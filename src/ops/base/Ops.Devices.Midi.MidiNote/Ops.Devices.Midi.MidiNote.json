@@ -34,13 +34,12 @@
                 "name": "MIDI Event Out"
             },
             {
-                "type": "0",
-                "name": "Note Name",
-                "subType": "number"
+                "type": "1",
+                "name": "Trigger Out"
             },
             {
                 "type": "0",
-                "name": "Note Index",
+                "name": "Current Note",
                 "subType": "number"
             },
             {
@@ -52,13 +51,16 @@
                 "type": "0",
                 "name": "Gate",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Current Note",
-                "subType": "number"
             }
         ],
-        "name": "Ops.User.simod.MidiNote"
+        "name": "Ops.Devices.Midi.MidiNote"
+    },
+    "summary": "read a single note value",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

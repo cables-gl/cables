@@ -113,6 +113,11 @@ CGL.Context = function(_patch) {
     var oldCanvasWidth = -1;
     var oldCanvasHeight = -1;
 
+    /**
+     * @function
+     * @description get current gl viewport
+     * @returns {Array} array [x,y,w,h]
+     */
     this.getViewPort = function() {
         return viewPort;
     };
@@ -125,6 +130,14 @@ CGL.Context = function(_patch) {
             viewPort[3]);
     };
 
+    /**
+     * @function
+     * @description set current gl viewport
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Number} w
+     * @param {Number} h
+     */
     this.setViewPort = function(x, y, w, h) {
         viewPort[0] = Math.round(x);
         viewPort[1] = Math.round(y);

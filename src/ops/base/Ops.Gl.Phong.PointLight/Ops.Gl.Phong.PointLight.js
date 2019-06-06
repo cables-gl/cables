@@ -13,16 +13,16 @@ const exe=op.inTrigger("exe"),
 const r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random());
-        r.setUiAttribs({ colorPick: true });
+    r.setUiAttribs({ colorPick: true });
 
 const ambientR=op.inValue("Ambient R",0.1),
     ambientG=op.inValue("Ambient G",0.1),
     ambientB=op.inValue("Ambient B",0.1);
 
-const specularR=op.inValueSlider("r", Math.random()),
-    specularG=op.inValueSlider("g", Math.random()),
-    specularB=op.inValueSlider("b", Math.random());
-        specularR.setUiAttribs({ colorPick: true });
+const specularR=op.inValueSlider("Specular r", Math.random()),
+    specularG=op.inValueSlider("Specular g", Math.random()),
+    specularB=op.inValueSlider("Specular b", Math.random());
+    specularR.setUiAttribs({ colorPick: true });
 
 var cgl=op.patch.cgl;
 

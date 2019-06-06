@@ -37,10 +37,6 @@ var srcFrag=''
     .endl()+'UNI float time;'
     .endl()+'IN vec2 texCoord;'
 
-    .endl()+'float c;'
-    .endl()+'float c1;'
-    .endl()+'float c2;'
-
 
     .endl()+'float random(vec2 co)'
     .endl()+'{'
@@ -49,49 +45,35 @@ var srcFrag=''
 
     .endl()+'void main()'
     .endl()+'{'
-    .endl()+'   vec4 old = texture2D( tex, texCoord );'
+    .endl()+'   vec4 old=texture2D(tex,texCoord);'
+    .endl()+'   vec4 field=texture2D(texField,texCoord);'
+    .endl()+'   vec4 newPos=old+field*0.3;'
 
-    .endl()+'   c =random((0.2323)*gl_FragCoord.xy);'
-    .endl()+'   c1=random(c*gl_FragCoord.xy);'
-    .endl()+'   c2=random(c1*gl_FragCoord.xy);'
-
-    .endl()+'   vec4 field = texture2D( texField, vec2( old.r,old.g ));'
-    .endl()+'   field -= 0.5; '
-    .endl()+'   field *=0.03;'
-
-    .endl()+'   if(time!=0.0)'
+    .endl()+'   if(newPos.y>=1.0 || newPos.y<=0.0 || newPos.x>=1.0 || newPos.x<=0.0)'
     .endl()+'   {'
-    .endl()+'       c =old.r;'
-    .endl()+'       c1=old.g;'
-    .endl()+'       c2=old.b;'
+    .endl()+'       newPos.x=random(time*texCoord.xy);'
+    .endl()+'       newPos.y=random(time*texCoord.xx);'
+    .endl()+'       newPos.z=1.0;'
     .endl()+'   }'
 
-
-    // .endl()+'   if(c>15.0)c=random((0.2323)*gl_FragCoord.xy)*0.5;'
-
-    .endl()+'   float x=( c+field.r );'
-    .endl()+'   float y=( c1+field.g );'
-    .endl()+'   float z=( (field.b)*31.1+0.5 );'
-
-    .endl()+'   if(y>=1.0 || y<=0.0 || x>=1.0 || x<=0.0)'
-    .endl()+'   {'
-    .endl()+'       x=random(time*gl_FragCoord.xy);'
-    .endl()+'       y=random(x*gl_FragCoord.xy);'
-    .endl()+'   }'
-
-    .endl()+'   outColor= vec4( x, y , z, 1.0);'
+    .endl()+'   outColor=vec4(newPos.xyz, 1.0);'
+    // .endl()+'   outColor=vec4(field.xyz, 1.0);'
+    // .endl()+'   outColor=vec4(texCoord.x*2.0,texCoord.y*2.0,sin(time+texCoord.x)*0.5,1.0);'
     .endl()+'}';
 
 
 
-var simTexture=new CGL.Texture(cgl,{
-    "isFloatingPointTexture":true,
-    "filter":CGL.Texture.FILTER_WRAP,
-    "wrap":CGL.Texture.WRAP_CLAMP_TO_EDGE,
-    "name":"simtex vectorfield2d",
+var simTexture=new CGL.Texture(cgl,
+    {
+        "width":1024,
+        "height":1024,
+        "isFloatingPointTexture":true,
+        "filter":CGL.Texture.FILTER_NEAREST,
+        "wrap":CGL.Texture.WRAP_CLAMP_TO_EDGE,
+        "name":"simtex vectorfield2d",
+    });
 
-});
-simTexture.setSize(1024,1024);
+// simTexture.setSize(1024,1024);
 
 var shaderSim=new CGL.Shader(cgl);
 shaderSim.setSource(shaderSim.getDefaultVertexShader(),srcFrag);
@@ -100,7 +82,6 @@ var texSimUni=new CGL.Uniform(shaderSim,'t','tex',5);
 var texFieldUni=new CGL.Uniform(shaderSim,'t','texField',6);
 var uniTime2=new CGL.Uniform(shaderSim,'f','time',0);
 var startTime=Date.now()/1000;
-
 var effect=new CGL.TextureEffect(cgl);
 
 effect.setSourceTexture(simTexture);
@@ -118,16 +99,20 @@ var srcHeadVert=''
 var srcBodyVert=''
 
     .endl()+'float size=1024.0;'
-    .endl()+'float tx = mod(attrVertIndex,size)/size;'
-    .endl()+'float ty = float( int((attrVertIndex/size)) )/size;'
+    .endl()+'float tx=mod(attrVertIndex,size)/size;'
+    .endl()+'float ty=float(int((attrVertIndex/size)))/size;'
     // .endl()+'   vec2 vec2(tx,ty);'
 
-    .endl()+'vec4 {{mod}}_col=texture2D( {{mod}}_texture, vec2(tx,ty) );'
+    .endl()+'vec4 {{mod}}_col=texture2D( {{mod}}_texture, texCoord );' //vec2(tx,ty)
 
-    .endl()+'{{mod}}_col.xyz-=0.5;'
+    // .endl()+'{{mod}}_col.xyz-=0.5;'
+    // .endl()+'{{mod}}_col.z*=0.1;'
 
     .endl()+'pos.xyz={{mod}}_col.xyz;'
     // .endl()+'pos.z=0.0;'
+
+    // .endl()+'pos.x=attrVertIndex*0.001;'
+
     .endl();
 
 
@@ -145,9 +130,6 @@ render.onTriggered=function()
         uniTime.setValue(0);
     }
 
-
-
-
     effect.startEffect();
     t=effect.getCurrentSourceTexture().tex;
     cgl.setShader(shaderSim);
@@ -164,13 +146,12 @@ render.onTriggered=function()
     cgl.setPreviousShader();
     effect.endEffect();
 
-
     cgl.resetViewPort();
-
 
     if(cgl.getShader()!=shader)
     {
-        if(shader) removeModule();
+        if(shader)removeModule();
+
         shader=cgl.getShader();
         module=shader.addModule(
             {
@@ -181,17 +162,12 @@ render.onTriggered=function()
 
         uniTime=new CGL.Uniform(shader,'f',module.prefix+'_time',0);
         uniTexture=new CGL.Uniform(shader,'t',module.prefix+'_texture',4);
-        // setDefines();
     }
 
-    // if(texture.get())
-    {
-        cgl.setTexture(4,t);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, t);
-    }
+    cgl.setTexture(4,t);
 
     uniTime2.setValue(op.patch.freeTimer.get());
     uniTime.setValue(op.patch.freeTimer.get());
-    // console.log(op.patch.freeTimer.get());
+
     next.trigger();
 };

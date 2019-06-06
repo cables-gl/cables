@@ -99,10 +99,10 @@ var tempMat4=mat4.create();
 //     'camPos'
 // ];
 var countTexture=0;
+var foundNames=[];
 
 function parseUniforms(src)
 {
-    var foundNames=[];
     const lines=src.split(";");
 
 
@@ -123,14 +123,14 @@ function parseUniforms(src)
                 foundNames.push(uniName);
                 if(!hasUniformInput(uniName))
                 {
-                const newInput=op.inValueFloat(uniName,0);
-                newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
-                // newInput.onChange=function(p)
-                // {
-                //     p.uniform.needsUpdate=true;
-                //     p.uniform.setValue(p.get());
-                // };
-                uniformInputs.push(newInput);
+                    const newInput=op.inValueFloat(uniName,0);
+                    newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
+                    // newInput.onChange=function(p)
+                    // {
+                    //     p.uniform.needsUpdate=true;
+                    //     p.uniform.setValue(p.get());
+                    // };
+                    uniformInputs.push(newInput);
                 }
             }
 
@@ -185,6 +185,7 @@ function updateShader()
 
 
     countTexture=0;
+    foundNames.length=0;
 
     parseUniforms(vertexShader.get() );
     parseUniforms(fragmentShader.get() );

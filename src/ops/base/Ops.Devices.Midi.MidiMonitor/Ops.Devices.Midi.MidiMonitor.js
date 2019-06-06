@@ -2,8 +2,8 @@
 const OUTPUT_KEYS = [
   'MIDI Channel',
   'Message Type',
-  'Note Value',
-  'Velocity',
+  'Note',
+  'Note Velocity',
   'CC Number',
   'CC Value',
   'Pitch Bend Value',
@@ -11,6 +11,8 @@ const OUTPUT_KEYS = [
   'NRPN Value',
 ];
 const eventOut = op.outObject('MIDI Event Out');
+const triggerOut = op.outTrigger('Trigger Out');
+
 // create outputs from keys specified above
 const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) => {
   acc[cur] = op.outValue(cur, '-');
@@ -62,36 +64,53 @@ inData.onChange = () => {
        we don't wanna show that for now, hence we skip everything above 248 */
   if (statusByte >= 248) {
     eventOut.set(event);
+    triggerOut.trigger();
     return;
   }
 
   const { messageType } = event;
 
-  const isNoteMessage = messageType === 'NOTE ON' || messageType === 'NOTE OFF';
-  const isCCMessage = messageType === 'CC';
-  const isPitchBendMessage = messageType === 'PITCH BEND';
-
   OUTPUTS['MIDI Channel'].set(getMIDIChannel(statusByte));
   OUTPUTS['Message Type'].set(messageType);
 
-  OUTPUTS['Note Value'].set(isNoteMessage ? getMIDINote(dataByte1LSB) : '-');
-  OUTPUTS.Velocity.set(isNoteMessage ? getMessageValue(dataByte2MSB) : '-');
+  switch (messageType) {
+      case 'NRPN':
+        OUTPUTS['NRPN Number'].set(event.nrpnIndex);
+        OUTPUTS['NRPN Value'].set(event.nrpnValue);
+        Object.keys(OUTPUTS)
+          .filter(key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel')
+          .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
+        break;
+      case 'CC':
+        const [, ccIndex, ccValue] = event.data;
+        OUTPUTS['CC Number'].set(ccIndex);
+        OUTPUTS['CC Value'].set(ccValue);
+        Object.keys(OUTPUTS)
+          .filter(key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel')
+          .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
+        break;
+      case 'Note':
+            const { newNote: [noteIndex, ], velocity } = event;
+            OUTPUTS['Note'].set(noteIndex);
+            OUTPUTS['Note Velocity'].set(velocity);
+          Object.keys(OUTPUTS)
+          .filter(key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel')
+          .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
+            break;
+      case "Pitch Bend":
+          OUTPUTS['Pitch Bend Value'].set(getPitchBendValue(dataByte1LSB, dataByte2MSB));
+          Object.keys(OUTPUTS)
+          .filter(key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel')
+          .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
+          break;
+      default:
+                  Object.keys(OUTPUTS)
+          .filter(key => key !== 'Message Type' && key !== 'MIDI Channel')
+          .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
 
-  if (messageType !== 'NRPN') {
-    OUTPUTS['CC Number'].set(isCCMessage ? getCCNumber(dataByte1LSB) : '-');
-    OUTPUTS['CC Value'].set(isCCMessage ? getMessageValue(dataByte2MSB) : '-');
-  } else {
-    OUTPUTS['CC Number'].set('-');
-    OUTPUTS['CC Value'].set('-');
   }
 
-  if (messageType === 'NRPN') {
-    OUTPUTS['NRPN Number'].set(event.nrpnIndex);
-    OUTPUTS['NRPN Value'].set(event.nrpnValue);
-  }
-  OUTPUTS['Pitch Bend Value'].set(
-    isPitchBendMessage ? getPitchBendValue(dataByte1LSB, dataByte2MSB) : '-',
-  );
+  triggerOut.trigger();
   eventOut.set(event);
   // }
 };

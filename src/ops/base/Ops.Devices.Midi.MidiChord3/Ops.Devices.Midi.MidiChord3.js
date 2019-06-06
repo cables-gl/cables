@@ -11,7 +11,7 @@ function getMIDINote(dataByte1LSB) {
     : 'NO NOTE';
 }
 
-const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
+const noteValues = Array.from(Array(128).keys(), key => getMIDINote(key));
 
 /* IN */
 const inEvent = op.inObject('MIDI Event In');
@@ -24,53 +24,48 @@ const noteDropdowns = [noteDropdown, noteDropdown2, noteDropdown3];
 const normalizeDropdown = op.inValueSelect(
   'Normalize Velocity',
   ['none', '0 to 1', '-1 to 1'],
-  'none',
+  'none'
 );
+
 const learn = op.inTriggerButton('learn');
 const reset = op.inTriggerButton('reset');
 
 /* OUT */
 
 const eventOut = op.outObject('MIDI Event Out');
+const triggerOut = op.outTrigger('Trigger Out');
 
-const noteNameOut1 = op.outValue('Note Name 1');
-const noteIndexOut1 = op.outValue('Note Index 1');
+const noteIndexOut1 = op.outValue('Note 1');
 const velocityOut1 = op.outValue('Velocity 1');
 const gateOut1 = op.outValueBool('Gate 1');
 
 const out1 = {
-  noteNameOut: noteNameOut1,
   noteIndexOut: noteIndexOut1,
   velocityOut: velocityOut1,
   gateOut: gateOut1,
 };
 
-const noteNameOut2 = op.outValue('Note Name 2');
-const noteIndexOut2 = op.outValue('Note Index 2');
+const noteIndexOut2 = op.outValue('Note 2');
 const velocityOut2 = op.outValue('Velocity 2');
 const gateOut2 = op.outValueBool('Gate 2');
 
 const out2 = {
-  noteNameOut: noteNameOut2,
   noteIndexOut: noteIndexOut2,
   velocityOut: velocityOut2,
   gateOut: gateOut2,
 };
 
-const noteNameOut3 = op.outValue('Note Name 3');
-const noteIndexOut3 = op.outValue('Note Index 3');
+const noteIndexOut3 = op.outValue('Note 3');
 const velocityOut3 = op.outValue('Velocity 3');
 const gateOut3 = op.outValueBool('Gate 3');
 
 const out3 = {
-  noteNameOut: noteNameOut3,
   noteIndexOut: noteIndexOut3,
   velocityOut: velocityOut3,
   gateOut: gateOut3,
 };
 
 const outs = [out1, out2, out3];
-
 noteDropdown.set(0);
 midiChannelDropdown.set(1);
 
@@ -107,6 +102,7 @@ inEvent.onChange = () => {
       eventOut.set(event);
       return;
     }
+
     if (!learnedNotes.includes(midiNote)) noteDropdowns[learnCount].set(midiNote);
     else {
       eventOut.set(event);
@@ -134,7 +130,7 @@ inEvent.onChange = () => {
     }
 
     const {
-      gateOut, noteNameOut, noteIndexOut, velocityOut,
+      gateOut, noteIndexOut, velocityOut,
     } = outs[chordIndex];
 
     if (msgType === NOTE_OFF || velocity === 0) {
@@ -144,13 +140,19 @@ inEvent.onChange = () => {
 
     if (msgType === NOTE_ON) {
       gateOut.set(true);
-      noteNameOut.set(noteName);
+      triggerOut.trigger();
       noteIndexOut.set(noteIndex);
 
-      if (normalizeDropdown.get() === '0 to 1') velocityOut.set(velocity / 127);
-      else if (normalizeDropdown.get() === '-1 to 1') {
-        const normalizedValue = velocity / (127 / 2) - 1;
+    if (normalizeDropdown.get() === '0 to 1'){
+        // (max'-min')/(max-min)*(value-min)+min'
+        velocityOut.set(1 / 126 * (velocity - 1));
+      }
+
+    else if (normalizeDropdown.get() === '-1 to 1') {
+        // (max'-min')/(max-min)*(value-min)+min'
+        const normalizedValue = 2 / 126 * (velocity - 1) - 1;
         velocityOut.set(normalizedValue);
+
       } else if (normalizeDropdown.get() === 'none') velocityOut.set(velocity);
     }
   }

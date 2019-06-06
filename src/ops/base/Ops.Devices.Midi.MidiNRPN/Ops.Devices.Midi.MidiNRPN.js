@@ -13,6 +13,7 @@ const learn = op.inTriggerButton('learn');
 const eventOut = op.outObject('MIDI Event Out');
 const nrpnIndexOut = op.outValue('NRPN Index');
 const nrpnValueOut = op.outValue('NRPN Value');
+const triggerOut = op.outTrigger("Trigger Out");
 
 nrpnIndexDropdown.set(0);
 midiChannelDropdown.set(1);
@@ -49,9 +50,18 @@ inEvent.onChange = () => {
 
       outValue = nrpnValue;
 
-      if (normalizeDropdown.get() === '0 to 1') nrpnValueOut.set(outValue / 16383);
-      else if (normalizeDropdown.get() === '-1 to 1') nrpnValueOut.set(outValue / (16383 / 2) - 1);
-      else if (normalizeDropdown.get() === 'none') nrpnValueOut.set(outValue);
+      if (normalizeDropdown.get() === '0 to 1') {
+          nrpnValueOut.set(outValue / 16383);
+          triggerOut.trigger();
+      }
+      else if (normalizeDropdown.get() === '-1 to 1') {
+          nrpnValueOut.set(outValue / (16383 / 2) - 1);
+          triggerOut.trigger();
+      }
+      else if (normalizeDropdown.get() === 'none') {
+          nrpnValueOut.set(outValue)
+          triggerOut.trigger();
+      }
       else nrpnValueOut.set(0);
     }
   }

@@ -59,11 +59,5 @@ void main()
         gl_PointSize = (pointSize / cameraDist) * psMul;
     #endif
 
-
-
-
-
     gl_Position = projMatrix * viewMatrix * model;
-
-
 }

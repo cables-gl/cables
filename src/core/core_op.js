@@ -284,7 +284,7 @@ CABLES.Op = function()
      * @param {string} name
      * @return {CABLES.Port}
      */
-    CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"display":"texture","preview":true})); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create a object input port

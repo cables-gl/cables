@@ -10,7 +10,7 @@ const deviceSelect = op.inValueSelect('Device', ['none']);
 
 var learning = false;
 const learn = op.inTriggerButton('Learn');
-const resetIn = op.inTriggerButton('Reset');
+const resetIn = op.inTriggerButton('Panic');
 
 /* OPS */
 const opPrefix = 'Ops.Devices.Midi.Midi';
@@ -57,6 +57,10 @@ const PROGRAM_CHANGE = 0xc;
 const CHANNEL_PRESSURE = 0xd;
 const PITCH_BEND = 0xe;
 const CLOCK = 0xf8;
+const CLOCK_START = 0xfa;
+const CLOCK_CONTINUE = 0xfb;
+const CLOCK_STOP = 0xfc;
+const CLOCK_SIGNALS = [CLOCK, CLOCK_START, CLOCK_CONTINUE, CLOCK_STOP];
 
 const MESSAGE_TYPES = {
   [NOTE_OFF]: 'Note',
@@ -114,7 +118,7 @@ const LSBRoutine = (ccIndex, ccValue) => {
 
   nrpnIndex_ = nrpnIndexMSB | nrpnIndexLSB;
 
-  if (typeof nrpnIndex === 'number') {
+  if (typeof nrpnIndex_ === 'number') {
     if (ccIndex === NRPN_VALUE_MSB) {
       nrpnValueMSB = ccValue << 7;
 
@@ -139,7 +143,7 @@ const MSBRoutine = (ccIndex, ccValue) => {
   else if (ccIndex === NRPN_INDEX_LSB) nrpnIndexLSB = ccValue;
 
   nrpnIndex_ = nrpnIndexMSB | nrpnIndexLSB;
-  if (typeof nrpnIndex === 'number') {
+  if (typeof nrpnIndex_ === 'number') {
     if (ccIndex === NRPN_VALUE_MSB) {
       nrpnValueMSB = ccValue << 7;
 
@@ -181,10 +185,11 @@ function onMIDIMessage(_event) {
   const { data } = _event;
   const [statusByte, LSB, MSB] = data;
 
-  if (statusByte === CLOCK) {
+  if (CLOCK_SIGNALS.includes(statusByte)) {
     OUTPUTS.Clock.set(_event);
     return;
   }
+
   if (statusByte > 248) {
     // we don't use statusbytes above 248 for now
     return;
@@ -206,10 +211,6 @@ function onMIDIMessage(_event) {
     if (nrpnValueRes) {
       const [index, value] = nrpnValueRes;
       messageType = 'NRPN';
-
-      // outputIndex = index;
-      // outputValue = value;
-
       nrpnIndex = index;
       nrpnValue = value;
     }
@@ -339,11 +340,9 @@ if (navigator.requestMIDIAccess) {
 
 resetIn.onTriggered = () => {
   if (!outputDevice) return;
-  for (let controllerIndex = 0; controllerIndex < 128; controllerIndex += 1) {
-    //       outputDevice.send([0x90, i, 0]);
-    // outputDevice.send([0xb0, i, 0]);
-    outputDevice.send([NOTE_OFF, controllerIndex, 0]);
-    outputDevice.send([CC, controllerIndex, 0]);
+  for (let i = 0; i < 12; i += 1) {
+            outputDevice.send( [0x90, i, 0] );
+            outputDevice.send( [0xb0, i, 0] );
   }
 };
 

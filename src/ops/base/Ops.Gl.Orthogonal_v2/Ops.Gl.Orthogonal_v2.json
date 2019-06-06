@@ -45,11 +45,18 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Orthogonal2"
+        "name": "Ops.Gl.Orthogonal_v2"
     },
     "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "using now current width/height of viewport, and not of the canvas",
+            "author": "pandur",
+            "date": 1559654315975
+        }
+    ]
 }

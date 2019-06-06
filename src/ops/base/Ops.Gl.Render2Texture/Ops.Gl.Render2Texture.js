@@ -88,8 +88,7 @@ function doRender()
             else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
             else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
-
-        texDepth.set( fb.getTextureDepth() );
+        texDepth.set(fb.getTextureDepth());
         reInitFb=false;
     }
 

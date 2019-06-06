@@ -48,13 +48,12 @@
                 "name": "MIDI Event Out"
             },
             {
-                "type": "0",
-                "name": "Note Name 1",
-                "subType": "number"
+                "type": "1",
+                "name": "Trigger Out"
             },
             {
                 "type": "0",
-                "name": "Note Index 1",
+                "name": "Note 1",
                 "subType": "number"
             },
             {
@@ -69,12 +68,7 @@
             },
             {
                 "type": "0",
-                "name": "Note Name 2",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Note Index 2",
+                "name": "Note 2",
                 "subType": "number"
             },
             {
@@ -89,12 +83,7 @@
             },
             {
                 "type": "0",
-                "name": "Note Name 3",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Note Index 3",
+                "name": "Note 3",
                 "subType": "number"
             },
             {
@@ -108,6 +97,14 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.simod.MidiChord3"
+        "name": "Ops.Devices.Midi.MidiChord3"
+    },
+    "summary": "Map 3 midi notes to values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

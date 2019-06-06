@@ -22,6 +22,10 @@
                 "name": "MIDI Event Out"
             },
             {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
                 "type": "0",
                 "name": "MIDI Channel",
                 "subType": "number"
@@ -33,12 +37,12 @@
             },
             {
                 "type": "0",
-                "name": "Note Value",
+                "name": "Note",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Velocity",
+                "name": "Note Velocity",
                 "subType": "number"
             },
             {
@@ -67,6 +71,14 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.simod.MidiMonitor"
+        "name": "Ops.Devices.Midi.MidiMonitor"
+    },
+    "summary": "detailed information about Midi events being sent",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

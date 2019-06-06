@@ -11,6 +11,11 @@ function getMIDINote(dataByte1LSB) {
     : 'NO NOTE';
 }
 
+function getNoteIndexFromMIDINote(midiNote) {
+    if (midiNote === 'NO NOTE') return null;
+    const string = midiNote.split('- ')[1];
+    return Number(string);
+}
 const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
 
 /* IN */
@@ -32,10 +37,11 @@ const reset = op.inTriggerButton('reset');
 
 /* OUT */
 const eventOut = op.outObject('Event');
-const noteNameOut = op.outValue('Note Name');
-const noteIndexOut = op.outValue('Note Index');
+const triggerOut = op.outTrigger('Trigger Out');
+const noteIndexOut = op.outValue('Current Note');
 const velocityOut = op.outValue('Velocity');
 const gateOut = op.outValueBool('Gate');
+
 
 noteStartDropdown.set(0);
 noteEndDropdown.set(0);
@@ -44,6 +50,9 @@ midiChannelDropdown.set(1);
 let learning = false;
 
 learn.onTriggered = () => {
+  if (learnedNotesIn.get().length > 0) {
+      learnedNotesIn.set([]);
+  }
   learning = true;
 };
 reset.onTriggered = () => {
@@ -53,6 +62,30 @@ reset.onTriggered = () => {
   noteEndDropdown.set(0);
   midiChannelDropdown.set(1);
 };
+
+noteStartDropdown.onChange = () => {
+    var learnedNotes = learnedNotesIn.get();
+    learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
+        if (learnedNotes.length === 2) {
+            learnedNotes.sort((a, b) => a - b);
+            const [start, end] = learnedNotes;
+            noteStartDropdown.set(getMIDINote(start));
+            noteEndDropdown.set(getMIDINote(end));
+        }
+    learnedNotesIn.set(learnedNotes);
+}
+
+noteEndDropdown.onChange = () => {
+    var learnedNotes = learnedNotesIn.get();
+    learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
+        if (learnedNotes.length === 2) {
+            learnedNotes.sort((a, b) => a - b);
+            const [start, end] = learnedNotes;
+            noteStartDropdown.set(getMIDINote(start));
+            noteEndDropdown.set(getMIDINote(end));
+        }
+    learnedNotesIn.set(learnedNotes);
+}
 
 inEvent.onChange = () => {
   const event = inEvent.get();
@@ -66,6 +99,7 @@ inEvent.onChange = () => {
   const [noteIndex, noteName] = newNote;
   const midiNote = getMIDINote(noteIndex);
   const learnedNotes = learnedNotesIn.get();
+
   if (learning) {
     if (statusByte >> 4 === NOTE_OFF) {
       eventOut.set(event);
@@ -105,16 +139,18 @@ inEvent.onChange = () => {
       }
       if (statusByte >> 4 === NOTE_ON) {
         gateOut.set(true);
-        noteNameOut.set(noteName);
+
         noteIndexOut.set(noteIndex);
+        triggerOut.trigger();
 
-        velocityOut.set(velocity);
-
-        if (normalizeDropdown.get() === '0 to 1') velocityOut.set(velocity / 127);
+        if (normalizeDropdown.get() === '0 to 1'){
+            // (max'-min')/(max-min)*(value-min)+min'
+            velocityOut.set(1 / 126 * (velocity - 1));
+        }
         else if (normalizeDropdown.get() === '-1 to 1') {
-          const normalizedValue = velocity / (127 / 2) - 1;
-
-          velocityOut.set(normalizedValue);
+            // (max'-min')/(max-min)*(value-min)+min'
+            const normalizedValue = 2 / 126 * (velocity - 1) - 1;
+            velocityOut.set(normalizedValue);
         } else if (normalizeDropdown.get() === 'none') velocityOut.set(velocity);
       }
     }

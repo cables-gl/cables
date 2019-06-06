@@ -161,8 +161,6 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
     this.verticesIndices.length=verts.length/3;
     // this.verticesIndices=[];
 
-    // TODO why does this have indizes ???????????????????????????
-
     for(i=0;i<verts.length/3;i++)
     {
         this.verticesIndices[i]=i;

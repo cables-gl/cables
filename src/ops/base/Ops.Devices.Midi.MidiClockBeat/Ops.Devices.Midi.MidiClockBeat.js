@@ -18,6 +18,7 @@ var outBPM=op.outValue("BPM");
 var outBeatDuration=op.outValue("Tick Duration");
 
 
+
 eventIn.onChange=function()
 {
     if(!eventIn.get())return;
