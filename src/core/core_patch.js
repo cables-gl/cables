@@ -10,6 +10,9 @@ var CABLES = CABLES || {};
  * @property {function} [onFinishedLoading=null] called when patch finished loading all assets
  * @property {function} [onFirstFrameRendered=null] called when patch rendered it's first frame
  * @property {boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @property {boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @property {boolean} [clearCanvasDepth=true] clear depth every frame
  * @property {boolean} [silent=false] 
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
@@ -110,8 +113,10 @@ CABLES.Patch = function(cfg) {
         fpsLimit: 0,
     };
 
-    if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
-    if (!this.config.masterVolume) this.config.masterVolume = 1.0;
+    if(!this.config.hasOwnProperty("doRequestAnimation"))this.config.doRequestAnimation=true;
+
+    if(!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
+    if(!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
     if (cfg && cfg.variables) this._variables = cfg.variables||{};
@@ -121,7 +126,7 @@ CABLES.Patch = function(cfg) {
 
     this.cgl = new CGL.Context(this);
     
-    this.cgl.setCanvas(this.config.glCanvasId||'glcanvas');
+    this.cgl.setCanvas(this.config.glCanvasId||this.config.glCanvas||'glcanvas');
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
     if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
@@ -523,7 +528,6 @@ CABLES.Patch.prototype.exec = function(e) {
                 this._frameWasdelayed = true;
                 return;
             }
-    
         }
 
         // if(now-this._lastFrameTime>300 && this._lastFrameTime!==0  && !this._frameWasdelayed)
@@ -575,7 +579,7 @@ CABLES.Patch.prototype.exec = function(e) {
     this._lastFrameTime = CABLES.now();
     this._fpsFrameCount++;
 
-    requestAnimationFrame(this.exec.bind(this));
+    if(this.config.doRequestAnimation)requestAnimationFrame(this.exec.bind(this));
 };
 
 

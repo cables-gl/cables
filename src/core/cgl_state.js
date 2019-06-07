@@ -9,6 +9,8 @@ CGL.Context = function(_patch) {
     var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
+    this.clearCanvasTransparent=true;
+    this.clearCanvasDepth=true;
     this.patch = _patch;
 
     this.temporaryTexture = null;
@@ -62,17 +64,21 @@ CGL.Context = function(_patch) {
         this.aborted = true;
     }
 
-    this.setCanvas = function(id) {
+    this.setCanvas = function(canv) {
+
         CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
-        this.canvas = document.getElementById(id);
 
-
+        if (typeof canv === 'string') this.canvas = document.getElementById(canv);
+            else this.canvas=canv;
 
         if (!this.patch.config.canvas) this.patch.config.canvas = {};
 
         if (!this.patch.config.canvas.hasOwnProperty('preserveDrawingBuffer')) this.patch.config.canvas.preserveDrawingBuffer = false;
         if (!this.patch.config.canvas.hasOwnProperty('premultipliedAlpha')) this.patch.config.canvas.premultipliedAlpha = false;
         if (!this.patch.config.canvas.hasOwnProperty('alpha')) this.patch.config.canvas.alpha = false;
+        
+        if (this.patch.config.hasOwnProperty('clearCanvasColor')) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
+        if (this.patch.config.hasOwnProperty('clearCanvasDepth')) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
 
         if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
@@ -299,8 +305,6 @@ CGL.Context = function(_patch) {
         return this._frameBufferStack[this._frameBufferStack.length - 1];
     }
 
-
-
     var identView = vec3.create();
     vec3.set(identView, 0, 0, 2);
     var ident = vec3.create();
@@ -313,14 +317,17 @@ CGL.Context = function(_patch) {
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
-
-        cgl.gl.clearColor(0, 0, 0, 0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        
+        if(this.clearCanvasTransparent)
+        {
+            cgl.gl.clearColor(0,0,0,0);
+            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
+        }
+        if(this.clearCanvasDepth) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, identTranslate);
@@ -351,12 +358,12 @@ CGL.Context = function(_patch) {
 
         cgl.endFrame();
     };
-    
+
     this.getTexture= function(slot)
     {
         return this._textureslots[slot];
     }
-    
+
     this.setTexture = function(slot, t, type)
     {
         if(this._textureslots[slot]!=t)
@@ -367,7 +374,8 @@ CGL.Context = function(_patch) {
         }
     };
 
-    this.fullScreen = function() {
+    this.fullScreen = function()
+    {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
             else if (this.canvas.mozRequestFullScreen) this.canvas.mozRequestFullScreen();
             else if (this.canvas.webkitRequestFullscreen) this.canvas.webkitRequestFullscreen();
