@@ -15,7 +15,7 @@ inSend.onTriggered=function()
 
         // connection.send(JSON.stringify(inObject.get()));
 
-        connection.send(inObject.get());
+        connection.send(JSON.stringify(inObject.get()));
 
     }
     else

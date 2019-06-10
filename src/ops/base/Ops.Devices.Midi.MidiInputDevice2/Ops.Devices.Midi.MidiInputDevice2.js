@@ -28,7 +28,7 @@ const OUTPUT_KEYS = [
   // "Channel Pressure",
   // "Poly Key Pressure",
   'NRPN',
-  'SysEx',
+  //'SysEx',
   // "Pitchbend",
   'Clock',
 ];

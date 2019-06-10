@@ -51,7 +51,7 @@ inEvent.onChange = () => {
   const { newNote, velocity } = event;
   const [noteIndex, noteName] = newNote;
 
-  if (learning) {
+  if (learning || noteDropdown.onChange) {
     noteDropdown.set(noteName);
     midiChannelDropdown.set(event.channel + 1);
 
@@ -67,10 +67,10 @@ inEvent.onChange = () => {
     if (getMIDINote(noteIndex) === noteDropdown.get()) {
       if (statusByte >> 4 === NOTE_OFF || velocity === 0) {
         gateOut.set(false);
-        if (velocity === 0) velocityOut.set(0);
+        velocityOut.set(0);
       }
 
-      if (statusByte >> 4 === NOTE_ON) {
+      else if (statusByte >> 4 === NOTE_ON) {
         gateOut.set(true);
         currentNoteOut.set(noteIndex);
         if (normalizeDropdown.get() === '0 to 1') {
@@ -92,10 +92,10 @@ inEvent.onChange = () => {
     } else if (noteDropdown.get() === 0) { // no note selected
           if (statusByte >> 4 === NOTE_OFF || velocity === 0) {
             gateOut.set(false);
-            if (velocity === 0) velocityOut.set(0);
+            velocityOut.set(0);
           }
 
-          if (statusByte >> 4 === NOTE_ON) {
+          else if (statusByte >> 4 === NOTE_ON) {
             gateOut.set(true);
             currentNoteOut.set(noteIndex);
             if (normalizeDropdown.get() === '0 to 1') {

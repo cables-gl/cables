@@ -55,12 +55,61 @@
         ],
         "name": "Ops.Devices.Midi.MidiNote"
     },
-    "summary": "read a single note value",
+    "summary": "Read a single midi note",
     "issues": "",
     "collections": null,
-    "relatedops": null,
-    "youtubeids": [],
+    "relatedops": [
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiClock"
+    ],
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "MIDI Event In",
+                "text": "Midi event in - must come from the midi device op"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "Pick a midi channel from 1 to 16"
+            },
+            {
+                "name": "Note",
+                "text": "The selected note to output"
+            },
+            {
+                "name": "Normalize Velocity",
+                "text": "Enable to normalize values from 0 to 1 or -1 to 1"
+            },
+            {
+                "name": "learn",
+                "text": "Click and then press a midi note to automatically select it"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "Midi event out - passes all midi data through to allow midi ops to be stacked"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Triggers when the selected midi note comes in"
+            },
+            {
+                "name": "Current Note",
+                "text": "If no note has been selected it will output all changing note numbers else it outputs selected note"
+            },
+            {
+                "name": "Velocity",
+                "text": "Velocity is normally between 0-127 unless Normalise velocity is enabled"
+            },
+            {
+                "name": "Gate",
+                "text": "True when the note is on else false."
+            }
+        ]
     }
 }

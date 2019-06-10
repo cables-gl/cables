@@ -14,7 +14,7 @@ const cgl=op.patch.cgl;
 render.onTriggered=function()
 {
     const vp=cgl.getViewPort();
-    const ratio=vp[2]/vp[3];
+    const ratio=vp[3]/vp[2];
 
     cgl.pushPMatrix();
     mat4.ortho(

@@ -102,9 +102,94 @@
     "summary": "Map 3 midi notes to values",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiNRPN"
+    ],
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "MIDI Event In",
+                "text": "The in port for the MIDI event"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "MIDI Channel number from 1 - 16"
+            },
+            {
+                "name": "Note 1",
+                "text": "First note index"
+            },
+            {
+                "name": "Note 2",
+                "text": "Second note index"
+            },
+            {
+                "name": "Note 3",
+                "text": "Third note index"
+            },
+            {
+                "name": "Normalize Velocity",
+                "text": "Normalize the velocity to either \"-1 to 1\" or \"0 to 1\". Normalization applies to all notes."
+            },
+            {
+                "name": "learn",
+                "text": "Press to learn notes"
+            },
+            {
+                "name": "reset",
+                "text": "Reset the learned values"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "The out port for the MIDI event"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Triggers whenever one of the chosen notes is played"
+            },
+            {
+                "name": "Note 1",
+                "text": "Outputs first note's index"
+            },
+            {
+                "name": "Velocity 1",
+                "text": "Outputs first note's velocity"
+            },
+            {
+                "name": "Gate 1",
+                "text": "true when first note is played, false when not"
+            },
+            {
+                "name": "Note 2",
+                "text": "Outputs second note's index"
+            },
+            {
+                "name": "Velocity 2",
+                "text": "Outputs second note's velocity"
+            },
+            {
+                "name": "Gate 2",
+                "text": "true when first note is played, false when not"
+            },
+            {
+                "name": "Note 3",
+                "text": "Outputs third note's index"
+            },
+            {
+                "name": "Velocity 3",
+                "text": "Outputs third note's velocity"
+            },
+            {
+                "name": "Gate 3",
+                "text": "true when third note is played, false when not"
+            }
+        ]
     }
 }

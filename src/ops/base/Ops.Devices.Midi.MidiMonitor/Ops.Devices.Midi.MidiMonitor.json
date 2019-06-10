@@ -76,9 +76,66 @@
     "summary": "detailed information about Midi events being sent",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiNRPN"
+    ],
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Event",
+                "text": "The in port for the MIDI event"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "The out port for the MIDI event"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "triggers whenever a midi event is received"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "the midi channel of the message"
+            },
+            {
+                "name": "Message Type",
+                "text": "the type of the message (CC, Note, NRPN, Clock, ...)"
+            },
+            {
+                "name": "Note",
+                "text": "displays the sent note index if message is a note"
+            },
+            {
+                "name": "Note Velocity",
+                "text": "displays the sent note velocity if message is a note"
+            },
+            {
+                "name": "CC Number",
+                "text": "displays the sent CC index if message is of type CC"
+            },
+            {
+                "name": "CC Value",
+                "text": "displays the sent CC value if message is of type CC"
+            },
+            {
+                "name": "Pitch Bend Value",
+                "text": "displays the sent pitch bend value if message is of type Pitch Bend"
+            },
+            {
+                "name": "NRPN Number",
+                "text": "displays the sent NRPN index if message is of type NRPN"
+            },
+            {
+                "name": "NRPN Value",
+                "text": "displays the sent NRPN value if message is of type NRPN"
+            }
+        ]
     }
 }
