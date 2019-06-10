@@ -11,7 +11,7 @@ ratio.set(1.777777777778);
 
 const cgl=op.patch.cgl;
 
-var blackBars=op.addInPort(new CABLES.Port(op,"black bars",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+var blackBars=op.inValueBool("black bars");
 blackBars.set(true);
 
 var x=0,y=0,w=1000,h=1000;

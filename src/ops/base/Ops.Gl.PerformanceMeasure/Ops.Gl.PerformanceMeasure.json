@@ -32,5 +32,13 @@
             }
         ],
         "name": "Ops.Gl.PerformanceMeasure"
+    },
+    "summary": "Measure the time used to execute all child ops",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

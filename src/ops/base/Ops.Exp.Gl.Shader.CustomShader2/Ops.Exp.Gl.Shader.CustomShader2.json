@@ -1,0 +1,82 @@
+{
+    "id": "a165fc89-a35b-4d39-8930-7345b098bd9d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557747298207
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557747300453,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "5",
+                "name": "Fragment Code",
+                "group": "Source Code"
+            },
+            {
+                "type": "5",
+                "name": "Vertex Code",
+                "group": "Source Code"
+            },
+            {
+                "type": "0",
+                "name": "Use As Material",
+                "group": "Options",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Shader.CustomShader2"
+    },
+    "summary": "Write your own custom shader",
+    "youtubeid": "Zfhn8xSM0SE",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Shader.Shader2Texture"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Fragment Code",
+                "text": "A string can be passed in as a fragment shader. It's better to use an attachment"
+            },
+            {
+                "name": "Vertex Code",
+                "text": "A string can be passed in as a vertex shader. It's better to use an attachment"
+            },
+            {
+                "name": "Use As Material",
+                "text": "Enable to use as a material"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader/material out"
+            }
+        ]
+    }
+}

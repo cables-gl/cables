@@ -53,5 +53,13 @@
             }
         ],
         "name": "Ops.Html.DivElement2"
+    },
+    "summary": "Create a html DIV element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

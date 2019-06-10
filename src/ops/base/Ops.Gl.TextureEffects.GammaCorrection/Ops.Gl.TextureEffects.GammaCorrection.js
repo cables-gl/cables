@@ -9,18 +9,14 @@ const trigger=op.outTrigger('trigger');
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.gamma_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.gamma_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const multiplyUniform=new CGL.Uniform(shader,'f','multiplyAmount',inMultiply);
 const gammaUniform=new CGL.Uniform(shader,'f','gammaAmount',inGamma);
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 render.onTriggered=function()
 {

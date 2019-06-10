@@ -13,10 +13,14 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Is Fullscreen"
+                "name": "Is Fullscreen",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Html.FullscreenMode"
     },
-    "summary": "switch webgl to fullscreen"
+    "summary": "switch webgl to fullscreen",
+    "authorName": "pandur",
+    "id": "fe933b35-696d-4738-be03-c0c011ed67a0",
+    "created": 1558014424320
 }

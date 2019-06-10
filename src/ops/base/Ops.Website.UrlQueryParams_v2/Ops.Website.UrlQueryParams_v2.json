@@ -1,0 +1,52 @@
+{
+    "id": "2e1b645c-c463-465d-abec-bf06ee4b970c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559051871955
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559051875098,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "parameter"
+            },
+            {
+                "type": "5",
+                "name": "Default"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Website.UrlQueryParams_v2"
+    },
+    "summary": "Returns a URL query parameter, e.g. index.html?Parameter=ParameterValue",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "parameter",
+                "text": "The parameter (key) to get"
+            },
+            {
+                "name": "Default",
+                "text": "Default value if key does not exist"
+            },
+            {
+                "name": "result",
+                "text": "The value of the parameter, or default value if it could not be found in the URL"
+            }
+        ]
+    }
+}

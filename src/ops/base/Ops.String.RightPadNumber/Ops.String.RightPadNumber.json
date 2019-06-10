@@ -28,5 +28,13 @@
     "summary": "converts a number to a string with num decimal places, adds 0's",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "needs new string type output",
+            "author": "pandur",
+            "id": "5d4249fc-88d7-4b56-80dd-f226a88ff7ca",
+            "date": 1558351256513
+        }
+    ]
 }

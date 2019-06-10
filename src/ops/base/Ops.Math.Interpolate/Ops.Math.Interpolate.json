@@ -4,23 +4,30 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 2"
+                "name": "Value 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Percentage"
+                "name": "Percentage",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Interpolate"
-    }
+    },
+    "authorName": "pandur",
+    "id": "d126e2c8-221e-428f-8ff4-8b8c5f6b8905",
+    "created": 1558014630016
 }

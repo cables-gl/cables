@@ -1,6 +1,3 @@
-//strict mode allows us to write cleaner code
-"use strict";
-
 //Create a input port of the type Array
 const inArr   = op.inArray("Array in");
 
@@ -19,7 +16,7 @@ function update()
     //create an array called 'tempArray' and assign
     //the array coming in to it
     var tempArray = inArr.get();
-    
+
     //error checking section
     //check if arrays come in correctly on startup
     //if no array comes in just return to avoid errors

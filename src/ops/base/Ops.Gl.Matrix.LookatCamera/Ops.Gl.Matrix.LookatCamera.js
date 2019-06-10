@@ -1,17 +1,17 @@
 var render=op.inTrigger('render');
 var trigger=op.outTrigger('trigger');
 
-var eyeX=op.addInPort(new CABLES.Port(op,"eyeX"));
-var eyeY=op.addInPort(new CABLES.Port(op,"eyeY"));
-var eyeZ=op.addInPort(new CABLES.Port(op,"eyeZ"));
+var eyeX=op.inValueFloat("eyeX");
+var eyeY=op.inValueFloat("eyeY");
+var eyeZ=op.inValueFloat("eyeZ");
 
-var centerX=op.addInPort(new CABLES.Port(op,"centerX"));
-var centerY=op.addInPort(new CABLES.Port(op,"centerY"));
-var centerZ=op.addInPort(new CABLES.Port(op,"centerZ"));
+var centerX=op.inValueFloat("centerX");
+var centerY=op.inValueFloat("centerY");
+var centerZ=op.inValueFloat("centerZ");
 
-var vecUpX=op.addInPort(new CABLES.Port(op,"upX"));
-var vecUpY=op.addInPort(new CABLES.Port(op,"upY"));
-var vecUpZ=op.addInPort(new CABLES.Port(op,"upZ"));
+var vecUpX=op.inValueFloat("upX");
+var vecUpY=op.inValueFloat("upY");
+var vecUpZ=op.inValueFloat("upZ");
 
 var outArr=op.outArray("Array");
 
@@ -39,8 +39,8 @@ var arr=[];
 
 render.onTriggered=function()
 {
-    
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) 
+
+    if(CABLES.UI && gui.patch().isCurrentOp(op))
         gui.setTransformGizmo(
             {
                 posX:eyeX,
@@ -50,7 +50,7 @@ render.onTriggered=function()
 
 
     cgl.pushViewMatrix();
-    
+
     arr[0]=eyeX.get();
     arr[1]=eyeY.get();
     arr[2]=eyeZ.get();
@@ -69,7 +69,7 @@ render.onTriggered=function()
     vec3.set(vCenter, centerX.get(),centerY.get(),centerZ.get());
 
     mat4.lookAt(transMatrix, vEye, vCenter, vUp);
-    
+
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 
     trigger.trigger();

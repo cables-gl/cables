@@ -140,5 +140,58 @@
     },
     "libs": [
         "cannon.js"
+    ],
+    "summary": "cast a ray and test intersection with physic bodies",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Screen X",
+                "text": "Position of the ray on the X axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Screen Y",
+                "text": "Position of the ray on the Y axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Screen Z",
+                "text": "Position of the ray on the Z axis 0.0 is the center of the screen"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Has Hit",
+                "text": "if the ray intersects/hits a physics body then 1 is output"
+            },
+            {
+                "name": "Hit X",
+                "text": "Intersection position in world space on the X axis"
+            },
+            {
+                "name": "Hit Y",
+                "text": "Intersection position in world space on the Y axis"
+            },
+            {
+                "name": "Hit Z",
+                "text": "Intersection position in world space on the Z axis"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Docs need a lot of work, parameter names aren't clear",
+            "author": "andro",
+            "id": "6844885b-d287-4e56-ac71-6b4fc59ff2b2",
+            "date": 1558347670614
+        }
     ]
 }

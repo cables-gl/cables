@@ -1,5 +1,4 @@
 {
-    "updated": 1521842188236,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
@@ -46,11 +45,10 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
+    "youtubeid": "46MCfZRQiGU",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ]
+    "relatedops": null,
+    "issues": ""
 }

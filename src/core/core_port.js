@@ -1,14 +1,8 @@
 
 /**
- * @name Port
- * @memberof CABLES
+ * @module CABLES.Port
+ * @name CABLES.Port
  * @class
- */
-
-/**
- * change listener for input value ports 
- * @name CABLES.Port#onChange
- * @type Function
  */
 
 CABLES.PORT_DIR_IN=0;
@@ -16,6 +10,7 @@ CABLES.PORT_DIR_OUT=1;
 
 var CABLES=CABLES || {};
 
+/** @constructor */
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
     this.data = {}; // reserved for port-specific user-data
@@ -73,6 +68,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         }
       });
 };
+
+
+
+/**
+ * change listener for input value ports 
+ * @name CABLES.Port#onChange
+ * @type Function
+ */
+
+
+
 {
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
@@ -138,8 +144,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
+     * @memberof CABLES.Port
      * @function
-     * @name CABLES.Port#setValue
+     * @name setValue
      * @description set value of port / will send value to all linked ports (only for output ports)
      */
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)

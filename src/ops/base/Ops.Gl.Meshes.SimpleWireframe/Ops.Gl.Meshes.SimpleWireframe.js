@@ -12,6 +12,8 @@ render.onTriggered=doRender;
 
 var mesh=null;
 var verts=[];
+var tc=[];
+var normals=[];
 
 inGeom.onChange=function()
 {
@@ -36,10 +38,26 @@ inGeom.onChange=function()
         verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
         verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
         verts.push(geom.vertices[index*3+0],geom.vertices[index*3+1],geom.vertices[index*3+2]);
+
+        normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
+        normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
+        normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
+        normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
+        normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
+        normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
+
+        tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
+        tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
+        tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
+        tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
+        tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
+        tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
     }
 
     geom=new CGL.Geometry("wireframelinegeom");
     geom.setPointVertices(verts);
+    geom.setTexCoords(tc);
+    geom.vertexNormals=normals;
 
     mesh=new CGL.Mesh(cgl,geom,cgl.gl.LINE_STRIP);
 };

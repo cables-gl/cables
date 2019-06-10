@@ -33,5 +33,13 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Emboss"
+    },
+    "summary": "Emboss / bevel effect",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

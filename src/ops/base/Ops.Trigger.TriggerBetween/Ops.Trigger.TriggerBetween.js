@@ -21,7 +21,7 @@ exe.onTriggered=function()
             {
                 outFract.set( 1.0+(inNumber2.get()-inIndex.get() ));
             }
-            else 
+            else
             if(inIndex.get()<inNumber1.get())
             {
                 outFract.set( 1.0-(inNumber1.get()-inIndex.get() ));
@@ -31,5 +31,5 @@ exe.onTriggered=function()
             next.trigger();
 
         }
-    
+
 };

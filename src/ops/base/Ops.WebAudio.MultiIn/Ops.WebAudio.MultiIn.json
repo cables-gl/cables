@@ -50,5 +50,8 @@
                 "text": "Audio output which contains the mixed audio signal of all connected inputs, can be connected to `AudioOutput` e.g."
             }
         ]
-    }
+    },
+    "authorName": "tim",
+    "id": "fd3ee2e6-e632-4013-b548-d380c14ffa7d",
+    "created": 1558103602025
 }

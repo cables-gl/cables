@@ -1,0 +1,50 @@
+{
+    "id": "1f870586-1ae4-4b7e-9dd7-24c300c989ba",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557744529358
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557744606556,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Shader"
+            },
+            {
+                "type": "5",
+                "name": "Name"
+            },
+            {
+                "type": "5",
+                "name": "Value"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Shader.ShaderDefine"
+    },
+    "summary": "Set shader defines",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "Needs docs and an example",
+            "author": "andro",
+            "id": "7f787fa1-ac98-419b-95b4-863254b57853",
+            "date": 1558362029913
+        }
+    ]
+}

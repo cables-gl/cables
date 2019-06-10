@@ -1,14 +1,15 @@
 var render=op.inTrigger('render');
 
-var inWidth=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var inHeight=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var inPosX=op.addInPort(new CABLES.Port(op,"X",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var inPosY=op.addInPort(new CABLES.Port(op,"Y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+var inWidth=op.inValueFloat("Width");
+var inHeight=op.inValueFloat("Height");
+var inPosX=op.inValueFloat("X");
+var inPosY=op.inValueFloat("Y");
 
-var r=op.addInPort(new CABLES.Port(op,"r",CABLES.OP_PORT_TYPE_VALUE,{ display:'range', colorPick:'true'}));
-var g=op.addInPort(new CABLES.Port(op,"g",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var b=op.addInPort(new CABLES.Port(op,"b",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
-var a=op.addInPort(new CABLES.Port(op,"a",CABLES.OP_PORT_TYPE_VALUE,{ display:'range' }));
+const r = op.inValueSlider("r", Math.random());
+const g = op.inValueSlider("g", Math.random());
+const b = op.inValueSlider("b", Math.random());
+const a = op.inValueSlider("a",1.0);
+r.setUiAttribs({ colorPick: true });
 
 var trigger=op.outTrigger('trigger');
 
@@ -65,7 +66,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -2,22 +2,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "exe"
-            },
-            {
                 "type": "0",
-                "name": "degree"
+                "name": "degree",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.DegreeToVector"
@@ -42,5 +41,8 @@
                 "text": "The y-vector in the range `[-1, 1]`"
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "56b1618b-4eed-41a8-87a2-57397ffc9029",
+    "created": 1558014622113
 }

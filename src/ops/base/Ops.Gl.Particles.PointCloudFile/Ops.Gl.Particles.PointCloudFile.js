@@ -1,7 +1,7 @@
-const render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-const trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-const points=this.addInPort(new CABLES.Port(this,"points",CABLES.OP_PORT_TYPE_ARRAY));
-const doCenter=this.addInPort(new CABLES.Port(this,"center",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const render=op.inTrigger("render");
+const trigger=op.outTrigger("trigger");
+const points=op.inArray("points");
+const doCenter=op.inValueBool("center");
 
 const cgl=this.patch.cgl;
 
@@ -16,7 +16,7 @@ render.onTriggered=function()
 {
     for(var i=0;i<meshes.length;i++)
         meshes[i].render(cgl.getShader());
-    
+
     trigger.trigger();
 };
 
@@ -29,24 +29,24 @@ function createMesh(arr,start,end)
     var texCoords=[];
     var verts=[];
     verts.length=(end-start)*3;
-    
+
     var vertColors=[];
     vertColors.length=(end-start)*4;
     texCoords.length=(end-start)*2;
     geom.verticesIndices.length=end-start;
-    
+
     for(i=start;i<end;i++)
     {
         var ind=i-start;
         verts[ind*3+0]=arr[i][0];
         verts[ind*3+1]=arr[i][1];
         verts[ind*3+2]=arr[i][2];
-        
+
         vertColors[ind*4+0]=arr[i][3]/255;
         vertColors[ind*4+1]=arr[i][4]/255;
         vertColors[ind*4+2]=arr[i][5]/255;
         vertColors[ind*4+3]=1;
-        
+
         texCoords[ind*2+0]=5/(arr[i][1]%5);
         texCoords[ind*2+1]=5/(arr[i][2]%5);
     }
@@ -59,29 +59,29 @@ function createMesh(arr,start,end)
     console.log('geom.verticesIndices',geom.verticesIndices.length);
 
     var mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-    
+
     console.log("mesh generated");
-    
+
     return mesh;
 }
 
 
 function create()
 {
-    
-    
+
+
     var arr=points.get();
     if(!arr)return;
     meshes.length=0;
     var meshMax=2000;
     var i=0;
-    
+
     if(doCenter.get())
     {
         var avgX=0;
         var avgY=0;
         var avgZ=0;
-        
+
         for(i=0;i<arr.length;i++)
         {
             avgX=(avgX+arr[i][0])/2;
@@ -95,9 +95,9 @@ function create()
             arr[i][1]-=avgY;
             arr[i][2]-=avgZ;
         }
-        
+
     }
-    
+
     if(arr)
     {
         var count=0;
@@ -106,8 +106,8 @@ function create()
             meshes.push(createMesh(arr,i,Math.min(arr.length,i+meshMax)));
         }
     }
-    
-    
+
+
 }
 
 create();

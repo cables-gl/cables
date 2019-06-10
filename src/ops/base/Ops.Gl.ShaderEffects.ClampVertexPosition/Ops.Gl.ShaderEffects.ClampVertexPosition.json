@@ -1,0 +1,46 @@
+{
+    "updated": 1516085974993,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "0346b2d4-fbf3-421e-972b-9cb3429583c5",
+    "created": 1515058505589,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "min"
+            },
+            {
+                "type": "0",
+                "name": "max"
+            },
+            {
+                "type": "0",
+                "name": "Update Normals"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.RestrictVertexPosition"
+    },
+    "summary": "clamp/restrict the vertex position to min/max values per axis",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

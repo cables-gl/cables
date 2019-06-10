@@ -30,13 +30,13 @@ function invalidateMatrices() {
     matricesValid = false;
 }
 
-rotX.onValueChange(invalidateMatrices);
-rotY.onValueChange(invalidateMatrices);
-rotZ.onValueChange(invalidateMatrices);
-scale.onValueChange(invalidateMatrices);
-offset.onValueChange(invalidateMatrices);
+rotX.onChange=invalidateMatrices;
+rotY.onChange=invalidateMatrices;
+rotZ.onChange=invalidateMatrices;
+scale.onChange=invalidateMatrices;
+offset.onChange=invalidateMatrices;
 
-amount.onValueChange(function() { amountRadians = amount.get()*CGL.DEG2RAD; });
+amount.onChange=function() { amountRadians = amount.get()*CGL.DEG2RAD; };
 
 function updateRange()
 {

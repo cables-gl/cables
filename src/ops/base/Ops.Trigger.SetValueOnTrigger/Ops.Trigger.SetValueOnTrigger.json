@@ -22,5 +22,13 @@
             }
         ],
         "name": "Ops.Trigger.SetValueOnTrigger"
+    },
+    "summary": "set number when triggered",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

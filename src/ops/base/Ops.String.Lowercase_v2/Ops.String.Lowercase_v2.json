@@ -1,0 +1,29 @@
+{
+    "updated": 1542056323872,
+    "authorName": "pandur",
+    "id": "bff9c3d9-e63a-46d2-a59f-932c715aceab",
+    "created": 1541835195546,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Lowercase2"
+    },
+    "summary": "convert all characters to small letters",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

@@ -24,8 +24,7 @@ var srcVert=''
     .endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
     .endl()+'}';
 
-    var srcFrag=''
-
+var srcFrag=''
     .endl()+'{{MODULES_HEAD}}'
 
     .endl()+'IN vec4 color;'

@@ -8,11 +8,13 @@
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
@@ -34,7 +36,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Dither"
     },
-    "updated": 1542100853699,
     "authorName": "pandur",
     "id": "4fb6167d-a9b0-4604-84c4-755b09fd8dd7",
     "created": 1519027703473,

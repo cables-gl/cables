@@ -1,5 +1,4 @@
 {
-    "updated": 1517565940305,
     "authorName": "tim",
     "id": "d6da4bad-4bab-4210-8bb9-1c7848b2e6d0",
     "created": 1517494452954,
@@ -15,7 +14,8 @@
             },
             {
                 "type": "0",
-                "name": "Value Input"
+                "name": "Value Input",
+                "subType": "string"
             },
             {
                 "type": "3",
@@ -52,5 +52,12 @@
                 "text": "Prints a message every time the object changes (you might need to connect the `Execute` port)"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559038142524
+        }
+    ]
 }

@@ -1,0 +1,47 @@
+{
+    "id": "2def6fdb-de39-4f56-9818-05b7a302583c",
+    "updated": 1543065858320,
+    "authorName": "pandur",
+    "created": 1543065812320,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "5",
+                "name": "Character"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.StringIterator2"
+    },
+    "summary": "iterate over every character of a string",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

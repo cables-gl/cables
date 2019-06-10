@@ -63,7 +63,7 @@ mqttObj.onChange=function(){
                 // inform others on change
                 mqttOutObj.set(o);
             }
-            
+
         } else { // reconnect
             //subscribe();
             resubscribe();

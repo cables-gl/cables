@@ -9,64 +9,77 @@
             {
                 "type": "0",
                 "name": "PointSize",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Random Size",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Round",
+                "group": "Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "Scale by Distance",
+                "group": "Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "a",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "preMultiplied alpha",
+                "group": "Color",
                 "subType": "boolean"
             },
             {
                 "type": "2",
-                "name": "texture"
+                "name": "texture",
+                "group": "Texture"
             },
             {
                 "type": "2",
-                "name": "Texture Mask"
+                "name": "Texture Mask",
+                "group": "Texture"
             },
             {
                 "type": "0",
                 "name": "colorizeTexture",
+                "group": "Texture",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "texture Lookup",
+                "group": "Texture",
                 "subType": "boolean"
             }
         ],

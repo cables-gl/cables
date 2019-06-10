@@ -2,19 +2,20 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "a95ef5bc-560d-435d-84a0-2fc134af4adf",
-    "updated": 1519810978745,
     "created": 1519810978746,
     "layout": {
         "portsIn": [
             {
                 "type": "0",
-                "name": "Midi Value"
+                "name": "Midi Value",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Note"
+                "name": "Note",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Midi.MidiValueToNote"

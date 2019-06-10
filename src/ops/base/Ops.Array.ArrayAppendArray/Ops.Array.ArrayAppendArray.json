@@ -1,0 +1,66 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "c2bbf5a7-0e98-416b-aadf-49d09242821c",
+    "created": 1514997061949,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Join"
+            },
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayAppendArray"
+    },
+    "summary": "Append an array to an existing array ",
+    "docs": {
+        "ports": [
+            {
+                "name": "Join",
+                "text": "Append array to existing array"
+            },
+            {
+                "name": "Array",
+                "text": "ArrayIn"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset the array"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "fixed array length zero now resets array correctly",
+            "author": "andro",
+            "date": 1558534982108
+        },
+        {
+            "message": "fixed - outputs null if array is empty or has been reset",
+            "author": "andro",
+            "date": 1559128676819
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
+}

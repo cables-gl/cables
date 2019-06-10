@@ -1,5 +1,5 @@
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
+var render=op.inTrigger("render");
 var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
@@ -69,73 +69,7 @@ function bindTextures()
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texLength.get().tex);
     }
 
-    
+
 }
 
 
-
-// var cgl=op.patch.cgl;
-
-// op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-// op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-
-// var inLayer=op.inValueInt("Layer");
-// var inNumLayers=op.inValueInt("Num Layers");
-
-// var inTime=op.inValue("Time");
-
-
-// var inStrength=op.inValue("Strength",1);
-
-// var shader=null;
-
-// var srcHeadVert=attachments.fur_vert;
-
-// var srcBodyVert=''
-//     .endl()+'pos=MOD_scaler(pos,modelMatrix*pos,attrVertNormal);' //modelMatrix*
-//     .endl();
-    
-// var moduleVert=null;
-
-// function removeModule()
-// {
-//     if(shader && moduleVert) shader.removeModule(moduleVert);
-//     shader=null;
-// }
-
-// op.render.onLinkChanged=removeModule;
-
-// op.render.onTriggered=function()
-// {
-//     if(!cgl.getShader())
-//     {
-//          op.trigger.trigger();
-//          return;
-//     }
-    
-//     if(cgl.getShader()!=shader)
-//     {
-//         if(shader) removeModule();
-//         shader=cgl.getShader();
-
-//         moduleVert=shader.addModule(
-//             {
-//                 title:op.objName,
-//                 name:'MODULE_VERTEX_POSITION',
-//                 srcHeadVert:srcHeadVert,
-//                 srcBodyVert:srcBodyVert
-//             });
-
-//         inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-//         inLayer.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'Layer',inLayer);
-//         inNumLayers.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'NumLayers',inNumLayers);
-//         inTime.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'time',inTime);
-
-//     }
-    
-    
-//     if(!shader)return;
-
-//     op.trigger.trigger();
-// };

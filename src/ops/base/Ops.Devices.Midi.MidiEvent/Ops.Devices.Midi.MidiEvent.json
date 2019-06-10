@@ -47,15 +47,12 @@
         ],
         "name": "Ops.Devices.Midi.MidiEvent"
     },
-    "summary": "",
+    "summary": "midi event data",
     "youtubeid": "",
-    "collections": [
-        "hardware"
-    ],
-    "relatedops": [
-        ""
-    ],
+    "collections": null,
+    "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "issues": ""
 }

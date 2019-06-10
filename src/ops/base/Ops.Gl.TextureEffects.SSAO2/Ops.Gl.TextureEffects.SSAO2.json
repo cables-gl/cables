@@ -38,6 +38,16 @@
                 "type": "0",
                 "name": "Luminance Influence",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable noise",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Noise amount",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -10,11 +10,10 @@ const
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,'perlinnoise');
-const srcFrag=attachments.perlinnoise3d_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
 op.setPortGroup("Position",[x,y,z]);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+shader.setSource(shader.getDefaultVertexShader(),attachments.perlinnoise3d_frag );
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),

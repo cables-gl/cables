@@ -71,7 +71,9 @@ function loadImage(_i,_url,nocache,cb)
                 if(err)
                 {
                     setTempTexture();
-                    op.uiAttr({'error':'could not load texture "'+url+'"'});
+                    const errMsg='could not load texture "'+url+'"';
+                    op.uiAttr({'error':errMsg});
+                    console.warn('[TextureArrayLoader] '+errMsg);
                     if(cb)cb();
                     return;
                 }
@@ -94,10 +96,6 @@ function loadImage(_i,_url,nocache,cb)
                             warning:null
                         });
 
-                // textureOut.set(null);
-                // textureOut.set(tex);
-
-                // tex.printInfo();
                 arrOut.set(null);
                 arrOut.set(arr);
                 if(cb)cb();
@@ -124,31 +122,28 @@ function loadImage(_i,_url,nocache,cb)
 
 function realReload(nocache)
 {
-
     var files=filenames.get();
 
     if(!files||files.length==0)return;
 
-
     if(loadingId)cgl.patch.loading.finished(loadingId);
     loadingId=cgl.patch.loading.start('texturearray',CABLES.uuid());
 
+    // arr.length=files.length;
+
+
     for(var i=0;i<files.length;i++)
     {
-        console.log('load',files[i]);
+        arr[i]=CGL.Texture.getEmptyTexture(cgl);
         var cb=null;
         if(i==files.length-1)cb=function()
             {
                 cgl.patch.loading.finished(loadingId);
-console.log('loaded all');
+                // console.log('loaded all');
             };
         loadImage(i,files[i],nocache,cb);
-
     }
-
-
 }
-
 
 function onFilterChange()
 {
@@ -180,9 +175,6 @@ op.onFileChanged=function(fn)
 };
 
 
-
-
 tfilter.set('linear');
 wrap.set('repeat');
-
 

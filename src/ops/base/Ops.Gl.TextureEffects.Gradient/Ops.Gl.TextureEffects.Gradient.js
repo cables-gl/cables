@@ -33,8 +33,8 @@ var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
 var shader=new CGL.Shader(cgl,'gradient');
-var srcFrag=attachments.gradient_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+
+shader.setSource(shader.getDefaultVertexShader(),attachments.gradient_frag);
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 var uniPos=new CGL.Uniform(shader,'f','pos',pos1);
 var uniWidth=new CGL.Uniform(shader,'f','width',width);

@@ -7,39 +7,48 @@
             },
             {
                 "type": "0",
-                "name": "eyeX"
+                "name": "eyeX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "eyeY"
+                "name": "eyeY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "eyeZ"
+                "name": "eyeZ",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "centerX"
+                "name": "centerX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "centerY"
+                "name": "centerY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "centerZ"
+                "name": "centerZ",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "upX"
+                "name": "upX",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "upY"
+                "name": "upY",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "upZ"
+                "name": "upZ",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -54,7 +63,6 @@
         ],
         "name": "Ops.Gl.Matrix.LookatCamera"
     },
-    "updated": 1518869551898,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "e0f1bad6-7dfb-4665-b458-ca50a1bfe7fa",

@@ -4,7 +4,7 @@ var SORT_Y="Y Axis";
 var SORT_Z="Z Axis";
 var SORT_NONE="None";
 
-var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geometry=op.inObject("Geometry");
 var sorting=op.inValueSelect("Sort",[SORT_RANDOM,SORT_X,SORT_Y,SORT_Z,SORT_NONE],SORT_X);
 var reverse=op.inValueBool("Reverse",false);
 
@@ -132,10 +132,13 @@ function update()
             newTexCoords.push(
                 geom.texCoords[faces[i+0]*2+0],
                 geom.texCoords[faces[i+0]*2+1] );
+
+            if(geom.tangents)
             newTangents.push(
                 geom.tangents[faces[i+0]*3+0],
                 geom.tangents[faces[i+0]*3+1],
                 geom.tangents[faces[i+0]*3+2] );
+            if(geom.biTangents)
             newBiTangents.push(
                 geom.biTangents[faces[i+0]*3+0],
                 geom.biTangents[faces[i+0]*3+1],
@@ -154,14 +157,16 @@ function update()
             newTexCoords.push(
                 geom.texCoords[faces[i+1]*2+0],
                 geom.texCoords[faces[i+1]*2+1] );
-            newTangents.push(
-                geom.tangents[faces[i+1]*3+0],
-                geom.tangents[faces[i+1]*3+1],
-                geom.tangents[faces[i+1]*3+2] );
-            newBiTangents.push(
-                geom.biTangents[faces[i+1]*3+0],
-                geom.biTangents[faces[i+1]*3+1],
-                geom.biTangents[faces[i+1]*3+2] );
+            if(geom.tangents)
+                newTangents.push(
+                    geom.tangents[faces[i+1]*3+0],
+                    geom.tangents[faces[i+1]*3+1],
+                    geom.tangents[faces[i+1]*3+2] );
+            if(geom.biTangents)
+                newBiTangents.push(
+                    geom.biTangents[faces[i+1]*3+0],
+                    geom.biTangents[faces[i+1]*3+1],
+                    geom.biTangents[faces[i+1]*3+2] );
 
             newFaces.push(
                 newVerts.length/3 );
@@ -176,14 +181,16 @@ function update()
             newTexCoords.push(
                 geom.texCoords[faces[i+2]*2+0],
                 geom.texCoords[faces[i+2]*2+1] );
-            newTangents.push(
-                geom.tangents[faces[i+2]*3+0],
-                geom.tangents[faces[i+2]*3+1],
-                geom.tangents[faces[i+2]*3+2] );
-            newBiTangents.push(
-                geom.biTangents[faces[i+2]*3+0],
-                geom.biTangents[faces[i+2]*3+1],
-                geom.biTangents[faces[i+2]*3+2] );
+            if(geom.tangents)
+                newTangents.push(
+                    geom.tangents[faces[i+2]*3+0],
+                    geom.tangents[faces[i+2]*3+1],
+                    geom.tangents[faces[i+2]*3+2] );
+            if(geom.biTangents)
+                newBiTangents.push(
+                    geom.biTangents[faces[i+2]*3+0],
+                    geom.biTangents[faces[i+2]*3+1],
+                    geom.biTangents[faces[i+2]*3+2] );
         }
 
         newGeom.vertices=newVerts;
@@ -193,6 +200,7 @@ function update()
         newGeom.tangents=newTangents;
         newGeom.biTangents=newBiTangents;
 
+        outGeom.set(null);
         outGeom.set(newGeom);
     }
 }

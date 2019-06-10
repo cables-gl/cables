@@ -1,5 +1,4 @@
 {
-    "updated": 1541692839514,
     "authorName": "andro",
     "id": "a55eea17-efb8-4418-bcf9-7fefeecf40e5",
     "created": 1541692839518,
@@ -12,11 +11,13 @@
             {
                 "type": "0",
                 "name": "Amount",
+                "group": "Blending",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Blend Mode",
+                "group": "Blending",
                 "subType": "string"
             },
             {
@@ -71,7 +72,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.GlitchNoise"
+        "name": "Ops.Gl.TextureEffects.Noise.GlitchNoise"
     },
     "summary": "Creates a black and white glitched texture to use for displacement",
     "youtubeid": "",

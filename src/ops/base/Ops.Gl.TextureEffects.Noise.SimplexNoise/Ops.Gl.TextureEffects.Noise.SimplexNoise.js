@@ -1,36 +1,28 @@
-const render=op.inTrigger('render');
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const smoothness=op.inValue("smoothness",1.0);
-const scale=op.inValue("scale",1.0);
-const trigger=op.outTrigger('trigger');
-
-const x=op.inValue("x");
-const y=op.inValue("y");
-const time=op.inValue("time",0.314);
+const
+    render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    smoothness=op.inValue("smoothness",1.0),
+    scale=op.inValue("scale",1.0),
+    trigger=op.outTrigger('trigger'),
+    x=op.inValue("x"),
+    y=op.inValue("y"),
+    time=op.inValue("time",0.314);
 
 const cgl=op.patch.cgl;
-
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.simplexnoise_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.simplexnoise_frag);
 
-const textureUniform=new CGL.Uniform(shader,'t','tex',0);
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+const
+    textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniSmoothness=new CGL.Uniform(shader,'f','smoothness',smoothness),
+    uniScale=new CGL.Uniform(shader,'f','scale',scale),
+    uniX=new CGL.Uniform(shader,'f','x',x),
+    uniY=new CGL.Uniform(shader,'f','y',y),
+    uniTime=new CGL.Uniform(shader,'f','time',time);
 
-const uniSmoothness=new CGL.Uniform(shader,'f','smoothness',smoothness.get());
-const uniScale=new CGL.Uniform(shader,'f','scale',scale.get());
-const uniX=new CGL.Uniform(shader,'f','x',x.get());
-const uniY=new CGL.Uniform(shader,'f','y',y.get());
-const uniTime=new CGL.Uniform(shader,'f','time',time.get());
-
-x.onChange=function() { uniX.setValue(x.get()/100); };
-y.onChange=function(){ uniY.setValue(y.get()/100); };
-time.onChange=function(){ uniTime.setValue(time.get()/100); };
-
-smoothness.onChange=function(){ uniSmoothness.setValue(smoothness.get());};
-scale.onChange=function(){ uniScale.setValue(scale.get()); };
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
@@ -42,7 +34,6 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

@@ -12,7 +12,7 @@ function update()
     var theArray=inArrays.get();
     if(!theArray)
     {
-        op.log('no array');
+        // op.log('no array');
         return;
     }
     

@@ -22,7 +22,7 @@ defaultTransparent.onChange=function()
 
 for(var i=0;i<16;i++)
 {
-    var tex=this.addInPort(new CABLES.Port(this,"texture"+i,CABLES.OP_PORT_TYPE_TEXTURE));
+    var tex=op.inTexture("texture"+i);
     texturePorts.push(tex);
     tex.onChange=forceUpdateTexture;
 }

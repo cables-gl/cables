@@ -1,6 +1,3 @@
-// var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-// fontname=op.addInPort(new CABLES.Port(op,"family",CABLES.OP_PORT_TYPE_VALUE,{ type:'string' } ));
-
 const
     filename=op.inFile("file"),
     fontname=op.inValueString("family"),

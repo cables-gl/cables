@@ -1,5 +1,4 @@
 {
-    "updated": 1517322881551,
     "authorName": "pandur",
     "id": "b18040d6-13d7-4f55-950f-3f95cafa4e90",
     "created": 1517322111948,
@@ -15,42 +14,55 @@
             },
             {
                 "type": "0",
-                "name": "Translate X"
+                "name": "Translate X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Translate Y"
+                "name": "Translate Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Translate Z"
+                "name": "Translate Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale X"
+                "name": "Scale X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Y"
+                "name": "Scale Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Z"
+                "name": "Scale Z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotation X"
+                "name": "Rotation X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotation Y"
+                "name": "Rotation Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Rotation Z"
+                "name": "Rotation Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "3",
                 "name": "Result"

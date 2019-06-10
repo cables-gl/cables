@@ -1,0 +1,61 @@
+{
+    "id": "19e3c428-22ce-45a3-b903-fddfc46fc0a3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550740418598
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550740548820,
+    "summary": "Switch between two strings with a boolean",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Boolean",
+                "text": "Boolean in true or false / 1 or 0"
+            },
+            {
+                "name": "True",
+                "text": "The string to output if boolean evaluates to true"
+            },
+            {
+                "name": "False",
+                "text": "The string to output if boolean evaluates to false"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "True"
+            },
+            {
+                "type": "5",
+                "name": "False"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringSwitchBoolean"
+    }
+}

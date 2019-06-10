@@ -1,0 +1,30 @@
+{
+    "updated": 1541835338347,
+    "authorName": "pandur",
+    "id": "6d208424-daf2-4a2b-874f-daac406c1f66",
+    "created": 1541835302748,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.ParseInt2"
+    },
+    "summary": "Parse a string to a integer number",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

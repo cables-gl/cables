@@ -27,13 +27,13 @@ function addListeners()
     listenerElement.addEventListener('mousedown', onEvent);
     listenerElement.addEventListener('mouseup', onEvent);
     listenerElement.addEventListener('mouseenter', onEvent);
-    
+
 }
 
 
 function removeLiseteners()
 {
-    
+
     listenerElement.removeEventListener('mousemove', onEvent);
     listenerElement.removeEventListener('mouseleave', onEvent);
     listenerElement.removeEventListener('mousedown', onEvent);

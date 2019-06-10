@@ -1,0 +1,68 @@
+{
+    "id": "6468b7c1-f63e-4db4-b809-4b203d27ead3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557742503222
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557742505295,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Syntax",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringEditor"
+    },
+    "summary": "string text editor",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "Not an input port, press edit to open the text editor"
+            },
+            {
+                "name": "Syntax",
+                "text": "Syntax mode Text, GLSL or  CSS"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "Needs example",
+            "author": "andro",
+            "id": "1eb1aa43-ed39-4df4-8fa0-bcd01f20623c",
+            "date": 1558362590399
+        },
+        {
+            "message": "Needs an example showing what the op does depending on the syntax mode selected",
+            "author": "andro",
+            "id": "db42f5a9-ea34-41cc-8dd9-f10e787eb0d9",
+            "date": 1558363866783
+        }
+    ]
+}

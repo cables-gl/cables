@@ -1,7 +1,7 @@
 const render=op.inTrigger("Render");
 const trigger=op.outTrigger("Next");
 const msaa=op.inValueSelect("MSAA",["none","2x","4x","8x"],"none");
-const useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
+const useVPSize=op.inValueBool("use viewport size");
 
 const width=op.inValueInt("texture width");
 const height=op.inValueInt("texture height");
@@ -31,7 +31,7 @@ tfilter.set('linear');
 var reInitFb=true;
 
 render.onTriggered=doRender;
-tfilter.onValueChange(onFilterChange);
+tfilter.onChange = onFilterChange;
 useVPSize.onChange=updateVpSize;
 
 fpTexture.onChange=reInitLater;

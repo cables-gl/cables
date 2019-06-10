@@ -38,7 +38,6 @@
         "name": "Ops.Math.Accumulator"
     },
     "summary": "Add to and multiply a number, set to current value",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -66,5 +65,9 @@
                 "text": "The current number"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

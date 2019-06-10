@@ -1,0 +1,153 @@
+{
+    "authorName": "simod",
+    "id": "5eea2f30-4e10-42a7-a761-63fb274cdb4f",
+    "created": 1559654386342,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "Timing",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "1",
+                "name": "Tick Out"
+            },
+            {
+                "type": "1",
+                "name": "Clock Start"
+            },
+            {
+                "type": "1",
+                "name": "Clock Stop"
+            },
+            {
+                "type": "1",
+                "name": "Clock Continue"
+            },
+            {
+                "type": "0",
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tick Duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sub Tick",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "1/1"
+            },
+            {
+                "type": "1",
+                "name": "1/2"
+            },
+            {
+                "type": "1",
+                "name": "1/4"
+            },
+            {
+                "type": "1",
+                "name": "1/8"
+            },
+            {
+                "type": "1",
+                "name": "1/16"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiClock"
+    },
+    "summary": "sends out midi clock signals as triggers",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiNRPN"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Event In",
+                "text": "Input for the midi clock event, use the clock output of MidiInputDevice2"
+            },
+            {
+                "name": "Timing",
+                "text": "Change the subdivision timing"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "The out port for the MIDI clock event"
+            },
+            {
+                "name": "Tick Out",
+                "text": "Outputs a trigger every tick"
+            },
+            {
+                "name": "Clock Start",
+                "text": "Outputs a clock start signal"
+            },
+            {
+                "name": "Clock Stop",
+                "text": "Outputs a clock stop signal"
+            },
+            {
+                "name": "Clock Continue",
+                "text": "Outputs a clock continue signal"
+            },
+            {
+                "name": "BPM",
+                "text": "read the current bpm as a number"
+            },
+            {
+                "name": "Tick Duration",
+                "text": "tick duration in milliseconds"
+            },
+            {
+                "name": "Sub Tick",
+                "text": "current subtick (value between 0 - 24)"
+            },
+            {
+                "name": "1/1",
+                "text": "outputs a trigger every bar (dotted: 1.5 bars, triplet: full-note triplet)"
+            },
+            {
+                "name": "1/2",
+                "text": "outputs a trigger every half note (dotted: trigger every 3/4, triplet: half-note triplet)"
+            },
+            {
+                "name": "1/4",
+                "text": "outputs a trigger every quarter note (dotted: trigger every 3/8, triplet: quarter-note triplet)"
+            },
+            {
+                "name": "1/8",
+                "text": "outputs a trigger every eigth note (dotted: trigger every 3/16, triplet: eigth-note triplet)"
+            },
+            {
+                "name": "1/16",
+                "text": "outputs a trigger every sixteenth note (dotted: trigger every 3/32, triplet: sixteenth-note triplet)"
+            }
+        ]
+    }
+}

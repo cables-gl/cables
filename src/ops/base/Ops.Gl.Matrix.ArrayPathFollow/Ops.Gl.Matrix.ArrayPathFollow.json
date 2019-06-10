@@ -54,9 +54,11 @@
     "authorName": "pandur",
     "id": "395bff14-d092-4e7e-a723-b6a69564add2",
     "created": 1520592871298,
-    "youtubeid": "",
     "collections": [
-        "transform"
+        "transform",
+        "Spline"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "issues": "",
+    "youtubeids": []
 }

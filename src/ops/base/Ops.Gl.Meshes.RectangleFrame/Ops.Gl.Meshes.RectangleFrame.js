@@ -1,41 +1,37 @@
+const
+    render=op.inTrigger('Render'),
+    width=op.inValueFloat("Width",1),
+    height=op.inValueFloat("Height",1),
+    thickness=op.inValueFloat("Thickness",-0.1),
+    pivotX=op.inValueSelect("pivot x",["center","left","right"],"center"),
+    pivotY=op.inValueSelect("pivot y",["center","top","bottom"],"center"),
 
-var render=op.inTrigger('Render');
-var width=op.addInPort(new CABLES.Port(op,"Width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new CABLES.Port(op,"Height",CABLES.OP_PORT_TYPE_VALUE));
-var thickness=op.addInPort(new CABLES.Port(op,"Thickness",CABLES.OP_PORT_TYPE_VALUE));
-var pivotX=op.addInPort(new CABLES.Port(op,"pivot x",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","left","right"]} ));
-var pivotY=op.addInPort(new CABLES.Port(op,"pivot y",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["center","top","bottom"]} ));
+    trigger=op.outTrigger('trigger'),
+    geomOut=op.outObject("Geometry"),
 
-var trigger=op.outTrigger('trigger');
-var geomOut=op.addOutPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
-
-var drawTop=op.inValueBool("Draw Top",true);
-var drawBottom=op.inValueBool("Draw Bottom",true);
-var drawLeft=op.inValueBool("Draw Left",true);
-var drawRight=op.inValueBool("Draw Right",true);
+    drawTop=op.inValueBool("Draw Top",true),
+    drawBottom=op.inValueBool("Draw Bottom",true),
+    drawLeft=op.inValueBool("Draw Left",true),
+    drawRight=op.inValueBool("Draw Right",true);
 
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry();
 geom.tangents = [];
 geom.biTangents = [];
 
-width.set(1);
-height.set(1);
-thickness.set(-0.1);
-pivotX.set('center');
-pivotY.set('center');
-
 geomOut.ignoreValueSerialize=true;
 
-width.onChange=create;
-pivotX.onChange=create;
-pivotY.onChange=create;
-height.onChange=create;
-thickness.onChange=create;
-
-drawTop.onChange=drawBottom.onChange=drawLeft.onChange=drawRight.onChange=create;
+width.onChange=
+    pivotX.onChange=
+    pivotY.onChange=
+    height.onChange=
+    thickness.onChange=
+    drawTop.onChange=
+    drawBottom.onChange=
+    drawLeft.onChange=
+    drawRight.onChange=create;
 
 create();
 
@@ -53,7 +49,7 @@ function create()
     var x=-w/2;
     var y=-h/2;
     var th=thickness.get();//*Math.min(height.get(),width.get())*-0.5;
- 
+
     if(pivotX.get()=='right') x=-w;
     else if(pivotX.get()=='left') x=0;
 

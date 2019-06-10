@@ -24,9 +24,26 @@
         ],
         "name": "Ops.Json.ObjectGetValue"
     },
-    "summary": "",
+    "summary": "Get a number from an object",
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "rename to objectGetNumber",
+            "author": "pandur",
+            "id": "7dbe943c-4a12-43b2-9f57-c06e135b10ba",
+            "date": 1558354570797
+        },
+        {
+            "message": "create new version with new string input",
+            "author": "pandur",
+            "id": "8003e441-092d-442d-aab1-f07ffc091f6c",
+            "date": 1558354585572
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null
 }

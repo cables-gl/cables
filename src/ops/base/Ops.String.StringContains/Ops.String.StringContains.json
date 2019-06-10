@@ -3,24 +3,31 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "String"
+                "name": "String",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "SearchValue"
+                "name": "SearchValue",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Found"
+                "name": "Found",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "number"
             }
         ],
         "name": "Ops.String.StringContains"
     },
-    "summary": "check if string contains another string (find,search,indexOf)"
+    "summary": "check if string contains another string (find,search,indexOf)",
+    "authorName": "pandur",
+    "id": "9621424b-76f1-4000-9cd4-acc46da06a5d",
+    "created": 1558039688432
 }

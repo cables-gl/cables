@@ -7,23 +7,28 @@
             },
             {
                 "type": "0",
-                "name": "In Min"
+                "name": "In Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Midpoint"
+                "name": "Midpoint",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "In Max"
+                "name": "In Max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Out Min"
+                "name": "Out Min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Out Max"
+                "name": "Out Max",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -34,7 +39,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.Levels"
     },
-    "updated": 1540920816945,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "42ad6bbe-df17-48c7-89dd-bd7022113897",

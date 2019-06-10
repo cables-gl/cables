@@ -11,8 +11,8 @@ UNI float scale;
 UNI sampler2D tex;
 UNI float rangeA;
 UNI float rangeB;
-{{BLENDCODE}}
 
+{{CGL.BLENDMODES}}
 
 // Cellular noise ("Worley noise") in 3D in GLSL.
 // Copyright (c) Stefan Gustavson 2011-04-19. All rights reserved.
@@ -99,7 +99,7 @@ void main(void) {
 
 	st.x+=x;
 	st.y+=y;
-	
+
 
 	vec2 F = cellular2x2x2(vec3(st,z));
 	float n = smoothstep(rangeA,rangeB, F.x);
@@ -107,15 +107,12 @@ void main(void) {
     #ifdef DO_INVERT
         n=1.0-n;
     #endif
-    
+
     vec4 col=vec4(n,n,n,1.0);
 
     vec4 base=texture(tex,texCoord);
-    
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
 
-    outColor= col;
 
-// 	outColor= vec4(n, n, n, 1.0);
+    outColor=cgl_blend(base,col,amount);
+
 }

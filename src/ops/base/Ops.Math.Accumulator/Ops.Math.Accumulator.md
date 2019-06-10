@@ -1,0 +1,1 @@
+Handy when used with devices like gamepads or counters

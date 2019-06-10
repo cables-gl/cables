@@ -29,5 +29,29 @@
         ],
         "name": "Ops.Anim.Timer2"
     },
-    "summary": "A timer that can be started, paused and reset by triggering"
+    "summary": "A timer that can be started, paused and reset by triggering",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Play",
+                "text": "Starts timer when set to true"
+            },
+            {
+                "name": "Reset",
+                "text": "Resets timer to 0"
+            },
+            {
+                "name": "Speed",
+                "text": "Multiply time by this amount"
+            },
+            {
+                "name": "Time",
+                "text": "Time elapsed"
+            }
+        ]
+    }
 }

@@ -31,5 +31,13 @@
                 "text": "The input value as a boolean value"
             }
         ]
-    }
+    },
+    "todos": [
+        {
+            "message": "needs new string version / rename parseBooleanString / BooleanFromNumber",
+            "author": "pandur",
+            "id": "6d41ce24-f65f-4169-86f1-c4e4cb9e7d32",
+            "date": 1558515870256
+        }
+    ]
 }

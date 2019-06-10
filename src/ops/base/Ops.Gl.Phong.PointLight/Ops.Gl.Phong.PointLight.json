@@ -8,63 +8,78 @@
             },
             {
                 "type": "0",
-                "name": "Radius"
+                "name": "Radius",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fall Off"
+                "name": "Fall Off",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Intensity"
+                "name": "Intensity",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "r"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "g"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "b"
+                "name": "b",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ambient R"
+                "name": "Ambient R",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ambient G"
+                "name": "Ambient G",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Ambient B"
+                "name": "Ambient B",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular R"
+                "name": "r",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular G"
+                "name": "g",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Specular B"
+                "name": "b",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -79,9 +94,15 @@
         ],
         "name": "Ops.Gl.Phong.PointLight"
     },
-    "updated": 1520443092601,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "1d2cf105-f66d-4a31-949e-b1887d582080",
-    "created": 1504698930842
+    "created": 1504698930842,
+    "changelog": [
+        {
+            "message": "code cleanup - ports , removed unused setters",
+            "author": "andro",
+            "date": 1559046783572
+        }
+    ]
 }

@@ -1,0 +1,27 @@
+{
+    "id": "a3315052-fd88-43c8-94c1-ebae0be05848",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1560078498063
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1560078628347,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.Array4toArray3"
+    }
+}

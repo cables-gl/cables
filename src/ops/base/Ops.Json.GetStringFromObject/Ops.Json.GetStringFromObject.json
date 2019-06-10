@@ -1,0 +1,47 @@
+{
+    "id": "6562a543-2147-485d-8fd3-58fe3357684e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550658667375
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550658681332,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "5",
+                "name": "key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetString"
+    },
+    "summary": "get string from object",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "Add docs and example patch",
+            "author": "andro",
+            "id": "443120cc-3245-4d12-aabf-df5ecd3a75ec",
+            "date": 1558358447255
+        }
+    ]
+}

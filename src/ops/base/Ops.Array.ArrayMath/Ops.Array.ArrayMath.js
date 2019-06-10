@@ -1,18 +1,14 @@
-//this op expects 2 arrays. The user can then pick a
-//mathematical function which will be applied to the
-//two arrays. If arrays have a different length then a warning
-//is given in the panel
-const inArray_0 = op.inArray("array 0");
-const inArray_1 = op.inArray("array 1");
-const mathSelect = op.inValueSelect("Math function",['+','-','*','/','%','min','max'],'+');
-const outArray = op.outArray("Array result");
+const inArray_0 = op.inArray("array 0"),
+    NumberIn = op.inValueFloat("Number for math", 0.0),
+    mathSelect = op.inValueSelect("Math function",['+','-','*','/','%','min','max'],'+'),
+    outArray = op.outArray("Array result");
 
 //cache for errors
 var showingError = false;
-//create array to store multiplied result from both arrays
+//create array to store mathematical result
 var mathArray = [];
 var selectIndex = 0;
-mathSelect.onChange = onFilterChange;
+mathSelect.onChange = NumberIn.onChange = onFilterChange;
 
 const MATH_FUNC_ADD = 0;
 const MATH_FUNC_SUB = 1;
@@ -38,77 +34,61 @@ function onFilterChange()
 function update()
 {
     var array0 = inArray_0.get();
-    var array1 = inArray_1.get();
+
     //reset array
     mathArray.length = 0;
 
     //check if arrays come in correctly on startup
-    if(!array0 || !array1)
+    if(!array0)
     {
         return;
     }
-    //if arrays don't have the same length then give a warning to panel ui
-    if(array0.length !== array1.length)
-    {
-        if(!showingError)
-        {
-            op.uiAttr({error:"Arrays do not have the same length !"});
-            showingError = true;
-        }
-        return;
-    }
-    if(showingError)
-    {
-        showingError = false;
-        op.uiAttr({error:null});
-    }
 
-
+    var num = NumberIn.get();
     mathArray.length = array0.length;
 
     //create variable for for loop
     var i = 0;
-    //use selectIndex to decide which math mode is used on the 2 arrays
+    //use selectIndex to decide which math mode is used on the array
     if(selectIndex === MATH_FUNC_ADD)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = array0[i] + array1[i];
+            mathArray[i] = array0[i] + num;
     }
     else if(selectIndex === MATH_FUNC_SUB)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = array0[i] - array1[i];
+            mathArray[i] = array0[i] - num;
     }
     else if(selectIndex === MATH_FUNC_MUL)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = array0[i] * array1[i];
+            mathArray[i] = array0[i] * num;
     }
     else if(selectIndex === MATH_FUNC_DIV)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = array0[i] / array1[i];
+            mathArray[i] = array0[i] / num;
     }
     else if(selectIndex === MATH_FUNC_MOD)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = array0[i] % array1[i];
+            mathArray[i] = array0[i] % num;
     }
     else if(selectIndex === MATH_FUNC_MIN)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = Math.min(array0[i], array1[i]);
+            mathArray[i] = Math.min(array0[i], num);
     }
     else if(selectIndex === MATH_FUNC_MAX)
     {
         for(i = 0; i < array0.length; i++)
-            mathArray[i] = Math.max(array0[i], array1[i]);
+            mathArray[i] = Math.max(array0[i], num);
     }
     outArray.set(null);
     outArray.set(mathArray);
 }
 
 inArray_0.onChange = update;
-inArray_1.onChange = update;
-mathSelect.onChange = onFilterChange;
+//mathSelect.onChange = onFilterChange;
 update();

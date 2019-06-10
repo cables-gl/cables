@@ -44,7 +44,7 @@
             },
             {
                 "name": "Seed",
-                "text": "Radnom number seed. 0 is always different on a reload. Set to a number to keep a fixed speed."
+                "text": "Random number seed. 0 is always different on a reload. Set to a number to keep a fixed seed."
             },
             {
                 "name": "Result",

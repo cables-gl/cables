@@ -1,0 +1,69 @@
+{
+    "id": "65c535ef-70f0-47f6-bb82-5b6c8e6d9dd9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556520624739
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1556520686795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Parent"
+            },
+            {
+                "type": "2",
+                "name": "Child 1"
+            },
+            {
+                "type": "2",
+                "name": "Child 2"
+            },
+            {
+                "type": "2",
+                "name": "Child 3"
+            },
+            {
+                "type": "2",
+                "name": "Child 4"
+            },
+            {
+                "type": "2",
+                "name": "Child 5"
+            },
+            {
+                "type": "2",
+                "name": "Child 6"
+            },
+            {
+                "type": "2",
+                "name": "Child 7"
+            },
+            {
+                "type": "2",
+                "name": "Child 8"
+            },
+            {
+                "type": "2",
+                "name": "Child 9"
+            },
+            {
+                "type": "2",
+                "name": "Child 10"
+            }
+        ],
+        "name": "Ops.Html.ElementChilds"
+    },
+    "summary": "Set childs of a HTML Element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

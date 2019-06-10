@@ -4,13 +4,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "size"
+                "name": "size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Opacity"
+                "name": "Opacity",
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.CablesLink"
-    }
+    },
+    "authorName": "pandur",
+    "id": "aba114d1-b042-484a-9b66-a9bfe6590b3d",
+    "created": 1558014374347
 }

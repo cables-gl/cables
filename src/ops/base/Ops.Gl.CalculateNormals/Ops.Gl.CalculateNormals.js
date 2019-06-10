@@ -1,9 +1,9 @@
 
-var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
-var smoothNormals=op.addInPort(new CABLES.Port(op,"Smooth",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
-var forceZUp=op.addInPort(new CABLES.Port(op,"Force Z Up",CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"}));
+var geometry=op.inObject("Geometry");
+var smoothNormals=op.inValueBool("Smooth");
+var forceZUp=op.inValueBool("Force Z Up");
 
-var geomOut=op.addOutPort(new CABLES.Port(op,"Geometry Out",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("Geometry Out");
 
 geomOut.ignoreValueSerialize=true;
 geometry.ignoreValueSerialize=true;
@@ -30,6 +30,6 @@ function calc()
     });
 
     geomOut.set(geom);
-    
+
 }
 

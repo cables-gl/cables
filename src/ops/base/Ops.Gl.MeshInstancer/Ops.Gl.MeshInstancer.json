@@ -56,7 +56,6 @@
         "name": "Ops.Gl.MeshInstancer"
     },
     "summary": "draw the same mesh multiple times very fast",
-    "youtubeid": "7xlElfbMWgw",
     "docs": {
         "ports": [
             {
@@ -93,10 +92,7 @@
             }
         ]
     },
-    "collections": [
-        "pointArrays",
-        "meshInstancing"
-    ],
+    "collections": null,
     "relatedops": null,
-    "issues": "Currently the meshInstancer op cannot share materials with other ops. Make sure it has it's own material"
+    "issues": ""
 }

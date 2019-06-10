@@ -1,0 +1,31 @@
+{
+    "updated": 1519810366954,
+    "authorName": "pandur",
+    "id": "165b241d-b884-436d-90b9-720aef0b982d",
+    "created": 1519810366957,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Connection"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Reload listeners on Save"
+            }
+        ],
+        "name": "Ops.Cables.CableConnect.SendPatchChanges"
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

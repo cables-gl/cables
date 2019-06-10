@@ -16,7 +16,7 @@ UNI float stretch;
 UNI float x;
 UNI float y;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 float dist(float x,float y,float x2,float y2)
 {
@@ -50,7 +50,6 @@ float dist = dist(x,y,texCoord.x+0.5,(texCoord.y-0.5)*aspect+0.5);
 
    col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);
    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount),1.0);
-
    outColor=col;
 
    #ifdef WARN_OVERFLOW

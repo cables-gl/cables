@@ -1,0 +1,106 @@
+{
+    "authorName": "simod",
+    "id": "2b13bc7b-c1bd-4319-9c85-86a81a6e2354",
+    "created": 1550071006329,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normalize",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiNRPN"
+    },
+    "summary": "read NRPN value from controller",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiMonitor"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Event In",
+                "text": "The in port for the MIDI event"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "MIDI Channel number from 1 - 16"
+            },
+            {
+                "name": "NRPN Index",
+                "text": "NRPN index"
+            },
+            {
+                "name": "Normalize",
+                "text": "Choose between 3 options: 0 to 16383 (none), 0 to 1, -1 to 1"
+            },
+            {
+                "name": "learn",
+                "text": "press to automatically assign NRPN"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "The out port for MIDI event"
+            },
+            {
+                "name": "NRPN Index",
+                "text": "index output"
+            },
+            {
+                "name": "NRPN Value",
+                "text": "value output"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "triggers whenever an NRPN message is sent"
+            }
+        ]
+    }
+}

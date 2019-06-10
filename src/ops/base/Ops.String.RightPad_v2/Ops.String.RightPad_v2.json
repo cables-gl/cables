@@ -1,0 +1,37 @@
+{
+    "id": "b10c1bcb-c6aa-4238-bcba-bb9f33a2febf",
+    "authorName": "pandur",
+    "created": 1543065617794,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Value"
+            },
+            {
+                "type": "5",
+                "name": "Char"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.String.RightPad2"
+    },
+    "summary": "create a string with a fixed length filling the space with a character",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

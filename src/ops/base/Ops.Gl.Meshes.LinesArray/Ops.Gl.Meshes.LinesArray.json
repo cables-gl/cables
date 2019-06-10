@@ -41,12 +41,12 @@
             {
                 "type": "0",
                 "name": "num columns",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "num rows",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",

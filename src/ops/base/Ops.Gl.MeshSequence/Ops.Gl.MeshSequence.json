@@ -1,5 +1,4 @@
 {
-    "updated": 1515168314731,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "a9ba3a67-233e-46cb-9c29-fc7b38956b45",
@@ -12,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "frame"
+                "name": "frame",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "smooth"
+                "name": "smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -34,11 +37,13 @@
             },
             {
                 "type": "0",
-                "name": "Num Frames"
+                "name": "Num Frames",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Frame Name"
+                "name": "Frame Name",
+                "subType": "number"
             },
             {
                 "type": "2",
@@ -51,5 +56,12 @@
         ],
         "name": "Ops.Gl.MeshSequence"
     },
-    "summary": "morph between a series of meshes"
+    "summary": "morph between a series of meshes",
+    "changelog": [
+        {
+            "message": "code cleanup - ports and onChange Calls",
+            "author": "andro",
+            "date": 1559045526956
+        }
+    ]
 }

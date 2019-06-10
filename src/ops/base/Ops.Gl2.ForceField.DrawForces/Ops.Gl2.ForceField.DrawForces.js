@@ -17,7 +17,7 @@ exec.onTriggered=function()
         cgl.pushModelMatrix();
         vec3.set(vec, CABLES.forceFieldForces[j].pos[0],CABLES.forceFieldForces[j].pos[1],CABLES.forceFieldForces[j].pos[2]);
         mat4.translate(cgl.mvMatrix,cgl.mvMatrix, vec);
-        
+
         outIndex.set(j);
         outRange.set(CABLES.forceFieldForces[j].range);
         outAttraction.set(CABLES.forceFieldForces[j].attraction);

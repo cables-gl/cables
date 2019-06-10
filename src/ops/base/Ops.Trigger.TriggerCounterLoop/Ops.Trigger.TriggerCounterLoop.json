@@ -1,0 +1,72 @@
+{
+    "authorName": "andro",
+    "id": "d3356c53-e278-433f-af0b-d8327cd99a2d",
+    "created": 1557391819548,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "trigger in"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            },
+            {
+                "type": "0",
+                "name": "Loop min",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Loop max",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger out"
+            },
+            {
+                "type": "0",
+                "name": "current count",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerCounterLoop"
+    },
+    "summary": "Increments with each trigger and loops depending on min and max loop values.",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "trigger in",
+                "text": "Trigger in, increments or decrements the current count"
+            },
+            {
+                "name": "reset",
+                "text": "Sets current number to minimum"
+            },
+            {
+                "name": "Loop min",
+                "text": "Minimum value, loop start number"
+            },
+            {
+                "name": "Loop max",
+                "text": "Maximum value, loop end number"
+            },
+            {
+                "name": "trigger out",
+                "text": "Trigger out "
+            },
+            {
+                "name": "current count",
+                "text": "Current number in loop"
+            }
+        ]
+    }
+}

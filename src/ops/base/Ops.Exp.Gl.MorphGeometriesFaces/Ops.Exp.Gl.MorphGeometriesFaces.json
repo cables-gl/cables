@@ -38,5 +38,13 @@
             }
         ],
         "name": "Ops.Exp.Gl.MorphGeometriesFaces"
+    },
+    "summary": "morph individual faces between two geometries",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

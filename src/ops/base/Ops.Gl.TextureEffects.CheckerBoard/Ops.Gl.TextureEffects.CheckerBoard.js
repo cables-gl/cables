@@ -9,8 +9,7 @@ const trigger=op.outTrigger('trigger');
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.checkerboard_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.checkerboard_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);

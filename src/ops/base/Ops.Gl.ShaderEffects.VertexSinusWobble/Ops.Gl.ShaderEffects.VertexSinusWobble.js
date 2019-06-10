@@ -1,71 +1,53 @@
 var self=this;
-var cgl=self.patch.cgl;
+const cgl=op.patch.cgl;
 
 var shader=null;
 var module=null;
 var uniTime;
 
-this.render=this.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-
-this.frequency=this.addInPort(new CABLES.Port(this,"frequency",CABLES.OP_PORT_TYPE_VALUE));
-var uniFrequency=null;
-this.frequency.val=1.0;
-// this.frequency.onChange=function(){ if(uniFrequency)uniFrequency.setValue(self.frequency.val); };
-
-this.amount=this.addInPort(new CABLES.Port(this,"amount",CABLES.OP_PORT_TYPE_VALUE));
-var uniAmount=null;
-this.amount.val=1.0;
-// this.amount.onChange=function(){ if(uniAmount)uniAmount.setValue(self.amount.val); };
-
-
-this.phase=this.addInPort(new CABLES.Port(this,"phase",CABLES.OP_PORT_TYPE_VALUE));
-var uniPhase=null;
-this.phase.val=1.0;
-
-var mul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
-var uniMul=null;
-mul.set(3.0);
-
-var add=this.addInPort(new CABLES.Port(this,"add",CABLES.OP_PORT_TYPE_VALUE));
-var uniAdd=null;
-add.set(0);
-
-
-this.toAxisX=this.addInPort(new CABLES.Port(this,"axisX",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.toAxisX.val=true;
-this.toAxisX.onChange=setDefines;
-
-this.toAxisY=this.addInPort(new CABLES.Port(this,"axisY",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.toAxisY.val=true;
-this.toAxisY.onChange=setDefines;
-
-this.toAxisZ=this.addInPort(new CABLES.Port(this,"axisZ",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-this.toAxisZ.val=true;
-this.toAxisZ.onChange=setDefines;
-
-var src=op.addInPort(new CABLES.Port(op,"Source",CABLES.OP_PORT_TYPE_VALUE ,{display:'dropdown',values:[
+const render=op.inTrigger("render");
+const next=this.outTrigger("trigger");
+const frequency=op.inValueFloat("frequency",1);
+const amount=op.inValueSlider("amount",1.0);
+const phase=op.inValueFloat("phase",1);
+const mul=op.inValueFloat("mul",3);
+const add=op.inValueFloat("add",0);
+const toAxisX=op.inValueBool("axisX",true);
+const toAxisY=op.inValueBool("axisY",true);
+const toAxisZ=op.inValueBool("axisZ",true);
+var src=op.inValueSelect("Source",[
     "X * Z + Time",
     "X * Y + Time",
     "X + Time",
     "Y + Time",
-    "Z + Time"]} ));
-src.onChange=setDefines;
+    "Z + Time"],"X * Z + Time" );
 
+var uniMul=null;
+var uniFrequency=null;
+var uniAmount=null;
+var uniPhase=null;
+var uniAdd=null;
+
+
+
+src.onChange=
+    toAxisZ.onChange=
+    toAxisX.onChange=
+    toAxisY.onChange=setDefines;
 
 function setDefines()
 {
     if(!shader)return;
 
-    if(self.toAxisX.val)shader.define(module.prefix+'TO_AXIS_X');
+    if(toAxisX.val)shader.define(module.prefix+'TO_AXIS_X');
         else shader.removeDefine(module.prefix+'TO_AXIS_X');
 
-    if(self.toAxisY.val)shader.define(module.prefix+'TO_AXIS_Y');
+    if(toAxisY.val)shader.define(module.prefix+'TO_AXIS_Y');
         else shader.removeDefine(module.prefix+'TO_AXIS_Y');
 
-    if(self.toAxisZ.val)shader.define(module.prefix+'TO_AXIS_Z');
+    if(toAxisZ.val)shader.define(module.prefix+'TO_AXIS_Z');
         else shader.removeDefine(module.prefix+'TO_AXIS_Z');
-    
+
     if(!src.get() || src.get()=='X * Z + Time' || src.get()==='') shader.define(module.prefix+'SRC_XZ');
         else shader.removeDefine(module.prefix+'SRC_XZ');
 
@@ -106,8 +88,8 @@ function removeModule()
     }
 }
 
-this.render.onLinkChanged=removeModule;
-this.render.onTriggered=function()
+render.onLinkChanged=removeModule;
+render.onTriggered=function()
 {
     if(cgl.getShader()!=shader)
     {
@@ -121,14 +103,14 @@ this.render.onTriggered=function()
             });
 
         uniTime=new CGL.Uniform(shader,'f',module.prefix+'time',0);
-        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'frequency',self.frequency);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'amount',self.amount);
-        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'phase',self.phase);
+        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'frequency',frequency);
+        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'amount',amount);
+        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'phase',phase);
         uniMul=new CGL.Uniform(shader,'f',module.prefix+'mul',mul);
         uniAdd=new CGL.Uniform(shader,'f',module.prefix+'add',add);
         setDefines();
     }
 
     uniTime.setValue(CABLES.now()/1000.0-startTime);
-    self.trigger.trigger();
+    next.trigger();
 };

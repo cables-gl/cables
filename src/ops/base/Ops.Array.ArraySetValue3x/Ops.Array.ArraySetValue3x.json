@@ -1,5 +1,4 @@
 {
-    "updated": 1519813592067,
     "authorName": "pandur",
     "id": "c3b2d0c9-0aa5-4605-948a-a53784fa8f1a",
     "created": 1519813558455,
@@ -15,19 +14,23 @@
             },
             {
                 "type": "0",
-                "name": "index"
+                "name": "index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 2"
+                "name": "Value 2",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 3"
+                "name": "Value 3",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -40,6 +43,46 @@
     },
     "summary": "set three values at position index in an array",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in "
+            },
+            {
+                "name": "array",
+                "text": "Array in "
+            },
+            {
+                "name": "index",
+                "text": "Index to change"
+            },
+            {
+                "name": "Value 1",
+                "text": "Value 1 to change at index"
+            },
+            {
+                "name": "Value 2",
+                "text": "Value 2 to change at index"
+            },
+            {
+                "name": "Value 3",
+                "text": "Value 3 to change at index"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558951998685
+        }
+    ]
 }

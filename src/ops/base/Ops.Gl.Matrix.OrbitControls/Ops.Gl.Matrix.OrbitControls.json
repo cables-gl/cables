@@ -166,5 +166,12 @@
     "collections": [
         "cameras"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559040635707
+        }
+    ]
 }

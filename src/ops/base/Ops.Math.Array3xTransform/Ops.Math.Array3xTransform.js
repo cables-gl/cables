@@ -1,29 +1,27 @@
-
-var inExec=op.inTriggerButton("Transform");
-var inArr=op.inArray("Array");
-
-
-
-var transX=op.inValue("Translate X");
-var transY=op.inValue("Translate Y");
-var transZ=op.inValue("Translate Z");
-
-var scaleX=op.inValueSlider("Scale X",1);
-var scaleY=op.inValueSlider("Scale Y",1);
-var scaleZ=op.inValueSlider("Scale Z",1);
-
-var rotX=op.inValue("Rotation X");
-var rotY=op.inValue("Rotation Y");
-var rotZ=op.inValue("Rotation Z");
-
-
-
-var outArr=op.outArray("Result");
+const
+    inExec=op.inTriggerButton("Transform"),
+    inArr=op.inArray("Array"),
+    transX=op.inValue("Translate X"),
+    transY=op.inValue("Translate Y"),
+    transZ=op.inValue("Translate Z"),
+    scaleX=op.inValueSlider("Scale X",1),
+    scaleY=op.inValueSlider("Scale Y",1),
+    scaleZ=op.inValueSlider("Scale Z",1),
+    rotX=op.inValue("Rotation X"),
+    rotY=op.inValue("Rotation Y"),
+    rotZ=op.inValue("Rotation Z"),
+    next=op.outTrigger("Next"),
+    outArr=op.outArray("Result");
 
 var resultArr=[];
 
-
 inExec.onTriggered=doTransform;
+
+var rotVec=vec3.create();
+var emptyVec=vec3.create();
+var transVec=vec3.create();
+var centerVec=vec3.create();
+
 
 function doTransform()
 {
@@ -33,13 +31,8 @@ function doTransform()
         outArr.set(null);
         return;
     }
-    
+
     resultArr.length=arr.length;
-    
-    var rotVec=vec3.create();
-    var emptyVec=vec3.create();
-    var transVec=vec3.create();
-    var centerVec=vec3.create();
 
     for(var i=0;i<arr.length;i+=3)
     {
@@ -54,7 +47,6 @@ function doTransform()
 
     for(var i=0;i<arr.length;i+=3)
     {
-
         vec3.set(rotVec,
             resultArr[i+0],
             resultArr[i+1],
@@ -67,12 +59,9 @@ function doTransform()
         resultArr[i+0]=rotVec[0];
         resultArr[i+1]=rotVec[1];
         resultArr[i+2]=rotVec[2];
-
-
     }
 
-  outArr.set(null);
-  outArr.set(resultArr);
-
-    
-};
+    outArr.set(null);
+    outArr.set(resultArr);
+    next.trigger();
+}

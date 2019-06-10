@@ -1,0 +1,33 @@
+{
+    "id": "a669d4f7-1e35-463c-bf8b-08c9f1b68e04",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556293017309
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1556293022756,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Open"
+            },
+            {
+                "type": "5",
+                "name": "URL"
+            }
+        ],
+        "name": "Ops.Html.HyperLink2"
+    },
+    "summary": "Open another website",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

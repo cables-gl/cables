@@ -1,5 +1,4 @@
 {
-    "updated": 1511875187868,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "b6d933cf-1ef8-41d6-95c1-593be0b4be90",
@@ -12,51 +11,63 @@
             },
             {
                 "type": "0",
-                "name": "Distance"
+                "name": "Distance",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Absolute"
+                "name": "Absolute",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "add x"
+                "name": "add x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "add y"
+                "name": "add y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "add z"
+                "name": "add z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul x"
+                "name": "mul x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul y"
+                "name": "mul y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "mul z"
+                "name": "mul z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             }
         ],
         "portsOut": [

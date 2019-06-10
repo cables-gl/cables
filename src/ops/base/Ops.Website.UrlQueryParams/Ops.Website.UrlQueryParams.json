@@ -41,5 +41,16 @@
                 "text": "The value of the parameter, or default value if it could not be found in the URL"
             }
         ]
-    }
+    },
+    "todos": [
+        {
+            "message": "we need a new version using string input/outputs",
+            "author": "pandur",
+            "id": "589a5771-c066-4957-995a-66b1672c546e",
+            "date": 1558021849149,
+            "deleted": true,
+            "deletedBy": "pandur",
+            "deletedDate": 1559052020404
+        }
+    ]
 }

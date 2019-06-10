@@ -11,9 +11,6 @@ var patch=this.patch;
 
 
 
-
-this.name='AudioPlayer';
-
 this.file=op.inFile("file","audio");
 var play=op.addInPort(new CABLES.Port(this,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 var autoPlay=op.addInPort(new CABLES.Port(this,"Autoplay",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));

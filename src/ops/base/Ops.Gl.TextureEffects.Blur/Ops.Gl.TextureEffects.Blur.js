@@ -27,7 +27,7 @@ var uniWidth=new CGL.Uniform(shader,'f','width',0);
 var uniHeight=new CGL.Uniform(shader,'f','height',0);
 
 var uniAmount=new CGL.Uniform(shader,'f','amount',amount.get());
-amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
+amount.onChange=function(){ uniAmount.setValue(amount.get()); };
 
 var textureAlpha=new CGL.Uniform(shader,'t','imageMask',1);
 
@@ -35,12 +35,12 @@ var textureAlpha=new CGL.Uniform(shader,'t','imageMask',1);
 
 var dir=0;
 
-direction.onValueChange(function()
+direction.onChange=function()
 {
     if(direction.get()=='both')dir=0;
     if(direction.get()=='horizontal')dir=1;
     if(direction.get()=='vertical')dir=2;
-});
+};
 
 var mask=op.inTexture("mask");
 

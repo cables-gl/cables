@@ -1,1 +1,163 @@
-{}
+{
+    "authorName": "andro",
+    "id": "a9fc6f3e-c439-48a2-b96f-ce5c34063930",
+    "created": 1558014478462,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line thickness X",
+                "group": "LineThickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line thickness Y",
+                "group": "LineThickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cells X",
+                "group": "Cells",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cells Y",
+                "group": "Cells",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Line red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Line Blue",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.GridTexture"
+    },
+    "summary": "Creates a grid texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Line thickness X",
+                "text": "Thickness of line on the X axis"
+            },
+            {
+                "name": "Line thickness Y",
+                "text": "Thickness of line on the Y axis"
+            },
+            {
+                "name": "Cells X",
+                "text": "Amount of cells on the X axis"
+            },
+            {
+                "name": "Cells Y",
+                "text": "Amount of cells on the Y axis"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the grid"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset on the Y axis"
+            },
+            {
+                "name": "Invert color",
+                "text": "Inverts color of grid"
+            },
+            {
+                "name": "Line red",
+                "text": "Red amount of color"
+            },
+            {
+                "name": "Line green",
+                "text": "Green amount of color"
+            },
+            {
+                "name": "Line Blue",
+                "text": "Blue amount of color"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}

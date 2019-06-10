@@ -1,6 +1,6 @@
 const render=op.inTrigger("render");
-const minDist=op.addInPort(new CABLES.Port(op,"min distance",CABLES.OP_PORT_TYPE_VALUE));
-const maxDist=op.addInPort(new CABLES.Port(op,"max distance",CABLES.OP_PORT_TYPE_VALUE));
+const minDist=op.inValueFloat("min distance");
+const maxDist=op.inValueFloat("max distance");
 
 const minRotY=op.inValue("min rot y",0);
 const maxRotY=op.inValue("max rot y",0);
@@ -9,15 +9,13 @@ const maxRotY=op.inValue("max rot y",0);
 // const maxRotX=op.inValue("max rot x",0);
 
 const initialRadius=op.inValue("initial radius",0);
-const initialAxis=op.addInPort(new CABLES.Port(op,"initial axis y",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-const initialX=op.addInPort(new CABLES.Port(op,"initial axis x",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
+const initialAxis=op.inValueSlider("initial axis y");
+const initialX=op.inValueSlider("initial axis x");
 
-const mul=op.addInPort(new CABLES.Port(op,"mul",CABLES.OP_PORT_TYPE_VALUE));
+const mul=op.inValueFloat("mul");
 const smoothness=op.inValueSlider("Smoothness",1.0);
 const speedX=op.inValue("Speed X",1);
 const speedY=op.inValue("Speed Y",1);
-
-
 
 const active=op.inValueBool("Active",true);
 

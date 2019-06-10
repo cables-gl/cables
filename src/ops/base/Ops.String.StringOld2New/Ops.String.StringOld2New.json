@@ -24,5 +24,22 @@
             }
         ],
         "name": "Ops.String.StringOld2New"
+    },
+    "summary": "temporary string port converter",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in - old format"
+            },
+            {
+                "name": "Result",
+                "text": "String out - new format"
+            }
+        ]
     }
 }

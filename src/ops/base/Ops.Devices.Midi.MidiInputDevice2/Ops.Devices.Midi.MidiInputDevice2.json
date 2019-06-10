@@ -1,0 +1,96 @@
+{
+    "authorName": "simod",
+    "id": "484b3a00-41b7-4e3f-8a99-a1b32a764eff",
+    "created": 1549387018997,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Device",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            },
+            {
+                "type": "1",
+                "name": "Panic"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            },
+            {
+                "type": "2",
+                "name": "Note"
+            },
+            {
+                "type": "2",
+                "name": "CC"
+            },
+            {
+                "type": "2",
+                "name": "NRPN"
+            },
+            {
+                "type": "2",
+                "name": "Clock"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiInputDevice2"
+    },
+    "summary": "connect to MIDI device output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiNRPN"
+    ],
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Device",
+                "text": "list of your midi devices"
+            },
+            {
+                "name": "Learn",
+                "text": "press button and send midi signal to automatically create op"
+            },
+            {
+                "name": "Panic",
+                "text": "press if you panic"
+            },
+            {
+                "name": "Event",
+                "text": "The out port for all MIDI events"
+            },
+            {
+                "name": "Note",
+                "text": "Only outputs midi events of type Note"
+            },
+            {
+                "name": "CC",
+                "text": "Only outputs midi events of type CC"
+            },
+            {
+                "name": "NRPN",
+                "text": "Only outputs midi events of type NRPN"
+            },
+            {
+                "name": "Clock",
+                "text": "Only outputs midi events of type Clock"
+            }
+        ]
+    }
+}

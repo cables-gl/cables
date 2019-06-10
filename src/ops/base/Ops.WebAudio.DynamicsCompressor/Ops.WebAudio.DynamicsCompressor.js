@@ -1,4 +1,3 @@
-this.name="DynamicsCompressor";
 
 if(!window.audioContext)
     if('webkitAudioContext' in window) audioContext = new webkitAudioContext();
@@ -42,7 +41,7 @@ var oldAudioIn = null;
 var compressor = audioContext.createDynamicsCompressor();
 
 // Audio In Value Change
-audioIn.onValueChange( function() {
+audioIn.onChange=function() {
     if (!audioIn.get()) {
         if (oldAudioIn !== null) {
             try {
@@ -55,7 +54,7 @@ audioIn.onValueChange( function() {
         audioIn.val.connect(compressor);
     }
     oldAudioIn=audioIn.val;
-});
+};
 
 // exe – only needed, to update the reduction value (useful for debugging and make-up gain ops)
 this.exe.onTriggered=function()
@@ -71,30 +70,30 @@ function checkBounds(value, min, max) {
 
 // Value Change Callbacks
 
-attack.onValueChange( function() {
+attack.onChange=function() {
     compressor.attack.value = checkBounds( parseFloat( attack.get(), ATTACK_MIN, ATTACK_MAX) );
     attack.set( compressor.attack.value ); // update UI with clamped value
-});
+};
 
-knee.onValueChange( function() {
+knee.onChange=function() {
     compressor.knee.value = checkBounds( parseFloat( knee.get() ), KNEE_MIN, KNEE_MAX );
     knee.set( compressor.knee.value ); // update UI with clamped value
-});
+};
 
-ratio.onValueChange( function() {
+ratio.onChange=function() {
     compressor.ratio.value = checkBounds( parseFloat( ratio.get() ), RATIO_MIN, RATIO_MAX );
     ratio.set( compressor.ratio.value ); // update UI with clamped value
-});
+};
 
-release.onValueChange( function() {
+release.onChange=function() {
     compressor.release.value = checkBounds( parseFloat( release.get() ), RELEASE_MIN, RELEASE_MAX );
     release.set( compressor.release.value ); // update UI with clamped value
-});
+};
 
-threshold.onValueChange( function() {
+threshold.onChange=function() {
     compressor.threshold.value = checkBounds( parseFloat( threshold.get() ), THRESHOLD_MIN, THRESHOLD_MAX );
     threshold.set( compressor.threshold.value ); // update UI with clamped value
-});
+};
 
 // Init In-Port Values
 attack.set(ATTACK_DEF);

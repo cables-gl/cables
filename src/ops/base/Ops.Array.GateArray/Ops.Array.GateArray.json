@@ -1,0 +1,46 @@
+{
+    "authorName": "andro",
+    "id": "74ce6e98-0ffd-4cd1-ac84-12b90435e6cf",
+    "created": 1558617924684,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Pass Through",
+                "subType": "boolean"
+            },
+            {
+                "type": "3",
+                "name": "Array in"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.GateArray"
+    },
+    "summary": "Only allows an array through if pass through is true",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Pass Through",
+                "text": "Open or closes the gate"
+            },
+            {
+                "name": "Array in",
+                "text": "Array in"
+            },
+            {
+                "name": "Array Out",
+                "text": "Array out - null if gate is closed"
+            }
+        ]
+    }
+}

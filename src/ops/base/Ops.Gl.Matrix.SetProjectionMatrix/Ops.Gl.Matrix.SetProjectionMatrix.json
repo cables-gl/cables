@@ -1,0 +1,28 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "Matrix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.setProjectionMatrix"
+    },
+    "authorName": "pandur",
+    "id": "2c614eb3-ab11-4793-a085-3ef8f517e30b",
+    "created": 1517222075223,
+    "summary": "set a projection matrix",
+    "docs": {
+        "ports": []
+    }
+}

@@ -1,0 +1,52 @@
+{
+    "id": "319d07e0-5cbe-4bc1-89fb-a934fd41b0c4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557471942484
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1557471953670,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Changed"
+            },
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerOnChangeString"
+    },
+    "summary": "triggers when string has changed",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - only when something in the String has changed"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
+    }
+}

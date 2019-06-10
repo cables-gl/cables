@@ -1,0 +1,49 @@
+{
+    "authorName": "andro",
+    "id": "68ea2c83-05fc-47a7-aba8-3c400f1dd737",
+    "created": 1558530554864,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger in"
+            },
+            {
+                "type": "3",
+                "name": "Array 1"
+            },
+            {
+                "type": "3",
+                "name": "Array 2"
+            },
+            {
+                "type": "3",
+                "name": "Array 3"
+            },
+            {
+                "type": "3",
+                "name": "Array 4"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Num Points",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.ArrayPack4"
+    },
+    "summary": "Pack 4 arrays into one array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

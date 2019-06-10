@@ -1,0 +1,65 @@
+{
+    "authorName": "simod",
+    "id": "28616ffc-a761-4792-9076-8625f9ccc965",
+    "created": 1549380950324,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "CC Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normalize",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "clear"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            },
+            {
+                "type": "0",
+                "name": "CC Index Out",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "CC Value Out",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiCC"
+    },
+    "summary": "read CC value from Midi controller",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -65,6 +65,7 @@ function connect()
     {
         console.log('could not connect to',inUrl.get());
         connecting=false;
+        console.log(e);
     }
 
     if(connection)

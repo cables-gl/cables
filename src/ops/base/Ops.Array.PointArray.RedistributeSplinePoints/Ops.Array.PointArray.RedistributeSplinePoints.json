@@ -32,11 +32,14 @@
         "name": "Ops.User.pandur.RedistributeSplinePoints"
     },
     "summary": "recalculate a spline / change number of points of a spline",
-    "youtubeid": "",
     "docs": {
         "ports": []
     },
     "collections": [
-        "pointArrays"
-    ]
+        "pointArrays",
+        "Spline"
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
 }

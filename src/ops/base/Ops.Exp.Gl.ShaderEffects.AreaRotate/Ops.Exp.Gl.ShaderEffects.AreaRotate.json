@@ -1,5 +1,4 @@
 {
-    "updated": 1516207551320,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "8de665f1-0fc5-466c-8819-b73e17560ccf",
@@ -12,27 +11,33 @@
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Strength"
+                "name": "Strength",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Smooth"
+                "name": "Smooth",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -47,5 +52,12 @@
     "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "fixed - ports",
+            "author": "andro",
+            "date": 1559038475780
+        }
+    ]
 }

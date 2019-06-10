@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.Gl.Meshes.VoronoiLines"
+    },
+    "summary": "Render lines from the Voronoi op",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

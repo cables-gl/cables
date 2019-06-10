@@ -45,8 +45,8 @@ UNI float zfar;
 
 UNI float radius;
 UNI float aoclamp;
-const bool noise = false; //use noise instead of pattern for sample dithering
-const float noiseamount = 0.0008; //dithering amount
+UNI bool noise ; //use noise instead of pattern for sample dithering//*****
+UNI float noiseamount; //dithering amount//********
 
 const float diffarea = 0.4; //self-shadowing reduction
 const float gdisplace = 0.4; //gauss bell center
@@ -63,15 +63,16 @@ UNI float lumInfluence;
 
 vec2 rand(vec2 coord) //generating noise/pattern texture for dithering
 {
-	float noiseX = ((fract(1.0-coord.s*(width/2.0))*0.25)+(fract(coord.t*(height/2.0))*0.75))*2.0-1.0;
-	float noiseY = ((fract(1.0-coord.s*(width/2.0))*0.75)+(fract(coord.t*(height/2.0))*0.25))*2.0-1.0;
 
-	if (noise)
-	{
-		noiseX = clamp(fract(sin(dot(coord ,vec2(12.9898,78.233))) * 43758.5453),0.0,1.0)*2.0-1.0;
-		noiseY = clamp(fract(sin(dot(coord ,vec2(12.9898,78.233)*2.0)) * 43758.5453),0.0,1.0)*2.0-1.0;
-	}
-	return vec2(noiseX,noiseY)*noiseamount;
+    #ifndef NOISE
+    	return vec2(0.0,0.0);
+	#endif
+
+    #ifdef NOISE
+		float noiseX = clamp(fract(sin(dot(coord ,vec2(12.9898,78.233))) * 43758.5453),0.0,1.0)*2.0-1.0;
+		float noiseY = clamp(fract(sin(dot(coord ,vec2(12.9898,78.233)*2.0)) * 43758.5453),0.0,1.0)*2.0-1.0;
+    	return vec2(noiseX,noiseY)*noiseamount/100.0;
+    #endif
 }
 
 // float doMist()

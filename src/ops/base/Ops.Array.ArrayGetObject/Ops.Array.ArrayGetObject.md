@@ -1,0 +1,1 @@
+Returns a single object from an array based upon the index.

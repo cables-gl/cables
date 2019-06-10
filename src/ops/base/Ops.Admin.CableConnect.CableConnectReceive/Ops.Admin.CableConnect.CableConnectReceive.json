@@ -1,0 +1,29 @@
+{
+    "updated": 1519810870591,
+    "authorName": "pandur",
+    "id": "1bfb7290-3fce-4cfd-b6d1-bb86e503175a",
+    "created": 1519810870592,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Connection"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Message"
+            }
+        ],
+        "name": "Ops.Cables.CableConnect.CableConnectReceive"
+    },
+    "summary": "internal test op",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    }
+}

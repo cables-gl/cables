@@ -45,5 +45,13 @@
     "summary": "start/configure a world with physic simulation",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "Needs example file and docs",
+            "author": "andro",
+            "id": "04becc10-d6b3-415a-87f1-8ea3bf0fb214",
+            "date": 1558347928358
+        }
+    ]
 }

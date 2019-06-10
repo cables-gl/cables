@@ -271,6 +271,6 @@ void main()
 
 
     outColor= col;
-    // gl_FragColor.a =a;
+    // outColor.a =a;
 }
 

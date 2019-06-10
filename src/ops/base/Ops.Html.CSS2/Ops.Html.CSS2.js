@@ -1,5 +1,8 @@
 var code=op.inStringEditor("css code");
 
+code.setUiAttribs({editorSyntax:'css'});
+
+
 var styleEle=null;
 var eleId='css_'+CABLES.uuid();
 

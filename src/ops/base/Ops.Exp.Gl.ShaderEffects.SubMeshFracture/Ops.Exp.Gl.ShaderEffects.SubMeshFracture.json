@@ -1,5 +1,4 @@
 {
-    "updated": 1519921784205,
     "authorName": "pandur",
     "id": "2b0abd00-6845-49c1-bebf-90cbf3e69640",
     "created": 1516266890871,
@@ -11,39 +10,48 @@
             },
             {
                 "type": "0",
-                "name": "Area"
+                "name": "Area",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Amount"
+                "name": "Amount",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Size"
+                "name": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Falloff"
+                "name": "Falloff",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "Invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "x"
+                "name": "x",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "y"
+                "name": "y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "z"
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -53,5 +61,12 @@
             }
         ],
         "name": "Ops.Exp.Gl.ShaderEffects.SubMeshFracture"
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559038606792
+        }
+    ]
 }

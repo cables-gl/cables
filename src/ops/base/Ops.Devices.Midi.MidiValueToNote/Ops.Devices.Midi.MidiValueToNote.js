@@ -1,5 +1,3 @@
-op.name='MidiValueToNote';
-
 var midiValuePort = op.inValue("Midi Value");
 var notePort = op.outValue("Note");
 

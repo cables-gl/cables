@@ -1,6 +1,6 @@
 var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
 var gain=this.addInPort(new CABLES.Port(this,"gain",CABLES.OP_PORT_TYPE_VALUE));
-gain.onValueChange(updateGain);
+gain.onChange=updateGain;
 var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
 
 if(!window.audioContext){ audioContext = new AudioContext(); }

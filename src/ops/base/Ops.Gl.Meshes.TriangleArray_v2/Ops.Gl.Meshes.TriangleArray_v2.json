@@ -1,0 +1,53 @@
+{
+    "id": "ee4d9fa8-996d-44a4-80a0-4f14bbd85502",
+    "authorName": "pandur",
+    "created": 1547129778134,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.TriangleArray2"
+    },
+    "summary": "Draws multiple triangles using coordinates from an array",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Renders the triangles"
+            },
+            {
+                "name": "Points",
+                "text": "The points forming the triangles, one dimensional array"
+            },
+            {
+                "name": "Next",
+                "text": "Triggers the next op"
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry of the triangles"
+            }
+        ]
+    }
+}

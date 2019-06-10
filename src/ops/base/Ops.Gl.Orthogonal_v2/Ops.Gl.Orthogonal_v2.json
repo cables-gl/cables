@@ -1,0 +1,62 @@
+{
+    "authorName": "pandur",
+    "id": "b9235490-eaf2-4960-b1be-4279a4051ec6",
+    "created": 1541805299988,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "bounds",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frustum near",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frustum far",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Orthogonal_v2"
+    },
+    "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "using now current width/height of viewport, and not of the canvas",
+            "author": "pandur",
+            "date": 1559654315975
+        }
+    ]
+}

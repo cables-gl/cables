@@ -1,22 +1,17 @@
-var render=op.inTrigger('render');
-var width=op.addInPort(new CABLES.Port(op,"width"),10);
-var height=op.addInPort(new CABLES.Port(op,"height"),1);
-var doLog=op.inValueBool("Logarithmic",false);
-var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
-var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
+const
+    render=op.inTrigger('render'),
+    width=op.inValueFloat("width",10),
+    height=op.inValueFloat("height",1),
+    doLog=op.inValueBool("Logarithmic",false),
+    pivotX=op.inValueSelect("pivot x",["center","left","right"],"center"),
+    pivotY=op.inValueSelect("pivot y",["center","top","bottom"],"center"),
+    nColumns=op.inValueInt("num columns",10),
+    nRows=op.inValueInt("num rows",10),
+    axis=op.inValueSelect("axis",["xy","xz"],"xy"),
+    trigger=op.outTrigger('trigger'),
+    outPointArrays=op.outArray("Point Arrays");
 
-var nColumns=op.addInPort(new CABLES.Port(op,"num columns"),10);
-var nRows=op.addInPort(new CABLES.Port(op,"num rows"),10);
-
-var axis=op.inValueSelect("axis",["xy","xz"]);
-var trigger=op.outTrigger('trigger');
-var outPointArrays=op.outArray("Point Arrays");
-
-var cgl=op.patch.cgl;
-axis.set('xy');
-pivotX.set('center');
-pivotY.set('center');
-
+const cgl=op.patch.cgl;
 var meshes=[];
 
 op.setPortGroup("Size",[width,height]);
@@ -30,8 +25,6 @@ axis.onChange=
     nRows.onChange=
     nColumns.onChange=
     doLog.onChange=rebuildDelayed;
-
-
 
 rebuild();
 

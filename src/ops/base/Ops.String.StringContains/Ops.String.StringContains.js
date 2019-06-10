@@ -20,6 +20,6 @@ function exec()
     {
         outIndex.set(-1);
         outFound.set(false);
-        
+
     }
 }

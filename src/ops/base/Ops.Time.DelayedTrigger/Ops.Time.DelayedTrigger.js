@@ -1,9 +1,7 @@
-const exe=op.inTrigger("exe");
-var delay=op.addInPort(new CABLES.Port(op,"delay",CABLES.OP_PORT_TYPE_VALUE));
-
-const next=op.outTrigger("next");
-
-delay.set(1);
+const
+    exe=op.inTrigger("exe"),
+    delay=op.inValueFloat("delay",1),
+    next=op.outTrigger("next");
 
 var lastTimeout=null;
 
@@ -15,6 +13,6 @@ exe.onTriggered=function()
         {
             lastTimeout=null;
             next.trigger();
-        }, 
+        },
         delay.get()*1000);
 };

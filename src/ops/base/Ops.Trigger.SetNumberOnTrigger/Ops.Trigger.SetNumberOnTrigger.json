@@ -12,13 +12,13 @@
     "layout": {
         "portsIn": [
             {
+                "type": "1",
+                "name": "Set"
+            },
+            {
                 "type": "0",
                 "name": "Number",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Set"
             }
         ],
         "portsOut": [
@@ -29,5 +29,26 @@
             }
         ],
         "name": "Ops.Trigger.SetNumberOnTrigger"
+    },
+    "summary": "Outputs a number when triggered",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Set",
+                "text": "Trigger - send out stored number"
+            },
+            {
+                "name": "Number",
+                "text": "Number to output on Trigger"
+            },
+            {
+                "name": "Out Value",
+                "text": "Number out"
+            }
+        ]
     }
 }

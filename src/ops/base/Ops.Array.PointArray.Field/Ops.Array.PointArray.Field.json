@@ -41,16 +41,44 @@
     "summary": "generate coordinates for a rectangular field of points",
     "youtubeid": "",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Rows",
+                "text": "Amount of rows"
+            },
+            {
+                "name": "Columns",
+                "text": "Amount of columns"
+            },
+            {
+                "name": "Width",
+                "text": "Width of rectangle"
+            },
+            {
+                "name": "Height",
+                "text": "Height of rectangle"
+            },
+            {
+                "name": "Center",
+                "text": "Pivot point. Center of bottom left corner "
+            },
+            {
+                "name": "Result",
+                "text": "Array out "
+            }
+        ]
     },
-    "collections": [
-        "pointArrays"
-    ],
+    "collections": null,
     "changelog": [
         {
             "message": "fixed the columns and rows parameter not resetting the array",
             "author": "andro",
             "date": 1550658911313
         }
+    ],
+    "issues": "",
+    "relatedops": [
+        "Ops.Array.ArrayUnpack4",
+        "Ops.Gl.MeshInstancer"
     ]
 }

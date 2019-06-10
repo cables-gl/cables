@@ -10,6 +10,9 @@ var CABLES = CABLES || {};
  * @property {function} [onFinishedLoading=null] called when patch finished loading all assets
  * @property {function} [onFirstFrameRendered=null] called when patch rendered it's first frame
  * @property {boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @property {boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @property {boolean} [clearCanvasDepth=true] clear depth every frame
  * @property {boolean} [silent=false] 
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
@@ -110,17 +113,20 @@ CABLES.Patch = function(cfg) {
         fpsLimit: 0,
     };
 
-    if (!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
-    if (!this.config.masterVolume) this.config.masterVolume = 1.0;
+    if(!this.config.hasOwnProperty("doRequestAnimation"))this.config.doRequestAnimation=true;
+
+    if(!this.config.prefixAssetPath) this.config.prefixAssetPath = '';
+    if(!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
+    if (cfg && cfg.variables) this._variables = cfg.variables||{};
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
     this.cgl = new CGL.Context(this);
     
-    this.cgl.setCanvas(this.config.glCanvasId||'glcanvas');
+    this.cgl.setCanvas(this.config.glCanvasId||this.config.glCanvas||'glcanvas');
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize('window');
     if (this.config.glCanvasResizeToParent === true) this.cgl.setAutoResize('parent');
     this.loading.setOnFinishedLoading(this.config.onFinishedLoading);
@@ -478,7 +484,6 @@ CABLES.Patch.prototype.getFrameNum = function() {
     return this._frameNum;
 };
 
-
 CABLES.Patch.prototype.renderFrame = function(e) {
     this.timer.update();
     this.freeTimer.update();
@@ -498,7 +503,6 @@ CABLES.Patch.prototype.renderFrame = function(e) {
 };
 
 CABLES.Patch.prototype.exec = function(e) {
-
     if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
@@ -510,7 +514,8 @@ CABLES.Patch.prototype.exec = function(e) {
     var frameDelta = now - this._frameNext;
     
 
-    if (CABLES.UI) {
+    if (CABLES.UI)
+    {
         if (CABLES.UI.capturer) CABLES.UI.capturer.capture(this.cgl.canvas);
 
         if(!this._renderOneFrame)
@@ -523,7 +528,6 @@ CABLES.Patch.prototype.exec = function(e) {
                 this._frameWasdelayed = true;
                 return;
             }
-    
         }
 
         // if(now-this._lastFrameTime>300 && this._lastFrameTime!==0  && !this._frameWasdelayed)
@@ -571,11 +575,11 @@ CABLES.Patch.prototype.exec = function(e) {
             this._fpsStart=CABLES.now();
         }
     }
-    
+
     this._lastFrameTime = CABLES.now();
     this._fpsFrameCount++;
 
-    requestAnimationFrame(this.exec.bind(this));
+    if(this.config.doRequestAnimation)requestAnimationFrame(this.exec.bind(this));
 };
 
 
@@ -738,7 +742,6 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
                 }
             }
 
-
             this.deleteOp(oldOp.id);
         // }
     }
@@ -792,8 +795,6 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     }
 
     var reqs=new CABLES.Requirements(this);
-    
-
 
     // console.log('add ops ',obj.ops);
     // add ops...
@@ -996,7 +997,7 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
  * set variable value
  * @name CABLES.Patch.Variable#setVariable
  * @param {String} name of variable
- * @param {Number|String|Boolena} value
+ * @param {Number|String|Boolean} value
  * @function
  */
 CABLES.Patch.prototype.setVariable = function(name, val)
@@ -1078,3 +1079,14 @@ CABLES.Patch.prototype.preRenderOps = function() {
     if(stopwatch)stopwatch.stop('prerendering');
 };
 
+
+
+/**
+ * @name CABLES.Patch#dispose
+ * @description stop, dispose and cleanup patch
+ * @function
+ */
+CABLES.Patch.prototype.dispose = function() {
+    this.pause();
+    this.clear();
+};

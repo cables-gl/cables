@@ -1,0 +1,155 @@
+{
+    "id": "dbb27405-03b5-4b88-8f63-f9a6c639fc52",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1552909420466
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1552909426694,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "draw",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "Geom Surface"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Distribution",
+                "group": "Distribution",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Selection",
+                "group": "Distribution",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed",
+                "group": "Distribution",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size min",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size max",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Limit",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Limit Num",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Random Rotate",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Positions"
+            }
+        ],
+        "name": "Ops.Gl.SurfaceScatterInstanced3"
+    },
+    "summary": "Scatter an object on the surface of a mesh with different distribution methods",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "draw",
+                "text": "If enabled renders the instanced geometry"
+            },
+            {
+                "name": "Num",
+                "text": "Amount of randomly placed instances"
+            },
+            {
+                "name": "Geom Surface",
+                "text": "The geometry to be used for the surface scatter"
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry to be instanced across the surface"
+            },
+            {
+                "name": "Distribution",
+                "text": "Distribution modes - see docs for explanation"
+            },
+            {
+                "name": "Selection",
+                "text": "RANDOM or SEQUENTIAL. Sequential follows the draw order of the vertices"
+            },
+            {
+                "name": "Random Seed",
+                "text": "Random seed for RANDOM selection"
+            },
+            {
+                "name": "Size min",
+                "text": "Minimum size of instanced geometry "
+            },
+            {
+                "name": "Size max",
+                "text": "Maximum size of instanced geometry "
+            },
+            {
+                "name": "Limit",
+                "text": "Enable limit on amount of shapes"
+            },
+            {
+                "name": "Limit Num",
+                "text": "The maximum amount of geometry to be instanced"
+            },
+            {
+                "name": "Random Rotate",
+                "text": "Randomly rotate the instanced geometry along the surface"
+            },
+            {
+                "name": "Positions",
+                "text": "Array out of positional data from the instances"
+            }
+        ]
+    }
+}

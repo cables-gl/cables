@@ -2,6 +2,7 @@ const
     exe=op.inTrigger("exe"),
     inValue=op.inValue("Value"),
     duration=op.inValueFloat("duration"),
+    next=op.outTrigger("Next"),
     result=op.outValue("result"),
     finished=op.outTrigger("Finished");
 
@@ -32,4 +33,5 @@ exe.onTriggered=function()
     var v=anim.getValue(t);
 
     result.set(v);
+    next.trigger();
 };

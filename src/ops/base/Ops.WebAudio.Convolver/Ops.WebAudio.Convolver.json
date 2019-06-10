@@ -10,11 +10,13 @@
             },
             {
                 "type": "0",
-                "name": "impulse response"
+                "name": "impulse response",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "normalize"
+                "name": "normalize",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -25,7 +27,6 @@
         ],
         "name": "Ops.WebAudio.Convolver"
     },
-    "updated": 1510741688553,
     "created": 1510741688555,
     "summary": "Audio reverb using an impulse response (sample)",
     "docs": {

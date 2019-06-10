@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "braintree-jsdoc-template": "^3.3.0"
+  },
+  "devDependencies": {
+    "minami": "^1.2.3"
   }
 }

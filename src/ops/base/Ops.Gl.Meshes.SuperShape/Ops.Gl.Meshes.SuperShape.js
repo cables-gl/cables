@@ -71,7 +71,7 @@ function update()
     var step = pStep.get();
     var q = parseInt(2 * Math.PI / step + 1.3462);
     var o = parseInt(Math.PI / step + 1.5);
-    
+
     var resize=pNormalizeSize.get();
     var max=0;
 
@@ -107,7 +107,7 @@ function update()
             verts.push(f);
             verts.push(p);
             verts.push(w);
-            
+
             if(resize)
             {
                 max=Math.max(max,Math.abs(f));
@@ -116,10 +116,10 @@ function update()
             }
         }
     }
-    
+
     if(resize && max>1) for(var i=0;i<verts.length;i++) verts[i]/=max;
 
-    
+
     if(asPointCloud.get())
     {
         geometry.setPointVertices(verts);
@@ -141,7 +141,7 @@ function update()
                 geometry.verticesIndices.push(d);
                 geometry.verticesIndices.push(c);
                 geometry.verticesIndices.push(b);
-                
+
                 geometry.verticesIndices.push(a);
                 geometry.verticesIndices.push(b);
                 geometry.verticesIndices.push(d);
@@ -149,11 +149,11 @@ function update()
         }
         geometry.vertices=verts;
         outNumVerts.set(verts.length);
-        
+
         geometry.calculateNormals({"forceZUp":true});
-    
+
         if(!mesh) mesh=new CGL.Mesh(op.patch.cgl,geometry);
-            else mesh.setGeom(geometry);        
+            else mesh.setGeom(geometry);
     }
 
     outGeom.set(null);

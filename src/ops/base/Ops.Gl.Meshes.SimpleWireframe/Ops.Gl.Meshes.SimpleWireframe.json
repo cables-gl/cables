@@ -28,5 +28,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "addded: now also contains normals and texture coordinates",
+            "author": "pandur",
+            "date": 1558096764115
+        }
+    ]
 }

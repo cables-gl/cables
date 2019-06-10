@@ -1,10 +1,10 @@
 const render=op.inTrigger("render");
 const inStacks=op.inValueInt("stacks",32);
 const inSlices=op.inValueInt("slices",32);
-const inRadius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
+const inRadius=op.inValueFloat("radius");
 const inRender=op.inValueBool("Render",true);
 const trigger=op.outTrigger("trigger")
-const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+const geomOut=op.outObject("geometry");
 
 inRadius.set(1);
 geomOut.ignoreValueSerialize=true;
@@ -29,7 +29,7 @@ render.onTriggered=function()
     if(!mesh) updateMesh();
 
     if(inRender.get()) mesh.render(cgl.getShader());
-    
+
     trigger.trigger();
 };
 
@@ -40,7 +40,7 @@ function updateMesh()
     if(nslices<1)nslices=1;
     if(nstacks<1)nstacks=1;
     var r=inRadius.get();
-    
+
     uvSphere(r, nslices, nstacks);
 }
 
@@ -68,7 +68,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */
@@ -123,7 +123,7 @@ function uvSphere(radius, slices, stacks)
 
             texCoords[indexT++] = j/slices;
             texCoords[indexT++] = i/stacks;
-        } 
+        }
     }
     var k = 0;
     for (j = 0; j < stacks; j++)
@@ -135,7 +135,7 @@ function uvSphere(radius, slices, stacks)
             indices[k++] = row1 + i;
             indices[k++] = row2 + i;
             indices[k++] = row2 + i + 1;
-         
+
             indices[k++] = row1 + i;
             indices[k++] = row2 + i + 1;
             indices[k++] = row1 + i + 1;

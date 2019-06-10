@@ -1,3 +1,4 @@
+
 const exe=op.inTrigger("exe");
 const exes=[];
 const triggers=[];
@@ -11,11 +12,11 @@ function triggerAll()
 
 for(var i=0;i<num;i++)
 {
-    triggers.push( op.addOutPort(new CABLES.Port(op,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION)) );
-    
+    triggers.push( op.outTrigger("trigger "+i));
+
     if(i<num-1)
     {
-        var newExe=op.addInPort(new CABLES.Port(op,"exe "+i,CABLES.OP_PORT_TYPE_FUNCTION));
+        var newExe=op.inTrigger("exe "+i);
         newExe.onTriggered=triggerAll;
         exes.push( newExe );
     }

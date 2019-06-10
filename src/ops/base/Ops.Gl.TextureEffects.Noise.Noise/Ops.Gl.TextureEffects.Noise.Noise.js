@@ -11,10 +11,9 @@ const
     shader=new CGL.Shader(cgl),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount),
     timeUniform=new CGL.Uniform(shader,'f','time',1.0),
-    textureUniform=new CGL.Uniform(shader,'t','tex',0),
-    srcFrag=attachments.noise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+    textureUniform=new CGL.Uniform(shader,'t','tex',0);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.noise_frag);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

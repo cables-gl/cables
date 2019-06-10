@@ -3,10 +3,8 @@
  * @memberof CABLES
  * @class
  */
-
 var Ops = {};
 var CABLES=CABLES || {};
-
 
 /**
  * current CGL Context 
@@ -21,6 +19,8 @@ CABLES.OP_PORT_TYPE_TEXTURE = 2;
 CABLES.OP_PORT_TYPE_ARRAY = 3;
 CABLES.OP_PORT_TYPE_DYNAMIC = 4;
 CABLES.OP_PORT_TYPE_STRING = 5;
+
+CABLES.OP_VERSION_PREFIX = '_v';
 
 /**
  * CABLES.Op
@@ -45,7 +45,18 @@ CABLES.Op = function()
     if(this.name)
     {
         this.name=this.name.split('.')[this.name.split('.').length-1]
+
+        if(this.name.indexOf(CABLES.OP_VERSION_PREFIX)>0)
+        {
+            var n=this.name.split(CABLES.OP_VERSION_PREFIX)[1]
+            this.name=this.name.substring(0,this.name.length - (CABLES.OP_VERSION_PREFIX+n).length);
+        }
     }
+    // this.name=this.name.split('.')[this.name.split('.').length-1]
+    // const a=this.name.substring(this.name.length - 1, this.name.length);
+    // const b=this.name.substring(this.name.length - 2, this.name.length-1);
+    // if(CABLES.UTILS.isNumeric(a) && !CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 1);
+    //     else if(CABLES.UTILS.isNumeric(a) && CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 2);
 
     this.id=arguments[2]||CABLES.uuid(); // instance id
     this.onAddPort=null;
@@ -114,6 +125,7 @@ CABLES.Op = function()
         p.parent=this;
         this.portsOut.push(p);
         if(this.onAddPort)this.onAddPort(p);
+        // this.fireEvent("onPortsChanged",{});
         return p;
     };
 
@@ -153,6 +165,7 @@ CABLES.Op = function()
         p.parent=this;
         this.portsIn.push(p);
         if(this.onAddPort)this.onAddPort(p);
+        // this.fireEvent("onPortsChanged",{});
         return p;
     };
 
@@ -271,7 +284,7 @@ CABLES.Op = function()
      * @param {string} name
      * @return {CABLES.Port}
      */
-    CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"display":"texture","preview":true})); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create a object input port
@@ -339,7 +352,7 @@ CABLES.Op = function()
      * @function
      */
     CABLES.Op.prototype.outValueString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
-    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
+    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); else p.set(''); return p; };
 
     /**
      * create output object port
@@ -921,6 +934,7 @@ CABLES.Op = function()
             {
                 this.portsIn.splice(ipi, 1);
                 this.fireEvent("onUiAttribsChange",{});
+                this.fireEvent("onPortRemoved",{});
                 return;
             }
         }
@@ -961,18 +975,18 @@ CABLES.Op = function()
             working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'TextureEffects.ImageCompose');
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'ImageCompose';
         }
-        else
-        {
-            if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
-            {
-                if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
-                {
-                    var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
-                    working = iscon;
-                    if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
-                }
-            }
-        }
+        // else
+        // {
+        //     if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
+        //     {
+        //         if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
+        //         {
+        //             var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
+        //             working = iscon;
+        //             if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
+        //         }
+        //     }
+        // }
 
 
         if (this._needsParentOp && working)

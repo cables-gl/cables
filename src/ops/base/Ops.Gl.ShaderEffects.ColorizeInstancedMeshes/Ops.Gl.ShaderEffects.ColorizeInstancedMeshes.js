@@ -1,7 +1,7 @@
 var cgl=op.patch.cgl;
 
-op.render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+op.render=op.inTrigger("render");
+op.trigger=op.outTrigger("trigger");
 
 var inStrength=op.inValueSlider("Amount",1);
 
@@ -9,10 +9,7 @@ var mulColor=op.inValueBool("Multiply Color");
 
 var inLookup=op.inTexture("Lookup Texture");
 
-
-
 var shader=null;
-
 
 // var srcHeadVert=attachments.perlin_instposition_vert||'';
 
@@ -30,7 +27,7 @@ var srcHeadVert=''
     .endl()+'  OUT float instanceIndexFrag;'
     .endl()+'#endif'
     .endl();
-    
+
 var srcHeadFrag=''
 
     .endl()+'UNI float MOD_strength;'
@@ -86,7 +83,7 @@ op.render.onTriggered=function()
          op.trigger.trigger();
          return;
     }
-    
+
     if(cgl.getShader()!=shader)
     {
         if(shader) removeModule();
@@ -121,7 +118,7 @@ op.render.onTriggered=function()
         cgl.setTexture(5,inLookup.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLookup.get().tex);
     }
-    
+
     if(!shader)return;
 
     op.trigger.trigger();

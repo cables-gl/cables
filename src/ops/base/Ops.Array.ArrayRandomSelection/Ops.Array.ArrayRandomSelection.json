@@ -1,0 +1,57 @@
+{
+    "authorName": "andro",
+    "id": "3dc059c8-bcb3-4d63-b806-ce81215da3b5",
+    "created": 1558451659688,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Elements",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayRandomSelection"
+    },
+    "summary": "Extract a definable amount of values from an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.Array3xRandomSelection"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The array in to extract random values from"
+            },
+            {
+                "name": "Elements",
+                "text": "Amount of elements to extract"
+            },
+            {
+                "name": "Seed",
+                "text": "Random number seed. 0 is always different on a reload. Set to a number to keep a fixed seed."
+            },
+            {
+                "name": "Result",
+                "text": "Array Out"
+            }
+        ]
+    },
+    "youtubeids": []
+}

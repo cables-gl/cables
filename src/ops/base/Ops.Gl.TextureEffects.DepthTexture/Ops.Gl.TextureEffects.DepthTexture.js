@@ -1,11 +1,12 @@
-const render=op.inTrigger('render');
-const inDepthTex=op.inTexture("image");
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const amount=op.inValueSlider("Amount",1);
-const farPlane=op.inValue("farplane",50.0);
-const nearPlane=op.inValue("nearplane",0.1);
-const inInv=op.inValueBool("Invert",false);
-const trigger=op.outTrigger('trigger');
+const
+    render=op.inTrigger('render'),
+    inDepthTex=op.inTexture("image"),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    farPlane=op.inValue("farplane",50.0),
+    nearPlane=op.inValue("nearplane",0.1),
+    inInv=op.inValueBool("Invert",false),
+    trigger=op.outTrigger('trigger');
 
 op.setPortGroup("Frustum",[farPlane,nearPlane]);
 
@@ -13,15 +14,14 @@ op.setPortGroup("Frustum",[farPlane,nearPlane]);
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
-const srcFrag=(attachments.depthtexture_frag||'').replace("{{BLENDCODE}}",CGL.TextureEffect.getBlendCode());
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
+shader.setSource(shader.getDefaultVertexShader(),attachments.depthtexture_frag);
 
-const textureUniform=new CGL.Uniform(shader,'t','texDepth',0);
-const textureBaseUniform=new CGL.Uniform(shader,'t','texBase',1);
-const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
-const uniFarplane=new CGL.Uniform(shader,'f','f',farPlane);
-const uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
+const
+    textureUniform=new CGL.Uniform(shader,'t','texDepth',0),
+    textureBaseUniform=new CGL.Uniform(shader,'t','texBase',1),
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniFarplane=new CGL.Uniform(shader,'f','f',farPlane),
+    uniNearplane=new CGL.Uniform(shader,'f','n',nearPlane);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

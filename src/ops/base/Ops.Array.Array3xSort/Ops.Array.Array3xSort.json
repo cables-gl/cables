@@ -23,12 +23,12 @@
     "authorName": "pandur",
     "id": "b0fbc366-09a8-4695-87b3-5946210bf722",
     "created": 1513100341975,
-    "summary": "Sorts an array with value triplets `[x1, y1, z1, …]`",
+    "summary": "Sorts an array with the lowest values of the selected component.",
     "docs": {
         "ports": [
             {
                 "name": "Array",
-                "text": "The array3x to sort"
+                "text": "The arrayXyz to sort"
             },
             {
                 "name": "What",
@@ -40,8 +40,8 @@
             }
         ]
     },
-    "youtubeid": "",
-    "collections": [
-        "pointArrays"
-    ]
+    "collections": null,
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
 }

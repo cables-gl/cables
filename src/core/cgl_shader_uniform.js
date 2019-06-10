@@ -192,7 +192,7 @@ CGL.Uniform.prototype.updateValueArrayF=function()
         else this.needsUpdate=false;
 
     if(!this._value)return;
-    this._shader.getCgl().gl.uniformfv(this._loc, this._value);
+    this._shader.getCgl().gl.uniform1fv(this._loc, this._value);
     CGL.profileUniformCount++;
 };
 

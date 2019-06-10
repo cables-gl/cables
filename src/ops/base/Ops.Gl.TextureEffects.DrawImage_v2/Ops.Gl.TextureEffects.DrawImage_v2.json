@@ -1,0 +1,161 @@
+{
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "f94b5136-61fd-4558-8348-e7c8db5a6348",
+    "created": 1510248525000,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "blendMode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "image"
+            },
+            {
+                "type": "0",
+                "name": "removeAlphaSrc",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "imageAlpha",
+                "group": "Mask"
+            },
+            {
+                "type": "0",
+                "name": "alphaSrc",
+                "group": "Mask",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "invert alpha channel",
+                "group": "Mask",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "group": "Aspect Ratio",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Stretch Axis",
+                "group": "Aspect Ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Position",
+                "group": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Crop",
+                "group": "Aspect Ratio",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "flip x",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "flip y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Position X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Position Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Clip Repeat",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.DrawImageNew"
+    },
+    "summary": "Draws an image into a composition",
+    "youtubeid": "Ww04Cw9wArM",
+    "docs": {
+        "ports": [
+            {
+                "name": "removeAlphaSrc",
+                "text": "If this is enabled then the alpha value is 1 for everything"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added Aspect Ratio Fix Checkbox",
+            "author": "pandur",
+            "date": 1549557373535
+        },
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558958277669
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "todos": [
+        {
+            "message": "Add docs",
+            "author": "andro",
+            "id": "14943411-86e6-46c9-99f0-87c9058df9b7",
+            "date": 1558365798814
+        }
+    ]
+}

@@ -8,7 +8,7 @@ UNI float b;
 UNI float aspect;
 UNI bool smoothed;
 
-{{BLENDCODE}}
+{{CGL.BLENDMODES}}
 
 void main()
 {
@@ -27,11 +27,6 @@ void main()
        col= mix(col,vec4(r,g,b, 1.0),1.0-f);
     }
 
-
     vec4 base=texture(tex,texCoord);
-
-    col=vec4( _blend(base.rgb,col.rgb) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*amount),1.0);
-
-    outColor= col;
+    outColor=cgl_blend(base,col,amount);
 }

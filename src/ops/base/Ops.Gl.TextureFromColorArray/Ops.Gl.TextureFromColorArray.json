@@ -1,0 +1,80 @@
+{
+    "id": "7984c105-5b33-471a-833c-0fb310916e30",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1553685665389
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1553685673981,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Texture out"
+            }
+        ],
+        "name": "Ops.Gl.TextureFromColorArray"
+    },
+    "summary": "create a texture from an array of number values",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Shader.BasicMaterial"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger in "
+            },
+            {
+                "name": "array",
+                "text": "Array in to turn into a texture"
+            },
+            {
+                "name": "width",
+                "text": "Width of texture"
+            },
+            {
+                "name": "height",
+                "text": "Height of texture"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Texture out",
+                "text": "Texture out"
+            }
+        ]
+    }
+}

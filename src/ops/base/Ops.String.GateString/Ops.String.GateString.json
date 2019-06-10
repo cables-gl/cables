@@ -1,0 +1,53 @@
+{
+    "id": "0ce14933-2d91-4381-9d82-2304aae22c0e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1550903879563
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1550903947060,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String In"
+            },
+            {
+                "type": "0",
+                "name": "Pass Through",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String Out"
+            }
+        ],
+        "name": "Ops.String.GateString"
+    },
+    "summary": "Output string if pass through is true",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "String In",
+                "text": "String in"
+            },
+            {
+                "name": "Pass Through",
+                "text": "Opens or closes the gate"
+            },
+            {
+                "name": "String Out",
+                "text": "String output if pass through is true"
+            }
+        ]
+    }
+}

@@ -32,7 +32,34 @@
     },
     "summary": "extract colors from a texture",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "texture",
+                "text": "texture in to turn into an array. Beware of high resolutions."
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Colors",
+                "text": "Outputs the RGBA arrays as one large array"
+            },
+            {
+                "name": "Floating Point",
+                "text": "If HDR is enable on Image compose this will be true else false"
+            }
+        ]
     },
-    "youtubeid": ""
+    "youtubeid": "mQN8VtVOltQ",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.TextureEffects.ImageCompose",
+        "Ops.Gl.MeshInstancer"
+    ]
 }

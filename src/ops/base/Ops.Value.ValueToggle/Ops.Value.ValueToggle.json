@@ -3,24 +3,28 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value 0"
+                "name": "Value 0",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value 1"
+                "name": "Value 1",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Use Value 1"
+                "name": "Use Value 1",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Out Value"
+                "name": "Out Value",
+                "subType": "number"
             }
         ],
-        "name": "Ops.ValueToggle"
+        "name": "Ops.Value.ValueToggle"
     },
     "summary": "Switches two number values using a boolean",
     "docs": {
@@ -42,5 +46,8 @@
                 "text": "Either `Value 0` or `Value 1`"
             }
         ]
-    }
+    },
+    "authorName": "pandur",
+    "id": "400eea7d-5a68-4dda-a94d-2bb2ee7c2331",
+    "created": 1558014712164
 }

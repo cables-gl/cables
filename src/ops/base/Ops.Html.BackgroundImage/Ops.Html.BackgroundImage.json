@@ -48,5 +48,13 @@
             }
         ],
         "name": "Ops.Html.BackgroundImage"
+    },
+    "summary": "Set a background image of a HTML element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
     }
 }

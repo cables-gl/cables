@@ -8,7 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "delay"
+                "name": "delay",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,5 +19,8 @@
             }
         ],
         "name": "Ops.Time.DelayedTrigger"
-    }
+    },
+    "authorName": "pandur",
+    "id": "f4ff66b0-8500-46f7-9117-832aea0c2750",
+    "created": 1558014639272
 }

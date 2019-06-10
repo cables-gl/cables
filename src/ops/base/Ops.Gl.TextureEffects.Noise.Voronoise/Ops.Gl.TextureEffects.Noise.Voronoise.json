@@ -31,7 +31,7 @@
             {
                 "type": "0",
                 "name": "Num",
-                "subType": "number"
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -74,12 +74,18 @@
             "url": "https://thebookofshaders.com/12/"
         }
     ],
-    "updated": 1506759203086,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "dba476ec-d5c8-4d54-bd88-23fba59b7a96",
     "created": 1506759182337,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558958462098
+        }
+    ]
 }

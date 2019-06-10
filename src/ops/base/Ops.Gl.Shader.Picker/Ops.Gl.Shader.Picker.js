@@ -1,16 +1,18 @@
 op.render=op.inTrigger("render");
 
-var useMouseCoords=op.inValueBool("Use Mouse Coordinates",true);
+const useMouseCoords=op.inValueBool("Use Mouse Coordinates",true);
 
-op.x=op.addInPort(new CABLES.Port(op,"x",CABLES.OP_PORT_TYPE_VALUE));
-op.y=op.addInPort(new CABLES.Port(op,"y",CABLES.OP_PORT_TYPE_VALUE));
-op.enabled=op.addInPort(new CABLES.Port(op,"enabled",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+op.x=op.inValueFloat("x");
+op.y=op.inValueFloat("y");
+op.enabled=op.inValueBool("enabled");
 op.enabled.set(true);
 
 op.trigger=op.outTrigger("trigger");
 var somethingPicked=op.outValue("Something Picked");
 
-var cursor=this.addInPort(new CABLES.Port(this,"cursor",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]} ));
+var cursor=this.inValueSelect("cursor",["","pointer","auto","default","crosshair","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help"]);
+
+//inValueSelect
 cursor.set('default');
 
 var pixelRGB = new Uint8Array(4);
@@ -204,6 +206,5 @@ tex.onPreviewChanged=function()
     if(tex.showPreview) op.render.onTriggered=doRender;
     else op.render.onTriggered=doRender;
 };
-
 
 op.render.onTriggered=doRender;

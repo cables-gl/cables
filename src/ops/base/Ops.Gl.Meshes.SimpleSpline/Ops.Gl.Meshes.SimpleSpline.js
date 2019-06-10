@@ -11,8 +11,11 @@ const geom=new CGL.Geometry("simplespline");
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
 var buff=new Float32Array();
+var needsRebuild=true;
 
-inPoints.onChange=rebuild;
+inPoints.onChange=function(){//rebuild;
+        needsRebuild=true;
+    };
 
 var attr;
 
@@ -25,7 +28,7 @@ function rebuild()
     if(!points)return;
 
     if(points.length===0)return;
-    if(op.instanced(render))return;
+    // if(op.instanced(render))return;
 
     if(!(points instanceof Float32Array))
     {
@@ -57,7 +60,7 @@ function rebuild()
 render.onTriggered=function()
 {
     if(!inPoints.get())return;
-    if(!mesh)rebuild();
+    if(needsRebuild)rebuild();
     var shader=cgl.getShader();
     if(!shader)return;
 

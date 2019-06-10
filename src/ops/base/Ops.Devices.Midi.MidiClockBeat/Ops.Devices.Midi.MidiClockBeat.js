@@ -18,17 +18,18 @@ var outBPM=op.outValue("BPM");
 var outBeatDuration=op.outValue("Tick Duration");
 
 
+
 eventIn.onChange=function()
 {
     if(!eventIn.get())return;
-    
+
 
     var data=eventIn.get().data;
 
     // var data = _event.data;
     var isTick = data[0] == clockTick;
     var isStart = data[0] == clockStart;
-    
+
     if (isStart)
     {
         tickCount = 0;
@@ -43,7 +44,7 @@ eventIn.onChange=function()
             {
                 var diff=CABLES.now()-lastBeat;
                 var bpm=60*1000/diff;
-                outBPM.set(Math.round(bpm));
+                outBPM.set(bpm);
                 outBeatDuration.set(60/bpm/4);
             }
 
@@ -51,14 +52,14 @@ eventIn.onChange=function()
             triggerTick.trigger();
         }
         if (tickCount%6==0 )triggerSub.trigger();
-        
+
         tickCount++;
-        
+
         if (tickCount%24 == 0) tickCount = 0;
     }
-    
+
     outSubTick.set(tickCount);
 
-    
+
 };
 

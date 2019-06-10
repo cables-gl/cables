@@ -1,5 +1,5 @@
-var render=op.addInPort(new CABLES.Port(this,"render",CABLES.OP_PORT_TYPE_FUNCTION));
-var next=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
+var render=op.inTrigger("render");
+var next=op.outTrigger("trigger");
 
 var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
@@ -9,16 +9,12 @@ var inFalloff=op.inValueSlider("Falloff",0.5);
 var inScale=op.inValueSlider("Scale",1);
 var inInvert=op.inValueBool("Invert");
 
-
 {
     // position
     var x=op.inValue("x");
     var y=op.inValue("y");
     var z=op.inValue("z");
 }
-
-
-
 
 var shader=null;
 var moduleVert=null;
@@ -37,7 +33,7 @@ function updateInvert()
 function updateArea()
 {
     if(!shader)return;
-    
+
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z");
@@ -54,7 +50,6 @@ function updateArea()
     else if(inArea.get()=="Axis Z Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_Z_INFINITE");
     else shader.define(moduleVert.prefix+"AREA_SPHERE");
 }
-
 
 function removeModule()
 {
@@ -89,8 +84,7 @@ render.onTriggered=function()
         inSize.unif=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
         inFalloff.unif=new CGL.Uniform(shader,'f',moduleVert.prefix+'falloff',inFalloff);
         inScale.unif=new CGL.Uniform(shader,'f',moduleVert.prefix+'scale',inScale);
-        
-        
+
         x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);

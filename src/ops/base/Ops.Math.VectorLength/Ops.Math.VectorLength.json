@@ -3,21 +3,25 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Length"
+                "name": "Length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.VectorLength"
@@ -25,5 +29,8 @@
     "summary": "length of a vector",
     "docs": {
         "ports": []
-    }
+    },
+    "authorName": "pandur",
+    "id": "a9e7bda2-7f57-4df2-83e3-74cdf63371d7",
+    "created": 1558014398331
 }

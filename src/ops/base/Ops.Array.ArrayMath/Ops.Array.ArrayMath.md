@@ -1,0 +1,1 @@
+The op has a dropdown menu which allows easy switching between multiple mathematical modes. A single number is used for the mathematical operations on all values in the array.

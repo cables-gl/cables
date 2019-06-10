@@ -23,6 +23,7 @@ exe.onTriggered=function()
     {
         outArr.set(null);
     }
+
     else
     {
         if(resultArr.length!=arr1.length) resultArr.length=arr1.length;
@@ -47,3 +48,13 @@ exe.onTriggered=function()
     next.trigger();
 
 };
+//get back to this in a bit !
+// isArrayNumerical = function (arrayIn)
+// {
+//     if(arrayIn.some(isNaN))
+//     {
+//       return;
+//     }
+
+// }
+// inArr1.onLinkChanged = inArr2.onLinkChanged

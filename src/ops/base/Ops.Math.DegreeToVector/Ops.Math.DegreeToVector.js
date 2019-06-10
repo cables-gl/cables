@@ -1,10 +1,9 @@
-const exe=op.inTrigger("exe");
+const
+    deg=op.inValueFloat("degree",0),
+    x=op.outValue("x"),
+    y=op.outValue("y");
 
-var deg=op.addInPort(new CABLES.Port(op,"degree"));
-var x=op.addOutPort(new CABLES.Port(op,"x"));
-var y=op.addOutPort(new CABLES.Port(op,"y"));
-
-deg.set(-1);
+deg.onChange=update;
 
 function update()
 {
@@ -13,7 +12,3 @@ function update()
     y.set(Math.cos(rad));
 }
 
-deg.onValueChange(update);
-exe.onTriggered=update;
-
-deg.set(0.0);

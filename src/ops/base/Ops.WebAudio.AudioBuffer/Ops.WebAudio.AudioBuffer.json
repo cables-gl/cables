@@ -6,7 +6,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "URL"
+                "name": "URL",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -16,23 +17,28 @@
             },
             {
                 "type": "0",
-                "name": "Finished Loading"
+                "name": "Finished Loading",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Sample Rate"
+                "name": "Sample Rate",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Length"
+                "name": "Length",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Duration"
+                "name": "Duration",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Number of Channels"
+                "name": "Number of Channels",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.AudioBuffer"
@@ -70,6 +76,5 @@
             }
         ]
     },
-    "updated": 1540451511425,
     "created": 1540451511431
 }

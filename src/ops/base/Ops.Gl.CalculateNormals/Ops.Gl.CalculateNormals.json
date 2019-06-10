@@ -1,5 +1,4 @@
 {
-    "updated": 1534328529197,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "c90c70e5-59eb-4b19-9c15-962e3e2f236b",
@@ -29,5 +28,12 @@
         ],
         "name": "Ops.Gl.CalculateNormals"
     },
-    "summary": "calculate normals of a geometry"
+    "summary": "calculate normals of a geometry",
+    "changelog": [
+        {
+            "message": "code cleanup - ports",
+            "author": "andro",
+            "date": 1559038877766
+        }
+    ]
 }

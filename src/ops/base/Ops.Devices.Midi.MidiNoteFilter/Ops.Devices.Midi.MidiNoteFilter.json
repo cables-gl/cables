@@ -1,0 +1,137 @@
+{
+    "authorName": "simod",
+    "id": "b248a588-81cc-47af-a65b-36509abd2888",
+    "created": 1553163854704,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Note Values"
+            },
+            {
+                "type": "2",
+                "name": "MIDI Event"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note Start",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note End",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Normalize Velocity",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "0",
+                "name": "Current Note",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gate",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiNoteFilter"
+    },
+    "summary": "Only read a range of notes (e.g. C1 to C2)",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiCC",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiClock"
+    ],
+    "youtubeids": [
+        "eDlaFD_d5lc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Event",
+                "text": "Midi event in"
+            },
+            {
+                "name": "MIDI Channel",
+                "text": "Pick a midi channel from 1 to 16"
+            },
+            {
+                "name": "Note Start",
+                "text": "The first note in the range- all notes below this are ignored"
+            },
+            {
+                "name": "Note End",
+                "text": "The last note in the range- all notes above this are ignored"
+            },
+            {
+                "name": "Normalize Velocity",
+                "text": "Enable to normalise values from 0 to 1 or -1 to 1"
+            },
+            {
+                "name": "learn",
+                "text": "lick and then press the first and then last midi note to automatically define the range"
+            },
+            {
+                "name": "reset",
+                "text": "Resets the selected range"
+            },
+            {
+                "name": "Event",
+                "text": "Midi event out - passes all midi data through to allow midi ops to be stacked"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Triggers when notes between the selected range come in"
+            },
+            {
+                "name": "Current Note",
+                "text": "outputs all note numbers coming in between the selected range"
+            },
+            {
+                "name": "Velocity",
+                "text": "Velocity of current note. Normally between 0-127 unless Normalise velocity is enabled"
+            },
+            {
+                "name": "Gate",
+                "text": "True when the note is on else false."
+            }
+        ]
+    }
+}

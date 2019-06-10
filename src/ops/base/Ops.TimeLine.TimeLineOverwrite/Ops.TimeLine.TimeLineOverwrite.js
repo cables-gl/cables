@@ -1,18 +1,13 @@
-var self=this;
-
-this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-this.newTime=this.addInPort(new CABLES.Port(this,"new time"));
-
-this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION));
-this.theTime=this.addOutPort(new CABLES.Port(this,"time"));
-this.newTime.val=0.0;
+const exec=op.inTrigger("exe");
+const newTime=op.inValueFloat("new time");
+const next=op.outTrigger("trigger");
 
 var realTime=0;
-this.exe.onTriggered=function()
+exec.onTriggered=function()
 {
-    realTime=self.patch.timer.getTime();
+    realTime=op.patch.timer.getTime();
 
-    self.patch.timer.overwriteTime=self.newTime.val;
-    self.trigger.trigger();
-    self.patch.timer.overwriteTime=-1;
+    op.patch.timer.overwriteTime=newTime.get();
+    next.trigger();
+    op.patch.timer.overwriteTime=-1;
 };

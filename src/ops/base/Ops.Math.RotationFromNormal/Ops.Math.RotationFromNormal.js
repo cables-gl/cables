@@ -3,7 +3,7 @@ const inNormalY = op.inValue("Normal Y");
 const inNormalZ = op.inValue("Normal Z");
 const inRecalculate = op.inTriggerButton("recalculate");
 
-const outRotation = op.outValue("RotationMatrix");
+const outRotation = op.outArray("RotationMatrix");
 
 const identMat = mat4.create();
 const outMat = mat4.create();
@@ -26,5 +26,5 @@ inRecalculate.onTriggered = function () {
     outRotation.set(identMat);
     outRotation.set(outMat);
 
-}
+};
 

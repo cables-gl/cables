@@ -5,3 +5,4 @@ UNI float MOD_amount;
 UNI float MOD_x;
 UNI float MOD_y;
 UNI float MOD_z;
+UNI float MOD_repeat;

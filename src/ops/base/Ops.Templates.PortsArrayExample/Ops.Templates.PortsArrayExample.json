@@ -1,5 +1,4 @@
 {
-    "updated": 1537198978776,
     "authorName": "andro",
     "id": "c31a7377-0eca-476e-8146-c2d9b8d3b908",
     "created": 1537183143150,
@@ -16,7 +15,7 @@
                 "name": "Array out"
             }
         ],
-        "name": "Ops.User.andro.ArrayPortExample"
+        "name": "Ops.Templates.PortsArrayExample"
     },
     "summary": "Is a template for creating Array ports",
     "docs": {

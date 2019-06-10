@@ -1,0 +1,61 @@
+{
+    "summary": "performs a math operations on two arrays",
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array in"
+            },
+            {
+                "name": "array 1",
+                "text": "Array in"
+            },
+            {
+                "name": "Math function",
+                "text": "Pick a math function to apply to both arrays"
+            },
+            {
+                "name": "Array result",
+                "text": "Calculated array out "
+            }
+        ]
+    },
+    "authorName": "andro",
+    "id": "f31a1764-ce14-41de-9b3f-dc2fe249bb52",
+    "created": 1537345902425,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array 0"
+            },
+            {
+                "type": "3",
+                "name": "array 1"
+            },
+            {
+                "type": "0",
+                "name": "Math function",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array result"
+            }
+        ],
+        "name": "Ops.Array.ArrayMathArray"
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "optimized - removed function call occurring twice",
+            "author": "andro",
+            "date": 1558625292186
+        }
+    ]
+}

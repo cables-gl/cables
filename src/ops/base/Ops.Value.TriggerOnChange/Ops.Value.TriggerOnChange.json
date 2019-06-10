@@ -21,5 +21,13 @@
     "summary": "triggers next everytime the input value changed",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "rename to Ops.Value.TriggerOnChangeNumber",
+            "author": "pandur",
+            "id": "c5a06cf4-8651-42cb-81ff-e23fec6bfcdb",
+            "date": 1557996991073
+        }
+    ]
 }

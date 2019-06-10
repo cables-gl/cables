@@ -1,25 +1,16 @@
-var render=op.inTrigger('render');
-var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
+const render=op.inTrigger('render'),
+    filename=op.inFile("file"),
+    extrude=op.inValueFloat("extrude",1),
+    mWidth=op.inValueFloat ("width",3),
+    mHeight=op.inValueFloat("height",3),
+    nRows=op.inValueInt("rows",20),
+    nColumns=op.inValueInt("columns",20),
+    sliceTex=op.inValueBool("texCoords slice"),
+    flat=op.inValueBool("flat"),
+    trigger=op.outTrigger('trigger');
 
-var extrude=op.addInPort(new CABLES.Port(op,"extrude",CABLES.OP_PORT_TYPE_VALUE));
-var mWidth=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var mHeight=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-var nRows=op.addInPort(new CABLES.Port(op,"rows",CABLES.OP_PORT_TYPE_VALUE));
-var nColumns=op.addInPort(new CABLES.Port(op,"columns",CABLES.OP_PORT_TYPE_VALUE));
-var sliceTex=op.addInPort(new CABLES.Port(op,"texCoords slice",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var flat=op.addInPort(new CABLES.Port(op,"flat",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-
-var trigger=op.outTrigger('trigger');
-
-var outGeom=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var outGeom=op.outObject("geometry");
 outGeom.ignoreValueSerialize=true;
-
-
-extrude.set(1);
-mHeight.set(3.0);
-mWidth.set(3.0);
-nRows.set(20);
-nColumns.set(20);
 
 var geom=new CGL.Geometry();
 var mesh=null;
@@ -32,12 +23,8 @@ render.onTriggered=function()
     trigger.trigger();
 };
 
-extrude.onChange=rebuildGeom;
-mHeight.onChange=rebuildGeom;
-mWidth.onChange=rebuildGeom;
-nRows.onChange=rebuildGeom;
-nColumns.onChange=rebuildGeom;
-flat.onChange=rebuildGeom;
+extrude.onChange=mHeight.onChange=mWidth.onChange=
+    nRows.onChange=nColumns.onChange=flat.onChange=rebuildGeom;
 
 filename.onChange=reload;
 
@@ -61,7 +48,7 @@ function rebuildGeom()
     var meshHeight=mHeight.get();
 
     var count=0;
-    
+
     var vertStepX=meshWidth/width;
     var vertStepY=meshHeight/height;
 
@@ -73,7 +60,7 @@ function rebuildGeom()
 
     var stepRow=meshWidth/numRows;
     var stepColumn=meshHeight/numColumns;
-    
+
     var cycleTex=0;
     var oldh=0;
 

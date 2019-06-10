@@ -11,9 +11,8 @@ const
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
-const srcFrag=attachments.waveform_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
+shader.setSource(shader.getDefaultVertexShader(),attachments.waveform_frag );
 
 mode.onChange=updateMode;
 
@@ -28,10 +27,7 @@ const
 
 updateMode();
 
-blendMode.onChange=function()
-{
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
-};
+CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 function updateMode()
 {

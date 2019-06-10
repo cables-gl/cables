@@ -4,13 +4,14 @@ var cgl=op.patch.cgl;
 op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
 
-var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
+var inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis XY","Axis XZ","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere");
 
 var inSize=op.inValue("Size",1);
 
 
 var inInvert=op.inValueBool("Invert");
-
+var inRepeat=op.inValueBool("Repeat");
+var inRepeatDist=op.inValueFloat("Repeat Distance",0.0);
 
 {
     // position
@@ -43,7 +44,7 @@ op.render.onLinkChanged=removeModule;
 inWorldSpace.onChange=updateWorldspace;
 inArea.onChange=updateArea;
 inInvert.onChange=updateInvert;
-
+inRepeat.onChange=updateRepeat;
 
 
 function updateInvert()
@@ -53,11 +54,20 @@ function updateInvert()
         else shader.removeDefine(moduleVert.prefix+"AREA_INVERT");
 }
 
+function updateRepeat()
+{
+    if(!shader)return;
+    if(inRepeat.get()) shader.define(moduleVert.prefix+"AREA_REPEAT");
+        else shader.removeDefine(moduleVert.prefix+"AREA_REPEAT");
+}
+
 function updateArea()
 {
     if(!shader)return;
 
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_XY");
+    shader.removeDefine(moduleVert.prefix+"AREA_AXIS_XZ");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Y");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_Z");
     shader.removeDefine(moduleVert.prefix+"AREA_AXIS_X_INFINITE");
@@ -67,6 +77,10 @@ function updateArea()
     if(inArea.get()=="Axis X")shader.define(moduleVert.prefix+"AREA_AXIS_X");
     else if(inArea.get()=="Axis Y")shader.define(moduleVert.prefix+"AREA_AXIS_Y");
     else if(inArea.get()=="Axis Z")shader.define(moduleVert.prefix+"AREA_AXIS_Z");
+
+    else if(inArea.get()=="Axis XY")shader.define(moduleVert.prefix+"AREA_AXIS_XY");
+    else if(inArea.get()=="Axis XZ")shader.define(moduleVert.prefix+"AREA_AXIS_XZ");
+
 
     else if(inArea.get()=="Axis X Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_X_INFINITE");
     else if(inArea.get()=="Axis Y Infinite")shader.define(moduleVert.prefix+"AREA_AXIS_Y_INFINITE");
@@ -139,10 +153,12 @@ op.render.onTriggered=function()
         x.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
         y.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
         z.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
+        inRepeatDist.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'repeat',inRepeatDist);
 
         updateWorldspace();
         updateArea();
         updateInvert();
+        updateRepeat();
     }
 
     if(!shader)return;

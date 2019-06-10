@@ -15,6 +15,8 @@ inArr.onChange=function()
     geom.vertices = verts;
 
     mesh=new CGL.Mesh(cgl,geom);
+    // geom.calcNormals(false);
+    // mesh.setGeom(geom);
     geomOut.set(null);
     geomOut.set(geom);
 };
