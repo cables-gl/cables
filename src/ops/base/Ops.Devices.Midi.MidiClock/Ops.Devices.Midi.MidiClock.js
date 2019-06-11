@@ -43,6 +43,24 @@ const STRAIGHT_TICKS = {
   sixteenth: 6,
 };
 
+const TICKS = {
+    straight: STRAIGHT_TICKS,
+    dotted: {
+        full: STRAIGHT_TICKS.full + STRAIGHT_TICKS.full / 2,
+        half: STRAIGHT_TICKS.half + STRAIGHT_TICKS.half / 2,
+        quarter: STRAIGHT_TICKS.quarter + STRAIGHT_TICKS.quarter / 2,
+        eigth: STRAIGHT_TICKS.eigth + STRAIGHT_TICKS.eigth / 2,
+        sixteenth: STRAIGHT_TICKS.sixteenth + STRAIGHT_TICKS.sixteenth / 2,
+    },
+    triplet: {
+        full: (STRAIGHT_TICKS.full * 2) / 3,
+        half: (STRAIGHT_TICKS.half * 2) / 3,
+        quarter: (STRAIGHT_TICKS.quarter * 2) / 3,
+        eigth: (STRAIGHT_TICKS.eigth * 2) / 3,
+        sixteenth: (STRAIGHT_TICKS.sixteenth * 2) / 3,
+    }
+}
+/*
 const TICKS = Object.keys(STRAIGHT_TICKS).reduce(
   (acc, val) => {
     acc.straight = STRAIGHT_TICKS;
@@ -52,7 +70,7 @@ const TICKS = Object.keys(STRAIGHT_TICKS).reduce(
   },
   { straight: {}, dotted: {}, triplet: {} },
 );
-
+*/
 var tickCount = 0;
 
 var lastBeat = 0;

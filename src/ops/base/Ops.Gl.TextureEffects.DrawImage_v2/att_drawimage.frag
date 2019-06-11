@@ -77,7 +77,7 @@ void main()
 
     #ifdef ASPECT_RATIO
         #ifdef ASPECT_CROP
-            if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0) colNew.rgb=vec3(0.0);
+            if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0) colNew.rgb=base.rgb;//vec3(0.0);
         #endif
     #endif
 

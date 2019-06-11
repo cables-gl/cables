@@ -123,7 +123,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.DrawImageNew"
+        "name": "Ops.Gl.TextureEffects.DrawImage_v2"
     },
     "summary": "Draws an image into a composition",
     "youtubeid": "Ww04Cw9wArM",

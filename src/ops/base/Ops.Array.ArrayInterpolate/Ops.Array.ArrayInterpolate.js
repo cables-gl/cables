@@ -10,6 +10,7 @@ var outArr=op.outArray("Result");
 
 var resultArr=[];
 
+
 exe.onTriggered=function()
 {
     var arr1=inArr1.get();
@@ -48,13 +49,21 @@ exe.onTriggered=function()
     next.trigger();
 
 };
-//get back to this in a bit !
-// isArrayNumerical = function (arrayIn)
-// {
-//     if(arrayIn.some(isNaN))
-//     {
-//       return;
-//     }
 
-// }
-// inArr1.onLinkChanged = inArr2.onLinkChanged
+// still not working
+// inArr1.onLinkChanged = inArr2.onLinkChanged  = function ()
+// {
+//     var arr1=inArr1.get();
+//     var arr2=inArr2.get();
+
+//     console.log("port linked");
+//     console.log(arr1);
+//     console.log(arr2);
+
+    // if(!arr1.some(isNaN))
+    // {
+    //     console.log("Array wasn't numerical");
+    //     return;
+    // }
+
+// };
