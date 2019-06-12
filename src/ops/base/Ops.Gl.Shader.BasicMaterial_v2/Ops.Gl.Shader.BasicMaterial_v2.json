@@ -106,7 +106,7 @@
                 "name": "shader"
             }
         ],
-        "name": "Ops.Gl.Shader.BasicMaterialNew"
+        "name": "Ops.Gl.Shader.BasicMaterial_v2"
     },
     "summary": "",
     "youtubeid": "F-CUdHq40Pc",

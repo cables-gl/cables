@@ -236,8 +236,9 @@ function onWrapChange()
     updateResolution();
 }
 
-twrap.set('clamp to edge');
+twrap.set('repeat');
 twrap.onChange=onWrapChange;
+
 
 function onFilterChange()
 {
@@ -261,4 +262,6 @@ op.preRender=doRender;
 
 width.set(640);
 height.set(360);
+onFilterChange();
+onWrapChange();
 updateSizePorts();
