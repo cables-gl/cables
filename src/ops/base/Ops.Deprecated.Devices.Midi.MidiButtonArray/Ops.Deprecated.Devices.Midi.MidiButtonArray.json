@@ -83,5 +83,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiButtonArray renamed to Ops.Deprecated.Devices.Midi.MidiButtonArray",
+            "author": "pandur",
+            "date": 1560334381967
+        }
     ]
 }

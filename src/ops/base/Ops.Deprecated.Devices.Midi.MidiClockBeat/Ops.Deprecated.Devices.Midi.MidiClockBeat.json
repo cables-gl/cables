@@ -50,5 +50,12 @@
         "hardware"
     ],
     "relatedops": null,
-    "issues": ""
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiClockBeat renamed to Ops.Deprecated.Devices.Midi.MidiClockBeat",
+            "author": "pandur",
+            "date": 1560334363067
+        }
+    ]
 }

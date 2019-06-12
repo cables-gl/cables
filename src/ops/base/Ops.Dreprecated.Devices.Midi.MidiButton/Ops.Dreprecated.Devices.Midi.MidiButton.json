@@ -53,5 +53,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiButton renamed to Ops.Dreprecated.Devices.Midi.MidiButton",
+            "author": "pandur",
+            "date": 1560334329264
+        }
     ]
 }

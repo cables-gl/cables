@@ -54,5 +54,12 @@
     "docs": {
         "ports": []
     },
-    "issues": ""
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiEvent renamed to Ops.Deprecated.Devices.Midi.MidiEvent",
+            "author": "pandur",
+            "date": 1560334265760
+        }
+    ]
 }
