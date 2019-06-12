@@ -33,5 +33,12 @@
     "summary": "Convert a black and white map to a normal map",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
+            "author": "pandur",
+            "date": 1560333507524
+        }
+    ]
 }

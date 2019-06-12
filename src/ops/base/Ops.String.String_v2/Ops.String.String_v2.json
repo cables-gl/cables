@@ -24,5 +24,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.String.ValueString_v2 renamed to Ops.String.String_v2",
+            "author": "pandur",
+            "date": 1560332798890
+        }
+    ]
 }

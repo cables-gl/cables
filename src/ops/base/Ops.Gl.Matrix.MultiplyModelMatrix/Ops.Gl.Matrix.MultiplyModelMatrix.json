@@ -29,5 +29,12 @@
     "summary": "multiply model matrix",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Matrix.multiplyModelMatrix renamed to Ops.Gl.Matrix.MultiplyModelMatrix",
+            "author": "pandur",
+            "date": 1560333473339
+        }
+    ]
 }

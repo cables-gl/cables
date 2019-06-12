@@ -92,5 +92,12 @@
                 "text": "Only outputs midi events of type Clock"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiInputDevice2 renamed to Ops.Devices.Midi.MidiInputDevice_v2",
+            "author": "pandur",
+            "date": 1560333646996
+        }
+    ]
 }

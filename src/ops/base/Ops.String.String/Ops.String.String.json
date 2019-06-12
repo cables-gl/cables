@@ -43,5 +43,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueString renamed to Ops.String.String",
+            "author": "pandur",
+            "date": 1560332760467
+        }
+    ]
 }

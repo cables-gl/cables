@@ -25,5 +25,12 @@
     "summary": "multiply view matrix",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Matrix.mulViewMatrix renamed to Ops.Gl.Matrix.MulViewMatrix",
+            "author": "pandur",
+            "date": 1560333452550
+        }
+    ]
 }

@@ -26,5 +26,12 @@
     "youtubeid": "",
     "collections": [
         "pointArrays"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Array.Array2xTo3x renamed to Ops.Array.Array2To3",
+            "author": "pandur",
+            "date": 1560332616585
+        }
     ]
 }
