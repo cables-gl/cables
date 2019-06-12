@@ -1,7 +1,7 @@
 const
     inObject=op.inObject("Object"),
     outObject=op.outObject("Result Object"),
-    inKey=op.inValueString("Key"),
+    inKey=op.inString("Key"),
     inValue=op.inValueFloat("Number");
 
 inObject.onChange=

@@ -819,8 +819,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
 
                 if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
                 if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
-                if (objPort && objPort.animated) port.setAnimated(objPort.animated);
-                if (objPort && objPort.anim) {
+                if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
+                if (port && objPort && objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
                     for (var ani in objPort.anim.keys) {

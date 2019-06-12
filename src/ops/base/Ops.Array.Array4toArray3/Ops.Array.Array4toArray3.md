@@ -1,0 +1,1 @@
+example: `[rgbargbargba]` becomes `[rgbrgbrgb]`
