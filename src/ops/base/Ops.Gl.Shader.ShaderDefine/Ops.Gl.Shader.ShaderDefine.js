@@ -6,10 +6,11 @@ const
     ;
 
 
-inDefineName.onChange=
-inDefineValue.onChange=
-inActive.onChange=
-    update;
+inShader.onChange=
+    inDefineName.onChange=
+    inDefineValue.onChange=
+    inActive.onChange=update;
+update();
 
 function update()
 {
@@ -21,6 +22,5 @@ function update()
 
     if(!inActive.get()) shader.removeDefine(inDefineName.get());
         else  shader.define(inDefineName.get(),inDefineValue.get());
-
 
 }
