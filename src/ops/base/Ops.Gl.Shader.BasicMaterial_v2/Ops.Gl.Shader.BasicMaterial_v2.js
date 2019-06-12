@@ -54,10 +54,6 @@ const unia=new CGL.Uniform(shader,'f','a',a);
 
 op.setPortGroup("Color",[r,g,b,a]);
 
-
-
-
-
     // diffuse outTexture
 
     var diffuseTexture=op.inTexture("texture");
