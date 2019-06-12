@@ -61,5 +61,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.DivElement2 renamed to Ops.Html.DivElement_v2",
+            "author": "pandur",
+            "date": 1560335654025
+        }
+    ]
 }

@@ -53,5 +53,12 @@
             }
         ],
         "name": "Ops.Json.ObjectSwitcher"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectSwitcher renamed to Ops.Json.SwitchObject",
+            "author": "pandur",
+            "date": 1560335169456
+        }
+    ]
 }

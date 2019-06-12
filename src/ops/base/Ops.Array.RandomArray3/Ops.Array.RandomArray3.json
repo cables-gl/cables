@@ -64,5 +64,12 @@
     "youtubeid": "",
     "collections": [
         "pointArrays"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Array.RandomArray3x renamed to Ops.Array.RandomArray3",
+            "author": "pandur",
+            "date": 1560335739548
+        }
     ]
 }

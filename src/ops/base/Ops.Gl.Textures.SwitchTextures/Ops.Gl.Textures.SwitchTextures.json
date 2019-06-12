@@ -94,5 +94,12 @@
     "summary": "switch betwen different textures",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Textures.TextureSwitcher renamed to Ops.Gl.Textures.SwitchTextures",
+            "author": "pandur",
+            "date": 1560335410656
+        }
+    ]
 }

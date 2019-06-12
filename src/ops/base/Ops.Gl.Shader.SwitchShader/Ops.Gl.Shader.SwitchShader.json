@@ -34,5 +34,12 @@
             }
         ],
         "name": "Ops.Gl.Shader.ShaderSwitch"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Shader.ShaderSwitch renamed to Ops.Gl.Shader.SwitchShader",
+            "author": "pandur",
+            "date": 1560335437028
+        }
+    ]
 }

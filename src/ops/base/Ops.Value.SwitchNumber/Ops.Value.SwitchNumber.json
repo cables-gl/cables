@@ -73,5 +73,12 @@
     "summary": "switch between number values by index",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueSwitcherNew renamed to Ops.Value.SwitchNumber",
+            "author": "pandur",
+            "date": 1560335207192
+        }
+    ]
 }

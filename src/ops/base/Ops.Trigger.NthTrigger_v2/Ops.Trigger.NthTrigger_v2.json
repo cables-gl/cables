@@ -39,5 +39,12 @@
                 "text": "The limited trigger"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Trigger.NthTrigger2 renamed to Ops.Trigger.NthTrigger_v2",
+            "author": "pandur",
+            "date": 1560335586854
+        }
+    ]
 }

@@ -43,5 +43,12 @@
     "collections": null,
     "issues": "",
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xSort renamed to Ops.Array.SortArray3",
+            "author": "pandur",
+            "date": 1560335792598
+        }
+    ]
 }

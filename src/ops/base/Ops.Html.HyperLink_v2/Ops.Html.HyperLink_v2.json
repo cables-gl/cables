@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1556293017309
+        },
+        {
+            "message": "Ops.Html.HyperLink2 renamed to Ops.Html.HyperLink_v2",
+            "author": "pandur",
+            "date": 1560335627816
         }
     ],
     "authorName": "pandur",

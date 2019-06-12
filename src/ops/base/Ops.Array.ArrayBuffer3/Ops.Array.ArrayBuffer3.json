@@ -45,5 +45,12 @@
     "summary": "circular buffer for xyz values",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayBuffer3x renamed to Ops.Array.ArrayBuffer3",
+            "author": "pandur",
+            "date": 1560335466288
+        }
+    ]
 }

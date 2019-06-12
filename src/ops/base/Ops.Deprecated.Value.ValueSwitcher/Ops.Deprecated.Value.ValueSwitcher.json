@@ -109,6 +109,11 @@
             "message": "code cleanup - ports",
             "author": "andro",
             "date": 1559050869922
+        },
+        {
+            "message": "Ops.Value.ValueSwitcher renamed to Ops.Deprecated.Value.ValueSwitcher",
+            "author": "pandur",
+            "date": 1560335249961
         }
     ]
 }

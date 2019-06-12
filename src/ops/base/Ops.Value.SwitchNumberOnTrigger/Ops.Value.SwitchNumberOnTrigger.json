@@ -185,5 +185,17 @@
                 "text": "Triggers after any of the input ports were triggered"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueSwitcherTrigger renamed to Ops.Value.SwitchNumberByTrigger",
+            "author": "pandur",
+            "date": 1560335276355
+        },
+        {
+            "message": "Ops.Value.SwitchNumberByTrigger renamed to Ops.Value.SwitchNumberOnTrigger",
+            "author": "pandur",
+            "date": 1560335334259
+        }
+    ]
 }
