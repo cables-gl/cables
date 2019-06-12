@@ -1005,7 +1005,7 @@ CABLES.Patch.prototype.setVariable = function(name, val)
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
     } else {
-        consolr.warn("variable "+name+" not found!");
+        console.warn("variable "+name+" not found!");
     }
 };
 

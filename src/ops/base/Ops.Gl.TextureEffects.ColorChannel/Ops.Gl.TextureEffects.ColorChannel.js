@@ -31,6 +31,7 @@ mono.onChange=
     channelR.onChange=
     channelG.onChange=
     channelB.onChange=updateChannels;
+updateChannels();
 
 function updateChannels()
 {

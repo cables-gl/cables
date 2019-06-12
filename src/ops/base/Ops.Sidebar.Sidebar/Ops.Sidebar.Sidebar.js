@@ -25,8 +25,9 @@ var childrenPort = op.outObject('childs');
 
 var sidebarEl = document.querySelector('.' + SIDEBAR_ID);
 if(!sidebarEl) {
-    sidebarEl = initSidebarElement();    
+    sidebarEl = initSidebarElement();
 }
+if(!sidebarEl) return;
 var sidebarItemsEl = sidebarEl.querySelector('.' + SIDEBAR_ITEMS_CLASS);
 childrenPort.set({
     parentElement: sidebarItemsEl,
@@ -83,7 +84,7 @@ function onVisiblePortChange() {
 
 side.onChanged=function()
 {
-    
+
 };
 
 /**
@@ -95,7 +96,7 @@ function updateDynamicStyles() {
     if(dynamicStyles) {
         dynamicStyles.forEach(function(e) {
             e.parentNode.removeChild(e);
-        });    
+        });
     }
     let newDynamicStyle = document.createElement('style');
     newDynamicStyle.classList.add(CSS_ELEMENT_DYNAMIC_CLASS);
@@ -111,7 +112,13 @@ function initSidebarElement() {
     var element = document.createElement('div');
     element.classList.add(SIDEBAR_CLASS);
     element.classList.add(SIDEBAR_ID);
-        var canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
+    var canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
+
+    if(!canvasWrapper)
+    {
+        console.warn("[sidebar] no canvas parentelement found...");
+        return;
+    }
     canvasWrapper.appendChild(element);
     var items = document.createElement('div');
     items.classList.add(SIDEBAR_ITEMS_CLASS);
@@ -161,7 +168,7 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }
 

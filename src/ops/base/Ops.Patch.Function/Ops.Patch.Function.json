@@ -37,5 +37,13 @@
     "created": 1540980283574,
     "youtubeid": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "todos": [
+        {
+            "message": "needs new version with new string type input",
+            "author": "pandur",
+            "id": "334b6761-9e53-4547-8e6b-cb668e3b6dea",
+            "date": 1560257368945
+        }
+    ]
 }
