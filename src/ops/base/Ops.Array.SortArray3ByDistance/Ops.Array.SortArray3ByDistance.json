@@ -1,0 +1,35 @@
+{
+    "id": "d67e094b-0206-4ab6-b97f-98a1242b334c",
+    "authorName": "pandur",
+    "created": 1542753950596,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.SortArray3xByDistance"
+    },
+    "summary": "sort an array3x, by the distance of each point to the first",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "collections": [
+        "pointArrays"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Array.SortArray3xByDistance renamed to Ops.Array.SortArray3ByDistance",
+            "author": "pandur",
+            "date": 1560413930149
+        }
+    ]
+}

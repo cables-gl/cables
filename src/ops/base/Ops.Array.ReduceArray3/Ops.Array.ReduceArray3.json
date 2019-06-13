@@ -1,0 +1,63 @@
+{
+    "summary": "Reduce an array by copying only every xth value",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Every xth Item",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Max Index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result Array"
+            }
+        ],
+        "name": "Ops.Array.ReduceArray3x"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The source array"
+            },
+            {
+                "name": "Every xth Item",
+                "text": "When set to `1` source and result array will be identical, when set to `2` result array contains half the number of items of the source array and so on"
+            },
+            {
+                "name": "Max Index",
+                "text": "If set to anything other than `0` the resulting array will contain `Max Index` value triplets at max"
+            },
+            {
+                "name": "Result Array",
+                "text": "The new array containing only a subset of elements"
+            }
+        ]
+    },
+    "updated": 1542698795655,
+    "authorName": "pandur",
+    "id": "8a9b80c3-dd51-47f1-8a64-1d26da48fec7",
+    "created": 1542698796041,
+    "youtubeid": "",
+    "collections": [
+        "pointArrays"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Array.ReduceArray3x renamed to Ops.Array.ReduceArray3",
+            "author": "pandur",
+            "date": 1560412313194
+        }
+    ]
+}

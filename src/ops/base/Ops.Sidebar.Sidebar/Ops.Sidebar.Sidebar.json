@@ -42,5 +42,13 @@
     "youtubeid": "cpRVswVdvI0",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "fix: \"default minimized\" was not working",
+            "author": "pandur",
+            "id": "7343d67c-cd34-4717-8ae9-83558f39c030",
+            "date": 1560339002381
+        }
+    ]
 }

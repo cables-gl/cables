@@ -28,6 +28,11 @@
                 "type": "0",
                 "name": "height",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Create Texture",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -46,7 +51,6 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "ed633fe4-3200-4890-8d9e-ccd1ea478c74",
-    "updated": 1542795249867,
     "created": 1508578965659,
     "summary": "ger average value in an area of a fft audio analysis buffer",
     "youtubeid": "",

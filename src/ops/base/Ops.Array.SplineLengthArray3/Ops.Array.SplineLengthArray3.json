@@ -1,0 +1,54 @@
+{
+    "updated": 1521812105327,
+    "authorName": "pandur",
+    "id": "894db700-f220-427d-99fe-553db0a60034",
+    "created": 1519997721513,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array3x"
+            },
+            {
+                "type": "1",
+                "name": "Calculate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.Array3xSplineLength"
+    },
+    "summary": "Returns a number with the total distance between the points/items in an array3x",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array3x",
+                "text": "The array in that is analysed for it's length"
+            },
+            {
+                "name": "Calculate",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Length",
+                "text": "Total length of the spline points from the array returned as a single number"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xSplineLength renamed to Ops.Array.SplineLengthArray3",
+            "author": "pandur",
+            "date": 1560414179653
+        }
+    ]
+}

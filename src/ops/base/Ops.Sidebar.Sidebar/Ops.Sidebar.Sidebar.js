@@ -60,10 +60,10 @@ side.onChange=function()
 function onDefaultMinimizedPortChanged() {
     if(!openCloseBtn) { return; }
     if(defaultMinimizedPort.get()) {
-        sidebarEl.classList.add('sidebar-cables--closed');
+        sidebarEl.classList.add('sidebar--closed');
         // openCloseBtn.textContent = BTN_TEXT_CLOSED;
     } else {
-        sidebarEl.classList.remove('sidebar-cables--closed');
+        sidebarEl.classList.remove('sidebar--closed');
         // openCloseBtn.textContent = BTN_TEXT_OPEN;
     }
 }
@@ -134,9 +134,14 @@ function initSidebarElement() {
     return element;
 }
 
+function setClosed(b)
+{
+
+}
+
 function onOpenCloseBtnClick(ev) {
   ev.stopPropagation();
-  const sidebarEl = ev.target.closest('.' + SIDEBAR_CLASS);
+//   const sidebarEl = ev.target.closest('.' + SIDEBAR_CLASS);
   if(!sidebarEl) { console.error('Sidebar could not be closed...'); return; }
   sidebarEl.classList.toggle('sidebar--closed');
   const btn = ev.target;
