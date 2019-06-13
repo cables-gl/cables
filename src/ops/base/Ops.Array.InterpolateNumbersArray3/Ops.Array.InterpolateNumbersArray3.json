@@ -60,5 +60,12 @@
         "Spline"
     ],
     "issues": "",
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xGetValuesInterpolated renamed to Ops.Array.InterpolateNumbersArray3",
+            "author": "pandur",
+            "date": 1560415153313
+        }
+    ]
 }

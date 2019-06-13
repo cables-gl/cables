@@ -30,5 +30,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Trigger.SetValueOnTrigger renamed to Ops.Deprecated.Trigger.SetValueOnTrigger",
+            "author": "pandur",
+            "date": 1560414817495
+        }
+    ]
 }

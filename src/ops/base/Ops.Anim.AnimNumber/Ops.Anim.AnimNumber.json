@@ -68,5 +68,12 @@
                 "text": "Sends a trigger out when the value is reached"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Anim.ValueChangeAnim renamed to Ops.Anim.AnimNumber",
+            "author": "pandur",
+            "date": 1560415244041
+        }
+    ]
 }

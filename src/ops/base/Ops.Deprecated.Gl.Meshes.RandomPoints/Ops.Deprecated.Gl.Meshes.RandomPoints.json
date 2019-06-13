@@ -53,5 +53,12 @@
             "id": "88c38fd8-47ca-4146-989d-49162c98799c",
             "date": 1558349934348
         }
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Gl.Meshes.RandomPoints renamed to Ops.Deprecated.Gl.Meshes.RandomPoints",
+            "author": "pandur",
+            "date": 1560414950577
+        }
     ]
 }

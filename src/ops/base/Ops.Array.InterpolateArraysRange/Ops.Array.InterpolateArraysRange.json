@@ -57,5 +57,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayInterpolateOffset renamed to Ops.Array.InterpolateArraysRange",
+            "author": "pandur",
+            "date": 1560415453416
+        }
+    ]
 }

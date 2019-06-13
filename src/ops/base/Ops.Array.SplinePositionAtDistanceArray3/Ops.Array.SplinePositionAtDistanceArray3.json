@@ -64,5 +64,12 @@
     "collections": [
         "pointArrays"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xSplinePositionAtDistance renamed to Ops.Array.SplinePositionAtDistanceArray3",
+            "author": "pandur",
+            "date": 1560415583904
+        }
+    ]
 }

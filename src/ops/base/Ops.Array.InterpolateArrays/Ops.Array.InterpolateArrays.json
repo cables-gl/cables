@@ -67,5 +67,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayInterpolate renamed to Ops.Array.InterpolateArrays",
+            "author": "pandur",
+            "date": 1560415284531
+        }
+    ]
 }

@@ -50,5 +50,12 @@
                 "text": "The array containing elements with `0`, and one element with `1`"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ExclusiveBoolStateArray renamed to Ops.Array.BoolStateArray",
+            "author": "pandur",
+            "date": 1560415525362
+        }
+    ]
 }

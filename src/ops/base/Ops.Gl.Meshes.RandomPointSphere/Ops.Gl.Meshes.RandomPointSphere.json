@@ -49,5 +49,13 @@
     "created": 1519122617858,
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "deprecate this op and add a new one without the rendering/geometry part - only output an array",
+            "author": "pandur",
+            "id": "b316a619-bf50-42c1-9fa2-61db92c4d5db",
+            "date": 1560415017307
+        }
+    ]
 }
