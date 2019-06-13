@@ -93,7 +93,9 @@
     },
     "summary": "Creates a grid texture",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "generator"
+    ],
     "relatedops": null,
     "youtubeids": [],
     "docs": {

@@ -40,8 +40,10 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
-    "relatedops": null
+    "collections": [
+        "math"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

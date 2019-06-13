@@ -65,8 +65,9 @@
         "name": "Ops.Array.Array3xAnalyze"
     },
     "summary": "min,max and average values of an array3x",
-    "youtubeid": "",
-    "collections": null,
+    "collections": [
+        "datainfo"
+    ],
     "relatedops": [
         "Ops.Array.ArrayAnalyze"
     ],
@@ -120,5 +121,7 @@
             "author": "pandur",
             "date": 1560413598551
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

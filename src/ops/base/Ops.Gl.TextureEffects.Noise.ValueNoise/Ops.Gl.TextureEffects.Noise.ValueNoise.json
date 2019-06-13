@@ -65,5 +65,12 @@
     "summary": "value noise",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

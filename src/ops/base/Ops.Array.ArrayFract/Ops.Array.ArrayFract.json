@@ -18,9 +18,10 @@
         "name": "Ops.Array.ArrayFract"
     },
     "summary": "Returns the fractional remainder of all values in an array",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -33,5 +34,6 @@
                 "text": "Array out"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

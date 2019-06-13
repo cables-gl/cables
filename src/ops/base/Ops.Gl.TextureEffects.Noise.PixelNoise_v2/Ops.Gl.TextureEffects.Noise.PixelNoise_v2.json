@@ -141,7 +141,10 @@
         ]
     },
     "issues": "",
-    "collections": null,
+    "collections": [
+        "random",
+        "generator"
+    ],
     "relatedops": null,
     "youtubeids": []
 }

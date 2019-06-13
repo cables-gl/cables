@@ -80,8 +80,9 @@
         "name": "Ops.Gl.TextureEffects.Rectangle2"
     },
     "summary": "Draw a 2D rectangle with controllable parameters",
-    "youtubeid": "",
-    "collections": null,
+    "collections": [
+        "generator"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -141,5 +142,7 @@
             "author": "andro",
             "date": 1548344369982
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }
