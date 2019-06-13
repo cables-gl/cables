@@ -62,7 +62,9 @@
         ]
     },
     "collections": [
-        "pointArrays"
+        "pointArrays",
+        "generator",
+        "random"
     ],
     "changelog": [
         {

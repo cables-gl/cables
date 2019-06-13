@@ -23,9 +23,9 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
     "collections": [
-        "pointArrays"
+        "pointArrays",
+        "converter"
     ],
     "changelog": [
         {
@@ -33,5 +33,8 @@
             "author": "pandur",
             "date": 1560332616585
         }
-    ]
+    ],
+    "issues": "",
+    "relatedops": null,
+    "youtubeids": []
 }

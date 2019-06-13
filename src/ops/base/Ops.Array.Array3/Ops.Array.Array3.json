@@ -53,7 +53,9 @@
     },
     "summary": "create an array of num triplets set to default values xyz  ",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "generator"
+    ],
     "relatedops": null,
     "youtubeids": [],
     "docs": {

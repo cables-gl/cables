@@ -39,7 +39,6 @@
         "name": "Ops.Array.PointArray.Field"
     },
     "summary": "generate coordinates for a rectangular field of points",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -68,7 +67,9 @@
             }
         ]
     },
-    "collections": null,
+    "collections": [
+        "generator"
+    ],
     "changelog": [
         {
             "message": "fixed the columns and rows parameter not resetting the array",
@@ -80,5 +81,6 @@
     "relatedops": [
         "Ops.Array.ArrayUnpack4",
         "Ops.Gl.MeshInstancer"
-    ]
+    ],
+    "youtubeids": []
 }

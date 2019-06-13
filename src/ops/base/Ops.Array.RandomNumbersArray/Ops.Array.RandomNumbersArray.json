@@ -68,7 +68,10 @@
         }
     ],
     "issues": "",
-    "collections": null,
+    "collections": [
+        "generator",
+        "random"
+    ],
     "relatedops": null,
     "youtubeids": []
 }
