@@ -1,0 +1,93 @@
+{
+    "authorName": "pandur",
+    "id": "c3b2d0c9-0aa5-4605-948a-a53784fa8f1a",
+    "created": 1519813558455,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "3",
+                "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Value 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 3",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            }
+        ],
+        "name": "Ops.Array.ArraySetValue3x"
+    },
+    "summary": "set three values at position index in an array",
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in "
+            },
+            {
+                "name": "array",
+                "text": "Array in "
+            },
+            {
+                "name": "index",
+                "text": "Index to change"
+            },
+            {
+                "name": "Value 1",
+                "text": "Value 1 to change at index"
+            },
+            {
+                "name": "Value 2",
+                "text": "Value 2 to change at index"
+            },
+            {
+                "name": "Value 3",
+                "text": "Value 3 to change at index"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "code cleanup ports",
+            "author": "andro",
+            "date": 1558951998685
+        },
+        {
+            "message": "Ops.Array.ArraySetValue3x renamed to Ops.Array.SetNumbersArray3",
+            "author": "pandur",
+            "date": 1560416384486
+        }
+    ]
+}

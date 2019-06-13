@@ -1,0 +1,32 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "10abadc9-adb7-400e-872a-40c6e0763c61",
+    "created": 1507134725517,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Vars.SetVariableString"
+    },
+    "summary": "set variable with a string input",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Vars.SetVariableString renamed to Ops.Vars.VarSetString",
+            "author": "pandur",
+            "date": 1560418772776
+        }
+    ]
+}

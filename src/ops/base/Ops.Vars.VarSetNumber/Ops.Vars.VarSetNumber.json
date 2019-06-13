@@ -1,0 +1,37 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Vars.SetVariable"
+    },
+    "summary": "set a variable value",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
+    "created": 1519228504479,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Vars.Variable"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Vars.SetVariable renamed to Ops.Vars.VarSetNumber",
+            "author": "pandur",
+            "date": 1560418435802
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Vars.Variable"
+    },
+    "summary": "read a variable value",
+    "docs": {
+        "ports": []
+    },
+    "authorName": "pandur",
+    "id": "1b9c4504-d69a-43c2-b747-8ca795a8950f",
+    "created": 1548885174898,
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Vars.SetVariable"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Vars.Variable renamed to Ops.Vars.VarGetNumber",
+            "author": "pandur",
+            "date": 1560418347970
+        }
+    ]
+}
