@@ -65,7 +65,6 @@
         "name": "Ops.Gl.TextureEffects.Vignette2"
     },
     "summary": "Simulating an old camera effect of fading away the edges of the image",
-    "youtubeid": "",
     "docs": {
         "ports": []
     },
@@ -75,5 +74,11 @@
             "author": "andro",
             "date": 1548344228988
         }
-    ]
+    ],
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

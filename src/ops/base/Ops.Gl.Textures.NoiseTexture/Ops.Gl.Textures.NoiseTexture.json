@@ -12,11 +12,14 @@
         "name": "Ops.Gl.Textures.NoiseTexture"
     },
     "summary": "Simple noisetexture",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "random",
+        "generator"
+    ],
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeids": []
 }

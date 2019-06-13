@@ -18,9 +18,10 @@
         "name": "Ops.Array.ArrayAbs"
     },
     "summary": "Converts array contents to absolute values - converts all negative numbers to positive numbers",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -33,5 +34,6 @@
                 "text": "The modified array out"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

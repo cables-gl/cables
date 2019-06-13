@@ -47,9 +47,10 @@
         ],
         "name": "Ops.Array.ArrayMathArray"
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": null,
     "changelog": [
         {
@@ -57,5 +58,6 @@
             "author": "andro",
             "date": 1558625292186
         }
-    ]
+    ],
+    "youtubeids": []
 }

@@ -33,10 +33,6 @@
                 "text": "Shuffles the array"
             },
             {
-                "name": "Shuffle on Change",
-                "text": "If set to `true`, the resulting array will be shuffled every time the input array changed, if set to `false` only when `Execute` is triggered"
-            },
-            {
                 "name": "array",
                 "text": "The input array to shuffle"
             },
@@ -61,5 +57,11 @@
             "author": "andro",
             "date": 1556103723657
         }
-    ]
+    ],
+    "issues": "",
+    "collections": [
+        "random"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }
