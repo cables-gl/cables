@@ -35,14 +35,14 @@ var animLength=0;
 var timeStep=0.1;
 function setup()
 {
-    animX.clear();
-    animY.clear();
-    animZ.clear();
+    animX=new CABLES.Anim();
+    animY=new CABLES.Anim();
+    animZ=new CABLES.Anim();
 
-    animQX.clear();
-    animQY.clear();
-    animQZ.clear();
-    animQW.clear();
+    animQX=new CABLES.Anim();
+    animQY=new CABLES.Anim();
+    animQZ=new CABLES.Anim();
+    animQW=new CABLES.Anim();
 
     var i=0;
     var arr=arrayIn.get();

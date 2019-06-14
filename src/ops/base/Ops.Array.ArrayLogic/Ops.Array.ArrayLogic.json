@@ -8,5 +8,55 @@
         }
     ],
     "authorName": "cables",
-    "created": 1560432521791
+    "created": 1560432521791,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array 0"
+            },
+            {
+                "type": "0",
+                "name": "Number for comparison",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array result"
+            }
+        ],
+        "name": "Ops.Array.ArrayLogic"
+    },
+    "summary": "Performs logical comparison operators on a single array of numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array in"
+            },
+            {
+                "name": "Number for comparison",
+                "text": "The number used to apply a logical comparison operator to all the numbers in the array"
+            },
+            {
+                "name": "Comparison mode",
+                "text": "Pick the mode here - see docs for full list and explanation"
+            },
+            {
+                "name": "Array result",
+                "text": "Array out"
+            }
+        ]
+    }
 }

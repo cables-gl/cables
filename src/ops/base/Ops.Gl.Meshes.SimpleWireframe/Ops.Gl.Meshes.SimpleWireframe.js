@@ -25,33 +25,51 @@ inGeom.onChange=function()
     }
 
     verts.length=0;
+    var i=0;
 
-    for(var i=0;i<geom.verticesIndices.length;i+=3)
+    if(geom.isIndexed())
     {
-        var index=geom.verticesIndices[i+0];
-        var index1=geom.verticesIndices[i+1];
-        var index2=geom.verticesIndices[i+2];
+        for(i=0;i<geom.verticesIndices.length;i+=3)
+        {
+            var index=geom.verticesIndices[i+0];
+            var index1=geom.verticesIndices[i+1];
+            var index2=geom.verticesIndices[i+2];
 
-        verts.push(geom.vertices[index*3+0],geom.vertices[index*3+1],geom.vertices[index*3+2]);
-        verts.push(geom.vertices[index1*3+0],geom.vertices[index1*3+1],geom.vertices[index1*3+2]);
-        verts.push(geom.vertices[index1*3+0],geom.vertices[index1*3+1],geom.vertices[index1*3+2]);
-        verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
-        verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
-        verts.push(geom.vertices[index*3+0],geom.vertices[index*3+1],geom.vertices[index*3+2]);
+            verts.push(geom.vertices[index*3+0],geom.vertices[index*3+1],geom.vertices[index*3+2]);
+            verts.push(geom.vertices[index1*3+0],geom.vertices[index1*3+1],geom.vertices[index1*3+2]);
+            verts.push(geom.vertices[index1*3+0],geom.vertices[index1*3+1],geom.vertices[index1*3+2]);
+            verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
+            verts.push(geom.vertices[index2*3+0],geom.vertices[index2*3+1],geom.vertices[index2*3+2]);
+            verts.push(geom.vertices[index*3+0],geom.vertices[index*3+1],geom.vertices[index*3+2]);
 
-        normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
-        normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
-        normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
-        normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
-        normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
-        normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
+            normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
+            normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
+            normals.push(geom.vertexNormals[index1*3+0],geom.vertexNormals[index1*3+1],geom.vertexNormals[index1*3+2]);
+            normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
+            normals.push(geom.vertexNormals[index2*3+0],geom.vertexNormals[index2*3+1],geom.vertexNormals[index2*3+2]);
+            normals.push(geom.vertexNormals[index*3+0],geom.vertexNormals[index*3+1],geom.vertexNormals[index*3+2]);
 
-        tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
-        tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
-        tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
-        tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
-        tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
-        tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
+            tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
+            tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
+            tc.push(geom.texCoords[index1*2+0],geom.texCoords[index1*2+1]);
+            tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
+            tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
+            tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
+        }
+    }
+    else
+    {
+        for(i=0;i<geom.vertices.length;i+=9)
+        {
+            verts.push(geom.vertices[i+0],geom.vertices[i+1],geom.vertices[i+2]);
+            verts.push(geom.vertices[i+3],geom.vertices[i+4],geom.vertices[i+5]);
+
+            verts.push(geom.vertices[i+3],geom.vertices[i+4],geom.vertices[i+5]);
+            verts.push(geom.vertices[i+6],geom.vertices[i+7],geom.vertices[i+8]);
+
+            verts.push(geom.vertices[i+6],geom.vertices[i+7],geom.vertices[i+8]);
+            verts.push(geom.vertices[i+0],geom.vertices[i+1],geom.vertices[i+2]);
+        }
     }
 
     geom=new CGL.Geometry("wireframelinegeom");

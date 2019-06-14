@@ -32,7 +32,6 @@ inCalc.onTriggered=function()
 
     Math.randomSeed=inSeed.get();
 
-
     while(i<(num-1))
     {
         var ind=Math.floor(Math.seededRandom()*numOld);
@@ -43,5 +42,4 @@ inCalc.onTriggered=function()
 
     outArr.set(null);
     outArr.set(arr);
-
 };
