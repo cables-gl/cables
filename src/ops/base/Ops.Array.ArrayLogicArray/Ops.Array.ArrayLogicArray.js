@@ -4,6 +4,7 @@
 //is given in the panel
 //pass allows the value from array 0 through if the
 //comparison evaulates to true else zero
+//empty line
 
 const inArray_0 = op.inArray("array 0");
 const inArray_1 = op.inArray("array 1");
