@@ -1,0 +1,78 @@
+{
+    "authorName": "simod",
+    "id": "86c99074-4929-44d0-a826-49e7f8bdf5c4",
+    "created": 1559826863977,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Segments",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "border radius",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Top Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Top Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Bottom Left",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Bottom Right",
+                "group": "Round Corner",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "group": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.User.simod.RoundedCornerRectangle"
+    }
+}
