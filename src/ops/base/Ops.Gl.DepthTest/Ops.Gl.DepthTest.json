@@ -36,5 +36,26 @@
     "summary": "change depth testing method (depthMask,depthWrite,depthFunc)",
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "csdcsd",
+            "author": "pandur",
+            "id": "cc4b76ad-9c16-4053-afd9-f9311a4fd03d",
+            "date": 1560507834980
+        },
+        {
+            "message": "cccc",
+            "author": "pandur",
+            "id": "32b10f13-df34-49c7-8339-75cd32f57043",
+            "date": 1560507838679
+        }
+    ],
+    "changelog": [
+        {
+            "message": "cdscdscsd",
+            "author": "pandur",
+            "date": 1560507841493
+        }
+    ]
 }

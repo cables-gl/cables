@@ -41,7 +41,8 @@
     "summary": "generate spline using lissajous formulas",
     "collections": [
         "pointArrays",
-        "Spline"
+        "Spline",
+        "generator"
     ],
     "docs": {
         "ports": []

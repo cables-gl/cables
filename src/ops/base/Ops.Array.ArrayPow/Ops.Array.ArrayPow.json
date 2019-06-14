@@ -1,8 +1,9 @@
 {
     "summary": "Applies a Pow function to an array",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -42,5 +43,6 @@
             }
         ],
         "name": "Ops.Array.ArrayPow"
-    }
+    },
+    "youtubeids": []
 }

@@ -96,7 +96,9 @@
         ]
     },
     "issues": "",
-    "collections": null,
+    "collections": [
+        "generator"
+    ],
     "relatedops": null,
     "youtubeids": []
 }

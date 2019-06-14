@@ -101,5 +101,11 @@
     "summary": "draw 2d circle into texture",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

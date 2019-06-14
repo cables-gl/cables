@@ -28,9 +28,10 @@
         "name": "Ops.Array.Array3xRandomSelection"
     },
     "summary": "extract definable amount of random xyz points from an array",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "random"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -51,5 +52,6 @@
                 "text": "A new array with a length determined by the elements paramater."
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

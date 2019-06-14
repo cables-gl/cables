@@ -3,8 +3,9 @@
     "authorName": "pandur",
     "created": 1548108515570,
     "summary": "Parse a string into an array (create)",
-    "youtubeid": "",
-    "collections": null,
+    "collections": [
+        "converter"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -67,5 +68,7 @@
             }
         ],
         "name": "Ops.Array.ParseArray2"
-    }
+    },
+    "issues": "",
+    "youtubeids": []
 }

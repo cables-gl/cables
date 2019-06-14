@@ -38,5 +38,12 @@
     "summary": "interpolate between two matrices",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "interpolate",
+        "math"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

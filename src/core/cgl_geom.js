@@ -329,7 +329,7 @@ CGL.Geometry.prototype.isIndexed=function()
 };
 
 
-CGL.Geometry.prototype.unIndex=function()
+CGL.Geometry.prototype.unIndex=function(reIndex)
 {
     var newVerts=[];
     var newIndizes=[];
@@ -416,9 +416,8 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.vertexNormals=newNormals;
-
-    // TODO why does unindexed has indizes ???????????????????????????
-    this.verticesIndices=newIndizes;
+    this.verticesIndices.length=0;
+    if(reIndex) this.verticesIndices=newIndizes;
     this.calculateNormals();
 };
 

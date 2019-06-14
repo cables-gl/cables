@@ -40,10 +40,12 @@
         ],
         "name": "Ops.Array.ArrayDivide"
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": [
         "Ops.Array.ArrayMath"
-    ]
+    ],
+    "youtubeids": []
 }

@@ -40,5 +40,11 @@
                 "text": "`true` if the string could be successfully parsed, `false` if it is not a valid object"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": [
+        "converter"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

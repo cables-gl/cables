@@ -46,5 +46,13 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "todos": [
+        {
+            "message": "should be an array generator op, no transforms etc needed",
+            "author": "pandur",
+            "id": "dbfbdd83-246c-456c-8f49-6da580ec7073",
+            "date": 1560419496058
+        }
+    ]
 }
