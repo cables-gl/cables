@@ -42,11 +42,14 @@
     "authorName": "pandur",
     "id": "e5b0b016-9663-4c9d-9365-f54ae3c5fbb6",
     "created": 1519730689749,
-    "youtubeid": "",
     "collections": null,
     "relatedops": null,
     "docs": {
         "ports": [
+            {
+                "name": "exe",
+                "text": "Trigegr in"
+            },
             {
                 "name": "Value",
                 "text": "The value you want to alter"
@@ -58,6 +61,10 @@
             {
                 "name": "easing",
                 "text": "Easing mode selector"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
             },
             {
                 "name": "result",
@@ -75,5 +82,7 @@
             "author": "pandur",
             "date": 1560415244041
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

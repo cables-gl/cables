@@ -46,6 +46,14 @@
                 "text": "Which element is the `1`"
             },
             {
+                "name": "Inactive Value",
+                "text": "Zeroes are set to this number"
+            },
+            {
+                "name": "Active Value",
+                "text": "Ones are set to this number"
+            },
+            {
                 "name": "State Array",
                 "text": "The array containing elements with `0`, and one element with `1`"
             }
@@ -57,5 +65,9 @@
             "author": "pandur",
             "date": 1560415525362
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

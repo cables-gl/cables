@@ -34,11 +34,20 @@
         "name": "Ops.Vars.SetVariableString2"
     },
     "summary": "Set string variable",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name"
+            },
+            {
+                "name": "Value",
+                "text": "String in"
+            }
+        ]
+    },
+    "youtubeids": []
 }

@@ -58,6 +58,14 @@
             {
                 "name": "random seed",
                 "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
+            },
+            {
+                "name": "Last == First",
+                "text": "Set to true to make the first and last number in the array the same, handy for loops"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
             }
         ]
     },
@@ -79,6 +87,10 @@
         }
     ],
     "issues": "",
-    "relatedops": null,
-    "youtubeids": []
+    "relatedops": [
+        "Ops.Array.RandomNumbersArray"
+    ],
+    "youtubeids": [
+        "7xlElfbMWgw"
+    ]
 }

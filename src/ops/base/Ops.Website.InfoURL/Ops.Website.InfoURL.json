@@ -39,13 +39,13 @@
         "name": "Ops.Website.DocumentURL2"
     },
     "summary": "Information about the current URL",
-    "youtubeid": "",
     "issues": "",
     "collections": [
-        "datainfo"
+        "dataInfo"
     ],
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeids": []
 }

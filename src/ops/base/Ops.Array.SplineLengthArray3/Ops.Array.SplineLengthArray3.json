@@ -23,7 +23,7 @@
         ],
         "name": "Ops.Array.Array3xSplineLength"
     },
-    "summary": "Returns a number with the total distance between the points/items in an array3x",
+    "summary": "Returns a number with the total distance between the points/items in an array3",
     "docs": {
         "ports": [
             {
@@ -40,7 +40,6 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -50,5 +49,6 @@
             "author": "pandur",
             "date": 1560414179653
         }
-    ]
+    ],
+    "youtubeids": []
 }

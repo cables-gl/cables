@@ -51,16 +51,47 @@
         ],
         "name": "Ops.Array.Array3xSplinePositionAtDistance"
     },
-    "summary": "get position in array3x/spline at distance from start",
+    "summary": "get position in array3/spline at distance from start",
     "docs": {
         "ports": [
             {
+                "name": "Calculate",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Array3x",
+                "text": "Array in"
+            },
+            {
+                "name": "Distance",
+                "text": "Point to lookup in the spline"
+            },
+            {
                 "name": "Normalized",
                 "text": "if true distance input is in the range 0-1"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "X",
+                "text": "X position - based upon point in the spline from the distance parameter"
+            },
+            {
+                "name": "Y",
+                "text": "Y position - based upon point in the spline from the distance parameter"
+            },
+            {
+                "name": "Z",
+                "text": "Z position - based upon point in the spline from the distance parameter"
+            },
+            {
+                "name": "Spline Length",
+                "text": "Total length of the spline"
             }
         ]
     },
-    "youtubeid": "",
     "collections": [
         "pointArrays"
     ],
@@ -71,5 +102,7 @@
             "author": "pandur",
             "date": 1560415583904
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

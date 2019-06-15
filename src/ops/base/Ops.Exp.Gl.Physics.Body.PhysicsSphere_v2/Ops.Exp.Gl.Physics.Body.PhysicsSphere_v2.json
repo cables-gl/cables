@@ -137,5 +137,13 @@
                 "text": "Trigger out when colliding with another physics object"
             }
         ]
-    }
+    },
+    "todos": [
+        {
+            "message": "Needs positional parameters to set position on reset",
+            "author": "andro",
+            "id": "39ef580c-e774-4e33-a031-4d7ffd08f8b5",
+            "date": 1560511237179
+        }
+    ]
 }

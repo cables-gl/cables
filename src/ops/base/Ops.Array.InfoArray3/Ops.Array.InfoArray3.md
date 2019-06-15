@@ -1,1 +1,1 @@
-Check the example file Ops.Array.ArrayAnalyze for a simplified version of Array3xAnalyze
+Check the example file Ops.Array.InfoArray for a simplified version of infoArray3

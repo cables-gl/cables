@@ -1,4 +1,4 @@
-variables are values you can read anywhere in your patch without creating very long cables
+variables are numbers you can read anywhere in your patch without creating very long cables
 
 they can also be written and read by external scripts when embedding cables patches:
 
