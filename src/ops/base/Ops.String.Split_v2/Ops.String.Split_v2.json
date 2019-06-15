@@ -22,9 +22,10 @@
         "name": "Ops.String.Split2"
     },
     "summary": "Splits a string with separator into an array of strings",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "converter"
+    ],
     "relatedops": null,
     "docs": {
         "ports": [
@@ -41,5 +42,6 @@
                 "text": "The single parts of the string"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

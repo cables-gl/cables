@@ -73,6 +73,53 @@
                 "name": "geometry"
             }
         ],
-        "name": "Ops.User.simod.RoundedCornerRectangle"
+        "name": "Ops.Gl.Meshes.RectangleRounded"
+    },
+    "summary": "Draws a rectangle with rounded corners",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Meshes.Rectangle"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Segments",
+                "text": "amount of segments for corner circles"
+            },
+            {
+                "name": "width",
+                "text": "width of rectangle"
+            },
+            {
+                "name": "height",
+                "text": "height of rectangle"
+            },
+            {
+                "name": "border radius",
+                "text": "radius of corner circles"
+            },
+            {
+                "name": "Top Left",
+                "text": "round top left corner"
+            },
+            {
+                "name": "Top Right",
+                "text": "round top right corner"
+            },
+            {
+                "name": "Bottom Left",
+                "text": "round bottom left corner"
+            },
+            {
+                "name": "Bottom Right",
+                "text": "round bottom right corner"
+            },
+            {
+                "name": "Draw",
+                "text": "show/hide rectangle"
+            }
+        ]
     }
 }

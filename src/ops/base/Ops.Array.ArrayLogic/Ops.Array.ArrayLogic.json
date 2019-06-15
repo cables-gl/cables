@@ -25,7 +25,7 @@
         ],
         "name": "Ops.Array.ArrayLogic"
     },
-    "summary": "Performs logical comparison operators on a single array of numbers",
+    "summary": "Performs logical comparison operations on a single array of numbers",
     "issues": "",
     "collections": null,
     "relatedops": null,
