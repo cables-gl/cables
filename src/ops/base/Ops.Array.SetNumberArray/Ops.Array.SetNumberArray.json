@@ -1,5 +1,5 @@
 {
-    "summary": "Change the value of an array at an index",
+    "summary": "Change the Number of an array at an index",
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ed39fd33-1b8d-4d04-a44d-4a22e4477a0a",
@@ -31,7 +31,7 @@
                 "name": "values"
             }
         ],
-        "name": "Ops.Array.ArraySetValue"
+        "name": "Ops.Array.SetNumberArray"
     },
     "changelog": [
         {
@@ -48,6 +48,39 @@
             "message": "Ops.Array.ArraySetValue renamed to Ops.Array.SetNumberArray",
             "author": "pandur",
             "date": 1560416314813
+        },
+        {
+            "message": "fixed - index values are turned into integers",
+            "author": "andro",
+            "date": 1560507194973
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in"
+            },
+            {
+                "name": "array",
+                "text": "Array in"
+            },
+            {
+                "name": "index",
+                "text": "Index to modify"
+            },
+            {
+                "name": "value",
+                "text": "Number in - changes index to this number"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            }
+        ]
+    }
 }

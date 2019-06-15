@@ -25,5 +25,23 @@
             "author": "pandur",
             "date": 1560418815651
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Vars.VarSetArray"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name to read from "
+            },
+            {
+                "name": "Array",
+                "text": "Array out"
+            }
+        ]
+    }
 }

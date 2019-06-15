@@ -45,10 +45,38 @@
         "generator"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Formula",
+                "text": "Pick 1 of 3 formulas"
+            },
+            {
+                "name": "A",
+                "text": "Frequency parameter A"
+            },
+            {
+                "name": "B",
+                "text": "Frequency parameter B"
+            },
+            {
+                "name": "C",
+                "text": "Frequency parameter C"
+            },
+            {
+                "name": "D",
+                "text": "Frequency parameter D"
+            },
+            {
+                "name": "Result",
+                "text": "ArrayOut"
+            }
+        ]
     },
     "issues": "",
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.Meshes.SimpleSpline",
+        "Ops.Gl.Meshes.SplineMesh"
+    ],
     "youtubeids": [],
     "changelog": [
         {

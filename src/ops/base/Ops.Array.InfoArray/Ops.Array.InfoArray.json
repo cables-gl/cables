@@ -29,13 +29,16 @@
     "authorName": "pandur",
     "id": "1db230c8-212f-4679-87d6-3531659363da",
     "created": 1542698747467,
-    "youtubeid": "",
     "collections": [
         "dataInfo"
     ],
     "relatedops": null,
     "docs": {
         "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
             {
                 "name": "Min",
                 "text": "The lowest value in the array "
@@ -56,5 +59,7 @@
             "author": "pandur",
             "date": 1560413658724
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

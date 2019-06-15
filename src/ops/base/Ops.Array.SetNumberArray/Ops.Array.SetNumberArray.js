@@ -15,7 +15,7 @@ function update()
         values.set(null);
         return;
     }
-    arr[index.get()]=value.get();
+    arr[index.get()]=Math.abs(Math.floor(value.get()));
 
     values.set(null);
     values.set(arr);
