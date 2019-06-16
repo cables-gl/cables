@@ -1,0 +1,60 @@
+{
+    "id": "ff757f51-fbb0-4728-b158-644094cd160e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1560683772268
+        },
+        {
+            "message": "Ops.User.pandur.Texture2RandomPoints renamed to Ops.Gl.TextureToPoints",
+            "author": "pandur",
+            "date": 1560684091152
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1560683773988,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "update"
+            },
+            {
+                "type": "0",
+                "name": "Num Points",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z Position",
+                "subType": "string"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "NumPoints",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.TextureToPoints"
+    }
+}
