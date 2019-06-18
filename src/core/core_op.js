@@ -102,6 +102,18 @@ CABLES.Op = function()
             this.fireEvent("onTitleChange",name);
     };
 
+
+
+    /**
+     * setUiAttrib
+     * possible values:
+     * warning - warning message - showing up in op parameter panel
+     * error - error message - showing up in op parameter panel
+     * extendTitle - op title extension, e.g. [ + ]
+     * @name CABLES.Op#setUiAttrib
+     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @function
+     */
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
         if(!this.uiAttribs)this.uiAttribs={};
@@ -110,7 +122,6 @@ CABLES.Op = function()
             this.uiAttribs[p]=newAttribs[p];
         }
         
-        // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
         this.fireEvent("onUiAttribsChange",newAttribs);
     };
 
@@ -330,6 +341,7 @@ CABLES.Op = function()
      * create output value port
      * @name CABLES.Op#outValue
      * @param {string} name
+     * @param {number} default value
      * @return {CABLES.Port}
      * @function
      */

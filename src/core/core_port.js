@@ -243,11 +243,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.getTypeString=function()
     {
-        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Value';
+        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Number';
         else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Function';
         else if(this.type==CABLES.OP_PORT_TYPE_OBJECT)return 'Object';
         else if(this.type==CABLES.OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
         else if(this.type==CABLES.OP_PORT_TYPE_ARRAY)return 'Array';
+        else if(this.type==CABLES.OP_PORT_TYPE_STRING)return 'String';
         else return 'Unknown';
     };
 
