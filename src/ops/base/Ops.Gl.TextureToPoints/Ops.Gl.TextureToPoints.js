@@ -98,6 +98,41 @@ function updatePixels ()
         }
     }
 
+    // var off=14;
+    // var offy=15;
+    // var x=0;
+    // var y=0;
+    // while(ind<num*3)
+    // {
+
+    //     count++;
+    //     if(count>num*3*100)return;
+    //     x+=off;
+    //     y+=offy;
+    //     if(x>realTexture.width || y>realTexture.height)
+    //     {
+
+    //         off=off-(Math.random()*4-2);
+    //         offy=offy-(Math.random()*4-2);
+    //         x=off;
+    //         y=offy;
+    //     }
+
+    //     x=Math.abs(Math.floor(x));
+    //     y=Math.abs(Math.floor(y));
+
+    //     var intens=pixelData[(x+(y*realTexture.width))*NUM_COL_CHANNELS+colChanOffset];
+
+    //     if(intens>10)
+    //     {
+    //         points[ind++]=((x*pixelStepX)-(offsetX));
+    //         points[ind++]=((y*pixelStepY)-(offsetY));
+
+    //         if(colChanOffset<4) points[ind++]=(intens/255);
+    //         else points[ind++]=0;
+    //     }
+    // }
+
     outPointsNum.set(ind/3);
     outPoints.set(null);
     outPoints.set(points);

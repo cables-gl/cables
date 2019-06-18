@@ -32,5 +32,32 @@
             }
         ],
         "name": "Ops.Array.ArrayLogicArray"
+    },
+    "summary": "Performs logical comparison operations on two arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayLogic"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array 0 in"
+            },
+            {
+                "name": "array 1",
+                "text": "Array 1 in"
+            },
+            {
+                "name": "Comparison mode",
+                "text": "Comparison mode"
+            },
+            {
+                "name": "Array result",
+                "text": "Array out"
+            }
+        ]
     }
 }
