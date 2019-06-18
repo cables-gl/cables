@@ -14,18 +14,26 @@
         ],
         "name": "Ops.Vars.SetVariable"
     },
-    "summary": "set a variable value",
+    "summary": "set a variable number",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name"
+            },
+            {
+                "name": "Value",
+                "text": "Number in"
+            }
+        ]
     },
     "authorName": "pandur",
     "id": "b0190d08-82f6-45b2-bc0c-b70a3257ea92",
     "created": 1519228504479,
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": [
-        "Ops.Vars.Variable"
+        "Ops.Vars.VarGetNumber"
     ],
     "changelog": [
         {
@@ -33,5 +41,6 @@
             "author": "pandur",
             "date": 1560418435802
         }
-    ]
+    ],
+    "youtubeids": []
 }

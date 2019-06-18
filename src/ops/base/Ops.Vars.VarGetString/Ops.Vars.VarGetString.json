@@ -31,11 +31,20 @@
         "name": "Ops.Vars.VariableString"
     },
     "summary": "String variable getter",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name"
+            },
+            {
+                "name": "Value",
+                "text": "String out"
+            }
+        ]
+    },
+    "youtubeids": []
 }

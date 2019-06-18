@@ -4,7 +4,6 @@
     "authorName": "pandur",
     "created": 1543861514673,
     "summary": "Converts a hex color like `#ff0000` to number values",
-    "youtubeid": "",
     "docs": {
         "ports": [
             {
@@ -47,5 +46,11 @@
             }
         ],
         "name": "Ops.Color.HexToRGB2"
-    }
+    },
+    "issues": "",
+    "collections": [
+        "converter"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -39,7 +39,7 @@
                 "name": "values"
             }
         ],
-        "name": "Ops.Array.ArraySetValue3x"
+        "name": "Ops.Array.SetNumbersArray3"
     },
     "summary": "set three values at position index in an array",
     "docs": {
@@ -88,6 +88,51 @@
             "message": "Ops.Array.ArraySetValue3x renamed to Ops.Array.SetNumbersArray3",
             "author": "pandur",
             "date": 1560416384486
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506082726
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506087485
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506090817
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506091192
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506091524
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506091772
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506091996
+        },
+        {
+            "message": "fixed - float values on the index are now converted to integers",
+            "author": "andro",
+            "date": 1560506092257
+        },
+        {
+            "message": "aaa",
+            "author": "pandur",
+            "date": 1560506136993
         }
     ]
 }

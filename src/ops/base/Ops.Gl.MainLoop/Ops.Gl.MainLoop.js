@@ -4,6 +4,7 @@ const width=op.outValue("width");
 const height=op.outValue("height");
 const reduceLoadingFPS=op.inValueBool("Reduce FPS loading");
 const clear=op.inValueBool("Clear",true);
+const clearAlpha=op.inValueBool("ClearAlpha",true);
 const fullscreen=op.inValueBool("Fullscreen Button",false);
 const active=op.inValueBool("Active",true);
 const hdpi=op.inValueBool("Hires Displays",false);
@@ -190,6 +191,16 @@ function render(time)
 
 
     // cgl.printError('mainloop end');
+
+
+    if(clearAlpha.get())
+    {
+        cgl.gl.clearColor(1, 1, 1, 1);
+        cgl.gl.colorMask(false, false, false, true);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
+        cgl.gl.colorMask(true, true, true, true);
+    }
+
 
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;

@@ -3,12 +3,12 @@
     "authorName": "tim",
     "id": "594105c8-1fdb-4f3c-bbd5-29b9ad6b33e0",
     "created": 1519832716109,
-    "summary": "Let’s a value through only if control bool is true, like a gate",
+    "summary": "Let’s a number through only if control bool is true, like a gate",
     "docs": {
         "ports": [
             {
                 "name": "Value In",
-                "text": "The value to let through"
+                "text": "The number to let through"
             },
             {
                 "name": "Pass Through",
@@ -39,12 +39,15 @@
         ],
         "name": "Ops.Value.ValueRelay"
     },
-    "youtubeid": "",
     "changelog": [
         {
             "message": "Ops.Value.Gate renamed to Ops.Value.GateNumber",
             "author": "pandur",
             "date": 1560416939855
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

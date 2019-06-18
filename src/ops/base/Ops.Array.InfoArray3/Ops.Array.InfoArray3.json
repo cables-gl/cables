@@ -64,9 +64,9 @@
         ],
         "name": "Ops.Array.Array3xAnalyze"
     },
-    "summary": "min,max and average values of an array3x",
+    "summary": "min,max and average values of an array3",
     "collections": [
-        "datainfo"
+        "dataInfo"
     ],
     "relatedops": [
         "Ops.Array.ArrayAnalyze"

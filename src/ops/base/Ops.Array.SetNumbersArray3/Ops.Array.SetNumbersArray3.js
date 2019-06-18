@@ -7,23 +7,16 @@ const exe=op.inTriggerButton("exe"),
     value3=op.inValueFloat("Value 3"),
     values=op.outArray("values");
 
-function updateIndex()
-{
-    if(exe.isLinked())return;
-    update();
-}
 function update()
 {
     if(!array.get())return;
-    array.get()[index.get()*3+0]=value1.get();
-    array.get()[index.get()*3+1]=value2.get();
-    array.get()[index.get()*3+2]=value3.get();
+    const idx=Math.abs(Math.floor(index.get()));
+    array.get()[idx*3+0]=value1.get();
+    array.get()[idx*3+1]=value2.get();
+    array.get()[idx*3+2]=value3.get();
 
     values.set(null);
     values.set(array.get());
 }
 
-// index.onChange=updateIndex;
-// array.onChange=updateIndex;
-// value.onChange=update;
 exe.onTriggered=update;

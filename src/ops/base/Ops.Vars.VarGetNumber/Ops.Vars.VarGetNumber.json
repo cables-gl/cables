@@ -16,14 +16,22 @@
         ],
         "name": "Ops.Vars.Variable"
     },
-    "summary": "read a variable value",
+    "summary": "read a variable number",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name"
+            },
+            {
+                "name": "Value",
+                "text": "Number out"
+            }
+        ]
     },
     "authorName": "pandur",
     "id": "1b9c4504-d69a-43c2-b747-8ca795a8950f",
     "created": 1548885174898,
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -35,5 +43,6 @@
             "author": "pandur",
             "date": 1560418347970
         }
-    ]
+    ],
+    "youtubeids": []
 }

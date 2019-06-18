@@ -46,7 +46,10 @@ function doRender()
     }
 
     if(needsRebuild || !mesh)rebuild();
-    if(mesh) mesh.render(cgl.getShader());
+
+    var verts=arr.get();
+
+    if(verts && verts.length>0 && mesh) mesh.render(cgl.getShader());
 }
 
 function reset()
@@ -75,11 +78,11 @@ function rebuild()
     var verts=arr.get();
     if(!verts || verts.length==0)
     {
-        mesh=null;
+        // mesh=null;
         return;
     }
 
-    geom.clear();
+    // geom.clear();
     var num=verts.length/3;
     num=Math.abs(Math.floor(num));
 
@@ -116,8 +119,8 @@ function rebuild()
         geom.setTexCoords(texCoords);
         geom.verticesIndices=[];
 
-        if(mesh)mesh.dispose();
-        mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+        // if(mesh)mesh.dispose();
+        if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);

@@ -74,5 +74,13 @@
     "relatedops": [
         "Ops.Gl.Shader.PointMaterial",
         "Ops.Gl.Geometry.GeometryPoints"
+    ],
+    "todos": [
+        {
+            "message": "improved performance by rebuilding mesh less often",
+            "author": "pandur",
+            "id": "decb1b63-7f07-4dab-a96a-8f6d7936ed67",
+            "date": 1560669928210
+        }
     ]
 }

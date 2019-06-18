@@ -20,6 +20,11 @@
             },
             {
                 "type": "0",
+                "name": "ClearAlpha",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Fullscreen Button",
                 "subType": "boolean"
             },
@@ -91,5 +96,12 @@
                 "text": "height of the canvas/renderer area"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "added clear alpha option",
+            "author": "pandur",
+            "date": 1560684236098
+        }
+    ]
 }

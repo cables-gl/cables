@@ -23,5 +23,23 @@
             "author": "pandur",
             "date": 1560418836330
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Vars.VarGetArray"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Variable",
+                "text": "Variable name assigned to op"
+            }
+        ]
+    }
 }
