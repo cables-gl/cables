@@ -10,6 +10,9 @@ var height=op.outValue("height");
 var loading=op.outValue("loading");
 var ratio=op.outValue("Aspect Ratio");
 
+
+op.setPortGroup("Size",[width,height]);
+
 unpackAlpha.hidePort();
 
 op.toWorkPortsNeedToBeLinked(textureOut);
