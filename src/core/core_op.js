@@ -208,7 +208,10 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueFloat=CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+    CABLES.Op.prototype.inValueFloat= // old
+    CABLES.Op.prototype.inValue= // old
+    CABLES.Op.prototype.inFloat=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a boolean input port, displayed as a checkbox
@@ -218,7 +221,9 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+    CABLES.Op.prototype.inValueBool= // old
+    CABLES.Op.prototype.inBool=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a String value input port
@@ -267,7 +272,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueSelect= // old
+    CABLES.Op.prototype.inDropDown=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a integer input port
@@ -277,7 +283,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueInt= //old
+    CABLES.Op.prototype.inInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a file input port
@@ -325,7 +332,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueSlider= //old
+    CABLES.Op.prototype.inFloatSlider=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
     /**
@@ -335,7 +343,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outFunction=CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outFunction= //old
+    CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output value port
@@ -345,7 +354,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValue=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outValue= //old
+    CABLES.Op.prototype.outNumber= function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output boolean port
@@ -354,7 +364,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValueBool=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
+    CABLES.Op.prototype.outValueBool= //old
+    CABLES.Op.prototype.outBool=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
 
     /**
      * create output string port
