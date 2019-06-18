@@ -1,0 +1,49 @@
+{
+    "id": "c3b01c76-a300-44d3-8e1a-c8ae7a776463",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1560858958571
+        }
+    ],
+    "authorName": "cables",
+    "created": 1560859040306,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MIDI Event In",
+                "group": "MIDI"
+            },
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "group": "MIDI",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "learn",
+                "group": "MIDI"
+            },
+            {
+                "type": "0",
+                "name": "Transpose Amount",
+                "group": "Transpose",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.User.cables.MidiTranspose"
+    }
+}
