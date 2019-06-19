@@ -12,9 +12,9 @@ function getMIDINote(dataByte1LSB) {
 }
 
 function getNoteIndexFromMIDINote(midiNote) {
-    if (midiNote === 'NO NOTE') return null;
-    const string = midiNote.split('- ')[1];
-    return Number(string);
+  if (midiNote === 'NO NOTE') return null;
+  const string = midiNote.split('- ')[1];
+  return Number(string);
 }
 const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
 
@@ -35,6 +35,9 @@ const normalizeDropdown = op.inValueSelect(
 const learn = op.inTriggerButton('learn');
 const reset = op.inTriggerButton('reset');
 
+op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
+op.setPortGroup('Notes', [noteStartDropdown, noteEndDropdown, normalizeDropdown]);
+
 /* OUT */
 const eventOut = op.outObject('Event');
 const triggerOut = op.outTrigger('Trigger Out');
@@ -42,6 +45,8 @@ const noteIndexOut = op.outValue('Current Note');
 const velocityOut = op.outValue('Velocity');
 const gateOut = op.outValueBool('Gate');
 
+op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
+op.setPortGroup('Notes Out', [noteIndexOut, velocityOut, gateOut]);
 
 noteStartDropdown.set(0);
 noteEndDropdown.set(0);
@@ -51,7 +56,7 @@ let learning = false;
 
 learn.onTriggered = () => {
   if (learnedNotesIn.get().length > 0) {
-      learnedNotesIn.set([]);
+    learnedNotesIn.set([]);
   }
   learning = true;
 };
@@ -64,28 +69,28 @@ reset.onTriggered = () => {
 };
 
 noteStartDropdown.onChange = () => {
-    var learnedNotes = learnedNotesIn.get();
-    learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
-        if (learnedNotes.length === 2) {
-            learnedNotes.sort((a, b) => a - b);
-            const [start, end] = learnedNotes;
-            noteStartDropdown.set(getMIDINote(start));
-            noteEndDropdown.set(getMIDINote(end));
-        }
-    learnedNotesIn.set(learnedNotes);
-}
+  var learnedNotes = learnedNotesIn.get();
+  learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
+  if (learnedNotes.length === 2) {
+    learnedNotes.sort((a, b) => a - b);
+    const [start, end] = learnedNotes;
+    noteStartDropdown.set(getMIDINote(start));
+    noteEndDropdown.set(getMIDINote(end));
+  }
+  learnedNotesIn.set(learnedNotes);
+};
 
 noteEndDropdown.onChange = () => {
-    var learnedNotes = learnedNotesIn.get();
-    learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
-        if (learnedNotes.length === 2) {
-            learnedNotes.sort((a, b) => a - b);
-            const [start, end] = learnedNotes;
-            noteStartDropdown.set(getMIDINote(start));
-            noteEndDropdown.set(getMIDINote(end));
-        }
-    learnedNotesIn.set(learnedNotes);
-}
+  var learnedNotes = learnedNotesIn.get();
+  learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
+  if (learnedNotes.length === 2) {
+    learnedNotes.sort((a, b) => a - b);
+    const [start, end] = learnedNotes;
+    noteStartDropdown.set(getMIDINote(start));
+    noteEndDropdown.set(getMIDINote(end));
+  }
+  learnedNotesIn.set(learnedNotes);
+};
 
 inEvent.onChange = () => {
   const event = inEvent.get();
@@ -143,14 +148,13 @@ inEvent.onChange = () => {
         noteIndexOut.set(noteIndex);
         triggerOut.trigger();
 
-        if (normalizeDropdown.get() === '0 to 1'){
-            // (max'-min')/(max-min)*(value-min)+min'
-            velocityOut.set(1 / 126 * (velocity - 1));
-        }
-        else if (normalizeDropdown.get() === '-1 to 1') {
-            // (max'-min')/(max-min)*(value-min)+min'
-            const normalizedValue = 2 / 126 * (velocity - 1) - 1;
-            velocityOut.set(normalizedValue);
+        if (normalizeDropdown.get() === '0 to 1') {
+          // (max'-min')/(max-min)*(value-min)+min'
+          velocityOut.set((1 / 126) * (velocity - 1));
+        } else if (normalizeDropdown.get() === '-1 to 1') {
+          // (max'-min')/(max-min)*(value-min)+min'
+          const normalizedValue = (2 / 126) * (velocity - 1) - 1;
+          velocityOut.set(normalizedValue);
         } else if (normalizeDropdown.get() === 'none') velocityOut.set(velocity);
       }
     }
