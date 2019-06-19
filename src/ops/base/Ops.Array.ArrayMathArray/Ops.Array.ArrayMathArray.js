@@ -4,7 +4,7 @@
 //is given in the panel
 const inArray_0 = op.inArray("array 0");
 const inArray_1 = op.inArray("array 1");
-const mathSelect = op.inValueSelect("Math function",['+','-','*','/','%','min','max'],'+');
+const mathSelect = op.inSwitch("Math function",['+','-','*','/','%','min','max'],'+');
 const outArray = op.outArray("Array result");
 
 //cache for errors
