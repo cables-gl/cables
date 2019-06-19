@@ -6,22 +6,32 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note",
+                "group": "Note",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Normalize Velocity",
+                "group": "Note",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Gate",
+                "group": "Note",
+                "subType": "boolean"
             },
             {
                 "type": "1",

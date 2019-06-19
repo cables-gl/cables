@@ -12,6 +12,8 @@ var learning = false;
 const learn = op.inTriggerButton('Learn');
 const resetIn = op.inTriggerButton('Panic');
 
+op.setPortGroup('Device Select', [deviceSelect]);
+op.setPortGroup('', [learn, resetIn]);
 /* OPS */
 const opPrefix = 'Ops.Devices.Midi.Midi';
 const OPS = {
@@ -28,7 +30,7 @@ const OUTPUT_KEYS = [
   // "Channel Pressure",
   // "Poly Key Pressure",
   'NRPN',
-  //'SysEx',
+  // 'SysEx',
   // "Pitchbend",
   'Clock',
 ];
@@ -42,7 +44,11 @@ const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) => {
   return acc;
 }, {});
 
-// op.setPortGroup('Message Events', Object.keys(OUTPUTS).map(x => OUTPUTS[x]));
+op.setPortGroup('MIDI Event', [OUTPUTS.Event]);
+op.setPortGroup(
+  'MIDI Event by Type',
+  Object.keys(OUTPUTS).map(key => key !== 'Event' && OUTPUTS[key]),
+);
 
 /* CONSTANTS */
 /* http://www.indiana.edu/~emusic/etext/MIDI/chapter3_MIDI3.shtml */
@@ -341,8 +347,8 @@ if (navigator.requestMIDIAccess) {
 resetIn.onTriggered = () => {
   if (!outputDevice) return;
   for (let i = 0; i < 12; i += 1) {
-            outputDevice.send( [0x90, i, 0] );
-            outputDevice.send( [0xb0, i, 0] );
+    outputDevice.send([0x90, i, 0]);
+    outputDevice.send([0xb0, i, 0]);
   }
 };
 

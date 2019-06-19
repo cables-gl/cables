@@ -7,11 +7,20 @@ const ccIndexDropdown = op.inValueInt('CC Index', 0);
 const normalizeDropdown = op.inValueSelect('Normalize', ['none', '0 to 1', '-1 to 1'], 'none');
 const learn = op.inTriggerButton('learn');
 const clear = op.inTriggerButton('clear');
+
+op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
+op.setPortGroup('CC', [ccIndexDropdown, normalizeDropdown]);
+op.setPortGroup('', [learn, clear]);
+
 /* OUT */
 const eventOut = op.outObject('Event');
+const triggerOut = op.outTrigger('Trigger Out');
 const ccIndexOut = op.outValue('CC Index Out');
 const ccValueOut = op.outValue('CC Value Out');
-const triggerOut = op.outTrigger("Trigger Out");
+
+op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
+op.setPortGroup('CC Out', [ccIndexOut, ccValueOut]);
+
 ccIndexDropdown.set(0);
 midiChannelDropdown.set(1);
 normalizeDropdown.set(normalizeDropdown.get('none'));

@@ -7,6 +7,7 @@
             {
                 "type": "0",
                 "name": "Device",
+                "group": "Device Select",
                 "subType": "string"
             },
             {
@@ -40,7 +41,7 @@
                 "name": "Clock"
             }
         ],
-        "name": "Ops.Devices.Midi.MidiInputDevice2"
+        "name": "Ops.Devices.Midi.MidiInputDevice_v2"
     },
     "summary": "connect to MIDI device output port",
     "issues": "",
