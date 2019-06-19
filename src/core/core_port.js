@@ -77,8 +77,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
  * @type Function
  */
 
-
-
 {
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
