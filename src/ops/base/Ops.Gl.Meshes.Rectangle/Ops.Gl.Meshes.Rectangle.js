@@ -9,7 +9,7 @@ var pivotY=op.inSwitch("pivot y",["top","center","bottom"]);
 
 var nColumns=op.inValueInt("num columns",1);
 var nRows=op.inValueInt("num rows",1);
-var axis=op.inValueSelect("axis",["xy","xz"],"xy");
+var axis=op.inSwitch("axis",["xy","xz"],"xy");
 
 var active=op.inValueBool('Active',true);
 

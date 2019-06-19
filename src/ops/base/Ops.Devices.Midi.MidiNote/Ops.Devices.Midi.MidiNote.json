@@ -22,10 +22,9 @@
                 "subType": "string"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Normalize Velocity",
-                "group": "Note",
-                "subType": "string"
+                "group": "Note"
             },
             {
                 "type": "0",

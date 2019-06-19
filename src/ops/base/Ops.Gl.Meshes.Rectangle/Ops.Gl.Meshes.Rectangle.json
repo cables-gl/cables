@@ -41,9 +41,8 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "axis",
-                "subType": "string"
+                "type": "5",
+                "name": "axis"
             },
             {
                 "type": "0",

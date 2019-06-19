@@ -4,7 +4,7 @@ const MIDIChannels = Array.from(Array(16).keys(), i => i + 1);
 const inEvent = op.inObject('MIDI Event In');
 const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
 const ccIndexDropdown = op.inValueInt('CC Index', 0);
-const normalizeDropdown = op.inValueSelect('Normalize', ['none', '0 to 1', '-1 to 1'], 'none');
+const normalizeDropdown = op.inSwitch('Normalize', ['none', '0 to 1', '-1 to 1'], 'none');
 const learn = op.inTriggerButton('learn');
 const clear = op.inTriggerButton('clear');
 

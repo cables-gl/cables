@@ -22,10 +22,9 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Normalize",
-                "group": "CC",
-                "subType": "string"
+                "group": "CC"
             },
             {
                 "type": "1",

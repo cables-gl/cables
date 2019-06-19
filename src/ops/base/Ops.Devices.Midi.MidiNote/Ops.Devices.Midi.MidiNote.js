@@ -17,7 +17,7 @@ const noteValues = Array.from(Array(128).keys(), key => getMIDINote(key));
 const inEvent = op.inObject('MIDI Event In');
 const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
 const noteDropdown = op.inValueSelect('Note', noteValues, 'none');
-const normalizeDropdown = op.inValueSelect(
+const normalizeDropdown = op.inSwitch(
   'Normalize Velocity',
   ['none', '0 to 1', '-1 to 1'],
   'none',
