@@ -3,7 +3,7 @@ const useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PO
 const width=op.inValueInt("width");
 const height=op.inValueInt("height");
 
-const tfilter=op.inValueSelect("filter",['nearest','linear','mipmap'],"linear");
+const tfilter=op.inSwitch("filter",['nearest','linear','mipmap'],"linear");
 const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat']);
 const fpTexture=op.inValueBool("HDR");
 

@@ -24,10 +24,9 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "filter",
-                "group": "Texture Settings",
-                "subType": "string"
+                "group": "Texture Settings"
             },
             {
                 "type": "0",

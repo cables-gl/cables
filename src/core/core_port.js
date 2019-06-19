@@ -165,6 +165,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                 {
                     try
                     {
+                        
                         this.value=v;
                         this.forceChange();
                     }

@@ -1,5 +1,5 @@
 var filename=op.inFile("file");
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
+var tfilter=op.inSwitch("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 var flip=op.inValueBool("flip",false);
 var unpackAlpha=op.inValueBool("unpackPreMultipliedAlpha",false);
