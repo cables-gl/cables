@@ -1,6 +1,6 @@
 
 ## Class Variable
 
-### setValue(name [String] name of value ,value)
+### setValue(**name** [String] *name of value* ,value)
 
 returns number;
