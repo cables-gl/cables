@@ -77,8 +77,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
  * @type Function
  */
 
-
-
 {
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
@@ -287,8 +285,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.removeLinks=function()
     {
+        
+        var count=0;
         while(this.links.length>0)
         {
+            count++;
+            if(count>5000)
+            {
+                console.warn('could not delete links... / infinite loop');
+                this.links.length=0;
+                break;
+            }
             this.links[0].remove();
         }
     };

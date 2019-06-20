@@ -500,7 +500,7 @@ CABLES.Op = function()
     CABLES.Op.prototype.removeLinks=function()
     {
         for(var i=0;i<this.portsIn.length;i++) this.portsIn[i].removeLinks();
-        for(var ipo in this.portsOut) this.portsOut[ipo].removeLinks();
+        for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
     };
 
     CABLES.Op.prototype.countFittingPorts=function(otherPort)
