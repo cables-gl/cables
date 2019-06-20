@@ -1,0 +1,51 @@
+{
+    "id": "c4ed075b-c897-4788-9cc0-2df638671f67",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1555057855316
+        },
+        {
+            "message": "Ops.Bodymovin.LottieSVGPlayer renamed to Ops.Lottie.LottieSVGPlayer",
+            "author": "pandur",
+            "date": 1560783156915
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1555057857873,
+    "libs": [
+        "lottie_svg.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            },
+            {
+                "type": "2",
+                "name": "JSON Data"
+            },
+            {
+                "type": "0",
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.LottieSVGPlayer"
+    },
+    "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
