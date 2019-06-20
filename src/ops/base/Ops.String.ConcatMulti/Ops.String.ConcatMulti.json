@@ -1,0 +1,65 @@
+{
+    "id": "21d3dcc6-3c5b-4e94-97dc-ef7720e9e00d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561018699762
+        }
+    ],
+    "authorName": "andro",
+    "created": 1561018707477,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "add spaces",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "new lines",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "string 0"
+            },
+            {
+                "type": "5",
+                "name": "string 1"
+            },
+            {
+                "type": "5",
+                "name": "string 2"
+            },
+            {
+                "type": "5",
+                "name": "string 3"
+            },
+            {
+                "type": "5",
+                "name": "string 4"
+            },
+            {
+                "type": "5",
+                "name": "string 5"
+            },
+            {
+                "type": "5",
+                "name": "string 6"
+            },
+            {
+                "type": "5",
+                "name": "string 7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "concat string"
+            }
+        ],
+        "name": "Ops.String.ConcatMulti"
+    }
+}
