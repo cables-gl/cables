@@ -1,0 +1,31 @@
+{
+    "id": "9ab49d2c-b4e4-4fc2-9e6e-8e664e094369",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561021078579
+        }
+    ],
+    "authorName": "andro",
+    "created": 1561021084385,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array to sort"
+            },
+            {
+                "type": "5",
+                "name": "Sorting mode"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Sorted array"
+            }
+        ],
+        "name": "Ops.Array.SortArray"
+    }
+}
