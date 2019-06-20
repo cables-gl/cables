@@ -1,5 +1,4 @@
-
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 
 op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
@@ -28,15 +27,14 @@ function removeModule()
     shader=null;
 }
 
-
 op.render.onLinkChanged=removeModule;
 
 op.render.onTriggered=function()
 {
     if(!cgl.getShader())
     {
-         op.trigger.trigger();
-         return;
+        op.trigger.trigger();
+        return;
     }
 
     if(CABLES.UI && gui.patch().isCurrentOp(op))

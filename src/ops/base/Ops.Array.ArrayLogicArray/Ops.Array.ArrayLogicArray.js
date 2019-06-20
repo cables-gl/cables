@@ -50,6 +50,7 @@ function onFilterChange()
         else if(mathSelectValue === '!=pass') selectIndex = LOGIC_NOT_EQUAL_PASS;
 
     update();
+    op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
 function update()

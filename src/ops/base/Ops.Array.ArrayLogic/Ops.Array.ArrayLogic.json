@@ -12,9 +12,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Comparison mode",
-                "subType": "string"
+                "type": "5",
+                "name": "Comparison mode"
             }
         ],
         "portsOut": [

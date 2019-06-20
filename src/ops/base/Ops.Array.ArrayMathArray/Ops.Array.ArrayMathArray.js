@@ -35,6 +35,7 @@ function onFilterChange()
     else if(mathSelectValue === 'min') selectIndex = MATH_FUNC_MIN;
     else if(mathSelectValue === 'max') selectIndex = MATH_FUNC_MAX;
     update();
+    op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
 function update()
