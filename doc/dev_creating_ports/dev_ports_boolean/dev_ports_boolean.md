@@ -16,10 +16,10 @@ This will also create a checkbox which can be clicked<br>
 "use strict";
 
 //Create a input port of the type Boolean
-const inBoolean = op.inValueBool("Boolean in");
+const inBoolean = op.inBool("Boolean in");
 
 //Create a output port of the type value
-const outBoolean = op.outValueBool("Boolean out");
+const outBoolean = op.outBool("Boolean out");
 
 //when input port changes call the function 'update'
 inBoolean.onChange = update;
