@@ -5,12 +5,16 @@ const
     numPoints=op.inValueInt("Num Points"),
     outGeom=op.outObject("Geometry"),
     pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
-    seed=op.inValue("Seed");
+    seed=op.inValue("Seed"),
+    vertCols=op.inArray("Vertex Colors");
 
 const cgl=op.patch.cgl;
 
 pTexCoordRand.onChange=updateRandTexCoords;
-seed.onChange=arr.onChange=reset;
+seed.onChange=
+    arr.onChange=
+    vertCols.onChange=
+    reset;
 numPoints.onChange=updateNumVerts;
 
 op.toWorkPortsNeedToBeLinked(arr,exe);
@@ -23,6 +27,7 @@ var mesh=null;
 const geom=new CGL.Geometry("pointcloudfromarray");
 var texCoords=[];
 var needsRebuild=true;
+var showingError=false;
 
 function doRender()
 {
@@ -33,7 +38,7 @@ function doRender()
         {
             if(!hasError)
             {
-                op.uiAttr( { 'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
+                op.uiAttr({'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
                 hasError=true;
             }
             return;
@@ -117,9 +122,29 @@ function rebuild()
     {
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
+
+        if(vertCols.get())
+        {
+            if(!showingError && vertCols.get().length!=num*4)
+            {
+                op.uiAttr({error:"Color array does not have the correct length! (should be "+num*4+")"});
+                showingError = true;
+                mesh=null;
+                return;
+            }
+
+            geom.vertexColors=vertCols.get();
+        }
+        else geom.vertexColors=[];
+
+        if(showingError)
+        {
+            showingError = false;
+            op.uiAttr({error:null});
+        }
+
         geom.verticesIndices=[];
 
-        // if(mesh)mesh.dispose();
         if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;

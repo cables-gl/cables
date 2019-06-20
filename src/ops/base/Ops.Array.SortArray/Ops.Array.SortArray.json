@@ -27,5 +27,31 @@
             }
         ],
         "name": "Ops.Array.SortArray"
+    },
+    "summary": "Sorts an array of numbers with one of two modes - ascending or descending",
+    "issues": "",
+    "collections": [
+        "sort"
+    ],
+    "relatedops": [
+        "Ops.Array.SortArray3",
+        "Ops.Array.SortArray3ByDistance"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array to sort",
+                "text": "Array in"
+            },
+            {
+                "name": "Sorting mode",
+                "text": "Sorting mode. Ascending or descending"
+            },
+            {
+                "name": "Sorted array",
+                "text": "Sorted array out"
+            }
+        ]
     }
 }

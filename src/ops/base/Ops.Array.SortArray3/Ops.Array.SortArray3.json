@@ -40,7 +40,9 @@
             }
         ]
     },
-    "collections": null,
+    "collections": [
+        "sort"
+    ],
     "issues": "",
     "relatedops": null,
     "youtubeids": [],

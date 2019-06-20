@@ -3,6 +3,11 @@ IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 
+#ifdef VERTEX_COLORS
+    IN vec3 attrVertColor;
+    OUT vec3 vertexColor;
+#endif
+
 OUT vec3 norm;
 #ifdef HAS_TEXTURES
     OUT vec2 texCoord;
@@ -33,7 +38,9 @@ void main()
     float psMul=sqrt(canvasWidth/canvasHeight)+0.00000000001;
     float sizeMultiply=1.0;
 
-
+    #ifdef VERTEX_COLORS
+        vertexColor=attrVertColor;
+    #endif
 
     #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;

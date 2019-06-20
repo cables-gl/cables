@@ -2,7 +2,6 @@ const arrayIn = op.inArray("Array to sort"),
     sortMode = op.inSwitch("Sorting mode",["Sort ascending","Sort descending"],"Sort ascending"),
     arrayOut = op.outArray("Sorted array");
 
-
 var arrOut = [];
 
 arrayIn.onChange = sortMode.onChange = update;

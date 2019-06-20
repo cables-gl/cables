@@ -31,7 +31,8 @@
         ]
     },
     "collections": [
-        "pointArrays"
+        "pointArrays",
+        "sort"
     ],
     "changelog": [
         {

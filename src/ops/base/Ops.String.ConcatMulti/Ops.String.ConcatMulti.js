@@ -11,13 +11,11 @@ newLinesCheckBox.onChange = update;
 addSpacesCheckBox.hidePort(true);
 newLinesCheckBox.hidePort(true);
 
-
 for(var i=0; i<8; i++)
 {
     var p=op.inString("string " + i);
     stringPorts.push(p);
     p.onChange = update;
-
 }
 
 function update()
@@ -25,7 +23,6 @@ function update()
     var str = "";
     var nl = "";
     var space = addSpacesCheckBox.get();
-
 
     for(var i=0; i<stringPorts.length; i++)
 

@@ -9,7 +9,6 @@
     ],
     "authorName": "andro",
     "created": 1561018707477,
-
     "layout": {
         "portsIn": [
             {
@@ -62,5 +61,60 @@
             }
         ],
         "name": "Ops.String.ConcatMulti"
+    },
+    "summary": "Joins multiple strings together",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.String.Concat_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "add spaces",
+                "text": "Adds a space to the end of each string"
+            },
+            {
+                "name": "new lines",
+                "text": "Adds a line break to the end of each string"
+            },
+            {
+                "name": "string 0",
+                "text": "String 0 in"
+            },
+            {
+                "name": "string 1",
+                "text": "String 1 in"
+            },
+            {
+                "name": "string 2",
+                "text": "String 2 in"
+            },
+            {
+                "name": "string 3",
+                "text": "String 3 in"
+            },
+            {
+                "name": "string 4",
+                "text": "String 4 in"
+            },
+            {
+                "name": "string 5",
+                "text": "String 5 in"
+            },
+            {
+                "name": "string 6",
+                "text": "String 6 in"
+            },
+            {
+                "name": "string 7",
+                "text": "String 7 in"
+            },
+            {
+                "name": "concat string",
+                "text": "Merged strings out"
+            }
+        ]
     }
 }
