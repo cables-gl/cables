@@ -11,15 +11,25 @@ var indexArray=[];
 inArr2.onChange=updateArr2;
 inArr1.onChange=updateArr1;
 
+
+
 function updateArr1()
 {
-    if(!inArr1.get())return;
+    if(!inArr1.get())
+    {
+        arrOut.set(null);
+        return;
+    }
     resultArr.length=inArr1.get().length;
 }
 
 function updateArr2()
 {
-    if(!inArr2.get())return;
+    if(!inArr2.get())
+    {
+        arrOut.set(null);
+        return;
+    }
 
     indexArray.length=Math.ceil(inArr2.get().length/3);
 
