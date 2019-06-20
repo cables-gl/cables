@@ -13,13 +13,13 @@
         "portsIn": [
             {
                 "type": "3",
-                "name": "Arry In xyz"
+                "name": "Array in"
             }
         ],
         "portsOut": [
             {
                 "type": "3",
-                "name": "Array out length of vector"
+                "name": "Array out"
             }
         ],
         "name": "Ops.Array.Array3VectorLength"

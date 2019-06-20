@@ -1,5 +1,5 @@
-const inArray=op.inArray("Arry In xyz"),
-        outArray=op.outArray("Array out length of vector"),
+const inArray=op.inArray("Array in"),
+        outArray=op.outArray("Array out"),
         newArr=[];
 
 outArray.set(newArr);
@@ -37,9 +37,10 @@ inArray.onChange=function()
         op.uiAttr({error:null});
     }
 
+    var vec = vec3.create();
+
     for(var i=0;i<newArr.length;i++)
     {
-        var vec = vec3.create();
         //get xyz components place into a vec3
         vec3.set(vec,arr[i*3+0],arr[i*3+1],arr[i*3+2]);
         //get length of vector and place into array- note single number !
