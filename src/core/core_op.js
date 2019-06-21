@@ -41,16 +41,22 @@ CABLES.Op = function()
     this.errors={};
     this._needsLinkedToWork=[];
     this._needsParentOp=null;
+    this._shortOpName='';
 
-    if(this.name)
+    if(arguments[1])
     {
-        this.name=this.name.split('.')[this.name.split('.').length-1]
 
-        if(this.name.indexOf(CABLES.OP_VERSION_PREFIX)>0)
+        
+        this._shortOpName=arguments[1].split('.')[arguments[1].split('.').length-1]
+
+        if(this._shortOpName.indexOf(CABLES.OP_VERSION_PREFIX)>0)
         {
-            var n=this.name.split(CABLES.OP_VERSION_PREFIX)[1]
-            this.name=this.name.substring(0,this.name.length - (CABLES.OP_VERSION_PREFIX+n).length);
+            var n=this._shortOpName.split(CABLES.OP_VERSION_PREFIX)[1]
+            this._shortOpName=this._shortOpName.substring(0,this._shortOpName.length - (CABLES.OP_VERSION_PREFIX+n).length);
         }
+
+        this.uiAttribs.title=this._shortOpName;
+        console.log('this._shortOpName',this._shortOpName);
     }
     // this.name=this.name.split('.')[this.name.split('.').length-1]
     // const a=this.name.substring(this.name.length - 1, this.name.length);
@@ -127,7 +133,12 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.getName=function()
     {
-        return this.name;
+        if(this.uiAttribs.name) return this.uiAttribs.name;
+        else 
+        {
+            return this.objName.split(".")
+        }
+        // return this.name;
     };
 
     CABLES.Op.prototype.addOutPort=function(p)
@@ -529,16 +540,21 @@ CABLES.Op = function()
     CABLES.Op.prototype.getSerialized=function()
     {
         var op={};
-        op.name=this.getName();
-
-        var nameParts=this.objName.split('.');
-        if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
+        // op.name=this.getName();
+        // var nameParts=this.objName.split('.');
+        // if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
         if(this.opId) op.opId=this.opId;
         op.objName=this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
         
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
+
+        if(this.uiAttribs.title==this._shortOpName) delete this.uiAttribs.title;
+
+        if(this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working==true) delete this.uiAttribs.working;
+        if(this.uiAttribs.hasOwnProperty("subPatch") && this.uiAttribs.subPatch===0) delete this.uiAttribs.subPatch;
+
         op.portsIn=[];
         op.portsOut=[];
 
