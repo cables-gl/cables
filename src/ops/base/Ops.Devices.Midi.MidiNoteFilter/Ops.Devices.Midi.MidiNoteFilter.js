@@ -66,6 +66,7 @@ reset.onTriggered = () => {
   noteStartDropdown.set(0);
   noteEndDropdown.set(0);
   midiChannelDropdown.set(1);
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
 };
 
 noteStartDropdown.onChange = () => {

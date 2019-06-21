@@ -23,5 +23,24 @@
             }
         ],
         "name": "Ops.Array.Array3VectorLength"
+    },
+    "summary": "Returns the length of a vector from an array 3 ",
+    "issues": "",
+    "collections": [
+        "Vector"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in",
+                "text": "Array in "
+            },
+            {
+                "name": "Array out",
+                "text": "Array out "
+            }
+        ]
     }
 }

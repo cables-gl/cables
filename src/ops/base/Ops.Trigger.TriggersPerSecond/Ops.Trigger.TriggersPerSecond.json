@@ -19,6 +19,10 @@
     "docs": {
         "ports": [
             {
+                "name": "exe",
+                "text": "Trigger in "
+            },
+            {
                 "name": "cps",
                 "text": "Calls per second – how often `Exe` is being triggered by second"
             }
@@ -34,5 +38,9 @@
             "author": "pandur",
             "date": 1560411540542
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

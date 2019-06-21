@@ -18,9 +18,18 @@
         ],
         "name": "Ops.Value.TriggerOnChange"
     },
-    "summary": "triggers next everytime the input value changed",
+    "summary": "triggers every time the input value changed",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Value",
+                "text": "number in"
+            },
+            {
+                "name": "Next",
+                "text": "trigger out when number in changes"
+            }
+        ]
     },
     "todos": [
         {
@@ -36,5 +45,9 @@
             "author": "pandur",
             "date": 1560412383059
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

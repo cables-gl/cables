@@ -12,9 +12,10 @@ function getMIDINote(dataByte1LSB) {
 /* IN */
 const inEvent = op.inObject('MIDI Event In');
 const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
+const inTranspose = op.inInt('Transpose Amount', 0);
 const learn = op.inTriggerButton('learn');
 
-const inTranspose = op.inInt('Transpose Amount', 0);
+
 
 op.setPortGroup('MIDI', [inEvent, midiChannelDropdown, learn]);
 op.setPortGroup('Transpose', [inTranspose]);

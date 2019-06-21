@@ -8,10 +8,11 @@ const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
 const nrpnIndexDropdown = op.inValueInt('NRPN Index', 0);
 const normalizeDropdown = op.inValueSelect('Normalize', ['none', '0 to 1', '-1 to 1'], 'none');
 const learn = op.inTriggerButton('learn');
+const clear = op.inTriggerButton("clear");
 
 op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
 op.setPortGroup('NRPN', [nrpnIndexDropdown, normalizeDropdown]);
-op.setPortGroup('', [learn]);
+op.setPortGroup('', [learn, clear]);
 /* OUT */
 const eventOut = op.outObject('MIDI Event Out');
 const triggerOut = op.outTrigger('Trigger Out');
@@ -30,6 +31,12 @@ learn.onTriggered = () => {
   learning = true;
 };
 
+clear.onTriggered = () => {
+  nrpnIndexDropdown.set(0);
+  midiChannelDropdown.set(1);
+  normalizeDropdown.set(normalizeDropdown.get('none'));
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
+}
 var outValue;
 inEvent.onChange = () => {
   const event = inEvent.get();

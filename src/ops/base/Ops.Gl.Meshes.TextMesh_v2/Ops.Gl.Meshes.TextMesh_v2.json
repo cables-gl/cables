@@ -87,10 +87,70 @@
         ],
         "name": "Ops.Gl.Meshes.TextMesh3"
     },
-    "summary": "Draw text",
-    "youtubeid": "",
+    "summary": "Draws text onto a mesh",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Text",
+                "text": "String"
+            },
+            {
+                "name": "Scale",
+                "text": "Scale of text"
+            },
+            {
+                "name": "Font",
+                "text": "Font to use"
+            },
+            {
+                "name": "align",
+                "text": "Horizontal alignment of text `left,center,right`"
+            },
+            {
+                "name": "vertical align",
+                "text": "Vertical alignment of text `top,middle,bottom`"
+            },
+            {
+                "name": "Line Height",
+                "text": "Height of each line"
+            },
+            {
+                "name": "Letter Spacing",
+                "text": "Space between each letter"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            },
+            {
+                "name": "Font Available",
+                "text": "Reports if font is available with a zero or one"
+            }
+        ]
     },
     "collections": [
         "drawText"
@@ -102,5 +162,7 @@
             "author": "pandur",
             "date": 1560335690848
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

@@ -34,5 +34,30 @@
             }
         ],
         "name": "Ops.Math.Math"
+    },
+    "summary": "Allows different mathematical operations to be applied to two numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "number 0",
+                "text": "Number 0 in"
+            },
+            {
+                "name": "number 1",
+                "text": "Number 1 in"
+            },
+            {
+                "name": "math mode",
+                "text": "Select a math mode"
+            },
+            {
+                "name": "result",
+                "text": "Result out"
+            }
+        ]
     }
 }

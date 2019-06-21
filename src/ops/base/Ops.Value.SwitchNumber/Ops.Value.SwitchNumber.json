@@ -72,7 +72,16 @@
     },
     "summary": "switch between number values by index",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Index",
+                "text": "Index to get number from"
+            },
+            {
+                "name": "Result",
+                "text": "Number out"
+            }
+        ]
     },
     "changelog": [
         {
@@ -80,5 +89,9 @@
             "author": "pandur",
             "date": 1560335207192
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

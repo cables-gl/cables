@@ -8,6 +8,7 @@ var mulZ=op.inValue("Mul Z",1);
 var outArr=op.outArray("Result");
 
 var arr=[];
+
 mulY.onChange=mulX.onChange=mulZ.onChange=
 inArr.onChange=function()
 {
@@ -30,5 +31,5 @@ inArr.onChange=function()
     {
         outArr.set(null);
     }
-    
+
 };

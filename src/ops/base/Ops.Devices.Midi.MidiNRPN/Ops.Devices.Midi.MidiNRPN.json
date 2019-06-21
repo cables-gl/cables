@@ -30,6 +30,10 @@
             {
                 "type": "1",
                 "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "clear"
             }
         ],
         "portsOut": [
@@ -58,7 +62,7 @@
     "issues": "",
     "collections": null,
     "relatedops": [
-        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiInputDevice",
         "Ops.Devices.Midi.MidiClock",
         "Ops.Devices.Midi.MidiCC",
         "Ops.Devices.Midi.MidiNote",
@@ -90,20 +94,24 @@
                 "text": "press to automatically assign NRPN"
             },
             {
+                "name": "clear",
+                "text": "reset op to default state"
+            },
+            {
                 "name": "MIDI Event Out",
                 "text": "The out port for MIDI event"
             },
             {
+                "name": "Trigger Out",
+                "text": "triggers whenever an NRPN message is sent"
+            },
+            {
                 "name": "NRPN Index",
-                "text": "index output"
+                "text": "NRPN index"
             },
             {
                 "name": "NRPN Value",
                 "text": "value output"
-            },
-            {
-                "name": "Trigger Out",
-                "text": "triggers whenever an NRPN message is sent"
             }
         ]
     }

@@ -5,9 +5,8 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Mode select",
-                "subType": "string"
+                "type": "5",
+                "name": "Mode select"
             },
             {
                 "type": "0",
@@ -26,7 +25,7 @@
                 "name": "Array"
             }
         ],
-        "name": "Ops.Array.Array2"
+        "name": "Ops.Array.Array_v2"
     },
     "summary": "Fill array with one number or fill it with incrementing values ",
     "issues": "",
@@ -52,5 +51,12 @@
                 "text": "Array out"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "changed dropdown to switch",
+            "author": "andro",
+            "date": 1561108505721
+        }
+    ]
 }
