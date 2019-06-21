@@ -1,25 +1,17 @@
 const cgl=op.patch.cgl;
-
 var scene=new CABLES.Variable();
-
 cgl.frameStore.currentScene=null;
 
 var exe=op.inTrigger("Render");
 var filename=op.inFile("file",'3d json');
-
 var meshIndex=op.inValueInt("Mesh Index",0);
-
 var draw=op.inValueBool("Draw",true);
 var centerPivot=op.inValueBool("Center Mesh",true);
-
 var inSize=op.inValue("Size",1);
-
 var next=op.outTrigger("trigger");
 var geometryOut=op.outObject("Geometry");
-
 var merge=op.inValueBool("Merge",false);
-
-var inNormals=op.inValueSelect("Calculate Normals",["no","smooth","flat"],"no");
+var inNormals=op.inSwitch("Calculate Normals",["no","smooth","flat"],"no");
 var outScale=op.outValue("Scaling",1.0);
 
 var geom=null;
@@ -33,15 +25,16 @@ var vScale=vec3.fromValues(1,1,1);
 
 op.preRender=render;
 exe.onTriggered=render;
+
 filename.onChange=reload;
+inNormals.onChange=reload;
+
 centerPivot.onChange=setMeshLater;
 meshIndex.onChange=setMeshLater;
-inNormals.onChange=setMeshLater;
 merge.onChange=setMeshLater;
 
 inSize.onChange=updateScale;
 var needSetMesh=true;
-
 
 function calcNormals()
 {
@@ -51,9 +44,8 @@ function calcNormals()
         return;
     }
 
-    if(inNormals.get()=='no')reload();
     if(inNormals.get()=='smooth')geom.calculateNormals();
-    if(inNormals.get()=='flat')
+    else if(inNormals.get()=='flat')
     {
         geom.unIndex();
         geom.calculateNormals();
@@ -186,7 +178,7 @@ function setMesh()
     updateScale();
     updateInfo(geom);
 
-    calcNormals();
+    if(inNormals.get()!='no')calcNormals();
     geometryOut.set(geom);
 
     if(mesh)mesh.dispose();
