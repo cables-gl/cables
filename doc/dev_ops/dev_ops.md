@@ -9,7 +9,12 @@ Different port examples below.
 Floating point number ports in and out:
 ```javascript
 const inFloat = op.inFloat("float in");
-const outFloat = op.outNumber("float out");
+const outNumber = op.outNumber("number out");
+```
+Integer number ports in and out:
+```javascript
+const inInt = op.inFloat("int in");
+const outNumber = op.outNumber("number out");
 ```
 String ports in and out:
 ```javascript
