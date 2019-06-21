@@ -10,6 +10,9 @@ op.toWorkPortsNeedToBeLinked(render,trigger);
 
 
 
+
+
+
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.bindTextures=bindTextures;
@@ -53,10 +56,6 @@ const unib=new CGL.Uniform(shader,'f','b',b);
 const unia=new CGL.Uniform(shader,'f','a',a);
 
 op.setPortGroup("Color",[r,g,b,a]);
-
-
-
-
 
     // diffuse outTexture
 
@@ -102,7 +101,7 @@ op.setPortGroup("Color Texture",[diffuseTexture,colorizeTexture]);
 op.textureOpacity=op.inTexture("textureOpacity");
 op.textureOpacityUniform=null;
 
-op.alphaMaskSource=op.inValueSelect("Alpha Mask Source",["Alpha Channel","Luminance","R","G","B"],"Luminance");
+op.alphaMaskSource=op.inSwitch("Alpha Mask Source",["Luminance","R","G","B","A"],"Luminance");
 op.alphaMaskSource.onChange=updateAlphaMaskMethod;
 op.alphaMaskSource.setUiAttribs({greyout:true});
 

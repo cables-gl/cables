@@ -1,12 +1,12 @@
 
 // input ports
-var chromeFilePort = op.addInPort( new CABLES.Port( op, "Chrome File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var firefoxFilePort = op.addInPort( new CABLES.Port( op, "Firefox File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var safariFilePort = op.addInPort( new CABLES.Port( op, "Safari File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var ieFilePort = op.addInPort( new CABLES.Port( op, "IE <= 11 File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var edgeFilePort = op.addInPort( new CABLES.Port( op, "Edge File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var operaFilePort = op.addInPort( new CABLES.Port( op, "Opera File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
-var defaultFilePort = op.addInPort( new CABLES.Port( op, "Default File", CABLES.OP_PORT_TYPE_VALUE, { display: 'file', type: 'string', filter: null  } ));
+var chromeFilePort = op.inFile("Chrome File");
+var firefoxFilePort = op.inFile("Firefox File");
+var safariFilePort = op.inFile("Safari File");
+var ieFilePort = op.inFile("IE <= 11 File");
+var edgeFilePort = op.inFile("Edge File");
+var operaFilePort = op.inFile("Opera File");
+var defaultFilePort = op.inFile("Default File");
 
 // output port
 var outFile = op.outValueString("Browser Specific File");

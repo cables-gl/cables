@@ -26,6 +26,7 @@ setIndex();
 function update()
 {
     if(!valuePorts[oldIdx]) return;
+    if(!valuePorts[idx.get()]) return;
 
     resultTime1.set(valuePorts[oldIdx].get());
     resultTime2.set(valuePorts[idx.get()].get());
@@ -38,7 +39,7 @@ function setIndex()
     var now=(CABLES.now())/1000;
     var startTime=now;
     anim.clear();
-    
+
     if(oldIdx==-1)oldIdx=idx.get();
 
     anim.setValue(now,0);

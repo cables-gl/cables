@@ -1,0 +1,47 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "5f010aa8-971b-4697-ac64-cc871f94d381",
+    "created": 1513356658385,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "name": "Ops.Vars.GetVariableObject"
+    },
+    "summary": "Get a variable object",
+    "changelog": [
+        {
+            "message": "Ops.Vars.VariableObject renamed to Ops.Vars.VarGetObject",
+            "author": "pandur",
+            "date": 1560418607059
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Vars.VarSetObject"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Variable",
+                "text": "Variable name"
+            },
+            {
+                "name": "Object",
+                "text": "Object out"
+            }
+        ]
+    }
+}

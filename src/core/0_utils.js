@@ -416,7 +416,9 @@ CGL.getWheelSpeed=CGL.getWheelDelta=function(event)
     else
     {
         //firefox
-        var rawAmmount = event.deltaY ? event.deltaY : event.detail;
+        var d=event.deltaY;
+        if(event.shiftKey)d=event.deltaX;
+        var rawAmmount = d ? d : event.detail;
         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
         normalized*=-3;
     }

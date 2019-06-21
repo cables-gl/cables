@@ -20,5 +20,11 @@
             }
         ],
         "name": "Ops.Array.RandomWordsArray"
-    }
+    },
+    "issues": "",
+    "collections": [
+        "random"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

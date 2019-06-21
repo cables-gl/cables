@@ -6,32 +6,44 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "NRPN Index",
+                "group": "NRPN",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Normalize",
+                "group": "NRPN",
                 "subType": "string"
             },
             {
                 "type": "1",
                 "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "clear"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
                 "name": "MIDI Event Out"
+            },
+            {
+                "type": "1",
+                "name": "Trigger Out"
             },
             {
                 "type": "0",
@@ -42,10 +54,6 @@
                 "type": "0",
                 "name": "NRPN Value",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Trigger Out"
             }
         ],
         "name": "Ops.Devices.Midi.MidiNRPN"
@@ -54,7 +62,7 @@
     "issues": "",
     "collections": null,
     "relatedops": [
-        "Ops.Devices.Midi.MidiInputDevice2",
+        "Ops.Devices.Midi.MidiInputDevice",
         "Ops.Devices.Midi.MidiClock",
         "Ops.Devices.Midi.MidiCC",
         "Ops.Devices.Midi.MidiNote",
@@ -86,20 +94,24 @@
                 "text": "press to automatically assign NRPN"
             },
             {
+                "name": "clear",
+                "text": "reset op to default state"
+            },
+            {
                 "name": "MIDI Event Out",
                 "text": "The out port for MIDI event"
             },
             {
+                "name": "Trigger Out",
+                "text": "triggers whenever an NRPN message is sent"
+            },
+            {
                 "name": "NRPN Index",
-                "text": "index output"
+                "text": "NRPN index"
             },
             {
                 "name": "NRPN Value",
                 "text": "value output"
-            },
-            {
-                "name": "Trigger Out",
-                "text": "triggers whenever an NRPN message is sent"
             }
         ]
     }

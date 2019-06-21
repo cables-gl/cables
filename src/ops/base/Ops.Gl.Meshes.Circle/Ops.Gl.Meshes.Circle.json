@@ -42,9 +42,8 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "mapping",
-                "subType": "string"
+                "type": "5",
+                "name": "mapping"
             },
             {
                 "type": "0",

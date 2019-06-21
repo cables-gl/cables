@@ -6,26 +6,39 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note",
+                "group": "Note",
                 "subType": "string"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Normalize Velocity",
-                "subType": "string"
+                "group": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Gate",
+                "group": "Note",
+                "subType": "boolean"
             },
             {
                 "type": "1",
                 "name": "learn"
+            },
+            {
+                "type": "1",
+                "name": "clear"
             }
         ],
         "portsOut": [
@@ -63,7 +76,8 @@
         "Ops.Devices.Midi.MidiChord3",
         "Ops.Devices.Midi.MidiCC",
         "Ops.Devices.Midi.MidiNRPN",
-        "Ops.Devices.Midi.MidiClock"
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiTranspose"
     ],
     "youtubeids": [
         "eDlaFD_d5lc"
@@ -72,7 +86,7 @@
         "ports": [
             {
                 "name": "MIDI Event In",
-                "text": "Midi event in - must come from the midi device op"
+                "text": "Midi event in"
             },
             {
                 "name": "MIDI Channel",
@@ -87,8 +101,16 @@
                 "text": "Enable to normalize values from 0 to 1 or -1 to 1"
             },
             {
+                "name": "Toggle Gate",
+                "text": "When activated, playing a note turns the gate on. Playing it again turns it off."
+            },
+            {
                 "name": "learn",
                 "text": "Click and then press a midi note to automatically select it"
+            },
+            {
+                "name": "clear",
+                "text": "reset op to default state"
             },
             {
                 "name": "MIDI Event Out",
@@ -108,7 +130,7 @@
             },
             {
                 "name": "Gate",
-                "text": "True when the note is on else false."
+                "text": "True when the note is on else false. When toggle is activated, true when note comes in. False when note comes in again."
             }
         ]
     }

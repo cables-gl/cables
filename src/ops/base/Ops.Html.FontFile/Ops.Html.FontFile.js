@@ -19,7 +19,7 @@ function addStyle()
     if(filename.get() && fontname.get())
     {
         if(document.fonts) {
-            fontFaceObj = new FontFace(fontname.get(), 'url(' + filename.get() + ')');
+            fontFaceObj = new FontFace(fontname.get(), 'url(' + op.patch.getFilePath(String(filename.get()))+ ')');
             //console.log(fontFaceObj);
 
             // Add the FontFace to the FontFaceSet

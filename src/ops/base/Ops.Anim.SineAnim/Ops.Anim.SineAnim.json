@@ -28,6 +28,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "0",
                 "name": "result",
                 "subType": "number"
@@ -54,13 +58,24 @@
                 "text": "How small / big the values can become, setting it to `2` e.g. results in an output between `-2` and `2`"
             },
             {
+                "name": "Trigger out",
+                "text": "Trigger out"
+            },
+            {
                 "name": "result",
                 "text": "A value cycling between `-Amplitude` and `Amplitude`"
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added Trigger out port",
+            "author": "andro",
+            "date": 1561106388941
+        }
+    ],
+    "youtubeids": []
 }

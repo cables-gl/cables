@@ -2,6 +2,8 @@ const exe = op.inTrigger("Trigger in");
 const inArr1=op.inArray("Array 1");
 const inArr2=op.inArray("Array 2");
 const inArr3=op.inArray("Array 3");
+
+const exeOut = op.outTrigger("Trigger out");
 const outArr=op.outArray("Array out");
 const outNum=op.outValue("Num Points");
 
@@ -69,5 +71,7 @@ function update()
     outArr.set(null);
     outArr.set(arr);
     outNum.set(arr.length/3);
+
+    exeOut.trigger();
 }
 

@@ -2,6 +2,7 @@ const
     inConnection=op.inObject("Connection"),
     inObject=op.inObject("Object"),
     inSend=op.inTriggerButton("Send"),
+    inStringify=op.inBool("Send String",true),
     outSent=op.outValueBool("Sent");
 var connection=null;
 
@@ -21,7 +22,9 @@ inSend.onTriggered=function()
         // connection.send(JSON.stringify(inObject.get()));
 
 
-        connection.send(JSON.stringify(inObject.get()));
+        if(inStringify.get())connection.send(JSON.stringify(inObject.get()));
+            else connection.send(inObject.get());
+
         outSent.set(true);
     }
     else

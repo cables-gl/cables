@@ -1,0 +1,94 @@
+{
+    "authorName": "pandur",
+    "id": "6afe0f08-0f09-4a57-b43c-414db478dcf4",
+    "created": 1516049339061,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "Note Start",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Learn Start"
+            },
+            {
+                "type": "0",
+                "name": "Note End",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Learn End"
+            },
+            {
+                "type": "0",
+                "name": "Light",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Button Value",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Clear"
+            },
+            {
+                "type": "0",
+                "name": "enabled",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "Last Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Buttons",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Buttons"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiButtonArray"
+    },
+    "summary": "map state of multiple midi buttons to an array",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "x0mjo8XStzA",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiButtonArray renamed to Ops.Deprecated.Devices.Midi.MidiButtonArray",
+            "author": "pandur",
+            "date": 1560334381967
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "id": "7b32f8ad-ff4a-4634-927b-ede9955e3b53",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1554108320990
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1554108323765,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Acceleration X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Device.Mobile.ShakeGesture"
+    },
+    "summary": "Reads the accelerometer data from a mobile device",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

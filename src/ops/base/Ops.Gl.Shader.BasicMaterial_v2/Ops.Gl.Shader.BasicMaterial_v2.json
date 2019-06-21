@@ -49,10 +49,9 @@
                 "group": "Opacity"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Alpha Mask Source",
-                "group": "Opacity",
-                "subType": "string"
+                "group": "Opacity"
             },
             {
                 "type": "0",
@@ -106,11 +105,23 @@
                 "name": "shader"
             }
         ],
-        "name": "Ops.Gl.Shader.BasicMaterialNew"
+        "name": "Ops.Gl.Shader.BasicMaterial_v2"
     },
-    "summary": "",
-    "youtubeid": "F-CUdHq40Pc",
+    "summary": "A material without shading",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "F-CUdHq40Pc"
+    ],
+    "changelog": [
+        {
+            "message": "use new switch ui element for alpha source",
+            "author": "pandur",
+            "date": 1560943431105
+        }
+    ]
 }

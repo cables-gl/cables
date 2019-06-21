@@ -67,5 +67,11 @@
     "summary": "Renders a plasma effect",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

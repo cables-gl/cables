@@ -5,6 +5,7 @@ const
     y=op.inValueSlider("y"),
     w=op.inValueSlider("width",0.2),
     h=op.inValueSlider("height",0.2),
+    drawTex=op.inValueBool("Create Texture",true),
     texOut=op.outTexture("texture_out"),
     value=op.outValue("value");
 
@@ -33,14 +34,20 @@ refresh.onTriggered=function()
     if(!arr)return;
     var width=arr.length;
 
-    ctx.beginPath();
-    ctx.fillStyle="#000";
-    ctx.strokeStyle="#ff0";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    const draw=drawTex.get();
 
-    ctx.fillStyle="#888";
-    for(var i=0;i<arr.length;i++)
-        ctx.fillRect(i,size-arr[i],1,arr[i]);
+    if(draw)
+    {
+        ctx.beginPath();
+        ctx.fillStyle="#000";
+        ctx.strokeStyle="#ff0";
+        ctx.fillRect(0,0,canvas.width,canvas.height);
+
+        ctx.fillStyle="#888";
+        for(var i=0;i<arr.length;i++)
+            ctx.fillRect(i,size-arr[i],1,arr[i]);
+
+    }
 
     areaX=x.get()*canvas.width;
     areaY=y.get()*canvas.height;
@@ -48,8 +55,9 @@ refresh.onTriggered=function()
     areaW=w.get()*size/2;
     areaH=h.get()*size/2;
 
-    ctx.rect(areaX,areaY,areaW,areaH);
-    ctx.stroke();
+
+    if(draw)ctx.rect(areaX,areaY,areaW,areaH);
+    if(draw)ctx.stroke();
 
     var val=0;
     var count=0;
@@ -62,11 +70,13 @@ refresh.onTriggered=function()
     amount/=2;
     value.set(amount);
 
-    ctx.fillStyle="#ff0";
-    ctx.fillRect(0,0,amount*canvas.width,5);
+    if(draw)
+    {
+        ctx.fillStyle="#ff0";
+        ctx.fillRect(0,0,amount*canvas.width,5);
 
-
-    if(texOut.get()) texOut.get().initTexture(canvas,CGL.Texture.FILTER_NEAREST);
-        else texOut.set(new CGL.Texture.createFromImage( cgl, canvas, { "filter":CGL.Texture.FILTER_NEAREST } ));
+        if(texOut.get()) texOut.get().initTexture(canvas,CGL.Texture.FILTER_NEAREST);
+            else texOut.set(new CGL.Texture.createFromImage( cgl, canvas, { "filter":CGL.Texture.FILTER_NEAREST } ));
+    }
 
 };

@@ -1,0 +1,1 @@
+Useful to allow or stop a number from being output

@@ -801,26 +801,26 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     for (var iop in obj.ops) {
 
         var start=CABLES.now();
-        
+        var opData=obj.ops[iop];
         var op=null;
-        if(obj.ops[iop].opId) op = this.addOp(obj.ops[iop].opId, obj.ops[iop].uiAttribs, obj.ops[iop].id);
-            else op = this.addOp(obj.ops[iop].objName, obj.ops[iop].uiAttribs, obj.ops[iop].id);
+        if(opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
+            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
 
         reqs.checkOp(op);
 
         if (op) {
             if (genIds) op.id = CABLES.uuid();
-            op.portsInData=obj.ops[iop].portsIn;
-            op._origData=obj.ops[iop];
+            op.portsInData=opData.portsIn;
+            op._origData=opData;
 
-            for (var ipi in obj.ops[iop].portsIn) {
-                var objPort = obj.ops[iop].portsIn[ipi];
+            for (var ipi in opData.portsIn) {
+                var objPort = opData.portsIn[ipi];
                 var port = op.getPort(objPort.name);
 
                 if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
                 if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
-                if (objPort.animated) port.setAnimated(objPort.animated);
-                if (objPort.anim) {
+                if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
+                if (port && objPort && objPort.anim) {
                     if (!port.anim) port.anim = new CABLES.Anim();
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
                     for (var ani in objPort.anim.keys) {
@@ -829,9 +829,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 }
             }
 
-            for (var ipo in obj.ops[iop].portsOut) {
-                var port2 = op.getPort(obj.ops[iop].portsOut[ipo].name);
-                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && obj.ops[iop].portsOut[ipo].hasOwnProperty('value')) {
+            for (var ipo in opData.portsOut) {
+                var port2 = op.getPort(opData.portsOut[ipo].name);
+                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty('value')) {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
             }
@@ -1005,7 +1005,7 @@ CABLES.Patch.prototype.setVariable = function(name, val)
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
     } else {
-        consolr.warn("variable "+name+" not found!");
+        console.warn("variable "+name+" not found!");
     }
 };
 

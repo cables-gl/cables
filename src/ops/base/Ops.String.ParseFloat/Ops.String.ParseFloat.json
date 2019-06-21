@@ -20,10 +20,13 @@
         "name": "Ops.String.ParseFloat"
     },
     "summary": "Parses a string and returns a floating point number ",
-    "youtubeid": "",
-    "collections": null,
+    "collections": [
+        "converter"
+    ],
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "youtubeids": []
 }

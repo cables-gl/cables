@@ -14,9 +14,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Math function",
-                "subType": "string"
+                "type": "5",
+                "name": "Math function"
             }
         ],
         "portsOut": [
@@ -29,7 +28,9 @@
     },
     "summary": "Pick from multiple mathematical modes which can all be applied to a single array",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": [
         "Ops.Array.ArrayMathArray",
         "Ops.Array.ArrayMultiply"

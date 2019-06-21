@@ -34,9 +34,8 @@
                 "name": "array 1"
             },
             {
-                "type": "0",
-                "name": "Math function",
-                "subType": "string"
+                "type": "5",
+                "name": "Math function"
             }
         ],
         "portsOut": [
@@ -47,9 +46,10 @@
         ],
         "name": "Ops.Array.ArrayMathArray"
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "math"
+    ],
     "relatedops": null,
     "changelog": [
         {
@@ -57,5 +57,6 @@
             "author": "andro",
             "date": 1558625292186
         }
-    ]
+    ],
+    "youtubeids": []
 }

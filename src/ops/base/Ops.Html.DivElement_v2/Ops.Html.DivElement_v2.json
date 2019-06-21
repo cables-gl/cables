@@ -1,0 +1,72 @@
+{
+    "id": "db36db6d-83e4-4d27-b84c-8a20067aaffc",
+    "authorName": "pandur",
+    "created": 1543065096877,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Id"
+            },
+            {
+                "type": "5",
+                "name": "Class"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Style",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Interactive",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Convert Line Breaks",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "DOM Element"
+            },
+            {
+                "type": "0",
+                "name": "Hover",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Clicked"
+            }
+        ],
+        "name": "Ops.Html.DivElement2"
+    },
+    "summary": "Create a html DIV element",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.DivElement2 renamed to Ops.Html.DivElement_v2",
+            "author": "pandur",
+            "date": 1560335654025
+        }
+    ]
+}

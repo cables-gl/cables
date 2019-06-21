@@ -40,5 +40,11 @@
     "summary": "Performs a sin or cos operation on the contents of an array",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "math"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

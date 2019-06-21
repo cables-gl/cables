@@ -1,0 +1,52 @@
+{
+    "summary": "Is n1 smaller than n2? (lesser, less)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "number2",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Compare.Smaller"
+    },
+    "docs": {
+        "ports": [
+            {
+                "name": "number1",
+                "text": "The number you want to check if it is smaller than `Number 2`"
+            },
+            {
+                "name": "number2",
+                "text": "The number you want to check if it is bigger than `Number 1`"
+            },
+            {
+                "name": "result",
+                "text": "Returns `true` if `Number 1` is smaller than `Number 2`, otherwise `false`"
+            }
+        ]
+    },
+    "updated": 1540919866847,
+    "authorName": "pandur",
+    "id": "04fd113f-ade1-43fb-99fa-f8825f8814c0",
+    "created": 1540919866860,
+    "changelog": [
+        {
+            "message": "Ops.Math.Compare.Smaller renamed to Ops.Math.Compare.LessThan",
+            "author": "pandur",
+            "date": 1560413967801
+        }
+    ]
+}

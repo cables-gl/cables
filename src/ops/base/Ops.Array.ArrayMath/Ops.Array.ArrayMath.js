@@ -1,6 +1,6 @@
 const inArray_0 = op.inArray("array 0"),
     NumberIn = op.inValueFloat("Number for math", 0.0),
-    mathSelect = op.inValueSelect("Math function",['+','-','*','/','%','min','max'],'+'),
+    mathSelect = op.inSwitch("Math function",['+','-','*','/','%','min','max'],'+'),
     outArray = op.outArray("Array result");
 
 //cache for errors
@@ -18,6 +18,8 @@ const MATH_FUNC_MOD = 4;
 const MATH_FUNC_MIN = 5;
 const MATH_FUNC_MAX = 6;
 
+onFilterChange();
+
 function onFilterChange()
 {
     var mathSelectValue = mathSelect.get();
@@ -29,6 +31,7 @@ function onFilterChange()
     else if(mathSelectValue === 'min') selectIndex = MATH_FUNC_MIN;
     else if(mathSelectValue === 'max') selectIndex = MATH_FUNC_MAX;
     update();
+    op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
 function update()

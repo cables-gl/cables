@@ -16,7 +16,9 @@ UNI float g;
 UNI float b;
 UNI float a;
 
-
+#ifdef VERTEX_COLORS
+    IN vec3 vertexColor;
+#endif
 
 void main()
 {
@@ -53,6 +55,11 @@ void main()
     #ifdef MAKE_ROUND
         if ((gl_PointCoord.x-0.5)*(gl_PointCoord.x-0.5) + (gl_PointCoord.y-0.5)*(gl_PointCoord.y-0.5) > 0.25) discard; //col.a=0.0;
     #endif
+
+    #ifdef VERTEX_COLORS
+        col.rgb*=vertexColor;
+    #endif
+
 
     #ifdef HAS_TEXTURE_MASK
         col.a=mask;

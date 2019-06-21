@@ -41,16 +41,22 @@ CABLES.Op = function()
     this.errors={};
     this._needsLinkedToWork=[];
     this._needsParentOp=null;
+    this._shortOpName='';
 
-    if(this.name)
+    if(arguments[1])
     {
-        this.name=this.name.split('.')[this.name.split('.').length-1]
 
-        if(this.name.indexOf(CABLES.OP_VERSION_PREFIX)>0)
+        
+        this._shortOpName=arguments[1].split('.')[arguments[1].split('.').length-1]
+
+        if(this._shortOpName.indexOf(CABLES.OP_VERSION_PREFIX)>0)
         {
-            var n=this.name.split(CABLES.OP_VERSION_PREFIX)[1]
-            this.name=this.name.substring(0,this.name.length - (CABLES.OP_VERSION_PREFIX+n).length);
+            var n=this._shortOpName.split(CABLES.OP_VERSION_PREFIX)[1]
+            this._shortOpName=this._shortOpName.substring(0,this._shortOpName.length - (CABLES.OP_VERSION_PREFIX+n).length);
         }
+
+        this.uiAttribs.title=this._shortOpName;
+        console.log('this._shortOpName',this._shortOpName);
     }
     // this.name=this.name.split('.')[this.name.split('.').length-1]
     // const a=this.name.substring(this.name.length - 1, this.name.length);
@@ -102,6 +108,18 @@ CABLES.Op = function()
             this.fireEvent("onTitleChange",name);
     };
 
+
+
+    /**
+     * setUiAttrib
+     * possible values:
+     * warning - warning message - showing up in op parameter panel
+     * error - error message - showing up in op parameter panel
+     * extendTitle - op title extension, e.g. [ + ]
+     * @name CABLES.Op#setUiAttrib
+     * @param {Object} newAttribs, e.g. {"attrib":value}
+     * @function
+     */
     CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
     {
         if(!this.uiAttribs)this.uiAttribs={};
@@ -110,13 +128,17 @@ CABLES.Op = function()
             this.uiAttribs[p]=newAttribs[p];
         }
         
-        // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
         this.fireEvent("onUiAttribsChange",newAttribs);
     };
 
     CABLES.Op.prototype.getName=function()
     {
-        return this.name;
+        if(this.uiAttribs.name) return this.uiAttribs.name;
+        else 
+        {
+            return this.objName.split(".")
+        }
+        // return this.name;
     };
 
     CABLES.Op.prototype.addOutPort=function(p)
@@ -191,27 +213,32 @@ CABLES.Op = function()
 
     /**
      * create a number value input port
-     * @name CABLES.Op#inValue
+     * @name CABLES.Op#inFloat
      * @param {string} name
      * @param {Boolean} value
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueFloat=CABLES.Op.prototype.inValue=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+    CABLES.Op.prototype.inValueFloat= // old
+    CABLES.Op.prototype.inValue= // old
+    CABLES.Op.prototype.inFloat=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a boolean input port, displayed as a checkbox
-     * @name CABLES.Op#inValueBool
+     * @name CABLES.Op#inBool
      * @param {string} name
      * @param {Boolean} value
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueBool=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    
+    CABLES.Op.prototype.inValueBool= // old
+    CABLES.Op.prototype.inBool=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a String value input port
-     * @name CABLES.Op#inValueString
+     * @name CABLES.Op#inString
      * @param {string} name
      * @param {string} value default value
      * @return {CABLES.Port}
@@ -221,8 +248,6 @@ CABLES.Op = function()
 
     // new string
     CABLES.Op.prototype.inString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" }));  v=v||''; p.value = v; p.set(v); p.defaultValue = v; return p; };
-    
-
 
     /**
      * create a String value input port displayed as TextArea
@@ -236,27 +261,42 @@ CABLES.Op = function()
     
     /**
      * create a String value input port displayed as editor
-     * @name CABLES.Op#inValueEditor
+     * @name CABLES.Op#inStringEditor
      * @param {string} name
      * @param {string} value default value
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueEditor=function(name,v,syntax){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string",display:'editor',editorSyntax:syntax})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-    
     // new string
     CABLES.Op.prototype.inStringEditor = function (name, v, syntax) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string", display: 'editor', editorSyntax: syntax })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
 
+    // old
+    CABLES.Op.prototype.inValueEditor=function(name,v,syntax){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string",display:'editor',editorSyntax:syntax})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
     /**
      * create a string select box
-     * @name CABLES.Op#inValueSelect
+     * @name CABLES.Op#inDropDown
      * @param {string} name
      * @param {Array} values
      * @param {string} value default value
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueSelect=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueSelect= // old
+    CABLES.Op.prototype.inDropDown=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+
+    /**
+     * create a string switch box
+     * @name CABLES.Op#inSwitch
+     * @param {string} name
+     * @param {Array} values
+     * @param {string} value default value
+     * @return {CABLES.Port}
+     * @function
+     */
+    CABLES.Op.prototype.inSwitch=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_STRING,{"display":'switch',"hidePort":true,"type":"string","values":values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
 
     /**
      * create a integer input port
@@ -266,7 +306,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueInt= //old
+    CABLES.Op.prototype.inInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
      * create a file input port
@@ -314,7 +355,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.inValueSlider=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    CABLES.Op.prototype.inValueSlider= //old
+    CABLES.Op.prototype.inFloatSlider=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
 
     /**
@@ -324,16 +366,19 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outFunction=CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outFunction= //old
+    CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output value port
      * @name CABLES.Op#outValue
      * @param {string} name
+     * @param {number} default value
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValue=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    CABLES.Op.prototype.outValue= //old
+    CABLES.Op.prototype.outNumber= function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
 
     /**
      * create output boolean port
@@ -342,7 +387,8 @@ CABLES.Op = function()
      * @return {CABLES.Port}
      * @function
      */
-    CABLES.Op.prototype.outValueBool=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
+    CABLES.Op.prototype.outValueBool= //old
+    CABLES.Op.prototype.outBool=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
 
     /**
      * create output string port
@@ -464,11 +510,8 @@ CABLES.Op = function()
 
     CABLES.Op.prototype.removeLinks=function()
     {
-        for(var i=0;i<this.portsIn.length;i++)
-            this.portsIn[i].removeLinks();
-
-        for(var ipo in this.portsOut)
-            this.portsOut[ipo].removeLinks();
+        for(var i=0;i<this.portsIn.length;i++) this.portsIn[i].removeLinks();
+        for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
     };
 
     CABLES.Op.prototype.countFittingPorts=function(otherPort)
@@ -486,25 +529,32 @@ CABLES.Op = function()
     CABLES.Op.prototype.findFittingPort=function(otherPort)
     {
         for(var ipo in this.portsOut)
-            if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))return this.portsOut[ipo];
+            if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))
+                return this.portsOut[ipo];
 
         for(var ipi in this.portsIn)
-            if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))return this.portsIn[ipi];
+            if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))
+                return this.portsIn[ipi];
     };
 
     CABLES.Op.prototype.getSerialized=function()
     {
         var op={};
-        op.name=this.getName();
-
-        var nameParts=this.objName.split('.');
-        if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
+        // op.name=this.getName();
+        // var nameParts=this.objName.split('.');
+        // if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
         if(this.opId) op.opId=this.opId;
         op.objName=this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
         
         op.id=this.id;
         op.uiAttribs=this.uiAttribs;
+
+        if(this.uiAttribs.title==this._shortOpName) delete this.uiAttribs.title;
+
+        if(this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working==true) delete this.uiAttribs.working;
+        if(this.uiAttribs.hasOwnProperty("subPatch") && this.uiAttribs.subPatch===0) delete this.uiAttribs.subPatch;
+
         op.portsIn=[];
         op.portsOut=[];
 
@@ -517,7 +567,8 @@ CABLES.Op = function()
     CABLES.Op.prototype.getFistOutPortByType=function(type)
     {
         for(var ipo in this.portsOut)
-            if(this.portsOut[ipo].type==type)return this.portsOut[ipo];
+            if(this.portsOut[ipo].type==type)
+                return this.portsOut[ipo];
     };
 
     /**
@@ -531,11 +582,13 @@ CABLES.Op = function()
     {
         // for(var ipi in this.portsIn)
         for(var ipi=0;ipi<this.portsIn.length;ipi++)
-            if(this.portsIn[ipi].getName()==name)return this.portsIn[ipi];
+            if(this.portsIn[ipi].getName()==name)
+                return this.portsIn[ipi];
 
         // for(var ipo in this.portsOut)
         for(var ipo=0;ipo<this.portsOut.length;ipo++)
-            if(this.portsOut[ipo].getName()==name)return this.portsOut[ipo];
+            if(this.portsOut[ipo].getName()==name)
+                return this.portsOut[ipo];
     };
 
     /**

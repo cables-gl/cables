@@ -1,0 +1,73 @@
+{
+    "summary": "Allows switching between objects",
+    "docs": {
+        "ports": [
+            {
+                "name": "Object Index",
+                "text": "Index to look up object from ports"
+            }
+        ]
+    },
+    "authorName": "pandur",
+    "id": "345d535e-267d-49fb-98c0-c8a8f9424160",
+    "created": 1541226181893,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Object Index",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "object port 0"
+            },
+            {
+                "type": "2",
+                "name": "object port 1"
+            },
+            {
+                "type": "2",
+                "name": "object port 2"
+            },
+            {
+                "type": "2",
+                "name": "object port 3"
+            },
+            {
+                "type": "2",
+                "name": "object port 4"
+            },
+            {
+                "type": "2",
+                "name": "object port 5"
+            },
+            {
+                "type": "2",
+                "name": "object port 6"
+            },
+            {
+                "type": "2",
+                "name": "object port 7"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "object out"
+            }
+        ],
+        "name": "Ops.Json.ObjectSwitcher"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectSwitcher renamed to Ops.Json.SwitchObject",
+            "author": "pandur",
+            "date": 1560335169456
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
+}

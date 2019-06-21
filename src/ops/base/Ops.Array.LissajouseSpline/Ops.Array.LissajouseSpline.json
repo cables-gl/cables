@@ -1,0 +1,88 @@
+{
+    "authorName": "pandur",
+    "id": "b4be3f11-20ed-43a0-865d-2b88f0879a6f",
+    "created": 1515970216234,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Formula",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "A",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "C",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "D",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.LissajouseSpline"
+    },
+    "summary": "generate spline using lissajous formulas",
+    "collections": [
+        "pointArrays",
+        "Spline",
+        "generator"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Formula",
+                "text": "Pick 1 of 3 formulas"
+            },
+            {
+                "name": "A",
+                "text": "Frequency parameter A"
+            },
+            {
+                "name": "B",
+                "text": "Frequency parameter B"
+            },
+            {
+                "name": "C",
+                "text": "Frequency parameter C"
+            },
+            {
+                "name": "D",
+                "text": "Frequency parameter D"
+            },
+            {
+                "name": "Result",
+                "text": "ArrayOut"
+            }
+        ]
+    },
+    "issues": "",
+    "relatedops": [
+        "Ops.Gl.Meshes.SimpleSpline",
+        "Ops.Gl.Meshes.SplineMesh"
+    ],
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Ops.Math.LissajouseSpline renamed to Ops.Array.LissajouseSpline",
+            "author": "pandur",
+            "date": 1560417827056
+        }
+    ]
+}

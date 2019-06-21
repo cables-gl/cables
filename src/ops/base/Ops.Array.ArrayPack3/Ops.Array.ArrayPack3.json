@@ -23,6 +23,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "3",
                 "name": "Array out"
             },
@@ -35,7 +39,6 @@
         "name": "Ops.Array.ArrayPack3"
     },
     "summary": "Packs 3 individual arrays into a xyz array",
-    "youtubeid": "",
     "collections": [
         "pointArrays"
     ],
@@ -58,6 +61,10 @@
                 "text": "z array"
             },
             {
+                "name": "Trigger out",
+                "text": "Trigger out"
+            },
+            {
                 "name": "Array out",
                 "text": "The combined xyz array"
             },
@@ -70,5 +77,13 @@
     "relatedops": [
         "Ops.Array.ArrayUnpack3"
     ],
-    "issues": ""
+    "issues": "",
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Added trigger out port",
+            "author": "andro",
+            "date": 1560931058835
+        }
+    ]
 }

@@ -182,3 +182,6 @@ function updateTexRepeat()
     diffuseRepeatX.set(1);
     diffuseRepeatY.set(1);
 }
+
+
+updateTexRepeat();

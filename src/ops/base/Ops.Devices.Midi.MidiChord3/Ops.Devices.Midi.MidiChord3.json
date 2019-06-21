@@ -6,31 +6,37 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note 1",
+                "group": "Notes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note 2",
+                "group": "Notes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note 3",
+                "group": "Notes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Normalize Velocity",
+                "group": "Notes",
                 "subType": "string"
             },
             {

@@ -17,6 +17,11 @@
             },
             {
                 "type": "0",
+                "name": "X or Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Line Size",
                 "subType": "number"
             },

@@ -36,5 +36,27 @@
     "collections": [
         "drawText"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "fixed file loading problems when viewing outside of the editor",
+            "author": "pandur",
+            "date": 1561037914528
+        },
+        {
+            "message": "fixed file loading problems when viewing outside of the editor",
+            "author": "pandur",
+            "date": 1561037915170
+        },
+        {
+            "message": "fixed file loading problems when viewing outside of the editor",
+            "author": "pandur",
+            "date": 1561037917742
+        },
+        {
+            "message": "fixed file loading problems when viewing outside of the editor",
+            "author": "pandur",
+            "date": 1561037918153
+        }
+    ]
 }

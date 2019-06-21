@@ -1,0 +1,127 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "e2ace702-eed6-4b40-86f6-cea716ba8579",
+    "created": 1513154928260,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Items",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.Array3xAnalyze"
+    },
+    "summary": "min,max and average values of an array3",
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": [
+        "Ops.Array.ArrayAnalyze"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Num Items",
+                "text": "Number of items in the array"
+            },
+            {
+                "name": "Min X",
+                "text": "Minimum value of the x component in the array"
+            },
+            {
+                "name": "Max X",
+                "text": "Maximum value of the x component in the array"
+            },
+            {
+                "name": "Average X",
+                "text": "Average of all the values in the x component"
+            },
+            {
+                "name": "Min Y",
+                "text": "Minimum value of the y component in the array"
+            },
+            {
+                "name": "Max Y",
+                "text": "Maximum value of the y component in the array"
+            },
+            {
+                "name": "Average Y",
+                "text": "Average of all the values in the y component"
+            },
+            {
+                "name": "Min Z",
+                "text": "Minimum value of the z component in the array"
+            },
+            {
+                "name": "Max Z",
+                "text": "Maximum value of the z component in the array"
+            },
+            {
+                "name": "Average Z",
+                "text": "Average of all the values in the z component"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xAnalyze renamed to Ops.Array.InfoArray3",
+            "author": "pandur",
+            "date": 1560413598551
+        }
+    ],
+    "issues": "",
+    "youtubeids": []
+}

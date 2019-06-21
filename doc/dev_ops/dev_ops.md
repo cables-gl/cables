@@ -8,19 +8,24 @@ Different port examples below.
 
 Floating point number ports in and out:
 ```javascript
-const inFloat = op.inValueFloat("float in");
-const outFloat = op.outValue("float out");
+const inFloat = op.inFloat("float in");
+const outNumber = op.outNumber("number out");
+```
+Integer number ports in and out:
+```javascript
+const inInt = op.inFloat("int in");
+const outNumber = op.outNumber("number out");
 ```
 String ports in and out:
 ```javascript
-const inString = op.inValueString("String in");
-const outString = op.outValueString("String out");
+const inString = op.inString("String in");
+const outString = op.outString("String out");
 ```
 
 Boolean ports in and out:
 ```javascript
-const inBoolean = op.inValueBool("Boolean in");
-const outBoolean = op.outValueBool("Boolean out");
+const inBoolean = op.inBool("Boolean in");
+const outBoolean = op.outBool("Boolean out");
 ```
 
 Trigger ports in and out:
@@ -50,8 +55,8 @@ The code you write inside your op will be executed once the op is added to the p
 All your initialisation-code should be in the root of your code, e.g.
 
 ```javascript
-var inPort = op.inValueFloat("My Input Port");
-var outPort = op.outValue("My Output Port");
+var inPort = op.inFloat("My Input Port");
+var outPort = op.outNumber("My Output Port");
 
 // put your initialisation code here
 ...

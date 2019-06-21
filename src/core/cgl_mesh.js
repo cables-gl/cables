@@ -25,6 +25,7 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
     this._lastShader=null;
     this._numInstances=0;
     this._glPrimitive=glPrimitive;
+    this._preWireframeGeom=null;
     this.addVertexNumbers=false;
     this.feedBackAttributes=[];
     this.setGeom(__geom);
@@ -454,9 +455,11 @@ CGL.Mesh.prototype.render=function(shader)
     if(!shader) return;
     var i=0;
 
+    if(!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
     if(shader.wireframe && this._geom.isIndexed())
     {
-        console.log("unindex");
+        this._preWireframeGeom=this._geom;
+        this._geom=this._geom.copy();
         this._geom.unIndex();
         this._geom.calcBarycentric();
         this.setGeom(this._geom);

@@ -1,0 +1,47 @@
+{
+    "updated": 1519807678165,
+    "authorName": "pandur",
+    "id": "c451ee12-67f4-4dc9-8fb8-7a6cc4295a4c",
+    "created": 1519807674289,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array3x"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array2x"
+            }
+        ],
+        "name": "Ops.Array.Array3xTo2x"
+    },
+    "summary": "remove every 3rd item of an array - changes array length",
+    "docs": {
+        "ports": [
+            {
+                "name": "Array3x",
+                "text": "The XYZ array in"
+            },
+            {
+                "name": "Array2x",
+                "text": "the XY array out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": [
+        "converter"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xTo2x renamed to Ops.Array.Array3To2",
+            "author": "pandur",
+            "date": 1560412192982
+        }
+    ],
+    "youtubeids": []
+}

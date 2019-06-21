@@ -1,0 +1,64 @@
+{
+    "id": "c2f2a779-00d5-435f-8497-5d124fa6e88c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1556610684917
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1556610692410,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "innerRadius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "segments",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "percent",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Exp.Gl.Circle2"
+    },
+    "summary": "Creates a circle mesh",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

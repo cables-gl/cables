@@ -1,0 +1,28 @@
+{
+    "id": "a56d3edd-06ad-44ed-9810-dbf714600c67",
+    "authorName": "pandur",
+    "created": 1548415620859,
+    "summary": "Define a custom stylesheet",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "css code"
+            }
+        ],
+        "name": "Ops.Html.CSS2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Html.CSS2 renamed to Ops.Html.CSS_v2",
+            "author": "pandur",
+            "date": 1560335517152
+        }
+    ]
+}

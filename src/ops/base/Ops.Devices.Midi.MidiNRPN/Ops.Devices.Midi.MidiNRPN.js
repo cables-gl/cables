@@ -8,12 +8,19 @@ const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
 const nrpnIndexDropdown = op.inValueInt('NRPN Index', 0);
 const normalizeDropdown = op.inValueSelect('Normalize', ['none', '0 to 1', '-1 to 1'], 'none');
 const learn = op.inTriggerButton('learn');
+const clear = op.inTriggerButton("clear");
 
+op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
+op.setPortGroup('NRPN', [nrpnIndexDropdown, normalizeDropdown]);
+op.setPortGroup('', [learn, clear]);
 /* OUT */
 const eventOut = op.outObject('MIDI Event Out');
+const triggerOut = op.outTrigger('Trigger Out');
 const nrpnIndexOut = op.outValue('NRPN Index');
 const nrpnValueOut = op.outValue('NRPN Value');
-const triggerOut = op.outTrigger("Trigger Out");
+
+op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
+op.setPortGroup('NRPN Out', [nrpnIndexOut, nrpnValueOut]);
 
 nrpnIndexDropdown.set(0);
 midiChannelDropdown.set(1);
@@ -24,6 +31,12 @@ learn.onTriggered = () => {
   learning = true;
 };
 
+clear.onTriggered = () => {
+  nrpnIndexDropdown.set(0);
+  midiChannelDropdown.set(1);
+  normalizeDropdown.set(normalizeDropdown.get('none'));
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
+}
 var outValue;
 inEvent.onChange = () => {
   const event = inEvent.get();
@@ -51,18 +64,15 @@ inEvent.onChange = () => {
       outValue = nrpnValue;
 
       if (normalizeDropdown.get() === '0 to 1') {
-          nrpnValueOut.set(outValue / 16383);
-          triggerOut.trigger();
-      }
-      else if (normalizeDropdown.get() === '-1 to 1') {
-          nrpnValueOut.set(outValue / (16383 / 2) - 1);
-          triggerOut.trigger();
-      }
-      else if (normalizeDropdown.get() === 'none') {
-          nrpnValueOut.set(outValue)
-          triggerOut.trigger();
-      }
-      else nrpnValueOut.set(0);
+        nrpnValueOut.set(outValue / 16383);
+        triggerOut.trigger();
+      } else if (normalizeDropdown.get() === '-1 to 1') {
+        nrpnValueOut.set(outValue / (16383 / 2) - 1);
+        triggerOut.trigger();
+      } else if (normalizeDropdown.get() === 'none') {
+        nrpnValueOut.set(outValue);
+        triggerOut.trigger();
+      } else nrpnValueOut.set(0);
     }
   }
   eventOut.set(event);

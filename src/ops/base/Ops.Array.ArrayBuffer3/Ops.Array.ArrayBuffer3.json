@@ -1,0 +1,89 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "156762c6-1c10-4e9b-9cca-8dbc329a82bd",
+    "created": 1511273095896,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exec"
+            },
+            {
+                "type": "0",
+                "name": "Max Num Elements",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value Z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayBuffer3x"
+    },
+    "summary": "circular buffer for xyz values",
+    "docs": {
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Max Num Elements",
+                "text": "Maximum length of array"
+            },
+            {
+                "name": "Value X",
+                "text": "Number 0 to write to X component of array"
+            },
+            {
+                "name": "Value Y",
+                "text": "Number 1 to write to Y component of array"
+            },
+            {
+                "name": "Value Z",
+                "text": "Number 2 to write to Z component of array"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset array"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayBuffer3x renamed to Ops.Array.ArrayBuffer3",
+            "author": "pandur",
+            "date": 1560335466288
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
+}

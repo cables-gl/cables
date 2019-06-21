@@ -37,9 +37,8 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Calculate Normals",
-                "subType": "string"
+                "type": "5",
+                "name": "Calculate Normals"
             }
         ],
         "portsOut": [

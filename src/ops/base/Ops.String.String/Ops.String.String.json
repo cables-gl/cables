@@ -1,0 +1,54 @@
+{
+    "updated": 1517917854855,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "5bf57cac-68e1-4356-94b2-c43d75925b4d",
+    "created": 1515149180605,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result"
+            }
+        ],
+        "name": "Ops.Value.ValueString"
+    },
+    "summary": "enter a string",
+    "docs": {
+        "ports": [
+            {
+                "name": "value",
+                "text": "String which will be copied to the output port"
+            },
+            {
+                "name": "result",
+                "text": "Same as the input port (`Value`)"
+            }
+        ]
+    },
+    "todos": [
+        {
+            "message": "should be deprecated",
+            "author": "pandur",
+            "id": "ce4d0c3f-b597-40b1-b0ab-ddda4e118518",
+            "date": 1557996880446
+        }
+    ],
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueString renamed to Ops.String.String",
+            "author": "pandur",
+            "date": 1560332760467
+        }
+    ]
+}

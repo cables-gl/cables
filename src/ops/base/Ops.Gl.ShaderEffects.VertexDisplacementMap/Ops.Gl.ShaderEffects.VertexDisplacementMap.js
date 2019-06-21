@@ -184,11 +184,7 @@ op.render.onTriggered=function()
     {
         if(shader) removeModule();
 
-
-        // console.log('re init shader module vertexdisplacement');
-
         shader=cgl.getShader();
-
 
         moduleVert=shader.addModule(
             {
@@ -220,15 +216,13 @@ op.render.onTriggered=function()
 
 
     if(!shader)return;
-    var texSlot=moduleVert.num+5;
+    var texSlot=moduleVert.num+4;
 
     if(texture.get())
     {
         uniTexture.setValue(texSlot);
         uniTextureFrag.setValue(texSlot);
-
         cgl.setTexture(0+texSlot,texture.get().tex);
-        // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texture.get().tex);
     }
 
     op.trigger.trigger();

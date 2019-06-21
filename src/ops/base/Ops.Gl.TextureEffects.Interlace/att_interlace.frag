@@ -17,7 +17,17 @@ void main()
 
    col=texture(tex,texCoord);
     // .endl()+'   col=clamp(col,0.0,1.0);'
-   if( mod(gl_FragCoord.y+scroll,lineSize)>=lineSize*0.5)
+
+    float dir;
+    #ifdef DIRECTION
+        dir = gl_FragCoord.x;
+    #endif
+
+    #ifndef DIRECTION
+        dir = gl_FragCoord.y;
+    #endif
+
+   if( mod(dir+scroll,lineSize)>=lineSize*0.5)
    {
        col=texture(tex,vec2(texCoord.x+displace*0.05,texCoord.y));
        float gray = vec3(dot(vec3(0.2126,0.7152,0.0722), col.rgb)).r;

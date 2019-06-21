@@ -5,7 +5,9 @@ const
     numPoints=op.inValueInt("Num Points"),
     outGeom=op.outObject("Geometry"),
     pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
-    seed=op.inValue("Seed");
+    seed=op.inValue("Seed"),
+    vertCols=op.inArray("Vertex Colors");
+
 
 const cgl=op.patch.cgl;
 
@@ -23,6 +25,7 @@ var mesh=null;
 const geom=new CGL.Geometry("pointcloudfromarray");
 var texCoords=[];
 var needsRebuild=true;
+var showingError=false;
 
 function doRender()
 {
@@ -109,6 +112,20 @@ function rebuild()
             changed=true;
         }
     }
+
+    if(vertCols.get())
+    {
+        if(!showingError && vertCols.get().length!=num*4)
+        {
+            op.uiAttr({error:"Color array does not have the correct length! (should be "+num*4+")"});
+            showingError = true;
+            mesh=null;
+            return;
+        }
+
+        geom.vertexColors=vertCols.get();
+    }
+    else geom.vertexColors=[];
 
     if(changed)
     {

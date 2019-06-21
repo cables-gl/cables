@@ -1,9 +1,11 @@
 const
     exe=op.inTrigger("exe"),
+    trigOut = op.outTrigger("Trigger out"),
     result=op.outValue("result"),
     phase=op.inValueFloat("phase",0),
     mul=op.inValueFloat("frequency",1),
     amplitude=op.inValueFloat("amplitude",1);
+
 
 op.toWorkPortsNeedToBeLinked(exe);
 
@@ -13,5 +15,6 @@ exec();
 function exec()
 {
     result.set( amplitude.get() * Math.sin( (op.patch.freeTimer.get()*mul.get()) + phase.get() ));
+    trigOut.trigger();
 }
 

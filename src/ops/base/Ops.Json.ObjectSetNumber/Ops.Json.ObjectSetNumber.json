@@ -1,0 +1,44 @@
+{
+    "id": "e50fd010-5db1-48a7-91dc-94799ae1cb3b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559301644607
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559301685240,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "5",
+                "name": "Key"
+            },
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyNumber"
+    },
+    "summary": "set number at key in an object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

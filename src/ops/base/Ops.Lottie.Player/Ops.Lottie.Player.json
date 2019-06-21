@@ -1,0 +1,86 @@
+{
+    "libs": [
+        "bodymovin.js"
+    ],
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "03716ff8-71e7-4a51-bf65-fa74f9fbc1b2",
+    "created": 1511019535921,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "file",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "rewind"
+            },
+            {
+                "type": "0",
+                "name": "speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frame",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "name": "Ops.Lottie.Player"
+    },
+    "summary": "play/render a bodymovin animation to a texture",
+    "changelog": [
+        {
+            "message": "Ops.Bodymovin.Player renamed to Ops.Lottie.Player",
+            "author": "pandur",
+            "date": 1560783174788
+        }
+    ]
+}

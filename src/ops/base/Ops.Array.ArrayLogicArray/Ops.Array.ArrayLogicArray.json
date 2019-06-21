@@ -1,0 +1,63 @@
+{
+    "id": "850a40f5-f623-438f-9ff8-461b1a9aeefc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1560526789016
+        }
+    ],
+    "authorName": "andro",
+    "created": 1560526792360,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "array 0"
+            },
+            {
+                "type": "3",
+                "name": "array 1"
+            },
+            {
+                "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array result"
+            }
+        ],
+        "name": "Ops.Array.ArrayLogicArray"
+    },
+    "summary": "Performs logical comparison operations on two arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayLogic"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "array 0",
+                "text": "Array 0 in"
+            },
+            {
+                "name": "array 1",
+                "text": "Array 1 in"
+            },
+            {
+                "name": "Comparison mode",
+                "text": "Comparison mode"
+            },
+            {
+                "name": "Array result",
+                "text": "Array out"
+            }
+        ]
+    }
+}

@@ -1,0 +1,1 @@
+Check the example file Ops.Array.InfoArray for a simplified version of infoArray3

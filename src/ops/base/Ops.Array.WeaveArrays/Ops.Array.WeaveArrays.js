@@ -50,5 +50,6 @@ function update() {
             }
         }
     }
+    outPort.set(null);
     outPort.set(newArr);
 }

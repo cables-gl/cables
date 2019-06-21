@@ -60,5 +60,15 @@
     ],
     "authorName": "pandur",
     "id": "446442ba-1a7e-4c71-bb43-b12005aa6511",
-    "created": 1524157680368
+    "created": 1524157680368,
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

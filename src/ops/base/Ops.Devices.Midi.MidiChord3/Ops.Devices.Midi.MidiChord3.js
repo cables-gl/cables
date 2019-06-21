@@ -30,6 +30,9 @@ const normalizeDropdown = op.inValueSelect(
 const learn = op.inTriggerButton('learn');
 const reset = op.inTriggerButton('reset');
 
+op.setPortGroup("MIDI", [inEvent, midiChannelDropdown]);
+op.setPortGroup("Notes", [...noteDropdowns, normalizeDropdown]);
+op.setPortGroup("", [learn, reset]);
 /* OUT */
 
 const eventOut = op.outObject('MIDI Event Out');
@@ -69,6 +72,11 @@ const outs = [out1, out2, out3];
 noteDropdown.set(0);
 midiChannelDropdown.set(1);
 
+op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);
+op.setPortGroup("Note 1 Out", [noteIndexOut1, velocityOut1, gateOut1]);
+op.setPortGroup("Note 2 Out", [noteIndexOut2, velocityOut2, gateOut2]);
+op.setPortGroup("Note 3 Out", [noteIndexOut3, velocityOut3, gateOut3]);
+
 let learning = false;
 let learnCount = 0;
 let learnedNotes = [];
@@ -82,6 +90,7 @@ reset.onTriggered = () => {
   learnCount = 0;
   learnedNotes = [];
   noteDropdowns.forEach(nd => nd.set(0));
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
 };
 
 inEvent.onChange = () => {

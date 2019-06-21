@@ -26,5 +26,13 @@
     "created": 1510738260027,
     "docs": {
         "ports": []
-    }
+    },
+    "todos": [
+        {
+            "message": "Add Amount Slider and Mask Texture Input",
+            "author": "bagoof",
+            "id": "182b59f6-02e6-4b3e-8301-843faa57c6d0",
+            "date": 1560196212801
+        }
+    ]
 }

@@ -70,8 +70,13 @@
         "name": "Ops.Gl.TextureEffects.Stripes2"
     },
     "summary": "Draw stripes into the current ImageCompose",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -1,0 +1,64 @@
+{
+    "summary": "random points in space",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scaleZ",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.RandomPoints"
+    },
+    "updated": 1535641209013,
+    "authorName": "pandur",
+    "id": "a8687c3b-7376-4cfa-a420-8e827eeedacc",
+    "created": 1516620100989,
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "do we still need this ? is pointcloud from array enough?",
+            "author": "pandur",
+            "id": "88c38fd8-47ca-4146-989d-49162c98799c",
+            "date": 1558349934348
+        }
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Gl.Meshes.RandomPoints renamed to Ops.Deprecated.Gl.Meshes.RandomPoints",
+            "author": "pandur",
+            "date": 1560414950577
+        }
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Strength"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.toNormalMap"
+    },
+    "credits": [
+        {
+            "title": "NormalMap Shader",
+            "author": "moka",
+            "url": "https://forum.openframeworks.cc/t/compute-normal-map-from-image/1400/11"
+        }
+    ],
+    "updated": 1510252742729,
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "a9aba612-dc72-4108-a6fb-f0292463a186",
+    "created": 1510252712035,
+    "summary": "Convert a black and white map to a normal map",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.toNormalMap renamed to Ops.Gl.TextureEffects.ToNormalMap",
+            "author": "pandur",
+            "date": 1560333507524
+        }
+    ]
+}

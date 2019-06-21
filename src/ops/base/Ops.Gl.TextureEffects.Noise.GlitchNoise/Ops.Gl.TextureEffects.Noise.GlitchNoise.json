@@ -75,8 +75,14 @@
         "name": "Ops.Gl.TextureEffects.Noise.GlitchNoise"
     },
     "summary": "Creates a black and white glitched texture to use for displacement",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -10,26 +10,31 @@
             },
             {
                 "type": "2",
-                "name": "MIDI Event"
+                "name": "MIDI Event",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note Start",
+                "group": "Notes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Note End",
+                "group": "Notes",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Normalize Velocity",
+                "group": "Notes",
                 "subType": "string"
             },
             {
@@ -80,7 +85,8 @@
         "Ops.Devices.Midi.MidiClock"
     ],
     "youtubeids": [
-        "eDlaFD_d5lc"
+        "eDlaFD_d5lc",
+        "x0mjo8XStzA"
     ],
     "docs": {
         "ports": [

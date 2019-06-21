@@ -80,7 +80,6 @@
         "name": "Ops.Gl.TextureEffects.Noise.LayerNoise"
     },
     "summary": "multilayer perlin noise variation",
-    "youtubeid": "",
     "docs": {
         "ports": []
     },
@@ -90,5 +89,12 @@
             "author": "andro",
             "date": 1548344194920
         }
-    ]
+    ],
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

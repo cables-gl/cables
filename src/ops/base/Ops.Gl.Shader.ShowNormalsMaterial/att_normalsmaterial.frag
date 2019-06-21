@@ -12,8 +12,5 @@ void main()
     #endif
     #ifdef SHOW_TANGENTS
         outColor=vec4(outTangent.x,outTangent.y,outTangent.z,1.0);
-
-
     #endif
-
 }

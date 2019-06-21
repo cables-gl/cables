@@ -26,5 +26,11 @@
             }
         ],
         "name": "Ops.Array.ArrayModulo"
-    }
+    },
+    "issues": "",
+    "collections": [
+        "math"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

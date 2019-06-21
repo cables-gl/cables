@@ -1,0 +1,63 @@
+{
+    "id": "e9fdcaca-a007-4563-8a4d-e94e08506e0f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561047420006
+        }
+    ],
+    "authorName": "andro",
+    "created": 1561047442391,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "number 0",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "number 1",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "math mode"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Math"
+    },
+    "summary": "Allows different mathematical operations to be applied to two numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "number 0",
+                "text": "Number 0 in"
+            },
+            {
+                "name": "number 1",
+                "text": "Number 1 in"
+            },
+            {
+                "name": "math mode",
+                "text": "Select a math mode"
+            },
+            {
+                "name": "result",
+                "text": "Result out"
+            }
+        ]
+    }
+}

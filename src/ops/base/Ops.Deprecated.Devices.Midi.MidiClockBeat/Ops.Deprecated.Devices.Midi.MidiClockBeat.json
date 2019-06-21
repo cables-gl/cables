@@ -1,0 +1,61 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "9056b704-b8f5-4fda-8df6-0738fa75d301",
+    "created": 1515100298538,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Beat"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Sub Tick",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Sub Beat"
+            },
+            {
+                "type": "0",
+                "name": "BPM",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tick Duration",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiClockBeat"
+    },
+    "summary": "receive midi clock beat / sync",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "46MCfZRQiGU",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": null,
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiClockBeat renamed to Ops.Deprecated.Devices.Midi.MidiClockBeat",
+            "author": "pandur",
+            "date": 1560334363067
+        }
+    ]
+}

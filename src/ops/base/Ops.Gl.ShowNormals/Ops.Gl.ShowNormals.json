@@ -26,5 +26,12 @@
             }
         ],
         "name": "Ops.Gl.ShowNormals"
-    }
+    },
+    "changelog": [
+        {
+            "message": "fix problem normal lines disappearing when using other materials than BasicMaterial",
+            "author": "pandur",
+            "date": 1561131711835
+        }
+    ]
 }

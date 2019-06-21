@@ -1,0 +1,65 @@
+{
+    "updated": 1516031615531,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "b8c67b59-3cef-48d4-905a-85a934701aff",
+    "created": 1515015811182,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "Device"
+            },
+            {
+                "type": "0",
+                "name": "Note"
+            },
+            {
+                "type": "0",
+                "name": "Velocity"
+            },
+            {
+                "type": "0",
+                "name": "Channel"
+            },
+            {
+                "type": "0",
+                "name": "Cmd"
+            },
+            {
+                "type": "0",
+                "name": "Type"
+            },
+            {
+                "type": "1",
+                "name": "Event Received"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiEvent"
+    },
+    "summary": "midi event data",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiEvent renamed to Ops.Deprecated.Devices.Midi.MidiEvent",
+            "author": "pandur",
+            "date": 1560334265760
+        }
+    ]
+}

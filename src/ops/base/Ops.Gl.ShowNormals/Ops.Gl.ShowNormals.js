@@ -1,21 +1,25 @@
-
-var render=op.inTrigger('render');
-var geometry=op.inObject("geometry");
-
-var mul=op.inValueFloat("Length",0.1);
-var trigger=op.outTrigger('trigger');
+const
+    render=op.inTrigger('render'),
+    geometry=op.inObject("geometry"),
+    mul=op.inValueFloat("Length",0.1),
+    trigger=op.outTrigger('trigger');
 
 geometry.ignoreValueSerialize=true;
 
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
 var buffer = cgl.gl.createBuffer();
 
 geometry.onChange=rebuild;
 mul.onChange=rebuild;
+const geom=new CGL.Geometry("shownormals");
+geom.vertices=[0,0,0,0,0,0,0,0,0];
+
+var mesh=new CGL.Mesh(cgl,geom);
 
 function rebuild()
 {
     var points=[];
+    var tc=[];
     var segments=4;
     var i=0;
     var geom=geometry.get();
@@ -28,16 +32,18 @@ function rebuild()
             points.push(geom.vertices[i+1]);
             points.push(geom.vertices[i+2]);
 
+            tc.push(0,1);
+            tc.push(0,1);
+
             points.push(geom.vertices[i+0]+geom.vertexNormals[i+0]*mul.get());
             points.push(geom.vertices[i+1]+geom.vertexNormals[i+1]*mul.get());
             points.push(geom.vertices[i+2]+geom.vertexNormals[i+2]*mul.get());
         }
-    }
 
-    cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-    cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(points), cgl.gl.STATIC_DRAW);
-    buffer.itemSize = 3;
-    buffer.numItems = points.length/buffer.itemSize;
+        var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,points,3);
+        attr.numItems=points.length/3;
+        mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,tc,2);
+    }
 }
 
 render.onTriggered=function()
@@ -47,20 +53,14 @@ render.onTriggered=function()
         var shader=cgl.getShader();
         if(!shader)return;
 
-        cgl.pushModelMatrix();
+        var oldPrim=shader.glPrimitive;
+        shader.glPrimitive=cgl.gl.LINES;
 
-        shader.bind();
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+        if(mesh) mesh.render(shader);
 
-        cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(),buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
-        cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+        shader.glPrimitive=oldPrim;
 
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-        cgl.gl.drawArrays(cgl.gl.LINES, 0, buffer.numItems);
-
-        cgl.popModelMatrix();
         trigger.trigger();
-
     }
 };
 
