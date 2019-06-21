@@ -12,6 +12,11 @@
             {
                 "type": "1",
                 "name": "Send"
+            },
+            {
+                "type": "0",
+                "name": "Send String",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

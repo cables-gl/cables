@@ -68,6 +68,11 @@
             "message": "optimized accepts floats as input for index and makes it an integer",
             "author": "andro",
             "date": 1557328099124
+        },
+        {
+            "message": "Ops.Array.Array3xGetValues renamed to Ops.Deprecated.Array.Array3xGetValues",
+            "author": "pandur",
+            "date": 1561119542157
         }
     ],
     "issues": ""

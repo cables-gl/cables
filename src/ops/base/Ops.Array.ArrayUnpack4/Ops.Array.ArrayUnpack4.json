@@ -60,5 +60,12 @@
     "relatedops": [
         "Ops.Array.ArrayPack3",
         "Ops.Gl.TextureFromColorArray"
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayUnpack4x renamed to Ops.Array.ArrayUnpack4",
+            "author": "pandur",
+            "date": 1561119475404
+        }
     ]
 }

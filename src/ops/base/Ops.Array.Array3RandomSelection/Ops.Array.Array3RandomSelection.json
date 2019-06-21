@@ -53,5 +53,12 @@
             }
         ]
     },
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xRandomSelection renamed to Ops.Array.Array3RandomSelection",
+            "author": "pandur",
+            "date": 1561119598200
+        }
+    ]
 }

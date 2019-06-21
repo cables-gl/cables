@@ -53,5 +53,12 @@
                 "text": "The average of the z component"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xAverage renamed to Ops.Array.Array3Average",
+            "author": "pandur",
+            "date": 1561119837246
+        }
+    ]
 }

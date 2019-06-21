@@ -37,5 +37,12 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xInterpolateDistributed renamed to Ops.Array.Array3InterpolateDistributed",
+            "author": "pandur",
+            "date": 1561119629301
+        }
+    ]
 }
