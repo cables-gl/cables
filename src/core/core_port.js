@@ -77,8 +77,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
  * @type Function
  */
 
-
-
 {
     CABLES.Port.prototype.onAnimToggle=function(){};
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
@@ -165,6 +163,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                 {
                     try
                     {
+                        
                         this.value=v;
                         this.forceChange();
                     }
@@ -243,11 +242,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.getTypeString=function()
     {
-        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Value';
+        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Number';
         else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Function';
         else if(this.type==CABLES.OP_PORT_TYPE_OBJECT)return 'Object';
         else if(this.type==CABLES.OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
         else if(this.type==CABLES.OP_PORT_TYPE_ARRAY)return 'Array';
+        else if(this.type==CABLES.OP_PORT_TYPE_STRING)return 'String';
         else return 'Unknown';
     };
 
@@ -285,8 +285,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.removeLinks=function()
     {
+        
+        var count=0;
         while(this.links.length>0)
         {
+            count++;
+            if(count>5000)
+            {
+                console.warn('could not delete links... / infinite loop');
+                this.links.length=0;
+                break;
+            }
             this.links[0].remove();
         }
     };

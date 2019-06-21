@@ -61,6 +61,12 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Vertex Colors",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "texture",
                 "group": "Texture"
@@ -168,5 +174,12 @@
     "collections": null,
     "relatedops": [
         "Ops.Gl.Meshes.PointCloudFromArray"
+    ],
+    "changelog": [
+        {
+            "message": "added support for vertex colors",
+            "author": "pandur",
+            "date": 1561041326814
+        }
     ]
 }

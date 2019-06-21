@@ -51,7 +51,7 @@ function calcNormals()
         return;
     }
 
-    if(inNormals.get()=='no')return;
+    if(inNormals.get()=='no')reload();
     if(inNormals.get()=='smooth')geom.calculateNormals();
     if(inNormals.get()=='flat')
     {

@@ -6,22 +6,25 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "CC Index",
+                "group": "CC",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Normalize",
-                "subType": "string"
+                "group": "CC"
             },
             {
                 "type": "1",
@@ -38,6 +41,10 @@
                 "name": "Event"
             },
             {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
                 "type": "0",
                 "name": "CC Index Out",
                 "subType": "number"
@@ -46,10 +53,6 @@
                 "type": "0",
                 "name": "CC Value Out",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Trigger Out"
             }
         ],
         "name": "Ops.Devices.Midi.MidiCC"

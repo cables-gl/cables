@@ -5,7 +5,7 @@ const segments=op.inValueInt('segments',40);
 const percent=op.inValueSlider('percent',1);
 const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
-const mapping=op.inValueSelect("mapping",['flat','round']);
+const mapping=op.inSwitch("mapping",['flat','round']);
 const drawSpline=op.inValueBool("Spline",false);
 
 const inDraw=op.inValueBool('Draw',true);

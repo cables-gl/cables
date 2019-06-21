@@ -1,5 +1,4 @@
 {
-    "updated": 1543065295679,
     "authorName": "pandur",
     "id": "ce0fff72-1438-4373-924f-e1d0f78b053f",
     "created": 1518859707157,
@@ -47,7 +46,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.BlendMode2"
+        "name": "Ops.Gl.BlendMode"
     },
     "youtubeid": "",
     "issues": "",

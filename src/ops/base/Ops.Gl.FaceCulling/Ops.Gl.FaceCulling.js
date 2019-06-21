@@ -2,7 +2,7 @@ const
     render=op.inTrigger("render"),
     trigger=op.outTrigger("trigger"),
     enable=op.inValueBool("enable",true),
-    facing=op.inValueSelect("facing",['back','front','both'],'back'),
+    facing=op.inSwitch("facing",['back','front','both'],'back'),
     cgl=op.patch.cgl;
 
 var whichFace=cgl.gl.BACK;

@@ -11,6 +11,7 @@ const
     b = op.inValueSlider("b", Math.random()),
     a = op.inValueSlider("a",1),
     preMultipliedAlpha=op.inValueBool("preMultiplied alpha"),
+    vertCols=op.inBool("Vertex Colors",false),
     texture=op.inTexture("texture"),
     textureMask=op.inTexture("Texture Mask"),
     colorizeTexture=op.inValueBool("colorizeTexture",false),
@@ -19,7 +20,7 @@ const
     shaderOut=op.outObject("shader");
 
 op.setPortGroup("Texture",[textureLookup,textureMask,texture,colorizeTexture]);
-op.setPortGroup("Color",[r,g,b,a,preMultipliedAlpha]);
+op.setPortGroup("Color",[r,g,b,a,preMultipliedAlpha,vertCols]);
 op.setPortGroup("Size",[pointSize,randomSize,makeRound,doScale]);
 r.setUiAttribs({ colorPick: true });
 
@@ -93,6 +94,11 @@ colorizeTexture.onChange=function()
 textureLookup.onChange=function()
 {
     shader.toggleDefine('LOOKUP_TEXTURE',textureLookup.get());
+};
+
+vertCols.onChange=function()
+{
+    shader.toggleDefine('VERTEX_COLORS',vertCols.get());
 };
 
 texture.onChange=function()

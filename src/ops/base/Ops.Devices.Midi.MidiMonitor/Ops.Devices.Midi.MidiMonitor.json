@@ -13,7 +13,8 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "Event"
+                "name": "Event",
+                "group": "MIDI"
             }
         ],
         "portsOut": [

@@ -1,6 +1,6 @@
-# Value Ports
+# Floating Point Number Ports
 
-This page will explain how to create an input and ouput port of the type `Value`<br>
+This page will explain how to create an input and ouput port of the type `Number`<br>
 ![Button](../img/creating_ports_value_port_color.png)<br> 
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
@@ -14,9 +14,9 @@ Value ports can hold a single float like -1 or 2.45
 "use strict";
 
 //Create a input port of the type value
-const inVal   = op.inValueFloat("Value in");
+const inVal   = op.inFloat("Value in");
 //Create a output port of the type value
-const outResult  = op.outValue("Value out");
+const outResult  = op.outNumber("Value out");
 
 //when input port changes call the function 'update'
 inVal.onChange = update;
@@ -24,9 +24,7 @@ inVal.onChange = update;
 //this function runs every time the input port changes
 function update()
 {
-    //set the ouput port to the value of the input port
-    //parse the input for a float, if it isn't a float set to Nan 
-    outResult.set(parseFloat( inVal.get()));
+    outResult.set(inVal.get());
 }
 ```
 

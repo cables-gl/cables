@@ -24,7 +24,7 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.String.Concat2"
+        "name": "Ops.String.Concat_v2"
     },
     "summary": "Joins two strings together",
     "youtubeid": "",

@@ -17,9 +17,9 @@ The input string will be passed out of the output port
 "use strict";
 
 //Create a input port of the type String
-const inString  = op.inValueString("String in");
+const inString  = op.inString("String in");
 //Create a output port of the type String
-const outString = op.outValueString("String out");
+const outString = op.outString("String out");
 
 //when input port changes call the function 'update'
 inString.onChange = update;

@@ -12,10 +12,23 @@ update();
 function update()
 {
     if(inBlend.get()=="Normal")blendMode=CGL.BLEND_NORMAL;
-    else if(inBlend.get()=="Add")blendMode=CGL.BLEND_ADD;
-    else if(inBlend.get()=="Subtract")blendMode=CGL.BLEND_SUB;
-    else if(inBlend.get()=="Multiply")blendMode=CGL.BLEND_MUL;
-    else blendMode=CGL.BLEND_NONE;
+        else if(inBlend.get()=="Add")blendMode=CGL.BLEND_ADD;
+        else if(inBlend.get()=="Subtract")blendMode=CGL.BLEND_SUB;
+        else if(inBlend.get()=="Multiply")blendMode=CGL.BLEND_MUL;
+        else blendMode=CGL.BLEND_NONE;
+
+    if(CABLES.UI)
+    {
+        var blstr='';
+        if(inBlend.get()=="Normal")blstr='';
+            else if(inBlend.get()=="Add")blstr='Add';
+            else if(inBlend.get()=="Subtract")blstr='Sub';
+            else if(inBlend.get()=="Multiply")blstr='Mul';
+            else blstr='None';
+
+        op.setUiAttrib({"extendTitle":blstr});
+    }
+
 }
 
 exec.onTriggered=function()

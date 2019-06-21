@@ -25,5 +25,11 @@
     "summary": "multiply modelmatrix",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "math"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

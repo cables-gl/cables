@@ -329,7 +329,12 @@ CGL.Geometry.prototype.isIndexed=function()
 };
 
 
-CGL.Geometry.prototype.unIndex=function()
+/**
+ * @function
+ * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
+ * @name CGL.Geometry#unIndex
+ */
+CGL.Geometry.prototype.unIndex=function(reIndex)
 {
     var newVerts=[];
     var newIndizes=[];
@@ -416,9 +421,8 @@ CGL.Geometry.prototype.unIndex=function()
     this.vertices=newVerts;
     this.texCoords=newTexCoords;
     this.vertexNormals=newNormals;
-
-    // TODO why does unindexed has indizes ???????????????????????????
-    this.verticesIndices=newIndizes;
+    this.verticesIndices.length=0;
+    if(reIndex) this.verticesIndices=newIndizes;
     this.calculateNormals();
 };
 
@@ -533,7 +537,6 @@ CGL.Geometry.buildFromFaces=function(arr)
         var a=arr[i+0];
         var b=arr[i+1];
         var c=arr[i+2];
-
         var face=[-1,-1,-1];
 
         for(var iv=0;iv<vertices;iv+=3)
@@ -572,8 +575,6 @@ CGL.Geometry.buildFromFaces=function(arr)
         verticesIndices.push( parseInt( face[0],10 ) );
         verticesIndices.push( parseInt( face[1],10 ) );
         verticesIndices.push( parseInt( face[2],10 ) );
-
-        // this.faceVertCount=verticesIndices.length;
     }
 
     var geom=new CGL.Geometry();
@@ -601,10 +602,6 @@ CGL.Geometry.json2geom=function(jsonMesh)
     if(jsonMesh.tangents_b64) geom.tangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.tangents_b64));
     if(jsonMesh.bitangents_b64) geom.biTangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.bitangents_b64));
     if(jsonMesh.texturecoords_b64) geom.setTexCoords( new Float32Array(CABLES.b64decTypedArray(jsonMesh.texturecoords_b64[0])));
-
-    // console.log(jsonMesh.vertices[2],geom.vertices[2]);
-    // console.log(jsonMesh.vertices.length,geom.vertices.length);
-    // console.log(geom);
 
     if(jsonMesh.faces_b64)
     {

@@ -11,7 +11,8 @@ trigger.onTriggered=update;
 
 function update()
 {
-    var str='url('+filename.get()+') '+offX.get()+' '+offX.get()+', auto';
+
+    var str='url('+op.patch.getFilePath(String(filename.get()))+') '+offX.get()+' '+offX.get()+', auto';
     op.patch.cgl.canvas.style.cursor = str;
 }
 

@@ -1,10 +1,10 @@
 const
     render=op.inTrigger("render"),
     trigger=op.outTrigger("trigger"),
-    r=op.inValueSlider("r",0.1),
-    g=op.inValueSlider("g",0.1),
-    b=op.inValueSlider("b",0.1),
-    a=op.inValueSlider("a",1);
+    r=op.inFloatSlider("r",0.1),
+    g=op.inFloatSlider("g",0.1),
+    b=op.inFloatSlider("b",0.1),
+    a=op.inFloatSlider("a",1);
 
 r.setUiAttribs({ colorPick: true });
 

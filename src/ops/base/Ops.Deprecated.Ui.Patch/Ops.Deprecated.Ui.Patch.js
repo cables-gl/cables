@@ -146,7 +146,7 @@ function createPatchInputPort(dynPort,name)
         {
             pOut.trigger();
         };
-        dynPort.onTriggered();
+        if(dynPort.onTriggered)dynPort.onTriggered();
     }
     else
     {
@@ -154,7 +154,7 @@ function createPatchInputPort(dynPort,name)
         {
             pOut.set(dynPort.get());
         };
-        dynPort.onValueChanged();
+        if(dynPort.onValueChanged)dynPort.onValueChanged();
     }
 
     return pOut;

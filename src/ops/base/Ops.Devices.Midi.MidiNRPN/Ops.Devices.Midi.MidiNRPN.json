@@ -6,21 +6,25 @@
         "portsIn": [
             {
                 "type": "2",
-                "name": "MIDI Event In"
+                "name": "MIDI Event In",
+                "group": "MIDI"
             },
             {
                 "type": "0",
                 "name": "MIDI Channel",
+                "group": "MIDI",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "NRPN Index",
+                "group": "NRPN",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Normalize",
+                "group": "NRPN",
                 "subType": "string"
             },
             {
@@ -34,6 +38,10 @@
                 "name": "MIDI Event Out"
             },
             {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
                 "type": "0",
                 "name": "NRPN Index",
                 "subType": "number"
@@ -42,10 +50,6 @@
                 "type": "0",
                 "name": "NRPN Value",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Trigger Out"
             }
         ],
         "name": "Ops.Devices.Midi.MidiNRPN"

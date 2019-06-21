@@ -12,12 +12,12 @@ A naming example below:
 Now add the following code:    
 
 ```javascript
-const myInPort = op.inValueFloat("Input");
+const myInPort = op.inFloat("Input");
 ```
 We have now created a new variable of the type value. Lets break this line of code down:
 - **var** creates a new variable
 - **myInPort** is the name of the variable, you could write anything here
-- **op** references to the operator itself **.inValueFloat("Input")** creates an input port of the type value
+- **op** references to the operator itself **.inFloat("Input")** creates an input port of the type value
 
 Don't worry if your not following this all right now, it will all make much more sense later on :)
 
@@ -25,7 +25,7 @@ We have now defined a new port called `myInPort` with the visible text label `My
 In this example we will just forward the input value to an out-port. So let’s define it below:
 
 ```javascript
-var myOutPort = op.outValue("Output");
+var myOutPort = op.outNumber("Output");
 ```
 
 In the top of the editor window click on `Save` and afterwards `Execute`, now reload the patch (the browser window) by pressing `cmd + r`. Now click on `Op` —> `Add` on the very top of the window, enter the name of the op you just created – `HelloOp` and press Enter.
@@ -54,8 +54,8 @@ myInPort.onChange = function()
 Your op-code should look like this now:  
 
 ```javascript
-const myInPort = op.inValueFloat("Input");
-const myOutPort = op.outValue("Output");
+const myInPort = op.inFloat("Input");
+const myOutPort = op.outNumber("Output");
 
 myInPort.onChange = function() 
 {
@@ -91,7 +91,7 @@ To change the multiplication amount we have to go into the code editor which is 
 We'll create a second input port and use this to define the multiplication amount.
 Add the following line of code below the first **myInputPort**
 ```javascript
-const multiplyValueIn = op.inValueFloat("Multiply amount");
+const multiplyValueIn = op.inFloat("Multiply amount");
 ```
 
 This creates a second port and a new part on the object pane which allows us to set the multiplication amount.
@@ -102,9 +102,9 @@ Your op should now look like this
 
 Your code should look like this
 ```javascript
-const myInPort = op.inValueFloat("Input");
-const multiplyValueIn = op.inValueFloat("Multiply amount");
-const myOutPort = op.outValue("Output");
+const myInPort = op.inFloat("Input");
+const multiplyValueIn = op.inFloat("Multiply amount");
+const myOutPort = op.outNumber("Output");
 ```
 
 

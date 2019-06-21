@@ -12,9 +12,8 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "facing",
-                "subType": "string"
+                "type": "5",
+                "name": "facing"
             }
         ],
         "portsOut": [
@@ -25,7 +24,6 @@
         ],
         "name": "Ops.Gl.FaceCulling"
     },
-    "updated": 1541772817826,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a389f42c-7324-45c9-bb47-369e31d602f0",

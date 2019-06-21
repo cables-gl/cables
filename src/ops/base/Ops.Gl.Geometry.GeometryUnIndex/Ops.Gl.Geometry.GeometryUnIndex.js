@@ -18,9 +18,6 @@ geometry.onChange=function()
         newGeom.unIndex();
         result.set(newGeom);
     }
-    else
-    {
-        result.set(null);
-    }
+    else result.set(null);
 
 };

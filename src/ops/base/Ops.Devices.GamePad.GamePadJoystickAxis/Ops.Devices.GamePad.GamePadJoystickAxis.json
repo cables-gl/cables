@@ -43,11 +43,10 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ]
+    "relatedops": null,
+    "issues": "",
+    "youtubeids": []
 }

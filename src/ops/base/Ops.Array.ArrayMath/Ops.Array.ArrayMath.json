@@ -14,9 +14,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Math function",
-                "subType": "string"
+                "type": "5",
+                "name": "Math function"
             }
         ],
         "portsOut": [
