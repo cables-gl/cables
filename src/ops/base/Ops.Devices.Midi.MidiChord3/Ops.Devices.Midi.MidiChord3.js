@@ -90,6 +90,7 @@ reset.onTriggered = () => {
   learnCount = 0;
   learnedNotes = [];
   noteDropdowns.forEach(nd => nd.set(0));
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
 };
 
 inEvent.onChange = () => {

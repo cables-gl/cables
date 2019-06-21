@@ -36,6 +36,11 @@
                 "subType": "string"
             },
             {
+                "type": "0",
+                "name": "Z Multiply",
+                "subType": "number"
+            },
+            {
                 "type": "2",
                 "name": "texture"
             }
@@ -56,5 +61,13 @@
             }
         ],
         "name": "Ops.Gl.TextureToPoints"
+    },
+    "summary": "Create points by sampling texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

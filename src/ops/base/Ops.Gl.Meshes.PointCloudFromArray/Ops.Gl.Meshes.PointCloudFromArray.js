@@ -8,13 +8,11 @@ const
     seed=op.inValue("Seed"),
     vertCols=op.inArray("Vertex Colors");
 
+
 const cgl=op.patch.cgl;
 
 pTexCoordRand.onChange=updateRandTexCoords;
-seed.onChange=
-    arr.onChange=
-    vertCols.onChange=
-    reset;
+seed.onChange=arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
 op.toWorkPortsNeedToBeLinked(arr,exe);
@@ -38,7 +36,7 @@ function doRender()
         {
             if(!hasError)
             {
-                op.uiAttr({'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
+                op.uiAttr( { 'warning': 'using a Material not made for point rendering. maybe use pointMaterial.' } );
                 hasError=true;
             }
             return;
@@ -51,10 +49,7 @@ function doRender()
     }
 
     if(needsRebuild || !mesh)rebuild();
-
-    var verts=arr.get();
-
-    if(verts && verts.length>0 && mesh) mesh.render(cgl.getShader());
+    if(mesh) mesh.render(cgl.getShader());
 }
 
 function reset()
@@ -83,11 +78,11 @@ function rebuild()
     var verts=arr.get();
     if(!verts || verts.length==0)
     {
-        // mesh=null;
+        mesh=null;
         return;
     }
 
-    // geom.clear();
+    geom.clear();
     var num=verts.length/3;
     num=Math.abs(Math.floor(num));
 
@@ -118,34 +113,28 @@ function rebuild()
         }
     }
 
+    if(vertCols.get())
+    {
+        if(!showingError && vertCols.get().length!=num*4)
+        {
+            op.uiAttr({error:"Color array does not have the correct length! (should be "+num*4+")"});
+            showingError = true;
+            mesh=null;
+            return;
+        }
+
+        geom.vertexColors=vertCols.get();
+    }
+    else geom.vertexColors=[];
+
     if(changed)
     {
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
-
-        if(vertCols.get())
-        {
-            if(!showingError && vertCols.get().length!=num*4)
-            {
-                op.uiAttr({error:"Color array does not have the correct length! (should be "+num*4+")"});
-                showingError = true;
-                mesh=null;
-                return;
-            }
-
-            geom.vertexColors=vertCols.get();
-        }
-        else geom.vertexColors=[];
-
-        if(showingError)
-        {
-            showingError = false;
-            op.uiAttr({error:null});
-        }
-
         geom.verticesIndices=[];
 
-        if(!mesh)mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
+        if(mesh)mesh.dispose();
+        mesh=new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
 
         mesh.addVertexNumbers=true;
         mesh.setGeom(geom);

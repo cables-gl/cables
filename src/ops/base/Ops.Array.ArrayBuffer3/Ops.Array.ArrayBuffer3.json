@@ -44,7 +44,36 @@
     },
     "summary": "circular buffer for xyz values",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Max Num Elements",
+                "text": "Maximum length of array"
+            },
+            {
+                "name": "Value X",
+                "text": "Number 0 to write to X component of array"
+            },
+            {
+                "name": "Value Y",
+                "text": "Number 1 to write to Y component of array"
+            },
+            {
+                "name": "Value Z",
+                "text": "Number 2 to write to Z component of array"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset array"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     },
     "changelog": [
         {
@@ -52,5 +81,9 @@
             "author": "pandur",
             "date": 1560335466288
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

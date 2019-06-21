@@ -39,7 +39,6 @@
         "name": "Ops.Json.ObjectGetArray2"
     },
     "summary": "Returns an array from a JSON-object",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -62,5 +61,6 @@
                 "text": "The length of the array"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

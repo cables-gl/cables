@@ -1,4 +1,4 @@
-const modeSelect = op.inValueSelect("Mode select",['Number','1,2,3,4'],'Number'),
+const modeSelect = op.inSwitch("Mode select",['Number','1,2,3,4'],'Number'),
     inLength=op.inValueInt("Array length",10),
     inDefaultValue=op.inValueFloat("Default Value"),
     outArr=op.outArray("Array");
@@ -17,6 +17,7 @@ modeSelect.onChange = function()
         inDefaultValue.setUiAttribs({greyout:true});
     }
     reset();
+    op.setUiAttrib({"extendTitle":modeSelect.get()});
 }
 
 inDefaultValue.onChange = inLength.onChange = function ()

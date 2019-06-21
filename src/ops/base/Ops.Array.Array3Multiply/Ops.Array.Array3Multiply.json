@@ -1,5 +1,4 @@
 {
-    "updated": 1515878828523,
     "authorName": "pandur",
     "id": "a1e4d85f-0955-4ada-819c-c597cec40365",
     "created": 1515878597720,
@@ -11,15 +10,18 @@
             },
             {
                 "type": "0",
-                "name": "Mul X"
+                "name": "Mul X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Mul Y"
+                "name": "Mul Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Mul Z"
+                "name": "Mul Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -28,7 +30,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.Array3xMultiply"
+        "name": "Ops.Array.Array3Multiply"
     },
     "summary": "multiply every XYZ member of array3x",
     "docs": {

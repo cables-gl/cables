@@ -93,7 +93,24 @@
     },
     "summary": "switch betwen different textures",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "num",
+                "text": "Input port to pick texture from"
+            },
+            {
+                "name": "Default Texture Transparent",
+                "text": "Enable transparency"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            }
+        ]
     },
     "changelog": [
         {
@@ -101,5 +118,9 @@
             "author": "pandur",
             "date": 1560335410656
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

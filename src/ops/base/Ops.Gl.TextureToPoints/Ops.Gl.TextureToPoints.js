@@ -1,9 +1,10 @@
 const
     cgl = op.patch.cgl,
-    pUpdate = op.inTrigger("update"),
+    pUpdate = op.inTriggerButton("update"),
     inNum=op.inValueInt("Num Points",2000),
     inSeed=op.inValueFloat("Seed",1),
     zPos = op.inValueSelect("Z Position",['None','Red','Green','Blue','Alpha'],'Red'),
+    zMultiply = op.inValueFloat("Z Multiply",1.0),
     tex = op.inObject("texture"),
     outTrigger = op.outTrigger("trigger"),
     outPoints = op.outArray("Points"),
@@ -93,7 +94,7 @@ function updatePixels ()
             points[ind++]=((x*pixelStepX)-(offsetX));
             points[ind++]=((y*pixelStepY)-(offsetY));
 
-            if(colChanOffset<4) points[ind++]=(intens/255);
+            if(colChanOffset<4) points[ind++]=(intens/255)*zMultiply.get();
             else points[ind++]=0;
         }
     }

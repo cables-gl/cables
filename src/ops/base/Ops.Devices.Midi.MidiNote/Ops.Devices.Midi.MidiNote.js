@@ -24,9 +24,10 @@ const normalizeDropdown = op.inSwitch(
 );
 const gateType = op.inBool('Toggle Gate', false);
 const learn = op.inTriggerButton('learn');
+const clear = op.inTriggerButton('clear');
 
 op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
-op.setPortGroup('', [learn]);
+op.setPortGroup('', [learn, clear]);
 op.setPortGroup('Note', [noteDropdown, normalizeDropdown, gateType]);
 
 /* OUT */
@@ -44,6 +45,14 @@ midiChannelDropdown.set(1);
 let learning = false;
 learn.onTriggered = () => {
   learning = true;
+};
+
+clear.onTriggered = () => {
+  noteDropdown.set(0);
+  midiChannelDropdown.set(1);
+  normalizeDropdown.set(normalizeDropdown.get('none'));
+  gateType.set(false);
+  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
 };
 
 gateType.onChange = () => {
@@ -101,7 +110,7 @@ inEvent.onChange = () => {
       }
     } else if (noteDropdown.get() === 0) {
       // no note selected
-      if ((statusByte >> 4 === NOTE_OFF + event.channel || velocity === 0) && !gateType.get()) {
+      if ((statusByte >> 4 === NOTE_OFF || velocity === 0) && !gateType.get()) {
         gateOut.set(false);
         velocityOut.set(0);
       } else if (statusByte >> 4 === NOTE_ON) {
