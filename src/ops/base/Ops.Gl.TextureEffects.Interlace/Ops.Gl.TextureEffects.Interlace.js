@@ -1,7 +1,7 @@
 var render=op.inTrigger('render');
 var amount=op.inValueSlider("amount",0.5);
 var lum=op.inValueSlider("Lumi Scale",0.9);
-var direction = op.inBool("direction",true);
+var direction = op.inBool("X or Y",true);
 var lineSize=op.inValue("Line Size",4);
 var displace=op.inValueSlider("Displacement",0);
 

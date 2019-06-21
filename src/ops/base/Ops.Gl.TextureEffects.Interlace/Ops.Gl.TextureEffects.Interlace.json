@@ -17,7 +17,7 @@
             },
             {
                 "type": "0",
-                "name": "direction",
+                "name": "X or Y",
                 "subType": "boolean"
             },
             {

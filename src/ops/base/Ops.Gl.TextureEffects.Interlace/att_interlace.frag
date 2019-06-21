@@ -18,13 +18,13 @@ void main()
    col=texture(tex,texCoord);
     // .endl()+'   col=clamp(col,0.0,1.0);'
 
-    float dir = 0.0;
+    float dir;
     #ifdef DIRECTION
-        dir = gl_FragCoord.y;
+        dir = gl_FragCoord.x;
     #endif
 
     #ifndef DIRECTION
-        dir = gl_FragCoord.x;
+        dir = gl_FragCoord.y;
     #endif
 
    if( mod(dir+scroll,lineSize)>=lineSize*0.5)
