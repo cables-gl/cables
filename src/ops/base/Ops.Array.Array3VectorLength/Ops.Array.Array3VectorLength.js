@@ -21,7 +21,9 @@ inArray.onChange=function()
 
     newArr.length = Math.floor(arr.length/3);
 
-    if(newArr.length % 3 === 0)
+    var divisibleBy3 = newArr.length % 3 === 0;
+
+    if(divisibleBy3 === false)
     {
         if(!showingError)
         {

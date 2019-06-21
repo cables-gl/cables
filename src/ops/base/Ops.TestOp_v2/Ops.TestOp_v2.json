@@ -1,0 +1,27 @@
+{
+    "id": "a958b8b6-6a77-4661-9e9f-4d915466b1a3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559035880114
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559035882703,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "test float 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "test float 2",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.TestOp_v2"
+    }
+}

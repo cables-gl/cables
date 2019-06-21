@@ -1,66 +1,23 @@
-var cgl=op.patch.cgl;
+const cgl=op.patch.cgl;
+const render=op.inTrigger("render");
+const trigger=op.outTrigger('trigger');
+const opacity=op.inValueFloat("opacity",1);
 
-var render=op.addInPort(new CABLES.Port(op,"render",CABLES.OP_PORT_TYPE_FUNCTION) );
-var trigger=op.outTrigger('trigger');
-var opacity=op.addInPort(new CABLES.Port(op,"opacity",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-opacity.set(1);
+var shader=new CGL.Shader(cgl,'vertex color material');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
+shader.setSource(attachments.vertexcolor_vert,attachments.vertexcolor_frag);
 
-var srcVert=''
-    .endl()+'{{MODULES_HEAD}}'
-
-    .endl()+'IN vec3 vPosition;'
-    .endl()+'IN vec3 attrVertColor;'
-    .endl()+'UNI mat4 projMatrix;'
-    .endl()+'UNI mat4 mvMatrix;'
-    .endl()+'OUT vec4 color;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   color.rgb=attrVertColor;'
-    .endl()+'    vec4 pos = vec4( vPosition, 1. );'
-
-    .endl()+'{{MODULE_VERTEX_POSITION}}'
-
-    .endl()+'   gl_Position = projMatrix * mvMatrix * pos;'
-    .endl()+'}';
-
-var srcFrag=''
-    .endl()+'{{MODULES_HEAD}}'
-
-    .endl()+'IN vec4 color;'
-    .endl()+'UNI float opacity;'
-
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'{{MODULE_BEGIN_FRAG}}'
-    .endl()+'   vec4 col=color;'
-    .endl()+'{{MODULE_COLOR}}'
-
-    .endl()+'   col.a=opacity;'
-    .endl()+'   outColor= col;'
-    .endl()+'}';
-
-var doRender=function()
-{
-    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-    cgl.setShader(shader);
-    trigger.trigger();
-    cgl.setPreviousShader();
-};
+render.onTriggered=doRender;
 
 opacity.onChange=function()
 {
     shader.uniOpacity.setValue(opacity.get());
 };
 
-
-var shader=new CGL.Shader(cgl,'vertex color material');
-shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.uniOpacity=new CGL.Uniform(shader,'f','opacity',opacity.get());
-
-shader.setSource(srcVert,srcFrag);
-
-
-render.onTriggered=doRender;
-
-doRender();
+function doRender()
+{
+    cgl.setShader(shader);
+    trigger.trigger();
+    cgl.setPreviousShader();
+}
