@@ -45,8 +45,6 @@ CABLES.Op = function()
 
     if(arguments[1])
     {
-
-        
         this._shortOpName=arguments[1].split('.')[arguments[1].split('.').length-1]
 
         if(this._shortOpName.indexOf(CABLES.OP_VERSION_PREFIX)>0)
@@ -56,7 +54,6 @@ CABLES.Op = function()
         }
 
         this.uiAttribs.title=this._shortOpName;
-        console.log('this._shortOpName',this._shortOpName);
     }
     // this.name=this.name.split('.')[this.name.split('.').length-1]
     // const a=this.name.substring(this.name.length - 1, this.name.length);
@@ -551,9 +548,7 @@ CABLES.Op = function()
         op.uiAttribs=this.uiAttribs;
 
         if(this.uiAttribs.title==this._shortOpName) delete this.uiAttribs.title;
-
         if(this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working==true) delete this.uiAttribs.working;
-        if(this.uiAttribs.hasOwnProperty("subPatch") && this.uiAttribs.subPatch===0) delete this.uiAttribs.subPatch;
 
         op.portsIn=[];
         op.portsOut=[];
