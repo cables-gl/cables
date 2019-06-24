@@ -1,0 +1,42 @@
+{
+    "id": "fa10c94d-d14e-41d3-b690-26d7cac5f146",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1561395575686
+        }
+    ],
+    "authorName": "cables",
+    "created": 1561395625188,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Num Subdivs",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Bezier Start/End Points",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.SubdivideArray1"
+    }
+}
