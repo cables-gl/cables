@@ -22,7 +22,7 @@
     * [Calling External Functions / Triggering Ops from Outside](dev_embed_functions/dev_embed_functions.md)
   * [Writing Ops](chapter_readmes/writing_ops/readme.md)
     * [Hello Op](dev_hello_op/dev_hello_op.md)
-    * [Namespaces](namespaces/namespaces.md)
+    * [GuideLines](guidelines/guidelines.md)
     * [Op Development](dev_ops/dev_ops.md)
     * [Ports](dev_creating_ports/dev_creating_ports.md)
       * [Trigger Ports](dev_creating_ports/dev_ports_trigger/dev_ports_trigger.md)
