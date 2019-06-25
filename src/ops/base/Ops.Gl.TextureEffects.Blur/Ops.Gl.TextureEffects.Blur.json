@@ -12,9 +12,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "direction",
-                "subType": "string"
+                "type": "5",
+                "name": "direction"
             },
             {
                 "type": "0",

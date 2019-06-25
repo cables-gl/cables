@@ -1,6 +1,6 @@
 const
     render=op.inTrigger('render'),
-    inAttr=op.inValueSelect('Attribute',["Normals","Tangents","BiTangents"],"Normals"),
+    inAttr=op.inSwitch('Attribute',["Normals","Tangents","BiTangents"],"Normals"),
     trigger=op.outTrigger('trigger'),
     outShader=op.outObject("Shader");
 

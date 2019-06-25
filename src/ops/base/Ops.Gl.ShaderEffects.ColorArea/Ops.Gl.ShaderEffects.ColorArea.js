@@ -10,9 +10,7 @@ const inAmount=op.inValueSlider("Amount",0.5);
 
 const inFalloff=op.inValueSlider("Falloff",0);
 const inInvert=op.inValueBool("Invert");
-
-
-var inBlend=op.inValueSelect("Blend ",["Normal","Multiply"],"Normal");
+var inBlend=op.inSwitch("Blend ",["Normal","Multiply"],"Normal");
 
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());

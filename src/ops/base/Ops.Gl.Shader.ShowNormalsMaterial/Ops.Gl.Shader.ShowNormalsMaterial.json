@@ -6,9 +6,8 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "Attribute",
-                "subType": "string"
+                "type": "5",
+                "name": "Attribute"
             }
         ],
         "portsOut": [

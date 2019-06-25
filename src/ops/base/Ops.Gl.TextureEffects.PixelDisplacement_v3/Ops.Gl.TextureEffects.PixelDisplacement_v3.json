@@ -37,10 +37,9 @@
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Wrap",
-                "group": "Modes",
-                "subType": "string"
+                "group": "Modes"
             },
             {
                 "type": "0",
@@ -49,9 +48,8 @@
                 "subType": "string"
             },
             {
-                "type": "0",
-                "name": "Zero Displace",
-                "subType": "string"
+                "type": "5",
+                "name": "Zero Displace"
             }
         ],
         "portsOut": [
@@ -60,7 +58,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.PixelDisplacement3"
+        "name": "Ops.Gl.TextureEffects.PixelDisplacement_v3"
     },
     "summary": "Changes color lookup for every pixel using a displacement map",
     "youtubeid": "cc5Vlmvlq6A",

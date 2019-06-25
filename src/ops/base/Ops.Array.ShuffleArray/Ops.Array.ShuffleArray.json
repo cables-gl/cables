@@ -7,6 +7,10 @@
                 "name": "Execute"
             },
             {
+                "type": "1",
+                "name": "Shuffle array"
+            },
+            {
                 "type": "3",
                 "name": "array"
             }
@@ -56,6 +60,11 @@
             "message": "code cleanup - removed unused variables",
             "author": "andro",
             "date": 1556103723657
+        },
+        {
+            "message": "Added extra trigger for shuffle which nows as expected.",
+            "author": "andro",
+            "date": 1561362989337
         }
     ],
     "issues": "",

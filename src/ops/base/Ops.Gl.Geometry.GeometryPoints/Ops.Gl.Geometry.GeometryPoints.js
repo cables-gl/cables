@@ -3,6 +3,7 @@ const
     outVertices=op.outArray("Vertices"),
     outFaces=op.outArray("Faces"),
     outTextcoords=op.outArray("TexCoords"),
+    outVertexColors=op.outArray("Vertex Colors"),
     outNormals=op.outArray("Normals"),
     outBiTangents=op.outArray("BiTangents"),
     outTangents=op.outArray("Tangents");
@@ -19,4 +20,5 @@ geometry.onChange=function()
     outNormals.set(geom.vertexNormals);
     outTangents.set(geom.tangents);
     outBiTangents.set(geom.biTangents);
+    outVertexColors.set(geom.vertexColors[0]);
 };

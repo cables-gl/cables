@@ -7,10 +7,9 @@ const steps=op.inValue('steps',0);
 const invertSteps=op.inValueBool('invertSteps',false);
 const mapping=op.inSwitch("mapping",['flat','round']);
 const drawSpline=op.inValueBool("Spline",false);
-
 const inDraw=op.inValueBool('Draw',true);
 const trigger=op.outTrigger('trigger');
-const geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+const geomOut=op.outObject("geometry");
 
 
 op.setPortGroup('Size',[radius,innerRadius]);

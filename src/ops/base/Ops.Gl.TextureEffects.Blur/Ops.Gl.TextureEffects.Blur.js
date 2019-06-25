@@ -1,7 +1,7 @@
 const render=op.inTrigger('render');
 const trigger=op.outTrigger('trigger');
 const amount=op.inValueFloat("amount");
-const direction=op.inValueSelect("direction",['both','vertical','horizontal'],'both');
+const direction=op.inSwitch("direction",['both','vertical','horizontal'],'both');
 const fast=op.inValueBool("Fast",true);
 const cgl=op.patch.cgl;
 

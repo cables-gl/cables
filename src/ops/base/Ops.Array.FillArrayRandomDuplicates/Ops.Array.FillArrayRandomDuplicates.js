@@ -2,6 +2,7 @@ const
     inArr=op.inArray("Array"),
     inNum=op.inValueInt("Num Elements",1000),
     inCalc=op.inTriggerButton("Calculate"),
+    inShuffleAll = op.inBool("Shuffle all"),
     inSeed = op.inValueFloat("Random seed"),
     outArr=op.outArray("Result")
     ;
@@ -25,9 +26,12 @@ inCalc.onTriggered=function()
     var numOld=oldArr.length;
 
     var i=0;
-    for(i=0;i<numOld;i++)
+    if(inShuffleAll.get() === false)
     {
-        arr[i]=oldArr[i];
+        for(i=0;i<numOld;i++)
+        {
+            arr[i]=oldArr[i];
+        }
     }
 
     Math.randomSeed=inSeed.get();

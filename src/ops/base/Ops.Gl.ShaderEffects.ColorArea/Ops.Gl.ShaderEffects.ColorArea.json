@@ -31,10 +31,9 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Blend ",
-                "group": "Color",
-                "subType": "string"
+                "group": "Color"
             },
             {
                 "type": "0",
