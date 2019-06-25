@@ -1,0 +1,49 @@
+{
+    "id": "8fd2ed9b-02e5-4349-b7bc-6665ca240ffa",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1561449100201
+        }
+    ],
+    "authorName": "andro",
+    "created": 1561449111438,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "Divisor Up",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor down",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.AverageInterpolationArray"
+    }
+}
