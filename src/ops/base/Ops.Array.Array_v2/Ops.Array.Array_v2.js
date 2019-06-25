@@ -10,26 +10,29 @@ const MODE_NUMBER = 0;
 const MODE_1_TO_4 = 1;
 const MODE_0_TO_1 = 2;
 
+onFilterChange();
 function onFilterChange()
 {
     var selectedMode = modeSelect.get();
     if(selectedMode === 'Number') selectIndex = MODE_NUMBER;
     else if(selectedMode === '1,2,3,4') selectIndex = MODE_1_TO_4;
     else if(selectedMode === '0-1') selectIndex = MODE_0_TO_1;
-    //used to grey out parameter
-    if( modeSelect.get() === 'Number')
+
+    if( selectIndex === MODE_NUMBER)
     {
         inDefaultValue.setUiAttribs({greyout:false});
     }
-    else if(modeSelect.get() === '1,2,3,4')
+    else if(selectIndex === MODE_1_TO_4)
     {
         inDefaultValue.setUiAttribs({greyout:true});
     }
-    else if(modeSelect.get() === '0-1')
+    else if(selectIndex === MODE_0_TO_1)
     {
         inDefaultValue.setUiAttribs({greyout:true});
     }
     op.setUiAttrib({"extendTitle":modeSelect.get()});
+
+    reset();
 }
 
 function reset()
@@ -41,7 +44,7 @@ function reset()
     var i;
 
     //mode 0 - fill all array values with one number
-    if( modeSelect.get() === 'Number')
+    if( selectIndex === MODE_NUMBER)
     {
         for(i=0;i<arrLength;i++)
         {
@@ -49,7 +52,7 @@ function reset()
         }
     }
     //mode 1 Continuous number array - increments up to array length
-    else if(modeSelect.get() === "1,2,3,4")
+    else if(selectIndex === MODE_1_TO_4)
     {
         for(i = 0;i < arrLength; i++)
         {
@@ -57,7 +60,7 @@ function reset()
         }
     }
     //mode 2 Normalized array
-    else if(modeSelect.get() === "0-1")
+    else if(selectIndex === MODE_0_TO_1)
     {
         var length = arrLength;
         for(i = 0;i < arrLength; i++)
@@ -68,10 +71,9 @@ function reset()
     outArr.set(null);
     outArr.set(arr);
 }
-modeSelect.onChange = inDefaultValue.onChange = inLength.onChange = function ()
+inDefaultValue.onChange = inLength.onChange = function ()
 {
-    onFilterChange();
     reset();
 }
-onFilterChange();
+modeSelect.onChange = onFilterChange;
 reset();
