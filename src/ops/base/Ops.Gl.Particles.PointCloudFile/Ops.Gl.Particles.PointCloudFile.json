@@ -16,12 +16,25 @@
                 "type": "0",
                 "name": "center",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Render",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "trigger"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "3",
+                "name": "Vertex Colors"
             }
         ],
         "name": "Ops.Gl.Particles.PointCloudFile"

@@ -1,5 +1,5 @@
 {
-    "summary": "Stores a value, use the same value in different places",
+    "summary": "Stores a value, use the same value in different places (was: value.value)",
     "layout": {
         "portsIn": [
             {
@@ -38,5 +38,9 @@
             "author": "pandur",
             "date": 1561119761731
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

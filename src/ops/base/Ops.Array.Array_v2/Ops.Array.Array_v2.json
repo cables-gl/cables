@@ -27,7 +27,7 @@
         ],
         "name": "Ops.Array.Array_v2"
     },
-    "summary": "Fill array with one number or fill it with incrementing values ",
+    "summary": "Fill array with one number or fill it with incrementing values (ContinuousNumberArray)",
     "issues": "",
     "collections": null,
     "relatedops": null,

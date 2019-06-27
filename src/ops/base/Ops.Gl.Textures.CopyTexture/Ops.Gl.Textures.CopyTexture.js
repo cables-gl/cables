@@ -152,7 +152,7 @@ var doRender=function()
     if(!inTexture.get())return;
 
     lastTex=inTexture.get();
-
+    var oldEffect=cgl.currentTextureEffect;
     cgl.currentTextureEffect=effect;
     effect.setSourceTexture(tex);
 
@@ -173,7 +173,7 @@ var doRender=function()
 
     cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
-    cgl.currentTextureEffect=null;
+    cgl.currentTextureEffect=oldEffect;
 
     trigger.trigger();
 };
