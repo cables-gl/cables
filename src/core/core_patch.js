@@ -1,68 +1,10 @@
 var CABLES = CABLES || {};
 
 /**
- * patch-config
- * @typedef {Object} patchConfig
- * @memberof CABLES
- * @property {string} [prefixAssetPath=''] path to assets
- * @property {string} [glCanvasId='glcanvas'] dom element id of canvas element
- * @property {function} [onError=null] called when an error occurs
- * @property {function} [onFinishedLoading=null] called when patch finished loading all assets
- * @property {function} [onFirstFrameRendered=null] called when patch rendered it's first frame
- * @property {boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
- * @property {boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
- * @property {boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
- * @property {boolean} [clearCanvasDepth=true] clear depth every frame
- * @property {boolean} [silent=false] 
- * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
- * @property {String} [glslPrecision='mediump'] default precision for glsl shader
- * 
- */
-
-/**
- * op added to patch event
- * @event Patch#onOpAdd
- * @type {object}
- * @property {Op} op new op
- */
-
-/**
- * op deleted from patch
- * @event Patch#onOpDelete
- * @type {object}
- * @property {Op} op that will be deleted
- */
-
-/**
- * link event - two ports will be linked
- * @event Patch#onLink
- * @type {object}
- * @property {Port} port1
- * @property {Port} port2
- */
-
-/**
- * unlink event - a link was deleted
- * @event Patch#onUnLink
- * @type {object}
- */
-
-
-/**
- * variables has been changed / a variable has been added to the patch
- * @event Patch#variablesChanged
- * @type {object}
- * @property {Port} port1
- * @property {Port} port2
- */
-
-
-/**
- * @name Patch
- * @memberof CABLES
- * @param {patchConfig} config
+ * @external CABLES
+ * @namespace Patch
+ * @param {PatchConfig} config The configuration object.
  * @constructor
- * @class
  */
 CABLES.Patch = function(cfg) {
 
@@ -100,7 +42,7 @@ CABLES.Patch = function(cfg) {
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
-
+    
     this.config = cfg || {
         glCanvasResizeToWindow: false,
         // glCanvasId: 'glcanvas',
@@ -177,9 +119,10 @@ CABLES.Patch.prototype.renderOneFrame = function() {
 
 /**
  * current number of frames per second
- * @name CABLES.Patch#getFPS
+ * @function getFPS
+ * @memberof Patch
+ * @instance
  * @return {Number} fps
- * @function
  */
 CABLES.Patch.prototype.getFPS = function() {
     return this._fps;
@@ -188,8 +131,9 @@ CABLES.Patch.prototype.getFPS = function() {
 
 /**
  * pauses patch execution
- * @name CABLES.Patch#pause
- * @function
+ * @function pause
+ * @memberof Patch
+ * @instance
  */
 CABLES.Patch.prototype.pause = function() {
     this._paused = true;
@@ -198,8 +142,9 @@ CABLES.Patch.prototype.pause = function() {
 
 /**
  * resumes patch execution
- * @name CABLES.Patch#resume
- * @function
+ * @function resume
+ * @memberof Patch
+ * @instance
  */
 CABLES.Patch.prototype.resume = function() {
     if (this._paused) {
@@ -211,8 +156,10 @@ CABLES.Patch.prototype.resume = function() {
 
 /**
  * set volume [0-1]
- * @name CABLES.Patch#setVolume
- * @function
+ * @function setVolume
+ * @param {Number} volume
+ * @memberof Patch
+ * @instance
  */
 CABLES.Patch.prototype.setVolume = function(v) {
     this.config.masterVolume = v;
@@ -223,10 +170,12 @@ CABLES.Patch.prototype.setVolume = function(v) {
 /**
  * get url/filepath for a filename 
  * this uses prefixAssetpath in exported patches
- * @name CABLES.Patch#getFilePath
+ * @function getFilePath
+ * @memberof Patch
+ * @instance
  * @param {String} filename
  * @return {String} url
- * @function
+ 
  */
 CABLES.Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
@@ -375,10 +324,11 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
 
 /**
  * create a new op in patch
- * @name CABLES.Patch#addOp
+ * @function addOp
+ * @memberof Patch
+ * @instance
  * @param {String} objName, e.g. Ops.Math.Sum
  * @param {Object} UI Attributes
- * @function
  */
 CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
     // if (!objName || objName.indexOf('.') == -1) {
@@ -585,12 +535,13 @@ CABLES.Patch.prototype.exec = function(e) {
 
 /**
  * link two ops/ports
- * @name CABLES.Patch#link
- * @param {CABLES.Op} op1
+ * @function link
+ * @memberof Patch
+ * @instance
+ * @param {Op} op1
  * @param {String} op1 portName
- * @param {CABLES.Op} op2
+ * @param {Op} op2
  * @param {String} op2 portName
- * @function
  */
 CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     if(!op1)
@@ -912,12 +863,13 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 
 /**
+ * @class
  * @name Variable
+ * @inner
  * @param {String} name
  * @param {String|Number} value
- * @memberof CABLES.Patch
+ * @memberof Patch
  * @constructor
- * @class
  */
 CABLES.Patch.Variable = function(name, val) {
     this._name = name;
@@ -926,16 +878,20 @@ CABLES.Patch.Variable = function(name, val) {
 };
 
 /**
- * @name CABLES.Patch.Variable#getValue
+ * @function getValue
+ * @memberof Variable
+ * @instance
  * @returns {String|Number|Boolean} 
- * @function
  */
+
 CABLES.Patch.Variable.prototype.getValue = function() {
     return this._v;
 };
 
 /**
- * @name CABLES.Patch.Variable#getName
+ * @function getName
+ * @memberof Variable
+ * @instance
  * @returns {String|Number|Boolean} 
  * @function
  */
@@ -944,7 +900,9 @@ CABLES.Patch.Variable.prototype.getName = function() {
 };
 
 /**
- * @name CABLES.Patch.Variable#setValue
+ * @function setValue
+ * @memberof Variable
+ * @instance
  * @returns {String|Number|Boolean} 
  * @function
  */
@@ -957,9 +915,10 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
 
 /**
  * function will be called when value of variable is changed
- * @name CABLES.Patch.Variable#addListener
+ * @function addListener
+ * @memberof Variable
+ * @instance
  * @param {Function} callback
- * @function
  */
 CABLES.Patch.Variable.prototype.addListener = function(cb) {
     this._changeListeners.push(cb);
@@ -967,9 +926,10 @@ CABLES.Patch.Variable.prototype.addListener = function(cb) {
 
 /**
  * remove listener
- * @name CABLES.Patch.Variable#removeListener
+ * @function removeListener
+ * @memberof Variable
+ * @instance
  * @param {Function} callback
- * @function
  */
 CABLES.Patch.Variable.prototype.removeListener = function(cb) {
     var ind = this._changeListeners.indexOf(cb);
@@ -995,10 +955,11 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 /**
  * set variable value
- * @name CABLES.Patch.Variable#setVariable
+ * @function setVariable
+ * @memberof Variable
+ * @instance
  * @param {String} name of variable
  * @param {Number|String|Boolean} value
- * @function
  */
 CABLES.Patch.prototype.setVariable = function(name, val)
 {
@@ -1028,10 +989,11 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
 };
 
 /**
- * @name CABLES.Patch#getVar
+ * @function getVar
+ * @memberof Patch
+ * @instance
  * @param {String} name
- * @return {CABLES.Patch.Variable} variable
- * @function
+ * @return {Variable} variable
  */
 CABLES.Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
@@ -1039,8 +1001,10 @@ CABLES.Patch.prototype.getVar = function(name) {
 };
 
 /**
- * @name CABLES.Patch#getVars
- * @return {Array<CABLES.Patch.Variable>} variables
+ * @function getVars
+ * @memberof Patch
+ * @instance
+ * @return {Array<Variable>} variables
  * @function
  */
 CABLES.Patch.prototype.getVars = function() {
@@ -1057,7 +1021,9 @@ CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
 }
 
 /**
- * @name CABLES.Patch#preRenderOps
+ * @function preRenderOps
+ * @memberof Patch
+ * @instance
  * @description invoke pre rendering of ops
  * @function
  */
@@ -1082,11 +1048,73 @@ CABLES.Patch.prototype.preRenderOps = function() {
 
 
 /**
- * @name CABLES.Patch#dispose
+ * @function dispose
+ * @memberof Patch
+ * @instance
  * @description stop, dispose and cleanup patch
- * @function
  */
 CABLES.Patch.prototype.dispose = function() {
     this.pause();
     this.clear();
 };
+
+/**
+ * op added to patch event
+ * @event onOpAdd
+ * @memberof Patch
+ * @type {Object}
+ * @property {Op} op new op
+ */
+
+/**
+ * op deleted from patch
+ * @event onOpDelete
+ * @memberof Patch
+ * @type {Object}
+ * @property {Op} op that will be deleted
+ */
+
+/**
+ * link event - two ports will be linked
+ * @event onLink
+ * @memberof Patch
+ * @type {Object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+/**
+ * unlink event - a link was deleted
+ * @event onUnLink
+ * @memberof Patch
+ * @type {Object}
+ */
+
+
+/**
+ * variables has been changed / a variable has been added to the patch
+ * @event variablesChanged
+ * @memberof Patch
+ * @type {Object}
+ * @property {Port} port1
+ * @property {Port} port2
+ */
+
+
+/**
+ * patch-config
+ * @typedef {Object} PatchConfig
+ * @param {String} [prefixAssetPath=''] path to assets
+ * @param {String} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @param {Function} [onError=null] called when an error occurs
+ * @param {Function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @param {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @param {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @param {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @param {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @param {Boolean} [clearCanvasDepth=true] clear depth every frame
+ * @param {Boolean} [silent=false] 
+ * @param {Number} [fpsLimit=0] 0 for maximum possible frames per second
+ * @param {String} [glslPrecision='mediump'] default precision for glsl shader
+ * 
+ */

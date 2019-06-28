@@ -4,4 +4,4 @@ src/ops/users
 /doc/SUMMARY.md
 .idea/
 jsdoc/node_modules
-/jsdoc/output-test
+jsdoc/output-test
