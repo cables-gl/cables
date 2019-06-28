@@ -504,10 +504,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function getType
-     * @memberof Port
-     * @instance
-     * @return {Number} type of port
      * <pre>
      * CABLES.OP_PORT_TYPE_VALUE = 0;
      * CABLES.OP_PORT_TYPE_FUNCTION = 1;
@@ -517,6 +513,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * CABLES.OP_PORT_TYPE_DYNAMIC = 4;
      * CABLES.OP_PORT_TYPE_STRING = 5;
      * </pre>
+    * @function getType
+     * @memberof Port
+     * @instance
+     * @return {Number} type of port
      */
     CABLES.Port.prototype.getType=function(){ return this.type; };
 

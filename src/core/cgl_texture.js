@@ -91,7 +91,7 @@ CGL.Texture.prototype.compareSettings=function(tex)
 };
 
 /**
- * returns a new texturw with the same settings (does not copy texture itself)
+ * returns a new texture with the same settings (does not copy texture itself)
  * @function clone
  * @memberof Texture
  * @instance
