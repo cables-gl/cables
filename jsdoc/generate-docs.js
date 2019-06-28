@@ -1,5 +1,8 @@
 const fs = require('fs');
 const documentation = require('documentation');
+
+const { html } = documentation.formats;
+
 const streamArray = require('stream-array');
 const vfs = require('vinyl-fs');
 
@@ -20,7 +23,10 @@ const fileNames = [
 // fs.readdirSync('../src/core').map(fileName => `../src/core/${fileName}`);
 
 console.log(fileNames);
+
 documentation
   .build(fileNames, { shallow: false })
-  .then(documentation.formats.html)
-  .then(output => streamArray(output).pipe(vfs.dest('./output-test')));
+  .then(comments => html(comments, { theme: 'theme' }))
+  .then((output) => {
+    streamArray(output).pipe(vfs.dest('./output-test'));
+  });

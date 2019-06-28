@@ -18,7 +18,7 @@ h4 {
 }
 
 .documentation h3 {
-  color: #000;
+  color: red;
 }
 
 .border-bottom {
@@ -26,7 +26,7 @@ h4 {
 }
 
 a {
-  color: #1184CE;
+  color:black;
   text-decoration: none;
 }
 

@@ -20,6 +20,7 @@
     "connect": "^3.7.0",
     "minami": "^1.2.3",
     "nodemon": "^1.19.1",
-    "serve": "^11.0.2"
+    "serve": "^11.0.2",
+    "docjs-theme": "./theme"
   }
 }
