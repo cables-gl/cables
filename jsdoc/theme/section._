@@ -157,7 +157,7 @@
     <% } %>
 
     <% if (section.examples && section.examples.length) { %>
-      <div class='py1 quiet mt1 prose-big'>Example</div>
+      <br/><div class='indent'>Example:</div>
       <% section.examples.forEach(function(example) { %>
         <% if (example.caption) { %><p><%= md(example.caption) %></p><% } %>
         <div class="indent">

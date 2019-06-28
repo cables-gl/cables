@@ -1,10 +1,13 @@
 
 /**
+ * data coming into and out of ops through input and output ports
  * @external CABLES
  * @namespace Port
+ * @class
+ * @hideconstructor
+ * @example
+ * const myPort=op.inString("String Port");
  */
-
-
 
 CABLES.PORT_DIR_IN=0;
 CABLES.PORT_DIR_OUT=1;
@@ -76,10 +79,16 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
 
 /**
- * change listener for input value ports 
+ * change listener for input value ports, overwrite to react to changes
  * @function onChange
  * @memberof Port
  * @instance
+ * @example
+ * const myPort=op.inString("MyPort");
+ * myPort.onChange=function()
+ * {
+ *   console.log("was changed to: ",myPort.get());
+ * }
  * 
  */
 

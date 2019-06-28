@@ -5,6 +5,7 @@ var CABLES=CABLES || {};
  * @namespace Link
  * @param {Object} patch The patch object
  * @description a link is a connection between two ops/ports -> one input and one output port
+ * @hideconstructor
  * @class
 */
 CABLES.Link = function(scene)

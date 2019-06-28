@@ -1,11 +1,11 @@
 /**
- * Core op functionality. See {@link CABLES}
+ * op the class of all operators
  * @external CABLES
  * @namespace Op
+ * @hideconstructor
  */
 var Ops = {};
 var CABLES=CABLES || {};
-
 
 CABLES.OP_PORT_TYPE_VALUE = 0;
 CABLES.OP_PORT_TYPE_FUNCTION = 1;
