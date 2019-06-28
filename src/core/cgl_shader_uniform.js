@@ -1,19 +1,12 @@
 
 /**
- * @name Uniform
+ * @external CGL
+ * @namespace Uniform
  * @class
- * @constructor
- * @memberof CGL
- * @param {CGL.Shader} shader
+ * @param {Shader} shader
  * @param {String} [type=f]
  * @param {String} name
  * @param {Number|Port} value  can be a Number,Matrix or Port
- */
-
-/**
- * @name CGL.Uniform#setValue
- * @param {Number|Matrix|Texture} value
- * @function
  */
 CGL.Uniform=function(__shader,__type,__name,_value)
 {
@@ -326,3 +319,10 @@ CGL.Uniform.prototype.setValueM4=function(v)
     this.needsUpdate=true;
     this._value=v;
 };
+
+/**
+ * @function setValue
+ * @memberof Uniform
+ * @instance
+ * @param {Number|Matrix|Texture} value
+ */

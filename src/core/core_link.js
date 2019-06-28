@@ -1,12 +1,12 @@
-/**
- * @name Link
- * @memberof CABLES
- * @description a link is a connection between two ops/ports -> one input and one output port
- * @class
- */
 
 var CABLES=CABLES || {};
-
+/**  
+ * @external CABLES
+ * @namespace Link
+ * @param {Object} patch The patch object
+ * @description a link is a connection between two ops/ports -> one input and one output port
+ * @class
+*/
 CABLES.Link = function(scene)
 {
     this.portIn=null;
@@ -61,9 +61,10 @@ CABLES.Link.prototype._setValue=function()
 };
 
 /**
- * @name CABLES.Link#getOtherPort
- * @function
- * @param {CABLES.Port} port
+ * @function getOtherPort
+ * @memberof Link
+ * @instance
+ * @param {Port} port
  * @description returns the port of the link, which is not port
  */
 CABLES.Link.prototype.getOtherPort=function(p)
@@ -73,8 +74,9 @@ CABLES.Link.prototype.getOtherPort=function(p)
 };
 
 /**
- * @name CABLES.Link#remove
- * @function
+ * @function remove
+ * @memberof Link
+ * @instance
  * @description unlink/remove this link from all ports
  */
 CABLES.Link.prototype.remove=function()
@@ -102,11 +104,11 @@ CABLES.Link.prototype.remove=function()
 };
 
 /**
- * @function
- * @name CABLES.Link#link
+ * @function link
+ * @memberof Link
  * @description link those two ports
- * @param {CABLES.Port} port1
- * @param {CABLES.Port} port2
+ * @param {Port} port1
+ * @param {Port} port2
  */
 CABLES.Link.prototype.link=function(p1,p2)
 {
@@ -155,11 +157,12 @@ CABLES.Link.prototype.getSerialized=function()
 // --------------------------------------------
 
 /**
- * @function
- * @name CABLES.Link#canLinkText
+ * @function canLinkText
+ * @memberof Link
+ * @instance
  * @description return a text message with human readable reason if ports can not be linked, or can be
- * @param {CABLES.Port} port1
- * @param {CABLES.Port} port2
+ * @param {Port} port1
+ * @param {Port} port2
  */
 CABLES.Link.canLinkText=function(p1,p2)
 {
@@ -192,11 +195,13 @@ CABLES.Link.canLinkText=function(p1,p2)
 };
 
 /**
- * @function
- * @name CABLES.Link#canLink
+ * @function canLink
+ * @memberof Link
+ * @instance
  * @description return true if ports can be linked
- * @param {CABLES.Port} port1
- * @param {CABLES.Port} port2
+ * @param {Port} port1
+ * @param {Port} port2
+ * @returns {Boolean}
  */
 CABLES.Link.canLink=function(p1,p2)
 {

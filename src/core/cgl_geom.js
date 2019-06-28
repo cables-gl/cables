@@ -1,10 +1,9 @@
 "use strict";
 
 /**
- * @constructor
- * @name CGL.Geometry
- * @memberof CGL
- * @param {string} name
+ * @external CGL
+ * @namespace Geometry
+ * @param {String} name
  * @class
  */
 CGL.Geometry=function(name)
@@ -32,9 +31,10 @@ CGL.Geometry=function(name)
 };
 
 /**
- * @function
+ * @function clear
+ * @memberof Geometry
+ * @instance
  * @description clear all buffers/set them to length 0
- * @name CGL.Geometry#clear
  */
 CGL.Geometry.prototype.clear=function()
 {
@@ -46,9 +46,10 @@ CGL.Geometry.prototype.clear=function()
 };
 
 /**
- * @function
- * @name CGL.Geometry#getAttributes
- * @return returns array of attribute objects
+ * @function getAttributes
+   @memberof Geometry
+ * @instance
+ * @return {Array<Object>} returns array of attribute objects
  */
 CGL.Geometry.prototype.getAttributes=function()
 {
@@ -56,9 +57,10 @@ CGL.Geometry.prototype.getAttributes=function()
 };
 
 /**
- * @function
- * @name CGL.Geometry#getAttribute
- * @param {string} name
+ * @function getAttribute
+ * @memberof Geometry
+ * @instance
+ * @param {String} name
  * @return {Object}
  */
 CGL.Geometry.prototype.getAttribute=function(name)
@@ -71,12 +73,13 @@ CGL.Geometry.prototype.getAttribute=function(name)
 };
 
 /**
- * @function
+ * @function setAttribute
  * @description create an attribute
- * @name CGL.Geometry#setAttribute
- * @param {string} name
- * @param {array} data
- * @param {number} itemsize
+ * @memberof Geometry
+ * @instance
+ * @param {String} name
+ * @param {Array} data
+ * @param {Number} itemsize
  */
 CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
 {
@@ -97,10 +100,11 @@ CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
 };
 
 /**
- * @function
+ * @function setVertices
+ * @memberof Geometry
+ * @instance
  * @description set vertices
- * @name CGL.Geometry#setVertices
- * @param {array|float32array} data [x,y,z,x,y,z,...]
+ * @param {Array|Float32Array} data [x,y,z,x,y,z,...]
  */
 CGL.Geometry.prototype.setVertices=function(arr)
 {
@@ -109,10 +113,11 @@ CGL.Geometry.prototype.setVertices=function(arr)
 };
 
 /**
- * @function
+ * @function setTexCoords
+ * @memberof Geometry
+ * @instance
  * @description set texcoords
- * @name CGL.Geometry#setTexCoords
- * @param {array|float32array} data [u,v,u,v,...]
+ * @param {Array|Float32Array} data [u,v,u,v,...]
  */
 CGL.Geometry.prototype.setTexCoords=function(arr)
 {
@@ -355,9 +360,11 @@ CGL.Geometry.prototype.isIndexed=function()
 
 
 /**
- * @function
+ * @function unIndex
+ * @memberof Geometry
+ * @instance
+ * @param {Boolean}
  * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
- * @name CGL.Geometry#unIndex
  */
 CGL.Geometry.prototype.unIndex=function(reIndex)
 {

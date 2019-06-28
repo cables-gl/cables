@@ -329,6 +329,9 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
  * @instance
  * @param {String} objName, e.g. Ops.Math.Sum
  * @param {Object} UI Attributes
+ * @example
+ * // add invisible op
+ * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
 CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
     // if (!objName || objName.indexOf('.') == -1) {

@@ -1,8 +1,8 @@
 var CGL = CGL || {};
 
 /**
- * @name Context
- * @memberof CGL
+ * @external CGL
+ * @namespace Context
  * @class
  */
 CGL.Context = function(_patch) {
@@ -120,7 +120,9 @@ CGL.Context = function(_patch) {
     var oldCanvasHeight = -1;
 
     /**
-     * @function
+     * @function getViewPort
+     * @memberof Context
+     * @instance
      * @description get current gl viewport
      * @returns {Array} array [x,y,w,h]
      */
@@ -137,7 +139,9 @@ CGL.Context = function(_patch) {
     };
 
     /**
-     * @function
+     * @function setViewPort
+     * @memberof Context
+     * @instance
      * @description set current gl viewport
      * @param {Number} x
      * @param {Number} y
@@ -239,7 +243,9 @@ CGL.Context = function(_patch) {
 
     /**
      * push a framebuffer to the framebuffer stack
-     * @name CGL.Context#pushGlFrameBuffer
+     * @function pushGlFrameBuffer
+     * @memberof Context
+     * @instance
      * @param {Object} framebuffer
      * @function
      */
@@ -249,9 +255,10 @@ CGL.Context = function(_patch) {
 
     /**
      * pop framebuffer stack
-     * @name CGL.Context#popGlFrameBuffer
+     * @function popGlFrameBuffer
+     * @memberof Context
+     * @instance
      * @returns {Object} current framebuffer or null
-     * @function
      */
     this.popGlFrameBuffer = function() {
         if (this._glFrameBufferStack.length == 0) return null;
@@ -261,9 +268,10 @@ CGL.Context = function(_patch) {
 
     /**
      * get current framebuffer 
-     * @name CGL.Context#getCurrentFrameBuffer
+     * @function getCurrentFrameBuffer
+     * @memberof Context
+     * @instance
      * @returns {Object} current framebuffer or null
-     * @function
      */
     this.getCurrentGlFrameBuffer=function()
     {
@@ -273,9 +281,10 @@ CGL.Context = function(_patch) {
 
     /**
      * push a framebuffer to the framebuffer stack
-     * @name CGL.Context#pushGlFrameBuffer
+     * @function pushGlFrameBuffer
+     * @memberof Context
+     * @instance
      * @param {CGL.FrameBuffer} framebuffer
-     * @function
      */
     this.pushFrameBuffer = function(fb) {
         this._frameBufferStack.push(fb);
@@ -283,9 +292,10 @@ CGL.Context = function(_patch) {
 
     /**
      * pop framebuffer stack
-     * @name CGL.Context#popFrameBuffer
+     * @function popFrameBuffer
+     * @memberof Context
+     * @instance
      * @returns {CGL.FrameBuffer} current framebuffer or null
-     * @function
      */
     this.popFrameBuffer = function() {
         if (this._frameBufferStack.length == 0) return null;
@@ -295,9 +305,10 @@ CGL.Context = function(_patch) {
 
     /**
      * get current framebuffer 
-     * @name CGL.Context#getCurrentFrameBuffer
+     * @function getCurrentFrameBuffer
+     * @memberof Context
+     * @instance
      * @returns {CGL.FrameBuffer} current framebuffer or null
-     * @function
      */
     this.getCurrentFrameBuffer=function()
     {
@@ -508,9 +519,10 @@ CGL.Context = function(_patch) {
 
 /**
  * push a matrix to the view matrix stack
- * @name CGL.Context#pushviewMatrix
+ * @function pushviewMatrix
+ * @memberof Context
+ * @instance
  * @param {mat4} viewmatrix
- * @function
  */
 CGL.Context.prototype.pushViewMatrix = function() {
     this.vMatrix=this._vMatrixStack.push(this.vMatrix);
@@ -518,7 +530,9 @@ CGL.Context.prototype.pushViewMatrix = function() {
 
 /**
  * pop view matrix stack
- * @name CGL.Context#popViewMatrix
+ * @function popViewMatrix
+ * @memberof Context
+ * @instance
  * @returns {mat4} current viewmatrix 
  * @function
  */
@@ -533,9 +547,10 @@ CGL.Context.prototype.getViewMatrixStateCount = function() {
 
 /**
  * push a matrix to the projection matrix stack
- * @name CGL.Context#pushPMatrix
+ * @function pushPMatrix
+ * @memberof Context
+ * @instance
  * @param {mat4} projectionmatrix
- * @function
  */
 CGL.Context.prototype.pushPMatrix = function() {
     this.pMatrix=this._pMatrixStack.push(this.pMatrix);
@@ -543,9 +558,10 @@ CGL.Context.prototype.pushPMatrix = function() {
 
 /**
  * pop projection matrix stack
- * @name CGL.Context#popPMatrix
+ * @function popPMatrix
+ * @memberof Context
+ * @instance
  * @returns {mat4} current projectionmatrix 
- * @function
  */
 CGL.Context.prototype.popPMatrix = function() {
     this.pMatrix = this._pMatrixStack.pop();
@@ -558,9 +574,10 @@ CGL.Context.prototype.getProjectionMatrixStateCount = function() {
 
 /**
  * push a matrix to the model matrix stack
- * @name CGL.Context#pushModelMatrix
+ * @function pushModelMatrix
+ * @memberof Context
+ * @instance
  * @param {mat4} modelmatrix
- * @function
  */
 CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()
@@ -571,9 +588,10 @@ CGL.Context.prototype.pushModelMatrix = function()
 
 /**
  * pop model matrix stack
- * @name CGL.Context#popModelMatrix
+ * @function popModelMatrix
+ * @memberof Context
+ * @instance
  * @returns {mat4} current modelmatrix 
- * @function
  */
 CGL.Context.prototype.popMvMatrix = // todo: DEPRECATE
 CGL.Context.prototype.popmMatrix =
@@ -585,9 +603,10 @@ CGL.Context.prototype.popModelMatrix = function() {
 
 /**
  * get model matrix 
- * @name CGL.Context#modelMatrix
+ * @function modelMatrix
+ * @memberof Context
+ * @instance
  * @returns {mat4} current modelmatrix 
- * @function
  */
 CGL.Context.prototype.modelMatrix = function() {
     return this.mMatrix;
@@ -645,9 +664,10 @@ CGL.Context.prototype._stackDepthFunc=[];
 /**
  * enable / disable depth testing 
  * like `gl.depthFunc(boolean);`
- * @name CGL.Context#pushDepthFunc
- * @param {boolean} depthtesting
- * @function
+ * @function pushDepthFunc
+ * @memberof Context
+ * @instance
+ * @param {Boolean} depthtesting
  */
 CGL.Context.prototype.pushDepthFunc=function(f)
 {
@@ -657,9 +677,10 @@ CGL.Context.prototype.pushDepthFunc=function(f)
 
 /**
  * current state of blend 
- * @name CGL.Context#stateDepthFunc
- * @returns {boolean} depth testing enabled/disabled
- * @function
+ * @function stateDepthFunc
+ * @memberof Context
+ * @instance 
+ * @returns {Boolean} depth testing enabled/disabled
  */
 CGL.Context.prototype.stateDepthFunc=function()
 {
@@ -669,8 +690,9 @@ CGL.Context.prototype.stateDepthFunc=function()
 
 /**
  * pop depth testing and set the previous state
- * @name CGL.Context#popDepthFunc
- * @function
+ * @function popDepthFunc
+ * @memberof Context
+ * @instance
  */
 CGL.Context.prototype.popDepthFunc=function()
 {
@@ -686,9 +708,10 @@ CGL.Context.prototype._stackBlend=[];
 /**
  * enable / disable blend 
  * like gl.enable(gl.BLEND); / gl.disable(gl.BLEND);
- * @name CGL.Context#pushBlend
- * @param {boolean} blending
- * @function
+ * @function pushBlend
+ * @memberof Context
+ * @instance
+ * @param {Boolean} blending
  */
 CGL.Context.prototype.pushBlend=function(b)
 {
@@ -699,8 +722,10 @@ CGL.Context.prototype.pushBlend=function(b)
 
 /**
  * current state of blend 
+ * @function stateBlend
  * @returns {boolean} blending enabled/disabled
- * @function
+ * @memberof Context
+ * @instance
  */
 CGL.Context.prototype.stateBlend=function()
 {
@@ -709,8 +734,9 @@ CGL.Context.prototype.stateBlend=function()
 
 /**
  * pop blend state and set the previous state
- * @name CGL.Context#popBlend
- * @function
+ * @function popBlend
+ * @memberof Context
+ * @instance
  */
 CGL.Context.prototype.popBlend=function()
 {
@@ -732,10 +758,11 @@ CGL.Context.prototype._stackBlendModePremul=[];
 
 /**
  * push and switch to predefined blendmode (CGL.BLEND_NONE,CGL.BLEND_NORMAL,CGL.BLEND_ADD,CGL.BLEND_SUB,CGL.BLEND_MUL)
- * @name CGL.Context#pushBlendMode
+ * @function pushBlendMode
+ * @memberof Context
+ * @instance
  * @param {Number} blendmode
  * @param {Boolean} premultiplied mode
- * @function
  */
 CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
 {
@@ -750,8 +777,9 @@ CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
 
 /**
  * pop predefined blendmode / switch back to previous blendmode
- * @name CGL.Context#pushBlendMode
- * @function
+ * @function pushBlendMode
+ * @memberof Context
+ * @instance
  */
 CGL.Context.prototype.popBlendMode=function()
 {

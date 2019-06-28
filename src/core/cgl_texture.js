@@ -6,10 +6,10 @@ CGL.DEFAULT_TEXTURE_SIZE=8;
 
 /**
  * A Texture
- * @namespace CGL.Texture
- * @memberof CGL
+ * @external CGL
+ * @namespace Texture
  * @constructor
- * @param {CGL.Context} cgl
+ * @param {Context} cgl
  * @param {Object} [options]
  * @class
  */
@@ -60,10 +60,11 @@ CGL.Texture=function(__cgl,options)
 
 /**
  * returns true if otherTexture has same options (width/height/filter/wrap etc)
- * @name CGL.Texture#compareSettings
- * @param {CGL.Texture} otherTexture
- * @returns {boolean}
- * @function
+ * @function compareSettings
+ * @memberof Texture
+ * @instance
+ * @param {Texture} otherTexture
+ * @returns {Boolean}
  */
 CGL.Texture.prototype.compareSettings=function(tex)
 {
@@ -81,9 +82,10 @@ CGL.Texture.prototype.compareSettings=function(tex)
 
 /**
  * returns a new texturw with the same settings (does not copy texture itself)
- * @name CGL.Texture#clone
- * @returns {CGL.Texture}
- * @function
+ * @function clone
+ * @memberof Texture
+ * @instance
+ * @returns {Texture}
  */
 CGL.Texture.prototype.clone=function()
 {
@@ -111,10 +113,11 @@ CGL.Texture.prototype.clone=function()
 
 /**
  * set pixel size of texture
- * @name CGL.Texture#setSize
- * @param {number} width
- * @param {number} height
- * @function
+ * @function setSize
+ * @memberof Texture
+ * @instance
+ * @param {Number} width
+ * @param {Number} height
  */
 CGL.Texture.prototype.setSize=function(w,h)
 {
@@ -186,14 +189,15 @@ CGL.Texture.prototype.setSize=function(w,h)
 };
 
 /**
- * @function
- * @name CGL.Texture#initFromData
+ * @function initFromData
+ * @memberof Texture
+ * @instance
  * @description create texturem from rgb data
- * @param {Array<number>}data rgb color array [r,g,b,a,r,g,b,a,...]
- * @param {number} width
- * @param {number} height
- * @param {number} filter
- * @param {number} wrap
+ * @param {Array<Number>} data rgb color array [r,g,b,a,r,g,b,a,...]
+ * @param {Number} width
+ * @param {Number} height
+ * @param {Number} filter
+ * @param {Number} wrap
  */
 CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
@@ -227,10 +231,11 @@ CGL.Texture.prototype.updateMipMap=function()
 
 /**
  * set texture data from an image/canvas object
- * @name CGL.Texture#initTexture
- * @param {object} image
- * @param {number} filter
- * @function
+ * @function initTexture
+ * @memberof Texture
+ * @instance
+ * @param {Object} image
+ * @param {Number} filter
  */
 CGL.Texture.prototype.initTexture=function(img,filter)
 {
@@ -256,8 +261,9 @@ CGL.Texture.prototype.initTexture=function(img,filter)
 
 /**
  * delete texture. use this when texture is no longer needed
- * @name CGL.Texture#delete
- * @function
+ * @function delete
+ * @memberof Texture
+ * @instance
  */
 CGL.Texture.prototype.delete=function()
 {
@@ -266,10 +272,11 @@ CGL.Texture.prototype.delete=function()
 };
 
 /**
- * @function
- * @name CGL.Texture#isPowerOfTwo
+ * @function isPowerOfTwo
+ * @memberof Texture
+ * @instance
  * @description return true if texture width and height are both power of two
- * @return {boolean}
+ * @return {Boolean}
  */
 CGL.Texture.prototype.isPowerOfTwo=function()
 {
@@ -397,15 +404,15 @@ CGL.Texture.prototype._setFilter=function()
 
 
 /**
- * @function
+ * @function load
  * @static
- * @name CGL.Texture#load
+ * @memberof Texture
  * @description load an image from an url 
- * @param {CGL.Context} cgl
+ * @param {Context} cgl
  * @param {String} url
  * @param {Function} onFinished
  * @param {Object} options
- * @return {CGL.Texture}
+ * @return {Texture}
  */
 CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 {
@@ -450,11 +457,11 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
 
 /**
  * @static
- * @function
- * @name CGL.Texture#getTempTexture
+ * @function getTempTexture
+ * @memberof Texture
  * @description returns the default temporary texture (grey diagonal stipes)
- * @param {CGL.Context} cgl
- * @return {CGL.Texture}
+ * @param {Context} cgl
+ * @return {Texture}
  */
 CGL.Texture.getTempTexture=function(cgl)
 {
@@ -463,10 +470,11 @@ CGL.Texture.getTempTexture=function(cgl)
 };
 
 /**
- * @function
- * @name CGL.Texture#getEmptyTexture
+ * @function getEmptyTexture
+ * @memberof Texture
+ * @instance
  * @description returns a reference to a small empty texture
- * @return {CGL.Texture}
+ * @return {Texture}
  */
 CGL.Texture.getEmptyTexture=function(cgl)
 {
@@ -482,10 +490,11 @@ CGL.Texture.getEmptyTexture=function(cgl)
 
 
 /**
- * @function
- * @name CGL.Texture#getEmptyTexture
- * @description returns a reference to a small empty texture
- * @return {CGL.Texture}
+ * @function getRandomTexture
+ * @memberof Texture
+ * @static
+ * @description returns a reference to a random texture
+ * @return {Texture}
  */
 CGL.Texture.getRandomTexture=function(cgl)
 {
@@ -511,11 +520,11 @@ CGL.Texture.getRandomTexture=function(cgl)
 
 /**
  * @static
- * @function
- * @name CGL.Texture#getTempGradientTexture
+ * @function getTempGradientTexture
+ * @memberof Texture
  * @description returns a gradient texture from black to white
- * @param {CGL.Context} cgl
- * @return {CGL.Texture}
+ * @param {Context} cgl
+ * @return {Texture}
  */
 CGL.Texture.getTempGradientTexture=function(cgl)
 {
@@ -568,12 +577,12 @@ CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
 
 /**
  * @static
- * @function
- * @name CGL.Texture#createFromImage
+ * @function createFromImage
+ * @memberof Texture
  * @description create texturem from image data (e.g. image or canvas)
- * @param {CGL.Context} cgl
- * @param {object} image
- * @param {object} options
+ * @param {Context} cgl
+ * @param {Object} image
+ * @param {Object} options
  */
 CGL.Texture.createFromImage=function(cgl,img,options)
 {
@@ -603,11 +612,11 @@ CGL.Texture.fromImage=function(cgl,img,filter,wrap)
 
 /**
  * @static
- * @function
- * @name CGL.Texture#isPowerOfTwo
+ * @function isPowerOfTwo
+ * @memberof Texture
  * @description returns true if x is power of two
- * @param {number} x
- * @return {boolean}
+ * @param {Number} x
+ * @return {Boolean}
  */
 CGL.Texture.isPowerOfTwo=function(x)
 {
