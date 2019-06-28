@@ -1,8 +1,7 @@
 
 /**
- * @module CABLES.Port
- * @name CABLES.Port
- * @class
+ * @external CABLES
+ * @namespace Port
  */
 
 CABLES.PORT_DIR_IN=0;
@@ -10,7 +9,9 @@ CABLES.PORT_DIR_OUT=1;
 
 var CABLES=CABLES || {};
 
-/** @constructor */
+/** 
+ * @constructor
+ * */
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
     this.data = {}; // reserved for port-specific user-data
