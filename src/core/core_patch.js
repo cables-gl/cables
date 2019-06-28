@@ -4,7 +4,7 @@ var CABLES = CABLES || {};
  * @external CABLES
  * @namespace Patch
  * @param {PatchConfig} config The configuration object.
- * @constructor
+ * @class
  */
 CABLES.Patch = function(cfg) {
 
@@ -863,9 +863,8 @@ CABLES.Patch.prototype.profile = function(enable) {
 
 
 /**
- * @class
+ * @type {Object}
  * @name Variable
- * @inner
  * @param {String} name
  * @param {String|Number} value
  * @memberof Patch
@@ -878,9 +877,8 @@ CABLES.Patch.Variable = function(name, val) {
 };
 
 /**
- * @function getValue
- * @memberof Variable
- * @instance
+ * @function Variable.getValue
+ * @memberof Patch.Variable
  * @returns {String|Number|Boolean} 
  */
 
@@ -890,7 +888,7 @@ CABLES.Patch.Variable.prototype.getValue = function() {
 
 /**
  * @function getName
- * @memberof Variable
+ * @memberof Patch.Variable
  * @instance
  * @returns {String|Number|Boolean} 
  * @function
@@ -901,7 +899,7 @@ CABLES.Patch.Variable.prototype.getName = function() {
 
 /**
  * @function setValue
- * @memberof Variable
+ * @memberof Patch.Variable
  * @instance
  * @returns {String|Number|Boolean} 
  * @function
@@ -916,7 +914,7 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
 /**
  * function will be called when value of variable is changed
  * @function addListener
- * @memberof Variable
+ * @memberof Patch.Variable
  * @instance
  * @param {Function} callback
  */
@@ -927,7 +925,7 @@ CABLES.Patch.Variable.prototype.addListener = function(cb) {
 /**
  * remove listener
  * @function removeListener
- * @memberof Variable
+ * @memberof Patch.Variable
  * @instance
  * @param {Function} callback
  */
@@ -956,7 +954,7 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 /**
  * set variable value
  * @function setVariable
- * @memberof Variable
+ * @memberof Patch
  * @instance
  * @param {String} name of variable
  * @param {Number|String|Boolean} value
@@ -1118,3 +1116,4 @@ CABLES.Patch.prototype.dispose = function() {
  * @param {String} [glslPrecision='mediump'] default precision for glsl shader
  * 
  */
+

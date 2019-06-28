@@ -592,8 +592,3 @@ CABLES.Port.portTypeNumberToString = function(type) {
 };
 
 // var Port = CABLES.Port; // TODO deprecated.. remove one day...
-
-    /**
-     * Callback to be executed when port is triggered.
-     * @callback onTriggeredCallback
-     */
