@@ -6,12 +6,22 @@ CGL.MESH.lastMesh=null;
 
 
 /**
+ * webgl renderable 3d object
  * @external CGL
  * @namespace Mesh
+ * @hideconstructor
  * @param {Context} cgl
  * @param {Geometry} geometry
  * @param {Number} [glPrimitive]
  * @class
+ * @example
+ * const cgl=op.patch.cgl
+ * const mesh=new CGL.Mesh(cgl, geometry);
+ * 
+ * function render()
+ * {
+ *   mesh.render(cgl.getShader());	
+ * }
  */
 CGL.Mesh=function(_cgl,__geom,glPrimitive)
 {

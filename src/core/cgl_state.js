@@ -1,9 +1,11 @@
 var CGL = CGL || {};
 
 /**
+ * cables gl context/state manager
  * @external CGL
  * @namespace Context
  * @class
+ * @hideconstructor
  */
 CGL.Context = function(_patch) {
     var self = this;
@@ -16,8 +18,30 @@ CGL.Context = function(_patch) {
     this.temporaryTexture = null;
     this.frameStore = {};
     this.gl = null;
+
+    /**
+     * Current projection matrix
+     * @member pMatrix
+     * @memberof Context
+     * @instance
+     * @type {mat4}
+     */
     this.pMatrix = mat4.create();
+    /**
+     * Current model matrix
+     * @member pMatrix
+     * @memberof Context
+     * @instance
+     * @type {mat4}
+     */
     this.mMatrix = mat4.create();
+    /**
+     * Current view matrix
+     * @member vMatrix
+     * @memberof Context
+     * @instance
+     * @type {mat4}
+     */
     this.vMatrix = mat4.create();
     this._textureslots=[];
 
@@ -578,6 +602,12 @@ CGL.Context.prototype.getProjectionMatrixStateCount = function() {
  * @memberof Context
  * @instance
  * @param {mat4} modelmatrix
+ * @example
+ * // see source code of translate op:
+ * cgl.pushModelMatrix();
+ * mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
+ * trigger.trigger();
+ * cgl.popModelMatrix();
  */
 CGL.Context.prototype.pushMvMatrix = // deprecated
 CGL.Context.prototype.pushModelMatrix = function()

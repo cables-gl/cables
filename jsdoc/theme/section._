@@ -33,7 +33,7 @@
 
 
 
-  <div class='pre p1 fill-light mt0 <% if (section.hideconstructor) { %>hide<% }%>' style="color:black;font-size: 1.02em;">
+  <div class='pre p1 fill-light mt0 <% if (section.hideconstructor) { %>hide<% }%>' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
   <% if (section.kind =="function") { %>.<% }%><% if (section.kind =="member") { %>.<% }%><%= signature(section) %></div>
     
 
@@ -73,8 +73,8 @@
 
   <!--
     <% if (section.params && section.params.length) { %>
-      <div class='py1 quiet mt1 prose-big'>Parameters</div>
-      <div class='prose'>
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
         <% section.params.forEach(function(param) { %>
           <div class='space-bottom0'>
             <div>
@@ -110,8 +110,8 @@
     <% } %> -->
 
     <% if (section.properties && section.properties.length) { %>
-      <div class='py1 quiet mt1 prose-big indent'>Properties</div>
-      <div>
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
         <% section.properties.forEach(function(property) { %>
           <div class='space-bottom0'>
             <span class='code bold'><%- property.name%></span> <code class='quiet'>(<%= formatType(property.type) %>)</code>

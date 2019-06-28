@@ -1,11 +1,28 @@
 var CABLES = CABLES || {};
 
 /**
+ * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch 
+ * 
+ * see {@link PatchConfig}
+ * 
  * @external CABLES
  * @namespace Patch
+ * @hideconstructor
  * @param {PatchConfig} config The configuration object.
  * @class
+ * @example
+ * CABLES.patch=new CABLES.Patch(
+ * {
+ *     patch:pStr,
+ *     glCanvasId:'glcanvas',
+ *     glCanvasResizeToWindow:true,
+ *     canvas:{powerPreference:"high-performance"},
+ *     prefixAssetPath:'/assets/',
+ *     onError:function(e){console.log(e);}
+ * });
  */
+
+
 CABLES.Patch = function(cfg) {
 
     CABLES.EventTarget.apply(this);
@@ -1062,6 +1079,7 @@ CABLES.Patch.prototype.dispose = function() {
 /**
  * op added to patch event
  * @event onOpAdd
+ * 
  * @memberof Patch
  * @type {Object}
  * @property {Op} op new op
@@ -1103,20 +1121,21 @@ CABLES.Patch.prototype.dispose = function() {
 
 
 /**
- * patch-config
+ * configuration object for loading a patch
  * @typedef {Object} PatchConfig
- * @param {String} [prefixAssetPath=''] path to assets
- * @param {String} [glCanvasId='glcanvas'] dom element id of canvas element
- * @param {Function} [onError=null] called when an error occurs
- * @param {Function} [onFinishedLoading=null] called when patch finished loading all assets
- * @param {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
- * @param {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
- * @param {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
- * @param {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
- * @param {Boolean} [clearCanvasDepth=true] clear depth every frame
- * @param {Boolean} [silent=false] 
- * @param {Number} [fpsLimit=0] 0 for maximum possible frames per second
- * @param {String} [glslPrecision='mediump'] default precision for glsl shader
+ * @hideconstructor
+ * @property {String} [prefixAssetPath=''] path to assets
+ * @property {String} [glCanvasId='glcanvas'] dom element id of canvas element
+ * @property {Function} [onError=null] called when an error occurs
+ * @property {Function} [onFinishedLoading=null] called when patch finished loading all assets
+ * @property {Function} [onFirstFrameRendered=null] called when patch rendered it's first frame
+ * @property {Boolean} [glCanvasResizeToWindow=false] resize canvas automatically to window size
+ * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+ * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
+ * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
+ * @property {Boolean} [silent=false] 
+ * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
+ * @property {String} [glslPrecision='mediump'] default precision for glsl shader
  * 
  */
 

@@ -1,10 +1,43 @@
 "use strict";
 
 /**
+ * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @external CGL
  * @namespace Geometry
  * @param {String} name
  * @class
+ * @example
+ * // create a triangle with all attributes
+ * const geom=new CGL.Geometry("triangle"),
+ * 
+ * geom.vertices = [
+ *      0.0,           sizeH.get(),  0.0,
+ *     -sizeW.get(),  -sizeH.get(),  0.0,
+ *      sizeW.get(),  -sizeH.get(),  0.0 ];
+ * 
+ * geom.vertexNormals = [
+ *      0.0,  0.0,  1.0,
+ *      0.0,  0.0,  1.0,
+ *      0.0,  0.0,  1.0 ];
+ * 
+ * geom.tangents = [
+ *     1,0,0,
+ *     1,0,0,
+ *     1,0,0 ];
+ * 
+ * geom.biTangents = [
+ *     0,1,0,
+ *     0,1,0,
+ *     0,1,0 ];
+ * 
+ * geom.texCoords = [
+ *      0.5,  0.0,
+ *      1.0,  1.0,
+ *      0.0,  1.0, ];
+ * 
+ * geom.verticesIndices = [
+ *     0, 1, 2 ];
+ * 
  */
 CGL.Geometry=function(name)
 {

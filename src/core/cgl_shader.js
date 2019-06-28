@@ -28,7 +28,11 @@ CGL.SHADERVAR_UNI_VIEWPOS = "camPos"
  * @class
  * @external CGL
  * @namespace Shader
-  */
+ * @hideconstructor
+ * @example
+ * var shader=new CGL.Shader(cgl,'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert,attachments.shader_frag);
+ */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
 

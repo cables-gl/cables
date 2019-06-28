@@ -107,6 +107,7 @@ CABLES.Link.prototype.remove=function()
 /**
  * @function link
  * @memberof Link
+ * @instance
  * @description link those two ports
  * @param {Port} port1
  * @param {Port} port2

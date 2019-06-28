@@ -1,6 +1,6 @@
 
 /**
- * data coming into and out of ops through input and output ports
+ * data is coming into and out of ops through input and output ports
  * @external CABLES
  * @namespace Port
  * @class
@@ -121,11 +121,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
+     * set ui attributes
      * @function setUiAttribs
      * @memberof Port
      * @instance
      * @param {Object} newAttribs
-     * @description set ui attributes
+     * <pre>
+     * greyout - port paramater will appear greyed out, can not be
+     * hidePort - port will be hidden from op
+     * </pre>
+     * @example
+     * myPort.setUiAttribs({greyout:true});
      */
     CABLES.Port.prototype.setUiAttribs=function(newAttribs)
     {
@@ -501,8 +507,16 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @function getType
      * @memberof Port
      * @instance
-     * @return {Number} type
-     * @description return type of port
+     * @return {Number} type of port
+     * <pre>
+     * CABLES.OP_PORT_TYPE_VALUE = 0;
+     * CABLES.OP_PORT_TYPE_FUNCTION = 1;
+     * CABLES.OP_PORT_TYPE_OBJECT = 2;
+     * CABLES.OP_PORT_TYPE_TEXTURE = 2;
+     * CABLES.OP_PORT_TYPE_ARRAY = 3;
+     * CABLES.OP_PORT_TYPE_DYNAMIC = 4;
+     * CABLES.OP_PORT_TYPE_STRING = 5;
+     * </pre>
      */
     CABLES.Port.prototype.getType=function(){ return this.type; };
 
@@ -510,8 +524,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @function isLinked
      * @memberof Port
      * @instance
-     * @return {Boolean} 
-     * @description return true if port is linked
+     * @return {Boolean} true if port is linked
      */
     CABLES.Port.prototype.isLinked=function(){ return this.links.length>0; };
 
@@ -519,8 +532,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @function isAnimated
      * @memberof Port
      * @instance
-     * @return {Boolean}
-     * @description return true if port is animated
+     * @return {Boolean} true if port is animated
      */
     CABLES.Port.prototype.isAnimated=function()
     {
@@ -532,8 +544,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @function isHidden
      * @memberof Port
      * @instance
-     * @return {Boolean}
-     * @description return true if port is hidden
+     * @return {Boolean} true if port is hidden
      */
     CABLES.Port.prototype.isHidden=function()
     {

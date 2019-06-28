@@ -11,7 +11,17 @@ CGL.DEFAULT_TEXTURE_SIZE=8;
  * @constructor
  * @param {Context} cgl
  * @param {Object} [options]
+ * @hideconstructor
  * @class
+ * @example
+ * // generate a 256x256 pixel texture of random colors
+ * const size=256;
+ * const data = new Uint8Array(size*size*4);
+ * 
+ * for(var x=0;x<size*size*4;x++) data[ x*4+3]=255;
+ * 
+ * const tex=new CGL.Texture(cgl);
+ * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
 CGL.Texture=function(__cgl,options)
 {
