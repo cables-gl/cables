@@ -469,9 +469,16 @@ CABLES.ANIM.Key.prototype.getEasing=function()
 
 /**
  * Keyframed interpolated animation. 
+ * @hideconstructor
  * @external CABLES
  * @namespace Anim
  * @class
+ * @example
+ * var anim=new CABLES.Anim();
+ * anim.setValue(0,0);  // set value 0 at 0 seconds
+ * anim.setValue(10,1); // set value 1 at 10 seconds
+ * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
+
  */
 CABLES.Anim=function(cfg)
 {
@@ -525,7 +532,7 @@ CABLES.Anim.prototype.isRising=function(time)
 
 /**
  * remove all keys from animation
- * @param {Number} [time=0] set a new key at time
+ * @param {Number} [time=0] set a new key at time with the old value at time
  * @memberof Anim
  * @instance
  * @function
@@ -571,8 +578,8 @@ CABLES.Anim.prototype.getKeyIndex=function(time)
  * @function setValue
  * @memberof Anim
  * @instance
- * @param {Number} [time] time
- * @param {Number} [value] value
+ * @param {Number} time
+ * @param {Number} value
  * @param {Function} [callback] callback
  */
 CABLES.Anim.prototype.setValue=function(time,value,cb)

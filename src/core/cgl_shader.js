@@ -28,7 +28,7 @@ CGL.SHADERVAR_UNI_VIEWPOS = "camPos"
  * @class
  * @external CGL
  * @namespace Shader
- */
+  */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
 
