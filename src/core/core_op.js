@@ -12,7 +12,7 @@
  * @memberof Op
  * @description access file attachments as String values
  * @example
- * // set shader source to attached files
+ * // set shader source to attached files (files are called shader.vert / shader.frag)
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
 
@@ -58,11 +58,6 @@ CABLES.Op = function()
 
         this.uiAttribs.title=this._shortOpName;
     }
-    // this.name=this.name.split('.')[this.name.split('.').length-1]
-    // const a=this.name.substring(this.name.length - 1, this.name.length);
-    // const b=this.name.substring(this.name.length - 2, this.name.length-1);
-    // if(CABLES.UTILS.isNumeric(a) && !CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 1);
-    //     else if(CABLES.UTILS.isNumeric(a) && CABLES.UTILS.isNumeric(b)) this.name=this.name.substring(0,this.name.length - 2);
 
     this.id=arguments[2]||CABLES.uuid(); // instance id
     this.onAddPort=null;
@@ -594,7 +589,7 @@ CABLES.Op = function()
         return op;
     };
 
-    CABLES.Op.prototype.getFistOutPortByType=function(type)
+    CABLES.Op.prototype.getFirstOutPortByType=function(type)
     {
         for(var ipo in this.portsOut)
             if(this.portsOut[ipo].type==type)
@@ -603,12 +598,13 @@ CABLES.Op = function()
 
     /**
      * return port by the name portName
-     * @function getPortByName
+     * @function getPort
      * @instance
      * @memberof Op
      * @param {String} portName
      * @return {Port}
      */
+    CABLES.Op.prototype.getPort=
     CABLES.Op.prototype.getPortByName=function(name)
     {
         // for(var ipi in this.portsIn)
@@ -637,11 +633,6 @@ CABLES.Op = function()
 
         for(var ipo=0;ipo<this.portsOut.length;ipo++)
             if(this.portsOut[ipo].id==id)return this.portsOut[ipo];
-    };
-
-    CABLES.Op.prototype.getPort=function(name)
-    {
-        return this.getPortByName(name);
     };
 
     CABLES.Op.prototype.updateAnims=function()
@@ -685,6 +676,12 @@ CABLES.Op = function()
         }
     };
 
+    /**
+     * disconnect all links
+     * @function
+     * @instance
+     * @memberof Op
+     */
     CABLES.Op.prototype.unLink=function()
     {
         for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
@@ -978,7 +975,7 @@ CABLES.Op = function()
 
     /**
      * enable/disable op
-     * @function setEnabled
+     * @function
      * @instance
      * @memberof Op
      * @param {boolean} 
@@ -992,7 +989,7 @@ CABLES.Op = function()
 
     /**
      * organize ports into a group
-     * @function setPortGroup
+     * @function
      * @instance
      * @memberof Op
      * @param {String} name
@@ -1116,12 +1113,10 @@ CABLES.Op = function()
             else if (!this.uiAttribs.working) this.setUiAttrib({ "working": true,"notWorkingMsg":null});
 
     }
-    
 
     CABLES.Op.prototype._checkLinksNeededToWork=function()
     {
     }
-
     
     CABLES.Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
@@ -1130,6 +1125,16 @@ CABLES.Op = function()
 
     }
 
+
+    /**
+     * show a small X to indicate op is not working when given ports are not linked
+     * @function
+     * @instance
+     * @memberof Op
+     * @param {Port} port1
+     * @param {Port} port2
+     * @param {Port} port3
+     */
     CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
         if (!CABLES.UI) return;
