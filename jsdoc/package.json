@@ -12,15 +12,15 @@
   "license": "ISC",
   "dependencies": {
     "braintree-jsdoc-template": "^3.3.0",
-    "documentation": "^11.0.1",
     "stream-array": "^1.1.2",
     "vinyl-fs": "^3.0.3"
   },
   "devDependencies": {
     "connect": "^3.7.0",
+    "docjs-theme": "./theme",
+    "documentation": "^11.0.1",
     "minami": "^1.2.3",
     "nodemon": "^1.19.1",
-    "serve": "^11.0.2",
-    "docjs-theme": "./theme"
+    "serve": "^11.0.2"
   }
 }
