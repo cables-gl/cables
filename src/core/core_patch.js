@@ -23,6 +23,7 @@ var CABLES = CABLES || {};
  */
 
 
+
 CABLES.Patch = function(cfg) {
 
     CABLES.EventTarget.apply(this);
@@ -1075,6 +1076,24 @@ CABLES.Patch.prototype.dispose = function() {
     this.pause();
     this.clear();
 };
+
+
+/**
+ * remove an eventlistener
+ * @instance
+ * @function addEventListener
+ * @param {String} name of event
+ * @param {function} callback
+ */
+
+/**
+ * remove an eventlistener
+ * @instance
+ * @function removeEventListener
+ * @param {String} name of event
+ * @param {function} callback
+ */
+
 
 /**
  * op added to patch event

@@ -89,8 +89,7 @@ CABLES.Timer.prototype.update=function()
  * @function
  * @memberof Timer
  * @instance
- * @description returns time in milliseconds
- * @return {Number} value
+ * @return {Number} time in milliseconds
  */
 CABLES.Timer.prototype.getMillis=function()
 {
@@ -101,8 +100,7 @@ CABLES.Timer.prototype.getMillis=function()
  * @function
  * @memberof Timer
  * @instance
- * @description returns time in seconds
- * @return {Number} value
+ * @return {Number} value time in seconds
  */
 CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 {
@@ -111,10 +109,10 @@ CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 };
 
 /**
+ * toggle between play/pause state
  * @function
  * @memberof Timer
  * @instance
- * @description toggle playing state
  */
 CABLES.Timer.prototype.togglePlay=function()
 {
@@ -123,10 +121,11 @@ CABLES.Timer.prototype.togglePlay=function()
 };
 
 /**
+ * set current time
  * @function
  * @memberof Timer
  * @instance
- * @description set current time
+ * @param {Number} time
  */
 CABLES.Timer.prototype.setTime=function(t)
 {
@@ -154,10 +153,10 @@ CABLES.Timer.prototype.setOffset=function(val)
 };
 
 /**
+ * (re)starts the timer
  * @function
  * @memberof Timer
  * @instance
- * @description (re)starts the timer
  */
 CABLES.Timer.prototype.play=function()
 {
@@ -167,10 +166,10 @@ CABLES.Timer.prototype.play=function()
 };
 
 /**
+ * pauses the timer
  * @function
  * @memberof Timer
  * @instance
- * @description pauses the timer
  */
 CABLES.Timer.prototype.pause=function()
 {
@@ -188,6 +187,7 @@ CABLES.Timer.prototype.pauseEvents=function(onoff)
  * @callback
  * @description adds callback, which will be executed it playing state changed
  * @memberof Timer
+ * @param {Function} callback
  * @instance
  */
 CABLES.Timer.prototype.onPlayPause=function(cb)
@@ -200,6 +200,7 @@ CABLES.Timer.prototype.onPlayPause=function(cb)
  * @callback
  * @description adds callback, which will be executed when the current time changes
  * @memberof Timer
+ * @param {Function} callback
  * @instance
  */
 CABLES.Timer.prototype.onTimeChange=function(cb)
