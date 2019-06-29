@@ -6,13 +6,22 @@ CGL.MESH.lastMesh=null;
 
 
 /**
- * @constructor
- * @memberof CGL
- * @name CGL.Mesh
- * @param {CGL.Context} cgl
- * @param {CGL.Geometry} geometry
- * @param {number} [glPrimitive]
+ * webgl renderable 3d object
+ * @external CGL
+ * @namespace Mesh
+ * @hideconstructor
+ * @param {Context} cgl
+ * @param {Geometry} geometry
+ * @param {Number} [glPrimitive]
  * @class
+ * @example
+ * const cgl=op.patch.cgl
+ * const mesh=new CGL.Mesh(cgl, geometry);
+ * 
+ * function render()
+ * {
+ *   mesh.render(cgl.getShader());	
+ * }
  */
 CGL.Mesh=function(_cgl,__geom,glPrimitive)
 {
@@ -46,10 +55,11 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
 };
 
 /**
- * @function
+ * @function updateVertices
+ * @memberof Mesh
+ * @instance
  * @description update vertices only from a geometry
- * @name CGL.Mesh#updateVertices
- * @param {CGL.Geometry} geometry
+ * @param {Geometry} geometry
  */
 CGL.Mesh.prototype.updateVertices=function(geom)
 {
@@ -84,9 +94,10 @@ CGL.Mesh.prototype.getAttribute=function(name)
 
 
 /**
- * @function
+ * @function setAttribute
  * @description update attribute 
- * @name CGL.Mesh#setAttribute
+ * @memberof Mesh
+ * @instance
  * @param {String} attribute name
  * @param {Array} data
  * @param {Number} itemSize
@@ -177,10 +188,11 @@ CGL.Mesh.prototype.getAttributes=function()
 };
 
 /**
- * @function
+ * @function updateTexCoords
  * @description update texture coordinates only from a geometry
- * @name CGL.Mesh#updateTexCoords
- * @param {CGL.Geometry} geometry
+ * @memberof Mesh
+ * @instance
+ * @param {Geometry} geometry
  */
 CGL.Mesh.prototype.updateTexCoords=function(geom)
 {
@@ -243,10 +255,11 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
 };
 
 /**
- * @function
+ * @function setGeom
+ * @memberof Mesh
+ * @instance
  * @description set geometry for mesh
- * @name CGL.Mesh#setGeom
- * @param {CGL.Geometry} geometry
+ * @param {Geometry} geometry
  */
 CGL.Mesh.prototype.setGeom=function(geom)
 {
@@ -443,10 +456,11 @@ CGL.Mesh.prototype.setNumVertices=function(num)
 };
 
 /**
- * @function
+ * @function render
+ * @memberof Mesh
+ * @instance
  * @description draw mesh to screen
- * @name CGL.Mesh#render
- * @param {CGL.Shader} shader
+ * @param {Shader} shader
  */
 CGL.Mesh.prototype.render=function(shader)
 {

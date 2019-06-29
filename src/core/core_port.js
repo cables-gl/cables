@@ -1,8 +1,12 @@
 
 /**
- * @module CABLES.Port
- * @name CABLES.Port
+ * data is coming into and out of ops through input and output ports
+ * @external CABLES
+ * @namespace Port
  * @class
+ * @hideconstructor
+ * @example
+ * const myPort=op.inString("String Port");
  */
 
 CABLES.PORT_DIR_IN=0;
@@ -10,13 +14,14 @@ CABLES.PORT_DIR_OUT=1;
 
 var CABLES=CABLES || {};
 
-/** @constructor */
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
     this.data = {}; // reserved for port-specific user-data
     /**
-     * @type {number}
-     * @name CABLES.Port#direction
+     * @type {Number}
+     * @name direction
+     * @instance
+     * @memberof Port
      * @description direction of port (input(0) or output(1))
      */
     this.direction=CABLES.PORT_DIR_IN;
@@ -24,8 +29,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.parent=__parent;
 
     /**
-     * @type {Array<CABLES.Link>}
-     * @name CABLES.Port#links
+     * @type {Array<Link>}
+     * @name links
+     * @instance
+     * @memberof Port
      * @description links of port
      */
     this.links=[];
@@ -72,9 +79,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
 
 /**
- * change listener for input value ports 
- * @name CABLES.Port#onChange
- * @type Function
+ * change listener for input value ports, overwrite to react to changes
+ * @function onChange
+ * @memberof Port
+ * @instance
+ * @example
+ * const myPort=op.inString("MyPort");
+ * myPort.onChange=function()
+ * {
+ *   console.log("was changed to: ",myPort.get());
+ * }
+ * 
  */
 
 {
@@ -82,8 +97,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
 
     /**
-     * @name CABLES.Port#hidePort
-     * @function
+     * @function hidePort
+     * @memberof Port
+     * @instance
      * @description hide port rectangle in op
      */
     CABLES.Port.prototype.hidePort=function()
@@ -92,8 +108,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @name CABLES.Port#remove
-     * @function
+     * @function remove
+     * @memberof Port
+     * @instance
      * @description remove port
      */
     CABLES.Port.prototype.remove=function()
@@ -104,10 +121,17 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @name CABLES.Port#setUiAttribs
-     * @function
+     * set ui attributes
+     * @function setUiAttribs
+     * @memberof Port
+     * @instance
      * @param {Object} newAttribs
-     * @description set ui attributes
+     * <pre>
+     * greyout - port paramater will appear greyed out, can not be
+     * hidePort - port will be hidden from op
+     * </pre>
+     * @example
+     * myPort.setUiAttribs({greyout:true});
      */
     CABLES.Port.prototype.setUiAttribs=function(newAttribs)
     {
@@ -120,8 +144,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @name CABLES.Port#get
-     * @function
+     * @function get
+     * @memberof Port
+     * @instance
      * @description get value of port
      */
     CABLES.Port.prototype.get=function()
@@ -142,9 +167,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @memberof CABLES.Port
-     * @function
-     * @name setValue
+     * @function setValue
+     * @memberof Port
+     * @instance
      * @description set value of port / will send value to all linked ports (only for output ports)
      */
     CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
@@ -235,10 +260,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#getTypeString
+     * @function getTypeString
+     * @memberof Port
+     * @instance
      * @description get port type as string, e.g. "Function","Value"...
-     * @return {string} type
+     * @return {String} type
      */
     CABLES.Port.prototype.getTypeString=function()
     {
@@ -279,8 +305,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.shouldLink=function(){return true;};
 
     /**
-     * @function
-     * @name CABLES.Port#removeLinks
+     * @function removeLinks
+     * @memberof Port
+     * @instance
      * @description remove all links from port
      */
     CABLES.Port.prototype.removeLinks=function()
@@ -301,8 +328,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#removeLink
+     * @function removeLink
+     * @memberof Port
+     * @instance
      * @description remove all link from port
      * @param {CABLES.Link} link
      */
@@ -341,8 +369,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#getName
+     * @function getName
+     * @memberof Port
+     * @instance
      * @description return port name
      */
     CABLES.Port.prototype.getName= function()
@@ -358,9 +387,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#getLinkTo
-     * @param {CABLES.Port} otherPort
+     * @function getLinkTo
+     * @memberof Port
+     * @instance
+     * @param {Port} otherPort
      * @description return link, which is linked to otherPort
      */
     CABLES.Port.prototype.getLinkTo=function(p2)
@@ -371,9 +401,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#removeLinkTo
-     * @param {CABLES.Port} otherPort
+     * @function removeLinkTo
+     * @memberof Port
+     * @instance
+     * @param {Port} otherPort
      * @description removes link, which is linked to otherPort
      */
     CABLES.Port.prototype.removeLinkTo=function(p2)
@@ -388,9 +419,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#isLinkedTo
-     * @param {CABLES.Port} otherPort
+     * @function isLinkedTo
+     * @memberof Port
+     * @instance
+     * @param {Port} otherPort
      * @description returns true if port is linked to otherPort
      */
     CABLES.Port.prototype.isLinkedTo=function(p2)
@@ -402,8 +434,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @name CABLES.Port#trigger
-     * @function
+     * @function trigger
+     * @memberof Port
+     * @instance
      * @description trigger the linked port (usually invoked on an output function port)
      */
     CABLES.Port.prototype.trigger=function()
@@ -471,26 +504,35 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
 
     /**
-     * @function
-     * @name CABLES.Port#getType
-     * @return {number} type
-     * @description return type of port
+     * <pre>
+     * CABLES.OP_PORT_TYPE_VALUE = 0;
+     * CABLES.OP_PORT_TYPE_FUNCTION = 1;
+     * CABLES.OP_PORT_TYPE_OBJECT = 2;
+     * CABLES.OP_PORT_TYPE_TEXTURE = 2;
+     * CABLES.OP_PORT_TYPE_ARRAY = 3;
+     * CABLES.OP_PORT_TYPE_DYNAMIC = 4;
+     * CABLES.OP_PORT_TYPE_STRING = 5;
+     * </pre>
+    * @function getType
+     * @memberof Port
+     * @instance
+     * @return {Number} type of port
      */
     CABLES.Port.prototype.getType=function(){ return this.type; };
 
     /**
-     * @function
-     * @name CABLES.Port#getType
-     * @return {number} 
-     * @description return true if port is linked
+     * @function isLinked
+     * @memberof Port
+     * @instance
+     * @return {Boolean} true if port is linked
      */
     CABLES.Port.prototype.isLinked=function(){ return this.links.length>0; };
 
     /**
-     * @function
-     * @name CABLES.Port#isAnimated
-     * @return {boolean}
-     * @description return true if port is animated
+     * @function isAnimated
+     * @memberof Port
+     * @instance
+     * @return {Boolean} true if port is animated
      */
     CABLES.Port.prototype.isAnimated=function()
     {
@@ -499,10 +541,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
 
     /**
-     * @function
-     * @name CABLES.Port#isHidden
-     * @return {boolean}
-     * @description return true if port is hidden
+     * @function isHidden
+     * @memberof Port
+     * @instance
+     * @return {Boolean} true if port is hidden
      */
     CABLES.Port.prototype.isHidden=function()
     {
@@ -510,10 +552,12 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     };
     
 
+
     /**
-     * @function
-     * @name CABLES.Port#onTriggered
-     * @param {function} callback
+     * @function onTriggered
+     * @memberof Port
+     * @instance
+     * @param {onTriggeredCallback} callback
      * @description set callback, which will be executed when port was triggered (usually output port)
      */
     CABLES.Port.prototype._onTriggered=function()
@@ -551,8 +595,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
 /**
 * Returns the port type string, e.g. "value" based on the port type number
-* @param {number} type - The port type number
-* @returns {string} - The port type as string
+* @function portTypeNumberToString
+* @instance
+* @memberof Port
+* @param {Number} type - The port type number
+* @returns {String} - The port type as string
 */
 CABLES.Port.portTypeNumberToString = function(type) {
    if(type == CABLES.OP_PORT_TYPE_VALUE) return 'value';
