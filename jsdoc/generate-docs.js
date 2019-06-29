@@ -28,5 +28,5 @@ documentation
   .build(fileNames, { shallow: false })
   .then(comments => html(comments, { theme: 'theme' }))
   .then((output) => {
-    streamArray(output).pipe(vfs.dest('./output-test'));
+    streamArray(output).pipe(vfs.dest('./output'));
   });
