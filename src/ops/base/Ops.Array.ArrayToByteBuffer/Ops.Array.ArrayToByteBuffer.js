@@ -14,7 +14,7 @@ inArr.onChange=function()
             packet[i]=arr[i];
         }
         outObject.set(packet.buffer);
-        console.log('set');
+        // console.log('set');
     }
     else outObject.set(null);
 
