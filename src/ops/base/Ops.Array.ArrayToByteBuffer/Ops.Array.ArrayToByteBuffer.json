@@ -22,7 +22,7 @@
                 "name": "Buffer"
             }
         ],
-        "name": "Ops.User.pandur.ArrayToByteBuffer"
+        "name": "Ops.Array.ArrayToByteBuffer"
     },
     "summary": "convert an array to a bye buffer (Uint8ClampedArray)",
     "youtubeid": "",
