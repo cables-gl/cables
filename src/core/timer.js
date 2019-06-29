@@ -12,8 +12,10 @@ CABLES.now=function() { return CABLES.internalNow(); };
 // ----------------------------
 
 /**
+ * Measuring time 
  * @external CABLES
  * @namespace Timer
+ * @hideconstructor
  * @class
  */
 CABLES.Timer=function()
