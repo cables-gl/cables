@@ -159,7 +159,7 @@ CGL.Texture.prototype.setSize=function(w,h)
         
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
 
-        if(this._cgl.glVersion==1) this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.HALF_FLOAT_OES, null); //UNSIGNED_SHORT
+        if(this._cgl.glVersion==1) this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); //UNSIGNED_SHORT
             else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
