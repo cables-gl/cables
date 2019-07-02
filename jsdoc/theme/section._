@@ -1,13 +1,21 @@
 <section class='p2 mb2 clearfix bg-white minishadow'>
 
-<!-- <%- JSON.stringify(section) %> -->
+<!--
+<pre>
+<%- JSON.stringify(section.tags,null,4) %>
+</pre>
+-->
 
 
   <% if (typeof nested === 'undefined' || (section.context && section.context.github)) { %>
   <div class='clearfix'>
     <% if (typeof nested === 'undefined') { %>
     <h3 class='fl m0' id='<%- slug(section.namespace) %>'>
-      <%- section.name %>
+      
+      <%= section.tags.map(function(tag) {
+	      if(tag.title=='external')return tag.description+'.';
+        else return null;
+	    }).filter(Boolean) %><%- section.name %>
     </h3>
     <% } %>
     <% if (section.context && section.context.github) { %>

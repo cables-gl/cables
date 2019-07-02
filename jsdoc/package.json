@@ -17,7 +17,6 @@
   },
   "devDependencies": {
     "connect": "^3.7.0",
-    "docjs-theme": "./theme",
     "documentation": "^11.0.1",
     "minami": "^1.2.3",
     "nodemon": "^1.19.1",
