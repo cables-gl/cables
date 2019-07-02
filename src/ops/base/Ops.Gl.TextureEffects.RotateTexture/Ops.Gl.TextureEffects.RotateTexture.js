@@ -1,4 +1,5 @@
 const render=op.inTrigger('render'),
+    multiplierTex = op.inTexture("Mask"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     inRotate=op.inValueSlider("Rotate",0.125),
@@ -11,18 +12,23 @@ const shader=new CGL.Shader(cgl);
 shader.setSource(shader.getDefaultVertexShader(),attachments.rotate_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
+const textureMultiplierUniform=new CGL.Uniform(shader,'t','multiplierTex',1);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 
 crop.onChange=updateCrop;
 updateCrop();
 
+
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
 function updateCrop()
 {
-    if(crop.get()) shader.define('CROP_IMAGE');
-        else shader.removeDefine('CROP_IMAGE');
+    shader.toggleDefine('CROP_IMAGE',crop.get());
+}
+multiplierTex.onChange = function()
+{
+    shader.toggleDefine('ROTATE_TEXTURE',multiplierTex.isLinked());
 }
 render.onTriggered=function()
 {
@@ -32,6 +38,8 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+    if(multiplierTex.get()) cgl.setTexture(1, multiplierTex.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

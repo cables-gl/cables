@@ -11,6 +11,7 @@ const
     addX=op.inValue("X",0),
     addY=op.inValue("Y",0),
     addZ=op.inValue("Z",0),
+    seed2=op.inValue("Seed",0),
     trigger=op.outTrigger("Next");
 
 op.setPortGroup("Look",[inRGB,inLoop,minValue,maxValue]);
@@ -30,6 +31,7 @@ const
     uni_addX=new CGL.Uniform(shader,'f','addX',addX),
     uni_addY=new CGL.Uniform(shader,'f','addY',addY),
     uni_addZ=new CGL.Uniform(shader,'f','addZ',addZ),
+    uni_seed=new CGL.Uniform(shader,'f','seed2',seed2),
     uni_minValue=new CGL.Uniform(shader,'f','minIn',minValue),
     uni_maxValue=new CGL.Uniform(shader,'f','maxIn',maxValue);
 

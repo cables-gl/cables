@@ -1,5 +1,6 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+UNI sampler2D multiplierTex;
 UNI float amount;
 UNI float resX;
 UNI float resY;
@@ -17,10 +18,16 @@ void pR(inout vec2 p, float a)
 
 void main()
 {
+    float multiplier = 0.0;
+
+    #ifdef ROTATE_TEXTURE
+        multiplier = dot(vec3(0.2126,0.7152,0.0722), texture(multiplierTex,texCoord).rgb);
+    #endif
+
     vec2 uv = texCoord;
     vec2 res = vec2(resX,resY);
     uv -= 0.5;
-    pR(uv.xy,rotate * (TAU));
+    pR(uv.xy,(rotate + multiplier) * (TAU)  );
     uv += 0.5;
 
     #ifdef CROP_IMAGE

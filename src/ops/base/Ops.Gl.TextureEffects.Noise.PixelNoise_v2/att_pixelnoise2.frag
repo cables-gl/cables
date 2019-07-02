@@ -6,6 +6,7 @@ UNI float numY;
 UNI float addX;
 UNI float addY;
 UNI float addZ;
+UNI float seed2;
 UNI float minIn;
 UNI float maxIn;
 
@@ -28,13 +29,13 @@ void main()
     float r,g,b;
 
     #ifndef RGB
-        r=g=b=random( seed );
+        r=g=b=random( seed + 0.5711 + seed2 );
     #endif
 
     #ifdef RGB
-        r=random( seed+0.5711 );
-        g=random( seed+0.5712 );
-        b=random( seed+0.5713 );
+        r=random( seed+0.5711 + seed2);
+        g=random( seed+0.5712 + seed2);
+        b=random( seed+0.5713 + seed2);
     #endif
 
     vec4 rnd = clamp( vec4( r,g,b,1.0 ),vec4(minIn), vec4(maxIn) );

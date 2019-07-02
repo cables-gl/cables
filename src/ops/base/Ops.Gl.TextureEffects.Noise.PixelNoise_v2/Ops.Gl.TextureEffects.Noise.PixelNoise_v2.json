@@ -73,6 +73,11 @@
                 "name": "Z",
                 "group": "Position",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -81,7 +86,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.PixelNoise2"
+        "name": "Ops.Gl.TextureEffects.Noise.PixelNoise_v2"
     },
     "summary": "Pixelated noise",
     "docs": {

@@ -38,6 +38,10 @@
                 "name": "render"
             },
             {
+                "type": "2",
+                "name": "Mask"
+            },
+            {
                 "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
