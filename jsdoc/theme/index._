@@ -1,9 +1,9 @@
 
-    <div class='flex'>
-      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+    <div>
+      <div id='split-right' class=''>
         <% docs.forEach(function(s) { %>
           <% if (s.kind === 'note' && !s.children) { %>
-            <div class='keyline-top-not py2'><%=renderNote({ note: s })%></div>
+            <div class=''><%=renderNote({ note: s })%></div>
           <% } else { %>
           <%= renderSection({
             section: s,
