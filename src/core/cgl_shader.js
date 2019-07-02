@@ -26,8 +26,12 @@ CGL.SHADERVAR_UNI_VIEWPOS = "camPos"
 
 /**
  * @class
- * @name Shader
- * @memberof CGL
+ * @external CGL
+ * @namespace Shader
+ * @hideconstructor
+ * @example
+ * var shader=new CGL.Shader(cgl,'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
 CGL.Shader = function(_cgl, _name) {
     if (!_cgl) throw "shader constructed without cgl";
@@ -469,8 +473,10 @@ CGL.Shader.prototype.bind = function()
 
 /**
  * easily enable/disable a define without a value
+ * @function toggleDefine
+ * @memberof Shader
+ * @instance
  * @param {name} name
- * @function
  */
 CGL.Shader.prototype.toggleDefine = function(name, enabled)
 {
@@ -480,9 +486,12 @@ CGL.Shader.prototype.toggleDefine = function(name, enabled)
 
 /**
  * add a define to a shader, e.g.  #define DO_THIS_THAT 1
- * @param {name} name
- * @param {value} value (can be empty)
- * @function
+ * @function define
+ * @memberof Shader
+ * @instance
+ * @param {String} name
+ * @param {Any} value (can be empty)
+ 
  */
 CGL.Shader.prototype.define = function(name, value)
 {
@@ -521,7 +530,9 @@ CGL.Shader.prototype.hasDefine = function(name) {
 /**
  * remove a define from a shader
  * @param {name} name
- * @function
+ * @function removeDefine
+ * @memberof Shader
+ * @instance
  */
 CGL.Shader.prototype.removeDefine = function(name) {
     for (var i = 0; i < this._defines.length; i++) {
@@ -541,8 +552,10 @@ CGL.Shader.prototype.removeDefine = function(name) {
 
 /**
  * remove a module from shader
+ * @function removeModule
+ * @memberof Shader
+ * @instance
  * @param {shaderModule} module the module to be removed
- * @function
  */
 CGL.Shader.prototype.removeModule = function(mod)
 {
@@ -587,9 +600,11 @@ CGL.Shader.prototype.getCurrentModules=function(){return this._modules;};
 
 /**
  * add a module
+ * @function addModule
+ * @memberof Shader
+ * @instance
  * @param {shaderModule} module the module to be added
  * @param {shaderModule} [sibling] sibling module, new module will share the same group
- * @function
  */
 CGL.Shader.prototype.addModule = function(mod, sibling) {
     if(!mod.id) mod.id = CABLES.generateUUID();
@@ -665,7 +680,9 @@ CGL.Shader.prototype.removeUniform = function(name) {
 
 /**
  * add a uniform to the shader
- * @param {uniform} uniform
+ * @param {Uniform} uniform
+ * @memberof Shader
+ * @instance
  * @function
  */
 CGL.Shader.prototype.addUniform = function(uni) {
@@ -796,10 +813,11 @@ CGL.Shader.prototype.getDefaultFragmentShader = CGL.Shader.getDefaultFragmentSha
 };
 
 /**
- * @function
- * adds attribute definition to shader header without colliding with other shader modules...
+  * adds attribute definition to shader header without colliding with other shader modules...
  * when attrFrag is defined, vertex shader will output this attribute to the fragment shader
- * @name CGL.Shader#addAttribute
+ * @function
+ * @memberof Shader
+ * @instance
  * @param {Object} attribObject {type:x,name:x,[nameFrag:x]}
  * @return {Object}
  */

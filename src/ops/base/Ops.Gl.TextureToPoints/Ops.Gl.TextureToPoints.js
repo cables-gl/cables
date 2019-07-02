@@ -3,7 +3,7 @@ const
     pUpdate = op.inTriggerButton("update"),
     inNum=op.inValueInt("Num Points",2000),
     inSeed=op.inValueFloat("Seed",1),
-    zPos = op.inValueSelect("Z Position",['None','Red','Green','Blue','Alpha'],'Red'),
+    zPos = op.inSwitch("Z Position",['None','Red','Green','Blue','Alpha'],'Red'),
     zMultiply = op.inValueFloat("Z Multiply",1.0),
     tex = op.inObject("texture"),
     outTrigger = op.outTrigger("trigger"),

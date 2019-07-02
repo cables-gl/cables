@@ -48,16 +48,14 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "align",
-                "group": "Alignment",
-                "subType": "string"
+                "group": "Alignment"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "vertical align",
-                "group": "Alignment",
-                "subType": "string"
+                "group": "Alignment"
             },
             {
                 "type": "0",
@@ -81,7 +79,7 @@
                 "name": "texture"
             }
         ],
-        "name": "Ops.Gl.Textures.Text2"
+        "name": "Ops.Gl.Textures.Text_v2"
     },
     "summary": "Generates a texture which reads Text",
     "youtubeid": "z1Qf9dE67-w",

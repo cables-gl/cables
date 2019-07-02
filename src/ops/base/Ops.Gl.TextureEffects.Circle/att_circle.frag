@@ -48,14 +48,28 @@ float dist = dist(x,y,texCoord.x+0.5,(texCoord.y-0.5)*aspect+0.5);
        if(dist>sz && dist<sz+fade)v=1.0-((dist-sz)/(fade));
    #endif
 
+
+
+
    col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);
+
+//   col.b=0.0;
+//   col.g=1.0-abs(x-texCoord.x-0.125);
+//   col.b=1.0-abs(x-texCoord.x-0.125);
+
+//   col.g=abs(y-0.125)*0.5;
+
    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount),1.0);
    outColor=col;
+
+
 
    #ifdef WARN_OVERFLOW
        float width=0.01;
        if( texCoord.x>(1.0-width) || texCoord.y>(1.0-width) || texCoord.y<width || texCoord.x<width )
            if(v>0.001*amount)outColor= vec4(1.0,0.0,0.0, 1.0);
    #endif
+
+
 
 }

@@ -23,9 +23,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Type",
-                "subType": "string"
+                "type": "5",
+                "name": "Type"
             },
             {
                 "type": "0",

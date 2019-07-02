@@ -3,7 +3,7 @@ var arr=[];
 
 // inputs
 var exePort = op.inTriggerButton('Execute');
-
+var inTrigShuffle = op.inTriggerButton("Shuffle array");
 var array=op.inArray("array");
 
 // outputs
@@ -53,9 +53,14 @@ function update() {
 }
 
 exePort.onTriggered = function() {
-    update();
+    //update();
     nextPort.trigger();
 };
+inTrigShuffle.onTriggered = function()
+{
+    update();
+}
+
 array.onLink = function ()
 {
     update();

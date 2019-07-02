@@ -1,19 +1,36 @@
 
 /**
- * @name Uniform
+ * Shader uniforms
+ * 
+ * types:
+ * <pre>
+ * f    - float
+ * 2f   - vec2
+ * 3f   - vec3
+ * 4f   - vec4
+ * i    - integer
+ * t    - texture
+ * m4   - mat4, 4x4 float matrix
+ * f[]  - array of floats
+ * 3f[] - array of float triplets
+ * </pre>
+ * 
+ * @external CGL
+ * @namespace Uniform
  * @class
- * @constructor
- * @memberof CGL
- * @param {CGL.Shader} shader
+ * @param {Shader} shader
  * @param {String} [type=f]
  * @param {String} name
  * @param {Number|Port} value  can be a Number,Matrix or Port
- */
-
-/**
- * @name CGL.Uniform#setValue
- * @param {Number|Matrix|Texture} value
- * @function
+ * @example
+ * // bind float uniform called myfloat and initialize with value 1.0
+ * const unir=new CGL.Uniform(shader,'f','myfloat',1.0); 
+ * unir.setValue(1.0);
+ * 
+ * // bind float uniform called myfloat and automatically set it to input port value
+ * const myPort=op.inFloat("input");
+ * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
+ * 
  */
 CGL.Uniform=function(__shader,__type,__name,_value)
 {
@@ -326,3 +343,10 @@ CGL.Uniform.prototype.setValueM4=function(v)
     this.needsUpdate=true;
     this._value=v;
 };
+
+/**
+ * @function setValue
+ * @memberof Uniform
+ * @instance
+ * @param {Number|Array|Matrix|Texture} value
+ */

@@ -4,7 +4,7 @@ const
     useVPSize=op.inValueBool('use original size'),
     width=op.inValueInt('width'),
     height=op.inValueInt('height'),
-    tfilter=op.inValueSelect('filter',['nearest','linear','mipmap']),
+    tfilter=op.inSwitch('filter',['nearest','linear','mipmap']),
     twrap=op.inValueSelect('wrap',['clamp to edge','repeat','mirrored repeat']),
     fpTexture=op.inValueBool('HDR'),
     trigger=op.outTrigger('trigger'),

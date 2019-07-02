@@ -5,9 +5,9 @@ const
     amount=op.inValueSlider("Amount",1),
     amountX=op.inValueSlider("amount X"),
     amountY=op.inValueSlider("amount Y"),
-    inWrap=op.inValueSelect("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
+    inWrap=op.inSwitch("Wrap",["Mirror","Clamp","Repeat"],"Mirror"),
     inInput=op.inValueSelect("Input",["Luminance","RedGreen","Red","Green","Blue"],"Luminance"),
-    inZero=op.inValueSelect("Zero Displace",["Grey","Black"],"Grey"),
+    inZero=op.inSwitch("Zero Displace",["Grey","Black"],"Grey"),
     // displaceTex=op.inTexture("displaceTex"),
     trigger=op.outTrigger("trigger");
 

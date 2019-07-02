@@ -3,7 +3,6 @@ CABLES.internalNow=function() { return window.performance.now(); };
 
 /**
  * current time in milliseconds
- * @name CABLES#now
  * @memberof CABLES
  * @function
  * @static
@@ -13,8 +12,10 @@ CABLES.now=function() { return CABLES.internalNow(); };
 // ----------------------------
 
 /**
- * @name Timer
- * @memberof CABLES
+ * Measuring time 
+ * @external CABLES
+ * @namespace Timer
+ * @hideconstructor
  * @class
  */
 CABLES.Timer=function()
@@ -59,7 +60,8 @@ CABLES.Timer.prototype.setDelay=function(d)
 
 /**
  * @function
- * @name CABLES.Timer#isPlaying
+ * @memberof Timer
+ * @instance
  * @description returns true if timer is playing
  * @return {Boolean} value
  */
@@ -70,7 +72,8 @@ CABLES.Timer.prototype.isPlaying=function()
 
 /**
  * @function
- * @name CABLES.Timer#update
+ * @memberof Timer
+ * @instance
  * @description update timer
  * @return {Number} time
  */
@@ -84,9 +87,9 @@ CABLES.Timer.prototype.update=function()
 
 /**
  * @function
- * @name CABLES.Timer#getMillis
- * @description returns time in milliseconds
- * @return {Number} value
+ * @memberof Timer
+ * @instance
+ * @return {Number} time in milliseconds
  */
 CABLES.Timer.prototype.getMillis=function()
 {
@@ -95,9 +98,9 @@ CABLES.Timer.prototype.getMillis=function()
 
 /**
  * @function
- * @name CABLES.Timer#getTime
- * @description returns time in seconds
- * @return {Number} value
+ * @memberof Timer
+ * @instance
+ * @return {Number} value time in seconds
  */
 CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 {
@@ -106,9 +109,10 @@ CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
 };
 
 /**
+ * toggle between play/pause state
  * @function
- * @name CABLES.Timer#togglePlay
- * @description toggle playing state
+ * @memberof Timer
+ * @instance
  */
 CABLES.Timer.prototype.togglePlay=function()
 {
@@ -117,9 +121,11 @@ CABLES.Timer.prototype.togglePlay=function()
 };
 
 /**
+ * set current time
  * @function
- * @name CABLES.Timer#setTime
- * @description set current time
+ * @memberof Timer
+ * @instance
+ * @param {Number} time
  */
 CABLES.Timer.prototype.setTime=function(t)
 {
@@ -147,9 +153,10 @@ CABLES.Timer.prototype.setOffset=function(val)
 };
 
 /**
+ * (re)starts the timer
  * @function
- * @name CABLES.Timer#play
- * @description (re)starts the timer
+ * @memberof Timer
+ * @instance
  */
 CABLES.Timer.prototype.play=function()
 {
@@ -159,9 +166,10 @@ CABLES.Timer.prototype.play=function()
 };
 
 /**
+ * pauses the timer
  * @function
- * @name CABLES.Timer#pause
- * @description pauses the timer
+ * @memberof Timer
+ * @instance
  */
 CABLES.Timer.prototype.pause=function()
 {
@@ -176,10 +184,11 @@ CABLES.Timer.prototype.pauseEvents=function(onoff)
 };
 
 /**
- * @function
+ * @callback
  * @description adds callback, which will be executed it playing state changed
- * @name CABLES.Timer#onPlayPause
- * @param {function} callback
+ * @memberof Timer
+ * @param {Function} callback
+ * @instance
  */
 CABLES.Timer.prototype.onPlayPause=function(cb)
 {
@@ -188,10 +197,11 @@ CABLES.Timer.prototype.onPlayPause=function(cb)
 };
 
 /**
- * @function
+ * @callback
  * @description adds callback, which will be executed when the current time changes
- * @name CABLES.Timer#onTimeChange
- * @param {function} callback
+ * @memberof Timer
+ * @param {Function} callback
+ * @instance
  */
 CABLES.Timer.prototype.onTimeChange=function(cb)
 {

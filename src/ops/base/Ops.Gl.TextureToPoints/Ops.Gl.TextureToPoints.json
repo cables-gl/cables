@@ -31,9 +31,8 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Z Position",
-                "subType": "string"
+                "type": "5",
+                "name": "Z Position"
             },
             {
                 "type": "0",

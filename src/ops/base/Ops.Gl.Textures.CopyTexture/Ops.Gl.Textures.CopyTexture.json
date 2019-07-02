@@ -31,9 +31,8 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "filter",
-                "subType": "string"
+                "type": "5",
+                "name": "filter"
             },
             {
                 "type": "0",

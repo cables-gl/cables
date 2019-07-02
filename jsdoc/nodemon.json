@@ -1,0 +1,11 @@
+{
+  "verbose": true,
+  "ignore": ["./output-test", "*.spec.js", "temp", "public", "logs"],
+  "watch": ["./*", "../src/core"],
+  "events": {
+    "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"' && yarn gen-doc"
+  },
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

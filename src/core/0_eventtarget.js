@@ -28,13 +28,6 @@ CABLES.EventTarget=function()
         }
     }
 
-
-    /**
-     * @function
-     * @description remove an eventlistener
-     * @param {which} name of event
-     * @param {function} callback
-     */
     this.removeEventListener=function(which,cb)
     {
         if(this._eventCallbacks[which])

@@ -2,7 +2,7 @@ const render=op.inTrigger("Render");
 const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount=op.inValueSlider("Amount",1);
 const width=op.inValue("Width",1);
-const gType=op.inValueSelect("Type",['X','Y','XY','Radial'],"X");
+const gType=op.inSwitch("Type",['X','Y','XY','Radial'],"X");
 const pos1=op.inValueSlider("Pos",0.5);
 const smoothStep=op.inValueBool("Smoothstep",true);
 

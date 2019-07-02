@@ -469,10 +469,55 @@ CABLES.ANIM.Key.prototype.getEasing=function()
 
 /**
  * Keyframed interpolated animation. 
- * @name Anim
- * @memberof CABLES
- * @constructor
+ * 
+ * Available Easings:
+ * <pre>
+ * CABLES.ANIM.EASING_LINEAR
+ * CABLES.ANIM.EASING_ABSOLUTE
+ * CABLES.ANIM.EASING_SMOOTHSTEP
+ * CABLES.ANIM.EASING_SMOOTHERSTEP
+ * CABLES.ANIM.EASING_BEZIER
+
+ * CABLES.ANIM.EASING_CUBIC_IN
+ * CABLES.ANIM.EASING_CUBIC_OUT
+ * CABLES.ANIM.EASING_CUBIC_INOUT
+
+ * CABLES.ANIM.EASING_EXPO_IN
+ * CABLES.ANIM.EASING_EXPO_OUT
+ * CABLES.ANIM.EASING_EXPO_INOUT
+
+ * CABLES.ANIM.EASING_SIN_IN
+ * CABLES.ANIM.EASING_SIN_OUT
+ * CABLES.ANIM.EASING_SIN_INOUT
+
+ * CABLES.ANIM.EASING_BACK_IN
+ * CABLES.ANIM.EASING_BACK_OUT
+ * CABLES.ANIM.EASING_BACK_INOUT
+
+ * CABLES.ANIM.EASING_ELASTIC_IN
+ * CABLES.ANIM.EASING_ELASTIC_OUT
+
+ * CABLES.ANIM.EASING_BOUNCE_IN
+ * CABLES.ANIM.EASING_BOUNCE_OUT
+
+ * CABLES.ANIM.EASING_QUART_IN
+ * CABLES.ANIM.EASING_QUART_OUT
+ * CABLES.ANIM.EASING_QUART_INOUT
+
+ * CABLES.ANIM.EASING_QUINT_IN
+ * CABLES.ANIM.EASING_QUINT_OUT
+ * CABLES.ANIM.EASING_QUINT_INOUT
+ * </pre>
+ * @hideconstructor
+ * @external CABLES
+ * @namespace Anim
  * @class
+ * @example
+ * var anim=new CABLES.Anim();
+ * anim.setValue(0,0);  // set value 0 at 0 seconds
+ * anim.setValue(10,1); // set value 1 at 10 seconds
+ * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
+
  */
 CABLES.Anim=function(cfg)
 {
@@ -482,8 +527,10 @@ CABLES.Anim=function(cfg)
     this.loop=false;
 
     /**
-     * @name CABLES.Anim#defaultEasing
-     * @type Number
+     * @member defaultEasing
+     * @memberof Anim
+     * @instance
+     * @type {Number}
      */
     this.defaultEasing=CABLES.ANIM.EASING_LINEAR;
     this.onLooped=null;
@@ -503,7 +550,8 @@ CABLES.Anim.prototype.forceChangeCallback=function()
  * checks if last key time is < time
  * @param {Number} time
  * @returns {Boolean} 
- * @name CABLES.Anim#hasEnded
+ * @memberof Anim
+ * @instance
  * @function
  */
 CABLES.Anim.prototype.hasEnded=function(time)
@@ -523,8 +571,9 @@ CABLES.Anim.prototype.isRising=function(time)
 
 /**
  * remove all keys from animation
- * @param {Number} [time=0] set a new key at time
- * @name CABLES.Anim#clear
+ * @param {Number} [time=0] set a new key at time with the old value at time
+ * @memberof Anim
+ * @instance
  * @function
  */
 CABLES.Anim.prototype.clear=function(time)
@@ -565,11 +614,12 @@ CABLES.Anim.prototype.getKeyIndex=function(time)
 
 /**
  * set value at time
- * @name CABLES.Anim#setValue
- * @param {Number} [time] time
- * @param {Number} [value] value
+ * @function setValue
+ * @memberof Anim
+ * @instance
+ * @param {Number} time
+ * @param {Number} value
  * @param {Function} [callback] callback
- * @function
  */
 CABLES.Anim.prototype.setValue=function(time,value,cb)
 {
@@ -634,10 +684,11 @@ CABLES.Anim.prototype.isStarted=function(time)
 
 /**
  * get value at time
- * @name CABLES.Anim#getValue
+ * @function getValue
+ * @memberof Anim
+ * @instance
  * @param {Number} [time] time
  * @returns {Number} interpolated value at time
- * @function
  */
 CABLES.Anim.prototype.getValue=function(time)
 {

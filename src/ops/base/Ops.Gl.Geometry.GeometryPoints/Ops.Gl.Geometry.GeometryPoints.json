@@ -25,6 +25,10 @@
             },
             {
                 "type": "3",
+                "name": "Vertex Colors"
+            },
+            {
+                "type": "3",
                 "name": "Normals"
             },
             {
