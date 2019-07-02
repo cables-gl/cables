@@ -19,6 +19,8 @@ const fileNames = [
   '../src/core/cgl_shader_uniform.js',
   '../src/core/anim.js',
   '../src/core/timer.js',
+  '../src/core/cgl_framebuffer.js',
+  '../src/core/0_utils.js',
 ];
 // fs.readdirSync('../src/core').map(fileName => `../src/core/${fileName}`);
 

@@ -1,13 +1,12 @@
 /**
  * a framebuffer
- * @namespace CGL.Framebuffer
- * @memberof CGL
+ * @external CGL
+ * @namespace Framebuffer
  * @constructor
- * @param {CGL.Context} cgl
+ * @param {Context} cgl 
  * @param {Number} width
  * @param {Number} height
  * @param {Object} [options]
- * @class
  */
 
 var CGL=CGL || {};
@@ -55,9 +54,9 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     /**
      * get native gl framebuffer
-     * @name CGL.Context#getGlFrameBuffer()
+     * @function getGlFrameBuffer
+     * @memberof Framebuffer
      * @returns {Object} framebuffer
-     * @function
      */
     this.getGlFrameBuffer=function()
     {
@@ -67,9 +66,9 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     /**
      * get depth renderbuffer
-     * @name CGL.Context#getDepthRenderBuffer
+     * @function getDepthRenderBuffer
+     * @memberof Framebuffer
      * @returns {Object} renderbuffer
-     * @function
      */
     this.getDepthRenderBuffer=function()
     {
@@ -78,9 +77,9 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     /**
      * get color texture 
-     * @name CGL.Context#getTextureColor
-     * @returns {CGL.Texture} rgba texture
-     * @function
+     * @function getTextureColor
+     * @memberof Framebuffer
+     * @returns {Texture} rgba texture
      */
     this.getTextureColor=function()
     {
@@ -89,9 +88,9 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     /**
      * get depth texture
-     * @name CGL.Context#getTextureDepth
-     * @returns {CGL.Texture} depth texture
-     * @function
+     * @function getTextureDepth
+     * @memberof Framebuffer
+     * @returns {Texture} depth texture
      */
     this.getTextureDepth=function()
     {
