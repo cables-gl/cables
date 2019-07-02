@@ -1,4 +1,5 @@
 const fs = require('fs-extra');
+const fs_org = require('fs');
 const util = require('util');
 const stream = require('stream');
 const documentation = require('documentation');
@@ -69,7 +70,7 @@ Promise.all(promises).then(() => {
     const htmlFiles = names.map(name => `${__dirname}/output/${name}.html`);
     const capitalNames = names.map(capitalizeFirstLetter);
     const anchorEls = capitalNames.map(
-      capitalName => `: <a href="./${capitalName.toLowerCase()}.html">${capitalName}</a>`,
+      capitalName => `: <a href="../api_${capitalName.toLowerCase()}/${capitalName.toUpperCase()}.html">${capitalName}</a>`,
     );
     const regExps = capitalNames.map(name => new RegExp(`: ${name}`, 'g'));
 
@@ -85,6 +86,26 @@ Promise.all(promises).then(() => {
       }
     });
 
-    Promise.all(replacePromises).then(() => console.log('Created documentation.'));
+    Promise.all(replacePromises).then(async () => {
+      console.log('Created documentation.');
+      const mdPromises = htmlFiles.map(async (htmlFile) => {
+        try {
+          const htmlName = htmlFile.split('/').pop();
+          const folderName = htmlName.split('.').shift();
+
+          await fs_org.mkdir(`../doc/api_${folderName}/`, () => {});
+          await fs.copyFile(htmlFile, `../doc/api_${folderName}/${htmlName}`);
+          await fs_org.writeFile(
+            `../doc/api_${folderName}/${folderName.toUpperCase()}.md`,
+            `!INCLUDE "${htmlName}"\n`,
+            () => {},
+          );
+        } catch (err) {
+          console.error('ERR MD GEN', err);
+        }
+      });
+      await Promise.all(mdPromises);
+      console.log('Writing .md done.');
+    });
   });
 });
