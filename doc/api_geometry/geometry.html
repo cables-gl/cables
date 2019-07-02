@@ -1,0 +1,1143 @@
+
+    <div class='flex'>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;external&quot;,
+        &quot;description&quot;: &quot;CGL&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;namespace&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3,
+        &quot;type&quot;: null,
+        &quot;name&quot;: &quot;Geometry&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;class&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: null,
+        &quot;name&quot;: null
+    },
+    {
+        &quot;title&quot;: &quot;example&quot;,
+        &quot;description&quot;: &quot;// create a triangle with all attributes\nconst geom=new CGL.Geometry(\&quot;triangle\&quot;),\n\ngeom.vertices = [\n     0.0,           sizeH.get(),  0.0,\n    -sizeW.get(),  -sizeH.get(),  0.0,\n     sizeW.get(),  -sizeH.get(),  0.0 ];\n\ngeom.vertexNormals = [\n     0.0,  0.0,  1.0,\n     0.0,  0.0,  1.0,\n     0.0,  0.0,  1.0 ];\n\ngeom.tangents = [\n    1,0,0,\n    1,0,0,\n    1,0,0 ];\n\ngeom.biTangents = [\n    0,1,0,\n    0,1,0,\n    0,1,0 ];\n\ngeom.texCoords = [\n     0.5,  0.0,\n     1.0,  1.0,\n     0.0,  1.0, ];\n\ngeom.verticesIndices = [\n    0, 1, 2 ];&quot;,
+        &quot;lineNumber&quot;: 6
+    }
+]
+</pre>
+-->
+
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='geometry'>
+      
+      CGL.Geometry
+    </h3>
+    
+    
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  new Geometry(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+      <br/><div class='indent'>Example:</div>
+      
+        
+        <div class="indent">
+          <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// create a triangle with all attributes</span>
+<span class="hljs-keyword">const</span> geom=<span class="hljs-keyword">new</span> CGL.Geometry(<span class="hljs-string">"triangle"</span>),
+
+geom.vertices = [
+     <span class="hljs-number">0.0</span>,           sizeH.get(),  <span class="hljs-number">0.0</span>,
+    -sizeW.get(),  -sizeH.get(),  <span class="hljs-number">0.0</span>,
+     sizeW.get(),  -sizeH.get(),  <span class="hljs-number">0.0</span> ];
+
+geom.vertexNormals = [
+     <span class="hljs-number">0.0</span>,  <span class="hljs-number">0.0</span>,  <span class="hljs-number">1.0</span>,
+     <span class="hljs-number">0.0</span>,  <span class="hljs-number">0.0</span>,  <span class="hljs-number">1.0</span>,
+     <span class="hljs-number">0.0</span>,  <span class="hljs-number">0.0</span>,  <span class="hljs-number">1.0</span> ];
+
+geom.tangents = [
+    <span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,
+    <span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,
+    <span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span> ];
+
+geom.biTangents = [
+    <span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,
+    <span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,
+    <span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span> ];
+
+geom.texCoords = [
+     <span class="hljs-number">0.5</span>,  <span class="hljs-number">0.0</span>,
+     <span class="hljs-number">1.0</span>,  <span class="hljs-number">1.0</span>,
+     <span class="hljs-number">0.0</span>,  <span class="hljs-number">1.0</span>, ];
+
+geom.verticesIndices = [
+    <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span> ];</pre>
+        </div>
+      
+    
+
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+      <div class="clearfix">
+  
+    <div class='' id='geometryclear'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:clear()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;clear&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;clear all buffers/set them to length 0&quot;,
+        &quot;lineNumber&quot;: 4
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .clear()</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>clear all buffers/set them to length 0</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometrygetattributes'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getAttributes()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;getAttributes&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: &quot;returns array of attribute objects&quot;,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;TypeApplication&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Array&quot;
+            },
+            &quot;applications&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Object&quot;
+                }
+            ]
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getAttributes(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>></code>:
+          returns array of attribute objects
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometrygetattribute'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getAttribute(name)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;getAttribute&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getAttribute(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></code>:
+          
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometrysetattribute'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setAttribute(name, data, itemsize)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;setAttribute&quot;
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;create an attribute&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Array&quot;
+        },
+        &quot;name&quot;: &quot;data&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 7,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Number&quot;
+        },
+        &quot;name&quot;: &quot;itemsize&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setAttribute(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, data: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>, itemsize: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>create an attribute</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>data</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>itemsize</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometrysetvertices'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setVertices(data)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;setVertices&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;set vertices&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;[x,y,z,x,y,z,...]&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Array&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Float32Array&quot;
+                }
+            ]
+        },
+        &quot;name&quot;: &quot;data&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setVertices(data: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float32Array">Float32Array</a>))</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>set vertices</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>data</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float32Array">Float32Array</a>))</code>
+  	    [x,y,z,x,y,z,...]
+
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometrysettexcoords'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setTexCoords(data)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;setTexCoords&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;set texcoords&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;[u,v,u,v,...]&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Array&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Float32Array&quot;
+                }
+            ]
+        },
+        &quot;name&quot;: &quot;data&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setTexCoords(data: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float32Array">Float32Array</a>))</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>set texcoords</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>data</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Float32Array">Float32Array</a>))</code>
+  	    [u,v,u,v,...]
+
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='geometryunindex'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:unIndex(Boolean)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;unIndex&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Geometry&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: null,
+        &quot;name&quot;: &quot;Boolean&quot;
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;remove all vertex indizes, vertices array will contain 3*XYZ for every triangle&quot;,
+        &quot;lineNumber&quot;: 5
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .unIndex(Boolean: any)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>remove all vertex indizes, vertices array will contain 3*XYZ for every triangle</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>Boolean</span> <code class='quiet'>(any)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+
+    
+
+    
+  </section>
+
+
+
+          
+        
+      </div>
+    </div>
+

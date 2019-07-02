@@ -1,0 +1,3660 @@
+
+    <div class='flex'>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;external&quot;,
+        &quot;description&quot;: &quot;CABLES&quot;,
+        &quot;lineNumber&quot;: 5
+    },
+    {
+        &quot;title&quot;: &quot;namespace&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: null,
+        &quot;name&quot;: &quot;Patch&quot;
+    },
+    {
+        &quot;title&quot;: &quot;hideconstructor&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 7
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;The configuration object.&quot;,
+        &quot;lineNumber&quot;: 8,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;PatchConfig&quot;
+        },
+        &quot;name&quot;: &quot;config&quot;
+    },
+    {
+        &quot;title&quot;: &quot;class&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 9,
+        &quot;type&quot;: null,
+        &quot;name&quot;: null
+    },
+    {
+        &quot;title&quot;: &quot;example&quot;,
+        &quot;description&quot;: &quot;CABLES.patch=new CABLES.Patch(\n{\n    patch:pStr,\n    glCanvasId:&#39;glcanvas&#39;,\n    glCanvasResizeToWindow:true,\n    canvas:{powerPreference:\&quot;high-performance\&quot;},\n    prefixAssetPath:&#39;/assets/&#39;,\n    onError:function(e){console.log(e);}\n});&quot;,
+        &quot;lineNumber&quot;: 10
+    }
+]
+</pre>
+-->
+
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='patch'>
+      
+      CABLES.Patch
+    </h3>
+    
+    
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 hide' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  new Patch(config: <a href="./patchconfig.html">PatchConfig</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>Patch class, contains all operators,values,links etc. manages loading and running of the whole patch </p>
+<p>see <a href="./patchconfig.html">PatchConfig</a></p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>config</span> <code class='quiet'>(<a href="./patchconfig.html">PatchConfig</a>)</code>
+  	    The configuration object.
+
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+      <br/><div class='indent'>Example:</div>
+      
+        
+        <div class="indent">
+          <pre class='p1 overflow-auto round fill-light'>CABLES.patch=<span class="hljs-keyword">new</span> CABLES.Patch(
+{
+    <span class="hljs-attr">patch</span>:pStr,
+    <span class="hljs-attr">glCanvasId</span>:<span class="hljs-string">'glcanvas'</span>,
+    <span class="hljs-attr">glCanvasResizeToWindow</span>:<span class="hljs-literal">true</span>,
+    <span class="hljs-attr">canvas</span>:{<span class="hljs-attr">powerPreference</span>:<span class="hljs-string">"high-performance"</span>},
+    <span class="hljs-attr">prefixAssetPath</span>:<span class="hljs-string">'/assets/'</span>,
+    <span class="hljs-attr">onError</span>:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>)</span>{<span class="hljs-built_in">console</span>.log(e);}
+});</pre>
+        </div>
+      
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Static Members</div>
+      <div class="clearfix">
+  
+    <div class='' id='patchvariable'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:new Variable(name, value)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    },
+    {
+        &quot;title&quot;: &quot;name&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;Variable&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;String&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Number&quot;
+                }
+            ]
+        },
+        &quot;name&quot;: &quot;value&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 5
+    },
+    {
+        &quot;title&quot;: &quot;constructor&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;name&quot;: null
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  new Variable(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, value: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>value</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>))</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Static Members</div>
+      <div class="clearfix">
+  
+    <div class='' id='patchvariablevariablegetvalue'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:Variable.getValue()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;Variable.getValue&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch.Variable&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;returns&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;String&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Number&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Boolean&quot;
+                }
+            ]
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .Variable.getValue(): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>:
+          
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+      <div class="clearfix">
+  
+    <div class='' id='patchvariablegetname'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getName()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;getName&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch.Variable&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;returns&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;String&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Number&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Boolean&quot;
+                }
+            ]
+        }
+    },
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;name&quot;: null
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getName(): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>:
+          
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchvariablesetvalue'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setValue()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;setValue&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch.Variable&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;returns&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;String&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Number&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Boolean&quot;
+                }
+            ]
+        }
+    },
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;name&quot;: null
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setValue(): (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>)</code>:
+          
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchvariableaddlistener'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:addListener(callback)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;addListener&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch.Variable&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Function&quot;
+        },
+        &quot;name&quot;: &quot;callback&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .addListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>function will be called when value of variable is changed</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchvariableremovelistener'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:removeListener(callback)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;removeListener&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch.Variable&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Function&quot;
+        },
+        &quot;name&quot;: &quot;callback&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .removeListener(callback: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>remove listener</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>callback</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Instance Members</div>
+      <div class="clearfix">
+  
+    <div class='' id='patchgetfps'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getFPS()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;getFPS&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: &quot;fps&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Number&quot;
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getFPS(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>current number of frames per second</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></code>:
+          fps
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchpause'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:pause()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;pause&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .pause()</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>pauses patch execution</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchresume'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:resume()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;resume&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .resume()</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>resumes patch execution</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchsetvolume'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setVolume(volume)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;setVolume&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Number&quot;
+        },
+        &quot;name&quot;: &quot;volume&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setVolume(volume: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>set volume [0-1]</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>volume</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchgetfilepath'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getFilePath(filename)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3,
+        &quot;name&quot;: &quot;getFilePath&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;filename&quot;
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: &quot;url&quot;,
+        &quot;lineNumber&quot;: 7,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getFilePath(filename: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>get url/filepath for a filename
+this uses prefixAssetpath in exported patches</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>filename</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+          url
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchaddop'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:addOp(objName, UI)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;addOp&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;, e.g. Ops.Math.Sum&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;objName&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;Attributes&quot;,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        },
+        &quot;name&quot;: &quot;UI&quot;
+    },
+    {
+        &quot;title&quot;: &quot;example&quot;,
+        &quot;description&quot;: &quot;// add invisible op\npatch.addOp(&#39;Ops.Math.Sum&#39;, { showUiAttribs: false });&quot;,
+        &quot;lineNumber&quot;: 7
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .addOp(objName: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, UI: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>create a new op in patch</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>objName</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    , e.g. Ops.Math.Sum
+
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>UI</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code>
+  	    Attributes
+
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+      <br/><div class='indent'>Example:</div>
+      
+        
+        <div class="indent">
+          <pre class='p1 overflow-auto round fill-light'><span class="hljs-comment">// add invisible op</span>
+patch.addOp(<span class="hljs-string">'Ops.Math.Sum'</span>, { <span class="hljs-attr">showUiAttribs</span>: <span class="hljs-literal">false</span> });</pre>
+        </div>
+      
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchlink'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:link(op1, op1, op2, op2)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;link&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Op&quot;
+        },
+        &quot;name&quot;: &quot;op1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;portName&quot;,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;op1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 7,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Op&quot;
+        },
+        &quot;name&quot;: &quot;op2&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;portName&quot;,
+        &quot;lineNumber&quot;: 8,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;op2&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .link(op1: <a href="../api_op/OP.html">Op</a>, op1: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, op2: <a href="../api_op/OP.html">Op</a>, op2: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>link two ops/ports</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>op1</span> <code class='quiet'>(Op)</code>
+  	    
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>op1</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    portName
+
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>op2</span> <code class='quiet'>(Op)</code>
+  	    
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>op2</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    portName
+
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchsetvariable'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:setVariable(name, value)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;name&quot;: &quot;setVariable&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: &quot;of variable&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;UnionType&quot;,
+            &quot;elements&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Number&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;String&quot;
+                },
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Boolean&quot;
+                }
+            ]
+        },
+        &quot;name&quot;: &quot;value&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .setVariable(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, value: (<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>))</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>set variable value</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    of variable
+
+            </div>
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>value</span> <code class='quiet'>((<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a> | <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>))</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchgetvar'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getVar(name)</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;getVar&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;param&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;String&quot;
+        },
+        &quot;name&quot;: &quot;name&quot;
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: &quot;variable&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Variable&quot;
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getVar(name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>): Variable</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+    
+      <div class='indent py1 quiet mt1 prose-big'>Parameters</div>
+      <div class='indent prose'>
+        
+          <div class='space-bottom0'>
+            <div>
+              <span class='code bold'>name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code>
+  	    
+            </div>
+            
+          </div>
+        
+      </div>
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code>Variable</code>:
+          variable
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchgetvars'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:getVars()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;getVars&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;return&quot;,
+        &quot;description&quot;: &quot;variables&quot;,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;TypeApplication&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Array&quot;
+            },
+            &quot;applications&quot;: [
+                {
+                    &quot;type&quot;: &quot;NameExpression&quot;,
+                    &quot;name&quot;: &quot;Variable&quot;
+                }
+            ]
+        }
+    },
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;name&quot;: null
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .getVars(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Variable></div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+    <div class="indent">
+      
+        <span class=''>Returns</span>
+        <code><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;Variable></code>:
+          variables
+
+        
+      
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchprerenderops'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:preRenderOps()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;preRenderOps&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;invoke pre rendering of ops&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;name&quot;: null
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .preRenderOps()</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>invoke pre rendering of ops</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patchdispose'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:dispose()</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;function&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 1,
+        &quot;name&quot;: &quot;dispose&quot;
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;instance&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;description&quot;,
+        &quot;description&quot;: &quot;stop, dispose and cleanup patch&quot;,
+        &quot;lineNumber&quot;: 4
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  .dispose()</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>stop, dispose and cleanup patch</p>
+
+</div>
+
+
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+
+    
+
+    
+      <div class='py1 quiet mt1 prose-big'>Events</div>
+      <div class="clearfix">
+  
+    <div class='' id='patcheventonopadd'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:onOpAdd</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;event&quot;,
+        &quot;description&quot;: &quot;onOpAdd&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 4
+    },
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;new op&quot;,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Op&quot;
+        },
+        &quot;name&quot;: &quot;op&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  onOpAdd</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>op added to patch event</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>op</span> <code class='quiet'>(Op)</code>
+            : new op
+
+            
+          </div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patcheventonopdelete'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:onOpDelete</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;event&quot;,
+        &quot;description&quot;: &quot;onOpDelete&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;that will be deleted&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Op&quot;
+        },
+        &quot;name&quot;: &quot;op&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  onOpDelete</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>op deleted from patch</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>op</span> <code class='quiet'>(Op)</code>
+            : that will be deleted
+
+            
+          </div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patcheventonlink'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:onLink</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;event&quot;,
+        &quot;description&quot;: &quot;onLink&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Port&quot;
+        },
+        &quot;name&quot;: &quot;port1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Port&quot;
+        },
+        &quot;name&quot;: &quot;port2&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  onLink</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>link event - two ports will be linked</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>port1</span> <code class='quiet'>(Port)</code>
+            
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>port2</span> <code class='quiet'>(Port)</code>
+            
+            
+          </div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patcheventonunlink'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:onUnLink</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;event&quot;,
+        &quot;description&quot;: &quot;onUnLink&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  onUnLink</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>unlink event - a link was deleted</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+    <div class='' id='patcheventvariableschanged'>
+      <div class="clearfix small pointer ">
+      <!--
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>SHORTSIG:variablesChanged</span>
+        </div>
+        -->
+      </div>
+      <div class="clearfix ">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;event&quot;,
+        &quot;description&quot;: &quot;variablesChanged&quot;,
+        &quot;lineNumber&quot;: 2
+    },
+    {
+        &quot;title&quot;: &quot;memberof&quot;,
+        &quot;description&quot;: &quot;Patch&quot;,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;type&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        }
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Port&quot;
+        },
+        &quot;name&quot;: &quot;port1&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Port&quot;
+        },
+        &quot;name&quot;: &quot;port2&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 ' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  variablesChanged</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>variables has been changed / a variable has been added to the patch</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>port1</span> <code class='quiet'>(Port)</code>
+            
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>port2</span> <code class='quiet'>(Port)</code>
+            
+            
+          </div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+      </div>
+    </div>
+  
+</div>
+
+    
+  </section>
+
+
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+<!--
+<pre>
+[
+    {
+        &quot;title&quot;: &quot;typedef&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 2,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;NameExpression&quot;,
+            &quot;name&quot;: &quot;Object&quot;
+        },
+        &quot;name&quot;: &quot;PatchConfig&quot;
+    },
+    {
+        &quot;title&quot;: &quot;hideconstructor&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 3
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;path to assets&quot;,
+        &quot;lineNumber&quot;: 4,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;String&quot;
+            }
+        },
+        &quot;name&quot;: &quot;prefixAssetPath&quot;,
+        &quot;default&quot;: &quot;&#39;&#39;&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;dom element id of canvas element&quot;,
+        &quot;lineNumber&quot;: 5,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;String&quot;
+            }
+        },
+        &quot;name&quot;: &quot;glCanvasId&quot;,
+        &quot;default&quot;: &quot;&#39;glcanvas&#39;&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;called when an error occurs&quot;,
+        &quot;lineNumber&quot;: 6,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Function&quot;
+            }
+        },
+        &quot;name&quot;: &quot;onError&quot;,
+        &quot;default&quot;: &quot;null&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;called when patch finished loading all assets&quot;,
+        &quot;lineNumber&quot;: 7,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Function&quot;
+            }
+        },
+        &quot;name&quot;: &quot;onFinishedLoading&quot;,
+        &quot;default&quot;: &quot;null&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;called when patch rendered it&#39;s first frame&quot;,
+        &quot;lineNumber&quot;: 8,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Function&quot;
+            }
+        },
+        &quot;name&quot;: &quot;onFirstFrameRendered&quot;,
+        &quot;default&quot;: &quot;null&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;resize canvas automatically to window size&quot;,
+        &quot;lineNumber&quot;: 9,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Boolean&quot;
+            }
+        },
+        &quot;name&quot;: &quot;glCanvasResizeToWindow&quot;,
+        &quot;default&quot;: &quot;false&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)&quot;,
+        &quot;lineNumber&quot;: 10,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Boolean&quot;
+            }
+        },
+        &quot;name&quot;: &quot;doRequestAnimation&quot;,
+        &quot;default&quot;: &quot;true&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;clear canvas in transparent color every frame&quot;,
+        &quot;lineNumber&quot;: 11,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Boolean&quot;
+            }
+        },
+        &quot;name&quot;: &quot;clearCanvasColor&quot;,
+        &quot;default&quot;: &quot;true&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;clear depth every frame&quot;,
+        &quot;lineNumber&quot;: 12,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Boolean&quot;
+            }
+        },
+        &quot;name&quot;: &quot;clearCanvasDepth&quot;,
+        &quot;default&quot;: &quot;true&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: null,
+        &quot;lineNumber&quot;: 13,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Boolean&quot;
+            }
+        },
+        &quot;name&quot;: &quot;silent&quot;,
+        &quot;default&quot;: &quot;false&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;0 for maximum possible frames per second&quot;,
+        &quot;lineNumber&quot;: 14,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;Number&quot;
+            }
+        },
+        &quot;name&quot;: &quot;fpsLimit&quot;,
+        &quot;default&quot;: &quot;0&quot;
+    },
+    {
+        &quot;title&quot;: &quot;property&quot;,
+        &quot;description&quot;: &quot;default precision for glsl shader&quot;,
+        &quot;lineNumber&quot;: 15,
+        &quot;type&quot;: {
+            &quot;type&quot;: &quot;OptionalType&quot;,
+            &quot;expression&quot;: {
+                &quot;type&quot;: &quot;NameExpression&quot;,
+                &quot;name&quot;: &quot;String&quot;
+            }
+        },
+        &quot;name&quot;: &quot;glslPrecision&quot;,
+        &quot;default&quot;: &quot;&#39;mediump&#39;&quot;
+    }
+]
+</pre>
+-->
+
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='patchconfig'>
+      
+      PatchConfig
+    </h3>
+    
+    
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class='pre p1 fill-light mt0 hide' style="color:black;font-size: 1.02em;border-left:2px solid #29bca8">
+  PatchConfig</div>
+    
+
+
+  
+
+  
+  
+  
+  
+  
+  
+
+
+<div class="indent">
+  <p>configuration object for loading a patch</p>
+
+</div>
+
+
+  
+    <div class="indent">
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>
+    </div>
+  
+
+
+
+  <!--
+     -->
+
+    
+      <div class='indent py1 quiet mt1 prose-big indent'>Properties</div>
+      <div class="indent">
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>prefixAssetPath</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+            : path to assets
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>glCanvasId</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+            : dom element id of canvas element
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>onError</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+            : called when an error occurs
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>onFinishedLoading</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+            : called when patch finished loading all assets
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>onFirstFrameRendered</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function">Function</a>?)</code>
+            : called when patch rendered it's first frame
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>glCanvasResizeToWindow</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?)</code>
+            : resize canvas automatically to window size
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>doRequestAnimation</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?)</code>
+            : do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>clearCanvasColor</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?)</code>
+            : clear canvas in transparent color every frame
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>clearCanvasDepth</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?)</code>
+            : clear depth every frame
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>silent</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a>?)</code>
+            
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>fpsLimit</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a>?)</code>
+            : 0 for maximum possible frames per second
+
+            
+          </div>
+        
+          <div class='space-bottom0'>
+            <span class='code bold'>glslPrecision</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>?)</code>
+            : default precision for glsl shader
+
+            
+          </div>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+
+
+
+          
+        
+      </div>
+    </div>
+

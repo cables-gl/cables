@@ -16,12 +16,13 @@
   padding-left: 9px;
 }
 
-.book .book-summary ul.summary li a{
+.book .book-summary ul.summary li a {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-.book .book-header h1 a, .book .book-header h1 a:hover {
+.book .book-header h1 a,
+.book .book-header h1 a:hover {
   transition: none;
 }
 
@@ -29,11 +30,34 @@
   opacity: 1;
 }
 
-.book.color-theme-2 .book-summary ul.summary li a, .book.color-theme-2 .book-summary ul.summary li span {
+.book.color-theme-2 .book-summary ul.summary li a,
+.book.color-theme-2 .book-summary ul.summary li span {
   font-weight: 400;
 }
 
-li.chapter > a[href*="chapter"], .book.color-theme-2 .book-summary ul.summary li a[href*="chapter"] {
+li.chapter > a[href*='chapter'],
+.book.color-theme-2 .book-summary ul.summary li a[href*='chapter'] {
   color: #f1f1f1;
   font-weight: 600;
+}
+
+.indent {
+  margin-left: 25px;
+}
+
+.fill-light {
+  border-left-color: rgb(41, 188, 168);
+  border-left-style: solid;
+  border-left-width: 2px;
+  color: rgb(0, 0, 0);
+  display: block;
+  font-family: 'Source Code Pro', Menlo, Consolas, 'Liberation Mono', monospace;
+  font-size: 16.32px;
+  height: 24px;
+  line-height: 24.48px;
+  margin-top: 0px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 8px;
 }
