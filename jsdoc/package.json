@@ -5,21 +5,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "gen-doc": "node generate-docs.js",
-    "serve-html": "serve output-test"
+    "gen-doc": "node generate-docs.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "braintree-jsdoc-template": "^3.3.0",
+    "documentation": "^11.0.1",
+    "fs-extra": "^8.1.0",
+    "replace-in-file": "^4.1.0",
     "stream-array": "^1.1.2",
     "vinyl-fs": "^3.0.3"
-  },
-  "devDependencies": {
-    "connect": "^3.7.0",
-    "documentation": "^11.0.1",
-    "minami": "^1.2.3",
-    "nodemon": "^1.19.1",
-    "serve": "^11.0.2"
   }
 }

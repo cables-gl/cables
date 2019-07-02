@@ -23,7 +23,7 @@ module.exports = function(comments, config) {
     comments,
     function(namespace) {
       var slugger = new GithubSlugger();
-      return '#' + slugger.slug(namespace);
+      return './' + slugger.slug(namespace) + ".html";
     }
   );
 

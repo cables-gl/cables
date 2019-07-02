@@ -1,10 +1,18 @@
-const fs = require('fs');
+const fs = require('fs-extra');
+const util = require('util');
+const stream = require('stream');
 const documentation = require('documentation');
+const replace = require('replace-in-file');
 
 const { html } = documentation.formats;
-
 const streamArray = require('stream-array');
 const vfs = require('vinyl-fs');
+
+const pipeline = util.promisify(stream.pipeline);
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const fileNames = [
   '../src/core/core_op.js',
@@ -22,13 +30,61 @@ const fileNames = [
   '../src/core/cgl_framebuffer.js',
   '../src/core/0_utils.js',
 ];
-// fs.readdirSync('../src/core').map(fileName => `../src/core/${fileName}`);
 
-console.log(fileNames);
+console.log('Creating documentation for ', fileNames);
 
-documentation
-  .build(fileNames, { shallow: false })
-  .then(comments => html(comments, { theme: 'theme' }))
-  .then((output) => {
-    streamArray(output).pipe(vfs.dest('./output'));
+const names = [];
+
+const promises = fileNames.map(async (fileName, index) => {
+  try {
+    const comments = await documentation.build([fileName], { shallow: false });
+    const name = comments[0].namespace.toLowerCase();
+    names.push(name);
+    const htmlOutput = await html(comments, { theme: 'theme' });
+    await pipeline(streamArray(htmlOutput), vfs.dest(`./temp/${name}`));
+    if (index === 0) {
+      await pipeline(streamArray(htmlOutput), vfs.dest('./output'));
+      await fs.remove('./output/index.html');
+    }
+  } catch (err) {
+    throw err;
+  }
+});
+
+Promise.all(promises).then(() => {
+  Promise.all(
+    names.map(async (name) => {
+      try {
+        await fs.copyFile(
+          `${__dirname}/temp/${name}/index.html`,
+          `${__dirname}/output/${name}.html`,
+        );
+        await fs.remove(`${__dirname}/temp/${name}`);
+      } catch (err) {
+        console.error('ERROR:', err);
+      }
+    }),
+  ).then((res) => {
+    fs.removeSync(`${__dirname}/temp/`);
+    const htmlFiles = names.map(name => `${__dirname}/output/${name}.html`);
+    const capitalNames = names.map(capitalizeFirstLetter);
+    const anchorEls = capitalNames.map(
+      capitalName => `: <a href="./${capitalName.toLowerCase()}.html">${capitalName}</a>`,
+    );
+    const regExps = capitalNames.map(name => new RegExp(`: ${name}`, 'g'));
+
+    const replacePromises = capitalNames.map(async () => {
+      try {
+        await replace({
+          files: htmlFiles,
+          from: regExps,
+          to: anchorEls,
+        });
+      } catch (err) {
+        console.error('ERR IN REPLACE', err);
+      }
+    });
+
+    Promise.all(replacePromises).then(() => console.log('Created documentation.'));
   });
+});
