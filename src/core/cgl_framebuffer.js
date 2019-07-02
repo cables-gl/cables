@@ -128,7 +128,7 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         {
             // if(this._cgl.gl.getExtension('OES_texture_half_float'))
             // {
-            //     console.log("halt float");HALF_FLOAT_OES
+            //     console.log("half float");HALF_FLOAT_OES
             // }
             cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
             cgl.gl.framebufferTexture2D(

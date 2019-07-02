@@ -750,17 +750,6 @@ CGL.Context.prototype.pushBlend=function(b)
         else this.gl.enable(this.gl.BLEND);
 };
 
-/**
- * current state of blend 
- * @function stateBlend
- * @returns {boolean} blending enabled/disabled
- * @memberof Context
- * @instance
- */
-CGL.Context.prototype.stateBlend=function()
-{
-    return this._stackBlend[this._stackBlend.length-1];
-}
 
 /**
  * pop blend state and set the previous state
@@ -776,6 +765,18 @@ CGL.Context.prototype.popBlend=function()
         else this.gl.enable(this.gl.BLEND);
 };
 
+
+/**
+ * current state of blend 
+ * @function stateBlend
+ * @returns {boolean} blending enabled/disabled
+ * @memberof Context
+ * @instance
+ */
+CGL.Context.prototype.stateBlend=function()
+{
+    return this._stackBlend[this._stackBlend.length-1];
+}
 
 CGL.BLEND_NONE=0;
 CGL.BLEND_NORMAL=1;
