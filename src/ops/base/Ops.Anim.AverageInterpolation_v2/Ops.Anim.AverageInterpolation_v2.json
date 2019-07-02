@@ -1,0 +1,51 @@
+{
+    "id": "8def22f1-c618-485d-b36b-4b7579cb079f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1562074994331
+        }
+    ],
+    "authorName": "cables",
+    "created": 1562075018989,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Divisor down",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.AverageInterpolation_v2"
+    }
+}
