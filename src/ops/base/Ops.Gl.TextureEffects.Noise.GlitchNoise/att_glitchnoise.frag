@@ -13,9 +13,10 @@ UNI float blockSizeC;
 UNI float blockSizeD;
 UNI float scrollX;
 UNI float scrollY;
+
 float rng2(vec2 seed)
 {
-    return fract(sin(dot(seed * floor(time * (frequency * 10.0)), vec2(127.1,311.7))) * 43758.5453123);
+    return fract(sin(dot(seed * floor(time * (frequency * 10.0)), vec2(127.1,311.7))) * 43758.5453123);//43758.5453123
 }
 
 float rng(float seed)

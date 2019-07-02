@@ -1,5 +1,5 @@
 const render=op.inTrigger('render'),
-    multiplierTex = op.inTexture("Mask"),
+    multiplierTex = op.inTexture("Multiplier"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     inRotate=op.inValueSlider("Rotate",0.125),

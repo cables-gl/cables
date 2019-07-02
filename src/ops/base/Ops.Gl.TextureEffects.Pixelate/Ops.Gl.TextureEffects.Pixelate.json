@@ -6,6 +6,10 @@
                 "name": "render"
             },
             {
+                "type": "2",
+                "name": "Multiplier"
+            },
+            {
                 "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
