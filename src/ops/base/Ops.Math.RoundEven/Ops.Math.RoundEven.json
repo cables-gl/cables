@@ -1,0 +1,29 @@
+{
+    "id": "b4c116ba-ab64-4903-80bb-35c8d65819a1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1560245717548
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1560245783276,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.RoundEven"
+    }
+}

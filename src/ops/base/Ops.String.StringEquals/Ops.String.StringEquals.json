@@ -1,0 +1,32 @@
+{
+    "id": "ef15195a-760b-4ac5-9630-322b0ba7b722",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1559919671089
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1559919723187,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String 1"
+            },
+            {
+                "type": "5",
+                "name": "String 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.String.StringEquals"
+    }
+}
