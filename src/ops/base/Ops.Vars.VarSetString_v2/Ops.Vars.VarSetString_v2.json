@@ -31,7 +31,7 @@
                 "name": "Value"
             }
         ],
-        "name": "Ops.Vars.SetVariableString2"
+        "name": "Ops.Vars.VarSetString_v2"
     },
     "summary": "Set string variable",
     "issues": "",
