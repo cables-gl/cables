@@ -3,7 +3,7 @@
     <div class='' id='<%- slug(member.namespace) %>'>
       <div class="clearfix small pointer ">
       <!--
-        <div class="py1 contain">
+        <div class="">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
             <span class='code strong strong truncate'>SHORTSIG:<%= shortSignature(member) %></span>
         </div>

@@ -308,7 +308,7 @@ CGL.Context = function(_patch) {
      * @function pushGlFrameBuffer
      * @memberof Context
      * @instance
-     * @param {CGL.FrameBuffer} framebuffer
+     * @param {Framebuffer} framebuffer
      */
     this.pushFrameBuffer = function(fb) {
         this._frameBufferStack.push(fb);
@@ -319,7 +319,7 @@ CGL.Context = function(_patch) {
      * @function popFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @returns {Framebuffer} current framebuffer or null
      */
     this.popFrameBuffer = function() {
         if (this._frameBufferStack.length == 0) return null;
@@ -332,7 +332,7 @@ CGL.Context = function(_patch) {
      * @function getCurrentFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @returns {Framebuffer} current framebuffer or null
      */
     this.getCurrentFrameBuffer=function()
     {

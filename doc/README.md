@@ -81,3 +81,8 @@ Make sure to have a newline on the end!
 - Check with `blc https://docs.cables.gl -ro`
   - Error 401: Not logged in
   - Mozilla Web Audio Error: Can be ignored
+
+### Generating JSDoc documentation
+
+- JSDoc documentation gets generated when building the gitbook.
+- If you want to generate JSDoc documentation seperately, `npm run gen-doc`

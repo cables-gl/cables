@@ -1,15 +1,22 @@
 // "use strict";
 
+/**
+ * @external CABLES
+ * @namespace Utils
+ */
+
 var CABLES=CABLES || {};
 CABLES.UTILS={};
 CGL=CGL || {};
 
 /**
- * merge two float32Arrays
- * @name float32Concat
- * @memberof CABLES.UTILS
- * @function
- * @return {Float32Array} 
+ * Merge two Float32Arrays.
+
+ * @function float32Concat
+ * @memberof Utils
+ * @param {Float32Array} first Left-hand side array
+ * @param {Float32Array} second Right-hand side array
+ * @return {Float32Array}
  * @static
  */
 CABLES.UTILS.float32Concat=function(first, second)
@@ -28,11 +35,10 @@ CABLES.UTILS.float32Concat=function(first, second)
 
 /**
  * randomize order of an array
- * @name shuffleArray
- * @memberof CABLES
- * @function
- * @param array {Array} original
- * @return {Array} shuffled array
+ * @function shuffleArray
+ * @memberof Utils
+ * @param {Array|Float32Array} array {Array} original
+ * @return {Array|Float32Array} shuffled array
  * @static
  */
 CABLES.shuffleArray=function(array) {
@@ -48,9 +54,8 @@ CABLES.shuffleArray=function(array) {
 
 /**
  * generate a UUID
- * @name uuid
- * @memberof CABLES
- * @function
+ * @function uuid
+ * @memberof Utils
  * @return {String} generated UUID
  * @static
  */
@@ -68,9 +73,8 @@ CABLES.generateUUID=CABLES.uuid=function()
 
 /**
  * generate a simple ID 
- * @name simpleId
- * @memberof CABLES
- * @function
+ * @function simpleId
+ * @memberof Utils
  * @return {Number} new id
  * @static
  */
@@ -83,10 +87,10 @@ CABLES.simpleId=function()
 
 /**
  * smoothStep a value
- * @name smoothStep
- * @memberof CABLES
+ * @function smoothStep
+ * @memberof Utils
  * @function
- * @param value {Number} value to be smoothed [0-1]
+ * @param {Number} value value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
  */
@@ -99,9 +103,8 @@ CABLES.smoothStep=function(perc)
 
 /**
  * smootherstep a value
- * @name smootherStep
- * @memberof CABLES
- * @function
+ * @function smootherStep
+ * @memberof Utils
  * @param value {Number} value to be smoothed [0-1]
  * @return {Number} smoothed value
  * @static
@@ -115,14 +118,13 @@ CABLES.smootherStep=function(perc)
 
 /**
  * map a value in a range to a value in another range
- * @name map
- * @memberof CABLES
- * @function
- * @param value {Number} value to be mapped
- * @param oldMin {Number} old range minimum value
- * @param oldMax {Number} old range maximum value
- * @param newMin {Number} new range minimum value
- * @param newMax {Number} new range maximum value
+ * @function map
+ * @memberof Utils
+ * @param {Number} value value to be mapped
+ * @param {Number} oldMin old range minimum value
+ * @param {Number} oldMax old range maximum value
+ * @param {Number} newMin new range minimum value
+ * @param {Number} newMax new range maximum value
  * @return {Number} mapped value
  * @static
  */
@@ -168,8 +170,11 @@ CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 };
 
 /**
+ * @namespace Math
+  */
+/**
  * set random seed for seededRandom()
- * @name Math#randomSeed
+ * @memberof Math
  * @type Number
  * @static
  */
@@ -177,11 +182,10 @@ Math.randomSeed=1;
 
 /**
  * generate a seeded random number
- * @name seededRandom
+ * @function seededRandom
  * @memberof Math
- * @function
- * @param max {Number} minimum possible random number
- * @param min {Number} maximum possible random number
+ * @param {Number} max minimum possible random number
+ * @param {Number} min maximum possible random number
  * @return {Number} random value
  * @static
  */
@@ -209,10 +213,10 @@ CABLES.UTILS.arrayWriteToEnd=function(arr,v)
 
 /**
  * returns true if parameter is a number
- * @name isNumeric
- * @memberof CABLES.UTILS
- * @function
- * @return {Boolean} 
+ * @function isNumeric
+ * @memberof Utils
+ * @param {Any} value The value to check.
+ * @return {Boolean}
  * @static
  */
 CABLES.UTILS.isNumeric=function(n)
@@ -222,10 +226,10 @@ CABLES.UTILS.isNumeric=function(n)
 
 /**
  * returns true if parameter is array
- * @name isArray
- * @memberof CABLES.UTILS
- * @function
- * @return {Boolean} 
+ * @function isArray
+ * @param {Any} value Value to check
+ * @memberof Utils
+ * @return {Boolean}
  * @static
  */
 CABLES.UTILS.isArray = function(v)
@@ -233,22 +237,23 @@ CABLES.UTILS.isArray = function(v)
     return Object.prototype.toString.call(v) === '[object Array]';
 };
 
+/** 
+ * @namespace String
+ */
 
 /**
  * append a linebreak to a string
- * @name endl
+ * @function endl
  * @memberof String
- * @function
- * @return {Number} string with newline break appended ('\n')
+ * @return {String} string with newline break appended ('\n')
  */
 String.prototype.endl = function(){return this+'\n';};
 
 /**
  * return true if string starts with prefix
- * @name startsWith
+ * @function startsWith
  * @memberof String
- * @function
- * @param {String} prefix
+ * @param {String} prefix The prefix to check.
  * @return {Boolean}
  */
 String.prototype.startsWith = function(prefix) {
@@ -257,9 +262,8 @@ String.prototype.startsWith = function(prefix) {
 
 /**
  * return true if string ends with suffix
- * @name endsWith
+ * @function endsWith
  * @memberof String
- * @function
  * @param {String} suffix
  * @return {Boolean}
  */
@@ -271,11 +275,10 @@ String.prototype.endsWith = function(suffix) {
 
 /**
  * append a unique/random parameter to a url, so the browser is forced to reload the file, even if its cached
- * @name cacheBust
+ * @function cacheBust
  * @static
- * @memberof CABLES
- * @function
- * @param {String} url
+ * @memberof Utils
+ * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
 CABLES.cacheBust=function(url)
@@ -380,8 +383,9 @@ CABLES.request=function(options)
 };
 
 /** 
- * @constant {number} 
- * @description multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
+ * multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
+ * @constant {Number}
+ * @description 
  */
 CGL.DEG2RAD=Math.PI/180.0;
 
@@ -395,10 +399,9 @@ CGL.onLoadingAssetsFinished=null; // deprecated / remove later
 
 /**
  * get normalized mouse wheel delta (including browser specific adjustment)
- * @name getWheelDelta
+ * @function getWheelDelta
  * @static
- * @memberof CGL
- * @function
+ * @external CGL
  * @param {MouseEvent} event
  * @return {Number} normalized delta
  */

@@ -3,5 +3,4 @@ doc/ops_base
 src/ops/users
 /doc/SUMMARY.md
 .idea/
-jsdoc/node_modules
-jsdoc/output-test
+/doc/api_*

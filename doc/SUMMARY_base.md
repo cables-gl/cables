@@ -37,11 +37,27 @@
     * [Writing Web Audio / tone.js Ops](webaudio/webaudio.md)
     * [Writing Shaders](shader/shader.md)
     * [Creating Attachments](dev_attachments/dev_attachments.md)
+* API
+  * CGL
+    * [Context](api_context/CONTEXT.md)
+    * [Framebuffer](api_framebuffer/FRAMEBUFFER.md)
+    * [Shader](api_shader/SHADER.md)
+    * [Uniform](api_uniform/UNIFORM.md)
+    * [Mesh](api_mesh/MESH.md)
+    * [Geometry](api_geometry/GEOMETRY.md)
+    * [Texture](api_texture/TEXTURE.md)
+  * Patch
+    * [Patch](api_patch/PATCH.md)
+    * [Op](api_op/OP.md)
+    * [Port](api_port/PORT.md)
+    * [Link](api_link/LINK.md)
+  * Util
+    * [Anim](api_anim/ANIM.md)
+    * [Utils](api_utils/UTILS.md)
+
 * [FAQ](chapter_readmes/faq/readme.md)
   * [Exported patch is black](faq/open_exported_patch_locally.md)
   - [Disable page scrolling on mobile](faq/page_scrolling_on_mobile.md)
   - [Remove grey rectangles on touch (iOS)](faq/grey_rectangles_on_ios.md)
   - [Video on Mobile](faq/video_on_mobile.md)
-* [API](api/api.md)
-
-
+* [REST-API](api/api.md)

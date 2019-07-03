@@ -10,7 +10,7 @@
   <% if (typeof nested === 'undefined' || (section.context && section.context.github)) { %>
   <div class='clearfix'>
     <% if (typeof nested === 'undefined') { %>
-    <h3 class='fl m0' id='<%- slug(section.namespace) %>'>
+    <h3 class='' id='<%- slug(section.namespace) %>'>
       
       <%= section.tags.map(function(tag) {
 	      if(tag.title=='external')return tag.description+'.';
@@ -19,7 +19,7 @@
     </h3>
     <% } %>
     <% if (section.context && section.context.github) { %>
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='<%= section.context.github.url %>'>
+      <a class='' href='<%= section.context.github.url %>'>
       <span><%= section.context.github.path %></span>
       </a>
     <% } %>
