@@ -3,3 +3,4 @@ doc/ops_base
 src/ops/users
 /doc/SUMMARY.md
 .idea/
+/doc/api_*
