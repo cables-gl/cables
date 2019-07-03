@@ -1,15 +1,11 @@
 const fs = require('fs-extra');
 const fsOrg = require('fs');
-const util = require('util');
-const stream = require('stream');
 const documentation = require('documentation');
 const replace = require('replace-in-file');
 
 const { html } = documentation.formats;
 const streamArray = require('stream-array');
 const vfs = require('vinyl-fs');
-
-const pipeline = util.promisify(stream.pipeline);
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -35,18 +31,20 @@ const fileNames = [
 console.log('Creating documentation for ', fileNames);
 
 const names = [];
-
 const promises = fileNames.map(async (fileName, index) => {
   try {
     const comments = await documentation.build([fileName], { shallow: false });
     const name = comments[0].namespace.toLowerCase();
     names.push(name);
     const htmlOutput = await html(comments, { theme: 'theme' });
-    await pipeline(streamArray(htmlOutput), vfs.dest(`./temp/${name}`));
-    // if (index === 0) {
-    //   await pipeline(streamArray(htmlOutput), vfs.dest('./output'));
-    //   await fs.remove('./output/index.html');
-    // }
+    return new Promise((resolve, reject) => {
+      streamArray(htmlOutput)
+        .pipe(vfs.dest(`./temp/${name}`))
+        .on('finish', () => {
+          resolve();
+        })
+        .on('error', err => reject(err));
+    });
   } catch (err) {
     throw err;
   }
@@ -60,7 +58,10 @@ Promise.all(promises).then(() => {
         //   `${__dirname}/temp/${name}/index.html`,
         //   `${__dirname}/output/${name}.html`,
         // );
-        await fs.rename(`${__dirname}/temp/${name}/index.html`, `${__dirname}/temp/${name}/${name}.html`);
+        await fs.rename(
+          `${__dirname}/temp/${name}/index.html`,
+          `${__dirname}/temp/${name}/${name}.html`,
+        );
       } catch (err) {
         console.error('ERROR:', err);
       }
@@ -94,7 +95,7 @@ Promise.all(promises).then(() => {
 
           await fsOrg.mkdir(`${__dirname}/api_${folderName}/`, () => {});
           await fs.copyFile(htmlFile, `${__dirname}/api_${folderName}/${htmlName}`);
-          
+
           await fsOrg.writeFile(
             `${__dirname}/api_${folderName}/${folderName.toUpperCase()}.md`,
             `!INCLUDE "${htmlName}"\n`,
