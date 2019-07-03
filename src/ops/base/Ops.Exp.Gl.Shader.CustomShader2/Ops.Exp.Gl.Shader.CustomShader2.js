@@ -103,49 +103,50 @@ var foundNames=[];
 
 function parseUniforms(src)
 {
-    const lines=src.split(";");
+    const lblines=src.split("\n");
 
-
-    for(var i=0;i<lines.length;i++)
+    for(var k=0;k<lblines.length;k++)
     {
-        var words=lines[i].split(" ");
+        const lines=lblines[k].split(";");
 
-        for(var j=0;j<words.length;j++) words[j]=(words[j]+'').trim();
-
-        if(words[0]==="UNI" || words[0]==="uniform")
+        for(var i=0;i<lines.length;i++)
         {
-            words = words.filter(function(el) { return el!=""; });
+            // console.log("---",lines[i]);
+            var words=lines[i].split(" ");
 
-            const uniName=words[2];
+            for(var j=0;j<words.length;j++) words[j]=(words[j]+'').trim();
 
-            if(words[1]==="float")
+            if(words[0]==="UNI" || words[0]==="uniform")
             {
-                foundNames.push(uniName);
-                if(!hasUniformInput(uniName))
+                words = words.filter(function(el) { return el!=""; });
+
+                const uniName=words[2];
+
+                console.log('found uniform',uniName);
+
+                if(words[1]==="float")
                 {
-                    const newInput=op.inValueFloat(uniName,0);
-                    newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
-                    // newInput.onChange=function(p)
-                    // {
-                    //     p.uniform.needsUpdate=true;
-                    //     p.uniform.setValue(p.get());
-                    // };
-                    uniformInputs.push(newInput);
+                    foundNames.push(uniName);
+                    if(!hasUniformInput(uniName))
+                    {
+                        const newInput=op.inValueFloat(uniName,0);
+                        newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
+                        uniformInputs.push(newInput);
+                    }
+                }
+
+                if(words[1]==="sampler2D")
+                {
+                    foundNames.push(uniName);
+                    if(!hasUniformInput(uniName))
+                    {
+                        var newInputTex=op.inObject(uniName);
+                        newInputTex.uniform=new CGL.Uniform(shader,'t',uniName,3+uniformTextures.length);
+                        uniformTextures.push(newInputTex);
+                        countTexture++;
+                    }
                 }
             }
-
-            if(words[1]==="sampler2D")
-            {
-                foundNames.push(uniName);
-                if(!hasUniformInput(uniName))
-                {
-                    var newInputTex=op.inObject(uniName);
-                    newInputTex.uniform=new CGL.Uniform(shader,'t',uniName,3+uniformTextures.length);
-                    uniformTextures.push(newInputTex);
-                    countTexture++;
-                }
-            }
-
         }
     }
 
