@@ -1,5 +1,5 @@
 const fs = require('fs-extra');
-const fs_org = require('fs');
+const fsOrg = require('fs');
 const util = require('util');
 const stream = require('stream');
 const documentation = require('documentation');
@@ -43,10 +43,10 @@ const promises = fileNames.map(async (fileName, index) => {
     names.push(name);
     const htmlOutput = await html(comments, { theme: 'theme' });
     await pipeline(streamArray(htmlOutput), vfs.dest(`./temp/${name}`));
-    if (index === 0) {
-      await pipeline(streamArray(htmlOutput), vfs.dest('./output'));
-      await fs.remove('./output/index.html');
-    }
+    // if (index === 0) {
+    //   await pipeline(streamArray(htmlOutput), vfs.dest('./output'));
+    //   await fs.remove('./output/index.html');
+    // }
   } catch (err) {
     throw err;
   }
@@ -56,18 +56,17 @@ Promise.all(promises).then(() => {
   Promise.all(
     names.map(async (name) => {
       try {
-        await fs.copyFile(
-          `${__dirname}/temp/${name}/index.html`,
-          `${__dirname}/output/${name}.html`,
-        );
-        await fs.remove(`${__dirname}/temp/${name}`);
+        // await fs.copyFile(
+        //   `${__dirname}/temp/${name}/index.html`,
+        //   `${__dirname}/output/${name}.html`,
+        // );
+        await fs.rename(`${__dirname}/temp/${name}/index.html`, `${__dirname}/temp/${name}/${name}.html`);
       } catch (err) {
         console.error('ERROR:', err);
       }
     }),
-  ).then((res) => {
-    fs.removeSync(`${__dirname}/temp/`);
-    const htmlFiles = names.map(name => `${__dirname}/output/${name}.html`);
+  ).then(() => {
+    const htmlFiles = names.map(name => `${__dirname}/temp/${name}/${name}.html`);
     const capitalNames = names.map(capitalizeFirstLetter);
     const anchorEls = capitalNames.map(
       capitalName => `: <a href="../api_${capitalName.toLowerCase()}/${capitalName.toUpperCase()}.html">${capitalName}</a>`,
@@ -87,16 +86,17 @@ Promise.all(promises).then(() => {
     });
 
     Promise.all(replacePromises).then(async () => {
-      console.log('Created documentation.');
+      console.log('Created documentation. Creating .html & .md files.');
       const mdPromises = htmlFiles.map(async (htmlFile) => {
         try {
           const htmlName = htmlFile.split('/').pop();
           const folderName = htmlName.split('.').shift();
 
-          await fs_org.mkdir(`../doc/api_${folderName}/`, () => {});
-          await fs.copyFile(htmlFile, `../doc/api_${folderName}/${htmlName}`);
-          await fs_org.writeFile(
-            `../doc/api_${folderName}/${folderName.toUpperCase()}.md`,
+          await fsOrg.mkdir(`${__dirname}/api_${folderName}/`, () => {});
+          await fs.copyFile(htmlFile, `${__dirname}/api_${folderName}/${htmlName}`);
+          
+          await fsOrg.writeFile(
+            `${__dirname}/api_${folderName}/${folderName.toUpperCase()}.md`,
             `!INCLUDE "${htmlName}"\n`,
             () => {},
           );
@@ -106,6 +106,8 @@ Promise.all(promises).then(() => {
       });
       await Promise.all(mdPromises);
       console.log('Writing .md done.');
+      fs.removeSync(`${__dirname}/temp/`);
+      console.log('Deleting /output folder.');
     });
   });
 });
