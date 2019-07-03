@@ -151,22 +151,6 @@ function parseUniforms(src)
     }
 
 
-    for(var j=0;j<uniformTextures.length;j++)
-        for(var i=0;i<foundNames.length;i++)
-            if(uniformTextures[j] && foundNames.indexOf(uniformTextures[j].name)==-1)
-            {
-                uniformTextures[j].remove();
-                uniformTextures[j]=null;
-            }
-
-
-    for(var j=0;j<uniformInputs.length;j++)
-        for(var i=0;i<foundNames.length;i++)
-            if(uniformInputs[j] && foundNames.indexOf(uniformInputs[j].name)==-1)
-            {
-                uniformInputs[j].remove();
-                uniformInputs[j]=null;
-            }
 
 
 
@@ -190,6 +174,24 @@ function updateShader()
 
     parseUniforms(vertexShader.get() );
     parseUniforms(fragmentShader.get() );
+
+
+    for(var j=0;j<uniformTextures.length;j++)
+        for(var i=0;i<foundNames.length;i++)
+            if(uniformTextures[j] && foundNames.indexOf(uniformTextures[j].name)==-1)
+            {
+                uniformTextures[j].remove();
+                uniformTextures[j]=null;
+            }
+
+
+    for(var j=0;j<uniformInputs.length;j++)
+        for(var i=0;i<foundNames.length;i++)
+            if(uniformInputs[j] && foundNames.indexOf(uniformInputs[j].name)==-1)
+            {
+                uniformInputs[j].remove();
+                uniformInputs[j]=null;
+            }
 
 
     shader.compile();
