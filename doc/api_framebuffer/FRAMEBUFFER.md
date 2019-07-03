@@ -1,1 +1,0 @@
-!INCLUDE "framebuffer.html"
