@@ -3,7 +3,7 @@ const
     geometry=op.inObject("geometry"),
     mul=op.inValueFloat("Length",0.1),
     trigger=op.outTrigger('trigger');
-
+    dropdown = op.inSwitch("Vectors", ["Normals", "Tangents", "Bitangents"], "Normals");
 geometry.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
@@ -11,6 +11,7 @@ var buffer = cgl.gl.createBuffer();
 
 geometry.onChange=rebuild;
 mul.onChange=rebuild;
+dropdown.onChange = rebuild;
 const geom=new CGL.Geometry("shownormals");
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 
@@ -34,10 +35,22 @@ function rebuild()
 
             tc.push(0,1);
             tc.push(0,1);
-
+            if (dropdown.get() === "Normals") {
             points.push(geom.vertices[i+0]+geom.vertexNormals[i+0]*mul.get());
             points.push(geom.vertices[i+1]+geom.vertexNormals[i+1]*mul.get());
             points.push(geom.vertices[i+2]+geom.vertexNormals[i+2]*mul.get());
+            }
+            
+            if(dropdown.get() === "Tangents") {
+                points.push(geom.vertices[i+0]+geom.tangents[i+0]*mul.get());
+                points.push(geom.vertices[i+1]+geom.tangents[i+1]*mul.get());
+                points.push(geom.vertices[i+2]+geom.tangents[i+2]*mul.get());
+            }
+            if(dropdown.get() === "Bitangents") {
+                points.push(geom.vertices[i+0]+geom.biTangents[i+0]*mul.get());
+                points.push(geom.vertices[i+1]+geom.biTangents[i+1]*mul.get());
+                points.push(geom.vertices[i+2]+geom.biTangents[i+2]*mul.get());
+            }
         }
 
         var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,points,3);
