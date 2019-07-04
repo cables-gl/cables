@@ -29,7 +29,6 @@ function onFilterChange()
     if(selectedMode === 'Single') selectIndex = MODE_SINGLE;
     else if(selectedMode === 'Up down') selectIndex = MODE_UP_DOWN;
 
-
     if(selectIndex == MODE_SINGLE)
     {
         inDivisorDown.setUiAttribs({greyout:true});
@@ -58,6 +57,8 @@ function getDivisors()
 
     if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
     if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
+    if(divisorUp <= 1.0) divisorUp = 1.0;
+    if(divisorDown <= 1.0) divisorDown = 1.0;
 };
 
 inArray.onChange=function()
