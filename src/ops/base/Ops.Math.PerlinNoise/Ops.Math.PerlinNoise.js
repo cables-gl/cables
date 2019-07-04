@@ -5,9 +5,7 @@ const seed = op.inFloatSlider("Seed",0),
 
 seed.set(Math.random());
 
-x.onChange=update;
-y.onChange=update;
-seed.onChange = update;
+x.onChange = y.onChange = seed.onChange = update;
 
 function update()
 {
