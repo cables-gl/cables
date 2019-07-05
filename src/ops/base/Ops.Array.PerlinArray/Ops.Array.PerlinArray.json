@@ -27,7 +27,7 @@
             },
             {
                 "type": "0",
-                "name": "Multiplier",
+                "name": "Frequency",
                 "subType": "number"
             }
         ],
