@@ -1,7 +1,7 @@
 const inArraySeed = op.inArray("Array seed"),
     inTime = op.inFloat("Time in",0),
     seed = op.inFloatSlider("Seed 0-1",0.5),
-    inMultiplier = op.inFloat("Multiplier",1),
+    inFrequency = op.inFloat("Frequency",1),
     outArray = op.outArray("Array out");
 
 var newArr=[];
@@ -9,7 +9,7 @@ outArray.set(newArr);
 
 seed.set(Math.random());
 
-inArraySeed.onChange = inTime.onChange = inMultiplier.onChange = update;
+inArraySeed.onChange = inTime.onChange = inFrequency.onChange = update;
 
 seed.onChange = function()
 {
@@ -29,7 +29,7 @@ function update()
     if(newArr.length!=arr.length)newArr.length=arr.length;
 
     var time = inTime.get();
-    var mult = inMultiplier.get();
+    var mult = inFrequency.get();
 
     for(var i=0;i<arr.length;i++)
     {
