@@ -1,0 +1,42 @@
+{
+    "id": "094af2fe-c511-4c89-b384-4cc7c4c7b626",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1562317109974
+        }
+    ],
+    "authorName": "andro",
+    "created": 1562317126233,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array seed"
+            },
+            {
+                "type": "0",
+                "name": "Time in",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Seed 0-1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.SimplexArray"
+    }
+}
