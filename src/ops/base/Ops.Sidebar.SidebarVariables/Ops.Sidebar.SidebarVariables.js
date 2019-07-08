@@ -44,7 +44,7 @@ function update() {
     //     }
     // }
 
-    var vars= CABLES.patch.getVars();
+    var vars= op.patch.getVars();
     var html='<table style="font-size:13px;">';
     for(var ki in vars)
     {
