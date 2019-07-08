@@ -1,0 +1,42 @@
+{
+    "id": "ed55556e-f319-47cc-bce6-ea015b45650b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1562316068523
+        }
+    ],
+    "authorName": "andro",
+    "created": 1562316087824,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array seed"
+            },
+            {
+                "type": "0",
+                "name": "Time in",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Seed 0-1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.PerlinArray"
+    }
+}
