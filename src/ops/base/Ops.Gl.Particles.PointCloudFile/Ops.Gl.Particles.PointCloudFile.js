@@ -2,6 +2,11 @@ const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger");
 const points=op.inArray("points");
 const doCenter=op.inValueBool("center");
+const doRender=op.inValueBool("Render",true);
+
+const outPoints=op.outArray("Points");
+const outVertColors=op.outArray("Vertex Colors");
+
 
 const cgl=this.patch.cgl;
 
@@ -14,8 +19,12 @@ doCenter.onChange=create;
 var cycle=0;
 render.onTriggered=function()
 {
-    for(var i=0;i<meshes.length;i++)
-        meshes[i].render(cgl.getShader());
+    if(doRender.get())
+    {
+        for(var i=0;i<meshes.length;i++)
+            meshes[i].render(cgl.getShader());
+
+    }
 
     trigger.trigger();
 };
@@ -53,6 +62,9 @@ function createMesh(arr,start,end)
 
     for(i=0;i<verts.length/3;i++) geom.verticesIndices[i]=i;
 
+    outPoints.set(verts);
+    outVertColors.set(vertColors);
+
     geom.vertices=verts;
     geom.vertexColors=vertColors;
     geom.texCoords=texCoords;
@@ -73,7 +85,7 @@ function create()
     var arr=points.get();
     if(!arr)return;
     meshes.length=0;
-    var meshMax=2000;
+    var meshMax=20000000;
     var i=0;
 
     if(doCenter.get())

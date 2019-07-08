@@ -18,5 +18,12 @@
             }
         ],
         "name": "Ops.Array.ContinuousNumberArray"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ContinuousNumberArray renamed to Ops.Deprecated.Array.ContinuousNumberArray",
+            "author": "pandur",
+            "date": 1561124373400
+        }
+    ]
 }

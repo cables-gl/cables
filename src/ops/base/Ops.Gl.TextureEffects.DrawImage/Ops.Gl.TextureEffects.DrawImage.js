@@ -1,5 +1,5 @@
 var render=op.inTrigger('render');
-var amount=op.inValueFloat("amount");
+var amount=op.inFloatSlider("amount");
 var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
 
 var image=op.inTexture("image");
