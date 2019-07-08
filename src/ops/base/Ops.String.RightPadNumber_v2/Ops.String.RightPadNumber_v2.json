@@ -1,0 +1,41 @@
+{
+    "authorName": "pandur",
+    "id": "dfbb4d58-1557-421b-8f2d-fdd0e74f8c43",
+    "created": 1562581795547,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.User.pandur.RightPadNumber_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.RightPadNumber_v2 renamed to Ops.String.RightPadNumber_v2",
+            "author": "pandur",
+            "date": 1562581844422
+        }
+    ],
+    "summary": "Converts a number to a string with num decimal places, adds 0's",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
