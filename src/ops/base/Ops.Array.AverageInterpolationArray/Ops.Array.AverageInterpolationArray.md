@@ -1,1 +1,0 @@
-Use this op to smoothly interpolate between differences in the values of an array

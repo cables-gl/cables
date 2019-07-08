@@ -19,7 +19,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.VertexPositionFromTexture"
+        "name": "Ops.Gl.ShaderEffects.VertexPositionFromTexture"
     },
     "changelog": [
         {
@@ -27,5 +27,13 @@
             "author": "pandur",
             "date": 1562515452832
         }
-    ]
+    ],
+    "summary": "set vertex positions from texture color values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
