@@ -44,6 +44,8 @@ void main()
     vec4 col=vec4(0.0);
     vec3 normal = normalize(mat3(normalMatrix)*norm);
 
+   // if (!gl_FrontFacing) normal=normal*-1.0;
+
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         Light light=lights[l];

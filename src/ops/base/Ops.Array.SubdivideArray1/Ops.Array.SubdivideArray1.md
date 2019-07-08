@@ -1,0 +1,1 @@
+This version of the op works on a single array.

@@ -351,3 +351,8 @@ table {
 .page-inner {
   max-width: 1000px;
 }
+
+.hide
+{
+display:none;
+}

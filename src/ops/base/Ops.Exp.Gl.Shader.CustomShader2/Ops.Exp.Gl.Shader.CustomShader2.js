@@ -43,7 +43,6 @@ function initDataOnLoad(data)
         for(var j=0;j<data.portsIn.length;j++)
             if(uniformInputs[i] && uniformInputs[i].name==data.portsIn[j].name)
                 uniformInputs[i].set(data.portsIn[j].value);
-
 }
 
 function updateLater()
@@ -122,7 +121,7 @@ function parseUniforms(src)
 
                 const uniName=words[2];
 
-                console.log('found uniform',uniName);
+                // console.log('found uniform',uniName);
 
                 if(words[1]==="float")
                 {
@@ -162,19 +161,14 @@ function updateShader()
 {
     if(!shader)return;
 
-
-    // shader.glslVersion=0;
     shader.bindTextures=bindTextures.bind(this);
     shader.setSource(vertexShader.get(),fragmentShader.get());
-
-
 
     countTexture=0;
     foundNames.length=0;
 
     parseUniforms(vertexShader.get() );
     parseUniforms(fragmentShader.get() );
-
 
     for(var j=0;j<uniformTextures.length;j++)
         for(var i=0;i<foundNames.length;i++)

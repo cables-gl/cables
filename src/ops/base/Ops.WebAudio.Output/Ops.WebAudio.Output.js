@@ -3,7 +3,7 @@ op.requirements=[CABLES.Requirements.WEBAUDIO];
 var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // constants
-var VOLUME_DEFAULT = 1;
+var VOLUME_DEFAULT = 1.0;
 var VOLUME_MIN = 0;
 var VOLUME_MAX = 1;
 

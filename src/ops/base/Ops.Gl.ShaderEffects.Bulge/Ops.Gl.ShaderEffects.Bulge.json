@@ -1,5 +1,4 @@
 {
-    "updated": 1543742493348,
     "authorName": "pandur",
     "id": "08840984-6be4-4ca4-a280-65456f3401b8",
     "created": 1522220096262,
@@ -24,9 +23,8 @@
                 "name": "Texture"
             },
             {
-                "type": "0",
-                "name": "Axis",
-                "subType": "string"
+                "type": "5",
+                "name": "Axis"
             }
         ],
         "portsOut": [

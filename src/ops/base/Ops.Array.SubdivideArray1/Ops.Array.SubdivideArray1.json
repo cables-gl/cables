@@ -38,5 +38,30 @@
             }
         ],
         "name": "Ops.Array.SubdivideArray1"
+    },
+    "summary": "For subdividing splines, smoothing lines using cubic bezier interpolation",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Points",
+                "text": "The array in to subdivide"
+            },
+            {
+                "name": "Num Subdivs",
+                "text": "Amount of subdivisions applied to the array in"
+            },
+            {
+                "name": "Smooth",
+                "text": "Enable to smooth out differences in the array"
+            },
+            {
+                "name": "Result",
+                "text": "Subdivided array out"
+            }
+        ]
     }
 }

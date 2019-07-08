@@ -1,0 +1,31 @@
+{
+    "authorName": "pandur",
+    "id": "9d4c1066-6a38-48f5-9a10-59e8aae9f58c",
+    "created": 1562514666366,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.VertexPositionFromTexture"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.VertexPositionFromTexture renamed to Ops.Gl.ShaderEffects.VertexPositionFromTexture",
+            "author": "pandur",
+            "date": 1562515452832
+        }
+    ]
+}

@@ -45,5 +45,38 @@
             }
         ],
         "name": "Ops.Array.AverageInterpolationArray"
+    },
+    "summary": "Weighted average interpolation on an array3",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "The array to interpolate"
+            },
+            {
+                "name": "Mode",
+                "text": "Apply one divisor to up and down changes in value or use two divisors on up and down changes"
+            },
+            {
+                "name": "Divisor Up",
+                "text": "Higher numbers result in slower interpolation towards the current value when increasing"
+            },
+            {
+                "name": "Divisor down",
+                "text": "Higher numbers result in slower interpolation towards the current value when decreasing"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Array Out",
+                "text": "Interpolated array"
+            }
+        ]
     }
 }
