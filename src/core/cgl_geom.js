@@ -393,7 +393,7 @@ CGL.Geometry.prototype.calculateNormals=function(options)
  * Terathon Software 3D Graphics Library.
  * https://fenix.tecnico.ulisboa.pt/downloadFile/845043405449073/Tangent%20Space%20Calculation.pdf
  *
- * @function calcTangentsBiTangents
+ * @function calcTangentsBitangents
  * @memberof Geometry
  * @instance
  */
