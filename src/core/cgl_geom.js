@@ -523,8 +523,7 @@ CGL.Geometry.prototype.calcTangentsBitangents = function () {
 
         vec3.scale(tan, normalized, 1/w);
         vec3.cross(bitan, normal, tan);
-        
-        //console.log({ tan });
+
         this.tangents[vert * 3 + 0] = tan[0];
         this.tangents[vert * 3 + 1] = tan[1];
         this.tangents[vert * 3 + 2] = tan[2];
