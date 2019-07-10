@@ -4,6 +4,11 @@ op.dynOut=op.addOutPort(new CABLES.Port(op,"create port out",CABLES.OP_PORT_TYPE
 var dataStr=op.addInPort(new CABLES.Port(op,"dataStr",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 op.patchId=op.addInPort(new CABLES.Port(op,"patchId",CABLES.OP_PORT_TYPE_VALUE,{ display:'readonly' }));
 
+
+
+dataStr.setUiAttribs({hideParam:true});
+op.patchId.setUiAttribs({hideParam:true});
+
 var data={"ports":[],"portsOut":[]};
 
 // Ops.Ui.Patch.maxPatchId=CABLES.generateUUID();
@@ -59,6 +64,8 @@ var dataLoaded=false;
 dataStr.onChange=function()
 {
     if(dataLoaded)return;
+console.log(dataStr.get());
+
 
     if(!dataStr.get())return;
     try
@@ -76,11 +83,39 @@ dataStr.onChange=function()
 function saveData()
 {
     dataStr.set(JSON.stringify(data));
+    console.log(dataStr.get());
 }
 
 function addPortListener(newPort,newPortInPatch)
 {
     //console.log('newPort',newPort.name);
+
+    newPort.addEventListener("onUiAttrChange",function(attribs)
+    {
+        console.log("onUiAttrChange!!!");
+
+
+        if(attribs.title)
+        {
+
+
+
+
+            var i=0;
+            for(i=0;i<data.portsOut.length;i++)
+                if(data.portsOut[i].name==newPort.name)
+                    data.portsOut[i].title=attribs.title;
+
+            for(i=0;i<data.ports.length;i++)
+                if(data.ports[i].name==newPort.name)
+                    data.ports[i].title=attribs.title;
+
+            saveData();
+        }
+
+    });
+
+
     if(newPort.direction==CABLES.PORT_DIR_IN)
     {
         if(newPort.type==CABLES.OP_PORT_TYPE_FUNCTION)
@@ -117,6 +152,10 @@ function setupPorts()
             var newPort=op.addInPort(new CABLES.Port(op,ports[i].name,ports[i].type));
             var patchInputOp=getSubPatchInputOp();
 
+
+
+
+
             // console.log(patchInputOp);
 
             var newPortInPatch=patchInputOp.addOutPort(new CABLES.Port(patchInputOp,ports[i].name,ports[i].type));
@@ -125,7 +164,14 @@ function setupPorts()
 
 
             newPort.ignoreValueSerialize=true;
+            newPort.setUiAttribs({"editableTitle":true});
+            if(ports[i].title)
+            {
+                newPort.setUiAttribs({"title":ports[i].title});
+                newPortInPatch.setUiAttribs({"title":ports[i].title});
+            }
             addPortListener(newPort,newPortInPatch);
+
         }
     }
 
@@ -138,8 +184,16 @@ function setupPorts()
             var newPortOutPatch=patchOutputOp.addInPort(new CABLES.Port(patchOutputOp,portsOut[i].name,portsOut[i].type));
 
             newPortOut.ignoreValueSerialize=true;
+            newPortOut.setUiAttribs({"editableTitle":true});
 
-            addPortListener(newPortOutPatch,newPortOut);
+            if(portsOut[i].title)
+            {
+                newPortOut.setUiAttribs({"title":portsOut[i].title});
+                newPortOutPatch.setUiAttribs({"title":portsOut[i].title});
+            }
+
+
+            addPortListener(newPortOut,newPortOutPatch);
         }
     }
 

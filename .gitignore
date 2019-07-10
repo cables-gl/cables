@@ -4,3 +4,4 @@ src/ops/users
 /doc/SUMMARY.md
 .idea/
 /doc/api_*
+node_modules

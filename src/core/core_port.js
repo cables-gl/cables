@@ -16,6 +16,8 @@ var CABLES=CABLES || {};
 
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
+    CABLES.EventTarget.apply(this);
+    
     this.data = {}; // reserved for port-specific user-data
     /**
      * @type {Number}
@@ -61,7 +63,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     this._warnedDeprecated=false;
     
-    this.onUiAttrChange=null;
+    // this.onUiAttrChange=null;
 
     Object.defineProperty(this, 'val', {
         get: function() {
@@ -130,6 +132,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * title - overwrite title of port (by default this is portname)
      * greyout - port paramater will appear greyed out, can not be
      * hidePort - port will be hidden from op
+     * hideParam - port params will be hidden from parameter panel
      * </pre>
      * @example
      * myPort.setUiAttribs({greyout:true});
@@ -141,7 +144,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             this.uiAttribs[p]=newAttribs[p];
         }
-        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        this.emitEvent("onUiAttrChange",newAttribs);
     };
 
     /**
