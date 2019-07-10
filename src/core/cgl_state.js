@@ -108,11 +108,13 @@ CGL.Context = function(_patch) {
 
 
 
-        // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
+        if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
             this.glVersion = 2;
-        } else {
+        }
+        else
+        {
             this.gl = this.canvas.getContext('webgl',this.patch.config.canvas) || this.canvas.getContext('experimental-webgl',this.patch.config.canvas);
             this.glVersion = 1;
 
