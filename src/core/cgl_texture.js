@@ -154,7 +154,6 @@ CGL.Texture.prototype.setSize=function(w,h)
 
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
-        console.log("fp tex...");
         // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
 
@@ -179,8 +178,6 @@ CGL.Texture.prototype.setSize=function(w,h)
     else
     if(this.textureType==CGL.Texture.TYPE_DEPTH)
     {
-
-        console.log("depth tex/.//");
 
         if(this._cgl.glVersion==1)
         {
