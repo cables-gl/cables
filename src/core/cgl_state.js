@@ -106,12 +106,7 @@ CGL.Context = function(_patch) {
         if (this.patch.config.hasOwnProperty('clearCanvasDepth')) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
 
-        if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference'))
-        {
-            // ios
-            this.patch.config.canvas.powerPreference = "high-performance";
-            this.glUseHalfFloatTex=true;
-        }
+
 
         // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
@@ -120,6 +115,18 @@ CGL.Context = function(_patch) {
         } else {
             this.gl = this.canvas.getContext('webgl',this.patch.config.canvas) || this.canvas.getContext('experimental-webgl',this.patch.config.canvas);
             this.glVersion = 1;
+
+            // safari
+            if( /^((?!chrome|android).)*safari/i.test(navigator.userAgent) )
+            {
+                this.glUseHalfFloatTex=true;
+            }
+
+            // ios
+            if( /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+            {
+                if(!this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
+            }
         }
 
         if (!this.gl) {

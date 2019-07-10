@@ -155,7 +155,6 @@ CGL.Texture.prototype.setSize=function(w,h)
     if(this.textureType==CGL.Texture.TYPE_FLOAT)
     {
         // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
-        
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
 
         if(this._cgl.glVersion==1)
