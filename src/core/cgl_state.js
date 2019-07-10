@@ -11,6 +11,7 @@ CGL.Context = function(_patch) {
     var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
+    this.glUseHalfFloatTex=false;
     this.clearCanvasTransparent=true;
     this.clearCanvasDepth=true;
     this.patch = _patch;
@@ -105,7 +106,12 @@ CGL.Context = function(_patch) {
         if (this.patch.config.hasOwnProperty('clearCanvasDepth')) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
 
-        if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
+        if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference'))
+        {
+            // ios
+            this.patch.config.canvas.powerPreference = "high-performance";
+            this.glUseHalfFloatTex=true;
+        }
 
         // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
