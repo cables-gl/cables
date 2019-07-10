@@ -1,29 +1,32 @@
-const exec=op.inTrigger("Render");
-const inShader=op.inObject("Shader");
-const tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
-const twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge');
-const inVPSize=op.inValueBool("Use Viewport Size",true);
-const inWidth=op.inValueInt("Width",512);
-const inHeight=op.inValueInt("Height",512);
-const inFloatingPoint=op.inValueBool("Floating Point",false);
-const next=op.outTrigger("Next");
-const outTex=op.outTexture("Texture");
+const
+    exec=op.inTrigger("Render"),
+    inShader=op.inObject("Shader"),
+    tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']),
+    twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge'),
+    inVPSize=op.inValueBool("Use Viewport Size",true),
+    inWidth=op.inValueInt("Width",512),
+    inHeight=op.inValueInt("Height",512),
+    inFloatingPoint=op.inValueBool("Floating Point",false),
+    next=op.outTrigger("Next"),
+    outTex=op.outTexture("Texture");
 
+const cgl=op.patch.cgl;
 var prevViewPort=[0,0,0,0];
-var cgl=op.patch.cgl;
 var effect=null;
 
-inWidth.onChange=initFbLater;
-inHeight.onChange=initFbLater;
-inFloatingPoint.onChange=initFbLater;
-inVPSize.onChange=initFbLater;
-tfilter.onChange=initFbLater;
-twrap.onChange=initFbLater;
+inWidth.onChange=
+    inHeight.onChange=
+    inFloatingPoint.onChange=
+    inVPSize.onChange=
+    tfilter.onChange=
+    twrap.onChange=initFbLater;
 
 var fb=null;
 var tex=null;
 var needInit=true;
 var mesh=CGL.MESHES.getSimpleRect(cgl,"shader2texture rect");
+
+op.toWorkPortsNeedToBeLinked(inShader);
 
 tfilter.set("nearest");
 
@@ -48,8 +51,6 @@ function initFb()
     var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
     if(twrap.get()=='mirrored repeat') selectedWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
-
-
 
     if(inVPSize.get())
     {
@@ -92,16 +93,18 @@ function initFb()
             wrap:selectedWrap
         });
     }
-
-
-
 }
 
 exec.onTriggered=function()
 {
     var vp=cgl.getViewPort();
 
-    // console.log();
+    var shader=inShader.get();
+    if(!shader)
+    {
+        outTex.set(null);
+        return;
+    }
     if(!fb || needInit )initFb();
     if(inVPSize.get() && fb && ( vp[2]!=fb.getTextureColor().width || vp[3]!=fb.getTextureColor().height ) )
     {
@@ -112,7 +115,6 @@ exec.onTriggered=function()
     prevViewPort[1]=vp[1];
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
-
 
     fb.renderStart(cgl);
 
@@ -126,7 +128,7 @@ exec.onTriggered=function()
     mat4.identity(cgl.mMatrix);
 
     cgl.setShader(inShader.get());
-    if(inShader.get().bindTextures) inShader.get().bindTextures();
+    if(shader.bindTextures) shader.bindTextures();
 
     mesh.render(inShader.get());
 

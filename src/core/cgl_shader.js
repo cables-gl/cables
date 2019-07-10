@@ -169,6 +169,11 @@ CGL.Shader.prototype.compile = function() {
         var drawBufferStr = '';
         var count=0;
 
+        if(this.srcFrag.indexOf("outColor0")>-1)this._drawBuffers[0]=true;
+        if(this.srcFrag.indexOf("outColor1")>-1)this._drawBuffers[1]=true;
+        if(this.srcFrag.indexOf("outColor2")>-1)this._drawBuffers[2]=true;
+        if(this.srcFrag.indexOf("outColor3")>-1)this._drawBuffers[3]=true;
+
         if(this._drawBuffers.length==1)
         {
             // drawBufferStr+='#define gl_FragColor outColor'+i+''.endl();
@@ -179,6 +184,8 @@ CGL.Shader.prototype.compile = function() {
         {
             var count=0;
             drawBufferStr+='vec4 outColor;'.endl();
+
+
             for(var i=0;i<this._drawBuffers.length;i++)
             {
                 // if(this._drawBuffers[i])
@@ -192,6 +199,7 @@ CGL.Shader.prototype.compile = function() {
                 }
                 count++;
             }
+
         }
         
 

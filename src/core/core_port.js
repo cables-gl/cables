@@ -127,6 +127,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @param {Object} newAttribs
      * <pre>
+     * title - overwrite title of port (by default this is portname)
      * greyout - port paramater will appear greyed out, can not be
      * hidePort - port will be hidden from op
      * </pre>
