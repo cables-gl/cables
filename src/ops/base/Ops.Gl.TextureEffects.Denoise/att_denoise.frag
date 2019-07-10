@@ -9,7 +9,7 @@ void main()
     vec4 center = texture(tex, texCoord);
     vec4 color = vec4(0.0);
     float total = 0.0;
-    float pixels=4.0;
+    const float pixels=4.0;
     for (float x = -pixels; x <= pixels; x += 1.0) {
         for (float y = -pixels; y <= pixels; y += 1.0) {
             vec4 smpl = texture(tex, texCoord + vec2(x, y) / texSize);
