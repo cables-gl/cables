@@ -1,5 +1,5 @@
-const inArraySeed = op.inArray("Array seed"),
-    inTime = op.inFloat("Time in",0),
+const inArrayX = op.inArray("Array in X "),
+    inTime = op.inFloat("Time in Y",0),
     seed = op.inFloatSlider("Seed 0-1",0.5),
     inFrequency = op.inFloat("Frequency",1),
     outArray = op.outArray("Array out");
@@ -9,7 +9,7 @@ outArray.set(newArr);
 
 seed.set(Math.random());
 
-inArraySeed.onChange = inTime.onChange = inFrequency.onChange = update;
+inArrayX.onChange = inTime.onChange = inFrequency.onChange = update;
 
 seed.onChange = function()
 {
@@ -19,7 +19,7 @@ seed.onChange = function()
 }
 function update()
 {
-    var arr=inArraySeed.get();
+    var arr=inArrayX.get();
     if(!arr)
     {
         outArray.set(null);

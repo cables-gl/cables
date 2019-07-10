@@ -13,11 +13,11 @@
         "portsIn": [
             {
                 "type": "3",
-                "name": "Array seed"
+                "name": "Array in X"
             },
             {
                 "type": "0",
-                "name": "Time in",
+                "name": "Time in Y",
                 "subType": "number"
             },
             {
@@ -38,5 +38,37 @@
             }
         ],
         "name": "Ops.Array.PerlinArray"
+    },
+    "libs": [
+        "perlin.js"
+    ],
+    "summary": "Creates An array filled with Perlin noise values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array seed",
+                "text": "Array in defines the X domain"
+            },
+            {
+                "name": "Time in",
+                "text": "Time in defines the Y domain"
+            },
+            {
+                "name": "Seed 0-1",
+                "text": "setting to 0 creates a different seed each time the patch is loaded - must be between `0 1`"
+            },
+            {
+                "name": "Frequency",
+                "text": "Noise frequency"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out"
+            }
+        ]
     }
 }

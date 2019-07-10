@@ -29,7 +29,7 @@
         ],
         "name": "Ops.Math.PerlinNoise"
     },
-    "summary": "outputs a perlin noise value like random",
+    "summary": "outputs a perlin noise value like random ",
     "credits": [
         {
             "title": "Perlin Noise Library",
@@ -40,5 +40,29 @@
     ],
     "authorName": "pandur",
     "id": "4e69926a-b0e4-4eaf-988b-00c044976d04",
-    "created": 1542700181620
+    "created": 1542700181620,
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Seed",
+                "text": "Seed number, setting to 0 results in a different seed each time the patch loads"
+            },
+            {
+                "name": "X",
+                "text": "X domain"
+            },
+            {
+                "name": "Y",
+                "text": "Y domain"
+            },
+            {
+                "name": "Result",
+                "text": "Number out"
+            }
+        ]
+    }
 }
