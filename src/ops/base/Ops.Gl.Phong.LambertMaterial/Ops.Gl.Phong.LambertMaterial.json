@@ -28,6 +28,11 @@
                 "type": "0",
                 "name": "diffuse a",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
