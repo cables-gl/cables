@@ -42,9 +42,13 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(0.0);
+
     vec3 normal = normalize(mat3(normalMatrix)*norm);
 
-    if(!gl_FrontFacing) normal=normal*-1.0;
+
+    #ifdef DOUBLE_SIDED
+    if(!gl_FrontFacing) normal = normal*-1.0;
+    #endif
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
