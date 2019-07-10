@@ -25,7 +25,6 @@ render.onTriggered=function()
 function update()
 {
     var geom=geometry.get();
-
     if(geom)
     {
         if(mesh)mesh.dispose();
