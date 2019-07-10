@@ -1,5 +1,4 @@
 {
-    "updated": 1518770913593,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "a9208e84-e957-43ac-9a79-9c719eff95eb",
@@ -14,39 +13,48 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Indexed"
+                "name": "Indexed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Faces"
+                "name": "Faces",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Vertices"
+                "name": "Vertices",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Normals"
+                "name": "Normals",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "TexCoords"
+                "name": "TexCoords",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Tangents"
+                "name": "Tangents",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "BiTangents"
+                "name": "BiTangents",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "VertexColors"
+                "name": "VertexColors",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Other Attributes"
+                "name": "Other Attributes",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryInfo"
