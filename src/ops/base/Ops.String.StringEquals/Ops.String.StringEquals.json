@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.String.StringEquals"
+    },
+    "summary": "check if content of two strings is the same",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

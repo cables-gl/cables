@@ -13,11 +13,11 @@
         "portsIn": [
             {
                 "type": "3",
-                "name": "Array seed"
+                "name": "Array in X "
             },
             {
                 "type": "0",
-                "name": "Time in",
+                "name": "Time in Y",
                 "subType": "number"
             },
             {
