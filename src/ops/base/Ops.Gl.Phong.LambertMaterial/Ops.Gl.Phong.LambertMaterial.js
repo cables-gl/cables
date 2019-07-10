@@ -3,6 +3,14 @@ const r = op.inValueSlider("diffuse r", Math.random());
 const g = op.inValueSlider("diffuse g", Math.random());
 const b = op.inValueSlider("diffuse b", Math.random());
 const a = op.inValueSlider("diffuse a", 1.0);
+
+const inToggleDoubleSided = op.inBool("Double Sided", false);
+
+inToggleDoubleSided.onChange = function () {
+    shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
+}
+
+
 const next=op.outTrigger("next");
 
 r.setUiAttribs({ colorPick: true });
