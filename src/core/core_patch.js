@@ -560,9 +560,9 @@ CABLES.Patch.prototype.exec = function(e) {
  * @memberof Patch
  * @instance
  * @param {Op} op1
- * @param {String} op1 portName
+ * @param {String} portName1
  * @param {Op} op2
- * @param {String} op2 portName
+ * @param {String} portName2
  */
 CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     if(!op1)
