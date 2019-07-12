@@ -9,6 +9,7 @@ const
 const cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
+var vectors=[];
 
 fragmentShader.setUiAttribs({editorSyntax:'glsl'});
 vertexShader.setUiAttribs({editorSyntax:'glsl'});
@@ -23,33 +24,23 @@ fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-fragmentShader.onChange=
-    vertexShader.onChange=updateLater;
+fragmentShader.onChange=vertexShader.onChange=function(){ needsUpdate=true; };
 
 render.onTriggered=doRender;
 
-var vectors=[];
 var needsUpdate=true;
 op.onLoadedValueSet=initDataOnLoad;
-
-// op.addEventListener("onPortsChanged",function(){console.log("PORTS CHANGED");});
 
 function initDataOnLoad(data)
 {
     updateShader();
-
     // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
-
     for(var i=0;i<uniformInputs.length;i++)
         for(var j=0;j<data.portsIn.length;j++)
             if(uniformInputs[i] && uniformInputs[i].name==data.portsIn[j].name)
                 uniformInputs[i].set(data.portsIn[j].value);
 }
 
-function updateLater()
-{
-    needsUpdate=true;
-}
 
 op.init=function()
 {
@@ -60,24 +51,16 @@ function doRender()
 {
     setVectorValues();
     if(needsUpdate)updateShader();
-
     if(asMaterial.get()) cgl.setShader(shader);
-
     trigger.trigger();
-
     if(asMaterial.get()) cgl.setPreviousShader();
-
 }
 
 function bindTextures()
 {
     for(var i=0;i<uniformTextures.length;i++)
-    {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
-        {
             cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
-        }
-    }
 }
 
 function hasUniformInput(name)
@@ -123,7 +106,7 @@ function parseUniforms(src)
                 var varnames=words[2];
                 if(words.length>4)for(var j=3;j<words.length;j++)varnames+=words[j];
 
-                words = words.filter(function(el) { return el!=""; });
+                words = words.filter(function(el) { return el!==""; });
                 const type=words[1];
 
                 var names=[varnames];
@@ -219,7 +202,7 @@ function parseUniforms(src)
                                 group.push(newInputZ);
                                 vec.z=newInputZ;
                             }
-                            if(num>3)
+                            else if(num>3)
                             {
                                 const newInputW=op.inFloat(uniName+' W',0);
                                 newInputW.onChange=function(){vec.changed=true;}
@@ -237,11 +220,7 @@ function parseUniforms(src)
     }
 
     op.setPortGroup("uniforms",groupUniforms);
-
-
 }
-
-
 
 function updateShader()
 {
@@ -253,8 +232,8 @@ function updateShader()
     countTexture=0;
     foundNames.length=0;
 
-    parseUniforms(vertexShader.get() );
-    parseUniforms(fragmentShader.get() );
+    parseUniforms(vertexShader.get());
+    parseUniforms(fragmentShader.get());
 
     for(var j=0;j<uniformTextures.length;j++)
         for(var i=0;i<foundNames.length;i++)
@@ -277,28 +256,22 @@ function updateShader()
 
     shader.compile();
 
-
     for(i=0;i<uniformInputs.length;i++)
-    {
         if(uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate=true;
-    }
 
     if(CABLES.UI) gui.patch().showOpParams(op);
-
 
     outShader.set(null);
     outShader.set(shader);
     needsUpdate=false;
-
 }
 
 function initVectorUniform(vec)
 {
     if(vec.num==2) vec.uni=new CGL.Uniform(shader,'2f',vec.name,[0,0]);
-    if(vec.num==3) vec.uni=new CGL.Uniform(shader,'3f',vec.name,[0,0,0]);
-    if(vec.num==4) vec.uni=new CGL.Uniform(shader,'4f',vec.name,[0,0,0,0]);
+    else if(vec.num==3) vec.uni=new CGL.Uniform(shader,'3f',vec.name,[0,0,0]);
+    else if(vec.num==4) vec.uni=new CGL.Uniform(shader,'4f',vec.name,[0,0,0,0]);
 }
-
 
 function setVectorValues()
 {
@@ -314,4 +287,3 @@ function setVectorValues()
         }
     }
 }
-updateShader();
