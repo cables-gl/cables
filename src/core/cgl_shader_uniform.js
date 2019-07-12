@@ -170,8 +170,6 @@ CGL.Uniform.prototype.updateValueBool=function()
         else this.needsUpdate=false;
     this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0 );
 
-    console.log('bool',this._value ? 1 : 0);
-
     CGL.profileUniformCount++;
 };
 
