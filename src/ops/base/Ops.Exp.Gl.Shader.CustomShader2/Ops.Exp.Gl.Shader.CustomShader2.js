@@ -128,11 +128,76 @@ function parseUniforms(src)
                     foundNames.push(uniName);
                     if(!hasUniformInput(uniName))
                     {
-                        const newInput=op.inValueFloat(uniName,0);
+                        const newInput=op.inFloat(uniName,0);
                         newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
                         uniformInputs.push(newInput);
                     }
                 }
+
+                if(words[1]==="int")
+                {
+                    foundNames.push(uniName);
+                    if(!hasUniformInput(uniName))
+                    {
+                        const newInput=op.inInt(uniName,0);
+                        newInput.uniform=new CGL.Uniform(shader,'i',uniName,newInput);
+                        uniformInputs.push(newInput);
+                    }
+                }
+
+                if(words[1]==="vec3" || words[1]==="vec2" || words[1]==="vec4")
+                {
+                    var num=2;
+                    if(words[1]==="vec4")num=4;
+                    if(words[1]==="vec3")num=3;
+                    foundNames.push(uniName+' X');
+                    foundNames.push(uniName+' Y');
+                    if(num>2)foundNames.push(uniName+' Z');
+                    if(num>3)foundNames.push(uniName+' W');
+                    if(!hasUniformInput(uniName+' X'))
+                    {
+                        var group=[];
+
+                        const newInputX=op.inFloat(uniName+' X',0);
+                        newInputX.uniform=new CGL.Uniform(shader,'f',uniName,newInputX);
+                        uniformInputs.push(newInputX);
+                        group.push(newInputX);
+
+                        const newInputY=op.inFloat(uniName+' Y',0);
+                        newInputY.uniform=new CGL.Uniform(shader,'f',uniName,newInputY);
+                        uniformInputs.push(newInputY);
+                        group.push(newInputY);
+
+                        if(num>2)
+                        {
+                            const newInputZ=op.inFloat(uniName+' Z',0);
+                            newInputZ.uniform=new CGL.Uniform(shader,'f',uniName,newInputZ);
+                            uniformInputs.push(newInputZ);
+                            group.push(newInputZ);
+                        }
+                        if(num>3)
+                        {
+                            const newInputW=op.inFloat(uniName+' W',0);
+                            newInputW.uniform=new CGL.Uniform(shader,'f',uniName,newInputW);
+                            uniformInputs.push(newInputW);
+                            group.push(newInputW);
+                        }
+
+                        op.setPortGroup(uniName,group);
+                    }
+                }
+
+                // if(words[1]==="bool")
+                // {
+                //     foundNames.push(uniName);
+                //     if(!hasUniformInput(uniName))
+                //     {
+                //         const newInput=op.inBool(uniName,0);
+
+                //         newInput.uniform=new CGL.Uniform(shader,'b',uniName,newInput);
+                //         uniformInputs.push(newInput);
+                //     }
+                // }
 
                 if(words[1]==="sampler2D")
                 {
@@ -190,83 +255,6 @@ function updateShader()
 
     shader.compile();
 
-//     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
-
-//     var i=0;
-//     var countTexture=0;
-//     for (i=0; i < activeUniforms; i++)
-//     {
-//         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
-
-//         if (
-// 			hasUniformInput(uniform.name) ||
-// 			uniform.name.indexOf('mod') == 0 ||
-// 			uniformNameBlacklist.indexOf(uniform.name)!=-1
-// 		)
-// 		    continue;
-
-//         if(uniform.type==cgl.gl.FLOAT)
-//         {
-//             var newInput=null;
-//             if(uniform.size>1)
-//             {
-//                 newInput=op.inArray(uniform.name,[]);
-
-//                 newInput.uniform=new CGL.Uniform(shader,'f[]',uniform.name,new Float32Array(22));
-
-//                 newInput.onChange=function(p)
-//                 {
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(new Float32Array(p.get()));
-//                 };
-
-//             }
-//             else
-//             {
-//                 newInput=op.inValue(uniform.name,0);
-//                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
-//                 newInput.onChange=function(p)
-//                 {
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(p.get());
-//                 };
-
-//             }
-
-//             uniformInputs.push(newInput);
-
-//         }
-//         else
-//         if(uniform.type==cgl.gl.FLOAT_MAT4)
-//         {
-//             var newInputM4=op.inArray(uniform.name);
-//             newInputM4.onChange=function(p)
-//             {
-//                 if(p.get() && p.isLinked())
-//                 {
-//                     mat4.copy(tempMat4,p.get());
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(tempMat4);
-//                 }
-//             };
-
-//             uniformInputs.push(newInputM4);
-//             // lastm4=newInputM4;
-//             newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
-//         }
-//         else
-//         if(uniform.type==cgl.gl.SAMPLER_2D)
-//         {
-//             var newInputTex=op.inObject(uniform.name);
-//             newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
-//             uniformTextures.push(newInputTex);
-//             countTexture++;
-//         }
-//         else
-//         {
-//             console.log('unsupported uniform type',uniform.type,uniform);
-//         }
-    // }
 
     for(i=0;i<uniformInputs.length;i++)
     {
@@ -281,30 +269,6 @@ function updateShader()
     needsUpdate=false;
 
 }
-
-
-// 0x8B50: 'FLOAT_VEC2',
-// 0x8B51: 'FLOAT_VEC3',
-// 0x8B52: 'FLOAT_VEC4',
-// 0x8B53: 'INT_VEC2',
-// 0x8B54: 'INT_VEC3',
-// 0x8B55: 'INT_VEC4',
-// 0x8B56: 'BOOL',
-// 0x8B57: 'BOOL_VEC2',
-// 0x8B58: 'BOOL_VEC3',
-// 0x8B59: 'BOOL_VEC4',
-// 0x8B5A: 'FLOAT_MAT2',
-// 0x8B5B: 'FLOAT_MAT3',
-// 0x8B5C: 'FLOAT_MAT4',
-// 0x8B5E: 'SAMPLER_2D',
-// 0x8B60: 'SAMPLER_CUBE',
-// 0x1400: 'BYTE',
-// 0x1401: 'UNSIGNED_BYTE',
-// 0x1402: 'SHORT',
-// 0x1403: 'UNSIGNED_SHORT',
-// 0x1404: 'INT',
-// 0x1405: 'UNSIGNED_INT',
-// 0x1406: 'FLOAT'
 
 
 updateShader();

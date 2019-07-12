@@ -304,8 +304,8 @@ const parametricBodies = [
             {
         title: 'Apple',
         xFunction: 'cos(u)*(5 + 4.8 *cos(v)) + pow(v/PI, 20)',
-        yFunction: 'sin(u)*(5 + 4.8*cos(v)) + 0.25*cos(5*u)',
-        zFunction: '-2.3*log(1-v*0.3157) + 6*sin(v) + 2*cos(v) ',
+        yFunction: '-2.3*log(1-v*0.3157) + 6*sin(v) + 2*cos(v) ',
+        zFunction: 'sin(u)*(5 + 4.8*cos(v)) + 0.25*cos(5*u)',
 
         uMin: -1,
         uMax: 1,
