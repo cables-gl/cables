@@ -1020,6 +1020,15 @@ CABLES.Patch.prototype.getVar = function(name) {
 };
 
 /**
+ * @function 
+ * @memberof Patch
+ * @instance
+ */
+CABLES.Patch.prototype.getVars = function() {
+    return this._variables;
+};
+
+/**
  * @function getVars
  * @memberof Patch
  * @instance
