@@ -72,6 +72,16 @@
                 "type": "0",
                 "name": ".preset_1_g",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_1_b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_1_a",
+                "subType": "number"
             }
         ],
         "portsOut": [

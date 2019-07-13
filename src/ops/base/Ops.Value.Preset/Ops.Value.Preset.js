@@ -67,7 +67,6 @@ function updateInterpolation()
 
     op.setUiAttrib({"extendTitle":ip});
 
-
     if(interpolate!==0) updateFade();
         else updatePreset();
 }
@@ -92,9 +91,7 @@ function getId()
         if(!found) break;
     }
     return id;
-
 }
-
 
 function updateFade()
 {
@@ -124,13 +121,11 @@ function updateFade()
 
         if(!a || !b)
         {
-            console.warn("presets wrong");
+            console.warn("preset not found");
             return;
         }
 
         // todo: cache variable, so no string lookup needed every time...
-
-
 
         for(var i in a.values)
         {
@@ -254,7 +249,6 @@ dataPort.onChange=function()
     	}
     }
 
-    console.log(data);
     dataPort.onChange=null;
 };
 
@@ -269,7 +263,6 @@ function listenPortChange(port,varname)
     valuePorts.push(port);
     port.onChange=function()
     {
-        console.log(varname,port.get());
         op.patch.setVarValue(varname,port.get());
     };
 }
@@ -290,8 +283,6 @@ addPort.onLinkChanged=function(p)
     newPort.setUiAttribs({"editableTitle":true,"title":newPort.name});
     newPort.set(otherPort.get());
 
-    console.log(varname);
-
     data.push(
         {
             "varname":varname,
@@ -311,6 +302,7 @@ addPort.onLinkChanged=function(p)
     listenPortChange(newPort,varname);
 
     addPort.removeLinks();
+    if(CABLES.UI && gui) gui.patch().removeDeadLinks();
     saveData();
     op.refreshParams();
 };
