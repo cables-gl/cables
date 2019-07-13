@@ -9,6 +9,7 @@ const
 const cgl=op.patch.cgl;
 var uniformInputs=[];
 var uniformTextures=[];
+var vectors=[];
 
 fragmentShader.setUiAttribs({editorSyntax:'glsl'});
 vertexShader.setUiAttribs({editorSyntax:'glsl'});
@@ -23,32 +24,23 @@ fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
-fragmentShader.onChange=
-    vertexShader.onChange=updateLater;
+fragmentShader.onChange=vertexShader.onChange=function(){ needsUpdate=true; };
 
 render.onTriggered=doRender;
 
 var needsUpdate=true;
 op.onLoadedValueSet=initDataOnLoad;
 
-// op.addEventListener("onPortsChanged",function(){console.log("PORTS CHANGED");});
-
 function initDataOnLoad(data)
 {
     updateShader();
-
     // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
-
     for(var i=0;i<uniformInputs.length;i++)
         for(var j=0;j<data.portsIn.length;j++)
             if(uniformInputs[i] && uniformInputs[i].name==data.portsIn[j].name)
                 uniformInputs[i].set(data.portsIn[j].value);
 }
 
-function updateLater()
-{
-    needsUpdate=true;
-}
 
 op.init=function()
 {
@@ -57,25 +49,18 @@ op.init=function()
 
 function doRender()
 {
+    setVectorValues();
     if(needsUpdate)updateShader();
-
     if(asMaterial.get()) cgl.setShader(shader);
-
     trigger.trigger();
-
     if(asMaterial.get()) cgl.setPreviousShader();
-
 }
 
 function bindTextures()
 {
     for(var i=0;i<uniformTextures.length;i++)
-    {
         if(uniformTextures[i] && uniformTextures[i].get() && uniformTextures[i].get().tex)
-        {
             cgl.setTexture(0+i+3, uniformTextures[i].get().tex);
-        }
-    }
 }
 
 function hasUniformInput(name)
@@ -100,9 +85,11 @@ var tempMat4=mat4.create();
 var countTexture=0;
 var foundNames=[];
 
+
 function parseUniforms(src)
 {
     const lblines=src.split("\n");
+    var groupUniforms=[];
 
     for(var k=0;k<lblines.length;k++)
     {
@@ -110,52 +97,130 @@ function parseUniforms(src)
 
         for(var i=0;i<lines.length;i++)
         {
-            // console.log("---",lines[i]);
             var words=lines[i].split(" ");
 
             for(var j=0;j<words.length;j++) words[j]=(words[j]+'').trim();
 
             if(words[0]==="UNI" || words[0]==="uniform")
             {
-                words = words.filter(function(el) { return el!=""; });
+                var varnames=words[2];
+                if(words.length>4)for(var j=3;j<words.length;j++)varnames+=words[j];
 
-                const uniName=words[2];
+                words = words.filter(function(el) { return el!==""; });
+                const type=words[1];
 
-                // console.log('found uniform',uniName);
+                var names=[varnames];
+                if(varnames.indexOf(",")>-1) names=varnames.split(",");
 
-                if(words[1]==="float")
+                for(var l=0;l<names.length;l++)
                 {
-                    foundNames.push(uniName);
-                    if(!hasUniformInput(uniName))
+                    const uniName=names[l].trim();
+
+                    if(type==="float")
                     {
-                        const newInput=op.inValueFloat(uniName,0);
-                        newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
-                        uniformInputs.push(newInput);
+                        foundNames.push(uniName);
+                        if(!hasUniformInput(uniName))
+                        {
+                            const newInput=op.inFloat(uniName,0);
+                            newInput.uniform=new CGL.Uniform(shader,'f',uniName,newInput);
+                            uniformInputs.push(newInput);
+                            groupUniforms.push(newInput);
+                        }
                     }
-                }
-
-                if(words[1]==="sampler2D")
-                {
-                    foundNames.push(uniName);
-                    if(!hasUniformInput(uniName))
+                    else if(type==="int")
                     {
-                        var newInputTex=op.inObject(uniName);
-                        newInputTex.uniform=new CGL.Uniform(shader,'t',uniName,3+uniformTextures.length);
-                        uniformTextures.push(newInputTex);
-                        countTexture++;
+                        foundNames.push(uniName);
+                        if(!hasUniformInput(uniName))
+                        {
+                            const newInput=op.inInt(uniName,0);
+                            newInput.uniform=new CGL.Uniform(shader,'i',uniName,newInput);
+                            uniformInputs.push(newInput);
+                            groupUniforms.push(newInput);
+                        }
+                    }
+                    // else if(type==="bool")
+                    // {
+                    //     foundNames.push(uniName);
+                    //     if(!hasUniformInput(uniName))
+                    //     {
+                    //         const newInput=op.inBool(uniName,false);
+                    //         newInput.uniform=new CGL.Uniform(shader,'b',uniName,newInput);
+                    //         uniformInputs.push(newInput);
+                    //         groupUniforms.push(newInput);
+                    //     }
+                    // }
+                    else if(type==="sampler2D")
+                    {
+                        foundNames.push(uniName);
+                        if(!hasUniformInput(uniName))
+                        {
+                            var newInputTex=op.inObject(uniName);
+                            newInputTex.uniform=new CGL.Uniform(shader,'t',uniName,3+uniformTextures.length);
+                            uniformTextures.push(newInputTex);
+                            groupUniforms.push(newInputTex);
+                            countTexture++;
+                        }
+                    }
+                    else if(type==="vec3" || type==="vec2" || type==="vec4")
+                    {
+                        var num=2;
+                        if(type==="vec4")num=4;
+                        if(type==="vec3")num=3;
+                        foundNames.push(uniName+' X');
+                        foundNames.push(uniName+' Y');
+                        if(num>2)foundNames.push(uniName+' Z');
+                        if(num>3)foundNames.push(uniName+' W');
+
+                        if(!hasUniformInput(uniName+' X'))
+                        {
+                            var group=[];
+                            var vec={
+                                "name":uniName,
+                                "num":num,
+                                "changed":false
+                            };
+                            vectors.push(vec);
+                            initVectorUniform(vec);
+
+                            const newInputX=op.inFloat(uniName+' X',0);
+                            newInputX.onChange=function(){vec.changed=true;}
+                            uniformInputs.push(newInputX);
+                            group.push(newInputX);
+                            vec.x=newInputX;
+
+                            const newInputY=op.inFloat(uniName+' Y',0);
+                            newInputY.onChange=function(){vec.changed=true;}
+                            uniformInputs.push(newInputY);
+                            group.push(newInputY);
+                            vec.y=newInputY;
+
+                            if(num>2)
+                            {
+                                const newInputZ=op.inFloat(uniName+' Z',0);
+                                newInputZ.onChange=function(){vec.changed=true;}
+                                uniformInputs.push(newInputZ);
+                                group.push(newInputZ);
+                                vec.z=newInputZ;
+                            }
+                            else if(num>3)
+                            {
+                                const newInputW=op.inFloat(uniName+' W',0);
+                                newInputW.onChange=function(){vec.changed=true;}
+                                uniformInputs.push(newInputW);
+                                group.push(newInputW);
+                                vec.w=newInputW;
+                            }
+
+                            op.setPortGroup(uniName,group);
+                        }
                     }
                 }
             }
         }
     }
 
-
-
-
-
+    op.setPortGroup("uniforms",groupUniforms);
 }
-
-
 
 function updateShader()
 {
@@ -167,8 +232,8 @@ function updateShader()
     countTexture=0;
     foundNames.length=0;
 
-    parseUniforms(vertexShader.get() );
-    parseUniforms(fragmentShader.get() );
+    parseUniforms(vertexShader.get());
+    parseUniforms(fragmentShader.get());
 
     for(var j=0;j<uniformTextures.length;j++)
         for(var i=0;i<foundNames.length;i++)
@@ -187,124 +252,38 @@ function updateShader()
                 uniformInputs[j]=null;
             }
 
+    for(var j=0;j<vectors.length;j++) initVectorUniform(vectors[j]);
 
     shader.compile();
 
-//     var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
-
-//     var i=0;
-//     var countTexture=0;
-//     for (i=0; i < activeUniforms; i++)
-//     {
-//         var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
-
-//         if (
-// 			hasUniformInput(uniform.name) ||
-// 			uniform.name.indexOf('mod') == 0 ||
-// 			uniformNameBlacklist.indexOf(uniform.name)!=-1
-// 		)
-// 		    continue;
-
-//         if(uniform.type==cgl.gl.FLOAT)
-//         {
-//             var newInput=null;
-//             if(uniform.size>1)
-//             {
-//                 newInput=op.inArray(uniform.name,[]);
-
-//                 newInput.uniform=new CGL.Uniform(shader,'f[]',uniform.name,new Float32Array(22));
-
-//                 newInput.onChange=function(p)
-//                 {
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(new Float32Array(p.get()));
-//                 };
-
-//             }
-//             else
-//             {
-//                 newInput=op.inValue(uniform.name,0);
-//                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
-//                 newInput.onChange=function(p)
-//                 {
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(p.get());
-//                 };
-
-//             }
-
-//             uniformInputs.push(newInput);
-
-//         }
-//         else
-//         if(uniform.type==cgl.gl.FLOAT_MAT4)
-//         {
-//             var newInputM4=op.inArray(uniform.name);
-//             newInputM4.onChange=function(p)
-//             {
-//                 if(p.get() && p.isLinked())
-//                 {
-//                     mat4.copy(tempMat4,p.get());
-//                     p.uniform.needsUpdate=true;
-//                     p.uniform.setValue(tempMat4);
-//                 }
-//             };
-
-//             uniformInputs.push(newInputM4);
-//             // lastm4=newInputM4;
-//             newInputM4.uniform=new CGL.Uniform(shader,'m4',uniform.name,mat4.create());
-//         }
-//         else
-//         if(uniform.type==cgl.gl.SAMPLER_2D)
-//         {
-//             var newInputTex=op.inObject(uniform.name);
-//             newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
-//             uniformTextures.push(newInputTex);
-//             countTexture++;
-//         }
-//         else
-//         {
-//             console.log('unsupported uniform type',uniform.type,uniform);
-//         }
-    // }
-
     for(i=0;i<uniformInputs.length;i++)
-    {
-        if(uniformInputs[i])uniformInputs[i].uniform.needsUpdate=true;
-    }
+        if(uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate=true;
 
     if(CABLES.UI) gui.patch().showOpParams(op);
-
 
     outShader.set(null);
     outShader.set(shader);
     needsUpdate=false;
-
 }
 
+function initVectorUniform(vec)
+{
+    if(vec.num==2) vec.uni=new CGL.Uniform(shader,'2f',vec.name,[0,0]);
+    else if(vec.num==3) vec.uni=new CGL.Uniform(shader,'3f',vec.name,[0,0,0]);
+    else if(vec.num==4) vec.uni=new CGL.Uniform(shader,'4f',vec.name,[0,0,0,0]);
+}
 
-// 0x8B50: 'FLOAT_VEC2',
-// 0x8B51: 'FLOAT_VEC3',
-// 0x8B52: 'FLOAT_VEC4',
-// 0x8B53: 'INT_VEC2',
-// 0x8B54: 'INT_VEC3',
-// 0x8B55: 'INT_VEC4',
-// 0x8B56: 'BOOL',
-// 0x8B57: 'BOOL_VEC2',
-// 0x8B58: 'BOOL_VEC3',
-// 0x8B59: 'BOOL_VEC4',
-// 0x8B5A: 'FLOAT_MAT2',
-// 0x8B5B: 'FLOAT_MAT3',
-// 0x8B5C: 'FLOAT_MAT4',
-// 0x8B5E: 'SAMPLER_2D',
-// 0x8B60: 'SAMPLER_CUBE',
-// 0x1400: 'BYTE',
-// 0x1401: 'UNSIGNED_BYTE',
-// 0x1402: 'SHORT',
-// 0x1403: 'UNSIGNED_SHORT',
-// 0x1404: 'INT',
-// 0x1405: 'UNSIGNED_INT',
-// 0x1406: 'FLOAT'
-
-
-updateShader();
+function setVectorValues()
+{
+    for(var i=0;i<vectors.length;i++)
+    {
+        var v=vectors[i];
+        if(v.changed)
+        {
+            if(v.num===2) v.uni.setValue([v.x.get(),v.y.get()]);
+            else if(v.num===3) v.uni.setValue([v.x.get(),v.y.get(),v.z.get()]);
+            else if(v.num===4) v.uni.setValue([v.x.get(),v.y.get(),v.z.get(),v.w.get()]);
+            v.changed=false;
+        }
+    }
+}

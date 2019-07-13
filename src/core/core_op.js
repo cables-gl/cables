@@ -1154,6 +1154,18 @@ CABLES.Op = function()
     }
 
 
+    /**
+     * refresh op parameters, if current op is selected
+     * @function
+     * @instance
+     * @memberof Op
+     */
+    CABLES.Op.prototype.refreshParams=function()
+    {
+        if(CABLES.UI && gui) gui.patch().showOpParams(this);
+    }
+
+
 }
 
 /**
@@ -1181,7 +1193,6 @@ CABLES.Op.isSubpatchOp=function(name)
 {
     return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
-
 
 
 

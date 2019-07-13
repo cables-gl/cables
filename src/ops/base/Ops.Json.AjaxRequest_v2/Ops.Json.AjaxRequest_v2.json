@@ -34,7 +34,7 @@
         ],
         "name": "Ops.Json.AjaxRequest_v2"
     },
-    "summary": "Request a json file from another server (ajax, url, json)",
+    "summary": "Request a json file and output an object (ajax, url, json)",
     "issues": "",
     "collections": null,
     "relatedops": null,

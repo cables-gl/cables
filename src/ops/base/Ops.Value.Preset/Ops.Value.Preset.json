@@ -1,0 +1,90 @@
+{
+    "id": "ffe981a5-67df-4da5-a6a9-7fcb910fc982",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1562937804063
+        },
+        {
+            "message": "Ops.User.pandur.Preset renamed to Ops.Value.Preset",
+            "author": "pandur",
+            "date": 1562948747052
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1562937887698,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "data"
+            },
+            {
+                "type": "5",
+                "name": "sets"
+            },
+            {
+                "type": "5",
+                "name": "presetid"
+            },
+            {
+                "type": "5",
+                "name": "Interpolation"
+            },
+            {
+                "type": "0",
+                "name": "Preset A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Preset B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fade",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Preset",
+                "group": "Manage Presets",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Create new",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "Update",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "Delete",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "0",
+                "name": ".preset_1_g",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "4",
+                "name": "Create Variable"
+            },
+            {
+                "type": "0",
+                "name": "Num Presets",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.Preset"
+    }
+}

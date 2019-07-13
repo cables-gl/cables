@@ -172,6 +172,11 @@
             "message": "code cleanup - ports",
             "author": "andro",
             "date": 1559040635707
+        },
+        {
+            "message": "reset now also resets position from panning",
+            "author": "pandur",
+            "date": 1562767457075
         }
     ]
 }
