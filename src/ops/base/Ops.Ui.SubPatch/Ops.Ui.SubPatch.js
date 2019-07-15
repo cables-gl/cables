@@ -240,7 +240,6 @@ op.dyn.onLinkChanged=function()
             gui.patch().removeDeadLinks();
         },100);
     }
-
 };
 
 op.dynOut.onLinkChanged=function()

@@ -17,27 +17,35 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Preset A",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Preset B",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Fade",
-                "subType": "number"
-            },
-            {
                 "type": "5",
                 "name": "data"
             },
             {
                 "type": "5",
                 "name": "sets"
+            },
+            {
+                "type": "5",
+                "name": "presetid"
+            },
+            {
+                "type": "5",
+                "name": "Interpolation"
+            },
+            {
+                "type": "0",
+                "name": "Preset A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Preset B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fade",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -62,12 +70,17 @@
             },
             {
                 "type": "0",
-                "name": "preset_Scale",
+                "name": ".preset_1_g",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "preset_Amount",
+                "name": ".preset_1_b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_1_a",
                 "subType": "number"
             }
         ],
@@ -75,8 +88,13 @@
             {
                 "type": "4",
                 "name": "Create Variable"
+            },
+            {
+                "type": "0",
+                "name": "Num Presets",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.Preset"
+        "name": "Ops.Value.Preset"
     }
 }

@@ -54,7 +54,6 @@ function addPort(n)
     if(!n)n="texture"+texturePorts.length;
     var newPort=self.addInPort(new CABLES.Port(self,n,CABLES.OP_PORT_TYPE_TEXTURE));
 
-    // newPort.onLink=checkPorts;
     newPort.onLinkChanged=checkPorts;
     newPort.onChange=checkPorts;
 

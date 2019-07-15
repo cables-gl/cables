@@ -61,7 +61,7 @@ inTrigShuffle.onTriggered = function()
     update();
 }
 
-array.onLink = function ()
+array.onLinkChanged = function ()
 {
     update();
     nextPort.trigger();
