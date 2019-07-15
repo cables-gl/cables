@@ -226,6 +226,8 @@ CGL.Geometry.prototype.merge=function(geom)
     this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
     this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
     this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.tangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.tangents);
+    this.bitangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.bitangents);
 };
 
 CGL.Geometry.prototype.copy=function()

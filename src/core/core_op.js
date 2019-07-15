@@ -1162,7 +1162,7 @@ CABLES.Op = function()
      */
     CABLES.Op.prototype.refreshParams=function()
     {
-        if(CABLES.UI && gui) gui.patch().showOpParams(this);
+        if(CABLES.UI && gui) gui.patch().refreshOpParams(this);
     }
 
 

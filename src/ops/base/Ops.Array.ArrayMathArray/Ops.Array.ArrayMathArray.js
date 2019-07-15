@@ -13,6 +13,7 @@ var showingError = false;
 var mathArray = [];
 var selectIndex = 0;
 
+op.toWorkPortsNeedToBeLinked(inArray_1,inArray_0);
 
 const MATH_FUNC_ADD = 0;
 const MATH_FUNC_SUB = 1;

@@ -1,0 +1,84 @@
+{
+    "authorName": "pandur",
+    "id": "cdf55940-7726-4ab3-854c-1a576434da46",
+    "created": 1563182105585,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "Mesh Index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Calculate Normals",
+                "group": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Resize",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "New Size",
+                "group": "Geometry",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Merge All",
+                "group": "Geometry",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Scaling",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json3d.Mesh3d"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Json3dMesh2 renamed to Ops.Json3d.Json3dMesh2",
+            "author": "pandur",
+            "date": 1563185480950
+        },
+        {
+            "message": "Ops.Json3d.Json3dMesh2 renamed to Ops.Json3d.Mesh3d",
+            "author": "pandur",
+            "date": 1563186029634
+        }
+    ]
+}
