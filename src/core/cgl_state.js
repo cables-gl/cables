@@ -198,7 +198,7 @@ CGL.Context = function(_patch) {
     this.beginFrame = function() {
 
         if (CABLES.UI) {
-            gui._texturePreviewer.render();
+            gui.metaTexturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 
