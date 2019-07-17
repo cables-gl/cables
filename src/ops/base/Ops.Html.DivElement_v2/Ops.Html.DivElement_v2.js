@@ -29,18 +29,21 @@ updateStyle();
 
 op.onDelete=removeElement;
 
+var prevDisplay='block';
 
 function setCSSVisible(visible)
 {
     if(!visible)
     {
         div.style.visibility='hidden';
+        prevDisplay=div.style.display||'block';
         div.style.display='none';
     }
     else
     {
+        prevDisplay=div.style.display||'block';
         div.style.visibility='visible';
-        div.style.display='block';
+        div.style.display=prevDisplay;
     }
 }
 

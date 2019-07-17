@@ -50,12 +50,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Array seed",
-                "text": "Array in defines the X domain"
+                "name": "Array in X",
+                "text": "X domain"
             },
             {
-                "name": "Time in",
-                "text": "Time in defines the Y domain"
+                "name": "Time in Y",
+                "text": "Y domain"
             },
             {
                 "name": "Seed 0-1",

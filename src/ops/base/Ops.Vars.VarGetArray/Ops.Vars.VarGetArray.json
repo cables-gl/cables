@@ -8,7 +8,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Variable"
+                "name": "Variable",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -17,7 +18,7 @@
                 "name": "Array"
             }
         ],
-        "name": "Ops.Vars.VariableArray"
+        "name": "Ops.Vars.VarGetArray"
     },
     "changelog": [
         {
@@ -31,7 +32,9 @@
     "relatedops": [
         "Ops.Vars.VarSetArray"
     ],
-    "youtubeids": [],
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
     "docs": {
         "ports": [
             {

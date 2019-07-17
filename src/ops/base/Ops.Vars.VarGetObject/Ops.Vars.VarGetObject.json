@@ -7,7 +7,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Variable"
+                "name": "Variable",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -16,7 +17,7 @@
                 "name": "Object"
             }
         ],
-        "name": "Ops.Vars.GetVariableObject"
+        "name": "Ops.Vars.VarGetObject"
     },
     "summary": "Get a variable object",
     "changelog": [
@@ -31,7 +32,9 @@
     "relatedops": [
         "Ops.Vars.VarSetObject"
     ],
-    "youtubeids": [],
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
     "docs": {
         "ports": [
             {

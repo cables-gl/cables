@@ -41,5 +41,34 @@
     },
     "libs": [
         "perlin.js"
-    ]
+    ],
+    "summary": "Creates An array filled with Simplex noise values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in X ",
+                "text": "X domain"
+            },
+            {
+                "name": "Time in Y",
+                "text": "Y domain"
+            },
+            {
+                "name": "Seed 0-1",
+                "text": "setting to 0 creates a different seed each time the patch is loaded - must be between `0 1`"
+            },
+            {
+                "name": "Frequency",
+                "text": "Noise frequency"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out"
+            }
+        ]
+    }
 }

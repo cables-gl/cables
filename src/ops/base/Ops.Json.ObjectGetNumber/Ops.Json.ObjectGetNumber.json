@@ -45,5 +45,12 @@
     ],
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectGetValue renamed to Ops.Json.ObjectGetNumber",
+            "author": "pandur",
+            "date": 1562758578400
+        }
+    ]
 }
