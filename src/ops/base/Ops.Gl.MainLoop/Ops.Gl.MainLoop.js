@@ -29,6 +29,8 @@ active.onChange=function()
         // op.patch.pause();
         // op.patch.removeOnAnimFrame(op);
         op.onAnimFrame=render;
+        op.patch.addOnAnimFrame(op);
+        console.log("adding again!");
     }
 
 

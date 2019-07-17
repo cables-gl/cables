@@ -12,13 +12,13 @@
             },
             {
                 "type": "0",
-                "name": "Line Strip",
-                "subType": "boolean"
+                "name": "Num Points",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Num Points",
-                "subType": "integer"
+                "name": "Line Strip",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

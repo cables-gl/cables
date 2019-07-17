@@ -1,8 +1,9 @@
 const
     render=op.inTrigger("Render"),
     inPoints=op.inArray("Points"),
-    strip=op.inValueBool("Line Strip",true),
     numPoints=op.inValueInt("Num Points"),
+    strip=op.inBool("Line Strip",true),
+    // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]),
     next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
@@ -12,29 +13,26 @@ geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
 var buff=new Float32Array();
 var needsRebuild=true;
-
-inPoints.onChange=function(){//rebuild;
-        needsRebuild=true;
-    };
-
 var attr;
+
+inPoints.onChange=
+function(){ needsRebuild=true; };
 
 op.toWorkPortsNeedToBeLinked(inPoints);
 
 function rebuild()
 {
-    var points=inPoints.get();
+    const points=inPoints.get();
 
-    if(!points)return;
+    if(!points || points.length===0) return;
 
-    if(points.length===0)return;
-    // if(op.instanced(render))return;
+    var newLength=points.length;
 
     if(!(points instanceof Float32Array))
     {
-        if(points.length!=buff.length)
+        if(newLength!=buff.length)
         {
-            buff=new Float32Array(points.length);
+            buff=new Float32Array(newLength);
             buff.set(points);
         }
         else
@@ -65,7 +63,7 @@ render.onTriggered=function()
     if(!shader)return;
 
     var oldPrim=shader.glPrimitive;
-    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;
+    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;  // LINE_LOOP
         else shader.glPrimitive=cgl.gl.LINES;
 
     if(attr)

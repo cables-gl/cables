@@ -29,5 +29,13 @@
             }
         ],
         "name": "Ops.Array.InterpolateNumbersArray"
+    },
+    "summary": "interpolate between all values of an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

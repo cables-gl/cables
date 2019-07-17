@@ -141,7 +141,7 @@
         ],
         "name": "Ops.Gl.Meshes.ParametricSurface"
     },
-    "summary": "Creates a 3d mesh from a 2d area",
+    "summary": "Creates a 3d mesh from a 2d area expressions",
     "issues": "",
     "collections": null,
     "relatedops": [

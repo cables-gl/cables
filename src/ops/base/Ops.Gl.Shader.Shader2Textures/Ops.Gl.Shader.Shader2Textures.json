@@ -67,7 +67,7 @@
         ],
         "name": "Ops.User.pandur.Shader2Textures"
     },
-    "summary": "",
+    "summary": "render a shader to multiple textures",
     "issues": "",
     "collections": null,
     "relatedops": null,

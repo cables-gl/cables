@@ -20,6 +20,10 @@ function update()
         theLength=maxOldIndex.get();
     }
 
+    if(num.get() === 0)
+    {
+        return;
+    }
     var newLength=Math.floor(theLength/num.get());
     var step=num.get()*3;
     newArray.length=newLength;
