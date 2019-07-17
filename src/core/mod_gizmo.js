@@ -1,5 +1,5 @@
 
-CABLES.htmlLine=function(parentElement,color)
+export const htmlLine=function(parentElement,color)
 {
     var line=null;
     function createLineElement(x, y, length, angle) {
@@ -77,7 +77,7 @@ CABLES.htmlLine=function(parentElement,color)
 };
 
 
-CABLES.Gizmo=function(cgl)
+const Gizmo=function(cgl)
 {
     this._cgl=cgl;
     this._eleCenter=null;
@@ -97,7 +97,7 @@ CABLES.Gizmo=function(cgl)
 
 
 
-CABLES.Gizmo.prototype.getDir=function(x2,y2)
+Gizmo.prototype.getDir=function(x2,y2)
 {
     var xd = this._params.x-x2;
     var yd = this._params.y-y2;
@@ -109,9 +109,9 @@ CABLES.Gizmo.prototype.getDir=function(x2,y2)
 
 };
 
-CABLES.Gizmo.tempParams={};
+Gizmo.tempParams={};
 
-CABLES.Gizmo.prototype.set=function(params)
+Gizmo.prototype.set=function(params)
 {
     if(!params)return this.setParams(params);
 
@@ -183,33 +183,33 @@ CABLES.Gizmo.prototype.set=function(params)
     cgl.popModelMatrix();
     
 
-    CABLES.Gizmo.tempParams.x=zero.x;
-    CABLES.Gizmo.tempParams.y=zero.y;
-    CABLES.Gizmo.tempParams.xx=screenX.x;
-    CABLES.Gizmo.tempParams.xy=screenX.y;
-    CABLES.Gizmo.tempParams.yx=screenY.x;
-    CABLES.Gizmo.tempParams.yy=screenY.y;
-    CABLES.Gizmo.tempParams.zx=screenZ.x;
-    CABLES.Gizmo.tempParams.zy=screenZ.y;
+    Gizmo.tempParams.x=zero.x;
+    Gizmo.tempParams.y=zero.y;
+    Gizmo.tempParams.xx=screenX.x;
+    Gizmo.tempParams.xy=screenX.y;
+    Gizmo.tempParams.yx=screenY.x;
+    Gizmo.tempParams.yy=screenY.y;
+    Gizmo.tempParams.zx=screenZ.x;
+    Gizmo.tempParams.zy=screenZ.y;
     
-    CABLES.Gizmo.tempParams.coord=trans;
-    CABLES.Gizmo.tempParams.coordX=transX;
-    CABLES.Gizmo.tempParams.coordY=transY;
-    CABLES.Gizmo.tempParams.coordZ=transZ;
+    Gizmo.tempParams.coord=trans;
+    Gizmo.tempParams.coordX=transX;
+    Gizmo.tempParams.coordY=transY;
+    Gizmo.tempParams.coordZ=transZ;
     
-    CABLES.Gizmo.tempParams.posX=params.posX;
-    CABLES.Gizmo.tempParams.posY=params.posY;
-    CABLES.Gizmo.tempParams.posZ=params.posZ;
-    CABLES.Gizmo.tempParams.dist=w;
+    Gizmo.tempParams.posX=params.posX;
+    Gizmo.tempParams.posY=params.posY;
+    Gizmo.tempParams.posZ=params.posZ;
+    Gizmo.tempParams.dist=w;
 
-    this.setParams(CABLES.Gizmo.tempParams);
+    this.setParams(Gizmo.tempParams);
 
 };
 
 
 
 
-CABLES.Gizmo.prototype.setParams=function(params)
+Gizmo.prototype.setParams=function(params)
 {
     this._params=params;
 
@@ -327,7 +327,7 @@ CABLES.Gizmo.prototype.setParams=function(params)
 };
 
 
-CABLES.Gizmo.prototype.dragger=function(el)
+Gizmo.prototype.dragger=function(el)
 {
     var isDown=false;
     var self=this;
@@ -394,3 +394,5 @@ CABLES.Gizmo.prototype.dragger=function(el)
     $( document ).bind( "mouseup", up );
     $( document ).bind( "mousedown", down );
 };
+
+export default Gizmo;

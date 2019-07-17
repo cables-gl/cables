@@ -1,5 +1,8 @@
+import { OP_PORT_TYPE_FUNCTION, OP_PORT_TYPE_OBJECT, OP_PORT_TYPE_DYNAMIC } from "./core_op";
+import { PORT_DIR_IN } from "./core_port";
 
-var CABLES=CABLES || {};
+// 
+// var CABLES=CABLES || {};
 /**  
  * @external CABLES
  * @namespace Link
@@ -8,7 +11,7 @@ var CABLES=CABLES || {};
  * @hideconstructor
  * @class
 */
-CABLES.Link = function(scene)
+const Link = function(scene)
 {
     this.portIn=null;
     this.portOut=null;
@@ -17,13 +20,13 @@ CABLES.Link = function(scene)
 };
 
 
-CABLES.Link.prototype.setValue=function(v)
+Link.prototype.setValue=function(v)
 {
     if(v===undefined) this._setValue();
         else this.portIn.set(v);
 };
 
-CABLES.Link.prototype.activity=function()
+Link.prototype.activity=function()
 {
     this.activityCounter++;
     // if(Date.now()-this.lastTime>100)
@@ -36,7 +39,7 @@ CABLES.Link.prototype.activity=function()
 };
 
 
-CABLES.Link.prototype._setValue=function()
+Link.prototype._setValue=function()
 {
     if(!this.portOut)
     {
@@ -48,7 +51,7 @@ CABLES.Link.prototype._setValue=function()
 
     if(v==v)  // NaN is the only JavaScript value that is treated as unequal to itself
     {
-        if(this.portIn.type!=CABLES.OP_PORT_TYPE_FUNCTION)this.activity();
+        if(this.portIn.type!=OP_PORT_TYPE_FUNCTION)this.activity();
 
         if( this.portIn.get()!==v )
         {
@@ -68,7 +71,7 @@ CABLES.Link.prototype._setValue=function()
  * @param {Port} port
  * @description returns the port of the link, which is not port
  */
-CABLES.Link.prototype.getOtherPort=function(p)
+Link.prototype.getOtherPort=function(p)
 {
     if(p==this.portIn)return this.portOut;
     return this.portIn;
@@ -80,7 +83,7 @@ CABLES.Link.prototype.getOtherPort=function(p)
  * @instance
  * @description unlink/remove this link from all ports
  */
-CABLES.Link.prototype.remove=function()
+Link.prototype.remove=function()
 {
     if(this.portIn)this.portIn.removeLink(this);
     if(this.portOut)this.portOut.removeLink(this);
@@ -89,7 +92,7 @@ CABLES.Link.prototype.remove=function()
         this.scene.emitEvent("onUnLink",this.portIn,this.portOut);
     }
 
-    if(this.portIn && this.portIn.type==CABLES.OP_PORT_TYPE_OBJECT)
+    if(this.portIn && this.portIn.type==OP_PORT_TYPE_OBJECT)
     {
         this.portIn.set(null);
         if(this.portIn.links.length>0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
@@ -112,15 +115,15 @@ CABLES.Link.prototype.remove=function()
  * @param {Port} port1
  * @param {Port} port2
  */
-CABLES.Link.prototype.link=function(p1,p2)
+Link.prototype.link=function(p1,p2)
 {
-    if(!CABLES.Link.canLink(p1,p2))
+    if(!Link.canLink(p1,p2))
     {
         console.log('cannot link ports!');
         return false;
     }
 
-    if(p1.direction==CABLES.PORT_DIR_IN)
+    if(p1.direction==PORT_DIR_IN)
     {
         this.portIn=p1;
         this.portOut=p2;
@@ -144,7 +147,7 @@ CABLES.Link.prototype.link=function(p1,p2)
 
 };
 
-CABLES.Link.prototype.getSerialized=function()
+Link.prototype.getSerialized=function()
 {
     var obj={};
 
@@ -166,16 +169,16 @@ CABLES.Link.prototype.getSerialized=function()
  * @param {Port} port1
  * @param {Port} port2
  */
-CABLES.Link.canLinkText=function(p1,p2)
+Link.canLinkText=function(p1,p2)
 {
     if(p1.direction==p2.direction)
     {
         var txt='(out)';
-        if(p2.direction==CABLES.PORT_DIR_IN)txt="(in)";
+        if(p2.direction==PORT_DIR_IN)txt="(in)";
         return 'can not link: same direction'+txt;
     }
     if(p1.parent==p2.parent)return 'can not link: same op';
-    if( p1.type!=CABLES.OP_PORT_TYPE_DYNAMIC && p2.type!=CABLES.OP_PORT_TYPE_DYNAMIC )
+    if( p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC )
     {
         if(p1.type!=p2.type)return 'can not link: different type';
     }
@@ -184,8 +187,8 @@ CABLES.Link.canLinkText=function(p1,p2)
     if(!p2)return 'can not link: port 2 invalid';
 
 
-    if(p1.direction==CABLES.PORT_DIR_IN && p1.isAnimated())return 'can not link: is animated';
-    if(p2.direction==CABLES.PORT_DIR_IN && p2.isAnimated())return 'can not link: is animated';
+    if(p1.direction==PORT_DIR_IN && p1.isAnimated())return 'can not link: is animated';
+    if(p2.direction==PORT_DIR_IN && p2.isAnimated())return 'can not link: is animated';
 
     // if(p1.direction==CABLES.PORT_DIR_IN && p1.links.length>0)return 'input port already busy';
     // if(p2.direction==CABLES.PORT_DIR_IN && p2.links.length>0)return 'input port already busy';
@@ -205,12 +208,12 @@ CABLES.Link.canLinkText=function(p1,p2)
  * @param {Port} port2
  * @returns {Boolean}
  */
-CABLES.Link.canLink=function(p1,p2)
+Link.canLink=function(p1,p2)
 {
     if(!p1)return false;
     if(!p2)return false;
-    if(p1.direction==CABLES.PORT_DIR_IN && p1.isAnimated())return false;
-    if(p2.direction==CABLES.PORT_DIR_IN && p2.isAnimated())return false;
+    if(p1.direction==PORT_DIR_IN && p1.isAnimated())return false;
+    if(p2.direction==PORT_DIR_IN && p2.isAnimated())return false;
 
     if(p1.isHidden() || p2.isHidden())return false;
 
@@ -218,8 +221,8 @@ CABLES.Link.canLink=function(p1,p2)
 
     if(p1.direction==p2.direction)return false;
     
-    if( (p1.type!=p2.type) && ( p1.type!=CABLES.OP_PORT_TYPE_DYNAMIC && p2.type!=CABLES.OP_PORT_TYPE_DYNAMIC )) return false;
-    if(p1.type==CABLES.OP_PORT_TYPE_DYNAMIC || p2.type==CABLES.OP_PORT_TYPE_DYNAMIC )return true;
+    if( (p1.type!=p2.type) && ( p1.type!=OP_PORT_TYPE_DYNAMIC && p2.type!=OP_PORT_TYPE_DYNAMIC )) return false;
+    if(p1.type==OP_PORT_TYPE_DYNAMIC || p2.type==OP_PORT_TYPE_DYNAMIC )return true;
     
     if(p1.parent==p2.parent)return false;
 
@@ -231,3 +234,5 @@ CABLES.Link.canLink=function(p1,p2)
 
     return true;
 };
+
+export default Link;

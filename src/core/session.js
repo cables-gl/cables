@@ -2,7 +2,7 @@
 
 // old...
 
-var CABLES=CABLES || {};
+// var CABLES=CABLES || {};
 
 CABLES.Variable=function()
 {
@@ -34,3 +34,5 @@ CABLES.Variable=function()
     };
 
 };
+
+export default CABLES;

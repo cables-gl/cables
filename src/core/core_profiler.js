@@ -1,5 +1,5 @@
-CABLES=CABLES||{};
-CABLES.Profiler=function()
+// CABLES=CABLES||{};
+const Profiler=function()
 {
     var items={};
     var currentId=null;
@@ -71,3 +71,5 @@ CABLES.Profiler=function()
     };
 
 };
+
+export default Profiler;

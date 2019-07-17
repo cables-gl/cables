@@ -1,3 +1,9 @@
+import EventTarget from "./0_eventtarget";
+import { generateUUID } from "./0_utils";
+import { Anim } from "./anim";
+import {
+    OP_PORT_TYPE_VALUE, OP_PORT_TYPE_FUNCTION, OP_PORT_TYPE_OBJECT, OP_PORT_TYPE_TEXTURE, OP_PORT_TYPE_ARRAY, OP_PORT_TYPE_DYNAMIC, OP_PORT_TYPE_STRING,
+} from "./core_op";
 /**
  * data is coming into and out of ops through input and output ports
  * @external CABLES
@@ -8,15 +14,15 @@
  * const myPort=op.inString("String Port");
  */
 
-CABLES.PORT_DIR_IN=0;
-CABLES.PORT_DIR_OUT=1;
+export const PORT_DIR_IN = 0;
+export const PORT_DIR_OUT = 1;
 
-var CABLES=CABLES || {};
+// var CABLES=CABLES || {};
 
-CABLES.Port=function(__parent,name,type,uiAttribs)
+const Port = function (__parent, name, type, uiAttribs)
 {
-    CABLES.EventTarget.apply(this);
-    
+    EventTarget.apply(this);
+
     this.data = {}; // reserved for port-specific user-data
     /**
      * @type {Number}
@@ -25,9 +31,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @memberof Port
      * @description direction of port (input(0) or output(1))
      */
-    this.direction=CABLES.PORT_DIR_IN;
-    this.id=CABLES.generateUUID();
-    this.parent=__parent;
+    this.direction = PORT_DIR_IN;
+    this.id = generateUUID();
+    this.parent = __parent;
 
     /**
      * @type {Array<Link>}
@@ -36,48 +42,48 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @memberof Port
      * @description links of port
      */
-    this.links=[];
-    this.value=0.0;
-    this.name=name;
-    this.type=type || CABLES.OP_PORT_TYPE_VALUE;
-    this.uiAttribs=uiAttribs || {};
-    this.anim=null;
-    var oldAnimVal=-5711;
-    this.defaultValue=null;
-    
-    this._uiActiveState=true;
-    this.ignoreValueSerialize=false;
+    this.links = [];
+    this.value = 0.0;
+    this.name = name;
+    this.type = type || OP_PORT_TYPE_VALUE;
+    this.uiAttribs = uiAttribs || {};
+    this.anim = null;
+    var oldAnimVal = -5711;
+    this.defaultValue = null;
+
+    this._uiActiveState = true;
+    this.ignoreValueSerialize = false;
     // this.onLink=null;
-    this.onLinkChanged=null;
-    this.crashed=false;
+    this.onLinkChanged = null;
+    this.crashed = false;
 
-    this._valueBeforeLink=null;
-    this._lastAnimFrame=-1;
-    this._animated=false;
+    this._valueBeforeLink = null;
+    this._lastAnimFrame = -1;
+    this._animated = false;
 
-    this.onValueChanged=null;
-    this.onTriggered=null;
-    this.onUiActiveStateChange=null;
-    this.changeAlways=false;
+    this.onValueChanged = null;
+    this.onTriggered = null;
+    this.onUiActiveStateChange = null;
+    this.changeAlways = false;
 
-    this._warnedDeprecated=false;
-    
+    this._warnedDeprecated = false;
+
     // this.onUiAttrChange=null;
 
-    Object.defineProperty(this, 'val', {
-        get: function() {
-            this._warnedDeprecated=true;
+    Object.defineProperty(this, "val", {
+        get()
+        {
+            this._warnedDeprecated = true;
             return this.get();
         },
-        set: function(v) {
+        set(v)
+        {
             this.setValue(v);
             // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
-            this._warnedDeprecated=true;
-        }
-      });
+            this._warnedDeprecated = true;
+        },
+    });
 };
-
-
 
 /**
  * change listener for input value ports, overwrite to react to changes
@@ -90,12 +96,15 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
  * {
  *   console.log("was changed to: ",myPort.get());
  * }
- * 
+ *
  */
 
 {
-    CABLES.Port.prototype.onAnimToggle=function(){};
-    CABLES.Port.prototype._onAnimToggle=function(){this.onAnimToggle();};
+    Port.prototype.onAnimToggle = function () {};
+    Port.prototype._onAnimToggle = function ()
+    {
+        this.onAnimToggle();
+    };
 
     /**
      * @function hidePort
@@ -103,9 +112,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description hide port rectangle in op
      */
-    CABLES.Port.prototype.hidePort=function()
+    Port.prototype.hidePort = function ()
     {
-        this.setUiAttribs({hidePort:true});
+        this.setUiAttribs({ hidePort: true });
     };
 
     /**
@@ -114,7 +123,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description remove port
      */
-    CABLES.Port.prototype.remove=function()
+    Port.prototype.remove = function ()
     {
         // this.setUiAttribs({hidePort:true});
         this.removeLinks();
@@ -137,15 +146,15 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @example
      * myPort.setUiAttribs({greyout:true});
      */
-    CABLES.Port.prototype.setUiAttribs=function(newAttribs)
+    Port.prototype.setUiAttribs = function (newAttribs)
     {
-        if(!this.uiAttribs)this.uiAttribs={};
-        for(var p in newAttribs)
+        if (!this.uiAttribs) this.uiAttribs = {};
+        for (var p in newAttribs)
         {
-            this.uiAttribs[p]=newAttribs[p];
+            this.uiAttribs[p] = newAttribs[p];
         }
         // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
-        this.emitEvent("onUiAttrChange",newAttribs);
+        this.emitEvent("onUiAttrChange", newAttribs);
     };
 
     /**
@@ -154,16 +163,16 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description get value of port
      */
-    CABLES.Port.prototype.get=function()
+    Port.prototype.get = function ()
     {
-        if(this._animated && this._lastAnimFrame!=this.parent.patch.getFrameNum())
+        if (this._animated && this._lastAnimFrame != this.parent.patch.getFrameNum())
         {
-            this._lastAnimFrame=this.parent.patch.getFrameNum();
-            this.value=this.anim.getValue(this.parent.patch.timer.getTime());
+            this._lastAnimFrame = this.parent.patch.getFrameNum();
+            this.value = this.anim.getValue(this.parent.patch.timer.getTime());
 
             // if(oldAnimVal!=this.value)
             {
-                oldAnimVal=this.value;
+                oldAnimVal = this.value;
                 this.forceChange();
             }
         }
@@ -177,91 +186,90 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description set value of port / will send value to all linked ports (only for output ports)
      */
-    CABLES.Port.prototype.set=CABLES.Port.prototype.setValue=function(v)
+    Port.prototype.set = Port.prototype.setValue = function (v)
     {
-        if(v===undefined)return;
+        if (v === undefined) return;
 
-        if(this.parent.enabled && !this.crashed)
+        if (this.parent.enabled && !this.crashed)
         {
-            if(v!==this.value || this.changeAlways || this.type==CABLES.OP_PORT_TYPE_TEXTURE || this.type==CABLES.OP_PORT_TYPE_ARRAY )
+            if (v !== this.value || this.changeAlways || this.type == OP_PORT_TYPE_TEXTURE || this.type == OP_PORT_TYPE_ARRAY)
             {
-                if(this._animated)
+                if (this._animated)
                 {
-                    this.anim.setValue(this.parent.patch.timer.getTime(),v);
+                    this.anim.setValue(this.parent.patch.timer.getTime(), v);
                 }
                 else
                 {
                     try
                     {
-                        
-                        this.value=v;
+                        this.value = v;
                         this.forceChange();
                     }
-                    catch(ex)
+                    catch (ex)
                     {
-                        this.crashed=true;
-                        this.setValue=function(v){};
-                        this.onTriggered=function(){};
+                        this.crashed = true;
+                        this.setValue = function (v) {};
+                        this.onTriggered = function () {};
 
-                        console.log('exception!');
-                        console.error('onvaluechanged exception cought',ex);
+                        console.log("exception!");
+                        console.error("onvaluechanged exception cought", ex);
                         console.log(ex.stack);
-                        console.log('exception in: '+this.parent.name);
-                        if(gui)gui.showOpCrash(this.parent);
+                        console.log(`exception in: ${this.parent.name}`);
+                        if (gui) gui.showOpCrash(this.parent);
 
-                        if(CABLES.UI) CABLES.UI.MODAL.showException(ex,this.parent);
+                        if (CABLES.UI) CABLES.UI.MODAL.showException(ex, this.parent);
                     }
 
-                    if(CABLES.UI && this.type==CABLES.OP_PORT_TYPE_TEXTURE )
+                    if (CABLES.UI && this.type == OP_PORT_TYPE_TEXTURE)
                     {
                         gui.texturePreview().updateTexturePort(this);
                     }
                 }
 
-                if(this.direction==CABLES.PORT_DIR_OUT)
-                    for (var i = 0; i < this.links.length; ++i)
-                        this.links[i].setValue();
+                if (this.direction == PORT_DIR_OUT) for (var i = 0; i < this.links.length; ++i) this.links[i].setValue();
             }
         }
     };
 
-    CABLES.Port.prototype.updateAnim=function()
+    Port.prototype.updateAnim = function ()
     {
-        if(this._animated)
+        if (this._animated)
         {
-            this.value=this.get();
+            this.value = this.get();
 
-            if(oldAnimVal!=this.value || this.changeAlways)
+            if (oldAnimVal != this.value || this.changeAlways)
             {
-                oldAnimVal=this.value;
+                oldAnimVal = this.value;
                 this.forceChange();
             }
-            oldAnimVal=this.value;
+            oldAnimVal = this.value;
         }
     };
 
-    CABLES.Port.args=function(func) { 
-        return (func + '')
-            .replace(/[/][/].*$/mg,'') // strip single-line comments
-            .replace(/\s+/g, '') // strip white space
-            .replace(/[/][*][^/*]*[*][/]/g, '') // strip multi-line comments  
-            .split('){', 1)[0].replace(/^[^(]*[(]/, '') // extract the parameters  
-            .replace(/=[^,]+/g, '') // strip any ES6 defaults  
-            .split(',').filter(Boolean); // split & filter [""]
-    }  
-
-
-    CABLES.Port.prototype.forceChange=function()
+    Port.args = function (func)
     {
-        if(this.onValueChanged || this.onChange)
+        return `${func}`
+            .replace(/[/][/].*$/gm, "") // strip single-line comments
+            .replace(/\s+/g, "") // strip white space
+            .replace(/[/][*][^/*]*[*][/]/g, "") // strip multi-line comments
+            .split("){", 1)[0]
+            .replace(/^[^(]*[(]/, "") // extract the parameters
+            .replace(/=[^,]+/g, "") // strip any ES6 defaults
+            .split(",")
+            .filter(Boolean); // split & filter [""]
+    };
+
+    Port.prototype.forceChange = function ()
+    {
+        if (this.onValueChanged || this.onChange)
         {
             // very temporary: deprecated warning!!!!!!!!!
-            // var params=CABLES.Port.args(this.onValueChanged||this.onChange)
+            // var params=Port.args(this.onValueChanged||this.onChange)
             // if(params.length>0) console.warn('TOM: port has onchange params!',this.parent.objName,this.name);
         }
-    
-        if(this.onChange) this.onChange(this,this.value);
-            else if(this.onValueChanged) this.onValueChanged(this,this.value); // deprecated
+
+        if (this.onChange) this.onChange(this, this.value);
+        else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
     };
 
     /**
@@ -271,43 +279,47 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @description get port type as string, e.g. "Function","Value"...
      * @return {String} type
      */
-    CABLES.Port.prototype.getTypeString=function()
+    Port.prototype.getTypeString = function ()
     {
-        if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Number';
-        else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Trigger';
-        else if(this.type==CABLES.OP_PORT_TYPE_OBJECT)return 'Object';
-        else if(this.type==CABLES.OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
-        else if(this.type==CABLES.OP_PORT_TYPE_ARRAY)return 'Array';
-        else if(this.type==CABLES.OP_PORT_TYPE_STRING)return 'String';
-        else return 'Unknown';
+        if (this.type == OP_PORT_TYPE_VALUE) return "Number";
+        if (this.type == OP_PORT_TYPE_FUNCTION) return "Trigger";
+        if (this.type == OP_PORT_TYPE_OBJECT) return "Object";
+        if (this.type == OP_PORT_TYPE_DYNAMIC) return "Dynamic";
+        if (this.type == OP_PORT_TYPE_ARRAY) return "Array";
+        if (this.type == OP_PORT_TYPE_STRING) return "String";
+        return "Unknown";
     };
 
-    CABLES.Port.prototype.getSerialized=function()
+    Port.prototype.getSerialized = function ()
     {
-        var obj={};
-        obj.name=this.getName();
+        var obj = {};
+        obj.name = this.getName();
 
-        if(!this.ignoreValueSerialize && this.links.length===0 )
+        if (!this.ignoreValueSerialize && this.links.length === 0)
         {
-            if(this.type==CABLES.OP_PORT_TYPE_OBJECT && this.value && this.value.tex){}
-                else obj.value=this.value;
-        }
-        if(this._animated) obj.animated=true;
-        if(this.anim) obj.anim=this.anim.getSerialized();
-        if(this.uiAttribs.display=='file')  obj.display=this.uiAttribs.display;
-        if(this.direction==CABLES.PORT_DIR_IN && this.links.length>0)
-        {
-            obj.links=[];
-            for(var i in this.links)
+            if (this.type == OP_PORT_TYPE_OBJECT && this.value && this.value.tex)
             {
-                if( this.links[i].portIn && this.links[i].portOut)
-                    obj.links.push( this.links[i].getSerialized() );
+            }
+            else obj.value = this.value;
+        }
+        if (this._animated) obj.animated = true;
+        if (this.anim) obj.anim = this.anim.getSerialized();
+        if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
+        if (this.direction == PORT_DIR_IN && this.links.length > 0)
+        {
+            obj.links = [];
+            for (var i in this.links)
+            {
+                if (this.links[i].portIn && this.links[i].portOut) obj.links.push(this.links[i].getSerialized());
             }
         }
         return obj;
     };
 
-    CABLES.Port.prototype.shouldLink=function(){return true;};
+    Port.prototype.shouldLink = function ()
+    {
+        return true;
+    };
 
     /**
      * @function removeLinks
@@ -315,16 +327,16 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description remove all links from port
      */
-    CABLES.Port.prototype.removeLinks=function()
+    Port.prototype.removeLinks = function ()
     {
-        var count=0;
-        while(this.links.length>0)
+        var count = 0;
+        while (this.links.length > 0)
         {
             count++;
-            if(count>5000)
+            if (count > 5000)
             {
-                console.warn('could not delete links... / infinite loop');
-                this.links.length=0;
+                console.warn("could not delete links... / infinite loop");
+                this.links.length = 0;
                 break;
             }
             this.links[0].remove();
@@ -338,18 +350,20 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @description remove all link from port
      * @param {CABLES.Link} link
      */
-    CABLES.Port.prototype.removeLink=function(link)
+    Port.prototype.removeLink = function (link)
     {
-        for(var i in this.links)
-            if(this.links[i]==link)
+        for (var i in this.links)
+        {
+            if (this.links[i] == link)
             {
                 this.links.splice(i, 1);
             }
+        }
 
-        if(this.direction==CABLES.PORT_DIR_IN)
+        if (this.direction == PORT_DIR_IN)
         {
-            if(this.type==CABLES.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
-                else this.setValue(this._valueBeforeLink || null);
+            if (this.type == OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
+            else this.setValue(this._valueBeforeLink || null);
         }
 
         // if (this.type == CABLES.OP_PORT_TYPE_OBJECT && this.direction == CABLES.PORT_DIR_IN && this.links.length > 0)
@@ -365,11 +379,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         //         this.set(this.links[i].portOut.get());
         //         console.log(this.get())
         //         // this.forceChange();
-                
+
         //     }
         // }
 
-        if(this.onLinkChanged)this.onLinkChanged();
+        if (this.onLinkChanged) this.onLinkChanged();
         this.emitEvent("onLinkChanged");
     };
 
@@ -379,16 +393,16 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description return port name
      */
-    CABLES.Port.prototype.getName= function()
+    Port.prototype.getName = function ()
     {
         return this.name;
     };
 
-    CABLES.Port.prototype.addLink=function(l)
+    Port.prototype.addLink = function (l)
     {
-        this._valueBeforeLink=this.value;
+        this._valueBeforeLink = this.value;
         this.links.push(l);
-        if(this.onLinkChanged)this.onLinkChanged();
+        if (this.onLinkChanged) this.onLinkChanged();
         this.emitEvent("onLinkChanged");
     };
 
@@ -399,11 +413,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @param {Port} otherPort
      * @description return link, which is linked to otherPort
      */
-    CABLES.Port.prototype.getLinkTo=function(p2)
+    Port.prototype.getLinkTo = function (p2)
     {
-        for(var i in this.links)
-            if(this.links[i].portIn==p2 || this.links[i].portOut==p2)
-                return this.links[i];
+        for (var i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return this.links[i];
     };
 
     /**
@@ -413,16 +425,18 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @param {Port} otherPort
      * @description removes link, which is linked to otherPort
      */
-    CABLES.Port.prototype.removeLinkTo=function(p2)
+    Port.prototype.removeLinkTo = function (p2)
     {
-        for(var i in this.links)
-            if(this.links[i].portIn==p2 || this.links[i].portOut==p2)
+        for (var i in this.links)
+        {
+            if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
             {
                 this.links[i].remove();
-                if(this.onLinkChanged)this.onLinkChanged();
+                if (this.onLinkChanged) this.onLinkChanged();
                 this.emitEvent("onLinkChanged");
                 return;
             }
+        }
     };
 
     /**
@@ -432,10 +446,9 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @param {Port} otherPort
      * @description returns true if port is linked to otherPort
      */
-    CABLES.Port.prototype.isLinkedTo=function(p2)
+    Port.prototype.isLinkedTo = function (p2)
     {
-        for(var i in this.links)
-            if(this.links[i].portIn==p2 || this.links[i].portOut==p2)return true;
+        for (var i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return true;
 
         return false;
     };
@@ -446,66 +459,66 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @description trigger the linked port (usually invoked on an output function port)
      */
-    CABLES.Port.prototype.trigger=function()
+    Port.prototype.trigger = function ()
     {
-        if(this.links.length===0)return;
-        if(!this.parent.enabled)return;
+        if (this.links.length === 0) return;
+        if (!this.parent.enabled) return;
 
-        var portTriggered=null;
+        var portTriggered = null;
         try
         {
             for (var i = 0; i < this.links.length; ++i)
             {
-                if(this.links[i].portIn)
+                if (this.links[i].portIn)
                 {
-                    portTriggered=this.links[i].portIn;
+                    portTriggered = this.links[i].portIn;
                     portTriggered._onTriggered();
                 }
                 this.links[i].activity();
             }
         }
-        catch(ex)
+        catch (ex)
         {
-            this.parent.enabled=false;
+            this.parent.enabled = false;
 
-            if(CABLES.UI)
-{
- CABLES.UI.MODAL.showException(ex,portTriggered.parent);
+            if (CABLES.UI)
+            {
+                CABLES.UI.MODAL.showException(ex, portTriggered.parent);
 
-            if(window.gui)gui.showOpCrash(portTriggered.parent);
-}
-            console.log('exception!');
-            console.error('ontriggered exception cought',ex);
+                if (window.gui) gui.showOpCrash(portTriggered.parent);
+            }
+            console.log("exception!");
+            console.error("ontriggered exception cought", ex);
             console.log(ex.stack);
-            console.log('exception in: '+portTriggered.parent.name);
+            console.log(`exception in: ${portTriggered.parent.name}`);
         }
     };
 
-    CABLES.Port.prototype.call=function()
+    Port.prototype.call = function ()
     {
-        console.log('call deprecated - use trigger() ');
+        console.log("call deprecated - use trigger() ");
         this.trigger();
     };
 
-    CABLES.Port.prototype.execute=function()
+    Port.prototype.execute = function ()
     {
-        console.log('### execute port: '+this.getName() , this.goals.length);
+        console.log(`### execute port: ${this.getName()}`, this.goals.length);
     };
 
-    CABLES.Port.prototype.setAnimated=function(a)
+    Port.prototype.setAnimated = function (a)
     {
-        if(this._animated!=a)
+        if (this._animated != a)
         {
-            this._animated=a;
-            if(this._animated && !this.anim)this.anim=new CABLES.Anim();
+            this._animated = a;
+            if (this._animated && !this.anim) this.anim = new Anim();
             this._onAnimToggle();
         }
     };
 
-    CABLES.Port.prototype.toggleAnim=function(val)
+    Port.prototype.toggleAnim = function (val)
     {
-        this._animated=!this._animated;
-        if(this._animated && !this.anim)this.anim=new CABLES.Anim();
+        this._animated = !this._animated;
+        if (this._animated && !this.anim) this.anim = new Anim();
         this.setAnimated(this._animated);
         this._onAnimToggle();
     };
@@ -520,12 +533,15 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * CABLES.OP_PORT_TYPE_DYNAMIC = 4;
      * CABLES.OP_PORT_TYPE_STRING = 5;
      * </pre>
-    * @function getType
+     * @function getType
      * @memberof Port
      * @instance
      * @return {Number} type of port
      */
-    CABLES.Port.prototype.getType=function(){ return this.type; };
+    Port.prototype.getType = function ()
+    {
+        return this.type;
+    };
 
     /**
      * @function isLinked
@@ -533,7 +549,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @return {Boolean} true if port is linked
      */
-    CABLES.Port.prototype.isLinked=function(){ return this.links.length>0; };
+    Port.prototype.isLinked = function ()
+    {
+        return this.links.length > 0;
+    };
 
     /**
      * @function isAnimated
@@ -541,11 +560,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @return {Boolean} true if port is animated
      */
-    CABLES.Port.prototype.isAnimated=function()
+    Port.prototype.isAnimated = function ()
     {
         return this._animated;
     };
-
 
     /**
      * @function isHidden
@@ -553,12 +571,10 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @return {Boolean} true if port is hidden
      */
-    CABLES.Port.prototype.isHidden=function()
+    Port.prototype.isHidden = function ()
     {
         return this.uiAttribs.hidePort;
     };
-    
-
 
     /**
      * @function onTriggered
@@ -567,55 +583,58 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @param {onTriggeredCallback} callback
      * @description set callback, which will be executed when port was triggered (usually output port)
      */
-    CABLES.Port.prototype._onTriggered=function()
+    Port.prototype._onTriggered = function ()
     {
         this.parent.updateAnims();
-        if(this.parent.enabled && this.onTriggered) this.onTriggered();
+        if (this.parent.enabled && this.onTriggered) this.onTriggered();
     };
 
-    CABLES.Port.prototype._onTriggeredProfiling=function()
+    Port.prototype._onTriggeredProfiling = function ()
     {
         this.parent.updateAnims();
-        this.parent.patch.profiler.add("port",this);
+        this.parent.patch.profiler.add("port", this);
 
-        if(this.parent.enabled && this.onTriggered) this.onTriggered();
-        this.parent.patch.profiler.add("port",null);
+        if (this.parent.enabled && this.onTriggered) this.onTriggered();
+        this.parent.patch.profiler.add("port", null);
     };
 
-    CABLES.Port.prototype.onValueChange=function(cb)
+    Port.prototype.onValueChange = function (cb)
     {
         // deprecated
-        this.onChange=cb;
+        this.onChange = cb;
     };
 
-    CABLES.Port.prototype.getUiActiveState=function()
+    Port.prototype.getUiActiveState = function ()
     {
         return this._uiActiveState;
     };
 
-    CABLES.Port.prototype.setUiActiveState=function(onoff)
+    Port.prototype.setUiActiveState = function (onoff)
     {
-        _uiActiveState=onoff;
-        if(this.onUiActiveStateChange)this.onUiActiveStateChange();
+        _uiActiveState = onoff;
+        if (this.onUiActiveStateChange) this.onUiActiveStateChange();
     };
 }
 
 /**
-* Returns the port type string, e.g. "value" based on the port type number
-* @function portTypeNumberToString
-* @instance
-* @memberof Port
-* @param {Number} type - The port type number
-* @returns {String} - The port type as string
-*/
-CABLES.Port.portTypeNumberToString = function(type) {
-   if(type == CABLES.OP_PORT_TYPE_VALUE) return 'value';
-   else if(type == CABLES.OP_PORT_TYPE_FUNCTION) return 'function';
-   else if(type == CABLES.OP_PORT_TYPE_OBJECT) return 'object';
-   else if (type == CABLES.OP_PORT_TYPE_ARRAY) return 'array';
-   else if (type == CABLES.OP_PORT_TYPE_STRING) return 'string';
-   else if(type == CABLES.OP_PORT_TYPE_DYNAMIC) return 'dynamic';
-   else return 'unknown';
+ * Returns the port type string, e.g. "value" based on the port type number
+ * @function portTypeNumberToString
+ * @instance
+ * @memberof Port
+ * @param {Number} type - The port type number
+ * @returns {String} - The port type as string
+ */
+Port.portTypeNumberToString = function (type)
+{
+    if (type == OP_PORT_TYPE_VALUE) return "value";
+    if (type == OP_PORT_TYPE_FUNCTION) return "function";
+    if (type == OP_PORT_TYPE_OBJECT) return "object";
+    if (type == OP_PORT_TYPE_ARRAY) return "array";
+    if (type == OP_PORT_TYPE_STRING) return "string";
+    if (type == OP_PORT_TYPE_DYNAMIC) return "dynamic";
+    return "unknown";
 };
 
-// var Port = CABLES.Port; // TODO deprecated.. remove one day...
+// var Port = Port; // TODO deprecated.. remove one day...
+
+export default Port;

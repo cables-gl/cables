@@ -5,13 +5,14 @@
  * @namespace Utils
  */
 
-var CABLES=CABLES || {};
-CABLES.UTILS={};
-CGL=CGL || {};
+// var CABLES=CABLES || {};
+// CABLES.UTILS={};
+// CGL=CGL || {};
 
+
+const UTILS = {};
 /**
  * Merge two Float32Arrays.
-
  * @function float32Concat
  * @memberof Utils
  * @param {Float32Array} first Left-hand side array
@@ -19,7 +20,7 @@ CGL=CGL || {};
  * @return {Float32Array}
  * @static
  */
-CABLES.UTILS.float32Concat=function(first, second)
+UTILS.float32Concat=function(first, second)
 {
     if(!(first instanceof Float32Array))first=new Float32Array(first);
     if(!(second instanceof Float32Array))second=new Float32Array(second);
@@ -41,7 +42,7 @@ CABLES.UTILS.float32Concat=function(first, second)
  * @return {Array|Float32Array} shuffled array
  * @static
  */
-CABLES.shuffleArray=function(array) {
+export const shuffleArray=function(array) {
     for (var i = array.length - 1; i > 0; i--) {
         var j = Math.floor(Math.seededRandom() * (i + 1));
         var temp = array[i];
@@ -51,15 +52,7 @@ CABLES.shuffleArray=function(array) {
     return array;
 }
 
-
-/**
- * generate a UUID
- * @function uuid
- * @memberof Utils
- * @return {String} generated UUID
- * @static
- */
-CABLES.generateUUID=CABLES.uuid=function()
+const _uuid =function()
 {
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
@@ -70,6 +63,15 @@ CABLES.generateUUID=CABLES.uuid=function()
     });
     return uuid;
 };
+/**
+ * generate a UUID
+ * @function uuid
+ * @memberof Utils
+ * @return {String} generated UUID
+ * @static
+ */
+export const uuid = _uuid;
+export const generateUUID = _uuid;
 
 /**
  * generate a simple ID 
@@ -78,11 +80,11 @@ CABLES.generateUUID=CABLES.uuid=function()
  * @return {Number} new id
  * @static
  */
-CABLES.simpleIdCounter=0;
-CABLES.simpleId=function()
+var simpleIdCounter=0;
+export const simpleId=function()
 {
-    CABLES.simpleIdCounter++;
-    return CABLES.simpleIdCounter;
+    simpleIdCounter++;
+    return simpleIdCounter;
 };
 
 /**
@@ -94,7 +96,7 @@ CABLES.simpleId=function()
  * @return {Number} smoothed value
  * @static
  */
-CABLES.smoothStep=function(perc)
+export const smoothStep=function(perc)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     perc= x*x*(3 - 2*x); // smoothstep
@@ -109,7 +111,7 @@ CABLES.smoothStep=function(perc)
  * @return {Number} smoothed value
  * @static
  */
-CABLES.smootherStep=function(perc)
+export const smootherStep=function(perc)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
@@ -128,7 +130,7 @@ CABLES.smootherStep=function(perc)
  * @return {Number} mapped value
  * @static
  */
-CABLES.map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
+export const map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 {
     if(x>=_oldMax) return _newMax;
     if(x<=_oldMin) return _newMin;
@@ -203,7 +205,7 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
-CABLES.UTILS.arrayWriteToEnd=function(arr,v)
+UTILS.arrayWriteToEnd=function(arr,v)
 {
     for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
     arr[arr.length-1]=v;
@@ -219,7 +221,7 @@ CABLES.UTILS.arrayWriteToEnd=function(arr,v)
  * @return {Boolean}
  * @static
  */
-CABLES.UTILS.isNumeric=function(n)
+UTILS.isNumeric=function(n)
 {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
@@ -232,7 +234,7 @@ CABLES.UTILS.isNumeric=function(n)
  * @return {Boolean}
  * @static
  */
-CABLES.UTILS.isArray = function(v)
+UTILS.isArray = function(v)
 {
     return Object.prototype.toString.call(v) === '[object Array]';
 };
@@ -281,17 +283,18 @@ String.prototype.endsWith = function(suffix) {
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
-CABLES.cacheBust=function(url)
+export const cacheBust=function(url)
 {
     if(url.indexOf('?')>-1) url+='&'; else url+='?';
     return url+'cb='+CABLES.uuid();
 }
 
-CABLES.jsonp=function(url,cb)
+var jsonpCounter=null;
+export const jsonp= function(url,cb) 
 {
-    CABLES.jsonpCounter=CABLES.jsonpCounter||0;
-    CABLES.jsonpCounter++;
-    var jsonPID=CABLES.jsonpCounter;
+    jsonpCounter=jsonpCounter||0;
+    jsonpCounter++;
+    var jsonPID=jsonpCounter;
 
     console.log('making jsonp request...');
 
@@ -300,7 +303,6 @@ CABLES.jsonp=function(url,cb)
         console.log(data);
         cb(false, data);
     };
-
 
     var paramChar='?';
     if(url.indexOf(paramChar)>-1)paramChar='&';
@@ -314,9 +316,9 @@ CABLES.jsonp=function(url,cb)
 
 };
 
-CABLES.ajaxSync=function(url,cb,method,post,contenttype)
+export const ajaxSync=function(url,cb,method,post,contenttype)
 {
-    CABLES.request(
+    request(
         {
             "url":url,
             "cb":cb,
@@ -327,9 +329,9 @@ CABLES.ajaxSync=function(url,cb,method,post,contenttype)
         });
 };
 
-CABLES.ajax=function(url,cb,method,post,contenttype,jsonp)
+export const ajax=function(url,cb,method,post,contenttype,jsonp)
 {
-    CABLES.request(
+    request(
         {
             "url":url,
             "cb":cb,
@@ -341,7 +343,7 @@ CABLES.ajax=function(url,cb,method,post,contenttype,jsonp)
         });
 };
 
-CABLES.request=function(options)
+export const request=function(options)
 {
     if(!options.hasOwnProperty('asynch'))options.asynch=true;
 
@@ -382,56 +384,7 @@ CABLES.request=function(options)
     }
 };
 
-/** 
- * multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
- * @constant {Number}
- * @description 
- */
-CGL.DEG2RAD=Math.PI/180.0;
-
-/** 
- * @constant {number} 
- * @description to get degrees from radians, e.g. `3.14 * CGL.RAD2DEG` 
- */
-CGL.RAD2DEG=180.0/Math.PI;
-
-CGL.onLoadingAssetsFinished=null; // deprecated / remove later
-
-/**
- * get normalized mouse wheel delta (including browser specific adjustment)
- * @function getWheelDelta
- * @static
- * @external CGL
- * @param {MouseEvent} event
- * @return {Number} normalized delta
- */
-CGL.isWindows=window.navigator.userAgent.indexOf("Windows") != -1;
-CGL.getWheelSpeed=CGL.getWheelDelta=function(event)
-{
-    var normalized;
-    if (event.wheelDelta)
-    {
-        //chrome
-        normalized = (event.wheelDelta % 120 - 0) == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
-        normalized*=-1.5;
-        if(CGL.isWindows)normalized*=2;
-    }
-    else
-    {
-        //firefox
-        var d=event.deltaY;
-        if(event.shiftKey)d=event.deltaX;
-        var rawAmmount = d ? d : event.detail;
-        normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
-        normalized*=-3;
-    }
-
-    if(normalized>20)normalized=20;
-    if(normalized<-20)normalized=-20;
-
-    return normalized;
-};
-
+export { UTILS };
 // ----------------------------------------------------------------
 
 window.performance = (window.performance ||
@@ -439,3 +392,4 @@ window.performance = (window.performance ||
     offset: Date.now(),
     now: function now(){ return Date.now() - this.offset; }
 });
+

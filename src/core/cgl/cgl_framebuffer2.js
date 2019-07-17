@@ -1,11 +1,9 @@
+import Texture from "./cgl_texture";
+// var CGL=CGL || {};
 
-var CGL=CGL || {};
 
-CGL.Framebuffer2DrawTargetsDefault=null;
-CGL.Framebuffer2BlittingFramebuffer=null;
-CGL.Framebuffer2FinalFramebuffer=null;
 
-CGL.Framebuffer2=function(cgl,w,h,options)
+const Framebuffer2=function(cgl,w,h,options)
 {
     this._cgl=cgl;
 
@@ -18,10 +16,10 @@ CGL.Framebuffer2=function(cgl,w,h,options)
     this._colorRenderbuffers=[];
     this._drawTargetArray=[];
     
-    if(!CGL.Framebuffer2BlittingFramebuffer)CGL.Framebuffer2BlittingFramebuffer=cgl.gl.createFramebuffer();
-    if(!CGL.Framebuffer2FinalFramebuffer)CGL.Framebuffer2FinalFramebuffer=cgl.gl.createFramebuffer();
+    if(!Framebuffer2BlittingFramebuffer)Framebuffer2BlittingFramebuffer=cgl.gl.createFramebuffer();
+    if(!Framebuffer2FinalFramebuffer)Framebuffer2FinalFramebuffer=cgl.gl.createFramebuffer();
     
-    if(!CGL.Framebuffer2DrawTargetsDefault)CGL.Framebuffer2DrawTargetsDefault=[cgl.gl.COLOR_ATTACHMENT0];
+    if(!Framebuffer2DrawTargetsDefault)Framebuffer2DrawTargetsDefault=[cgl.gl.COLOR_ATTACHMENT0];
 
     this._options=options ||
         {
@@ -38,14 +36,14 @@ CGL.Framebuffer2=function(cgl,w,h,options)
         this._options.multisamplingSamples=0;
     }
 
-    if(!this._options.hasOwnProperty('filter')) this._options.filter=CGL.Texture.FILTER_LINEAR;
+    if(!this._options.hasOwnProperty('filter')) this._options.filter=Texture.FILTER_LINEAR;
 
     this._numRenderBuffers=this._options.numRenderBuffers;
     this._colorTextures=[];
 
     for(var i=0;i<this._numRenderBuffers;i++)
     {
-        this._colorTextures[i]=new CGL.Texture(cgl,
+        this._colorTextures[i]=new Texture(cgl,
             {
                 "name":"framebuffer2 texture "+i,
                 "isFloatingPointTexture":this._options.isFloatingPointTexture,
@@ -54,10 +52,10 @@ CGL.Framebuffer2=function(cgl,w,h,options)
             });
     }
 
-    var fil=CGL.Texture.FILTER_NEAREST;
-    if(this._options.shadowMap)fil=CGL.Texture.FILTER_LINEAR;
+    var fil=Texture.FILTER_NEAREST;
+    if(this._options.shadowMap)fil=Texture.FILTER_LINEAR;
 
-    this._textureDepth=new CGL.Texture(cgl,
+    this._textureDepth=new Texture(cgl,
         {
             "name":"framebuffer2 depth texture",
             "isDepthTexture":true,
@@ -68,35 +66,35 @@ CGL.Framebuffer2=function(cgl,w,h,options)
     this.setSize(w||512 ,h||512);
 };
 
-CGL.Framebuffer2.prototype.getWidth=function(){ return this._width; };
-CGL.Framebuffer2.prototype.getHeight=function(){ return this._height; };
+Framebuffer2.prototype.getWidth=function(){ return this._width; };
+Framebuffer2.prototype.getHeight=function(){ return this._height; };
 
-CGL.Framebuffer2.prototype.getGlFrameBuffer=function()
+Framebuffer2.prototype.getGlFrameBuffer=function()
 {
     return this._frameBuffer;
 }
 
-CGL.Framebuffer2.prototype.getDepthRenderBuffer=function()
+Framebuffer2.prototype.getDepthRenderBuffer=function()
 {
     return this._depthRenderbuffer;
 }
 
-CGL.Framebuffer2.prototype.getTextureColor=function()
+Framebuffer2.prototype.getTextureColor=function()
 {
     return this._colorTextures[0];
 };
 
-CGL.Framebuffer2.prototype.getTextureColorNum=function(i)
+Framebuffer2.prototype.getTextureColorNum=function(i)
 {
     return this._colorTextures[i];
 };
 
-CGL.Framebuffer2.prototype.getTextureDepth=function()
+Framebuffer2.prototype.getTextureDepth=function()
 {
     return this._textureDepth;
 };
 
-CGL.Framebuffer2.prototype.setFilter=function(f)
+Framebuffer2.prototype.setFilter=function(f)
 {
     for(var i=0;i<this._numRenderBuffers;i++)
     {
@@ -105,8 +103,8 @@ CGL.Framebuffer2.prototype.setFilter=function(f)
     }
 };
 
-CGL.Framebuffer2.prototype.delete=
-CGL.Framebuffer2.prototype.dispose=function()
+Framebuffer2.prototype.delete=
+Framebuffer2.prototype.dispose=function()
 {
     for(var i=0;i<this._numRenderBuffers;i++) this._colorTextures[i].delete();
     // this._texture.delete();
@@ -118,7 +116,7 @@ CGL.Framebuffer2.prototype.dispose=function()
 };
 
 
-CGL.Framebuffer2.prototype.setSize=function(w,h)
+Framebuffer2.prototype.setSize=function(w,h)
 {
     this._width=Math.floor(w);
     this._height=Math.floor(h);
@@ -269,7 +267,7 @@ CGL.Framebuffer2.prototype.setSize=function(w,h)
 
 
 
-CGL.Framebuffer2.prototype.renderStart=function()
+Framebuffer2.prototype.renderStart=function()
 {
     this._cgl.pushModelMatrix(); // needed ??
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
@@ -288,7 +286,7 @@ CGL.Framebuffer2.prototype.renderStart=function()
     }
 };
 
-CGL.Framebuffer2.prototype.renderEnd=function()
+Framebuffer2.prototype.renderEnd=function()
 {
     this._cgl.popPMatrix();
 
@@ -308,24 +306,24 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     }
     else
     {
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, CGL.Framebuffer2BlittingFramebuffer);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
 
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, CGL.Framebuffer2FinalFramebuffer);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2FinalFramebuffer);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.TEXTURE_2D, this._textureDepth.tex, 0);
 
         for(var i=0;i<this._numRenderBuffers;i++)
         {
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, CGL.Framebuffer2BlittingFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
             this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, CGL.Framebuffer2FinalFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2FinalFramebuffer);
             this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
 
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, CGL.Framebuffer2BlittingFramebuffer);
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, CGL.Framebuffer2FinalFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, Framebuffer2FinalFramebuffer);
     
             this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
 
@@ -346,7 +344,7 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     this._cgl.popModelMatrix();
     this._cgl.resetViewPort();
 
-    if(this._colorTextures[0].filter==CGL.Texture.FILTER_MIPMAP)
+    if(this._colorTextures[0].filter==Texture.FILTER_MIPMAP)
     {
         for(var i=0;i<this._numRenderBuffers;i++)
         {
@@ -357,3 +355,5 @@ CGL.Framebuffer2.prototype.renderEnd=function()
     }
 
 };
+
+export default Framebuffer2;

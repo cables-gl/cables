@@ -1,20 +1,20 @@
 
-var CABLES=CABLES||{};
+// var CABLES=CABLES||{};
 
-CABLES.Instancing=function()
+const Instancing=function()
 {
     this._loops=[];
     this._indizes=[];
     this._index=0;
 };
 
-CABLES.Instancing.prototype.pushLoop=function(maxNum)
+Instancing.prototype.pushLoop=function(maxNum)
 {
     this._loops.push( Math.abs(Math.floor(maxNum)) );
     this._indizes.push( this._index);
 };
 
-CABLES.Instancing.prototype.popLoop=function()
+Instancing.prototype.popLoop=function()
 {
     this._loops.pop();
     // this._index--;
@@ -22,12 +22,12 @@ CABLES.Instancing.prototype.popLoop=function()
     if(this._loops.length===0) this._index=0;
 };
 
-CABLES.Instancing.prototype.numLoops=function()
+Instancing.prototype.numLoops=function()
 {
     return this._loops.length;
 };
 
-CABLES.Instancing.prototype.numCycles=function()
+Instancing.prototype.numCycles=function()
 {
     if(this._loops.length===0)return 0;
     var num=this._loops[0];
@@ -37,17 +37,19 @@ CABLES.Instancing.prototype.numCycles=function()
     return num;
 };
 
-CABLES.Instancing.prototype.inLoop=function()
+Instancing.prototype.inLoop=function()
 {
     return this._loops.length>0;
 };
 
-CABLES.Instancing.prototype.increment=function()
+Instancing.prototype.increment=function()
 {
     this._index++;
 };
 
-CABLES.Instancing.prototype.index=function()
+Instancing.prototype.index=function()
 {
     return this._index;
 };
+
+export default Instancing;

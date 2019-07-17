@@ -1,3 +1,4 @@
+import Texture from "./cgl_texture";
 /**
  * a framebuffer
  * @external CGL
@@ -9,9 +10,9 @@
  * @param {Object} [options]
  */
 
-var CGL=CGL || {};
+// var CGL=CGL || {};
 
-CGL.Framebuffer=function(_cgl,w,h,options)
+const Framebuffer =function(_cgl,w,h,options)
 {
     var cgl=_cgl;
 
@@ -30,18 +31,18 @@ CGL.Framebuffer=function(_cgl,w,h,options)
         "isFloatingPointTexture":false
     };
 
-    if(!options.hasOwnProperty('filter')) options.filter=CGL.Texture.FILTER_LINEAR;
+    if(!options.hasOwnProperty('filter')) options.filter= Texture.FILTER_LINEAR;
     
-    var texture=new CGL.Texture(cgl,
+    var texture=new Texture(cgl,
         {
             "isFloatingPointTexture":options.isFloatingPointTexture,
             "filter":options.filter,
-            "wrap":CGL.Texture.CLAMP_TO_EDGE
+            "wrap":Texture.CLAMP_TO_EDGE
         });
 
     var textureDepth=null;
     if(depthTextureExt)
-        textureDepth=new CGL.Texture(cgl,
+        textureDepth=new Texture(cgl,
             {
                 "isDepthTexture":true
             });
@@ -203,3 +204,5 @@ CGL.Framebuffer=function(_cgl,w,h,options)
 
     this.setSize(width,height);
 };
+
+export default Framebuffer;

@@ -1,8 +1,11 @@
-CABLES=CABLES||{};
+import Geometry from "./cgl_geom";
+import Mesh from "./cgl_mesh";
+import Shader from "./cgl_shader";
+import { DEG2RAD } from "./cgl_utils";
 
-CGL.Marker=function(cgl)
+export const Marker=function(cgl)
 {
-    var geom=new CGL.Geometry("marker");
+    var geom=new Geometry("marker");
     geom.setPointVertices(
         [
             0.00001, 0, 0,   1,0,0,
@@ -82,7 +85,7 @@ CGL.Marker=function(cgl)
 
 
 
-CGL.WirePoint=function(cgl,size)
+export const WirePoint=function(cgl,size)
 {
     var buffer = cgl.gl.createBuffer();
     var vScale=vec3.create();
@@ -96,7 +99,7 @@ CGL.WirePoint=function(cgl,size)
 
         for (i=0; i <= Math.round(segments); i++)
         {
-            degInRad = (360.0/Math.round(segments))*i*CGL.DEG2RAD;
+            degInRad = (360.0/Math.round(segments))*i*DEG2RAD;
             points.push(Math.cos(degInRad)*radius);
             points.push(0);
             points.push(Math.sin(degInRad)*radius);
@@ -104,7 +107,7 @@ CGL.WirePoint=function(cgl,size)
 
         for (i=0; i <= Math.round(segments); i++)
         {
-            degInRad = (360.0/Math.round(segments))*i*CGL.DEG2RAD;
+            degInRad = (360.0/Math.round(segments))*i*DEG2RAD;
             points.push(Math.cos(degInRad)*radius);
             points.push(Math.sin(degInRad)*radius);
             points.push(0);
@@ -112,7 +115,7 @@ CGL.WirePoint=function(cgl,size)
 
         for (i=0; i <= Math.round(segments); i++)
         {
-            degInRad = (360.0/Math.round(segments))*i*CGL.DEG2RAD;
+            degInRad = (360.0/Math.round(segments))*i*DEG2RAD;
             points.push(0);
             points.push(Math.cos(degInRad)*radius);
             points.push(Math.sin(degInRad)*radius);
@@ -152,7 +155,7 @@ CGL.WirePoint=function(cgl,size)
 };
 
 
-CGL.WireCube=function(cgl)
+export const WireCube=function(cgl)
 {
     var buffer = cgl.gl.createBuffer();
     var vScale=vec3.create();
@@ -220,3 +223,4 @@ CGL.WireCube=function(cgl)
     bufferData();
 
 };
+

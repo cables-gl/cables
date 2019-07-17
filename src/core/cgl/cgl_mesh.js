@@ -1,7 +1,11 @@
 
-var CGL=CGL || {};
-CGL.MESH=CGL.MESH || {};
-CGL.MESH.lastMesh=null;
+// var CGL=CGL || {};
+// CGL.MESH=CGL.MESH || {};
+
+const MESH = {};
+MESH.lastMesh=null;
+
+export { MESH };
 
 
 
@@ -23,7 +27,7 @@ CGL.MESH.lastMesh=null;
  *   mesh.render(cgl.getShader());	
  * }
  */
-CGL.Mesh=function(_cgl,__geom,glPrimitive)
+const Mesh=function(_cgl,__geom,glPrimitive)
 {
     this._cgl=_cgl;
     this._bufVertexAttrib = null;
@@ -61,12 +65,12 @@ CGL.Mesh=function(_cgl,__geom,glPrimitive)
  * @description update vertices only from a geometry
  * @param {Geometry} geometry
  */
-CGL.Mesh.prototype.updateVertices=function(geom)
+Mesh.prototype.updateVertices=function(geom)
 {
     this.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,geom.vertices,3);
 };
 
-CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
+Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
 {
     for(var i=0;i<this._attributes.length;i++)
     {
@@ -85,7 +89,7 @@ CGL.Mesh.prototype.setAttributePointer=function(attrName,name,stride,offset)
     }
 };
 
-CGL.Mesh.prototype.getAttribute=function(name)
+Mesh.prototype.getAttribute=function(name)
 {
     for(var i=0;i<this._attributes.length;i++)
         if(this._attributes[i].name==name)
@@ -103,9 +107,9 @@ CGL.Mesh.prototype.getAttribute=function(name)
  * @param {Number} itemSize
  * @param {Object} options
  */
-CGL.Mesh.prototype.addAttribute=
-CGL.Mesh.prototype.updateAttribute=
-CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
+Mesh.prototype.addAttribute=
+Mesh.prototype.updateAttribute=
+Mesh.prototype.setAttribute=function(name,array,itemSize,options)
 {
     var floatArray=null;
     var cb=null;
@@ -182,7 +186,7 @@ CGL.Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     return attr;
 };
 
-CGL.Mesh.prototype.getAttributes=function()
+Mesh.prototype.getAttributes=function()
 {
     return this._attributes;
 };
@@ -194,7 +198,7 @@ CGL.Mesh.prototype.getAttributes=function()
  * @instance
  * @param {Geometry} geometry
  */
-CGL.Mesh.prototype.updateTexCoords=function(geom)
+Mesh.prototype.updateTexCoords=function(geom)
 {
     if(geom.texCoords && geom.texCoords.length>0)
     {
@@ -207,7 +211,7 @@ CGL.Mesh.prototype.updateTexCoords=function(geom)
     }
 };
 
-CGL.Mesh.prototype._setVertexNumbers=function()
+Mesh.prototype._setVertexNumbers=function()
 {
     var numVerts=this._geom.vertices.length/3;
 
@@ -226,7 +230,7 @@ CGL.Mesh.prototype._setVertexNumbers=function()
    }
 };
 
-CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
+Mesh.prototype.setVertexIndices=function(vertIndices)
 {
     if(vertIndices.length>0)
     {
@@ -261,7 +265,7 @@ CGL.Mesh.prototype.setVertexIndices=function(vertIndices)
  * @description set geometry for mesh
  * @param {Geometry} geometry
  */
-CGL.Mesh.prototype.setGeom=function(geom)
+Mesh.prototype.setGeom=function(geom)
 {
     this._geom=geom;
 
@@ -291,7 +295,7 @@ CGL.Mesh.prototype.setGeom=function(geom)
     }
 };
 
-CGL.Mesh.prototype._preBind=function(shader)
+Mesh.prototype._preBind=function(shader)
 {
     for(var i=0;i<this._attributes.length;i++)
     {
@@ -302,7 +306,7 @@ CGL.Mesh.prototype._preBind=function(shader)
     }
 };
 
-CGL.Mesh.prototype._bind=function(shader)
+Mesh.prototype._bind=function(shader)
 {
     if(shader!=this._lastShader)this.unBind();
     var attrLocs=[];
@@ -397,7 +401,7 @@ CGL.Mesh.prototype._bind=function(shader)
     if(this._bufVerticesIndizes.numItems!==0) this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 };
 
-CGL.Mesh.prototype.unBind=function()
+Mesh.prototype.unBind=function()
 {
     var shader=this._lastShader;
     this._lastShader=null;
@@ -436,12 +440,12 @@ CGL.Mesh.prototype.unBind=function()
     }
 };
 
-CGL.Mesh.prototype.meshChanged=function()
+Mesh.prototype.meshChanged=function()
 {
     return (this._cgl.lastMesh && ( this._cgl.lastMesh!=this ));
 };
 
-CGL.Mesh.prototype.printDebug=function(shader)
+Mesh.prototype.printDebug=function(shader)
 {
     console.log("--attributes");
     for(i=0;i<this._attributes.length;i++)
@@ -450,7 +454,7 @@ CGL.Mesh.prototype.printDebug=function(shader)
     }
 };
 
-CGL.Mesh.prototype.setNumVertices=function(num)
+Mesh.prototype.setNumVertices=function(num)
 {
     this._bufVertexAttrib.numItems=num;
 };
@@ -462,7 +466,7 @@ CGL.Mesh.prototype.setNumVertices=function(num)
  * @description draw mesh to screen
  * @param {Shader} shader
  */
-CGL.Mesh.prototype.render=function(shader)
+Mesh.prototype.render=function(shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
@@ -539,7 +543,7 @@ CGL.Mesh.prototype.render=function(shader)
     }    
 };
 
-CGL.Mesh.prototype.setNumInstances=function(n)
+Mesh.prototype.setNumInstances=function(n)
 {
     this._numInstances=n;
     if(n>0)
@@ -550,7 +554,7 @@ CGL.Mesh.prototype.setNumInstances=function(n)
     }
 }
 
-CGL.Mesh.prototype._disposeAttributes=function()
+Mesh.prototype._disposeAttributes=function()
 {
     if(!this._attributes) return;
 
@@ -565,7 +569,7 @@ CGL.Mesh.prototype._disposeAttributes=function()
     this._attributes.length=0;
 }
 
-CGL.Mesh.prototype.dispose=function()
+Mesh.prototype.dispose=function()
 {
     if(this._bufVertexAttrib && this._bufVertexAttrib.buffer) this._cgl.gl.deleteBuffer( this._bufVertexAttrib.buffer );
     if(this._bufVerticesIndizes) this._cgl.gl.deleteBuffer( this._bufVerticesIndizes );
@@ -573,3 +577,6 @@ CGL.Mesh.prototype.dispose=function()
     this._disposeAttributes();
 
 };
+
+
+export default Mesh;

@@ -1,4 +1,16 @@
-var CABLES = CABLES || {};
+import EventTarget from "./0_eventtarget";
+import { ajax, uuid, ajaxSync } from "./0_utils";
+import LoadingStatus from "./loadingstatus";
+import Instancing from "./instancing";
+import Timer from "./timer";
+import Link from "./core_link";
+import Profiler from "./core_profiler";
+import { Anim, ANIM } from "./anim";
+import { OP_PORT_TYPE_TEXTURE } from "./core_op";
+import Requirements from "./requirements";
+import CGL from "./cgl";
+
+// var CABLES = CABLES || {};
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch 
@@ -24,14 +36,14 @@ var CABLES = CABLES || {};
 
 
 
-CABLES.Patch = function(cfg) {
+const Patch = function(cfg) {
 
-    CABLES.EventTarget.apply(this);
+    EventTarget.apply(this);
 
     this.ops = [];
     this.settings = {};
-    this.timer = new CABLES.Timer();
-    this.freeTimer = new CABLES.Timer();
+    this.timer = new Timer();
+    this.freeTimer = new Timer();
     this.animFrameOps = [];
     this.animFrameCallbacks = [];
     this.gui = false;
@@ -40,7 +52,7 @@ CABLES.Patch = function(cfg) {
     this.onLoadStart = null;
     this.onLoadEnd = null;
     this.aborted = false;
-    this.loading = new CABLES.LoadingStatus(this);
+    this.loading = new LoadingStatus(this);
     this._crashedOps=[];
 
     this._fps=0;
@@ -51,7 +63,7 @@ CABLES.Patch = function(cfg) {
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
-    this.instancing = new CABLES.Instancing();
+    this.instancing = new Instancing();
     this.onOneFrameRendered=null;
     this.namedTriggers={};
 
@@ -103,7 +115,7 @@ CABLES.Patch = function(cfg) {
             this.timer.play();
         } else
         if (this.config.patchFile) {
-            CABLES.ajax(this.config.patchFile, function(err, _data) {
+            ajax(this.config.patchFile, function(err, _data) {
                 var data = JSON.parse(_data);
                 if (err) {
                     var txt = '';
@@ -124,11 +136,11 @@ CABLES.Patch = function(cfg) {
     console.log('made with https://cables.gl')
 };
 
-CABLES.Patch.prototype.isPlaying = function() {
+Patch.prototype.isPlaying = function() {
     return !this._paused;
 };
 
-CABLES.Patch.prototype.renderOneFrame = function() {
+Patch.prototype.renderOneFrame = function() {
     this._paused=true;
     this._renderOneFrame=true;
     this.exec();
@@ -142,7 +154,7 @@ CABLES.Patch.prototype.renderOneFrame = function() {
  * @instance
  * @return {Number} fps
  */
-CABLES.Patch.prototype.getFPS = function() {
+Patch.prototype.getFPS = function() {
     return this._fps;
 };
 
@@ -153,7 +165,7 @@ CABLES.Patch.prototype.getFPS = function() {
  * @memberof Patch
  * @instance
  */
-CABLES.Patch.prototype.pause = function() {
+Patch.prototype.pause = function() {
     this._paused = true;
     this.freeTimer.pause();
 };
@@ -164,7 +176,7 @@ CABLES.Patch.prototype.pause = function() {
  * @memberof Patch
  * @instance
  */
-CABLES.Patch.prototype.resume = function() {
+Patch.prototype.resume = function() {
     if (this._paused) {
         this._paused = false;
         this.freeTimer.play();
@@ -179,7 +191,7 @@ CABLES.Patch.prototype.resume = function() {
  * @memberof Patch
  * @instance
  */
-CABLES.Patch.prototype.setVolume = function(v) {
+Patch.prototype.setVolume = function(v) {
     this.config.masterVolume = v;
     for (var i = 0; i < this._volumeListeners.length; i++)
         this._volumeListeners[i].onMasterVolumeChanged(v);
@@ -195,7 +207,7 @@ CABLES.Patch.prototype.setVolume = function(v) {
  * @return {String} url
  
  */
-CABLES.Patch.prototype.getFilePath = function(filename) {
+Patch.prototype.getFilePath = function(filename) {
     if (!filename) return filename;
     if (filename.indexOf('https:') === 0 || filename.indexOf('http:') === 0) return filename;
 
@@ -207,16 +219,16 @@ CABLES.Patch.prototype.getFilePath = function(filename) {
     return finalFilename;
 };
 
-CABLES.Patch.prototype.clear = function() {
+Patch.prototype.clear = function() {
     this.cgl.TextureEffectMesh = null;
     this.animFrameOps.length = 0;
-    this.timer = new CABLES.Timer();
+    this.timer = new Timer();
     while (this.ops.length > 0)
         this.deleteOp(this.ops[0].id);
 };
 
 
-CABLES.Patch.getOpClass = function(objName) {
+Patch.getOpClass = function(objName) {
     var parts = objName.split('.');
     var opObj = null;
 
@@ -238,7 +250,7 @@ CABLES.Patch.getOpClass = function(objName) {
     }
 };
 
-// CABLES.Patch.prototype.addOp=function(objName,uiAttribs,next)
+// Patch.prototype.addOp=function(objName,uiAttribs,next)
 // {
 //     // if(CABLES.UI && gui.serverOps.opHasLibs(objName) && !gui.serverOps.opLibsLoaded(objName) )
 //     // {
@@ -253,7 +265,7 @@ CABLES.Patch.getOpClass = function(objName) {
 //     return this.doAddOp(objName,uiAttribs,next);
 // };
 
-CABLES.Patch.prototype.createOp = function(identifier,id)
+Patch.prototype.createOp = function(identifier,id)
 {
     var parts = identifier.split('.');
     var op = null;
@@ -281,7 +293,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
         if(!op) // fallback: create by objname!
         {
             objName=identifier;
-            var opObj = CABLES.Patch.getOpClass(objName);
+            var opObj = Patch.getOpClass(objName);
 
             if (!opObj) {
                 if (CABLES.UI) {
@@ -351,7 +363,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
-CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
+Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
     // if (!objName || objName.indexOf('.') == -1) {
     //     CABLES.UI.MODAL.showError('could not create op', 'op unknown');
     //     return;
@@ -378,11 +390,11 @@ CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
     return op;
 };
 
-CABLES.Patch.prototype.addOnAnimFrame = function(op) {
+Patch.prototype.addOnAnimFrame = function(op) {
     this.animFrameOps.push(op);
 };
 
-CABLES.Patch.prototype.removeOnAnimFrame = function(op) {
+Patch.prototype.removeOnAnimFrame = function(op) {
     for (var i = 0; i < this.animFrameOps.length; i++) {
         if (this.animFrameOps[i] == op) {
             this.animFrameOps.splice(i, 1);
@@ -391,11 +403,11 @@ CABLES.Patch.prototype.removeOnAnimFrame = function(op) {
     }
 };
 
-CABLES.Patch.prototype.addOnAnimFrameCallback = function(cb) {
+Patch.prototype.addOnAnimFrameCallback = function(cb) {
     this.animFrameCallbacks.push(cb);
 };
 
-CABLES.Patch.prototype.removeOnAnimCallback = function(cb) {
+Patch.prototype.removeOnAnimCallback = function(cb) {
     for (var i = 0; i < this.animFrameCallbacks.length; i++) {
         if (this.animFrameCallbacks[i] == cb) {
             this.animFrameCallbacks.splice(i, 1);
@@ -404,7 +416,7 @@ CABLES.Patch.prototype.removeOnAnimCallback = function(cb) {
     }
 };
 
-CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
+Patch.prototype.deleteOp = function(opid, tryRelink) {
     for (var i in this.ops) {
         if (this.ops[i].id == opid) {
             var op = this.ops[i];
@@ -451,11 +463,11 @@ CABLES.Patch.prototype.deleteOp = function(opid, tryRelink) {
     }
 };
 
-CABLES.Patch.prototype.getFrameNum = function() {
+Patch.prototype.getFrameNum = function() {
     return this._frameNum;
 };
 
-CABLES.Patch.prototype.renderFrame = function(e) {
+Patch.prototype.renderFrame = function(e) {
     this.timer.update();
     this.freeTimer.update();
     var time = this.timer.getTime();
@@ -473,7 +485,7 @@ CABLES.Patch.prototype.renderFrame = function(e) {
     }
 };
 
-CABLES.Patch.prototype.exec = function(e) {
+Patch.prototype.exec = function(e) {
     if(!this._renderOneFrame && ( this._paused || this.aborted )) return;
 
     this.config.fpsLimit = this.config.fpsLimit || 0;
@@ -564,7 +576,7 @@ CABLES.Patch.prototype.exec = function(e) {
  * @param {Op} op2
  * @param {String} portName2
  */
-CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
+Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     if(!op1)
     {
         console.log('link: op1 is null ');
@@ -592,8 +604,8 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
         return false;
     }
 
-    if(CABLES.Link.canLink(port1, port2)) {
-        var link = new CABLES.Link(this);
+    if(Link.canLink(port1, port2)) {
+        var link = new Link(this);
         link.link(port1, port2);
 
         this.emitEvent("onLink",port1, port2,link);
@@ -601,7 +613,7 @@ CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     }
 };
 
-CABLES.Patch.prototype.serialize = function(asObj) {
+Patch.prototype.serialize = function(asObj) {
     var obj = {};
 
     obj.ops = [];
@@ -614,13 +626,13 @@ CABLES.Patch.prototype.serialize = function(asObj) {
     return JSON.stringify(obj);
 };
 
-CABLES.Patch.prototype.getOpById = function(opid) {
+Patch.prototype.getOpById = function(opid) {
     for (var i in this.ops) {
         if (this.ops[i].id == opid) return this.ops[i];
     }
 };
 
-CABLES.Patch.prototype.getOpsByName = function(name) {
+Patch.prototype.getOpsByName = function(name) {
     var arr = [];
     for (var i in this.ops) {
         if (this.ops[i].name == name) arr.push(this.ops[i]);
@@ -628,7 +640,7 @@ CABLES.Patch.prototype.getOpsByName = function(name) {
     return arr;
 };
 
-CABLES.Patch.prototype.getOpsByObjName = function(name) {
+Patch.prototype.getOpsByObjName = function(name) {
     var arr = [];
     for (var i in this.ops) {
         if (this.ops[i].objName == name) arr.push(this.ops[i]);
@@ -636,8 +648,8 @@ CABLES.Patch.prototype.getOpsByObjName = function(name) {
     return arr;
 };
 
-CABLES.Patch.prototype.loadLib = function(which) {
-    CABLES.ajaxSync('/ui/libs/' + which + '.js',
+Patch.prototype.loadLib = function(which) {
+    ajaxSync('/ui/libs/' + which + '.js',
         function(err, res) {
             var se = document.createElement('script');
             se.type = "text/javascript";
@@ -650,7 +662,7 @@ CABLES.Patch.prototype.loadLib = function(which) {
     // add the returned content to a newly created script tag
 };
 
-CABLES.Patch.prototype.reloadOp = function(objName, cb) {
+Patch.prototype.reloadOp = function(objName, cb) {
     var count = 0;
     var ops = [];
     var oldOps=[];
@@ -720,7 +732,7 @@ CABLES.Patch.prototype.reloadOp = function(objName, cb) {
     cb(count, ops);
 };
 
-CABLES.Patch.prototype.getSubPatchOps = function(patchId) {
+Patch.prototype.getSubPatchOps = function(patchId) {
     var ops = [];
     for (var i in this.ops) {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId) {
@@ -730,7 +742,7 @@ CABLES.Patch.prototype.getSubPatchOps = function(patchId) {
     return ops;
 };
 
-CABLES.Patch.prototype.getSubPatchOp = function(patchId, objName) {
+Patch.prototype.getSubPatchOp = function(patchId, objName) {
     for (var i in this.ops) {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName) {
             return this.ops[i];
@@ -739,7 +751,7 @@ CABLES.Patch.prototype.getSubPatchOp = function(patchId, objName) {
     return false;
 };
 
-CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
+Patch.prototype.deSerialize = function(obj, genIds) {
 
     if (this.aborted) return;
 
@@ -766,7 +778,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
     }
 
-    var reqs=new CABLES.Requirements(this);
+    var reqs=new Requirements(this);
 
     // console.log('add ops ',obj.ops);
     // add ops...
@@ -781,7 +793,7 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         reqs.checkOp(op);
 
         if (op) {
-            if (genIds) op.id = CABLES.uuid();
+            if (genIds) op.id = uuid();
             op.portsInData=opData.portsIn;
             op._origData=opData;
 
@@ -790,20 +802,20 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
                 var port = op.getPort(objPort.name);
 
                 if (port && (port.uiAttribs.display == 'bool' || port.uiAttribs.type == 'bool') && !isNaN(objPort.value)) objPort.value = true === objPort.value;
-                if (port && objPort.value !== undefined && port.type != CABLES.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
+                if (port && objPort.value !== undefined && port.type != OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
                 if (port && objPort && objPort.anim) {
-                    if (!port.anim) port.anim = new CABLES.Anim();
+                    if (!port.anim) port.anim = new Anim();
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
                     for (var ani in objPort.anim.keys) {
-                        port.anim.keys.push(new CABLES.ANIM.Key(objPort.anim.keys[ani]));
+                        port.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
             }
 
             for (var ipo in opData.portsOut) {
                 var port2 = op.getPort(opData.portsOut[ipo].name);
-                if (port2 && port2.type != CABLES.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty('value')) {
+                if (port2 && port2.type != OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty('value')) {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
             }
@@ -870,8 +882,8 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
     if (this.onLoadEnd) this.onLoadEnd();
 };
 
-CABLES.Patch.prototype.profile = function(enable) {
-    this.profiler = new CABLES.Profiler();
+Patch.prototype.profile = function(enable) {
+    this.profiler = new Profiler();
     for (var i in this.ops) {
         this.ops[i].profile(enable);
     }
@@ -891,7 +903,7 @@ CABLES.Patch.prototype.profile = function(enable) {
  * @memberof Patch
  * @constructor
  */
-CABLES.Patch.Variable = function(name, val) {
+Patch.Variable = function(name, val) {
     this._name = name;
     this._changeListeners = [];
     this.setValue(val);
@@ -903,7 +915,7 @@ CABLES.Patch.Variable = function(name, val) {
  * @returns {String|Number|Boolean} 
  */
 
-CABLES.Patch.Variable.prototype.getValue = function() {
+Patch.Variable.prototype.getValue = function() {
     return this._v;
 };
 
@@ -914,7 +926,7 @@ CABLES.Patch.Variable.prototype.getValue = function() {
  * @returns {String|Number|Boolean} 
  * @function
  */
-CABLES.Patch.Variable.prototype.getName = function() {
+Patch.Variable.prototype.getName = function() {
     return this._name;
 };
 
@@ -925,7 +937,7 @@ CABLES.Patch.Variable.prototype.getName = function() {
  * @returns {String|Number|Boolean} 
  * @function
  */
-CABLES.Patch.Variable.prototype.setValue = function(v) {
+Patch.Variable.prototype.setValue = function(v) {
     this._v = v;
     for (var i = 0; i < this._changeListeners.length; i++) {
         this._changeListeners[i](v);
@@ -939,7 +951,7 @@ CABLES.Patch.Variable.prototype.setValue = function(v) {
  * @instance
  * @param {Function} callback
  */
-CABLES.Patch.Variable.prototype.addListener = function(cb) {
+Patch.Variable.prototype.addListener = function(cb) {
     this._changeListeners.push(cb);
 };
 
@@ -950,7 +962,7 @@ CABLES.Patch.Variable.prototype.addListener = function(cb) {
  * @instance
  * @param {Function} callback
  */
-CABLES.Patch.Variable.prototype.removeListener = function(cb) {
+Patch.Variable.prototype.removeListener = function(cb) {
     var ind = this._changeListeners.indexOf(cb);
     this._changeListeners.splice(ind, 1);
 };
@@ -960,12 +972,12 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
 
 
 // // old?
-// CABLES.Patch.prototype.addVariableListener = function(cb) {
+// Patch.prototype.addVariableListener = function(cb) {
 //     this._variableListeners.push(cb);
 // };
 
 // // old?
-// CABLES.Patch.prototype._callVariableListener = function(cb) {
+// Patch.prototype._callVariableListener = function(cb) {
 //     for (var i = 0; i < this._variableListeners.length; i++) {
 //         this._variableListeners[i]();
 //     }
@@ -980,7 +992,7 @@ CABLES.Patch.Variable.prototype.removeListener = function(cb) {
  * @param {String} name of variable
  * @param {Number|String|Boolean} value
  */
-CABLES.Patch.prototype.setVariable = function(name, val)
+Patch.prototype.setVariable = function(name, val)
 {
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
@@ -992,17 +1004,17 @@ CABLES.Patch.prototype.setVariable = function(name, val)
 
 
 // used internally
-CABLES.Patch.prototype.setVarValue = function(name, val) {
+Patch.prototype.setVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name)) {
         this._variables[name].setValue(val);
     } else {
-        this._variables[name] = new CABLES.Patch.Variable(name, val);
+        this._variables[name] = new Patch.Variable(name, val);
         this.emitEvent("variablesChanged");
     }
     return this._variables[name];
 };
 // old?
-CABLES.Patch.prototype.getVarValue = function(name, val) {
+Patch.prototype.getVarValue = function(name, val) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name].getValue();
 };
@@ -1014,7 +1026,7 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
  * @param {String} name
  * @return {Variable} variable
  */
-CABLES.Patch.prototype.getVar = function(name) {
+Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name];
 };
@@ -1024,7 +1036,7 @@ CABLES.Patch.prototype.getVar = function(name) {
  * @memberof Patch
  * @instance
  */
-CABLES.Patch.prototype.getVars = function() {
+Patch.prototype.getVars = function() {
     return this._variables;
 };
 
@@ -1035,11 +1047,11 @@ CABLES.Patch.prototype.getVars = function() {
  * @return {Array<Variable>} variables
  * @function
  */
-CABLES.Patch.prototype.getVars = function() {
+Patch.prototype.getVars = function() {
     return this._variables;
 };
 
-CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
+Patch.prototype.exitError=function(errorId,errorMessage)
 {
     if(this && this.config && this.config.onError)
     {
@@ -1055,7 +1067,7 @@ CABLES.Patch.prototype.exitError=function(errorId,errorMessage)
  * @description invoke pre rendering of ops
  * @function
  */
-CABLES.Patch.prototype.preRenderOps = function() {
+Patch.prototype.preRenderOps = function() {
 
     console.log("prerendering...");
     var stopwatch=null;
@@ -1081,7 +1093,7 @@ CABLES.Patch.prototype.preRenderOps = function() {
  * @instance
  * @description stop, dispose and cleanup patch
  */
-CABLES.Patch.prototype.dispose = function() {
+Patch.prototype.dispose = function() {
     this.pause();
     this.clear();
 };
@@ -1167,3 +1179,4 @@ CABLES.Patch.prototype.dispose = function() {
  * 
  */
 
+export default Patch;

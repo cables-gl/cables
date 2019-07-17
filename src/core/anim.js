@@ -1,46 +1,47 @@
 
-var CABLES=CABLES || {};
-CABLES.ANIM=CABLES.ANIM || {};
-CABLES.TL=CABLES.ANIM;
+// var CABLES=CABLES || {};
+// CABLES.ANIM=CABLES.ANIM || {};
+// CABLES.TL=CABLES.ANIM;
 
+const ANIM = {};
 
-CABLES.ANIM.EASING_LINEAR=0;
-CABLES.ANIM.EASING_ABSOLUTE=1;
-CABLES.ANIM.EASING_SMOOTHSTEP=2;
-CABLES.ANIM.EASING_SMOOTHERSTEP=3;
-CABLES.ANIM.EASING_BEZIER=4;
+ANIM.EASING_LINEAR=0;
+ANIM.EASING_ABSOLUTE=1;
+ANIM.EASING_SMOOTHSTEP=2;
+ANIM.EASING_SMOOTHERSTEP=3;
+ANIM.EASING_BEZIER=4;
 
-CABLES.ANIM.EASING_CUBIC_IN=5;
-CABLES.ANIM.EASING_CUBIC_OUT=6;
-CABLES.ANIM.EASING_CUBIC_INOUT=7;
+ANIM.EASING_CUBIC_IN=5;
+ANIM.EASING_CUBIC_OUT=6;
+ANIM.EASING_CUBIC_INOUT=7;
 
-CABLES.ANIM.EASING_EXPO_IN=8;
-CABLES.ANIM.EASING_EXPO_OUT=9;
-CABLES.ANIM.EASING_EXPO_INOUT=10;
+ANIM.EASING_EXPO_IN=8;
+ANIM.EASING_EXPO_OUT=9;
+ANIM.EASING_EXPO_INOUT=10;
 
-CABLES.ANIM.EASING_SIN_IN=11;
-CABLES.ANIM.EASING_SIN_OUT=12;
-CABLES.ANIM.EASING_SIN_INOUT=13;
+ANIM.EASING_SIN_IN=11;
+ANIM.EASING_SIN_OUT=12;
+ANIM.EASING_SIN_INOUT=13;
 
-CABLES.ANIM.EASING_BACK_IN=14;
-CABLES.ANIM.EASING_BACK_OUT=15;
-CABLES.ANIM.EASING_BACK_INOUT=16;
+ANIM.EASING_BACK_IN=14;
+ANIM.EASING_BACK_OUT=15;
+ANIM.EASING_BACK_INOUT=16;
 
-CABLES.ANIM.EASING_ELASTIC_IN=17;
-CABLES.ANIM.EASING_ELASTIC_OUT=18;
+ANIM.EASING_ELASTIC_IN=17;
+ANIM.EASING_ELASTIC_OUT=18;
 
-CABLES.ANIM.EASING_BOUNCE_IN=19;
-CABLES.ANIM.EASING_BOUNCE_OUT=21;
+ANIM.EASING_BOUNCE_IN=19;
+ANIM.EASING_BOUNCE_OUT=21;
 
-CABLES.ANIM.EASING_QUART_IN=22;
-CABLES.ANIM.EASING_QUART_OUT=23;
-CABLES.ANIM.EASING_QUART_INOUT=24;
+ANIM.EASING_QUART_IN=22;
+ANIM.EASING_QUART_OUT=23;
+ANIM.EASING_QUART_INOUT=24;
 
-CABLES.ANIM.EASING_QUINT_IN=25;
-CABLES.ANIM.EASING_QUINT_OUT=26;
-CABLES.ANIM.EASING_QUINT_INOUT=27;
+ANIM.EASING_QUINT_IN=25;
+ANIM.EASING_QUINT_OUT=26;
+ANIM.EASING_QUINT_INOUT=27;
 
-CABLES.ANIM.Key=function(obj)
+ANIM.Key=function(obj)
 {
     this.time=0.0;
     this.value=0.0;
@@ -58,49 +59,49 @@ CABLES.ANIM.Key=function(obj)
     var bezierAnim=null;
     var updateBezier=false;
 
-    this.setEasing(CABLES.ANIM.EASING_LINEAR);
+    this.setEasing(ANIM.EASING_LINEAR);
     this.set(obj);
 };
 
-CABLES.ANIM.Key.linear=function(perc,key1,key2)
+ANIM.Key.linear=function(perc,key1,key2)
 {
     return parseFloat(key1.value)+ parseFloat((key2.value - key1.value)) * perc;
 };
 
-CABLES.ANIM.Key.easeLinear=function(perc,key2)
+ANIM.Key.easeLinear=function(perc,key2)
 {
-    return CABLES.ANIM.Key.linear(perc,this,key2);
+    return ANIM.Key.linear(perc,this,key2);
 };
 
-CABLES.ANIM.Key.easeAbsolute=function(perc,key2)
+ANIM.Key.easeAbsolute=function(perc,key2)
 {
     return this.value;
 };
 
-CABLES.easeExpoIn=function(t)
+export const easeExpoIn=function(t)
 {
     return t= Math.pow( 2, 10 * (t - 1) );
 }
 
-CABLES.ANIM.Key.easeExpoIn=function( t,  key2)
+ANIM.Key.easeExpoIn=function( t,  key2)
 {
     t=CABLES.easeExpoIn(t);
     return CABLES.ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.easeExpoOut=function(t)
+export const easeExpoOut=function(t)
 {
     t= ( -Math.pow( 2, -10 * t ) + 1 );
     return t;
 }
 
-CABLES.ANIM.Key.easeExpoOut=function( t,  key2)
+ANIM.Key.easeExpoOut=function( t,  key2)
 {
     t=CABLES.easeExpoOut(t);
     return CABLES.ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.easeExpoInOut=function(t)
+export const easeExpoInOut=function(t)
 {
     t*=2;
     if (t < 1)
@@ -115,40 +116,40 @@ CABLES.easeExpoInOut=function(t)
     return t;
 }
 
-CABLES.ANIM.Key.easeExpoInOut=function( t,  key2)
+ANIM.Key.easeExpoInOut=function( t,  key2)
 {
-    t=CABLES.easeExpoInOut(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    t=easeExpoInOut(t);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeSinIn=function( t,key2)
+ANIM.Key.easeSinIn=function( t,key2)
 {
     t= -1 * Math.cos(t * Math.PI/2) + 1;
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeSinOut=function( t,key2)
+ANIM.Key.easeSinOut=function( t,key2)
 {
     t= Math.sin(t * Math.PI/2);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeSinInOut=function( t,key2)
+ANIM.Key.easeSinInOut=function( t,key2)
 {
     t= -0.5 * (Math.cos(Math.PI*t) - 1.0);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.easeCubicIn=function(t)
+export const easeCubicIn=function(t)
 {
     t=t*t*t;
     return t;
 }
 
-CABLES.ANIM.Key.easeCubicIn=function(t,key2)
+ANIM.Key.easeCubicIn=function(t,key2)
 {
-    t=CABLES.easeCubicIn(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    t=easeCubicIn(t);
+    return ANIM.Key.linear(t,this,key2);
 };
 
 // b 0
@@ -158,50 +159,50 @@ CABLES.ANIM.Key.easeCubicIn=function(t,key2)
 //     return c*((t=t/d-1)*t*t + 1) + b;
 
 
-CABLES.ANIM.Key.easeInQuint=function(t,key2)
+ANIM.Key.easeInQuint=function(t,key2)
 {
 
     t= t*t*t*t*t;
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
-CABLES.ANIM.Key.easeOutQuint=function(t,key2)
+ANIM.Key.easeOutQuint=function(t,key2)
 {
     t= ((t-=1)*t*t*t*t + 1);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
-CABLES.ANIM.Key.easeInOutQuint=function(t,key2)
+ANIM.Key.easeInOutQuint=function(t,key2)
 {
     if ((t/=0.5) < 1) t= 0.5*t*t*t*t*t;
         else t= 0.5*((t-=2)*t*t*t*t + 2);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
 
 
 
-CABLES.ANIM.Key.easeInQuart=function(t,key2)
+ANIM.Key.easeInQuart=function(t,key2)
 {
     t=t*t*t*t;
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeOutQuart=function(t,key2)
+ANIM.Key.easeOutQuart=function(t,key2)
 {
     // return -c * ((t=t/d-1)*t*t*t - 1) + b;
     t= -1 * ((t-=1)*t*t*t - 1);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeInOutQuart=function(t,key2)
+ANIM.Key.easeInOutQuart=function(t,key2)
 {
     if((t/=0.5) < 1) t= 0.5*t*t*t*t;
         else t= -0.5 * ((t-=2)*t*t*t - 2);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
 
 
-CABLES.ANIM.Key.bounce=function(t)
+ANIM.Key.bounce=function(t)
 {
     if ((t/=1) < (1/2.75)) t= (7.5625*t*t);
     else if (t < (2/2.75)) t= (7.5625*(t-=(1.5/2.75))*t + 0.75);
@@ -210,18 +211,18 @@ CABLES.ANIM.Key.bounce=function(t)
     return t;
 };
 
-CABLES.ANIM.Key.easeInBounce=function(t,key2)
+ANIM.Key.easeInBounce=function(t,key2)
 {
-    return CABLES.ANIM.Key.linear(CABLES.ANIM.Key.bounce(t),this,key2);
+    return ANIM.Key.linear(ANIM.Key.bounce(t),this,key2);
     // return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d);
 };
 
-CABLES.ANIM.Key.easeOutBounce=function(t,key2)
+ANIM.Key.easeOutBounce=function(t,key2)
 {
-    return CABLES.ANIM.Key.linear(CABLES.ANIM.Key.bounce(t),this,key2);
+    return ANIM.Key.linear(ANIM.Key.bounce(t),this,key2);
 };
 
-CABLES.ANIM.Key.easeInElastic=function(t,key2)
+ANIM.Key.easeInElastic=function(t,key2)
 {
     var s=1.70158;
     var p=0;
@@ -241,10 +242,10 @@ CABLES.ANIM.Key.easeInElastic=function(t,key2)
                 t= -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
             }
 
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeOutElastic=function(t,key2)
+ANIM.Key.easeOutElastic=function(t,key2)
 {
     var s=1.70158;
     var p=0;
@@ -264,49 +265,49 @@ CABLES.ANIM.Key.easeOutElastic=function(t,key2)
                 t= a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
             }
 
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeInBack=function(t,key2)
+ANIM.Key.easeInBack=function(t,key2)
 {
     var s = 1.70158;
     t=(t)*t*((s+1)*t - s) ;
 
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeOutBack=function (t,key2)
+ANIM.Key.easeOutBack=function (t,key2)
 {
     var s = 1.70158;
     t= ((t=t/1-1)*t*((s+1)*t + s) + 1) ;
 
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeInOutBack=function(t, key2)
+ANIM.Key.easeInOutBack=function(t, key2)
 {
     var s = 1.70158;
     var c=1/2;
     if ((t/=1/2) < 1) t= c*(t*t*(((s*=(1.525))+1)*t - s));
         else t= c*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2);
 
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.easeCubicOut=function(t)
+export const easeCubicOut=function(t)
 {
     t--;
     t=(t*t*t + 1) ;
     return t;
 }
 
-CABLES.ANIM.Key.easeCubicOut=function(t,key2)
+ANIM.Key.easeCubicOut=function(t,key2)
 {
-    t=CABLES.easeCubicOut(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    t=easeCubicOut(t);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.easeCubicInOut=function(t)
+export const easeCubicInOut=function(t)
 {
     t*=2;
     if (t < 1) t= 0.5*t*t*t;
@@ -318,93 +319,93 @@ CABLES.easeCubicInOut=function(t)
     return t;
 }
 
-CABLES.ANIM.Key.easeCubicInOut=function(t,key2)
+ANIM.Key.easeCubicInOut=function(t,key2)
 {
-    t=CABLES.easeCubicInOut(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    t=easeCubicInOut(t);
+    return ANIM.Key.linear(t,this,key2);
 };
 
-CABLES.ANIM.Key.easeSmoothStep=function(perc,key2)
+ANIM.Key.easeSmoothStep=function(perc,key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     var x = Math.max(0, Math.min(1, perc));
     perc= x*x*(3 - 2*x); // smoothstep
-    return CABLES.ANIM.Key.linear(perc,this,key2);
+    return ANIM.Key.linear(perc,this,key2);
 };
 
-CABLES.ANIM.Key.easeSmootherStep=function(perc,key2)
+ANIM.Key.easeSmootherStep=function(perc,key2)
 {
     var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
-    return CABLES.ANIM.Key.linear(perc,this,key2);
+    return ANIM.Key.linear(perc,this,key2);
 };
 
 
-CABLES.ANIM.Key.prototype.setEasing=function(e)
+ANIM.Key.prototype.setEasing=function(e)
 {
     this._easing=e;
 
-    if(this._easing==CABLES.ANIM.EASING_ABSOLUTE) this.ease=CABLES.ANIM.Key.easeAbsolute;
-    else if(this._easing==CABLES.ANIM.EASING_SMOOTHSTEP) this.ease=CABLES.ANIM.Key.easeSmoothStep;
-    else if(this._easing==CABLES.ANIM.EASING_SMOOTHERSTEP) this.ease=CABLES.ANIM.Key.easeSmootherStep;
+    if(this._easing==ANIM.EASING_ABSOLUTE) this.ease=ANIM.Key.easeAbsolute;
+    else if(this._easing==ANIM.EASING_SMOOTHSTEP) this.ease=ANIM.Key.easeSmoothStep;
+    else if(this._easing==ANIM.EASING_SMOOTHERSTEP) this.ease=ANIM.Key.easeSmootherStep;
 
-    else if(this._easing==CABLES.ANIM.EASING_CUBIC_IN) this.ease=CABLES.ANIM.Key.easeCubicIn;
-    else if(this._easing==CABLES.ANIM.EASING_CUBIC_OUT) this.ease=CABLES.ANIM.Key.easeCubicOut;
-    else if(this._easing==CABLES.ANIM.EASING_CUBIC_INOUT) this.ease=CABLES.ANIM.Key.easeCubicInOut;
+    else if(this._easing==ANIM.EASING_CUBIC_IN) this.ease=ANIM.Key.easeCubicIn;
+    else if(this._easing==ANIM.EASING_CUBIC_OUT) this.ease=ANIM.Key.easeCubicOut;
+    else if(this._easing==ANIM.EASING_CUBIC_INOUT) this.ease=ANIM.Key.easeCubicInOut;
 
-    else if(this._easing==CABLES.ANIM.EASING_EXPO_IN) this.ease=CABLES.ANIM.Key.easeExpoIn;
-    else if(this._easing==CABLES.ANIM.EASING_EXPO_OUT) this.ease=CABLES.ANIM.Key.easeExpoOut;
-    else if(this._easing==CABLES.ANIM.EASING_EXPO_INOUT) this.ease=CABLES.ANIM.Key.easeExpoInOut;
+    else if(this._easing==ANIM.EASING_EXPO_IN) this.ease=ANIM.Key.easeExpoIn;
+    else if(this._easing==ANIM.EASING_EXPO_OUT) this.ease=ANIM.Key.easeExpoOut;
+    else if(this._easing==ANIM.EASING_EXPO_INOUT) this.ease=ANIM.Key.easeExpoInOut;
 
-    else if(this._easing==CABLES.ANIM.EASING_SIN_IN) this.ease=CABLES.ANIM.Key.easeSinIn;
-    else if(this._easing==CABLES.ANIM.EASING_SIN_OUT) this.ease=CABLES.ANIM.Key.easeSinOut;
-    else if(this._easing==CABLES.ANIM.EASING_SIN_INOUT) this.ease=CABLES.ANIM.Key.easeSinInOut;
+    else if(this._easing==ANIM.EASING_SIN_IN) this.ease=ANIM.Key.easeSinIn;
+    else if(this._easing==ANIM.EASING_SIN_OUT) this.ease=ANIM.Key.easeSinOut;
+    else if(this._easing==ANIM.EASING_SIN_INOUT) this.ease=ANIM.Key.easeSinInOut;
 
-    else if(this._easing==CABLES.ANIM.EASING_BACK_OUT) this.ease=CABLES.ANIM.Key.easeOutBack;
-    else if(this._easing==CABLES.ANIM.EASING_BACK_IN) this.ease=CABLES.ANIM.Key.easeInBack;
-    else if(this._easing==CABLES.ANIM.EASING_BACK_INOUT) this.ease=CABLES.ANIM.Key.easeInOutBack;
+    else if(this._easing==ANIM.EASING_BACK_OUT) this.ease=ANIM.Key.easeOutBack;
+    else if(this._easing==ANIM.EASING_BACK_IN) this.ease=ANIM.Key.easeInBack;
+    else if(this._easing==ANIM.EASING_BACK_INOUT) this.ease=ANIM.Key.easeInOutBack;
 
-    else if(this._easing==CABLES.ANIM.EASING_ELASTIC_IN) this.ease=CABLES.ANIM.Key.easeInElastic;
-    else if(this._easing==CABLES.ANIM.EASING_ELASTIC_OUT) this.ease=CABLES.ANIM.Key.easeOutElastic;
+    else if(this._easing==ANIM.EASING_ELASTIC_IN) this.ease=ANIM.Key.easeInElastic;
+    else if(this._easing==ANIM.EASING_ELASTIC_OUT) this.ease=ANIM.Key.easeOutElastic;
 
-    else if(this._easing==CABLES.ANIM.EASING_BOUNCE_IN) this.ease=CABLES.ANIM.Key.easeInBounce;
-    else if(this._easing==CABLES.ANIM.EASING_BOUNCE_OUT) this.ease=CABLES.ANIM.Key.easeOutBounce;
+    else if(this._easing==ANIM.EASING_BOUNCE_IN) this.ease=ANIM.Key.easeInBounce;
+    else if(this._easing==ANIM.EASING_BOUNCE_OUT) this.ease=ANIM.Key.easeOutBounce;
 
-    else if(this._easing==CABLES.ANIM.EASING_QUART_OUT) this.ease=CABLES.ANIM.Key.easeOutQuart;
-    else if(this._easing==CABLES.ANIM.EASING_QUART_IN) this.ease=CABLES.ANIM.Key.easeInQuart;
-    else if(this._easing==CABLES.ANIM.EASING_QUART_INOUT) this.ease=CABLES.ANIM.Key.easeInOutQuart;
+    else if(this._easing==ANIM.EASING_QUART_OUT) this.ease=ANIM.Key.easeOutQuart;
+    else if(this._easing==ANIM.EASING_QUART_IN) this.ease=ANIM.Key.easeInQuart;
+    else if(this._easing==ANIM.EASING_QUART_INOUT) this.ease=ANIM.Key.easeInOutQuart;
 
-    else if(this._easing==CABLES.ANIM.EASING_QUINT_OUT) this.ease=CABLES.ANIM.Key.easeOutQuint;
-    else if(this._easing==CABLES.ANIM.EASING_QUINT_IN) this.ease=CABLES.ANIM.Key.easeInQuint;
-    else if(this._easing==CABLES.ANIM.EASING_QUINT_INOUT) this.ease=CABLES.ANIM.Key.easeInOutQuint;
+    else if(this._easing==ANIM.EASING_QUINT_OUT) this.ease=ANIM.Key.easeOutQuint;
+    else if(this._easing==ANIM.EASING_QUINT_IN) this.ease=ANIM.Key.easeInQuint;
+    else if(this._easing==ANIM.EASING_QUINT_INOUT) this.ease=ANIM.Key.easeInOutQuint;
 
-    else if(this._easing==CABLES.ANIM.EASING_BEZIER)
+    else if(this._easing==ANIM.EASING_BEZIER)
     {
         updateBezier=true;
-        this.ease=CABLES.ANIM.Key.easeBezier;
+        this.ease=ANIM.Key.easeBezier;
     }
     else
     {
-        this._easing=CABLES.ANIM.EASING_LINEAR;
-        this.ease=CABLES.ANIM.Key.easeLinear;
+        this._easing=ANIM.EASING_LINEAR;
+        this.ease=ANIM.Key.easeLinear;
     }
 };
 
 
-CABLES.ANIM.Key.prototype.trigger=function()
+ANIM.Key.prototype.trigger=function()
 {
     this.cb();
     this.cbTriggered=true;
 };
 
-CABLES.ANIM.Key.prototype.setValue=function(v)
+ANIM.Key.prototype.setValue=function(v)
 {
     this.value=v;
     updateBezier=true;
     if(this.onChange!==null)this.onChange();
 };
 
-CABLES.ANIM.Key.prototype.set=function(obj)
+ANIM.Key.prototype.set=function(obj)
 {
     if(obj)
     {
@@ -433,24 +434,25 @@ CABLES.ANIM.Key.prototype.set=function(obj)
 
 };
 
-CABLES.ANIM.Key.prototype.getSerialized=function()
+ANIM.Key.prototype.getSerialized=function()
 {
     var obj={};
     obj.t=this.time;
     obj.v=this.value;
     obj.e=this._easing;
-    if(this._easing==CABLES.ANIM.EASING_BEZIER)
+    if(this._easing==ANIM.EASING_BEZIER)
         obj.b=[this.bezTime,this.bezValue,this.bezTimeIn,this.bezValueIn];
 
     return obj;
 };
 
 
-CABLES.ANIM.Key.prototype.getEasing=function()
+ANIM.Key.prototype.getEasing=function()
 {
     return this._easing;
 };
 
+export { ANIM };
 
 // ------------------------------------------------------------------------------------------------------
 
@@ -519,7 +521,7 @@ CABLES.ANIM.Key.prototype.getEasing=function()
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
 
  */
-CABLES.Anim=function(cfg)
+const Anim=function(cfg)
 {
     this.keys=[];
     this.onChange=null;
@@ -538,9 +540,9 @@ CABLES.Anim=function(cfg)
     this._timesLooped=0;
     this._needsSort=false;
 };
-CABLES.TL.Anim=CABLES.Anim;
 
-CABLES.Anim.prototype.forceChangeCallback=function()
+
+Anim.prototype.forceChangeCallback=function()
 {
     if(this.onChange!==null)this.onChange();
 };
@@ -554,14 +556,14 @@ CABLES.Anim.prototype.forceChangeCallback=function()
  * @instance
  * @function
  */
-CABLES.Anim.prototype.hasEnded=function(time)
+Anim.prototype.hasEnded=function(time)
 {
     if(this.keys.length===0)return true;
     if(this.keys[this.keys.length-1].time<=time)return true;
     return false;
 };
 
-CABLES.Anim.prototype.isRising=function(time)
+Anim.prototype.isRising=function(time)
 {
     if(this.hasEnded(time))return false;
     var ki=this.getKeyIndex(time);
@@ -576,7 +578,7 @@ CABLES.Anim.prototype.isRising=function(time)
  * @instance
  * @function
  */
-CABLES.Anim.prototype.clear=function(time)
+Anim.prototype.clear=function(time)
 {
     var v=0;
     if(time) v=this.getValue(time);
@@ -586,7 +588,7 @@ CABLES.Anim.prototype.clear=function(time)
     if(this.onChange!==null)this.onChange();
 };
 
-CABLES.Anim.prototype.sortKeys=function()
+Anim.prototype.sortKeys=function()
 {
     this.keys.sort(function(a, b)
     {
@@ -595,13 +597,13 @@ CABLES.Anim.prototype.sortKeys=function()
     this._needsSort=false;
 };
 
-CABLES.Anim.prototype.getLength=function()
+Anim.prototype.getLength=function()
 {
     if(this.keys.length===0)return 0;
     return this.keys[this.keys.length-1].time;
 };
 
-CABLES.Anim.prototype.getKeyIndex=function(time)
+Anim.prototype.getKeyIndex=function(time)
 {
     var index=0;
     for(var i=0;i<this.keys.length;i++)
@@ -621,7 +623,7 @@ CABLES.Anim.prototype.getKeyIndex=function(time)
  * @param {Number} value
  * @param {Function} [callback] callback
  */
-CABLES.Anim.prototype.setValue=function(time,value,cb)
+Anim.prototype.setValue=function(time,value,cb)
 {
     var found=false;
     for(var i in this.keys)
@@ -635,14 +637,14 @@ CABLES.Anim.prototype.setValue=function(time,value,cb)
         }
     }
 
-    if(!found) this.keys.push(new CABLES.ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
+    if(!found) this.keys.push(new ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
 
     if(this.onChange)this.onChange();
     this._needsSort=true;
 };
 
 
-CABLES.Anim.prototype.getSerialized=function()
+Anim.prototype.getSerialized=function()
 {
     var obj={};
     obj.keys=[];
@@ -656,13 +658,13 @@ CABLES.Anim.prototype.getSerialized=function()
     return obj;
 };
 
-CABLES.Anim.prototype.getKey=function(time)
+Anim.prototype.getKey=function(time)
 {
     var index=this.getKeyIndex(time);
     return this.keys[index];
 };
 
-CABLES.Anim.prototype.getNextKey=function(time)
+Anim.prototype.getNextKey=function(time)
 {
     var index=this.getKeyIndex(time)+1;
     if(index>=this.keys.length)index=this.keys.length-1;
@@ -670,13 +672,13 @@ CABLES.Anim.prototype.getNextKey=function(time)
     return this.keys[index];
 };
 
-CABLES.Anim.prototype.isFinished=function(time)
+Anim.prototype.isFinished=function(time)
 {
     if(this.keys.length<=0)return true;
     return time>this.keys[this.keys.length-1].time;
 };
 
-CABLES.Anim.prototype.isStarted=function(time)
+Anim.prototype.isStarted=function(time)
 {
     if(this.keys.length<=0)return false;
     return time>=this.keys[0].time;
@@ -690,7 +692,7 @@ CABLES.Anim.prototype.isStarted=function(time)
  * @param {Number} [time] time
  * @returns {Number} interpolated value at time
  */
-CABLES.Anim.prototype.getValue=function(time)
+Anim.prototype.getValue=function(time)
 {
     if(this.keys.length===0)return 0;
     if(this._needsSort)this.sortKeys();
@@ -730,7 +732,7 @@ CABLES.Anim.prototype.getValue=function(time)
     return key1.ease(perc,key2);
 };
 
-CABLES.Anim.prototype.addKey=function(k)
+Anim.prototype.addKey=function(k)
 {
     if(k.time===undefined)
     {
@@ -744,45 +746,45 @@ CABLES.Anim.prototype.addKey=function(k)
 };
 
 
-CABLES.Anim.prototype.easingFromString=function(str)
+Anim.prototype.easingFromString=function(str)
 {
-    if(str=='linear') return CABLES.ANIM.EASING_LINEAR;
-    if(str=='absolute') return CABLES.ANIM.EASING_ABSOLUTE;
-    if(str=='smoothstep') return CABLES.ANIM.EASING_SMOOTHSTEP;
-    if(str=='smootherstep') return CABLES.ANIM.EASING_SMOOTHERSTEP;
+    if(str=='linear') return ANIM.EASING_LINEAR;
+    if(str=='absolute') return ANIM.EASING_ABSOLUTE;
+    if(str=='smoothstep') return ANIM.EASING_SMOOTHSTEP;
+    if(str=='smootherstep') return ANIM.EASING_SMOOTHERSTEP;
 
-    if(str=='Cubic In') return CABLES.ANIM.EASING_CUBIC_IN;
-    if(str=='Cubic Out') return CABLES.ANIM.EASING_CUBIC_OUT;
-    if(str=='Cubic In Out') return CABLES.ANIM.EASING_CUBIC_INOUT;
+    if(str=='Cubic In') return ANIM.EASING_CUBIC_IN;
+    if(str=='Cubic Out') return ANIM.EASING_CUBIC_OUT;
+    if(str=='Cubic In Out') return ANIM.EASING_CUBIC_INOUT;
 
-    if(str=='Expo In') return CABLES.ANIM.EASING_EXPO_IN;
-    if(str=='Expo Out') return CABLES.ANIM.EASING_EXPO_OUT;
-    if(str=='Expo In Out') return CABLES.ANIM.EASING_EXPO_INOUT;
+    if(str=='Expo In') return ANIM.EASING_EXPO_IN;
+    if(str=='Expo Out') return ANIM.EASING_EXPO_OUT;
+    if(str=='Expo In Out') return ANIM.EASING_EXPO_INOUT;
 
-    if(str=='Sin In') return CABLES.ANIM.EASING_SIN_IN;
-    if(str=='Sin Out') return CABLES.ANIM.EASING_SIN_OUT;
-    if(str=='Sin In Out') return CABLES.ANIM.EASING_SIN_INOUT;
+    if(str=='Sin In') return ANIM.EASING_SIN_IN;
+    if(str=='Sin Out') return ANIM.EASING_SIN_OUT;
+    if(str=='Sin In Out') return ANIM.EASING_SIN_INOUT;
 
-    if(str=='Back In') return CABLES.ANIM.EASING_BACK_IN;
-    if(str=='Back Out') return CABLES.ANIM.EASING_BACK_OUT;
-    if(str=='Back In Out') return CABLES.ANIM.EASING_BACK_INOUT;
+    if(str=='Back In') return ANIM.EASING_BACK_IN;
+    if(str=='Back Out') return ANIM.EASING_BACK_OUT;
+    if(str=='Back In Out') return ANIM.EASING_BACK_INOUT;
 
-    if(str=='Elastic In') return CABLES.ANIM.EASING_ELASTIC_IN;
-    if(str=='Elastic Out') return CABLES.ANIM.EASING_ELASTIC_OUT;
+    if(str=='Elastic In') return ANIM.EASING_ELASTIC_IN;
+    if(str=='Elastic Out') return ANIM.EASING_ELASTIC_OUT;
 
-    if(str=='Bounce In') return CABLES.ANIM.EASING_BOUNCE_IN;
-    if(str=='Bounce Out') return CABLES.ANIM.EASING_BOUNCE_OUT;
+    if(str=='Bounce In') return ANIM.EASING_BOUNCE_IN;
+    if(str=='Bounce Out') return ANIM.EASING_BOUNCE_OUT;
 
-    if(str=='Quart Out') return CABLES.ANIM.EASING_QUART_OUT;
-    if(str=='Quart In') return CABLES.ANIM.EASING_QUART_IN;
-    if(str=='Quart In Out') return CABLES.ANIM.EASING_QUART_INOUT;
+    if(str=='Quart Out') return ANIM.EASING_QUART_OUT;
+    if(str=='Quart In') return ANIM.EASING_QUART_IN;
+    if(str=='Quart In Out') return ANIM.EASING_QUART_INOUT;
 
-    if(str=='Quint Out') return CABLES.ANIM.EASING_QUINT_OUT;
-    if(str=='Quint In') return CABLES.ANIM.EASING_QUINT_IN;
-    if(str=='Quint In Out') return CABLES.ANIM.EASING_QUINT_INOUT;
+    if(str=='Quint Out') return ANIM.EASING_QUINT_OUT;
+    if(str=='Quint In') return ANIM.EASING_QUINT_IN;
+    if(str=='Quint In Out') return ANIM.EASING_QUINT_INOUT;
 };
 
-CABLES.Anim.prototype.createPort=function(op,title,cb)
+Anim.prototype.createPort=function(op,title,cb)
 {
     var port=op.addInPort(new CABLES.Port(op,title,CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
         "linear",
@@ -828,13 +830,13 @@ CABLES.Anim.prototype.createPort=function(op,title,cb)
 
 // ------------------------------
 
-CABLES.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
+Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
 {
 
-    if(!CABLES.Anim.slerpQuaternion.q1)
+    if(!Anim.slerpQuaternion.q1)
     {
-        CABLES.Anim.slerpQuaternion.q1=quat.create();
-        CABLES.Anim.slerpQuaternion.q2=quat.create();
+        Anim.slerpQuaternion.q1=quat.create();
+        Anim.slerpQuaternion.q2=quat.create();
     }
 
     var i1=animx.getKeyIndex(time);
@@ -856,21 +858,27 @@ CABLES.Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
         var key2Time=animx.keys[i2].time;
         var perc=(time-key1Time)/(key2Time-key1Time);
 
-        quat.set(CABLES.Anim.slerpQuaternion.q1,
+        quat.set(Anim.slerpQuaternion.q1,
             animx.keys[i1].value,
             animy.keys[i1].value,
             animz.keys[i1].value,
             animw.keys[i1].value
         );
 
-        quat.set(CABLES.Anim.slerpQuaternion.q2,
+        quat.set(Anim.slerpQuaternion.q2,
             animx.keys[i2].value,
             animy.keys[i2].value,
             animz.keys[i2].value,
             animw.keys[i2].value
         );
 
-        quat.slerp(q, CABLES.Anim.slerpQuaternion.q1, CABLES.Anim.slerpQuaternion.q2, perc);
+        quat.slerp(q, Anim.slerpQuaternion.q1, Anim.slerpQuaternion.q2, perc);
     }
     return q;
 };
+
+export { Anim };
+const TL = ANIM;
+TL.Anim= Anim;
+export { TL };
+

@@ -1,6 +1,8 @@
-var CGL=CGL || {};
+import Texture from "./cgl_texture";
+import MESHES from "./cgl_simplerect";
+// var CGL=CGL || {};
 
-CGL.TextureEffect=function(cgl,options)
+const TextureEffect=function(cgl,options)
 {
     this._cgl=cgl;
 
@@ -29,13 +31,13 @@ CGL.TextureEffect=function(cgl,options)
 };
 
 
-CGL.TextureEffect.prototype.setSourceTexture=function(tex)
+TextureEffect.prototype.setSourceTexture=function(tex)
 {
-    if(tex.textureType==CGL.Texture.TYPE_FLOAT) this._cgl.gl.getExtension('EXT_color_buffer_float');
+    if(tex.textureType==Texture.TYPE_FLOAT) this._cgl.gl.getExtension('EXT_color_buffer_float');
 
     if(tex===null)
     {
-        this._textureSource=new CGL.Texture(this._cgl);
+        this._textureSource=new Texture(this._cgl);
         this._textureSource.setSize(16,16);
     }
     else
@@ -102,7 +104,7 @@ CGL.TextureEffect.prototype.setSourceTexture=function(tex)
     }
 };
 
-CGL.TextureEffect.prototype.startEffect=function()
+TextureEffect.prototype.startEffect=function()
 {
     if(!this._textureTarget)
     {
@@ -131,7 +133,7 @@ CGL.TextureEffect.prototype.startEffect=function()
     mat4.identity(this._cgl.mvMatrix);
 };
 
-CGL.TextureEffect.prototype.endEffect=function()
+TextureEffect.prototype.endEffect=function()
 {
     this._cgl.popDepthTest(false);
     // this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
@@ -145,7 +147,7 @@ CGL.TextureEffect.prototype.endEffect=function()
     this._cgl.resetViewPort();
 };
 
-CGL.TextureEffect.prototype.bind=function()
+TextureEffect.prototype.bind=function()
 {
     if(this._textureSource===null)
     {
@@ -165,7 +167,7 @@ CGL.TextureEffect.prototype.bind=function()
     }
 };
 
-CGL.TextureEffect.prototype.finish=function()
+TextureEffect.prototype.finish=function()
 {
     if(this._textureSource===null)
     {
@@ -179,7 +181,7 @@ CGL.TextureEffect.prototype.finish=function()
 
     // this._textureTarget.updateMipMap();
 
-    if(this._textureTarget.filter==CGL.Texture.FILTER_MIPMAP)
+    if(this._textureTarget.filter==Texture.FILTER_MIPMAP)
     {
         if(!this.switched)
         {
@@ -199,19 +201,19 @@ CGL.TextureEffect.prototype.finish=function()
     this.switched=!this.switched;
 };
 
-CGL.TextureEffect.prototype.getCurrentTargetTexture=function()
+TextureEffect.prototype.getCurrentTargetTexture=function()
 {
     if(this.switched)return this._textureSource;
         else return this._textureTarget;
 };
 
-CGL.TextureEffect.prototype.getCurrentSourceTexture=function()
+TextureEffect.prototype.getCurrentSourceTexture=function()
 {
     if(this.switched)return this._textureTarget;
         else return this._textureSource;
 };
 
-CGL.TextureEffect.prototype.delete=function()
+TextureEffect.prototype.delete=function()
 {
     if(this._textureTarget)this._textureTarget.delete();
     if(this._textureSource)this._textureSource.delete();
@@ -219,16 +221,16 @@ CGL.TextureEffect.prototype.delete=function()
     this._cgl.gl.deleteFramebuffer(this._frameBuf);
 };
 
-CGL.TextureEffect.prototype.createMesh=function()
+TextureEffect.prototype.createMesh=function()
 {
-    this._cgl.TextureEffectMesh=CGL.MESHES.getSimpleRect(this._cgl,"textureEffect rect");
+    this._cgl.TextureEffectMesh= MESHES.getSimpleRect(this._cgl,"textureEffect rect");
 };
 
 
 // ---------------------------------------------------------------------------------
 
 
-CGL.TextureEffect.checkOpNotInTextureEffect=function(op)
+TextureEffect.checkOpNotInTextureEffect=function(op)
 {
     if(op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
@@ -250,7 +252,7 @@ CGL.TextureEffect.checkOpNotInTextureEffect=function(op)
 };
 
 
-CGL.TextureEffect.checkOpInEffect=function(op)
+TextureEffect.checkOpInEffect=function(op)
 {
     if(op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
     {
@@ -270,7 +272,7 @@ CGL.TextureEffect.checkOpInEffect=function(op)
     return true;
 };
 
-CGL.TextureEffect.getBlendCode=function()
+TextureEffect.getBlendCode=function()
 {
     return ''
 
@@ -381,7 +383,7 @@ CGL.TextureEffect.getBlendCode=function()
 };
 
 
-CGL.TextureEffect.onChangeBlendSelect=function(shader,blendName)
+TextureEffect.onChangeBlendSelect=function(shader,blendName)
 {
     if(blendName=='normal') shader.define('BM_NORMAL');
         else shader.removeDefine('BM_NORMAL');
@@ -436,7 +438,7 @@ CGL.TextureEffect.onChangeBlendSelect=function(shader,blendName)
 
 };
 
-CGL.TextureEffect.AddBlendSelect=function(op,name)
+TextureEffect.AddBlendSelect=function(op,name)
 {
     var p=op.inValueSelect(name,
         [
@@ -462,14 +464,14 @@ CGL.TextureEffect.AddBlendSelect=function(op,name)
     return p;
 };
 
-CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
+TextureEffect.setupBlending=function(op,shader,blendMode,amount)
 {
     op.setPortGroup('Blending', [blendMode, amount]);
 
     // blendMode.setUiAttribs({"showIndex":true});
 
     blendMode.onChange = function () {
-        CGL.TextureEffect.onChangeBlendSelect(shader, blendMode.get());
+        TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
         if(CABLES.UI)
         {
@@ -501,3 +503,5 @@ CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
     
 
 }
+
+export default TextureEffect;

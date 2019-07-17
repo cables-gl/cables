@@ -1,8 +1,8 @@
-var CGL=CGL || {};
-CGL.tempTexture=null;
-CGL.tempTextureEmpty=null;
+// var CGL=CGL || {};
+export var tempTexture=null;
+export var tempTextureEmpty=null;
 
-CGL.DEFAULT_TEXTURE_SIZE=8;
+export var DEFAULT_TEXTURE_SIZE=8;
 
 /**
  * A Texture
@@ -23,7 +23,7 @@ CGL.DEFAULT_TEXTURE_SIZE=8;
  * const tex=new CGL.Texture(cgl);
  * tex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
  */
-CGL.Texture=function(__cgl,options)
+const Texture=function(__cgl,options)
 {
     if(!__cgl) throw "no cgl";
 
@@ -34,11 +34,11 @@ CGL.Texture=function(__cgl,options)
     this.height = 0;
     this.flip = true;
     this.shadowMap=false;
-    this.filter = CGL.Texture.FILTER_NEAREST;
-    this.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    this.filter = Texture.FILTER_NEAREST;
+    this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
     this.texTarget= this._cgl.gl.TEXTURE_2D;
     if(options && options.type)this.texTarget=options.type;
-    this.textureType=CGL.Texture.TYPE_DEFAULT;
+    this.textureType=Texture.TYPE_DEFAULT;
     this.unpackAlpha=true;
     this._fromData=true;
     this.name="unknown";
@@ -46,8 +46,8 @@ CGL.Texture=function(__cgl,options)
     if(options)
     {
         this.name=options.name||this.name;
-        if(options.isDepthTexture) this.textureType=CGL.Texture.TYPE_DEPTH;
-        if(options.isFloatingPointTexture) this.textureType=CGL.Texture.TYPE_FLOAT;
+        if(options.isDepthTexture) this.textureType=Texture.TYPE_DEPTH;
+        if(options.isFloatingPointTexture) this.textureType=Texture.TYPE_FLOAT;
 
         if("textureType" in options) this.textureType=options.textureType;
         if("filter" in options) this.filter=options.filter;
@@ -60,8 +60,8 @@ CGL.Texture=function(__cgl,options)
     {
         options=
             {
-                width:CGL.DEFAULT_TEXTURE_SIZE,
-                height:CGL.DEFAULT_TEXTURE_SIZE
+                width: DEFAULT_TEXTURE_SIZE,
+                height: DEFAULT_TEXTURE_SIZE
             };
     }
 
@@ -76,7 +76,7 @@ CGL.Texture=function(__cgl,options)
  * @param {Texture} otherTexture
  * @returns {Boolean}
  */
-CGL.Texture.prototype.compareSettings=function(tex)
+Texture.prototype.compareSettings=function(tex)
 {
     if(!tex)return false;
     return (
@@ -97,9 +97,9 @@ CGL.Texture.prototype.compareSettings=function(tex)
  * @instance
  * @returns {Texture}
  */
-CGL.Texture.prototype.clone=function()
+Texture.prototype.clone=function()
 {
-    var newTex=new CGL.Texture(this._cgl,
+    var newTex=new Texture(this._cgl,
         {
             "name":this.name,
             "filter":this.filter,
@@ -129,10 +129,10 @@ CGL.Texture.prototype.clone=function()
  * @param {Number} width
  * @param {Number} height
  */
-CGL.Texture.prototype.setSize=function(w,h)
+Texture.prototype.setSize=function(w,h)
 {
-    if(w!=w || w<=0 || !w)w=CGL.DEFAULT_TEXTURE_SIZE;
-    if(h!=h || h<=0 || !h)h=CGL.DEFAULT_TEXTURE_SIZE;
+    if(w!=w || w<=0 || !w)w= DEFAULT_TEXTURE_SIZE;
+    if(h!=h || h<=0 || !h)h= DEFAULT_TEXTURE_SIZE;
     w=Math.floor(w);
     h=Math.floor(h);
     if(this.width==w && this.height==h)return;
@@ -145,14 +145,14 @@ CGL.Texture.prototype.setSize=function(w,h)
 
     var uarr=null;
 
-    if(this.textureType==CGL.Texture.TYPE_FLOAT)
+    if(this.textureType==Texture.TYPE_FLOAT)
     {
-        this.filter = CGL.Texture.FILTER_NEAREST;
+        this.filter = Texture.FILTER_NEAREST;
     }
 
     this._setFilter();
 
-    if(this.textureType==CGL.Texture.TYPE_FLOAT)
+    if(this.textureType==Texture.TYPE_FLOAT)
     {
         // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
@@ -176,7 +176,7 @@ CGL.Texture.prototype.setSize=function(w,h)
         else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w,h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
     }
     else
-    if(this.textureType==CGL.Texture.TYPE_DEPTH)
+    if(this.textureType==Texture.TYPE_DEPTH)
     {
 
         if(this._cgl.glVersion==1)
@@ -204,7 +204,7 @@ CGL.Texture.prototype.setSize=function(w,h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
+    // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
     // {
     //     this._cgl.gl.generateMipmap(this.texTarget);
     // }
@@ -224,12 +224,12 @@ CGL.Texture.prototype.setSize=function(w,h)
  * @param {Number} filter
  * @param {Number} wrap
  */
-CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
+Texture.prototype.initFromData=function(data,w,h,filter,wrap)
 {
     this.filter=filter;
     this.wrap=wrap;
-    if(filter==undefined)this.filter=CGL.Texture.FILTER_LINEAR;
-    if(wrap==undefined)this.wrap=CGL.Texture.CLAMP_TO_EDGE;
+    if(filter==undefined)this.filter=Texture.FILTER_LINEAR;
+    if(wrap==undefined)this.wrap=Texture.CLAMP_TO_EDGE;
     this.width=w;
     this.height=h;
     this._fromData=true;
@@ -237,7 +237,7 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
     this._setFilter();
 
-    // if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP)
+    // if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
     // {
     //     this._cgl.gl.generateMipmap(this.texTarget);
     // }
@@ -246,9 +246,9 @@ CGL.Texture.prototype.initFromData=function(data,w,h,filter,wrap)
     this._cgl.gl.bindTexture(this.texTarget, null);
 };
 
-CGL.Texture.prototype.updateMipMap=function()
+Texture.prototype.updateMipMap=function()
 {
-    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==CGL.Texture.FILTER_MIPMAP) 
+    if( (this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP) 
     {
         this._cgl.gl.generateMipmap(this.texTarget);
     }
@@ -262,7 +262,7 @@ CGL.Texture.prototype.updateMipMap=function()
  * @param {Object} image
  * @param {Number} filter
  */
-CGL.Texture.prototype.initTexture=function(img,filter)
+Texture.prototype.initTexture=function(img,filter)
 {
     this._fromData=false;
     // if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
@@ -290,7 +290,7 @@ CGL.Texture.prototype.initTexture=function(img,filter)
  * @memberof Texture
  * @instance
  */
-CGL.Texture.prototype.delete=function()
+Texture.prototype.delete=function()
 {
     CGL.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
@@ -303,17 +303,17 @@ CGL.Texture.prototype.delete=function()
  * @description return true if texture width and height are both power of two
  * @return {Boolean}
  */
-CGL.Texture.prototype.isPowerOfTwo=function()
+Texture.prototype.isPowerOfTwo=function()
 {
-    return CGL.Texture.isPowerOfTwo(this.width) && CGL.Texture.isPowerOfTwo(this.height);
+    return Texture.isPowerOfTwo(this.width) && Texture.isPowerOfTwo(this.height);
 };
 
-CGL.Texture.prototype.printInfo=function()
+Texture.prototype.printInfo=function()
 {
     console.log(this.getInfo());
 };
 
-CGL.Texture.prototype.getInfoReadable=function()
+Texture.prototype.getInfoReadable=function()
 {
     var info=this.getInfo();
     var html='';
@@ -328,7 +328,7 @@ CGL.Texture.prototype.getInfoReadable=function()
     return html;
 };
 
-CGL.Texture.prototype.getInfo=function()
+Texture.prototype.getInfo=function()
 {
     var obj={};
 
@@ -342,24 +342,24 @@ CGL.Texture.prototype.getInfo=function()
 
     obj.unpackAlpha=this.unpackAlpha;
 
-    if(this.textureType==CGL.Texture.TYPE_FLOAT) obj.textureType='TYPE_FLOAT';
-    else if(this.textureType==CGL.Texture.TYPE_DEPTH) obj.textureType='TYPE_DEPTH';
-    else if(this.textureType==CGL.Texture.TYPE_DEFAULT) obj.textureType='TYPE_DEFAULT';
+    if(this.textureType==Texture.TYPE_FLOAT) obj.textureType='TYPE_FLOAT';
+    else if(this.textureType==Texture.TYPE_DEPTH) obj.textureType='TYPE_DEPTH';
+    else if(this.textureType==Texture.TYPE_DEFAULT) obj.textureType='TYPE_DEFAULT';
     else obj.textureType='UNKNOWN';
 
-    if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE) obj.wrap="CLAMP_TO_EDGE";
-    else if(this.wrap==CGL.Texture.WRAP_REPEAT) obj.wrap="WRAP_REPEAT";
-    else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT) obj.wrap="WRAP_MIRRORED_REPEAT";
+    if(this.wrap==Texture.WRAP_CLAMP_TO_EDGE) obj.wrap="CLAMP_TO_EDGE";
+    else if(this.wrap==Texture.WRAP_REPEAT) obj.wrap="WRAP_REPEAT";
+    else if(this.wrap==Texture.WRAP_MIRRORED_REPEAT) obj.wrap="WRAP_MIRRORED_REPEAT";
     else obj.wrap="UNKNOWN";
 
-    if(this.filter==CGL.Texture.FILTER_NEAREST) obj.filter="FILTER_NEAREST";
-    else if(this.filter==CGL.Texture.FILTER_LINEAR) obj.filter="FILTER_LINEAR";
-    else if(this.filter==CGL.Texture.FILTER_MIPMAP) obj.filter="FILTER_MIPMAP";
+    if(this.filter==Texture.FILTER_NEAREST) obj.filter="FILTER_NEAREST";
+    else if(this.filter==Texture.FILTER_LINEAR) obj.filter="FILTER_LINEAR";
+    else if(this.filter==Texture.FILTER_MIPMAP) obj.filter="FILTER_MIPMAP";
     else obj.filter="UNKNOWN";
     return obj;
 };
 
-CGL.Texture.prototype._setFilter=function()
+Texture.prototype._setFilter=function()
 {
     if(!this._fromData)
     {
@@ -382,39 +382,39 @@ CGL.Texture.prototype._setFilter=function()
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
 
-        this.filter=CGL.Texture.FILTER_NEAREST;
-        this.wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+        this.filter=Texture.FILTER_NEAREST;
+        this.wrap=Texture.WRAP_CLAMP_TO_EDGE;
     }
     else
     {
-        if(this.wrap==CGL.Texture.WRAP_CLAMP_TO_EDGE)
+        if(this.wrap==Texture.WRAP_CLAMP_TO_EDGE)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
         }
-        else if(this.wrap==CGL.Texture.WRAP_REPEAT)
+        else if(this.wrap==Texture.WRAP_REPEAT)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.REPEAT);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.REPEAT);
         }
-        else if(this.wrap==CGL.Texture.WRAP_MIRRORED_REPEAT)
+        else if(this.wrap==Texture.WRAP_MIRRORED_REPEAT)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.MIRRORED_REPEAT);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.MIRRORED_REPEAT);
         }
 
         
-        if(this.filter==CGL.Texture.FILTER_NEAREST)
+        if(this.filter==Texture.FILTER_NEAREST)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
         }
-        else if(this.filter==CGL.Texture.FILTER_LINEAR)
+        else if(this.filter==Texture.FILTER_LINEAR)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
         }
-        else if(this.filter==CGL.Texture.FILTER_MIPMAP)
+        else if(this.filter==Texture.FILTER_MIPMAP)
         {
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR_MIPMAP_LINEAR);
@@ -439,10 +439,10 @@ CGL.Texture.prototype._setFilter=function()
  * @param {Object} options
  * @return {Texture}
  */
-CGL.Texture.load=function(cgl,url,finishedCallback,settings)
+Texture.load=function(cgl,url,finishedCallback,settings)
 {
     var loadingId=cgl.patch.loading.start('texture',url);
-    var texture=new CGL.Texture(cgl);
+    var texture=new Texture(cgl);
 
     texture.name=url;
 
@@ -488,9 +488,9 @@ CGL.Texture.load=function(cgl,url,finishedCallback,settings)
  * @param {Context} cgl
  * @return {Texture}
  */
-CGL.Texture.getTempTexture=function(cgl)
+Texture.getTempTexture=function(cgl)
 {
-    if(!CGL.tempTexture) CGL.tempTexture=CGL.Texture.getTemporaryTexture(cgl,256,CGL.Texture.FILTER_LINEAR,CGL.Texture.REPEAT);
+    if(!CGL.tempTexture) CGL.tempTexture=Texture.getTemporaryTexture(cgl,256,Texture.FILTER_LINEAR,Texture.REPEAT);
     return CGL.tempTexture;
 };
 
@@ -501,14 +501,14 @@ CGL.Texture.getTempTexture=function(cgl)
  * @description returns a reference to a small empty texture
  * @return {Texture}
  */
-CGL.Texture.getEmptyTexture=function(cgl)
+Texture.getEmptyTexture=function(cgl)
 {
     if(CGL.tempTextureEmpty) return CGL.tempTextureEmpty;
 
-    CGL.tempTextureEmpty=new CGL.Texture(cgl);
+    CGL.tempTextureEmpty=new Texture(cgl);
     var data = new Uint8Array(8*8*4);//.fill(0);
 
-    CGL.tempTextureEmpty.initFromData(data,8,8,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+    CGL.tempTextureEmpty.initFromData(data,8,8,Texture.FILTER_NEAREST,Texture.WRAP_REPEAT);
 
     return CGL.tempTextureEmpty;
 };
@@ -521,7 +521,7 @@ CGL.Texture.getEmptyTexture=function(cgl)
  * @description returns a reference to a random texture
  * @return {Texture}
  */
-CGL.Texture.getRandomTexture=function(cgl)
+Texture.getRandomTexture=function(cgl)
 {
     if(CGL.randomTexture) return CGL.randomTexture;
 
@@ -536,8 +536,8 @@ CGL.Texture.getRandomTexture=function(cgl)
         data[ x*4+3]=255;
     }
     
-    CGL.randomTexture=new CGL.Texture(cgl);
-    CGL.randomTexture.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+    CGL.randomTexture=new Texture(cgl);
+    CGL.randomTexture.initFromData(data,size,size,Texture.FILTER_NEAREST,Texture.WRAP_REPEAT);
 
     return CGL.randomTexture;
 };
@@ -551,10 +551,10 @@ CGL.Texture.getRandomTexture=function(cgl)
  * @param {Context} cgl
  * @return {Texture}
  */
-CGL.Texture.getTempGradientTexture=function(cgl)
+Texture.getTempGradientTexture=function(cgl)
 {
     if(CGL.tempTextureGradient) return CGL.tempTextureGradient;
-    var temptex=new CGL.Texture(cgl);
+    var temptex=new Texture(cgl);
     const size=256;
     var data = new Uint8Array(size*size*4);//.fill(0);
 
@@ -565,14 +565,14 @@ CGL.Texture.getTempGradientTexture=function(cgl)
             data[ (x+y*size)*4+3]=255;
         }
 
-    temptex.initFromData(data,size,size,CGL.Texture.FILTER_NEAREST,CGL.Texture.WRAP_REPEAT);
+    temptex.initFromData(data,size,size,Texture.FILTER_NEAREST,Texture.WRAP_REPEAT);
     CGL.tempTextureGradient=temptex;
     return temptex;
 };
 
-CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
+Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
 {
-    var temptex=new CGL.Texture(cgl);
+    var temptex=new Texture(cgl);
     var arr=[];
     for(var y=0;y<size;y++)
     {
@@ -609,9 +609,9 @@ CGL.Texture.getTemporaryTexture=function(cgl,size,filter,wrap)
  * @param {Object} image
  * @param {Object} options
  */
-CGL.Texture.createFromImage=function(cgl,img,options)
+Texture.createFromImage=function(cgl,img,options)
 {
-    var texture=new CGL.Texture(cgl,options);
+    var texture=new Texture(cgl,options);
     texture.flip=false;
     texture.image = img;
     texture.width=img.width;
@@ -622,11 +622,11 @@ CGL.Texture.createFromImage=function(cgl,img,options)
 };
 
 // deprecated!
-CGL.Texture.fromImage=function(cgl,img,filter,wrap)
+Texture.fromImage=function(cgl,img,filter,wrap)
 {
     console.error('deprecated texture from image...');
 
-    var texture=new CGL.Texture(cgl);
+    var texture=new Texture(cgl);
     texture.flip=false;
     if(filter)texture.filter=filter;
     if(wrap)texture.wrap=wrap;
@@ -643,19 +643,22 @@ CGL.Texture.fromImage=function(cgl,img,filter,wrap)
  * @param {Number} x
  * @return {Boolean}
  */
-CGL.Texture.isPowerOfTwo=function(x)
+Texture.isPowerOfTwo=function(x)
 {
     return ( x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384);
 };
 
-CGL.Texture.FILTER_NEAREST=0;
-CGL.Texture.FILTER_LINEAR=1;
-CGL.Texture.FILTER_MIPMAP=2;
+Texture.FILTER_NEAREST=0;
+Texture.FILTER_LINEAR=1;
+Texture.FILTER_MIPMAP=2;
 
-CGL.Texture.WRAP_REPEAT=0;
-CGL.Texture.WRAP_MIRRORED_REPEAT=1;
-CGL.Texture.WRAP_CLAMP_TO_EDGE=2;
+Texture.WRAP_REPEAT=0;
+Texture.WRAP_MIRRORED_REPEAT=1;
+Texture.WRAP_CLAMP_TO_EDGE=2;
 
-CGL.Texture.TYPE_DEFAULT=0;
-CGL.Texture.TYPE_DEPTH=1;
-CGL.Texture.TYPE_FLOAT=2;
+Texture.TYPE_DEFAULT=0;
+Texture.TYPE_DEPTH=1;
+Texture.TYPE_FLOAT=2;
+
+
+export default Texture;

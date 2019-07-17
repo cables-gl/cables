@@ -1,3 +1,5 @@
+import { uuid } from "./0_utils";
+import { PORT_DIR_IN, PORT_DIR_OUT } from "./core_port";
 /**
  * op the class of all operators
  * @external CABLES
@@ -17,57 +19,57 @@
  */
 
 var Ops = {};
-var CABLES=CABLES || {};
+// var CABLES=CABLES || {};
 
-CABLES.OP_PORT_TYPE_VALUE = 0;
-CABLES.OP_PORT_TYPE_FUNCTION = 1;
-CABLES.OP_PORT_TYPE_OBJECT = 2;
-CABLES.OP_PORT_TYPE_TEXTURE = 2;
-CABLES.OP_PORT_TYPE_ARRAY = 3;
-CABLES.OP_PORT_TYPE_DYNAMIC = 4;
-CABLES.OP_PORT_TYPE_STRING = 5;
+export const OP_PORT_TYPE_VALUE = 0;
+export const OP_PORT_TYPE_FUNCTION = 1;
+export const OP_PORT_TYPE_OBJECT = 2;
+export const OP_PORT_TYPE_TEXTURE = 2;
+export const OP_PORT_TYPE_ARRAY = 3;
+export const OP_PORT_TYPE_DYNAMIC = 4;
+export const OP_PORT_TYPE_STRING = 5;
 
-CABLES.OP_VERSION_PREFIX = '_v';
+export const OP_VERSION_PREFIX = "_v";
 
-CABLES.Op = function()
+const Op = function ()
 {
-    this.data={}; // reserved for op-specific user-data
-    this.objName='';
-    this.portsOut=[];
-    this.portsIn=[];
-    this.portsInData=[]; // original loaded patch data 
-    this.opId=''; // unique op id
+    this.data = {}; // reserved for op-specific user-data
+    this.objName = "";
+    this.portsOut = [];
+    this.portsIn = [];
+    this.portsInData = []; // original loaded patch data
+    this.opId = ""; // unique op id
     this.uiAttribs = {};
-    this.enabled=true;
-    this.patch=arguments[0];
-    this.name=arguments[1];
-    this.errors={};
-    this._needsLinkedToWork=[];
-    this._needsParentOp=null;
-    this._shortOpName='';
+    this.enabled = true;
+    this.patch = arguments[0];
+    this.name = arguments[1];
+    this.errors = {};
+    this._needsLinkedToWork = [];
+    this._needsParentOp = null;
+    this._shortOpName = "";
 
-    if(arguments[1])
+    if (arguments[1])
     {
-        this._shortOpName=arguments[1].split('.')[arguments[1].split('.').length-1]
+        this._shortOpName = arguments[1].split(".")[arguments[1].split(".").length - 1];
 
-        if(this._shortOpName.indexOf(CABLES.OP_VERSION_PREFIX)>0)
+        if (this._shortOpName.indexOf(OP_VERSION_PREFIX) > 0)
         {
-            var n=this._shortOpName.split(CABLES.OP_VERSION_PREFIX)[1]
-            this._shortOpName=this._shortOpName.substring(0,this._shortOpName.length - (CABLES.OP_VERSION_PREFIX+n).length);
+            var n = this._shortOpName.split(OP_VERSION_PREFIX)[1];
+            this._shortOpName = this._shortOpName.substring(0, this._shortOpName.length - (OP_VERSION_PREFIX + n).length);
         }
 
-        this.uiAttribs.title=this._shortOpName;
+        this.uiAttribs.title = this._shortOpName;
     }
 
-    this.id=arguments[2]||CABLES.uuid(); // instance id
-    this.onAddPort=null;
-    this.onCreate=null;
-    this.onResize=null;
-    this.onLoaded=null;
-    this.onDelete=null;
-    this.onUiAttrChange=null;
-    this._eventCallbacks={};
-    this._instances=null;
+    this.id = arguments[2] || uuid(); // instance id
+    this.onAddPort = null;
+    this.onCreate = null;
+    this.onResize = null;
+    this.onLoaded = null;
+    this.onDelete = null;
+    this.onUiAttrChange = null;
+    this._eventCallbacks = {};
+    this._instances = null;
 
     /**
      * overwrite this to prerender shader and meshes / will be called by op `loadingStatus`
@@ -75,8 +77,7 @@ CABLES.Op = function()
      * @memberof Op
      * @instance
      */
-    this.preRender=null;
-
+    this.preRender = null;
 
     /**
      * overwrite this to initialize your op
@@ -84,30 +85,37 @@ CABLES.Op = function()
      * @memberof Op
      * @instance
      */
-    this.init=null;
+    this.init = null;
 };
 
 {
-    CABLES.Op.prototype.clearUiAttrib=function(name)
+    Op.prototype.clearUiAttrib = function (name)
     {
-        var obj={};
-        obj.name=null;
+        var obj = {};
+        obj.name = null;
         this.uiAttrib(obj);
     };
 
-    CABLES.Op.prototype.setTitle=function(name)
+    Op.prototype.setTitle = function (name)
     {
-        var doFireEvent=this.name!=name;
+        var doFireEvent = this.name != name;
 
-        this.name=name;
-        this.uiAttr({title:name});
+        this.name = name;
+        this.uiAttr({ title: name });
 
-        if(doFireEvent) 
-            this.fireEvent("onTitleChange",name);
+        if (doFireEvent) this.fireEvent("onTitleChange", name);
     };
 
+    const _setUiAttrib = function (newAttribs)
+    {
+        if (!this.uiAttribs) this.uiAttribs = {};
+        for (var p in newAttribs)
+        {
+            this.uiAttribs[p] = newAttribs[p];
+        }
 
-
+        this.fireEvent("onUiAttribsChange", newAttribs);
+    };
     /**
      * setUiAttrib
      * possible values:
@@ -123,73 +131,61 @@ CABLES.Op = function()
      * @example
      * op.setUiAttrib({"extendTitle":str});
      */
-    CABLES.Op.prototype.setUiAttrib=CABLES.Op.prototype.uiAttr=function(newAttribs)
-    {
-        if(!this.uiAttribs)this.uiAttribs={};
-        for(var p in newAttribs)
-        {
-            this.uiAttribs[p]=newAttribs[p];
-        }
-        
-        this.fireEvent("onUiAttribsChange",newAttribs);
-    };
+    Op.prototype.setUiAttrib = _setUiAttrib;
+    Op.prototype.uiAttr = _setUiAttrib;
 
-    CABLES.Op.prototype.getName=function()
+    Op.prototype.getName = function ()
     {
-        if(this.uiAttribs.name) return this.uiAttribs.name;
-        else 
-        {
-            return this.objName.split(".")
-        }
+        if (this.uiAttribs.name) return this.uiAttribs.name;
+
+        return this.objName.split(".");
+
         // return this.name;
     };
 
-    CABLES.Op.prototype.addOutPort=function(p)
+    Op.prototype.addOutPort = function (p)
     {
-        p.direction=CABLES.PORT_DIR_OUT;
-        p.parent=this;
+        p.direction = PORT_DIR_OUT;
+        p.parent = this;
         this.portsOut.push(p);
-        if(this.onAddPort)this.onAddPort(p);
+        if (this.onAddPort) this.onAddPort(p);
         // this.fireEvent("onPortsChanged",{});
         return p;
     };
 
-    CABLES.Op.prototype.hasPort=function(name)
+    Op.prototype.hasPort = function (name)
     {
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
-            if(this.portsIn[i].getName()==name)
-                return true;
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[i].getName() == name) return true;
         return false;
     };
 
-    CABLES.Op.prototype.hasDynamicPort=function()
+    Op.prototype.hasDynamicPort = function ()
     {
-        var i=0;
-        for(i=0;i<this.portsIn.length;i++)
+        var i = 0;
+        for (i = 0; i < this.portsIn.length; i++)
         {
-            if(this.portsIn[i].type==CABLES.OP_PORT_TYPE_DYNAMIC) return true;
-            if(this.portsIn[i].getName()=='dyn') return true;
+            if (this.portsIn[i].type == OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsIn[i].getName() == "dyn") return true;
         }
-        for(i=0;i<this.portsOut.length;i++)
+        for (i = 0; i < this.portsOut.length; i++)
         {
-            if(this.portsOut[i].type==CABLES.OP_PORT_TYPE_DYNAMIC) return true;
-            if(this.portsOut[i].getName()=='dyn') return true;
+            if (this.portsOut[i].type == OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsOut[i].getName() == "dyn") return true;
         }
 
         return false;
     };
 
-    CABLES.Op.prototype.addInPort=function(p)
+    Op.prototype.addInPort = function (p)
     {
-        if( !(p instanceof CABLES.Port))
+        if (!(p instanceof CABLES.Port))
         {
             throw new Error("parameter is not a port!");
-            return;
         }
-        p.direction=CABLES.PORT_DIR_IN;
-        p.parent=this;
+        p.direction = CABLES.PORT_DIR_IN;
+        p.parent = this;
         this.portsIn.push(p);
-        if(this.onAddPort)this.onAddPort(p);
+        if (this.onAddPort) this.onAddPort(p);
         // this.fireEvent("onPortsChanged",{});
         return p;
     };
@@ -201,10 +197,15 @@ CABLES.Op = function()
      * @memberof Op
      * @param {String} name
      * @return {Port} created port
-     * 
+     *
      */
-    CABLES.Op.prototype.inFunction= // deprecated
-    CABLES.Op.prototype.inTrigger=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inFunction = Op.prototype.inTrigger = function (name, v)
+    {
+        // deprecated
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create a trigger input  port with an UI trigger button
@@ -214,8 +215,13 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inFunctionButton=  // deprecated
-    CABLES.Op.prototype.inTriggerButton=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION,{"display":"button"})); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inFunctionButton = Op.prototype.inTriggerButton = function (name, v)
+    {
+        // deprecated
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION, { display: "button" }));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create a number value input port
@@ -225,12 +231,20 @@ CABLES.Op = function()
      * @param {String} name
      * @param {Number} value
      * @return {Port} created port
-     
+
      */
-    
-    CABLES.Op.prototype.inValueFloat= // old
-    CABLES.Op.prototype.inValue= // old
-    CABLES.Op.prototype.inFloat=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+    Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
+    {
+        // old // old
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a boolean input port, displayed as a checkbox
@@ -241,9 +255,18 @@ CABLES.Op = function()
      * @param {Boolean} value
      * @return {Port} created port
      */
-    
-    CABLES.Op.prototype.inValueBool= // old
-    CABLES.Op.prototype.inBool=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+    Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
+    {
+        // old
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a String value input port
@@ -254,10 +277,28 @@ CABLES.Op = function()
      * @param {String} value default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inValueString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
+    Op.prototype.inValueString = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string" }));
+        p.value = "";
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     // new string
-    CABLES.Op.prototype.inString = function (name, v) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" }));  v=v||''; p.value = v; p.set(v); p.defaultValue = v; return p; };
+    Op.prototype.inString = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string" }));
+        v = v || "";
+        p.value = v;
+        p.set(v);
+        p.defaultValue = v;
+        return p;
+    };
 
     /**
      * create a String value input port displayed as TextArea
@@ -268,8 +309,18 @@ CABLES.Op = function()
      * @param {String} value default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inValueText=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string","display":"text"})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-    
+    Op.prototype.inValueText = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string", display: "text" }));
+        p.value = "";
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
+
     /**
      * create a String value input port displayed as editor
      * @function inStringEditor
@@ -280,10 +331,30 @@ CABLES.Op = function()
      * @return {Port} created port
      */
     // new string
-    CABLES.Op.prototype.inStringEditor = function (name, v, syntax) { var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string", display: 'editor', editorSyntax: syntax })); p.value = ''; if (v !== undefined) { p.set(v); p.defaultValue = v; } return p; };
+    Op.prototype.inStringEditor = function (name, v, syntax)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string", display: "editor", editorSyntax: syntax }));
+        p.value = "";
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     // old
-    CABLES.Op.prototype.inValueEditor=function(name,v,syntax){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"type":"string",display:'editor',editorSyntax:syntax})); p.value=''; if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    Op.prototype.inValueEditor = function (name, v, syntax)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string", display: "editor", editorSyntax: syntax }));
+        p.value = "";
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a string select box
@@ -295,9 +366,17 @@ CABLES.Op = function()
      * @param {String} value default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inValueSelect= // old
-    CABLES.Op.prototype.inDropDown=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":'dropdown',"hidePort":true,values:values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-
+    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
+    {
+        // old
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: true, values }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a string switch box
@@ -309,8 +388,23 @@ CABLES.Op = function()
      * @param {String} value default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inSwitch=function(name,values,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_STRING,{"display":'switch',"hidePort":true,"type":"string","values":values})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-
+    Op.prototype.inSwitch = function (name, values, v)
+    {
+        var p = this.addInPort(
+            new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, {
+                display: "switch",
+                hidePort: true,
+                type: "string",
+                values,
+            }),
+        );
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a integer input port
@@ -321,8 +415,17 @@ CABLES.Op = function()
      * @param {number} value default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inValueInt= //old
-    CABLES.Op.prototype.inInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    Op.prototype.inValueInt = Op.prototype.inInt = function (name, v)
+    {
+        // old
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { increment: "integer" }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a file/URL input port
@@ -332,11 +435,27 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+    Op.prototype.inFile = function (name, filter, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "file", filter }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
-    CABLES.Op.prototype.inUrl=function(name,filter,v){var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_STRING,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-
-
+    Op.prototype.inUrl = function (name, filter, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { display: "file", filter }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create a texture input port
@@ -346,7 +465,12 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inTexture=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"display":"texture","preview":true})); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inTexture = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, { display: "texture", preview: true }));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create a object input port
@@ -356,9 +480,19 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inObject=function(name,v,options) { var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,options)); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inObject = function (name, v, options)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, options));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
-    CABLES.Op.prototype.inGradient=function(name,v) { var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"gradient","hidePort":true})); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inGradient = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "gradient", hidePort: true }));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create a array input port
@@ -368,7 +502,12 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inArray=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.inArray = function (name, v)
+    {
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_ARRAY));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create a value slider input port
@@ -379,9 +518,17 @@ CABLES.Op = function()
      * @param {number} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.inValueSlider= //old
-    CABLES.Op.prototype.inFloatSlider=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{'display':'range'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
-
+    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v)
+    {
+        // old
+        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "range" }));
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
 
     /**
      * create output trigger port
@@ -391,8 +538,13 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outFunction= //old
-    CABLES.Op.prototype.outTrigger=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_FUNCTION)); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.outFunction = Op.prototype.outTrigger = function (name, v)
+    {
+        // old
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create output value port
@@ -403,8 +555,13 @@ CABLES.Op = function()
      * @param {number} default value
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outValue= //old
-    CABLES.Op.prototype.outNumber= function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE)); if(v!==undefined)p.set(v); return p; };
+    Op.prototype.outValue = Op.prototype.outNumber = function (name, v)
+    {
+        // old
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
 
     /**
      * create output boolean port
@@ -414,8 +571,14 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outValueBool= //old
-    CABLES.Op.prototype.outBool=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"bool"})); if(v!==undefined)p.set(v);else p.set(false); return p; };
+    Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
+    {
+        // old
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        if (v !== undefined) p.set(v);
+        else p.set(false);
+        return p;
+    };
 
     /**
      * create output string port
@@ -425,8 +588,19 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outValueString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { "type": "string" })); if (v !== undefined) p.set(v); return p; };
-    CABLES.Op.prototype.outString = function (name, v) { var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { "type": "string" })); if (v !== undefined) p.set(v); else p.set(''); return p; };
+    Op.prototype.outValueString = function (name, v)
+    {
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string" }));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
+    Op.prototype.outString = function (name, v)
+    {
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string" }));
+        if (v !== undefined) p.set(v);
+        else p.set("");
+        return p;
+    };
 
     /**
      * create output object port
@@ -436,7 +610,13 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outObject=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+    Op.prototype.outObject = function (name, v)
+    {
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT));
+        if (v !== undefined) p.set(v);
+        p.ignoreValueSerialize = true;
+        return p;
+    };
 
     /**
      * create output array port
@@ -446,7 +626,13 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outArray=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_ARRAY)); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
+    Op.prototype.outArray = function (name, v)
+    {
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_ARRAY));
+        if (v !== undefined) p.set(v);
+        p.ignoreValueSerialize = true;
+        return p;
+    };
 
     /**
      * create output texture port
@@ -456,148 +642,147 @@ CABLES.Op = function()
      * @param {String} name
      * @return {Port} created port
      */
-    CABLES.Op.prototype.outTexture=function(name,v){ var p=this.addOutPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_OBJECT,{"preview":true})); if(v!==undefined)p.set(v); p.ignoreValueSerialize=true; return p; };
-
-
-    CABLES.Op.prototype.inDynamic=
-        function(name,filter,options,v){
-            var p=new CABLES.Port( this,name,CABLES.OP_PORT_TYPE_DYNAMIC,options);
-
-            p.shouldLink=function(p1,p2)
-            {
-              if(filter && CABLES.UTILS.isArray(filter))
-              {
-                for(var i=0; i<filter.length; i++)
-                {
-                  if(p1==this && p2.type===filter[i]) return true;
-                  if(p2==this && p1.type===filter[i]) return true;
-                }
-                return false; // types do not match
-              } else {
-                return true; // no filter set
-              }
-            };
-
-            this.addInPort(p); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p;
-        };
-
-    CABLES.Op.prototype.printInfo=function()
+    Op.prototype.outTexture = function (name, v)
     {
-        for(var i=0;i<this.portsIn.length;i++)
-            console.log('in: '+this.portsIn[i].getName());
-
-        for(var ipo in this.portsOut)
-            console.log('out: '+this.portsOut[ipo].getName());
+        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, { preview: true }));
+        if (v !== undefined) p.set(v);
+        p.ignoreValueSerialize = true;
+        return p;
     };
 
-    CABLES.Op.prototype.getOutChilds=function()
+    Op.prototype.inDynamic = function (name, filter, options, v)
     {
-        var childs=[];
-        for(var ipo in this.portsOut)
+        var p = new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_DYNAMIC, options);
+
+        p.shouldLink = function (p1, p2)
         {
-            for(var l in this.portsOut[ipo].links)
+            if (filter && CABLES.UTILS.isArray(filter))
             {
-                if(this.portsOut[ipo].type==CABLES.OP_PORT_TYPE_FUNCTION)
-                    childs.push(this.portsOut[ipo].links[l].portIn.parent);
+                for (var i = 0; i < filter.length; i++)
+                {
+                    if (p1 == this && p2.type === filter[i]) return true;
+                    if (p2 == this && p1.type === filter[i]) return true;
+                }
+                return false; // types do not match
+            }
+            return true; // no filter set
+        };
+
+        this.addInPort(p);
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
+
+    Op.prototype.printInfo = function ()
+    {
+        for (var i = 0; i < this.portsIn.length; i++) console.log(`in: ${this.portsIn[i].getName()}`);
+
+        for (var ipo in this.portsOut) console.log(`out: ${this.portsOut[ipo].getName()}`);
+    };
+
+    Op.prototype.getOutChilds = function ()
+    {
+        var childs = [];
+        for (var ipo in this.portsOut)
+        {
+            for (var l in this.portsOut[ipo].links)
+            {
+                if (this.portsOut[ipo].type == CABLES.OP_PORT_TYPE_FUNCTION) childs.push(this.portsOut[ipo].links[l].portIn.parent);
             }
         }
         return childs;
     };
 
-    CABLES.Op.prototype.markChilds=function()
+    Op.prototype.markChilds = function ()
     {
-        this.marked=true;
-        for(var ipo in this.portsOut)
+        this.marked = true;
+        for (var ipo in this.portsOut)
         {
-            for(var l in this.portsOut[ipo].links)
+            for (var l in this.portsOut[ipo].links)
             {
-                this.portsOut[ipo].parent.marked=true;
-                if(this.portsOut[ipo].links[l].portIn.parent!=this) this.portsOut[ipo].links[l].portIn.parent.markChilds();
+                this.portsOut[ipo].parent.marked = true;
+                if (this.portsOut[ipo].links[l].portIn.parent != this) this.portsOut[ipo].links[l].portIn.parent.markChilds();
             }
         }
     };
 
-    CABLES.Op.prototype.deleteChilds=function()
+    Op.prototype.deleteChilds = function ()
     {
-        var opsToDelete=[];
-        for(var ipo in this.portsOut)
+        var opsToDelete = [];
+        for (var ipo in this.portsOut)
         {
-            for(var l in this.portsOut[ipo].links)
+            for (var l in this.portsOut[ipo].links)
             {
-                if(this.portsOut[ipo].links[l].portIn.parent!=this)
+                if (this.portsOut[ipo].links[l].portIn.parent != this)
                 {
-                    if(this.portsOut[ipo].parent!=this) opsToDelete.push(this.portsOut[ipo].parent);
+                    if (this.portsOut[ipo].parent != this) opsToDelete.push(this.portsOut[ipo].parent);
                     opsToDelete.push(this.portsOut[ipo].links[l].portIn.parent);
                     this.portsOut[ipo].links[l].portIn.parent.deleteChilds();
                 }
             }
         }
 
-        for(var i in opsToDelete)
+        for (var i in opsToDelete)
         {
             this.patch.deleteOp(opsToDelete[i].id);
         }
     };
 
-    CABLES.Op.prototype.removeLinks=function()
+    Op.prototype.removeLinks = function ()
     {
-        for(var i=0;i<this.portsIn.length;i++) this.portsIn[i].removeLinks();
-        for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
+        for (var i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
+        for (var ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
     };
 
-    CABLES.Op.prototype.countFittingPorts=function(otherPort)
+    Op.prototype.countFittingPorts = function (otherPort)
     {
-        var count=0;
-        for(var ipo in this.portsOut)
-            if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))count++;
+        var count = 0;
+        for (var ipo in this.portsOut) if (CABLES.Link.canLink(otherPort, this.portsOut[ipo])) count++;
 
-        for(var ipi in this.portsIn)
-            if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))count++;
+        for (var ipi in this.portsIn) if (CABLES.Link.canLink(otherPort, this.portsIn[ipi])) count++;
 
         return count;
     };
 
-    CABLES.Op.prototype.findFittingPort=function(otherPort)
+    Op.prototype.findFittingPort = function (otherPort)
     {
-        for(var ipo in this.portsOut)
-            if(CABLES.Link.canLink(otherPort,this.portsOut[ipo]))
-                return this.portsOut[ipo];
+        for (var ipo in this.portsOut) if (CABLES.Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
 
-        for(var ipi in this.portsIn)
-            if(CABLES.Link.canLink(otherPort,this.portsIn[ipi]))
-                return this.portsIn[ipi];
+        for (var ipi in this.portsIn) if (CABLES.Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
     };
 
-    CABLES.Op.prototype.getSerialized=function()
+    Op.prototype.getSerialized = function ()
     {
-        var op={};
+        var op = {};
         // op.name=this.getName();
         // var nameParts=this.objName.split('.');
         // if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
 
-        if(this.opId) op.opId=this.opId;
-        op.objName=this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
-        
-        op.id=this.id;
-        op.uiAttribs=this.uiAttribs;
+        if (this.opId) op.opId = this.opId;
+        op.objName = this.objName; // id opid exists, this should not be needed, but for fallback reasons still here.
 
-        if(this.uiAttribs.title==this._shortOpName) delete this.uiAttribs.title;
-        if(this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working==true) delete this.uiAttribs.working;
+        op.id = this.id;
+        op.uiAttribs = this.uiAttribs;
 
-        op.portsIn=[];
-        op.portsOut=[];
+        if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
+        if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
 
-        for(var i=0;i<this.portsIn.length;i++) op.portsIn.push(this.portsIn[i].getSerialized());
-        for(var ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
+        op.portsIn = [];
+        op.portsOut = [];
+
+        for (var i = 0; i < this.portsIn.length; i++) op.portsIn.push(this.portsIn[i].getSerialized());
+        for (var ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
 
         return op;
     };
 
-    CABLES.Op.prototype.getFirstOutPortByType=function(type)
+    Op.prototype.getFirstOutPortByType = function (type)
     {
-        for(var ipo in this.portsOut)
-            if(this.portsOut[ipo].type==type)
-                return this.portsOut[ipo];
+        for (var ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
     };
 
     /**
@@ -608,18 +793,13 @@ CABLES.Op = function()
      * @param {String} portName
      * @return {Port}
      */
-    CABLES.Op.prototype.getPort=
-    CABLES.Op.prototype.getPortByName=function(name)
+    Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
         // for(var ipi in this.portsIn)
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
-            if(this.portsIn[ipi].getName()==name)
-                return this.portsIn[ipi];
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
 
         // for(var ipo in this.portsOut)
-        for(var ipo=0;ipo<this.portsOut.length;ipo++)
-            if(this.portsOut[ipo].getName()==name)
-                return this.portsOut[ipo];
+        for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
     };
 
     /**
@@ -630,53 +810,45 @@ CABLES.Op = function()
      * @param {String} id
      * @return {Port}
      */
-    CABLES.Op.prototype.getPortById=function(id)
+    Op.prototype.getPortById = function (id)
     {
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
-            if(this.portsIn[ipi].id==id)return this.portsIn[ipi];
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].id == id) return this.portsIn[ipi];
 
-        for(var ipo=0;ipo<this.portsOut.length;ipo++)
-            if(this.portsOut[ipo].id==id)return this.portsOut[ipo];
+        for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].id == id) return this.portsOut[ipo];
     };
 
-    CABLES.Op.prototype.updateAnims=function()
+    Op.prototype.updateAnims = function ()
     {
-        for(var i=0;i<this.portsIn.length;i++)
-            this.portsIn[i].updateAnim();
+        for (var i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
     };
 
-    CABLES.Op.prototype.log=function()
+    Op.prototype.log = function ()
     {
-        if(!this.patch.silent) Function.prototype.apply.apply(console.log, [console, arguments]);
+        if (!this.patch.silent) Function.prototype.apply.apply(console.log, [console, arguments]);
     };
 
-    CABLES.Op.prototype.error=function()
+    Op.prototype.error = function ()
     {
-        if(!this.patch.silent) Function.prototype.apply.apply(console.error, [console, arguments]);
+        if (!this.patch.silent) Function.prototype.apply.apply(console.error, [console, arguments]);
     };
 
-    CABLES.Op.prototype.warn=function()
+    Op.prototype.warn = function ()
     {
-        if(!this.patch.silent) Function.prototype.apply.apply(console.warn, [console, arguments]);
+        if (!this.patch.silent) Function.prototype.apply.apply(console.warn, [console, arguments]);
     };
 
-    CABLES.Op.prototype.undoUnLinkTemporary=function()
+    Op.prototype.undoUnLinkTemporary = function ()
     {
-        if(this.shakeLink)this.shakeLink.remove();
-        this.shakeLink=null;
+        if (this.shakeLink) this.shakeLink.remove();
+        this.shakeLink = null;
 
-        if(this.oldLinks)
+        if (this.oldLinks)
         {
-            for(var i=0;i<this.oldLinks.length;i++)
+            for (var i = 0; i < this.oldLinks.length; i++)
             {
-                this.patch.link(
-                    this.oldLinks[i].in.parent,
-                    this.oldLinks[i].in.getName(),
-                    this.oldLinks[i].out.parent,
-                    this.oldLinks[i].out.getName()
-                    );
+                this.patch.link(this.oldLinks[i].in.parent, this.oldLinks[i].in.getName(), this.oldLinks[i].out.parent, this.oldLinks[i].out.getName());
             }
-            this.oldLinks.length=0;
+            this.oldLinks.length = 0;
         }
     };
 
@@ -686,214 +858,202 @@ CABLES.Op = function()
      * @instance
      * @memberof Op
      */
-    CABLES.Op.prototype.unLink=function()
+    Op.prototype.unLink = function ()
     {
-        for(var ipo=0;ipo<this.portsOut.length;ipo++) this.portsOut[ipo].removeLinks();
-        for(var ipi=0;ipi<this.portsIn.length;ipi++) this.portsIn[ipi].removeLinks();
+        for (var ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi].removeLinks();
     };
 
-    CABLES.Op.unLinkTempReLinkP1=null;
-    CABLES.Op.unLinkTempReLinkP2=null;
+    Op.unLinkTempReLinkP1 = null;
+    Op.unLinkTempReLinkP2 = null;
 
-    CABLES.Op.prototype.unLinkTemporary=function()
+    Op.prototype.unLinkTemporary = function ()
     {
-        var tryRelink=true;
-        var i=0;
+        var tryRelink = true;
+        var i = 0;
 
-        this.shakeLink=null;
-        this.oldLinks=[];
+        this.shakeLink = null;
+        this.oldLinks = [];
 
-        if(tryRelink)
+        if (tryRelink)
         {
-            if(
-                (this.portsIn.length>0 && this.portsIn[0].isLinked()) &&
-                (this.portsOut.length>0 && this.portsOut[0].isLinked()))
+            if (this.portsIn.length > 0 && this.portsIn[0].isLinked() && (this.portsOut.length > 0 && this.portsOut[0].isLinked()))
             {
-                if(this.portsIn[0].getType()==this.portsOut[0].getType())
+                if (this.portsIn[0].getType() == this.portsOut[0].getType())
                 {
-                    CABLES.Op.unLinkTempReLinkP1=this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
-                    CABLES.Op.unLinkTempReLinkP2=this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
+                    Op.unLinkTempReLinkP1 = this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
+                    Op.unLinkTempReLinkP2 = this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
                 }
             }
         }
 
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            for(i=0;i<this.portsIn[ipi].links.length;i++)
-                this.oldLinks.push(
-                    {
-                        in:this.portsIn[ipi].links[i].portIn,
-                        out:this.portsIn[ipi].links[i].portOut
-                    });
+            for (i = 0; i < this.portsIn[ipi].links.length; i++)
+            {
+                this.oldLinks.push({
+                    in: this.portsIn[ipi].links[i].portIn,
+                    out: this.portsIn[ipi].links[i].portOut,
+                });
+            }
         }
 
-        for(var ipo=0;ipo<this.portsOut.length;ipo++)
+        for (var ipo = 0; ipo < this.portsOut.length; ipo++)
         {
-            for(i=0;i<this.portsOut[ipo].links.length;i++)
-                this.oldLinks.push(
-                    {
-                        in:this.portsOut[ipo].links[i].portIn,
-                        out:this.portsOut[ipo].links[i].portOut
-                    });
+            for (i = 0; i < this.portsOut[ipo].links.length; i++)
+            {
+                this.oldLinks.push({
+                    in: this.portsOut[ipo].links[i].portIn,
+                    out: this.portsOut[ipo].links[i].portOut,
+                });
+            }
         }
 
         this.unLink();
 
-        if(CABLES.Op.unLinkTempReLinkP1 && CABLES.Op.unLinkTempReLinkP2)
+        if (Op.unLinkTempReLinkP1 && Op.unLinkTempReLinkP2)
         {
-            this.shakeLink=this.patch.link(
-                CABLES.Op.unLinkTempReLinkP1.parent,
-                CABLES.Op.unLinkTempReLinkP1.getName(),
-                CABLES.Op.unLinkTempReLinkP2.parent,
-                CABLES.Op.unLinkTempReLinkP2.getName()
-                );
+            this.shakeLink = this.patch.link(Op.unLinkTempReLinkP1.parent, Op.unLinkTempReLinkP1.getName(), Op.unLinkTempReLinkP2.parent, Op.unLinkTempReLinkP2.getName());
         }
     };
 
-    CABLES.Op.prototype.profile=function(enable)
+    Op.prototype.profile = function (enable)
     {
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
-            this.portsIn[ipi]._onTriggered=this.portsIn[ipi]._onTriggeredProfiling;
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
     };
 
-    CABLES.Op.prototype.findParent=function(objName)
+    Op.prototype.findParent = function (objName)
     {
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            if(this.portsIn[ipi].isLinked())
+            if (this.portsIn[ipi].isLinked())
             {
-                if(this.portsIn[ipi].links[0].portOut.parent.objName==objName)
-                    return this.portsIn[ipi].links[0].portOut.parent;
-                else
-                {
-                    var found=null;
-                    found=this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
-                    if(found) return found;
-                }
+                if (this.portsIn[ipi].links[0].portOut.parent.objName == objName) return this.portsIn[ipi].links[0].portOut.parent;
+
+                var found = null;
+                found = this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
+                if (found) return found;
             }
         }
         return null;
     };
 
-    CABLES.Op.prototype.cleanUp=function()
+    Op.prototype.cleanUp = function ()
     {
-        if(this._instances)
+        if (this._instances)
         {
-            for(var i=0;i<this._instances.length;i++)
+            for (var i = 0; i < this._instances.length; i++)
             {
-                if(this._instances[i].onDelete)this._instances[i].onDelete();
+                if (this._instances[i].onDelete) this._instances[i].onDelete();
             }
-            this._instances.length=0;
+            this._instances.length = 0;
         }
     };
 
-    CABLES.Op.prototype.instanced=function(triggerPort)
+    Op.prototype.instanced = function (triggerPort)
     {
-        if(this.patch.instancing.numCycles()===0)return false;
+        if (this.patch.instancing.numCycles() === 0) return false;
 
-        var i=0;
-        var ipi=0;
-        if(!this._instances || this._instances.length!=this.patch.instancing.numCycles())
+        var i = 0;
+        var ipi = 0;
+        if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
         {
-            if(!this._instances)this._instances=[];
-            console.log('creating instances of ',this.objName,this.patch.instancing.numCycles(),this._instances.length);
-            this._instances.length=this.patch.instancing.numCycles();
-            for(i=0;i<this._instances.length;i++)
+            if (!this._instances) this._instances = [];
+            console.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+            this._instances.length = this.patch.instancing.numCycles();
+            for (i = 0; i < this._instances.length; i++)
             {
-                this._instances[i]=this.patch.createOp(this.objName,true);
-                this._instances[i].instanced=function()
+                this._instances[i] = this.patch.createOp(this.objName, true);
+                this._instances[i].instanced = function ()
                 {
                     return false;
                 };
                 this._instances[i].uiAttr(this.uiAttribs);
 
-                for(var ipo=0;ipo<this.portsOut.length;ipo++)
+                for (var ipo = 0; ipo < this.portsOut.length; ipo++)
                 {
-                    if(this.portsOut[ipo].type==CABLES.OP_PORT_TYPE_FUNCTION)
+                    if (this.portsOut[ipo].type == CABLES.OP_PORT_TYPE_FUNCTION)
                     {
-                        this._instances[ i ].getPortByName(this.portsOut[ipo].name).trigger=this.portsOut[ ipo ].trigger.bind(this.portsOut[ipo]);
+                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
                     }
                 }
             }
 
-            for(ipi=0;ipi<this.portsIn.length;ipi++)
+            for (ipi = 0; ipi < this.portsIn.length; ipi++)
             {
-                this.portsIn[ipi].onChange=null;
-                this.portsIn[ipi].onValueChanged=null;
+                this.portsIn[ipi].onChange = null;
+                this.portsIn[ipi].onValueChanged = null;
             }
         }
 
-        var theTriggerPort=null;
-        for(ipi=0;ipi<this.portsIn.length;ipi++)
+        var theTriggerPort = null;
+        for (ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_ARRAY)
+            if (this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_ARRAY)
             {
-                this._instances[ this.patch.instancing.index() ].portsIn[ipi].set(this.portsIn[ipi].get());
+                this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
             }
-            if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_FUNCTION)
+            if (this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_FUNCTION)
             {
                 // console.log(this.patch.instancing.index());
                 // console.log(this._instances.length);
-
                 // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
-                    // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
+                // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }
         }
 
-        if(theTriggerPort)theTriggerPort.onTriggered();
+        if (theTriggerPort) theTriggerPort.onTriggered();
 
-        for(ipi=0;ipi<this.portsOut.length;ipi++)
+        for (ipi = 0; ipi < this.portsOut.length; ipi++)
         {
-            if(this.portsOut[ipi].type==CABLES.OP_PORT_TYPE_VALUE)
+            if (this.portsOut[ipi].type == CABLES.OP_PORT_TYPE_VALUE)
             {
-                this.portsOut[ipi].set(this._instances[ this.patch.instancing.index() ].portsOut[ipi].get());
+                this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
             }
         }
 
         return true;
     };
 
-    CABLES.Op.prototype.initInstancable=function()
+    Op.prototype.initInstancable = function ()
     {
-//         if(this.isInstanced)
-//         {
-//             console.log('cancel instancing');
-//             return;
-//         }
-//         this._instances=[];
-//         for(var ipi=0;ipi<this.portsIn.length;ipi++)
-//         {
-//             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE)
-//             {
-//
-//             }
-//             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_FUNCTION)
-//             {
-//                 // var piIndex=ipi;
-//                 this.portsIn[ipi].onTriggered=function(piIndex)
-//                 {
-//
-//                     var i=0;
-// // console.log('trigger',this._instances.length);
-//
-//                 }.bind(this,ipi );
-//
-//             }
+        //         if(this.isInstanced)
+        //         {
+        //             console.log('cancel instancing');
+        //             return;
+        //         }
+        //         this._instances=[];
+        //         for(var ipi=0;ipi<this.portsIn.length;ipi++)
+        //         {
+        //             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE)
+        //             {
+        //
+        //             }
+        //             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_FUNCTION)
+        //             {
+        //                 // var piIndex=ipi;
+        //                 this.portsIn[ipi].onTriggered=function(piIndex)
+        //                 {
+        //
+        //                     var i=0;
+        // // console.log('trigger',this._instances.length);
+        //
+        //                 }.bind(this,ipi );
+        //
+        //             }
         // };
         // this._instances=null;
     };
 
-
-    CABLES.Op.prototype.setValues=function(obj)
+    Op.prototype.setValues = function (obj)
     {
-        for(var i in obj)
+        for (var i in obj)
         {
-            var port=this.getPortByName(i);
-            if(port) port.set(obj[i]);
-                else console.log("op.setValues: port not found:",i);
+            var port = this.getPortByName(i);
+            if (port) port.set(obj[i]);
+            else console.log("op.setValues: port not found:", i);
         }
     };
-
 
     /**
      * show op error message - set message to null to remove error message
@@ -903,18 +1063,18 @@ CABLES.Op = function()
      * @param {errorid} id error identifier
      * @param {txt} text message
      */
-    CABLES.Op.prototype.error=function(id,txt)
+    Op.prototype.error = function (id, txt)
     {
-        this.errors[id]=txt;
-        if(txt==null) delete this.errors[id];
+        this.errors[id] = txt;
+        if (txt == null) delete this.errors[id];
 
-        var errorHtml='';
-        for(var i in this.errors)
+        var errorHtml = "";
+        for (var i in this.errors)
         {
-            errorHtml+='- '+this.errors[i]+'<br/>';
+            errorHtml += `- ${this.errors[i]}<br/>`;
         }
-        this.uiAttr({'error':errorHtml});
-    }
+        this.uiAttr({ error: errorHtml });
+    };
 
     /**
      *  add an eventlistener ot op
@@ -926,29 +1086,28 @@ CABLES.Op = function()
      * @param {which} name of event
      * @param {function} callback
      */
-    CABLES.Op.prototype.addListener=
-    CABLES.Op.prototype.addEventListener=function(which,cb)
+    Op.prototype.addListener = Op.prototype.addEventListener = function (which, cb)
     {
-        if(!this._eventCallbacks[which]) this._eventCallbacks[which]=[cb];
-            else this._eventCallbacks[which].push(cb);
-    }
+        if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
+        else this._eventCallbacks[which].push(cb);
+    };
 
-    CABLES.Op.prototype.hasEventListener=function(which,cb)
+    Op.prototype.hasEventListener = function (which, cb)
     {
-        if(which && cb)
+        if (which && cb)
         {
-            if(this._eventCallbacks[which])
+            if (this._eventCallbacks[which])
             {
-                var idx=this._eventCallbacks[which].indexOf(cb);
-                if(idx==-1) return false;
-                else return true;
+                var idx = this._eventCallbacks[which].indexOf(cb);
+                if (idx == -1) return false;
+                return true;
             }
         }
         else
         {
-            console.log("hasListener: missing parameters")
+            console.log("hasListener: missing parameters");
         }
-    }
+    };
 
     /**
      * remove an eventlistener
@@ -958,38 +1117,36 @@ CABLES.Op = function()
      * @param {which} name of event
      * @param {function} callback
      */
-    CABLES.Op.prototype.removeEventListener=function(which,cb)
+    Op.prototype.removeEventListener = function (which, cb)
     {
-        if(this._eventCallbacks[which])
+        if (this._eventCallbacks[which])
         {
-            var idx=this._eventCallbacks[which].indexOf(cb);
-            if(idx==-1) console.log("eventlistener "+which+" not found...");
+            var idx = this._eventCallbacks[which].indexOf(cb);
+            if (idx == -1) console.log(`eventlistener ${which} not found...`);
             else this._eventCallbacks[which].slice(idx);
         }
-    }
+    };
 
-    CABLES.Op.prototype.fireEvent=function(which,params)
+    Op.prototype.fireEvent = function (which, params)
     {
-        if(this._eventCallbacks[which])
-            for(var i=0;i<this._eventCallbacks[which].length;i++)
-                if(this._eventCallbacks[which][i])this._eventCallbacks[which][i](params);
+        if (this._eventCallbacks[which]) for (var i = 0; i < this._eventCallbacks[which].length; i++) if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i](params);
 
-        if(this.onUiAttrChange && which=="onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
-    }
+        if (this.onUiAttrChange && which == "onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
+    };
 
     /**
      * enable/disable op
      * @function
      * @instance
      * @memberof Op
-     * @param {boolean} 
+     * @param {boolean}
      */
-    CABLES.Op.prototype.setEnabled=function(b)
+    Op.prototype.setEnabled = function (b)
     {
-        this.enabled=b;
-        this.fireEvent('onEnabledChange',b);
+        this.enabled = b;
+        this.fireEvent("onEnabledChange", b);
         // if(this._eventCallbacks.onEnabledChange)this._eventCallbacks.onEnabledChange(b);
-    }
+    };
 
     /**
      * organize ports into a group
@@ -999,23 +1156,24 @@ CABLES.Op = function()
      * @param {String} name
      * @param {Array} ports
      */
-    CABLES.Op.prototype.setPortGroup=function(name,ports)
+    Op.prototype.setPortGroup = function (name, ports)
     {
         for (var i = 0; i < ports.length; i++)
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
-                else
-                {
-                    console.error('setPortGroup: invalid port!');
-                }
-    }
+        {
+            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ group: name });
+            else
+            {
+                console.error("setPortGroup: invalid port!");
+            }
+        }
+    };
 
-    CABLES.Op.prototype.setUiAxisPorts=function(px,py,pz)
+    Op.prototype.setUiAxisPorts = function (px, py, pz)
     {
-        if(px) px.setUiAttribs({"axis":"X"})
-        if(py) py.setUiAttribs({"axis":"Y"})
-        if(pz) pz.setUiAttribs({"axis":"Z"})
-    }
-
+        if (px) px.setUiAttribs({ axis: "X" });
+        if (py) py.setUiAttribs({ axis: "Y" });
+        if (pz) pz.setUiAttribs({ axis: "Z" });
+    };
 
     /**
      * remove port from op
@@ -1024,36 +1182,36 @@ CABLES.Op = function()
      * @memberof Op
      * @param {Port} port to remove
      */
-    CABLES.Op.prototype.removePort=function(port)
+    Op.prototype.removePort = function (port)
     {
         // for(var ipi in this.portsIn)
-        for(var ipi=0;ipi<this.portsIn.length;ipi++)
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            if(this.portsIn[ipi]==port)
+            if (this.portsIn[ipi] == port)
             {
                 this.portsIn.splice(ipi, 1);
-                this.fireEvent("onUiAttribsChange",{});
-                this.fireEvent("onPortRemoved",{});
+                this.fireEvent("onUiAttribsChange", {});
+                this.fireEvent("onPortRemoved", {});
                 return;
             }
         }
-    }
+    };
 
     // needs to be in UI only
-    CABLES.Op.prototype.checkLinkTimeWarnings=function()
+    Op.prototype.checkLinkTimeWarnings = function ()
     {
-        function hasParent(op, type,name)
+        function hasParent(op, type, name)
         {
-            for(var i=0;i<op.portsIn.length;i++)
+            for (var i = 0; i < op.portsIn.length; i++)
             {
-                if (op.portsIn[i].type ==type &&  op.portsIn[i].isLinked())
+                if (op.portsIn[i].type == type && op.portsIn[i].isLinked())
                 {
-                    var pi=op.portsIn[i];
-                    for(var li=0;li<pi.links.length;li++)
+                    var pi = op.portsIn[i];
+                    for (var li = 0; li < pi.links.length; li++)
                     {
-                        if(!pi.links[li])continue;
-                        if(pi.links[li].portOut.parent.objName.indexOf(name)>-1) return true;
-                            else if (hasParent(pi.links[li].portOut.parent,type,name)) return true;
+                        if (!pi.links[li]) continue;
+                        if (pi.links[li].portOut.parent.objName.indexOf(name) > -1) return true;
+                        if (hasParent(pi.links[li].portOut.parent, type, name)) return true;
                     }
                 }
             }
@@ -1062,17 +1220,17 @@ CABLES.Op = function()
 
         function hasTriggerInput(op)
         {
-            if (op.portsIn.length>0 && op.portsIn[0].type==CABLES.OP_PORT_TYPE_FUNCTION )return true;
+            if (op.portsIn.length > 0 && op.portsIn[0].type == CABLES.OP_PORT_TYPE_FUNCTION) return true;
             return false;
         }
 
-        var notWorkingMsg=null;
-        var working=true;
+        var notWorkingMsg = null;
+        var working = true;
 
-        if (working && this.objName.indexOf('Ops.Gl.TextureEffects') == 0 && hasTriggerInput(this) && this.objName.indexOf('TextureEffects.ImageCompose')==-1)
+        if (working && this.objName.indexOf("Ops.Gl.TextureEffects") == 0 && hasTriggerInput(this) && this.objName.indexOf("TextureEffects.ImageCompose") == -1)
         {
-            working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'TextureEffects.ImageCompose');
-            if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'ImageCompose';
+            working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, "TextureEffects.ImageCompose");
+            if (!working) notWorkingMsg = `${CABLES.UI.TEXTS.working_connected_to}ImageCompose`;
         }
         // else
         // {
@@ -1087,48 +1245,44 @@ CABLES.Op = function()
         //     }
         // }
 
-
         if (this._needsParentOp && working)
         {
-            working = hasParent(this, CABLES.OP_PORT_TYPE_OBJECT,this._needsParentOp);
+            working = hasParent(this, CABLES.OP_PORT_TYPE_OBJECT, this._needsParentOp);
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + this._needsParentOp;
         }
 
-        if (this._needsLinkedToWork.length>0)
+        if (this._needsLinkedToWork.length > 0)
         {
-            for (var i = 0; i < this._needsLinkedToWork.length; i++) {
+            for (var i = 0; i < this._needsLinkedToWork.length; i++)
+            {
                 var p = this._needsLinkedToWork[i];
-                if (!p) {
-                    console.warn('[needsLinkedToWork] port not found');
+                if (!p)
+                {
+                    console.warn("[needsLinkedToWork] port not found");
                     continue;
                 }
-                if (!p.isLinked()) {
+                if (!p.isLinked())
+                {
                     working = false;
 
                     if (!notWorkingMsg) notWorkingMsg = CABLES.UI.TEXTS.working_connected_needs_connections_to;
-                        else notWorkingMsg += ', ';
-                    notWorkingMsg += '' + p.name.toUpperCase() + '';
+                    else notWorkingMsg += ", ";
+                    notWorkingMsg += `${p.name.toUpperCase()}`;
                 }
             }
         }
 
+        if (!working) this.setUiAttrib({ working, notWorkingMsg });
+        else if (!this.uiAttribs.working) this.setUiAttrib({ working: true, notWorkingMsg: null });
+    };
 
-        if (!working) this.setUiAttrib({ "working": working, "notWorkingMsg": notWorkingMsg });
-            else if (!this.uiAttribs.working) this.setUiAttrib({ "working": true,"notWorkingMsg":null});
+    Op.prototype._checkLinksNeededToWork = function () {};
 
-    }
-
-    CABLES.Op.prototype._checkLinksNeededToWork=function()
-    {
-    }
-    
-    CABLES.Op.prototype.toWorkNeedsParent = function (parentOpName)
+    Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
         if (!CABLES.UI) return;
-        this._needsParentOp=parentOpName;
-
-    }
-
+        this._needsParentOp = parentOpName;
+    };
 
     /**
      * show a small X to indicate op is not working when given ports are not linked
@@ -1139,20 +1293,17 @@ CABLES.Op = function()
      * @param {Port} port2
      * @param {Port} port3
      */
-    CABLES.Op.prototype.toWorkPortsNeedToBeLinked = function ()
+    Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
         if (!CABLES.UI) return;
-        for (var i = 0; i < arguments.length; i++)
-            if(this._needsLinkedToWork.indexOf(arguments[i])==-1)
-                this._needsLinkedToWork.push(arguments[i]);
-    }
-    CABLES.Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
+        for (var i = 0; i < arguments.length; i++) if (this._needsLinkedToWork.indexOf(arguments[i]) == -1) this._needsLinkedToWork.push(arguments[i]);
+    };
+    Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
     {
         if (!CABLES.UI) return;
-        this._needsLinkedToWork.length=0;
+        this._needsLinkedToWork.length = 0;
         this.checkLinkTimeWarnings();
-    }
-
+    };
 
     /**
      * refresh op parameters, if current op is selected
@@ -1160,12 +1311,10 @@ CABLES.Op = function()
      * @instance
      * @memberof Op
      */
-    CABLES.Op.prototype.refreshParams=function()
+    Op.prototype.refreshParams = function ()
     {
-        if(CABLES.UI && gui) gui.patch().refreshOpParams(this);
-    }
-
-
+        if (CABLES.UI && gui) gui.patch().refreshOpParams(this);
+    };
 }
 
 /**
@@ -1176,23 +1325,22 @@ CABLES.Op = function()
  * @param {String} opName - The (full) name of the op, e.g. "Ops.Value"
  * @returns {String} - The op category
  */
-CABLES.Op.getNamespaceClassName = function(opName) {
-    if(!opName) return 'default';
-    if( opName.startsWith('Ops.Gl') ) return 'gl';
-    if( opName.startsWith('Ops.WebAudio') ) return 'audio';
-    if( opName.startsWith('Ops.Devices') ) return 'devices';
-    if( opName.startsWith('Ops.Html') ) return 'html';
-    if( opName.startsWith('Ops.Sidebar') ) return 'html';
-    if( opName.startsWith('Ops.Math') ) return 'math';
-    if( opName.startsWith('Ops.User') ) return 'user';
-    return 'default';
-};
-
-
-CABLES.Op.isSubpatchOp=function(name)
+Op.getNamespaceClassName = function (opName)
 {
-    return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
+    if (!opName) return "default";
+    if (opName.startsWith("Ops.Gl")) return "gl";
+    if (opName.startsWith("Ops.WebAudio")) return "audio";
+    if (opName.startsWith("Ops.Devices")) return "devices";
+    if (opName.startsWith("Ops.Html")) return "html";
+    if (opName.startsWith("Ops.Sidebar")) return "html";
+    if (opName.startsWith("Ops.Math")) return "math";
+    if (opName.startsWith("Ops.User")) return "user";
+    return "default";
 };
 
+Op.isSubpatchOp = function (name)
+{
+    return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
+};
 
-
+export default Op;

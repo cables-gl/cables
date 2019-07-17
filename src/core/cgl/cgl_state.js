@@ -1,4 +1,6 @@
-var CGL = CGL || {};
+import Shader from "./cgl_shader";
+import MatrixStack from "./cgl_matrixstack";
+// var CGL = CGL || {};
 
 /**
  * cables gl context/state manager
@@ -7,7 +9,7 @@ var CGL = CGL || {};
  * @class
  * @hideconstructor
  */
-CGL.Context = function(_patch) {
+const Context = function(_patch) {
     var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
@@ -46,9 +48,9 @@ CGL.Context = function(_patch) {
     this.vMatrix = mat4.create();
     this._textureslots=[];
 
-    this._pMatrixStack=new CGL.MatrixStack();
-    this._mMatrixStack=new CGL.MatrixStack();
-    this._vMatrixStack=new CGL.MatrixStack();
+    this._pMatrixStack=new MatrixStack();
+    this._mMatrixStack=new MatrixStack();
+    this._vMatrixStack=new MatrixStack();
     this._glFrameBufferStack = [];
     this._frameBufferStack=[];
     this._shaderStack = [];
@@ -60,10 +62,10 @@ CGL.Context = function(_patch) {
     mat4.identity(this.mMatrix);
     mat4.identity(this.vMatrix);
 
-    var simpleShader = new CGL.Shader(this, "simpleshader");
+    var simpleShader = new Shader(this, "simpleshader");
     
     simpleShader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-    simpleShader.setSource(CGL.Shader.getDefaultVertexShader(), CGL.Shader.getDefaultFragmentShader());
+    simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
     var currentShader = simpleShader;
     var aborted = false;
@@ -559,7 +561,7 @@ CGL.Context = function(_patch) {
  * @instance
  * @param {mat4} viewmatrix
  */
-CGL.Context.prototype.pushViewMatrix = function() {
+Context.prototype.pushViewMatrix = function() {
     this.vMatrix=this._vMatrixStack.push(this.vMatrix);
 };
 
@@ -571,11 +573,11 @@ CGL.Context.prototype.pushViewMatrix = function() {
  * @returns {mat4} current viewmatrix 
  * @function
  */
-CGL.Context.prototype.popViewMatrix = function() {
+Context.prototype.popViewMatrix = function() {
     this.vMatrix = this._vMatrixStack.pop();
 };
 
-CGL.Context.prototype.getViewMatrixStateCount = function() {
+Context.prototype.getViewMatrixStateCount = function() {
     return this._vMatrixStack.stateCounter;
 };
 
@@ -587,7 +589,7 @@ CGL.Context.prototype.getViewMatrixStateCount = function() {
  * @instance
  * @param {mat4} projectionmatrix
  */
-CGL.Context.prototype.pushPMatrix = function() {
+Context.prototype.pushPMatrix = function() {
     this.pMatrix=this._pMatrixStack.push(this.pMatrix);
 };
 
@@ -598,12 +600,12 @@ CGL.Context.prototype.pushPMatrix = function() {
  * @instance
  * @returns {mat4} current projectionmatrix 
  */
-CGL.Context.prototype.popPMatrix = function() {
+Context.prototype.popPMatrix = function() {
     this.pMatrix = this._pMatrixStack.pop();
     return this.pMatrix;
 };
 
-CGL.Context.prototype.getProjectionMatrixStateCount = function() {
+Context.prototype.getProjectionMatrixStateCount = function() {
     return this._pMatrixStack.stateCounter;
 };
 
@@ -620,8 +622,8 @@ CGL.Context.prototype.getProjectionMatrixStateCount = function() {
  * trigger.trigger();
  * cgl.popModelMatrix();
  */
-CGL.Context.prototype.pushMvMatrix = // deprecated
-CGL.Context.prototype.pushModelMatrix = function()
+Context.prototype.pushMvMatrix = // deprecated
+Context.prototype.pushModelMatrix = function()
 {
     // var copy = mat4.clone(this.mMatrix);
     this.mMatrix=this._mMatrixStack.push(this.mMatrix);
@@ -634,9 +636,9 @@ CGL.Context.prototype.pushModelMatrix = function()
  * @instance
  * @returns {mat4} current modelmatrix 
  */
-CGL.Context.prototype.popMvMatrix = // todo: DEPRECATE
-CGL.Context.prototype.popmMatrix =
-CGL.Context.prototype.popModelMatrix = function() {
+Context.prototype.popMvMatrix = // todo: DEPRECATE
+Context.prototype.popmMatrix =
+Context.prototype.popModelMatrix = function() {
     // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
     this.mMatrix = this._mMatrixStack.pop();
     return this.mMatrix;
@@ -649,27 +651,27 @@ CGL.Context.prototype.popModelMatrix = function() {
  * @instance
  * @returns {mat4} current modelmatrix 
  */
-CGL.Context.prototype.modelMatrix = function() {
+Context.prototype.modelMatrix = function() {
     return this.mMatrix;
 };
 
 
 // state depthtest
 
-CGL.Context.prototype._stackDepthTest=[];
-CGL.Context.prototype.pushDepthTest=function(b)
+Context.prototype._stackDepthTest=[];
+Context.prototype.pushDepthTest=function(b)
 {
     this._stackDepthTest.push(b);
     if(!b) this.gl.disable(this.gl.DEPTH_TEST);
         else this.gl.enable(this.gl.DEPTH_TEST);
 };
 
-CGL.Context.prototype.stateDepthTest=function()
+Context.prototype.stateDepthTest=function()
 {
     return this._stackDepthTest[this._stackDepthTest.length-1];
 }
 
-CGL.Context.prototype.popDepthTest=function()
+Context.prototype.popDepthTest=function()
 {
     this._stackDepthTest.pop();
 
@@ -679,19 +681,19 @@ CGL.Context.prototype.popDepthTest=function()
 
 // state depthwrite
 
-CGL.Context.prototype._stackDepthWrite=[];
-CGL.Context.prototype.pushDepthWrite=function(b)
+Context.prototype._stackDepthWrite=[];
+Context.prototype.pushDepthWrite=function(b)
 {
     this._stackDepthWrite.push(b);
     this.gl.depthMask(b);
 };
 
-CGL.Context.prototype.stateDepthWrite=function()
+Context.prototype.stateDepthWrite=function()
 {
     return this._stackDepthWrite[this._stackDepthWrite.length-1];
 }
 
-CGL.Context.prototype.popDepthWrite=function()
+Context.prototype.popDepthWrite=function()
 {
     this._stackDepthWrite.pop();
     this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length-1]);
@@ -700,7 +702,7 @@ CGL.Context.prototype.popDepthWrite=function()
 
 // state depthfunc
 
-CGL.Context.prototype._stackDepthFunc=[];
+Context.prototype._stackDepthFunc=[];
 
 /**
  * enable / disable depth testing 
@@ -710,7 +712,7 @@ CGL.Context.prototype._stackDepthFunc=[];
  * @instance
  * @param {Boolean} depthtesting
  */
-CGL.Context.prototype.pushDepthFunc=function(f)
+Context.prototype.pushDepthFunc=function(f)
 {
     this._stackDepthFunc.push(f);
     this.gl.depthFunc(f);
@@ -723,7 +725,7 @@ CGL.Context.prototype.pushDepthFunc=function(f)
  * @instance 
  * @returns {Boolean} depth testing enabled/disabled
  */
-CGL.Context.prototype.stateDepthFunc=function()
+Context.prototype.stateDepthFunc=function()
 {
     if(this._stackDepthFunc.length>0) return this._stackDepthFunc[this._stackDepthFunc.length-1];
     return false;
@@ -735,7 +737,7 @@ CGL.Context.prototype.stateDepthFunc=function()
  * @memberof Context
  * @instance
  */
-CGL.Context.prototype.popDepthFunc=function()
+Context.prototype.popDepthFunc=function()
 {
     this._stackDepthFunc.pop();
     if(this._stackDepthFunc.length>0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length-1]);
@@ -743,7 +745,7 @@ CGL.Context.prototype.popDepthFunc=function()
 
 
 
-CGL.Context.prototype._stackBlend=[];
+Context.prototype._stackBlend=[];
 
 
 /**
@@ -754,7 +756,7 @@ CGL.Context.prototype._stackBlend=[];
  * @instance
  * @param {Boolean} blending
  */
-CGL.Context.prototype.pushBlend=function(b)
+Context.prototype.pushBlend=function(b)
 {
     this._stackBlend.push(b);
     if(!b) this.gl.disable(this.gl.BLEND);
@@ -768,7 +770,7 @@ CGL.Context.prototype.pushBlend=function(b)
  * @memberof Context
  * @instance
  */
-CGL.Context.prototype.popBlend=function()
+Context.prototype.popBlend=function()
 {
     this._stackBlend.pop();
 
@@ -784,19 +786,21 @@ CGL.Context.prototype.popBlend=function()
  * @memberof Context
  * @instance
  */
-CGL.Context.prototype.stateBlend=function()
+Context.prototype.stateBlend=function()
 {
     return this._stackBlend[this._stackBlend.length-1];
 }
 
-CGL.BLEND_NONE=0;
-CGL.BLEND_NORMAL=1;
-CGL.BLEND_ADD=2;
-CGL.BLEND_SUB=3;
-CGL.BLEND_MUL=4;
+export const BLENDS = {
+BLEND_NONE: 0,
+BLEND_NORMAL: 1,
+BLEND_ADD: 2,
+BLEND_SUB: 3,
+BLEND_MUL: 4,
+};
 
-CGL.Context.prototype._stackBlendMode=[];
-CGL.Context.prototype._stackBlendModePremul=[];
+Context.prototype._stackBlendMode=[];
+Context.prototype._stackBlendModePremul=[];
 
 /**
  * push and switch to predefined blendmode (CGL.BLEND_NONE,CGL.BLEND_NORMAL,CGL.BLEND_ADD,CGL.BLEND_SUB,CGL.BLEND_MUL)
@@ -806,7 +810,7 @@ CGL.Context.prototype._stackBlendModePremul=[];
  * @param {Number} blendmode
  * @param {Boolean} premultiplied mode
  */
-CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
+Context.prototype.pushBlendMode=function(blendMode,premul)
 {
     this._stackBlendMode.push(blendMode);
     this._stackBlendModePremul.push(premul);
@@ -823,7 +827,7 @@ CGL.Context.prototype.pushBlendMode=function(blendMode,premul)
  * @memberof Context
  * @instance
  */
-CGL.Context.prototype.popBlendMode=function()
+Context.prototype.popBlendMode=function()
 {
     this._stackBlendMode.pop();
     this._stackBlendModePremul.pop();
@@ -836,7 +840,7 @@ CGL.Context.prototype.popBlendMode=function()
         this._setBlendMode(this._stackBlendMode[n],this._stackBlendModePremul[n]);
 }
 
-CGL.Context.prototype.glGetAttribLocation=function(prog,name)
+Context.prototype.glGetAttribLocation=function(prog,name)
 {
     const  l=this.gl.getAttribLocation(prog, name);
     if(l==-1)
@@ -849,7 +853,7 @@ CGL.Context.prototype.glGetAttribLocation=function(prog,name)
 
 
 
-CGL.Context.prototype._setBlendMode=function(blendMode,premul)
+Context.prototype._setBlendMode=function(blendMode,premul)
 {
     const gl=this.gl;
 
@@ -918,3 +922,4 @@ CGL.Context.prototype._setBlendMode=function(blendMode,premul)
 
 };
 
+export default Context;

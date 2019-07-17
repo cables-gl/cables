@@ -1,13 +1,13 @@
 
-CABLES.internalNow=function() { return window.performance.now(); };
+export const internalNow=function() { return window.performance.now(); };
 
 /**
  * current time in milliseconds
  * @memberof CABLES
- * @function
+ * @function now
  * @static
  */
-CABLES.now=function() { return CABLES.internalNow(); };
+export const now=function() { return internalNow(); };
 
 // ----------------------------
 
@@ -18,9 +18,9 @@ CABLES.now=function() { return CABLES.internalNow(); };
  * @hideconstructor
  * @class
  */
-CABLES.Timer=function()
+const Timer=function()
 {
-    this._timeStart=CABLES.internalNow();
+    this._timeStart= internalNow();
     this._timeOffset=0;
 
     this._currentTime=0;
@@ -34,25 +34,25 @@ CABLES.Timer=function()
     this.cbTimeChange=[];
 };
 
-CABLES.Timer.prototype._getTime=function()
+Timer.prototype._getTime=function()
 {
-    this._lastTime=(CABLES.internalNow()-this._timeStart)/1000;
+    this._lastTime=(internalNow()-this._timeStart)/1000;
     return this._lastTime+this._timeOffset;
 };
 
-CABLES.Timer.prototype._eventPlayPause=function()
+Timer.prototype._eventPlayPause=function()
 {
     if(this._eventsPaused)return;
     for(var i in this.cbPlayPause) this.cbPlayPause[i]();
 };
 
-CABLES.Timer.prototype._eventTimeChange=function()
+Timer.prototype._eventTimeChange=function()
 {
     if(this._eventsPaused)return;
     for(var i in this.cbTimeChange) this.cbTimeChange[i]();
 };
 
-CABLES.Timer.prototype.setDelay=function(d)
+Timer.prototype.setDelay=function(d)
 {
     this._delay=d;
     this._eventTimeChange();
@@ -65,7 +65,7 @@ CABLES.Timer.prototype.setDelay=function(d)
  * @description returns true if timer is playing
  * @return {Boolean} value
  */
-CABLES.Timer.prototype.isPlaying=function()
+Timer.prototype.isPlaying=function()
 {
     return !this._paused;
 };
@@ -77,7 +77,7 @@ CABLES.Timer.prototype.isPlaying=function()
  * @description update timer
  * @return {Number} time
  */
-CABLES.Timer.prototype.update=function()
+Timer.prototype.update=function()
 {
     if(this._paused) return;
     this._currentTime=this._getTime();
@@ -91,7 +91,7 @@ CABLES.Timer.prototype.update=function()
  * @instance
  * @return {Number} time in milliseconds
  */
-CABLES.Timer.prototype.getMillis=function()
+Timer.prototype.getMillis=function()
 {
     return this.get()*1000;
 };
@@ -102,7 +102,7 @@ CABLES.Timer.prototype.getMillis=function()
  * @instance
  * @return {Number} value time in seconds
  */
-CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
+Timer.prototype.get=Timer.prototype.getTime=function()
 {
     if(this.overwriteTime>=0)return this.overwriteTime-this._delay;
     return this._currentTime-this._delay;
@@ -114,7 +114,7 @@ CABLES.Timer.prototype.get=CABLES.Timer.prototype.getTime=function()
  * @memberof Timer
  * @instance
  */
-CABLES.Timer.prototype.togglePlay=function()
+Timer.prototype.togglePlay=function()
 {
     if(this._paused) this.play();
         else this.pause();
@@ -127,20 +127,20 @@ CABLES.Timer.prototype.togglePlay=function()
  * @instance
  * @param {Number} time
  */
-CABLES.Timer.prototype.setTime=function(t)
+Timer.prototype.setTime=function(t)
 {
     if(t<0)t=0;
-    this._timeStart=CABLES.internalNow();
+    this._timeStart=internalNow();
     this._timeOffset=t;
     this._currentTime=t;
     this._eventTimeChange();
 };
 
-CABLES.Timer.prototype.setOffset=function(val)
+Timer.prototype.setOffset=function(val)
 {
     if(this._currentTime+val<0)
     {
-        this._timeStart=CABLES.internalNow();
+        this._timeStart=internalNow();
         this._timeOffset=0;
         this._currentTime=0;
     }
@@ -158,9 +158,9 @@ CABLES.Timer.prototype.setOffset=function(val)
  * @memberof Timer
  * @instance
  */
-CABLES.Timer.prototype.play=function()
+Timer.prototype.play=function()
 {
-    this._timeStart=CABLES.internalNow();
+    this._timeStart=internalNow();
     this._paused=false;
     this._eventPlayPause();
 };
@@ -171,14 +171,14 @@ CABLES.Timer.prototype.play=function()
  * @memberof Timer
  * @instance
  */
-CABLES.Timer.prototype.pause=function()
+Timer.prototype.pause=function()
 {
     this._timeOffset=this._currentTime;
     this._paused=true;
     this._eventPlayPause();
 };
 
-CABLES.Timer.prototype.pauseEvents=function(onoff)
+Timer.prototype.pauseEvents=function(onoff)
 {
     this._eventsPaused=onoff;
 };
@@ -190,7 +190,7 @@ CABLES.Timer.prototype.pauseEvents=function(onoff)
  * @param {Function} callback
  * @instance
  */
-CABLES.Timer.prototype.onPlayPause=function(cb)
+Timer.prototype.onPlayPause=function(cb)
 {
     if(cb && typeof cb == "function")
         this.cbPlayPause.push(cb);
@@ -203,8 +203,10 @@ CABLES.Timer.prototype.onPlayPause=function(cb)
  * @param {Function} callback
  * @instance
  */
-CABLES.Timer.prototype.onTimeChange=function(cb)
+Timer.prototype.onTimeChange=function(cb)
 {
     if(cb && typeof cb == "function")
         this.cbTimeChange.push(cb);
 };
+
+export default Timer;

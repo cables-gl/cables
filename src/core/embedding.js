@@ -1,7 +1,10 @@
+import Patch from "./core_patch";
+import { generateUUID} from "./0_utils";
 
-CABLES=CABLES||{};
-CABLES.EMBED=CABLES.EMBED||{};
+// CABLES=CABLES||{};
+// CABLES.EMBED=CABLES.EMBED||{};
 
+const EMBED = {};
 
 /**
  * add patch into html element (will create canvas and set size to fill containerElement)
@@ -10,10 +13,10 @@ CABLES.EMBED=CABLES.EMBED||{};
  * @param {options} patch options
  * @function
  */
-CABLES.EMBED.addPatch=function(_element,options)
+EMBED.addPatch=function(_element,options)
 {
     var el=_element;
-    var id=CABLES.generateUUID();
+    var id=generateUUID();
     if(typeof _element=="string" )
     {
         id=_element;
@@ -49,6 +52,8 @@ CABLES.EMBED.addPatch=function(_element,options)
             console.log(err);
         };
 
-    CABLES.patch=new CABLES.Patch(options);
+    CABLES.patch=new Patch(options);
     return canvEl;
 };
+
+export default EMBED;

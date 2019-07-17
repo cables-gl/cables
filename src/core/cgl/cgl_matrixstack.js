@@ -1,4 +1,4 @@
-var CGL=CGL||{};
+// var CGL=CGL||{};
 
 // CGL.MatrixStackOld=function()
 // {
@@ -27,14 +27,14 @@ var CGL=CGL||{};
 
 // -------------------------------------------------------------
 
-CGL.MatrixStack=function()
+const MatrixStack=function()
 {
     this._arr=[mat4.create()];
     this._index=0;
     this.stateCounter=0;
 }
 
-CGL.MatrixStack.prototype.push=function(m)
+MatrixStack.prototype.push=function(m)
 {
     this._index++;
     this.stateCounter++;
@@ -50,7 +50,7 @@ CGL.MatrixStack.prototype.push=function(m)
     return this._arr[this._index];
 }
 
-CGL.MatrixStack.prototype.pop=function()
+MatrixStack.prototype.pop=function()
 {
     this.stateCounter++;
     
@@ -60,8 +60,9 @@ CGL.MatrixStack.prototype.pop=function()
     return this._arr[this._index];
 }
 
-CGL.MatrixStack.prototype.length=function()
+MatrixStack.prototype.length=function()
 {
     return this._index;
 }
 
+export default MatrixStack;

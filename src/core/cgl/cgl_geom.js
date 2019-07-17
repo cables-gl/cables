@@ -1,5 +1,5 @@
-"use strict";
-
+import { UTILS } from "../0_utils";
+import { b64decTypedArray } from "../0_base64";
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @external CGL
@@ -8,7 +8,7 @@
  * @class
  * @example
  * // create a triangle with all attributes
- * const geom=new CGL.Geometry("triangle"),
+ * const geom=new Geometry("triangle"),
  * 
  * geom.vertices = [
  *      0.0,           sizeH.get(),  0.0,
@@ -39,7 +39,7 @@
  *     0, 1, 2 ];
  * 
  */
-CGL.Geometry=function(name)
+const Geometry=function(name)
 {
     this.name=name;
     this.faceVertCount=3;
@@ -71,7 +71,7 @@ CGL.Geometry=function(name)
  * @instance
  * @description clear all buffers/set them to length 0
  */
-CGL.Geometry.prototype.clear=function()
+Geometry.prototype.clear=function()
 {
     this.vertices=new Float32Array([]);
     this.verticesIndices.length=0;
@@ -86,7 +86,7 @@ CGL.Geometry.prototype.clear=function()
  * @instance
  * @return {Array<Object>} returns array of attribute objects
  */
-CGL.Geometry.prototype.getAttributes=function()
+Geometry.prototype.getAttributes=function()
 {
     return this._attributes;
 };
@@ -98,7 +98,7 @@ CGL.Geometry.prototype.getAttributes=function()
  * @param {String} name
  * @return {Object}
  */
-CGL.Geometry.prototype.getAttribute=function(name)
+Geometry.prototype.getAttribute=function(name)
 {
     for(var i in this._attributes)
     {
@@ -116,7 +116,7 @@ CGL.Geometry.prototype.getAttribute=function(name)
  * @param {Array} data
  * @param {Number} itemsize
  */
-CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
+Geometry.prototype.setAttribute=function(name,arr,itemSize)
 {
     var attrType='';
     if(itemSize==1)attrType='float';
@@ -141,7 +141,7 @@ CGL.Geometry.prototype.setAttribute=function(name,arr,itemSize)
  * @description set vertices
  * @param {Array|Float32Array} data [x,y,z,x,y,z,...]
  */
-CGL.Geometry.prototype.setVertices=function(arr)
+Geometry.prototype.setVertices=function(arr)
 {
     if(arr instanceof Float32Array)this._vertices=arr;
         else this._vertices=new Float32Array(arr);
@@ -154,13 +154,13 @@ CGL.Geometry.prototype.setVertices=function(arr)
  * @description set texcoords
  * @param {Array|Float32Array} data [u,v,u,v,...]
  */
-CGL.Geometry.prototype.setTexCoords=function(arr)
+Geometry.prototype.setTexCoords=function(arr)
 {
     if(arr instanceof Float32Array)this.texCoords=arr;
         else this.texCoords=new Float32Array(arr);
 };
 
-CGL.Geometry.prototype.testIndices=function()
+Geometry.prototype.testIndices=function()
 {
     var foundError=false;
     for(var i=0;i<this.verticesIndices.length;i++)
@@ -176,7 +176,7 @@ CGL.Geometry.prototype.testIndices=function()
 };
 
 // deprecated
-CGL.Geometry.prototype.calcNormals=function(smooth)
+Geometry.prototype.calcNormals=function(smooth)
 {
     var options={};
     if(!smooth) this.unIndex();
@@ -184,7 +184,7 @@ CGL.Geometry.prototype.calcNormals=function(smooth)
     this.calculateNormals(options);
 };
 
-CGL.Geometry.prototype.setPointVertices=function(verts)
+Geometry.prototype.setPointVertices=function(verts)
 {
     if(verts.length%3!==0)
     {
@@ -211,7 +211,7 @@ CGL.Geometry.prototype.setPointVertices=function(verts)
 
 
 
-CGL.Geometry.prototype.merge=function(geom)
+Geometry.prototype.merge=function(geom)
 {
     if(!geom)return;
     var oldIndizesLength=this.verticesIndices.length;
@@ -223,17 +223,17 @@ CGL.Geometry.prototype.merge=function(geom)
         this.verticesIndices[oldIndizesLength+i]=geom.verticesIndices[i]+vertLength;
     }
 
-    this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
-    this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
-    this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
-    this.tangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.tangents);
-    this.bitangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.bitangents);
+    this.vertices=UTILS.float32Concat(this.vertices,geom.vertices);
+    this.texCoords=UTILS.float32Concat(this.texCoords,geom.texCoords);
+    this.vertexNormals=UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.tangents=UTILS.float32Concat(this.vertexNormals,geom.tangents);
+    this.bitangents=UTILS.float32Concat(this.vertexNormals,geom.bitangents);
 };
 
-CGL.Geometry.prototype.copy=function()
+Geometry.prototype.copy=function()
 {
     var i=0;
-    var geom=new CGL.Geometry();
+    var geom=new Geometry();
     geom.faceVertCount=this.faceVertCount;
 
     // geom.vertices.length=this.vertices.length;
@@ -278,7 +278,7 @@ CGL.Geometry.prototype.copy=function()
     return geom;
 };
 
-CGL.Geometry.prototype.calculateNormals=function(options)
+Geometry.prototype.calculateNormals=function(options)
 {
     var u=vec3.create();
     var v=vec3.create();
@@ -399,7 +399,7 @@ CGL.Geometry.prototype.calculateNormals=function(options)
  * @memberof Geometry
  * @instance
  */
-CGL.Geometry.prototype.calcTangentsBitangents = function () {
+Geometry.prototype.calcTangentsBitangents = function () {
     if (!this.vertices.length) {
         throw new Error("Cannot calculate tangents/bitangents without vertices.");
     }
@@ -536,7 +536,7 @@ CGL.Geometry.prototype.calcTangentsBitangents = function () {
 
 }
 
-CGL.Geometry.prototype.isIndexed=function()
+Geometry.prototype.isIndexed=function()
 {
     return this.verticesIndices.length!=0;
 };
@@ -549,7 +549,7 @@ CGL.Geometry.prototype.isIndexed=function()
  * @param {Boolean}
  * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
  */
-CGL.Geometry.prototype.unIndex=function(reIndex)
+Geometry.prototype.unIndex=function(reIndex)
 {
     var newVerts=[];
     var newIndizes=[];
@@ -641,7 +641,7 @@ CGL.Geometry.prototype.unIndex=function(reIndex)
     this.calculateNormals();
 };
 
-CGL.Geometry.prototype.calcBarycentric=function()
+Geometry.prototype.calcBarycentric=function()
 {
     this.barycentrics.length=this.vertices.length;
 
@@ -657,7 +657,7 @@ CGL.Geometry.prototype.calcBarycentric=function()
 };
 
 
-CGL.Geometry.prototype.getBounds=function()
+Geometry.prototype.getBounds=function()
 {
     var bounds={
         maxX:-Number.MAX_VALUE,
@@ -692,7 +692,7 @@ CGL.Geometry.prototype.getBounds=function()
     return bounds;
 };
 
-CGL.Geometry.prototype.center=function(x,y,z)
+Geometry.prototype.center=function(x,y,z)
 {
     if(x===undefined)
     {
@@ -723,7 +723,7 @@ CGL.Geometry.prototype.center=function(x,y,z)
     return offset;
 };
 
-CGL.Geometry.prototype.mapTexCoords2d=function()
+Geometry.prototype.mapTexCoords2d=function()
 {
     var bounds=this.getBounds();
     var num=this.vertices.length/3;
@@ -742,7 +742,7 @@ CGL.Geometry.prototype.mapTexCoords2d=function()
 // -----------------
 
 // TODO : move this into "old" circle op 
-CGL.Geometry.buildFromFaces=function(arr)
+Geometry.buildFromFaces=function(arr)
 {
     var vertices=[];
     var verticesIndices=[];
@@ -792,7 +792,7 @@ CGL.Geometry.buildFromFaces=function(arr)
         verticesIndices.push( parseInt( face[2],10 ) );
     }
 
-    var geom=new CGL.Geometry();
+    var geom=new Geometry();
     geom.vertices=vertices;
     geom.verticesIndices=verticesIndices;
 
@@ -800,9 +800,9 @@ CGL.Geometry.buildFromFaces=function(arr)
 };
 
 
-CGL.Geometry.json2geom=function(jsonMesh)
+Geometry.json2geom=function(jsonMesh)
 {
-    var geom=new CGL.Geometry();
+    var geom=new Geometry();
     geom.verticesIndices=[];
 
     geom.vertices=jsonMesh.vertices||[];
@@ -812,15 +812,15 @@ CGL.Geometry.json2geom=function(jsonMesh)
     geom.biTangents=jsonMesh.bitangents||[];
     if(jsonMesh.texturecoords) geom.setTexCoords( jsonMesh.texturecoords[0] );
 
-    if(jsonMesh.vertices_b64) geom.vertices=new Float32Array(CABLES.b64decTypedArray(jsonMesh.vertices_b64));
-    if(jsonMesh.normals_b64) geom.vertexNormals=new Float32Array(CABLES.b64decTypedArray(jsonMesh.normals_b64));
-    if(jsonMesh.tangents_b64) geom.tangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.tangents_b64));
-    if(jsonMesh.bitangents_b64) geom.biTangents=new Float32Array(CABLES.b64decTypedArray(jsonMesh.bitangents_b64));
-    if(jsonMesh.texturecoords_b64) geom.setTexCoords( new Float32Array(CABLES.b64decTypedArray(jsonMesh.texturecoords_b64[0])));
+    if(jsonMesh.vertices_b64) geom.vertices=new Float32Array(b64decTypedArray(jsonMesh.vertices_b64));
+    if(jsonMesh.normals_b64) geom.vertexNormals=new Float32Array(b64decTypedArray(jsonMesh.normals_b64));
+    if(jsonMesh.tangents_b64) geom.tangents=new Float32Array(b64decTypedArray(jsonMesh.tangents_b64));
+    if(jsonMesh.bitangents_b64) geom.biTangents=new Float32Array(b64decTypedArray(jsonMesh.bitangents_b64));
+    if(jsonMesh.texturecoords_b64) geom.setTexCoords( new Float32Array(b64decTypedArray(jsonMesh.texturecoords_b64[0])));
 
     if(jsonMesh.faces_b64)
     {
-        geom.verticesIndices=new Uint32Array(CABLES.b64decTypedArray(jsonMesh.faces_b64));
+        geom.verticesIndices=new Uint32Array(b64decTypedArray(jsonMesh.faces_b64));
     }
     else
     {
@@ -835,3 +835,5 @@ CGL.Geometry.json2geom=function(jsonMesh)
 
     return geom;
 };
+
+export default Geometry;

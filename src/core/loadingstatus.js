@@ -1,6 +1,9 @@
-"use strict";
+import { generateUUID } from "./0_utils";
+import CGL from "./cgl";
 
-CABLES.LoadingStatus=function(patch)
+// "use strict";
+
+const LoadingStatus=function(patch)
 {
     this._loadingAssets={};
     this._cbFinished=[];
@@ -12,22 +15,22 @@ CABLES.LoadingStatus=function(patch)
     this._patch=patch;
 };
 
-CABLES.LoadingStatus.prototype.setOnFinishedLoading=function(cb)
+LoadingStatus.prototype.setOnFinishedLoading=function(cb)
 {
     this._cbFinished.push(cb);
 };
 
-CABLES.LoadingStatus.prototype.getNumAssets=function()
+LoadingStatus.prototype.getNumAssets=function()
 {
     return this._countFinished;
 };
 
-CABLES.LoadingStatus.prototype.getProgress=function()
+LoadingStatus.prototype.getProgress=function()
 {
     return this._percent;
 };
 
-CABLES.LoadingStatus.prototype.checkStatus=function()
+LoadingStatus.prototype.checkStatus=function()
 {
     this._countFinished=0;
     this._count=0;
@@ -59,7 +62,7 @@ CABLES.LoadingStatus.prototype.checkStatus=function()
     }
 };
 
-CABLES.LoadingStatus.prototype.print=function()
+LoadingStatus.prototype.print=function()
 {
     if(this._patch.silent) return;
 
@@ -78,7 +81,7 @@ CABLES.LoadingStatus.prototype.print=function()
     console.groupEnd();
 }
 
-CABLES.LoadingStatus.prototype.finished=function(id)
+LoadingStatus.prototype.finished=function(id)
 {
     if(this._loadingAssets[id])
     {
@@ -89,10 +92,10 @@ CABLES.LoadingStatus.prototype.finished=function(id)
     this.checkStatus();
 };
 
-CABLES.LoadingStatus.prototype.start=function(type,name)
+LoadingStatus.prototype.start=function(type,name)
 {
     if(this._startTime==0)this._startTime=Date.now();
-    var id=CABLES.generateUUID();
+    var id=generateUUID();
 
     this._loadingAssets[id]=({id:id,type:type,name:name,finished:false,timeStart:Date.now(),order:this._order});
     this._order++;
@@ -100,3 +103,5 @@ CABLES.LoadingStatus.prototype.start=function(type,name)
     return id;
 };
 
+
+export default LoadingStatus;
