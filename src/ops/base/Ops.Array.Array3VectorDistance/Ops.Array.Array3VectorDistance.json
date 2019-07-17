@@ -1,0 +1,31 @@
+{
+    "id": "d8f245ef-4639-4c76-aa87-b9101f666d9e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1563376252532
+        }
+    ],
+    "authorName": "andro",
+    "created": 1563379319924,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in 1"
+            },
+            {
+                "type": "3",
+                "name": "Array in 2"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.Array3VectorDistance"
+    }
+}
