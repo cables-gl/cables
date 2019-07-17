@@ -14,7 +14,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Vars.Variable"
+        "name": "Ops.Vars.VarGetNumber"
     },
     "summary": "read a variable number",
     "docs": {
@@ -44,5 +44,7 @@
             "date": 1560418347970
         }
     ],
-    "youtubeids": []
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ]
 }
