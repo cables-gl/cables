@@ -12,11 +12,11 @@ inArray.onChange = function()
         return;
     }
 
-    if(newArray.length !== arr.length) newArray.length = arr.length;
+    if(newArray.length !== arr.length) newArray.length = arr.length+3;
     var i ;
-    for (i = 0; i < newArray.length; i+=3)
+    for (i = 0; i < arr.length; i+=3)
     {
-        newArray[i+0] = arr[i+0];
+        newArray[i+0]   = arr[i+0];
         newArray[i+1] = arr[i+1];
         newArray[i+2] = arr[i+2];
     }
