@@ -28,7 +28,7 @@
                 "name": "Value"
             }
         ],
-        "name": "Ops.Vars.VariableString"
+        "name": "Ops.Vars.VarGetString"
     },
     "summary": "String variable getter",
     "issues": "",
@@ -46,5 +46,7 @@
             }
         ]
     },
-    "youtubeids": []
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ]
 }

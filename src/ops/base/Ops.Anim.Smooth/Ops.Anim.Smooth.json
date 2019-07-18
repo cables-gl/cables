@@ -1,0 +1,52 @@
+{
+    "id": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1563449317441
+        }
+    ],
+    "authorName": "cables",
+    "created": 1563449330030,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Separate inc/dec",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inc factor",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Dec factor",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Anim.Smooth"
+    }
+}
