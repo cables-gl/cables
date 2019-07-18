@@ -167,8 +167,9 @@ CGL.Uniform.prototype.setValueI=function(v)
 CGL.Uniform.prototype.updateValueBool=function()
 {
     if(this._loc==-1) this._loc=this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-    else this.needsUpdate=false;
+        else this.needsUpdate=false;
     this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0 );
+
     CGL.profileUniformCount++;
 };
 

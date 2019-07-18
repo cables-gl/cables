@@ -11,6 +11,7 @@ CGL.Context = function(_patch) {
     var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
+    this.glUseHalfFloatTex=false;
     this.clearCanvasTransparent=true;
     this.clearCanvasDepth=true;
     this.patch = _patch;
@@ -104,16 +105,26 @@ CGL.Context = function(_patch) {
         if (this.patch.config.hasOwnProperty('clearCanvasColor')) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty('clearCanvasDepth')) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
-
-        if( (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) && !this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
-
-        // if (!this.patch.config.canvas.hasOwnProperty('antialias')) this.patch.config.canvas.antialias = false;
         this.gl = this.canvas.getContext('webgl2',this.patch.config.canvas);
         if (this.gl) {
             this.glVersion = 2;
-        } else {
+        }
+        else
+        {
             this.gl = this.canvas.getContext('webgl',this.patch.config.canvas) || this.canvas.getContext('experimental-webgl',this.patch.config.canvas);
             this.glVersion = 1;
+
+            // safari
+            if( /^((?!chrome|android).)*safari/i.test(navigator.userAgent) )
+            {
+                this.glUseHalfFloatTex=true;
+            }
+
+            // ios
+            if( /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream)
+            {
+                if(!this.patch.config.canvas.hasOwnProperty('powerPreference')) this.patch.config.canvas.powerPreference = "high-performance";
+            }
         }
 
         if (!this.gl) {
@@ -187,7 +198,7 @@ CGL.Context = function(_patch) {
     this.beginFrame = function() {
 
         if (CABLES.UI) {
-            gui._texturePreviewer.render();
+            gui.metaTexturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 
@@ -308,7 +319,7 @@ CGL.Context = function(_patch) {
      * @function pushGlFrameBuffer
      * @memberof Context
      * @instance
-     * @param {CGL.FrameBuffer} framebuffer
+     * @param {Framebuffer} framebuffer
      */
     this.pushFrameBuffer = function(fb) {
         this._frameBufferStack.push(fb);
@@ -319,7 +330,7 @@ CGL.Context = function(_patch) {
      * @function popFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @returns {Framebuffer} current framebuffer or null
      */
     this.popFrameBuffer = function() {
         if (this._frameBufferStack.length == 0) return null;
@@ -332,7 +343,7 @@ CGL.Context = function(_patch) {
      * @function getCurrentFrameBuffer
      * @memberof Context
      * @instance
-     * @returns {CGL.FrameBuffer} current framebuffer or null
+     * @returns {Framebuffer} current framebuffer or null
      */
     this.getCurrentFrameBuffer=function()
     {
@@ -750,17 +761,6 @@ CGL.Context.prototype.pushBlend=function(b)
         else this.gl.enable(this.gl.BLEND);
 };
 
-/**
- * current state of blend 
- * @function stateBlend
- * @returns {boolean} blending enabled/disabled
- * @memberof Context
- * @instance
- */
-CGL.Context.prototype.stateBlend=function()
-{
-    return this._stackBlend[this._stackBlend.length-1];
-}
 
 /**
  * pop blend state and set the previous state
@@ -776,6 +776,18 @@ CGL.Context.prototype.popBlend=function()
         else this.gl.enable(this.gl.BLEND);
 };
 
+
+/**
+ * current state of blend 
+ * @function stateBlend
+ * @returns {boolean} blending enabled/disabled
+ * @memberof Context
+ * @instance
+ */
+CGL.Context.prototype.stateBlend=function()
+{
+    return this._stackBlend[this._stackBlend.length-1];
+}
 
 CGL.BLEND_NONE=0;
 CGL.BLEND_NORMAL=1;

@@ -26,6 +26,10 @@
                 "type": "0",
                 "name": "y",
                 "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Multiply"
             }
         ],
         "portsOut": [

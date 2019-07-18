@@ -325,14 +325,18 @@ CABLES.Op = function()
     CABLES.Op.prototype.inInt=function(name,v){ var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"increment":'integer'})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
 
     /**
-     * create a file input port
-     * @function inFile
+     * create a file/URL input port
+     * @function inURL
      * @instance
      * @memberof Op
      * @param {String} name
      * @return {Port} created port
      */
     CABLES.Op.prototype.inFile=function(name,filter,v){var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_VALUE,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+    CABLES.Op.prototype.inUrl=function(name,filter,v){var p=this.addInPort(new CABLES.Port(this,name,CABLES.OP_PORT_TYPE_STRING,{"display":"file","filter":filter})); if(v!==undefined){ p.set(v); p.defaultValue=v;} return p; };
+
+
 
     /**
      * create a texture input port
@@ -1150,6 +1154,18 @@ CABLES.Op = function()
     }
 
 
+    /**
+     * refresh op parameters, if current op is selected
+     * @function
+     * @instance
+     * @memberof Op
+     */
+    CABLES.Op.prototype.refreshParams=function()
+    {
+        if(CABLES.UI && gui) gui.patch().refreshOpParams(this);
+    }
+
+
 }
 
 /**
@@ -1177,7 +1193,6 @@ CABLES.Op.isSubpatchOp=function(name)
 {
     return (name=='Ops.Ui.Patch' || name=='Ops.Ui.SubPatch');
 };
-
 
 
 

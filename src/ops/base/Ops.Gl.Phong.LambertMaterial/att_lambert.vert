@@ -51,6 +51,7 @@ void main()
     texCoord=attrTexCoord;
 
     norm=attrVertNormal;
+
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
     {{MODULE_VERTEX_POSITION}}

@@ -1,0 +1,41 @@
+{
+    "id": "d0894a6b-f921-4542-aafc-3f1b21615a44",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1562762718624
+        }
+    ],
+    "authorName": "andro",
+    "created": 1562762828530,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index Position",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.InterpolateNumbersArray"
+    },
+    "summary": "interpolate between all values of an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

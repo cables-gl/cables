@@ -1,0 +1,56 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "tim",
+    "id": "6663e59c-160a-4191-8f93-77f47c670c52",
+    "created": 1508184297977,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "key",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetValue"
+    },
+    "summary": "Get a number from an object",
+    "youtubeid": "",
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "rename to objectGetNumber",
+            "author": "pandur",
+            "id": "7dbe943c-4a12-43b2-9f57-c06e135b10ba",
+            "date": 1558354570797
+        },
+        {
+            "message": "create new version with new string input",
+            "author": "pandur",
+            "id": "8003e441-092d-442d-aab1-f07ffc091f6c",
+            "date": 1558354585572
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectGetValue renamed to Ops.Json.ObjectGetNumber",
+            "author": "pandur",
+            "date": 1562758578400
+        }
+    ]
+}

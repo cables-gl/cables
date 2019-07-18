@@ -1,0 +1,1 @@
+handy e.g. for calculating vertex positions in a custom fragment shader

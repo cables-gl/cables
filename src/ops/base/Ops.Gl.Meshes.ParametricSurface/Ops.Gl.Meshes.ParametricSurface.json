@@ -1,0 +1,249 @@
+{
+    "id": "5d3211a6-801d-4e59-ba6f-546ffe5fd34a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1562753949267
+        }
+    ],
+    "authorName": "simod",
+    "created": 1562753968852,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "shapes",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "u Segments",
+                "group": "Segments",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "v Segments",
+                "group": "Segments",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Multiple of PI - u",
+                "group": "U range",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "uMin",
+                "group": "U range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "uMax",
+                "group": "U range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Displace U",
+                "group": "U range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiple of PI - v",
+                "group": "V range",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "vMin",
+                "group": "V range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "vMax",
+                "group": "V range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Displace V",
+                "group": "V range",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "X Function",
+                "group": "XYZ Functions"
+            },
+            {
+                "type": "5",
+                "name": "Y Function",
+                "group": "XYZ Functions"
+            },
+            {
+                "type": "5",
+                "name": "Z Function",
+                "group": "XYZ Functions"
+            },
+            {
+                "type": "0",
+                "name": "Scale X",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Y",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale Z",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "group": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            },
+            {
+                "type": "3",
+                "name": "Position"
+            },
+            {
+                "type": "0",
+                "name": "Position Amount",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.ParametricSurface"
+    },
+    "summary": "Creates a 3d mesh from a 2d area expressions",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Meshes.SuperShape",
+        "Ops.Gl.Meshes.Polyhedron",
+        "Ops.Gl.Meshes.Icosahedron"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "shapes",
+                "text": "Dropdown menu to choose presets from."
+            },
+            {
+                "name": "render",
+                "text": "Trigger input"
+            },
+            {
+                "name": "u Segments",
+                "text": "number of segments on the U axis"
+            },
+            {
+                "name": "v Segments",
+                "text": "number of segments on the V axis"
+            },
+            {
+                "name": "Multiple of PI - u",
+                "text": "whether uMin & uMax should be multiplied with PI"
+            },
+            {
+                "name": "uMin",
+                "text": "boundary start U"
+            },
+            {
+                "name": "uMax",
+                "text": "boundary end U"
+            },
+            {
+                "name": "Displace U",
+                "text": "displace U range"
+            },
+            {
+                "name": "Multiple of PI - v",
+                "text": "whether vMin & vMax should be multiplied with PI"
+            },
+            {
+                "name": "vMin",
+                "text": "boundary start V"
+            },
+            {
+                "name": "vMax",
+                "text": "boundary end V"
+            },
+            {
+                "name": "Displace V",
+                "text": "displace V range"
+            },
+            {
+                "name": "X Function",
+                "text": "uv function for x coordinates, allowed values: u, v"
+            },
+            {
+                "name": "Y Function",
+                "text": "uv function for y coordinates, allowed values: u, v"
+            },
+            {
+                "name": "Z Function",
+                "text": "uv function for z coordinates, allowed values: u, v"
+            },
+            {
+                "name": "Scale X",
+                "text": "scale x coordinates by given amount"
+            },
+            {
+                "name": "Scale Y",
+                "text": "scale y coordinates by given amount"
+            },
+            {
+                "name": "Scale Z",
+                "text": "scale z coordinates by given amount"
+            },
+            {
+                "name": "Draw",
+                "text": "whether the shape should be drawn"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "geometry",
+                "text": "outputs the geometry of the surface"
+            },
+            {
+                "name": "Position",
+                "text": "outputs the vertices of the surface (as an xyz-Array)"
+            },
+            {
+                "name": "Position Amount",
+                "text": "outputs the length of the vertices array"
+            }
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+{
+    "authorName": "pandur",
+    "id": "e0879058-5505-4dc4-b9ff-47a3d3c8a71a",
+    "created": 1562766592876,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.AjaxRequest2 renamed to Ops.Json.AjaxRequest_v2",
+            "author": "pandur",
+            "date": 1562766700020
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "JsonP",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "data"
+            },
+            {
+                "type": "0",
+                "name": "Is Loading",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.AjaxRequest_v2"
+    },
+    "summary": "Request a json file and output an object (ajax, url, json)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

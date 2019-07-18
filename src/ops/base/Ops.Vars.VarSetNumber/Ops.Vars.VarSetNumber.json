@@ -12,7 +12,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Vars.SetVariable"
+        "name": "Ops.Vars.VarSetNumber"
     },
     "summary": "set a variable number",
     "docs": {
@@ -42,5 +42,7 @@
             "date": 1560418435802
         }
     ],
-    "youtubeids": []
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ]
 }

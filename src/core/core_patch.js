@@ -560,9 +560,9 @@ CABLES.Patch.prototype.exec = function(e) {
  * @memberof Patch
  * @instance
  * @param {Op} op1
- * @param {String} op1 portName
+ * @param {String} portName1
  * @param {Op} op2
- * @param {String} op2 portName
+ * @param {String} portName2
  */
 CABLES.Patch.prototype.link = function(op1, port1Name, op2, port2Name) {
     if(!op1)
@@ -1017,6 +1017,15 @@ CABLES.Patch.prototype.getVarValue = function(name, val) {
 CABLES.Patch.prototype.getVar = function(name) {
     if (this._variables.hasOwnProperty(name))
         return this._variables[name];
+};
+
+/**
+ * @function 
+ * @memberof Patch
+ * @instance
+ */
+CABLES.Patch.prototype.getVars = function() {
+    return this._variables;
 };
 
 /**

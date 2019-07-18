@@ -92,6 +92,10 @@ function reset()
     px=px%(Math.PI*2);
     py=py%(Math.PI*2);
 
+    vec3.set(vOffset,0,0,0);
+    vec3.set(vCenter, 0,0,0);
+    vec3.set(vUp, 0,1,0);
+
     percX=(initialX.get()*Math.PI*2);
     percY=(initialAxis.get()-0.5);
     radius=initialRadius.get();

@@ -48,6 +48,8 @@ CGL.Geometry=function(name)
     this.texCoords=new Float32Array();
     this.texCoordsIndices=[];
     this.vertexNormals=[];
+    this.tangents=[];
+    this.biTangents=[];
     this.barycentrics=[];
     this.morphTargets=[];
     this.vertexColors=[];
@@ -224,6 +226,8 @@ CGL.Geometry.prototype.merge=function(geom)
     this.vertices=CABLES.UTILS.float32Concat(this.vertices,geom.vertices);
     this.texCoords=CABLES.UTILS.float32Concat(this.texCoords,geom.texCoords);
     this.vertexNormals=CABLES.UTILS.float32Concat(this.vertexNormals,geom.vertexNormals);
+    this.tangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.tangents);
+    this.bitangents=CABLES.UTILS.float32Concat(this.vertexNormals,geom.bitangents);
 };
 
 CGL.Geometry.prototype.copy=function()
@@ -385,6 +389,152 @@ CGL.Geometry.prototype.calculateNormals=function(options)
 
 };
 
+/** 
+ * Calculates tangents & bitangents with the help of uv-coordinates. Adapted from
+ * Lengyel, Eric. “Computing Tangent Space Basis Vectors for an Arbitrary Mesh”.
+ * Terathon Software 3D Graphics Library.
+ * https://fenix.tecnico.ulisboa.pt/downloadFile/845043405449073/Tangent%20Space%20Calculation.pdf
+ *
+ * @function calcTangentsBitangents
+ * @memberof Geometry
+ * @instance
+ */
+CGL.Geometry.prototype.calcTangentsBitangents = function () {
+    if (!this.vertices.length) {
+        throw new Error("Cannot calculate tangents/bitangents without vertices.");
+    }
+    if (!this.vertexNormals.length) {
+        throw new Error("Cannot calculate tangents/bitangents without normals.");
+    }
+    if (!this.texCoords.length) {
+        throw new Error("Cannot calculate tangents/bitangents without texture coordinates.");
+    }
+    if (!this.verticesIndices.length) {
+        throw new Error("Cannot calculate tangents/bitangents without vertex indices.");
+    }
+    // this code assumes that we have three indices per triangle
+    if (this.verticesIndices.length % 3 !== 0) throw new Error("Vertex indices mismatch!");
+
+    const triangleCount = this.verticesIndices.length / 3;
+    const vertexCount = this.vertices.length / 3;
+
+    this.tangents = new Float32Array(this.vertexNormals.length);
+    this.biTangents = new Float32Array(this.vertexNormals.length);
+
+    // temporary buffers
+    var tempVertices = [];
+    tempVertices.length = vertexCount * 2;
+
+    const v1 = vec3.create();
+    const v2 = vec3.create();
+    const v3 = vec3.create();
+
+    const w1 = vec2.create();
+    const w2 = vec2.create();
+    const w3 = vec2.create();
+
+    const sdir = vec3.create();
+    const tdir = vec3.create();
+
+      // for details on calculation, see article referenced above
+      for (var tri = 0; tri < triangleCount; tri += 1) {
+
+        // indices of the three vertices for a triangle
+        const i1 = this.verticesIndices[tri * 3];
+        const i2 = this.verticesIndices[tri * 3 + 1];
+        const i3 = this.verticesIndices[tri * 3 + 2];
+
+        // vertex position as vec3
+        vec3.set(v1, this.vertices[i1 * 3], this.vertices[i1 * 3 + 1], this.vertices[i1 * 3 + 2]);
+        vec3.set(v2, this.vertices[i2 * 3], this.vertices[i2 * 3 + 1], this.vertices[i2 * 3 + 2]);
+        vec3.set(v3, this.vertices[i3 * 3], this.vertices[i3 * 3 + 1], this.vertices[i3 * 3 + 2]);
+
+        // texture coordinate as vec2
+        vec2.set(w1, this.texCoords[i1 * 2], this.texCoords[i1 * 2 + 1]);
+        vec2.set(w2, this.texCoords[i2 * 2], this.texCoords[i2 * 2 + 1]);
+        vec2.set(w3, this.texCoords[i3 * 2], this.texCoords[i3 * 2 + 1]);
+
+
+        const x1 = v2[0] - v1[0];
+        const x2 = v3[0] - v1[0];
+        const y1 = v2[1] - v1[1];
+        const y2 = v3[1] - v1[1];
+        const z1 = v2[2] - v1[2];
+        const z2 = v3[2] - v1[2];
+
+        const s1 = w2[0] - w1[0];
+        const s2 = w3[0] - w1[0];
+        const t1 = w2[1] - w1[1];
+        const t2 = w3[1] - w1[1];
+
+        const r = 1.0 / (s1 * t2 - s2 * t1);
+
+        vec3.set(
+            sdir,
+            (t2 * x1 - t1 * x2) * r,
+            (t2 * y1 - t1 * y2) * r,
+            (t2 * z1 - t1 * z2) * r
+        );
+
+        vec3.set(
+            tdir,
+            (s1 * x2 - s2 * x1) * r,
+            (s1 * y2 - s2 * y1) * r,
+            (s1 * z2 - s2 * z1) * r
+        );
+
+        tempVertices[i1] = sdir;
+        tempVertices[i2] = sdir;
+        tempVertices[i3] = sdir;
+
+        tempVertices[i1 + vertexCount] = tdir;
+        tempVertices[i2 + vertexCount] = tdir;
+        tempVertices[i3 + vertexCount] = tdir;
+    }
+
+    const normal = vec3.create();
+    const tempVert = vec3.create();
+    const tan = vec3.create();
+    const bitan = vec3.create();
+    const temp1 = vec3.create();
+    const temp2 = vec3.create();
+    const crossPd = vec3.create();
+    const normalized = vec3.create();
+
+    for (var vert = 0; vert < vertexCount; vert += 1) {
+        vec3.set(normal, this.vertexNormals[vert * 3], this.vertexNormals[vert * 3 + 1], this.vertexNormals[vert * 3 + 2]);
+        vec3.set(tempVert, tempVertices[vert][0], tempVertices[vert][1], tempVertices[vert][2]);
+        
+        // Gram-Schmidt orthagonalize
+        const _dp = vec3.dot(normal, tempVert);
+        vec3.scale(temp1, normal, _dp);
+        vec3.subtract(
+            temp2,
+            tempVert,
+            temp1
+            );
+
+        vec3.normalize(normalized, temp2);
+
+        vec3.cross(crossPd, normal, tempVert);
+
+        const intermDot = vec3.dot(crossPd, tempVertices[vert + vertexCount]);
+
+
+        const w = intermDot < 0.0 ? -1.0 : 1.0;
+
+        vec3.scale(tan, normalized, 1/w);
+        vec3.cross(bitan, normal, tan);
+
+        this.tangents[vert * 3 + 0] = tan[0];
+        this.tangents[vert * 3 + 1] = tan[1];
+        this.tangents[vert * 3 + 2] = tan[2];
+        this.biTangents[vert * 3 + 0] = bitan[0];
+        this.biTangents[vert * 3 + 1] = bitan[1];
+        this.biTangents[vert * 3 + 2] = bitan[2];
+    }
+
+}
 
 CGL.Geometry.prototype.isIndexed=function()
 {

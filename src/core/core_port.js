@@ -1,4 +1,3 @@
-
 /**
  * data is coming into and out of ops through input and output ports
  * @external CABLES
@@ -16,6 +15,8 @@ var CABLES=CABLES || {};
 
 CABLES.Port=function(__parent,name,type,uiAttribs)
 {
+    CABLES.EventTarget.apply(this);
+    
     this.data = {}; // reserved for port-specific user-data
     /**
      * @type {Number}
@@ -42,11 +43,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     this.uiAttribs=uiAttribs || {};
     this.anim=null;
     var oldAnimVal=-5711;
-    this.onLink=null;
     this.defaultValue=null;
-
+    
     this._uiActiveState=true;
     this.ignoreValueSerialize=false;
+    // this.onLink=null;
     this.onLinkChanged=null;
     this.crashed=false;
 
@@ -61,7 +62,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
 
     this._warnedDeprecated=false;
     
-    this.onUiAttrChange=null;
+    // this.onUiAttrChange=null;
 
     Object.defineProperty(this, 'val', {
         get: function() {
@@ -127,8 +128,11 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * @instance
      * @param {Object} newAttribs
      * <pre>
+     * title - overwrite title of port (by default this is portname)
      * greyout - port paramater will appear greyed out, can not be
      * hidePort - port will be hidden from op
+     * hideParam - port params will be hidden from parameter panel
+     * showIndex - only for dropdowns - show value index (e.g. `0 - normal` )
      * </pre>
      * @example
      * myPort.setUiAttribs({greyout:true});
@@ -140,7 +144,8 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         {
             this.uiAttribs[p]=newAttribs[p];
         }
-        if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+        this.emitEvent("onUiAttrChange",newAttribs);
     };
 
     /**
@@ -269,7 +274,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
     CABLES.Port.prototype.getTypeString=function()
     {
         if(this.type==CABLES.OP_PORT_TYPE_VALUE)return 'Number';
-        else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Function';
+        else if(this.type==CABLES.OP_PORT_TYPE_FUNCTION)return 'Trigger';
         else if(this.type==CABLES.OP_PORT_TYPE_OBJECT)return 'Object';
         else if(this.type==CABLES.OP_PORT_TYPE_DYNAMIC)return 'Dynamic';
         else if(this.type==CABLES.OP_PORT_TYPE_ARRAY)return 'Array';
@@ -312,7 +317,6 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      */
     CABLES.Port.prototype.removeLinks=function()
     {
-        
         var count=0;
         while(this.links.length>0)
         {
@@ -366,6 +370,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         // }
 
         if(this.onLinkChanged)this.onLinkChanged();
+        this.emitEvent("onLinkChanged");
     };
 
     /**
@@ -384,6 +389,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         this._valueBeforeLink=this.value;
         this.links.push(l);
         if(this.onLinkChanged)this.onLinkChanged();
+        this.emitEvent("onLinkChanged");
     };
 
     /**
@@ -414,6 +420,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
             {
                 this.links[i].remove();
                 if(this.onLinkChanged)this.onLinkChanged();
+                this.emitEvent("onLinkChanged");
                 return;
             }
     };

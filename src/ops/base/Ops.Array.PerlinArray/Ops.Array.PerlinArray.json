@@ -1,0 +1,74 @@
+{
+    "id": "ed55556e-f319-47cc-bce6-ea015b45650b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1562316068523
+        }
+    ],
+    "authorName": "andro",
+    "created": 1562316087824,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in X"
+            },
+            {
+                "type": "0",
+                "name": "Time in Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Seed 0-1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.PerlinArray"
+    },
+    "libs": [
+        "perlin.js"
+    ],
+    "summary": "Creates An array filled with Perlin noise values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in X",
+                "text": "X domain"
+            },
+            {
+                "name": "Time in Y",
+                "text": "Y domain"
+            },
+            {
+                "name": "Seed 0-1",
+                "text": "setting to 0 creates a different seed each time the patch is loaded - must be between `0 1`"
+            },
+            {
+                "name": "Frequency",
+                "text": "Noise frequency"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out"
+            }
+        ]
+    }
+}

@@ -17,7 +17,7 @@ function updateVarNamesDropdown()
 
         for(var i in vars) varnames.push(i);
 
-        varnames.push('+ create new one');
+        // varnames.push('+ create new one');
         op.varName.uiAttribs.values=varnames;
     }
 }
@@ -31,14 +31,14 @@ function init()
 {
     updateVarNamesDropdown();
 
-    if(CABLES.UI)
-    {
-        if(op.varName.get()=='+ create new one')
-        {
-            CABLES.CMD.PATCH.createVariable(op);
-            return;
-        }
-    }
+    // if(CABLES.UI)
+    // {
+    //     if(op.varName.get()=='+ create new one')
+    //     {
+    //         CABLES.CMD.PATCH.createVariable(op);
+    //         return;
+    //     }
+    // }
 
     if(variable)
     {

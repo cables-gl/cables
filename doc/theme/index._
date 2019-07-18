@@ -1,0 +1,18 @@
+
+    <div>
+      <div id='split-right' class=''>
+        <% docs.forEach(function(s) { %>
+          <% if (s.kind === 'note' && !s.children) { %>
+            <div class=''><%=renderNote({ note: s })%></div>
+          <% } else { %>
+          <%= renderSection({
+            section: s,
+            renderSection: renderSection,
+            renderSectionList: renderSectionList,
+            renderParamProperty: renderParamProperty
+          }) %>
+          <% } %>
+        <% }) %>
+      </div>
+    </div>
+

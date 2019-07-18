@@ -4,7 +4,8 @@
 		"website": "styles/website.css"
     },
 	"plugins": [
-	  "ga"
+	  "ga",
+      "include-html"
 	],
 	"pluginsConfig": {
         "ga": {

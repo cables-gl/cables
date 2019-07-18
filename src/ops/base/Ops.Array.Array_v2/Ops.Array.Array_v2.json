@@ -27,7 +27,7 @@
         ],
         "name": "Ops.Array.Array_v2"
     },
-    "summary": "Fill array with one number or fill it with incrementing values ",
+    "summary": "Can generate 3 kinds of arrays. Number - 1,2,3,4 - Normalized - (ContinuousNumberArray)",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -36,7 +36,7 @@
         "ports": [
             {
                 "name": "Mode select",
-                "text": "Number or 0,1,2,3"
+                "text": "`Number` - `0,1,2,3` - `normalized`"
             },
             {
                 "name": "Array length",
@@ -44,7 +44,7 @@
             },
             {
                 "name": "Default Value",
-                "text": "the value to place into the whole array if Number mode is selected"
+                "text": "Varies depending on selected mode - see docs for more details"
             },
             {
                 "name": "Array",

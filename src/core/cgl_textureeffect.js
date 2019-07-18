@@ -466,6 +466,8 @@ CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
 {
     op.setPortGroup('Blending', [blendMode, amount]);
 
+    // blendMode.setUiAttribs({"showIndex":true});
+
     blendMode.onChange = function () {
         CGL.TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
@@ -491,6 +493,7 @@ CGL.TextureEffect.setupBlending=function(op,shader,blendMode,amount)
             else if(str=='hardlight')str='hard';
 
             op.setUiAttrib({"extendTitle":str});
+            
     
         }
     };

@@ -34,7 +34,9 @@ function update()
 exec.onTriggered=function()
 {
     cgl.pushBlendMode(blendMode,inPremul.get());
+    cgl.pushBlend(blendMode!=CGL.BLEND_NONE);
     next.trigger();
+    cgl.popBlend();
     cgl.popBlendMode();
 	cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
 	cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );

@@ -52,9 +52,12 @@
     "authorName": "tim",
     "id": "ed633fe4-3200-4890-8d9e-ccd1ea478c74",
     "created": 1508578965659,
-    "summary": "ger average value in an area of a fft audio analysis buffer",
-    "youtubeid": "",
+    "summary": "get average value in an area of a fft audio analysis buffer",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -181,7 +181,9 @@ vec4 textureLinear(sampler2D uTex, vec2 uv) {
 float calcFresnel(vec3 direction, vec3 normal)
 {
     vec3 nDirection = normalize( direction );
+
     vec3 nNormal = normalize( normal );
+
     vec3 halfDirection = normalize( nNormal + nDirection );
 
     float cosine = dot( halfDirection, nDirection );
@@ -227,6 +229,7 @@ void main()
         //     normal = normals_4_0(vViewPosition);
         //   } else {
         normal = vNormal;
+        //if(!gl_FrontFacing) normal=normal*-1.0;
         //   }
 
         // if(!gl_FrontFacing) normal*=vec3(-1);

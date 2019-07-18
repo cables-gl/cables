@@ -1,0 +1,44 @@
+{
+    "authorName": "pandur",
+    "id": "55e502d6-0360-41aa-9c84-deb9f9e0be24",
+    "created": 1562067587433,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Id",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.SidebarVariables"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Ops.Sidebar.SidebarVariables renamed to Ops.Sidebar.SidebarVariables",
+            "author": "pandur",
+            "date": 1562068752993
+        }
+    ],
+    "summary": "show values of all variables in a sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
