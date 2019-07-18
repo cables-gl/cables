@@ -50,7 +50,7 @@
                 "name": "Array Out"
             }
         ],
-        "name": "Ops.Array.AverageInterpolationArray"
+        "name": "Ops.Array.SmoothArray"
     },
     "summary": "Smooths out changes in values of an array",
     "issues": "",

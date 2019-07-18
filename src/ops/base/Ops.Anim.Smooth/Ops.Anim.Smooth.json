@@ -1,14 +1,14 @@
 {
-    "id": "8def22f1-c618-485d-b36b-4b7579cb079f",
+    "id": "5677b5b5-753a-4fbf-9e91-64c81ec68a2f",
     "changelog": [
         {
             "message": "created op",
-            "author": "andro",
-            "date": 1562074994331
+            "author": "cables",
+            "date": 1563449317441
         }
     ],
-    "authorName": "andro",
-    "created": 1562075018989,
+    "authorName": "cables",
+    "created": 1563449330030,
     "layout": {
         "portsIn": [
             {
@@ -17,12 +17,22 @@
             },
             {
                 "type": "0",
+                "name": "Separate inc/dec",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Value",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Divisor",
+                "name": "Inc factor",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Dec factor",
                 "subType": "number"
             }
         ],
@@ -37,6 +47,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Anim.AverageInterpolation_v2"
+        "name": "Ops.Anim.Smooth"
     }
 }

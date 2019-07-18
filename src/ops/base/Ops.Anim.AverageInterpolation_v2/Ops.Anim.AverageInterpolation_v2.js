@@ -1,9 +1,9 @@
+var divisor=5;
+
 const exec=op.inTrigger("Update");
-const inMode = op.inSwitch("Mode",["Single", "Up down"],"Single");
 const inVal=op.inValue("Value");
 const next=op.outTrigger("Next");
-const inDivisorUp=op.inValue("Divisor",5);
-const inDivisorDown=op.inValue("Divisor down",5);
+const inDivisor=op.inValue("Divisor",divisor);
 const result=op.outValue("Result",0);
 
 var val=0;
@@ -12,84 +12,27 @@ var oldVal=0;
 var lastTrigger=0;
 op.toWorkPortsNeedToBeLinked(exec);
 
-var divisorUp;
-var divisorDown;
-var divisor = 4;
-
-var selectIndex = 0;
-const MODE_SINGLE = 0;
-const MODE_UP_DOWN = 1;
-
-onFilterChange();
-getDivisors();
-
-function onFilterChange()
-{
-    var selectedMode = inMode.get();
-    if(selectedMode === 'Single') selectIndex = MODE_SINGLE;
-    else if(selectedMode === 'Up down') selectIndex = MODE_UP_DOWN;
-
-
-    if(selectIndex == MODE_SINGLE)
-    {
-        inDivisorDown.setUiAttribs({greyout:true});
-    }
-    else if (selectIndex == MODE_UP_DOWN)
-    {
-        inDivisorDown.setUiAttribs({greyout:false});
-    }
-
-    getDivisors();
-    update();
-};
-
-function getDivisors()
-{
-    if(selectIndex == MODE_SINGLE)
-    {
-        divisorUp=inDivisorUp.get();
-        divisorDown=inDivisorUp.get();
-    }
-    else if (selectIndex == MODE_UP_DOWN)
-    {
-        divisorUp=inDivisorUp.get();
-        divisorDown=inDivisorDown.get();
-    }
-
-    if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
-    if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
-};
-
 inVal.onChange=function()
 {
     goal=inVal.get();
 };
 
-inDivisorUp.onChange=function()
+inDivisor.onChange=function()
 {
-    divisor=inDivisorUp.get();
+    divisor=inDivisor.get();
     if(divisor<=0)divisor=5;
 };
 
-function update()
+exec.onTriggered=function()
 {
     var tm=1;
     if(CABLES.now()-lastTrigger>500 || lastTrigger===0)val=inVal.get();
     else tm=(CABLES.now()-lastTrigger)/16;
     lastTrigger=CABLES.now();
 
-    if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
-    if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
 
     if(divisor<=0)divisor=0.0001;
-
-    var diff = goal-val;
-
-    if(diff  >= 0)
-        val=val+(diff)/(divisorDown*tm);
-    else
-        val=val+(diff)/(divisorUp*tm);
-    //val=val+(goal-val)/(divisor*tm);
+    val=val+(goal-val)/(divisor*tm);
 
     if(val>0 && val<0.000000001)val=0;
     if(divisor!=divisor)val=0;
@@ -103,12 +46,3 @@ function update()
 
     next.trigger();
 };
-
-exec.onTriggered = function()
-{
-    update();
-};
-
-inDivisorUp.onChange = inDivisorDown.onChange = getDivisors;
-inMode.onChange = onFilterChange;
-update();
