@@ -180,11 +180,11 @@ function updateTransformPorts()
     shader.toggleDefine('TEX_TRANSFORM',doTransform.get());
     if(doTransform.get())
     {
-        scaleX.setUiAttribs({hidePort:false});
-        scaleY.setUiAttribs({hidePort:false});
-        posX.setUiAttribs({hidePort:false});
-        posY.setUiAttribs({hidePort:false});
-        rotate.setUiAttribs({hidePort:false});
+        // scaleX.setUiAttribs({hidePort:false});
+        // scaleY.setUiAttribs({hidePort:false});
+        // posX.setUiAttribs({hidePort:false});
+        // posY.setUiAttribs({hidePort:false});
+        // rotate.setUiAttribs({hidePort:false});
 
         scaleX.setUiAttribs({greyout:false});
         scaleY.setUiAttribs({greyout:false});
@@ -200,16 +200,16 @@ function updateTransformPorts()
         posY.setUiAttribs({greyout:true});
         rotate.setUiAttribs({greyout:true});
 
-        scaleX.setUiAttribs({hidePort:true});
-        scaleY.setUiAttribs({hidePort:true});
-        posX.setUiAttribs({hidePort:true});
-        posY.setUiAttribs({hidePort:true});
-        rotate.setUiAttribs({hidePort:true});
+        // scaleX.setUiAttribs({"hidePort":true});
+        // scaleY.setUiAttribs({"hidePort":true});
+        // posX.setUiAttribs({"hidePort":true});
+        // posY.setUiAttribs({"hidePort":true});
+        // rotate.setUiAttribs({"hidePort":true});
 
 
     }
 
-    op.refreshParams();
+    // op.refreshParams();
 }
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
