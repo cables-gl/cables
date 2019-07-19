@@ -21,6 +21,11 @@
             {
                 "type": "3",
                 "name": "Array 3 out"
+            },
+            {
+                "type": "0",
+                "name": "Array lengths",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayUnpack3"

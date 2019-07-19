@@ -1,8 +1,8 @@
-const inArray1=op.inArray("Array in xyz");
-
-const outArray1=op.outArray("Array 1 out");
-const outArray2=op.outArray("Array 2 out");
-const outArray3=op.outArray("Array 3 out");
+const inArray1=op.inArray("Array in xyz"),
+    outArray1=op.outArray("Array 1 out"),
+    outArray2=op.outArray("Array 2 out"),
+    outArray3=op.outArray("Array 3 out"),
+    outArrayLength = op.outNumber("Array lengths");
 
 var showingError = false;
 
@@ -19,6 +19,17 @@ function update()
     if(!array1)
     {
         outArray1.set(null);
+        return;
+    }
+
+    if(array1.length % 3 !== 0)
+    {
+        if(!showingError)
+        {
+            op.uiAttr({error:"Arrays length not divisible by 3 !"});
+            outArrayLength.set(0);
+            showingError = true;
+        }
         return;
     }
 
@@ -45,5 +56,6 @@ function update()
     outArray1.set(arr1);
     outArray2.set(arr2);
     outArray3.set(arr3);
+    outArrayLength.set(arr1.length);
 }
 

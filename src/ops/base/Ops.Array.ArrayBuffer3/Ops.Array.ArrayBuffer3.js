@@ -1,15 +1,14 @@
-var exec=op.inTrigger("exec");
-var maxLength=op.inValue("Max Num Elements",100);
-
-var valX=op.inValue("Value X");
-var valY=op.inValue("Value Y");
-var valZ=op.inValue("Value Z");
-
-var inReset=op.inTriggerButton("Reset");
-
+const exec=op.inTrigger("exec"),
+    maxLength=op.inValue("Max Num Elements",100),
+    valX=op.inValue("Value X"),
+    valY=op.inValue("Value Y"),
+    valZ=op.inValue("Value Z"),
+    inReset=op.inTriggerButton("Reset"),
+    arrOut=op.outArray("Result"),
+    outArrayLength = op.outNumber("Array length");
 var arr=[];
 
-var arrOut=op.outArray("Result");
+
 
 arrOut.set(arr);
 
@@ -24,6 +23,7 @@ function reset()
     if (maxLength === 0)
     {
         arr.set (null);
+        outArrayLength.set(0);
         return;
     }
     arr.length=Math.abs(Math.floor(maxLength.get()*3))||0;
@@ -60,5 +60,6 @@ exec.onTriggered=function()
     arr[arr.length-1]=valZ.get();
     arrOut.set(null);
     arrOut.set(arr);
+    outArrayLength.set(arr.length);
 
 };

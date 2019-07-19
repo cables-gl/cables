@@ -10,6 +10,7 @@ inArr.onChange=inArr2.onChange=function()
     if(!inArr2.get() && !inArr.get())
     {
         outArr.set(null);
+        outArrayLength.set(0);
         return;
     }
 

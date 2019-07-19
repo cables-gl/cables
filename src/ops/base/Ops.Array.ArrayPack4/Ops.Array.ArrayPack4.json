@@ -32,7 +32,7 @@
             },
             {
                 "type": "0",
-                "name": "Num Points",
+                "name": "Array length",
                 "subType": "number"
             }
         ],

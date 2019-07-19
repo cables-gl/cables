@@ -45,6 +45,7 @@ function update()
     //check if arrays come in correctly on startup
     if(!array0)
     {
+        outArrayLength.set(0);
         return;
     }
 

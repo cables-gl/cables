@@ -1,10 +1,11 @@
-var exec=op.inTrigger("Update");
-var inArr1=op.inArray("Array 1");
-var inArr2=op.inArray("Array 2");
+const
+    exec=op.inTrigger("Update"),
+    inArr1=op.inArray("Array 1"),
+    inArr2=op.inArray("Array 2"),
+    inProgress=op.inValueSlider("Progress"),
+    arrOut=op.outArray("Result"),
+    outArrayLength = op.outNumber("Array length");
 
-var inProgress=op.inValueSlider("Progress");
-
-var arrOut=op.outArray("Result");
 var resultArr=[];
 var indexArray=[];
 
@@ -18,6 +19,7 @@ function updateArr1()
     if(!inArr1.get())
     {
         arrOut.set(null);
+        outArrayLength.set(0);
         return;
     }
     resultArr.length=inArr1.get().length;
@@ -28,6 +30,7 @@ function updateArr2()
     if(!inArr2.get())
     {
         arrOut.set(null);
+        outArrayLength.set(0);
         return;
     }
 
@@ -83,6 +86,5 @@ exec.onTriggered=function()
 
     arrOut.set(null);
     arrOut.set(resultArr);
-
-
+    outArrayLength.set(resultArr.length);
 };

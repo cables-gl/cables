@@ -64,6 +64,7 @@ function update()
     if(!array0)
     {
         outArray.set(null);
+        outArrayLength.set(0);
         return;
     }
 

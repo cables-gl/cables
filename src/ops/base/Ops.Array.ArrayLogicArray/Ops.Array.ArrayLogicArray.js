@@ -64,6 +64,7 @@ function update()
     //check if arrays come in correctly on startup
     if(!array0 || !array1)
     {
+        outArrayLength.set(0);
         return;
     }
     //if arrays don't have the same length then give a warning to panel ui

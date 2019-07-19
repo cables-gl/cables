@@ -1,7 +1,8 @@
 const inArray=op.inArray("Array"),
     inNum=op.inValueInt("Elements",10),
     inSeed=op.inValue("Seed",0),
-    result=op.outArray("Result");
+    result=op.outArray("Result"),
+    outArrayLength = op.outNumber("Array length");
 
 var arr=[];
 inSeed.onChange=inArray.onChange=inNum.onChange=update;
@@ -11,6 +12,7 @@ function update()
     if(Math.floor(inNum.get())<0 || !inArray.get())
     {
         result.set(null);
+        outArrayLength.set(0);
         return;
     }
 
@@ -34,4 +36,5 @@ function update()
     }
     result.set(null);
     result.set(arr);
+    outArrayLength.set(arr.length);
 }
