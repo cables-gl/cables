@@ -6,9 +6,11 @@ var arrOut=op.outArray("Result");
 var arr=[];
 
 var maxLength=op.inValue("Max Length",100);
+var inReset=op.inTriggerButton("Reset");
 arrOut.set(arr);
 
 maxLength.onChange=reset;
+inReset.onTriggered=reset;
 reset();
 
 function reset()

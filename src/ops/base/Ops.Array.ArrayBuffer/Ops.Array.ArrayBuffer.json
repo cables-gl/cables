@@ -17,6 +17,10 @@
                 "type": "0",
                 "name": "Max Length",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [
