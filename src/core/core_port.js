@@ -146,6 +146,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
         }
         // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
         this.emitEvent("onUiAttrChange",newAttribs);
+        // console.log("new attribs!",newAttribs);
     };
 
     /**
