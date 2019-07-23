@@ -1,4 +1,5 @@
 import ShaderLibMods from "./cgl_shader_lib";
+import { MESH } from "./cgl_mesh";
 // var CGL = CGL || {};
 
 // ---------------------------------------------------------------------------
@@ -377,8 +378,8 @@ Shader.prototype.compile = function() {
     this.finalShaderFrag = fs;
     this.finalShaderVert = vs;
 
-    CGL.MESH.lastMesh = null;
-    CGL.MESH.lastShader = null;
+    MESH.lastMesh = null;
+    MESH.lastShader = null;
 
     this._needsRecompile = false;
     this.lastCompile = CABLES.now();
@@ -387,7 +388,7 @@ Shader.prototype.compile = function() {
 Shader.prototype.bind = function()
 {
     var i = 0;
-    CGL.MESH.lastShader = this;
+    MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
 

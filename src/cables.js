@@ -16,11 +16,11 @@ import Timer, * as TimerUtils from "./core/timer";
 import * as PatchConnections from "./core/patchConnection";
 import Gizmo, * as GizmoUtils from "./core/mod_gizmo";
 
-import CGL from "./cgl";
-console.log("CGL", CGL);
-window.CGL = CGL;
+// import CGL from "./cgl";
+// console.log("CGL", CGL);
+// window.CGL = CGL;
 
-console.log("window.CGL", window.CGL);
+// console.log("window.CGL", window.CGL);
 // import EventTarget from "./core/0_eventtarget";
 // import utils from "./core/0_utils";
 // import anim from "./core/anim";

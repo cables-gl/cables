@@ -1,20 +1,7 @@
 import CABLES from "./cables";
+import CGL from "./cgl";
+// require("expose-loader?CGL!./core/cgl/index.js");
 
-// const CABLES = require("./cables");
-
-// window.CABLES = CABLES;
-// const CGL = require("./cgl");
-
-// window.CGL = CGL;
-
-// console.log({ CABLES, CGL }, "ASDASDASDASD");
-
-// console.log("WINDOW OBJECTS", window.CABLES, window.CGL);
-// module.exports = { CABLES, CGL };
-
-//window.CABLES = CABLES;
+window.CGL = CGL;
 
 export default CABLES;
-
-
-// export  {CABLES as CABLES };

@@ -1,5 +1,5 @@
 import Framebuffer from "./cgl_framebuffer";
-import Framebuffer2 from "./cgl_framebuffer2";
+import Framebuffer2, { fbs } from "./cgl_framebuffer2";
 import Geometry from "./cgl_geom";
 import * as Markers from "./cgl_marker";
 import MatrixStack from "./cgl_matrixstack";
@@ -16,8 +16,8 @@ import TextureEffect from "./cgl_textureeffect";
 extendMeshWithFeedback(Mesh);
 
 const CGL = {
-  ...SHADER_VARS,
-  ...BLENDS,
+    ...SHADER_VARS,
+    ...BLENDS,
     Framebuffer,
     Framebuffer2,
     Geometry,
@@ -32,11 +32,14 @@ const CGL = {
     Context,
     Texture,
     TextureEffect,
+    ...fbs,
+    currentTextureEffect() {},
     /* FROM cgl_framebuffer2.js */
-    Framebuffer2DrawTargetsDefault: null,
-    Framebuffer2BlittingFramebuffer: null,
-    Framebuffer2FinalFramebuffer: null,
+    // Framebuffer2DrawTargetsDefault: null,
+    // Framebuffer2BlittingFramebuffer: null,
+    // Framebuffer2FinalFramebuffer: null,
 };
 
-export default CGL;
+console.log("CGL before export", CGL);
 
+export default CGL;

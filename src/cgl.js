@@ -1,3 +1,6 @@
+import CGL from "./core/cgl";
+
+export default CGL;
 // var CGL = {};
 
 // require("./core/cgl_framebuffer")(CGL);

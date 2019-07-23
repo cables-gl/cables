@@ -201,7 +201,7 @@ Geometry.prototype.setPointVertices=function(verts)
     this.verticesIndices.length=verts.length/3;
     // this.verticesIndices=[];
 
-    for(i=0;i<verts.length/3;i++)
+    for(var i=0;i<verts.length/3;i++)
     {
         this.verticesIndices[i]=i;
         this.texCoords[i*2]=0;

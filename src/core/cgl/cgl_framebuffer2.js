@@ -1,7 +1,17 @@
 import Texture from "./cgl_texture";
 // var CGL=CGL || {};
 
+const fbs = {
+        Framebuffer2DrawTargetsDefault: null,
+    Framebuffer2BlittingFramebuffer: null,
+    Framebuffer2FinalFramebuffer: null,
+};
 
+// var fbs.Framebuffer2DrawTargetsDefault = fbs.fbs.Framebuffer2DrawTargetsDefault;
+// var fbs.Framebuffer2BlittingFramebuffer = fbs.fbs.Framebuffer2BlittingFramebuffer;
+// var fbs.Framebuffer2FinalFramebuffer = fbs.fbs.Framebuffer2FinalFramebuffer;
+
+export {fbs};
 
 const Framebuffer2=function(cgl,w,h,options)
 {
@@ -16,10 +26,10 @@ const Framebuffer2=function(cgl,w,h,options)
     this._colorRenderbuffers=[];
     this._drawTargetArray=[];
     
-    if(!Framebuffer2BlittingFramebuffer)Framebuffer2BlittingFramebuffer=cgl.gl.createFramebuffer();
-    if(!Framebuffer2FinalFramebuffer)Framebuffer2FinalFramebuffer=cgl.gl.createFramebuffer();
+    if(!fbs.Framebuffer2BlittingFramebuffer)fbs.Framebuffer2BlittingFramebuffer=cgl.gl.createFramebuffer();
+    if(!fbs.Framebuffer2FinalFramebuffer)fbs.Framebuffer2FinalFramebuffer=cgl.gl.createFramebuffer();
     
-    if(!Framebuffer2DrawTargetsDefault)Framebuffer2DrawTargetsDefault=[cgl.gl.COLOR_ATTACHMENT0];
+    if(!fbs.Framebuffer2DrawTargetsDefault)fbs.Framebuffer2DrawTargetsDefault=[cgl.gl.COLOR_ATTACHMENT0];
 
     this._options=options ||
         {
@@ -306,24 +316,24 @@ Framebuffer2.prototype.renderEnd=function()
     }
     else
     {
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, fbs.Framebuffer2BlittingFramebuffer);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthRenderbuffer);
 
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2FinalFramebuffer);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, fbs.Framebuffer2FinalFramebuffer);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.TEXTURE_2D, this._textureDepth.tex, 0);
 
         for(var i=0;i<this._numRenderBuffers;i++)
         {
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, fbs.Framebuffer2BlittingFramebuffer);
             this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, Framebuffer2FinalFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, fbs.Framebuffer2FinalFramebuffer);
             this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
 
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, Framebuffer2BlittingFramebuffer);
-            this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, Framebuffer2FinalFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, fbs.Framebuffer2BlittingFramebuffer);
+            this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, fbs.Framebuffer2FinalFramebuffer);
     
             this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
 

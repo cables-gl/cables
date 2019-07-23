@@ -1,12 +1,10 @@
 
 // var CGL=CGL || {};
-// CGL.MESH=CGL.MESH || {};
+// MESH=MESH || {};
 
-const MESH = {};
+var MESH = {};
+
 MESH.lastMesh=null;
-
-export { MESH };
-
 
 
 /**
@@ -219,7 +217,7 @@ Mesh.prototype._setVertexNumbers=function()
     {
         this._verticesNumbers=new Float32Array(numVerts);
 
-        for(i=0;i<numVerts;i++) this._verticesNumbers[i]=i;
+        for(var i=0;i<numVerts;i++) this._verticesNumbers[i]=i;
 
         this.setAttribute(CGL.SHADERVAR_VERTEX_NUMBER,this._verticesNumbers,1,
             function(attr,geom,shader)
@@ -269,7 +267,7 @@ Mesh.prototype.setGeom=function(geom)
 {
     this._geom=geom;
 
-    CGL.MESH.lastMesh=null;
+    MESH.lastMesh=null;
     CGL.profileMeshSetGeom++;
 
     
@@ -411,7 +409,7 @@ Mesh.prototype.unBind=function()
     if(this._attribLocs[shader.id]) attrLocs=this._attribLocs[shader.id];
         else this._attribLocs[shader.id]=attrLocs;
 
-        CGL.MESH.lastMesh=null;
+        MESH.lastMesh=null;
     
     for(var i=0;i<this._attributes.length;i++)
     {
@@ -485,9 +483,9 @@ Mesh.prototype.render=function(shader)
     }
 
     var needsBind=false;
-    if(CGL.MESH.lastMesh!=this )
+    if(MESH.lastMesh!=this )
     {
-        if(CGL.MESH.lastMesh) CGL.MESH.lastMesh.unBind();
+        if(MESH.lastMesh) MESH.lastMesh.unBind();
         needsBind=true;
     }
 
@@ -505,7 +503,7 @@ Mesh.prototype.render=function(shader)
     this._bind(shader);
     if(this.addVertexNumbers)this._setVertexNumbers();
 
-    CGL.MESH.lastMesh=this;
+    MESH.lastMesh=this;
 
     var prim=this._cgl.gl.TRIANGLES;
     if(this._glPrimitive!==undefined) prim=this._glPrimitive;
@@ -578,5 +576,5 @@ Mesh.prototype.dispose=function()
 
 };
 
-
+export { MESH };
 export default Mesh;

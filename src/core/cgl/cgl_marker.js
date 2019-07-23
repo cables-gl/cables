@@ -12,10 +12,10 @@ export const Marker=function(cgl)
             0, 0.00001, 0,   0,1,0,
             0, 0, 0.00001,   0,0,1,
         ]);
-    var mesh=new CGL.Mesh(cgl, geom, cgl.gl.LINES);
+    var mesh=new Mesh(cgl, geom, cgl.gl.LINES);
     mesh.setGeom(geom);
 
-    var shader=new CGL.Shader(cgl,'markermaterial');
+    var shader=new Shader(cgl,'markermaterial');
 
     var frag=''
         .endl()+'precision highp float;'

@@ -7,7 +7,8 @@ OP_PORT_TYPE_TEXTURE,
 OP_PORT_TYPE_ARRAY,
 OP_PORT_TYPE_DYNAMIC,
 OP_PORT_TYPE_STRING,
-} from "./core_op.js";
+} from "./core_op";
+
 import CGL from "./cgl";
 
 
