@@ -16,13 +16,22 @@
             {
                 "type": "0",
                 "name": "Max Length",
-                "subType": "number"
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [
             {
                 "type": "3",
                 "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayBuffer"

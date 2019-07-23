@@ -4,8 +4,9 @@ const
     inWidth=op.inValueInt("Width",2),
     inHeight=op.inValueInt("Height",2),
     inCenter=op.inValueBool("Center",true),
-    outArr=op.outArray("Result")
-    ;
+    outArr=op.outArray("Result"),
+    outTotalPoints = op.outNumber("Total points"),
+    outArrayLength = op.outNumber("Array length");
 
 inNumX.onChange=generate;
 inNumY.onChange=generate;
@@ -40,7 +41,7 @@ function generate()
     {
         for(var y=0;y<numY;y++)
         {
-            //original code, broekn
+            //original code, broken
             arr[i++]=stepX*x-centerX;
             arr[i++]=stepY*y-centerY;
             arr[i++]=0;
@@ -58,4 +59,6 @@ function generate()
 
     outArr.set(null);
     outArr.set(arr);
+    outTotalPoints.set(arr.length/3);
+    outArrayLength.set(arr.length);
 }

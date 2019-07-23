@@ -1,0 +1,27 @@
+{
+    "id": "9a911a46-af51-47c4-acb6-4f7ad026caab",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1563286839735
+        }
+    ],
+    "authorName": "andro",
+    "created": 1563287080906,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array in"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.LoopArray3"
+    }
+}

@@ -42,6 +42,11 @@
             {
                 "type": "3",
                 "name": "Array result"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayMathArray"

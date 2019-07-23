@@ -1,37 +1,32 @@
-// input
-var srcArrayPort = op.inArray("Source Array");
-var newLengthPort = op.inValue("New Length");
-
-// output
-var croppedArrayOutPort = op.outArray("Cropped Array");
+const
+    srcArrayPort = op.inArray("Source Array"),
+    newLengthPort = op.inInt("New Length"),
+    croppedArrayOutPort = op.outArray("Cropped Array"),
+    outArrayLength = op.outNumber("Array length");
 
 //change listeners
-srcArrayPort.onChange = setOutPort;
-newLengthPort.onChange = setOutPort;
+srcArrayPort.onChange = newLengthPort.onChange = setOutPort;
 
 // functions
-function setOutPort() {
-    //var makeShallowCopy = makeShallowCopyPort.get();
-    var makeShallowCopy = true; // TODO Delete when non shallow copy is implemented
+function setOutPort()
+{
     var srcArray = srcArrayPort.get();
-    op.log("Array Changed: ", srcArray);
-    if(srcArray) {
-        op.log("makeShallowCopy: ", makeShallowCopy);
-        var newLength = parseInt(newLengthPort.get());
-        op.log("newLength: ", newLength);
-        op.log("srcArray.length: ", srcArray.length);
-        if(newLength <= srcArray.length) {
-            if(makeShallowCopy) {
-                var croppedArr = srcArray.slice(0, newLength);
-                croppedArrayOutPort.set(croppedArr);
-                op.log("Copied array: ", croppedArr);
-            } else { // modify array
-                /*
-                srcArray = srcArray.splice(newLength, srcArray.length-newLength-1);
-                croppedArrayOutPort.set(srcArray);
-                op.log("Modified array: ", srcArray);
-                */
-            }
-        }
+
+    if(!srcArray)
+    {
+        croppedArrayOutPort.set(null);
+        outArrayLength.set(0);
+        return;
     }
+    var newLength = parseInt(newLengthPort.get());
+    if(newLength >= srcArray.lenngth) newLength = srcArray.length;
+    if(newLength <= srcArray.length)
+    {
+            var croppedArr = srcArray.slice(0, newLength);
+            croppedArrayOutPort.set(null);
+            croppedArrayOutPort.set(croppedArr);
+            outArrayLength.set(croppedArr.length);
+    }
+
+
 }

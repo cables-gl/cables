@@ -177,24 +177,39 @@ alphaSrc.set("alpha channel");
 
 function updateTransformPorts()
 {
+    shader.toggleDefine('TEX_TRANSFORM',doTransform.get());
     if(doTransform.get())
     {
-        shader.define('TEX_TRANSFORM');
-        scaleX.setUiAttribs({hidePort:false,greyout:false});
-        scaleY.setUiAttribs({hidePort:false,greyout:false});
-        posX.setUiAttribs({hidePort:false,greyout:false});
-        posY.setUiAttribs({hidePort:false,greyout:false});
-        rotate.setUiAttribs({hidePort:false,greyout:false});
+        // scaleX.setUiAttribs({hidePort:false});
+        // scaleY.setUiAttribs({hidePort:false});
+        // posX.setUiAttribs({hidePort:false});
+        // posY.setUiAttribs({hidePort:false});
+        // rotate.setUiAttribs({hidePort:false});
+
+        scaleX.setUiAttribs({greyout:false});
+        scaleY.setUiAttribs({greyout:false});
+        posX.setUiAttribs({greyout:false});
+        posY.setUiAttribs({greyout:false});
+        rotate.setUiAttribs({greyout:false});
     }
     else
     {
-        shader.removeDefine('TEX_TRANSFORM');
-        scaleX.setUiAttribs({hidePort:true,greyout:true});
-        scaleY.setUiAttribs({hidePort:true,greyout:true});
-        posX.setUiAttribs({hidePort:true,greyout:true});
-        posY.setUiAttribs({hidePort:true,greyout:true});
-        rotate.setUiAttribs({hidePort:true,greyout:true});
+        scaleX.setUiAttribs({greyout:true});
+        scaleY.setUiAttribs({greyout:true});
+        posX.setUiAttribs({greyout:true});
+        posY.setUiAttribs({greyout:true});
+        rotate.setUiAttribs({greyout:true});
+
+        // scaleX.setUiAttribs({"hidePort":true});
+        // scaleY.setUiAttribs({"hidePort":true});
+        // posX.setUiAttribs({"hidePort":true});
+        // posY.setUiAttribs({"hidePort":true});
+        // rotate.setUiAttribs({"hidePort":true});
+
+
     }
+
+    // op.refreshParams();
 }
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);

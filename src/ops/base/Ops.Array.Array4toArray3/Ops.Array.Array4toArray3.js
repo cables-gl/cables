@@ -1,6 +1,7 @@
 const
     inArr=op.inArray("Array"),
-    result=op.outArray("Result");
+    result=op.outArray("Result"),
+    outArrayLength = op.outNumber("Array length");
 
 var arr=[];
 inArr.onChange=function()
@@ -9,6 +10,7 @@ inArr.onChange=function()
     if(!ia)
     {
         result.set([]);
+        outArrayLength.set(0);
         return;
     }
 
@@ -24,4 +26,5 @@ inArr.onChange=function()
 
     result.set(null);
     result.set(arr);
+    outArrayLength.set(arr.length);
 };

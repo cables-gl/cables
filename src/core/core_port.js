@@ -154,7 +154,12 @@ const Port = function (__parent, name, type, uiAttribs)
             this.uiAttribs[p] = newAttribs[p];
         }
         // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+<<<<<<< HEAD
         this.emitEvent("onUiAttrChange", newAttribs);
+=======
+        this.emitEvent("onUiAttrChange",newAttribs);
+        // console.log("new attribs!",newAttribs);
+>>>>>>> origin/develop
     };
 
     /**

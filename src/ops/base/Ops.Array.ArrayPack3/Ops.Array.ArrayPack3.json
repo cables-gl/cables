@@ -34,6 +34,11 @@
                 "type": "0",
                 "name": "Num Points",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayPack3"

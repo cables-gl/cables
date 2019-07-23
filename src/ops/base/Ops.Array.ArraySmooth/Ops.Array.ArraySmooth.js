@@ -1,9 +1,8 @@
-
-const inArray = op.inArray("Array");
-const inIterations = op.inValueInt("Iterations",1);
-const inMode = op.inValueSelect("Mode",['repeat', 'clamp']);
-inMode.set('repeat');
-const outArray = op.outArray("Smoothed array");
+const inArray = op.inArray("Array"),
+    inIterations = op.inValueInt("Iterations",1),
+    inMode = op.inValueSelect("Mode",['repeat', 'clamp'],'repeat'),
+    outArray = op.outArray("Smoothed array"),
+    outArrayLength = op.outNumber("Array length");
 
 var smoothed = [];
 
@@ -60,6 +59,7 @@ function update()
 
     outArray.set(null);
     outArray.set(array);
+    outArrayLength.set(array.length);
 }
 
 

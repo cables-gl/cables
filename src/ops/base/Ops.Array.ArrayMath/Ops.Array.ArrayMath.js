@@ -1,7 +1,8 @@
 const inArray_0 = op.inArray("array 0"),
     NumberIn = op.inValueFloat("Number for math", 0.0),
     mathSelect = op.inSwitch("Math function",['+','-','*','/','%','min','max'],'+'),
-    outArray = op.outArray("Array result");
+    outArray = op.outArray("Array result"),
+    outArrayLength = op.outNumber("Array length");
 
 //cache for errors
 var showingError = false;
@@ -44,6 +45,7 @@ function update()
     //check if arrays come in correctly on startup
     if(!array0)
     {
+        outArrayLength.set(0);
         return;
     }
 
@@ -90,8 +92,8 @@ function update()
     }
     outArray.set(null);
     outArray.set(mathArray);
+    outArrayLength.set(mathArray.length);
 }
 
 inArray_0.onChange = update;
-//mathSelect.onChange = onFilterChange;
 update();

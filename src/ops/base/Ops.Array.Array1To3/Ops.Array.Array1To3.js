@@ -1,6 +1,7 @@
-
-var inArr=op.inArray("Array1x");
-var outArr=op.outArray("Array3x");
+const inArr=op.inArray("Array1x"),
+    outArr=op.outArray("Array3x"),
+    outTotalPoints = op.outNumber("Total points"),
+    outArrayLength = op.outNumber("Array length");
 
 var arr=[];
 
@@ -10,6 +11,8 @@ inArr.onChange=function()
     if(!theArray)
     {
         outArr.set(null);
+        outTotalPoints.set(0);
+        outArrayLength.set(0);
         return;
     }
 
@@ -27,4 +30,6 @@ inArr.onChange=function()
 
     outArr.set(null);
     outArr.set(arr);
+    outTotalPoints.set(arr.length/3);
+    outArrayLength.set(arr.length);
 };

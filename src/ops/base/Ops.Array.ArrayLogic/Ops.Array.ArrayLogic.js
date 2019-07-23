@@ -8,7 +8,8 @@ const inArray_0 = op.inArray("array 0"),
     numberIn = op.inValueFloat("Number for comparison", 1.0),
     mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
                 '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
-    outArray = op.outArray("Array result");
+    outArray = op.outArray("Array result"),
+    outArrayLength = op.outNumber("Array length");
 
 //cache for errors
 var showingError = false;
@@ -63,6 +64,7 @@ function update()
     if(!array0)
     {
         outArray.set(null);
+        outArrayLength.set(0);
         return;
     }
 
@@ -244,6 +246,7 @@ function update()
     }
     outArray.set(null);
     outArray.set(mathArray);
+    outArrayLength.set(mathArray.length);
 };
 
 inArray_0.onChange = update;
