@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const glob = require("glob");
+const webpack = require("webpack");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
 
 module.exports = {
@@ -49,7 +50,15 @@ module.exports = {
     externals: ["CABLES.UI"],
     resolve: {
         extensions: [".json", ".js", ".jsx"],
+        alias: {
+            CGL: path.resolve(__dirname, "./src/core/cgl/index.js"),
+        },
     },
     // devtool: "cheap-module-source-map",
-    // plugins: [new ErrorOverlayPlugin()],
+    plugins: [
+        new webpack.ProvidePlugin({
+            CGL: "CGL",
+        }),
+        // new ErrorOverlayPlugin()
+    ],
 };

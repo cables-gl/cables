@@ -37,11 +37,6 @@ const EventTarget = function ()
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-<<<<<<< HEAD
-        if (this._eventCallbacks[which]) for (var i = 0; i < this._eventCallbacks[which].length; i++) if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i](param1, param2, param3, param4, param5, param6);
-    };
-};
-=======
         if(this._eventCallbacks[which])
         {
             for(var i=0;i<this._eventCallbacks[which].length;i++)
@@ -55,6 +50,5 @@ const EventTarget = function ()
     }
 
 }
->>>>>>> origin/develop
 
 export default EventTarget;
