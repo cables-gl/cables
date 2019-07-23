@@ -10,14 +10,17 @@ import Uniform from "./cgl_shader_uniform";
 import Shader, * as SHADER_VARS from "./cgl_shader";
 import MESHES from "./cgl_simplerect";
 import Context, * as BLENDS from "./cgl_state";
-import Texture from "./cgl_texture";
+import * as Utils from "./cgl_utils";
+import Texture, * as TEXTURE_VARS from "./cgl_texture";
 import TextureEffect from "./cgl_textureeffect";
 
 extendMeshWithFeedback(Mesh);
-
+const { BLENDS: _BLENDS } = BLENDS;
+const { SHADER_VARS: _SHADER_VARS } = SHADER_VARS;
+// console.log({ SHADER_VARS, BLENDS, yolo });
 const CGL = {
-    ...SHADER_VARS,
-    ...BLENDS,
+    ..._SHADER_VARS,
+    ..._BLENDS,
     Framebuffer,
     Framebuffer2,
     Geometry,
@@ -30,10 +33,12 @@ const CGL = {
     Uniform,
     MESHES,
     Context,
+    ...TEXTURE_VARS,
     Texture,
     TextureEffect,
     ...fbs,
-    currentTextureEffect() {},
+    ...Utils,
+    // currentTextureEffect() {},
     /* FROM cgl_framebuffer2.js */
     // Framebuffer2DrawTargetsDefault: null,
     // Framebuffer2BlittingFramebuffer: null,

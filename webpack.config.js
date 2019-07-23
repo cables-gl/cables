@@ -50,15 +50,15 @@ module.exports = {
     externals: ["CABLES.UI"],
     resolve: {
         extensions: [".json", ".js", ".jsx"],
-        alias: {
-            CGL: path.resolve(__dirname, "./src/core/cgl/index.js"),
-        },
+        // alias: {
+        //     CGL: path.resolve(__dirname, "./src/core/cgl/index.js"),
+        // },
     },
     // devtool: "cheap-module-source-map",
     plugins: [
-        new webpack.ProvidePlugin({
-            CGL: "CGL",
-        }),
+        // new webpack.ProvidePlugin({
+        //     CGL: "CGL",
+        // }),
         // new ErrorOverlayPlugin()
     ],
 };

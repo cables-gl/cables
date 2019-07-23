@@ -1,5 +1,7 @@
+
 import ShaderLibMods from "./cgl_shader_lib";
 import { MESH } from "./cgl_mesh";
+import CGL from "./index";
 // var CGL = CGL || {};
 
 // ---------------------------------------------------------------------------

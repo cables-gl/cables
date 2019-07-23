@@ -1,3 +1,4 @@
+import CGL from "./index";
 // var CGL=CGL || {};
 export var tempTexture=null;
 export var tempTextureEmpty=null;

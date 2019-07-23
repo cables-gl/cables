@@ -1,4 +1,5 @@
 import Texture from "./cgl_texture";
+import CGL from "./index";
 // var CGL=CGL || {};
 
 const fbs = {

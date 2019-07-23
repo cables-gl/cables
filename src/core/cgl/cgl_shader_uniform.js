@@ -1,4 +1,4 @@
-
+import CGL from "./index";
 /**
  * Shader uniforms
  * 

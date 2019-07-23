@@ -1,4 +1,5 @@
 import Shader from "./cgl_shader";
+import CGL from "./index";
 import MatrixStack from "./cgl_matrixstack";
 // var CGL = CGL || {};
 

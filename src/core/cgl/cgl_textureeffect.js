@@ -1,4 +1,5 @@
 import Texture from "./cgl_texture";
+import CGL from "./index";
 import MESHES from "./cgl_simplerect";
 // var CGL=CGL || {};
 

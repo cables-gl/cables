@@ -1,4 +1,6 @@
 import Texture from "./cgl_texture";
+import CGL from "./index";
+
 /**
  * a framebuffer
  * @external CGL
