@@ -1,6 +1,5 @@
 import CABLES from "./cables";
-import CGL from "./cgl";
-// require("expose-loader?CGL!./core/cgl/index.js");
+import CGL from "./core/cgl";
 
 window.CGL = CGL;
 
