@@ -12,7 +12,6 @@ var uniformTextures=[];
 op.toWorkPortsNeedToBeLinked(outShader);
 
 
-
 var shader=new CGL.Shader(cgl,"shaderMaterial");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 

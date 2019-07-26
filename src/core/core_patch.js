@@ -374,6 +374,7 @@ CABLES.Patch.prototype.addOp = function(opIdentifier, uiAttribs,id) {
         if(op.init)op.init();
     }
 
+
     // if(next) next(op);
     return op;
 };
@@ -775,8 +776,19 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         var start=CABLES.now();
         var opData=obj.ops[iop];
         var op=null;
-        if(opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
+
+        try
+        {
+            if(opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
             else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
+
+        }
+        catch(e)
+        {
+            console.warn("something gone wrong");
+            console.log(opData);
+            throw e;
+        }
 
         reqs.checkOp(op);
 

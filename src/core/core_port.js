@@ -133,6 +133,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
      * hidePort - port will be hidden from op
      * hideParam - port params will be hidden from parameter panel
      * showIndex - only for dropdowns - show value index (e.g. `0 - normal` )
+     * editorSyntax - set syntax highlighting theme for editor port
      * </pre>
      * @example
      * myPort.setUiAttribs({greyout:true});
