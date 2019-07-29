@@ -463,7 +463,7 @@ CABLES.Port=function(__parent,name,type,uiAttribs)
                     portTriggered=this.links[i].portIn;
                     portTriggered._onTriggered();
                 }
-                this.links[i].activity();
+                if(this.links[i])this.links[i].activity();
             }
         }
         catch(ex)
