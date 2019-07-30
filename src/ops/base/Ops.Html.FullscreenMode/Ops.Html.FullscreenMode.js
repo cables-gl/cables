@@ -1,6 +1,13 @@
-var doRequest=op.inTrigger("Request Fullscreen");
-var doExit=op.inTrigger("Exit Fullscreen");
-var isFullscreen=op.outValueBool("Is Fullscreen");
+const
+    doRequest=op.inTriggerButton("Request Fullscreen"),
+    doExit=op.inTriggerButton("Exit Fullscreen"),
+    isFullscreen=op.outValueBool("Is Fullscreen");
+
+doExit.onTriggered=exitFs;
+doRequest.onTriggered=startFs;
+
+
+var countStarts=0;
 
 function setState()
 {
@@ -8,8 +15,15 @@ function setState()
     isFullscreen.set(isFull);
 }
 
-doRequest.onTriggered=function()
+function startFs()
 {
+    countStarts++;
+    if(countStarts>30)
+    {
+        doRequest.onTriggered=null;
+        op.setUiAttrib({error:"Fullscreen Request shound not triggered that often: op disabled"});
+        exitFs();
+    }
     var elem=op.patch.cgl.canvas.parentElement;
 
     if (elem.requestFullScreen) elem.requestFullScreen();
@@ -20,10 +34,14 @@ doRequest.onTriggered=function()
     setTimeout(setState,100);
     setTimeout(setState,500);
     setTimeout(setState,1000);
-};
+}
 
-doExit.onTriggered=function()
+
+
+function exitFs()
 {
+
+    countStarts--;
     if (document.exitFullscreen) document.exitFullscreen();
     else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
@@ -32,4 +50,4 @@ doExit.onTriggered=function()
     setTimeout(setState,100);
     setTimeout(setState,500);
     setTimeout(setState,1000);
-};
+}

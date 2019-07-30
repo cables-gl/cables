@@ -39,8 +39,17 @@
         ],
         "name": "Ops.WebAudio.AudioAnalyzer"
     },
-    "summary": "Extracts FFT or Waveform data from the incoming signal",
+    "summary": "Extracts FFT or Waveform data from the incoming audio signal",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "FFT audio"
+    ],
+    "relatedops": [
+        "Ops.WebAudio.FFTAreaAverage",
+        "Ops.WebAudio.FftTexture"
+    ],
+    "youtubeids": []
 }

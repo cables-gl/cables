@@ -57,7 +57,12 @@
         "ports": []
     },
     "issues": "",
-    "collections": null,
-    "relatedops": null,
+    "collections": [
+        "FFT audio"
+    ],
+    "relatedops": [
+        "Ops.WebAudio.AudioAnalyzer",
+        "Ops.WebAudio.FftTexture"
+    ],
     "youtubeids": []
 }
