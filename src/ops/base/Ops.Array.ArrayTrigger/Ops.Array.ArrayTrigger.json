@@ -15,6 +15,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "3",
                 "name": "Result"
             }
