@@ -95,6 +95,11 @@
             "message": "fixed - ui redraws slowing down op",
             "author": "andro",
             "date": 1559037337970
+        },
+        {
+            "message": "fixed - maximize checkbox causes infinite loop in editor",
+            "author": "pandur",
+            "date": 1564739363830
         }
     ]
 }

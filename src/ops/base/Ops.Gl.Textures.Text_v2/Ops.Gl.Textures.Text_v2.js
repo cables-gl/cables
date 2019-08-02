@@ -60,13 +60,14 @@ maximize.onChange =  function ()
 {
     if(maximize.get())
     {
-        inFontSize.setUiAttribs({hidePort:true,greyout:true});
+        inFontSize.setUiAttribs({greyout:true});
     }
     else
     {
-        inFontSize.setUiAttribs({hidePort:false,greyout:false});
+        inFontSize.setUiAttribs({greyout:false});
     }
-}
+};
+
 function refresh()
 {
     ctx.clearRect(0,0,fontImage.width,fontImage.height);
