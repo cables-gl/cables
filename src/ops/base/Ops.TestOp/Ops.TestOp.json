@@ -10,6 +10,26 @@
     "authorName": "pandur",
     "created": 1559035870179,
     "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "name",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "aaaa",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.testop"
-    }
+    },
+    "libs": [
+        "cannon.js",
+        "clmtrackr.js",
+        "bodymovin.js",
+        "webvr-polyfill.js",
+        "webaudio-peaks.js",
+        "twitterFetcher_min.js"
+    ]
 }

@@ -274,7 +274,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
             }
             else
             {
-                console.error("could not find op by id");
+                throw("could not find op by id");
             }
         }
 
@@ -288,7 +288,7 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
                     CABLES.UI.MODAL.showError('unknown op', 'unknown op: ' + objName);
                 }
                 console.error('unknown op: ' + objName);
-                throw(new Error('unknown op: ' + objName));
+                throw new Error('unknown op: ' + objName);
             } else {
                 if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
                 else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName,id);
@@ -317,17 +317,18 @@ CABLES.Patch.prototype.createOp = function(identifier,id)
     catch (e)
     {
         this._crashedOps.push(objName);
-        console.error('instancing error ' + objName,e);
         if (CABLES.UI)
         {
             CABLES.UI.MODAL.showOpException(e, objName);
+            console.error('[instancing error] ' + objName,e);
         }
         else
         {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
-            console.log(e.stacktrace);
-            this.exitError("INSTANCE_ERR",'instancing error ' + objName);
+            // console.log(e.stacktrace);
+            console.error('[instancing error] ' + objName,e);
+            this.exitError("INSTANCE_ERR",'Instancing Error ' + objName);
             throw 'instancing error ' + objName;
         }
     }
@@ -785,9 +786,9 @@ CABLES.Patch.prototype.deSerialize = function(obj, genIds) {
         }
         catch(e)
         {
-            console.warn("something gone wrong");
-            console.log(opData);
-            throw e;
+            // console.warn("something gone wrong");
+            console.warn("[instancing error] op data:",opData);
+            throw "instancing error: "+opData.objName;
         }
 
         reqs.checkOp(op);
