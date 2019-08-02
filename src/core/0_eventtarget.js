@@ -7,6 +7,7 @@ CABLES.EventTarget=function()
 
     this.addEventListener=function(which,cb)
     {
+        console.log(which);
         if(!this._eventCallbacks[which]) this._eventCallbacks[which]=[cb];
             else this._eventCallbacks[which].push(cb);
     }
