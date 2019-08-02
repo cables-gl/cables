@@ -28,6 +28,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "0",
                 "name": "Result X",
                 "subType": "number"
@@ -43,7 +47,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.ScreenPosTo3d2"
+        "name": "Ops.Gl.Matrix.ScreenPosTo3d_v2"
     },
     "summary": "convert screen coordinates to 3d coordinates",
     "youtubeid": "",

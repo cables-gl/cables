@@ -3,6 +3,7 @@ const
     exe=op.inTrigger("exe"),
     arr=op.inArray("Array"),
     numPoints=op.inValueInt("Num Points"),
+    outTrigger = op.outTrigger("Trigger out"),
     outGeom=op.outObject("Geometry"),
     pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
     seed=op.inValue("Seed"),
@@ -29,6 +30,7 @@ var showingError=false;
 
 function doRender()
 {
+    outTrigger.trigger();
     if(CABLES.UI)
     {
         var shader=cgl.getShader();

@@ -21,6 +21,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
                 "type": "0",
                 "name": "Value",
                 "subType": "number"

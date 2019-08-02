@@ -1,9 +1,11 @@
-const exec=op.inTrigger("Exec");
-const inX=op.inValue("X");
-const inY=op.inValue("Y");
-const outX=op.outValue("Result X");
-const outY=op.outValue("Result Y");
-const outZ=op.outValue("Result Z");
+const
+    exec=op.inTrigger("Exec"),
+    inX=op.inValue("X"),
+    inY=op.inValue("Y"),
+    outTrigger = op.outTrigger("Trigger out"),
+    outX=op.outValue("Result X"),
+    outY=op.outValue("Result Y"),
+    outZ=op.outValue("Result Z");
 
 const mat=mat4.create();
 const cgl=op.patch.cgl;
@@ -26,4 +28,6 @@ function calc()
     outX.set(point3d[0]*1);
     outY.set(point3d[1]*1);
     outZ.set(point3d[2]*1);
+
+    outTrigger.trigger();
 }
