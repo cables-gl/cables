@@ -26,6 +26,7 @@ var inPreRotZ=op.inValue("Pre Rot Z",1);
 var texScaling=op.inTexture("Texture Scaling");
 var texRotation=op.inTexture("Texture Rotation");
 
+var outTrigger = op.outTrigger("Trigger out");
 
 geom.ignoreValueSerialize=true;
 
@@ -110,12 +111,12 @@ function setupArray()
     if(!mesh)return;
     if(!shader)return;
     if(!uniPoints)return;
-    
+
     var pointArray=inTransformations.get();
     var num=inNum.get();
     if(num<=0)return;
     numSplinePoints=Math.floor(pointArray.length/3);
-    
+
     // console.log("numSplinePoints",numSplinePoints);
 
     // spline...
@@ -126,7 +127,7 @@ function setupArray()
 
     // delta attr per mesh
     var indexArr=new Float32Array(num);
-    
+
     var space=inSpacing.get();
     if(inMeth.get()=="Fill")
     {
@@ -137,7 +138,7 @@ function setupArray()
     else shader.removeDefine("METHOD_FILL");
 
     for(var i=0;i<num;i++) indexArr[i]=i*space;
-    
+
     mesh.addAttribute(mod.prefix+'index',indexArr,1,{instanced:true});
     mesh.numInstances=num;
 
@@ -151,6 +152,7 @@ function setupArray()
 
 function doRender()
 {
+    outTrigger.trigger();
     // if(matrixArray.length<=1)return;
     if(!mesh) return;
     // if(recalc)setupArray();
@@ -189,11 +191,11 @@ function doRender()
             op.uniRotX=new CGL.Uniform(shader,'f',mod.prefix+'rotX',inRotX);
             op.uniRotY=new CGL.Uniform(shader,'f',mod.prefix+'rotY',inRotY);
             op.uniRotZ=new CGL.Uniform(shader,'f',mod.prefix+'rotZ',inRotZ);
-            
+
             op.uniPreRotX=new CGL.Uniform(shader,'f',mod.prefix+'preRotX',inPreRotX);
             op.uniPreRotY=new CGL.Uniform(shader,'f',mod.prefix+'preRotY',inPreRotY);
             op.uniPreRotZ=new CGL.Uniform(shader,'f',mod.prefix+'preRotZ',inPreRotZ);
-            
+
             if(numSplinePoints) shader.define('PATHFOLLOW_POINTS',Math.floor(numSplinePoints));
                 else shader.define('PATHFOLLOW_POINTS',10);
         }

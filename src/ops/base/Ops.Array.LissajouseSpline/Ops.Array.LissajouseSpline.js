@@ -1,12 +1,12 @@
-
-var inForm=op.inValueSelect("Formula",[1,2,3],1);
-
-var inA=op.inValueInt("A",5);
-var inB=op.inValueInt("B",4);
-var inC=op.inValueInt("C",1);
-var inD=op.inValueInt("D",2);
-
-var result=op.outArray("Result");
+const
+    inForm=op.inValueSelect("Formula",[1,2,3],1),
+    inA=op.inValueInt("A",5),
+    inB=op.inValueInt("B",4),
+    inC=op.inValueInt("C",1),
+    inD=op.inValueInt("D",2),
+    result=op.outArray("Result"),
+    outTotalPoints = op.outNumber("Total points"),
+    outArrayLength = op.outNumber("Array length");
 
 inForm.onChange=inA.onChange=inB.onChange=inC.onChange=inD.onChange=calc;
 calc();
@@ -56,5 +56,7 @@ function calc()
     }
 
     result.set(arr);
+    outTotalPoints.set(arr.length/3);
+    outArrayLength.set(arr.length);
 }
 

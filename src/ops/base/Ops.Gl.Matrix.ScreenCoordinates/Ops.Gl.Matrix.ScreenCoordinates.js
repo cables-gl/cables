@@ -1,8 +1,9 @@
 const
     exec=op.inTrigger("Execute"),
+    trigger=op.outTrigger('Trigger'),
     x=op.outValue("X"),
-    y=op.outValue("Y"),
-    trigger=op.outTrigger('Trigger');
+    y=op.outValue("Y");
+
 
 const cgl=op.patch.cgl;
 var trans=vec3.create();

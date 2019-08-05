@@ -31,6 +31,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "2",
                 "name": "Geometry"
             }

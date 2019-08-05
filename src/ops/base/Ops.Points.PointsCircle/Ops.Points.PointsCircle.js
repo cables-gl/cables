@@ -2,7 +2,9 @@ const
     outArr=op.outArray("Points"),
     percent=op.inValueSlider('percent',1),
     segments=op.inValue('segments',40),
-    radius=op.inValue('radius',1);
+    radius=op.inValue('radius',1),
+    outTotalPoints = op.outNumber("Total points"),
+    outArrayLength = op.outNumber("Array lengths");
 
 radius.onChange=
     percent.onChange=
@@ -27,6 +29,8 @@ function calcArray()
 
     outArr.set(null);
     outArr.set(points);
+    outTotalPoints.set(points.length/3);
+    outArrayLength.set(points.length);
 }
 
 calcArray();

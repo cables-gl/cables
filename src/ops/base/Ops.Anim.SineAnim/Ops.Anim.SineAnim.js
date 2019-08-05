@@ -6,7 +6,6 @@ const
     mul=op.inValueFloat("frequency",1),
     amplitude=op.inValueFloat("amplitude",1);
 
-
 op.toWorkPortsNeedToBeLinked(exe);
 
 exe.onTriggered=exec;
@@ -17,4 +16,3 @@ function exec()
     result.set( amplitude.get() * Math.sin( (op.patch.freeTimer.get()*mul.get()) + phase.get() ));
     trigOut.trigger();
 }
-

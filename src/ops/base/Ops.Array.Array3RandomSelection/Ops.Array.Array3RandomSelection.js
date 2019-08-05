@@ -1,7 +1,10 @@
-var inArray=op.inArray("Array");
-var inNum=op.inValueInt("Elements",10);
-var inSeed=op.inValue("Seed",0);
-var result=op.outArray("Result");
+const
+    inArray=op.inArray("Array"),
+    inNum=op.inValueInt("Elements",10),
+    inSeed=op.inValue("Seed",0),
+    result=op.outArray("Result"),
+    outTotalPoints = op.outNumber("Total points"),
+    outArrayLength = op.outNumber("Array length");
 
 var arr=[];
 inSeed.onChange=inArray.onChange=inNum.onChange=update;
@@ -11,6 +14,8 @@ function update()
     if(Math.floor(inNum.get())<0 || !inArray.get())
     {
         result.set(null);
+        outTotalPoints.set(0);
+        outArrayLength.set(0);
         return;
     }
 
@@ -20,7 +25,9 @@ function update()
 
     // if(arr.length>oldArr.length)arr.length=oldArr.length;
     var nums=[];
-    for(var i=0;i<Math.max(arr.length/3,oldArr.length/3);i++)nums[i]=i%(oldArr.length/3);
+    for(var i=0;i<Math.max(arr.length/3,oldArr.length/3);i++)
+        nums[i]=i%(oldArr.length/3);
+
     nums=CABLES.shuffleArray(nums);
 
     Math.randomSeed=inSeed.get();
@@ -36,6 +43,6 @@ function update()
 
     result.set(null);
     result.set(arr);
-
-
+    outTotalPoints.set(arr.length/3);
+    outArrayLength.set(arr.length);
 }

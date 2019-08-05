@@ -1,11 +1,12 @@
+const
+    exe=op.inTrigger("Render"),
+    num=op.inValueInt("Num",1000),
+    size=op.inValue("Size",1),
+    seed=op.inValue("Seed",0),
+    distRand=op.inValueSlider("Distance Random",0),
 
-var exe=op.inTrigger("Render");
-var num=op.inValueInt("Num",1000);
-var size=op.inValue("Size",1);
-var seed=op.inValue("Seed",0);
-var distRand=op.inValueSlider("Distance Random",0);
-
-var distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]);
+    distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]),
+    outTrigger = op.outTrigger("Trigger out");
 
 var outGeom=op.outObject("Geometry");
 const outArr=op.outArray("Points");
@@ -25,6 +26,7 @@ reset();
 
 function doRender()
 {
+    outTrigger.trigger();
     if(mesh) mesh.render(cgl.getShader());
 }
 

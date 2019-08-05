@@ -1,11 +1,11 @@
-const exe = op.inTrigger("Trigger in");
-const inArr1=op.inArray("Array 1");
-const inArr2=op.inArray("Array 2");
-const inArr3=op.inArray("Array 3");
-
-const exeOut = op.outTrigger("Trigger out");
-const outArr=op.outArray("Array out");
-const outNum=op.outValue("Num Points");
+const exe = op.inTrigger("Trigger in"),
+    inArr1=op.inArray("Array 1"),
+    inArr2=op.inArray("Array 2"),
+    inArr3=op.inArray("Array 3"),
+    exeOut = op.outTrigger("Trigger out"),
+    outArr=op.outArray("Array out"),
+    outNum=op.outValue("Num Points"),
+    outArrayLength = op.outNumber("Array length");
 
 var showingError = false;
 
@@ -24,6 +24,7 @@ function update()
     if(!array1 && !array2 && !array3 )
     {
         outArr.set(null);
+        outTotalPoints.set(0);
         return;
     }
 
@@ -48,6 +49,7 @@ function update()
         if(!showingError)
         {
             op.uiAttr({error:"Arrays do not have the same length !"});
+            outArrayLength.set(0);
             showingError = true;
         }
         return;
@@ -71,6 +73,7 @@ function update()
     outArr.set(null);
     outArr.set(arr);
     outNum.set(arr.length/3);
+    outArrayLength.set(arr.length);
 
     exeOut.trigger();
 }

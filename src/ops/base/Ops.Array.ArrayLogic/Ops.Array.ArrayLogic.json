@@ -12,14 +12,20 @@
                 "subType": "number"
             },
             {
-                "type": "5",
-                "name": "Comparison mode"
+                "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "3",
                 "name": "Array result"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayLogic"

@@ -1,7 +1,7 @@
-var inArr=op.inArray("Array");
-var inArr2=op.inArray("Array 2");
-
-var outArr=op.outArray("Result");
+const inArr=op.inArray("Array"),
+    inArr2=op.inArray("Array 2"),
+    outArr=op.outArray("Result"),
+    outArrayLength = op.outNumber("Array length");
 
 var arr=[];
 
@@ -10,6 +10,7 @@ inArr.onChange=inArr2.onChange=function()
     if(!inArr2.get() && !inArr.get())
     {
         outArr.set(null);
+        outArrayLength.set(0);
         return;
     }
 
@@ -29,5 +30,5 @@ inArr.onChange=inArr2.onChange=function()
     arr=arr.concat(inArr2.get());
 
     outArr.set(arr);
-
+    outArrayLength.set(arr.length);
 };

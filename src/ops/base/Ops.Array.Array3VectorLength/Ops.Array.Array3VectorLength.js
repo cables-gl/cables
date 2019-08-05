@@ -1,5 +1,6 @@
 const inArray=op.inArray("Array in"),
         outArray=op.outArray("Array out"),
+        outArrayLength = op.outNumber("Array lengths"),
         newArr=[];
 
 outArray.set(newArr);
@@ -21,9 +22,7 @@ inArray.onChange=function()
 
     newArr.length = Math.floor(arr.length/3);
 
-    var divisibleBy3 = newArr.length % 3 === 0;
-
-    if(divisibleBy3 === false)
+    if(arr.length % 3 !== 0)
     {
         if(!showingError)
         {
@@ -51,4 +50,5 @@ inArray.onChange=function()
 
     outArray.set(null);
     outArray.set(newArr);
+    outArrayLength.set(newArr.length);
 };

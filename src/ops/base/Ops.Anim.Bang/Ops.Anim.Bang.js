@@ -1,7 +1,9 @@
-const inUpdate=op.inTrigger("update");
-const inBang=op.inTriggerButton("Bang");
-const inDuration=op.inValue("Duration",0.1);
-const outValue=op.outValue("Value");
+const
+    inUpdate=op.inTrigger("update"),
+    inBang=op.inTriggerButton("Bang"),
+    inDuration=op.inValue("Duration",0.1),
+    outTrigger = op.outTrigger("Trigger Out"),
+    outValue=op.outValue("Value");
 
 const anim=new CABLES.Anim();
 var startTime=CABLES.now();
@@ -20,4 +22,5 @@ inUpdate.onTriggered=function()
 {
     var v=anim.getValue((CABLES.now()-startTime)/1000);
     outValue.set(v);
+    outTrigger.trigger();
 };

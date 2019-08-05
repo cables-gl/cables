@@ -12,6 +12,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
                 "type": "0",
                 "name": "X",
                 "subType": "number"
@@ -20,10 +24,6 @@
                 "type": "0",
                 "name": "Y",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Trigger"
             }
         ],
         "name": "Ops.Gl.Matrix.ScreenCoordinates"

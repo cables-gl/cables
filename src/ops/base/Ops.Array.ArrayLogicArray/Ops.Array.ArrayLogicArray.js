@@ -5,11 +5,12 @@
 //pass allows the value from array 0 through if the
 //comparison evaulates to true else zero
 
-const inArray_0 = op.inArray("array 0");
-const inArray_1 = op.inArray("array 1");
-const mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
-                                    '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>');
-const outArray = op.outArray("Array result");
+const inArray_0 = op.inArray("array 0"),
+    inArray_1 = op.inArray("array 1"),
+    mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
+                '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
+    outArray = op.outArray("Array result"),
+    outArrayLength = op.outNumber("Array length");
 
 //cache for errors
 var showingError = false;
@@ -63,6 +64,7 @@ function update()
     //check if arrays come in correctly on startup
     if(!array0 || !array1)
     {
+        outArrayLength.set(0);
         return;
     }
     //if arrays don't have the same length then give a warning to panel ui
@@ -260,6 +262,7 @@ function update()
     }
     outArray.set(null);
     outArray.set(mathArray);
+    outArrayLength.set(mathArray.length);
 };
 
 inArray_0.onChange = update;

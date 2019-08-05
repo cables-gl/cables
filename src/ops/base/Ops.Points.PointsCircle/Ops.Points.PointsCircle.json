@@ -22,9 +22,19 @@
             {
                 "type": "3",
                 "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array lengths",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Math.CirclePath"
+        "name": "Ops.Points.PointsCircle"
     },
     "authorName": "pandur",
     "id": "ef54ba67-8b1d-41b0-8140-bb97061eaa97",
