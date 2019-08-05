@@ -24,7 +24,7 @@ function update()
     if(!array1 && !array2 && !array3 )
     {
         outArr.set(null);
-        outTotalPoints.set(0);
+        outNum.set(0);
         return;
     }
 
