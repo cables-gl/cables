@@ -1,0 +1,1 @@
+Returns a single number with the distance between each point from 2 arrays

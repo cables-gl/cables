@@ -27,5 +27,26 @@
             }
         ],
         "name": "Ops.Array.Array3VectorDistance"
+    },
+    "summary": "Returns the distance between 2 points from an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in 1",
+                "text": "Array in 1"
+            },
+            {
+                "name": "Array in 2",
+                "text": "Array in 2"
+            },
+            {
+                "name": "Array out",
+                "text": "Distance between each point"
+            }
+        ]
     }
 }

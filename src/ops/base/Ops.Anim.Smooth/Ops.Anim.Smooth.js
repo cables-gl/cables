@@ -23,6 +23,8 @@ const MODE_UP_DOWN = 1;
 onFilterChange();
 getDivisors();
 
+inMode.setUiAttribs({hidePort:true});
+
 function onFilterChange()
 {
     var selectedMode = inMode.get();

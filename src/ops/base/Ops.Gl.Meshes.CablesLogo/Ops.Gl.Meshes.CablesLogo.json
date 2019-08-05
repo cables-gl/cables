@@ -10,6 +10,11 @@
                 "type": "0",
                 "name": "Scale",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -27,7 +32,6 @@
     "docs": {
         "ports": []
     },
-    "updated": 1540457798275,
     "authorName": "pandur",
     "id": "d53b5d7b-99b5-420e-b5a1-2d7c2c1f1ebb",
     "created": 1540457633048
