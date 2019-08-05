@@ -66,4 +66,4 @@ array.onLinkChanged = function ()
     update();
     nextPort.trigger();
 }
-
+update();

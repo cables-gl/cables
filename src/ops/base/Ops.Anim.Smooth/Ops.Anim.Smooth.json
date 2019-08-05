@@ -48,5 +48,42 @@
             }
         ],
         "name": "Ops.Anim.Smooth"
+    },
+    "summary": "Smooths out jumps in values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Separate inc/dec",
+                "text": "Enable to have separate control over the smoothing when values increase or decrease"
+            },
+            {
+                "name": "Value",
+                "text": "The value to smooth"
+            },
+            {
+                "name": "Inc factor",
+                "text": "Amount of smoothing applied to values that increase from the previous number"
+            },
+            {
+                "name": "Dec factor",
+                "text": "Amount of smoothing applied to values that decrease from the previous number"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The smoothed result"
+            }
+        ]
     }
 }

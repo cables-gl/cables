@@ -1,5 +1,6 @@
 const render=op.inTrigger('render');
 const scale=op.inValue("Scale",1);
+const draw=op.inBool("Draw",true);
 const trigger=op.outTrigger('trigger');
 const geomOut=op.outObject('Geometry');
 
@@ -33,7 +34,8 @@ function build()
 
 render.onTriggered=function()
 {
-    mesh.render(op.patch.cgl.getShader());
+    if(draw.get())
+        mesh.render(op.patch.cgl.getShader());
     trigger.trigger();
 };
 

@@ -1,0 +1,54 @@
+{
+    "id": "22dd3a12-79ff-49ce-abe6-d3b5a3b06ff3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1563310768761
+        },
+        {
+            "message": "Ops.Color.RGBtoHSV renamed to Ops.Color.RGBtoHSB",
+            "author": "pandur",
+            "date": 1563311152990
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1563310785990,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Hue",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Saturation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Brightness",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Color.RGBtoHSB"
+    }
+}

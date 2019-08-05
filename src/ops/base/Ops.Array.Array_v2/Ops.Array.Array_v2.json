@@ -23,6 +23,11 @@
             {
                 "type": "3",
                 "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Array length out",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.Array_v2"

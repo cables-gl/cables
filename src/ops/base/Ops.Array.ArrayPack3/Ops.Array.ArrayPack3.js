@@ -49,7 +49,7 @@ function update()
         if(!showingError)
         {
             op.uiAttr({error:"Arrays do not have the same length !"});
-            outArrayLength.set(0);
+            outNum.set(0);
             showingError = true;
         }
         return;

@@ -39,8 +39,7 @@
         ],
         "name": "Ops.Gl.Geometry.AlignGeometry"
     },
-    "summary": "align a geometry / change its pivot/center point",
-    "youtubeid": "",
+    "summary": "align a geometry / change its pivot / center / origin point",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -69,5 +68,6 @@
                 "text": "Geometry out "
             }
         ]
-    }
+    },
+    "youtubeids": []
 }
