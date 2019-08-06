@@ -1,9 +1,7 @@
 import CGL from "./index";
-// var CGL=CGL || {};
-// MESH=MESH || {};
+import { profileData } from "./cgl_profileData";
 
 var MESH = {};
-// console.log("TESTING BRO");const;
 MESH.lastMesh=null;
 
 /**
@@ -132,8 +130,8 @@ Mesh.prototype.setAttribute=function(name,array,itemSize,options)
     if(!(array instanceof Float32Array))
     {
         floatArray=new Float32Array(array);
-        CGL.profileNonTypedAttrib++;
-        CGL.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
+        profileData.profileNonTypedAttrib++;
+        profileData.profileNonTypedAttribNames=this._geom.name+' '+name+' ';
     }
     else floatArray=array;
 
@@ -267,7 +265,7 @@ Mesh.prototype.setGeom=function(geom)
     this._geom=geom;
 
     MESH.lastMesh=null;
-    CGL.profileMeshSetGeom++;
+    profileData.profileMeshSetGeom++;
 
     
 
@@ -327,7 +325,7 @@ Mesh.prototype._bind=function(shader)
             {
                 attribute._attrLocationLastShaderTime=shader.lastCompile;
                 attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
-                CGL.profileAttrLoc++;
+                profileData.profileAttrLoc++;
             }
         }
             
@@ -383,7 +381,7 @@ Mesh.prototype._bind=function(shader)
                         var pointer=attribute.pointer[ip];
 
                         if(pointer.loc==-1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
-                        CGL.profileAttrLoc++;
+                        profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);

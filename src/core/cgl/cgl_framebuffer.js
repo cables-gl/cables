@@ -1,10 +1,11 @@
 // * NOTE:
-// * CGL.profileFrameBuffercreate
+// * profileData.profileFrameBuffercreate
 // * used in framebuffer, framebuffer2, deprecated.Performance and Performance.Op
 // * should be encapsulated in an object to make it import/export - able
 
 import Texture from "./cgl_texture";
 import CGL from "./index";
+import { profileData } from "./cgl_profileData";
 
 /**
  * a framebuffer
@@ -123,7 +124,7 @@ const Framebuffer = function (_cgl, w, h, options)
         width = Math.ceil(w);
         height = Math.ceil(h);
 
-        CGL.profileFrameBuffercreate++;
+        profileData.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);

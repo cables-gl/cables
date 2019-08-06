@@ -2,6 +2,7 @@
 
 import Texture from "./cgl_texture";
 import CGL from "./index";
+import { profileData } from "./cgl_profileData";
 
 // var CGL=CGL || {};
 
@@ -136,7 +137,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._width = Math.floor(w);
     this._height = Math.floor(h);
 
-    CGL.profileFrameBuffercreate++;
+    profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
     {

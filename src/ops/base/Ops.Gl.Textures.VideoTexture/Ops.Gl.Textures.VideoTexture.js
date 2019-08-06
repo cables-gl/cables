@@ -177,7 +177,7 @@ function updateTexture()
 
     textureOut.set(tex);
 
-    CGL.profileVideosPlaying++;
+    CGL.profileData.profileVideosPlaying++;
 
 
     if(videoElement.readyState==4) loading.set(false);

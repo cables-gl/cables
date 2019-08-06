@@ -1,8 +1,8 @@
-// * profileShaderCompiles, CGL.profileShaderCompileName, profileShaderBinds, profileMVPMatrixCount only used here & in performance op, 
+
 import ShaderLibMods from "./cgl_shader_lib";
 import { MESH } from "./cgl_mesh";
 import CGL from "./index";
-// var CGL = CGL || {};
+import { profileData } from "./cgl_profileData";
 
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
@@ -146,8 +146,8 @@ Shader.prototype._addLibs=function(src)
 
 
 Shader.prototype.compile = function() {
-    CGL.profileShaderCompiles++;
-    CGL.profileShaderCompileName = this._name;
+    profileData.profileShaderCompiles++;
+    profileData.profileShaderCompileName = this._name;
 
     var extensionString = '';
     if (this._extensions)
@@ -407,7 +407,7 @@ Shader.prototype.bind = function()
     }
 
     if (this._cgl.currentProgram != this._program) {
-        CGL.profileShaderBinds++;
+        profileData.profileShaderBinds++;
         this._cgl.gl.useProgram(this._program);
         this._cgl.currentProgram = this._program;
     }
@@ -419,7 +419,7 @@ Shader.prototype.bind = function()
     {
         this._pMatrixState=this._cgl.getProjectionMatrixStateCount();
         this._cgl.gl.uniformMatrix4fv(this._projMatrixUniform, false, this._cgl.pMatrix);
-        CGL.profileMVPMatrixCount++;
+        profileData.profileMVPMatrixCount++;
     }
 
     if (this._vMatrixUniform)
@@ -427,24 +427,24 @@ Shader.prototype.bind = function()
         if(this._vMatrixState!=this._cgl.getViewMatrixStateCount())
         {
             this._cgl.gl.uniformMatrix4fv(this._vMatrixUniform, false, this._cgl.vMatrix);
-            CGL.profileMVPMatrixCount++;
+            profileData.profileMVPMatrixCount++;
             this._vMatrixState=this._cgl.getViewMatrixStateCount();
 
             if (this._inverseViewMatrixUniform)
             {
                 mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
                 this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
-                CGL.profileMVPMatrixCount++;
+                profileData.profileMVPMatrixCount++;
             }
         }
         this._cgl.gl.uniformMatrix4fv(this._mMatrixUniform, false, this._cgl.mMatrix);
-        CGL.profileMVPMatrixCount++;
+        profileData.profileMVPMatrixCount++;
 
         if(this._camPosUniform)
         {
             mat4.invert(this._tempCamPosMatrix, this._cgl.vMatrix);
             this._cgl.gl.uniform3f(this._camPosUniform, this._tempCamPosMatrix[12], this._tempCamPosMatrix[13], this._tempCamPosMatrix[14]);
-            CGL.profileMVPMatrixCount++;
+            profileData.profileMVPMatrixCount++;
         }
     }
     else
@@ -454,7 +454,7 @@ Shader.prototype.bind = function()
 
         mat4.mul(tempmv, this._cgl.vMatrix, this._cgl.mMatrix);
         this._cgl.gl.uniformMatrix4fv(this._mvMatrixUniform, false, tempmv);
-        CGL.profileMVPMatrixCount++;
+        profileData.profileMVPMatrixCount++;
     }
 
     if (this._normalMatrixUniform)
@@ -473,7 +473,7 @@ Shader.prototype.bind = function()
         mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
         this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
-        CGL.profileMVPMatrixCount++;
+        profileData.profileMVPMatrixCount++;
     }
 
     for(var i=0;i<this._libs.length;i++)

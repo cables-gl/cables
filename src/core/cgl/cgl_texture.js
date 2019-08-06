@@ -1,4 +1,5 @@
 import CGL from "./index";
+import { profileData } from "./cgl_profileData";
 
 
 
@@ -145,7 +146,7 @@ Texture.prototype.setSize=function(w,h)
     this.height=h;
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    CGL.profileTextureResize++;
+    profileData.profileTextureResize++;
 
     var uarr=null;
 
@@ -296,7 +297,7 @@ Texture.prototype.initTexture=function(img,filter)
  */
 Texture.prototype.delete=function()
 {
-    CGL.profileTextureDelete++;
+    profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
 
