@@ -1,6 +1,6 @@
 // * TODO:
 
-import { profileData } from "./cgl_profileData";
+import { profileData } from "./cgl_profiledata";
 
 /**
  * Shader uniforms

@@ -1,5 +1,5 @@
 import CGL from "./index";
-import { profileData } from "./cgl_profileData";
+import { profileData } from "./cgl_profiledata";
 
 
 

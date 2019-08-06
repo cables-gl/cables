@@ -2,7 +2,7 @@
 import ShaderLibMods from "./cgl_shader_lib";
 import { MESH } from "./cgl_mesh";
 import CGL from "./index";
-import { profileData } from "./cgl_profileData";
+import { profileData } from "./cgl_profiledata";
 
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {

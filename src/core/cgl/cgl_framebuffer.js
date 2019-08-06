@@ -1,6 +1,6 @@
 
 import Texture from "./cgl_texture";
-import { profileData } from "./cgl_profileData";
+import { profileData } from "./cgl_profiledata";
 
 /**
  * a framebuffer

@@ -13,7 +13,7 @@ import Context, * as BLENDS from "./cgl_state";
 import * as Utils from "./cgl_utils";
 import Texture, * as TEXTURE_VARS from "./cgl_texture";
 import TextureEffect from "./cgl_textureeffect";
-import { profileData } from "./cgl_profileData";
+import { profileData } from "./cgl_profiledata";
 
 extendMeshWithFeedback(Mesh);
 const { BLENDS: _BLENDS } = BLENDS;
