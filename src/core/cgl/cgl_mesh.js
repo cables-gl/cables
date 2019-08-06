@@ -6,7 +6,6 @@ var MESH = {};
 // console.log("TESTING BRO");const;
 MESH.lastMesh=null;
 
-
 /**
  * webgl renderable 3d object
  * @external CGL

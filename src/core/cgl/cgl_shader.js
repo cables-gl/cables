@@ -7,7 +7,7 @@ import CGL from "./index";
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
 profileShaderBinds: 0,
-profileUniformCount: 0,
+// profileUniformCount: 0,
 profileShaderCompiles: 0,
 profileVideosPlaying: 0,
 profileMVPMatrixCount: 0,

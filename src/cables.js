@@ -50,7 +50,6 @@ import Gizmo, * as GizmoUtils from "./core/mod_gizmo";
 
 export default {
     ...base64,
-    Browser,
     // Link,
     EventTarget,
     ...utils,
@@ -72,3 +71,4 @@ export default {
     ...PatchConnections,
     WEBAUDIO,
 };
+

@@ -1,4 +1,8 @@
 import CGL from "./index";
+
+import profileData from "./cgl_profileData";
+
+
 /**
  * Shader uniforms
  * 
@@ -109,9 +113,9 @@ const Uniform=function(__shader,__type,__name,_value)
     this.needsUpdate=true;
 };
 
-Uniform.prototype.getType=function() {return this._type;};
-Uniform.prototype.getName=function() {return this._name;};
-Uniform.prototype.getValue=function() {return this._value;};
+Uniform.prototype.getType=function() { return this._type; };
+Uniform.prototype.getName=function() { return this._name; };
+Uniform.prototype.getValue=function() { return this._value; };
 Uniform.prototype.resetLoc=function() { this._loc=-1;this.needsUpdate=true; };
 
 Uniform.prototype.bindTextures=function()
@@ -134,7 +138,7 @@ Uniform.prototype.updateValueF=function()
     else this.needsUpdate=false;
 
     this._shader.getCgl().gl.uniform1f(this._loc, this._value);
-    CGL.profileUniformCount++;
+    profileData.profileUniformCount++;
 };
 
 Uniform.prototype.setValueF=function(v)

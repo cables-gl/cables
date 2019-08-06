@@ -13,9 +13,11 @@ import Context, * as BLENDS from "./cgl_state";
 import * as Utils from "./cgl_utils";
 import Texture, * as TEXTURE_VARS from "./cgl_texture";
 import TextureEffect from "./cgl_textureeffect";
+import profileData from "./cgl_profiledata";
 
 extendMeshWithFeedback(Mesh);
 const { BLENDS: _BLENDS } = BLENDS;
+
 const { SHADER_VARS: _SHADER_VARS } = SHADER_VARS;
 // console.log({ SHADER_VARS, BLENDS, yolo });
 const CGL = {
@@ -38,6 +40,8 @@ const CGL = {
     TextureEffect,
     ...fbs,
     ...Utils,
+    profileData
+    
     // currentTextureEffect() {},
     /* FROM cgl_framebuffer2.js */
     // Framebuffer2DrawTargetsDefault: null,
@@ -48,3 +52,11 @@ const CGL = {
 console.log("CGL before export", CGL);
 
 export default CGL;
+
+const obj = { a: 1, b: 2} ;
+const arr = [1, 2];
+const [x, y] = arr;
+
+console.log(x);
+
+const { a: firstObjKeyVal } = x;
