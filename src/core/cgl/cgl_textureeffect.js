@@ -26,11 +26,7 @@ const TextureEffect=function(cgl,options)
     this._renderbuffer2  = this._cgl.gl.createRenderbuffer();
     this.switched=false;
     this.depth=false;
-
-    
-
 };
-
 
 TextureEffect.prototype.setSourceTexture=function(tex)
 {

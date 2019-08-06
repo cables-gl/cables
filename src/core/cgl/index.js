@@ -42,11 +42,6 @@ const CGL = {
     ...Utils,
     profileData
     
-    // currentTextureEffect() {},
-    /* FROM cgl_framebuffer2.js */
-    // Framebuffer2DrawTargetsDefault: null,
-    // Framebuffer2BlittingFramebuffer: null,
-    // Framebuffer2FinalFramebuffer: null,
 };
 
 console.log("CGL before export", CGL);

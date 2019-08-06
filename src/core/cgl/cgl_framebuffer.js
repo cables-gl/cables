@@ -1,10 +1,5 @@
-// * NOTE:
-// * profileData.profileFrameBuffercreate
-// * used in framebuffer, framebuffer2, deprecated.Performance and Performance.Op
-// * should be encapsulated in an object to make it import/export - able
 
 import Texture from "./cgl_texture";
-import CGL from "./index";
 import { profileData } from "./cgl_profileData";
 
 /**
@@ -17,8 +12,6 @@ import { profileData } from "./cgl_profileData";
  * @param {Number} height
  * @param {Object} [options]
  */
-
-// var CGL=CGL || {};
 
 const Framebuffer = function (_cgl, w, h, options)
 {
