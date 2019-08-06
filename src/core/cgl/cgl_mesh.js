@@ -3,7 +3,7 @@ import CGL from "./index";
 // MESH=MESH || {};
 
 var MESH = {};
-
+// console.log("TESTING BRO");const;
 MESH.lastMesh=null;
 
 

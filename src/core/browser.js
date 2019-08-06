@@ -1,3 +1,5 @@
+import CGL from "./cgl";
+
 const Browser = function (projectId)
 {
     var canceled = false;

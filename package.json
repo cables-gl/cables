@@ -23,6 +23,7 @@
   "homepage": "https://github.com/pandrr/cables#readme",
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
     "@babel/preset-env": "^7.3.1",
     "add-module-exports-webpack-plugin": "^1.0.0",
     "babel-loader": "^8.0.5",
@@ -32,5 +33,8 @@
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.0.0"
   }
 }
