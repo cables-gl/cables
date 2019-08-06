@@ -1,7 +1,8 @@
 const modeSelect = op.inSwitch("Mode select",['Number','1,2,3,4',"0-1"],'Number'),
     inLength=op.inValueInt("Array length",10),
     inDefaultValue=op.inValueFloat("Default Value"),
-    outArr=op.outArray("Array");
+    outArr=op.outArray("Array"),
+    outArrayLength = op.outNumber("Array length out");
 
 var arr=[];
 
@@ -42,7 +43,7 @@ function reset()
     var arrLength = inLength.get();
     var valueForArray = inDefaultValue.get();
     var i;
-
+    outArrayLength.set(arrLength);
     //mode 0 - fill all array values with one number
     if( selectIndex === MODE_NUMBER)
     {
@@ -70,6 +71,7 @@ function reset()
     }
     outArr.set(null);
     outArr.set(arr);
+
 }
 inDefaultValue.onChange = inLength.onChange = function ()
 {

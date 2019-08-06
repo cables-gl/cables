@@ -232,6 +232,7 @@ function create() {
     geom.texCoords[(i / 3) * 2 + 1] = Math.abs(geom.vertices[i + 1] / hAbs - 0.5);
   }
 
+
   geom.vertexNormals = geom.vertices.map((vert, i) => (i % 3 === 2 ? 1.0 : 0.0));
   geom.tangents = geom.vertices.map((vert, i) => (i % 3 === 0 ? -1.0 : 0.0));
   geom.biTangents = geom.vertices.map((vert, i) => (i % 3 === 1 ? -1.0 : 0.0));

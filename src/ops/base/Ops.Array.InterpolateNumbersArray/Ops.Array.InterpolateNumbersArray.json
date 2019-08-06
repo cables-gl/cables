@@ -36,6 +36,19 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Index Position",
+                "text": "Index position of array - integers return a non interpolated number"
+            },
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "result",
+                "text": "Number out"
+            }
+        ]
     }
 }

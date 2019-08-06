@@ -47,8 +47,8 @@ function mouseMove(e)
 
     if(e && e.hasOwnProperty('offsetX')>=0)
     {
-        op.x.set(e.offsetX);
-        op.y.set(e.offsetY);
+        op.x.set(e.offsetX*(window.devicePixelRatio||1));
+        op.y.set(e.offsetY*(window.devicePixelRatio||1));
     }
 }
 

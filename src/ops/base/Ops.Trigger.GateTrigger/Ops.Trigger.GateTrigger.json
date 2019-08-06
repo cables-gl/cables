@@ -1,0 +1,46 @@
+{
+    "authorName": "andro",
+    "id": "65e8b8a2-ba13-485f-883a-2bcf377989da",
+    "created": 1564999639713,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Pass Through",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Execute"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger out"
+            }
+        ],
+        "name": "Ops.Trigger.GateTrigger"
+    },
+    "summary": "Allows a trigger to pass only if the gate is open",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Pass Through",
+                "text": "When true trigger passes through"
+            },
+            {
+                "name": "Execute",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Trigger out",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}

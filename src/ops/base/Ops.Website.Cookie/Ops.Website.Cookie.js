@@ -1,4 +1,7 @@
-var outCookie=op.outObject("Cookie");
+const
+    outCookie=op.outObject("Cookie"),
+    outString=op.outString("Cookie String");
+
 
 update();
 
@@ -21,4 +24,5 @@ function str_obj(str)
 function update()
 {
     outCookie.set(str_obj(document.cookie));
+    outString.set(document.cookie);
 }

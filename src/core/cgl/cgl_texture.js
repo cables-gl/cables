@@ -461,7 +461,7 @@ Texture.load=function(cgl,url,finishedCallback,settings)
         texture.image.onerror=
             function(e)
             {
-                console.log(e);
+                console.warn('[cgl.texture.load] error loading texture',e);
                 cgl.patch.loading.finished(loadingId);
                 var error={'error':true};
                 if(finishedCallback)finishedCallback(error);

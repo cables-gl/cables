@@ -37,12 +37,19 @@
     "docs": {
         "ports": []
     },
-    "youtubeid": "Zfhn8xSM0SE",
     "changelog": [
         {
             "message": "Now parses uniforms from source code, uniforms don't disappear when not in use",
             "author": "pandur",
             "date": 1558002044484
         }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Shader.Shader2Texture"
+    ],
+    "youtubeids": [
+        "Zfhn8xSM0SE"
     ]
 }

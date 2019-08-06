@@ -1,7 +1,7 @@
 var exec=op.inTrigger("Execute");
 var next=op.outTrigger("Next");
 
-var prim=op.inValueSelect("Primitive",['LINES','LINE_STRIP','LINE_LOOP','POINTS','TRIANGLES','TRIANGLE_FAN','TRIANGLE_STRIP']);
+var prim=op.inValueSelect("Primitive",['LINES','LINE_STRIP','LINE_LOOP','POINTS','TRIANGLES','TRIANGLE_FAN','TRIANGLE_STRIP'],'LINES');
 var cgl=op.patch.cgl;
 
 var glPrim=cgl.gl.LINES;
@@ -29,7 +29,7 @@ exec.onTriggered=function()
     // shader.glPrimitive=cgl.gl.POINTS;
 
     next.trigger();
-    
+
     shader.glPrimitive=oldPrim;
-    
+
 };

@@ -14,6 +14,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger out"
+            },
+            {
                 "type": "0",
                 "name": "result",
                 "subType": "number"
@@ -37,7 +41,6 @@
             }
         ]
     },
-    "updated": 1542101789280,
     "authorName": "pandur",
     "id": "917df27b-7cc3-465f-986d-bcf5a7e125a7",
     "created": 1542101380011,

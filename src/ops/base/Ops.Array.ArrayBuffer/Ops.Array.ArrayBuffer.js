@@ -1,5 +1,6 @@
 const exec=op.inTriggerButton("exec"),
     val=op.inValue("Value"),
+    outTrigger = op.outTrigger("Trigger out"),
     arrOut=op.outArray("Result"),
     outArrayLength = op.outNumber("Array length");
 
@@ -29,4 +30,5 @@ exec.onTriggered=function()
     arrOut.set(null);
     arrOut.set(arr);
     outArrayLength.set(arr.length);
+    outTrigger.trigger();
 };

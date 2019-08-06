@@ -11,7 +11,7 @@ var result = op.outValue('result');
 
 var calculate = Math.sin;
 
-phase.onChange = 
+phase.onChange =
 value.onChange = function()
 {
     result.set(

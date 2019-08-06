@@ -45,7 +45,6 @@
         "name": "Ops.Exp.Gl.Shader.CustomShader2"
     },
     "summary": "Write your own custom shader",
-    "youtubeid": "Zfhn8xSM0SE",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -78,5 +77,8 @@
                 "text": "Shader/material out"
             }
         ]
-    }
+    },
+    "youtubeids": [
+        "Zfhn8xSM0SE"
+    ]
 }

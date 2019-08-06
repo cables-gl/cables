@@ -193,7 +193,9 @@ function setupPorts()
             }
 
 
-            addPortListener(newPortOut,newPortOutPatch);
+            // addPortListener(newPortOut,newPortOutPatch);
+            addPortListener(newPortOutPatch,newPortOut);
+
         }
     }
 
