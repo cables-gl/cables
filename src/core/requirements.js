@@ -1,7 +1,5 @@
 // var CABLES=CABLES || {};
 
-
-
 const Requirements=function(patch)
 {
     this._patch=patch;

@@ -12,7 +12,7 @@ import { profileData } from "./cgl_profiledata";
  * @param {Number} height
  * @param {Object} [options]
  */
-
+ 
 const Framebuffer = function (_cgl, w, h, options)
 {
     var cgl = _cgl;

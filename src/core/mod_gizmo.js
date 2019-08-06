@@ -1,4 +1,7 @@
 
+// todo: this is optional?
+
+
 export const htmlLine=function(parentElement,color)
 {
     var line=null;

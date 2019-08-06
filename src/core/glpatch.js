@@ -1,4 +1,6 @@
 
+// SHOULD BE MOVED TO UI !!
+
 import {
     OP_PORT_TYPE_VALUE,
 OP_PORT_TYPE_FUNCTION,
