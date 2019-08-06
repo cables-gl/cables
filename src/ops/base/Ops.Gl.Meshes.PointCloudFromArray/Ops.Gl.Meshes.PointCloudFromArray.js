@@ -19,6 +19,7 @@ numPoints.onChange=updateNumVerts;
 op.toWorkPortsNeedToBeLinked(arr,exe);
 
 var hasError=false;
+var showingError=false;
 
 exe.onTriggered=doRender;
 
@@ -26,7 +27,6 @@ var mesh=null;
 const geom=new CGL.Geometry("pointcloudfromarray");
 var texCoords=[];
 var needsRebuild=true;
-var showingError=false;
 
 function doRender()
 {
@@ -78,9 +78,28 @@ function updateNumVerts()
 function rebuild()
 {
     var verts=arr.get();
+
     if(!verts || verts.length==0)
     {
         mesh=null;
+        return;
+    }
+
+    if(showingError)
+    {
+        showingError = false;
+        op.uiAttr({error:null});
+    }
+
+    var divisibleBy3 = verts.length % 3 === 0;
+
+    if(divisibleBy3 === false)
+    {
+        if(!showingError)
+        {
+            op.uiAttr({error:"Array length not divisible by 3!"});
+            showingError = true;
+        }
         return;
     }
 
