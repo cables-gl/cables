@@ -1,11 +1,9 @@
 var cgl=op.patch.cgl;
 
-
 op.name='Performance';
 
 var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
 var trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNCTION)) ;
-
 var textureOut=this.addOutPort(new CABLES.Port(this,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var outFPS=this.addOutPort(new CABLES.Port(this,"fps",CABLES.OP_PORT_TYPE_VALUE));
 
@@ -97,14 +95,14 @@ function refresh()
 
         fpsStartTime=Date.now();
         warn='';
-        if(CGL.profileShaderCompiles>0)warn+='Shader compile! ';
-        if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ';
-        if(CGL.profileAttrLoc>0)warn+='Shader get attrib loc! ';
+        if(CGL.profileData.profileShaderCompiles>0)warn+='Shader compile! ';
+        if(CGL.profileData.profileShaderGetUniform>0)warn+='Shader get uni loc! ';
+        if(CGL.profileData.profileAttrLoc>0)warn+='Shader get attrib loc! ';
         
-        if(CGL.profileTextureResize>0)warn+='Texture resize! ';
-        if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
-        if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
-        if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
+        if(CGL.profileData.profileTextureResize>0)warn+='Texture resize! ';
+        if(CGL.profileData.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
+        if(CGL.profileData.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
+        if(CGL.profileData.profileTextureDelete>0)warn+='Texture delete! ';
 
         var count=0;
         for(var i=queue.length;i>queue.length-queue.length/3;i--)
@@ -124,19 +122,19 @@ function refresh()
         avgMsChilds/=count;
 
         text2='frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
-        text3='shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileUniformCount/fps);
+        text3='shader binds: '+Math.ceil(CGL.profileData.profileShaderBinds/fps)+' uniforms: '+Math.ceil(CGL.profileData.profileUniformCount/fps);
         text3+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
 
 
-        CGL.profileUniformCount=0;
-        CGL.profileShaderGetUniform=0;
-        CGL.profileShaderCompiles=0;
-        CGL.profileShaderBinds=0;
-        CGL.profileTextureResize=0;
-        CGL.profileFrameBuffercreate=0;
-        CGL.profileEffectBuffercreate=0;
-        CGL.profileTextureDelete=0;
-        CGL.profileAttrLoc=0;
+        CGL.profileData.profileUniformCount=0;
+        CGL.profileData.profileShaderGetUniform=0;
+        CGL.profileData.profileShaderCompiles=0;
+        CGL.profileData.profileShaderBinds=0;
+        CGL.profileData.profileTextureResize=0;
+        CGL.profileData.profileFrameBuffercreate=0;
+        CGL.profileData.profileEffectBuffercreate=0;
+        CGL.profileData.profileTextureDelete=0;
+        CGL.profileData.profileAttrLoc=0;
     }
 
     // ctx.clearRect(0,0,canvas.width,canvas.height);

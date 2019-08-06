@@ -139,13 +139,13 @@ function updateText()
 {
     if(!inShow.get())return;
     var warn="";
-    if(CGL.profileShaderCompiles>0)warn+='Shader compile ('+CGL.profileShaderCompileName+') ';
-    if(CGL.profileShaderGetUniform>0)warn+='Shader get uni loc! ('+CGL.profileShaderGetUniformName+')';
-    if(CGL.profileTextureResize>0)warn+='Texture resize! ';
-    if(CGL.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
-    if(CGL.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
-    if(CGL.profileTextureDelete>0)warn+='Texture delete! ';
-    if(CGL.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileNonTypedAttribNames;
+    if(CGL.profileData.profileShaderCompiles>0)warn+='Shader compile ('+CGL.profileData.profileShaderCompileName+') ';
+    if(CGL.profileData.profileShaderGetUniform>0)warn+='Shader get uni loc! ('+CGL.profileData.profileShaderGetUniformName+')';
+    if(CGL.profileData.profileTextureResize>0)warn+='Texture resize! ';
+    if(CGL.profileData.profileFrameBuffercreate>0)warn+='Framebuffer create! ';
+    if(CGL.profileData.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
+    if(CGL.profileData.profileTextureDelete>0)warn+='Texture delete! ';
+    if(CGL.profileData.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileData.profileNonTypedAttribNames;
 
     if(warn.length>0)
     {
@@ -186,11 +186,11 @@ function updateText()
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
 
-        element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileShaderBinds/fps)+
-            ' uniforms: '+Math.ceil(CGL.profileUniformCount/fps)+
-            ' mvp_uni_mat4: '+Math.ceil(CGL.profileMVPMatrixCount/fps)+
-            ' mesh.setGeom: '+CGL.profileMeshSetGeom+
-            ' videos: '+CGL.profileVideosPlaying;
+        element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileData.profileShaderBinds/fps)+
+            ' uniforms: '+Math.ceil(CGL.profileData.profileUniformCount/fps)+
+            ' mvp_uni_mat4: '+Math.ceil(CGL.profileData.profileMVPMatrixCount/fps)+
+            ' mesh.setGeom: '+CGL.profileData.profileMeshSetGeom+
+            ' videos: '+CGL.profileData.profileVideosPlaying;
 
 
         // var vars= CABLES.patch.getVars();
@@ -206,20 +206,20 @@ function updateText()
     }
 
 
-    CGL.profileUniformCount=0;
-    CGL.profileShaderGetUniform=0;
-    CGL.profileShaderCompiles=0;
-    CGL.profileShaderBinds=0;
-    CGL.profileTextureResize=0;
-    CGL.profileFrameBuffercreate=0;
-    CGL.profileEffectBuffercreate=0;
-    CGL.profileTextureDelete=0;
-    CGL.profileMeshSetGeom=0;
-    CGL.profileVideosPlaying=0;
-    CGL.profileMVPMatrixCount=0;
+    CGL.profileData.profileUniformCount=0;
+    CGL.profileData.profileShaderGetUniform=0;
+    CGL.profileData.profileShaderCompiles=0;
+    CGL.profileData.profileShaderBinds=0;
+    CGL.profileData.profileTextureResize=0;
+    CGL.profileData.profileFrameBuffercreate=0;
+    CGL.profileData.profileEffectBuffercreate=0;
+    CGL.profileData.profileTextureDelete=0;
+    CGL.profileData.profileMeshSetGeom=0;
+    CGL.profileData.profileVideosPlaying=0;
+    CGL.profileData.profileMVPMatrixCount=0;
 
-    CGL.profileNonTypedAttrib=0;
-    CGL.profileNonTypedAttribNames="";
+    CGL.profileData.profileNonTypedAttrib=0;
+    CGL.profileData.profileNonTypedAttribNames="";
 }
 
 

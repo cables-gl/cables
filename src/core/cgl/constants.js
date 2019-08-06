@@ -1,9 +1,4 @@
 const SHADER = {
-    profileShaderBinds: 0,
-    profileUniformCount: 0,
-    profileShaderCompiles: 0,
-    profileVideosPlaying: 0,
-    profileMVPMatrixCount: 0,
 
     // default attributes
     SHADERVAR_VERTEX_POSITION: "vPosition",

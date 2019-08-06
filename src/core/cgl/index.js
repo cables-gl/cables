@@ -13,7 +13,7 @@ import Context, * as BLENDS from "./cgl_state";
 import * as Utils from "./cgl_utils";
 import Texture, * as TEXTURE_VARS from "./cgl_texture";
 import TextureEffect from "./cgl_textureeffect";
-import profileData from "./cgl_profiledata";
+import { profileData } from "./cgl_profileData";
 
 extendMeshWithFeedback(Mesh);
 const { BLENDS: _BLENDS } = BLENDS;
@@ -50,7 +50,7 @@ const CGL = {
 };
 
 console.log("CGL before export", CGL);
-
+window.CGL=CGL;
 export default CGL;
 
 const obj = { a: 1, b: 2} ;
