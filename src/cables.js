@@ -2,7 +2,6 @@ import * as base64 from "./core/0_base64";
 import EventTarget from "./core/0_eventtarget";
 import * as utils from "./core/0_utils";
 import * as anim from "./core/anim";
-import Browser from "./core/browser";
 import Link from "./core/core_link";
 import Port, * as PortUtils from "./core/core_port";
 import Op, * as OpUtils from "./core/core_op";

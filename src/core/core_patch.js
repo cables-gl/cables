@@ -316,10 +316,6 @@ Patch.prototype.createOp = function (identifier, id)
                 {
                     CABLES.UI.MODAL.showError("unknown op", `unknown op: ${objName}`);
                 }
-<<<<<<< HEAD
-                console.error(`unknown op: ${objName}`);
-                throw new Error(`unknown op: ${objName}`);
-=======
                 console.error('unknown op: ' + objName);
                 throw new Error('unknown op: ' + objName);
             } else {
@@ -333,19 +329,7 @@ Patch.prototype.createOp = function (identifier, id)
                 else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName,id);
                 else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName,id);
                 else console.log('parts.length', parts.length);
->>>>>>> origin/develop
             }
-            else
-            if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName, id);
-            else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName, id);
-            else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName, id);
-            else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName, id);
-            else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName, id);
-            else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName, id);
-            else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
-            else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
-            else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-            else console.log("parts.length", parts.length);
 
             if (op)
             {
@@ -361,10 +345,6 @@ Patch.prototype.createOp = function (identifier, id)
     catch (e)
     {
         this._crashedOps.push(objName);
-<<<<<<< HEAD
-        console.error(`instancing error ${objName}`, e);
-=======
->>>>>>> origin/develop
         if (CABLES.UI)
         {
             CABLES.UI.MODAL.showOpException(e, objName);
@@ -374,16 +354,10 @@ Patch.prototype.createOp = function (identifier, id)
         {
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
-<<<<<<< HEAD
-            console.log(e.stacktrace);
-            this.exitError("INSTANCE_ERR", `instancing error ${objName}`);
-            throw `instancing error ${objName}`;
-=======
             // console.log(e.stacktrace);
             console.error('[instancing error] ' + objName,e);
             this.exitError("INSTANCE_ERR",'Instancing Error ' + objName);
             throw 'instancing error ' + objName;
->>>>>>> origin/develop
         }
     }
 
