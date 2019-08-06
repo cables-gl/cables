@@ -1,3 +1,13 @@
+// * extension of Mesh, maybe put mesh in 1 folder to extend mesh?
+// * i.e. mesh/index.js contains 
+// * import withCore from "./mesh_core.js";
+// * const Mesh = {}; 
+// * withCore(Mesh); 
+// * withFeedback(Mesh);
+// * export default Mesh;
+// ***************
+// * mesh/mesh_core.js (Mesh) => { Mesh.prototype.func = () => {} }
+// * mesh/mesh_feedback.js (Mesh) => { Mesh.prototype.feedbackFunc =  () => {} }
 // view-source:http://toji.github.io/webgl2-particles-2/
 
 export default (Mesh) =>

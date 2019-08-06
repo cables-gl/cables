@@ -1,4 +1,3 @@
-import CGL from "./index";
 /**
  * multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
  * @constant {Number}
@@ -31,7 +30,7 @@ const getWheelDelta_ = function (event)
         // chrome
         normalized = (event.wheelDelta % 120) - 0 == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
         normalized *= -1.5;
-        if (CGL.isWindows) normalized *= 2;
+        if (isWindows) normalized *= 2;
     }
     else
     {
