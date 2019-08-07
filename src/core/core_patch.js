@@ -5,10 +5,11 @@ import Instancing from "./instancing";
 import Timer from "./timer";
 import Link from "./core_link";
 import Profiler from "./core_profiler";
+import Context from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { OP_PORT_TYPE_TEXTURE } from "./core_op";
 import Requirements from "./requirements";
-import CGL from "./cgl";
+import { CGL } from "./cgl";
 
 // var CABLES = CABLES || {};
 
@@ -94,7 +95,7 @@ const Patch = function (cfg)
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
 
-    this.cgl = new CGL.Context(this);
+    this.cgl = new Context(this);
 
     this.cgl.setCanvas(this.config.glCanvasId || this.config.glCanvas || "glcanvas");
     if (this.config.glCanvasResizeToWindow === true) this.cgl.setAutoResize("window");

@@ -1,155 +1,123 @@
+import { quat } from "gl-matrix";
+import Port from "./core_port";
+
+import { CONSTANTS }from "./constants";
 
 // var CABLES=CABLES || {};
-// CABLES.ANIM=CABLES.ANIM || {};
-// CABLES.TL=CABLES.ANIM;
+// ANIM=CABLESANIM || {};
+// CABLES.TL=CABLESANIM;
 
 const ANIM = {};
 
-ANIM.EASING_LINEAR=0;
-ANIM.EASING_ABSOLUTE=1;
-ANIM.EASING_SMOOTHSTEP=2;
-ANIM.EASING_SMOOTHERSTEP=3;
-ANIM.EASING_BEZIER=4;
-
-ANIM.EASING_CUBIC_IN=5;
-ANIM.EASING_CUBIC_OUT=6;
-ANIM.EASING_CUBIC_INOUT=7;
-
-ANIM.EASING_EXPO_IN=8;
-ANIM.EASING_EXPO_OUT=9;
-ANIM.EASING_EXPO_INOUT=10;
-
-ANIM.EASING_SIN_IN=11;
-ANIM.EASING_SIN_OUT=12;
-ANIM.EASING_SIN_INOUT=13;
-
-ANIM.EASING_BACK_IN=14;
-ANIM.EASING_BACK_OUT=15;
-ANIM.EASING_BACK_INOUT=16;
-
-ANIM.EASING_ELASTIC_IN=17;
-ANIM.EASING_ELASTIC_OUT=18;
-
-ANIM.EASING_BOUNCE_IN=19;
-ANIM.EASING_BOUNCE_OUT=21;
-
-ANIM.EASING_QUART_IN=22;
-ANIM.EASING_QUART_OUT=23;
-ANIM.EASING_QUART_INOUT=24;
-
-ANIM.EASING_QUINT_IN=25;
-ANIM.EASING_QUINT_OUT=26;
-ANIM.EASING_QUINT_INOUT=27;
-
-ANIM.Key=function(obj)
+ANIM.Key = function (obj)
 {
-    this.time=0.0;
-    this.value=0.0;
-    this.ui={};
-    this.onChange=null;
-    this._easing=0;
-    this.bezTime=0.5;
-    this.bezValue=0;
-    this.bezTimeIn=-0.5;
-    this.bezValueIn=0;
+    this.time = 0.0;
+    this.value = 0.0;
+    this.ui = {};
+    this.onChange = null;
+    this._easing = 0;
+    this.bezTime = 0.5;
+    this.bezValue = 0;
+    this.bezTimeIn = -0.5;
+    this.bezValueIn = 0;
 
-    this.cb=null;
-    this.cbTriggered=false;
+    this.cb = null;
+    this.cbTriggered = false;
 
-    var bezierAnim=null;
-    var updateBezier=false;
+    var bezierAnim = null;
+    var updateBezier = false;
 
-    this.setEasing(ANIM.EASING_LINEAR);
+    this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
 };
 
-ANIM.Key.linear=function(perc,key1,key2)
+ANIM.Key.linear = function (perc, key1, key2)
 {
-    return parseFloat(key1.value)+ parseFloat((key2.value - key1.value)) * perc;
+    return parseFloat(key1.value) + parseFloat(key2.value - key1.value) * perc;
 };
 
-ANIM.Key.easeLinear=function(perc,key2)
+ANIM.Key.easeLinear = function (perc, key2)
 {
-    return ANIM.Key.linear(perc,this,key2);
+    return ANIM.Key.linear(perc, this, key2);
 };
 
-ANIM.Key.easeAbsolute=function(perc,key2)
+ANIM.Key.easeAbsolute = function (perc, key2)
 {
     return this.value;
 };
 
-export const easeExpoIn=function(t)
+export const easeExpoIn = function (t)
 {
-    return t= Math.pow( 2, 10 * (t - 1) );
-}
-
-ANIM.Key.easeExpoIn=function( t,  key2)
-{
-    t=CABLES.easeExpoIn(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
+    return (t = Math.pow(2, 10 * (t - 1)));
 };
 
-export const easeExpoOut=function(t)
+ANIM.Key.easeExpoIn = function (t, key2)
 {
-    t= ( -Math.pow( 2, -10 * t ) + 1 );
+    t = easeExpoIn(t);
+    return ANIM.Key.linear(t, this, key2);
+};
+
+export const easeExpoOut = function (t)
+{
+    t = -Math.pow(2, -10 * t) + 1;
     return t;
-}
-
-ANIM.Key.easeExpoOut=function( t,  key2)
-{
-    t=CABLES.easeExpoOut(t);
-    return CABLES.ANIM.Key.linear(t,this,key2);
 };
 
-export const easeExpoInOut=function(t)
+ANIM.Key.easeExpoOut = function (t, key2)
 {
-    t*=2;
+    t = easeExpoOut(t);
+    return ANIM.Key.linear(t, this, key2);
+};
+
+export const easeExpoInOut = function (t)
+{
+    t *= 2;
     if (t < 1)
     {
-      t= 0.5 * Math.pow( 2, 10 * (t - 1) );
+        t = 0.5 * Math.pow(2, 10 * (t - 1));
     }
     else
     {
         t--;
-        t= 0.5 * ( -Math.pow( 2, -10 * t) + 2 );
+        t = 0.5 * (-Math.pow(2, -10 * t) + 2);
     }
     return t;
-}
-
-ANIM.Key.easeExpoInOut=function( t,  key2)
-{
-    t=easeExpoInOut(t);
-    return ANIM.Key.linear(t,this,key2);
 };
 
-ANIM.Key.easeSinIn=function( t,key2)
+ANIM.Key.easeExpoInOut = function (t, key2)
 {
-    t= -1 * Math.cos(t * Math.PI/2) + 1;
-    return ANIM.Key.linear(t,this,key2);
+    t = easeExpoInOut(t);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeSinOut=function( t,key2)
+ANIM.Key.easeSinIn = function (t, key2)
 {
-    t= Math.sin(t * Math.PI/2);
-    return ANIM.Key.linear(t,this,key2);
+    t = -1 * Math.cos((t * Math.PI) / 2) + 1;
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeSinInOut=function( t,key2)
+ANIM.Key.easeSinOut = function (t, key2)
 {
-    t= -0.5 * (Math.cos(Math.PI*t) - 1.0);
-    return ANIM.Key.linear(t,this,key2);
+    t = Math.sin((t * Math.PI) / 2);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-export const easeCubicIn=function(t)
+ANIM.Key.easeSinInOut = function (t, key2)
 {
-    t=t*t*t;
+    t = -0.5 * (Math.cos(Math.PI * t) - 1.0);
+    return ANIM.Key.linear(t, this, key2);
+};
+
+export const easeCubicIn = function (t)
+{
+    t = t * t * t;
     return t;
-}
+};
 
-ANIM.Key.easeCubicIn=function(t,key2)
+ANIM.Key.easeCubicIn = function (t, key2)
 {
-    t=easeCubicIn(t);
-    return ANIM.Key.linear(t,this,key2);
+    t = easeCubicIn(t);
+    return ANIM.Key.linear(t, this, key2);
 };
 
 // b 0
@@ -158,296 +126,283 @@ ANIM.Key.easeCubicIn=function(t,key2)
 // easeOutCubic: function (x, t, b, c, d) {
 //     return c*((t=t/d-1)*t*t + 1) + b;
 
-
-ANIM.Key.easeInQuint=function(t,key2)
+ANIM.Key.easeInQuint = function (t, key2)
 {
-
-    t= t*t*t*t*t;
-    return ANIM.Key.linear(t,this,key2);
+    t = t * t * t * t * t;
+    return ANIM.Key.linear(t, this, key2);
 };
-ANIM.Key.easeOutQuint=function(t,key2)
+ANIM.Key.easeOutQuint = function (t, key2)
 {
-    t= ((t-=1)*t*t*t*t + 1);
-    return ANIM.Key.linear(t,this,key2);
+    t = (t -= 1) * t * t * t * t + 1;
+    return ANIM.Key.linear(t, this, key2);
 };
-ANIM.Key.easeInOutQuint=function(t,key2)
+ANIM.Key.easeInOutQuint = function (t, key2)
 {
-    if ((t/=0.5) < 1) t= 0.5*t*t*t*t*t;
-        else t= 0.5*((t-=2)*t*t*t*t + 2);
-    return ANIM.Key.linear(t,this,key2);
+    if ((t /= 0.5) < 1) t = 0.5 * t * t * t * t * t;
+    else t = 0.5 * ((t -= 2) * t * t * t * t + 2);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-
-
-
-ANIM.Key.easeInQuart=function(t,key2)
+ANIM.Key.easeInQuart = function (t, key2)
 {
-    t=t*t*t*t;
-    return ANIM.Key.linear(t,this,key2);
+    t = t * t * t * t;
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeOutQuart=function(t,key2)
+ANIM.Key.easeOutQuart = function (t, key2)
 {
     // return -c * ((t=t/d-1)*t*t*t - 1) + b;
-    t= -1 * ((t-=1)*t*t*t - 1);
-    return ANIM.Key.linear(t,this,key2);
+    t = -1 * ((t -= 1) * t * t * t - 1);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeInOutQuart=function(t,key2)
+ANIM.Key.easeInOutQuart = function (t, key2)
 {
-    if((t/=0.5) < 1) t= 0.5*t*t*t*t;
-        else t= -0.5 * ((t-=2)*t*t*t - 2);
-    return ANIM.Key.linear(t,this,key2);
+    if ((t /= 0.5) < 1) t = 0.5 * t * t * t * t;
+    else t = -0.5 * ((t -= 2) * t * t * t - 2);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-
-
-ANIM.Key.bounce=function(t)
+ANIM.Key.bounce = function (t)
 {
-    if ((t/=1) < (1/2.75)) t= (7.5625*t*t);
-    else if (t < (2/2.75)) t= (7.5625*(t-=(1.5/2.75))*t + 0.75);
-    else if (t < (2.5/2.75)) t= (7.5625*(t-=(2.25/2.75))*t + 0.9375);
-    else t= (7.5625*(t-=(2.625/2.75))*t + 0.984375);
+    if ((t /= 1) < 1 / 2.75) t = 7.5625 * t * t;
+    else if (t < 2 / 2.75) t = 7.5625 * (t -= 1.5 / 2.75) * t + 0.75;
+    else if (t < 2.5 / 2.75) t = 7.5625 * (t -= 2.25 / 2.75) * t + 0.9375;
+    else t = 7.5625 * (t -= 2.625 / 2.75) * t + 0.984375;
     return t;
 };
 
-ANIM.Key.easeInBounce=function(t,key2)
+ANIM.Key.easeInBounce = function (t, key2)
 {
-    return ANIM.Key.linear(ANIM.Key.bounce(t),this,key2);
+    return ANIM.Key.linear(ANIM.Key.bounce(t), this, key2);
     // return c - jQuery.easing.easeOutBounce (x, d-t, 0, c, d);
 };
 
-ANIM.Key.easeOutBounce=function(t,key2)
+ANIM.Key.easeOutBounce = function (t, key2)
 {
-    return ANIM.Key.linear(ANIM.Key.bounce(t),this,key2);
+    return ANIM.Key.linear(ANIM.Key.bounce(t), this, key2);
 };
 
-ANIM.Key.easeInElastic=function(t,key2)
-{
-    var s=1.70158;
-    var p=0;
-    var a=1;
-
-    var b=0;
-    var d=1;
-    var c=1;
-
-    if (t===0) t= b;
-        else if ((t/=d)==1) t= b+c;
-            else
-            {
-                if(!p) p=d*0.3;
-                if(a < Math.abs(c)) { a=c; s=p/4; }
-                    else s = p/(2*Math.PI) * Math.asin (c/a);
-                t= -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
-            }
-
-    return ANIM.Key.linear(t,this,key2);
-};
-
-ANIM.Key.easeOutElastic=function(t,key2)
-{
-    var s=1.70158;
-    var p=0;
-    var a=1;
-
-    var b=0;
-    var d=1;
-    var c=1;
-
-    if (t===0) t=b;
-        else if ((t/=d)==1) t=b+c;
-            else
-            {
-                if (!p) p=d*0.3;
-                if (a < Math.abs(c)) { a=c; s=p/4; }
-                    else s = p/(2*Math.PI) * Math.asin (c/a);
-                t= a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
-            }
-
-    return ANIM.Key.linear(t,this,key2);
-};
-
-ANIM.Key.easeInBack=function(t,key2)
+ANIM.Key.easeInElastic = function (t, key2)
 {
     var s = 1.70158;
-    t=(t)*t*((s+1)*t - s) ;
+    var p = 0;
+    var a = 1;
 
-    return ANIM.Key.linear(t,this,key2);
+    var b = 0;
+    var d = 1;
+    var c = 1;
+
+    if (t === 0) t = b;
+    else if ((t /= d) == 1) t = b + c;
+    else
+    {
+        if (!p) p = d * 0.3;
+        if (a < Math.abs(c))
+        {
+            a = c;
+            s = p / 4;
+        }
+        else s = (p / (2 * Math.PI)) * Math.asin(c / a);
+        t = -(a * Math.pow(2, 10 * (t -= 1)) * Math.sin(((t * d - s) * (2 * Math.PI)) / p)) + b;
+    }
+
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeOutBack=function (t,key2)
+ANIM.Key.easeOutElastic = function (t, key2)
 {
     var s = 1.70158;
-    t= ((t=t/1-1)*t*((s+1)*t + s) + 1) ;
+    var p = 0;
+    var a = 1;
 
-    return ANIM.Key.linear(t,this,key2);
+    var b = 0;
+    var d = 1;
+    var c = 1;
+
+    if (t === 0) t = b;
+    else if ((t /= d) == 1) t = b + c;
+    else
+    {
+        if (!p) p = d * 0.3;
+        if (a < Math.abs(c))
+        {
+            a = c;
+            s = p / 4;
+        }
+        else s = (p / (2 * Math.PI)) * Math.asin(c / a);
+        t = a * Math.pow(2, -10 * t) * Math.sin(((t * d - s) * (2 * Math.PI)) / p) + c + b;
+    }
+
+    return ANIM.Key.linear(t, this, key2);
 };
 
-ANIM.Key.easeInOutBack=function(t, key2)
+ANIM.Key.easeInBack = function (t, key2)
 {
     var s = 1.70158;
-    var c=1/2;
-    if ((t/=1/2) < 1) t= c*(t*t*(((s*=(1.525))+1)*t - s));
-        else t= c*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2);
+    t = t * t * ((s + 1) * t - s);
 
-    return ANIM.Key.linear(t,this,key2);
+    return ANIM.Key.linear(t, this, key2);
 };
 
-export const easeCubicOut=function(t)
+ANIM.Key.easeOutBack = function (t, key2)
+{
+    var s = 1.70158;
+    t = (t = t / 1 - 1) * t * ((s + 1) * t + s) + 1;
+
+    return ANIM.Key.linear(t, this, key2);
+};
+
+ANIM.Key.easeInOutBack = function (t, key2)
+{
+    var s = 1.70158;
+    var c = 1 / 2;
+    if ((t /= 1 / 2) < 1) t = c * (t * t * (((s *= 1.525) + 1) * t - s));
+    else t = c * ((t -= 2) * t * (((s *= 1.525) + 1) * t + s) + 2);
+
+    return ANIM.Key.linear(t, this, key2);
+};
+
+export const easeCubicOut = function (t)
 {
     t--;
-    t=(t*t*t + 1) ;
+    t = t * t * t + 1;
     return t;
-}
-
-ANIM.Key.easeCubicOut=function(t,key2)
-{
-    t=easeCubicOut(t);
-    return ANIM.Key.linear(t,this,key2);
 };
 
-export const easeCubicInOut=function(t)
+ANIM.Key.easeCubicOut = function (t, key2)
 {
-    t*=2;
-    if (t < 1) t= 0.5*t*t*t;
+    t = easeCubicOut(t);
+    return ANIM.Key.linear(t, this, key2);
+};
+
+export const easeCubicInOut = function (t)
+{
+    t *= 2;
+    if (t < 1) t = 0.5 * t * t * t;
     else
     {
         t -= 2;
-        t= 0.5*(t*t*t + 2);
+        t = 0.5 * (t * t * t + 2);
     }
     return t;
-}
-
-ANIM.Key.easeCubicInOut=function(t,key2)
-{
-    t=easeCubicInOut(t);
-    return ANIM.Key.linear(t,this,key2);
 };
 
-ANIM.Key.easeSmoothStep=function(perc,key2)
+ANIM.Key.easeCubicInOut = function (t, key2)
+{
+    t = easeCubicInOut(t);
+    return ANIM.Key.linear(t, this, key2);
+};
+
+ANIM.Key.easeSmoothStep = function (perc, key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
     var x = Math.max(0, Math.min(1, perc));
-    perc= x*x*(3 - 2*x); // smoothstep
-    return ANIM.Key.linear(perc,this,key2);
+    perc = x * x * (3 - 2 * x); // smoothstep
+    return ANIM.Key.linear(perc, this, key2);
 };
 
-ANIM.Key.easeSmootherStep=function(perc,key2)
+ANIM.Key.easeSmootherStep = function (perc, key2)
 {
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
-    return ANIM.Key.linear(perc,this,key2);
+    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
+    return ANIM.Key.linear(perc, this, key2);
 };
 
-
-ANIM.Key.prototype.setEasing=function(e)
+ANIM.Key.prototype.setEasing = function (e)
 {
-    this._easing=e;
+    this._easing = e;
 
-    if(this._easing==ANIM.EASING_ABSOLUTE) this.ease=ANIM.Key.easeAbsolute;
-    else if(this._easing==ANIM.EASING_SMOOTHSTEP) this.ease=ANIM.Key.easeSmoothStep;
-    else if(this._easing==ANIM.EASING_SMOOTHERSTEP) this.ease=ANIM.Key.easeSmootherStep;
-
-    else if(this._easing==ANIM.EASING_CUBIC_IN) this.ease=ANIM.Key.easeCubicIn;
-    else if(this._easing==ANIM.EASING_CUBIC_OUT) this.ease=ANIM.Key.easeCubicOut;
-    else if(this._easing==ANIM.EASING_CUBIC_INOUT) this.ease=ANIM.Key.easeCubicInOut;
-
-    else if(this._easing==ANIM.EASING_EXPO_IN) this.ease=ANIM.Key.easeExpoIn;
-    else if(this._easing==ANIM.EASING_EXPO_OUT) this.ease=ANIM.Key.easeExpoOut;
-    else if(this._easing==ANIM.EASING_EXPO_INOUT) this.ease=ANIM.Key.easeExpoInOut;
-
-    else if(this._easing==ANIM.EASING_SIN_IN) this.ease=ANIM.Key.easeSinIn;
-    else if(this._easing==ANIM.EASING_SIN_OUT) this.ease=ANIM.Key.easeSinOut;
-    else if(this._easing==ANIM.EASING_SIN_INOUT) this.ease=ANIM.Key.easeSinInOut;
-
-    else if(this._easing==ANIM.EASING_BACK_OUT) this.ease=ANIM.Key.easeOutBack;
-    else if(this._easing==ANIM.EASING_BACK_IN) this.ease=ANIM.Key.easeInBack;
-    else if(this._easing==ANIM.EASING_BACK_INOUT) this.ease=ANIM.Key.easeInOutBack;
-
-    else if(this._easing==ANIM.EASING_ELASTIC_IN) this.ease=ANIM.Key.easeInElastic;
-    else if(this._easing==ANIM.EASING_ELASTIC_OUT) this.ease=ANIM.Key.easeOutElastic;
-
-    else if(this._easing==ANIM.EASING_BOUNCE_IN) this.ease=ANIM.Key.easeInBounce;
-    else if(this._easing==ANIM.EASING_BOUNCE_OUT) this.ease=ANIM.Key.easeOutBounce;
-
-    else if(this._easing==ANIM.EASING_QUART_OUT) this.ease=ANIM.Key.easeOutQuart;
-    else if(this._easing==ANIM.EASING_QUART_IN) this.ease=ANIM.Key.easeInQuart;
-    else if(this._easing==ANIM.EASING_QUART_INOUT) this.ease=ANIM.Key.easeInOutQuart;
-
-    else if(this._easing==ANIM.EASING_QUINT_OUT) this.ease=ANIM.Key.easeOutQuint;
-    else if(this._easing==ANIM.EASING_QUINT_IN) this.ease=ANIM.Key.easeInQuint;
-    else if(this._easing==ANIM.EASING_QUINT_INOUT) this.ease=ANIM.Key.easeInOutQuint;
-
-    else if(this._easing==ANIM.EASING_BEZIER)
+    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeAbsolute;
+    else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = ANIM.Key.easeSmoothStep;
+    else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = ANIM.Key.easeSmootherStep;
+    else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = ANIM.Key.easeCubicIn;
+    else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_OUT) this.ease = ANIM.Key.easeCubicOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_INOUT) this.ease = ANIM.Key.easeCubicInOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_IN) this.ease = ANIM.Key.easeExpoIn;
+    else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_OUT) this.ease = ANIM.Key.easeExpoOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_EXPO_INOUT) this.ease = ANIM.Key.easeExpoInOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_SIN_IN) this.ease = ANIM.Key.easeSinIn;
+    else if (this._easing == CONSTANTS.ANIM.EASING_SIN_OUT) this.ease = ANIM.Key.easeSinOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_SIN_INOUT) this.ease = ANIM.Key.easeSinInOut;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BACK_OUT) this.ease = ANIM.Key.easeOutBack;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BACK_IN) this.ease = ANIM.Key.easeInBack;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BACK_INOUT) this.ease = ANIM.Key.easeInOutBack;
+    else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_IN) this.ease = ANIM.Key.easeInElastic;
+    else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_OUT) this.ease = ANIM.Key.easeOutElastic;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_IN) this.ease = ANIM.Key.easeInBounce;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_OUT) this.ease = ANIM.Key.easeOutBounce;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUART_OUT) this.ease = ANIM.Key.easeOutQuart;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUART_IN) this.ease = ANIM.Key.easeInQuart;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUART_INOUT) this.ease = ANIM.Key.easeInOutQuart;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
+    else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
+    else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
     {
-        updateBezier=true;
-        this.ease=ANIM.Key.easeBezier;
+        updateBezier = true;
+        this.ease = ANIM.Key.easeBezier;
     }
     else
     {
-        this._easing=ANIM.EASING_LINEAR;
-        this.ease=ANIM.Key.easeLinear;
+        this._easing = CONSTANTS.ANIM.EASING_LINEAR;
+        this.ease = ANIM.Key.easeLinear;
     }
 };
 
-
-ANIM.Key.prototype.trigger=function()
+ANIM.Key.prototype.trigger = function ()
 {
     this.cb();
-    this.cbTriggered=true;
+    this.cbTriggered = true;
 };
 
-ANIM.Key.prototype.setValue=function(v)
+ANIM.Key.prototype.setValue = function (v)
 {
-    this.value=v;
-    updateBezier=true;
-    if(this.onChange!==null)this.onChange();
+    this.value = v;
+    updateBezier = true;
+    if (this.onChange !== null) this.onChange();
 };
 
-ANIM.Key.prototype.set=function(obj)
+ANIM.Key.prototype.set = function (obj)
 {
-    if(obj)
+    if (obj)
     {
-        if(obj.e) this.setEasing(obj.e);
-        if(obj.cb)
+        if (obj.e) this.setEasing(obj.e);
+        if (obj.cb)
         {
-            this.cb=obj.cb;
-            this.cbTriggered=false;
+            this.cb = obj.cb;
+            this.cbTriggered = false;
         }
 
-        if(obj.b)
+        if (obj.b)
         {
-            this.bezTime=obj.b[0];
-            this.bezValue=obj.b[1];
-            this.bezTimeIn=obj.b[2];
-            this.bezValueIn=obj.b[3];
-            updateBezier=true;
+            this.bezTime = obj.b[0];
+            this.bezValue = obj.b[1];
+            this.bezTimeIn = obj.b[2];
+            this.bezValueIn = obj.b[3];
+            updateBezier = true;
         }
 
-        if(obj.hasOwnProperty('t'))this.time=obj.t;
-        if(obj.hasOwnProperty('time')) this.time=obj.time;
-        if(obj.hasOwnProperty('v')) this.value=obj.v;
-            else if(obj.hasOwnProperty('value')) this.value=obj.value;
+        if (obj.hasOwnProperty("t")) this.time = obj.t;
+        if (obj.hasOwnProperty("time")) this.time = obj.time;
+        if (obj.hasOwnProperty("v")) this.value = obj.v;
+        else if (obj.hasOwnProperty("value")) this.value = obj.value;
     }
-    if(this.onChange!==null)this.onChange();
-
+    if (this.onChange !== null) this.onChange();
 };
 
-ANIM.Key.prototype.getSerialized=function()
+ANIM.Key.prototype.getSerialized = function ()
 {
-    var obj={};
-    obj.t=this.time;
-    obj.v=this.value;
-    obj.e=this._easing;
-    if(this._easing==ANIM.EASING_BEZIER)
-        obj.b=[this.bezTime,this.bezValue,this.bezTimeIn,this.bezValueIn];
+    var obj = {};
+    obj.t = this.time;
+    obj.v = this.value;
+    obj.e = this._easing;
+    if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
     return obj;
 };
 
-
-ANIM.Key.prototype.getEasing=function()
+ANIM.Key.prototype.getEasing = function ()
 {
     return this._easing;
 };
@@ -456,59 +411,46 @@ export { ANIM };
 
 // ------------------------------------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
- * Keyframed interpolated animation. 
- * 
+ * Keyframed interpolated animation.
+ *
  * Available Easings:
  * <pre>
- * CABLES.ANIM.EASING_LINEAR
- * CABLES.ANIM.EASING_ABSOLUTE
- * CABLES.ANIM.EASING_SMOOTHSTEP
- * CABLES.ANIM.EASING_SMOOTHERSTEP
- * CABLES.ANIM.EASING_BEZIER
+ * CONSTANTS.ANIM.EASING_LINEAR
+ * CONSTANTS.ANIM.EASING_ABSOLUTE
+ * CONSTANTS.ANIM.EASING_SMOOTHSTEP
+ * CONSTANTS.ANIM.EASING_SMOOTHERSTEP
+ * CONSTANTS.ANIM.EASING_BEZIER
 
- * CABLES.ANIM.EASING_CUBIC_IN
- * CABLES.ANIM.EASING_CUBIC_OUT
- * CABLES.ANIM.EASING_CUBIC_INOUT
+ * CONSTANTS.ANIM.EASING_CUBIC_IN
+ * CONSTANTS.ANIM.EASING_CUBIC_OUT
+ * CONSTANTS.ANIM.EASING_CUBIC_INOUT
 
- * CABLES.ANIM.EASING_EXPO_IN
- * CABLES.ANIM.EASING_EXPO_OUT
- * CABLES.ANIM.EASING_EXPO_INOUT
+ * CONSTANTS.ANIM.EASING_EXPO_IN
+ * CONSTANTS.ANIM.EASING_EXPO_OUT
+ * CONSTANTS.ANIM.EASING_EXPO_INOUT
 
- * CABLES.ANIM.EASING_SIN_IN
- * CABLES.ANIM.EASING_SIN_OUT
- * CABLES.ANIM.EASING_SIN_INOUT
+ * CONSTANTS.ANIM.EASING_SIN_IN
+ * CONSTANTS.ANIM.EASING_SIN_OUT
+ * CONSTANTS.ANIM.EASING_SIN_INOUT
 
- * CABLES.ANIM.EASING_BACK_IN
- * CABLES.ANIM.EASING_BACK_OUT
- * CABLES.ANIM.EASING_BACK_INOUT
+ * CONSTANTS.ANIM.EASING_BACK_IN
+ * CONSTANTS.ANIM.EASING_BACK_OUT
+ * CONSTANTS.ANIM.EASING_BACK_INOUT
 
- * CABLES.ANIM.EASING_ELASTIC_IN
- * CABLES.ANIM.EASING_ELASTIC_OUT
+ * CONSTANTS.ANIM.EASING_ELASTIC_IN
+ * CONSTANTS.ANIM.EASING_ELASTIC_OUT
 
- * CABLES.ANIM.EASING_BOUNCE_IN
- * CABLES.ANIM.EASING_BOUNCE_OUT
+ * CONSTANTS.ANIM.EASING_BOUNCE_IN
+ * CONSTANTS.ANIM.EASING_BOUNCE_OUT
 
- * CABLES.ANIM.EASING_QUART_IN
- * CABLES.ANIM.EASING_QUART_OUT
- * CABLES.ANIM.EASING_QUART_INOUT
+ * CONSTANTS.ANIM.EASING_QUART_IN
+ * CONSTANTS.ANIM.EASING_QUART_OUT
+ * CONSTANTS.ANIM.EASING_QUART_INOUT
 
- * CABLES.ANIM.EASING_QUINT_IN
- * CABLES.ANIM.EASING_QUINT_OUT
- * CABLES.ANIM.EASING_QUINT_INOUT
+ * CONSTANTS.ANIM.EASING_QUINT_IN
+ * CONSTANTS.ANIM.EASING_QUINT_OUT
+ * CONSTANTS.ANIM.EASING_QUINT_INOUT
  * </pre>
  * @hideconstructor
  * @external CABLES
@@ -521,12 +463,12 @@ export { ANIM };
  * anim.getValue(5);    // get value at 5 seconds - this returns 0.5
 
  */
-const Anim=function(cfg)
+const Anim = function (cfg)
 {
-    this.keys=[];
-    this.onChange=null;
-    this.stayInTimeline=false;
-    this.loop=false;
+    this.keys = [];
+    this.onChange = null;
+    this.stayInTimeline = false;
+    this.loop = false;
 
     /**
      * @member defaultEasing
@@ -534,40 +476,39 @@ const Anim=function(cfg)
      * @instance
      * @type {Number}
      */
-    this.defaultEasing=CABLES.ANIM.EASING_LINEAR;
-    this.onLooped=null;
+    this.defaultEasing = CONSTANTS.ANIM.EASING_LINEAR;
+    this.onLooped = null;
 
-    this._timesLooped=0;
-    this._needsSort=false;
+    this._timesLooped = 0;
+    this._needsSort = false;
 };
 
-
-Anim.prototype.forceChangeCallback=function()
+Anim.prototype.forceChangeCallback = function ()
 {
-    if(this.onChange!==null)this.onChange();
+    if (this.onChange !== null) this.onChange();
 };
 
 /**
  * returns true if animation has ended at @time
  * checks if last key time is < time
  * @param {Number} time
- * @returns {Boolean} 
+ * @returns {Boolean}
  * @memberof Anim
  * @instance
  * @function
  */
-Anim.prototype.hasEnded=function(time)
+Anim.prototype.hasEnded = function (time)
 {
-    if(this.keys.length===0)return true;
-    if(this.keys[this.keys.length-1].time<=time)return true;
+    if (this.keys.length === 0) return true;
+    if (this.keys[this.keys.length - 1].time <= time) return true;
     return false;
 };
 
-Anim.prototype.isRising=function(time)
+Anim.prototype.isRising = function (time)
 {
-    if(this.hasEnded(time))return false;
-    var ki=this.getKeyIndex(time);
-    if(this.keys[ki].value<this.keys[ki+1].value)return true;
+    if (this.hasEnded(time)) return false;
+    var ki = this.getKeyIndex(time);
+    if (this.keys[ki].value < this.keys[ki + 1].value) return true;
     return false;
 };
 
@@ -578,38 +519,36 @@ Anim.prototype.isRising=function(time)
  * @instance
  * @function
  */
-Anim.prototype.clear=function(time)
+Anim.prototype.clear = function (time)
 {
-    var v=0;
-    if(time) v=this.getValue(time);
-    this.keys.length=0;
+    var v = 0;
+    if (time) v = this.getValue(time);
+    this.keys.length = 0;
 
-    if(time) this.setValue(time,v);
-    if(this.onChange!==null)this.onChange();
+    if (time) this.setValue(time, v);
+    if (this.onChange !== null) this.onChange();
 };
 
-Anim.prototype.sortKeys=function()
+Anim.prototype.sortKeys = function ()
 {
-    this.keys.sort(function(a, b)
+    this.keys.sort((a, b) =>
+        parseFloat(a.time) - parseFloat(b.time));
+    this._needsSort = false;
+};
+
+Anim.prototype.getLength = function ()
+{
+    if (this.keys.length === 0) return 0;
+    return this.keys[this.keys.length - 1].time;
+};
+
+Anim.prototype.getKeyIndex = function (time)
+{
+    var index = 0;
+    for (var i = 0; i < this.keys.length; i++)
     {
-        return parseFloat(a.time) - parseFloat(b.time);
-    });
-    this._needsSort=false;
-};
-
-Anim.prototype.getLength=function()
-{
-    if(this.keys.length===0)return 0;
-    return this.keys[this.keys.length-1].time;
-};
-
-Anim.prototype.getKeyIndex=function(time)
-{
-    var index=0;
-    for(var i=0;i<this.keys.length;i++)
-    {
-        if(time >= this.keys[i].time) index=i;
-        if( this.keys[i].time > time ) return index;
+        if (time >= this.keys[i].time) index = i;
+        if (this.keys[i].time > time) return index;
     }
     return index;
 };
@@ -623,65 +562,69 @@ Anim.prototype.getKeyIndex=function(time)
  * @param {Number} value
  * @param {Function} [callback] callback
  */
-Anim.prototype.setValue=function(time,value,cb)
+Anim.prototype.setValue = function (time, value, cb)
 {
-    var found=false;
-    for(var i in this.keys)
+    var found = false;
+    for (var i in this.keys)
     {
-        if(this.keys[i].time==time)
+        if (this.keys[i].time == time)
         {
-            found=this.keys[i];
+            found = this.keys[i];
             this.keys[i].setValue(value);
-            this.keys[i].cb=cb;
+            this.keys[i].cb = cb;
             break;
         }
     }
 
-    if(!found) this.keys.push(new ANIM.Key({time:time,value:value,e:this.defaultEasing,cb:cb}));
+    if (!found)
+    {
+        this.keys.push(new ANIM.Key({
+            time, value, e: this.defaultEasing, cb,
+        }));
+    }
 
-    if(this.onChange)this.onChange();
-    this._needsSort=true;
+    if (this.onChange) this.onChange();
+    this._needsSort = true;
 };
 
-
-Anim.prototype.getSerialized=function()
+Anim.prototype.getSerialized = function ()
 {
-    var obj={};
-    obj.keys=[];
-    obj.loop=this.loop;
+    var obj = {};
+    obj.keys = [];
+    obj.loop = this.loop;
 
-    for(var i in this.keys)
+    for (var i in this.keys)
     {
-        obj.keys.push( this.keys[i].getSerialized() );
+        obj.keys.push(this.keys[i].getSerialized());
     }
 
     return obj;
 };
 
-Anim.prototype.getKey=function(time)
+Anim.prototype.getKey = function (time)
 {
-    var index=this.getKeyIndex(time);
+    var index = this.getKeyIndex(time);
     return this.keys[index];
 };
 
-Anim.prototype.getNextKey=function(time)
+Anim.prototype.getNextKey = function (time)
 {
-    var index=this.getKeyIndex(time)+1;
-    if(index>=this.keys.length)index=this.keys.length-1;
+    var index = this.getKeyIndex(time) + 1;
+    if (index >= this.keys.length) index = this.keys.length - 1;
 
     return this.keys[index];
 };
 
-Anim.prototype.isFinished=function(time)
+Anim.prototype.isFinished = function (time)
 {
-    if(this.keys.length<=0)return true;
-    return time>this.keys[this.keys.length-1].time;
+    if (this.keys.length <= 0) return true;
+    return time > this.keys[this.keys.length - 1].time;
 };
 
-Anim.prototype.isStarted=function(time)
+Anim.prototype.isStarted = function (time)
 {
-    if(this.keys.length<=0)return false;
-    return time>=this.keys[0].time;
+    if (this.keys.length <= 0) return false;
+    return time >= this.keys[0].time;
 };
 
 /**
@@ -692,137 +635,112 @@ Anim.prototype.isStarted=function(time)
  * @param {Number} [time] time
  * @returns {Number} interpolated value at time
  */
-Anim.prototype.getValue=function(time)
+Anim.prototype.getValue = function (time)
 {
-    if(this.keys.length===0)return 0;
-    if(this._needsSort)this.sortKeys();
+    if (this.keys.length === 0) return 0;
+    if (this._needsSort) this.sortKeys();
 
-    if(time<this.keys[0].time)return this.keys[0].value;
+    if (time < this.keys[0].time) return this.keys[0].value;
 
-    var lastKeyIndex=this.keys.length-1;
-    if(this.loop && time>this.keys[lastKeyIndex].time)
+    var lastKeyIndex = this.keys.length - 1;
+    if (this.loop && time > this.keys[lastKeyIndex].time)
     {
-        var currentLoop=time/this.keys[lastKeyIndex].time;
-        if(currentLoop>this._timesLooped)
+        var currentLoop = time / this.keys[lastKeyIndex].time;
+        if (currentLoop > this._timesLooped)
         {
             this._timesLooped++;
-            if(this.onLooped)this.onLooped();
+            if (this.onLooped) this.onLooped();
         }
-        time=(time-this.keys[0].time)%(this.keys[lastKeyIndex].time-this.keys[0].time);
-        time+=this.keys[0].time;
+        time = (time - this.keys[0].time) % (this.keys[lastKeyIndex].time - this.keys[0].time);
+        time += this.keys[0].time;
     }
 
-    var index=this.getKeyIndex(time);
-    if(index>=lastKeyIndex)
+    var index = this.getKeyIndex(time);
+    if (index >= lastKeyIndex)
     {
-        if(this.keys[lastKeyIndex].cb && !this.keys[lastKeyIndex].cbTriggered)
-            this.keys[lastKeyIndex].trigger();
+        if (this.keys[lastKeyIndex].cb && !this.keys[lastKeyIndex].cbTriggered) this.keys[lastKeyIndex].trigger();
 
         return this.keys[lastKeyIndex].value;
     }
-    var index2=parseInt(index,10)+1;
-    var key1=this.keys[index];
-    var key2=this.keys[index2];
+    var index2 = parseInt(index, 10) + 1;
+    var key1 = this.keys[index];
+    var key2 = this.keys[index2];
 
-    if(key1.cb && !key1.cbTriggered)key1.trigger();
+    if (key1.cb && !key1.cbTriggered) key1.trigger();
 
-    if(!key2)return -1;
+    if (!key2) return -1;
 
-    var perc=(time-key1.time)/(key2.time-key1.time);
-    return key1.ease(perc,key2);
+    var perc = (time - key1.time) / (key2.time - key1.time);
+    return key1.ease(perc, key2);
 };
 
-Anim.prototype.addKey=function(k)
+Anim.prototype.addKey = function (k)
 {
-    if(k.time===undefined)
+    if (k.time === undefined)
     {
-        console.log('key time undefined, ignoring!');
+        console.log("key time undefined, ignoring!");
     }
     else
     {
         this.keys.push(k);
-        if(this.onChange!==null)this.onChange();
+        if (this.onChange !== null) this.onChange();
     }
 };
 
-
-Anim.prototype.easingFromString=function(str)
+Anim.prototype.easingFromString = function (str)
 {
-    if(str=='linear') return ANIM.EASING_LINEAR;
-    if(str=='absolute') return ANIM.EASING_ABSOLUTE;
-    if(str=='smoothstep') return ANIM.EASING_SMOOTHSTEP;
-    if(str=='smootherstep') return ANIM.EASING_SMOOTHERSTEP;
+    if (str == "linear") return CONSTANTS.ANIM.EASING_LINEAR;
+    if (str == "absolute") return CONSTANTS.ANIM.EASING_ABSOLUTE;
+    if (str == "smoothstep") return CONSTANTS.ANIM.EASING_SMOOTHSTEP;
+    if (str == "smootherstep") return CONSTANTS.ANIM.EASING_SMOOTHERSTEP;
 
-    if(str=='Cubic In') return ANIM.EASING_CUBIC_IN;
-    if(str=='Cubic Out') return ANIM.EASING_CUBIC_OUT;
-    if(str=='Cubic In Out') return ANIM.EASING_CUBIC_INOUT;
+    if (str == "Cubic In") return CONSTANTS.ANIM.EASING_CUBIC_IN;
+    if (str == "Cubic Out") return CONSTANTS.ANIM.EASING_CUBIC_OUT;
+    if (str == "Cubic In Out") return CONSTANTS.ANIM.EASING_CUBIC_INOUT;
 
-    if(str=='Expo In') return ANIM.EASING_EXPO_IN;
-    if(str=='Expo Out') return ANIM.EASING_EXPO_OUT;
-    if(str=='Expo In Out') return ANIM.EASING_EXPO_INOUT;
+    if (str == "Expo In") return CONSTANTS.ANIM.EASING_EXPO_IN;
+    if (str == "Expo Out") return CONSTANTS.ANIM.EASING_EXPO_OUT;
+    if (str == "Expo In Out") return CONSTANTS.ANIM.EASING_EXPO_INOUT;
 
-    if(str=='Sin In') return ANIM.EASING_SIN_IN;
-    if(str=='Sin Out') return ANIM.EASING_SIN_OUT;
-    if(str=='Sin In Out') return ANIM.EASING_SIN_INOUT;
+    if (str == "Sin In") return CONSTANTS.ANIM.EASING_SIN_IN;
+    if (str == "Sin Out") return CONSTANTS.ANIM.EASING_SIN_OUT;
+    if (str == "Sin In Out") return CONSTANTS.ANIM.EASING_SIN_INOUT;
 
-    if(str=='Back In') return ANIM.EASING_BACK_IN;
-    if(str=='Back Out') return ANIM.EASING_BACK_OUT;
-    if(str=='Back In Out') return ANIM.EASING_BACK_INOUT;
+    if (str == "Back In") return CONSTANTS.ANIM.EASING_BACK_IN;
+    if (str == "Back Out") return CONSTANTS.ANIM.EASING_BACK_OUT;
+    if (str == "Back In Out") return CONSTANTS.ANIM.EASING_BACK_INOUT;
 
-    if(str=='Elastic In') return ANIM.EASING_ELASTIC_IN;
-    if(str=='Elastic Out') return ANIM.EASING_ELASTIC_OUT;
+    if (str == "Elastic In") return CONSTANTS.ANIM.EASING_ELASTIC_IN;
+    if (str == "Elastic Out") return CONSTANTS.ANIM.EASING_ELASTIC_OUT;
 
-    if(str=='Bounce In') return ANIM.EASING_BOUNCE_IN;
-    if(str=='Bounce Out') return ANIM.EASING_BOUNCE_OUT;
+    if (str == "Bounce In") return CONSTANTS.ANIM.EASING_BOUNCE_IN;
+    if (str == "Bounce Out") return CONSTANTS.ANIM.EASING_BOUNCE_OUT;
 
-    if(str=='Quart Out') return ANIM.EASING_QUART_OUT;
-    if(str=='Quart In') return ANIM.EASING_QUART_IN;
-    if(str=='Quart In Out') return ANIM.EASING_QUART_INOUT;
+    if (str == "Quart Out") return CONSTANTS.ANIM.EASING_QUART_OUT;
+    if (str == "Quart In") return CONSTANTS.ANIM.EASING_QUART_IN;
+    if (str == "Quart In Out") return CONSTANTS.ANIM.EASING_QUART_INOUT;
 
-    if(str=='Quint Out') return ANIM.EASING_QUINT_OUT;
-    if(str=='Quint In') return ANIM.EASING_QUINT_IN;
-    if(str=='Quint In Out') return ANIM.EASING_QUINT_INOUT;
+    if (str == "Quint Out") return CONSTANTS.ANIM.EASING_QUINT_OUT;
+    if (str == "Quint In") return CONSTANTS.ANIM.EASING_QUINT_IN;
+    if (str == "Quint In Out") return CONSTANTS.ANIM.EASING_QUINT_INOUT;
 };
 
-Anim.prototype.createPort=function(op,title,cb)
+Anim.prototype.createPort = function (op, title, cb)
 {
-    var port=op.addInPort(new CABLES.Port(op,title,CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:[
-        "linear",
-        "absolute",
-        "smoothstep",
-        "smootherstep",
-        "Cubic In",
-        "Cubic Out",
-        "Cubic In Out",
-        "Expo In",
-        "Expo Out",
-        "Expo In Out",
-        "Sin In",
-        "Sin Out",
-        "Sin In Out",
-        "Quart In",
-        "Quart Out",
-        "Quart In Out",
-        "Quint In",
-        "Quint Out",
-        "Quint In Out",
-        "Back In",
-        "Back Out",
-        "Back In Out",
-        "Elastic In",
-        "Elastic Out",
-        "Elastic In Out",
-        "Bounce In",
-        "Bounce Out",
-        ]}));
+    var port = op.addInPort(
+        new Port(op, title, CABLES.OP_PORT_TYPE_VALUE, {
+            display: "dropdown",
+            values: CONSTANTS.ANIM.EASINGS,
+        }),
+    );
 
-    port.set('linear');
-    port.defaultValue='linear';
+    port.set("linear");
+    port.defaultValue = "linear";
 
-    port.onChange=function()
+    port.onChange = function ()
     {
-        this.defaultEasing=this.easingFromString(port.get());
-        if(cb)cb();
+        this.defaultEasing = this.easingFromString(port.get());
+        if (cb) cb();
     }.bind(this);
 
     return port;
@@ -830,47 +748,31 @@ Anim.prototype.createPort=function(op,title,cb)
 
 // ------------------------------
 
-Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
+Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
 {
-
-    if(!Anim.slerpQuaternion.q1)
+    if (!Anim.slerpQuaternion.q1)
     {
-        Anim.slerpQuaternion.q1=quat.create();
-        Anim.slerpQuaternion.q2=quat.create();
+        Anim.slerpQuaternion.q1 = quat.create();
+        Anim.slerpQuaternion.q2 = quat.create();
     }
 
-    var i1=animx.getKeyIndex(time);
-    var i2=i1+1;
-    if(i2>=animx.keys.length)i2=animx.keys.length-1;
+    var i1 = animx.getKeyIndex(time);
+    var i2 = i1 + 1;
+    if (i2 >= animx.keys.length) i2 = animx.keys.length - 1;
 
-    if(i1==i2)
+    if (i1 == i2)
     {
-        quat.set(q,
-            animx.keys[i1].value,
-            animy.keys[i1].value,
-            animz.keys[i1].value,
-            animw.keys[i1].value
-        );
+        quat.set(q, animx.keys[i1].value, animy.keys[i1].value, animz.keys[i1].value, animw.keys[i1].value);
     }
     else
     {
-        var key1Time=animx.keys[i1].time;
-        var key2Time=animx.keys[i2].time;
-        var perc=(time-key1Time)/(key2Time-key1Time);
+        var key1Time = animx.keys[i1].time;
+        var key2Time = animx.keys[i2].time;
+        var perc = (time - key1Time) / (key2Time - key1Time);
 
-        quat.set(Anim.slerpQuaternion.q1,
-            animx.keys[i1].value,
-            animy.keys[i1].value,
-            animz.keys[i1].value,
-            animw.keys[i1].value
-        );
+        quat.set(Anim.slerpQuaternion.q1, animx.keys[i1].value, animy.keys[i1].value, animz.keys[i1].value, animw.keys[i1].value);
 
-        quat.set(Anim.slerpQuaternion.q2,
-            animx.keys[i2].value,
-            animy.keys[i2].value,
-            animz.keys[i2].value,
-            animw.keys[i2].value
-        );
+        quat.set(Anim.slerpQuaternion.q2, animx.keys[i2].value, animy.keys[i2].value, animz.keys[i2].value, animw.keys[i2].value);
 
         quat.slerp(q, Anim.slerpQuaternion.q1, Anim.slerpQuaternion.q2, perc);
     }
@@ -879,6 +781,5 @@ Anim.slerpQuaternion=function(time,q,animx,animy,animz,animw)
 
 export { Anim };
 const TL = ANIM;
-TL.Anim= Anim;
+TL.Anim = Anim;
 export { TL };
-

@@ -1,5 +1,4 @@
-
-import Texture from "./cgl_texture";
+import { Texture } from "./cgl_texture";
 import { profileData } from "./cgl_profiledata";
 
 /**
@@ -12,7 +11,7 @@ import { profileData } from "./cgl_profiledata";
  * @param {Number} height
  * @param {Object} [options]
  */
- 
+
 const Framebuffer = function (_cgl, w, h, options)
 {
     var cgl = _cgl;
@@ -211,4 +210,4 @@ const Framebuffer = function (_cgl, w, h, options)
     this.setSize(width, height);
 };
 
-export default Framebuffer;
+export { Framebuffer };

@@ -1,7 +1,6 @@
 // * see framebuffer1
 
-import Texture from "./cgl_texture";
-import CGL from "./index";
+import { Texture } from "./cgl_texture";
 import { profileData } from "./cgl_profiledata";
 
 // var CGL=CGL || {};
@@ -16,7 +15,7 @@ const fbs = {
 // var fbs.Framebuffer2BlittingFramebuffer = fbs.fbs.Framebuffer2BlittingFramebuffer;
 // var fbs.Framebuffer2FinalFramebuffer = fbs.fbs.Framebuffer2FinalFramebuffer;
 
-export { fbs };
+// export { fbs };
 
 const Framebuffer2 = function (cgl, w, h, options)
 {
@@ -340,4 +339,4 @@ Framebuffer2.prototype.renderEnd = function ()
     }
 };
 
-export default Framebuffer2;
+export { fbs, Framebuffer2 };

@@ -1,5 +1,3 @@
-// * TODO:
-
 import { profileData } from "./cgl_profiledata";
 
 /**
@@ -35,7 +33,7 @@ import { profileData } from "./cgl_profiledata";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-const Uniform = function (__shader, __type, __name, _value)
+export const Uniform = function (__shader, __type, __name, _value)
 {
     this._loc = -1;
     this._type = __type;
@@ -111,12 +109,25 @@ const Uniform = function (__shader, __type, __name, _value)
     this.needsUpdate = true;
 };
 
-Uniform.prototype.getType=function() { return this._type; };
-Uniform.prototype.getName=function() { return this._name; };
-Uniform.prototype.getValue=function() { return this._value; };
-Uniform.prototype.resetLoc=function() { this._loc=-1;this.needsUpdate=true; };
+Uniform.prototype.getType = function ()
+{
+    return this._type;
+};
+Uniform.prototype.getName = function ()
+{
+    return this._name;
+};
+Uniform.prototype.getValue = function ()
+{
+    return this._value;
+};
+Uniform.prototype.resetLoc = function ()
+{
+    this._loc = -1;
+    this.needsUpdate = true;
+};
 
-Uniform.prototype.bindTextures=function()
+Uniform.prototype.bindTextures = function ()
 {
     return this._value;
 };
@@ -141,7 +152,7 @@ Uniform.prototype.updateFromPort = function ()
 Uniform.prototype.updateValueF = function ()
 {
     if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+    else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1f(this._loc, this._value);
     profileData.profileUniformCount++;
@@ -159,7 +170,7 @@ Uniform.prototype.setValueF = function (v)
 Uniform.prototype.updateValueI = function ()
 {
     if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        else this.needsUpdate = false;
+    else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1i(this._loc, this._value);
     profileData.UniformCount++;
@@ -359,4 +370,4 @@ Uniform.prototype.setValueM4 = function (v)
  * @param {Number|Array|Matrix|Texture} value
  */
 
-export default Uniform;
+// export { Uniform };

@@ -1,4 +1,4 @@
-import Mesh from "./cgl_mesh";
+import { Mesh } from "./cgl_mesh";
 import Geometry from "./cgl_geom";
 
 // 

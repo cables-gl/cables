@@ -1,22 +1,13 @@
 
 // SHOULD BE MOVED TO UI !!
+import Shader from "./cgl/cgl_shader";
+import { Uniform } from "./cgl/cgl_shader_uniform";
+import Geometry from "./cgl/cgl_geom";
+import { Mesh } from "./cgl/cgl_mesh";
 
-import {
-    OP_PORT_TYPE_VALUE,
-OP_PORT_TYPE_FUNCTION,
-OP_PORT_TYPE_OBJECT,
-OP_PORT_TYPE_TEXTURE,
-OP_PORT_TYPE_ARRAY,
-OP_PORT_TYPE_DYNAMIC,
-OP_PORT_TYPE_STRING,
-} from "./core_op";
+import { CONSTANTS } from "./constants";
 
-import CGL from "./cgl";
-
-
-// var CABLES=CABLES||{};
 const GLGUI = {};
-// CABLES.GLGUI=CABLES.GLGUI||{};
 
 GLGUI.LineDrawer=function(cgl,options)
 {
@@ -43,7 +34,7 @@ GLGUI.RectInstancer=function(cgl,options)
     this._colors=new Float32Array(4*this._num);
     this._sizes=new Float32Array(2*this._num);
 
-    this._shader=new CGL.Shader(cgl,'rectinstancer');
+    this._shader=new Shader(cgl,'rectinstancer');
     this._shader.setSource(''
         .endl()+'IN vec3 vPosition;'
         .endl()+'IN vec3 instPos;'
@@ -71,17 +62,17 @@ GLGUI.RectInstancer=function(cgl,options)
         .endl()+'}'
         , 'IN vec4 col;void main(){outColor=vec4(col.rgb,1.0);}');
 
-    this._uniZoom=new CGL.Uniform(this._shader,'f','zoom',0),
-    this._uniResX=new CGL.Uniform(this._shader,'f','resX',500),
-    this._uniResY=new CGL.Uniform(this._shader,'f','resY',500),
-    this._uniscrollX=new CGL.Uniform(this._shader,'f','scrollX',0),
-    this._uniscrollY=new CGL.Uniform(this._shader,'f','scrollY',0);
+    this._uniZoom=new Uniform(this._shader,'f','zoom',0),
+    this._uniResX=new Uniform(this._shader,'f','resX',500),
+    this._uniResY=new Uniform(this._shader,'f','resY',500),
+    this._uniscrollX=new Uniform(this._shader,'f','scrollX',0),
+    this._uniscrollY=new Uniform(this._shader,'f','scrollY',0);
 
-    this._geom=new CGL.Geometry("rectinstancer");
+    this._geom=new Geometry("rectinstancer");
     this._geom.vertices = new Float32Array([1,1,0, 0,1,0, 1,0,0, 0,0,0]);
     this._geom.verticesIndices = new Float32Array([ 2, 1, 0,  3, 1, 2 ]);
 
-    this._mesh=new CGL.Mesh(cgl,this._geom);
+    this._mesh=new Mesh(cgl,this._geom);
     this._mesh.numInstances=this._num;
 
     var i=0;
@@ -251,12 +242,12 @@ GLGUI.GlOp.prototype._setupPort=function(i,p)
     var r=new GLGUI.GlRect(this._instancer,{"parent":this._glRectBg});
     r.setSize(7,5);
     
-    if(p.type == OP_PORT_TYPE_VALUE) r.setColor(0,1,0.7);
-        else if(p.type == OP_PORT_TYPE_FUNCTION) r.setColor(1,1,0);
-        else if(p.type == OP_PORT_TYPE_OBJECT) r.setColor(1,0,1);
-        else if(p.type == OP_PORT_TYPE_ARRAY) r.setColor(0,0.3,1);
-        else if(p.type == OP_PORT_TYPE_STRING) r.setColor(1,0.3,0);
-        else if(p.type == OP_PORT_TYPE_DYNAMIC) r.setColor(1,1,1);
+    if(p.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) r.setColor(0,1,0.7);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) r.setColor(1,1,0);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) r.setColor(1,0,1);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY) r.setColor(0,0.3,1);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_STRING) r.setColor(1,0.3,0);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) r.setColor(1,1,1);
 
     var y=0;
     if(p.direction==1)y=30-5;
