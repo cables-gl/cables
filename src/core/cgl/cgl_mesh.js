@@ -1,8 +1,9 @@
 import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { profileData } from "./cgl_profiledata";
+import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
 
-var MESH = {};
+const MESH = {};
 MESH.lastMesh = null;
 
 /**
@@ -556,6 +557,9 @@ Mesh.prototype.dispose = function ()
 
     this._disposeAttributes();
 };
+
+
+extendMeshWithFeedback(Mesh);
 
 export { Mesh, MESH };
 // export default Mesh;

@@ -1,8 +1,8 @@
 
 // SHOULD BE MOVED TO UI !!
-import Shader from "./cgl/cgl_shader";
+import { Shader } from "./cgl/cgl_shader";
 import { Uniform } from "./cgl/cgl_shader_uniform";
-import Geometry from "./cgl/cgl_geom";
+import { Geometry } from "./cgl/cgl_geom";
 import { Mesh } from "./cgl/cgl_mesh";
 
 import { CONSTANTS } from "./constants";
@@ -95,7 +95,7 @@ GLGUI.RectInstancer.prototype.render=function(resX,resY,scrollX,scrollY,zoom)
     this._uniZoom.set(zoom);
 
     if(this._needsRebuild)this.rebuild();
-    
+
     this._mesh.render(this._shader);
 }
 
@@ -204,7 +204,7 @@ GLGUI.GlOp=function(instancer,op)
     this._glRectBg.setSize(100,30);
     this._glRectBg.setColor(0.1,0.1,0.1);
     this._portRects=[];
-    
+
     this.updatePosition();
 
     for(var i=0;i<this._op.portsIn.length;i++)
@@ -214,7 +214,7 @@ GLGUI.GlOp=function(instancer,op)
         this._setupPort(i,this._op.portsOut[i]);
 
     const portsSize=Math.max(this._op.portsIn.length,this._op.portsOut.length)*10;
-    
+
     this._glRectBg.setSize(Math.max(GLGUI.OP_MIN_WIDTH,portsSize),30);
 }
 
@@ -241,7 +241,7 @@ GLGUI.GlOp.prototype._setupPort=function(i,p)
 {
     var r=new GLGUI.GlRect(this._instancer,{"parent":this._glRectBg});
     r.setSize(7,5);
-    
+
     if(p.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) r.setColor(0,1,0.7);
         else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) r.setColor(1,1,0);
         else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) r.setColor(1,0,1);
@@ -312,7 +312,7 @@ GLGUI.GlPatch.prototype.deleteOp=function(op)
             this._glOps[i].getOp().removeEventListener("onUiAttribsChange",this._glOps[i].update);
             this._glOps.slice(i,1);
             delOp.dispose();
-            return;         
+            return;
         }
     }
 }
@@ -363,7 +363,7 @@ GLGUI.GlPatch.prototype.reset=function()
     }
 
     this._rectInstancer.rebuild();
-   
+
 }
 
 

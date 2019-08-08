@@ -68,4 +68,4 @@ MatrixStack.prototype.length = function ()
     return this._index;
 };
 
-export default MatrixStack;
+export { MatrixStack };

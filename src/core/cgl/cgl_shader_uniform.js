@@ -1,4 +1,5 @@
 import { profileData } from "./cgl_profiledata";
+import { Port } from "../core_port";
 
 /**
  * Shader uniforms
@@ -97,7 +98,7 @@ export const Uniform = function (__shader, __type, __name, _value)
     }
     else throw new Error("Unknown uniform type");
 
-    if (typeof _value == "object" && _value instanceof CABLES.Port)
+    if (typeof _value == "object" && _value instanceof Port)
     {
         this._port = _value;
         this._value = this._port.get();

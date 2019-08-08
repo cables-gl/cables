@@ -794,4 +794,4 @@ Geometry.json2geom = function (jsonMesh)
     return geom;
 };
 
-export default Geometry;
+export { Geometry };

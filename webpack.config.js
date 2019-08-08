@@ -3,6 +3,13 @@ const fs = require("fs");
 const glob = require("glob");
 const webpack = require("webpack");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
+const glMatrix = require("gl-matrix");
+
+const provideObject = Object.keys(glMatrix).reduce((acc, val) =>
+{
+    acc[val] = ["gl-matrix", val];
+    return acc;
+}, {});
 
 module.exports = {
     mode: "production",
@@ -56,6 +63,7 @@ module.exports = {
     },
     // devtool: "cheap-module-source-map",
     plugins: [
+        new webpack.ProvidePlugin(provideObject),
         // new webpack.ProvidePlugin({
         //     CGL: "CGL",
         // }),

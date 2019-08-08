@@ -1,5 +1,7 @@
-
+// TODO: remove CABLES.UI
 import { ShaderLibMods } from "./cgl_shader_lib";
+import { now } from "../timer";
+import { simpleId, generateUUID } from "../0_utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";
@@ -46,7 +48,7 @@ const Shader = function(_cgl, _name) {
     this.glslVersion = 0;
     if(_cgl.glVersion>1)this.glslVersion=300;
 
-    this.id=CABLES.simpleId();
+    this.id=simpleId();
     this._program = null;
     this._uniforms = [];
     this._drawBuffers=[true];
@@ -206,7 +208,7 @@ Shader.prototype.compile = function() {
             }
 
         }
-        
+
 
         vs = '#version 300 es'
             .endl() + '// '
@@ -232,7 +234,7 @@ Shader.prototype.compile = function() {
             .endl() + '#define IN in'
             .endl() + '#define UNI uniform'
             .endl() + drawBufferStr
-            
+
             .endl();
 
     } else {
@@ -385,7 +387,7 @@ Shader.prototype.compile = function() {
     MESH.lastShader = null;
 
     this._needsRecompile = false;
-    this.lastCompile = CABLES.now();
+    this.lastCompile = now();
 };
 
 Shader.prototype.bind = function()
@@ -504,7 +506,7 @@ Shader.prototype.toggleDefine = function(name, enabled)
  * @instance
  * @param {String} name
  * @param {Any} value (can be empty)
- 
+
  */
 Shader.prototype.define = function(name, value)
 {
@@ -620,7 +622,7 @@ Shader.prototype.getCurrentModules=function(){return this._modules;};
  * @param {shaderModule} [sibling] sibling module, new module will share the same group
  */
 Shader.prototype.addModule = function(mod, sibling) {
-    if(!mod.id) mod.id = CABLES.generateUUID();
+    if(!mod.id) mod.id = generateUUID();
     if(!mod.numId) mod.numId = this._moduleNumId;
     if(!mod.num)mod.num = this._modules.length;
 
@@ -738,9 +740,9 @@ Shader.prototype._linkProgram = function(program)
     // }
 
     if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS)) {
-        
 
-        // todo print shaderinfolog!!!! 
+
+        // todo print shaderinfolog!!!!
 
         console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
         console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
@@ -788,7 +790,7 @@ Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = functi
         .endl() + 'IN vec2 attrTexCoord;'
         .endl() + 'IN vec3 attrVertNormal;'
         .endl() + 'IN float attrVertIndex;'
-        
+
         .endl() + 'OUT vec2 texCoord;'
         .endl() + 'OUT vec3 norm;'
         .endl() + 'UNI mat4 projMatrix;'
@@ -916,4 +918,4 @@ Shader.createShader = function(cgl, str, type, cglShader) {
     return shader;
 };
 
-export default Shader;
+export { Shader };

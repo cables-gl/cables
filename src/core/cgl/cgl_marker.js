@@ -1,7 +1,7 @@
 import { vec3, mat4 } from "gl-matrix";
-import Geometry from "./cgl_geom";
+import { Geometry } from "./cgl_geom";
 import { Mesh } from "./cgl_mesh";
-import Shader from "./cgl_shader";
+import { Shader } from "./cgl_shader";
 import { DEG2RAD } from "./cgl_utils";
 
 export const Marker=function(cgl)
@@ -54,7 +54,7 @@ export const Marker=function(cgl)
         cgl.pushModelMatrix();
 
 
-        
+
         cgl.setShader(shader);
 
 
@@ -138,7 +138,7 @@ export const WirePoint=function(cgl,size)
 
         // var shader=cgl.getDefaultShader();
         var shader=cgl.getShader();
-        
+
         shader.bind();
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
 

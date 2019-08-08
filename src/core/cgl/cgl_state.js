@@ -1,8 +1,7 @@
 import { vec3, mat4 } from "gl-matrix";
 import { CONSTANTS } from "./constants";
-import Shader from "./cgl_shader";
-import MatrixStack from "./cgl_matrixstack";
-
+import { Shader } from "./cgl_shader";
+import { MatrixStack } from "./cgl_matrixstack";
 
 /**
  * cables gl context/state manager
@@ -235,13 +234,11 @@ const Context = function (_patch)
 
         if (this.canvas && this.canvas.toBlob)
         {
-            this.canvas.toBlob(
-                (blob) =>
-                {
-                    if (cb) cb(blob);
-                    else console.log("no screenshot callback...");
-                },
-            );
+            this.canvas.toBlob((blob) =>
+            {
+                if (cb) cb(blob);
+                else console.log("no screenshot callback...");
+            });
         }
     };
 
@@ -552,31 +549,28 @@ const Context = function (_patch)
         if (!filename) filename = `cables_${dateStr}.png`;
         else filename += ".png";
 
-        this.patch.cgl.screenShot(
-            (blob) =>
+        this.patch.cgl.screenShot((blob) =>
+        {
+            this.canvas.width = w;
+            this.canvas.height = h;
+            if (blob)
             {
-                this.canvas.width = w;
-                this.canvas.height = h;
-                if (blob)
-                {
-                    var anchor = document.createElement("a");
+                var anchor = document.createElement("a");
 
-                    anchor.download = filename;
+                anchor.download = filename;
 
-                    anchor.href = URL.createObjectURL(blob);
-                    document.body.appendChild(anchor);
+                anchor.href = URL.createObjectURL(blob);
+                document.body.appendChild(anchor);
 
-                    anchor.click();
-                    if (cb) cb(blob);
-                    anchor.remove();
-                }
-                else
-                {
-                    console.log("screenshot: no blob");
-                }
-            },
-            true,
-        );
+                anchor.click();
+                if (cb) cb(blob);
+                anchor.remove();
+            }
+            else
+            {
+                console.log("screenshot: no blob");
+            }
+        }, true);
     };
 };
 
@@ -654,7 +648,8 @@ Context.prototype.getProjectionMatrixStateCount = function ()
  * cgl.popModelMatrix();
  */
 Context.prototype.pushMvMatrix = Context.prototype.pushModelMatrix = function ()
-{ // deprecated
+{
+    // deprecated
     // var copy = mat4.clone(this.mMatrix);
     this.mMatrix = this._mMatrixStack.push(this.mMatrix);
 };
@@ -667,7 +662,8 @@ Context.prototype.pushMvMatrix = Context.prototype.pushModelMatrix = function ()
  * @returns {mat4} current modelmatrix
  */
 Context.prototype.popMvMatrix = Context.prototype.popmMatrix = Context.prototype.popModelMatrix = function ()
-{ // todo: DEPRECATE
+{
+    // todo: DEPRECATE
     // if (this._mMatrixStack.length === 0) throw "Invalid modelview popMatrix!";
     this.mMatrix = this._mMatrixStack.pop();
     return this.mMatrix;
@@ -939,4 +935,4 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
 };
 
-export default Context;
+export { Context };

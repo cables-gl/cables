@@ -5,7 +5,7 @@ import Instancing from "./instancing";
 import Timer from "./timer";
 import Link from "./core_link";
 import Profiler from "./core_profiler";
-import Context from "./cgl/cgl_state";
+import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { OP_PORT_TYPE_TEXTURE } from "./core_op";
 import Requirements from "./requirements";

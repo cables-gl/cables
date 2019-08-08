@@ -14,7 +14,7 @@ const SHADER = {
     SHADERVAR_UNI_VIEWPOS: "camPos",
 };
 
-const BLENDS = {
+const BLEND_MODES = {
     BLEND_NONE: 0,
     BLEND_NORMAL: 1,
     BLEND_ADD: 2,
@@ -31,14 +31,8 @@ const CONSTANTS = {
         RAD2DEG,
     },
     SHADER,
-    BLEND_MODES: BLENDS,
+    BLEND_MODES,
 };
 
-export default {
-    SHADER,
-    BLENDS,
-    RAD2DEG,
-    DEG2RAD,
-};
 
 export { CONSTANTS };
