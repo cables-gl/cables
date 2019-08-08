@@ -1,6 +1,7 @@
 const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const compiler = require("webpack");
+const webpackConfig = require("./webpack.config");
 
 exports.default = exports.watch = gulp.series(gulp.parallel(_scripts_core, _scripts_core_min), _watch);
 
@@ -33,7 +34,7 @@ function _scripts_core()
             .pipe(
                 webpack(
                     {
-                        config: require("./webpack.config.js")(false),
+                        config: webpackConfig(false),
                     },
                     compiler,
                     (err, stats) =>
@@ -64,7 +65,7 @@ function _scripts_core_min()
             .pipe(
                 webpack(
                     {
-                        config: require("./webpack.config.js")(true),
+                        config: webpackConfig(true),
                     },
                     compiler,
                     (err, stats) =>
