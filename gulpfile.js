@@ -1,19 +1,14 @@
-
-const gulp = require('gulp');
+const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const compiler = require("webpack");
 
-
-exports.default =
-    exports.watch = gulp.series(
-        _scripts_core,
-        _watch);
+exports.default = exports.watch = gulp.series(_scripts_core, _watch);
 
 exports.build = gulp.series(_scripts_core);
 
 function _watch()
 {
-    gulp.watch('src/core/**/*', gulp.series(_scripts_core));
+    gulp.watch("src/core/**/*", gulp.series(_scripts_core));
 
     // cb();
 }
@@ -32,27 +27,31 @@ function _watch()
 
 function _scripts_core()
 {
-    return gulp.src(["src/index.js"])
-    .pipe(
-        webpack(
-            {
-                config: require("./webpack.config.js"),
-            },
-            compiler,
-            (err, stats) =>
-            {
-                if (err) throw err;
-                if (stats.hasErrors())
-                {
-                    return reject(new Error(stats.compilation.errors.join("\n")));
-                }
-            },
-        ),
-    )
-
-    .pipe(gulp.dest("../cables_ui/dist/js"))
-    .on("error", (err) =>
+    return new Promise((resolve, reject) =>
     {
-        console.error("WEBPACK ERROR", err);
+        gulp.src(["src/index.js"])
+            .pipe(
+                webpack(
+                    {
+                        config: require("./webpack.config.js"),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        resolve();
+                    },
+                ),
+            )
+
+            .pipe(gulp.dest("../cables_ui/dist/js"))
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
     });
 }
