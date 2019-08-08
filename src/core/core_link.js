@@ -104,7 +104,6 @@ Link.prototype.remove=function()
     this.portIn=null;
     this.portOut=null;
     this.scene=null;
-
 };
 
 /**

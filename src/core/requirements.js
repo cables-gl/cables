@@ -22,7 +22,6 @@ Requirements.prototype.checkRequirement=function(which,op)
     this.result=[];
     switch(which)
     {
-        
         case Requirements.WEBGL2:
             return op.patch.cgl.glVersion>=2;
         break;

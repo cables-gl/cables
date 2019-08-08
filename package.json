@@ -8,7 +8,8 @@
   },
   "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp",
+    "watch": "gulp watch"
   },
   "repository": {
     "type": "git",
@@ -30,9 +31,11 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "error-overlay-webpack-plugin": "^0.4.0",
     "glob": "^7.1.4",
-    "webpack": "^4.29.0",
+    "gulp": "^4.0.2",
+    "webpack": "^4.39.1",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "webpack-stream": "^5.2.1"
   },
   "dependencies": {
     "gl-matrix": "^3.0.0"

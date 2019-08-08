@@ -10,7 +10,7 @@ import { OP_PORT_TYPE_TEXTURE } from "./core_op";
 import Requirements from "./requirements";
 import CGL from "./cgl";
 
-// var CABLES = CABLES || {};
+
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
