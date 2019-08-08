@@ -21,7 +21,7 @@ module.exports = isProduction =>
         output: {
             path: path.join(process.cwd(), "dist"),
             // publicPath: `${__dirname}dist/`,
-            filename: isProduction ? "cables.max.js" : "cables.min.js",
+            filename: isProduction ? "cables.min.js" : "cables.max.js",
             // chunkFilename: '[name].js',
             library: "CABLES",
             libraryExport: "default",
