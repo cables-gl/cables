@@ -28,6 +28,7 @@ module.exports = isProduction =>
             libraryTarget: "var",
             globalObject: "window",
         },
+        stats: isProduction,
         optimization: { minimize: isProduction },
         module: {
             rules: [
