@@ -6,6 +6,7 @@ const ProfileData = function ()
     this.profileShaderCompiles = 0;
     this.profileVideosPlaying = 0;
     this.profileMVPMatrixCount = 0;
+    this.profileEffectBuffercreate = 0;
 };
 
 export const profileData = new ProfileData();
