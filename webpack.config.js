@@ -64,11 +64,12 @@ module.exports = isProduction => ({
     },
     // devtool: "cheap-module-source-map",
     plugins: [
+        isProduction
+            && new BundleAnalyzerPlugin({
+                analyzerMode: "disabled",
+                generateStatsFile: true,
+            }),
         new webpack.ProvidePlugin(provideObject),
-        isProduction && new BundleAnalyzerPlugin({
-            analyzerMode: "disabled",
-            generateStatsFile: true,
-        }),
         // new webpack.ProvidePlugin({
         //     CGL: "CGL",
         // }),
