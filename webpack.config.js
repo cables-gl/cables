@@ -1,6 +1,4 @@
 const path = require("path");
-const fs = require("fs");
-const glob = require("glob");
 const webpack = require("webpack");
 const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
 const glMatrix = require("gl-matrix");
@@ -11,24 +9,25 @@ const provideObject = Object.keys(glMatrix).reduce((acc, val) =>
     return acc;
 }, {});
 
-module.exports = {
-    mode: "production",
+module.exports = isProduction => ({
+    mode: isProduction ? "production" : "development",
     entry: [
         path.join(__dirname, "src", "index.js"),
         // ...fs.readdirSync('./src/ops/').filter(file => file.match(/.*\.js$/)),
     ],
     // watch: true,
+    devtool: isProduction ? "source-map" : false,
     output: {
         path: path.join(process.cwd(), "dist"),
         // publicPath: `${__dirname}dist/`,
-        filename: "cables.max.js",
+        filename: isProduction ? "cables.max.js" : "cables.min.js",
         // chunkFilename: '[name].js',
         library: "CABLES",
         libraryExport: "default",
         libraryTarget: "var",
         globalObject: "window",
     },
-    optimization: { minimize: false },
+    optimization: { minimize: isProduction },
     module: {
         rules: [
             {
@@ -69,4 +68,4 @@ module.exports = {
         // }),
         // new ErrorOverlayPlugin()
     ],
-};
+});
