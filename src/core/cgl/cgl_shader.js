@@ -1,8 +1,9 @@
 
-import ShaderLibMods from "./cgl_shader_lib";
+import { ShaderLibMods } from "./cgl_shader_lib";
 import { MESH } from "./cgl_mesh";
-import CGL from "./index";
+// import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";
+import{ CONSTANTS } from "./constants";
 
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
@@ -395,14 +396,14 @@ Shader.prototype.bind = function()
     if (!this._program || this._needsRecompile) this.compile();
 
     if (!this._projMatrixUniform) {
-        this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CGL.SHADERVAR_VERTEX_POSITION);
-        this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_PROJMAT);
+        this._attrVertexPos = this._cgl.glGetAttribLocation(this._program, CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION);
+        this._projMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_PROJMAT);
         this._mvMatrixUniform = this._cgl.gl.getUniformLocation(this._program, "mvMatrix");
-        this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_VIEWMAT);
-        this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_MODELMAT);
-        this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_VIEWPOS);
-        this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_NORMALMAT);
-        this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CGL.SHADERVAR_UNI_INVVIEWMAT);
+        this._vMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWMAT);
+        this._mMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_MODELMAT);
+        this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWPOS);
+        this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
+        this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
         for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
     }
 

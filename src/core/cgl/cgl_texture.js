@@ -1,4 +1,4 @@
-import CGL from "./index";
+import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";
 
 
@@ -666,4 +666,5 @@ Texture.TYPE_DEPTH=1;
 Texture.TYPE_FLOAT=2;
 
 
-export default Texture;
+// export default Texture;
+export { Texture };

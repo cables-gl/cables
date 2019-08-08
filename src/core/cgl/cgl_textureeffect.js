@@ -1,5 +1,5 @@
-import Texture from "./cgl_texture";
-import CGL from "./index";
+import { Texture } from "./cgl_texture";
+import { CGL } from "./index";
 import MESHES from "./cgl_simplerect";
 // var CGL=CGL || {};
 
@@ -501,4 +501,5 @@ TextureEffect.setupBlending=function(op,shader,blendMode,amount)
 
 }
 
-export default TextureEffect;
+// export default TextureEffect;
+export { TextureEffect };

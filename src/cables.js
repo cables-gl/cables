@@ -14,8 +14,8 @@ import WEBAUDIO from "./core/webaudio";
 import Timer, * as TimerUtils from "./core/timer";
 import * as PatchConnections from "./core/patchConnection";
 import Gizmo, * as GizmoUtils from "./core/mod_gizmo";
-
-// import CGL from "./cgl";
+import { CONSTANTS }from "./core/constants";
+// import { CGL } from "./cgl";
 // console.log("CGL", CGL);
 // window.CGL = CGL;
 
@@ -70,5 +70,6 @@ export default {
     Timer,
     ...PatchConnections,
     WEBAUDIO,
+    // CONSTANTS,
 };
 

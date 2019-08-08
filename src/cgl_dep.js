@@ -1,4 +1,4 @@
-// import CGL from "./core/cgl";
+// import { CGL } from "./core/cgl";
 
 // export default CGL;
 // // var CGL = {};

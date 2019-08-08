@@ -1,5 +1,4 @@
 const SHADER = {
-
     // default attributes
     SHADERVAR_VERTEX_POSITION: "vPosition",
     SHADERVAR_VERTEX_NUMBER: "attrVertIndex",
@@ -25,6 +24,21 @@ const BLENDS = {
 
 const DEG2RAD = Math.PI / 180.0;
 const RAD2DEG = 180.0 / Math.PI;
-export default {
-    SHADER, BLENDS, RAD2DEG, DEG2RAD,
+
+const CONSTANTS = {
+    MATH: {
+        DEG2RAD,
+        RAD2DEG,
+    },
+    SHADER,
+    BLEND_MODES: BLENDS,
 };
+
+export default {
+    SHADER,
+    BLENDS,
+    RAD2DEG,
+    DEG2RAD,
+};
+
+export { CONSTANTS };

@@ -1,5 +1,8 @@
-import { uuid } from "./0_utils";
-import { PORT_DIR_IN, PORT_DIR_OUT } from "./core_port";
+import { uuid, UTILS } from "./0_utils";
+import { CONSTANTS } from "./constants";
+import Port from "./core_port";
+import Link from "./core_link";
+
 /**
  * op the class of all operators
  * @external CABLES
@@ -145,7 +148,7 @@ const Op = function ()
 
     Op.prototype.addOutPort = function (p)
     {
-        p.direction = PORT_DIR_OUT;
+        p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p.parent = this;
         this.portsOut.push(p);
         if (this.onAddPort) this.onAddPort(p);
@@ -178,11 +181,11 @@ const Op = function ()
 
     Op.prototype.addInPort = function (p)
     {
-        if (!(p instanceof CABLES.Port))
+        if (!(p instanceof Port))
         {
             throw new Error("parameter is not a port!");
         }
-        p.direction = CABLES.PORT_DIR_IN;
+        p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p.parent = this;
         this.portsIn.push(p);
         if (this.onAddPort) this.onAddPort(p);
@@ -202,7 +205,7 @@ const Op = function ()
     Op.prototype.inFunction = Op.prototype.inTrigger = function (name, v)
     {
         // deprecated
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -218,7 +221,7 @@ const Op = function ()
     Op.prototype.inFunctionButton = Op.prototype.inTriggerButton = function (name, v)
     {
         // deprecated
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION, { display: "button" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, { display: "button" }));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -237,7 +240,7 @@ const Op = function ()
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
         // old // old
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined)
         {
             p.set(v);
@@ -259,7 +262,7 @@ const Op = function ()
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
         // old
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "bool" }));
         if (v !== undefined)
         {
             p.set(v);
@@ -279,7 +282,7 @@ const Op = function ()
      */
     Op.prototype.inValueString = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string" }));
         p.value = "";
         if (v !== undefined)
         {
@@ -292,7 +295,7 @@ const Op = function ()
     // new string
     Op.prototype.inString = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string" }));
         v = v || "";
         p.value = v;
         p.set(v);
@@ -311,7 +314,7 @@ const Op = function ()
      */
     Op.prototype.inValueText = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string", display: "text" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string", display: "text" }));
         p.value = "";
         if (v !== undefined)
         {
@@ -333,7 +336,7 @@ const Op = function ()
     // new string
     Op.prototype.inStringEditor = function (name, v, syntax)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string", display: "editor", editorSyntax: syntax }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string", display: "editor", editorSyntax: syntax }));
         p.value = "";
         if (v !== undefined)
         {
@@ -346,7 +349,7 @@ const Op = function ()
     // old
     Op.prototype.inValueEditor = function (name, v, syntax)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string", display: "editor", editorSyntax: syntax }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string", display: "editor", editorSyntax: syntax }));
         p.value = "";
         if (v !== undefined)
         {
@@ -369,7 +372,7 @@ const Op = function ()
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
         // old
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: true, values }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: true, values }));
         if (v !== undefined)
         {
             p.set(v);
@@ -391,7 +394,7 @@ const Op = function ()
     Op.prototype.inSwitch = function (name, values, v)
     {
         var p = this.addInPort(
-            new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, {
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 display: "switch",
                 hidePort: true,
                 type: "string",
@@ -418,7 +421,7 @@ const Op = function ()
     Op.prototype.inValueInt = Op.prototype.inInt = function (name, v)
     {
         // old
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { increment: "integer" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" }));
         if (v !== undefined)
         {
             p.set(v);
@@ -437,7 +440,7 @@ const Op = function ()
      */
     Op.prototype.inFile = function (name, filter, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "file", filter }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "file", filter }));
         if (v !== undefined)
         {
             p.set(v);
@@ -448,7 +451,7 @@ const Op = function ()
 
     Op.prototype.inUrl = function (name, filter, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { display: "file", filter }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { display: "file", filter }));
         if (v !== undefined)
         {
             p.set(v);
@@ -467,7 +470,7 @@ const Op = function ()
      */
     Op.prototype.inTexture = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, { display: "texture", preview: true }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { display: "texture", preview: true }));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -482,14 +485,14 @@ const Op = function ()
      */
     Op.prototype.inObject = function (name, v, options)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, options));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, options));
         if (v !== undefined) p.set(v);
         return p;
     };
 
     Op.prototype.inGradient = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "gradient", hidePort: true }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "gradient", hidePort: true }));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -504,7 +507,7 @@ const Op = function ()
      */
     Op.prototype.inArray = function (name, v)
     {
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_ARRAY));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -521,7 +524,7 @@ const Op = function ()
     Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v)
     {
         // old
-        var p = this.addInPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "range" }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "range" }));
         if (v !== undefined)
         {
             p.set(v);
@@ -541,7 +544,7 @@ const Op = function ()
     Op.prototype.outFunction = Op.prototype.outTrigger = function (name, v)
     {
         // old
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_FUNCTION));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -558,7 +561,7 @@ const Op = function ()
     Op.prototype.outValue = Op.prototype.outNumber = function (name, v)
     {
         // old
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -574,7 +577,7 @@ const Op = function ()
     Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
     {
         // old
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "bool" }));
         if (v !== undefined) p.set(v);
         else p.set(false);
         return p;
@@ -590,13 +593,13 @@ const Op = function ()
      */
     Op.prototype.outValueString = function (name, v)
     {
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_VALUE, { type: "string" }));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string" }));
         if (v !== undefined) p.set(v);
         return p;
     };
     Op.prototype.outString = function (name, v)
     {
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_STRING, { type: "string" }));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string" }));
         if (v !== undefined) p.set(v);
         else p.set("");
         return p;
@@ -612,7 +615,7 @@ const Op = function ()
      */
     Op.prototype.outObject = function (name, v)
     {
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -628,7 +631,7 @@ const Op = function ()
      */
     Op.prototype.outArray = function (name, v)
     {
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_ARRAY));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -644,7 +647,7 @@ const Op = function ()
      */
     Op.prototype.outTexture = function (name, v)
     {
-        var p = this.addOutPort(new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_OBJECT, { preview: true }));
+        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { preview: true }));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -652,11 +655,11 @@ const Op = function ()
 
     Op.prototype.inDynamic = function (name, filter, options, v)
     {
-        var p = new CABLES.Port(this, name, CABLES.OP_PORT_TYPE_DYNAMIC, options);
+        var p = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC, options);
 
         p.shouldLink = function (p1, p2)
         {
-            if (filter && CABLES.UTILS.isArray(filter))
+            if (filter && UTILS.isArray(filter))
             {
                 for (var i = 0; i < filter.length; i++)
                 {
@@ -691,7 +694,7 @@ const Op = function ()
         {
             for (var l in this.portsOut[ipo].links)
             {
-                if (this.portsOut[ipo].type == CABLES.OP_PORT_TYPE_FUNCTION) childs.push(this.portsOut[ipo].links[l].portIn.parent);
+                if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) childs.push(this.portsOut[ipo].links[l].portIn.parent);
             }
         }
         return childs;
@@ -741,18 +744,18 @@ const Op = function ()
     Op.prototype.countFittingPorts = function (otherPort)
     {
         var count = 0;
-        for (var ipo in this.portsOut) if (CABLES.Link.canLink(otherPort, this.portsOut[ipo])) count++;
+        for (var ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) count++;
 
-        for (var ipi in this.portsIn) if (CABLES.Link.canLink(otherPort, this.portsIn[ipi])) count++;
+        for (var ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) count++;
 
         return count;
     };
 
     Op.prototype.findFittingPort = function (otherPort)
     {
-        for (var ipo in this.portsOut) if (CABLES.Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+        for (var ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
 
-        for (var ipi in this.portsIn) if (CABLES.Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        for (var ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
     };
 
     Op.prototype.getSerialized = function ()
@@ -972,7 +975,7 @@ const Op = function ()
 
                 for (var ipo = 0; ipo < this.portsOut.length; ipo++)
                 {
-                    if (this.portsOut[ipo].type == CABLES.OP_PORT_TYPE_FUNCTION)
+                    if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
                     {
                         this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
                     }
@@ -989,11 +992,11 @@ const Op = function ()
         var theTriggerPort = null;
         for (ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            if (this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_ARRAY)
+            if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
             {
                 this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
             }
-            if (this.portsIn[ipi].type == CABLES.OP_PORT_TYPE_FUNCTION)
+            if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
             {
                 // console.log(this.patch.instancing.index());
                 // console.log(this._instances.length);
@@ -1006,7 +1009,7 @@ const Op = function ()
 
         for (ipi = 0; ipi < this.portsOut.length; ipi++)
         {
-            if (this.portsOut[ipi].type == CABLES.OP_PORT_TYPE_VALUE)
+            if (this.portsOut[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE)
             {
                 this.portsOut[ipi].set(this._instances[this.patch.instancing.index()].portsOut[ipi].get());
             }
@@ -1025,11 +1028,11 @@ const Op = function ()
         //         this._instances=[];
         //         for(var ipi=0;ipi<this.portsIn.length;ipi++)
         //         {
-        //             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_VALUE)
+        //             if(this.portsIn[ipi].type==CONSTANTS.OP.OP_PORT_TYPE_VALUE)
         //             {
         //
         //             }
-        //             if(this.portsIn[ipi].type==CABLES.OP_PORT_TYPE_FUNCTION)
+        //             if(this.portsIn[ipi].type==CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
         //             {
         //                 // var piIndex=ipi;
         //                 this.portsIn[ipi].onTriggered=function(piIndex)
@@ -1220,7 +1223,7 @@ const Op = function ()
 
         function hasTriggerInput(op)
         {
-            if (op.portsIn.length > 0 && op.portsIn[0].type == CABLES.OP_PORT_TYPE_FUNCTION) return true;
+            if (op.portsIn.length > 0 && op.portsIn[0].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) return true;
             return false;
         }
 
@@ -1229,7 +1232,7 @@ const Op = function ()
 
         if (working && this.objName.indexOf("Ops.Gl.TextureEffects") == 0 && hasTriggerInput(this) && this.objName.indexOf("TextureEffects.ImageCompose") == -1)
         {
-            working = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, "TextureEffects.ImageCompose");
+            working = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, "TextureEffects.ImageCompose");
             if (!working) notWorkingMsg = `${CABLES.UI.TEXTS.working_connected_to}ImageCompose`;
         }
         // else
@@ -1238,7 +1241,7 @@ const Op = function ()
         //     {
         //         if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
         //         {
-        //             var iscon = hasParent(this, CABLES.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
+        //             var iscon = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
         //             working = iscon;
         //             if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
         //         }
@@ -1247,7 +1250,7 @@ const Op = function ()
 
         if (this._needsParentOp && working)
         {
-            working = hasParent(this, CABLES.OP_PORT_TYPE_OBJECT, this._needsParentOp);
+            working = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, this._needsParentOp);
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + this._needsParentOp;
         }
 

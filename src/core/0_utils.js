@@ -9,7 +9,6 @@
 // CABLES.UTILS={};
 // CGL=CGL || {};
 
-
 const UTILS = {};
 /**
  * Merge two Float32Arrays.
@@ -20,10 +19,10 @@ const UTILS = {};
  * @return {Float32Array}
  * @static
  */
-UTILS.float32Concat=function(first, second)
+UTILS.float32Concat = function (first, second)
 {
-    if(!(first instanceof Float32Array))first=new Float32Array(first);
-    if(!(second instanceof Float32Array))second=new Float32Array(second);
+    if (!(first instanceof Float32Array)) first = new Float32Array(first);
+    if (!(second instanceof Float32Array)) second = new Float32Array(second);
 
     var firstLength = first.length,
         result = new Float32Array(firstLength + second.length);
@@ -32,7 +31,7 @@ UTILS.float32Concat=function(first, second)
     result.set(second, firstLength);
 
     return result;
-}
+};
 
 /**
  * randomize order of an array
@@ -42,24 +41,26 @@ UTILS.float32Concat=function(first, second)
  * @return {Array|Float32Array} shuffled array
  * @static
  */
-export const shuffleArray=function(array) {
-    for (var i = array.length - 1; i > 0; i--) {
+export const shuffleArray = function (array)
+{
+    for (var i = array.length - 1; i > 0; i--)
+    {
         var j = Math.floor(Math.seededRandom() * (i + 1));
         var temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
     return array;
-}
+};
 
-const _uuid =function()
+const _uuid = function ()
 {
     var d = new Date().getTime();
-    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c)
+    var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
     {
-        var r = (d + Math.random()*16)%16 | 0;
-        d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        var r = (d + Math.random() * 16) % 16 | 0;
+        d = Math.floor(d / 16);
+        return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
     return uuid;
 };
@@ -74,14 +75,14 @@ export const uuid = _uuid;
 export const generateUUID = _uuid;
 
 /**
- * generate a simple ID 
+ * generate a simple ID
  * @function simpleId
  * @memberof Utils
  * @return {Number} new id
  * @static
  */
-var simpleIdCounter=0;
-export const simpleId=function()
+var simpleIdCounter = 0;
+export const simpleId = function ()
 {
     simpleIdCounter++;
     return simpleIdCounter;
@@ -96,10 +97,10 @@ export const simpleId=function()
  * @return {Number} smoothed value
  * @static
  */
-export const smoothStep=function(perc)
+export const smoothStep = function (perc)
 {
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*(3 - 2*x); // smoothstep
+    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    perc = x * x * (3 - 2 * x); // smoothstep
     return perc;
 };
 
@@ -111,10 +112,10 @@ export const smoothStep=function(perc)
  * @return {Number} smoothed value
  * @static
  */
-export const smootherStep=function(perc)
+export const smootherStep = function (perc)
 {
-    var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    perc= x*x*x*(x*(x*6 - 15) + 10); // smootherstep
+    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
     return perc;
 };
 
@@ -130,42 +131,41 @@ export const smootherStep=function(perc)
  * @return {Number} mapped value
  * @static
  */
-export const map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
+export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
 {
-    if(x>=_oldMax) return _newMax;
-    if(x<=_oldMin) return _newMin;
+    if (x >= _oldMax) return _newMax;
+    if (x <= _oldMin) return _newMin;
 
     var reverseInput = false;
-    var oldMin = Math.min( _oldMin, _oldMax );
-    var oldMax = Math.max( _oldMin, _oldMax );
-    if(oldMin!= _oldMin) reverseInput = true;
+    var oldMin = Math.min(_oldMin, _oldMax);
+    var oldMax = Math.max(_oldMin, _oldMax);
+    if (oldMin != _oldMin) reverseInput = true;
 
     var reverseOutput = false;
-    var newMin = Math.min( _newMin, _newMax );
-    var newMax = Math.max( _newMin, _newMax );
-    if(newMin != _newMin) reverseOutput = true;
+    var newMin = Math.min(_newMin, _newMax);
+    var newMax = Math.max(_newMin, _newMax);
+    if (newMin != _newMin) reverseOutput = true;
 
-    var portion=0;
-    var r=0;
+    var portion = 0;
+    var r = 0;
 
-    if(reverseInput) portion = (oldMax-x)*(newMax-newMin)/(oldMax-oldMin);
-        else portion = (x-oldMin)*(newMax-newMin)/(oldMax-oldMin);
+    if (reverseInput) portion = ((oldMax - x) * (newMax - newMin)) / (oldMax - oldMin);
+    else portion = ((x - oldMin) * (newMax - newMin)) / (oldMax - oldMin);
 
-    if(reverseOutput) r=newMax - portion;
-        else r=portion + newMin;
+    if (reverseOutput) r = newMax - portion;
+    else r = portion + newMin;
 
-    if(!_easing) return r;
-    else
-    if(_easing==1) // smoothstep
+    if (!_easing) return r;
+    if (_easing == 1)
     {
-        x = Math.max(0, Math.min(1, (r-_newMin)/(_newMax-_newMin)));
-        return ( _newMin+x*x*(3 - 2*x)* (_newMax-_newMin) );
-    }
-    else
-    if(_easing==2) // smootherstep
+        // smoothstep
+        x = Math.max(0, Math.min(1, (r - _newMin) / (_newMax - _newMin)));
+        return _newMin + x * x * (3 - 2 * x) * (_newMax - _newMin);
+    } if (_easing == 2)
     {
-        x = Math.max(0, Math.min(1, (r-_newMin)/(_newMax-_newMin)));
-        return ( _newMin+x*x*x*(x*(x*6 - 15) + 10) * (_newMax-_newMin) ) ;
+        // smootherstep
+        x = Math.max(0, Math.min(1, (r - _newMin) / (_newMax - _newMin)));
+        return _newMin + x * x * x * (x * (x * 6 - 15) + 10) * (_newMax - _newMin);
     }
 
     return r;
@@ -173,14 +173,14 @@ export const map=function(x,_oldMin,_oldMax,_newMin,_newMax,_easing)
 
 /**
  * @namespace Math
-  */
+ */
 /**
  * set random seed for seededRandom()
  * @memberof Math
  * @type Number
  * @static
  */
-Math.randomSeed=1;
+Math.randomSeed = 1;
 
 /**
  * generate a seeded random number
@@ -191,9 +191,9 @@ Math.randomSeed=1;
  * @return {Number} random value
  * @static
  */
-Math.seededRandom = function(max, min)
+Math.seededRandom = function (max, min)
 {
-    if(Math.randomSeed===0)Math.randomSeed=Math.random()*999;
+    if (Math.randomSeed === 0) Math.randomSeed = Math.random() * 999;
     max = max || 1;
     min = min || 0;
 
@@ -205,11 +205,11 @@ Math.seededRandom = function(max, min)
 
 // ----------------------------------------------------------------
 
-UTILS.arrayWriteToEnd=function(arr,v)
+UTILS.arrayWriteToEnd = function (arr, v)
 {
-    for(var i=1;i<arr.length;i++)arr[i-1]=arr[i];
-    arr[arr.length-1]=v;
-}
+    for (var i = 1; i < arr.length; i++) arr[i - 1] = arr[i];
+    arr[arr.length - 1] = v;
+};
 
 // ----------------------------------------------------------------
 
@@ -221,10 +221,10 @@ UTILS.arrayWriteToEnd=function(arr,v)
  * @return {Boolean}
  * @static
  */
-UTILS.isNumeric=function(n)
+UTILS.isNumeric = function (n)
 {
     return !isNaN(parseFloat(n)) && isFinite(n);
-}
+};
 
 /**
  * returns true if parameter is array
@@ -234,12 +234,12 @@ UTILS.isNumeric=function(n)
  * @return {Boolean}
  * @static
  */
-UTILS.isArray = function(v)
+UTILS.isArray = function (v)
 {
-    return Object.prototype.toString.call(v) === '[object Array]';
+    return Object.prototype.toString.call(v) === "[object Array]";
 };
 
-/** 
+/**
  * @namespace String
  */
 
@@ -249,7 +249,10 @@ UTILS.isArray = function(v)
  * @memberof String
  * @return {String} string with newline break appended ('\n')
  */
-String.prototype.endl = function(){return this+'\n';};
+String.prototype.endl = function ()
+{
+    return `${this}\n`;
+};
 
 /**
  * return true if string starts with prefix
@@ -258,7 +261,8 @@ String.prototype.endl = function(){return this+'\n';};
  * @param {String} prefix The prefix to check.
  * @return {Boolean}
  */
-String.prototype.startsWith = function(prefix) {
+String.prototype.startsWith = function (prefix)
+{
     return this.indexOf(prefix) === 0;
 };
 
@@ -269,8 +273,9 @@ String.prototype.startsWith = function(prefix) {
  * @param {String} suffix
  * @return {Boolean}
  */
-String.prototype.endsWith = function(suffix) {
-    return this.match(suffix+"$") == suffix;
+String.prototype.endsWith = function (suffix)
+{
+    return this.match(`${suffix}$`) == suffix;
 };
 
 // ----------------------------------------------------------------
@@ -283,85 +288,87 @@ String.prototype.endsWith = function(suffix) {
  * @param {String} url The url to append the cachebuster parameter to.
  * @return {String} url with cachebuster parameter
  */
-export const cacheBust=function(url)
+export const cacheBust = function (url)
 {
-    if(url.indexOf('?')>-1) url+='&'; else url+='?';
-    return url+'cb='+CABLES.uuid();
-}
+    if (url.indexOf("?") > -1) url += "&";
+    else url += "?";
+    return `${url}cb=${CABLES.uuid()}`;
+};
 
-var jsonpCounter=null;
-export const jsonp= function(url,cb) 
+var jsonpCounter = null;
+export const jsonp = function (url, cb)
 {
-    jsonpCounter=jsonpCounter||0;
+    jsonpCounter = jsonpCounter || 0;
     jsonpCounter++;
-    var jsonPID=jsonpCounter;
+    var jsonPID = jsonpCounter;
 
-    console.log('making jsonp request...');
+    console.log("making jsonp request...");
 
-    CABLES["jsonpFunc"+jsonPID]=function(data)
+    CABLES[`jsonpFunc${jsonPID}`] = function (data)
     {
         console.log(data);
         cb(false, data);
     };
 
-    var paramChar='?';
-    if(url.indexOf(paramChar)>-1)paramChar='&';
+    var paramChar = "?";
+    if (url.indexOf(paramChar) > -1) paramChar = "&";
 
-    var s = document.createElement( 'script' );
-    s.setAttribute( 'src', url+paramChar+'callback=CABLES.jsonpFunc'+jsonPID );
+    var s = document.createElement("script");
+    s.setAttribute("src", `${url + paramChar}callback=CABLES.jsonpFunc${jsonPID}`);
     // s.onload=function()
     // {
     // };
-    document.body.appendChild( s );
-
+    document.body.appendChild(s);
 };
 
-export const ajaxSync=function(url,cb,method,post,contenttype)
+export const ajaxSync = function (url, cb, method, post, contenttype)
 {
-    request(
-        {
-            "url":url,
-            "cb":cb,
-            "method":method,
-            "data":post,
-            "contenttype":contenttype,
-            "sync":true
-        });
+    request({
+        url,
+        cb,
+        method,
+        data: post,
+        contenttype,
+        sync: true,
+    });
 };
 
-export const ajax=function(url,cb,method,post,contenttype,jsonp)
+export const ajax = function (url, cb, method, post, contenttype, jsonp)
 {
-    request(
-        {
-            "url":url,
-            "cb":cb,
-            "method":method,
-            "data:":post,
-            "contenttype":contenttype,
-            "sync":false,
-            "jsonp":jsonp
-        });
+    request({
+        url,
+        cb,
+        method,
+        "data:": post,
+        contenttype,
+        sync: false,
+        jsonp,
+    });
 };
 
-export const request=function(options)
+export const request = function (options)
 {
-    if(!options.hasOwnProperty('asynch'))options.asynch=true;
+    if (!options.hasOwnProperty("asynch")) options.asynch = true;
 
     var xhr;
-    try{ xhr = new XMLHttpRequest(); }catch(e){}
+    try
+    {
+        xhr = new XMLHttpRequest();
+    }
+    catch (e) {}
 
-    xhr.onreadystatechange = function()
+    xhr.onreadystatechange = function ()
     {
         if (xhr.readyState != 4) return;
 
-        if(options.cb)
+        if (options.cb)
         {
-            if(xhr.status == 200 || xhr.status == 0) options.cb(false, xhr.responseText,xhr);
-            else options.cb(true, xhr.responseText,xhr);
+            if (xhr.status == 200 || xhr.status == 0) options.cb(false, xhr.responseText, xhr);
+            else options.cb(true, xhr.responseText, xhr);
         }
     };
 
-    xhr.addEventListener("progress", function(ev)
+    xhr.addEventListener("progress", (ev) =>
     {
         // console.log('progress',ev.loaded/1024+' kb');
         // if (ev.lengthComputable)
@@ -371,25 +378,26 @@ export const request=function(options)
         // }
     });
 
-    xhr.open(options.method?options.method.toUpperCase():"GET", options.url, !options.sync);
+    xhr.open(options.method ? options.method.toUpperCase() : "GET", options.url, !options.sync);
 
-    if(!options.post && !options.data)
+    if (!options.post && !options.data)
     {
         xhr.send();
     }
     else
     {
-        xhr.setRequestHeader('Content-type', options.contenttype?options.contenttype:'application/x-www-form-urlencoded');
-        xhr.send(options.data||options.post);
+        xhr.setRequestHeader("Content-type", options.contenttype ? options.contenttype : "application/x-www-form-urlencoded");
+        xhr.send(options.data || options.post);
     }
 };
 
 export { UTILS };
 // ----------------------------------------------------------------
 
-window.performance = (window.performance ||
-{
+window.performance = window.performance || {
     offset: Date.now(),
-    now: function now(){ return Date.now() - this.offset; }
-});
-
+    now: function now()
+    {
+        return Date.now() - this.offset;
+    },
+};

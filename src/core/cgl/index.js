@@ -1,18 +1,26 @@
-import Framebuffer from "./cgl_framebuffer";
-import Framebuffer2, { fbs } from "./cgl_framebuffer2";
+import { Framebuffer } from "./cgl_framebuffer";
+import { fbs, Framebuffer2 } from "./cgl_framebuffer2";
 import Geometry from "./cgl_geom";
 import * as Markers from "./cgl_marker";
 import MatrixStack from "./cgl_matrixstack";
-import Mesh, { MESH } from "./cgl_mesh";
+import { Mesh, MESH } from "./cgl_mesh";
 import extendMeshWithFeedback from "./cgl_mesh_feedback";
-import ShaderLibMods from "./cgl_shader_lib";
-import Uniform from "./cgl_shader_uniform";
+
+
+
+import { Uniform } from "./cgl_shader_uniform";
+import { ShaderLibMods } from "./cgl_shader_lib";
+
 import Shader, * as SHADER_VARS from "./cgl_shader";
 import MESHES from "./cgl_simplerect";
 import Context, * as BLENDS from "./cgl_state";
 import * as Utils from "./cgl_utils";
-import Texture, * as TEXTURE_VARS from "./cgl_texture";
-import TextureEffect from "./cgl_textureeffect";
+import {
+    Texture, tempTexture, tempTextureEmpty, DEFAULT_TEXTURE_SIZE,
+} from "./cgl_texture";
+
+import { TextureEffect } from "./cgl_textureeffect";
+
 import { profileData } from "./cgl_profiledata";
 
 extendMeshWithFeedback(Mesh);
@@ -35,23 +43,15 @@ const CGL = {
     Uniform,
     MESHES,
     Context,
-    ...TEXTURE_VARS,
     Texture,
     TextureEffect,
     ...fbs,
     ...Utils,
-    profileData
-    
+    profileData,
+    tempTexture,
+    tempTextureEmpty,
+    DEFAULT_TEXTURE_SIZE,
 };
 
-console.log("CGL before export", CGL);
-window.CGL=CGL;
-export default CGL;
-
-const obj = { a: 1, b: 2} ;
-const arr = [1, 2];
-const [x, y] = arr;
-
-console.log(x);
-
-const { a: firstObjKeyVal } = x;
+window.CGL = CGL;
+export { CGL };
