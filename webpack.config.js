@@ -17,7 +17,7 @@ module.exports = isProduction =>
             // ...fs.readdirSync('./src/ops/').filter(file => file.match(/.*\.js$/)),
         ],
         // watch: true,
-        devtool: isProduction ? "source-map" : false,
+        devtool: isProduction ? "inline-source-map" : "cheap-module-eval-source-map",
         output: {
             path: path.join(process.cwd(), "dist"),
             // publicPath: `${__dirname}dist/`,
