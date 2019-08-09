@@ -636,3 +636,4 @@ Port.portTypeNumberToString = function (type)
 // var Port = Port; // TODO deprecated.. remove one day...
 
 export default Port;
+export { Port };
