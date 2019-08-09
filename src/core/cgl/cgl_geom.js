@@ -163,18 +163,18 @@ Geometry.prototype.setTexCoords = function (arr)
     else this.texCoords = new Float32Array(arr);
 };
 
-Geometry.prototype.testIndices = function ()
-{
-    var foundError = false;
-    for (var i = 0; i < this.verticesIndices.length; i++)
-    {
-        if (this.verticesIndices[i * 3 + 0] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 1] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 2] >= this._vertices.length / 3)
-        {
-            foundError = true;
-            console.log("index error!");
-        }
-    }
-};
+// Geometry.prototype.testIndices = function ()
+// {
+//     var foundError = false;
+//     for (var i = 0; i < this.verticesIndices.length; i++)
+//     {
+//         if (this.verticesIndices[i * 3 + 0] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 1] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 2] >= this._vertices.length / 3)
+//         {
+//             foundError = true;
+//             console.log("index error!");
+//         }
+//     }
+// };
 
 // deprecated
 Geometry.prototype.calcNormals = function (smooth)
@@ -615,7 +615,7 @@ Geometry.prototype.unIndex = function (reIndex)
 Geometry.prototype.calcBarycentric = function ()
 {
     this.barycentrics.length = this.vertices.length;
-    var i=0;
+    var i = 0;
     for (i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
 
     var count = 0;
@@ -629,6 +629,7 @@ Geometry.prototype.calcBarycentric = function ()
 
 Geometry.prototype.getBounds = function ()
 {
+    var i = 0;
     var bounds = {
         maxX: -Number.MAX_VALUE,
         maxY: -Number.MAX_VALUE,
@@ -637,7 +638,6 @@ Geometry.prototype.getBounds = function ()
         minY: Number.MAX_VALUE,
         minZ: Number.MAX_VALUE,
     };
-    var i = 0;
 
     for (i = 0; i < this.vertices.length; i += 3)
     {
@@ -671,7 +671,7 @@ Geometry.prototype.center = function (x, y, z)
         z = true;
     }
 
-    var i=0;
+    var i = 0;
     const bounds = this.getBounds();
     const offset = [bounds.minX + (bounds.maxX - bounds.minX) / 2, bounds.minY + (bounds.maxY - bounds.minY) / 2, bounds.minZ + (bounds.maxZ - bounds.minZ) / 2];
 

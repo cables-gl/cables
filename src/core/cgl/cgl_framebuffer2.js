@@ -43,9 +43,16 @@ const Framebuffer2 = function(cgl, w, h, options) {
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
     if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
 
-    if (!this._options.hasOwnProperty("multisampling")) {
+    if (!this._options.hasOwnProperty("multisampling"))
+    {
         this._options.multisampling = false;
         this._options.multisamplingSamples = 0;
+    }
+
+    if (this._options.multisamplingSamples)
+    {
+        if (!this._cgl.gl.MAX_SAMPLES) this._options.multisamplingSamples = 0;
+        else this._options.multisamplingSamples = Math.min(this._cgl.gl.getParameter(this._cgl.gl.MAX_SAMPLES), this._options.multisamplingSamples);
     }
 
     if (!this._options.hasOwnProperty("filter")) this._options.filter = Texture.FILTER_LINEAR;
