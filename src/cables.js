@@ -11,6 +11,7 @@ import Requirements from "./core/requirements";
 import GLGUI from "./core/glpatch";
 import Instancing from "./core/instancing";
 import WEBAUDIO from "./core/webaudio";
+import Variable from "./core/sessionvar";
 import Timer, * as TimerUtils from "./core/timer";
 import * as PatchConnections from "./core/patchConnection";
 import Gizmo, * as GizmoUtils from "./core/mod_gizmo";
@@ -70,6 +71,6 @@ export default {
     Timer,
     ...PatchConnections,
     WEBAUDIO,
+    Variable,
     // CONSTANTS,
 };
-

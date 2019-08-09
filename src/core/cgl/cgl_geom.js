@@ -615,8 +615,8 @@ Geometry.prototype.unIndex = function (reIndex)
 Geometry.prototype.calcBarycentric = function ()
 {
     this.barycentrics.length = this.vertices.length;
-
-    for (var i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
+    var i=0;
+    for (i = 0; i < this.vertices.length; i++) this.barycentrics[i] = 0;
 
     var count = 0;
     for (i = 0; i < this.vertices.length; i += 3)
@@ -671,9 +671,9 @@ Geometry.prototype.center = function (x, y, z)
         z = true;
     }
 
-    var bounds = this.getBounds();
-
-    var offset = [bounds.minX + (bounds.maxX - bounds.minX) / 2, bounds.minY + (bounds.maxY - bounds.minY) / 2, bounds.minZ + (bounds.maxZ - bounds.minZ) / 2];
+    var i=0;
+    const bounds = this.getBounds();
+    const offset = [bounds.minX + (bounds.maxX - bounds.minX) / 2, bounds.minY + (bounds.maxY - bounds.minY) / 2, bounds.minZ + (bounds.maxZ - bounds.minZ) / 2];
 
     for (i = 0; i < this.vertices.length; i += 3)
     {
