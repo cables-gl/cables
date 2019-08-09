@@ -15,6 +15,7 @@ import { profileData } from "./cgl_profiledata";
 
 // export { fbs };
 
+
 const Framebuffer2 = function(cgl, w, h, options) {
     this.Framebuffer2DrawTargetsDefault = null;
     this.Framebuffer2BlittingFramebuffer = null;

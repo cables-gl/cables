@@ -3,30 +3,16 @@ const webpack = require("webpack-stream");
 const compiler = require("webpack");
 const webpackConfig = require("./webpack.config");
 
-exports.default = exports.watch = gulp.series(gulp.parallel(_scripts_core, _scripts_core_min), _watch);
+exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreJsMax, taskCoreJsMin), _watch);
 
-exports.build = gulp.parallel(_scripts_core, _scripts_core_min);
+exports.build = gulp.parallel(taskCoreJsMax, taskCoreJsMin);
 
 function _watch()
 {
-    gulp.watch("src/core/**/*", gulp.parallel(_scripts_core, _scripts_core_min));
-
-    // cb();
+    gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
 }
 
-// function _scripts_libs_core()
-// {
-//     return gulp.src(['libs/core/*.js'])
-//         .pipe(sourcemaps.init())
-//         .pipe(concat('libs.core.js'))
-//         .pipe(gulp.dest('dist/js'))
-//         .pipe(rename('libs.core.min.js'))
-//         .pipe(uglify())
-//         .pipe(sourcemaps.write('./'))
-//         .pipe(gulp.dest('dist/js'));
-// }
-
-function _scripts_core()
+function taskCoreJsMax()
 {
     return new Promise((resolve, reject) =>
     {
@@ -49,7 +35,7 @@ function _scripts_core()
                 ),
             )
 
-            .pipe(gulp.dest("../cables_ui/dist/js"))
+            .pipe(gulp.dest("build"))
             .on("error", (err) =>
             {
                 console.error("WEBPACK ERROR", err);
@@ -57,7 +43,7 @@ function _scripts_core()
     });
 }
 
-function _scripts_core_min()
+function taskCoreJsMin()
 {
     return new Promise((resolve, reject) =>
     {
@@ -80,7 +66,7 @@ function _scripts_core_min()
                 ),
             )
 
-            .pipe(gulp.dest("../cables_ui/dist/js"))
+            .pipe(gulp.dest("build"))
             .on("error", (err) =>
             {
                 console.error("WEBPACK ERROR", err);

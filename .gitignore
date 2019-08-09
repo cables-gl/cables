@@ -6,3 +6,4 @@ src/ops/users
 /doc/api_*
 node_modules
 /dist/
+build/

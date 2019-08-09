@@ -19,7 +19,7 @@ module.exports = isProduction => ({
     // watch: true,
     devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
     output: {
-        path: path.join(__dirname, "../cables_ui", "dist", "js"),
+        path: path.join(__dirname, "build"),
         // publicPath: `${__dirname}dist/`,
         filename: isProduction ? "cables.min.js" : "cables.max.js",
         // chunkFilename: '[name].js',
@@ -28,7 +28,7 @@ module.exports = isProduction => ({
         libraryTarget: "var",
         globalObject: "window",
     },
-    // stats: isProduction,
+    stats: isProduction,
     optimization: { minimize: isProduction },
     module: {
         rules: [
