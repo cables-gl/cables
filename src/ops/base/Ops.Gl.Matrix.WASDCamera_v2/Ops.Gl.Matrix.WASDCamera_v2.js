@@ -9,6 +9,7 @@ var speedx=0,speedy=0,speedz=0;
 var movementSpeedFactor = 0.5;
 
 var fly=op.inValueBool("Allow Flying",true);
+var moveSpeed = op.inFloat("Speed",1);
 
 var outPosX=op.outValue("posX");
 var outPosY=op.outValue("posY");
@@ -135,7 +136,7 @@ function calcCameraMovement()
         camMovementZComponent += movementSpeedFactor * (Math.sin(yRotRad));
     }
 
-var mulSpeed=0.5;
+var mulSpeed=0.016;
 
 
     speedx = camMovementXComponent*mulSpeed;
@@ -222,10 +223,10 @@ var lastMove=0;
 function move()
 {
     var timeOffset = window.performance.now()-lastMove;
-
-    posX=posX+speedx;
-    posY=posY+speedy;
-    posZ=posZ+speedz;
+    timeOffset *= moveSpeed.get();
+    posX=posX+speedx * timeOffset;
+    posY=posY+speedy * timeOffset;
+    posZ=posZ+speedz * timeOffset;
 
 
     lastMove = window.performance.now();
@@ -277,4 +278,3 @@ function keyUp(e)
         break;
     }
 }
-
