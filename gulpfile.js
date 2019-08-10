@@ -2,14 +2,30 @@ const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const compiler = require("webpack");
 const webpackConfig = require("./webpack.config");
+const concat = require("gulp-concat");
+const rename = require("gulp-rename");
 
-exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreJsMax, taskCoreJsMin), _watch);
+exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreLibs,taskCoreJsMax, taskCoreJsMin), _watch);
 
-exports.build = gulp.parallel(taskCoreJsMax, taskCoreJsMin);
+exports.build = gulp.parallel(taskCoreLibs,taskCoreJsMax, taskCoreJsMin);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
+    gulp.watch("libs/**/*", gulp.parallel(taskCoreLibs));
+}
+
+function taskCoreLibs()
+{
+    return gulp.src(['libs/*.js'])
+        // .pipe(sourcemaps.init())
+        .pipe(concat('libs.core.js'))
+        .pipe(gulp.dest('build'))
+        .pipe(rename('libs.core.min.js'))
+        // .pipe(uglify())
+        // .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('build'));
+
 }
 
 function taskCoreJsMax()
