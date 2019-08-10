@@ -1,11 +1,11 @@
 const
     exe=op.inTrigger("Exec"),
     inArr=op.inArray("Array3x"),
-    fov=op.inValueFloat("fov"),
-    w=op.inValueFloat("w"),
-    h=op.inValueFloat("h"),
-    px=op.inValueFloat("Pos X"),
-    py=op.inValueFloat("Pos Y"),
+    fov=op.inValueFloat("fov",45),
+    w=op.inValueFloat("w",1),
+    h=op.inValueFloat("h",1),
+    px=op.inValueFloat("Pos X",-0.5),
+    py=op.inValueFloat("Pos Y",-0.5),
     coordmul=op.inValueFloat("mul"),
     outArr=op.outArray("Array2x");
 
@@ -14,17 +14,16 @@ exe.onTriggered=function()
     if(needsUpdate) update();
 };
 
-
 exe.onChange=
-inArr.onChange=
-fov.onChange=
-w.onChange=
-h.onChange=
-px.onChange=
-py.onChange=
-coordmul.onChange=update;
+    inArr.onChange=
+    fov.onChange=
+    w.onChange=
+    h.onChange=
+    px.onChange=
+    py.onChange=
+    coordmul.onChange=update;
 
-
+const cgl=op.patch.cgl;
 
 var needsUpdate=false;
 
@@ -33,7 +32,6 @@ var maxX=-9999999;
 var minY=9999999;
 var maxY=-9999999;
 
-var cgl=op.patch.cgl;
 
 var pos=vec3.create();
 var m=mat4.create();

@@ -64,7 +64,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.WASDCamera2"
+        "name": "Ops.Gl.Matrix.WASDCamera_v2"
     },
     "summary": "simple camera you control with W,A,S,D keys like in a FPS game",
     "docs": {

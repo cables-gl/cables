@@ -7,6 +7,7 @@ const
     rotate=op.inValueSlider("Rotate",0),
     offset=op.inValue("Offset",0),
     smoothed=op.inValueBool("Gradients"),
+    circular=op.inValueBool("Circular"),
     r=op.inValueSlider("r", Math.random()),
     g=op.inValueSlider("g", Math.random()),
     b=op.inValueSlider("b", Math.random()),
@@ -14,11 +15,15 @@ const
 
 r.setUiAttribs({ colorPick: true });
 
-smoothed.onChange=function()
+smoothed.onChange=updateDefines;
+circular.onChange=updateDefines;
+
+function updateDefines()
 {
-    if(smoothed.get())shader.define("STRIPES_SMOOTHED");
-        else shader.removeDefine("STRIPES_SMOOTHED");
-};
+
+    shader.toggleDefine("STRIPES_SMOOTHED",smoothed.get());
+    shader.toggleDefine("CIRCULAR",circular.get());
+}
 
 
 const

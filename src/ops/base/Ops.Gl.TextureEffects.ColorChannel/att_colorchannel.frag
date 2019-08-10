@@ -10,6 +10,10 @@ void main()
        #ifdef MONO
            col.g=col.b=col.r;
        #endif
+       #ifdef ALPHA
+            col.a=col.r;
+       #endif
+
    #endif
 
    #ifdef CHANNEL_G
@@ -17,12 +21,19 @@ void main()
        #ifdef MONO
            col.r=col.b=col.g;
        #endif
+       #ifdef ALPHA
+            col.a=col.g;
+       #endif
+
    #endif
 
    #ifdef CHANNEL_B
        col.b=texture(tex,texCoord).b;
        #ifdef MONO
            col.g=col.r=col.b;
+       #endif
+       #ifdef ALPHA
+            col.a=col.b;
        #endif
    #endif
 

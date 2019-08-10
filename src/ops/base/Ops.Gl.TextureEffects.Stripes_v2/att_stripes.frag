@@ -32,7 +32,14 @@ void main()
     v=uv.y;
     v+=offset;
 
+
+
     float m=mod(v,1.0/num);
+
+    #ifdef CIRCULAR
+        m=mod(length(uv)*1.5,1.0/num);
+    #endif
+
     float rm=width*2.0*1.0/num/2.0;
 
     if(m>rm)

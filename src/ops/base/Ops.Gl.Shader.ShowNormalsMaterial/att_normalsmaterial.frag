@@ -1,16 +1,37 @@
 IN vec3 normal;
 IN vec3 outTangent;
 IN vec3 outBiTangent;
+IN mat4 mMatrix;
 
 void main()
 {
+
+    #ifdef MULMODEL
+        vec4 attr;
+    #endif
+    #ifndef MULMODEL
+        vec3 attr;
+    #endif
+
+
     #ifdef SHOW_NORMALS
-        outColor=vec4(normal.x,normal.y,normal.z,1.0);
+        attr.xyz=normal;
     #endif
     #ifdef SHOW_BITANGENTS
-        outColor=vec4(outBiTangent.x,outBiTangent.y,outBiTangent.z,1.0);
+        attr.xyz=outBiTangent;
     #endif
     #ifdef SHOW_TANGENTS
-        outColor=vec4(outTangent.x,outTangent.y,outTangent.z,1.0);
+        attr.xyz=outTangent;
+    #endif
+
+
+    #ifdef MULMODEL
+        attr*=mMatrix;
+    #endif
+
+    outColor=vec4(attr.x,attr.y,attr.z,1.0);
+
+    #ifdef ABS
+        outColor=abs(outColor);
     #endif
 }

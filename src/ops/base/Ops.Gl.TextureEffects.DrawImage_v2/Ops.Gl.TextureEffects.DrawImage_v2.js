@@ -6,7 +6,7 @@ var image=op.inTexture("image");
 var removeAlphaSrc=op.inValueBool("removeAlphaSrc",false);
 
 var imageAlpha=op.inTexture("imageAlpha");
-var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
+var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance','luminance inv']);
 var invAlphaChannel=op.inValueBool("invert alpha channel");
 
 const inAspect=op.inValueBool("Aspect Ratio",false);
@@ -113,8 +113,8 @@ function updateRemoveAlphaSrc()
 
 alphaSrc.onChange=function()
 {
-    if(alphaSrc.get()=='luminance') shader.define('ALPHA_FROM_LUMINANCE');
-        else shader.removeDefine('ALPHA_FROM_LUMINANCE');
+    shader.toggleDefine('ALPHA_FROM_LUMINANCE',alphaSrc.get()=='luminance');
+    shader.toggleDefine('ALPHA_FROM_INV_UMINANCE',alphaSrc.get()=='luminance_inv');
 };
 
 alphaSrc.set("alpha channel");

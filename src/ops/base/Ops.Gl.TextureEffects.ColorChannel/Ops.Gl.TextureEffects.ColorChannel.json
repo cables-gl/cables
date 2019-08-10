@@ -25,6 +25,11 @@
                 "type": "0",
                 "name": "mono",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Alpha",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
