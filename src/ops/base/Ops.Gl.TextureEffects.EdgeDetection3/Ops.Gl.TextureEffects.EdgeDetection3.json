@@ -1,0 +1,54 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mul Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.EdgeDetectionDev"
+    },
+    "authorName": "pandur",
+    "id": "3cdc351c-8d6e-4d3d-8da0-0777a6062c0d",
+    "created": 1565440211012,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.EdgeDetectionDev renamed to Ops.Gl.TextureEffects.EdgeDetection3",
+            "author": "pandur",
+            "date": 1565509389531
+        }
+    ]
+}

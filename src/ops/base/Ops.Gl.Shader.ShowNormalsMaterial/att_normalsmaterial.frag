@@ -5,14 +5,12 @@ IN mat4 mMatrix;
 
 void main()
 {
-
     #ifdef MULMODEL
         vec4 attr;
     #endif
     #ifndef MULMODEL
         vec3 attr;
     #endif
-
 
     #ifdef SHOW_NORMALS
         attr.xyz=normal;
@@ -24,9 +22,9 @@ void main()
         attr.xyz=outTangent;
     #endif
 
-
     #ifdef MULMODEL
         attr*=mMatrix;
+        attr.xyz=normalize(vec3(attr.x,attr.y,attr.z));
     #endif
 
     outColor=vec4(attr.x,attr.y,attr.z,1.0);
