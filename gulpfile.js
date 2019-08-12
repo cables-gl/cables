@@ -1,13 +1,13 @@
 const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const compiler = require("webpack");
-const webpackConfig = require("./webpack.config");
 const concat = require("gulp-concat");
 const rename = require("gulp-rename");
+const webpackConfig = require("./webpack.config");
 
-exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreLibs,taskCoreJsMax, taskCoreJsMin), _watch);
+exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin), _watch);
 
-exports.build = gulp.parallel(taskCoreLibs,taskCoreJsMax, taskCoreJsMin);
+exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin);
 
 function _watch()
 {
@@ -17,15 +17,17 @@ function _watch()
 
 function taskCoreLibs()
 {
-    return gulp.src(['libs/*.js'])
-        // .pipe(sourcemaps.init())
-        .pipe(concat('libs.core.js'))
-        .pipe(gulp.dest('build'))
-        .pipe(rename('libs.core.min.js'))
-        // .pipe(uglify())
-        // .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('build'));
-
+    return (
+        gulp
+            .src(["libs/*.js"])
+            // .pipe(sourcemaps.init())
+            .pipe(concat("libs.core.js"))
+            .pipe(gulp.dest("build"))
+            .pipe(rename("libs.core.min.js"))
+            // .pipe(uglify())
+            // .pipe(sourcemaps.write('./'))
+            .pipe(gulp.dest("build"))
+    );
 }
 
 function taskCoreJsMax()

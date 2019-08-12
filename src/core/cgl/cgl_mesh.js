@@ -504,24 +504,17 @@ Mesh.prototype.render = function (shader)
     // prim=this._cgl.gl.LINE_STRIP;
     // if(this._bufVerticesIndizes.numItems===0)
     // console.log(this._bufVertexAttrib.numItems);
-
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
     }
     else if (this._bufVerticesIndizes.numItems === 0)
     {
-        this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
+        if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
+        else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
     }
-    else
-    if (this._numInstances === 0)
-    {
-        this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
-    }
-    else
-    {
-        this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
-    }
+    else if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+    else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
 };
 
 Mesh.prototype.setNumInstances = function (n)
@@ -557,7 +550,6 @@ Mesh.prototype.dispose = function ()
 
     this._disposeAttributes();
 };
-
 
 extendMeshWithFeedback(Mesh);
 
