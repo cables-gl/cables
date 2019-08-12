@@ -495,15 +495,7 @@ Mesh.prototype.render = function (shader)
     if (this._glPrimitive !== undefined) prim = this._glPrimitive;
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
-    // console.log(shader.glPrimitive);
-    // if(prim==this._cgl.gl.POINTS) console.log('points');
-    // if(shader.glPrimitive==this._cgl.gl.POINTS) console.log('shader points');
-    // if(shader.glPrimitive==1)prim=this._cgl.gl.POINTS;
-    // if(shader.glPrimitive==2)prim=this._cgl.gl.LINE_STRIP;
-    // if(cgl.points)prim=; // todo this should be in the shader...
-    // prim=this._cgl.gl.LINE_STRIP;
-    // if(this._bufVerticesIndizes.numItems===0)
-    // console.log(this._bufVertexAttrib.numItems);
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
@@ -513,7 +505,8 @@ Mesh.prototype.render = function (shader)
         if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
         else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
     }
-    else if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+    else
+    if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
     else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
 };
 
