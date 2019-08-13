@@ -61,5 +61,12 @@
     "summary": "load multiple texture from filenames given as an array",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.TextureArrayLoader",
+        "Ops.Gl.Texture"
+    ],
+    "youtubeids": []
 }

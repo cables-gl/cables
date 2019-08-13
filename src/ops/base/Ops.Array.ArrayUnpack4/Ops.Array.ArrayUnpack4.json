@@ -71,6 +71,11 @@
             "message": "Ops.Array.ArrayUnpack4x renamed to Ops.Array.ArrayUnpack4",
             "author": "pandur",
             "date": 1561119475404
+        },
+        {
+            "message": "now reports an error if array length is not divisible by 4",
+            "author": "andro",
+            "date": 1565014841078
         }
     ]
 }

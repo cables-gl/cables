@@ -90,5 +90,12 @@
                 "text": "The last image number, e.g. `my_image_0143.jpg` —> `143`"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Texture",
+        "Ops.Gl.TextureArrayLoaderFromArray"
+    ],
+    "youtubeids": []
 }

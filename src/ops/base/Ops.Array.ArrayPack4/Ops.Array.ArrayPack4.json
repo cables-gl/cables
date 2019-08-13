@@ -45,5 +45,12 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "removed total points port",
+            "author": "andro",
+            "date": 1565014651233
+        }
+    ]
 }

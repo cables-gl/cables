@@ -1,5 +1,4 @@
 {
-    "updated": 1519732347802,
     "authorName": "pandur",
     "id": "1feb4565-32c5-4fb9-b869-88502b461256",
     "created": 1519731691788,
@@ -7,7 +6,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Index Position"
+                "name": "Index Position",
+                "subType": "number"
             },
             {
                 "type": "3",
@@ -17,18 +17,21 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "X"
+                "name": "X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y"
+                "name": "Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z"
+                "name": "Z",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Array.Array3xGetValuesInterpolated"
+        "name": "Ops.Array.InterpolateNumbersArray3"
     },
     "summary": "get interpolated values between the indices of an array3x",
     "docs": {
@@ -55,17 +58,25 @@
             }
         ]
     },
-    "youtubeid": "",
     "collections": [
-        "Spline"
+        "Spline",
+        "interpolate"
     ],
     "issues": "",
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Array.InterpolateNumbersArray"
+    ],
     "changelog": [
         {
             "message": "Ops.Array.Array3xGetValuesInterpolated renamed to Ops.Array.InterpolateNumbersArray3",
             "author": "pandur",
             "date": 1560415153313
+        },
+        {
+            "message": "fix : doesn't output NaN when index is larger than array length",
+            "author": "andro",
+            "date": 1565366154404
         }
-    ]
+    ],
+    "youtubeids": []
 }

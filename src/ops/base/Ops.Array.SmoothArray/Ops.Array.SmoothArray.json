@@ -10,6 +10,11 @@
             "message": "Ops.Array.AverageInterpolationArray renamed to Ops.Array.SmoothArray",
             "author": "pandur",
             "date": 1562580268917
+        },
+        {
+            "message": "Now updates parameter names depending on selected mode",
+            "author": "andro",
+            "date": 1565014751787
         }
     ],
     "authorName": "andro",

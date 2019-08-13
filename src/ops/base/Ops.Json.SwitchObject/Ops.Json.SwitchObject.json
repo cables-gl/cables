@@ -64,6 +64,11 @@
             "message": "Ops.Json.ObjectSwitcher renamed to Ops.Json.SwitchObject",
             "author": "pandur",
             "date": 1560335169456
+        },
+        {
+            "message": "Now loads an object on patch load",
+            "author": "andro",
+            "date": 1565014703967
         }
     ],
     "issues": "",
