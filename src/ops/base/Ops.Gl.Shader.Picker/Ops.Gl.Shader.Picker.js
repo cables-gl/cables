@@ -80,8 +80,12 @@ function fixTouchEvent(touchEvent)
     {
         touchEvent.offsetX = touchEvent.pageX - touchEvent.target.offsetLeft;
         touchEvent.offsetY = touchEvent.pageY - touchEvent.target.offsetTop;
-        touchEvent.offsetX*=(window.devicePixelRatio||1);
-        touchEvent.offsetY*=(window.devicePixelRatio||1);
+
+        if(! /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+        {
+            touchEvent.offsetX*=(window.devicePixelRatio||1);
+            touchEvent.offsetY*=(window.devicePixelRatio||1);
+        }
 
         return touchEvent;
     }

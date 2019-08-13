@@ -40,7 +40,9 @@
         "ports": []
     },
     "issues": "",
-    "collections": null,
+    "collections": [
+        "interpolate"
+    ],
     "relatedops": null,
     "youtubeids": [],
     "changelog": [

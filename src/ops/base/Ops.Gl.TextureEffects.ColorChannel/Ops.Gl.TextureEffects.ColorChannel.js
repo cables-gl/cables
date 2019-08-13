@@ -26,8 +26,10 @@ var channelR=op.inValueBool("channelR",true);
 var channelG=op.inValueBool("channelG",false);
 var channelB=op.inValueBool("channelB",false);
 var mono=op.inValueBool("mono",false);
+var alpha=op.inValueBool("Alpha",false);
 
 mono.onChange=
+    alpha.onChange=
     channelR.onChange=
     channelG.onChange=
     channelB.onChange=updateChannels;
@@ -46,4 +48,7 @@ function updateChannels()
 
     if(mono.get()) shader.define('MONO');
         else shader.removeDefine('MONO');
+
+    if(alpha.get()) shader.define('ALPHA');
+        else shader.removeDefine('ALPHA');
 }

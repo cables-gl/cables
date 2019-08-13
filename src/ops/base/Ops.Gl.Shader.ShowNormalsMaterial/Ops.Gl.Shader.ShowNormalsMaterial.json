@@ -8,6 +8,16 @@
             {
                 "type": "5",
                 "name": "Attribute"
+            },
+            {
+                "type": "0",
+                "name": "Absolute",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "World Space",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

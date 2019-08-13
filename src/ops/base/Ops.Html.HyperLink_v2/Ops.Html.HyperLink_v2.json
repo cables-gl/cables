@@ -23,16 +23,24 @@
             {
                 "type": "5",
                 "name": "URL"
+            },
+            {
+                "type": "5",
+                "name": "Target Name"
+            },
+            {
+                "type": "5",
+                "name": "Specs"
             }
         ],
-        "name": "Ops.Html.HyperLink2"
+        "name": "Ops.Html.HyperLink_v2"
     },
     "summary": "Open another website",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeids": []
 }

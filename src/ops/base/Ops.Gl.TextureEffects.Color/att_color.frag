@@ -26,4 +26,6 @@ void main()
     #endif
 
     outColor= cgl_blend(base,col,am);
+    outColor.a*=base.a;
+
 }

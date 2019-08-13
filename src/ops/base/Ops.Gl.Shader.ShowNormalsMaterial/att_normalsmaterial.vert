@@ -4,10 +4,12 @@ IN vec3 attrVertNormal,attrTangent,attrBiTangent;
 OUT vec2 texCoord;
 OUT vec3 normal;
 OUT vec3 outTangent,outBiTangent;
+OUT mat4 mMatrix;
 UNI mat4 projMatrix;
 // UNI mat4 mvMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
+
 
 {{MODULES_HEAD}}
 
@@ -19,7 +21,7 @@ void main()
     vec3 bitangent=attrBiTangent;
 
     vec4 pos=vec4(vPosition,1.0);
-    mat4 mMatrix=modelMatrix;
+    mMatrix=modelMatrix;
 
     {{MODULE_VERTEX_POSITION}}
 
