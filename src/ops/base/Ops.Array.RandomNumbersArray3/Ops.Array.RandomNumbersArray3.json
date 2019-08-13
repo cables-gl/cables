@@ -76,6 +76,14 @@
             {
                 "name": "values",
                 "text": "Array out"
+            },
+            {
+                "name": "Total points",
+                "text": "Total xyz points in array"
+            },
+            {
+                "name": "Array length",
+                "text": "Total length of array"
             }
         ]
     },
@@ -94,6 +102,11 @@
             "message": "Ops.Array.RandomArray3 renamed to Ops.Array.RandomNumbersArray3",
             "author": "pandur",
             "date": 1560416633631
+        },
+        {
+            "message": "Outputs total points and array length",
+            "author": "andro",
+            "date": 1565014968027
         }
     ],
     "issues": "",

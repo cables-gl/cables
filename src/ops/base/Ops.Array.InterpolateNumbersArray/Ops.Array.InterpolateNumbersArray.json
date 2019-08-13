@@ -32,8 +32,12 @@
     },
     "summary": "interpolate between all values of an array",
     "issues": "",
-    "collections": null,
-    "relatedops": null,
+    "collections": [
+        "interpolate"
+    ],
+    "relatedops": [
+        "Ops.Array.InterpolateNumbersArray3"
+    ],
     "youtubeids": [],
     "docs": {
         "ports": [

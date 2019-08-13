@@ -50,11 +50,12 @@
         "name": "Ops.Array.ArrayInterpolateOffset"
     },
     "summary": "interpolate between two arrays, only a few numbers at the same time",
-    "youtubeid": "",
     "collections": [
         "pointArrays"
     ],
-    "relatedops": null,
+    "relatedops": [
+        "interpolate"
+    ],
     "docs": {
         "ports": []
     },
@@ -64,5 +65,7 @@
             "author": "pandur",
             "date": 1560415453416
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

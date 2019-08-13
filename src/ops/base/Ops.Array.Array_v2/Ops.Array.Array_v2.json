@@ -62,6 +62,11 @@
             "message": "changed dropdown to switch",
             "author": "andro",
             "date": 1561108505721
+        },
+        {
+            "message": "Now has array length output port",
+            "author": "andro",
+            "date": 1565014902549
         }
     ]
 }

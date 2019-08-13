@@ -18,7 +18,7 @@ inIndex.onChange=inArr.onChange=function()
 
     if(i<0)return;
 
-    if(i>=arr.length-1)
+    if(i>=arr.length-3)
     {
         outX.set(arr[arr.length-1]);
         outY.set(arr[arr.length-2]);
@@ -34,8 +34,8 @@ inIndex.onChange=inArr.onChange=function()
     var x2=arr[i+3];
     var y2=arr[i+4];
     var z2=arr[i+5];
-    
-    
+
+
     x=x+ (x2 - x) * fr;
     y=y+ (y2 - y) * fr;
     z=z+ (z2 - z) * fr;

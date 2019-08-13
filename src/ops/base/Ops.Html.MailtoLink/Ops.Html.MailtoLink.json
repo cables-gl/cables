@@ -1,0 +1,29 @@
+{
+    "id": "6d03ec3b-f8b2-4544-bdb3-df771e857069",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1565640040770
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1565640164194,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Email"
+            },
+            {
+                "type": "5",
+                "name": "Subject"
+            },
+            {
+                "type": "1",
+                "name": "Execute"
+            }
+        ],
+        "name": "Ops.Html.MailtoLink"
+    }
+}

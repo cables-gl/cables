@@ -66,5 +66,17 @@
     "collections": null,
     "relatedops": [
         "Ops.Array.ArrayBuffer3x"
+    ],
+    "changelog": [
+        {
+            "message": "Now has integer values for array length",
+            "author": "andro",
+            "date": 1565014682135
+        },
+        {
+            "message": "Added reset button to reset array",
+            "author": "andro",
+            "date": 1565014936678
+        }
     ]
 }

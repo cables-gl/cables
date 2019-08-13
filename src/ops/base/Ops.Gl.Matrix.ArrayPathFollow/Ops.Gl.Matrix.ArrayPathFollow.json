@@ -56,7 +56,8 @@
     "created": 1520592871298,
     "collections": [
         "transform",
-        "Spline"
+        "Spline",
+        "interpolate"
     ],
     "relatedops": null,
     "issues": "",

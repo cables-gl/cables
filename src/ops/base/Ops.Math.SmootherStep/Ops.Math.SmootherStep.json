@@ -29,5 +29,14 @@
             }
         ],
         "name": "Ops.Math.SmootherStep"
+    },
+    "issues": "",
+    "collections": [
+        "interpolate"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
