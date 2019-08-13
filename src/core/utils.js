@@ -1,13 +1,8 @@
-// "use strict";
-
 /**
  * @external CABLES
  * @namespace Utils
  */
 
-// var CABLES=CABLES || {};
-// CABLES.UTILS={};
-// CGL=CGL || {};
 
 const UTILS = {};
 /**
@@ -292,7 +287,7 @@ export const cacheBust = function (url)
 {
     if (url.indexOf("?") > -1) url += "&";
     else url += "?";
-    return `${url}cb=${CABLES.uuid()}`;
+    return `${url}cb=${uuid()}`;
 };
 
 var jsonpCounter = null;
@@ -391,7 +386,6 @@ export const request = function (options)
     }
 };
 
-export { UTILS };
 // ----------------------------------------------------------------
 
 window.performance = window.performance || {
@@ -401,3 +395,5 @@ window.performance = window.performance || {
         return Date.now() - this.offset;
     },
 };
+
+export { UTILS };

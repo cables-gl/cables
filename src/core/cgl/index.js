@@ -14,7 +14,7 @@ import {
     isWindows, getWheelSpeed, getWheelDelta, onLoadingAssetsFinished,
 } from "./cgl_utils";
 import {
-    Texture, tempTexture, tempTextureEmpty, DEFAULT_TEXTURE_SIZE,
+    Texture,
 } from "./cgl_texture";
 
 import { TextureEffect } from "./cgl_textureeffect";
@@ -45,9 +45,6 @@ const CGL = Object.assign(
         getWheelDelta,
         onLoadingAssetsFinished,
         profileData,
-        tempTexture,
-        tempTextureEmpty,
-        DEFAULT_TEXTURE_SIZE,
     },
     CONSTANTS.BLEND_MODES,
     CONSTANTS.SHADER,
@@ -56,4 +53,5 @@ const CGL = Object.assign(
 );
 
 window.CGL = CGL;
+
 export { CGL };

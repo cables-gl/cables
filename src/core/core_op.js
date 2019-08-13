@@ -1,7 +1,7 @@
-import { uuid, UTILS } from "./0_utils";
+import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import Port from "./core_port";
-import Link from "./core_link";
+import { Port } from "./core_port";
+import { Link } from "./core_link";
 
 /**
  * op the class of all operators
@@ -24,15 +24,15 @@ import Link from "./core_link";
 var Ops = {};
 // var CABLES=CABLES || {};
 
-export const OP_PORT_TYPE_VALUE = 0;
-export const OP_PORT_TYPE_FUNCTION = 1;
-export const OP_PORT_TYPE_OBJECT = 2;
-export const OP_PORT_TYPE_TEXTURE = 2;
-export const OP_PORT_TYPE_ARRAY = 3;
-export const OP_PORT_TYPE_DYNAMIC = 4;
-export const OP_PORT_TYPE_STRING = 5;
+// export const OP_PORT_TYPE_VALUE = 0;
+// export const OP_PORT_TYPE_FUNCTION = 1;
+// export const OP_PORT_TYPE_OBJECT = 2;
+// export const OP_PORT_TYPE_TEXTURE = 2;
+// export const OP_PORT_TYPE_ARRAY = 3;
+// export const OP_PORT_TYPE_DYNAMIC = 4;
+// export const OP_PORT_TYPE_STRING = 5;
 
-export const OP_VERSION_PREFIX = "_v";
+// export const OP_VERSION_PREFIX = "_v";
 
 const Op = function ()
 {
@@ -55,10 +55,10 @@ const Op = function ()
     {
         this._shortOpName = arguments[1].split(".")[arguments[1].split(".").length - 1];
 
-        if (this._shortOpName.indexOf(OP_VERSION_PREFIX) > 0)
+        if (this._shortOpName.indexOf(CONSTANTS.OP.OP_VERSION_PREFIX) > 0)
         {
-            var n = this._shortOpName.split(OP_VERSION_PREFIX)[1];
-            this._shortOpName = this._shortOpName.substring(0, this._shortOpName.length - (OP_VERSION_PREFIX + n).length);
+            var n = this._shortOpName.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
+            this._shortOpName = this._shortOpName.substring(0, this._shortOpName.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
         }
 
         this.uiAttribs.title = this._shortOpName;
@@ -167,12 +167,12 @@ const Op = function ()
         var i = 0;
         for (i = 0; i < this.portsIn.length; i++)
         {
-            if (this.portsIn[i].type == OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
             if (this.portsIn[i].getName() == "dyn") return true;
         }
         for (i = 0; i < this.portsOut.length; i++)
         {
-            if (this.portsOut[i].type == OP_PORT_TYPE_DYNAMIC) return true;
+            if (this.portsOut[i].type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
             if (this.portsOut[i].getName() == "dyn") return true;
         }
 
@@ -1346,4 +1346,4 @@ Op.isSubpatchOp = function (name)
     return name == "Ops.Ui.Patch" || name == "Ops.Ui.SubPatch";
 };
 
-export default Op;
+export { Op };

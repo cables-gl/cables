@@ -1,5 +1,4 @@
-import { mat4 } from "gl-matrix";
-// var CGL=CGL||{};
+// import { mat4 } from "gl-matrix";
 
 // CGL.MatrixStackOld=function()
 // {

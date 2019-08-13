@@ -1,10 +1,7 @@
 // TODO: remove CABLES.UI
 import { Texture } from "./cgl_texture";
-import { CGL } from "./index";
 import { MESHES } from "./cgl_simplerect";
 import { profileData } from "./cgl_profiledata";
-
-// var CGL=CGL || {};
 
 const TextureEffect = function (cgl, options)
 {
@@ -439,5 +436,4 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
     };
 };
 
-// export default TextureEffect;
 export { TextureEffect };

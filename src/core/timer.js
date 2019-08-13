@@ -212,4 +212,4 @@ Timer.prototype.onTimeChange = function (cb)
     if (cb && typeof cb == "function") this.cbTimeChange.push(cb);
 };
 
-export default Timer;
+export { Timer };

@@ -4,16 +4,21 @@ const webpack = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const glMatrix = require("gl-matrix");
 
-const provideObject = Object.keys(glMatrix).reduce((acc, val) =>
+console.log("GLMATRIX", Object.keys(glMatrix));
+
+const glMatrixClasses = ["glMatrix", "mat2", "mat2d", "mat3", "mat4", "quat", "quat2", "vec2", "vec3", "vec4"];
+
+const provideObject = glMatrixClasses.reduce((acc, val) =>
 {
     acc[val] = ["gl-matrix", val];
     return acc;
 }, {});
 
+console.log("PROID", provideObject)
 module.exports = isProduction => ({
     mode: isProduction ? "production" : "development",
     entry: [
-        path.join(__dirname, "src", "index.js"),
+        path.join(__dirname, "src", "core", "index.js"),
         // ...fs.readdirSync('./src/ops/').filter(file => file.match(/.*\.js$/)),
     ],
     // watch: true,
@@ -32,30 +37,30 @@ module.exports = isProduction => ({
     optimization: { minimize: isProduction },
     module: {
         rules: [
-            {
-                test: /.jsx?$/,
-                include: [path.resolve(__dirname, "src")],
-                exclude: [path.resolve(__dirname, "node_modules")],
-                loader: "babel-loader",
-                query: {
-                    presets: [
-                        [
-                            "@babel/env",
-                            {
-                                targets: {
-                                    edge: "12",
-                                    ie: "11",
-                                    safari: "10",
-                                },
-                            },
-                        ],
-                    ],
-                    plugins: ["@babel/plugin-proposal-object-rest-spread"],
-                },
-            },
+            // {
+            //     test: /.jsx?$/,
+            //     include: [path.resolve(__dirname, "src")],
+            //     exclude: [path.resolve(__dirname, "node_modules")],
+            //     loader: "babel-loader",
+            //     query: {
+            //         presets: [
+            //             [
+            //                 "@babel/env",
+            //                 {
+            //                     targets: {
+            //                         edge: "12",
+            //                         ie: "11",
+            //                         safari: "10",
+            //                     },
+            //                 },
+            //             ],
+            //         ],
+            //         plugins: ["@babel/plugin-proposal-object-rest-spread"],
+            //     },
+            // },
         ],
     },
-    externals: ["CABLES.UI"],
+    externals: ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
     resolve: {
         extensions: [".json", ".js", ".jsx"],
         // alias: {
@@ -69,7 +74,7 @@ module.exports = isProduction => ({
                 analyzerMode: "disabled",
                 generateStatsFile: true,
             }),
-        new webpack.ProvidePlugin(provideObject),
+        // new webpack.ProvidePlugin(provideObject),
         // new webpack.ProvidePlugin({
         //     CGL: "CGL",
         // }),

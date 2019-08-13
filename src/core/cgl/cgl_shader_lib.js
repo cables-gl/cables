@@ -1,7 +1,6 @@
 import { Uniform } from "./cgl_shader_uniform";
 import { Texture } from "./cgl_texture";
 import { TextureEffect } from "./cgl_textureeffect";
-// var CGL = CGL || {};
 
 const ShaderLibMods = {
     "CGL.BLENDMODES": function ()

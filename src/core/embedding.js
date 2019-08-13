@@ -1,8 +1,5 @@
 import Patch from "./core_patch";
-import { generateUUID } from "./0_utils";
-
-// CABLES=CABLES||{};
-// CABLES.EMBED=CABLES.EMBED||{};
+import { generateUUID } from "./utils";
 
 const EMBED = {};
 
@@ -60,4 +57,4 @@ EMBED.addPatch = function (_element, options)
     return canvEl;
 };
 
-export default EMBED;
+export { EMBED };

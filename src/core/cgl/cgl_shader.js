@@ -1,7 +1,7 @@
 // TODO: remove CABLES.UI
 import { ShaderLibMods } from "./cgl_shader_lib";
 import { now } from "../timer";
-import { simpleId, generateUUID } from "../0_utils";
+import { simpleId, generateUUID } from "../utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";

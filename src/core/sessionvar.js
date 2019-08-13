@@ -32,4 +32,4 @@ const Variable = function ()
     };
 };
 
-export default Variable;
+export { Variable };

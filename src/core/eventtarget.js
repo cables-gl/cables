@@ -53,4 +53,4 @@ const EventTarget = function ()
         }
     };
 };
-export default EventTarget;
+export { EventTarget };

@@ -1,4 +1,4 @@
-import { CONSTANTS }from "./constants";
+import { CONSTANTS } from "./constants";
 
 //
 // var CABLES=CABLES || {};
@@ -53,8 +53,7 @@ Link.prototype._setValue = function ()
         {
             this.portIn.set(v);
         }
-        else
-        if (this.portIn.changeAlways) this.portIn.set(v);
+        else if (this.portIn.changeAlways) this.portIn.set(v);
     }
 };
 
@@ -92,12 +91,12 @@ Link.prototype.remove = function ()
         if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());
     }
 
-    if(this.portIn)this.portIn.parent._checkLinksNeededToWork();
-    if(this.portOut)this.portOut.parent._checkLinksNeededToWork();
+    if (this.portIn) this.portIn.parent._checkLinksNeededToWork();
+    if (this.portOut) this.portOut.parent._checkLinksNeededToWork();
 
-    this.portIn=null;
-    this.portOut=null;
-    this.scene=null;
+    this.portIn = null;
+    this.portOut = null;
+    this.scene = null;
 };
 
 /**
@@ -223,4 +222,4 @@ Link.canLink = function (p1, p2)
     return true;
 };
 
-export default Link;
+export { Link };

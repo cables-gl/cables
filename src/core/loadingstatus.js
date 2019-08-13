@@ -1,5 +1,5 @@
-import { generateUUID } from "./0_utils";
-// import { onLoadingAssetsFinished } from "./cgl/cgl_utils";
+import { generateUUID } from "./utils";
+// eslint-disable-next-line
 import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
 
 // "use strict";
@@ -100,4 +100,4 @@ LoadingStatus.prototype.start = function (type, name)
     return id;
 };
 
-export default LoadingStatus;
+export { LoadingStatus };

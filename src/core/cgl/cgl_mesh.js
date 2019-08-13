@@ -547,4 +547,3 @@ Mesh.prototype.dispose = function ()
 extendMeshWithFeedback(Mesh);
 
 export { Mesh, MESH };
-// export default Mesh;

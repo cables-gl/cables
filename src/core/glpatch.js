@@ -363,8 +363,7 @@ GLGUI.GlPatch.prototype.reset=function()
     }
 
     this._rectInstancer.rebuild();
+};
 
-}
 
-
-export default GLGUI;
+export { GLGUI };

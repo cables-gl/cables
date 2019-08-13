@@ -1,7 +1,5 @@
 // todo: needs to be removed...
 
-// var CABLES=CABLES||{};
-
 const Instancing = function ()
 {
     this._loops = [];
@@ -52,4 +50,4 @@ Instancing.prototype.index = function ()
     return this._index;
 };
 
-export default Instancing;
+export { Instancing };

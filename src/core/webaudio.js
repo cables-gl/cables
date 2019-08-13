@@ -1,9 +1,5 @@
-import {
-    OP_PORT_TYPE_VALUE, OP_PORT_TYPE_OBJECT
-} from "./core_op.js";
+import { CONSTANTS } from "./constants";
 
-// CABLES=CABLES||{};
-// CABLES.WEBAUDIO = CABLES.WEBAUDIO || {};
 
 const WEBAUDIO = {};
 
@@ -240,7 +236,7 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     op.webAudio = op.webAudio || {};
     op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
     // var port = op.inObject(portName);
-    var port = op.inDynamic(portName, [OP_PORT_TYPE_VALUE, OP_PORT_TYPE_OBJECT], options, defaultValue);
+    var port = op.inDynamic(portName, [CONSTANTS.OP.OP_PORT_TYPE_VALUE, CONSTANTS.OP.OP_PORT_TYPE_OBJECT], options, defaultValue);
     port.webAudio = {};
     port.webAudio.previousAudioInNode = null;
     port.webAudio.audioNode = audioNode;
@@ -251,9 +247,9 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     //   op.log("onLinkChanged");
     //   if(port.isLinked()) {
     //
-    //       if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_) { // value
+    //       if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_) { // value
     //
-    //       } else if(port.links[0].portOut.type === CABLES.OP_PORT_TYPE_OBJECT) { // object
+    //       } else if(port.links[0].portOut.type === CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT) { // object
     //
     //       }
     //   } else { // unlinked
@@ -479,4 +475,4 @@ WEBAUDIO.isValidToneNote = function (note)
     return true;
 };
 
-export default WEBAUDIO;
+export { WEBAUDIO };

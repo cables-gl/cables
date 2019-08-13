@@ -1,5 +1,5 @@
-import EventTarget from "./0_eventtarget";
-import { generateUUID } from "./0_utils";
+import { EventTarget } from "./eventtarget";
+import { generateUUID } from "./utils";
 import { Anim } from "./anim";
 import { CONSTANTS } from "./constants";
 /**
@@ -12,10 +12,6 @@ import { CONSTANTS } from "./constants";
  * const myPort=op.inString("String Port");
  */
 
-export const PORT_DIR_IN = 0;
-export const PORT_DIR_OUT = 1;
-
-// var CABLES=CABLES || {};
 
 const Port = function (__parent, name, type, uiAttribs)
 {
@@ -633,7 +629,4 @@ Port.portTypeNumberToString = function (type)
     return "unknown";
 };
 
-// var Port = Port; // TODO deprecated.. remove one day...
-
-export default Port;
 export { Port };

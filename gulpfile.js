@@ -34,7 +34,7 @@ function taskCoreJsMax()
 {
     return new Promise((resolve, reject) =>
     {
-        gulp.src(["src/index.js"])
+        gulp.src(["src/core/index.js"])
             .pipe(
                 webpack(
                     {
@@ -65,7 +65,7 @@ function taskCoreJsMin()
 {
     return new Promise((resolve, reject) =>
     {
-        gulp.src(["src/index.js"])
+        gulp.src(["src/core/index.js"])
             .pipe(
                 webpack(
                     {

@@ -1,7 +1,7 @@
-import { vec3, mat4 } from "gl-matrix";
+// import { vec3, mat4 } from "gl-matrix";
 // todo: this is optional?
 
-export const htmlLine = function (parentElement, color)
+const htmlLine = function (parentElement, color)
 {
     var line = null;
 
@@ -17,11 +17,11 @@ export const htmlLine = function (parentElement, color)
                    'position: absolute; '+
                    'top: ' + y + 'px; '+
                    'left: ' + x + 'px; ';
-        line.setAttribute('style', styles);  
+        line.setAttribute('style', styles);
         line.classList.add('gizmoline');
         return line;
     }
-    
+
     function setPos(x, y, length, angle) {
         line.style.width=length + 'px';
         line.style.top= y + 'px';
@@ -384,4 +384,4 @@ Gizmo.prototype.dragger = function (el)
     $(document).bind("mousedown", down);
 };
 
-export default Gizmo;
+export { Gizmo, htmlLine };

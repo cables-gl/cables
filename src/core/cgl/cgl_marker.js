@@ -1,4 +1,4 @@
-import { vec3, mat4 } from "gl-matrix";
+// import { vec3, mat4 } from "gl-matrix";
 import { Geometry } from "./cgl_geom";
 import { Mesh } from "./cgl_mesh";
 import { Shader } from "./cgl_shader";

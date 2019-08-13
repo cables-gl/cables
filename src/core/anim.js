@@ -1,11 +1,7 @@
-import { quat } from "gl-matrix";
-import Port from "./core_port";
+// import { quat } from "gl-matrix";
+import { Port } from "./core_port";
 
-import { CONSTANTS }from "./constants";
-
-// var CABLES=CABLES || {};
-// ANIM=CABLESANIM || {};
-// CABLES.TL=CABLESANIM;
+import { CONSTANTS } from "./constants";
 
 const ANIM = {};
 
@@ -728,7 +724,7 @@ Anim.prototype.easingFromString = function (str)
 Anim.prototype.createPort = function (op, title, cb)
 {
     var port = op.addInPort(
-        new Port(op, title, CABLES.OP_PORT_TYPE_VALUE, {
+        new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
             display: "dropdown",
             values: CONSTANTS.ANIM.EASINGS,
         }),
@@ -779,7 +775,9 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     return q;
 };
 
-export { Anim };
+
 const TL = ANIM;
 TL.Anim = Anim;
+
+export { Anim };
 export { TL };

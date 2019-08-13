@@ -1,5 +1,3 @@
-// var CABLES=CABLES||{};
-
 export const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
 // Use a lookup table to find the index.

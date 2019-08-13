@@ -24,7 +24,7 @@ const Profiler = function ()
             {
                 if (items[currentId])
                 {
-                // console.log(currentStart);
+                    // console.log(currentStart);
                     items[currentId].timeUsed += performance.now() - currentStart;
 
                     if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)
@@ -74,4 +74,4 @@ const Profiler = function ()
     };
 };
 
-export default Profiler;
+export { Profiler };

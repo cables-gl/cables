@@ -1,6 +1,6 @@
-import { vec2, vec3 } from "gl-matrix";
-import { UTILS } from "../0_utils";
-import { b64decTypedArray } from "../0_base64";
+// import { vec2, vec3 } from "gl-matrix";
+import { UTILS } from "../utils";
+import { b64decTypedArray } from "../base64";
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @external CGL

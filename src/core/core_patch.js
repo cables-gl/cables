@@ -1,15 +1,15 @@
-import EventTarget from "./0_eventtarget";
-import { ajax, uuid, ajaxSync } from "./0_utils";
-import LoadingStatus from "./loadingstatus";
-import Instancing from "./instancing";
-import Timer from "./timer";
-import Link from "./core_link";
-import Profiler from "./core_profiler";
+import { EventTarget } from "./eventtarget";
+import { ajax, uuid, ajaxSync } from "./utils";
+import { LoadingStatus } from "./loadingstatus";
+import { Instancing } from "./instancing";
+import { Timer } from "./timer";
+import { Link } from "./core_link";
+import { Profiler } from "./core_profiler";
 import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
-import { OP_PORT_TYPE_TEXTURE } from "./core_op";
-import Requirements from "./requirements";
-import { CGL } from "./cgl";
+import { CONSTANTS } from "./constants";
+// import { CONSTANTS.OP.OP_PORT_TYPE_TEXTURE } from "./core_op";
+import { Requirements } from "./requirements";
 
 
 
@@ -876,7 +876,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 var port = op.getPort(objPort.name);
 
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
-                if (port && objPort.value !== undefined && port.type != OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
+                if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
                 if (port && objPort && objPort.anim)
                 {
@@ -892,7 +892,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             for (var ipo in opData.portsOut)
             {
                 var port2 = op.getPort(opData.portsOut[ipo].name);
-                if (port2 && port2.type != OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
+                if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
                 {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
                 }
