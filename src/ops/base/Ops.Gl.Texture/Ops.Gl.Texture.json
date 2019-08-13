@@ -98,5 +98,14 @@
                 "text": "true if the image ist still loading"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.TextureArrayLoader",
+        "Ops.Gl.TextureArrayLoaderFromArray",
+        "Ops.Gl.Textures.VideoTexture",
+        "Ops.Gl.Textures.TextureSVG"
+    ],
+    "youtubeids": []
 }

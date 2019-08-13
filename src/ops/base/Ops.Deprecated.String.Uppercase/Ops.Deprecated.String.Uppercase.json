@@ -1,3 +1,22 @@
 {
-    "id": "f344c48e-1647-4508-9eb7-3a1c6ad6cb81"
+    "id": "f344c48e-1647-4508-9eb7-3a1c6ad6cb81",
+    "authorName": "chunna",
+    "created": 1565654380180,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Deprecated.String.Uppercase"
+    }
 }

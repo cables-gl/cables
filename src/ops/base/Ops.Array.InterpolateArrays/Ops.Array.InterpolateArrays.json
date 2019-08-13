@@ -64,9 +64,10 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "interpolate"
+    ],
     "relatedops": null,
     "changelog": [
         {
@@ -74,5 +75,6 @@
             "author": "pandur",
             "date": 1560415284531
         }
-    ]
+    ],
+    "youtubeids": []
 }

@@ -41,6 +41,11 @@
             "message": "Ops.Array.Array2xTo3x renamed to Ops.Array.Array2To3",
             "author": "pandur",
             "date": 1560332616585
+        },
+        {
+            "message": "Now reports an error if array length is not divisible by 2",
+            "author": "andro",
+            "date": 1565014778244
         }
     ],
     "issues": "",

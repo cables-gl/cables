@@ -2,6 +2,9 @@ IN vec3 normal;
 IN vec3 outTangent;
 IN vec3 outBiTangent;
 IN mat4 mMatrix;
+IN vec2 texCoord;
+
+{{MODULES_HEAD}}
 
 void main()
 {
@@ -27,9 +30,13 @@ void main()
         attr.xyz=normalize(vec3(attr.x,attr.y,attr.z));
     #endif
 
-    outColor=vec4(attr.x,attr.y,attr.z,1.0);
+    vec4 col=vec4(attr.x,attr.y,attr.z,1.0);
 
     #ifdef ABS
-        outColor=abs(outColor);
+        col=abs(col);
     #endif
+
+    {{MODULE_COLOR}}
+
+    outColor=col;
 }

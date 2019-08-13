@@ -1,4 +1,14 @@
 {
+    "id": "3cdc351c-8d6e-4d3d-8da0-0777a6062c0d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1565702490013
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1565702539095,
     "layout": {
         "portsIn": [
             {
@@ -39,16 +49,6 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.EdgeDetectionDev"
-    },
-    "authorName": "pandur",
-    "id": "3cdc351c-8d6e-4d3d-8da0-0777a6062c0d",
-    "created": 1565440211012,
-    "changelog": [
-        {
-            "message": "Ops.User.pandur.EdgeDetectionDev renamed to Ops.Gl.TextureEffects.EdgeDetection3",
-            "author": "pandur",
-            "date": 1565509389531
-        }
-    ]
+        "name": "Ops.Gl.TextureEffects.EdgeDetection3"
+    }
 }
