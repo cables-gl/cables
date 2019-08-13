@@ -107,6 +107,11 @@
             "message": "added - scale array now works on XYZ",
             "author": "andro",
             "date": 1559115622556
+        },
+        {
+            "message": "Added trigger out port",
+            "author": "andro",
+            "date": 1565622341334
         }
     ]
 }

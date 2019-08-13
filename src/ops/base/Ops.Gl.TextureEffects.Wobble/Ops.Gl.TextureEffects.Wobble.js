@@ -7,6 +7,7 @@ const
     repeatX=op.inValue("RepeatX",11),
     repeatY=op.inValue("RepeatY",11),
     mul=op.inValue("Multiply",0.01),
+    maskTex = op.inTexture("Mask"),
 
     trigger=op.outTrigger("Trigger");
 
@@ -23,6 +24,12 @@ const speedYUniform=new CGL.Uniform(shader,'f','speedY',speedY);
 const repeatXUniform=new CGL.Uniform(shader,'f','repeatX',repeatX);
 const repeatYUniform=new CGL.Uniform(shader,'f','repeatY',repeatY);
 const mulUniform=new CGL.Uniform(shader,'f','mul',mul);
+const maskUniform=new CGL.Uniform(shader,'t','texMask',1);
+
+maskTex.onChange = function()
+{
+    shader.toggleDefine('MASK',maskTex.isLinked());
+};
 
 render.onTriggered=function()
 {
@@ -32,6 +39,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    if(maskTex.get()) cgl.setTexture(1, maskTex.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();

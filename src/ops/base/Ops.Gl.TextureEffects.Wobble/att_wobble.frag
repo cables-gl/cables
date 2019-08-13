@@ -1,5 +1,6 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+UNI sampler2D texMask;
 UNI float time;
 UNI float speedX;
 UNI float speedY;
@@ -13,7 +14,12 @@ void main()
 {
     vec4 col=vec4(1.0,0.0,0.0,1.0);
 
-    vec2 tc = texCoord+cos( (time*vec2(speedX, speedY) + vec2(texCoord.s*repeatX,texCoord.t*repeatY)))*mul;
+float mult=mul;
+#ifdef MASK
+    mult*=texture(texMask,texCoord).r;
+#endif
+
+    vec2 tc = texCoord + cos( (time*vec2(speedX, speedY) + vec2(texCoord.s*repeatX,texCoord.t*repeatY)))*mult;
 
     col=texture(tex,tc);
 

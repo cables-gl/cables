@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1552591453971
+        },
+        {
+            "message": "added mask texture input",
+            "author": "pandur",
+            "date": 1565603054167
         }
     ],
     "authorName": "pandur",
@@ -44,6 +49,10 @@
                 "type": "0",
                 "name": "Multiply",
                 "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Mask"
             }
         ],
         "portsOut": [
