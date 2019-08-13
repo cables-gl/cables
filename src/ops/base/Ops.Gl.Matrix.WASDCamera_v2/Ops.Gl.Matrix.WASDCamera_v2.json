@@ -13,6 +13,11 @@
                 "type": "0",
                 "name": "Allow Flying",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -64,10 +69,17 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.WASDCamera2"
+        "name": "Ops.Gl.Matrix.WASDCamera_v2"
     },
     "summary": "simple camera you control with W,A,S,D keys like in a FPS game",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Added speed control for camera speed",
+            "author": "cables",
+            "date": 1565358593987
+        }
+    ]
 }
