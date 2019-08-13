@@ -17,7 +17,9 @@ update();
 
 function update()
 {
-    const num=inNum.get()*3;
+    var num=inNum.get()*3;
+
+    if(num<0)num=0;
     if(arr.length!=num) arr.length=num;
 
     const x=inX.get();

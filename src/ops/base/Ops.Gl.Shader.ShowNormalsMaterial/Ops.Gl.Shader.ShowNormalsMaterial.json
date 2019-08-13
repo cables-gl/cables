@@ -8,6 +8,16 @@
             {
                 "type": "5",
                 "name": "Attribute"
+            },
+            {
+                "type": "0",
+                "name": "Absolute",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "World Space",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -28,5 +38,17 @@
     "summary": "render mesh normals as colors",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "added worldspace option ",
+            "author": "pandur",
+            "date": 1565466494033
+        },
+        {
+            "message": "added absolute number option",
+            "author": "pandur",
+            "date": 1565466507120
+        }
+    ]
 }

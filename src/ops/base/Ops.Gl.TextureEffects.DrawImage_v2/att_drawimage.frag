@@ -67,6 +67,11 @@ void main()
                 colImgAlphaAlpha=(gray.r+gray.g+gray.b)/3.0;
             #endif
 
+            #ifdef ALPHA_FROM_INV_UMINANCE
+                vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), colImgAlpha.rgb ));
+                colImgAlphaAlpha=1.0-(gray.r+gray.g+gray.b)/3.0;
+            #endif
+
             blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
         #endif
     #endif

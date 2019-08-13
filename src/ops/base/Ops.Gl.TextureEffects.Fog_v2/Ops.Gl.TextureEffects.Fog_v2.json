@@ -1,0 +1,97 @@
+{
+    "id": "6133aaa3-016d-4679-861f-10a42aa2dfb4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1565342193929
+        }
+    ],
+    "authorName": "andro",
+    "created": 1565342211394,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "depth texture"
+            },
+            {
+                "type": "2",
+                "name": "Color gradient"
+            },
+            {
+                "type": "0",
+                "name": "Frustum near",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frustum far",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fogStart",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fogEnd",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "density",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fog r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fog g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fog b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fog a",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "invert direction",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Fog_v2"
+    }
+}
