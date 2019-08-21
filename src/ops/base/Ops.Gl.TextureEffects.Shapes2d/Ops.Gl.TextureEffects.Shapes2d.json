@@ -1,0 +1,114 @@
+{
+    "id": "5858bc92-3af6-45ad-8c3c-496880249b80",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1566314509290
+        }
+    ],
+    "authorName": "cables",
+    "created": 1566314545325,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Shape",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Mirror X",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Mirror Y",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fillShape",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Line thickness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Shapes2d"
+    }
+}
