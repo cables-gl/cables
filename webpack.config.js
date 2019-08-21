@@ -4,8 +4,6 @@ const webpack = require("webpack");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const glMatrix = require("gl-matrix");
 
-console.log("GLMATRIX", Object.keys(glMatrix));
-
 const glMatrixClasses = ["glMatrix", "mat2", "mat2d", "mat3", "mat4", "quat", "quat2", "vec2", "vec3", "vec4"];
 
 const provideObject = glMatrixClasses.reduce((acc, val) =>
@@ -14,7 +12,6 @@ const provideObject = glMatrixClasses.reduce((acc, val) =>
     return acc;
 }, {});
 
-console.log("PROID", provideObject)
 module.exports = isProduction => ({
     mode: isProduction ? "production" : "development",
     entry: [
