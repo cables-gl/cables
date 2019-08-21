@@ -2,10 +2,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "learn"
-            },
-            {
                 "type": "0",
                 "name": "key code",
                 "subType": "integer"
@@ -29,6 +25,10 @@
                 "type": "0",
                 "name": "Prevent Default",
                 "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "learn"
             }
         ],
         "portsOut": [

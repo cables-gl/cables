@@ -1,0 +1,1 @@
+For target name and spec options see: https://www.w3schools.com/jsref/met_win_open.asp

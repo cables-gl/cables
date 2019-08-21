@@ -1,0 +1,32 @@
+{
+    "id": "3e761540-3648-45f8-ae47-8fad9ff95244",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1566058252402
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1566058393799,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Num Lines",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.LimitLineBreaks"
+    }
+}

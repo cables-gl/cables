@@ -16,6 +16,8 @@ var cgl=op.patch.cgl;
 var textureSize=2048;
 var fontLoaded=false;
 
+const BIASX=17;
+
 align.onChange=generateMesh;
 str.onChange=generateMesh;
 
@@ -331,7 +333,7 @@ function printChars(fontSize,simulate)
             ctx.fillText(chStr, posx, posy+fontSize);
         }
 
-        posx+=chWidth+12;
+        posx+=chWidth+BIASX;
     }
 
     if(posy>textureSize-lineHeight)
