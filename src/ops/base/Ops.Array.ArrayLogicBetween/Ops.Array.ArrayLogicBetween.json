@@ -1,0 +1,42 @@
+{
+    "id": "b6252a44-01aa-4434-815a-74595af6e77f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1565945255326
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1565945257886,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pass Value",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayLogicBetween"
+    }
+}

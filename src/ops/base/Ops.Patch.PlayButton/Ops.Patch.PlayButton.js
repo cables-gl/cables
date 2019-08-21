@@ -1,47 +1,67 @@
 const
     inExec=op.inTrigger("Trigger"),
     inIfSuspended=op.inValueBool("Only if Audio Suspended"),
+    inReset=op.inTriggerButton("Reset"),
     outNext=op.outTrigger("Next"),
     outState=op.outString("Audiocontext State"),
     outClicked=op.outValueBool("Clicked");
 
-var wasClicked=false;
-const ele=document.createElement("div");
-const elePlay=document.createElement("div");
-const canvas = op.patch.cgl.canvas.parentElement;
-
 op.toWorkPortsNeedToBeLinked(inExec);
 
-ele.style.width="100px";
-ele.style.height="100px";
-ele.style.left="50%";
-ele.style.top="50%";
-ele.style['border-radius']="50px";
-ele.style['margin-left']="-50px";
-ele.style['margin-top']="-50px";
-ele.style.position="absolute";
-ele.style.cursor="pointer";
-ele.style.opacity=0.7;
-ele.style['z-index']=999999;
-ele.style['background-color']="rgba(55,55,55)";
+const canvas = op.patch.cgl.canvas.parentElement;
+var wasClicked=false;
+var ele=null;
+var elePlay=null;
+createElements();
 
-elePlay.style["border-style"]="solid";
-elePlay.style["border-color"]="transparent transparent transparent #ccc";
-elePlay.style["box-sizing"]="border-box";
-elePlay.style.width="50px";
-elePlay.style.height="50px";
-elePlay.style['margin-top']="15px";
-elePlay.style['margin-left']="33px";
-elePlay.style["border-width"]="35px 0px 35px 50px";
-elePlay.style['pointer-events']="none";
+function createElements()
+{
+    if(elePlay) elePlay.remove();
+    if(ele) ele.remove();
 
-canvas.appendChild(ele);
-ele.appendChild(elePlay);
-ele.addEventListener('mouseenter', hover);
-ele.addEventListener('mouseleave', hoverOut);
-ele.addEventListener('click', clicked);
-ele.addEventListener('touchStart', clicked);
-op.onDelete=removeElements;
+    ele=document.createElement("div");
+    elePlay=document.createElement("div");
+
+
+    ele.style.width="100px";
+    ele.style.height="100px";
+    ele.style.left="50%";
+    ele.style.top="25%";
+    ele.style['border-radius']="50px";
+    ele.style['margin-left']="-50px";
+    ele.style['margin-top']="-50px";
+    ele.style.position="absolute";
+    ele.style.cursor="pointer";
+    ele.style.opacity=0.7;
+    ele.style['z-index']=999999;
+    ele.style['background-color']="rgba(55,55,55)";
+
+    elePlay.style["border-style"]="solid";
+    elePlay.style["border-color"]="transparent transparent transparent #ccc";
+    elePlay.style["box-sizing"]="border-box";
+    elePlay.style.width="50px";
+    elePlay.style.height="50px";
+    elePlay.style['margin-top']="15px";
+    elePlay.style['margin-left']="33px";
+    elePlay.style["border-width"]="35px 0px 35px 50px";
+    elePlay.style['pointer-events']="none";
+
+    canvas.appendChild(ele);
+    ele.appendChild(elePlay);
+    ele.addEventListener('mouseenter', hover);
+    ele.addEventListener('mouseleave', hoverOut);
+    ele.addEventListener('click', clicked);
+    ele.addEventListener('touchStart', clicked);
+    op.onDelete=removeElements;
+}
+
+inReset.onTriggered=function()
+{
+    createElements();
+    wasClicked=false;
+    outClicked.set(wasClicked);
+
+};
 
 inExec.onTriggered=function()
 {
@@ -71,10 +91,10 @@ function removeElements()
 
 function hoverOut()
 {
-    ele.style.opacity=0.7;
+    if(ele) ele.style.opacity=0.7;
 }
 
 function hover()
 {
-    ele.style.opacity=1.0;
+    if(ele) ele.style.opacity=1.0;
 }

@@ -1,7 +1,14 @@
 {
+    "id": "81f910ec-a11c-4bee-bd63-8ae036632d7d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1565935788235
+        }
+    ],
     "authorName": "pandur",
-    "id": "3353effa-851f-4c0f-bace-ba5e2e82ae49",
-    "created": 1517222182124,
+    "created": 1565935822451,
     "layout": {
         "portsIn": [
             {
@@ -41,33 +48,24 @@
         ],
         "portsOut": [
             {
-                "type": "1",
-                "name": "Next"
+                "type": "3",
+                "name": "Positions"
+            },
+            {
+                "type": "3",
+                "name": "Scalings"
             },
             {
                 "type": "0",
-                "name": "Index",
+                "name": "Array Length",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "depth",
+                "name": "Total Points",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Matrix.RandomGridPlacement"
-    },
-    "summary": "place random objects on a grid",
-    "docs": {
-        "ports": [
-            {
-                "name": "Possibility",
-                "text": "Propability to go into a deeper level"
-            }
-        ]
-    },
-    "issues": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": []
+        "name": "Ops.Gl.Matrix.RandomGridPlacementArrays"
+    }
 }

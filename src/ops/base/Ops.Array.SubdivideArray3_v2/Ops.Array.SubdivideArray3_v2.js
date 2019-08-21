@@ -42,7 +42,7 @@ function calc()
         const newLen=(inPoints.length-3)*subd+3;
         if(newLen!=arr.length)
         {
-            op.log("resize subdiv arr");
+            // op.log("resize subdiv arr");
             arr.length=newLen;
         }
 

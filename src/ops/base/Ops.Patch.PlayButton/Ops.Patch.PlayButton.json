@@ -12,6 +12,10 @@
                 "type": "0",
                 "name": "Only if Audio Suspended",
                 "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [

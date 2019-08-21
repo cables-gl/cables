@@ -1,22 +1,40 @@
 const
     exe=op.inTrigger("Exe"),
     maxDepth=op.inValue("max Depth",4),
-    deeper=op.inValueSlider("Possibility"),
+    deeper=op.inValueSlider("Possibility",0.5),
     seed=op.inValue("Seed",5711),
     inScale=op.inValueSlider("Scale",1),
     width=op.inValue("Width",4),
     height=op.inValue("Height",3),
-    next=op.outTrigger("Next"),
-    outIndex=op.outValue("Index"),
-    outDepth=op.outValue("depth");
+    outPosArr=op.outArray("Positions"),
+    outScaleArr=op.outArray("Scalings"),
+    outArrayLength=op.outNumber("Array Length"),
+    outArrayPoints=op.outNumber("Total Points");
 
 const cgl=op.patch.cgl;
+var needsChange=true ;
 var globalScale=1;
 var vPos=vec3.create();
 var vScale=vec3.create();
 var hhalf=0;
 var whalf=0;
 var index=0;
+var arrPos=[];
+var arrScale=[];
+
+var count=0;
+
+
+maxDepth.onChange=
+    deeper.onChange=
+    seed.onChange=
+    inScale.onChange=
+    width.onChange=
+    height.onChange=
+    function()
+    {
+        needsChange=true;
+    };
 
 function drawSquare(x,y,depth,scale)
 {
@@ -41,28 +59,42 @@ function drawSquare(x,y,depth,scale)
                     y+yy-scale/4,
                     depth,
                     scale/2*globalScale);
+
             }
         }
     }
     else
     {
-        cgl.pushModelMatrix();
+        // cgl.pushModelMatrix();
         vec3.set(vScale,scale,scale,scale);
         vec3.set(vPos,x-whalf+0.5,y-hhalf+0.5,0);
         index++;
-        outIndex.set(index);
-        outDepth.set(depth);
+        // outIndex.set(index);
+        // outDepth.set(depth);
 
-        mat4.translate(cgl.mMatrix,cgl.mMatrix,vPos);
-        mat4.scale(cgl.mMatrix,cgl.mMatrix,vScale);
-        next.trigger();
+        // mat4.translate(cgl.mMatrix,cgl.mMatrix,vPos);
+        // mat4.scale(cgl.mMatrix,cgl.mMatrix,vScale);
 
-        cgl.popModelMatrix();
+        arrPos[count*3+0]=vPos[0];
+        arrPos[count*3+1]=vPos[1];
+        arrPos[count*3+2]=vPos[2];
+
+        arrScale[count*3+0]=vScale[0];
+        arrScale[count*3+1]=vScale[1];
+        arrScale[count*3+2]=vScale[2];
+
+        count++;
+        // next.trigger();
+
+        // cgl.popModelMatrix();
     }
 }
 
 exe.onTriggered=function()
 {
+    if(!needsChange)return;
+
+    needsChange=false;
     index=0;
     Math.randomSeed=seed.get();
 
@@ -70,6 +102,10 @@ exe.onTriggered=function()
     hhalf=height.get()/2;
 
     globalScale=inScale.get();
+
+    arrPos.length=0;
+    arrScale.length=0;
+    count=0;
 
     for(var x=0;x<width.get();x++)
     {
@@ -80,4 +116,23 @@ exe.onTriggered=function()
         }
     }
 
+
+    outArrayLength.set(arrPos.length);
+    outArrayPoints.set(arrPos.length/3);
+
+    outPosArr.set(null);
+    outPosArr.set(arrPos);
+    outScaleArr.set(null);
+    outScaleArr.set(arrScale);
+
+
+
 };
+
+
+
+
+
+
+
+

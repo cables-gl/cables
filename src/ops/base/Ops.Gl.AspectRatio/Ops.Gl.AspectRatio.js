@@ -109,12 +109,14 @@ render.onTriggered=function()
     // }
 
     resize();
-    x=Math.round(x);
-    y=Math.round(y);
-    w=Math.round(w+0.5);
-    h=Math.round(h+0.5);
+    x=Math.ceil(x);
+    y=Math.ceil(y);
+    w=Math.ceil(w);
+    h=Math.ceil(h);
 
     cgl.setViewPort(x,y,w,h);
+
+
 
     mat4.perspective(cgl.pMatrix,45, ratio, 0.1, 1100.0);
 

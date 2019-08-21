@@ -53,6 +53,29 @@
     },
     "summary": "load a 3d scene, .fbx, .dae, collada etc.",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in"
+            },
+            {
+                "name": "file",
+                "text": "File to convert"
+            },
+            {
+                "name": "Create Nodes",
+                "text": "Clicking this creates a subpatch with nodes for the whole scene"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "iv8ZXqEWnqw"
+    ]
 }

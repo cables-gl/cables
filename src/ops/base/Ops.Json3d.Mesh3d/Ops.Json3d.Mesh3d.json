@@ -80,5 +80,64 @@
             "author": "pandur",
             "date": 1563186029634
         }
-    ]
+    ],
+    "summary": "Load a 3D mesh - model into a scene",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "iv8ZXqEWnqw"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "file",
+                "text": "Click to load a file"
+            },
+            {
+                "name": "Mesh Index",
+                "text": "Pick which mesh is loaded with multiple meshes in one file"
+            },
+            {
+                "name": "Calculate Normals",
+                "text": "Mode to select if normals are calculated or not"
+            },
+            {
+                "name": "Resize",
+                "text": "Normalizes the size of a mesh to 1"
+            },
+            {
+                "name": "New Size",
+                "text": "Resize normalized mesh"
+            },
+            {
+                "name": "Center",
+                "text": "Centers object and overrides objects original center of origin"
+            },
+            {
+                "name": "Merge All",
+                "text": "Shows all meshes at once"
+            },
+            {
+                "name": "Draw",
+                "text": "Enables or disables rendering of the model."
+            },
+            {
+                "name": "trigger",
+                "text": "Next trigger"
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry output"
+            },
+            {
+                "name": "Scaling",
+                "text": "Scaling applied to mesh to normalize it with Resize"
+            }
+        ]
+    }
 }

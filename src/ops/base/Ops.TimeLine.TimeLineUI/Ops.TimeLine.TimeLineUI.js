@@ -84,7 +84,7 @@ function updatePlayButton()
     }
     else
     {
-        playButton.innerHTML='play';        
+        playButton.innerHTML='play';
     }
 }
 
@@ -119,14 +119,14 @@ var lasttime=-1;
 
 function updateTime()
 {
-    
+
     if(CABLES.GUI && window.gui)
     {
         var p=op.patch.timer.getTime()/gui.timeLine().getTimeLineLength();
         timeline.style.width=(p*100)+'%';
     }
-    
-    var t=Math.round(op.patch.timer.getTime());
+
+    var t=Math.floor(op.patch.timer.getTime());
     if(t!=lasttime)
     {
         time.innerHTML=t;
