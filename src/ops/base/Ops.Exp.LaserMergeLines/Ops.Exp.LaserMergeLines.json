@@ -19,6 +19,26 @@
             },
             {
                 "type": "0",
+                "name": "Limit",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "r",
                 "subType": "number"
             },
@@ -31,9 +51,21 @@
                 "type": "0",
                 "name": "b",
                 "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Merge Points"
+            },
+            {
+                "type": "3",
+                "name": "Merge Colors"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "3",
                 "name": "Points"
