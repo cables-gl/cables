@@ -42,7 +42,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this.type = type || CONSTANTS.OP.OP_PORT_TYPE_VALUE;
     this.uiAttribs = uiAttribs || {};
     this.anim = null;
-    var oldAnimVal = -5711;
+    this._oldAnimVal = -5711;
     this.defaultValue = null;
 
     this._uiActiveState = true;
@@ -165,9 +165,9 @@ Port.prototype.get = function ()
         this._lastAnimFrame = this.parent.patch.getFrameNum();
         this.value = this.anim.getValue(this.parent.patch.timer.getTime());
 
-        // if(oldAnimVal!=this.value)
+        // if(this._oldAnimVal!=this.value)
         {
-            oldAnimVal = this.value;
+            this._oldAnimVal = this.value;
             this.forceChange();
         }
     }
@@ -232,12 +232,12 @@ Port.prototype.updateAnim = function ()
     {
         this.value = this.get();
 
-        if (oldAnimVal != this.value || this.changeAlways)
+        if (this._oldAnimVal != this.value || this.changeAlways)
         {
-            oldAnimVal = this.value;
+            this._oldAnimVal = this.value;
             this.forceChange();
         }
-        oldAnimVal = this.value;
+        this._oldAnimVal = this.value;
     }
 };
 
