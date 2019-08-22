@@ -3,7 +3,6 @@
  * @namespace Utils
  */
 
-
 const UTILS = {};
 /**
  * Merge two Float32Arrays.
@@ -156,7 +155,8 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
         // smoothstep
         x = Math.max(0, Math.min(1, (r - _newMin) / (_newMax - _newMin)));
         return _newMin + x * x * (3 - 2 * x) * (_newMax - _newMin);
-    } if (_easing == 2)
+    }
+    if (_easing == 2)
     {
         // smootherstep
         x = Math.max(0, Math.min(1, (r - _newMin) / (_newMax - _newMin)));
@@ -246,7 +246,7 @@ UTILS.isArray = function (v)
  */
 String.prototype.endl = function ()
 {
-    return `${this}\n`;
+    return this + "\n";
 };
 
 /**
@@ -270,7 +270,7 @@ String.prototype.startsWith = function (prefix)
  */
 String.prototype.endsWith = function (suffix)
 {
-    return this.match(`${suffix}$`) == suffix;
+    return this.match(suffix + "$") == suffix;
 };
 
 // ----------------------------------------------------------------
@@ -287,7 +287,7 @@ export const cacheBust = function (url)
 {
     if (url.indexOf("?") > -1) url += "&";
     else url += "?";
-    return `${url}cb=${uuid()}`;
+    return url + "cb=" + CABLES.uuid();
 };
 
 var jsonpCounter = null;
@@ -299,7 +299,7 @@ export const jsonp = function (url, cb)
 
     console.log("making jsonp request...");
 
-    CABLES[`jsonpFunc${jsonPID}`] = function (data)
+    CABLES["jsonpFunc" + jsonPID] = function (data)
     {
         console.log(data);
         cb(false, data);
@@ -309,7 +309,7 @@ export const jsonp = function (url, cb)
     if (url.indexOf(paramChar) > -1) paramChar = "&";
 
     var s = document.createElement("script");
-    s.setAttribute("src", `${url + paramChar}callback=CABLES.jsonpFunc${jsonPID}`);
+    s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
     // s.onload=function()
     // {
     // };
@@ -381,7 +381,10 @@ export const request = function (options)
     }
     else
     {
-        xhr.setRequestHeader("Content-type", options.contenttype ? options.contenttype : "application/x-www-form-urlencoded");
+        xhr.setRequestHeader(
+            "Content-type",
+            options.contenttype ? options.contenttype : "application/x-www-form-urlencoded",
+        );
         xhr.send(options.data || options.post);
     }
 };

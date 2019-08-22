@@ -166,7 +166,7 @@ const Framebuffer = function (_cgl, w, h, options)
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
             console.log("incomplete framebuffer", status);
-            throw new Error(`Incomplete framebuffer: ${status}`);
+            throw new Error("Incomplete framebuffer: " + status);
             // throw("Incomplete framebuffer: " + status);
         }
 

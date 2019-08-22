@@ -298,20 +298,20 @@ Gizmo.prototype.setParams = function (params)
     this.lineY.show();
 
     this._eleCenter.style.display = "block";
-    this._eleCenter.style.left = `${params.x}px`;
-    this._eleCenter.style.top = `${params.y}px`;
+    this._eleCenter.style.left = params.x + "px";
+    this._eleCenter.style.top = params.y + "px";
 
     this._eleX.style.display = "block";
-    this._eleX.style.left = `${params.xx}px`;
-    this._eleX.style.top = `${params.xy}px`;
+    this._eleX.style.left = params.xx + "px";
+    this._eleX.style.top = params.xy + "px";
 
     this._eleY.style.display = "block";
-    this._eleY.style.left = `${params.yx}px`;
-    this._eleY.style.top = `${params.yy}px`;
+    this._eleY.style.left = params.yx + "px";
+    this._eleY.style.top = params.yy + "px";
 
     this._eleZ.style.display = "block";
-    this._eleZ.style.left = `${params.zx}px`;
-    this._eleZ.style.top = `${params.zy}px`;
+    this._eleZ.style.left = params.zx + "px";
+    this._eleZ.style.top = params.zy + "px";
 
     this.lineX.set(params.x, params.y, params.xx, params.xy);
     this.lineY.set(params.x, params.y, params.yx, params.yy);

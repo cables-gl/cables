@@ -209,7 +209,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     console.log("exception!");
                     console.error("onvaluechanged exception cought", ex);
                     console.log(ex.stack);
-                    console.log(`exception in: ${this.parent.name}`);
+                    console.log("exception in: " + this.parent.name);
                     if (gui) gui.showOpCrash(this.parent);
 
                     if (CABLES.UI) CABLES.UI.MODAL.showException(ex, this.parent);
@@ -243,7 +243,7 @@ Port.prototype.updateAnim = function ()
 
 Port.args = function (func)
 {
-    return `${func}`
+    return (func + "")
         .replace(/[/][/].*$/gm, "") // strip single-line comments
         .replace(/\s+/g, "") // strip white space
         .replace(/[/][*][^/*]*[*][/]/g, "") // strip multi-line comments
@@ -485,7 +485,7 @@ Port.prototype.trigger = function ()
         console.log("exception!");
         console.error("ontriggered exception cought", ex);
         console.log(ex.stack);
-        console.log(`exception in: ${portTriggered.parent.name}`);
+        console.log("exception in: " + portTriggered.parent.name);
     }
 };
 
@@ -497,7 +497,7 @@ Port.prototype.call = function ()
 
 Port.prototype.execute = function ()
 {
-    console.log(`### execute port: ${this.getName()}`, this.goals.length);
+    console.log("### execute port: " + this.getName(), this.goals.length);
 };
 
 Port.prototype.setAnimated = function (a)

@@ -21,13 +21,13 @@ EMBED.addPatch = function (_element, options)
 
         if (!el)
         {
-            console.error(`${id} Polyshape Container Element not found!`);
+            console.error(id + " Polyshape Container Element not found!");
             return;
         }
     }
 
     var canvEl = document.createElement("canvas");
-    canvEl.id = `glcanvas_${id}`;
+    canvEl.id = "glcanvas_" + id;
     canvEl.width = el.clientWidth;
     canvEl.height = el.clientHeight;
 

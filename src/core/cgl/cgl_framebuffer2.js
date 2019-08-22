@@ -63,7 +63,7 @@ const Framebuffer2 = function(cgl, w, h, options) {
 
     for (var i = 0; i < this._numRenderBuffers; i++) {
         this._colorTextures[i] = new Texture(cgl, {
-            name: `framebuffer2 texture ${i}`,
+            name: "framebuffer2 texture " + i,
             isFloatingPointTexture: this._options.isFloatingPointTexture,
             filter: this._options.filter,
             wrap: this._options.wrap,
@@ -232,7 +232,7 @@ Framebuffer2.prototype.setSize = function(w, h) {
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
             console.log("incomplete framebuffer", status);
-            throw new Error(`Incomplete framebuffer: ${status}`);
+            throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
     }
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);

@@ -30,7 +30,7 @@ const EventTarget = function ()
         if (this._eventCallbacks[which])
         {
             var idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) console.log(`eventlistener ${which} not found...`);
+            if (idx == -1) console.log("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].splice(idx);
         }
     };

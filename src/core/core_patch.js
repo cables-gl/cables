@@ -315,7 +315,7 @@ Patch.prototype.createOp = function (identifier, id)
             {
                 if (CABLES.UI)
                 {
-                    CABLES.UI.MODAL.showError("unknown op", `unknown op: ${objName}`);
+                    CABLES.UI.MODAL.showError("unknown op", "unknown op: " + objName);
                 }
                 console.error('unknown op: ' + objName);
                 throw new Error('unknown op: ' + objName);
@@ -590,7 +590,7 @@ Patch.prototype.exec = function (e)
             if (CABLES.UI)
             {
                 if (!CABLES.UI.fpsElement) CABLES.UI.fpsElement = $("#canvasInfoFPS");
-                CABLES.UI.fpsElement.html(`| fps: ${this._fps} | ms: ${Math.round(this._fpsMsCount / this._fpsFrameCount)}`);
+                CABLES.UI.fpsElement.html("| fps: " + this._fps + " | ms: " + Math.round(this._fpsMsCount / this._fpsFrameCount));
             }
             this._fpsFrameCount = 0;
             this._fpsMsCount = 0;
@@ -631,13 +631,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
 
     if (!port1)
     {
-        console.warn(`port not found! ${port1Name} (${op1.objName})`);
+        console.warn("port not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        console.warn(`port not found! ${port2Name} of ${op2.name} (${op2.objName})`);
+        console.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
         return;
     }
 
@@ -702,7 +702,7 @@ Patch.prototype.getOpsByObjName = function (name)
 Patch.prototype.loadLib = function (which)
 {
     ajaxSync(
-        `/ui/libs/${which}.js`,
+        "/ui/libs/" + which + ".js",
         (err, res) =>
         {
             var se = document.createElement("script");
@@ -751,7 +751,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             if (oldOp.portsIn[j].links.length === 0)
             {
                 var p = op.getPort(oldOp.portsIn[j].name);
-                if (!p) console.error(`[reloadOp] could not set port ${oldOp.portsIn[j].name}, propably renamed port ?`);
+                if (!p) console.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
                 else p.set(oldOp.portsIn[j].get());
             }
             else
@@ -764,7 +764,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                     oldOp.portsIn[j].links[0].remove();
 
                     l = self.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) console.log(`[reloadOp] relink after op reload not successfull for port ${oldOutName}`);
+                    if (!l) console.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
             }
@@ -780,7 +780,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 oldOp.portsOut[j].links[0].remove();
 
                 l = self.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) console.log(`relink after op reload not successfull for port ${oldInName}`);
+                if (!l) console.log("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }
         }
@@ -1098,7 +1098,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        console.warn(`variable ${name} not found!`);
+        console.warn("variable " + name + " not found!");
     }
 };
 
@@ -1183,7 +1183,7 @@ Patch.prototype.preRenderOps = function ()
         if (this.ops[i].preRender)
         {
             this.ops[i].preRender();
-            console.log(`prerender ${this.ops[i].objName}`);
+            console.log("prerender " + this.ops[i].objName);
         }
     }
 

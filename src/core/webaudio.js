@@ -1,6 +1,5 @@
 import { CONSTANTS } from "./constants";
 
-
 const WEBAUDIO = {};
 
 WEBAUDIO.toneJsInitialized = false;
@@ -118,7 +117,10 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
                     }
                     catch (e)
                     {
-                        op.log("Disconnecting audio node with in/out port index, as well as without in/out-port-index did not work ", e);
+                        op.log(
+                            "Disconnecting audio node with in/out port index, as well as without in/out-port-index did not work ",
+                            e,
+                        );
                         if (e.printStackTrace)
                         {
                             e.printStackTrace();
@@ -174,7 +176,7 @@ WEBAUDIO.replaceNodeInPort = function (port, oldNode, newNode)
             {
                 e.printStackTrace();
             }
-            throw new Error(`replaceNodeInPort: Could not disconnect old audio node. ${e.name} ${e.message}`);
+            throw new Error("replaceNodeInPort: Could not disconnect old audio node. " + e.name + " " + e.message);
         }
         port.webAudio.audioNode = newNode;
         try
@@ -187,7 +189,7 @@ WEBAUDIO.replaceNodeInPort = function (port, oldNode, newNode)
             {
                 e.printStackTrace();
             }
-            throw new Error(`replaceNodeInPort: Could not connect to new node. ${e.name} ${e.message}`);
+            throw new Error("replaceNodeInPort: Could not connect to new node. " + e.name + " " + e.message);
         }
     }
 };
@@ -236,7 +238,12 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     op.webAudio = op.webAudio || {};
     op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
     // var port = op.inObject(portName);
-    var port = op.inDynamic(portName, [CONSTANTS.OP.OP_PORT_TYPE_VALUE, CONSTANTS.OP.OP_PORT_TYPE_OBJECT], options, defaultValue);
+    var port = op.inDynamic(
+        portName,
+        [CONSTANTS.OP.OP_PORT_TYPE_VALUE, CONSTANTS.OP.OP_PORT_TYPE_OBJECT],
+        options,
+        defaultValue,
+    );
     port.webAudio = {};
     port.webAudio.previousAudioInNode = null;
     port.webAudio.audioNode = audioNode;
@@ -332,7 +339,10 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
                         }
                         catch (e)
                         {
-                            op.log("AudioParam has minValue / maxValue defined, and value is in range, but setting the value failed! ", e);
+                            op.log(
+                                "AudioParam has minValue / maxValue defined, and value is in range, but setting the value failed! ",
+                                e,
+                            );
                             if (e.printStackTrace)
                             {
                                 e.printStackTrace();
@@ -420,7 +430,7 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
 {
     var audioContext = WEBAUDIO.createAudioContext();
     var loadingId = patch.loading.start("audio", url);
-    if (CABLES.UI) gui.jobs().start({ id: `loadaudio${loadingId}`, title: ` loading audio (${url})` });
+    if (CABLES.UI) gui.jobs().start({ id: "loadaudio" + loadingId, title: " loading audio (" + url + ")" });
     var request = new XMLHttpRequest();
     if (!url)
     {
@@ -433,7 +443,7 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
     request.onload = function ()
     {
         patch.loading.finished(loadingId);
-        if (CABLES.UI) gui.jobs().finish(`loadaudio${loadingId}`);
+        if (CABLES.UI) gui.jobs().finish("loadaudio" + loadingId);
         audioContext.decodeAudioData(request.response, onFinished, onError);
     };
     request.send();
