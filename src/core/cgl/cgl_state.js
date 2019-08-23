@@ -454,8 +454,8 @@ const Context = function (_patch)
 
     this.setSize = function (w, h)
     {
-        this.canvas.style.width = `${w}px`;
-        this.canvas.style.height = `${h}px`;
+        this.canvas.style.width = w + "px";
+        this.canvas.style.height = h + "px";
 
         this.canvas.width = w * this.pixelDensity;
         this.canvas.height = h * this.pixelDensity;
@@ -544,9 +544,9 @@ const Context = function (_patch)
 
         var d = new Date();
 
-        var dateStr = `${String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate())}_${padLeft(d.getHours(), 2)}${padLeft(d.getMinutes(), 2)}${padLeft(d.getSeconds(), 2)}`;
+        var dateStr = "".concat(String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate()), "_").concat(padLeft(d.getHours(), 2)).concat(padLeft(d.getMinutes(), 2)).concat(padLeft(d.getSeconds(), 2));
 
-        if (!filename) filename = `cables_${dateStr}.png`;
+        if (!filename) filename = "cables_" + dateStr + ".png";
         else filename += ".png";
 
         this.patch.cgl.screenShot((blob) =>

@@ -682,9 +682,9 @@ const Op = function ()
 
     Op.prototype.printInfo = function ()
     {
-        for (var i = 0; i < this.portsIn.length; i++) console.log(`in: ${this.portsIn[i].getName()}`);
+        for (var i = 0; i < this.portsIn.length; i++) console.log("in: " + this.portsIn[i].getName());
 
-        for (var ipo in this.portsOut) console.log(`out: ${this.portsOut[ipo].getName()}`);
+        for (var ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());
     };
 
     Op.prototype.getOutChilds = function ()
@@ -1074,7 +1074,7 @@ const Op = function ()
         var errorHtml = "";
         for (var i in this.errors)
         {
-            errorHtml += `- ${this.errors[i]}<br/>`;
+            errorHtml += "- " + this.errors[i] + "<br/>";
         }
         this.uiAttr({ error: errorHtml });
     };
@@ -1125,7 +1125,7 @@ const Op = function ()
         if (this._eventCallbacks[which])
         {
             var idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) console.log(`eventlistener ${which} not found...`);
+            if (idx == -1) console.log("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].slice(idx);
         }
     };
@@ -1233,7 +1233,7 @@ const Op = function ()
         if (working && this.objName.indexOf("Ops.Gl.TextureEffects") == 0 && hasTriggerInput(this) && this.objName.indexOf("TextureEffects.ImageCompose") == -1)
         {
             working = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, "TextureEffects.ImageCompose");
-            if (!working) notWorkingMsg = `${CABLES.UI.TEXTS.working_connected_to}ImageCompose`;
+            if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + "ImageCompose";
         }
         // else
         // {
@@ -1270,7 +1270,7 @@ const Op = function ()
 
                     if (!notWorkingMsg) notWorkingMsg = CABLES.UI.TEXTS.working_connected_needs_connections_to;
                     else notWorkingMsg += ", ";
-                    notWorkingMsg += `${p.name.toUpperCase()}`;
+                    notWorkingMsg += p.name.toUpperCase();
                 }
             }
         }

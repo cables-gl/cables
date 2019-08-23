@@ -53,7 +53,7 @@ const Profiler = function ()
             }
 
             items[object.id].numTriggers++;
-            items[object.id].title = `${object.parent.name} ${object.name}`;
+            items[object.id].title = object.parent.name + object.name;
 
             currentId = object.id;
             currentStart = performance.now();
@@ -69,7 +69,7 @@ const Profiler = function ()
         console.log("--------");
         for (var i in items)
         {
-            console.log(`${items[i].title}: ${items[i].numTriggers} / ${items[i].timeUsed}`);
+            console.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
         }
     };
 };

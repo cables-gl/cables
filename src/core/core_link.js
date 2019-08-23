@@ -166,7 +166,7 @@ Link.canLinkText = function (p1, p2)
     {
         var txt = "(out)";
         if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN) txt = "(in)";
-        return `can not link: same direction${txt}`;
+        return "can not link: same direction " + txt;
     }
     if (p1.parent == p2.parent) return "can not link: same op";
     if (p1.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC && p2.type != CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC)

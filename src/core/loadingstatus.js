@@ -69,9 +69,19 @@ LoadingStatus.prototype.print = function ()
 
     var rows = [];
 
-    for (var i in this._loadingAssets) rows.push([this._loadingAssets[i].order, this._loadingAssets[i].type, this._loadingAssets[i].name, `${(this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000}s`]);
+    for (var i in this._loadingAssets)
+    {
+        rows.push([
+            this._loadingAssets[i].order,
+            this._loadingAssets[i].type,
+            this._loadingAssets[i].name,
+            (this._loadingAssets[i].timeEnd - this._loadingAssets[i].timeStart) / 1000 + "s",
+        ]);
+    }
 
-    console.groupCollapsed(`finished loading ${this._order} assets in ${(Date.now() - this._startTime) / 1000}s`);
+    console.groupCollapsed(
+        "finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s",
+    );
     console.table(rows);
     console.groupEnd();
 };
@@ -93,7 +103,12 @@ LoadingStatus.prototype.start = function (type, name)
     var id = generateUUID();
 
     this._loadingAssets[id] = {
-        id, type, name, finished: false, timeStart: Date.now(), order: this._order,
+        id,
+        type,
+        name,
+        finished: false,
+        timeStart: Date.now(),
+        order: this._order,
     };
     this._order++;
 

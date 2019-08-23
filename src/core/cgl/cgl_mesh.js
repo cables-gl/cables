@@ -110,7 +110,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     var i = 0;
     var numItems = array.length / itemSize;
 
-    if (numItems === 0) console.warn(`CGL_MESH: num items in attribute ${name} is ZERO`);
+    if (numItems === 0) console.warn("CGL_MESH: num items in attribute " + name + " is ZERO");
 
     if (typeof options == "function")
     {
@@ -129,7 +129,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     {
         floatArray = new Float32Array(array);
         profileData.profileNonTypedAttrib++;
-        profileData.profileNonTypedAttribNames = `${this._geom.name} ${name} `;
+        profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
     }
     else floatArray = array;
 
@@ -228,7 +228,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         {
             if (vertIndices[i] >= this._geom.vertices.length / 3)
             {
-                console.warn(`invalid index in ${this._geom.name}`);
+                console.warn("invalid index in " + this._geom.name);
                 return;
             }
         }
@@ -434,7 +434,8 @@ Mesh.prototype.printDebug = function (shader)
     console.log("--attributes");
     for (i = 0; i < this._attributes.length; i++)
     {
-        console.log(`attribute ${i}  ${this._attributes[i].name}`);
+
+        console.log("attribute " + i + " " + this._attributes[i].name);
     }
 };
 
