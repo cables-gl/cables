@@ -25,7 +25,7 @@ var r=0;
 var g=0;
 var b=0;
 
-op.init=inLinear.onChange=arrayInPalette.onChange=buildTexture;
+inLinear.onChange=arrayInPalette.onChange=buildTexture;
 
 function hexToR(h) {
     return parseInt((cutHex(h)).substring(0,2),16);
