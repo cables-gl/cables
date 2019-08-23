@@ -47,6 +47,11 @@
             },
             {
                 "type": "0",
+                "name": "Flip Mapping",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Caps",
                 "subType": "boolean"
             }
@@ -61,7 +66,7 @@
                 "name": "geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.Cylinder2"
+        "name": "Ops.Gl.Meshes.Cylinder_v2"
     },
     "youtubeid": "",
     "docs": {
