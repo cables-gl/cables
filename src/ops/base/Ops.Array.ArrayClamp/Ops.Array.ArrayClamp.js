@@ -6,7 +6,7 @@ const
 
 var newArr = [];
 outArray.set(newArr);
-inArray.onChange = inMinValue.onChange = inMaxValue.onChange = inArray.onChange = function()
+inArray.onChange = inMinValue.onChange = inMaxValue.onChange = function()
 {
     var arr = inArray.get();
     if(!arr)return;
