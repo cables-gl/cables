@@ -1,0 +1,36 @@
+{
+    "id": "8117ed3b-a264-4a46-83a4-3cdb3f743d10",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1566548173878
+        }
+    ],
+    "authorName": "andro",
+    "created": 1566548329850,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Palette array"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Color Array"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PaletteTexture"
+    }
+}
