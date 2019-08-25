@@ -110,5 +110,90 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Shapes2d"
+    },
+    "summary": "Generates different 2d shapes to use as a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger op"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blending mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of belnding"
+            },
+            {
+                "name": "Shape",
+                "text": "Pick a shape - see docs for full list"
+            },
+            {
+                "name": "Mirror X",
+                "text": "mirror the x axis"
+            },
+            {
+                "name": "Mirror Y",
+                "text": "mirror the y axis"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset x axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset y axis"
+            },
+            {
+                "name": "fillShape",
+                "text": "Disable to only draw shape outline"
+            },
+            {
+                "name": "Line thickness",
+                "text": "Line thickness when fillshape is disabled"
+            },
+            {
+                "name": "Invert color",
+                "text": "Invert color to background"
+            },
+            {
+                "name": "width",
+                "text": "width of shape"
+            },
+            {
+                "name": "height",
+                "text": "height of shape"
+            },
+            {
+                "name": "Rotate",
+                "text": "rotate the shape"
+            },
+            {
+                "name": "r",
+                "text": "red amount"
+            },
+            {
+                "name": "g",
+                "text": "green amount"
+            },
+            {
+                "name": "b",
+                "text": "blue amount"
+            },
+            {
+                "name": "a",
+                "text": "alpha amount"
+            },
+            {
+                "name": "trigger",
+                "text": "next trigger"
+            }
+        ]
     }
 }

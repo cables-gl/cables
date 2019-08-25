@@ -1,0 +1,53 @@
+{
+    "authorName": "pandur",
+    "id": "f05f45fe-f3d2-4d99-b1b7-dfae7005382a",
+    "created": 1566732295899,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Multiplier"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.PatternLookup"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.PatternLookup renamed to Ops.Gl.TextureEffects.PatternLookup",
+            "author": "pandur",
+            "date": 1566733308555
+        }
+    ]
+}

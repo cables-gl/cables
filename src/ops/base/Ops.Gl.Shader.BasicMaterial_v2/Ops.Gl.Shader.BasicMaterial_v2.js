@@ -5,6 +5,9 @@ shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
 
+
+
+
 op.toWorkPortsNeedToBeLinked(render,trigger);
 
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
