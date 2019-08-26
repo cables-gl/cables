@@ -22,7 +22,7 @@ function setOutarray() {
     }
 
     if(!inArr || size < 1) {
-        outArrayPort.set([]);
+        outArrayPort.set(null);
         return;
     }
     var end = size + begin;

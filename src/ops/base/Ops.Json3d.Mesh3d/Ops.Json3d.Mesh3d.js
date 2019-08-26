@@ -10,7 +10,8 @@ const
     next=op.outTrigger("trigger"),
     draw=op.inValueBool("Draw",true),
     geometryOut=op.outObject("Geometry"),
-    outScale=op.outValue("Scaling",1.0);
+    outScale=op.outValue("Scaling",1.0),
+    outName=op.outString("Mesh Name");
 
 op.setPortGroup("Geometry",[centerPivot,merge,inNormals,inSize,inResize]);
 
@@ -40,6 +41,25 @@ centerPivot.onChange=
 
 inResize.onChange=
     merge.onChange=updateResizeUi;
+
+
+function getMeshName(idx)
+{
+
+    if(data && data.meshes && data.meshes[idx] && data.meshes[idx].name)return data.meshes[idx].name;
+
+    if(data && data.rootnode && data.rootnode.children && data.rootnode.children.length>idx-1)
+    {
+        for(var i=0;i<data.rootnode.children.length;i++)
+        {
+            if(data.rootnode.children[i].meshes.length==1 && data.rootnode.children[i].meshes[0]==idx) return data.rootnode.children[i].name;
+        }
+
+    }
+
+
+    return "unknown";
+}
 
 function updateResizeUi()
 {
@@ -138,6 +158,7 @@ function setMesh()
         op.uiAttr({'warning':'mesh not found - index out of range / or no file selected '});
         meshes[index]=null;
         hasError=true;
+        outName.set("");
         return;
     }
     else
@@ -147,7 +168,6 @@ function setMesh()
             op.uiAttr({'warning':null});
             hasError=false;
         }
-
     }
 
     currentIndex=index;
@@ -165,10 +185,13 @@ function setMesh()
                 geom.merge(geomNew);
             }
         }
+        outName.set(getMeshName(""));
     }
     else
     {
         var jsonGeom=data.meshes[index];
+
+        outName.set(getMeshName(index));
 
         if(!jsonGeom)
         {

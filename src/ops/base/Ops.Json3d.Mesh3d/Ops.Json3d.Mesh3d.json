@@ -65,6 +65,10 @@
                 "type": "0",
                 "name": "Scaling",
                 "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Mesh Name"
             }
         ],
         "name": "Ops.Json3d.Mesh3d"
@@ -79,9 +83,14 @@
             "message": "Ops.Json3d.Json3dMesh2 renamed to Ops.Json3d.Mesh3d",
             "author": "pandur",
             "date": 1563186029634
+        },
+        {
+            "message": "Added output of Mesh name",
+            "author": "pandur",
+            "date": 1566377185673
         }
     ],
-    "summary": "Load a 3D mesh - model into a scene",
+    "summary": "Load a 3D mesh - model into a scene , e.g. .FBX. DAE .OBJ",
     "issues": "",
     "collections": null,
     "relatedops": null,
