@@ -111,8 +111,8 @@ function update()
             mathArray[i] = Math.max(array0[i], array1[i]);
     }
     outArray.set(null);
-    outArray.set(mathArray);
     outArrayLength.set(mathArray.length);
+    outArray.set(mathArray);
 }
 
 inArray_0.onChange = update;

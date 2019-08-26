@@ -27,9 +27,9 @@ void main()
     #ifndef WIREFRAME_FILL
        col = vec4(r,g,b, opacity*(1.0-edgeFactor())*0.95);
     #endif
-    
+
     // col=vec4(barycentric,1.0);
-    
+
     outColor=col;
 
 }

@@ -3,12 +3,12 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "left",
+                "name": "top",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "top",
+                "name": "left",
                 "subType": "number"
             }
         ],

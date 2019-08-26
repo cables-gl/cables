@@ -1,5 +1,5 @@
-var sleft=op.addOutPort(new CABLES.Port(op,"left"));
 var stop=op.addOutPort(new CABLES.Port(op,"top"));
+var sleft=op.addOutPort(new CABLES.Port(op,"left"));
 
 function updateScroll()
 {
