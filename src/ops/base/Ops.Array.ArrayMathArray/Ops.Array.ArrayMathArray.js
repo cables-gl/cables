@@ -53,6 +53,9 @@ function update()
         outArrayLength.set(0);
         return;
     }
+
+    // console.log(array0.length, array1.length);
+
     //if arrays don't have the same length then give a warning to panel ui
     if(array0.length !== array1.length)
     {

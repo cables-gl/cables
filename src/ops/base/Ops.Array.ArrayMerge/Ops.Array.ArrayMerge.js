@@ -29,6 +29,7 @@ inArr.onChange=inArr2.onChange=function()
     arr=arr.concat(inArr.get());
     arr=arr.concat(inArr2.get());
 
+outArr.set(null);
     outArr.set(arr);
     outArrayLength.set(arr.length);
 };
