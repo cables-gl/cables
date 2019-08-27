@@ -33,6 +33,7 @@ function setOutarray() {
         var beginArr = inArr.slice(0, remainingArrSize);
         chunk.push.apply(chunk, beginArr);
     }
+    outArrayPort.set(null);
     outArrayPort.set(chunk);
     outArrayLength.set(size);
 }
