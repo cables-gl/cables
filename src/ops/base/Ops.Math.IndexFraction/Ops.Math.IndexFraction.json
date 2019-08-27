@@ -1,0 +1,42 @@
+{
+    "id": "924f3516-7d1c-4829-a24d-515bf3e7f43f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1566911472085
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1566911482757,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.IndexFraction"
+    },
+    "summary": "return fraction of value by index",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
