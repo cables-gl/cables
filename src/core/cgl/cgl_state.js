@@ -471,6 +471,7 @@ const Context = function (_patch)
 
     this._resizeToParentSize = function ()
     {
+        console.log("_resizeToParentSize");
         var p = this.canvas.parentElement;
         if (!p)
         {

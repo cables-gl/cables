@@ -606,7 +606,7 @@ Port.prototype.getUiActiveState = function ()
 
 Port.prototype.setUiActiveState = function (onoff)
 {
-    _uiActiveState = onoff;
+    this._uiActiveState = onoff;
     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
 };
 
