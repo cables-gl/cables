@@ -1,0 +1,27 @@
+{
+    "id": "93f3dc25-a1e7-46f5-9069-527c1bd2c3a3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1567002441146
+        }
+    ],
+    "authorName": "cables",
+    "created": 1567002458698,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArraySqrt"
+    }
+}
