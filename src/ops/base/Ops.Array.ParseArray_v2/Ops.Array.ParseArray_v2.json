@@ -67,8 +67,15 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Array.ParseArray2"
+        "name": "Ops.Array.ParseArray_v2"
     },
     "issues": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "enhancement: ignore comma after last value",
+            "author": "pandur",
+            "date": 1566813445790
+        }
+    ]
 }
