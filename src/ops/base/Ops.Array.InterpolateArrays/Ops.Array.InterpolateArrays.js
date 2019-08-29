@@ -35,10 +35,7 @@ exe.onTriggered=function()
         {
             val1=arr1[i];
             val2=arr2[i];
-            //old cude buggy
-            m= (val2-val1)*perc+val1;
-            //new code fixes
-            //var m = val1 *(1 - perc) +val2 * perc;
+            m=(val2-val1)*perc+val1;
             resultArr[i]=m;
         }
 
@@ -50,20 +47,25 @@ exe.onTriggered=function()
 
 };
 
-// still not working
-// inArr1.onLinkChanged = inArr2.onLinkChanged  = function ()
-// {
-//     var arr1=inArr1.get();
-//     var arr2=inArr2.get();
+//check that array input is string or not
+inArr1.onLinkChanged = inArr2.onLinkChanged  = function ()
+{
+    var arr1=inArr1.get();
+    var arr2=inArr2.get();
 
-//     console.log("port linked");
-//     console.log(arr1);
-//     console.log(arr2);
+    if(!arr1 || !arr2)
+    {
+        outArr.set(null);
+        return;
+    }
 
-    // if(!arr1.some(isNaN))
-    // {
-    //     console.log("Array wasn't numerical");
-    //     return;
-    // }
+    var stringTest1 = arr1[0];
+    var stringTest2 = arr2[0];
 
-// };
+    if(typeof stringTest1  === 'string' || typeof stringTest2  === 'string' )
+    {
+        outArr.set(null);
+        return;
+    }
+
+};
