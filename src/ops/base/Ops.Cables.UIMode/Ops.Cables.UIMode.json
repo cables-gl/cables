@@ -5,7 +5,7 @@
             {
                 "type": "0",
                 "name": "UI",
-                "subType": "number"
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Cables.UIMode"

@@ -21,7 +21,7 @@ ANIM.Key = function (obj)
     this.cbTriggered = false;
 
     var bezierAnim = null;
-    var updateBezier = false;
+    this._updateBezier = false;
 
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
@@ -336,7 +336,7 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
     {
-        updateBezier = true;
+        this._updateBezier = true;
         this.ease = ANIM.Key.easeBezier;
     }
     else
@@ -355,7 +355,7 @@ ANIM.Key.prototype.trigger = function ()
 ANIM.Key.prototype.setValue = function (v)
 {
     this.value = v;
-    updateBezier = true;
+    this._updateBezier = true;
     if (this.onChange !== null) this.onChange();
 };
 
@@ -376,7 +376,7 @@ ANIM.Key.prototype.set = function (obj)
             this.bezValue = obj.b[1];
             this.bezTimeIn = obj.b[2];
             this.bezValueIn = obj.b[3];
-            updateBezier = true;
+            this._updateBezier = true;
         }
 
         if (obj.hasOwnProperty("t")) this.time = obj.t;
