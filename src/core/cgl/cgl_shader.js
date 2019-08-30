@@ -1,4 +1,3 @@
-// TODO: remove CABLES.UI
 import { ShaderLibMods } from "./cgl_shader_lib";
 import { now } from "../timer";
 import { simpleId, generateUUID } from "../utils";
@@ -905,8 +904,8 @@ Shader.createShader = function(cgl, str, type, cglShader) {
 
         htmlWarning = infoLog + '<br/>' + htmlWarning + '<br/><br/>';
 
-        if (CABLES.UI) CABLES.UI.MODAL.showError('shader error ' + name, htmlWarning);
-            else console.log('shader error ' + name, htmlWarning);
+        cgl.patch.emitEvent("criticalError",'Shader error ' + name, htmlWarning);
+        if(cgl.patch.isEditorMode())console.log('Shader error ' + name, htmlWarning);
 
         htmlWarning += '</div>';
 

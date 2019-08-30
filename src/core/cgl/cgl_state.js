@@ -559,7 +559,6 @@ const Context = function (_patch)
                 var anchor = document.createElement("a");
 
                 anchor.download = filename;
-
                 anchor.href = URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
 

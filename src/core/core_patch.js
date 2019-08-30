@@ -11,8 +11,6 @@ import { CONSTANTS } from "./constants";
 // import { CONSTANTS.OP.OP_PORT_TYPE_TEXTURE } from "./core_op";
 import { Requirements } from "./requirements";
 
-
-
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *
@@ -54,10 +52,14 @@ const Patch = function (cfg)
     this.loading = new LoadingStatus(this);
     this._crashedOps = [];
 
-    this._fps = 0;
-    this._fpsFrameCount = 0;
-    this._fpsMsCount = 0;
-    this._fpsStart = 0;
+    this._perf = {
+        fps: 0,
+        ms: 0,
+        _fpsFrameCount: 0,
+        _fpsMsCount: 0,
+        _fpsStart: 0,
+    };
+
 
     this._volumeListeners = [];
     this._paused = false;
@@ -169,6 +171,18 @@ Patch.prototype.getFPS = function ()
 };
 
 /**
+ * returns true if patch is opened in editor/gui mode
+ * @function isEditorMode
+ * @memberof Patch
+ * @instance
+ * @return {Boolean} editor mode
+ */
+Patch.prototype.isEditorMode = function ()
+{
+    return this.config.editorMode === true;
+};
+
+/**
  * pauses patch execution
  * @function pause
  * @memberof Patch
@@ -264,21 +278,6 @@ Patch.getOpClass = function (objName)
     }
 };
 
-// Patch.prototype.addOp=function(objName,uiAttribs,next)
-// {
-//     // if(CABLES.UI && gui.serverOps.opHasLibs(objName) && !gui.serverOps.opLibsLoaded(objName) )
-//     // {
-//     //     var self=this;
-//     //
-//     //     gui.serverOps.loadOpLibs(objName,function()
-//     //     {
-//     //         self.doAddOp(objName,uiAttribs,next);
-//     //     });
-//     // }
-//     // else
-//     return this.doAddOp(objName,uiAttribs,next);
-// };
-
 Patch.prototype.createOp = function (identifier, id)
 {
     var parts = identifier.split(".");
@@ -313,10 +312,8 @@ Patch.prototype.createOp = function (identifier, id)
 
             if (!opObj)
             {
-                if (CABLES.UI)
-                {
-                    CABLES.UI.MODAL.showError("unknown op", "unknown op: " + objName);
-                }
+                this.emitEvent("criticalError", "unknown op", "unknown op: " + objName);
+
                 console.error('unknown op: ' + objName);
                 throw new Error('unknown op: ' + objName);
             } else {
@@ -346,17 +343,15 @@ Patch.prototype.createOp = function (identifier, id)
     catch (e)
     {
         this._crashedOps.push(objName);
-        if (CABLES.UI)
+
+        this.emitEvent("exceptionOp", e, objName);
+
+        if (!this.isEditorMode)
         {
-            CABLES.UI.MODAL.showOpException(e, objName);
-            console.error('[instancing error] ' + objName,e);
-        }
-        else
-        {
-            if (CABLES.api) CABLES.api.sendErrorReport(e);
             console.log(e);
-            // console.log(e.stacktrace);
             console.error('[instancing error] ' + objName,e);
+
+            if (CABLES.api) CABLES.api.sendErrorReport(e);
             this.exitError("INSTANCE_ERR",'Instancing Error ' + objName);
             throw 'instancing error ' + objName;
         }
@@ -383,11 +378,6 @@ Patch.prototype.createOp = function (identifier, id)
  */
 Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 {
-    // if (!objName || objName.indexOf('.') == -1) {
-    //     CABLES.UI.MODAL.showError('could not create op', 'op unknown');
-    //     return;
-    // }
-
     var op = this.createOp(opIdentifier, id);
 
     if (op)
@@ -533,46 +523,33 @@ Patch.prototype.exec = function (e)
     var now = CABLES.now();
     var frameDelta = now - this._frameNext;
 
-    if (CABLES.UI)
+    if (this.isEditorMode())
     {
-        if (CABLES.UI.capturer) CABLES.UI.capturer.capture(this.cgl.canvas);
-
         if (!this._renderOneFrame)
         {
-            if (now - this._lastFrameTime > 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed)
+            if (now - this._lastFrameTime >= 500 && this._lastFrameTime !== 0 && !this._frameWasdelayed)
             {
                 this._lastFrameTime = 0;
                 setTimeout(this.exec.bind(this), 500);
-
-                if (CABLES.UI) $("#delayed").show();
+                this.emitEvent("renderDelayStart");
                 this._frameWasdelayed = true;
                 return;
             }
         }
-
-        // if(now-this._lastFrameTime>300 && this._lastFrameTime!==0  && !this._frameWasdelayed)
-        // {
-        //     this._lastFrameTime=0;
-        //     setTimeout(this.exec.bind(this),300);
-        //
-        //     if(CABLES.UI)$('#delayed').show();
-        //     this._frameWasdelayed=true;
-        //     return;
-        // }
     }
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
         var startFrameTime = CABLES.now();
         this.renderFrame();
-        this._fpsMsCount += CABLES.now() - startFrameTime;
+        this._perf._fpsMsCount += CABLES.now() - startFrameTime;
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
     }
 
     if (this._frameWasdelayed)
     {
-        if (CABLES.UI) $("#delayed").hide();
+        this.emitEvent("renderDelayEnd");
         this._frameWasdelayed = false;
     }
 
@@ -582,24 +559,33 @@ Patch.prototype.exec = function (e)
         this._renderOneFrame = false;
     }
 
-    if (CABLES.now() - this._fpsStart >= 1000)
+
+
+    // this._perf = {
+    //     fps: 0,
+    //     ms: 0,
+    //     _fpsFrameCount: 0,
+    //     _fpsMsCount: 0,
+    //     _fpsStart: 0,
+    // };
+
+    if (CABLES.now() - this._perf._fpsStart >= 1000)
     {
-        if (this._fps != this._fpsFrameCount)
+        if (this._perf.fps != this._perf._fpsFrameCount)
         {
-            this._fps = this._fpsFrameCount;
-            if (CABLES.UI)
-            {
-                if (!CABLES.UI.fpsElement) CABLES.UI.fpsElement = $("#canvasInfoFPS");
-                CABLES.UI.fpsElement.html("| fps: " + this._fps + " | ms: " + Math.round(this._fpsMsCount / this._fpsFrameCount));
-            }
-            this._fpsFrameCount = 0;
-            this._fpsMsCount = 0;
-            this._fpsStart = CABLES.now();
+            this._perf.fps = this._perf._fpsFrameCount;
+            this._perf.ms = Math.round(this._perf._fpsMsCount / this._perf._fpsFrameCount);
+            
+            this.emitEvent("performance", this._perf);
+
+            this._perf._fpsFrameCount = 0;
+            this._perf._fpsMsCount = 0;
+            this._perf._fpsStart = CABLES.now();
         }
     }
 
-    this._lastFrameTime = CABLES.now();
-    this._fpsFrameCount++;
+    this._perf._lastFrameTime = CABLES.now();
+    this._perf._fpsFrameCount++;
 
     if (this.config.doRequestAnimation) requestAnimationFrame(this.exec.bind(this));
 };

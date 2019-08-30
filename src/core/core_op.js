@@ -1235,18 +1235,6 @@ const Op = function ()
             working = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, "TextureEffects.ImageCompose");
             if (!working) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + "ImageCompose";
         }
-        // else
-        // {
-        //     if(!this.uiAttribs.subPatch) // todo: real subpatch check at one point!
-        //     {
-        //         if(this.objName.indexOf('Ops.Gl') == 0 && hasTriggerInput(this) && this.objName != 'Ops.Gl.MainLoop')
-        //         {
-        //             var iscon = hasParent(this, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, 'Ops.Gl.MainLoop');
-        //             working = iscon;
-        //             if (!iscon) notWorkingMsg = CABLES.UI.TEXTS.working_connected_to + 'Ops.Gl.MainLoop';
-        //         }
-        //     }
-        // }
 
         if (this._needsParentOp && working)
         {
@@ -1283,7 +1271,7 @@ const Op = function ()
 
     Op.prototype.toWorkNeedsParent = function (parentOpName)
     {
-        if (!CABLES.UI) return;
+        if (!this.patch.isEditorMode()) return;
         this._needsParentOp = parentOpName;
     };
 
@@ -1298,12 +1286,12 @@ const Op = function ()
      */
     Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
-        if (!CABLES.UI) return;
+        if (!this.patch.isEditorMode()) return;
         for (var i = 0; i < arguments.length; i++) if (this._needsLinkedToWork.indexOf(arguments[i]) == -1) this._needsLinkedToWork.push(arguments[i]);
     };
     Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
     {
-        if (!CABLES.UI) return;
+        if (!this.patch.isEditorMode()) return;
         this._needsLinkedToWork.length = 0;
         this.checkLinkTimeWarnings();
     };

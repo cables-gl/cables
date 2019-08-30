@@ -1,4 +1,3 @@
-// TODO: remove CABLES.UI
 import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
 import { profileData } from "./cgl_profiledata";
@@ -404,35 +403,30 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 {
     op.setPortGroup("Blending", [blendMode, amount]);
 
-    // blendMode.setUiAttribs({"showIndex":true});
-
     blendMode.onChange = function ()
     {
         TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
-        if (CABLES.UI)
-        {
-            var str = blendMode.get();
-            if (str == "normal") str = null;
-            else if (str == "multiply") str = "mul";
-            else if (str == "multiply invert") str = "mulinv";
-            else if (str == "lighten") str = "light";
-            else if (str == "darken") str = "darken";
-            else if (str == "average") str = "avg";
-            else if (str == "substract") str = "sub";
-            else if (str == "difference") str = "diff";
-            else if (str == "negation") str = "neg";
-            else if (str == "negation") str = "neg";
-            else if (str == "negation") str = "neg";
-            else if (str == "exclusion") str = "exc";
-            else if (str == "overlay") str = "ovl";
-            else if (str == "color dodge") str = "dodge";
-            else if (str == "color burn") str = "burn";
-            else if (str == "softlight") str = "soft";
-            else if (str == "hardlight") str = "hard";
+        var str = blendMode.get();
+        if (str == "normal") str = null;
+        else if (str == "multiply") str = "mul";
+        else if (str == "multiply invert") str = "mulinv";
+        else if (str == "lighten") str = "light";
+        else if (str == "darken") str = "darken";
+        else if (str == "average") str = "avg";
+        else if (str == "substract") str = "sub";
+        else if (str == "difference") str = "diff";
+        else if (str == "negation") str = "neg";
+        else if (str == "negation") str = "neg";
+        else if (str == "negation") str = "neg";
+        else if (str == "exclusion") str = "exc";
+        else if (str == "overlay") str = "ovl";
+        else if (str == "color dodge") str = "dodge";
+        else if (str == "color burn") str = "burn";
+        else if (str == "softlight") str = "soft";
+        else if (str == "hardlight") str = "hard";
 
-            op.setUiAttrib({ extendTitle: str });
-        }
+        op.setUiAttrib({ extendTitle: str });
     };
 };
 
