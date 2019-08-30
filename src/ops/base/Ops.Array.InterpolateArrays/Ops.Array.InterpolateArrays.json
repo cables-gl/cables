@@ -29,7 +29,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArrayInterpolate"
+        "name": "Ops.Array.InterpolateArrays"
     },
     "summary": "interpolate between two arrays (lerp) - linear interpolation",
     "author": "59db805b08bab26e1ab7a0f2",
