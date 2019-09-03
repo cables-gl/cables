@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Array.ArrayMerge_v2"
+    },
+    "summary": "Merge two arrays - Array 2 is placed behind array 1",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array 1 in"
+            },
+            {
+                "name": "Array 2",
+                "text": "Array 2 in"
+            },
+            {
+                "name": "Result",
+                "text": "Merged array out"
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array"
+            }
+        ]
     }
 }

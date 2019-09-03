@@ -1,0 +1,58 @@
+{
+    "id": "3199b99a-c56f-4ddb-99a0-ad36789ab062",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1565725804019
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1565725882703,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "X 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Subdivs",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Exp.LaserSimpleLine"
+    }
+}

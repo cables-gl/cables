@@ -85,7 +85,7 @@
                 "name": "Positions"
             }
         ],
-        "name": "Ops.Gl.SurfaceScatterInstanced3"
+        "name": "Ops.Gl.SurfaceScatterInstanced_v3"
     },
     "summary": "Scatter an object on the surface of a mesh with different distribution methods",
     "youtubeid": "",

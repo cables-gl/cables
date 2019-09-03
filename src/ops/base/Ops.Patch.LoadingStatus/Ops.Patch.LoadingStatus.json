@@ -15,6 +15,11 @@
                 "type": "0",
                 "name": "PreRender Ops",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Play Timeline",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -53,7 +58,6 @@
         ],
         "name": "Ops.Patch.LoadingStatus"
     },
-    "updated": 1541051246021,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "30f01b6d-b234-4ebe-a2c3-ebffd96a31e9",

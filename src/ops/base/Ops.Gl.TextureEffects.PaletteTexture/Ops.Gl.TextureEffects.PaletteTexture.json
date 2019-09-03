@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.PaletteTexture"
+    },
+    "summary": "Create a RGB palette using an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Palette array",
+                "text": "Array in which defines the palette"
+            },
+            {
+                "name": "Smooth",
+                "text": "Apply smoothing between all colors"
+            },
+            {
+                "name": "Color Array",
+                "text": "Color array out"
+            },
+            {
+                "name": "Texture",
+                "text": "Texture out containing the gradient"
+            }
+        ]
     }
 }

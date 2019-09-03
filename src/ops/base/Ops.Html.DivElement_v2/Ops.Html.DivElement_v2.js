@@ -41,10 +41,12 @@ function setCSSVisible(visible)
     }
     else
     {
-        prevDisplay=div.style.display||'block';
+        // prevDisplay=div.style.display||'block';
         div.style.visibility='visible';
         div.style.display=prevDisplay;
     }
+
+    console.log('div.style.display',div.style.display);
 }
 
 function updateVisibility()

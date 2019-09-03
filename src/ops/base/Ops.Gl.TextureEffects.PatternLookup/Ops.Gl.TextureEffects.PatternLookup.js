@@ -11,6 +11,9 @@ const patternHeight=op.inValueSlider("Height",0.1);
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
 
+op.toWorkPortsNeedToBeLinked(multiplierTex);
+
+
 shader.setSource(shader.getDefaultVertexShader(),attachments.patternlookup_frag);
 
 const textureUniform=new CGL.Uniform(shader,'t','tex',0);
@@ -25,15 +28,20 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
-    cgl.currentTextureEffect.bind();
+    var multex=multiplierTex.get();
+    if(multex)
+    {
+        cgl.setShader(shader);
+        cgl.currentTextureEffect.bind();
 
-    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-    if(multiplierTex.get()) cgl.setTexture(1, multiplierTex.get().tex );
+        if(multex) cgl.setTexture(1, multex.tex );
 
-    cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+        cgl.currentTextureEffect.finish();
+        cgl.setPreviousShader();
+    }
+
 
     trigger.trigger();
 };
