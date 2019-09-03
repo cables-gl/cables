@@ -6,6 +6,7 @@
 
 const inArray_0 = op.inArray("array 0"),
     numberIn = op.inValueFloat("Number for comparison", 0.5),
+    inValueIfTrue = op.inFloat("value if true",1.0),
     inValueIfFalse = op.inFloat("value if false",0.0),
     mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
                 '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
@@ -51,6 +52,7 @@ function onFilterChange()
         else if(mathSelectValue === '!=pass') selectIndex = LOGIC_NOT_EQUAL_PASS;
 
     update();
+    op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
 function update()
@@ -59,6 +61,7 @@ function update()
 
     var mathNumberIn = numberIn.get();
     var valueFalse = inValueIfFalse.get();
+    var valueTrue = inValueIfTrue.get();
     //reset array
     mathArray.length = 0;
 
@@ -81,7 +84,7 @@ function update()
         {
             if(array0[i] > mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -96,7 +99,7 @@ function update()
         {
             if(array0[i] < mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -110,7 +113,7 @@ function update()
         {
             if(array0[i] >= mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -124,7 +127,7 @@ function update()
         {
             if(array0[i] <= mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -138,7 +141,7 @@ function update()
         {
             if(array0[i] === mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -152,7 +155,7 @@ function update()
         {
             if(array0[i] !== mathNumberIn)
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
@@ -171,7 +174,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -185,7 +188,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -199,7 +202,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -213,7 +216,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -227,7 +230,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -242,7 +245,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
