@@ -49,10 +49,9 @@ function taskCoreJsMax()
                             return reject(new Error(stats.compilation.errors.join("\n")));
                         }
                         resolve();
-                    },
-                ),
+                    }
+                )
             )
-
             .pipe(gulp.dest("build"))
             .on("error", (err) =>
             {
@@ -80,8 +79,8 @@ function taskCoreJsMin()
                             return reject(new Error(stats.compilation.errors.join("\n")));
                         }
                         resolve();
-                    },
-                ),
+                    }
+                )
             )
 
             .pipe(gulp.dest("build"))
