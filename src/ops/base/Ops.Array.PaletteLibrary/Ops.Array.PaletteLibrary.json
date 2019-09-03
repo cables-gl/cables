@@ -8,5 +8,25 @@
         }
     ],
     "authorName": "andro",
-    "created": 1566548812010
+    "created": 1566548812010,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Palette Array out"
+            }
+        ],
+        "name": "Ops.Array.PaletteLibrary"
+    },
+    "summary": "Contains a collection of palettes in groups of 5 to be used with the palette texture op",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.TextureEffects.PaletteTexture",
+        "Ops.Array.ArrayChunk"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

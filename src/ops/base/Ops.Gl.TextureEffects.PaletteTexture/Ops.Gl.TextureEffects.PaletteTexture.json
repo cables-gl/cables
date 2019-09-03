@@ -36,7 +36,9 @@
     "summary": "Create a RGB palette using an array",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.TextureEffects.PaletteTexture"
+    ],
     "youtubeids": [],
     "docs": {
         "ports": [

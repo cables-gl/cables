@@ -8,5 +8,55 @@
         }
     ],
     "authorName": "andro",
-    "created": 1566556568413
+    "created": 1566556568413,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.Array.ArrayClamp"
+    },
+    "summary": "Clamp the values of an array to a min and max value",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "Array in"
+            },
+            {
+                "name": "Min",
+                "text": "Minimum value to clamp to"
+            },
+            {
+                "name": "Max",
+                "text": "Maximum value to clamp to"
+            },
+            {
+                "name": "Array Out",
+                "text": "Clamped array out"
+            }
+        ]
+    }
 }
