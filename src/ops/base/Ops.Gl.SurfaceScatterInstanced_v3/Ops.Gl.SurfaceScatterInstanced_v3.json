@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1552909420466
+        },
+        {
+            "message": "now works with non indexed geometries",
+            "author": "pandur",
+            "date": 1567170200747
         }
     ],
     "authorName": "pandur",
@@ -85,10 +90,9 @@
                 "name": "Positions"
             }
         ],
-        "name": "Ops.Gl.SurfaceScatterInstanced3"
+        "name": "Ops.Gl.SurfaceScatterInstanced_v3"
     },
     "summary": "Scatter an object on the surface of a mesh with different distribution methods",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -151,5 +155,8 @@
                 "text": "Array out of positional data from the instances"
             }
         ]
-    }
+    },
+    "youtubeids": [
+        "rAAE9LcFkfw"
+    ]
 }

@@ -14,6 +14,7 @@ var mesh=null;
 var verts=[];
 var tc=[];
 var normals=[];
+var prim=cgl.gl.LINE_STRIP;
 
 inGeom.onChange=function()
 {
@@ -25,6 +26,8 @@ inGeom.onChange=function()
     }
 
     verts.length=0;
+    normals.length=0;
+    tc.length=0;
     var i=0;
 
     if(geom.isIndexed())
@@ -56,6 +59,7 @@ inGeom.onChange=function()
             tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
             tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
         }
+        prim=cgl.gl.LINE_STRIP;
     }
     else
     {
@@ -70,14 +74,18 @@ inGeom.onChange=function()
             verts.push(geom.vertices[i+6],geom.vertices[i+7],geom.vertices[i+8]);
             verts.push(geom.vertices[i+0],geom.vertices[i+1],geom.vertices[i+2]);
         }
+
+        prim=cgl.gl.LINES;
     }
 
     geom=new CGL.Geometry("wireframelinegeom");
-    geom.setPointVertices(verts);
+    // if(verts.length>60000)geom.setVertices(verts);
+    // else
+    geom.setVertices(verts);
     geom.setTexCoords(tc);
     geom.vertexNormals=normals;
 
-    mesh=new CGL.Mesh(cgl,geom,cgl.gl.LINE_STRIP);
+    mesh=new CGL.Mesh(cgl,geom,prim);
 };
 
 
@@ -87,7 +95,7 @@ function doRender()
     if(!shader)return;
 
     var oldPrim=shader.glPrimitive;
-    shader.glPrimitive=cgl.gl.LINE_STRIP;
+    shader.glPrimitive=prim;
     if(mesh) mesh.render(shader);
     shader.glPrimitive=oldPrim;
     next.trigger();

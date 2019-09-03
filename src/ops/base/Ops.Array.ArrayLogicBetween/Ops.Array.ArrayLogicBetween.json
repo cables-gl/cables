@@ -24,11 +24,6 @@
                 "type": "0",
                 "name": "Max",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pass Value",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -38,5 +33,13 @@
             }
         ],
         "name": "Ops.Array.ArrayLogicBetween"
+    },
+    "summary": "outputs an array of 0 and 1 if array value is between of min and max or not",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

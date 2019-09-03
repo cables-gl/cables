@@ -2,13 +2,11 @@ const
     inArray=op.inArray("Array"),
     inMin=op.inFloat("Min",0),
     inMax=op.inFloat("Max",0.5),
-    inPass=op.inBool("Pass Value",false),
     outArray=op.outArray("Result");
 
 inArray.onChange=
 inMin.onChange=
 inMax.onChange=
-inPass.onChange=
 function update()
 {
     var arr=inArray.get();

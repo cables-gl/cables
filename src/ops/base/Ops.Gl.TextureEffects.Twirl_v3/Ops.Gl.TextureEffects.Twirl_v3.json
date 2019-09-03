@@ -49,8 +49,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Twirl3"
     },
-    "summary": "Creates a twirl/spiral effect in a texture",
-    "youtubeid": "",
+    "summary": "Creates a twirl/swirl/spiral effect in a texture",
     "collections": null,
     "relatedops": null,
     "docs": {
@@ -84,5 +83,7 @@
                 "text": "Center point of the effect on the y axis"
             }
         ]
-    }
+    },
+    "issues": "",
+    "youtubeids": []
 }

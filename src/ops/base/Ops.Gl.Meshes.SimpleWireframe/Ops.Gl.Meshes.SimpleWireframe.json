@@ -39,6 +39,11 @@
             "message": "now works also with not-indexed geometries",
             "author": "pandur",
             "date": 1560512021060
+        },
+        {
+            "message": "fixed bug with non indexed meshes",
+            "author": "pandur",
+            "date": 1567174544877
         }
     ]
 }
