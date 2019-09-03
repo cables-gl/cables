@@ -1,5 +1,4 @@
 {
-    "updated": 1512653999354,
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "9643edc7-e479-4b26-9f7a-343cdcdc81f4",
@@ -14,18 +13,21 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Average X"
+                "name": "Average X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average Y"
+                "name": "Average Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Average Z"
+                "name": "Average Z",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Array.Array3xAverage"
+        "name": "Ops.Array.Array3Average"
     },
     "summary": "average x,y,z values of an array3x",
     "youtubeid": "",
