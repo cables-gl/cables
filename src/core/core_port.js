@@ -212,7 +212,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     console.log("exception in: " + this.parent.name);
                     if (gui) gui.showOpCrash(this.parent);
 
-                    if (CABLES.UI) CABLES.UI.MODAL.showException(ex, this.parent);
+                    this.parent.patch.emitEvent("exception".ex,this.parent);
                 }
 
                 if (CABLES.UI && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE)
@@ -478,7 +478,7 @@ Port.prototype.trigger = function ()
 
         if (CABLES.UI)
         {
-            CABLES.UI.MODAL.showException(ex, portTriggered.parent);
+            this.parent.patch.emitEvent("exception".ex,portTriggered.parent);
 
             if (window.gui) gui.showOpCrash(portTriggered.parent);
         }

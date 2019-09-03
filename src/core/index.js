@@ -16,7 +16,7 @@ import { WEBAUDIO } from "./webaudio";
 import { Variable } from "./sessionvar";
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
-import { Gizmo, htmlLine } from "./mod_gizmo";
+// import { Gizmo, htmlLine } from "./mod_gizmo";
 import { CONSTANTS } from "./constants";
 
 const CABLES = Object.assign(
@@ -30,8 +30,8 @@ const CABLES = Object.assign(
         Requirements,
         Patch,
         GLGUI,
-        Gizmo,
-        htmlLine,
+        // Gizmo,
+        // htmlLine,
         Instancing,
         Timer,
         WEBAUDIO,
