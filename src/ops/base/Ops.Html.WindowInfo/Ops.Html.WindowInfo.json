@@ -8,5 +8,28 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1566822681581
+    "created": 1566822681581,
+    "summary": "size of browser window in pixels",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "clientWidth",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "clientHeight",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.WindowInfo"
+    }
 }

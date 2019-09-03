@@ -19,8 +19,7 @@ inExec.onTriggered=function()
         {
             format:inFormat.get(),
             onProgress:progress
-        }
-        );
+        });
 };
 
 function progress(v)

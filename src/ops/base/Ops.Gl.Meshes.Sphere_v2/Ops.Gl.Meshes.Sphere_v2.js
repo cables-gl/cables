@@ -50,7 +50,8 @@ function buildMesh () {
             z = Math.sin(u)*a;
 
             positions.push(x*radius,y*radius,z*radius);
-            texcoords.push(i/(stacks+1),j/slices);
+            // texcoords.push(i/(stacks+1),j/slices);
+            texcoords.push(j/slices,i/(stacks+1));
 
             d = Math.sqrt(x*x+y*y+z*z);
             normals.push(

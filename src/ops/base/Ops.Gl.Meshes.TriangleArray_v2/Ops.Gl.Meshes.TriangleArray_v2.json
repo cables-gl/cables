@@ -23,7 +23,7 @@
                 "name": "Geometry"
             }
         ],
-        "name": "Ops.Gl.Meshes.TriangleArray2"
+        "name": "Ops.Gl.Meshes.TriangleArray_v2"
     },
     "summary": "Draws multiple triangles using coordinates from an array",
     "youtubeid": "",

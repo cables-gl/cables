@@ -1,0 +1,1 @@
+Allows fog to be added to a scene as a texture effect

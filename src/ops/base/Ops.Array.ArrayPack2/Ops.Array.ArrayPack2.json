@@ -40,5 +40,38 @@
             }
         ],
         "name": "Ops.Array.ArrayPack2"
+    },
+    "summary": "Packs two individual arrays into a new array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger in",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Array 1",
+                "text": "array 1 in"
+            },
+            {
+                "name": "Array 2",
+                "text": "array 2 in"
+            },
+            {
+                "name": "Trigger out",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Array out",
+                "text": "Packed array"
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array"
+            }
+        ]
     }
 }

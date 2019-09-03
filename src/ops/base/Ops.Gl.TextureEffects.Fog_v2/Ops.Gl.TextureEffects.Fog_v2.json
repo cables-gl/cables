@@ -93,5 +93,78 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Fog_v2"
+    },
+    "summary": "Render fog as a texture effect using a depth texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend mode"
+            },
+            {
+                "name": "depth texture",
+                "text": "Depth texture in"
+            },
+            {
+                "name": "Color gradient",
+                "text": "gradient texture changes fog over distance"
+            },
+            {
+                "name": "Frustum near",
+                "text": "Frustrum near"
+            },
+            {
+                "name": "Frustum far",
+                "text": "Frustrum near"
+            },
+            {
+                "name": "fogStart",
+                "text": "Fog start - default 0"
+            },
+            {
+                "name": "fogEnd",
+                "text": "Fog end"
+            },
+            {
+                "name": "density",
+                "text": "Density of fog "
+            },
+            {
+                "name": "fog r",
+                "text": "Fog red color amount"
+            },
+            {
+                "name": "fog g",
+                "text": "Green color amount"
+            },
+            {
+                "name": "fog b",
+                "text": "Blue color amount"
+            },
+            {
+                "name": "fog a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "invert direction",
+                "text": "Invert direction of fog"
+            },
+            {
+                "name": "trigger",
+                "text": "TRigger out"
+            }
+        ]
     }
 }

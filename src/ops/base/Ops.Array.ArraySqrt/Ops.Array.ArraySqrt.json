@@ -23,5 +23,22 @@
             }
         ],
         "name": "Ops.Array.ArraySqrt"
+    },
+    "summary": "Returns the square root of all values in the array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     }
 }

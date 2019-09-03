@@ -9,6 +9,7 @@ var isFinishedPort = op.outValue('all loaded', false);
 var preRenderStatus=this.addOutPort(new CABLES.Port(op,"preRenderStatus",CABLES.OP_PORT_TYPE_VALUE));
 var preRenderTimeFrames=this.addInPort(new CABLES.Port(op,"preRenderTimes",CABLES.OP_PORT_TYPE_VALUE));
 var preRenderOps=op.inValueBool("PreRender Ops");
+var startTimeLine=op.inBool("Play Timeline",true);
 preRenderStatus.set(0);
 this.numAssets=this.addOutPort(new CABLES.Port(op,"numAssets",CABLES.OP_PORT_TYPE_VALUE));
 this.loading=this.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -99,8 +100,11 @@ this.exe.onTriggered= function()
             if(preRenderOps.get()) op.patch.preRenderOps();
             loadingFinished.trigger();
             op.patch.timer.setTime(0);
-            op.patch.timer.play();
-            isFinishedPort.set(true);
+            if(startTimeLine.get())
+            {
+                op.patch.timer.play();
+                isFinishedPort.set(true);
+            }
             firstTime=false;
         }
 
