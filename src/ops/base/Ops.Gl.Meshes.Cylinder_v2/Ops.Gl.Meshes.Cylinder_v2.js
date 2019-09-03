@@ -7,6 +7,7 @@ const
     inOuterRadius = op.inValueFloat("outer radius", 0.5),
     inInnerRadius = op.inValueFloat("inner radius", 0),
     inUVMode = op.inValueSelect("UV mode", ["simple","atlas"],"simple"),
+    flipSideMapping = op.inValueBool("Flip Mapping",false),
     inCaps = op.inValueBool("Caps",true),
     outTrigger = op.outTrigger("next"),
     outGeometry = op.outObject("geometry"),
@@ -21,6 +22,8 @@ var mesh = null;
 inUVMode.hidePort();
 
 function buildMesh () {
+
+    const flipTex=flipSideMapping.get();
 
     const
         segments = Math.max(inSegments.get(), 3)|0,
@@ -70,6 +73,14 @@ function buildMesh () {
             normals.push(x,y,0);
             tangents.push(-y,x,0);
             biTangents.push(0,0,1);
+
+            if(flipTex)
+                texcoords.push(
+                    j / segments,
+                    1.0-((z / length + 0.5) * o)
+                );
+
+            else
             texcoords.push(
                 (z / length + 0.5) * o,
                 j / segments
@@ -280,6 +291,7 @@ inOuterRadius.onChange =
 inInnerRadius.onChange =
 inCaps.onChange =
 inLength.onChange =
+flipSideMapping.onChange=
 inStacks.onChange =
 inUVMode.onChange = function() {
     // only calculate once, even after multiple settings could were changed
@@ -287,5 +299,5 @@ inUVMode.onChange = function() {
 };
 
 // set lifecycle handlers
-op.onDelete = function () { mesh.dispose(); }
+op.onDelete = function () { if(mesh)mesh.dispose(); }
 

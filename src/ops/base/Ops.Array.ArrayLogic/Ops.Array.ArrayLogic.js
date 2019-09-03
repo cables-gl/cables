@@ -1,11 +1,12 @@
 //The user can  pick a
 //logical comparison which will be applied to the array.
-// if it evaulates to true then it outputs 1 else 0
+// if it evaulates to true then it outputs 1 else 0 or defined value
 //pass mode (p) allows the value from array 0 through if the
 //comparison evaulates to true else zero
 
 const inArray_0 = op.inArray("array 0"),
-    numberIn = op.inValueFloat("Number for comparison", 1.0),
+    numberIn = op.inValueFloat("Number for comparison", 0.5),
+    inValueIfFalse = op.inFloat("value if false",0.0),
     mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
                 '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
     outArray = op.outArray("Array result"),
@@ -57,6 +58,7 @@ function update()
     var array0 = inArray_0.get();
 
     var mathNumberIn = numberIn.get();
+    var valueFalse = inValueIfFalse.get();
     //reset array
     mathArray.length = 0;
 
@@ -70,7 +72,7 @@ function update()
 
     mathArray.length = array0.length;
 
-    //create variable for for loop
+    //create variable for the for loop
     var i = 0;
 
     if(selectIndex === LOGIC_GREATER)
@@ -83,7 +85,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
 
@@ -98,7 +100,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -112,7 +114,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -126,7 +128,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -140,7 +142,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -154,7 +156,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -249,5 +251,5 @@ function update()
     outArrayLength.set(mathArray.length);
 };
 
-inArray_0.onChange = numberIn.onChange = update;
+inArray_0.onChange = numberIn.onChange = inValueIfFalse.onChange =update;
 update();

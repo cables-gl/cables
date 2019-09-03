@@ -47,6 +47,11 @@
             },
             {
                 "type": "0",
+                "name": "Circular",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "r",
                 "subType": "number"
             },
@@ -78,5 +83,12 @@
         "generator"
     ],
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "added circular mode",
+            "author": "pandur",
+            "date": 1565450488807
+        }
+    ]
 }

@@ -25,15 +25,13 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "filter",
-                "group": "Alignment",
-                "subType": "string"
+                "group": "Alignment"
             },
             {
-                "type": "0",
-                "name": "MSAA",
-                "subType": "string"
+                "type": "5",
+                "name": "MSAA"
             },
             {
                 "type": "0",

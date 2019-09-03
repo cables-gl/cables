@@ -5,6 +5,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": "5",
+                "name": "FFT size"
+            },
+            {
                 "type": "1",
                 "name": "refresh"
             },

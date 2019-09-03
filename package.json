@@ -1,0 +1,46 @@
+{
+  "name": "cables",
+  "version": "1.0.0",
+  "description": "something something cables .",
+  "main": "dist/cables.max.js",
+  "directories": {
+    "doc": "doc"
+  },
+  "private": true,
+  "scripts": {
+    "build": "gulp",
+    "watch": "gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pandrr/cables.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pandrr/cables/issues"
+  },
+  "homepage": "https://github.com/pandrr/cables#readme",
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/preset-env": "^7.3.1",
+    "add-module-exports-webpack-plugin": "^1.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "error-overlay-webpack-plugin": "^0.4.0",
+    "glob": "^7.1.4",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "webpack": "^4.39.1",
+    "webpack-bundle-analyzer": "^3.4.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-stream": "^5.2.1"
+  },
+  "dependencies": {
+    "gl-matrix": "^3.0.0"
+  }
+}

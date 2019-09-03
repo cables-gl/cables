@@ -1,0 +1,123 @@
+{
+    "id": "97e57613-6a51-41cf-9de5-fe3dbc2c69b2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1566304253144
+        }
+    ],
+    "authorName": "andro",
+    "created": 1566304281410,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Play"
+            },
+            {
+                "type": "1",
+                "name": "Pause"
+            },
+            {
+                "type": "1",
+                "name": "rewind"
+            },
+            {
+                "type": "0",
+                "name": "Set current time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "play trigger"
+            },
+            {
+                "type": "1",
+                "name": "pause trigger"
+            },
+            {
+                "type": "1",
+                "name": "rewind trigger"
+            },
+            {
+                "type": "0",
+                "name": "is Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "set time (seconds)",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "current time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "current frame",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLinePlayer"
+    },
+    "summary": "Player controls for the timeline",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.WebAudio.MediaPlayer"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Play",
+                "text": "Trigger to start timeline"
+            },
+            {
+                "name": "Pause",
+                "text": "Trigger to pause timeline - pressing play again resumes from this point"
+            },
+            {
+                "name": "rewind",
+                "text": "Rewind to 0"
+            },
+            {
+                "name": "Set current time",
+                "text": "Set current time - press play to jump to this number"
+            },
+            {
+                "name": "play trigger",
+                "text": "Trigger out when play has been triggered"
+            },
+            {
+                "name": "pause trigger",
+                "text": "Trigger out when pause has been triggered"
+            },
+            {
+                "name": "rewind trigger",
+                "text": "Trigger out when rewind has been triggered"
+            },
+            {
+                "name": "is Playing",
+                "text": "Is true when timeline is playing else false"
+            },
+            {
+                "name": "set time (seconds)",
+                "text": "number that time was set to"
+            },
+            {
+                "name": "current time",
+                "text": "Current time in seconds1"
+            },
+            {
+                "name": "current frame",
+                "text": "Current time in frames (30fps)"
+            }
+        ]
+    }
+}

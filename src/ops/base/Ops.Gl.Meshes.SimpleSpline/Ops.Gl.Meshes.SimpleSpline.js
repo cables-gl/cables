@@ -3,11 +3,13 @@ const
     inPoints=op.inArray("Points"),
     numPoints=op.inValueInt("Num Points"),
     strip=op.inBool("Line Strip",true),
+    outGeom=op.outObject("Geometry"),
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]),
     next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
 const geom=new CGL.Geometry("simplespline");
+outGeom.set(geom);
 
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);

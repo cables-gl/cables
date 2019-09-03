@@ -39,7 +39,6 @@ function updateVpSize()
     }
 }
 
-
 function initFbLater()
 {
     reInitFb=true;

@@ -1,9 +1,15 @@
 
+// SHOULD BE MOVED TO UI !!
+import { Shader } from "./cgl/cgl_shader";
+import { Uniform } from "./cgl/cgl_shader_uniform";
+import { Geometry } from "./cgl/cgl_geom";
+import { Mesh } from "./cgl/cgl_mesh";
 
-var CABLES=CABLES||{};
-CABLES.GLGUI=CABLES.GLGUI||{};
+import { CONSTANTS } from "./constants";
 
-CABLES.GLGUI.LineDrawer=function(cgl,options)
+const GLGUI = {};
+
+GLGUI.LineDrawer=function(cgl,options)
 {
     this._num=100000;
     this._counter=0;
@@ -18,7 +24,7 @@ CABLES.GLGUI.LineDrawer=function(cgl,options)
 
 
 
-CABLES.GLGUI.RectInstancer=function(cgl,options)
+GLGUI.RectInstancer=function(cgl,options)
 {
     this._counter=0;
     this._num=100000;
@@ -28,7 +34,7 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
     this._colors=new Float32Array(4*this._num);
     this._sizes=new Float32Array(2*this._num);
 
-    this._shader=new CGL.Shader(cgl,'rectinstancer');
+    this._shader=new Shader(cgl,'rectinstancer');
     this._shader.setSource(''
         .endl()+'IN vec3 vPosition;'
         .endl()+'IN vec3 instPos;'
@@ -56,17 +62,17 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
         .endl()+'}'
         , 'IN vec4 col;void main(){outColor=vec4(col.rgb,1.0);}');
 
-    this._uniZoom=new CGL.Uniform(this._shader,'f','zoom',0),
-    this._uniResX=new CGL.Uniform(this._shader,'f','resX',500),
-    this._uniResY=new CGL.Uniform(this._shader,'f','resY',500),
-    this._uniscrollX=new CGL.Uniform(this._shader,'f','scrollX',0),
-    this._uniscrollY=new CGL.Uniform(this._shader,'f','scrollY',0);
+    this._uniZoom=new Uniform(this._shader,'f','zoom',0),
+    this._uniResX=new Uniform(this._shader,'f','resX',500),
+    this._uniResY=new Uniform(this._shader,'f','resY',500),
+    this._uniscrollX=new Uniform(this._shader,'f','scrollX',0),
+    this._uniscrollY=new Uniform(this._shader,'f','scrollY',0);
 
-    this._geom=new CGL.Geometry("rectinstancer");
+    this._geom=new Geometry("rectinstancer");
     this._geom.vertices = new Float32Array([1,1,0, 0,1,0, 1,0,0, 0,0,0]);
     this._geom.verticesIndices = new Float32Array([ 2, 1, 0,  3, 1, 2 ]);
 
-    this._mesh=new CGL.Mesh(cgl,this._geom);
+    this._mesh=new Mesh(cgl,this._geom);
     this._mesh.numInstances=this._num;
 
     var i=0;
@@ -75,12 +81,12 @@ CABLES.GLGUI.RectInstancer=function(cgl,options)
     for(i=0;i<4*this._num;i++) this._colors[i]=1;//Math.random();
 }
 
-CABLES.GLGUI.RectInstancer.prototype.dispose=function()
+GLGUI.RectInstancer.prototype.dispose=function()
 {
 
 }
 
-CABLES.GLGUI.RectInstancer.prototype.render=function(resX,resY,scrollX,scrollY,zoom)
+GLGUI.RectInstancer.prototype.render=function(resX,resY,scrollX,scrollY,zoom)
 {
     this._uniResX.set(resX);
     this._uniResY.set(resY);
@@ -89,11 +95,11 @@ CABLES.GLGUI.RectInstancer.prototype.render=function(resX,resY,scrollX,scrollY,z
     this._uniZoom.set(zoom);
 
     if(this._needsRebuild)this.rebuild();
-    
+
     this._mesh.render(this._shader);
 }
 
-CABLES.GLGUI.RectInstancer.prototype.rebuild=function()
+GLGUI.RectInstancer.prototype.rebuild=function()
 {
     this._mesh.addAttribute('instPos',this._positions,3,{instanced:true});
     this._mesh.addAttribute('instCol',this._colors,4,{instanced:true});
@@ -101,28 +107,28 @@ CABLES.GLGUI.RectInstancer.prototype.rebuild=function()
     this._needsRebuild=false;
 }
 
-CABLES.GLGUI.RectInstancer.prototype.getIndex=function()
+GLGUI.RectInstancer.prototype.getIndex=function()
 {
     this._counter++;
     // console.log("inst counter",this._counter);
     return this._counter;
 }
 
-CABLES.GLGUI.RectInstancer.prototype.setPosition=function(idx,x,y)
+GLGUI.RectInstancer.prototype.setPosition=function(idx,x,y)
 {
     this._positions[idx*3+0]=x;
     this._positions[idx*3+1]=y;
     this._needsRebuild=true;
 }
 
-CABLES.GLGUI.RectInstancer.prototype.setSize=function(idx,x,y)
+GLGUI.RectInstancer.prototype.setSize=function(idx,x,y)
 {
     this._sizes[idx*2+0]=x;
     this._sizes[idx*2+1]=y;
     this._needsRebuild=true;
 }
 
-CABLES.GLGUI.RectInstancer.prototype.setColor=function(idx,r,g,b)
+GLGUI.RectInstancer.prototype.setColor=function(idx,r,g,b)
 {
     this._colors[idx*4+0]=r;
     this._colors[idx*4+1]=g;
@@ -136,7 +142,7 @@ CABLES.GLGUI.RectInstancer.prototype.setColor=function(idx,r,g,b)
 
 // ---------------------------------------
 
-CABLES.GLGUI.GlRect=function(instancer,options)
+GLGUI.GlRect=function(instancer,options)
 {
     options=options||{};
     this._rectInstancer=instancer;
@@ -145,22 +151,22 @@ CABLES.GLGUI.GlRect=function(instancer,options)
     this.childs=[];
 }
 
-CABLES.GLGUI.GlRect.prototype.addChild=function(c)
+GLGUI.GlRect.prototype.addChild=function(c)
 {
     this.childs.push(c);
 }
 
-CABLES.GLGUI.GlRect.prototype.setSize=function(x,y)
+GLGUI.GlRect.prototype.setSize=function(x,y)
 {
     this._rectInstancer.setSize(this._attrIndex,x,y);
 }
 
-CABLES.GLGUI.GlRect.prototype.setColor=function(r,g,b)
+GLGUI.GlRect.prototype.setColor=function(r,g,b)
 {
     this._rectInstancer.setColor(this._attrIndex,r,g,b);
 }
 
-CABLES.GLGUI.GlRect.prototype.setPosition=function(_x,_y)
+GLGUI.GlRect.prototype.setPosition=function(_x,_y)
 {
     this.x=_x;
     this.y=_y;
@@ -187,18 +193,18 @@ CABLES.GLGUI.GlRect.prototype.setPosition=function(_x,_y)
 
 // ------------------------------------
 
-CABLES.GLGUI.OP_MIN_WIDTH=100;
+GLGUI.OP_MIN_WIDTH=100;
 
-CABLES.GLGUI.GlOp=function(instancer,op)
+GLGUI.GlOp=function(instancer,op)
 {
     this._op=op;
     this._instancer=instancer;
-    this._glRectBg=new CABLES.GLGUI.GlRect(instancer);
+    this._glRectBg=new GLGUI.GlRect(instancer);
     // this._glRectBg.setPosition(0,0);
     this._glRectBg.setSize(100,30);
     this._glRectBg.setColor(0.1,0.1,0.1);
     this._portRects=[];
-    
+
     this.updatePosition();
 
     for(var i=0;i<this._op.portsIn.length;i++)
@@ -208,11 +214,11 @@ CABLES.GLGUI.GlOp=function(instancer,op)
         this._setupPort(i,this._op.portsOut[i]);
 
     const portsSize=Math.max(this._op.portsIn.length,this._op.portsOut.length)*10;
-    
-    this._glRectBg.setSize(Math.max(CABLES.GLGUI.OP_MIN_WIDTH,portsSize),30);
+
+    this._glRectBg.setSize(Math.max(GLGUI.OP_MIN_WIDTH,portsSize),30);
 }
 
-CABLES.GLGUI.GlOp.prototype.dispose=function()
+GLGUI.GlOp.prototype.dispose=function()
 {
     if(this._glRectBg)
     {
@@ -231,17 +237,17 @@ CABLES.GLGUI.GlOp.prototype.dispose=function()
     this._instancer=null;
 }
 
-CABLES.GLGUI.GlOp.prototype._setupPort=function(i,p)
+GLGUI.GlOp.prototype._setupPort=function(i,p)
 {
-    var r=new CABLES.GLGUI.GlRect(this._instancer,{"parent":this._glRectBg});
+    var r=new GLGUI.GlRect(this._instancer,{"parent":this._glRectBg});
     r.setSize(7,5);
-    
-    if(p.type == CABLES.OP_PORT_TYPE_VALUE) r.setColor(0,1,0.7);
-        else if(p.type == CABLES.OP_PORT_TYPE_FUNCTION) r.setColor(1,1,0);
-        else if(p.type == CABLES.OP_PORT_TYPE_OBJECT) r.setColor(1,0,1);
-        else if(p.type == CABLES.OP_PORT_TYPE_ARRAY) r.setColor(0,0.3,1);
-        else if(p.type == CABLES.OP_PORT_TYPE_STRING) r.setColor(1,0.3,0);
-        else if(p.type == CABLES.OP_PORT_TYPE_DYNAMIC) r.setColor(1,1,1);
+
+    if(p.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) r.setColor(0,1,0.7);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) r.setColor(1,1,0);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) r.setColor(1,0,1);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY) r.setColor(0,0.3,1);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_STRING) r.setColor(1,0.3,0);
+        else if(p.type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) r.setColor(1,1,1);
 
     var y=0;
     if(p.direction==1)y=30-5;
@@ -252,7 +258,7 @@ CABLES.GLGUI.GlOp.prototype._setupPort=function(i,p)
 
 
 
-CABLES.GLGUI.GlOp.prototype.updatePosition=function()
+GLGUI.GlOp.prototype.updatePosition=function()
 {
     if(!this._glRectBg)
     {
@@ -262,12 +268,12 @@ CABLES.GLGUI.GlOp.prototype.updatePosition=function()
     this._glRectBg.setPosition(this._op.uiAttribs.translate.x,this._op.uiAttribs.translate.y);
 }
 
-CABLES.GLGUI.GlOp.prototype.getOp=function()
+GLGUI.GlOp.prototype.getOp=function()
 {
     return this._op;
 }
 
-CABLES.GLGUI.GlOp.prototype.update=function()
+GLGUI.GlOp.prototype.update=function()
 {
     this.updatePosition();
 }
@@ -281,22 +287,22 @@ CABLES.GLGUI.GlOp.prototype.update=function()
 
 
 
-CABLES.GLGUI.GlPatch=function(patch)
+GLGUI.GlPatch=function(patch)
 {
     this._patch=patch;
     this._glOps=[];
-    this._rectInstancer=new CABLES.GLGUI.RectInstancer(this._patch.cgl);
+    this._rectInstancer=new GLGUI.RectInstancer(this._patch.cgl);
     this._rectInstancer.rebuild();
 
     patch.addEventListener("onOpAdd",this.addOp.bind(this));
     patch.addEventListener("onOpDelete",this.deleteOp.bind(this));
 }
 
-CABLES.GLGUI.GlPatch.prototype.getOpAt=function(x,y)
+GLGUI.GlPatch.prototype.getOpAt=function(x,y)
 {
 }
 
-CABLES.GLGUI.GlPatch.prototype.deleteOp=function(op)
+GLGUI.GlPatch.prototype.deleteOp=function(op)
 {
     for(var i=0;i<this._glOps.length;i++)
     {
@@ -306,26 +312,26 @@ CABLES.GLGUI.GlPatch.prototype.deleteOp=function(op)
             this._glOps[i].getOp().removeEventListener("onUiAttribsChange",this._glOps[i].update);
             this._glOps.slice(i,1);
             delOp.dispose();
-            return;         
+            return;
         }
     }
 }
 
-CABLES.GLGUI.GlPatch.prototype.addOp=function(op)
+GLGUI.GlPatch.prototype.addOp=function(op)
 {
     console.log("OP ADDEDDDDDD");
-    const glOp=new CABLES.GLGUI.GlOp(this._rectInstancer,op);
+    const glOp=new GLGUI.GlOp(this._rectInstancer,op);
     this._glOps.push(glOp);
 
     op.addEventListener("onUiAttribsChange",glOp.update.bind(glOp));
 }
 
-CABLES.GLGUI.GlPatch.prototype.render=function(resX,resY,scrollX,scrollY,zoom)
+GLGUI.GlPatch.prototype.render=function(resX,resY,scrollX,scrollY,zoom)
 {
     this._rectInstancer.render(resX,resY,scrollX,scrollY,zoom);
 }
 
-CABLES.GLGUI.GlPatch.prototype.dispose=function()
+GLGUI.GlPatch.prototype.dispose=function()
 {
     while(this._glOps.length>0)
     {
@@ -336,9 +342,9 @@ CABLES.GLGUI.GlPatch.prototype.dispose=function()
     if(this._rectInstancer)this._rectInstancer.dispose();
 }
 
-CABLES.GLGUI.GlPatch.prototype.reset=function()
+GLGUI.GlPatch.prototype.reset=function()
 {
-    this._rectInstancer=new CABLES.GLGUI.RectInstancer(this._patch.cgl);
+    this._rectInstancer=new GLGUI.RectInstancer(this._patch.cgl);
     this._rectInstancer.rebuild();
 
     this.dispose();
@@ -357,6 +363,7 @@ CABLES.GLGUI.GlPatch.prototype.reset=function()
     }
 
     this._rectInstancer.rebuild();
-   
-}
+};
 
+
+export { GLGUI };

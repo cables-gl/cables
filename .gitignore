@@ -5,3 +5,7 @@ src/ops/users
 .idea/
 /doc/api_*
 node_modules
+/dist/
+build/
+
+package-lock.json

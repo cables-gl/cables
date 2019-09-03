@@ -1,5 +1,5 @@
 var audioCtx=CABLES.WEBAUDIO.createAudioContext(op);
-
+const inFftSize = op.inSwitch("FFT size",[64,128,256,512,1024],256);
 const analyser = audioCtx.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
@@ -17,6 +17,11 @@ var fftBufferLength = analyser.frequencyBinCount;
 var fftDataArray = new Uint8Array(fftBufferLength);
 var getFreq=true;
 var array=null;
+
+inFftSize.onChange = function()
+{
+    analyser.fftSize = inFftSize.get();
+}
 
 anData.onChange=function() {
     if(anData.get()=="Frequency")getFreq=true;
@@ -37,7 +42,7 @@ refresh.onTriggered = function()
 
     if(!fftDataArray)
     {
-        op.log("[audioanalyzer] fftDataArray is null, returning.");
+        //op.log("[audioanalyzer] fftDataArray is null, returning.");
         return;
     }
 
