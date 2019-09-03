@@ -12,6 +12,8 @@ var arr=[];
 var numValues=100;
 seed.set(Math.round(Math.random()*99999));
 
+op.setPortGroup("Value Range",[min,max]);
+
 index.onChange=update;
 
 init();
@@ -47,9 +49,9 @@ function init()
     var inMin = min.get();
     var inMax = max.get();
     arr.length=Math.floor(numValues*3) || 300;
+
     if(!isInteger)
     {
-        console.log("not integer");
         for(var i=0;i<arr.length;i+=3)
         {
             arr[i+0]=Math.seededRandom() * ( inMax - inMin ) + inMin ;
@@ -59,7 +61,6 @@ function init()
     }
     else
     {
-        console.log("is integer");
         for(var i=0;i<arr.length;i+=3)
         {
             arr[i+0]=Math.floor(Math.seededRandom() * (inMax - inMin ) + inMin) ;
@@ -67,4 +68,4 @@ function init()
             arr[i+2]=Math.floor(Math.seededRandom() * (inMax - inMin ) + inMin) ;
         }
     }
-}
+};

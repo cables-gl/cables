@@ -15,11 +15,13 @@
             {
                 "type": "0",
                 "name": "Min",
+                "group": "Value Range",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Max",
+                "group": "Value Range",
                 "subType": "number"
             },
             {
