@@ -21,6 +21,11 @@
                 "type": "0",
                 "name": "Max",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
