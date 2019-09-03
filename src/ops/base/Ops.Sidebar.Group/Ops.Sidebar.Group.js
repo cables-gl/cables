@@ -25,7 +25,7 @@ headerTitleText.classList.add('sidebar__group-header-title-text');
 headerTitle.appendChild(headerTitleText);
 var icon = document.createElement('span');
 icon.classList.add('sidebar__group-header-icon');
-icon.classList.add('icon-chevron-up');
+icon.classList.add('iconsidebar-chevron-up');
 headerTitle.appendChild(icon);
 var groupItems = document.createElement('div');
 groupItems.classList.add('sidebar__group-items');
