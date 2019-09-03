@@ -14,6 +14,8 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.setSource(attachments.chromakeymaterial_vert,attachments.chromakeymaterial_frag);
 shader.define('MODE_COLOR');
 
+op.toWorkPortsNeedToBeLinked(texture);
+
 function doRender()
 {
     if(shader)
@@ -28,6 +30,7 @@ function doRender()
 shader.bindTextures=function()
 {
     if(texture.get()) cgl.setTexture(0, texture.val.tex);
+    //else cgl.setTexture(0, CGL.Texture.getTemporaryTexture());
 
 };
 

@@ -117,170 +117,174 @@ function setup()
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
 
-    if(geom.isIndexed())
+    var faces=geom.verticesIndices;
+    if(!geom.isIndexed())
     {
-        var faces=geom.verticesIndices;
-        var indices=uniqueIndices(faces.length/3,num,inVariety.get()=="Random");
+        faces=[];
+        for(var i=0;i<geom.vertices.length/3;i++) faces[i]=i;
+    }
 
-        arrRotations.length=arrPositions.length=num*3;
+    var indices=uniqueIndices(faces.length/3,num,inVariety.get()=="Random");
+
+    arrRotations.length=arrPositions.length=num*3;
 
 
-        for(var i=0;i<num;i++)
+    for(var i=0;i<num;i++)
+    {
+        var index=indices[i];
+        var index3=index*3;
+
+        var px=0;
+        var py=0;
+        var pz=0;
+
+        mat4.identity(m);
+
+        var nx=geom.vertexNormals[faces[index3]*3+0];
+        var ny=geom.vertexNormals[faces[index3]*3+1];
+        var nz=geom.vertexNormals[faces[index3]*3+2];
+
+        if(distMode==DISTMODE_VERTEX)
         {
-            var index=indices[i];
-            var index3=index*3;
+            px=geom.vertices[faces[index3]*3+0];
+            py=geom.vertices[faces[index3]*3+1];
+            pz=geom.vertices[faces[index3]*3+2];
+        }
+        else if(distMode==DISTMODE_TRIANGLE_CENTER)
+        {
+            px=(geom.vertices[faces[index3]*3+0]+geom.vertices[faces[index3+1]*3+0]+geom.vertices[faces[index3+2]*3+0])/3;
+            py=(geom.vertices[faces[index3]*3+1]+geom.vertices[faces[index3+1]*3+1]+geom.vertices[faces[index3+2]*3+1])/3;
+            pz=(geom.vertices[faces[index3]*3+2]+geom.vertices[faces[index3+1]*3+2]+geom.vertices[faces[index3+2]*3+2])/3;
 
-            var px=0;
-            var py=0;
-            var pz=0;
+            nx=(geom.vertexNormals[faces[index3]*3+0]+geom.vertexNormals[faces[index3+1]*3+0]+geom.vertexNormals[faces[index3+2]*3+0])/3;
+            ny=(geom.vertexNormals[faces[index3]*3+1]+geom.vertexNormals[faces[index3+1]*3+1]+geom.vertexNormals[faces[index3+2]*3+1])/3;
+            nz=(geom.vertexNormals[faces[index3]*3+2]+geom.vertexNormals[faces[index3+1]*3+2]+geom.vertexNormals[faces[index3+2]*3+2])/3;
 
-            mat4.identity(m);
+        }
+        else if(distMode==DISTMODE_TRIANGLE_SIDE)
+        {
+            var which=Math.round(Math.seededRandom()*3.0);
+            var whichA=which;
+            var whichB=which+1;
+            if(whichB>2)whichB=0;
 
-            var nx=geom.vertexNormals[faces[index3]*3+0];
-            var ny=geom.vertexNormals[faces[index3]*3+1];
-            var nz=geom.vertexNormals[faces[index3]*3+2];
+            px=( geom.vertices[faces[index3+whichA]*3+0]+geom.vertices[faces[index3+whichB]*3+0] )/2;
+            py=( geom.vertices[faces[index3+whichA]*3+1]+geom.vertices[faces[index3+whichB]*3+1] )/2;
+            pz=( geom.vertices[faces[index3+whichA]*3+2]+geom.vertices[faces[index3+whichB]*3+2] )/2;
 
-            if(distMode==DISTMODE_VERTEX)
-            {
-                px=geom.vertices[faces[index3]*3+0];
-                py=geom.vertices[faces[index3]*3+1];
-                pz=geom.vertices[faces[index3]*3+2];
-            }
-            else if(distMode==DISTMODE_TRIANGLE_CENTER)
-            {
-                px=(geom.vertices[faces[index3]*3+0]+geom.vertices[faces[index3+1]*3+0]+geom.vertices[faces[index3+2]*3+0])/3;
-                py=(geom.vertices[faces[index3]*3+1]+geom.vertices[faces[index3+1]*3+1]+geom.vertices[faces[index3+2]*3+1])/3;
-                pz=(geom.vertices[faces[index3]*3+2]+geom.vertices[faces[index3+1]*3+2]+geom.vertices[faces[index3+2]*3+2])/3;
+        }
+        else if(distMode==DISTMODE_TRIANGLE_RANDOM)
+        {
+            var r=Math.seededRandom();
+            var p1x=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+0],geom.vertices[(faces[index3+1])*3+0]);
+            var p1y=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+1],geom.vertices[(faces[index3+1])*3+1]);
+            var p1z=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+2],geom.vertices[(faces[index3+1])*3+2]);
 
-                nx=(geom.vertexNormals[faces[index3]*3+0]+geom.vertexNormals[faces[index3+1]*3+0]+geom.vertexNormals[faces[index3+2]*3+0])/3;
-                ny=(geom.vertexNormals[faces[index3]*3+1]+geom.vertexNormals[faces[index3+1]*3+1]+geom.vertexNormals[faces[index3+2]*3+1])/3;
-                nz=(geom.vertexNormals[faces[index3]*3+2]+geom.vertexNormals[faces[index3+1]*3+2]+geom.vertexNormals[faces[index3+2]*3+2])/3;
+            var n1x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+0],geom.vertexNormals[(faces[index3+1])*3+0]);
+            var n1y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+1],geom.vertexNormals[(faces[index3+1])*3+1]);
+            var n1z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+2],geom.vertexNormals[(faces[index3+1])*3+2]);
 
-            }
-            else if(distMode==DISTMODE_TRIANGLE_SIDE)
-            {
-                var which=Math.round(Math.seededRandom()*3.0);
-                var whichA=which;
-                var whichB=which+1;
-                if(whichB>2)whichB=0;
+            r=Math.seededRandom();
+            var p2x=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+0],geom.vertices[(faces[index3+2])*3+0]);
+            var p2y=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+1],geom.vertices[(faces[index3+2])*3+1]);
+            var p2z=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+2],geom.vertices[(faces[index3+2])*3+2]);
 
-                px=( geom.vertices[faces[index3+whichA]*3+0]+geom.vertices[faces[index3+whichB]*3+0] )/2;
-                py=( geom.vertices[faces[index3+whichA]*3+1]+geom.vertices[faces[index3+whichB]*3+1] )/2;
-                pz=( geom.vertices[faces[index3+whichA]*3+2]+geom.vertices[faces[index3+whichB]*3+2] )/2;
+            var n2x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+0],geom.vertexNormals[(faces[index3+2])*3+0]);
+            var n2y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+1],geom.vertexNormals[(faces[index3+2])*3+1]);
+            var n2z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+2],geom.vertexNormals[(faces[index3+2])*3+2]);
 
-            }
-            else if(distMode==DISTMODE_TRIANGLE_RANDOM)
-            {
-                var r=Math.seededRandom();
-                var p1x=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+0],geom.vertices[(faces[index3+1])*3+0]);
-                var p1y=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+1],geom.vertices[(faces[index3+1])*3+1]);
-                var p1z=CABLES.map(r,0,1,geom.vertices[(faces[index3+0])*3+2],geom.vertices[(faces[index3+1])*3+2]);
+            r=Math.seededRandom();
+            var p3x=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+0],geom.vertices[(faces[index3+0])*3+0]);
+            var p3y=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+1],geom.vertices[(faces[index3+0])*3+1]);
+            var p3z=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+2],geom.vertices[(faces[index3+0])*3+2]);
 
-                var n1x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+0],geom.vertexNormals[(faces[index3+1])*3+0]);
-                var n1y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+1],geom.vertexNormals[(faces[index3+1])*3+1]);
-                var n1z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+0])*3+2],geom.vertexNormals[(faces[index3+1])*3+2]);
+            var n3x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+0],geom.vertexNormals[(faces[index3+0])*3+0]);
+            var n3y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+1],geom.vertexNormals[(faces[index3+0])*3+1]);
+            var n3z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+2],geom.vertexNormals[(faces[index3+0])*3+2]);
 
-                r=Math.seededRandom();
-                var p2x=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+0],geom.vertices[(faces[index3+2])*3+0]);
-                var p2y=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+1],geom.vertices[(faces[index3+2])*3+1]);
-                var p2z=CABLES.map(r,0,1,geom.vertices[(faces[index3+1])*3+2],geom.vertices[(faces[index3+2])*3+2]);
+            px=(p1x+p2x+p3x)/3;
+            py=(p1y+p2y+p3y)/3;
+            pz=(p1z+p2z+p3z)/3;
 
-                var n2x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+0],geom.vertexNormals[(faces[index3+2])*3+0]);
-                var n2y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+1],geom.vertexNormals[(faces[index3+2])*3+1]);
-                var n2z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+1])*3+2],geom.vertexNormals[(faces[index3+2])*3+2]);
+            nx=(n1x+n2x+n3x)/3;
+            ny=(n1y+n2y+n3y)/3;
+            nz=(n1z+n2z+n3z)/3;
+        }
 
-                r=Math.seededRandom();
-                var p3x=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+0],geom.vertices[(faces[index3+0])*3+0]);
-                var p3y=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+1],geom.vertices[(faces[index3+0])*3+1]);
-                var p3z=CABLES.map(r,0,1,geom.vertices[(faces[index3+2])*3+2],geom.vertices[(faces[index3+0])*3+2]);
+        arrPositions[i*3+0]=px;
+        arrPositions[i*3+1]=py;
+        arrPositions[i*3+2]=pz;
+        mat4.translate(m,m,[px,py,pz]);
 
-                var n3x=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+0],geom.vertexNormals[(faces[index3+0])*3+0]);
-                var n3y=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+1],geom.vertexNormals[(faces[index3+0])*3+1]);
-                var n3z=CABLES.map(r,0,1,geom.vertexNormals[(faces[index3+2])*3+2],geom.vertexNormals[(faces[index3+0])*3+2]);
+        // rotate to normal direction
+        vec3.set(norm,nx,ny,nz );
+        vec3.set(vm2,1,0,0);
+        quat.rotationTo(q,vm2,norm);
 
-                px=(p1x+p2x+p3x)/3;
-                py=(p1y+p2y+p3y)/3;
-                pz=(p1z+p2z+p3z)/3;
-
-                nx=(n1x+n2x+n3x)/3;
-                ny=(n1y+n2y+n3y)/3;
-                nz=(n1z+n2z+n3z)/3;
-            }
-
-            arrPositions[i*3+0]=px;
-            arrPositions[i*3+1]=py;
-            arrPositions[i*3+2]=pz;
-            mat4.translate(m,m,[px,py,pz]);
-
-            // rotate to normal direction
-            vec3.set(norm,nx,ny,nz );
-            vec3.set(vm2,1,0,0);
-            quat.rotationTo(q,vm2,norm);
-
-            mat4.fromQuat(qMat, q);
-            mat4.mul(m,m,qMat);
+        mat4.fromQuat(qMat, q);
+        mat4.mul(m,m,qMat);
 
 
-            // random rotate around up axis
-            if(inRotateRandom.get())
-            {
-                var mr=mat4.create();
-                var qbase=quat.create();
-                quat.rotateX(qbase,qbase,Math.seededRandom()*360*CGL.DEG2RAD);
-                mat4.fromQuat(mr,qbase);
-                mat4.mul(m,m,mr);
-            }
+        // random rotate around up axis
+        if(inRotateRandom.get())
+        {
+            var mr=mat4.create();
+            var qbase=quat.create();
+            quat.rotateX(qbase,qbase,Math.seededRandom()*360*CGL.DEG2RAD);
+            mat4.fromQuat(mr,qbase);
+            mat4.mul(m,m,mr);
+        }
 
-            // rotate -90 degree
-            var mr2=mat4.create();
-            var qbase2=quat.create();
-            quat.rotateZ(qbase2,qbase2,-90*CGL.DEG2RAD);
-            mat4.fromQuat(mr2,qbase2);
-            mat4.mul(m,m,mr2);
+        // rotate -90 degree
+        var mr2=mat4.create();
+        var qbase2=quat.create();
+        quat.rotateZ(qbase2,qbase2,-90*CGL.DEG2RAD);
+        mat4.fromQuat(mr2,qbase2);
+        mat4.mul(m,m,mr2);
 
-            // scale
-            if(inSizeMin.get()!=1.0 || inSizeMax!=1.0)
-            {
-                var sc=inSizeMin.get()+ ( Math.seededRandom()*(inSizeMax.get()-inSizeMin.get()) );
-                mat4.scale(m,m,[sc,sc,sc]);
-            }
+        // scale
+        if(inSizeMin.get()!=1.0 || inSizeMax!=1.0)
+        {
+            var sc=inSizeMin.get()+ ( Math.seededRandom()*(inSizeMax.get()-inSizeMin.get()) );
+            mat4.scale(m,m,[sc,sc,sc]);
+        }
 
 
 
 
 
 
-            // //quaternion to euler, KINDA works, but not really :/
-            // var finalq=q;//quat.create();
-            // mat4.getRotation(finalq,m);
+        // //quaternion to euler, KINDA works, but not really :/
+        // var finalq=q;//quat.create();
+        // mat4.getRotation(finalq,m);
 
-            // function clamp(v)
-            // {
-            //     return Math.min(1,Math.max(-1,v) ) ;
-            // }
+        // function clamp(v)
+        // {
+        //     return Math.min(1,Math.max(-1,v) ) ;
+        // }
 
-            // var yaw = Math.atan2(2.0*(finalq[1]*finalq[2] + finalq[3]*finalq[0]), finalq[3]*finalq[3] - finalq[0]*finalq[0] - finalq[1]*finalq[1] + finalq[2]*finalq[2]);
-            // var pitch = Math.asin( clamp( -2.0*(finalq[0]*finalq[2] - finalq[3]*finalq[1])));
-            // var roll = Math.atan2(2.0*(finalq[0]*finalq[1] + finalq[3]*finalq[2]), finalq[3]*finalq[3] + finalq[0]*finalq[0] - finalq[1]*finalq[1] - finalq[2]*finalq[2]);
+        // var yaw = Math.atan2(2.0*(finalq[1]*finalq[2] + finalq[3]*finalq[0]), finalq[3]*finalq[3] - finalq[0]*finalq[0] - finalq[1]*finalq[1] + finalq[2]*finalq[2]);
+        // var pitch = Math.asin( clamp( -2.0*(finalq[0]*finalq[2] - finalq[3]*finalq[1])));
+        // var roll = Math.atan2(2.0*(finalq[0]*finalq[1] + finalq[3]*finalq[2]), finalq[3]*finalq[3] + finalq[0]*finalq[0] - finalq[1]*finalq[1] - finalq[2]*finalq[2]);
 
-            // arrRotations[i*3+0]=360-(pitch*CGL.RAD2DEG);
-            // arrRotations[i*3+1]=360-(yaw*CGL.RAD2DEG);
-            // arrRotations[i*3+2]=(roll*CGL.RAD2DEG);
-
-
+        // arrRotations[i*3+0]=360-(pitch*CGL.RAD2DEG);
+        // arrRotations[i*3+1]=360-(yaw*CGL.RAD2DEG);
+        // arrRotations[i*3+2]=(roll*CGL.RAD2DEG);
 
 
-            // save
-            for(var a=0;a<16;a++)
-            {
-                matrixArray[i*16+a]=m[a];
-            }
+
+
+        // save
+        for(var a=0;a<16;a++)
+        {
+            matrixArray[i*16+a]=m[a];
         }
     }
-    else
-    {
-        console.error("geom is not indexed");
-    }
+    // }
+    // else
+    // {
+    //     console.error("geom is not indexed");
+    // }
 
     if(inDraw.get() && mesh)
     {

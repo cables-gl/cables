@@ -8,5 +8,37 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1565717348413
+    "created": 1565717348413,
+    "summary": "Join array values to a string (concat)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "5",
+                "name": "Seperator"
+            },
+            {
+                "type": "0",
+                "name": "New Line",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Join_v2"
+    }
 }
