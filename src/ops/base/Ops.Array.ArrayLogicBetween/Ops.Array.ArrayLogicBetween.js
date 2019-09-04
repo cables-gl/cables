@@ -13,7 +13,6 @@ function update()
     if(!arr)return;
     const min=inMin.get();
     const max=inMax.get();
-    const pass = inPass.get();
     var newArr=[];
     newArr.length=arr.length;
 
