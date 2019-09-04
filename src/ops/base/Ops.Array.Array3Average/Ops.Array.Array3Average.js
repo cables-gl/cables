@@ -27,6 +27,10 @@ inArr.onChange=function()
         z+=arr[i+2];
     }
 
+    x /= arr.length/3;
+    y /= arr.length/3;
+    z /= arr.length/3;
+
     avgX.set(x);
     avgY.set(y);
     avgZ.set(z);
