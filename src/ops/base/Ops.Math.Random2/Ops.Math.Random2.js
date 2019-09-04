@@ -10,6 +10,7 @@ max.onChange=genRandom;
 min.onChange=genRandom;
 inInteger.onChange=genRandom;
 
+op.setPortGroup("Value Range",[min,max]);
 genRandom();
 
 function genRandom()
@@ -18,4 +19,4 @@ function genRandom()
     if(inInteger.get())r=Math.floor(r);
     result.set(r);
     outTrig.trigger();
-}
+};

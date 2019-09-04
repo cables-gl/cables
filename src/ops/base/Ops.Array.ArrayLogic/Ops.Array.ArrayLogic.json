@@ -13,6 +13,11 @@
             },
             {
                 "type": "0",
+                "name": "value if true",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "value if false",
                 "subType": "number"
             },

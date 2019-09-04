@@ -32,11 +32,8 @@
   box-sizing: border-box;
   overflow-y: auto;
   overflow-x: hidden;
-  /* overflow-y: overlay; */
-  /* max-height: 1000px; */
-  /* ransition: max-height 0.5s; */
   font-size: 13px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", SimSun, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: Arial;
   line-height: 1em; /* prevent emojis from breaking height of the title */
   --sidebar-border-radius: 4px;
   --sidebar-monospace-font-stack: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;

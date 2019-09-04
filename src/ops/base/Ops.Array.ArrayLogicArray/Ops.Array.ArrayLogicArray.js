@@ -7,6 +7,8 @@
 
 const inArray_0 = op.inArray("array 0"),
     inArray_1 = op.inArray("array 1"),
+    inValueIfTrue = op.inFloat("value if true",1.0),
+    inValueIfFalse = op.inFloat("value if false",0.0),
     mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
                 '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
     outArray = op.outArray("Array result"),
@@ -32,7 +34,8 @@ const LOGIC_GREATER = 0,
     LOGIC_EQUAL_PASS = 10,
     LOGIC_NOT_EQUAL_PASS = 11;
 
-mathSelect.onChange = onFilterChange;
+mathSelect.onChange = inValueIfTrue.onChange =
+inValueIfFalse.onChange = onFilterChange;
 
 function onFilterChange()
 {
@@ -58,6 +61,10 @@ function update()
 {
     var array0 = inArray_0.get();
     var array1 = inArray_1.get();
+
+    var valueFalse = inValueIfFalse.get();
+    var valueTrue = inValueIfTrue.get();
+
     //reset array
     mathArray.length = 0;
 
@@ -95,11 +102,11 @@ function update()
         {
             if(array0[i] > array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
 
@@ -110,11 +117,11 @@ function update()
         {
             if(array0[i] < array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -124,11 +131,11 @@ function update()
         {
             if(array0[i] >= array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -138,11 +145,11 @@ function update()
         {
             if(array0[i] <= array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -152,11 +159,11 @@ function update()
         {
             if(array0[i] === array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -166,11 +173,11 @@ function update()
         {
             if(array0[i] !== array1[i])
             {
-                mathArray[i] = 1;
+                mathArray[i] = valueTrue;
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -185,7 +192,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -199,7 +206,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -213,7 +220,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -227,7 +234,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -241,7 +248,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }
@@ -256,7 +263,7 @@ function update()
             }
             else
             {
-                mathArray[i] = 0;
+                mathArray[i] = valueFalse;
             }
         }
     }

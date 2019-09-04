@@ -1,24 +1,32 @@
-const index=op.inValueInt("index");
-const seed=op.inValueFloat("random seed");
-const min=op.inValueFloat("Min");
-const max=op.inValueFloat("Max");
-const outX=op.outValue("X");
-const outY=op.outValue("Y");
-const outZ=op.outValue("Z");
-
-var numValues=100;
-min.set(-1);
-max.set(1);
-seed.set(Math.round(Math.random()*99999));
-
-max.onChange=init;
-min.onChange=init;
-seed.onChange=init;
+const
+    index=op.inValueInt("index",0.0),
+    seed=op.inValueFloat("random seed"),
+    min=op.inValueFloat("Min",0),
+    max=op.inValueFloat("Max",1),
+    outX=op.outValue("X"),
+    outY=op.outValue("Y"),
+    outZ=op.outValue("Z"),
+    inInteger=op.inValueBool("Integer",false);
 
 var arr=[];
+var numValues=100;
+seed.set(Math.round(Math.random()*99999));
+
+op.setPortGroup("Value Range",[min,max]);
+
+index.onChange=update;
+
 init();
 
-index.onChange=function()
+op.init=inInteger.onChange=
+max.onChange=min.onChange=
+seed.onChange=inInteger.onChange=function()
+{
+    init();
+    update();
+}
+
+function update()
 {
     var idx=Math.floor(index.get())||0;
     if(idx*3>=arr.length)
@@ -37,12 +45,27 @@ index.onChange=function()
 function init()
 {
     Math.randomSeed=seed.get();
-
+    var isInteger = inInteger.get();
+    var inMin = min.get();
+    var inMax = max.get();
     arr.length=Math.floor(numValues*3) || 300;
-    for(var i=0;i<arr.length;i+=3)
+
+    if(!isInteger)
     {
-        arr[i+0]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
-        arr[i+1]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
-        arr[i+2]=Math.seededRandom()* ( max.get() - min.get() ) + min.get() ;
+        for(var i=0;i<arr.length;i+=3)
+        {
+            arr[i+0]=Math.seededRandom() * ( inMax - inMin ) + inMin ;
+            arr[i+1]=Math.seededRandom() * ( inMax - inMin ) + inMin ;
+            arr[i+2]=Math.seededRandom() * ( inMax - inMin ) + inMin ;
+        }
     }
-}
+    else
+    {
+        for(var i=0;i<arr.length;i+=3)
+        {
+            arr[i+0]=Math.floor(Math.seededRandom() * (inMax - inMin ) + inMin) ;
+            arr[i+1]=Math.floor(Math.seededRandom() * (inMax - inMin ) + inMin) ;
+            arr[i+2]=Math.floor(Math.seededRandom() * (inMax - inMin ) + inMin) ;
+        }
+    }
+};
