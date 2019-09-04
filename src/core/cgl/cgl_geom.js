@@ -80,7 +80,7 @@ Geometry.prototype.clear = function ()
     this.verticesIndices.length = 0;
     this.texCoords = new Float32Array([]);
     this.texCoordsIndices.length = 0;
-    this.vertexNormals.length = 0;
+    this.vertexNormals = new Float32Array([]);
 };
 
 /**
