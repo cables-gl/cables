@@ -7,7 +7,7 @@ var avgZ=op.outValue("Average Z");
 
 inArr.onChange=function()
 {
-    
+
     var arr=inArr.get();
     if(!arr)
     {
@@ -19,14 +19,18 @@ inArr.onChange=function()
     var x=0;
     var y=0;
     var z=0;
-    
+
     for(var i=0;i<arr.length;i+=3)
     {
         x+=arr[i+0];
         y+=arr[i+1];
         z+=arr[i+2];
     }
-    
+
+    x /= arr.length/3;
+    y /= arr.length/3;
+    z /= arr.length/3;
+
     avgX.set(x);
     avgY.set(y);
     avgZ.set(z);

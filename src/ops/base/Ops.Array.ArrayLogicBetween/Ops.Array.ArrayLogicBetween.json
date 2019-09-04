@@ -24,6 +24,11 @@
                 "type": "0",
                 "name": "Max",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "pass value when true",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

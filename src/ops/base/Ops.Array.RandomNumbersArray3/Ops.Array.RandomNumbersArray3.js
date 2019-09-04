@@ -4,11 +4,13 @@ const
     max=op.inValueFloat("Max",1),
     seed=op.inValueFloat("random seed"),
     closed=op.inValueBool("Last == First"),
+    inInteger=op.inValueBool("Integer",false),
     values=op.outArray("values"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length");
 
 op.setPortGroup("Value Range",[min,max]);
+op.setPortGroup("",[seed,closed]);
 
 values.ignoreValueSerialize=true;
 
@@ -16,7 +18,8 @@ closed.onChange=max.onChange=
     min.onChange=
     numValues.onChange=
     seed.onChange=
-    values.onLinkChanged=init;
+    values.onLinkChanged=
+    inInteger.onChange=init;
 
 var arr=[];
 init();
@@ -25,12 +28,23 @@ function init()
 {
     Math.randomSeed=seed.get();
 
+    var isInteger=inInteger.get();
+
     var arrLength = arr.length=Math.floor(Math.abs(numValues.get()*3));
     for(var i=0;i<arrLength;i+=3)
     {
-        arr[i+0]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
-        arr[i+1]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
-        arr[i+2]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+        if(!isInteger)
+        {
+            arr[i+0]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+            arr[i+1]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+            arr[i+2]=Math.seededRandom() * ( max.get() - min.get() ) + min.get() ;
+        }
+        else
+        {
+            arr[i+0]=Math.floor(Math.seededRandom() * ( max.get() - min.get() ) + min.get()) ;
+            arr[i+1]=Math.floor(Math.seededRandom() * ( max.get() - min.get() ) + min.get()) ;
+            arr[i+2]=Math.floor(Math.seededRandom() * ( max.get() - min.get() ) + min.get()) ;
+        }
     }
 
     if(closed.get() && arrLength>3)
@@ -44,4 +58,4 @@ function init()
     values.set(arr);
     outTotalPoints.set(arrLength/3);
     outArrayLength.set(arrLength);
-}
+};

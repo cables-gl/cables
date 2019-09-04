@@ -27,6 +27,11 @@
                 "type": "0",
                 "name": "Last == First",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

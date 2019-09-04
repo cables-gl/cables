@@ -23,6 +23,11 @@
                 "type": "0",
                 "name": "random seed",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
