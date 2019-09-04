@@ -39,12 +39,33 @@
         ],
         "name": "Ops.Array.ArrayLogicBetween"
     },
-    "summary": "outputs an array of 0 and 1 if array value is between of min and max or not",
+    "summary": "If value of array is between min and max then the value is 1 else 0",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Min",
+                "text": "Min value to be between"
+            },
+            {
+                "name": "Max",
+                "text": "Max value to be between"
+            },
+            {
+                "name": "pass value when true",
+                "text": "When enabled values between are passed through instead of being 1"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     }
 }
