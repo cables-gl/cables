@@ -66,12 +66,24 @@
                 "text": "Array 1 in"
             },
             {
+                "name": "value if true",
+                "text": "default 1 - set your own value if it evaluates to true"
+            },
+            {
+                "name": "value if false",
+                "text": "default 0 - set your own value if it evaluates to false"
+            },
+            {
                 "name": "Comparison mode",
                 "text": "Comparison mode"
             },
             {
                 "name": "Array result",
                 "text": "Array out"
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array out "
             }
         ]
     }
