@@ -1,0 +1,58 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Multiply"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Repeat"
+    },
+    "summary": "Repeat Image",
+    "author": "59d794f763898eb73bd67a7e",
+    "authorName": "pandur",
+    "id": "f477746c-2699-4da5-9786-04867aeae8a6",
+    "created": 1510252477792,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Repeat renamed to Ops.Gl.TextureEffects.RepeatTexture",
+            "author": "pandur",
+            "date": 1567674684001
+        }
+    ]
+}

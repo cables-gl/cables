@@ -1,0 +1,71 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "9643edc7-e479-4b26-9f7a-343cdcdc81f4",
+    "created": 1512653759876,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Average X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.Array3Average"
+    },
+    "summary": "average x,y,z values of an array3x",
+    "youtubeid": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.ArrayAnalyze",
+        "Ops.Array.Array3xAnalyze"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "The xyz array to analyze"
+            },
+            {
+                "name": "Average X",
+                "text": "The average of the x component"
+            },
+            {
+                "name": "Average Y",
+                "text": "The average of the y component"
+            },
+            {
+                "name": "Average Z",
+                "text": "The average of the z component"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.Array3xAverage renamed to Ops.Array.Array3Average",
+            "author": "pandur",
+            "date": 1561119837246
+        },
+        {
+            "message": "Ops.Array.Array3Average renamed to Ops.Array.Array3GetAverage",
+            "author": "pandur",
+            "date": 1567671227369
+        }
+    ]
+}

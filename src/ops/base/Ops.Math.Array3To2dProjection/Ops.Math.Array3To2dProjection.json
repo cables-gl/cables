@@ -1,0 +1,65 @@
+{
+    "authorName": "pandur",
+    "id": "8ac0bd90-ba6f-40f7-8429-21bff899cb14",
+    "created": 1519813779726,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "3",
+                "name": "Array3x"
+            },
+            {
+                "type": "0",
+                "name": "fov",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "w",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "h",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "mul",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array2x"
+            }
+        ],
+        "name": "Ops.Math.Array3x2dProjection"
+    },
+    "summary": "calculate 2d positions of an array3x",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Math.Array3x2dProjection renamed to Ops.Math.Array3To2dProjection",
+            "author": "pandur",
+            "date": 1567672631011
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Start",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "End",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Fog"
+    },
+    "authorName": "pandur",
+    "id": "ad61e198-f178-42d0-8be9-cc776365cd3b",
+    "created": 1524478605086,
+    "summary": "Fog as a shadereffect applied to a material",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.ShaderEffects.Fog renamed to Ops.Gl.ShaderEffects.FogEffect",
+            "author": "pandur",
+            "date": 1567674860442
+        }
+    ]
+}
