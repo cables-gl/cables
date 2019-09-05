@@ -50,5 +50,12 @@
     "summary": "Fog as a shadereffect applied to a material",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.ShaderEffects.Fog renamed to Ops.Gl.ShaderEffects.FogEffect",
+            "author": "pandur",
+            "date": 1567674860442
+        }
+    ]
 }

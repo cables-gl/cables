@@ -47,5 +47,12 @@
     "created": 1510252477792,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.TextureEffects.Repeat renamed to Ops.Gl.TextureEffects.RepeatTexture",
+            "author": "pandur",
+            "date": 1567674684001
+        }
+    ]
 }

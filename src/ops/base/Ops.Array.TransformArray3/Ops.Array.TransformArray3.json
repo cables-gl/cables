@@ -83,6 +83,11 @@
             "message": "Ops.Math.Array3xTransform renamed to Ops.Array.Array3Transform",
             "author": "pandur",
             "date": 1561119973012
+        },
+        {
+            "message": "Ops.Array.Array3Transform renamed to Ops.Array.TransformArray3",
+            "author": "pandur",
+            "date": 1567674630199
         }
     ]
 }
