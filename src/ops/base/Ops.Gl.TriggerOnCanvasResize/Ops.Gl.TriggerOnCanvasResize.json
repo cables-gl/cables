@@ -13,5 +13,12 @@
             }
         ],
         "name": "Ops.Gl.OnResize"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.OnResize renamed to Ops.Gl.TriggerOnCanvasResize",
+            "author": "pandur",
+            "date": 1567670124470
+        }
+    ]
 }

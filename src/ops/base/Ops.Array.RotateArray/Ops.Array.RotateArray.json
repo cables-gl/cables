@@ -42,5 +42,12 @@
                 "text": "The modified array out"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayRotate renamed to Ops.Array.RotateArray",
+            "author": "pandur",
+            "date": 1567671309381
+        }
+    ]
 }

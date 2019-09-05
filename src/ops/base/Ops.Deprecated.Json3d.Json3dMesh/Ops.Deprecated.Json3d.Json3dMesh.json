@@ -69,5 +69,18 @@
                 "text": "If `Size` is `0` then it will not be resized. If size is not `0`, the mesh will be scaled exactly to that size."
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json3d.Json3dMesh renamed to Ops.Deprecated.Json3d.Json3dMesh",
+            "author": "pandur",
+            "date": 1567674037157
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Json3d.Mesh3d"
+    ],
+    "youtubeids": []
 }

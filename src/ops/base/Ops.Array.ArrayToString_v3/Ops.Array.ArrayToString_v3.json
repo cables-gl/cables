@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1565717313677
+        },
+        {
+            "message": "Ops.String.Join_v2 renamed to Ops.Array.ArrayToString_v3",
+            "author": "pandur",
+            "date": 1567672278393
         }
     ],
     "authorName": "pandur",

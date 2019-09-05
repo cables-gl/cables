@@ -56,5 +56,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Array.ArraySmooth renamed to Ops.Array.AverageArray",
+            "author": "pandur",
+            "date": 1567671122131
+        }
+    ]
 }

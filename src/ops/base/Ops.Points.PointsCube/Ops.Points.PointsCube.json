@@ -85,6 +85,11 @@
             "message": "fixed - now correctly creates a ointField when the op is created",
             "author": "andro",
             "date": 1559136995246
+        },
+        {
+            "message": "Ops.Points.PointsField3d renamed to Ops.Points.PointsCube",
+            "author": "pandur",
+            "date": 1567672099542
         }
     ]
 }

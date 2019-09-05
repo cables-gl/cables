@@ -40,5 +40,19 @@
         ],
         "name": "Ops.Array.ArrayPushValue3x"
     },
-    "summary": "Adds three values at once into an array"
+    "summary": "Push three numbers to the end of an array",
+    "changelog": [
+        {
+            "message": "Ops.Array.ArrayPushValue3x renamed to Ops.Array.Array3PushNumbers",
+            "author": "pandur",
+            "date": 1567672473987
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

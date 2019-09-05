@@ -77,6 +77,11 @@
             "message": "Ops.Value.Value3x renamed to Ops.Value.Value3",
             "author": "pandur",
             "date": 1560411340628
+        },
+        {
+            "message": "Ops.Value.Value3 renamed to Ops.Value.Trigger3Numbers",
+            "author": "pandur",
+            "date": 1567671912312
         }
     ]
 }

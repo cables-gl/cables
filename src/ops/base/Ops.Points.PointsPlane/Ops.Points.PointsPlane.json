@@ -85,6 +85,11 @@
             "message": "fixed the columns and rows parameter not resetting the array",
             "author": "andro",
             "date": 1550658911313
+        },
+        {
+            "message": "Ops.Array.PointArray.Field renamed to Ops.Points.PointsPlane",
+            "author": "pandur",
+            "date": 1567672061954
         }
     ],
     "issues": "",

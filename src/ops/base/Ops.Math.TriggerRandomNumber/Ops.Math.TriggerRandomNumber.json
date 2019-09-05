@@ -42,5 +42,12 @@
     "summary": "generate random number between min and max",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Math.Random2 renamed to Ops.Math.TriggerRandomNumber",
+            "author": "pandur",
+            "date": 1567671715697
+        }
+    ]
 }

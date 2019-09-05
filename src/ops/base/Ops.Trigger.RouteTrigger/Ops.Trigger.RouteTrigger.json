@@ -76,5 +76,12 @@
     "youtubeid": "nCJO9yF7bnk",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Trigger.SwitchTrigger renamed to Ops.Trigger.RouteTrigger",
+            "author": "pandur",
+            "date": 1567672707912
+        }
+    ]
 }
