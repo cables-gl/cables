@@ -248,7 +248,7 @@ Geometry.prototype.copy = function ()
     geom.texCoordsIndices.length = this.texCoordsIndices.length;
     for (i = 0; i < this.texCoordsIndices.length; i++) geom.texCoordsIndices[i] = this.texCoordsIndices[i];
 
-    geom.vertexNormals.length = this.vertexNormals.length;
+    geom.vertexNormals = new Float32Array(this.vertexNormals.length);
     for (i = 0; i < this.vertexNormals.length; i++) geom.vertexNormals[i] = this.vertexNormals[i];
 
     if (this.tangents)
@@ -533,7 +533,7 @@ Geometry.prototype.unIndex = function (reIndex)
     var newNormals = [];
     var count = 0;
     var i = 0;
-    this.vertexNormals.length = 0;
+    this.vertexNormals=[];
 
     for (i = 0; i < this.verticesIndices.length; i += 3)
     {

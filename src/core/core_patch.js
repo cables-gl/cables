@@ -300,7 +300,7 @@ Patch.prototype.createOp = function (identifier, id)
             }
             else
             {
-                throw("could not find op by id",opId);
+                throw("could not find op by id: "+opId);
             }
         }
 
