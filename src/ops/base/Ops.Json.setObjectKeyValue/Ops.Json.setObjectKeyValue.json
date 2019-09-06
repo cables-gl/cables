@@ -1,0 +1,29 @@
+{
+    "updated": 1519815720330,
+    "authorName": "pandur",
+    "id": "24298c15-15a6-4ced-8fbe-244257b63b96",
+    "created": 1519815720331,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Key"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyValue"
+    }
+}

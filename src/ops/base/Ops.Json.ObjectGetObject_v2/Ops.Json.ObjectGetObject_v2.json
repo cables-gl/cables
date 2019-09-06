@@ -1,0 +1,39 @@
+{
+    "id": "d1dfa305-89db-4ca1-b0ac-2d6321d76ae8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567761017731
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567761034900,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "5",
+                "name": "Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetObject_v2"
+    },
+    "summary": "Get an object from an object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

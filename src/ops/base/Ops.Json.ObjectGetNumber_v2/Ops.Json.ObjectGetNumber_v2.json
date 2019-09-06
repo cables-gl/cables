@@ -1,0 +1,40 @@
+{
+    "id": "a7335e79-046e-40da-9e9c-db779b0a5e53",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567760939682
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567760965947,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Data"
+            },
+            {
+                "type": "5",
+                "name": "Key"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetNumber_v2"
+    },
+    "summary": "Get a number from an object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

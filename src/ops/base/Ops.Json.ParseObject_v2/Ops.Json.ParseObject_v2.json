@@ -1,0 +1,40 @@
+{
+    "id": "2ce8a4d3-37d3-4cdc-abd1-a560fbe841ee",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567760842315
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567760862485,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "JSON String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Valid",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.ParseObject_v2"
+    },
+    "summary": "Parses a string to a JSON object ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
