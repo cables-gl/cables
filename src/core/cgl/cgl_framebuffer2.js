@@ -43,7 +43,6 @@ const Framebuffer2 = function(cgl, w, h, options) {
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
     if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
-
     if (!this._options.hasOwnProperty("multisampling"))
     {
         this._options.multisampling = false;

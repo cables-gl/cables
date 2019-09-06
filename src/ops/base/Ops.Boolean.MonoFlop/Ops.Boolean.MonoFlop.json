@@ -1,5 +1,4 @@
 {
-    "updated": 1541805009707,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3a4b0a78-4172-41c7-8248-95cb0856ecc8",
@@ -27,6 +26,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Activated"
+            },
             {
                 "type": "0",
                 "name": "Result",

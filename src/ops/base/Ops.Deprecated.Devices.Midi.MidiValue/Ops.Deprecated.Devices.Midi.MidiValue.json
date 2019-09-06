@@ -1,0 +1,61 @@
+{
+    "updated": 1516046846727,
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "badd2c4e-c9bb-45d4-89dd-779ff4d88b11",
+    "created": 1515015827119,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "note"
+            },
+            {
+                "type": "0",
+                "name": "Channel"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            },
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiValue"
+    },
+    "summary": "read a value from a midi knob",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "eDlaFD_d5lc",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiValue renamed to Ops.Dreprecated.Devices.Midi.MidiValue",
+            "author": "pandur",
+            "date": 1560334311372
+        },
+        {
+            "message": "Ops.Dreprecated.Devices.Midi.MidiValue renamed to Ops.Deprecated.Devices.Midi.MidiValue",
+            "author": "pandur",
+            "date": 1567675263840
+        }
+    ]
+}
