@@ -3,7 +3,7 @@ var inFilename=op.inValueString("Filename","cables");
 var inStart=op.inValue("Start Time",0);
 var inEnd=op.inValue("End Time",1);
 var inFps=op.inValue("FPS",30);
-var inFormat=op.inValueSelect("Fileformat",["webm","png"],"webm");
+var inFormat=op.inValueSelect("Fileformat",["webm","png"],"png");
 var inExec=op.inTriggerButton("Render");
 
 var outProgress=op.outValue("Progress");

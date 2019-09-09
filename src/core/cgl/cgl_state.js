@@ -550,7 +550,7 @@ const Context = function (_patch)
         if (!filename) filename = "cables_" + dateStr + ".png";
         else filename += ".png";
 
-        this.patch.cgl.screenShot((blob) =>
+        this.patch.cgl.screenShot(function(blob)
         {
             this.canvas.width = w;
             this.canvas.height = h;
@@ -560,17 +560,23 @@ const Context = function (_patch)
 
                 anchor.download = filename;
                 anchor.href = URL.createObjectURL(blob);
-                document.body.appendChild(anchor);
 
-                anchor.click();
-                if (cb) cb(blob);
-                anchor.remove();
+                setTimeout(function()
+                {
+                    anchor.click();
+                    if (cb) cb(blob);
+
+                    // anchor.remove(); 
+
+                },100);
+
+                
             }
             else
             {
                 console.log("screenshot: no blob");
             }
-        }, true);
+        }.bind(this), true);
     };
 };
 
