@@ -1,5 +1,8 @@
 {
-    "libs": [],
+    "libs": [
+        "posenet.js",
+        "posenet-tfjs.js"
+    ],
     "summary": "Trigger other ops once every frame to create smooth animations (renderer)",
     "layout": {
         "portsIn": [

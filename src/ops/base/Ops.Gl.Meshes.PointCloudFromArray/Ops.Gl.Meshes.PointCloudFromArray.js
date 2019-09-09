@@ -1,4 +1,3 @@
-
 const
     exe=op.inTrigger("exe"),
     arr=op.inArray("Array"),
@@ -7,12 +6,13 @@ const
     outGeom=op.outObject("Geometry"),
     pTexCoordRand=op.inValueBool("Scramble Texcoords",true),
     seed=op.inValue("Seed"),
+    inCoords=op.inArray("Coordinates"),
     vertCols=op.inArray("Vertex Colors");
-
 
 const cgl=op.patch.cgl;
 
-pTexCoordRand.onChange=updateRandTexCoords;
+inCoords.onChange=updateTexCoordsPorts;
+pTexCoordRand.onChange=updateTexCoordsPorts;
 seed.onChange=arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
@@ -59,10 +59,21 @@ function reset()
     needsRebuild=true;
 }
 
-function updateRandTexCoords()
+function updateTexCoordsPorts()
 {
-    if(!pTexCoordRand.get()) seed.setUiAttribs({hidePort:true,greyout:true});
-        else seed.setUiAttribs({hidePort:false,greyout:false});
+    if(inCoords.isLinked())
+    {
+        seed.setUiAttribs({greyout:true});
+        pTexCoordRand.setUiAttribs({greyout:true});
+    }
+    else
+    {
+        pTexCoordRand.setUiAttribs({greyout:false});
+
+        if(!pTexCoordRand.get()) seed.setUiAttribs({greyout:true});
+           else seed.setUiAttribs({greyout:false});
+    }
+
     needsRebuild=true;
 }
 
@@ -107,12 +118,17 @@ function rebuild()
     var num=verts.length/3;
     num=Math.abs(Math.floor(num));
 
-    if(!texCoords || texCoords.length!=num*2) texCoords.length=num*2;//=new Float32Array(num*2);
+    // console.log("num",num);
+    if(num==0)return;
+
+    if(!texCoords || texCoords.length!=num*2) texCoords=new Float32Array(num*2); //num*2;//=
 
     var changed=false;
     var rndTc=pTexCoordRand.get();
 
     Math.randomSeed=seed.get();
+    var genCoords=!inCoords.isLinked();
+    changed=!inCoords.isLinked();
 
     for(var i=0;i<num;i++)
     {
@@ -120,6 +136,7 @@ function rebuild()
             geom.vertices[i*3+1]!=verts[i*3+1] ||
             geom.vertices[i*3+2]!=verts[i*3+2])
         {
+            if(genCoords)
             if(rndTc)
             {
                 texCoords[i*2]=Math.seededRandom();
@@ -150,6 +167,8 @@ function rebuild()
 
     if(changed)
     {
+        if(!genCoords) texCoords = inCoords.get();
+
         geom.setPointVertices(verts);
         geom.setTexCoords(texCoords);
         geom.verticesIndices=[];
@@ -165,3 +184,6 @@ function rebuild()
     updateNumVerts();
     needsRebuild=false;
 }
+
+
+

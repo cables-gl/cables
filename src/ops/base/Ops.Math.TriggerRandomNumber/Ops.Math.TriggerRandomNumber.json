@@ -39,7 +39,7 @@
         ],
         "name": "Ops.Math.Random2"
     },
-    "summary": "generate random number between min and max",
+    "summary": "generate random number between min and max (was: random2)",
     "docs": {
         "ports": []
     },
@@ -49,5 +49,9 @@
             "author": "pandur",
             "date": 1567671715697
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

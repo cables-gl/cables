@@ -2,6 +2,7 @@ const
     render=op.inTrigger('render'),
     centerInCanvas=op.inValueBool("Center in Canvas"),
     flipY=op.inValueBool("Flip Y"),
+    flipX=op.inValueBool("Flip X"),
     inTexture=op.inTexture("Texture"),
     trigger=op.outTrigger('trigger');
 
@@ -11,7 +12,8 @@ var geom=new CGL.Geometry("fullscreen rectangle");
 var x=0,y=0,z=0,w=0,h=0;
 
 centerInCanvas.onChange=rebuild;
-flipY.onChange=rebuild;
+    flipX.onChange=rebuildFlip;
+    flipY.onChange=rebuildFlip;
 
 const shader=new CGL.Shader(cgl,'fullscreenrectangle');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
@@ -98,6 +100,11 @@ function doRender()
     trigger.trigger();
 }
 
+function rebuildFlip()
+{
+    mesh=null;
+}
+
 
 function rebuild()
 {
@@ -117,20 +124,33 @@ function rebuild()
          xx,   xy,    0.0
     ]);
 
+    var tc=null;
+
     if(flipY.get())
-        geom.setTexCoords( new Float32Array([
-             1.0, 0.0,
-             0.0, 0.0,
-             1.0, 1.0,
-             0.0, 1.0
-        ]));
+        tc=new Float32Array([
+            1.0, 0.0,
+            0.0, 0.0,
+            1.0, 1.0,
+            0.0, 1.0
+        ]);
     else
-        geom.setTexCoords(new Float32Array([
-             1.0, 1.0,
-             0.0, 1.0,
-             1.0, 0.0,
-             0.0, 0.0
-        ]));
+        tc=new Float32Array([
+            1.0, 1.0,
+            0.0, 1.0,
+            1.0, 0.0,
+            0.0, 0.0
+        ]);
+
+    if(flipX.get())
+    {
+        tc[0]=0.0;
+        tc[2]=1.0;
+        tc[4]=0.0;
+        tc[6]=1.0;
+    }
+console.log(tc);
+    geom.setTexCoords(tc);
+
 
     geom.verticesIndices = new Float32Array([
         2, 1, 0,

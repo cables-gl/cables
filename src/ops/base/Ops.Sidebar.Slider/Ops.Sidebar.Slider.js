@@ -79,6 +79,8 @@ op.init=function()
     }
     else
         valuePort.set(parseFloat(defaultValuePort.get()));
+
+    onInputValuePortChanged();
 };
 
 reset.onTriggered=function()

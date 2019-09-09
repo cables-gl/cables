@@ -32,6 +32,10 @@
                 "type": "0",
                 "name": "Available",
                 "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Element Id"
             }
         ],
         "name": "Ops.Gl.Textures.WebcamTexture"
