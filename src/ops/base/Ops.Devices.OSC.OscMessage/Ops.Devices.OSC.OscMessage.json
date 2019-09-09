@@ -1,0 +1,41 @@
+{
+    "id": "1383c725-fccc-4551-a611-c8ad2b59842a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567751791830
+        },
+        {
+            "message": "Ops.User.pandur.OscMessage renamed to Ops.Devices.OSC.OscMessage",
+            "author": "pandur",
+            "date": 1567752712258
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567751935340,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Message"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Adress"
+            },
+            {
+                "type": "3",
+                "name": "Arguments"
+            },
+            {
+                "type": "0",
+                "name": "Total Arguments",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.OscMessage"
+    }
+}
