@@ -11,27 +11,48 @@
             },
             {
                 "type": "0",
-                "name": "Start Time",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "End Time",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "FPS",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Fileformat",
                 "subType": "string"
             },
             {
                 "type": "1",
                 "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Start Time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "End Time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "FPS",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Use Viewport Size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Size",
+                "subType": "integer"
             }
         ],
         "portsOut": [
