@@ -59,7 +59,7 @@ inGeom.onChange=function()
             tc.push(geom.texCoords[index2*2+0],geom.texCoords[index2*2+1]);
             tc.push(geom.texCoords[index*2+0],geom.texCoords[index*2+1]);
         }
-        prim=cgl.gl.LINE_STRIP;
+        prim=cgl.gl.LINES;
     }
     else
     {

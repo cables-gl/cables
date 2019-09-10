@@ -29,7 +29,14 @@ void main()
     #ifdef HAS_TEXTURES
 
         #ifdef HAS_TEXTURE_MASK
-            float mask=texture(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
+            float mask;
+            #ifdef LOOKUP_TEXTURE
+                mask=texture(texMask,texCoord).r;
+            #endif
+            #ifndef LOOKUP_TEXTURE
+                mask=texture(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
+            #endif
+
         #endif
 
         #ifdef HAS_TEXTURE_DIFFUSE

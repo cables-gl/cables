@@ -26,6 +26,10 @@
             },
             {
                 "type": "3",
+                "name": "Coordinates"
+            },
+            {
+                "type": "3",
                 "name": "Vertex Colors"
             }
         ],

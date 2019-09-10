@@ -17,6 +17,11 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Flip X",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "Texture"
             }

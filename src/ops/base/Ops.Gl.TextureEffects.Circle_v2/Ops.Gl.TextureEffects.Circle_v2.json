@@ -1,0 +1,115 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "size",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inner",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Stretch",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "fallOff",
+                "group": "Style",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "fade Out",
+                "group": "Style",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "warn overflow",
+                "group": "Style",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Circle_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Circle22 renamed to Ops.Gl.TextureEffects.Circle_v2",
+            "author": "pandur",
+            "date": 1567700120980
+        }
+    ],
+    "authorName": "pandur",
+    "id": "03a2ff88-f3af-4042-8e64-62e70e17e1bc",
+    "created": 1567700253441,
+    "summary": "Draw 2d circle into texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

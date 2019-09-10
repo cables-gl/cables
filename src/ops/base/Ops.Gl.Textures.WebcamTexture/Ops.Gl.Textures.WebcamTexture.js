@@ -4,14 +4,17 @@ var inActive=op.inValueBool("Active",true);
 var textureOut=op.outTexture("texture");
 var outRatio=op.outValue("Ratio");
 var available=op.outValue("Available");
+var outEleId=op.outString("Element Id");
 
 fps.set(30);
 flip.set(true);
 
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
-videoElement.setAttribute("id", "webcam");
+const eleId="webcam"+CABLES.uuid();
+videoElement.setAttribute("id", eleId);
 videoElement.style.display="none";
+outEleId.set(eleId);
 
     var canvas = op.patch.cgl.canvas.parentElement;
     canvas.appendChild(videoElement);

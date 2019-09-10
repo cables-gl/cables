@@ -29,7 +29,7 @@ void main()
 {
     vec4 base=texture(tex,texCoord);
     vec4 col=vec4(0.0,0.0,0.0,1.0);
-    float dist = dist(x,y,texCoord.x+0.5,(texCoord.y-0.5)*aspect+0.5);
+    float dist = dist(x,y,texCoord.x-0.5,(1.0-texCoord.y-1.0)*aspect+0.5);
 
     float sz=size*0.5;
     float v=0.0;
