@@ -9,14 +9,12 @@ import { EMBED } from "./embedding";
 import { Profiler } from "./core_profiler";
 import Patch from "./core_patch";
 import { Requirements } from "./requirements";
-import { GLGUI } from "./glpatch";
 import { Instancing } from "./instancing";
 import { LoadingStatus } from "./loadingstatus";
 import { WEBAUDIO } from "./webaudio";
 import { Variable } from "./sessionvar";
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
-// import { Gizmo, htmlLine } from "./mod_gizmo";
 import { CONSTANTS } from "./constants";
 
 const CABLES = Object.assign(
@@ -29,9 +27,6 @@ const CABLES = Object.assign(
         Profiler,
         Requirements,
         Patch,
-        GLGUI,
-        // Gizmo,
-        // htmlLine,
         Instancing,
         Timer,
         WEBAUDIO,
