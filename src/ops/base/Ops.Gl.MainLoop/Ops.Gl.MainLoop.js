@@ -30,7 +30,7 @@ active.onChange=function()
         // op.patch.removeOnAnimFrame(op);
         op.onAnimFrame=render;
         op.patch.addOnAnimFrame(op);
-        console.log("adding again!");
+        op.log("adding again!");
     }
 
 

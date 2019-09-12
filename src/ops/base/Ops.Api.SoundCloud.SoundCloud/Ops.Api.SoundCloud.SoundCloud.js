@@ -16,9 +16,6 @@ soundCloudUrl.onChange=resolve;
 
 function resolve()
 {
-    
-    console.log(1234,soundCloudUrl.get());
-    
     if(soundCloudUrl.get())
         CABLES.ajax(
             'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,
@@ -28,8 +25,6 @@ function resolve()
                 streamUrl.set(data.stream_url+"?client_id="+clientId);
                 artworkUrl.set(data.artwork_url);
                 title.set(data.title);
-                console.log('stream url:'+data.stream_url);
-                console.log(data);
             });
 
 }

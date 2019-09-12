@@ -1,5 +1,6 @@
 import { profileData } from "./cgl_profiledata";
 import { uuid } from "../utils";
+import { Log } from "../log";
 
 var tempTexture = null;
 var tempTextureEmpty = null;
@@ -107,8 +108,8 @@ Texture.prototype.clone = function ()
     if (!this.compareSettings(newTex))
     {
         console.error("Cloned texture settings do not compare!");
-        console.log(this);
-        console.log(newTex);
+        Log.log(this);
+        Log.log(newTex);
     }
 
     return newTex;
@@ -174,7 +175,7 @@ Texture.prototype.setSize = function (w, h)
         {
             // if(this._cgl.gl.getExtension('OES_texture_half_float'))
             // {
-            //     console.log("is half float");
+            //     Log.log("is half float");
             //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
             //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
             // }
@@ -301,7 +302,7 @@ Texture.prototype.isPowerOfTwo = function ()
 
 Texture.prototype.printInfo = function ()
 {
-    console.log(this.getInfo());
+    Log.log(this.getInfo());
 };
 
 Texture.prototype.getInfoReadable = function ()
@@ -359,14 +360,14 @@ Texture.prototype._setFilter = function ()
 
     if (this.shadowMap)
     {
-        console.log("shadowmap tex");
+        Log.log("shadowmap tex");
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
     {
-        // console.log( 'non power of two',this.width,this.height );
+        // Log.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
@@ -411,7 +412,7 @@ Texture.prototype._setFilter = function ()
         }
         else
         {
-            console.log("unknown texture filter!", this.filter);
+            Log.log("unknown texture filter!", this.filter);
             throw new Error("unknown texture filter!" + this.filter);
         }
     }

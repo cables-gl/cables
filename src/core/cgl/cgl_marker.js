@@ -4,6 +4,10 @@ import { Mesh } from "./cgl_mesh";
 import { Shader } from "./cgl_shader";
 import { DEG2RAD } from "./cgl_utils";
 
+
+// TODO CAN THIS BE REMOVED ?
+
+
 export const Marker=function(cgl)
 {
     var geom=new Geometry("marker");

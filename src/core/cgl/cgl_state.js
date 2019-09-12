@@ -2,6 +2,8 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
+import { Log } from "../log";
+
 
 /**
  * cables gl context/state manager
@@ -124,11 +126,11 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
-        console.log('this.patch.config.canvas.forceWebGl1',this.patch.config.canvas.forceWebGl1,false);
+        Log.log('this.patch.config.canvas.forceWebGl1',this.patch.config.canvas.forceWebGl1,false);
 
         if(!this.patch.config.canvas.forceWebGl1)
         {
-            console.log("check webgl2");
+            Log.log("check webgl2");
             this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
         }
 
@@ -244,7 +246,7 @@ const Context = function (_patch)
             this.canvas.toBlob((blob) =>
             {
                 if (cb) cb(blob);
-                else console.log("no screenshot callback...");
+                else Log.log("no screenshot callback...");
             });
         }
     };
@@ -254,16 +256,16 @@ const Context = function (_patch)
         if (CABLES.UI) CABLES.GL_MARKER.drawMarkerLayer(this);
 
         self.setPreviousShader();
-        if (this._vMatrixStack.length() > 0) console.warn("view matrix stack length !=0 at end of rendering...");
-        if (this._mMatrixStack.length() > 0) console.warn("mvmatrix stack length !=0 at end of rendering...");
-        if (this._pMatrixStack.length() > 0) console.warn("pmatrix stack length !=0 at end of rendering...");
-        if (this._glFrameBufferStack.length > 0) console.warn("glFrameBuffer stack length !=0 at end of rendering...");
-        if (this._stackDepthTest.length > 0) console.warn("depthtest stack length !=0 at end of rendering...");
-        if (this._stackDepthWrite.length > 0) console.warn("depthwrite stack length !=0 at end of rendering...");
-        if (this._stackDepthFunc.length > 0) console.warn("depthfunc stack length !=0 at end of rendering...");
-        if (this._stackBlend.length > 0) console.warn("blend stack length !=0 at end of rendering...");
-        if (this._stackBlendMode.length > 0) console.warn("blendMode stack length !=0 at end of rendering...");
-        if (this._shaderStack.length > 0) console.warn("this._shaderStack length !=0 at end of rendering...");
+        if (this._vMatrixStack.length() > 0) Log.warn("view matrix stack length !=0 at end of rendering...");
+        if (this._mMatrixStack.length() > 0) Log.warn("mvmatrix stack length !=0 at end of rendering...");
+        if (this._pMatrixStack.length() > 0) Log.warn("pmatrix stack length !=0 at end of rendering...");
+        if (this._glFrameBufferStack.length > 0) Log.warn("glFrameBuffer stack length !=0 at end of rendering...");
+        if (this._stackDepthTest.length > 0) Log.warn("depthtest stack length !=0 at end of rendering...");
+        if (this._stackDepthWrite.length > 0) Log.warn("depthwrite stack length !=0 at end of rendering...");
+        if (this._stackDepthFunc.length > 0) Log.warn("depthfunc stack length !=0 at end of rendering...");
+        if (this._stackBlend.length > 0) Log.warn("blend stack length !=0 at end of rendering...");
+        if (this._stackBlendMode.length > 0) Log.warn("blendMode stack length !=0 at end of rendering...");
+        if (this._shaderStack.length > 0) Log.warn("this._shaderStack length !=0 at end of rendering...");
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight)
         {
@@ -478,7 +480,7 @@ const Context = function (_patch)
 
     this._resizeToParentSize = function ()
     {
-        // console.log("_resizeToParentSize");
+        // Log.log("_resizeToParentSize");
         var p = this.canvas.parentElement;
         if (!p)
         {
@@ -486,7 +488,7 @@ const Context = function (_patch)
             return;
         }
         this.setSize(p.clientWidth, p.clientHeight);
-        // console.log("_resizeToParentSize", p.clientWidth, p.clientHeight);
+        // Log.log("_resizeToParentSize", p.clientWidth, p.clientHeight);
 
         this.updateSize();
     };
@@ -523,7 +525,7 @@ const Context = function (_patch)
             if (error == this.gl.CONTEXT_LOST_WEBGL) errStr = "CONTEXT_LOST_WEBGL";
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
-            console.log("gl error: ", str, error, errStr);
+            Log.log("gl error: ", str, error, errStr);
         }
     };
 
@@ -581,7 +583,7 @@ const Context = function (_patch)
             }
             else
             {
-                console.log("screenshot: no blob");
+                Log.log("screenshot: no blob");
             }
         }.bind(this), true);
     };
@@ -876,7 +878,7 @@ Context.prototype.glGetAttribLocation = function (prog, name)
     const l = this.gl.getAttribLocation(prog, name);
     if (l == -1)
     {
-        // console.log("get attr loc -1 ",name);
+        // Log.log("get attr loc -1 ",name);
         // debugger;
     }
     return l;
@@ -944,7 +946,7 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
     else
     {
-        console.log("setblendmode: unknown blendmode");
+        Log.log("setblendmode: unknown blendmode");
     }
 };
 
