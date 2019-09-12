@@ -43,7 +43,7 @@
         ],
         "name": "Ops.Value.Value3x"
     },
-    "summary": "Stores a 3D coordinate",
+    "summary": "Stores a 3D coordinate (was Value3)",
     "docs": {
         "ports": [
             {
@@ -83,5 +83,9 @@
             "author": "pandur",
             "date": 1567671912312
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

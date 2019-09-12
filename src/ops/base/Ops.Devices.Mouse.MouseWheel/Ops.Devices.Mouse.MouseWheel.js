@@ -47,7 +47,7 @@ max.onChange=function()
 minUnlimitedPort.onChange = function() {
     var minUnlimited = minUnlimitedPort.get();
     min.setUiAttribs({
-        hidePort: minUnlimited,
+        // hidePort: minUnlimited,
         greyout: minUnlimited
     });
 };
@@ -55,7 +55,7 @@ minUnlimitedPort.onChange = function() {
 maxUnlimitedPort.onChange = function() {
     var maxUnlimited = maxUnlimitedPort.get();
     max.setUiAttribs({
-        hidePort: maxUnlimited,
+        // hidePort: maxUnlimited,
         greyout: maxUnlimited
     });
 };

@@ -40,7 +40,7 @@
         ],
         "name": "Ops.Array.ArrayPushValue3x"
     },
-    "summary": "Push three numbers to the end of an array",
+    "summary": "Push three numbers to the end of an array (was ArrayPushValue3x)",
     "changelog": [
         {
             "message": "Ops.Array.ArrayPushValue3x renamed to Ops.Array.Array3PushNumbers",
