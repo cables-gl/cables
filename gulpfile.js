@@ -5,21 +5,18 @@ const concat = require("gulp-concat");
 const rename = require("gulp-rename");
 const webpackConfig = require("./webpack.config");
 
-const shouldBabel = process.env.SHOULDBABEL;
+exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _watch);
 
-exports.default = exports.watch = gulp.series(
-    gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin),
-    _watch
-);
+exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel);
 
-exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin);
-
-function _watch() {
+function _watch()
+{
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
     gulp.watch("libs/**/*", gulp.parallel(taskCoreLibs));
 }
 
-function taskCoreLibs() {
+function taskCoreLibs()
+{
     return (
         gulp
             .src(["libs/*.js"])
@@ -33,56 +30,122 @@ function taskCoreLibs() {
     );
 }
 
-function taskCoreJsMax() {
-    return new Promise((resolve, reject) => {
+function taskCoreJsMax()
+{
+    return new Promise((resolve, reject) =>
+    {
         gulp.src(["src/core/index.js"])
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(false, shouldBabel)
+                        config: webpackConfig(false, false),
                     },
                     compiler,
-                    (err, stats) => {
+                    (err, stats) =>
+                    {
                         if (err) throw err;
-                        if (stats.hasErrors()) {
-                            return reject(
-                                new Error(stats.compilation.errors.join("\n"))
-                            );
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
                         }
                         resolve();
-                    }
-                )
+                    },
+                ),
             )
             .pipe(gulp.dest("build"))
-            .on("error", err => {
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
+}
+function taskCoreJsMaxBabel()
+{
+    return new Promise((resolve, reject) =>
+    {
+        gulp.src(["src/core/index.js"])
+            .pipe(
+                webpack(
+                    {
+                        config: webpackConfig(false, true),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        resolve();
+                    },
+                ),
+            )
+            .pipe(gulp.dest("build"))
+            .on("error", (err) =>
+            {
                 console.error("WEBPACK ERROR", err);
             });
     });
 }
 
-function taskCoreJsMin() {
-    return new Promise((resolve, reject) => {
+function taskCoreJsMin()
+{
+    return new Promise((resolve, reject) =>
+    {
         gulp.src(["src/core/index.js"])
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(true, shouldBabel)
+                        config: webpackConfig(true, false),
                     },
                     compiler,
-                    (err, stats) => {
+                    (err, stats) =>
+                    {
                         if (err) throw err;
-                        if (stats.hasErrors()) {
-                            return reject(
-                                new Error(stats.compilation.errors.join("\n"))
-                            );
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
                         }
                         resolve();
-                    }
-                )
+                    },
+                ),
             )
 
             .pipe(gulp.dest("build"))
-            .on("error", err => {
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
+}
+
+function taskCoreJsMinBabel()
+{
+    return new Promise((resolve, reject) =>
+    {
+        gulp.src(["src/core/index.js"])
+            .pipe(
+                webpack(
+                    {
+                        config: webpackConfig(true, true),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        resolve();
+                    },
+                ),
+            )
+
+            .pipe(gulp.dest("build"))
+            .on("error", (err) =>
+            {
                 console.error("WEBPACK ERROR", err);
             });
     });
