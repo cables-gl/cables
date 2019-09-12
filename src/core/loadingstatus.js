@@ -59,7 +59,7 @@ LoadingStatus.prototype.checkStatus = function ()
 
 LoadingStatus.prototype.print = function ()
 {
-    if (this._patch.silent) return;
+    if (this._patch.config.silent) return;
 
     var rows = [];
 

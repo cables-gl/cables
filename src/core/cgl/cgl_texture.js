@@ -448,7 +448,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.image.onabort = texture.image.onerror = function (e)
     {
-        console.warn("[cgl.texture.load] error loading texture", e);
+        Log.warn("[cgl.texture.load] error loading texture", e);
         cgl.patch.loading.finished(loadingId);
         var error = { error: true };
         if (finishedCallback) finishedCallback(error);
@@ -612,7 +612,7 @@ Texture.createFromImage = function (cgl, img, options)
 // deprecated!
 Texture.fromImage = function (cgl, img, filter, wrap)
 {
-    console.error("deprecated texture from image...");
+    Log.error("deprecated texture from image...");
 
     var texture = new Texture(cgl);
     texture.flip = false;
