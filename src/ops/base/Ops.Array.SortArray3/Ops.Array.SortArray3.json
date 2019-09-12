@@ -17,7 +17,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.Array3xSort"
+        "name": "Ops.Array.SortArray3"
     },
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",

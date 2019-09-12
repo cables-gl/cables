@@ -28,7 +28,7 @@ inArr.onChange=recalc;
 
 function recalc()
 {
-console.log("array3x sort start");
+//console.log("array3x sort start");
 
     if(!Array.isArray(inArr.get()))
     {
@@ -47,7 +47,7 @@ console.log("array3x sort start");
 
     sliceArray();
 
-    console.log("OP1");
+    //console.log("OP1");
 
     arrArr.sort(comparator);
     outArr.set(null);
@@ -61,9 +61,9 @@ console.log("array3x sort start");
     outArr.set(arrArr);
 
 
-console.log('op time',performance.now()-start);
+//console.log('op time',performance.now()-start);
 
-    console.log("array3x sort end");
+  //  console.log("array3x sort end");
 
 };
 
