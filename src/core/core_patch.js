@@ -8,7 +8,6 @@ import { Profiler } from "./core_profiler";
 import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
-// import { CONSTANTS.OP.OP_PORT_TYPE_TEXTURE } from "./core_op";
 import { Requirements } from "./requirements";
 
 /**

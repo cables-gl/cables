@@ -149,7 +149,7 @@ function updateText()
 
     if(warn.length>0)
     {
-        console.warn("warn:",warn);
+        // console.warn("warn:",warn);
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
 
     }
