@@ -148,9 +148,8 @@ function rebuild()
         tc[4]=0.0;
         tc[6]=1.0;
     }
-console.log(tc);
-    geom.setTexCoords(tc);
 
+    geom.setTexCoords(tc);
 
     geom.verticesIndices = new Float32Array([
         2, 1, 0,

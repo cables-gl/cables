@@ -1,4 +1,4 @@
-var ver=op.outValue("Major Version",op.patch.cgl.glVersion);
+const ver=op.outValue("Major Version", op.patch.cgl.glVersion);
 
 op.onLoaded=function()
 {
