@@ -19,12 +19,12 @@ UNI mat4 viewMatrix;
     UNI float texOffsetY;
 #endif
 
-
 void main()
 {
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
 
+    norm=attrVertNormal;
     texCoordOrig=attrTexCoord;
     texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES
@@ -32,8 +32,7 @@ void main()
         texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
     #endif
 
-    vec4 pos = vec4( vPosition, 1. );
-
+    vec4 pos = vec4(vPosition, 1.0);
 
     #ifdef BILLBOARD
        vec3 position=vPosition;

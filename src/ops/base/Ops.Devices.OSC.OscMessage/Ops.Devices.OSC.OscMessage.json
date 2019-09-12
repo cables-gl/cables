@@ -36,6 +36,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.OscMessage"
+        "name": "Ops.Devices.OSC.OscMessage"
     }
 }

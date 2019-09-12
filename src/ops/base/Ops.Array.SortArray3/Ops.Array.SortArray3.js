@@ -28,6 +28,7 @@ inArr.onChange=recalc;
 
 function recalc()
 {
+
     if(!Array.isArray(inArr.get()))
     {
         outArr.set(null);
@@ -43,6 +44,7 @@ function recalc()
     var start=performance.now();
 
     sliceArray();
+
 
     arrArr.sort(comparator);
     outArr.set(null);

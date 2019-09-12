@@ -98,7 +98,7 @@ var srcBodyVert=''
     .endl()+'float {{mod}}_texVal=texture2D( {{mod}}_texture, vec2({{mod}}tc.x+{{mod}}_offsetX,{{mod}}tc.y+{{mod}}_offsetY) ).b;'
 
     .endl()+'#ifdef '+id+'HEIGHTMAP_INVERT'
-    .endl()+'{{mod}}_texVal=1.0-{{mod}}_texVal;'
+    .endl()+'   {{mod}}_texVal=1.0-{{mod}}_texVal;'
     .endl()+'#endif'
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_MULXYZ'
