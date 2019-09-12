@@ -47,12 +47,6 @@ LoadingStatus.prototype.checkStatus = function ()
 
     this._percent = (this._count - this._countFinished) / this._count;
 
-    // if (onLoadingAssetsFinished)
-    // {
-    //     console.error("CGL.onLoadingAssetsFinished is deprecated, please use config parameter onFinishedLoading with scene/patch constructor");
-    //     setTimeout(this._cbFinished, 200);
-    // }
-
     if (this._countFinished === 0)
     {
         for (var j = 0; j < this._cbFinished.length; j++)
