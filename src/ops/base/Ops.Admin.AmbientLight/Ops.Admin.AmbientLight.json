@@ -50,6 +50,6 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.AmbientLight"
+        "name": "Ops.Admin.AmbientLight"
     }
 }

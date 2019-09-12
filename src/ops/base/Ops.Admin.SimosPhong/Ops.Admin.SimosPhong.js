@@ -51,14 +51,24 @@ op.setPortGroup("Light Options", lightProps);
 const inDiffuseTexture = op.inTexture("Diffuse Texture");
 const inSpecularTexture = op.inTexture("Specular Texture");
 const inNormalTexture = op.inTexture("Normal Map");
-const inNormalIntensity = op.inFloatSlider("Normal Map Intensity");
+const inAoTexture = op.inTexture("AO Texture");
+op.setPortGroup("Textures",[inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture]);
 
+// TEXTURE TRANSFORMS
+const inColorizeTexture = op.inBool("Colorize Texture",false);
+const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 0);
+const inDiffuseRepeatY = op.inFloat("Diffuse Repeat Y", 0);
+const inTextureOffsetX = op.inFloat("Texture Offset X", 0);
+const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
+const inNormalIntensity = op.inFloatSlider("Normal Map Intensity");
+op.setPortGroup("Texture Transforms",[inNormalIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
 function bindTextures() {
     if(inDiffuseTexture.get()) cgl.setTexture(0, inDiffuseTexture.get().tex);
     if (inSpecularTexture.get()) cgl.setTexture(1, inSpecularTexture.get().tex);
     if(inNormalTexture.get()) cgl.setTexture(2, inNormalTexture.get().tex);
-    //if(op.textureOpacity.get()) cgl.setTexture(1, op.textureOpacity.get().tex);
+    if (inAoTexture.get()) cgl.setTexture(3, inAoTexture.get().tex);
 }
+
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outLength = op.outNumber("NUM_LIGHTS");
@@ -73,7 +83,11 @@ shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;
 let normalTextureUniform = null;
+let aoTextureUniform = null;
 
+inColorizeTexture.onChange = function() {
+    shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
+}
 function updateDiffuseTexture() {
     if (inDiffuseTexture.get()) {
             if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE')) {
@@ -113,10 +127,22 @@ function updateNormalTexture() {
         }
 }
 
+function updateAoTexture() {
+        if (inAoTexture.get()) {
+        if(!shader.hasDefine('HAS_TEXTURE_AO')) {
+            shader.define('HAS_TEXTURE_AO');
+            if (!aoTextureUniform) aoTextureUniform = new CGL.Uniform(shader, 't', 'texAO', 3);
+        }
+    } else {
+        shader.removeUniform('texAO');
+        shader.removeDefine('HAS_TEXTURE_AO');
+        aoTextureUniform = null;
+        }
+}
 inDiffuseTexture.onChange = updateDiffuseTexture;
 inSpecularTexture.onChange = updateSpecularTexture;
 inNormalTexture.onChange = updateNormalTexture;
-
+inAoTexture.onChange = updateAoTexture;
 
 const MAX_LIGHTS = 16;
 
@@ -152,7 +178,11 @@ const initialUniforms = [
     new CGL.Uniform(shader, "f", "inAlpha", inDiffuseA),
     new CGL.Uniform(shader, "f", "shininess", inShininess),
     new CGL.Uniform(shader, "f", "inSpecularCoefficient", inSpecularCoefficient),
-    new CGL.Uniform(shader, "f", "inNormalIntensity", inNormalIntensity)
+    new CGL.Uniform(shader, "f", "inNormalIntensity", inNormalIntensity),
+    new CGL.Uniform(shader, "f", "inDiffuseRepeatX", inDiffuseRepeatX),
+    new CGL.Uniform(shader, "f", "inDiffuseRepeatY", inDiffuseRepeatY),
+    new CGL.Uniform(shader, "f", "inTextureOffsetX", inTextureOffsetX),
+    new CGL.Uniform(shader, "f", "inTextureOffsetY", inTextureOffsetY),
 ];
 
 const lightUniforms = [];
@@ -263,3 +293,4 @@ inTrigger.onTriggered = function() {
 updateDiffuseTexture();
 updateSpecularTexture();
 updateNormalTexture();
+updateAoTexture();

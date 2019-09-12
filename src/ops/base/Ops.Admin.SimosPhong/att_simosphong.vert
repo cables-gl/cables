@@ -15,13 +15,21 @@ OUT vec3 noViewMatVertPos;
 OUT vec3 v_Vertex;
 OUT vec3 fragPos;
 OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
+OUT mat3 mvMatrixMat3;
+
+#ifdef HAS_TEXTURES
+    UNI float inDiffuseRepeatX;
+    UNI float inDiffuseRepeatY;
+    UNI float inTextureOffsetX;
+    UNI float inTextureOffsetY;
+#endif
 
 UNI vec3 camPos;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 normalMatrix;
-
+UNI mat4 transMatrix;
 mat3 transposeMat3(mat3 m)
 {
     return mat3(m[0][0], m[1][0], m[2][0],
@@ -51,13 +59,15 @@ void main()
    mat4 mMatrix=modelMatrix;
    mat4 MV_Matrix = (viewMatrix * mMatrix);
    vec4 pos=vec4(vPosition,  1.0);
-
+   mvMatrixMat3 = mat3(MV_Matrix);
    texCoord=attrTexCoord;
    norm=attrVertNormal;
-
    vec4 cameraSpace_pos = MV_Matrix * pos;
    {{MODULE_VERTEX_POSITION}}
-
+    #ifdef HAS_TEXTURES
+        texCoord.x=texCoord.x*inDiffuseRepeatX+inTextureOffsetX;
+        texCoord.y=texCoord.y*inDiffuseRepeatY+inTextureOffsetY;
+    #endif
    //vec3 _norm = ((viewMatrix*mMatrix)* vec4(norm, 0.0)).xyz;
    vec3 norm = transposeMat3(inverseMat3(mat3(mMatrix)))*norm;
    normInterpolated = norm;

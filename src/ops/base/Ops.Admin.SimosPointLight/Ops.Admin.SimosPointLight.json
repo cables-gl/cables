@@ -117,6 +117,6 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.SimosPointLight"
+        "name": "Ops.Admin.SimosPointLight"
     }
 }

@@ -76,19 +76,58 @@
             },
             {
                 "type": "2",
-                "name": "Diffuse Texture"
+                "name": "Diffuse Texture",
+                "group": "Textures"
             },
             {
                 "type": "2",
-                "name": "Specular Texture"
+                "name": "Specular Texture",
+                "group": "Textures"
             },
             {
                 "type": "2",
-                "name": "Normal Map"
+                "name": "Normal Map",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Texture",
+                "group": "Texture Transforms",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse Repeat X",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse Repeat Y",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Offset X",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Offset Y",
+                "group": "Texture Transforms",
+                "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Normal Map Intensity",
+                "group": "Texture Transforms",
                 "subType": "number"
             }
         ],

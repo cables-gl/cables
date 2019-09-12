@@ -50,6 +50,10 @@ UNI sampler2D texSpecular;
 UNI sampler2D texNormal;
 #endif
 
+#ifdef HAS_TEXTURE_AO
+UNI sampler2D texAO;
+#endif
+
 UNI float inDiffuseR;
 UNI float inDiffuseG;
 UNI float inDiffuseB;
@@ -76,6 +80,7 @@ IN vec3 vertPosOut;
 IN vec3 noViewMatVertPos;
 IN vec3 fragPos;
 IN mat3 TBN_Matrix;
+IN mat3 mvMatrixMat3;
 
 
 #define PI 3.1415926535897932384626433832795
@@ -115,6 +120,9 @@ float Attenuation(Light light, float distanceLightFrag)
 }
 
 vec3 AmbientLight(Light light, Material material) {
+    #ifdef HAS_TEXTURE_AO
+        light.color *= texture(texAO, texCoord).rgb;
+    #endif
     return light.intensity*light.color; //*material.diffuse;
 }
 vec3 DirectionalLight(Light light, Material material) {
@@ -171,13 +179,12 @@ vec3 DirectionalLight(Light light, Material material) {
     } else {
         attenuation = 0.;
     }
-    //specularColor = vec3(0.);
+
     return ambientColor + light.intensity*(diffuseColor + specularColor);
 }
 
 vec3 SpotLight(Light light, Material material) {
     vec3 normal = normalize(normInterpolated);
-
     #ifdef HAS_TEXTURE_NORMAL
     normal = texture(texNormal, texCoord).rgb;
     normal = normalize(normal * 2. - 1.);
@@ -339,31 +346,33 @@ void main() {
     _material.shininess = shininess;
     _material.specularCoefficient = inSpecularCoefficient;
     float alpha = inAlpha;
-
-    #ifdef HAS_TEXTURE_DIFFUSE
+    #ifdef HAS_TEXTURES
         vec2 uv = vec2(texCoord.s, 1.0-texCoord.t);
-        _material.diffuse = texture(texDiffuse,uv).xyz;
-        alpha = inAlpha * texture(texDiffuse,uv).a;
-        /* #ifdef COLORIZE_TEXTURE
-            col.r*=r;
-            col.g*=g;
-            col.b*=b;
-        #endif */
-    #endif
 
-    #ifdef HAS_TEXTURE_SPECULAR
-        vec2 uv2 = vec2(texCoord.s, 1.0-texCoord.t);
-        _material.specular = texture(texSpecular, texCoord).xyz;
-    #endif
+       #ifdef HAS_TEXTURE_DIFFUSE
+            _material.diffuse = texture(texDiffuse,uv).xyz;
+            #ifdef COLORIZE_TEXTURE
+                _material.diffuse *= vec3(inDiffuseR, inDiffuseG, inDiffuseB);
+            #endif
+            alpha = inAlpha * texture(texDiffuse,uv).a;
+        #endif
 
-    #ifdef HAS_TEXTURE_NORMAL
-    // TODO: calc tangentspace light dir and view dir in vertex shader instead of normal transform here
-    normal = texture(texNormal, texCoord).rgb;
-    normal = normalize(normal * 2. - 1.);
-    normal = normalize(TBN_Matrix * normal);
+        #ifdef HAS_TEXTURE_SPECULAR
+            vec2 uv2 = vec2(texCoord.s, 1.0-texCoord.t);
+            _material.specular = texture(texSpecular, texCoord).xyz;
+        #endif
+
+        #ifdef HAS_TEXTURE_NORMAL
+        // TODO: calc tangentspace light dir and view dir in vertex shader instead of normal transform here
+        normal = texture(texNormal, texCoord).rgb;
+        normal = normalize(normal * 2. - 1.);
+        normal = normalize(TBN_Matrix * normal);
+        #endif
+
     #endif
 
     vec3 color = vec3(0.);
+
     for (int i = 0; i < MAX_LIGHTS; i++) {
         Light light = lights[i];
         if (light.type == POINT) {
@@ -386,8 +395,6 @@ void main() {
         outColor += vec4(color, inAlpha);
     }
 
-    //
-    // outColor = vec4(reflection, 1.0);
 }
 
 

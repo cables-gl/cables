@@ -99,6 +99,6 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.DirectionalLight"
+        "name": "Ops.Admin.DirectionalLight"
     }
 }

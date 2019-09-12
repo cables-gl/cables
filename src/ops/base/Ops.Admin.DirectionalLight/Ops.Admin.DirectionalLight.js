@@ -19,9 +19,9 @@ function Light(config) {
 
 
 const inTrigger = op.inTrigger("Trigger In");
-const inPosX = op.inFloat("X", 30);
-const inPosY = op.inFloat("Y", 20);
-const inPosZ = op.inFloat("Z", 0);
+const inPosX = op.inFloat("X", -1);
+const inPosY = op.inFloat("Y", 1);
+const inPosZ = op.inFloat("Z", 1);
 
 const positionIn = [inPosX, inPosY, inPosZ];
 op.setPortGroup("Direction", positionIn);

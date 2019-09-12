@@ -52,9 +52,9 @@ const inPosZ = op.inFloat("Z", 0.75);
 const positionIn = [inPosX, inPosY, inPosZ];
 op.setPortGroup("Position", positionIn);
 
-const inR = op.inFloat("R", Math.random());
-const inG = op.inFloat("G", Math.random());
-const inB = op.inFloat("B", Math.random());
+const inR = op.inFloat("R", 1);
+const inG = op.inFloat("G", 1);
+const inB = op.inFloat("B", 1);
 
 inR.setUiAttribs({ colorPick: true });
 const colorIn = [inR, inG, inB];
