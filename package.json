@@ -9,6 +9,7 @@
   "private": true,
   "scripts": {
     "build": "gulp build",
+    "build:babel": "cross-env SHOULDBABEL=1 gulp build",
     "watch": "gulp watch"
   },
   "repository": {
@@ -29,6 +30,7 @@
     "add-module-exports-webpack-plugin": "^1.0.0",
     "babel-loader": "^8.0.5",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "cross-env": "^5.2.1",
     "error-overlay-webpack-plugin": "^0.4.0",
     "glob": "^7.1.4",
     "gulp": "^4.0.2",

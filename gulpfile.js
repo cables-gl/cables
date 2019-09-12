@@ -5,6 +5,8 @@ const concat = require("gulp-concat");
 const rename = require("gulp-rename");
 const webpackConfig = require("./webpack.config");
 
+const shouldBabel = process.env.SHOULDBABEL;
+
 exports.default = exports.watch = gulp.series(
     gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin),
     _watch
@@ -37,7 +39,7 @@ function taskCoreJsMax() {
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(false)
+                        config: webpackConfig(false, shouldBabel)
                     },
                     compiler,
                     (err, stats) => {
@@ -64,7 +66,7 @@ function taskCoreJsMin() {
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(true)
+                        config: webpackConfig(true, shouldBabel)
                     },
                     compiler,
                     (err, stats) => {
