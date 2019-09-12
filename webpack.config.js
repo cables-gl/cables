@@ -54,7 +54,8 @@ module.exports = (isProduction, shouldBabel = false) => ({
                             },
                         ],
                     ],
-                    plugins: ["@babel/plugin-proposal-object-rest-spread"],
+                    plugins: ["@babel/plugin-proposal-object-rest-spread","@babel/plugin-transform-object-assign"],
+
                 },
             },
         ].filter(Boolean),

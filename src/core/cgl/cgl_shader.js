@@ -129,7 +129,6 @@ Shader.prototype.setSource = function(srcVert, srcFrag) {
     this._needsRecompile = true;
 };
 
-
 Shader.prototype._addLibs=function(src)
 {
     for(var id in ShaderLibMods)

@@ -109,8 +109,6 @@ const Patch = function (cfg)
     if (this.cgl.aborted) this.aborted = true;
     if (this.cgl.silent) this.silent = true;
 
-    Log.log(123);
-
     this.freeTimer.play();
     this.exec();
 
