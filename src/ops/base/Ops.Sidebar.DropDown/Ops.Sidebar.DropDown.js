@@ -7,6 +7,7 @@ const defaultValuePort = op.inValueString('Default', '');
 // outputs
 const siblingsPort = op.outObject('Children');
 const valuePort = op.outValue('Result', defaultValuePort.get());
+const outIndex = op.outNumber("Index");
 
 // vars
 var el = document.createElement('div');
@@ -29,6 +30,7 @@ defaultValuePort.onChange = onDefaultValueChanged;
 op.onDelete = onDelete;
 valuesPort.onChange = onValuesPortChange;
 
+var options=[];
 // functions
 
 function onValuesPortChange() {
@@ -36,7 +38,7 @@ function onValuesPortChange() {
     while (input.lastChild) {
         input.removeChild(input.lastChild);
     }
-    var options = valuesPort.get();
+    options = valuesPort.get();
     var defaultValue = defaultValuePort.get();
     if(options) {
         options.forEach(function(option) {
@@ -69,6 +71,7 @@ function setSelectedProperty() {
 
 function onInput(ev) {
     valuePort.set(ev.target.value);
+    outIndex.set(options.indexOf(ev.target.value));
 }
 
 function onDefaultValueChanged() {
@@ -82,7 +85,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Text Input: ' + labelText);    
+        op.setTitle('Text Input: ' + labelText);
     }
 }
 
@@ -94,7 +97,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -117,6 +120,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

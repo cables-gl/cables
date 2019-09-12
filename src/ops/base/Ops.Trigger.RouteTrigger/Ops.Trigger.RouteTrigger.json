@@ -72,8 +72,7 @@
         ],
         "name": "Ops.Trigger.SwitchTrigger"
     },
-    "summary": "Triggers one of the out ports (value index switch case)",
-    "youtubeid": "nCJO9yF7bnk",
+    "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
     "docs": {
         "ports": []
     },
@@ -83,5 +82,11 @@
             "author": "pandur",
             "date": 1567672707912
         }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "nCJO9yF7bnk"
     ]
 }

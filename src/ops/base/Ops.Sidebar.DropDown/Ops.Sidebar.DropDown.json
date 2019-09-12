@@ -1,5 +1,4 @@
 {
-    "updated": 1525878675933,
     "authorName": "tim",
     "id": "c4b8e4ff-e1a1-4e40-b0b4-4de06d25b89d",
     "created": 1525849292203,
@@ -33,6 +32,11 @@
                 "type": "0",
                 "name": "Result",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "number"
             }
         ],
         "name": "Ops.Sidebar.DropDown"
@@ -65,5 +69,12 @@
                 "text": "The currently selected value or the default value"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Enhancement: Outputs Index Number",
+            "author": "pandur",
+            "date": 1568111316189
+        }
+    ]
 }

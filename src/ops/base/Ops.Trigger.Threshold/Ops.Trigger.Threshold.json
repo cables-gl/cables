@@ -26,5 +26,12 @@
     "summary": "Triggers only once when threshold is crossed",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Trigger.Past renamed to Ops.Trigger.Threshold",
+            "author": "pandur",
+            "date": 1568277658158
+        }
+    ]
 }

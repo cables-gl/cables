@@ -124,7 +124,6 @@ function realReload(nocache)
     }
 }
 
-
 function onFilterChange()
 {
     if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
@@ -145,7 +144,6 @@ function onWrapChange()
 
 op.onFileChanged=function(fn)
 {
-    // console.log(fn);
     if(filename.get() && filename.get().indexOf(fn)>-1)
     {
         textureOut.set(null);

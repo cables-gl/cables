@@ -25,6 +25,10 @@ getDivisors();
 
 inMode.setUiAttribs({hidePort:true});
 
+inDivisorUp.onChange = inDivisorDown.onChange = getDivisors;
+inMode.onChange = onFilterChange;
+update();
+
 function onFilterChange()
 {
     var selectedMode = inMode.get();
@@ -61,8 +65,8 @@ function getDivisors()
         divisorDown=inDivisorDown.get();
     }
 
-    if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
-    if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
+    if(divisorUp<=0.2 || divisorUp != divisorUp )divisorUp=0.2;
+    if(divisorDown<=0.2 || divisorDown != divisorDown )divisorDown=0.2;
 };
 
 inVal.onChange=function()
@@ -83,8 +87,8 @@ function update()
     else tm=(CABLES.now()-lastTrigger)/16;
     lastTrigger=CABLES.now();
 
-    if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
-    if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
+    // if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
+    // if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
 
     if(divisor<=0)divisor=0.0001;
 
@@ -114,6 +118,6 @@ exec.onTriggered = function()
     update();
 };
 
-inDivisorUp.onChange = inDivisorDown.onChange = getDivisors;
-inMode.onChange = onFilterChange;
-update();
+
+
+

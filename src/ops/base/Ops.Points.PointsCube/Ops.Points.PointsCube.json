@@ -43,8 +43,7 @@
         ],
         "name": "Ops.Points.PointsField3d"
     },
-    "summary": "Generates a 3d point field with controllable amount of xyz points ",
-    "youtubeid": "tVphEMCXDb4",
+    "summary": "Generates a 3d point field with controllable amount of xyz points (was PointsField3d)",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -91,5 +90,8 @@
             "author": "pandur",
             "date": 1567672099542
         }
+    ],
+    "youtubeids": [
+        "tVphEMCXDb4"
     ]
 }

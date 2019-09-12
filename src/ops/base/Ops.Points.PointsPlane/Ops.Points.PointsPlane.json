@@ -48,7 +48,7 @@
         ],
         "name": "Ops.Array.PointArray.Field"
     },
-    "summary": "generate coordinates for a rectangular field of points",
+    "summary": "generate coordinates for a rectangular field of points (was Field)",
     "docs": {
         "ports": [
             {

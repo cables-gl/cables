@@ -252,12 +252,21 @@ function updateShader()
                 uniformInputs[j]=null;
             }
 
-    for(var j=0;j<vectors.length;j++) initVectorUniform(vectors[j]);
+    for(var j=0;j<vectors.length;j++)
+    {
+        initVectorUniform(vectors[j]);
+        vectors[j].changed=true;
+    }
 
-    shader.compile();
 
     for(i=0;i<uniformInputs.length;i++)
         if(uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate=true;
+
+
+
+
+    shader.compile();
+
 
     if(CABLES.UI) gui.patch().showOpParams(op);
 
