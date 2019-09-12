@@ -12,7 +12,7 @@ const provideObject = glMatrixClasses.reduce((acc, val) =>
     return acc;
 }, {});
 
-module.exports = isProduction => ({
+module.exports = (isProduction, shouldBabel = false) => ({
     mode: isProduction ? "production" : "development",
     entry: [
         path.join(__dirname, "src", "core", "index.js"),
@@ -23,7 +23,9 @@ module.exports = isProduction => ({
     output: {
         path: path.join(__dirname, "build"),
         // publicPath: `${__dirname}dist/`,
-        filename: isProduction ? "cables.min.js" : "cables.max.js",
+        filename: isProduction ?
+        (shouldBabel ? "babel.cables.min.js" : "cables.min.js")
+        : (shouldBabel ? "babel.cables.max.js" : "cables.max.js"),
         // chunkFilename: '[name].js',
         library: "CABLES",
         libraryExport: "default",
@@ -34,28 +36,28 @@ module.exports = isProduction => ({
     optimization: { minimize: isProduction },
     module: {
         rules: [
-            // {
-            //     test: /.jsx?$/,
-            //     include: [path.resolve(__dirname, "src")],
-            //     exclude: [path.resolve(__dirname, "node_modules")],
-            //     loader: "babel-loader",
-            //     query: {
-            //         presets: [
-            //             [
-            //                 "@babel/env",
-            //                 {
-            //                     targets: {
-            //                         edge: "12",
-            //                         ie: "11",
-            //                         safari: "10",
-            //                     },
-            //                 },
-            //             ],
-            //         ],
-            //         plugins: ["@babel/plugin-proposal-object-rest-spread"],
-            //     },
-            // },
-        ],
+            shouldBabel && {
+                test: /.jsx?$/,
+                include: [path.resolve(__dirname, "src")],
+                exclude: [path.resolve(__dirname, "node_modules")],
+                loader: "babel-loader",
+                query: {
+                    presets: [
+                        [
+                            "@babel/env",
+                            {
+                                targets: {
+                                    edge: "12",
+                                    ie: "11",
+                                    safari: "10",
+                                },
+                            },
+                        ],
+                    ],
+                    plugins: ["@babel/plugin-proposal-object-rest-spread"],
+                },
+            },
+        ].filter(Boolean),
     },
     externals: ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
     resolve: {
