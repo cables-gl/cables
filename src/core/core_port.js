@@ -2,6 +2,8 @@ import { EventTarget } from "./eventtarget";
 import { generateUUID } from "./utils";
 import { Anim } from "./anim";
 import { CONSTANTS } from "./constants";
+import { Log } from "./log";
+
 /**
  * data is coming into and out of ops through input and output ports
  * @external CABLES
@@ -73,7 +75,7 @@ const Port = function (__parent, name, type, uiAttribs)
         set(v)
         {
             this.setValue(v);
-            // if(!this._warnedDeprecated)console.log('deprecated .val set used',this.parent.name);
+            // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
         },
     });
@@ -88,7 +90,7 @@ const Port = function (__parent, name, type, uiAttribs)
  * const myPort=op.inString("MyPort");
  * myPort.onChange=function()
  * {
- *   console.log("was changed to: ",myPort.get());
+ *   Log.log("was changed to: ",myPort.get());
  * }
  *
  */
@@ -149,7 +151,7 @@ Port.prototype.setUiAttribs = function (newAttribs)
     }
     // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
     this.emitEvent("onUiAttrChange", newAttribs);
-    // console.log("new attribs!",newAttribs);
+    // Log.log("new attribs!",newAttribs);
 };
 
 /**
@@ -206,10 +208,10 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     this.setValue = function (v) {};
                     this.onTriggered = function () {};
 
-                    console.log("exception!");
+                    Log.log("exception!");
                     console.error("onvaluechanged exception cought", ex);
-                    console.log(ex.stack);
-                    console.log("exception in: " + this.parent.name);
+                    Log.log(ex.stack);
+                    Log.log("exception in: " + this.parent.name);
                     if (gui) gui.showOpCrash(this.parent);
 
                     this.parent.patch.emitEvent("exception".ex,this.parent);
@@ -363,16 +365,16 @@ Port.prototype.removeLink = function (link)
 
     // if (this.type == CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.direction == CABLES.CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
     // {
-    //     console.log("REMOVELINK OBJECT!!",this);
+    //     Log.log("REMOVELINK OBJECT!!",this);
 
     //     for (var i=0;i<this.links.length;i++)
     //     {
-    //         // console.log('iii', i, this.links[i].portOut.get());
+    //         // Log.log('iii', i, this.links[i].portOut.get());
     //         // this.links[i].setValue();
     //         // this.set(null);
     //         // this.forceChange();
     //         this.set(this.links[i].portOut.get());
-    //         console.log(this.get())
+    //         Log.log(this.get())
     //         // this.forceChange();
 
     //     }
@@ -482,22 +484,22 @@ Port.prototype.trigger = function ()
 
             if (window.gui) gui.showOpCrash(portTriggered.parent);
         }
-        console.log("exception!");
+        Log.log("exception!");
         console.error("ontriggered exception cought", ex);
-        console.log(ex.stack);
-        console.log("exception in: " + portTriggered.parent.name);
+        Log.log(ex.stack);
+        Log.log("exception in: " + portTriggered.parent.name);
     }
 };
 
 Port.prototype.call = function ()
 {
-    console.log("call deprecated - use trigger() ");
+    Log.log("call deprecated - use trigger() ");
     this.trigger();
 };
 
 Port.prototype.execute = function ()
 {
-    console.log("### execute port: " + this.getName(), this.goals.length);
+    Log.log("### execute port: " + this.getName(), this.goals.length);
 };
 
 Port.prototype.setAnimated = function (a)

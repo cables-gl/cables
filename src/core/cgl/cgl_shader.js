@@ -5,6 +5,7 @@ import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";
 import{ CONSTANTS } from "./constants";
+import { Log } from "../log";
 
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
@@ -118,7 +119,7 @@ Shader.prototype.hasTextureUniforms = function() {
 
 Shader.prototype.setWhyCompile=function(why)
 {
-    // console.log('recompile because '+why);
+    // Log.log('recompile because '+why);
 };
 
 Shader.prototype.setSource = function(srcVert, srcFrag) {
@@ -726,7 +727,7 @@ Shader.prototype._linkProgram = function(program)
 
     // var infoLog = this._cgl.gl.getProgramInfoLog(program);
     // if (infoLog) {
-    //     // console.log(name+' link programinfo: ',this._cgl.gl.getProgramInfoLog(program));
+    //     // Log.log(name+' link programinfo: ',this._cgl.gl.getProgramInfoLog(program));
     // }
 
     if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS)) {
@@ -738,13 +739,13 @@ Shader.prototype._linkProgram = function(program)
         console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
 
         console.error(name + " shader linking fail...");
-        console.log('srcFrag',this.srcFrag);
-        console.log('srcVert',this.srcVert);
-        console.log(name + ' programinfo: ', this._cgl.gl.getProgramInfoLog(program));
+        Log.log('srcFrag',this.srcFrag);
+        Log.log('srcVert',this.srcVert);
+        Log.log(name + ' programinfo: ', this._cgl.gl.getProgramInfoLog(program));
 
-        console.log('--------------------------------------');
-        console.log(this);
-        console.log('--------------------------------------');
+        Log.log('--------------------------------------');
+        Log.log(this);
+        Log.log('--------------------------------------');
 
         name = "errorshader";
         this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
@@ -756,9 +757,9 @@ Shader.prototype._linkProgram = function(program)
 
     // var error = this._cgl.gl.getError();
     // if (error == this._cgl.gl.NO_ERROR )
-    // console.log('no error: ',error);
+    // Log.log('no error: ',error);
     // else
-    //   console.log('get error: ',error);
+    //   Log.log('get error: ',error);
     // if(this._feedBackNames.length>0)
     //    this._cgl.gl.transformFeedbackVaryings( program, [], this._cgl.gl.SEPARATE_ATTRIBS );
 
@@ -863,10 +864,10 @@ Shader.createShader = function(cgl, str, type, cglShader) {
     cgl.gl.compileShader(shader);
 
     if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS)) {
-        console.log('compile status: ');
+        Log.log('compile status: ');
 
-        if (type == cgl.gl.VERTEX_SHADER) console.log('VERTEX_SHADER');
-        if (type == cgl.gl.FRAGMENT_SHADER) console.log('FRAGMENT_SHADER');
+        if (type == cgl.gl.VERTEX_SHADER) Log.log('VERTEX_SHADER');
+        if (type == cgl.gl.FRAGMENT_SHADER) Log.log('FRAGMENT_SHADER');
 
         console.warn(cgl.gl.getShaderInfoLog(shader));
 
@@ -878,7 +879,7 @@ Shader.createShader = function(cgl, str, type, cglShader) {
         for (var i in lines) {
             var j = parseInt(i, 10) + 1;
             var line = j + ': ' + lines[i];
-            console.log(line);
+            Log.log(line);
 
             var isBadLine = false;
             for (var bj in badLines)
@@ -896,14 +897,14 @@ Shader.createShader = function(cgl, str, type, cglShader) {
         htmlWarning = infoLog + '<br/>' + htmlWarning + '<br/><br/>';
 
         cgl.patch.emitEvent("criticalError",'Shader error ' + name, htmlWarning);
-        if(cgl.patch.isEditorMode())console.log('Shader error ' + name, htmlWarning);
+        if(cgl.patch.isEditorMode())Log.log('Shader error ' + name, htmlWarning);
 
         htmlWarning += '</div>';
 
         name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
     } else {
-        // console.log(name+' shader compiled...');
+        // Log.log(name+' shader compiled...');
     }
     return shader;
 };

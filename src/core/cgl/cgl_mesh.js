@@ -2,6 +2,7 @@ import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { profileData } from "./cgl_profiledata";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
+import { Log } from "../log";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -332,7 +333,7 @@ Mesh.prototype._bind = function (shader)
                 // todo: easier way to fill mat4 attribs...
                 if (attribute.itemSize <= 4)
                 {
-                    if (!attribute.itemSize || attribute.itemSize == 0) console.log("instanced attrib itemsize error", this._geom.name, attribute);
+                    if (!attribute.itemSize || attribute.itemSize == 0) Log.log("instanced attrib itemsize error", this._geom.name, attribute);
 
                     this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
                     this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
@@ -356,12 +357,12 @@ Mesh.prototype._bind = function (shader)
                 }
                 else
                 {
-                    console.log("unknown instance attrib size", attribute.name);
+                    Log.log("unknown instance attrib size", attribute.name);
                 }
             }
             else
             {
-                if (!attribute.itemSize || attribute.itemSize == 0) console.log("attrib itemsize error", this._geom.name, attribute);
+                if (!attribute.itemSize || attribute.itemSize == 0) Log.log("attrib itemsize error", this._geom.name, attribute);
                 this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
 
                 if (attribute.pointer)
@@ -431,11 +432,11 @@ Mesh.prototype.meshChanged = function ()
 
 Mesh.prototype.printDebug = function (shader)
 {
-    console.log("--attributes");
+    Log.log("--attributes");
     for (i = 0; i < this._attributes.length; i++)
     {
 
-        console.log("attribute " + i + " " + this._attributes[i].name);
+        Log.log("attribute " + i + " " + this._attributes[i].name);
     }
 };
 

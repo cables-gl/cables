@@ -24,8 +24,8 @@ function resolve()
                 streamUrl.set(data.stream_url+"?client_id="+clientId);
                 artworkUrl.set(data.artwork_url);
                 title.set(data.title);
-                console.log('stream url:'+data.stream_url);
-                console.log(data);
+                op.log('stream url:'+data.stream_url);
+                op.log(data);
             });
 
 }

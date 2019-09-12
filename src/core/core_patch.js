@@ -9,6 +9,7 @@ import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
+import { Log } from "./log";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -85,6 +86,8 @@ const Patch = function (cfg)
         fpsLimit: 0,
     };
 
+    Log.setSilent(this.config.silent);
+
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
@@ -105,6 +108,8 @@ const Patch = function (cfg)
 
     if (this.cgl.aborted) this.aborted = true;
     if (this.cgl.silent) this.silent = true;
+
+    Log.log(123);
 
     this.freeTimer.play();
     this.exec();
@@ -127,9 +132,9 @@ const Patch = function (cfg)
                     {
                         var txt = "";
 
-                        console.error("err", err);
-                        console.error("data", data);
-                        console.error("data", data.msg);
+                        Log.error("err", err);
+                        Log.error("data", data);
+                        Log.error("data", data.msg);
                         return;
                     }
 
@@ -240,7 +245,7 @@ Patch.prototype.getFilePath = function (filename)
     filename = filename.replace("//", "/");
 
     var finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
-    // console.log('finalFilename',finalFilename);
+    // Log.log('finalFilename',finalFilename);
 
     return finalFilename;
 };
@@ -313,7 +318,7 @@ Patch.prototype.createOp = function (identifier, id)
             {
                 this.emitEvent("criticalError", "unknown op", "unknown op: " + objName);
 
-                console.error('unknown op: ' + objName);
+                Log.error('unknown op: ' + objName);
                 throw new Error('unknown op: ' + objName);
             } else {
                 if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
@@ -325,13 +330,13 @@ Patch.prototype.createOp = function (identifier, id)
                 else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName,id);
                 else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName,id);
                 else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName,id);
-                else console.log('parts.length', parts.length);
+                else Log.log('parts.length', parts.length);
             }
 
             if (op)
             {
                 op.opId = null;
-                // console.log("op created by objName:",objName);
+                // Log.log("op created by objName:",objName);
                 for (var i in CABLES.OPS)
                 {
                     if (CABLES.OPS[i].objName == objName) op.opId = i;
@@ -347,8 +352,8 @@ Patch.prototype.createOp = function (identifier, id)
 
         if (!this.isEditorMode)
         {
-            console.log(e);
-            console.error('[instancing error] ' + objName,e);
+            Log.log(e);
+            Log.error('[instancing error] ' + objName,e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             this.exitError("INSTANCE_ERR",'Instancing Error ' + objName);
@@ -463,7 +468,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink)
                 if (this.onDelete)
                 {
                     // todo: remove
-                    console.log("deprecated this.onDelete", this.onDelete);
+                    Log.log("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
@@ -603,12 +608,12 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
 {
     if (!op1)
     {
-        console.log("link: op1 is null ");
+        Log.log("link: op1 is null ");
         return;
     }
     if (!op2)
     {
-        console.log("link: op2 is null");
+        Log.log("link: op2 is null");
         return;
     }
     var port1 = op1.getPort(port1Name);
@@ -736,7 +741,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             if (oldOp.portsIn[j].links.length === 0)
             {
                 var p = op.getPort(oldOp.portsIn[j].name);
-                if (!p) console.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
+                if (!p) Log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
                 else p.set(oldOp.portsIn[j].get());
             }
             else
@@ -749,7 +754,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                     oldOp.portsIn[j].links[0].remove();
 
                     l = self.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) console.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
+                    if (!l) Log.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
             }
@@ -765,7 +770,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 oldOp.portsOut[j].links[0].remove();
 
                 l = self.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) console.log("relink after op reload not successfull for port " + oldInName);
+                if (!l) Log.log("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }
         }
@@ -827,7 +832,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     var reqs = new Requirements(this);
 
-    // console.log('add ops ',obj.ops);
+    // Log.log('add ops ',obj.ops);
     // add ops...
     for (var iop in obj.ops)
     {
@@ -886,7 +891,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
         var timeused = Math.round(100 * (CABLES.now() - start)) / 100;
         // if(!this.silent && timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
-        // else console.log('op time',obj.ops[iop].objName,timeused);
+        // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
     for (var i in this.ops)
@@ -1159,7 +1164,7 @@ Patch.prototype.exitError = function (errorId, errorMessage)
  */
 Patch.prototype.preRenderOps = function ()
 {
-    console.log("prerendering...");
+    Log.log("prerendering...");
     var stopwatch = null;
     if (CABLES.StopWatch) stopwatch = new CABLES.StopWatch("prerendering");
 
@@ -1168,7 +1173,7 @@ Patch.prototype.preRenderOps = function ()
         if (this.ops[i].preRender)
         {
             this.ops[i].preRender();
-            console.log("prerender " + this.ops[i].objName);
+            Log.log("prerender " + this.ops[i].objName);
         }
     }
 

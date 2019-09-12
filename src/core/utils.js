@@ -290,6 +290,9 @@ export const cacheBust = function (url)
     return url + "cb=" + CABLES.uuid();
 };
 
+
+
+// is jsonp used anywhere ?
 var jsonpCounter = null;
 export const jsonp = function (url, cb)
 {
@@ -297,11 +300,11 @@ export const jsonp = function (url, cb)
     jsonpCounter++;
     var jsonPID = jsonpCounter;
 
-    console.log("making jsonp request...");
+    // console.log("making jsonp request...");
 
     CABLES["jsonpFunc" + jsonPID] = function (data)
     {
-        console.log(data);
+        // console.log(data);
         cb(false, data);
     };
 

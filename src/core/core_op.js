@@ -2,6 +2,7 @@ import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port } from "./core_port";
 import { Link } from "./core_link";
+import { Log } from "./log";
 
 /**
  * op the class of all operators
@@ -682,9 +683,9 @@ const Op = function ()
 
     Op.prototype.printInfo = function ()
     {
-        for (var i = 0; i < this.portsIn.length; i++) console.log("in: " + this.portsIn[i].getName());
+        for (var i = 0; i < this.portsIn.length; i++) Log.log("in: " + this.portsIn[i].getName());
 
-        for (var ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());
+        for (var ipo in this.portsOut) Log.log("out: " + this.portsOut[ipo].getName());
     };
 
     Op.prototype.getOutChilds = function ()
@@ -798,10 +799,7 @@ const Op = function ()
      */
     Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
-        // for(var ipi in this.portsIn)
         for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
-
-        // for(var ipo in this.portsOut)
         for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
     };
 
@@ -816,7 +814,6 @@ const Op = function ()
     Op.prototype.getPortById = function (id)
     {
         for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].id == id) return this.portsIn[ipi];
-
         for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].id == id) return this.portsOut[ipo];
     };
 
@@ -827,17 +824,26 @@ const Op = function ()
 
     Op.prototype.log = function ()
     {
-        if (!this.patch.silent) Function.prototype.apply.apply(console.log, [console, arguments]);
+        if (this.patch.silent) return;
+        var args = ["[op "+this._shortOpName+"]"];
+        args.push.apply(args, arguments);
+        Function.prototype.apply.apply(console.log, [console, args]);
     };
 
     Op.prototype.error = function ()
     {
-        if (!this.patch.silent) Function.prototype.apply.apply(console.error, [console, arguments]);
+        if (this.patch.silent) return;
+        var args = ["[op "+this._shortOpName+"]"];
+        args.push.apply(args, arguments);
+        Function.prototype.apply.apply(console.error, [console, args]);
     };
 
     Op.prototype.warn = function ()
     {
-        if (!this.patch.silent) Function.prototype.apply.apply(console.warn, [console, arguments]);
+        if (this.patch.silent) return;
+        var args = ["[op "+this._shortOpName+"]"];
+        args.push.apply(args, arguments);
+        Function.prototype.apply.apply(console.warn, [console, args]);
     };
 
     Op.prototype.undoUnLinkTemporary = function ()
@@ -962,7 +968,7 @@ const Op = function ()
         if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
         {
             if (!this._instances) this._instances = [];
-            console.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+            Log.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
             this._instances.length = this.patch.instancing.numCycles();
             for (i = 0; i < this._instances.length; i++)
             {
@@ -998,8 +1004,8 @@ const Op = function ()
             }
             if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
             {
-                // console.log(this.patch.instancing.index());
-                // console.log(this._instances.length);
+                // Log.log(this.patch.instancing.index());
+                // Log.log(this._instances.length);
                 // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
                 // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }
@@ -1022,7 +1028,7 @@ const Op = function ()
     {
         //         if(this.isInstanced)
         //         {
-        //             console.log('cancel instancing');
+        //             Log.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
@@ -1039,7 +1045,7 @@ const Op = function ()
         //                 {
         //
         //                     var i=0;
-        // // console.log('trigger',this._instances.length);
+        // // Log.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //
@@ -1054,7 +1060,7 @@ const Op = function ()
         {
             var port = this.getPortByName(i);
             if (port) port.set(obj[i]);
-            else console.log("op.setValues: port not found:", i);
+            else Log.log("op.setValues: port not found:", i);
         }
     };
 
@@ -1108,7 +1114,7 @@ const Op = function ()
         }
         else
         {
-            console.log("hasListener: missing parameters");
+            Log.log("hasListener: missing parameters");
         }
     };
 
@@ -1125,7 +1131,7 @@ const Op = function ()
         if (this._eventCallbacks[which])
         {
             var idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) console.log("eventlistener " + which + " not found...");
+            if (idx == -1) Log.log("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].slice(idx);
         }
     };
