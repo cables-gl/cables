@@ -20,7 +20,7 @@
                 "name": "ArrayOut"
             }
         ],
-        "name": "Ops.Array.ArrayRotate"
+        "name": "Ops.Array.RotateArray"
     },
     "summary": "Shift array contents based upon rotate amount",
     "youtubeid": "",

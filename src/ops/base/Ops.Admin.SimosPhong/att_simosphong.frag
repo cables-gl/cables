@@ -269,6 +269,8 @@ vec3 SpotLight(Light light, Material material) {
 }
 
 vec3 PointLight(Light light, Material material) {
+
+
     vec3 normal = normalize(normInterpolated);
 
     #ifdef HAS_TEXTURE_NORMAL

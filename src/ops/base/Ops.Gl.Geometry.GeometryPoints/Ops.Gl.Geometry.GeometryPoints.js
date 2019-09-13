@@ -14,7 +14,10 @@ geometry.onChange=function()
     var geom=geometry.get();
     if(!geom) return;
 
-    outVertices.set(geom.vertices);
+    // convert float32array to array
+    var verts =  Array.prototype.slice.call(geom.vertices);
+
+    outVertices.set(verts);
     outFaces.set(geom.verticesIndices);
     outTextcoords.set(geom.texCoords);
     outNormals.set(geom.vertexNormals);
