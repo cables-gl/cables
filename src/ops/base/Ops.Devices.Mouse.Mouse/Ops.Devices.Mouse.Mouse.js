@@ -9,10 +9,12 @@ const
     flipY=op.inValueBool("flip y",true),
     outMouseX=op.outValue("x"),
     outMouseY=op.outValue("y"),
+    rightClickPrevDef=op.inBool("right click prevent default",true),
     mouseDown=op.outValueBool("button down"),
     mouseClick=op.outTrigger("click"),
     mouseUp=op.outTrigger("Button Up"),
     mouseClickRight=op.outTrigger("click right"),
+
     mouseOver=op.outValueBool("mouseOver"),
     outButton=op.outValue("button");
 
@@ -114,7 +116,7 @@ function onMouseUp(e)
 function onClickRight(e)
 {
     mouseClickRight.trigger();
-    e.preventDefault();
+    if(rightClickPrevDef.get()) e.preventDefault();
 }
 
 function onmouseclick(e)

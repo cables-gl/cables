@@ -76,8 +76,7 @@ inVal.onChange=function()
 
 inDivisorUp.onChange=function()
 {
-    divisor=inDivisorUp.get();
-    if(divisor<=0)divisor=5;
+    getDivisors();
 };
 
 function update()
@@ -86,9 +85,6 @@ function update()
     if(CABLES.now()-lastTrigger>500 || lastTrigger===0)val=inVal.get();
     else tm=(CABLES.now()-lastTrigger)/16;
     lastTrigger=CABLES.now();
-
-    // if(divisorUp<=0 || divisorUp != divisorUp )divisorUp=0.0001;
-    // if(divisorDown<=0 || divisorDown != divisorDown )divisorDown=0.0001;
 
     if(divisor<=0)divisor=0.0001;
 
