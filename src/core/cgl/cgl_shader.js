@@ -122,7 +122,8 @@ Shader.prototype.setWhyCompile=function(why)
     // Log.log('recompile because '+why);
 };
 
-Shader.prototype.setSource = function(srcVert, srcFrag) {
+Shader.prototype.setSource = function(srcVert, srcFrag)
+{
     this.srcVert = srcVert;
     this.srcFrag = srcFrag;
     this.setWhyCompile("Source changed");
@@ -722,45 +723,29 @@ Shader.prototype._linkProgram = function(program)
     }
 
     this._cgl.gl.linkProgram(program);
-    this._cgl.gl.validateProgram(program);
 
-    // var infoLog = this._cgl.gl.getProgramInfoLog(program);
-    // if (infoLog) {
-    //     // Log.log(name+' link programinfo: ',this._cgl.gl.getProgramInfoLog(program));
-    // }
-
-    if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS)) {
-
-
-        // todo print shaderinfolog!!!!
-
-        console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
-        console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
-
-        console.error(name + " shader linking fail...");
-        Log.log('srcFrag',this.srcFrag);
-        Log.log('srcVert',this.srcVert);
-        Log.log(name + ' programinfo: ', this._cgl.gl.getProgramInfoLog(program));
-
-        Log.log('--------------------------------------');
-        Log.log(this);
-        Log.log('--------------------------------------');
-
-        name = "errorshader";
-        this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
-    }
-    else
+    if(this._cgl.patch.config.canvas.glValidateShader!==false)
     {
+        this._cgl.gl.validateProgram(program);
 
+        if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
+        {
+            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
+            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
+            console.error(name + " shader linking fail...");
+
+            Log.log('srcFrag',this.srcFrag);
+            Log.log('srcVert',this.srcVert);
+            Log.log(name + ' programinfo: ', this._cgl.gl.getProgramInfoLog(program));
+
+            Log.log('--------------------------------------');
+            Log.log(this);
+            Log.log('--------------------------------------');
+
+            name = "errorshader";
+            this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
+        }
     }
-
-    // var error = this._cgl.gl.getError();
-    // if (error == this._cgl.gl.NO_ERROR )
-    // Log.log('no error: ',error);
-    // else
-    //   Log.log('get error: ',error);
-    // if(this._feedBackNames.length>0)
-    //    this._cgl.gl.transformFeedbackVaryings( program, [], this._cgl.gl.SEPARATE_ATTRIBS );
 
 };
 

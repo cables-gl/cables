@@ -176,11 +176,7 @@ var doRender=function()
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
 
-
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-    // cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
-
-
 
     updateResolution();
 
