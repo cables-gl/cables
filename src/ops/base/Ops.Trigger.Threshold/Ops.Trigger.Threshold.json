@@ -21,7 +21,7 @@
                 "name": "Output"
             }
         ],
-        "name": "Ops.Trigger.Past"
+        "name": "Ops.Trigger.Threshold"
     },
     "summary": "Triggers only once when threshold is crossed",
     "docs": {

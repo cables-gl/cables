@@ -41,6 +41,11 @@
                 "type": "0",
                 "name": "flip y",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "right click prevent default",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
