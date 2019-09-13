@@ -724,7 +724,7 @@ Shader.prototype._linkProgram = function(program)
 
     this._cgl.gl.linkProgram(program);
 
-    if(this._cgl.patch.config.canvas.glValidateShader!==false)
+    if(this._cgl.patch.config.glValidateShader!==false)
     {
         this._cgl.gl.validateProgram(program);
 

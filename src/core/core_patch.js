@@ -1261,6 +1261,7 @@ Patch.prototype.dispose = function ()
  * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
  * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
  * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
+ * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders * 
  * @property {Boolean} [silent=false]
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
