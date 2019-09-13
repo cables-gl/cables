@@ -1,5 +1,4 @@
 {
-    "updated": 1536134920122,
     "authorName": "pandur",
     "id": "3fab881c-c2cf-42a0-9c42-2d8edfd93f57",
     "created": 1535465590797,
@@ -57,7 +56,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArraySwitch"
+        "name": "Ops.Array.SwitchArray"
     },
     "summary": "switch between multiple arrays",
     "docs": {
