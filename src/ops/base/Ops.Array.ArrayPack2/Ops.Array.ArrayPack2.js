@@ -10,9 +10,15 @@ var showingError = false;
 
 var arr=[];
 var emptyArray=[];
+var needsCalc = true;
 
 exe.onTriggered = update;
 
+inArr1.onChange=inArr2.onChange=calcLater;
+function calcLater()
+{
+    needsCalc=true;
+}
 
 function update()
 {
@@ -24,47 +30,50 @@ function update()
         outArr.set(null);
         return;
     }
-
-    var arrlen=0;
-
-    if(!array1 || !array2)
+    if(needsCalc)
     {
-        if(array1) arrlen=array1.length;
-            else if(array2) arrlen=array2.length;
+        var arrlen=0;
 
-        if(emptyArray.length!=arrlen)
-            for(var i=0;i<arrlen;i++) emptyArray[i]=0;
-
-        if(!array1)array1=emptyArray;
-        if(!array2)array2=emptyArray;
-    }
-
-    if(array1.length !== array2.length)
-    {
-        if(!showingError)
+        if(!array1 || !array2)
         {
-            op.uiAttr({error:"Arrays do not have the same length !"});
-            showingError = true;
+            if(array1) arrlen=array1.length;
+                else if(array2) arrlen=array2.length;
+
+            if(emptyArray.length!=arrlen)
+                for(var i=0;i<arrlen;i++) emptyArray[i]=0;
+
+            if(!array1)array1=emptyArray;
+            if(!array2)array2=emptyArray;
         }
-        return;
-    }
 
-    if(showingError)
-    {
-        showingError = false;
-        op.uiAttr({error:null});
-    }
+        if(array1.length !== array2.length)
+        {
+            if(!showingError)
+            {
+                op.uiAttr({error:"Arrays do not have the same length !"});
+                showingError = true;
+            }
+            return;
+        }
 
-    arr.length = array1.length;
-    for(var i=0;i<array1.length;i++)
-    {
-        arr[i*2+0] = array1[i];
-        arr[i*2+1] = array2[i];
-    }
+        if(showingError)
+        {
+            showingError = false;
+            op.uiAttr({error:null});
+        }
 
-    outArr.set(null);
-    outArr.set(arr);
-    outArrayLength.set(arr.length);
+        arr.length = array1.length;
+        for(var i=0;i<array1.length;i++)
+        {
+            arr[i*2+0] = array1[i];
+            arr[i*2+1] = array2[i];
+        }
+
+        needsCalc = false;
+        outArr.set(null);
+        outArr.set(arr);
+        outArrayLength.set(arr.length);
+    }
 
     exeOut.trigger();
 }
