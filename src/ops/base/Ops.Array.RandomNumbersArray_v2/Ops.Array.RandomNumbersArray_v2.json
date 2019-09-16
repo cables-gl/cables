@@ -1,0 +1,55 @@
+{
+    "id": "e6a33cd3-e797-4289-a747-d14798c3df25",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1568370685431
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1568370713845,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "numValues",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.RandomNumbersArray_v2"
+    }
+}
