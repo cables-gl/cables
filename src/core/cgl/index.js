@@ -21,7 +21,6 @@ import { TextureEffect } from "./cgl_textureeffect";
 import { CONSTANTS } from "./constants";
 import { profileData } from "./cgl_profiledata";
 
-// console.log({ SHADER_VARS, BLENDS, yolo });
 const CGL = Object.assign(
     {
         Framebuffer,

@@ -1,13 +1,16 @@
-var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var next=this.addOutPort(new CABLES.Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
+const
+    exe=op.inTrigger("exe"),
+    inShow=op.inValueBool("Visible",true),
+    next=op.outTrigger("childs"),
+    outFPS=op.outValue("FPS");
 
-var inShow=op.inValueBool("Visible",true);
+// var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
+// var next=this.addOutPort(new CABLES.Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
 
-var outFPS=op.outValue("FPS");
+const cgl=op.patch.cgl;
 var element = document.createElement('div');
 var elementMeasures=null;
 var ctx=null;
-var cgl=op.patch.cgl;
 var opened=false;
 var frameCount=0;
 var fps=0;
@@ -22,8 +25,11 @@ var selfTime=0;
 var canvas=null;
 var lastTime=0;
 var loadingCounter=0;
-
 var loadingChars=['|','/','-','\\'];
+
+exe.onLinkChanged =
+    inShow.onChange = updateVisibility;
+
 
 for(var i=0;i<numBars;i++)
 {
@@ -50,14 +56,17 @@ container.appendChild(element);
 
 element.addEventListener("click", toggleOpened);
 
+
 op.onDelete=function()
 {
-    element.remove();
+    if(canvas)canvas.remove();
+    if(element)element.remove();
 };
 
-inShow.onChange=function()
+
+function updateVisibility()
 {
-    if(!inShow.get())
+    if(!inShow.get() || !exe.isLinked())
     {
         element.style.display='none';
         element.style.opacity=0;
@@ -67,8 +76,7 @@ inShow.onChange=function()
         element.style.display='block';
         element.style.opacity=1;
     }
-
-};
+}
 
 function toggleOpened()
 {
@@ -149,9 +157,7 @@ function updateText()
 
     if(warn.length>0)
     {
-        // console.warn("warn:",warn);
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
-
     }
 
     element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
@@ -205,7 +211,6 @@ function updateText()
         // }
     }
 
-
     CGL.profileData.profileUniformCount=0;
     CGL.profileData.profileShaderGetUniform=0;
     CGL.profileData.profileShaderCompiles=0;
@@ -217,7 +222,6 @@ function updateText()
     CGL.profileData.profileMeshSetGeom=0;
     CGL.profileData.profileVideosPlaying=0;
     CGL.profileData.profileMVPMatrixCount=0;
-
     CGL.profileData.profileNonTypedAttrib=0;
     CGL.profileData.profileNonTypedAttribNames="";
 }
@@ -243,14 +247,12 @@ function addMeasureChild(m,parentEle,timeSum,level)
             else  newEle.style.height=height+'px';
 
         newEle.style.overflow='hidden';
-
         newEle.style.display='inline-block';
 
         if(!m.isRoot)
         {
             newEle.innerHTML='<div style="min-height:'+height+'px;width:100%;overflow:hidden;color:black;position:relative">&nbsp;'+m.name+'</div>';
             newEle.style['background-color']="rgb("+m.colR+","+m.colG+","+m.colB+")";
-
             newEle.style['border-left']='1px solid black';
         }
 
@@ -319,9 +321,8 @@ function measures()
 
     if(!elementMeasures)
     {
-        console.log("create measure ele");
+        op.log("create measure ele");
         elementMeasures = document.createElement('div');
-        // elementMeasures.style.border="1px solid red";
         elementMeasures.style.width="100%";
         elementMeasures.style['background-color']="#444";
         elementMeasures.style.bottom="10px";
@@ -334,23 +335,14 @@ function measures()
         container.appendChild(elementMeasures);
     }
 
-    // elementMeasures.innerHTML='';
-
-    // console.log(CGL.performanceMeasures[0]);
-
     var timeSum=0;
 
-    // if(CGL.performanceMeasures[0])
-        var root=CGL.performanceMeasures[0];
+    var root=CGL.performanceMeasures[0];
 
-        for(var i=0;i<root.childs.length;i++)
-        {
-            timeSum+=root.childs[i].used;
-        }
-
-    // console.log(root.childs.length);
-
-    // console.log(timeSum);
+    for(var i=0;i<root.childs.length;i++)
+    {
+        timeSum+=root.childs[i].used;
+    }
 
     addMeasureChild(CGL.performanceMeasures[0],elementMeasures,timeSum,0);
 
@@ -361,6 +353,7 @@ function measures()
     CGL.performanceMeasures.length=0;
     initMeasures=false;
 }
+
 
 
 exe.onTriggered=function()
@@ -387,7 +380,7 @@ exe.onTriggered=function()
         if(opened)
         {
             var timeUsed=performance.now()-lastTime;
-            // if(timeUsed>30)console.log("peak ",performance.now()-lastTime);
+            // if(timeUsed>30)op.log("peak ",performance.now()-lastTime);
             queue.push(timeUsed);
             queue.shift();
 
@@ -396,7 +389,6 @@ exe.onTriggered=function()
 
             updateCanvas();
         }
-
     }
 
     lastTime=performance.now();
@@ -410,8 +402,3 @@ exe.onTriggered=function()
 };
 
 
-op.onDelete=function()
-{
-  if(canvas)canvas.remove();
-  if(element)element.remove();
-};

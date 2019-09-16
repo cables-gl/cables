@@ -112,8 +112,6 @@ const Context = function (_patch)
 
     this.setCanvas = function (canv)
     {
-        // CGL.TextureEffectMesh = CGL.TextureEffectMesh || null;
-
         if (typeof canv === "string") this.canvas = document.getElementById(canv);
         else this.canvas = canv;
 
@@ -127,9 +125,7 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
         if(!this.patch.config.canvas.forceWebGl1)
-        {
             this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
-        }
 
         if (this.gl)
         {

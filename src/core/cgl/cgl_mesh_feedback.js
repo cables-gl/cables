@@ -1,4 +1,5 @@
 // view-source:http://toji.github.io/webgl2-particles-2/
+import { Log } from "../log";
 
 export function extendMeshWithFeedback(Mesh)
 {
@@ -41,7 +42,7 @@ export function extendMeshWithFeedback(Mesh)
         fb.initialArr = initialArr;
         fb.attrib = attrib;
 
-        // console.log("setfeedback");
+        // Log.log("setfeedback");
 
         if (fb.outBuffer) this._cgl.gl.deleteBuffer(fb.outBuffer);
         // if(fb.attrib.buffer)this._cgl.gl.deleteBuffer(fb.attrib.buffer);
@@ -54,9 +55,9 @@ export function extendMeshWithFeedback(Mesh)
 
         if (!found) this._feedBacks.push(fb);
 
-        // console.log('initialArr',initialArr.length/3);
-        // console.log('vertices',fb.attrib.numItems);
-        // console.log('vertices',this._bufVertexAttrib.numItems);
+        // Log.log('initialArr',initialArr.length/3);
+        // Log.log('vertices',fb.attrib.numItems);
+        // Log.log('vertices',this._bufVertexAttrib.numItems);
 
         return fb;
     };
@@ -92,7 +93,7 @@ export function extendMeshWithFeedback(Mesh)
 
         if (!found)
         {
-            // console.log("ARTTRIB NOT FOUND",attrib.name);
+            // Log.log("ARTTRIB NOT FOUND",attrib.name);
         }
     };
 
@@ -108,12 +109,12 @@ export function extendMeshWithFeedback(Mesh)
             for (i = 0; i < this._feedBacks.length; i++) names.push(this._feedBacks[i].nameOut);
             shader.setFeedbackNames(names);
 
-            console.log("feedbacknames", names);
+            Log.log("feedbacknames", names);
 
             shader.compile();
             this._feedBacksChanged = false;
             this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, null);
-            console.log("changed finished");
+            Log.log("changed finished");
             return;
         }
 

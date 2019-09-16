@@ -21,7 +21,7 @@ const EventTarget = function ()
         }
         else
         {
-            console.log("hasListener: missing parameters");
+            Log.warn("hasListener: missing parameters");
         }
     };
 
@@ -30,7 +30,7 @@ const EventTarget = function ()
         if (this._eventCallbacks[which])
         {
             var idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) console.log("eventlistener " + which + " not found...");
+            if (idx == -1) Log.warn("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].splice(idx);
         }
     };
@@ -49,7 +49,7 @@ const EventTarget = function ()
         }
         else
         {
-            // console.log("has no event callback",which,this._eventCallbacks);
+            // Log.warn("has no event callback",which,this._eventCallbacks);
         }
     };
 };

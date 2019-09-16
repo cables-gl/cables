@@ -1,5 +1,6 @@
 // import { quat } from "gl-matrix";
 import { Port } from "./core_port";
+import { Log } from "./log";
 
 import { CONSTANTS } from "./constants";
 
@@ -674,7 +675,7 @@ Anim.prototype.addKey = function (k)
 {
     if (k.time === undefined)
     {
-        console.log("key time undefined, ignoring!");
+        Log.log("key time undefined, ignoring!");
     }
     else
     {

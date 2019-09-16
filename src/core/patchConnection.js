@@ -1,4 +1,5 @@
 import { CONSTANTS } from "./constants";
+import { Log } from "./log"
 
 // todo: this is optional?
 
@@ -38,28 +39,26 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     if (ev.event) data = ev;
     else data = JSON.parse(ev.data);
 
-    // console.log(data);
-
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
     {
-        console.log("op create: data.vars.objName");
+        Log.log("op create: data.vars.objName");
         var op = this._patch.addOp(data.vars.objName);
         op.id = data.vars.opId;
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
     {
-        console.log("load patch.....");
+        Log.log("load patch.....");
         this._patch.clear();
         this._patch.deSerialize(data.vars.patch);
     }
     else if (data.event == CONSTANTS.PACO.PACO_CLEAR)
     {
         this._patch.clear();
-        console.log("clear");
+        Log.log("clear");
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_DELETE)
     {
-        console.log("op delete");
+        Log.log("op delete");
         this._patch.deleteOp(data.vars.op, true);
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_ENABLE)
@@ -94,7 +93,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else
     {
-        console.log("unknown patchConnectionEvent!", ev);
+        Log.log("unknown patchConnectionEvent!", ev);
     }
 };
 
@@ -124,7 +123,7 @@ const PatchConnectorBroadcastChannel = function ()
 PatchConnectorBroadcastChannel.prototype.receive = function (paco)
 {
     if (!this.bc) return;
-    console.log("init");
+    Log.log("init");
     this.bc.onmessage = paco._receive.bind(paco);
 };
 
@@ -135,7 +134,7 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
     data.event = event;
     data.vars = vars;
     this.bc.postMessage(JSON.stringify(data));
-    // console.log(data);
+    // Log.log(data);
 };
 
 // -------------
@@ -143,31 +142,31 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
 // const PatchConnectorSocketIO = function ()
 // {
 //     this._socket = io("localhost:5712");
-//     console.log("socket io paco...");
+//     Log.log("socket io paco...");
 //     this._socket.emit("channel", { name: "hund" });
 
 //     this._socket.on("connect", () =>
 //     {
-//         console.log("CONNECTED");
+//         Log.log("CONNECTED");
 //         // connection.set(socket);
 //         // connected.set(true);
 //     });
 
 //     this._socket.on("reconnect_error", () =>
 //     {
-//         console.log("reconnect_error");
+//         Log.log("reconnect_error");
 //         // connected.set(false);
 //     });
 
 //     this._socket.on("connect_error", () =>
 //     {
-//         console.log("connect_error");
+//         Log.log("connect_error");
 //         // connected.set(false);
 //     });
 
 //     this._socket.on("error", () =>
 //     {
-//         console.log("socket error");
+//         Log.log("socket error");
 //         // connected.set(false);
 //     });
 // };
@@ -176,14 +175,14 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
 // {
 //     this._socket.on("event", (r) =>
 //     {
-//         console.log("socket io receive", r);
+//         Log.log("socket io receive", r);
 //         paco._receive(r.data);
 //     });
 // };
 
 // PatchConnectorSocketIO.prototype.send = function (event, vars)
 // {
-//     console.log("send socketio");
+//     Log.log("send socketio");
 //     var data = {};
 //     data.event = event;
 //     data.vars = vars;

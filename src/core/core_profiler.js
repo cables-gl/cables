@@ -1,4 +1,5 @@
 import { now } from "./timer";
+import { Log } from "./log";
 
 const Profiler = function ()
 {
@@ -24,14 +25,14 @@ const Profiler = function ()
             {
                 if (items[currentId])
                 {
-                    // console.log(currentStart);
+                    // Log.log(currentStart);
                     items[currentId].timeUsed += performance.now() - currentStart;
 
                     if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)
                     {
                         if (items[currentId].peak > 1 && object)
                         {
-                            console.log("PEAK ", object.parent.objName);
+                            Log.log("PEAK ", object.parent.objName);
                         }
 
                         items[currentId].peak = 0;
@@ -66,10 +67,10 @@ const Profiler = function ()
 
     this.print = function ()
     {
-        console.log("--------");
+        Log.log("--------");
         for (var i in items)
         {
-            console.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
+            Log.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
         }
     };
 };

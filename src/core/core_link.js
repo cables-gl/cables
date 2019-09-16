@@ -1,4 +1,5 @@
 import { CONSTANTS } from "./constants";
+import { Log } from "./log";
 
 //
 // var CABLES=CABLES || {};
@@ -111,7 +112,7 @@ Link.prototype.link = function (p1, p2)
 {
     if (!Link.canLink(p1, p2))
     {
-        console.log("cannot link ports!");
+        Log.log("cannot link ports!");
         return false;
     }
 

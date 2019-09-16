@@ -1,3 +1,5 @@
+import { Log } from "./log";
+
 /**
  * @external CABLES
  * @namespace Utils
@@ -300,11 +302,11 @@ export const jsonp = function (url, cb)
     jsonpCounter++;
     var jsonPID = jsonpCounter;
 
-    // console.log("making jsonp request...");
+    // Log.log("making jsonp request...");
 
     CABLES["jsonpFunc" + jsonPID] = function (data)
     {
-        // console.log(data);
+        // Log.log(data);
         cb(false, data);
     };
 
@@ -368,11 +370,11 @@ export const request = function (options)
 
     xhr.addEventListener("progress", (ev) =>
     {
-        // console.log('progress',ev.loaded/1024+' kb');
+        // Log.log('progress',ev.loaded/1024+' kb');
         // if (ev.lengthComputable)
         // {
         //     var percentComplete = ev.loaded / ev.total;
-        //     console.log(url,percentComplete);
+        //     Log.log(url,percentComplete);
         // }
     });
 

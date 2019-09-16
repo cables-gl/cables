@@ -1,5 +1,6 @@
 import { profileData } from "./cgl_profiledata";
 import { Port } from "../core_port";
+import { Log } from "../log";
 
 /**
  * Shader uniforms
@@ -314,7 +315,7 @@ Uniform.prototype.updateValueT = function ()
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.ShaderGetUniform++;
         profileData.ShaderGetUniformName = this._name;
-        if (this._loc == -1) console.log("texture this._loc unknown!!");
+        if (this._loc == -1) Log.log("texture this._loc unknown!!");
     }
     profileData.UniformCount++;
 

@@ -4,7 +4,7 @@ const
     numPoints=op.inValueInt("Num Points"),
     strip=op.inBool("Line Strip",true),
     outGeom=op.outObject("Geometry"),
-    // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]),
+    // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!
     next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;

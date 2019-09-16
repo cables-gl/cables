@@ -2,6 +2,7 @@
 
 import { Texture } from "./cgl_texture";
 import { profileData } from "./cgl_profiledata";
+import { Log } from "../log";
 
 // const fbs = {
 //     Framebuffer2DrawTargetsDefault: null,
@@ -218,19 +219,19 @@ Framebuffer2.prototype.setSize = function(w, h) {
         case this._cgl.gl.FRAMEBUFFER_COMPLETE:
             break;
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            console.log("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...");
+            Log.log("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-            console.log("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            Log.log("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-            console.log("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            Log.log("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-            console.log("FRAMEBUFFER_UNSUPPORTED");
+            Log.log("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         default:
-            console.log("incomplete framebuffer", status);
+            Log.log("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
     }
