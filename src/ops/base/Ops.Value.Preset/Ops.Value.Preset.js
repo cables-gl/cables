@@ -39,7 +39,6 @@ presetA.onChange=
 updateInterpolation();
 updateDropdown();
 
-
 function updateInterpolation()
 {
     var ip=inInterPolate.get();
@@ -68,7 +67,7 @@ function updateInterpolation()
     op.setUiAttrib({"extendTitle":ip});
 
     if(interpolate!==0) updateFade();
-        else updatePreset();
+    else updatePreset();
 }
 
 
@@ -189,8 +188,12 @@ function updatePreset()
     for (var i = 0; i < varnames.length; i++)
     {
         var p=op.getPort(varnames[i]);
-        p.set(preset.values[varnames[i]]);
-        if(interpolate===0)p.forceChange();
+        if(p)
+        {
+            p.set(preset.values[varnames[i]]);
+            if(interpolate===0)p.forceChange();
+
+        }
     }
 
     op.refreshParams();
@@ -230,6 +233,8 @@ presetDelete.onTriggered=function()
     op.refreshParams();
 };
 
+
+
 dataPort.onChange=function()
 {
     data=JSON.parse(dataPort.get());
@@ -238,18 +243,25 @@ dataPort.onChange=function()
     {
         var portObject=data[i];
 
-    	if(portObject.type==CABLES.OP_PORT_TYPE_VALUE)
-    	{
-    	    const varname=portObject.varname;
-    	    op.patch.setVarValue(varname,0);
-    	    var port=op.inFloat(varname,0);
-    	    port.setUiAttribs({"editableTitle":true});
+        const varname=portObject.varname;
+        if(!op.getPort(varname))
+        {
+        	if(portObject.type==CABLES.OP_PORT_TYPE_VALUE)
+        	{
 
-    	    listenPortChange(port,varname);
-    	}
+        	    op.patch.setVarValue(varname,0);
+        	    var port=op.inFloat(varname,0);
+        	    port.setUiAttribs({
+        	        "editableTitle":true,
+        	        "title":portObject.title});
+
+        	    listenPortChange(port,varname);
+        	}
+
+        }
     }
 
-    dataPort.onChange=null;
+    // dataPort.onChange=null;
 };
 
 
@@ -267,43 +279,103 @@ function listenPortChange(port,varname)
     };
 }
 
-
-addPort.onLinkChanged=function(p)
+op.patch.addEventListener("onOpDelete",(optodelete)=>
 {
-    if(addPort.links.length===0)return;
+    if(optodelete.objName.indexOf("VarGet")==-1)return;
+
+    var newData=[];
+    for(var i=0;i<data.length;i++)
+    {
+        var found=false;
+
+        for(var oi=0;oi<op.patch.ops.length;oi++)
+        {
+            const opt=op.patch.ops[oi];
+
+            if(
+                opt!=optodelete &&
+                opt.objName.indexOf("VarGet">-1) &&
+                opt.varName &&
+                opt.varName.get &&
+                opt.varName.get()==data[i].varname)
+            {
+                found=true;
+                break;
+            }
+        }
+
+        if(found)
+        {
+            console.log('found!')
+            newData.push(data[i]);
+        }
+        else
+        {
+            op.removePort(op.getPort(data[i].varname));
+        }
+    }
+
+    data=newData;
+    saveData();
+    op.refreshParams();
+    setTimeout(op.refreshParams.bind(this),1000);
+});
+
+
+addPort.onLinkChanged=function()
+{
+    if(addPort.links.length===0)
+    {
+        op.log("no links!");
+        return;
+    }
 
     var link=addPort.links[0];
-
     var otherPort=link.getOtherPort(addPort);
 
 
-    const varname=".preset_"+id.get()+"_"+otherPort.name;
-    var newPort=op.addInPort(new CABLES.Port(op,varname,otherPort.type));
 
-    newPort.setUiAttribs({"editableTitle":true,"title":newPort.name});
-    newPort.set(otherPort.get());
+    const varname=".preset_"+id.get()+"_"+otherPort.name;
+
+//     var newPort=op.addInPort(new CABLES.Port(op,varname,otherPort.type));
+
+// op.log("pilength",op.portsIn);
+
+//     newPort.setUiAttribs({"editableTitle":true,"title":newPort.name});
+//     newPort.set(otherPort.get());
+
+    op.log("pilength",op.portsIn.length);
 
     data.push(
         {
             "varname":varname,
-            "type":newPort.type
+            "title":otherPort.parent.name+" "+otherPort.name,
+            "type":otherPort.type
         });
 
     op.patch.setVarValue(varname,otherPort.get());
 
-	if(newPort.type==CABLES.OP_PORT_TYPE_VALUE)
-	{
+// 	if(newPort.type==CABLES.OP_PORT_TYPE_VALUE)
+// 	{
         var opGetter = op.patch.addOp("Ops.Vars.VarGetNumber");
         opGetter.varName.set(varname);
 
-        op.patch.link(otherPort.parent,otherPort.name,opGetter,"Value");
-    }
 
-    listenPortChange(newPort,varname);
+//     }
+
+    // listenPortChange(newPort,varname);
 
     addPort.removeLinks();
     if(CABLES.UI && gui) gui.patch().removeDeadLinks();
     saveData();
     op.refreshParams();
+
+    // var newPort=op.getPort("varname")
+
+    op.patch.link(otherPort.parent,otherPort.name,opGetter,"Value");
+
+
 };
+
+
 
