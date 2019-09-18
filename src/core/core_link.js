@@ -13,6 +13,7 @@ import { Log } from "./log";
  */
 const Link = function (scene)
 {
+    this.id=CABLES.uuid();
     this.portIn = null;
     this.portOut = null;
     this.scene = scene; // todo: make private and rename to patch
@@ -83,7 +84,7 @@ Link.prototype.remove = function ()
     if (this.portOut) this.portOut.removeLink(this);
     if (this.scene)
     {
-        this.scene.emitEvent("onUnLink", this.portIn, this.portOut);
+        this.scene.emitEvent("onUnLink", this.portIn, this.portOut, this);
     }
 
     if (this.portIn && this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)

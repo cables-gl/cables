@@ -95,20 +95,20 @@ function getId()
 
 function updateFade()
 {
-    if(interpolate===0)return;
+    if(interpolate===0) return;
 
     var fade=0;
     var idxa=0;
     var idxb=0;
 
-    if(interpolate===2)
+    if(interpolate===2) // a-b
     {
         var pr=presetA.get();
         idxa=Math.floor(pr);
-        idxb=Math.floor(pr+1);
+        idxb=Math.ceil(pr);
         fade=pr%1;
     }
-    else if(interpolate===1)
+    else if(interpolate===1) // xfade
     {
         fade=presetFade.get();
         idxa=Math.floor(presetA.get());

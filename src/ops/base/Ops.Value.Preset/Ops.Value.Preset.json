@@ -70,7 +70,7 @@
             },
             {
                 "type": "0",
-                "name": ".preset_1_g",
+                "name": ".preset_1_r",
                 "subType": "number"
             },
             {
@@ -80,7 +80,7 @@
             },
             {
                 "type": "0",
-                "name": ".preset_1_a",
+                "name": ".preset_1_g",
                 "subType": "number"
             }
         ],

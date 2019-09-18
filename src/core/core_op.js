@@ -441,7 +441,7 @@ const Op = function ()
      */
     Op.prototype.inFile = function (name, filter, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "file", filter }));
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "file", filter:filter }));
         if (v !== undefined)
         {
             p.set(v);

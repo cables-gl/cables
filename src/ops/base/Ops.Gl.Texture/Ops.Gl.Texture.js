@@ -1,4 +1,4 @@
-var filename=op.inFile("file");
+var filename=op.inFile("file","image");
 var tfilter=op.inSwitch("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 var flip=op.inValueBool("flip",false);
