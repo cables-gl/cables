@@ -599,6 +599,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
  */
 Texture.createFromImage = function (cgl, img, options)
 {
+    options=options||{};
     var texture = new Texture(cgl, options);
     texture.flip = false;
     texture.image = img;
