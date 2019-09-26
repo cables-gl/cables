@@ -185,7 +185,7 @@ void main()
         d = 1.0 - sign(d);
     }
 
-    d = clamp(0.0,1.0,d);
+    d = clamp(d,0.0,1.0);
 
     //blend section
     vec4 col = vec4(vec4(r,g,b,a)) ;
@@ -195,3 +195,5 @@ void main()
     outColor = cgl_blend(base,col,d*amount);
     // outColor.rgb=vec3(d);
 }
+
+

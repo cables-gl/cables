@@ -4,8 +4,8 @@ const
     size=op.inValue("Size",1),
     seed=op.inValue("Seed",0),
     distRand=op.inValueSlider("Distance Random",0),
-
     distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]),
+    inDoRender=op.inBool("Render",true),
     outTrigger = op.outTrigger("Trigger out");
 
 var outGeom=op.outObject("Geometry");
@@ -27,7 +27,7 @@ reset();
 function doRender()
 {
     outTrigger.trigger();
-    if(mesh) mesh.render(cgl.getShader());
+    if(inDoRender.get() && mesh) mesh.render(cgl.getShader());
 }
 
 function reset()
@@ -94,8 +94,7 @@ function reset()
         texCoords[i*2]=Math.seededRandom();
         texCoords[i*2+1]=Math.seededRandom();
     }
-
-    geom.setPointVertices(verts);
+    geom.vertices=verts;
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;
     outGeom.set(null);
@@ -107,7 +106,6 @@ function reset()
     // if(mesh) mesh.setGeom(geom);
     if(mesh)mesh.dispose();
     mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-
     mesh.addVertexNumbers=true;
     // mesh.setGeom(geom);
 }
