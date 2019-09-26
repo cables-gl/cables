@@ -5,7 +5,7 @@ const
     seed=op.inValue("Seed",0),
     distRand=op.inValueSlider("Distance Random",0),
     distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]),
-    inDoRender=op.inBool("Render",true),
+    inDoRender=op.inBool("Draw",true),
     outTrigger = op.outTrigger("Trigger out");
 
 var outGeom=op.outObject("Geometry");

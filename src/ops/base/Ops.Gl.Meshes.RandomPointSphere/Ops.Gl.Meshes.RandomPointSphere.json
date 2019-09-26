@@ -33,7 +33,7 @@
             },
             {
                 "type": "0",
-                "name": "Render",
+                "name": "Draw",
                 "subType": "boolean"
             }
         ],
