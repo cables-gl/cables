@@ -1,14 +1,19 @@
 {
-    "id": "cc591cc3-ff23-4817-907c-e5be7d5c059d",
+    "id": "6e8600c4-fb7d-4315-88d4-4f10009538a7",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1566307472489
+            "date": 1568881565437
+        },
+        {
+            "message": "Ops.User.pandur.LocalFileSidebar renamed to Ops.Sidebar.LocalTextureFile",
+            "author": "pandur",
+            "date": 1568883268946
         }
     ],
     "authorName": "pandur",
-    "created": 1566307485317,
+    "created": 1568881684871,
     "layout": {
         "portsIn": [
             {
@@ -29,8 +34,20 @@
             {
                 "type": "2",
                 "name": "childs"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
             }
         ],
-        "name": "Ops.Sidebar.SidebarText_v2"
+        "name": "Ops.User.pandur.LocalFileSidebar"
+    },
+    "summary": "Use a local file as a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -2,7 +2,7 @@ const EventTarget = function ()
 {
     this._eventCallbacks = {};
 
-    this.on = this.addEventListener = function (which, cb)
+    this.addEventListener = this.on = function (which, cb)
     {
         if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
         else this._eventCallbacks[which].push(cb);

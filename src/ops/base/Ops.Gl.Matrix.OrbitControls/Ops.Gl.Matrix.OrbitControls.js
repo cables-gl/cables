@@ -30,6 +30,11 @@ const outRadius=op.outValue("radius");
 const outYDeg=op.outValue("Rot Y");
 const outXDeg=op.outValue("Rot X");
 
+const
+    outPosX=op.outNumber("Eye Pos X"),
+    outPosY=op.outNumber("Eye Pos Y"),
+    outPosZ=op.outNumber("Eye Pos Z");
+
 const inReset=op.inTriggerButton("Reset");
 
 op.setPortGroup("Initial Values",[initialAxis,initialX,initialRadius]);
@@ -145,30 +150,10 @@ render.onTriggered=function()
         lastPy=py;
     }
 
-
     var degX=(px)*CGL.RAD2DEG;
 
-    // if(minRotX.get()!==0 && degX<minRotX.get())
-    // {
-    //     degX=minRotX.get();
-    //     px=lastPx;
-    // }
-    // else if(maxRotX.get()!==0 && degX>maxRotX.get())
-    // {
-    //     degX=maxRotX.get();
-    //     px=lastPx;
-    // }
-    // else
-    // {
-    //     lastPx=px;
-    // }
-
-
-
     outYDeg.set( degY );
-    // outXDeg.set( (px)*180 );
     outXDeg.set( degX );
-
 
     circlePosi(eye, py );
 
@@ -182,6 +167,10 @@ render.onTriggered=function()
     finalCenter[0]=ip(finalCenter[0],tempCenter[0]);
     finalCenter[1]=ip(finalCenter[1],tempCenter[1]);
     finalCenter[2]=ip(finalCenter[2],tempCenter[2]);
+
+    outPosX.set(finalEye[0]);
+    outPosY.set(finalEye[1]);
+    outPosZ.set(finalEye[2]);
 
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
@@ -382,7 +371,6 @@ active.onChange=function()
     if(active.get())bind();
         else unbind();
 }
-
 
 function setElement(ele)
 {
