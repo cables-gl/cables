@@ -16,7 +16,7 @@ cgl.frameStore.currentScene=null;
 
 doCreate.onTriggered=createNodes;
 
-var defaultEasing=CABLES.TL.EASING_LINEAR;
+var defaultEasing=CABLES.EASING_LINEAR;
 var skipFrames=1;
 var frameNum=0;
 var cloneTransformStore=[];

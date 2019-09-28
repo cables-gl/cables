@@ -13,7 +13,9 @@ const
 
 const cgl=op.patch.cgl;
 
-var textureSize=2048;
+
+const filter=CGL.Texture.FILTER_MIPMAP;
+const textureSize=1024;
 var fontLoaded=false;
 
 align.onChange=
@@ -143,9 +145,9 @@ render.onTriggered=function()
         cgl.setShader(shader);
         cgl.setTexture(0,textureOut.get().tex);
 
-        if(valignMode==2) vec3.set(vec, 0,height,0);
-        else if(valignMode==1) vec3.set(vec, 0,0,0);
-        else if(valignMode==0) vec3.set(vec, 0,height/2,0);
+        if(valignMode===2) vec3.set(vec, 0,height,0);
+        else if(valignMode===1) vec3.set(vec, 0,0,0);
+        else if(valignMode===0) vec3.set(vec, 0,height/2,0);
         vec[1]-=lineHeight.get();
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
@@ -363,7 +365,7 @@ function generateTexture()
     if(!font.texture)
         font.texture=CGL.Texture.createFromImage(cgl,font.canvas,
             {
-                filter:CGL.Texture.FILTER_MIPMAP
+                filter:filter
             });
 
     font.texture.setSize(textureSize,textureSize);
@@ -385,7 +387,7 @@ function generateTexture()
 
     ctx.restore();
 
-    font.texture.initTexture(font.canvas,CGL.Texture.FILTER_MIPMAP);
+    font.texture.initTexture(font.canvas,filter);
     font.texture.unpackAlpha=true;
     textureOut.set(font.texture);
 

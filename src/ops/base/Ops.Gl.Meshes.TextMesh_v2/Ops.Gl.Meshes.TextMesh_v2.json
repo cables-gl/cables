@@ -85,7 +85,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Meshes.TextMesh3"
+        "name": "Ops.Gl.Meshes.TextMesh_v2"
     },
     "summary": "Draws text onto a mesh",
     "docs": {
