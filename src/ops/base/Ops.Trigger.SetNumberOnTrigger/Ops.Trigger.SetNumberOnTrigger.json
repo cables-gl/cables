@@ -23,6 +23,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Next"
+            },
+            {
                 "type": "0",
                 "name": "Out Value",
                 "subType": "number"

@@ -1,5 +1,5 @@
 // constants
-var NUM_PORTS = 10;
+var NUM_PORTS = 16;
 
 // inputs
 var exePort = op.inTriggerButton('Execute');

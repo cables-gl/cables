@@ -195,3 +195,5 @@ void main()
     outColor = cgl_blend(base,col,d*amount);
     // outColor.rgb=vec3(d);
 }
+
+

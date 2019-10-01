@@ -4,12 +4,12 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "has focus"
+                "name": "has focus",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Html.WindowHasFocus"
     },
-    "updated": 1520526123750,
     "authorName": "pandur",
     "id": "6542896e-aa13-4b57-81e0-163597f4149a",
     "created": 1520526123752

@@ -56,7 +56,11 @@ function doTrigger(_time)
         var time=_time;
         if(_time===undefined) time=current.parent.patch.timer.getTime();
 
-        currentKeyTime.set(time-current.anim.getKey(time).time);
+var key=current.anim.getKey(time);
+var timeOff=0;
+if(key) timeOff=key.time
+
+        currentKeyTime.set(time-timeOff);
 
         if(current.isAnimated())
         {

@@ -24,13 +24,13 @@ const textureUniform=new CGL.Uniform(shader,'t','tex',0),
 doSmooth.onChange=function()
 {
     if(doSmooth.get())shader.define("SMOOTH");
-        else shader.removeDefine("SMOOTH");
+    else shader.removeDefine("SMOOTH");
 };
 
 textureMask.onChange=function()
 {
     if(textureMask.get())shader.define("MASK");
-        else shader.removeDefine("MASK");
+    else shader.removeDefine("MASK");
 };
 
 render.onTriggered=function()

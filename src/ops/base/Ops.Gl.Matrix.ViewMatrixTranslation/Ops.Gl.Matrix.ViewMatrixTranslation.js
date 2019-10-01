@@ -1,16 +1,19 @@
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+const
+    render=op.inTrigger('render'),
+    trigger=op.outTrigger('trigger'),
+    outX=op.outValue("X"),
+    outY=op.outValue("Y"),
+    outZ=op.outValue("Z");
 
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
+const
+    cgl=op.patch.cgl,
+    pos=vec3.create(),
+    identVec=vec3.create(),
+    iViewMatrix=mat4.create();
 
-var cgl=op.patch.cgl;
-var pos=vec3.create();
-var identVec=vec3.create();
-var iViewMatrix=mat4.create();
+render.onTriggered=update;
 
-render.onTriggered=function()
+function update()
 {
     mat4.invert(iViewMatrix,cgl.vMatrix);
     vec3.transformMat4(pos, identVec,iViewMatrix );
@@ -20,4 +23,4 @@ render.onTriggered=function()
     outZ.set(pos[2]);
 
     trigger.trigger();
-};
+}

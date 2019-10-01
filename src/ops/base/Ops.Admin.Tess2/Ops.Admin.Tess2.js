@@ -47,31 +47,36 @@ function tess()
         winding=Tess2.WINDING_ABS_GEQ_TWO;
     }
 
+    var res=null;
+    try {
+        // Tesselate
+        res = Tess2.tesselate({
+        	contours: contours,
+        	windingRule: winding,
+        	elementType: Tess2.POLYGONS,
+        	polySize: 3,
+        	vertexSize: 2
+        });
+    } catch (e) {}
 
-
-    // Tesselate
-    var res = Tess2.tesselate({
-    	contours: contours,
-    	windingRule: winding,
-    	elementType: Tess2.POLYGONS,
-    	polySize: 3,
-    	vertexSize: 2
-    });
-
-    const geom=new CGL.Geometry("tess2geom");
-
-    var verts3=[];
-    for(var i=0;i<res.vertices.length;i+=2)
+    if(res)
     {
-        verts3.push(res.vertices[i+0],res.vertices[i+1],0);
+        const geom=new CGL.Geometry("tess2geom");
+
+        var verts3=[];
+        for(var i=0;i<res.vertices.length;i+=2)
+        {
+            verts3.push(res.vertices[i+0],res.vertices[i+1],0);
+        }
+
+        geom.vertices=verts3;
+        geom.verticesIndices=res.elements;
+        geom.calculateNormals();
+
+        outGeom.set(null);
+        outGeom.set(geom);
+
     }
-
-    geom.vertices=verts3;
-    geom.verticesIndices=res.elements;
-    geom.calculateNormals();
-
-    outGeom.set(null);
-    outGeom.set(geom);
 
 
 }

@@ -67,10 +67,34 @@
             },
             {
                 "type": "1",
+                "name": "Trigger 10"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 11"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 12"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 13"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 14"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 15"
+            },
+            {
+                "type": "1",
                 "name": "Default Trigger"
             }
         ],
-        "name": "Ops.Trigger.SwitchTrigger"
+        "name": "Ops.Trigger.RouteTrigger"
     },
     "summary": "Triggers one of the out ports - value index switch case (was SwitchTrigger)",
     "docs": {

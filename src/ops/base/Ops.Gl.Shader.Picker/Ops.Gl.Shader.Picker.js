@@ -159,8 +159,8 @@ var doRender=function()
 
             renderPickingPass();
 
-            var x=Math.floor(op.x.get()/minimizeFB);
-            var y=Math.floor( vpH-op.y.get()/minimizeFB);
+            var x=Math.floor(op.x.get()/minimizeFB/window.devicePixelRatio);
+            var y=Math.floor( vpH-op.y.get()/minimizeFB/window.devicePixelRatio);
             if(x<0)x=0;
             if(y<0)y=0;
 

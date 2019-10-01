@@ -50,6 +50,8 @@ op.onDelete=function()
     cgl.resetViewPort();
 };
 
+var prevViewPort=[];
+
 render.onTriggered=function()
 {
     resize();
@@ -59,10 +61,18 @@ render.onTriggered=function()
 
     cgl.gl.enable(cgl.gl.SCISSOR_TEST);
     var vp=cgl.getViewPort();
-    
+    prevViewPort[0]=vp[0];
+    prevViewPort[1]=vp[1];
+    prevViewPort[2]=vp[2];
+    prevViewPort[3]=vp[3];
+
+
     vp[2]=cgl.canvasWidth;
     vp[3]=cgl.canvasHeight;
-    
+    vp[0]=0;
+    vp[1]=0;
+
+
     // console.log(posX.get(),vp,cgl.canvasWidth,cgl.canvasHeight);
 
     var x=0;
@@ -78,5 +88,6 @@ render.onTriggered=function()
 
     trigger.trigger();
     cgl.gl.disable(cgl.gl.SCISSOR_TEST);
+    cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 
 };
