@@ -1,7 +1,6 @@
 //https://jmonkeyengine.github.io/wiki/jme3/advanced/pbr_part3.html
 //https://learnopengl.com/PBR/IBL/Diffuse-irradiance
 
-
 var render=op.inTrigger('render');
 var inMiplevel=op.inValueSlider("Mip Level",0.0);
 var inCubemap=op.inObject("Cubemap");
@@ -10,8 +9,6 @@ var mapReflect=op.inValueBool("Reflection",true);
 mapReflect.onChange=updateMapping;
 inCubemap.onChange=updateMapping;
 
-
-
 var trigger=op.outTrigger('trigger');
 
 var cgl=op.patch.cgl;
@@ -19,8 +16,6 @@ var cgl=op.patch.cgl;
 function doRender()
 {
     cgl.setShader(shader);
-
-
 
     if(inCubemap.get())
     {

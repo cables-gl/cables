@@ -10,7 +10,6 @@ const active=op.inValueBool("Active",true);
 const hdpi=op.inValueBool("Hires Displays",false);
 
 op.onAnimFrame=render;
-
 hdpi.onChange=function()
 {
     if(hdpi.get()) op.patch.cgl.pixelDensity=window.devicePixelRatio;
@@ -26,18 +25,17 @@ active.onChange=function()
 
     if(active.get())
     {
-        // op.patch.pause();
-        // op.patch.removeOnAnimFrame(op);
+        op.setUiAttrib({"extendTitle":""});
         op.onAnimFrame=render;
         op.patch.addOnAnimFrame(op);
         op.log("adding again!");
     }
-
-
-    // else op.patch.resume();
+    else
+    {
+        op.setUiAttrib({"extendTitle":"Inactive"});
+    }
 
 };
-
 
 var cgl=op.patch.cgl;
 var rframes=0;
@@ -95,7 +93,6 @@ function updateFullscreenButton()
         fsElement.style.top="5px";
         fsElement.style.width="20px";
         fsElement.style.height="20px";
-        // fsElement.style.opacity="1.0";
         fsElement.style.cursor="pointer";
         fsElement.style['border-radius']="40px";
         fsElement.style.background="#444";
@@ -114,7 +111,6 @@ function updateFullscreenButton()
     }
 }
 
-
 fpsLimit.onChange=function()
 {
     op.patch.config.fpsLimit=fpsLimit.get()||0;
@@ -124,16 +120,12 @@ op.onDelete=function()
 {
     cgl.gl.clearColor(0,0,0,0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
-
 };
-
 
 op.patch.loading.setOnFinishedLoading(function(cb)
 {
     op.patch.config.fpsLimit=fpsLimit.get();
 });
-
 
 
 function render(time)
@@ -154,9 +146,7 @@ function render(time)
 
     if(cgl.canvasWidth!=width.get() || cgl.canvasHeight!=height.get())
     {
-        // cgl.canvasWidth=cgl.canvas.clientWidth;
         width.set(cgl.canvasWidth);
-        // cgl.canvasHeight=cgl.canvas.clientHeight;
         height.set(cgl.canvasHeight);
     }
 
@@ -180,9 +170,7 @@ function render(time)
 
     trigger.trigger();
 
-
     if(CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
-
 
     if(CGL.Texture.previewTexture)
     {
@@ -190,10 +178,6 @@ function render(time)
         CGL.Texture.texturePreviewer.render(CGL.Texture.previewTexture);
     }
     cgl.renderEnd(cgl);
-
-
-    // cgl.printError('mainloop end');
-
 
     if(clearAlpha.get())
     {
@@ -203,7 +187,16 @@ function render(time)
         cgl.gl.colorMask(true, true, true, true);
     }
 
-
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
 };
+
+
+
+
+
+
+
+
+
+

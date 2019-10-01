@@ -1,5 +1,4 @@
 {
-    "updated": 1537862908429,
     "authorName": "pandur",
     "id": "aac7f721-208f-411a-adb3-79adae2e471a",
     "created": 1517953593075,
@@ -7,17 +6,25 @@
         "portsIn": [
             {
                 "type": "0",
+                "name": "Speed",
+                "group": "Controls",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Play",
+                "group": "Controls",
                 "subType": "boolean"
             },
             {
                 "type": "1",
-                "name": "Reset"
+                "name": "Reset",
+                "group": "Controls"
             },
             {
                 "type": "0",
-                "name": "Speed",
-                "subType": "number"
+                "name": "Sync to timeline",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -27,7 +34,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Anim.Timer2"
+        "name": "Ops.Anim.Timer_v2"
     },
     "summary": "A timer that can be started, paused and reset by triggering",
     "youtubeid": "",

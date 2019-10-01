@@ -2,6 +2,8 @@
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
+   IN vec3 attrTangent;
+   IN vec3 attrBiTangent;
 
 #ifdef VERTEX_COLORS
     IN vec3 attrVertColor;
@@ -37,6 +39,10 @@ void main()
 {
     float psMul=sqrt(canvasWidth/canvasHeight)+0.00000000001;
     float sizeMultiply=1.0;
+
+    vec3 tangent=attrTangent;
+    vec3 bitangent=attrBiTangent;
+
 
     #ifdef VERTEX_COLORS
         vertexColor=attrVertColor;

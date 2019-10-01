@@ -125,6 +125,21 @@
                 "type": "0",
                 "name": "Rot X",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Eye Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Eye Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Eye Pos Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.OrbitControls"

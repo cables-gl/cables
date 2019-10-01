@@ -9,7 +9,7 @@ this.exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION)
 this.filename=this.addInPort(new CABLES.Port(this,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'mesh' } ));
 const trigger=op.outTrigger("trigger");
 
-var defaultEasing=CABLES.TL.EASING_LINEAR;
+var defaultEasing=CABLES.EASING_LINEAR;
 
 var skipFrames=1;
 var frameNum=0;

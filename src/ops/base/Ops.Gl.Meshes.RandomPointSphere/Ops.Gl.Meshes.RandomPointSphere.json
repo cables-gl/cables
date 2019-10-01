@@ -30,6 +30,11 @@
                 "type": "0",
                 "name": "Distribution",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -60,6 +65,12 @@
             "author": "pandur",
             "id": "b316a619-bf50-42c1-9fa2-61db92c4d5db",
             "date": 1560415017307
+        },
+        {
+            "message": "fix setvertexnumber problem: does not render correctly, when chaning parameters!",
+            "author": "pandur",
+            "id": "b585a1b4-8c92-43cc-b6db-35f02e064280",
+            "date": 1568967370746
         }
     ]
 }

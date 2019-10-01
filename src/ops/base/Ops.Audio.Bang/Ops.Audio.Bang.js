@@ -14,9 +14,9 @@ var easing=op.inValueSelect("easing",["linear","smoothstep","smootherstep"],'lin
 
 function init()
 {
-    if(easing.get()=='linear') anim.defaultEasing=CABLES.TL.EASING_LINEAR;
-    if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHSTEP;
-    if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.TL.EASING_SMOOTHERSTEP;
+    if(easing.get()=='linear') anim.defaultEasing=CABLES.EASING_LINEAR;
+    if(easing.get()=='smoothstep') anim.defaultEasing=CABLES.EASING_SMOOTHSTEP;
+    if(easing.get()=='smootherstep') anim.defaultEasing=CABLES.EASING_SMOOTHERSTEP;
 
     anim.clear();
 
