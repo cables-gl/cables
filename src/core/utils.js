@@ -49,6 +49,36 @@ export const shuffleArray = function (array)
     return array;
 };
 
+
+/**
+ * generate a short "relativly unique" id
+ * @function shortId
+ * @memberof Utils
+ * @return {String} generated ID
+ * @static
+ */
+
+
+
+const _shortIds={};
+const _shortId=function()
+{
+    const str=Math.random().toString(36).substr(2, 9);
+
+    if(_shortIds.hasOwnProperty(str)) str=_shortId();
+    _shortIds[str]=true;
+    return str;
+};
+export const shortId = _shortId;
+
+
+/**
+ * generate a UUID
+ * @function uuid
+ * @memberof Utils
+ * @return {String} generated UUID
+ * @static
+ */
 const _uuid = function ()
 {
     var d = new Date().getTime();
@@ -60,15 +90,11 @@ const _uuid = function ()
     });
     return uuid;
 };
-/**
- * generate a UUID
- * @function uuid
- * @memberof Utils
- * @return {String} generated UUID
- * @static
- */
 export const uuid = _uuid;
 export const generateUUID = _uuid;
+
+
+
 
 /**
  * generate a simple ID
