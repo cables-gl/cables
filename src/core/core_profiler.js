@@ -54,7 +54,7 @@ const Profiler = function ()
             }
 
             items[object.id].numTriggers++;
-            items[object.id].title = object.parent.name + object.name;
+            items[object.id].title = object.parent.name +"."+ object.name;
 
             currentId = object.id;
             currentStart = performance.now();

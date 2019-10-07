@@ -58,8 +58,6 @@ export const shuffleArray = function (array)
  * @static
  */
 
-
-
 const _shortIds={};
 const _shortId=function()
 {
