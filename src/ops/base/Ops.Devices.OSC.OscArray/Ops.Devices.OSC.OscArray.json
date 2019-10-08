@@ -1,0 +1,48 @@
+{
+    "id": "441207d6-f3d5-444e-ac12-32bee2c33651",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1570544585161
+        }
+    ],
+    "authorName": "cables",
+    "created": 1570544607041,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Message"
+            },
+            {
+                "type": "5",
+                "name": "Address"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Message"
+            },
+            {
+                "type": "3",
+                "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Received"
+            }
+        ],
+        "name": "Ops.Devices.OSC.OscArray"
+    }
+}

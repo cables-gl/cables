@@ -1,0 +1,59 @@
+{
+    "id": "252f4360-6994-4081-b6c4-e573c68c40c5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1570543160420
+        }
+    ],
+    "authorName": "cables",
+    "created": 1570543177180,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Message in"
+            },
+            {
+                "type": "5",
+                "name": "Osc Address"
+            },
+            {
+                "type": "1",
+                "name": "Learn"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Message through"
+            },
+            {
+                "type": "1",
+                "name": "Received"
+            },
+            {
+                "type": "0",
+                "name": "Number 0",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number 3",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.OSC.OscNumbers"
+    }
+}
