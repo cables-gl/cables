@@ -4,7 +4,7 @@ const
     learn=op.inTriggerButton("Learn"),
     outMsg=op.outObject("Message"),
     outArray=op.outArray("Array out"),
-    outArrayLength=op.outNumber("Array length");
+    outArrayLength=op.outNumber("Array length"),
     outTrig=op.outTrigger("Received");
 
 var learning = false;
