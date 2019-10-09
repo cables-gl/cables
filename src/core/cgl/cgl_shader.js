@@ -463,7 +463,7 @@ Shader.prototype.bind = function()
     if (this._normalMatrixUniform)
     {
         // mat4.mul(this._tempNormalMatrix, this._cgl.vMatrix, this._cgl.mMatrix);
-        mat4.invert(this._tempNormalMatrix, this._tempNormalMatrix);
+        mat4.invert(this._tempNormalMatrix, this._cgl.mMatrix);
         mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
         this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
