@@ -1,0 +1,226 @@
+{
+    "id": "ef4c436e-3de5-4a97-a392-10a52a5b3dc6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1570026791447
+        }
+    ],
+    "authorName": "andro",
+    "created": 1570026836982,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Axiom / seed",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Constant 1",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Rule 1",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Constant 2",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Rule 2",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Constant 3",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Rule 3",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Constant 4",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Rule 4",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Iterations",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Step length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Step scale multiplier",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Default angle",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation multiplier",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random strength",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Out trigger geometry"
+            },
+            {
+                "type": "1",
+                "name": "Line/point trigger"
+            },
+            {
+                "type": "3",
+                "name": "Points out"
+            },
+            {
+                "type": "0",
+                "name": "Max Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Final generated string",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Exp.Lsystem_v2"
+    },
+    "summary": "Lsystem generator",
+    "issues": "",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [
+        "UnnFrRX1QEc"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Axiom / seed",
+                "text": "The start of the generated string"
+            },
+            {
+                "name": "Constant 1",
+                "text": "If this is encountered in the string Rule 1 is applied"
+            },
+            {
+                "name": "Rule 1",
+                "text": "String to add"
+            },
+            {
+                "name": "Constant 2",
+                "text": "If this is encountered in the string Rule 2 is applied"
+            },
+            {
+                "name": "Rule 2",
+                "text": "String to add"
+            },
+            {
+                "name": "Constant 3",
+                "text": "If this is encountered in the string Rule 3 is applied"
+            },
+            {
+                "name": "Rule 3",
+                "text": "String to add"
+            },
+            {
+                "name": "Constant 4",
+                "text": "If this is encountered in the string Rule 4 is applied"
+            },
+            {
+                "name": "Rule 4",
+                "text": "String to add"
+            },
+            {
+                "name": "Iterations",
+                "text": "Iteration amount, be careful with high numbers, the generated string is highly dependent on the Constants and Rules."
+            },
+            {
+                "name": "Step length",
+                "text": "How far the current point moves when \"F\" or \"f\" is used"
+            },
+            {
+                "name": "Step scale multiplier",
+                "text": "Used to multiply or divide the current 'step length' whenever \">\" or \"<\" is used"
+            },
+            {
+                "name": "Default angle",
+                "text": "The rotation amount that is used when a rotation amount isn't defined"
+            },
+            {
+                "name": "Rotation multiplier",
+                "text": "Multiplies all default angles by this amount"
+            },
+            {
+                "name": "random seed",
+                "text": "Seed used for \"Random Strength\" amount"
+            },
+            {
+                "name": "random strength",
+                "text": "Amount of random offset applied to position and rotation of every point"
+            },
+            {
+                "name": "Out trigger geometry",
+                "text": "Used to trigger geometry"
+            },
+            {
+                "name": "Line/point trigger",
+                "text": "Used to trigger pointCloudArray or SimpleSpline"
+            },
+            {
+                "name": "Points out",
+                "text": "An array containing all the xyz data for every point"
+            },
+            {
+                "name": "Max Size",
+                "text": "The largest distance from the starting point, can be used to make sure that the generated Lsystem is always within a bounding box. Check example file to see how this works."
+            },
+            {
+                "name": "Final generated string",
+                "text": "The final string used to create the Lsystem"
+            }
+        ]
+    }
+}

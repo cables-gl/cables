@@ -27,20 +27,20 @@ const pointerLock=op.inValueBool("Pointerlock",false);
 
 const trigger=op.outTrigger("trigger");
 const outRadius=op.outValue("radius");
-const outYDeg=op.outValue("Rot Y");
 const outXDeg=op.outValue("Rot X");
+const outYDeg=op.outValue("Rot Y");
 
-const
-    outPosX=op.outNumber("Eye Pos X"),
-    outPosY=op.outNumber("Eye Pos Y"),
-    outPosZ=op.outNumber("Eye Pos Z");
+
+// const
+//     outPosX=op.outNumber("Eye Pos X"),
+//     outPosY=op.outNumber("Eye Pos Y"),
+//     outPosZ=op.outNumber("Eye Pos Z");
 
 const inReset=op.inTriggerButton("Reset");
 
 op.setPortGroup("Initial Values",[initialAxis,initialX,initialRadius]);
 op.setPortGroup("Interaction",[mul,smoothness,speedX,speedY]);
 op.setPortGroup("Boundaries",[minRotY,maxRotY,minDist,maxDist]);
-
 
 
 mul.set(1);
@@ -54,7 +54,9 @@ var eye=vec3.create();
 var vUp=vec3.create();
 var vCenter=vec3.create();
 var viewMatrix=mat4.create();
+var tempViewMatrix=mat4.create();
 var vOffset=vec3.create();
+var finalEyeAbs=vec3.create();
 
 initialAxis.set(0.5);
 
@@ -168,13 +170,66 @@ render.onTriggered=function()
     finalCenter[1]=ip(finalCenter[1],tempCenter[1]);
     finalCenter[2]=ip(finalCenter[2],tempCenter[2]);
 
-    outPosX.set(finalEye[0]);
-    outPosY.set(finalEye[1]);
-    outPosZ.set(finalEye[2]);
+
+
+
+
+
+    var empty=vec3.create();
+    // var fpm=mat4.create();
+
+    // mat4.translate(fpm, fpm, finalEye);
+    // mat4.rotate(fpm, fpm, px, vUp);
+    // mat4.multiply(fpm,fpm, cgl.vMatrix);
+    // vec3.transformMat4(finalEyeAbs, empty, fpm);
+
+    // outPosX.set(finalEyeAbs[0]);
+    // outPosY.set(finalEyeAbs[1]);
+    // outPosZ.set(finalEyeAbs[2]);
+
+
 
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
+
+    // finaly multiply current scene viewmatrix
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,viewMatrix);
+
+
+
+
+
+
+
+    // vec3.transformMat4(finalEyeAbs, empty, cgl.vMatrix);
+
+    // outPosX.set(finalEyeAbs[0]);
+    // outPosY.set(finalEyeAbs[1]);
+    // outPosZ.set(finalEyeAbs[2]);
+
+
+
+    // var fpm=mat4.create();
+    // mat4.identity(fpm);
+    // mat4.translate(fpm,fpm,finalEye);
+    // mat4.rotate(fpm, fpm, px, vUp);
+    // mat4.multiply(fpm,fpm,cgl.vMatrix);
+
+    // // vec3.copy(finalEyeAbs,finalEye);
+    // // vec3.set(finalEyeAbs,0,1,0);
+    // // mat4.rotate(viewMatrix, viewMatrix, px, vUp);
+    // // vec3.transformMat4( finalEyeAbs, finalEye, fpm );
+
+    // // vec3.transformMat4( finalEyeAbs, finalEyeAbs, cgl.vMatrix );
+    // // mat4.getTranslation(finalEyeAbs,fpm);
+    // var pos=vec3.create();
+    // vec3.transformMat4(finalEyeAbs, empty, fpm);
+
+
+    // outPosX.set(finalEyeAbs[0]);
+    // outPosY.set(finalEyeAbs[1]);
+    // outPosZ.set(finalEyeAbs[2]);
+
 
     trigger.trigger();
     cgl.popViewMatrix();
@@ -184,8 +239,8 @@ render.onTriggered=function()
 function circlePosi(vec,perc)
 {
     const mmul=mul.get();
-    if(radius<minDist.get()*mmul)radius=minDist.get()*mmul;
-    if(radius>maxDist.get()*mmul)radius=maxDist.get()*mmul;
+    if(radius<minDist.get()*mmul) radius = minDist.get() * mmul;
+    if(radius>maxDist.get()*mmul) radius = maxDist.get() * mmul;
 
     outRadius.set(radius*mmul);
 
