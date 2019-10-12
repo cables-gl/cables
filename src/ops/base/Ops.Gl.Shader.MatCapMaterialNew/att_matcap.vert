@@ -70,6 +70,7 @@ void main()
     // );
 
     e = normalize( vec3( mvMatrix * pos ) );
+    // e = normalize( vec3( mMatrix * pos )-camPos );-camPos
     vec3 n = normalize( mat3(normalMatrix) * norm );
 
 

@@ -16,6 +16,10 @@
                 "subType": "number"
             },
             {
+                "type": "2",
+                "name": "Mask"
+            },
+            {
                 "type": "0",
                 "name": "Repeat",
                 "subType": "boolean"

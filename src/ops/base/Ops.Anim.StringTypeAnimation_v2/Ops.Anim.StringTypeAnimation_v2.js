@@ -17,7 +17,7 @@ function setNewTimeout()
 {
     clearTimeout(updateInterval);
     var ms=speed.get()*(Math.random()*(speedVariation.get()*2-1));
-    if(pos>text.get().length)ms=speed.get();
+    if(text.get() && pos>text.get().length)ms=speed.get();
     updateInterval=setTimeout(update,speed.get()+ms);
 }
 
@@ -41,6 +41,9 @@ function update()
 
     if(pos>text.get().length && cursorblink)
     {
+        t+=' ';
+        pos++;
+
         if(!finished)
         {
             outFinished.trigger();

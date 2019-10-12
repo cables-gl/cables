@@ -7,7 +7,7 @@ UNI float amountGhosts;
 UNI float amountHalo;
 UNI sampler2D texLookup;
 
-in vec2 texCoord;
+IN vec2 texCoord;
 
 vec3 lumi(vec3 c)
 {
@@ -27,9 +27,9 @@ void main()
     // vec2 texelSize = 1.0 / vec2(textureSize(texInput, 0));
     vec2 ghostVec = (vec2(0.5) - texcoord) * (0.5*dispersal);
     vec4 result = vec4(0.0,0.0,0.0,1.0);//texture(tex,texCoord);
-    
 
-    
+
+
     // ghosts
     for (int i = 0; i < numGhosts; ++i)
     {
@@ -42,7 +42,7 @@ void main()
     // halo
     vec2 haloVec = normalize(ghostVec) * haloWidth;
     float weight = length(vec2(0.5) - fract(texcoord + haloVec)) / length(vec2(0.5));
-    
+
     weight = pow(1.0 - weight, 5.0);
     result += myTexture(tex, texcoord + haloVec) * weight * amountHalo;
 

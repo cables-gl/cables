@@ -44,7 +44,7 @@
                 "name": "Finished"
             }
         ],
-        "name": "Ops.User.andro.StringTyper_v2"
+        "name": "Ops.Anim.StringTypeAnimation_v2"
     },
     "summary": "Animates a text/string, like it is being typed out by a person",
     "issues": "",
