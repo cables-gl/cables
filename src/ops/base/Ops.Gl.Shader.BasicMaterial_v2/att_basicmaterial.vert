@@ -3,6 +3,7 @@
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
 IN vec2 attrTexCoord;
+IN float attrVertIndex;
 
 OUT vec3 norm;
 OUT vec2 texCoord;

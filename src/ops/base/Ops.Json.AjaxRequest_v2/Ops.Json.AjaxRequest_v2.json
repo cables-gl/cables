@@ -30,6 +30,10 @@
                 "type": "0",
                 "name": "Is Loading",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Loaded"
             }
         ],
         "name": "Ops.Json.AjaxRequest_v2"

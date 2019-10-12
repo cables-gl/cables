@@ -9,6 +9,7 @@ const
     letterSpace=op.inValueFloat("Letter Spacing"),
     next=op.outTrigger("Next"),
     textureOut=op.outTexture("texture"),
+    outLines=op.outNumber("Total Lines",0),
     loaded=op.outValue("Font Available",0);
 
 const cgl=op.patch.cgl;
@@ -202,6 +203,7 @@ function generateMesh()
     if(!mesh)mesh=new CGL.Mesh(cgl,font.geom);
 
     var strings=(theString).split('\n');
+    outLines.set(strings.length);
 
     var transformations=[];
     var tcOffsets=[];//new Float32Array(str.get().length*2);

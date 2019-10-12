@@ -37,5 +37,30 @@
             }
         ],
         "name": "Ops.Devices.OSC.OscMessage"
+    },
+    "summary": "Shows the current active address of an incoming OSC message",
+    "issues": "",
+    "collections": [
+        "Osc"
+    ],
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Adress",
+                "text": "Current incoming address"
+            },
+            {
+                "name": "Arguments",
+                "text": "Contents "
+            }
+        ]
     }
 }

@@ -9,9 +9,8 @@
                 "name": "link"
             },
             {
-                "type": "0",
-                "name": "Text",
-                "subType": "string"
+                "type": "5",
+                "name": "Text"
             },
             {
                 "type": "0",

@@ -55,5 +55,54 @@
             }
         ],
         "name": "Ops.Devices.OSC.OscNumbers"
+    },
+    "summary": "Outputs up to 4 numbers from a user defined OSC address",
+    "issues": "",
+    "collections": [
+        "Osc"
+    ],
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message in",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Osc Address",
+                "text": "Address to filter data from"
+            },
+            {
+                "name": "Learn",
+                "text": "Click to learn. Op automatically listens to the next Osc message that comes in"
+            },
+            {
+                "name": "Message through",
+                "text": "Incoming Osc message passed through"
+            },
+            {
+                "name": "Received",
+                "text": "Triggers when a message change occurs"
+            },
+            {
+                "name": "Number 0",
+                "text": "Number out 0"
+            },
+            {
+                "name": "Number 1",
+                "text": "Number out 1"
+            },
+            {
+                "name": "Number 2",
+                "text": "Number out 2"
+            },
+            {
+                "name": "Number 3",
+                "text": "Number out 3"
+            }
+        ]
     }
 }

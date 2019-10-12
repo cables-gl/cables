@@ -110,7 +110,11 @@ function refresh()
         do
         {
             count++;
-            if(count>300)break;
+            if(count>500)
+            {
+                op.log("too many iterations - maximize size")
+                break;
+            }
             fontSize-=10;
             ctx.font = fontSize+'px "'+font.get()+'"';
             maxWidth=0;
@@ -121,12 +125,12 @@ function refresh()
             }
         }
         while(maxWidth>ctx.canvas.width || maxHeight>ctx.canvas.height);
+
     }
     else
     {
         // inFontSize.setUiAttribs({hidePort:false,greyout:false});
     }
-
 
     if(valign.get()=='center')
     {

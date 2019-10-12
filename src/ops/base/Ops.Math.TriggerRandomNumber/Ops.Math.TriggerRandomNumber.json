@@ -37,7 +37,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Math.Random2"
+        "name": "Ops.Math.TriggerRandomNumber"
     },
     "summary": "generate random number between min and max (was: random2)",
     "docs": {

@@ -1,7 +1,7 @@
 const
     dataPort=op.inString("data",""),
     setsPort=op.inString("sets",""),
-    id=op.inString("presetid",getId()),
+    id=op.inString("presetid",CABLES.shortId()),
 
     inInterPolate=op.inSwitch("Interpolation",["None","xfade","a-b"],"None"), //"a..b","a..c"
 
@@ -71,26 +71,6 @@ function updateInterpolation()
 }
 
 
-function getId()
-{
-    var id=0;
-
-    for(var i=0;i<9999;i++)
-    {
-        var found=false;
-        id++;
-        for(var vn in op.patch._variables)
-        {
-            if(vn.indexOf(".preset_"+id)===0)
-            {
-                found=true;
-            }
-        }
-
-        if(!found) break;
-    }
-    return id;
-}
 
 function updateFade()
 {
@@ -192,7 +172,6 @@ function updatePreset()
         {
             p.set(preset.values[varnames[i]]);
             if(interpolate===0)p.forceChange();
-
         }
     }
 
@@ -244,11 +223,11 @@ dataPort.onChange=function()
         var portObject=data[i];
 
         const varname=portObject.varname;
+
         if(!op.getPort(varname))
         {
         	if(portObject.type==CABLES.OP_PORT_TYPE_VALUE)
         	{
-
         	    op.patch.setVarValue(varname,0);
         	    var port=op.inFloat(varname,0);
         	    port.setUiAttribs({
@@ -335,7 +314,7 @@ addPort.onLinkChanged=function()
 
 
 
-    const varname=".preset_"+id.get()+"_"+otherPort.name;
+    const varname=".preset_"+id.get()+"_"+CABLES.shortId()+'_'+otherPort.name;
 
 //     var newPort=op.addInPort(new CABLES.Port(op,varname,otherPort.type));
 

@@ -75,6 +75,8 @@ void main()
         y=abs((floor(my)-fract(my)));
     #endif
 
+
+
     vec4 col=texture(tex,vec2(x,y));
     vec4 base=texture(tex,texCoord);
 

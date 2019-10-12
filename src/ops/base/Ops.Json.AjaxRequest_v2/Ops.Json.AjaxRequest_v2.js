@@ -2,7 +2,8 @@ const
     filename=op.inUrl("file"),
     jsonp=op.inValueBool("JsonP",false),
     outData=op.outObject("data"),
-    isLoading=op.outValue("Is Loading",false);
+    isLoading=op.outValue("Is Loading",false),
+    outTrigger=op.outTrigger("Loaded");
 
 outData.ignoreValueSerialize=true;
 
@@ -42,6 +43,7 @@ function reload()
                 outData.set(data);
                 op.uiAttr({'error':''});
                 op.patch.loading.finished(loadingId);
+                outTrigger.trigger();
                 isLoading.set(false);
             }
             catch(e)
