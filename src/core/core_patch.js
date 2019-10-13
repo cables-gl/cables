@@ -302,7 +302,7 @@ Patch.prototype.createOp = function (identifier, id)
             }
             else
             {
-                throw("could not find op by id: "+opId);
+                throw new Error("could not find op by id: "+opId);
             }
         }
 

@@ -7,24 +7,44 @@ const
     inMouseY=op.inValueFloat("Mouse Y"),
     inMouseButton=op.inValueFloat("MouseButton"),
     inZoom=op.inValueFloat("Zoom"),
-    next=op.inTrigger("Next");
+    inFont=op.inTexture("SDF Font"),
+    next=op.outTrigger("Next");
 
-var p=new CABLES.GLGUI.GlPatch(CABLES.patch);
-var api=new CABLES.GLGUI.GlPatchAPI(op.patch,p);
+var p=null;
+var api=null;
 
 var firstTime=true;
 
-refresh.onTriggered=function()
+refresh.onTriggered=init;
+
+inFont.onChange=function()
 {
-    p.reset();
+    if(p)p.setFont(inFont.get());
+
 };
+
+
+
+function init()
+{
+    // p.reset();
+    // p=null;
+
+    p=new CABLES.GLGUI.GlPatch(CABLES.patch);
+    api=new CABLES.GLGUI.GlPatchAPI(op.patch,p);
+    firstTime=true;
+
+}
 
 render.onTriggered=function()
 {
+    if(!p)init();
+
     if(firstTime)
     {
         p.reset();
         firstTime=false;
+        p.setFont(inFont.get());
     }
 
     p.render(
