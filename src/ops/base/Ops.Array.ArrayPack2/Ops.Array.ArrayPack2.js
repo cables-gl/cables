@@ -1,5 +1,5 @@
 const
-    exe = op.inTrigger("Trigger in"),
+    exe = op.inTriggerButton("Trigger in"),
     inArr1=op.inArray("Array 1"),
     inArr2=op.inArray("Array 2"),
     exeOut = op.outTrigger("Trigger out"),

@@ -1,0 +1,47 @@
+{
+    "id": "96e77c88-58b8-4948-bd61-c95d604a2607",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1571059588025
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1571059591652,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "LatLon Array"
+            },
+            {
+                "type": "0",
+                "name": "MapWidth",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "MapHeight",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Lat",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Center Lon",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Math.MercatorCoordsArray"
+    }
+}
