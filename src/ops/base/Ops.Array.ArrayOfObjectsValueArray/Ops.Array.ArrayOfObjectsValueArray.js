@@ -3,10 +3,7 @@ const
     inKey=op.inString("Key"),
     outArray=op.outArray("Result");
 
-inKey.onChange=
-    inArr.onChange=exec;
-
-
+inKey.onChange=inArr.onChange=exec;
 
 function exec()
 {
@@ -22,22 +19,12 @@ function exec()
 
     const key=inKey.get();
 
-    console.log('key',key);
-
     for(var i=0;i<arr.length;i++)
     {
         const obj=arr[i];
-
-        // console.log("obj[key]",obj[key]);
-
-        if(obj.hasOwnProperty(key))
-        {
-            newArr.push(obj[key]);
-        }
+        if(obj.hasOwnProperty(key)) newArr.push(obj[key]);
     }
 
     outArray.set(null);
     outArray.set(newArr);
-
-
 }
