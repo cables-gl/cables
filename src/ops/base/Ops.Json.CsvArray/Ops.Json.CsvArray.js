@@ -1,5 +1,5 @@
 
-var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'json' } ));
+var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
 var result=op.addOutPort(new CABLES.Port(op,"result",CABLES.OP_PORT_TYPE_ARRAY));
 var len=op.addOutPort(new CABLES.Port(op,"num items",CABLES.OP_PORT_TYPE_VALUE));
 

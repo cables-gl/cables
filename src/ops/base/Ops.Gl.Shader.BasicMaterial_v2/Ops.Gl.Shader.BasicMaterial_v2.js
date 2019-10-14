@@ -5,9 +5,6 @@ shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
 
-
-
-
 op.toWorkPortsNeedToBeLinked(render,trigger);
 
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
@@ -86,13 +83,12 @@ op.setPortGroup("Color",[r,g,b,a]);
             diffuseOffsetX.setUiAttribs({greyout:true});
             diffuseOffsetY.setUiAttribs({greyout:true});
             colorizeTexture.setUiAttribs({greyout:true});
-
         }
     };
+
 const colorizeTexture=op.inValueBool("colorizeTexture",false);
 
 op.setPortGroup("Color Texture",[diffuseTexture,colorizeTexture]);
-
 
 // opacity texture
 op.textureOpacity=op.inTexture("textureOpacity");

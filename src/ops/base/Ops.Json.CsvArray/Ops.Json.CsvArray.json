@@ -1,5 +1,4 @@
 {
-    "updated": 1519816795228,
     "authorName": "pandur",
     "id": "2e76c1f8-19ac-4e9d-8db8-58b2f9fbc1d3",
     "created": 1519816793278,
@@ -7,7 +6,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "file"
+                "name": "file",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -17,7 +17,8 @@
             },
             {
                 "type": "0",
-                "name": "num items"
+                "name": "num items",
+                "subType": "number"
             }
         ],
         "name": "Ops.Json.CsvArray"
