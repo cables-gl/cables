@@ -1,0 +1,58 @@
+{
+    "id": "0ea5fb62-94e7-4a1b-928f-bdcab373c022",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1571059142799
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1571059160676,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Num Items",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average Y",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.InfoArray2"
+    }
+}
