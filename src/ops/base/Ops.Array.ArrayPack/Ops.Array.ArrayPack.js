@@ -1,9 +1,8 @@
-
 const outArr=op.outArray("Result");
 
 const NUM_PORTS=8;
+const inArrPorts=[];
 
-var inArrPorts=[];
 var showingError=false;
 
 for(var i=0;i<NUM_PORTS;i++)
@@ -15,10 +14,9 @@ for(var i=0;i<NUM_PORTS;i++)
 
 function update()
 {
-    var arr=[];
-    var inArrays=[];
+    const arr=[];
+    const inArrays=[];
     var i=0;
-
 
     for(i=0;i<NUM_PORTS;i++)
     {
@@ -44,17 +42,12 @@ function update()
         return;
     }
 
-    if(showingError) op.uiAttr({error:null});
+    if(showingError)op.uiAttr({error:null});
     showingError=false;
 
     for(var j=0;j<inArrays[0].length;j++)
-    {
         for(i=0;i<inArrays.length;i++)
-        {
             arr.push(inArrays[i][j]);
-        }
-
-    }
 
     outArr.set(null);
     outArr.set(arr);
