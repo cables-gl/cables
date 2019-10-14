@@ -4,7 +4,7 @@ const outArr=op.outArray("Result");
 const NUM_PORTS=8;
 
 var inArrPorts=[];
-
+var showingError=false;
 
 for(var i=0;i<NUM_PORTS;i++)
 {
@@ -26,10 +26,11 @@ function update()
         if(a)
         {
             inArrays.push(a);
-            if(a.length!=inArrays[0])
+            if(a.length!=inArrays[0].length)
             {
-                console.log("arrays do not match!");
+                if(!showingError)op.uiAttr({error:"Arrays do not have the same length !"});
                 outArr.set(null);
+                showingError=true;
                 return;
             }
         }
@@ -37,14 +38,18 @@ function update()
 
     if(inArrays.length===0)
     {
-        console.log("no arrays!");
+        if(!showingError)op.uiAttr({error:"No Valid Arrays"});
         outArr.set(null);
+        showingError=true;
         return;
     }
 
-    for(i=0;i<inArrays.length;i++)
+    if(showingError) op.uiAttr({error:null});
+    showingError=false;
+
+    for(var j=0;j<inArrays[0].length;j++)
     {
-        for(var j=0;j<inArrays[0].length;j++)
+        for(i=0;i<inArrays.length;i++)
         {
             arr.push(inArrays[i][j]);
         }
