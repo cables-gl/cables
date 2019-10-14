@@ -1,0 +1,40 @@
+{
+    "id": "bd5f43cf-7a69-4bff-85b3-08df62b899b4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1570640891390
+        },
+        {
+            "message": "Ops.Array.FlatArray renamed to Ops.Array.FlattenArray",
+            "author": "pandur",
+            "date": 1570643772481
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1570640962169,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.FlatArray"
+    },
+    "summary": "Creates a new array with all sub-array selements concatenated into it",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -10,6 +10,11 @@
             "message": "Ops.Array.ArrayOfObjectsGetNumberArray renamed to Ops.Array.ArrayOfObjectsValueArray",
             "author": "pandur",
             "date": 1571058218670
+        },
+        {
+            "message": "Ops.Array.ArrayOfObjectsValueArray renamed to Ops.Array.GetValuesFromArrayOfObjects",
+            "author": "pandur",
+            "date": 1571077017655
         }
     ],
     "authorName": "pandur",
@@ -37,5 +42,13 @@
             }
         ],
         "name": "Ops.Array.ArrayOfObjectsValueArray"
+    },
+    "summary": "Get an array of values by key of objects in an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

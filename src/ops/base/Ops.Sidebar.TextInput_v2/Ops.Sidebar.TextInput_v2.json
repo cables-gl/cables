@@ -1,0 +1,39 @@
+{
+    "id": "6538a190-e73c-451b-964e-d010ee267aa9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1570714576973
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1570714614732,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Link"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "5",
+                "name": "Default"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Children"
+            },
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Sidebar.TextInput_v2"
+    }
+}

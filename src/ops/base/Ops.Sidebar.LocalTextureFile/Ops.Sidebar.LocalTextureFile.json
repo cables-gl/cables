@@ -42,7 +42,7 @@
         ],
         "name": "Ops.User.pandur.LocalFileSidebar"
     },
-    "summary": "Use a local file as a texture",
+    "summary": "Let the user select a local file as a texture",
     "issues": "",
     "collections": null,
     "relatedops": null,

@@ -1,0 +1,45 @@
+{
+    "id": "ea752da3-79f4-4674-95bf-722634365f53",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1571055782982
+        },
+        {
+            "message": "Ops.Admin.ShuffleArrayNew renamed to Ops.Array.ShuffleArray_v2",
+            "author": "pandur",
+            "date": 1571055918370
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1571055802848,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array3"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Admin.ShuffleArrayNew"
+    },
+    "summary": "Randomizes the order of elements inside an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

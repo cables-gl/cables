@@ -1,0 +1,98 @@
+{
+    "id": "27023519-9e88-4b85-9fcf-b316847e0df7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1569418562571
+        },
+        {
+            "message": "Ops.Admin.ArraySpray renamed to Ops.Gl.ArraySpray",
+            "author": "pandur",
+            "date": 1571078125486
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1569418566706,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "movement z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "lifetime",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Lifetime Minimum",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Positions"
+            },
+            {
+                "type": "3",
+                "name": "Lifetime"
+            }
+        ],
+        "name": "Ops.Admin.ArraySpray"
+    },
+    "summary": "Particle Spray simulation",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

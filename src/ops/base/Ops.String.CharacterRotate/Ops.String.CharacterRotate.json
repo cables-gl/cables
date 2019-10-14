@@ -1,0 +1,52 @@
+{
+    "id": "9dcc7ad1-c790-4c9d-9f2a-a902bd8d6cc8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1569957555702
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1569957602895,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Characters"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.CharacterRotate"
+    },
+    "summary": "String rotate characters like a split-flap display",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

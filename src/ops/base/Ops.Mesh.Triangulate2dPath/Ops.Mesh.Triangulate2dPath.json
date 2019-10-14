@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1567930392101
+        },
+        {
+            "message": "Ops.Admin.Tess2 renamed to Ops.Mesh.Triangulate2dPath",
+            "author": "pandur",
+            "date": 1571077585233
         }
     ],
     "authorName": "pandur",
@@ -43,5 +48,13 @@
             }
         ],
         "name": "Ops.Admin.Tess2"
+    },
+    "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

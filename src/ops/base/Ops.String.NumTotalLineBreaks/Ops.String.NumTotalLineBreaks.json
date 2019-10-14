@@ -1,0 +1,36 @@
+{
+    "id": "76a958cd-def3-40e5-ab2b-c08a3325d9cb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1570109632146
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1570109660426,
+    "summary": "Count number of line breaks in a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Total Lines",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.NumTotalLineBreaks"
+    }
+}

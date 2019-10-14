@@ -1,0 +1,40 @@
+{
+    "id": "5176b7f8-4f01-4639-831e-28a6607711b2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1569072607714
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1569072710127,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array3"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ShuffleArray3"
+    },
+    "summary": "Shuffles/Randomizes the order of an array of triplets",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
