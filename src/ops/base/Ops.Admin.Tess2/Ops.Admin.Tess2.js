@@ -72,6 +72,8 @@ function tess()
         geom.vertices=verts3;
         geom.verticesIndices=res.elements;
         geom.calculateNormals();
+        geom.mapTexCoords2d();
+
 
         outGeom.set(null);
         outGeom.set(geom);
