@@ -67,14 +67,6 @@
                 "type": "1",
                 "name": "Delete",
                 "group": "Manage Presets"
-            },
-            {
-                "type": "0",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "subType": "number"
             }
         ],
         "portsOut": [

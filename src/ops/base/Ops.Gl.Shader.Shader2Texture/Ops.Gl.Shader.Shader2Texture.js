@@ -54,8 +54,8 @@ function initFb()
 
     if(inVPSize.get())
     {
-        inWidth.setUiAttribs({hidePort:true,greyout:true});
-        inHeight.setUiAttribs({hidePort:true,greyout:true});
+        inWidth.setUiAttribs({greyout:true});
+        inHeight.setUiAttribs({greyout:true});
 
         w=cgl.getViewPort()[2];
         h=cgl.getViewPort()[3];
@@ -66,8 +66,8 @@ function initFb()
     {
         if(inWidth.uiAttribs.hidePort)
         {
-            inWidth.setUiAttribs({hidePort:false,greyout:false});
-            inHeight.setUiAttribs({hidePort:false,greyout:false});
+            inWidth.setUiAttribs({greyout:false});
+            inHeight.setUiAttribs({greyout:false});
         }
     }
 

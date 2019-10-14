@@ -29,7 +29,7 @@ doLimit.onChange=updateLimit;
 exe.onTriggered=doRender;
 exe.onLinkChanged=removeModule;
 
-var matrixArray= new Float32Array(1);
+var matrixArray=new Float32Array(1);
 var m=mat4.create();
 
 updateLimit();

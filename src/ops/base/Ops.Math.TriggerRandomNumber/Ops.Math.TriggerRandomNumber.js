@@ -1,9 +1,10 @@
-var exe=op.inTriggerButton('Generate');
-var min=op.inValue("min",0);
-var max=op.inValue("max",1);
-var outTrig = op.outTrigger("next");
-var result=op.outValue("result");
-var inInteger=op.inValueBool("Integer",false);
+const
+    exe=op.inTriggerButton('Generate'),
+    min=op.inValue("min",0),
+    max=op.inValue("max",1),
+    outTrig = op.outTrigger("next"),
+    result=op.outValue("result"),
+    inInteger=op.inValueBool("Integer",false);
 
 exe.onTriggered=genRandom;
 max.onChange=genRandom;
@@ -19,4 +20,4 @@ function genRandom()
     if(inInteger.get())r=Math.floor(r);
     result.set(r);
     outTrig.trigger();
-};
+}

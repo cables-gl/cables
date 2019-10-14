@@ -18,6 +18,9 @@ numPoints.onChange=updateNumVerts;
 
 op.toWorkPortsNeedToBeLinked(arr,exe);
 
+op.setPortGroup("Texture Coordinates",[pTexCoordRand,seed,inCoords]);
+
+
 var hasError=false;
 var showingError=false;
 

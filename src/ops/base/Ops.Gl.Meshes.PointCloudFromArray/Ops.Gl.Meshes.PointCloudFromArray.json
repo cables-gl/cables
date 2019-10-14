@@ -17,16 +17,19 @@
             {
                 "type": "0",
                 "name": "Scramble Texcoords",
+                "group": "Texture Coordinates",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "Seed",
+                "group": "Texture Coordinates",
                 "subType": "number"
             },
             {
                 "type": "3",
-                "name": "Coordinates"
+                "name": "Coordinates",
+                "group": "Texture Coordinates"
             },
             {
                 "type": "3",

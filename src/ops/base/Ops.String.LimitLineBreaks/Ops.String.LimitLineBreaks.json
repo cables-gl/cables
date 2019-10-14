@@ -19,6 +19,11 @@
                 "type": "0",
                 "name": "Num Lines",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Reverse",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

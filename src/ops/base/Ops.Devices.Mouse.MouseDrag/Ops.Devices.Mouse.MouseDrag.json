@@ -1,5 +1,4 @@
 {
-    "updated": 1521558818623,
     "authorName": "pandur",
     "id": "5103d14e-2f21-4f43-ae91-c1b55a944226",
     "created": 1519221134310,
@@ -14,6 +13,10 @@
                 "type": "0",
                 "name": "Speed",
                 "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Input Type"
             }
         ],
         "portsOut": [
@@ -33,7 +36,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Devices.Mouse.MouseDrag2"
+        "name": "Ops.Devices.Mouse.MouseDrag"
     },
     "summary": "get delta of mouse position while dragging",
     "docs": {
@@ -45,5 +48,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "added input type selection",
+            "author": "pandur",
+            "date": 1570700646501
+        }
     ]
 }

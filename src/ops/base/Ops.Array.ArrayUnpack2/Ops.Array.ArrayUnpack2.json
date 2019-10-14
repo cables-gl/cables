@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Array.ArrayUnpack2"
+    },
+    "summary": "Unpacks an xy array into separate arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array in xyz",
+                "text": "Array in"
+            },
+            {
+                "name": "Array 1 out",
+                "text": "X component out "
+            },
+            {
+                "name": "Array 2 out",
+                "text": "Y component out "
+            },
+            {
+                "name": "Array lengths",
+                "text": "Length of arrays"
+            }
+        ]
     }
 }

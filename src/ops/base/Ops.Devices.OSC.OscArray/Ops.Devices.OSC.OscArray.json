@@ -44,5 +44,46 @@
             }
         ],
         "name": "Ops.Devices.OSC.OscArray"
+    },
+    "summary": "Outputs an array of data from a user defined OSC address",
+    "issues": "",
+    "collections": [
+        "Osc"
+    ],
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Address",
+                "text": "Address to filter data from"
+            },
+            {
+                "name": "Learn",
+                "text": "Click to learn. Op automatically listens to the next Osc message that comes in"
+            },
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out "
+            },
+            {
+                "name": "Array length",
+                "text": "Length of array"
+            },
+            {
+                "name": "Received",
+                "text": "Triggers when a message change occurs"
+            }
+        ]
     }
 }

@@ -45,5 +45,40 @@
             }
         ],
         "name": "Ops.Devices.OSC.OscNumber"
+    },
+    "summary": "Outputs a single number from a user defined OSC address",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Net.WebSocket.WebSocket"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Address",
+                "text": "Address to filter data from"
+            },
+            {
+                "name": "Learn",
+                "text": "Click to learn. Op automatically listens to the next Osc message that comes in"
+            },
+            {
+                "name": "Message",
+                "text": "Incoming Osc message"
+            },
+            {
+                "name": "Value",
+                "text": "Number out"
+            },
+            {
+                "name": "Received",
+                "text": "Triggers when a message change occurs"
+            }
+        ]
     }
 }

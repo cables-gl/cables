@@ -41,7 +41,7 @@ SHADERVAR_UNI_VIEWPOS: "camPos",
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
 const Shader = function(_cgl, _name) {
-    if (!_cgl) throw "shader constructed without cgl";
+    if (!_cgl) throw new Error("shader constructed without cgl "+_name);
 
     this._cgl = _cgl;
     this._name = _name || 'unknown';

@@ -51,7 +51,7 @@ op.onAnimFrame=function(t)
 
         if(syncTimeline)
         {
-            outTime.set(t);
+            outTime.set(t*inSpeed.get());
         }
         else
         {

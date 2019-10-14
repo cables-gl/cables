@@ -1,0 +1,65 @@
+{
+    "id": "ad6e3e6b-9d88-4378-b09f-6b57999d4f91",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1570876567514
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1570876570684,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "1",
+                "name": "Refresh"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mouse X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mouse Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "MouseButton",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Zoom",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "SDF Font"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Admin.GlPatch"
+    }
+}

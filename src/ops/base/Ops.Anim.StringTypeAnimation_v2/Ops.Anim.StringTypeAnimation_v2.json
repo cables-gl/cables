@@ -28,6 +28,11 @@
                 "type": "0",
                 "name": "Speed Variation",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Show Cursor",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

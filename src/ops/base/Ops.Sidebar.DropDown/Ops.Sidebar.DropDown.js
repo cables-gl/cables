@@ -85,7 +85,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Text Input: ' + labelText);
+        op.setTitle('Dropdown: ' + labelText);
     }
 }
 

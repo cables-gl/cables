@@ -81,6 +81,11 @@
             },
             {
                 "type": "0",
+                "name": "Total Lines",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Font Available",
                 "subType": "number"
             }

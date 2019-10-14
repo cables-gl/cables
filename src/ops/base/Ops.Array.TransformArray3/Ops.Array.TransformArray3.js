@@ -75,6 +75,6 @@ function doTransform()
         needsCalc=false;
         outArr.set(null);
         outArr.set(resultArr);
-        next.trigger();
     }
+    next.trigger();
 }

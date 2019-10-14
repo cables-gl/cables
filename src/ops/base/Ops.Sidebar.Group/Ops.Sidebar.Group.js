@@ -1,6 +1,6 @@
 // inputs
 var parentPort = op.inObject('link');
-var labelPort = op.inValueString('Text', 'Group');
+var labelPort = op.inString('Text', 'Group');
 var defaultMinimizedPort = op.inValueBool('Default Minimized');
 
 // outputs

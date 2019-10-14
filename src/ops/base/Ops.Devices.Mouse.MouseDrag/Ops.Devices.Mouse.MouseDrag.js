@@ -1,19 +1,21 @@
-var active=op.inValueBool("Active",true);
-var speed=op.inValue("Speed",0.01);
-var outDeltaX=op.outValue("Delta X");
-var outDeltaY=op.outValue("Delta Y");
+const
+    active=op.inValueBool("Active",true),
+    speed=op.inValue("Speed",0.01),
+    inputType=op.inSwitch("Input Type",['All','Mouse','Touch'],"All"),
+    outDeltaX=op.outValue("Delta X"),
+    outDeltaY=op.outValue("Delta Y"),
+    outDragging=op.outValue("Is Dragging");
 
-
-var outDragging=op.outValue("Is Dragging");
-
-var canvas=op.patch.cgl.canvas;
-
+const canvas=op.patch.cgl.canvas;
 var absoluteX=0;
 var absoluteY=0;
 var pressed=false;
 var lastX=0;
 var lastY=0;
 var firstMove=true;
+
+bind();
+
 
 function onMouseMove(e)
 {
@@ -30,9 +32,9 @@ function onMouseMove(e)
             outDeltaX.set(deltaX);
             outDeltaY.set(deltaY);
         }
-        
+
         firstMove=false;
-        
+
         lastX=e.clientX;
         lastY=e.clientY;
     }
@@ -54,29 +56,34 @@ function onMouseUp(e)
 }
 
 
+
 function bind()
 {
-    canvas.addEventListener('mousemove', onMouseMove);
-    canvas.addEventListener('mousedown', onMouseDown);
-    canvas.addEventListener('mouseup', onMouseUp);
-    canvas.addEventListener('mouseenter', onMouseUp);
-    canvas.addEventListener('mouseleave', onMouseUp);
+    if(inputType.get()=="All" || inputType.get()=="Mouse")
+    {
+        canvas.addEventListener('mousemove', onMouseMove);
+        canvas.addEventListener('mousedown', onMouseDown);
+        canvas.addEventListener('mouseup', onMouseUp);
+        canvas.addEventListener('mouseenter', onMouseUp);
+        canvas.addEventListener('mouseleave', onMouseUp);
+    }
 
-    canvas.addEventListener("touchmove", onMouseMove);
-    canvas.addEventListener("touchend", onMouseUp);
-    canvas.addEventListener('touchstart', onMouseDown);
+    if(inputType.get()=="All" || inputType.get()=="Touch")
+    {
+        canvas.addEventListener("touchmove", onMouseMove);
+        canvas.addEventListener("touchend", onMouseUp);
+        canvas.addEventListener('touchstart', onMouseDown);
+    }
 }
 
 function unbind()
 {
-    // console.log("remove mouse op...");
-
     canvas.removeEventListener('mousemove', onMouseMove);
     canvas.removeEventListener('mousedown', onMouseDown);
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseUp);
     canvas.removeEventListener('mouseleave', onMouseUp);
-    
+
     canvas.removeEventListener("touchmove", onMouseMove);
     canvas.removeEventListener("touchend", onMouseUp);
     canvas.removeEventListener('touchstart', onMouseDown);
@@ -88,7 +95,6 @@ active.onChange=function()
     else unbind();
 };
 
-bind();
 
 op.onDelete=function()
 {
