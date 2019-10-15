@@ -10,6 +10,11 @@
             "message": "Ops.Admin.ArraySpray renamed to Ops.Gl.ArraySpray",
             "author": "pandur",
             "date": 1571078125486
+        },
+        {
+            "message": "Ops.Gl.ArraySpray renamed to Ops.Systens.ArraySpray",
+            "author": "pandur",
+            "date": 1571126063398
         }
     ],
     "authorName": "pandur",
