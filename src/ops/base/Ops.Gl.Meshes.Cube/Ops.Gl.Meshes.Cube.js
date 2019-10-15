@@ -214,4 +214,4 @@ function buildMesh()
 op.onDelete=function()
 {
     if(mesh)mesh.dispose();
-}
+};

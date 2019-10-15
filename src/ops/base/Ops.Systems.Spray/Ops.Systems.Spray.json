@@ -99,5 +99,12 @@
     },
     "authorName": "pandur",
     "id": "80ca4cc5-d6ba-4fbf-a629-de04df600060",
-    "created": 1534507645860
+    "created": 1534507645860,
+    "changelog": [
+        {
+            "message": "Ops.Gl.Spray renamed to Ops.Systems.Spray",
+            "author": "pandur",
+            "date": 1571128079219
+        }
+    ]
 }

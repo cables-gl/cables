@@ -47,7 +47,7 @@
                 "name": "Geometry"
             }
         ],
-        "name": "Ops.Admin.Tess2"
+        "name": "Ops.Mesh.Triangulate2dPath"
     },
     "summary": "Triangulate a 2d path to a flat and filled 3d geometry",
     "issues": "",

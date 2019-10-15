@@ -22,9 +22,18 @@ function update()
 
     if(num.get() === 0)
     {
+        outArr.set(null);
         return;
     }
     var newLength=Math.floor(theLength/num.get());
+
+    if(newLength<=0 || newLength!=newLength)
+    {
+        outArr.set(null);
+        return;
+    }
+
+
     var step=num.get()*3;
     newArray.length=newLength;
 

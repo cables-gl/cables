@@ -15,6 +15,11 @@
             "message": "Ops.Gl.ArraySpray renamed to Ops.Systens.ArraySpray",
             "author": "pandur",
             "date": 1571126063398
+        },
+        {
+            "message": "Ops.Systens.ArraySpray renamed to Ops.Systems.ArraySpray",
+            "author": "pandur",
+            "date": 1571128091069
         }
     ],
     "authorName": "pandur",
@@ -98,6 +103,63 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger in"
+            },
+            {
+                "name": "time",
+                "text": "Timer to animate the cubes movement"
+            },
+            {
+                "name": "num",
+                "text": "Array length/amount of particles"
+            },
+            {
+                "name": "Size X",
+                "text": "Size of the particle on the x axis"
+            },
+            {
+                "name": "Size Y",
+                "text": "Size of the particle on the y axis"
+            },
+            {
+                "name": "Size Z",
+                "text": "Size of the particle on the z axis"
+            },
+            {
+                "name": "movement x",
+                "text": "The direction to move the spray in on the x axis"
+            },
+            {
+                "name": "movement y",
+                "text": "The direction to move the spray in on the y axis"
+            },
+            {
+                "name": "movement z",
+                "text": "The direction to move the spray in on the z axis"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset state"
+            },
+            {
+                "name": "lifetime",
+                "text": "Amount of time before a particle dies out and is reborn"
+            },
+            {
+                "name": "Lifetime Minimum",
+                "text": "Minimum lifetime of particle"
+            },
+            {
+                "name": "Positions",
+                "text": "Positional array out"
+            },
+            {
+                "name": "Lifetime",
+                "text": "LifeTime array out"
+            }
+        ]
     }
 }

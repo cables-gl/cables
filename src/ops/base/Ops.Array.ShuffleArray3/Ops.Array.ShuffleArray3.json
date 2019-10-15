@@ -35,6 +35,19 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array3",
+                "text": "Array in - must be a triplet array"
+            },
+            {
+                "name": "Seed",
+                "text": "Random number seed"
+            },
+            {
+                "name": "Result",
+                "text": "Shuffled array out"
+            }
+        ]
     }
 }

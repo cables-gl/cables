@@ -35,8 +35,6 @@ function tess()
     if(points3 && points3.length>0) contours.push(points3);
 
 
-    // console.log('contours',contours);
-
     var winding=Tess2.WINDING_ODD;
     if(inWinding.get()=="Positive")
     {

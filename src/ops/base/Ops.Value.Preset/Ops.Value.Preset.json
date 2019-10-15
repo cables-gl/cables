@@ -81,5 +81,66 @@
             }
         ],
         "name": "Ops.Value.Preset"
+    },
+    "summary": "State management of all parameters connected to it - Create presets of multiple ops",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "data",
+                "text": "Used internally by op"
+            },
+            {
+                "name": "sets",
+                "text": "Used internally by op"
+            },
+            {
+                "name": "presetid",
+                "text": "Used internally by op"
+            },
+            {
+                "name": "Interpolation",
+                "text": "Interpolation mode - none - xfade - a-b"
+            },
+            {
+                "name": "Preset A",
+                "text": "xfade mode preset A"
+            },
+            {
+                "name": "Preset B",
+                "text": "xfade mode preset B"
+            },
+            {
+                "name": "Fade",
+                "text": "Morph between preset A -B with xfade mode"
+            },
+            {
+                "name": "Preset",
+                "text": "Preset number"
+            },
+            {
+                "name": "Create new",
+                "text": "Create a new preset"
+            },
+            {
+                "name": "Update",
+                "text": "update current preset to current values"
+            },
+            {
+                "name": "Delete",
+                "text": "Delete preset"
+            },
+            {
+                "name": "Create Variable",
+                "text": "Connect this port to a parameter to map it to the preset op"
+            },
+            {
+                "name": "Num Presets",
+                "text": "Number of stored presets"
+            }
+        ]
     }
 }
