@@ -10,7 +10,7 @@ UNI float centerX,centerY;
 
 void main()
 {
-    float multiplier = 0.0;
+    float multiplier = 1.0;
     vec2 uv = texCoord;
 
     #ifdef MASK_SCALE
