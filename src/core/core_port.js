@@ -13,8 +13,6 @@ import { Log } from "./log";
  * @example
  * const myPort=op.inString("String Port");
  */
-
-
 const Port = function (__parent, name, type, uiAttribs)
 {
     EventTarget.apply(this);

@@ -17,14 +17,14 @@ var firstTime=true;
 
 refresh.onTriggered=function()
 {
-    p.reset();
+    api.reset();
 };
 
 render.onTriggered=function()
 {
     if(firstTime)
     {
-        p.reset();
+        api.reset();
         firstTime=false;
     }
 

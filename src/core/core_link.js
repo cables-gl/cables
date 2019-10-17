@@ -1,4 +1,5 @@
 import { CONSTANTS } from "./constants";
+import { EventTarget } from "./eventtarget";
 import { Log } from "./log";
 
 //
@@ -13,11 +14,14 @@ import { Log } from "./log";
  */
 const Link = function (scene)
 {
+    EventTarget.apply(this);
+
     this.id=CABLES.uuid();
     this.portIn = null;
     this.portOut = null;
     this.scene = scene; // todo: make private and rename to patch
     this.activityCounter = 0;
+
 };
 
 Link.prototype.setValue = function (v)
