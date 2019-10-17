@@ -1,5 +1,6 @@
 const
     render=op.inTrigger("render"),
+    multiplierTex = op.inTexture("Multiplier"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     scaleX=op.inValue("Scale X",1.5),
@@ -17,6 +18,7 @@ shader.setSource(shader.getDefaultVertexShader(),attachments.scale_frag);
 
 const
     textureUniform=new CGL.Uniform(shader,'t','tex',0),
+    textureMultiplierUniform=new CGL.Uniform(shader,'t','multiplierTex',1),
     amountUniform=new CGL.Uniform(shader,'f','amount',amount),
     scaleXUniform=new CGL.Uniform(shader,'f','uScaleX',scaleX),
     scaleYUniform=new CGL.Uniform(shader,'f','uScaleY',scaleY),
@@ -27,6 +29,11 @@ const
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
+multiplierTex.onChange = function()
+{
+    shader.toggleDefine('MASK_SCALE',multiplierTex.isLinked());
+}
+
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -35,6 +42,8 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+
+    if(multiplierTex.get()) cgl.setTexture(1, multiplierTex.get().tex );
 
     cgl.currentTextureEffect.finish();
     cgl.setPreviousShader();
