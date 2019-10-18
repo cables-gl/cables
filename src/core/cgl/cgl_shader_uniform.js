@@ -92,6 +92,11 @@ export const Uniform = function (__shader, __type, __name, _value)
         this.set = this.setValue = this.setValueT.bind(this);
         this.updateValue = this.updateValueT.bind(this);
     }
+    else if (__type == "t[]")
+    {
+        this.set = this.setValue = this.setValueArrayT.bind(this);
+        this.updateValue = this.updateValueArrayT.bind(this);
+    }
     else if (__type == "m4")
     {
         this.set = this.setValue = this.setValueM4.bind(this);
@@ -237,6 +242,26 @@ Uniform.prototype.updateValueArrayF = function ()
     profileData.UniformCount++;
 };
 
+
+
+Uniform.prototype.setValueArrayT = function (v)
+{
+    this.needsUpdate = true;
+    this._value = v;
+};
+
+Uniform.prototype.updateValueArrayT = function ()
+{
+    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    else this.needsUpdate = false;
+
+    if (!this._value) return;
+    this._shader.getCgl().gl.uniform1iv(this._loc, this._value);
+    profileData.UniformCount++;
+};
+
+
+
 Uniform.prototype.updateValue3F = function ()
 {
     if (!this._value)
@@ -322,6 +347,8 @@ Uniform.prototype.updateValueT = function ()
     this._shader.getCgl().gl.uniform1i(this._loc, this._value);
     this.needsUpdate = false;
 };
+
+
 
 Uniform.prototype.setValueT = function (v)
 {
