@@ -29,6 +29,8 @@ function onMouseMove(e)
             var deltaX=(e.clientX-lastX)*speed.get();
             var deltaY=(e.clientY-lastY)*speed.get();
 
+            outDeltaX.set(0);
+            outDeltaY.set(0);
             outDeltaX.set(deltaX);
             outDeltaY.set(deltaY);
         }
