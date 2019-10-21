@@ -76,12 +76,17 @@ you can overwrite the initial value of a variable in the patch config:
 
 If you want to test certain aspects of your patch which involve getting / setting variables from outside cables you can do so from the terminal:  
 
-Open the browser terminal by hitting `cmd + alt + i`, then enter:
+- Open the browser terminal by hitting `cmd + alt + i`.
+- Switch the context to "editorframe" via the dropdown selector above the console. (cables editor runs in a iframe sandbox) 
+then enter:
 
 ```javascript
 var myCablesVar = gui.patch().scene.getVar('name of your variable');
 myCablesVar.setValue(123);
 console.log(myCablesVar.getValue()); // prints 123
 ```
+
+
+
 
 *Summarising*: If you want to access a variable from outside cables use `CABLES.patch.getVar…`, if you want to test getting / setting variables without leaving cables, use `gui.patch().scene.getVar…`.  
