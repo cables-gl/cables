@@ -43,6 +43,10 @@ IN vec3 e;
    vec2 vNormt;
 #endif
 
+#ifdef HAS_TEXTURE_OPACITY
+    UNI sampler2D texOpacity;
+#endif
+
 #ifdef CALC_SSNORMALS
     // from https://www.enkisoftware.com/devlogpost-20150131-1-Normal_generation_in_the_pixel_shader
     IN vec3 eye_relative_pos;
@@ -174,6 +178,27 @@ void main()
     #endif
 
     col.a*=opacity;
+    #ifdef HAS_TEXTURE_OPACITY
+            #ifdef TRANSFORMALPHATEXCOORDS
+                texCoords=vec2(texCoord.s,1.0-texCoord.t);
+            #endif
+            #ifdef ALPHA_MASK_ALPHA
+                col.a*=texture(texOpacity,texCoords).a;
+            #endif
+            #ifdef ALPHA_MASK_LUMI
+                col.a*=dot(vec3(0.2126,0.7152,0.0722), texture(texOpacity,texCoords).rgb);
+            #endif
+            #ifdef ALPHA_MASK_R
+                col.a*=texture(texOpacity,texCoords).r;
+            #endif
+            #ifdef ALPHA_MASK_G
+                col.a*=texture(texOpacity,texCoords).g;
+            #endif
+            #ifdef ALPHA_MASK_B
+                col.a*=texture(texOpacity,texCoords).b;
+            #endif
+            // #endif
+    #endif
 
     {{MODULE_COLOR}}
 

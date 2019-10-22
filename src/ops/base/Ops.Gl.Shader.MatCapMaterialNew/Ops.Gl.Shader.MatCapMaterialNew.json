@@ -35,6 +35,11 @@
                 "group": "Texture maps"
             },
             {
+                "type": "2",
+                "name": "Opacity Texture",
+                "group": "Texture maps"
+            },
+            {
                 "type": "0",
                 "name": "r",
                 "group": "Color",
@@ -86,6 +91,23 @@
             {
                 "type": "0",
                 "name": "Screen Space Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Texture Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Opacity TexCoords Transform",
+                "group": "Texture Opacity",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Discard Transparent Pixels",
+                "group": "Texture Opacity",
                 "subType": "boolean"
             }
         ],
