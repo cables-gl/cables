@@ -5,6 +5,10 @@ const textureNormal=op.inTexture('Normal');
 const textureSpec=op.inTexture('Specular');
 const textureSpecMatCap=op.inTexture('Specular MatCap');
 const textureAo=op.inTexture('AO Texture');
+// opacity texture
+const textureOpacity=op.inTexture("Opacity Texture");
+
+ // op.alphaMaskSource.onChange=updateAlphaMaskMethod;
 const r=op.inValueSlider('r',1);
 const g=op.inValueSlider('g',1);
 const b=op.inValueSlider('b',1);
@@ -19,7 +23,15 @@ const next=op.outTrigger("trigger");
 const shaderOut=op.outObject("Shader");
 
 r.setUiAttribs({colorPick:true});
-op.setPortGroup("Texture maps",[textureDiffuse,textureNormal,textureSpec,textureSpecMatCap,textureAo,]);
+
+const alphaMaskSource=op.inSwitch("Alpha Mask Source",["Luminance","R","G","B","A"],"Luminance");
+alphaMaskSource.setUiAttribs({ greyout:true });
+
+const texCoordAlpha=op.inValueBool("Opacity TexCoords Transform",false);
+const discardTransPxl=op.inValueBool("Discard Transparent Pixels");
+
+op.setPortGroup("Texture Opacity",[alphaMaskSource, texCoordAlpha, discardTransPxl]);
+op.setPortGroup("Texture maps",[textureDiffuse,textureNormal,textureSpec,textureSpecMatCap,textureAo, textureOpacity]);
 op.setPortGroup("Color",[r,g,b,pOpacity]);
 
 const cgl=op.patch.cgl;
@@ -190,6 +202,72 @@ textureSpec.onChange=textureSpecMatCap.onChange=function()
     }
 };
 
+// TEX OPACITY
+
+function updateAlphaMaskMethod()
+{
+    if(alphaMaskSource.get()=='Alpha Channel') shader.define('ALPHA_MASK_ALPHA');
+        else shader.removeDefine('ALPHA_MASK_ALPHA');
+
+    if(alphaMaskSource.get()=='Luminance') shader.define('ALPHA_MASK_LUMI');
+        else shader.removeDefine('ALPHA_MASK_LUMI');
+
+    if(alphaMaskSource.get()=='R') shader.define('ALPHA_MASK_R');
+        else shader.removeDefine('ALPHA_MASK_R');
+
+    if(alphaMaskSource.get()=='G') shader.define('ALPHA_MASK_G');
+        else shader.removeDefine('ALPHA_MASK_G');
+
+    if(alphaMaskSource.get()=='B') shader.define('ALPHA_MASK_B');
+        else shader.removeDefine('ALPHA_MASK_B');
+}
+alphaMaskSource.onChange=updateAlphaMaskMethod;
+
+var textureOpacityUniform = null;
+
+function updateOpacity()
+{
+
+    if(textureOpacity.get())
+    {
+        if(textureOpacityUniform!==null)return;
+        shader.removeUniform('texOpacity');
+        shader.define('HAS_TEXTURE_OPACITY');
+        if(!textureOpacityUniform) textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',6);
+
+        alphaMaskSource.setUiAttribs({greyout:false});
+        discardTransPxl.setUiAttribs({greyout:false});
+        texCoordAlpha.setUiAttribs({greyout:false});
+
+    }
+    else
+    {
+        shader.removeUniform('texOpacity');
+        shader.removeDefine('HAS_TEXTURE_OPACITY');
+        textureOpacityUniform=null;
+
+        alphaMaskSource.setUiAttribs({greyout:true});
+        discardTransPxl.setUiAttribs({greyout:true});
+        texCoordAlpha.setUiAttribs({greyout:true});
+    }
+    updateAlphaMaskMethod();
+};
+textureOpacity.onChange=updateOpacity;
+
+discardTransPxl.onChange=function()
+{
+    if(discardTransPxl.get()) shader.define('DISCARDTRANS');
+        else shader.removeDefine('DISCARDTRANS');
+};
+
+
+texCoordAlpha.onChange=function()
+{
+    if(texCoordAlpha.get()) shader.define('TRANSFORMALPHATEXCOORDS');
+        else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
+};
+
+
 function bindTextures()
 {
     if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
@@ -198,6 +276,7 @@ function bindTextures()
     if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
     if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
     if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+    if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
 };
 
 op.onDelete=function()
