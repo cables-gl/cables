@@ -1,6 +1,6 @@
 var learnedKeyCode = op.inValueInt("key code");
 var canvasOnly=op.inValueBool("canvas only");
-var modKey=op.inValueSelect("Mod Key",['none','alt']);
+var modKey=op.inValueSelect("Mod Key",['none','alt'],"none");
 var inEnable=op.inValueBool("Enabled",true);
 var preventDefault=op.inValueBool("Prevent Default");
 var learn = op.inTriggerButton("learn");

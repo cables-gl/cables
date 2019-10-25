@@ -667,13 +667,24 @@ Patch.prototype.getOpById = function (opid)
     }
 };
 
+Patch.prototype.getOpsById = function (opIds)
+{
+    var ops=[];
+    for (var i in this.ops)
+        for(var j=0;j<opIds.length;j++)
+            if (this.ops[i].id === opIds[j])
+            {
+                ops.push(this.ops[i]);
+                break;
+            }
+    return ops;
+};
+
 Patch.prototype.getOpsByName = function (name)
 {
     var arr = [];
     for (var i in this.ops)
-    {
         if (this.ops[i].name == name) arr.push(this.ops[i]);
-    }
     return arr;
 };
 
@@ -681,9 +692,7 @@ Patch.prototype.getOpsByObjName = function (name)
 {
     var arr = [];
     for (var i in this.ops)
-    {
         if (this.ops[i].objName == name) arr.push(this.ops[i]);
-    }
     return arr;
 };
 
