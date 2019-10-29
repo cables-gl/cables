@@ -1,23 +1,24 @@
-var disableScaleWeb=op.inValueBool("Disable Scaling",true);
-var disableDefault=op.inValueBool("Disable Scroll",true);
-var hdpi=op.inValueBool("HDPI Coordinates",false);
-var active=op.inValueBool("Active",true);
+const
+    disableScaleWeb=op.inValueBool("Disable Scaling",true),
+    disableDefault=op.inValueBool("Disable Scroll",true),
+    hdpi=op.inValueBool("HDPI Coordinates",false),
+    active=op.inValueBool("Active",true),
 
-var outTouched=op.outValue("Touched");
-var numFingers=op.outValue("Fingers");
+    outTouched=op.outValue("Touched"),
+    numFingers=op.outValue("Fingers"),
 
-var f1x=op.outValue("Finger 1 X");
-var f1y=op.outValue("Finger 1 Y");
+    f1x=op.outValue("Finger 1 X"),
+    f1y=op.outValue("Finger 1 Y"),
+    f1f=op.outValue("Finger 1 Force"),
 
-var f2x=op.outValue("Finger 2 X");
-var f2y=op.outValue("Finger 2 Y");
+    f2x=op.outValue("Finger 2 X"),
+    f2y=op.outValue("Finger 2 Y"),
 
-var outEvents=op.outArray("Events");
-var normalize=op.inValueBool("Normalize Coordinates");
-var flipY=op.inValueBool("Flip Y");
-var outTouchStart=op.outTrigger("Touch Start");
-var outTouchEnd=op.outTrigger("Touch End");
-
+    outEvents=op.outArray("Events"),
+    normalize=op.inValueBool("Normalize Coordinates"),
+    flipY=op.inValueBool("Flip Y"),
+    outTouchStart=op.outTrigger("Touch Start"),
+    outTouchEnd=op.outTrigger("Touch End");
 
 
 function setPos(event)
@@ -44,6 +45,9 @@ function setPos(event)
 
         f1x.set(x);
         f1y.set(y);
+
+        if(event.touches[0].force)f1f.set(event.touches[0].force);
+
     }
 
     if(event.touches && event.touches.length>1)
@@ -76,6 +80,7 @@ var ontouchstart=function(event)
 var ontouchend=function(event)
 {
     outTouched.set(false);
+    f1f.set(0);
     setPos(event);
 
     numFingers.set(event.touches.length);
@@ -121,3 +126,4 @@ active.onChange=function()
 };
 
 addListeners();
+

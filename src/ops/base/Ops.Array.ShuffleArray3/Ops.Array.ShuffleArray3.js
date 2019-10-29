@@ -23,7 +23,6 @@ function fisherYatesShuffle(array)
     }
 }
 
-
 function update()
 {
     const arr = inArr.get();

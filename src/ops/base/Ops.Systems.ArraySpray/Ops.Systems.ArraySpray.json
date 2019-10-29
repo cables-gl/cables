@@ -20,6 +20,11 @@
             "message": "Ops.Systens.ArraySpray renamed to Ops.Systems.ArraySpray",
             "author": "pandur",
             "date": 1571128091069
+        },
+        {
+            "message": "Added output trigger",
+            "author": "simod",
+            "date": 1571748235057
         }
     ],
     "authorName": "pandur",
@@ -87,6 +92,10 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
                 "type": "3",
                 "name": "Positions"
             },
@@ -95,7 +104,7 @@
                 "name": "Lifetime"
             }
         ],
-        "name": "Ops.Admin.ArraySpray"
+        "name": "Ops.Systems.ArraySpray"
     },
     "summary": "Particle Spray simulation",
     "issues": "",
@@ -151,6 +160,10 @@
             {
                 "name": "Lifetime Minimum",
                 "text": "Minimum lifetime of particle"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger out"
             },
             {
                 "name": "Positions",

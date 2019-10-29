@@ -64,6 +64,10 @@
                 "type": "0",
                 "name": "Gate",
                 "subType": "boolean"
+            },
+            {
+                "type": "3",
+                "name": "Velocity Array"
             }
         ],
         "name": "Ops.Devices.Midi.MidiNote"

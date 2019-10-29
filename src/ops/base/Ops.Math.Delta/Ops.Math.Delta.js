@@ -1,20 +1,36 @@
-var CHANGE_ALWAYS_DEFUALT = false;
+const CHANGE_ALWAYS_DEFUALT = false;
 
-var val=op.inValue("Value");
+const
+    val=op.inValue("Value"),
+    changeAlwaysPort = op.inValueBool('Change Always', CHANGE_ALWAYS_DEFUALT),
+    inReset=op.inTrigger("Reset"),
+    result=op.outValue("Delta");
+
 val.changeAlways = CHANGE_ALWAYS_DEFUALT;
-var changeAlwaysPort = op.inValueBool('Change Always', CHANGE_ALWAYS_DEFUALT);
-var result=op.outValue("Delta");
 
 var oldVal=0;
 
-changeAlwaysPort.onChange = function() {
-    val.changeAlways = changeAlwaysPort.get();    
+var firstTime=true;
+
+changeAlwaysPort.onChange = function()
+{
+    val.changeAlways = changeAlwaysPort.get();
+};
+
+inReset.onTriggered=function()
+{
+    firstTime=true;
 };
 
 val.onChange=function()
 {
     var change=oldVal-val.get();
     oldVal=val.get();
+    if(firstTime)
+    {
+        firstTime=false;
+        return;
+    }
     result.set(change);
 };
 

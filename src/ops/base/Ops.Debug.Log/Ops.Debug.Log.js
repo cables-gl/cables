@@ -75,8 +75,8 @@ functionInput.onTriggered = function(){
         }
 };
 
-valueInput.onChange=printValue;
-arrayInput.onChange=printArray;
+// valueInput.onChange=printValue;
+// arrayInput.onChange=printArray;
 /*objectInput.onChange=printObject;*/
 
 /*objectInput.onChange=function(){

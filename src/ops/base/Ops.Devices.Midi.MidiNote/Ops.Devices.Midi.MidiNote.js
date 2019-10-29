@@ -12,7 +12,7 @@ function getMIDINote(dataByte1LSB) {
 }
 
 const noteValues = Array.from(Array(128).keys(), key => getMIDINote(key));
-
+const velocityArray = Array.from(Array(128).keys(), key => 0);
 /* IN */
 const inEvent = op.inObject('MIDI Event In');
 const midiChannelDropdown = op.inValueSelect('MIDI Channel', MIDIChannels, 1);
@@ -36,6 +36,8 @@ const triggerOut = op.outTrigger('Trigger Out');
 const currentNoteOut = op.outValue('Current Note');
 const velocityOut = op.outValue('Velocity');
 const gateOut = op.outValueBool('Gate');
+const arrayOut = op.outArray("Velocity Array");
+arrayOut.set(velocityArray);
 
 op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
 op.setPortGroup('Note Out', [currentNoteOut, velocityOut, gateOut]);
@@ -87,6 +89,9 @@ inEvent.onChange = () => {
       if ((statusByte >> 4 === NOTE_OFF || velocity === 0) && !gateType.get()) {
         gateOut.set(false);
         velocityOut.set(0);
+        velocityArray[noteIndex] = 0;
+        arrayOut.set(null);
+        arrayOut.set(velocityArray);
       } else if (statusByte >> 4 === NOTE_ON) {
         if (gateType.get()) {
           gateOut.set(!gateOut.get());
@@ -94,13 +99,18 @@ inEvent.onChange = () => {
           gateOut.set(true);
         }
         currentNoteOut.set(noteIndex);
+        velocityArray[noteIndex] = velocity;
+        arrayOut.set(null);
+        arrayOut.set(velocityArray);
         if (normalizeDropdown.get() === '0 to 1') {
           // (max'-min')/(max-min)*(value-min)+min'
           velocityOut.set((1 / 126) * (velocity - 1));
+          velocityArray[noteIndex] = (1 / 126) * (velocity - 1);
           triggerOut.trigger();
         } else if (normalizeDropdown.get() === '-1 to 1') {
           // (max'-min')/(max-min)*(value-min)+min'
           const normalizedValue = (2 / 126) * (velocity - 1) - 1;
+          velocityArray[noteIndex] = normalizedValue;
           velocityOut.set(normalizedValue);
           triggerOut.trigger();
         } else if (normalizeDropdown.get() === 'none') {
@@ -113,6 +123,9 @@ inEvent.onChange = () => {
       if ((statusByte >> 4 === NOTE_OFF || velocity === 0) && !gateType.get()) {
         gateOut.set(false);
         velocityOut.set(0);
+        velocityArray[noteIndex] = 0;
+        arrayOut.set(null);
+        arrayOut.set(velocityArray);
       } else if (statusByte >> 4 === NOTE_ON) {
         if (gateType.get()) {
           gateOut.set(!gateOut.get());
@@ -120,6 +133,9 @@ inEvent.onChange = () => {
           gateOut.set(true);
         }
         currentNoteOut.set(noteIndex);
+        velocityArray[noteIndex] = velocity;
+        arrayOut.set(null);
+        arrayOut.set(velocityArray);
         if (normalizeDropdown.get() === '0 to 1') {
           // (max'-min')/(max-min)*(value-min)+min'
           velocityOut.set((1 / 126) * (velocity - 1));
@@ -136,6 +152,6 @@ inEvent.onChange = () => {
       }
     }
   }
-
+  eventOut.set(null);
   eventOut.set(event);
 };

@@ -12,11 +12,13 @@
             },
             {
                 "type": "1",
-                "name": "Learn"
+                "name": "Learn",
+                "group": "Controls"
             },
             {
                 "type": "1",
-                "name": "Panic"
+                "name": "Panic",
+                "group": "Controls"
             }
         ],
         "portsOut": [

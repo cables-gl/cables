@@ -42,5 +42,13 @@
             }
         ],
         "name": "Ops.String.StringCompose2"
+    },
+    "summary": "Combine multiple Values to a new String",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

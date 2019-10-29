@@ -25,5 +25,21 @@
             }
         ],
         "name": "Ops.Json.ObjectKeyValue"
-    }
+    },
+    "summary": "Set object number value by key",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "should be renamed to number, not value",
+            "author": "pandur",
+            "id": "52cfcc34-b403-405f-8d30-eb0609c7cd59",
+            "date": 1571344309165
+        }
+    ]
 }

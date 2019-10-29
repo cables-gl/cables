@@ -59,7 +59,7 @@
             },
             {
                 "type": "0",
-                "name": "Note 1",
+                "name": "Note Out 1",
                 "subType": "number"
             },
             {
@@ -74,7 +74,7 @@
             },
             {
                 "type": "0",
-                "name": "Note 2",
+                "name": "Note Out 2",
                 "subType": "number"
             },
             {
@@ -89,7 +89,7 @@
             },
             {
                 "type": "0",
-                "name": "Note 3",
+                "name": "Note Out 3",
                 "subType": "number"
             },
             {

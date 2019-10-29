@@ -12,14 +12,19 @@ op.setPortGroup('MIDI', [inEvent, midiChannelDropdown]);
 op.setPortGroup('CC', [ccIndexDropdown, normalizeDropdown]);
 op.setPortGroup('', [learn, clear]);
 
+const ccArray = Array.from(Array(128).keys(), key => 0);
+
 /* OUT */
 const eventOut = op.outObject('Event');
 const triggerOut = op.outTrigger('Trigger Out');
 const ccIndexOut = op.outValue('CC Index Out');
 const ccValueOut = op.outValue('CC Value Out');
+const arrayOut = op.outArray("Value Array");
 
 op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
 op.setPortGroup('CC Out', [ccIndexOut, ccValueOut]);
+
+arrayOut.set(ccArray);
 
 ccIndexDropdown.set(0);
 midiChannelDropdown.set(1);
@@ -56,24 +61,44 @@ inEvent.onChange = () => {
   }
 
   if (event.channel === midiChannelDropdown.get() - 1) {
+
+    if (normalizeDropdown.get() === '0 to 1') {
+      ccArray[ccIndex] = ccValue / 127;
+
+    } else if (normalizeDropdown.get() === '-1 to 1') {
+      ccArray[ccIndex] = ccValue / (127 / 2) - 1;
+    } else if (normalizeDropdown.get() === 'none') {
+      ccArray[ccIndex] = ccValue;
+    }
+
     if (ccIndex === ccIndexDropdown.get()) {
       ccIndexOut.set(ccIndex);
-
+      let value = ccValue;
+      ccArray[ccIndex] = ccValue;
       if (normalizeDropdown.get() === '0 to 1') {
-        ccValueOut.set(ccValue / 127);
+        value = ccValue / 127;
+        ccValueOut.set(value);
+        ccArray[ccIndex] = ccValue;
         triggerOut.trigger();
       } else if (normalizeDropdown.get() === '-1 to 1') {
-        const normalizedValue = ccValue / (127 / 2) - 1;
+
+        value = ccValue / (127 / 2) - 1;
         triggerOut.trigger();
-        ccValueOut.set(normalizedValue);
+        ccValueOut.set(value);
+        ccArray[ccIndex] = ccValue;
       } else if (normalizeDropdown.get() === 'none') {
         triggerOut.trigger();
-        ccValueOut.set(ccValue);
+        ccValueOut.set(value);
+        ccArray[ccIndex] = ccValue;
       } else {
+        ccArray[ccIndex] = 0;
         ccValue.set(0);
       }
     }
   }
 
+  arrayOut.set(null);
+  arrayOut.set(ccArray);
+  eventOut.set(null);
   eventOut.set(event);
 };

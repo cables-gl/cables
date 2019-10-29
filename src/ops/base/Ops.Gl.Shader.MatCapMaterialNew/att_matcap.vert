@@ -3,8 +3,8 @@ IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 IN float attrVertIndex;
-   IN vec3 attrTangent;
-   IN vec3 attrBiTangent;
+IN vec3 attrTangent;
+IN vec3 attrBiTangent;
 
 #ifdef HAS_NORMAL_TEXTURE
 
