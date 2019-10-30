@@ -47,12 +47,12 @@ function exec() {
       let reverseInput = false;
       const oldMin = Math.min(oMin, oMax);
       const oldMax = Math.max(oMin, oMax);
-      if (oldMin != oMin) reverseInput = true;
+      if (oldMin !== oMin) reverseInput = true;
 
       let reverseOutput = false;
       const newMin = Math.min(nMin, nMax);
       const newMax = Math.max(nMin, nMax);
-      if (newMin != nMin) reverseOutput = true;
+      if (newMin !== nMin) reverseOutput = true;
 
       let portion = 0;
 
@@ -70,10 +70,10 @@ function exec() {
 
       if (ease === 0) {
         outArray[i] = r;
-      } else if (ease == 1) {
+      } else if (ease === 1) {
         x = Math.max(0, Math.min(1, (r - nMin) / (nMax - nMin)));
         outArray[i] = nMin + x * x * (3 - 2 * x) * (nMax - nMin); // smoothstep
-      } else if (ease == 2) {
+      } else if (ease === 2) {
         x = Math.max(0, Math.min(1, (r - nMin) / (nMax - nMin)));
         outArray[i] = nMin + x * x * x * (x * (x * 6 - 15) + 10) * (nMax - nMin); // smootherstep
       }
