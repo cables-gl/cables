@@ -42,9 +42,7 @@ exec('node add_ops.js', (error, stdout, stderr) => {
   if (error !== null) throw new Error(error);
   // success
   else {
-    console.log(
-      'Summary generation / op-markdown copy finished. Now generating jsdoc-Documentation from comments.',
-    );
+    console.log( 'Summary generation / op-markdown copy finished. Now generating jsdoc-Documentation from comments.');
     generateJSDoc();
   }
 });

@@ -4,7 +4,7 @@
 IN vec3 norm;
 IN vec2 texCoord;
 UNI sampler2D tex;
-IN vec2 vNorm;
+IN vec3 vNorm;
 UNI mat4 viewMatrix;
 
 UNI float repeatX;
@@ -67,8 +67,29 @@ vec2 sampleSphericalMap(vec3 direction)
 
 void main()
 {
-    vec2 vnOrig=vNorm;
-    vec2 vn=vNorm;
+    vec2 vnOrig=vNorm.xy;
+    vec2 vn=vNorm.xy;
+
+    #ifdef PER_PIXEL
+
+        vec3 ref = reflect( e, vNorm );
+        // ref=(ref);
+
+        // ref.z+=1.;
+        // ref=normalize(ref);
+
+        // float m = 2. * sqrt(
+        //     pow(ref.x, 2.0)+
+        //     pow(ref.y, 2.0)+
+        //     pow(ref.z+1., 2.0)
+        // );
+
+        float m = 2.58284271247461903 * sqrt( (length(ref)) );
+
+        vn.xy = ref.xy / m + 0.5;
+
+
+    #endif
 
 
 
@@ -147,8 +168,10 @@ void main()
 
     #endif
 
-    vn.t=clamp(vn.t, 0.0, 1.0);
-    vn.s=clamp(vn.s, 0.0, 1.0);
+// vn=clamp(vn,0.0,1.0);
+
+
+
 
 
     vec4 col = texture( tex, vn );
@@ -201,6 +224,47 @@ void main()
     #endif
 
     {{MODULE_COLOR}}
+
+
+    // #ifdef PER_PIXEL
+
+
+    //     vec2 nn=(vn-0.5)*2.0;
+    //     float ll=length( nn );
+    //     // col.r=0.0;
+    //     // col.b=0.0;
+    //     // col.a=1.0;
+
+    //     // if(ll>0.49 && ll<0.51) col=vec4(0.0,1.0,0.0,1.0);
+    //     // if(ll>0. ) col=vec4(0.0,1.0,0.0,1.0);
+    //     // col=vec4(vn,0.0,1.0);
+
+
+    //     float dd=(vn.x-0.5)*(vn.x-0.5) + (vn.y-0.5)*(vn.y-0.5);
+    //     dd*=4.0;
+
+    //     if(dd>0.94)
+    //     {
+    //     col=vec4(0.0,1.0,0.0,1.0);
+    //         // nn*=0.5;
+    //         // nn+=0.5;
+    //         // nn*=2.0;
+    //         // vn=nn;
+
+    //         // // dd=1.0;
+    //     }
+    //     // else dd=0.0;
+
+    //     // col=vec4(vec3(dd),1.0);
+
+    //     // if(dd>0.95) col=vec4(1.0,0.0,0.0,1.0);
+
+    //     // vec2 test=(vec2(1.0,1.0)-0.5)*2.0;
+    //     // col=vec4(0.0,0.0,length(test),1.0);
+
+    // #endif
+
+
 
     outColor = col;
 

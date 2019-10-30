@@ -43,7 +43,7 @@ IN vec3 norm;
 IN vec4 modelPos;
 // IN mat3 normalMatrix;
 UNI mat4 normalMatrix;
-
+UNI mat4 viewMatrix;
 UNI float r,g,b,a;
 
 struct Light {
@@ -103,7 +103,7 @@ void main()
     float specular=0.0;
 
     vec3 col=vec3(0.0);
-    vec3 normal = normalize(mat3(normalMatrix)*norm);
+    vec3 normal = normalize(mat3(normalMatrix)*mat3(viewMatrix)*norm);
 
     #ifdef DOUBLESIDED
         if(!gl_FrontFacing)normal*=vec3(-1);

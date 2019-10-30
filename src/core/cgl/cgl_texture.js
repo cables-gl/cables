@@ -139,8 +139,9 @@ Texture.prototype.setSize = function (w, h)
 
     var uarr = null;
 
-    if (this.textureType == Texture.TYPE_FLOAT)
+    if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR && !this._cgl.gl.getExtension('OES_texture_float_linear'))
     {
+        console.warn('this graphics card does not support floating point texture linear interpolation!');
         this.filter = Texture.FILTER_NEAREST;
     }
 
