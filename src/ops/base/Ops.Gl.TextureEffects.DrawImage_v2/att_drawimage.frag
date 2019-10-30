@@ -59,7 +59,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTUREALPHA
-            vec4 colImgAlpha=texture(imageAlpha,texCoord);
+            vec4 colImgAlpha=texture(imageAlpha,tc);
             float colImgAlphaAlpha=colImgAlpha.a;
 
             #ifdef ALPHA_FROM_LUMINANCE

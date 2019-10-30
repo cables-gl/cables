@@ -38,7 +38,7 @@ op.setPortGroup("", [learn, reset]);
 const eventOut = op.outObject('MIDI Event Out');
 const triggerOut = op.outTrigger('Trigger Out');
 
-const noteIndexOut1 = op.outValue('Note 1');
+const noteIndexOut1 = op.outValue('Note Out 1');
 const velocityOut1 = op.outValue('Velocity 1');
 const gateOut1 = op.outValueBool('Gate 1');
 
@@ -48,7 +48,7 @@ const out1 = {
   gateOut: gateOut1,
 };
 
-const noteIndexOut2 = op.outValue('Note 2');
+const noteIndexOut2 = op.outValue('Note Out 2');
 const velocityOut2 = op.outValue('Velocity 2');
 const gateOut2 = op.outValueBool('Gate 2');
 
@@ -58,7 +58,7 @@ const out2 = {
   gateOut: gateOut2,
 };
 
-const noteIndexOut3 = op.outValue('Note 3');
+const noteIndexOut3 = op.outValue('Note Out 3');
 const velocityOut3 = op.outValue('Velocity 3');
 const gateOut3 = op.outValueBool('Gate 3');
 
@@ -73,9 +73,9 @@ noteDropdown.set(0);
 midiChannelDropdown.set(1);
 
 op.setPortGroup("MIDI/Trigger Out", [eventOut, triggerOut]);
-op.setPortGroup("Note 1 Out", [noteIndexOut1, velocityOut1, gateOut1]);
-op.setPortGroup("Note 2 Out", [noteIndexOut2, velocityOut2, gateOut2]);
-op.setPortGroup("Note 3 Out", [noteIndexOut3, velocityOut3, gateOut3]);
+op.setPortGroup("Note 1", [noteIndexOut1, velocityOut1, gateOut1]);
+op.setPortGroup("Note 2", [noteIndexOut2, velocityOut2, gateOut2]);
+op.setPortGroup("Note 3", [noteIndexOut3, velocityOut3, gateOut3]);
 
 let learning = false;
 let learnCount = 0;

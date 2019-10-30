@@ -55,6 +55,11 @@
             },
             {
                 "type": "0",
+                "name": "Finger 1 Force",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Finger 2 X",
                 "subType": "number"
             },

@@ -75,5 +75,6 @@ inEvent.onChange = () => {
       } else nrpnValueOut.set(0);
     }
   }
+  eventOut.set(null);
   eventOut.set(event);
 };

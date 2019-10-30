@@ -1,10 +1,12 @@
-const render=op.inTrigger('render');
-const sides=op.inValue("sides",32);
-const rings=op.inValue("rings",32);
-const innerRadius=op.inValue("innerRadius",0.5);
-const outerRadius=op.inValue("outerRadius",1);
-const trigger=op.outTrigger('trigger');
-const geomOut=op.outObject("geometry");
+const
+    render=op.inTrigger('render'),
+    sides=op.inValue("sides",32),
+    rings=op.inValue("rings",32),
+    innerRadius=op.inValue("innerRadius",0.5),
+    outerRadius=op.inValue("outerRadius",1),
+    indraw=op.inBool("Draw",true),
+    trigger=op.outTrigger('trigger'),
+    geomOut=op.outObject("geometry");
 
 const UP=vec3.fromValues(0,1,0),RIGHT=vec3.fromValues(1,0,0);
 var tmpNormal = vec3.create(), tmpVec = vec3.create();
@@ -27,8 +29,9 @@ outerRadius.onChange=function()
 
 render.onTriggered=function()
 {
-    if(needsUpdate)updateMesh();
-    if(mesh!==null) mesh.render(cgl.getShader());
+    if(needsUpdate) updateMesh();
+    if(indraw.get() && mesh!==null) mesh.render(cgl.getShader());
+
     trigger.trigger();
 };
 

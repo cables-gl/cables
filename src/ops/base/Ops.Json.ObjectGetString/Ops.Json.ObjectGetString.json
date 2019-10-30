@@ -27,5 +27,13 @@
             }
         ],
         "name": "Ops.Json.ObjectGetString"
+    },
+    "summary": "Get string from object by key",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

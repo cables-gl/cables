@@ -1,4 +1,5 @@
 // inputs
+const inEnabled=op.inBool("Active",true);
 var enableVerticalSwipePort = op.inValueBool('Vertical Swipe', true);
 var enableVerticalPanPort = op.inValueBool('Vertical Pan', true);
 
@@ -59,50 +60,58 @@ mc.on('press', onPress);
 mc.on('pressup', onPressUp);
 
 function onPress(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     pressPort.trigger();
 }
 
 function onPressUp(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     pressUpPort.trigger();
 }
 
 function onPanLeft(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     panLeftPort.trigger();
 }
 
 function onPanRight(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     panRightPort.trigger();
 }
 
 function onSwipeLeft(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     swipeLeftPort.trigger();
 }
 
 function onSwipeRight(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     swipeRightPort.trigger();
 }
 
 function onSwipeUp(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     swipeUpPort.trigger();
 }
 
 function onSwipeDown(ev) {
+    if(!inEnabled.get())return;
     eventPort.set(ev);
     swipeDownPort.trigger();
 }
 
 /*
-// By default it adds a set of tap, doubletap, press, 
-// horizontal pan and swipe, and the multi-touch pinch 
+// By default it adds a set of tap, doubletap, press,
+// horizontal pan and swipe, and the multi-touch pinch
 // and rotate recognizers. The pinch and rotate recognizers
-// are disabled by default because they would make the 
+// are disabled by default because they would make the
 // element blocking, but you can enable them by calling:
 hammertime.get('pinch').set({ enable: true });
 hammertime.get('rotate').set({ enable: true });

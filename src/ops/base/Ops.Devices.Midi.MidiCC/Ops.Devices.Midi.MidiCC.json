@@ -53,6 +53,10 @@
                 "type": "0",
                 "name": "CC Value Out",
                 "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Value Array"
             }
         ],
         "name": "Ops.Devices.Midi.MidiCC"

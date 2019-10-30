@@ -1,5 +1,4 @@
 {
-    "updated": 1520953350402,
     "authorName": "tim",
     "id": "08c5d91e-32d2-4852-ac18-d4cae543dd37",
     "created": 1520949138517,
@@ -8,6 +7,11 @@
     ],
     "layout": {
         "portsIn": [
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
             {
                 "type": "0",
                 "name": "Vertical Swipe",

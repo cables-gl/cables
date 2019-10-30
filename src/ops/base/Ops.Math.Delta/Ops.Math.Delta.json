@@ -3,24 +3,37 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value"
+                "name": "Value",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Change Always"
+                "name": "Change Always",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Delta"
+                "name": "Delta",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.Delta"
     },
     "summary": "difference to the last value (previous, store)",
-    "updated": 1517650832487,
     "authorName": "tim",
     "id": "0f203337-e13c-47ec-a09f-b309212540b0",
-    "created": 1517650300323
+    "created": 1517650300323,
+    "changelog": [
+        {
+            "message": "add reset trigger",
+            "author": "pandur",
+            "date": 1572346333148
+        }
+    ]
 }

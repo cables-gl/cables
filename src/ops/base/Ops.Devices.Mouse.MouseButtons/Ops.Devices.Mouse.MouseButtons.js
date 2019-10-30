@@ -19,9 +19,11 @@ var listenerElement=null;
 area.onChange=addListeners;
 op.onDelete=removeListeners;
 addListeners();
+var mouseDownTime=0;
 
-var onMouseDown = function(e)
+function onMouseDown(e)
 {
+    mouseDownTime=CABLES.now();
     if(e.which==1)
     {
         mouseDownLeft.set(true);
@@ -37,9 +39,9 @@ var onMouseDown = function(e)
         mouseDownRight.set(true);
         triggerMouseDownRight.trigger();
     }
-};
+}
 
-var onMouseUp = function(e)
+function onMouseUp(e)
 {
     if(e.which==1)
     {
@@ -56,13 +58,13 @@ var onMouseUp = function(e)
         mouseDownRight.set(false);
         triggerMouseUpRight.trigger();
     }
-};
+}
 
-var onClickRight= function(e)
+function onClickRight(e)
 {
     mouseClickRight.trigger();
     e.preventDefault();
-};
+}
 
 function onDoubleClick(e)
 {
@@ -71,22 +73,23 @@ function onDoubleClick(e)
 
 function onmouseclick(e)
 {
-    mouseClickLeft.trigger();
+    if(CABLES.now()-mouseDownTime<200)
+        mouseClickLeft.trigger();
 }
 
-var ontouchstart=function(event)
+function ontouchstart(event)
 {
     if(event.touches && event.touches.length>0)
     {
         event.touches[0].which=1;
         onMouseDown(event.touches[0]);
     }
-};
+}
 
-var ontouchend=function(event)
+function ontouchend(event)
 {
     onMouseUp({which:1});
-};
+}
 
 function removeListeners()
 {
@@ -130,7 +133,9 @@ function updateListeners()
 {
     removeListeners();
     if(active.get()) addListeners();
+}
 
-};
+
+
 
 

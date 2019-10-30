@@ -91,6 +91,12 @@ function updateNumVerts()
 
 function rebuild()
 {
+
+
+
+
+
+
     var verts=arr.get();
 
     if(!verts || verts.length==0)
@@ -98,6 +104,14 @@ function rebuild()
         mesh=null;
         return;
     }
+
+    if(geom.vertices.length==verts.length && mesh && !showingError && !inCoords.isLinked() && !vertCols.isLinked())
+    {
+        mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
+        needsRebuild=false;
+        return;
+    }
+
 
     if(showingError)
     {

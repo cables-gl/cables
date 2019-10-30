@@ -55,6 +55,8 @@ function rebuild()
         var bufTexCoord=new Float32Array(numTc);
         var attrTc=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,bufTexCoord,2);
     }
+
+    needsRebuild=false;
 }
 
 render.onTriggered=function()

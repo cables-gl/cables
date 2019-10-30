@@ -3,7 +3,7 @@
  */
 
 .icon-chevron-down {
-	
+
     top: 2px;
     right: 9px;
 }
@@ -71,7 +71,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */ 
+  user-select: none;          /* Likely future */
   transition: background-color var(--sidebar-hover-transition-time);
   color: #CCCCCC;
   height: 22px;
@@ -128,7 +128,7 @@
 
 .sidebar__items {
   /* max-height: 1000px; */
-  /* transition: max-height 0.5;*/ 
+  /* transition: max-height 0.5;*/
 }
 
 .sidebar--closed .sidebar__items {
@@ -163,7 +163,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */ 
+  user-select: none;          /* Likely future */
   height: var(--sidebar-group-header-height);
   padding-top: 7px;
   text-transform: uppercase;
@@ -190,7 +190,7 @@
     display: inline-block;
     position: absolute;
     background-size: cover;
-    
+
     /* icon open */
     /* feather icon: chevron up */
     background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM4ODg4ODgiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0iZmVhdGhlciBmZWF0aGVyLWNoZXZyb24tdXAiPjxwb2x5bGluZSBwb2ludHM9IjE4IDE1IDEyIDkgNiAxNSI+PC9wb2x5bGluZT48L3N2Zz4=);
@@ -227,7 +227,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */ 
+  user-select: none;          /* Likely future */
   width: calc(50% - 7px);
   margin-right: 7px;
   max-height: 1em;
@@ -261,7 +261,7 @@
  */
 
 .sidebar__toggle {
-    cursor: pointer;    
+    cursor: pointer;
 }
 
 .sidebar__toggle-input {
@@ -290,7 +290,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */ 
+  user-select: none;          /* Likely future */
   max-width: calc(50% - 12px);
 }
 .sidebar__toggle-input::after { clear: both; }
@@ -316,7 +316,7 @@
   -webkit-user-select: none;  /* Chrome all / Safari all */
   -moz-user-select: none;     /* Firefox all */
   -ms-user-select: none;      /* IE 10+ */
-  user-select: none;          /* Likely future */ 
+  user-select: none;          /* Likely future */
   height: 24px;
   background-color: #444444;
   color: #CCCCCC;
@@ -373,7 +373,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #CCCCCC; 
+  background-color: #CCCCCC;
   pointer-events: none;
   height: var(--sidebar-slider-input-height);
   /* width: 10px; */
@@ -384,7 +384,7 @@
   background-color: #444444;
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .sidebar__slider-input::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
@@ -422,15 +422,15 @@
 }
 
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input-active-track {
-  background-color: #EEEEEE;  
+  background-color: #EEEEEE;
 }
 
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input::-moz-range-thumb {
-  background-color: #EEEEEE !important;  
+  background-color: #EEEEEE !important;
 }
 
 .sidebar__slider-input-wrapper:hover .sidebar__slider-input::-webkit-slider-thumb {
-  background-color: #EEEEEE;  
+  background-color: #EEEEEE;
 }
 
 .sidebar__slider input[type=text] {
@@ -445,9 +445,9 @@
     border-radius: 0;
     padding: 0 0 0 4px !important;
     margin: 0;
-} 
+}
 
-.sidebar__slider input[type=text]:active, 
+.sidebar__slider input[type=text]:active,
 .sidebar__slider input[type=text]:focus,
 .sidebar__slider input[type=text]:hover {
     background-color: #444444;
@@ -457,14 +457,14 @@
 /*
  * TEXT / DESCRIPTION
  */
- 
+
 .sidebar__text .sidebar__item-label {
     width: auto;
     display: block;
     max-height: none;
     margin-right: 0;
     line-height: 1.1em;
-} 
+}
 
 /*
  * SIDEBAR INPUT
@@ -481,9 +481,9 @@
     border-radius: 0;
     padding: 0 0 0 4px !important;
     margin: 0;
-} 
+}
 
-.sidebar__text-input input[type=text]:active, 
+.sidebar__text-input input[type=text]:active,
 .sidebar__text-input input[type=text]:focus,
 .sidebar__text-input input[type=text]:hover {
     background-color: #444444;
@@ -493,11 +493,11 @@
 /*
  * SIDEBAR SELECT
  */
- 
+
  .sidebar__select {}
  .sidebar__select-select {
     color: #BBBBBB;
-    -webkit-appearance: none; 
+    -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     box-sizing: border-box;
@@ -515,7 +515,7 @@
     cursor: pointer;
     outline: none;
  }
- 
+
 .sidebar__select-select:hover,
 .sidebar__select-select:active,
 .sidebar__select-select:active {
@@ -526,9 +526,9 @@
 /*
  * COLOR PICKER
  */
- 
+
  .sidebar__color-picker-color-input {}
- 
+
  .sidebar__color-picker input[type=text] {
     box-sizing: border-box;
     background-color: #333333;
@@ -542,9 +542,9 @@
     padding: 0 0 0 4px !important;
     margin: 0;
     margin-right: 7px;
-} 
+}
 
-.sidebar__color-picker input[type=text]:active, 
+.sidebar__color-picker input[type=text]:active,
 .sidebar__color-picker input[type=text]:focus,
 .sidebar__color-picker input[type=text]:hover {
     background-color: #444444;
@@ -579,7 +579,7 @@
 }
 .sidebar__color-picker input[type=color]::-webkit-color-swatch-wrapper,
 .sidebar__palette-picker input[type=color]::-webkit-color-swatch-wrapper {
-    padding: 0;	
+    padding: 0;
 }
 .sidebar__color-picker input[type=color]::-webkit-color-swatch,
 .sidebar__palette-picker input[type=color]::-webkit-color-swatch {

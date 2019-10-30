@@ -17,6 +17,7 @@ render.onTriggered=function()
     const ratio=vp[3]/vp[2];
 
     cgl.pushPMatrix();
+
     mat4.ortho(
         cgl.pMatrix,
         -bounds.get(),

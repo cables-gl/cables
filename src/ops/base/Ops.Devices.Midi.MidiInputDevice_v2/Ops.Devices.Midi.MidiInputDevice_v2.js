@@ -13,7 +13,7 @@ const learn = op.inTriggerButton('Learn');
 const resetIn = op.inTriggerButton('Panic');
 
 op.setPortGroup('Device Select', [deviceSelect]);
-op.setPortGroup('', [learn, resetIn]);
+op.setPortGroup('Controls', [learn, resetIn]);
 /* OPS */
 const opPrefix = 'Ops.Devices.Midi.Midi';
 const OPS = {
@@ -47,7 +47,7 @@ const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) => {
 op.setPortGroup('MIDI Event', [OUTPUTS.Event]);
 op.setPortGroup(
   'MIDI Event by Type',
-  Object.keys(OUTPUTS).map(key => key !== 'Event' && OUTPUTS[key]),
+  Object.keys(OUTPUTS).map(key => key !== 'Event' && OUTPUTS[key]).filter(Boolean),
 );
 
 /* CONSTANTS */
@@ -324,12 +324,13 @@ function onMIDIFailure() {
 function onMIDISuccess(midiAccess) {
   midi = midiAccess;
   const inputs = midi.inputs.values();
+  const outputs = midi.outputs.values();
   op.uiAttr({ info: 'no midi devices found' });
 
   const deviceNames = [];
 
-  for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
-    deviceNames.push(input.value.name);
+  for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
+    deviceNames.push(output.value.name);
   }
 
   deviceSelect.uiAttribs.values = deviceNames;
@@ -345,11 +346,14 @@ if (navigator.requestMIDIAccess) {
 } else onMIDIFailure();
 
 resetIn.onTriggered = () => {
+
+    // TODO: senmd note off to every note
+    /*
   if (!outputDevice) return;
   for (let i = 0; i < 12; i += 1) {
     outputDevice.send([0x90, i, 0]);
     outputDevice.send([0xb0, i, 0]);
-  }
+  } */
 };
 
 learn.onTriggered = () => {

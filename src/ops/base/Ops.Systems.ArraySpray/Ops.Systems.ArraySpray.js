@@ -13,9 +13,9 @@ const lifetimeMin=op.inValue("Lifetime Minimum",5);
 
 
 const
+    outTrigger = op.outTrigger("Trigger Out");
     outPositions=op.outArray("Positions"),
     outLifetimes=op.outArray("Lifetime");
-
 inReset.onTriggered=reset;
 const cgl=op.patch.cgl;
 
@@ -113,14 +113,13 @@ exe.onTriggered=function()
 
         lifetimes[i]=particles[i].lifeTimePercent;
         if(lifetimes[i]>1.0)lifetimes[i]=1.0;
-        // console.log(particles[i].lifeTimePercent);
     }
 
     outPositions.set(null);
     outLifetimes.set(null);
     outPositions.set(positions);
     outLifetimes.set(lifetimes);
-
+    outTrigger.trigger();
 };
 
 function reset()
