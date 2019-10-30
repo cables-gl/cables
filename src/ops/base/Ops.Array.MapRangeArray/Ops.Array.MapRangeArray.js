@@ -26,7 +26,7 @@ easing.onChange = function() {
 function exec() {
   const outArray = [];
   const inArray = v.get();
-  if (inArray.length === 0) {
+  if (!inArray || inArray.length === 0) {
     result.set([]);
     return;
   }
