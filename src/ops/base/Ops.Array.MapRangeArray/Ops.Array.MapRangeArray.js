@@ -82,7 +82,7 @@ function exec() {
   result.set(outArray);
 }
 
-v.set([]);
+v.set(null);
 old_min.set(0);
 old_max.set(1);
 new_min.set(-1);
@@ -95,6 +95,6 @@ old_max.onChange = exec;
 new_min.onChange = exec;
 new_max.onChange = exec;
 
-result.set([]);
+result.set(null);
 
 exec();
