@@ -24,19 +24,19 @@ easing.onChange = function() {
 
 
 function exec() {
-  const outArray = [];
   const inArray = v.get();
   if (!inArray || inArray.length === 0) {
     result.set([]);
     return;
   }
+  const outArray = Array(inArray.length);
   for (let i = 0; i < inArray.length; i++) {
     let x = inArray[i];
 
     if (x >= Math.max(old_max.get(), old_min.get())) {
-      outArray.push(new_max.get());
+      outArray[i] = new_max.get();
     } else if (x <= Math.min(old_max.get(), old_min.get())) {
-      outArray.push(new_min.get());
+      outArray[i] = new_min.get();
     } else {
 
       const nMin = new_min.get();
@@ -69,13 +69,13 @@ function exec() {
       }
 
       if (ease === 0) {
-        outArray.push(r);
+        outArray[i] = r;
       } else if (ease == 1) {
         x = Math.max(0, Math.min(1, (r - nMin) / (nMax - nMin)));
-        outArray.push(nMin + x * x * (3 - 2 * x) * (nMax - nMin)); // smoothstep
+        outArray[i] = nMin + x * x * (3 - 2 * x) * (nMax - nMin); // smoothstep
       } else if (ease == 2) {
         x = Math.max(0, Math.min(1, (r - nMin) / (nMax - nMin)));
-        outArray.push(nMin + x * x * x * (x * (x * 6 - 15) + 10) * (nMax - nMin)); // smootherstep
+        outArray[i] = nMin + x * x * x * (x * (x * 6 - 15) + 10) * (nMax - nMin); // smootherstep
       }
     }
   }
