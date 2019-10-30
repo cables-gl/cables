@@ -14,7 +14,6 @@ const
     drawLeft=op.inValueBool("Draw Left",true),
     drawRight=op.inValueBool("Draw Right",true);
 
-
 const cgl=op.patch.cgl;
 var mesh=null;
 var geom=new CGL.Geometry();
@@ -68,12 +67,9 @@ function create()
         x-th,y+h+th,0
     );
 
-    if(geom.vertexNormals.length===0)
-        geom.vertexNormals.push(0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1);
-    if(geom.tangents.length===0)
-        geom.tangents.push(1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0);
-    if(geom.biTangents.length===0)
-        geom.biTangents.push(0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0);
+    if(geom.vertexNormals.length===0) geom.vertexNormals.push( 0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1);
+    if(geom.tangents.length===0)      geom.tangents.push(      1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0);
+    if(geom.biTangents.length===0)    geom.biTangents.push(    0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0,0,1,0);
 
     if (geom.verticesIndices)geom.verticesIndices.length=0;
     else geom.verticesIndices = [];

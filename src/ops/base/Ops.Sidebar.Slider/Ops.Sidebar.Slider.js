@@ -70,7 +70,7 @@ maxPort.onChange = onMaxPortChange;
 stepPort.onChange = stepPortChanged;
 op.onDelete = onDelete;
 
-op.init=function()
+op.onload=op.init=function()
 {
     if(op.patch.config.sidebar)
     {
