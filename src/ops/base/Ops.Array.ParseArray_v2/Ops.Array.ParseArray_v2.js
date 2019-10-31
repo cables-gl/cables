@@ -1,13 +1,14 @@
-var text=op.inStringEditor("text",'1,2,3');
-var separator=op.inValueString("separator",",");
-var toNumber=op.inValueBool("Numbers",true);
-var parsed=op.outTrigger("Parsed");
-var arr=op.outArray("array");
-var len=op.outValue("length");
+const
+    text=op.inStringEditor("text",'1,2,3'),
+    separator=op.inValueString("separator",","),
+    toNumber=op.inValueBool("Numbers",true),
+    parsed=op.outTrigger("Parsed"),
+    arr=op.outArray("array"),
+    len=op.outValue("length");
 
-text.onChange=parse;
-separator.onChange=parse;
-toNumber.onChange=parse;
+text.onChange=
+    separator.onChange=
+    toNumber.onChange=parse;
 
 parse();
 

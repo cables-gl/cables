@@ -76,8 +76,8 @@ function update()
             arr[i*3+0] = array1[i];
             arr[i*3+1] = array2[i];
             arr[i*3+2] = array3[i];
-
         }
+
         needsCalc = false;
         outArr.set(null);
         outArr.set(arr);

@@ -1094,6 +1094,30 @@ const Op = function ()
     };
 
     /**
+     * show op hint message - set message to null to remove 
+     * @function setHint
+     * @instance
+     * @memberof Op
+     * @param {txt} text message
+     */
+    Op.prototype.setHint = function (txt)
+    {
+        if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
+    };
+
+    /**
+     * show op warning message - set message to null to remove 
+     * @function setWarning
+     * @instance
+     * @memberof Op
+     * @param {txt} text message
+     */
+    Op.prototype.setWarning = function (txt)
+    {
+        if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
+    };
+
+    /**
      *  add an eventlistener ot op
      * currently implemented:  "onEnabledChange", "onTitleChange", "onUiAttribsChange"
      * @function addEventListener
