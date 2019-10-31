@@ -21,11 +21,17 @@ function parse()
 
     len.set(r.length);
 
+    op.setError(null);
+
     if(toNumber.get())
         for(var i=0;i<r.length;i++)
+        {
             r[i]=Number(r[i]);
+            if(!CABLES.UTILS.isNumeric(r[i]))op.setError("Parse Error / Not all values numerical!");
+        }
 
     arr.set(null);
     arr.set(r);
     parsed.trigger();
 }
+

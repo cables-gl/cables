@@ -1066,23 +1066,31 @@ const Op = function ()
 
     /**
      * show op error message - set message to null to remove error message
-     * @function error
+     * @function setError
      * @instance
      * @memberof Op
-     * @param {errorid} id error identifier
      * @param {txt} text message
      */
+    Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
-        this.errors[id] = txt;
-        if (txt == null) delete this.errors[id];
-
-        var errorHtml = "";
-        for (var i in this.errors)
+        if(txt==undefined)
         {
-            errorHtml += "- " + this.errors[i] + "<br/>";
+            if(id!=this.uiAttribs.error) this.uiAttr({ error: id });
         }
-        this.uiAttr({ error: errorHtml });
+        else
+        {
+            // todo is this used at all ?
+            this.errors[id] = txt;
+            if (txt == null) delete this.errors[id];
+    
+            var errorHtml = "";
+            for (var i in this.errors)
+            {
+                errorHtml += "- " + this.errors[i] + "<br/>";
+            }
+            this.uiAttr({ error: errorHtml });
+        }
     };
 
     /**

@@ -80,10 +80,7 @@ function updateFullscreenButton()
             fsElement.addEventListener('click', function(e)
             {
                 if(CABLES.UI && !e.shiftKey) gui.cycleRendererSize();
-                    else
-                    {
-                        cgl.fullScreen();
-                    }
+                else cgl.fullScreen();
             });
         }
 
@@ -190,7 +187,6 @@ function render(time)
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
 };
-
 
 
 
