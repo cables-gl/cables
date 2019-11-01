@@ -11,6 +11,8 @@ var uniformInputs=[];
 var uniformTextures=[];
 var vectors=[];
 
+op.toWorkPortsNeedToBeLinked(render);
+
 fragmentShader.setUiAttribs({editorSyntax:'glsl'});
 vertexShader.setUiAttribs({editorSyntax:'glsl'});
 

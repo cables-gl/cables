@@ -846,20 +846,6 @@ const Op = function ()
         Function.prototype.apply.apply(console.warn, [console, args]);
     };
 
-    Op.prototype.undoUnLinkTemporary = function ()
-    {
-        if (this.shakeLink) this.shakeLink.remove();
-        this.shakeLink = null;
-
-        if (this.oldLinks)
-        {
-            for (var i = 0; i < this.oldLinks.length; i++)
-            {
-                this.patch.link(this.oldLinks[i].in.parent, this.oldLinks[i].in.getName(), this.oldLinks[i].out.parent, this.oldLinks[i].out.getName());
-            }
-            this.oldLinks.length = 0;
-        }
-    };
 
     /**
      * disconnect all links
@@ -875,6 +861,26 @@ const Op = function ()
 
     Op.unLinkTempReLinkP1 = null;
     Op.unLinkTempReLinkP2 = null;
+
+    Op.prototype.undoUnLinkTemporary = function ()
+    {
+        if (this.shakeLink) this.shakeLink.remove();
+        this.shakeLink = null;
+
+        if (this.oldLinks)
+        {
+            for (var i = 0; i < this.oldLinks.length; i++)
+            {
+                this.patch.link(this.oldLinks[i].in.parent, this.oldLinks[i].in.getName(), this.oldLinks[i].out.parent, this.oldLinks[i].out.getName());
+            }
+            this.oldLinks.length = 0;
+        }
+
+        Op.unLinkTempReLinkP1 = null;
+        Op.unLinkTempReLinkP2 = null;
+    
+    };
+
 
     Op.prototype.unLinkTemporary = function ()
     {

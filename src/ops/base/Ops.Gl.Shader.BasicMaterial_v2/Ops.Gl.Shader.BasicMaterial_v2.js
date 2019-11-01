@@ -109,7 +109,7 @@ function updateAlphaMaskMethod()
     if(op.alphaMaskSource.get()=='R') shader.define('ALPHA_MASK_R');
         else shader.removeDefine('ALPHA_MASK_R');
 
-    if(op.alphaMaskSource.get()=='G') shader.define('ALPHA_MASK_G');
+    if(op.alphaMaskSource.get()=='G') shader.define("ALPHA_MASK_G");
         else shader.removeDefine('ALPHA_MASK_G');
 
     if(op.alphaMaskSource.get()=='B') shader.define('ALPHA_MASK_B');
