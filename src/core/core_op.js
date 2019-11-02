@@ -1340,6 +1340,17 @@ const Op = function ()
         this.checkLinkTimeWarnings();
     };
 
+    Op.prototype.initVarPorts = function ()
+    {
+        for(var i=0;i<this.portsIn.length;i++)
+        {
+            if(this.portsIn[i].getVariableName()) this.portsIn[i].setVariable( this.portsIn[i].getVariableName() );
+        }
+
+    };
+    
+
+
     /**
      * refresh op parameters, if current op is selected
      * @function

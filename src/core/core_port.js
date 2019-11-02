@@ -61,7 +61,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this.changeAlways = false;
 
     this._warnedDeprecated = false;
-
+    this._useVariableName=null;
     // this.onUiAttrChange=null;
 
     Object.defineProperty(this, "val", {
@@ -77,6 +77,7 @@ const Port = function (__parent, name, type, uiAttribs)
             this._warnedDeprecated = true;
         },
     });
+
 };
 
 /**
@@ -297,6 +298,7 @@ Port.prototype.getSerialized = function ()
         }
         else obj.value = this.value;
     }
+    if (this._useVariableName)obj.useVariable=this._useVariableName;
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
@@ -500,6 +502,54 @@ Port.prototype.execute = function ()
     Log.log("### execute port: " + this.getName(), this.goals.length);
 };
 
+
+Port.prototype.setVariableName = function (n)
+{
+    this._useVariableName=n;
+}
+
+Port.prototype.getVariableName = function ()
+{
+    return this._useVariableName;
+}
+
+Port.prototype.setVariable = function (v)
+{
+    this.setAnimated(false);
+    var attr={useVariable:false};
+
+    if(this._variableIn)
+    {
+        this._variableIn.removeListener(this.set.bind(this));
+        this._variableIn=null;
+    }
+
+    if(v)
+    {
+        this._variableIn=this.parent.patch.getVar(v);
+
+        if(!this._variableIn)
+        {
+            console.log("PORT VAR NOT FOUND!!!");
+
+        }
+        else
+        {
+            this._variableIn.addListener(this.set.bind(this));
+        }
+        this._useVariableName=v;
+        attr.useVariable=true;
+        attr.variableName=this._useVariableName;
+    }
+    else
+    {
+        attr.variableName=this._useVariableName=null;
+        attr.useVariable=false;
+    }
+
+    this.setUiAttribs(attr);
+}
+
 Port.prototype.setAnimated = function (a)
 {
     if (this._animated != a)
@@ -508,6 +558,7 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
+    this.setUiAttribs({isAnimated:this._animated});
 };
 
 Port.prototype.toggleAnim = function (val)
@@ -516,6 +567,7 @@ Port.prototype.toggleAnim = function (val)
     if (this._animated && !this.anim) this.anim = new Anim();
     this.setAnimated(this._animated);
     this._onAnimToggle();
+    this.setUiAttribs({isAnimated:this._animated});
 };
 
 /**

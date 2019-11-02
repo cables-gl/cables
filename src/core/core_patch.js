@@ -875,6 +875,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
+                if (port && objPort && objPort.useVariable) port.setVariableName(objPort.useVariable);
+
                 if (port && objPort && objPort.anim)
                 {
                     if (!port.anim) port.anim = new Anim();
@@ -962,6 +964,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             // this._variables = cfg.variables;
         }
     }
+    for (var i in this.ops) this.ops[i].initVarPorts();
 
     setTimeout(
         () =>
