@@ -231,18 +231,17 @@ dataPort.onChange=function()
         	   // op.patch.setVarValue(varname,0);
 
                 var val=op.patch.getVarValue(varname);
-
         	    var port=op.inFloat(varname,val);
-
-
 
         	    port.setUiAttribs({
         	        "editableTitle":true,
         	        "title":portObject.title});
 
         	    listenPortChange(port,varname);
-        	}
 
+        	    port.set(val);
+        	    port.forceChange();
+        	}
         }
     }
 
