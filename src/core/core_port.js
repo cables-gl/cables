@@ -531,11 +531,11 @@ Port.prototype.setVariable = function (v)
         if(!this._variableIn)
         {
             console.log("PORT VAR NOT FOUND!!!");
-
         }
         else
         {
             this._variableIn.addListener(this.set.bind(this));
+            this.set(this._variableIn.getValue());
         }
         this._useVariableName=v;
         attr.useVariable=true;

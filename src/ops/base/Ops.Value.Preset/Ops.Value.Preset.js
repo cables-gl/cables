@@ -228,8 +228,14 @@ dataPort.onChange=function()
         {
         	if(portObject.type==CABLES.OP_PORT_TYPE_VALUE)
         	{
-        	    op.patch.setVarValue(varname,0);
-        	    var port=op.inFloat(varname,0);
+        	   // op.patch.setVarValue(varname,0);
+
+                var val=op.patch.getVarValue(varname);
+
+        	    var port=op.inFloat(varname,val);
+
+
+
         	    port.setUiAttribs({
         	        "editableTitle":true,
         	        "title":portObject.title});
@@ -314,7 +320,7 @@ addPort.onLinkChanged=function()
 
 
 
-    const varname=".preset_"+id.get()+"_"+CABLES.shortId()+'_'+otherPort.name;
+    const varname=".preset_"+otherPort.name+"_"+id.get()+'_'+CABLES.shortId();
 
 //     var newPort=op.addInPort(new CABLES.Port(op,varname,otherPort.type));
 
@@ -332,12 +338,16 @@ addPort.onLinkChanged=function()
             "type":otherPort.type
         });
 
-    op.patch.setVarValue(varname,otherPort.get());
+        console.log("otherPort.get()",otherPort.get());
+
+    const oldValue=otherPort.get()
+
+    op.patch.setVarValue(varname,oldValue);
 
 // 	if(newPort.type==CABLES.OP_PORT_TYPE_VALUE)
 // 	{
-        var opGetter = op.patch.addOp("Ops.Vars.VarGetNumber");
-        opGetter.varName.set(varname);
+        // var opGetter = op.patch.addOp("Ops.Vars.VarGetNumber");
+        // opGetter.varName.set(varname);
 
 
 //     }
@@ -351,8 +361,9 @@ addPort.onLinkChanged=function()
 
     // var newPort=op.getPort("varname")
 
-    op.patch.link(otherPort.parent,otherPort.name,opGetter,"Value");
+    // op.patch.link(otherPort.parent,otherPort.name,opGetter,"Value");
 
+    otherPort.setVariable(varname);
 
 };
 
