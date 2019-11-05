@@ -1,0 +1,53 @@
+{
+    "authorName": "stephan",
+    "id": "6a5a6674-9247-47ea-b9e1-0438ca07529a",
+    "created": 1572452000369,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array to sort"
+            },
+            {
+                "type": "5",
+                "name": "Sort property"
+            },
+            {
+                "type": "5",
+                "name": "Sorting mode"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Sorted array"
+            }
+        ],
+        "name": "Ops.Array.SortArrayObjectsByKey"
+    },
+    "summary": "sort an array of objects by value of object keys",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array to sort",
+                "text": "the array of objects to sort"
+            },
+            {
+                "name": "Sort property",
+                "text": "sorting property, can be \"nested\" (i.e. dimensions.width)"
+            },
+            {
+                "name": "Sorting mode",
+                "text": "ascending or descending"
+            },
+            {
+                "name": "Sorted array",
+                "text": "the sorted array of objects"
+            }
+        ]
+    }
+}

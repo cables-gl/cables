@@ -3,6 +3,8 @@ IN vec2 attrTexCoord;
 IN vec3 attrVertNormal,attrTangent,attrBiTangent;
 OUT vec2 texCoord;
 OUT vec3 normal;
+OUT vec3 tangent;
+OUT vec3 bitangent;
 OUT vec3 outTangent,outBiTangent;
 OUT mat4 mMatrix;
 UNI mat4 projMatrix;
@@ -17,8 +19,8 @@ void main()
 {
     texCoord=attrTexCoord;
     vec3 norm=attrVertNormal;
-    vec3 tangent=attrTangent;
-    vec3 bitangent=attrBiTangent;
+    tangent=attrTangent;
+    bitangent=attrBiTangent;
 
     vec4 pos=vec4(vPosition,1.0);
     mMatrix=modelMatrix;

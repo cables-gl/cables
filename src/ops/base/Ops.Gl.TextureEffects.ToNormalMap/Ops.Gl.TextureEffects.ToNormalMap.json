@@ -40,5 +40,13 @@
             "author": "pandur",
             "date": 1560333507524
         }
+    ],
+    "todos": [
+        {
+            "message": "Make texture size dynamic, right now fixed at 1024!",
+            "author": "simod",
+            "id": "20d29ae3-7a58-4ad2-9b24-4c7c2ba6f314",
+            "date": 1572519515040
+        }
     ]
 }

@@ -25,12 +25,13 @@ function update()
     var space = addSpacesCheckBox.get();
 
     for(var i=0; i<stringPorts.length; i++)
-
     {
-        if(space && stringPorts[i].get())  str += " ";
+        const inString=stringPorts[i].get();
+        if(!inString)continue;
+        if(space) str += " ";
         if(newLinesCheckBox.get()) nl = '\n';
-            str += nl;
-            str += stringPorts[i].get();
+        str += nl;
+        str += inString;
     }
     result.set(str);
 }

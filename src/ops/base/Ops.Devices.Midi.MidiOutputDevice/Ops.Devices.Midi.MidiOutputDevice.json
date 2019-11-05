@@ -1,0 +1,43 @@
+{
+    "id": "a874a81a-4416-4ed5-bea9-66531ed83376",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1571218830424
+        },
+        {
+            "message": "Ops.User.simod.MidiOutputDevice renamed to Ops.Devices.Midi.MidiOutputDevice",
+            "author": "simod",
+            "date": 1571309253138
+        }
+    ],
+    "authorName": "simod",
+    "created": 1571218864323,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Device",
+                "group": "Device",
+                "subType": "string"
+            },
+            {
+                "type": "2",
+                "name": "Note",
+                "group": "Midi Events"
+            },
+            {
+                "type": "2",
+                "name": "CC",
+                "group": "Midi Events"
+            },
+            {
+                "type": "2",
+                "name": "NRPN",
+                "group": "Midi Events"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiOutputDevice"
+    }
+}

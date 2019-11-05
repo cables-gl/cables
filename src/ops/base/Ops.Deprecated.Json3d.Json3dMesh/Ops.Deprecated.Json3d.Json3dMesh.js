@@ -230,7 +230,6 @@ function reload()
                 if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
 
             });
-        // setMesh();
     }
 
     var loadingId=op.patch.loading.start('json3dMesh',filename.get());

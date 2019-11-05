@@ -1,0 +1,168 @@
+{
+    "authorName": "simod",
+    "id": "f602a6b3-d345-4c6c-8241-335d24f7381a",
+    "created": 1569922936819,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "group": "Light Attributes",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Admin.DirectionalLight_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.DirectionalLight_v2 renamed to Ops.Admin.DirectionalLight_v2",
+            "author": "simod",
+            "date": 1570629976106
+        }
+    ],
+    "summary": "directional light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "PointLight",
+        "SpotLight",
+        "PhongMaterial4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "X",
+                "text": "Direction X"
+            },
+            {
+                "name": "Y",
+                "text": "Direction Y"
+            },
+            {
+                "name": "Z",
+                "text": "Direction Z"
+            },
+            {
+                "name": "R",
+                "text": "R color channel"
+            },
+            {
+                "name": "G",
+                "text": "G color channel"
+            },
+            {
+                "name": "B",
+                "text": "B color channel"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular reflection color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular reflection color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular reflection color channel B"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the directional light"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the directional light"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff within the effective radius"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger output"
+            }
+        ]
+    }
+}

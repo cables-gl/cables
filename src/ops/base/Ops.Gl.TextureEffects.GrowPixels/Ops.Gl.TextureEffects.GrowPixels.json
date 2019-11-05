@@ -1,0 +1,72 @@
+{
+    "id": "9359a744-a18b-437a-9249-094f605727fb",
+    "authorName": "pandur",
+    "created": 1546949708427,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "iterations",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.GrowPixels"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.outlineGrowPixels renamed to Ops.Gl.TextureEffects.GrowPixels",
+            "author": "pandur",
+            "date": 1572620886436
+        }
+    ],
+    "summary": "Make one pixel lines thicker via postprocessing",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

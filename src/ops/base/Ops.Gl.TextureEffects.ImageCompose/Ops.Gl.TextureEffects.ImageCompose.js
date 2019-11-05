@@ -1,6 +1,6 @@
 const render=op.inTrigger("render");
 // const useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
-const useVPSize=op.inBool("use viewport size")
+const useVPSize=op.inBool("use viewport size");
 const width=op.inValueInt("width");
 const height=op.inValueInt("height");
 

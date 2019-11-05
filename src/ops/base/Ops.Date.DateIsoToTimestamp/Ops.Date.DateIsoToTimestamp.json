@@ -1,0 +1,38 @@
+{
+    "authorName": "stephan",
+    "id": "cedf9c37-f864-4416-9675-ecc15f07025d",
+    "created": 1572450058843,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "datetime"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "timestamp",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Date.DateIsoToTimestamp"
+    },
+    "summary": "parses a date and time in iso format and outputs a millisecond timestamp",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "datetime",
+                "text": "iso formated date"
+            },
+            {
+                "name": "timestamp",
+                "text": "time in milliseconds since January 1, 1970, 00:00:00 UTC"
+            }
+        ]
+    }
+}

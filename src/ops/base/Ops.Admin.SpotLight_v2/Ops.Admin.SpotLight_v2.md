@@ -1,0 +1,1 @@
+The spot light basically is a point light, with the difference that you can set an angle to control where the light gets cut off. 

@@ -1,0 +1,1 @@
+This op adds ambient background light to every mesh that uses the PhongMaterial4. It is additive and its color is not influenced by other lights.

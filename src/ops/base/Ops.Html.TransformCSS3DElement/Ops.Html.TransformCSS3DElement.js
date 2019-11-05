@@ -73,13 +73,13 @@ inOrigin.onChange = function () {
     el.parentElement.classList.add('origin-'+inOrigin.get());
 }
 trigger.onTriggered = function () {
-	var pxfov = 0.5 / (1 / cgl.pMatrix[5]) * cgl.gl.drawingBufferHeight;
+	var pxfov = 0.5 / (1 / cgl.pMatrix[5]) * cgl.gl.drawingBufferHeight/op.patch.cgl.pixelDensity;
 	elProjection.style.perspective = pxfov + "px";
 	var a = -2 * cgl.gl.drawingBufferWidth / cgl.gl.drawingBufferHeight;
 	vec3.set(
 		sScalingVector,
-		a / cgl.gl.drawingBufferWidth,
-		-2 / cgl.gl.drawingBufferHeight,
+		a / cgl.gl.drawingBufferWidth/op.patch.cgl.pixelDensity,
+		-2 / cgl.gl.drawingBufferHeight/op.patch.cgl.pixelDensity,
 		1
 	);
 	var el = inElement.get();
@@ -113,8 +113,8 @@ trigger.onTriggered = function () {
     			sCSSMatrix[14] + ',' +
     			sCSSMatrix[15] +
     		") scaleX(-1) translate3d("+
-    			cgl.gl.drawingBufferWidth/2+"px,"+
-    			cgl.gl.drawingBufferHeight/2+"px"+
+    			cgl.gl.drawingBufferWidth/2/op.patch.cgl.pixelDensity+"px,"+
+    			cgl.gl.drawingBufferHeight/2/op.patch.cgl.pixelDensity+"px"+
     			",0"+
     		")";
 	}
@@ -134,7 +134,7 @@ op.onDelete=function()
     removeProperties(oldEle);
 };
 
-inElement.onLinkChanged = function() 
+inElement.onLinkChanged = function()
 {
     if(!inElement.isLinked())
         removeProperties(oldEle);

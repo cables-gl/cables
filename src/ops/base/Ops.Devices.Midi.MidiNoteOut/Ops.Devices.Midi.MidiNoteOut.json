@@ -1,0 +1,63 @@
+{
+    "authorName": "simod",
+    "id": "172dcd08-cd5b-4272-bc7d-2b1a61ecfd4a",
+    "created": 1571232970147,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "group": "General",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note",
+                "group": "General",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Note Number",
+                "group": "Note",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "group": "Note",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min In Velocity",
+                "group": "Velocity Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max In Velocity",
+                "group": "Velocity Range",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Velocity Array In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiNoteOut"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.MidiNoteOut renamed to Ops.Devices.Midi.MidiNoteOut",
+            "author": "simod",
+            "date": 1571309145038
+        }
+    ]
+}

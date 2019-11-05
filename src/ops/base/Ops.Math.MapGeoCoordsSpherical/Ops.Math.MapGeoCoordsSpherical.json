@@ -1,0 +1,45 @@
+{
+    "id": "e4c6786b-abf6-4762-b8f9-ed89dd532e23",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567762619351
+        },
+        {
+            "message": "Ops.User.pandur.MapGeoCoordsToSphere renamed to Ops.Math.MapGeoCoordsSpherical",
+            "author": "pandur",
+            "date": 1571649175730
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567762648383,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Coordinates"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.MapGeoCoordsToSphere"
+    },
+    "summary": "map geo locations (latitude - longitude) to spherical coordinates",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

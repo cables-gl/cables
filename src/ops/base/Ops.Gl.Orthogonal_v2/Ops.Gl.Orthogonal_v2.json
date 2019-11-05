@@ -14,6 +14,10 @@
                 "subType": "number"
             },
             {
+                "type": "5",
+                "name": "Axis"
+            },
+            {
                 "type": "0",
                 "name": "frustum near",
                 "subType": "number"
@@ -48,15 +52,28 @@
         "name": "Ops.Gl.Orthogonal_v2"
     },
     "summary": "Orthogonal projection / objects in distance don't appear smaller (isometric)",
-    "youtubeid": "",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Axis",
+                "text": "this axis will be scaled to [bounds], the other axis will be bounds*aspect ratio"
+            }
+        ]
     },
     "changelog": [
         {
             "message": "using now current width/height of viewport, and not of the canvas",
             "author": "pandur",
             "date": 1559654315975
+        },
+        {
+            "message": "added axis toggle",
+            "author": "pandur",
+            "date": 1572884804997
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

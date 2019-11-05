@@ -5,7 +5,8 @@ const arrayOut = op.outArray('Sorted array');
 
 let arrOut = [];
 
-arrayIn.onChange = sortMode.onChange = update;
+arrayIn.onChange = propIn.onChange = sortMode.onChange = update;
+
 update();
 
 function update() {
@@ -23,14 +24,26 @@ function update() {
       const properties = Array.isArray(path) ? path : path.split('.');
       const propA = properties.reduce((prev, curr) => prev && prev[curr], a);
       const propB = properties.reduce((prev, curr) => prev && prev[curr], b);
-      return propA - propB;
+      if (propA < propB) {
+        return -1;
+      } else if ( propA > propB) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
   } else {
     arrOut.sort(function(a, b) {
       const properties = Array.isArray(path) ? path : path.split('.');
       const propA = properties.reduce((prev, curr) => prev && prev[curr], a);
       const propB = properties.reduce((prev, curr) => prev && prev[curr], b);
-      return propB - propA;
+      if (propA < propB) {
+        return 1;
+      } else if ( propA > propB) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
   }
 

@@ -1,0 +1,1 @@
+Lets you sort an array of objects (as i.e. given by CsvArray) by one key of the containing objects. Can be "tested" properties, use '.' as a seperator then (i.e. dimensions.width).

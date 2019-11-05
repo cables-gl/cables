@@ -1,0 +1,77 @@
+{
+    "id": "949d6daf-d677-4ed6-a921-51a5732b64ac",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1572277544559
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1572277607095,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size",
+                "group": "Canvas size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Canvas size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Canvas size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frustum near",
+                "group": "Clipping",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frustum far",
+                "group": "Clipping",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Flip X",
+                "group": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "group": "Flip",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.PixelProjection"
+    },
+    "summary": "map world units to pixels",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

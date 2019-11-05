@@ -52,7 +52,7 @@ function getMeshName(idx)
     {
         for(var i=0;i<data.rootnode.children.length;i++)
         {
-            if(data.rootnode.children[i].meshes.length==1 && data.rootnode.children[i].meshes[0]==idx) return data.rootnode.children[i].name;
+            if(data.rootnode.children[i].meshes && data.rootnode.children[i].meshes.length==1 && data.rootnode.children[i].meshes[0]==idx) return data.rootnode.children[i].name;
         }
 
     }

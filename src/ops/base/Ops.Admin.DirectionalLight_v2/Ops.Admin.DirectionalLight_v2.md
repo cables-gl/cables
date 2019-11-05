@@ -1,0 +1,1 @@
+This light illuminates the whole scene. It does not have a position, only a direction. You can think of it as a sunlight.

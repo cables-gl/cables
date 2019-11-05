@@ -1,0 +1,58 @@
+{
+    "id": "469abc8f-598a-4a42-a5df-881bf80ee363",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1571299650828
+        },
+        {
+            "message": "Ops.User.simod.MidiNRPNOut renamed to Ops.Devices.Midi.MidiNRPNOut",
+            "author": "simod",
+            "date": 1571309227667
+        }
+    ],
+    "authorName": "simod",
+    "created": 1571299706473,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "MIDI Channel",
+                "group": "Generalw",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Value",
+                "group": "NRPN",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "NRPN Index",
+                "group": "NRPN",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min In Value",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max In Value",
+                "group": "Value Range",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MIDI Event Out"
+            }
+        ],
+        "name": "Ops.User.simod.MidiNRPNOut"
+    }
+}
