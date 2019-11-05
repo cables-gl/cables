@@ -105,9 +105,10 @@
     "issues": "",
     "collections": null,
     "relatedops": [
-        "PointLight",
-        "SpotLight",
-        "PhongMaterial4"
+        "Ops.Gl.Phong.PhongMaterial_v4",
+        "Ops.Gl.Phong.AmbientLight_v4",
+        "Ops.Gl.Phong.PointLight_v4",
+        "Ops.Gl.Phong.SpotLight_v4"
     ],
     "youtubeids": [],
     "docs": {

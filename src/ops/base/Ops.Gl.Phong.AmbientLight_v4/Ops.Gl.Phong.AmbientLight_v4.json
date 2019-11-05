@@ -56,9 +56,10 @@
     "issues": "",
     "collections": null,
     "relatedops": [
-        "SpotLight",
-        "DirectionalLight",
-        "PhongMaterial4"
+        "Ops.Gl.Phong.PhongMaterial_v4",
+        "Ops.Gl.Phong.DirectionalLight_v4",
+        "Ops.Gl.Phong.PointLight_v4",
+        "Ops.Gl.Phong.SpotLight_v4"
     ],
     "youtubeids": [],
     "docs": {

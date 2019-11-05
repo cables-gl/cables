@@ -11,7 +11,7 @@ const inNrpnValue = op.inInt("NRPN Value", 0);
 const inNrpnIndex = op.inInt("NRPN Index", 0);
 const inMin = op.inFloat("Min In Value", 0);
 const inMax = op.inFloat("Max In Value", 1);
-op.setPortGroup("Generalw",[inChannel]);
+op.setPortGroup("General",[inChannel]);
 op.setPortGroup("NRPN",[inNrpnValue, inNrpnIndex]);
 op.setPortGroup("Value Range",[inMin, inMax]);
 const outEvent = op.outObject("MIDI Event Out");

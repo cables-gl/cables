@@ -63,8 +63,6 @@ var currentChannel = null;
 
 const killLastNote = () => {
   if (!outputDevice || !currentNote || !currentChannel) return;
-    console.log("killLastNote outputdevice");
-    console.log(outputDevice);
     outputDevice.send([(NOTE_OFF << 4 | (currentChannel)), currentNote, 0]);
 };
 
@@ -72,7 +70,6 @@ const killAllNotes = () => {
     if (!outputDevice) return;
   for (let i = 0; i < 128; i += 1) {
     for (let channel = 0; channel < 16; channel += 1) outputDevice.send([(NOTE_OFF << 4 | channel), i, 0]);
-    console.log("killAllNotes outputdevice");
   }
 };
 

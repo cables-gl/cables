@@ -39,5 +39,42 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiOutputDevice"
+    },
+    "summary": "Connect to MIDI device input port",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiCCOut",
+        "Ops.Devices.Midi.MidiNoteOut",
+        "Ops.Devices.Midi.MidiNRPNOut",
+        "Ops.Devices.Midi.MidiInputDevice_v2",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiTranspose"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Device",
+                "text": "list of your midi devices"
+            },
+            {
+                "name": "Note",
+                "text": "the input port for MIDI note events"
+            },
+            {
+                "name": "CC",
+                "text": "the input port for MIDI CC events"
+            },
+            {
+                "name": "NRPN",
+                "text": "the input port for MIDI NRPN events"
+            }
+        ]
     }
 }

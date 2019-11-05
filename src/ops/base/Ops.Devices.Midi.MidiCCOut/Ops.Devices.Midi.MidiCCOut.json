@@ -54,5 +54,50 @@
             }
         ],
         "name": "Ops.Devices.Midi.MidiCCOut"
+    },
+    "summary": "send MIDI CC data to a midi output",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiNRPNOut",
+        "Ops.Devices.Midi.MidiOutputDevice",
+        "Ops.Devices.Midi.MidiNoteOut",
+        "Ops.Devices.Midi.MidiInputDevice",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiTranspose"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Channel",
+                "text": "the midi channel of the CC message"
+            },
+            {
+                "name": "CC Index",
+                "text": "the index of the CC message"
+            },
+            {
+                "name": "CC Value",
+                "text": "the value of the CC message"
+            },
+            {
+                "name": "Min In Value",
+                "text": "the minimum value that is coming in"
+            },
+            {
+                "name": "Max In Value",
+                "text": "the maximum value that is coming in"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "the midi event output port"
+            }
+        ]
     }
 }

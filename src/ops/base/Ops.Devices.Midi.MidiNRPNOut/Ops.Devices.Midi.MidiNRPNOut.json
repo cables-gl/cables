@@ -19,7 +19,7 @@
             {
                 "type": "0",
                 "name": "MIDI Channel",
-                "group": "Generalw",
+                "group": "General",
                 "subType": "string"
             },
             {
@@ -53,6 +53,51 @@
                 "name": "MIDI Event Out"
             }
         ],
-        "name": "Ops.User.simod.MidiNRPNOut"
+        "name": "Ops.Devices.Midi.MidiNRPNOut"
+    },
+    "summary": "send midi NRPN data to a midi output",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiCCOut",
+        "Ops.Devices.Midi.MidiOutputDevice",
+        "Ops.Devices.Midi.MidiNoteOut",
+        "Ops.Devices.Midi.MidiInputDevice",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiTranspose"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Channel",
+                "text": "the midi channel of the NRPN message"
+            },
+            {
+                "name": "NRPN Value",
+                "text": "the value of the NRPN message"
+            },
+            {
+                "name": "NRPN Index",
+                "text": "the index of the NRPN message"
+            },
+            {
+                "name": "Min In Value",
+                "text": "the minimum value that is coming in"
+            },
+            {
+                "name": "Max In Value",
+                "text": "the maximum value that is coming in"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "the midi event output port"
+            }
+        ]
     }
 }

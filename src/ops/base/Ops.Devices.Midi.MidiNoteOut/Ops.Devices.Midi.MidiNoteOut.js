@@ -32,14 +32,12 @@ const outEvent = op.outObject("MIDI Event Out");
 var currentNote = null;
 const killAllNotes = () => {
   for (let i = 0; i < 128; i += 1) {
-    console.log("killAllNotes midinoteout");
     outEvent.set(null);
     outEvent.set({ data: [(NOTE_OFF << 4 | (inChannel.get() - 1)), i, 0] });
   }
 };
 
 const killLastNote = () => {
-  console.log("killLastNote midinoteout");
   outEvent.set(null);
   outEvent.set({ data: [(NOTE_OFF << 4 | (inChannel.get() - 1)), currentNote, 0] });
 };
@@ -58,8 +56,7 @@ inNoteArray.onLinkChanged = function() {
 
 inNoteDropdown.onChange = inChannel.onChange = killLastNote;
 
-inVelocity.onChange = function() {
-    console.log("inveloOnchange");
+inNoteNumber.onChange = inVelocity.onChange = function() {
     /* if (!inNoteDropdown.get()) {
        // if (!op.uiAttribs.error) op.uiAttr({ error: "Please choose a MIDI Note!" });
         return;
@@ -144,7 +141,6 @@ inNoteArray.onChange = function () {
         }
 
         oldArr = arr;
-        // console.log(event.data);
         outEvent.set(null);
         outEvent.set(event);
     }

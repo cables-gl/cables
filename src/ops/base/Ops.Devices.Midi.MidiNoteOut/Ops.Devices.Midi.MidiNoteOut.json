@@ -59,5 +59,58 @@
             "author": "simod",
             "date": 1571309145038
         }
-    ]
+    ],
+    "summary": "send midi note data to a midi output",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Devices.Midi.MidiCCOut",
+        "Ops.Devices.Midi.MidiOutputDevice",
+        "Ops.Devices.Midi.MidiNRPNOut",
+        "Ops.Devices.Midi.MidiInputDevice",
+        "Ops.Devices.Midi.MidiNRPN",
+        "Ops.Devices.Midi.MidiNote",
+        "Ops.Devices.Midi.MidiMonitor",
+        "Ops.Devices.Midi.MidiClock",
+        "Ops.Devices.Midi.MidiNoteFilter",
+        "Ops.Devices.Midi.MidiChord3",
+        "Ops.Devices.Midi.MidiTranspose"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "MIDI Channel",
+                "text": "the midi channel of the note message"
+            },
+            {
+                "name": "Note",
+                "text": "dropdown menu for a single note"
+            },
+            {
+                "name": "Note Number",
+                "text": "the note number of the note message"
+            },
+            {
+                "name": "Velocity",
+                "text": "the velocity of the note message"
+            },
+            {
+                "name": "Min In Velocity",
+                "text": "the minimum velocity that is coming in"
+            },
+            {
+                "name": "Max In Velocity",
+                "text": "the maximum velocity that is coming in"
+            },
+            {
+                "name": "Velocity Array In",
+                "text": "array input of length 128 for each note"
+            },
+            {
+                "name": "MIDI Event Out",
+                "text": "the midi event output port"
+            }
+        ]
+    }
 }
