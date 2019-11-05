@@ -1,0 +1,30 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Value.ValueChanged"
+    },
+    "summary": "Triggers the next Op if value has changed",
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "c62cb6f6-77be-4d5e-818b-89a8eb596797",
+    "created": 1512038554694,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueChanged renamed to Ops.Deprecated.Value.ValueChanged",
+            "author": "pandur",
+            "date": 1572939115804
+        }
+    ]
+}

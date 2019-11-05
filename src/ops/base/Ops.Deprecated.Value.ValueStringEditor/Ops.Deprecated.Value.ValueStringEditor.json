@@ -1,0 +1,36 @@
+{
+    "updated": 1519205634132,
+    "authorName": "pandur",
+    "id": "28df4563-fbf2-412e-a4a4-33b5d0e0ba27",
+    "created": 1517917830731,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Value.ValueStringEditor"
+    },
+    "summary": "edit long string values in the editor",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueStringEditor renamed to Ops.Deprecated.Value.ValueStringEditor",
+            "author": "pandur",
+            "date": 1572939254435
+        }
+    ]
+}

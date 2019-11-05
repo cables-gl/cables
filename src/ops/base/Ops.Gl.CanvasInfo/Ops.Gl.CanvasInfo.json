@@ -1,0 +1,57 @@
+{
+    "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pixel Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Landscape",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.CanvasSize"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "94e499e5-b4ee-4861-ab48-6ab5098b2cc3",
+    "created": 1507289041073,
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "collections": [
+        "dataInfo"
+    ],
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "new output: landscape - true if canvas width > height",
+            "author": "pandur",
+            "date": 1550644352354
+        },
+        {
+            "message": "Ops.Gl.CanvasSize renamed to Ops.Gl.CanvasInfo",
+            "author": "pandur",
+            "date": 1572939393002
+        }
+    ]
+}
