@@ -1,0 +1,399 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "A",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable",
+                "group": "Oren-Nayar Diffuse",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Albedo",
+                "group": "Oren-Nayar Diffuse",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Roughness",
+                "group": "Oren-Nayar Diffuse",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "group": "Fresnel",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel Intensity",
+                "group": "Fresnel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel R",
+                "group": "Fresnel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel G",
+                "group": "Fresnel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel B",
+                "group": "Fresnel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Shininess",
+                "group": "Specular",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular Amount",
+                "group": "Specular",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Specular Model",
+                "group": "Specular"
+            },
+            {
+                "type": "0",
+                "name": "Energy Conservation",
+                "group": "Light Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided Material",
+                "group": "Light Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "Specular Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "Normal Map",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "Emissive Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "Opacity Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Texture",
+                "group": "Texture Transforms",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse Repeat X",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse Repeat Y",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Offset X",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Offset Y",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular Intensity",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Normal Map Intensity",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "AO Intensity",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Emissive Intensity",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Opacity Texture"
+            },
+            {
+                "type": "0",
+                "name": "Opacity TexCoords Transform",
+                "group": "Opacity Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Discard Transparent Pixels",
+                "group": "Opacity Texture",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Admin.SimosPhong_v2"
+    },
+    "authorName": "simod",
+    "id": "7059501e-31a6-46cd-8939-4d4b82229086",
+    "created": 1569856091698,
+    "changelog": [
+        {
+            "message": "Ops.User.simod.SimosPhong_v2 renamed to Ops.Admin.SimosPhong_v2",
+            "author": "simod",
+            "date": 1570629900011
+        },
+        {
+            "message": "Ops.Admin.SimosPhong_v2 renamed to Ops.Gl.Phong.PhongMaterial_v4",
+            "author": "pandur",
+            "date": 1572940793478
+        }
+    ],
+    "summary": "A shading material with lights",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger in"
+            },
+            {
+                "name": "R",
+                "text": "Diffuse Red Value"
+            },
+            {
+                "name": "G",
+                "text": "Diffuse Green Value"
+            },
+            {
+                "name": "B",
+                "text": "Diffuse Blue Value"
+            },
+            {
+                "name": "A",
+                "text": "Opacity"
+            },
+            {
+                "name": "Enable",
+                "text": "Enables or disables the Oren-Nayar diffuse calculation"
+            },
+            {
+                "name": "Albedo",
+                "text": "Albedo of the diffuse color"
+            },
+            {
+                "name": "Roughness",
+                "text": "Roughness of the diffuse color"
+            },
+            {
+                "name": "Active",
+                "text": "Enables or disables the Fresnel effect"
+            },
+            {
+                "name": "Fresnel Intensity",
+                "text": "Amount of Fresnel effect"
+            },
+            {
+                "name": "Fresnel R",
+                "text": "Fresnel Red Value"
+            },
+            {
+                "name": "Fresnel G",
+                "text": "Fresnel Green Value"
+            },
+            {
+                "name": "Fresnel B",
+                "text": "Fresnel Blue Value"
+            },
+            {
+                "name": "Shininess",
+                "text": "Size of the specular reflection, the greater the value the smaller the reflection"
+            },
+            {
+                "name": "Specular Amount",
+                "text": "Amount of the specular reflection"
+            },
+            {
+                "name": "Specular Model",
+                "text": "1 of 4 specular models: Blinn-Phong, Schlick, Phong or Gaussian"
+            },
+            {
+                "name": "Energy Conservation",
+                "text": "Enable or disable physically correct light energy conservation"
+            },
+            {
+                "name": "Double Sided Material",
+                "text": "Invert normals when not front-facing (useful for e.g. ParametricSurface)"
+            },
+            {
+                "name": "Diffuse Texture",
+                "text": "Diffuse texture input"
+            },
+            {
+                "name": "Specular Texture",
+                "text": "Specular texture input"
+            },
+            {
+                "name": "Normal Map",
+                "text": "Normal Map input"
+            },
+            {
+                "name": "AO Texture",
+                "text": "Ambient Occlusion texture input"
+            },
+            {
+                "name": "Emissive Texture",
+                "text": "Emissive texture input"
+            },
+            {
+                "name": "Opacity Texture",
+                "text": "Opacity texture input"
+            },
+            {
+                "name": "Colorize Texture",
+                "text": "Multiply texture color with material color"
+            },
+            {
+                "name": "Diffuse Repeat X",
+                "text": "How often a texture is repeated on the X axis (applied to all textures)"
+            },
+            {
+                "name": "Diffuse Repeat Y",
+                "text": "How often a texture is repeated on the Y axis (applied to all textures)"
+            },
+            {
+                "name": "Texture Offset X",
+                "text": "texture pixel offset on the C axis (applied to all textures)"
+            },
+            {
+                "name": "Texture Offset Y",
+                "text": "texture pixel offset on the Y axis (applied to all textures)"
+            },
+            {
+                "name": "Specular Intensity",
+                "text": "intensity of the specular texture"
+            },
+            {
+                "name": "Normal Map Intensity",
+                "text": "intensity of the normal map"
+            },
+            {
+                "name": "AO Intensity",
+                "text": "intensity of the Ambient Occlusion texture"
+            },
+            {
+                "name": "Emissive Intensity",
+                "text": "intension of the emissive map"
+            },
+            {
+                "name": "Alpha Mask Source",
+                "text": "which channel of a texture should be used for alpha blending: Luminance, R, G or B"
+            },
+            {
+                "name": "Opacity TexCoords Transform",
+                "text": "Flip opacity texture coordinates"
+            },
+            {
+                "name": "Discard Transparent Pixels",
+                "text": "Discard transparent pixels"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader out"
+            }
+        ]
+    }
+}

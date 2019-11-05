@@ -1,0 +1,92 @@
+{
+    "authorName": "simod",
+    "id": "235a18d1-a8de-4034-962d-2848017e27cd",
+    "created": 1569921678890,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.User.simod.AmbientLight_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.AmbientLight_v2 renamed to Ops.Admin.AmbientLight_v2",
+            "author": "simod",
+            "date": 1570629996574
+        },
+        {
+            "message": "Ops.Admin.AmbientLight_v2 renamed to Ops.Gl.Phong.AmbientLight_v4",
+            "author": "pandur",
+            "date": 1572941085566
+        }
+    ],
+    "summary": "ambient light for phong material shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "SpotLight",
+        "DirectionalLight",
+        "PhongMaterial4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "R",
+                "text": "R color channel"
+            },
+            {
+                "name": "G",
+                "text": "G color channel"
+            },
+            {
+                "name": "B",
+                "text": "B color channel"
+            },
+            {
+                "name": "Intensity",
+                "text": "ambient light intensity"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger output"
+            }
+        ]
+    }
+}

@@ -1,0 +1,137 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "4698b1c4-859e-463c-97d1-9179e70ee674",
+    "created": 1510753963538,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "execute"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fesnel",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular Shininess",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse Texture"
+            },
+            {
+                "type": "2",
+                "name": "Normal Texture"
+            },
+            {
+                "type": "2",
+                "name": "Specular Texture"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture"
+            },
+            {
+                "type": "2",
+                "name": "Emissive Texture"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Light Shading",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Diffuse Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Normal Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Ao Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Falloff",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Emissive",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Specular",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Toggle Fresnel",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Exp.Gl.PhongMaterial3"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.PhongMaterial3 renamed to Ops.Gl.Phong.PhongMaterial_v3",
+            "author": "pandur",
+            "date": 1572942160709
+        }
+    ]
+}

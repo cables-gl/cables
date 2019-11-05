@@ -1,0 +1,232 @@
+{
+    "authorName": "simod",
+    "id": "213f2e70-e763-4484-9439-4a9eb76f5367",
+    "created": 1569922400165,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At X",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Y",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Z",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inner Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Spot Exponent",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Admin.SpotLight_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.SpotLight_v2 renamed to Ops.Admin.SpotLight_v2",
+            "author": "simod",
+            "date": 1570629949280
+        },
+        {
+            "message": "Ops.Admin.SpotLight_v2 renamed to Ops.Gl.Phong.SpotLight_v4",
+            "author": "pandur",
+            "date": 1572941018274
+        }
+    ],
+    "summary": "spot light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "PointLight",
+        "PhongMaterial4",
+        "DirectionalLight"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the spotlight"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the spot light"
+            },
+            {
+                "name": "X",
+                "text": "X position of the light"
+            },
+            {
+                "name": "Y",
+                "text": "Y position of the light"
+            },
+            {
+                "name": "Z",
+                "text": "Z position of the light"
+            },
+            {
+                "name": "Point At X",
+                "text": "where the light points at X"
+            },
+            {
+                "name": "Point At Y",
+                "text": "where the light points at Y"
+            },
+            {
+                "name": "Point At Z",
+                "text": "where the light points at Z"
+            },
+            {
+                "name": "R",
+                "text": "diffuse color channel R"
+            },
+            {
+                "name": "G",
+                "text": "diffuse color channel G"
+            },
+            {
+                "name": "B",
+                "text": "diffuse color channel B"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular color channel B"
+            },
+            {
+                "name": "Cone Angle",
+                "text": "outter cone angle of the spot light"
+            },
+            {
+                "name": "Inner Cone Angle",
+                "text": "inner cone angle (soft shadow area) of the spot light"
+            },
+            {
+                "name": "Spot Exponent",
+                "text": "appearance of the spot light"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff in respect to effective radius"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger output"
+            }
+        ]
+    }
+}

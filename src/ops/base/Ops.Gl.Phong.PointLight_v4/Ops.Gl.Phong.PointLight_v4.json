@@ -1,0 +1,173 @@
+{
+    "authorName": "simod",
+    "id": "8d7dc3dc-b71d-4ba8-830f-83dca2638359",
+    "created": 1569852450800,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Admin.SimosPointLight_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.SimosPointLight_v2 renamed to Ops.Admin.SimosPointLight_v2",
+            "author": "simod",
+            "date": 1570629926049
+        },
+        {
+            "message": "Ops.Admin.SimosPointLight_v2 renamed to Ops.Gl.Phong.PointLight_v4",
+            "author": "pandur",
+            "date": 1572940931025
+        }
+    ],
+    "summary": "point light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "SpotLight",
+        "DirectionalLight",
+        "AmbientLight",
+        "PhongMaterial4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the point light"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the point light"
+            },
+            {
+                "name": "X",
+                "text": "position X"
+            },
+            {
+                "name": "Y",
+                "text": "position Y"
+            },
+            {
+                "name": "Z",
+                "text": "position Z"
+            },
+            {
+                "name": "R",
+                "text": "diffuse color channel R"
+            },
+            {
+                "name": "G",
+                "text": "diffuse color channel G"
+            },
+            {
+                "name": "B",
+                "text": "diffuse color channel B"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular color channel B"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff within effective radius"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            }
+        ]
+    }
+}
