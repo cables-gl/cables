@@ -47,6 +47,11 @@
             "message": "new output: landscape - true if canvas width > height",
             "author": "pandur",
             "date": 1550644352354
+        },
+        {
+            "message": "Ops.Gl.CanvasSize renamed to Ops.Gl.CanvasInfo",
+            "author": "pandur",
+            "date": 1572939393002
         }
     ]
 }

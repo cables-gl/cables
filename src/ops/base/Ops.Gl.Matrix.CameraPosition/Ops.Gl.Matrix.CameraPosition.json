@@ -33,5 +33,12 @@
         ],
         "name": "Ops.Gl.Matrix.ViewMatrixTranslation"
     },
-    "summary": "get the current position of viewmatrix/camera eye"
+    "summary": "get the current position of viewmatrix/camera eye",
+    "changelog": [
+        {
+            "message": "Ops.Gl.Matrix.ViewMatrixTranslation renamed to Ops.Gl.Matrix.CameraPosition",
+            "author": "pandur",
+            "date": 1572939452440
+        }
+    ]
 }

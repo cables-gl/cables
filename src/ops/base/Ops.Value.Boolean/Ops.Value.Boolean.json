@@ -31,5 +31,12 @@
     },
     "authorName": "pandur",
     "id": "83e2d74c-9741-41aa-a4d7-1bda4ef55fb3",
-    "created": 1541052012961
+    "created": 1541052012961,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueBoolean renamed to Ops.Value.Boolean",
+            "author": "pandur",
+            "date": 1572939020005
+        }
+    ]
 }

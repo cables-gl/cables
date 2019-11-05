@@ -25,5 +25,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueStringEditor renamed to Ops.Deprecated.Value.ValueStringEditor",
+            "author": "pandur",
+            "date": 1572939254435
+        }
+    ]
 }
