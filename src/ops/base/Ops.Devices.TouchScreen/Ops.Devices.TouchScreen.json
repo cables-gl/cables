@@ -22,6 +22,10 @@
                 "subType": "boolean"
             },
             {
+                "type": "5",
+                "name": "Area"
+            },
+            {
                 "type": "0",
                 "name": "Normalize Coordinates",
                 "subType": "boolean"

@@ -54,6 +54,11 @@
             "message": "added input type selection",
             "author": "pandur",
             "date": 1570700646501
+        },
+        {
+            "message": "added area parameter",
+            "author": "pandur",
+            "date": 1573030808834
         }
     ]
 }

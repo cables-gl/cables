@@ -1,9 +1,7 @@
-
-var hasFocus=op.outValue("has focus");
+const hasFocus=op.outValue("has focus");
 
 op.onDelete=removeListeners;
 addListeners();
-
 
 function onFocus()
 {

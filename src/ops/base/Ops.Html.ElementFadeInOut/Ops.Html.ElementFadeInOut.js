@@ -2,9 +2,8 @@ const inEle=op.inObject("HTML Element");
 const inVisible=op.inValueBool("Visible",true);
 const inDuration=op.inValue("Duration",0.5);
 const inOpacity=op.inValue("Opacity",1);
-
-
 const outShowing=op.outValueBool("Is Showing",false);
+
 var theTimeout=null;
 inDuration.onChange=update;
 inOpacity.onChange=update;
@@ -24,7 +23,10 @@ op.onLoaded=function()
 {
     loaded=true;
 
+
     updateVisibility();
+
+
     outShowing.set(inVisible.get());
 
 };

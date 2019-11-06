@@ -24,13 +24,13 @@
             },
             {
                 "type": "0",
-                "name": "NRPN Value",
+                "name": "NRPN Index",
                 "group": "NRPN",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "NRPN Index",
+                "name": "NRPN Value",
                 "group": "NRPN",
                 "subType": "integer"
             },

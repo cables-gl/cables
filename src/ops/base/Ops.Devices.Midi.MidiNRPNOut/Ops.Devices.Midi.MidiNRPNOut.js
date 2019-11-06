@@ -7,8 +7,8 @@ const CC_STATUS_BYTE = 0xb;
 const CC_STATUS_BYTE_START = 176;
 
 const inChannel = op.inDropDown("MIDI Channel", MIDIChannels, "1");
-const inNrpnValue = op.inInt("NRPN Value", 0);
 const inNrpnIndex = op.inInt("NRPN Index", 0);
+const inNrpnValue = op.inInt("NRPN Value", 0);
 const inMin = op.inFloat("Min In Value", 0);
 const inMax = op.inFloat("Max In Value", 1);
 op.setPortGroup("General",[inChannel]);

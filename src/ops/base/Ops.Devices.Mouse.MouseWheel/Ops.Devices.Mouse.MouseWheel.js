@@ -12,6 +12,8 @@ const preventScroll=op.inValueBool("prevent scroll");
 const flip=op.inValueBool("Flip Direction");
 const active=op.inValueBool("active",true);
 const reset=op.inTriggerButton("Reset");
+const area=op.inSwitch("Area",['Canvas','Document'],'Canvas');
+
 const absVal=op.outValue("absolute value",0);
 const delta=op.outValue("delta",0);
 
@@ -29,6 +31,11 @@ anim.clear();
 anim.setValue(CABLES.now()/1000.0-startTime,absVal.get());
 var dir=1;
 var isWindows=navigator.appVersion.indexOf("Win")!=-1;
+
+var listenerElement=null;
+
+area.onChange=updateArea;
+var vOut=0;
 
 addListener();
 
@@ -94,9 +101,6 @@ smooth.onChange=function()
         else clearTimeout(smoothTimer);
 };
 
-// var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
-
-
 function checkValue()
 {
     if(!maxUnlimitedPort.get()) {
@@ -112,8 +116,6 @@ flip.onChange=function()
     if(flip.get())dir=-1;
         else dir=1;
 };
-
-var vOut=0;
 
 function onMouseWheel(e)
 {
@@ -139,20 +141,29 @@ function onMouseWheel(e)
     if(preventScroll.get()) e.preventDefault();
 }
 
+function updateArea()
+{
+    removeListener();
+
+    if(area.get()=='Document') listenerElement = document;
+    else listenerElement = cgl.canvas;
+
+    if(active.get())addListener();
+}
+
 function addListener()
 {
-    cgl.canvas.addEventListener('wheel', onMouseWheel);
+    if(!listenerElement)updateArea();
+    listenerElement.addEventListener('wheel', onMouseWheel);
 }
 
 function removeListener()
 {
-    cgl.canvas.removeEventListener('wheel', onMouseWheel);
+    if(listenerElement) listenerElement.removeEventListener('wheel', onMouseWheel);
 }
-
 
 active.onChange=function()
 {
-    removeListener();
-    if(active.get())addListener();
-};
+    updateArea();
+}
 
