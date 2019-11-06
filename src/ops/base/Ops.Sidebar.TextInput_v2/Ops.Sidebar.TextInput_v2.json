@@ -35,5 +35,34 @@
             }
         ],
         "name": "Ops.Sidebar.TextInput_v2"
+    },
+    "summary": "Enter text in the sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Link",
+                "text": "Where to attach the sidebar item to (Sidebar / Sidebar Group)"
+            },
+            {
+                "name": "Text",
+                "text": "The text label"
+            },
+            {
+                "name": "Default",
+                "text": "The default text in the input field"
+            },
+            {
+                "name": "Children",
+                "text": "In case you want to add other Sidebar items below"
+            },
+            {
+                "name": "Result",
+                "text": "The text which was entered in the input field"
+            }
+        ]
     }
 }
