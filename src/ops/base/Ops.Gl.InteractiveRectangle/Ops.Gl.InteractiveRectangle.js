@@ -201,7 +201,7 @@ function updateDivVisibility()
     if(div)
     {
         if(divVisible.get()) div.style.border='1px solid red';
-            else div.style.border='none';
+        else div.style.border='none';
     }
 }
 
@@ -383,8 +383,7 @@ function onTouchMove(e)
 {
     // console.log('touchmoveevent',e);
 
-    var targetEle=document.elementFromPoint(
-        e.targetTouches[0].pageX,e.targetTouches[0].pageY);
+    var targetEle=document.elementFromPoint(e.targetTouches[0].pageX,e.targetTouches[0].pageY);
 
     if(targetEle==div)
     {

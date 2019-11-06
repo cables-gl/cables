@@ -2,8 +2,8 @@
 .CABLES_animFadedOut
 {
     display:none !important;
+    opacity:0;
 }
-
 
 .CABLES_animFadeOut
 {

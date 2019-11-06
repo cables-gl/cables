@@ -42,6 +42,7 @@ function setCSSVisible(visible)
     else
     {
         // prevDisplay=div.style.display||'block';
+        if(prevDisplay=="none") prevDisplay="block";
         div.style.visibility='visible';
         div.style.display=prevDisplay;
     }

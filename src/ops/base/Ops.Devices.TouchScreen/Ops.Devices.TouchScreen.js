@@ -13,6 +13,7 @@ const
 
     f2x=op.outValue("Finger 2 X"),
     f2y=op.outValue("Finger 2 Y"),
+    area=op.inSwitch("Area",['Canvas','Document'],'Canvas'),
 
     outEvents=op.outArray("Events"),
     normalize=op.inValueBool("Normalize Coordinates"),
@@ -20,6 +21,8 @@ const
     outTouchStart=op.outTrigger("Touch Start"),
     outTouchEnd=op.outTrigger("Touch End");
 
+
+area.onChange=updateArea;
 
 function setPos(event)
 {
@@ -47,7 +50,6 @@ function setPos(event)
         f1y.set(y);
 
         if(event.touches[0].force)f1f.set(event.touches[0].force);
-
     }
 
     if(event.touches && event.touches.length>1)
@@ -102,26 +104,34 @@ var cgl=op.patch.cgl;
 var listenerElement=null;
 function addListeners()
 {
-    listenerElement=cgl.canvas;
+    updateArea();
     listenerElement.addEventListener('touchmove', ontouchmove);
     listenerElement.addEventListener('touchstart', ontouchstart);
     listenerElement.addEventListener('touchend', ontouchend);
 }
 
-function removeLiseteners()
+
+function updateArea()
+{
+    removeListeners();
+    listenerElement = cgl.canvas;
+    if(area.get()=='Document') listenerElement = document;
+}
+
+function removeListeners()
 {
     if(listenerElement)
     {
-    listenerElement.removeEventListener('touchmove', ontouchmove);
-    listenerElement.removeEventListener('touchstart', ontouchstart);
-    listenerElement.removeEventListener('touchend', ontouchend);
+        listenerElement.removeEventListener('touchmove', ontouchmove);
+        listenerElement.removeEventListener('touchstart', ontouchstart);
+        listenerElement.removeEventListener('touchend', ontouchend);
     }
-    listenerElement=null;
+
 }
 
 active.onChange=function()
 {
-    if(listenerElement)removeLiseteners();
+    removeListeners();
     if(active.get())addListeners();
 };
 

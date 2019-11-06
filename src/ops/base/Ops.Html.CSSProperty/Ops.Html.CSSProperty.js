@@ -1,15 +1,14 @@
-const inEle=op.inObject("Element");
-const inProperty=op.inValueString("Property");
-const inValue=op.inValue("Value");
-const inValueSuffix=op.inValueString("Value Suffix",'px');
-const outEle=op.outObject("HTML Element");
+const
+    inEle=op.inObject("Element"),
+    inProperty=op.inValueString("Property"),
+    inValue=op.inValue("Value"),
+    inValueSuffix=op.inValueString("Value Suffix",'px'),
+    outEle=op.outObject("HTML Element");
 
 inProperty.onChange=update;
 inValue.onChange=update;
 inValueSuffix.onChange=update;
-
 var ele=null;
-
 
 inEle.onChange=inEle.onLinkChanged=function()
 {
@@ -28,6 +27,6 @@ function update()
         var str=inValue.get()+inValueSuffix.get();
         ele.style[inProperty.get()]=str;
     }
-    
+
     outEle.set(inEle.get());
 }

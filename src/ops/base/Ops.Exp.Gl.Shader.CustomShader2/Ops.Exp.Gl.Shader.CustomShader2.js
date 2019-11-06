@@ -185,13 +185,13 @@ function parseUniforms(src)
                             initVectorUniform(vec);
 
                             const newInputX=op.inFloat(uniName+' X',0);
-                            newInputX.onChange=function(){vec.changed=true;}
+                            newInputX.onChange=function(){this.changed=true;}.bind(vec)
                             uniformInputs.push(newInputX);
                             group.push(newInputX);
                             vec.x=newInputX;
 
                             const newInputY=op.inFloat(uniName+' Y',0);
-                            newInputY.onChange=function(){vec.changed=true;}
+                            newInputY.onChange=function(){this.changed=true;}.bind(vec)
                             uniformInputs.push(newInputY);
                             group.push(newInputY);
                             vec.y=newInputY;
@@ -199,7 +199,7 @@ function parseUniforms(src)
                             if(num>2)
                             {
                                 const newInputZ=op.inFloat(uniName+' Z',0);
-                                newInputZ.onChange=function(){vec.changed=true;}
+                                newInputZ.onChange=function(){this.changed=true;}.bind(vec)
                                 uniformInputs.push(newInputZ);
                                 group.push(newInputZ);
                                 vec.z=newInputZ;
@@ -207,7 +207,7 @@ function parseUniforms(src)
                             else if(num>3)
                             {
                                 const newInputW=op.inFloat(uniName+' W',0);
-                                newInputW.onChange=function(){vec.changed=true;}
+                                newInputW.onChange=function(){this.changed=true;}.bind(vec)
                                 uniformInputs.push(newInputW);
                                 group.push(newInputW);
                                 vec.w=newInputW;

@@ -60,6 +60,10 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "5",
+                "name": "Area"
             }
         ],
         "portsOut": [
@@ -88,5 +92,12 @@
     ],
     "relatedops": [
         ""
+    ],
+    "changelog": [
+        {
+            "message": "added area parameter",
+            "author": "pandur",
+            "date": 1573030793127
+        }
     ]
 }
