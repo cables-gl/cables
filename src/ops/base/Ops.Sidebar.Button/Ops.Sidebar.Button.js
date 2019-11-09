@@ -6,6 +6,10 @@ var buttonTextPort = op.inValueString('Text', 'Button');
 var siblingsPort = op.outObject('childs');
 var buttonPressedPort = op.outTrigger('Pressed Trigger');
 
+const inGreyOut=op.inBool("Grey Out",false);
+const inVisible=op.inBool("Visible",true);
+
+
 // vars
 var el = document.createElement('div');
 el.classList.add('sidebar__item');
@@ -23,7 +27,21 @@ parentPort.onChange = onParentChanged;
 buttonTextPort.onChange = onButtonTextChanged;
 op.onDelete = onDelete;
 
-// functions
+var greyOut = document.createElement('div');
+greyOut.classList.add('sidebar__greyout');
+el.appendChild(greyOut);
+greyOut.style.display="none";
+
+inGreyOut.onChange=function()
+{
+    greyOut.style.display= inGreyOut.get() ? "block" : "none";
+};
+
+inVisible.onChange=function()
+{
+    el.style.display= inVisible.get() ? "block" : "none";
+};
+
 
 function onButtonClick() {
     buttonPressedPort.trigger();

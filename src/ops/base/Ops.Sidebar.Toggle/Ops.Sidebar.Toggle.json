@@ -26,6 +26,16 @@
                 "type": "0",
                 "name": "Default",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

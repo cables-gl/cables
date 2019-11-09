@@ -15,7 +15,7 @@ var offsetY=op.inValueFloat("offset Y");
 
 var colorize=op.inValueBool("colorize");
 var colorizeAdd=op.inValueSlider("colorize add");
-var meth=op.inValueSelect("mode",['normal','mul xyz','add z','add y','mul y','sub z']);
+var meth=op.inValueSelect("mode",['normal','mul xyz','add x','add y','add z','mul y','mul z','sub z']);
 
 colorize.set(false);
 
@@ -48,20 +48,15 @@ var updateMethod=function()
 {
     if(shader)
     {
-        if(flip.get()) shader.define(id+'FLIPY');
-            else shader.removeDefine(id+'FLIPY');
-
-        shader.removeDefine(id+'DISPLACE_METH_MULXYZ');
-        shader.removeDefine(id+'DISPLACE_METH_ADDZ');
-        shader.removeDefine(id+'DISPLACE_METH_ADDY');
-        shader.removeDefine(id+'DISPLACE_METH_MULY');
-        shader.removeDefine(id+'DISPLACE_METH_NORMAL');
-
-        if(meth.get()=='mul xyz') shader.define(id+'DISPLACE_METH_MULXYZ');
-        if(meth.get()=='add z') shader.define(id+'DISPLACE_METH_ADDZ');
-        if(meth.get()=='add y') shader.define(id+'DISPLACE_METH_ADDY');
-        if(meth.get()=='mul y') shader.define(id+'DISPLACE_METH_MULY');
-        if(meth.get()=='normal') shader.define(id+'DISPLACE_METH_NORMAL');
+        // if(flip.get()) shader.define(id+'FLIPY');
+        shader.toggleDefine(id+'FLIPY',flip.get());
+        shader.toggleDefine(id+'DISPLACE_METH_MULXYZ',meth.get()=='mul xyz');
+        shader.toggleDefine(id+'DISPLACE_METH_ADDZ',meth.get()=='add z');
+        shader.toggleDefine(id+'DISPLACE_METH_ADDY',meth.get()=='add y');
+        shader.toggleDefine(id+'DISPLACE_METH_ADDX',meth.get()=='add x');
+        shader.toggleDefine(id+'DISPLACE_METH_MULY',meth.get()=='mul y');
+        shader.toggleDefine(id+'DISPLACE_METH_MULZ',meth.get()=='mul z');
+        shader.toggleDefine(id+'DISPLACE_METH_NORMAL',meth.get()=='normal');
 
         updateRemoveZero();
     }
@@ -113,12 +108,19 @@ var srcBodyVert=''
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_ADDY'
     .endl()+'   pos.y+=({{mod}}_texVal * {{mod}}_extrude);'
-    // .endl()+'norm=normalize(norm+normalize(vec3(0.0,0.0+({{mod}}_texVal ),0.0)));'
+    .endl()+'#endif'
+
+    .endl()+'#ifdef '+id+'DISPLACE_METH_ADDX'
+    .endl()+'   pos.x+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
 
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_MULY'
     .endl()+'   pos.y+=(({{mod}}_texVal-0.5) * {{mod}}_extrude);'
+    .endl()+'#endif'
+
+    .endl()+'#ifdef '+id+'DISPLACE_METH_MULZ'
+    .endl()+'   pos.z+=(({{mod}}_texVal-0.5) * {{mod}}_extrude);'
     .endl()+'#endif'
 
     .endl()+'#ifdef '+id+'DISPLACE_METH_NORMAL'

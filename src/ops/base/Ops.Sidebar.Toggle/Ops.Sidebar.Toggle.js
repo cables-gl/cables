@@ -7,6 +7,8 @@ const inputValuePort = op.inValueBool('Input', DEFAULT_VALUE_DEFAULT);
 const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
 var defaultValuePort = op.inValueBool('Default', DEFAULT_VALUE_DEFAULT);
 defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
+const inGreyOut=op.inBool("Grey Out",false);
+const inVisible=op.inBool("Visible",true);
 
 // outputs
 var siblingsPort = op.outObject('childs');
@@ -16,9 +18,8 @@ var valuePort = op.outValue('Value', defaultValuePort.get());
 var el = document.createElement('div');
 el.classList.add('sidebar__item');
 el.classList.add('sidebar__toggle');
-if(DEFAULT_VALUE_DEFAULT) {
-    el.classList.add('sidebar__toggle--active');
-}
+if(DEFAULT_VALUE_DEFAULT) el.classList.add('sidebar__toggle--active');
+
 el.addEventListener('click', onInputClick);
 var label = document.createElement('div');
 label.classList.add('sidebar__item-label');
@@ -33,6 +34,11 @@ var input = document.createElement('div');
 input.classList.add('sidebar__toggle-input');
 el.appendChild(input);
 
+var greyOut = document.createElement('div');
+greyOut.classList.add('sidebar__greyout');
+el.appendChild(greyOut);
+greyOut.style.display="none";
+
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
@@ -42,20 +48,19 @@ op.onDelete = onDelete;
 setDefaultValueButtonPort.onTriggered = setDefaultValue;
 op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
 
-// functions
-
-function setDefaultValue() {
-  const defaultValue = inputValuePort.get();
-  defaultValuePort.set(defaultValue);
-  valuePort.set(defaultValue);
-  if(CABLES.UI  && gui.patch().isCurrentOp(op)){
-    gui.patch().showOpParams(op); /* update DOM */
-  }
+function setDefaultValue()
+{
+    const defaultValue = inputValuePort.get();
+    defaultValuePort.set(defaultValue);
+    valuePort.set(defaultValue);
+    if(CABLES.UI  && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op); /* update DOM */
 }
 
-function onInputClick() {
-    el.classList.toggle('sidebar__toggle--active')
-    if(el.classList.contains('sidebar__toggle--active')) {
+function onInputClick()
+{
+    el.classList.toggle('sidebar__toggle--active');
+    if(el.classList.contains('sidebar__toggle--active'))
+    {
         valuePort.set(true);
         inputValuePort.set(true);
         value.textContent = 'true';
@@ -64,14 +69,14 @@ function onInputClick() {
         inputValuePort.set(false);
         value.textContent = 'false';
     }
-    if(CABLES.UI  && gui.patch().isCurrentOp(op)){
-        gui.patch().showOpParams(op); /* update DOM */
-    }
+    if(CABLES.UI  && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op); /* update DOM */
 }
 
-function onInputValuePortChanged() {
+function onInputValuePortChanged()
+{
     var inputValue = inputValuePort.get();
-    if(inputValue) {
+    if(inputValue)
+    {
         el.classList.add('sidebar__toggle--active');
         valuePort.set(true);
         value.textContent = 'true';
@@ -95,45 +100,52 @@ function onDefaultValueChanged() {
     */
 }
 
-function onLabelTextChanged() {
+function onLabelTextChanged()
+{
     var labelText = labelPort.get();
     label.textContent = labelText;
-    if(CABLES.UI) {
-        op.setTitle('Toggle: ' + labelText);
-    }
+    if(CABLES.UI) op.setTitle('Toggle: ' + labelText);
 }
 
-function onParentChanged() {
+function onParentChanged()
+{
     var parent = parentPort.get();
-    if(parent && parent.parentElement) {
+    if(parent && parent.parentElement)
+    {
         parent.parentElement.appendChild(el);
         siblingsPort.set(null);
         siblingsPort.set(parent);
-    } else { // detach
-        if(el.parentElement) {
-            el.parentElement.removeChild(el);
-        }
     }
+    else if(el.parentElement) el.parentElement.removeChild(el);
 }
 
-function showElement(el) {
-    if(el) {
-        el.style.display = 'block';
-    }
+function showElement(el)
+{
+    if(el) el.style.display = 'block';
 }
 
-function hideElement(el) {
-    if(el) {
-        el.style.display = 'none';
-    }
+function hideElement(el)
+{
+    if(el) el.style.display = 'none';
 }
 
-function onDelete() {
+function onDelete()
+{
     removeElementFromDOM(el);
 }
 
-function removeElementFromDOM(el) {
-    if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);
-    }
+function removeElementFromDOM(el)
+{
+    if(el && el.parentNode && el.parentNode.removeChild) el.parentNode.removeChild(el);
 }
+
+inGreyOut.onChange=function()
+{
+    greyOut.style.display= inGreyOut.get() ? "block" : "none";
+};
+
+inVisible.onChange=function()
+{
+    el.style.display= inVisible.get() ? "block" : "none";
+};
+
