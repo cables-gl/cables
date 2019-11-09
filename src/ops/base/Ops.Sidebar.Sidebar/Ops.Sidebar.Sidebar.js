@@ -118,6 +118,25 @@ function initSidebarElement()
     element.classList.add(SIDEBAR_ID);
     var canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
 
+    // header...
+    var headerGroup = document.createElement('div');
+    headerGroup.classList.add('sidebar__group');
+    element.appendChild(headerGroup);
+    var header = document.createElement('div');
+    header.classList.add('sidebar__group-header');
+    element.appendChild(header);
+    var headerTitle = document.createElement('div');
+    headerTitle.classList.add('sidebar__group-header-title');
+    var headerTitleText = document.createElement('span');
+    headerTitleText.classList.add('sidebar__group-header-title-text');
+    headerTitleText.innerHTML="Sidebar";
+    headerTitle.appendChild(headerTitleText);
+    header.appendChild(headerTitle);
+    headerGroup.appendChild(header);
+    element.appendChild(headerGroup);
+headerGroup.addEventListener('click', onOpenCloseBtnClick);
+
+
     if(!canvasWrapper)
     {
         console.warn("[sidebar] no canvas parentelement found...");
@@ -135,6 +154,7 @@ function initSidebarElement()
     openCloseBtnIcon = document.createElement('span');
     openCloseBtnIcon.classList.add(SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS);
     openCloseBtn.appendChild(openCloseBtnIcon);
+
     return element;
 }
 
