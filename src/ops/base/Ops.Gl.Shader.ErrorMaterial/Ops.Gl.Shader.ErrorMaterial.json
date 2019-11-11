@@ -21,5 +21,11 @@
     "summary": "draw meshes using the cables error material shader",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

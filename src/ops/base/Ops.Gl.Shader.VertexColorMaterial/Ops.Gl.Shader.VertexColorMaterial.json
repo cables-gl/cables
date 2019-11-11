@@ -22,5 +22,15 @@
             }
         ],
         "name": "Ops.Gl.Shader.VertexColorMaterial"
+    },
+    "summary": "",
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
