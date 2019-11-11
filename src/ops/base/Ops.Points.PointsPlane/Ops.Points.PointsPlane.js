@@ -6,7 +6,9 @@ const
     inCenter=op.inValueBool("Center",true),
     outArr=op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
-    outArrayLength = op.outNumber("Array length");
+    outArrayLength = op.outNumber("Array length"),
+    outRowNums=op.outArray("Row Numbers"),
+    outColNums=op.outArray("Column Numbers");
 
 inNumX.onChange=generate;
 inNumY.onChange=generate;
@@ -15,6 +17,8 @@ inWidth.onChange=generate;
 inHeight.onChange=generate;
 
 var arr=[];
+var arrRowNums=[];
+var arrColNums=[];
 outArr.set(arr);
 generate();
 
@@ -23,8 +27,8 @@ function generate()
     arr.length = 0;
     const numX=inNumX.get();
     const numY=inNumY.get();
-    const stepY=inHeight.get()/numY;
-    const stepX=inWidth.get()/numX;
+    const stepY=inHeight.get()/(numY-1);
+    const stepX=inWidth.get()/(numX-1);
 
     var i=0;
 
@@ -33,29 +37,34 @@ function generate()
 
     if(inCenter.get())
     {
-        centerX=inWidth.get()/2;
+        centerX=(inWidth.get())/2;
         centerY=inHeight.get()/2;
     }
+
+    const l=Math.floor(numX)*Math.floor(numY)*3;
+
+    arr.length = l;
+    arrColNums.length = arrRowNums.length = l/3;
 
     for(var x=0;x<numX;x++)
     {
         for(var y=0;y<numY;y++)
         {
-            //original code, broken
+            arrColNums[i/3]=x;
+            arrRowNums[i/3]=y;
+
             arr[i++]=stepX*x-centerX;
             arr[i++]=stepY*y-centerY;
             arr[i++]=0;
 
-            //doesn't work ??
-            // arr[i*3+0]=stepX*x-centerX;
-            // arr[i*3+1]=stepY*y-centerY;
-            // arr[i*3+2]=0;
-
-            // arr.push(stepX*x-centerX);
-            // arr.push(stepY*y-centerY);
-            // arr.push(0);
         }
     }
+
+    outRowNums.set(null);
+    outRowNums.set(arrRowNums);
+
+    outColNums.set(null);
+    outColNums.set(arrColNums);
 
     outArr.set(null);
     outArr.set(arr);

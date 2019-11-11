@@ -25,6 +25,10 @@
                 "subType": "number"
             },
             {
+                "type": "5",
+                "name": "Title"
+            },
+            {
                 "type": "0",
                 "name": "Side",
                 "subType": "boolean"

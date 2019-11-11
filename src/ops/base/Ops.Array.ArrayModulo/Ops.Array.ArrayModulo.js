@@ -1,5 +1,5 @@
 var inArray = op.inArray("Array In");
-var inValue = op.inValue("Value",1.0);
+var inValue = op.inValue("Value",2.0);
 var outArray = op.outArray("Array Out");
 
 var newArr = [];
@@ -9,11 +9,11 @@ inValue.onChange = inArray.onChange = function()
 {
     var arr = inArray.get();
     if(!arr)return;
-    
+
     var modulo = inValue.get();
-    
+
     if(newArr.length != arr.length)newArr.length = arr.length;
-    
+
     var i = 0;
     for(i = 0;i < arr.length;i++)
     {
