@@ -169,9 +169,10 @@
             }
         ]
     },
-    "youtubeid": "tFM2Ixf-ixs",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": [
         "Ops.Gl.Meshes.PointCloudFromArray"
     ],
@@ -181,5 +182,8 @@
             "author": "pandur",
             "date": 1561041326814
         }
+    ],
+    "youtubeids": [
+        "tFM2Ixf-ixs"
     ]
 }

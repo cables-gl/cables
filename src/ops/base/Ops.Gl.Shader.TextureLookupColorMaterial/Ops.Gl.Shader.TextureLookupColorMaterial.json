@@ -56,11 +56,13 @@
         "name": "Ops.Gl.Shader.TextureLookupColorMaterial"
     },
     "summary": "lookup color values from a texture and use it as object color",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "youtubeids": []
 }

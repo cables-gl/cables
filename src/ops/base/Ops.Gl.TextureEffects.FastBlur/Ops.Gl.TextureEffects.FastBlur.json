@@ -27,5 +27,12 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.FastBlur"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Deprecated.Gl.TextureEffects.FastBlur renamed to Ops.Gl.TextureEffects.FastBlur",
+            "author": "pandur",
+            "date": 1573490089072
+        }
+    ]
 }

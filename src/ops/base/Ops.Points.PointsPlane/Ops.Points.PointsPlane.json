@@ -46,7 +46,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Array.PointArray.Field"
+        "name": "Ops.Points.PointsPlane"
     },
     "summary": "generate coordinates for a rectangular field of points (was Field)",
     "docs": {

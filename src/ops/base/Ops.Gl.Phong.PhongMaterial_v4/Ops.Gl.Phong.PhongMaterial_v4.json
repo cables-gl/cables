@@ -237,7 +237,9 @@
     ],
     "summary": "A shaded material for lighting objects",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": [
         "Ops.Gl.Phong.AmbientLight_v4",
         "Ops.Gl.Phong.DirectionalLight_v4",
