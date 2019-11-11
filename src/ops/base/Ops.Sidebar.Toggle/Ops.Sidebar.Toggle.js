@@ -26,13 +26,19 @@ label.classList.add('sidebar__item-label');
 var labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-var value = document.createElement('div');
-value.textContent = DEFAULT_VALUE_DEFAULT;
-value.classList.add('sidebar__item-value-label');
-el.appendChild(value);
-var input = document.createElement('div');
-input.classList.add('sidebar__toggle-input');
-el.appendChild(input);
+// var value = document.createElement('div');
+// value.textContent = DEFAULT_VALUE_DEFAULT;
+// value.classList.add('sidebar__item-value-label');
+// el.appendChild(value);
+// var input = document.createElement('div');
+// input.classList.add('sidebar__toggle-input');
+// el.appendChild(input);
+
+
+var icon = document.createElement('div');
+icon.classList.add('icon_toggle');
+el.appendChild(icon);
+
 
 var greyOut = document.createElement('div');
 greyOut.classList.add('sidebar__greyout');
@@ -63,11 +69,17 @@ function onInputClick()
     {
         valuePort.set(true);
         inputValuePort.set(true);
-        value.textContent = 'true';
+        // value.textContent = 'true';
+        icon.classList.add('icon_toggle_true');
+        icon.classList.remove('icon_toggle_false');
+
     } else {
+        icon.classList.remove('icon_toggle_true');
+        icon.classList.add('icon_toggle_false');
+
         valuePort.set(false);
         inputValuePort.set(false);
-        value.textContent = 'false';
+        // value.textContent = 'false';
     }
     if(CABLES.UI  && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op); /* update DOM */
 }
@@ -79,11 +91,11 @@ function onInputValuePortChanged()
     {
         el.classList.add('sidebar__toggle--active');
         valuePort.set(true);
-        value.textContent = 'true';
+        // value.textContent = 'true';
     } else {
         el.classList.remove('sidebar__toggle--active');
         valuePort.set(false);
-        value.textContent = 'false';
+        // value.textContent = 'false';
     }
 }
 

@@ -11,6 +11,7 @@ const BTN_TEXT_CLOSED = ''; // 'Show Controls';
 
 let openCloseBtn = null;
 let openCloseBtnIcon = null;
+var headerTitleText=null;
 
 // inputs
 var visiblePort = op.inValueBool("Visible", true);
@@ -18,6 +19,7 @@ var opacityPort = op.inValueSlider('Opacity', 1);
 var defaultMinimizedPort = op.inValueBool('Default Minimized');
 var minimizedOpacityPort = op.inValueSlider('Minimized Opacity', 0.5);
 
+var inTitle = op.inString('Title','Sidebar');
 var side = op.inValueBool('Side');
 
 // outputs
@@ -127,15 +129,14 @@ function initSidebarElement()
     element.appendChild(header);
     var headerTitle = document.createElement('div');
     headerTitle.classList.add('sidebar__group-header-title');
-    var headerTitleText = document.createElement('span');
+    headerTitleText = document.createElement('span');
     headerTitleText.classList.add('sidebar__group-header-title-text');
-    headerTitleText.innerHTML="Sidebar";
+    headerTitleText.innerHTML=inTitle.get();
     headerTitle.appendChild(headerTitleText);
     header.appendChild(headerTitle);
     headerGroup.appendChild(header);
     element.appendChild(headerGroup);
-headerGroup.addEventListener('click', onOpenCloseBtnClick);
-
+    headerGroup.addEventListener('click', onOpenCloseBtnClick);
 
     if(!canvasWrapper)
     {
@@ -157,6 +158,12 @@ headerGroup.addEventListener('click', onOpenCloseBtnClick);
 
     return element;
 }
+
+inTitle.onChange=function()
+{
+    if(headerTitleText)headerTitleText.innerHTML=inTitle.get();
+
+};
 
 function setClosed(b)
 {

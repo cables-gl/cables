@@ -2,10 +2,18 @@
 var parentPort = op.inObject('link');
 var labelPort = op.inString('Text', 'Group');
 var defaultMinimizedPort = op.inValueBool('Default Minimized');
+const inVisible=op.inBool("Visible",true);
 
 // outputs
 var nextPort = op.outObject('next');
 var childrenPort = op.outObject('childs');
+
+
+inVisible.onChange=function()
+{
+    el.style.display= inVisible.get() ? "block" : "none";
+};
+
 
 // vars
 var el = document.createElement('div');
