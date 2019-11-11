@@ -182,9 +182,10 @@
         "name": "Ops.Gl.Shader.IBLMaterial3"
     },
     "summary": " image based lighting material using cubemaps",
-    "youtubeid": "",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": [
         "Ops.Json3d.Json3dMesh",
         "Ops.Gl.Texture"
@@ -316,5 +317,6 @@
                 "text": "Shader/Material out"
             }
         ]
-    }
+    },
+    "youtubeids": []
 }

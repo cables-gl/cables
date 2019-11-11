@@ -16,5 +16,15 @@
     },
     "authorName": "pandur",
     "id": "732ff263-1aeb-4f39-969f-c781d7776cc8",
-    "created": 1537519830894
+    "created": 1537519830894,
+    "summary": "",
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
