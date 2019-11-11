@@ -636,9 +636,18 @@ Port.prototype._onTriggered = function ()
     if (this.parent.enabled && this.onTriggered) this.onTriggered();
 };
 
+
+Port.prototype._onSetProfiling = function (v)
+{
+    this.parent.patch.profiler.add("port", this);
+    this.setValue(v);
+    // if (this.parent.enabled && this.onTriggered) this.onTriggered();
+    this.parent.patch.profiler.add("port", null);
+}
+
 Port.prototype._onTriggeredProfiling = function ()
 {
-    this.parent.updateAnims();
+    // this.parent.updateAnims();
     this.parent.patch.profiler.add("port", this);
 
     if (this.parent.enabled && this.onTriggered) this.onTriggered();
