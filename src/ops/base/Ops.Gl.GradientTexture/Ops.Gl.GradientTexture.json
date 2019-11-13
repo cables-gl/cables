@@ -20,6 +20,10 @@
                 "subType": "integer"
             },
             {
+                "type": "3",
+                "name": "Gradient Array"
+            },
+            {
                 "type": "0",
                 "name": "Direction",
                 "subType": "string"
@@ -49,6 +53,10 @@
                 "text": "The resolution of the gradient in pixels. 256 is a good default value"
             },
             {
+                "name": "Gradient Array",
+                "text": "An array of Object containing pos,r,g,b,a information (see documentation for format)"
+            },
+            {
                 "name": "Direction",
                 "text": "`X or Y` render the texture horizontally or vertically"
             },
@@ -58,8 +66,8 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "youtubeids": []
 }
