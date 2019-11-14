@@ -1,0 +1,17 @@
+{
+    "id": "0f552671-7431-4031-97e3-211f2cf9f111",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1573749802227
+        },
+        {
+            "message": "Ops.User.cables.HSBtoRGBArray renamed to Ops.Array.HSBtoRGBArray",
+            "author": "cables",
+            "date": 1573749822395
+        }
+    ],
+    "authorName": "cables",
+    "created": 1573749804856
+}
