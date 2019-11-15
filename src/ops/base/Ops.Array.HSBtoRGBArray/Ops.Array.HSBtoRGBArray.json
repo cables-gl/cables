@@ -3,15 +3,60 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
+            "author": "simod",
             "date": 1573749802227
         },
         {
             "message": "Ops.User.cables.HSBtoRGBArray renamed to Ops.Array.HSBtoRGBArray",
-            "author": "cables",
+            "author": "simod",
             "date": 1573749822395
         }
     ],
-    "authorName": "cables",
-    "created": 1573749804856
+    "authorName": "simod",
+    "created": 1573749804856,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger Input"
+            },
+            {
+                "type": "3",
+                "name": "In Hue Array"
+            },
+            {
+                "type": "3",
+                "name": "In Saturation Array"
+            },
+            {
+                "type": "3",
+                "name": "In Brightness Array"
+            },
+            {
+                "type": "3",
+                "name": "In Alpha Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Output"
+            },
+            {
+                "type": "3",
+                "name": "Result Array"
+            },
+            {
+                "type": "0",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RGBA Tuple Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.HSBtoRGBArray"
+    }
 }
