@@ -48,23 +48,6 @@ updateLimit();
 inRot.onChange=inColor.onChange=inIgnoreAlpha.onChange=
     inTranslates.onChange=
     inScales.onChange=reset;
-/*
-var srcHeadVert=''
-    .endl()+'UNI float do_instancing;'
-    .endl()+'UNI float MOD_scale;'
-
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   IN mat4 instMat;'
-    .endl()+'   OUT mat4 instModelMat;'
-    .endl()+'#endif';
-
-var srcBodyVert=''
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'    mMatrix*=instMat;'
-    .endl()+'    pos.xyz*=MOD_scale;'
-    .endl()+'#endif'
-    .endl();
-*/
 
 geom.onChange=function()
 {
@@ -140,16 +123,16 @@ function setupArray()
         instColorArray[i*4+1] = colArr[i*4+1];
         instColorArray[i*4+2] = colArr[i*4+2];
         instColorArray[i*4+3] = inIgnoreAlpha.get() ? 1 : colArr[i*4+3];
-        //if(scales && scales.length>i) mat4.scale(m,m,[scales[i],scales[i+1],scales[i+2]]);
 
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
-            else mat4.scale(m,m,[1,1,1]);
+        else mat4.scale(m,m,[1,1,1]);
+
         for(var a=0;a<16;a++) matrixArray[i*16+a]=m[a];
     }
 
     mesh.numInstances=num;
 
-    mesh.addAttribute('instMat',matrixArray,16);
+    mesh.addAttribute('instMat', matrixArray,16);
     mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
     recalc=false;
