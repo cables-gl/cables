@@ -114,7 +114,7 @@ function hexToRgbNorm(hexColor) {
     if(!hexColor || hexColor.length !== 7) { return; }
     return hexColor
         .match(/[A-Za-z0-9]{2}/g)
-        .map(function(v) { 
+        .map(function(v) {
             return parseInt(v, 16) / 255;
         });
 
@@ -198,7 +198,7 @@ function onDefaultValueChanged() {
         }
         if(defaultValue.length === 7) {
             input.value = defaultValue;
-            colorInput.value = defaultValue;    
+            colorInput.value = defaultValue;
             setColorOutPorts(defaultValue);
         }
     }
@@ -208,7 +208,7 @@ function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
     if(CABLES.UI) {
-        op.setTitle('Text Input: ' + labelText);    
+        op.setTitle('Color Picker: ' + labelText);
     }
 }
 
@@ -220,7 +220,7 @@ function onParentChanged() {
         siblingsPort.set(parent);
     } else { // detach
         if(el.parentElement) {
-            el.parentElement.removeChild(el);    
+            el.parentElement.removeChild(el);
         }
     }
 }
@@ -243,6 +243,6 @@ function onDelete() {
 
 function removeElementFromDOM(el) {
     if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);    
+        el.parentNode.removeChild(el);
     }
 }

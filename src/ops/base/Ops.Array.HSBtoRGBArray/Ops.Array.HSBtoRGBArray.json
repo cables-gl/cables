@@ -58,5 +58,58 @@
             }
         ],
         "name": "Ops.Array.HSBtoRGBArray"
+    },
+    "summary": "generates RGBA array from up to 4 arrays (HSBA)",
+    "issues": "",
+    "collections": [
+        "pointArrays",
+        "generator",
+        "random",
+        "converter"
+    ],
+    "relatedops": [
+        "Ops.Array.RandomNumbersArray",
+        "Ops.Array.RandomNumbersArray3"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger Input",
+                "text": "Trigger input"
+            },
+            {
+                "name": "In Hue Array",
+                "text": "Hue In Array with range`[0, 1]`"
+            },
+            {
+                "name": "In Saturation Array",
+                "text": "Saturation In Array with range`[0, 1]` - if not connected, default output value is `0.5`"
+            },
+            {
+                "name": "In Brightness Array",
+                "text": "Brightness In Array with range`[0, 1]` - if not connected, default output value is `1`"
+            },
+            {
+                "name": "In Alpha Array",
+                "text": "Alpha/Opacity In Array with range`[0, 1]` - if not connceted, default output value is `1`"
+            },
+            {
+                "name": "Trigger Output",
+                "text": "Trigger output"
+            },
+            {
+                "name": "Result Array",
+                "text": "Resulting RGBA array output"
+            },
+            {
+                "name": "Array Length",
+                "text": "Total length of the array"
+            },
+            {
+                "name": "RGBA Tuple Length",
+                "text": "amount of RGBA tuples"
+            }
+        ]
     }
 }

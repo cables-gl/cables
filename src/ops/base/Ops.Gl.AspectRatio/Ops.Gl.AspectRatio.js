@@ -21,9 +21,21 @@ const
     outHeight=op.outValue("Height"),
     inAspect=op.inValueSelect('Aspect Ratio',aspectTitles,aspects[0].title),
     inCustom=op.inValueFloat("Custom",1.777777);
-    // blackBars=op.inValueBool("Black Bars");
 
+const
+    useVPSize=op.inValueBool("use viewport size",true),
+    width=op.inValueInt("texture width",512),
+    height=op.inValueInt("texture height",512);
 
+op.setPortGroup("Size",[useVPSize,width,height]);
+useVPSize.onChange=updateVpSize;
+function updateVpSize()
+{
+    width.setUiAttribs({greyout:useVPSize.get()});
+    height.setUiAttribs({greyout:useVPSize.get()});
+}
+
+const prevViewPort=[];
 const cgl=op.patch.cgl;
 var w=1000,h=1000,x,y;
 var ratio=1;
@@ -59,18 +71,28 @@ function changedRatio()
 
 function resize()
 {
-    var _w=cgl.canvasHeight*ratio;
-    var _h=cgl.canvasHeight;
-    var _x=0;
-    var _y=0;
-    if(_w>cgl.canvasWidth)
+
+    var theWidth=cgl.canvasWidth;
+    var theHeight=cgl.canvasHeight;
+
+    if(!useVPSize.get())
     {
-       _w=cgl.canvasWidth;
-       _h=cgl.canvasWidth/ratio;
+        theWidth=width.get();
+        theHeight=height.get();
     }
 
-    if(_w<cgl.canvasWidth) _x=(cgl.canvasWidth-_w)/2;
-    if(_h<cgl.canvasHeight) _y=(cgl.canvasHeight-_h)/2;
+    var _w=theHeight*ratio;
+    var _h=theHeight;
+    var _x=0;
+    var _y=0;
+    if(_w>theWidth)
+    {
+       _w=theWidth;
+       _h=theWidth/ratio;
+    }
+
+    if(_w<theWidth) _x=(theWidth-_w)/2;
+    if(_h<theHeight) _y=(theHeight-_h)/2;
 
 
     _w=Math.ceil(_w);
@@ -102,11 +124,11 @@ op.onDelete=function()
 
 render.onTriggered=function()
 {
-    // if(blackBars.get())
-    // {
-    //     cgl.gl.clearColor(0,0,0,1);
-    //     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    // }
+    var vp=cgl.getViewPort();
+    prevViewPort[0]=vp[0];
+    prevViewPort[1]=vp[1];
+    prevViewPort[2]=vp[2];
+    prevViewPort[3]=vp[3];
 
     resize();
     x=Math.ceil(x);
@@ -116,10 +138,9 @@ render.onTriggered=function()
 
     cgl.setViewPort(x,y,w,h);
 
-
-
     mat4.perspective(cgl.pMatrix,45, ratio, 0.1, 1100.0);
 
     trigger.trigger();
 
+    cgl.setViewPort(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3]);
 };

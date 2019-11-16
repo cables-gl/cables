@@ -7,16 +7,23 @@ const exe=op.inTriggerButton("exe"),
     value3=op.inValueFloat("Value 3"),
     values=op.outArray("values");
 
+var newArr=[];
+
 function update()
 {
-    if(!array.get())return;
-    const idx=Math.abs(Math.floor(index.get()));
-    array.get()[idx*3+0]=value1.get();
-    array.get()[idx*3+1]=value2.get();
-    array.get()[idx*3+2]=value3.get();
+    var arr=array.get();
+    if(!arr)return;
+
+    newArr.length=arr.length;
+    for(var i=0;i<arr.length;i++) newArr[i]=arr[i];
+
+    const idx=3*Math.abs(Math.floor(index.get()));
+    newArr[idx+0]=value1.get();
+    newArr[idx+1]=value2.get();
+    newArr[idx+2]=value3.get();
 
     values.set(null);
-    values.set(array.get());
+    values.set(newArr);
 }
 
 exe.onTriggered=update;

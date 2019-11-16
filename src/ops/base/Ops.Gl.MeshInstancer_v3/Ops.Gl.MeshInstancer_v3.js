@@ -37,7 +37,9 @@ op.toWorkPortsNeedToBeLinked(geom);
 
 doLimit.onChange=updateLimit;
 exe.onTriggered=doRender;
-exe.onLinkChanged=removeModule;
+exe.onLinkChanged=function() {
+    if (!exe.isLinked()) removeModule();
+}
 
 var matrixArray=new Float32Array(1);
 var instColorArray = new Float32Array(1);
@@ -84,6 +86,11 @@ function setupArray()
 
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
+
+    op.log("setupArray");
+
+    num=Math.floor(transforms.length/3);
+
     var colArr = inColor.get();
     if (!colArr) {
         colArr = [];
@@ -92,8 +99,6 @@ function setupArray()
             colArr[i] = 1;
         }
     }
-
-    num=Math.floor(transforms.length/3);
     var scales=inScales.get();
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
@@ -166,15 +171,15 @@ function doRender()
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
                 });
-
-            fragMod = shader.addModule({
-                name: "MODULE_COLOR",
-                priority: -2,
-                title: op.objName,
-                srcHeadFrag:srcHeadFrag,
-                srcBodyFrag:srcBodyFrag,
-            });
-
+            if (inColor.get()) {
+                fragMod = shader.addModule({
+                    name: "MODULE_COLOR",
+                    priority: -2,
+                    title: op.objName,
+                    srcHeadFrag:srcHeadFrag,
+                    srcBodyFrag:srcBodyFrag,
+                });
+            }
             shader.define('INSTANCING');
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
