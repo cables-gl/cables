@@ -44,9 +44,17 @@
                 "type": "0",
                 "name": "Array length",
                 "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Row Numbers"
+            },
+            {
+                "type": "3",
+                "name": "Column Numbers"
             }
         ],
-        "name": "Ops.Array.PointArray.Field"
+        "name": "Ops.Points.PointsPlane"
     },
     "summary": "generate coordinates for a rectangular field of points (was Field)",
     "docs": {

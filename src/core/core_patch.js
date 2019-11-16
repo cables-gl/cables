@@ -51,6 +51,7 @@ const Patch = function (cfg)
     this.aborted = false;
     this.loading = new LoadingStatus(this);
     this._crashedOps = [];
+    this._renderOneFrame=false;
 
     this._perf = {
         fps: 0,
@@ -151,6 +152,12 @@ Patch.prototype.isPlaying = function ()
 {
     return !this._paused;
 };
+
+Patch.prototype.isRenderingOneFrame = function ()
+{
+    return this._renderOneFrame;
+};
+
 
 Patch.prototype.renderOneFrame = function ()
 {
@@ -555,21 +562,12 @@ Patch.prototype.exec = function (e)
         this._frameWasdelayed = false;
     }
 
-    if (this._renderOneFrame && this.onOneFrameRendered)
+    if (this._renderOneFrame) 
     {
-        this.onOneFrameRendered();
+        if(this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
+        this.emitEvent("renderedOneFrame");
         this._renderOneFrame = false;
     }
-
-
-
-    // this._perf = {
-    //     fps: 0,
-    //     ms: 0,
-    //     _fpsFrameCount: 0,
-    //     _fpsMsCount: 0,
-    //     _fpsStart: 0,
-    // };
 
     if (CABLES.now() - this._perf._fpsStart >= 1000)
     {

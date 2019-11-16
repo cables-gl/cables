@@ -128,8 +128,13 @@
     "id": "7857ee9e-6d60-4c30-9bc0-dfdddf2b47ad",
     "created": 1508327382364,
     "summary": "Easy to use image based lighting Material",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

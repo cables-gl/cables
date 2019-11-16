@@ -20,8 +20,13 @@
         "name": "Ops.Gl.Shader.ShowTexCoordsMaterial"
     },
     "summary": "visualize texturecoordinates/UV mapping of a mesh ",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

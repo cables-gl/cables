@@ -16,6 +16,11 @@
                 "type": "0",
                 "name": "Default Minimized",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

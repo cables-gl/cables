@@ -567,11 +567,7 @@ const Context = function (_patch)
                 {
                     anchor.click();
                     if (cb) cb(blob);
-
-                    // anchor.remove(); 
-
                 },100);
-
                 
             }
             else

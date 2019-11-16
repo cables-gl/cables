@@ -8,7 +8,7 @@ const
 op.setPortGroup("Controls",[playPause,reset,inSpeed]);
 
 const timer=new CABLES.Timer();
-var lastTime=0;
+var lastTime=null;
 var time=0;
 var syncTimeline=false;
 
@@ -29,10 +29,12 @@ function setState()
     }
 }
 
-reset.onTriggered=function()
+reset.onTriggered=doReset;
+
+function doReset()
 {
     time=0;
-    lastTime=0;
+    lastTime=null;
     timer.setTime(0);
     outTime.set(0);
 };
@@ -44,28 +46,42 @@ inSyncTimeline.onChange=function()
     reset.setUiAttribs({greyout:syncTimeline});
 };
 
-op.onAnimFrame=function(t)
+op.onAnimFrame=function(tt)
 {
     if(timer.isPlaying())
     {
 
+        if(CABLES.overwriteTime!==undefined)
+        {
+            // console.log(t);
+
+            outTime.set(CABLES.overwriteTime*inSpeed.get());
+
+        } else
+
         if(syncTimeline)
         {
-            outTime.set(t*inSpeed.get());
+            outTime.set(tt*inSpeed.get());
         }
         else
         {
             timer.update();
             var timerVal=timer.get();
 
-            if(lastTime===0)
+
+
+            if(lastTime===null)
             {
                 lastTime=timerVal;
                 return;
             }
 
-            const t=timerVal-lastTime;
+            var t=Math.abs(timerVal-lastTime);
             lastTime=timerVal;
+
+
+
+
             time+=t*inSpeed.get();
             if(time!=time)time=0;
             outTime.set(time);

@@ -934,7 +934,12 @@ const Op = function ()
 
     Op.prototype.profile = function (enable)
     {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
+        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+        {
+            this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
+            this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
+        }
+
     };
 
     Op.prototype.findParent = function (objName)

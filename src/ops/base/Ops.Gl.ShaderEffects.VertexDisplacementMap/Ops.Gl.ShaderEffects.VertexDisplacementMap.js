@@ -15,7 +15,7 @@ var offsetY=op.inValueFloat("offset Y");
 
 var colorize=op.inValueBool("colorize");
 var colorizeAdd=op.inValueSlider("colorize add");
-var meth=op.inValueSelect("mode",['normal','mul xyz','add x','add y','add z','mul y','mul z','sub z']);
+var meth=op.inValueSelect("mode",['normal','mul xyz','sub x','add x','add y','add z','mul y','mul z','sub z']);
 
 colorize.set(false);
 
@@ -54,6 +54,7 @@ var updateMethod=function()
         shader.toggleDefine(id+'DISPLACE_METH_ADDZ',meth.get()=='add z');
         shader.toggleDefine(id+'DISPLACE_METH_ADDY',meth.get()=='add y');
         shader.toggleDefine(id+'DISPLACE_METH_ADDX',meth.get()=='add x');
+        shader.toggleDefine(id+'DISPLACE_METH_SUBX',meth.get()=='sub x');
         shader.toggleDefine(id+'DISPLACE_METH_MULY',meth.get()=='mul y');
         shader.toggleDefine(id+'DISPLACE_METH_MULZ',meth.get()=='mul z');
         shader.toggleDefine(id+'DISPLACE_METH_NORMAL',meth.get()=='normal');
@@ -110,8 +111,14 @@ var srcBodyVert=''
     .endl()+'   pos.y+=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
 
+
+
     .endl()+'#ifdef '+id+'DISPLACE_METH_ADDX'
     .endl()+'   pos.x+=({{mod}}_texVal * {{mod}}_extrude);'
+    .endl()+'#endif'
+
+    .endl()+'#ifdef '+id+'DISPLACE_METH_SUBX'
+    .endl()+'   pos.x-=({{mod}}_texVal * {{mod}}_extrude);'
     .endl()+'#endif'
 
 

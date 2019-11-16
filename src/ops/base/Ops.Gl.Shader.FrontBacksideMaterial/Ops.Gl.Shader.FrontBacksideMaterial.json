@@ -20,8 +20,13 @@
         "name": "Ops.Gl.Shader.FrontBacksideMaterial"
     },
     "summary": "see which faces are facing the camera",
-    "youtubeid": "",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": []
 }

@@ -30,10 +30,10 @@ const Profiler = function ()
 
                     if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)
                     {
-                        if (items[currentId].peak > 1 && object)
-                        {
-                            Log.log("PEAK ", object.parent.objName);
-                        }
+                        // if (items[currentId].peak > 1 && object)
+                        // {
+                        //     Log.log("PEAK ", object.parent.objName);
+                        // }
 
                         items[currentId].peak = 0;
                         items[currentId].peakTime = now();

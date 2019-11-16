@@ -140,7 +140,7 @@ export function extendMeshWithFeedback(Mesh)
 
     Mesh.prototype.unBindFeedbacks = function ()
     {
-        for (i = 0; i < this._feedBacks.length; i++)
+        for (var i = 0; i < this._feedBacks.length; i++)
         {
             // this._cgl.gl.disableVertexAttribArray(this._feedBacks[i].attrib.loc);
             this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, i, null);
