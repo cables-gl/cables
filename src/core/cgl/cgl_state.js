@@ -224,7 +224,7 @@ const Context = function (_patch)
         self.setShader(simpleShader);
     };
 
-    this.screenShot = function (cb, doScreenshotClearAlpha)
+    this.screenShot = function (cb, doScreenshotClearAlpha,mimeType, quality)
     {
         if (doScreenshotClearAlpha)
         {
@@ -240,7 +240,7 @@ const Context = function (_patch)
             {
                 if (cb) cb(blob);
                 else Log.log("no screenshot callback...");
-            });
+            },mimeType,quality);
         }
     };
 
