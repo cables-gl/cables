@@ -1,0 +1,103 @@
+{
+    "id": "c05e54a3-3ed5-4941-a412-01134f53f0ac",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1573902407264
+        },
+        {
+            "message": "Ops.User.cables.Renderanim2 renamed to Ops.Gl.Renderanim2",
+            "author": "cables",
+            "date": 1573993578343
+        }
+    ],
+    "authorName": "cables",
+    "created": 1573902410722,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "File Type",
+                "group": "File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Filename",
+                "group": "File",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Quality",
+                "group": "File",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Duration Type",
+                "group": "Timing"
+            },
+            {
+                "type": "0",
+                "name": "Duration",
+                "group": "Timing",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "FPS",
+                "group": "Timing",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Use Canvas Size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Start"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Progress",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Status"
+            },
+            {
+                "type": "0",
+                "name": "Started",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.cables.Renderanim2"
+    }
+}
