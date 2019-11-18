@@ -34,6 +34,21 @@
                 "type": "0",
                 "name": "b",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "subType": "number"
             }
         ],
         "portsOut": [

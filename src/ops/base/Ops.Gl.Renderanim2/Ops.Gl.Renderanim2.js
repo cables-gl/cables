@@ -1,21 +1,16 @@
 const
     exec=op.inTrigger("Render"),
     next=op.outTrigger("Next"),
-
     inType=op.inDropDown("File Type",['PNG','JPG','WebP','WebM'],'PNG'),
-    inFilePrefix=op.inInt("Filename","cables"),
+    inFilePrefix=op.inString("Filename","cables"),
     inQuality=op.inFloatSlider("Quality",0.8),
-
     inDurType=op.inSwitch("Duration Type",['Seconds','Frames'],"Seconds"),
     inDuration=op.inInt("Duration",1),
     inFps=op.inInt("FPS",30),
-
     useCanvasSize=op.inValueBool("Use Canvas Size",true),
     inWidth=op.inValueInt("texture width",512),
     inHeight=op.inValueInt("texture height",512),
-
     inStart=op.inTriggerButton("Start"),
-
     outProgress=op.outNumber("Progress",0),
     outStatus=op.outString("Status","Waiting"),
     outStarted=op.outBool("Started");
@@ -45,6 +40,9 @@ var oldSizeH=CABLES.patch.cgl.canvasHeight;
 
 inType.onChange=updateQuality;
 useCanvasSize.onChange=updateSize;
+
+console.log("hello renaderanim!")
+
 
 updateQuality();
 updateSize();

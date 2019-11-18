@@ -1,6 +1,7 @@
 UNI float MOD_scale;
 UNI float MOD_amount;
 UNI float MOD_r,MOD_g,MOD_b;
+UNI float MOD_x,MOD_y,MOD_z;
 
 IN vec4 MOD_pos;
 
@@ -9,6 +10,7 @@ vec4 MOD_mod289(vec4 x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
 vec4 MOD_perm(vec4 x){return MOD_mod289(((x * 34.0) + 1.0) * x);}
 
 float MOD_meshPixelNoise(vec3 p){
+    p+=vec3(MOD_x,MOD_y,MOD_z);
     vec3 a = floor(p);
     vec3 d = p - a;
     d = d * d * (3.0 - 2.0 * d);
