@@ -341,26 +341,27 @@ inToggleDoubleSided.onChange = function () {
 // * INIT UNIFORMS *
 const initialUniforms = [
     new CGL.Uniform(shader, "i", "numLights", MAX_LIGHTS),
-    new CGL.Uniform(shader, "f", "inDiffuseR", inDiffuseR),
-    new CGL.Uniform(shader, "f", "inDiffuseG", inDiffuseG),
-    new CGL.Uniform(shader, "f", "inDiffuseB", inDiffuseB),
-    new CGL.Uniform(shader, "f", "inAlpha", inDiffuseA),
+
+    new CGL.Uniform(shader, "4f", "inMaterialProperties", inAlbedo, inRoughness, inShininess, inSpecularCoefficient),
+    //new CGL.Uniform(shader, "2f", "inAlbedoRoughness", [inAlbedo, inRoughness]),
+    //new CGL.Uniform(shader, "f", "inAlbedo", inAlbedo),
+    //new CGL.Uniform(shader, "f", "inRoughness", inRoughness),
+
+    //new CGL.Uniform(shader, "2f", "inShininessSpecular", inShininess, inSpecularCoefficient),
     new CGL.Uniform(shader, "f", "shininess", inShininess),
     new CGL.Uniform(shader, "f", "inSpecularCoefficient", inSpecularCoefficient),
-    new CGL.Uniform(shader, "f", "inNormalIntensity", inNormalIntensity),
-    new CGL.Uniform(shader, "f", "inAoIntensity", inAoIntensity),
-    new CGL.Uniform(shader, "f", "inSpecularIntensity", inSpecularIntensity),
-    new CGL.Uniform(shader, "f", "inEmissiveIntensity", inEmissiveIntensity),
-    new CGL.Uniform(shader, "f", "inDiffuseRepeatX", inDiffuseRepeatX),
-    new CGL.Uniform(shader, "f", "inDiffuseRepeatY", inDiffuseRepeatY),
-    new CGL.Uniform(shader, "f", "inTextureOffsetX", inTextureOffsetX),
-    new CGL.Uniform(shader, "f", "inTextureOffsetY", inTextureOffsetY),
-    new CGL.Uniform(shader, "f", "inFresnel", inFresnel),
-    new CGL.Uniform(shader, "f", "inFresnelR", inFresnelR),
-    new CGL.Uniform(shader, "f", "inFresnelG", inFresnelG),
-    new CGL.Uniform(shader, "f", "inFresnelB", inFresnelB),
-    new CGL.Uniform(shader, "f", "inAlbedo", inAlbedo),
-    new CGL.Uniform(shader, "f", "inRoughness", inRoughness),
+
+    new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA),
+
+
+
+
+    new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
+
+
+    new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
+    new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
+
 ];
 
 const lightUniforms = [];
