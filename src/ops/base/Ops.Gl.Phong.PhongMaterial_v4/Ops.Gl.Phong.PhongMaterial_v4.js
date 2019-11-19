@@ -15,6 +15,7 @@ function Light(config) {
 
 
 const cgl = op.patch.cgl;
+
 const inTrigger = op.inTrigger("Trigger In");
 
 
@@ -292,7 +293,8 @@ inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 
-const MAX_LIGHTS = 16;
+const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 7 : 16;
 
 shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
 shader.define("SPECULAR_PHONG");
@@ -340,25 +342,9 @@ inToggleDoubleSided.onChange = function () {
 
 // * INIT UNIFORMS *
 const initialUniforms = [
-    new CGL.Uniform(shader, "i", "numLights", MAX_LIGHTS),
-
     new CGL.Uniform(shader, "4f", "inMaterialProperties", inAlbedo, inRoughness, inShininess, inSpecularCoefficient),
-    //new CGL.Uniform(shader, "2f", "inAlbedoRoughness", [inAlbedo, inRoughness]),
-    //new CGL.Uniform(shader, "f", "inAlbedo", inAlbedo),
-    //new CGL.Uniform(shader, "f", "inRoughness", inRoughness),
-
-    //new CGL.Uniform(shader, "2f", "inShininessSpecular", inShininess, inSpecularCoefficient),
-    new CGL.Uniform(shader, "f", "shininess", inShininess),
-    new CGL.Uniform(shader, "f", "inSpecularCoefficient", inSpecularCoefficient),
-
     new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA),
-
-
-
-
     new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
-
-
     new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
     new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
 
@@ -380,19 +366,34 @@ const initialLight = new Light({
 });
 
 for (let i = 0; i < MAX_LIGHTS; i += 1) {
+    const lightProperties = [
+        i === 0 ? initialLight.intensity : 0,
+        i === 0 ? initialLight.radius : 0,
+        i === 0 ? initialLight.falloff : 0
+        ];
+    const lightPropertiesUniform = new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".lightProperties", lightProperties);
+    const spotProperties = [null, null, null];
+    const spotPropertiesUniform = new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".spotProperties", spotProperties);
+
     lightUniforms.push({
-        type: new CGL.Uniform(shader, "i", "lights" + "[" + i + "]" + ".type", i === 0 ? LIGHT_TYPES.point : LIGHT_TYPES.none),
         color: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".color", i === 0 ? initialLight.color : [0, 0, 0]),
+
         specular: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".specular", i === 0 ? initialLight.specular : [1, 1, 1]),
+
         position: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".position", i === 0 ? initialLight.position : [0, 0, 0]),
-        intensity: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".intensity", i === 0 ? initialLight.intensity : 0),
-        radius: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".radius", i === 0 ? initialLight.radius : 0),
-        falloff: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".falloff", i === 0 ? initialLight.falloff : 0),
+
+        type: new CGL.Uniform(shader, "i", "lights" + "[" + i + "]" + ".type", i === 0 ? LIGHT_TYPES.point : LIGHT_TYPES.none),
+
+        lightProperties: lightPropertiesUniform,
+        intensity: true,
+        radius: true,
+        falloff: true,
 
         /* SPOT LIGHT */
-        spotExponent: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".spotExponent", null),
-        cosConeAngle: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".cosConeAngle", null),
-        cosConeAngleInner: new CGL.Uniform(shader, "f", "lights" + "[" + i + "]" + ".cosConeAngleInner", null),
+        spotProperties: spotPropertiesUniform,
+        spotExponent: true,
+        cosConeAngle: true,
+        cosConeAngleInner: true,
         conePointAt: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".conePointAt", null)
     });
 };
@@ -430,23 +431,31 @@ inTrigger.onTriggered = function() {
             for (let i = 0; i < lightUniforms.length; i += 1) {
                 if (i === 0) {
                     const keys = Object.keys(initialLight);
-
                     for (let j = 0; j < keys.length; j += 1) {
                         const key = keys[j];
                         if (key === "type") {
                             lightUniforms[i][key].setValue(LIGHT_TYPES[initialLight[key]]);
-                        }
-                        else if (key === "position") {
-                            /* transform for default light */
-                            mat4.invert(inverseViewMat, cgl.vMatrix);
-                            vec3.transformMat4(camPos, vecTemp, inverseViewMat);
-                            lightUniforms[i].position.setValue(camPos);
+                        } else {
+                            if (lightUniforms[i][key]) {
+                                if (key === "radius" || key === "intensity" || key === "falloff") {
+                                    lightUniforms[i].lightProperties.setValue([initialLight.intensity, initialLight.radius, initialLight.falloff]);
+                                }
+                                else if (key === "spotExponent" || key === "cosConeAngle" || key === "cosConeAngleInner") {
+                                        lightUniforms[i].spotProperties.setValue([null, null, null]);
+                                }
+                                else if (key === "position") {
+                                    /* transform for default light */
+                                    mat4.invert(inverseViewMat, cgl.vMatrix);
+                                    vec3.transformMat4(camPos, vecTemp, inverseViewMat);
+                                    lightUniforms[i].position.setValue(camPos);
 
+                                }
+                                else {
+                                    lightUniforms[i][key].setValue(initialLight[key]);
+                                }
+                            }
                         }
 
-                        else {
-                            lightUniforms[i][key].setValue(initialLight[key]);
-                        }
                     }
                 } else {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);
@@ -458,19 +467,25 @@ inTrigger.onTriggered = function() {
             op.setError(null);
             for (let i = 0; i < MAX_LIGHTS; i += 1) {
                 const light = cgl.lightStack[i];
-
                 if (!light) {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);
                     continue;
                 }
 
                 const keys = Object.keys(light);
-
                 for (let j = 0; j < keys.length; j += 1) {
                     const key = keys[j];
                     if (key === "type") lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
                     else {
-                        if (lightUniforms[i][key]) lightUniforms[i][key].setValue(light[key]);
+                        if (lightUniforms[i][key]) {
+                            if (key === "radius" || key === "intensity" || key === "falloff") {
+                                lightUniforms[i].lightProperties.setValue([light.intensity, light.radius, light.falloff]);
+                            }
+                            else if (key === "spotExponent" || key === "cosConeAngle" || key === "cosConeAngleInner") {
+                                lightUniforms[i].spotProperties.setValue([light.spotExponent, light.cosConeAngle, light.cosConeAngleInner]);
+                            }
+                            else lightUniforms[i][key].setValue(light[key]);
+                        }
 
                     }
                 }
@@ -480,7 +495,6 @@ inTrigger.onTriggered = function() {
     } else {
         cgl.lightStack = [];
     }
-    op.log(shader.getUniforms());
 }
 
 updateDiffuseTexture();

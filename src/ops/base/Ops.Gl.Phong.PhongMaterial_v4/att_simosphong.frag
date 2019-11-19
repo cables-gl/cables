@@ -1,9 +1,7 @@
 
 // https://www.mathematik.uni-marburg.de/~thormae/lectures/graphics1/code/WebGLShaderLightMat/ShaderLightMat.html
 struct Material {
-	vec3 ambient;
 	vec3 diffuse;
-	vec3 specular;
 	float shininess;
 	float specularCoefficient;
 };
@@ -11,9 +9,10 @@ struct Material {
 struct Light {
     vec3 position;
     vec3 color;
-    vec3 ambient;
     vec3 specular;
     int type;
+    vec3 lightProperties; // x - intensity, y - radius, z - falloff
+    vec3 spotProperties; // x - spotExponent, y - cosConeAngle, z - cosConeAngleInner
     float intensity;
     float radius;
     float falloff;
@@ -192,7 +191,7 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
 
     #ifdef HAS_TEXTURE_DIFFUSE
     vec2 uv = vec2(texCoord.s,1.0-texCoord.t);
-    ambientColor = vec3(0.); //light.ambient * vec3(texture(texDiffuse, uv));
+    ambientColor = vec3(0.);
     #endif
 
     vec3 diffuseColor = lambertian*material.diffuse*light.color;
@@ -241,11 +240,12 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
 
-    #ifdef ENABLE_FRESNEL
-        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
-    #endif
 
     vec3 color = ambientColor + light.intensity*(diffuseColor + specularColor);
+
+    #ifdef ENABLE_FRESNEL
+        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+    #endif
 
     return color;
 }
@@ -344,12 +344,12 @@ vec3 SpotLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
 
-    #ifdef ENABLE_FRESNEL
-        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
-    #endif
 
     vec3 color = ambientColor+attenuation*light.intensity*(diffuseColor + specularColor);
 
+    #ifdef ENABLE_FRESNEL
+        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+    #endif
 
     return color;
 }
@@ -423,11 +423,12 @@ vec3 PointLight(Light light, Material material, vec3 normal) {
     }
     // col.rgb += col.rgb *(CalculateFresnel(vec3(cameraSpace_pos),normal)*inFresnel*5.);
 
-    #ifdef ENABLE_FRESNEL
-        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
-    #endif
+
     vec3 color = ambientColor+attenuation*light.intensity* (diffuseColor + specularColor);
 
+    #ifdef ENABLE_FRESNEL
+        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+    #endif
     return color;
 }
 
@@ -491,6 +492,10 @@ void main() {
     for (int i = 0; i < MAX_LIGHTS; i++) {
         Light light = lights[i];
 
+            // lightProperties; // x - intensity, y - radius, z - falloff
+        light.intensity = light.lightProperties.x;
+        light.radius = light.lightProperties.y;
+        light.falloff = light.lightProperties.z;
         #ifdef HAS_TEXTURE_AO
             float aoIntensity = inTextureIntensities.AO;
             light.color *= mix(vec3(1.), texture(texAO, texCoord).rgb, aoIntensity);
@@ -505,6 +510,11 @@ void main() {
             color = PointLight(light, _material, normal);
         }
         else if (light.type == SPOT) {
+            // spotProperties; // x - spotExponent, y - cosConeAngle, z - cosConeAngleInner
+            light.spotExponent = light.spotProperties.x;
+            light.cosConeAngle = light.spotProperties.y;
+            light.cosConeAngleInner = light.spotProperties.z;
+
             color = SpotLight(light, _material, normal);
         }
         else if (light.type == DIRECTIONAL) {
