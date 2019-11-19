@@ -1,5 +1,11 @@
 
 {{MODULES_HEAD}}
+
+#define TEX_REPEAT_X x;
+#define TEX_REPEAT_Y y;
+#define TEX_OFFSET_X z;
+#define TEX_OFFSET_Y w;
+
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
@@ -17,10 +23,7 @@ OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
 
 #ifdef HAS_TEXTURES
-    UNI float inDiffuseRepeatX;
-    UNI float inDiffuseRepeatY;
-    UNI float inTextureOffsetX;
-    UNI float inTextureOffsetY;
+    UNI vec4 inTextureRepeatOffset;
 #endif
 
 UNI vec3 camPos;
@@ -72,8 +75,10 @@ void main()
     cameraSpace_pos = mvMatrix * pos;
 
     #ifdef HAS_TEXTURES
-        texCoord.x=texCoord.x*inDiffuseRepeatX+inTextureOffsetX;
-        texCoord.y=texCoord.y*inDiffuseRepeatY+inTextureOffsetY;
+        texCoord.x *= inTextureRepeatOffset.TEX_REPEAT_X
+        texCoord.x += inTextureRepeatOffset.TEX_OFFSET_X;
+        texCoord.y *= inTextureRepeatOffset.TEX_REPEAT_Y
+        texCoord.y += inTextureRepeatOffset.TEX_OFFSET_Y;
     #endif
 
    normInterpolated = vec3(normalMatrix*vec4(norm, 1.));
