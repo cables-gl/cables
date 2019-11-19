@@ -117,7 +117,7 @@ export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,
             this._port3=_port3;
             this._port4=_port4;
             this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
-            updateFromPort4f();
+            this.updateFromPort4f();
         }
         else if(_port2 && _port3)
         {
@@ -125,14 +125,14 @@ export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,
             this._port2=_port2;
             this._port3=_port3;
             this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
-            updateFromPort3f();
+            this.updateFromPort3f();
         }
         else if(_port2)
         {
             this._value=[0,0];
             this._port2=_port2;
             this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
-            updateFromPort2f();
+            this.updateFromPort2f();
         }
     }
     else this._value = _value;
