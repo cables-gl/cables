@@ -480,6 +480,7 @@ inTrigger.onTriggered = function() {
     } else {
         cgl.lightStack = [];
     }
+    op.log(shader.getUniforms());
 }
 
 updateDiffuseTexture();

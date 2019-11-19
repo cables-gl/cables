@@ -98,48 +98,6 @@ const float EIGHT_PI = 8.*PI;
 
 {{MODULES_HEAD}}
 
-/*
-float FalloffInverseSquare(Light light, float distance) {
-    if (light.radius <= distance) return 0.;
-    return 1./(distance*distance);
-}
-
-float FalloffB(Light light, float distance) {
-    if (distance < (1.-light.falloff) * light.radius) {
-        return 1.;
-    }
-
-    else if (distance >= light.radius) {
-        return 0.;
-    }
-
-    else {
-        return ((light.radius - distance) / (light.radius - light.radius*(1.-light.falloff)));
-    }
-}
-
-float FalloffC(Light light, float distance) {
-    float radius = light.radius*(1.-light.falloff);
-    float attenuation = clamp(1.0 - distance*distance/(radius*radius), 0., 1.);
-    attenuation*=attenuation;
-    return attenuation;
-}
-*/
-/*
-float Attenuation(Light light, float distanceLightFrag)
-{
-
-    float denom = distanceLightFrag / light.radius + 1.0;
-    float attenuation = 1.0 / (denom*denom);
-    float t = (attenuation - 0.1) / (1.0 - 0.1);
-    t = t * ((1.-light.falloff)*(1.-light.falloff));
-
-    return clamp(t, 0., 1.);
-
-}
-*/
-
-
 #ifdef CONSERVE_ENERGY
     // http://www.rorydriscoll.com/2009/01/25/energy-conservation-in-games/
     // http://www.farbrausch.de/~fg/articles/phong.pdf
@@ -198,14 +156,6 @@ float Attenuation(Light light, float distanceLightFrag)
         float product = max( cosine, 0.0 );
         float factor = pow( product, 5.0 );
 
-
-        /*
-        float n1 = inRefracIndex1; //1.;
-        float n2 = inRefracIndex2; //0.2;
-        float r0 = pow((n1-n2) / (n1+n2), 2.);
-
-        float factor = r0 * (1. - r0)*pow((max(dot(nDirection, halfDirection), 0.)), 5.);
-        */
         return 5. * factor;
 
     }
@@ -291,11 +241,11 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
 
-    vec3 color = ambientColor + light.intensity*(diffuseColor + specularColor);
-
     #ifdef ENABLE_FRESNEL
-        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
     #endif
+
+    vec3 color = ambientColor + light.intensity*(diffuseColor + specularColor);
 
     return color;
 }
@@ -394,11 +344,12 @@ vec3 SpotLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
 
+    #ifdef ENABLE_FRESNEL
+        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+    #endif
+
     vec3 color = ambientColor+attenuation*light.intensity*(diffuseColor + specularColor);
 
-    #ifdef ENABLE_FRESNEL
-        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
-    #endif
 
     return color;
 }
@@ -471,11 +422,11 @@ vec3 PointLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
     // col.rgb += col.rgb *(CalculateFresnel(vec3(cameraSpace_pos),normal)*inFresnel*5.);
-    vec3 color = ambientColor+attenuation*light.intensity* (diffuseColor + specularColor);
 
     #ifdef ENABLE_FRESNEL
-        color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
+        specularColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);
     #endif
+    vec3 color = ambientColor+attenuation*light.intensity* (diffuseColor + specularColor);
 
     return color;
 }
