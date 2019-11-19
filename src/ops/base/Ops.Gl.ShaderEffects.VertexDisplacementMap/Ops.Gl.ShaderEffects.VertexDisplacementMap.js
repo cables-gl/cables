@@ -21,28 +21,23 @@ colorize.set(false);
 
 function updateColorize()
 {
-    if(shader)
-        if(colorize.get()) shader.define(id+'HEIGHTMAP_COLORIZE');
-            else shader.removeDefine(id+'HEIGHTMAP_COLORIZE');
+    if(shader) shader.toggleDefine(id+'HEIGHTMAP_COLORIZE',colorize.get());
 }
 
 function updateInvert()
 {
-    if(shader)
-        if(invert.get()) shader.define(id+'HEIGHTMAP_INVERT');
-            else shader.removeDefine(id+'HEIGHTMAP_INVERT');
+    if(shader) shader.toggleDefine(id+'HEIGHTMAP_INVERT',invert.get());
+}
+
+function updateRemoveZero()
+{
+    if(shader) shader.toggleDefine(id+'DISPLACE_REMOVE_ZERO',removeZero.get());
 }
 
 colorize.onChange=updateColorize;
 invert.onChange=updateInvert;
 removeZero.onChange=updateRemoveZero;
 
-function updateRemoveZero()
-{
-    if(shader)
-        if(removeZero.get()) shader.define(id+'DISPLACE_REMOVE_ZERO');
-            else shader.removeDefine(id+'DISPLACE_REMOVE_ZERO');
-}
 
 var updateMethod=function()
 {

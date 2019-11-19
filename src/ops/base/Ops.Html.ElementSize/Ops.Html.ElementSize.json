@@ -1,0 +1,59 @@
+{
+    "id": "fb23c251-a43e-4677-9d03-ccd512fee82e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1574152979661
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1574152992830,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Position"
+            },
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Html.ElementSize"
+    },
+    "summary": "Get size and position of a HTML element",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

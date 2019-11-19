@@ -1,0 +1,70 @@
+{
+    "id": "b3fcd56a-ceef-467b-a9b9-9d11a239bc62",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1571951572745
+        },
+        {
+            "message": "Ops.Admin.TestTemp renamed to Ops.Admin.Jeeliz",
+            "author": "pandur",
+            "date": 1572092347710
+        }
+    ],
+    "libs": [
+        "jeelizFaceFilter.js"
+    ],
+    "authorName": "pandur",
+    "created": 1571951765646,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "NNC Data"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Detected",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "rx",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "ry",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "rz",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "s",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Canvas"
+            }
+        ],
+        "name": "Ops.Admin.Jeeliz"
+    }
+}

@@ -1,0 +1,248 @@
+{
+    "id": "92a0c536-f2bf-4972-9f02-a9accf26c1df",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1573219140991
+        },
+        {
+            "message": "Ops.User.simod.CameraDecompose renamed to Ops.Gl.Matrix.CameraDecompose",
+            "author": "simod",
+            "date": 1573222642172
+        },
+        {
+            "message": "Ops.Gl.Matrix.CameraDecompose renamed to Ops.Gl.Matrix.CameraInfo",
+            "author": "simod",
+            "date": 1573224037749
+        }
+    ],
+    "authorName": "simod",
+    "created": 1573219149978,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "5",
+                "name": "Camera Type"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Right X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Right Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Right Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Up X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Up Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Up Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Forward X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Forward Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Forward Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bottom Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Top Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Left Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Right Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "FOV",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.simod.CameraDecompose"
+    },
+    "summary": "get camera attributes from current camera/orbit controls",
+    "issues": "",
+    "collections": [
+        "Cameras"
+    ],
+    "relatedops": [
+        "Ops.Gl.Matrix.OrbitControls",
+        "Ops.Gl.Matrix.WASDCamera",
+        "Ops.Gl.Matrix.Camera"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Camera Type",
+                "text": "Choose between orthographic & perspective cameara"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger outpu"
+            },
+            {
+                "name": "X",
+                "text": "x position of camera"
+            },
+            {
+                "name": "Y",
+                "text": "y position of camera"
+            },
+            {
+                "name": "Z",
+                "text": "z position of camera"
+            },
+            {
+                "name": "Right X",
+                "text": "x right of camera"
+            },
+            {
+                "name": "Right Y",
+                "text": "y right of camera"
+            },
+            {
+                "name": "Right Z",
+                "text": "z right of camera"
+            },
+            {
+                "name": "Up X",
+                "text": "x up of camera"
+            },
+            {
+                "name": "Up Y",
+                "text": "y up of camera"
+            },
+            {
+                "name": "Up Z",
+                "text": "z up of camera"
+            },
+            {
+                "name": "Forward X",
+                "text": "x forward of camera"
+            },
+            {
+                "name": "Forward Y",
+                "text": "y forward of camera"
+            },
+            {
+                "name": "Forward Z",
+                "text": "z forward of camera"
+            },
+            {
+                "name": "Near Frustum",
+                "text": "frustum near"
+            },
+            {
+                "name": "Far Frustum",
+                "text": "frustum far"
+            },
+            {
+                "name": "Bottom Frustum",
+                "text": "frustum bottom"
+            },
+            {
+                "name": "Top Frustum",
+                "text": "frustum top"
+            },
+            {
+                "name": "Left Frustum",
+                "text": "frustum left"
+            },
+            {
+                "name": "Right Frustum",
+                "text": "frustum right"
+            },
+            {
+                "name": "FOV",
+                "text": "field of view"
+            },
+            {
+                "name": "Aspect Ratio",
+                "text": "aspect ratio"
+            }
+        ]
+    }
+}

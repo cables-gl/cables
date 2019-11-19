@@ -1,0 +1,32 @@
+{
+    "id": "0877ac11-4ebc-484c-aa10-276040756d0a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1573761632584
+        },
+        {
+            "message": "Ops.User.pandur.ArrayOfSplinesToLineStripArray renamed to Ops.Array.SplinesToLineStripArray",
+            "author": "pandur",
+            "date": 1573805734910
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1573761684200,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayOfSplinesToLineStripArray"
+    }
+}
