@@ -19,10 +19,11 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
 shader.define('NUM_LIGHTS','1');
 
-const runiform=new CGL.Uniform(shader,'f','r',r);
-const guniform=new CGL.Uniform(shader,'f','g',g);
-const buniform=new CGL.Uniform(shader,'f','b',b);
-const auniform=new CGL.Uniform(shader,'f','a',a);
+// const runiform=new CGL.Uniform(shader,'f','r',r);
+// const guniform=new CGL.Uniform(shader,'f','g',g);
+// const buniform=new CGL.Uniform(shader,'f','b',b);
+// const auniform=new CGL.Uniform(shader,'f','a',a);
+const colUni=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 var outShader=op.outObject("Shader");
 outShader.set(shader);

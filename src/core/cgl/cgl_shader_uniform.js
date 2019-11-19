@@ -35,7 +35,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value)
+export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,_port4)
 {
     this._loc = -1;
     this._type = __type;
@@ -109,6 +109,28 @@ export const Uniform = function (__shader, __type, __name, _value)
         this._port = _value;
         this._value = this._port.get();
         this._port.onValueChanged = this.updateFromPort.bind(this);
+
+        if(_port2 && _port3 && _port4)
+        {
+            this._value=[0,0,0,0];
+            this._port2=_port2;
+            this._port3=_port3;
+            this._port4=_port4;
+            this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
+        }
+        else if(_port2 && _port3)
+        {
+            this._value=[0,0,0];
+            this._port2=_port2;
+            this._port3=_port3;
+            this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
+        }
+        else if(_port2 && _port3)
+        {
+            this._value=[0,0];
+            this._port2=_port2;
+            this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
+        }
     }
     else this._value = _value;
 
@@ -138,6 +160,7 @@ Uniform.prototype.bindTextures = function ()
 {
     return this._value;
 };
+
 Uniform.prototype.resetLoc = function ()
 {
     this._loc = -1;
@@ -150,6 +173,32 @@ Uniform.prototype.getLoc = function ()
 {
     return this._loc;
 };
+
+
+Uniform.prototype.updateFromPort4f = function ()
+{
+    this._value[0]=this._port.get();
+    this._value[1]=this._port2.get();
+    this._value[2]=this._port3.get();
+    this._value[3]=this._port4.get();
+    this.setValue(this._value);
+};
+
+Uniform.prototype.updateFromPort3f = function ()
+{
+    this._value[0]=this._port.get();
+    this._value[1]=this._port2.get();
+    this._value[2]=this._port3.get();
+    this.setValue(this._value);
+};
+
+Uniform.prototype.updateFromPort2f = function ()
+{
+    this._value[0]=this._port.get();
+    this._value[1]=this._port2.get();
+    this.setValue(this._value);
+};
+
 
 Uniform.prototype.updateFromPort = function ()
 {
@@ -242,8 +291,6 @@ Uniform.prototype.updateValueArrayF = function ()
     profileData.UniformCount++;
 };
 
-
-
 Uniform.prototype.setValueArrayT = function (v)
 {
     this.needsUpdate = true;
@@ -260,14 +307,9 @@ Uniform.prototype.updateValueArrayT = function ()
     profileData.UniformCount++;
 };
 
-
-
 Uniform.prototype.updateValue3F = function ()
 {
-    if (!this._value)
-    {
-        return;
-    }
+    if (!this._value) return;
     if (this._loc == -1)
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
@@ -348,8 +390,6 @@ Uniform.prototype.updateValueT = function ()
     this.needsUpdate = false;
 };
 
-
-
 Uniform.prototype.setValueT = function (v)
 {
     this.needsUpdate = true;
@@ -369,6 +409,12 @@ Uniform.prototype.updateValue4F = function ()
 };
 
 Uniform.prototype.setValue4F = function (v)
+{
+    this.needsUpdate = true;
+    this._value = v;
+};
+
+Uniform.prototype.setValues4F = function (x,y,z,w)
 {
     this.needsUpdate = true;
     this._value = v;

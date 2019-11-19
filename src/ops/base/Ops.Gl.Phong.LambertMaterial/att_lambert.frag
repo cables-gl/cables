@@ -12,7 +12,7 @@ IN vec3 mvNormal;
 IN vec3 mvTangent;
 IN vec3 mvBiTangent;
 
-UNI float r,g,b,a;
+UNI vec4 color;//r,g,b,a;
 
 struct Light {
   vec3 pos;
@@ -42,9 +42,7 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(0.0);
-
     vec3 normal = normalize(mat3(normalMatrix)*norm);
-
 
     #ifdef DOUBLE_SIDED
     if(!gl_FrontFacing) normal = normal*-1.0;
@@ -67,9 +65,8 @@ void main()
         // col.rgb=light.color.rgb;
     }
 
-
-    col.rgb*=vec3(r,g,b);
-    col.a=a;
+    col.rgb*=color.rgb;
+    col.a=color.a;
 
     {{MODULE_COLOR}}
 
