@@ -115,7 +115,6 @@ function handleTrigger() {
 
         for (let i = 0; i < newArr.length / 4; i += 1) {
             const hsbArray = HSBtoRGB(arrH[i], arrS[i], arrB[i]);
-
             newArr[i * 4 + 0] = hsbArray[0];
             newArr[i * 4 + 1] = hsbArray[1];
             newArr[i * 4 + 2] = hsbArray[2];

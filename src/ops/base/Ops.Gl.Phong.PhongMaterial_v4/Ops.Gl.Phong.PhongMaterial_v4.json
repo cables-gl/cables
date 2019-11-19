@@ -218,7 +218,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Admin.SimosPhong_v2"
+        "name": "Ops.Gl.Phong.PhongMaterial_v4"
     },
     "authorName": "simod",
     "id": "7059501e-31a6-46cd-8939-4d4b82229086",

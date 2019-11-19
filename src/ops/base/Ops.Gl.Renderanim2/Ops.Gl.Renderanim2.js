@@ -35,8 +35,8 @@ var frames=[];
 var lastFrame=-1;
 var time=0;
 
-var oldSizeW=CABLES.patch.cgl.canvasWidth;
-var oldSizeH=CABLES.patch.cgl.canvasHeight;
+var oldSizeW=op.patch.cgl.canvasWidth;
+var oldSizeH=op.patch.cgl.canvasHeight;
 
 inType.onChange=updateQuality;
 useCanvasSize.onChange=updateSize;
@@ -131,7 +131,7 @@ function render()
 
         CABLES.overwriteTime=time;
         op.patch.timer.setTime(time);
-        gui.patch().scene.freeTimer.setTime(time);
+        op.patch.freeTimer.setTime(time);
     }
 
     if(lastFrame==countFrames)
@@ -205,7 +205,7 @@ function render()
         if(inType.get()=="WebM")
         {
 
-            frames.push( gui.patch().scene.cgl.canvas.toDataURL('image/webp', inQuality.get()));
+            frames.push( op.patch.cgl.canvas.toDataURL('image/webp', inQuality.get()));
             countFrames++;
             updateTime();
         }

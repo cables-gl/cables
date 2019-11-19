@@ -34,7 +34,7 @@ void main()
                 col.b*=color.b;
             #endif
         #endif
-        col.a*=a;
+        col.a*=color.a;
         #ifdef HAS_TEXTURE_OPACITY
             #ifdef TRANSFORMALPHATEXCOORDS
                 uv=vec2(texCoordOrig.s,1.0-texCoordOrig.t);
