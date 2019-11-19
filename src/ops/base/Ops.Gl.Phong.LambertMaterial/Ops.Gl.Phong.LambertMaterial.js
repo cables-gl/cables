@@ -8,8 +8,7 @@ const inToggleDoubleSided = op.inBool("Double Sided", false);
 
 inToggleDoubleSided.onChange = function () {
     shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
-}
-
+};
 
 const next=op.outTrigger("next");
 
@@ -19,10 +18,7 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
 shader.define('NUM_LIGHTS','1');
 
-const runiform=new CGL.Uniform(shader,'f','r',r);
-const guniform=new CGL.Uniform(shader,'f','g',g);
-const buniform=new CGL.Uniform(shader,'f','b',b);
-const auniform=new CGL.Uniform(shader,'f','a',a);
+const colUni=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 var outShader=op.outObject("Shader");
 outShader.set(shader);
@@ -44,7 +40,6 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
     lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
 }
-
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
 

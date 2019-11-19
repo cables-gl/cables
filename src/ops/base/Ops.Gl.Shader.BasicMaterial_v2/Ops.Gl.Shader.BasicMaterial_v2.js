@@ -44,10 +44,11 @@ const b=op.inValueSlider("b",Math.random());
 const a=op.inValueSlider("a",1);
 r.setUiAttribs({"colorPick":true});
 
-const unir=new CGL.Uniform(shader,'f','r',r);
-const unig=new CGL.Uniform(shader,'f','g',g);
-const unib=new CGL.Uniform(shader,'f','b',b);
-const unia=new CGL.Uniform(shader,'f','a',a);
+// const unir=new CGL.Uniform(shader,'f','r',r);
+// const unig=new CGL.Uniform(shader,'f','g',g);
+// const unib=new CGL.Uniform(shader,'f','b',b);
+// const unia=new CGL.Uniform(shader,'f','a',a);
+const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 op.setPortGroup("Color",[r,g,b,a]);
 

@@ -27,10 +27,9 @@
                 "subType": "string"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Filename",
-                "group": "File",
-                "subType": "integer"
+                "group": "File"
             },
             {
                 "type": "0",
@@ -98,6 +97,9 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.cables.Renderanim2"
-    }
+        "name": "Ops.Gl.Renderanim2"
+    },
+    "libs": [
+        "whammy.js"
+    ]
 }

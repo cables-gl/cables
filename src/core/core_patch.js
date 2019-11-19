@@ -355,7 +355,7 @@ Patch.prototype.createOp = function (identifier, id)
 
         this.emitEvent("exceptionOp", e, objName);
 
-        if (!this.isEditorMode)
+        if (!this.isEditorMode())
         {
             Log.log(e);
             Log.error('[instancing error] ' + objName,e);

@@ -8,7 +8,10 @@ const
 const
     r = op.inValueSlider("r",0),
     g = op.inValueSlider("g",0),
-    b = op.inValueSlider("b",0);
+    b = op.inValueSlider("b",0),
+    x = op.inValueSlider("x",0),
+    y = op.inValueSlider("y",0),
+    z = op.inValueSlider("z",0);
 r.setUiAttribs({ colorPick: true });
 
 
@@ -26,10 +29,10 @@ var srcHeadVert=''
 
 var srcBodyVert=''
     .endl()+'#ifndef WORLDSPACE'
-    .endl()+'   MOD_pos=vec4(vPosition,1.0);'
+    .endl()+'   MOD_pos=vec4(pos.xyz,1.0);'
     .endl()+'#endif'
     .endl()+'#ifdef WORLDSPACE'
-    .endl()+'   MOD_pos=vec4(vPosition,1.0)*mMatrix;'
+    .endl()+'   MOD_pos=vec4(pos.xyz,1.0)*mMatrix;'
     .endl()+'#endif'
     .endl();
 
@@ -89,6 +92,9 @@ render.onTriggered=function()
         new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
         new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
         new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
+        new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
         updateWorldspace();
     }
 

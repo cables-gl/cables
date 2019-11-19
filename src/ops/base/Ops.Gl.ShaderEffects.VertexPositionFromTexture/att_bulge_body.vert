@@ -1,4 +1,8 @@
-vec3 MOD_pos=texture(MOD_tex,texCoord).xyz;
+vec4 col=texture(MOD_tex,texCoord);
+
+
+
+vec3 MOD_pos=col.xyz;
 
 // #ifdef SET_X
 //     pos.x=MOD_pos.x;
@@ -9,5 +13,10 @@ vec3 MOD_pos=texture(MOD_tex,texCoord).xyz;
 // #ifdef SET_Z
 //     pos.z=MOD_pos.z;
 // #endif
+// psMul = col.a*=0.1;
+
+
+
 
 pos.xyz=MOD_pos.xyz;
+// mMatrix[3].xyz+=MOD_pos.xyz;
