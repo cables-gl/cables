@@ -440,7 +440,8 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     if (CABLES.UI) gui.jobs().start({ id: "loadtexture" + loadingId, title: "loading texture (" + url + ")" });
 
     texture.image = new Image();
-    texture.image.crossOrigin = "";
+    texture.image.crossOrigin = "anonymous";
+
 
     if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
     if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
