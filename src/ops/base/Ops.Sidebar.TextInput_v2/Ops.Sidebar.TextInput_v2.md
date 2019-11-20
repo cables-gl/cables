@@ -1,0 +1,1 @@
+Let’s you enter a string in the sidebar, which you can then e.g. render in your patch

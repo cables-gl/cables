@@ -3,6 +3,7 @@ var width=op.inValue("width",400);
 var height=op.inValue("height",400);
 var src=op.inValueString("URL",'https://undev.studio');
 var elId=op.inValueString("ID");
+const outEle=op.outObject("Element");
 
 function updateSize()
 {
@@ -26,6 +27,8 @@ element.style.position="absolute";
 element.style.width="40px";
 element.style.height="40px";
 element.style["z-index"]="9999";
+
+outEle.set(element);
 
 var canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(element);
