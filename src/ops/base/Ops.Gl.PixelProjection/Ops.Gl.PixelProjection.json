@@ -66,12 +66,35 @@
         ],
         "name": "Ops.Gl.PixelProjection"
     },
-    "summary": "world unit projection to pixel co-ordinates",
+    "summary": "remaps world co-ordinates to a pixel co-ordinate system",
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "xkIrVtSU4FU"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "use viewport size",
+                "text": "set width and height to the viewport size"
+            },
+            {
+                "name": "Width",
+                "text": "Width if Use Viewport Size is disabled"
+            },
+            {
+                "name": "Height",
+                "text": "Height if Use Viewport Size is disabled"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

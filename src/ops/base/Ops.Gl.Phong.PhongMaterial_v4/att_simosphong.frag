@@ -578,7 +578,7 @@ void main() {
             col.a*=texture(texAlpha,uv).a;
         #endif
         #ifdef ALPHA_MASK_LUMI
-            col.a*=dot(vec3(0.2126,0.7152,0.0722), texture(texAlpha,uv).rgb);
+            col.a*= dot(vec3(0.2126,0.7152,0.0722), texture(texAlpha,uv).rgb);
         #endif
         #ifdef ALPHA_MASK_R
             col.a*=texture(texAlpha,uv).r;
