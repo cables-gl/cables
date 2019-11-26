@@ -279,10 +279,8 @@ Mesh.prototype.setGeom = function (geom)
     if (this.addVertexNumbers) this._setVertexNumbers();
 
     var geomAttribs = this._geom.getAttributes();
-    for (var index in geomAttribs)
-    {
-        this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
-    }
+    for (var index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
+    
 };
 
 Mesh.prototype._preBind = function (shader)
