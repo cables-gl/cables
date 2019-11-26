@@ -547,6 +547,7 @@
 /*
  * SIDEBAR INPUT
  */
+.sidebar__text-input textarea,
 .sidebar__text-input input[type=text] {
     box-sizing: border-box;
     background-color: #333333;
@@ -567,11 +568,19 @@
     width:45%;
 }
 
+.sidebar__text-input textarea,
 .sidebar__text-input input[type=text]:active,
 .sidebar__text-input input[type=text]:focus,
 .sidebar__text-input input[type=text]:hover {
     background-color: transparent;
     color: #EEEEEE;
+}
+
+.sidebar__text-input textarea
+{
+    margin-top:10px;
+    height:60px;
+    width:100%;
 }
 
 /*

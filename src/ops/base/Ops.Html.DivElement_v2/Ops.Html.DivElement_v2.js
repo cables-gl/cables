@@ -1,7 +1,7 @@
 const
+    inText=op.inString("Text","Hello Div"),
     inId=op.inString("Id"),
     inClass=op.inString("Class"),
-    inText=op.inString("Text","Hello Div"),
     inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css"),
     inInteractive=op.inValueBool("Interactive",false),
     inVisible=op.inValueBool("Visible",true),
@@ -46,8 +46,6 @@ function setCSSVisible(visible)
         div.style.visibility='visible';
         div.style.display=prevDisplay;
     }
-
-    console.log('div.style.display',div.style.display);
 }
 
 function updateVisibility()
@@ -55,13 +53,21 @@ function updateVisibility()
     setCSSVisible(inVisible.get());
 }
 
+var oldStr=null;
+
 function updateText()
 {
     var str=inText.get();
+    // console.log(oldStr,str);
+
+    if(oldStr===str) return;
+    oldStr=str;
+
     if(inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+
     div.innerHTML=str;
-    outElement.set(null);
-    outElement.set(div);
+    // outElement.set(null);
+    // outElement.set(div);
 }
 
 function removeElement()
@@ -73,8 +79,8 @@ function updateStyle()
 {
     div.setAttribute("style",inStyle.get());
     updateVisibility();
-    outElement.set(null);
-    outElement.set(div);
+    // outElement.set(null);
+    // outElement.set(div);
 }
 
 function updateClass()

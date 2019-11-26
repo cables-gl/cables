@@ -5,6 +5,7 @@ const
     strip=op.inBool("Line Strip",true),
     outGeom=op.outObject("Geometry"),
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!
+    texCoords=op.inSwitch("TexCoords",["0","0-1","Random"],"0"),
     next=op.outTrigger("Next");
 
 const cgl=op.patch.cgl;
@@ -14,11 +15,14 @@ outGeom.set(geom);
 geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
 var buff=new Float32Array();
+var bufTexCoord=new Float32Array();
 var needsRebuild=true;
 var attr;
+var currentTexCoords="";
 
-inPoints.onChange=
-function(){ needsRebuild=true; };
+texCoords.onChange=
+    inPoints.onChange=
+    function(){ needsRebuild=true; };
 
 op.toWorkPortsNeedToBeLinked(inPoints);
 
@@ -49,10 +53,31 @@ function rebuild()
 
     attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
 
-    var numTc=(points.length/3)*2;
-    if(mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
+    var numTc=(newLength/3)*2;
+    if(currentTexCoords!=texCoords.get() || mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
     {
-        var bufTexCoord=new Float32Array(numTc);
+        currentTexCoords=texCoords.get();
+
+
+        if(bufTexCoord.length!=numTc) bufTexCoord=new Float32Array(numTc);
+
+
+        if(texCoords.get()=="0-1")
+        {
+            for(var i=0;i<numTc;i+=2)
+            {
+                bufTexCoord[i]=i/numTc;
+                bufTexCoord[i+1]=0.5;
+            }
+        }
+        else if(texCoords.get()=="Random")
+        {
+            for(var i=0;i<numTc;i+=2)
+            {
+                bufTexCoord[i]=Math.random();
+                bufTexCoord[i+1]=Math.random();
+            }
+        }
         var attrTc=mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD,bufTexCoord,2);
     }
 
@@ -62,6 +87,8 @@ function rebuild()
 render.onTriggered=function()
 {
     if(!inPoints.get())return;
+
+
     if(needsRebuild)rebuild();
     var shader=cgl.getShader();
     if(!shader)return;
@@ -74,7 +101,11 @@ render.onTriggered=function()
         if(numPoints.get()<=0)attr.numItems=buff.length/3;
             else attr.numItems=Math.min(numPoints.get(),buff.length/3);
 
-    if(mesh) mesh.render(shader);
+
+    // console.log('buffs',buff.length/3,bufTexCoord.length/2);
+
+
+    if(mesh && buff.length!==0) mesh.render(shader);
 
     shader.glPrimitive=oldPrim;
 

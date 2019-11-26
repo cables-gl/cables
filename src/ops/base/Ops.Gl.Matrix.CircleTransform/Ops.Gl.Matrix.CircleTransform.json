@@ -23,6 +23,16 @@
             },
             {
                 "type": "0",
+                "name": "Absolute",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Rotate",
                 "subType": "boolean"
             }
@@ -51,5 +61,12 @@
     "collections": [
         "transform"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added absolute number mode",
+            "author": "pandur",
+            "date": 1574692630839
+        }
+    ]
 }

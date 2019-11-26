@@ -1,6 +1,26 @@
 {
-    "updated": 1538418873785,
     "authorName": "pandur",
     "id": "a1307fb3-a370-4d94-8aa9-a61decc525d0",
-    "created": 1538418849286
+    "created": 1538418849286,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "String",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.Deprecated.Array.GetValueString"
+    }
 }

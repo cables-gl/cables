@@ -18,10 +18,17 @@ const cgl=op.patch.cgl;
 const filter=CGL.Texture.FILTER_MIPMAP;
 const textureSize=1024;
 var fontLoaded=false;
+var needUpdate=true;
 
 align.onChange=
     str.onChange=
-    lineHeight.onChange=generateMesh;
+    lineHeight.onChange=generateMeshLater;
+
+
+function generateMeshLater()
+{
+    needUpdate=true;
+}
 
 var canvasid=null;
 CABLES.OpTextureMeshCanvas={};
@@ -130,6 +137,11 @@ var disabled=false;
 
 render.onTriggered=function()
 {
+    if(needUpdate)
+    {
+        generateMesh();
+        needUpdate=false;
+    }
     var font=getFont();
     if(font.lastChange!=lastTextureChange)
     {

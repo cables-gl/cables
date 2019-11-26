@@ -10,6 +10,11 @@
             },
             {
                 "type": "0",
+                "name": "Start Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "New Length",
                 "subType": "integer"
             }
@@ -47,5 +52,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added start index parameter",
+            "author": "pandur",
+            "date": 1574332879603
+        }
+    ]
 }

@@ -1,16 +1,15 @@
 const
     srcArrayPort = op.inArray("Source Array"),
+    inStartIndex = op.inInt("Start Index"),
     newLengthPort = op.inInt("New Length"),
     croppedArrayOutPort = op.outArray("Cropped Array"),
     outArrayLength = op.outNumber("Array length");
 
-//change listeners
-srcArrayPort.onChange = newLengthPort.onChange = setOutPort;
+inStartIndex.onChange = srcArrayPort.onChange = newLengthPort.onChange = setOutPort;
 
-// functions
 function setOutPort()
 {
-    var srcArray = srcArrayPort.get();
+    const srcArray = srcArrayPort.get();
 
     if(!srcArray)
     {
@@ -19,14 +18,15 @@ function setOutPort()
         return;
     }
     var newLength = parseInt(newLengthPort.get());
-    if(newLength >= srcArray.lenngth) newLength = srcArray.length;
-    if(newLength <= srcArray.length)
-    {
-            var croppedArr = srcArray.slice(0, newLength);
-            croppedArrayOutPort.set(null);
-            croppedArrayOutPort.set(croppedArr);
-            outArrayLength.set(croppedArr.length);
-    }
+    const start=Math.floor(Math.abs(inStartIndex.get()));
 
+    if(start+newLength >= srcArray.length) newLength = srcArray.length-start;
+    if(start+newLength <= srcArray.length)
+    {
+        var croppedArr = srcArray.slice(start, start+newLength);
+        croppedArrayOutPort.set(null);
+        croppedArrayOutPort.set(croppedArr);
+        outArrayLength.set(croppedArr.length);
+    }
 
 }

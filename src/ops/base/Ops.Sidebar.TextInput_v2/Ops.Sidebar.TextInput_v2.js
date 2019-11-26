@@ -2,6 +2,7 @@
 const parentPort = op.inObject('Link');
 const labelPort = op.inString('Text', 'Text');
 const defaultValuePort = op.inString('Default', '');
+const inTextArea=op.inBool("TextArea",false);
 const inGreyOut=op.inBool("Grey Out",false);
 const inVisible=op.inBool("Visible",true);
 
@@ -22,14 +23,36 @@ el.appendChild(label);
 //var inputWrapper = document.createElement('div');
 //inputWrapper.classList.add('sidebar__text-input-input-wrapper');
 //el.appendChild(inputWrapper);
-var input = document.createElement('input');
-input.classList.add('sidebar__text-input-input');
-input.setAttribute('type', 'text');
-input.setAttribute('value', defaultValuePort.get());
+
+var input=null;
+creatElement();
+
 //inputWrapper.appendChild(input);
-el.appendChild(input);
-input.addEventListener('input', onInput);
 op.toWorkPortsNeedToBeLinked(parentPort);
+
+inTextArea.onChange=creatElement;
+
+function creatElement()
+{
+    if(input)input.remove();
+    if(!inTextArea.get())
+    {
+        input = document.createElement('input');
+    }
+    else
+    {
+        input = document.createElement('textarea');
+    }
+
+    input.classList.add('sidebar__text-input-input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('value', defaultValuePort.get());
+    el.appendChild(input);
+    input.addEventListener('input', onInput);
+
+
+}
+
 
 
 var greyOut = document.createElement('div');
