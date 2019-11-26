@@ -62,6 +62,7 @@ render.onTriggered=function()
     arr[6]=vecUpX.get();
     arr[7]=vecUpY.get();
     arr[8]=vecUpZ.get();
+    outArr.set(null);
     outArr.set(arr);
 
     vec3.set(vUp, vecUpX.get(),vecUpY.get(),vecUpZ.get());

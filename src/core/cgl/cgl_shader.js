@@ -9,27 +9,55 @@ import { Log } from "../log";
 
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
-profileShaderBinds: 0,
-// profileUniformCount: 0,
-profileShaderCompiles: 0,
-profileVideosPlaying: 0,
-profileMVPMatrixCount: 0,
+    profileShaderBinds: 0,
+    // profileUniformCount: 0,
+    profileShaderCompiles: 0,
+    profileVideosPlaying: 0,
+    profileMVPMatrixCount: 0,
 
-// default attributes
-SHADERVAR_VERTEX_POSITION: 'vPosition',
-SHADERVAR_VERTEX_NUMBER: 'attrVertIndex',
-SHADERVAR_VERTEX_TEXCOORD: 'attrTexCoord',
-SHADERVAR_INSTANCE_MMATRIX: 'instMat',
+    // default attributes
+    SHADERVAR_VERTEX_POSITION: 'vPosition',
+    SHADERVAR_VERTEX_NUMBER: 'attrVertIndex',
+    SHADERVAR_VERTEX_TEXCOORD: 'attrTexCoord',
+    SHADERVAR_INSTANCE_MMATRIX: 'instMat',
 
-// default uniforms
-SHADERVAR_UNI_PROJMAT: "projMatrix",
-SHADERVAR_UNI_VIEWMAT: "viewMatrix",
-SHADERVAR_UNI_MODELMAT: "modelMatrix",
-SHADERVAR_UNI_NORMALMAT: "normalMatrix",
-SHADERVAR_UNI_INVVIEWMAT: "inverseViewMatrix",
-SHADERVAR_UNI_VIEWPOS: "camPos",
+    // default uniforms
+    SHADERVAR_UNI_PROJMAT: "projMatrix",
+    SHADERVAR_UNI_VIEWMAT: "viewMatrix",
+    SHADERVAR_UNI_MODELMAT: "modelMatrix",
+    SHADERVAR_UNI_NORMALMAT: "normalMatrix",
+    SHADERVAR_UNI_INVVIEWMAT: "inverseViewMatrix",
+    SHADERVAR_UNI_VIEWPOS: "camPos",
 }
+
+
+/*
+
+proposal default shader variable names:
+
+attrVertex - currently: vPosition
+attrVertexIndex - currently: attrVertIndex
+attrTexCoord
+attrInstMat - currently: instMat
+attrVertColor
+attrTangent
+attrBiTangent
+
+uProjMatrix - currently: projMatrix
+uModelMatrix - currently: modelMatrix 
+uNormalMatrix - currently: normalMatrix
+uCamPosition - currently: camPos
+
+*/
+
+
+
 // ---------------------------------------------------------------------------
+
+
+
+
+
 
 /**
  * @class
@@ -208,6 +236,9 @@ Shader.prototype.compile = function() {
             }
 
         }
+
+
+
 
 
         vs = '#version 300 es'

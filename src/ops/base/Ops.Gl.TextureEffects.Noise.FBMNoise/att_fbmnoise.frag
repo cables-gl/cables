@@ -13,7 +13,7 @@ UNI bool layer1;
 UNI bool layer2;
 UNI bool layer3;
 UNI bool layer4;
-
+UNI vec3 color;
 UNI float aspect;
 
 IN vec2 texCoord;
@@ -120,7 +120,7 @@ void main()
         numLayers++;
     }
 
-    finalColor=vec4( vec3(colVal/numLayers),1.0);
+    finalColor=vec4( color*vec3(colVal/numLayers),1.0);
 
 
     outColor = cgl_blend(base,finalColor,amount);;

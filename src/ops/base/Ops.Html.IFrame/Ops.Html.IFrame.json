@@ -1,5 +1,4 @@
 {
-    "updated": 1533745612618,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "d50ef8f6-e706-48ac-94e1-35be3c69a713",
@@ -8,19 +7,29 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "URL"
+                "name": "URL",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "ID"
+                "name": "ID",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
             }
         ],
         "name": "Ops.Html.IFrame"

@@ -3,6 +3,8 @@ const
     segments=op.inValueInt("segments",40),
     radius=op.inValueFloat("radius",1),
     percent=op.inValueSlider("percent",1),
+    numAbs=op.inBool('Absolute',true),
+    flip=op.inBool('Flip',false),
     inRotate=op.inValueBool("Rotate"),
     trigger=op.outTrigger('trigger'),
     index=op.outValue("index");
@@ -14,9 +16,12 @@ radius.set(1);
 percent.set(1);
 
 var pos=[];
-segments.onChange=calcLater;
-radius.onChange=calcLater;
-percent.onChange=calcLater;
+flip.onChange=
+    numAbs.onChange=
+    segments.onChange=
+    radius.onChange=
+    percent.onChange=calcLater;
+
 var needsCalc=true;
 
 render.onTriggered=doRender;
@@ -52,16 +57,24 @@ function calc()
     var segs=segments.get();
     if(segs<1)segs=1;
 
-    for (i=0; i < Math.round(segs*percent.get()); i++)
+    var num=Math.round(segs*percent.get());
+    var step=(360/Math.round(segs));
+
+
+    if(!numAbs.get())
     {
-        degInRad = (360/Math.round(segs))*i*CGL.DEG2RAD;
-        pos.push(
-            [
-            Math.sin(degInRad)*radius.get(),
-            Math.cos(degInRad)*radius.get(),
-            0
-            ]
-            );
+        num=segs;
+        step=(360/Math.round(segs)*percent.get());
+    }
+
+
+    var doflip=flip.get();
+
+    for (i=0; i < num; i++)
+    {
+        if(doflip)degInRad = (360-(step*i))*CGL.DEG2RAD;
+        else degInRad = step*i*CGL.DEG2RAD;
+        pos.push([ Math.sin(degInRad)*radius.get(), Math.cos(degInRad)*radius.get(), 0]);
     }
 
     needsCalc=false;

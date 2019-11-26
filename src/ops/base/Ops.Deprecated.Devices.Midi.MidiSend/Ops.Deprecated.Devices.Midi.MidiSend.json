@@ -1,0 +1,63 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "277123eb-f75b-4f51-984e-49d7d7031081",
+    "created": 1515015834447,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Event Input"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Velocity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "note",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "learn"
+            },
+            {
+                "type": "0",
+                "name": "Controll Value",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Event Output"
+            }
+        ],
+        "name": "Ops.Devices.Midi.MidiSend"
+    },
+    "summary": "Send a midi event to another device",
+    "docs": {
+        "ports": []
+    },
+    "youtubeid": "",
+    "collections": [
+        "hardware"
+    ],
+    "relatedops": [
+        ""
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.MidiSend renamed to Ops.Deprecated.Devices.Midi.MidiSend",
+            "author": "pandur",
+            "date": 1572947984690
+        }
+    ]
+}

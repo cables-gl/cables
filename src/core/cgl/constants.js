@@ -2,6 +2,7 @@ const SHADER = {
     // default attributes
     SHADERVAR_VERTEX_POSITION: "vPosition",
     SHADERVAR_VERTEX_NUMBER: "attrVertIndex",
+    SHADERVAR_VERTEX_NORMAL: "attrVertNormal",
     SHADERVAR_VERTEX_TEXCOORD: "attrTexCoord",
     SHADERVAR_INSTANCE_MMATRIX: "instMat",
 

@@ -19,6 +19,10 @@
                 "type": "0",
                 "name": "Line Strip",
                 "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "TexCoords"
             }
         ],
         "portsOut": [
