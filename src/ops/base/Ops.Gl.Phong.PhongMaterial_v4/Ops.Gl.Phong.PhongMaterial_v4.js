@@ -54,12 +54,14 @@ inToggleOrenNayar.onChange = function() {
 const inToggleFresnel=op.inValueBool("Active", false);
 inToggleFresnel.setUiAttribs({ hidePort: true });
 const inFresnel=op.inValueSlider("Fresnel Intensity", 0.7);
+const inFresnelWidth = op.inFloat("Fresnel Width", 1);
+const inFresnelExponent = op.inFloat("Fresnel Exponent", 6);
 const inFresnelR = op.inFloat("Fresnel R", 1);
 const inFresnelG = op.inFloat("Fresnel G", 1);
 const inFresnelB = op.inFloat("Fresnel B", 1);
 inFresnelR.setUiAttribs({ colorPick: true });
 
-const fresnelArr = [inFresnel, inFresnelR, inFresnelG, inFresnelB];
+const fresnelArr = [inFresnel, inFresnelWidth, inFresnelExponent, inFresnelR, inFresnelG, inFresnelB];
 fresnelArr.forEach(function(port) { port.setUiAttribs({ greyout: true })});
 op.setPortGroup("Fresnel", fresnelArr.concat([inToggleFresnel]));
 
@@ -347,10 +349,13 @@ const initialUniforms = [
     new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
     new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
     new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
+    new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent),
 
 ];
 
 const lightUniforms = [];
+const vertexLightUniforms = [];
+
 const initialLight = new Light({
     type: "point",
     color: [0.8, 0.8, 0.8],
@@ -396,6 +401,11 @@ for (let i = 0; i < MAX_LIGHTS; i += 1) {
         cosConeAngleInner: true,
         conePointAt: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".conePointAt", null)
     });
+
+    vertexLightUniforms.push({
+        position: new CGL.Uniform(shader, "3f", "vertexLights" + "[" + i + "]" + ".position", i === 0 ? initialLight.position : [0, 0, 0]),
+        type: new CGL.Uniform(shader, "i", "vertexLights" + "[" + i + "]" + ".type", i === 0 ? LIGHT_TYPES.point : LIGHT_TYPES.none),
+    })
 };
 
 const render = function() {
@@ -435,7 +445,15 @@ inTrigger.onTriggered = function() {
                         const key = keys[j];
                         if (key === "type") {
                             lightUniforms[i][key].setValue(LIGHT_TYPES[initialLight[key]]);
+                            vertexLightUniforms[i][key].setValue(LIGHT_TYPES[initialLight[key]]);
                         } else {
+                            if (vertexLightUniforms[i][key]) {
+                              if (key === "position") {
+                                    mat4.invert(inverseViewMat, cgl.vMatrix);
+                                    vec3.transformMat4(camPos, vecTemp, inverseViewMat);
+                                    vertexLightUniforms[i].position.setValue(camPos);
+                              }
+                            }
                             if (lightUniforms[i][key]) {
                                 if (key === "radius" || key === "intensity" || key === "falloff") {
                                     lightUniforms[i].lightProperties.setValue([initialLight.intensity, initialLight.radius, initialLight.falloff]);
@@ -475,7 +493,10 @@ inTrigger.onTriggered = function() {
                 const keys = Object.keys(light);
                 for (let j = 0; j < keys.length; j += 1) {
                     const key = keys[j];
-                    if (key === "type") lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                    if (key === "type") {
+                        lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                        vertexLightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                    }
                     else {
                         if (lightUniforms[i][key]) {
                             if (key === "radius" || key === "intensity" || key === "falloff") {
@@ -485,6 +506,9 @@ inTrigger.onTriggered = function() {
                                 lightUniforms[i].spotProperties.setValue([light.spotExponent, light.cosConeAngle, light.cosConeAngleInner]);
                             }
                             else lightUniforms[i][key].setValue(light[key]);
+                        }
+                        if (vertexLightUniforms[i][key]) {
+                            vertexLightUniforms[i][key].setValue(light[key]);
                         }
 
                     }
