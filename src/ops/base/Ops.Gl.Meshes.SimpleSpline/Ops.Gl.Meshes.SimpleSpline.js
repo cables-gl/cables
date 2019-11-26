@@ -16,6 +16,7 @@ geom.vertices=[0,0,0,0,0,0,0,0,0];
 var mesh=new CGL.Mesh(cgl,geom);
 var buff=new Float32Array();
 var bufTexCoord=new Float32Array();
+var bufNorms=new Float32Array();
 var needsRebuild=true;
 var attr;
 var currentTexCoords="";
@@ -39,6 +40,9 @@ function rebuild()
         if(newLength!=buff.length)
         {
             buff=new Float32Array(newLength);
+            bufNorms=new Float32Array(newLength);
+            mesh.setAttribute(CGL.SHADERVAR_VERTEX_NORMAL,bufNorms,3);
+
             buff.set(points);
         }
         else
@@ -52,6 +56,8 @@ function rebuild()
     }
 
     attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,buff,3);
+
+
 
     var numTc=(newLength/3)*2;
     if(currentTexCoords!=texCoords.get() || mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems!=numTc/2)
@@ -94,15 +100,12 @@ render.onTriggered=function()
     if(!shader)return;
 
     var oldPrim=shader.glPrimitive;
-    if(strip.get())shader.glPrimitive=cgl.gl.LINE_STRIP;  // LINE_LOOP
+    if(strip.get()) shader.glPrimitive=cgl.gl.LINE_STRIP;  // LINE_LOOP
         else shader.glPrimitive=cgl.gl.LINES;
 
     if(attr)
         if(numPoints.get()<=0)attr.numItems=buff.length/3;
             else attr.numItems=Math.min(numPoints.get(),buff.length/3);
-
-
-    // console.log('buffs',buff.length/3,bufTexCoord.length/2);
 
 
     if(mesh && buff.length!==0) mesh.render(shader);
