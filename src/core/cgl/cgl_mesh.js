@@ -373,7 +373,13 @@ Mesh.prototype._bind = function (shader)
                     {
                         var pointer = attribute.pointer[ip];
 
-                        if (pointer.loc == -1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                        if (pointer.loc == -1)
+                        {
+                            pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+
+                            console.log('pointer.loc',attribute.name,pointer.loc);
+
+                        }
                         profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
