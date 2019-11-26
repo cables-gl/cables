@@ -31,11 +31,6 @@ OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
 OUT vec3 lightDirections[MAX_LIGHTS];
 OUT vec3 v_viewDirection;
-OUT vec3 halfVectors[MAX_LIGHTS];
-
-#ifdef SPECULAR_PHONG
-    // OUT vec3 reflectDirections[MAX_LIGHTS];
-#endif
 
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;
@@ -115,13 +110,12 @@ void main()
         vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
         vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
 
-        // re orthogonalization
+        // re orthogonalization for smoother normals
         tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
         bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
 
         TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
 
-    //#endif
 
     fragPos = vec3((mMatrix) * pos);
     v_viewDirection = normalize(camPos - fragPos);
