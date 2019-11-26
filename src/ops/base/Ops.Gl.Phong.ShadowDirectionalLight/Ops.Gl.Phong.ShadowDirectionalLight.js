@@ -1,4 +1,6 @@
 const cgl = op.patch.cgl;
+const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_SHADOWMAPS = MAX_UNIFORM_FRAGMENTS === 64 ? 2 : 8;
 
 function ShadowInfo() {
     const m11 = cgl.pMatrix[4 * 0 + 0];
@@ -21,7 +23,7 @@ function ShadowInfo() {
 
     this.projMatrix = mat4.create();
   // ortho(out, left, right, bottom, top, near, far)
-     mat4.ortho(this.projMatrix, -10, 10, -10, 10, 0.1, 30);
+     mat4.ortho(this.projMatrix, -8, 8, -8, 8, 0.1, 30);
   return this;
 }
 
@@ -38,6 +40,9 @@ function Light(config) {
      this.cosConeAngle = config.cosConeAngle || 0;
      this.conePointAt = config.conePointAt || [0, 0, 0];
      this.shadowInfo = new ShadowInfo();
+     this.shadowMap = null;
+     this.shadowMapIndex = null;
+     this.mvpBiasMatrix = null;
      return this;
 }
 
@@ -46,10 +51,10 @@ var fb = null;
 if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, 1024, 1024);
 else {
     fb = new CGL.Framebuffer2(cgl,1024,1024, {
-        multisampling: true,
+        // multisampling: true,
+        isFloatingPointTexture:true,
         // multisampling:true,
-        // isFloatingPointTexture:true,
-        // filter: CGL.Texture.FILTER_NEAREST,
+        filter: CGL.Texture.FILTER_LINEAR,
          //shadowMap:true
     });
 }
@@ -89,6 +94,12 @@ op.setPortGroup("Specular Color", colorSpecularIn);
 const inIntensity = op.inFloat("Intensity", 1);
 const attribIns = [inIntensity];
 op.setPortGroup("Light Attributes", attribIns);
+
+const inCastShadow = op.inBool("Cast Shadow", false);
+const inShadowBias = op.inFloat("Bias", 0.002);
+op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow]);
+
+var inShadowBiasUniform = new CGL.Uniform(shader, "f", "inShadowBias", inShadowBias);
 
 const outTrigger = op.outTrigger("Trigger Out");
 const textureOut = op.outTexture("Shadow Map");
@@ -152,7 +163,7 @@ function renderFramebuffer() {
     cgl.pushViewMatrix();
     cgl.pushPMatrix();
 
-    fb.setSize(2048, 2048);
+    // fb.setSize(2048, 2048);
     fb.renderStart();
 
     // * calculate matrices & camPos vector
@@ -160,6 +171,7 @@ function renderFramebuffer() {
     mat4.copy(cgl.mMatrix, identityMat); // M
     mat4.lookAt(cgl.vMatrix, camPos, lookAt, up); // V
     mat4.copy(cgl.pMatrix, light.shadowInfo.projMatrix); // P
+
     // * create light mvp bias matrix
     mat4.mul(lightBiasMVPMatrix, cgl.pMatrix, cgl.vMatrix);
     mat4.mul(lightBiasMVPMatrix, biasMatrix, lightBiasMVPMatrix);
@@ -167,6 +179,24 @@ function renderFramebuffer() {
     outTrigger.trigger();
 
     fb.renderEnd();
+
+    // remove light from stack and readd it with shadow map & mvp matrix
+    cgl.lightStack.pop();
+
+    const map = fb.getTextureColor();
+
+    light.mvpBiasMatrix = lightBiasMVPMatrix;
+
+    if (light.shadowMapIndex === null) {
+        cgl.shadowMapArray.push(map);
+        const shadowMapIndex = cgl.shadowMapArray.indexOf(map);
+        light.shadowMapIndex = shadowMapIndex;
+    }
+    else {
+        cgl.shadowMapArray[light.shadowMapIndex] = map;
+    }
+
+    cgl.lightStack.push(light);
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -183,6 +213,10 @@ const position = vec3.create();
 
 inTrigger.onTriggered = function() {
     if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.shadowMapArray) {
+        cgl.shadowMapArray = [];
+        // cgl.shadowMapArray.length = MAX_SHADOWMAPS;
+     }
         /*
         if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         CABLES.GL_MARKER.drawLineSourceDest({
@@ -202,6 +236,7 @@ inTrigger.onTriggered = function() {
     renderFramebuffer();
     outTrigger.trigger();
     cgl.lightStack.pop();
+
     textureOut.set(null);
     textureOut.set(fb.getTextureColor());
 }

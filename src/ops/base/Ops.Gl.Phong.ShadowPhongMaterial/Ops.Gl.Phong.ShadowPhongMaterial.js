@@ -15,6 +15,9 @@ function Light(config) {
 
 
 const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl,"simosphong");
+shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
+shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 
 const inTrigger = op.inTrigger("Trigger In");
 
@@ -94,6 +97,20 @@ inToggleDoubleSided.setUiAttribs({ hidePort: true });
 const lightProps = [inEnergyConservation, inToggleDoubleSided];
 op.setPortGroup("Light Options", lightProps);
 
+// * SHADOW *
+const inReceiveShadow = op.inValueBool("Receive Shadow", false);
+const inShadowAlgorithm = op.inSwitch("Shadow Algorithm", ["Variance"], "Variance");
+
+inReceiveShadow.onChange = function() {
+    shader.toggleDefine("RECEIVE_SHADOW", inReceiveShadow.get());
+    op.log(shader.getDefines());
+}
+
+inReceiveShadow.setUiAttribs({ hidePort: true });
+inShadowAlgorithm.setUiAttribs({ hidePort: true });
+
+op.setPortGroup("Shadow Options",[inReceiveShadow, inShadowAlgorithm]);
+
 // TEXTURES
 const inDiffuseTexture = op.inTexture("Diffuse Texture");
 const inSpecularTexture = op.inTexture("Specular Texture");
@@ -135,6 +152,14 @@ function bindTextures() {
     if (inAoTexture.get()) cgl.setTexture(3, inAoTexture.get().tex);
     if (inEmissiveTexture.get()) cgl.setTexture(4, inEmissiveTexture.get().tex);
     if (inAlphaTexture.get()) cgl.setTexture(5, inAlphaTexture.get().tex);
+
+    // if(cgl.shadowMapTest) cgl.setTexture(4, cgl.shadowPass ? null : cgl.shadowMapTest.tex);
+    if (cgl.shadowMapArray) {
+        for (let i = 0; i < MAX_SHADOWMAPS; i += 1) {
+            if (cgl.shadowMapArray[i]) cgl.setTexture(6 + i, cgl.shadowMapArray[i].tex);
+        }
+    }
+
 }
 
 
@@ -143,9 +168,7 @@ const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
 
 
-const shader = new CGL.Shader(cgl,"simosphong");
-shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
-shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
+
 
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;
@@ -223,6 +246,7 @@ function updateEmissiveTexture() {
     }
 }
 
+
 // TEX OPACITY
 
 function updateAlphaMaskMethod()
@@ -272,6 +296,24 @@ function updateAlphaTexture()
     updateAlphaMaskMethod();
 };
 
+const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 7 : 16; // iOS
+
+const MAX_SHADOWMAPS = MAX_UNIFORM_FRAGMENTS === 64 ? 2 : 8;
+
+shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
+shader.define('MAX_SHADOWMAPS', MAX_SHADOWMAPS.toString());
+shader.define("SPECULAR_PHONG");
+
+const shadowMapUniforms = [];
+for (let i = 0; i < MAX_SHADOWMAPS; i += 1) {
+    shadowMapUniforms.push(new CGL.Uniform(shader, 't', "shadowMaps[" + i + "]", 6 + i));
+}
+
+shader.bindTextures = bindTextures;
+
+
+
 discardTransPxl.onChange=function()
 {
     if(discardTransPxl.get()) shader.define('DISCARDTRANS');
@@ -293,12 +335,6 @@ inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 
-const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
-const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 7 : 16;
-
-shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
-shader.define("SPECULAR_PHONG");
-shader.bindTextures = bindTextures;
 
 const LIGHT_TYPES = {
     none: -1,
@@ -351,6 +387,7 @@ const initialUniforms = [
 ];
 
 const lightUniforms = [];
+const vertexLightUniforms = []; // workaround cause i cant use same light uniforms in vs & fs???
 const initialLight = new Light({
     type: "point",
     color: [0.8, 0.8, 0.8],
@@ -394,10 +431,23 @@ for (let i = 0; i < MAX_LIGHTS; i += 1) {
         spotExponent: true,
         cosConeAngle: true,
         cosConeAngleInner: true,
-        conePointAt: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".conePointAt", null)
+        conePointAt: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".conePointAt", null),
+
+        // * SHADOW *
+        mvpBiasMatrix: new CGL.Uniform(shader, "m4", "lights" + "[" + i + "]" + ".mvpBiasMatrix", mat4.create()),
+        shadowMapIndex: new CGL.Uniform(shader, "i", "lights" + "[" + i + "]" + ".shadowMapIndex", -1),
     });
 };
 
+for (let i = 0; i < MAX_LIGHTS; i += 1) {
+    vertexLightUniforms.push({
+        type: new CGL.Uniform(shader, "i", "vertexLights" + "[" + i + "]" + ".type", LIGHT_TYPES.none),
+        mvpBiasMatrix: new CGL.Uniform(shader, "m4", "vertexLights" + "[" + i + "]" + ".mvpBiasMatrix", mat4.create()),
+        shadowMapIndex: new CGL.Uniform(shader, "i", "vertexLights" + "[" + i + "]" + ".shadowMapIndex", -1),
+    });
+}
+
+op.log(vertexLightUniforms);
 const render = function() {
     if (!shader) {
         op.log("NO SHADER");
@@ -412,9 +462,6 @@ const render = function() {
     cgl.setPreviousShader();
 
     } else {
-        op.log("1 shadowPass");
-        op.log("shader to render", cgl.shaderToRender);
-        op.log("2 shader", cgl._shaderStack.map(shader => shader._name));
         //cgl.setShader(cgl.shaderToRender);
         //cgl.setPreviousShader();
         //op.log("3 shader after pop", cgl._shaderStack.map(shader => shader._name));
@@ -443,7 +490,7 @@ const vecTemp = vec3.create();
 const camPos = vec3.create();
 
 inTrigger.onTriggered = function() {
-    cgl.shadowPass = true;
+    // cgl.shadowPass = true;
     if (cgl.lightStack) {
         if (!cgl.shadowPass) {
             if (cgl.lightStack.length === 0) {
@@ -496,7 +543,10 @@ inTrigger.onTriggered = function() {
                     const keys = Object.keys(light);
                     for (let j = 0; j < keys.length; j += 1) {
                         const key = keys[j];
-                        if (key === "type") lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                        if (key === "type") {
+                            lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                            vertexLightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                        }
                         else {
                             if (lightUniforms[i][key]) {
                                 if (key === "radius" || key === "intensity" || key === "falloff") {
@@ -505,9 +555,18 @@ inTrigger.onTriggered = function() {
                                 else if (key === "spotExponent" || key === "cosConeAngle" || key === "cosConeAngleInner") {
                                     lightUniforms[i].spotProperties.setValue([light.spotExponent, light.cosConeAngle, light.cosConeAngleInner]);
                                 }
-                                else lightUniforms[i][key].setValue(light[key]);
+                                else {
+                                    lightUniforms[i][key].setValue(light[key]);
+                                    //op.log("lightuniform", lightUniforms[i][key]);
+                                }
                             }
 
+                            if (vertexLightUniforms[i][key]) {
+                                vertexLightUniforms[i][key].setValue(light[key]);
+
+                                // op.log("key", key, "uniform", vertexLightUniforms[i][key], "light", light[key], "shadowmaparray", cgl.shadowMapArray);
+
+                            }
                         }
                     }
                 }

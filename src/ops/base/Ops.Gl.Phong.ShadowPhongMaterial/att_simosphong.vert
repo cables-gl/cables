@@ -6,6 +6,12 @@
 #define TEX_OFFSET_X z;
 #define TEX_OFFSET_Y w;
 
+#define NONE -1
+#define AMBIENT 0
+#define POINT 1
+#define DIRECTIONAL 2
+#define SPOT 3
+
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
@@ -22,6 +28,25 @@ OUT vec3 fragPos;
 OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
 
+
+#ifdef RECEIVE_SHADOW
+    OUT vec4 lightSpace_fragPos[MAX_SHADOWMAPS];
+    OUT vec4 shadowCoords[MAX_SHADOWMAPS];
+#endif
+
+
+struct Light {
+    int type;
+    mat4 mvpBiasMatrix;
+    int shadowMapIndex;
+};
+
+struct LightTest {
+    int type;
+    mat4 mvpBiasMatrix;
+    int shadowMapIndex;
+};
+
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;
 #endif
@@ -31,6 +56,9 @@ UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 normalMatrix;
+UNI Light vertexLights[MAX_LIGHTS];
+// UNI LightTest lights[MAX_LIGHTS];
+//UNI Light lights[MAX_LIGHTS];
 
 mat3 transposeMat3(mat3 m)
 {
@@ -95,6 +123,19 @@ void main()
    TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
    fragPos = vec3((mMatrix) * pos);
 
+    #ifdef RECEIVE_SHADOW
+        for (int i = 0; i < MAX_LIGHTS; i++) {
+            Light light = vertexLights[i];
+            if (light.type == DIRECTIONAL) {
+                if (light.shadowMapIndex != -1) {
+                    mat4 lightBiasMVP = light.mvpBiasMatrix;
+                    lightSpace_fragPos[light.shadowMapIndex] = lightBiasMVP * pos;
+                    shadowCoords[light.shadowMapIndex] = lightBiasMVP * mMatrix * pos; // vec4(fragPos, 1.);
+                }
+            }
+            else continue;
+        }
+    #endif
 
 
    gl_Position = projMatrix * mvMatrix * pos;

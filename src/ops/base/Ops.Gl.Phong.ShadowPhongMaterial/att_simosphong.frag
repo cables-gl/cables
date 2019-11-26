@@ -20,6 +20,9 @@ struct Light {
     float cosConeAngleInner;
     float spotExponent;
     vec3 conePointAt;
+    mat4 lightBiasMVP;
+    int shadowMapIndex;
+
 };
 
 #ifdef HAS_TEXTURES
@@ -49,6 +52,12 @@ struct Light {
 #endif
 
 UNI Light lights[MAX_LIGHTS];
+// UNI Light light;
+#ifdef RECEIVE_SHADOW
+    UNI sampler2D shadowMaps[MAX_SHADOWMAPS];
+    IN vec4 lightSpace_fragPos[MAX_SHADOWMAPS];
+    IN vec4 shadowCoords[MAX_SHADOWMAPS];
+#endif
 
 UNI Material material;
 UNI vec4 inDiffuseColor;
@@ -69,6 +78,8 @@ IN vec3 normInterpolated;
 IN vec3 fragPos;
 IN mat3 TBN_Matrix;
 IN vec4 cameraSpace_pos;
+
+IN vec4 shadowCoord;
 
 UNI mat4 normalMatrix;
 UNI mat4 viewMatrix;
@@ -95,7 +106,137 @@ UNI mat4 viewMatrix;
 const float TWO_PI = 2.*PI;
 const float EIGHT_PI = 8.*PI;
 
+
 {{MODULES_HEAD}}
+
+// #define ALIASING_VARIANCE
+
+
+#ifdef RECEIVE_SHADOW
+    float ChebyshevUpperBound(sampler2D shadowMap, vec4 shadowCoord) {
+        float distanceTo = shadowCoord.z;
+        // retrieve previously stored moments & variance
+        vec3 moments = texture(shadowMap, shadowCoord.xy).rgb;
+
+        if (distanceTo <= moments.x) return 1.;
+
+        // could this be done in shadow pass?
+        //float variance = moments.y - (moments.x * moments.x);
+
+        float variance = moments.b;
+        float d = distanceTo - moments.x;
+        float pMax = variance / (variance + d * d);
+
+        return pMax;
+    }
+#endif
+
+// http://www.chinedufn.com/webgl-shadow-mapping-tutorial/
+#ifdef ALIASING_PCF
+    float decodeFloat (vec4 color) {
+    const vec4 bitShift = vec4(
+    1.0 / (256.0 * 256.0 * 256.0),
+    1.0 / (256.0 * 256.0),
+    1.0 / 256.0,
+    1);
+
+    return dot(color, bitShift);
+}
+
+    float PCFSampling(sampler2D shadowMap, vec4 shadowCoord, float bias) {
+        vec3 fragmentDepth = shadowCoord.xyz;
+
+        float texelSize = 1. / shadowMapWidth;
+        float visibility = 0.;
+
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                float texelDepth = texture(shadowMap, fragmentDepth.xy + vec2(x, y) * texelSize).r;
+                // float texelDepth = decodeFloat(shadowColor);
+                if (fragmentDepth.z - bias < texelDepth) {
+                    visibility += 1.;
+                }
+            }
+        }
+
+        visibility /= 9.;
+        return visibility;
+    }
+#endif
+
+#ifdef ALIASING_POISSON
+
+    vec2 poissonDisk[16] = vec2[](
+       vec2( -0.94201624, -0.39906216 ),
+       vec2( 0.94558609, -0.76890725 ),
+       vec2( -0.094184101, -0.92938870 ),
+       vec2( 0.34495938, 0.29387760 ),
+       vec2( -0.91588581, 0.45771432 ),
+       vec2( -0.81544232, -0.87912464 ),
+       vec2( -0.38277543, 0.27676845 ),
+       vec2( 0.97484398, 0.75648379 ),
+       vec2( 0.44323325, -0.97511554 ),
+       vec2( 0.53742981, -0.47373420 ),
+       vec2( -0.26496911, -0.41893023 ),
+       vec2( 0.79197514, 0.19090188 ),
+       vec2( -0.24188840, 0.99706507 ),
+       vec2( -0.81409955, 0.91437590 ),
+       vec2( 0.19984126, 0.78641367 ),
+       vec2( 0.14383161, -0.14100790 )
+    );
+
+    const int SAMPLE_AMOUNT = 16;
+
+    float PoissonSampling(sampler2D shadowMap, vec4 shadowCoord, float bias) {
+        float visibility = 1.;
+        for (int i = 0; i < SAMPLE_AMOUNT; i++) {
+            if (texture(shadowMap, (shadowCoord.xy + poissonDisk[i]/700.)).r < shadowCoord.z - bias) {
+                visibility -= 0.2;
+            }
+        }
+        return visibility;
+    }
+#endif
+#ifdef ALIASING_STRATIFIED
+    vec2 poissonDisk[16] = vec2[](
+       vec2( -0.94201624, -0.39906216 ),
+       vec2( 0.94558609, -0.76890725 ),
+       vec2( -0.094184101, -0.92938870 ),
+       vec2( 0.34495938, 0.29387760 ),
+       vec2( -0.91588581, 0.45771432 ),
+       vec2( -0.81544232, -0.87912464 ),
+       vec2( -0.38277543, 0.27676845 ),
+       vec2( 0.97484398, 0.75648379 ),
+       vec2( 0.44323325, -0.97511554 ),
+       vec2( 0.53742981, -0.47373420 ),
+       vec2( -0.26496911, -0.41893023 ),
+       vec2( 0.79197514, 0.19090188 ),
+       vec2( -0.24188840, 0.99706507 ),
+       vec2( -0.81409955, 0.91437590 ),
+       vec2( 0.19984126, 0.78641367 ),
+       vec2( 0.14383161, -0.14100790 )
+    );
+    const int SAMPLE_AMOUNT = 16;
+
+    float Random(vec4 randomVec) {
+        float dotProduct = dot(randomVec, vec4(12.9898,78.233,45.164,94.673));
+        return fract(sin(dotProduct) * 43758.5453);
+    }
+
+    float StratifiedSampling(sampler2D shadowMap, vec4 shadowCoord, float bias) {
+        float visibility = 1.;
+        for (int i = 0; i < SAMPLE_AMOUNT; i++) {
+            int index = int(16. * Random(vec4(gl_FragCoord.xyy, i)))%16;
+            if (texture(shadowMap, (shadowCoord.xy + poissonDisk[index]/700.)).r < shadowCoord.z - bias) {
+                visibility -= 0.2;
+            }
+        }
+        return visibility;
+    }
+#endif
+
+
+
 
 #ifdef CONSERVE_ENERGY
     // http://www.rorydriscoll.com/2009/01/25/energy-conservation-in-games/
@@ -240,6 +381,15 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
         attenuation = 0.;
     }
 
+
+    #ifdef RECEIVE_SHADOW
+        float visibility = 1.;
+        vec4 shadowCoord = shadowCoords[light.shadowMapIndex];
+        //if (texture(shadowMaps[light.shadowMapIndex], shadowCoord.xy).z < shadowCoord.z - 0.005) visibility = 0.2;
+        visibility = ChebyshevUpperBound(shadowMaps[light.shadowMapIndex], shadowCoord);
+        specularColor *= visibility;
+        diffuseColor *= visibility;
+    #endif
 
     vec3 color = ambientColor + light.intensity*(diffuseColor + specularColor);
 
@@ -575,4 +725,60 @@ void main() {
     outColor = clamp(col, 0., 1.);
 }
 
+/*
+    // #ifdef HAS_SHADOW_MAP
+       // float visibility = 1.;
+        float bias = 0.05;
+
+        // * FIXING SELF SHDAOWING ? * //
+
+        // from stackoverflow
+        bias = max(0.05 * (1. - dot(normal, lightDirection)), 0.005);
+       // from openGL tut: http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/
+       //bias = clamp(0.005*tan(acos(dot(normal,lightDirection))), 0.01, 0.06);
+
+
+
+        //vec3 actualShadowCoords = shadowCoord.xyz / shadowCoord.w;
+        //actualShadowCoords = actualShadowCoords * 0.5 + 0.5;
+        //ec3 projCoords = lightSpace_fragPos.xyz / lightSpace_fragPos.w;
+        //projCoords = projCoords * 0.5 + 0.5;
+
+        float closestDepth = texture(shadowMap, shadowCoord.xy).z;
+        float currentDepth = shadowCoord.z;
+
+        // float visibility = currentDepth > closestDepth ? 1. : 0.5;
+        float visibility = 1.0;
+
+        #ifdef ALIASING_PCF
+            visibility = PCFSampling(shadowMap, shadowCoord, bias);
+          if (texture(shadowMap, shadowCoord.xy).r < shadowCoord.z - bias) visibility = 0.2;
+
+         #endif
+
+        #ifdef ALIASING_POISSON
+            visibility = PoissonSampling(shadowMap, shadowCoord, bias);
+        #endif
+
+        #ifdef ALIASING_STRATIFIED
+            visibility = StratifiedSampling(shadowMap, shadowCoord, bias);
+        #endif
+
+        #ifdef ALIASING_VARIANCE
+            visibility = VarianceSampling(shadowMap, shadowCoord, bias);
+        #endif
+
+
+        if (texture(shadowMap, actualShadowCoords.xy).r < shadowCoord.z - bias) {
+            // visibility = 0.5;
+        }
+
+        // visibility=closestDepth;
+
+
+        diffuseColor *= (visibility); // (visibility);
+        specularColor *= (visibility); // (visibility);
+
+    // #endif
+*/
 

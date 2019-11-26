@@ -110,6 +110,17 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Receive Shadow",
+                "group": "Shadow Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Shadow Algorithm",
+                "group": "Shadow Options"
+            },
+            {
                 "type": "2",
                 "name": "Diffuse Texture",
                 "group": "Textures"
@@ -221,7 +232,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.User.cables.ShadowPhongMaterial"
+        "name": "Ops.Gl.Phong.ShadowPhongMaterial"
     },
     "changelog": [
         {

@@ -67,6 +67,18 @@
                 "name": "Intensity",
                 "group": "Light Attributes",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cast Shadow",
+                "group": "Shadow Attributes",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "group": "Shadow Attributes",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -79,7 +91,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.User.cables.ShadowDirectionalLight"
+        "name": "Ops.Gl.Phong.ShadowDirectionalLight"
     },
     "changelog": [
         {
