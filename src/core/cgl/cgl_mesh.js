@@ -280,7 +280,7 @@ Mesh.prototype.setGeom = function (geom)
 
     var geomAttribs = this._geom.getAttributes();
     for (var index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
-    
+
 };
 
 Mesh.prototype._preBind = function (shader)
@@ -318,6 +318,7 @@ Mesh.prototype._bind = function (shader)
             {
                 attribute._attrLocationLastShaderTime = shader.lastCompile;
                 attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
+                // console.log('attribloc',attribute.name,attrLocs[i]);
                 profileData.profileAttrLoc++;
             }
         }
@@ -370,7 +371,11 @@ Mesh.prototype._bind = function (shader)
                     {
                         var pointer = attribute.pointer[ip];
 
-                        if (pointer.loc == -1) pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                        if (pointer.loc == -1)
+                        {
+                            pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
+                            // console.log('pointer.loc',attribute.name,pointer.loc);
+                        }
                         profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
