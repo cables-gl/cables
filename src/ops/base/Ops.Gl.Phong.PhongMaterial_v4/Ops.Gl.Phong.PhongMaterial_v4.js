@@ -296,7 +296,7 @@ inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
-const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 7 : 16;
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
 shader.define("SPECULAR_PHONG");
@@ -354,7 +354,6 @@ const initialUniforms = [
 ];
 
 const lightUniforms = [];
-const vertexLightUniforms = [];
 
 const initialLight = new Light({
     type: "point",
@@ -401,11 +400,6 @@ for (let i = 0; i < MAX_LIGHTS; i += 1) {
         cosConeAngleInner: true,
         conePointAt: new CGL.Uniform(shader, "3f", "lights" + "[" + i + "]" + ".conePointAt", null)
     });
-
-    vertexLightUniforms.push({
-        position: new CGL.Uniform(shader, "3f", "vertexLights" + "[" + i + "]" + ".position", i === 0 ? initialLight.position : [0, 0, 0]),
-        type: new CGL.Uniform(shader, "i", "vertexLights" + "[" + i + "]" + ".type", i === 0 ? LIGHT_TYPES.point : LIGHT_TYPES.none),
-    })
 };
 
 const render = function() {
@@ -417,10 +411,6 @@ const render = function() {
     shader.bindTextures();
     outTrigger.trigger();
     cgl.setPreviousShader();
-}
-
-op.init = function() {
-
 }
 
 op.preRender = function() {
@@ -445,15 +435,7 @@ inTrigger.onTriggered = function() {
                         const key = keys[j];
                         if (key === "type") {
                             lightUniforms[i][key].setValue(LIGHT_TYPES[initialLight[key]]);
-                            vertexLightUniforms[i][key].setValue(LIGHT_TYPES[initialLight[key]]);
                         } else {
-                            if (vertexLightUniforms[i][key]) {
-                              if (key === "position") {
-                                    mat4.invert(inverseViewMat, cgl.vMatrix);
-                                    vec3.transformMat4(camPos, vecTemp, inverseViewMat);
-                                    vertexLightUniforms[i].position.setValue(camPos);
-                              }
-                            }
                             if (lightUniforms[i][key]) {
                                 if (key === "radius" || key === "intensity" || key === "falloff") {
                                     lightUniforms[i].lightProperties.setValue([initialLight.intensity, initialLight.radius, initialLight.falloff]);
@@ -473,7 +455,6 @@ inTrigger.onTriggered = function() {
                                 }
                             }
                         }
-
                     }
                 } else {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);
@@ -495,7 +476,6 @@ inTrigger.onTriggered = function() {
                     const key = keys[j];
                     if (key === "type") {
                         lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
-                        vertexLightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
                     }
                     else {
                         if (lightUniforms[i][key]) {
@@ -507,10 +487,6 @@ inTrigger.onTriggered = function() {
                             }
                             else lightUniforms[i][key].setValue(light[key]);
                         }
-                        if (vertexLightUniforms[i][key]) {
-                            vertexLightUniforms[i][key].setValue(light[key]);
-                        }
-
                     }
                 }
             }

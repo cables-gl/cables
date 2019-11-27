@@ -29,7 +29,6 @@ OUT vec3 fragPos;
 
 OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
-OUT vec3 lightDirections[MAX_LIGHTS];
 OUT vec3 v_viewDirection;
 
 #ifdef HAS_TEXTURES
@@ -40,8 +39,6 @@ struct Light {
     vec3 position;
     int type;
 };
-
-UNI Light vertexLights[MAX_LIGHTS];
 
 UNI vec3 camPos;
 UNI mat4 projMatrix;
@@ -120,15 +117,5 @@ void main()
     fragPos = vec3((mMatrix) * pos);
     v_viewDirection = normalize(camPos - fragPos);
 
-    for (int i = 0; i < MAX_LIGHTS; i++) {
-        if (vertexLights[i].type == DIRECTIONAL) {
-            lightDirections[i] = normalize(vertexLights[i].position);
-        }
-        else {
-            lightDirections[i] = vertexLights[i].position - fragPos;
-        }
-    }
-
-
-   gl_Position = projMatrix * mvMatrix * pos;
+    gl_Position = projMatrix * mvMatrix * pos;
 }

@@ -48,6 +48,8 @@ struct Light {
     #endif
 #endif
 
+UNI vec3 camPos;
+UNI mat4 viewMatrix;
 UNI Light lights[MAX_LIGHTS];
 UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
@@ -59,50 +61,37 @@ UNI vec4 inMaterialProperties;
 #endif
 
 
-UNI vec3 camPos;
-
 IN vec2 texCoord;
 IN vec3 normInterpolated;
 IN vec3 fragPos;
 IN mat3 TBN_Matrix;
 IN vec4 cameraSpace_pos;
-
-IN vec3 lightDirections[MAX_LIGHTS];
 IN vec3 v_viewDirection;
 
-UNI mat4 viewMatrix;
 
+/* CONSTANTS */
 #define PI 3.1415926535897932384626433832795
-
 #define NONE -1
 #define AMBIENT 0
 #define POINT 1
 #define DIRECTIONAL 2
 #define SPOT 3
-
 #define ALBEDO x;
 #define ROUGHNESS y;
 #define SHININESS z;
 #define SPECULAR_AMT w;
-
 #define NORMAL x;
 #define AO y;
 #define SPECULAR z;
 #define EMISSIVE w;
-
-
 const float TWO_PI = 2.*PI;
 const float EIGHT_PI = 8.*PI;
 
 {{MODULES_HEAD}}
 
-float when_gt(float x, float y) {
-  return max(sign(x - y), 0.0);
-}
-
-int when_eq(int x, int y) {
-  return 1 - abs(sign(x - y));
-}
+float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
+float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
+float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
 
 #ifdef CONSERVE_ENERGY
     // http://www.rorydriscoll.com/2009/01/25/energy-conservation-in-games/
@@ -192,15 +181,15 @@ vec3 CalculateSpecularColor(Material material, Light light, vec3 lightDirection,
     #ifdef SPECULAR_PHONG
         vec3 reflectDirection = reflect(-lightDirection, normal);
         float specularAngle = max(dot(reflectDirection, viewDirection), 0.);
-        float specularFactor = pow(specularAngle, max(0., material.shininess)); //max(0.01, 1. - material.shininess)*256.);
-    specularColor = lambertian * specularFactor * material.specularCoefficient * light.specular; // * material.diffuse;
+        float specularFactor = pow(specularAngle, max(0., material.shininess));
+    specularColor = lambertian * specularFactor * material.specularCoefficient * light.specular;
     #endif
 
     #ifdef SPECULAR_BLINN
         vec3 halfDirection = normalize(lightDirection + viewDirection);
         float specularAngle = max(dot(halfDirection, normal), 0.);
-        float specularFactor = pow(specularAngle, max(0., material.shininess)); //max(0.01, 1. - material.shininess)*256.);
-        specularColor = lambertian * specularFactor * material.specularCoefficient * light.specular; // * material.diffuse;
+        float specularFactor = pow(specularAngle, max(0., material.shininess));
+        specularColor = lambertian * specularFactor * material.specularCoefficient * light.specular;
     #endif
 
     #ifdef SPECULAR_SCHLICK
@@ -214,7 +203,7 @@ vec3 CalculateSpecularColor(Material material, Light light, vec3 lightDirection,
     #ifdef SPECULAR_GAUSS
         vec3 halfDirection = normalize(lightDirection + viewDirection);
         float specularAngle = acos(max(dot(halfDirection, normal), 0.));
-        float exponent = specularAngle * material.shininess * 0.17; // * 10.;
+        float exponent = specularAngle * material.shininess * 0.17;
         exponent = -(exponent*exponent);
         float specularFactor = exp(exponent);
 
@@ -298,7 +287,8 @@ void main() {
             light.cosConeAngle = light.spotProperties.y;
             light.cosConeAngleInner = light.spotProperties.z;
 
-            vec3 lightDirection = normalize(lightDirections[i]);
+             // when light is not directional, we subtract fragpos, if it is we just use position
+            vec3 lightDirection = normalize(light.position - when_neq(float(light.type), float(DIRECTIONAL)) * fragPos);
             vec3 viewDirection = normalize(v_viewDirection);
 
 
@@ -324,7 +314,7 @@ void main() {
             attenuation *= when_gt(lambertian, 0.);
 
             // when_eq returns 1 when light type == DIRECTIONAL, 0 else, we take the max -> dirLight gets attenuation of 1.
-            attenuation = max(attenuation, float(when_eq(light.type, DIRECTIONAL)));
+            attenuation = max(attenuation, when_eq(float(light.type), float(DIRECTIONAL)));
 
             vec3 specularColor = CalculateSpecularColor(material, light, lightDirection, viewDirection, normal, lambertian);
 
@@ -381,5 +371,7 @@ void main() {
         if(col.a<0.2) discard;
     #endif
 
+    // outColor = vec4(1., 0., 0., 1.);
     outColor = clamp(col, 0., 1.);
+    //outColor = vec4()
 }
