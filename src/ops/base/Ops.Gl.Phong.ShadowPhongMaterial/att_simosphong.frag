@@ -113,21 +113,29 @@ const float EIGHT_PI = 8.*PI;
 
 
 #ifdef RECEIVE_SHADOW
+    float linstep(float value, float low, float high) {
+        return clamp((value - low)/(high-low), 0., 1.) ;
+    }
+
     float ChebyshevUpperBound(sampler2D shadowMap, vec4 shadowCoord) {
         float distanceTo = shadowCoord.z;
         // retrieve previously stored moments & variance
+
         vec3 moments = texture(shadowMap, shadowCoord.xy).rgb;
 
-        if (distanceTo <= moments.x) return 1.;
+        //if (distanceTo <= moments.x) return 1.;
+        float p = step(distanceTo, moments.x);
 
-        // could this be done in shadow pass?
-        //float variance = moments.y - (moments.x * moments.x);
+        // could this be done in shadow pass? no because we interpolate with linear filtering
+        float variance = max(moments.y - (moments.x * moments.x), 0.00002);
 
-        float variance = moments.b;
-        float d = distanceTo - moments.x;
-        float pMax = variance / (variance + d * d);
+        float distanceToMean = distanceTo - moments.x;
+        //there is a very small probability that something is being lit when its not
+        // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
+        float pMax = linstep(variance / (variance + distanceToMean * distanceToMean), 0.0001, 1.);
 
-        return pMax;
+
+        return clamp(pMax, 1., p); // min(max(pMax, p), 1.);
     }
 #endif
 
@@ -385,8 +393,9 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
     #ifdef RECEIVE_SHADOW
         float visibility = 1.;
         vec4 shadowCoord = shadowCoords[light.shadowMapIndex];
-        //if (texture(shadowMaps[light.shadowMapIndex], shadowCoord.xy).z < shadowCoord.z - 0.005) visibility = 0.2;
+        //if (texture(shadowMaps[light.shadowMapIndex], shadowCoord.xy).w < shadowCoord.z - 0.3) visibility = 0.2;
         visibility = ChebyshevUpperBound(shadowMaps[light.shadowMapIndex], shadowCoord);
+
         specularColor *= visibility;
         diffuseColor *= visibility;
     #endif

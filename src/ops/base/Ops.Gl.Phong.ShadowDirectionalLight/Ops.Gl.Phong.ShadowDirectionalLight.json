@@ -79,6 +79,24 @@
                 "name": "Bias",
                 "group": "Shadow Attributes",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "LR-BottomTop",
+                "group": "Shadow Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "group": "Shadow Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "group": "Shadow Attributes",
+                "subType": "number"
             }
         ],
         "portsOut": [

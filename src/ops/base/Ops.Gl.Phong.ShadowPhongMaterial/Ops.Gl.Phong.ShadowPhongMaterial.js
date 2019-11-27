@@ -106,7 +106,7 @@ inReceiveShadow.onChange = function() {
     op.log(shader.getDefines());
 }
 
-inReceiveShadow.setUiAttribs({ hidePort: true });
+// inReceiveShadow.setUiAttribs({ hidePort: true });
 inShadowAlgorithm.setUiAttribs({ hidePort: true });
 
 op.setPortGroup("Shadow Options",[inReceiveShadow, inShadowAlgorithm]);

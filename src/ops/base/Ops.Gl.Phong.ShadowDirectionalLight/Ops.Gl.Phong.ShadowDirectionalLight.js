@@ -67,6 +67,22 @@ shader.setSource(attachments.shadow_vert, attachments.shadow_frag);
 
 cgl.shaderToRender = shader;
 
+const blurShader = new CGL.Shader(cgl, "shadowBlur");
+blurShader.setSource(blurShader.getDefaultVertexShader(), attachments.blur_frag);
+const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+
+const outputTexture =new CGL.Texture(cgl, {
+        name: "shadowMap",
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+        width: 1024,
+        height: 1024,
+    });
+
+
+
+
+
 const inTrigger = op.inTrigger("Trigger In");
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 3);
@@ -97,7 +113,11 @@ op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inShadowBias = op.inFloat("Bias", 0.002);
-op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow]);
+const inLRBT = op.inFloat("LR-BottomTop", 8);
+const inNear = op.inFloat("Near", 0.1);
+const inFar = op.inFloat("Far", 30);
+
+op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow, inLRBT, inNear, inFar]);
 
 var inShadowBiasUniform = new CGL.Uniform(shader, "f", "inShadowBias", inShadowBias);
 
@@ -114,6 +134,15 @@ const light = new Light({
     falloff: null,
 });
 
+inLRBT.onChange = inNear.onChange = inFar.onChange = function() {
+    mat4.ortho(light.shadowInfo.projMatrix,
+        -1*inLRBT.get(),
+        inLRBT.get(),
+        -1*inLRBT.get(),
+        inLRBT.get(),
+        inNear.get(),
+        inFar.get());
+}
 const inLight = {
   position: [inPosX, inPosY, inPosZ],
   color: [inR, inG, inB],
@@ -151,6 +180,23 @@ const biasMatrix = mat4.fromValues(
         0.5, 0.5, 0.5, 1.0);
 const lightBiasMVPMatrix = mat4.create();
 
+function renderBlur(texture) {
+    effect.setSourceTexture(texture);
+    effect.startEffect();
+
+    // render background color...
+    cgl.setShader(blurShader);
+    cgl.currentTextureEffect.bind();
+    cgl.setTexture(12, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    cgl.currentTextureEffect.finish();
+    cgl.setPreviousShader();
+
+    //trigger.trigger();
+
+    textureOut.set(effect.getCurrentSourceTexture());
+    effect.endEffect();
+}
+
 function renderFramebuffer() {
     //cgl.frameStore.renderOffscreen = true;
 
@@ -170,6 +216,7 @@ function renderFramebuffer() {
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
     mat4.copy(cgl.mMatrix, identityMat); // M
     mat4.lookAt(cgl.vMatrix, camPos, lookAt, up); // V
+
     mat4.copy(cgl.pMatrix, light.shadowInfo.projMatrix); // P
 
     // * create light mvp bias matrix
@@ -238,5 +285,5 @@ inTrigger.onTriggered = function() {
     cgl.lightStack.pop();
 
     textureOut.set(null);
-    textureOut.set(fb.getTextureColor());
+    // textureOut.set(fb.getTextureColor());
 }
