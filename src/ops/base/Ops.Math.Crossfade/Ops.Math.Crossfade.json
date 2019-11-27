@@ -1,0 +1,17 @@
+{
+    "id": "6c8d01a2-dc8c-43c3-a569-c2ab0ba42747",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1574855237155
+        },
+        {
+            "message": "Ops.User.simod.Crossfade renamed to Ops.Math.Crossfade",
+            "author": "simod",
+            "date": 1574855293589
+        }
+    ],
+    "authorName": "simod",
+    "created": 1574855239568
+}
