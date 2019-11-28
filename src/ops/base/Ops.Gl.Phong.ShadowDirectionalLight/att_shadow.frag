@@ -27,7 +27,6 @@ void main() {
     outColor = vec4(moment1, moment2, variance, 1.);
     */
     vec2 moments = vec2(gl_FragCoord.z, gl_FragCoord.z*gl_FragCoord.z);
-    float variance = moments.y - (moments.x * moments.x);
 
     outColor = vec4(depth,
     moment2,

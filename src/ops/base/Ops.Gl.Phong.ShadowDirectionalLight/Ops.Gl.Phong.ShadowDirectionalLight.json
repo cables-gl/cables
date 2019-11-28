@@ -97,6 +97,12 @@
                 "name": "Far",
                 "group": "Shadow Attributes",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "group": "Shadow Attributes",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -134,8 +134,10 @@ const float EIGHT_PI = 8.*PI;
         // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
         float pMax = linstep(variance / (variance + distanceToMean * distanceToMean), 0.0001, 1.);
 
-
-        return clamp(pMax, 1., p); // min(max(pMax, p), 1.);
+        float origRes = clamp(pMax, 1., p);
+        //float res = 1. - clamp(pMax, 1., p);
+        //if (res < 0.00001) return 1.;
+        return origRes; //- 0.80002; // min(max(pMax, p), 1.);
     }
 #endif
 

@@ -68,17 +68,23 @@ shader.setSource(attachments.shadow_vert, attachments.shadow_frag);
 cgl.shaderToRender = shader;
 
 const blurShader = new CGL.Shader(cgl, "shadowBlur");
-blurShader.setSource(blurShader.getDefaultVertexShader(), attachments.blur_frag);
+blurShader.setSource(attachments.gaussian_blur_vert, attachments.gaussian_blur_frag);
+
 const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
 
 const outputTexture =new CGL.Texture(cgl, {
-        name: "shadowMap",
+        name: "shadowMapBlur",
         isFloatingPointTexture: true,
         filter: CGL.Texture.FILTER_LINEAR,
-        width: 1024,
-        height: 1024,
+        width: 512,
+        height: 512,
     });
 
+const texelSize = 1/512;
+const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 12);
+const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
+const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+// effect.setSourceTexture(outputTexture);
 
 
 
@@ -116,8 +122,8 @@ const inShadowBias = op.inFloat("Bias", 0.002);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
-
-op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow, inLRBT, inNear, inFar]);
+const inBlur = op.inFloat("Blur Amount", 1);
+op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow, inLRBT, inNear, inFar, inBlur]);
 
 var inShadowBiasUniform = new CGL.Uniform(shader, "f", "inShadowBias", inShadowBias);
 
@@ -179,22 +185,56 @@ const biasMatrix = mat4.fromValues(
         0.0, 0.0, 0.5, 0.0,
         0.5, 0.5, 0.5, 1.0);
 const lightBiasMVPMatrix = mat4.create();
+console.log(blurShader);
 
-function renderBlur(texture) {
-    effect.setSourceTexture(texture);
+/*
     effect.startEffect();
+    t=effect.getCurrentSourceTexture().tex;
+    cgl.setShader(shaderSim);
 
-    // render background color...
+    effect.bind();
+
+    cgl.setTexture(5,t);
+    cgl.setTexture(6,textureField.get().tex);
+
+    effect.finish();
+    t=effect.getCurrentSourceTexture().tex;
+
+    outSimTex.set(effect.getCurrentSourceTexture());
+    cgl.setPreviousShader();
+    effect.endEffect();
+*/
+function renderBlur(texture) {
+    //effect.setSourceTexture(texture);
+
+
+    effect.setSourceTexture(texture); // take shadow map as source
+    effect.startEffect();
+    const effectTexture = effect.getCurrentSourceTexture().tex;
+
     cgl.setShader(blurShader);
-    cgl.currentTextureEffect.bind();
-    cgl.setTexture(12, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    cgl.currentTextureEffect.finish();
+
+    effect.bind();
+    cgl.setTexture(12, effect.getCurrentSourceTexture().tex);
+
+    uniformXY.setValue([inBlur.get() * texelSize, 0]);
+
+    effect.finish();
+
+    effect.bind();
+    cgl.setTexture(12, effect.getCurrentSourceTexture().tex);
+
+    uniformXY.setValue([0, inBlur.get() * texelSize]);
+
+    effect.finish();
+
+
+    //textureOut.set(null);
+    //textureOut.set(effect.getCurrentSourceTexture());
     cgl.setPreviousShader();
 
-    //trigger.trigger();
-
-    textureOut.set(effect.getCurrentSourceTexture());
     effect.endEffect();
+    return effect.getCurrentSourceTexture();
 }
 
 function renderFramebuffer() {
@@ -213,6 +253,8 @@ function renderFramebuffer() {
     fb.renderStart();
 
     // * calculate matrices & camPos vector
+    // const mat = convertPerspectiveToOrtho();
+    // mat4.copy(light.shadowInfo.projMatrix, mat);
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
     mat4.copy(cgl.mMatrix, identityMat); // M
     mat4.lookAt(cgl.vMatrix, camPos, lookAt, up); // V
@@ -229,21 +271,6 @@ function renderFramebuffer() {
 
     // remove light from stack and readd it with shadow map & mvp matrix
     cgl.lightStack.pop();
-
-    const map = fb.getTextureColor();
-
-    light.mvpBiasMatrix = lightBiasMVPMatrix;
-
-    if (light.shadowMapIndex === null) {
-        cgl.shadowMapArray.push(map);
-        const shadowMapIndex = cgl.shadowMapArray.indexOf(map);
-        light.shadowMapIndex = shadowMapIndex;
-    }
-    else {
-        cgl.shadowMapArray[light.shadowMapIndex] = map;
-    }
-
-    cgl.lightStack.push(light);
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -278,12 +305,35 @@ inTrigger.onTriggered = function() {
     }
     */
 
-
     cgl.lightStack.push(light);
     renderFramebuffer();
-    outTrigger.trigger();
-    cgl.lightStack.pop();
+
+    const map = fb.getTextureColor();
+
+    const blurredMap = renderBlur(map);
 
     textureOut.set(null);
-    // textureOut.set(fb.getTextureColor());
+    textureOut.set(blurredMap);
+
+    light.mvpBiasMatrix = lightBiasMVPMatrix;
+
+    if (light.shadowMapIndex === null) {
+        cgl.shadowMapArray.push(blurredMap);
+        const shadowMapIndex = cgl.shadowMapArray.indexOf(blurredMap);
+        light.shadowMapIndex = shadowMapIndex;
+    }
+    else {
+        cgl.shadowMapArray[light.shadowMapIndex] = blurredMap;
+    }
+
+
+    cgl.lightStack.push(light);
+
+
+    outTrigger.trigger();
+
+    cgl.lightStack.pop();
+
+    //textureOut.set(null);
+    //textureOut.set(fb.getTextureColor());
 }
