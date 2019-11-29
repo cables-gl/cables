@@ -1,6 +1,6 @@
 # Embedding Patches
 
-*cables*-Patches can be exported as a zip-file and embedded into any website. The size of the exported patches are relatively small as only the ops which you use in your patch are packed into the zip-file. 
+*cables*-Patches can be exported as a zip-file and embedded into any website. The size of the exported patches are relatively small as only the ops which you use in your patch are packed into the zip-file.
 
 - In your project settings click `Export Static Archive`
 - A *.zip*-archive containing all your project data is created
@@ -44,7 +44,7 @@ use `CABLES.EMBED.addPatch(...)` to create a canvas element and insert it into a
 ```
 
 
-## Advanced: Create Canvas and Patch  
+## Advanced: Create Canvas and Patch
 
 Create the Canvas Element yourself. Load the Patch and use the canvas id as parameter. Cables will then use this canvas. The Canvas is not resized automatically.
 
@@ -55,18 +55,18 @@ Create the Canvas Element yourself. Load the Patch and use the canvas id as para
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
 <body>
-    
+
     <canvas id="glcanvas" width="800" height="480"></canvas>
 
-    <script type="text/javascript" src="js/libs.core.min.js"></script>
-    <script type="text/javascript" src="js/cables.min.js"></script>
-    <script type="text/javascript" src="js/ops.js"></script>
+    <script type="text/javascript" src="js/libs.core.min.js" async></script>
+    <script type="text/javascript" src="js/cables.min.js" async></script>
+    <script type="text/javascript" src="js/ops.js" async></script>
 
     <script>
 
         var patch=null
 
-        document.addEventListener("DOMContentLoaded", function(event)
+        document.addEventListener("CABLES.jsLoaded", function(event)
         {
             patch=new CABLES.Patch(
             {
@@ -91,7 +91,7 @@ For performance Reasons, you should pause the patch, when its not visible using`
 
 - `canvas` canvas context attributes (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext)
 - `glCanvasId` (string): The element ID of your canvas object
-- `prefixAssetPath` (string): Path where to find the assets folder 
+- `prefixAssetPath` (string): Path where to find the assets folder
 - `onError` (function): Function to be called if a critical error occurs (e.g. browser has no WebGL / Web Audio)
 - `onFinishedLoading`: Function to be called when cables is done loading the patch and all assets
 - `silent` (bool): Enable / disable all logging to console.
@@ -104,7 +104,7 @@ For performance Reasons, you should pause the patch, when its not visible using`
 
 # Transparent Patch
 
-make sure `clear` checkbox is NOT checked in mainloop. 
+make sure `clear` checkbox is NOT checked in mainloop.
 
 in patch options set the following canvas context attributes:
 

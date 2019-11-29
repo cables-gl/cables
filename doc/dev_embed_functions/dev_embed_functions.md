@@ -2,7 +2,7 @@
 
 ## Triggering cables ops from outside
 
-Sometimes you need to trigger a cables-port from outside cables, e.g. when you embed a cables-patch into a website.  
+Sometimes you need to trigger a cables-port from outside cables, e.g. when you embed a cables-patch into a website.
 
 Using the op [Ops.Patch.Function](http://cables.gl/op/Ops.Patch.Function) you can define a function name which is visble from outside cables, just give it a name by setting the input-port `Function Name`, e.g. `myFunction` and you can trigger the op from your website’s JavaScript-code using `CABLES.patch.config.myFunction();`
 
@@ -12,7 +12,7 @@ If you need to pass a parameter, you can set a cables variable first (see [Varia
 
 ## Calling external functions
 
-If you want to call an external JavaScript-function from inside cables you need to define it as a property of `CABLES.patch.config`. 
+If you want to call an external JavaScript-function from inside cables you need to define it as a property of `CABLES.patch.config`.
 
 Let’s create a function `helloFromOutside()`:
 
@@ -26,7 +26,7 @@ Export the project and open the `index.html` file in a text editor. Let’s defi
             alert(err);
         }
 
-        document.addEventListener('DOMContentLoaded', function(event) {
+        document.addEventListener('CABLES.jsLoaded', function(event) {
             CABLES.patch=new CABLES.Patch({
                 patchFile: 'js/Callback_Example_Patch.json',
                 prefixAssetPath: '',
@@ -34,7 +34,7 @@ Export the project and open the `index.html` file in a text editor. Let’s defi
                 glCanvasResizeToWindow: true,
                 onError: showError
             });
-          
+
             CABLES.patch.config.helloFromOutside = function(parameters) {
             	console.log('cables called... hello!?');
             };
@@ -50,12 +50,12 @@ If you pass any parameters with the `Callback`-op, these will be bundled as the 
 
 If you want to test the above callback without leaving cables you can define a test-function in the browser console:
 
-Open the developer tools by pressing `cmd + alt + i` and enter:  
+Open the developer tools by pressing `cmd + alt + i` and enter:
 
 ```javascript
 gui.patch().scene.config.helloFromOutside = function() {
     console.log('cables called... hello!?');
-}; 
+};
 ```
 
 Based on the example above you should now be able to click somewhere on the canvas and see `cables called... hello!?` printed in the console.
