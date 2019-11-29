@@ -47,6 +47,7 @@ use `CABLES.EMBED.addPatch(...)` to create a canvas element and insert it into a
 ## Advanced: Create Canvas and Patch
 
 Create the Canvas Element yourself. Load the Patch and use the canvas id as parameter. Cables will then use this canvas. The Canvas is not resized automatically.
+You should subscribe to the `CABLES.jsLoaded` event to initialize the patch, this assures all the javascript is loaded (even when loading "async").
 
 ```html
 <html>
