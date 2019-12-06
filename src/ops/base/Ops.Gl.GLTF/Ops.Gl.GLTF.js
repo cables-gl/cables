@@ -16,10 +16,11 @@ var gltf=null;
 
 inExec.onTriggered=function()
 {
-    for(var i=0;i<gltf.nodes.length;i++)
-    {
-        if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
-    }
+    if(gltf)
+        for(var i=0;i<gltf.nodes.length;i++)
+        {
+            if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+        }
 
     cgl.frameStore.currentScene=gltf;
     next.trigger();
@@ -41,3 +42,10 @@ function loadBin()
     oReq.send(null);
 }
 
+op.onFileChanged=function(fn)
+{
+    if(inFile.get() && inFile.get().indexOf(fn)>-1)
+    {
+        loadBin(true);
+    }
+};

@@ -3,7 +3,6 @@ var gltfNode=class
 {
     constructor(node,gltf)
     {
-        console.log(node);
         this.isChild=node.isChild||false;
         this.name=node.name;
         this.mat=mat4.create();
@@ -18,6 +17,8 @@ var gltfNode=class
             mat4.fromQuat(rotmat,node.rotation);
             mat4.mul(this.mat,this.mat,rotmat);
         }
+
+        if(node.scale) mat4.scale(this.mat,this.mat,node.scale);
 
         if(node.hasOwnProperty("mesh"))
         {
@@ -40,10 +41,7 @@ var gltfNode=class
         cgl.pushModelMatrix();
         mat4.multiply(cgl.mMatrix,cgl.mMatrix,this.mat);
 
-        if(this.mesh)
-        {
-            this.mesh.render(cgl);
-        }
+        if(this.mesh) this.mesh.render(cgl);
 
         for(var i=0;i<this.children.length;i++)
         {

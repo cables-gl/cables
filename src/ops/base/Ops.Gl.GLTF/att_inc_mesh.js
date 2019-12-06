@@ -15,20 +15,21 @@ var gltfMesh=class
             if(!prims[i].attributes)continue;
 
             if(prims[i].hasOwnProperty("indices"))
-            {
                 this.geom.verticesIndices=gltf.buffers[prims[i].indices];
-            }
 
             if(prims[i].attributes.hasOwnProperty("POSITION"))
-            {
                 this.geom.vertices=gltf.buffers[prims[i].attributes.POSITION];
-            }
 
             if(prims[i].attributes.hasOwnProperty("NORMAL"))
-            {
                 this.geom.vertexNormals=gltf.buffers[prims[i].attributes.NORMAL];
-            }
+
+            if(prims[i].attributes.hasOwnProperty("TEXCOORD_0"))
+                this.geom.texCoords=gltf.buffers[prims[i].attributes.TEXCOORD_0];
+
         }
+
+        this.geom.calcTangentsBitangents();
+        this.bounds=this.geom.getBounds();
     }
 
     render(cgl)
