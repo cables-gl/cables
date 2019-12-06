@@ -25,7 +25,6 @@ var gltfMesh=class
 
             if(prims[i].attributes.hasOwnProperty("TEXCOORD_0"))
                 this.geom.texCoords=gltf.buffers[prims[i].attributes.TEXCOORD_0];
-
         }
 
         this.geom.calcTangentsBitangents();
