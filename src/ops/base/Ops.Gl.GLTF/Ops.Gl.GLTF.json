@@ -1,0 +1,45 @@
+{
+    "id": "92dba573-955d-4dff-b454-75ae184bab26",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1575540499966
+        },
+        {
+            "message": "Ops.User.pandur.GlbTest renamed to Ops.Gl.GLTF",
+            "author": "pandur",
+            "date": 1575641188314
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1575540508530,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "glb File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "5",
+                "name": "Generator"
+            },
+            {
+                "type": "0",
+                "name": "Version",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.GlbTest"
+    }
+}
