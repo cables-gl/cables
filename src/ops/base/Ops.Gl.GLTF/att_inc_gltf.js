@@ -85,8 +85,54 @@ function parseGltf(arrayBuffer)
 
             var dataBuff=null;
 
-            if(acc.type=="SCALAR")
+
+// 5120 (BYTE)	1
+// 5121(UNSIGNED_BYTE)	1
+// 5122 (SHORT)	2
+
+            if(acc.componentType==5126) // FLOAT
             {
+                var numComps=0;
+
+                if(acc.type=="VEC2")numComps=2;
+                else if(acc.type=="VEC3")numComps=3;
+                else if(acc.type=="VEC4")numComps=4;
+
+                var stride=4;
+                var num=view.byteLength/stride;
+
+                if(view.byteStride)
+                {
+                    console.log('view.byteStride',view.byteStride,acc.type);
+                    stride=view.byteStride;
+                    num=(view.byteLength/view.byteStride)*numComps;
+                }
+
+                // num=view.byteLength/(view.byteStride||4);
+                // console.log(num);
+
+                dataBuff=new Float32Array(num);
+
+                var pos=view.byteOffset;
+                for(j=0;j<num;j++)
+                {
+
+                    dataBuff[j]=chunks[1].dataView.getFloat32(pos,le);
+
+                    if(stride!=4)
+                    {
+                        if((j+1)%numComps==0)pos+=stride-(numComps*4);
+                    }
+                    pos+=4;
+                }
+            }
+            else if(acc.componentType==5123) // UNSIGNED_SHORT
+            {
+                if(view.byteStride)
+                {
+                    console.log("STRIDE IN SHORTS");
+                }
+
                 const num=view.byteLength/2;
                 dataBuff=new Uint32Array(num);
 
@@ -97,13 +143,7 @@ function parseGltf(arrayBuffer)
             }
             else
             {
-                const num=view.byteLength/4;
-                dataBuff=new Float32Array(num);
-
-                for(j=0;j<num;j++)
-                {
-                    dataBuff[j]=chunks[1].dataView.getFloat32(view.byteOffset+j*4,le);
-                }
+                console.log("unknown component type",acc.componentType);
             }
 
             gltf.buffers.push(dataBuff);

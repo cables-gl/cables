@@ -3,6 +3,7 @@ var gltfMesh=class
 {
     constructor(m,gltf)
     {
+        this.test=0;
         this.name=m.name;
         this.mesh=null;
         this.geom=new CGL.Geometry("gltf_"+this.name);
@@ -10,25 +11,52 @@ var gltfMesh=class
 
         const prims=m.primitives;
 
+
+
+
         for(var i=0;i<prims.length;i++)
         {
-            if(!prims[i].attributes)continue;
+            const prim=prims[i];
 
-            if(prims[i].hasOwnProperty("indices"))
-                this.geom.verticesIndices=gltf.buffers[prims[i].indices];
+            if(!prim.attributes)continue;
 
-            if(prims[i].attributes.hasOwnProperty("POSITION"))
-                this.geom.vertices=gltf.buffers[prims[i].attributes.POSITION];
+            if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.buffers[prim.indices];
 
-            if(prims[i].attributes.hasOwnProperty("NORMAL"))
-                this.geom.vertexNormals=gltf.buffers[prims[i].attributes.NORMAL];
+            this.fillGeomAttribs(gltf,this.geom,prim.attributes);
 
-            if(prims[i].attributes.hasOwnProperty("TEXCOORD_0"))
-                this.geom.texCoords=gltf.buffers[prims[i].attributes.TEXCOORD_0];
+            if(prim.targets)
+                for(var j=0;j<prim.targets.length;j++)
+                {
+                    var tgeom=new CGL.Geometry("gltf_"+this.name);
+                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.buffers[prim.indices];
+                    this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+
+                    // {//calcnormals
+                    //     this.morphGeom.vertices= new Float32Array(this.geom.vertices.length);
+                    //     for(var i=0;i<this.morphGeom.vertices.length;i++)
+                    //     {
+                    //         this.morphGeom.vertices[i]=this.geom.vertices[i]+tgeom.vertices[i];
+                    //     }
+
+                    //     this.morphGeom.calculateNormals();
+                    //     tgeom.vertexNormals=this.morphGeom.vertexNormals;
+                    // }
+
+                    this.geom.morphTargets.push(tgeom);
+                }
         }
 
-        this.geom.calcTangentsBitangents();
+        this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
+    }
+
+    fillGeomAttribs(gltf,geom,attribs)
+    {
+        if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.buffers[attribs.POSITION];
+        if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.buffers[attribs.NORMAL];
+        if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.buffers[attribs.TEXCOORD_0];
+        if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.buffers[attribs.TANGENT];
+        // todo calc bi tangents...?!
     }
 
     render(cgl)
@@ -42,6 +70,27 @@ var gltfMesh=class
         else
         {
             this.mesh.render(cgl.getShader());
+
+            if(this.geom.morphTargets.length)
+            {
+                this.test+=0.1;
+
+                if(this.test>=this.geom.morphTargets.length)this.test=0;
+
+                var mt=this.geom.morphTargets[Math.floor(this.test)];
+                if(mt.vertices)
+                {
+
+                    for(var i=0;i<this.morphGeom.vertices.length;i++)
+                    {
+                        this.morphGeom.vertices[i]=this.geom.vertices[i]+mt.vertices[i];
+
+                    }
+
+                    this.mesh.updateVertices(this.morphGeom);
+                    // this.mesh.updateNormals(this.morphGeom);
+                }
+            }
         }
     }
 
