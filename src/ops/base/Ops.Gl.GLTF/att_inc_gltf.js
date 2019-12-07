@@ -50,6 +50,8 @@ function loadAnims(gltf)
             const sampler=an.samplers[chan.sampler];
             // console.log("sampler",sampler);
 
+
+
             const acc=gltf.json.accessors[sampler.input];
             const bufferIn=gltf.accBuffers[sampler.input];
             // console.log("anim buffer",acc,bufferIn);
@@ -66,6 +68,10 @@ function loadAnims(gltf)
             var anims=[];
 
             for(var k=0;k<numComps;k++) anims.push(new CABLES.TL.Anim());
+
+            if(sampler.interpolation=="LINEAR") {}
+            else if(sampler.interpolation=="STEP") for(var k=0;k<numComps;k++) anims[k].defaultEasing=CONSTANTS.ANIM.EASING_ABSOLUTE;
+            else console.warn("[gltf] unknown interpolation",sampler.interpolation);
 
             for(var j=0;j<bufferIn.length;j++)
             {
@@ -195,8 +201,9 @@ function parseGltf(arrayBuffer)
 
     for(i=0;i<gltf.json.meshes.length;i++)
     {
-        var mesh=new gltfMesh(gltf.json.meshes[i],gltf);
+        var mesh=new gltfMeshGroup(gltf,gltf.json.meshes[i]);
         gltf.meshes.push(mesh);
+
     }
 
     for(i=0;i<gltf.json.nodes.length;i++)

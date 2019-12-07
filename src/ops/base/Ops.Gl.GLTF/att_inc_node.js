@@ -48,7 +48,8 @@ var gltfNode=class
     setAnim(path,anims)
     {
         if(path=="translation")this._animTrans=anims;
-        if(path=="rotation")this._animRot=anims;
+        else if(path=="rotation")this._animRot=anims;
+        else console.warn("unknown anim path",path,anims);
     }
 
     render(cgl)
@@ -73,12 +74,10 @@ var gltfNode=class
 
             if(this._animRot)
             {
-
                 CABLES.TL.Anim.slerpQuaternion(time,this._tempQuat,this._animRot[0],this._animRot[1],this._animRot[2],this._animRot[3]);
 
                 mat4.fromQuat(this._tempMat,this._tempQuat);
                 mat4.mul(this._animMat,this._animMat,this._tempMat);
-
             }
             else
             if(this._rot)
@@ -91,15 +90,12 @@ var gltfNode=class
             if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
 
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
-
         }
 
         if(this.mesh) this.mesh.render(cgl);
 
         for(var i=0;i<this.children.length;i++)
-        {
             gltf.nodes[this.children[i]].render(cgl);
-        }
 
         cgl.popModelMatrix();
     }

@@ -20,7 +20,6 @@ var time=2.2;
 
 inExec.onTriggered=function()
 {
-
     time=Math.max(0,inTime.get())%maxTime;
     if(gltf)
         for(var i=0;i<gltf.nodes.length;i++)

@@ -1,21 +1,21 @@
 
 var gltfMesh=class
 {
-    constructor(m,gltf)
+    constructor(name,prim,gltf)
     {
         this.test=0;
-        this.name=m.name;
+        this.name=name;
         this.mesh=null;
         this.geom=new CGL.Geometry("gltf_"+this.name);
         this.geom.verticesIndices = [];
 
-        const prims=m.primitives;
+        // const prims=m.primitives;
 
-        for(var i=0;i<prims.length;i++)
-        {
-            const prim=prims[i];
+        // for(var i=0;i<prims.length;i++)
+        // {
+            // const prim=prims[i];
 
-            if(!prim.attributes)continue;
+            // if(!prim.attributes)continue;
 
             if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
 
@@ -41,7 +41,8 @@ var gltfMesh=class
 
                     this.geom.morphTargets.push(tgeom);
                 }
-        }
+
+        // }
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
@@ -70,17 +71,22 @@ var gltfMesh=class
 
             if(this.geom.morphTargets.length)
             {
-                this.test+=0.1;
+                this.test+=0.07;
 
-                if(this.test>=this.geom.morphTargets.length)this.test=0;
+                if(this.test>=this.geom.morphTargets.length-1)this.test=0;
 
-                var mt=this.geom.morphTargets[Math.floor(this.test)];
+                const mt=this.geom.morphTargets[Math.floor(this.test)];
+                const mt2=this.geom.morphTargets[Math.floor(this.test+1)];
+
                 if(mt.vertices)
                 {
-
+                    const fract=this.test%1;
                     for(var i=0;i<this.morphGeom.vertices.length;i++)
                     {
-                        this.morphGeom.vertices[i]=this.geom.vertices[i]+mt.vertices[i];
+                        this.morphGeom.vertices[i]=
+                            this.geom.vertices[i]+
+                            (1.0-fract)*mt.vertices[i]+
+                            fract*mt2.vertices[i];
                     }
 
                     this.mesh.updateVertices(this.morphGeom);
