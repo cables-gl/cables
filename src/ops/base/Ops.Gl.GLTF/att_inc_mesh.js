@@ -11,16 +11,13 @@ var gltfMesh=class
 
         const prims=m.primitives;
 
-
-
-
         for(var i=0;i<prims.length;i++)
         {
             const prim=prims[i];
 
             if(!prim.attributes)continue;
 
-            if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.buffers[prim.indices];
+            if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
 
             this.fillGeomAttribs(gltf,this.geom,prim.attributes);
 
@@ -28,7 +25,7 @@ var gltfMesh=class
                 for(var j=0;j<prim.targets.length;j++)
                 {
                     var tgeom=new CGL.Geometry("gltf_"+this.name);
-                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.buffers[prim.indices];
+                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
                     this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
 
                     // {//calcnormals
@@ -52,10 +49,10 @@ var gltfMesh=class
 
     fillGeomAttribs(gltf,geom,attribs)
     {
-        if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.buffers[attribs.POSITION];
-        if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.buffers[attribs.NORMAL];
-        if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.buffers[attribs.TEXCOORD_0];
-        if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.buffers[attribs.TANGENT];
+        if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
+        if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
+        if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
+        if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
         // todo calc bi tangents...?!
     }
 
@@ -84,7 +81,6 @@ var gltfMesh=class
                     for(var i=0;i<this.morphGeom.vertices.length;i++)
                     {
                         this.morphGeom.vertices[i]=this.geom.vertices[i]+mt.vertices[i];
-
                     }
 
                     this.mesh.updateVertices(this.morphGeom);

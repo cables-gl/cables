@@ -3,6 +3,7 @@
 const
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
+    inTime=op.inFloat("Time"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("Version");
@@ -14,8 +15,13 @@ inFile.onChange=loadBin;
 
 var gltf=null;
 
+var maxTime=0;
+var time=2.2;
+
 inExec.onTriggered=function()
 {
+
+    time=Math.max(0,inTime.get())%maxTime;
     if(gltf)
         for(var i=0;i<gltf.nodes.length;i++)
         {

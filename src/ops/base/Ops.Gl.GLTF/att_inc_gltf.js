@@ -34,6 +34,59 @@ function readChunk(dv,bArr,arrayBuffer,offset)
     return chunk;
 }
 
+function loadAnims(gltf)
+{
+    for(var i=0;i<gltf.json.animations.length;i++)
+    {
+        var an=gltf.json.animations[i];
+
+        for(var ia=0;ia<an.channels.length;ia++)
+        {
+            var chan=an.channels[ia];
+
+            const node=gltf.nodes[chan.target.node];
+
+
+            const sampler=an.samplers[chan.sampler];
+            // console.log("sampler",sampler);
+
+            const acc=gltf.json.accessors[sampler.input];
+            const bufferIn=gltf.accBuffers[sampler.input];
+            // console.log("anim buffer",acc,bufferIn);
+
+            const accOut=gltf.json.accessors[sampler.output];
+            const bufferOut=gltf.accBuffers[sampler.output];
+            // console.log("anim buffer Out",accOut,bufferOut);
+
+            var numComps=1;
+            if(accOut.type=="VEC2")numComps=2;
+            else if(accOut.type=="VEC3")numComps=3;
+            else if(accOut.type=="VEC4")numComps=4;
+
+            var anims=[];
+
+            for(var k=0;k<numComps;k++) anims.push(new CABLES.TL.Anim());
+
+            for(var j=0;j<bufferIn.length;j++)
+            {
+                maxTime=Math.max(bufferIn[j],maxTime);
+                // animX.setValue(bufferIn[j],bufferOut[j*numComps]);
+
+                for(var k=0;k<numComps;k++)
+                {
+                    anims[k].setValue( bufferIn[j] , bufferOut[j*numComps+k] );
+                }
+                // if(numComps>1) animY.setValue(bufferIn[j],bufferOut[j*numComps+1]);
+                // if(numComps>2) animZ.setValue(bufferIn[j],bufferOut[j*numComps+2]);
+                // if(numComps>3) animW.setValue(bufferIn[j],bufferOut[j*numComps+2]);
+            }
+
+            node.setAnim(chan.target.path,anims);
+        }
+    }
+
+}
+
 function parseGltf(arrayBuffer)
 {
     var j=0,i=0;
@@ -41,7 +94,7 @@ function parseGltf(arrayBuffer)
     var gltf=
         {
             json:{},
-            buffers:[],
+            accBuffers:[],
             meshes:[],
             nodes:[]
         };
@@ -83,70 +136,60 @@ function parseGltf(arrayBuffer)
             const acc=accessors[i];
             const view=views[acc.bufferView];
 
+            var numComps=0;
+            if(acc.type=="SCALAR")numComps=1;
+            else if(acc.type=="VEC2")numComps=2;
+            else if(acc.type=="VEC3")numComps=3;
+            else if(acc.type=="VEC4")numComps=4;
+            else console.error('unknown accessor type',acc.type);
+
+            var num=acc.count*numComps;
+            var accPos = (view.byteOffset||0)+(acc.byteOffset||0);
+            var stride = view.byteStride||0;
             var dataBuff=null;
 
 
-// 5120 (BYTE)	1
-// 5121(UNSIGNED_BYTE)	1
-// 5122 (SHORT)	2
-
+            // 5120 (BYTE)	1
+            // 5121(UNSIGNED_BYTE)	1
+            // 5122 (SHORT)	2
             if(acc.componentType==5126) // FLOAT
             {
-                var numComps=0;
-
-                if(acc.type=="VEC2")numComps=2;
-                else if(acc.type=="VEC3")numComps=3;
-                else if(acc.type=="VEC4")numComps=4;
-
-                var stride=4;
-                var num=view.byteLength/stride;
-
-                if(view.byteStride)
-                {
-                    console.log('view.byteStride',view.byteStride,acc.type);
-                    stride=view.byteStride;
-                    num=(view.byteLength/view.byteStride)*numComps;
-                }
-
-                // num=view.byteLength/(view.byteStride||4);
-                // console.log(num);
-
+                stride=stride||4;
                 dataBuff=new Float32Array(num);
 
-                var pos=view.byteOffset;
                 for(j=0;j<num;j++)
                 {
+                    dataBuff[j]=chunks[1].dataView.getFloat32(accPos,le);
 
-                    dataBuff[j]=chunks[1].dataView.getFloat32(pos,le);
-
-                    if(stride!=4)
-                    {
-                        if((j+1)%numComps==0)pos+=stride-(numComps*4);
-                    }
-                    pos+=4;
+                    if(stride!=4 && (j+1)%numComps===0)accPos+=stride-(numComps*4);
+                    accPos+=4;
                 }
             }
             else if(acc.componentType==5123) // UNSIGNED_SHORT
             {
-                if(view.byteStride)
-                {
-                    console.log("STRIDE IN SHORTS");
-                }
+                stride=stride||2;
 
-                const num=view.byteLength/2;
-                dataBuff=new Uint32Array(num);
+                dataBuff=new Uint16Array(num);
 
                 for(j=0;j<num;j++)
                 {
-                    dataBuff[j]=chunks[1].dataView.getUint16(view.byteOffset+j*2,le);
+                    dataBuff[j]=chunks[1].dataView.getUint16(accPos,le);
+
+                    if(stride!=2 && (j+1) % numComps===0) accPos+=stride-(numComps*2);
+
+                    accPos+=2;
+                    // console.log(accPos,dataBuff[j])
                 }
+
+                // console.log(dataBuff);
+
             }
             else
             {
-                console.log("unknown component type",acc.componentType);
+                console.error("unknown component type",acc.componentType);
             }
 
-            gltf.buffers.push(dataBuff);
+            gltf.accBuffers.push(dataBuff);
         }
     }
 
@@ -162,6 +205,8 @@ function parseGltf(arrayBuffer)
         gltf.nodes.push(node);
     }
 
+    if(gltf.json.animations)loadAnims(gltf);
+console.log(gltf);
     return gltf;
 
 }

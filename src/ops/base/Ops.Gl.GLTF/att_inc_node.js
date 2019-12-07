@@ -6,6 +6,9 @@ var gltfNode=class
         this.isChild=node.isChild||false;
         this.name=node.name;
         this.mat=mat4.create();
+        this._animMat=mat4.create();
+        this._tempMat=mat4.create();
+        this._tempQuat=quat.create();
         this.mesh=null;
         this.children=[];
 
@@ -14,11 +17,17 @@ var gltfNode=class
         if(node.rotation)
         {
             var rotmat=mat4.create();
+            this._rot=node.rotation;
+
             mat4.fromQuat(rotmat,node.rotation);
             mat4.mul(this.mat,this.mat,rotmat);
         }
 
-        if(node.scale) mat4.scale(this.mat,this.mat,node.scale);
+        if(node.scale)
+        {
+            this._scale=node.scale;
+            mat4.scale(this.mat,this.mat,this._scale);
+        }
 
         if(node.hasOwnProperty("mesh"))
         {
@@ -36,10 +45,54 @@ var gltfNode=class
         }
     }
 
+    setAnim(path,anims)
+    {
+        if(path=="translation")this._animTrans=anims;
+        if(path=="rotation")this._animRot=anims;
+    }
+
     render(cgl)
     {
         cgl.pushModelMatrix();
-        mat4.multiply(cgl.mMatrix,cgl.mMatrix,this.mat);
+
+        if(!this._animTrans)
+        {
+            mat4.mul(cgl.mMatrix,cgl.mMatrix,this.mat);
+        }
+        else
+        {
+            mat4.identity(this._animMat);
+            if(this._animTrans)
+            {
+                mat4.translate(this._animMat,this._animMat,[
+                    this._animTrans[0].getValue(time),
+                    this._animTrans[1].getValue(time),
+                    this._animTrans[2].getValue(time)]);
+            }
+            else if(node.translation) mat4.translate(this._animMat,this._animMat,node.translation);
+
+            if(this._animRot)
+            {
+
+                CABLES.TL.Anim.slerpQuaternion(time,this._tempQuat,this._animRot[0],this._animRot[1],this._animRot[2],this._animRot[3]);
+
+                mat4.fromQuat(this._tempMat,this._tempQuat);
+                mat4.mul(this._animMat,this._animMat,this._tempMat);
+
+            }
+            else
+            if(this._rot)
+            {
+                var rotmat=mat4.create();
+                mat4.fromQuat(rotmat,this._rot);
+                mat4.mul(this._animMat,this._animMat,rotmat);
+            }
+
+            if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
+
+            mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
+
+        }
 
         if(this.mesh) this.mesh.render(cgl);
 

@@ -23,6 +23,11 @@
             {
                 "type": "5",
                 "name": "glb File"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "portsOut": [
