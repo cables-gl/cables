@@ -1,6 +1,12 @@
 
 {{MODULES_HEAD}}
 
+#define NONE -1
+#define AMBIENT 0
+#define POINT 1
+#define DIRECTIONAL 2
+#define SPOT 3
+
 #define TEX_REPEAT_X x;
 #define TEX_REPEAT_Y y;
 #define TEX_OFFSET_X z;
@@ -19,18 +25,27 @@ OUT vec3 normInterpolated;
 OUT vec3 tangent;
 OUT vec3 bitangent;
 OUT vec3 fragPos;
+
+
 OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
+OUT vec3 v_viewDirection;
 
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;
 #endif
+
+struct Light {
+    vec3 position;
+    int type;
+};
 
 UNI vec3 camPos;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 normalMatrix;
+
 
 mat3 transposeMat3(mat3 m)
 {
@@ -75,27 +90,32 @@ void main()
     cameraSpace_pos = mvMatrix * pos;
 
     #ifdef HAS_TEXTURES
-        texCoord.x *= inTextureRepeatOffset.TEX_REPEAT_X
-        texCoord.x += inTextureRepeatOffset.TEX_OFFSET_X;
-        texCoord.y *= inTextureRepeatOffset.TEX_REPEAT_Y
-        texCoord.y += inTextureRepeatOffset.TEX_OFFSET_Y;
+        float repeatX = inTextureRepeatOffset.TEX_REPEAT_X;
+        float offsetX = inTextureRepeatOffset.TEX_OFFSET_X;
+        float repeatY = inTextureRepeatOffset.TEX_REPEAT_Y;
+        float offsetY = inTextureRepeatOffset.TEX_OFFSET_Y;
+
+        texCoord.x *= repeatX;
+        texCoord.x += offsetX;
+        texCoord.y *= repeatY;
+        texCoord.y += offsetY;
     #endif
 
    normInterpolated = vec3(normalMatrix*vec4(norm, 1.));
-   vec3 normCameraSpace = normalize((vec4(normInterpolated, 1.0)).xyz);
-   vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 1.0)).xyz);
-   //tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
-   vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 1.0)).xyz);
 
-   //bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
+        vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
+        vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
+        vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
 
-   // * TODO: Transform lightDir and viewDir to TBN space here in vertex shader
-   // * TODO: dont transfer normals from normalmap to world space in fragment
-   // * TODO: since TBN is an orthogonal matrix, we can use transpose instead of inverse A^T = A^-1
-   TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
-   fragPos = vec3((mMatrix) * pos);
+        // re orthogonalization for smoother normals
+        tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
+        bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
+
+        TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
 
 
+    fragPos = vec3((mMatrix) * pos);
+    v_viewDirection = normalize(camPos - fragPos);
 
-   gl_Position = projMatrix * mvMatrix * pos;
+    gl_Position = projMatrix * mvMatrix * pos;
 }
