@@ -14,7 +14,6 @@ const cgl=op.patch.cgl;
 inFile.onChange=loadBin;
 
 var gltf=null;
-
 var maxTime=0;
 var time=2.2;
 
