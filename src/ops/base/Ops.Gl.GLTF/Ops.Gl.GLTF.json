@@ -28,6 +28,10 @@
                 "type": "0",
                 "name": "Time",
                 "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Materials"
             }
         ],
         "portsOut": [

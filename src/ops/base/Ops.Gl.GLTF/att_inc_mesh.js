@@ -5,6 +5,7 @@ var gltfMesh=class
     {
         this.test=0;
         this.name=name;
+        this.material=prim.material;
         this.mesh=null;
         this.geom=new CGL.Geometry("gltf_"+this.name);
         this.geom.verticesIndices = [];
@@ -61,14 +62,14 @@ var gltfMesh=class
     {
         if(!this.geom)return;
 
+
         if(!this.mesh)
         {
             this.mesh=new CGL.Mesh(cgl,this.geom);
         }
         else
         {
-            this.mesh.render(cgl.getShader());
-
+            // update morphTargets
             if(this.geom.morphTargets.length)
             {
                 this.test+=0.07;
@@ -93,6 +94,20 @@ var gltfMesh=class
                     // this.mesh.updateNormals(this.morphGeom);
                 }
             }
+
+            if(this.material!=-1 && gltf.shaders[this.material])
+            {
+                cgl.setShader(gltf.shaders[this.material]);
+            }
+
+            this.mesh.render(cgl.getShader());
+
+            if(this.material!=-1 && gltf.shaders[this.material])
+            {
+                cgl.setPreviousShader();
+            }
+
+
         }
     }
 

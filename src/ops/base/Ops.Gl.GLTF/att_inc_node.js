@@ -49,6 +49,7 @@ var gltfNode=class
     {
         if(path=="translation")this._animTrans=anims;
         else if(path=="rotation")this._animRot=anims;
+        else if(path=="scale")this._animScale=anims;
         else console.warn("unknown anim path",path,anims);
     }
 
@@ -87,7 +88,15 @@ var gltfNode=class
                 mat4.mul(this._animMat,this._animMat,rotmat);
             }
 
-            if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
+            if(this._animScale)
+            {
+                mat4.scale(this._animMat,this._animMat,[
+                    this._animScale[0].getValue(time),
+                    this._animScale[1].getValue(time),
+                    this._animScale[2].getValue(time)]);
+
+            }
+            else if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
 
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
         }

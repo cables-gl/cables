@@ -45,20 +45,13 @@ function loadAnims(gltf)
             var chan=an.channels[ia];
 
             const node=gltf.nodes[chan.target.node];
-
-
             const sampler=an.samplers[chan.sampler];
-            // console.log("sampler",sampler);
-
-
 
             const acc=gltf.json.accessors[sampler.input];
             const bufferIn=gltf.accBuffers[sampler.input];
-            // console.log("anim buffer",acc,bufferIn);
 
             const accOut=gltf.json.accessors[sampler.output];
             const bufferOut=gltf.accBuffers[sampler.output];
-            // console.log("anim buffer Out",accOut,bufferOut);
 
             var numComps=1;
             if(accOut.type=="VEC2")numComps=2;
@@ -102,7 +95,8 @@ function parseGltf(arrayBuffer)
             json:{},
             accBuffers:[],
             meshes:[],
-            nodes:[]
+            nodes:[],
+            shaders:[]
         };
 
     if (!arrayBuffer) return;
@@ -212,8 +206,12 @@ function parseGltf(arrayBuffer)
         gltf.nodes.push(node);
     }
 
+    needsMatUpdate=true;
+
     if(gltf.json.animations)loadAnims(gltf);
 console.log(gltf);
     return gltf;
 
 }
+
+
