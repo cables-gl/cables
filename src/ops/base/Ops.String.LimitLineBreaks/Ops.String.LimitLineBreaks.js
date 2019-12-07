@@ -2,19 +2,23 @@ const
     inStr=op.inString("String","default"),
     inNum=op.inInt("Num Lines",5),
     inRev=op.inBool("Reverse",false),
+    inAppend=op.inBool("Force Num Lines",false),
     outStr=op.outString("Result","default");
 
 var stringsNew=[];
 
-inStr.onChange=
-inNum.onChange=function()
+inRev.onChange=
+    inAppend.onChange=
+    inStr.onChange=
+    inNum.onChange=update;
+
+function update()
 {
     var strings=inStr.get().split('\n');
 
+    const num=inNum.get();
     if(inRev.get())
     {
-
-        var num=inNum.get();
         if(strings.length>num)
         {
             for(var i=0;i<num;i++)
@@ -25,9 +29,18 @@ inNum.onChange=function()
     }
     else
     {
-        strings.length=Math.min(inNum.get(),strings.length);
+        strings.length=Math.min(num,strings.length);
     }
 
-    outStr.set(strings.join('\n'));
+    var str=strings.join('\n');
 
-};
+    if(inAppend.get())
+    {
+        if(strings.length<num)
+            for(var i=strings.length;i<num;i++)
+                str+='\n';
+    }
+
+    outStr.set(str);
+
+}
