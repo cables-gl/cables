@@ -64,9 +64,7 @@ function rebuild()
     {
         currentTexCoords=texCoords.get();
 
-
         if(bufTexCoord.length!=numTc) bufTexCoord=new Float32Array(numTc);
-
 
         if(texCoords.get()=="0-1")
         {

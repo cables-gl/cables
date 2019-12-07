@@ -38,7 +38,7 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.simod.AmbientLight_v2"
+        "name": "Ops.Gl.Phong.AmbientLight_v4"
     },
     "changelog": [
         {

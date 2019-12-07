@@ -12,4 +12,4 @@ arrayIn.onChange = passThrough.onChange = function()
     {
         arrayOut.set(null);
     }
-}
+};

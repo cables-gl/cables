@@ -42,12 +42,6 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Ignore Alpha",
-                "group": "Color",
-                "subType": "boolean"
-            },
-            {
                 "type": "3",
                 "name": "positions",
                 "group": "Parameters"
@@ -64,8 +58,7 @@
             },
             {
                 "type": "3",
-                "name": "Colors",
-                "group": "Color"
+                "name": "Colors"
             }
         ],
         "portsOut": [
