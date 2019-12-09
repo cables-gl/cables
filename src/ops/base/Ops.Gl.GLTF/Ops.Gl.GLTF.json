@@ -48,7 +48,7 @@
             },
             {
                 "type": "1",
-                "name": "Assign Shader"
+                "name": "Assign Material"
             }
         ],
         "portsOut": [

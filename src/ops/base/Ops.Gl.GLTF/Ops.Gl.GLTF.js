@@ -7,7 +7,7 @@ const
     inTimeLine=op.inBool("Sync to timeline"),
     inMaterials=op.inObject("Materials"),
     inMaterialList=op.inDropDown("Material List",[]),
-    inMaterialCreate=op.inTriggerButton("Assign Shader"),
+    inMaterialCreate=op.inTriggerButton("Assign Material"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("Version");
@@ -67,6 +67,8 @@ function loadBin()
         var arrayBuffer = oReq.response;
         gltf=parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
+        needsMatUpdate=true;
+
     };
 
     oReq.send(null);
@@ -92,6 +94,18 @@ inMaterialList.onChange=updateMaterialCreateButton;
 
 function updateMaterialCreateButton()
 {
+    if(!op.patch.isEditorMode())return;
+
+    if(!gltf || !gltf.json || !gltf.json.materials || gltf.json.materials.length===0)
+    {
+        if(gltf)console.log("NO MATERIALS!!!",gltf.json);
+        inMaterialList.uiAttribs.values=["no materials"];
+        inMaterialList.setUiAttribs({"greyout":true});
+        inMaterialCreate.setUiAttribs({"greyout":true});
+        return;
+    }
+
+    inMaterialList.setUiAttribs({"greyout":false});
     inMaterialCreate.setUiAttribs({"greyout":inMaterialList.get()==selectMatStr});
 }
 
@@ -100,35 +114,20 @@ inMaterialCreate.onTriggered=function()
     if(op.patch.isEditorMode())
     {
         var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
-
         newop.getPort("Material Name").set(inMaterialList.get());
-        console.log("CFVREAYE!");
-
-    // this.link(reLinkP1.parent, reLinkP1.getName(), reLinkP2.parent, reLinkP2.getName());
-
         op.patch.link(op,inMaterials.name,newop,"Material");
-
-
     }
 };
 
 function updateMaterials()
 {
-    if(!gltf)return;
+    if(!gltf)
+    {
+        updateMaterialCreateButton();
+        return;
+    }
+
     gltf.shaders={};
-
-    if(!gltf.json.materials || gltf.json.materials.length===0)
-    {
-        inMaterialList.uiAttribs.values=["no materials"];
-        inMaterialList.setUiAttribs({"greyout":true});
-        inMaterialCreate.setUiAttribs({"greyout":true});
-    }
-    else
-    {
-        inMaterialList.setUiAttribs({"greyout":false});
-        inMaterialCreate.setUiAttribs({"greyout":false});
-    }
-
 
     for(var j=0;j<inMaterials.links.length;j++)
     {
@@ -136,10 +135,8 @@ function updateMaterials()
         const portShader=op.getPort("Shader");
         const portName=op.getPort("Material Name");
 
-
         if(portShader && portName && portShader.get())
         {
-
             const name=portName.get();
             const matNames=[selectMatStr];
 
@@ -150,7 +147,6 @@ function updateMaterials()
 
                     if(gltf.json.materials[i].name==name)
                         gltf.shaders[i]=portShader.get();
-
                 }
 
             inMaterialList.uiAttribs.values=matNames;
@@ -158,9 +154,7 @@ function updateMaterials()
         }
     }
 
-
-
-
+    updateMaterialCreateButton();
     needsMatUpdate=false;
 }
 
