@@ -299,7 +299,11 @@ Mesh.prototype.setGeom = function (geom)
 
     if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
     if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
-    if (this._geom.vertexColors.length > 0) this.setAttribute("attrVertColor", this._geom.vertexColors.flat(100), 4);
+    if (this._geom.vertexColors.length > 0)
+    {
+        if(this._geom.vertexColors.flat)this._geom.vertexColors.flat(100);
+        this.setAttribute("attrVertColor", this._geom.vertexColors, 4);
+    }
 
     if (this.addVertexNumbers) this._setVertexNumbers();
 

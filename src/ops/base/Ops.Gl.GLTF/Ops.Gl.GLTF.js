@@ -98,7 +98,7 @@ function updateMaterialCreateButton()
 
     if(!gltf || !gltf.json || !gltf.json.materials || gltf.json.materials.length===0)
     {
-        if(gltf)console.log("NO MATERIALS!!!",gltf.json);
+        if(gltf) console.log("NO MATERIALS!!!",gltf.json);
         inMaterialList.uiAttribs.values=["no materials"];
         inMaterialList.setUiAttribs({"greyout":true});
         inMaterialCreate.setUiAttribs({"greyout":true});

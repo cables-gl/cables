@@ -33,13 +33,15 @@ var gltfMesh=class
         if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
         if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
         if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
+
+        if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+
         // todo calc bi tangents...?!
     }
 
     render(cgl)
     {
         if(!this.geom)return;
-
 
         if(!this.mesh)
         {
