@@ -1,3 +1,6 @@
+const CHUNK_HEADER_SIZE=8;
+
+
 function readChunk(dv,bArr,arrayBuffer,offset)
 {
     const chunk={};
@@ -36,6 +39,7 @@ function readChunk(dv,bArr,arrayBuffer,offset)
 
 function loadAnims(gltf)
 {
+    var k=0;
     for(var i=0;i<gltf.json.animations.length;i++)
     {
         var an=gltf.json.animations[i];
@@ -60,24 +64,20 @@ function loadAnims(gltf)
 
             var anims=[];
 
-            for(var k=0;k<numComps;k++) anims.push(new CABLES.TL.Anim());
+            for(k=0;k<numComps;k++) anims.push(new CABLES.TL.Anim());
 
             if(sampler.interpolation=="LINEAR") {}
-            else if(sampler.interpolation=="STEP") for(var k=0;k<numComps;k++) anims[k].defaultEasing=CONSTANTS.ANIM.EASING_ABSOLUTE;
+            else if(sampler.interpolation=="STEP") for(k=0;k<numComps;k++) anims[k].defaultEasing=CONSTANTS.ANIM.EASING_ABSOLUTE;
             else console.warn("[gltf] unknown interpolation",sampler.interpolation);
 
             for(var j=0;j<bufferIn.length;j++)
             {
                 maxTime=Math.max(bufferIn[j],maxTime);
-                // animX.setValue(bufferIn[j],bufferOut[j*numComps]);
 
-                for(var k=0;k<numComps;k++)
+                for(k=0;k<numComps;k++)
                 {
-                    anims[k].setValue( bufferIn[j] , bufferOut[j*numComps+k] );
+                    anims[k].setValue( bufferIn[j], bufferOut[j*numComps+k] );
                 }
-                // if(numComps>1) animY.setValue(bufferIn[j],bufferOut[j*numComps+1]);
-                // if(numComps>2) animZ.setValue(bufferIn[j],bufferOut[j*numComps+2]);
-                // if(numComps>3) animW.setValue(bufferIn[j],bufferOut[j*numComps+2]);
             }
 
             node.setAnim(chan.target.path,anims);
@@ -96,7 +96,9 @@ function parseGltf(arrayBuffer)
             accBuffers:[],
             meshes:[],
             nodes:[],
-            shaders:[]
+            shaders:[],
+            timing:[],
+            startTime:performance.now()
         };
 
     if (!arrayBuffer) return;
@@ -110,6 +112,8 @@ function parseGltf(arrayBuffer)
         console.log("invalid glTF fileformat");
         return;
     }
+
+    gltf.timing.push("Start parsing",Math.round((performance.now()-gltf.startTime)));
 
     const dv=new DataView(arrayBuffer);
     const version=dv.getUint32(pos,le);
@@ -129,6 +133,10 @@ function parseGltf(arrayBuffer)
 
     var views=chunks[0].data.bufferViews;
     var accessors=chunks[0].data.accessors;
+
+    gltf.timing.push("Parse buffers",Math.round((performance.now()-gltf.startTime)));
+
+
     if(views)
     {
         for(i=0;i<accessors.length;i++)
@@ -178,11 +186,7 @@ function parseGltf(arrayBuffer)
                     if(stride!=2 && (j+1) % numComps===0) accPos+=stride-(numComps*2);
 
                     accPos+=2;
-                    // console.log(accPos,dataBuff[j])
                 }
-
-                // console.log(dataBuff);
-
             }
             else
             {
@@ -193,12 +197,15 @@ function parseGltf(arrayBuffer)
         }
     }
 
+    gltf.timing.push("Parse mesh groups",Math.round((performance.now()-gltf.startTime)));
+
     for(i=0;i<gltf.json.meshes.length;i++)
     {
         var mesh=new gltfMeshGroup(gltf,gltf.json.meshes[i]);
         gltf.meshes.push(mesh);
-
     }
+
+    gltf.timing.push("Parse nodes",Math.round((performance.now()-gltf.startTime)));
 
     for(i=0;i<gltf.json.nodes.length;i++)
     {
@@ -208,8 +215,14 @@ function parseGltf(arrayBuffer)
 
     needsMatUpdate=true;
 
+    gltf.timing.push("load anims",Math.round((performance.now()-gltf.startTime)));
+
     if(gltf.json.animations)loadAnims(gltf);
-console.log(gltf);
+
+    gltf.timing.push("finished",Math.round((performance.now()-gltf.startTime)));
+
+    console.log(gltf);
+
     return gltf;
 
 }

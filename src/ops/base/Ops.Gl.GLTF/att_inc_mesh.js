@@ -10,40 +10,18 @@ var gltfMesh=class
         this.geom=new CGL.Geometry("gltf_"+this.name);
         this.geom.verticesIndices = [];
 
-        // const prims=m.primitives;
+        if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
 
-        // for(var i=0;i<prims.length;i++)
-        // {
-            // const prim=prims[i];
+        this.fillGeomAttribs(gltf,this.geom,prim.attributes);
 
-            // if(!prim.attributes)continue;
-
-            if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
-
-            this.fillGeomAttribs(gltf,this.geom,prim.attributes);
-
-            if(prim.targets)
-                for(var j=0;j<prim.targets.length;j++)
-                {
-                    var tgeom=new CGL.Geometry("gltf_"+this.name);
-                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
-                    this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
-
-                    // {//calcnormals
-                    //     this.morphGeom.vertices= new Float32Array(this.geom.vertices.length);
-                    //     for(var i=0;i<this.morphGeom.vertices.length;i++)
-                    //     {
-                    //         this.morphGeom.vertices[i]=this.geom.vertices[i]+tgeom.vertices[i];
-                    //     }
-
-                    //     this.morphGeom.calculateNormals();
-                    //     tgeom.vertexNormals=this.morphGeom.vertexNormals;
-                    // }
-
-                    this.geom.morphTargets.push(tgeom);
-                }
-
-        // }
+        if(prim.targets)
+            for(var j=0;j<prim.targets.length;j++)
+            {
+                var tgeom=new CGL.Geometry("gltf_"+this.name);
+                if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
+                this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+                this.geom.morphTargets.push(tgeom);
+            }
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
@@ -72,7 +50,7 @@ var gltfMesh=class
             // update morphTargets
             if(this.geom.morphTargets.length)
             {
-                this.test+=0.07;
+                this.test=time*0.7;
 
                 if(this.test>=this.geom.morphTargets.length-1)this.test=0;
 
@@ -91,7 +69,6 @@ var gltfMesh=class
                     }
 
                     this.mesh.updateVertices(this.morphGeom);
-                    // this.mesh.updateNormals(this.morphGeom);
                 }
             }
 

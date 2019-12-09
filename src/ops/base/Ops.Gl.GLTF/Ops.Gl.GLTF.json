@@ -27,11 +27,28 @@
             {
                 "type": "0",
                 "name": "Time",
+                "group": "Timing",
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Sync to timeline",
+                "group": "Material Mapping",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
-                "name": "Materials"
+                "name": "Materials",
+                "group": "Material Mapping"
+            },
+            {
+                "type": "0",
+                "name": "Material List",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Assign Shader"
             }
         ],
         "portsOut": [
