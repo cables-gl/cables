@@ -11,7 +11,7 @@ UNI float uAspect;
 UNI float amount;
 
 {{CGL.BLENDMODES}}
-{{CGL.RANDOM_TEX}}
+
 // https://www.shadertoy.com/view/MdfBRX
 float Bokeh(vec2 p, vec2 sp, float size, float mi, float blur)
 {
@@ -19,11 +19,6 @@ float Bokeh(vec2 p, vec2 sp, float size, float mi, float blur)
     float c = smoothstep(size, size*(1.-blur), d);
     c *= mix(mi, 1., smoothstep(size*.8, size, d));
     return c;
-}
-//this causes glitches when UV co-ords move one windows
-vec2 hash( vec2 p ){
-	p = vec2( dot(p,vec2(127.1,311.7)),dot(p,vec2(269.5,183.3)));
-	return fract(sin(p)*43.5453) * 2.0 - 1.0;
 }
 ///  2 out, 2 in... from https://www.shadertoy.com/view/4djSRW
 //stable
@@ -58,23 +53,19 @@ void main()
     uv *= uZoom;
     uv -= vec2(uOffsetX,uOffsetY);
 
-    float r=cgl_random(texCoord.xy);
-
     int loopSize = clamp(uIterations,0,300);
 
     float q = 0.0;
     for (int i = 1; i < loopSize; i++)
     {
-        q = float(i);//*uRandomSeed;
+        q = float(i);
         vec2 h=hash22(vec2(q)+vec2(uRandomSeed));
-        di += dirt(uv-h,
-                  			h.x,
-                  					1.0,edgeHardness);
+        di += dirt(uv-h, h.x, 1.0, edgeHardness);
     }
 
     di = pow(di* 0.01,vec3(uGamma));
     vec4 col = vec4(di,1.0);
     vec4 base = texture(tex,texCoord);
 
-    outColor = cgl_blend(base,col,amount);;
+    outColor = cgl_blend(base,col,amount);
 }
