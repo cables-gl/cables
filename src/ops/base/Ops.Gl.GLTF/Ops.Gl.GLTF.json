@@ -26,6 +26,11 @@
             },
             {
                 "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Time",
                 "group": "Timing",
                 "subType": "number"
@@ -33,8 +38,19 @@
             {
                 "type": "0",
                 "name": "Sync to timeline",
-                "group": "Material Mapping",
+                "group": "Timing",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Material List",
+                "group": "Material Mapping",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Assign Material",
+                "group": "Material Mapping"
             },
             {
                 "type": "2",
@@ -43,12 +59,14 @@
             },
             {
                 "type": "0",
-                "name": "Material List",
+                "name": "Node List",
+                "group": "Expose Nodes",
                 "subType": "string"
             },
             {
                 "type": "1",
-                "name": "Assign Material"
+                "name": "Expose Node",
+                "group": "Expose Nodes"
             }
         ],
         "portsOut": [

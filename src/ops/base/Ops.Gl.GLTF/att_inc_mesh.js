@@ -39,7 +39,7 @@ var gltfMesh=class
         // todo calc bi tangents...?!
     }
 
-    render(cgl)
+    render(cgl,ignoreMaterial)
     {
         if(!this.geom)return;
 
@@ -74,14 +74,15 @@ var gltfMesh=class
                 }
             }
 
-            if(this.material!=-1 && gltf.shaders[this.material])
+
+            if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
             {
                 cgl.setShader(gltf.shaders[this.material]);
             }
 
-            this.mesh.render(cgl.getShader());
+            this.mesh.render(cgl.getShader(),ignoreMaterial);
 
-            if(this.material!=-1 && gltf.shaders[this.material])
+            if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
             {
                 cgl.setPreviousShader();
             }

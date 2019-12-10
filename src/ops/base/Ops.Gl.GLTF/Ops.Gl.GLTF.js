@@ -3,19 +3,24 @@
 const
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
+    inRender=op.inBool("Draw",true),
     inTime=op.inFloat("Time"),
     inTimeLine=op.inBool("Sync to timeline"),
-    inMaterials=op.inObject("Materials"),
     inMaterialList=op.inDropDown("Material List",[]),
     inMaterialCreate=op.inTriggerButton("Assign Material"),
+    inMaterials=op.inObject("Materials"),
+    inNodeList=op.inDropDown("Node List",[]),
+    inNodeCreate=op.inTriggerButton("Expose Node"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("Version");
 
 op.setPortGroup("Timing",[inTime,inTimeLine]);
-op.setPortGroup("Material Mapping",[inMaterials,inTimeLine]);
+op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
+op.setPortGroup("Expose Nodes",[inNodeList,inNodeCreate]);
 
 const selectMatStr="Select a material...";
+const selectNodeStr="Select a node...";
 const le=true; //little endian
 const cgl=op.patch.cgl;
 inFile.onChange=reloadSoon;
@@ -42,7 +47,7 @@ inExec.onTriggered=function()
     if(inTimeLine.get()) time=op.patch.timer.getTime();
     else time=Math.max(0,inTime.get())%maxTime;
 
-    if(gltf)
+    if(gltf && inRender.get())
     {
         if(needsMatUpdate) updateMaterials();
         for(var i=0;i<gltf.nodes.length;i++)
@@ -68,7 +73,8 @@ function loadBin()
         gltf=parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate=true;
-
+        updateDropdowns();
+        op.refreshParams();
     };
 
     oReq.send(null);
@@ -91,6 +97,7 @@ function reloadSoon(nocache)
 }
 
 inMaterialList.onChange=updateMaterialCreateButton;
+inNodeList.onChange=updateMaterialCreateButton;
 
 function updateMaterialCreateButton()
 {
@@ -102,11 +109,18 @@ function updateMaterialCreateButton()
         inMaterialList.uiAttribs.values=["no materials"];
         inMaterialList.setUiAttribs({"greyout":true});
         inMaterialCreate.setUiAttribs({"greyout":true});
+
+        inNodeList.setUiAttribs({"greyout":true});
+        inNodeCreate.setUiAttribs({"greyout":true});
         return;
     }
 
     inMaterialList.setUiAttribs({"greyout":false});
     inMaterialCreate.setUiAttribs({"greyout":inMaterialList.get()==selectMatStr});
+
+    inNodeList.setUiAttribs({"greyout":false});
+    inNodeCreate.setUiAttribs({"greyout":inNodeList.get()==selectMatStr});
+
 }
 
 inMaterialCreate.onTriggered=function()
@@ -129,6 +143,10 @@ function updateMaterials()
 
     gltf.shaders={};
 
+
+    console.log("update material list");
+
+
     for(var j=0;j<inMaterials.links.length;j++)
     {
         const op=inMaterials.links[j].portOut.parent;
@@ -138,24 +156,40 @@ function updateMaterials()
         if(portShader && portName && portShader.get())
         {
             const name=portName.get();
-            const matNames=[selectMatStr];
-
             if(gltf.json.materials)
                 for(var i=0;i<gltf.json.materials.length;i++)
-                {
-                    matNames.push(gltf.json.materials[i].name);
-
-                    if(gltf.json.materials[i].name==name)
-                        gltf.shaders[i]=portShader.get();
-                }
-
-            inMaterialList.uiAttribs.values=matNames;
-            inMaterialList.set(selectMatStr);
+                    if(gltf.json.materials[i].name==name) gltf.shaders[i]=portShader.get();
         }
     }
 
+    updateDropdowns();
     updateMaterialCreateButton();
     needsMatUpdate=false;
+}
+
+
+function updateDropdowns()
+{
+    // material list
+
+    const matNames=[selectMatStr];
+
+    if(gltf.json.materials)
+        for(var i=0;i<gltf.json.materials.length;i++)
+            matNames.push(gltf.json.materials[i].name);
+
+    inMaterialList.uiAttribs.values=matNames;
+    inMaterialList.set(selectMatStr);
+
+    // node list
+
+    const nodeNames=[selectNodeStr];
+
+    for(var i=0;i<gltf.nodes.length;i++)
+        nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
+
+    inNodeList.uiAttribs.values=nodeNames;
+    inMaterialList.set(selectNodeStr);
 }
 
 

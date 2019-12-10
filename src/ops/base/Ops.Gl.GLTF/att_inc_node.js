@@ -53,10 +53,8 @@ var gltfNode=class
         else console.warn("unknown anim path",path,anims);
     }
 
-    render(cgl)
+    transform(cgl)
     {
-        cgl.pushModelMatrix();
-
         if(!this._animTrans)
         {
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this.mat);
@@ -100,11 +98,17 @@ var gltfNode=class
 
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
         }
+    }
 
-        if(this.mesh) this.mesh.render(cgl);
+    render(cgl,ignoreTransform,ignoreMaterial)
+    {
+        cgl.pushModelMatrix();
 
-        for(var i=0;i<this.children.length;i++)
-            gltf.nodes[this.children[i]].render(cgl);
+        if(!ignoreTransform) this.transform(cgl);
+
+        if(this.mesh) this.mesh.render(cgl,ignoreMaterial);
+
+        for(var i=0;i<this.children.length;i++) gltf.nodes[this.children[i]].render(cgl,ignoreTransform,ignoreMaterial);
 
         cgl.popModelMatrix();
     }

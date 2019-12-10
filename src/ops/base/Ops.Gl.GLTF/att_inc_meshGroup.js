@@ -13,12 +13,11 @@ var gltfMeshGroup=class
         }
     }
 
-
-    render(cgl)
+    render(cgl, ignoreMat)
     {
         for(var i=0;i<this.meshes.length;i++)
         {
-            this.meshes[i].render(cgl);
+            this.meshes[i].render(cgl,ignoreMat);
         }
 
     }
