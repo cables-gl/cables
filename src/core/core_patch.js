@@ -1104,7 +1104,6 @@ Patch.prototype.setVarValue = function (name, val)
 {
     if (this._variables.hasOwnProperty(name))
     {
-        console.log("var:",this._variables[name]);
         this._variables[name].setValue(val);
     }
     else
