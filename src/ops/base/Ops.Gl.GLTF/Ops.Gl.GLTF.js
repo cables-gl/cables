@@ -101,25 +101,25 @@ inNodeList.onChange=updateMaterialCreateButton;
 
 function updateMaterialCreateButton()
 {
-    if(!op.patch.isEditorMode())return;
+    // if(!op.patch.isEditorMode())return;
 
-    if(!gltf || !gltf.json || !gltf.json.materials || gltf.json.materials.length===0)
-    {
-        if(gltf) console.log("NO MATERIALS!!!",gltf.json);
-        inMaterialList.uiAttribs.values=["no materials"];
-        inMaterialList.setUiAttribs({"greyout":true});
-        inMaterialCreate.setUiAttribs({"greyout":true});
+    // if(!gltf || !gltf.json || !gltf.json.materials || gltf.json.materials.length===0)
+    // {
+    //     if(gltf) console.log("NO MATERIALS!!!",gltf.json);
+    //     inMaterialList.uiAttribs.values=["no materials"];
+    //     inMaterialList.setUiAttribs({"greyout":true});
+    //     inMaterialCreate.setUiAttribs({"greyout":true});
 
-        inNodeList.setUiAttribs({"greyout":true});
-        inNodeCreate.setUiAttribs({"greyout":true});
-        return;
-    }
+    //     inNodeList.setUiAttribs({"greyout":true});
+    //     inNodeCreate.setUiAttribs({"greyout":true});
+    //     return;
+    // }
 
-    inMaterialList.setUiAttribs({"greyout":false});
-    inMaterialCreate.setUiAttribs({"greyout":inMaterialList.get()==selectMatStr});
+    // inMaterialList.setUiAttribs({"greyout":false});
+    // inMaterialCreate.setUiAttribs({"greyout":inMaterialList.get()==selectMatStr});
 
-    inNodeList.setUiAttribs({"greyout":false});
-    inNodeCreate.setUiAttribs({"greyout":inNodeList.get()==selectMatStr});
+    // inNodeList.setUiAttribs({"greyout":false});
+    // inNodeCreate.setUiAttribs({"greyout":inNodeList.get()==selectMatStr});
 
 }
 

@@ -95,7 +95,6 @@ const Patch = function (cfg)
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
-    if (cfg && cfg.variables) this._variables = cfg.variables || {};
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
@@ -1105,6 +1104,7 @@ Patch.prototype.setVarValue = function (name, val)
 {
     if (this._variables.hasOwnProperty(name))
     {
+        console.log("var:",this._variables[name]);
         this._variables[name].setValue(val);
     }
     else
