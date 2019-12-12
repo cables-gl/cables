@@ -58,7 +58,7 @@ inExec.onTriggered=function()
 
         if(gltf.bounds && inAutoSize.get())
         {
-            const sc=3/gltf.bounds.maxAxis;
+            const sc=2.5/gltf.bounds.maxAxis;
             vec3.set(scale,sc,sc,sc);
             mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
         }
