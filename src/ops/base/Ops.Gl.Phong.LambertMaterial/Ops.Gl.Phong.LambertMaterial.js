@@ -54,15 +54,22 @@ var updateLights=function()
     var count=0;
     var i=0;
     var num=0;
-    if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
         num=0;
     }
     else
     {
-        for(i in cgl.frameStore.phong.lights)
-        {
-            num++;
+        if (cgl.frameStore.phong) {
+            if (cgl.frameStore.phong.lights) {
+                for(i in cgl.frameStore.phong.lights) num++;
+            }
+        }
+
+        for (let light in cgl.lightStack) {
+            if (cgl.lightStack[light].type === "point") {
+                num++;
+            }
         }
     }
 
@@ -72,7 +79,7 @@ var updateLights=function()
         shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
     }
 
-    if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
         lights[count].pos.setValue([5,5,5]);
         lights[count].color.setValue([1,1,1]);
@@ -83,29 +90,51 @@ var updateLights=function()
     else
     {
         count=0;
-        if(shader)
-            for(i in cgl.frameStore.phong.lights)
-            {
-                lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
-                // if(cgl.frameStore.phong.lights[i].changed)
-                {
-                    cgl.frameStore.phong.lights[i].changed=false;
-                    if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+        if(shader) {
+            if (cgl.frameStore.phong) {
+                if (cgl.frameStore.phong.lights) {
+                    let length = cgl.frameStore.phong.lights.length;
+                    for(let i = 0; i < length; i +=1) {
+                        lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
+                        // if(cgl.frameStore.phong.lights[i].changed)
+                        {
+                            cgl.frameStore.phong.lights[i].changed=false;
+                            if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
 
-                    lights[count].fallOff.setValue(cgl.frameStore.phong.lights[i].fallOff);
-                    lights[count].radius.setValue(cgl.frameStore.phong.lights[i].radius);
-                    lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
-                    lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
-                    lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
-                    lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                    if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                    if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
+                            lights[count].fallOff.setValue(cgl.frameStore.phong.lights[i].fallOff);
+                            lights[count].radius.setValue(cgl.frameStore.phong.lights[i].radius);
+                            lights[count].color.setValue(cgl.frameStore.phong.lights[i].color);
+                            lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
+                            lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
+                            lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
+                            if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                            if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
 
-                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul||1);
+                            lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul||1);
+                        }
+
+                        count++;
+                    }
                 }
-
-                count++;
             }
+            if (cgl.lightStack) {
+                if (cgl.lightStack.length) {
+                        for (let j = 0; j < cgl.lightStack.length; j += 1) {
+                            const light = cgl.lightStack[j];
+                                 if (light.type === "point") { // POINT LIGHT
+                                    lights[count].pos.setValue(light.position);
+                                    lights[count].fallOff.setValue(light.falloff);
+                                    lights[count].radius.setValue(light.radius);
+                                    lights[count].color.setValue(light.color);
+                                    lights[count].ambient.setValue([0, 0, 0]);
+                                    lights[count].type.setValue(0); // old point light type index
+                                    lights[count].mul.setValue(light.intensity);
+                                    count++;
+                                 }
+                        }
+                    }
+                }
+        }
     }
 };
 
