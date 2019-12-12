@@ -105,7 +105,7 @@ function handleTrigger() {
         const areSameLength = [arrH, arrS, arrB, arrA].every(function(val, i, arr) { return val.length === length;});
 
         if (!areSameLength) {
-            op.log([arrH, arrS, arrB, arrA].map(a => a.length), length);
+            //op.log([arrH, arrS, arrB, arrA].map(a => a.length), length);
             op.setError("Arrays don't have the same length!");
         } else {
             op.setError(null);

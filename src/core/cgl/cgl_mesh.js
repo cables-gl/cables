@@ -203,6 +203,30 @@ Mesh.prototype.updateTexCoords = function (geom)
     }
 };
 
+
+/**
+ * @function updateNormals
+ * @description update normals only from a geometry
+ * @memberof Mesh
+ * @instance
+ * @param {Geometry} geometry
+ */
+Mesh.prototype.updateNormals = function (geom)
+{
+    if (geom.vertexNormals && geom.vertexNormals.length > 0)
+    {
+        this.setAttribute("attrVertNormal", geom.vertexNormals, 3);
+    }
+    else
+    {
+        var tcBuff = new Float32Array(Math.round((geom.vertices.length )));
+        this.setAttribute("attrVertNormal", tcBuff, 3);
+    }
+};
+
+
+
+
 Mesh.prototype._setVertexNumbers = function ()
 {
     var numVerts = this._geom.vertices.length / 3;
@@ -269,12 +293,17 @@ Mesh.prototype.setGeom = function (geom)
     this.setVertexIndices(this._geom.verticesIndices);
 
     this.updateTexCoords(this._geom);
+    this.updateNormals(this._geom);
 
-    if (this._geom.vertexNormals.length > 0) this.setAttribute("attrVertNormal", this._geom.vertexNormals, 3);
+    
 
     if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
     if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
-    if (this._geom.vertexColors.length > 0) this.setAttribute("attrVertColor", this._geom.vertexColors.flat(100), 4);
+    if (this._geom.vertexColors.length > 0)
+    {
+        if(this._geom.vertexColors.flat)this._geom.vertexColors.flat(100);
+        this.setAttribute("attrVertColor", this._geom.vertexColors, 4);
+    }
 
     if (this.addVertexNumbers) this._setVertexNumbers();
 

@@ -54,12 +54,14 @@ inToggleOrenNayar.onChange = function() {
 const inToggleFresnel=op.inValueBool("Active", false);
 inToggleFresnel.setUiAttribs({ hidePort: true });
 const inFresnel=op.inValueSlider("Fresnel Intensity", 0.7);
+const inFresnelWidth = op.inFloat("Fresnel Width", 1);
+const inFresnelExponent = op.inFloat("Fresnel Exponent", 6);
 const inFresnelR = op.inFloat("Fresnel R", 1);
 const inFresnelG = op.inFloat("Fresnel G", 1);
 const inFresnelB = op.inFloat("Fresnel B", 1);
 inFresnelR.setUiAttribs({ colorPick: true });
 
-const fresnelArr = [inFresnel, inFresnelR, inFresnelG, inFresnelB];
+const fresnelArr = [inFresnel, inFresnelWidth, inFresnelExponent, inFresnelR, inFresnelG, inFresnelB];
 fresnelArr.forEach(function(port) { port.setUiAttribs({ greyout: true })});
 op.setPortGroup("Fresnel", fresnelArr.concat([inToggleFresnel]));
 
@@ -294,7 +296,7 @@ inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
-const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 7 : 16;
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
 shader.define("SPECULAR_PHONG");
@@ -347,10 +349,12 @@ const initialUniforms = [
     new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
     new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
     new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
+    new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent),
 
 ];
 
 const lightUniforms = [];
+
 const initialLight = new Light({
     type: "point",
     color: [0.8, 0.8, 0.8],
@@ -409,10 +413,6 @@ const render = function() {
     cgl.setPreviousShader();
 }
 
-op.init = function() {
-
-}
-
 op.preRender = function() {
     shader.bind();
     render();
@@ -455,7 +455,6 @@ inTrigger.onTriggered = function() {
                                 }
                             }
                         }
-
                     }
                 } else {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);
@@ -475,7 +474,9 @@ inTrigger.onTriggered = function() {
                 const keys = Object.keys(light);
                 for (let j = 0; j < keys.length; j += 1) {
                     const key = keys[j];
-                    if (key === "type") lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                    if (key === "type") {
+                        lightUniforms[i][key].setValue(LIGHT_TYPES[light[key]]);
+                    }
                     else {
                         if (lightUniforms[i][key]) {
                             if (key === "radius" || key === "intensity" || key === "falloff") {
@@ -486,7 +487,6 @@ inTrigger.onTriggered = function() {
                             }
                             else lightUniforms[i][key].setValue(light[key]);
                         }
-
                     }
                 }
             }

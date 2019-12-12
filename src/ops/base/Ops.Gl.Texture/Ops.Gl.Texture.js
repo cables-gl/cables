@@ -44,16 +44,9 @@ var loadingId=null;
 var tex=null;
 function reloadSoon(nocache)
 {
-    // if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
-
-    // if(timedLoader!=0)
-    // {
-    //     console.log('tex load canceled...');
-    // }
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
-        // console.log('tex load yay...');
         realReload(nocache);
     },30);
 }

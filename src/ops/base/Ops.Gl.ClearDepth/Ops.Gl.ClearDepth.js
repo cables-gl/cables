@@ -1,7 +1,8 @@
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
 
-var cgl=op.patch.cgl;
+const
+    render=op.inTrigger('render'),
+    trigger=op.outTrigger('trigger'),
+    cgl=op.patch.cgl;
 
 render.onTriggered=function()
 {

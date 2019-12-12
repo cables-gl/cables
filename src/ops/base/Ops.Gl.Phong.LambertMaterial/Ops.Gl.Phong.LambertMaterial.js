@@ -38,7 +38,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
     lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
-    lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
+    lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',1000);
 }
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);

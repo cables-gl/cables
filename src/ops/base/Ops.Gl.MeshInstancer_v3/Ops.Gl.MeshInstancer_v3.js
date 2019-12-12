@@ -5,7 +5,7 @@ const
 
     doLimit=op.inValueBool("Limit Instances",false),
     inLimit=op.inValueInt("Limit",100),
-    inIgnoreAlpha=op.inValueBool("Ignore Alpha", true),
+    //inIgnoreAlpha=op.inValueBool("Ignore Alpha", true),
 
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
@@ -32,14 +32,13 @@ var num=0;
 
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
-op.setPortGroup("Color", [inIgnoreAlpha, inColor])
 op.toWorkPortsNeedToBeLinked(geom);
 
 doLimit.onChange=updateLimit;
 exe.onTriggered=doRender;
 exe.onLinkChanged=function() {
     if (!exe.isLinked()) removeModule();
-}
+};
 
 var matrixArray=new Float32Array(1);
 var instColorArray = new Float32Array(1);
@@ -47,7 +46,7 @@ var m=mat4.create();
 
 updateLimit();
 
-inRot.onChange=inColor.onChange=inIgnoreAlpha.onChange=
+inRot.onChange=inColor.onChange=
     inTranslates.onChange=
     inScales.onChange=reset;
 
@@ -87,7 +86,7 @@ function setupArray()
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
 
-    op.log("setupArray");
+    //op.log("setupArray");
 
     num=Math.floor(transforms.length/3);
 
@@ -127,7 +126,7 @@ function setupArray()
         instColorArray[i*4+0] = colArr[i*4+0];
         instColorArray[i*4+1] = colArr[i*4+1];
         instColorArray[i*4+2] = colArr[i*4+2];
-        instColorArray[i*4+3] = inIgnoreAlpha.get() ? 1 : colArr[i*4+3];
+        instColorArray[i*4+3] = colArr[i*4+3];
 
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
         else mat4.scale(m,m,[1,1,1]);

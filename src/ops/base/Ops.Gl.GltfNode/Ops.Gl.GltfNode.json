@@ -1,0 +1,36 @@
+{
+    "id": "d4ca087f-ff12-4ca1-889c-1e5bd42631c8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1575984189121
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1575984225713,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Node Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Material",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.GltfNode"
+    }
+}

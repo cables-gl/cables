@@ -86,7 +86,7 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.Admin.SimosPointLight_v2"
+        "name": "Ops.Gl.Phong.PointLight_v4"
     },
     "changelog": [
         {
