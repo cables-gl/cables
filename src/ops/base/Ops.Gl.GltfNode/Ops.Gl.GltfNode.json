@@ -22,6 +22,11 @@
             },
             {
                 "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Transform",
                 "subType": "boolean"
             },
@@ -29,6 +34,12 @@
                 "type": "0",
                 "name": "Ignore Material",
                 "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Geometry"
             }
         ],
         "name": "Ops.Gl.GltfNode"

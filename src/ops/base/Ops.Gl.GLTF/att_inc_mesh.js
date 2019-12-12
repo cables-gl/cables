@@ -25,8 +25,8 @@ var gltfMesh=class
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
-        // console.log('meshbounds',this.bounds);
-        console.log("mesh bounds:",this.bounds._maxAxis);
+
+        // console.log("mesh bounds:",this.bounds._maxAxis);
     }
 
     fillGeomAttribs(gltf,geom,attribs)

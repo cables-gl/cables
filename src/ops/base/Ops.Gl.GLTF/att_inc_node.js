@@ -67,7 +67,7 @@ var gltfNode=class
                 bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf,mat,bounds));
         }
 
-        console.log("node bounds:"+this.name,bounds._maxAxis,bounds.changed);
+        // console.log("node bounds:"+this.name,bounds._maxAxis,bounds.changed);
 
         if(bounds.changed)return bounds;
         else return null;
@@ -106,8 +106,7 @@ var gltfNode=class
                 mat4.fromQuat(this._tempMat,this._tempQuat);
                 mat4.mul(this._animMat,this._animMat,this._tempMat);
             }
-            else
-            if(this._rot)
+            else if(this._rot)
             {
                 var rotmat=mat4.create();
                 mat4.fromQuat(rotmat,this._rot);
@@ -120,9 +119,7 @@ var gltfNode=class
                     this._animScale[0].getValue(time),
                     this._animScale[1].getValue(time),
                     this._animScale[2].getValue(time)]);
-
-            }
-            else if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
+            } else if(this._scale) mat4.scale(this._animMat,this._animMat,this._scale);
 
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
         }

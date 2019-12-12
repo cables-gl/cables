@@ -53,15 +53,18 @@ inExec.onTriggered=function()
 
     cgl.pushModelMatrix();
 
+
+    if(gltf && gltf.bounds && inAutoSize.get())
+    {
+        const sc=2.5/gltf.bounds.maxAxis;
+        vec3.set(scale,sc,sc,sc);
+        mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
+    }
+
+
     if(gltf && inRender.get())
     {
 
-        if(gltf.bounds && inAutoSize.get())
-        {
-            const sc=2.5/gltf.bounds.maxAxis;
-            vec3.set(scale,sc,sc,sc);
-            mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
-        }
 
         if(gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
         {

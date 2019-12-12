@@ -14,7 +14,7 @@ var gltfMeshGroup=class
             this.bounds.apply(mesh.bounds);
         }
 
-        console.log("mesh group bounds:",this.bounds._maxAxis);
+        // console.log("mesh group bounds:",this.bounds._maxAxis);
     }
 
     render(cgl, ignoreMat)
