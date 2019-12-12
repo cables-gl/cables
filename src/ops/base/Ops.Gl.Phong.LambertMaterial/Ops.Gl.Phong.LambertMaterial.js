@@ -128,6 +128,7 @@ var updateLights=function()
                                     lights[count].color.setValue(light.color);
                                     lights[count].ambient.setValue([0, 0, 0]);
                                     lights[count].type.setValue(0); // old point light type index
+                                    lights[count].mul.setValue(light.intensity);
                                     count++;
                                  }
                         }
