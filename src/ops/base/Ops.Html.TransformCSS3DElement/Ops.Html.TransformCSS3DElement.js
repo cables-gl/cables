@@ -60,6 +60,7 @@ function wrap (el) {
 	return view;
 }
 
+
 inElement.onChange = function (self, el) {
 	op.onDelete();
 	if (!el) return;

@@ -17,6 +17,24 @@
                 "type": "0",
                 "name": "Custom",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "use viewport size",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "group": "Size",
+                "subType": "integer"
             }
         ],
         "portsOut": [

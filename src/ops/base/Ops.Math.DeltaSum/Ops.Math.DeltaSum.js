@@ -27,13 +27,13 @@ function updateLimit()
 {
     if(!inLimit.get())
     {
-        inMin.setUiAttribs({hidePort:true,greyout:true});
-        inMax.setUiAttribs({hidePort:true,greyout:true});
+        inMin.setUiAttribs({greyout:true});
+        inMax.setUiAttribs({greyout:true});
     }
     else
     {
-        inMin.setUiAttribs({hidePort:false,greyout:false});
-        inMax.setUiAttribs({hidePort:false,greyout:false});
+        inMin.setUiAttribs({greyout:false});
+        inMax.setUiAttribs({greyout:false});
     }
 }
 

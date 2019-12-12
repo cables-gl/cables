@@ -104,18 +104,24 @@ var cgl=op.patch.cgl;
 var listenerElement=null;
 function addListeners()
 {
-    updateArea();
     listenerElement.addEventListener('touchmove', ontouchmove);
     listenerElement.addEventListener('touchstart', ontouchstart);
     listenerElement.addEventListener('touchend', ontouchend);
+
+    console.log("added touchscreen listeners",listenerElement);
+
 }
 
 
 function updateArea()
 {
     removeListeners();
-    listenerElement = cgl.canvas;
+
     if(area.get()=='Document') listenerElement = document;
+    else listenerElement = cgl.canvas;
+
+    if(active.get()) addListeners();
+
 }
 
 function removeListeners()
@@ -126,14 +132,17 @@ function removeListeners()
         listenerElement.removeEventListener('touchstart', ontouchstart);
         listenerElement.removeEventListener('touchend', ontouchend);
     }
+    console.log("removed touchscreen listeners");
+    listenerElement=null;
 
 }
 
 active.onChange=function()
 {
-    removeListeners();
-    if(active.get())addListeners();
+    updateArea();
+
+    console.log('active',active.get());
 };
 
-addListeners();
+updateArea();
 

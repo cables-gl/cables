@@ -7,6 +7,7 @@ const
     valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle'),
     lineHeight=op.inValueFloat("Line Height",1),
     letterSpace=op.inValueFloat("Letter Spacing"),
+    inMulTex=op.inTexture("Multiply Texture"),
     next=op.outTrigger("Next"),
     textureOut=op.outTexture("texture"),
     outLines=op.outNumber("Total Lines",0),
@@ -18,10 +19,17 @@ const cgl=op.patch.cgl;
 const filter=CGL.Texture.FILTER_MIPMAP;
 const textureSize=1024;
 var fontLoaded=false;
+var needUpdate=true;
 
 align.onChange=
     str.onChange=
-    lineHeight.onChange=generateMesh;
+    lineHeight.onChange=generateMeshLater;
+
+
+function generateMeshLater()
+{
+    needUpdate=true;
+}
 
 var canvasid=null;
 CABLES.OpTextureMeshCanvas={};
@@ -33,6 +41,11 @@ var mesh=null;
 
 var createMesh=true;
 var createTexture=true;
+
+inMulTex.onChange=function()
+{
+    shader.toggleDefine("DO_MULTEX",inMulTex.get());
+};
 
 textureOut.set(null);
 inFont.onChange=function()
@@ -105,6 +118,7 @@ op.onDelete=function()
 var shader=new CGL.Shader(cgl,'TextMesh');
 shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
+var uniTexMul=new CGL.Uniform(shader,'t','texMul',1);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
 const
@@ -130,6 +144,11 @@ var disabled=false;
 
 render.onTriggered=function()
 {
+    if(needUpdate)
+    {
+        generateMesh();
+        needUpdate=false;
+    }
     var font=getFont();
     if(font.lastChange!=lastTextureChange)
     {
@@ -145,6 +164,10 @@ render.onTriggered=function()
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.setShader(shader);
         cgl.setTexture(0,textureOut.get().tex);
+
+        var mulTex=inMulTex.get();
+        if(mulTex)cgl.setTexture(1,mulTex.tex);
+
 
         if(valignMode===2) vec3.set(vec, 0,height,0);
         else if(valignMode===1) vec3.set(vec, 0,0,0);
@@ -208,6 +231,7 @@ function generateMesh()
     var transformations=[];
     var tcOffsets=[];//new Float32Array(str.get().length*2);
     var tcSize=[];//new Float32Array(str.get().length*2);
+    var texPos=[];
     var charCounter=0;
     createTexture=false;
     var m=mat4.create();
@@ -254,6 +278,7 @@ function generateMesh()
             }
             else
             {
+                texPos.push(pos/width*0.99+0.005,(1.0-(s/(strings.length-1)))*0.99+0.005);
                 tcOffsets.push(char.texCoordX,1-char.texCoordY-char.texCoordHeight);
                 tcSize.push(char.texCoordWidth,char.texCoordHeight);
 
@@ -284,6 +309,8 @@ function generateMesh()
     mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});
+
+    mesh.setAttribute('attrTexPos',new Float32Array(texPos),2,{"instanced":true});
 
     createMesh=false;
 

@@ -268,5 +268,5 @@ function reload()
     var loadingId=op.patch.loading.start('json3dMesh',filename.get());
 
     if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
-        else doLoad();
+    else doLoad();
 }

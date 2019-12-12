@@ -8,9 +8,10 @@ const SIDEBAR_OPEN_CLOSE_BTN_CLASS = 'sidebar__close-button';
 const SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS = 'sidebar__close-button-icon';
 const BTN_TEXT_OPEN = ''; // 'Close';
 const BTN_TEXT_CLOSED = ''; // 'Show Controls';
-var cssFileContent = attachments.style_css; /* the CSS style attachment */
+
 let openCloseBtn = null;
 let openCloseBtnIcon = null;
+var headerTitleText=null;
 
 // inputs
 var visiblePort = op.inValueBool("Visible", true);
@@ -18,6 +19,7 @@ var opacityPort = op.inValueSlider('Opacity', 1);
 var defaultMinimizedPort = op.inValueBool('Default Minimized');
 var minimizedOpacityPort = op.inValueSlider('Minimized Opacity', 0.5);
 
+var inTitle = op.inString('Title','Sidebar');
 var side = op.inValueBool('Side');
 
 // outputs
@@ -27,7 +29,7 @@ var sidebarEl = document.querySelector('.' + SIDEBAR_ID);
 if(!sidebarEl) {
     sidebarEl = initSidebarElement();
 }
-if(!sidebarEl) return;
+// if(!sidebarEl) return;
 var sidebarItemsEl = sidebarEl.querySelector('.' + SIDEBAR_ITEMS_CLASS);
 childrenPort.set({
     parentElement: sidebarItemsEl,
@@ -91,10 +93,13 @@ side.onChanged=function()
  * Some styles cannot be set directly inline, so a dynamic stylesheet is needed.
  * Here hover states can be set later on e.g.
  */
-function updateDynamicStyles() {
+function updateDynamicStyles()
+{
     let dynamicStyles = document.querySelectorAll('.' + CSS_ELEMENT_DYNAMIC_CLASS);
-    if(dynamicStyles) {
-        dynamicStyles.forEach(function(e) {
+    if(dynamicStyles)
+    {
+        dynamicStyles.forEach(function(e)
+        {
             e.parentNode.removeChild(e);
         });
     }
@@ -108,11 +113,30 @@ function updateDynamicStyles() {
     document.body.appendChild(newDynamicStyle);
 }
 
-function initSidebarElement() {
+function initSidebarElement()
+{
     var element = document.createElement('div');
     element.classList.add(SIDEBAR_CLASS);
     element.classList.add(SIDEBAR_ID);
     var canvasWrapper = op.patch.cgl.canvas.parentElement; /* maybe this is bad outside cables!? */
+
+    // header...
+    var headerGroup = document.createElement('div');
+    headerGroup.classList.add('sidebar__group');
+    element.appendChild(headerGroup);
+    var header = document.createElement('div');
+    header.classList.add('sidebar__group-header');
+    element.appendChild(header);
+    var headerTitle = document.createElement('div');
+    headerTitle.classList.add('sidebar__group-header-title');
+    headerTitleText = document.createElement('span');
+    headerTitleText.classList.add('sidebar__group-header-title-text');
+    headerTitleText.innerHTML=inTitle.get();
+    headerTitle.appendChild(headerTitleText);
+    header.appendChild(headerTitle);
+    headerGroup.appendChild(header);
+    element.appendChild(headerGroup);
+    headerGroup.addEventListener('click', onOpenCloseBtnClick);
 
     if(!canvasWrapper)
     {
@@ -131,25 +155,29 @@ function initSidebarElement() {
     openCloseBtnIcon = document.createElement('span');
     openCloseBtnIcon.classList.add(SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS);
     openCloseBtn.appendChild(openCloseBtnIcon);
+
     return element;
 }
+
+inTitle.onChange=function()
+{
+    if(headerTitleText)headerTitleText.innerHTML=inTitle.get();
+
+};
 
 function setClosed(b)
 {
 
 }
 
-function onOpenCloseBtnClick(ev) {
-  ev.stopPropagation();
-//   const sidebarEl = ev.target.closest('.' + SIDEBAR_CLASS);
-  if(!sidebarEl) { console.error('Sidebar could not be closed...'); return; }
-  sidebarEl.classList.toggle('sidebar--closed');
-  const btn = ev.target;
-  let btnText = BTN_TEXT_OPEN;
-  if(sidebarEl.classList.contains('sidebar--closed')) {
-    btnText = BTN_TEXT_CLOSED;
-   }
-   // btn.textContent = btnText
+function onOpenCloseBtnClick(ev)
+{
+    ev.stopPropagation();
+    if(!sidebarEl) { console.error('Sidebar could not be closed...'); return; }
+    sidebarEl.classList.toggle('sidebar--closed');
+    const btn = ev.target;
+    let btnText = BTN_TEXT_OPEN;
+    if(sidebarEl.classList.contains('sidebar--closed')) btnText = BTN_TEXT_CLOSED;
 }
 
 function initSidebarCss() {
@@ -162,7 +190,7 @@ function initSidebarCss() {
         });
     }
     var newStyle = document.createElement('style');
-    newStyle.innerHTML = cssFileContent;
+    newStyle.innerHTML = attachments.style_css;
     newStyle.classList.add(CSS_ELEMENT_CLASS);
     document.body.appendChild(newStyle);
 }
@@ -172,8 +200,6 @@ function onDelete() {
 }
 
 function removeElementFromDOM(el) {
-    if(el && el.parentNode && el.parentNode.removeChild) {
-        el.parentNode.removeChild(el);
-    }
+    if(el && el.parentNode && el.parentNode.removeChild) el.parentNode.removeChild(el);
 }
 

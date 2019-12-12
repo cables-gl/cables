@@ -1,3 +1,5 @@
+import { Log } from "./log";
+
 const EventTarget = function ()
 {
     this._eventCallbacks = {};

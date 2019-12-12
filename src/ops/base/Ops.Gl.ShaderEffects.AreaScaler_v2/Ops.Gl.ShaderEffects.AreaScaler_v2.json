@@ -1,0 +1,73 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Area size",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Source",
+                "group": "Influence"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "group": "Influence",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smoothstep",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Min Size Original",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.AreaScaler_v2"
+    },
+    "authorName": "pandur",
+    "id": "b44cc257-8d84-43af-a07c-c003957bf258",
+    "created": 1573742550907,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.AreaScaler_v2 renamed to Ops.Gl.ShaderEffects.AreaScaler_v2",
+            "author": "pandur",
+            "date": 1573743399666
+        }
+    ]
+}

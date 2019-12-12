@@ -1,0 +1,1 @@
+Create a 4-tuple RGBA array from 4 array inputs.

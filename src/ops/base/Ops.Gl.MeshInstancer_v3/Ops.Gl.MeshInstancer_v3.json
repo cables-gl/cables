@@ -1,0 +1,77 @@
+{
+    "id": "322d8c8d-851b-481d-9bee-ec1cf7d57a35",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1573749960932
+        },
+        {
+            "message": "Ops.User.cables.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v3",
+            "author": "cables",
+            "date": 1573754593215
+        }
+    ],
+    "authorName": "cables",
+    "created": 1573750008766,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Limit Instances",
+                "group": "Limit Number of Instances",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Limit",
+                "group": "Limit Number of Instances",
+                "subType": "integer"
+            },
+            {
+                "type": "3",
+                "name": "positions",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "Scale Array",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "Rotations",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "Colors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.MeshInstancer_v3"
+    }
+}

@@ -2,7 +2,12 @@ const
     render=op.inTrigger("render"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
+    r=op.inValueSlider("r",1.0),
+    g=op.inValueSlider("g",1.0),
+    b=op.inValueSlider("b",1.0),
     trigger=op.outTrigger("trigger");
+
+r.setUiAttribs({colorPick:true});
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
@@ -21,6 +26,8 @@ var uniLayer1=new CGL.Uniform(shader,'b','layer1',op.inValueBool("Layer 1",true)
 var uniLayer2=new CGL.Uniform(shader,'b','layer2',op.inValueBool("Layer 2",true));
 var uniLayer3=new CGL.Uniform(shader,'b','layer3',op.inValueBool("Layer 3",true));
 var uniLayer4=new CGL.Uniform(shader,'b','layer4',op.inValueBool("Layer 4",true));
+
+const uniColor=new CGL.Uniform(shader,'3f','color',r,g,b);
 
 var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 

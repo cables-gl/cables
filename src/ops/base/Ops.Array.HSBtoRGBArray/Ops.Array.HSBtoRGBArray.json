@@ -1,0 +1,115 @@
+{
+    "id": "0f552671-7431-4031-97e3-211f2cf9f111",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1573749802227
+        },
+        {
+            "message": "Ops.User.cables.HSBtoRGBArray renamed to Ops.Array.HSBtoRGBArray",
+            "author": "simod",
+            "date": 1573749822395
+        }
+    ],
+    "authorName": "simod",
+    "created": 1573749804856,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger Input"
+            },
+            {
+                "type": "3",
+                "name": "In Hue Array"
+            },
+            {
+                "type": "3",
+                "name": "In Saturation Array"
+            },
+            {
+                "type": "3",
+                "name": "In Brightness Array"
+            },
+            {
+                "type": "3",
+                "name": "In Alpha Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Output"
+            },
+            {
+                "type": "3",
+                "name": "Result Array"
+            },
+            {
+                "type": "0",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RGBA Tuple Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.HSBtoRGBArray"
+    },
+    "summary": "generates RGBA array from up to 4 arrays (HSBA)",
+    "issues": "",
+    "collections": [
+        "pointArrays",
+        "generator",
+        "random",
+        "converter"
+    ],
+    "relatedops": [
+        "Ops.Array.RandomNumbersArray",
+        "Ops.Array.RandomNumbersArray3"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger Input",
+                "text": "Trigger input"
+            },
+            {
+                "name": "In Hue Array",
+                "text": "Hue In Array with range`[0, 1]`"
+            },
+            {
+                "name": "In Saturation Array",
+                "text": "Saturation In Array with range`[0, 1]` - if not connected, default output value is `0.5`"
+            },
+            {
+                "name": "In Brightness Array",
+                "text": "Brightness In Array with range`[0, 1]` - if not connected, default output value is `1`"
+            },
+            {
+                "name": "In Alpha Array",
+                "text": "Alpha/Opacity In Array with range`[0, 1]` - if not connceted, default output value is `1`"
+            },
+            {
+                "name": "Trigger Output",
+                "text": "Trigger output"
+            },
+            {
+                "name": "Result Array",
+                "text": "Resulting RGBA array output"
+            },
+            {
+                "name": "Array Length",
+                "text": "Total length of the array"
+            },
+            {
+                "name": "RGBA Tuple Length",
+                "text": "amount of RGBA tuples"
+            }
+        ]
+    }
+}

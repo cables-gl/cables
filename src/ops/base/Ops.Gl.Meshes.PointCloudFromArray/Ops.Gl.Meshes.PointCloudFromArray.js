@@ -13,7 +13,8 @@ const cgl=op.patch.cgl;
 
 inCoords.onChange=updateTexCoordsPorts;
 pTexCoordRand.onChange=updateTexCoordsPorts;
-seed.onChange=arr.onChange=reset;
+
+vertCols.onChange=seed.onChange=arr.onChange=reset;
 numPoints.onChange=updateNumVerts;
 
 op.toWorkPortsNeedToBeLinked(arr,exe);

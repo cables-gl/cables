@@ -1,6 +1,11 @@
 // import { vec2, vec3 } from "gl-matrix";
 import { UTILS } from "../utils";
 import { b64decTypedArray } from "../base64";
+
+
+import { BoundingBox } from "./cgl_boundingbox";
+
+
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
  * @external CGL
@@ -629,37 +634,7 @@ Geometry.prototype.calcBarycentric = function ()
 
 Geometry.prototype.getBounds = function ()
 {
-    var i = 0;
-    var bounds = {
-        maxX: -Number.MAX_VALUE,
-        maxY: -Number.MAX_VALUE,
-        maxZ: -Number.MAX_VALUE,
-        minX: Number.MAX_VALUE,
-        minY: Number.MAX_VALUE,
-        minZ: Number.MAX_VALUE,
-    };
-
-    for (i = 0; i < this.vertices.length; i += 3)
-    {
-        if (this.vertices[i + 0] == this.vertices[i + 0])
-        {
-            bounds.maxX = Math.max(bounds.maxX, this.vertices[i + 0]);
-            bounds.maxY = Math.max(bounds.maxY, this.vertices[i + 1]);
-            bounds.maxZ = Math.max(bounds.maxZ, this.vertices[i + 2]);
-
-            bounds.minX = Math.min(bounds.minX, this.vertices[i + 0]);
-            bounds.minY = Math.min(bounds.minY, this.vertices[i + 1]);
-            bounds.minZ = Math.min(bounds.minZ, this.vertices[i + 2]);
-        }
-    }
-
-    bounds.x = Math.abs(bounds.maxX) + Math.abs(bounds.minX);
-    bounds.y = Math.abs(bounds.maxY) + Math.abs(bounds.minY);
-    bounds.z = Math.abs(bounds.maxZ) + Math.abs(bounds.minZ);
-
-    bounds.maxAxis = Math.max(bounds.z, Math.max(bounds.x, bounds.y));
-
-    return bounds;
+    return new BoundingBox(this);
 };
 
 Geometry.prototype.center = function (x, y, z)

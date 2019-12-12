@@ -19,6 +19,8 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal)
         m+=1.0;
     #endif
 
+    // if(m<0.0)m=0.0;
+
     pos.xyz*=m;
 
     return pos;

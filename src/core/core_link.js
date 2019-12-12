@@ -91,7 +91,7 @@ Link.prototype.remove = function ()
         this.scene.emitEvent("onUnLink", this.portIn, this.portOut, this);
     }
 
-    if (this.portIn && this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT)
+    if (this.portIn && (this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT || this.portIn.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY))
     {
         this.portIn.set(null);
         if (this.portIn.links.length > 0) this.portIn.set(this.portIn.links[0].getOtherPort(this.portIn).get());

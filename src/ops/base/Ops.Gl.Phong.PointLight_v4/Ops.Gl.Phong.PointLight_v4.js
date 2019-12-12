@@ -13,14 +13,10 @@ function Light(config) {
      return this;
 }
 
-
-
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
-
 const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 15);
-
 
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 1);
@@ -89,6 +85,7 @@ Object.keys(inLight).forEach(function(key) {
 });
 
 
+const sc=vec3.create();
 const result = vec3.create();
 const position = vec3.create();
 const transVec = vec3.create();
@@ -99,6 +96,9 @@ inTrigger.onTriggered = function() {
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     light.position = position;
+
+    // mat4.getScaling(sc,cgl.mMatrix);
+    // light.radius=inRadius.get()*sc[0];
 
     if(CABLES.UI && gui.patch().isCurrentOp(op)) {
         gui.setTransformGizmo({

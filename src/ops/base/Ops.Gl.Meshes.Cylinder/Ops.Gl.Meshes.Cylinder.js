@@ -1,13 +1,13 @@
 var render=op.inTrigger('render');
-var slices=op.addInPort(new CABLES.Port(op,"slices",CABLES.OP_PORT_TYPE_VALUE));
-var stacks=op.addInPort(new CABLES.Port(op,"stacks",CABLES.OP_PORT_TYPE_VALUE));
-var radius=op.addInPort(new CABLES.Port(op,"radius",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
+var slices=op.inFloat("slices");
+var stacks=op.inFloat("stacks");
+var radius=op.inFloat("radius");
+var height=op.inFloat("height");
 
 var startSlice=op.inValueInt("Start Slice",0);
 
 var trigger=op.outTrigger('trigger');
-var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));
+var geomOut=op.outObject("geometry");
 
 
 height.set(2);
@@ -72,7 +72,7 @@ function circleTable(n,halfCircle)
         sint[i] = Math.sin(angle*i);
         cost[i] = Math.cos(angle*i);
     }
-    
+
     if (halfCircle)
     {
         sint[size] =  0.0;  /* sin PI */

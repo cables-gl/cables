@@ -6,6 +6,9 @@ const exe=op.inTriggerButton("exe"),
 
 exe.onTriggered=update;
 
+var newArr=[];
+
+
 function update()
 {
     var arr=array.get();
@@ -15,9 +18,13 @@ function update()
         values.set(null);
         return;
     }
-    arr[index.get()]=Math.abs(Math.floor(value.get()));
+
+    newArr.length=arr.length;
+    for(var i=0;i<arr.length;i++)newArr[i]=arr[i];
+
+    newArr[Math.floor(index.get())]=value.get();
 
     values.set(null);
-    values.set(arr);
+    values.set(newArr);
 }
 

@@ -51,6 +51,7 @@ const Patch = function (cfg)
     this.aborted = false;
     this.loading = new LoadingStatus(this);
     this._crashedOps = [];
+    this._renderOneFrame=false;
 
     this._perf = {
         fps: 0,
@@ -94,7 +95,6 @@ const Patch = function (cfg)
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
-    if (cfg && cfg.variables) this._variables = cfg.variables || {};
     this._variableListeners = [];
     this.vars = {};
     if (cfg && cfg.vars) this.vars = cfg.vars; // vars is old!
@@ -151,6 +151,12 @@ Patch.prototype.isPlaying = function ()
 {
     return !this._paused;
 };
+
+Patch.prototype.isRenderingOneFrame = function ()
+{
+    return this._renderOneFrame;
+};
+
 
 Patch.prototype.renderOneFrame = function ()
 {
@@ -348,7 +354,7 @@ Patch.prototype.createOp = function (identifier, id)
 
         this.emitEvent("exceptionOp", e, objName);
 
-        if (!this.isEditorMode)
+        if (!this.isEditorMode())
         {
             Log.log(e);
             Log.error('[instancing error] ' + objName,e);
@@ -555,21 +561,12 @@ Patch.prototype.exec = function (e)
         this._frameWasdelayed = false;
     }
 
-    if (this._renderOneFrame && this.onOneFrameRendered)
+    if (this._renderOneFrame) 
     {
-        this.onOneFrameRendered();
+        if(this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
+        this.emitEvent("renderedOneFrame");
         this._renderOneFrame = false;
     }
-
-
-
-    // this._perf = {
-    //     fps: 0,
-    //     ms: 0,
-    //     _fpsFrameCount: 0,
-    //     _fpsMsCount: 0,
-    //     _fpsStart: 0,
-    // };
 
     if (CABLES.now() - this._perf._fpsStart >= 1000)
     {

@@ -22,23 +22,11 @@ IN vec2 coord6;
     UNI sampler2D imageMask;
 #endif
 
-
 void main()
 {
-
     vec4 color = vec4(0.0);
 
-
-    // color += texture(tex, coord0) * 0.006206;
-    // color += texture(tex, coord1) * 0.066575;
-    // color += texture(tex, coord2) * 0.30233;
-    // color += texture(tex, coord3) * 0.382928;
-    // color += texture(tex, coord4) * 0.30233;
-    // color += texture(tex, coord5) * 0.066575;
-    // color += texture(tex, coord6) * 0.006206;
-
-// +++++0.1383328848652136+0.06927096443792478
-
+// color += texture(tex, texCoord+1.0/1024.0*0.5);
 
     color += texture(tex, coord0) * 0.06927096443792478;
     color += texture(tex, coord1) * 0.1383328848652136;
@@ -48,15 +36,6 @@ void main()
     color += texture(tex, coord5) * 0.1383328848652136;
     color += texture(tex, coord6) * 0.06927096443795711;
 
-    // color += texture(tex, coord0) * 0.05; //0.095766;
-    // color += texture(tex, coord1) * 0.1; //0.191243;
-    // color += texture(tex, coord2) * 0.2; //0.303053;
-    // color += texture(tex, coord3) * 0.3; //0.20236;
-    // color += texture(tex, coord4) * 0.2; //0.303053;
-    // color += texture(tex, coord5) * 0.1; //0.191243;
-    // color += texture(tex, coord6) * 0.05; //0.095766;
-
     color.a=1.0;
-    
     outColor= color;
 }

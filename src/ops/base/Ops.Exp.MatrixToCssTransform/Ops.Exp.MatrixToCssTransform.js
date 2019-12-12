@@ -46,11 +46,18 @@ update.onTriggered=function()
 
     if(ele)
     {
-        ele.style.transform= generateCSSString(op.patch.cgl.modelMatrix());
-        updatePerspective();
-        ele.parentNode.style.perspective=persp.get()+'px';
-        ele.style['perspective-origin']='50% 50%';
+        try
+        {
+            ele.style.transform= generateCSSString(op.patch.cgl.modelMatrix());
+            updatePerspective();
+            ele.parentNode.style.perspective=persp.get()+'px';
+            ele.style['perspective-origin']='50% 50%';
+        }
+        catch(e)
+        {
+            ele=null;
+        }
     }
-    
-    
+
+
 };

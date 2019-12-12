@@ -12,6 +12,16 @@
                 "type": "0",
                 "name": "Text",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

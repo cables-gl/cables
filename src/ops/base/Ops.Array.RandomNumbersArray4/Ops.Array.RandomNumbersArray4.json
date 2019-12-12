@@ -1,0 +1,118 @@
+{
+    "authorName": "simod",
+    "id": "4accd9a1-d632-427a-a22b-6e5da86fc2a1",
+    "created": 1573666773540,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "numValues",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Last == First",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            },
+            {
+                "type": "0",
+                "name": "Tuple Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.RandomNumbersArray4"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.simod.RandomNumbersArray4 renamed to Ops.Array.RandomNumbersArray4",
+            "author": "simod",
+            "date": 1573669237619
+        }
+    ],
+    "summary": "Generates a random array of numbers in 4-tuples",
+    "issues": "",
+    "collections": [
+        "pointArrays",
+        "generator",
+        "random"
+    ],
+    "relatedops": [
+        "Ops.Array.RandomNumbersArray",
+        "Ops.Array.RandomNumbersArray3",
+        "Ops.Array.HSBtoRGBArray"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "numValues",
+                "text": "The number of value quadruplets to generate"
+            },
+            {
+                "name": "Min",
+                "text": "The minimum for the generated values"
+            },
+            {
+                "name": "Max",
+                "text": "The maximum for the generated values"
+            },
+            {
+                "name": "random seed",
+                "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
+            },
+            {
+                "name": "Last == First",
+                "text": "Set to true to make the first and last number in the array the same, handy for loops"
+            },
+            {
+                "name": "Integer",
+                "text": "Check to make all values integers (whole numbers)"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            },
+            {
+                "name": "Total points",
+                "text": "amount of 4-tuples in array"
+            },
+            {
+                "name": "Array length",
+                "text": "total length of array"
+            }
+        ]
+    }
+}

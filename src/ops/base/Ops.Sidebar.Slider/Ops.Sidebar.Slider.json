@@ -15,22 +15,37 @@
             },
             {
                 "type": "0",
-                "name": "Input",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Min",
+                "group": "Range",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Max",
+                "group": "Range",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Step",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "group": "Visibility",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "group": "Visibility",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Input",
                 "subType": "number"
             },
             {

@@ -6,15 +6,15 @@
         "portsIn": [
             {
                 "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "5",
                 "name": "Id"
             },
             {
                 "type": "5",
                 "name": "Class"
-            },
-            {
-                "type": "5",
-                "name": "Text"
             },
             {
                 "type": "0",

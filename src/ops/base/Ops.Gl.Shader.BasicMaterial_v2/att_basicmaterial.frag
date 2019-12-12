@@ -1,10 +1,11 @@
 {{MODULES_HEAD}}
 
 IN vec2 texCoord;
-UNI float r;
-UNI float g;
-UNI float b;
-UNI float a;
+UNI vec4 color;
+// UNI float r;
+// UNI float g;
+// UNI float b;
+// UNI float a;
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
@@ -19,7 +20,7 @@ UNI float a;
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
-    vec4 col=vec4(r,g,b,a);
+    vec4 col=color;
 
     #ifdef HAS_TEXTURES
         vec2 uv=vec2(texCoord.s,1.0-texCoord.t);
@@ -28,12 +29,12 @@ void main()
             col=texture(tex,uv);
 
             #ifdef COLORIZE_TEXTURE
-                col.r*=r;
-                col.g*=g;
-                col.b*=b;
+                col.r*=color.r;
+                col.g*=color.g;
+                col.b*=color.b;
             #endif
         #endif
-        col.a*=a;
+        col.a*=color.a;
         #ifdef HAS_TEXTURE_OPACITY
             #ifdef TRANSFORMALPHATEXCOORDS
                 uv=vec2(texCoordOrig.s,1.0-texCoordOrig.t);

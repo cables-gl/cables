@@ -3,6 +3,9 @@ const parentPort = op.inObject('Link');
 const labelPort = op.inValueString('Text', 'Value');
 const valuesPort = op.inArray('Values');
 const defaultValuePort = op.inValueString('Default', '');
+const inGreyOut=op.inBool("Grey Out",false);
+const inVisible=op.inBool("Visible",true);
+
 
 // outputs
 const siblingsPort = op.outObject('Children');
@@ -22,6 +25,22 @@ var input = document.createElement('select');
 input.classList.add('sidebar__select-select');
 el.appendChild(input);
 input.addEventListener('input', onInput);
+
+var greyOut = document.createElement('div');
+greyOut.classList.add('sidebar__greyout');
+el.appendChild(greyOut);
+greyOut.style.display="none";
+
+inGreyOut.onChange=function()
+{
+    greyOut.style.display= inGreyOut.get() ? "block" : "none";
+};
+
+inVisible.onChange=function()
+{
+    el.style.display= inVisible.get() ? "block" : "none";
+};
+
 
 // events
 parentPort.onChange = onParentChanged;

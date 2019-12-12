@@ -22,6 +22,21 @@
             {
                 "type": "5",
                 "name": "Default"
+            },
+            {
+                "type": "0",
+                "name": "TextArea",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -36,7 +51,7 @@
         ],
         "name": "Ops.Sidebar.TextInput_v2"
     },
-    "summary": "Enter text in the sidebar",
+    "summary": "Get a string from an sidebar input field",
     "issues": "",
     "collections": null,
     "relatedops": null,

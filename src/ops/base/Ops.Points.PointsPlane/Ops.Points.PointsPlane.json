@@ -44,6 +44,14 @@
                 "type": "0",
                 "name": "Array length",
                 "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Row Numbers"
+            },
+            {
+                "type": "3",
+                "name": "Column Numbers"
             }
         ],
         "name": "Ops.Points.PointsPlane"
