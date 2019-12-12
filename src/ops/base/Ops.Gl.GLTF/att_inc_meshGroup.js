@@ -2,6 +2,7 @@ var gltfMeshGroup=class
 {
     constructor(gltf,m)
     {
+        this.bounds=new CGL.BoundingBox();
         this.meshes=[];
         this.name=m.name;
         const prims=m.primitives;
@@ -10,7 +11,10 @@ var gltfMeshGroup=class
         {
             var mesh=new gltfMesh(this.name+' '+i,prims[i],gltf);
             this.meshes.push(mesh);
+            this.bounds.apply(mesh.bounds);
         }
+
+        console.log("mesh group bounds:",this.bounds._maxAxis);
     }
 
     render(cgl, ignoreMat)
@@ -19,6 +23,5 @@ var gltfMeshGroup=class
         {
             this.meshes[i].render(cgl,ignoreMat);
         }
-
     }
 };

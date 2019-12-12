@@ -4,6 +4,7 @@ const
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
     inRender=op.inBool("Draw",true),
+    inAutoSize=op.inBool("Auto Scale",true),
     inTime=op.inFloat("Time"),
     inTimeLine=op.inBool("Sync to timeline"),
     inMaterialList=op.inDropDown("Material List",[]),
@@ -42,13 +43,35 @@ inTimeLine.onChange=function()
     inTime.setUiAttribs({greyout:inTimeLine.get()});
 };
 
+
+var scale=vec3.create();
+
 inExec.onTriggered=function()
 {
     if(inTimeLine.get()) time=op.patch.timer.getTime();
     else time=Math.max(0,inTime.get())%maxTime;
 
+    cgl.pushModelMatrix();
+
     if(gltf && inRender.get())
     {
+
+        if(gltf.bounds && inAutoSize.get())
+        {
+            const sc=3/gltf.bounds.maxAxis;
+            vec3.set(scale,sc,sc,sc);
+            mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
+        }
+
+        if(gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
+        {
+            if(CABLES.UI.renderHelper)cgl.setShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+            else cgl.setShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+            gltf.bounds.render(cgl);
+            cgl.setPreviousShader();
+        }
+
+
         if(needsMatUpdate) updateMaterials();
         for(var i=0;i<gltf.nodes.length;i++)
             if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
@@ -57,6 +80,8 @@ inExec.onTriggered=function()
     cgl.frameStore.currentScene=gltf;
     next.trigger();
     cgl.frameStore.currentScene=null;
+
+    cgl.popModelMatrix();
 };
 
 function loadBin()

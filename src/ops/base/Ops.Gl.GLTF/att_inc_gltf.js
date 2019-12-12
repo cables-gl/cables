@@ -98,7 +98,8 @@ function parseGltf(arrayBuffer)
             nodes:[],
             shaders:[],
             timing:[],
-            startTime:performance.now()
+            startTime:performance.now(),
+            bounds:new CGL.BoundingBox()
         };
 
     if (!arrayBuffer) return;
@@ -211,7 +212,14 @@ function parseGltf(arrayBuffer)
     {
         var node=new gltfNode(gltf.json.nodes[i],gltf);
         gltf.nodes.push(node);
+        if(!node.isChild)
+        {
+            console.log("node calcbouynds");
+            node.calcBounds(gltf,null,gltf.bounds);
+        }
     }
+
+    console.log("gltf bounds:",gltf.bounds);
 
     needsMatUpdate=true;
 

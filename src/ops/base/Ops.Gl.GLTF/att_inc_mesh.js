@@ -25,6 +25,8 @@ var gltfMesh=class
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
+        // console.log('meshbounds',this.bounds);
+        console.log("mesh bounds:",this.bounds._maxAxis);
     }
 
     fillGeomAttribs(gltf,geom,attribs)
@@ -52,14 +54,14 @@ var gltfMesh=class
             // update morphTargets
             if(this.geom.morphTargets.length)
             {
-                this.test=time*0.7;
+                this.test=time*11.7;
 
                 if(this.test>=this.geom.morphTargets.length-1)this.test=0;
 
                 const mt=this.geom.morphTargets[Math.floor(this.test)];
                 const mt2=this.geom.morphTargets[Math.floor(this.test+1)];
 
-                if(mt.vertices)
+                if(mt && mt.vertices)
                 {
                     const fract=this.test%1;
                     for(var i=0;i<this.morphGeom.vertices.length;i++)

@@ -4,6 +4,7 @@ var gltfNode=class
     constructor(node,gltf)
     {
         this.isChild=node.isChild||false;
+
         this.name=node.name;
         this.mat=mat4.create();
         this._animMat=mat4.create();
@@ -11,6 +12,7 @@ var gltfNode=class
         this._tempQuat=quat.create();
         this.mesh=null;
         this.children=[];
+        this._node=node;
 
         if(node.translation) mat4.translate(this.mat,this.mat,node.translation);
 
@@ -43,6 +45,32 @@ var gltfNode=class
                 this.children.push(node.children[i]);
             }
         }
+    }
+
+    calcBounds(gltf,mat,bounds)
+    {
+        mat=mat||mat4.create();
+
+        if(this.mat)
+            mat4.mul(mat,mat,this.mat);
+
+        if(this.mesh)
+        {
+            var bb=this.mesh.bounds.copy();
+            bb.mulMat4(mat);
+            bounds.apply(bb);
+        }
+
+        for(var i=0;i<this.children.length;i++)
+        {
+            if(gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
+                bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf,mat,bounds));
+        }
+
+        console.log("node bounds:"+this.name,bounds._maxAxis,bounds.changed);
+
+        if(bounds.changed)return bounds;
+        else return null;
     }
 
     setAnim(path,anims)
