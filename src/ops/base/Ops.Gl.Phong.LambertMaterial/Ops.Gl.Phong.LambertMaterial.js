@@ -1,3 +1,6 @@
+const cgl = op.patch.cgl;
+
+
 const execute=op.inTrigger("execute");
 const r = op.inValueSlider("diffuse r", Math.random());
 const g = op.inValueSlider("diffuse g", Math.random());
@@ -8,21 +11,17 @@ const inToggleDoubleSided = op.inBool("Double Sided", false);
 
 inToggleDoubleSided.onChange = function () {
     shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
-}
-
+};
 
 const next=op.outTrigger("next");
 
 r.setUiAttribs({ colorPick: true });
 
-const cgl=op.patch.cgl;
+
 const shader=new CGL.Shader(cgl,"LambertMaterial");
 shader.define('NUM_LIGHTS','1');
 
-const runiform=new CGL.Uniform(shader,'f','r',r);
-const guniform=new CGL.Uniform(shader,'f','g',g);
-const buniform=new CGL.Uniform(shader,'f','b',b);
-const auniform=new CGL.Uniform(shader,'f','a',a);
+const colUni=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 var outShader=op.outObject("Shader");
 outShader.set(shader);
@@ -42,9 +41,8 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
     lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
     lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
-    lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
+    lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',1000);
 }
-
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
 
@@ -54,7 +52,10 @@ var updateLights=function()
     var count=0;
     var i=0;
     var num=0;
-    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
+    if(
+        (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+        && !cgl.lightStack
+    )
     {
         num=0;
     }
@@ -79,22 +80,29 @@ var updateLights=function()
         shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
     }
 
-    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
+    if(
+        (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+        && !cgl.lightStack
+    )
     {
-        lights[count].pos.setValue([5,5,5]);
-        lights[count].color.setValue([1,1,1]);
-        lights[count].ambient.setValue([0.1,0.1,0.1]);
-        lights[count].mul.setValue(1);
-        lights[count].fallOff.setValue(0.5);
+            lights[count].pos.setValue([5,5,5]);
+            lights[count].color.setValue([1,1,1]);
+            lights[count].ambient.setValue([0.1,0.1,0.1]);
+            lights[count].mul.setValue(1);
+            lights[count].fallOff.setValue(0.5);
+
     }
     else
     {
         count=0;
         if(shader) {
+
             if (cgl.frameStore.phong) {
                 if (cgl.frameStore.phong.lights) {
                     let length = cgl.frameStore.phong.lights.length;
-                    for(let i = 0; i < length; i +=1) {
+
+                    for(let i = 0; i < length; i +=1 )//in cgl.frameStore.phong.lights)
+                    {
                         lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
                         // if(cgl.frameStore.phong.lights[i].changed)
                         {
@@ -116,9 +124,8 @@ var updateLights=function()
                         count++;
                     }
                 }
-            }
-            if (cgl.lightStack) {
-                if (cgl.lightStack.length) {
+                if (cgl.lightStack) {
+                    if (cgl.lightStack.length) {
                         for (let j = 0; j < cgl.lightStack.length; j += 1) {
                             const light = cgl.lightStack[j];
                                  if (light.type === "point") { // POINT LIGHT
@@ -134,6 +141,7 @@ var updateLights=function()
                         }
                     }
                 }
+            }
         }
     }
 };
