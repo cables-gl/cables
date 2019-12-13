@@ -212,11 +212,7 @@ function parseGltf(arrayBuffer)
     {
         var node=new gltfNode(gltf.json.nodes[i],gltf);
         gltf.nodes.push(node);
-        if(!node.isChild)
-        {
-            console.log("node calcbouynds");
-            node.calcBounds(gltf,null,gltf.bounds);
-        }
+        if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 
     console.log("gltf bounds:",gltf.bounds);

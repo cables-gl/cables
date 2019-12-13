@@ -7,7 +7,8 @@ const
     valign=op.inValueSelect("vertical align",['Top','Middle','Bottom'],'Middle'),
     lineHeight=op.inValueFloat("Line Height",1),
     letterSpace=op.inValueFloat("Letter Spacing"),
-    inMulTex=op.inTexture("Multiply Texture"),
+    inMulTex=op.inTexture("Texture Color"),
+    inMulTexMask=op.inTexture("Texture Mask"),
     next=op.outTrigger("Next"),
     textureOut=op.outTexture("texture"),
     outLines=op.outNumber("Total Lines",0),
@@ -15,6 +16,8 @@ const
 
 const cgl=op.patch.cgl;
 
+
+op.setPortGroup("Masking",[inMulTex,inMulTexMask]);
 
 const filter=CGL.Texture.FILTER_MIPMAP;
 const textureSize=1024;
@@ -42,9 +45,12 @@ var mesh=null;
 var createMesh=true;
 var createTexture=true;
 
+inMulTexMask.onChange=
 inMulTex.onChange=function()
 {
     shader.toggleDefine("DO_MULTEX",inMulTex.get());
+    shader.toggleDefine("DO_MULTEX_MASK",inMulTexMask.get());
+
 };
 
 textureOut.set(null);
@@ -119,6 +125,7 @@ var shader=new CGL.Shader(cgl,'TextMesh');
 shader.setSource(attachments.textmesh_vert,attachments.textmesh_frag);
 var uniTex=new CGL.Uniform(shader,'t','tex',0);
 var uniTexMul=new CGL.Uniform(shader,'t','texMul',1);
+var uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',2);
 var uniScale=new CGL.Uniform(shader,'f','scale',scale);
 
 const
@@ -168,10 +175,13 @@ render.onTriggered=function()
         var mulTex=inMulTex.get();
         if(mulTex)cgl.setTexture(1,mulTex.tex);
 
+        var mulTexMask=inMulTexMask.get();
+        if(mulTexMask)cgl.setTexture(2,mulTexMask.tex);
 
         if(valignMode===2) vec3.set(vec, 0,height,0);
         else if(valignMode===1) vec3.set(vec, 0,0,0);
         else if(valignMode===0) vec3.set(vec, 0,height/2,0);
+
         vec[1]-=lineHeight.get();
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
@@ -309,7 +319,6 @@ function generateMesh()
     mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTexSize',new Float32Array(tcSize),2,{"instanced":true});
-
     mesh.setAttribute('attrTexPos',new Float32Array(texPos),2,{"instanced":true});
 
     createMesh=false;
@@ -404,8 +413,8 @@ function generateTexture()
     ctx.fillStyle = 'rgba(255,255,255,255)';
 
     var fontSize=font.fontSize+40;
-
     var simu=printChars(fontSize,true);
+
     while(!simu.fits)
     {
         fontSize-=5;

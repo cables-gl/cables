@@ -70,5 +70,58 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.LensDirt"
+    },
+    "summary": "Creates a lens dirt like texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "amount of blending"
+            },
+            {
+                "name": "Offset X",
+                "text": "offset X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "offset Y axis"
+            },
+            {
+                "name": "Zoom",
+                "text": "Zoom factor"
+            },
+            {
+                "name": "Iterations",
+                "text": "Iteration count. Max 300"
+            },
+            {
+                "name": "Seed",
+                "text": "Random number seed"
+            },
+            {
+                "name": "Spot edge",
+                "text": "defines softness and hardness on most shapes"
+            },
+            {
+                "name": "Gamma",
+                "text": "Gamma blending factor. Default 1."
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }
