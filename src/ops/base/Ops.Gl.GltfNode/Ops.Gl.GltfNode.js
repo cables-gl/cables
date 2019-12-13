@@ -24,10 +24,10 @@ inExec.onTriggered=function()
 
     var n=cgl.frameStore.currentScene.nodes[idx];
 
-    if(inDraw.get()) n.render(cgl, inTransform.get(), inIgnMaterial.get());
+    if(inDraw.get()) n.render(cgl, !inTransform.get(), inIgnMaterial.get());
 
-console.log(n);
 
+    // console.log(n);
 
 
     if(n.mesh && n.mesh.meshes && n.mesh.meshes.length && n.mesh.meshes[0] && n.mesh.meshes[0].geom )

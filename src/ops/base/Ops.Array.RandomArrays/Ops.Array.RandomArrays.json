@@ -13,5 +13,93 @@
         }
     ],
     "authorName": "simod",
-    "created": 1574160241045
+    "created": 1574160241045,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "Num Values",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Min A",
+                "group": "Value Range A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max A",
+                "group": "Value Range A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min B",
+                "group": "Value Range B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max B",
+                "group": "Value Range B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min C",
+                "group": "Value Range C",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max C",
+                "group": "Value Range C",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min D",
+                "group": "Value Range D",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max D",
+                "group": "Value Range D",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            },
+            {
+                "type": "0",
+                "name": "Chunks Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.RandomArrays"
+    }
 }
