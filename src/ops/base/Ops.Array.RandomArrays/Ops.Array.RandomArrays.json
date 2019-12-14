@@ -101,5 +101,74 @@
             }
         ],
         "name": "Ops.Array.RandomArrays"
+    },
+    "summary": "create a random array of 1 to 4 dimensions",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Mode",
+                "text": "Specify the mode, either A, AB, ABC, ABCD (A = 1 dimension, ABCD = 4 dimensions)"
+            },
+            {
+                "name": "Num Values",
+                "text": "amount of chunks "
+            },
+            {
+                "name": "Random Seed ",
+                "text": "seed for number distribution"
+            },
+            {
+                "name": "Integer",
+                "text": "Check to set values to integers"
+            },
+            {
+                "name": "Min A",
+                "text": "minimum value for A"
+            },
+            {
+                "name": "Max A",
+                "text": "maximum value for A"
+            },
+            {
+                "name": "Min B",
+                "text": "minimum value for B"
+            },
+            {
+                "name": "Max B",
+                "text": "maximum value for B"
+            },
+            {
+                "name": "Min C",
+                "text": "minimum value for C"
+            },
+            {
+                "name": "Max C",
+                "text": "maximum value for C"
+            },
+            {
+                "name": "Min D",
+                "text": "minimum value for D"
+            },
+            {
+                "name": "Max D",
+                "text": "maximum value for D"
+            },
+            {
+                "name": "Array Out",
+                "text": "Output of the constructed array"
+            },
+            {
+                "name": "Chunks Amount",
+                "text": "number of chunks "
+            },
+            {
+                "name": "Array length",
+                "text": "length of the array"
+            }
+        ]
     }
 }
