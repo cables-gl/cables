@@ -1,0 +1,35 @@
+{
+    "authorName": "stephan",
+    "id": "0cac2fb2-cac2-4b50-82c1-f7047ef96e0a",
+    "created": 1574240002061,
+    "changelog": [
+        {
+            "message": "Ops.User.stephan.CorsProxy_v2 renamed to Ops.Net.CorsProxy_v2",
+            "author": "stephan",
+            "date": 1574240839196
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "CORS URL"
+            }
+        ],
+        "name": "Ops.Net.CorsProxy_v2"
+    },
+    "summary": "create a cables.gl CORS proxy URL",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
