@@ -1,8 +1,6 @@
 const
     inArr=op.inArray("LatLon Array"),
     inMapWidth=op.inValue("MapWidth",100),
-
-    inMapWidth=op.inValue("MapWidth",1800),
     inCenterLat=op.inValue("Center Lat",0),
     inCenterLon=op.inValue("Center Lon",0),
     outArr=op.outArray("Result");
