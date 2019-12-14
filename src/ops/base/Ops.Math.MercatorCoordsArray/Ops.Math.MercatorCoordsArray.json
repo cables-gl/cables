@@ -22,11 +22,6 @@
             },
             {
                 "type": "0",
-                "name": "MapHeight",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Center Lat",
                 "subType": "number"
             },
@@ -50,6 +45,31 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "LatLon Array",
+                "text": "An array of latitude and longitude points"
+            },
+            {
+                "name": "MapWidth",
+                "text": "width of the map"
+            },
+            {
+                "name": "MapHeight",
+                "text": "Height of the map"
+            },
+            {
+                "name": "Center Lat",
+                "text": "Center latitude, use infoArray2 to get this information. Check example file"
+            },
+            {
+                "name": "Center Lon",
+                "text": "Center longitude, use infoArray2 to get this information. Check example file"
+            },
+            {
+                "name": "Result",
+                "text": "Array2 out. Use Array2to3 to add zeroes on the z component. See example file"
+            }
+        ]
     }
 }

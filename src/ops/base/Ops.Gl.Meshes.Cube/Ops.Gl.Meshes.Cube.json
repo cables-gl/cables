@@ -32,6 +32,10 @@
                 "type": "0",
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Mapping"
             }
         ],
         "portsOut": [

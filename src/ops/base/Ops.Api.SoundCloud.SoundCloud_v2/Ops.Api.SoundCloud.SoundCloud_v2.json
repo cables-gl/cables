@@ -34,7 +34,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Api.SoundCloud.SoundCloud2"
+        "name": "Ops.Api.SoundCloud.SoundCloud_v2"
     },
     "summary": "Get infos / stream URL from a regular Soundcloud-track URL",
     "youtubeid": "",

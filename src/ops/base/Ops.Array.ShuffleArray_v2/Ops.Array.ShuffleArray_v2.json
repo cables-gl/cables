@@ -32,7 +32,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Admin.ShuffleArrayNew"
+        "name": "Ops.Array.ShuffleArray_v2"
     },
     "summary": "Randomizes the order of elements inside an array",
     "issues": "",

@@ -21,10 +21,12 @@ function resolve()
             'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,
             function(err,_data,xhr)
             {
+		try{
                 var data=JSON.parse(_data);
                 streamUrl.set(data.stream_url+"?client_id="+clientId);
                 artworkUrl.set(data.artwork_url);
                 title.set(data.title);
+}catch(e){console.log(e);}
             });
 
 }
