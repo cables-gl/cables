@@ -1,5 +1,4 @@
 
-
 function printNode(html,node,level)
 {
     html+='<tr class="row">';
@@ -13,10 +12,9 @@ function printNode(html,node,level)
     var id=CABLES.uuid();
     html+=ident;
     html+='<td colspan="'+(20-level)+'">';
+
     if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
     else html+='<span class="icon corner-down-right"></span> &nbsp;';
-    // if(node.mesh && node.mesh.meshes.length>1)html+=" ["+node.mesh.meshes.length+" meshes]";
-
 
     html+='<a>'+node.name+'</a>';
     html+='</td>';
@@ -25,10 +23,6 @@ function printNode(html,node,level)
     html+='</td>';
 
     html+='<td>';
-
-    // if(node.mesh && node.mesh.meshes.length==1)html+=" [mesh]";
-    // if(node.mesh && node.mesh.meshes.length>1)html+=" ["+node.mesh.meshes.length+" meshes]";
-
 
     if(node.mesh)
     {
@@ -61,7 +55,6 @@ function printMaterial()
 
 }
 
-
 function printInfo()
 {
     var html='<div style="">';
@@ -77,5 +70,4 @@ function printInfo()
     html+='</div>';
 
     CABLES.UI.MODAL.show(html);
-
 }
