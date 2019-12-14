@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.GlbTest renamed to Ops.Gl.GLTF",
             "author": "pandur",
             "date": 1575641188314
+        },
+        {
+            "message": "Ops.Gl.GLTF renamed to Ops.Gl.GLTF.GltfScene",
+            "author": "pandur",
+            "date": 1576232952766
         }
     ],
     "authorName": "pandur",
@@ -85,10 +90,20 @@
             },
             {
                 "type": "0",
-                "name": "Version",
+                "name": "GLTF Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Time",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.GLTF"
+        "name": "Ops.Gl.GLTF.GltfScene"
     }
 }

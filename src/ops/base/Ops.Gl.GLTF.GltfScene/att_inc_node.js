@@ -4,7 +4,6 @@ var gltfNode=class
     constructor(node,gltf)
     {
         this.isChild=node.isChild||false;
-
         this.name=node.name;
         this.mat=mat4.create();
         this._animMat=mat4.create();
@@ -67,8 +66,6 @@ var gltfNode=class
                 bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf,mat,bounds));
         }
 
-        // console.log("node bounds:"+this.name,bounds._maxAxis,bounds.changed);
-
         if(bounds.changed)return bounds;
         else return null;
     }
@@ -81,7 +78,7 @@ var gltfNode=class
         else console.warn("unknown anim path",path,anims);
     }
 
-    transform(cgl)
+    transform(cgl,_time)
     {
         if(!this._animTrans)
         {
@@ -125,15 +122,15 @@ var gltfNode=class
         }
     }
 
-    render(cgl,ignoreTransform,ignoreMaterial)
+    render(cgl,ignoreTransform,ignoreMaterial,_time)
     {
         cgl.pushModelMatrix();
 
-        if(!ignoreTransform) this.transform(cgl);
+        if(!ignoreTransform) this.transform(cgl,_time||time);
 
         if(this.mesh) this.mesh.render(cgl,ignoreMaterial);
 
-        for(var i=0;i<this.children.length;i++) gltf.nodes[this.children[i]].render(cgl,ignoreTransform,ignoreMaterial);
+        for(var i=0;i<this.children.length;i++) gltf.nodes[this.children[i]].render(cgl,ignoreTransform,ignoreMaterial,_time);
 
         cgl.popModelMatrix();
     }

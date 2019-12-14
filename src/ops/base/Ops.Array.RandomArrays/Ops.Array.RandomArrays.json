@@ -13,5 +13,162 @@
         }
     ],
     "authorName": "simod",
-    "created": 1574160241045
+    "created": 1574160241045,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "Num Values",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Random Seed ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Min A",
+                "group": "Value Range A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max A",
+                "group": "Value Range A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min B",
+                "group": "Value Range B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max B",
+                "group": "Value Range B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min C",
+                "group": "Value Range C",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max C",
+                "group": "Value Range C",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min D",
+                "group": "Value Range D",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max D",
+                "group": "Value Range D",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            },
+            {
+                "type": "0",
+                "name": "Chunks Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.RandomArrays"
+    },
+    "summary": "create a random array of 1 to 4 dimensions",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Mode",
+                "text": "Specify the mode, either A, AB, ABC, ABCD (A = 1 dimension, ABCD = 4 dimensions)"
+            },
+            {
+                "name": "Num Values",
+                "text": "amount of chunks "
+            },
+            {
+                "name": "Random Seed ",
+                "text": "seed for number distribution"
+            },
+            {
+                "name": "Integer",
+                "text": "Check to set values to integers"
+            },
+            {
+                "name": "Min A",
+                "text": "minimum value for A"
+            },
+            {
+                "name": "Max A",
+                "text": "maximum value for A"
+            },
+            {
+                "name": "Min B",
+                "text": "minimum value for B"
+            },
+            {
+                "name": "Max B",
+                "text": "maximum value for B"
+            },
+            {
+                "name": "Min C",
+                "text": "minimum value for C"
+            },
+            {
+                "name": "Max C",
+                "text": "maximum value for C"
+            },
+            {
+                "name": "Min D",
+                "text": "minimum value for D"
+            },
+            {
+                "name": "Max D",
+                "text": "maximum value for D"
+            },
+            {
+                "name": "Array Out",
+                "text": "Output of the constructed array"
+            },
+            {
+                "name": "Chunks Amount",
+                "text": "number of chunks "
+            },
+            {
+                "name": "Array length",
+                "text": "length of the array"
+            }
+        ]
+    }
 }

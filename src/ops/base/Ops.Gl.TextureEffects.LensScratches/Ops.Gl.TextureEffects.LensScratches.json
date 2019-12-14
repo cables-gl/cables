@@ -75,5 +75,62 @@
         "name": "Ops.Gl.TextureEffects.LensScratches"
     },
     "authorName": "cables",
-    "created": 1575998270324
+    "created": 1575998270324,
+    "summary": "Creates a procedural texture simulating scratches on a lens",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Blending amount"
+            },
+            {
+                "name": "Offset X",
+                "text": "offset X "
+            },
+            {
+                "name": "Offset Y",
+                "text": "offset Y "
+            },
+            {
+                "name": "Wavyness",
+                "text": "adds curves to lines"
+            },
+            {
+                "name": "scale",
+                "text": "Scale of scracthes"
+            },
+            {
+                "name": "Layers",
+                "text": "Iterations of layers to draw"
+            },
+            {
+                "name": "AA iterations",
+                "text": "1 is default (no AA) 4 is a good number. Can be expensive"
+            },
+            {
+                "name": "Frequency",
+                "text": "Frequency of lines"
+            },
+            {
+                "name": "Frequency step size",
+                "text": "Step size between frequency of lines"
+            },
+            {
+                "name": "trigger",
+                "text": "TRigger out"
+            }
+        ]
+    }
 }

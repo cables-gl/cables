@@ -47,7 +47,13 @@
             },
             {
                 "type": "2",
-                "name": "Multiply Texture"
+                "name": "Texture Color",
+                "group": "Masking"
+            },
+            {
+                "type": "2",
+                "name": "Texture Mask",
+                "group": "Masking"
             },
             {
                 "type": "0",

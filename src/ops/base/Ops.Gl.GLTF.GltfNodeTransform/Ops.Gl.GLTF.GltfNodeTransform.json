@@ -1,0 +1,32 @@
+{
+    "id": "15a6a7e0-155c-4a38-81f8-f402a78ec575",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1576233072011
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1576233105016,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Node Index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfNodeTransform"
+    }
+}

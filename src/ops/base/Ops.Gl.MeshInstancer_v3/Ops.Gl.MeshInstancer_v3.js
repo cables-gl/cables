@@ -29,6 +29,7 @@ var shader=null;
 var uniDoInstancing=null;
 var recalc=true;
 var num=0;
+var oldColorArr=null;
 
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
@@ -86,18 +87,24 @@ function setupArray()
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
 
-    //op.log("setupArray");
-
     num=Math.floor(transforms.length/3);
 
     var colArr = inColor.get();
-    if (!colArr) {
-        colArr = [];
-        colArr.length = num*4;
-        for (let i = 0; i < colArr.length; i += 1) {
-            colArr[i] = 1;
-        }
+
+    if(oldColorArr!=colArr && colArr!=null)
+    {
+        removeModule();
+        oldColorArr=colArr;
     }
+
+
+    // if (!colArr && !oldColorArr) {
+    //     colArr = [];
+    //     colArr.length = num*4;
+    //     for (let i = 0; i < colArr.length; i += 1) {
+    //         colArr[i] = 1;
+    //     }
+    // }
     var scales=inScales.get();
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
@@ -123,10 +130,13 @@ function setupArray()
             mat4.rotateZ(m,m,rotArr[i*3+2]*CGL.DEG2RAD);
         }
 
+        if(colArr)
+        {
         instColorArray[i*4+0] = colArr[i*4+0];
         instColorArray[i*4+1] = colArr[i*4+1];
         instColorArray[i*4+2] = colArr[i*4+2];
         instColorArray[i*4+3] = colArr[i*4+3];
+        }
 
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
         else mat4.scale(m,m,[1,1,1]);

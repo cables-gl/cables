@@ -2,7 +2,6 @@ const
     inExec=op.inTrigger("Render"),
     inNode=op.inInt("Node Index"),
     inDraw=op.inBool("Draw",true),
-    inTransform=op.inBool("Transform",true),
     inIgnMaterial=op.inBool("Ignore Material",true),
     outGeom=op.outObject("Geometry")
     ;
@@ -24,10 +23,10 @@ inExec.onTriggered=function()
 
     var n=cgl.frameStore.currentScene.nodes[idx];
 
-    if(inDraw.get()) n.render(cgl, inTransform.get(), inIgnMaterial.get());
+    if(inDraw.get()) n.render(cgl, true, inIgnMaterial.get());
 
-console.log(n);
 
+    // console.log(n);
 
 
     if(n.mesh && n.mesh.meshes && n.mesh.meshes.length && n.mesh.meshes[0] && n.mesh.meshes[0].geom )

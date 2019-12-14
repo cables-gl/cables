@@ -1,19 +1,17 @@
 const
     inArr=op.inArray("LatLon Array"),
     inMapWidth=op.inValue("MapWidth",100),
-    // inMapHeight=op.inValue("MapHeight",1),
 
+    inMapWidth=op.inValue("MapWidth",1800),
     inCenterLat=op.inValue("Center Lat",0),
     inCenterLon=op.inValue("Center Lon",0),
-
     outArr=op.outArray("Result");
 
 inArr.onChange=
     inMapWidth.onChange=
     // inMapHeight.onChange=
     inCenterLat.onChange=
-    inCenterLon.onChange=
-        update;
+    inCenterLon.onChange=update;
 
 
 function calcLon(lon,mapWidth)
@@ -41,7 +39,7 @@ function update()
     const centerLon=calcLon(inCenterLon.get(),mapWidth,mapHeight);
     const centerLat=calcLat(inCenterLat.get(),mapWidth,mapHeight);
 
-    console.log('centerLon',centerLon,centerLat);
+    console.log('centerLon',centerLon,centerLat,mapHeight);
 
     var arr=inArr.get();
 

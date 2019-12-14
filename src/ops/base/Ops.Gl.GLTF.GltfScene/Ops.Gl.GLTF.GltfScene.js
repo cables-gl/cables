@@ -14,7 +14,9 @@ const
     inNodeCreate=op.inTriggerButton("Expose Node"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
-    outVersion=op.outNumber("Version");
+    outVersion=op.outNumber("GLTF Version"),
+    outAnimLength=op.outNumber("Anim Length",0),
+    outAnimTime=op.outNumber("Anim Time",0);
 
 op.setPortGroup("Timing",[inTime,inTimeLine]);
 op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
@@ -53,9 +55,11 @@ inExec.onTriggered=function()
 
     cgl.pushModelMatrix();
 
+    outAnimTime.set(time);
 
     if(gltf && gltf.bounds && inAutoSize.get())
     {
+
         const sc=2.5/gltf.bounds.maxAxis;
         vec3.set(scale,sc,sc,sc);
         mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
@@ -64,7 +68,7 @@ inExec.onTriggered=function()
 
     if(gltf && inRender.get())
     {
-
+        gltf.time=time;
 
         if(gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
         {
@@ -95,14 +99,19 @@ function loadBin()
     oReq.open("GET", inFile.get(), true);
     oReq.responseType = "arraybuffer";
 
+
+
     oReq.onload = function (oEvent)
     {
+        maxTime=0;
         var arrayBuffer = oReq.response;
         gltf=parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate=true;
         updateDropdowns();
         op.refreshParams();
+        outAnimLength.set(maxTime);
+        printInfo();
     };
 
     oReq.send(null);
@@ -113,6 +122,7 @@ op.onFileChanged=function(fn)
     if(inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
 
 };
+
 
 function reloadSoon(nocache)
 {
