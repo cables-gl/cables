@@ -7,6 +7,9 @@ const
     inAutoSize=op.inBool("Auto Scale",true),
     inTime=op.inFloat("Time"),
     inTimeLine=op.inBool("Sync to timeline"),
+
+    inShow=op.inTriggerButton("Show Structure"),
+
     inMaterialList=op.inDropDown("Material List",[]),
     inMaterialCreate=op.inTriggerButton("Assign Material"),
     inMaterials=op.inObject("Materials"),
@@ -34,6 +37,9 @@ var time=0;
 var needsMatUpdate=true;
 var timedLoader=null;
 var loadingId=null;
+
+inShow.onTriggered=printInfo;
+
 
 inMaterials.onLinkChanged=inMaterials.onChange=function()
 {
@@ -111,7 +117,6 @@ function loadBin()
         updateDropdowns();
         op.refreshParams();
         outAnimLength.set(maxTime);
-        printInfo();
     };
 
     oReq.send(null);
