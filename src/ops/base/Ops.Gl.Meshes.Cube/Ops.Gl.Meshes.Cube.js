@@ -5,6 +5,7 @@ const
     lengt=op.inValue('length',1),
     center=op.inValueBool('center',true),
     active=op.inValueBool('Active',true),
+    mapping=op.inSwitch("Mapping",['Default','Cube','Cube Biased'],'Default'),
     trigger=op.outTrigger('trigger'),
     geomOut=op.outObject("geometry");
 
@@ -15,6 +16,7 @@ op.setPortGroup("Geometry",[width,height,lengt]);
 var geom=null;
 var mesh=null;
 
+mapping.onChange=buildMesh;
 width.onChange=buildMesh;
 height.onChange=buildMesh;
 lengt.onChange=buildMesh;
@@ -63,71 +65,148 @@ function buildMesh()
         nz*=0.5;
     }
 
-    geom.vertices = [
-        // Front face
-        nx, ny,  z,
-        x, ny,  z,
-        x,  y,  z,
-        nx,  y,  z,
-        // Back face
-        nx, ny, nz,
-        nx,  y, nz,
-        x,  y, nz,
-        x, ny, nz,
-        // Top face
-        nx,  y, nz,
-        nx,  y,  z,
-        x,  y,  z,
-        x,  y, nz,
-        // Bottom face
-        nx, ny, nz,
-        x, ny, nz,
-        x, ny,  z,
-        nx, ny,  z,
-        // Right face
-        x, ny, nz,
-        x,  y, nz,
-        x,  y,  z,
-        x, ny,  z,
-        // zeft face
-        nx, ny, nz,
-        nx, ny,  z,
-        nx,  y,  z,
-        nx,  y, nz
-        ];
+    if(mapping.get()=="Cube" || mapping.get()=="Cube Biased")
+        geom.vertices = [
+            // Front face
+            nx, ny,  z,
+            x, ny,  z,
+            x,  y,  z,
+            nx,  y,  z,
+            // Back face
+            nx, ny, nz,
+            x,  ny, nz,
+            x,  y, nz,
+            nx, y, nz,
+            // Top face
+            nx,  y, nz,
+            x,  y,  nz,
+            x,  y,  z,
+            nx,  y, z,
+            // Bottom face
+            nx, ny, nz,
+            x, ny, nz,
+            x, ny,  z,
+            nx, ny,  z,
+            // Right face
+            x, ny, nz,
+            x, ny, z,
+            x,  y, z,
+            x, y, nz,
+            // zeft face
+            nx, ny, nz,
+            nx, ny,  z,
+            nx,  y,  z,
+            nx,  y, nz
+            ];
 
-    geom.setTexCoords( [
-          // Front face
-          0.0, 1.0,
-          1.0, 1.0,
-          1.0, 0.0,
-          0.0, 0.0,
-          // Back face
-          1.0, 1.0,
-          1.0, 0.0,
-          0.0, 0.0,
-          0.0, 1.0,
-          // Top face
-          0.0, 0.0,
-          0.0, 1.0,
-          1.0, 1.0,
-          1.0, 0.0,
-          // Bottom face
-          1.0, 0.0,
-          0.0, 0.0,
-          0.0, 1.0,
-          1.0, 1.0,
-          // Right face
-          1.0, 1.0,
-          1.0, 0.0,
-          0.0, 0.0,
-          0.0, 1.0,
-          // Left face
-          0.0, 1.0,
-          1.0, 1.0,
-          1.0, 0.0,
-          0.0, 0.0,
-        ]);
+    else
+        geom.vertices = [
+            // Front face
+            nx, ny,  z,
+            x, ny,  z,
+            x,  y,  z,
+            nx,  y,  z,
+            // Back face
+            nx, ny, nz,
+            nx,  y, nz,
+            x,  y, nz,
+            x, ny, nz,
+            // Top face
+            nx,  y, nz,
+            nx,  y,  z,
+            x,  y,  z,
+            x,  y, nz,
+            // Bottom face
+            nx, ny, nz,
+            x, ny, nz,
+            x, ny,  z,
+            nx, ny,  z,
+            // Right face
+            x, ny, nz,
+            x,  y, nz,
+            x,  y,  z,
+            x, ny,  z,
+            // zeft face
+            nx, ny, nz,
+            nx, ny,  z,
+            nx,  y,  z,
+            nx,  y, nz
+            ];
+
+    if(mapping.get()=="Cube" || mapping.get()=="Cube Biased")
+    {
+        const sx=0.25;
+        const sy=1/3;
+        var bias=0.0;
+        if(mapping.get()=="Cube Biased")bias=0.01;
+        geom.setTexCoords( [
+              // Front face   Z+
+              sx+bias, sy*2-bias,
+              sx*2-bias, sy*2-bias,
+              sx*2-bias, sy+bias,
+              sx+bias, sy+bias,
+              // Back face Z-
+              sx*4-bias, sy*2-bias,
+              sx*3+bias, sy*2-bias,
+              sx*3+bias, sy+bias,
+              sx*4-bias, sy+bias,
+              // Top face
+              sx+bias, 0+bias,
+              sx*2-bias, 0+bias,
+              sx*2-bias, sy*1-bias,
+              sx+bias, sy*1-bias,
+              // Bottom face
+              sx+bias, sy*2+bias,
+              sx*2-bias, sy*2+bias,
+              sx*2-bias, sy*3-bias,
+              sx+bias, sy*3-bias,
+              // Right face
+              sx*0+bias, sy+bias,
+              sx*1-bias, sy+bias,
+              sx*1-bias, sy*2-bias,
+              sx*0+bias, sy*2-bias,
+              // Left face
+              sx*2+bias, sy+bias,
+              sx*3-bias, sy+bias,
+              sx*3-bias, sy*2-bias,
+              sx*2+bias, sy*2-bias,
+            ]);
+
+    }
+
+    else
+        geom.setTexCoords( [
+              // Front face
+              0.0, 1.0,
+              1.0, 1.0,
+              1.0, 0.0,
+              0.0, 0.0,
+              // Back face
+              1.0, 1.0,
+              1.0, 0.0,
+              0.0, 0.0,
+              0.0, 1.0,
+              // Top face
+              0.0, 0.0,
+              0.0, 1.0,
+              1.0, 1.0,
+              1.0, 0.0,
+              // Bottom face
+              1.0, 0.0,
+              0.0, 0.0,
+              0.0, 1.0,
+              1.0, 1.0,
+              // Right face
+              1.0, 1.0,
+              1.0, 0.0,
+              0.0, 0.0,
+              0.0, 1.0,
+              // Left face
+              0.0, 1.0,
+              1.0, 1.0,
+              1.0, 0.0,
+              0.0, 0.0,
+            ]);
 
     geom.vertexNormals = [
         // Front face

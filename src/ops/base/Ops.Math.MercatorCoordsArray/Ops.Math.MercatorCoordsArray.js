@@ -1,14 +1,15 @@
 const
     inArr=op.inArray("LatLon Array"),
+    inMapWidth=op.inValue("MapWidth",100),
+
     inMapWidth=op.inValue("MapWidth",1800),
-    inMapHeight=op.inValue("MapHeight",1),
     inCenterLat=op.inValue("Center Lat",0),
     inCenterLon=op.inValue("Center Lon",0),
     outArr=op.outArray("Result");
 
 inArr.onChange=
     inMapWidth.onChange=
-    inMapHeight.onChange=
+    // inMapHeight.onChange=
     inCenterLat.onChange=
     inCenterLon.onChange=update;
 
@@ -33,7 +34,7 @@ function calcLat(lat,mapWidth,mapHeight)
 function update()
 {
     var mapWidth    = inMapWidth.get();//1.289672544080605;
-    var mapHeight   = inMapHeight.get();// 1;
+    var mapHeight   = 1;//inMapHeight.get();// 1;
 
     const centerLon=calcLon(inCenterLon.get(),mapWidth,mapHeight);
     const centerLat=calcLat(inCenterLat.get(),mapWidth,mapHeight);
