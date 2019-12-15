@@ -7,19 +7,25 @@ function printNode(html,node,level)
 
     for(i=0;i<level;i++)
     {
-        ident+='<td style="width:20px;height:20px;padding:0px;border-left:1px solid #333;border-bottom:1px solid #333;"><div style=""></div></td>';
+        // var last=level-1==i;
+        // var identClass=last?"identnormal":"identlast";
+
+        var identClass="identBg";
+        if(i==0)identClass="identBgLevel0";
+        // if(i==level-1)identClass="identBgLast";
+        ident+='<td class="ident  '+identClass+'" ><div style=""></div></td>';
     }
     var id=CABLES.uuid();
     html+=ident;
     html+='<td colspan="'+(20-level)+'">';
 
     if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
-    else html+='<span class="icon corner-down-right"></span> &nbsp;';
+    else html+='<span class="icon icon-circle"></span> &nbsp;';
 
     html+='<a>'+node.name+'</a>';
     html+='</td>';
     html+='<td>';
-    html+='<a onclick="" class="">expose node</a>';
+    html+='<a onclick="" class="treebutton">Expose</a>';
     html+='</td>';
 
     html+='<td>';
@@ -28,14 +34,16 @@ function printNode(html,node,level)
     {
         for(i=0;i<node.mesh.meshes.length;i++)
         {
-            html+='<span class="icon icon-cube"></span> '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts)</a>';
+            html+='<a onclick="" class="treebutton">Mesh '+node.mesh.meshes[i].name+'</a> ('+node.mesh.meshes[i].geom.vertices.length/3+' verts)</a>';
         }
     }
 
     html+='</td>';
 
     html+='<td>';
-    html+='<span class="icon icon-eye"></span>';
+    var hideclass='';
+    if(node.hidden)hideclass='node-hidden';
+    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().getSelectedOps()[0].op.hideNode(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
@@ -50,20 +58,39 @@ function printNode(html,node,level)
     return html;
 }
 
-function printMaterial()
+function printMaterial(mat)
 {
-
+    var html='<tr>';
+    html+='<td>'+mat.name+'<td>';
+    html+='<td><a onclick="" class="treebutton">Assign</a><td>';
+    html+='<td style="width:60%"><td>';
+    html+='</tr>';
+    return html;
 }
 
 function printInfo()
 {
     var html='<div style="">';
 
-    html+='Nodes<br/>';
-    html+='<table class="treetable table">';
+    html+='<h3>Materials</h3>';
+
+    if(!gltf.json.materials || gltf.json.materials.length==0) html+="No materials";
+    else
+    {
+        html+='<table class="table treetable">';
+        for(var i=0;i<gltf.json.materials.length;i++)
+        {
+            html+=printMaterial(gltf.json.materials[i]);
+        }
+        html+='</table>';
+    }
+
+    html+='<h3>Nodes</h3>';
+    html+='<table class="table treetable">';
     for(var i=0;i<gltf.nodes.length;i++)
     {
-        html=printNode(html,gltf.nodes[i],1);
+        if(!gltf.nodes[i].isChild)
+            html=printNode(html,gltf.nodes[i],1);
     }
 
     html+='</table>';

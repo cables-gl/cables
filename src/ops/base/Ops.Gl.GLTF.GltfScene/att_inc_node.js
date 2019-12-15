@@ -5,6 +5,7 @@ var gltfNode=class
     {
         this.isChild=node.isChild||false;
         this.name=node.name;
+        this.hidden=false;
         this.mat=mat4.create();
         this._animMat=mat4.create();
         this._tempMat=mat4.create();
@@ -124,6 +125,7 @@ var gltfNode=class
 
     render(cgl,ignoreTransform,ignoreMaterial,_time)
     {
+        if(this.hidden)return;
         cgl.pushModelMatrix();
 
         if(!ignoreTransform) this.transform(cgl,_time||time);

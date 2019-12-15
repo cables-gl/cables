@@ -13,8 +13,8 @@ const
     inMaterialList=op.inDropDown("Material List",[]),
     inMaterialCreate=op.inTriggerButton("Assign Material"),
     inMaterials=op.inObject("Materials"),
-    inNodeList=op.inDropDown("Node List",[]),
-    inNodeCreate=op.inTriggerButton("Expose Node"),
+    // inNodeList=op.inDropDown("Node List",[]),
+    // inNodeCreate=op.inTriggerButton("Expose Node"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("GLTF Version"),
@@ -23,7 +23,7 @@ const
 
 op.setPortGroup("Timing",[inTime,inTimeLine]);
 op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
-op.setPortGroup("Expose Nodes",[inNodeList,inNodeCreate]);
+// op.setPortGroup("Expose Nodes",[inNodeList,inNodeCreate]);
 
 const selectMatStr="Select a material...";
 const selectNodeStr="Select a node...";
@@ -140,7 +140,7 @@ function reloadSoon(nocache)
 }
 
 inMaterialList.onChange=updateMaterialCreateButton;
-inNodeList.onChange=updateMaterialCreateButton;
+// inNodeList.onChange=updateMaterialCreateButton;
 
 function updateMaterialCreateButton()
 {
@@ -186,9 +186,7 @@ function updateMaterials()
 
     gltf.shaders={};
 
-
     console.log("update material list");
-
 
     for(var j=0;j<inMaterials.links.length;j++)
     {
@@ -231,12 +229,21 @@ function updateDropdowns()
     for(var i=0;i<gltf.nodes.length;i++)
         nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
 
-    inNodeList.uiAttribs.values=nodeNames;
+    // inNodeList.uiAttribs.values=nodeNames;
     inMaterialList.set(selectNodeStr);
 }
 
 
-
+op.hideNode=function(name)
+{
+    for(var i=0;i<gltf.nodes.length;i++)
+    {
+        if(gltf.nodes[i].name==name)
+        {
+            gltf.nodes[i].hidden=!gltf.nodes[i].hidden;
+        }
+    }
+}
 
 
 

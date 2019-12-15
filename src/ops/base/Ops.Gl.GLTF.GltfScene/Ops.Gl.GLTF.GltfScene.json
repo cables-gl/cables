@@ -70,17 +70,6 @@
                 "type": "2",
                 "name": "Materials",
                 "group": "Material Mapping"
-            },
-            {
-                "type": "0",
-                "name": "Node List",
-                "group": "Expose Nodes",
-                "subType": "string"
-            },
-            {
-                "type": "1",
-                "name": "Expose Node",
-                "group": "Expose Nodes"
             }
         ],
         "portsOut": [
