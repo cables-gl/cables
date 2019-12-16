@@ -21,13 +21,22 @@
                 "name": "Render"
             },
             {
-                "type": "0",
-                "name": "Node Index",
-                "subType": "integer"
+                "type": "5",
+                "name": "Node Name"
             },
             {
                 "type": "0",
-                "name": "Draw",
+                "name": "Transformation",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw Mesh",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw Childs",
                 "subType": "boolean"
             },
             {
@@ -38,8 +47,17 @@
         ],
         "portsOut": [
             {
+                "type": "1",
+                "name": "Next"
+            },
+            {
                 "type": "2",
                 "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Found",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfNode"
