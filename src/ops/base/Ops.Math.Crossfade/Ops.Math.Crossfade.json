@@ -13,5 +13,78 @@
         }
     ],
     "authorName": "simod",
-    "created": 1574855239568
+    "created": 1574855239568,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Crossfade",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Out Min",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Out Max",
+                "group": "Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Easing",
+                "group": "Easing",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "A",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.Crossfade"
+    },
+    "summary": "crossfade between 2 values",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Crossfade",
+                "text": "crossfade"
+            },
+            {
+                "name": "Out Min",
+                "text": "minimum out value"
+            },
+            {
+                "name": "Out Max",
+                "text": "maximum out value"
+            },
+            {
+                "name": "Easing",
+                "text": "type of easing"
+            },
+            {
+                "name": "A",
+                "text": "A output "
+            },
+            {
+                "name": "B",
+                "text": "B output"
+            }
+        ]
+    }
 }

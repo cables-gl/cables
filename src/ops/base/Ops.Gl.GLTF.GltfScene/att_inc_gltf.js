@@ -1,4 +1,29 @@
+
 const CHUNK_HEADER_SIZE=8;
+
+var Gltf=class
+{
+    constructor()
+    {
+        this.json={};
+        this.accBuffers=[];
+        this.meshes=[];
+        this.nodes=[];
+        this.shaders=[];
+        this.timing=[];
+        this.startTime=performance.now();
+        this.bounds=new CGL.BoundingBox();
+    }
+
+    getNode(n)
+    {
+        for(var i=0;i<this.nodes.length;i++)
+        {
+            if(this.nodes[i].name==n)return this.nodes[i];
+        }
+    }
+};
+
 
 
 function readChunk(dv,bArr,arrayBuffer,offset)
@@ -83,24 +108,13 @@ function loadAnims(gltf)
             node.setAnim(chan.target.path,anims);
         }
     }
-
 }
 
 function parseGltf(arrayBuffer)
 {
     var j=0,i=0;
 
-    var gltf=
-        {
-            json:{},
-            accBuffers:[],
-            meshes:[],
-            nodes:[],
-            shaders:[],
-            timing:[],
-            startTime:performance.now(),
-            bounds:new CGL.BoundingBox()
-        };
+    var gltf=new Gltf();
 
     if (!arrayBuffer) return;
     var byteArray = new Uint8Array(arrayBuffer);
@@ -215,15 +229,15 @@ function parseGltf(arrayBuffer)
         if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 
-    console.log("gltf bounds:",gltf.bounds);
+    console.log("gltf bounds:", gltf.bounds);
 
     needsMatUpdate=true;
 
-    gltf.timing.push("load anims",Math.round((performance.now()-gltf.startTime)));
+    gltf.timing.push("load anims", Math.round((performance.now()-gltf.startTime)));
 
-    if(gltf.json.animations)loadAnims(gltf);
+    if(gltf.json.animations) loadAnims(gltf);
 
-    gltf.timing.push("finished",Math.round((performance.now()-gltf.startTime)));
+    gltf.timing.push("finished", Math.round((performance.now()-gltf.startTime)));
 
     console.log(gltf);
 

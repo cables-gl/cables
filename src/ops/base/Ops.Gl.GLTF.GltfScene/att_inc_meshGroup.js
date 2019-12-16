@@ -9,7 +9,7 @@ var gltfMeshGroup=class
 
         for(var i=0;i<prims.length;i++)
         {
-            var mesh=new gltfMesh(this.name+' '+i,prims[i],gltf);
+            var mesh=new gltfMesh(this.name,prims[i],gltf);
             this.meshes.push(mesh);
             this.bounds.apply(mesh.bounds);
         }

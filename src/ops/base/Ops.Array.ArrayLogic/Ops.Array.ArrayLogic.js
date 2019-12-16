@@ -254,5 +254,6 @@ function update()
     outArrayLength.set(mathArray.length);
 };
 
-inArray_0.onChange = numberIn.onChange = inValueIfFalse.onChange =update;
+inArray_0.onChange = numberIn.onChange = inValueIfFalse.onChange =
+inValueIfTrue.onChange=update;
 update();

@@ -3,7 +3,6 @@ var inLat=op.inValue("Latitude");
 var inLon=op.inValue("Longitude");
 
 var inMapWidth=op.inValue("MapWidth",1);
-var inMapHeight=op.inValue("MapHeight",1);
 
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
@@ -11,13 +10,12 @@ var outY=op.outValue("Y");
 inLat.onChange=update;
 inLon.onChange=update;
 inMapWidth.onChange=update;
-inMapHeight.onChange=update;
 
 
 function update()
 {
     var mapWidth    = inMapWidth.get();//1.289672544080605;
-    var mapHeight   = inMapHeight.get();// 1;
+    var mapHeight   = 1;
 
     var latitude=inLat.get();
     var longitude=inLon.get();

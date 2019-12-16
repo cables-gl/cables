@@ -16,6 +16,11 @@ function setOutarray() {
     var size = sizePort.get();
     var circular = circularPort.get();
 
+    if(!inArr)
+    {
+        outArrayPort.set(null);
+        return;
+    }
     if(begin < 0) {
         begin = 0;
     }

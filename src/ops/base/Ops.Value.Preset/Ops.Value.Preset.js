@@ -142,18 +142,15 @@ function updateDropdown()
 function getPreset(name)
 {
     for(var i=0;i<presets.length;i++)
-    {
-        if(presets[i] && presets[i].name==name)return presets[i];
-    }
+        if(presets[i] && presets[i].name==name)
+            return presets[i];
 }
 
 setsPort.onChange=function()
 {
     presets=JSON.parse(setsPort.get());
     outNum.set(presets.length);
-
     updateDropdown();
-
     setsPort.onChange=null;
 };
 
@@ -211,8 +208,6 @@ presetDelete.onTriggered=function()
     presetNames.uiAttribs.values.splice(idx,1);
     op.refreshParams();
 };
-
-
 
 dataPort.onChange=function()
 {

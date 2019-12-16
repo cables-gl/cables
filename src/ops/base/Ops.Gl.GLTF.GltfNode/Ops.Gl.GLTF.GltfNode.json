@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1575984189121
+        },
+        {
+            "message": "Ops.Gl.GltfNode renamed to Ops.Gl.GLTF.GltfNode",
+            "author": "pandur",
+            "date": 1576232975066
         }
     ],
     "authorName": "pandur",
@@ -27,11 +32,6 @@
             },
             {
                 "type": "0",
-                "name": "Transform",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Ignore Material",
                 "subType": "boolean"
             }
@@ -42,6 +42,6 @@
                 "name": "Geometry"
             }
         ],
-        "name": "Ops.Gl.GltfNode"
+        "name": "Ops.Gl.GLTF.GltfNode"
     }
 }

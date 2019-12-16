@@ -10,12 +10,21 @@
             "message": "Ops.User.pandur.GlbTest renamed to Ops.Gl.GLTF",
             "author": "pandur",
             "date": 1575641188314
+        },
+        {
+            "message": "Ops.Gl.GLTF renamed to Ops.Gl.GLTF.GltfScene",
+            "author": "pandur",
+            "date": 1576232952766
         }
     ],
     "authorName": "pandur",
     "created": 1575540508530,
     "layout": {
         "portsIn": [
+            {
+                "type": "5",
+                "name": "data"
+            },
             {
                 "type": "1",
                 "name": "Render"
@@ -47,6 +56,10 @@
                 "subType": "boolean"
             },
             {
+                "type": "1",
+                "name": "Show Structure"
+            },
+            {
                 "type": "0",
                 "name": "Material List",
                 "group": "Material Mapping",
@@ -61,17 +74,6 @@
                 "type": "2",
                 "name": "Materials",
                 "group": "Material Mapping"
-            },
-            {
-                "type": "0",
-                "name": "Node List",
-                "group": "Expose Nodes",
-                "subType": "string"
-            },
-            {
-                "type": "1",
-                "name": "Expose Node",
-                "group": "Expose Nodes"
             }
         ],
         "portsOut": [
@@ -85,10 +87,20 @@
             },
             {
                 "type": "0",
-                "name": "Version",
+                "name": "GLTF Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Time",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.GLTF"
+        "name": "Ops.Gl.GLTF.GltfScene"
     }
 }
