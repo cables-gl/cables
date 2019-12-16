@@ -22,6 +22,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": "5",
+                "name": "data"
+            },
+            {
                 "type": "1",
                 "name": "Render"
             },

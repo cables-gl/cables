@@ -1,6 +1,7 @@
 // https://raw.githubusercontent.com/KhronosGroup/glTF/master/specification/2.0/figures/gltfOverview-2.0.0b.png
 
 const
+    dataPort=op.inString("data"),
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
     inRender=op.inBool("Draw",true),
@@ -37,9 +38,11 @@ var time=0;
 var needsMatUpdate=true;
 var timedLoader=null;
 var loadingId=null;
+var data=null;
 
 inShow.onTriggered=printInfo;
-
+dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
+dataPort.onChange=loadData;
 
 inMaterials.onLinkChanged=inMaterials.onChange=function()
 {
@@ -105,8 +108,6 @@ function loadBin()
     oReq.open("GET", inFile.get(), true);
     oReq.responseType = "arraybuffer";
 
-
-
     oReq.onload = function (oEvent)
     {
         maxTime=0;
@@ -117,6 +118,7 @@ function loadBin()
         updateDropdowns();
         op.refreshParams();
         outAnimLength.set(maxTime);
+        hideNodesFromData();
     };
 
     oReq.send(null);
@@ -226,23 +228,84 @@ function updateDropdowns()
 
     const nodeNames=[selectNodeStr];
 
-    for(var i=0;i<gltf.nodes.length;i++)
-        nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
+    for(var i=0;i<gltf.nodes.length;i++) nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
 
     // inNodeList.uiAttribs.values=nodeNames;
     inMaterialList.set(selectNodeStr);
 }
 
 
-op.hideNode=function(name)
+
+function hideNodesFromData()
 {
-    for(var i=0;i<gltf.nodes.length;i++)
+    // var data=loadData();
+    if(data && data.hiddenNodes)
     {
-        if(gltf.nodes[i].name==name)
+        for(var i in data.hiddenNodes)
         {
-            gltf.nodes[i].hidden=!gltf.nodes[i].hidden;
+            // op.hideNode(data.hiddenNodes[i]);
+            console.log("hide node",i);
+            const n=gltf.getNode(i);
+            n.hidden=true;
         }
     }
+}
+
+
+function loadData()
+{
+    // if(!\data)
+    // {
+        data=dataPort.get()
+        // console.log("RAW DATA",data);
+        if(!data || data==="")data={};
+        else data=JSON.parse(data);
+
+        // data.hiddenNodes=data.hiddenNodes||{};
+
+        if(gltf)hideNodesFromData();
+        console.log("LOAD DATA ",data);
+    // }
+
+    return data;
+}
+
+
+function saveData()
+{
+    dataPort.set(JSON.stringify(data));
+    console.log("saved",dataPort.get());
+}
+
+op.toggleNodeVisibility=function(name)
+{
+    // loadData();
+
+    const n=gltf.getNode(name);
+
+    n.hidden=!n.hidden;
+
+    data.hiddenNodes=data.hiddenNodes||{};
+
+    if(n)
+        if(n.hidden)data.hiddenNodes[name]=true;
+        else delete data.hiddenNodes[name];
+
+    saveData();
+    // data=null;
+    // loadData();
+    // for(var i=0;i<gltf.nodes.length;i++)
+    // {
+    //     if(gltf.nodes[i].name==name)
+    //     {
+    //         gltf.nodes[i].hidden=!gltf.nodes[i].hidden;
+    //         if(gltf.nodes[i].hidden)data.hiddenNodes[name]=true;
+    //         else delete data.hiddenNodes[name]
+    //     }
+    // }
+
+
+
 }
 
 

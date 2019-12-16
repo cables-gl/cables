@@ -43,7 +43,7 @@ function printNode(html,node,level)
     html+='<td>';
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().getSelectedOps()[0].op.hideNode(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
+    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().getSelectedOps()[0].op.toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
