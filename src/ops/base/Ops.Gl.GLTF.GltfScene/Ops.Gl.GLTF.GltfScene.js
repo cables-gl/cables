@@ -238,6 +238,7 @@ function updateDropdowns()
 
 function hideNodesFromData()
 {
+    if(!data)loadData();
     // var data=loadData();
     if(data && data.hiddenNodes)
     {

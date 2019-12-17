@@ -10,6 +10,7 @@ var gltfNode=class
         this._animMat=mat4.create();
         this._tempMat=mat4.create();
         this._tempQuat=quat.create();
+        this._tempRotmat=mat4.create();
         this.mesh=null;
         this.children=[];
         this._node=node;
@@ -88,16 +89,21 @@ var gltfNode=class
         else
         {
             mat4.identity(this._animMat);
-            if(this._animTrans)
+
+            var playAnims=true;
+
+
+            if(playAnims && this._animTrans)
             {
                 mat4.translate(this._animMat,this._animMat,[
                     this._animTrans[0].getValue(time),
                     this._animTrans[1].getValue(time),
                     this._animTrans[2].getValue(time)]);
             }
-            else if(node.translation) mat4.translate(this._animMat,this._animMat,node.translation);
+            else
+            if(this.translation) mat4.translate(this._animMat,this._animMat,this.translation);
 
-            if(this._animRot)
+            if(playAnims && this._animRot)
             {
                 CABLES.TL.Anim.slerpQuaternion(time,this._tempQuat,this._animRot[0],this._animRot[1],this._animRot[2],this._animRot[3]);
 
@@ -106,12 +112,11 @@ var gltfNode=class
             }
             else if(this._rot)
             {
-                var rotmat=mat4.create();
                 mat4.fromQuat(rotmat,this._rot);
-                mat4.mul(this._animMat,this._animMat,rotmat);
+                mat4.mul(this._animMat,this._animMat,this._tempRotmat);
             }
 
-            if(this._animScale)
+            if(playAnims && this._animScale)
             {
                 mat4.scale(this._animMat,this._animMat,[
                     this._animScale[0].getValue(time),
@@ -123,18 +128,22 @@ var gltfNode=class
         }
     }
 
-    render(cgl,ignoreTransform,ignoreMaterial,_time)
+
+    render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time)
     {
-        if(this.hidden)return;
-        cgl.pushModelMatrix();
+        // dontTransform,drawMesh,ignoreMaterial,
+        if(this.hidden) return;
 
-        if(!ignoreTransform) this.transform(cgl,_time||time);
+        if(!dontTransform) cgl.pushModelMatrix();
+        if(!dontTransform) this.transform(cgl,_time||time);
 
-        if(this.mesh) this.mesh.render(cgl,ignoreMaterial);
+        if(this.mesh && !dontDrawMesh) this.mesh.render(cgl,ignoreMaterial);
 
-        for(var i=0;i<this.children.length;i++) gltf.nodes[this.children[i]].render(cgl,ignoreTransform,ignoreMaterial,_time);
+        if(!ignoreChilds)
+            for(var i=0;i<this.children.length;i++)
+                gltf.nodes[this.children[i]].render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time);
 
-        cgl.popModelMatrix();
+        if(!dontTransform)cgl.popModelMatrix();
     }
 
 };
