@@ -10,18 +10,37 @@
             },
             {
                 "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Area",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Size",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Invert",
-                "subType": "boolean"
+                "name": "Size X",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Y",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Z",
+                "group": "Size",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -36,21 +55,25 @@
             {
                 "type": "0",
                 "name": "x",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "y",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "z",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "WorldSpace",
+                "group": "Position",
                 "subType": "boolean"
             }
         ],

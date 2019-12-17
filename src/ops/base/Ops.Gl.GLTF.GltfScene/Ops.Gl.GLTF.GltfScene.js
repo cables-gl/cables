@@ -11,8 +11,8 @@ const
 
     inShow=op.inTriggerButton("Show Structure"),
 
-    inMaterialList=op.inDropDown("Material List",[]),
-    inMaterialCreate=op.inTriggerButton("Assign Material"),
+    // inMaterialList=op.inDropDown("Material List",[]),
+    // inMaterialCreate=op.inTriggerButton("Assign Material"),
     inMaterials=op.inObject("Materials"),
     // inNodeList=op.inDropDown("Node List",[]),
     // inNodeCreate=op.inTriggerButton("Expose Node"),
@@ -23,7 +23,7 @@ const
     outAnimTime=op.outNumber("Anim Time",0);
 
 op.setPortGroup("Timing",[inTime,inTimeLine]);
-op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
+// op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
 // op.setPortGroup("Expose Nodes",[inNodeList,inNodeCreate]);
 
 const selectMatStr="Select a material...";
@@ -44,10 +44,10 @@ inShow.onTriggered=printInfo;
 dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 dataPort.onChange=loadData;
 
-inMaterials.onLinkChanged=inMaterials.onChange=function()
-{
-    needsMatUpdate=true;
-};
+// inMaterials.onLinkChanged=inMaterials.onChange=function()
+// {
+//     needsMatUpdate=true;
+// };
 
 inTimeLine.onChange=function()
 {
@@ -141,7 +141,7 @@ function reloadSoon(nocache)
     },30);
 }
 
-inMaterialList.onChange=updateMaterialCreateButton;
+// inMaterialList.onChange=updateMaterialCreateButton;
 // inNodeList.onChange=updateMaterialCreateButton;
 
 function updateMaterialCreateButton()
@@ -168,15 +168,7 @@ function updateMaterialCreateButton()
 
 }
 
-inMaterialCreate.onTriggered=function()
-{
-    if(op.patch.isEditorMode())
-    {
-        var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
-        newop.getPort("Material Name").set(inMaterialList.get());
-        op.patch.link(op,inMaterials.name,newop,"Material");
-    }
-};
+
 
 function updateMaterials()
 {
@@ -188,7 +180,7 @@ function updateMaterials()
 
     gltf.shaders={};
 
-    console.log("update material list");
+    // console.log("update material list");
 
     for(var j=0;j<inMaterials.links.length;j++)
     {
@@ -205,8 +197,8 @@ function updateMaterials()
         }
     }
 
-    updateDropdowns();
-    updateMaterialCreateButton();
+    // updateDropdowns();
+    // updateMaterialCreateButton();
     needsMatUpdate=false;
 }
 
@@ -215,23 +207,23 @@ function updateDropdowns()
 {
     // material list
 
-    const matNames=[selectMatStr];
+    // const matNames=[selectMatStr];
 
-    if(gltf.json.materials)
-        for(var i=0;i<gltf.json.materials.length;i++)
-            matNames.push(gltf.json.materials[i].name);
+    // if(gltf.json.materials)
+    //     for(var i=0;i<gltf.json.materials.length;i++)
+    //         matNames.push(gltf.json.materials[i].name);
 
-    inMaterialList.uiAttribs.values=matNames;
-    inMaterialList.set(selectMatStr);
+    // inMaterialList.uiAttribs.values=matNames;
+    // inMaterialList.set(selectMatStr);
 
     // node list
 
-    const nodeNames=[selectNodeStr];
+    // const nodeNames=[selectNodeStr];
 
-    for(var i=0;i<gltf.nodes.length;i++) nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
+    // for(var i=0;i<gltf.nodes.length;i++) nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
 
     // inNodeList.uiAttribs.values=nodeNames;
-    inMaterialList.set(selectNodeStr);
+    // inMaterialList.set(selectNodeStr);
 }
 
 
@@ -277,6 +269,17 @@ function saveData()
     dataPort.set(JSON.stringify(data));
     console.log("saved",dataPort.get());
 }
+
+
+op.assignMaterial=function(name)
+{
+    // if(op.patch.isEditorMode())
+    // {
+        var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
+        newop.getPort("Material Name").set(name);
+        op.patch.link(op,inMaterials.name,newop,"Material");
+    // }
+};
 
 op.toggleNodeVisibility=function(name)
 {
