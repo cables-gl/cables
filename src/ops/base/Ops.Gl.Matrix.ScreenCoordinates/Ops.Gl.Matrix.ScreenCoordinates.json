@@ -24,6 +24,11 @@
                 "type": "0",
                 "name": "Y",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Matrix.ScreenCoordinates"
