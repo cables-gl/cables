@@ -1,5 +1,6 @@
 const cgl = op.patch.cgl;
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+
 const MAX_SHADOWMAPS = MAX_UNIFORM_FRAGMENTS === 64 ? 2 : 8;
 
 function ShadowInfo() {
@@ -122,7 +123,7 @@ const inShadowBias = op.inFloat("Bias", 0.002);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
-const inBlur = op.inFloat("Blur Amount", 1);
+const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("Shadow Attributes", [inShadowBias, inCastShadow, inLRBT, inNear, inFar, inBlur]);
 
 var inShadowBiasUniform = new CGL.Uniform(shader, "f", "inShadowBias", inShadowBias);
