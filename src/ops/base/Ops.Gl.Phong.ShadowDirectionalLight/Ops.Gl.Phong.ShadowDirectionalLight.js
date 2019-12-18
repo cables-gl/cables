@@ -179,13 +179,18 @@ vec3.set(up, 0, 1, 0);
 const camPos = vec3.create();
 
 const identityMat = mat4.create();
-const biasMatrix = mat4.fromValues(
+const biasMatrixT = mat4.fromValues(
+    0.5 , 0. , 0. , 0.5,
+    0.0, 0.5, 0, 0.5,
+    0., 0., 0.5, 0.5,
+    0., 0., 0., 1.);
+var biasMatrix = mat4.fromValues(
         0.5, 0.0, 0.0, 0.0,
         0.0, 0.5, 0.0, 0.0,
         0.0, 0.0, 0.5, 0.0,
         0.5, 0.5, 0.5, 1.0);
+// biasMatrix = biasMatrixT;
 const lightBiasMVPMatrix = mat4.create();
-console.log(blurShader);
 
 /*
     effect.startEffect();
@@ -324,6 +329,7 @@ inTrigger.onTriggered = function() {
     }
     else {
         cgl.shadowMapArray[light.shadowMapIndex] = blurredMap;
+        // op.log(cgl.shadowMapArray);
     }
 
 

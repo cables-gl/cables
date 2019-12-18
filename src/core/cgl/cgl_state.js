@@ -3,7 +3,7 @@ import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
-
+import { ShadowStore } from "./cgl_shadowstore";
 
 /**
  * cables gl context/state manager
@@ -24,6 +24,8 @@ const Context = function (_patch)
 
     this.temporaryTexture = null;
     this.frameStore = {};
+    this.shadowStore = new ShadowStore();
+
     this.gl = null;
 
     /**
@@ -568,7 +570,7 @@ const Context = function (_patch)
                     anchor.click();
                     if (cb) cb(blob);
                 },100);
-                
+
             }
             else
             {

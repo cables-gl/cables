@@ -126,7 +126,7 @@ void main()
     #ifdef RECEIVE_SHADOW
         for (int i = 0; i < MAX_LIGHTS; i++) {
             Light light = vertexLights[i];
-            if (light.type == DIRECTIONAL) {
+            if (light.type == DIRECTIONAL || light.type == SPOT) {
                 if (light.shadowMapIndex != -1) {
                     mat4 lightBiasMVP = light.mvpBiasMatrix;
                     lightSpace_fragPos[light.shadowMapIndex] = lightBiasMVP * pos;

@@ -117,7 +117,32 @@ const float EIGHT_PI = 8.*PI;
         return clamp((value - low)/(high-low), 0., 1.) ;
     }
 
+    float LinearizeDepth(float depth)
+    {
+        float far_plane = 30.;
+        float near_plane = 0.5;
+        float z = depth * 2.0 - 1.0; // Back to NDC
+        return (2.0 * near_plane * far_plane) / (far_plane + near_plane - z * (far_plane - near_plane));
+    }
+
+
     float ChebyshevUpperBound(sampler2D shadowMap, vec4 shadowCoord) {
+
+        // from NVIDIA
+        float visibility = 0.;
+        float far_plane = 30.;
+        vec3 moments = texture(shadowMap, shadowCoord.xy).rgb;
+        // moments.x = LinearizeDepth(moments.x)/far_plane;
+        float E_x2 = moments.y;
+        float Ex_2 = moments.x * moments.x;
+        float variance = E_x2 - Ex_2;
+        float mD = moments.x - shadowCoord.z;
+        float mD_2 = mD * mD;
+        float p = variance / (variance + mD_2);
+        visibility = max(p, float(shadowCoord.z <= moments.x));
+        return visibility;
+
+        /*
         float distanceTo = shadowCoord.z;
         // retrieve previously stored moments & variance
 
@@ -138,6 +163,7 @@ const float EIGHT_PI = 8.*PI;
         //float res = 1. - clamp(pMax, 1., p);
         //if (res < 0.00001) return 1.;
         return origRes; //- 0.80002; // min(max(pMax, p), 1.);
+        */
     }
 #endif
 
@@ -394,9 +420,9 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
 
     #ifdef RECEIVE_SHADOW
         float visibility = 1.;
-        vec4 shadowCoord = shadowCoords[light.shadowMapIndex];
-        //if (texture(shadowMaps[light.shadowMapIndex], shadowCoord.xy).w < shadowCoord.z - 0.3) visibility = 0.2;
-        visibility = ChebyshevUpperBound(shadowMaps[light.shadowMapIndex], shadowCoord);
+        vec4 shadowCoord = shadowCoords[0];
+        //if (texture(shadowMaps[0], shadowCoord.xy).w < shadowCoord.z - 0.3) visibility = 0.2;
+        visibility = ChebyshevUpperBound(shadowMaps[0], shadowCoord);
 
         specularColor *= visibility;
         diffuseColor *= visibility;
@@ -410,6 +436,7 @@ vec3 DirectionalLight(Light light, Material material, vec3 normal) {
 
     return color;
 }
+
 
 vec3 SpotLight(Light light, Material material, vec3 normal) {
 
@@ -506,7 +533,19 @@ vec3 SpotLight(Light light, Material material, vec3 normal) {
     }
 
 
+    #ifdef RECEIVE_SHADOW
+        float visibility = 1.;
+        vec4 shadowCoord = shadowCoords[0];
+        //if (texture(shadowMaps[0], shadowCoord.xy).w < shadowCoord.z - 0.3) visibility = 0.2;
+        visibility = ChebyshevUpperBound(shadowMaps[0], shadowCoord);
+        // if ( textureProj( shadowMaps[0], shadowCoord.xyz ).r  <  (shadowCoord.r-0.002)/shadowCoord.w ) visibility = 0.5;
+        specularColor *= visibility;
+        diffuseColor *= visibility;
+        // specularColor = vec3(1.);
+        // diffuseColor = visibility * vec3(1.,0.,0.);
+    #endif
     vec3 color = ambientColor+attenuation*light.intensity*(diffuseColor + specularColor);
+        // color = vec3(visibility);
 
     #ifdef ENABLE_FRESNEL
         color += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w);

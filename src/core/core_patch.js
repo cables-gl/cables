@@ -10,6 +10,7 @@ import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
 import { Log } from "./log";
+import { ShadowStore } from "./cgl/cgl_shadowstore";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -74,7 +75,6 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
-
     this.config = cfg || {
         glCanvasResizeToWindow: false,
         // glCanvasId: 'glcanvas',
@@ -143,7 +143,7 @@ const Patch = function (cfg)
             this.timer.play();
         }
     }
-
+    this.shadowStore = new ShadowStore(this.cgl);
     console.log("made with https://cables.gl");
 };
 
@@ -561,7 +561,7 @@ Patch.prototype.exec = function (e)
         this._frameWasdelayed = false;
     }
 
-    if (this._renderOneFrame) 
+    if (this._renderOneFrame)
     {
         if(this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
         this.emitEvent("renderedOneFrame");
@@ -574,7 +574,7 @@ Patch.prototype.exec = function (e)
         {
             this._perf.fps = this._perf._fpsFrameCount;
             this._perf.ms = Math.round(this._perf._fpsMsCount / this._perf._fpsFrameCount);
-            
+
             this.emitEvent("performance", this._perf);
 
             this._perf._fpsFrameCount = 0;
@@ -1270,7 +1270,7 @@ Patch.prototype.dispose = function ()
  * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
  * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
  * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
- * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders * 
+ * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
  * @property {Boolean} [silent=false]
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader

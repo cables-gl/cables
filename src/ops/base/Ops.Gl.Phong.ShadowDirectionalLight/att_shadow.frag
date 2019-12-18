@@ -30,7 +30,7 @@ void main() {
 
     outColor = vec4(depth,
     moment2,
-    1.,
+    0.,
     1.);
     // outColor = vec4(1., 1., 1., 1.);
     // outColor = //vec4(gl_FragCoord.z, gl_FragCoord.z*gl_FragCoord.z, 0.,1.);

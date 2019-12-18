@@ -563,7 +563,7 @@ inTrigger.onTriggered = function() {
 
                             if (vertexLightUniforms[i][key]) {
                                 vertexLightUniforms[i][key].setValue(light[key]);
-
+                                // op.log(cgl.shadowMapArray);
                                 // op.log("key", key, "uniform", vertexLightUniforms[i][key], "light", light[key], "shadowmaparray", cgl.shadowMapArray);
 
                             }
