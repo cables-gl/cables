@@ -127,7 +127,7 @@ const Context = function (_patch)
         if(!this.patch.config.canvas.forceWebGl1)
             this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
-        if (this.gl)
+        if (this.gl && this.gl.getParameter(this.gl.VERSION)!="WebGL 1.0")
         {
             this.glVersion = 2;
         }

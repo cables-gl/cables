@@ -1,6 +1,7 @@
 
 function printNode(html,node,level)
 {
+    if(!gltf)return;
     html+='<tr class="row">';
     var i=0;
     var ident="";
@@ -72,7 +73,7 @@ function printInfo()
 {
     var html='<div style="">';
 
-    html+='<h3>Materials</h3>';
+    html+='<h3>Materials ('+gltf.json.materials.length+')</h3>';
 
     if(!gltf.json.materials || gltf.json.materials.length==0) html+="No materials";
     else
@@ -85,15 +86,28 @@ function printInfo()
         html+='</table>';
     }
 
-    html+='<h3>Nodes</h3>';
+    html+='<h3>Nodes ('+gltf.nodes.length+')</h3>';
     html+='<table class="table treetable">';
     for(var i=0;i<gltf.nodes.length;i++)
     {
         if(!gltf.nodes[i].isChild)
             html=printNode(html,gltf.nodes[i],1);
     }
-
     html+='</table>';
+
+    html+='<h3>meshes ('+gltf.json.meshes.length+')</h3>';
+    for(var i=0;i<gltf.json.meshes.length;i++)
+    {
+        html+='- '+gltf.json.meshes[i].name+"<br/>";
+        console.log(gltf.json.meshes[i]);
+    }
+
+    html+='<h3>Animations ('+gltf.json.animations.length+')</h3>';
+    for(var i=0;i<gltf.json.animations.length;i++)
+    {
+        html+='- '+gltf.json.animations[i].name+"<br/>";
+    }
+
     html+='</div>';
 
     CABLES.UI.MODAL.show(html);

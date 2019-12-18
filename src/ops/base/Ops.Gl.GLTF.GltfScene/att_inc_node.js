@@ -82,6 +82,8 @@ var gltfNode=class
 
     transform(cgl,_time)
     {
+        if(!_time )_time=time;
+
         if(!this._animTrans)
         {
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this.mat);
@@ -91,7 +93,6 @@ var gltfNode=class
             mat4.identity(this._animMat);
 
             var playAnims=true;
-
 
             if(playAnims && this._animTrans)
             {
@@ -128,7 +129,6 @@ var gltfNode=class
         }
     }
 
-
     render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time)
     {
         // dontTransform,drawMesh,ignoreMaterial,
@@ -141,7 +141,8 @@ var gltfNode=class
 
         if(!ignoreChilds)
             for(var i=0;i<this.children.length;i++)
-                gltf.nodes[this.children[i]].render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time);
+                if(gltf.nodes[this.children[i]])
+                    gltf.nodes[this.children[i]].render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time);
 
         if(!dontTransform)cgl.popModelMatrix();
     }

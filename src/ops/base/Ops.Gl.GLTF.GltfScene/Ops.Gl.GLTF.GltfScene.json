@@ -60,20 +60,8 @@
                 "name": "Show Structure"
             },
             {
-                "type": "0",
-                "name": "Material List",
-                "group": "Material Mapping",
-                "subType": "string"
-            },
-            {
-                "type": "1",
-                "name": "Assign Material",
-                "group": "Material Mapping"
-            },
-            {
                 "type": "2",
-                "name": "Materials",
-                "group": "Material Mapping"
+                "name": "Materials"
             }
         ],
         "portsOut": [
