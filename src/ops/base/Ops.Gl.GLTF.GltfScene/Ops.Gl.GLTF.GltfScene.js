@@ -35,16 +35,19 @@ var data=null;
 var scale=vec3.create();
 var lastTime=0;
 
+inShow.onTriggered=printInfo;
+dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
+dataPort.onChange=loadData;
 
 inMaterials.onChange=function()
 {
     needsMatUpdate=true;
 };
 
-inShow.onTriggered=printInfo;
-dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
-dataPort.onChange=loadData;
-
+op.onDelete=function()
+{
+    closeTab();
+};
 
 inTimeLine.onChange=function()
 {
@@ -112,6 +115,7 @@ function loadBin()
     var oReq = new XMLHttpRequest();
     oReq.open("GET", inFile.get(), true);
     oReq.responseType = "arraybuffer";
+    closeTab();
 
     oReq.onload = function (oEvent)
     {
