@@ -1,3 +1,10 @@
+var tab=null;
+
+function closeTab()
+{
+    if(tab)gui.mainTabs.closeTab(tab.id);
+}
+
 
 function printNode(html,node,level)
 {
@@ -195,6 +202,12 @@ function printInfo()
 
     html+='</div>';
 
-    CABLES.UI.MODAL.show(html);
+    // CABLES.UI.MODAL.show(html);
+
+    closeTab();
+    tab=new CABLES.UI.Tab("GLTF",{"icon":"cube","infotext":"tab_gltf","padding":true});
+    gui.mainTabs.addTab(tab,true);
+    tab.html(html);
+
     console.log(gltf);
 }
