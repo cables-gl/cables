@@ -35,7 +35,9 @@ function printNode(html,node,level)
         for(i=0;i<node.mesh.meshes.length;i++)
         {
             // html+='<a onclick="" class="treebutton">Mesh '+node.mesh.meshes[i].name+'</a> ('+node.mesh.meshes[i].geom.vertices.length/3+' verts)</a>';
-            html+='Mesh '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) Material:'+gltf.json.materials[node.mesh.meshes[i].material].name;
+            var matname='no material';
+            if(node.mesh.meshes[i].material && gltf.json.materials[node.mesh.meshes[i].material]) matname=gltf.json.materials[node.mesh.meshes[i].material].name;
+            html+='Mesh '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) Material:'+matname;
         }
     }
 
@@ -137,7 +139,8 @@ function printInfo()
         html+='<td>';
         for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
         {
-            html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
+            if(gltf.json.materials[gltf.json.meshes[i].primitives[j].material])
+                html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
         }
         html+='</td>';
 
