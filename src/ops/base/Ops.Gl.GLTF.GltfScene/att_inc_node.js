@@ -129,10 +129,10 @@ var gltfNode=class
         }
     }
 
-    render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time)
+    render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,drawHidden,_time)
     {
         // dontTransform,drawMesh,ignoreMaterial,
-        if(this.hidden) return;
+        if(this.hidden && !drawHidden) return;
 
         if(!dontTransform) cgl.pushModelMatrix();
         if(!dontTransform) this.transform(cgl,_time||time);
@@ -142,7 +142,7 @@ var gltfNode=class
         if(!ignoreChilds)
             for(var i=0;i<this.children.length;i++)
                 if(gltf.nodes[this.children[i]])
-                    gltf.nodes[this.children[i]].render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,_time);
+                    gltf.nodes[this.children[i]].render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,drawHidden,_time);
 
         if(!dontTransform)cgl.popModelMatrix();
     }

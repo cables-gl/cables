@@ -45,7 +45,6 @@ function readChunk(dv,bArr,arrayBuffer,offset)
         try
         {
             const obj=JSON.parse(json);
-            console.log(obj);
             chunk.data=obj;
             outGenerator.set(obj.asset.generator);
         }
@@ -229,8 +228,6 @@ function parseGltf(arrayBuffer)
         if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 
-    console.log("gltf bounds:", gltf.bounds);
-
     needsMatUpdate=true;
 
     gltf.timing.push("load anims", Math.round((performance.now()-gltf.startTime)));
@@ -239,7 +236,7 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("finished", Math.round((performance.now()-gltf.startTime)));
 
-    console.log(gltf);
+
 
     return gltf;
 

@@ -16,9 +16,8 @@
                 "name": "Render"
             },
             {
-                "type": "0",
-                "name": "Node Index",
-                "subType": "integer"
+                "type": "5",
+                "name": "Node Name"
             },
             {
                 "type": "0",
@@ -48,6 +47,11 @@
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Found",
+                "subType": "boolean"
             },
             {
                 "type": "3",

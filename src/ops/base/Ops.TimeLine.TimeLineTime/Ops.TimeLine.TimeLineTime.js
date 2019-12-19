@@ -1,4 +1,5 @@
-var theTime=op.outValue("time");
+
+const theTime=op.outValue("time");
 
 op.onAnimFrame=function(time)
 {

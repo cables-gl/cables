@@ -1,17 +1,18 @@
 const
     inExec=op.inTrigger("Render"),
-    inNode=op.inInt("Node Index"),
+    inNodeName=op.inString("Node Name"),
     inNum=op.inInt("Steps",100),
     inFullAnim=op.inBool("Full Animation",true),
     inAnimStart=op.inFloat("Start",0),
     inAnimLen=op.inFloat("Length",10),
     next=op.outTrigger("Next"),
+    outFound=op.outBool("Found"),
     outArr=op.outArray("Positions");
 
 const cgl=op.patch.cgl;
 
 op.setPortGroup("Timing",[inFullAnim,inAnimStart,inAnimLen]);
-
+var node=null;
 
 inFullAnim.onChange=function()
 {
@@ -19,16 +20,44 @@ inFullAnim.onChange=function()
     inAnimLen.setUiAttribs({"greyout":inFullAnim.get()});
 };
 
+inNodeName.onChange=function()
+{
+    outArr.set(null);
+    node=null;
+    outFound.set(false);
+};
+
 
 inExec.onTriggered=function()
 {
     if(!cgl.frameStore.currentScene) return;
 
-    var idx=inNode.get();
-    idx=Math.max(0,idx);
-    idx=Math.min(cgl.frameStore.currentScene.nodes.length-1,idx);
+    if(!node)
+    {
+        const name=inNodeName.get();
 
-    var n=cgl.frameStore.currentScene.nodes[idx];
+        if(!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        {
+            return;
+        }
+
+        for(var i=0;i<cgl.frameStore.currentScene.nodes.length;i++)
+        {
+            if(cgl.frameStore.currentScene.nodes[i].name==name)
+            {
+                node=cgl.frameStore.currentScene.nodes[i];
+                // console.log("NODE",node);
+                outFound.set(true);
+            }
+        }
+    }
+
+
+    // var idx=inNode.get();
+    // idx=Math.max(0,idx);
+    // idx=Math.min(cgl.frameStore.currentScene.nodes.length-1,idx);
+
+    var n=node;
     var arr=[];
 
     if(n && n._animTrans&& n._animTrans.length)
