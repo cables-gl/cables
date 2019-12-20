@@ -1,6 +1,7 @@
 const
     filename=op.inUrl("file"),
     jsonp=op.inValueBool("JsonP",false),
+    headers=op.inObject("headers", {}),
     outData=op.outObject("data"),
     isLoading=op.outValue("Is Loading",false),
     outTrigger=op.outTrigger("Loaded");
@@ -53,7 +54,13 @@ function reload()
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
-        });
+        },
+        null,
+        null,
+        null,
+        null,
+        headers.get()
+    );
 
 }
 

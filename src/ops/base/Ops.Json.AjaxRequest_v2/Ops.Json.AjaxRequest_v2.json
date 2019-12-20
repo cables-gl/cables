@@ -19,6 +19,10 @@
                 "type": "0",
                 "name": "JsonP",
                 "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "headers"
             }
         ],
         "portsOut": [
