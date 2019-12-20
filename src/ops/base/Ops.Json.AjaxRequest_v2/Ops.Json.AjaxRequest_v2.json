@@ -48,6 +48,27 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "file",
+                "text": "file or url"
+            },
+            {
+                "name": "JsonP",
+                "text": "wether or not to load jsonp (to circumvent CORS)"
+            },
+            {
+                "name": "headers",
+                "text": "a key/value-object of additional headers to send"
+            },
+            {
+                "name": "data",
+                "text": "the data"
+            },
+            {
+                "name": "Loaded",
+                "text": "triggers when finished"
+            }
+        ]
     }
 }

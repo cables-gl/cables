@@ -1,39 +1,39 @@
 const
-    filename=op.inUrl("file"),
-    jsonp=op.inValueBool("JsonP",false),
-    headers=op.inObject("headers", {}),
-    outData=op.outObject("data"),
-    isLoading=op.outValue("Is Loading",false),
-    outTrigger=op.outTrigger("Loaded");
+    filename = op.inUrl("file"),
+    jsonp = op.inValueBool("JsonP",false),
+    headers = op.inObject("headers", {}),
+    outData = op.outObject("data"),
+    isLoading = op.outValue("Is Loading",false),
+    outTrigger = op.outTrigger("Loaded");
 
-outData.ignoreValueSerialize=true;
+outData.ignoreValueSerialize = true;
 
-filename.onChange=jsonp.onChange=delayedReload;
+filename.onChange = jsonp.onChange = delayedReload;
 
-var loadingId=0;
-var reloadTimeout=0;
+let loadingId = 0;
+let reloadTimeout = 0;
 
 function delayedReload()
 {
     clearTimeout(reloadTimeout);
-    reloadTimeout=setTimeout(reload,100);
+    reloadTimeout = setTimeout(reload,100);
 }
 
 function reload()
 {
-    if(!filename.get())return;
+    if (!filename.get()) return;
 
     op.patch.loading.finished(loadingId);
 
-    loadingId=op.patch.loading.start('jsonFile',''+filename.get());
+    loadingId = op.patch.loading.start("jsonFile", "" + filename.get());
     isLoading.set(true);
 
-    var f=CABLES.ajax;
-    if(jsonp.get())f=CABLES.jsonp;
+    let f = CABLES.ajax;
+    if (jsonp.get()) f = CABLES.jsonp;
 
     f(
         op.patch.getFilePath(filename.get()),
-        function(err,_data,xhr)
+        function (err,_data, xhr)
         {
             try
             {
@@ -49,7 +49,7 @@ function reload()
             }
             catch(e)
             {
-                console.error('ajaxrequest: exception while loading ',filename.get());
+                op.error('ajaxrequest: exception while loading ',filename.get());
                 op.uiAttr({'error':'error loading json'});
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
@@ -59,8 +59,6 @@ function reload()
         null,
         null,
         null,
-        headers.get()
+        headers.get(),
     );
-
 }
-
