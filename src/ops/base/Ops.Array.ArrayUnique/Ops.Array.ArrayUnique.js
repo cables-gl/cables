@@ -1,21 +1,16 @@
-const inArray = op.inArray("In");
-const outArray = op.outArray("Result");
-
-const newArr = [];
-outArray.set(newArr);
+const inArray = op.inArray("array");
+const outArray = op.outArray("arrayOut");
 
 inArray.onChange = function ()
 {
-    const arr = inArray.get();
-
-    if (!arr) return;
-
-    if (newArr.length != arr.length) newArr.length = arr.length;
-
-    for (let i = 0; i < arr.length; i++)
+    const inValue = inArray.get();
+    if (Array.isArray(inValue))
     {
-        newArr[i] = Math.abs(arr[i]);
+        const unique = inValue.filter((v, i, a) => a.indexOf(v) === i);
+        outArray.set(unique);
     }
-    outArray.set(null);
-    outArray.set(newArr);
+    else
+    {
+        outArray.set(inValue);
+    }
 };
