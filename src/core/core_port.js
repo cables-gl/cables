@@ -207,11 +207,10 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     this.setValue = function (v) {};
                     this.onTriggered = function () {};
 
-                    Log.log("exception!");
                     console.error("onvaluechanged exception cought", ex);
                     Log.log(ex.stack);
                     Log.log("exception in: " + this.parent.name);
-                    if (gui) gui.showOpCrash(this.parent);
+                    if (CABLES.UI) gui.showOpCrash(this.parent);
 
                     this.parent.patch.emitEvent("exception".ex,this.parent);
                 }

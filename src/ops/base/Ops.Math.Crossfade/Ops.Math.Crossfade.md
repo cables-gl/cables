@@ -1,0 +1,1 @@
+This handy op allows you to crossfade between 2 numbers. You can set the min and max range.  

@@ -1,0 +1,136 @@
+{
+    "id": "68d557e4-f218-4fed-a675-7299997b97dd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1575998200027
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Wavyness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Layers",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "AA iterations",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frequency step size",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.LensScratches"
+    },
+    "authorName": "cables",
+    "created": 1575998270324,
+    "summary": "Creates a procedural texture simulating scratches on a lens",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Blending amount"
+            },
+            {
+                "name": "Offset X",
+                "text": "offset X "
+            },
+            {
+                "name": "Offset Y",
+                "text": "offset Y "
+            },
+            {
+                "name": "Wavyness",
+                "text": "adds curves to lines"
+            },
+            {
+                "name": "scale",
+                "text": "Scale of scracthes"
+            },
+            {
+                "name": "Layers",
+                "text": "Iterations of layers to draw"
+            },
+            {
+                "name": "AA iterations",
+                "text": "1 is default (no AA) 4 is a good number. Can be expensive"
+            },
+            {
+                "name": "Frequency",
+                "text": "Frequency of lines"
+            },
+            {
+                "name": "Frequency step size",
+                "text": "Step size between frequency of lines"
+            },
+            {
+                "name": "trigger",
+                "text": "TRigger out"
+            }
+        ]
+    }
+}

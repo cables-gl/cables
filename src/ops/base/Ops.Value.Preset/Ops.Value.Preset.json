@@ -67,21 +67,6 @@
                 "type": "1",
                 "name": "Delete",
                 "group": "Manage Presets"
-            },
-            {
-                "type": "0",
-                "name": ".preset_r_ptr86tfkr_94ng9ag0c",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_g_ptr86tfkr_b823ycx5r",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_b_ptr86tfkr_0swivdnb3",
-                "subType": "number"
             }
         ],
         "portsOut": [

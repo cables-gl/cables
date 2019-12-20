@@ -18,6 +18,11 @@ function init()
 {
     position++;
     var txt=inText.get();
+    if(!txt)
+    {
+        result.set("");
+        return;
+    }
     var alphab=inChars.get();
 
     resultString="";
@@ -44,11 +49,22 @@ inUpdate.onTriggered=function()
     var txt=inText.get();
     var alphab=inChars.get();
 
+    if(!txt)
+    {
+        result.set("");
+        return;
+    }
+
     if(!resultString) init();
     var newStr="";
 
     for(var i=0;i<txt.length;i++)
     {
+        if(txt[i]=='\n')
+        {
+            newStr+='\n';
+        }
+        else
         if(txt[i]!=resultString[i])
         {
             var newindex=alphab.indexOf(resultString[i])+1;

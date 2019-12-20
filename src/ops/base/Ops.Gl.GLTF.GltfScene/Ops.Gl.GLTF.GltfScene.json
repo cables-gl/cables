@@ -1,0 +1,104 @@
+{
+    "id": "92dba573-955d-4dff-b454-75ae184bab26",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1575540499966
+        },
+        {
+            "message": "Ops.User.pandur.GlbTest renamed to Ops.Gl.GLTF",
+            "author": "pandur",
+            "date": 1575641188314
+        },
+        {
+            "message": "Ops.Gl.GLTF renamed to Ops.Gl.GLTF.GltfScene",
+            "author": "pandur",
+            "date": 1576232952766
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1575540508530,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "data"
+            },
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "glb File"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Auto Scale",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Show Structure"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sync to timeline",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Materials"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "5",
+                "name": "Generator"
+            },
+            {
+                "type": "0",
+                "name": "GLTF Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Time",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfScene"
+    }
+}

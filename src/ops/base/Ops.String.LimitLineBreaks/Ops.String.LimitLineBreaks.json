@@ -24,6 +24,11 @@
                 "type": "0",
                 "name": "Reverse",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Force Num Lines",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -1,6 +1,7 @@
 import { Framebuffer } from "./cgl_framebuffer";
 import { Framebuffer2 } from "./cgl_framebuffer2";
 import { Geometry } from "./cgl_geom";
+import { BoundingBox } from "./cgl_boundingbox";
 import { Marker, WireCube, WirePoint } from "./cgl_marker";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Mesh, MESH } from "./cgl_mesh";
@@ -26,6 +27,7 @@ const CGL = Object.assign(
         Framebuffer,
         Framebuffer2,
         Geometry,
+        BoundingBox,
         Marker,
         WirePoint,
         WireCube,

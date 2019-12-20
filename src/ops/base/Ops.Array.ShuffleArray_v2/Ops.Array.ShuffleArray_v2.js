@@ -28,6 +28,11 @@ function update()
 {
     const arr = inArr.get();
 
+    if(!arr)
+    {
+        outArr.set(null);
+        return;
+    }
     if(arr.length!=newArr.length) newArr.length = arr.length;
 
     var i = 0;

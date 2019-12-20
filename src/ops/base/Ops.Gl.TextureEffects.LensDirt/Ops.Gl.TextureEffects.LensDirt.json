@@ -1,0 +1,127 @@
+{
+    "id": "e78c3b3f-ed23-4363-a3ac-74a2bb279f7d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1575997748747
+        }
+    ],
+    "authorName": "andro",
+    "created": 1575997761586,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Zoom",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Iterations",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Seed",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Spot edge",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gamma",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.LensDirt"
+    },
+    "summary": "Creates a lens dirt like texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "amount of blending"
+            },
+            {
+                "name": "Offset X",
+                "text": "offset X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "offset Y axis"
+            },
+            {
+                "name": "Zoom",
+                "text": "Zoom factor"
+            },
+            {
+                "name": "Iterations",
+                "text": "Iteration count. Max 300"
+            },
+            {
+                "name": "Seed",
+                "text": "Random number seed"
+            },
+            {
+                "name": "Spot edge",
+                "text": "defines softness and hardness on most shapes"
+            },
+            {
+                "name": "Gamma",
+                "text": "Gamma blending factor. Default 1."
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}

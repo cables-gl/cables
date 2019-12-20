@@ -5,7 +5,7 @@ shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
 
-op.toWorkPortsNeedToBeLinked(render,trigger);
+op.toWorkPortsNeedToBeLinked(render);
 
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);

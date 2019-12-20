@@ -20,12 +20,19 @@ function resolve()
             'https://api.soundcloud.com/resolve.json?url='+soundCloudUrl.get()+'&client_id='+clientId,
             function(err,_data,xhr)
             {
-                var data=JSON.parse(_data);
-                streamUrl.set(data.stream_url+"?client_id="+clientId);
-                artworkUrl.set(data.artwork_url);
-                title.set(data.title);
-                op.log('stream url:'+data.stream_url);
-                op.log(data);
+                try
+                {
+                    var data=JSON.parse(_data);
+                    streamUrl.set(data.stream_url+"?client_id="+clientId);
+                    artworkUrl.set(data.artwork_url);
+                    title.set(data.title);
+                    op.log('stream url:'+data.stream_url);
+                    op.log(data);
+                }
+                catch(e)
+                {
+                    console.log(e);
+                }
             });
 
 }
