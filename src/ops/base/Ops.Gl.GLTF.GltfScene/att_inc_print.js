@@ -88,13 +88,17 @@ function printMaterial(mat,idx)
 function printInfo()
 {
     if(!gltf)return;
-    var html='<div style="">';
+    var html='<div style="overflow:scroll;width:100%;height:100%">';
 
-    html+='<h3>Materials ('+gltf.json.materials.length+')</h3>';
 
-    if(!gltf.json.materials || gltf.json.materials.length==0) html+="No materials";
+    if(!gltf.json.materials || gltf.json.materials.length==0)
+    {
+        html+='<h3>Materials</h3>';
+        html+="No materials";
+    }
     else
     {
+        html+='<h3>Materials ('+gltf.json.materials.length+')</h3>';
         html+='<table class="table treetable">';
         html+='<tr>';
         html+=' <th>Name</th>';
