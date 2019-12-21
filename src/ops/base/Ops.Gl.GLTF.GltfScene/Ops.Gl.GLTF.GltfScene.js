@@ -135,9 +135,7 @@ function loadBin()
 op.onFileChanged=function(fn)
 {
     if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
-
 };
-
 
 function reloadSoon(nocache)
 {
@@ -179,7 +177,6 @@ function updateMaterials()
     }
     needsMatUpdate=false;
 }
-
 
 function hideNodesFromData()
 {

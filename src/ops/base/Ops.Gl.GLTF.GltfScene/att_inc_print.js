@@ -9,6 +9,7 @@ function closeTab()
 function printNode(html,node,level)
 {
     if(!gltf)return;
+    sizes={};
     html+='<tr class="row">';
     var i=0;
     var ident="";
@@ -42,7 +43,11 @@ function printNode(html,node,level)
         for(i=0;i<node.mesh.meshes.length;i++)
         {
             // html+='<a onclick="" class="treebutton">Mesh '+node.mesh.meshes[i].name+'</a> ('+node.mesh.meshes[i].geom.vertices.length/3+' verts)</a>';
-            html+='Mesh '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) Material:'+gltf.json.materials[node.mesh.meshes[i].material].name;
+            html+='Mesh '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) ';
+
+            if(node.mesh.meshes[i].material)
+                html+='Material:'+gltf.json.materials[node.mesh.meshes[i].material].name;
+
         }
     }
 
@@ -140,6 +145,10 @@ function printInfo()
     html+=' <th>Attributes</th>';
     html+='</tr>';
 
+
+    var sizeBufferViews=[];
+    sizes.meshes=0;
+
     for(var i=0;i<gltf.json.meshes.length;i++)
     {
         html+='<tr>';
@@ -148,7 +157,8 @@ function printInfo()
         html+='<td>';
         for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
         {
-            html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
+            if(gltf.json.meshes[i].primitives[j].material)
+                html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
         }
         html+='</td>';
 
@@ -165,6 +175,36 @@ function printInfo()
         html+='</td>';
 
         html+='</tr>';
+
+
+        for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
+        {
+            var bufView=gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
+
+            if(sizeBufferViews.indexOf(bufView)==-1)
+            {
+                sizeBufferViews.push(bufView);
+                sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+            }
+
+
+            for(var k in gltf.json.meshes[i].primitives[j].attributes)
+            {
+                const attr=gltf.json.meshes[i].primitives[j].attributes[k];
+                const bufView=gltf.json.accessors[attr].bufferView;
+
+                if(sizeBufferViews.indexOf(bufView)==-1)
+                {
+                    sizeBufferViews.push(bufView);
+                    sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+                }
+
+
+            }
+
+        }
+
+
     }
     html+='</table>';
 
@@ -180,8 +220,30 @@ function printInfo()
         html+='  <th>paths</th>';
         html+='</tr>';
 
+        sizes.animations=0;
+
         for(var i=0;i<gltf.json.animations.length;i++)
         {
+            for(var j=0;j< gltf.json.animations[i].samplers.length;j++)
+            {
+                var bufView=gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
+                if(sizeBufferViews.indexOf(bufView)==-1)
+                {
+                    sizeBufferViews.push(bufView);
+                    sizes.animations+=gltf.json.bufferViews[bufView].byteLength;
+                }
+
+                var bufView=gltf.json.accessors[gltf.json.animations[i].samplers[j].output].bufferView;
+                if(sizeBufferViews.indexOf(bufView)==-1)
+                {
+                    sizeBufferViews.push(bufView);
+                    sizes.animations+=gltf.json.bufferViews[bufView].byteLength;
+                }
+
+            }
+
+
+
             html+='<tr>';
             html+='  <td>'+gltf.json.animations[i].name+'</td>';
             html+='  <td>'+gltf.nodes[gltf.json.animations[i].channels[0].target.node].name+'</td>';
@@ -211,16 +273,55 @@ function printInfo()
         html+='  <th>type</th>';
         html+='</tr>';
 
+        sizes.images=0;
+
         for(var i=0;i<gltf.json.images.length;i++)
         {
+            sizes.images+=gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
+
             html+='<tr>';
             html+='<td>'+gltf.json.images[i].name+'</td>';
             html+='<td>'+gltf.json.images[i].mimeType+'</td>';
             html+='<tr>';
         }
         html+='</table>';
-
     }
+
+
+    // html+='data size: '+;
+    const sizeBin=gltf.json.buffers[0].byteLength;
+    html+='<h3>Binary Data ('+readableSize(sizeBin)+')</h3>';
+
+
+    html+='<table class="table treetable">';
+    html+='<tr>';
+    html+='  <th>name</th>';
+    html+='  <th>size</th>';
+    html+='  <th>%</th>';
+    html+='</tr>';
+    var sizeUnknown=sizeBin;
+    for(var i in sizes)
+    {
+        // html+=i+':'+Math.round(sizes[i]/1024);
+        html+='<tr>';
+        html+='<td>'+i+'</td>';
+        html+='<td>'+readableSize(sizes[i])+' </td>';
+        html+='<td>'+Math.round(sizes[i]/sizeBin*100)+'% </td>';
+        html+='<tr>';
+        sizeUnknown-=sizes[i];
+    }
+
+    if(sizeUnknown!=0)
+    {
+        html+='<tr>';
+        html+='<td>unknown</td>';
+        html+='<td>'+readableSize(sizeUnknown)+' </td>';
+        html+='<td>'+Math.round(sizeUnknown/sizeBin*100)+'% </td>';
+        html+='<tr>';
+    }
+
+    html+='</table>';
+
 
 
     html+='</div>';
@@ -234,3 +335,13 @@ function printInfo()
 
     console.log(gltf);
 }
+
+function readableSize(n)
+{
+    if(n>1024)return Math.round(n/1024)+' kb';
+    if(n>1024*500)return Math.round(n/1024)+' mb';
+    else return n+' bytes';
+
+}
+
+
