@@ -201,6 +201,28 @@ function printInfo()
         html+='<h3>Animations (0)</h3>';
     }
 
+    if(gltf.json.images)
+    {
+        html+='<h3>Images ('+gltf.json.images.length+')</h3>';
+        html+='<table class="table treetable">';
+
+        html+='<tr>';
+        html+='  <th>name</th>';
+        html+='  <th>type</th>';
+        html+='</tr>';
+
+        for(var i=0;i<gltf.json.images.length;i++)
+        {
+            html+='<tr>';
+            html+='<td>'+gltf.json.images[i].name+'</td>';
+            html+='<td>'+gltf.json.images[i].mimeType+'</td>';
+            html+='<tr>';
+        }
+        html+='</table>';
+
+    }
+
+
     html+='</div>';
 
     // CABLES.UI.MODAL.show(html);
