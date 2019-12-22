@@ -5,7 +5,6 @@ function closeTab()
     if(tab)gui.mainTabs.closeTab(tab.id);
 }
 
-
 function printNode(html,node,level)
 {
     if(!gltf)return;
@@ -31,28 +30,40 @@ function printNode(html,node,level)
     if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
     else html+='<span class="icon icon-circle"></span> &nbsp;';
 
-    html+='<a>'+node.name+'</a>';
+    html+=node.name;
     html+='</td>';
     html+='<td>';
     html+='</td>';
 
-    html+='<td>';
+    // html+='<td>';
 
     if(node.mesh)
     {
+        html+='<td>';
         for(i=0;i<node.mesh.meshes.length;i++)
         {
-            // html+='<a onclick="" class="treebutton">Mesh '+node.mesh.meshes[i].name+'</a> ('+node.mesh.meshes[i].geom.vertices.length/3+' verts)</a>';
-            html+='Mesh '+node.mesh.meshes[i].name+' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) ';
-
-            if(node.mesh.meshes[i].material)
-                html+='Material:'+gltf.json.materials[node.mesh.meshes[i].material].name;
-
+            html+=node.mesh.meshes[i].name;
+            // html+=' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) ';
         }
+        html+='</td>';
+        html+='<td>';
+        for(i=0;i<node.mesh.meshes.length;i++)
+        {
+            if(node.mesh.meshes[i].material)
+                html+=gltf.json.materials[node.mesh.meshes[i].material].name;
+        }
+        html+='</td>';
+
     }
+    else
+    {
+        html+='<td>-</td><td>-</td>';
+    }
+    html+='<td>';
+    if(node._animRot ||node._animScale ||node._animTrans) html+='Yes';
+    else html+='-';
 
     html+='</td>';
-
     html+='<td>';
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
@@ -74,14 +85,28 @@ function printNode(html,node,level)
 function printMaterial(mat,idx)
 {
     var html='<tr>';
-    html+=' <td>'+idx+'<td>';
-    html+=' <td>'+mat.name+'<td>';
+    html+=' <td>'+idx+'</td>';
+    html+=' <td>'+mat.name+'</td>';
     // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
 
 
+    html+=' <td>';
+    if(mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
+    {
+        var rgb='';
+        rgb+=''+Math.round(mat.pbrMetallicRoughness.baseColorFactor[0]*255);
+        rgb+=','+Math.round(mat.pbrMetallicRoughness.baseColorFactor[1]*255);
+        rgb+=','+Math.round(mat.pbrMetallicRoughness.baseColorFactor[2]*255);
+
+        html+='<div style="width:15px;height:15px;;background-color:rgb('+rgb+')">&nbsp;</a>';
+
+        // html+='<td>';
+    }
     html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.patch().getSelectedOps()[0].op.assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
-    html+=' <td style="width:60%"><td>';
+    html+='<td>';
+
+
 
     // console.log();
 
@@ -112,10 +137,10 @@ function printInfo()
         html+='<h3>Materials ('+gltf.json.materials.length+')</h3>';
         html+='<table class="table treetable">';
         html+='<tr>';
+        html+=' <th>Index</th>';
         html+=' <th>Name</th>';
-        html+=' <th></th>';
-        html+=' <th></th>';
-        html+=' <th></th>';
+        html+=' <th>Color</th>';
+        html+=' <th>Function</th>';
         html+=' <th></th>';
         html+='</tr>';
         for(var i=0;i<gltf.json.materials.length;i++)
@@ -129,8 +154,11 @@ function printInfo()
     html+='<table class="table treetable">';
 
     html+='<tr>';
-    html+=' <th colspan="20">Name</th>';
-    html+=' <th colspan="110"></th>';
+    html+=' <th colspan="21">Name</th>';
+    html+=' <th>Mesh</th>';
+    html+=' <th>Material</th>';
+    html+=' <th>Anim</th>';
+    html+=' <th>Show</th>';
     html+='</tr>';
 
     for(var i=0;i<gltf.nodes.length;i++)

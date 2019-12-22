@@ -12,6 +12,7 @@ const
     inLoop=op.inBool("Loop",true),
 
     inMaterials=op.inObject("Materials"),
+    nextBefore=op.outTrigger("Render Before"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("GLTF Version"),
@@ -84,6 +85,9 @@ inExec.onTriggered=function()
         mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
     }
 
+    cgl.frameStore.currentScene=gltf;
+    nextBefore.trigger();
+
     if(gltf && inRender.get())
     {
         gltf.time=time;
@@ -101,7 +105,6 @@ inExec.onTriggered=function()
             if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
     }
 
-    cgl.frameStore.currentScene=gltf;
     next.trigger();
     cgl.frameStore.currentScene=null;
 
@@ -176,6 +179,8 @@ function updateMaterials()
         }
     }
     needsMatUpdate=false;
+    if(tab)printInfo();
+
 }
 
 function hideNodesFromData()
