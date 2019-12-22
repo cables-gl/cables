@@ -9,7 +9,7 @@ function closeTab()
 function printNode(html,node,level)
 {
     if(!gltf)return;
-    sizes={};
+
     html+='<tr class="row">';
     var i=0;
     var ident="";
@@ -93,7 +93,13 @@ function printMaterial(mat,idx)
 function printInfo()
 {
     if(!gltf)return;
+
+    const sizes={};
+
     var html='<div style="overflow:scroll;width:100%;height:100%">';
+
+
+    html+='generator:'+gltf.json.asset.generator;
 
 
     if(!gltf.json.materials || gltf.json.materials.length==0)
@@ -141,7 +147,7 @@ function printInfo()
     html+='<tr>';
     html+=' <th>Name</th>';
     html+=' <th>Material</th>';
-    html+=' <th>Indices</th>';
+    html+=' <th>Vertices</th>';
     html+=' <th>Attributes</th>';
     html+='</tr>';
 
@@ -159,13 +165,19 @@ function printInfo()
         {
             if(gltf.json.meshes[i].primitives[j].material)
                 html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
+                else html+='None';
         }
         html+='</td>';
 
         html+='<td>';
         for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
         {
-            html+=gltf.json.meshes[i].primitives[j].indices;
+            // html+=gltf.json.meshes[i].primitives[j].indices;
+            if(gltf.json.meshes[i].primitives[j].attributes.POSITION)
+            {
+                html+=gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count;
+
+            }
         }
         html+='</td>';
 
@@ -215,9 +227,11 @@ function printInfo()
         html+='<h3>Animations ('+gltf.json.animations.length+')</h3>';
         html+='<table class="table treetable">';
         html+='<tr>';
-        html+='  <th>name</th>';
-        html+='  <th>target node</th>';
-        html+='  <th>paths</th>';
+        html+='  <th>Name</th>';
+        html+='  <th>Target node</th>';
+        html+='  <th>Path</th>';
+        html+='  <th>Interpolation</th>';
+        html+='  <th>Keys</th>';
         html+='</tr>';
 
         sizes.animations=0;
@@ -244,16 +258,30 @@ function printInfo()
 
 
 
-            html+='<tr>';
-            html+='  <td>'+gltf.json.animations[i].name+'</td>';
-            html+='  <td>'+gltf.nodes[gltf.json.animations[i].channels[0].target.node].name+'</td>';
-            html+='  <td>';
 
             for(var j=0;j< gltf.json.animations[i].channels.length;j++)
-                html+=gltf.json.animations[i].channels[j].target.path+' ';
+            {
+                html+='<tr>';
+                html+='  <td>'+gltf.json.animations[i].name+' ('+i+')</td>';
 
-            html+='  </td>';
-            html+='</tr>';
+                html+='  <td>'+gltf.nodes[gltf.json.animations[i].channels[j].target.node].name+'</td>';
+                html+='  <td>';
+                html+=gltf.json.animations[i].channels[j].target.path+' ';
+                html+='  </td>';
+
+                const smplidx=gltf.json.animations[i].channels[j].sampler;
+                const smplr=gltf.json.animations[i].samplers[smplidx];
+
+                html+='  <td>'+smplr.interpolation+'</td>'
+
+
+                html+='  <td>'+gltf.json.accessors[smplr.output].count;+'</td>'
+
+
+
+                html+='</tr>';
+
+            }
         }
         html+='</table>';
 
