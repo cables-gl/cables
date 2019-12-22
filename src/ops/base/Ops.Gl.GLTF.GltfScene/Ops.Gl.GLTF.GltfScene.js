@@ -135,14 +135,10 @@ function loadBin()
 
 op.onFileChanged=function(fn)
 {
-    if(inFile.get() && inFile.get().indexOf(fn)>-1)
-    {
-        reloadSoon();
-        if(tab)printInfo();
-    }
+
+    if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
 
 };
-
 
 function reloadSoon(nocache)
 {
@@ -172,12 +168,18 @@ function updateMaterials()
             const name=portName.get();
             if(gltf.json.materials)
                 for(var i=0;i<gltf.json.materials.length;i++)
-                    if(gltf.json.materials[i].name==name) gltf.shaders[i]=portShader.get();
+                    if(gltf.json.materials[i].name==name)
+                    {
+                        if(gltf.shaders[i])
+                        {
+                            console.log("double material assignment:",name);
+                        }
+                        gltf.shaders[i]=portShader.get();
+                    }
         }
     }
     needsMatUpdate=false;
 }
-
 
 function hideNodesFromData()
 {

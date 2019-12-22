@@ -357,7 +357,7 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
     });
 };
 
-export const ajax = function (url, cb, method, post, contenttype, jsonp)
+export const ajax = function (url, cb, method, post, contenttype, jsonp, headers = {})
 {
     request({
         url,
@@ -367,6 +367,7 @@ export const ajax = function (url, cb, method, post, contenttype, jsonp)
         contenttype,
         sync: false,
         jsonp,
+        headers,
     });
 };
 
@@ -403,6 +404,17 @@ export const request = function (options)
     });
 
     xhr.open(options.method ? options.method.toUpperCase() : "GET", options.url, !options.sync);
+
+    if (typeof options.headers === "object")
+    {
+        const keys = Object.keys(options.headers);
+        for (let i = 0; i < keys.length; i++)
+        {
+            const name = keys[i];
+            const value = options.headers[name];
+            xhr.setRequestHeader(name, value);
+        }
+    }
 
     if (!options.post && !options.data)
     {

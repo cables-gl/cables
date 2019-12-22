@@ -1,0 +1,33 @@
+{
+    "authorName": "cables",
+    "id": "6c6927e6-abd3-4427-92b2-4095f6f0b1c0",
+    "created": 1576853663819,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayUniqueItemInfo"
+    },
+    "summary": "will give you information about the count of \"duplicates\" in an array, as an object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "an array of"
+            }
+        ]
+    }
+}

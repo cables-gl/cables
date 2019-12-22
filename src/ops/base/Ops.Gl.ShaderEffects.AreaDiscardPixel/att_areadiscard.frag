@@ -1,8 +1,5 @@
 
 
-
-
-
 float MOD_de=0.0;
 
 #ifdef MOD_AREA_SPHERE
