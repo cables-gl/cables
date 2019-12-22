@@ -1,0 +1,38 @@
+{
+    "authorName": "pandur",
+    "id": "9dfd0ee4-81e1-438c-8a99-4894c64f41cb",
+    "created": 1577014342965,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "5",
+                "name": "Discard",
+                "group": "Face Fulling"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "group": "Face Fulling",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.FaceCulling_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.FaceCulling_v2 renamed to Ops.Gl.FaceCulling_v2",
+            "author": "pandur",
+            "date": 1577014912398
+        }
+    ]
+}

@@ -259,6 +259,8 @@ const Context = function (_patch)
         if (this._stackBlend.length > 0) Log.warn("blend stack length !=0 at end of rendering...");
         if (this._stackBlendMode.length > 0) Log.warn("blendMode stack length !=0 at end of rendering...");
         if (this._shaderStack.length > 0) Log.warn("this._shaderStack length !=0 at end of rendering...");
+        if (this._stackCullFace.length > 0) Log.warn("this._stackCullFace length !=0 at end of rendering...");
+        if (this._stackCullFaceFacing.length > 0) Log.warn("this._stackCullFaceFacing length !=0 at end of rendering...");
 
         if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight)
         {
@@ -389,6 +391,7 @@ const Context = function (_patch)
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
+        this.pushCullFace(false);
 
         if (this.clearCanvasTransparent)
         {
@@ -425,6 +428,7 @@ const Context = function (_patch)
         this.popDepthTest();
         this.popDepthWrite();
         this.popDepthFunc();
+        this.popCullFace();
         this.popBlend();
         this.popBlendMode();
 
@@ -708,6 +712,7 @@ Context.prototype.popDepthTest = function ()
     else this.gl.enable(this.gl.DEPTH_TEST);
 };
 
+// --------------------------------------
 // state depthwrite
 
 Context.prototype._stackDepthWrite = [];
@@ -728,6 +733,56 @@ Context.prototype.popDepthWrite = function ()
     this.gl.depthMask(this._stackDepthWrite[this._stackDepthWrite.length - 1]);
 };
 
+
+// --------------------------------------
+// state CullFace
+
+Context.prototype._stackCullFace = [];
+Context.prototype.pushCullFace = function (b)
+{
+    this._stackCullFace.push(b);
+
+    if(b) this.gl.enable(this.gl.CULL_FACE);
+    else this.gl.disable(this.gl.CULL_FACE);
+};
+
+Context.prototype.stateCullFace = function ()
+{
+    return this._stackCullFace[this._stackCullFace.length - 1];
+};
+
+Context.prototype.popCullFace = function ()
+{
+    this._stackCullFace.pop();
+
+    if(this._stackCullFace[this._stackCullFace.length - 1]) this.gl.enable(this.gl.CULL_FACE);
+    else this.gl.disable(this.gl.CULL_FACE);
+};
+
+
+// --------------------------------------
+// state CullFace Facing
+
+Context.prototype._stackCullFaceFacing = [];
+Context.prototype.pushCullFaceFacing = function (b)
+{
+    this._stackCullFaceFacing.push(b);
+    this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+};
+
+Context.prototype.stateCullFaceFacing = function ()
+{
+    return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
+};
+
+Context.prototype.popCullFaceFacing = function ()
+{
+    this._stackCullFaceFacing.pop();
+    this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+};
+
+
+// --------------------------------------
 // state depthfunc
 
 Context.prototype._stackDepthFunc = [];
@@ -770,6 +825,8 @@ Context.prototype.popDepthFunc = function ()
     this._stackDepthFunc.pop();
     if (this._stackDepthFunc.length > 0) this.gl.depthFunc(this._stackDepthFunc[this._stackDepthFunc.length - 1]);
 };
+
+
 
 Context.prototype._stackBlend = [];
 

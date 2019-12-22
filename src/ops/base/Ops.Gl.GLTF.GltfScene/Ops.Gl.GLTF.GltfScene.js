@@ -127,6 +127,7 @@ function loadBin()
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
+        if(tab)printInfo();
     };
 
     oReq.send(null);
@@ -134,7 +135,11 @@ function loadBin()
 
 op.onFileChanged=function(fn)
 {
-    if(inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
+    if(inFile.get() && inFile.get().indexOf(fn)>-1)
+    {
+        reloadSoon();
+        if(tab)printInfo();
+    }
 
 };
 
