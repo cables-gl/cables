@@ -737,6 +737,13 @@ Context.prototype.popDepthWrite = function ()
 // --------------------------------------
 // state CullFace
 
+/**
+ * push face culling face enabled state
+ * @function pushCullFaceFacing
+ * @param {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype._stackCullFace = [];
 Context.prototype.pushCullFace = function (b)
 {
@@ -746,11 +753,24 @@ Context.prototype.pushCullFace = function (b)
     else this.gl.disable(this.gl.CULL_FACE);
 };
 
+/**
+ * current state of face culling
+ * @function stateCullFace
+ * @returns {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.stateCullFace = function ()
 {
     return this._stackCullFace[this._stackCullFace.length - 1];
 };
 
+/**
+ * pop face culling enabled state
+ * @function popCullFaceFacing
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.popCullFace = function ()
 {
     this._stackCullFace.pop();
@@ -763,6 +783,13 @@ Context.prototype.popCullFace = function ()
 // --------------------------------------
 // state CullFace Facing
 
+/**
+ * push face culling face side
+ * @function pushCullFaceFacing
+ * @param {Number} cgl.gl.FRONT_AND_BACK, cgl.gl.BACK or cgl.gl.FRONT
+ * @memberof Context
+ * @instance
+ */
 Context.prototype._stackCullFaceFacing = [];
 Context.prototype.pushCullFaceFacing = function (b)
 {
@@ -770,11 +797,24 @@ Context.prototype.pushCullFaceFacing = function (b)
     this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
 };
 
+/**
+ * current state of face culling side
+ * @function stateCullFaceFacing
+ * @returns {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.stateCullFaceFacing = function ()
 {
     return this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1];
 };
 
+/**
+ * pop face culling face side
+ * @function popCullFaceFacing
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.popCullFaceFacing = function ()
 {
     this._stackCullFaceFacing.pop();
