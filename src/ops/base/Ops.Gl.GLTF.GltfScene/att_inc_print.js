@@ -377,9 +377,6 @@ function printInfo()
     }
 
     html+='</table>';
-
-
-
     html+='</div>';
 
     // CABLES.UI.MODAL.show(html);
