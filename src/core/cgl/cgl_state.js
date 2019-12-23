@@ -392,6 +392,7 @@ const Context = function (_patch)
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
         this.pushCullFace(false);
+        this.pushCullFaceFacing(cgl.gl.BACK);
 
         if (this.clearCanvasTransparent)
         {
@@ -429,6 +430,7 @@ const Context = function (_patch)
         this.popDepthWrite();
         this.popDepthFunc();
         this.popCullFace();
+        this.popCullFaceFacing();
         this.popBlend();
         this.popBlendMode();
 
@@ -782,6 +784,8 @@ Context.prototype.popCullFace = function ()
 
 // --------------------------------------
 // state CullFace Facing
+
+
 
 /**
  * push face culling face side
