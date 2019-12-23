@@ -25,6 +25,10 @@
                 "type": "0",
                 "name": "unpackPreMultipliedAlpha",
                 "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic"
             }
         ],
         "portsOut": [
