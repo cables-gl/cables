@@ -44,6 +44,10 @@
                 "subType": "boolean"
             },
             {
+                "type": "1",
+                "name": "Show Structure"
+            },
+            {
                 "type": "0",
                 "name": "Time",
                 "group": "Timing",
@@ -56,8 +60,10 @@
                 "subType": "boolean"
             },
             {
-                "type": "1",
-                "name": "Show Structure"
+                "type": "0",
+                "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
             },
             {
                 "type": "2",
@@ -65,6 +71,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Render Before"
+            },
             {
                 "type": "1",
                 "name": "Next"
@@ -87,6 +97,10 @@
                 "type": "0",
                 "name": "Anim Time",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfScene"

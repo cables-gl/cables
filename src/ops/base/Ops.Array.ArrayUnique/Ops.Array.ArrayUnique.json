@@ -1,0 +1,37 @@
+{
+    "authorName": "cables",
+    "id": "81204fcc-c416-4948-9cba-2218763db4fc",
+    "created": 1576853657478,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Array.ArrayUnique"
+    },
+    "summary": "filters an array for duplicate items and returns all unique items in a new array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "In",
+                "text": "an array with (potentially) non unique values"
+            },
+            {
+                "name": "Result",
+                "text": "the array with the unique values"
+            }
+        ]
+    }
+}

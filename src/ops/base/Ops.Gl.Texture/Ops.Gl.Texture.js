@@ -3,13 +3,13 @@ var tfilter=op.inSwitch("filter",['nearest','linear','mipmap']);
 var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
 var flip=op.inValueBool("flip",false);
 var unpackAlpha=op.inValueBool("unpackPreMultipliedAlpha",false);
+var aniso=op.inSwitch("Anisotropic",[0,1,2,4,8,16],0);
 
 var textureOut=op.outTexture("texture");
 var width=op.outValue("width");
 var height=op.outValue("height");
 var loading=op.outValue("loading");
 var ratio=op.outValue("Aspect Ratio");
-
 
 op.setPortGroup("Size",[width,height]);
 
@@ -20,10 +20,11 @@ op.toWorkPortsNeedToBeLinked(textureOut);
 const cgl=op.patch.cgl;
 var cgl_filter=0;
 var cgl_wrap=0;
+var cgl_aniso=0;
 
 filename.onChange=flip.onChange=function(){reloadSoon();};
 
-tfilter.onChange=onFilterChange;
+aniso.onChange=tfilter.onChange=onFilterChange;
 wrap.onChange=onWrapChange;
 unpackAlpha.onChange=function(){ reloadSoon(); };
 
@@ -95,6 +96,7 @@ function realReload(nocache)
                 // tex.printInfo();
 
             },{
+                anisotropic:cgl_aniso,
                 wrap:cgl_wrap,
                 flip:flip.get(),
                 unpackAlpha:unpackAlpha.get(),
@@ -120,8 +122,11 @@ function realReload(nocache)
 function onFilterChange()
 {
     if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
-    if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
-    if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+    else if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
+    else if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+    else if(tfilter.get()=='Anisotropic') cgl_filter=CGL.Texture.FILTER_ANISOTROPIC;
+
+    cgl_aniso=aniso.get();
 
     reloadSoon();
 }

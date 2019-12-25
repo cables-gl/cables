@@ -144,8 +144,6 @@ op.render.onTriggered=function()
 
     if(cgl.getShader()!=shader)
     {
-
-        console.log("Areapixeldiscard shader change!");
         if(shader) removeModule();
         shader=cgl.getShader();
 

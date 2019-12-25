@@ -1,18 +1,15 @@
 
 
-
-
-
 float MOD_de=0.0;
 
 #ifdef MOD_AREA_SPHERE
-    MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),MOD_areaPos.xyz/MOD_sizeAxis);
+    MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z)/MOD_sizeAxis,MOD_areaPos.xyz/MOD_sizeAxis);
 #endif
 
 #ifdef MOD_AREA_BOX
-    if( abs(MOD_y-MOD_areaPos.y/(MOD_sizeAxis.y*MOD_size))>0.5 ||
-        abs(MOD_x-MOD_areaPos.x/(MOD_sizeAxis.x*MOD_size))>0.5 ||
-        abs(MOD_z-MOD_areaPos.z/(MOD_sizeAxis.z*MOD_size))>0.5 ) MOD_de=1.0;
+    if( abs(MOD_y/MOD_sizeAxis.y-MOD_areaPos.y/(MOD_sizeAxis.y*MOD_size))>0.5 ||
+        abs(MOD_x/MOD_sizeAxis.x-MOD_areaPos.x/(MOD_sizeAxis.x*MOD_size))>0.5 ||
+        abs(MOD_z/MOD_sizeAxis.z-MOD_areaPos.z/(MOD_sizeAxis.z*MOD_size))>0.5 ) MOD_de=1.0;
 #endif
 
 #ifdef MOD_AREA_AXIS_X

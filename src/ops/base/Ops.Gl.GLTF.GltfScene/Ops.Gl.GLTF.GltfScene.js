@@ -6,28 +6,22 @@ const
     inFile=op.inUrl("glb File"),
     inRender=op.inBool("Draw",true),
     inAutoSize=op.inBool("Auto Scale",true),
-    inTime=op.inFloat("Time"),
-    inTimeLine=op.inBool("Sync to timeline"),
-
     inShow=op.inTriggerButton("Show Structure"),
+    inTime=op.inFloat("Time"),
+    inTimeLine=op.inBool("Sync to timeline",false),
+    inLoop=op.inBool("Loop",true),
 
-    // inMaterialList=op.inDropDown("Material List",[]),
-    // inMaterialCreate=op.inTriggerButton("Assign Material"),
     inMaterials=op.inObject("Materials"),
-    // inNodeList=op.inDropDown("Node List",[]),
-    // inNodeCreate=op.inTriggerButton("Expose Node"),
+    nextBefore=op.outTrigger("Render Before"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
     outVersion=op.outNumber("GLTF Version"),
     outAnimLength=op.outNumber("Anim Length",0),
-    outAnimTime=op.outNumber("Anim Time",0);
+    outAnimTime=op.outNumber("Anim Time",0),
+    outAnimFinished=op.outTrigger("Finished");
 
-op.setPortGroup("Timing",[inTime,inTimeLine]);
-// op.setPortGroup("Material Mapping",[inMaterialList,inMaterialCreate,inMaterials]);
-// op.setPortGroup("Expose Nodes",[inNodeList,inNodeCreate]);
+op.setPortGroup("Timing",[inTime,inTimeLine,inLoop]);
 
-const selectMatStr="Select a material...";
-const selectNodeStr="Select a node...";
 const le=true; //little endian
 const cgl=op.patch.cgl;
 inFile.onChange=reloadSoon;
@@ -39,15 +33,22 @@ var needsMatUpdate=true;
 var timedLoader=null;
 var loadingId=null;
 var data=null;
+var scale=vec3.create();
+var lastTime=0;
 
 inShow.onTriggered=printInfo;
 dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 dataPort.onChange=loadData;
 
-// inMaterials.onLinkChanged=inMaterials.onChange=function()
-// {
-//     needsMatUpdate=true;
-// };
+inMaterials.onChange=function()
+{
+    needsMatUpdate=true;
+};
+
+op.onDelete=function()
+{
+    closeTab();
+};
 
 inTimeLine.onChange=function()
 {
@@ -55,12 +56,23 @@ inTimeLine.onChange=function()
 };
 
 
-var scale=vec3.create();
-
 inExec.onTriggered=function()
 {
     if(inTimeLine.get()) time=op.patch.timer.getTime();
-    else time=Math.max(0,inTime.get())%maxTime;
+    else time=Math.max(0,inTime.get());
+
+
+
+    if(inLoop.get())
+    {
+        time = time % maxTime;
+        if(time<lastTime)outAnimFinished.trigger();
+    }
+    else
+    {
+        if(maxTime >0 && time>=maxTime)outAnimFinished.trigger();
+    }
+    lastTime=time;
 
     cgl.pushModelMatrix();
 
@@ -68,12 +80,13 @@ inExec.onTriggered=function()
 
     if(gltf && gltf.bounds && inAutoSize.get())
     {
-
         const sc=2.5/gltf.bounds.maxAxis;
         vec3.set(scale,sc,sc,sc);
         mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
     }
 
+    cgl.frameStore.currentScene=gltf;
+    nextBefore.trigger();
 
     if(gltf && inRender.get())
     {
@@ -87,13 +100,11 @@ inExec.onTriggered=function()
             cgl.setPreviousShader();
         }
 
-
         if(needsMatUpdate) updateMaterials();
         for(var i=0;i<gltf.nodes.length;i++)
             if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
     }
 
-    cgl.frameStore.currentScene=gltf;
     next.trigger();
     cgl.frameStore.currentScene=null;
 
@@ -107,6 +118,7 @@ function loadBin()
     var oReq = new XMLHttpRequest();
     oReq.open("GET", inFile.get(), true);
     oReq.responseType = "arraybuffer";
+    closeTab();
 
     oReq.onload = function (oEvent)
     {
@@ -115,10 +127,10 @@ function loadBin()
         gltf=parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate=true;
-        updateDropdowns();
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
+        if(tab)printInfo();
     };
 
     oReq.send(null);
@@ -126,10 +138,10 @@ function loadBin()
 
 op.onFileChanged=function(fn)
 {
-    if(inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
+
+    if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
 
 };
-
 
 function reloadSoon(nocache)
 {
@@ -141,46 +153,12 @@ function reloadSoon(nocache)
     },30);
 }
 
-// inMaterialList.onChange=updateMaterialCreateButton;
-// inNodeList.onChange=updateMaterialCreateButton;
-
-function updateMaterialCreateButton()
-{
-    // if(!op.patch.isEditorMode())return;
-
-    // if(!gltf || !gltf.json || !gltf.json.materials || gltf.json.materials.length===0)
-    // {
-    //     if(gltf) console.log("NO MATERIALS!!!",gltf.json);
-    //     inMaterialList.uiAttribs.values=["no materials"];
-    //     inMaterialList.setUiAttribs({"greyout":true});
-    //     inMaterialCreate.setUiAttribs({"greyout":true});
-
-    //     inNodeList.setUiAttribs({"greyout":true});
-    //     inNodeCreate.setUiAttribs({"greyout":true});
-    //     return;
-    // }
-
-    // inMaterialList.setUiAttribs({"greyout":false});
-    // inMaterialCreate.setUiAttribs({"greyout":inMaterialList.get()==selectMatStr});
-
-    // inNodeList.setUiAttribs({"greyout":false});
-    // inNodeCreate.setUiAttribs({"greyout":inNodeList.get()==selectMatStr});
-
-}
-
-
 
 function updateMaterials()
 {
-    if(!gltf)
-    {
-        updateMaterialCreateButton();
-        return;
-    }
+    if(!gltf) return;
 
     gltf.shaders={};
-
-    // console.log("update material list");
 
     for(var j=0;j<inMaterials.links.length;j++)
     {
@@ -193,53 +171,32 @@ function updateMaterials()
             const name=portName.get();
             if(gltf.json.materials)
                 for(var i=0;i<gltf.json.materials.length;i++)
-                    if(gltf.json.materials[i].name==name) gltf.shaders[i]=portShader.get();
+                    if(gltf.json.materials[i].name==name)
+                    {
+                        if(gltf.shaders[i])
+                        {
+                            console.log("double material assignment:",name);
+                        }
+                        gltf.shaders[i]=portShader.get();
+                    }
         }
     }
-
-    // updateDropdowns();
-    // updateMaterialCreateButton();
     needsMatUpdate=false;
+    if(tab)printInfo();
+
 }
-
-
-function updateDropdowns()
-{
-    // material list
-
-    // const matNames=[selectMatStr];
-
-    // if(gltf.json.materials)
-    //     for(var i=0;i<gltf.json.materials.length;i++)
-    //         matNames.push(gltf.json.materials[i].name);
-
-    // inMaterialList.uiAttribs.values=matNames;
-    // inMaterialList.set(selectMatStr);
-
-    // node list
-
-    // const nodeNames=[selectNodeStr];
-
-    // for(var i=0;i<gltf.nodes.length;i++) nodeNames.push(gltf.nodes[i].name||'unnamed node '+i);
-
-    // inNodeList.uiAttribs.values=nodeNames;
-    // inMaterialList.set(selectNodeStr);
-}
-
-
 
 function hideNodesFromData()
 {
     if(!data)loadData();
-    // var data=loadData();
+
     if(data && data.hiddenNodes)
     {
         for(var i in data.hiddenNodes)
         {
-            // op.hideNode(data.hiddenNodes[i]);
-            console.log("hide node",i);
             const n=gltf.getNode(i);
-            n.hidden=true;
+            if(n) n.hidden=true;
+            else op.warn("node to be hidden not found",i,n);
         }
     }
 }
@@ -247,44 +204,32 @@ function hideNodesFromData()
 
 function loadData()
 {
-    // if(!\data)
-    // {
-        data=dataPort.get()
-        // console.log("RAW DATA",data);
-        if(!data || data==="")data={};
-        else data=JSON.parse(data);
+    data=dataPort.get()
 
-        // data.hiddenNodes=data.hiddenNodes||{};
+    if(!data || data==="")data={};
+    else data=JSON.parse(data);
 
-        if(gltf)hideNodesFromData();
-        console.log("LOAD DATA ",data);
-    // }
+    if(gltf)hideNodesFromData();
 
     return data;
 }
 
-
 function saveData()
 {
     dataPort.set(JSON.stringify(data));
-    console.log("saved",dataPort.get());
 }
-
 
 op.assignMaterial=function(name)
 {
-    // if(op.patch.isEditorMode())
-    // {
-        var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
-        newop.getPort("Material Name").set(name);
-        op.patch.link(op,inMaterials.name,newop,"Material");
-    // }
+    var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
+    newop.getPort("Material Name").set(name);
+    op.patch.link(op,inMaterials.name,newop,"Material");
+    gui.patch().focusOp(newop.id,true);
+    CABLES.UI.MODAL.hide();
 };
 
 op.toggleNodeVisibility=function(name)
 {
-    // loadData();
-
     const n=gltf.getNode(name);
 
     n.hidden=!n.hidden;
@@ -296,24 +241,7 @@ op.toggleNodeVisibility=function(name)
         else delete data.hiddenNodes[name];
 
     saveData();
-    // data=null;
-    // loadData();
-    // for(var i=0;i<gltf.nodes.length;i++)
-    // {
-    //     if(gltf.nodes[i].name==name)
-    //     {
-    //         gltf.nodes[i].hidden=!gltf.nodes[i].hidden;
-    //         if(gltf.nodes[i].hidden)data.hiddenNodes[name]=true;
-    //         else delete data.hiddenNodes[name]
-    //     }
-    // }
-
-
-
 }
-
-
-
 
 
 

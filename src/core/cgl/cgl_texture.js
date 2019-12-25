@@ -38,6 +38,7 @@ const Texture = function (__cgl, options)
     this.height = 0;
     this.flip = true;
     this.shadowMap = false;
+    this.anisotropic=0;
     this.filter = Texture.FILTER_NEAREST;
     this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
     this.texTarget = this._cgl.gl.TEXTURE_2D;
@@ -59,6 +60,7 @@ const Texture = function (__cgl, options)
         if ("unpackAlpha" in options) this.unpackAlpha = options.unpackAlpha;
         if ("flip" in options) this.flip = options.flip;
         if ("shadowMap" in options) this.shadowMap = options.shadowMap;
+        if ("anisotropic" in options) this.anisotropic = options.anisotropic;
     }
     else
     {
@@ -348,6 +350,8 @@ Texture.prototype.getInfo = function ()
     if (this.filter == Texture.FILTER_NEAREST) obj.filter = "FILTER_NEAREST";
     else if (this.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
     else if (this.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
+    // else if (this.filter == Texture.FILTER_ANISOTROPIC) obj.filter = "FILTER_ANISOTROPIC";
+    
     else obj.filter = "UNKNOWN";
     return obj;
 };
@@ -416,6 +420,16 @@ Texture.prototype._setFilter = function ()
             Log.log("unknown texture filter!", this.filter);
             throw new Error("unknown texture filter!" + this.filter);
         }
+
+        if(this.anisotropic)
+        {
+            var ext=this._cgl.gl.getExtension('EXT_texture_filter_anisotropic');
+            if(ext)
+            {
+                var max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max,this.anisotropic));
+            }
+        }
     }
 };
 
@@ -446,6 +460,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
     if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
     if (settings && settings.hasOwnProperty("wrap")) texture.wrap = settings.wrap;
+    if (settings && settings.hasOwnProperty("anisotropic")) texture.anisotropic = settings.anisotropic;
     if (settings && settings.hasOwnProperty("unpackAlpha")) texture.unpackAlpha = settings.unpackAlpha;
 
     texture.image.onabort = texture.image.onerror = function (e)
@@ -642,6 +657,7 @@ Texture.isPowerOfTwo = function (x)
 Texture.FILTER_NEAREST = 0;
 Texture.FILTER_LINEAR = 1;
 Texture.FILTER_MIPMAP = 2;
+
 
 Texture.WRAP_REPEAT = 0;
 Texture.WRAP_MIRRORED_REPEAT = 1;

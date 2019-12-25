@@ -1,13 +1,10 @@
 const
     inExec=op.inTrigger("Render"),
     inNodeName=op.inString("Node Name"),
-
     inTrans=op.inBool("Transformation",true),
     inDraw=op.inBool("Draw Mesh",true),
     inChilds=op.inBool("Draw Childs",true),
     inIgnMaterial=op.inBool("Ignore Material",true),
-
-
     next=op.outTrigger("Next"),
     outGeom=op.outObject("Geometry"),
     outFound=op.outBool("Found")
@@ -42,34 +39,30 @@ inExec.onTriggered=function()
             if(cgl.frameStore.currentScene.nodes[i].name==name)
             {
                 node=cgl.frameStore.currentScene.nodes[i];
-                // console.log("NODE",node);
                 outFound.set(true);
             }
         }
     }
 
-    // var idx=inNode.get();
-    // idx=Math.max(0,idx);
-    // idx=Math.min(cgl.frameStore.currentScene.nodes.length-1,idx);
-
-    // var n=cgl.frameStore.currentScene.nodes[idx];
-
     cgl.pushModelMatrix();
-
-
 
     if(node)
     {
-        // node.pushTransform();
-
         if(inTrans.get())
         {
             cgl.pushModelMatrix();
             node.transform(cgl);
         }
 
-        // console.log(!inDraw.get());
-        node.render(cgl, false, !inDraw.get(), inIgnMaterial.get(),!inChilds.get());
+        // render(cgl,
+        //     dontTransform,
+        //     dontDrawMesh,
+        //     ignoreMaterial,
+        //     ignoreChilds,
+        //     drawHidden,
+        //     _time)
+
+        node.render(cgl, false, !inDraw.get(), inIgnMaterial.get(),!inChilds.get(),true);
     }
 
 
@@ -81,16 +74,5 @@ inExec.onTriggered=function()
     }
 
     cgl.popModelMatrix();
-
-
-
-    // // console.log(n);
-
-
-    // if(n.mesh && n.mesh.meshes && n.mesh.meshes.length && n.mesh.meshes[0] && n.mesh.meshes[0].geom )
-    // {
-
-    //     outGeom.set(n.mesh.meshes[0].geom);
-    // }
 
 };
