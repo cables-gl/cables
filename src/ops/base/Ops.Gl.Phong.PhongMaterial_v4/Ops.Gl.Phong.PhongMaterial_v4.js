@@ -407,10 +407,14 @@ const render = function() {
         op.log("NO SHADER");
         return;
     }
-    cgl.setShader(shader);
-    shader.bindTextures();
-    outTrigger.trigger();
-    cgl.setPreviousShader();
+    if (cgl.shadowPass) {
+        outTrigger.trigger();
+    } else {
+        cgl.setShader(shader);
+        shader.bindTextures();
+        outTrigger.trigger();
+        cgl.setPreviousShader();
+    }
 }
 
 op.preRender = function() {
