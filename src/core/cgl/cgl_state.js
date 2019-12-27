@@ -391,8 +391,8 @@ const Context = function (_patch)
         this.pushDepthTest(true);
         this.pushDepthWrite(true);
         this.pushDepthFunc(cgl.gl.LEQUAL);
-        this.pushCullFace(false);
         this.pushCullFaceFacing(cgl.gl.BACK);
+        this.pushCullFace(false);
 
         if (this.clearCanvasTransparent)
         {
@@ -429,8 +429,8 @@ const Context = function (_patch)
         this.popDepthTest();
         this.popDepthWrite();
         this.popDepthFunc();
-        this.popCullFace();
         this.popCullFaceFacing();
+        this.popCullFace();
         this.popBlend();
         this.popBlendMode();
 
@@ -769,7 +769,7 @@ Context.prototype.stateCullFace = function ()
 
 /**
  * pop face culling enabled state
- * @function popCullFaceFacing
+ * @function popCullFace
  * @memberof Context
  * @instance
  */
@@ -822,7 +822,7 @@ Context.prototype.stateCullFaceFacing = function ()
 Context.prototype.popCullFaceFacing = function ()
 {
     this._stackCullFaceFacing.pop();
-    this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+    if(this._stackCullFaceFacing.length>0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
 };
 
 
