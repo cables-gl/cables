@@ -117,7 +117,6 @@ const Patch = function (cfg)
         if (this.config.patch)
         {
             this.deSerialize(this.config.patch);
-            this.timer.play();
         }
         else if (this.config.patchFile)
         {
@@ -129,19 +128,17 @@ const Patch = function (cfg)
                     if (err)
                     {
                         var txt = "";
-
                         Log.error("err", err);
                         Log.error("data", data);
                         Log.error("data", data.msg);
                         return;
                     }
-
                     this.deSerialize(data);
-                },
+                }
             );
 
-            this.timer.play();
         }
+        this.timer.play();
     }
     this.shadowStore = new ShadowStore(this.cgl);
     console.log("made with https://cables.gl");
@@ -507,10 +504,14 @@ Patch.prototype.renderFrame = function (e)
         if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
     }
 
+
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
         if (this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
     }
+    
+    this.emitEvent("onRenderFrame", time);
+
     this._frameNum++;
     if (this._frameNum == 1)
     {

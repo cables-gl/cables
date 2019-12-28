@@ -126,7 +126,7 @@ function onFilterChange()
     else if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
     else if(tfilter.get()=='Anisotropic') cgl_filter=CGL.Texture.FILTER_ANISOTROPIC;
 
-    cgl_aniso=aniso.get();
+    cgl_aniso=parseFloat(aniso.get());
 
     reloadSoon();
 }

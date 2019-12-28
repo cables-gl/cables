@@ -10,7 +10,7 @@ const
     inFont=op.inTexture("SDF Font"),
     next=op.inTrigger("Next");
 
-var p=new CABLES.GLGUI.GlPatch(CABLES.patch);
+var p=new CABLES.GLGUI.GlPatch(op.patch.cgl);
 var api=new CABLES.GLGUI.GlPatchAPI(op.patch,p);
 
 var firstTime=true;
