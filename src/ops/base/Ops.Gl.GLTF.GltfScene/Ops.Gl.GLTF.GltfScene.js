@@ -190,7 +190,7 @@ function hideNodesFromData()
 {
     if(!data)loadData();
 
-    if(data && data.hiddenNodes)
+    if(gltf && data && data.hiddenNodes)
     {
         for(var i in data.hiddenNodes)
         {
