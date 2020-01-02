@@ -115,8 +115,9 @@ function loadBin()
 {
     if(!loadingId)loadingId=cgl.patch.loading.start('gltf',inFile.get());
 
+    const url = op.patch.getFilePath(String(inFile.get()));
     var oReq = new XMLHttpRequest();
-    oReq.open("GET", inFile.get(), true);
+    oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
     closeTab();
 
@@ -190,7 +191,7 @@ function hideNodesFromData()
 {
     if(!data)loadData();
 
-    if(data && data.hiddenNodes)
+    if(gltf && data && data.hiddenNodes)
     {
         for(var i in data.hiddenNodes)
         {
