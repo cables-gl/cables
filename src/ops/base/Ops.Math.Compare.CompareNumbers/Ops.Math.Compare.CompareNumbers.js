@@ -56,13 +56,7 @@ function update()
             resultNumber=1;
             resultBoolean=true;
         }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
-        }
     }
-
     else if(selectIndex === LOGIC_LESS)
     {
         if(n1 < n2)
@@ -70,13 +64,7 @@ function update()
             resultNumber=1;
             resultBoolean=true;
         }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
-        }
     }
-
     else if(selectIndex === LOGIC_GREATER_EQUALS)
     {
         if(n1 >= n2)
@@ -84,13 +72,7 @@ function update()
             resultNumber=1;
             resultBoolean=true;
         }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
-        }
     }
-
     else if(selectIndex === LOGIC_LESS_EQUALS)
     {
         if(n1 <= n2)
@@ -98,24 +80,13 @@ function update()
             resultNumber=1;
             resultBoolean=true;
         }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
-        }
     }
-
     else if(selectIndex === LOGIC_EQUAL)
     {
         if(n1 === n2)
         {
             resultNumber=1;
             resultBoolean=true;
-        }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
         }
     }
     else if(selectIndex === LOGIC_NOT_EQUAL)
@@ -124,11 +95,6 @@ function update()
         {
             resultNumber=1;
             resultBoolean=true;
-        }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
         }
     }
     else if(selectIndex === BETWEEN)
@@ -139,11 +105,6 @@ function update()
             resultNumber=1;
             resultBoolean=true;
         }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
-        }
     }
     else if(selectIndex === BETWEEN_EQUALS)
     {
@@ -152,11 +113,6 @@ function update()
         {
             resultNumber=1;
             resultBoolean=true;
-        }
-        else
-        {
-            resultNumber=0;
-            resultBoolean=false;
         }
     }
 
