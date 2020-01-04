@@ -1,0 +1,57 @@
+{
+    "id": "169137db-9853-4384-ac5b-d10a0bbda5c2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1577977278852
+        }
+    ],
+    "authorName": "andro",
+    "created": 1577977290989,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Result boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Trigger true"
+            },
+            {
+                "type": "1",
+                "name": "Trigger false"
+            }
+        ],
+        "name": "Ops.Math.Compare.CompareNumbers"
+    }
+}
