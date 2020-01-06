@@ -53,5 +53,46 @@
             }
         ],
         "name": "Ops.Math.Compare.CompareNumbers"
+    },
+    "summary": "Performs logical comparisons on numbers (compare, operators)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Number 1",
+                "text": "The number you want to check"
+            },
+            {
+                "name": "Number 2",
+                "text": "The value you want to check against"
+            },
+            {
+                "name": "Value",
+                "text": "the value to test when one of the between modes is used."
+            },
+            {
+                "name": "Comparison mode",
+                "text": "Comparison mode"
+            },
+            {
+                "name": "Result number",
+                "text": "0 if false, 1 if true"
+            },
+            {
+                "name": "Result boolean",
+                "text": "true or false"
+            },
+            {
+                "name": "Trigger true",
+                "text": "Triggers if result is true"
+            },
+            {
+                "name": "Trigger false",
+                "text": "Triggers if result is false"
+            }
+        ]
     }
 }
