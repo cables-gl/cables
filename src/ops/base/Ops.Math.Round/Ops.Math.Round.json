@@ -10,7 +10,7 @@
             {
                 "type": "0",
                 "name": "Decimal Places",
-                "subType": "number"
+                "subType": "integer"
             }
         ],
         "portsOut": [

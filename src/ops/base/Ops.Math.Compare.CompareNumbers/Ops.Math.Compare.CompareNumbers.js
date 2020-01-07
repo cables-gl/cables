@@ -121,6 +121,7 @@ function update()
 
     if(resultBoolean) triggerOutIfTrue.trigger();
         else triggerOutIfFalse.trigger();
+
 };
 
 numberIn_1.onChange = numberIn_2.onChange = numberIn_3.onChange=update;
