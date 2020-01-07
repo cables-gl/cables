@@ -612,8 +612,8 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
         Log.log("link: op2 is null");
         return;
     }
-    var port1 = op1.getPort(port1Name);
-    var port2 = op2.getPort(port2Name);
+    const port1 = op1.getPort(port1Name);
+    const port2 = op2.getPort(port2Name);
 
     if (!port1)
     {
