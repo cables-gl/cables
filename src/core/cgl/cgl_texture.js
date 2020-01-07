@@ -3,7 +3,7 @@ import { uuid } from "../utils";
 import { Log } from "../log";
 
 var tempTexture = null;
-var tempTextureEmpty = null;
+// var tempTextureEmpty = null;
 var randomTexture = null;
 var tempTextureGradient = null;
 var DEFAULT_TEXTURE_SIZE = 8;
@@ -508,14 +508,15 @@ Texture.getTempTexture = function (cgl)
  */
 Texture.getEmptyTexture = function (cgl)
 {
-    if (tempTextureEmpty) return tempTextureEmpty;
+    if(!cgl)console.error('[getEmptyTexture] no cgl!');
+    if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
-    tempTextureEmpty = new Texture(cgl);
+    cgl.tempTextureEmpty = new Texture(cgl);
     var data = new Uint8Array(8 * 8 * 4); // .fill(0);
 
-    tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+    cgl.tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return tempTextureEmpty;
+    return cgl.tempTextureEmpty;
 };
 
 /**

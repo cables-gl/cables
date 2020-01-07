@@ -4,23 +4,14 @@
   "description": "You need to add a symlink called \"ops_base\" pointing to \"src/ops/base\" first. Will add all ops with a markdown file to the doc index (summary).",
   "main": "add_ops.js",
   "scripts": {
-    "build": "node build_docs.js && node clean.js",
-    "gen-doc": "node generate-jsdoc.js",
-    "ops": "node add_ops.js",
+    "build": "node build_docs.js ",
     "serve": "gitbook serve",
     "clean": "node clean.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Tim Pulver",
   "license": "ISC",
-  "dependencies": {
-    "documentation": "^11.0.1",
-    "fs-extra": "^8.1.0",
-    "fs-sync": "^1.0.2",
-    "replace-in-file": "^4.3.1",
-    "stream-array": "^1.1.2",
-    "vinyl-fs": "^3.0.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "gitbook-plugin-ga": "^1.0.1",
     "gitbook-cli": "^2.3.2",
