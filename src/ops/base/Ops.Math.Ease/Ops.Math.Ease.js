@@ -1,18 +1,15 @@
-var inVal=op.inValue("Value");
-
-var inMin=op.inValue("Min",0);
-var inMax=op.inValue("Max",1);
-
-var result=op.outValue("Result");
-
-var anim=new CABLES.Anim();
+const
+    inVal=op.inValue("Value"),
+    inMin=op.inValue("Min",0),
+    inMax=op.inValue("Max",1),
+    result=op.outValue("Result"),
+    anim=new CABLES.Anim();
 
 anim.createPort(op,"Easing",updateAnimEasing);
-
 anim.setValue(0,0);
 anim.setValue(1,1);
 
-inMin.onChange=inMax.onChange=updateMinMax;
+op.onLoaded=inMin.onChange=inMax.onChange=updateMinMax;
 
 function updateMinMax()
 {
@@ -22,14 +19,11 @@ function updateMinMax()
 
 function updateAnimEasing()
 {
-    anim.keys[0].setEasing(anim.defaultEasing);    
+    anim.keys[0].setEasing(anim.defaultEasing);
 }
-
 
 inVal.onChange=function()
 {
-    var v=inVal.get();
-    var r=anim.getValue(v);
+    const r=anim.getValue(inVal.get());
     result.set(r);
-
 };

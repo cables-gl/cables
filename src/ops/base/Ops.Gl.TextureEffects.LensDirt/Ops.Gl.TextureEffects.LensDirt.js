@@ -21,7 +21,7 @@ const
     offsetXUniformX=new CGL.Uniform(shader,'f','uOffsetX',offsetX),
     offsetXUniformY=new CGL.Uniform(shader,'f','uOffsetY',offsetY),
     zoomUniform=new CGL.Uniform(shader,'f','uZoom',zoom),
-    iterationsUniform=new CGL.Uniform(shader,'i','uIterations',iterations),
+    // iterationsUniform=new CGL.Uniform(shader,'i','uIterations',iterations),
     randomSeedUniform=new CGL.Uniform(shader,'i','uRandomSeed',randomSeed),
     spotEdgeUniform=new CGL.Uniform(shader,'f','uSpotEdge',spotEdge),
     gammaUniform=new CGL.Uniform(shader,'f','uGamma',gamma),
@@ -30,6 +30,16 @@ const
     amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+
+iterations.onChange=updateIterations;
+updateIterations();
+
+function updateIterations()
+{
+    var its=iterations.get();
+    its=Math.min(300,Math.max(0,its));
+    shader.define("ITERATIONS",its);
+}
 
 render.onTriggered=function()
 {

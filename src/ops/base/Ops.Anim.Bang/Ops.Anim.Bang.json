@@ -17,6 +17,11 @@
                 "type": "0",
                 "name": "Duration",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -67,7 +67,7 @@ function printNode(html,node,level)
     html+='<td>';
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().getSelectedOps()[0].op.toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
+    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().scene.getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
@@ -103,7 +103,7 @@ function printMaterial(mat,idx)
 
         // html+='<td>';
     }
-    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.patch().getSelectedOps()[0].op.assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
+    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
     html+='<td>';
 
 

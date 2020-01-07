@@ -11,6 +11,10 @@
                 "name": "exe"
             },
             {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
                 "type": "0",
                 "name": "phase",
                 "subType": "number"

@@ -1,0 +1,98 @@
+{
+    "id": "169137db-9853-4384-ac5b-d10a0bbda5c2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1577977278852
+        }
+    ],
+    "authorName": "andro",
+    "created": 1577977290989,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number 1",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number 2",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Result boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Trigger true"
+            },
+            {
+                "type": "1",
+                "name": "Trigger false"
+            }
+        ],
+        "name": "Ops.Math.Compare.CompareNumbers"
+    },
+    "summary": "Performs logical comparisons on numbers (compare, operators)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Number 1",
+                "text": "The number you want to check"
+            },
+            {
+                "name": "Number 2",
+                "text": "The value you want to check against"
+            },
+            {
+                "name": "Value",
+                "text": "the value to test when one of the between modes is used."
+            },
+            {
+                "name": "Comparison mode",
+                "text": "Comparison mode"
+            },
+            {
+                "name": "Result number",
+                "text": "0 if false, 1 if true"
+            },
+            {
+                "name": "Result boolean",
+                "text": "true or false"
+            },
+            {
+                "name": "Trigger true",
+                "text": "Triggers if result is true"
+            },
+            {
+                "name": "Trigger false",
+                "text": "Triggers if result is false"
+            }
+        ]
+    }
+}

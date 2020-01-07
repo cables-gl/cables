@@ -2,6 +2,7 @@ const
     inUpdate=op.inTrigger("update"),
     inBang=op.inTriggerButton("Bang"),
     inDuration=op.inValue("Duration",0.1),
+    invert=op.inBool("Invert",false),
     outTrigger = op.outTrigger("Trigger Out"),
     outValue=op.outValue("Value");
 
@@ -21,6 +22,8 @@ inBang.onTriggered=function()
 inUpdate.onTriggered=function()
 {
     var v=anim.getValue((CABLES.now()-startTime)/1000);
-    outValue.set(v);
+    if(invert.get()) outValue.set(1.0-v);
+        else outValue.set(v);
+
     outTrigger.trigger();
 };

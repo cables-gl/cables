@@ -1,7 +1,7 @@
 const
     result=op.outValue("result"),
     number1=op.inValueFloat("number"),
-    decPlaces=op.inValueFloat("Decimal Places",0);
+    decPlaces=op.inInt("Decimal Places",0);
 
 number1.onChange=decPlaces.onChange=exec;
 
