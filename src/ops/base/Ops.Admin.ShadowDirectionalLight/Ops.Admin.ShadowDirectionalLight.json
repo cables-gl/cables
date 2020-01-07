@@ -1,0 +1,111 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "LR-BottomTop",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Shadow Map"
+            }
+        ],
+        "name": "Ops.User.cables.ShadowLambertDirLight"
+    },
+    "authorName": "cables",
+    "id": "83023195-a31d-4341-8c55-9e093b8bd3b0",
+    "created": 1576690236278,
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowLambertDirLight renamed to Ops.Admin.ShadowDirectionalLight",
+            "author": "cables",
+            "date": 1578416828896
+        }
+    ]
+}

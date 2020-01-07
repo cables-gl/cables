@@ -1,0 +1,126 @@
+{
+    "authorName": "cables",
+    "id": "724eeabe-b9a3-4605-9383-c2f3878b5397",
+    "created": 1578011163119,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "LR-BottomTop",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap Projection"
+            }
+        ],
+        "name": "Ops.User.cables.ShadowLambertPointLight"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowLambertPointLight renamed to Ops.Admin.ShadowPointLight",
+            "author": "cables",
+            "date": 1578416772916
+        }
+    ]
+}

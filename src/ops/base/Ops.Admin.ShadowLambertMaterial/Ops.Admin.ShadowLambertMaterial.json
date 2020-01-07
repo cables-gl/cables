@@ -1,0 +1,84 @@
+{
+    "authorName": "cables",
+    "id": "292a9149-4933-4f30-bbe0-0d2b26504c4c",
+    "created": 1576687797849,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "execute"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse a",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Receive Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Algorithm"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Samples",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Shadow Strength",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            },
+            {
+                "type": "2",
+                "name": "Shadow Map"
+            }
+        ],
+        "name": "Ops.User.cables.ShadowLambertMaterial"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowLambertMaterial renamed to Ops.Admin.ShadowLambertMaterial",
+            "author": "cables",
+            "date": 1578416716883
+        }
+    ]
+}
