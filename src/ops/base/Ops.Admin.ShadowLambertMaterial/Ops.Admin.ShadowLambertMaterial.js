@@ -15,8 +15,8 @@ inToggleDoubleSided.onChange = function () {
 };
 inShadow.onChange = function() {
     shader.toggleDefine("SHADOW_MAP", inShadow.get());
-    op.log(shader.hasDefine("SHADOW_MAP"));
-    op.log(...shader.getDefines());
+
+
 }
 
 const algorithms = ['Default','Bias', 'PCF', 'Poisson', 'Stratified', 'VSM'];
@@ -36,7 +36,7 @@ inAlgorithm.onChange = function() {
         }
         else shader.removeDefine("MODE_" + algorithm.toUpperCase());
     });
-    // op.log(...shader.getDefines());
+
 }
 
 const inBias = op.inFloatSlider("Bias", 0.005);
@@ -188,7 +188,7 @@ var updateLights=function()
                             lights[count].ambient.setValue(cgl.frameStore.phong.lights[i].ambient);
                             lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                             lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                            //op.log(cgl.frameStore.phong.lights[i].type);
+
                             if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
                             if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
 
@@ -211,7 +211,7 @@ var updateLights=function()
                                     lights[count].ambient.setValue([0, 0, 0]);
                                     lights[count].nearFar.setValue(light.nearFar);
                                     lights[count].type.setValue(0); // old point light type index
-                                    // op.log("first", lights[count].type);
+
 
                                     lights[count].mul.setValue(light.intensity);
                                     count++;
@@ -256,7 +256,6 @@ function updateSpecular()
     if(inSpecular.get()==1)inSpecular.uniform.setValue(99999);
         else inSpecular.uniform.setValue(Math.exp(inSpecular.get()*8,2));
 }
-
 execute.onTriggered=function()
 {
     if(!shader)
@@ -265,14 +264,16 @@ execute.onTriggered=function()
         return;
     }
     // cgl.shadowPass = true;
-    // op.log(cgl.frameStore.shadowMap);
+
+
     if (cgl.shadowPass) {
-        //cgl.setShader(defaultShader);
+        // cgl.setShader(defaultShader);
         next.trigger();
-        //cgl.setPreviousShader();
+        // cgl.setPreviousShader();
     }
     else {
         cgl.setShader(shader);
+
         shader.bindTextures();
         outTex.set(null);
         //    outTex.set(cgl.frameStore.shadowMap);

@@ -146,7 +146,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.User.cables.ShadowLambertSpotLight"
+        "name": "Ops.Admin.ShadowSpotLight"
     },
     "changelog": [
         {

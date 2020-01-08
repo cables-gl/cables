@@ -72,7 +72,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.User.cables.ShadowLambertMaterial"
+        "name": "Ops.Admin.ShadowLambertMaterial"
     },
     "changelog": [
         {

@@ -308,6 +308,9 @@ function renderCubemapProjection() {
 }
 
 
+shader.offScreenPass = true;
+blurShader.offScreenPass = true;
+projectionShader.offScreenPass = true;
 
 const identityMat = mat4.create();
 const lookAt = vec3.create();
@@ -422,11 +425,14 @@ inTrigger.onTriggered = function() {
     }
 
     cgl.lightStack.push(light);
+    cgl.frameStore.renderOffscreen = true;
     cgl.shadowPass = true;
+
     renderCubemap();
     renderCubemapProjection();
-    cgl.shadowPass = false;
 
+    cgl.shadowPass = false;
+    cgl.frameStore.renderOffscreen = false;
     cgl.lightStack.pop();
 
     cgl.frameStore.shadowCubeMap = dynamicCubemap;

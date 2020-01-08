@@ -163,9 +163,8 @@ function renderBlur(texture) {
     cgl.setShader(blurShader);
 
     effect.setSourceTexture(fb.getTextureColor()); // take shadow map as source
-    // op.log(fb.getTextureColor());
-    effect.startEffect();
 
+    effect.startEffect();
     effect.bind();
 
     uniformXY.setValue([0, (inBlur.get() * 1.5) * texelSize]);
@@ -190,12 +189,16 @@ function renderBlur(texture) {
     cgl.setPreviousShader();
 }
 
+shader.offScreenPass = true;
+blurShader.offScreenPass = true;
 function renderShadowMap() {
     // * set shader
     cgl.gl.clearColor(0, 0, 0, 1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
+
     cgl.setShader(shader);
+
 
     cgl.pushModelMatrix();
     cgl.pushViewMatrix();
@@ -227,14 +230,16 @@ function renderShadowMap() {
     cgl.popModelMatrix();
     cgl.popViewMatrix();
 
+
     cgl.setPreviousShader();
+
 }
 
 inTrigger.onTriggered = function() {
     if (!cgl.lightStack) cgl.lightStack = [];
     if (!cgl.frameStore.mapStack) cgl.frameStore.mapStack = [];
 
-    /*
+     // NOTE: how to handle this? fucks up the shadow map
     if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         CABLES.GL_MARKER.drawLineSourceDest({
             op: op,
@@ -247,18 +252,22 @@ inTrigger.onTriggered = function() {
         })
     }
 
-    */
+
+
     cgl.lightStack.push(light);
 
     //cgl.gl.enable(cgl.gl.CULL_FACE);
     //cgl.gl.cullFace(cgl.gl.FRONT);
     //cgl.gl.colorMask(false,false,false,false);
+
     cgl.shadowPass = true;
+    cgl.frameStore.renderOffscreen = true;
     //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
     //cgl.gl.polygonOffset(0, 0);
 
     cgl.gl.enable(cgl.gl.CULL_FACE);
     cgl.gl.cullFace(cgl.gl.FRONT);
+
 
     renderShadowMap();
 
@@ -269,17 +278,17 @@ inTrigger.onTriggered = function() {
 
     renderBlur();
 
+    cgl.frameStore.renderOffscreen = false;
     cgl.shadowPass = false;
 
-    // op.log(blurredMap);
     //cgl.gl.disable(cgl.gl.CULL_FACE);
     // cgl.gl.colorMask(false,false,false,false);
     outTexture.set(null);
     outTexture.set(fb.getTextureColor());
 
     light.lightMatrix = lightBiasMVPMatrix;
+
     cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
-    // light.shadowMap = blurredMap;
     cgl.frameStore.shadowMap = fb.getTextureColor(); // effect.getCurrentSourceTexture();
     cgl.lightStack.push(light);
 
@@ -288,11 +297,13 @@ inTrigger.onTriggered = function() {
     //cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
     outTrigger.trigger();
+
     cgl.lightStack.pop();
     cgl.frameStore.mapStack.pop();
 }
 
 op.onDelete = function () { cgl.frameStore.shadowMap = null; }
+
 inTrigger.onLinkChanged = function() {
     if (!inTrigger.isLinked()) {
         cgl.frameStore.shadowMap = null;

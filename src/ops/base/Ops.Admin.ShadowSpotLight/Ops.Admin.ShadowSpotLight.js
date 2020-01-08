@@ -147,14 +147,7 @@ Object.keys(inLight).forEach(function(key) {
                 light[key] = CGL.DEG2RAD*inLight[key].get();
             } else if (key === "cosConeAngle") {
                 light[key] = Math.cos(CGL.DEG2RAD*(inLight[key].get()));
-                mat4.perspective(
-                    lightProjectionMatrix,
-                    2 * CGL.DEG2RAD * inLight[key].get(),
-                    1,
-                    inNear.get(),
-                    inFar.get()
-                );
-                op.log();
+                updateProjectionMatrix();
 
             }
             else if (key === "cosConeAngleInner") {
@@ -176,15 +169,19 @@ mat4.perspective(
     inFar.get()
 );
 
-inNear.onChange = inFar.onChange = function() {
-    // (static) perspective(out, fovy, aspect, near, far) → {mat4}
-    mat4.perspective(
+function updateProjectionMatrix() {
+        mat4.perspective(
         lightProjectionMatrix,
         2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
     );
+}
+
+inNear.onChange = inFar.onChange = function() {
+    // (static) perspective(out, fovy, aspect, near, far) → {mat4}
+    updateProjectionMatrix();
     /*mat4.ortho(lightProjectionMatrix,
         -1*inLRBT.get(),
         inLRBT.get(),
@@ -238,6 +235,8 @@ function renderBlur() {
     cgl.setPreviousShader();
 }
 
+shader.offScreenPass = true;
+blurShader.offScreenPass = true;
 function renderShadowMap() {
     // * set shader
 
@@ -321,6 +320,7 @@ inTrigger.onTriggered = function() {
     cgl.gl.enable(cgl.gl.CULL_FACE);
     cgl.gl.cullFace(cgl.gl.FRONT);
 
+    cgl.frameStore.renderOffscreen = true;
     cgl.shadowPass = true;
 
     renderShadowMap();
@@ -331,7 +331,7 @@ inTrigger.onTriggered = function() {
     renderBlur();
 
     cgl.shadowPass = false;
-
+    cgl.frameStore.renderOffscreen = false;
     //cgl.gl.disable(cgl.gl.CULL_FACE);
     // cgl.gl.colorMask(false,false,false,false);
     outTexture.set(null);

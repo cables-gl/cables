@@ -96,7 +96,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.User.cables.ShadowLambertDirLight"
+        "name": "Ops.Admin.ShadowDirectionalLight"
     },
     "authorName": "cables",
     "id": "83023195-a31d-4341-8c55-9e093b8bd3b0",
