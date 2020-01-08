@@ -24,6 +24,7 @@ jobs:
     - name: build jsdoc
       run: |
         cd doc/jsdoc/
+        npm install
         npx documentation build ../../../cables/src/core/index.js -f html -o out --theme theme
   deploy:
     needs: build
