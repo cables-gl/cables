@@ -5,6 +5,10 @@ on:
     branches:
       - docdeploy
 
+env:
+  JDOC_APP_ID: "fdb282ef-1a12-4ed8-8859-ac16c5ea3390"
+  DOC_APP_ID: "f9c74979-3bf4-4b00-b98d-3966314c44a5"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,11 +20,6 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - name: Set env to develop - testing
-      if: endsWith(github.ref, '/docdeploy')
-      run: |
-        echo "::set-env name=JDOC_APP_ID::fdb282ef-1a12-4ed8-8859-ac16c5ea3390"
-        echo "::set-env name=DOC_APP_ID::f9c74979-3bf4-4b00-b98d-3966314c44a5"
     - name: Set env to develop
       if: endsWith(github.ref, '/develop')
       run: |
