@@ -11,7 +11,9 @@
   },
   "author": "Tim Pulver",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "fs-sync": "1.0.6"
+  },
   "devDependencies": {
     "gitbook": "^3.2.3",
     "gitbook-cli": "^2.3.2",
