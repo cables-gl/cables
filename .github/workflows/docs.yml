@@ -5,26 +5,26 @@ on:
     branches:
       - docdeploy
 
-env:
-  JSDOC_LIVE_ID: '131e893c-eac4-4713-917b-a49fdd10c1c8'
-  JSDOC_DEV_ID: 'fdb282ef-1a12-4ed8-8859-ac16c5ea3390'
-  DOC_LIVE_ID: '7ac0f11c-d231-4be4-8cfe-6e458d45f663'
-  DOC_DEV_ID: 'f9c74979-3bf4-4b00-b98d-3966314c44a5'
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Cache node modules
-      uses: actions/cache@v1
-      with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+    - name: Set env to develop - testing
+      if: endsWith(github.ref, '/docdeploy')
+      run: |
+        echo "::set-env name=JDOC_APP_ID::fdb282ef-1a12-4ed8-8859-ac16c5ea3390"
+        echo "::set-env name=DOC_APP_ID::f9c74979-3bf4-4b00-b98d-3966314c44a5"
+    - name: Set env to develop
+      if: endsWith(github.ref, '/develop')
+      run: |
+        echo "::set-env name=JDOC_APP_ID::fdb282ef-1a12-4ed8-8859-ac16c5ea3390"
+        echo "::set-env name=DOC_APP_ID::f9c74979-3bf4-4b00-b98d-3966314c44a5"
+    - name: Set env to master
+      if: endsWith(github.ref, '/master')
+      run: |
+        echo "::set-env name=JDOC_APP_ID::131e893c-eac4-4713-917b-a49fdd10c1c8"
+        echo "::set-env name=DOC_APP_ID::7ac0f11c-d231-4be4-8cfe-6e458d45f663"
     - name: build gitbook
       run: |
         cd doc/gitbook/
@@ -39,7 +39,7 @@ jobs:
       uses: netlify/actions/cli@master
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ env.JSDOC_DEV_ID }}
+        NETLIFY_SITE_ID: ${{ env.JDOC_APP_ID }}
       with:
         args: deploy --dir=doc/jsdoc/out --prod
         secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
@@ -47,7 +47,7 @@ jobs:
       uses: netlify/actions/cli@master
       env:
         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ env.DOC_DEV_ID }}
+        NETLIFY_SITE_ID: ${{ env.DOC_APP_ID }}
       with:
         args: deploy --dir=doc/gitbook/_book --prod
         secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
