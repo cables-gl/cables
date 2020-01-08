@@ -19,7 +19,7 @@ jobs:
     - name: build gitbook
       run: |
         cd doc/gitbook/
-        npm install -g gitbook-cli
+        npm install gitbook-cli
         gitbook install
         npx gitbook build
     - name: build jsdoc
