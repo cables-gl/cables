@@ -6,10 +6,10 @@ on:
       - docdeploy
 
 env:
-  JSDOC_LIVE_HOST: 'jsdoc.cables.gl'
-  JSDOC_DEV_HOST: 'jsdoc.dev.cables.gl'
-  DOC_LIVE_HOST: 'doc.cables.gl'
-  DOC_DEV_HOST: 'doc.dev.cables.gl'
+  JSDOC_LIVE_ID: '131e893c-eac4-4713-917b-a49fdd10c1c8'
+  JSDOC_DEV_ID: 'fdb282ef-1a12-4ed8-8859-ac16c5ea3390'
+  DOC_LIVE_ID: '7ac0f11c-d231-4be4-8cfe-6e458d45f663'
+  DOC_DEV_ID: 'f9c74979-3bf4-4b00-b98d-3966314c44a5'
 
 jobs:
   build:
@@ -30,13 +30,19 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: deploy jsdocs
-      uses: appleboy/scp-action@master
+    - name: Deploy jsdocs to netlify
+      uses: netlify/actions/cli@master
       env:
-        HOST: ${{ env.JSDOC_DEV_HOST }}
-        USERNAME: ${{ secrets.USERNAME }}
-        PORT: ${{ secrets.PORT }}
-        KEY: ${{ secrets.KEY }}
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ env.JSDOC_DEV_ID }}
       with:
-        source: "doc/jsdoc/*"
-        target: "jsdoc"
+        args: deploy --dir=doc/jsdoc --prod
+        secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+    - name: Deploy gitbook to netlify
+      uses: netlify/actions/cli@master
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ env.DOC_DEV_ID }}
+      with:
+        args: deploy --dir=doc/gitbook/_book --prod
+        secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
