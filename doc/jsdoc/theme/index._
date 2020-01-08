@@ -29,7 +29,12 @@
                 <li><a
                   href='#<%=slug(doc.namespace)%>'
                   class="<% if (doc.kind === 'note') { %>h5 bold black caps<% } %><% if (hasMembers) { %> toggle-sibling<% } %>">
-                  <%- doc.name %>
+
+
+<%= doc.tags.map(function(tag) {
+        if(tag.title=='external')return tag.description+'.';
+        else return null;
+      }).filter(Boolean) %><%- doc.name %>
                   <% if (hasMembers) { %><span class='icon'>▸</span><% } %>
                 </a>
                 <% if (hasMembers) { %>

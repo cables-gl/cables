@@ -1,10 +1,7 @@
 // import { vec2, vec3 } from "gl-matrix";
 import { UTILS } from "../utils";
 import { b64decTypedArray } from "../base64";
-
-
 import { BoundingBox } from "./cgl_boundingbox";
-
 
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.

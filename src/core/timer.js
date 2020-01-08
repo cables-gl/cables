@@ -1,3 +1,6 @@
+
+/** @namespace CABLES */
+
 export const internalNow = function ()
 {
     return window.performance.now();

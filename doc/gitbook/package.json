@@ -11,11 +11,13 @@
   },
   "author": "Tim Pulver",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "fs-sync": "1.0.6"
+  },
   "devDependencies": {
-    "gitbook-plugin-ga": "^1.0.1",
+    "gitbook": "^3.2.3",
     "gitbook-cli": "^2.3.2",
-    "gitbook-plugin-include-html": "^0.2.0",
-    "gitbook": "^3.2.3"
+    "gitbook-plugin-ga": "^1.0.1",
+    "gitbook-plugin-include-html": "^0.2.0"
   }
 }

@@ -30,7 +30,6 @@ const Context = function (_patch)
 
     /**
      * Current projection matrix
-     * @member pMatrix
      * @memberof Context
      * @instance
      * @type {mat4}
@@ -38,7 +37,6 @@ const Context = function (_patch)
     this.pMatrix = mat4.create();
     /**
      * Current model matrix
-     * @member pMatrix
      * @memberof Context
      * @instance
      * @type {mat4}
@@ -46,7 +44,6 @@ const Context = function (_patch)
     this.mMatrix = mat4.create();
     /**
      * Current view matrix
-     * @member vMatrix
      * @memberof Context
      * @instance
      * @type {mat4}
@@ -695,6 +692,13 @@ Context.prototype.modelMatrix = function ()
 
 // state depthtest
 
+/**
+ * push depth testing enabled state
+ * @function pushDepthTest
+ * @param {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype._stackDepthTest = [];
 Context.prototype.pushDepthTest = function (b)
 {
@@ -702,12 +706,24 @@ Context.prototype.pushDepthTest = function (b)
     if (!b) this.gl.disable(this.gl.DEPTH_TEST);
     else this.gl.enable(this.gl.DEPTH_TEST);
 };
-
+/**
+ * current state of depth testing
+ * @function stateCullFace
+ * @returns {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.stateDepthTest = function ()
 {
     return this._stackDepthTest[this._stackDepthTest.length - 1];
 };
 
+/**
+ * pop depth testing state
+ * @function popCullFace
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.popDepthTest = function ()
 {
     this._stackDepthTest.pop();
@@ -719,6 +735,13 @@ Context.prototype.popDepthTest = function ()
 // --------------------------------------
 // state depthwrite
 
+/**
+ * push depth write enabled state
+ * @function pushDepthTest
+ * @param {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype._stackDepthWrite = [];
 Context.prototype.pushDepthWrite = function (b)
 {
@@ -726,11 +749,24 @@ Context.prototype.pushDepthWrite = function (b)
     this.gl.depthMask(b);
 };
 
+/**
+ * current state of depth writing
+ * @function stateCullFace
+ * @returns {Boolean} enabled
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.stateDepthWrite = function ()
 {
     return this._stackDepthWrite[this._stackDepthWrite.length - 1];
 };
 
+/**
+ * pop depth writing state
+ * @function popCullFace
+ * @memberof Context
+ * @instance
+ */
 Context.prototype.popDepthWrite = function ()
 {
     this._stackDepthWrite.pop();

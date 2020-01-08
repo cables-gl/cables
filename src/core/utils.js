@@ -318,7 +318,7 @@ export const cacheBust = function (url)
 
 
 
-// is jsonp used anywhere ?
+// todo: is jsonp used anywhere ?
 var jsonpCounter = null;
 export const jsonp = function (url, cb)
 {
@@ -357,6 +357,11 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
     });
 };
 
+/**
+ * make an ajax request
+ * @function ajax
+ * @static
+ */
 export const ajax = function (url, cb, method, post, contenttype, jsonp, headers = {})
 {
     request({
