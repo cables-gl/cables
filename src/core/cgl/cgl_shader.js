@@ -150,6 +150,14 @@ Shader.prototype.setWhyCompile=function(why)
     // Log.log('recompile because '+why);
 };
 
+/**
+ * set shader source code
+ * @function setSource
+ * @memberof Shader
+ * @instance
+ * @param {String} srcVert
+ * @param {String} srcFrag
+ */
 Shader.prototype.setSource = function(srcVert, srcFrag)
 {
     this.srcVert = srcVert;
@@ -234,12 +242,7 @@ Shader.prototype.compile = function() {
                 }
                 count++;
             }
-
         }
-
-
-
-
 
         vs = '#version 300 es'
             .endl() + '// '
@@ -528,7 +531,6 @@ Shader.prototype.toggleDefine = function(name, enabled)
  * @instance
  * @param {String} name
  * @param {Any} value (can be empty)
-
  */
 Shader.prototype.define = function(name, value)
 {
@@ -559,6 +561,14 @@ Shader.prototype.getDefine = function(name) {
     return null;
 };
 
+/**
+ * return true if shader has define
+ * @function hasDefine
+ * @memberof Shader
+ * @instance
+ * @param {String} name
+ * @return {Boolean}
+ */
 Shader.prototype.hasDefine = function(name) {
     for (var i = 0; i < this._defines.length; i++)
         if (this._defines[i][0] == name) return true;
@@ -580,12 +590,6 @@ Shader.prototype.removeDefine = function(name) {
         }
     }
 };
-
-
-
-
-
-
 
 /**
  * remove a module from shader
@@ -669,25 +673,6 @@ Shader.prototype.dispose=function()
 {
     this._cgl.gl.deleteProgram(this._program);
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Shader.prototype.setDrawBuffers = function(arr) {
     this._drawBuffers=arr;
@@ -777,7 +762,6 @@ Shader.prototype._linkProgram = function(program)
             this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
         }
     }
-
 };
 
 Shader.prototype.getProgram = function() {

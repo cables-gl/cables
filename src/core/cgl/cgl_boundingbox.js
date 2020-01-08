@@ -1,6 +1,13 @@
 
 export { BoundingBox };
 
+/**
+ * bounding box
+ * @class
+ * @external CGL
+ * @namespace BoundingBox
+ * @param {Geometry} geometry or bounding box
+ */
 class BoundingBox
 {
     constructor(geom)
@@ -16,19 +23,72 @@ class BoundingBox
         if(geom)this.apply(geom);
     }
 
+    /**
+     * get biggest number of maxX,maxY,maxZ
+     * @type {Number}
+     */
     get maxAxis() { return this._maxAxis; }
+
+    /**
+     * size of bounding box 
+     * @type {vec3}
+     */
     get size() { return this._size; }
 
+    /**
+     * center x 
+     * @type {Number}
+     */
     get x() { return this._center[0]; }
+    /**
+     * center y
+     * @type {Number}
+     */
     get y() { return this._center[1]; }
+    /**
+     * center z
+     * @type {Number}
+     */
     get z() { return this._center[2]; }
 
+
+    /**
+     * minimum x 
+     * @type {Number}
+     */
     get minX() { return this._min[0]; }
+
+    /**
+     * minimum y 
+     * @type {Number}
+     */
     get minY() { return this._min[1]; }
+
+    /**
+     * minimum z 
+     * @type {Number}
+     */
     get minZ() { return this._min[2]; }
+
+    /**
+     * maximum x
+     * @type {Number}
+     */
     get maxX() { return this._max[0]; }
+
+    /**
+     * maximum y
+     * @type {Number}
+     */
     get maxY() { return this._max[1]; }
+
+    /**
+     * maximum z
+     * @type {Number}
+     */
     get maxZ() { return this._max[2]; }
+
+
 
     apply(geom)
     {
@@ -56,10 +116,15 @@ class BoundingBox
         this.calcCenterSize();
     }
 
+    /**
+     * returns a copy of the bounding box
+     * @function copy
+     * @memberof BoundingBox
+     * @instance
+     */
     copy()
     {
         return new BoundingBox(this);
-        
     }
 
     get changed()
@@ -88,7 +153,6 @@ class BoundingBox
         this._min[0] = Math.min(this._min[0], x);
         this._min[1] = Math.min(this._min[1], y);
         this._min[2] = Math.min(this._min[2], z);
-
     }
 
     calcCenterSize()
