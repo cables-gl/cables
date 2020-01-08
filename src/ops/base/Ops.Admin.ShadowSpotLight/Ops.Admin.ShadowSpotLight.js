@@ -11,6 +11,7 @@ function Light(config) {
      this.cosConeAngleInner = config.cosConeAngleInner || 0; // spot light
      this.cosConeAngle = config.cosConeAngle || 0;
      this.conePointAt = config.conePointAt || [0, 0, 0];
+     this.castShadow = config.castShadow || false;
      return this;
 }
 
@@ -97,10 +98,17 @@ const inFalloff = op.inFloatSlider("Falloff", 0.00001);
 const lightAttribsIn = [inIntensity, inRadius ];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
-const inLRBT = op.inFloat("LR-BottomTop", 8);
+const inCastShadow = op.inBool("Cast Shadow", false);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
+
+op.setPortGroup("Shadow",[inCastShadow, inNear, inFar, inBlur]);
+
+inNear.setUiAttribs({ greyout: true });
+inFar.setUiAttribs({ greyout: true });
+inBlur.setUiAttribs({ greyout: true });
+
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
@@ -130,7 +138,8 @@ const light = new Light({
     falloff: inFalloff.get(),
     cosConeAngleInner: Math.cos(CGL.DEG2RAD * inConeAngleInner.get()),
     cosConeAngle: Math.cos(CGL.DEG2RAD * inConeAngle.get()),
-    spotExponent: inSpotExponent.get()
+    spotExponent: inSpotExponent.get(),
+    castShadow: false,
 });
 
 Object.keys(inLight).forEach(function(key) {
@@ -159,6 +168,19 @@ Object.keys(inLight).forEach(function(key) {
     }
 });
 
+inCastShadow.onChange = function() {
+    const castShadow = inCastShadow.get();
+    light.castShadow = castShadow;
+    if (castShadow) {
+        inNear.setUiAttribs({ greyout: false });
+        inFar.setUiAttribs({ greyout: false });
+        inBlur.setUiAttribs({ greyout: false });
+    } else {
+        inNear.setUiAttribs({ greyout: true });
+        inFar.setUiAttribs({ greyout: true });
+        inBlur.setUiAttribs({ greyout: true });
+    }
+}
 
 const lightProjectionMatrix = mat4.create();
 mat4.perspective(
@@ -179,17 +201,7 @@ function updateProjectionMatrix() {
     );
 }
 
-inNear.onChange = inFar.onChange = function() {
-    // (static) perspective(out, fovy, aspect, near, far) → {mat4}
-    updateProjectionMatrix();
-    /*mat4.ortho(lightProjectionMatrix,
-        -1*inLRBT.get(),
-        inLRBT.get(),
-        -1*inLRBT.get(),
-        inLRBT.get(),
-        inNear.get(),
-        inFar.get());*/
-}
+inNear.onChange = inFar.onChange = function() {updateProjectionMatrix(); }
 
 // * init vectors & matrices
 const lookAt = vec3.fromValues(0, 0, 0);
@@ -297,7 +309,6 @@ inTrigger.onTriggered = function() {
     light.position = resultPos;
     light.conePointAt = resultPointAt;
 
-
     /*
     if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         gui.setTransformGizmo({
@@ -317,38 +328,41 @@ inTrigger.onTriggered = function() {
     }
     */
     cgl.lightStack.push(light);
-    cgl.gl.enable(cgl.gl.CULL_FACE);
-    cgl.gl.cullFace(cgl.gl.FRONT);
 
-    cgl.frameStore.renderOffscreen = true;
-    cgl.shadowPass = true;
+    if (inCastShadow.get()) {
+        cgl.gl.enable(cgl.gl.CULL_FACE);
+        cgl.gl.cullFace(cgl.gl.FRONT);
 
-    renderShadowMap();
+        cgl.frameStore.renderOffscreen = true;
+        cgl.shadowPass = true;
 
-    cgl.gl.cullFace(cgl.gl.BACK);
-    cgl.gl.disable(cgl.gl.CULL_FACE);
+        renderShadowMap();
 
-    renderBlur();
+        cgl.gl.cullFace(cgl.gl.BACK);
+        cgl.gl.disable(cgl.gl.CULL_FACE);
 
-    cgl.shadowPass = false;
-    cgl.frameStore.renderOffscreen = false;
-    //cgl.gl.disable(cgl.gl.CULL_FACE);
-    // cgl.gl.colorMask(false,false,false,false);
-    outTexture.set(null);
-    outTexture.set(effect.getCurrentSourceTexture());
+        renderBlur();
 
-    light.lightMatrix = lightBiasMVPMatrix;
-    cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
-    // light.shadowMap = blurredMap;
-    cgl.frameStore.shadowMap = effect.getCurrentSourceTexture();
+        cgl.shadowPass = false;
+        cgl.frameStore.renderOffscreen = false;
+        //cgl.gl.disable(cgl.gl.CULL_FACE);
+        // cgl.gl.colorMask(false,false,false,false);
+        outTexture.set(null);
+        outTexture.set(effect.getCurrentSourceTexture());
 
-    cgl.lightStack.push(light);
-    cgl.frameStore.mapStack.push(effect.getCurrentSourceTexture());
+        light.lightMatrix = lightBiasMVPMatrix;
+        cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
+        // light.shadowMap = blurredMap;
+        cgl.frameStore.shadowMap = effect.getCurrentSourceTexture();
+
+        cgl.lightStack.push(light);
+        cgl.frameStore.mapStack.push(effect.getCurrentSourceTexture());
+    }
 
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-    cgl.frameStore.mapStack.pop();
+    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
 }
 
 

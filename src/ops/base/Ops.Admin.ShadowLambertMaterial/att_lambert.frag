@@ -103,6 +103,7 @@ struct Light {
   float mul;
   int type;
   vec2 nearFar;
+  int castShadow;
 };
 
 UNI Light lights[NUM_LIGHTS];
@@ -277,7 +278,7 @@ void main()
         }
 
         #ifdef SHADOW_MAP
-            col.rgb *=  CalculateShadow(light, lambert);
+        if (light.castShadow == 1) col.rgb *=  CalculateShadow(light, lambert);
         #endif
     }
 

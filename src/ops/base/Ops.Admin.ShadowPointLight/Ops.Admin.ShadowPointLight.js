@@ -12,6 +12,7 @@ function Light(config) {
      this.spotExponent = config.spotExponent || 1;
      this.cosConeAngle = Math.cos(CGL.DEG2RAD * this.coneAngle);
      this.conePointAt = config.conePointAt || [0, 0, 0];
+     this.castShadow = config.castShadow || false;
      return this;
 }
 
@@ -85,10 +86,30 @@ const inFalloff = op.inFloatSlider("Falloff", 0.5);
 const attribIns = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", attribIns);
 
-const inLRBT = op.inFloat("LR-BottomTop", 8);
+const inCastShadow = op.inBool("Cast Shadow", false);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
+op.setPortGroup("Shadow",[inCastShadow, inNear, inFar, inBlur]);
+const shadowProperties = [inNear, inFar, inBlur];
+
+inNear.setUiAttribs({ greyout: true });
+inFar.setUiAttribs({ greyout: true });
+inBlur.setUiAttribs({ greyout: true });
+
+inCastShadow.onChange = function() {
+    const castShadow = inCastShadow.get();
+    light.castShadow = castShadow;
+    if (castShadow) {
+        inNear.setUiAttribs({ greyout: false });
+        inFar.setUiAttribs({ greyout: false });
+        inBlur.setUiAttribs({ greyout: false });
+    } else {
+        inNear.setUiAttribs({ greyout: true });
+        inFar.setUiAttribs({ greyout: true });
+        inBlur.setUiAttribs({ greyout: true });
+    }
+}
 
 // * SHADER *
 const shader = new CGL.Shader(cgl, "shadowPointLight");
@@ -115,16 +136,7 @@ inNear.onChange = inFar.onChange = function() {
         inNear.get(),
         inFar.get()
     );
-    }
-    /*mat4.ortho(lightProjectionMatrix,
-        -1*inLRBT.get(),
-        inLRBT.get(),
-        -1*inLRBT.get(),
-        inLRBT.get(),
-        inNear.get(),
-        inFar.get());*/
-
-
+}
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outCubemap = op.outObject("Cubemap");
@@ -268,11 +280,12 @@ function initializeCubemap() {
     // Check form WebGL errors (since I'm not sure all platforms will be able to create the framebuffer)
 
     outCubemap.set({ "cubemap": dynamicCubemap });
-    var cubemapInitialized = true;
 
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    cubemapInitialized = true;
      // cgl.resetViewPort();
 }
 
@@ -396,12 +409,11 @@ const transVec = vec3.create();
 
 
 initializeCubemap();
-op.log(dynamicCubemap);
+
 inTrigger.onTriggered = function() {
 
     if (!cgl.lightStack) cgl.lightStack = [];
     if (!cgl.frameStore.mapStack) cgl.frameStore.mapStack = [];
-
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     light.position = position;
@@ -416,7 +428,7 @@ inTrigger.onTriggered = function() {
             posZ: inPosZ,
         });
 
-/*
+        /*
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, transVec);
         CABLES.GL_MARKER.drawSphere(op, inRadius.get());
@@ -425,25 +437,31 @@ inTrigger.onTriggered = function() {
     }
 
     cgl.lightStack.push(light);
-    cgl.frameStore.renderOffscreen = true;
-    cgl.shadowPass = true;
 
-    renderCubemap();
-    renderCubemapProjection();
+    if (inCastShadow.get()) {
+        if (!cubemapInitialized) initializeCubemap();
+        cgl.frameStore.renderOffscreen = true;
+        cgl.shadowPass = true;
 
-    cgl.shadowPass = false;
-    cgl.frameStore.renderOffscreen = false;
-    cgl.lightStack.pop();
+        renderCubemap();
+        renderCubemapProjection();
 
-    cgl.frameStore.shadowCubeMap = dynamicCubemap;
-    cgl.frameStore.mapStack.push(dynamicCubemap);
+        cgl.shadowPass = false;
+        cgl.frameStore.renderOffscreen = false;
+        cgl.lightStack.pop();
 
-    light.nearFar = [inNear.get(), inFar.get()];
-    cgl.lightStack.push(light);
+        cgl.frameStore.shadowCubeMap = dynamicCubemap;
+        cgl.frameStore.mapStack.push(dynamicCubemap);
 
+        light.nearFar = [inNear.get(), inFar.get()];
+
+        cgl.lightStack.push(light);
+    }
     outTrigger.trigger();
+
     cgl.lightStack.pop();
-    cgl.frameStore.mapStack.pop();
+
+    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
 }
 
 inTrigger.onLinkChanged = function() {

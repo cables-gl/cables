@@ -117,22 +117,26 @@
             },
             {
                 "type": "0",
-                "name": "LR-BottomTop",
-                "subType": "number"
+                "name": "Cast Shadow",
+                "group": "Shadow",
+                "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "Near",
+                "group": "Shadow",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Far",
+                "group": "Shadow",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Blur Amount",
+                "group": "Shadow",
                 "subType": "number"
             }
         ],

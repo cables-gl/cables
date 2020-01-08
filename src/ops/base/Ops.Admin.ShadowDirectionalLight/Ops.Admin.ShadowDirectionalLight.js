@@ -12,6 +12,7 @@ function Light(config) {
      this.coneAngle = config.coneAngle || 0; // spot light
      this.cosConeAngle = config.cosConeAngle || 0;
      this.conePointAt = config.conePointAt || [0, 0, 0];
+     this.castShadow = config.castShadow || 0;
      return this;
 }
 
@@ -83,10 +84,17 @@ const inIntensity = op.inFloat("Intensity", 1);
 const attribIns = [inIntensity];
 op.setPortGroup("Light Attributes", attribIns);
 
+const inCastShadow = op.inBool("Cast Shadow", false);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
+op.setPortGroup("Shadow",[inCastShadow, inLRBT, inNear, inFar, inBlur]);
+
+inLRBT.setUiAttribs({ greyout: true });
+inNear.setUiAttribs({ greyout: true });
+inFar.setUiAttribs({ greyout: true });
+inBlur.setUiAttribs({ greyout: true });
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
@@ -123,6 +131,22 @@ Object.keys(inLight).forEach(function(key) {
     }
 });
 
+
+inCastShadow.onChange = function() {
+    const castShadow = inCastShadow.get();
+    light.castShadow = castShadow;
+    if (castShadow) {
+        inLRBT.setUiAttribs({ greyout: false });
+        inNear.setUiAttribs({ greyout: false });
+        inFar.setUiAttribs({ greyout: false });
+        inBlur.setUiAttribs({ greyout: false });
+    } else {
+        inLRBT.setUiAttribs({ greyout: true });
+        inNear.setUiAttribs({ greyout: true });
+        inFar.setUiAttribs({ greyout: true });
+        inBlur.setUiAttribs({ greyout: true });
+    }
+}
 
 const lightProjectionMatrix = mat4.create();
 mat4.ortho(lightProjectionMatrix,
@@ -259,47 +283,47 @@ inTrigger.onTriggered = function() {
     //cgl.gl.enable(cgl.gl.CULL_FACE);
     //cgl.gl.cullFace(cgl.gl.FRONT);
     //cgl.gl.colorMask(false,false,false,false);
+    if (inCastShadow.get()) {
+        cgl.shadowPass = true;
+        cgl.frameStore.renderOffscreen = true;
+        //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+        //cgl.gl.polygonOffset(0, 0);
 
-    cgl.shadowPass = true;
-    cgl.frameStore.renderOffscreen = true;
-    //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-    //cgl.gl.polygonOffset(0, 0);
-
-    cgl.gl.enable(cgl.gl.CULL_FACE);
-    cgl.gl.cullFace(cgl.gl.FRONT);
-
-
-    renderShadowMap();
-
-    //cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-    cgl.gl.cullFace(cgl.gl.BACK);
-    cgl.gl.disable(cgl.gl.CULL_FACE);
+        cgl.gl.enable(cgl.gl.CULL_FACE);
+        cgl.gl.cullFace(cgl.gl.FRONT);
 
 
-    renderBlur();
+        renderShadowMap();
 
-    cgl.frameStore.renderOffscreen = false;
-    cgl.shadowPass = false;
+        //cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+        cgl.gl.cullFace(cgl.gl.BACK);
+        cgl.gl.disable(cgl.gl.CULL_FACE);
 
-    //cgl.gl.disable(cgl.gl.CULL_FACE);
-    // cgl.gl.colorMask(false,false,false,false);
-    outTexture.set(null);
-    outTexture.set(fb.getTextureColor());
 
-    light.lightMatrix = lightBiasMVPMatrix;
+        renderBlur();
 
-    cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
-    cgl.frameStore.shadowMap = fb.getTextureColor(); // effect.getCurrentSourceTexture();
-    cgl.lightStack.push(light);
+        cgl.frameStore.renderOffscreen = false;
+        cgl.shadowPass = false;
 
-    cgl.frameStore.mapStack.push(fb.getTextureColor());
+        //cgl.gl.disable(cgl.gl.CULL_FACE);
+        // cgl.gl.colorMask(false,false,false,false);
+        outTexture.set(null);
+        outTexture.set(fb.getTextureColor());
 
+        light.lightMatrix = lightBiasMVPMatrix;
+
+        cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
+        cgl.frameStore.shadowMap = fb.getTextureColor(); // effect.getCurrentSourceTexture();
+        cgl.lightStack.push(light);
+
+        cgl.frameStore.mapStack.push(fb.getTextureColor());
+    }
     //cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-    cgl.frameStore.mapStack.pop();
+    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
 }
 
 op.onDelete = function () { cgl.frameStore.shadowMap = null; }

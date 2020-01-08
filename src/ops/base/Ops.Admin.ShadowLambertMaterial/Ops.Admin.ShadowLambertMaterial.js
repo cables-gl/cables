@@ -92,6 +92,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].type=new CGL.Uniform(shader,'i','lights['+count+'].type',0);
     lights[count].lightMatrix=new CGL.Uniform(shader,'m4','lights['+count+'].lightMatrix',mat4.create());
     lights[count].nearFar=new CGL.Uniform(shader,'2f','lights['+count+'].nearFar', vec2.create());
+    lights[count].castShadow=new CGL.Uniform(shader,'i','lights['+count+'].castShadow', 0);
 
 }
 
@@ -214,6 +215,8 @@ var updateLights=function()
 
 
                                     lights[count].mul.setValue(light.intensity);
+                                    lights[count].castShadow.setValue(Number(light.castShadow));
+
                                     count++;
                                  } else if (light.type === "directional") {
 
@@ -227,6 +230,7 @@ var updateLights=function()
                                     lights[count].mul.setValue(light.intensity);
 
                                     if (cgl.frameStore.lightMatrix) lightMatrix.set(cgl.frameStore.lightMatrix);
+                                    lights[count].castShadow.setValue(Number(light.castShadow));
                                     count++;
 
                                  } else if (light.type === "spot") {
@@ -241,7 +245,10 @@ var updateLights=function()
                                     lights[count].spotExponent.setValue(light.spotExponent);
                                     lights[count].type.setValue(2);
                                     lights[count].mul.setValue(light.intensity);
+
                                     if (cgl.frameStore.lightMatrix) lightMatrix.set(cgl.frameStore.lightMatrix);
+
+                                    lights[count].castShadow.setValue(Number(light.castShadow));
                                     count++;
                                  }
                         }
