@@ -1,3 +1,5 @@
+/** @namespace WEBAUDIO */
+
 import { CONSTANTS } from "./constants";
 
 const WEBAUDIO = {};
@@ -405,18 +407,7 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     return port;
 };
 
-/**
- * Callback when an audio file finished loading
- *
- * @callback loadAudioFileFinishedCallback
- */
 
-/**
- * Callback when a request to load an audio file did not succeed.
- *
- * @callback loadAudioFileErrorCallback
- * @param {string} err - The error which occured while loading the audio file
- */
 
 /**
  * Loads an audio file and updates the loading indicators when cables is run in the editor.

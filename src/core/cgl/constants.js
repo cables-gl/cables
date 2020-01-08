@@ -23,8 +23,10 @@ const BLEND_MODES = {
     BLEND_MUL: 4,
 };
 
-const DEG2RAD = Math.PI / 180.0;
+
+
 const RAD2DEG = 180.0 / Math.PI;
+const DEG2RAD = Math.PI / 180.0;
 
 const CONSTANTS = {
     MATH: {

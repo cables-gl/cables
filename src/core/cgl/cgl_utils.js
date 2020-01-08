@@ -1,13 +1,18 @@
+/** @namespace CGL */
+
+
 /**
  * multiply to get radians from degree, e.g. `360 * CGL.DEG2RAD`
- * @constant {Number}
- * @description
+ * @const {Number}
+ * @memberof CGL
+ * @static
  */
 export const DEG2RAD = Math.PI / 180.0;
 
 /**
- * @constant {number}
- * @description to get degrees from radians, e.g. `3.14 * CGL.RAD2DEG`
+ * to get degrees from radians, e.g. `3.14 * CGL.RAD2DEG`
+ * @const {number}
+ * @memberof CGL
  */
 export const RAD2DEG = 180.0 / Math.PI;
 
@@ -17,7 +22,7 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
  * get normalized mouse wheel delta (including browser specific adjustment)
  * @function getWheelDelta
  * @static
- * @external CGL
+ * @memberof CGL
  * @param {MouseEvent} event
  * @return {Number} normalized delta
  */
