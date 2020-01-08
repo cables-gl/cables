@@ -134,108 +134,108 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
     float CalculateShadow(Light light, float lambert) {
         float visibility = 1.;
 
-            vec2 shadowMapLookup = shadowCoord.xy;
-            vec3 cubemapLookup = modelPos.xyz - light.pos;
+        vec2 shadowMapLookup = shadowCoord.xy;
+        vec3 cubemapLookup = modelPos.xyz - light.pos;
 
-            float shadowMapDepth = shadowCoord.z;
+        float shadowMapDepth = shadowCoord.z;
 
-            if (light.type == SPOT) {
-                // project coordinates
-                shadowMapLookup /= shadowCoord.w;
-                shadowMapDepth /= shadowCoord.w;
+        if (light.type == SPOT) {
+            // project coordinates
+            shadowMapLookup /= shadowCoord.w;
+            shadowMapDepth /= shadowCoord.w;
+        }
+
+        float depthFromMapLookup = 0.;
+
+        vec3 toLightNormal = vec3(0.);
+        float cameraNear = 0.;
+        float cameraFar = 0.;
+
+        if (light.type == POINT) {
+
+            cameraNear = light.nearFar.x; // uniforms
+            cameraFar = light.nearFar.y;
+
+            toLightNormal = normalize(light.pos - modelPos.xyz);
+
+            float fromLightToFrag =
+                (length(modelPos.xyz - light.pos) - cameraNear) / (cameraFar - cameraNear);
+            depthFromMapLookup = texture(shadowCubeMap, -toLightNormal).r;
+
+            shadowMapDepth = fromLightToFrag;
+
+        }
+
+        else depthFromMapLookup = texture(shadowMap, shadowMapLookup).r;
+
+        // modify bias according to slope of the surface
+        float bias = clamp(inBias * tan(acos(lambert)), 0., 0.1);
+
+        #ifdef MODE_DEFAULT
+            if (depthFromMapLookup < shadowMapDepth) visibility = 0.2;
+        #endif
+
+        #ifdef MODE_BIAS
+            if (depthFromMapLookup < shadowMapDepth - bias) visibility = 0.2;
+        #endif
+
+        #ifdef MODE_PCF
+            float texelSize = 1. / inShadowMapSize;
+            visibility = 0.;
+
+            // sample neighbouring pixels & get mean value
+            for (int x = -1; x <= 1; x++) {
+                for (int y = -1; y <= 1; y++) {
+                    float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
+                    if (shadowMapDepth - bias < texelDepth) {
+                        visibility += 1.;
+                    }
+                }
             }
 
-            float depthFromMapLookup = 0.;
+            visibility /= 9.;
+        #endif
 
-            vec3 toLightNormal = vec3(0.);
-            float cameraNear = 0.;
-            float cameraFar = 0.;
-
-            if (light.type == POINT) {
-
-                cameraNear = light.nearFar.x; // uniforms
-                cameraFar = light.nearFar.y;
-
-                toLightNormal = normalize(light.pos - modelPos.xyz);
-
-                float fromLightToFrag =
-                    (length(modelPos.xyz - light.pos) - cameraNear) / (cameraFar - cameraNear);
-                depthFromMapLookup = texture(shadowCubeMap, -toLightNormal).r;
-
-                shadowMapDepth = fromLightToFrag;
-
+        #ifdef MODE_POISSON
+            for (int i = 0; i < SAMPLE_AMOUNT; i++) {
+                if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/700.)).r < shadowMapDepth - bias) {
+                    visibility -= 0.2;
+                }
             }
+        #endif
 
-            else depthFromMapLookup = texture(shadowMap, shadowMapLookup).r;
-
-            // modify bias according to slope of the surface
-            float bias = clamp(inBias * tan(acos(lambert)), 0., 0.1);
-
-            #ifdef MODE_DEFAULT
-                if (depthFromMapLookup < shadowMapDepth) visibility = 0.2;
-            #endif
-
-            #ifdef MODE_BIAS
-                if (depthFromMapLookup < shadowMapDepth - bias) visibility = 0.2;
-            #endif
-
-            #ifdef MODE_PCF
-                float texelSize = 1. / inShadowMapSize;
-                visibility = 0.;
-
-                // sample neighbouring pixels & get mean value
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
-                        if (shadowMapDepth - bias < texelDepth) {
-                            visibility += 1.;
-                        }
-                    }
+        #ifdef MODE_STRATIFIED
+            for (int i = 0; i < SAMPLE_AMOUNT; i++) {
+                int index = int(float(SAMPLE_AMOUNT) * Random(vec4(gl_FragCoord.xyy, i)))%SAMPLE_AMOUNT;
+                if (texture(shadowMap, (shadowMapLookup + poissonDisk[index]/700.)).r < shadowMapDepth - bias) {
+                    visibility -= 0.2;
                 }
+            }
+        #endif
 
-                visibility /= 9.;
-            #endif
+        #ifdef MODE_VSM
+            float distanceTo = shadowMapDepth;
+            // retrieve previously stored moments & variance
+            vec2 moments = texture(shadowMap, shadowMapLookup).rg;
 
-            #ifdef MODE_POISSON
-                for (int i = 0; i < SAMPLE_AMOUNT; i++) {
-                    if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/700.)).r < shadowMapDepth - bias) {
-                        visibility -= 0.2;
-                    }
-                }
-            #endif
+            if (light.type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
 
-            #ifdef MODE_STRATIFIED
-                for (int i = 0; i < SAMPLE_AMOUNT; i++) {
-                    int index = int(float(SAMPLE_AMOUNT) * Random(vec4(gl_FragCoord.xyy, i)))%SAMPLE_AMOUNT;
-                    if (texture(shadowMap, (shadowMapLookup + poissonDisk[index]/700.)).r < shadowMapDepth - bias) {
-                        visibility -= 0.2;
-                    }
-                }
-            #endif
+            float p = step(distanceTo, moments.x);
+            float variance =  max(moments.y - (moments.x * moments.x), 0.000002);
 
-            #ifdef MODE_VSM
-                float distanceTo = shadowMapDepth;
-                // retrieve previously stored moments & variance
-                vec2 moments = texture(shadowMap, shadowMapLookup).rg;
+            float distanceToMean = distanceTo - moments.x;
+            //there is a very small probability that something is being lit when its not
+            // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
+            // bottom line helps make the shadows darker
+            // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
+            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), (1. - inBias), 1.);
+            //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
+            //pMax = variance / (variance + distanceToMean*distanceToMean);
+            // visibility = clamp(pMax, 1., p);
+            visibility = min(max(p, pMax), 1.);
+        #endif
 
-                if (light.type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
-
-                float p = step(distanceTo, moments.x);
-                float variance =  max(moments.y - (moments.x * moments.x), 0.000002);
-
-                float distanceToMean = distanceTo - moments.x;
-                //there is a very small probability that something is being lit when its not
-                // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
-                // bottom line helps make the shadows darker
-                // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-                float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), (1. - bias), 1.);
-                //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
-                //pMax = variance / (variance + distanceToMean*distanceToMean);
-                // visibility = clamp(pMax, 1., p);
-                visibility = min(max(p, pMax), 1.);
-            #endif
-
-            return visibility;
+        return visibility;
     }
 #endif
 
