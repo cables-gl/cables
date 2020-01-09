@@ -72,23 +72,33 @@ inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
 
+const inAdvanced = op.inBool("Enable Advanced", false);
+const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
+const inFilterType = op.inSwitch("Texture Filter",['Linear', 'Anisotropic', 'Mip Map'], 'Linear');
+const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], '0');
+const inTest = op.inFloat("Test", 1);
+inMSAA.setUiAttribs({ greyout: true });
+inFilterType.setUiAttribs({ greyout: true });
+inAnisotropic.setUiAttribs({ greyout: true });
+inTest.setUiAttribs({ greyout: true });
+op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic, inTest]);
+
+inAdvanced.onChange = function() {
+    if (inAdvanced.get()) {
+        inMSAA.setUiAttribs({ greyout: false });
+        inFilterType.setUiAttribs({ greyout: false });
+    } else {
+        inMSAA.setUiAttribs({ greyout: true });
+        inFilterType.setUiAttribs({ greyout: true });
+        inMSAA.setValue("none");
+        inAnisotropic.setUiAttribs({ greyout: true });
+        inTest.setUiAttribs({ greyout: true });
+    }
+};
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
 
-// * FRAMEBUFFER *
-var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
-else {
-    fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
-        // multisampling: true,
-        isFloatingPointTexture:true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
-    });
-}
 // * SHADER *
 const shader = new CGL.Shader(cgl, "shadowSpotLight");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
@@ -97,17 +107,71 @@ shader.setSource(attachments.spotlight_shadowpass_vert, attachments.spotlight_sh
 const blurShader = new CGL.Shader(cgl, "shadowSpotBlur");
 blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur_frag);
 
-const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+var effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
 
 var texelSize = 1/Number(inMapSize.get());
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
 const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
 const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+const uniformLightPosition = new CGL.Uniform(shader, '3f', "lightPosition", vec3.create());
 
 
-inMapSize.onChange = function() {
-
+// * FRAMEBUFFER *
+var fb = null;
+if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+else {
+    fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
+        isFloatingPointTexture:true,
+         filter: CGL.Texture.FILTER_LINEAR,
+    });
 }
+
+function updateBuffers() {
+        const MSAA = Number(inMSAA.get().charAt(0));
+
+    if (fb) fb.delete();
+    if (effect) effect.delete();
+
+    let filterType = null;
+    let anisotropicFactor = undefined;
+
+    if (inFilterType.get() == "Linear") {
+        filterType = CGL.Texture.FILTER_LINEAR;
+    } else if (inFilterType.get() == "Anisotropic") {
+        filterType = CGL.Texture.FILTER_LINEAR;
+        anisotropicFactor = Number(inAnisotropic.get());
+    } else if (inFilterType.get() == "Mip Map") {
+        filterType = CGL.Texture.FILTER_MIPMAP;
+    }
+
+    const mapSize = Number(inMapSize.get());
+    const textureOptions = {
+        isFloatingPointTexture: true,
+        filter: filterType,
+    };
+
+
+    if (MSAA) Object.assign(textureOptions, { multisampling: true, multisamplingSamples: MSAA });
+    if (anisotropicFactor !== undefined) Object.assign(textureOptions, { anisotropic: anisotropicFactor });
+
+    fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
+    effect = new CGL.TextureEffect(cgl, textureOptions);
+}
+
+inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
+
+inFilterType.onChange = function() {
+    if (inFilterType.get() === "Anisotropic") {
+        inAnisotropic.setUiAttribs({ greyout: false });
+        inTest.setUiAttribs({ greyout: false });
+
+    } else {
+        inAnisotropic.setUiAttribs({ greyout: true });
+        inTest.setUiAttribs({ greyout: true });
+    }
+
+    updateBuffers();
+};
 
 const inLight = {
   position: positionIn,
@@ -169,7 +233,6 @@ inMapSize.onChange = function() {
     fb.setSize(size, size);
     texelSize = 1 / size;
     uniformTexelSize.setValue(texelSize);
-    op.log("executed onChange mapsize");
 }
 
 
@@ -262,7 +325,7 @@ function renderShadowMap() {
     cgl.pushViewMatrix();
     cgl.pushPMatrix();
 
-    fb.renderStart();
+    fb.renderStart(cgl);
     /* */
     // * calculate matrices & camPos vector
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
@@ -280,7 +343,7 @@ function renderShadowMap() {
 
     outTrigger.trigger();
 
-    fb.renderEnd();
+    fb.renderEnd(cgl);
 
     // remove light from stack and readd it with shadow map & mvp matrix
     cgl.lightStack.pop();
@@ -312,7 +375,7 @@ inTrigger.onTriggered = function() {
 
     light.position = resultPos;
     light.conePointAt = resultPointAt;
-
+    uniformLightPosition.setValue(light.position);
     /*
     if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         gui.setTransformGizmo({
@@ -333,19 +396,19 @@ inTrigger.onTriggered = function() {
     */
     cgl.lightStack.push(light);
 
-    if (inCastShadow.get()) {
+    if (inCastShadow.get() && fb) {
         cgl.gl.enable(cgl.gl.CULL_FACE);
         cgl.gl.cullFace(cgl.gl.FRONT);
 
         cgl.frameStore.renderOffscreen = true;
         cgl.shadowPass = true;
 
-        renderShadowMap();
+         renderShadowMap();
 
         cgl.gl.cullFace(cgl.gl.BACK);
         cgl.gl.disable(cgl.gl.CULL_FACE);
 
-        renderBlur();
+         renderBlur();
 
         cgl.shadowPass = false;
         cgl.frameStore.renderOffscreen = false;
@@ -366,7 +429,7 @@ inTrigger.onTriggered = function() {
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
+    if (inCastShadow.get() && fb) cgl.frameStore.mapStack.pop();
 }
 
 

@@ -1,5 +1,5 @@
 // http://fabiensanglard.net/shadowmappingVSM/
-IN vec4 vPos;
+
 UNI float inShadowBias;
 void main() {
     {{MODULE_BEGIN_FRAG}}
@@ -10,6 +10,7 @@ void main() {
 
 
     float depth = gl_FragCoord.z;
+
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel
 

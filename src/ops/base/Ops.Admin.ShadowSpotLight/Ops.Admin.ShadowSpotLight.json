@@ -143,6 +143,33 @@
                 "name": "Blur Amount",
                 "group": "Shadow",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable Advanced",
+                "group": "Advanced Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "MSAA",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "5",
+                "name": "Texture Filter",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Test",
+                "group": "Advanced Options",
+                "subType": "number"
             }
         ],
         "portsOut": [

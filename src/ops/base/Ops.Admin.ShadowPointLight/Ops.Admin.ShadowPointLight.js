@@ -479,12 +479,12 @@ inTrigger.onTriggered = function() {
 
 inTrigger.onLinkChanged = function() {
     if (!inTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap.cubemap = null;
+        cgl.frameStore.shadowCubeMap = null;
     }
 }
 outTrigger.onLinkChanged = function() {
     if (!outTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap.cubemap = null;
+        cgl.frameStore.shadowCubeMap = null;
     }
 }
 

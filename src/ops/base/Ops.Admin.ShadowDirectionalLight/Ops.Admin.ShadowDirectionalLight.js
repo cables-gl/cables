@@ -58,6 +58,30 @@ inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
 
+const inAdvanced = op.inBool("Enable Advanced", false);
+const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
+const inFilterType = op.inSwitch("Texture Filter",['Linear', 'Anisotropic', 'Mip Map'], 'Linear');
+const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], '0');
+const inTest = op.inFloat("Test", 1);
+inMSAA.setUiAttribs({ greyout: true });
+inFilterType.setUiAttribs({ greyout: true });
+inAnisotropic.setUiAttribs({ greyout: true });
+inTest.setUiAttribs({ greyout: true });
+op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic, inTest]);
+
+inAdvanced.onChange = function() {
+    if (inAdvanced.get()) {
+        inMSAA.setUiAttribs({ greyout: false });
+        inFilterType.setUiAttribs({ greyout: false });
+    } else {
+        inMSAA.setUiAttribs({ greyout: true });
+        inFilterType.setUiAttribs({ greyout: true });
+        inMSAA.setValue("none");
+        inAnisotropic.setUiAttribs({ greyout: true });
+        inTest.setUiAttribs({ greyout: true });
+    }
+};
+
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
 
@@ -85,7 +109,7 @@ shader.setSource(attachments.dirlight_shadowpass_vert, attachments.dirlight_shad
 const blurShader = new CGL.Shader(cgl, "shadowBlur");
 blurShader.setSource(attachments.dirlight_blur_vert, attachments.dirlight_blur_frag);
 
-const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+var effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
 
 var texelSize = 1/Number(inMapSize.get());
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
@@ -103,6 +127,52 @@ const light = new Light({
     falloff: null,
 });
 
+function updateBuffers() {
+        const MSAA = Number(inMSAA.get().charAt(0));
+
+    if (fb) fb.delete();
+    if (effect) effect.delete();
+
+    let filterType = null;
+    let anisotropicFactor = undefined;
+
+    if (inFilterType.get() == "Linear") {
+        filterType = CGL.Texture.FILTER_LINEAR;
+    } else if (inFilterType.get() == "Anisotropic") {
+        filterType = CGL.Texture.FILTER_LINEAR;
+        anisotropicFactor = Number(inAnisotropic.get());
+    } else if (inFilterType.get() == "Mip Map") {
+        filterType = CGL.Texture.FILTER_MIPMAP;
+    }
+
+    const mapSize = Number(inMapSize.get());
+    const textureOptions = {
+        isFloatingPointTexture: true,
+        filter: filterType,
+    };
+
+
+    if (MSAA) Object.assign(textureOptions, { multisampling: true, multisamplingSamples: MSAA });
+    if (anisotropicFactor !== undefined) Object.assign(textureOptions, { anisotropic: anisotropicFactor });
+
+    fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
+    effect = new CGL.TextureEffect(cgl, textureOptions);
+}
+
+inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
+
+inFilterType.onChange = function() {
+    if (inFilterType.get() === "Anisotropic") {
+        inAnisotropic.setUiAttribs({ greyout: false });
+        inTest.setUiAttribs({ greyout: false });
+
+    } else {
+        inAnisotropic.setUiAttribs({ greyout: true });
+        inTest.setUiAttribs({ greyout: true });
+    }
+
+    updateBuffers();
+};
 
 const inLight = {
   position: [inPosX, inPosY, inPosZ],
@@ -285,7 +355,7 @@ inTrigger.onTriggered = function() {
     //cgl.gl.enable(cgl.gl.CULL_FACE);
     //cgl.gl.cullFace(cgl.gl.FRONT);
     //cgl.gl.colorMask(false,false,false,false);
-    if (inCastShadow.get()) {
+    if (inCastShadow.get() && fb) {
         cgl.shadowPass = true;
         cgl.frameStore.renderOffscreen = true;
         //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);

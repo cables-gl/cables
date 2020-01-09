@@ -97,33 +97,36 @@ for(var i=0;i<MAX_LIGHTS;i++)
 }
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
-let shadowMap = new CGL.Uniform(shader,'t','shadowMap', 0);
-let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 1);
+let shadowMap = new CGL.Uniform(shader,'t','shadowMap', 0);;
+let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 1);;
 const lightMatrix = new CGL.Uniform(shader, "m4", "lightMatrix", mat4.create());
 const uniformShadowMapSize = new CGL.Uniform(shader, 'f', 'inShadowMapSize', 0);
 const uniformShadowStrength = new CGL.Uniform(shader, 'f', 'inShadowStrength', inShadowStrength);
 
 shader.bindTextures = function() {
-    if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap.cubemap) {
+    if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap) {
         if (inShadow.get()) {
-            if (!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
 
             if (cgl.frameStore.shadowMap) {
                 cgl.setTexture(0, cgl.frameStore.shadowMap.tex);
                 uniformShadowMapSize.setValue(cgl.frameStore.shadowMap.width);
             }
 
-            if (cgl.frameStore.shadowCubeMap.cubemap) {
-                cgl.setTexture(1, cgl.frameStore.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-                if (cgl.frameStore.shadowCubeMap.size) uniformShadowMapSize.setValue(cgl.frameStore.shadowCubeMap.size);
-                else uniformShadowMapSize.setValue(1024);
+            if (cgl.frameStore.shadowCubeMap) {
+                    cgl.setTexture(1, cgl.frameStore.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+                    if (cgl.frameStore.shadowCubeMap.size) uniformShadowMapSize.setValue(cgl.frameStore.shadowCubeMap.size);
+                    else uniformShadowMapSize.setValue(1024);
+
             }
+            if (!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
         }
     } else {
 
         if (inShadow.get()) {
-            if (!cgl.frameStore.shadowMap && !cgl.frameStore.shadowCubeMap.cubemap) {
-                if (shader.hasDefine("SHADOW_MAP")) shader.removeDefine("SHADOW_MAP");
+            if (!cgl.frameStore.shadowMap && !cgl.frameStore.shadowCubeMap) {
+                if (shader.hasDefine("SHADOW_MAP")) {
+                    shader.removeDefine("SHADOW_MAP");
+                }
             }
         }
     }
@@ -275,19 +278,15 @@ execute.onTriggered=function()
 
 
     if (cgl.shadowPass) {
-        // cgl.setShader(defaultShader);
         next.trigger();
-        // cgl.setPreviousShader();
     }
     else {
         cgl.setShader(shader);
-
         shader.bindTextures();
-        outTex.set(null);
-        //    outTex.set(cgl.frameStore.shadowMap);
 
         updateLights();
         next.trigger();
+
         cgl.setPreviousShader();
     }
 };
