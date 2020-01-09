@@ -441,12 +441,12 @@ inTrigger.onTriggered = function() {
             posZ: inPosZ,
         });
 
-        /*
+
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, transVec);
         CABLES.GL_MARKER.drawSphere(op, inRadius.get());
         cgl.popModelMatrix();
-        */
+
     }
 
     cgl.lightStack.push(light);
@@ -479,12 +479,12 @@ inTrigger.onTriggered = function() {
 
 inTrigger.onLinkChanged = function() {
     if (!inTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap = null;
+        cgl.frameStore.shadowCubeMap.cubemap = null;
     }
 }
 outTrigger.onLinkChanged = function() {
     if (!outTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap = null;
+        cgl.frameStore.shadowCubeMap.cubemap = null;
     }
 }
 

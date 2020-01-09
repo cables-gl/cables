@@ -104,7 +104,7 @@ const uniformShadowMapSize = new CGL.Uniform(shader, 'f', 'inShadowMapSize', 0);
 const uniformShadowStrength = new CGL.Uniform(shader, 'f', 'inShadowStrength', inShadowStrength);
 
 shader.bindTextures = function() {
-    if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap) {
+    if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap.cubemap) {
         if (inShadow.get()) {
             if (!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
 

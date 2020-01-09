@@ -224,7 +224,7 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
             if (light.type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
 
             float p = step(distanceTo, moments.x);
-            float variance =  max(moments.y - (moments.x * moments.x), 0.000002);
+            float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
 
             float distanceToMean = distanceTo - moments.x;
             //there is a very small probability that something is being lit when its not
