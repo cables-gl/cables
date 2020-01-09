@@ -122,7 +122,7 @@ shader.bindTextures = function() {
     } else {
 
         if (inShadow.get()) {
-            if (!cgl.frameStore.shadowMap && !cgl.frameStore.shadowCubeMap) {
+            if (!cgl.frameStore.shadowMap && !cgl.frameStore.shadowCubeMap.cubemap) {
                 if (shader.hasDefine("SHADOW_MAP")) shader.removeDefine("SHADOW_MAP");
             }
         }

@@ -231,7 +231,7 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
             // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
             // bottom line helps make the shadows darker
             // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), (1. - inBias), 1.);
+            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), inBias, 1.);
             //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
             //pMax = variance / (variance + distanceToMean*distanceToMean);
             // visibility = clamp(pMax, 1., p);
