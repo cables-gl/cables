@@ -13,26 +13,21 @@ void main() {
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel
 
-    float moment2 = depth*depth + 0.25 * (dx * dx + dy * dy);
-    /*
-
-    float depth = vPos.z/vPos.w;
-    float moment1 = depth;
-    float moment2 = depth*depth;
-
-    moment2 += 0.25*(dx * dx + dy * dy);
-    float variance = moment2 - (moment1 * moment1);
-    variance = max(variance, inShadowBias);
-
-    outColor = vec4(moment1, moment2, variance, 1.);
+     /*
+    dot(x, x) = x*x
+    Finally, it is usually beneficial to clamp the partial derivative portion of M 2
+    to avoid an excessively high variance if an occluder is almost parallel to the light direction.
+    Hardware-generated partial derivatives become somewhat unstable in these cases
+    and a correspondingly unstable variance can produce random, flashing pixels of light
+    in regions that should be fully shadowed.
+    https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
     */
-    vec2 moments = vec2(gl_FragCoord.z, gl_FragCoord.z*gl_FragCoord.z);
-    float originalZ = gl_FragCoord.z; // / gl_FragCoord.w;
+    float clampedDerivative = clamp(dot(dx, dx) + dot(dy, dy), 0., 1.);
+    float moment2 = dot(depth, depth) + 0.25 * clampedDerivative;
+
     outColor = vec4(
-        originalZ,
-    moment2, //moment2,
+    depth,
+    moment2,
     0.,
     1.);
-    // outColor = vec4(1., 0., 0., 1.);
-    // outColor = //vec4(gl_FragCoord.z, gl_FragCoord.z*gl_FragCoord.z, 0.,1.);
 }
