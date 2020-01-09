@@ -16,39 +16,6 @@ function Light(config) {
      return this;
 }
 
-// * FRAMEBUFFER *
-var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, 1024, 1024);
-else {
-    fb = new CGL.Framebuffer2(cgl,1024,1024, {
-        // multisampling: true,
-        isFloatingPointTexture:true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
-    });
-}
-
-// cgl.shaderToRender = shader;
-
-const blurShader = new CGL.Shader(cgl, "shadowBlur");
-blurShader.setSource(attachments.pointlight_blur_vert, attachments.pointlight_blur_frag);
-
-const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
-const outputTexture =new CGL.Texture(cgl, {
-        name: "shadowDirLightBlur",
-        isFloatingPointTexture: true,
-        filter: CGL.Texture.FILTER_MIPMAP,
-        width: 1024,
-        height: 1024,
-    });
-
-const texelSize = 1/1024;
-const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
-const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
-const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
 
 
 
@@ -87,12 +54,13 @@ const attribIns = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-op.setPortGroup("Shadow",[inCastShadow, inNear, inFar, inBlur]);
+op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBlur]);
 const shadowProperties = [inNear, inFar, inBlur];
-
+inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
@@ -101,10 +69,12 @@ inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
     if (castShadow) {
+        inMapSize.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
     } else {
+        inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
@@ -150,7 +120,39 @@ const inLight = {
   falloff: inFalloff,
 };
 
+// * FRAMEBUFFER *
+var fb = null;
+if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+else {
+    fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
+        // multisampling: true,
+        isFloatingPointTexture: true,
+        // multisampling:true,
+        //filter: CGL.Texture.FILTER_NEAREST
+         filter: CGL.Texture.FILTER_LINEAR,
+         //shadowMap:true
+    });
+}
 
+const blurShader = new CGL.Shader(cgl, "shadowBlur");
+blurShader.setSource(attachments.pointlight_blur_vert, attachments.pointlight_blur_frag);
+
+const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+
+const outputTexture =new CGL.Texture(cgl, {
+        name: "shadowDirLightBlur",
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_MIPMAP,
+        width: Number(inMapSize.get()),
+        height: Number(inMapSize.get()),
+    });
+
+var texelSize = 1/Number(inMapSize.get());
+const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
+const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
+const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+
+var cubemapInitialized = false;
 
 const light = new Light({
     type: "point",
@@ -175,6 +177,16 @@ Object.keys(inLight).forEach(function(key) {
         }
     }
 });
+
+inMapSize.onChange = function() {
+    cubemapInitialized = false;
+    const size = Number(inMapSize.get());
+    fb.setSize(size, size);
+    texelSize = 1 / size;
+    uniformTexelSize.setValue(texelSize);
+    initializeCubemap();
+    cubemapInitialized = true;
+}
 
 const CUBEMAP_PROPERTIES = [  // targets for use in some gl functions for working with cubemaps
     {
@@ -209,7 +221,7 @@ function checkError(when)
     var err=gl.getError();
     if (err != gl.NO_ERROR) {
         console.log("error "+when);
-        console.log('error size',1024);
+        console.log('error size',Number(inMapSize.get()));
         if(err==cgl.gl.NO_ERROR)console.error("NO_ERROR");
         if(err==cgl.gl.OUT_OF_MEMORY)console.error("OUT_OF_MEMORY");
         if(err==cgl.gl.INVALID_ENUM)console.error("INVALID_ENUM");
@@ -224,8 +236,9 @@ function checkError(when)
 }
 var framebuffer = null;
 var depthBuffer = null;
+const cubeMap = { cubemap: null, size: null };
 var dynamicCubemap = null;
-var cubemapInitialized = false;
+
 
 function initializeCubemap() {
     var i=0;
@@ -249,8 +262,8 @@ function initializeCubemap() {
             CUBEMAP_PROPERTIES[i].face,
             0,
             gl.RGBA,
-            1024,
-            1024,
+            Number(inMapSize.get()),
+            Number(inMapSize.get()),
             0, gl.RGBA,
             gl.UNSIGNED_BYTE,
             null
@@ -270,7 +283,7 @@ function initializeCubemap() {
     checkError(4);
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer); // so we can create storage for the depthBuffer
     checkError(5);
-    gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, 1024, 1024);
+    gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, Number(inMapSize.get()), Number(inMapSize.get()));
     checkError(6);
     gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
     checkError(7);
@@ -279,7 +292,7 @@ function initializeCubemap() {
 
     // Check form WebGL errors (since I'm not sure all platforms will be able to create the framebuffer)
 
-    outCubemap.set({ "cubemap": dynamicCubemap });
+    outCubemap.set({ cubemap: dynamicCubemap });
 
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);
@@ -384,7 +397,7 @@ function renderCubemap() {
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
-    gl.viewport(0, 0, 1024, 1024);
+    gl.viewport(0, 0, Number(inMapSize.get()), Number(inMapSize.get()));
 
     cgl.gl.enable(cgl.gl.CULL_FACE);
     cgl.gl.cullFace(cgl.gl.FRONT);
@@ -450,7 +463,7 @@ inTrigger.onTriggered = function() {
         cgl.frameStore.renderOffscreen = false;
         cgl.lightStack.pop();
 
-        cgl.frameStore.shadowCubeMap = dynamicCubemap;
+        cgl.frameStore.shadowCubeMap = { cubemap: dynamicCubemap };
         cgl.frameStore.mapStack.push(dynamicCubemap);
 
         light.nearFar = [inNear.get(), inFar.get()];

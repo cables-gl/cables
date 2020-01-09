@@ -16,46 +16,6 @@ function Light(config) {
      return this;
 }
 
-// * FRAMEBUFFER *
-var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, 1024, 1024);
-else {
-    fb = new CGL.Framebuffer2(cgl,1024,1024, {
-        // multisampling: true,
-        isFloatingPointTexture:true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
-    });
-}
-// * SHADER *
-const shader = new CGL.Shader(cgl, "shadowDirLight");
-shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
-shader.setSource(attachments.dirlight_shadowpass_vert, attachments.dirlight_shadowpass_frag);
-
-// cgl.shaderToRender = shader;
-
-const blurShader = new CGL.Shader(cgl, "shadowBlur");
-blurShader.setSource(attachments.dirlight_blur_vert, attachments.dirlight_blur_frag);
-
-const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
-const outputTexture =new CGL.Texture(cgl, {
-        name: "shadowDirLightBlur",
-        isFloatingPointTexture: true,
-        filter: CGL.Texture.FILTER_MIPMAP,
-        width: 1024,
-        height: 1024,
-    });
-
-const texelSize = 1/1024;
-const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
-const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
-const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
-
-
-
 const inTrigger = op.inTrigger("Trigger In");
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 3);
@@ -85,12 +45,14 @@ const attribIns = [inIntensity];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-op.setPortGroup("Shadow",[inCastShadow, inLRBT, inNear, inFar, inBlur]);
+op.setPortGroup("Shadow",[inMapSize, inCastShadow, inLRBT, inNear, inFar, inBlur]);
 
+inMapSize.setUiAttribs({ greyout: true });
 inLRBT.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
@@ -98,6 +60,38 @@ inBlur.setUiAttribs({ greyout: true });
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
+
+
+// * FRAMEBUFFER *
+var fb = null;
+if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+else {
+    fb = new CGL.Framebuffer2(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
+        // multisampling: true,
+        isFloatingPointTexture:true,
+        // multisampling:true,
+        //filter: CGL.Texture.FILTER_NEAREST
+         filter: CGL.Texture.FILTER_LINEAR,
+         //shadowMap:true
+    });
+}
+
+
+// * SHADER *
+const shader = new CGL.Shader(cgl, "shadowDirLight");
+shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
+shader.setSource(attachments.dirlight_shadowpass_vert, attachments.dirlight_shadowpass_frag);
+
+const blurShader = new CGL.Shader(cgl, "shadowBlur");
+blurShader.setSource(attachments.dirlight_blur_vert, attachments.dirlight_blur_frag);
+
+const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+
+var texelSize = 1/Number(inMapSize.get());
+const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
+const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
+const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+
 
 const light = new Light({
     type: "directional",
@@ -131,16 +125,24 @@ Object.keys(inLight).forEach(function(key) {
     }
 });
 
+inMapSize.onChange = function() {
+    const size = Number(inMapSize.get());
+    fb.setSize(size, size);
+    texelSize = 1 / size;
+    uniformTexelSize.setValue(texelSize);
+}
 
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
     if (castShadow) {
+        inMapSize.setUiAttribs({ greyout: false });
         inLRBT.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
     } else {
+        inMapSize.setUiAttribs({ greyout: true });
         inLRBT.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });

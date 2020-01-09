@@ -72,6 +72,11 @@
                 "subType": "boolean"
             },
             {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow"
+            },
+            {
                 "type": "0",
                 "name": "LR-BottomTop",
                 "group": "Shadow",

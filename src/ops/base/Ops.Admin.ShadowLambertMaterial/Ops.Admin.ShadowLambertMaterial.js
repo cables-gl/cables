@@ -113,9 +113,10 @@ shader.bindTextures = function() {
                 uniformShadowMapSize.setValue(cgl.frameStore.shadowMap.width);
             }
 
-            if (cgl.frameStore.shadowCubeMap) {
-                cgl.setTexture(1, cgl.frameStore.shadowCubeMap, cgl.gl.TEXTURE_CUBE_MAP);
-                uniformShadowMapSize.setValue(1024);
+            if (cgl.frameStore.shadowCubeMap.cubemap) {
+                cgl.setTexture(1, cgl.frameStore.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+                if (cgl.frameStore.shadowCubeMap.size) uniformShadowMapSize.setValue(cgl.frameStore.shadowCubeMap.size);
+                else uniformShadowMapSize.setValue(1024);
             }
         }
     } else {

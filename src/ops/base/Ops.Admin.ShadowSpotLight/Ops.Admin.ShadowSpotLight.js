@@ -15,46 +15,6 @@ function Light(config) {
      return this;
 }
 
-
-// * FRAMEBUFFER *
-var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, 1024, 1024);
-else {
-    fb = new CGL.Framebuffer2(cgl,1024,1024, {
-        // multisampling: true,
-        isFloatingPointTexture:true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
-    });
-}
-// * SHADER *
-const shader = new CGL.Shader(cgl, "shadowSpotLight");
-shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
-shader.setSource(attachments.spotlight_shadowpass_vert, attachments.spotlight_shadowpass_frag);
-op.log( shader );
-// cgl.shaderToRender = shader;
-
-const blurShader = new CGL.Shader(cgl, "shadowSpotBlur");
-blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur_frag);
-
-const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
-const outputTexture =new CGL.Texture(cgl, {
-        name: "shadowSpotLightBlur",
-        isFloatingPointTexture: true,
-        filter: CGL.Texture.FILTER_LINEAR,
-        width: 1024,
-        height: 1024,
-    });
-
-const texelSize = 1/1024;
-const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
-const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
-const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
-
-
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 
@@ -99,12 +59,15 @@ const lightAttribsIn = [inIntensity, inRadius ];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
+
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 
-op.setPortGroup("Shadow",[inCastShadow, inNear, inFar, inBlur]);
+op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBlur]);
 
+inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
@@ -112,6 +75,39 @@ inBlur.setUiAttribs({ greyout: true });
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
+
+// * FRAMEBUFFER *
+var fb = null;
+if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+else {
+    fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
+        // multisampling: true,
+        isFloatingPointTexture:true,
+        // multisampling:true,
+        //filter: CGL.Texture.FILTER_NEAREST
+         filter: CGL.Texture.FILTER_LINEAR,
+         //shadowMap:true
+    });
+}
+// * SHADER *
+const shader = new CGL.Shader(cgl, "shadowSpotLight");
+shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
+shader.setSource(attachments.spotlight_shadowpass_vert, attachments.spotlight_shadowpass_frag);
+
+const blurShader = new CGL.Shader(cgl, "shadowSpotBlur");
+blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur_frag);
+
+const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+
+var texelSize = 1/Number(inMapSize.get());
+const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
+const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
+const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+
+
+inMapSize.onChange = function() {
+
+}
 
 const inLight = {
   position: positionIn,
@@ -168,14 +164,25 @@ Object.keys(inLight).forEach(function(key) {
     }
 });
 
+inMapSize.onChange = function() {
+    const size = Number(inMapSize.get());
+    fb.setSize(size, size);
+    texelSize = 1 / size;
+    uniformTexelSize.setValue(texelSize);
+    op.log("executed onChange mapsize");
+}
+
+
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
     if (castShadow) {
+        inMapSize.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
     } else {
+        inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
@@ -201,7 +208,7 @@ function updateProjectionMatrix() {
     );
 }
 
-inNear.onChange = inFar.onChange = function() {updateProjectionMatrix(); }
+inNear.onChange = inFar.onChange = updateProjectionMatrix;
 
 // * init vectors & matrices
 const lookAt = vec3.fromValues(0, 0, 0);
@@ -225,7 +232,7 @@ function renderBlur() {
 
 
     effect.bind();
-   cgl.setTexture(0, effect.getCurrentSourceTexture().tex);
+    cgl.setTexture(0, effect.getCurrentSourceTexture().tex);
 
     uniformXY.setValue([1.5 * inBlur.get() * texelSize, 0]);
     effect.finish();
@@ -239,9 +246,6 @@ function renderBlur() {
 
     effect.finish();
 
-
-    //outTexture.set(null);
-    //outTexture.set(effect.getCurrentSourceTexture());
     effect.endEffect();
 
     cgl.setPreviousShader();
@@ -352,7 +356,7 @@ inTrigger.onTriggered = function() {
 
         light.lightMatrix = lightBiasMVPMatrix;
         cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
-        // light.shadowMap = blurredMap;
+
         cgl.frameStore.shadowMap = effect.getCurrentSourceTexture();
 
         cgl.lightStack.push(light);

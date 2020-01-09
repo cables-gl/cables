@@ -22,6 +22,9 @@ UNI float inBias;
 UNI float inShadowMapSize;
 UNI float inShadowStrength;
 
+UNI sampler2D shadowMaps[NUM_LIGHTS];
+
+
 #define POINT 0
 #define DIRECTIONAL 1
 #define SPOT 2
