@@ -178,8 +178,10 @@ var updateLights=function()
         lights[count].ambient.setValue([0.1,0.1,0.1]);
         lights[count].mul.setValue(1);
         lights[count].fallOff.setValue(0.5);
+
         if (lights[count].shadowMap) {
             shader.removeUniform('lights[' + count + '].shadowMap'); // lights[count].shadowMap = null;
+            lights[count].shadowMap = null;
         }
         lights[count].castShadow.setValue(0);
     }
@@ -255,12 +257,15 @@ var updateLights=function()
                                             lights[count].shadowBias.setValue(light.shadowBias);
                                         }
                                     } else {
-                                        if (lights[count].shadowMap) lights[count].shadowMap = null;
+                                        lightMatrices[count].setValue(null);
+                                        if (lights[count].shadowMap) {
+                                            shader.removeUniform('lights[' + count + '].shadowMap');
+                                            lights[count].shadowMap = null;
+                                        }
                                     }
                                     count++;
 
                                  } else if (light.type === "spot") {
-                                     op.log(count);
                                     lights[count].pos.setValue(light.position);
                                     lights[count].fallOff.setValue(light.falloff);
                                     lights[count].radius.setValue(light.radius);
@@ -285,8 +290,13 @@ var updateLights=function()
                                             lights[count].shadowBias.setValue(light.shadowBias);
                                         }
                                     } else {
-                                        if (lights[count].shadowMap) shader.removeUniform('lights[' + count + '].shadowMap');
+                                        // lightMatrices[count].setValue(null);
+                                        if (lights[count].shadowMap) {
+                                            shader.removeUniform('lights[' + count + '].shadowMap');
+                                            lights[count].shadowMap = null;
+                                        }
                                     }
+
                                     count++;
                                  }
                         }

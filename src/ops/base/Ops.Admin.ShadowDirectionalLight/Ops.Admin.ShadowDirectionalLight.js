@@ -221,6 +221,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
         inBias.setUiAttribs({ greyout: true });
+        outTexture.set(null);
     }
 }
 

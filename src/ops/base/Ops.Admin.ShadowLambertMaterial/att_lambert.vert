@@ -63,10 +63,11 @@ void main()
 
     mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;
-
-    for (int i = 0; i < NUM_LIGHTS; i++) {
-        shadowCoords[i] = lightMatrices[i] * modelPos;
-    }
+    #ifdef SHADOW_MAP
+        for (int i = 0; i < NUM_LIGHTS; i++) {
+            shadowCoords[i] = lightMatrices[i] * modelPos;
+        }
+    #endif
 
     gl_Position = projMatrix * mvMatrix * pos;
     // shadowCoord = lightMatrix * modelPos; // vec4(fragPos, 1.);
