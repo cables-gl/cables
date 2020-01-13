@@ -49,8 +49,9 @@ const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
+const inBias = op.inFloatSlider("Bias", 0.004);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-op.setPortGroup("Shadow",[inMapSize, inCastShadow, inLRBT, inNear, inFar, inBlur]);
+op.setPortGroup("Shadow",[inMapSize, inCastShadow, inLRBT, inNear, inFar, inBias, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inLRBT.setUiAttribs({ greyout: true });
@@ -384,6 +385,7 @@ inTrigger.onTriggered = function() {
             outTexture.set(fb.getTextureColor());
 
             light.lightMatrix = lightBiasMVPMatrix;
+            light.shadowBias = inBias.get();
             light.shadowMap = fb.getTextureColor();
             cgl.lightStack.push(light);
 

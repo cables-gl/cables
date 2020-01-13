@@ -24,8 +24,6 @@ UNI vec4 color;//r,g,b,a;
 
 UNI sampler2D shadowMap;
 UNI samplerCube shadowCubeMap;
-
-UNI float inBias;
 UNI float inShadowStrength;
 
 
@@ -85,8 +83,6 @@ UNI float inShadowStrength;
     );
 
 #ifdef MODE_VSM
-
-
     float linstep(float value, float low, float high) {
         return clamp((value - low)/(high-low), 0., 1.);
     }
@@ -109,6 +105,7 @@ struct Light {
   int castShadow;
   sampler2D map;
   float shadowMapWidth;
+  float shadowBias;
   // samplerCube cubemap;
 };
 
@@ -137,7 +134,7 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
 }
 
 #ifdef SHADOW_MAP
-    float CalculateShadow(vec3 lightPos, vec2 nearFar, int type, float lambert, sampler2D shadowMap, vec4 shadowCoord, float shadowMapSize) {
+    float CalculateShadow(vec3 lightPos, vec2 nearFar, int type, float lambert, sampler2D shadowMap, vec4 shadowCoord, float shadowMapSize, float shadowBias) {
         float visibility = 1.;
 
         vec2 shadowMapLookup = shadowCoord.xy;
@@ -175,7 +172,7 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
         else depthFromMapLookup = texture(shadowMap, shadowMapLookup).r;
 
         // modify bias according to slope of the surface
-        float bias = clamp(inBias * tan(acos(lambert)), 0., 0.1);
+        float bias = clamp(shadowBias * tan(acos(lambert)), 0., 0.1);
 
         #ifdef MODE_DEFAULT
             if (depthFromMapLookup < shadowMapDepth) visibility = 0.2;
@@ -234,7 +231,7 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
             // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
             // bottom line helps make the shadows darker
             // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), inBias, 1.);
+            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
             //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
             //pMax = variance / (variance + distanceToMean*distanceToMean);
             // visibility = clamp(pMax, 1., p);
@@ -295,7 +292,7 @@ void main()
             if (lights[l].castShadow == 1) {
                 visibility *= CalculateShadow(
                     lights[l].pos, lights[l].nearFar, lights[l].type,
-                    lambert, lights[l].map, shadowCoords[l], lights[l].shadowMapWidth
+                    lambert, lights[l].map, shadowCoords[l], lights[l].shadowMapWidth, lights[l].shadowBias
                 );
                 col.rgb *= visibility;
             }

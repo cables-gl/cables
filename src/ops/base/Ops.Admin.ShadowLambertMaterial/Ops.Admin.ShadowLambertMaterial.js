@@ -92,10 +92,11 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].spotExponent=new CGL.Uniform(shader,'f','lights['+count+'].spotExponent',0);
     lights[count].type=new CGL.Uniform(shader,'i','lights['+count+'].type',0);
     // lights[count].lightMatrix=new CGL.Uniform(shader,'m4','lights['+count+'].lightMatrix',mat4.create());
-    lights[count].nearFar=new CGL.Uniform(shader,'2f','lights['+count+'].nearFar', vec2.create());
     lights[count].castShadow=new CGL.Uniform(shader,'i','lights['+count+'].castShadow', 0);
+    lights[count].nearFar=new CGL.Uniform(shader,'2f','lights['+count+'].nearFar', vec2.create());
     lights[count].shadowMap = null;
     lights[count].shadowMapWidth = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowMapWidth', 0);
+    lights[count].shadowBias = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowBias', 0);
     lightMatrices[count] = new CGL.Uniform(shader,'m4','lightMatrices['+count+']', mat4.create());
 }
 
@@ -248,6 +249,7 @@ var updateLights=function()
                                             }
                                             cgl.setTexture(count, light.shadowMap.tex);
                                             lights[count].shadowMapWidth.setValue(light.shadowMap.width);
+                                            lights[count].shadowBias.setValue(light.shadowBias);
                                         }
                                     }
                                     count++;

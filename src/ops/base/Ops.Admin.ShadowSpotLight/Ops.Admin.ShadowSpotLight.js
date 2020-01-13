@@ -365,7 +365,6 @@ const resultPointAt = vec3.create();
 
 inTrigger.onTriggered = function() {
     if (!cgl.lightStack) cgl.lightStack = [];
-    if (!cgl.frameStore.mapStack) cgl.frameStore.mapStack = [];
 
     vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
@@ -396,40 +395,39 @@ inTrigger.onTriggered = function() {
     */
     cgl.lightStack.push(light);
 
-    if (inCastShadow.get() && fb) {
-        cgl.gl.enable(cgl.gl.CULL_FACE);
-        cgl.gl.cullFace(cgl.gl.FRONT);
+    if (!cgl.shadowPass) {
+        if (inCastShadow.get() && fb) {
+            cgl.gl.enable(cgl.gl.CULL_FACE);
+            cgl.gl.cullFace(cgl.gl.FRONT);
 
-        cgl.frameStore.renderOffscreen = true;
-        cgl.shadowPass = true;
+            cgl.frameStore.renderOffscreen = true;
+            cgl.shadowPass = true;
 
-         renderShadowMap();
+             renderShadowMap();
 
-        cgl.gl.cullFace(cgl.gl.BACK);
-        cgl.gl.disable(cgl.gl.CULL_FACE);
+            cgl.gl.cullFace(cgl.gl.BACK);
+            cgl.gl.disable(cgl.gl.CULL_FACE);
 
-         renderBlur();
+             renderBlur();
 
-        cgl.shadowPass = false;
-        cgl.frameStore.renderOffscreen = false;
-        //cgl.gl.disable(cgl.gl.CULL_FACE);
-        // cgl.gl.colorMask(false,false,false,false);
-        outTexture.set(null);
-        outTexture.set(effect.getCurrentSourceTexture());
+            cgl.shadowPass = false;
+            cgl.frameStore.renderOffscreen = false;
+            //cgl.gl.disable(cgl.gl.CULL_FACE);
+            // cgl.gl.colorMask(false,false,false,false);
+            outTexture.set(null);
+            outTexture.set(effect.getCurrentSourceTexture());
 
-        light.lightMatrix = lightBiasMVPMatrix;
-        cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
+            light.lightMatrix = lightBiasMVPMatrix;
+            light.shadowMap = fb.getTextureColor();
 
-        cgl.frameStore.shadowMap = effect.getCurrentSourceTexture();
 
-        cgl.lightStack.push(light);
-        cgl.frameStore.mapStack.push(effect.getCurrentSourceTexture());
+            cgl.lightStack.push(light);
+        }
     }
 
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-    if (inCastShadow.get() && fb) cgl.frameStore.mapStack.pop();
 }
 
 

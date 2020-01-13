@@ -96,6 +96,12 @@
             },
             {
                 "type": "0",
+                "name": "Bias",
+                "group": "Shadow",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Blur Amount",
                 "group": "Shadow",
                 "subType": "number"
