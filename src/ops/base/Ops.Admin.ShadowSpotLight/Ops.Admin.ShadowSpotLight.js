@@ -63,14 +63,16 @@ const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
+const inBias = op.inFloatSlider("Bias", 0.004);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 
-op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBlur]);
+op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBias, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
+inBias.setUiAttribs({ greyout: true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
@@ -244,11 +246,13 @@ inCastShadow.onChange = function() {
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
+        inBias.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
+        inBias.setUiAttribs({ greyout: true });
     }
 }
 
@@ -418,7 +422,9 @@ inTrigger.onTriggered = function() {
             outTexture.set(effect.getCurrentSourceTexture());
 
             light.lightMatrix = lightBiasMVPMatrix;
+            light.castShadow = true;
             light.shadowMap = fb.getTextureColor();
+            light.shadowBias = inBias.get();
 
 
             cgl.lightStack.push(light);

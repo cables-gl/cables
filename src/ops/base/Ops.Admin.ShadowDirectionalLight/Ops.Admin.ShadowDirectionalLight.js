@@ -58,6 +58,7 @@ inLRBT.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
+inBias.setUiAttribs({ greyout: true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
@@ -212,12 +213,14 @@ inCastShadow.onChange = function() {
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
+        inBias.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inLRBT.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
+        inBias.setUiAttribs({ greyout: true });
     }
 }
 

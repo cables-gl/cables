@@ -170,7 +170,7 @@ var updateLights=function()
         shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
     }
 
-    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
+    if((!cgl.lightStack || !cgl.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
 
         lights[count].pos.setValue([5,5,5]);
@@ -178,7 +178,10 @@ var updateLights=function()
         lights[count].ambient.setValue([0.1,0.1,0.1]);
         lights[count].mul.setValue(1);
         lights[count].fallOff.setValue(0.5);
-
+        if (lights[count].shadowMap) {
+            shader.removeUniform('lights[' + count + '].shadowMap'); // lights[count].shadowMap = null;
+        }
+        lights[count].castShadow.setValue(0);
     }
     else
     {
@@ -240,7 +243,7 @@ var updateLights=function()
 
                                     lights[count].mul.setValue(light.intensity);
                                     lights[count].castShadow.setValue(Number(light.castShadow));
-                                    // op.log(lightMatrices);
+
                                     if (light.castShadow) {
                                         lightMatrices[count].setValue(light.lightMatrix);
                                         if (light.shadowMap) {
@@ -251,10 +254,13 @@ var updateLights=function()
                                             lights[count].shadowMapWidth.setValue(light.shadowMap.width);
                                             lights[count].shadowBias.setValue(light.shadowBias);
                                         }
+                                    } else {
+                                        if (lights[count].shadowMap) lights[count].shadowMap = null;
                                     }
                                     count++;
 
                                  } else if (light.type === "spot") {
+                                     op.log(count);
                                     lights[count].pos.setValue(light.position);
                                     lights[count].fallOff.setValue(light.falloff);
                                     lights[count].radius.setValue(light.radius);
@@ -266,10 +272,21 @@ var updateLights=function()
                                     lights[count].spotExponent.setValue(light.spotExponent);
                                     lights[count].type.setValue(2);
                                     lights[count].mul.setValue(light.intensity);
-
-                                    if (light.lightMatrix) lightMatrix.set(light.lightMatrix);
-
                                     lights[count].castShadow.setValue(Number(light.castShadow));
+
+                                    if (light.castShadow) {
+                                        lightMatrices[count].setValue(light.lightMatrix);
+                                        if (light.shadowMap) {
+                                            if (!lights[count].shadowMap) {
+                                                lights[count].shadowMap = new CGL.Uniform(shader,'t','shadowMaps[' + count + ']', count);
+                                            }
+                                            cgl.setTexture(count, light.shadowMap.tex);
+                                            lights[count].shadowMapWidth.setValue(light.shadowMap.width);
+                                            lights[count].shadowBias.setValue(light.shadowBias);
+                                        }
+                                    } else {
+                                        if (lights[count].shadowMap) shader.removeUniform('lights[' + count + '].shadowMap');
+                                    }
                                     count++;
                                  }
                         }
