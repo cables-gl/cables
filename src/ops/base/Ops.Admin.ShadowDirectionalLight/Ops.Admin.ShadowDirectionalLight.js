@@ -373,7 +373,7 @@ inTrigger.onTriggered = function() {
             cgl.gl.disable(cgl.gl.CULL_FACE);
 
 
-            // renderBlur();
+            renderBlur();
 
             cgl.frameStore.renderOffscreen = false;
             cgl.shadowPass = false;

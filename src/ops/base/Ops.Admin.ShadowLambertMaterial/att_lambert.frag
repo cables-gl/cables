@@ -297,12 +297,13 @@ void main()
                     lights[l].pos, lights[l].nearFar, lights[l].type,
                     lambert, lights[l].map, shadowCoords[l], lights[l].shadowMapWidth
                 );
+                col.rgb *= visibility;
             }
         #endif
     }
     col.rgb*=color.rgb;
     #ifdef SHADOW_MAP
-    col.rgb *= visibility;
+    // col.rgb *= visibility;
     #endif
     col.a=color.a;
 
