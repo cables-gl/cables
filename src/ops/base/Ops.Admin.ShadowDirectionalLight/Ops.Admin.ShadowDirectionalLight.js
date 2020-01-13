@@ -128,7 +128,7 @@ const light = new Light({
 });
 
 function updateBuffers() {
-        const MSAA = Number(inMSAA.get().charAt(0));
+    const MSAA = Number(inMSAA.get().charAt(0));
 
     if (fb) fb.delete();
     if (effect) effect.delete();
@@ -147,7 +147,7 @@ function updateBuffers() {
 
     const mapSize = Number(inMapSize.get());
     const textureOptions = {
-        isFloatingPointTexture: true,
+        isFloatingPointTexture: cgl.glVersion === 2,
         filter: filterType,
     };
 
@@ -333,9 +333,8 @@ function renderShadowMap() {
 
 inTrigger.onTriggered = function() {
     if (!cgl.lightStack) cgl.lightStack = [];
-    if (!cgl.frameStore.mapStack) cgl.frameStore.mapStack = [];
-
      // NOTE: how to handle this? fucks up the shadow map
+     /*
     if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         CABLES.GL_MARKER.drawLineSourceDest({
             op: op,
@@ -347,6 +346,7 @@ inTrigger.onTriggered = function() {
             destZ: 200*light.position[2],
         })
     }
+    */
 
 
 
@@ -355,47 +355,45 @@ inTrigger.onTriggered = function() {
     //cgl.gl.enable(cgl.gl.CULL_FACE);
     //cgl.gl.cullFace(cgl.gl.FRONT);
     //cgl.gl.colorMask(false,false,false,false);
-    if (inCastShadow.get() && fb) {
-        cgl.shadowPass = true;
-        cgl.frameStore.renderOffscreen = true;
-        //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-        //cgl.gl.polygonOffset(0, 0);
+    if (!cgl.shadowPass) {
+        if (inCastShadow.get() && fb) {
+            cgl.shadowPass = true;
+            cgl.frameStore.renderOffscreen = true;
+            //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+            //cgl.gl.polygonOffset(0, 0);
 
-        cgl.gl.enable(cgl.gl.CULL_FACE);
-        cgl.gl.cullFace(cgl.gl.FRONT);
-
-
-        renderShadowMap();
-
-        //cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-        cgl.gl.cullFace(cgl.gl.BACK);
-        cgl.gl.disable(cgl.gl.CULL_FACE);
+            cgl.gl.enable(cgl.gl.CULL_FACE);
+            cgl.gl.cullFace(cgl.gl.FRONT);
 
 
-        renderBlur();
+            renderShadowMap();
 
-        cgl.frameStore.renderOffscreen = false;
-        cgl.shadowPass = false;
+            //cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+            cgl.gl.cullFace(cgl.gl.BACK);
+            cgl.gl.disable(cgl.gl.CULL_FACE);
 
-        //cgl.gl.disable(cgl.gl.CULL_FACE);
-        // cgl.gl.colorMask(false,false,false,false);
-        outTexture.set(null);
-        outTexture.set(fb.getTextureColor());
 
-        light.lightMatrix = lightBiasMVPMatrix;
+            // renderBlur();
 
-        cgl.frameStore.lightMatrix = lightBiasMVPMatrix;
-        cgl.frameStore.shadowMap = fb.getTextureColor(); // effect.getCurrentSourceTexture();
-        cgl.lightStack.push(light);
+            cgl.frameStore.renderOffscreen = false;
+            cgl.shadowPass = false;
 
-        cgl.frameStore.mapStack.push(fb.getTextureColor());
+            //cgl.gl.disable(cgl.gl.CULL_FACE);
+            // cgl.gl.colorMask(false,false,false,false);
+            outTexture.set(null);
+            outTexture.set(fb.getTextureColor());
+
+            light.lightMatrix = lightBiasMVPMatrix;
+            light.shadowMap = fb.getTextureColor();
+            cgl.lightStack.push(light);
+
+        }
     }
     //cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
 }
 
 op.onDelete = function () { cgl.frameStore.shadowMap = null; }

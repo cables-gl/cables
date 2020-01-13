@@ -10,14 +10,14 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 lightMatrix;
-
+UNI mat4 lightMatrices[NUM_LIGHTS];
 OUT vec3 norm;
 OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 OUT vec2 texCoord;
 OUT vec4 shadowCoord;
-
+OUT vec4 shadowCoords[NUM_LIGHTS];
 {{MODULES_HEAD}}
 
 mat3 transposeMat3(mat3 m)
@@ -64,8 +64,11 @@ void main()
     mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;
 
+    for (int i = 0; i < NUM_LIGHTS; i++) {
+        shadowCoords[i] = lightMatrices[i] * modelPos;
+    }
+
     gl_Position = projMatrix * mvMatrix * pos;
-    shadowCoord = lightMatrix * modelPos;
     // shadowCoord = lightMatrix * modelPos; // vec4(fragPos, 1.);
     // gl_Position = shadowCoord;
 }

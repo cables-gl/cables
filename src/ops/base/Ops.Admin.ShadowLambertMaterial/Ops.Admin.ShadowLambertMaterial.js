@@ -71,6 +71,7 @@ outShader.set(shader);
 const outTex = op.outTexture("Shadow Map");
 var MAX_LIGHTS=16;
 var lights=[];
+const lightMatrices = [];
 for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
@@ -90,20 +91,22 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].cosConeAngle=new CGL.Uniform(shader,'f','lights['+count+'].cosConeAngle',0);
     lights[count].spotExponent=new CGL.Uniform(shader,'f','lights['+count+'].spotExponent',0);
     lights[count].type=new CGL.Uniform(shader,'i','lights['+count+'].type',0);
-    lights[count].lightMatrix=new CGL.Uniform(shader,'m4','lights['+count+'].lightMatrix',mat4.create());
+    // lights[count].lightMatrix=new CGL.Uniform(shader,'m4','lights['+count+'].lightMatrix',mat4.create());
     lights[count].nearFar=new CGL.Uniform(shader,'2f','lights['+count+'].nearFar', vec2.create());
     lights[count].castShadow=new CGL.Uniform(shader,'i','lights['+count+'].castShadow', 0);
-
+    lights[count].shadowMap = null;
+    lights[count].shadowMapWidth = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowMapWidth', 0);
+    lightMatrices[count] = new CGL.Uniform(shader,'m4','lightMatrices['+count+']', mat4.create());
 }
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
-let shadowMap = new CGL.Uniform(shader,'t','shadowMap', 0);;
-let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 1);;
+let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 1);
 const lightMatrix = new CGL.Uniform(shader, "m4", "lightMatrix", mat4.create());
 const uniformShadowMapSize = new CGL.Uniform(shader, 'f', 'inShadowMapSize', 0);
 const uniformShadowStrength = new CGL.Uniform(shader, 'f', 'inShadowStrength', inShadowStrength);
 
 shader.bindTextures = function() {
+    /*
     if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap) {
         if (inShadow.get()) {
 
@@ -130,8 +133,11 @@ shader.bindTextures = function() {
             }
         }
     }
+    */
 }
+const SHADOWMAP_DEFINES = [
 
+];
 var numLights=-1;
 var updateLights=function()
 {
@@ -151,7 +157,7 @@ var updateLights=function()
         }
 
         for (let light in cgl.lightStack) {
-            if (cgl.lightStack[light].type === "point") {
+            if (cgl.lightStack[light].type !== "ambient") {
                 num++;
             }
         }
@@ -232,9 +238,18 @@ var updateLights=function()
                                     lights[count].type.setValue(1);
 
                                     lights[count].mul.setValue(light.intensity);
-
-                                    if (cgl.frameStore.lightMatrix) lightMatrix.set(cgl.frameStore.lightMatrix);
                                     lights[count].castShadow.setValue(Number(light.castShadow));
+                                    // op.log(lightMatrices);
+                                    if (light.castShadow) {
+                                        lightMatrices[count].setValue(light.lightMatrix);
+                                        if (light.shadowMap) {
+                                            if (!lights[count].shadowMap) {
+                                                lights[count].shadowMap = new CGL.Uniform(shader,'t','shadowMaps[' + count + ']', count);
+                                            }
+                                            cgl.setTexture(count, light.shadowMap.tex);
+                                            lights[count].shadowMapWidth.setValue(light.shadowMap.width);
+                                        }
+                                    }
                                     count++;
 
                                  } else if (light.type === "spot") {
@@ -250,7 +265,7 @@ var updateLights=function()
                                     lights[count].type.setValue(2);
                                     lights[count].mul.setValue(light.intensity);
 
-                                    if (cgl.frameStore.lightMatrix) lightMatrix.set(cgl.frameStore.lightMatrix);
+                                    if (light.lightMatrix) lightMatrix.set(light.lightMatrix);
 
                                     lights[count].castShadow.setValue(Number(light.castShadow));
                                     count++;

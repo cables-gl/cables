@@ -1,5 +1,9 @@
 {{MODULES_HEAD}}
 
+#define POINT 0
+#define DIRECTIONAL 1
+#define SPOT 2
+
 IN vec3 norm;
 IN vec4 modelPos;
 
@@ -7,11 +11,14 @@ IN vec4 modelPos;
 IN mat3 normalMatrix; // when instancing...
 
 IN vec2 texCoord;
-IN vec4 shadowCoord;
+// IN vec4 shadowCoord;
 
 IN vec3 mvNormal;
 IN vec3 mvTangent;
 IN vec3 mvBiTangent;
+
+IN vec4 shadowCoords[NUM_LIGHTS];
+
 
 UNI vec4 color;//r,g,b,a;
 
@@ -19,15 +26,8 @@ UNI sampler2D shadowMap;
 UNI samplerCube shadowCubeMap;
 
 UNI float inBias;
-UNI float inShadowMapSize;
 UNI float inShadowStrength;
 
-UNI sampler2D shadowMaps[NUM_LIGHTS];
-
-
-#define POINT 0
-#define DIRECTIONAL 1
-#define SPOT 2
 
 #ifdef MODE_POISSON
     vec2 poissonDisk[16] = vec2[](
@@ -107,10 +107,13 @@ struct Light {
   int type;
   vec2 nearFar;
   int castShadow;
+  sampler2D map;
+  float shadowMapWidth;
+  // samplerCube cubemap;
 };
 
 UNI Light lights[NUM_LIGHTS];
-
+/*
 float getfallOff(Light light,float distLight)
 {
     float denom = distLight / light.radius + 1.0;
@@ -121,28 +124,28 @@ float getfallOff(Light light,float distLight)
 
     return min(1.0,max(t, 0.0));
 }
-
-float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
-    vec3 spotLightDirection = normalize(light.pos-light.conePointAt);
+*/
+float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
+    vec3 spotLightDirection = normalize(lightPosition-conePointAt);
     float spotAngle = dot(-lightDirection, spotLightDirection);
-    float epsilon = light.cosConeAngle - light.cosConeAngleInner;
+    float epsilon = cosConeAngle - cosConeAngleInner;
 
-    float spotIntensity = clamp((spotAngle - light.cosConeAngle)/epsilon, 0.0, 1.0);
-    spotIntensity = pow(spotIntensity, max(0.01, light.spotExponent));
+    float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
+    spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
 
     return max(0., spotIntensity);
 }
 
 #ifdef SHADOW_MAP
-    float CalculateShadow(Light light, float lambert) {
+    float CalculateShadow(vec3 lightPos, vec2 nearFar, int type, float lambert, sampler2D shadowMap, vec4 shadowCoord, float shadowMapSize) {
         float visibility = 1.;
 
         vec2 shadowMapLookup = shadowCoord.xy;
-        vec3 cubemapLookup = modelPos.xyz - light.pos;
+        vec3 cubemapLookup = modelPos.xyz - lightPos;
 
         float shadowMapDepth = shadowCoord.z;
 
-        if (light.type == SPOT) {
+        if (type == SPOT) {
             // project coordinates
             shadowMapLookup /= shadowCoord.w;
             shadowMapDepth /= shadowCoord.w;
@@ -154,15 +157,15 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
         float cameraNear = 0.;
         float cameraFar = 0.;
 
-        if (light.type == POINT) {
+        if (type == POINT) {
 
-            cameraNear = light.nearFar.x; // uniforms
-            cameraFar = light.nearFar.y;
+            cameraNear = nearFar.x; // uniforms
+            cameraFar = nearFar.y;
 
-            toLightNormal = normalize(light.pos - modelPos.xyz);
+            toLightNormal = normalize(lightPos - modelPos.xyz);
 
             float fromLightToFrag =
-                (length(modelPos.xyz - light.pos) - cameraNear) / (cameraFar - cameraNear);
+                (length(modelPos.xyz - lightPos) - cameraNear) / (cameraFar - cameraNear);
             depthFromMapLookup = texture(shadowCubeMap, -toLightNormal).r;
 
             shadowMapDepth = fromLightToFrag;
@@ -183,7 +186,7 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
         #endif
 
         #ifdef MODE_PCF
-            float texelSize = 1. / inShadowMapSize;
+            float texelSize = 1. / shadowMapSize;
             visibility = 0.;
 
             // sample neighbouring pixels & get mean value
@@ -221,7 +224,7 @@ float CalculateSpotLightEffect(Light light, vec3 lightDirection) {
             // retrieve previously stored moments & variance
             vec2 moments = texture(shadowMap, shadowMapLookup).rg;
 
-            if (light.type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
+            if (type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
 
             float p = step(distanceTo, moments.x);
             float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
@@ -255,37 +258,52 @@ void main()
     if(!gl_FrontFacing) normal = normal*-1.0;
     #endif
 
-    for(int l=0;l<1;l++)
+    #ifdef SHADOW_MAP
+        float visibility = 1.;
+    #endif
+
+    for(int l=0;l<NUM_LIGHTS;l++)
     {
-        Light light=lights[l];
+        // Light light=lights[l];
 
-        vec3 lightModelDiff=light.pos - modelPos.xyz;
+        vec3 lightModelDiff=lights[l].pos - modelPos.xyz;
 
 
 
-        if (light.type == DIRECTIONAL) lightModelDiff = light.pos;
+        if (lights[l].type == DIRECTIONAL) lightModelDiff = lights[l].pos;
 
         vec3 lightDir = normalize(lightModelDiff);
         float lambert = max(dot(lightDir,normal), 0.);
 
-        vec3 newColor= lambert * light.color.rgb * light.mul;
+        vec3 newColor= lambert * lights[l].color.rgb * lights[l].mul;
 
-        // if (light.type != 1) newColor*=getfallOff(light, length(lightModelDiff));
+        // if (lights[l].type != 1) newColor*=getfallOff(light, length(lightModelDiff));
 
-        col.rgb+=vec3(light.ambient);
+        col.rgb+=vec3(lights[l].ambient);
         col.rgb+= newColor;
 
-        if (light.type == SPOT) {
-                float spotIntensity = CalculateSpotLightEffect(light, lightDir);
+        if (lights[l].type == SPOT) {
+            // vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent,
+                float spotIntensity = CalculateSpotLightEffect(
+                    lights[l].pos, lights[l].conePointAt, lights[l].cosConeAngle,
+                    lights[l].cosConeAngleInner, lights[l].spotExponent, lightDir
+                );
                 col.rgb *= spotIntensity;
         }
 
         #ifdef SHADOW_MAP
-        if (light.castShadow == 1) col.rgb *=  CalculateShadow(light, lambert);
+            if (lights[l].castShadow == 1) {
+                visibility *= CalculateShadow(
+                    lights[l].pos, lights[l].nearFar, lights[l].type,
+                    lambert, lights[l].map, shadowCoords[l], lights[l].shadowMapWidth
+                );
+            }
         #endif
     }
-
     col.rgb*=color.rgb;
+    #ifdef SHADOW_MAP
+    col.rgb *= visibility;
+    #endif
     col.a=color.a;
 
     {{MODULE_COLOR}}
