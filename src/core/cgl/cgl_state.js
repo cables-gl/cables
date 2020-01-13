@@ -22,6 +22,8 @@ const Context = function (_patch)
     this.clearCanvasDepth = true;
     this.patch = _patch;
 
+    this.currentProgram=null;
+
     this.temporaryTexture = null;
     this.frameStore = {};
     this.gl = null;

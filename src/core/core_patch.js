@@ -87,6 +87,10 @@ const Patch = function (cfg)
         fpsLimit: 0,
     };
 
+
+    if(! (function() { return !this; })() ) console.log('not in strict mode: core patch' );
+
+
     Log.setSilent(this.config.silent);
 
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
@@ -738,9 +742,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         var op = this.addOp(objName, oldOp.uiAttribs);
         ops.push(op);
 
-        var j,
-            k,
-            l;
+        var j, k, l;
         for (j in oldOp.portsIn)
         {
             if (oldOp.portsIn[j].links.length === 0)

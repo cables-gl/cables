@@ -3,6 +3,8 @@ import { Log } from "./log";
 const EventTarget = function ()
 {
     this._eventCallbacks = {};
+    this._logName="";
+    this._log=false;
 
     this.addEventListener = this.on = function (which, cb)
     {
@@ -37,8 +39,16 @@ const EventTarget = function ()
         }
     };
 
+    this.logEvents=function(enabled,name)
+    {
+        this._log=enabled;
+        this._logName=name;
+    };
+
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
+        if(this._log)console.log("[event] ",this._logName,which);
+
         if (this._eventCallbacks[which])
         {
             for (var i = 0; i < this._eventCallbacks[which].length; i++)

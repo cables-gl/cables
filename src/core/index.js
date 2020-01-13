@@ -17,6 +17,7 @@ import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
 
+
 const CABLES = Object.assign(
     {
         EventTarget,
@@ -47,3 +48,6 @@ const CABLES = Object.assign(
 );
 
 export default CABLES;
+
+
+if(! (function() { return !this; })() ) console.log('not in strict mode: index core' );

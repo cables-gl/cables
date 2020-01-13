@@ -7,6 +7,8 @@ const ProfileData = function ()
     this.profileVideosPlaying = 0;
     this.profileMVPMatrixCount = 0;
     this.profileEffectBuffercreate = 0;
+    this.profileShaderGetUniform=0;
+    this.profileFrameBuffercreate=0;
 };
 
 export const profileData = new ProfileData();
