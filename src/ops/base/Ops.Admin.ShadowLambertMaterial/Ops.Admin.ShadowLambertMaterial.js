@@ -298,9 +298,9 @@ var updateLights=function()
 
                                             cgl.setTexture(count, light.shadowMap.tex);
                                             // op.log("count", count, "unival", lights[count].shadowMap._value, "textures", cgl.getTexture(count) === lights[count].shadowMap.tex);
-                                            op.log("count", count);
-                                            op.log(lights[count].shadowMap);
-                                            op.log(...shader.getDefines()[0]);
+                                            //op.log("count", count);
+                                            //op.log(lights[count].shadowMap);
+                                            //op.log(...shader.getDefines()[0]);
                                             // op.log("count", count, Array.from(lightMatrices[count]._value).sort().toString() === Array.from(light.lightMatrix).sort().toString());
                                             lights[count].shadowMapWidth.setValue(light.shadowMap.width);
                                             lights[count].shadowBias.setValue(light.shadowBias);

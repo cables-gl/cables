@@ -51,7 +51,7 @@ float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator func
     vec2( 0.14383161, -0.14100790 )
     );
 #endif
-
+/*
 #ifdef MODE_STRATIFIED
     float Random(vec4 randomVec) {
         float dotProduct = dot(randomVec, vec4(12.9898,78.233,45.164,94.673));
@@ -77,7 +77,8 @@ float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator func
        vec2( 0.14383161, -0.14100790 )
     );
 #endif
-
+*/
+/*
     vec3 sampleOffsetDirections[20]=vec3[](
         vec3(1,1,1),vec3(1,-1,1),vec3(-1,-1,1),vec3(-1,1,1),
         vec3(1,1,-1),vec3(1,-1,-1),vec3(-1,-1,-1),vec3(-1,1,-1),
@@ -85,7 +86,7 @@ float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator func
         vec3(1,0,1),vec3(-1,0,1),vec3(1,0,-1),vec3(-1,0,-1),
         vec3(0,1,1),vec3(0,-1,1),vec3(0,-1,-1),vec3(0,1,-1)
     );
-
+*/
 #ifdef MODE_VSM
     float linstep(float value, float low, float high) {
         return clamp((value - low)/(high-low), 0., 1.);
@@ -238,6 +239,61 @@ float getfallOff(Light light,float distLight)
     }
 #endif
 
+float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {
+        // #ifdef MODE_PCF
+            float texelSize = 1. / shadowMapSize;
+            float visibility = 0.;
+
+            // sample neighbouring pixels & get mean value
+            for (int x = -1; x <= 1; x++) {
+                for (int y = -1; y <= 1; y++) {
+                    float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
+                    if (shadowMapDepth - bias < texelDepth) {
+                        visibility += 1.;
+                    }
+                }
+            }
+
+            return visibility / 9.;
+        // #endif
+}
+
+#ifdef MODE_POISSON
+    float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
+        float visibility = 1.;
+
+        for (int i = 0; i < SAMPLE_AMOUNT; i++) {
+            if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/700.)).r < shadowMapDepth - bias) {
+                visibility -= 0.2;
+            }
+        }
+
+        return visibility;
+    }
+#endif
+
+#ifdef MODE_VSM
+    float ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth) {
+            float distanceTo = shadowMapDepth;
+                // retrieve previously stored moments & variance
+            float p = step(distanceTo, moments.x);
+            float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
+
+            float distanceToMean = distanceTo - moments.x;
+            //there is a very small probability that something is being lit when its not
+            // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
+            // bottom line helps make the shadows darker
+            // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
+            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
+            //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
+            //pMax = variance / (variance + distanceToMean*distanceToMean);
+            // visibility = clamp(pMax, 1., p);
+            float visibility = min(max(p, pMax), 1.);
+
+            return visibility;
+    }
+#endif
+
 float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
     vec3 spotLightDirection = normalize(lightPosition-conePointAt);
     float spotAngle = dot(-lightDirection, spotLightDirection);
@@ -249,7 +305,6 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
     return max(0., spotIntensity);
 }
 
-// .a channel = lambertian factor
 vec3 CalculateDiffuseColor(vec3 lightDirection, vec3 normal, vec3 lightColor, vec3 materialColor, inout float lambert) {
     lambert = clamp(dot(lightDirection, normal), 0., 1.);
     vec3 diffuseColor = lambert * lightColor * materialColor;
@@ -261,8 +316,8 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
     vec4 col=vec4(0.0);
-    vec3 testColor = vec3(0.);
-    vec3 normal = normalize(normInterpolated); // normalize(mat3(normalMatrix)*norm);
+    vec3 calculatedColor = vec3(0.);
+    vec3 normal = normalize(normInterpolated);
 
     #ifdef DOUBLE_SIDED
     if(!gl_FrontFacing) normal = normal*-1.0;
@@ -271,30 +326,17 @@ void main()
     #ifdef SHADOW_MAP
         float visibility = 1.;
     #endif
-    float lambert2 = 0.;
+
     for(int l=0;l<NUM_LIGHTS;l++)
     {
-        // Light light=lights[l];
-
-        //wvec3 lightModelDiff=lights[l].pos - modelPos.xyz;
-
-
-
         vec3 lightDirection = normalize(lights[l].pos - modelPos.xyz);
         if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].pos;
 
 
-        float lambert = 1.;
+        float lambert = 1.; // in out
         vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, materialColor.rgb, lambert);
 
-        //vec3 lightDir = normalize(lightModelDiff);
-
-        // vec3 newColor= lambert * lights[l].color.rgb * lights[l].mul;
-
         // if (lights[l].type != 1) newColor*=getfallOff(light, length(lightModelDiff));
-
-        //col.rgb+=vec3(lights[l].ambient);
-        //col.rgb+= newColor;
 
         diffuseColor *= lights[l].mul;
 
@@ -311,21 +353,27 @@ void main()
                     shadowMapLookup /= shadowCoords[l].w;
                     shadowMapDepth /= shadowCoords[l].w;
                 }
-                //diffuseColor = float(lights[l].castShadow) * texture2D(lights[l].shadowMap, shadowMapLookup).rgb;
-                float depthFromMapLookup = texture(lights[l].shadowMap, testCoord.xy / testCoord.w).r;
-                if (depthFromMapLookup < shadowMapDepth) visibility = 0.2;
-                diffuseColor *= visibility;
-            /*    visibility *= CalculateShadow(
-                    lights[l].pos, lights[l].nearFar, lights[l].type,
-                    lambert, lights[l].shadowMap, shadowCoords[l],
-                    lights[l].shadowMapWidth, lights[l].shadowBias
-                ); */
+
+                #ifndef MODE_VSM
+                    // modify bias according to slope of the surface
+                    float bias = clamp(lights[l].shadowBias * tan(acos(lambert)), 0., 0.1);
+                #endif
+
+                #ifdef MODE_PCF
+                    diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
+                #endif
+
+                #ifdef MODE_POISSON
+                    diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
+                #endif
+                #ifdef MODE_VSM
+                    diffuseColor *= ShadowFactorVSM(texture(lights[l].shadowMap,shadowMapLookup).rg, lights[l].shadowBias, shadowMapDepth);
+                #endif
             }
 
         #endif
 
         if (lights[l].type == SPOT) {
-            // vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent,
                 float spotIntensity = CalculateSpotLightEffect(
                     lights[l].pos, lights[l].conePointAt, lights[l].cosConeAngle,
                     lights[l].cosConeAngleInner, lights[l].spotExponent, lightDirection
@@ -333,13 +381,11 @@ void main()
                 diffuseColor *= spotIntensity;
         }
 
-         testColor += clamp(diffuseColor.rgb, 0., 1.);
-        //testColor += texture2D(lights[l].shadowMap, shadowCoords[l].xy / shadowCoords[l].w).rgb;
-        // col.rgb += col.rgb;
+         calculatedColor += diffuseColor;
     }
 
-    col.rgb = testColor;
-    col.a = 1.; // materialColor.a;
+    col.rgb = clamp(calculatedColor, 0., 1.);
+    col.a = materialColor.a;
 
     {{MODULE_COLOR}}
 

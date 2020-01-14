@@ -65,9 +65,10 @@ const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inFOV = op.inFloat("FOV", 45);
 const inBias = op.inFloatSlider("Bias", 0.004);
+const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-
-op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inFOV, inBias, inBlur]);
+op.setPortGroup("",[inCastShadow]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inFOV, inBias, inPolygonOffset, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
@@ -90,12 +91,15 @@ inAdvanced.onChange = function() {
     if (inAdvanced.get()) {
         inMSAA.setUiAttribs({ greyout: false });
         inFilterType.setUiAttribs({ greyout: false });
+        inPolygonOffset.setUiAttribs({ greyout: false });
     } else {
         inMSAA.setUiAttribs({ greyout: true });
         inFilterType.setUiAttribs({ greyout: true });
         inMSAA.setValue("none");
         inAnisotropic.setUiAttribs({ greyout: true });
         inTest.setUiAttribs({ greyout: true });
+        inPolygonOffset.setUiAttribs({ greyout: true });
+        inPolygonOffset.setValue(1);
     }
 };
 
@@ -248,12 +252,14 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
         inBias.setUiAttribs({ greyout: false });
+        inFOV.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
         inBias.setUiAttribs({ greyout: true });
+        inFOV.setUiAttribs({ greyout: true });
         outTexture.set(null);
     }
 }
@@ -369,20 +375,8 @@ const pointAtPos = vec3.create();
 const resultPos = vec3.create();
 const resultPointAt = vec3.create();
 
-inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
-
-    vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
-    vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
-
-    vec3.transformMat4(resultPos, position, cgl.mMatrix);
-    vec3.transformMat4(resultPointAt, pointAtPos, cgl.mMatrix);
-
-    light.position = resultPos;
-    light.conePointAt = resultPointAt;
-    uniformLightPosition.setValue(light.position);
-    /*
-    if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
+function drawHelpers() {
+        if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         gui.setTransformGizmo({
             posX:inPosX,
             posY:inPosY,
@@ -396,9 +390,25 @@ inTrigger.onTriggered = function() {
             destX: light.conePointAt[0],
             destY: light.conePointAt[1],
             destZ: light.conePointAt[2],
-        })
+        });
     }
-    */
+}
+
+inTrigger.onTriggered = function() {
+    if (!cgl.lightStack) cgl.lightStack = [];
+
+    vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
+    vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
+
+    vec3.transformMat4(resultPos, position, cgl.mMatrix);
+    vec3.transformMat4(resultPointAt, pointAtPos, cgl.mMatrix);
+
+    light.position = resultPos;
+    light.conePointAt = resultPointAt;
+    uniformLightPosition.setValue(light.position);
+
+    // drawHelpers();
+
     cgl.lightStack.push(light);
     if (inCastShadow.get()) {
 
@@ -412,7 +422,10 @@ inTrigger.onTriggered = function() {
             if (fb) {
                 cgl.gl.enable(cgl.gl.CULL_FACE);
                 cgl.gl.cullFace(cgl.gl.FRONT);
-                //cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
+                cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+                cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
+                cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;
@@ -428,29 +441,37 @@ inTrigger.onTriggered = function() {
 
                 }
                 */
-
+                cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
+                cgl.gl.colorMask(true,true,true,true);
 
+                /*
                 if (!cgl.firstShadowPass) {
-
                     cgl.gl.disable(cgl.gl.BLEND);
+
                     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
                 }
+                */
 
 
-                //cgl.gl.disable(cgl.gl.DEPTH_TEST);
+                cgl.gl.disable(cgl.gl.DEPTH_TEST);
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
+                cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
-                 // renderBlur();
+                // NOTE: blur is still very cpu intensive... idk why
+                cgl.gl.colorMask(true,true,false,false);
+                renderBlur();
+                cgl.gl.colorMask(true,true,true,true);
+
 
                 cgl.shadowPass = false;
                 cgl.frameStore.renderOffscreen = false;
                 //cgl.gl.disable(cgl.gl.CULL_FACE);
                 // cgl.gl.colorMask(false,false,false,false);
                 outTexture.set(null);
-                outTexture.set(fb.getTextureColor());
+                outTexture.set(fb.getTextureDepth());
 
             }
         }
