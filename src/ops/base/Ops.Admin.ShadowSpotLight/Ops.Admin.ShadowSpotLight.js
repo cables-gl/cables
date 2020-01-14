@@ -63,10 +63,11 @@ const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
+const inFOV = op.inFloat("FOV", 45);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 
-op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBias, inBlur]);
+op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inFOV, inBias, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
@@ -269,14 +270,15 @@ mat4.perspective(
 function updateProjectionMatrix() {
         mat4.perspective(
         lightProjectionMatrix,
-        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        CGL.DEG2RAD * inFOV.get(),
+        //  2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
     );
 }
 
-inNear.onChange = inFar.onChange = updateProjectionMatrix;
+inNear.onChange = inFar.onChange = inFOV.onChange = updateProjectionMatrix;
 
 // * init vectors & matrices
 const lookAt = vec3.fromValues(0, 0, 0);
@@ -350,8 +352,7 @@ function renderShadowMap() {
 
     fb.renderEnd(cgl);
 
-    // remove light from stack and readd it with shadow map & mvp matrix
-    cgl.lightStack.pop();
+
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -399,39 +400,77 @@ inTrigger.onTriggered = function() {
     }
     */
     cgl.lightStack.push(light);
+    if (inCastShadow.get()) {
 
-    if (!cgl.shadowPass) {
-        if (inCastShadow.get() && fb) {
-            cgl.gl.enable(cgl.gl.CULL_FACE);
-            cgl.gl.cullFace(cgl.gl.FRONT);
-
-            cgl.frameStore.renderOffscreen = true;
-            cgl.shadowPass = true;
-
-             renderShadowMap();
-
-            cgl.gl.cullFace(cgl.gl.BACK);
-            cgl.gl.disable(cgl.gl.CULL_FACE);
-
-             renderBlur();
-
-            cgl.shadowPass = false;
-            cgl.frameStore.renderOffscreen = false;
-            //cgl.gl.disable(cgl.gl.CULL_FACE);
-            // cgl.gl.colorMask(false,false,false,false);
-            outTexture.set(null);
-            outTexture.set(effect.getCurrentSourceTexture());
-
-            light.lightMatrix = lightBiasMVPMatrix;
-            light.castShadow = true;
-            light.shadowMap = fb.getTextureColor();
-            light.shadowBias = inBias.get();
-
-
-            cgl.lightStack.push(light);
+        /*
+        if (cgl.lightStack.indexOf(light) === 0) {
+            cgl.firstShadowPass = true;
         }
+        */
+
+        if (!cgl.shadowPass) {
+            if (fb) {
+                cgl.gl.enable(cgl.gl.CULL_FACE);
+                cgl.gl.cullFace(cgl.gl.FRONT);
+                //cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
+                cgl.frameStore.renderOffscreen = true;
+                cgl.shadowPass = true;
+
+                /*
+                if (!cgl.firstShadowPass) {
+                    // https://github.com/haedri/shadow-mapping/wiki/Part-4-%3A-multiple-lights%2C-forward-rendering
+                    // https://gamedev.stackexchange.com/questions/110202/multiple-lights-shadows
+                    //
+
+                    cgl.gl.enable(cgl.gl.BLEND);
+                    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+                }
+                */
+
+                renderShadowMap();
+
+                if (!cgl.firstShadowPass) {
+
+                    cgl.gl.disable(cgl.gl.BLEND);
+                    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+                }
+
+
+                //cgl.gl.disable(cgl.gl.DEPTH_TEST);
+                cgl.gl.cullFace(cgl.gl.BACK);
+                cgl.gl.disable(cgl.gl.CULL_FACE);
+
+                 // renderBlur();
+
+                cgl.shadowPass = false;
+                cgl.frameStore.renderOffscreen = false;
+                //cgl.gl.disable(cgl.gl.CULL_FACE);
+                // cgl.gl.colorMask(false,false,false,false);
+                outTexture.set(null);
+                outTexture.set(fb.getTextureColor());
+
+            }
+        }
+        /*
+        if (cgl.lightStack.indexOf(light) === 0) {
+            cgl.firstShadowPass = false;
+        }
+        */
+
     }
 
+    // remove light from stack and readd it with shadow map & mvp matrix
+    cgl.lightStack.pop();
+    light.lightMatrix = lightBiasMVPMatrix;
+    light.castShadow = inCastShadow.get();
+    light.shadowMap = fb.getTextureColor();
+    light.shadowBias = inBias.get();
+
+
+    cgl.lightStack.push(light);
     outTrigger.trigger();
 
     cgl.lightStack.pop();

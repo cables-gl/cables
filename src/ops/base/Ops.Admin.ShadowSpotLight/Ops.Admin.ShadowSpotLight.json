@@ -140,6 +140,12 @@
             },
             {
                 "type": "0",
+                "name": "FOV",
+                "group": "Shadow",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Bias",
                 "group": "Shadow",
                 "subType": "number"

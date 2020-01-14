@@ -12,12 +12,14 @@ UNI mat4 viewMatrix;
 UNI mat4 lightMatrix;
 UNI mat4 lightMatrices[NUM_LIGHTS];
 OUT vec3 norm;
+OUT vec3 normInterpolated;
 OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 OUT vec2 texCoord;
 OUT vec4 shadowCoord;
 OUT vec4 shadowCoords[NUM_LIGHTS];
+OUT mat4 testMatrices[NUM_LIGHTS];
 {{MODULES_HEAD}}
 
 mat3 transposeMat3(mat3 m)
@@ -56,7 +58,7 @@ void main()
     norm=attrVertNormal;
 
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
-
+    normInterpolated = normalMatrix * norm;
     {{MODULE_VERTEX_POSITION}}
 
     // this needs only to be done when instancing....
@@ -66,6 +68,8 @@ void main()
     #ifdef SHADOW_MAP
         for (int i = 0; i < NUM_LIGHTS; i++) {
             shadowCoords[i] = lightMatrices[i] * modelPos;
+            testMatrices[i] = lightMatrices[i];
+
         }
     #endif
 
