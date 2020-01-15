@@ -354,6 +354,7 @@ function renderShadowMap() {
     mat4.mul(lightBiasMVPMatrix, cgl.mMatrix, lightBiasMVPMatrix);
     mat4.mul(lightBiasMVPMatrix, biasMatrix, lightBiasMVPMatrix);
 
+    cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
     outTrigger.trigger();
 
     fb.renderEnd(cgl);

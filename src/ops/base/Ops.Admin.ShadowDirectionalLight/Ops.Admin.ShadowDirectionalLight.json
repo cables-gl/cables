@@ -68,7 +68,6 @@
             {
                 "type": "0",
                 "name": "Cast Shadow",
-                "group": "Shadow",
                 "subType": "boolean"
             },
             {
@@ -99,6 +98,12 @@
                 "name": "Bias",
                 "group": "Shadow",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow",
+                "subType": "integer"
             },
             {
                 "type": "0",

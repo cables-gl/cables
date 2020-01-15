@@ -251,17 +251,23 @@ var updateLights=function()
                                     lights[count].castShadow.setValue(Number(light.castShadow));
 
                                     if (light.castShadow) {
+
                                         lightMatrices[count].setValue(light.lightMatrix);
+                                        lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
+
                                         if (light.shadowMap) {
                                             if (!lights[count].shadowMap) {
                                                 lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                             }
+
                                             cgl.setTexture(count, light.shadowMap.tex);
                                             lights[count].shadowMapWidth.setValue(light.shadowMap.width);
                                             lights[count].shadowBias.setValue(light.shadowBias);
                                         }
+
+
                                     } else {
-                                        lightMatrices[count].setValue(null);
+                                        //lightMatrices[count].setValue(null);
                                         if (lights[count].shadowMap) {
                                             shader.removeUniform('lights[' + count + '].shadowMap');
                                             lights[count].shadowMap = null;
@@ -289,24 +295,16 @@ var updateLights=function()
                                         lightMatrices[count].setValue(light.lightMatrix);
                                         lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
 
-                                        //
-
                                         if (light.shadowMap) {
                                             if (!lights[count].shadowMap) {
                                                 lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                             }
 
                                             cgl.setTexture(count, light.shadowMap.tex);
-                                            // op.log("count", count, "unival", lights[count].shadowMap._value, "textures", cgl.getTexture(count) === lights[count].shadowMap.tex);
-                                            //op.log("count", count);
-                                            //op.log(lights[count].shadowMap);
-                                            //op.log(...shader.getDefines()[0]);
-                                            // op.log("count", count, Array.from(lightMatrices[count]._value).sort().toString() === Array.from(light.lightMatrix).sort().toString());
                                             lights[count].shadowMapWidth.setValue(light.shadowMap.width);
                                             lights[count].shadowBias.setValue(light.shadowBias);
                                         }
                                     } else {
-                                        // lightMatrices[count].setValue(null);
                                         if (lights[count].shadowMap) {
                                             shader.removeUniform('lights[' + count + '].shadowMap');
                                             lights[count].shadowMap = null;

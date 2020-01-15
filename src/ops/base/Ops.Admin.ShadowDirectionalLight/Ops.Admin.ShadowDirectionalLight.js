@@ -50,15 +50,18 @@ const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
+const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-op.setPortGroup("Shadow",[inMapSize, inCastShadow, inLRBT, inNear, inFar, inBias, inBlur]);
+op.setPortGroup("", [inCastShadow]);
+op.setPortGroup("Shadow",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inLRBT.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
-inBlur.setUiAttribs({ greyout: true });
 inBias.setUiAttribs({ greyout: true });
+inPolygonOffset.setUiAttribs({ greyout: true });
+inBlur.setUiAttribs({ greyout: true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
@@ -214,6 +217,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
         inBias.setUiAttribs({ greyout: false });
+        inPolygonOffset.setUiAttribs({ greyout: true });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inLRBT.setUiAttribs({ greyout: true });
@@ -221,6 +225,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
         inBias.setUiAttribs({ greyout: true });
+        inPolygonOffset.setUiAttribs({ greyout: true });
         outTexture.set(null);
     }
 }
@@ -324,9 +329,6 @@ function renderShadowMap() {
 
     fb.renderEnd();
 
-    // remove light from stack and readd it with shadow map & mvp matrix
-    cgl.lightStack.pop();
-
     cgl.popPMatrix();
     cgl.popModelMatrix();
     cgl.popViewMatrix();
@@ -336,11 +338,8 @@ function renderShadowMap() {
 
 }
 
-inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
-     // NOTE: how to handle this? fucks up the shadow map
-     /*
-    if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
+function renderHelpers() {
+        if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         CABLES.GL_MARKER.drawLineSourceDest({
             op: op,
             sourceX: -200*light.position[0],
@@ -351,48 +350,69 @@ inTrigger.onTriggered = function() {
             destZ: 200*light.position[2],
         })
     }
-    */
+}
+
+inTrigger.onTriggered = function() {
+    if (!cgl.lightStack) cgl.lightStack = [];
+     // NOTE: how to handle this? fucks up the shadow map
+     // renderHelpers();
 
 
 
     cgl.lightStack.push(light);
 
-    //cgl.gl.enable(cgl.gl.CULL_FACE);
-    //cgl.gl.cullFace(cgl.gl.FRONT);
-    //cgl.gl.colorMask(false,false,false,false);
-    if (!cgl.shadowPass) {
-        if (inCastShadow.get() && fb) {
-            cgl.shadowPass = true;
-            cgl.frameStore.renderOffscreen = true;
-            //cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-            //cgl.gl.polygonOffset(0, 0);
-
-            cgl.gl.enable(cgl.gl.CULL_FACE);
-            cgl.gl.cullFace(cgl.gl.FRONT);
+    if (inCastShadow.get()) {
+        if (!cgl.shadowPass) {
+            if (fb) {
+                cgl.shadowPass = true;
+                cgl.frameStore.renderOffscreen = true;
 
 
-            renderShadowMap();
+                cgl.gl.enable(cgl.gl.CULL_FACE);
+                cgl.gl.cullFace(cgl.gl.FRONT);
 
-            //cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-            cgl.gl.cullFace(cgl.gl.BACK);
-            cgl.gl.disable(cgl.gl.CULL_FACE);
+                cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+                cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
+
+                cgl.gl.enable(cgl.gl.DEPTH_TEST);
+                cgl.gl.colorMask(true,true,false,false);
+
+                renderShadowMap();
+
+                cgl.gl.colorMask(false,false,false,false);
+
+                cgl.gl.cullFace(cgl.gl.BACK);
+                cgl.gl.disable(cgl.gl.CULL_FACE);
 
 
-            renderBlur();
+                cgl.gl.disable(cgl.gl.DEPTH_TEST);
+                cgl.gl.cullFace(cgl.gl.BACK);
+                cgl.gl.disable(cgl.gl.CULL_FACE);
+                cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
-            cgl.frameStore.renderOffscreen = false;
-            cgl.shadowPass = false;
+                // NOTE: blur is still very cpu intensive... idk why
+                // better with jsut 2 color channels
+                cgl.gl.colorMask(true,true,false,false);
+                renderBlur();
+                cgl.gl.colorMask(true,true,true,true);
 
-            //cgl.gl.disable(cgl.gl.CULL_FACE);
-            // cgl.gl.colorMask(false,false,false,false);
-            outTexture.set(null);
-            outTexture.set(fb.getTextureColor());
+                cgl.frameStore.renderOffscreen = false;
+                cgl.shadowPass = false;
 
-            light.lightMatrix = lightBiasMVPMatrix;
-            light.shadowBias = inBias.get();
-            light.shadowMap = fb.getTextureColor();
-            cgl.lightStack.push(light);
+                outTexture.set(null);
+                outTexture.set(fb.getTextureDepth());
 
+
+                // remove light from stack and readd it with shadow map & mvp matrix
+                cgl.lightStack.pop();
+
+                light.lightMatrix = lightBiasMVPMatrix;
+                light.shadowBias = inBias.get();
+                light.shadowMap = fb.getTextureColor();
+
+                cgl.lightStack.push(light);
+
+            }
         }
     }
     //cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
