@@ -43,19 +43,8 @@
                 "name": "Algorithm"
             },
             {
-                "type": "0",
-                "name": "Bias",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Samples",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Shadow Strength",
-                "subType": "number"
+                "type": "5",
+                "name": "Samples"
             }
         ],
         "portsOut": [

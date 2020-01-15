@@ -19,18 +19,19 @@ inShadow.onChange = function() {
 
 }
 
-const algorithms = ['Default','Bias', 'PCF', 'Poisson', 'Stratified', 'VSM'];
+const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
+const inSamples = op.inSwitch("Samples", [1, 2, 4, 8, 16], 4);
+inSamples.setUiAttribs({ greyout: true });
+
 inAlgorithm.onChange = function() {
     const selectedAlgorithm = inAlgorithm.get();
     algorithms.forEach(function(algorithm) {
         if (selectedAlgorithm === algorithm) {
             shader.define("MODE_" + algorithm.toUpperCase());
             if (algorithm !== "Default") {
-                inBias.setUiAttribs({ greyout: false });
                 inSamples.setUiAttribs({ greyout: false });
             } else {
-                inBias.setUiAttribs({ greyout: true });
                 inSamples.setUiAttribs({ greyout: true });
             }
         }
@@ -38,27 +39,20 @@ inAlgorithm.onChange = function() {
     });
 
 }
-
-const inBias = op.inFloatSlider("Bias", 0.005);
-inBias.setUiAttribs({ greyout: true });
-const inSamples = op.inInt("Samples", 4);
-inSamples.setUiAttribs({ greyout: true });
-const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const next=op.outTrigger("next");
 
 r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
-shader.define("MODE_DEFAULT");
+shader.define("MODE_PCF");
 shader.define('NUM_LIGHTS','1');
 
 inSamples.onChange = function() {
-    shader.define("SAMPLE_AMOUNT", clamp(inSamples.get(), 1, 16).toString());
+    shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
 }
-shader.define("SAMPLE_AMOUNT", clamp(inSamples.get(), 1, 16).toString());
+shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
 
-const uniformBias = new CGL.Uniform(shader, "f", "inBias", inBias);
 const defaultShader = new CGL.Shader(cgl, "lambertDefault");
 defaultShader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 defaultShader.setSource(defaultShader.getDefaultVertexShader(), defaultShader.getDefaultFragmentShader());
