@@ -57,12 +57,16 @@ const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
+const inBias = op.inFloatSlider("Bias", 0.004);
+const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
-op.setPortGroup("Shadow",[inCastShadow, inMapSize, inNear, inFar, inBlur]);
+op.setPortGroup("",[inCastShadow]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inBias, inPolygonOffset, inBlur]);
 const shadowProperties = [inNear, inFar, inBlur];
 inMapSize.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
+inPolygonOffset.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
 
 inCastShadow.onChange = function() {
@@ -72,11 +76,13 @@ inCastShadow.onChange = function() {
         inMapSize.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
+        inPolygonOffset.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
+        inPolygonOffset.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
     }
 }
@@ -362,7 +368,6 @@ function renderCubeSide(index) {
     );
 
     gl.clearColor(1, 1, 1, 1);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     // * calculate matrices & camPos vector
     mat4.copy(cgl.mMatrix, identityMat); // M
 
@@ -371,12 +376,7 @@ function renderCubeSide(index) {
     mat4.lookAt(cgl.vMatrix, light.position, lookAt, CUBEMAP_PROPERTIES[index].up); // V
     mat4.copy(cgl.pMatrix, lightProjectionMatrix); // P
 
-    // * create light mvp bias matrix
-    /*
-    mat4.mul(lightBiasMVPMatrix, cgl.pMatrix, cgl.vMatrix);
-    mat4.mul(lightBiasMVPMatrix, cgl.mMatrix, lightBiasMVPMatrix);
-    mat4.mul(lightBiasMVPMatrix, biasMatrix, lightBiasMVPMatrix);
-    */
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     outTrigger.trigger();
 
     // fb.renderEnd();
@@ -423,10 +423,27 @@ const transVec = vec3.create();
 
 initializeCubemap();
 
+function renderHelpers(renderRadius) {
+    if(CABLES.UI && gui.patch().isCurrentOp(op)) {
+        gui.setTransformGizmo({
+            posX: inPosX,
+            posY: inPosY,
+            posZ: inPosZ,
+        });
+        if (renderRadius) {
+            cgl.pushModelMatrix();
+            mat4.translate(cgl.mMatrix,cgl.mMatrix, transVec);
+            CABLES.GL_MARKER.drawSphere(op, inRadius.get());
+            cgl.popModelMatrix();
+        }
+
+    }
+}
+
 inTrigger.onTriggered = function() {
 
     if (!cgl.lightStack) cgl.lightStack = [];
-    if (!cgl.frameStore.mapStack) cgl.frameStore.mapStack = [];
+
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     light.position = position;
@@ -434,47 +451,49 @@ inTrigger.onTriggered = function() {
     // mat4.getScaling(sc,cgl.mMatrix);
     // light.radius=inRadius.get()*sc[0];
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) {
-        gui.setTransformGizmo({
-            posX: inPosX,
-            posY: inPosY,
-            posZ: inPosZ,
-        });
-
-
-        cgl.pushModelMatrix();
-        mat4.translate(cgl.mMatrix,cgl.mMatrix, transVec);
-        CABLES.GL_MARKER.drawSphere(op, inRadius.get());
-        cgl.popModelMatrix();
-
-    }
+    renderHelpers(false);
 
     cgl.lightStack.push(light);
 
     if (inCastShadow.get()) {
         if (!cubemapInitialized) initializeCubemap();
+        cgl.gl.enable(cgl.gl.CULL_FACE);
+        cgl.gl.cullFace(cgl.gl.FRONT);
+
+        cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+        cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
+        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
         cgl.frameStore.renderOffscreen = true;
         cgl.shadowPass = true;
 
+        cgl.gl.colorMask(true,true,false,false);
+
         renderCubemap();
+
+        cgl.gl.colorMask(true,true,true,true);
+        cgl.gl.disable(cgl.gl.DEPTH_TEST);
+        cgl.gl.cullFace(cgl.gl.BACK);
+        cgl.gl.disable(cgl.gl.CULL_FACE);
+        cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+
         renderCubemapProjection();
 
         cgl.shadowPass = false;
         cgl.frameStore.renderOffscreen = false;
+
         cgl.lightStack.pop();
 
-        cgl.frameStore.shadowCubeMap = { cubemap: dynamicCubemap };
-        cgl.frameStore.mapStack.push(dynamicCubemap);
-
+        light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()) };
         light.nearFar = [inNear.get(), inFar.get()];
+        light.castShadow = inCastShadow.get();
+        light.shadowBias = inBias.get();
 
         cgl.lightStack.push(light);
     }
+
     outTrigger.trigger();
-
     cgl.lightStack.pop();
-
-    if (inCastShadow.get()) cgl.frameStore.mapStack.pop();
 }
 
 inTrigger.onLinkChanged = function() {

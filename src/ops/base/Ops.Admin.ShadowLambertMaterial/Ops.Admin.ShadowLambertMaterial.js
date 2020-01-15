@@ -9,6 +9,7 @@ const b = op.inValueSlider("diffuse b", Math.random());
 const a = op.inValueSlider("diffuse a", 1.0);
 
 const inToggleDoubleSided = op.inBool("Double Sided", false);
+
 const inShadow = op.inBool("Receive Shadow", false);
 inToggleDoubleSided.onChange = function () {
     shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
@@ -22,8 +23,11 @@ inShadow.onChange = function() {
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8, 16], 4);
-inSamples.setUiAttribs({ greyout: true });
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 
+inSamples.setUiAttribs({ greyout: true });
+op.setPortGroup("", [inShadow]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inNormalOffset]);
 inAlgorithm.onChange = function() {
     const selectedAlgorithm = inAlgorithm.get();
     algorithms.forEach(function(algorithm) {
@@ -48,24 +52,23 @@ const shader=new CGL.Shader(cgl,"LambertMaterial");
 shader.define("MODE_PCF");
 shader.define('NUM_LIGHTS','1');
 
+
 inSamples.onChange = function() {
     shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
 }
 shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
 
-const defaultShader = new CGL.Shader(cgl, "lambertDefault");
-defaultShader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
-defaultShader.setSource(defaultShader.getDefaultVertexShader(), defaultShader.getDefaultFragmentShader());
-
-
 const colUni=new CGL.Uniform(shader,'4f','materialColor',r,g,b,a);
-
+const uniformNormalOffset = new CGL.Uniform(shader, 'f', 'inNormalOffset', inNormalOffset);
 var outShader=op.outObject("Shader");
 outShader.set(shader);
 const outTex = op.outTexture("Shadow Map");
-var MAX_LIGHTS=16;
-var lights=[];
+
+const MAX_LIGHTS = 16;
+const lights = [];
 const lightMatrices = [];
+const shadowCubeMaps = [];
+
 for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
@@ -89,13 +92,16 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].castShadow=new CGL.Uniform(shader,'i','lights['+count+'].castShadow', 0);
     lights[count].nearFar=new CGL.Uniform(shader,'2f','lights['+count+'].nearFar', vec2.create());
     lights[count].shadowMap = null;
+    lights[count].shadowCubeMap = null;
     lights[count].shadowMapWidth = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowMapWidth', 0);
     lights[count].shadowBias = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowBias', 0);
     lightMatrices[count] = new CGL.Uniform(shader,'m4','lightMatrices['+count+']', mat4.create());
+    shadowCubeMaps[count] = null;
 }
 
+op.log(shadowCubeMaps);
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
-let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 1);
+let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 12);
 
 shader.bindTextures = function() {
     /*
@@ -223,13 +229,34 @@ var updateLights=function()
                                     lights[count].radius.setValue(light.radius);
                                     lights[count].color.setValue(light.color);
                                     lights[count].ambient.setValue([0, 0, 0]);
-                                    lights[count].nearFar.setValue(light.nearFar);
                                     lights[count].type.setValue(0); // old point light type index
 
 
                                     lights[count].mul.setValue(light.intensity);
                                     lights[count].castShadow.setValue(Number(light.castShadow));
 
+                                    if (light.castShadow) {
+                                        lights[count].nearFar.setValue(light.nearFar);
+                                        //lightMatrices[count].setValue(light.lightMatrix);
+                                        //lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
+
+                                        if (light.shadowCubeMap) {
+                                            if (light.shadowCubeMap.cubemap) {
+                                                if (!shadowCubeMaps[count]) {
+                                                    shadowCubeMaps[count] = new CGL.Uniform(shader,'t','shadowCubeMaps[' + count + '].cubeMap', count);
+                                                }
+
+                                                cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+                                                lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
+                                                lights[count].shadowBias.setValue(light.shadowBias);
+                                            }
+                                        }
+                                    } else {
+                                        if (shadowCubeMaps[count]) {
+                                            shader.removeUniform('shadowCubeMaps[' + count + '].cubeMap');
+                                            shadowCubeMaps[count] = null;
+                                        }
+                                    }
                                     count++;
 
                                  } else if (light.type === "directional") {

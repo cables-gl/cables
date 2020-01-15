@@ -23,7 +23,7 @@ IN mat4 testMatrices[NUM_LIGHTS];
 
 UNI vec4 materialColor;//r,g,b,a;
 
-UNI sampler2D shadowMap;
+// UNI sampler2D shadowMap;
 UNI samplerCube shadowCubeMap;
 UNI float inShadowStrength;
 
@@ -112,9 +112,13 @@ struct Light {
   float shadowMapWidth;
   float shadowBias;
   mat4 lightMatrix;
-  // samplerCube cubemap;
 };
 
+struct CubeMap { // hack to be able to use cube maps in arrays ? you cannot put 2 samplers in a struct somehow
+    samplerCube cubeMap;
+};
+
+UNI CubeMap shadowCubeMaps[NUM_LIGHTS];
 UNI Light lights[NUM_LIGHTS];
 /*
 float getfallOff(Light light,float distLight)
@@ -239,24 +243,30 @@ float getfallOff(Light light,float distLight)
     }
 #endif
 
-float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {
-        // #ifdef MODE_PCF
-            float texelSize = 1. / shadowMapSize;
-            float visibility = 0.;
+#ifdef MODE_DEFAULT
+    float shadowFactorDefault(float depthFromMapLookup, float shadowMapDepth, float bias) {
+        if (depthFromMapLookup < shadowMapDepth - bias) return 0.2; // todo: make this uniform value from light or from material?
+        return 1.;
+    }
+#endif
+#ifdef MODE_PCF
+    float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {
+        float texelSize = 1. / shadowMapSize;
+        float visibility = 0.;
 
-            // sample neighbouring pixels & get mean value
-            for (int x = -1; x <= 1; x++) {
-                for (int y = -1; y <= 1; y++) {
-                    float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
-                    if (shadowMapDepth - bias < texelDepth) {
-                        visibility += 1.;
-                    }
+        // sample neighbouring pixels & get mean value
+        for (int x = -1; x <= 1; x++) {
+            for (int y = -1; y <= 1; y++) {
+                float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
+                if (shadowMapDepth - bias < texelDepth) {
+                    visibility += 1.;
                 }
             }
+        }
 
-            return visibility / 9.;
-        // #endif
-}
+        return visibility / 9.;
+    }
+#endif
 
 #ifdef MODE_POISSON
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
@@ -348,17 +358,41 @@ void main()
                 vec2 shadowMapLookup = shadowCoords[l].xy;
                 float shadowMapDepth = shadowCoords[l].z;
 
-                if (lights[l].type == SPOT) {
+                // if (lights[l].type == SPOT) {
                     // project coordinates
                     shadowMapLookup /= shadowCoords[l].w;
                     shadowMapDepth /= shadowCoords[l].w;
+                // }
+
+                float depthFromMapLookup = 1.;
+                if (lights[l].type == POINT) {
+                    float cameraNear, cameraFar;
+                    cameraNear = lights[l].nearFar.x; // uniforms
+                    cameraFar =  lights[l].nearFar.y;
+
+                    //toLightNormal = normalize(lightPos - modelPos.xyz);
+
+                    float fromLightToFrag = (length(modelPos.xyz - lights[l].pos) - cameraNear) / (cameraFar - cameraNear);
+                    // depthFromMapLookup = texture(shadowCubeMaps[l], -lightDirection).r;
+                    shadowMapDepth = fromLightToFrag;
                 }
 
                 #ifndef MODE_VSM
+                    // https://digitalrune.github.io/DigitalRune-Documentation/html/3f4d959e-9c98-4a97-8d85-7a73c26145d7.htm
+                    // Depth Bias: The pixel is moved in the direction of the light.
+                    // Slope-Scaled Depth Bias: Like the depth bias, but the offset depends on the slope of the surface because shadow acne is bigger on slopes which are nearly parallel to the light.
+                    // Normal Offset [1]: The pixels are moved in the direction of the surface normal. The offset can be proportional to the slope.
+                    // View Direction Offset [2]: Like the normal offset but instead of moving into the normal direction, the pixel is moved in the view direction. This is cheaper but not as good as the normal offset.
+                    // Receiver Plane Depth Bias [3][4]: The receiver plane is calculated to analytically find the ideal bias.
+
                     // modify bias according to slope of the surface
                     float bias = clamp(lights[l].shadowBias * tan(acos(lambert)), 0., 0.1);
                 #endif
 
+                #ifdef MODE_DEFAULT
+                    diffuseColor *= shadowFactorDefault(depthFromMapLookup, shadowMapDepth, bias);
+                    diffuseColor =
+                #endif
                 #ifdef MODE_PCF
                     diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
                 #endif
@@ -367,7 +401,10 @@ void main()
                     diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
                 #endif
                 #ifdef MODE_VSM
-                    diffuseColor *= ShadowFactorVSM(texture(lights[l].shadowMap,shadowMapLookup).rg, lights[l].shadowBias, shadowMapDepth);
+                    if (lights[l].type != POINT) diffuseColor *= ShadowFactorVSM(texture(lights[l].shadowMap, shadowMapLookup).rg, lights[l].shadowBias, shadowMapDepth);
+                    else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
+                    // else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMaps[l].cubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
+                    // diffuseColor = vec3(texture(shadowCubeMap, -lightDirection).r);
                 #endif
             }
 

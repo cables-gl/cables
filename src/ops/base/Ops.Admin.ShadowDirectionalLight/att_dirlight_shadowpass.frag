@@ -1,6 +1,4 @@
 // http://fabiensanglard.net/shadowmappingVSM/
-
-UNI float inShadowBias;
 void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);

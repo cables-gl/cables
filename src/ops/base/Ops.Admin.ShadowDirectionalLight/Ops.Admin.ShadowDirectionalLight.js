@@ -53,7 +53,7 @@ const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inLRBT.setUiAttribs({ greyout: true });
@@ -217,7 +217,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
         inBias.setUiAttribs({ greyout: false });
-        inPolygonOffset.setUiAttribs({ greyout: true });
+        inPolygonOffset.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inLRBT.setUiAttribs({ greyout: true });
@@ -375,11 +375,9 @@ inTrigger.onTriggered = function() {
                 cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
 
                 cgl.gl.enable(cgl.gl.DEPTH_TEST);
+
                 cgl.gl.colorMask(true,true,false,false);
-
                 renderShadowMap();
-
-                cgl.gl.colorMask(false,false,false,false);
 
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
@@ -392,8 +390,9 @@ inTrigger.onTriggered = function() {
 
                 // NOTE: blur is still very cpu intensive... idk why
                 // better with jsut 2 color channels
-                cgl.gl.colorMask(true,true,false,false);
+
                 renderBlur();
+
                 cgl.gl.colorMask(true,true,true,true);
 
                 cgl.frameStore.renderOffscreen = false;
@@ -415,7 +414,6 @@ inTrigger.onTriggered = function() {
             }
         }
     }
-    //cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
 
     outTrigger.trigger();
 

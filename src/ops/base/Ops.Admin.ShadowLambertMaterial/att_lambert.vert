@@ -11,6 +11,8 @@ UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 lightMatrix;
 UNI mat4 lightMatrices[NUM_LIGHTS];
+UNI float inNormalOffset;
+
 OUT vec3 norm;
 OUT vec3 normInterpolated;
 OUT mat4 mvMatrix;
@@ -67,13 +69,13 @@ void main()
     modelPos=mMatrix*pos;
     #ifdef SHADOW_MAP
         for (int i = 0; i < NUM_LIGHTS; i++) {
-            shadowCoords[i] = lightMatrices[i] * modelPos;
+            // normal offset:
+            // https://www.gamedev.net/forums/topic/665740-can39t-fix-shadow-acne-with-bias/5210839/
+            shadowCoords[i] = lightMatrices[i] * (modelPos + vec4(norm, 1) * inNormalOffset);
             testMatrices[i] = lightMatrices[i];
 
         }
     #endif
 
     gl_Position = projMatrix * mvMatrix * pos;
-    // shadowCoord = lightMatrix * modelPos; // vec4(fragPos, 1.);
-    // gl_Position = shadowCoord;
 }

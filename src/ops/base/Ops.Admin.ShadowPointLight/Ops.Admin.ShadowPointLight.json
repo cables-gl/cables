@@ -82,30 +82,41 @@
             {
                 "type": "0",
                 "name": "Cast Shadow",
-                "group": "Shadow",
                 "subType": "boolean"
             },
             {
                 "type": "5",
                 "name": "Map Size",
-                "group": "Shadow"
+                "group": "Shadow Map Settings"
             },
             {
                 "type": "0",
                 "name": "Near",
-                "group": "Shadow",
+                "group": "Shadow Map Settings",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Far",
-                "group": "Shadow",
+                "group": "Shadow Map Settings",
                 "subType": "number"
             },
             {
                 "type": "0",
+                "name": "Bias",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow Map Settings",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Blur Amount",
-                "group": "Shadow",
+                "group": "Shadow Map Settings",
                 "subType": "number"
             }
         ],
