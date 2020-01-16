@@ -227,13 +227,7 @@ var updateLights=function()
 
                                 } else if (light.shadowCubeMap) {
                                     lights[count].nearFar.setValue(light.nearFar);
-                                    /* if (!shadowCubeMaps[count]) {
-                                        shadowCubeMaps[count] = new CGL.Uniform(shader,'t','shadowCubeMaps[' + count + '].cubeMap', count);
-                                    } */
                                     cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-                                    /*
-
-                                    */
                                     lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
                                 }
                             } else { // if castShadow = false, remove uniform.. should that be done?

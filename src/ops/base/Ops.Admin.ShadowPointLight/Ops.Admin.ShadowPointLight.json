@@ -115,6 +115,11 @@
             },
             {
                 "type": "0",
+                "name": "Geometry Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Blur Amount",
                 "group": "Shadow Map Settings",
                 "subType": "number"

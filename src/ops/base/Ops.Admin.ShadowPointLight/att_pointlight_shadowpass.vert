@@ -18,7 +18,7 @@ UNI mat4 lightMVP;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
-
+UNI float inGeometryScale;
 
 UNI mat4 lightBiasMVP;
 void main() {
@@ -36,6 +36,6 @@ void main() {
 
     mat4 mvMatrix=viewMatrix * modelMatrix;
     vPos = projMatrix * mvMatrix * vec4(vPosition, 1.);
-    modelPos = (modelMatrix * pos).xyz;
+    modelPos = inGeometryScale * (modelMatrix * pos).xyz;
     gl_Position = vPos;
 }
