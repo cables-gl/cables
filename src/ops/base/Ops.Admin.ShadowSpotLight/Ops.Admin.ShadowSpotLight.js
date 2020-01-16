@@ -383,6 +383,7 @@ function drawHelpers() {
             posY:inPosY,
             posZ:inPosZ,
         });
+        /*
         CABLES.GL_MARKER.drawLineSourceDest({
             op: op,
             sourceX: light.position[0],
@@ -392,6 +393,7 @@ function drawHelpers() {
             destY: light.conePointAt[1],
             destZ: light.conePointAt[2],
         });
+        */
     }
 }
 
@@ -408,7 +410,7 @@ inTrigger.onTriggered = function() {
     light.conePointAt = resultPointAt;
     uniformLightPosition.setValue(light.position);
 
-    // drawHelpers();
+    drawHelpers();
 
     cgl.lightStack.push(light);
     if (inCastShadow.get()) {
@@ -496,16 +498,4 @@ inTrigger.onTriggered = function() {
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-}
-
-
-inTrigger.onLinkChanged = function() {
-    if (!inTrigger.isLinked()) {
-        cgl.frameStore.shadowMap = null;
-    }
-}
-outTrigger.onLinkChanged = function() {
-    if (!outTrigger.isLinked()) {
-        cgl.frameStore.shadowMap = null;
-    }
 }

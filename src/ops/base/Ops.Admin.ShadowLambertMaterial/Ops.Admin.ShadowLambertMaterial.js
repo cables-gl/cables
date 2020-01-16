@@ -15,9 +15,8 @@ inToggleDoubleSided.onChange = function () {
     shader.toggleDefine("DOUBLE_SIDED", inToggleDoubleSided.get());
 };
 inShadow.onChange = function() {
-    shader.toggleDefine("SHADOW_MAP", inShadow.get());
-
-
+    if (inShadow.get()) shader.define("SHADOW_MAP")
+    else shader.removeDefine("SHADOW_MAP");
 }
 
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
@@ -103,46 +102,27 @@ op.log(shadowCubeMaps);
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
 let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 12);
 
+
 shader.bindTextures = function() {
-    /*
-    if (cgl.frameStore.shadowMap || cgl.frameStore.shadowCubeMap) {
-        if (inShadow.get()) {
-
-            if (cgl.frameStore.shadowMap) {
-                cgl.setTexture(0, cgl.frameStore.shadowMap.tex);
-                uniformShadowMapSize.setValue(cgl.frameStore.shadowMap.width);
-            }
-
-            if (cgl.frameStore.shadowCubeMap) {
-                    cgl.setTexture(1, cgl.frameStore.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-                    if (cgl.frameStore.shadowCubeMap.size) uniformShadowMapSize.setValue(cgl.frameStore.shadowCubeMap.size);
-                    else uniformShadowMapSize.setValue(1024);
-
-            }
-            if (!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
-        }
-    } else {
-
-        if (inShadow.get()) {
-            if (!cgl.frameStore.shadowMap && !cgl.frameStore.shadowCubeMap) {
-                if (shader.hasDefine("SHADOW_MAP")) {
-                    shader.removeDefine("SHADOW_MAP");
-                }
-            }
-        }
-    }
-    */
 }
 const SHADOWMAP_DEFINES = [
 
 ];
 var numLights=-1;
+function setDefaultLight() {
+
+}
+
+const LIGHT_TYPES = { point: 0, directional: 1, spot: 2 };
+const inverseViewMat = mat4.create();
+const camPos = vec3.create();
+
 var updateLights=function()
 {
     var count=0;
     var i=0;
     var num=0;
-    if(!cgl.lightStack && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
+    if((!cgl.lightStack || !cgl.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
         num=0;
     }
@@ -172,18 +152,17 @@ var updateLights=function()
 
     if((!cgl.lightStack || !cgl.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
-
-        lights[count].pos.setValue([5,5,5]);
+        shader.removeDefine("SHADOW_MAP");
+        lights.forEach(l => l.shadowMap = null); // Does this clear textures?
+        shadowCubeMap = null;
+        lights[count].pos.setValue([5, 5, 5]);
         lights[count].color.setValue([1,1,1]);
         lights[count].ambient.setValue([0.1,0.1,0.1]);
         lights[count].mul.setValue(1);
         lights[count].fallOff.setValue(0.5);
+        lights[count].type.setValue(LIGHT_TYPES.point);
+        lights[count].castShadow.setValue(0);
 
-        if (lights[count].shadowMap) {
-    //        shader.removeUniform('lights[' + count + '].shadowMap'); // lights[count].shadowMap = null;
-    //        lights[count].shadowMap = null;
-        }
-        // lights[count].castShadow.setValue(0);
     }
     else
     {
@@ -218,123 +197,56 @@ var updateLights=function()
             }
             if (cgl.lightStack) {
                 if (cgl.lightStack.length) {
-
                         for (let j = 0; j < cgl.lightStack.length; j += 1) {
-
-
                             const light = cgl.lightStack[j];
-                                 if (light.type === "point") { // POINT LIGHT
-                                    lights[count].pos.setValue(light.position);
-                                    lights[count].fallOff.setValue(light.falloff);
-                                    lights[count].radius.setValue(light.radius);
-                                    lights[count].color.setValue(light.color);
-                                    lights[count].ambient.setValue([0, 0, 0]);
-                                    lights[count].type.setValue(0); // old point light type index
+                            lights[count].pos.setValue(light.position);
+                            lights[count].fallOff.setValue(light.falloff);
+                            lights[count].radius.setValue(light.radius);
+                            lights[count].color.setValue(light.color);
+                            lights[count].ambient.setValue([0, 0, 0]); // TODO: Remove
+                            lights[count].conePointAt.setValue(light.conePointAt);
+                            lights[count].cosConeAngle.setValue(light.cosConeAngle);
+                            lights[count].cosConeAngleInner.setValue(light.cosConeAngleInner);
+                            lights[count].spotExponent.setValue(light.spotExponent);
+                            lights[count].type.setValue(LIGHT_TYPES[light.type]);
+                            lights[count].mul.setValue(light.intensity);
+                            lights[count].castShadow.setValue(Number(light.castShadow));
 
+                            if (light.castShadow) {
+                                if (inShadow.get() && !shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
+                                if (light.lightMatrix) lightMatrices[count].setValue(light.lightMatrix);
 
-                                    lights[count].mul.setValue(light.intensity);
-                                    lights[count].castShadow.setValue(Number(light.castShadow));
+                                lights[count].shadowBias.setValue(light.shadowBias);
 
-                                    if (light.castShadow) {
-                                        lights[count].nearFar.setValue(light.nearFar);
-                                        //lightMatrices[count].setValue(light.lightMatrix);
-                                        //lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
-
-                                        if (light.shadowCubeMap) {
-                                            if (light.shadowCubeMap.cubemap) {
-                                                if (!shadowCubeMaps[count]) {
-                                                    shadowCubeMaps[count] = new CGL.Uniform(shader,'t','shadowCubeMaps[' + count + '].cubeMap', count);
-                                                }
-
-                                                cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-                                                lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
-                                                lights[count].shadowBias.setValue(light.shadowBias);
-                                            }
-                                        }
-                                    } else {
-                                        if (shadowCubeMaps[count]) {
-                                            shader.removeUniform('shadowCubeMaps[' + count + '].cubeMap');
-                                            shadowCubeMaps[count] = null;
-                                        }
+                                if (light.shadowMap) {
+                                    if (!lights[count].shadowMap) {
+                                        lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
-                                    count++;
+                                    cgl.setTexture(count, light.shadowMap.tex);
+                                    lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
-                                 } else if (light.type === "directional") {
+                                } else if (light.shadowCubeMap) {
+                                    lights[count].nearFar.setValue(light.nearFar);
+                                    /* if (!shadowCubeMaps[count]) {
+                                        shadowCubeMaps[count] = new CGL.Uniform(shader,'t','shadowCubeMaps[' + count + '].cubeMap', count);
+                                    } */
+                                    cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+                                    /*
 
-                                    lights[count].pos.setValue(light.position);
-                                    lights[count].fallOff.setValue(light.falloff);
-                                    lights[count].radius.setValue(light.radius);
-                                    lights[count].color.setValue(light.color);
-                                    lights[count].ambient.setValue([0, 0, 0]);
-                                    lights[count].type.setValue(1);
-
-                                    lights[count].mul.setValue(light.intensity);
-                                    lights[count].castShadow.setValue(Number(light.castShadow));
-
-                                    if (light.castShadow) {
-
-                                        lightMatrices[count].setValue(light.lightMatrix);
-                                        lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
-
-                                        if (light.shadowMap) {
-                                            if (!lights[count].shadowMap) {
-                                                lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
-                                            }
-
-                                            cgl.setTexture(count, light.shadowMap.tex);
-                                            lights[count].shadowMapWidth.setValue(light.shadowMap.width);
-                                            lights[count].shadowBias.setValue(light.shadowBias);
-                                        }
-
-
-                                    } else {
-                                        //lightMatrices[count].setValue(null);
-                                        if (lights[count].shadowMap) {
-                                            shader.removeUniform('lights[' + count + '].shadowMap');
-                                            lights[count].shadowMap = null;
-                                        }
-                                    }
-                                    count++;
-
-
-                                 } else if (light.type === "spot") {
-                                    // op.log(count, Object.keys(lights[count]).map(k => ({ k: k, v: lights[count][k] ? lights[count][k]._value : "no value" })));
-                                    lights[count].pos.setValue(light.position);
-                                    lights[count].fallOff.setValue(light.falloff);
-                                    lights[count].radius.setValue(light.radius);
-                                    lights[count].color.setValue(light.color);
-                                    lights[count].ambient.setValue([0, 0, 0]);
-                                    lights[count].conePointAt.setValue(light.conePointAt);
-                                    lights[count].cosConeAngle.setValue(light.cosConeAngle);
-                                    lights[count].cosConeAngleInner.setValue(light.cosConeAngleInner);
-                                    lights[count].spotExponent.setValue(light.spotExponent);
-                                    lights[count].type.setValue(2);
-                                    lights[count].mul.setValue(light.intensity);
-                                    lights[count].castShadow.setValue(Number(light.castShadow));
-
-                                    if (light.castShadow) {
-                                        lightMatrices[count].setValue(light.lightMatrix);
-                                        lights[count].lightMatrix.setValue(light.lightMatrix); // DEBUG
-
-                                        if (light.shadowMap) {
-                                            if (!lights[count].shadowMap) {
-                                                lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
-                                            }
-
-                                            cgl.setTexture(count, light.shadowMap.tex);
-                                            lights[count].shadowMapWidth.setValue(light.shadowMap.width);
-                                            lights[count].shadowBias.setValue(light.shadowBias);
-                                        }
-                                    } else {
-                                        if (lights[count].shadowMap) {
-                                            shader.removeUniform('lights[' + count + '].shadowMap');
-                                            lights[count].shadowMap = null;
-                                        }
-                                    }
-
-                                    count++;
-
-                                 }
+                                    */
+                                    lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
+                                }
+                            } else { // if castShadow = false, remove uniform.. should that be done?
+                                if (lights[count].shadowMap) {
+                                    shader.removeUniform('lights[' + count + '].shadowMap');
+                                    lights[count].shadowMap = null;
+                                }
+                                else if (shadowCubeMaps[count]) {
+                                    shader.removeUniform('shadowCubeMaps[' + count + '].cubeMap');
+                                    shadowCubeMaps[count] = null;
+                                }
+                            }
+                            count++;
                         }
                     }
                 }
@@ -342,11 +254,6 @@ var updateLights=function()
     }
 };
 
-function updateSpecular()
-{
-    if(inSpecular.get()==1)inSpecular.uniform.setValue(99999);
-        else inSpecular.uniform.setValue(Math.exp(inSpecular.get()*8,2));
-}
 execute.onTriggered=function()
 {
     if(!shader)

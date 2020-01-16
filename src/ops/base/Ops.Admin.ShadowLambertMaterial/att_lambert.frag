@@ -133,7 +133,7 @@ float getfallOff(Light light,float distLight)
 }
 */
 
-
+/*
 #ifdef SHADOW_MAP
     float CalculateShadow(vec3 lightPos, vec2 nearFar, int type, float lambert, sampler2D shadowMap, vec4 shadowCoord, float shadowMapSize, float shadowBias) {
         float visibility = 1.;
@@ -242,6 +242,7 @@ float getfallOff(Light light,float distLight)
         return visibility;
     }
 #endif
+*/
 
 #ifdef MODE_DEFAULT
     float shadowFactorDefault(float depthFromMapLookup, float shadowMapDepth, float bias) {
@@ -343,7 +344,7 @@ void main()
         if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].pos;
 
 
-        float lambert = 1.; // in out
+        float lambert = 1.; // inout variable
         vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, materialColor.rgb, lambert);
 
         // if (lights[l].type != 1) newColor*=getfallOff(light, length(lightModelDiff));
@@ -351,29 +352,21 @@ void main()
         diffuseColor *= lights[l].mul;
 
         #ifdef SHADOW_MAP
-
             if (lights[l].castShadow == 1) {
                 vec4 testCoord = lights[l].lightMatrix * modelPos;
 
-                vec2 shadowMapLookup = shadowCoords[l].xy;
-                float shadowMapDepth = shadowCoords[l].z;
-
-                // if (lights[l].type == SPOT) {
-                    // project coordinates
-                    shadowMapLookup /= shadowCoords[l].w;
-                    shadowMapDepth /= shadowCoords[l].w;
-                // }
+                vec2 shadowMapLookup = shadowCoords[l].xy / shadowCoords[l].w;
+                float shadowMapDepth = shadowCoords[l].z / shadowCoords[l].w;
 
                 float depthFromMapLookup = 1.;
+
                 if (lights[l].type == POINT) {
                     float cameraNear, cameraFar;
                     cameraNear = lights[l].nearFar.x; // uniforms
                     cameraFar =  lights[l].nearFar.y;
 
-                    //toLightNormal = normalize(lightPos - modelPos.xyz);
-
                     float fromLightToFrag = (length(modelPos.xyz - lights[l].pos) - cameraNear) / (cameraFar - cameraNear);
-                    // depthFromMapLookup = texture(shadowCubeMaps[l], -lightDirection).r;
+                    depthFromMapLookup = texture(shadowCubeMap, -lightDirection).r;
                     shadowMapDepth = fromLightToFrag;
                 }
 
@@ -387,11 +380,12 @@ void main()
 
                     // modify bias according to slope of the surface
                     float bias = clamp(lights[l].shadowBias * tan(acos(lambert)), 0., 0.1);
+
                 #endif
 
                 #ifdef MODE_DEFAULT
                     diffuseColor *= shadowFactorDefault(depthFromMapLookup, shadowMapDepth, bias);
-                    diffuseColor =
+
                 #endif
                 #ifdef MODE_PCF
                     diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
@@ -401,8 +395,8 @@ void main()
                     diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
                 #endif
                 #ifdef MODE_VSM
-                    if (lights[l].type != POINT) diffuseColor *= ShadowFactorVSM(texture(lights[l].shadowMap, shadowMapLookup).rg, lights[l].shadowBias, shadowMapDepth);
-                    else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
+                  if (lights[l].type == POINT) diffuseColor *= ShadowFactorVSM(texture(shadowCubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
+                  else diffuseColor *= ShadowFactorVSM(texture(lights[l].shadowMap, shadowMapLookup).rg, lights[l].shadowBias, shadowMapDepth);
                     // else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMaps[l].cubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
                     // diffuseColor = vec3(texture(shadowCubeMap, -lightDirection).r);
                 #endif
