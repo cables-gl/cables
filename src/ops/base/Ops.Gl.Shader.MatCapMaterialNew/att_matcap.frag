@@ -7,8 +7,6 @@ UNI sampler2D tex;
 IN vec3 vNorm;
 UNI mat4 viewMatrix;
 
-UNI float repeatX;
-UNI float repeatY;
 UNI float opacity;
 
 UNI float r;
@@ -123,7 +121,7 @@ void main()
     #endif
 
    #ifdef HAS_NORMAL_TEXTURE
-        vec3 tnorm=texture( texNormal, vec2(texCoord.x*repeatX,texCoord.y*repeatY) ).xyz * 2.0 - 1.0;
+        vec3 tnorm=texture( texNormal, texCoord ).xyz * 2.0 - 1.0;
 
         tnorm = normalize(tnorm*normalScale);
 
@@ -177,7 +175,7 @@ void main()
     vec4 col = texture( tex, vn );
 
     #ifdef HAS_DIFFUSE_TEXTURE
-        col = col*texture( texDiffuse, vec2(texCoords.x*repeatX,texCoords.y*repeatY));
+        col = col*texture( texDiffuse, texCoords);
     #endif
 
     col.r*=r;
@@ -189,14 +187,14 @@ void main()
         col = col*
             mix(
                 vec4(1.0,1.0,1.0,1.0),
-                texture( texAo, vec2(texCoords.x*repeatX,texCoords.y*repeatY)),
+                texture( texAo, texCoords),
                 aoIntensity
                 );
     #endif
 
     #ifdef USE_SPECULAR_TEXTURE
         vec4 spec = texture( texSpecMatCap, vn );
-        spec*= texture( texSpec, vec2(texCoords.x*repeatX,texCoords.y*repeatY) );
+        spec*= texture( texSpec, texCoords );
         col+=spec;
     #endif
 

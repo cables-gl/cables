@@ -80,6 +80,16 @@
             },
             {
                 "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "calc normal tangents",
                 "subType": "boolean"
             },

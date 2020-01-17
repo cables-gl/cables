@@ -13,17 +13,17 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Number 1",
+                "name": "Value in",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Number 2",
+                "name": "Condition value",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Value",
+                "name": "Between value high",
                 "subType": "number"
             },
             {
@@ -62,16 +62,16 @@
     "docs": {
         "ports": [
             {
-                "name": "Number 1",
-                "text": "The number you want to check"
+                "name": "Value in",
+                "text": "Number in to check"
             },
             {
-                "name": "Number 2",
-                "text": "The value you want to check against"
+                "name": "Condition value",
+                "text": "Becomes Between value low when between mode enabled"
             },
             {
-                "name": "Value",
-                "text": "the value to test when one of the between modes is used."
+                "name": "Between value high",
+                "text": "Max value for between or between equals mode"
             },
             {
                 "name": "Comparison mode",

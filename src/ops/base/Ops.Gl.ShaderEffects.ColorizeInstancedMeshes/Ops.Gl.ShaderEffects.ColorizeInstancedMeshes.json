@@ -31,11 +31,31 @@
         ],
         "name": "Ops.Gl.ShaderEffects.ColorizeInstancedMeshes"
     },
-    "summary": "colorize instanced meshes by picking random color from atexture",
+    "summary": "colorize instanced meshes by picking random color from a texture",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Amount",
+                "text": "Blend amount"
+            },
+            {
+                "name": "Multiply Color",
+                "text": "Multiply current color by random colors"
+            },
+            {
+                "name": "Lookup Texture",
+                "text": "Texture to use to generate random colors"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     },
-    "youtubeid": "",
     "collections": [
         "meshInstancing"
     ],
@@ -46,5 +66,7 @@
             "author": "andro",
             "date": 1559050673784
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

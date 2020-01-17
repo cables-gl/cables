@@ -1,7 +1,7 @@
 const
-    numberIn_1 = op.inFloat("Number 1",0),
-    numberIn_2 = op.inFloat("Number 2",1),
-    numberIn_3 = op.inFloat("Value",0),
+    numberIn_1 = op.inFloat("Value in",0),
+    numberIn_2 = op.inFloat("Condition value",1),
+    numberIn_3 = op.inFloat("Between value high",1),
     logicSelectMode = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=','><','>=<'],'>'),
     resultNumberOut = op.outNumber("Result number"),
     resultBooleanOut = op.outBool("Result boolean"),
@@ -33,9 +33,16 @@ function onFilterChange()
     else if(logicSelectValue === '><') selectIndex = BETWEEN;
     else if(logicSelectValue === '>=<') selectIndex = BETWEEN_EQUALS;
 
-    if (selectIndex === 6 || selectIndex == 7) numberIn_3.setUiAttribs({greyout:false});
-        else numberIn_3.setUiAttribs({greyout:true});
-
+    if (selectIndex === 6 || selectIndex == 7)
+    {
+        numberIn_3.setUiAttribs({greyout:false});
+        numberIn_2.setUiAttribs({title:"Between value low"});
+    }
+    else
+    {
+        numberIn_3.setUiAttribs({greyout:true});
+        numberIn_2.setUiAttribs({title:"Condition value"});
+    }
     update();
     op.setUiAttrib({"extendTitle":logicSelectValue});
 };
@@ -99,8 +106,8 @@ function update()
     }
     else if(selectIndex === BETWEEN)
     {
-        if(n3 > Math.min(n1 , n2 )  &&
-            n3 < Math.max(n1 , n2 ) )
+        if(n1 > Math.min(n2 , n3 )  &&
+            n1 < Math.max(n2 , n3 ) )
         {
             resultNumber=1;
             resultBoolean=true;
@@ -108,8 +115,8 @@ function update()
     }
     else if(selectIndex === BETWEEN_EQUALS)
     {
-        if(n3 >= Math.min(n1 , n2 )  &&
-            n3 <= Math.max(n1 , n2 ) )
+        if(n1 >= Math.min(n2 , n3 )  &&
+            n1 <= Math.max(n2 , n3 ) )
         {
             resultNumber=1;
             resultBoolean=true;

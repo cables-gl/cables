@@ -1,0 +1,28 @@
+{
+    "id": "2f447fcb-3c20-4c2f-9527-84daed3a6b0e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1578320041848
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1578320093120,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "update"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Admin.PerformanceNow"
+    }
+}

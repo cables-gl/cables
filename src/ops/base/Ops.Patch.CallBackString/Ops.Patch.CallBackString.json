@@ -1,0 +1,37 @@
+{
+    "authorName": "pandur",
+    "id": "cfc87cb1-a74b-482f-9fad-e1777cb7ffd4",
+    "created": 1576746522269,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "5",
+                "name": "Callback Name"
+            },
+            {
+                "type": "5",
+                "name": "Parameter 1"
+            },
+            {
+                "type": "5",
+                "name": "Parameter 2"
+            },
+            {
+                "type": "5",
+                "name": "Parameter 3"
+            }
+        ],
+        "name": "Ops.User.pandur.CallBack2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.CallBack2 renamed to Ops.Patch.CallBackString",
+            "author": "pandur",
+            "date": 1576746553597
+        }
+    ]
+}

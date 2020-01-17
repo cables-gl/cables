@@ -21,6 +21,10 @@ UNI mat4 viewMatrix;
 OUT vec3 vNorm;
 OUT vec3 e;
 
+UNI vec2 texOffset;
+UNI vec2 texRepeat;
+
+
 #ifndef INSTANCING
     UNI mat4 normalMatrix;
 #endif
@@ -38,7 +42,7 @@ UNI vec3 camPos;
 
 void main()
 {
-    texCoord=attrTexCoord;
+    texCoord=texRepeat*attrTexCoord+texOffset;
     norm=attrVertNormal;
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
