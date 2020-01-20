@@ -4,9 +4,8 @@ const
     amount=op.inValueSlider("Amount",1),
     modeSelect = op.inValueSelect("Mode",["Clamp","Remap","Remap smooth"],"Clamp"),
     inLowEdge=op.inValue("Min",0.0),
-    inHighEdge=op.inValue("Max",1.0);
-
-trigger=op.outTrigger('trigger');
+    inHighEdge=op.inValue("Max",1.0),
+    trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
