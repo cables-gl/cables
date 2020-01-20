@@ -23,14 +23,14 @@
             },
             {
                 "type": "0",
-                "name": "Mode",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mode",
+                "subType": "string"
             },
             {
                 "type": "0",

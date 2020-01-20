@@ -1,11 +1,12 @@
-const render=op.inTrigger('render');
-const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-const modeSelect = op.inValueSelect("Mode",["Clamp","Remap","Remap smooth"],"Clamp");
-const amount=op.inValueSlider("Amount",1);
-const inLowEdge=op.inValue("Min",0.0);
-const inHighEdge=op.inValue("Max",1.0);
+const
+    render=op.inTrigger('render'),
+    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
+    amount=op.inValueSlider("Amount",1),
+    modeSelect = op.inValueSelect("Mode",["Clamp","Remap","Remap smooth"],"Clamp"),
+    inLowEdge=op.inValue("Min",0.0),
+    inHighEdge=op.inValue("Max",1.0);
 
-const trigger=op.outTrigger('trigger');
+trigger=op.outTrigger('trigger');
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);

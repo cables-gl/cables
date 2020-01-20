@@ -6,11 +6,6 @@ UNI float highEdge;
 
 {{CGL.BLENDMODES}}
 
-vec3 inverse_smoothstep( vec3 x )
-{
-    return 0.5 - sin(asin(1.0-2.0*x)/3.0);
-}
-
 void main()
 {
     vec3 result = vec3(0.);
