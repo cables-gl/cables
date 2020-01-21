@@ -297,11 +297,10 @@ function renderBlur(texture) {
 
 shader.offScreenPass = true;
 blurShader.offScreenPass = true;
+
 function renderShadowMap() {
     // * set shader
     cgl.gl.clearColor(0, 0, 0, 1);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
 
     cgl.setShader(shader);
 

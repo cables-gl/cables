@@ -21,7 +21,7 @@ inShadow.onChange = function() {
 
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
-const inSamples = op.inSwitch("Samples", [1, 2, 4, 8, 16], 4);
+const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 
 inSamples.setUiAttribs({ greyout: true });
@@ -53,9 +53,9 @@ shader.define('NUM_LIGHTS','1');
 
 
 inSamples.onChange = function() {
-    shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
+    shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 }
-shader.define("SAMPLE_AMOUNT", clamp(Number(inSamples.get()), 1, 16).toString());
+shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 
 const colUni=new CGL.Uniform(shader,'4f','materialColor',r,g,b,a);
 const uniformNormalOffset = new CGL.Uniform(shader, 'f', 'inNormalOffset', inNormalOffset);
