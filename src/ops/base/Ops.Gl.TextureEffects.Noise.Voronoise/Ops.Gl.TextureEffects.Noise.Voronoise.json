@@ -31,7 +31,7 @@
             {
                 "type": "0",
                 "name": "Num",
-                "subType": "integer"
+                "subType": "number"
             },
             {
                 "type": "0",

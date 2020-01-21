@@ -5,6 +5,7 @@ const slices=op.inValue("slices",32);
 const stacks=op.inValue("stacks",5);
 const radius=op.inValue("radius",1);
 const height=op.inValue("height",2);
+const active=op.inValueBool('Active',true);
 const trigger=op.outTrigger('trigger');
 const geomOut=op.outObject("geometry");
 
@@ -30,7 +31,16 @@ function updateMeshLater()
 
 render.onTriggered=function()
 {
+
     if(needsRebuild) updateMesh();
+    if(active.get() && mesh)
+    {
+        mesh.render(cgl.getShader());
+    }
+    else
+    {
+        return;
+    }
     mesh.render(cgl.getShader());
     trigger.trigger();
 };

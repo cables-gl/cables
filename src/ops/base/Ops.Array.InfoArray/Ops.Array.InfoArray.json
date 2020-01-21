@@ -61,5 +61,8 @@
         }
     ],
     "issues": "",
-    "youtubeids": []
+    "youtubeids": [],
+    "libs": [
+        "tone.js"
+    ]
 }
