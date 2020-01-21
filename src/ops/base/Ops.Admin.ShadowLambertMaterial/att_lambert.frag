@@ -129,8 +129,10 @@ float getfallOff(Light light,float distLight)
                 }
             }
         }
+
         visibility /= PCF_DIVISOR_POINT;
         return visibility;
+
     }
 
     float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {

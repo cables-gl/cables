@@ -25,9 +25,5 @@ void main() {
     color.xyz += texture(shadowMap, coord6).xyz * 0.06927096443795711;  // 1/64
 
     color.a = 1.;
-    // if (color.rgb == vec3(0.0,0.0,0.0)) discard;
     outColor = color;
-
-
-     // outColor= vec4(1., 0., 0., 1.);
 }

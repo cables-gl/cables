@@ -146,16 +146,8 @@ const blurShader = new CGL.Shader(cgl, "shadowBlur");
 blurShader.setSource(attachments.pointlight_blur_vert, attachments.pointlight_blur_frag);
 
 const effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
-const outputTexture =new CGL.Texture(cgl, {
-        name: "shadowDirLightBlur",
-        isFloatingPointTexture: true,
-        filter: CGL.Texture.FILTER_MIPMAP,
-        width: Number(inMapSize.get()),
-        height: Number(inMapSize.get()),
-    });
-
 var texelSize = 1/Number(inMapSize.get());
+
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
 const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
 const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
@@ -381,11 +373,6 @@ function renderCubeSide(index) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     outTrigger.trigger();
 
-    // fb.renderEnd();
-
-    // remove light from stack and readd it with shadow map & mvp matrix
-    // cgl.lightStack.pop();
-
     cgl.popPMatrix();
     cgl.popModelMatrix();
     cgl.popViewMatrix();
@@ -496,16 +483,5 @@ inTrigger.onTriggered = function() {
 
     outTrigger.trigger();
     cgl.lightStack.pop();
-}
-
-inTrigger.onLinkChanged = function() {
-    if (!inTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap = null;
-    }
-}
-outTrigger.onLinkChanged = function() {
-    if (!outTrigger.isLinked()) {
-        cgl.frameStore.shadowCubeMap = null;
-    }
 }
 

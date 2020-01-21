@@ -414,20 +414,13 @@ inTrigger.onTriggered = function() {
 
     cgl.lightStack.push(light);
     if (inCastShadow.get()) {
-
-        /*
-        if (cgl.lightStack.indexOf(light) === 0) {
-            cgl.firstShadowPass = true;
-        }
-        */
-
         if (!cgl.shadowPass) {
             if (fb) {
                 cgl.gl.enable(cgl.gl.CULL_FACE);
                 cgl.gl.cullFace(cgl.gl.FRONT);
 
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-                cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
+                cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
                 cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
                 cgl.frameStore.renderOffscreen = true;
@@ -446,7 +439,7 @@ inTrigger.onTriggered = function() {
                 */
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
-                cgl.gl.colorMask(true,true,true,true);
+                //cgl.gl.colorMask(true,true,true,true);
 
                 /*
                 if (!cgl.firstShadowPass) {
@@ -464,26 +457,19 @@ inTrigger.onTriggered = function() {
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
                 // NOTE: blur is still very cpu intensive... idk why
-                cgl.gl.colorMask(true,true,false,false);
+                // cgl.gl.colorMask(true,true,false,false);
                 renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
 
                 cgl.shadowPass = false;
                 cgl.frameStore.renderOffscreen = false;
-                //cgl.gl.disable(cgl.gl.CULL_FACE);
-                // cgl.gl.colorMask(false,false,false,false);
+
                 outTexture.set(null);
                 outTexture.set(fb.getTextureDepth());
 
             }
         }
-        /*
-        if (cgl.lightStack.indexOf(light) === 0) {
-            cgl.firstShadowPass = false;
-        }
-        */
-
     }
 
     // remove light from stack and readd it with shadow map & mvp matrix

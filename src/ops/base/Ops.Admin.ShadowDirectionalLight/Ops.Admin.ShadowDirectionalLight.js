@@ -263,9 +263,7 @@ const biasMatrix = mat4.fromValues(
         0.5, 0.5, 0.5, 1.0);
 const lightBiasMVPMatrix = mat4.create();
 
-function renderBlur(texture) {
-    //effect.setSourceTexture(texture);
-
+function renderBlur() {
     cgl.setShader(blurShader);
 
     effect.setSourceTexture(fb.getTextureColor()); // take shadow map as source
@@ -287,9 +285,6 @@ function renderBlur(texture) {
 
     effect.finish();
 
-
-    //outTexture.set(null);
-    //outTexture.set(effect.getCurrentSourceTexture());
     effect.endEffect();
 
     cgl.setPreviousShader();
@@ -407,7 +402,6 @@ inTrigger.onTriggered = function() {
                 light.lightMatrix = lightBiasMVPMatrix;
                 light.shadowBias = inBias.get();
                 light.shadowMap = fb.getTextureColor();
-
                 cgl.lightStack.push(light);
 
             }
