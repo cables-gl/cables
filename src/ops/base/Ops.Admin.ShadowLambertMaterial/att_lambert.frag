@@ -7,11 +7,9 @@
 IN vec3 norm;
 IN vec4 modelPos;
 
-// UNI mat4 normalMatrix;
 IN mat3 normalMatrix; // when instancing...
 IN vec3 normInterpolated;
 IN vec2 texCoord;
-// IN vec4 shadowCoord;
 
 IN vec3 mvNormal;
 IN vec3 mvTangent;
@@ -23,7 +21,6 @@ IN mat4 testMatrices[NUM_LIGHTS];
 
 UNI vec4 materialColor;//r,g,b,a;
 
-// UNI sampler2D shadowMap;
 UNI samplerCube shadowCubeMap;
 UNI float inShadowStrength;
 
@@ -51,42 +48,7 @@ float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator func
     vec2( 0.14383161, -0.14100790 )
     );
 #endif
-/*
-#ifdef MODE_STRATIFIED
-    float Random(vec4 randomVec) {
-        float dotProduct = dot(randomVec, vec4(12.9898,78.233,45.164,94.673));
-        return fract(sin(dotProduct) * 43758.5453);
-    }
 
-    vec2 poissonDisk[16] = vec2[](
-       vec2( -0.94201624, -0.39906216 ),
-       vec2( 0.94558609, -0.76890725 ),
-       vec2( -0.094184101, -0.92938870 ),
-       vec2( 0.34495938, 0.29387760 ),
-       vec2( -0.91588581, 0.45771432 ),
-       vec2( -0.81544232, -0.87912464 ),
-       vec2( -0.38277543, 0.27676845 ),
-       vec2( 0.97484398, 0.75648379 ),
-       vec2( 0.44323325, -0.97511554 ),
-       vec2( 0.53742981, -0.47373420 ),
-       vec2( -0.26496911, -0.41893023 ),
-       vec2( 0.79197514, 0.19090188 ),
-       vec2( -0.24188840, 0.99706507 ),
-       vec2( -0.81409955, 0.91437590 ),
-       vec2( 0.19984126, 0.78641367 ),
-       vec2( 0.14383161, -0.14100790 )
-    );
-#endif
-*/
-/*
-    vec3 sampleOffsetDirections[20]=vec3[](
-        vec3(1,1,1),vec3(1,-1,1),vec3(-1,-1,1),vec3(-1,1,1),
-        vec3(1,1,-1),vec3(1,-1,-1),vec3(-1,-1,-1),vec3(-1,1,-1),
-        vec3(1,1,0),vec3(1,-1,0),vec3(-1,-1,0),vec3(-1,1,0),
-        vec3(1,0,1),vec3(-1,0,1),vec3(1,0,-1),vec3(-1,0,-1),
-        vec3(0,1,1),vec3(0,-1,1),vec3(0,-1,-1),vec3(0,1,-1)
-    );
-*/
 #ifdef MODE_VSM
     float linstep(float value, float low, float high) {
         return clamp((value - low)/(high-low), 0., 1.);
@@ -133,143 +95,13 @@ float getfallOff(Light light,float distLight)
 }
 */
 
-/*
-#ifdef SHADOW_MAP
-    float CalculateShadow(vec3 lightPos, vec2 nearFar, int type, float lambert, sampler2D shadowMap, vec4 shadowCoord, float shadowMapSize, float shadowBias) {
-        float visibility = 1.;
-
-        vec2 shadowMapLookup = shadowCoord.xy;
-        vec3 cubemapLookup = modelPos.xyz - lightPos;
-
-        float shadowMapDepth = shadowCoord.z;
-
-        if (type == SPOT) {
-            // project coordinates
-            shadowMapLookup /= shadowCoord.w;
-            shadowMapDepth /= shadowCoord.w;
-        }
-
-        float shadowMapSample = 0.;
-
-        vec3 toLightNormal = vec3(0.);
-        float cameraNear = 0.;
-        float cameraFar = 0.;
-
-        if (type == POINT) {
-
-            cameraNear = nearFar.x; // uniforms
-            cameraFar = nearFar.y;
-
-            toLightNormal = normalize(lightPos - modelPos.xyz);
-
-            float fromLightToFrag =
-                (length(modelPos.xyz - lightPos) - cameraNear) / (cameraFar - cameraNear);
-            shadowMapSample = texture(shadowCubeMap, -toLightNormal).r;
-
-            shadowMapDepth = fromLightToFrag;
-
-        }
-
-        else shadowMapSample = texture(shadowMap, shadowMapLookup).r;
-
-        // modify bias according to slope of the surface
-        float bias = clamp(shadowBias * tan(acos(lambert)), 0., 0.1);
-
-        #ifdef MODE_DEFAULT
-            if (shadowMapSample < shadowMapDepth) visibility = 0.2;
-        #endif
-
-        #ifdef MODE_BIAS
-            if (shadowMapSample < shadowMapDepth - bias) visibility = 0.2;
-        #endif
-
-        #ifdef MODE_PCF
-            float texelSize = 1. / shadowMapSize;
-            visibility = 0.;
-
-            // sample neighbouring pixels & get mean value
-            for (int x = -1; x <= 1; x++) {
-                for (int y = -1; y <= 1; y++) {
-                    float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
-                    if (shadowMapDepth - bias < texelDepth) {
-                        visibility += 1.;
-                    }
-                }
-            }
-
-            visibility /= 9.;
-        #endif
-
-        #ifdef MODE_POISSON
-            for (int i = 0; i < SAMPLE_AMOUNT; i++) {
-                if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/700.)).r < shadowMapDepth - bias) {
-                    visibility -= 0.2;
-                }
-            }
-        #endif
-
-        #ifdef MODE_STRATIFIED
-            for (int i = 0; i < SAMPLE_AMOUNT; i++) {
-                int index = int(float(SAMPLE_AMOUNT) * Random(vec4(gl_FragCoord.xyy, i)))%SAMPLE_AMOUNT;
-                if (texture(shadowMap, (shadowMapLookup + poissonDisk[index]/700.)).r < shadowMapDepth - bias) {
-                    visibility -= 0.2;
-                }
-            }
-        #endif
-
-        #ifdef MODE_VSM
-            float distanceTo = shadowMapDepth;
-            // retrieve previously stored moments & variance
-            vec2 moments = texture(shadowMap, shadowMapLookup).rg;
-
-            if (type == POINT) moments = texture(shadowCubeMap, -toLightNormal).rg;
-
-            float p = step(distanceTo, moments.x);
-            float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
-
-            float distanceToMean = distanceTo - moments.x;
-            //there is a very small probability that something is being lit when its not
-            // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
-            // bottom line helps make the shadows darker
-            // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
-            //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
-            //pMax = variance / (variance + distanceToMean*distanceToMean);
-            // visibility = clamp(pMax, 1., p);
-            visibility = min(max(p, pMax), 1.);
-        #endif
-
-        return visibility;
-    }
-#endif
-*/
-
 #ifdef MODE_DEFAULT
     float shadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias) {
         if (shadowMapSample < shadowMapDepth - bias) return 0.2; // todo: make this uniform value from light or from material?
         return 1.;
     }
 #endif
-/*
-float shadow  = 0.0;
-float bias    = 0.05;
-float samples = 4.0;
-float offset  = 0.1;
-for(float x = -offset; x < offset; x += offset / (samples * 0.5))
-{
-    for(float y = -offset; y < offset; y += offset / (samples * 0.5))
-    {
-        for(float z = -offset; z < offset; z += offset / (samples * 0.5))
-        {
-            float closestDepth = texture(depthMap, fragToLight + vec3(x, y, z)).r;
-            closestDepth *= far_plane;   // Undo mapping [0;1]
-            if(currentDepth - bias > closestDepth)
-                shadow += 1.0;
-        }
-    }
-}
-shadow /= (samples * samples * samples);
-*/
+
 #ifdef MODE_PCF
 #define RIGHT_BOUND float(SAMPLE_AMOUNT/2.)
 #define LEFT_BOUND -RIGHT_BOUND
@@ -321,6 +153,18 @@ shadow /= (samples * samples * samples);
 
 #ifdef MODE_POISSON
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
+    float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias) {
+        float visibility = 1.;
+
+        for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
+            if (texture(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/500.)).r < shadowMapDepth - bias) {
+                visibility -= 0.2;
+            }
+        }
+
+        return visibility;
+    }
+
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
@@ -410,7 +254,6 @@ void main()
                 vec2 shadowMapLookup = shadowCoords[l].xy / shadowCoords[l].w;
                 float shadowMapDepth = shadowCoords[l].z  / shadowCoords[l].w;
 
-                // float shadowMapSample = texture(lights[l].shadowMap, shadowCoords[l].xy).r;
                 vec2 shadowMapSample = vec2(1.);
                 float cameraNear, cameraFar;
                 if (lights[l].type == POINT) {
@@ -442,23 +285,18 @@ void main()
 
                 #endif
                 #ifdef MODE_PCF
-                    // samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float farPlane, float bias
                     if (lights[l].type == POINT) {
-                        float test = ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);
-                        // diffuseColor = test == 1. ? vec3(1.,0.,0.) : vec3(0.,1.,0.);
-                        diffuseColor *= test;
+                        diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);;
                     }
                     else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
                 #endif
 
                 #ifdef MODE_POISSON
-                    diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
+                    if (lights[l].type == POINT) diffuseColor *= ShadowFactorPointPoisson(shadowCubeMap, lightDirection, shadowMapDepth, bias);
+                    else diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
                 #endif
                 #ifdef MODE_VSM
                   diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowBias, shadowMapDepth);
-                  // else diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowBias, shadowMapDepth);
-                    // else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMaps[l].cubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
-                    // diffuseColor = vec3(texture(shadowCubeMap, -lightDirection).r);
                 #endif
             }
 
