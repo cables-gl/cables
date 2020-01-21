@@ -3,7 +3,7 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
+            "author": "pandr",
             "date": 1579615567550
         }
     ],
@@ -39,6 +39,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.BarrelDistortion_v2"
     },
-    "authorName": "cables",
+    "authorName": "pandr",
     "created": 1579615623326
 }
