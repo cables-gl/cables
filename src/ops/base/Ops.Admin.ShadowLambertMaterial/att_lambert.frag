@@ -297,10 +297,8 @@ shadow /= (samples * samples * samples);
                 }
             }
         }
-
-        ;
-
-        return clamp(visibility / PCF_DIVISOR_POINT, 0., 1.);
+        visibility /= PCF_DIVISOR_POINT;
+        return visibility;
     }
 
     float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {
@@ -322,11 +320,12 @@ shadow /= (samples * samples * samples);
 #endif
 
 #ifdef MODE_POISSON
+#define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
-        for (int i = 0; i < SAMPLE_AMOUNT; i++) {
-            if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/700.)).r < shadowMapDepth - bias) {
+        for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
+            if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/500.)).r < shadowMapDepth - bias) {
                 visibility -= 0.2;
             }
         }
@@ -445,7 +444,9 @@ void main()
                 #ifdef MODE_PCF
                     // samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float farPlane, float bias
                     if (lights[l].type == POINT) {
-                        diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);
+                        float test = ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);
+                        // diffuseColor = test == 1. ? vec3(1.,0.,0.) : vec3(0.,1.,0.);
+                        diffuseColor *= test;
                     }
                     else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
                 #endif
@@ -455,6 +456,9 @@ void main()
                 #endif
                 #ifdef MODE_VSM
                   diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowBias, shadowMapDepth);
+                  // else diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowBias, shadowMapDepth);
+                    // else diffuseColor *= ShadowFactorVSM(texture(shadowCubeMaps[l].cubeMap, -lightDirection).rg, lights[l].shadowBias, shadowMapDepth);
+                    // diffuseColor = vec3(texture(shadowCubeMap, -lightDirection).r);
                 #endif
             }
 
