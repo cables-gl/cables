@@ -1,0 +1,54 @@
+{
+    "id": "086ca023-af3c-4e3a-9be7-1972adcf63b5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1579534683863
+        }
+    ],
+    "authorName": "andro",
+    "created": 1579534750915,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ClampTexture"
+    }
+}
