@@ -154,6 +154,39 @@ Port.prototype.setUiAttribs = function (newAttribs)
 };
 
 /**
+ * get ui attributes
+ * @function getUiAttribs
+ * @memberof Port
+ * @example
+ * myPort.getUiAttribs();
+ */
+Port.prototype.getUiAttribs = function ()
+{
+    return this.uiAttribs;
+};
+
+/**
+ * get ui attribute
+ * @function getUiAttrib
+ * @memberof Port
+ * @instance
+ * @param {String} attribName
+ * <pre>
+ * attribName - return value of the ui-attribute, or null on unknown attribute
+ * </pre>
+ * @example
+ * myPort.setUiAttribs("values");
+ */
+Port.prototype.getUiAttrib = function (attribName)
+{
+    if (!this.uiAttribs || !this.uiAttribs.hasOwnProperty(attribName))
+    {
+        return null;
+    }
+    return this.uiAttribs[attribName];
+};
+
+/**
  * @function get
  * @memberof Port
  * @instance
@@ -689,4 +722,33 @@ Port.portTypeNumberToString = function (type)
     return "unknown";
 };
 
-export { Port };
+class SwitchPort extends Port {
+
+    set(value)
+    {
+        super.set(this.getValueFromSwitchValues(value));
+    }
+
+    setValue(value)
+    {
+        super.setValue(this.getValueFromSwitchValues(value));
+    }
+
+    getValueFromSwitchValues(value)
+    {
+        let newValue = value;
+        if (typeof value === "number")
+        {
+            const switchValues = this.getUiAttrib("values");
+            if (switchValues && Array.isArray(switchValues))
+            {
+                newValue = switchValues[value];
+            }
+        }
+        return newValue;
+    }
+}
+
+class ValuePort extends SwitchPort {}
+
+export { Port, SwitchPort, ValuePort };
