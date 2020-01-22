@@ -5,6 +5,18 @@
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -18,7 +30,6 @@
     "docs": {
         "ports": []
     },
-    "updated": 1542956145827,
     "authorName": "pandur",
     "id": "7188ff85-e73c-4a3b-8237-49508a00d63a",
     "created": 1540920620064
