@@ -1,0 +1,60 @@
+{
+    "id": "7b3f93d6-4de1-41fd-aa26-e74c8285c662",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1579692851160
+        }
+    ],
+    "authorName": "cables",
+    "created": 1579692865849,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Link"
+            },
+            {
+                "type": "0",
+                "name": "Text",
+                "subType": "string"
+            },
+            {
+                "type": "3",
+                "name": "Values"
+            },
+            {
+                "type": "0",
+                "name": "Default",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Children"
+            },
+            {
+                "type": "5",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Sidebar.DropDown_v2"
+    }
+}
