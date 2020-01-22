@@ -739,16 +739,17 @@ class SwitchPort extends Port {
         let newValue = value;
         if (typeof value === "number")
         {
+            const intValue = Math.floor(value);
             const switchValues = this.getUiAttrib("values");
             if (switchValues && Array.isArray(switchValues))
             {
-                newValue = switchValues[value];
+                newValue = switchValues[intValue];
             }
         }
         return newValue;
     }
 }
 
-class ValuePort extends SwitchPort {}
+class ValueSelectPort extends SwitchPort {}
 
-export { Port, SwitchPort, ValuePort };
+export { Port, SwitchPort, ValueSelectPort };
