@@ -370,6 +370,12 @@ Texture.prototype._setFilter = function ()
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
+    if(this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
+    {
+        Log.log("texture: HDR and mipmap filtering at the same time is not possible");
+        this.filter = Texture.FILTER_LINEAR;
+    }
+
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
     {
         // Log.log( 'non power of two',this.width,this.height );
