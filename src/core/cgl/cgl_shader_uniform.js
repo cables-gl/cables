@@ -219,6 +219,7 @@ Uniform.prototype.updateValueF = function ()
 
 Uniform.prototype.setValueF = function (v)
 {
+    if (typeof v !== "number") return;
     if (v != this._value)
     {
         this.needsUpdate = true;
@@ -237,6 +238,7 @@ Uniform.prototype.updateValueI = function ()
 
 Uniform.prototype.setValueI = function (v)
 {
+    if (!Number.isInteger(v)) return;
     if (v != this._value)
     {
         this.needsUpdate = true;
@@ -255,6 +257,7 @@ Uniform.prototype.updateValueBool = function ()
 
 Uniform.prototype.setValueBool = function (v)
 {
+    if (v === null || v === undefined) return;
     if (v != this._value)
     {
         this.needsUpdate = true;
@@ -264,6 +267,7 @@ Uniform.prototype.setValueBool = function (v)
 
 Uniform.prototype.setValueArray3F = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
@@ -280,6 +284,7 @@ Uniform.prototype.updateValueArray3F = function ()
 
 Uniform.prototype.setValueArrayF = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
@@ -296,6 +301,7 @@ Uniform.prototype.updateValueArrayF = function ()
 
 Uniform.prototype.setValueArrayT = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
@@ -395,6 +401,7 @@ Uniform.prototype.updateValueT = function ()
 
 Uniform.prototype.setValueT = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
@@ -413,18 +420,22 @@ Uniform.prototype.updateValue4F = function ()
 
 Uniform.prototype.setValue4F = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
 
 Uniform.prototype.setValues4F = function (x,y,z,w)
 {
+    if (typeof x !== "number" || typeof y !== "number" || typeof z !== "number" || typeof w !== "number") return;
+
     this.needsUpdate = true;
-    this._value = v;
+    this._value = [x, y, z, w];
 };
 
 Uniform.prototype.updateValueM4 = function ()
 {
+    if (!this._value) return;
     if (this._loc == -1)
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
@@ -437,6 +448,7 @@ Uniform.prototype.updateValueM4 = function ()
 
 Uniform.prototype.setValueM4 = function (v)
 {
+    if (!v) return;
     this.needsUpdate = true;
     this._value = v;
 };
