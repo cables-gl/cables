@@ -54,10 +54,7 @@ function doTransform()
             resultArr[i+0]=resultArr[i+0]+transX.get();
             resultArr[i+1]=resultArr[i+1]+transY.get();
             resultArr[i+2]=resultArr[i+2]+transZ.get();
-        }
 
-        for(var i=0;i<arr.length;i+=3)
-        {
             vec3.set(rotVec,
                 resultArr[i+0],
                 resultArr[i+1],
