@@ -1,6 +1,6 @@
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import { Port, SwitchPort, ValuePort } from "./core_port";
+import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import { Log } from "./log";
 
@@ -373,7 +373,7 @@ const Op = function ()
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
         // old
-        var p = this.addInPort(new ValuePort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: false, values }));
+        var p = this.addInPort(new ValueSelectPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: false, type: "integer", values }));
         if (v !== undefined)
         {
             p.set(v);
@@ -398,7 +398,7 @@ const Op = function ()
             new SwitchPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 display: "switch",
                 hidePort: false,
-                type: "string",
+                type: "integer",
                 values,
             }),
         );
