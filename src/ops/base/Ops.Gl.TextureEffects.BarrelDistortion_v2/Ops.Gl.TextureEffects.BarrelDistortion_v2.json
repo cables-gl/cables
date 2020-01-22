@@ -1,0 +1,44 @@
+{
+    "id": "6ac723ad-5442-435a-b600-e18ba82ceff7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1579615567550
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.BarrelDistortion_v2"
+    },
+    "authorName": "pandur",
+    "created": 1579615623326
+}
