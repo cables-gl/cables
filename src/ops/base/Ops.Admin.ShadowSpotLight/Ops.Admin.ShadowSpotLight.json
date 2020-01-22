@@ -139,12 +139,6 @@
             },
             {
                 "type": "0",
-                "name": "FOV",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Bias",
                 "group": "Shadow Map Settings",
                 "subType": "number"
@@ -154,6 +148,12 @@
                 "name": "Polygon Offset",
                 "group": "Shadow Map Settings",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normal Offset",
+                "group": "Shadow Map Settings",
+                "subType": "number"
             },
             {
                 "type": "0",

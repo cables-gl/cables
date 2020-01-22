@@ -9,9 +9,12 @@ IN float attrVertIndex;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
-UNI mat4 lightMatrix;
-UNI mat4 lightMatrices[NUM_LIGHTS];
-UNI float inNormalOffset;
+
+#ifdef SHADOW_MAP
+    UNI mat4 lightMatrices[NUM_LIGHTS];
+    UNI float normalOffsets[NUM_LIGHTS];
+    OUT vec4 shadowCoords[NUM_LIGHTS];
+#endif
 
 OUT vec3 norm;
 OUT vec3 normInterpolated;
@@ -19,9 +22,7 @@ OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
 OUT vec4 modelPos;
 OUT vec2 texCoord;
-OUT vec4 shadowCoord;
-OUT vec4 shadowCoords[NUM_LIGHTS];
-OUT mat4 testMatrices[NUM_LIGHTS];
+
 {{MODULES_HEAD}}
 
 mat3 transposeMat3(mat3 m)
@@ -67,13 +68,12 @@ void main()
 
     mvMatrix=viewMatrix*mMatrix;
     modelPos=mMatrix*pos;
+
     #ifdef SHADOW_MAP
         for (int i = 0; i < NUM_LIGHTS; i++) {
             // normal offset:
             // https://www.gamedev.net/forums/topic/665740-can39t-fix-shadow-acne-with-bias/5210839/
-            shadowCoords[i] = lightMatrices[i] * (modelPos + vec4(norm, 1) * inNormalOffset);
-            testMatrices[i] = lightMatrices[i];
-
+            shadowCoords[i] = lightMatrices[i] * (modelPos + vec4(norm, 1) * normalOffsets[i]);
         }
     #endif
 

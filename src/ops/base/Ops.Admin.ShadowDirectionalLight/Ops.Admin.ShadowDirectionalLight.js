@@ -51,15 +51,17 @@ const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0.024);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
 inMapSize.setUiAttribs({ greyout: true });
 inLRBT.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inBias.setUiAttribs({ greyout: true });
+inNormalOffset.setUiAttribs({ greyout: true });
 inPolygonOffset.setUiAttribs({ greyout: true });
 inBlur.setUiAttribs({ greyout: true });
 
@@ -217,6 +219,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
         inBias.setUiAttribs({ greyout: false });
+        inNormalOffset.setUiAttribs({ greyout: false });
         inPolygonOffset.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
@@ -225,6 +228,7 @@ inCastShadow.onChange = function() {
         inFar.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
         inBias.setUiAttribs({ greyout: true });
+        inNormalOffset.setUiAttribs({ greyout: true });
         inPolygonOffset.setUiAttribs({ greyout: true });
         outTexture.set(null);
     }
@@ -368,7 +372,7 @@ inTrigger.onTriggered = function() {
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
 
-                cgl.gl.enable(cgl.gl.DEPTH_TEST);
+                // cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
@@ -377,7 +381,7 @@ inTrigger.onTriggered = function() {
                 cgl.gl.disable(cgl.gl.CULL_FACE);
 
 
-                cgl.gl.disable(cgl.gl.DEPTH_TEST);
+                // cgl.gl.disable(cgl.gl.DEPTH_TEST);
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
@@ -385,7 +389,7 @@ inTrigger.onTriggered = function() {
                 // NOTE: blur is still very cpu intensive... idk why
                 // better with jsut 2 color channels
 
-                renderBlur();
+                if (inBlur.get() > 0) renderBlur();
 
                 cgl.gl.colorMask(true,true,true,true);
 
@@ -403,6 +407,7 @@ inTrigger.onTriggered = function() {
                 light.shadowBias = inBias.get();
                 light.shadowMap = fb.getTextureColor();
                 light.shadowMapDepth = fb.getTextureDepth();
+                light.normalOffset = inNormalOffset.get();
                 cgl.lightStack.push(light);
 
             }
@@ -412,19 +417,4 @@ inTrigger.onTriggered = function() {
     outTrigger.trigger();
 
     cgl.lightStack.pop();
-}
-
-op.onDelete = function () { cgl.frameStore.shadowMap = null; }
-
-inTrigger.onLinkChanged = function() {
-    if (!inTrigger.isLinked()) {
-        cgl.frameStore.shadowMap = null;
-        op.log("removing inTrigger", cgl.frameStore.shadowMap);
-    }
-}
-outTrigger.onLinkChanged = function() {
-    if (!outTrigger.isLinked()) {
-        cgl.frameStore.shadowMap = null;
-        op.log("removing shadowmap", cgl.frameStore.shadowMap);
-    }
 }

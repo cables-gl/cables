@@ -47,12 +47,6 @@
                 "type": "5",
                 "name": "Samples",
                 "group": "Shadow Settings"
-            },
-            {
-                "type": "0",
-                "name": "Normal Offset",
-                "group": "Shadow Settings",
-                "subType": "number"
             }
         ],
         "portsOut": [

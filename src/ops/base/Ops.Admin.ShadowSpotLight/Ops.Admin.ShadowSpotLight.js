@@ -63,43 +63,46 @@ const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
 
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
-const inFOV = op.inFloat("FOV", 45);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("",[inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inFOV, inBias, inPolygonOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
-inMapSize.setUiAttribs({ greyout: true });
-inNear.setUiAttribs({ greyout: true });
-inFar.setUiAttribs({ greyout: true });
-inBlur.setUiAttribs({ greyout: true });
-inBias.setUiAttribs({ greyout: true });
+
+inMapSize.setUiAttribs({ greyout: true, hidePort: true });
+inNear.setUiAttribs({ greyout: true, hidePort: true });
+inFar.setUiAttribs({ greyout: true, hidePort: true });
+inBlur.setUiAttribs({ greyout: true, hidePort: true });
+inPolygonOffset.setUiAttribs({ greyout: true, hidePort: true });
+inNormalOffset.setUiAttribs({ greyout: true, hidePort: true });
+inBias.setUiAttribs({ greyout: true, hidePort: true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
 const inFilterType = op.inSwitch("Texture Filter",['Linear', 'Anisotropic', 'Mip Map'], 'Linear');
 const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], '0');
 const inTest = op.inFloat("Test", 1);
-inMSAA.setUiAttribs({ greyout: true });
-inFilterType.setUiAttribs({ greyout: true });
-inAnisotropic.setUiAttribs({ greyout: true });
-inTest.setUiAttribs({ greyout: true });
+inMSAA.setUiAttribs({ greyout: true, hidePort: true });
+inFilterType.setUiAttribs({ greyout: true, hidePort: true });
+inAnisotropic.setUiAttribs({ greyout: true, hidePort: true });
+inTest.setUiAttribs({ greyout: true, hidePort: true });
 op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic, inTest]);
+
+inCastShadow.setUiAttribs({ hidePort: true });
+inAdvanced.setUiAttribs({ hidePort: true });
 
 inAdvanced.onChange = function() {
     if (inAdvanced.get()) {
         inMSAA.setUiAttribs({ greyout: false });
         inFilterType.setUiAttribs({ greyout: false });
-        inPolygonOffset.setUiAttribs({ greyout: false });
     } else {
         inMSAA.setUiAttribs({ greyout: true });
         inFilterType.setUiAttribs({ greyout: true });
         inMSAA.setValue("none");
         inAnisotropic.setUiAttribs({ greyout: true });
         inTest.setUiAttribs({ greyout: true });
-        inPolygonOffset.setUiAttribs({ greyout: true });
-        inPolygonOffset.setValue(1);
     }
 };
 
@@ -219,8 +222,9 @@ Object.keys(inLight).forEach(function(key) {
     } else {
         if (inLight[key]) {
         inLight[key].onChange = function() {
-            if (key === "coneAngle" || key === "coneAngleInner" || key === "coneAngleOuter") {
+            if (key === "coneAngle" || key === "coneAngleInner") {
                 light[key] = CGL.DEG2RAD*inLight[key].get();
+                if (key === "coneAngle") updateProjectionMatrix();
             } else if (key === "cosConeAngle") {
                 light[key] = Math.cos(CGL.DEG2RAD*(inLight[key].get()));
                 updateProjectionMatrix();
@@ -250,16 +254,19 @@ inCastShadow.onChange = function() {
         inMapSize.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
+        inNormalOffset.setUiAttribs({ greyout: false });
         inBlur.setUiAttribs({ greyout: false });
         inBias.setUiAttribs({ greyout: false });
-        inFOV.setUiAttribs({ greyout: false });
+        inPolygonOffset.setUiAttribs({ greyout: false });
+
     } else {
         inMapSize.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
+        inNormalOffset.setUiAttribs({ greyout: true });
         inBlur.setUiAttribs({ greyout: true });
         inBias.setUiAttribs({ greyout: true });
-        inFOV.setUiAttribs({ greyout: true });
+        inPolygonOffset.setUiAttribs({ greyout: true });
         outTexture.set(null);
     }
 }
@@ -276,15 +283,15 @@ mat4.perspective(
 function updateProjectionMatrix() {
         mat4.perspective(
         lightProjectionMatrix,
-        CGL.DEG2RAD * inFOV.get(),
-        //  2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        //CGL.DEG2RAD * inFOV.get(),
+        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
     );
 }
 
-inNear.onChange = inFar.onChange = inFOV.onChange = updateProjectionMatrix;
+inNear.onChange = inFar.onChange = updateProjectionMatrix;
 
 // * init vectors & matrices
 const lookAt = vec3.fromValues(0, 0, 0);
@@ -421,7 +428,7 @@ inTrigger.onTriggered = function() {
 
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
-                cgl.gl.enable(cgl.gl.DEPTH_TEST);
+                // cgl.gl.enable(cgl.gl.DEPTH_TEST); disabled so not rendering blur doesnt give black texture
 
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;
@@ -451,14 +458,14 @@ inTrigger.onTriggered = function() {
                 */
 
 
-                cgl.gl.disable(cgl.gl.DEPTH_TEST);
+                // cgl.gl.disable(cgl.gl.DEPTH_TEST);
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
                 // NOTE: blur is still very cpu intensive... idk why
                 // cgl.gl.colorMask(true,true,false,false);
-                renderBlur();
+                if (inBlur.get() > 0) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
 
@@ -478,6 +485,7 @@ inTrigger.onTriggered = function() {
     light.castShadow = inCastShadow.get();
     light.shadowMap = fb.getTextureColor();
     light.shadowMapDepth = fb.getTextureDepth();
+    light.normalOffset = inNormalOffset.get();
     light.shadowBias = inBias.get();
 
 

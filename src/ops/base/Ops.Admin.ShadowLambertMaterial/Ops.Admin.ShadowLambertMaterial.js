@@ -22,11 +22,10 @@ inShadow.onChange = function() {
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
-const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 
 inSamples.setUiAttribs({ greyout: true });
 op.setPortGroup("", [inShadow]);
-op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inNormalOffset]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples]);
 inAlgorithm.onChange = function() {
     const selectedAlgorithm = inAlgorithm.get();
     algorithms.forEach(function(algorithm) {
@@ -58,7 +57,6 @@ inSamples.onChange = function() {
 shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 
 const colUni=new CGL.Uniform(shader,'4f','materialColor',r,g,b,a);
-const uniformNormalOffset = new CGL.Uniform(shader, 'f', 'inNormalOffset', inNormalOffset);
 var outShader=op.outObject("Shader");
 outShader.set(shader);
 const outTex = op.outTexture("Shadow Map");
@@ -67,7 +65,7 @@ const MAX_LIGHTS = 16;
 const lights = [];
 const lightMatrices = [];
 const shadowCubeMaps = [];
-
+const normalOffsets = [];
 for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
@@ -95,6 +93,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].shadowMapWidth = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowMapWidth', 0);
     lights[count].shadowBias = new CGL.Uniform(shader, 'f', 'lights[' + count + '].shadowBias', 0);
     lightMatrices[count] = new CGL.Uniform(shader,'m4','lightMatrices['+count+']', mat4.create());
+    normalOffsets[count] = new CGL.Uniform(shader, 'f', 'normalOffsets[' + count + ']', 0);
     shadowCubeMaps[count] = null;
 }
 
@@ -215,14 +214,16 @@ var updateLights=function()
                             if (light.castShadow) {
                                 if (inShadow.get() && !shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
                                 if (light.lightMatrix) lightMatrices[count].setValue(light.lightMatrix);
-
+                                if (light.type !== "point") normalOffsets[count].setValue(light.normalOffset);
                                 lights[count].shadowBias.setValue(light.shadowBias);
 
                                 if (light.shadowMap) {
                                     if (!lights[count].shadowMap) {
                                         lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
-                                    cgl.setTexture(count, light.shadowMap.tex);
+                                    if (inAlgorithm.get() !== "VSM") cgl.setTexture(count, light.shadowMapDepth.tex);
+                                    else cgl.setTexture(count, light.shadowMap.tex);
+                                    // cgl.setTexture(count, light.shadowMap.tex);
                                     lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
                                 } else if (light.shadowCubeMap) {

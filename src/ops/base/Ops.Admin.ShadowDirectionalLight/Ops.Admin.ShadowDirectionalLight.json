@@ -107,6 +107,12 @@
             },
             {
                 "type": "0",
+                "name": "Normal Offset",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Blur Amount",
                 "group": "Shadow Map Settings",
                 "subType": "number"

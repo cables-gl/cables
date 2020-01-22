@@ -59,7 +59,6 @@ const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
-const inGeometryScale = op.inFloatSlider("Geometry Scale", 1);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("",[inCastShadow]);
 op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inBias, inPolygonOffset, inBlur]);
@@ -94,7 +93,6 @@ shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG'
 shader.setSource(attachments.pointlight_shadowpass_vert, attachments.pointlight_shadowpass_frag);
 const uniformLightPos = new CGL.Uniform(shader, '3f', 'lightPosition', vec3.create());
 const uniformNearFar = new CGL.Uniform(shader, '2f', 'inNearFar', vec2.create());
-const uniformGeometryScale = new CGL.Uniform(shader, 'f', 'inGeometryScale', inGeometryScale);
 
 const lightProjectionMatrix = mat4.create();
 
@@ -473,7 +471,8 @@ inTrigger.onTriggered = function() {
 
         cgl.lightStack.pop();
 
-        light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()), cubeDepthMap:  depthBuffer };
+        light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()), cubeDepthMap: depthBuffer };
+
         light.nearFar = [inNear.get(), inFar.get()];
         light.castShadow = inCastShadow.get();
         light.shadowBias = inBias.get();
