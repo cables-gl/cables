@@ -402,6 +402,7 @@ inTrigger.onTriggered = function() {
                 light.lightMatrix = lightBiasMVPMatrix;
                 light.shadowBias = inBias.get();
                 light.shadowMap = fb.getTextureColor();
+                light.shadowMapDepth = fb.getTextureDepth();
                 cgl.lightStack.push(light);
 
             }

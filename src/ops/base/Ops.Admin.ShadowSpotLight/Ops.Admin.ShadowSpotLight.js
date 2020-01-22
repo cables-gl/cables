@@ -477,6 +477,7 @@ inTrigger.onTriggered = function() {
     light.lightMatrix = lightBiasMVPMatrix;
     light.castShadow = inCastShadow.get();
     light.shadowMap = fb.getTextureColor();
+    light.shadowMapDepth = fb.getTextureDepth();
     light.shadowBias = inBias.get();
 
 
