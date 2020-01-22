@@ -381,8 +381,8 @@ function printInfo()
 
     // CABLES.UI.MODAL.show(html);
 
-    closeTab();
-    tab=new CABLES.UI.Tab("GLTF",{"icon":"cube","infotext":"tab_gltf","padding":true});
+    // closeTab();
+    tab=new CABLES.UI.Tab("GLTF",{"icon":"cube","infotext":"tab_gltf","padding":true,"singleton":true});
     gui.mainTabs.addTab(tab,true);
     tab.html(html);
 

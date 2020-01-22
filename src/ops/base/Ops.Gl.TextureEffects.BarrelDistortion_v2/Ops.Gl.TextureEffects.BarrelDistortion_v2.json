@@ -1,5 +1,12 @@
 {
-    "summary": "invert image colors",
+    "id": "6ac723ad-5442-435a-b600-e18ba82ceff7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1579615567550
+        }
+    ],
     "layout": {
         "portsIn": [
             {
@@ -17,20 +24,21 @@
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Invert"
-    },
-    "docs": {
-        "ports": []
+        "name": "Ops.Gl.TextureEffects.BarrelDistortion_v2"
     },
     "authorName": "pandur",
-    "id": "7188ff85-e73c-4a3b-8237-49508a00d63a",
-    "created": 1540920620064
+    "created": 1579615623326
 }
