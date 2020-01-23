@@ -59,10 +59,6 @@
             {
                 "type": "2",
                 "name": "Shader"
-            },
-            {
-                "type": "2",
-                "name": "Shadow Map"
             }
         ],
         "name": "Ops.Admin.ShadowLambertMaterial"

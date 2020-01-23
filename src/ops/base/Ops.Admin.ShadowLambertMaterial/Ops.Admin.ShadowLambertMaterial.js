@@ -47,7 +47,7 @@ r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
-shader.define("MODE_PCF");
+shader.define("MODE_DEFAULT");
 shader.define('NUM_LIGHTS','1');
 
 
@@ -59,7 +59,6 @@ shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).
 const colUni=new CGL.Uniform(shader,'4f','materialColor',r,g,b,a);
 var outShader=op.outObject("Shader");
 outShader.set(shader);
-const outTex = op.outTexture("Shadow Map");
 
 const MAX_LIGHTS = 16;
 const lights = [];
@@ -97,9 +96,8 @@ for(var i=0;i<MAX_LIGHTS;i++)
     shadowCubeMaps[count] = null;
 }
 
-op.log(shadowCubeMaps);
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
-let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 12);
+let shadowCubeMap = null;
 
 
 shader.bindTextures = function() {
@@ -225,6 +223,7 @@ var updateLights=function()
                                     lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
                                 } else if (light.shadowCubeMap) {
+                                    if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 12);
                                     lights[count].nearFar.setValue(light.nearFar);
                                     cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
                                     lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);

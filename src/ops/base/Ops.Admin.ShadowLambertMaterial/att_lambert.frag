@@ -109,8 +109,8 @@ float getfallOff(Light light,float distLight)
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias) {
-        if (WarpDepth(shadowMapSample).x < shadowMapDepth - bias) return 0.2; // todo: make this uniform value from light or from material?
-        return 0.2;
+        if (shadowMapSample < shadowMapDepth - bias) return 0.2; // todo: make this uniform value from light or from material?
+        return 1.;
     }
 #endif
 
