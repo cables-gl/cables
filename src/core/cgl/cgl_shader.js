@@ -4,9 +4,9 @@ import { simpleId, generateUUID } from "../utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { profileData } from "./cgl_profiledata";
-import{ CONSTANTS } from "./constants";
+import { CONSTANTS } from "./constants";
 import { Log } from "../log";
-
+import { escapeHTML } from "./cgl_utils";
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
     profileShaderBinds: 0,
@@ -44,7 +44,7 @@ attrTangent
 attrBiTangent
 
 uProjMatrix - currently: projMatrix
-uModelMatrix - currently: modelMatrix 
+uModelMatrix - currently: modelMatrix
 uNormalMatrix - currently: normalMatrix
 uCamPosition - currently: camPos
 
@@ -885,7 +885,7 @@ Shader.createShader = function(cgl, str, type, cglShader) {
                 if (badLines[bj] == j) isBadLine = true;
 
             if (isBadLine) htmlWarning += '<span class="error">';
-            htmlWarning += line;
+            htmlWarning += escapeHTML(line);
             if (isBadLine) htmlWarning += '</span>';
         }
 

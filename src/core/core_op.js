@@ -1,6 +1,6 @@
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import { Port } from "./core_port";
+import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import { Log } from "./log";
 
@@ -373,7 +373,7 @@ const Op = function ()
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
         // old
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: true, values }));
+        var p = this.addInPort(new ValueSelectPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: false, type: "integer", values }));
         if (v !== undefined)
         {
             p.set(v);
@@ -395,10 +395,10 @@ const Op = function ()
     Op.prototype.inSwitch = function (name, values, v)
     {
         var p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+            new SwitchPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 display: "switch",
-                hidePort: true,
-                type: "string",
+                hidePort: false,
+                type: "integer",
                 values,
             }),
         );
@@ -878,7 +878,7 @@ const Op = function ()
 
         Op.unLinkTempReLinkP1 = null;
         Op.unLinkTempReLinkP2 = null;
-    
+
     };
 
 
@@ -1094,7 +1094,7 @@ const Op = function ()
             // todo is this used at all ?
             this.errors[id] = txt;
             if (txt == null) delete this.errors[id];
-    
+
             var errorHtml = "";
             for (var i in this.errors)
             {
@@ -1105,7 +1105,7 @@ const Op = function ()
     };
 
     /**
-     * show op hint message - set message to null to remove 
+     * show op hint message - set message to null to remove
      * @function setHint
      * @instance
      * @memberof Op
@@ -1117,7 +1117,7 @@ const Op = function ()
     };
 
     /**
-     * show op warning message - set message to null to remove 
+     * show op warning message - set message to null to remove
      * @function setWarning
      * @instance
      * @memberof Op
@@ -1353,7 +1353,7 @@ const Op = function ()
         }
 
     };
-    
+
 
 
     /**
