@@ -414,13 +414,7 @@ Uniform.prototype.updateValue4F = function ()
 Uniform.prototype.setValue4F = function (v)
 {
     this.needsUpdate = true;
-    this._value = v;
-};
-
-Uniform.prototype.setValues4F = function (x,y,z,w)
-{
-    this.needsUpdate = true;
-    this._value = v;
+    this._value = v || vec4.create();
 };
 
 Uniform.prototype.updateValueM4 = function ()
@@ -438,7 +432,7 @@ Uniform.prototype.updateValueM4 = function ()
 Uniform.prototype.setValueM4 = function (v)
 {
     this.needsUpdate = true;
-    this._value = v;
+    this._value = v || mat4.create();
 };
 
 /**
