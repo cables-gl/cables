@@ -16,8 +16,8 @@ genRandom();
 
 function genRandom()
 {
-    var r=(Math.random()*((max.get()-min.get()+1)))+min.get();
-    if(inInteger.get())r=Math.floor(r);
+    var r=(Math.random()*(max.get()-min.get()))+min.get();
+    if(inInteger.get())r=Math.floor((Math.random()*((max.get()-min.get()+1)))+min.get());
     result.set(r);
     outTrig.trigger();
 }
