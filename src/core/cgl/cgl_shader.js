@@ -852,6 +852,15 @@ Shader.prototype._bindTextures=function()
 
 }
 
+/**
+ * pushs a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
+ * @param {uniform} texture uniform
+ * @param {texture} texture
+ * @param {type} texture type, can be ignored when TEXTURE_2D
+ * @function pushTexture
+ * @memberof Shader
+ * @instance
+ */
 Shader.prototype.pushTexture=function(uniform,t,type)
 {
     this._textureStackUni.push(uniform);
@@ -859,6 +868,12 @@ Shader.prototype.pushTexture=function(uniform,t,type)
     this._textureStackType.push(type);
 };
 
+/**
+ * pop last texture
+ * @function popTexture
+ * @memberof Shader
+ * @instance
+ */
 Shader.prototype.popTexture=function()
 {
     this._textureStackUni.pop();
@@ -866,6 +881,12 @@ Shader.prototype.popTexture=function()
     this._textureStackType.pop();
 };
 
+/**
+ * pop all textures
+ * @function popTextures
+ * @memberof Shader
+ * @instance
+ */
 Shader.prototype.popTextures=function()
 {
     this._textureStackTex.length=
