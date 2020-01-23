@@ -1,4 +1,5 @@
 import { uuid, UTILS } from "./utils";
+
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
@@ -370,39 +371,62 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
+    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v,noindex)
     {
-        const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
-        const n = this.addInPort(indexPort);
+        var p=null;
+        if(!noindex)
+        {
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const n = this.addInPort(indexPort);
 
-        const valuePort = new ValueSelectPort(
-            this,
-            name,
-            CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+            const valuePort = new ValueSelectPort(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+                {
+                    display: "dropdown",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                },
+                n,
+            );
+    
+            indexPort.onLinkChanged=function()
             {
-                display: "dropdown",
-                hidePort: true,
-                type: "string",
-                values,
-            },
-            n,
-        );
+                valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
+            };
 
-        indexPort.onLinkChanged=function()
-        {
-            valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
-        };
+            p = this.addInPort(valuePort);
 
-        const p = this.addInPort(valuePort);
-
-        if (v !== undefined)
-        {
-            p.set(v);
-            const index = values.findIndex(item => item == v);
-            n.setValue(index);
-            p.defaultValue = v;
-            n.defaultValue = index;
+            if (v !== undefined)
+            {
+                p.set(v);
+                const index = values.findIndex(item => item == v);
+                n.setValue(index);
+                p.defaultValue = v;
+                n.defaultValue = index;
+            }
         }
+        else
+        {
+            const valuePort = new Port(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+                {
+                    display: "dropdown",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                }
+            );
+
+             p = this.addInPort(valuePort);
+
+        }
+
+
         return p;
     };
 
@@ -416,38 +440,61 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inSwitch = function (name, values, v)
+    Op.prototype.inSwitch = function (name, values, v,noindex)
     {
-        const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
-        const n = this.addInPort(indexPort);
-        const switchPort = new SwitchPort(
-            this,
-            name,
-            CONSTANTS.OP.OP_PORT_TYPE_STRING,
+        var p=null;
+        if(!noindex)
+        {
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const n = this.addInPort(indexPort);
+
+            const switchPort = new SwitchPort(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_STRING,
+                {
+                    display: "switch",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                },
+                n
+            );
+    
+            indexPort.onLinkChanged=function()
             {
-                display: "switch",
-                hidePort: true,
-                type: "string",
-                values,
-            },
-            n
-        );
+                switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
+            };
+            p = this.addInPort(switchPort);
 
-        indexPort.onLinkChanged=function()
-        {
-            switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
-        };
+            if (v !== undefined)
+            {
+                p.set(v);
+                const index = values.findIndex(item => item == v);
+                n.setValue(index);
+                p.defaultValue = v;
+                n.defaultValue = index;
+            }
 
-        const p = this.addInPort(switchPort);
-
-        if (v !== undefined)
-        {
-            p.set(v);
-            const index = values.findIndex(item => item == v);
-            n.setValue(index);
-            p.defaultValue = v;
-            n.defaultValue = index;
         }
+        else
+        {
+            const switchPort = new Port(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_STRING,
+                {
+                    display: "switch",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                }
+            );
+            p = this.addInPort(switchPort);
+
+        }
+
+
         return p;
     };
 

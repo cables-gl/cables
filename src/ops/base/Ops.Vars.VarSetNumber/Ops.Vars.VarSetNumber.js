@@ -1,4 +1,4 @@
-op.varName=op.inValueSelect("Variable");
+op.varName=op.inDropDown("Variable",[],"",true);
 var val=op.inValueFloat("Value",0);
 
 op.varName.onChange=updateName;
