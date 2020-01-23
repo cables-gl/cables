@@ -721,32 +721,24 @@ Port.portTypeNumberToString = function (type)
     if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };
-
-class SwitchPort extends Port {
-
-    set(value)
+class SwitchPort extends Port
+{
+    constructor(__parent, name, type, uiAttribs, numberPort)
     {
-        super.set(this.getValueFromSwitchValues(value));
-    }
-
-    setValue(value)
-    {
-        super.setValue(this.getValueFromSwitchValues(value));
-    }
-
-    getValueFromSwitchValues(value)
-    {
-        let newValue = value;
-        if (typeof value === "number")
+        super(__parent, name, type, uiAttribs);
+        const values = uiAttribs.values;
+        numberPort.set = (value) =>
         {
-            const intValue = Math.floor(value);
-            const switchValues = this.getUiAttrib("values");
-            if (switchValues && Array.isArray(switchValues))
+            console.log("in set", value);
+
+            let intValue = Math.floor(value);
+            if (intValue > values.length)
             {
-                newValue = switchValues[intValue];
+                intValue = values.length - 1;
             }
-        }
-        return newValue;
+            numberPort.setValue(intValue);
+            this.set(values[intValue]);
+        };
     }
 }
 

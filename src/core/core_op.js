@@ -372,12 +372,32 @@ const Op = function ()
      */
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
-        // old
-        var p = this.addInPort(new ValueSelectPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: false, type: "integer", values }));
+        const numberPort = new Port(this, name + " position", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" });
+        const n = this.addInPort(numberPort);
+
+        const valuePort = new ValueSelectPort(
+            this,
+            name,
+            CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+            {
+                display: "dropdown",
+                hidePort: false,
+                type: "string",
+                values,
+            },
+            n,
+        );
+
+
+        const p = this.addInPort(valuePort);
+
         if (v !== undefined)
         {
             p.set(v);
+            const index = values.findIndex(item => item == v);
+            n.setValue(index);
             p.defaultValue = v;
+            n.defaultValue = index;
         }
         return p;
     };
@@ -394,18 +414,30 @@ const Op = function ()
      */
     Op.prototype.inSwitch = function (name, values, v)
     {
-        var p = this.addInPort(
-            new SwitchPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+        const numberPort = new Port(this, name + " postion", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" });
+        const n = this.addInPort(numberPort);
+        const switchPort = new SwitchPort(
+            this,
+            name,
+            CONSTANTS.OP.OP_PORT_TYPE_STRING,
+            {
                 display: "switch",
-                hidePort: false,
-                type: "integer",
+                hidePort: true,
+                type: "string",
                 values,
-            }),
+            },
+            n,
         );
+
+        const p = this.addInPort(switchPort);
+
         if (v !== undefined)
         {
             p.set(v);
+            const index = values.findIndex(item => item == v);
+            n.setValue(index);
             p.defaultValue = v;
+            n.defaultValue = index;
         }
         return p;
     };
