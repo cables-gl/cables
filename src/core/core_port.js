@@ -149,8 +149,10 @@ Port.prototype.setUiAttribs = function (newAttribs)
         this.uiAttribs[p] = newAttribs[p];
     }
     // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+
+    this.logEvents(true,"port");
     this.emitEvent("onUiAttrChange", newAttribs);
-    // Log.log("new attribs!",newAttribs);
+    Log.log("new attribs!",newAttribs);
 };
 
 /**
@@ -726,9 +728,14 @@ class SwitchPort extends Port
     constructor(__parent, name, type, uiAttribs, numberPort)
     {
         super(__parent, name, type, uiAttribs);
-        const values = uiAttribs.values;
+        
         numberPort.set = (value) =>
         {
+            const values = uiAttribs.values;
+            if(!values)
+            {
+                console.log("has no values",this);
+            }
             let intValue = Math.floor(value);
 
             intValue=Math.min(intValue,values.length - 1);
