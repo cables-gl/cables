@@ -113,7 +113,6 @@ const outTexture = op.outTexture("Shadow Map");
 const shader = new CGL.Shader(cgl, "shadowSpotLight");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 shader.setSource(attachments.spotlight_shadowpass_vert, attachments.spotlight_shadowpass_frag);
-
 const blurShader = new CGL.Shader(cgl, "shadowSpotBlur");
 blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur_frag);
 
@@ -128,12 +127,14 @@ const uniformLightPosition = new CGL.Uniform(shader, '3f', "lightPosition", vec3
 
 // * FRAMEBUFFER *
 var fb = null;
-if(cgl.glVersion==1) {
+if (cgl.glVersion == 1) {
+    op.log("ADJAKSDJASD", cgl.glVersion);
+    shader.enableExtension("GL_OES_standard_derivatives");
+    shader.enableExtension("GL_OES_texture_float");
+    shader.enableExtension("GL_OES_texture_float_linear");
     /*
     cgl.gl.getExtension("OES_standard_derivatives");
     cgl.gl.getExtension('EXT_shader_texture_lod');
-    cgl.gl.getExtension("OES_texture_float");
-    cgl.gl.getExtension("OES_texture_float_linear");
     */
     fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
         isFloatingPointTexture: true,
@@ -148,6 +149,7 @@ else {
 }
 
 op.log("aminakoyum", cgl.gl.getSupportedExtensions());
+
 function updateBuffers() {
         const MSAA = Number(inMSAA.get().charAt(0));
 
@@ -175,9 +177,12 @@ function updateBuffers() {
 
     if (MSAA) Object.assign(textureOptions, { multisampling: true, multisamplingSamples: MSAA });
     if (anisotropicFactor !== undefined) Object.assign(textureOptions, { anisotropic: anisotropicFactor });
-
-    fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
-    effect = new CGL.TextureEffect(cgl, textureOptions);
+    if (cgl.glVersion == 1) {
+        fb = new CGL.Framebuffer(cgl, mapSize, mapSize, textureOptions);
+    } else {
+        fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
+        effect = new CGL.TextureEffect(cgl, textureOptions);
+    }
 }
 
 inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
@@ -477,7 +482,7 @@ inTrigger.onTriggered = function() {
 
                 // NOTE: blur is still very cpu intensive... idk why
                 // cgl.gl.colorMask(true,true,false,false);
-                if (inBlur.get() > 0) renderBlur();
+                // if (inBlur.get() > 0) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
 

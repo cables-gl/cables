@@ -138,7 +138,12 @@ float getfallOff(Light light,float distLight)
             {
                 for(float z = LEFT_BOUND_POINT; z < RIGHT_BOUND_POINT; z += PCF_INCREMENT_POINT)
                 {
-                    float closestDepth = texture(shadowMap, -lightDirection + vec3(x, y, z)).r;
+                    #ifdef WEBGL2
+                        float closestDepth = texture(shadowMap, -lightDirection + vec3(x, y, z)).r;
+                    #endif
+                    #ifdef WEBGL1
+                        float closestDepth = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
+                    #endif
                      closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
                     if(shadowMapDepth - bias < closestDepth)
                         visibility += 1.0;
@@ -175,7 +180,12 @@ float getfallOff(Light light,float distLight)
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            if (texture(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/500.)).r < shadowMapDepth - bias) {
+            #ifdef WEBGL2
+                if (texture(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/500.)).r < shadowMapDepth - bias) {
+            #endif
+            #ifdef WEBGL1
+                if (textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/500.)).r < shadowMapDepth - bias) {
+            #endif
                 visibility -= 0.2;
             }
         }
@@ -283,7 +293,15 @@ void main()
                     cameraFar =  lights[l].nearFar.y;
 
                     float fromLightToFrag = (length(modelPos.xyz - lights[l].pos) - cameraNear) / (cameraFar - cameraNear);
-                    shadowMapSample = texture(shadowCubeMap, -lightDirection).rg;
+
+                    #ifdef WEBGL2
+                        shadowMapSample = texture(shadowCubeMap, -lightDirection).rg;
+                    #endif
+
+                    #ifdef WEBGL1
+                        shadowMapSample = textureCube(shadowCubeMap, -lightDirection).rg;
+                    #endif
+
                     shadowMapDepth = fromLightToFrag;
                     #ifdef MODE_VSM
                     #endif

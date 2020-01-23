@@ -40,15 +40,23 @@
             },
             {
                 "type": "0",
+                "name": "Algorithm index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Algorithm",
-                "group": "Shadow Settings",
-                "subType": "number"
+                "group": "Shadow Settings"
             },
             {
                 "type": "0",
+                "name": "Samples index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Samples",
-                "group": "Shadow Settings",
-                "subType": "number"
+                "group": "Shadow Settings"
             }
         ],
         "portsOut": [

@@ -122,9 +122,13 @@
             },
             {
                 "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Map Size",
-                "group": "Shadow Map Settings",
-                "subType": "number"
+                "group": "Shadow Map Settings"
             },
             {
                 "type": "0",
@@ -170,21 +174,33 @@
             },
             {
                 "type": "0",
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "MSAA",
-                "group": "Advanced Options",
-                "subType": "number"
+                "group": "Advanced Options"
             },
             {
                 "type": "0",
+                "name": "Texture Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Texture Filter",
-                "group": "Advanced Options",
-                "subType": "number"
+                "group": "Advanced Options"
             },
             {
                 "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Anisotropic",
-                "group": "Advanced Options",
-                "subType": "number"
+                "group": "Advanced Options"
             },
             {
                 "type": "0",

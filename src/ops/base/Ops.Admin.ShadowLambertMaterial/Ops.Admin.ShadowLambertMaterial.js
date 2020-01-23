@@ -49,7 +49,11 @@ const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl,"LambertMaterial");
 shader.define("MODE_DEFAULT");
 shader.define('NUM_LIGHTS','1');
-
+if (cgl.glVersion == 1) {
+    // shader.enableExtension("GL_OES_standard_derivatives");
+    shader.enableExtension("GL_OES_texture_float");
+    shader.enableExtension("GL_OES_texture_float_linear");
+}
 
 inSamples.onChange = function() {
     shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
@@ -207,6 +211,7 @@ var updateLights=function()
                                 lights[count].shadowBias.setValue(light.shadowBias);
 
                                 if (light.shadowMap) {
+                                    light.shadowMap.printInfo();
                                     if (!lights[count].shadowMap) {
                                         lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
