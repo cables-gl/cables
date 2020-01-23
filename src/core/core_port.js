@@ -150,9 +150,7 @@ Port.prototype.setUiAttribs = function (newAttribs)
     }
     // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
 
-    this.logEvents(true,"port");
     this.emitEvent("onUiAttrChange", newAttribs);
-    Log.log("new attribs!",newAttribs);
 };
 
 /**
