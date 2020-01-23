@@ -372,8 +372,8 @@ const Op = function ()
      */
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
-        const numberPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
-        const n = this.addInPort(numberPort);
+        const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+        const n = this.addInPort(indexPort);
 
         const valuePort = new ValueSelectPort(
             this,
@@ -381,13 +381,17 @@ const Op = function ()
             CONSTANTS.OP.OP_PORT_TYPE_VALUE,
             {
                 display: "dropdown",
-                hidePort: false,
+                hidePort: true,
                 type: "string",
                 values,
             },
             n,
         );
 
+        indexPort.onLinkChanged=function()
+        {
+            valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
+        };
 
         const p = this.addInPort(valuePort);
 
@@ -414,8 +418,8 @@ const Op = function ()
      */
     Op.prototype.inSwitch = function (name, values, v)
     {
-        const numberPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
-        const n = this.addInPort(numberPort);
+        const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+        const n = this.addInPort(indexPort);
         const switchPort = new SwitchPort(
             this,
             name,
@@ -426,8 +430,13 @@ const Op = function ()
                 type: "string",
                 values,
             },
-            n,
+            n
         );
+
+        indexPort.onLinkChanged=function()
+        {
+            switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
+        };
 
         const p = this.addInPort(switchPort);
 

@@ -729,8 +729,6 @@ class SwitchPort extends Port
         const values = uiAttribs.values;
         numberPort.set = (value) =>
         {
-            console.log("in set", value);
-
             let intValue = Math.floor(value);
 
             intValue=Math.min(intValue,values.length - 1);
