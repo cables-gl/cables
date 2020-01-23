@@ -97,18 +97,9 @@ for(var i=0;i<MAX_LIGHTS;i++)
 }
 
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
-let shadowCubeMap = null;
+let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 8);
 
-
-shader.bindTextures = function() {
-}
-const SHADOWMAP_DEFINES = [
-
-];
 var numLights=-1;
-function setDefaultLight() {
-
-}
 
 const LIGHT_TYPES = { point: 0, directional: 1, spot: 2 };
 const inverseViewMat = mat4.create();
@@ -209,7 +200,7 @@ var updateLights=function()
                             lights[count].mul.setValue(light.intensity);
                             lights[count].castShadow.setValue(Number(light.castShadow));
 
-                            if (light.castShadow) {
+                            if (light.castShadow && inShadow.get()) {
                                 if (inShadow.get() && !shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
                                 if (light.lightMatrix) lightMatrices[count].setValue(light.lightMatrix);
                                 if (light.type !== "point") normalOffsets[count].setValue(light.normalOffset);
@@ -223,9 +214,9 @@ var updateLights=function()
                                     lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
                                 } else if (light.shadowCubeMap) {
-                                    if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 12);
+                                    // if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 8);
                                     lights[count].nearFar.setValue(light.nearFar);
-                                    cgl.setTexture(12, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+                                    cgl.setTexture(8, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
                                     lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
                                 }
                             } else { // if castShadow = false, remove uniform.. should that be done?
@@ -261,7 +252,6 @@ execute.onTriggered=function()
     }
     else {
         cgl.setShader(shader);
-        shader.bindTextures();
 
         updateLights();
         next.trigger();

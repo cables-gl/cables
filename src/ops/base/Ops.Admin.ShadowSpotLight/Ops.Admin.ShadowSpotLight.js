@@ -128,7 +128,18 @@ const uniformLightPosition = new CGL.Uniform(shader, '3f', "lightPosition", vec3
 
 // * FRAMEBUFFER *
 var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+if(cgl.glVersion==1) {
+    /*
+    cgl.gl.getExtension("OES_standard_derivatives");
+    cgl.gl.getExtension('EXT_shader_texture_lod');
+    cgl.gl.getExtension("OES_texture_float");
+    cgl.gl.getExtension("OES_texture_float_linear");
+    */
+    fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+    });
+}
 else {
     fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
         isFloatingPointTexture:true,
@@ -136,6 +147,7 @@ else {
     });
 }
 
+op.log("aminakoyum", cgl.gl.getSupportedExtensions());
 function updateBuffers() {
         const MSAA = Number(inMSAA.get().charAt(0));
 

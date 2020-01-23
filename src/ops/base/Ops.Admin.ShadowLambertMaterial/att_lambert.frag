@@ -21,7 +21,9 @@ IN mat4 testMatrices[NUM_LIGHTS];
 
 UNI vec4 materialColor;//r,g,b,a;
 
-UNI samplerCube shadowCubeMap;
+#ifdef SHADOW_MAP
+    UNI samplerCube shadowCubeMap;
+#endif
 UNI float inShadowStrength;
 
 float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
@@ -82,10 +84,12 @@ struct Light {
   int type;
   vec2 nearFar;
   int castShadow;
-  sampler2D shadowMap;
-  float shadowMapWidth;
-  float shadowBias;
-  mat4 lightMatrix;
+  #ifdef SHADOW_MAP
+      sampler2D shadowMap;
+      float shadowMapWidth;
+      float shadowBias;
+      mat4 lightMatrix;
+  #endif
 };
 
 struct CubeMap { // hack to be able to use cube maps in arrays ? you cannot put 2 samplers in a struct somehow

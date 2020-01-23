@@ -1,14 +1,4 @@
 // http://fabiensanglard.net/shadowmappingVSM/
-// https://github.com/TheRealMJP/Shadows EVSM
-const float POSITIVE_EXPONENT = 30.;
-const float NEGATIVE_EXPONENT = 5.;
-vec2 WarpDepth(float depth) {
-    float warpedDepth = 2. * depth - 1.; // rescale to [-1, 1]
-    float positiveExponent = exp(POSITIVE_EXPONENT * depth);
-    float negativeExponent = exp(-NEGATIVE_EXPONENT * depth);
-    return vec2(positiveExponent, negativeExponent);
-}
-
 void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
@@ -18,7 +8,6 @@ void main() {
 
 
     float depth = gl_FragCoord.z;
-    float newDepth = WarpDepth(depth).x;
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel
 

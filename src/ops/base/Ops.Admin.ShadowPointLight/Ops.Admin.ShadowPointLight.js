@@ -394,6 +394,8 @@ function renderCubemap() {
     cgl.gl.cullFace(cgl.gl.BACK);
     cgl.gl.disable(cgl.gl.CULL_FACE);
 
+    gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
+
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
