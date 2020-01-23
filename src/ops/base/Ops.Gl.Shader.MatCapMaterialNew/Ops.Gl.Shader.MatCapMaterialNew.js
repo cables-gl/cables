@@ -5,10 +5,7 @@ const textureNormal=op.inTexture('Normal');
 const textureSpec=op.inTexture('Specular');
 const textureSpecMatCap=op.inTexture('Specular MatCap');
 const textureAo=op.inTexture('AO Texture');
-// opacity texture
 const textureOpacity=op.inTexture("Opacity Texture");
-
- // op.alphaMaskSource.onChange=updateAlphaMaskMethod;
 const r=op.inValueSlider('r',1);
 const g=op.inValueSlider('g',1);
 const b=op.inValueSlider('b',1);
@@ -275,13 +272,13 @@ texCoordAlpha.onChange=function()
 
 function bindTextures()
 {
-    if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
-    if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
-    if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
-    if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
-    if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
-    if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
-    if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
+    // if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
+    // if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
+    // if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
+    // if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
+    // if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
+    // if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+    // if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
 };
 
 op.onDelete=function()
@@ -300,9 +297,21 @@ op.preRender=function()
 
 render.onTriggered=function()
 {
-    shader.bindTextures=bindTextures;
+    // shader.bindTextures=bindTextures;
+
+
+    if(textureMatcap.get())     shader.pushTexture(textureMatcapUniform,textureMatcap.get().tex);
+    if(textureDiffuse.get())    shader.pushTexture(textureDiffuseUniform,textureDiffuse.get().tex);
+    if(textureNormal.get())     shader.pushTexture(textureNormalUniform,textureNormal.get().tex);
+    if(textureSpec.get())       shader.pushTexture(textureSpecUniform,textureSpec.get().tex);
+    if(textureSpecMatCap.get()) shader.pushTexture(textureSpecMatCapUniform,textureSpecMatCap.get().tex);
+    if(textureAo.get())         shader.pushTexture(textureAoUniform,textureAo.get().tex);
+    if(textureOpacity.get())    shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
+
+
     cgl.setShader(shader);
     next.trigger();
+    shader.popTextures();
     cgl.setPreviousShader();
 };
 

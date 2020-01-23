@@ -22,6 +22,9 @@ const Context = function (_patch)
     this.clearCanvasDepth = true;
     this.patch = _patch;
 
+    this.maxTextureUnits=0;
+    
+
     this.currentProgram=null;
 
     this.temporaryTexture = null;
@@ -155,6 +158,8 @@ const Context = function (_patch)
         }
         var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
         var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
+        
+        this.maxTextureUnits=this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
 
         if (instancingExt.vertexAttribDivisorANGLE)
         {
