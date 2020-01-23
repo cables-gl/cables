@@ -149,8 +149,8 @@ Port.prototype.setUiAttribs = function (newAttribs)
         this.uiAttribs[p] = newAttribs[p];
     }
     // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
+
     this.emitEvent("onUiAttrChange", newAttribs);
-    // Log.log("new attribs!",newAttribs);
 };
 
 /**
@@ -243,15 +243,13 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     console.error("onvaluechanged exception cought", ex);
                     Log.log(ex.stack);
                     Log.log("exception in: " + this.parent.name);
-                    if (CABLES.UI) gui.showOpCrash(this.parent);
+
+                    if(this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
                     this.parent.patch.emitEvent("exception".ex,this.parent);
                 }
 
-                if (CABLES.UI && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE)
-                {
-                    gui.texturePreview().updateTexturePort(this);
-                }
+                if (this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
             }
 
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (var i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -510,7 +508,7 @@ Port.prototype.trigger = function ()
     {
         this.parent.enabled = false;
 
-        if (CABLES.UI)
+        if (this.parent.patch.isEditorMode())
         {
             this.parent.patch.emitEvent("exception".ex,portTriggered.parent);
 
@@ -721,32 +719,29 @@ Port.portTypeNumberToString = function (type)
     if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };
-
-class SwitchPort extends Port {
-
-    set(value)
+class SwitchPort extends Port
+{
+    constructor(__parent, name, type, uiAttribs, numberPort)
     {
-        super.set(this.getValueFromSwitchValues(value));
-    }
-
-    setValue(value)
-    {
-        super.setValue(this.getValueFromSwitchValues(value));
-    }
-
-    getValueFromSwitchValues(value)
-    {
-        let newValue = value;
-        if (typeof value === "number")
+        super(__parent, name, type, uiAttribs);
+        
+        numberPort.set = (value) =>
         {
-            const intValue = Math.floor(value);
-            const switchValues = this.getUiAttrib("values");
-            if (switchValues && Array.isArray(switchValues))
+            const values = uiAttribs.values;
+            if(!values)
             {
-                newValue = switchValues[intValue];
+                console.log("has no values",this);
             }
-        }
-        return newValue;
+            let intValue = Math.floor(value);
+
+            intValue=Math.min(intValue,values.length - 1);
+            intValue=Math.max(intValue,0);
+
+            numberPort.setValue(intValue);
+            this.set(values[intValue]);
+
+            if(this.parent.patch.isEditorMode() && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+        };
     }
 }
 

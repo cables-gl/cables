@@ -12,10 +12,7 @@ export const togglePacoRenderer = function ()
 
 export const showPacoRenderer = function ()
 {
-    // if(CABLES.UI.userSettings.get("pacoRenderer"))
-    // {
-    //     $('body').append('<iframe class="paco-iframe" style="z-index:9999999;" src="/renderer/"></iframe>');
-    // }
+
 };
 
 const PatchConnectionReceiver = function (patch, options, connector)

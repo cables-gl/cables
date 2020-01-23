@@ -1,4 +1,5 @@
 import { uuid, UTILS } from "./utils";
+
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
@@ -370,15 +371,62 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
+    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v,noindex)
     {
-        // old
-        var p = this.addInPort(new ValueSelectPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "dropdown", hidePort: false, type: "integer", values }));
-        if (v !== undefined)
+        var p=null;
+        if(!noindex)
         {
-            p.set(v);
-            p.defaultValue = v;
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const n = this.addInPort(indexPort);
+
+            const valuePort = new ValueSelectPort(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+                {
+                    display: "dropdown",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                },
+                n,
+            );
+    
+            indexPort.onLinkChanged=function()
+            {
+                valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
+            };
+
+            p = this.addInPort(valuePort);
+
+            if (v !== undefined)
+            {
+                p.set(v);
+                const index = values.findIndex(item => item == v);
+                n.setValue(index);
+                p.defaultValue = v;
+                n.defaultValue = index;
+            }
         }
+        else
+        {
+            const valuePort = new Port(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
+                {
+                    display: "dropdown",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                }
+            );
+
+             p = this.addInPort(valuePort);
+
+        }
+
+
         return p;
     };
 
@@ -392,21 +440,61 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inSwitch = function (name, values, v)
+    Op.prototype.inSwitch = function (name, values, v,noindex)
     {
-        var p = this.addInPort(
-            new SwitchPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                display: "switch",
-                hidePort: false,
-                type: "integer",
-                values,
-            }),
-        );
-        if (v !== undefined)
+        var p=null;
+        if(!noindex)
         {
-            p.set(v);
-            p.defaultValue = v;
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const n = this.addInPort(indexPort);
+
+            const switchPort = new SwitchPort(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_STRING,
+                {
+                    display: "switch",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                },
+                n
+            );
+    
+            indexPort.onLinkChanged=function()
+            {
+                switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
+            };
+            p = this.addInPort(switchPort);
+
+            if (v !== undefined)
+            {
+                p.set(v);
+                const index = values.findIndex(item => item == v);
+                n.setValue(index);
+                p.defaultValue = v;
+                n.defaultValue = index;
+            }
+
         }
+        else
+        {
+            const switchPort = new Port(
+                this,
+                name,
+                CONSTANTS.OP.OP_PORT_TYPE_STRING,
+                {
+                    display: "switch",
+                    hidePort: true,
+                    type: "string",
+                    values,
+                }
+            );
+            p = this.addInPort(switchPort);
+
+        }
+
+
         return p;
     };
 
@@ -1364,7 +1452,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (CABLES.UI && gui) gui.patch().refreshOpParams(this);
+        if (this.patch) gui.patch().refreshOpParams(this);
     };
 }
 

@@ -47,7 +47,7 @@ const EventTarget = function ()
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-        if(this._log)console.log("[event] ",this._logName,which);
+        if(this._log) console.log("[event] ",this._logName,which,this._eventCallbacks);
 
         if (this._eventCallbacks[which])
         {

@@ -114,6 +114,10 @@ const Shader = function(_cgl, _name) {
 
     this._libs=[];
 
+    this._textureStackUni = [];
+    this._textureStackTex = [];
+    this._textureStackType = [];
+
     this._tempNormalMatrix=mat4.create();
     this._tempCamPosMatrix = mat4.create();
     this._tempInverseViewMatrix = mat4.create();
@@ -508,6 +512,8 @@ Shader.prototype.bind = function()
     {
         if(this._libs[i].onBind)this._libs[i].onBind.bind(this._libs[i])(this._cgl,this);
     }
+
+    this._bindTextures();
 };
 
 
@@ -834,6 +840,63 @@ Shader.prototype.addAttribute = function(attr) {
     this._attributes.push(attr);
     this._needsRecompile = true;
 };
+
+Shader.prototype._bindTextures=function()
+{
+    for(var i=0;i<this._textureStackTex.length;i++)
+    {
+        this._textureStackUni[i].setValue(i);
+        // console.log(i, this._textureStackUni[i] );
+        this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+    }
+
+}
+
+/**
+ * pushs a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
+ * @param {uniform} texture uniform
+ * @param {texture} texture
+ * @param {type} texture type, can be ignored when TEXTURE_2D
+ * @function pushTexture
+ * @memberof Shader
+ * @instance
+ */
+Shader.prototype.pushTexture=function(uniform,t,type)
+{
+    this._textureStackUni.push(uniform);
+    this._textureStackTex.push(t);
+    this._textureStackType.push(type);
+};
+
+/**
+ * pop last texture
+ * @function popTexture
+ * @memberof Shader
+ * @instance
+ */
+Shader.prototype.popTexture=function()
+{
+    this._textureStackUni.pop();
+    this._textureStackTex.pop();
+    this._textureStackType.pop();
+};
+
+/**
+ * pop all textures
+ * @function popTextures
+ * @memberof Shader
+ * @instance
+ */
+Shader.prototype.popTextures=function()
+{
+    this._textureStackTex.length=
+    this._textureStackType.length=
+    this._textureStackUni.length=0;
+
+};
+
+
+
 
 // --------------------------
 

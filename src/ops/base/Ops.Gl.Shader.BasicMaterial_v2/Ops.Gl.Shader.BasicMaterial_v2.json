@@ -49,6 +49,11 @@
                 "group": "Opacity"
             },
             {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Alpha Mask Source",
                 "group": "Opacity"
