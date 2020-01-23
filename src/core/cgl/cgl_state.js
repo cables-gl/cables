@@ -214,7 +214,7 @@ const Context = function (_patch)
 
     this.beginFrame = function ()
     {
-        if (CABLES.UI)
+        if(this.patch.isEditorMode())
         {
             gui.metaTexturePreviewer.render();
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
@@ -245,7 +245,7 @@ const Context = function (_patch)
 
     this.endFrame = function ()
     {
-        if (CABLES.UI) CABLES.GL_MARKER.drawMarkerLayer(this);
+        if(this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
         self.setPreviousShader();
         if (this._vMatrixStack.length() > 0) Log.warn("view matrix stack length !=0 at end of rendering...");
@@ -451,6 +451,7 @@ const Context = function (_patch)
         }
     };
 
+
     this.fullScreen = function ()
     {
         if (this.canvas.requestFullscreen) this.canvas.requestFullscreen();
@@ -582,6 +583,7 @@ const Context = function (_patch)
         }.bind(this), true);
     };
 };
+
 
 /**
  * push a matrix to the view matrix stack

@@ -421,7 +421,7 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
 {
     var audioContext = WEBAUDIO.createAudioContext();
     var loadingId = patch.loading.start("audio", url);
-    if (CABLES.UI) gui.jobs().start({ id: "loadaudio" + loadingId, title: " loading audio (" + url + ")" });
+    if (patch.isEditorMode()) gui.jobs().start({ id: "loadaudio" + loadingId, title: " loading audio (" + url + ")" });
     var request = new XMLHttpRequest();
     if (!url)
     {
@@ -434,7 +434,7 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
     request.onload = function ()
     {
         patch.loading.finished(loadingId);
-        if (CABLES.UI) gui.jobs().finish("loadaudio" + loadingId);
+        if (patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingId);
         audioContext.decodeAudioData(request.response, onFinished, onError);
     };
     request.send();

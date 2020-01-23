@@ -457,7 +457,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.name = url;
 
-    if (CABLES.UI) gui.jobs().start({ id: "loadtexture" + loadingId, title: "loading texture (" + url + ")" });
+    if(cgl.patch.isEditorMode()) gui.jobs().start({ id: "loadtexture" + loadingId, title: "loading texture (" + url + ")" });
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";
@@ -475,14 +475,14 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         cgl.patch.loading.finished(loadingId);
         var error = { error: true };
         if (finishedCallback) finishedCallback(error);
-        if (CABLES.UI) gui.jobs().finish("loadtexture" + loadingId);
+        if(cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
     };
 
     texture.image.onload = function (e)
     {
         texture.initTexture(texture.image);
         cgl.patch.loading.finished(loadingId);
-        if (CABLES.UI) gui.jobs().finish("loadtexture" + loadingId);
+        if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
         if (finishedCallback) finishedCallback();
     };

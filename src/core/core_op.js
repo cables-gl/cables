@@ -1452,7 +1452,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (CABLES.UI && gui) gui.patch().refreshOpParams(this);
+        if (this.patch) gui.patch().refreshOpParams(this);
     };
 }
 

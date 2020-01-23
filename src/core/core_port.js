@@ -243,15 +243,13 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     console.error("onvaluechanged exception cought", ex);
                     Log.log(ex.stack);
                     Log.log("exception in: " + this.parent.name);
-                    if (CABLES.UI) gui.showOpCrash(this.parent);
+
+                    if(this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
                     this.parent.patch.emitEvent("exception".ex,this.parent);
                 }
 
-                if (CABLES.UI && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE)
-                {
-                    gui.texturePreview().updateTexturePort(this);
-                }
+                if (this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
             }
 
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (var i = 0; i < this.links.length; ++i) this.links[i].setValue();
@@ -510,7 +508,7 @@ Port.prototype.trigger = function ()
     {
         this.parent.enabled = false;
 
-        if (CABLES.UI)
+        if (this.parent.patch.isEditorMode())
         {
             this.parent.patch.emitEvent("exception".ex,portTriggered.parent);
 
@@ -742,7 +740,7 @@ class SwitchPort extends Port
             numberPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if(CABLES.UI && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+            if(this.parent.patch.isEditorMode() && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
     }
 }

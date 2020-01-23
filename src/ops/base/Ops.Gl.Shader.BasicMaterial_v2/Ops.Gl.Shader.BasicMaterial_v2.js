@@ -17,8 +17,8 @@ render.onTriggered=doRender;
 
 function bindTextures()
 {
-    if(diffuseTexture.get()) cgl.setTexture(0, diffuseTexture.get().tex);
-    if(op.textureOpacity.get()) cgl.setTexture(1, op.textureOpacity.get().tex);
+    // if(diffuseTexture.get()) cgl.setTexture(0, diffuseTexture.get().tex);
+    // if(textureOpacity.get()) cgl.setTexture(1, textureOpacity.get().tex);
 }
 
 op.preRender=function()
@@ -33,7 +33,12 @@ function doRender()
 
     cgl.setShader(shader);
     shader.bindTextures();
+    if(diffuseTextureUniform) shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
+    if(textureOpacityUniform) shader.pushTexture(diffuseTextureUniform,textureOpacity.get().tex);
     trigger.trigger();
+
+    shader.popTextures();
+
     cgl.setPreviousShader();
 }
 
@@ -44,10 +49,6 @@ const b=op.inValueSlider("b",Math.random());
 const a=op.inValueSlider("a",1);
 r.setUiAttribs({"colorPick":true});
 
-// const unir=new CGL.Uniform(shader,'f','r',r);
-// const unig=new CGL.Uniform(shader,'f','g',g);
-// const unib=new CGL.Uniform(shader,'f','b',b);
-// const unia=new CGL.Uniform(shader,'f','a',a);
 const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 op.setPortGroup("Color",[r,g,b,a]);
@@ -92,8 +93,8 @@ const colorizeTexture=op.inValueBool("colorizeTexture",false);
 op.setPortGroup("Color Texture",[diffuseTexture,colorizeTexture]);
 
 // opacity texture
-op.textureOpacity=op.inTexture("textureOpacity");
-op.textureOpacityUniform=null;
+var textureOpacity=op.inTexture("textureOpacity");
+var textureOpacityUniform=null;
 
 op.alphaMaskSource=op.inSwitch("Alpha Mask Source",["Luminance","R","G","B","A"],"Luminance");
 op.alphaMaskSource.onChange=updateAlphaMaskMethod;
@@ -117,16 +118,16 @@ function updateAlphaMaskMethod()
         else shader.removeDefine('ALPHA_MASK_B');
 }
 
-op.textureOpacity.onChange=updateOpacity;
+textureOpacity.onChange=updateOpacity;
 function updateOpacity()
 {
 
-    if(op.textureOpacity.get())
+    if(textureOpacity.get())
     {
-        if(op.textureOpacityUniform!==null)return;
+        if(textureOpacityUniform!==null)return;
         shader.removeUniform('texOpacity');
         shader.define('HAS_TEXTURE_OPACITY');
-        if(!op.textureOpacityUniform)op.textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
+        if(!textureOpacityUniform)textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
 
         op.alphaMaskSource.setUiAttribs({greyout:false});
         discardTransPxl.setUiAttribs({greyout:false});
@@ -137,7 +138,7 @@ function updateOpacity()
     {
         shader.removeUniform('texOpacity');
         shader.removeDefine('HAS_TEXTURE_OPACITY');
-        op.textureOpacityUniform=null;
+        textureOpacityUniform=null;
 
         op.alphaMaskSource.setUiAttribs({greyout:true});
         discardTransPxl.setUiAttribs({greyout:true});
@@ -163,7 +164,7 @@ texCoordAlpha.onChange=function()
         else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
 };
 
-op.setPortGroup("Opacity",[op.textureOpacity,op.alphaMaskSource,discardTransPxl,texCoordAlpha]);
+op.setPortGroup("Opacity",[textureOpacity,op.alphaMaskSource,discardTransPxl,texCoordAlpha]);
 
 
 colorizeTexture.onChange=function()
