@@ -221,9 +221,7 @@ var updateLights=function()
                                     if (!lights[count].shadowMap) {
                                         lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
-                                    if (inAlgorithm.get() !== "VSM") cgl.setTexture(count, light.shadowMapDepth.tex);
-                                    else cgl.setTexture(count, light.shadowMap.tex);
-                                    // cgl.setTexture(count, light.shadowMap.tex);
+                                    cgl.setTexture(count, light.shadowMap.tex);
                                     lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
                                 } else if (light.shadowCubeMap) {
