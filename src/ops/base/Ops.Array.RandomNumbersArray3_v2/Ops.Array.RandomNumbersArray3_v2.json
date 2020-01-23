@@ -1,0 +1,65 @@
+{
+    "id": "45b2113a-1ca0-41d8-8d90-db3e394b669c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1579773524553
+        }
+    ],
+    "authorName": "cables",
+    "created": 1579773541865,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "numValues",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "group": "Value Range",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "random seed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Last == First",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "values"
+            },
+            {
+                "type": "0",
+                "name": "Total points",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.RandomNumbersArray3_v2"
+    }
+}
