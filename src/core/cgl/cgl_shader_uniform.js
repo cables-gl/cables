@@ -417,12 +417,6 @@ Uniform.prototype.setValue4F = function (v)
     this._value = v;
 };
 
-Uniform.prototype.setValues4F = function (x,y,z,w)
-{
-    this.needsUpdate = true;
-    this._value = v;
-};
-
 Uniform.prototype.updateValueM4 = function ()
 {
     if (this._loc == -1)
