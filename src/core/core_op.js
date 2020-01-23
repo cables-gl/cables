@@ -372,7 +372,7 @@ const Op = function ()
      */
     Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v)
     {
-        const numberPort = new Port(this, name + " position", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" });
+        const numberPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
         const n = this.addInPort(numberPort);
 
         const valuePort = new ValueSelectPort(
@@ -414,7 +414,7 @@ const Op = function ()
      */
     Op.prototype.inSwitch = function (name, values, v)
     {
-        const numberPort = new Port(this, name + " postion", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" });
+        const numberPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
         const n = this.addInPort(numberPort);
         const switchPort = new SwitchPort(
             this,

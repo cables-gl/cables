@@ -732,12 +732,14 @@ class SwitchPort extends Port
             console.log("in set", value);
 
             let intValue = Math.floor(value);
-            if (intValue > values.length)
-            {
-                intValue = values.length - 1;
-            }
+
+            intValue=Math.min(intValue,values.length - 1);
+            intValue=Math.max(intValue,0);
+
             numberPort.setValue(intValue);
             this.set(values[intValue]);
+
+            if(CABLES.UI && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
     }
 }
