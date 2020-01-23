@@ -194,23 +194,21 @@ float getfallOff(Light light,float distLight)
 
 #ifdef MODE_VSM
     float ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth) {
-            float warpedDepth = WarpDepth(shadowMapDepth).x;
-
-            float depthScale = shadowBias * 0.01 * POSITIVE_EXPONENT * shadowMapDepth; // - shadowBias;
+            float depthScale = shadowBias * 0.01 * shadowMapDepth; // - shadowBias;
             float minVariance = depthScale*depthScale; // = 0.00001
 
-            float distanceTo = warpedDepth - shadowBias; //shadowMapDepth; // - shadowBias;
+            float distanceTo = shadowMapDepth; //shadowMapDepth; // - shadowBias;
 
                 // retrieve previously stored moments & variance
             float p = step(distanceTo, moments.x);
-            float variance =  max(moments.y - (moments.x * moments.x), minVariance);
+            float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
 
             float distanceToMean = distanceTo - moments.x;
             //there is a very small probability that something is being lit when its not
             // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
             // bottom line helps make the shadows darker
             // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), minVariance, 1.);
+            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
             //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
             //pMax = variance / (variance + distanceToMean*distanceToMean);
             // visibility = clamp(pMax, 1., p);

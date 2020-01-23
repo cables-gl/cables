@@ -39,14 +39,16 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "Algorithm",
-                "group": "Shadow Settings"
+                "group": "Shadow Settings",
+                "subType": "number"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "Samples",
-                "group": "Shadow Settings"
+                "group": "Shadow Settings",
+                "subType": "number"
             }
         ],
         "portsOut": [

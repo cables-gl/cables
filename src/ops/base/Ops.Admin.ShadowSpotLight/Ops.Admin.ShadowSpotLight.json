@@ -121,9 +121,10 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "Map Size",
-                "group": "Shadow Map Settings"
+                "group": "Shadow Map Settings",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -168,19 +169,22 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "MSAA",
-                "group": "Advanced Options"
+                "group": "Advanced Options",
+                "subType": "number"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "Texture Filter",
-                "group": "Advanced Options"
+                "group": "Advanced Options",
+                "subType": "number"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "Anisotropic",
-                "group": "Advanced Options"
+                "group": "Advanced Options",
+                "subType": "number"
             },
             {
                 "type": "0",

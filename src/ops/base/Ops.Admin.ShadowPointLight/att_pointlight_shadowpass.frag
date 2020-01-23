@@ -4,15 +4,6 @@ IN vec3 modelPos;
 UNI vec3 lightPosition;
 UNI vec2 inNearFar;
 
-const float POSITIVE_EXPONENT = 30.;
-const float NEGATIVE_EXPONENT = 5.;
-vec2 WarpDepth(float depth) {
-    float warpedDepth = 2. * depth - 1.; // rescale to [-1, 1]
-    float positiveExponent = exp(POSITIVE_EXPONENT * depth);
-    float negativeExponent = exp(-NEGATIVE_EXPONENT * depth);
-    return vec2(positiveExponent, negativeExponent);
-}
-
 void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
@@ -24,8 +15,6 @@ void main() {
 
     float depth = gl_FragCoord.z;
     depth = (length(fromLightToFrag) - inNearFar.x) / (inNearFar.y - inNearFar.x);
-    depth = WarpDepth(depth).x;
-    // depth = length(modelPos - lightPosition);
 
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel
@@ -44,14 +33,3 @@ void main() {
 
     outColor = vec4(depth, moment2, 0., 1.);
 }
-
-/*
-const float POSITIVE_EXPONENT = 30.;
-const float NEGATIVE_EXPONENT = 5.;
-vec2 WarpDepth(float depth) {
-    float warpedDepth = 2. * depth - 1.; // rescale to [-1, 1]
-    float positiveExponent = exp(POSITIVE_EXPONENT * depth);
-    float negativeExponent = exp(-NEGATIVE_EXPONENT * depth);
-    return vec2(positiveExponent, negativeExponent);
-}
-*/
