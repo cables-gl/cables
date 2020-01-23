@@ -153,7 +153,7 @@ const Context = function (_patch)
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL.");
             return;
         }
-        var derivativeExt = this.gl.getExtension("GL_OES_standard_derivatives");
+        var derivativeExt = this.gl.getExtension("OES_standard_derivatives");
         var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
 
         if (instancingExt.vertexAttribDivisorANGLE)
@@ -574,7 +574,7 @@ const Context = function (_patch)
                     anchor.click();
                     if (cb) cb(blob);
                 },100);
-                
+
             }
             else
             {
