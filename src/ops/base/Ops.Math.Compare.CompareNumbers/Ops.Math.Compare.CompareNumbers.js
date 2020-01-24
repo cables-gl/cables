@@ -1,12 +1,10 @@
 const
     numberIn_1 = op.inFloat("Value in",0),
-    numberIn_2 = op.inFloat("Condition value",1),
-    numberIn_3 = op.inFloat("Between value high",1),
     logicSelectMode = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=','><','>=<'],'>'),
-    resultNumberOut = op.outNumber("Result number"),
-    resultBooleanOut = op.outBool("Result boolean"),
-    triggerOutIfTrue = op.outTrigger("Trigger true"),
-    triggerOutIfFalse = op.outTrigger("Trigger false");
+    numberIn_2 = op.inFloat("Condition value",1),
+    numberIn_3 = op.inFloat("Max",1),
+
+    resultNumberOut = op.outNumber("Result");
 
 var selectIndex = 0;
 
@@ -36,7 +34,7 @@ function onFilterChange()
     if (selectIndex === 6 || selectIndex == 7)
     {
         numberIn_3.setUiAttribs({greyout:false});
-        numberIn_2.setUiAttribs({title:"Between value low"});
+        numberIn_2.setUiAttribs({title:"Min"});
     }
     else
     {
@@ -54,14 +52,12 @@ function update()
     var n3 = numberIn_3.get();
 
     var resultNumber = 0;
-    var resultBoolean = false;
 
     if(selectIndex === LOGIC_GREATER)
     {
         if(n1 > n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === LOGIC_LESS)
@@ -69,7 +65,6 @@ function update()
         if(n1 < n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === LOGIC_GREATER_EQUALS)
@@ -77,7 +72,6 @@ function update()
         if(n1 >= n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === LOGIC_LESS_EQUALS)
@@ -85,7 +79,6 @@ function update()
         if(n1 <= n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === LOGIC_EQUAL)
@@ -93,7 +86,6 @@ function update()
         if(n1 === n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === LOGIC_NOT_EQUAL)
@@ -101,7 +93,6 @@ function update()
         if(n1 !== n2)
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === BETWEEN)
@@ -110,7 +101,6 @@ function update()
             n1 < Math.max(n2 , n3 ) )
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
     else if(selectIndex === BETWEEN_EQUALS)
@@ -119,15 +109,11 @@ function update()
             n1 <= Math.max(n2 , n3 ) )
         {
             resultNumber=1;
-            resultBoolean=true;
         }
     }
 
     resultNumberOut.set(resultNumber);
-    resultBooleanOut.set(resultBoolean);
 
-    if(resultBoolean) triggerOutIfTrue.trigger();
-        else triggerOutIfFalse.trigger();
 
 };
 

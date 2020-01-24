@@ -5,11 +5,11 @@
 //comparison evaulates to true else zero
 
 const inArray_0 = op.inArray("array 0"),
+    mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
+                    '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
     numberIn = op.inValueFloat("Number for comparison", 0.5),
     inValueIfTrue = op.inFloat("value if true",1.0),
     inValueIfFalse = op.inFloat("value if false",0.0),
-    mathSelect = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=',
-                '>pass','<pass','>=pass','<=pass','==pass','!=pass'],'>'),
     outArray = op.outArray("Array result"),
     outArrayLength = op.outNumber("Array length");
 
