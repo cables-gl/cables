@@ -31,11 +31,8 @@ presetUpdate.setUiAttribs({"hidePort":true});
 presetDelete.setUiAttribs({"hidePort":true});
 presetNames.setUiAttribs({"showIndex":true});
 presetCreate.setUiAttribs({"buttonTitle":"Create New Preset"});
-
 presetDelete.setUiAttribs({"buttonTitleClass":"smallbutton"});
 presetRename.setUiAttribs({"buttonTitleClass":"smallbutton"});
-
-
 
 presetNames.onChange=updatePreset;
 inInterPolate.onChange=updateInterpolation;
@@ -198,7 +195,6 @@ function updatePreset()
         }
     }
 
-
     if(interpolate!==0) updateFade();
 
     updateButtons();
@@ -237,8 +233,12 @@ presetDelete.onTriggered=function()
     presets.splice(idx,1);
     saveData();
 
+    if(presets.length>0)
+    presetNames.set(presets[0].name);
+
     op.refreshParams();
     updateDropdown();
+    updateButtons();
 };
 
 presetRename.onTriggered=function()
@@ -318,8 +318,7 @@ op.patch.addEventListener("onOpDelete",(optodelete)=>
         {
             const opt=op.patch.ops[oi];
 
-            if(
-                opt!=optodelete &&
+            if( opt!=optodelete &&
                 opt.objName.indexOf("VarGet">-1) &&
                 opt.varName &&
                 opt.varName.get &&
