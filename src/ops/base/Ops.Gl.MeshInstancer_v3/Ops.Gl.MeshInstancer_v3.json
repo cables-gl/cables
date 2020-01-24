@@ -73,5 +73,62 @@
             }
         ],
         "name": "Ops.Gl.MeshInstancer_v3"
+    },
+    "summary": "Draw the same mesh multiple times on the GPU",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.RandomArrays",
+        "Ops.Array.RandomNumbersArray3",
+        "Ops.Array.RandomNumbersArray4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger In"
+            },
+            {
+                "name": "geom",
+                "text": "The shape that will be instanced"
+            },
+            {
+                "name": "Scale",
+                "text": "Global scale for all instances, disabled if scale array is used"
+            },
+            {
+                "name": "Limit Instances",
+                "text": "Enable to set a limit on how many instances are created"
+            },
+            {
+                "name": "Limit",
+                "text": "If limit instances is enabled this number determines how many instances are created"
+            },
+            {
+                "name": "positions",
+                "text": "Needs an XYZ array to determine the positions of each instance"
+            },
+            {
+                "name": "Scale Array",
+                "text": "Needs an XYZ array to determine the scale of each instance"
+            },
+            {
+                "name": "Rotations",
+                "text": "Needs an XYZ array to determine the XYZ rotation of each instance. 0 - 360 degrees."
+            },
+            {
+                "name": "Colors",
+                "text": "Needs an RGBA array to determine the color of each instance."
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger Out"
+            },
+            {
+                "name": "Num",
+                "text": "Total number of instances/shapes"
+            }
+        ]
     }
 }

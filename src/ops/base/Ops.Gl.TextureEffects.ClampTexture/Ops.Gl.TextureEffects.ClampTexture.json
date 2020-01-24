@@ -50,5 +50,42 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.ClampTexture"
+    },
+    "summary": "Clamps a texture to min and max values - Also has remap modes",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Select a blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Blending amount"
+            },
+            {
+                "name": "Mode",
+                "text": "Pick from clamp - remap - remap smooth"
+            },
+            {
+                "name": "Min",
+                "text": "Min value"
+            },
+            {
+                "name": "Max",
+                "text": "Max value"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }
