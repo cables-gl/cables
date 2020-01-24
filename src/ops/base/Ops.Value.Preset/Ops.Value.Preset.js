@@ -29,6 +29,7 @@ presetCreate.setUiAttribs({"hidePort":true});
 presetUpdate.setUiAttribs({"hidePort":true});
 presetDelete.setUiAttribs({"hidePort":true});
 presetNames.setUiAttribs({"showIndex":true});
+presetCreate.setUiAttribs({"buttonTitle":"Create New Preset"});
 
 presetNames.onChange=updatePreset;
 inInterPolate.onChange=updateInterpolation;
@@ -38,6 +39,8 @@ presetA.onChange=
 
 updateInterpolation();
 updateDropdown();
+updatePreset();
+updateButtons();
 
 function updateInterpolation()
 {
@@ -65,6 +68,7 @@ function updateInterpolation()
     }
 
     op.setUiAttrib({"extendTitle":ip});
+
 
     if(interpolate!==0) updateFade();
     else updatePreset();
@@ -132,11 +136,27 @@ function setPresetValues(preset)
     return preset;
 }
 
+function updateButtons()
+{
+    presetDelete.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
+    presetUpdate.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
+
+    const preset=getPreset(presetNames.get());
+    if(preset)
+    {
+        presetDelete.setUiAttribs({buttonTitle:"Delete "+preset.name});
+        presetUpdate.setUiAttribs({buttonTitle:"Update "+preset.name});
+    }
+
+}
+
 function updateDropdown()
 {
     presetNames.uiAttribs.values.length=0;
     for(var i=0;i<presets.length;i++)
         presetNames.uiAttribs.values.push(presets[i].name);
+
+    updateButtons();
 }
 
 function getPreset(name)
@@ -156,11 +176,11 @@ setsPort.onChange=function()
 
 function updatePreset()
 {
-    var preset=getPreset(presetNames.get());
+    const preset=getPreset(presetNames.get());
 
     if(!preset)return;
 
-    var varnames=Object.keys(preset.values);
+    const varnames=Object.keys(preset.values);
 
     for (var i = 0; i < varnames.length; i++)
     {
@@ -172,9 +192,11 @@ function updatePreset()
         }
     }
 
-    op.refreshParams();
 
     if(interpolate!==0) updateFade();
+
+    updateButtons();
+    op.refreshParams();
 }
 
 presetUpdate.onTriggered=function()
@@ -197,16 +219,21 @@ presetCreate.onTriggered=function()
             presets.push(preset);
             updateDropdown();
             savePresets();
+
         });
 };
 
 presetDelete.onTriggered=function()
 {
     if(!CABLES.UI)return;
+    console.log(data);
     const current=presetNames.get();
     const idx=presetNames.uiAttribs.values.indexOf(current);
-    presetNames.uiAttribs.values.splice(idx,1);
+    presets.splice(idx,1);
+    saveData();
+
     op.refreshParams();
+    updateDropdown();
 };
 
 dataPort.onChange=function()
@@ -223,8 +250,6 @@ dataPort.onChange=function()
         {
         	if(portObject.type==CABLES.OP_PORT_TYPE_VALUE)
         	{
-        	   // op.patch.setVarValue(varname,0);
-
                 var val=op.patch.getVarValue(varname);
         	    var port=op.inFloat(varname,val);
 
@@ -312,16 +337,7 @@ addPort.onLinkChanged=function()
     var link=addPort.links[0];
     var otherPort=link.getOtherPort(addPort);
 
-
-
     const varname=".preset_"+otherPort.name+"_"+id.get()+'_'+CABLES.shortId();
-
-//     var newPort=op.addInPort(new CABLES.Port(op,varname,otherPort.type));
-
-// op.log("pilength",op.portsIn);
-
-//     newPort.setUiAttribs({"editableTitle":true,"title":newPort.name});
-//     newPort.set(otherPort.get());
 
     op.log("pilength",op.portsIn.length);
 
@@ -332,34 +348,25 @@ addPort.onLinkChanged=function()
             "type":otherPort.type
         });
 
-        console.log("otherPort.get()",otherPort.get());
+    console.log("otherPort.get()",otherPort.get());
 
     const oldValue=otherPort.get()
 
     op.patch.setVarValue(varname,oldValue);
-
-// 	if(newPort.type==CABLES.OP_PORT_TYPE_VALUE)
-// 	{
-        // var opGetter = op.patch.addOp("Ops.Vars.VarGetNumber");
-        // opGetter.varName.set(varname);
-
-
-//     }
-
-    // listenPortChange(newPort,varname);
 
     addPort.removeLinks();
     if(CABLES.UI && gui) gui.patch().removeDeadLinks();
     saveData();
     op.refreshParams();
 
-    // var newPort=op.getPort("varname")
-
-    // op.patch.link(otherPort.parent,otherPort.name,opGetter,"Value");
-
     otherPort.setVariable(varname);
 
 };
 
 
-
+op.onDelete=(reloading)=>
+    {
+        if(reloading)return;
+        for(var i=0;i<data.length;i++)
+            op.patch.deleteVar(data[i].varname);
+    };

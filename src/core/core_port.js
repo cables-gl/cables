@@ -536,6 +536,7 @@ Port.prototype.execute = function ()
 Port.prototype.setVariableName = function (n)
 {
     this._useVariableName=n;
+
 }
 
 Port.prototype.getVariableName = function ()
@@ -631,6 +632,10 @@ Port.prototype.isLinked = function ()
     return this.links.length > 0;
 };
 
+Port.prototype.isBoundToVar = function ()
+{
+    return this._useVariableName!=null;
+};
 /**
  * @function isAnimated
  * @memberof Port

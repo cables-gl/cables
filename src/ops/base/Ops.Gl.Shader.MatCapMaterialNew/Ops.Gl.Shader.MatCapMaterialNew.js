@@ -1,25 +1,26 @@
-const render=op.inTrigger("render");
-const textureMatcap=op.inTexture('MatCap');
-const textureDiffuse=op.inTexture('Diffuse');
-const textureNormal=op.inTexture('Normal');
-const textureSpec=op.inTexture('Specular');
-const textureSpecMatCap=op.inTexture('Specular MatCap');
-const textureAo=op.inTexture('AO Texture');
-const textureOpacity=op.inTexture("Opacity Texture");
-const r=op.inValueSlider('r',1);
-const g=op.inValueSlider('g',1);
-const b=op.inValueSlider('b',1);
-const pOpacity=op.inValueSlider("Opacity",1);
-const aoIntensity=op.inValueSlider("AO Intensity",1.0);
-const repeatX=op.inValue("Repeat X",1);
-const repeatY=op.inValue("Repeat Y",1);
-const offsetX=op.inValue("Offset X",0);
-const offsetY=op.inValue("Offset Y",0);
-const calcTangents = op.inValueBool("calc normal tangents",true);
-const projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no');
-const ssNormals=op.inValueBool("Screen Space Normals");
-const next=op.outTrigger("trigger");
-const shaderOut=op.outObject("Shader");
+const
+    render=op.inTrigger("render"),
+    textureMatcap=op.inTexture('MatCap'),
+    textureDiffuse=op.inTexture('Diffuse'),
+    textureNormal=op.inTexture('Normal'),
+    textureSpec=op.inTexture('Specular'),
+    textureSpecMatCap=op.inTexture('Specular MatCap'),
+    textureAo=op.inTexture('AO Texture'),
+    textureOpacity=op.inTexture("Opacity Texture"),
+    r=op.inValueSlider('r',1),
+    g=op.inValueSlider('g',1),
+    b=op.inValueSlider('b',1),
+    pOpacity=op.inValueSlider("Opacity",1),
+    aoIntensity=op.inValueSlider("AO Intensity",1.0),
+    repeatX=op.inValue("Repeat X",1),
+    repeatY=op.inValue("Repeat Y",1),
+    offsetX=op.inValue("Offset X",0),
+    offsetY=op.inValue("Offset Y",0),
+    calcTangents = op.inValueBool("calc normal tangents",true),
+    projectCoords=op.inValueSelect('projectCoords',['no','xy','yz','xz'],'no'),
+    ssNormals=op.inValueBool("Screen Space Normals"),
+    next=op.outTrigger("trigger"),
+    shaderOut=op.outObject("Shader");
 
 r.setUiAttribs({colorPick:true});
 
@@ -38,7 +39,6 @@ const shader=new CGL.Shader(cgl,'MatCapMaterialNew');
 var uniOpacity=new CGL.Uniform(shader,'f','opacity',pOpacity);
 
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.bindTextures=bindTextures;
 shader.setSource(attachments.matcap_vert,attachments.matcap_frag);
 shaderOut.set(shader);
 
@@ -48,8 +48,6 @@ var textureNormalUniform=null;
 var textureSpecUniform=null;
 var textureSpecMatCapUniform=null;
 var textureAoUniform=null;
-// const repeatXUniform=new CGL.Uniform(shader,'f','repeatX',repeatX);
-// const repeatYUniform=new CGL.Uniform(shader,'f','repeatY',repeatY);
 const offsetUniform=new CGL.Uniform(shader,'2f','texOffset',offsetX,offsetY);
 const repeatUniform=new CGL.Uniform(shader,'2f','texRepeat',repeatX,repeatY);
 
@@ -87,13 +85,9 @@ ssNormals.onChange=function()
 
 projectCoords.onChange=function()
 {
-    shader.removeDefine('DO_PROJECT_COORDS_XY');
-    shader.removeDefine('DO_PROJECT_COORDS_YZ');
-    shader.removeDefine('DO_PROJECT_COORDS_XZ');
-
-    if(projectCoords.get()=='xy') shader.define('DO_PROJECT_COORDS_XY');
-    else if(projectCoords.get()=='yz') shader.define('DO_PROJECT_COORDS_YZ');
-    else if(projectCoords.get()=='xz') shader.define('DO_PROJECT_COORDS_XZ');
+    shader.toggleDefine('DO_PROJECT_COORDS_XY',projectCoords.get()=='xy');
+    shader.toggleDefine('DO_PROJECT_COORDS_YZ',projectCoords.get()=='yz');
+    shader.toggleDefine('DO_PROJECT_COORDS_XZ',projectCoords.get()=='xz');
 };
 
 textureMatcap.onChange=updateMatcap;
@@ -269,17 +263,16 @@ texCoordAlpha.onChange=function()
         else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
 };
 
-
-function bindTextures()
-{
-    // if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
-    // if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
-    // if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
-    // if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
-    // if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
-    // if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
-    // if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
-};
+// function bindTextures()
+// {
+//      if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
+//      if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
+//      if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
+//      if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
+//      if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
+//      if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
+//      if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
+// };
 
 op.onDelete=function()
 {

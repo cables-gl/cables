@@ -29,6 +29,11 @@
                 "name": "presetid"
             },
             {
+                "type": "0",
+                "name": "Interpolation index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Interpolation"
             },
@@ -46,6 +51,11 @@
                 "type": "0",
                 "name": "Fade",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Preset index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -67,6 +77,11 @@
                 "type": "1",
                 "name": "Delete",
                 "group": "Manage Presets"
+            },
+            {
+                "type": "0",
+                "name": ".preset_amount_8dwke6ou9_psqo37ur7",
+                "subType": "number"
             }
         ],
         "portsOut": [
