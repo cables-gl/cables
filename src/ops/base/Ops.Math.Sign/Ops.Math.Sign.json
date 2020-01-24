@@ -13,6 +13,11 @@
                 "type": "0",
                 "name": "Value",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Remove zero",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
