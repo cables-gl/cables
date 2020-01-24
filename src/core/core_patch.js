@@ -443,7 +443,7 @@ Patch.prototype.removeOnAnimCallback = function (cb)
     }
 };
 
-Patch.prototype.deleteOp = function (opid, tryRelink)
+Patch.prototype.deleteOp = function (opid, tryRelink,reloadingOp)
 {
     for (var i in this.ops)
     {
@@ -477,10 +477,10 @@ Patch.prototype.deleteOp = function (opid, tryRelink)
                     this.onDelete(opToDelete);
                 }
 
-                this.emitEvent("onOpDelete", opToDelete);
+                this.emitEvent("onOpDelete", opToDelete,reloadingOp);
                 this.ops.splice(i, 1);
 
-                if (opToDelete.onDelete) opToDelete.onDelete();
+                if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                 opToDelete.cleanUp();
 
                 if (reLinkP1 !== null && reLinkP2 !== null)
@@ -733,7 +733,6 @@ Patch.prototype.reloadOp = function (objName, cb)
 
     for (var i = 0; i < oldOps.length; i++)
     {
-        // if (this.ops[i].objName == objName) {
         count++;
         var oldOp = oldOps[i];
         oldOp.deleted = true;
@@ -782,8 +781,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             }
         }
 
-        this.deleteOp(oldOp.id);
-        // }
+        this.deleteOp(oldOp.id,false,true);
     }
     cb(count, ops);
 };
@@ -1143,6 +1141,25 @@ Patch.prototype.getVars = function ()
 {
     return this._variables;
 };
+
+Patch.prototype.deleteVar = function (name)
+{
+    for(var i=0;i<this.ops.length;i++)
+    {
+        for(var j=0;j<this.ops[i].portsIn.length;j++)
+        {
+            if(this.ops[i].portsIn[j].getVariableName()==name)
+            {
+                console.log("found!");
+                this.ops[i].portsIn[j].setVariable(null);
+            }
+        }
+    }
+
+    delete this._variables[name];
+    // return this._variables;
+};
+
 
 /**
  * @function getVars

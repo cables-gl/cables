@@ -77,6 +77,16 @@
                 "type": "1",
                 "name": "Delete",
                 "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "Rename",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "0",
+                "name": ".preset_amount_8dwke6ou9_psqo37ur7",
+                "subType": "number"
             }
         ],
         "portsOut": [

@@ -23,8 +23,6 @@ const Context = function (_patch)
     this.patch = _patch;
 
     this.maxTextureUnits=0;
-    
-
     this.currentProgram=null;
 
     this.temporaryTexture = null;
@@ -455,7 +453,6 @@ const Context = function (_patch)
             this._textureslots[slot] = t;
         }
     };
-
 
     this.fullScreen = function ()
     {

@@ -1168,27 +1168,28 @@ const Op = function ()
      * @function setError
      * @instance
      * @memberof Op
+     * @param {id} error id
      * @param {txt} text message
      */
     Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
-        if(txt==undefined)
+        if(txt===undefined)
         {
-            if(id!=this.uiAttribs.error) this.uiAttr({ error: id });
+            this.uiAttr({ error: id });
         }
         else
         {
-            // todo is this used at all ?
-            this.errors[id] = txt;
-            if (txt == null) delete this.errors[id];
-
-            var errorHtml = "";
-            for (var i in this.errors)
+            if(this.errors[id]!=txt)
             {
-                errorHtml += "- " + this.errors[i] + "<br/>";
+                this.errors[id]=txt;
+                if(!txt)delete this.errors[id];
+
+                var errorArr=[];
+                for(var i in this.errors)errorArr.push(this.errors[i]);
+                this.uiAttr({ "errors": errorArr });
+                console.log(errorArr);
             }
-            this.uiAttr({ error: errorHtml });
         }
     };
 
