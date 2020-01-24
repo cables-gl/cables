@@ -5,6 +5,11 @@
     "layout": {
         "portsIn": [
             {
+                "type": "0",
+                "name": "Mode select index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Mode select"
             },
