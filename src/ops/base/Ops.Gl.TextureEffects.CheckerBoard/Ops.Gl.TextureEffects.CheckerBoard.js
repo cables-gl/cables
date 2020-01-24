@@ -16,7 +16,6 @@ const textureUniform=new CGL.Uniform(shader,'t','tex',0);
 const amountUniform=new CGL.Uniform(shader,'f','amount',amount);
 const uniLineSize=new CGL.Uniform(shader,'f','lineSize',lineSize);
 const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
-const centeredUniform=new CGL.Uniform(shader,'b','center',inCentered);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
