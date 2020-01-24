@@ -1,0 +1,49 @@
+{
+    "id": "a8b3380e-cd4a-4000-9ee9-1c65a11027dd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1579874058022
+        },
+        {
+            "message": "Ops.User.pandur.ForceCanvasSize renamed to Ops.Gl.ForceCanvasSize",
+            "author": "pandur",
+            "date": 1579877217407
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1579874096606,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Size",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.ForceCanvasSize"
+    }
+}
