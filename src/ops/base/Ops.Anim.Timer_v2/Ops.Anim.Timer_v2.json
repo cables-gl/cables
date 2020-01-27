@@ -60,8 +60,5 @@
                 "text": "Time elapsed"
             }
         ]
-    },
-    "libs": [
-        "ammo.js"
-    ]
+    }
 }
