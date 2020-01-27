@@ -736,7 +736,9 @@ class SwitchPort extends Port
             if(!values)
             {
                 console.log("has no values",this);
+                return;
             }
+
             let intValue = Math.floor(value);
 
             intValue=Math.min(intValue,values.length - 1);
@@ -745,7 +747,7 @@ class SwitchPort extends Port
             numberPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if(this.parent.patch.isEditorMode() && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+            if(this.parent.patch.isEditorMode() && window.gui && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
     }
 }

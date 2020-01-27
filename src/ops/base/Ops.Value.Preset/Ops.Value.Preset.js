@@ -198,7 +198,7 @@ function updatePreset()
     if(interpolate!==0) updateFade();
 
     updateButtons();
-    if(op.patch.isEditorMode())op.refreshParams();
+    op.refreshParams();
 }
 
 presetUpdate.onTriggered=function()
@@ -236,7 +236,7 @@ presetDelete.onTriggered=function()
     if(presets.length>0)
     presetNames.set(presets[0].name);
 
-    if(op.patch.isEditorMode())op.refreshParams();
+    op.refreshParams();
     updateDropdown();
     updateButtons();
 };
@@ -342,8 +342,11 @@ op.patch.addEventListener("onOpDelete",(optodelete)=>
 
     data=newData;
     saveData();
+
+
     op.refreshParams();
     setTimeout(op.refreshParams.bind(this),1000);
+
 });
 
 

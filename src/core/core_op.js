@@ -1453,7 +1453,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (this.patch) gui.patch().refreshOpParams(this);
+        if(this.patch && this.patch.isEditorMode()) gui.patch().refreshOpParams(this);
     };
 }
 
