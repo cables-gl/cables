@@ -735,7 +735,7 @@ class SwitchPort extends Port
             const values = uiAttribs.values;
             if(!values)
             {
-                console.log("has no values",this);
+                console.log("has no values");
                 return;
             }
 

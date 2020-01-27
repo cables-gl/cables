@@ -850,13 +850,17 @@ Shader.prototype._bindTextures=function()
 
     for(var i=0;i<this._textureStackTex.length;i++)
     {
-        if(this._textureStackUni[i])
+        if(!this._textureStackUni[i])
         {
-            throw(new Error('no uniform given to texturestack'));
+            // throw(new Error('no uniform given to texturestack'));
+            console.log('no uniform for pushtexture',this._name);
+            this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
         }
-        this._textureStackUni[i].setValue(i);
-        // console.log(i, this._textureStackUni[i] );
-        this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+        else
+        {
+            this._textureStackUni[i].setValue(i);
+            this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+        }
     }
 
 }

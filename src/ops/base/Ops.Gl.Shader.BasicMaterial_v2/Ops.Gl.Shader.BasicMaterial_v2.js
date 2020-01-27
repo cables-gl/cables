@@ -33,8 +33,8 @@ function doRender()
 
     cgl.setShader(shader);
     shader.bindTextures();
-    if(diffuseTextureUniform) shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
-    if(textureOpacityUniform) shader.pushTexture(diffuseTextureUniform,textureOpacity.get().tex);
+    if(diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
+    if(textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
     trigger.trigger();
 
     shader.popTextures();
