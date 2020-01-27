@@ -59,11 +59,13 @@
             {
                 "type": "0",
                 "name": "Aspect Ratio",
+                "group": "Proportions",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Ratio",
+                "group": "Proportions",
                 "subType": "number"
             },
             {
@@ -74,6 +76,7 @@
             {
                 "type": "0",
                 "name": "Fill Parent",
+                "group": "Proportions",
                 "subType": "string"
             }
         ],

@@ -13,12 +13,9 @@ const
     outHeight=op.outNumber("Height");
 
 op.setPortGroup("Size",[inWidth,inHeight]);
-
-op.setPortGroup("Aspect Ratio",[]);
-
+op.setPortGroup("Proportions",[inRatio,inStretch,inPresets]);
 
 var align=0;
-
 const ALIGN_NONE=0;
 const ALIGN_WIDTH=1;
 const ALIGN_HEIGHT=2;
@@ -27,6 +24,10 @@ const ALIGN_AUTO=4;
 
 inStretch.onChange=
 inWhat.onChange=updateUi;
+
+inCenter.onChange=
+inTrigger.onLinkChanged=removeStyles;
+
 
 inPresets.onChange=function()
 {
@@ -47,6 +48,11 @@ const cgl=op.patch.cgl;
 
 updateUi();
 
+inActive.onChange=function()
+{
+    if(!inActive.get())removeStyles();
+}
+
 function updateUi()
 {
     const forceRes=inWhat.get()=='Resolution';
@@ -56,8 +62,6 @@ function updateUi()
     inPresets.setUiAttribs({greyout:forceRes});
     inStretch.setUiAttribs({greyout:forceRes});
     inRatio.setUiAttribs({greyout:forceRes});
-
-
 
     align=0;
 
@@ -69,7 +73,6 @@ function updateUi()
         else if(strAlign=="Both")align=ALIGN_BOTH;
         else if(strAlign=="Auto")align=ALIGN_AUTO;
     }
-
 }
 
 function removeStyles()
@@ -81,9 +84,6 @@ function removeStyles()
     cgl.setSize(rect.width,rect.height);
 }
 
-
-inCenter.onChange=
-inTrigger.onLinkChanged=removeStyles;
 
 inTrigger.onTriggered=function()
 {
@@ -132,7 +132,6 @@ inTrigger.onTriggered=function()
     w=Math.floor(w);
     h=Math.floor(h);
 
-
     if(inCenter.get())
     {
         const rect=cgl.canvas.parentNode.getBoundingClientRect();
@@ -140,16 +139,12 @@ inTrigger.onTriggered=function()
         cgl.canvas.style['margin-left']=(rect.width-w)/2+"px";
     }
 
-
     if(cgl.canvas.width!=w || cgl.canvas.height!=h)
     {
         outWidth.set(w);
         outHeight.set(h);
-
         cgl.setSize(w,h);
     }
     else next.trigger();
 
 };
-
-

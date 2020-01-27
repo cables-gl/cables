@@ -198,7 +198,7 @@ function updatePreset()
     if(interpolate!==0) updateFade();
 
     updateButtons();
-    op.refreshParams();
+    if(op.patch.isEditorMode())op.refreshParams();
 }
 
 presetUpdate.onTriggered=function()
@@ -210,7 +210,7 @@ presetUpdate.onTriggered=function()
 
 presetCreate.onTriggered=function()
 {
-    if(!CABLES.UI)return;
+    if(!op.patch.isEditorMode())return;
     CABLES.UI.MODAL.prompt("New Preset","Enter a new preset name","",
         function(str)
         {
@@ -236,7 +236,7 @@ presetDelete.onTriggered=function()
     if(presets.length>0)
     presetNames.set(presets[0].name);
 
-    op.refreshParams();
+    if(op.patch.isEditorMode())op.refreshParams();
     updateDropdown();
     updateButtons();
 };
