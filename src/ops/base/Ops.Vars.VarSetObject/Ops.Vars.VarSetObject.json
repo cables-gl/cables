@@ -12,10 +12,11 @@
             },
             {
                 "type": "0",
-                "name": "Variable"
+                "name": "Variable",
+                "subType": "string"
             }
         ],
-        "name": "Ops.Vars.SetVariableObject"
+        "name": "Ops.Vars.VarSetObject"
     },
     "changelog": [
         {

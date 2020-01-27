@@ -16,6 +16,7 @@ function updateIndex()
 
 function update()
 {
+    triggerOut.trigger();
     if(!array.get())return;
     array.get()[index.get()]=value.get();
 

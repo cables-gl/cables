@@ -13,6 +13,7 @@
         }
     ],
     "authorName": "pandur",
+    "summary": "Resize canvas element to a specific pixel size or aspect ratio",
     "created": 1579874096606,
     "layout": {
         "portsIn": [
@@ -27,6 +28,20 @@
             },
             {
                 "type": "0",
+                "name": "Force index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Force"
+            },
+            {
+                "type": "0",
+                "name": "Center In Parent",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Width",
                 "group": "Size",
                 "subType": "integer"
@@ -36,43 +51,52 @@
                 "name": "Height",
                 "group": "Size",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "group": "Proportions",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Ratio",
+                "group": "Proportions",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fill Parent index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Fill Parent",
+                "group": "Proportions",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.ForceCanvasSize"
-    },
-    "summary": "Resize canvas element to a specific pixel size or aspect ratio",
-    "issues": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": [],
-    "docs": {
-        "ports": [
-            {
-                "name": "Trigger",
-                "text": "Trigger the op"
-            },
-            {
-                "name": "Active",
-                "text": "Enable or disable the op"
-            },
-            {
-                "name": "Width",
-                "text": "Width of the canvas"
-            },
-            {
-                "name": "Height",
-                "text": "Height of the canvas"
-            },
-            {
-                "name": "Next",
-                "text": "Trigger out"
-            }
-        ]
+        "name": "Ops.Gl.ForceCanvasSize"
     }
 }

@@ -31,8 +31,8 @@ presetUpdate.setUiAttribs({"hidePort":true});
 presetDelete.setUiAttribs({"hidePort":true});
 presetNames.setUiAttribs({"showIndex":true});
 presetCreate.setUiAttribs({"buttonTitle":"Create New Preset"});
-presetDelete.setUiAttribs({"buttonTitleClass":"smallbutton"});
-presetRename.setUiAttribs({"buttonTitleClass":"smallbutton"});
+presetDelete.setUiAttribs({"buttonTitleClass":"button-small"});
+presetRename.setUiAttribs({"buttonTitleClass":"button-small"});
 
 presetNames.onChange=updatePreset;
 inInterPolate.onChange=updateInterpolation;
@@ -210,7 +210,7 @@ presetUpdate.onTriggered=function()
 
 presetCreate.onTriggered=function()
 {
-    if(!CABLES.UI)return;
+    if(!op.patch.isEditorMode())return;
     CABLES.UI.MODAL.prompt("New Preset","Enter a new preset name","",
         function(str)
         {
@@ -342,8 +342,11 @@ op.patch.addEventListener("onOpDelete",(optodelete)=>
 
     data=newData;
     saveData();
+
+
     op.refreshParams();
     setTimeout(op.refreshParams.bind(this),1000);
+
 });
 
 

@@ -24,8 +24,12 @@
         ],
         "name": "Ops.Value.PreviousValueStore"
     },
-    "summary": "remember/store last set value ",
+    "summary": "remember/store last set number ",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

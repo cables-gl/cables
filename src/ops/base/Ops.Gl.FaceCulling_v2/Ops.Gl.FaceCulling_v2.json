@@ -34,5 +34,30 @@
             "author": "pandur",
             "date": 1577014912398
         }
-    ]
+    ],
+    "summary": "Disable the rendering of front or back facing triangles with culling",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Discard",
+                "text": "Mode - Front - Back - All"
+            },
+            {
+                "name": "Active",
+                "text": "Enable or disable the op"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

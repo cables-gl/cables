@@ -1,4 +1,4 @@
-op.varName=op.inValueSelect("Variable");
+op.varName=op.inValueSelect("Variable",[],"",true);
 var val=op.inString("Value",'New String');
 
 op.varName.onChange=updateName;
