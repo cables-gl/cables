@@ -1,7 +1,6 @@
-
-var play=op.inTriggerButton("Play");
+const play=op.inTriggerButton("Play");
 
 play.onTriggered=function()
 {
-    op.patch.timer.play();    
+    op.patch.timer.play();
 };

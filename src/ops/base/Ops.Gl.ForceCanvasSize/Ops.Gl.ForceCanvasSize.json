@@ -27,6 +27,20 @@
             },
             {
                 "type": "0",
+                "name": "Force index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Force"
+            },
+            {
+                "type": "0",
+                "name": "Center In Parent",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Width",
                 "group": "Size",
                 "subType": "integer"
@@ -36,6 +50,31 @@
                 "name": "Height",
                 "group": "Size",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fill Parent index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Fill Parent",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -44,6 +83,6 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.ForceCanvasSize"
+        "name": "Ops.Gl.ForceCanvasSize"
     }
 }
