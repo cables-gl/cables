@@ -1,3 +1,14 @@
+
+/*
+next version:
+
+- make rebuildLater functionality
+- make mapping mode for unconnected sides: no more face mapping texture problems (then we don't need that bias...)
+- maybe checkboxes to disable some sides ?
+- tesselation
+
+*/
+
 const
     render=op.inTrigger('render'),
     width=op.inValue('width',1),
