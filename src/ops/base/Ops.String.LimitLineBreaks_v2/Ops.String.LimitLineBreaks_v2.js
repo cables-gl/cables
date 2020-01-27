@@ -15,8 +15,7 @@ inRev.onChange=
 function update()
 {
     var strings=inStr.get().split('\n');
-    var num=inNum.get();
-
+    var num=num=Math.max(0,Math.floor(inNum.get())+1);
 
     if(inRev.get())
     {
