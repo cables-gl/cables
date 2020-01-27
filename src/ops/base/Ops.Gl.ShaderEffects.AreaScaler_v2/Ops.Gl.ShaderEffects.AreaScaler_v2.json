@@ -69,5 +69,50 @@
             "author": "pandur",
             "date": 1573743399666
         }
-    ]
+    ],
+    "summary": "Scales the size of meshes within the area of influence",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Area size",
+                "text": "Size of area to influence"
+            },
+            {
+                "name": "Source",
+                "text": "Vertex position or Object position"
+            },
+            {
+                "name": "Strength",
+                "text": "Strength of the effect"
+            },
+            {
+                "name": "Smoothstep",
+                "text": "Smoothstep mode to influence "
+            },
+            {
+                "name": "Pos X",
+                "text": "X position of the area"
+            },
+            {
+                "name": "Pos Y",
+                "text": "Y position of the area"
+            },
+            {
+                "name": "Pos Z",
+                "text": "Z position of the area"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

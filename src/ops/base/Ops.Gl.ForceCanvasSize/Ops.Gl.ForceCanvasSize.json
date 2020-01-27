@@ -45,5 +45,34 @@
             }
         ],
         "name": "Ops.User.pandur.ForceCanvasSize"
+    },
+    "summary": "Resize canvas element to a specific pixel size or aspect ratio",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Active",
+                "text": "Enable or disable the op"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the canvas"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the canvas"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     }
 }
