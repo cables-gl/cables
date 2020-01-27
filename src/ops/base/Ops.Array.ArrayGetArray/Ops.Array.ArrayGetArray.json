@@ -8,7 +8,6 @@
             }
         ]
     },
-    "updated": 1519807919154,
     "authorName": "pandur",
     "id": "b9d3f42b-3fbf-4522-9df2-a5c769a92d66",
     "created": 1519807916880,
@@ -20,7 +19,8 @@
             },
             {
                 "type": "0",
-                "name": "Index"
+                "name": "Index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

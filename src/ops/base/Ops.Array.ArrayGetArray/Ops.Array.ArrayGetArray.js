@@ -12,16 +12,19 @@ function update()
     var theArray=inArrays.get();
     if(!theArray)
     {
+    result.set(null);
         // op.log('no array');
         return;
     }
-    
+
     var ind=Math.floor(index.get());
     if(ind<0 || ind>theArray.length-1)
     {
+    result.set(null);
         op.log("index wrong");
         return;
     }
-    
+
+    result.set(null);
     result.set(theArray[ind]);
 }

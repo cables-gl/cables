@@ -6,5 +6,95 @@
     "youtubeids": [],
     "docs": {
         "ports": []
+    },
+    "authorName": "pandur",
+    "id": "a0e8f79c-115c-489f-b990-5e204779c8c6",
+    "created": 1579517139221,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "1",
+                "name": "reset"
+            },
+            {
+                "type": "0",
+                "name": "Use Viewport Size",
+                "group": "Texture Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Texture Size",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "speed",
+                "group": "Reaction Diffusion",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RD Mode",
+                "group": "Reaction Diffusion",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "feed",
+                "group": "Custom values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "kill",
+                "group": "Custom values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "delta",
+                "group": "Custom values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Ratio A",
+                "group": "Custom values",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Ratio B",
+                "group": "Custom values",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "1",
+                "name": "draw"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.ReactionDiffusionSystem"
     }
 }
