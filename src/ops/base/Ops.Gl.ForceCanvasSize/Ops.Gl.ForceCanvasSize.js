@@ -8,7 +8,9 @@ const
     inPresets=op.inDropDown("Aspect Ratio",['21:9','2:1','16:9','16:10','4:3','1:1','9:16','1:2','iPhoneXr Vert'],'16:9'),
     inRatio=op.inFloat("Ratio",0),
     inStretch=op.inDropDown("Fill Parent",['Auto','Width','Height','Both'],'Auto'),
-    next=op.outTrigger("Next");
+    next=op.outTrigger("Next"),
+    outWidth=op.outNumber("Width"),
+    outHeight=op.outNumber("Height");
 
 op.setPortGroup("Size",[inWidth,inHeight]);
 
@@ -139,7 +141,13 @@ inTrigger.onTriggered=function()
     }
 
 
-    if(cgl.canvas.width!=w || cgl.canvas.height!=h) cgl.setSize(w,h);
+    if(cgl.canvas.width!=w || cgl.canvas.height!=h)
+    {
+        outWidth.set(w);
+        outHeight.set(h);
+
+        cgl.setSize(w,h);
+    }
     else next.trigger();
 
 };
