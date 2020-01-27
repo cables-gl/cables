@@ -293,13 +293,13 @@ render.onTriggered=function()
     // shader.bindTextures=bindTextures;
 
 
-    if(textureMatcap.get())     shader.pushTexture(textureMatcapUniform,textureMatcap.get().tex);
-    if(textureDiffuse.get())    shader.pushTexture(textureDiffuseUniform,textureDiffuse.get().tex);
-    if(textureNormal.get())     shader.pushTexture(textureNormalUniform,textureNormal.get().tex);
-    if(textureSpec.get())       shader.pushTexture(textureSpecUniform,textureSpec.get().tex);
-    if(textureSpecMatCap.get()) shader.pushTexture(textureSpecMatCapUniform,textureSpecMatCap.get().tex);
-    if(textureAo.get())         shader.pushTexture(textureAoUniform,textureAo.get().tex);
-    if(textureOpacity.get())    shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
+    if(textureMatcap.get() && textureMatcapUniform)     shader.pushTexture(textureMatcapUniform,textureMatcap.get().tex);
+    if(textureDiffuse.get() && textureDiffuseUniform)    shader.pushTexture(textureDiffuseUniform,textureDiffuse.get().tex);
+    if(textureNormal.get() && textureNormalUniform)     shader.pushTexture(textureNormalUniform,textureNormal.get().tex);
+    if(textureSpec.get() && textureSpecUniform)       shader.pushTexture(textureSpecUniform,textureSpec.get().tex);
+    if(textureSpecMatCap.get() && textureSpecMatCapUniform) shader.pushTexture(textureSpecMatCapUniform,textureSpecMatCap.get().tex);
+    if(textureAo.get() && textureAoUniform)         shader.pushTexture(textureAoUniform,textureAo.get().tex);
+    if(textureOpacity.get() && textureOpacityUniform)    shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
 
 
     cgl.setShader(shader);
