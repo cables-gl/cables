@@ -15,11 +15,10 @@ inRev.onChange=
 function update()
 {
     var strings=inStr.get().split('\n');
-
+    var num=num=Math.max(0,Math.floor(inNum.get())+1);
 
     if(inRev.get())
     {
-        var num=inNum.get();
         if(strings.length>num)
         {
             for(var i=0;i<num;i++)

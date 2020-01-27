@@ -1,0 +1,42 @@
+{
+    "id": "fcf0f2a3-42db-485c-8c0b-15c5eb1f18c7",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1580144475278
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1580144520884,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Num Lines",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Reverse",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Force Num Lines",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.LimitLineBreaks_v2"
+    }
+}
