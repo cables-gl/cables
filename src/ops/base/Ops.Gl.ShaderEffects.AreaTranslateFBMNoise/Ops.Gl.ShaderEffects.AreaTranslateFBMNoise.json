@@ -1,0 +1,88 @@
+{
+    "authorName": "pandur",
+    "id": "e755e88e-a2a7-4db2-84b3-0e76c423bdb6",
+    "created": 1575287922281,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "5",
+                "name": "Mode"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Noise Scale",
+                "group": "Noise",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Noise X",
+                "group": "Noise",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Noise Y",
+                "group": "Noise",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Noise Z",
+                "group": "Noise",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.AreaTranslateFBMNoise"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.AreaTranslationFBM renamed to Ops.Gl.ShaderEffects.AreaTranslateFBMNoise",
+            "author": "pandur",
+            "date": 1575370418046
+        }
+    ]
+}

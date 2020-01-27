@@ -1,6 +1,6 @@
 const
     inTrigger=op.inTrigger("Trigger"),
-    inActive=op.inBool("Active",false),
+    inActive=op.inBool("Active",true),
     inWhat=op.inSwitch("Force",['Resolution','Aspect Ratio'],'Resolution'),
     inCenter=op.inBool("Center In Parent",true),
     inWidth=op.inInt("Width",300),

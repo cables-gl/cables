@@ -15,8 +15,11 @@ inRev.onChange=
 function update()
 {
     var strings=inStr.get().split('\n');
+    const num=Math.min(Math.max(0, 16, inNum.get()));
+    // const num=Math.floor(inNum.get());
+    //result.set( Math.min(Math.max(val.get(), min.get()), max.get()));
+    op.log("num is " + num);
 
-    const num=inNum.get();
     if(inRev.get())
     {
         if(strings.length>num)

@@ -33,5 +33,33 @@
         ],
         "name": "Ops.Gl.Matrix.ScreenCoordinates"
     },
-    "summary": "screen/pixel coordinates of the current transform"
+    "summary": "screen/pixel coordinates of the current transform",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "X",
+                "text": "X coordinate"
+            },
+            {
+                "name": "Y",
+                "text": "Y coordinate"
+            },
+            {
+                "name": "Visible",
+                "text": "Boolean - is the shape on the screen"
+            }
+        ]
+    }
 }

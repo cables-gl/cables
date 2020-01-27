@@ -1,0 +1,52 @@
+{
+    "id": "fc235cb7-5c9e-478b-aa6d-454c3811e0a0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1567852659722
+        },
+        {
+            "message": "Ops.Admin.PosenetJoints renamed to Ops.Admin.PosenetPart",
+            "author": "pandur",
+            "date": 1567868649043
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1567852709736,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Pose"
+            },
+            {
+                "type": "0",
+                "name": "Part",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Pose Out"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Score",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Admin.PosenetPart"
+    }
+}

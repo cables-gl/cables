@@ -1,0 +1,101 @@
+{
+    "authorName": "pandur",
+    "id": "d3114ea4-9202-45ca-8fb2-415c5ce48ede",
+    "created": 1575284644612,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smooth",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "group": "Area Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "group": "Area Position",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.AreaTranslateMeshes"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.AreaTranslateObjects renamed to Ops.Gl.ShaderEffects.AreaTranslateMeshes",
+            "author": "pandur",
+            "date": 1575370353668
+        }
+    ],
+    "summary": "Change the position of all meshes inside of the area of influence",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Size",
+                "text": "Size of area to influence meshes with"
+            },
+            {
+                "name": "Strength",
+                "text": "Strength of effect"
+            },
+            {
+                "name": "Smooth",
+                "text": "Reduces the strength factor when further from the center of the area"
+            },
+            {
+                "name": "x",
+                "text": "X position of the area"
+            },
+            {
+                "name": "y",
+                "text": "Y position of the area"
+            },
+            {
+                "name": "z",
+                "text": "Z position of the area"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}

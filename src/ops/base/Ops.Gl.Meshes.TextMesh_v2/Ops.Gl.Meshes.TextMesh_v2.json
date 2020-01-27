@@ -102,7 +102,7 @@
         ],
         "name": "Ops.Gl.Meshes.TextMesh_v2"
     },
-    "summary": "Draws textin 3d space",
+    "summary": "Draws text in 3d space",
     "docs": {
         "ports": [
             {
@@ -111,7 +111,7 @@
             },
             {
                 "name": "Text",
-                "text": "String"
+                "text": "String to display"
             },
             {
                 "name": "Scale",
@@ -136,6 +136,10 @@
             {
                 "name": "Letter Spacing",
                 "text": "Space between each letter"
+            },
+            {
+                "name": "Texture Mask",
+                "text": "Texture to mask out text"
             },
             {
                 "name": "r",

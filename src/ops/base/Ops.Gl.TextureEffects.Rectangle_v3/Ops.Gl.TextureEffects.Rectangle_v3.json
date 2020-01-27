@@ -1,0 +1,172 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "roundness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "group": "Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Rectangle_v3"
+    },
+    "authorName": "pandur",
+    "id": "6570ce79-8940-4684-80f1-ff42ce6190e2",
+    "created": 1575468429195,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Rectangle2d2 renamed to Ops.Gl.TextureEffects.Rectangle_v3",
+            "author": "pandur",
+            "date": 1575469559697
+        }
+    ],
+    "summary": "Draw a 2D rectangle with controllable parameters",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blend mode to apply"
+            },
+            {
+                "name": "Amount",
+                "text": "Blend amount"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the rectangle"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the rectangle"
+            },
+            {
+                "name": "Aspect Ratio",
+                "text": "Aspect ratio of the rectangle"
+            },
+            {
+                "name": "X",
+                "text": "The x position of the rectangle"
+            },
+            {
+                "name": "Y",
+                "text": "The y position of the rectangle"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotates the rectangle"
+            },
+            {
+                "name": "roundness",
+                "text": "Softens the 4 corners"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
+}
