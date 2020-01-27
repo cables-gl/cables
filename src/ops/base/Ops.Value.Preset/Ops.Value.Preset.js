@@ -31,8 +31,8 @@ presetUpdate.setUiAttribs({"hidePort":true});
 presetDelete.setUiAttribs({"hidePort":true});
 presetNames.setUiAttribs({"showIndex":true});
 presetCreate.setUiAttribs({"buttonTitle":"Create New Preset"});
-presetDelete.setUiAttribs({"buttonTitleClass":"smallbutton"});
-presetRename.setUiAttribs({"buttonTitleClass":"smallbutton"});
+presetDelete.setUiAttribs({"buttonTitleClass":"button-small"});
+presetRename.setUiAttribs({"buttonTitleClass":"button-small"});
 
 presetNames.onChange=updatePreset;
 inInterPolate.onChange=updateInterpolation;
