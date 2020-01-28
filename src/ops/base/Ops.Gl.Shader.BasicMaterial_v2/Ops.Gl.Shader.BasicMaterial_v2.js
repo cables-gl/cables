@@ -88,7 +88,7 @@ op.setPortGroup("Color",[r,g,b,a]);
             diffuseOffsetY.setUiAttribs({greyout:true});
             colorizeTexture.setUiAttribs({greyout:true});
         }
-    };
+    }
 
 const colorizeTexture=op.inValueBool("colorizeTexture",false);
 
