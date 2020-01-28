@@ -884,6 +884,7 @@ Shader.prototype._bindTextures=function()
 Shader.prototype.pushTexture=function(uniform,t,type)
 {
     if(!uniform) throw(new Error('no uniform given to texturestack'));
+    if(!t) throw(new Error('no texture given to texturestack'));
 
     // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
 
