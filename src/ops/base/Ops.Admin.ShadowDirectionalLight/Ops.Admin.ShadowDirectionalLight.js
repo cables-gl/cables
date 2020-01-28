@@ -15,7 +15,9 @@ function Light(config) {
      this.castShadow = config.castShadow || 0;
      return this;
 }
+cgl.addEventListener("resize", () => op.log("canvas resized."));
 
+// * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 3);
@@ -93,21 +95,6 @@ const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
 
 
-// * FRAMEBUFFER *
-var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
-else {
-    fb = new CGL.Framebuffer2(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
-        // multisampling: true,
-        isFloatingPointTexture:true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
-    });
-}
-
-
 // * SHADER *
 const shader = new CGL.Shader(cgl, "shadowDirLight");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
@@ -116,12 +103,46 @@ shader.setSource(attachments.dirlight_shadowpass_vert, attachments.dirlight_shad
 const blurShader = new CGL.Shader(cgl, "shadowBlur");
 blurShader.setSource(attachments.dirlight_blur_vert, attachments.dirlight_blur_frag);
 
-var effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
 var texelSize = 1/Number(inMapSize.get());
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
 const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
 const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
+
+// * FRAMEBUFFER *
+var fb = null;
+const IS_WEBGL_1 = cgl.glVersion == 1;
+
+if (IS_WEBGL_1) {
+    cgl.gl.getExtension('OES_texture_float');
+    cgl.gl.getExtension('OES_texture_float_linear');
+    cgl.gl.getExtension('OES_texture_half_float');
+    cgl.gl.getExtension('OES_texture_half_float_linear');
+
+    shader.enableExtension("GL_OES_standard_derivatives");
+    shader.enableExtension("GL_OES_texture_float");
+    shader.enableExtension("GL_OES_texture_float_linear");
+    shader.enableExtension("GL_OES_texture_half_float");
+    shader.enableExtension("GL_OES_texture_half_float_linear");
+
+
+    fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE
+    });
+}
+else {
+    fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
+    });
+}
+var effect = new CGL.TextureEffect(cgl, {
+    isFloatingPointTexture: true,
+    filter: CGL.Texture.FILTER_LINEAR,
+    wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
+});
 
 
 const light = new Light({
@@ -133,6 +154,8 @@ const light = new Light({
     radius: null,
     falloff: null,
 });
+
+op.log("aminakoyum", cgl.gl.getSupportedExtensions());
 
 function updateBuffers() {
     const MSAA = Number(inMSAA.get().charAt(0));
@@ -154,7 +177,7 @@ function updateBuffers() {
 
     const mapSize = Number(inMapSize.get());
     const textureOptions = {
-        isFloatingPointTexture: cgl.glVersion === 2,
+        isFloatingPointTexture: true,
         filter: filterType,
     };
 
@@ -162,8 +185,12 @@ function updateBuffers() {
     if (MSAA) Object.assign(textureOptions, { multisampling: true, multisamplingSamples: MSAA });
     if (anisotropicFactor !== undefined) Object.assign(textureOptions, { anisotropic: anisotropicFactor });
 
-    fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
-    effect = new CGL.TextureEffect(cgl, textureOptions);
+    if (cgl.glVersion == 1) {
+        fb = new CGL.Framebuffer(cgl, mapSize, mapSize, textureOptions);
+    } else {
+        fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
+        effect = new CGL.TextureEffect(cgl, textureOptions);
+    }
 }
 
 inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
@@ -308,7 +335,7 @@ function renderShadowMap() {
     cgl.pushViewMatrix();
     cgl.pushPMatrix();
 
-    fb.renderStart();
+    fb.renderStart(cgl);
     /* */
     // * calculate matrices & camPos vector
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
@@ -325,7 +352,7 @@ function renderShadowMap() {
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
     outTrigger.trigger();
 
-    fb.renderEnd();
+    fb.renderEnd(cgl);
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -389,7 +416,7 @@ inTrigger.onTriggered = function() {
                 // NOTE: blur is still very cpu intensive... idk why
                 // better with jsut 2 color channels
 
-                if (inBlur.get() > 0) renderBlur();
+                if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
 
                 cgl.gl.colorMask(true,true,true,true);
 
