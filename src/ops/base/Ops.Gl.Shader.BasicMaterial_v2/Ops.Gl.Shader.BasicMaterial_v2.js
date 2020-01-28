@@ -9,17 +9,17 @@ op.toWorkPortsNeedToBeLinked(render);
 
 const shader=new CGL.Shader(cgl,"basicmaterialnew");
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.bindTextures=bindTextures;
+// shader.bindTextures=bindTextures;
 shader.setSource(attachments.basicmaterial_vert,attachments.basicmaterial_frag);
 shaderOut.set(shader);
 
 render.onTriggered=doRender;
 
-function bindTextures()
-{
-    // if(diffuseTexture.get()) cgl.setTexture(0, diffuseTexture.get().tex);
-    // if(textureOpacity.get()) cgl.setTexture(1, textureOpacity.get().tex);
-}
+// function bindTextures()
+// {
+//     // if(diffuseTexture.get()) cgl.setTexture(0, diffuseTexture.get().tex);
+//     // if(textureOpacity.get()) cgl.setTexture(1, textureOpacity.get().tex);
+// }
 
 op.preRender=function()
 {
@@ -32,9 +32,11 @@ function doRender()
     if(!shader)return;
 
     cgl.setShader(shader);
-    shader.bindTextures();
-    if(diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
-    if(textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
+    // shader.bindTextures();
+    if(diffuseTextureUniform && diffuseTexture.get())
+        shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
+    if(textureOpacityUniform && textureOpacity.get())
+        shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
     trigger.trigger();
 
     shader.popTextures();
@@ -57,7 +59,7 @@ op.setPortGroup("Color",[r,g,b,a]);
 
     var diffuseTexture=op.inTexture("texture");
     var diffuseTextureUniform=null;
-    shader.bindTextures=bindTextures;
+    // shader.bindTextures=bindTextures;
 
     diffuseTexture.onChange=updateDiffuseTexture;
 
