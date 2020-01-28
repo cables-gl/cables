@@ -102,6 +102,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Specular Model index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Specular Model",
                 "group": "Specular"
@@ -201,6 +206,11 @@
                 "name": "Emissive Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
             },
             {
                 "type": "5",
