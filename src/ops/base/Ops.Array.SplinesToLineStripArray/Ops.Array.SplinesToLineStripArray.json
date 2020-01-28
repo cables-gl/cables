@@ -35,6 +35,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     }
 }

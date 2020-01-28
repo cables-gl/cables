@@ -18,38 +18,25 @@
             },
             {
                 "type": "0",
+                "name": "Comparison mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Condition value",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Between value high",
+                "name": "Max",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Comparison mode",
-                "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "0",
-                "name": "Result number",
+                "name": "Result",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Result boolean",
-                "subType": "boolean"
-            },
-            {
-                "type": "1",
-                "name": "Trigger true"
-            },
-            {
-                "type": "1",
-                "name": "Trigger false"
             }
         ],
         "name": "Ops.Math.Compare.CompareNumbers"

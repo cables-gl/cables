@@ -90,19 +90,31 @@
         "ports": [
             {
                 "name": "render",
-                "text": "TRigegr in"
+                "text": "Trigger in"
+            },
+            {
+                "name": "Invert",
+                "text": "Invert area "
             },
             {
                 "name": "Area",
-                "text": "Sphere, Axis X Y or Z, Axis XY or XZ, Axis X Y or Z infinite"
+                "text": "Sphere, Box, Axis X Y or Z, Axis XY or XZ, Axis X Y or Z infinite"
             },
             {
                 "name": "Size",
                 "text": "Size of area"
             },
             {
-                "name": "Invert",
-                "text": "Invert area "
+                "name": "Size X",
+                "text": "Size of the X axis"
+            },
+            {
+                "name": "Size Y",
+                "text": "Size of the Y axis"
+            },
+            {
+                "name": "Size Z",
+                "text": "Size of the Z axis"
             },
             {
                 "name": "Repeat",
@@ -114,15 +126,15 @@
             },
             {
                 "name": "x",
-                "text": "Moves are on the X axis"
+                "text": "Moves the X axis"
             },
             {
                 "name": "y",
-                "text": "Moves are on the Y axis"
+                "text": "Moves the Y axis"
             },
             {
                 "name": "z",
-                "text": "Moves are on the Z axis"
+                "text": "Moves the Z axis"
             },
             {
                 "name": "WorldSpace",
@@ -141,8 +153,8 @@
             "date": 1554653768876
         }
     ],
-    "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "youtubeids": []
 }

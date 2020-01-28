@@ -2,7 +2,9 @@ const exe=op.inTriggerButton("exe"),
     array=op.inArray("array"),
     index=op.inValueInt("index"),
     value=op.inArray("new Array"),
+    triggerOut = op.outTrigger("Trigger out"),
     values=op.outArray("values");
+
 
 values.ignoreValueSerialize=true;
 
@@ -14,6 +16,7 @@ function updateIndex()
 
 function update()
 {
+    triggerOut.trigger();
     if(!array.get())return;
     array.get()[index.get()]=value.get();
 

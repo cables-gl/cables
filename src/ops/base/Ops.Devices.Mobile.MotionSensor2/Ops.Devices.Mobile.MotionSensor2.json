@@ -1,0 +1,77 @@
+{
+    "id": "f4102f07-e5ff-4c1e-ac5b-6a4758b81727",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1574870824963
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1574870880964,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Mul Orientation",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Request Permissions"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Orientation Alpha",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Beta",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Orientation Gamma",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration X no gravity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Y no gravity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Acceleration Z no gravity",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "name": "Ops.Devices.Mobile.MotionSensor2"
+    }
+}

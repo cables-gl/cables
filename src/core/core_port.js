@@ -536,6 +536,7 @@ Port.prototype.execute = function ()
 Port.prototype.setVariableName = function (n)
 {
     this._useVariableName=n;
+
 }
 
 Port.prototype.getVariableName = function ()
@@ -631,6 +632,10 @@ Port.prototype.isLinked = function ()
     return this.links.length > 0;
 };
 
+Port.prototype.isBoundToVar = function ()
+{
+    return this._useVariableName!=null;
+};
 /**
  * @function isAnimated
  * @memberof Port
@@ -730,8 +735,10 @@ class SwitchPort extends Port
             const values = uiAttribs.values;
             if(!values)
             {
-                console.log("has no values",this);
+                console.log("has no values");
+                return;
             }
+
             let intValue = Math.floor(value);
 
             intValue=Math.min(intValue,values.length - 1);
@@ -740,7 +747,7 @@ class SwitchPort extends Port
             numberPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if(this.parent.patch.isEditorMode() && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+            if(this.parent.patch.isEditorMode() && window.gui && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
     }
 }

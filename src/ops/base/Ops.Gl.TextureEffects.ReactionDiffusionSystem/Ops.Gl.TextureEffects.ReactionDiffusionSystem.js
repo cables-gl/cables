@@ -167,8 +167,8 @@ function initFb() {
     var h = inHeight.get();
 
     // var filter = CGL.Texture.FILTER_NEAREST;
-    // var filter = CGL.Texture.FILTER_LINEAR;
-    var filter = CGL.Texture.FILTER_MIPMAP;
+    var filter = CGL.Texture.FILTER_LINEAR;
+    // var filter = CGL.Texture.FILTER_MIPMAP;
     // if(tfilter.get()=='linear') filter=CGL.Texture.FILTER_LINEAR;
     //     else if(tfilter.get()=='mipmap') filter=CGL.Texture.FILTER_MIPMAP;
 

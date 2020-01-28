@@ -54,6 +54,35 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Position",
+                "text": "Relative or absolute mode"
+            },
+            {
+                "name": "Element",
+                "text": "Element object input"
+            },
+            {
+                "name": "x",
+                "text": "Element X position - determined by position parameter"
+            },
+            {
+                "name": "y",
+                "text": "Element Y position - determined by position parameter"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the element "
+            },
+            {
+                "name": "Height",
+                "text": "Height of the element"
+            }
+        ]
     }
 }

@@ -92,6 +92,7 @@ function setSelectedProperty() {
 function onInput(ev) {
     valuePort.set(ev.target.value);
     outIndex.set(options.indexOf(ev.target.value));
+
 }
 
 function onDefaultValueChanged() {

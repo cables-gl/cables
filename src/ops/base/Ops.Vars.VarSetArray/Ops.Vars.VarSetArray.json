@@ -11,10 +11,11 @@
             },
             {
                 "type": "0",
-                "name": "Variable"
+                "name": "Variable",
+                "subType": "string"
             }
         ],
-        "name": "Ops.Vars.SetVariableArray"
+        "name": "Ops.Vars.VarSetArray"
     },
     "summary": "Set a variable array",
     "changelog": [

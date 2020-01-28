@@ -86,6 +86,10 @@
                 "text": "Change rendering of images with alpha channel"
             },
             {
+                "name": "Anisotropic",
+                "text": "Ansiotropic filter. See: (https://www.gamespot.com/articles/what-is-anisotropic-filtering-pc-graphics-settings/1100-6452221/)"
+            },
+            {
                 "name": "texture",
                 "text": "The texture object. To be used in e.g. Material ops."
             },

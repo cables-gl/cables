@@ -95,6 +95,11 @@
             },
             {
                 "type": "0",
+                "name": "projectCoords index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "projectCoords",
                 "subType": "string"
             },
@@ -102,6 +107,11 @@
                 "type": "0",
                 "name": "Screen Space Normals",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
             },
             {
                 "type": "5",

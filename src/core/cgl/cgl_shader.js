@@ -843,17 +843,30 @@ Shader.prototype.addAttribute = function(attr) {
 
 Shader.prototype._bindTextures=function()
 {
+    if(this._textureStackTex.length>this.maxTextureUnits)
+    {
+        console.log("[shader._bindTextures] too many textures bound",this._textureStackTex.length+'/'+this._cgl.maxTextureUnits);
+    }
+
     for(var i=0;i<this._textureStackTex.length;i++)
     {
-        this._textureStackUni[i].setValue(i);
-        // console.log(i, this._textureStackUni[i] );
-        this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+        if(!this._textureStackUni[i])
+        {
+            // throw(new Error('no uniform given to texturestack'));
+            console.log('no uniform for pushtexture',this._name);
+            this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+        }
+        else
+        {
+            this._textureStackUni[i].setValue(i);
+            this._cgl.setTexture(i,this._textureStackTex[i],this._textureStackType[i]);
+        }
     }
 
 }
 
 /**
- * pushs a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
+ * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
  * @param {uniform} texture uniform
  * @param {texture} texture
  * @param {type} texture type, can be ignored when TEXTURE_2D
@@ -863,6 +876,8 @@ Shader.prototype._bindTextures=function()
  */
 Shader.prototype.pushTexture=function(uniform,t,type)
 {
+    if(!uniform) throw(new Error('no uniform given to texturestack'));
+
     this._textureStackUni.push(uniform);
     this._textureStackTex.push(t);
     this._textureStackType.push(type);

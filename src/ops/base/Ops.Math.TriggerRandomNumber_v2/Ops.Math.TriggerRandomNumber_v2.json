@@ -1,57 +1,49 @@
 {
-    "id": "00aaeeb2-7956-4076-b01f-06b42120ecd9",
+    "id": "26f446cc-9107-4164-8209-5254487fa132",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1573218091032
+            "date": 1579793372912
         }
     ],
     "authorName": "pandur",
-    "created": 1573218144449,
+    "created": 1579793391418,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Generate"
             },
             {
                 "type": "0",
-                "name": "X",
+                "name": "min",
+                "group": "Value Range",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Y",
+                "name": "max",
+                "group": "Value Range",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Z",
-                "subType": "number"
+                "name": "Integer",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "next"
             },
             {
                 "type": "0",
-                "name": "Pos X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Z",
+                "name": "result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Position"
+        "name": "Ops.Math.TriggerRandomNumber_v2"
     }
 }
