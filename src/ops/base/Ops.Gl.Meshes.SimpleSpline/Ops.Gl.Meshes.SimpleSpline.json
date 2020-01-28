@@ -46,7 +46,36 @@
         "Spline"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Points",
+                "text": "Array in - needs to be in xyzxyzxyz format"
+            },
+            {
+                "name": "Num Points",
+                "text": "Amount of points to render - useful for drawing out lines "
+            },
+            {
+                "name": "Line Strip",
+                "text": "Changes rendering method to linestrip"
+            },
+            {
+                "name": "TexCoords",
+                "text": "Texture co-ordinates mode"
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry object out"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     },
     "issues": "",
     "relatedops": null,
