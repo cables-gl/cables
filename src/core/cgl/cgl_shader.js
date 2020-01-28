@@ -841,6 +841,7 @@ Shader.prototype.addAttribute = function(attr) {
     this._needsRecompile = true;
 };
 
+Shader.prototype.bindTextures=
 Shader.prototype._bindTextures=function()
 {
     if(this._textureStackTex.length>this.maxTextureUnits)
@@ -877,6 +878,8 @@ Shader.prototype._bindTextures=function()
 Shader.prototype.pushTexture=function(uniform,t,type)
 {
     if(!uniform) throw(new Error('no uniform given to texturestack'));
+
+    // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
 
     this._textureStackUni.push(uniform);
     this._textureStackTex.push(t);
