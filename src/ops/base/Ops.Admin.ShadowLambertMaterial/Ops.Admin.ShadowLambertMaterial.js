@@ -31,7 +31,7 @@ inAlgorithm.onChange = function() {
     algorithms.forEach(function(algorithm) {
         if (selectedAlgorithm === algorithm) {
             shader.define("MODE_" + algorithm.toUpperCase());
-            if (algorithm !== "Default") {
+            if (algorithm !== "Default" && algorithm !== "VSM") {
                 inSamples.setUiAttribs({ greyout: false });
             } else {
                 inSamples.setUiAttribs({ greyout: true });
@@ -103,6 +103,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
 shader.setSource(attachments.lambert_vert,attachments.lambert_frag);
 let shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 8);
 
+// cgl.setTexture(8, CGL.Texture.getEmptyTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
 var numLights=-1;
 
 const LIGHT_TYPES = { point: 0, directional: 1, spot: 2 };
@@ -211,17 +212,20 @@ var updateLights=function()
                                 lights[count].shadowBias.setValue(light.shadowBias);
 
                                 if (light.shadowMap) {
-                                    light.shadowMap.printInfo();
                                     if (!lights[count].shadowMap) {
                                         lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
-                                    cgl.setTexture(count, light.shadowMap.tex);
+                                    shader.pushTexture(lights[count].shadowMap, light.shadowMap.tex);
+                                    // cgl.setTexture(count, light.shadowMap.tex);
                                     lights[count].shadowMapWidth.setValue(light.shadowMap.width);
 
                                 } else if (light.shadowCubeMap) {
-                                    // if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', 8);
+                                    // if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', count);
                                     lights[count].nearFar.setValue(light.nearFar);
-                                    cgl.setTexture(8, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+
+                                    shader.pushTexture(lights[count].shadowMap, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+
+                                    // cgl.setTexture(8, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
                                     lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
                                 }
                             } else { // if castShadow = false, remove uniform.. should that be done?
@@ -241,7 +245,8 @@ var updateLights=function()
         }
     }
 };
-
+let shadowpasscount = 0;
+let normalpasscount = 0;
 execute.onTriggered=function()
 {
     if(!shader)
@@ -253,14 +258,16 @@ execute.onTriggered=function()
 
 
     if (cgl.shadowPass) {
+        if (shadowpasscount != 2) { op.log("ShadowPass!"); shadowpasscount++; }
         next.trigger();
     }
     else {
+        if (normalpasscount != 2) { op.log("NormalPass!"); normalpasscount++; }
         cgl.setShader(shader);
 
         updateLights();
         next.trigger();
-
+        shader.popTextures();
         cgl.setPreviousShader();
     }
 };

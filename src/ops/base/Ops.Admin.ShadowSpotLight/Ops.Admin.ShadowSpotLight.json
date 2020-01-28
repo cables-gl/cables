@@ -1,7 +1,7 @@
 {
     "authorName": "cables",
-    "id": "71aeca81-4045-49f9-9132-f3d044b0f61d",
-    "created": 1577752268563,
+    "id": "6a9182dd-7317-4aeb-85c5-5f2aef2d88e6",
+    "created": 1580225100838,
     "layout": {
         "portsIn": [
             {
@@ -220,12 +220,5 @@
             }
         ],
         "name": "Ops.Admin.ShadowSpotLight"
-    },
-    "changelog": [
-        {
-            "message": "Ops.User.cables.ShadowLambertSpotLight renamed to Ops.Admin.ShadowSpotLight",
-            "author": "cables",
-            "date": 1578416802499
-        }
-    ]
+    }
 }

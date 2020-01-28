@@ -15,6 +15,7 @@ function Light(config) {
      return this;
 }
 
+cgl.addEventListener("resize", () => op.log("canvas resized."));
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 
@@ -116,8 +117,6 @@ shader.setSource(attachments.spotlight_shadowpass_vert, attachments.spotlight_sh
 const blurShader = new CGL.Shader(cgl, "shadowSpotBlur");
 blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur_frag);
 
-var effect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-
 var texelSize = 1/Number(inMapSize.get());
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
 const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
@@ -127,11 +126,21 @@ const uniformLightPosition = new CGL.Uniform(shader, '3f', "lightPosition", vec3
 
 // * FRAMEBUFFER *
 var fb = null;
-if (cgl.glVersion == 1) {
-    op.log("ADJAKSDJASD", cgl.glVersion);
+let x, y;
+
+const IS_WEBGL_1 = cgl.glVersion == 1;
+
+if (IS_WEBGL_1) {
+    cgl.gl.getExtension('OES_texture_float');
+    cgl.gl.getExtension('OES_texture_float_linear');
+    cgl.gl.getExtension('OES_texture_half_float');
+    cgl.gl.getExtension('OES_texture_half_float_linear');
+
     shader.enableExtension("GL_OES_standard_derivatives");
     shader.enableExtension("GL_OES_texture_float");
     shader.enableExtension("GL_OES_texture_float_linear");
+    shader.enableExtension("GL_OES_texture_half_float");
+    shader.enableExtension("GL_OES_texture_half_float_linear");
     /*
     cgl.gl.getExtension("OES_standard_derivatives");
     cgl.gl.getExtension('EXT_shader_texture_lod');
@@ -139,15 +148,21 @@ if (cgl.glVersion == 1) {
     fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
         isFloatingPointTexture: true,
         filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
 }
 else {
     fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
-        isFloatingPointTexture:true,
-         filter: CGL.Texture.FILTER_LINEAR,
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
     });
 }
-
+var effect = new CGL.TextureEffect(cgl, {
+    isFloatingPointTexture: true ,
+    filter: CGL.Texture.FILTER_LINEAR,
+    wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
+});
 op.log("aminakoyum", cgl.gl.getSupportedExtensions());
 
 function updateBuffers() {
@@ -301,7 +316,7 @@ function updateProjectionMatrix() {
         mat4.perspective(
         lightProjectionMatrix,
         //CGL.DEG2RAD * inFOV.get(),
-        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
@@ -482,7 +497,7 @@ inTrigger.onTriggered = function() {
 
                 // NOTE: blur is still very cpu intensive... idk why
                 // cgl.gl.colorMask(true,true,false,false);
-                // if (inBlur.get() > 0) renderBlur();
+                if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
 
