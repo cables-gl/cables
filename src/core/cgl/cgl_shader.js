@@ -851,6 +851,12 @@ Shader.prototype._bindTextures=function()
 
     for(var i=0;i<this._textureStackTex.length;i++)
     {
+        if(!this._textureStackTex[i])
+        {
+            console.log('no texture for pushtexture',this._name);
+
+        }
+        else
         if(!this._textureStackUni[i])
         {
             // throw(new Error('no uniform given to texturestack'));
