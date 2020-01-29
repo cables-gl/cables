@@ -23,31 +23,37 @@
             {
                 "type": "0",
                 "name": "r",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "g",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "b",
+                "group": "Color",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "x",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "y",
+                "group": "Position",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "z",
+                "group": "Position",
                 "subType": "number"
             }
         ],
@@ -63,5 +69,53 @@
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "3eeb7a13-339c-4409-9de7-3dfcab303663",
-    "created": 1505485212802
+    "created": 1505485212802,
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Scale",
+                "text": "Noise scale"
+            },
+            {
+                "name": "Amount",
+                "text": "Blend amount"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "x",
+                "text": "X position"
+            },
+            {
+                "name": "y",
+                "text": "Y position"
+            },
+            {
+                "name": "z",
+                "text": "Z position"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

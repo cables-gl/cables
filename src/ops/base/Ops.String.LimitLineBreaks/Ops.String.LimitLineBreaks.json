@@ -45,6 +45,23 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String",
+                "text": "String input"
+            },
+            {
+                "name": "Num Lines",
+                "text": "Number of lines to display"
+            },
+            {
+                "name": "Reverse",
+                "text": "reverse lines"
+            },
+            {
+                "name": "Result",
+                "text": "String out"
+            }
+        ]
     }
 }

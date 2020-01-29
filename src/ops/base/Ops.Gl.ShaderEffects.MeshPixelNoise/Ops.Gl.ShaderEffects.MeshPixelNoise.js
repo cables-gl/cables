@@ -9,12 +9,13 @@ const
     r = op.inValueSlider("r",0),
     g = op.inValueSlider("g",0),
     b = op.inValueSlider("b",0),
-    x = op.inValueSlider("x",0),
-    y = op.inValueSlider("y",0),
-    z = op.inValueSlider("z",0);
+    x = op.inFloat("x",0),
+    y = op.inFloat("y",0),
+    z = op.inFloat("z",0);
 r.setUiAttribs({ colorPick: true });
 
-
+op.setPortGroup("Color",[r,g,b]);
+op.setPortGroup("Position",[x,y,z]);
 const cgl=op.patch.cgl;
 var shader=null;
 var moduleFrag=null;

@@ -71,6 +71,18 @@
                 "text": "The default text in the input field"
             },
             {
+                "name": "TextArea",
+                "text": "Enables a multi line input field"
+            },
+            {
+                "name": "Grey Out",
+                "text": "Grey out text input area"
+            },
+            {
+                "name": "Visible",
+                "text": "Disable visibility for text input field"
+            },
+            {
                 "name": "Children",
                 "text": "In case you want to add other Sidebar items below"
             },

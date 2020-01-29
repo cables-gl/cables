@@ -35,6 +35,19 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "JSON String",
+                "text": "Json string in"
+            },
+            {
+                "name": "Result",
+                "text": "Object out"
+            },
+            {
+                "name": "Valid",
+                "text": "Is true if the key is found"
+            }
+        ]
     }
 }

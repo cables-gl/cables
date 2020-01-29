@@ -151,6 +151,16 @@
             "message": "added repeat mode and diagonal axis",
             "author": "pandur",
             "date": 1554653768876
+        },
+        {
+            "message": "added box shape ",
+            "author": "andro",
+            "date": 1580204731724
+        },
+        {
+            "message": "scale area per axis",
+            "author": "andro",
+            "date": 1580204738758
         }
     ],
     "issues": "",

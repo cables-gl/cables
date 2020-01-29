@@ -54,9 +54,45 @@
     "authorName": "pandur",
     "id": "4e96d5a2-a1ec-4f83-954d-7c34a9021e9c",
     "created": 1512035143187,
-    "youtubeid": "1BtgdAfBLlY",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "segments",
+                "text": "Amount of segments to render"
+            },
+            {
+                "name": "radius",
+                "text": "Radius of the transform from the center"
+            },
+            {
+                "name": "percent",
+                "text": "Percentage of segments to render "
+            },
+            {
+                "name": "Absolute",
+                "text": "Mirror the segments with absolute co-ordinates"
+            },
+            {
+                "name": "Flip",
+                "text": "Flip the segments"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate each segment with the transform"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "index",
+                "text": "index number of each transform"
+            }
+        ]
     },
     "collections": [
         "transform"
@@ -68,5 +104,9 @@
             "author": "pandur",
             "date": 1574692630839
         }
+    ],
+    "issues": "",
+    "youtubeids": [
+        "1BtgdAfBLlY"
     ]
 }
