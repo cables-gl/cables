@@ -35,7 +35,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,_port4)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4)
 {
     this._loc = -1;
     this._type = __type;
@@ -66,6 +66,21 @@ export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,
     {
         this.set = this.setValue = this.setValueI.bind(this);
         this.updateValue = this.updateValueI.bind(this);
+    }
+    else if (__type == "2i")
+    {
+        this.set = this.setValue = this.setValue2I.bind(this);
+        this.updateValue = this.updateValue2I.bind(this);
+    }
+    else if (__type == "3i")
+    {
+        this.set = this.setValue = this.setValue3I.bind(this);
+        this.updateValue = this.updateValue3I.bind(this);
+    }
+    else if (__type == "4i")
+    {
+        this.set = this.setValue = this.setValue4I.bind(this);
+        this.updateValue = this.updateValue4I.bind(this);
     }
     else if (__type == "b")
     {
@@ -110,27 +125,29 @@ export const Uniform = function (__shader, __type, __name, _value,_port2,_port3,
         this._value = this._port.get();
         this._port.onValueChanged = this.updateFromPort.bind(this);
 
-        if(_port2 && _port3 && _port4)
+        if (_port2 && _port3 && _port4)
         {
-            this._value=[0,0,0,0];
-            this._port2=_port2;
-            this._port3=_port3;
-            this._port4=_port4;
-            this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
+            this._value = [0, 0, 0, 0];
+            this._port2 = _port2;
+            this._port3 = _port3;
+            this._port4 = _port4;
+            this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(
+                this,
+            );
             this.updateFromPort4f();
         }
-        else if(_port2 && _port3)
+        else if (_port2 && _port3)
         {
-            this._value=[0,0,0];
-            this._port2=_port2;
-            this._port3=_port3;
+            this._value = [0, 0, 0];
+            this._port2 = _port2;
+            this._port3 = _port3;
             this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
             this.updateFromPort3f();
         }
-        else if(_port2)
+        else if (_port2)
         {
-            this._value=[0,0];
-            this._port2=_port2;
+            this._value = [0, 0];
+            this._port2 = _port2;
             this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
             this.updateFromPort2f();
         }
@@ -177,31 +194,29 @@ Uniform.prototype.getLoc = function ()
     return this._loc;
 };
 
-
 Uniform.prototype.updateFromPort4f = function ()
 {
-    this._value[0]=this._port.get();
-    this._value[1]=this._port2.get();
-    this._value[2]=this._port3.get();
-    this._value[3]=this._port4.get();
+    this._value[0] = this._port.get();
+    this._value[1] = this._port2.get();
+    this._value[2] = this._port3.get();
+    this._value[3] = this._port4.get();
     this.setValue(this._value);
 };
 
 Uniform.prototype.updateFromPort3f = function ()
 {
-    this._value[0]=this._port.get();
-    this._value[1]=this._port2.get();
-    this._value[2]=this._port3.get();
+    this._value[0] = this._port.get();
+    this._value[1] = this._port2.get();
+    this._value[2] = this._port3.get();
     this.setValue(this._value);
 };
 
 Uniform.prototype.updateFromPort2f = function ()
 {
-    this._value[0]=this._port.get();
-    this._value[1]=this._port2.get();
+    this._value[0] = this._port.get();
+    this._value[1] = this._port2.get();
     this.setValue(this._value);
 };
-
 
 Uniform.prototype.updateFromPort = function ()
 {
@@ -235,6 +250,49 @@ Uniform.prototype.updateValueI = function ()
     profileData.profileUniformCount++;
 };
 
+Uniform.prototype.updateValue2I = function ()
+{
+    if (!this._value) return;
+
+    if (this._loc == -1)
+    {
+        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        profileData.profileShaderGetUniform++;
+        profileData.profileShaderGetUniformName = this._name;
+    }
+
+    this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
+    this.needsUpdate = false;
+    profileData.profileUniformCount++;
+};
+
+Uniform.prototype.updateValue3I = function ()
+{
+    if (!this._value) return;
+    if (this._loc == -1)
+    {
+        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        profileData.profileShaderGetUniform++;
+        profileData.profileShaderGetUniformName = this._name;
+    }
+
+    this._shader.getCgl().gl.uniform3i(this._loc, this._value[0], this._value[1], this._value[2]);
+    this.needsUpdate = false;
+    profileData.profileUniformCount++;
+};
+
+Uniform.prototype.updateValue4I = function ()
+{
+    if (this._loc == -1)
+    {
+        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        profileData.profileShaderGetUniform++;
+        profileData.profileShaderGetUniformName = this._name;
+    }
+    this._shader.getCgl().gl.uniform4i(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
+    profileData.profileUniformCount++;
+};
+
 Uniform.prototype.setValueI = function (v)
 {
     if (v != this._value)
@@ -242,6 +300,49 @@ Uniform.prototype.setValueI = function (v)
         this.needsUpdate = true;
         this._value = v;
     }
+};
+
+Uniform.prototype.setValue2I = function (v)
+{
+    if (!v) return;
+    if (!this._oldValue)
+    {
+        this._oldValue = [v[0] - 1, 1];
+        this.needsUpdate = true;
+    }
+    else if (v[0] != this._oldValue[0] || v[1] != this._oldValue[1])
+    {
+        this._oldValue[0] = v[0];
+        this._oldValue[1] = v[1];
+        this.needsUpdate = true;
+    }
+
+    this._value = v;
+};
+
+Uniform.prototype.setValue3I = function (v)
+{
+    if (!v) return;
+    if (!this._oldValue)
+    {
+        this._oldValue = [v[0] - 1, 1, 2];
+        this.needsUpdate = true;
+    }
+    else if (v[0] != this._oldValue[0] || v[1] != this._oldValue[1] || v[2] != this._oldValue[2])
+    {
+        this._oldValue[0] = v[0];
+        this._oldValue[1] = v[1];
+        this._oldValue[2] = v[2];
+        this.needsUpdate = true;
+    }
+
+    this._value = v;
+};
+
+Uniform.prototype.setValue4I = function (v)
+{
+    this.needsUpdate = true;
+    this._value = v || vec4.create();
 };
 
 Uniform.prototype.updateValueBool = function ()
