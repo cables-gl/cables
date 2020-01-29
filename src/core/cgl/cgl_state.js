@@ -532,7 +532,7 @@ const Context = function (_patch)
         }
     };
 
-    this.saveScreenshot = function (filename, cb, pw, ph)
+    this.saveScreenshot = function (filename, cb, pw, ph,noclearalpha)
     {
         this.patch.renderOneFrame();
 
@@ -584,7 +584,7 @@ const Context = function (_patch)
             {
                 Log.log("screenshot: no blob");
             }
-        }.bind(this), true);
+        }.bind(this), noclearalpha);
     };
 };
 
