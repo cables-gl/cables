@@ -4,7 +4,6 @@
 #define DIRECTIONAL 1
 #define SPOT 2
 
-IN vec3 norm;
 IN vec4 modelPos;
 
 IN mat3 normalMatrix; // when instancing...
@@ -53,8 +52,8 @@ struct Light {
     vec4 lightProperties;
 
     #define TYPE x
-    #define CAST_SHADOW y;
-    vec2 typeCastShadow;
+    #define CAST_SHADOW y
+    ivec2 typeCastShadow;
     int type;
     int castShadow;
 
@@ -284,24 +283,24 @@ void main()
     for(int l=0;l<NUM_LIGHTS;l++)
     {
         vec3 lightDirection = normalize(lights[l].position - modelPos.xyz);
-        if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
+        if (lights[l].typeCastShadow.TYPE == DIRECTIONAL) lightDirection = lights[l].position;
 
 
         float lambert = 1.; // inout variable
         vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, materialColor.rgb, lambert);
 
-        // if (lights[l].type != 1) newColor*=getfallOff(light, length(lightModelDiff));
+        // if (lights[l].typeCastShadow.TYPE != 1) newColor*=getfallOff(light, length(lightModelDiff));
 
         diffuseColor *= lights[l].lightProperties.INTENSITY;
 
         #ifdef SHADOW_MAP
-            if (lights[l].castShadow == 1) {
+            if (lights[l].typeCastShadow.CAST_SHADOW == 1) {
                 vec2 shadowMapLookup = shadowCoords[l].xy / shadowCoords[l].w;
                 float shadowMapDepth = shadowCoords[l].z  / shadowCoords[l].w;
 
                 vec2 shadowMapSample = vec2(1.);
                 float cameraNear, cameraFar;
-                if (lights[l].type == POINT) {
+                if (lights[l].typeCastShadow.TYPE == POINT) {
                     cameraNear = lights[l].shadowProperties.NEAR; // uniforms
                     cameraFar =  lights[l].shadowProperties.FAR;
 
@@ -330,7 +329,7 @@ void main()
 
                     // modify bias according to slope of the surface
                     float bias = lights[l].shadowProperties.BIAS;
-                    if (lights[l].type != DIRECTIONAL) bias = clamp(lights[l].shadowProperties.BIAS * tan(acos(lambert)), 0., 0.1);
+                    if (lights[l].typeCastShadow.TYPE != DIRECTIONAL) bias = clamp(lights[l].shadowProperties.BIAS * tan(acos(lambert)), 0., 0.1);
                 #endif
 
                 #ifdef MODE_DEFAULT
@@ -338,7 +337,7 @@ void main()
 
                 #endif
                 #ifdef MODE_PCF
-                    if (lights[l].type == POINT) {
+                    if (lights[l].typeCastShadow.TYPE == POINT) {
                         diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);;
                     }
                     else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowProperties.MAP_SIZE, shadowMapDepth, bias);
@@ -349,7 +348,7 @@ void main()
                     #ifdef WEBGL1
                         FillPoissonArray();
                     #endif
-                    if (lights[l].type == POINT) diffuseColor *= ShadowFactorPointPoisson(shadowCubeMap, lightDirection, shadowMapDepth, bias);
+                    if (lights[l].typeCastShadow.TYPE == POINT) diffuseColor *= ShadowFactorPointPoisson(shadowCubeMap, lightDirection, shadowMapDepth, bias);
                     else diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
                 #endif
 
@@ -360,7 +359,7 @@ void main()
 
         #endif
 
-        if (lights[l].type == SPOT) {
+        if (lights[l].typeCastShadow.TYPE == SPOT) {
                 float spotIntensity = CalculateSpotLightEffect(
                     lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
                     lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,

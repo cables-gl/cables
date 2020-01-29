@@ -76,7 +76,9 @@ var outShader=op.outObject("Shader");
 outShader.set(shader);
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
-const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
+const MAX_UNIFORM_VERTEX = cgl.gl.getParameter(cgl.gl.MAX_VERTEX_UNIFORM_VECTORS);
+op.log("vertex max", MAX_UNIFORM_VERTEX);
+const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 2 : 16;
 const MAX_TEXTURE_UNITS = cgl.gl.getParameter(cgl.gl.MAX_TEXTURE_IMAGE_UNITS);
 const MAX_TEXTURE_SLOT = MAX_TEXTURE_UNITS - 1;
 
@@ -122,7 +124,7 @@ for(var i=0;i<MAX_LIGHTS;i++)
     lights[count].lightProperties = new CGL.Uniform(shader, '4f', 'lights['+count+'].lightProperties', [1,1,1,1]);
 
 
-    lights[count].typeCastShadow = new CGL.Uniform(shader, '2f', 'lights[' + count + '].typeCastShadow', [0, 0]);
+    lights[count].typeCastShadow = new CGL.Uniform(shader, '2i', 'lights[' + count + '].typeCastShadow', [0, 0]);
     lights[count].type=new CGL.Uniform(shader,'i','lights['+count+'].type',0);
     lights[count].castShadow=new CGL.Uniform(shader,'i','lights['+count+'].castShadow', 0);
 
@@ -241,7 +243,7 @@ var updateLights=function()
                             lights[count].conePointAt.setValue(light.conePointAt);
                             lights[count].spotProperties.setValue([light.cosConeAngle, light.cosConeAngleInner, light.spotExponent]);
 
-                            lights[count].typeCastShadow.setValue(LIGHT_TYPES[light.type], light.castShadow);
+                            lights[count].typeCastShadow.setValue([LIGHT_TYPES[light.type], light.castShadow]);
 
                             lights[count].type.setValue(LIGHT_TYPES[light.type]);
                             lights[count].castShadow.setValue(Number(light.castShadow));
@@ -252,7 +254,11 @@ var updateLights=function()
                                 if (light.lightMatrix) lightMatrices[count].setValue(light.lightMatrix);
                                 if (light.type !== "point") normalOffsets[count].setValue(light.normalOffset);
 
-                                lights[count].shadowProperties.setValue([light.nearFar[0], light.nearFar[1], light.shadowMap.width, light.shadowBias]);
+                                lights[count].shadowProperties.setValue([
+                                    light.nearFar[0],
+                                    light.nearFar[1],
+                                    light.type === "point" ? light.shadowCubeMap.width : light.shadowMap.width,
+                                    light.shadowBias]);
                                 /*
                                 lights[count].shadowBias.setValue(light.shadowBias);
                                 lights[count].nearFar.setValue(light.nearFar);
@@ -272,7 +278,7 @@ var updateLights=function()
                                     // shader.pushTexture(shadowCubeMap, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
 
                                     cgl.setTexture(MAX_TEXTURE_SLOT, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-                                    lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
+                                    // lights[count].shadowMapWidth.setValue(light.shadowCubeMap.width);
                                 }
                             } else { // if castShadow = false, remove uniform.. should that be done?
                                 if (lights[count].shadowMap) {
