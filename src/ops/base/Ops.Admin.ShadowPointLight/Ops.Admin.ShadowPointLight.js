@@ -128,15 +128,37 @@ const inLight = {
 
 // * FRAMEBUFFER *
 var fb = null;
-if(cgl.glVersion==1) fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()));
+const IS_WEBGL_1 = cgl.glVersion == 1;
+
+if (IS_WEBGL_1) {
+    /*
+    cgl.gl.getExtension('OES_texture_float');
+    cgl.gl.getExtension('OES_texture_float_linear');
+    cgl.gl.getExtension('OES_texture_half_float');
+    cgl.gl.getExtension('OES_texture_half_float_linear');
+*/
+    shader.enableExtension("GL_OES_standard_derivatives");
+    /*
+    shader.enableExtension("GL_OES_texture_float");
+    shader.enableExtension("GL_OES_texture_float_linear");
+    shader.enableExtension("GL_OES_texture_half_float");
+    shader.enableExtension("GL_OES_texture_half_float_linear");
+    */
+    /*
+    cgl.gl.getExtension("OES_standard_derivatives");
+    cgl.gl.getExtension('EXT_shader_texture_lod');
+    */
+    fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
+        isFloatingPointTexture: true,
+        filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE
+    });
+}
 else {
     fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
-        // multisampling: true,
         isFloatingPointTexture: true,
-        // multisampling:true,
-        //filter: CGL.Texture.FILTER_NEAREST
-         filter: CGL.Texture.FILTER_LINEAR,
-         //shadowMap:true
+        filter: CGL.Texture.FILTER_LINEAR,
+        wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
     });
 }
 
@@ -248,8 +270,8 @@ function initializeCubemap() {
     checkError(111);
 
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);  // create storage for the reflection map images
-    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     checkError(122);
@@ -262,7 +284,8 @@ function initializeCubemap() {
             gl.RGBA,
             Number(inMapSize.get()),
             Number(inMapSize.get()),
-            0, gl.RGBA,
+            0,
+            gl.RGBA,
             gl.UNSIGNED_BYTE,
             null
             );
@@ -299,13 +322,26 @@ function initializeCubemap() {
     cubemapInitialized = true;
      // cgl.resetViewPort();
 }
+let projectionShader = null;
+let cubeMapEffect = null;
+let uniformCubemap = null;
 
-const cubeMapEffect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
-const projectionShader = new CGL.Shader(cgl, "cubemapProjection");
-const uniformCubemap = new CGL.Uniform(projectionShader, 't', 'cubeMap', 1);
+cubeMapEffect = new CGL.TextureEffect(cgl, { isFloatingPointTexture: true });
+projectionShader = new CGL.Shader(cgl, "cubemapProjection");
+uniformCubemap = new CGL.Uniform(projectionShader, 't', 'cubeMap', 1);
 
 projectionShader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 projectionShader.setSource(projectionShader.getDefaultVertexShader(), attachments.cubemapprojection_frag);
+
+if (IS_WEBGL_1) {
+    /*
+    projectionShader.enableExtension("GL_OES_standard_derivatives");
+    projectionShader.enableExtension("GL_OES_texture_float");
+    projectionShader.enableExtension("GL_OES_texture_float_linear");
+    projectionShader.enableExtension("GL_OES_texture_half_float");
+    projectionShader.enableExtension("GL_OES_texture_half_float_linear");
+    */
+}
 
 function renderCubemapProjection() {
     if(!dynamicCubemap) return;

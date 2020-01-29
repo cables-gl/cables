@@ -13,6 +13,7 @@ function Light(config) {
      this.cosConeAngle = config.cosConeAngle || 0;
      this.conePointAt = config.conePointAt || [0, 0, 0];
      this.castShadow = config.castShadow || 0;
+     this.nearFar = [0,0];
      return this;
 }
 cgl.addEventListener("resize", () => op.log("canvas resized."));

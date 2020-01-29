@@ -30,73 +30,44 @@ float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator 
 float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
 float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
 
-#ifdef MODE_POISSON
-    vec2 poissonDisk[16] = vec2[](
-    vec2( -0.94201624, -0.39906216 ),
-    vec2( 0.94558609, -0.76890725 ),
-    vec2( -0.094184101, -0.92938870 ),
-    vec2( 0.34495938, 0.29387760 ),
-    vec2( -0.91588581, 0.45771432 ),
-    vec2( -0.81544232, -0.87912464 ),
-    vec2( -0.38277543, 0.27676845 ),
-    vec2( 0.97484398, 0.75648379 ),
-    vec2( 0.44323325, -0.97511554 ),
-    vec2( 0.53742981, -0.47373420 ),
-    vec2( -0.26496911, -0.41893023 ),
-    vec2( 0.79197514, 0.19090188 ),
-    vec2( -0.24188840, 0.99706507 ),
-    vec2( -0.81409955, 0.91437590 ),
-    vec2( 0.19984126, 0.78641367 ),
-    vec2( 0.14383161, -0.14100790 )
-    );
-#endif
-
-    const float POSITIVE_EXPONENT = 30.;
-    const float NEGATIVE_EXPONENT = 5.;
-
-    vec2 WarpDepth(float depth) {
-    float warpedDepth = 2. * depth - 1.; // rescale to [-1, 1]
-    float positiveExponent = exp(POSITIVE_EXPONENT * depth);
-    float negativeExponent = exp(-NEGATIVE_EXPONENT * depth);
-    return vec2(positiveExponent, negativeExponent);
-}
 #ifdef MODE_VSM
     float linstep(float value, float low, float high) {
         return clamp((value - low)/(high-low), 0., 1.);
     }
-    float GetEVSMExponent(float positiveExponent) {
-        return min(positiveExponent, 42.);
-    }
 #endif
 
 struct Light {
-  vec3 pos;
-  vec3 color;
-  vec3 conePointAt;
-  float cosConeAngle;
-  float cosConeAngleInner;
-  float spotExponent;
-  vec3 ambient;
-  vec3 specular;
-  float falloff;
-  float radius;
-  float mul;
-  int type;
-  vec2 nearFar;
-  int castShadow;
-  #ifdef SHADOW_MAP
-      sampler2D shadowMap;
-      float shadowMapWidth;
-      float shadowBias;
-      mat4 lightMatrix;
-  #endif
+    vec3 position;
+    vec3 color;
+    // * SPOT LIGHT * //
+    vec3 conePointAt;
+    #define COSCONEANGLE x
+    #define COSCONEANGLEINNER y
+    #define SPOTEXPONENT z
+    vec3 spotProperties;
+
+    #define INTENSITY x
+    #define ATTENUATION y
+    #define FALLOFF z
+    #define RADIUS w
+    vec4 lightProperties;
+
+    #define TYPE x
+    #define CAST_SHADOW y;
+    vec2 typeCastShadow;
+    int type;
+    int castShadow;
+
+    #ifdef SHADOW_MAP
+        sampler2D shadowMap;
+        #define NEAR x
+        #define FAR y
+        #define MAP_SIZE z
+        #define BIAS w
+        vec4 shadowProperties;
+    #endif
 };
 
-struct CubeMap { // hack to be able to use cube maps in arrays ? you cannot put 2 samplers in a struct somehow
-    samplerCube cubeMap;
-};
-
-UNI CubeMap shadowCubeMaps[NUM_LIGHTS];
 UNI Light lights[NUM_LIGHTS];
 /*
 float getfallOff(Light light,float distLight)
@@ -175,6 +146,51 @@ float getfallOff(Light light,float distLight)
 #endif
 
 #ifdef MODE_POISSON
+    #ifdef WEBGL2
+        vec2 poissonDisk[16] = vec2[16](
+        vec2( -0.94201624, -0.39906216 ),
+        vec2( 0.94558609, -0.76890725 ),
+        vec2( -0.094184101, -0.92938870 ),
+        vec2( 0.34495938, 0.29387760 ),
+        vec2( -0.91588581, 0.45771432 ),
+        vec2( -0.81544232, -0.87912464 ),
+        vec2( -0.38277543, 0.27676845 ),
+        vec2( 0.97484398, 0.75648379 ),
+        vec2( 0.44323325, -0.97511554 ),
+        vec2( 0.53742981, -0.47373420 ),
+        vec2( -0.26496911, -0.41893023 ),
+        vec2( 0.79197514, 0.19090188 ),
+        vec2( -0.24188840, 0.99706507 ),
+        vec2( -0.81409955, 0.91437590 ),
+        vec2( 0.19984126, 0.78641367 ),
+        vec2( 0.14383161, -0.14100790 )
+        );
+    #endif
+    #ifdef WEBGL1
+    int CALLED_FILL_POISSON_ARRAY = 0;
+    // cannot allocate arrays like above in webgl1
+        vec2 poissonDisk[16];
+        void FillPoissonArray() {
+            if (CALLED_FILL_POISSON_ARRAY == 1) return;
+            poissonDisk[0] = vec2( -0.94201624, -0.39906216 );
+            poissonDisk[1] = vec2( 0.94558609, -0.76890725 );
+            poissonDisk[2] = vec2( -0.094184101, -0.92938870 );
+            poissonDisk[3] = vec2( 0.34495938, 0.29387760 );
+            poissonDisk[4] = vec2( -0.91588581, 0.45771432 );
+            poissonDisk[5] = vec2( -0.81544232, -0.87912464 );
+            poissonDisk[6] = vec2( -0.38277543, 0.27676845 );
+            poissonDisk[7] = vec2( 0.97484398, 0.75648379 );
+            poissonDisk[8] = vec2( 0.44323325, -0.97511554 );
+            poissonDisk[9] = vec2( 0.53742981, -0.47373420 );
+            poissonDisk[10] = vec2( -0.26496911, -0.41893023 );
+            poissonDisk[11] = vec2( 0.79197514, 0.19090188 );
+            poissonDisk[12] = vec2( -0.24188840, 0.99706507 );
+            poissonDisk[13] = vec2( -0.81409955, 0.91437590 );
+            poissonDisk[14] = vec2( 0.19984126, 0.78641367 );
+            poissonDisk[15] = vec2( 0.14383161, -0.14100790);
+            CALLED_FILL_POISSON_ARRAY = 1;
+        }
+    #endif
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
     float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias) {
         float visibility = 1.;
@@ -267,8 +283,8 @@ void main()
 
     for(int l=0;l<NUM_LIGHTS;l++)
     {
-        vec3 lightDirection = normalize(lights[l].pos - modelPos.xyz);
-        if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].pos;
+        vec3 lightDirection = normalize(lights[l].position - modelPos.xyz);
+        if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
 
 
         float lambert = 1.; // inout variable
@@ -276,23 +292,20 @@ void main()
 
         // if (lights[l].type != 1) newColor*=getfallOff(light, length(lightModelDiff));
 
-        diffuseColor *= lights[l].mul;
+        diffuseColor *= lights[l].lightProperties.INTENSITY;
 
         #ifdef SHADOW_MAP
             if (lights[l].castShadow == 1) {
-                vec4 testCoord = lights[l].lightMatrix * modelPos;
-
-
                 vec2 shadowMapLookup = shadowCoords[l].xy / shadowCoords[l].w;
                 float shadowMapDepth = shadowCoords[l].z  / shadowCoords[l].w;
 
                 vec2 shadowMapSample = vec2(1.);
                 float cameraNear, cameraFar;
                 if (lights[l].type == POINT) {
-                    cameraNear = lights[l].nearFar.x; // uniforms
-                    cameraFar =  lights[l].nearFar.y;
+                    cameraNear = lights[l].shadowProperties.NEAR; // uniforms
+                    cameraFar =  lights[l].shadowProperties.FAR;
 
-                    float fromLightToFrag = (length(modelPos.xyz - lights[l].pos) - cameraNear) / (cameraFar - cameraNear);
+                    float fromLightToFrag = (length(modelPos.xyz - lights[l].position) - cameraNear) / (cameraFar - cameraNear);
 
                     #ifdef WEBGL2
                         shadowMapSample = texture(shadowCubeMap, -lightDirection).rg;
@@ -303,8 +316,6 @@ void main()
                     #endif
 
                     shadowMapDepth = fromLightToFrag;
-                    #ifdef MODE_VSM
-                    #endif
                 } else {
                     shadowMapSample = texture(lights[l].shadowMap, shadowMapLookup).rg;
                 }
@@ -318,8 +329,8 @@ void main()
                     // Receiver Plane Depth Bias [3][4]: The receiver plane is calculated to analytically find the ideal bias.
 
                     // modify bias according to slope of the surface
-                    float bias = lights[l].shadowBias;
-                    if (lights[l].type != DIRECTIONAL) bias = clamp(lights[l].shadowBias * tan(acos(lambert)), 0., 0.1);
+                    float bias = lights[l].shadowProperties.BIAS;
+                    if (lights[l].type != DIRECTIONAL) bias = clamp(lights[l].shadowProperties.BIAS * tan(acos(lambert)), 0., 0.1);
                 #endif
 
                 #ifdef MODE_DEFAULT
@@ -330,15 +341,20 @@ void main()
                     if (lights[l].type == POINT) {
                         diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);;
                     }
-                    else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowMapWidth, shadowMapDepth, bias);
+                    else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowProperties.MAP_SIZE, shadowMapDepth, bias);
                 #endif
 
+
                 #ifdef MODE_POISSON
+                    #ifdef WEBGL1
+                        FillPoissonArray();
+                    #endif
                     if (lights[l].type == POINT) diffuseColor *= ShadowFactorPointPoisson(shadowCubeMap, lightDirection, shadowMapDepth, bias);
                     else diffuseColor *= ShadowFactorPoisson(lights[l].shadowMap, shadowMapLookup, shadowMapDepth, bias);
                 #endif
+
                 #ifdef MODE_VSM
-                  diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowBias, shadowMapDepth);
+                    diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowProperties.BIAS, shadowMapDepth);
                 #endif
             }
 
@@ -346,8 +362,9 @@ void main()
 
         if (lights[l].type == SPOT) {
                 float spotIntensity = CalculateSpotLightEffect(
-                    lights[l].pos, lights[l].conePointAt, lights[l].cosConeAngle,
-                    lights[l].cosConeAngleInner, lights[l].spotExponent, lightDirection
+                    lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
+                    lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
+                    lightDirection
                 );
                 diffuseColor *= spotIntensity;
         }

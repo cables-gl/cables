@@ -86,9 +86,13 @@
             },
             {
                 "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Map Size",
-                "group": "Shadow Map Settings",
-                "subType": "number"
+                "group": "Shadow Map Settings"
             },
             {
                 "type": "0",
