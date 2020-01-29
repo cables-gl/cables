@@ -149,7 +149,84 @@
     "created": 1508327382364,
     "summary": "Easy to use image based lighting Material",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "MatCap",
+                "text": "texture in - should be matcap material format"
+            },
+            {
+                "name": "Diffuse",
+                "text": "Diffuse texture in"
+            },
+            {
+                "name": "Normal",
+                "text": "Normals texture in"
+            },
+            {
+                "name": "Specular",
+                "text": "Specular texture in"
+            },
+            {
+                "name": "Specular MatCap",
+                "text": "Specular matcap texture in"
+            },
+            {
+                "name": "AO Texture",
+                "text": "Ambient occlusion texture in"
+            },
+            {
+                "name": "Opacity Texture",
+                "text": "Opacity texture in - affected by texture opacity options"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "Opacity",
+                "text": "Opacity amount"
+            },
+            {
+                "name": "AO Intensity",
+                "text": "Ambient occlusion intensity"
+            },
+            {
+                "name": "Repeat X",
+                "text": "Repeat texture amount on the X axis"
+            },
+            {
+                "name": "Repeat Y",
+                "text": "Repeat texture amount on the Y axis"
+            },
+            {
+                "name": "Offset X",
+                "text": "Offset texture on X axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Offset texture on Y axis"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader out"
+            }
+        ]
     },
     "issues": "",
     "collections": [

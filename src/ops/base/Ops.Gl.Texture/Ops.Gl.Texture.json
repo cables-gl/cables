@@ -115,5 +115,12 @@
         "Ops.Gl.Textures.VideoTexture",
         "Ops.Gl.Textures.TextureSVG"
     ],
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "feature : added anisotropic texture filtering switch",
+            "author": "andro",
+            "date": 1580204688497
+        }
+    ]
 }

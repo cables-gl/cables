@@ -1,5 +1,5 @@
 var trigger=op.inTrigger("Trigger");
-var varname=op.inValueSelect("Named Trigger");
+var varname=op.inValueSelect("Named Trigger",[],"",true);
 
 varname.onChange=updateName;
 

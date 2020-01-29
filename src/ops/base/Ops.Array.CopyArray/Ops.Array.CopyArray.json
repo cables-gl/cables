@@ -35,5 +35,34 @@
             }
         ],
         "name": "Ops.Array.CopyArray"
+    },
+    "summary": "Copy an array with a trigger, reset to use a default array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "Trigger the op - make a copy"
+            },
+            {
+                "name": "Array",
+                "text": "Array in to copy"
+            },
+            {
+                "name": "Reset",
+                "text": "Reset the op - initialize to default array"
+            },
+            {
+                "name": "Default",
+                "text": "Default array if reset is triggered"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
     }
 }
