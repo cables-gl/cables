@@ -1,0 +1,32 @@
+{
+    "id": "c521f240-25bb-4486-bfb9-7c9651123811",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1580310541911
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1580310557179,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Max Line Chars",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StringBreak_v3"
+    }
+}
