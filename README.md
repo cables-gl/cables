@@ -6,9 +6,7 @@ how to don't get binary merge conflicts:
 `git config --global merge.ours.driver true`
 
 
-
-
-### docs 
+### docs
 
 #### build gitbook doc:
 
