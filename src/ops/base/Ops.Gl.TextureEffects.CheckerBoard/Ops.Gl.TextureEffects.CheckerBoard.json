@@ -7,6 +7,11 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
                 "subType": "string"
@@ -26,6 +31,11 @@
                 "type": "0",
                 "name": "Rotate",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Centered",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
