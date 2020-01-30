@@ -18,6 +18,7 @@ const
     outVersion=op.outNumber("GLTF Version"),
     outAnimLength=op.outNumber("Anim Length",0),
     outAnimTime=op.outNumber("Anim Time",0),
+    outJson=op.outObject("Json"),
     outAnimFinished=op.outTrigger("Finished");
 
 op.setPortGroup("Timing",[inTime,inTimeLine,inLoop]);
@@ -60,7 +61,6 @@ inExec.onTriggered=function()
 {
     if(inTimeLine.get()) time=op.patch.timer.getTime();
     else time=Math.max(0,inTime.get());
-
 
 
     if(inLoop.get())

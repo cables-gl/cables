@@ -142,6 +142,7 @@ function parseGltf(arrayBuffer)
     chunks.push(readChunk(dv,byteArray,arrayBuffer,pos));
     pos+=chunks[0].size+CHUNK_HEADER_SIZE;
     gltf.json=chunks[0].data;
+    outJson.set(gltf.json);
 
     chunks.push(readChunk(dv,byteArray,arrayBuffer,pos));
 

@@ -292,7 +292,7 @@ render.onTriggered=function()
 {
     // shader.bindTextures=bindTextures;
 
-
+    shader.popTextures();
     if(textureMatcap.get() && textureMatcapUniform)     shader.pushTexture(textureMatcapUniform,textureMatcap.get().tex);
     if(textureDiffuse.get() && textureDiffuseUniform)    shader.pushTexture(textureDiffuseUniform,textureDiffuse.get().tex);
     if(textureNormal.get() && textureNormalUniform)     shader.pushTexture(textureNormalUniform,textureNormal.get().tex);
@@ -304,7 +304,6 @@ render.onTriggered=function()
 
     cgl.setShader(shader);
     next.trigger();
-    shader.popTextures();
     cgl.setPreviousShader();
 };
 

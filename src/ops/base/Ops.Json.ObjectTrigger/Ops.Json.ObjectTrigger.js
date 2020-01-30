@@ -5,5 +5,6 @@ var outObj=op.outObject("Result");
 
 inTrigger.onTriggered=function()
 {
+    outObj.set(null);
     outObj.set(inObj.get());
 };

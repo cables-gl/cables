@@ -87,16 +87,20 @@ maxPort.onChange = onMaxPortChange;
 stepPort.onChange = stepPortChanged;
 op.onDelete = onDelete;
 
-op.onload=op.init=function()
+// op.onLoadedValueSet=function()
+op.onLoaded=op.onInit=function()
 {
     if(op.patch.config.sidebar)
     {
         op.patch.config.sidebar[labelPort.get()];
         valuePort.set(op.patch.config.sidebar[labelPort.get()]);
     }
-    else valuePort.set(parseFloat(defaultValuePort.get()));
-
-    // onInputValuePortChanged();
+    else
+    {
+        valuePort.set(parseFloat(defaultValuePort.get()));
+        inputValuePort.set(parseFloat(defaultValuePort.get()));
+        // onInputValuePortChanged();
+    }
 };
 
 reset.onTriggered=function()
