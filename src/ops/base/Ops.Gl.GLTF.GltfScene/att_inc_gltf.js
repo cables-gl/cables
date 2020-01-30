@@ -221,10 +221,13 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes",Math.round((performance.now()-gltf.startTime)));
 
+
+
     for(i=0;i<gltf.json.nodes.length;i++)
     {
         var node=new gltfNode(gltf.json.nodes[i],gltf);
         gltf.nodes.push(node);
+
         if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 

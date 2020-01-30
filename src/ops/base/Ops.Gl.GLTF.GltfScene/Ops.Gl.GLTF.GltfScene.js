@@ -132,7 +132,10 @@ function loadBin()
         outAnimLength.set(maxTime);
         hideNodesFromData();
         if(tab)printInfo();
+        console.log('gltf.bounds',gltf.bounds);
     };
+
+
 
     oReq.send(null);
 }
@@ -219,6 +222,20 @@ function saveData()
 {
     dataPort.set(JSON.stringify(data));
 }
+
+
+op.exposeNode=function(name)
+{
+    console.log("HUND",name);
+
+    var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
+    newop.getPort("Node Name").set(name);
+    op.patch.link(op,next.name,newop,"Render");
+    gui.patch().focusOp(newop.id,true);
+    CABLES.UI.MODAL.hide();
+
+
+};
 
 op.assignMaterial=function(name)
 {
