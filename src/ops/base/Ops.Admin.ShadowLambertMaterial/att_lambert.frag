@@ -23,7 +23,6 @@ UNI vec4 materialColor;//r,g,b,a;
 #ifdef SHADOW_MAP
     UNI samplerCube shadowCubeMap;
 #endif
-UNI float inShadowStrength;
 
 float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
 float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
@@ -114,7 +113,7 @@ float getfallOff(Light light,float distLight)
                     #ifdef WEBGL1
                         float closestDepth = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
                     #endif
-                     closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
+                     // closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
                     if(shadowMapDepth - bias < closestDepth)
                         visibility += 1.0;
                 }

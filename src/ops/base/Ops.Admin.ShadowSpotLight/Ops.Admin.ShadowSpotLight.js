@@ -120,7 +120,7 @@ blurShader.setSource(attachments.spotlight_blur_vert, attachments.spotlight_blur
 
 var texelSize = 1/Number(inMapSize.get());
 const uniformTexture = new CGL.Uniform(blurShader,'t','shadowMap', 0);
-const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize); // change with dropdown?
+const uniformTexelSize = new CGL.Uniform(blurShader, 'f', 'texelSize', texelSize);
 const uniformXY = new CGL.Uniform(blurShader, "2f", "inXY", null);
 const uniformLightPosition = new CGL.Uniform(shader, '3f', "lightPosition", vec3.create());
 

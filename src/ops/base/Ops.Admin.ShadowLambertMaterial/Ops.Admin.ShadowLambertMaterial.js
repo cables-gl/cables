@@ -195,11 +195,15 @@ var updateLights=function()
         lights[count].lightProperties.setValue([1,1,1,1]);
         lights[count].position.setValue([5, 5, 5]);
         lights[count].color.setValue([1,1,1]);
-        lights[count].intensity.setValue(1);
-        lights[count].falloff.setValue(0.5);
-        lights[count].type.setValue(LIGHT_TYPES.point);
-        lights[count].castShadow.setValue(0);
-
+            // intensity, attenuation, falloff, radius
+            lights[count].lightProperties.setValue([1, 0, 0.5, 80]);
+        lights[count].typeCastShadow.setValue([LIGHT_TYPES.point, 0]);
+        lights[count].shadowProperties.setValue([
+            null,
+            null,
+            null,
+            null
+        ]);
     }
     else
     {
@@ -252,13 +256,9 @@ var updateLights=function()
                             if (light.castShadow && inShadow.get()) {
                                 if (inShadow.get() && !shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
                                 if (light.lightMatrix) lightMatrices[count].setValue(light.lightMatrix);
+
                                 if (light.type !== "point") normalOffsets[count].setValue(light.normalOffset);
 
-                                lights[count].shadowProperties.setValue([
-                                    light.nearFar[0],
-                                    light.nearFar[1],
-                                    light.type === "point" ? light.shadowCubeMap.width : light.shadowMap.width,
-                                    light.shadowBias]);
                                 /*
                                 lights[count].shadowBias.setValue(light.shadowBias);
                                 lights[count].nearFar.setValue(light.nearFar);
@@ -269,12 +269,25 @@ var updateLights=function()
                                     if (!lights[count].shadowMap) {
                                         lights[count].shadowMap = new CGL.Uniform(shader,'t','lights[' + count + '].shadowMap', count);
                                     }
-                                    // shader.pushTexture(lights[count].shadowMap, light.shadowMap.tex);
-                                    cgl.setTexture(count, light.shadowMap.tex);
+
+                                    lights[count].shadowProperties.setValue([
+                                        light.nearFar[0],
+                                        light.nearFar[1],
+                                        light.shadowMap.width,
+                                        light.shadowBias
+                                    ]);
+                                    shader.pushTexture(lights[count].shadowMap, light.shadowMap.tex);
+                                    // cgl.setTexture(count, light.shadowMap.tex);
 
                                 } else if (light.shadowCubeMap) {
                                     // if (!shadowCubeMap) shadowCubeMap = new CGL.Uniform(shader, 't', 'shadowCubeMap', count);
 
+                                    lights[count].shadowProperties.setValue([
+                                        light.nearFar[0],
+                                        light.nearFar[1],
+                                        light.shadowCubeMap.width,
+                                        light.shadowBias
+                                    ]);
                                     // shader.pushTexture(shadowCubeMap, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
 
                                     cgl.setTexture(MAX_TEXTURE_SLOT, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
@@ -317,9 +330,9 @@ execute.onTriggered=function()
         // if (normalpasscount != 2) { op.log("NormalPass!"); normalpasscount++; }
         cgl.setShader(shader);
 
+        shader.popTextures();
         updateLights();
         next.trigger();
-        shader.popTextures();
         cgl.setPreviousShader();
     }
 };
