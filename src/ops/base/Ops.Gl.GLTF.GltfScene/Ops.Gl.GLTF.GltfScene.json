@@ -108,5 +108,13 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfScene"
+    },
+    "summary": "GLTF/GLB File Loader and renderer",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
