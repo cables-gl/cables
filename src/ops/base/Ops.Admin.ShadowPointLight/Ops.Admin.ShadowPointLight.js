@@ -201,10 +201,10 @@ Object.keys(inLight).forEach(function(key) {
 inMapSize.onChange = function() {
     cubemapInitialized = false;
     const size = Number(inMapSize.get());
-    fb.setSize(size, size);
+    initializeCubemap();
+    if (fb) fb.setSize(size, size);
     texelSize = 1 / size;
     uniformTexelSize.setValue(texelSize);
-    initializeCubemap();
     cubemapInitialized = true;
 }
 
