@@ -99,6 +99,10 @@
                 "subType": "number"
             },
             {
+                "type": "2",
+                "name": "Json"
+            },
+            {
                 "type": "1",
                 "name": "Finished"
             }

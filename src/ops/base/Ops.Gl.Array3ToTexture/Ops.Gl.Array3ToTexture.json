@@ -1,0 +1,59 @@
+{
+    "id": "c3ca9f78-f3ec-418a-b885-18d1bb5b7048",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1576016213795
+        },
+        {
+            "message": "Ops.User.pandur.Array3ToTexture renamed to Ops.Gl.Array3ToTexture",
+            "author": "pandur",
+            "date": 1580307849347
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1576016236539,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "filter"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.Array3ToTexture"
+    },
+    "summary": "convert an array of RGB values to a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
