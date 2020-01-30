@@ -241,8 +241,11 @@ Geometry.prototype.copy = function ()
     // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
     geom.setVertices(this._vertices.slice(0));
 
-    geom.verticesIndices.length = this.verticesIndices.length;
-    for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
+    if(this.verticesIndices)
+    {
+        geom.verticesIndices.length = this.verticesIndices.length;
+        for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
+    }
 
     geom.texCoords = new Float32Array(this.texCoords.length);
     for (i = 0; i < this.texCoords.length; i++) geom.texCoords[i] = this.texCoords[i];
