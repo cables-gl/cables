@@ -25,7 +25,15 @@ float random(vec2 co)
 
 void main()
 {
-    vec2 seed=vec2(floor( texCoord.x*numX+addX),floor( texCoord.y*numY+addY));
+    vec2 seed=vec2(0.0);
+
+    #ifndef CENTER
+        seed=vec2(floor( texCoord.x*numX+addX),floor( texCoord.y*numY+addY));
+    #endif
+    #ifdef CENTER
+        seed=vec2(floor( (texCoord.x-0.5)*numX+addX),floor( (texCoord.y-0.5)*numY+addY));
+    #endif
+
     float r,g,b;
 
     #ifndef RGB

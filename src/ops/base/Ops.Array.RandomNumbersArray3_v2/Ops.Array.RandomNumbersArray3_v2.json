@@ -61,5 +61,58 @@
             }
         ],
         "name": "Ops.Array.RandomNumbersArray3_v2"
+    },
+    "summary": "Generates a random array of numbers (was: RandomArray3x)",
+    "issues": "",
+    "collections": [
+        "pointArrays",
+        "generator",
+        "random"
+    ],
+    "relatedops": [
+        "Ops.Array.RandomNumbersArray"
+    ],
+    "youtubeids": [
+        "7xlElfbMWgw"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "numValues",
+                "text": "The number of value triplets to generate"
+            },
+            {
+                "name": "Min",
+                "text": "The minimum for the generated values"
+            },
+            {
+                "name": "Max",
+                "text": "The maximum for the generated values"
+            },
+            {
+                "name": "random seed",
+                "text": "When set to `0` the array will be different every time the patch is run, set to another value to have the same output every time"
+            },
+            {
+                "name": "Last == First",
+                "text": "Set to true to make the first and last number in the array the same, handy for loops"
+            },
+            {
+                "name": "Integer",
+                "text": "Generate integers not floats"
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            },
+            {
+                "name": "Total points",
+                "text": "Total xyz points in array"
+            },
+            {
+                "name": "Array length",
+                "text": "Total length of array"
+            }
+        ]
     }
 }

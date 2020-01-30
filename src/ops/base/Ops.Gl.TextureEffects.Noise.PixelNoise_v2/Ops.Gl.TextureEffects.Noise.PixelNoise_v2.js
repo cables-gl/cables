@@ -12,6 +12,7 @@ const
     addY=op.inValue("Y",0),
     addZ=op.inValue("Z",0),
     seed2=op.inValue("Seed",0),
+    inCentered=op.inBool("Centered",false),
     trigger=op.outTrigger("Next");
 
 op.setPortGroup("Look",[inRGB,inLoop,minValue,maxValue]);
@@ -46,6 +47,11 @@ inRGB.onChange=function()
     if(inRGB.get())shader.define("RGB");
       else shader.removeDefine("RGB");
 };
+
+inCentered.onChange =function()
+{
+    shader.toggleDefine('CENTER',inCentered.get());
+}
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 

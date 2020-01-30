@@ -26,7 +26,11 @@
         "ports": [
             {
                 "name": "In",
-                "text": "an array of"
+                "text": "an array of arbitrary values"
+            },
+            {
+                "name": "Result",
+                "text": "an array with all the unique values in the input-array"
             }
         ]
     }

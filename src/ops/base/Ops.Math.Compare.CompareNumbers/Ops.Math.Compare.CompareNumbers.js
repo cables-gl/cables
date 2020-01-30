@@ -1,6 +1,6 @@
 const
-    numberIn_1 = op.inFloat("Value in",0),
     logicSelectMode = op.inValueSelect("Comparison mode",['>','<','>=','<=','==','!=','><','>=<'],'>'),
+    numberIn_1 = op.inFloat("Value in",0),
     numberIn_2 = op.inFloat("Condition value",1),
     numberIn_3 = op.inFloat("Max",1),
 

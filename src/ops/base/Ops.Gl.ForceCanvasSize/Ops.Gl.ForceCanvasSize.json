@@ -98,5 +98,33 @@
             }
         ],
         "name": "Ops.Gl.ForceCanvasSize"
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Active",
+                "text": "Enable or disable the op"
+            },
+            {
+                "name": "Width",
+                "text": "The new width"
+            },
+            {
+                "name": "Height",
+                "text": "The new height"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

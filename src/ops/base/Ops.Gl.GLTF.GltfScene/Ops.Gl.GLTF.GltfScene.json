@@ -99,10 +99,22 @@
                 "subType": "number"
             },
             {
+                "type": "2",
+                "name": "Json"
+            },
+            {
                 "type": "1",
                 "name": "Finished"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfScene"
+    },
+    "summary": "GLTF/GLB File Loader and renderer",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

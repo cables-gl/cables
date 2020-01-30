@@ -13,13 +13,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value in",
-                "subType": "number"
+                "name": "Comparison mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Comparison mode",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value in",
+                "subType": "number"
             },
             {
                 "type": "0",
@@ -49,36 +54,28 @@
     "docs": {
         "ports": [
             {
-                "name": "Value in",
-                "text": "Number in to check"
-            },
-            {
-                "name": "Condition value",
-                "text": "Becomes Between value low when between mode enabled"
-            },
-            {
-                "name": "Between value high",
-                "text": "Max value for between or between equals mode"
+                "name": "Comparison mode index",
+                "text": "Pick a mode with an integer"
             },
             {
                 "name": "Comparison mode",
                 "text": "Comparison mode"
             },
             {
-                "name": "Result number",
-                "text": "0 if false, 1 if true"
+                "name": "Value in",
+                "text": "Number in to check"
             },
             {
-                "name": "Result boolean",
-                "text": "true or false"
+                "name": "Condition value",
+                "text": "Becomes min when between mode enabled"
             },
             {
-                "name": "Trigger true",
-                "text": "Triggers if result is true"
+                "name": "Max",
+                "text": "Becomes max when between mode enabled"
             },
             {
-                "name": "Trigger false",
-                "text": "Triggers if result is false"
+                "name": "Result",
+                "text": "Outputs 1 for true 0 for false"
             }
         ]
     }

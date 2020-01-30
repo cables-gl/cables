@@ -58,14 +58,19 @@ var gltfNode=class
         if(this.mesh)
         {
             var bb=this.mesh.bounds.copy();
-            bb.mulMat4(mat);
+            // bb.mulMat4(mat);
             bounds.apply(bb);
         }
 
         for(var i=0;i<this.children.length;i++)
         {
             if(gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
+            {
+                // console.log("",bounds);
                 bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf,mat,bounds));
+                // console.log("",bounds.maxX,gltf.nodes[this.children[i]].name);
+
+            }
         }
 
         if(bounds.changed)return bounds;

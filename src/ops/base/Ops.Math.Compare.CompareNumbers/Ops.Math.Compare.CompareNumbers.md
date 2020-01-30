@@ -10,7 +10,3 @@ If any of the following evaluates to true then the output is 1 else 0
 ><    Between
 >=<  Between or equals
 ```
-
-
-
-Pass modes, if they evaluate to true then the value is passed through else 0

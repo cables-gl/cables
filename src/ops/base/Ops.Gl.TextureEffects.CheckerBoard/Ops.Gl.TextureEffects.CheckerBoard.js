@@ -3,6 +3,7 @@ const blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
 const amount=op.inValueSlider("Amount",1);
 const lineSize=op.inValue("Size",10);
 const inRotate=op.inValueSlider("Rotate",0.0);
+const inCentered=op.inBool("Centered",false);
 
 const trigger=op.outTrigger('trigger');
 
@@ -18,6 +19,10 @@ const rotateUniform=new CGL.Uniform(shader,'f','rotate',inRotate);
 
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 
+inCentered.onChange=function()
+{
+    shader.toggleDefine('CENTER',inCentered.get());
+}
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;

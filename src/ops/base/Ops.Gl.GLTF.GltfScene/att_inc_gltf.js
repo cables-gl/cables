@@ -142,6 +142,7 @@ function parseGltf(arrayBuffer)
     chunks.push(readChunk(dv,byteArray,arrayBuffer,pos));
     pos+=chunks[0].size+CHUNK_HEADER_SIZE;
     gltf.json=chunks[0].data;
+    outJson.set(gltf.json);
 
     chunks.push(readChunk(dv,byteArray,arrayBuffer,pos));
 
@@ -221,10 +222,13 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes",Math.round((performance.now()-gltf.startTime)));
 
+
+
     for(i=0;i<gltf.json.nodes.length;i++)
     {
         var node=new gltfNode(gltf.json.nodes[i],gltf);
         gltf.nodes.push(node);
+
         if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 

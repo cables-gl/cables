@@ -60,24 +60,25 @@ function printNode(html,node,level)
         html+='<td>-</td><td>-</td>';
     }
     html+='<td>';
-    if(node._animRot ||node._animScale ||node._animTrans) html+='Yes';
+    if(node._animRot || node._animScale || node._animTrans) html+='Yes';
     else html+='-';
 
     html+='</td>';
     html+='<td>';
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
+
+    html+='<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Expose</a>';
+    html+='&nbsp;';
+
     html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().scene.getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
 
-
     if(node.children)
         for(i=0;i<node.children.length;i++)
-        {
             html=printNode(html,gltf.nodes[node.children[i]],level+1);
-        }
 
     return html;
 }

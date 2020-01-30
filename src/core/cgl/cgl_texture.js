@@ -287,6 +287,8 @@ Texture.prototype.initTexture = function (img, filter)
  */
 Texture.prototype.delete = function ()
 {
+    this.width=0;
+    this.height=0;
     profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };

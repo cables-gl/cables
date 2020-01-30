@@ -51,5 +51,45 @@
             }
         ],
         "name": "Ops.Array.RandomNumbersArray_v3"
+    },
+    "summary": "Generate an Array of Random Numbers (was: randomArray)",
+    "issues": "",
+    "collections": [
+        "generator",
+        "random"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "numValues",
+                "text": "Number of random values and the length of the resulting array"
+            },
+            {
+                "name": "Min",
+                "text": "Minimum value of generated random numbers"
+            },
+            {
+                "name": "Max",
+                "text": "Maximum value of generated random numbers"
+            },
+            {
+                "name": "random seed",
+                "text": "A random seed always generates the same numbers. set to 0 to get random values every time"
+            },
+            {
+                "name": "Integer",
+                "text": "Generate integers not floats "
+            },
+            {
+                "name": "values",
+                "text": "Array out"
+            },
+            {
+                "name": "Array length",
+                "text": "Length of the array"
+            }
+        ]
     }
 }

@@ -45,9 +45,18 @@
         "name": "Ops.Gl.Meshes.Cone"
     },
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            }
+        ]
     },
     "authorName": "pandur",
     "id": "b67027f5-8f56-4aa0-8bb3-18d42ff15ffe",
-    "created": 1537800182423
+    "created": 1537800182423,
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
