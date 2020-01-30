@@ -2,6 +2,12 @@
 something something cables
 .
 
+how to don't get binary merge conflicts:
+`git config --global merge.ours.driver true`
+
+
+
+
 ### docs 
 
 #### build gitbook doc:
