@@ -6,13 +6,13 @@
         "portsIn": [
             {
                 "type": "3",
-                "name": "In"
+                "name": "array"
             }
         ],
         "portsOut": [
             {
                 "type": "3",
-                "name": "Result"
+                "name": "arrayOut"
             }
         ],
         "name": "Ops.Array.ArrayUnique"

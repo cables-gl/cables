@@ -1,5 +1,5 @@
 {
-    "summary": "animation in the form of a sine curve (sinus)",
+    "summary": "animation in the form of a sine/cosine curve (sinus/cos)",
     "author": "59db805b08bab26e1ab7a0f2",
     "authorName": "pandur",
     "id": "736d3d0e-c920-449e-ade0-f5ca6018fb5c",
@@ -48,6 +48,10 @@
             {
                 "name": "exe",
                 "text": "Executes the op"
+            },
+            {
+                "name": "Mode",
+                "text": "Can be set to sin or cos"
             },
             {
                 "name": "phase",

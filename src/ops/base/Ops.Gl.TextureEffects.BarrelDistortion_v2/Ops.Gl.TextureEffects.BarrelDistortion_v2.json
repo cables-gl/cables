@@ -40,5 +40,13 @@
         "name": "Ops.Gl.TextureEffects.BarrelDistortion_v2"
     },
     "authorName": "pandur",
-    "created": 1579615623326
+    "created": 1579615623326,
+    "summary": "Simulate fisheye effect",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
