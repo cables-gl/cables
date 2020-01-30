@@ -200,7 +200,10 @@ Object.keys(inLight).forEach(function(key) {
 
 inMapSize.onChange = function() {
     cubemapInitialized = false;
+
     const size = Number(inMapSize.get());
+    if (![256, 512, 1024, 2048].some(function(val) { val === size })) return; // had to add this check after update. returns 0 initially??
+
     initializeCubemap();
     if (fb) fb.setSize(size, size);
     texelSize = 1 / size;
