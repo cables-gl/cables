@@ -22,11 +22,7 @@ exec.onTriggered=function()
     var shader=cgl.getShader();
     if(!shader)return;
     var oldPrim=shader.glPrimitive;
-    shader.glPrimitive=glPrim;///cgl.gl.LINE_STRIP;
-    // GL_TRIANGLE_STRIP
-    // shader.glPrimitive=cgl.gl.LINE_LOOP;
-    // shader.glPrimitive=cgl.gl.LINES;
-    // shader.glPrimitive=cgl.gl.POINTS;
+    shader.glPrimitive=glPrim;
 
     next.trigger();
 

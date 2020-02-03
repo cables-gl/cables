@@ -40,5 +40,7 @@ function updateMinMax() {
     anim.keys[1].time = anim.keys[1].value = Math.max(inMinOut.get(), inMaxOut.get());
 }
 
+handleValueChange();
+
 inMinOut.onChange = inMaxOut.onChange = handleMinMaxChange;
 inFade.onChange = handleValueChange;

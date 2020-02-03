@@ -38,7 +38,8 @@ var gltfMesh=class
 
         if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
-        // todo calc bi tangents...?!
+        geom.calcTangentsBitangents();
+
     }
 
     render(cgl,ignoreMaterial)
