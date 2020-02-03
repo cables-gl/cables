@@ -57,6 +57,7 @@ const Geometry = function (name)
     this.morphTargets = [];
     this.vertexColors = [];
     this._attributes = {};
+    this.glPrimitive=null;
 
     Object.defineProperty(this, "vertices", {
         get()
