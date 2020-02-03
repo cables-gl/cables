@@ -398,18 +398,22 @@ Geometry.prototype.calcTangentsBitangents = function ()
     if (!this.vertices.length)
     {
         console.error("Cannot calculate tangents/bitangents without vertices.");
+        return;
     }
     if (!this.vertexNormals.length)
     {
         console.error("Cannot calculate tangents/bitangents without normals.");
+        return;
     }
     if (!this.texCoords.length)
     {
         console.error("Cannot calculate tangents/bitangents without texture coordinates.");
+        return;
     }
     if (!this.verticesIndices.length)
     {
         console.error("Cannot calculate tangents/bitangents without vertex indices.");
+        return;
     }
     // this code assumes that we have three indices per triangle
     if (this.verticesIndices.length % 3 !== 0) throw new Error("Vertex indices mismatch!");
