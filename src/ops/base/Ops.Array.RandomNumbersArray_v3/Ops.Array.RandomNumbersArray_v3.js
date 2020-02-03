@@ -48,7 +48,7 @@ function init()
     {
         for(var i=0;i<arrLength;i++)
         {
-            arr[i]=Math.floor(Math.seededRandom()* ( (maxIn - minIn) + 1 )) + minIn ;
+            arr[i]=Math.floor(Math.seededRandom()* ( (maxIn - minIn) + 1 ) + minIn);
         }
     }
 

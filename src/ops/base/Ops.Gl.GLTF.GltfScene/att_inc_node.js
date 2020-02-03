@@ -58,7 +58,7 @@ var gltfNode=class
         if(this.mesh)
         {
             var bb=this.mesh.bounds.copy();
-            // bb.mulMat4(mat);
+            bb.mulMat4(mat);
             bounds.apply(bb);
         }
 
