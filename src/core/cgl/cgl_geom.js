@@ -416,7 +416,11 @@ Geometry.prototype.calcTangentsBitangents = function ()
         return;
     }
     // this code assumes that we have three indices per triangle
-    if (this.verticesIndices.length % 3 !== 0) throw new Error("Vertex indices mismatch!");
+    if (this.verticesIndices.length % 3 !== 0)
+    {
+        console.error("Vertex indices mismatch!");
+        return;
+    }
 
     const triangleCount = this.verticesIndices.length / 3;
     const vertexCount = this.vertices.length / 3;
