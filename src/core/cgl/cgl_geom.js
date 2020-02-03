@@ -397,19 +397,19 @@ Geometry.prototype.calcTangentsBitangents = function ()
 {
     if (!this.vertices.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without vertices.");
+        console.error("Cannot calculate tangents/bitangents without vertices.");
     }
     if (!this.vertexNormals.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without normals.");
+        console.error("Cannot calculate tangents/bitangents without normals.");
     }
     if (!this.texCoords.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without texture coordinates.");
+        console.error("Cannot calculate tangents/bitangents without texture coordinates.");
     }
     if (!this.verticesIndices.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without vertex indices.");
+        console.error("Cannot calculate tangents/bitangents without vertex indices.");
     }
     // this code assumes that we have three indices per triangle
     if (this.verticesIndices.length % 3 !== 0) throw new Error("Vertex indices mismatch!");
