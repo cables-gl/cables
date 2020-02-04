@@ -18,7 +18,6 @@ import {
     Texture,
 } from "./cgl_texture";
 
-import { ShadowStore } from "./cgl_shadowstore";
 import { TextureEffect } from "./cgl_textureeffect";
 import { CONSTANTS } from "./constants";
 import { profileData } from "./cgl_profiledata";
@@ -42,7 +41,6 @@ const CGL = Object.assign(
         Context,
         Texture,
         TextureEffect,
-        ShadowStore,
         isWindows,
         getWheelSpeed,
         getWheelDelta,
