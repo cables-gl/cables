@@ -402,6 +402,8 @@ const render = function() {
     }
     cgl.setShader(shader);
 
+    shader.popTextures();
+
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
     if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
     if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
@@ -410,7 +412,6 @@ const render = function() {
     if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
 
     outTrigger.trigger();
-    shader.popTextures();
     cgl.setPreviousShader();
 }
 
