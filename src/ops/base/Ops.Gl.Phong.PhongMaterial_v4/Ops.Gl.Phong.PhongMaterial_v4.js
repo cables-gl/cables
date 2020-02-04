@@ -141,6 +141,8 @@ const shader = new CGL.Shader(cgl,"simosphong");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 
+shaderOut.set(shader);
+
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;
 let normalTextureUniform = null;
