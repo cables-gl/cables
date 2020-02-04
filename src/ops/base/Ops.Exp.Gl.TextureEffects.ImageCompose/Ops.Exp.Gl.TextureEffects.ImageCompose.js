@@ -166,6 +166,7 @@ var doRender=function()
     }
     else
     {
+
         effect.setSourceTexture(tex);
         effect.startEffect();
     }

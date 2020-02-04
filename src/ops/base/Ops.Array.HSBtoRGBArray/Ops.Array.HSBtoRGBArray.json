@@ -92,7 +92,7 @@
             },
             {
                 "name": "In Alpha Array",
-                "text": "Alpha/Opacity In Array with range`[0, 1]` - if not connceted, default output value is `1`"
+                "text": "Alpha/Opacity In Array with range`[0, 1]` - if not connected, default output value is `1`"
             },
             {
                 "name": "Trigger Output",

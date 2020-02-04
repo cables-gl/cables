@@ -57,6 +57,7 @@ const Geometry = function (name)
     this.morphTargets = [];
     this.vertexColors = [];
     this._attributes = {};
+    this.glPrimitive=null;
 
     Object.defineProperty(this, "vertices", {
         get()
@@ -241,8 +242,11 @@ Geometry.prototype.copy = function ()
     // for(i=0;i<this.vertices.length;i++) geom.vertices[i]=this.vertices[i];
     geom.setVertices(this._vertices.slice(0));
 
-    geom.verticesIndices.length = this.verticesIndices.length;
-    for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
+    if(this.verticesIndices)
+    {
+        geom.verticesIndices.length = this.verticesIndices.length;
+        for (i = 0; i < this.verticesIndices.length; i++) geom.verticesIndices[i] = this.verticesIndices[i];
+    }
 
     geom.texCoords = new Float32Array(this.texCoords.length);
     for (i = 0; i < this.texCoords.length; i++) geom.texCoords[i] = this.texCoords[i];
@@ -393,22 +397,30 @@ Geometry.prototype.calcTangentsBitangents = function ()
 {
     if (!this.vertices.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without vertices.");
+        console.error("Cannot calculate tangents/bitangents without vertices.");
+        return;
     }
     if (!this.vertexNormals.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without normals.");
+        console.error("Cannot calculate tangents/bitangents without normals.");
+        return;
     }
     if (!this.texCoords.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without texture coordinates.");
+        console.error("Cannot calculate tangents/bitangents without texture coordinates.");
+        return;
     }
     if (!this.verticesIndices.length)
     {
-        throw new Error("Cannot calculate tangents/bitangents without vertex indices.");
+        console.error("Cannot calculate tangents/bitangents without vertex indices.");
+        return;
     }
     // this code assumes that we have three indices per triangle
-    if (this.verticesIndices.length % 3 !== 0) throw new Error("Vertex indices mismatch!");
+    if (this.verticesIndices.length % 3 !== 0)
+    {
+        console.error("Vertex indices mismatch!");
+        return;
+    }
 
     const triangleCount = this.verticesIndices.length / 3;
     const vertexCount = this.vertices.length / 3;

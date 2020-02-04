@@ -11,6 +11,11 @@
             },
             {
                 "type": "0",
+                "name": "blendMode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "blendMode",
                 "group": "Blending",
                 "subType": "string"
@@ -37,6 +42,11 @@
             },
             {
                 "type": "0",
+                "name": "alphaSrc index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "alphaSrc",
                 "group": "Mask",
                 "subType": "string"
@@ -52,6 +62,11 @@
                 "name": "Aspect Ratio",
                 "group": "Aspect Ratio",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Stretch Axis index",
+                "subType": "integer"
             },
             {
                 "type": "0",

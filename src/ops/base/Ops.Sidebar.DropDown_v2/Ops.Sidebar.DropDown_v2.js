@@ -52,6 +52,11 @@ valuesPort.onChange = onValuesPortChange;
 var options=[];
 // functions
 
+op.onLoaded=function()
+{
+    valuePort.set(defaultValuePort.get());
+};
+
 function onValuesPortChange() {
     // remove all children
     while (input.lastChild) {

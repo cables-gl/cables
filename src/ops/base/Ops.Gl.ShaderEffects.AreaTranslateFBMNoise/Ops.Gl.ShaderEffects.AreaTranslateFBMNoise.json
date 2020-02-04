@@ -84,5 +84,54 @@
             "author": "pandur",
             "date": 1575370418046
         }
-    ]
+    ],
+    "summary": "Translate object positions with a noise function",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Mode",
+                "text": "Affect the rotation or the translation"
+            },
+            {
+                "name": "Size",
+                "text": "Area size of noise"
+            },
+            {
+                "name": "Strength",
+                "text": "Strength of the effect"
+            },
+            {
+                "name": "Smooth",
+                "text": "Smooth effect with distance"
+            },
+            {
+                "name": "x",
+                "text": "X position"
+            },
+            {
+                "name": "y",
+                "text": "Y position"
+            },
+            {
+                "name": "z",
+                "text": "Z position"
+            },
+            {
+                "name": "Noise Scale",
+                "text": "Scale of the noise"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

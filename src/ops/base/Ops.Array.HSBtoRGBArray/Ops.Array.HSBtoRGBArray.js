@@ -86,6 +86,7 @@ function handleTrigger() {
 
     if (shouldRecalculate) {
         if ([arrH, arrS, arrB, arrA].some(function(array) {  return !array })) {
+            op.log("imhere");
             if (arrH) length = arrH.length;
             else if (arrS) length = arrS.length;
             else if (arrB) length = arrB.length;
@@ -128,6 +129,5 @@ function handleTrigger() {
         outTupleLength.set(newArr.length / 4);
 
     }
-
     outTrigger.trigger();
 };

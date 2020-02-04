@@ -91,6 +91,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
     var t;
 
     geom=new CGL.Geometry();
+    geom.glPrimitive=cgl.gl.TRIANGLE_STRIP;
     geom.tangents = [];
     geom.biTangents = [];
 

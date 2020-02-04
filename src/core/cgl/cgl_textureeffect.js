@@ -98,6 +98,10 @@ TextureEffect.prototype.startEffect = function ()
     }
 
     this.switched = false;
+
+    // this._cgl.pushBlendMode(CGL.BLEND_NORMAL,false);
+    // this._cgl.pushBlend(true);
+
     // this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
     this._cgl.pushDepthTest(false);
 
@@ -115,6 +119,10 @@ TextureEffect.prototype.startEffect = function ()
 
     this._cgl.pushModelMatrix();
     mat4.identity(this._cgl.mvMatrix);
+
+    // this._cgl.popBlend();
+    // this._cgl.popBlendMode();
+
 };
 
 TextureEffect.prototype.endEffect = function ()

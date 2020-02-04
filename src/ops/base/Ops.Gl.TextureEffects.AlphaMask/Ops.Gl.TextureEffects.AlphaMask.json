@@ -9,6 +9,11 @@
                 "name": "render"
             },
             {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
                 "type": "2",
                 "name": "image"
             },

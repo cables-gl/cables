@@ -1,4 +1,5 @@
-const modeSelect = op.inSwitch("Mode select",['Number','1,2,3,4',"0-1","1-0"],'Number'),
+const
+    modeSelect = op.inSwitch("Mode select",['Number','1,2,3,4',"0-1","1-0"],'Number'),
     inLength=op.inValueInt("Array length",10),
     inDefaultValue=op.inValueFloat("Default Value"),
     outArr=op.outArray("Array"),

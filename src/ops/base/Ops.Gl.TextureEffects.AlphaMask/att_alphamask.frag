@@ -1,6 +1,7 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D image;
+UNI float amount;
 
 void main()
 {
@@ -24,9 +25,15 @@ void main()
    #endif
 
    #ifdef FROM_LUMINANCE
-       vec3 gray = vec3(dot(vec3(0.2126,0.7152,0.0722), texture(image,texCoord).rgb ));
-       col.a=(gray.r+gray.g+gray.b)/3.0;
+       float gray = dot(vec3(0.2126,0.7152,0.0722), texture(image,texCoord).rgb );
+       col.a=gray;
    #endif
 
-   outColor= col;
+
+    #ifndef USE_TEXTURE
+        col.a=1.0;
+    #endif
+
+    col.a*=amount;
+    outColor= col;
 }

@@ -283,6 +283,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 Mesh.prototype.setGeom = function (geom)
 {
     this._geom = geom;
+    if(geom.glPrimitive!=null) this._glPrimitive=geom.glPrimitive;
 
     MESH.lastMesh = null;
     profileData.profileMeshSetGeom++;

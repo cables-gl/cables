@@ -90,7 +90,7 @@ class BoundingBox
 
 
 
-    apply(geom)
+    apply(geom, mat)
     {
         if(!geom)
         {
@@ -111,7 +111,18 @@ class BoundingBox
     
             for (i = 0; i < geom.vertices.length; i += 3)
                 if (geom.vertices[i + 0] == geom.vertices[i + 0])
-                    this.applyPos(geom.vertices[i + 0],geom.vertices[i + 1],geom.vertices[i + 2]);
+                {
+                    
+                    // if(mat)
+                    // {
+                        this.applyPos(geom.vertices[i + 0],geom.vertices[i + 1],geom.vertices[i + 2]);
+                    // }
+                    // else
+                    // {
+                    //     this.applyPos(geom.vertices[i + 0],geom.vertices[i + 1],geom.vertices[i + 2]);
+                    // }
+                }
+                    
         }
         this.calcCenterSize();
     }

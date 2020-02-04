@@ -18,6 +18,7 @@ const
     outVersion=op.outNumber("GLTF Version"),
     outAnimLength=op.outNumber("Anim Length",0),
     outAnimTime=op.outNumber("Anim Time",0),
+    outJson=op.outObject("Json"),
     outAnimFinished=op.outTrigger("Finished");
 
 op.setPortGroup("Timing",[inTime,inTimeLine,inLoop]);
@@ -60,7 +61,6 @@ inExec.onTriggered=function()
 {
     if(inTimeLine.get()) time=op.patch.timer.getTime();
     else time=Math.max(0,inTime.get());
-
 
 
     if(inLoop.get())
@@ -132,7 +132,10 @@ function loadBin()
         outAnimLength.set(maxTime);
         hideNodesFromData();
         if(tab)printInfo();
+        console.log('gltf.bounds',gltf.bounds);
     };
+
+
 
     oReq.send(null);
 }
@@ -219,6 +222,20 @@ function saveData()
 {
     dataPort.set(JSON.stringify(data));
 }
+
+
+op.exposeNode=function(name)
+{
+    console.log("HUND",name);
+
+    var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
+    newop.getPort("Node Name").set(name);
+    op.patch.link(op,next.name,newop,"Render");
+    gui.patch().focusOp(newop.id,true);
+    CABLES.UI.MODAL.hide();
+
+
+};
 
 op.assignMaterial=function(name)
 {
