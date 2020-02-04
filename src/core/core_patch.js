@@ -10,7 +10,6 @@ import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
 import { Log } from "./log";
-import { ShadowStore } from "./cgl/cgl_shadowstore";
 
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
@@ -144,7 +143,6 @@ const Patch = function (cfg)
         }
         this.timer.play();
     }
-    this.shadowStore = new ShadowStore(this.cgl);
     console.log("made with https://cables.gl");
 };
 
@@ -513,7 +511,7 @@ Patch.prototype.renderFrame = function (e)
     {
         if (this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
     }
-    
+
     this.emitEvent("onRenderFrame", time);
 
     this._frameNum++;
