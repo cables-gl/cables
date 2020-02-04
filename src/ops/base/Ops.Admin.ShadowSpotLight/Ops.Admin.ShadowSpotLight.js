@@ -327,7 +327,7 @@ function updateProjectionMatrix() {
         mat4.perspective(
         lightProjectionMatrix,
         //CGL.DEG2RAD * inFOV.get(),
-        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        -2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()

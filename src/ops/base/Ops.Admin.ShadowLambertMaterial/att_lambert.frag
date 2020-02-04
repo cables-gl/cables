@@ -97,8 +97,11 @@ float getfallOff(Light light,float distLight)
 #define PCF_DIVISOR_POINT SAMPLE_AMOUNT*SAMPLE_AMOUNT*SAMPLE_AMOUNT
 
     // https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows
-    float ShadowFactorPointPCF(samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float nearPlane, float farPlane, float bias) {
+    float ShadowFactorPointPCF(samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float nearPlane, float farPlane, float bias, float shadowStrength) {
         float visibility  = 0.0;
+
+        // EARLY EXIT ... cant figure it out
+        // if (shadowMapDepth - bias < texture(shadowMap, -lightDirection).r) return 1.;
 
         for(float x = LEFT_BOUND_POINT; x < RIGHT_BOUND_POINT; x += PCF_INCREMENT_POINT)
         {
@@ -112,6 +115,8 @@ float getfallOff(Light light,float distLight)
                     #ifdef WEBGL1
                         float closestDepth = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
                     #endif
+
+                    //if (closestDepth == 0.) return 1.; // early exit?
                      // closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
                     if(shadowMapDepth - bias < closestDepth)
                         visibility += 1.0;
@@ -124,7 +129,7 @@ float getfallOff(Light light,float distLight)
 
     }
 
-    float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias) {
+    float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
         float texelSize = 1. / shadowMapSize;
         float visibility = 0.;
 
@@ -338,9 +343,9 @@ void main()
                 #endif
                 #ifdef MODE_PCF
                     if (lights[l].typeCastShadow.TYPE == POINT) {
-                        diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias);;
+                        diffuseColor *= ShadowFactorPointPCF(shadowCubeMap, lightDirection, shadowMapDepth, cameraNear, cameraFar, bias, shadowStrength);
                     }
-                    else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowProperties.MAP_SIZE, shadowMapDepth, bias);
+                    else diffuseColor *= ShadowFactorPCF(lights[l].shadowMap, shadowMapLookup, lights[l].shadowProperties.MAP_SIZE, shadowMapDepth, bias, shadowStrength);
                 #endif
 
 
