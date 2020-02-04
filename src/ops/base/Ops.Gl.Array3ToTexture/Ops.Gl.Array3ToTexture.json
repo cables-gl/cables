@@ -54,6 +54,31 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "wrap index",
+                "text": "pick wrap mode with an integer"
+            },
+            {
+                "name": "wrap",
+                "text": "modes repeat, mirrored repeat, clamp to edge"
+            },
+            {
+                "name": "filter index",
+                "text": "Pick a filter with an integer"
+            },
+            {
+                "name": "filter",
+                "text": "modes nearest, linear,mipmap"
+            },
+            {
+                "name": "Texture",
+                "text": "Texture out "
+            }
+        ]
     }
 }

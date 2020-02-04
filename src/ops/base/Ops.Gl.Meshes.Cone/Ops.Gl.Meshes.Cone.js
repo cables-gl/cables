@@ -99,6 +99,7 @@ function generateCone(base,height,stacks,slices)
     var r=base;
     var z=0;
     var geom=new CGL.Geometry();
+    geom.glPrimitive=cgl.gl.TRIANGLE_STRIP;
     geom.tangents=[];
     geom.biTangents=[];
 
@@ -144,6 +145,7 @@ function generateCone(base,height,stacks,slices)
     {
         for (j=0; j<slices; j++, idx+=3)
         {
+
             geom.vertices[idx  ] = table.cost[j]*r;
             geom.vertices[idx+1] = table.sint[j]*r;
             geom.vertices[idx+2] = z;
@@ -186,7 +188,9 @@ function generateCone(base,height,stacks,slices)
         geom.verticesIndices[idx+1] = offset+slices;
     }
 
-    mesh=new CGL.Mesh(cgl,geom,cgl.gl.TRIANGLE_STRIP);
+
+
+    mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(geom);
 }
 
