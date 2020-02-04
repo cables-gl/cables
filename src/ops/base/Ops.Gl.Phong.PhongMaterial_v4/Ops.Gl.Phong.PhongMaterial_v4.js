@@ -130,14 +130,6 @@ discardTransPxl.setUiAttribs({ hidePort: true });
 
 op.setPortGroup("Opacity Texture",[alphaMaskSource, texCoordAlpha, discardTransPxl]);
 
-function bindTextures() {
-    if(inDiffuseTexture.get()) cgl.setTexture(0, inDiffuseTexture.get().tex);
-    if (inSpecularTexture.get()) cgl.setTexture(1, inSpecularTexture.get().tex);
-    if(inNormalTexture.get()) cgl.setTexture(2, inNormalTexture.get().tex);
-    if (inAoTexture.get()) cgl.setTexture(3, inAoTexture.get().tex);
-    if (inEmissiveTexture.get()) cgl.setTexture(4, inEmissiveTexture.get().tex);
-    if (inAlphaTexture.get()) cgl.setTexture(5, inAlphaTexture.get().tex);
-}
 
 
 const outTrigger = op.outTrigger("Trigger Out");
@@ -148,6 +140,8 @@ shaderOut.ignoreValueSerialize = true;
 const shader = new CGL.Shader(cgl,"simosphong");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
+
+shaderOut.set(shader);
 
 let diffuseTextureUniform = null;
 let specularTextureUniform = null;
@@ -300,7 +294,6 @@ const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.define('MAX_LIGHTS', MAX_LIGHTS.toString());
 shader.define("SPECULAR_PHONG");
-shader.bindTextures = bindTextures;
 
 const LIGHT_TYPES = {
     none: -1,
@@ -411,7 +404,15 @@ const render = function() {
         outTrigger.trigger();
     } else {
         cgl.setShader(shader);
-        shader.bindTextures();
+        shader.popTextures();
+
+        if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
+        if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
+        if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
+        if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
+        if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
+        if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
+
         outTrigger.trigger();
         cgl.setPreviousShader();
     }
