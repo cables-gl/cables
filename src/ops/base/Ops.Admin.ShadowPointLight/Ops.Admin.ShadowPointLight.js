@@ -55,35 +55,35 @@ op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
+const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
-const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("",[inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inBias, inPolygonOffset, inBlur]);
-const shadowProperties = [inNear, inFar, inBlur];
+op.setPortGroup("Shadow Map Settings",[inMapSize, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
+const shadowProperties = [inNear, inFar];
 inMapSize.setUiAttribs({ greyout: true });
+inShadowStrength.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true });
 inFar.setUiAttribs({ greyout: true });
 inPolygonOffset.setUiAttribs({ greyout: true });
-inBlur.setUiAttribs({ greyout: true });
 
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
     if (castShadow) {
         inMapSize.setUiAttribs({ greyout: false });
+        inShadowStrength.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inPolygonOffset.setUiAttribs({ greyout: false });
-        inBlur.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
+        inShadowStrength.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inPolygonOffset.setUiAttribs({ greyout: true });
-        inBlur.setUiAttribs({ greyout: true });
     }
 }
 
@@ -323,8 +323,8 @@ function initializeCubemap() {
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     cubemapInitialized = true;
-     // cgl.resetViewPort();
 }
+
 let projectionShader = null;
 let cubeMapEffect = null;
 let uniformCubemap = null;
@@ -399,6 +399,7 @@ function renderCubeSide(index) {
     );
 
     gl.clearColor(1, 1, 1, 1);
+
     // * calculate matrices & camPos vector
     mat4.copy(cgl.mMatrix, identityMat); // M
 
@@ -476,9 +477,6 @@ inTrigger.onTriggered = function() {
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     light.position = position;
 
-    // mat4.getScaling(sc,cgl.mMatrix);
-    // light.radius=inRadius.get()*sc[0];
-
     renderHelpers(false);
 
     cgl.lightStack.push(light);
@@ -517,6 +515,7 @@ inTrigger.onTriggered = function() {
         light.nearFar = [inNear.get(), inFar.get()];
         light.castShadow = inCastShadow.get();
         light.shadowBias = inBias.get();
+        light.shadowStrength = inShadowStrength.get();
 
         cgl.lightStack.push(light);
     }

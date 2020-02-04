@@ -53,8 +53,6 @@ struct Light {
     #define TYPE x
     #define CAST_SHADOW y
     ivec2 typeCastShadow;
-    int type;
-    int castShadow;
 
     #ifdef SHADOW_MAP
         sampler2D shadowMap;
@@ -63,6 +61,7 @@ struct Light {
         #define MAP_SIZE z
         #define BIAS w
         vec4 shadowProperties;
+        float shadowStrength;
     #endif
 };
 
@@ -81,8 +80,8 @@ float getfallOff(Light light,float distLight)
 */
 
 #ifdef MODE_DEFAULT
-    float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias) {
-        if (shadowMapSample < shadowMapDepth - bias) return 0.2; // todo: make this uniform value from light or from material?
+    float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
+        if (shadowMapSample < shadowMapDepth - bias) return (1. - shadowStrength); // todo: make this uniform value from light or from material?
         return 1.;
     }
 #endif
@@ -299,6 +298,8 @@ void main()
 
                 vec2 shadowMapSample = vec2(1.);
                 float cameraNear, cameraFar;
+                float shadowStrength = lights[l].shadowStrength;
+
                 if (lights[l].typeCastShadow.TYPE == POINT) {
                     cameraNear = lights[l].shadowProperties.NEAR; // uniforms
                     cameraFar =  lights[l].shadowProperties.FAR;
@@ -332,7 +333,7 @@ void main()
                 #endif
 
                 #ifdef MODE_DEFAULT
-                    diffuseColor *= ShadowFactorDefault(shadowMapSample.r, shadowMapDepth, bias);
+                    diffuseColor *= ShadowFactorDefault(shadowMapSample.r, shadowMapDepth, bias, shadowStrength);
 
                 #endif
                 #ifdef MODE_PCF

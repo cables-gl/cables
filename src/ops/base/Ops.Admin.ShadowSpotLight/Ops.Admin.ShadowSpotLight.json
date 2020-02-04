@@ -132,6 +132,12 @@
             },
             {
                 "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Near",
                 "group": "Shadow Map Settings",
                 "subType": "number"

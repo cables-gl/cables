@@ -82,6 +82,12 @@
             },
             {
                 "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "LR-BottomTop",
                 "group": "Shadow Map Settings",
                 "subType": "number"
@@ -157,12 +163,6 @@
                 "type": "5",
                 "name": "Anisotropic",
                 "group": "Advanced Options"
-            },
-            {
-                "type": "0",
-                "name": "Test",
-                "group": "Advanced Options",
-                "subType": "number"
             }
         ],
         "portsOut": [

@@ -16,7 +16,6 @@ function Light(config) {
      return this;
 }
 
-cgl.addEventListener("resize", () => op.log("canvas resized."));
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 
@@ -62,7 +61,7 @@ op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
-
+const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
@@ -70,10 +69,20 @@ const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
 const inBlur = op.inFloatSlider("Blur Amount", 1);
 op.setPortGroup("",[inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[inMapSize, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings",[
+    inMapSize,
+    inShadowStrength,
+    inNear,
+    inFar,
+    inBias,
+    inPolygonOffset,
+    inNormalOffset,
+    inBlur
+]);
 
 
 inMapSize.setUiAttribs({ greyout: true, hidePort: true });
+inShadowStrength.setUiAttribs({ greyout: true });
 inNear.setUiAttribs({ greyout: true, hidePort: true });
 inFar.setUiAttribs({ greyout: true, hidePort: true });
 inBlur.setUiAttribs({ greyout: true, hidePort: true });
@@ -151,20 +160,19 @@ if (IS_WEBGL_1) {
         filter: CGL.Texture.FILTER_LINEAR,
         wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
-}
-else {
+} else {
     fb = new CGL.Framebuffer2(cgl,Number(inMapSize.get()),Number(inMapSize.get()), {
         isFloatingPointTexture: true,
         filter: CGL.Texture.FILTER_LINEAR,
         wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
     });
 }
+
 var effect = new CGL.TextureEffect(cgl, {
     isFloatingPointTexture: true ,
     filter: CGL.Texture.FILTER_LINEAR,
     wrap: CGL.Texture.WRAP_CLAMP_TO_EDGE,
 });
-op.log("aminakoyum", cgl.gl.getSupportedExtensions());
 
 function updateBuffers() {
         const MSAA = Number(inMSAA.get().charAt(0));
@@ -285,6 +293,7 @@ inCastShadow.onChange = function() {
     light.castShadow = castShadow;
     if (castShadow) {
         inMapSize.setUiAttribs({ greyout: false });
+        inShadowStrength.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
         inNormalOffset.setUiAttribs({ greyout: false });
@@ -294,6 +303,7 @@ inCastShadow.onChange = function() {
 
     } else {
         inMapSize.setUiAttribs({ greyout: true });
+        inShadowStrength.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
         inNormalOffset.setUiAttribs({ greyout: true });
@@ -307,7 +317,7 @@ inCastShadow.onChange = function() {
 const lightProjectionMatrix = mat4.create();
 mat4.perspective(
     lightProjectionMatrix,
-    2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+    CGL.DEG2RAD * inLight.cosConeAngle.get(),
     1,
     inNear.get(),
     inFar.get()
@@ -317,7 +327,7 @@ function updateProjectionMatrix() {
         mat4.perspective(
         lightProjectionMatrix,
         //CGL.DEG2RAD * inFOV.get(),
-        CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
@@ -379,7 +389,7 @@ function renderShadowMap() {
     cgl.pushPMatrix();
 
     fb.renderStart(cgl);
-    /* */
+
     // * calculate matrices & camPos vector
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
     mat4.copy(cgl.mMatrix, identityMat); // M
@@ -398,8 +408,6 @@ function renderShadowMap() {
     outTrigger.trigger();
 
     fb.renderEnd(cgl);
-
-
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -466,38 +474,13 @@ inTrigger.onTriggered = function() {
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;
 
-                /*
-                if (!cgl.firstShadowPass) {
-                    // https://github.com/haedri/shadow-mapping/wiki/Part-4-%3A-multiple-lights%2C-forward-rendering
-                    // https://gamedev.stackexchange.com/questions/110202/multiple-lights-shadows
-                    //
-
-                    cgl.gl.enable(cgl.gl.BLEND);
-                    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-
-                }
-                */
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
-                //cgl.gl.colorMask(true,true,true,true);
 
-                /*
-                if (!cgl.firstShadowPass) {
-                    cgl.gl.disable(cgl.gl.BLEND);
-
-                    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-
-                }
-                */
-
-
-                // cgl.gl.disable(cgl.gl.DEPTH_TEST);
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
-                // NOTE: blur is still very cpu intensive... idk why
-                // cgl.gl.colorMask(true,true,false,false);
                 if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
@@ -514,13 +497,14 @@ inTrigger.onTriggered = function() {
 
     // remove light from stack and readd it with shadow map & mvp matrix
     cgl.lightStack.pop();
+
     light.lightMatrix = lightBiasMVPMatrix;
     light.castShadow = inCastShadow.get();
     light.shadowMap = fb.getTextureColor();
     light.shadowMapDepth = fb.getTextureDepth();
     light.normalOffset = inNormalOffset.get();
     light.shadowBias = inBias.get();
-
+    light.shadowStrength = inShadowStrength.get();
 
     cgl.lightStack.push(light);
     outTrigger.trigger();

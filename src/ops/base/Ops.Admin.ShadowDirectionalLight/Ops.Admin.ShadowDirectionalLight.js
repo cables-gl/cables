@@ -16,7 +16,6 @@ function Light(config) {
      this.nearFar = [0,0];
      return this;
 }
-cgl.addEventListener("resize", () => op.log("canvas resized."));
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
@@ -49,6 +48,7 @@ op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
+const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
@@ -57,27 +57,26 @@ const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0.024);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[inMapSize, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings",[inMapSize, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
-inMapSize.setUiAttribs({ greyout: true });
-inLRBT.setUiAttribs({ greyout: true });
-inNear.setUiAttribs({ greyout: true });
-inFar.setUiAttribs({ greyout: true });
-inBias.setUiAttribs({ greyout: true });
-inNormalOffset.setUiAttribs({ greyout: true });
-inPolygonOffset.setUiAttribs({ greyout: true });
-inBlur.setUiAttribs({ greyout: true });
+inMapSize.setUiAttribs({ greyout: true, hidePort: true });
+inShadowStrength.setUiAttribs({ greyout: true });
+inLRBT.setUiAttribs({ greyout: true, hidePort: true });
+inNear.setUiAttribs({ greyout: true, hidePort: true });
+inFar.setUiAttribs({ greyout: true, hidePort: true });
+inBias.setUiAttribs({ greyout: true, hidePort: true });
+inNormalOffset.setUiAttribs({ greyout: true, hidePort: true });
+inPolygonOffset.setUiAttribs({ greyout: true, hidePort: true });
+inBlur.setUiAttribs({ greyout: true, hidePort: true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
 const inFilterType = op.inSwitch("Texture Filter",['Linear', 'Anisotropic', 'Mip Map'], 'Linear');
 const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], '0');
-const inTest = op.inFloat("Test", 1);
-inMSAA.setUiAttribs({ greyout: true });
-inFilterType.setUiAttribs({ greyout: true });
-inAnisotropic.setUiAttribs({ greyout: true });
-inTest.setUiAttribs({ greyout: true });
-op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic, inTest]);
+inMSAA.setUiAttribs({ greyout: true, hidePort: true });
+inFilterType.setUiAttribs({ greyout: true, hidePort: true });
+inAnisotropic.setUiAttribs({ greyout: true, hidePort: true });
+op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic]);
 
 inAdvanced.onChange = function() {
     if (inAdvanced.get()) {
@@ -88,7 +87,6 @@ inAdvanced.onChange = function() {
         inFilterType.setUiAttribs({ greyout: true });
         inMSAA.setValue("none");
         inAnisotropic.setUiAttribs({ greyout: true });
-        inTest.setUiAttribs({ greyout: true });
     }
 };
 
@@ -156,7 +154,6 @@ const light = new Light({
     falloff: null,
 });
 
-op.log("aminakoyum", cgl.gl.getSupportedExtensions());
 
 function updateBuffers() {
     const MSAA = Number(inMSAA.get().charAt(0));
@@ -199,11 +196,8 @@ inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
 inFilterType.onChange = function() {
     if (inFilterType.get() === "Anisotropic") {
         inAnisotropic.setUiAttribs({ greyout: false });
-        inTest.setUiAttribs({ greyout: false });
-
     } else {
         inAnisotropic.setUiAttribs({ greyout: true });
-        inTest.setUiAttribs({ greyout: true });
     }
 
     updateBuffers();
@@ -242,6 +236,7 @@ inCastShadow.onChange = function() {
     light.castShadow = castShadow;
     if (castShadow) {
         inMapSize.setUiAttribs({ greyout: false });
+        inShadowStrength.setUiAttribs({ greyout: false });
         inLRBT.setUiAttribs({ greyout: false });
         inNear.setUiAttribs({ greyout: false });
         inFar.setUiAttribs({ greyout: false });
@@ -251,6 +246,7 @@ inCastShadow.onChange = function() {
         inPolygonOffset.setUiAttribs({ greyout: false });
     } else {
         inMapSize.setUiAttribs({ greyout: true });
+        inShadowStrength.setUiAttribs({ greyout: true });
         inLRBT.setUiAttribs({ greyout: true });
         inNear.setUiAttribs({ greyout: true });
         inFar.setUiAttribs({ greyout: true });
@@ -337,7 +333,7 @@ function renderShadowMap() {
     cgl.pushPMatrix();
 
     fb.renderStart(cgl);
-    /* */
+
     // * calculate matrices & camPos vector
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
     mat4.copy(cgl.mMatrix, identityMat); // M
@@ -400,7 +396,6 @@ inTrigger.onTriggered = function() {
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
 
-                // cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
@@ -408,14 +403,9 @@ inTrigger.onTriggered = function() {
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
 
-
-                // cgl.gl.disable(cgl.gl.DEPTH_TEST);
                 cgl.gl.cullFace(cgl.gl.BACK);
                 cgl.gl.disable(cgl.gl.CULL_FACE);
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
-
-                // NOTE: blur is still very cpu intensive... idk why
-                // better with jsut 2 color channels
 
                 if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
 
@@ -436,6 +426,7 @@ inTrigger.onTriggered = function() {
                 light.shadowMap = fb.getTextureColor();
                 light.shadowMapDepth = fb.getTextureDepth();
                 light.normalOffset = inNormalOffset.get();
+                light.shadowStrength = inShadowStrength.get();
                 cgl.lightStack.push(light);
 
             }
