@@ -431,7 +431,6 @@ Geometry.prototype.calcTangentsBitangents = function ()
     // temporary buffers
     var tempVertices = [];
     tempVertices.length = vertexCount * 2;
-
     const v1 = vec3.create();
     const v2 = vec3.create();
     const v3 = vec3.create();
@@ -499,6 +498,9 @@ Geometry.prototype.calcTangentsBitangents = function ()
 
     for (var vert = 0; vert < vertexCount; vert += 1)
     {
+        // NOTE: some meshes don't have index 0 - n in their indexbuffer, if this is the case, skip calculation of this vertex
+        if (!tempVertices[vert]) continue;
+
         vec3.set(normal, this.vertexNormals[vert * 3], this.vertexNormals[vert * 3 + 1], this.vertexNormals[vert * 3 + 2]);
         vec3.set(tempVert, tempVertices[vert][0], tempVertices[vert][1], tempVertices[vert][2]);
 
