@@ -3,11 +3,10 @@ void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
 
-
     {{MODULE_COLOR}}
 
 
-    float depth = gl_FragCoord.z;
+    float depth =gl_FragCoord.z;
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel
 

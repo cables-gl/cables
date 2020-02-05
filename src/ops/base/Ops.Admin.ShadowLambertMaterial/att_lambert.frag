@@ -66,18 +66,17 @@ struct Light {
 };
 
 UNI Light lights[NUM_LIGHTS];
-/*
-float getfallOff(Light light,float distLight)
+
+float CalculateFalloff(float radius, float falloff, float distLight)
 {
-    float denom = distLight / light.radius + 1.0;
+    float denom = distLight / radius + 1.0;
     float attenuation = 1.0 / (denom*denom);
     float t = (attenuation - 0.1) / (1.0 - 0.1);
 
-    t=t* (20.0*light.falloff*20.0*light.falloff);
+    t = t * (20.0 * (1. - falloff) * 20.0 * (1. - falloff));
 
     return min(1.0,max(t, 0.0));
 }
-*/
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
@@ -225,7 +224,8 @@ float getfallOff(Light light,float distLight)
 #endif
 
 #ifdef MODE_VSM
-    float ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth) {
+    float ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth, float shadowStrength) {
+
             float depthScale = shadowBias * 0.01 * shadowMapDepth; // - shadowBias;
             float minVariance = depthScale*depthScale; // = 0.00001
 
@@ -236,6 +236,7 @@ float getfallOff(Light light,float distLight)
             float variance =  max(moments.y - (moments.x * moments.x), 0.00001);
 
             float distanceToMean = distanceTo - moments.x;
+
             //there is a very small probability that something is being lit when its not
             // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
             // bottom line helps make the shadows darker
@@ -291,8 +292,6 @@ void main()
 
         float lambert = 1.; // inout variable
         vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, materialColor.rgb, lambert);
-
-        // if (lights[l].typeCastShadow.TYPE != 1) newColor*=getfallOff(light, length(lightModelDiff));
 
         diffuseColor *= lights[l].lightProperties.INTENSITY;
 
@@ -358,7 +357,7 @@ void main()
                 #endif
 
                 #ifdef MODE_VSM
-                    diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowProperties.BIAS, shadowMapDepth);
+                    diffuseColor *= ShadowFactorVSM(shadowMapSample, lights[l].shadowProperties.BIAS, shadowMapDepth, shadowStrength);
                 #endif
             }
 
@@ -371,6 +370,11 @@ void main()
                     lightDirection
                 );
                 diffuseColor *= spotIntensity;
+        }
+
+        if (lights[l].typeCastShadow.TYPE != 1) {
+            vec3 lightModelDiff=lights[l].position - modelPos.xyz;
+            diffuseColor *= CalculateFalloff(lights[l].lightProperties.RADIUS, lights[l].lightProperties.FALLOFF, length(lightModelDiff));
         }
 
          calculatedColor += diffuseColor;

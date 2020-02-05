@@ -67,7 +67,7 @@ const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
-const inBlur = op.inFloatSlider("Blur Amount", 1);
+const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("",[inCastShadow]);
 op.setPortGroup("Shadow Map Settings",[
     inMapSize,
