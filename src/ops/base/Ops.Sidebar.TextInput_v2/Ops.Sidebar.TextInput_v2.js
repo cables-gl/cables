@@ -6,7 +6,6 @@ const inTextArea=op.inBool("TextArea",false);
 const inGreyOut=op.inBool("Grey Out",false);
 const inVisible=op.inBool("Visible",true);
 
-
 // outputs
 const siblingsPort = op.outObject('Children');
 const valuePort = op.outString('Result', defaultValuePort.get());
@@ -42,6 +41,8 @@ function creatElement()
     else
     {
         input = document.createElement('textarea');
+        onDefaultValueChanged();
+
     }
 
     input.classList.add('sidebar__text-input-input');
@@ -49,11 +50,7 @@ function creatElement()
     input.setAttribute('value', defaultValuePort.get());
     el.appendChild(input);
     input.addEventListener('input', onInput);
-
-
 }
-
-
 
 var greyOut = document.createElement('div');
 greyOut.classList.add('sidebar__greyout');
