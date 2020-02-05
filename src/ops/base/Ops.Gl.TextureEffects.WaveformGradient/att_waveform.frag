@@ -54,6 +54,13 @@ void main()
         v = pow(uv.x,uPow);
     #endif
 
+    #ifdef MODE_SQR
+        pModMirror1(uv.x,1.0);
+        uv.x = -abs(uv.x);
+        uv.x = fract(uv.x);
+        v = step(uv.x,uPow);
+    #endif
+
     vec4 col = vec4(v,v,v,1.0);
     vec4 base = texture(tex,texCoord);
 

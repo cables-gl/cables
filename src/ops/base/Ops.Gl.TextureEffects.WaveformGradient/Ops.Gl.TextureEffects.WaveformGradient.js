@@ -2,7 +2,7 @@ const
     render=op.inTrigger("render"),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
-    mode=op.inValueSelect("Mode",['Sine','Sawtooth','Triangle'],'Sine'),
+    mode=op.inValueSelect("Mode",['Sine','Sawtooth','Triangle','Square'],'Sine'),
     freq=op.inValue("Frequency",4),
     pow=op.inValue("Pow factor",6),
     offset=op.inValue("Offset",0),
@@ -34,10 +34,12 @@ function updateMode()
     shader.removeDefine("MODE_SAW");
     shader.removeDefine("MODE_SINE");
     shader.removeDefine("MODE_TRI");
+    shader.removeDefine("MODE_SQR");
 
     if(mode.get()=='Sine')shader.define("MODE_SINE");
     else if(mode.get()=='Sawtooth')shader.define("MODE_SAW");
     else if(mode.get()=='Triangle')shader.define("MODE_TRI");
+    else if(mode.get()=='Square')shader.define("MODE_SQR");
 
 }
 
