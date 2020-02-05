@@ -400,19 +400,22 @@ const render = function() {
         op.log("NO SHADER");
         return;
     }
-    cgl.setShader(shader);
+    if (cgl.shadowPass) {
+        outTrigger.trigger();
+    } else {
+        cgl.setShader(shader);
+        shader.popTextures();
 
-    shader.popTextures();
+        if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
+        if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
+        if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
+        if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
+        if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
+        if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
 
-    if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
-    if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
-    if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
-    if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
-    if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
-    if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
-
-    outTrigger.trigger();
-    cgl.setPreviousShader();
+        outTrigger.trigger();
+        cgl.setPreviousShader();
+    }
 }
 
 op.preRender = function() {

@@ -1,0 +1,190 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Direction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow Map Settings"
+            },
+            {
+                "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "LR-BottomTop",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow Map Settings",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normal Offset",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable Advanced",
+                "group": "Advanced Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "MSAA",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Texture Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Texture Filter",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Advanced Options"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Shadow Map"
+            }
+        ],
+        "name": "Ops.Admin.ShadowDirectionalLight"
+    },
+    "authorName": "cables",
+    "id": "83023195-a31d-4341-8c55-9e093b8bd3b0",
+    "created": 1576690236278,
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowLambertDirLight renamed to Ops.Admin.ShadowDirectionalLight",
+            "author": "cables",
+            "date": 1578416828896
+        }
+    ]
+}
