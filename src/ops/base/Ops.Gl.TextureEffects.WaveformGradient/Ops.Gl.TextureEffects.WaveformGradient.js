@@ -6,8 +6,16 @@ const
     freq=op.inValue("Frequency",4),
     pow=op.inValue("Pow factor",6),
     offset=op.inValue("Offset",0),
-    rotate=op.inValue("Rotate",0),
+    rotate=op.inFloatSlider("Rotate",0),
+    r=op.inValueSlider("r", 1.0),
+    g=op.inValueSlider("g", 1.0),
+    b=op.inValueSlider("b", 1.0),
     trigger=op.outTrigger("trigger");
+
+op.setPortGroup("Waveform",[mode,freq,pow,offset,rotate]);
+op.setPortGroup("Color",[r,g,b]);
+
+r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const shader=new CGL.Shader(cgl);
@@ -22,8 +30,10 @@ const
     offsetUniform=new CGL.Uniform(shader,'f','uOffset',offset),
     powUniform=new CGL.Uniform(shader,'f','uPow',pow),
     rotateUniform=new CGL.Uniform(shader,'f','uRotate',rotate),
-
-    amountUniform=new CGL.Uniform(shader,'f','amount',amount);
+    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
+    uniformR=new CGL.Uniform(shader,'f','r',r),
+    uniformG=new CGL.Uniform(shader,'f','g',g),
+    uniformB=new CGL.Uniform(shader,'f','b',b);
 
 updateMode();
 

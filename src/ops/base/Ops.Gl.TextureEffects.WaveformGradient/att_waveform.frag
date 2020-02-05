@@ -6,6 +6,10 @@ UNI float uPow;
 UNI float uRotate;
 UNI float amount;
 
+UNI float r;
+UNI float g;
+UNI float b;
+
 {{CGL.BLENDMODES}}
 
 #define PI 3.14159265359
@@ -61,7 +65,7 @@ void main()
         v = step(uv.x,uPow);
     #endif
 
-    vec4 col = vec4(v,v,v,1.0);
+    vec4 col = vec4(vec3(v)*vec3(r,g,b),1.0);
     vec4 base = texture(tex,texCoord);
 
     outColor = cgl_blend(base,col,amount);;
