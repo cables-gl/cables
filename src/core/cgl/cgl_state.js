@@ -4,6 +4,7 @@ import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
 
+
 /**
  * cables gl context/state manager
  * @external CGL
@@ -26,7 +27,6 @@ const Context = function (_patch)
 
     this.temporaryTexture = null;
     this.frameStore = {};
-
     this.gl = null;
 
     /**
@@ -156,7 +156,7 @@ const Context = function (_patch)
         }
         var derivativeExt = this.gl.getExtension("OES_standard_derivatives");
         var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
-
+        
         this.maxTextureUnits=this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
 
         if (instancingExt.vertexAttribDivisorANGLE)
