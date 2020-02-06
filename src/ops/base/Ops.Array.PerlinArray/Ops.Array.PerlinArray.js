@@ -1,4 +1,5 @@
-const inArrayX = op.inArray("Array in X"),
+const
+    inArrayX = op.inArray("Array in X"),
     inTimeArray = op.inArray("Array time"),
     inTime = op.inFloat("Time in Y",0),
     seed = op.inFloatSlider("Seed 0-1",0.0),
@@ -9,7 +10,6 @@ const inArrayX = op.inArray("Array in X"),
 var showingError=false;
 
 var newArr=[];
-var tempTimeArray=[];
 outArray.set(newArr);
 
 seed.set(Math.random());
