@@ -5,13 +5,19 @@ const
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
     inRender=op.inBool("Draw",true),
-    inAutoSize=op.inBool("Auto Scale",true),
+    inCenter=op.inSwitch("Center",["None","XYZ","XZ"],"XYZ"),
+    inRescale=op.inBool("Rescale",true),
+    inRescaleSize=op.inFloat("Rescale Size",2.5),
     inShow=op.inTriggerButton("Show Structure"),
     inTime=op.inFloat("Time"),
     inTimeLine=op.inBool("Sync to timeline",false),
     inLoop=op.inBool("Loop",true),
 
+    inSwitchNormalsYZ=op.inBool("Switch Normals",false),
+
     inMaterials=op.inObject("Materials"),
+
+
     nextBefore=op.outTrigger("Render Before"),
     next=op.outTrigger("Next"),
     outGenerator=op.outString("Generator"),
@@ -19,6 +25,8 @@ const
     outAnimLength=op.outNumber("Anim Length",0),
     outAnimTime=op.outNumber("Anim Time",0),
     outJson=op.outObject("Json"),
+    outPoints=op.outArray("BoundingPoints"),
+    outBounds=op.outObject("Bounds"),
     outAnimFinished=op.outTrigger("Finished");
 
 op.setPortGroup("Timing",[inTime,inTimeLine,inLoop]);
@@ -27,6 +35,7 @@ const le=true; //little endian
 const cgl=op.patch.cgl;
 inFile.onChange=reloadSoon;
 
+var boundingPoints=[];
 var gltf=null;
 var maxTime=0;
 var time=0;
@@ -36,10 +45,49 @@ var loadingId=null;
 var data=null;
 var scale=vec3.create();
 var lastTime=0;
+var doCenter=false;
+
+const boundsCenter=vec3.create();
 
 inShow.onTriggered=printInfo;
 dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 dataPort.onChange=loadData;
+
+op.setPortGroup("Transform",[inRescale,inRescaleSize,inCenter]);
+
+inCenter.onChange=function()
+{
+    doCenter=inCenter.get()!="None";
+    updateCenter();
+
+};
+
+function updateCenter()
+{
+
+    if(gltf && gltf.bounds)
+    {
+        boundsCenter.set(gltf.bounds.center);
+        boundsCenter[0]=-boundsCenter[0];
+        boundsCenter[1]=-boundsCenter[1];
+        boundsCenter[2]=-boundsCenter[2];
+
+        if(inCenter.get()=="XZ")
+            boundsCenter[1]=-gltf.bounds.minY;
+
+    }
+
+}
+
+inSwitchNormalsYZ.onChange=function()
+{
+    reloadSoon();
+};
+
+inRescale.onChange=function()
+{
+    inRescaleSize.setUiAttribs({greyout:!inRescale.get()});
+};
 
 inMaterials.onChange=function()
 {
@@ -62,7 +110,6 @@ inExec.onTriggered=function()
     if(inTimeLine.get()) time=op.patch.timer.getTime();
     else time=Math.max(0,inTime.get());
 
-
     if(inLoop.get())
     {
         time = time % maxTime;
@@ -78,12 +125,18 @@ inExec.onTriggered=function()
 
     outAnimTime.set(time);
 
-    if(gltf && gltf.bounds && inAutoSize.get())
+    if(gltf && gltf.bounds)
     {
-        const sc=2.5/gltf.bounds.maxAxis;
-        console.log("scale",sc);
-        vec3.set(scale,sc,sc,sc);
-        mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
+        if(inRescale.get())
+        {
+            const sc=inRescaleSize.get()/gltf.bounds.maxAxis;
+            vec3.set(scale,sc,sc,sc);
+            mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
+        }
+        if(doCenter)
+        {
+            mat4.translate(cgl.mMatrix,cgl.mMatrix,boundsCenter);
+        }
     }
 
     cgl.frameStore.currentScene=gltf;
@@ -124,6 +177,8 @@ function loadBin()
 
     oReq.onload = function (oEvent)
     {
+        boundingPoints=[];
+
         maxTime=0;
         var arrayBuffer = oReq.response;
         gltf=parseGltf(arrayBuffer);
@@ -133,7 +188,12 @@ function loadBin()
         outAnimLength.set(maxTime);
         hideNodesFromData();
         if(tab)printInfo();
+
+
+        outPoints.set(boundingPoints);
         console.log('gltf.bounds',gltf.bounds);
+        outBounds.set(gltf.bounds);
+        updateCenter();
     };
 
 

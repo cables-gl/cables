@@ -1,0 +1,230 @@
+{
+    "authorName": "cables",
+    "id": "6a9182dd-7317-4aeb-85c5-5f2aef2d88e6",
+    "created": 1580225100838,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At X",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Y",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Z",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inner Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Spot Exponent",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow Map Settings"
+            },
+            {
+                "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow Map Settings",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normal Offset",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable Advanced",
+                "group": "Advanced Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "MSAA",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Texture Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Texture Filter",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Test",
+                "group": "Advanced Options",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Shadow Map"
+            }
+        ],
+        "name": "Ops.Admin.ShadowSpotLight"
+    }
+}

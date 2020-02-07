@@ -10,6 +10,11 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
                 "subType": "string"
@@ -22,27 +27,55 @@
             },
             {
                 "type": "0",
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Mode",
+                "group": "Waveform",
                 "subType": "string"
             },
             {
                 "type": "0",
                 "name": "Frequency",
+                "group": "Waveform",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Pow factor",
+                "group": "Waveform",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Offset",
+                "group": "Waveform",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Rotate",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
                 "subType": "number"
             }
         ],

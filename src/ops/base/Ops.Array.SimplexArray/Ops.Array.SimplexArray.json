@@ -16,6 +16,10 @@
                 "name": "Array in X "
             },
             {
+                "type": "3",
+                "name": "Array time"
+            },
+            {
                 "type": "0",
                 "name": "Time in Y",
                 "subType": "number"
@@ -35,6 +39,11 @@
             {
                 "type": "3",
                 "name": "Array out"
+            },
+            {
+                "type": "0",
+                "name": "Array length out",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.SimplexArray"

@@ -1,0 +1,132 @@
+{
+    "authorName": "pandur",
+    "id": "daafedce-998a-4b34-8af3-6b62a66948ed",
+    "created": 1580986065507,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "data"
+            },
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "glb File"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Center index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Center",
+                "group": "Transform"
+            },
+            {
+                "type": "0",
+                "name": "Rescale",
+                "group": "Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Rescale Size",
+                "group": "Transform",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Show Structure"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "group": "Timing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sync to timeline",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "group": "Timing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Switch Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Materials"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Render Before"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "5",
+                "name": "Generator"
+            },
+            {
+                "type": "0",
+                "name": "GLTF Version",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Anim Time",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Json"
+            },
+            {
+                "type": "3",
+                "name": "BoundingPoints"
+            },
+            {
+                "type": "2",
+                "name": "Bounds"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
+            }
+        ],
+        "name": "Ops.Admin.GltfScene2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.GltfScene3 renamed to Ops.Admin.GltfScene2",
+            "author": "pandur",
+            "date": 1580991292936
+        }
+    ]
+}

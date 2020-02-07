@@ -2,7 +2,6 @@ op.varName=op.inValueSelect("Variable",[],"",true);
 var val=op.outObject("Object");
 
 var variable=null;
-// op.patch.addVariableListener(init);
 op.patch.addEventListener("variablesChanged",init);
 
 init();
@@ -18,7 +17,6 @@ function updateVarNamesDropdown()
 
         for(var i in vars) varnames.push(i);
 
-        // varnames.push('+ create new one');
         op.varName.uiAttribs.values=varnames;
     }
 }
@@ -32,19 +30,7 @@ function init()
 {
     updateVarNamesDropdown();
 
-    // if(CABLES.UI)
-    // {
-    //     if(op.varName.get()=='+ create new one')
-    //     {
-    //         CABLES.CMD.PATCH.createVariable(op);
-    //         return;
-    //     }
-    // }
-
-    if(variable)
-    {
-        variable.removeListener(onChange);
-    }
+    if(variable) variable.removeListener(onChange);
 
     variable=op.patch.getVar(op.varName.get());
 
@@ -54,7 +40,6 @@ function init()
         op.uiAttr({error:null,});
         op.setTitle('#'+op.varName.get());
         onChange(variable.getValue());
-        // console.log("var value ",variable.getName(),variable.getValue());
     }
     else
     {
@@ -72,6 +57,5 @@ function onChange(v)
 
 op.onDelete=function()
 {
-    if(variable)
-        variable.removeListener(onChange);
+    if(variable) variable.removeListener(onChange);
 };

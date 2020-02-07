@@ -8,8 +8,18 @@
                 "subType": "string"
             },
             {
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "filter"
+            },
+            {
+                "type": "0",
+                "name": "wrap index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -25,6 +35,11 @@
                 "type": "0",
                 "name": "unpackPreMultipliedAlpha",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
             },
             {
                 "type": "5",

@@ -1,13 +1,13 @@
 // adapted from the FreeGLUT project
-
-const render=op.inTrigger('render');
-const slices=op.inValue("slices",32);
-const stacks=op.inValue("stacks",5);
-const radius=op.inValue("radius",1);
-const height=op.inValue("height",2);
-const active=op.inValueBool('Active',true);
-const trigger=op.outTrigger('trigger');
-const geomOut=op.outObject("geometry");
+const
+    render=op.inTrigger('render'),
+    slices=op.inValue("slices",32),
+    stacks=op.inValue("stacks",5),
+    radius=op.inValue("radius",1),
+    height=op.inValue("height",2),
+    active=op.inValueBool('Active',true),
+    trigger=op.outTrigger('trigger'),
+    geomOut=op.outObject("geometry");
 
 geomOut.ignoreValueSerialize=true;
 
@@ -16,18 +16,14 @@ var mesh=null;
 var geom=null;
 var i=0,j=0,idx=0,offset=0;
 
-
 var needsRebuild=true;
 
-stacks.onChange=updateMeshLater;
-slices.onChange=updateMeshLater;
-radius.onChange=updateMeshLater;
-height.onChange=updateMeshLater;
+stacks.onChange=slices.onChange=radius.onChange=height.onChange=updateMeshLater;
 
 function updateMeshLater()
 {
     needsRebuild=true;
-}
+};
 
 render.onTriggered=function()
 {
@@ -54,8 +50,7 @@ function updateMesh()
     var r=radius.get();
     generateCone(r,Math.max(0.01,height.get()), nstacks, nslices);
     needsRebuild=false;
-}
-
+};
 
 function circleTable(n,halfCircle)
 {
@@ -92,7 +87,7 @@ function circleTable(n,halfCircle)
         cost[size] = cost[0];
     }
     return {cost:cost,sint:sint};
-}
+};
 
 function generateCone(base,height,stacks,slices)
 {
@@ -103,7 +98,7 @@ function generateCone(base,height,stacks,slices)
     geom.tangents=[];
     geom.biTangents=[];
 
-    var table=circleTable(-slices,false);
+    var table=circleTable(-slices+1,false);
 
     var zStep = height / ( ( stacks > 0 ) ? stacks : 1 );
     var rStep = base / ( ( stacks > 0 ) ? stacks : 1 );
@@ -111,7 +106,7 @@ function generateCone(base,height,stacks,slices)
     /* Scaling factors for vertex normals */
     var cosn = (height / Math.sqrt( height * height + base * base ));
     var sinn = (base   / Math.sqrt( height * height + base * base ));
-
+    var texCoords=[];
 
     /* bottom */
     geom.vertices[0] =  0;
@@ -122,8 +117,10 @@ function generateCone(base,height,stacks,slices)
     geom.vertexNormals[2] = -1;
     geom.tangents.push(1,0,0);
     geom.biTangents.push(0,1,0);
-    idx = 3;
+
+    idx = 3; // index carried over through all for loops - allows mesh buildup
     /* other on bottom (get normals right) */
+
     for (j=0; j<slices; j++, idx+=3)
     {
         geom.vertices[idx  ] = table.cost[j]*r;
@@ -145,6 +142,10 @@ function generateCone(base,height,stacks,slices)
     {
         for (j=0; j<slices; j++, idx+=3)
         {
+            //gets texcoords from textured material
+            //xyz converts to xy for uv
+            texCoords[idx/3*2  ] =1-j/slices;
+            texCoords[idx/3*2+1] = 1-i/stacks;
 
             geom.vertices[idx  ] = table.cost[j]*r;
             geom.vertices[idx+1] = table.sint[j]*r;
@@ -164,14 +165,30 @@ function generateCone(base,height,stacks,slices)
         r -= rStep;
     }
 
-    /* top stack */
+    /* top stack - bottom section*/
     for (j=0, idx=0;  j<slices;  j++, idx+=2)
     {
+        //makes the texture cartopol
+        texCoords[0  ] = (geom.vertices[0]/radius.get())*0.5+0.5;
+        texCoords[1  ] = 1-(geom.vertices[1]/radius.get())*0.5+0.5;
+
+        texCoords[j*2+0] = (geom.vertices[(j)*3]/radius.get())*0.5+0.5;
+        texCoords[j*2+1] = 1-(geom.vertices[(j)*3+1]/radius.get())*0.5+0.5;
+
         geom.verticesIndices[idx  ] = 0;
-        geom.verticesIndices[idx+1] = j+1;              /* 0 is top vertex, 1 is first for first stack */
+        geom.verticesIndices[idx+1] = j+1;  /* 0 is top vertex, 1 is first for first stack */
+
     }
-    geom.verticesIndices[idx  ] = 0;                    /* repeat first slice's idx for closing off shape */
+
+    geom.verticesIndices[idx  ] = 0;        /* repeat first slice's idx for closing off shape */
     geom.verticesIndices[idx+1] = 1;
+
+    texCoords[0  ] = (geom.vertices[0]/radius.get())*0.5+0.5;
+    texCoords[1  ] = 1-(geom.vertices[1]/radius.get())*0.5+0.5;
+
+    texCoords[j*2+0] = (geom.vertices[(j)*3]/radius.get())*0.5+0.5;
+    texCoords[j*2+1] = 1-(geom.vertices[(j)*3+1]/radius.get())*0.5+0.5;
+
     idx+=2;
 
     /* middle stacks: */
@@ -188,10 +205,8 @@ function generateCone(base,height,stacks,slices)
         geom.verticesIndices[idx+1] = offset+slices;
     }
 
-
+    geom.setTexCoords(texCoords);
 
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(geom);
-}
-
-
+};

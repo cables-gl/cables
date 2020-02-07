@@ -118,7 +118,7 @@ inTrigger.onTriggered=function()
     else if(align==ALIGN_BOTH)
     {
         const rect=cgl.canvas.parentNode.getBoundingClientRect();
-
+console.log("both rect",rect);
         h=rect.height;
         w=h*inRatio.get();
 

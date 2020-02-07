@@ -25,23 +25,36 @@ var gltfMesh=class
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
-
-        // console.log("mesh bounds:",this.bounds._maxAxis);
     }
-
     fillGeomAttribs(gltf,geom,attribs)
     {
         if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
         if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
         if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
         if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
-
         if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
+// Implementation note: When normals and tangents are specified,
+// client implementations should compute the bitangent by taking
+// the cross product of the normal and tangent xyz vectors and
+// multiplying against the w component of the tangent:
+// bitangent = cross(normal, tangent.xyz) * tangent.w
 
-        if(!geom.vertexNormals.length)geom.calculateNormals();
+        if(inSwitchNormalsYZ.get())
+        {
+            for(var i=0;i<geom.vertexNormals.length;i+=3)
+            {
+                var t=geom.vertexNormals[i+2];
+                geom.vertexNormals[i+2]=geom.vertexNormals[i+1];
+                geom.vertexNormals[i+1]=t;
+            }
+        }
+
+
+        if(!geom.vertexNormals.length) geom.calculateNormals();
+
+
         geom.calcTangentsBitangents();
-
     }
 
     render(cgl,ignoreMaterial)
