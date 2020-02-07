@@ -91,6 +91,9 @@ function updateFade()
         idxa=Math.floor(pr);
         idxb=Math.ceil(pr);
         fade=pr%1;
+
+        if(idxa >= presets.length) idxa = presets.length-1;
+        if(idxb >= presets.length) idxb = presets.length-1;
     }
     else if(interpolate===1) // xfade
     {
@@ -99,25 +102,25 @@ function updateFade()
         idxb=Math.floor(presetB.get());
     }
 
+
+    var a=presets[idxa];
+    var b=presets[idxb];
+
+    if(!a || !b)
     {
-        var a=presets[idxa];
-        var b=presets[idxb];
-
-        if(!a || !b)
-        {
-            console.warn("preset not found");
-            return;
-        }
-
-        // todo: cache variable, so no string lookup needed every time...
-
-        for(var i in a.values)
-        {
-            var ip=a.values[i]+ (b.values[i]-a.values[i])*fade;
-            op.patch.setVarValue(i,ip);
-        }
-
+        console.warn("preset not found");
+        return;
     }
+
+    // todo: cache variable, so no string lookup needed every time...
+
+    for(var i in a.values)
+    {
+        var ip=a.values[i]+ (b.values[i]-a.values[i])*fade;
+        op.patch.setVarValue(i,ip);
+    }
+
+
 }
 
 
@@ -160,6 +163,7 @@ function updateDropdown()
         presetNames.uiAttribs.values.push(presets[i].name);
 
     updateButtons();
+    savePresets();
 }
 
 function getPreset(name)

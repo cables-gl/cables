@@ -109,12 +109,73 @@
         ],
         "name": "Ops.Gl.GLTF.GltfScene"
     },
-    "summary": "GLTF/GLB File Loader and renderer",
+    "summary": "Load GLTF/GLB 3d files",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "glb File",
+                "text": "String/name of GLB file to load"
+            },
+            {
+                "name": "Draw",
+                "text": "Render the GLB file"
+            },
+            {
+                "name": "Auto Scale",
+                "text": "Auto scale to maximum bounding box around all meshes, disable for actual scale"
+            },
+            {
+                "name": "Show Structure",
+                "text": "Click to open the UI for the GLTF op, shows information of mesh sections and materials"
+            },
+            {
+                "name": "Time",
+                "text": "Used to go through any animations in the GLB file"
+            },
+            {
+                "name": "Sync to timeline",
+                "text": "Sync to timeline"
+            },
+            {
+                "name": "Loop",
+                "text": "Loops animation if end is reached "
+            },
+            {
+                "name": "Materials",
+                "text": "Expects gltfSetMaterial node to set materials of nodes"
+            },
+            {
+                "name": "Generator",
+                "text": "Generator used to create the current GLB file"
+            },
+            {
+                "name": "GLTF Version",
+                "text": "Version of the current GLB file"
+            },
+            {
+                "name": "Anim Length",
+                "text": "Length of the animation in seconds"
+            },
+            {
+                "name": "Anim Time",
+                "text": "current time with animation"
+            },
+            {
+                "name": "Json",
+                "text": "Json object of the GLB file"
+            },
+            {
+                "name": "Finished",
+                "text": "Triggers when all GLB file has been loaded"
+            }
+        ]
     }
 }
