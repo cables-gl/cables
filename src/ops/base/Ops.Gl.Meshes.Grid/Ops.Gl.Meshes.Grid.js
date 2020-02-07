@@ -14,7 +14,8 @@ inNum.onChange=inSpacing.onChange=function()
 
 function init()
 {
-    var geomVertical=new CGL.Geometry();
+    var geomStepsOne=new CGL.Geometry();
+    var geomX=new CGL.Geometry();
 
     var space=inSpacing.get();
     var num=Math.floor(inNum.get());
@@ -25,33 +26,33 @@ function init()
 
     for(var i=-num/2;i<num/2+1;i++)
     {
-        geomVertical.vertices.push(-l);
-        geomVertical.vertices.push(i*space);
-        geomVertical.vertices.push(0);
+        geomStepsOne.vertices.push(-l);
+        geomStepsOne.vertices.push(i*space);
+        geomStepsOne.vertices.push(0);
 
-        geomVertical.vertices.push(l);
-        geomVertical.vertices.push(i*space);
-        geomVertical.vertices.push(0);
+        geomStepsOne.vertices.push(l);
+        geomStepsOne.vertices.push(i*space);
+        geomStepsOne.vertices.push(0);
 
-        geomVertical.vertices.push(i*space);
-        geomVertical.vertices.push(-l);
-        geomVertical.vertices.push(0);
+        geomStepsOne.vertices.push(i*space);
+        geomStepsOne.vertices.push(-l);
+        geomStepsOne.vertices.push(0);
 
-        geomVertical.vertices.push(i*space);
-        geomVertical.vertices.push(l);
-        geomVertical.vertices.push(0);
-        
+        geomStepsOne.vertices.push(i*space);
+        geomStepsOne.vertices.push(l);
+        geomStepsOne.vertices.push(0);
+
         tc.push(0,0);
         tc.push(0,0);
         tc.push(0,0);
         tc.push(0,0);
     }
-    
-    geomVertical.setTexCoords(tc);
-    geomVertical.calculateNormals();
 
-    if(!mesh) mesh=new CGL.Mesh(cgl,geomVertical);
-        else mesh.setGeom(geomVertical);
+    geomStepsOne.setTexCoords(tc);
+    geomStepsOne.calculateNormals();
+
+    if(!mesh) mesh=new CGL.Mesh(cgl,geomStepsOne);
+        else mesh.setGeom(geomStepsOne);
 }
 
 
@@ -66,9 +67,9 @@ render.onTriggered=function()
     shader.glPrimitive=cgl.gl.LINES;
 
     mesh.render(shader);
-    
+
     shader.glPrimitive=oldPrim;
-    
+
     next.trigger();
 };
 

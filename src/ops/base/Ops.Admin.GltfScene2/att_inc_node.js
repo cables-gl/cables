@@ -68,7 +68,6 @@ var gltfNode=class
             bb.mulMat4(localMat);
             bounds.apply(bb);
 
-console.log('calc bounds',this.name);
             boundingPoints.push(bb._min[0],bb._min[1],bb._min[2]);
             boundingPoints.push(bb._max[0],bb._max[1],bb._max[2]);
         }
@@ -77,10 +76,7 @@ console.log('calc bounds',this.name);
         {
             if(gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
             {
-                // console.log("",bounds);
                 bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf,localMat,bounds));
-                // console.log("",bounds.maxX,gltf.nodes[this.children[i]].name);
-
             }
         }
 
