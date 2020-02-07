@@ -21,49 +21,40 @@
                 "name": "Trigger"
             },
             {
-                "type": "0",
-                "name": "Axiom / seed",
-                "subType": "string"
+                "type": "5",
+                "name": "Axiom / seed"
             },
             {
-                "type": "0",
-                "name": "Constant 1",
-                "subType": "string"
+                "type": "5",
+                "name": "Constant 1"
             },
             {
-                "type": "0",
-                "name": "Rule 1",
-                "subType": "string"
+                "type": "5",
+                "name": "Rule 1"
             },
             {
-                "type": "0",
-                "name": "Constant 2",
-                "subType": "string"
+                "type": "5",
+                "name": "Constant 2"
             },
             {
-                "type": "0",
-                "name": "Rule 2",
-                "subType": "string"
+                "type": "5",
+                "name": "Rule 2"
             },
             {
-                "type": "0",
-                "name": "Constant 3",
-                "subType": "string"
+                "type": "5",
+                "name": "Constant 3"
             },
             {
-                "type": "0",
-                "name": "Rule 3",
-                "subType": "string"
+                "type": "5",
+                "name": "Rule 3"
             },
             {
-                "type": "0",
-                "name": "Constant 4",
-                "subType": "string"
+                "type": "5",
+                "name": "Constant 4"
             },
             {
-                "type": "0",
-                "name": "Rule 4",
-                "subType": "string"
+                "type": "5",
+                "name": "Rule 4"
             },
             {
                 "type": "0",
@@ -120,12 +111,11 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Final generated string",
-                "subType": "string"
+                "type": "5",
+                "name": "Final generated string"
             }
         ],
-        "name": "Ops.Exp.Lsystem_v2"
+        "name": "Ops.Systems.Lsystem_v2"
     },
     "summary": "Lsystem generator",
     "issues": "",

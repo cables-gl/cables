@@ -51,7 +51,7 @@ updateUi();
 inActive.onChange=function()
 {
     if(!inActive.get())removeStyles();
-}
+};
 
 function updateUi()
 {
@@ -139,7 +139,7 @@ inTrigger.onTriggered=function()
         cgl.canvas.style['margin-left']=(rect.width-w)/2+"px";
     }
 
-    if(cgl.canvas.width!=w || cgl.canvas.height!=h)
+    if(cgl.canvas.width/cgl.pixelDensity!=w || cgl.canvas.height/cgl.pixelDensity!=h)
     {
         outWidth.set(w);
         outHeight.set(h);
