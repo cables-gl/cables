@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1576233072011
+        },
+        {
+            "message": "Ops.Gl.GLTF.GltfNodeTransform renamed to Ops.Deprecated.Gl.GLTF.GltfNodeTransform",
+            "author": "pandur",
+            "date": 1581323224671
         }
     ],
     "authorName": "pandur",
