@@ -1,0 +1,89 @@
+{
+    "changelog": [
+        {
+            "message": " added lib: lottie_canvas.min.js",
+            "author": "pandur",
+            "date": 1581087097615
+        },
+        {
+            "message": "Ops.User.pandur.LottiePlayer2 renamed to Ops.Admin.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1581088057174
+        }
+    ],
+    "libs": [
+        "lottie_canvas.min.js"
+    ],
+    "authorName": "pandur",
+    "id": "e9946c8c-afb8-4ab5-b534-3fe53ed45dcf",
+    "created": 1581087518936,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "scale",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "rewind"
+            },
+            {
+                "type": "0",
+                "name": "speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "frame",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "name": "Ops.User.pandur.LottiePlayer2"
+    }
+}
