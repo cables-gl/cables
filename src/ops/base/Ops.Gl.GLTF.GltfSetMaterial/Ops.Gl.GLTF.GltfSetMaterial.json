@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1575752740946
+        },
+        {
+            "message": "Ops.Gl.GltfSetMaterial renamed to Ops.Gl.GLTF.GltfSetMaterial",
+            "author": "pandur",
+            "date": 1581323165523
         }
     ],
     "authorName": "pandur",
