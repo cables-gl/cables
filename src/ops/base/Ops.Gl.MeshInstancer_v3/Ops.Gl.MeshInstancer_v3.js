@@ -32,6 +32,8 @@ var recalc=true;
 var num=0;
 var oldColorArr=null;
 
+op.toWorkPortsNeedToBeLinked(exe);
+
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
 op.toWorkPortsNeedToBeLinked(geom);
@@ -53,6 +55,22 @@ inRot.onChange=inColor.onChange=
     inScales.onChange=reset;
 
 inBlendMode.onChange = setBlendMode;
+
+// exe.onLinkChanged=function ()
+// {
+//     op.log("link has changed");
+//     if(!shader)
+//     {
+//         op.setUiError("error1","No Material present",0)
+//         return;
+//     }
+//     else
+//     {
+//         console.log(shader);
+//         op.setUiError("error1",null);
+//     }
+
+// };
 
 function setBlendMode()
 {
@@ -175,12 +193,14 @@ function doRender()
     if(recalc)return;
     if(matrixArray.length<=1)return;
 
+
+
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
         removeModule();
 
         shader=cgl.getShader();
-
+        // console.log(shader);//shows current material
         if(!shader.hasDefine('INSTANCING'))
         {
             mod=shader.addModule(
@@ -203,12 +223,25 @@ function doRender()
             shader.define('INSTANCING');
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
+
     }
 
     if(doLimit.get()) mesh.numInstances=Math.min(num,inLimit.get());
         else mesh.numInstances=num;
 
     outNum.set(mesh.numInstances);
+
+    if(shader !== cgl.getDefaultShader())
+    {
+        op.log("simpleshader");
+        op.log(shader);
+        op.setUiError("error1","No Material present",0)
+    }
+    else
+    {
+        op.log("current material is " + shader);
+        op.setUiError(null);
+    }
 
     if(mesh.numInstances>0) mesh.render(shader);
     outTrigger.trigger();
