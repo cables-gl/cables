@@ -48,10 +48,13 @@ const Op = function ()
     this.enabled = true;
     this.patch = arguments[0];
     this.name = arguments[1];
-    this.errors = {};
     this._needsLinkedToWork = [];
     this._needsParentOp = null;
     this._shortOpName = "";
+    
+    this._hasUiErrors=false;
+    this._uiErrors = {};
+    
 
     if (arguments[1])
     {
@@ -1165,12 +1168,37 @@ const Op = function ()
 
     /**
      * show op error message - set message to null to remove error message
-     * @function setError
+     * @function setUiError
      * @instance
      * @memberof Op
      * @param {id} error id
      * @param {txt} text message
+     * @param {level} level 
      */
+    Op.prototype.setUiError=function(id,txt,level)
+    {
+        if(!txt && !this._hasUiErrors)return;
+        if(!txt && !this._uiErrors.hasOwnProperty(id))return;
+        if(this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt==txt) return;
+
+        if(!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
+        else
+        {
+            if(txt && (!this._uiErrors.hasOwnProperty(id) || this._uiErrors[id].txt!=txt))
+            {
+                if(level==undefined)level=2;
+                this._uiErrors[id]={"txt":txt,"level":level};
+            }
+        }
+        
+        var errorArr=[];
+        for(var i in this._uiErrors) errorArr.push(this._uiErrors[i]);
+        
+        this.uiAttr({ "uierrors": errorArr });
+        this._hasUiErrors=Object.keys(this._uiErrors).length;
+    }
+
+
     Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
@@ -1180,13 +1208,13 @@ const Op = function ()
         }
         else
         {
-            if(this.errors[id]!=txt)
+            if(this._uiErrors[id]!=txt)
             {
-                this.errors[id]=txt;
-                if(!txt)delete this.errors[id];
+                this._uiErrors[id]=txt;
+                if(!txt)delete this._uiErrors[id];
 
                 var errorArr=[];
-                for(var i in this.errors)errorArr.push(this.errors[i]);
+                for(var i in this._uiErrors)errorArr.push(this._uiErrors[i]);
                 this.uiAttr({ "errors": errorArr });
                 console.log(errorArr);
             }
@@ -1401,8 +1429,16 @@ const Op = function ()
             }
         }
 
-        if (!working) this.setUiAttrib({ working, notWorkingMsg });
-        else if (!this.uiAttribs.working) this.setUiAttrib({ working: true, notWorkingMsg: null });
+        if (!working) 
+        {
+            this.setUiAttrib({ working,notWorkingMsg:notWorkingMsg });
+            this.setUiError("notworking",notWorkingMsg,1);
+        }
+        else if (!this.uiAttribs.working)
+        {
+            this.setUiAttrib({ working: true,notWorkingMsg:null });
+            this.setUiError("notworking",null);
+        }
     };
 
     Op.prototype._checkLinksNeededToWork = function () {};
