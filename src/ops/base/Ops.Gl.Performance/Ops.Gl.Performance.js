@@ -224,6 +224,7 @@ function updateText()
     CGL.profileData.profileMVPMatrixCount=0;
     CGL.profileData.profileNonTypedAttrib=0;
     CGL.profileData.profileNonTypedAttribNames="";
+    
 }
 
 

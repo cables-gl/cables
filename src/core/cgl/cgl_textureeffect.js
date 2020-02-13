@@ -231,7 +231,7 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 
     if (op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.uiAttr({ error: "This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs." });
+        op.setUiError("textureeffect","This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs.",0);
         return false;
     }
 
@@ -251,7 +251,7 @@ TextureEffect.checkOpInEffect = function (op)
 
     if (!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.uiAttr({ error: "This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>." });
+        op.setUiError("texeffect","This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>." ,1);
         return false;
     }
 
