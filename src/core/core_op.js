@@ -1173,6 +1173,7 @@ const Op = function ()
      * @memberof Op
      * @param {id} error id
      * @param {txt} text message
+     * @param {level} level 
      */
     Op.prototype.setUiError=function(id,txt,level)
     {
