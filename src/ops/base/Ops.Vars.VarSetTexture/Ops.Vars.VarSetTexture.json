@@ -1,0 +1,31 @@
+{
+    "id": "f8082a46-dac4-4145-9347-9ce0dbee2b3a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1580289896884
+        },
+        {
+            "message": "Ops.User.pandur.varSetTexture renamed to Ops.Vars.VarSetTexture",
+            "author": "pandur",
+            "date": 1581417165272
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1580289941969,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "name": "Ops.User.pandur.varSetTexture"
+    }
+}

@@ -107,9 +107,9 @@ function handleTrigger() {
 
         if (!areSameLength) {
             //op.log([arrH, arrS, arrB, arrA].map(a => a.length), length);
-            op.setError("Arrays don't have the same length!");
+            op.setUiError("arrlen","Arrays don't have the same length!");
         } else {
-            op.setError(null);
+            op.setUiError("arrlen",null);
         }
 
         newArr.length = length * 4;

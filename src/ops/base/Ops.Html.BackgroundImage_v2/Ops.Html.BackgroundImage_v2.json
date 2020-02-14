@@ -1,0 +1,66 @@
+{
+    "authorName": "pandur",
+    "id": "081c4328-984d-4acd-8758-5d1379cc3a30",
+    "created": 1581502794546,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
+            {
+                "type": "0",
+                "name": "active",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "image file"
+            },
+            {
+                "type": "0",
+                "name": "Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Repeat index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Repeat",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Position index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Position",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ],
+        "name": "Ops.User.pandur.BackgroundImage_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.BackgroundImage_v2 renamed to Ops.Html.BackgroundImage_v2",
+            "author": "pandur",
+            "date": 1581502849013
+        }
+    ]
+}

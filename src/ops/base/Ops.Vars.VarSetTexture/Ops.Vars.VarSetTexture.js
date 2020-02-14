@@ -1,11 +1,12 @@
+var val=op.inObject("Object");
 op.varName=op.inValueSelect("Variable",[],"",true);
-var val=op.inString("Value",'New String');
 
 op.varName.onChange=updateName;
 val.onChange=update;
-val.changeAlways=true;
 
+// op.patch.addVariableListener(updateVarNamesDropdown);
 op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
+
 
 updateVarNamesDropdown();
 
@@ -15,8 +16,10 @@ function updateVarNamesDropdown()
     {
         var varnames=[];
         var vars=op.patch.getVars();
-        varnames.push('+ create new one');
+
         for(var i in vars) varnames.push(i);
+
+        varnames.push('+ create new one');
         op.varName.uiAttribs.values=varnames;
     }
 }
@@ -31,13 +34,13 @@ function updateName()
             return;
         }
 
-        op.setTitle('set #' + op.varName.get());
+        op.setTitle('#'+op.varName.get());
     }
     update();
 }
 
 function update()
 {
-    if(val.get())
-        op.patch.setVarValue(op.varName.get(),val.get());
+    op.patch.setVarValue(op.varName.get(),CGL.Texture.getEmptyTexture(op.patch.cgl));
+    op.patch.setVarValue(op.varName.get(),val.get());
 }

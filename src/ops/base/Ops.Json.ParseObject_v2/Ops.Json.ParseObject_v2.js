@@ -20,6 +20,6 @@ function parse()
     {
         console.log(ex);
         isValid.set(false);
-        op.setUiError("invalidjson","INVALID JSON<br/> can not parse string to object:<br/><b> "+ex.message+'</b>');
+        op.setUiError("invalidjson","INVALID JSON<br/>can not parse string to object:<br/><b> "+ex.message+'</b>');
     }
 }
