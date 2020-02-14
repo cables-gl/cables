@@ -38,7 +38,7 @@ function fullScreenBlurWarning ()
     if(cgl.currentTextureEffect.getCurrentSourceTexture().width == cgl.canvasWidth &&
         cgl.currentTextureEffect.getCurrentSourceTexture().height == cgl.canvasHeight)
     {
-        op.setUiError('warning','Warning full screen blurs are slow!',0);
+        op.setUiError('warning','Full screen blurs are slow! Try reducing the resolution to 1/2 or a 1/4',0);
     }
     else
     {
