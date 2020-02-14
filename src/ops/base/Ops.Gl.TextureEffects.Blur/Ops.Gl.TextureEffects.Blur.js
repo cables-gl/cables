@@ -38,13 +38,13 @@ function fullScreenBlurWarning ()
     if(cgl.currentTextureEffect.getCurrentSourceTexture().width == cgl.canvasWidth &&
         cgl.currentTextureEffect.getCurrentSourceTexture().height == cgl.canvasHeight)
     {
-        op.uiAttr({warning:"Warning full screen blurs are slow! Set image compose to 1/2 or a 1/4 of the current resolution."});
+        op.setUiError('warning','Warning full screen blurs are slow!',0);
     }
     else
     {
-        op.uiAttr({warning:null});
+        op.setUiError('warning',null);
     }
-}
+};
 
 var dir=0;
 direction.onChange=function()
