@@ -10,6 +10,7 @@ const
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
     inRot=op.inArray("Rotations"),
+    inBlendMode = op.inSwitch("Material blend mode",['Multiply','Add'],'Multiply'),
     inColor = op.inArray("Colors"),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum=op.outValue("Num");
@@ -51,6 +52,15 @@ inRot.onChange=inColor.onChange=
     inTranslates.onChange=
     inScales.onChange=reset;
 
+inBlendMode.onChange = setBlendMode;
+
+function setBlendMode()
+{
+    if(!shader)return;
+    shader.toggleDefine('BLEND_MODE_MULTIPLY',inBlendMode.get() === 'Multiply');
+    shader.toggleDefine('BLEND_MODE_ADD',inBlendMode.get() === 'Add');
+};
+
 geom.onChange=function()
 {
     if(mesh)mesh.dispose();
@@ -72,12 +82,12 @@ function removeModule()
         shader.removeModule(fragMod);
         shader=null;
     }
-}
+};
 
 function reset()
 {
     recalc=true;
-}
+};
 
 
 function setupArray()
@@ -150,13 +160,13 @@ function setupArray()
     mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
     recalc=false;
-}
+};
 
 function updateLimit()
 {
     if(doLimit.get()) inLimit.setUiAttribs({hidePort:false,greyout:false});
         else inLimit.setUiAttribs({hidePort:true,greyout:true});
-}
+};
 
 function doRender()
 {
@@ -170,6 +180,7 @@ function doRender()
         removeModule();
 
         shader=cgl.getShader();
+
         if(!shader.hasDefine('INSTANCING'))
         {
             mod=shader.addModule(
@@ -199,7 +210,7 @@ function doRender()
 
     outNum.set(mesh.numInstances);
 
-
     if(mesh.numInstances>0) mesh.render(shader);
     outTrigger.trigger();
-}
+};
+
