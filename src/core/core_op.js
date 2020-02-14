@@ -1222,17 +1222,17 @@ const Op = function ()
         }
     };
 
-    // todo: remove 
-    Op.prototype.setHint = function (txt)
-    {
-        if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
-    };
+    // // todo: remove 
+    // Op.prototype.setHint = function (txt)
+    // {
+    //     if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
+    // };
 
-    // todo: remove 
-    Op.prototype.setWarning = function (txt)
-    {
-        if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
-    };
+    // // todo: remove 
+    // Op.prototype.setWarning = function (txt)
+    // {
+    //     if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
+    // };
 
     /**
      *  add an eventlistener ot op

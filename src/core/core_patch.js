@@ -391,6 +391,9 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 
     if (op)
     {
+        if(uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
+        if(uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
+
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
