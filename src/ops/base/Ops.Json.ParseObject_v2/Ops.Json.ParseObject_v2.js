@@ -14,12 +14,12 @@ function parse()
         outObj.set(null);
         outObj.set(obj);
         isValid.set(true);
-        op.setError("invalidjson",null);
+        op.setUiError("invalidjson",null);
     }
     catch(ex)
     {
         console.log(ex);
         isValid.set(false);
-        op.setError("invalidjson","INVALID JSON<br/> can not parse string to object:<br/><b> "+ex.message+'</b>');
+        op.setUiError("invalidjson","INVALID JSON<br/> can not parse string to object:<br/><b> "+ex.message+'</b>');
     }
 }

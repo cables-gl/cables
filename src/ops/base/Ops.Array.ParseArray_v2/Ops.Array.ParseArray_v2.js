@@ -22,13 +22,12 @@ function parse()
 
     len.set(r.length);
 
-    op.setError(null);
-
     if(toNumber.get())
         for(var i=0;i<r.length;i++)
         {
             r[i]=Number(r[i]);
-            if(!CABLES.UTILS.isNumeric(r[i]))op.setError("Parse Error / Not all values numerical!");
+            if(!CABLES.UTILS.isNumeric(r[i]))op.setUiError("notnum","Parse Error / Not all values numerical!");
+            else op.setUiError("notnum",null);
         }
 
     arr.set(null);
