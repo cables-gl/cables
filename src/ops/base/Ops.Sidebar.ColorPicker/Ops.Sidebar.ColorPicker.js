@@ -20,6 +20,8 @@ const redPort = op.outValue('Red', 0.0);
 const greenPort = op.outValue('Green', 0.0);
 const bluePort = op.outValue('Blue', 0.0);
 
+const outHex=op.outString("Hex", DEFAULT_COLOR_HEX);
+
 // vars
 var el = document.createElement('div');
 el.classList.add('sidebar__item');
@@ -91,6 +93,7 @@ function setDefaultColor() {
     // let hexCol = inputValuePort.get().trim();
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
+    outHex.set(hex);
     if(CABLES.UI){
         gui.patch().showOpParams(op); /* update DOM */
     }
@@ -148,6 +151,7 @@ function onColorPickerChange(event) {
     setColorOutPorts(hex);
     input.value = hex;
     // inputValuePort.set(hex)
+    outHex.set(hex);
     setInputsByHex(hex);
     if(CABLES.UI){
         gui.patch().showOpParams(op); /* update DOM */
@@ -160,9 +164,11 @@ function onColorPickerChange(event) {
  */
 function setInputsByHex(hex) {
     const colorArr = hexToRgbNorm(hex);
-    inputRedPort.set(colorArr[0]),
-    inputGreenPort.set(colorArr[1]),
-    inputBluePort.set(colorArr[2])
+    inputRedPort.set(colorArr[0]);
+    inputGreenPort.set(colorArr[1]);
+    inputBluePort.set(colorArr[2]);
+    outHex.set(hex);
+
 }
 
 function onInput(ev) {
@@ -175,6 +181,7 @@ function onInput(ev) {
         setColorOutPorts(newValue);
         // inputValuePort.set(newValue)
         setInputsByHex(newValue);
+        outHex.set(newValue);
         if(CABLES.UI){
             gui.patch().showOpParams(op); /* update DOM */
         }
@@ -184,6 +191,7 @@ function onInput(ev) {
 // hex must be 7 digits
 function setColorOutPorts(hex) {
     const colorArr = hexToRgbNorm(hex);
+    outHex.set(hex);
     redPort.set(colorArr[0]);
     greenPort.set(colorArr[1]);
     bluePort.set(colorArr[2]);
@@ -207,6 +215,7 @@ function onDefaultValueChanged() {
 function onLabelTextChanged() {
     var labelText = labelPort.get();
     label.textContent = labelText;
+
     if(CABLES.UI) {
         op.setTitle('Color Picker: ' + labelText);
     }

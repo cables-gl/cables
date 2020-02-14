@@ -17,6 +17,7 @@ var lastTimeAcc=0;
 var obj={};
 
 
+
 req.onTriggered=function()
 {
 
@@ -81,9 +82,6 @@ req.onTriggered=function()
             }
         })
         .catch(console.error);
-
-
-
 }
 
 

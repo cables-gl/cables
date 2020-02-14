@@ -46,14 +46,14 @@ function checkError()
     var snaps=snapVals.get();
     if(!snaps || snaps.length==0)
     {
-        op.error("snapsnull","needs array containing snap points");
+        op.setUiError("snapsnull","needs array containing snap points");
         hasError=true;
         return;
     }
     
     if(hasError)
     {
-        op.error("snapsnull",null);
+        op.setUiError("snapsnull",null);
         hasError=false;
         setTimeout(update,500);
     }

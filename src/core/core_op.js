@@ -1194,14 +1194,17 @@ const Op = function ()
         var errorArr=[];
         for(var i in this._uiErrors) errorArr.push(this._uiErrors[i]);
         
+        this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
         this._hasUiErrors=Object.keys(this._uiErrors).length;
     }
 
-
+    // todo: remove 
     Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
+        console.warn("old error message op.error() - use op.setUiError()");
+        
         if(txt===undefined)
         {
             this.uiAttr({ error: id });
@@ -1221,29 +1224,17 @@ const Op = function ()
         }
     };
 
-    /**
-     * show op hint message - set message to null to remove
-     * @function setHint
-     * @instance
-     * @memberof Op
-     * @param {txt} text message
-     */
-    Op.prototype.setHint = function (txt)
-    {
-        if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
-    };
+    // // todo: remove 
+    // Op.prototype.setHint = function (txt)
+    // {
+    //     if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
+    // };
 
-    /**
-     * show op warning message - set message to null to remove
-     * @function setWarning
-     * @instance
-     * @memberof Op
-     * @param {txt} text message
-     */
-    Op.prototype.setWarning = function (txt)
-    {
-        if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
-    };
+    // // todo: remove 
+    // Op.prototype.setWarning = function (txt)
+    // {
+    //     if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
+    // };
 
     /**
      *  add an eventlistener ot op
