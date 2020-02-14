@@ -49,8 +49,9 @@ function reload()
             }
             catch(e)
             {
-                op.error('ajaxrequest: exception while loading ',filename.get());
-                op.uiAttr({'error':'error loading json'});
+                // op.error('ajaxrequest: exception while loading ',filename.get());
+                console.log(e);
+                op.setUiError('jsonerr','Problem while loading json:<br/>'+e);
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
