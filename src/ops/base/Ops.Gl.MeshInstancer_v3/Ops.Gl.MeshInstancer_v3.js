@@ -10,7 +10,7 @@ const
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
     inRot=op.inArray("Rotations"),
-    inBlendMode = op.inSwitch("Material blend mode",['Multiply','Add'],'Multiply'),
+    inBlendMode = op.inSwitch("Material blend mode",['Multiply','Add','None'],'Multiply'),
     inColor = op.inArray("Colors"),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum=op.outValue("Num");
@@ -77,6 +77,7 @@ function setBlendMode()
     if(!shader)return;
     shader.toggleDefine('BLEND_MODE_MULTIPLY',inBlendMode.get() === 'Multiply');
     shader.toggleDefine('BLEND_MODE_ADD',inBlendMode.get() === 'Add');
+    shader.toggleDefine('BLEND_MODE_NONE',inBlendMode.get() === 'None');
 };
 
 geom.onChange=function()
@@ -221,6 +222,7 @@ function doRender()
                 });
             }
             shader.define('INSTANCING');
+            setBlendMode();
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
 
