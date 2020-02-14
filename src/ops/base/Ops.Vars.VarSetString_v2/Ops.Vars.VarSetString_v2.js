@@ -38,6 +38,5 @@ function updateName()
 
 function update()
 {
-    if(val.get())
-        op.patch.setVarValue(op.varName.get(),val.get());
+    if(val.get()!==undefined && val.get()!==null) op.patch.setVarValue(op.varName.get(),val.get());
 }
