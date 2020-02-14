@@ -1203,6 +1203,8 @@ const Op = function ()
     Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
+        console.warn("old error message op.error() - use op.setUiError()");
+        
         if(txt===undefined)
         {
             this.uiAttr({ error: id });
