@@ -18,6 +18,9 @@ function update()
     if (width < 4) width = 4;
     var keys = null;
 
+    op.setUiError("nodata",null);
+    op.setUiError("parse",null);
+
     if (Array.isArray(inGradArray.get()))
     {
         keys = inGradArray.get();
@@ -27,7 +30,7 @@ function update()
         var grad = null;
         if (!inGrad.get() || inGrad.get() == "")
         {
-            op.error("gradient no data");
+            op.setUiError("nodata","gradient no data");
             return;
         }
 
@@ -37,12 +40,12 @@ function update()
         }
         catch (e)
         {
-            op.error("could not parse gradient data");
+            op.setUiError("parse","could not parse gradient data");
         }
 
         if (!grad || !grad.keys)
         {
-            op.error("gradient no data");
+            op.setUiError("nodata","gradient no data");
             return;
         }
         keys = grad.keys;

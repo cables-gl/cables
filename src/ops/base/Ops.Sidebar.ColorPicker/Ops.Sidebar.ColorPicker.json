@@ -57,6 +57,10 @@
                 "type": "0",
                 "name": "Blue",
                 "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Hex"
             }
         ],
         "name": "Ops.Sidebar.ColorPicker"

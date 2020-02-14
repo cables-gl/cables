@@ -1,0 +1,85 @@
+{
+    "authorName": "pandur",
+    "id": "790f3702-9833-464e-8e37-6f0f813f7e16",
+    "created": 1581607123708,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "File"
+            },
+            {
+                "type": "0",
+                "name": "Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Filter"
+            },
+            {
+                "type": "0",
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic"
+            },
+            {
+                "type": "0",
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Pre Multiplied Alpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Texture_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Texture_v2 renamed to Ops.Gl.Texture_v2",
+            "author": "pandur",
+            "date": 1581607147784
+        }
+    ]
+}

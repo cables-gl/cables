@@ -22,6 +22,7 @@ op.toWorkPortsNeedToBeLinked(arr,exe);
 op.setPortGroup("Texture Coordinates",[pTexCoordRand,seed,inCoords]);
 
 
+var deactivated=false;
 var hasError=false;
 var showingError=false;
 
@@ -54,13 +55,18 @@ function doRender()
         }
     }
 
+
+
     if(needsRebuild || !mesh)rebuild();
-    if(mesh) mesh.render(cgl.getShader());
+    if(!deactivated && mesh) mesh.render(cgl.getShader());
 }
 
 function reset()
 {
-    needsRebuild=true;
+    deactivated=arr.get()==null;
+
+    if(!deactivated)needsRebuild=true;
+    else needsRebuild=false;
 }
 
 function updateTexCoordsPorts()
@@ -92,23 +98,18 @@ function updateNumVerts()
 
 function rebuild()
 {
-
-
-
-
-
-
     var verts=arr.get();
 
     if(!verts || verts.length==0)
     {
-        mesh=null;
+        // mesh=null;
         return;
     }
 
     if(geom.vertices.length==verts.length && mesh && !showingError && !inCoords.isLinked() && !vertCols.isLinked())
     {
         mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
+        geom.vertices=verts;
         needsRebuild=false;
         return;
     }
@@ -136,7 +137,7 @@ function rebuild()
     var num=verts.length/3;
     num=Math.abs(Math.floor(num));
 
-    // console.log("num",num);
+
     if(num==0)return;
 
     if(!texCoords || texCoords.length!=num*2) texCoords=new Float32Array(num*2); //num*2;//=
