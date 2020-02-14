@@ -64,11 +64,11 @@ exec.onTriggered=function()
         outDefines.set(shader.getDefines());
         outName.set(shader.getName());
 
-        op.error("programnull",null);
+        op.setUiError("programnull",null);
     }
     else
     {
-        op.error("programnull",'shader program is null');
+        op.setUiError("programnull",'shader program is null');
         outNumUniforms.set(0);
         outNumAttributes.set(0);
         outDefines.set(0);

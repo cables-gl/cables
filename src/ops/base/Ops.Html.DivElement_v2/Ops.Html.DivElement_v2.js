@@ -66,8 +66,8 @@ function updateText()
     if(inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
     div.innerHTML=str;
-    // outElement.set(null);
-    // outElement.set(div);
+    outElement.set(null);
+    outElement.set(div);
 }
 
 function removeElement()
@@ -79,8 +79,8 @@ function updateStyle()
 {
     div.setAttribute("style",inStyle.get());
     updateVisibility();
-    // outElement.set(null);
-    // outElement.set(div);
+    outElement.set(null);
+    outElement.set(div);
 }
 
 function updateClass()
