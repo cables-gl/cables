@@ -15,18 +15,12 @@ var shader=null;
 
 showFrag.onTriggered=function()
 {
-    if(CABLES.UI && shader)
-    {
-        CABLES.UI.MODAL.showCode('fragment shader',shader.finalShaderFrag,"GLSL");
-    }
+    if(CABLES.UI && shader) CABLES.UI.MODAL.showCode('fragment shader',shader.finalShaderFrag,"GLSL");
 };
 
 showVert.onTriggered=function()
 {
-    if(CABLES.UI && shader)
-    {
-        CABLES.UI.MODAL.showCode('vertex shader',shader.finalShaderVert,"GLSL");
-    }
+    if(CABLES.UI && shader) CABLES.UI.MODAL.showCode('vertex shader',shader.finalShaderVert,"GLSL");
 };
 
 exec.onTriggered=function()
@@ -34,19 +28,19 @@ exec.onTriggered=function()
     shader=cgl.getShader();
     next.trigger();
 
-    if(shader && shader.getProgram())
+    shader.bind();
+
+    if(!shader.getProgram()) op.setUiError("prognull",'Shader is not compiled');
+    else op.setUiError("prognull",null);
+
+    if(!shader) op.setUiError("noshader",'No Shader..');
+    else op.setUiError("noshader",null);
+
+    if(shader &&  shader.getProgram())
     {
         var activeUniforms=cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
         outNumUniforms.set(activeUniforms);
         outNumAttributes.set(cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_ATTRIBUTES));
-
-    // var uniFloats=0;
-    // for (var i=0; i < activeUniforms; i++) {
-    //     var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
-    //     console.log(uniform)
-    //     var floats=0;
-    //     uniSize += uniform.size;
-    // }
 
         var i=0;
         var attribNames=[];
@@ -56,15 +50,13 @@ exec.onTriggered=function()
             attribNames.push(name);
         }
         outAttributeNames.set(attribNames);
-
         outDefines.set(shader.getDefines());
         outName.set(shader.getName());
 
-        op.setUiError("programnull",null);
+        op.setUiError("prognull",null);
     }
     else
     {
-        op.setUiError("programnull",'No shader found');
         outNumUniforms.set(0);
         outNumAttributes.set(0);
         outDefines.set(0);
@@ -77,7 +69,6 @@ showModules.onTriggered=function()
 {
     if(!shader)return;
     var mods=shader.getCurrentModules();
-
 
     CABLES.UI.MODAL.showCode('vertex shader',JSON.stringify(mods,false,4),"json");
 };
