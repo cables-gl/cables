@@ -1,15 +1,12 @@
-const CHANGE_ALWAYS_DEFUALT = false;
-
 const
     val=op.inValue("Value"),
-    changeAlwaysPort = op.inValueBool('Change Always', CHANGE_ALWAYS_DEFUALT),
+    changeAlwaysPort = op.inValueBool('Change Always', false),
     inReset=op.inTrigger("Reset"),
     result=op.outValue("Delta");
 
-val.changeAlways = CHANGE_ALWAYS_DEFUALT;
+val.changeAlways = false;
 
 var oldVal=0;
-
 var firstTime=true;
 
 changeAlwaysPort.onChange = function()

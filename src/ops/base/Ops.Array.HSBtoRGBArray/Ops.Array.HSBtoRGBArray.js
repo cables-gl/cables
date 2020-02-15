@@ -83,7 +83,6 @@ function handleTrigger() {
 
     let length = 0;
 
-
     if (shouldRecalculate) {
         if ([arrH, arrS, arrB, arrA].some(function(array) {  return !array })) {
             op.log("imhere");

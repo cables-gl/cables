@@ -1,8 +1,8 @@
 //Create a input port of the type value
-const inVal   = op.inValue("Value in");
+const inVal = op.inFloat("Number in ",0);
 
 //Create a output port of the type value
-const outResult  = op.outValue("Value out");
+const outResult  = op.outNumber("Value out");
 
 //when input port changes call the function 'update'
 inVal.onChange = update;
@@ -11,6 +11,5 @@ inVal.onChange = update;
 function update()
 {
     //set the ouput port to the value of the input port
-    //parse the input for a float, if it isn't a float set to Nan
-    outResult.set(parseFloat( inVal.get()));
+    outResult.set(inVal.get());
 }

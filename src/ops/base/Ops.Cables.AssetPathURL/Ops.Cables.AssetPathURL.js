@@ -14,6 +14,12 @@ function update()
     {
         filename='/assets/'+gui.project()._id+'/'+filename;
     }
+    else if( document.location.href.indexOf("cables.gl")>0)
+    {
+        const parts=document.location.href.split("/");
+        filename='/assets/'+parts[parts.length-1]+'/'+filename;
+
+    }
     else
     {
         filename="assets/"+filename;

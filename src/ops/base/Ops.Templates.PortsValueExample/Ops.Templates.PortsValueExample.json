@@ -6,7 +6,7 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Value in",
+                "name": "Number in ",
                 "subType": "number"
             }
         ],

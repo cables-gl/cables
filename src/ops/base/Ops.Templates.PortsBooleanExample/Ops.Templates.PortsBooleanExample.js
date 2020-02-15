@@ -1,5 +1,5 @@
 //Create a input port of the type Boolean
-const inBoolean = op.inValueBool("Boolean in");
+const inBoolean = op.inBool("Boolean in",false);
 
 //Create a output port of the type value
 const outBoolean = op.outValueBool("Boolean out");

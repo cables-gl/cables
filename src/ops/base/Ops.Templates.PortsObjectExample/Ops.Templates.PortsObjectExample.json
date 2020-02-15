@@ -11,9 +11,8 @@
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Test",
-                "subType": "string"
+                "type": "2",
+                "name": "Object Out"
             }
         ],
         "name": "Ops.Templates.PortsObjectExample"

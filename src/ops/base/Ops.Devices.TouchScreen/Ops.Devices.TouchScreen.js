@@ -4,15 +4,15 @@ const
     hdpi=op.inValueBool("HDPI Coordinates",false),
     active=op.inValueBool("Active",true),
 
-    outTouched=op.outValue("Touched"),
-    numFingers=op.outValue("Fingers"),
+    outTouched=op.outValue("Touched",false),
+    numFingers=op.outValue("Fingers",0),
 
-    f1x=op.outValue("Finger 1 X"),
-    f1y=op.outValue("Finger 1 Y"),
-    f1f=op.outValue("Finger 1 Force"),
+    f1x=op.outValue("Finger 1 X",0),
+    f1y=op.outValue("Finger 1 Y",0),
+    f1f=op.outValue("Finger 1 Force",0),
 
-    f2x=op.outValue("Finger 2 X"),
-    f2y=op.outValue("Finger 2 Y"),
+    f2x=op.outValue("Finger 2 X",0),
+    f2y=op.outValue("Finger 2 Y",0),
     area=op.inSwitch("Area",['Canvas','Document'],'Canvas'),
 
     outEvents=op.outArray("Events"),
@@ -109,9 +109,7 @@ function addListeners()
     listenerElement.addEventListener('touchend', ontouchend);
 
     console.log("added touchscreen listeners",listenerElement);
-
 }
-
 
 function updateArea()
 {
@@ -121,7 +119,6 @@ function updateArea()
     else listenerElement = cgl.canvas;
 
     if(active.get()) addListeners();
-
 }
 
 function removeListeners()
