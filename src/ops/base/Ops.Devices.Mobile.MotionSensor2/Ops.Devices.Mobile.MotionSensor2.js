@@ -75,6 +75,7 @@ req.onTriggered=function()
 
                         outObj.set(null);
                         outObj.set(obj);
+                        op.log("axis 1 " + event.alpha);
 
                     }
                 }, true);
