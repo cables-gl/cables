@@ -17,9 +17,10 @@ var effect=null;
 inWidth.onChange=
     inHeight.onChange=
     inFloatingPoint.onChange=
-    inVPSize.onChange=
     tfilter.onChange=
     twrap.onChange=initFbLater;
+
+inVPSize.onChange=updateUI;
 
 var fb=null;
 var tex=null;
@@ -29,7 +30,23 @@ var mesh=CGL.MESHES.getSimpleRect(cgl,"shader2texture rect");
 op.toWorkPortsNeedToBeLinked(inShader);
 
 tfilter.set("nearest");
-
+updateUI();
+function updateUI()
+{
+    op.log("bool checked");
+    if(inVPSize.get() === true)
+    {
+        inWidth.setUiAttribs({greyout:true});
+        inHeight.setUiAttribs({greyout:true});
+        inWidth.set(cgl.getViewPort()[2]);
+        inHeight.set(cgl.getViewPort()[3]);
+    }
+    else if(inVPSize.get() === false)
+    {
+            inWidth.setUiAttribs({greyout:false});
+            inHeight.setUiAttribs({greyout:false});
+    }
+}
 function initFbLater()
 {
     needInit=true;
@@ -52,24 +69,7 @@ function initFb()
     if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
     if(twrap.get()=='mirrored repeat') selectedWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
 
-    if(inVPSize.get())
-    {
-        inWidth.setUiAttribs({greyout:true});
-        inHeight.setUiAttribs({greyout:true});
 
-        w=cgl.getViewPort()[2];
-        h=cgl.getViewPort()[3];
-        inWidth.set(w);
-        inHeight.set(h);
-    }
-    else
-    {
-        if(inWidth.uiAttribs.hidePort)
-        {
-            inWidth.setUiAttribs({greyout:false});
-            inHeight.setUiAttribs({greyout:false});
-        }
-    }
 
     if(cgl.glVersion>=2)
     {
