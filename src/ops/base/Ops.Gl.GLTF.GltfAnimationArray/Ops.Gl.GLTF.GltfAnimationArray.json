@@ -59,5 +59,40 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfAnimationArray"
+    },
+    "summary": "Convert an animation into an array of coordinates",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op "
+            },
+            {
+                "name": "Node Name",
+                "text": "Target node name from the GLTF Scene with the animation data  "
+            },
+            {
+                "name": "Steps",
+                "text": "Amount of interpolated steps of generated array. Higher numbers results in a smoother result."
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Found",
+                "text": "Target animation node name found"
+            },
+            {
+                "name": "Positions",
+                "text": "Array out of coordinates"
+            }
+        ]
     }
 }

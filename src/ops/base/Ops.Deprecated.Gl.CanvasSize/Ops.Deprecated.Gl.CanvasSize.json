@@ -10,13 +10,18 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Gl.CanvasSize"
-    }
+        "name": "Ops.Deprecated.Gl.CanvasSize"
+    },
+    "authorName": "andro",
+    "id": "df7700c0-d39c-4702-b8bb-6ac8d81d684e",
+    "created": 1581354808391
 }

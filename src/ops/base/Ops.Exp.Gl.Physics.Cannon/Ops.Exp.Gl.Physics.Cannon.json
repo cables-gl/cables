@@ -94,6 +94,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Index",
+                "subType": "number"
+            },
+            {
                 "type": "1",
                 "name": "Collision"
             }

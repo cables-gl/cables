@@ -127,6 +127,21 @@
             "message": "Ops.User.pandur.GltfScene3 renamed to Ops.Admin.GltfScene2",
             "author": "pandur",
             "date": 1580991292936
+        },
+        {
+            "message": "Ops.Admin.GltfScene2 renamed to Ops.Gl.GLTF.GltfScene.GltfScene_v2",
+            "author": "pandur",
+            "date": 1582026869490
         }
-    ]
+    ],
+    "summary": "Load GLTF/GLB 3d files",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": []
+    }
 }
