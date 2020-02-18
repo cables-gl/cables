@@ -169,7 +169,6 @@ function printInfo()
     }
     html+='</table>';
 
-
     html+='<h3>Meshes ('+gltf.json.meshes.length+')</h3>';
 
     html+='<table class="table treetable">';

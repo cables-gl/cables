@@ -125,7 +125,7 @@ var gltfNode=class
             }
             else if(this._rot)
             {
-                mat4.fromQuat(rotmat,this._rot);
+                mat4.fromQuat(this._tempRotmat,this._rot);
                 mat4.mul(this._animMat,this._animMat,this._tempRotmat);
             }
 
