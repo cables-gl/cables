@@ -75,17 +75,13 @@ geom.onChange=function()
     reset();
 };
 
-function removeFragmentShaderModule() {
-    shader.removeModule(fragMod);
-}
-
 function removeModule()
 {
     if(shader && mod)
     {
         shader.removeDefine('INSTANCING');
         shader.removeModule(mod);
-        removeFragmentShaderModule();
+        shader.removeModule(fragMod);
         shader=null;
     }
 }
