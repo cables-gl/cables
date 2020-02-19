@@ -28,7 +28,7 @@ const handleColorizeChange = function() {
     }
 }
 const cgl=op.patch.cgl;
-const shader = new CGL.Shader(cgl, "shadowPointLight");
+const shader = new CGL.Shader(cgl, "colorizeNormals");
 shader.setSource(shader.getDefaultVertexShader(), attachments.colorize_normals_frag);
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 shader.glPrimitive=cgl.gl.LINES;

@@ -58,7 +58,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.cables.ShowNormals_v2"
+        "name": "Ops.Gl.ShowNormals_v2"
     },
     "changelog": [
         {
