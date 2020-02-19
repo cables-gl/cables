@@ -14,8 +14,6 @@ const
     outTrigger = op.outTrigger("Trigger Out"),
     outNum=op.outValue("Num");
 
-inBlendMode.setUiAttribs({ hidePort: true  });
-doLimit.setUiAttribs({ hidePort: true });
 const srcHeadVert=attachments.instancer_head_vert;
 const srcBodyVert=attachments.instancer_body_vert;
 const srcHeadFrag=attachments.instancer_head_frag;
