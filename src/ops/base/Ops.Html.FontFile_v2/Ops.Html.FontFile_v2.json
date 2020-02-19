@@ -1,0 +1,37 @@
+{
+    "id": "68177370-116e-4c76-aef3-3b10d68e7227",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582125861169
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582125874800,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "file",
+                "subType": "string"
+            },
+            {
+                "type": "5",
+                "name": "family"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Loaded Trigger"
+            }
+        ],
+        "name": "Ops.Html.FontFile_v2"
+    }
+}

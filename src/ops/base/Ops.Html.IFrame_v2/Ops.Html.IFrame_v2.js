@@ -1,11 +1,13 @@
 const
     width=op.inValue("width",400),
     height=op.inValue("height",400),
-    src=op.inValueString("URL",'https://undev.studio'),
-    elId=op.inValueString("ID"),
+    src=op.inString("URL",'https://undev.studio'),
+    elId=op.inString("ID"),
     inBorder=op.inBool("Show Border", false),
     outEle=op.outObject("Element");
 
+op.setPortGroup('Size',[width,height]);
+op.setPortGroup('Attributes',[src,elId]);
 function updateSize()
 {
     element.style.width=width.get()+"px";
