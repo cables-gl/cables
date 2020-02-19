@@ -23,6 +23,7 @@ var outRadius=op.outValue("Out Radius");
 var outX=op.outValue("X");
 var outY=op.outValue("Y");
 var outZ=op.outValue("Z");
+var outIndex=op.outNumber("Index");
 
 var outCollision=op.outTrigger("Collision");
 
@@ -115,6 +116,8 @@ function render()
     {
         var body=bodies[i];
         // if(!body)return;
+
+outIndex.set(i);
 
         vec3.set(vec,
             body.position.x,

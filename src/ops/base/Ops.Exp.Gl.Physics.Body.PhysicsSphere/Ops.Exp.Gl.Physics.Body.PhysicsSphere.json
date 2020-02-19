@@ -79,7 +79,7 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Body.Sphere"
+        "name": "Ops.Exp.Gl.Physics.Body.PhysicsSphere"
     },
     "libs": [
         "cannon.js"

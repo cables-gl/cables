@@ -1,5 +1,3 @@
-import { __esModule } from "../../../../cables_api/src_client_libs/handlebars-v4.5.3";
-
 export { BoundingBox };
 
 /**

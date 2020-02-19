@@ -844,7 +844,7 @@ Shader.prototype.addAttribute = function(attr) {
 Shader.prototype.bindTextures=
 Shader.prototype._bindTextures=function()
 {
-    if(this._textureStackTex.length>this.maxTextureUnits)
+    if(this._textureStackTex.length>this._cgl.maxTextureUnits)
     {
         console.log("[shader._bindTextures] too many textures bound",this._textureStackTex.length+'/'+this._cgl.maxTextureUnits);
     }

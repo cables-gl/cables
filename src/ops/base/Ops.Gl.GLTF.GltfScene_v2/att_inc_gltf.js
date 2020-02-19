@@ -213,13 +213,16 @@ function parseGltf(arrayBuffer)
     }
 
     gltf.timing.push("Parse mesh groups",Math.round((performance.now()-gltf.startTime)));
-
+    
+    gltf.json.meshes=gltf.json.meshes||[];
+    
+    if(gltf.json.meshes)
     for(i=0;i<gltf.json.meshes.length;i++)
     {
         const mesh=new gltfMeshGroup(gltf,gltf.json.meshes[i]);
         gltf.meshes.push(mesh);
     }
-
+    
     gltf.timing.push("Parse nodes",Math.round((performance.now()-gltf.startTime)));
 
 
@@ -232,7 +235,6 @@ function parseGltf(arrayBuffer)
     for(i=0;i<gltf.nodes.length;i++)
     {
         const node=gltf.nodes[i];
-        console.log("nde",node.name,node.isChild);
         if(!node.isChild) node.calcBounds(gltf,null,gltf.bounds);
     }
 

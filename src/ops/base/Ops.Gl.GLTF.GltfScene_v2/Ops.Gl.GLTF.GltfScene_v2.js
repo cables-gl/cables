@@ -5,7 +5,7 @@ const
     inExec=op.inTrigger("Render"),
     inFile=op.inUrl("glb File"),
     inRender=op.inBool("Draw",true),
-    inCenter=op.inBool("Center",true),
+    inCenter=op.inSwitch("Center",["None","XYZ","XZ"],"XYZ"),
     inRescale=op.inBool("Rescale",true),
     inRescaleSize=op.inFloat("Rescale Size",2.5),
     inShow=op.inTriggerButton("Show Structure"),
@@ -45,6 +45,8 @@ var loadingId=null;
 var data=null;
 var scale=vec3.create();
 var lastTime=0;
+var doCenter=false;
+
 const boundsCenter=vec3.create();
 
 inShow.onTriggered=printInfo;
@@ -52,6 +54,30 @@ dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 dataPort.onChange=loadData;
 
 op.setPortGroup("Transform",[inRescale,inRescaleSize,inCenter]);
+
+inCenter.onChange=function()
+{
+    doCenter=inCenter.get()!="None";
+    updateCenter();
+
+};
+
+function updateCenter()
+{
+
+    if(gltf && gltf.bounds)
+    {
+        boundsCenter.set(gltf.bounds.center);
+        boundsCenter[0]=-boundsCenter[0];
+        boundsCenter[1]=-boundsCenter[1];
+        boundsCenter[2]=-boundsCenter[2];
+
+        if(inCenter.get()=="XZ")
+            boundsCenter[1]=-gltf.bounds.minY;
+
+    }
+
+}
 
 inSwitchNormalsYZ.onChange=function()
 {
@@ -107,7 +133,7 @@ inExec.onTriggered=function()
             vec3.set(scale,sc,sc,sc);
             mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
         }
-        if(inCenter.get())
+        if(doCenter)
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,boundsCenter);
         }
@@ -163,14 +189,11 @@ function loadBin()
         hideNodesFromData();
         if(tab)printInfo();
 
-        boundsCenter.set(gltf.bounds.center);
-        boundsCenter[0]=-boundsCenter[0];
-        boundsCenter[1]=-boundsCenter[1];
-        boundsCenter[2]=-boundsCenter[2];
 
         outPoints.set(boundingPoints);
         console.log('gltf.bounds',gltf.bounds);
         outBounds.set(gltf.bounds);
+        updateCenter();
     };
 
 
@@ -277,7 +300,7 @@ op.exposeNode=function(name)
 
 op.assignMaterial=function(name)
 {
-    var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
+    var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op,inMaterials.name,newop,"Material");
     gui.patch().focusOp(newop.id,true);

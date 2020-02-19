@@ -1,13 +1,13 @@
 const inExe = op.inTrigger ('Trigger');
-const inStrAxiom = op.inValueString("Axiom / seed","F");
-const inStrConstant1 = op.inValueString("Constant 1","F");
-const inStrRule1 = op.inValueString("Rule 1","Fx5y2.2F[yxFF]fF[yXFFfzFZF]fF[yXzFFfzFZF]");
-const inStrConstant2 = op.inValueString("Constant 2");
-const inStrRule2 = op.inValueString("Rule 2");
-const inStrConstant3 = op.inValueString("Constant 3");
-const inStrRule3 = op.inValueString("Rule 3");
-const inStrConstant4 = op.inValueString("Constant 4");
-const inStrRule4 = op.inValueString("Rule 4");
+const inStrAxiom = op.inString("Axiom / seed","F");
+const inStrConstant1 = op.inString("Constant 1","F");
+const inStrRule1 = op.inString("Rule 1","Fx5y2.2F[yxFF]fF[yXFFfzFZF]fF[yXzFFfzFZF]");
+const inStrConstant2 = op.inString("Constant 2","x");
+const inStrRule2 = op.inString("Rule 2");
+const inStrConstant3 = op.inString("Constant 3","y");
+const inStrRule3 = op.inString("Rule 3");
+const inStrConstant4 = op.inString("Constant 4","z");
+const inStrRule4 = op.inString("Rule 4");
 
 inStrAxiom.hidePort();
 inStrConstant1.hidePort();
@@ -30,7 +30,7 @@ const lineTrigger = op.outTrigger("Line/point trigger");
 //const outArray = op.outArray("Matrix Array out");
 const outPoints = op.outArray("Points out");
 const outMax=op.outValue("Max Size");
-const stringOut = op.outValueString('Final generated string');
+const stringOut = op.outString('Final generated string');
 
 const seed = op.inValue("random seed");
 const inRandStr = op.inValue("random strength");

@@ -23,9 +23,13 @@
             },
             {
                 "type": "0",
+                "name": "Center index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
                 "name": "Center",
-                "group": "Transform",
-                "subType": "boolean"
+                "group": "Transform"
             },
             {
                 "type": "0",
@@ -116,13 +120,28 @@
                 "name": "Finished"
             }
         ],
-        "name": "Ops.User.pandur.GltfScene3"
+        "name": "Ops.Admin.GltfScene2"
     },
     "changelog": [
         {
             "message": "Ops.User.pandur.GltfScene3 renamed to Ops.Admin.GltfScene2",
             "author": "pandur",
             "date": 1580991292936
+        },
+        {
+            "message": "Ops.Admin.GltfScene2 renamed to Ops.Gl.GLTF.GltfScene.GltfScene_v2",
+            "author": "pandur",
+            "date": 1582026869490
         }
-    ]
+    ],
+    "summary": "Load GLTF/GLB 3d files",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

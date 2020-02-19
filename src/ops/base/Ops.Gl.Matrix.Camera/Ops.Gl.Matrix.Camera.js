@@ -129,7 +129,7 @@ render.onTriggered=function() {
 	vec3.set(vCenter, centerX.get(),centerY.get(),centerZ.get());
 
 	mat4.lookAt(transMatrix, vEye, vCenter, vUp);
-    console.log(transMatrix, mat4.invert(mat4.create(), transMatrix));
+    // console.log(transMatrix, mat4.invert(mat4.create(), transMatrix));
 
 	mat4.multiply(cgl.vMatrix,cgl.vMatrix,transMatrix);
 

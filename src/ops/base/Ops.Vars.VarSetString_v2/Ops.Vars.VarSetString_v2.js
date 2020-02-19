@@ -31,13 +31,12 @@ function updateName()
             return;
         }
 
-        op.setTitle('#' + op.varName.get());
+        op.setTitle('set #' + op.varName.get());
     }
     update();
 }
 
 function update()
 {
-    if(val.get())
-        op.patch.setVarValue(op.varName.get(),val.get());
+    if(val.get()!==undefined && val.get()!==null) op.patch.setVarValue(op.varName.get(),val.get());
 }

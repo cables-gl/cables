@@ -1,0 +1,17 @@
+{
+    "id": "4c69914e-6b58-4a67-9682-ad09531f5335",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1580909062801
+        },
+        {
+            "message": "Ops.User.pandur.VarGetTexture renamed to Ops.Vars.VarGetTexture",
+            "author": "pandur",
+            "date": 1581417182319
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1580909065589
+}

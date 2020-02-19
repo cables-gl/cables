@@ -17,6 +17,7 @@ var lastTimeAcc=0;
 var obj={};
 
 
+
 req.onTriggered=function()
 {
 
@@ -75,15 +76,13 @@ req.onTriggered=function()
 
                         outObj.set(null);
                         outObj.set(obj);
+                        op.log("axis 1 " + event.alpha);
 
                     }
                 }, true);
             }
         })
         .catch(console.error);
-
-
-
 }
 
 

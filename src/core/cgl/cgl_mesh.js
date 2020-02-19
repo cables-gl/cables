@@ -93,6 +93,40 @@ Mesh.prototype.getAttribute = function (name)
     for (var i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
 };
 
+Mesh.prototype._bufferArray=function(array,attr)
+{
+    var floatArray = null;
+    if(!array)return;
+
+    if (!(array instanceof Float32Array))
+    {
+        // if(!attr.floatArray)console.log("no attr arr");
+        // else console.log("Attr array");
+
+        if(attr && attr.floatArray && attr.floatArray.length==array.length)
+        {
+            attr.floatArray.set(array);
+            floatArray=attr.floatArray;
+        }
+        else
+        {
+            floatArray = new Float32Array(array);
+
+            profileData.profileNonTypedAttrib++;
+            profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
+        }
+    }
+    else floatArray = array;
+
+    if(attr && floatArray)
+    {
+        attr.floatArray=floatArray;
+    }
+
+    
+    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+};
+
 /**
  * @function setAttribute
  * @description update attribute
@@ -105,7 +139,6 @@ Mesh.prototype.getAttribute = function (name)
  */
 Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.setAttribute = function (name, array, itemSize, options)
 {
-    var floatArray = null;
     var cb = null;
     var instanced = false;
     var i = 0;
@@ -126,30 +159,27 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
     if (name == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX) instanced = true;
 
-    if (!(array instanceof Float32Array))
-    {
-        floatArray = new Float32Array(array);
-        profileData.profileNonTypedAttrib++;
-        profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
-    }
-    else floatArray = array;
 
     for (i = 0; i < this._attributes.length; i++)
     {
         if (this._attributes[i].name == name)
         {
             this._attributes[i].numItems = numItems;
+
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
-            this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+            // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+            this._bufferArray(array,this._attributes[i]);
 
             return this._attributes[i];
         }
     }
 
+    // create new buffer...
+
     var buffer = this._cgl.gl.createBuffer();
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
-    this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
+    // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 
     var type = this._cgl.gl.FLOAT;
     if (options && options.type) type = options.type;
@@ -163,6 +193,8 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
         instanced,
         type,
     };
+
+    this._bufferArray(array,attr);
 
     if (name == CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib = attr;
     this._attributes.push(attr);

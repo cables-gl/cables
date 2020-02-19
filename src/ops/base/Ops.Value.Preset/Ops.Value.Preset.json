@@ -82,6 +82,21 @@
                 "type": "1",
                 "name": "Rename",
                 "group": "Manage Presets"
+            },
+            {
+                "type": "0",
+                "name": ".preset_Hue_tii5b22ek_d80gsnw7s",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_Saturation_tii5b22ek_ilykqgk7t",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_Brightness_tii5b22ek_shsvimqe1",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -101,7 +116,9 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "2eKIpiTv6ww"
+    ],
     "docs": {
         "ports": [
             {

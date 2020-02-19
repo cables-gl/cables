@@ -81,7 +81,6 @@ inExec.onTriggered=function()
     if(gltf && gltf.bounds && inAutoSize.get())
     {
         const sc=2.5/gltf.bounds.maxAxis;
-        console.log("scale",sc);
         vec3.set(scale,sc,sc,sc);
         mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
     }
@@ -240,7 +239,7 @@ op.exposeNode=function(name)
 
 op.assignMaterial=function(name)
 {
-    var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
+    var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op,inMaterials.name,newop,"Material");
     gui.patch().focusOp(newop.id,true);

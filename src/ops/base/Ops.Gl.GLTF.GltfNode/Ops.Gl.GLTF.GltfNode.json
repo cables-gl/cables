@@ -61,5 +61,54 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfNode"
+    },
+    "summary": "Control a single node from the GLTFscene op",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.GLTF.GltfScene"
+    ],
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Node Name",
+                "text": "Node name from GLTF scene"
+            },
+            {
+                "name": "Transformation",
+                "text": "Inherit the transformation from the GLTF scene op"
+            },
+            {
+                "name": "Draw Mesh",
+                "text": "Render the node"
+            },
+            {
+                "name": "Draw Childs",
+                "text": "Draws any child nodes beneath this node"
+            },
+            {
+                "name": "Ignore Material",
+                "text": "Ignores assigned material of the GLTF scene op"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Geometry",
+                "text": "Geometry out"
+            },
+            {
+                "name": "Found",
+                "text": "Returns true if node exists in the GLTF scene op"
+            }
+        ]
     }
 }

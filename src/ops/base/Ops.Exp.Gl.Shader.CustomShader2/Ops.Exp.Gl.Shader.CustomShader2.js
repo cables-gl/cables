@@ -17,6 +17,10 @@ fragmentShader.setUiAttribs({editorSyntax:'glsl'});
 vertexShader.setUiAttribs({editorSyntax:'glsl'});
 
 var shader=new CGL.Shader(cgl,"shaderMaterial");
+
+
+
+
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
 op.setPortGroup("Source Code",[fragmentShader,vertexShader]);
@@ -24,11 +28,13 @@ op.setPortGroup("Options",[asMaterial]);
 
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
-shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+
+
 
 fragmentShader.onChange=vertexShader.onChange=function(){ needsUpdate=true; };
 
 render.onTriggered=doRender;
+
 
 var needsUpdate=true;
 op.onLoadedValueSet=initDataOnLoad;
@@ -230,6 +236,20 @@ function updateShader()
 
     shader.bindTextures=bindTextures.bind(this);
     shader.setSource(vertexShader.get(),fragmentShader.get());
+
+if (cgl.glVersion == 1) {
+    cgl.gl.getExtension("OES_standard_derivatives");
+    // cgl.gl.getExtension('OES_texture_float');
+    // cgl.gl.getExtension('OES_texture_float_linear');
+    // cgl.gl.getExtension('OES_texture_half_float');
+    // cgl.gl.getExtension('OES_texture_half_float_linear');
+
+    shader.enableExtension("GL_OES_standard_derivatives");
+    // shader.enableExtension("GL_OES_texture_float");
+    // shader.enableExtension("GL_OES_texture_float_linear");
+    // shader.enableExtension("GL_OES_texture_half_float");
+    // shader.enableExtension("GL_OES_texture_half_float_linear");
+}
 
     countTexture=0;
     foundNames.length=0;

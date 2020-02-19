@@ -14,32 +14,48 @@
             },
             {
                 "type": "0",
-                "name": "filter",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "wrap",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Use Viewport Size",
+                "group": "Texture Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "Width",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Height",
+                "group": "Texture Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "group": "Texture settings",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "group": "Texture settings",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Floating Point",
+                "group": "Texture settings",
                 "subType": "boolean"
             }
         ],

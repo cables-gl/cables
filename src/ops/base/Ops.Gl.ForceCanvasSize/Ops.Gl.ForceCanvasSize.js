@@ -51,7 +51,7 @@ updateUi();
 inActive.onChange=function()
 {
     if(!inActive.get())removeStyles();
-}
+};
 
 function updateUi()
 {
@@ -118,7 +118,6 @@ inTrigger.onTriggered=function()
     else if(align==ALIGN_BOTH)
     {
         const rect=cgl.canvas.parentNode.getBoundingClientRect();
-console.log("both rect",rect);
         h=rect.height;
         w=h*inRatio.get();
 
@@ -139,7 +138,7 @@ console.log("both rect",rect);
         cgl.canvas.style['margin-left']=(rect.width-w)/2+"px";
     }
 
-    if(cgl.canvas.width!=w || cgl.canvas.height!=h)
+    if(cgl.canvas.width/cgl.pixelDensity!=w || cgl.canvas.height/cgl.pixelDensity!=h)
     {
         outWidth.set(w);
         outHeight.set(h);

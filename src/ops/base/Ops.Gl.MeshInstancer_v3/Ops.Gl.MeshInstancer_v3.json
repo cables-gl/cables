@@ -57,6 +57,15 @@
                 "group": "Parameters"
             },
             {
+                "type": "0",
+                "name": "Material blend mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Material blend mode"
+            },
+            {
                 "type": "3",
                 "name": "Colors"
             }

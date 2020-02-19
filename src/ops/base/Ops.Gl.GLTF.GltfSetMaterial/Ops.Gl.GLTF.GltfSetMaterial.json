@@ -1,0 +1,61 @@
+{
+    "id": "baf968ea-e4df-4fca-9cda-e6ddd38a4200",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1575752740946
+        },
+        {
+            "message": "Ops.Gl.GltfSetMaterial renamed to Ops.Gl.GLTF.GltfSetMaterial",
+            "author": "pandur",
+            "date": 1581323165523
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1575752915505,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Shader"
+            },
+            {
+                "type": "5",
+                "name": "Material Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Material"
+            }
+        ],
+        "name": "Ops.Gl.GltfSetMaterial"
+    },
+    "summary": "Assigns a material to a node inside of the gltfScene op",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.GLTF.GltfScene"
+    ],
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Shader",
+                "text": "Shader/Material input"
+            },
+            {
+                "name": "Material Name",
+                "text": "String used to define material assignment"
+            },
+            {
+                "name": "Material",
+                "text": "Material out, should be connected to Material input of GLTFScene"
+            }
+        ]
+    }
+}

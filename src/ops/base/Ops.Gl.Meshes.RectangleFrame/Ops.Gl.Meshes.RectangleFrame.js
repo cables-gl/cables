@@ -12,7 +12,12 @@ const
     drawTop=op.inValueBool("Draw Top",true),
     drawBottom=op.inValueBool("Draw Bottom",true),
     drawLeft=op.inValueBool("Draw Left",true),
-    drawRight=op.inValueBool("Draw Right",true);
+    drawRight=op.inValueBool("Draw Right",true),
+    active=op.inValueBool('Active',true);
+
+op.setPortGroup("Geometry",[width,height,thickness]);
+op.setPortGroup("Transform",[pivotX,pivotY]);
+op.setPortGroup("Sections",[drawTop,drawBottom,drawLeft,drawRight]);
 
 const cgl=op.patch.cgl;
 var mesh=null;
@@ -36,10 +41,11 @@ create();
 
 render.onTriggered=function()
 {
-    mesh.render(cgl.getShader());
-    trigger.trigger();
-};
+    if(active.get()) mesh.render(cgl.getShader());
 
+    trigger.trigger();
+
+};
 
 function create()
 {
@@ -94,5 +100,5 @@ function create()
 
     geomOut.set(null);
     geomOut.set(geom);
-}
+};
 

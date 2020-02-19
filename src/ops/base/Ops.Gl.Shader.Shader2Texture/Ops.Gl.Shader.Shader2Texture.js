@@ -1,14 +1,17 @@
 const
     exec=op.inTrigger("Render"),
     inShader=op.inObject("Shader"),
-    tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']),
-    twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge'),
     inVPSize=op.inValueBool("Use Viewport Size",true),
     inWidth=op.inValueInt("Width",512),
     inHeight=op.inValueInt("Height",512),
+    tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']),
+    twrap=op.inValueSelect("wrap",['clamp to edge','repeat','mirrored repeat'],'clamp to edge'),
     inFloatingPoint=op.inValueBool("Floating Point",false),
     next=op.outTrigger("Next"),
     outTex=op.outTexture("Texture");
+
+op.setPortGroup("Texture Size",[inVPSize,inWidth,inHeight]);
+op.setPortGroup("Texture settings",[tfilter,twrap,inFloatingPoint]);
 
 const cgl=op.patch.cgl;
 var prevViewPort=[0,0,0,0];
@@ -17,9 +20,10 @@ var effect=null;
 inWidth.onChange=
     inHeight.onChange=
     inFloatingPoint.onChange=
-    inVPSize.onChange=
     tfilter.onChange=
     twrap.onChange=initFbLater;
+
+inVPSize.onChange=updateUI;
 
 var fb=null;
 var tex=null;
@@ -30,10 +34,29 @@ op.toWorkPortsNeedToBeLinked(inShader);
 
 tfilter.set("nearest");
 
+updateUI();
+
+function updateUI()
+{
+    op.log("bool checked");
+    if(inVPSize.get() === true)
+    {
+        inWidth.setUiAttribs({greyout:true});
+        inHeight.setUiAttribs({greyout:true});
+        inWidth.set(cgl.getViewPort()[2]);
+        inHeight.set(cgl.getViewPort()[3]);
+    }
+    else if(inVPSize.get() === false)
+    {
+        inWidth.setUiAttribs({greyout:false});
+        inHeight.setUiAttribs({greyout:false});
+    }
+};
+
 function initFbLater()
 {
     needInit=true;
-}
+};
 
 function initFb()
 {
@@ -51,25 +74,6 @@ function initFb()
     var selectedWrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
     if(twrap.get()=='repeat') selectedWrap=CGL.Texture.WRAP_REPEAT;
     if(twrap.get()=='mirrored repeat') selectedWrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
-
-    if(inVPSize.get())
-    {
-        inWidth.setUiAttribs({greyout:true});
-        inHeight.setUiAttribs({greyout:true});
-
-        w=cgl.getViewPort()[2];
-        h=cgl.getViewPort()[3];
-        inWidth.set(w);
-        inHeight.set(h);
-    }
-    else
-    {
-        if(inWidth.uiAttribs.hidePort)
-        {
-            inWidth.setUiAttribs({greyout:false});
-            inHeight.setUiAttribs({greyout:false});
-        }
-    }
 
     if(cgl.glVersion>=2)
     {
@@ -93,7 +97,7 @@ function initFb()
             wrap:selectedWrap
         });
     }
-}
+};
 
 exec.onTriggered=function()
 {

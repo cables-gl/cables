@@ -50,11 +50,11 @@ function setGeom()
     if(geom)
     {
         mesh=new CGL.Mesh(cgl,geom);
-        op.error('geom',null);
+        op.setUiError('geom',null);
     }
     else
     {
-        op.error('geom','no/invalid geometry');
+        op.setUiError('geom','no/invalid geometry');
     }
 }
 

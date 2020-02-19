@@ -10,6 +10,7 @@ const
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
     inRot=op.inArray("Rotations"),
+    inBlendMode = op.inSwitch("Material blend mode",['Multiply','Add','None'],'Multiply'),
     inColor = op.inArray("Colors"),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum=op.outValue("Num");
@@ -31,6 +32,8 @@ var recalc=true;
 var num=0;
 var oldColorArr=null;
 
+op.toWorkPortsNeedToBeLinked(exe);
+
 op.setPortGroup("Limit Number of Instances",[inLimit,doLimit]);
 op.setPortGroup("Parameters",[inScales,inRot,inTranslates]);
 op.toWorkPortsNeedToBeLinked(geom);
@@ -50,6 +53,32 @@ updateLimit();
 inRot.onChange=inColor.onChange=
     inTranslates.onChange=
     inScales.onChange=reset;
+
+inBlendMode.onChange = setBlendMode;
+
+// exe.onLinkChanged=function ()
+// {
+//     op.log("link has changed");
+//     if(!shader)
+//     {
+//         op.setUiError("error1","No Material present",0)
+//         return;
+//     }
+//     else
+//     {
+//         console.log(shader);
+//         op.setUiError("error1",null);
+//     }
+
+// };
+
+function setBlendMode()
+{
+    if(!shader)return;
+    shader.toggleDefine('BLEND_MODE_MULTIPLY',inBlendMode.get() === 'Multiply');
+    shader.toggleDefine('BLEND_MODE_ADD',inBlendMode.get() === 'Add');
+    shader.toggleDefine('BLEND_MODE_NONE',inBlendMode.get() === 'None');
+};
 
 geom.onChange=function()
 {
@@ -72,12 +101,12 @@ function removeModule()
         shader.removeModule(fragMod);
         shader=null;
     }
-}
+};
 
 function reset()
 {
     recalc=true;
-}
+};
 
 
 function setupArray()
@@ -150,13 +179,13 @@ function setupArray()
     mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
     recalc=false;
-}
+};
 
 function updateLimit()
 {
     if(doLimit.get()) inLimit.setUiAttribs({hidePort:false,greyout:false});
         else inLimit.setUiAttribs({hidePort:true,greyout:true});
-}
+};
 
 function doRender()
 {
@@ -165,11 +194,14 @@ function doRender()
     if(recalc)return;
     if(matrixArray.length<=1)return;
 
+
+
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
         removeModule();
 
         shader=cgl.getShader();
+        // console.log(shader);//shows current material
         if(!shader.hasDefine('INSTANCING'))
         {
             mod=shader.addModule(
@@ -190,8 +222,10 @@ function doRender()
                 });
             }
             shader.define('INSTANCING');
+            setBlendMode();
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
+
     }
 
     if(doLimit.get()) mesh.numInstances=Math.min(num,inLimit.get());
@@ -199,7 +233,7 @@ function doRender()
 
     outNum.set(mesh.numInstances);
 
-
     if(mesh.numInstances>0) mesh.render(shader);
     outTrigger.trigger();
-}
+};
+

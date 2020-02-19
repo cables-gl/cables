@@ -30,12 +30,12 @@ void main()
 
         #ifdef HAS_TEXTURE_MASK
             float mask;
-            #ifdef LOOKUP_TEXTURE
+            // #ifdef LOOKUP_TEXTURE
                 mask=texture(texMask,texCoord).r;
-            #endif
-            #ifndef LOOKUP_TEXTURE
-                mask=texture(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
-            #endif
+            // #endif
+            // #ifndef LOOKUP_TEXTURE
+                // mask=texture(texMask,vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y))).r;
+            // #endif
 
         #endif
 
