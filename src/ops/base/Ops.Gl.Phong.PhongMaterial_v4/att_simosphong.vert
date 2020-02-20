@@ -44,7 +44,8 @@ UNI vec3 camPos;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
-UNI mat4 normalMatrix;
+OUT mat3 normalMatrix;
+// UNI mat4 normalMatrix;
 
 
 mat3 transposeMat3(mat3 m)
@@ -81,8 +82,10 @@ void main()
 
     tangent = attrTangent;
     bitangent = attrBiTangent;
+
     {{MODULE_VERTEX_POSITION}}
 
+    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
     mvMatrix = (viewMatrix * mMatrix);
 
 
@@ -101,7 +104,7 @@ void main()
         texCoord.y += offsetY;
     #endif
 
-   normInterpolated = vec3(normalMatrix*vec4(norm, 1.));
+   normInterpolated = vec3(normalMatrix*norm);
 
         vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
         vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
