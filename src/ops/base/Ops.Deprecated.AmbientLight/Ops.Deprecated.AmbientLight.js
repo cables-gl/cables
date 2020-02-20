@@ -60,10 +60,10 @@ Object.keys(inLight).forEach(function(key) {
 
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outTrigger.trigger();
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }

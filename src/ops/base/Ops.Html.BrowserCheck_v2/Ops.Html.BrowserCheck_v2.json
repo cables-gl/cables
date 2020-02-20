@@ -1,0 +1,86 @@
+{
+    "id": "316c7d84-ab25-4131-a628-b22651aa75dc",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582125984161
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582126002027,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Mobile",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 10+",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is IE 11",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Edge",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Chrome",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Firefox",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Safari",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Windows",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Linux",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Mac",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is iOS",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Android",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Language"
+            }
+        ],
+        "name": "Ops.Html.BrowserCheck_v2"
+    }
+}

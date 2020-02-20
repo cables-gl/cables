@@ -1,29 +1,37 @@
 {
-    "author": "55d744634cdc152216eb9aad",
+    "id": "dedf04b8-7f01-4802-b380-cce9ce808c32",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582124956971
+        }
+    ],
     "authorName": "pandur",
-    "id": "d50ef8f6-e706-48ac-94e1-35be3c69a713",
-    "created": 1513838366915,
+    "created": 1582124970368,
     "layout": {
         "portsIn": [
             {
                 "type": "0",
                 "name": "width",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "height",
+                "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "URL",
-                "subType": "string"
+                "group": "Attributes"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "ID",
-                "subType": "string"
+                "group": "Attributes"
             },
             {
                 "type": "0",
@@ -37,7 +45,6 @@
                 "name": "Element"
             }
         ],
-        "name": "Ops.Html.IFrame"
-    },
-    "summary": "show another website in an iframe element"
+        "name": "Ops.Html.IFrame_v2"
+    }
 }

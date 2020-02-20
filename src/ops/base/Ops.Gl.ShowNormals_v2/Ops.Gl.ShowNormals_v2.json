@@ -1,0 +1,70 @@
+{
+    "authorName": "simod",
+    "id": "3d68b4d4-2945-48bf-8fc9-30567946deda",
+    "created": 1582113072428,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            },
+            {
+                "type": "0",
+                "name": "Vectors index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Vectors"
+            },
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Colorize",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "A",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShowNormals_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShowNormals_v2 renamed to Ops.Gl.ShowNormals_v2",
+            "author": "simod",
+            "date": 1582120711810
+        }
+    ]
+}
