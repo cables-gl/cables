@@ -411,7 +411,6 @@ Geometry.prototype.calcTangentsBitangents = function ()
         const texCoordLength = (this.vertices.length / 3) * 2;
         this.texCoords = new Float32Array(texCoordLength);
         for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;
-        console.log(this.vertices.length, this.texCoords.length);
     }
     if (!this.verticesIndices.length)
     {
