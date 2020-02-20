@@ -82,7 +82,7 @@ const result = vec3.create();
 const position = vec3.create();
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
    //vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
     //vec3.transformMat4(result, position, cgl.mMatrix);
@@ -101,7 +101,7 @@ inTrigger.onTriggered = function() {
     }
 
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outTrigger.trigger();
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }

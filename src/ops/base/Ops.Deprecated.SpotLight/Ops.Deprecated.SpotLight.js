@@ -122,7 +122,7 @@ Object.keys(inLight).forEach(function(key) {
 
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
         gui.setTransformGizmo({
@@ -140,11 +140,11 @@ inTrigger.onTriggered = function() {
             destZ: inPointAtZ.get(),
         })
     }
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outArr.set(null);
     outArr.set([inPosX.get(), inPosY.get(), inPosZ.get(), inPointAtX.get(), inPointAtY.get(), inPointAtZ.get()]);
     outTrigger.trigger();
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }
 
 
