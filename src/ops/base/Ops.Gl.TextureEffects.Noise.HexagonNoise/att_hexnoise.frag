@@ -34,7 +34,7 @@ vec4 hex(vec2 uv, out vec2 id) {
 
 float random(vec2 co)
 {
-     float r=fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (5.711+(mod(addZ+5711.210,57.0))));
+    float r=fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * (5.711+(mod(addZ+5711.210,57.0))));
 
     #ifdef LOOP
         r=abs(r-0.5)*2.0;
@@ -42,7 +42,6 @@ float random(vec2 co)
 
     return r;
 }
-
 
 {{CGL.BLENDMODES}}
 
@@ -56,8 +55,10 @@ void main()
     #ifdef FLIP
         pR(uv.xy,0.25*TAU);
     #endif
+
     float r,g,b;
     vec4 rnd = vec4(0.0);
+
     // get hexagon cell id
     vec2 id0;
     vec4 h = hex(uv*4.0, id0);
@@ -71,10 +72,9 @@ void main()
         g = random(((id0.xy*id0.xy)*0.234)+seed2+0.9812);
         b = random(((id0.xy*id0.xy)*0.234)+seed2+57.101);
     #endif
+
     rnd = clamp( vec4( r,g,b,1.0 ),vec4(minIn), vec4(maxIn) );
-    //rnd = clamp
     vec4 base=texture(tex,texCoord);
 
     outColor=cgl_blend(base,rnd,amount);
-
 }

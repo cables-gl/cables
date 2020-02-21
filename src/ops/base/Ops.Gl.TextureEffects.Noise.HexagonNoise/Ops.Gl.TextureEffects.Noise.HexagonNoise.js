@@ -67,4 +67,3 @@ render.onTriggered=function()
 
     trigger.trigger();
 };
-
