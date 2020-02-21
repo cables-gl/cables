@@ -49,7 +49,7 @@ var m=mat4.create();
 
 updateLimit();
 
-inRot.onChange=inColor.onChange=
+inRot.onChange=inColor.onChange =
     inTranslates.onChange=
     inScales.onChange=reset;
 
@@ -94,6 +94,7 @@ function reset()
 
 function setupArray()
 {
+
     if(!mesh) return;
 
     var transforms=inTranslates.get();
@@ -162,8 +163,10 @@ function updateLimit()
 function doRender()
 {
     if(!mesh)return;
+
     if(recalc) setupArray();
     if(recalc)return;
+
     if(matrixArray.length<=1)return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
@@ -182,7 +185,7 @@ function doRender()
                     srcHeadVert: srcHeadVert,
                     srcBodyVert: srcBodyVert
                 });
-            if (inColor.get()) {
+
                 fragMod = shader.addModule({
                     name: "MODULE_COLOR",
                     priority: -2,
@@ -190,7 +193,7 @@ function doRender()
                     srcHeadFrag:srcHeadFrag,
                     srcBodyFrag:srcBodyFrag,
                 });
-            }
+
             shader.define('INSTANCING');
 
             setBlendMode();
