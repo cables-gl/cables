@@ -248,11 +248,11 @@ void main() {
 
     #ifdef HAS_TEXTURES
         #ifdef HAS_TEXTURE_DIFFUSE
-        material.diffuse = texture(texDiffuse, texCoord).rgb;
+            material.diffuse = texture(texDiffuse, texCoord).rgb;
 
-        #ifdef COLORIZE_TEXTURE
-            material.diffuse *= inDiffuseColor.rgb;
-        #endif
+            #ifdef COLORIZE_TEXTURE
+                material.diffuse *= inDiffuseColor.rgb;
+            #endif
         #endif
 
         #ifdef HAS_TEXTURE_NORMAL

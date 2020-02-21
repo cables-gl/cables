@@ -52,9 +52,10 @@ void main()
 
     norm=attrVertNormal;
 
+    {{MODULE_VERTEX_POSITION}}
+
     normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
 
-    {{MODULE_VERTEX_POSITION}}
 
     // this needs only to be done when instancing....
 
