@@ -10,6 +10,11 @@
             },
             {
                 "type": "0",
+                "name": "projection mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "projection mode",
                 "subType": "string"
             },

@@ -31,10 +31,22 @@ amount.onChange=function(){ uniAmount.setValue(amount.get()); };
 
 var textureAlpha=new CGL.Uniform(shader,'t','imageMask',1);
 
+var showingError = false;
 
+function fullScreenBlurWarning ()
+{
+    if(cgl.currentTextureEffect.getCurrentSourceTexture().width == cgl.canvasWidth &&
+        cgl.currentTextureEffect.getCurrentSourceTexture().height == cgl.canvasHeight)
+    {
+        op.setUiError('warning','Full screen blurs are slow! Try reducing the resolution to 1/2 or a 1/4',0);
+    }
+    else
+    {
+        op.setUiError('warning',null);
+    }
+};
 
 var dir=0;
-
 direction.onChange=function()
 {
     if(direction.get()=='both')dir=0;
@@ -50,8 +62,6 @@ mask.onChange=function()
         else shader.removeDefine('HAS_MASK');
 };
 
-
-
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -60,6 +70,8 @@ render.onTriggered=function()
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
+
+    fullScreenBlurWarning();
 
     // first pass
     if(dir===0 || dir==2)
@@ -105,3 +117,6 @@ render.onTriggered=function()
     cgl.setPreviousShader();
     trigger.trigger();
 };
+
+
+

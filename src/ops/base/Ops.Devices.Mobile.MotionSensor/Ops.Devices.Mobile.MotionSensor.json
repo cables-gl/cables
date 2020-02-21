@@ -65,12 +65,11 @@
     "authorName": "pandur",
     "id": "3b15ad33-0117-4a33-975e-bca154a7f298",
     "created": 1507296025359,
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
     "relatedops": [
-        ""
+        "Ops.Devices.Mobile.MotionSensor2"
     ],
     "docs": {
         "ports": []
@@ -81,5 +80,7 @@
             "author": "pandur",
             "date": 1559124082791
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

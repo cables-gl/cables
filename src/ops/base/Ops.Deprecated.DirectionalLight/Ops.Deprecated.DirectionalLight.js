@@ -86,11 +86,11 @@ Object.keys(inLight).forEach(function(key) {
 const cgl = op.patch.cgl;
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     // TODO: add directional vector gizmo
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outTrigger.trigger();
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }

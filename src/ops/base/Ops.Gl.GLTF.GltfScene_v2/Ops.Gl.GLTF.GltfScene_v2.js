@@ -300,7 +300,7 @@ op.exposeNode=function(name)
 
 op.assignMaterial=function(name)
 {
-    var newop=gui.patch().scene.addOp("Ops.Gl.GltfSetMaterial");
+    var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op,inMaterials.name,newop,"Material");
     gui.patch().focusOp(newop.id,true);

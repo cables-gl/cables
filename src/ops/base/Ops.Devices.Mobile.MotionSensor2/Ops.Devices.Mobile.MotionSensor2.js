@@ -78,7 +78,6 @@ req.onTriggered=function()
             {
                 if (response == 'granted')
                 {
-
                     window.addEventListener("deviceorientation", handleDeviceOrientation, true);
                 }
             })

@@ -5,7 +5,6 @@ const
 
     doLimit=op.inValueBool("Limit Instances",false),
     inLimit=op.inValueInt("Limit",100),
-    //inIgnoreAlpha=op.inValueBool("Ignore Alpha", true),
 
     inTranslates=op.inArray("positions"),
     inScales=op.inArray("Scale Array"),
@@ -56,22 +55,6 @@ inRot.onChange=inColor.onChange=
 
 inBlendMode.onChange = setBlendMode;
 
-// exe.onLinkChanged=function ()
-// {
-//     op.log("link has changed");
-//     if(!shader)
-//     {
-//         op.setUiError("error1","No Material present",0)
-//         return;
-//     }
-//     else
-//     {
-//         console.log(shader);
-//         op.setUiError("error1",null);
-//     }
-
-// };
-
 function setBlendMode()
 {
     if(!shader)return;
@@ -111,7 +94,7 @@ function reset()
 
 function setupArray()
 {
-    if(!mesh)return;
+    if(!mesh) return;
 
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
@@ -119,23 +102,12 @@ function setupArray()
     num=Math.floor(transforms.length/3);
 
     var colArr = inColor.get();
-
-    if(oldColorArr!=colArr && colArr!=null)
-    {
-        removeModule();
-        oldColorArr=colArr;
-    }
-
-
-    // if (!colArr && !oldColorArr) {
-    //     colArr = [];
-    //     colArr.length = num*4;
-    //     for (let i = 0; i < colArr.length; i += 1) {
-    //         colArr[i] = 1;
-    //     }
-    // }
     var scales=inScales.get();
 
+    if (shader) {
+        if (colArr) shader.define("COLORIZE_INSTANCES");
+        else shader.removeDefine("COLORIZE_INSTANCES");
+    }
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
     if(instColorArray.length!=num*4) instColorArray=new Float32Array(num*4);
 
@@ -161,10 +133,10 @@ function setupArray()
 
         if(colArr)
         {
-        instColorArray[i*4+0] = colArr[i*4+0];
-        instColorArray[i*4+1] = colArr[i*4+1];
-        instColorArray[i*4+2] = colArr[i*4+2];
-        instColorArray[i*4+3] = colArr[i*4+3];
+            instColorArray[i*4+0] = colArr[i*4+0];
+            instColorArray[i*4+1] = colArr[i*4+1];
+            instColorArray[i*4+2] = colArr[i*4+2];
+            instColorArray[i*4+3] = colArr[i*4+3];
         }
 
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
@@ -175,7 +147,7 @@ function setupArray()
 
     mesh.numInstances=num;
 
-    mesh.addAttribute('instMat', matrixArray,16);
+    mesh.addAttribute('instMat', matrixArray, 16);
     mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
     recalc=false;
@@ -190,18 +162,16 @@ function updateLimit()
 function doRender()
 {
     if(!mesh)return;
-    if(recalc)setupArray();
+    if(recalc) setupArray();
     if(recalc)return;
     if(matrixArray.length<=1)return;
-
-
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
         removeModule();
 
         shader=cgl.getShader();
-        // console.log(shader);//shows current material
+
         if(!shader.hasDefine('INSTANCING'))
         {
             mod=shader.addModule(
@@ -222,11 +192,19 @@ function doRender()
                 });
             }
             shader.define('INSTANCING');
+
             setBlendMode();
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
 
+        if (!inColor.get()) {
+            shader.removeDefine("COLORIZE_INSTANCES");
+        }
+        else {
+            shader.define("COLORIZE_INSTANCES");
+        }
     }
+
 
     if(doLimit.get()) mesh.numInstances=Math.min(num,inLimit.get());
     else mesh.numInstances=num;
