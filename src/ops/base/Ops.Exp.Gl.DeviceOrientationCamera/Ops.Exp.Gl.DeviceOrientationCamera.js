@@ -1,18 +1,14 @@
-
-var render=op.inTrigger("Render");
-var next=op.outTrigger("Next");
-var winOrient=op.outValue("Window Orientation");
+const
+    render=op.inTrigger("Render"),
+    next=op.outTrigger("Next"),
+    winOrient=op.outValue("Window Orientation"),
+    cgl=op.patch.cgl,
+    vCenter=vec3.create(),
+    transMatrix = mat4.create(),
+    displayOrientQuat=quat.create(),
+    displayOrientMatrix=mat4.create();
 
 window.addEventListener("deviceorientation", onOrientationChange,true);
-
-
-
-
-var cgl=op.patch.cgl;
-var vCenter=vec3.create();
-var transMatrix = mat4.create();
-var displayOrientQuat=quat.create();
-var displayOrientMatrix=mat4.create();
 var tempQuat=quat.create();
 mat4.identity(transMatrix);
 
@@ -20,6 +16,25 @@ var viewDirQuat=quat.create();
 
 render.onTriggered=function()
 {
+    //check for new permission request on IOS or android
+    if(DeviceMotionEvent && DeviceMotionEvent.requestPermission)
+    {
+        DeviceOrientationEvent.requestPermission()
+            .then(response =>
+            {
+                if (response == 'granted')
+                {
+
+                    window.addEventListener("deviceorientation", onOrientationChange, true);
+                }
+            })
+            .catch(console.error);
+    }
+    else
+    {
+        window.addEventListener("deviceorientation", onOrientationChange, true);
+    }
+
     if(window.orientation===undefined)
     {
         next.trigger();
@@ -27,7 +42,6 @@ render.onTriggered=function()
     }
 
     cgl.pushViewMatrix();
-
 
     tempQuat=quat.clone(viewDirQuat);
     quat.invert(tempQuat,tempQuat);
@@ -70,7 +84,7 @@ function quatFromEuler(quat,alpha,beta,gamma)
 	quat[3] = cX * cY * cZ - sX * sY * sZ;
 
 	return quat;
-}
+};
 
 function onOrientationChange(event)
 {
@@ -80,8 +94,4 @@ function onOrientationChange(event)
 
     winOrient.set( window.orientation||0 );
     quatFromEuler(viewDirQuat,alpha,beta,gamma);
-}
-
-
-
-
+};
