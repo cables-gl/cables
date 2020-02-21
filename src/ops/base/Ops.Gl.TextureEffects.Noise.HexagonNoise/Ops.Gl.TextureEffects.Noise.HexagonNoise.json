@@ -1,7 +1,14 @@
 {
-    "authorName": "andro",
-    "id": "8634e0bd-0507-46b5-81fb-7d9c42ada6f8",
-    "created": 1547460550646,
+    "id": "06993a23-1844-4a97-9aaf-d60319d4a528",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1582302771619
+        }
+    ],
+    "authorName": "cables",
+    "created": 1582302791527,
     "layout": {
         "portsIn": [
             {
@@ -51,15 +58,13 @@
             },
             {
                 "type": "0",
-                "name": "Num X",
-                "group": "Scaling",
+                "name": "Scale",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Num Y",
-                "group": "Scaling",
-                "subType": "number"
+                "name": "Orientation",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -91,70 +96,6 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.PixelNoise_v2"
-    },
-    "summary": "Pixelated noise",
-    "docs": {
-        "ports": [
-            {
-                "name": "Render",
-                "text": "Trigger in"
-            },
-            {
-                "name": "Blend Mode",
-                "text": "Blend mode to apply"
-            },
-            {
-                "name": "Amount",
-                "text": "Amount of blend mode to apply"
-            },
-            {
-                "name": "Loop",
-                "text": "If enabled the values loop and don't jump from 0-1"
-            },
-            {
-                "name": "RGB",
-                "text": "Enable for rgb noise"
-            },
-            {
-                "name": "Minimum value",
-                "text": "Minimum value the noise can reach"
-            },
-            {
-                "name": "Maximum value",
-                "text": "Maximum value the noise can reach"
-            },
-            {
-                "name": "Num X",
-                "text": "Number of cells on the x axis"
-            },
-            {
-                "name": "Num Y",
-                "text": "Number of cells on the y axis"
-            },
-            {
-                "name": "X",
-                "text": "Offsets on the x axis"
-            },
-            {
-                "name": "Y",
-                "text": "Offsets on the y axis"
-            },
-            {
-                "name": "Z",
-                "text": "Use this to animate the noise"
-            },
-            {
-                "name": "Next",
-                "text": "Trigger out"
-            }
-        ]
-    },
-    "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
-    "relatedops": null,
-    "youtubeids": []
+        "name": "Ops.Gl.TextureEffects.Noise.HexagonNoise"
+    }
 }
