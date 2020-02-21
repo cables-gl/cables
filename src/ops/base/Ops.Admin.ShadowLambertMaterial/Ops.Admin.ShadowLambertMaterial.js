@@ -88,6 +88,10 @@ const lights = [];
 const lightMatrices = [];
 const shadowCubeMaps = [];
 const normalOffsets = [];
+const directionalShadowMaps = [];
+const spotShadowMaps = [];
+const pointShadowMaps = [];
+
 for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;

@@ -474,6 +474,7 @@ inTrigger.onTriggered = function() {
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;
 
+                cgl.pushBlend(false);
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
 
@@ -484,7 +485,7 @@ inTrigger.onTriggered = function() {
                 if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
-
+                cgl.popBlend();
                 cgl.shadowPass = false;
                 cgl.frameStore.renderOffscreen = false;
 
