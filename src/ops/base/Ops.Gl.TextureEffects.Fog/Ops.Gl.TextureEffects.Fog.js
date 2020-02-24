@@ -61,14 +61,14 @@ render.onTriggered=function()
 
     if(image.get() && image.get().tex)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         cgl.setTexture(1, image.get().tex );
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();

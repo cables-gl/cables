@@ -55,9 +55,9 @@ var doRender=function()
     uniformWidth.setValue(w);
     uniformHeight.setValue(h);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 var srcFrag=''

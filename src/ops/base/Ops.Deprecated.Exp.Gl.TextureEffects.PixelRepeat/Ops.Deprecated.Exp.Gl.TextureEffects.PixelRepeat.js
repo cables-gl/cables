@@ -28,7 +28,7 @@ render.onTriggered=function()
     if(!mask.get())return;
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -38,7 +38,7 @@ render.onTriggered=function()
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

@@ -31,11 +31,11 @@ function updateLater()
 function doRender()
 {
     if(needsUpdate)updateShader();
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     bindTextures();
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 function bindTextures()

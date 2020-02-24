@@ -292,7 +292,7 @@ const biasMatrix = mat4.fromValues(
 const lightBiasMVPMatrix = mat4.create();
 
 function renderBlur() {
-    cgl.setShader(blurShader);
+    cgl.pushShader(blurShader);
 
     effect.setSourceTexture(fb.getTextureColor()); // take shadow map as source
 
@@ -315,7 +315,7 @@ function renderBlur() {
 
     effect.endEffect();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 shader.offScreenPass = true;
@@ -325,7 +325,7 @@ function renderShadowMap() {
     // * set shader
     cgl.gl.clearColor(0, 0, 0, 1);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
 
     cgl.pushModelMatrix();
@@ -356,7 +356,7 @@ function renderShadowMap() {
     cgl.popViewMatrix();
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 }
 

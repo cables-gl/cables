@@ -110,7 +110,7 @@ exec.onTriggered=function()
 {
     if(!shader)return;
     
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(shaderLastCompile!=shader.lastCompile)
     {
@@ -130,7 +130,7 @@ exec.onTriggered=function()
     shader.bindTextures=oldBindTexture;
     resetUniforms();
     
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 inShader.onChange=resetShader;

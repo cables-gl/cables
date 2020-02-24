@@ -61,14 +61,14 @@ render.onTriggered=function()
     tsize[1]=cgl.currentTextureEffect.getCurrentSourceTexture().height;
     texSizeUniform.setValue(tsize);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
     
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

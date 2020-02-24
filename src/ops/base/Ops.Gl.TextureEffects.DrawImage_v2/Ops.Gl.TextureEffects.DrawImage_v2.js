@@ -235,7 +235,7 @@ function doRender()
     var tex=image.get();
     if(tex && tex.tex && amount.get()>0.0)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         const imgTex=cgl.currentTextureEffect.getCurrentSourceTexture();
@@ -255,7 +255,7 @@ function doRender()
         }
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();

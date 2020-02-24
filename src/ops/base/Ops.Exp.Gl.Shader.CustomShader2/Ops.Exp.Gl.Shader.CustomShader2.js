@@ -59,9 +59,9 @@ function doRender()
 {
     setVectorValues();
     if(needsUpdate)updateShader();
-    if(asMaterial.get()) cgl.setShader(shader);
+    if(asMaterial.get()) cgl.pushShader(shader);
     trigger.trigger();
-    if(asMaterial.get()) cgl.setPreviousShader();
+    if(asMaterial.get()) cgl.popShader();
 }
 
 function bindTextures()

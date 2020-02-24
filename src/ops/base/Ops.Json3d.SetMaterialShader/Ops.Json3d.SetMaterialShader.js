@@ -23,10 +23,10 @@ exe.onTriggered=function()
 
         if(mat)
         {
-            cgl.setShader(mat);
+            cgl.pushShader(mat);
             if(mat.bindTextures) mat.bindTextures();
             next.trigger();
-            cgl.setPreviousShader();
+            cgl.popShader();
         }
     }
 

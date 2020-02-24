@@ -194,9 +194,9 @@ this.doRender=function()
 {
     shader.bindTextures=bindTextures;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     self.trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 
 

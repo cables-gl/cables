@@ -72,10 +72,10 @@ inTrigger.onTriggered = function () {
 
     cgl.setTexture(TEX_SLOT, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
     outTrigger.trigger();
 
     // console.log(shader.finalShaderFrag);

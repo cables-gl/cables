@@ -169,7 +169,7 @@ render.onTriggered=function()
     if(mesh && mesh.numInstances>0)
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.setTexture(0,textureOut.get().tex);
 
         var mulTex=inMulTex.get();
@@ -190,7 +190,7 @@ render.onTriggered=function()
         cgl.popModelMatrix();
 
         cgl.setTexture(0,null);
-        cgl.setPreviousShader();
+        cgl.popShader();
         cgl.popBlendMode();
     }
 

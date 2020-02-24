@@ -83,14 +83,14 @@ render.onTriggered=function()
     {
         uniWidth.setValue(image.get().width);
         uniHeight.setValue(image.get().height);
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0,image.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();

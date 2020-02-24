@@ -224,7 +224,7 @@ const Context = function (_patch)
             if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
         }
 
-        self.setShader(simpleShader);
+        this.pushShader(simpleShader);
     };
 
     this.screenShot = function (cb, doScreenshotClearAlpha,mimeType, quality)
@@ -251,7 +251,7 @@ const Context = function (_patch)
     {
         if(this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
-        self.setPreviousShader();
+        this.setPreviousShader();
         if (this._vMatrixStack.length() > 0) Log.warn("view matrix stack length !=0 at end of rendering...");
         if (this._mMatrixStack.length() > 0) Log.warn("mvmatrix stack length !=0 at end of rendering...");
         if (this._pMatrixStack.length() > 0) Log.warn("pmatrix stack length !=0 at end of rendering...");

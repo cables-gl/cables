@@ -42,7 +42,7 @@ shader.setSource(srcVert,srcFrag);
 
 var doRender=function()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(texture.get())
     {
@@ -51,7 +51,7 @@ var doRender=function()
     }
 
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 

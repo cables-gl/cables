@@ -156,7 +156,7 @@ stepWidth.set(10);
 this.render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
 
     // first pass
@@ -181,6 +181,6 @@ this.render.onTriggered=function()
     cgl.currentTextureEffect.finish();
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
     self.trigger.trigger();
 };

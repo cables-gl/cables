@@ -56,7 +56,7 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
@@ -102,6 +102,6 @@ render.onTriggered=function()
         cgl.currentTextureEffect.finish();
     }
 
-    cgl.setPreviousShader();
+    cgl.popShader();
     trigger.trigger();
 };

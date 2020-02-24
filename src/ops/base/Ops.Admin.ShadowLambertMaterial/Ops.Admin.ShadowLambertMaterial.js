@@ -282,13 +282,13 @@ execute.onTriggered=function()
     if (cgl.shadowPass) {
         next.trigger();
     } else {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
 
         shader.popTextures();
 
         updateLights();
         next.trigger();
 
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 };

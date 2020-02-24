@@ -148,10 +148,10 @@ inExec.onTriggered=function()
 
         if(gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
         {
-            if(CABLES.UI.renderHelper)cgl.setShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-            else cgl.setShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+            if(CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+            else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
             gltf.bounds.render(cgl);
-            cgl.setPreviousShader();
+            cgl.popShader();
         }
 
         if(needsMatUpdate) updateMaterials();

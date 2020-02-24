@@ -22,7 +22,7 @@ render.onTriggered=function()
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
     if(!inGradient.get())return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -33,7 +33,7 @@ render.onTriggered=function()
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inGradient.get().tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

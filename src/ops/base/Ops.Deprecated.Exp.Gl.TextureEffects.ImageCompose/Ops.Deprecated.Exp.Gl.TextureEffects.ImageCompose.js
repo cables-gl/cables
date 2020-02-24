@@ -134,12 +134,12 @@ var doRender=function()
         effect.setSourceTexture(tex);
         effect.startEffect();
 
-        cgl.setShader(bgShader);
+        cgl.pushShader(bgShader);
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
         
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
     else
     {

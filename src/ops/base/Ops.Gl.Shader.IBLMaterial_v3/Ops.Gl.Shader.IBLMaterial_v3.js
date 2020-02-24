@@ -214,9 +214,9 @@ function updateTexturesDefines()
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     bindTextures();
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 

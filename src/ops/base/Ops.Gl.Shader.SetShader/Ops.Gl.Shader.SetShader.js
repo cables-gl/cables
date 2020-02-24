@@ -10,10 +10,10 @@ function doRender()
 {
     if(shader.get())
     {
-        cgl.setShader(shader.get());
+        cgl.pushShader(shader.get());
         if(shader.get().bindTextures) shader.get().bindTextures();
         trigger.trigger();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
     else 
     {

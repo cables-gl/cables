@@ -36,14 +36,14 @@ render.onTriggered=function()
 
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, texture.tex );
     if(textureLookup.get()) cgl.setTexture(1, textureLookup.get().tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

@@ -37,7 +37,7 @@ render.onTriggered=function()
     
     for(var i=0;i<numPasses;i++)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
 
         uniPass.setValue(i/numPasses);
     
@@ -79,7 +79,7 @@ render.onTriggered=function()
             cgl.currentTextureEffect.finish();
         }
     
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();

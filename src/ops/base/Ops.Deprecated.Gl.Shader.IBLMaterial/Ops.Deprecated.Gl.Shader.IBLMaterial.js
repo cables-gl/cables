@@ -24,7 +24,7 @@ var cgl=op.patch.cgl;
 function doRender()
 {
     if(!inCubemap.get() )return;
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(inCubemap.get())
     {
@@ -79,7 +79,7 @@ function doRender()
 
 
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 inCubemap.onChange=updateTexturesDefines;
 inRough.onChange=updateTexturesDefines;

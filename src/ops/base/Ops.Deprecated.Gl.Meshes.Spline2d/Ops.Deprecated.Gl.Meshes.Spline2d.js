@@ -30,7 +30,7 @@ render.onTriggered=function()
     if(!shader)return;
     if(!mesh)return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     var thickness=inThickness.get();
     var feather=0;
@@ -75,7 +75,7 @@ render.onTriggered=function()
     }
 
     next.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 

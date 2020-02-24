@@ -350,7 +350,7 @@ function renderCubemapProjection() {
     if(!dynamicCubemap) return;
 
 
-    cgl.setShader(projectionShader);
+    cgl.pushShader(projectionShader);
 
     cubeMapEffect.setSourceTexture(fb.getTextureColor()); // take shadow map as source
 
@@ -365,7 +365,7 @@ function renderCubemapProjection() {
     cubeMapEffect.finish();
 
     cubeMapEffect.endEffect();
-    cgl.setPreviousShader();
+    cgl.popShader();
     outProjection.set(null);
     outProjection.set(cubeMapEffect.getCurrentSourceTexture());
 }
@@ -417,7 +417,7 @@ function renderCubeSide(index) {
 }
 
 function renderCubemap() {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     uniformLightPos.setValue(light.position);
     uniformNearFar.setValue([inNear.get(), inFar.get()]);
 
@@ -441,7 +441,7 @@ function renderCubemap() {
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
 
     cgl.resetViewPort();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 const sc=vec3.create();

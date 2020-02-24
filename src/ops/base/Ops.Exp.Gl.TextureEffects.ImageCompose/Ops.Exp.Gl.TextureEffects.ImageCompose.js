@@ -153,7 +153,7 @@ var doRender=function()
         cgl.pushBlend(false);
 
 
-        cgl.setShader(bgShader);
+        cgl.pushShader(bgShader);
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
@@ -162,7 +162,7 @@ var doRender=function()
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT );
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
     else
     {

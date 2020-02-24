@@ -147,8 +147,8 @@ execute.onTriggered=function()
         return;
     }
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     updateLights();
     next.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };

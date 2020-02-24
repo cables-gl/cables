@@ -231,10 +231,10 @@ const render = function() {
         console.log("NO SHADER");
         return;
     }
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     shader.bindTextures();
     outTrigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 op.init = function() {

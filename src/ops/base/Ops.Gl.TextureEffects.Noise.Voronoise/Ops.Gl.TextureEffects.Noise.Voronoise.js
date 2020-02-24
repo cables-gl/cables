@@ -55,14 +55,14 @@ render.onTriggered=function()
     uniPx.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniPy.setValue(1/cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

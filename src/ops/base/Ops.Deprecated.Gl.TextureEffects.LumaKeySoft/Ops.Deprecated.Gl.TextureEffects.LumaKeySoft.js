@@ -46,7 +46,7 @@ render.onTriggered=function()
 // unThreshold.setValue( threshold.get() );
 
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
 
     cgl.currentTextureEffect.bind();
@@ -55,6 +55,6 @@ render.onTriggered=function()
 
     cgl.currentTextureEffect.finish();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
     trigger.trigger();
 };

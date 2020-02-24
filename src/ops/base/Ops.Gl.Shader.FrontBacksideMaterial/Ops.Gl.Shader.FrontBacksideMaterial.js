@@ -8,8 +8,8 @@ render.onTriggered=doRender;
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     next.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 

@@ -21,22 +21,22 @@ function doRender()
     {
         if(shader.get())
         {
-            cgl.setShader(shader.get());
+            cgl.pushShader(shader.get());
             shaderOut.set(shader.get());
             shader.get().bindTextures();
             trigger.trigger();
-            cgl.setPreviousShader();
+            cgl.popShader();
         }
     }
     else
     {
         if(shader2.get())
         {
-            cgl.setShader(shader2.get());
+            cgl.pushShader(shader2.get());
             shaderOut.set(shader2.get());
             shader2.get().bindTextures();
             trigger.trigger();
-            cgl.setPreviousShader();
+            cgl.popShader();
         }
     }
 }

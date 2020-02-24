@@ -111,12 +111,12 @@ exe.onTriggered=function()
 
         effect.startEffect();
 
-        cgl.setShader(shaderWave);
+        cgl.pushShader(shaderWave);
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         cgl.setTexture(2, fb.getTextureColor().tex);
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
 
         outTex.set(effect.getCurrentSourceTexture());
 

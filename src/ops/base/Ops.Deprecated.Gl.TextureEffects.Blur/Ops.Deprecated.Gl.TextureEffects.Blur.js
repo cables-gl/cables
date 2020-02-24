@@ -66,7 +66,7 @@ direction.onValueChange(function()
 this.render.onTriggered=function()
 {
     if(!cgl.currentTextureEffect)return;
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
@@ -102,6 +102,6 @@ this.render.onTriggered=function()
         }
     }
 
-    cgl.setPreviousShader();
+    cgl.popShader();
     self.trigger.trigger();
 };

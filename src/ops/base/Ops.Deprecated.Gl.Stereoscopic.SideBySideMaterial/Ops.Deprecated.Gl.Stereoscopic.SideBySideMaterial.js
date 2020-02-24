@@ -71,7 +71,7 @@ texture0.onChange=texture1.onChange=function()
 
 render.onTriggered=function()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(texture0.get())
     {
@@ -87,5 +87,5 @@ render.onTriggered=function()
 
     trigger.trigger();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 };

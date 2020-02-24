@@ -31,7 +31,7 @@ render.onTriggered=function()
     var multex=multiplierTex.get();
     if(multex)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -39,7 +39,7 @@ render.onTriggered=function()
         if(multex) cgl.setTexture(1, multex.tex );
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
 

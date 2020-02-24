@@ -144,7 +144,7 @@ this.render.onTriggered=function()
 
     if(self.image.val && self.image.val.tex)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0,self.image.val.tex);
@@ -155,7 +155,7 @@ this.render.onTriggered=function()
 
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     self.trigger.trigger();

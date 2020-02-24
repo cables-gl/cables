@@ -29,9 +29,9 @@ function doRender()
         // isPicked.set(false);
 
         pickColorUniformR.setValue(currentPickingColor/255);
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         next.trigger();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
     else
     {

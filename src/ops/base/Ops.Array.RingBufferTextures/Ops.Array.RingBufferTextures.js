@@ -148,7 +148,7 @@ index=index%inNum.get();
 
     // here be rendering
 
-    cgl.setShader(bgShader);
+    cgl.pushShader(bgShader);
     // cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0,inTexture.get().tex);
@@ -166,7 +166,7 @@ index=index%inNum.get();
 
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 
     cgl.popDepthTest();

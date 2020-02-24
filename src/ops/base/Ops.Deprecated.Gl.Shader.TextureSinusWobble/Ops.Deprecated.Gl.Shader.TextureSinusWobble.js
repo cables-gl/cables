@@ -7,7 +7,7 @@ this.trigger=this.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_
 
 this.doRender=function()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(self.texture.get())
     {
@@ -18,7 +18,7 @@ this.doRender=function()
     self.trigger.trigger();
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 var srcFrag=''

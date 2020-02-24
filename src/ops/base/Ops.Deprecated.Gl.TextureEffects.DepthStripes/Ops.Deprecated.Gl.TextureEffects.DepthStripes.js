@@ -63,7 +63,7 @@ render.onTriggered=function()
 
     if(depthTexture.val && depthTexture.val.tex)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0,depthTexture.get().tex);
@@ -73,7 +73,7 @@ render.onTriggered=function()
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, colorTexture.get().tex );
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();

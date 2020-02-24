@@ -59,7 +59,7 @@ export const Marker=function(cgl)
 
 
 
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
 
 
 
@@ -75,7 +75,7 @@ export const Marker=function(cgl)
         // cgl.gl.enable(cgl.gl.DEPTH_TEST);
         cgl.popDepthTest();
 
-        cgl.setPreviousShader();
+        cgl.popShader();
 
 
         cgl.popModelMatrix();

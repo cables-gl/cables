@@ -106,13 +106,13 @@ function scrollTexture()
 
 
     // render background color...
-    cgl.setShader(shaderScroll);
+    cgl.pushShader(shaderScroll);
     effect.startEffect();
     effect.bind();
     cgl.setTexture(0, texFFT.tex );
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, texFFT.tex );
     effect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     texOut.set(effect.getCurrentSourceTexture());
 
@@ -181,7 +181,7 @@ amount.onValueChange(function(){ uniAmount.setValue(amount.get()); });
 
 function blurTexture()
 {
-    cgl.setShader(shaderBlur);
+    cgl.pushShader(shaderBlur);
 
     if(!effect.getCurrentSourceTexture())return;
 
@@ -220,7 +220,7 @@ function blurTexture()
         effect.endEffect();
     }
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 }
 
@@ -278,7 +278,7 @@ mirrorFlip.onChange=function()
 
 function mirrorTexture()
 {
-    cgl.setShader(shaderMirror);
+    cgl.pushShader(shaderMirror);
     effect.startEffect();
     effect.bind();
 
@@ -288,7 +288,7 @@ function mirrorTexture()
     effect.finish();
     effect.endEffect();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 };
 

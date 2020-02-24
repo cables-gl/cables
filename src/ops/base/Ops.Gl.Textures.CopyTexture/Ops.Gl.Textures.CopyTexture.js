@@ -159,12 +159,12 @@ var doRender=function()
     effect.startEffect();
 
     // render background color...
-    cgl.setShader(bgShader);
+    cgl.pushShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, inTexture.get().tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 
     texOut.set(effect.getCurrentSourceTexture());

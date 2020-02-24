@@ -167,13 +167,13 @@ render.onTriggered=function()
 
     // do simulation
     var t=effect.getCurrentSourceTexture().tex;
-    cgl.setShader(simShader);
+    cgl.pushShader(simShader);
     effect.bind();
 
     cgl.setTexture(3,t);
 
     effect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     uniTime.setValue(timeIn.get());
 

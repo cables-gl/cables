@@ -373,9 +373,9 @@ execute.onTriggered=function()
 {
     if(!shader)return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     updateLights();
     bindTextures();
     next.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };

@@ -112,14 +112,14 @@ render.onTriggered=function()
     // simulation shader
 
     var t=effect.getCurrentSourceTexture().tex;
-    cgl.setShader(shaderSim);
+    cgl.pushShader(shaderSim);
     effect.bind();
 
     cgl.setTexture(0,t);
     // cgl.setTexture(1,textureField.get().tex);
 
     effect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     cgl.resetViewPort();
 

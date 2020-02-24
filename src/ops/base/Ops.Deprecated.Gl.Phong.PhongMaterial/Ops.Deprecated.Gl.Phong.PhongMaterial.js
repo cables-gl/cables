@@ -412,11 +412,11 @@ var doRender=function()
 {
     if(!shader)return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     updateLights();
     shader.bindTextures();
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 shader.bindTextures=bindTextures;

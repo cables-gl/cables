@@ -132,7 +132,7 @@ render.onTriggered=function()
 
     effect.startEffect();
     t=effect.getCurrentSourceTexture().tex;
-    cgl.setShader(shaderSim);
+    cgl.pushShader(shaderSim);
 
     effect.bind();
 
@@ -143,7 +143,7 @@ render.onTriggered=function()
     t=effect.getCurrentSourceTexture().tex;
 
     outSimTex.set(effect.getCurrentSourceTexture());
-    cgl.setPreviousShader();
+    cgl.popShader();
     effect.endEffect();
 
     cgl.resetViewPort();

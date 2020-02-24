@@ -37,13 +37,13 @@ render.onTriggered=function()
 
     if(inDepthTex.get() && inDepthTex.get().tex)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, inDepthTex.get().tex );
         cgl.setTexture(1, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
 
 
     }

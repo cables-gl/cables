@@ -22,9 +22,9 @@ render.onTriggered=function()
     {
         uniTime.setValue( (Date.now()-startTime)/1000);
         uniTime2.setValue( (Date.now()-startTime)/1000);
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         trigger.trigger();
-        cgl.setPreviousShader();
+        cgl.popShader();
 
     }
 };

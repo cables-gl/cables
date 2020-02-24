@@ -39,9 +39,9 @@ var doRender=function()
         // else cgl.gl.enable(cgl.gl.DEPTH_TEST);
     cgl.pushDepthTest(enableDepth.get());
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     // if(true!==enableDepth.get()) cgl.gl.enable(cgl.gl.DEPTH_TEST);
     cgl.popDepthTest();

@@ -13,14 +13,14 @@ op.bindTextures=function()
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     shader.bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     trigger.trigger();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 var shader=new CGL.Shader(cgl,'TextureLookupColorMaterial');

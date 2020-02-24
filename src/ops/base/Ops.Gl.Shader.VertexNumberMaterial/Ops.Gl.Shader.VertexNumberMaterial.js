@@ -37,9 +37,9 @@ const srcFrag=''
 
 var doRender=function()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 const shader=new CGL.Shader(cgl,'vertexnumber material');

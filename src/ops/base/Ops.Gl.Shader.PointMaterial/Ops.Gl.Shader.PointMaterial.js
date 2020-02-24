@@ -66,14 +66,14 @@ function doRender()
     uniWidth.setValue(cgl.canvasWidth);
     uniHeight.setValue(cgl.canvasHeight);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     bindTextures();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     trigger.trigger();
     if(preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA,cgl.gl.ONE_MINUS_SRC_ALPHA);
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 doScale.onChange=function()

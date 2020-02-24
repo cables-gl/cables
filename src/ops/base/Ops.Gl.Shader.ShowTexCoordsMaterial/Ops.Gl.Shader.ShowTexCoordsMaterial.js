@@ -4,9 +4,9 @@ const cgl=op.patch.cgl;
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 var shader=new CGL.Shader(cgl,'showtexcoords material');

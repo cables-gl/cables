@@ -131,7 +131,7 @@ exec.onTriggered=function()
     cgl.pushModelMatrix();
     mat4.identity(cgl.mMatrix);
 
-    cgl.setShader(inShader.get());
+    cgl.pushShader(inShader.get());
     if(shader.bindTextures) shader.bindTextures();
 
     mesh.render(inShader.get());
@@ -143,7 +143,7 @@ exec.onTriggered=function()
 
     outTex.set(fb.getTextureColor());
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     cgl.gl.viewport(prevViewPort[0],prevViewPort[1],prevViewPort[2],prevViewPort[3] );
 

@@ -82,14 +82,14 @@ var gltfMesh=class
 
             if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
             {
-                cgl.setShader(gltf.shaders[this.material]);
+                cgl.pushShader(gltf.shaders[this.material]);
             }
 
             this.mesh.render(cgl.getShader(),ignoreMaterial);
 
             if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
             {
-                cgl.setPreviousShader();
+                cgl.popShader();
             }
 
 

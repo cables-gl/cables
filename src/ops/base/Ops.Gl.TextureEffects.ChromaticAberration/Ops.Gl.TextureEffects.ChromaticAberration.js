@@ -42,7 +42,7 @@ render.onTriggered=function()
     uniPixel.setValue(pixel.get()*(1/texture.width));
     uniOnePixel.setValue(1/texture.width);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, texture.tex );
@@ -50,7 +50,7 @@ render.onTriggered=function()
     if(textureMask.get()) cgl.setTexture(1, textureMask.get().tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

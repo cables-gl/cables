@@ -37,11 +37,11 @@ render.onTriggered=function()
     if(animated.get()) timeUniform.setValue(op.patch.freeTimer.get()/1000%100);
         else timeUniform.setValue(0);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

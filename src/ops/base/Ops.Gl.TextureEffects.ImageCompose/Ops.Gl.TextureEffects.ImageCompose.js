@@ -187,11 +187,11 @@ var doRender=function()
     effect.startEffect();
 
     // render background color...
-    cgl.setShader(bgShader);
+    cgl.pushShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 

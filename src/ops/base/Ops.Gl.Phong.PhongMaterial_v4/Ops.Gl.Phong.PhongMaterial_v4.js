@@ -403,7 +403,7 @@ const render = function() {
     if (cgl.shadowPass) {
         outTrigger.trigger();
     } else {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         shader.popTextures();
 
         if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
@@ -414,7 +414,7 @@ const render = function() {
         if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
 
         outTrigger.trigger();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 }
 

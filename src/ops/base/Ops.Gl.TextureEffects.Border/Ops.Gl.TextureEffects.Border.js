@@ -40,13 +40,13 @@ render.onTriggered=function()
     var texture=cgl.currentTextureEffect.getCurrentSourceTexture();
     aspectUniform.set(texture.height/texture.width);
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, texture.tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

@@ -302,8 +302,8 @@ render.onTriggered=function()
     if(textureOpacity.get() && textureOpacityUniform)    shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
 
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     next.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 

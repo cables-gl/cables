@@ -52,7 +52,7 @@ render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
     const texture=cgl.currentTextureEffect.getCurrentSourceTexture();
@@ -63,7 +63,7 @@ render.onTriggered=function()
     cgl.setTexture(0, texture.tex );
 
     cgl.currentTextureEffect.finish();
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

@@ -13,9 +13,9 @@ var inTime=op.inValue("Time");
 
 var doRender=function()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 };
 
 var shader=new CGL.Shader(cgl,'furmaterial');

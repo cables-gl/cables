@@ -77,7 +77,7 @@ exec.onTriggered=function()
     if(!p)return;
 
     var div=1000;
-    cgl.setShader(simShader);
+    cgl.pushShader(simShader);
 
     // console.log("---------------",p.points.length/2);
 
@@ -105,7 +105,7 @@ exec.onTriggered=function()
     }
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
 };
 

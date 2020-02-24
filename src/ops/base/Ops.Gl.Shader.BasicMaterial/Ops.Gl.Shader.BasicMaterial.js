@@ -33,12 +33,12 @@ function doRender()
 {
     if(!shader)return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     shader.bindTextures();
 
     trigger.trigger();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 

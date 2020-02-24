@@ -18,7 +18,7 @@ var textureUniform=new CGL.Uniform(shader,'t','tex',0);
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(cgl.getViewPort()[2]!=texWidth.get() || cgl.getViewPort()[3]!=texHeight.get())
     {
@@ -31,7 +31,7 @@ render.onTriggered=function()
 
     cgl.currentTextureEffect.finish();
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     trigger.trigger();
 };

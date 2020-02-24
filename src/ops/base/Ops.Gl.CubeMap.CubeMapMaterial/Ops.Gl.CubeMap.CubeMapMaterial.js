@@ -15,7 +15,7 @@ var cgl=op.patch.cgl;
 
 function doRender()
 {
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     if(inCubemap.get())
     {
@@ -25,7 +25,7 @@ function doRender()
     else cgl.setTexture(0,CGL.Texture.getTempTexture(cgl).tex);
 
     trigger.trigger();
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 function updateMapping()

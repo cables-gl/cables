@@ -259,7 +259,7 @@ function doRender() {
     prevViewPort[2]=vp[2];
     prevViewPort[3]=vp[3];
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
 
     var swapTexture, sourceTexture = fb.getTextureColor();
     for (var i = 0; i < rdsSpeeed.get(); i++) {
@@ -268,7 +268,7 @@ function doRender() {
     }
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 

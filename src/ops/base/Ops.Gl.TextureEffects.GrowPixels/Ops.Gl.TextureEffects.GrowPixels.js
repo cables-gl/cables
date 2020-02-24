@@ -36,7 +36,7 @@ render.onTriggered=function()
 for(var i=0;i<Math.floor(iter.get());i++)
     if(strength.get()>0.0)
     {
-        cgl.setShader(shader);
+        cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
@@ -45,7 +45,7 @@ for(var i=0;i<Math.floor(iter.get());i++)
         uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
         cgl.currentTextureEffect.finish();
-        cgl.setPreviousShader();
+        cgl.popShader();
     }
 
     trigger.trigger();
