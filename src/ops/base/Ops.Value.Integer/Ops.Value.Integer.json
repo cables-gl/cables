@@ -1,0 +1,29 @@
+{
+    "id": "17bc01d7-04ad-4aab-b88b-bb09744c4a69",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1582563572717
+        }
+    ],
+    "authorName": "andro",
+    "created": 1582563660326,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Integer",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Number out",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Value.Integer"
+    }
+}
