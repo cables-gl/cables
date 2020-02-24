@@ -375,13 +375,13 @@ function renderHelpers() {
 }
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
      // NOTE: how to handle this? fucks up the shadow map
      // renderHelpers();
 
 
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get()) {
         if (!cgl.shadowPass) {
@@ -419,7 +419,7 @@ inTrigger.onTriggered = function() {
 
 
                 // remove light from stack and readd it with shadow map & mvp matrix
-                cgl.lightStack.pop();
+                cgl.frameStore.lightStack.pop();
 
                 light.lightMatrix = lightBiasMVPMatrix;
                 light.shadowBias = inBias.get();
@@ -427,7 +427,7 @@ inTrigger.onTriggered = function() {
                 light.shadowMapDepth = fb.getTextureDepth();
                 light.normalOffset = inNormalOffset.get();
                 light.shadowStrength = inShadowStrength.get();
-                cgl.lightStack.push(light);
+                cgl.frameStore.lightStack.push(light);
 
             }
         }
@@ -435,5 +435,5 @@ inTrigger.onTriggered = function() {
 
     outTrigger.trigger();
 
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }

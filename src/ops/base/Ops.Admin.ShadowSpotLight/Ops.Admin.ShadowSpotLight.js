@@ -446,7 +446,7 @@ function drawHelpers() {
 }
 
 inTrigger.onTriggered = function() {
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.set(pointAtPos, inPointAtX.get(), inPointAtY.get(), inPointAtZ.get());
@@ -460,7 +460,7 @@ inTrigger.onTriggered = function() {
 
     drawHelpers();
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     if (inCastShadow.get()) {
         if (!cgl.shadowPass) {
             if (fb) {
@@ -474,6 +474,7 @@ inTrigger.onTriggered = function() {
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;
 
+                cgl.pushBlend(false);
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
 
@@ -484,7 +485,7 @@ inTrigger.onTriggered = function() {
                 if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
                 cgl.gl.colorMask(true,true,true,true);
 
-
+                cgl.popBlend();
                 cgl.shadowPass = false;
                 cgl.frameStore.renderOffscreen = false;
 
@@ -496,7 +497,7 @@ inTrigger.onTriggered = function() {
     }
 
     // remove light from stack and readd it with shadow map & mvp matrix
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 
     light.lightMatrix = lightBiasMVPMatrix;
     light.castShadow = inCastShadow.get();
@@ -506,8 +507,8 @@ inTrigger.onTriggered = function() {
     light.shadowBias = inBias.get();
     light.shadowStrength = inShadowStrength.get();
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
     outTrigger.trigger();
 
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }

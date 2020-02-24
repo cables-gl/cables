@@ -44,7 +44,7 @@ function updateVisibility()
         if(inVisible.get())
         {
             outShowing.set(true);
-            if(!ele.classList.contains('CABLES_animFadeIn'))
+            if(ele && ele.classList && !ele.classList.contains('CABLES_animFadeIn'))
             {
 
                 clearTimeout(theTimeout);
@@ -62,7 +62,7 @@ function updateVisibility()
         else
         {
             outShowing.set(true);
-            if(!ele.classList.contains('CABLES_animFadeOut'))
+            if(ele && ele.classList && !ele.classList.contains('CABLES_animFadeOut'))
             {
 
                 clearTimeout(theTimeout);

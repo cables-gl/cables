@@ -1,0 +1,44 @@
+{
+    "id": "c179aa0e-b558-4130-8c2d-2deab2919a07",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582125423781
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582125443369,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": "5",
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "group": "Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Value Suffix",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ],
+        "name": "Ops.Html.CSSProperty_v2"
+    }
+}

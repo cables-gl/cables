@@ -407,8 +407,10 @@ Geometry.prototype.calcTangentsBitangents = function ()
     }
     if (!this.texCoords.length)
     {
-        console.error("Cannot calculate tangents/bitangents without texture coordinates.");
-        return;
+        console.warn("No texcoords. Replacing with default values [0, 0].");
+        const texCoordLength = (this.vertices.length / 3) * 2;
+        this.texCoords = new Float32Array(texCoordLength);
+        for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;
     }
     if (!this.verticesIndices.length)
     {

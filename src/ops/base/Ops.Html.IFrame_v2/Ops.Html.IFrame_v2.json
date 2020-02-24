@@ -1,0 +1,50 @@
+{
+    "id": "dedf04b8-7f01-4802-b380-cce9ce808c32",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582124956971
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582124970368,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "URL",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "ID",
+                "group": "Attributes"
+            },
+            {
+                "type": "0",
+                "name": "Show Border",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.IFrame_v2"
+    }
+}

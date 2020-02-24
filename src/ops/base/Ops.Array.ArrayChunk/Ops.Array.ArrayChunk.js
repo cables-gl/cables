@@ -36,6 +36,7 @@ function setOutarray() {
 
     var newLen=Math.min(inArr.length,begin+end)-begin;
     newLen=Math.min(newLen,size);
+
     if(newLen > size) newLen=inArr.length;
     newArr.length=newLen;
     for(var i=begin;i<newLen+begin;i++)

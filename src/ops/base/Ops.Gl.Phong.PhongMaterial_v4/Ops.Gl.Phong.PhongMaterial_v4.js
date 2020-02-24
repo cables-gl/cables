@@ -429,8 +429,8 @@ const vecTemp = vec3.create();
 const camPos = vec3.create();
 
 inTrigger.onTriggered = function() {
-    if (cgl.lightStack) {
-        if (cgl.lightStack.length === 0) {
+    if (cgl.frameStore.lightStack) {
+        if (cgl.frameStore.lightStack.length === 0) {
             op.setUiError("deflight","Default light is enabled. Please add lights to your patch to make this warning disappear.",0);
             // if there is no lights in the stack, we set the material back to its initialLight
             for (let i = 0; i < lightUniforms.length; i += 1) {
@@ -470,7 +470,7 @@ inTrigger.onTriggered = function() {
             // we have lights in the stack
             op.setUiError("deflight",null);
             for (let i = 0; i < MAX_LIGHTS; i += 1) {
-                const light = cgl.lightStack[i];
+                const light = cgl.frameStore.lightStack[i];
                 if (!light) {
                     lightUniforms[i].type.setValue(LIGHT_TYPES.none);
                     continue;
@@ -498,7 +498,7 @@ inTrigger.onTriggered = function() {
         render();
         }
     } else {
-        cgl.lightStack = [];
+        cgl.frameStore.lightStack = [];
     }
 }
 

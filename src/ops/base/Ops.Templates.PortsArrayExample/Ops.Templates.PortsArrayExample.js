@@ -24,15 +24,6 @@ function update()
     {
         return;
     }
-    else
-    {
-        if(showingError)
-        {
-            showingError = false;
-            //set ui to null if the input is not an array
-            op.uiAttr({error:null});
-        }
-    }
     //set outArray to tempArray
     outArray.set(tempArray);
 }

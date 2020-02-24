@@ -471,7 +471,7 @@ function renderHelpers(renderRadius) {
 
 inTrigger.onTriggered = function() {
 
-    if (!cgl.lightStack) cgl.lightStack = [];
+    if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
@@ -479,7 +479,7 @@ inTrigger.onTriggered = function() {
 
     renderHelpers(false);
 
-    cgl.lightStack.push(light);
+    cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get()) {
         if (!cubemapInitialized) initializeCubemap();
@@ -508,7 +508,7 @@ inTrigger.onTriggered = function() {
         cgl.shadowPass = false;
         cgl.frameStore.renderOffscreen = false;
 
-        cgl.lightStack.pop();
+        cgl.frameStore.lightStack.pop();
 
         light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()), cubeDepthMap: depthBuffer };
 
@@ -517,10 +517,10 @@ inTrigger.onTriggered = function() {
         light.shadowBias = inBias.get();
         light.shadowStrength = inShadowStrength.get();
 
-        cgl.lightStack.push(light);
+        cgl.frameStore.lightStack.push(light);
     }
 
     outTrigger.trigger();
-    cgl.lightStack.pop();
+    cgl.frameStore.lightStack.pop();
 }
 

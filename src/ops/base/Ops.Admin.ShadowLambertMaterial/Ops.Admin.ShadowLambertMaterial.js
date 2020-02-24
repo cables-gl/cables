@@ -88,6 +88,10 @@ const lights = [];
 const lightMatrices = [];
 const shadowCubeMaps = [];
 const normalOffsets = [];
+const directionalShadowMaps = [];
+const spotShadowMaps = [];
+const pointShadowMaps = [];
+
 for(var i=0;i<MAX_LIGHTS;i++)
 {
     var count=i;
@@ -131,7 +135,7 @@ var updateLights=function()
     var count=0;
     var i=0;
     var num=0;
-    if((!cgl.lightStack || !cgl.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
+    if((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights))
     {
         num=0;
     }
@@ -143,8 +147,8 @@ var updateLights=function()
             }
         }
 
-        for (let light in cgl.lightStack) {
-            if (cgl.lightStack[light].type !== "ambient") {
+        for (let light in cgl.frameStore.lightStack) {
+            if (cgl.frameStore.lightStack[light].type !== "ambient") {
                 num++;
             }
         }
@@ -156,7 +160,7 @@ var updateLights=function()
         shader.define('NUM_LIGHTS',''+Math.max(numLights, 1));
     }
 
-    if((!cgl.lightStack || !cgl.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)) {
+    if((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length) && (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)) {
         shader.removeDefine("SHADOW_MAP");
         lights.forEach(l => l.shadowMap = null); // Does this clear textures?
         shadowCubeMap = null;
@@ -200,10 +204,10 @@ var updateLights=function()
                     }
                 }
             }
-            if (cgl.lightStack) {
-                if (cgl.lightStack.length) {
-                        for (let j = 0; j < cgl.lightStack.length; j += 1) {
-                            const light = cgl.lightStack[j];
+            if (cgl.frameStore.lightStack) {
+                if (cgl.frameStore.lightStack.length) {
+                        for (let j = 0; j < cgl.frameStore.lightStack.length; j += 1) {
+                            const light = cgl.frameStore.lightStack[j];
                             lights[count].position.setValue(light.position);
                             lights[count].color.setValue(light.color);
 

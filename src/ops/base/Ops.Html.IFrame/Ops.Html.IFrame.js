@@ -1,10 +1,10 @@
-
-var width=op.inValue("width",400);
-var height=op.inValue("height",400);
-var src=op.inValueString("URL",'https://undev.studio');
-var elId=op.inValueString("ID");
-var inBorder=op.inBool("Show Border", false);
-const outEle=op.outObject("Element");
+const
+    width=op.inValue("width",400),
+    height=op.inValue("height",400),
+    src=op.inValueString("URL",'https://undev.studio'),
+    elId=op.inValueString("ID"),
+    inBorder=op.inBool("Show Border", false),
+    outEle=op.outObject("Element");
 
 function updateSize()
 {
@@ -15,6 +15,7 @@ function updateSize()
 function updateURL()
 {
     element.setAttribute('src',src.get());
+    updateBorder();
 }
 
 function updateID()

@@ -1,0 +1,114 @@
+{
+    "id": "9fa3fc46-3147-4e3a-8ee8-a93ea9e8786e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1582115532282
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1582115559965,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "relative",
+                "group": "Behavior",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "normalize",
+                "group": "Behavior",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "flip y",
+                "group": "Behavior",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Area",
+                "group": "Behavior",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "right click prevent default",
+                "group": "Behavior",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "smooth",
+                "group": "Smoothing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "smoothSpeed",
+                "group": "Smoothing",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "multiply",
+                "group": "Smoothing",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "button down",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "click"
+            },
+            {
+                "type": "1",
+                "name": "Button Up"
+            },
+            {
+                "type": "1",
+                "name": "click right"
+            },
+            {
+                "type": "0",
+                "name": "mouseOver",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "button",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.Mouse.Mouse_v2"
+    }
+}

@@ -6,7 +6,7 @@ var outTriggered=op.outValue("Was Triggered");
 
 var triggered=false;
 
-op.toWorkPortsNeedToBeLinked(exe,next);
+op.toWorkPortsNeedToBeLinked(exe);
 
 reset.onTriggered=function()
 {

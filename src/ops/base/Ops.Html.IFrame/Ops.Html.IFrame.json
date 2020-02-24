@@ -24,6 +24,11 @@
                 "type": "0",
                 "name": "ID",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Show Border",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

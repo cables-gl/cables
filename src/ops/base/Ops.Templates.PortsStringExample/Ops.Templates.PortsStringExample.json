@@ -5,16 +5,14 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "String in",
-                "subType": "string"
+                "type": "5",
+                "name": "String in"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "String out",
-                "subType": "string"
+                "type": "5",
+                "name": "String out"
             }
         ],
         "name": "Ops.Templates.PortsStringExample"

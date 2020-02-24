@@ -1,0 +1,27 @@
+{
+    "id": "a1a2189b-564c-4dd7-b3d9-a6cebc0cd94e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1582126210630
+        }
+    ],
+    "authorName": "tim",
+    "created": 1582126224873,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Query"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.QuerySelector_v2"
+    }
+}
