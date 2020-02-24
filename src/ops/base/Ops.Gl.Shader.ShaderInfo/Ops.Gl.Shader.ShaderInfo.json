@@ -24,9 +24,8 @@
                 "name": "Next"
             },
             {
-                "type": "0",
-                "name": "Name",
-                "subType": "string"
+                "type": "5",
+                "name": "Name"
             },
             {
                 "type": "0",

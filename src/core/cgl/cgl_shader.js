@@ -133,6 +133,13 @@ Shader.prototype.getName=function(){
     return this._name;
 }
 
+/**
+ * enable an extension for the shader
+ * @function copy
+ * @memberof enableExtension
+ * @instance
+ * @param name extension name
+ */
 Shader.prototype.enableExtension = function(name) {
     this.setWhyCompile("enable extension "+name);
     this._needsRecompile = true;
@@ -153,6 +160,50 @@ Shader.prototype.setWhyCompile=function(why)
 {
     // Log.log('recompile because '+why);
 };
+
+
+/**
+ * copy all uniform values from another shader
+ * @function copy
+ * @memberof copyUniforms
+ * @instance
+ * @param shader uniform values will be copied from this shader
+ */
+Shader.prototype.copyUniforms = function(shader)
+{
+    for(var i=0;i<shader._uniforms.length;i++)
+    {
+        this._uniforms[i].set( shader._uniforms[i].getValue() );
+    }
+}
+
+/**
+ * copy current shader
+ * @function copy
+ * @memberof Shader
+ * @instance
+ * @returns newShader 
+ */
+Shader.prototype.copy = function()
+{
+    const shader=new Shader(this._cgl,this._name+" copy");
+    shader.setSource(this.srcVert,this.srcFrag);
+
+    shader._modules=JSON.parse(JSON.stringify(this._modules));
+    shader._defines=JSON.parse(JSON.stringify(this._defines));
+
+    shader._modGroupCount=this._modGroupCount;
+    shader._moduleNames=this._moduleNames;
+
+    for(var i=0;i<this._uniforms.length;i++) 
+    {
+        var u=this._uniforms[i].copy(shader);
+        u.resetLoc();
+    }
+
+    return shader;
+}
+
 
 /**
  * set shader source code
@@ -331,8 +382,8 @@ Shader.prototype.compile = function() {
         for (var j = 0; j < this._modules.length; j++) {
             if (this._modules[j].name == this._moduleNames[i]) {
 
-                srcHeadVert+='\n//---- MOD: '+this._modules[j].group+': '+j+' - '+this._modules[j].title+' ------\n';
-                srcHeadFrag+='\n//---- MOD: '+this._modules[j].group+': '+j+' - '+this._modules[j].title+' ------\n';
+                srcHeadVert+='\n//---- MOD: group:'+this._modules[j].group+': idx:'+j+' - prfx:'+this._modules[j].prefix+' - '+this._modules[j].title+' ------\n';
+                srcHeadFrag+='\n//---- MOD: group:'+this._modules[j].group+': idx:'+j+' - prfx:'+this._modules[j].prefix+' - '+this._modules[j].title+' ------\n';
 
                 srcVert+='\n\n//---- MOD: '+this._modules[j].title+' ------\n';
                 srcFrag+='\n\n//---- MOD: '+this._modules[j].title+' ------\n';
@@ -917,11 +968,7 @@ Shader.prototype.popTextures=function()
     this._textureStackTex.length=
     this._textureStackType.length=
     this._textureStackUni.length=0;
-
 };
-
-
-
 
 // --------------------------
 

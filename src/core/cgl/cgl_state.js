@@ -289,12 +289,29 @@ const Context = function (_patch)
         return simpleShader;
     };
 
+    /**
+     * push a shader to the shader stack
+     * @function pushShader
+     * @memberof Context
+     * @instance
+     * @param {Object} shader
+     * @function
+     */
+    this.pushShader=
     this.setShader = function (shader)
     {
         this._shaderStack.push(shader);
         currentShader = shader;
     };
 
+    /**
+     * pop current used shader from shader stack
+     * @function popShader
+     * @memberof Context
+     * @instance
+     * @function
+     */
+    this.popShader=
     this.setPreviousShader = function ()
     {
         if (this._shaderStack.length === 0) throw "Invalid shader stack pop!";

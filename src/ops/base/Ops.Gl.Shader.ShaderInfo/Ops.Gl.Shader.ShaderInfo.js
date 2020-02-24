@@ -4,7 +4,7 @@ const
     showVert=op.inTriggerButton("Show Vertex"),
     showModules=op.inTriggerButton("Show Modules"),
     next=op.outTrigger("Next"),
-    outName=op.outValueString("Name"),
+    outName=op.outString("Name"),
     outNumUniforms=op.outValue("Num Uniforms"),
     outNumAttributes=op.outValue("Num Attributes"),
     outAttributeNames=op.outArray("Arributes Names"),

@@ -31,18 +31,16 @@ function doRender()
 {
     if(!shader)return;
 
-    cgl.setShader(shader);
+    cgl.pushShader(shader);
     // shader.bindTextures();
     shader.popTextures();
 
-    if(diffuseTextureUniform && diffuseTexture.get())
-        shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
-    if(textureOpacityUniform && textureOpacity.get())
-        shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
+    if(diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform,diffuseTexture.get().tex);
+    if(textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
     trigger.trigger();
 
 
-    cgl.setPreviousShader();
+    cgl.popShader();
 }
 
 // rgba colors
@@ -56,40 +54,40 @@ const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
 
 op.setPortGroup("Color",[r,g,b,a]);
 
-    // diffuse outTexture
+// diffuse outTexture
 
-    var diffuseTexture=op.inTexture("texture");
-    var diffuseTextureUniform=null;
-    // shader.bindTextures=bindTextures;
+var diffuseTexture=op.inTexture("texture");
+var diffuseTextureUniform=null;
+// shader.bindTextures=bindTextures;
 
-    diffuseTexture.onChange=updateDiffuseTexture;
+diffuseTexture.onChange=updateDiffuseTexture;
 
-    function updateDiffuseTexture()
+function updateDiffuseTexture()
+{
+    if(diffuseTexture.get())
     {
-        if(diffuseTexture.get())
-        {
-            if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE'))shader.define('HAS_TEXTURE_DIFFUSE');
-            if(!diffuseTextureUniform)diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
+        if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE'))shader.define('HAS_TEXTURE_DIFFUSE');
+        if(!diffuseTextureUniform)diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
 
-            diffuseRepeatX.setUiAttribs({greyout:false});
-            diffuseRepeatY.setUiAttribs({greyout:false});
-            diffuseOffsetX.setUiAttribs({greyout:false});
-            diffuseOffsetY.setUiAttribs({greyout:false});
-            colorizeTexture.setUiAttribs({greyout:false});
-        }
-        else
-        {
-            shader.removeUniform('texDiffuse');
-            shader.removeDefine('HAS_TEXTURE_DIFFUSE');
-            diffuseTextureUniform=null;
-
-            diffuseRepeatX.setUiAttribs({greyout:true});
-            diffuseRepeatY.setUiAttribs({greyout:true});
-            diffuseOffsetX.setUiAttribs({greyout:true});
-            diffuseOffsetY.setUiAttribs({greyout:true});
-            colorizeTexture.setUiAttribs({greyout:true});
-        }
+        diffuseRepeatX.setUiAttribs({greyout:false});
+        diffuseRepeatY.setUiAttribs({greyout:false});
+        diffuseOffsetX.setUiAttribs({greyout:false});
+        diffuseOffsetY.setUiAttribs({greyout:false});
+        colorizeTexture.setUiAttribs({greyout:false});
     }
+    else
+    {
+        shader.removeUniform('texDiffuse');
+        shader.removeDefine('HAS_TEXTURE_DIFFUSE');
+        diffuseTextureUniform=null;
+
+        diffuseRepeatX.setUiAttribs({greyout:true});
+        diffuseRepeatY.setUiAttribs({greyout:true});
+        diffuseOffsetX.setUiAttribs({greyout:true});
+        diffuseOffsetY.setUiAttribs({greyout:true});
+        colorizeTexture.setUiAttribs({greyout:true});
+    }
+}
 
 const colorizeTexture=op.inValueBool("colorizeTexture",false);
 

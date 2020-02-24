@@ -158,6 +158,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this.needsUpdate = true;
 };
 
+Uniform.prototype.copy = function(newShader)
+{
+    return new Uniform(newShader, this._type, this._name);
+};
+
 Uniform.prototype.getType = function ()
 {
     return this._type;
