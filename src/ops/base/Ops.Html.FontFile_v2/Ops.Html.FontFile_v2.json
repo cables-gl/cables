@@ -12,9 +12,8 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "file",
-                "subType": "string"
+                "type": "5",
+                "name": "file"
             },
             {
                 "type": "5",

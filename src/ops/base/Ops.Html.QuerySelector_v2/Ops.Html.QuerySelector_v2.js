@@ -1,8 +1,6 @@
-// input
-var queryPort = op.inString('Query');
-
-// output
-var elementPort = op.outObject('Element');
+const
+    queryPort = op.inString('Query'),
+    elementPort = op.outObject('Element');
 
 queryPort.onChange = update;
 

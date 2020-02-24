@@ -1,18 +1,18 @@
-var isMobile=op.outValue("Is Mobile",false);
-var isIe=op.outValue("Is IE",false);
-var isIe10Plus=op.outValue("Is IE 10+",false);
-var isIe11=op.outValue("Is IE 11",false);
-var isEdge=op.outValue("Is Edge",false);
-var isChrome=op.outValue("Is Chrome",false);
-var isFirefox=op.outValue("Is Firefox",false);
-var isSafari=op.outValue("Is Safari",false);
-var isWindows=op.outValue("Is Windows",false);
-var isLinux=op.outValue("Is Linux",false);
-var isMac=op.outValue("Is Mac",false);
-var isIos=op.outValue("Is iOS",false);
-var isAndroid=op.outValue("Is Android",false);
-
-var outNav=op.outString("Language");
+const
+    isMobile=op.outValue("Is Mobile",false),
+    isIe=op.outValue("Is IE",false),
+    isIe10Plus=op.outValue("Is IE 10+",false),
+    isIe11=op.outValue("Is IE 11",false),
+    isEdge=op.outValue("Is Edge",false),
+    isChrome=op.outValue("Is Chrome",false),
+    isFirefox=op.outValue("Is Firefox",false),
+    isSafari=op.outValue("Is Safari",false),
+    isWindows=op.outValue("Is Windows",false),
+    isLinux=op.outValue("Is Linux",false),
+    isMac=op.outValue("Is Mac",false),
+    isIos=op.outValue("Is iOS",false),
+    isAndroid=op.outValue("Is Android",false),
+    outNav=op.outString("Language");
 
 outNav.set(navigator.language || navigator.userLanguage);
 
@@ -52,7 +52,6 @@ var isChromium = window.chrome,
     isIEedge = winNav.userAgent.indexOf("Edge") > -1,
     isIOSChrome = winNav.userAgent.match("CriOS");
 
-
 if(isIOSChrome || (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera === false && isIEedge === false))
 {
    // is Google Chrome
@@ -63,8 +62,6 @@ else
 {
    // not Google Chrome
 }
-
-
 
 if(window.navigator.userAgent.indexOf("Windows") != -1)
 {
@@ -88,10 +85,6 @@ isIos.set( /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream);
 if(window.navigator.userAgent.toLowerCase().indexOf("android") != -1)
     isAndroid.set(true);
 
-
-
-
 isMobile.set(false);
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
     isMobile.set(true);
-

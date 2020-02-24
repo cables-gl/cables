@@ -1,5 +1,5 @@
 const
-    filename=op.inFile("file"),
+    filename=op.inUrl("file"),
     fontname=op.inString("family"),
     outLoaded=op.outValue("Loaded"),
     loadedTrigger=op.outTrigger("Loaded Trigger");
