@@ -22,6 +22,7 @@ UNI vec4 materialColor;//r,g,b,a;
 
 #ifdef SHADOW_MAP
     UNI samplerCube shadowCubeMap;
+    UNI sampler2D shadowMapTest;
 #endif
 
 float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function

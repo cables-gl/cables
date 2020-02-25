@@ -191,7 +191,6 @@ function loadBin()
 
 
         outPoints.set(boundingPoints);
-        console.log('gltf.bounds',gltf.bounds);
         outBounds.set(gltf.bounds);
         updateCenter();
     };
@@ -240,7 +239,7 @@ function updateMaterials()
                     {
                         if(gltf.shaders[i])
                         {
-                            console.log("double material assignment:",name);
+                            op.warn("double material assignment:",name);
                         }
                         gltf.shaders[i]=portShader.get();
                     }
@@ -287,15 +286,11 @@ function saveData()
 
 op.exposeNode=function(name)
 {
-    console.log("HUND",name);
-
     var newop=gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
     newop.getPort("Node Name").set(name);
     op.patch.link(op,next.name,newop,"Render");
     gui.patch().focusOp(newop.id,true);
     CABLES.UI.MODAL.hide();
-
-
 };
 
 op.assignMaterial=function(name)

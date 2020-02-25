@@ -13,6 +13,7 @@ const
 var listenerElement=null;
 
 var div = document.createElement('div');
+div.dataset.op=op.id;
 var canvas = op.patch.cgl.canvas.parentElement;
 
 canvas.appendChild(div);

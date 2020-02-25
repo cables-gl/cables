@@ -22,11 +22,11 @@ function onLoadFinished(buffer) {
     sampleRatePort.set(buffer.sampleRate);
     audioBufferPort.set(buffer);
     finishedLoadingPort.set(true);
-    op.log("AudioBuffer loaded: ", buffer);
+    // op.log("AudioBuffer loaded: ", buffer);
 }
 
 function onLoadFailed(e) {
-    console.error("Error: Loading audio file failed: ", e);
+    op.error("Error: Loading audio file failed: ", e);
     invalidateOutPorts();
 }
 

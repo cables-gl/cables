@@ -108,7 +108,7 @@ function addListeners()
     listenerElement.addEventListener('touchstart', ontouchstart);
     listenerElement.addEventListener('touchend', ontouchend);
 
-    console.log("added touchscreen listeners",listenerElement);
+    // console.log("added touchscreen listeners",listenerElement);
 }
 
 function updateArea()
@@ -129,7 +129,7 @@ function removeListeners()
         listenerElement.removeEventListener('touchstart', ontouchstart);
         listenerElement.removeEventListener('touchend', ontouchend);
     }
-    console.log("removed touchscreen listeners");
+    // console.log("removed touchscreen listeners");
     listenerElement=null;
 
 }
@@ -137,8 +137,6 @@ function removeListeners()
 active.onChange=function()
 {
     updateArea();
-
-    console.log('active',active.get());
 };
 
 updateArea();

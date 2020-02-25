@@ -85,17 +85,12 @@
             },
             {
                 "type": "0",
-                "name": ".preset_Hue_tii5b22ek_d80gsnw7s",
+                "name": ".preset_scale_e5u2pqn22_ljxfuoay6",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": ".preset_Saturation_tii5b22ek_ilykqgk7t",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_Brightness_tii5b22ek_shsvimqe1",
+                "name": ".preset_a_e5u2pqn22_rhbb0g144",
                 "subType": "number"
             }
         ],
@@ -107,6 +102,11 @@
             {
                 "type": "0",
                 "name": "Num Presets",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "current Preset",
                 "subType": "number"
             }
         ],

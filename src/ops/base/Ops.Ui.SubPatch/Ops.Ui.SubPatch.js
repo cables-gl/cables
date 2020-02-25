@@ -64,8 +64,6 @@ var dataLoaded=false;
 dataStr.onChange=function()
 {
     if(dataLoaded)return;
-console.log(dataStr.get());
-
 
     if(!dataStr.get())return;
     try
@@ -83,7 +81,6 @@ console.log(dataStr.get());
 function saveData()
 {
     dataStr.set(JSON.stringify(data));
-    console.log(dataStr.get());
 }
 
 function addPortListener(newPort,newPortInPatch)
@@ -94,13 +91,8 @@ function addPortListener(newPort,newPortInPatch)
     {
         console.log("onUiAttrChange!!!");
 
-
         if(attribs.title)
         {
-
-
-
-
             var i=0;
             for(i=0;i<data.portsOut.length;i++)
                 if(data.portsOut[i].name==newPort.name)

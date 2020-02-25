@@ -18,6 +18,11 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "Calculate Normals index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Calculate Normals",
                 "group": "Geometry"

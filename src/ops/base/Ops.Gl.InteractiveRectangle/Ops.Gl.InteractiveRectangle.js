@@ -313,6 +313,7 @@ function setUpDiv()
     if(!div)
     {
         div = document.createElement('div');
+        div.dataset.op=op.id;
         div.oncontextmenu = function(e){
             console.log("context menu canceled!");
             e.preventDefault();
