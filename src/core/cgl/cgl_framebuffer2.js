@@ -219,7 +219,7 @@ Framebuffer2.prototype.setSize = function(w, h) {
         case this._cgl.gl.FRAMEBUFFER_COMPLETE:
             break;
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            Log.log("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...");
+            Log.log("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...",this);
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
             Log.log("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
