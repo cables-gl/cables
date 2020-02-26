@@ -227,7 +227,7 @@ function reload()
     if(!filename.get())return;
     currentIndex=-1;
 
-    console.log("reload",filename.get());
+    // console.log("reload",filename.get());
 
     function doLoad()
     {

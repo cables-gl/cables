@@ -15,7 +15,8 @@ const
     presetDelete=op.inTriggerButton("Delete"),
     presetRename=op.inTriggerButton("Rename"),
     addPort=op.addOutPort(new CABLES.Port(op,"Create Variable",CABLES.OP_PORT_TYPE_DYNAMIC)),
-    outNum=op.outNumber("Num Presets",0);
+    outNum=op.outNumber("Num Presets",0),
+    outNumCurrentPreset=op.outNumber("current Preset",0);
 
 var data=[];
 var presets=[];

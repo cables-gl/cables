@@ -19,6 +19,7 @@ var oldEle=null;
 var elProjection = cgl.canvas.parentElement.querySelector('[data-provide="css3d"]');
 if (!elProjection) {
 	elProjection = document.createElement('div');
+	elProjection.dataset.op=op.id;
 	elProjection.style.position = "absolute";
 	elProjection.style.top = elProjection.style.left = 0;
 	elProjection.style.width = elProjection.style.height = "100%";
@@ -29,6 +30,7 @@ if (!elProjection) {
 	cgl.canvas.parentElement.appendChild(elProjection);
 
 	var style = document.createElement('style');
+	style.dataset.op=op.id;
 	style.type="text/css";
 	style.textContent = [
 	    '.cables-loading .cables-css3dview {visibility:hidden;pointer-events:none;}',

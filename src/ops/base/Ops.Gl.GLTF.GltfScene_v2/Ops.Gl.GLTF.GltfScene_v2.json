@@ -120,7 +120,7 @@
                 "name": "Finished"
             }
         ],
-        "name": "Ops.Admin.GltfScene2"
+        "name": "Ops.Gl.GLTF.GltfScene_v2"
     },
     "changelog": [
         {
