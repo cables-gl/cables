@@ -70,7 +70,10 @@ const Texture = function (__cgl, options)
         };
     }
 
-    this.setSize(options.width, options.height);
+    var w=Math.min(options.width,this._cgl.maxTexSize);
+    var h=Math.min(options.height,this._cgl.maxTexSize);
+
+    this.setSize(w, h);
 };
 
 /**

@@ -159,6 +159,7 @@ const Context = function (_patch)
         var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
         
         this.maxTextureUnits=this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
+        this.maxTexSize=this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
 
         if (instancingExt.vertexAttribDivisorANGLE)
         {

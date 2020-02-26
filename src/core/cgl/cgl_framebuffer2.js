@@ -150,6 +150,12 @@ Framebuffer2.prototype.setSize = function(w, h) {
         this._colorTextures[i].setSize(this._width, this._height);
     }
 
+    if(this._numRenderBuffers>0)
+    {
+        this._width=this._colorTextures[0].width;
+        this._height=this._colorTextures[0].height;
+    }
+
     for (var i = 0; i < this._numRenderBuffers; i++) {
         var renderBuffer = this._cgl.gl.createRenderbuffer();
 
