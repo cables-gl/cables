@@ -130,6 +130,9 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function() {
 Framebuffer2.prototype.setSize = function(w, h) {
     this._width = Math.floor(w);
     this._height = Math.floor(h);
+    this._width=Math.min(this._width,this._cgl.maxTexSize);
+    this._height=Math.min(this._height,this._cgl.maxTexSize);
+
 
     profileData.profileFrameBuffercreate++;
 
@@ -150,11 +153,7 @@ Framebuffer2.prototype.setSize = function(w, h) {
         this._colorTextures[i].setSize(this._width, this._height);
     }
 
-    if(this._numRenderBuffers>0)
-    {
-        this._width=this._colorTextures[0].width;
-        this._height=this._colorTextures[0].height;
-    }
+
 
     for (var i = 0; i < this._numRenderBuffers; i++) {
         var renderBuffer = this._cgl.gl.createRenderbuffer();
