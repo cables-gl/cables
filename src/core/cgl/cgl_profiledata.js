@@ -10,6 +10,8 @@ const ProfileData = function ()
     this.profileShaderGetUniform=0;
     this.profileFrameBuffercreate=0;
     this.profileMeshSetGeom=0;
+    this.profileTextureNew=0;
+    this.profileGenMipMap=0;
 };
 
 export const profileData = new ProfileData();

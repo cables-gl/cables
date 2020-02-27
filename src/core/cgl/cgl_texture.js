@@ -73,6 +73,8 @@ const Texture = function (__cgl, options)
     var w=Math.min(options.width,this._cgl.maxTexSize);
     var h=Math.min(options.height,this._cgl.maxTexSize);
 
+    profileData.profileTextureNew++;
+
     this.setSize(w, h);
 };
 
@@ -249,6 +251,7 @@ Texture.prototype.updateMipMap = function ()
     if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
+        profileData.profileGenMipMap++;
     }
 };
 

@@ -154,6 +154,10 @@ function updateText()
     if(CGL.profileData.profileEffectBuffercreate>0)warn+='Effectbuffer create! ';
     if(CGL.profileData.profileTextureDelete>0)warn+='Texture delete! ';
     if(CGL.profileData.profileNonTypedAttrib>0)warn+='Not-Typed Buffer Attrib! '+CGL.profileData.profileNonTypedAttribNames;
+    if(CGL.profileData.profileTextureNew>0)warn+='new texture created! ';
+    if(CGL.profileData.profileGenMipMap>0)warn+='generating mip maps!';
+
+
 
     if(warn.length>0)
     {
@@ -224,7 +228,9 @@ function updateText()
     CGL.profileData.profileMVPMatrixCount=0;
     CGL.profileData.profileNonTypedAttrib=0;
     CGL.profileData.profileNonTypedAttribNames="";
-    
+    CGL.profileData.profileTextureNew=0;
+    CGL.profileData.profileGenMipMap=0;
+
 }
 
 
