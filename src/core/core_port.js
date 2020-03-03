@@ -61,7 +61,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this.changeAlways = false;
 
     this._warnedDeprecated = false;
-    this._useVariableName=null;
+    this._useVariableName = null;
     // this.onUiAttrChange=null;
 
     Object.defineProperty(this, "val", {
@@ -77,7 +77,6 @@ const Port = function (__parent, name, type, uiAttribs)
             this._warnedDeprecated = true;
         },
     });
-
 };
 
 /**
@@ -244,9 +243,9 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     Log.log(ex.stack);
                     Log.log("exception in: " + this.parent.name);
 
-                    if(this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
+                    if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
-                    this.parent.patch.emitEvent("exception".ex,this.parent);
+                    this.parent.patch.emitEvent("exception".ex, this.parent);
                 }
 
                 if (this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
@@ -328,7 +327,7 @@ Port.prototype.getSerialized = function ()
         }
         else obj.value = this.value;
     }
-    if (this._useVariableName)obj.useVariable=this._useVariableName;
+    if (this._useVariableName) obj.useVariable = this._useVariableName;
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
@@ -510,7 +509,7 @@ Port.prototype.trigger = function ()
 
         if (this.parent.patch.isEditorMode())
         {
-            this.parent.patch.emitEvent("exception".ex,portTriggered.parent);
+            this.parent.patch.emitEvent("exception".ex, portTriggered.parent);
 
             if (window.gui) gui.showOpCrash(portTriggered.parent);
         }
@@ -532,34 +531,32 @@ Port.prototype.execute = function ()
     Log.log("### execute port: " + this.getName(), this.goals.length);
 };
 
-
 Port.prototype.setVariableName = function (n)
 {
-    this._useVariableName=n;
-
-}
+    this._useVariableName = n;
+};
 
 Port.prototype.getVariableName = function ()
 {
     return this._useVariableName;
-}
+};
 
 Port.prototype.setVariable = function (v)
 {
     this.setAnimated(false);
-    var attr={useVariable:false};
+    var attr = { useVariable: false };
 
-    if(this._variableIn)
+    if (this._variableIn)
     {
         this._variableIn.removeListener(this.set.bind(this));
-        this._variableIn=null;
+        this._variableIn = null;
     }
 
-    if(v)
+    if (v)
     {
-        this._variableIn=this.parent.patch.getVar(v);
+        this._variableIn = this.parent.patch.getVar(v);
 
-        if(!this._variableIn)
+        if (!this._variableIn)
         {
             console.log("PORT VAR NOT FOUND!!!");
         }
@@ -568,18 +565,18 @@ Port.prototype.setVariable = function (v)
             this._variableIn.addListener(this.set.bind(this));
             this.set(this._variableIn.getValue());
         }
-        this._useVariableName=v;
-        attr.useVariable=true;
-        attr.variableName=this._useVariableName;
+        this._useVariableName = v;
+        attr.useVariable = true;
+        attr.variableName = this._useVariableName;
     }
     else
     {
-        attr.variableName=this._useVariableName=null;
-        attr.useVariable=false;
+        attr.variableName = this._useVariableName = null;
+        attr.useVariable = false;
     }
 
     this.setUiAttribs(attr);
-}
+};
 
 Port.prototype.setAnimated = function (a)
 {
@@ -589,7 +586,7 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
-    this.setUiAttribs({isAnimated:this._animated});
+    this.setUiAttribs({ isAnimated: this._animated });
 };
 
 Port.prototype.toggleAnim = function (val)
@@ -598,7 +595,7 @@ Port.prototype.toggleAnim = function (val)
     if (this._animated && !this.anim) this.anim = new Anim();
     this.setAnimated(this._animated);
     this._onAnimToggle();
-    this.setUiAttribs({isAnimated:this._animated});
+    this.setUiAttribs({ isAnimated: this._animated });
 };
 
 /**
@@ -634,7 +631,7 @@ Port.prototype.isLinked = function ()
 
 Port.prototype.isBoundToVar = function ()
 {
-    return this._useVariableName!=null;
+    return this._useVariableName != null;
 };
 /**
  * @function isAnimated
@@ -671,14 +668,13 @@ Port.prototype._onTriggered = function ()
     if (this.parent.enabled && this.onTriggered) this.onTriggered();
 };
 
-
 Port.prototype._onSetProfiling = function (v)
 {
     this.parent.patch.profiler.add("port", this);
     this.setValue(v);
     // if (this.parent.enabled && this.onTriggered) this.onTriggered();
     this.parent.patch.profiler.add("port", null);
-}
+};
 
 Port.prototype._onTriggeredProfiling = function ()
 {
@@ -726,14 +722,15 @@ Port.portTypeNumberToString = function (type)
 };
 class SwitchPort extends Port
 {
-    constructor(__parent, name, type, uiAttribs, numberPort)
+    constructor(__parent, name, type, uiAttribs, indexPort)
     {
         super(__parent, name, type, uiAttribs);
-        
-        numberPort.set = (value) =>
+
+        this.indexPort = indexPort;
+        this.indexPort.set = (value) =>
         {
             const values = uiAttribs.values;
-            if(!values)
+            if (!values)
             {
                 // console.log("has no values");
                 return;
@@ -741,14 +738,25 @@ class SwitchPort extends Port
 
             let intValue = Math.floor(value);
 
-            intValue=Math.min(intValue,values.length - 1);
-            intValue=Math.max(intValue,0);
+            intValue = Math.min(intValue, values.length - 1);
+            intValue = Math.max(intValue, 0);
 
-            numberPort.setValue(intValue);
+            this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if(this.parent.patch.isEditorMode() && window.gui && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+            if (this.parent.patch.isEditorMode() && window.gui && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
+    }
+
+    setUiAttribs(attribs)
+    {
+        const hidePort = attribs.hidePort;
+        attribs.hidePort = true;
+        super.setUiAttribs(attribs);
+        if (typeof hidePort !== "undefined")
+        {
+            this.indexPort.setUiAttribs({ hidePort });
+        }
     }
 }
 
