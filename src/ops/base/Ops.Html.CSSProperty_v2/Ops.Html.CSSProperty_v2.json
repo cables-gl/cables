@@ -40,5 +40,13 @@
             }
         ],
         "name": "Ops.Html.CSSProperty_v2"
+    },
+    "summary": "Set css style properties of a html element",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

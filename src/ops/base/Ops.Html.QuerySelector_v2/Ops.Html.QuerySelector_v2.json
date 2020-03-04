@@ -23,5 +23,22 @@
             }
         ],
         "name": "Ops.Html.QuerySelector_v2"
+    },
+    "summary": "Selects an element in the DOM",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Query",
+                "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
+            },
+            {
+                "name": "Element",
+                "text": "The first element which can be found using the query or null (no results)"
+            }
+        ]
     }
 }

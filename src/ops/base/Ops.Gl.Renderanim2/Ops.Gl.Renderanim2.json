@@ -22,6 +22,11 @@
             },
             {
                 "type": "0",
+                "name": "File Type index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "File Type",
                 "group": "File",
                 "subType": "string"
@@ -36,6 +41,11 @@
                 "name": "Quality",
                 "group": "File",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Duration Type index",
+                "subType": "integer"
             },
             {
                 "type": "5",
@@ -53,6 +63,11 @@
                 "name": "FPS",
                 "group": "Timing",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Transparency",
+                "subType": "boolean"
             },
             {
                 "type": "0",

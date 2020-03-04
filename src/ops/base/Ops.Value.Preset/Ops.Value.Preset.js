@@ -16,7 +16,10 @@ const
     presetRename=op.inTriggerButton("Rename"),
     addPort=op.addOutPort(new CABLES.Port(op,"Create Variable",CABLES.OP_PORT_TYPE_DYNAMIC)),
     outNum=op.outNumber("Num Presets",0),
-    outNumCurrentPreset=op.outNumber("current Preset",0);
+    outNumCurrentPreset=op.outNumber("current Preset",0),
+    outDbgData=op.outArray("dbg_data"),
+    outDbgSets=op.outArray("dbg_sets")
+    ;
 
 var data=[];
 var presets=[];
@@ -46,6 +49,30 @@ updateDropdown();
 updatePreset();
 updateButtons();
 
+op.onLoaded=function()
+{
+    if(presets.length>0 && data.length==0)
+    {
+        console.error("it happened again!!");
+
+        // this happened only once for now, find out how to reproduce it!!!
+        var keys=Object.keys(presets[0].values);
+
+        for(var i=0;i<keys.length;i++)
+        {
+            data.push(
+                {
+                    varname:keys[i],
+                    type:0,
+                    title:keys[i]
+
+                });
+        }
+        saveData();
+    }
+};
+
+
 function updateInterpolation()
 {
     var ip=inInterPolate.get();
@@ -72,7 +99,6 @@ function updateInterpolation()
     }
 
     op.setUiAttrib({"extendTitle":ip});
-
 
     if(interpolate!==0) updateFade();
     else updatePreset();
@@ -103,7 +129,6 @@ function updateFade()
         idxb=Math.floor(presetB.get());
     }
 
-
     var a=presets[idxa];
     var b=presets[idxb];
 
@@ -121,14 +146,15 @@ function updateFade()
         op.patch.setVarValue(i,ip);
     }
 
-
 }
 
 
 function savePresets()
 {
+
     setsPort.set(JSON.stringify(presets));
     outNum.set(presets.length);
+    setDebugOutput();
 }
 
 function setPresetValues(preset)
@@ -165,6 +191,7 @@ function updateDropdown()
 
     updateButtons();
     savePresets();
+    setDebugOutput();
 }
 
 function getPreset(name)
@@ -292,6 +319,7 @@ dataPort.onChange=function()
         }
     }
 
+    setDebugOutput();
     // dataPort.onChange=null;
 };
 
@@ -299,6 +327,7 @@ dataPort.onChange=function()
 function saveData()
 {
     dataPort.set(JSON.stringify(data));
+    setDebugOutput();
 }
 
 function listenPortChange(port,varname)
@@ -353,6 +382,13 @@ op.patch.addEventListener("onOpDelete",(optodelete)=>
     setTimeout(op.refreshParams.bind(this),1000);
 
 });
+
+function setDebugOutput()
+{
+    outDbgData.set(data);
+    outDbgSets.set(presets);
+
+}
 
 
 addPort.onLinkChanged=function()

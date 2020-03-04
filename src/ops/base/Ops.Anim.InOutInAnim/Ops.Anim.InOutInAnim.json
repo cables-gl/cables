@@ -7,27 +7,33 @@
             },
             {
                 "type": "0",
-                "name": "Duration Out"
+                "name": "Duration Out",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Easing Out"
+                "name": "Easing Out",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Value Out"
+                "name": "Value Out",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Duration In"
+                "name": "Duration In",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Easing In"
+                "name": "Easing In",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Value In"
+                "name": "Value In",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -41,7 +47,8 @@
             },
             {
                 "type": "0",
-                "name": "Result"
+                "name": "Result",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -51,7 +58,6 @@
         "name": "Ops.Anim.InOutInAnim"
     },
     "summary": "animates after a trigger from 1 to 0 to 1",
-    "updated": 1518684639580,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "ae46d30d-9ea6-417b-968b-e7b5726afdde",

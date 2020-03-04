@@ -21,7 +21,7 @@ inShadow.onChange = function() {
 }
 
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
-const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
+const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default', true);
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 
 inSamples.setUiAttribs({ greyout: true });

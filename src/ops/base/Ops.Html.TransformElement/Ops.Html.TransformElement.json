@@ -1,5 +1,4 @@
 {
-    "updated": 1537887161355,
     "authorName": "pandur",
     "id": "caca0307-d460-47df-8674-b7d2601239ab",
     "created": 1536133065934,
@@ -12,6 +11,34 @@
             {
                 "type": "2",
                 "name": "Element"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Align Vertical index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Align Vertical"
+            },
+            {
+                "type": "0",
+                "name": "Align Horizontal index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Align Horizontal"
             }
         ],
         "portsOut": [

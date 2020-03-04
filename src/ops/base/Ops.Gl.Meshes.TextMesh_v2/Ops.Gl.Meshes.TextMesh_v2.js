@@ -66,7 +66,7 @@ function checkFont()
     var oldFontLoaded=fontLoaded;
     try
     {
-        fontLoaded=document.fonts.check('20px '+inFont.get());
+        fontLoaded=document.fonts.check('20px "'+inFont.get()+'"');
     }
     catch(ex)
     {
@@ -169,7 +169,7 @@ render.onTriggered=function()
     if(mesh && mesh.numInstances>0)
     {
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
-        cgl.pushShader(shader);
+        cgl.setShader(shader);
         cgl.setTexture(0,textureOut.get().tex);
 
         var mulTex=inMulTex.get();
@@ -190,7 +190,7 @@ render.onTriggered=function()
         cgl.popModelMatrix();
 
         cgl.setTexture(0,null);
-        cgl.popShader();
+        cgl.setPreviousShader();
         cgl.popBlendMode();
     }
 

@@ -82,5 +82,18 @@
             }
         ],
         "name": "Ops.Html.BrowserCheck_v2"
+    },
+    "summary": "Reports the browser being used",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Is IE",
+                "text": "True if the browser is any of IE 9, IE 10, IE 11"
+            }
+        ]
     }
 }

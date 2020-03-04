@@ -39,11 +39,6 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Algorithm index",
-                "subType": "integer"
-            },
-            {
                 "type": "5",
                 "name": "Algorithm",
                 "group": "Shadow Settings"

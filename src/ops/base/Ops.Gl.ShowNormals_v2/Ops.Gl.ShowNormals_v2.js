@@ -41,6 +41,7 @@ handleColorizeChange();
 
 let geom = null;
 let mesh = null;
+const position = vec3.create();
 
 buildMesh();
 
@@ -51,6 +52,8 @@ function buildMesh() {
     const points = [];
     const tc = [];
     const geometryInput = geometry.get();
+
+
 
     if(geometryInput && geometryInput.vertices) {
         op.setUiError("noVertices", null);

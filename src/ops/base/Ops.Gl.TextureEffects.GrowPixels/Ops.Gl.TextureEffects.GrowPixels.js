@@ -3,7 +3,7 @@ const
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
     strength=op.inValueSlider("strength",1),
-    iter=op.inValueSlider("iterations",1),
+    iter=op.inInt("iterations",1),
     r = op.inValueSlider("r",1),
     g = op.inValueSlider("g",1),
     b = op.inValueSlider("b",1),

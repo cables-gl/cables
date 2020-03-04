@@ -99,6 +99,7 @@ function doRender()
 
     if(fb.getWidth()!=Math.ceil(width.get()) || fb.getHeight()!=Math.ceil(height.get()) )
     {
+
         fb.setSize(
             Math.max(1,Math.ceil(width.get())),
             Math.max(1,Math.ceil(height.get())) );

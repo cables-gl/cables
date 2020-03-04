@@ -40,7 +40,7 @@ function setupAnim()
 {
     anim.clear();
     anim.setValue(CABLES.now()/1000.0, value2.get());
-    
+
     anim.setValue(CABLES.now()/1000.0+
                         duration1.get(), value1.get(),function()
                         {

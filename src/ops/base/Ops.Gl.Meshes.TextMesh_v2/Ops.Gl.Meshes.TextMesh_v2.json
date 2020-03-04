@@ -25,9 +25,19 @@
             },
             {
                 "type": "0",
+                "name": "align index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "align",
                 "group": "Alignment",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "vertical align index",
+                "subType": "integer"
             },
             {
                 "type": "0",

@@ -69,6 +69,7 @@ struct Light {
 UNI Light lights[NUM_LIGHTS];
 UNI sampler2D directionalShadowMap[NUM_LIGHTS];
 UNI sampler2D spotShadowMap[NUM_LIGHTS];
+UNI sampler2D shadowMaps[NUM_LIGHTS];
 
 float CalculateFalloff(float radius, float falloff, float distLight)
 {

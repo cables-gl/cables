@@ -108,6 +108,14 @@
                 "type": "0",
                 "name": "current Preset",
                 "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "dbg_data"
+            },
+            {
+                "type": "3",
+                "name": "dbg_sets"
             }
         ],
         "name": "Ops.Value.Preset"

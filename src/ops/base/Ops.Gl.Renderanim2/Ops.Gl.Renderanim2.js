@@ -7,6 +7,7 @@ const
     inDurType=op.inSwitch("Duration Type",['Seconds','Frames'],"Seconds"),
     inDuration=op.inInt("Duration",1),
     inFps=op.inInt("FPS",30),
+    inTransparency=op.inValueBool("Transparency",false),
     useCanvasSize=op.inValueBool("Use Canvas Size",true),
     inWidth=op.inValueInt("texture width",512),
     inHeight=op.inValueInt("texture height",512),
@@ -27,7 +28,7 @@ var countFrames=0;
 var finished=true;
 var fps=30;
 var numFrames=31;
-var clearAlpha=true;
+
 var cycle=false;
 var shortId=CABLES.shortId();
 var frameStarted=false;
@@ -40,9 +41,6 @@ var oldSizeH=op.patch.cgl.canvasHeight;
 
 inType.onChange=updateQuality;
 useCanvasSize.onChange=updateSize;
-
-console.log("hello renaderanim!")
-
 
 updateQuality();
 updateSize();
@@ -229,7 +227,7 @@ function render()
             {
                 Log.log("screenshot: no blob");
             }
-        },clearAlpha,mimetype,inQuality.get());
+        },inTransparency.get(),mimetype,inQuality.get());
     }
     else
     {

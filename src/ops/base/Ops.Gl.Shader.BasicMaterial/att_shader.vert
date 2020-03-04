@@ -26,7 +26,7 @@ void main()
 {
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix;
-    
+
     texCoordOrig=attrTexCoord;
     texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES

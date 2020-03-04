@@ -10,6 +10,7 @@ op.toWorkPortsNeedToBeLinked(inArr);
 
 function compareX(a, b){ return a[0]-b[0]; }
 function compareY(a, b){ return a[1]-b[1]; }
+// function compareZ(a, b){ return b[2]-a[2]; }
 function compareZ(a, b){ return a[2]-b[2]; }
 function compareXYZ(a, b){ return (a[0]+a[1]+a[2])-(b[0]+b[1]+b[2]); }
 
@@ -44,7 +45,6 @@ function recalc()
     var start=performance.now();
 
     sliceArray();
-
 
     arrArr.sort(comparator);
     outArr.set(null);

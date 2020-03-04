@@ -94,6 +94,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
     geom.glPrimitive=cgl.gl.TRIANGLE_STRIP;
     geom.tangents = [];
     geom.biTangents = [];
+    var tc=[];
 
     for( j=0; j<nRings; j++ )
     {
@@ -111,6 +112,7 @@ function generateTorus(iradius,oradius,nRings,nSides)
 
             if (Math.abs(tmpNormal[1])==1) t = RIGHT;
             else t = UP;
+
             vec3.cross(tmpVec, tmpNormal, t);
             vec3.normalize(tmpVec,tmpVec);
             geom.tangents[offset  ] = tmpVec[0];
@@ -121,8 +123,8 @@ function generateTorus(iradius,oradius,nRings,nSides)
             geom.biTangents[offset+1] = tmpVec[1];
             geom.biTangents[offset+2] = tmpVec[2];
 
-            geom.texCoords[offset2] = 0;
-            geom.texCoords[offset2+1] = 0;
+            tc[offset2] = j/(nRings-1);
+            tc[offset2+1] = i/(nSides-1);
         }
     }
 
@@ -136,12 +138,20 @@ function generateTorus(iradius,oradius,nRings,nSides)
             var offset = j * nSides + i;
             geom.verticesIndices[idx  ] = offset;
             geom.verticesIndices[idx+1] = offset + ioff;
+
+            tc[offset2] = j/(nRings+1);
+            tc[offset2+1] = i/(nSides+1);
         }
+
         /* repeat first to close off shape */
         geom.verticesIndices[idx  ] = i;
         geom.verticesIndices[idx+1] = i + ioff;
+
+
         idx +=2;
     }
+
+    geom.setTexCoords(tc);
 
     geomOut.set(null);
     geomOut.set(geom);

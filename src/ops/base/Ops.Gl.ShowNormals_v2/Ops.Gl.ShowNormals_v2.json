@@ -66,5 +66,56 @@
             "author": "simod",
             "date": 1582120711810
         }
-    ]
+    ],
+    "summary": "visualize normals, tangents or bitangents",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Shader.ShowNormalsMaterial"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "trigger input"
+            },
+            {
+                "name": "geometry",
+                "text": "geometry input"
+            },
+            {
+                "name": "Vectors",
+                "text": "choose which vectors to render: normals, tangents or bitangents"
+            },
+            {
+                "name": "Length",
+                "text": "length of visualized vectors"
+            },
+            {
+                "name": "Colorize",
+                "text": "activate to render the vectors with color"
+            },
+            {
+                "name": "R",
+                "text": "R color component"
+            },
+            {
+                "name": "G",
+                "text": "G color component"
+            },
+            {
+                "name": "B",
+                "text": "B color component"
+            },
+            {
+                "name": "A",
+                "text": "transparency component"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger output"
+            }
+        ]
+    }
 }
