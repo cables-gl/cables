@@ -39,9 +39,14 @@
                 "type": "0",
                 "name": "Total points",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Array length",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Points.PointsField3d"
+        "name": "Ops.Points.PointsCube"
     },
     "summary": "Generates a 3d point field with controllable amount of xyz points (was PointsField3d)",
     "issues": "",

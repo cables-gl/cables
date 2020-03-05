@@ -1,11 +1,13 @@
-const num=op.inValueInt("Amount of points",1000);
-const size=op.inValue("Sphere size",1);
-const seed=op.inValue("Random seed",0);
-const distRand=op.inValueSlider("Random distance from sphere",0);
+const
+    num=op.inValueInt("Amount of points",1000),
+    size=op.inValue("Sphere size",1),
+    seed=op.inValue("Random seed",0),
+    distRand=op.inValueSlider("Random distance from sphere",0),
+    distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"],"Uniform"),
+    outArray=op.outArray("Array out"),
+    totalPointsOut=op.outNumber("Total points"),
+    arrayLengthOut=op.outNumber("Array length");
 
-const distrib=op.inValueSelect('Distribution',["Uniform","Poles","Half"]);
-
-var outArray=op.outArray("Array out");
 
 var newArr=[];
 outArray.set(newArr);
@@ -78,5 +80,7 @@ function generate()
 
     outArray.set(null);
     outArray.set(verts);
+    totalPointsOut.set(verts.length/3);
+    arrayLengthOut.set(verts.length);
 }
 
