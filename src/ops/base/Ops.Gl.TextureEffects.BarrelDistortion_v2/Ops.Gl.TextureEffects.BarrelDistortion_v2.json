@@ -15,6 +15,11 @@
             },
             {
                 "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Blend Mode",
                 "group": "Blending",
                 "subType": "string"

@@ -464,8 +464,8 @@ inTrigger.onTriggered = function() {
     if (inCastShadow.get()) {
         if (!cgl.shadowPass) {
             if (fb) {
-                cgl.gl.enable(cgl.gl.CULL_FACE);
-                cgl.gl.cullFace(cgl.gl.FRONT);
+                cgl.pushCullFace(true);
+                cgl.pushCullFaceFacing(cgl.gl.FRONT);
 
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
@@ -486,6 +486,9 @@ inTrigger.onTriggered = function() {
                 cgl.gl.colorMask(true,true,true,true);
 
                 cgl.popBlend();
+                cgl.popCullFaceFacing();
+                cgl.popCullFace();
+
                 cgl.shadowPass = false;
                 cgl.frameStore.renderOffscreen = false;
 

@@ -23,20 +23,18 @@ var scalePort = op.outValue('Scale', 1);
 var eventPort = op.outObject('Event Details');
 
 
-op.log(1239);
-
 // change listeners
 
 hammertime.on('pinch', function(ev) {
     op.log(ev.additionalEvent);
     ev.preventDefault(); // this is ignored in some browsers
     if(!enabledPort.get()) { return; }
-    
+
     // if(ev.isFinal || ev.isFirst) { op.log(ev); }
-    
+
     tmpScale = ev.scale;
     pinchInProgress = true;
-    
+
     //if(ev.isFinal || !ev.isFinal && pinchInProgress) {
     if(ev.isFinal) {
         scale *= tmpScale;
@@ -48,10 +46,10 @@ hammertime.on('pinch', function(ev) {
     } else {
         scalePort.set(checkAndCorrectBoundaries(scale * tmpScale));
     }
-    
-    
-	
-	
+
+
+
+
 	//if(ev.additionalEvent) {
 	    /*
 	    if(ev.additionalEvent === 'pinchin') {
@@ -65,7 +63,7 @@ hammertime.on('pinch', function(ev) {
 	/*
 	op.log('ev.scale: ', ev.scale);
 	tmpScale = ev.scale;
-	
+
 	var scaleToSet;
 	if(ev.isFinal) {
 	    scale *= tmpScale;
@@ -74,12 +72,12 @@ hammertime.on('pinch', function(ev) {
 	} else {
 	    scaleToSet = scale * tmpScale;
 	}
-	
+
 	op.log('scaleToSet', scaleToSet);
-	
+
 	scale = checkAndCorrectBoundaries(scale);
 	scaleToSet = checkAndCorrectBoundaries(scaleToSet);
-	
+
 	scalePort.set(scaleToSet);
 	*/
 });

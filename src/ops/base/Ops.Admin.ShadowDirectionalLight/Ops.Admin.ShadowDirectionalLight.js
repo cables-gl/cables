@@ -390,8 +390,10 @@ inTrigger.onTriggered = function() {
                 cgl.frameStore.renderOffscreen = true;
 
 
-                cgl.gl.enable(cgl.gl.CULL_FACE);
-                cgl.gl.cullFace(cgl.gl.FRONT);
+                cgl.pushBlend(false);
+
+                cgl.pushCullFace(true);
+                cgl.pushCullFaceFacing(cgl.gl.FRONT);
 
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
@@ -400,11 +402,10 @@ inTrigger.onTriggered = function() {
                 cgl.gl.colorMask(true,true,false,false);
                 renderShadowMap();
 
-                cgl.gl.cullFace(cgl.gl.BACK);
-                cgl.gl.disable(cgl.gl.CULL_FACE);
+                cgl.popBlend();
+                cgl.popCullFaceFacing();
+                cgl.popCullFace();
 
-                cgl.gl.cullFace(cgl.gl.BACK);
-                cgl.gl.disable(cgl.gl.CULL_FACE);
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
                 if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();

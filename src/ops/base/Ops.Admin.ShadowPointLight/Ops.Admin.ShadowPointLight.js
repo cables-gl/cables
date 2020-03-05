@@ -426,15 +426,19 @@ function renderCubemap() {
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
     gl.viewport(0, 0, Number(inMapSize.get()), Number(inMapSize.get()));
 
-    cgl.gl.enable(cgl.gl.CULL_FACE);
-    cgl.gl.cullFace(cgl.gl.FRONT);
+    //cgl.gl.enable(cgl.gl.CULL_FACE);
+    //cgl.gl.cullFace(cgl.gl.FRONT);
+
+    cgl.pushCullFace(true);
+    cgl.pushCullFaceFacing(cgl.gl.FRONT);
 
     for (let i = 0; i < 6; i += 1) renderCubeSide(i);
 
-    cgl.gl.cullFace(cgl.gl.BACK);
-    cgl.gl.disable(cgl.gl.CULL_FACE);
+    cgl.popCullFace();
+    cgl.popCullFaceFacing();
 
-    gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
+
+    // gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);
@@ -482,42 +486,41 @@ inTrigger.onTriggered = function() {
     cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get()) {
-        if (!cubemapInitialized) initializeCubemap();
-        cgl.gl.enable(cgl.gl.CULL_FACE);
-        cgl.gl.cullFace(cgl.gl.FRONT);
+        if (!cgl.shadowPass) {
+            if (!cubemapInitialized) initializeCubemap();
 
-        cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-        cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
-        cgl.gl.enable(cgl.gl.DEPTH_TEST);
+            cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+            cgl.gl.polygonOffset(inPolygonOffset.get(),inPolygonOffset.get());
+            cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
-        cgl.frameStore.renderOffscreen = true;
-        cgl.shadowPass = true;
+            cgl.frameStore.renderOffscreen = true;
+            cgl.shadowPass = true;
 
-        cgl.gl.colorMask(true,true,false,false);
+            cgl.gl.colorMask(true,true,false,false);
 
-        renderCubemap();
+            renderCubemap();
 
-        cgl.gl.colorMask(true,true,true,true);
-        cgl.gl.disable(cgl.gl.DEPTH_TEST);
-        cgl.gl.cullFace(cgl.gl.BACK);
-        cgl.gl.disable(cgl.gl.CULL_FACE);
-        cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
+            cgl.gl.colorMask(true,true,true,true);
+            cgl.gl.disable(cgl.gl.DEPTH_TEST);
 
-        renderCubemapProjection();
+            cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
-        cgl.shadowPass = false;
-        cgl.frameStore.renderOffscreen = false;
+            renderCubemapProjection();
 
-        cgl.frameStore.lightStack.pop();
+            cgl.shadowPass = false;
+            cgl.frameStore.renderOffscreen = false;
 
-        light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()), cubeDepthMap: depthBuffer };
+            cgl.frameStore.lightStack.pop();
 
-        light.nearFar = [inNear.get(), inFar.get()];
-        light.castShadow = inCastShadow.get();
-        light.shadowBias = inBias.get();
-        light.shadowStrength = inShadowStrength.get();
+            light.shadowCubeMap = { cubemap: dynamicCubemap, width: Number(inMapSize.get()), cubeDepthMap: depthBuffer };
 
-        cgl.frameStore.lightStack.push(light);
+            light.nearFar = [inNear.get(), inFar.get()];
+            light.castShadow = inCastShadow.get();
+            light.shadowBias = inBias.get();
+            light.shadowStrength = inShadowStrength.get();
+
+            cgl.frameStore.lightStack.push(light);
+        }
     }
 
     outTrigger.trigger();

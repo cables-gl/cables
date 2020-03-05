@@ -16,6 +16,7 @@ var reverse=op.inValueBool("Reverse");
 
 var next=op.outTrigger("Next");
 var outArr=op.outArray("Result");
+
 var resultArr=[];
 var easingFunction=null;
 
@@ -35,6 +36,8 @@ exe.onTriggered=function()
 {
     var arr1=inArr1.get();
     var arr2=inArr2.get();
+
+
 
     if(!arr1 || !arr2 || arr2.length<arr1.length)
     {
@@ -63,10 +66,12 @@ exe.onTriggered=function()
                 var m=( (val2-val1)*dist+val1 );
                 resultArr[i]=m;
             }
+
         }
 
         outArr.set(null);
         outArr.set(resultArr);
+
     }
 
     next.trigger();

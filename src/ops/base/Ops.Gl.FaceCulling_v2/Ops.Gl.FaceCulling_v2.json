@@ -9,6 +9,11 @@
                 "name": "render"
             },
             {
+                "type": "0",
+                "name": "Discard index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Discard",
                 "group": "Face Fulling"
@@ -26,7 +31,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.FaceCulling_v2"
+        "name": "Ops.Gl.FaceCulling_v2"
     },
     "changelog": [
         {

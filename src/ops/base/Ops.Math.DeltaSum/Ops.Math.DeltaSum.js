@@ -1,10 +1,11 @@
-const inVal=op.inValue("Delta Value");
-const defVal=op.inValue("Default Value",0);
-const inReset=op.inTriggerButton("Reset");
-const inLimit=op.inValueBool("Limit",false);
-const inMin=op.inValue("Min",0);
-const inMax=op.inValue("Max",100);
-const inMul=op.inValue("Multiply",1);
+const
+    inVal=op.inValue("Delta Value"),
+    defVal=op.inValue("Default Value",0),
+    inReset=op.inTriggerButton("Reset"),
+    inLimit=op.inValueBool("Limit",false),
+    inMin=op.inValue("Min",0),
+    inMax=op.inValue("Max",100),
+    inMul=op.inValue("Multiply",1);
 
 inVal.changeAlways=true;
 

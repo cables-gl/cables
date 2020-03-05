@@ -19,7 +19,7 @@ inShadow.onChange = function() {
     if (inShadow.get()) shader.define("SHADOW_MAP")
     else shader.removeDefine("SHADOW_MAP");
 }
-
+op.log("yo");
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default', true);
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);

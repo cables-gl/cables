@@ -1,5 +1,4 @@
 {
-    "updated": 1516729857480,
     "authorName": "tim",
     "id": "98e19e37-88ca-4c07-bed7-a050dac31e3a",
     "created": 1516706915825,
@@ -7,15 +6,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Enabled"
+                "name": "Enabled",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Min Scale"
+                "name": "Min Scale",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Max Scale"
+                "name": "Max Scale",
+                "subType": "number"
             },
             {
                 "type": "1",
@@ -25,7 +27,8 @@
         "portsOut": [
             {
                 "type": "0",
-                "name": "Scale"
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": "2",

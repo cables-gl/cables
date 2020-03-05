@@ -18,8 +18,8 @@ render.onTriggered=function()
 
     trigger.trigger();
 
-    cgl.popCullFace(enable.get());
-    cgl.popCullFaceFacing(whichFace);
+    cgl.popCullFace();
+    cgl.popCullFaceFacing();
 };
 
 facing.onChange=function()
