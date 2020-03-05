@@ -1,0 +1,156 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "MatCap"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse",
+                "group": "Texture maps"
+            },
+            {
+                "type": "2",
+                "name": "Normal",
+                "group": "Texture maps"
+            },
+            {
+                "type": "2",
+                "name": "Specular",
+                "group": "Texture maps"
+            },
+            {
+                "type": "2",
+                "name": "Specular MatCap",
+                "group": "Texture maps"
+            },
+            {
+                "type": "2",
+                "name": "AO Texture",
+                "group": "Texture maps"
+            },
+            {
+                "type": "2",
+                "name": "Opacity Texture",
+                "group": "Texture maps"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "AO Intensity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Repeat X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "calc normal tangents",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "projectCoords index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "projectCoords",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Screen Space Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Texture Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Opacity TexCoords Transform",
+                "group": "Texture Opacity",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Discard Transparent Pixels",
+                "group": "Texture Opacity",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.User.pandur.MatcapMaterialNew_v2"
+    },
+    "authorName": "pandur",
+    "id": "264b5f8d-82dd-44c6-ae03-741a702e904a",
+    "created": 1583424903008,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.MatcapMaterialNew_v2 renamed to Ops.Gl.Shader.MatCapMaterialNew_v2",
+            "author": "pandur",
+            "date": 1583427184715
+        }
+    ]
+}
