@@ -6,6 +6,7 @@ const
     outRatio=op.outValue("Ratio"),
     outFilter=op.outValue("Filter"),
     outWrap=op.outValue("Wrap"),
+    outFlipped=op.outValue("Flipped"),
     outId=op.outValue("Id");
 
 inTex.onChange=function()
@@ -25,6 +26,7 @@ inTex.onChange=function()
         outFilter.set(inTex.get().filter+' '+strFilter);
         outWrap.set(inTex.get().wrap);
         outId.set(inTex.get().id);
+        outFlipped.set(inTex.get().flipped);
     }
     else
     {
@@ -35,5 +37,6 @@ inTex.onChange=function()
         outFilter.set(null);
         outWrap.set(null);
         outId.set(null);
+        outFlipped.set(false);
     }
 };

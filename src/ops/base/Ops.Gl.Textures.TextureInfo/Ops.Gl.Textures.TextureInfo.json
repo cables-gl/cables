@@ -39,6 +39,11 @@
             },
             {
                 "type": "0",
+                "name": "Flipped",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Id",
                 "subType": "number"
             }

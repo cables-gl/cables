@@ -37,6 +37,7 @@ const Texture = function (__cgl, options)
     this.width = 0;
     this.height = 0;
     this.flip = true;
+    this.flipped=false;
     this.shadowMap = false;
     this.anisotropic=0;
     this.filter = Texture.FILTER_NEAREST;
@@ -228,8 +229,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 {
     this.filter = filter;
     this.wrap = wrap;
-    if (filter == undefined) this.filter = Texture.FILTER_LINEAR;
-    if (wrap == undefined) this.wrap = Texture.CLAMP_TO_EDGE;
+    if(filter == undefined) this.filter = Texture.FILTER_LINEAR;
+    if(wrap == undefined) this.wrap = Texture.CLAMP_TO_EDGE;
     this.width = w;
     this.height = h;
     this._fromData = true;
@@ -274,11 +275,14 @@ Texture.prototype.initTexture = function (img, filter)
     if (filter) this.filter = filter;
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, !this.flip);
+
+    this.flipped=!this.flip;
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
+
+
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
     this._setFilter();
-
     this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);

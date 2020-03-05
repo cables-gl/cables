@@ -103,6 +103,7 @@ function realReload(nocache)
                 filter:cgl_filter
             });
 
+        tex.oldTexFlip=true;
         textureOut.set(null);
         textureOut.set(tex);
 
