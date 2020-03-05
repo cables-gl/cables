@@ -1,0 +1,28 @@
+{
+    "authorName": "pandur",
+    "id": "b436e831-36f5-4e0c-838e-4a82c4b07ec0",
+    "created": 1582794993082,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.ParseBoolean2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.ParseBoolean2 renamed to Ops.Boolean.ParseBoolean_v2",
+            "author": "pandur",
+            "date": 1582795056810
+        }
+    ]
+}

@@ -1,0 +1,125 @@
+{
+    "authorName": "pandur",
+    "id": "ec55d252-3843-41b1-b731-0482dbd9e72b",
+    "created": 1583419753370,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "texture",
+                "group": "Color Texture"
+            },
+            {
+                "type": "0",
+                "name": "colorizeTexture",
+                "group": "Color Texture",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "textureOpacity",
+                "group": "Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Opacity"
+            },
+            {
+                "type": "0",
+                "name": "Opacity TexCoords Transform",
+                "group": "Opacity",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Discard Transparent Pixels",
+                "group": "Opacity",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatX",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuseRepeatY",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset X",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Tex Offset Y",
+                "group": "Texture Transform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "billboard",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.Gl.Shader.BasicMaterial_v3"
+    },
+    "summary": "A material without shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "F-CUdHq40Pc"
+    ],
+    "docs": {
+        "ports": []
+    }
+}
