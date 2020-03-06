@@ -20,7 +20,6 @@ circular.onChange=updateDefines;
 
 function updateDefines()
 {
-
     shader.toggleDefine("STRIPES_SMOOTHED",smoothed.get());
     shader.toggleDefine("CIRCULAR",circular.get());
 }
