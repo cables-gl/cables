@@ -21,6 +21,7 @@ const textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
     uniAmounthalo = new CGL.Uniform(shader, "f", "amountHalo", inAmountHalo);
 
 shader.define("NUM_GHOSTS", "3");
+
 inNumGhosts.onChange = function ()
 {
     shader.define("NUM_GHOSTS", Math.max(0, inNumGhosts.get()).toString());

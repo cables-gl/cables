@@ -1,7 +1,6 @@
 UNI sampler2D tex;
 // UNI sampler2D texInput;
 UNI float haloWidth;
-UNI int numGhosts;
 UNI float dispersal;
 UNI float amountGhosts;
 UNI float amountHalo;
