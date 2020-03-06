@@ -1,0 +1,97 @@
+{
+    "id": "08d2ef19-3517-4c15-b9c6-56dc107e10ef",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1583496743950
+        }
+    ],
+    "authorName": "andro",
+    "created": 1583496763116,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Mode",
+                "group": "Waveform",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pow factor",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "group": "Waveform",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.WaveformGradient_v2"
+    }
+}
