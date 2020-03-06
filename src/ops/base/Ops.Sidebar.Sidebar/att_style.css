@@ -148,6 +148,10 @@
     pointer-interactions: none;
 }
 
+.sidebar__item__right {
+    float: right;
+}
+
 /*
  * SIDEBAR GROUP
  */
@@ -369,6 +373,11 @@
     border-radius: 125px;
     border:2px solid #555;
     cursor: pointer;
+}
+
+.sidebar__button-input.plus, .sidebar__button-input.minus {
+    display: inline-block;
+    min-width: 20px;
 }
 
 .sidebar__button-input:hover {
