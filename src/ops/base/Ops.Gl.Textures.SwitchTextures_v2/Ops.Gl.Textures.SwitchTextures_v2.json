@@ -1,0 +1,101 @@
+{
+    "id": "a82ae429-ac07-4760-882b-595a857c7ae0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1583492799503
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1583492820153,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exec"
+            },
+            {
+                "type": "0",
+                "name": "num",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Default Texture Transparent",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "texture0"
+            },
+            {
+                "type": "2",
+                "name": "texture1"
+            },
+            {
+                "type": "2",
+                "name": "texture2"
+            },
+            {
+                "type": "2",
+                "name": "texture3"
+            },
+            {
+                "type": "2",
+                "name": "texture4"
+            },
+            {
+                "type": "2",
+                "name": "texture5"
+            },
+            {
+                "type": "2",
+                "name": "texture6"
+            },
+            {
+                "type": "2",
+                "name": "texture7"
+            },
+            {
+                "type": "2",
+                "name": "texture8"
+            },
+            {
+                "type": "2",
+                "name": "texture9"
+            },
+            {
+                "type": "2",
+                "name": "texture10"
+            },
+            {
+                "type": "2",
+                "name": "texture11"
+            },
+            {
+                "type": "2",
+                "name": "texture12"
+            },
+            {
+                "type": "2",
+                "name": "texture13"
+            },
+            {
+                "type": "2",
+                "name": "texture14"
+            },
+            {
+                "type": "2",
+                "name": "texture15"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.SwitchTextures_v2"
+    }
+}
