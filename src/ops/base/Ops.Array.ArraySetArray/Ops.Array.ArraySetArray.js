@@ -24,7 +24,7 @@ function copyArray(source)
 
 function update()
 {
-    if(!array.get())return;
+    if(!array.get() || !value.get())return;
     array.get()[index.get()]=copyArray(value.get());
 
     values.set(null);
