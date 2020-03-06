@@ -31,7 +31,7 @@ void main()
 
 
     // ghosts
-    for (int i = 0; i < numGhosts; ++i)
+    for (int i = 0; i < NUM_GHOSTS; ++i)
     {
         vec2 offset = fract(texcoord + ghostVec * float(i));
         float weightA = length(vec2(0.5) - offset) / length(vec2(0.5));
