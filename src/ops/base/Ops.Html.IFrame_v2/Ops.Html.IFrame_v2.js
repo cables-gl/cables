@@ -11,7 +11,7 @@ op.setPortGroup('Attributes',[src,elId]);
 function updateSize()
 {
     element.style.width=width.get()+"px";
-    element.style.height=width.get()+"px";
+    element.style.height=height.get()+"px";
 }
 
 function updateURL()

@@ -2,7 +2,6 @@ var val=op.outValue("Value");
 op.varName=op.inValueSelect("Variable",[],"",true);
 
 var variable=null;
-// op.patch.addVariableListener(init);
 op.patch.addEventListener("variablesChanged",init);
 
 init();

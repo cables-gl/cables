@@ -175,7 +175,7 @@ var effect = new CGL.TextureEffect(cgl, {
 });
 
 function updateBuffers() {
-        const MSAA = Number(inMSAA.get().charAt(0));
+    const MSAA = Number(inMSAA.get().charAt(0));
 
     if (fb) fb.delete();
     if (effect) effect.delete();
@@ -291,37 +291,18 @@ inMapSize.onChange = function() {
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
-    if (castShadow) {
-        inMapSize.setUiAttribs({ greyout: false });
-        inShadowStrength.setUiAttribs({ greyout: false });
-        inNear.setUiAttribs({ greyout: false });
-        inFar.setUiAttribs({ greyout: false });
-        inNormalOffset.setUiAttribs({ greyout: false });
-        inBlur.setUiAttribs({ greyout: false });
-        inBias.setUiAttribs({ greyout: false });
-        inPolygonOffset.setUiAttribs({ greyout: false });
 
-    } else {
-        inMapSize.setUiAttribs({ greyout: true });
-        inShadowStrength.setUiAttribs({ greyout: true });
-        inNear.setUiAttribs({ greyout: true });
-        inFar.setUiAttribs({ greyout: true });
-        inNormalOffset.setUiAttribs({ greyout: true });
-        inBlur.setUiAttribs({ greyout: true });
-        inBias.setUiAttribs({ greyout: true });
-        inPolygonOffset.setUiAttribs({ greyout: true });
-        outTexture.set(null);
-    }
+    inMapSize.setUiAttribs({ greyout: !castShadow });
+    inShadowStrength.setUiAttribs({ greyout: !castShadow });
+    inNear.setUiAttribs({ greyout: !castShadow });
+    inFar.setUiAttribs({ greyout: !castShadow });
+    inNormalOffset.setUiAttribs({ greyout: !castShadow });
+    inBlur.setUiAttribs({ greyout: !castShadow });
+    inBias.setUiAttribs({ greyout: !castShadow });
+    inPolygonOffset.setUiAttribs({ greyout: !castShadow });
 }
 
 const lightProjectionMatrix = mat4.create();
-mat4.perspective(
-    lightProjectionMatrix,
-    CGL.DEG2RAD * inLight.cosConeAngle.get(),
-    1,
-    inNear.get(),
-    inFar.get()
-);
 
 function updateProjectionMatrix() {
         mat4.perspective(
@@ -333,6 +314,8 @@ function updateProjectionMatrix() {
         inFar.get()
     );
 }
+
+updateProjectionMatrix();
 
 inNear.onChange = inFar.onChange = updateProjectionMatrix;
 
@@ -469,7 +452,6 @@ inTrigger.onTriggered = function() {
 
                 cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
                 cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
-                // cgl.gl.enable(cgl.gl.DEPTH_TEST); disabled so not rendering blur doesnt give black texture
 
                 cgl.frameStore.renderOffscreen = true;
                 cgl.shadowPass = true;

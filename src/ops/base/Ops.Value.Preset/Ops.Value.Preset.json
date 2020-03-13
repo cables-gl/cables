@@ -85,12 +85,22 @@
             },
             {
                 "type": "0",
-                "name": ".preset_scale_e5u2pqn22_ljxfuoay6",
+                "name": ".preset_scale_s9pddeyps_qvgsqtilu",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": ".preset_a_e5u2pqn22_rhbb0g144",
+                "name": ".preset_scale_s9pddeyps_efb7igj33",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_scale_s9pddeyps_m4qfu83t5",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_scale_s9pddeyps_xy4b48chx",
                 "subType": "number"
             }
         ],
