@@ -72,19 +72,12 @@ inPolygonOffset.setUiAttribs({ greyout: true });
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
-    if (castShadow) {
-        inMapSize.setUiAttribs({ greyout: false });
-        inShadowStrength.setUiAttribs({ greyout: false });
-        inNear.setUiAttribs({ greyout: false });
-        inFar.setUiAttribs({ greyout: false });
-        inPolygonOffset.setUiAttribs({ greyout: false });
-    } else {
-        inMapSize.setUiAttribs({ greyout: true });
-        inShadowStrength.setUiAttribs({ greyout: true });
-        inNear.setUiAttribs({ greyout: true });
-        inFar.setUiAttribs({ greyout: true });
-        inPolygonOffset.setUiAttribs({ greyout: true });
-    }
+    inMapSize.setUiAttribs({ greyout: !castShadow });
+    inShadowStrength.setUiAttribs({ greyout: !castShadow });
+    inNear.setUiAttribs({ greyout: !castShadow });
+    inFar.setUiAttribs({ greyout: !castShadow });
+    inBias.setUiAttribs({ greyout: !castShadow });
+    inPolygonOffset.setUiAttribs({ greyout: !castShadow });
 }
 
 // * SHADER *
@@ -336,15 +329,6 @@ uniformCubemap = new CGL.Uniform(projectionShader, 't', 'cubeMap', 1);
 projectionShader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 projectionShader.setSource(projectionShader.getDefaultVertexShader(), attachments.cubemapprojection_frag);
 
-if (IS_WEBGL_1) {
-    /*
-    projectionShader.enableExtension("GL_OES_standard_derivatives");
-    projectionShader.enableExtension("GL_OES_texture_float");
-    projectionShader.enableExtension("GL_OES_texture_float_linear");
-    projectionShader.enableExtension("GL_OES_texture_half_float");
-    projectionShader.enableExtension("GL_OES_texture_half_float_linear");
-    */
-}
 
 function renderCubemapProjection() {
     if(!dynamicCubemap) return;
@@ -426,8 +410,6 @@ function renderCubemap() {
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
     gl.viewport(0, 0, Number(inMapSize.get()), Number(inMapSize.get()));
 
-    //cgl.gl.enable(cgl.gl.CULL_FACE);
-    //cgl.gl.cullFace(cgl.gl.FRONT);
 
     cgl.pushCullFace(true);
     cgl.pushCullFaceFacing(cgl.gl.FRONT);
@@ -436,9 +418,6 @@ function renderCubemap() {
 
     cgl.popCullFace();
     cgl.popCullFaceFacing();
-
-
-    // gl.generateMipmap(gl.TEXTURE_CUBE_MAP);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);

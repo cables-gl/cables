@@ -26,6 +26,9 @@ var presets=[];
 var valuePorts=[];
 var interpolate=0;
 
+presetB.changeAlways=true;
+presetA.changeAlways=true;
+
 op.setPortGroup("Manage Presets",[presetCreate,presetUpdate,presetDelete,presetNames,presetRename]);
 dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 id.setUiAttribs({"hideParam":true,"hidePort":true});

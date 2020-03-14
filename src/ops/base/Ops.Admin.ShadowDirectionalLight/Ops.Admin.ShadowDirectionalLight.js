@@ -234,28 +234,16 @@ inMapSize.onChange = function() {
 inCastShadow.onChange = function() {
     const castShadow = inCastShadow.get();
     light.castShadow = castShadow;
-    if (castShadow) {
-        inMapSize.setUiAttribs({ greyout: false });
-        inShadowStrength.setUiAttribs({ greyout: false });
-        inLRBT.setUiAttribs({ greyout: false });
-        inNear.setUiAttribs({ greyout: false });
-        inFar.setUiAttribs({ greyout: false });
-        inBlur.setUiAttribs({ greyout: false });
-        inBias.setUiAttribs({ greyout: false });
-        inNormalOffset.setUiAttribs({ greyout: false });
-        inPolygonOffset.setUiAttribs({ greyout: false });
-    } else {
-        inMapSize.setUiAttribs({ greyout: true });
-        inShadowStrength.setUiAttribs({ greyout: true });
-        inLRBT.setUiAttribs({ greyout: true });
-        inNear.setUiAttribs({ greyout: true });
-        inFar.setUiAttribs({ greyout: true });
-        inBlur.setUiAttribs({ greyout: true });
-        inBias.setUiAttribs({ greyout: true });
-        inNormalOffset.setUiAttribs({ greyout: true });
-        inPolygonOffset.setUiAttribs({ greyout: true });
-        outTexture.set(null);
-    }
+
+    inMapSize.setUiAttribs({ greyout: !castShadow });
+    inShadowStrength.setUiAttribs({ greyout: !castShadow });
+    inLRBT.setUiAttribs({ greyout: !castShadow });
+    inNear.setUiAttribs({ greyout: !castShadow });
+    inFar.setUiAttribs({ greyout: !castShadow });
+    inBlur.setUiAttribs({ greyout: !castShadow });
+    inBias.setUiAttribs({ greyout: !castShadow });
+    inNormalOffset.setUiAttribs({ greyout: !castShadow });
+    inPolygonOffset.setUiAttribs({ greyout: !castShadow });
 }
 
 const lightProjectionMatrix = mat4.create();

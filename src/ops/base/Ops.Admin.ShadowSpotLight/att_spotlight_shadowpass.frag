@@ -1,4 +1,19 @@
 // http://fabiensanglard.net/shadowmappingVSM/
+
+#define SQRT3 1.73205081
+#define SQRT3DIV2 0.86602540378
+#define SQRT12DIV9 -0.38490017946
+
+// FOR MOMENT SHADOW MAPPING
+/*
+const mat4 ENCODE_MATRIX = mat4(
+vec4(1.5, 0., SQRT3DIV2, 0.),
+vec4(0., 4., 0., 0.5),
+vec4(-2., 0., SQRT12DIV9, 0.),
+vec4(0., -4., 0., 0.5)
+);
+*/
+
 void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
@@ -26,6 +41,6 @@ void main() {
     outColor = vec4(
     depth,
     moment2,
-    0.,
-    1.);
+    depth,
+    moment2);
 }

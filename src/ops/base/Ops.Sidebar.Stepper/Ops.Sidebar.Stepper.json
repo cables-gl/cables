@@ -1,0 +1,90 @@
+{
+    "authorName": "stephan",
+    "id": "9bb2e446-a385-4906-86c5-c421b74db4a0",
+    "created": 1583500680328,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "0",
+                "name": "Label",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "stepsize",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Values"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            },
+            {
+                "type": "0",
+                "name": "value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Sidebar.Stepper"
+    },
+    "summary": "steps through numerical or array values one by one",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "link",
+                "text": "link to sidebar"
+            },
+            {
+                "name": "Label",
+                "text": "the label on the sidebar"
+            },
+            {
+                "name": "min",
+                "text": "minimum value while decrementing"
+            },
+            {
+                "name": "max",
+                "text": "maximum value while incrementing"
+            },
+            {
+                "name": "stepsize",
+                "text": "size of each \"step\" (increment and decrement)"
+            },
+            {
+                "name": "Values",
+                "text": "optional array for stepping through it's items"
+            },
+            {
+                "name": "childs",
+                "text": "link to sidebar"
+            },
+            {
+                "name": "value",
+                "text": "the current value"
+            }
+        ]
+    }
+}

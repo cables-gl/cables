@@ -3,6 +3,7 @@ const
     inEle=op.inObject("Element"),
     next=op.outTrigger("Next"),
     inScale=op.inFloat("Scale",1),
+    inOrtho=op.inBool("Orthogonal",false),
     inRotate=op.inFloat("Rotate",0),
     inAlignVert=op.inSwitch("Align Vertical",["Left","Center","Right"],"Left"),
     inAlignHor=op.inSwitch("Align Horizontal",["Top","Center","Bottom"],"Top");
@@ -75,10 +76,25 @@ function getScreenCoord()
     mat4.multiply(m,cgl.vMatrix,cgl.mMatrix);
     vec3.transformMat4(pos, [0,0,0], m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
+
+
     var vp=cgl.getViewPort();
 
-    x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
-    y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+    if(inOrtho.get())
+    {
+        x=( ( vp[2]  * 0.5 + trans[0] * vp[2] * 0.5 / 1 ));
+        y=( ( vp[3]  * 0.5 - trans[1] * vp[3] * 0.5 / 1 ));
+
+    }
+    else
+    {
+        x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
+        y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+    }
+
+    // console.log(x,y );
+
+
 }
 
 function setProperties()
