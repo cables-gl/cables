@@ -42,14 +42,14 @@ function init()
     if(variable)
     {
         variable.addListener(onChange);
-        op.uiAttr({error:null,});
+        op.setUiError("unknownvar",null);
         op.setTitle('#'+op.varName.get());
         onChange(variable.getValue());
-        // console.log("var value ",variable.getName(),variable.getValue());
+
     }
     else
     {
-        op.uiAttr({error:"unknown variable! - there is no setVariable with this name"});
+        op.setUiError("unknownvar","unknown variable! - there is no setVariable with this name ("+op.varName.get()+")");
         op.setTitle('#invalid');
     }
 }
