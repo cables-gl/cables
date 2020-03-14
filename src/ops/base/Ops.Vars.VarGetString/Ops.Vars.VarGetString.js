@@ -15,9 +15,10 @@ function updateVarNamesDropdown()
         var varnames=[];
         var vars=op.patch.getVars();
 
-        for(var i in vars) varnames.push(i);
+        for(var i in vars)
+            if(typeof vars[i].getValue()=="string")
+                varnames.push(i);
 
-        // varnames.push('+ create new one');
         op.varName.uiAttribs.values=varnames;
     }
 }
@@ -30,15 +31,6 @@ op.varName.onChange=function()
 function init()
 {
     updateVarNamesDropdown();
-
-    // if(CABLES.UI)
-    // {
-    //     if(op.varName.get()=='+ create new one')
-    //     {
-    //         CABLES.CMD.PATCH.createVariable(op);
-    //         return;
-    //     }
-    // }
 
     if(variable)
     {

@@ -13,5 +13,21 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1580909065589
+    "created": 1580909065589,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Object"
+            }
+        ],
+        "name": "Ops.Vars.VarGetTexture"
+    }
 }
