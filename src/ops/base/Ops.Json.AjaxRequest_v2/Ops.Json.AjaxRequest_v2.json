@@ -23,6 +23,10 @@
             {
                 "type": "2",
                 "name": "headers"
+            },
+            {
+                "type": "1",
+                "name": "reload"
             }
         ],
         "portsOut": [
