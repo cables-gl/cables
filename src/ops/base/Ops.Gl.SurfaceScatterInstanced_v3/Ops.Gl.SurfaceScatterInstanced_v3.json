@@ -40,15 +40,13 @@
             },
             {
                 "type": "0",
-                "name": "Distribution",
-                "group": "Distribution",
-                "subType": "string"
+                "name": "Distribution index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Selection",
-                "group": "Distribution",
-                "subType": "string"
+                "name": "Selection index",
+                "subType": "integer"
             },
             {
                 "type": "0",

@@ -20,11 +20,6 @@
                 "type": "0",
                 "name": "Variable index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Variable",
-                "subType": "string"
             }
         ],
         "portsOut": [

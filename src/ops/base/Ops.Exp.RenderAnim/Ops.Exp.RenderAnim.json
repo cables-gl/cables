@@ -11,8 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Fileformat",
-                "subType": "string"
+                "name": "Fileformat index",
+                "subType": "integer"
             },
             {
                 "type": "1",

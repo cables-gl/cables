@@ -11,33 +11,28 @@
             },
             {
                 "type": "0",
-                "name": "MIDI Channel",
-                "group": "MIDI",
-                "subType": "string"
+                "name": "MIDI Channel index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note 1",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Note 1 index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note 2",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Note 2 index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note 3",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Note 3 index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Normalize Velocity",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Normalize Velocity index",
+                "subType": "integer"
             },
             {
                 "type": "1",

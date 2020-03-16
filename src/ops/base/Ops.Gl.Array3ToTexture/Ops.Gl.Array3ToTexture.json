@@ -27,17 +27,8 @@
             },
             {
                 "type": "0",
-                "name": "wrap",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "filter index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "filter"
             }
         ],
         "portsOut": [

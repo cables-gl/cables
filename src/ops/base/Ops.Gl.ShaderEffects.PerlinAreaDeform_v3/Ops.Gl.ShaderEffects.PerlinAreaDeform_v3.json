@@ -32,8 +32,8 @@
             },
             {
                 "type": "0",
-                "name": "Output",
-                "subType": "string"
+                "name": "Output index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -77,7 +77,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform3"
+        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform_v3"
     },
     "authorName": "pandur",
     "id": "e4432ebd-d67c-46e2-b302-619d4f97daab",

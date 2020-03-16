@@ -24,28 +24,13 @@
             },
             {
                 "type": "0",
-                "name": "Size",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Repeat index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Repeat",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Position index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Position",
-                "subType": "string"
             }
         ],
         "portsOut": [
@@ -54,7 +39,7 @@
                 "name": "HTML Element"
             }
         ],
-        "name": "Ops.User.pandur.BackgroundImage_v2"
+        "name": "Ops.Html.BackgroundImage_v2"
     },
     "changelog": [
         {

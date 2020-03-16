@@ -33,8 +33,8 @@
             },
             {
                 "type": "0",
-                "name": "Method",
-                "subType": "string"
+                "name": "Method index",
+                "subType": "integer"
             },
             {
                 "type": "0",

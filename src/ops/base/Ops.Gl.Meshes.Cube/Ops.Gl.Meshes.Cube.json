@@ -34,8 +34,9 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
-                "name": "Mapping"
+                "type": "0",
+                "name": "Mapping index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -79,4 +80,3 @@
         ]
     }
 }
-

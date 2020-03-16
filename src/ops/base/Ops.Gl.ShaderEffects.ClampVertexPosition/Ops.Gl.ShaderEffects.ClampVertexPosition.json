@@ -1,5 +1,4 @@
 {
-    "updated": 1516085974993,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "0346b2d4-fbf3-421e-972b-9cb3429583c5",
@@ -12,19 +11,23 @@
             },
             {
                 "type": "0",
-                "name": "Axis"
+                "name": "Axis index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "min"
+                "name": "min",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "max"
+                "name": "max",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Update Normals"
+                "name": "Update Normals",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -33,7 +36,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.RestrictVertexPosition"
+        "name": "Ops.Gl.ShaderEffects.ClampVertexPosition"
     },
     "summary": "clamp/restrict the vertex position to min/max values per axis",
     "youtubeid": "",

@@ -1,5 +1,4 @@
 {
-    "updated": 1542006156932,
     "authorName": "pandur",
     "id": "3996ed5d-8143-4bec-9cfd-c1b193a295af",
     "created": 1518855027067,
@@ -16,8 +15,8 @@
             },
             {
                 "type": "0",
-                "name": "Depth Test Method",
-                "subType": "string"
+                "name": "Depth Test Method index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -31,7 +30,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Gl.Depth2"
+        "name": "Ops.Gl.DepthTest"
     },
     "summary": "change depth testing method (depthMask,depthWrite,depthFunc)",
     "docs": {

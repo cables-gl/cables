@@ -24,15 +24,14 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "filter",
-                "group": "Texture Settings"
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap",
-                "group": "Texture Settings",
-                "subType": "string"
+                "name": "wrap index",
+                "subType": "integer"
             },
             {
                 "type": "0",

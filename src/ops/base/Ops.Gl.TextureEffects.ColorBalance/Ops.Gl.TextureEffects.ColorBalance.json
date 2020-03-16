@@ -7,8 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Tone",
-                "subType": "string"
+                "name": "Tone index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -34,7 +34,6 @@
         ],
         "name": "Ops.Gl.TextureEffects.ColorBalance"
     },
-    "updated": 1540822442245,
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
     "id": "24fc08e4-9a66-4fb9-9ebd-f72f6a986b24",

@@ -10,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Area",
-                "subType": "string"
+                "name": "Area index",
+                "subType": "integer"
             },
             {
                 "type": "0",

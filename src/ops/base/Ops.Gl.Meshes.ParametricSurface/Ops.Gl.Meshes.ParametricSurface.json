@@ -13,8 +13,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "shapes",
-                "subType": "string"
+                "name": "shapes index",
+                "subType": "integer"
             },
             {
                 "type": "1",

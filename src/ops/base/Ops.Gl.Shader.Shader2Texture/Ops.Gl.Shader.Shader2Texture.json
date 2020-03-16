@@ -37,20 +37,8 @@
             },
             {
                 "type": "0",
-                "name": "filter",
-                "group": "Texture settings",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "wrap index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "wrap",
-                "group": "Texture settings",
-                "subType": "string"
             },
             {
                 "type": "0",

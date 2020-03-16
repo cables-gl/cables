@@ -17,10 +17,6 @@
                 "type": "0",
                 "name": "Math function index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Math function"
             }
         ],
         "portsOut": [

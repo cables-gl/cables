@@ -17,18 +17,18 @@
             },
             {
                 "type": "0",
-                "name": "X",
-                "subType": "string"
+                "name": "X index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Y",
-                "subType": "string"
+                "name": "Y index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Z",
-                "subType": "string"
+                "name": "Z index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

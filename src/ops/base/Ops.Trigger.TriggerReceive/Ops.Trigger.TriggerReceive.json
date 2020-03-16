@@ -10,13 +10,6 @@
     "authorName": "pandur",
     "created": 1555064338485,
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Named Trigger",
-                "subType": "string"
-            }
-        ],
         "portsOut": [
             {
                 "type": "1",

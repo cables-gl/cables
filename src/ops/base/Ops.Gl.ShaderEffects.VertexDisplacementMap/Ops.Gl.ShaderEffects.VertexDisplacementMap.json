@@ -51,8 +51,8 @@
             },
             {
                 "type": "0",
-                "name": "mode",
-                "subType": "string"
+                "name": "mode index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

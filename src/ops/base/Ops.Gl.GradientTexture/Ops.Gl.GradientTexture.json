@@ -6,11 +6,6 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Gradient",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Smoothstep",
                 "subType": "boolean"
             },
@@ -25,8 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "Direction",
-                "subType": "string"
+                "name": "Direction index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

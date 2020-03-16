@@ -26,12 +26,6 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "File Type",
-                "group": "File",
-                "subType": "string"
-            },
-            {
                 "type": "5",
                 "name": "Filename",
                 "group": "File"
@@ -46,11 +40,6 @@
                 "type": "0",
                 "name": "Duration Type index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Duration Type",
-                "group": "Timing"
             },
             {
                 "type": "0",

@@ -14,11 +14,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Discard",
-                "group": "Face Fulling"
-            },
-            {
                 "type": "0",
                 "name": "Active",
                 "group": "Face Fulling",

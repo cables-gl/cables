@@ -33,11 +33,6 @@
             },
             {
                 "type": "0",
-                "name": "Easing",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Reverse",
                 "subType": "boolean"
             }

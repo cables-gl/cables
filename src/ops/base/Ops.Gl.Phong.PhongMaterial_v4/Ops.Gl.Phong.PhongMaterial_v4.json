@@ -31,12 +31,6 @@
             },
             {
                 "type": "0",
-                "name": "Enable",
-                "group": "Oren-Nayar Diffuse",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Albedo",
                 "group": "Oren-Nayar Diffuse",
                 "subType": "number"
@@ -46,12 +40,6 @@
                 "name": "Roughness",
                 "group": "Oren-Nayar Diffuse",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Active",
-                "group": "Fresnel",
-                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -102,28 +90,6 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Specular Model index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Specular Model",
-                "group": "Specular"
-            },
-            {
-                "type": "0",
-                "name": "Energy Conservation",
-                "group": "Light Options",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Double Sided Material",
-                "group": "Light Options",
-                "subType": "boolean"
-            },
-            {
                 "type": "2",
                 "name": "Diffuse Texture",
                 "group": "Textures"
@@ -152,12 +118,6 @@
                 "type": "2",
                 "name": "Opacity Texture",
                 "group": "Textures"
-            },
-            {
-                "type": "0",
-                "name": "Colorize Texture",
-                "group": "Texture Transforms",
-                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -211,23 +171,6 @@
                 "type": "0",
                 "name": "Alpha Mask Source index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Alpha Mask Source",
-                "group": "Opacity Texture"
-            },
-            {
-                "type": "0",
-                "name": "Opacity TexCoords Transform",
-                "group": "Opacity Texture",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Discard Transparent Pixels",
-                "group": "Opacity Texture",
-                "subType": "boolean"
             }
         ],
         "portsOut": [

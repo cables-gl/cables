@@ -3,11 +3,6 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Variable",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Value",
                 "subType": "number"
             }

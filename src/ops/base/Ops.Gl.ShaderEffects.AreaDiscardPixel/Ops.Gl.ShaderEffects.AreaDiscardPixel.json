@@ -20,11 +20,6 @@
             },
             {
                 "type": "0",
-                "name": "Area",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Size",
                 "group": "Size",
                 "subType": "number"

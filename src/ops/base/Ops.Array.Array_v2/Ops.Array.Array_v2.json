@@ -10,10 +10,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Mode select"
-            },
-            {
                 "type": "0",
                 "name": "Array length",
                 "subType": "integer"

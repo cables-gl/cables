@@ -31,8 +31,8 @@
             },
             {
                 "type": "0",
-                "name": "Blendmode",
-                "subType": "string"
+                "name": "Blendmode index",
+                "subType": "integer"
             },
             {
                 "type": "0",

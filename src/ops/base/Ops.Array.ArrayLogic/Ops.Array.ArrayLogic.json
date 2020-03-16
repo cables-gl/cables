@@ -8,8 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "Comparison mode",
-                "subType": "string"
+                "name": "Comparison mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",

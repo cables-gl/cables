@@ -10,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio",
-                "subType": "string"
+                "name": "Aspect Ratio index",
+                "subType": "integer"
             },
             {
                 "type": "0",

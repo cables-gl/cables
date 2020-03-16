@@ -42,8 +42,9 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
-                "name": "mapping"
+                "type": "0",
+                "name": "mapping index",
+                "subType": "integer"
             },
             {
                 "type": "0",
