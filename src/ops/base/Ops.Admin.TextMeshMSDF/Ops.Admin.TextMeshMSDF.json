@@ -121,6 +121,11 @@
             },
             {
                 "type": "0",
+                "name": "Start Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Num Chars",
                 "subType": "number"
             }
