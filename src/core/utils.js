@@ -334,6 +334,8 @@ export const basename = function (url)
         var str=parts[parts.length-1];
         var parts2=str.split("?");
         name=parts2[0];
+        parts2=name.split(".");
+        name=parts2[0];
     }
 
     return name;
