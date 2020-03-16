@@ -68,10 +68,33 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Rotation Rate Alpha",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Rate Beta",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Rate Gamma",
+                "subType": "number"
+            },
+            {
                 "type": "2",
                 "name": "Object"
             }
         ],
         "name": "Ops.Devices.Mobile.MotionSensor2"
+    },
+    "summary": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

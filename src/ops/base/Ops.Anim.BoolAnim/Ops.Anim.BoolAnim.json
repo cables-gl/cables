@@ -26,6 +26,14 @@
                 "type": "0",
                 "name": "Direction index",
                 "subType": "integer"
+<<<<<<< HEAD
+=======
+            },
+            {
+                "type": "0",
+                "name": "Direction",
+                "subType": "string"
+>>>>>>> origin/develop
             },
             {
                 "type": "0",
