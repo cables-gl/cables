@@ -5,37 +5,29 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
-                "name": "Note Values"
-            },
-            {
                 "type": "2",
                 "name": "MIDI Event",
                 "group": "MIDI"
             },
             {
                 "type": "0",
-                "name": "MIDI Channel",
-                "group": "MIDI",
-                "subType": "string"
+                "name": "MIDI Channel index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note Start",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Note Start index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note End",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Note End index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Normalize Velocity",
-                "group": "Notes",
-                "subType": "string"
+                "name": "Normalize Velocity index",
+                "subType": "integer"
             },
             {
                 "type": "1",
