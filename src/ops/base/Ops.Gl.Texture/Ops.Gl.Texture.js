@@ -63,6 +63,9 @@ function realReload(nocache)
     {
         loading.set(true);
 
+
+
+
         if(tex)tex.delete();
         tex=CGL.Texture.load(cgl,url,
             function(err)
