@@ -1,0 +1,80 @@
+{
+    "id": "b60ad395-d6ad-4309-86c5-c6bbffaf176c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1583493046745
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1583493050766,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Video Id"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Style"
+            },
+            {
+                "type": "5",
+                "name": "ElementID"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay",
+                "group": "Youtube Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Display Captions",
+                "group": "Youtube Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "group": "Youtube Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Allow Fullscreen",
+                "group": "Youtube Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Hide Controls",
+                "group": "Youtube Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Start at Second",
+                "group": "Youtube Options",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
+            {
+                "type": "5",
+                "name": "Direct Link"
+            }
+        ],
+        "name": "Ops.Html.YoutubePlayer"
+    }
+}
