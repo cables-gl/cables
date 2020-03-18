@@ -10,6 +10,7 @@ const
     doSDF=op.inBool("SDF",true),
     align=op.inSwitch("Align",['Left','Center','Right'],'Center'),
     valign=op.inSwitch("Vertical Align",['Top','Middle','Bottom'],'Middle'),
+
     r = op.inValueSlider("r", 1),
     g = op.inValueSlider("g", 1),
     b = op.inValueSlider("b", 1),
@@ -24,6 +25,7 @@ const
 
     outWidth=op.outNumber("Width"),
     outHeight=op.outNumber("Height"),
+    outStartY=op.outNumber("Start Y"),
     outNumChars=op.outNumber("Num Chars");
 
 inFontData.ignoreValueSerialize=true;
@@ -41,14 +43,17 @@ var geom=null;
 var mesh=null;
 var disabled=false;
 var valignMode=1;
-var vec=vec3.create();
-var heightAll=0;
+const alignVec=vec3.create();
+var heightAll=0,widthAll=0;
 var strings=[];
 var offY=0;
+var minY,maxY,minX,maxX;
+
 
 const shader=new CGL.Shader(cgl,'TextMeshSDF');
 
-if (cgl.glVersion == 1) {
+if (cgl.glVersion == 1)
+{
     cgl.gl.getExtension("OES_standard_derivatives");
     shader.enableExtension("GL_OES_standard_derivatives");
 }
@@ -77,12 +82,7 @@ align.onChange=
     };
 
 
-valign.onChange=function()
-{
-    if(valign.get()=='Top')valignMode=0;
-    else if(valign.get()=='Middle')valignMode=1;
-    else if(valign.get()=='Bottom')valignMode=2;
-};
+valign.onChange=updateAlign;
 
 function updateDefines()
 {
@@ -106,7 +106,6 @@ inFontData.onChange=function()
         return;
     }
 
-
     if(data && data.chars)
     {
         font=data;
@@ -116,8 +115,34 @@ inFontData.onChange=function()
 
         op.setUiError("datawrong",null);
     }
+
     needUpdate=true;
 };
+
+
+function updateAlign()
+{
+    if(minX==undefined)return;
+    if(valign.get()=='Top')valignMode=0;
+    else if(valign.get()=='Middle')valignMode=1;
+    else if(valign.get()=='Bottom')valignMode=2;
+
+    var offY=0;
+
+    if(valignMode===1) offY=heightAll/2;
+    else if(valignMode===2) offY=heightAll;
+
+    vec3.set(alignVec, 0,offY,0);
+
+    console.log({minX,maxX,minY,maxY});
+
+    widthAll=(Math.abs(minX-maxX));
+    heightAll=(Math.abs(minY-maxY));
+
+    outWidth.set(widthAll);
+    outHeight.set(heightAll);
+    outStartY.set(maxY+offY);
+}
 
 
 render.onTriggered=function()
@@ -151,27 +176,19 @@ render.onTriggered=function()
 
         // var mulTex=inMulTex.get();
         // if(mulTex)cgl.setTexture(1,mulTex.tex);
-
         // var mulTexMask=inMulTexMask.get();        // if(mulTexMask)cgl.setTexture(2,mulTexMask.tex);
+        // heightAll=(strings.length-1)*( lineHeight.get());
+        // outHeight.set(heightAll);
 
 
-        heightAll=(strings.length-1)*( lineHeight.get());
-        outHeight.set(heightAll);
 
-        if(valignMode===0)
-        {
-            vec3.set(vec, 0,heightAll,0);
-        }
-        else if(valignMode===1) vec3.set(vec, 0,heightAll/2,0);
-        else if(valignMode===2)
-        {
 
-            vec3.set(vec, 0,heightAll,0);
-        }
+
+
 
 
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mMatrix,cgl.mMatrix, vec);
+        mat4.translate(cgl.mMatrix,cgl.mMatrix, alignVec);
 
         if(inPosArr.get())
         {
@@ -222,8 +239,6 @@ function generateMesh()
     }
     var theString=String(str.get()+'');
 
-
-console.log("generate!");
     if(!geom)
     {
         geom=new CGL.Geometry("textmesh");
@@ -270,36 +285,40 @@ console.log("generate!");
 
     const mulSize=0.01;
 
-
-
     var arrPositions=[];
 
+    minY= 99999;
+    maxY=-99999;
+    minX= 99999;
+    maxX=-99999;
 
-    var widthMax=0;
+    var avgHeight=0;
+
+    for(var i=0;i<font.chars.length;i++)
+    {
+        if(font.chars[i].height) avgHeight+=font.chars[i].height;
+    }
+    avgHeight/=font.chars.length;
+    avgHeight*=mulSize;
+
+    console.log({avgHeight,font});
 
     for(var s=0;s<strings.length;s++)
     {
         var txt=strings[s];
         var numChars=txt.length;
-        var pos=0;
-        var offX=0;
-        var width=0;
+        var lineWidth=0;
 
         for(var i=0;i<numChars;i++)
         {
             const chStr=txt.substring(i,i+1);
             const char=font.characters[String(chStr)];
-            if(char) width+=char.xadvance*mulSize+letterSpace.get();
+            if(char) lineWidth+=char.xadvance*mulSize+letterSpace.get();
         }
 
-        // width-=letterSpace.get();
-        // height=0;
-
-        if(align.get()=='Left') offX=0;
-        else if(align.get()=='Right') offX=width;
-        else if(align.get()=='Center') offX=width/2;
-
-        // height=(s+1)*lineHeight.get();
+        var pos=0;
+        if(align.get()=='Right') pos-=lineWidth;
+        else if(align.get()=='Center') pos-=lineWidth/2;
 
         for(var i=0;i<numChars;i++)
         {
@@ -313,25 +332,42 @@ console.log("generate!");
             sizes.push(char.width,char.height);
 
             tcOffsets.push(char.x/font.common.scaleW,(char.y/font.common.scaleH));
-            tcSizes.push(char.width/font.common.scaleW,char.height/font.common.scaleH);
+
+            const charWidth=char.width/font.common.scaleW;
+            const charHeight=char.height/font.common.scaleH;
+            const charOffsetY=char.yoffset/font.common.scaleH;
+            const charOffsetX=char.xoffset/font.common.scaleH;
+
+            tcSizes.push(charWidth,charHeight);
 
             mat4.identity(m);
-
 
 
             var adv=(char.xadvance/2)*mulSize;
             pos+=adv;
 
-            const x=pos+(char.xoffset/2)*mulSize-offX;
-            const y=0-s*lineHeight.get()-(mulSize*(char.yoffset+char.height/2)); //-
+            const x=pos+(char.xoffset/2)*mulSize;
+            const y=(s*-lineHeight.get())+(avgHeight)-(mulSize*(char.yoffset+char.height/2));
 
-            mat4.translate(m,m,[x,y,0]);
+            minX=Math.min(x-charWidth,minX);
+            maxX=Math.max(x+charWidth,maxX);
+
+            minY=Math.min(y-charHeight-avgHeight/2,minY);
+            maxY=Math.max(y+charHeight+avgHeight/2,maxY);
+
+            mat4.translate(m,m,[x,y ,0]);
             arrPositions.push(x,y,0);
 
             adv=(char.xadvance/2)*mulSize+letterSpace.get();
+
             pos+=adv;
 
-            widthMax=Math.max(pos,widthMax);
+            minX=Math.min(pos-charWidth,minX);
+            maxX=Math.max(pos+charWidth,maxX);
+
+
+
+            // widthMax=Math.max(pos,widthMax);
 
             transformations.push(Array.prototype.slice.call(m));
 
@@ -358,7 +394,9 @@ console.log("generate!");
     mesh.setAttribute('attrTcSize',new Float32Array(tcSizes),2,{"instanced":true});
     mesh.setAttribute('attrSize',new Float32Array(sizes),2,{"instanced":true});
 
-    outWidth.set(widthMax);
+
+    updateAlign();
+    updateAlign();
 
     outArr.set(arrPositions);
 }

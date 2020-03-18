@@ -31,8 +31,9 @@
                 "subType": "number"
             },
             {
-                "type": "5",
-                "name": "Z Position"
+                "type": "0",
+                "name": "Z Position index",
+                "subType": "integer"
             },
             {
                 "type": "0",

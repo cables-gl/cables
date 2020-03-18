@@ -21,8 +21,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Direction"
+                "type": "0",
+                "name": "Direction index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

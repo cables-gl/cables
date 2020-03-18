@@ -6,8 +6,9 @@
                 "name": "render"
             },
             {
-                "type": "5",
-                "name": "Attribute"
+                "type": "0",
+                "name": "Attribute index",
+                "subType": "integer"
             },
             {
                 "type": "0",

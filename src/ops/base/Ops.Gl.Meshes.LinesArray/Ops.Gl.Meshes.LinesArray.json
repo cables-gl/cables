@@ -28,15 +28,13 @@
             },
             {
                 "type": "0",
-                "name": "pivot x",
-                "group": "Alignment",
-                "subType": "string"
+                "name": "pivot x index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "pivot y",
-                "group": "Alignment",
-                "subType": "string"
+                "name": "pivot y index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -50,8 +48,8 @@
             },
             {
                 "type": "0",
-                "name": "axis",
-                "subType": "string"
+                "name": "axis index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

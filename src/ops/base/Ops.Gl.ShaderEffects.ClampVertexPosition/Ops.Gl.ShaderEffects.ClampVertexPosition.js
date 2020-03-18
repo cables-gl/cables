@@ -35,7 +35,7 @@ function updateNormals()
     if(shader)
         if(inUpdateNormals.get()) shader.define("RESTRICT_UPDATENORMALS");
             else shader.removeDefine("RESTRICT_UPDATENORMALS");
-    
+
 }
 
 function updateAxis()
@@ -45,7 +45,7 @@ function updateAxis()
         shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_X");
         shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_Y");
         shader.removeDefine(moduleVert.prefix+"RESTRICT_AXIS_Z");
-        
+
         if(axis.get()=="X") shader.define(moduleVert.prefix+"RESTRICT_AXIS_X");
         if(axis.get()=="Y") shader.define(moduleVert.prefix+"RESTRICT_AXIS_Y");
         if(axis.get()=="Z") shader.define(moduleVert.prefix+"RESTRICT_AXIS_Z");
@@ -81,7 +81,7 @@ op.render.onTriggered=function()
         updateNormals();
     }
 
-    
+
     if(!shader)return;
 
     op.trigger.trigger();

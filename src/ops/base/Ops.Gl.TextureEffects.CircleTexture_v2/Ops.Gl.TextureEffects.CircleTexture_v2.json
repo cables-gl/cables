@@ -7,9 +7,8 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
+                "name": "Blend Mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -49,9 +48,8 @@
             },
             {
                 "type": "0",
-                "name": "fallOff",
-                "group": "Style",
-                "subType": "string"
+                "name": "fallOff index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -92,7 +90,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Circle_v2"
+        "name": "Ops.Gl.TextureEffects.CircleTexture_v2"
     },
     "changelog": [
         {

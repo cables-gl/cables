@@ -11,9 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "MIDI Channel",
-                "group": "MIDI",
-                "subType": "string"
+                "name": "MIDI Channel index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -22,9 +21,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Normalize",
-                "group": "CC"
+                "type": "0",
+                "name": "Normalize index",
+                "subType": "integer"
             },
             {
                 "type": "1",

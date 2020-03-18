@@ -19,11 +19,11 @@ var shader=null;
 render.onTriggered=function()
 {
     if(op.instanced(render))return;
-    
+
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
-    
+
 
     mesh.render(shader);
     trigger.trigger();
@@ -39,7 +39,7 @@ var lastSegs=-1;
 function calc()
 {
     var segs=Math.max(3,Math.floor(segments.get()));
-    
+
     geom.clear();
 
     var
@@ -67,7 +67,7 @@ function calc()
     if(shape.get()=="Saw")imode=1;
     if(shape.get()=="Gear")imode=2;
 
-    var cycleGear=true;    
+    var cycleGear=true;
 
     for (i=0; i <= segs*percent.get(); i++)
     {
@@ -95,14 +95,14 @@ function calc()
                 {
                     outX=(posx)*outerRadius.get();
                     outY=(posy)*outerRadius.get();
-    
+
                     degInRad = (360/segs)*(i-1)*CGL.DEG2RAD;
                     var ooutX=Math.cos(degInRad)*radius.get();
                     var ooutY=Math.sin(degInRad)*radius.get();
-    
+
                     ooutX*=outerRadius.get();
                     ooutY*=outerRadius.get();
-                    
+
                     faces.push(
                             [ooutX,ooutY,0],
                             [outX,outY,0],
@@ -143,7 +143,7 @@ function calc()
         oldPosX=posx;
         oldPosY=posy;
     }
-  
+
     geom=CGL.Geometry.buildFromFaces(faces);
     geom.vertexNormals=normals;
     geom.tangents=tangents;
@@ -152,7 +152,7 @@ function calc()
 
     geomOut.set(null);
     geomOut.set(geom);
-    
+
     if(geom.vertices.length==0)return;
     if(!mesh)mesh=new CGL.Mesh(cgl,geom);
     mesh.setGeom(geom);

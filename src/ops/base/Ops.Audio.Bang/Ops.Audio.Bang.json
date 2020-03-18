@@ -26,8 +26,8 @@
             },
             {
                 "type": "0",
-                "name": "easing",
-                "subType": "string"
+                "name": "easing index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -50,8 +50,8 @@
             },
             {
                 "type": "0",
-                "name": "Source",
-                "subType": "string"
+                "name": "Source index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -17,9 +17,8 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
+                "name": "Blend Mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -29,8 +28,8 @@
             },
             {
                 "type": "0",
-                "name": "Shape",
-                "subType": "string"
+                "name": "Shape index",
+                "subType": "integer"
             },
             {
                 "type": "0",

@@ -16,11 +16,6 @@
                 "type": "0",
                 "name": "origin index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "origin",
-                "subType": "string"
             }
         ],
         "portsOut": [

@@ -32,10 +32,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Force"
-            },
-            {
                 "type": "0",
                 "name": "Center In Parent",
                 "subType": "boolean"
@@ -59,12 +55,6 @@
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio",
-                "group": "Proportions",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Ratio",
                 "group": "Proportions",
                 "subType": "number"
@@ -73,12 +63,6 @@
                 "type": "0",
                 "name": "Fill Parent index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Fill Parent",
-                "group": "Proportions",
-                "subType": "string"
             }
         ],
         "portsOut": [

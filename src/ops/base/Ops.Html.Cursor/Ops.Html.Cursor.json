@@ -4,8 +4,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "cursor",
-                "subType": "string"
+                "name": "cursor index",
+                "subType": "integer"
             },
             {
                 "type": "1",
@@ -14,7 +14,6 @@
         ],
         "name": "Ops.Html.Cursor"
     },
-    "updated": 1542043094541,
     "authorName": "pandur",
     "id": "409f94da-6264-435c-8e73-03e8d2275e04",
     "created": 1537174036326

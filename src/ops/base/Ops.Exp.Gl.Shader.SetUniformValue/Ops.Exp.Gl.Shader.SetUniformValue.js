@@ -17,9 +17,9 @@ inRender.onTriggered=function()
         setupShader();
         doSetupUniform=true;
     }
-    
+
     if(doSetupUniform) setupUniform();
-    
+
     if(uniform)
     {
         var oldValue=uniform.getValue();
@@ -35,7 +35,7 @@ inRender.onTriggered=function()
 
 inSelect.onChange=function()
 {
-    doSetupUniform=true;    
+    doSetupUniform=true;
 };
 
 function setupUniform()
@@ -44,10 +44,10 @@ function setupUniform()
     {
         uniform=shader.getUniform(inSelect.get());
         // console.log('uniform!!!',uniform);
-        
+
         if(!uniform) op.uiAttr({'error':'uniform unknown. maybe shader changed'});
             else op.uiAttr({'error':null});
-            
+
         doSetupUniform=false;
     }
 }
@@ -58,11 +58,11 @@ function setupShader()
     // console.log('num uniforms',unis.length);
     shaderLastCompile=shader.lastCompile;
     var names=['none'];
-    
+
     for(var i=0;i<unis.length;i++)
     {
         names.push( unis[i].getName() );
     }
-    
+
     inSelect.setUiAttribs({values:names});
 }

@@ -41,12 +41,6 @@
             },
             {
                 "type": "0",
-                "name": "Area",
-                "group": "Behavior",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "right click prevent default",
                 "group": "Behavior",
                 "subType": "boolean"

@@ -29,7 +29,7 @@ function update()
         const inString=stringPorts[i].get();
         if(!inString)continue;
         if(space) str += " ";
-        if(newLinesCheckBox.get()) nl = '\n';
+        if(i>0 && newLinesCheckBox.get()) nl = '\n';
         str += nl;
         str += inString;
     }

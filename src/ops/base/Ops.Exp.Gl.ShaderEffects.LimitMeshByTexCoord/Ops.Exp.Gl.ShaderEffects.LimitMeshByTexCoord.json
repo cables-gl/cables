@@ -11,8 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Axis",
-                "subType": "string"
+                "name": "Axis index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -33,9 +33,8 @@
             },
             {
                 "type": "0",
-                "name": "Sine Source",
-                "group": "Sine Animation",
-                "subType": "string"
+                "name": "Sine Source index",
+                "subType": "integer"
             },
             {
                 "type": "0",

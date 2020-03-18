@@ -1,0 +1,55 @@
+{
+    "id": "a8ba593a-4d5a-4b55-8ee7-9b6f9920da1f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1583501445338
+        },
+        {
+            "message": "Ops.User.pandur.ModalOverlay renamed to Ops.Html.ModalOverlay",
+            "author": "pandur",
+            "date": 1583505264321
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1583501447053,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Content Element"
+            },
+            {
+                "type": "1",
+                "name": "Show"
+            },
+            {
+                "type": "1",
+                "name": "Close"
+            },
+            {
+                "type": "0",
+                "name": "Show Closebutton",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.ModalOverlay"
+    }
+}

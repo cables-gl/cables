@@ -11,8 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Joint",
-                "subType": "string"
+                "name": "Joint index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

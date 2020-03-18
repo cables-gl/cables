@@ -13,8 +13,9 @@
                 "name": "Sort property"
             },
             {
-                "type": "5",
-                "name": "Sorting mode"
+                "type": "0",
+                "name": "Sorting mode index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

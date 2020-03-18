@@ -1,5 +1,4 @@
 {
-    "updated": 1531137878464,
     "authorName": "_LJ_",
     "id": "2fbada6b-70fa-4b43-87db-8b0d9293990b",
     "created": 1530791106422,
@@ -11,23 +10,13 @@
             },
             {
                 "type": "0",
-                "name": "filter",
-                "subType": "string"
+                "name": "filter index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "flip",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "unpackPreMultipliedAlpha",
-                "subType": "boolean"
+                "name": "wrap index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

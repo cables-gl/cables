@@ -6,8 +6,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Formula",
-                "subType": "string"
+                "name": "Formula index",
+                "subType": "integer"
             },
             {
                 "type": "0",

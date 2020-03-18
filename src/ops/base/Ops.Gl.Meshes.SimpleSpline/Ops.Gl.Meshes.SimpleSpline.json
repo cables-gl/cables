@@ -21,8 +21,9 @@
                 "subType": "boolean"
             },
             {
-                "type": "5",
-                "name": "TexCoords"
+                "type": "0",
+                "name": "TexCoords index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

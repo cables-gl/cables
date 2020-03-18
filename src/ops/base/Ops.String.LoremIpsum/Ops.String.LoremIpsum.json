@@ -1,0 +1,37 @@
+{
+    "id": "c19ebc53-82d5-429c-a6cc-ff350a2c5d3e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1583504911167
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1583504975920,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "5",
+                "name": "HTML String"
+            },
+            {
+                "type": "3",
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.String.LoremIpsum"
+    },
+    "summary": "Lorem ipsum dolor sit amet",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

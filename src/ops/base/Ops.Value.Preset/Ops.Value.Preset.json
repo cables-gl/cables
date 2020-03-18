@@ -17,25 +17,9 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
-                "name": "data"
-            },
-            {
-                "type": "5",
-                "name": "sets"
-            },
-            {
-                "type": "5",
-                "name": "presetid"
-            },
-            {
                 "type": "0",
                 "name": "Interpolation index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Interpolation"
             },
             {
                 "type": "0",
@@ -58,50 +42,9 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Preset",
-                "group": "Manage Presets",
-                "subType": "string"
-            },
-            {
-                "type": "1",
-                "name": "Create new",
-                "group": "Manage Presets"
-            },
-            {
-                "type": "1",
-                "name": "Update",
-                "group": "Manage Presets"
-            },
-            {
-                "type": "1",
-                "name": "Delete",
-                "group": "Manage Presets"
-            },
-            {
                 "type": "1",
                 "name": "Rename",
                 "group": "Manage Presets"
-            },
-            {
-                "type": "0",
-                "name": ".preset_scale_s9pddeyps_qvgsqtilu",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_scale_s9pddeyps_efb7igj33",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_scale_s9pddeyps_m4qfu83t5",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_scale_s9pddeyps_xy4b48chx",
-                "subType": "number"
             }
         ],
         "portsOut": [

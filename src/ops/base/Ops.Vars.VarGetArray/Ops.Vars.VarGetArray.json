@@ -8,8 +8,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Variable",
-                "subType": "string"
+                "name": "Variable index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
