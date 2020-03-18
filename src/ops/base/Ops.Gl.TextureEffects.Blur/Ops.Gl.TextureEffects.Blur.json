@@ -17,10 +17,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "direction"
-            },
-            {
                 "type": "0",
                 "name": "Fast",
                 "subType": "boolean"

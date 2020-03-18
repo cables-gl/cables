@@ -5,8 +5,9 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
-                "name": "FFT size"
+                "type": "0",
+                "name": "FFT size index",
+                "subType": "integer"
             },
             {
                 "type": "1",
@@ -18,8 +19,8 @@
             },
             {
                 "type": "0",
-                "name": "Data",
-                "subType": "string"
+                "name": "Data index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

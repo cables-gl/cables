@@ -317,6 +317,30 @@ export const cacheBust = function (url)
     return url + "cb=" + CABLES.uuid();
 };
 
+/**
+ * return the filename part of a url
+ * @function basename
+ * @static
+ * @memberof Utils
+ * @param {String} url 
+ * @return {String} just the filename
+ */
+export const basename = function (url)
+{
+    var name="";
+    var parts=url.split("/");
+    if(parts.length>0)
+    {
+        var str=parts[parts.length-1];
+        var parts2=str.split("?");
+        name=parts2[0];
+        parts2=name.split(".");
+        name=parts2[0];
+    }
+
+    return name;
+};
+
 
 
 // todo: is jsonp used anywhere ?

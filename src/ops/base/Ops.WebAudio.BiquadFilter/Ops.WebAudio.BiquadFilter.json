@@ -10,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "type",
-                "subType": "string"
+                "name": "type index",
+                "subType": "integer"
             },
             {
                 "type": "0",

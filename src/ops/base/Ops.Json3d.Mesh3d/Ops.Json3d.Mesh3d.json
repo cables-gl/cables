@@ -23,11 +23,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Calculate Normals",
-                "group": "Geometry"
-            },
-            {
                 "type": "0",
                 "name": "Resize",
                 "group": "Geometry",

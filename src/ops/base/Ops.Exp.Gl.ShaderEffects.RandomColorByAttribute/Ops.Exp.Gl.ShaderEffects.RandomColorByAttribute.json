@@ -1,5 +1,4 @@
 {
-    "updated": 1520434623456,
     "authorName": "pandur",
     "id": "28c8c024-3ac9-4fca-8276-77ca76f35ad8",
     "created": 1519638909468,
@@ -11,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Attribute",
-                "subType": "string"
+                "name": "Attribute index",
+                "subType": "integer"
             },
             {
                 "type": "2",

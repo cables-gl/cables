@@ -112,7 +112,7 @@ function analyze()
     var arrSubmesh=[];
     arrSubmesh.length=verts.length/3;
     groupCounter-=1;
-    
+
     var maxGroupValue=-999999;
     var minGroupValue=999999;
 
@@ -133,7 +133,7 @@ function analyze()
         var group=faceGroups[i];// / groupCounter;
 
         if(sort=="Z") group=faceGroupPos[group];
-        
+
         maxGroupValue=Math.max(maxGroupValue,group);
         minGroupValue=Math.min(minGroupValue,group);
 
@@ -156,7 +156,7 @@ function analyze()
     // console.log(geom.getAttributes());
     outMax.set(maxGroupValue);
     outMin.set(minGroupValue);
-    
+
 
     // console.log("finished submesh analyze...",(CABLES.now()-startInit));
 

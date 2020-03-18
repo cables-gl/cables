@@ -1,0 +1,1 @@
+Performs a browser check. Some ops only work with certain browsers, you can use this op to create fallbacks.

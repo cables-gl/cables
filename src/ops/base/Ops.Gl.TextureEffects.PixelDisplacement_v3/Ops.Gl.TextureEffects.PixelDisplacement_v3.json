@@ -19,12 +19,6 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
@@ -47,29 +41,14 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Wrap",
-                "group": "Modes"
-            },
-            {
                 "type": "0",
                 "name": "Input index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Input",
-                "group": "Modes",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Zero Displace index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Zero Displace"
             }
         ],
         "portsOut": [

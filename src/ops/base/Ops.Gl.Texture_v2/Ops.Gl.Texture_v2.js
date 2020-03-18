@@ -64,6 +64,8 @@ function realReload(nocache)
     {
         loaded.set(false);
 
+        op.setUiAttrib({"extendTitle":CABLES.basename(url)});
+
         if(tex)tex.delete();
         tex=CGL.Texture.load(cgl,url,
             function(err)

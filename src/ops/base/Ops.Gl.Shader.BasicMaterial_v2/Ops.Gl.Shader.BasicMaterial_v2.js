@@ -103,7 +103,7 @@ op.alphaMaskSource.setUiAttribs({greyout:true});
 
 function updateAlphaMaskMethod()
 {
-    if(op.alphaMaskSource.get()=='Alpha Channel') shader.define('ALPHA_MASK_ALPHA');
+    if(op.alphaMaskSource.get()=='A') shader.define('ALPHA_MASK_ALPHA');
         else shader.removeDefine('ALPHA_MASK_ALPHA');
 
     if(op.alphaMaskSource.get()=='Luminance') shader.define('ALPHA_MASK_LUMI');

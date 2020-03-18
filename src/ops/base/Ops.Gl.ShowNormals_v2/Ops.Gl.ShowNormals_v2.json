@@ -18,10 +18,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Vectors"
-            },
-            {
                 "type": "0",
                 "name": "Length",
                 "subType": "number"

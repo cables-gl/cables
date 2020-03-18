@@ -5,7 +5,11 @@ const result=op.outString("Result");
 result.ignoreValueSerialize=true;
 data.ignoreValueSerialize=true;
 
-key.onChange=exec;
+key.onChange=function()
+{
+    op.setUiAttrib({ extendTitle: key.get() });
+    exec();
+};
 data.onChange=exec;
 
 function exec()

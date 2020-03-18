@@ -5,10 +5,6 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
-                "name": "data"
-            },
-            {
                 "type": "1",
                 "name": "Render"
             },
@@ -25,11 +21,6 @@
                 "type": "0",
                 "name": "Center index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Center",
-                "group": "Transform"
             },
             {
                 "type": "0",

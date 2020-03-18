@@ -8,8 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "span",
-                "subType": "string"
+                "name": "span index",
+                "subType": "integer"
             },
             {
                 "type": "0",

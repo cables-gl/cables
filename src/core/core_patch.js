@@ -1103,6 +1103,17 @@ Patch.prototype.setVariable = function (name, val)
     }
 };
 
+Patch.prototype._sortVars = function ()
+{
+    if(!CABLES.UI) return;
+    const ordered = {};
+    Object.keys(this._variables).sort().forEach((key)=>
+    {
+        ordered[key] = this._variables[key];
+    });
+    this._variables=ordered;
+}
+
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
@@ -1113,6 +1124,8 @@ Patch.prototype.setVarValue = function (name, val)
     else
     {
         this._variables[name] = new Patch.Variable(name, val);
+        this._sortVars();
+
         this.emitEvent("variablesChanged");
     }
     return this._variables[name];

@@ -13,13 +13,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "value",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Syntax",
-                "subType": "string"
+                "name": "Syntax index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

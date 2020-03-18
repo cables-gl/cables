@@ -19,14 +19,14 @@
                 "subType": "number"
             },
             {
-                "type": "5",
-                "name": "pivot x",
-                "group": "Pivot"
+                "type": "0",
+                "name": "pivot x index",
+                "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "pivot y",
-                "group": "Pivot"
+                "type": "0",
+                "name": "pivot y index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -41,8 +41,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "axis"
+                "type": "0",
+                "name": "axis index",
+                "subType": "integer"
             },
             {
                 "type": "0",

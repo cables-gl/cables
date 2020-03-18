@@ -30,7 +30,7 @@ function updateAxis()
     shader.removeDefine(mod.prefix+"AXIS_X");
     shader.removeDefine(mod.prefix+"AXIS_Y");
     shader.removeDefine(mod.prefix+"AXIS_Z");
-    
+
     if(axis.get()=="X")shader.define(mod.prefix+"AXIS_X");
     if(axis.get()=="Y")shader.define(mod.prefix+"AXIS_Y");
     if(axis.get()=="Z")shader.define(mod.prefix+"AXIS_Z");

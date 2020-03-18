@@ -11,8 +11,8 @@
             },
             {
                 "type": "0",
-                "name": "Sort",
-                "subType": "string"
+                "name": "Sort index",
+                "subType": "integer"
             },
             {
                 "type": "0",

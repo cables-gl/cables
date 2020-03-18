@@ -15,8 +15,8 @@
             },
             {
                 "type": "0",
-                "name": "Pos X",
-                "subType": "string"
+                "name": "Pos X index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

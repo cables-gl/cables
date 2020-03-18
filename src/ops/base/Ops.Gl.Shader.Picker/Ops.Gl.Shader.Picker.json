@@ -28,8 +28,8 @@
             },
             {
                 "type": "0",
-                "name": "cursor",
-                "subType": "string"
+                "name": "cursor index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

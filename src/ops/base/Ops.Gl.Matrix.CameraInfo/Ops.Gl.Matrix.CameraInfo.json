@@ -26,8 +26,9 @@
                 "name": "render"
             },
             {
-                "type": "5",
-                "name": "Camera Type"
+                "type": "0",
+                "name": "Camera Type index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -136,7 +137,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.simod.CameraDecompose"
+        "name": "Ops.Gl.Matrix.CameraInfo"
     },
     "summary": "get camera attributes from current camera/orbit controls",
     "issues": "",

@@ -4,13 +4,6 @@
     "id": "5f010aa8-971b-4697-ac64-cc871f94d381",
     "created": 1513356658385,
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Variable",
-                "subType": "string"
-            }
-        ],
         "portsOut": [
             {
                 "type": "2",

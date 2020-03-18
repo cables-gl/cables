@@ -34,8 +34,9 @@
                 "name": "array 1"
             },
             {
-                "type": "5",
-                "name": "Math function"
+                "type": "0",
+                "name": "Math function index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
