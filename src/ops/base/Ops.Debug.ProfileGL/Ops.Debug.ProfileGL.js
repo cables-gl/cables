@@ -3,6 +3,7 @@ const next=op.outTrigger("Next");
 const dump=op.inTriggerButton("Debug one Frame");
 
 const gl=op.patch.cgl.gl;
+const cgl=op.patch.cgl;
 
 var originals={};
 var counts={};
@@ -58,6 +59,8 @@ function resetStats()
 
 function start()
 {
+    console.log("-----------------------------");
+    cgl.debugOneFrame=true;
     for(var i in gl)
     {
         if(typeof gl[i]=='function')
@@ -72,6 +75,7 @@ function start()
 
 function end()
 {
+    cgl.debugOneFrame=false;
     for(var i in gl)
         if(typeof gl[i]=='function')
             gl[i]=originals[i];

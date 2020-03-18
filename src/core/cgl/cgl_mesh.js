@@ -72,18 +72,20 @@ Mesh.prototype.updateVertices = function (geom)
 
 Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
 {
-    for (var i = 0; i < this._attributes.length; i++)
+    for(var i = 0; i < this._attributes.length; i++)
     {
-        if (this._attributes[i].name == attrName)
+        if(this._attributes[i].name == attrName)
         {
-            if (!this._attributes[i].pointer) this._attributes[i].pointer = [];
-            this._attributes[i].pointer.push({
-                loc: -1,
-                name,
-                stride,
-                offset,
-                instanced: attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
-            });
+            if(!this._attributes[i].pointer) this._attributes[i].pointer = [];
+
+            this._attributes[i].pointer.push(
+                {
+                    loc: -1,
+                    name,
+                    stride,
+                    offset,
+                    instanced: attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
+                });
         }
     }
 };
@@ -98,11 +100,14 @@ Mesh.prototype._bufferArray=function(array,attr)
     var floatArray = null;
     if(!array)return;
 
+
+    if(this._cgl.debugOneFrame)
+    {
+        console.log("_bufferArray",array.length,attr.name);
+    }
+
     if (!(array instanceof Float32Array))
     {
-        // if(!attr.floatArray)console.log("no attr arr");
-        // else console.log("Attr array");
-
         if(attr && attr.floatArray && attr.floatArray.length==array.length)
         {
             attr.floatArray.set(array);
@@ -112,18 +117,19 @@ Mesh.prototype._bufferArray=function(array,attr)
         {
             floatArray = new Float32Array(array);
 
+            if(this._cgl.debugOneFrame)
+            {
+                console.log("_bufferArray create new float32array",array.length,attr.name);
+            }
+        
             profileData.profileNonTypedAttrib++;
             profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
         }
     }
     else floatArray = array;
 
-    if(attr && floatArray)
-    {
-        attr.floatArray=floatArray;
-    }
+    if(attr && floatArray) attr.floatArray=floatArray;
 
-    
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
 
@@ -191,21 +197,14 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
         numItems,
         startItem: 0,
         instanced,
-        type,
+        type
     };
 
     this._bufferArray(array,attr);
 
     if (name == CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib = attr;
     this._attributes.push(attr);
-
     this._attribLocs = {};
-    // for(var at in this._attribLocs)
-    //     for(i=0;i<this._attributes.length;i++)
-    //     {
-    //         this._attribLocs[at].length=0;
-    //         // this._attributes[i].loc=-1;
-    //     }
 
     return attr;
 };

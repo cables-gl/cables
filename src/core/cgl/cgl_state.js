@@ -21,6 +21,7 @@ const Context = function (_patch)
     this.clearCanvasTransparent = true;
     this.clearCanvasDepth = true;
     this.patch = _patch;
+    this.debugOneFrame=false;
 
     this.maxTextureUnits=0;
     this.currentProgram=null;
