@@ -1,0 +1,80 @@
+{
+    "authorName": "cables",
+    "id": "d01fcb62-dd50-4748-b8d7-bc7851b1b84d",
+    "created": 1583495367450,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "execute"
+            },
+            {
+                "type": "0",
+                "name": "diffuse r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "diffuse a",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Double Sided",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Receive Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Algorithm index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Algorithm",
+                "group": "Shadow Settings"
+            },
+            {
+                "type": "0",
+                "name": "Samples index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Samples",
+                "group": "Shadow Settings"
+            },
+            {
+                "type": "0",
+                "name": "Poisson Spread",
+                "group": "Shadow Settings",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Admin.ShadowLambertMaterial_v2"
+    }
+}
