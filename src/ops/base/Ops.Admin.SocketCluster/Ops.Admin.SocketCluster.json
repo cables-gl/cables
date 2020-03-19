@@ -1,0 +1,20 @@
+{
+    "id": "82482405-6345-41c7-a6d2-1c63f01b09fb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1584534300415
+        },
+        {
+            "message": " added lib: socketcluster-client.js",
+            "author": "stephan",
+            "date": 1584534406220
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1584534305112,
+    "libs": [
+        "socketcluster-client.js"
+    ]
+}
