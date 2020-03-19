@@ -1,7 +1,8 @@
 const inSocket = op.inObject("socket");
 const inTopic = op.inString("topic", "main");
-const outData = op.outNumber("data");
 const clientIdOut = op.outString("client id");
+const outData = op.outNumber("data");
+const outTrigger = op.outTrigger("received");
 
 const init = () =>
 {
@@ -17,6 +18,7 @@ const init = () =>
                 {
                     outData.set(obj.payload);
                     clientIdOut.set(obj.clientId);
+                    outTrigger.trigger();
                 }
             }
         })();
