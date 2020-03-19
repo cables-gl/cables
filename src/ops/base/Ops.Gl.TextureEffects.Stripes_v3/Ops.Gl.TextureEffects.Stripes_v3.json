@@ -1,0 +1,89 @@
+{
+    "id": "1943e09f-014c-4411-b39e-5db9d49a4972",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1583496113544
+        }
+    ],
+    "authorName": "andro",
+    "created": 1583496134924,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gradients",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Circular",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Stripes_v3"
+    }
+}
