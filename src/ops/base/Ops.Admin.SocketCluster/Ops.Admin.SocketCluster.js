@@ -1,5 +1,6 @@
 const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
 const allowSend = op.inBool("allow send", false);
+const channelName = op.inString("channel", op.patchId);
 const ready = op.outBool("ready", false);
 const errorOut = op.outObject("error", null);
 const socketOut = op.outObject("socket");
@@ -15,8 +16,9 @@ const init = () =>
         port: 443,
     });
     socket.allowSend = allowSend.get();
+    socket.channelName = channelName.get();
     sendOut.set(allowSend.get());
-    console.log("socketcluster clientId", socket.clientId);
+    console.info("socketcluster clientId", socket.clientId);
     (async () =>
     {
         for await (const { error } of socket.listener("error"))
@@ -33,25 +35,8 @@ const init = () =>
             socketOut.set(socket);
         }
     })();
-    (async () =>
-    {
-        const channel = socket.subscribe("cablescontrol");
-        for await (const obj of channel)
-        {
-            if (obj.data.clientId != socket.clientId)
-            {
-                if (obj.data.data.allowSend)
-                {
-                    socket.allowSend = false;
-                    socketOut.set(socket);
-                    sendOut.set(false);
-                }
-            }
-        }
-    })();
 };
 
-init();
 allowSend.onChange = () =>
 {
     if (socket)
@@ -59,7 +44,42 @@ allowSend.onChange = () =>
         socket.allowSend = allowSend.get();
         socketOut.set(socket);
         sendOut.set(allowSend.get());
-        const payload = { channel: "cablescontrol", clientId: socket.clientId, data: { allowSend: allowSend.get() } };
-        socket.transmit("cablescontrol", payload);
+        const payload = { topic: "cablescontrol", clientId: socket.clientId, payload: { allowSend: allowSend.get() } };
+        socket.transmitPublish(channelName.get() + "/control", payload);
     }
 };
+
+channelName.onChange = () =>
+{
+    if (socket)
+    {
+        socket.channelName = channelName.get();
+        socketOut.set(socket);
+
+        // subscribe to controllmessages for this channel
+        (async () =>
+        {
+            const channel = socket.subscribe(channelName.get() + "/control");
+            for await (const obj of channel)
+            {
+                if (obj.clientId != socket.clientId)
+                {
+                    handleControlMessage(obj);
+                }
+            }
+        })();
+    }
+};
+
+const handleControlMessage = (message) =>
+{
+    // other client wants to take over control, switch state
+    if (message.payload.allowSend)
+    {
+        socket.allowSend = false;
+        socketOut.set(socket);
+        sendOut.set(false);
+    }
+};
+
+init();

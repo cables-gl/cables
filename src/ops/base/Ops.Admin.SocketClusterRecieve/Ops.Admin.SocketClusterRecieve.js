@@ -1,5 +1,5 @@
 const inSocket = op.inObject("socket");
-const inChannel = op.inString("channel", "main");
+const inTopic = op.inString("topic", "main");
 const outData = op.outNumber("data");
 
 const init = () =>
@@ -9,12 +9,12 @@ const init = () =>
     {
         (async () =>
         {
-            const channel = socket.subscribe("main");
+            const channel = socket.subscribe(socket.channelName);
             for await (const obj of channel)
             {
-                if ((obj.data.clientId != socket.clientId) && obj.data.channel == inChannel.get())
+                if (obj.clientId != socket.clientId && obj.topic == inTopic.get())
                 {
-                    outData.set(obj.data.data);
+                    outData.set(obj.payload);
                 }
             }
         })();
