@@ -16,5 +16,48 @@
     "created": 1584534305112,
     "libs": [
         "socketcluster-client.js"
-    ]
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "server hostname"
+            },
+            {
+                "type": "0",
+                "name": "allow send",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "allow multiple senders",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "channel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "ready",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "0",
+                "name": "can send",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "error"
+            }
+        ],
+        "name": "Ops.Admin.SocketCluster"
+    }
 }

@@ -1,7 +1,7 @@
 const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
 const allowSend = op.inBool("allow send", false);
 const allowMultipleSenders = op.inBool("allow multiple senders", false);
-const channelName = op.inString("channel", op.patchId);
+const channelName = op.inString("channel", CABLES.generateUUID());
 const ready = op.outBool("ready", false);
 const socketOut = op.outObject("socket");
 const sendOut = op.outBool("can send", false);
