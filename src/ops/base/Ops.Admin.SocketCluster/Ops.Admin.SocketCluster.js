@@ -1,5 +1,6 @@
 const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
 const allowSend = op.inBool("allow send", false);
+const allowMultipleSenders = op.inBool("allow multiple senders", false);
 const channelName = op.inString("channel", op.patchId);
 const ready = op.outBool("ready", false);
 const socketOut = op.outObject("socket");
@@ -73,8 +74,8 @@ channelName.onChange = () =>
 
 const handleControlMessage = (message) =>
 {
-    // other client wants to take over control, switch state
-    if (message.payload.allowSend)
+    // other client wants to take over control, switch state if multiple senders are not allowed
+    if (message.payload.allowSend && !allowMultipleSenders.get())
     {
         socket.allowSend = false;
         socketOut.set(socket);
