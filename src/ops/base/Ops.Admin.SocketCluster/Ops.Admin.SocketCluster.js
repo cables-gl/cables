@@ -2,9 +2,9 @@ const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
 const allowSend = op.inBool("allow send", false);
 const channelName = op.inString("channel", op.patchId);
 const ready = op.outBool("ready", false);
-const errorOut = op.outObject("error", null);
 const socketOut = op.outObject("socket");
 const sendOut = op.outBool("can send", false);
+const errorOut = op.outObject("error", null);
 
 let socket = null;
 const init = () =>

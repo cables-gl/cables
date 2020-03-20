@@ -11,7 +11,7 @@ const init = () =>
     {
         (async () =>
         {
-            const channel = socket.subscribe(socket.channelName);
+            const channel = socket.subscribe(socket.channelName + "/numbers");
             for await (const obj of channel)
             {
                 if (obj.clientId != socket.clientId && obj.topic == inTopic.get())

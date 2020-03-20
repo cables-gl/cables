@@ -1,0 +1,34 @@
+{
+    "id": "c573796c-26b7-425b-b3b1-d5545e855984",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1584535172895
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1584535177009,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "send"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            },
+            {
+                "type": "0",
+                "name": "data",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterSendNumber"
+    }
+}
