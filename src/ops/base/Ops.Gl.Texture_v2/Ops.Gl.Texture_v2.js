@@ -92,7 +92,7 @@ function realReload(nocache)
             },{
                 anisotropic:cgl_aniso,
                 wrap:cgl_wrap,
-                flip:!flip.get(),
+                flip:flip.get(),
                 unpackAlpha:unpackAlpha.get(),
                 filter:cgl_filter
             });

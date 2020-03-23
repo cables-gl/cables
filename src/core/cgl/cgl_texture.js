@@ -279,7 +279,6 @@ Texture.prototype.initTexture = function (img, filter)
     this.flipped=!this.flip;
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
-
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
     this._setFilter();
