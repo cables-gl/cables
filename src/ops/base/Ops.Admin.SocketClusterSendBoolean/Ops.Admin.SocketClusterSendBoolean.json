@@ -1,0 +1,27 @@
+{
+    "authorName": "stephan",
+    "id": "c688fd16-0a79-490e-b143-364d3693bffc",
+    "created": 1584703301848,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "send"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            },
+            {
+                "type": "0",
+                "name": "data",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterSendBoolean"
+    }
+}
