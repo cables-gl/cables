@@ -49,11 +49,19 @@ var m=mat4.create();
 
 updateLimit();
 
-inRot.onChange=
-    inTranslates.onChange=
-    inScales.onChange=reset;
 
-var arrayChangedColor=false;
+var
+    arrayChangedColor=false,
+    arrayChangedTrans=false;
+
+inRot.onChange=
+    inScales.onChange=
+    inTranslates.onChange=
+        function()
+        {
+            arrayChangedTrans=true;
+            recalc=true;
+        };
 
 inColor.onChange =function()
 {
@@ -158,7 +166,7 @@ function setupArray()
 
     mesh.numInstances=num;
 
-    mesh.addAttribute('instMat', matrixArray, 16);
+    if(arrayChangedTrans) mesh.addAttribute('instMat', matrixArray, 16);
     if(arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
     arrayChangedColor=false;
