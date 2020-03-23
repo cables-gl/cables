@@ -49,9 +49,23 @@ var m=mat4.create();
 
 updateLimit();
 
-inRot.onChange=inColor.onChange =
+inRot.onChange=
     inTranslates.onChange=
     inScales.onChange=reset;
+
+var arrayChangedColor=false;
+
+inColor.onChange =function()
+{
+    arrayChangedColor=true;
+    recalc=true;
+};
+
+function reset()
+{
+    recalc=true;
+}
+
 
 inBlendMode.onChange = setBlendMode;
 
@@ -86,10 +100,6 @@ function removeModule()
     }
 }
 
-function reset()
-{
-    recalc=true;
-}
 
 
 function setupArray()
@@ -132,7 +142,7 @@ function setupArray()
             mat4.rotateZ(m,m,rotArr[i*3+2]*CGL.DEG2RAD);
         }
 
-        if(colArr)
+        if(arrayChangedColor && colArr)
         {
             instColorArray[i*4+0] = colArr[i*4+0];
             instColorArray[i*4+1] = colArr[i*4+1];
@@ -149,8 +159,9 @@ function setupArray()
     mesh.numInstances=num;
 
     mesh.addAttribute('instMat', matrixArray, 16);
-    mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
+    if(arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
+    arrayChangedColor=false;
     recalc=false;
 }
 

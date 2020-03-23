@@ -579,12 +579,15 @@ Mesh.prototype.render = function (shader)
 
 Mesh.prototype.setNumInstances = function (n)
 {
-    this._numInstances = n;
-    if (n > 0)
+    if(this._numInstances != n)
     {
-        var indexArr = new Float32Array(n);
-        for (var i = 0; i < n; i++) indexArr[i] = i;
-        this.setAttribute("instanceIndex", indexArr, 1, { instanced: true });
+        this._numInstances = n;
+        if (n > 0)
+        {
+            var indexArr = new Float32Array(n);
+            for (var i = 0; i < n; i++) indexArr[i] = i;
+            this.setAttribute("instanceIndex", indexArr, 1, { instanced: true });
+        }
     }
 };
 
