@@ -328,11 +328,12 @@ export const cacheBust = function (url)
 export const basename = function (url)
 {
     var name="";
-    var parts=url.split("/");
+    if(!url)return "";
+    const parts=(url+"").split("/");
     if(parts.length>0)
     {
-        var str=parts[parts.length-1];
-        var parts2=str.split("?");
+        const str=parts[parts.length-1];
+        const parts2=str.split("?");
         name=parts2[0];
         parts2=name.split(".");
         name=parts2[0];
