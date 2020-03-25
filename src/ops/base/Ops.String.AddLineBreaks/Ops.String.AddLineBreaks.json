@@ -1,0 +1,32 @@
+{
+    "id": "9746be6e-bf86-4a5f-86d9-d3b1c26d7f28",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585122285914
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1585122519426,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Max Characters per Line",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.AddLineBreaks"
+    }
+}
