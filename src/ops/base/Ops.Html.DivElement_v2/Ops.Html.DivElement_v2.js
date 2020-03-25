@@ -64,7 +64,7 @@ function updateText()
     if(oldStr===str) return;
     oldStr=str;
 
-    if(inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    if(str && inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
     div.innerHTML=str;
     outElement.set(null);

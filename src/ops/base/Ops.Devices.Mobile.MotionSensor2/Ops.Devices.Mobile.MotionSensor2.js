@@ -70,9 +70,9 @@ function handleDeviceOrientation (event)
 
 req.onTriggered=function()
 {
-    if(DeviceMotionEvent && DeviceMotionEvent.requestPermission)
+    if(window.DeviceMotionEvent && window.DeviceMotionEvent.requestPermission)
     {
-        DeviceMotionEvent.requestPermission()
+        window.DeviceMotionEvent.requestPermission()
             .then(response =>
             {
                 if (response == 'granted')
@@ -83,7 +83,7 @@ req.onTriggered=function()
             .catch(console.error);
 
 
-        DeviceOrientationEvent.requestPermission()
+        window.DeviceOrientationEvent.requestPermission()
             .then(response =>
             {
                 if (response == 'granted')
