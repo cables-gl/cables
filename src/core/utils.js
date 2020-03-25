@@ -332,8 +332,8 @@ export const basename = function (url)
     const parts=(url+"").split("/");
     if(parts.length>0)
     {
-        const str=parts[parts.length-1];
-        const parts2=str.split("?");
+        var str=parts[parts.length-1];
+        var parts2=str.split("?");
         name=parts2[0];
         parts2=name.split(".");
         name=parts2[0];
