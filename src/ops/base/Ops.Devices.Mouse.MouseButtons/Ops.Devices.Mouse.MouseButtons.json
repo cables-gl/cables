@@ -72,14 +72,22 @@
     "authorName": "pandur",
     "id": "c7e5e545-c8a1-4fef-85c2-45422b947f0d",
     "created": 1507284375026,
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Click Left",
+                "text": "only outputs a click if pressed duration is less than 0.2 ms"
+            },
+            {
+                "name": "Click Right",
+                "text": "only outputs a click if pressed duration is less than 0.2 ms"
+            }
+        ]
+    },
+    "issues": "",
+    "youtubeids": []
 }

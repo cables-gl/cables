@@ -1,4 +1,6 @@
 const render=op.inTrigger("render");
+const inIdentity=op.inValueBool("Identity",false);
+
 const trigger=op.outTrigger("trigger");
 
 var m=mat4.create();
@@ -12,6 +14,9 @@ render.onTriggered=function()
 {
     if(!matrix.get())return;
     cgl.pushViewMatrix();
+
+    if(inIdentity.get()) mat4.identity(cgl.vMatrix);
+
     mat4.multiply(cgl.vMatrix,cgl.vMatrix,matrix.get());
 
     trigger.trigger();

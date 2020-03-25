@@ -17,7 +17,9 @@ const float mulSize=0.01;
 
 void main()
 {
-   texCoord= attrTexOffsets+attrTexCoord*attrTcSize;
+   texCoord=(attrTexOffsets+attrTexCoord*attrTcSize);
+   texCoord.y=1.0-texCoord.y;
+
    mat4 instModelMat=instMat;
 //   instModelMat[3][0]*=scale;
 

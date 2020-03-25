@@ -10,6 +10,12 @@ function update()
 {
     var filename=fn.get()||'';
 
+    if(!filename || filename=="")
+    {
+        path.set("");
+        return;
+    }
+
     if(CABLES.UI)
     {
         filename='/assets/'+gui.project()._id+'/'+filename;

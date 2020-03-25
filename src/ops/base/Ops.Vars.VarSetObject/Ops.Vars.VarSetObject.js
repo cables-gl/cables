@@ -4,6 +4,9 @@ op.varName=op.inValueSelect("Variable",[],"",true);
 op.varName.onChange=updateName;
 val.onChange=update;
 
+val.ignoreValueSerialize = true;
+
+
 // op.patch.addVariableListener(updateVarNamesDropdown);
 op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
 

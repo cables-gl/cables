@@ -17,8 +17,13 @@ const
     a = op.inValueSlider("a", 1),
 
     inShadow = op.inBool("Shadow", false),
+
+    inTexColor=op.inTexture("Texture Color"),
+    inTexMask=op.inTexture("Texture Mask"),
+
     inPosArr=op.inArray("Positions"),
     inScaleArr=op.inArray("Scalings"),
+
     next=op.outTrigger("Next"),
     outArr=op.outArray("Positions Original"),
     outLines=op.outNumber("Num Lines"),
@@ -62,13 +67,17 @@ shader.setSource(attachments.textmeshsdf_vert,attachments.textmeshsdf_frag);
 
 const
     uniTex=new CGL.Uniform(shader,'t','tex',0),
-    uniTexMul=new CGL.Uniform(shader,'t','texMul',1),
+    uniTexMul=new CGL.Uniform(shader,'t','texMulColor',1),
     uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',2),
     uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a),
     uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0);
 
+inTexColor.onChange=
+inTexMask.onChange=
 inShadow.onChange=
-doSDF.onChange=updateDefines;
+doSDF.onChange=
+    updateDefines;
+
 updateDefines();
 
 align.onChange=
@@ -88,6 +97,9 @@ function updateDefines()
 {
     shader.toggleDefine("SDF",doSDF.get());
     shader.toggleDefine("SHADOW",inShadow.get());
+
+    shader.toggleDefine("TEXTURE_COLOR",inTexColor.isLinked());
+    shader.toggleDefine("TEXTURE_MASK",inTexMask.isLinked());
 }
 
 
@@ -134,7 +146,7 @@ function updateAlign()
 
     vec3.set(alignVec, 0,offY,0);
 
-    console.log({minX,maxX,minY,maxY});
+    // console.log({minX,maxX,minY,maxY});
 
     widthAll=(Math.abs(minX-maxX));
     heightAll=(Math.abs(minY-maxY));
@@ -170,9 +182,11 @@ render.onTriggered=function()
         if(inTex.get())
         {
             cgl.setTexture(0,inTex.get().tex);
-            // console.log([inTex.get().width,inTex.get().height]);
             uniTexSize.setValue([inTex.get().width,inTex.get().height]);
         }
+
+        if(inTexColor.get()) cgl.setTexture(1,inTexColor.get().tex);
+        if(inTexMask.get()) cgl.setTexture(2,inTexMask.get().tex);
 
         // var mulTex=inMulTex.get();
         // if(mulTex)cgl.setTexture(1,mulTex.tex);
@@ -301,7 +315,7 @@ function generateMesh()
     avgHeight/=font.chars.length;
     avgHeight*=mulSize;
 
-    console.log({avgHeight,font});
+    // console.log({avgHeight,font});
 
     for(var s=0;s<strings.length;s++)
     {
@@ -335,8 +349,8 @@ function generateMesh()
 
             const charWidth=char.width/font.common.scaleW;
             const charHeight=char.height/font.common.scaleH;
-            const charOffsetY=char.yoffset/font.common.scaleH;
-            const charOffsetX=char.xoffset/font.common.scaleH;
+            const charOffsetY=(char.yoffset/font.common.scaleH);
+            const charOffsetX=char.xoffset/font.common.scaleW;
 
             tcSizes.push(charWidth,charHeight);
 

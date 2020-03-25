@@ -1,5 +1,4 @@
 {
-    "updated": 1536068653420,
     "authorName": "pandur",
     "id": "333c6f6d-a9b2-47a5-9a0e-0bb3c6e7a0c1",
     "created": 1520334358051,
@@ -20,10 +19,15 @@
             },
             {
                 "type": "0",
+                "name": "Patch Id",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Namespace",
                 "subType": "string"
             }
         ],
-        "name": "Ops.Cables.PatchConfig"
+        "name": "Ops.Cables.PatchInfo"
     }
 }

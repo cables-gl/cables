@@ -63,7 +63,7 @@ function show()
     eleContainer.dataset.op=op.id;
     var parent = op.patch.cgl.canvas.parentElement;
 
-    eleContainer.style="overflow:auto;width:100%;height:100%;position:absolute;z-index:9999";
+    eleContainer.style="overflow:auto;top:0;width:100%;height:100%;position:absolute;z-index:9999";
     updateBgColor();
 
     parent.appendChild(eleContainer);

@@ -93,5 +93,42 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.WaveformGradient_v2"
+    },
+    "summary": "Generate different texture waveforms. Sine, sawtooth and triangle.",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Frequency",
+                "text": "Amount of repetitions"
+            },
+            {
+                "name": "Pow factor",
+                "text": "Alters the gradient effect"
+            },
+            {
+                "name": "Offset",
+                "text": "Offset on the X axis"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotate the texture"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

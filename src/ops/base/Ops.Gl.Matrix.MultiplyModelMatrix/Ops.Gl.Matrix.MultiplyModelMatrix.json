@@ -24,7 +24,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.multiplyModelMatrix"
+        "name": "Ops.Gl.Matrix.MultiplyModelMatrix"
     },
     "summary": "multiply model matrix",
     "docs": {

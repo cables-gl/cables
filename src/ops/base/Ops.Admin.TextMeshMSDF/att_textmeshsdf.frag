@@ -4,6 +4,14 @@ IN vec2 texCoord;
 UNI vec4 color;
 UNI vec2 texSize;
 
+#ifdef TEXTURE_COLOR
+UNI sampler2D texMulColor;
+#endif
+#ifdef TEXTURE_MASK
+UNI sampler2D texMulMask;
+#endif
+
+
 #ifdef SHADOW
     UNI float shadowWidth;
 #endif
@@ -16,15 +24,25 @@ float median(float r, float g, float b)
 
 void main()
 {
-    vec4 col=texture(tex,texCoord);
+    vec4 bgColor=vec4(0.0,0.0,0.0,0.0);
+    vec4 fgColor=color;
+    float opacity=1.0;
 
     #ifndef SDF
-        outColor=col;
+        outColor=texture(tex,texCoord);;
         return;
     #endif
 
-    vec4 bgColor=vec4(0.0,0.0,0.0,0.0);
-    vec4 fgColor=color;
+
+    #ifdef TEXTURE_COLOR
+        fgColor.rgb *= texture(texMulColor, vec2(0.0,0.0)).rgb; //todo texcoords from char positioning
+    #endif
+    #ifdef TEXTURE_MASK
+        opacity *= texture(texMulMask, vec2(0.0,0.0)).r; //todo texcoords from char positioning
+    #endif
+
+
+
 
     float pxRange=4.0;
 
@@ -38,9 +56,10 @@ void main()
 
     vec2 msdfUnit = pxRange/texSize;
     vec3 smpl = texture(tex, texCoord).rgb;
-    float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
+    float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.6;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));
-    float opacity = clamp(sigDist + 0.5, 0.0, 1.0);
+    opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
+
 
     outColor = mix(outColor, fgColor, opacity*color.a);
 }

@@ -87,6 +87,14 @@
                 "subType": "boolean"
             },
             {
+                "type": "2",
+                "name": "Texture Color"
+            },
+            {
+                "type": "2",
+                "name": "Texture Mask"
+            },
+            {
                 "type": "3",
                 "name": "Positions"
             },

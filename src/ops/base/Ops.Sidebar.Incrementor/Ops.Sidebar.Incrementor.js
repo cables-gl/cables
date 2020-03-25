@@ -1,6 +1,6 @@
 // inputs
 const parentPort = op.inObject("link");
-const labelPort = op.inValueString("Label", "Stepper");
+const labelPort = op.inValueString("Label", "Incrementor");
 const inMin = op.inValue("min", 0);
 const inMax = op.inValue("max", 10);
 const inStepsize = op.inValue("stepsize", 1);
