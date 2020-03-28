@@ -1,0 +1,81 @@
+{
+    "id": "a1be1b16-7afe-4fa5-ae31-7853e2fdb063",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585311485374
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1585311491788,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "extrude",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Zero Values",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "invert",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "colorize",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "colorize add",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v2"
+    }
+}
