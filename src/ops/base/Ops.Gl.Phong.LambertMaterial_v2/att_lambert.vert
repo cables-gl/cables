@@ -58,6 +58,7 @@ void main()
         bitangent=attrBiTangent;
 
     texCoord=attrTexCoord;
+    texCoord.y = 1. - texCoord.y;
 
     norm=attrVertNormal;
 

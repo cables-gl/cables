@@ -82,14 +82,14 @@ function getScreenCoord()
 
     if(inOrtho.get())
     {
-        x=( ( vp[2]  * 0.5 + trans[0] * vp[2] * 0.5 / 1 ));
-        y=( ( vp[3]  * 0.5 - trans[1] * vp[3] * 0.5 / 1 ));
+        x=( ( cgl.canvasWidth  * 0.5 + trans[0] * cgl.canvasWidth * 0.5 / 1 ));
+        y=( ( cgl.canvasHeight  * 0.5 - trans[1] * cgl.canvasHeight * 0.5 / 1 ));
 
     }
     else
     {
-        x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
-        y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+        x=( cgl.canvasWidth-( cgl.canvasWidth  * 0.5 - trans[0] * cgl.canvasWidth * 0.5 / trans[2] ));
+        y=( cgl.canvasHeight-( cgl.canvasHeight  * 0.5 + trans[1] * cgl.canvasHeight * 0.5 / trans[2] ));
     }
 
     // console.log(x,y );

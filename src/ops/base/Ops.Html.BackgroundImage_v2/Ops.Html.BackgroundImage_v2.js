@@ -18,14 +18,34 @@ inRepeat.onChange=
 active.onChange=
 filename.onChange=update;
 
-
 var ele=null;
+
+function remove()
+{
+    if(ele)
+    {
+        ele.style['background-image']='none';
+        ele.style['background-size']='initial';
+        ele.style['background-position']='initial';
+        ele.style['background-repeat']='initial';
+
+    }
+}
 
 function update()
 {
+
+    if(!inEle.get())
+    {
+        remove();
+        return;
+    }
+
     op.setUiAttrib({"extendTitle":CABLES.basename(filename.get())});
 
     ele=inEle.get();
+
+
     if(ele && ele.style && filename.get())
     {
         if(!active.get())
@@ -40,11 +60,11 @@ function update()
             ele.style['background-repeat']=inRepeat.get();
         }
     }
-    else
-    {
-        // really needed ?
-        setTimeout(update,100);
-    }
+    // else
+    // {
+    //     // really needed ?
+    //     setTimeout(update,100);
+    // }
 
     outEle.set(inEle.get());
 }

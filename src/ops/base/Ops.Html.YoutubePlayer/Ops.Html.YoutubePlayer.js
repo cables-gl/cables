@@ -44,7 +44,6 @@ inStyle.set(defaultStyle);
 
 function update()
 {
-    console.log("loaded!",active.get());
     if(!active.get())
     {
         removeEle();
@@ -99,7 +98,6 @@ function updateURL()
     if(urlParams.length>0) urlParamsStr='?'+urlParams.join('&');
 
     const urlStr='https://www.youtube.com/embed/'+src.get()+urlParamsStr;
-    console.log(urlStr);
     if(element) element.setAttribute('src',urlStr);
 
     outDirectLink.set("https://www.youtube.com/watch?v="+src.get());

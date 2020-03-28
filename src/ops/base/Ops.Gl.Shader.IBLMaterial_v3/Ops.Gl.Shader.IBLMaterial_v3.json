@@ -94,6 +94,11 @@
             },
             {
                 "type": "0",
+                "name": "Opacity Source Channel",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Opacity",
                 "subType": "number"
             },
