@@ -48,7 +48,7 @@ element.style.background="#222";
 element.style.color="white";
 element.style["font-family"]="monospace";
 element.style["font-size"]="12px";
-element.style["z-index"]="9999";
+element.style["z-index"]="99999";
 element.innerHTML="&nbsp;";
 
 var container = op.patch.cgl.canvas.parentElement;
@@ -135,7 +135,7 @@ function createCanvas()
     canvas.style.left  = "0px";
     canvas.style.cursor  = "pointer";
     canvas.style.top  = "-64px";
-    canvas.style['z-index']   = "9998";
+    canvas.style['z-index']   = "99998";
     container.appendChild(canvas);
     ctx = canvas.getContext('2d');
 
@@ -164,7 +164,7 @@ function updateText()
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
     }
 
-    element.innerHTML=fps+" fps | "+Math.round(childsTime*100)/100+"ms "+warn;
+    element.innerHTML=fps+" fps / "+Math.round(childsTime*100)/100+"ms "+warn;
     if(op.patch.loading.getProgress()!=1.0)
     {
         element.innerHTML+="<br/>loading "+Math.round(op.patch.loading.getProgress()*100)+'% '+loadingChars[ (++loadingCounter)%loadingChars.length ];

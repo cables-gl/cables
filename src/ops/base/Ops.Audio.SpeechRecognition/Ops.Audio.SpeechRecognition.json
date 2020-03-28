@@ -1,15 +1,43 @@
 {
     "layout": {
-        "portsOut": [
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Language"
+            },
             {
                 "type": "0",
-                "name": "Result",
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Confidence",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Supported",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "New Result"
+            },
+            {
+                "type": "0",
+                "name": "Started",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Audio.SpeechRecognition"
     },
-    "updated": 1537933701129,
     "authorName": "pandur",
     "id": "e7ccd7a9-54e9-4637-b8cb-011708dfc0dd",
     "created": 1537933698978,
