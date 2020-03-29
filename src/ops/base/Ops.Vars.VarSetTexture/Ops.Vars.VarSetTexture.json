@@ -19,6 +19,11 @@
             {
                 "type": "2",
                 "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
             }
         ],
         "name": "Ops.Vars.VarSetTexture"

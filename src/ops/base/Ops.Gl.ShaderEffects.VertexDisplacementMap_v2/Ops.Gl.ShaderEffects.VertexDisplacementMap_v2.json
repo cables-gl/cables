@@ -1,4 +1,14 @@
 {
+    "id": "a1be1b16-7afe-4fa5-ae31-7853e2fdb063",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585311485374
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1585311491788,
     "layout": {
         "portsIn": [
             {
@@ -8,6 +18,16 @@
             {
                 "type": "2",
                 "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "mode",
+                "subType": "string"
             },
             {
                 "type": "0",
@@ -48,16 +68,6 @@
                 "type": "0",
                 "name": "colorize add",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "mode index",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "mode",
-                "subType": "string"
             }
         ],
         "portsOut": [
@@ -66,19 +76,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap"
-    },
-    "author": "55d744634cdc152216eb9aad",
-    "authorName": "pandur",
-    "id": "94ffa0de-2926-4d02-842e-a1ad6f5846c2",
-    "created": 1508265581954,
-    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
-    "docs": {
-        "ports": []
-    },
-    "youtubeid": "NjG85Qbbl0w",
-    "collections": [
-        "vertexDeformers"
-    ],
-    "relatedops": null
+        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v2"
+    }
 }

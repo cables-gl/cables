@@ -5,6 +5,7 @@ const
     closeButton=op.inBool("Show Closebutton",true),
     inOpacity=op.inFloatSlider("Opacity",0.5),
     outVisible=op.outBool("Visible"),
+    outClosed=op.outTrigger("Closed"),
     outElement=op.outObject("Element");
 
 const eleContainer = document.createElement('div');
@@ -47,6 +48,7 @@ function hide()
 {
     outVisible.set(false);
     eleContainer.style.display="none";
+    outClosed.trigger();
 }
 
 function updateBgColor()

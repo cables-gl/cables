@@ -56,7 +56,7 @@ void main()
 
     vec2 msdfUnit = pxRange/texSize;
     vec3 smpl = texture(tex, texCoord).rgb;
-    float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.6;
+    float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));
     opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
 

@@ -46,6 +46,10 @@
                 "subType": "boolean"
             },
             {
+                "type": "1",
+                "name": "Closed"
+            },
+            {
                 "type": "2",
                 "name": "Element"
             }
