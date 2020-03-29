@@ -42,6 +42,11 @@
                 "type": "0",
                 "name": "Invalid if empty",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid if 0",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

@@ -4,7 +4,7 @@ const
     result=op.outString("Result"),
     confidence=op.outNumber("Confidence"),
     outSupported=op.outBool("Supported",false),
-    outResult=op.outTrigger("New Result"),
+    outResult=op.outTrigger("New Result",""),
     outActive=op.outBool("Started",false);
 
 

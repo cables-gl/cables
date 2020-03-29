@@ -51,8 +51,8 @@ updateLimit();
 
 
 var
-    arrayChangedColor=false,
-    arrayChangedTrans=false;
+    arrayChangedColor=true,
+    arrayChangedTrans=true;
 
 inRot.onChange=
     inScales.onChange=
@@ -65,6 +65,9 @@ inRot.onChange=
 
 inColor.onChange =function()
 {
+
+    if(shader) shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
+
     arrayChangedColor=true;
     recalc=true;
 };
@@ -158,6 +161,15 @@ function setupArray()
             instColorArray[i*4+3] = colArr[i*4+3];
         }
 
+        if(arrayChangedColor && !colArr)
+        {
+            instColorArray[i*4+0] = 1;
+            instColorArray[i*4+1] = 1;
+            instColorArray[i*4+2] = 1;
+            instColorArray[i*4+3] = 1;
+
+        }
+
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
         else mat4.scale(m,m,[1,1,1]);
 
@@ -219,12 +231,9 @@ function doRender()
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
 
-        if (!inColor.get()) {
-            shader.removeDefine("COLORIZE_INSTANCES");
-        }
-        else {
-            shader.define("COLORIZE_INSTANCES");
-        }
+        shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
+
+console.log(mesh);
     }
 
 
