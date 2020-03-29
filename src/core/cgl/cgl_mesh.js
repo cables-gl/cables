@@ -206,6 +206,10 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     this._attributes.push(attr);
     this._attribLocs = {};
 
+
+
+
+
     return attr;
 };
 
@@ -355,8 +359,28 @@ Mesh.prototype._preBind = function (shader)
     }
 };
 
+Mesh.prototype._checkAttrLengths = function ()
+{
+    // check length
+
+    for (var i = 0; i < this._attributes.length; i++)
+    {
+        if(this._attributes[0].floatArray.length/this._attributes[0].itemSize != 
+                this._attributes[i].floatArray.length/this._attributes[i].itemSize)
+        {
+            console.warn(
+                this._geom.name+": "+this._attributes[i].name+
+                " wrong attr length. is:",this._attributes[i].floatArray.length/this._attributes[i].itemSize,
+                " should be:",this._attributes[0].floatArray.length/this._attributes[0].itemSize,
+                );
+        }
+    }
+
+}
+
 Mesh.prototype._bind = function (shader)
 {
+
     if (shader != this._lastShader) this.unBind();
     var attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
@@ -368,6 +392,8 @@ Mesh.prototype._bind = function (shader)
     {
         this._lastAttrUpdate = shader.lastCompile;
         for (i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
+
+        this._checkAttrLengths();
     }
 
     for (i = 0; i < this._attributes.length; i++)

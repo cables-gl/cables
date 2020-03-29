@@ -65,15 +65,16 @@ inRot.onChange=
 
 inColor.onChange =function()
 {
-
-    if(shader) shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
-
     arrayChangedColor=true;
     recalc=true;
+
+    if(shader) shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
 };
 
 function reset()
 {
+    arrayChangedColor=true,
+    arrayChangedTrans=true;
     recalc=true;
 }
 
@@ -117,6 +118,7 @@ function setupArray()
 {
 
     if(!mesh) return;
+    if(!shader)return;
 
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
@@ -126,10 +128,8 @@ function setupArray()
     var colArr = inColor.get();
     var scales=inScales.get();
 
-    if (shader) {
-        if (colArr) shader.define("COLORIZE_INSTANCES");
-        else shader.removeDefine("COLORIZE_INSTANCES");
-    }
+    shader.toggleDefine("COLORIZE_INSTANCES",colArr);
+
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
     if(instColorArray.length!=num*4) instColorArray=new Float32Array(num*4);
 
@@ -187,8 +187,7 @@ function setupArray()
 
 function updateLimit()
 {
-    if(doLimit.get()) inLimit.setUiAttribs({hidePort:false,greyout:false});
-        else inLimit.setUiAttribs({hidePort:true,greyout:true});
+    inLimit.setUiAttribs({"hidePort":!doLimit.get(),"greyout":!doLimit.get()});
 }
 
 function doRender()
@@ -196,9 +195,8 @@ function doRender()
     if(!mesh)return;
 
     if(recalc) setupArray();
-    if(recalc)return;
 
-    if(matrixArray.length<=1)return;
+    // if(matrixArray.length<=1)return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
@@ -233,7 +231,8 @@ function doRender()
 
         shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
 
-console.log(mesh);
+
+
     }
 
 
