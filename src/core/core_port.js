@@ -662,10 +662,10 @@ Port.prototype.isHidden = function ()
  * @param {onTriggeredCallback} callback
  * @description set callback, which will be executed when port was triggered (usually output port)
  */
-Port.prototype._onTriggered = function ()
+Port.prototype._onTriggered = function (a)
 {
     this.parent.updateAnims();
-    if (this.parent.enabled && this.onTriggered) this.onTriggered();
+    if (this.parent.enabled && this.onTriggered) this.onTriggered(a);
 };
 
 Port.prototype._onSetProfiling = function (v)

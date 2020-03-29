@@ -12,8 +12,11 @@ const
     presetNames=op.inDropDown("Preset",[]),
     presetCreate=op.inTriggerButton("Create new"),
     presetUpdate=op.inTriggerButton("Update"),
+    move=op.inUiTriggerButtons("move",["↑","↓"]),
+
     presetDelete=op.inTriggerButton("Delete"),
     presetRename=op.inTriggerButton("Rename"),
+
     addPort=op.addOutPort(new CABLES.Port(op,"Create Variable",CABLES.OP_PORT_TYPE_DYNAMIC)),
     outNum=op.outNumber("Num Presets",0),
     outNumCurrentPreset=op.outNumber("current Preset",0),
@@ -29,13 +32,14 @@ var interpolate=0;
 presetB.changeAlways=true;
 presetA.changeAlways=true;
 
-op.setPortGroup("Manage Presets",[presetCreate,presetUpdate,presetDelete,presetNames,presetRename]);
+op.setPortGroup("Manage Presets",[presetCreate,presetUpdate,presetDelete,presetNames,move,presetRename]);
 dataPort.setUiAttribs({"hideParam":true,"hidePort":true});
 id.setUiAttribs({"hideParam":true,"hidePort":true});
 setsPort.setUiAttribs({"hideParam":true,"hidePort":true});
 presetCreate.setUiAttribs({"hidePort":true});
 presetUpdate.setUiAttribs({"hidePort":true});
 presetDelete.setUiAttribs({"hidePort":true});
+presetRename.setUiAttribs({"hidePort":true});
 presetNames.setUiAttribs({"showIndex":true});
 presetCreate.setUiAttribs({"buttonTitle":"Create New Preset"});
 presetDelete.setUiAttribs({"buttonTitleClass":"button-small"});
@@ -52,7 +56,25 @@ updateDropdown();
 updatePreset();
 updateButtons();
 
-op.onLoaded=function()
+function movePreset(from, to) {
+  var f = presets.splice(from, 1)[0];
+  presets.splice(to, 0, f);
+}
+
+
+move.onTriggered=function(which)
+{
+    const current=presetNames.get();
+    const idx=presetNames.uiAttribs.values.indexOf(current);
+
+    if(which=="↓") movePreset(idx,idx+1);
+    if(which=="↑") movePreset(idx,Math.max(0,idx-1));
+
+    updateDropdown();
+    updatePreset();
+};
+
+op.init=function()
 {
     if(presets.length>0 && data.length==0)
     {
@@ -152,8 +174,14 @@ function updateFade()
 }
 
 
+function saveData()
+{
+    savePresets();
+}
+
 function savePresets()
 {
+    dataPort.set(JSON.stringify(data));
 
     setsPort.set(JSON.stringify(presets));
     outNum.set(presets.length);
@@ -175,6 +203,9 @@ function updateButtons()
     presetDelete.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
     presetUpdate.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
     presetRename.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
+
+
+    move.setUiAttribs({"greyout":presetNames.uiAttribs.values.length==0});
 
     const preset=getPreset(presetNames.get());
     if(preset)
@@ -327,11 +358,6 @@ dataPort.onChange=function()
 };
 
 
-function saveData()
-{
-    dataPort.set(JSON.stringify(data));
-    setDebugOutput();
-}
 
 function listenPortChange(port,varname)
 {

@@ -17,9 +17,25 @@
     "layout": {
         "portsIn": [
             {
+                "type": "5",
+                "name": "data"
+            },
+            {
+                "type": "5",
+                "name": "sets"
+            },
+            {
+                "type": "5",
+                "name": "presetid"
+            },
+            {
                 "type": "0",
                 "name": "Interpolation index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Interpolation"
             },
             {
                 "type": "0",
@@ -40,6 +56,32 @@
                 "type": "0",
                 "name": "Preset index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Preset",
+                "group": "Manage Presets",
+                "subType": "string"
+            },
+            {
+                "type": "1",
+                "name": "Create new",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "Update",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "move",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
+                "name": "Delete",
+                "group": "Manage Presets"
             },
             {
                 "type": "1",
