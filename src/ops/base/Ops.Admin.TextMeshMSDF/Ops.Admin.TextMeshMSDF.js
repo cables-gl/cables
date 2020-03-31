@@ -242,6 +242,13 @@ render.onTriggered=function()
     next.trigger();
 };
 
+function getChar(chStr)
+{
+    return font.characters[String(chStr)]||font.characters['?']||font.characters['_']||font.characters['X'];
+
+}
+
+
 function generateMesh()
 {
     outArr.set(null);
@@ -326,8 +333,9 @@ function generateMesh()
         for(var i=0;i<numChars;i++)
         {
             const chStr=txt.substring(i,i+1);
-            const char=font.characters[String(chStr)];
+            const char=getChar(chStr);
             if(char) lineWidth+=char.xadvance*mulSize+letterSpace.get();
+
         }
 
         var pos=0;
@@ -339,7 +347,7 @@ function generateMesh()
             var m=mat4.create();
 
             const chStr=txt.substring(i,i+1);
-            const char=font.characters[String(chStr)];
+            const char=getChar(chStr);
 
             if(!char)continue;
 

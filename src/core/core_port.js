@@ -62,6 +62,8 @@ const Port = function (__parent, name, type, uiAttribs)
 
     this._warnedDeprecated = false;
     this._useVariableName = null;
+
+    this._tempLastUiValue=null;
     // this.onUiAttrChange=null;
 
     Object.defineProperty(this, "val", {
