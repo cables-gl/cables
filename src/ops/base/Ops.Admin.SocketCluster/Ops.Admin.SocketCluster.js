@@ -1,41 +1,65 @@
 const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
+const serverPort = op.inValue("server port", 443);
+const serverSecure = op.inBool("use ssl", true);
 const allowSend = op.inBool("allow send", false);
 const allowMultipleSenders = op.inBool("allow multiple senders", false);
 const channelName = op.inString("channel", CABLES.generateUUID());
 const ready = op.outBool("ready", false);
 const socketOut = op.outObject("socket");
+const clientIdOut = op.outString("own client id");
 const sendOut = op.outBool("can send", false);
 const errorOut = op.outObject("error", null);
 
 let socket = null;
+let initDelay = null;
+
 const init = () =>
 {
-    errorOut.set(null);
-    socket = socketClusterClient.create({
-        hostname: serverHostname.get(),
-        secure: true,
-        port: 443,
-    });
-    socket.allowSend = allowSend.get();
-    socket.channelName = channelName.get();
-    sendOut.set(allowSend.get());
-    console.info("socketcluster clientId", socket.clientId);
-    (async () =>
+    if (!initDelay)
     {
-        for await (const { error } of socket.listener("error"))
+        initDelay = setTimeout(() =>
         {
-            console.error(error);
-            errorOut.set(error);
-        }
-    })();
-    (async () =>
-    {
-        for await (const event of socket.listener("connect"))
-        {
-            ready.set(true);
-            socketOut.set(socket);
-        }
-    })();
+            errorOut.set(null);
+            if (socket)
+            {
+                socket.disconnect();
+                socket = null;
+            }
+            socket = socketClusterClient.create({
+                hostname: serverHostname.get(),
+                secure: serverSecure.get(),
+                port: serverPort.get(),
+            });
+            socket.allowSend = allowSend.get();
+            socket.channelName = channelName.get();
+            sendOut.set(allowSend.get());
+            clientIdOut.set(socket.clientId);
+            console.info("socketcluster clientId", socket.clientId);
+            (async () =>
+            {
+                for await (const { error } of socket.listener("error"))
+                {
+                    op.setUiError("connectionError", `error in socketcluster connection (${error.name})`, 2);
+                    console.error(error);
+                    errorOut.set(error);
+                    ready.set(false);
+                }
+            })();
+            (async () =>
+            {
+                for await (const event of socket.listener("connect"))
+                {
+                    op.setUiError("connectionError", null);
+                    ready.set(true);
+                    socketOut.set(socket);
+                }
+            })();
+            serverHostname.onChange = init;
+            serverPort.onChange = init;
+            serverSecure.onChange = init;
+            initDelay = null;
+        }, 1000);
+    }
 };
 
 allowSend.onChange = () =>
@@ -83,4 +107,4 @@ const handleControlMessage = (message) =>
     }
 };
 
-init();
+op.init = init;
