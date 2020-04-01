@@ -233,6 +233,29 @@ Patch.prototype.setVolume = function (v)
 };
 
 /**
+ * get asset path
+ * @function getAssetPath
+ * @memberof Patch
+ * @instance
+ */
+Patch.prototype.getAssetPath=function()
+{
+    if(CABLES.UI)
+    {
+        return '/assets/'+gui.project()._id+'/';
+    }
+    else if(document.location.href.indexOf("cables.gl")>0)
+    {
+        const parts=document.location.href.split("/");
+        return '/assets/'+parts[parts.length-1]+'/';
+    }
+    else
+    {
+        return "assets/"+filename;
+    }
+}
+
+/**
  * get url/filepath for a filename
  * this uses prefixAssetpath in exported patches
  * @function getFilePath
@@ -240,7 +263,6 @@ Patch.prototype.setVolume = function (v)
  * @instance
  * @param {String} filename
  * @return {String} url
-
  */
 Patch.prototype.getFilePath = function (filename)
 {
