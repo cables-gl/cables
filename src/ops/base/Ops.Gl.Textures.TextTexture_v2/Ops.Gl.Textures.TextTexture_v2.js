@@ -112,7 +112,7 @@ function refresh()
             count++;
             if(count>500)
             {
-                op.log("too many iterations - maximize size")
+                op.log("too many iterations - maximize size");
                 break;
             }
             fontSize-=10;

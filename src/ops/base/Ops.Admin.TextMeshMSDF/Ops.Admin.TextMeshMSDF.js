@@ -1,10 +1,14 @@
 // https://soimy.github.io/msdf-bmfont-xml/
 
+// antialiasing:
+// https://github.com/Chlumsky/msdfgen/issues/22
+
 const
     render=op.inTrigger("Render"),
     str=op.inString("Text","cables"),
     inTex=op.inTexture("Texture"),
     inFontData=op.inObject("Font Data"),
+    scale=op.inFloat("Scale",1),
     letterSpace=op.inFloat("Letter Spacing",0),
     lineHeight=op.inFloat("Line Height",1),
     doSDF=op.inBool("SDF",true),
@@ -49,6 +53,7 @@ var mesh=null;
 var disabled=false;
 var valignMode=1;
 const alignVec=vec3.create();
+const vScale=vec3.create();
 var heightAll=0,widthAll=0;
 var strings=[];
 var offY=0;
@@ -72,6 +77,8 @@ const
     uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a),
     uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0);
 
+scale.onChange=updateScale;
+
 inTexColor.onChange=
 inTexMask.onChange=
 inShadow.onChange=
@@ -79,6 +86,7 @@ doSDF.onChange=
     updateDefines;
 
 updateDefines();
+updateScale();
 
 align.onChange=
     str.onChange=
@@ -130,6 +138,14 @@ inFontData.onChange=function()
 
     needUpdate=true;
 };
+
+
+function updateScale()
+{
+    var s=scale.get();
+    vec3.set(vScale, s,s,s);
+}
+
 
 
 function updateAlign()
@@ -230,9 +246,16 @@ render.onTriggered=function()
 
         if(cgl.getShader())cgl.getShader().define('INSTANCING');
 
-        if(!disabled) mesh.render(cgl.getShader());
+        if(!disabled)
+        {
+            mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
+
+            mesh.render(cgl.getShader());
+        }
 
         cgl.popModelMatrix();
+
+
 
         cgl.setTexture(0,null);
         cgl.popShader();
