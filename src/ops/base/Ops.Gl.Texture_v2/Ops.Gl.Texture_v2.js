@@ -5,6 +5,7 @@ const
     aniso=op.inSwitch("Anisotropic",[0,1,2,4,8,16],0),
     flip=op.inValueBool("Flip",false),
     unpackAlpha=op.inValueBool("Pre Multiplied Alpha",false),
+    active=op.inValueBool("Active",true),
     textureOut=op.outTexture("Texture"),
     width=op.outValue("Width"),
     height=op.outValue("Height"),
@@ -19,6 +20,7 @@ op.toWorkPortsNeedToBeLinked(textureOut);
 
 const cgl=op.patch.cgl;
 
+var loadedFilename=null;
 var loadingId=null;
 var tex=null;
 var cgl_filter=0;
@@ -38,6 +40,15 @@ wrap.set('repeat');
 
 textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
+active.onChange=function()
+{
+    if(active.get())
+    {
+        if(loadedFilename!=filename.get()) realReload();
+    }
+    else textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+};
+
 var setTempTexture=function()
 {
     var t=CGL.Texture.getTempTexture(cgl);
@@ -55,10 +66,14 @@ function reloadSoon(nocache)
 
 function realReload(nocache)
 {
+    if(!active.get())return;
     if(!loadingId)loadingId=cgl.patch.loading.start('textureOp',filename.get());
 
     var url=op.patch.getFilePath(String(filename.get()));
     if(nocache)url+='?rnd='+CABLES.generateUUID();
+
+
+    loadedFilename=filename.get();
 
     if((filename.get() && filename.get().length>1))
     {
