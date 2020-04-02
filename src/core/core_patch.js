@@ -232,6 +232,7 @@ Patch.prototype.setVolume = function (v)
     for (var i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
 };
 
+
 /**
  * get asset path
  * @function getAssetPath
@@ -251,7 +252,7 @@ Patch.prototype.getAssetPath=function()
     }
     else
     {
-        return "assets/"+filename;
+        return "assets/";
     }
 }
 
