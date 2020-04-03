@@ -39,7 +39,8 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
     {
         Log.log("op create: data.vars.objName");
-        var op = this._patch.addOp(data.vars.objName);
+        if(this._patch.getOpById(data.vars.opId))return;
+        var op = this._patch.addOp(data.vars.objName,null,data.vars.opId);
         op.id = data.vars.opId;
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -133,6 +134,10 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
     this.bc.postMessage(JSON.stringify(data));
     // Log.log(data);
 };
+
+
+
+
 
 // -------------
 
