@@ -32,8 +32,9 @@ const PatchConnectionReceiver = function (patch, options, connector)
 
 PatchConnectionReceiver.prototype._receive = function (ev)
 {
+    console.log("ev", ev);
     var data = {};
-    if (ev.event) data = ev;
+    if (ev.hasOwnProperty('event')) data = ev;
     else data = JSON.parse(ev.data);
 
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
