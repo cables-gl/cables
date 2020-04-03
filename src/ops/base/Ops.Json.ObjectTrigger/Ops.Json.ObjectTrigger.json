@@ -5,15 +5,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Object"
-            },
-            {
                 "type": "1",
                 "name": "Trigger"
+            },
+            {
+                "type": "2",
+                "name": "Object"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "2",
                 "name": "Result"

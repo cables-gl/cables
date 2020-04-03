@@ -14,11 +14,7 @@ IN float attrVertIndex;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
-#ifdef HAS_TEXTURES
-    #ifdef HAS_TEXTURE_DIFFUSE
-        UNI vec4 inTextureTransforms;
-    #endif
-#endif
+
 OUT vec3 norm;
 OUT mat4 mvMatrix;
 OUT mat3 normalMatrix;
@@ -61,18 +57,6 @@ void main()
     texCoord.y = 1. - texCoord.y;
 
     norm=attrVertNormal;
-
-    #ifdef HAS_TEXTURES
-        float repeatX = inTextureTransforms.TEX_REPEAT_X;
-        float offsetX = inTextureTransforms.TEX_OFFSET_X;
-        float repeatY = inTextureTransforms.TEX_REPEAT_Y;
-        float offsetY = inTextureTransforms.TEX_OFFSET_Y;
-
-        texCoord.x *= repeatX;
-        texCoord.x += offsetX;
-        texCoord.y *= repeatY;
-        texCoord.y += offsetY;
-    #endif
 
     {{MODULE_VERTEX_POSITION}}
 

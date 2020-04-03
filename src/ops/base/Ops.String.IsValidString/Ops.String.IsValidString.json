@@ -51,6 +51,10 @@
         ],
         "portsOut": [
             {
+                "type": "5",
+                "name": "Last Valid String"
+            },
+            {
                 "type": "0",
                 "name": "Is Valid",
                 "subType": "boolean"

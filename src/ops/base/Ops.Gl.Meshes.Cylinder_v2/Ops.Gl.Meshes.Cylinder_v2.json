@@ -42,6 +42,16 @@
             },
             {
                 "type": "0",
+                "name": "UV mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "UV mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Flip Mapping",
                 "subType": "boolean"
             },

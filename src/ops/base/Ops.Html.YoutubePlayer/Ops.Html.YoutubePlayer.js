@@ -24,6 +24,7 @@ op.setPortGroup("Youtube Options",[paramAutoplay,paramCC,paramLoop,paramFs,param
 
 
 var element=null;
+var initialized=false;
 
 paramStart.onChange=
     paramAutoplay.onChange=
@@ -35,10 +36,19 @@ paramStart.onChange=
 
 elId.onChange=updateID;
 inStyle.onChange=updateStyle;
-active.onChange=update;
 op.onDelete=removeEle;
-op.onLoaded=update;
-op.init=update;
+
+active.onChange=update;
+
+console.log("---");
+
+op.init=function()
+{
+    console.log("yt init",active.get());
+    initialized=true;
+    setTimeout(()=>{update();},100);
+
+};
 
 inStyle.set(defaultStyle);
 
@@ -56,9 +66,12 @@ function update()
 
 function addElement()
 {
+    if(!initialized)return;
     if(element) removeEle();
 
-    var canvas = op.patch.cgl.canvas.parentElement;
+console.log("ADD youtube element!",initialized);
+
+    var parent = op.patch.cgl.canvas.parentElement;
     element = document.createElement('iframe');
     element.dataset.op=op.id;
     element.style.position="absolute";
@@ -66,7 +79,7 @@ function addElement()
     element.frameborder=0;
     element.allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
 
-    canvas.appendChild(element);
+    parent.appendChild(element);
 
     outEle.set(element);
 
@@ -79,11 +92,14 @@ function removeEle()
 {
     if(element) element.parentNode.removeChild(element);
     element=null;
+    outEle.set(null);
 }
 
 
 function updateURL()
 {
+    if(!initialized)return;
+    if(!active.get()) return;
     var urlParams=[];
 
     if(paramAutoplay.get()) urlParams.push('autoplay=1');
@@ -98,7 +114,14 @@ function updateURL()
     if(urlParams.length>0) urlParamsStr='?'+urlParams.join('&');
 
     const urlStr='https://www.youtube.com/embed/'+src.get()+urlParamsStr;
-    if(element) element.setAttribute('src',urlStr);
+    if(element)
+    {
+        element.setAttribute('src',urlStr);
+        console.log("yes set element src");
+    }
+    else console.log("no element for src url...");
+
+    console.log("urlStr",urlStr);
 
     outDirectLink.set("https://www.youtube.com/watch?v="+src.get());
 
@@ -108,10 +131,12 @@ function updateURL()
 
 function updateID()
 {
+    if(!active.get()) return;
     if(element) element.setAttribute('id',elId.get());
 }
 
 function updateStyle()
 {
+    if(!active.get()) return;
     if(element) element.style=inStyle.get();
 }

@@ -33,45 +33,9 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Double Sided",
-                "group": "Material Properties",
-                "subType": "boolean"
-            },
-            {
                 "type": "2",
                 "name": "Diffuse Texture",
                 "group": "Texture & Transforms"
-            },
-            {
-                "type": "0",
-                "name": "Colorize Texture",
-                "group": "Texture & Transforms",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Diffuse Repeat X",
-                "group": "Texture & Transforms",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Diffuse Repeat Y",
-                "group": "Texture & Transforms",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Texture Offset X",
-                "group": "Texture & Transforms",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Texture Offset Y",
-                "group": "Texture & Transforms",
-                "subType": "number"
             }
         ],
         "portsOut": [

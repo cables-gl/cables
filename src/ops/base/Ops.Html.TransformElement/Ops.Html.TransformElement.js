@@ -8,8 +8,6 @@ const
     inAlignVert=op.inSwitch("Align Vertical",["Left","Center","Right"],"Left"),
     inAlignHor=op.inSwitch("Align Horizontal",["Top","Center","Bottom"],"Top");
 
-
-
 const cgl=op.patch.cgl;
 var x=0;
 var y=0;
@@ -22,11 +20,10 @@ op.onDelete=removeProperties;
 
 var oldEle=null;
 
-
 inAlignHor.onChange=
-inAlignVert.onChange=
-inRotate.onChange=
-inScale.onChange=updateTransform;
+    inAlignVert.onChange=
+    inRotate.onChange=
+    inScale.onChange=updateTransform;
 
 function updateTransform()
 {
@@ -47,7 +44,6 @@ function updateTransform()
 
     const str="translate("+translateStr+") scale("+inScale.get()+") rotate("+inRotate.get()+"deg)";
     ele.style.transform=str;
-
 }
 
 inEle.onChange=function()
@@ -77,24 +73,21 @@ function getScreenCoord()
     vec3.transformMat4(pos, [0,0,0], m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-
     var vp=cgl.getViewPort();
+
+    const w=cgl.canvasWidth/cgl.pixelDensity;
+    const h=cgl.canvasHeight/cgl.pixelDensity;
 
     if(inOrtho.get())
     {
-        x=( ( cgl.canvasWidth  * 0.5 + trans[0] * cgl.canvasWidth * 0.5 / 1 ));
-        y=( ( cgl.canvasHeight  * 0.5 - trans[1] * cgl.canvasHeight * 0.5 / 1 ));
-
+        x=( ( w * 0.5 + trans[0] * w * 0.5 / 1 ));
+        y=( ( h * 0.5 - trans[1] * h * 0.5 / 1 ));
     }
     else
     {
-        x=( cgl.canvasWidth-( cgl.canvasWidth  * 0.5 - trans[0] * cgl.canvasWidth * 0.5 / trans[2] ));
-        y=( cgl.canvasHeight-( cgl.canvasHeight  * 0.5 + trans[1] * cgl.canvasHeight * 0.5 / trans[2] ));
+        x=( w - ( w * 0.5 - trans[0] * w * 0.5 / trans[2] ));
+        y=( h - ( h * 0.5 + trans[1] * h * 0.5 / trans[2] ));
     }
-
-    // console.log(x,y );
-
-
 }
 
 function setProperties()
@@ -120,12 +113,11 @@ function removeProperties(ele)
         ele.style.top='initial';
         ele.style.left='initial';
         ele.style.transform='initial';
-
     }
 }
 
 op.addEventListener("onEnabledChange",function(enabled)
 {
     if(enabled) setProperties();
-        else removeProperties();
+    else removeProperties();
 });
