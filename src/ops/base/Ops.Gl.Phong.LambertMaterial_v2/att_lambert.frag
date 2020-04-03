@@ -63,6 +63,15 @@ float CalculateFalloff(float radius, float falloff, float distLight)
     return min(1.0,max(t, 0.0));
 }
 
+float Falloff2(vec3 lightDirection, float falloff) {
+    float distanceSquared = dot(lightDirection, lightDirection);
+    float factor = distanceSquared * falloff;
+    float smoothFactor = clamp(1. - factor * factor, 0., 1.);
+    float attenuation = smoothFactor * smoothFactor;
+
+    return attenuation * 1. / max(distanceSquared, 0.00001);
+}
+
 float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
     vec3 spotLightDirection = normalize(lightPosition-conePointAt);
     float spotAngle = dot(-lightDirection, spotLightDirection);
@@ -107,24 +116,25 @@ void main()
     for(int l=0;l<NUM_LIGHTS;l++) {
         if (lights[l].type == AMBIENT) {
             col.rgb += lights[l].lightProperties.INTENSITY*lights[l].color;
+        } else {
+            vec3 lightModelDiff=lights[l].position - modelPos.xyz;
+            vec3 lightDirection = normalize(lightModelDiff);
+
+            if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
+
+            float lambert = 1.; // inout variable
+            vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, matColor, lambert);
+
+            if (lights[l].type != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
+            if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
+                lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
+                lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
+                lightDirection
+            );
+
+            diffuseColor *= lights[l].lightProperties.INTENSITY;
+            col.rgb += diffuseColor;
         }
-        vec3 lightModelDiff=lights[l].position - modelPos.xyz;
-        vec3 lightDirection = normalize(lightModelDiff);
-
-        if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
-
-        float lambert = 1.; // inout variable
-        vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, matColor, lambert);
-
-        if (lights[l].type != DIRECTIONAL) diffuseColor *= CalculateFalloff(lights[l].lightProperties.RADIUS, lights[l].lightProperties.FALLOFF, length(lightModelDiff));
-        if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
-            lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
-            lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
-            lightDirection
-        );
-
-        diffuseColor *= lights[l].lightProperties.INTENSITY;
-        col.rgb += diffuseColor;
     }
 
 

@@ -33,17 +33,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Align Vertical"
-            },
-            {
                 "type": "0",
                 "name": "Align Horizontal index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Align Horizontal"
             }
         ],
         "portsOut": [

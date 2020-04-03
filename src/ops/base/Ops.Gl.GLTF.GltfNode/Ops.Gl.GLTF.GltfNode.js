@@ -59,14 +59,6 @@ inExec.onTriggered=function()
             node.transform(cgl);
         }
 
-        // render(cgl,
-        //     dontTransform,
-        //     dontDrawMesh,
-        //     ignoreMaterial,
-        //     ignoreChilds,
-        //     drawHidden,
-        //     _time)
-
         node.render(cgl, false, !inDraw.get(), inIgnMaterial.get(),!inChilds.get(),true);
     }
 

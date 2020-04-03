@@ -1,12 +1,12 @@
 
-vec2 MODtc=texCoord;
+vec2 MOD_tc=texCoord;
 
 #ifdef MOD_FLIPY
-    MODtc.y=1.0-MODtc.y;
+    MOD_tc.y=1.0-MOD_tc.y;
 #endif
 
 
-float MOD_texVal=texture2D( MOD_texture, vec2(MODtc.x+MOD_offsetX,MODtc.y+MOD_offsetY) ).b;
+float MOD_texVal=texture2D( MOD_texture, vec2(MOD_tc.x+MOD_offsetX,MOD_tc.y+MOD_offsetY) ).b;
 
 #ifdef MOD_HEIGHTMAP_INVERT
    MOD_texVal=1.0-MOD_texVal;

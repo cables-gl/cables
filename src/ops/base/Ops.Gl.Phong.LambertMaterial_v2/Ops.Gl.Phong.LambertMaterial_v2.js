@@ -26,18 +26,9 @@ inColorizeTexture.onChange = function() {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 }
 
-const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 1);
-const inDiffuseRepeatY = op.inFloat("Diffuse Repeat Y", 1);
-const inTextureOffsetX = op.inFloat("Texture Offset X", 0);
-const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
 op.setPortGroup("Texture & Transforms", [
     inDiffuseTexture,
-    inColorizeTexture,
-    inColorizeTexture,
-    inDiffuseRepeatY,
-    inDiffuseRepeatX,
-    inTextureOffsetX,
-    inTextureOffsetY
+    inColorizeTexture
 ]);
 
 function updateDiffuseTexture() {
@@ -45,17 +36,10 @@ function updateDiffuseTexture() {
         if(!shader.hasDefine('HAS_TEXTURE_DIFFUSE')) {
             shader.define('HAS_TEXTURE_DIFFUSE');
             if (!diffuseTextureUniform) diffuseTextureUniform = new CGL.Uniform(shader, 't', 'texDiffuse', 0);
-            if (!textureTransformsUniform) textureTransformsUniform = new CGL.Uniform(
-                shader,
-                '4f',
-                'inTextureTransforms',
-                inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY
-            );
         }
     } else {
         shader.removeUniform('texDiffuse');
         shader.removeDefine('HAS_TEXTURE_DIFFUSE');
-        textureTransformsUniform = null;
         diffuseTextureUniform = null;
     }
 }
