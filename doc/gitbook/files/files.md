@@ -4,10 +4,10 @@
 You can drag files into the cables window to upload them.
 Image and Audio files do not need to be converted.
 
-Possible file types: 
+Possible file types:
 
-Image/Video: `.png`, `.jpg`, `.gif`, `.svg`, `.mp4`, 
-Audio: `.ogg`, `.mp3`, `.m4a`, `.aac`,`.wav`, 
+Image/Video: `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`, `.mp4`,
+Audio: `.ogg`, `.mp3`, `.m4a`, `.aac`,`.wav`,
 
 
 
