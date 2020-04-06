@@ -12,7 +12,9 @@ update();
 
 function getCssContent()
 {
-    return code.get();
+    var css=code.get();
+    css = css.replace(/{{ASSETPATH}}/g, op.patch.getAssetPath());
+    return css;
 }
 
 function update()

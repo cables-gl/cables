@@ -15,11 +15,6 @@
             },
             {
                 "type": "0",
-                "name": "projection mode",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "frustum near",
                 "subType": "number"
             },
@@ -37,11 +32,6 @@
                 "type": "0",
                 "name": "Auto Aspect Ratio",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Aspect Ratio",
-                "subType": "number"
             },
             {
                 "type": "0",

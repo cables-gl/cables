@@ -3,7 +3,7 @@ const numx=op.inValueInt("num x",5),
     numz=op.inValueInt("num z",5),
     mul=op.inValue("mul",1),
     center=op.inValueBool("center",true),
-    outArray = op.outArray("Array out");
+    outArray = op.outArray("Array out"),
     idx=op.outValue("Total points"),
     arrayLengthOut = op.outNumber("Array length");
 
@@ -15,7 +15,7 @@ numy.onChange=
 numz.onChange=
 mul.onChange=
 center.onChange= update;
-//center.onChange= function ()
+
 function update()
 {
     newArr.length = 0;
@@ -30,6 +30,7 @@ function update()
         subY=( (numy.get()-1)*mul.get())/2.0;
         subZ=( (numz.get()-1)*mul.get())/2.0;
     }
+
     var xTemp = 0;
     var yTemp = 0;
     var zTemp = 0;

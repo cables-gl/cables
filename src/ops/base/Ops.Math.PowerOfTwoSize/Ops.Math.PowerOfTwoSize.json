@@ -16,8 +16,8 @@
             },
             {
                 "type": "0",
-                "name": "Strategy",
-                "subType": "string"
+                "name": "Strategy index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

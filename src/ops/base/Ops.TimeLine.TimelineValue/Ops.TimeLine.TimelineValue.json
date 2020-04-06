@@ -16,8 +16,8 @@
             },
             {
                 "type": "0",
-                "name": "Unit",
-                "subType": "string"
+                "name": "Unit index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

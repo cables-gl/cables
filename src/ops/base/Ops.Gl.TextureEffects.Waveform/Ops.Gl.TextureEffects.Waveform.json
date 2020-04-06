@@ -10,9 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
+                "name": "Blend Mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -22,8 +21,8 @@
             },
             {
                 "type": "0",
-                "name": "Waveform",
-                "subType": "string"
+                "name": "Waveform index",
+                "subType": "integer"
             },
             {
                 "type": "0",

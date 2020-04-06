@@ -1,39 +1,97 @@
-var result=op.outValue("Result");
+const
+    inLang=op.inString("Language","us-US"),
+    active=op.inBool("Active",true),
+    result=op.outString("Result"),
+    confidence=op.outNumber("Confidence"),
+    outSupported=op.outBool("Supported",false),
+    outResult=op.outTrigger("New Result",""),
+    outActive=op.outBool("Started",false);
 
-window.SpeechRecognition = window.SpeechRecognition||window.webkitSpeechRecognition || mozSpeechRecognition || window.mozSpeechRecognition;
 
-var recognition=new SpeechRecognition();
+active.onChange=startStop;
 
-recognition.lang = "en-US";
-recognition.interimResults = false;
-recognition.maxAlternatives = 0;
-recognition.continuous=true;
-SpeechRecognition.interimResults=true;
-recognition.start();
+window.SpeechRecognition = window.SpeechRecognition||window.webkitSpeechRecognition || window.mozSpeechRecognition;
 
-function restart()
+var recognition=null;
+
+inLang.onChange=changeLang;
+
+function startStop()
 {
-    recognition.stop();
-    recognition.abort();
-    try
-    {
-        recognition.start();
+    if(!recognition) return;
+
+    try{
+
+        if(active.get()!=outActive.get())
+        {
+            if(active.get()) recognition.start();
+            else recognition.abort();
+        }
+
     }
-    catch(err)
+    catch(e)
     {
-        // recognition.start();
+        console.log(e);
     }
 }
 
-recognition.onstart = function() { op.log('recognition start'); };
-recognition.onresult = function(event) { op.log('recognition result'); };
-recognition.onstop = function(event) { op.log('recognition stop'); };
-recognition.onerror = function(event) { op.log('recognition error',result); };
 
-
-recognition.onresult = function(event)
+op.init=function()
 {
-    result.set(event.results[0][0].transcript);
-    op.log('You said: ', event.results[0][0].transcript);
-    restart();
+    startStop();
 };
+
+function changeLang()
+{
+    if(!recognition)return;
+
+    recognition.lang = inLang.get();
+    recognition.stop();
+
+    setTimeout(function(){
+        try{recognition.start();}catch(e){}},500);
+
+
+
+}
+
+startAPI();
+
+function startAPI()
+{
+    if(window.SpeechRecognition)
+    {
+        outSupported.set(true);
+
+        if(recognition) recognition.abort();
+
+        recognition=new SpeechRecognition();
+
+        recognition.lang = inLang.get();
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 0;
+        recognition.continuous=true;
+        SpeechRecognition.interimResults=true;
+
+
+        recognition.onstart = function() { outActive.set(true); };
+        recognition.onstop = function(event) { outActive.set(false); };
+
+        recognition.onresult = function(event) { op.log('recognition result'); };
+        recognition.onerror = function(event) { op.log('recognition error',result); };
+
+
+        recognition.onresult = function(event)
+        {
+            const idx=event.results.length-1;
+
+            result.set(event.results[idx][0].transcript);
+            confidence.set(event.results[idx][0].confidence);
+            op.log('You said: ', event.results[idx][0].transcript);
+            outResult.trigger();
+        };
+
+    }
+
+}
+

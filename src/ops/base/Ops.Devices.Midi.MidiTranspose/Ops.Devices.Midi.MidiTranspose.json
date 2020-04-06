@@ -18,9 +18,8 @@
             },
             {
                 "type": "0",
-                "name": "MIDI Channel",
-                "group": "MIDI",
-                "subType": "string"
+                "name": "MIDI Channel index",
+                "subType": "integer"
             },
             {
                 "type": "0",

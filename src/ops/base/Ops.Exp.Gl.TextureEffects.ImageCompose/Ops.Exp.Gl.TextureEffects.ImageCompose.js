@@ -157,7 +157,6 @@ var doRender=function()
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex );
 
-
         cgl.gl.clearColor(0,0,0,0);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT );
 

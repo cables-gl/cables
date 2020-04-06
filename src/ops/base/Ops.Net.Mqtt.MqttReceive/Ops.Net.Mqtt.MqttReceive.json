@@ -44,8 +44,8 @@
             },
             {
                 "type": "0",
-                "name": "Message Type",
-                "subType": "string"
+                "name": "Message Type index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

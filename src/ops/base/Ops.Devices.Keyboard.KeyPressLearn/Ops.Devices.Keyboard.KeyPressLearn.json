@@ -13,8 +13,8 @@
             },
             {
                 "type": "0",
-                "name": "Mod Key",
-                "subType": "string"
+                "name": "Mod Key index",
+                "subType": "integer"
             },
             {
                 "type": "0",

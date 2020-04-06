@@ -38,5 +38,36 @@
             }
         ],
         "name": "Ops.Anim.AverageInterpolation_v2"
+    },
+    "summary": "Weighted average interpolation",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "iM3BTNHwmsA"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Update",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Value",
+                "text": "The value to interpolate"
+            },
+            {
+                "name": "Divisor",
+                "text": "Higher numbers result in slower interpolation towards the current value"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "The interpolated result"
+            }
+        ]
     }
 }

@@ -66,7 +66,7 @@ start.onTriggered=function()
                 var reader = new FileReader();
                 // var out = new Blob([byte], {type: "application/pdf"});
                 reader.onload = function(e){
-                  window.location.href = reader.result;
+                    window.location.href = reader.result;
                 //   window.open(reader.result);
                 };
                 reader.readAsDataURL(blob);
@@ -78,9 +78,7 @@ start.onTriggered=function()
                 // anchor.target='_blank';
                 anchor.href=URL.createObjectURL(blob);
                 document.body.appendChild(anchor);
-
                 anchor.click();
-
             }
             outFinished.set(true);
         });

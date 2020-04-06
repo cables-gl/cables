@@ -1,5 +1,4 @@
 {
-    "updated": 1526724716862,
     "authorName": "pandur",
     "id": "25feb18a-8df6-473f-b548-59c514c6f949",
     "created": 1517139637740,
@@ -21,8 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "Shape",
-                "subType": "string"
+                "name": "Shape index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -38,11 +37,6 @@
                 "type": "0",
                 "name": "Fill",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "mapping",
-                "subType": "string"
             }
         ],
         "portsOut": [

@@ -1,0 +1,60 @@
+{
+    "authorName": "simod",
+    "id": "d69316f1-bde9-4645-8280-c635a8982e0d",
+    "created": 1583497431595,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Execute"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse R",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse G",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse B",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Diffuse A",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Diffuse Texture",
+                "group": "Texture & Transforms"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Gl.Phong.LambertMaterial_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.LambertMaterial_v2 renamed to Ops.Gl.Phong.LambertMaterial_v2",
+            "author": "simod",
+            "date": 1583503042981
+        }
+    ]
+}

@@ -44,7 +44,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Sidebar.Stepper"
+        "name": "Ops.Sidebar.Incrementor"
     },
     "summary": "steps through numerical or array values one by one",
     "issues": "",

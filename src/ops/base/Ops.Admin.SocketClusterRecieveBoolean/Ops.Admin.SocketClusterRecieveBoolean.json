@@ -1,0 +1,33 @@
+{
+    "authorName": "stephan",
+    "id": "5f84ec3a-8309-4e1d-9de3-a99c8e7dee87",
+    "created": 1584703322681,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "client id"
+            },
+            {
+                "type": "0",
+                "name": "data",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "received"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterRecieveBoolean"
+    }
+}

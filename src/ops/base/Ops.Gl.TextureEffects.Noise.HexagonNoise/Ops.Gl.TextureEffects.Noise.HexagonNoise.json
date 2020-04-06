@@ -97,5 +97,13 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.Noise.HexagonNoise"
+    },
+    "summary": "Creates a hexagonal noise texture ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

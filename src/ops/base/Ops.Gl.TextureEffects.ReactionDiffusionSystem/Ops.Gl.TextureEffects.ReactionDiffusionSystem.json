@@ -46,9 +46,8 @@
             },
             {
                 "type": "0",
-                "name": "RD Mode",
-                "group": "Reaction Diffusion",
-                "subType": "string"
+                "name": "RD Mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",

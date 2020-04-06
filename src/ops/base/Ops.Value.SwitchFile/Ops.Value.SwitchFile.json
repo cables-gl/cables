@@ -82,7 +82,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Value.FileSwitcher"
+        "name": "Ops.Value.SwitchFile"
     },
     "todos": [
         {

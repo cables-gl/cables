@@ -93,18 +93,16 @@ var gltfMesh=class
             }
 
 
-            if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
-            {
-                cgl.pushShader(gltf.shaders[this.material]);
-            }
+            const useMat=!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material];
+
+            // console.log(gltf.shaders);
+            // console.log(this.material);
+
+            if(useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             this.mesh.render(cgl.getShader(),ignoreMaterial);
 
-            if(!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material])
-            {
-                cgl.popShader();
-            }
-
+            if(useMat) cgl.popShader();
 
         }
     }

@@ -3,7 +3,6 @@
     "authorName": "pandur",
     "created": 1548415620859,
     "summary": "Define a custom stylesheet",
-    "youtubeid": "",
     "collections": null,
     "relatedops": null,
     "docs": {
@@ -24,5 +23,7 @@
             "author": "pandur",
             "date": 1560335517152
         }
-    ]
+    ],
+    "issues": "",
+    "youtubeids": []
 }

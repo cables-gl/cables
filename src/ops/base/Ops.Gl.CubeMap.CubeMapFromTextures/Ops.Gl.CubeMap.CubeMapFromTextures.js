@@ -6,8 +6,8 @@ var numImages=6;
 var inFilenames=[];
 
 var titles=[
-        "posx", "negx", 
-        "posy", "negy", 
+        "posx", "negx",
+        "posy", "negy",
         "posz", "negz"
     ];
 
@@ -42,7 +42,7 @@ function loadCubemapTexture(target, texture, url)
             outTex.set({"cubemap":skyboxCubemap});
             cgl.patch.loading.finished(loadingId);
         }
-        
+
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, null);
     };
     image.onerror = function()
@@ -73,7 +73,7 @@ function load()
     texCount=0;
     skyboxCubemap = cgl.gl.createTexture();
     cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, skyboxCubemap);
-  
+
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
     cgl.gl.texParameteri(cgl.gl.TEXTURE_CUBE_MAP, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
 
@@ -82,10 +82,11 @@ function load()
 
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X, skyboxCubemap, op.patch.getFilePath(inFilenames[0].get()));
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X, skyboxCubemap, op.patch.getFilePath(inFilenames[1].get()));
-    
+
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y, skyboxCubemap, op.patch.getFilePath(inFilenames[3].get()));
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y, skyboxCubemap, op.patch.getFilePath(inFilenames[2].get()));
-    
+
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[4].get()));
     loadCubemapTexture(cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z, skyboxCubemap, op.patch.getFilePath(inFilenames[5].get()));
+
 }

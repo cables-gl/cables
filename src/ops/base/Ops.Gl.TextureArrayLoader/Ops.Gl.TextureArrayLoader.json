@@ -3,39 +3,43 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "url"
+                "name": "url",
+                "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Left Pad"
+                "name": "Left Pad",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Num Digits"
+                "name": "Index Start",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Index Start"
+                "name": "Index End",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Index End"
+                "name": "filter index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "filter"
+                "name": "wrap index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap"
+                "name": "flip",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "flip"
-            },
-            {
-                "type": "0",
-                "name": "unpackPreMultipliedAlpha"
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -45,25 +49,28 @@
             },
             {
                 "type": "0",
-                "name": "width"
+                "name": "width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height"
+                "name": "height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "loading"
+                "name": "loading",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Aspect Ratio"
+                "name": "Aspect Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.TextureArrayLoader"
     },
     "summary": "load multiple images into an array",
-    "updated": 1519496901830,
     "authorName": "tim",
     "id": "4ee5bc6d-fd73-4498-8378-6846e57cdd7f",
     "created": 1519307241280,

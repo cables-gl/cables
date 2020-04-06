@@ -8,9 +8,8 @@
             },
             {
                 "type": "0",
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
+                "name": "Blend Mode index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -40,8 +39,8 @@
             },
             {
                 "type": "0",
-                "name": "Fill",
-                "subType": "string"
+                "name": "Fill index",
+                "subType": "integer"
             },
             {
                 "type": "0",

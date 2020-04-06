@@ -209,27 +209,35 @@ const Op = function ()
      */
     Op.prototype.inFunction = Op.prototype.inTrigger = function (name, v)
     {
-        // deprecated
         var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     };
 
     /**
-     * create a trigger input  port with an UI trigger button
+     * create multiple UI trigger buttons
      * @function inTriggerButton
      * @memberof Op
      * @instance
      * @param {String} name
+     * @param {Array} names
      * @return {Port} created port
      */
     Op.prototype.inFunctionButton = Op.prototype.inTriggerButton = function (name, v)
     {
-        // deprecated
         var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, { display: "button" }));
         if (v !== undefined) p.set(v);
         return p;
     };
+
+
+    Op.prototype.inFunctionButton = Op.prototype.inUiTriggerButtons = function (name, v)
+    {
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, { display: "buttons" }));
+        if (v !== undefined) p.set(v);
+        return p;
+    };
+
 
     /**
      * create a number value input port

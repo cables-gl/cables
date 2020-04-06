@@ -1,7 +1,7 @@
 var cgl=op.patch.cgl;
 var render=op.inTrigger('render');
 var inIdentity=op.inValueBool("Identity",false);
-var next=op.outTrigger("trigger")
+var next=op.outTrigger("trigger");
 
 var m=mat4.create();
 var matrix=op.inArray("matrix");

@@ -72,18 +72,20 @@ Mesh.prototype.updateVertices = function (geom)
 
 Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
 {
-    for (var i = 0; i < this._attributes.length; i++)
+    for(var i = 0; i < this._attributes.length; i++)
     {
-        if (this._attributes[i].name == attrName)
+        if(this._attributes[i].name == attrName)
         {
-            if (!this._attributes[i].pointer) this._attributes[i].pointer = [];
-            this._attributes[i].pointer.push({
-                loc: -1,
-                name,
-                stride,
-                offset,
-                instanced: attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
-            });
+            if(!this._attributes[i].pointer) this._attributes[i].pointer = [];
+
+            this._attributes[i].pointer.push(
+                {
+                    loc: -1,
+                    name,
+                    stride,
+                    offset,
+                    instanced: attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
+                });
         }
     }
 };
@@ -98,11 +100,14 @@ Mesh.prototype._bufferArray=function(array,attr)
     var floatArray = null;
     if(!array)return;
 
+
+    if(this._cgl.debugOneFrame)
+    {
+        console.log("_bufferArray",array.length,attr.name);
+    }
+
     if (!(array instanceof Float32Array))
     {
-        // if(!attr.floatArray)console.log("no attr arr");
-        // else console.log("Attr array");
-
         if(attr && attr.floatArray && attr.floatArray.length==array.length)
         {
             attr.floatArray.set(array);
@@ -112,18 +117,19 @@ Mesh.prototype._bufferArray=function(array,attr)
         {
             floatArray = new Float32Array(array);
 
+            if(this._cgl.debugOneFrame)
+            {
+                console.log("_bufferArray create new float32array",array.length,attr.name);
+            }
+        
             profileData.profileNonTypedAttrib++;
             profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
         }
     }
     else floatArray = array;
 
-    if(attr && floatArray)
-    {
-        attr.floatArray=floatArray;
-    }
+    if(attr && floatArray) attr.floatArray=floatArray;
 
-    
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
 
@@ -191,21 +197,18 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
         numItems,
         startItem: 0,
         instanced,
-        type,
+        type
     };
 
     this._bufferArray(array,attr);
 
     if (name == CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib = attr;
     this._attributes.push(attr);
-
     this._attribLocs = {};
-    // for(var at in this._attribLocs)
-    //     for(i=0;i<this._attributes.length;i++)
-    //     {
-    //         this._attribLocs[at].length=0;
-    //         // this._attributes[i].loc=-1;
-    //     }
+
+
+
+
 
     return attr;
 };
@@ -356,8 +359,28 @@ Mesh.prototype._preBind = function (shader)
     }
 };
 
+Mesh.prototype._checkAttrLengths = function ()
+{
+    // check length
+
+    for (var i = 0; i < this._attributes.length; i++)
+    {
+        if(this._attributes[0].floatArray.length/this._attributes[0].itemSize != 
+                this._attributes[i].floatArray.length/this._attributes[i].itemSize)
+        {
+            console.warn(
+                this._geom.name+": "+this._attributes[i].name+
+                " wrong attr length. is:",this._attributes[i].floatArray.length/this._attributes[i].itemSize,
+                " should be:",this._attributes[0].floatArray.length/this._attributes[0].itemSize,
+                );
+        }
+    }
+
+}
+
 Mesh.prototype._bind = function (shader)
 {
+
     if (shader != this._lastShader) this.unBind();
     var attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
@@ -369,6 +392,8 @@ Mesh.prototype._bind = function (shader)
     {
         this._lastAttrUpdate = shader.lastCompile;
         for (i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
+
+        this._checkAttrLengths();
     }
 
     for (i = 0; i < this._attributes.length; i++)
@@ -580,9 +605,10 @@ Mesh.prototype.render = function (shader)
 
 Mesh.prototype.setNumInstances = function (n)
 {
-    this._numInstances = n;
-    if (n > 0)
+    if(this._numInstances != n)
     {
+        this._numInstances = n;
+        // if (n <= 0)return;
         var indexArr = new Float32Array(n);
         for (var i = 0; i < n; i++) indexArr[i] = i;
         this.setAttribute("instanceIndex", indexArr, 1, { instanced: true });

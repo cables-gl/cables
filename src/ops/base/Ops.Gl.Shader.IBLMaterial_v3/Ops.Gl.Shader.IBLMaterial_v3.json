@@ -89,6 +89,11 @@
             },
             {
                 "type": "0",
+                "name": "Opacity Source Channel index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Opacity Source Channel",
                 "subType": "string"
             },
@@ -179,7 +184,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Gl.Shader.IBLMaterial3"
+        "name": "Ops.Gl.Shader.IBLMaterial_v3"
     },
     "summary": " image based lighting material using cubemaps",
     "issues": "",

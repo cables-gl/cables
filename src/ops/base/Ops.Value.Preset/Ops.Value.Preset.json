@@ -75,6 +75,11 @@
             },
             {
                 "type": "1",
+                "name": "move",
+                "group": "Manage Presets"
+            },
+            {
+                "type": "1",
                 "name": "Delete",
                 "group": "Manage Presets"
             },
@@ -82,16 +87,6 @@
                 "type": "1",
                 "name": "Rename",
                 "group": "Manage Presets"
-            },
-            {
-                "type": "0",
-                "name": ".preset_scale_e5u2pqn22_ljxfuoay6",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": ".preset_a_e5u2pqn22_rhbb0g144",
-                "subType": "number"
             }
         ],
         "portsOut": [

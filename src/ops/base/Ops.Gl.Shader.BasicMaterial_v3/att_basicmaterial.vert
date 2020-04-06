@@ -30,7 +30,7 @@ void main()
     texCoord=attrTexCoord;
     #ifdef HAS_TEXTURES
         texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
-        texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;
+        texCoord.y=(1.0-texCoord.y)*diffuseRepeatY+texOffsetY;
     #endif
 
     vec4 pos = vec4(vPosition, 1.0);

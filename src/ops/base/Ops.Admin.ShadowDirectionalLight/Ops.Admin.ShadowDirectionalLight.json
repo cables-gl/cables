@@ -72,59 +72,7 @@
             },
             {
                 "type": "0",
-                "name": "Map Size index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Map Size",
-                "group": "Shadow Map Settings"
-            },
-            {
-                "type": "0",
                 "name": "Shadow Strength",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "LR-BottomTop",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Near",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Far",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Bias",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Polygon Offset",
-                "group": "Shadow Map Settings",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Normal Offset",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Blur Amount",
                 "group": "Shadow Map Settings",
                 "subType": "number"
             },
@@ -133,36 +81,6 @@
                 "name": "Enable Advanced",
                 "group": "Advanced Options",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "MSAA index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "MSAA",
-                "group": "Advanced Options"
-            },
-            {
-                "type": "0",
-                "name": "Texture Filter index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Texture Filter",
-                "group": "Advanced Options"
-            },
-            {
-                "type": "0",
-                "name": "Anisotropic index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Anisotropic",
-                "group": "Advanced Options"
             }
         ],
         "portsOut": [

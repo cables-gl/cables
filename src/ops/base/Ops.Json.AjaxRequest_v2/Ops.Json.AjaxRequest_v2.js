@@ -24,6 +24,13 @@ function delayedReload()
     reloadTimeout = setTimeout(reload, 100);
 }
 
+op.onFileChanged=function(fn)
+{
+    if(filename.get() && filename.get().indexOf(fn)>-1) reload();
+};
+
+
+
 function reload()
 {
     if (!filename.get()) return;
@@ -32,6 +39,9 @@ function reload()
 
     loadingId = op.patch.loading.start("jsonFile", "" + filename.get());
     isLoading.set(true);
+
+    op.setUiAttrib({"extendTitle":CABLES.basename(filename.get())});
+
 
     let f = CABLES.ajax;
     if (jsonp.get()) f = CABLES.jsonp;

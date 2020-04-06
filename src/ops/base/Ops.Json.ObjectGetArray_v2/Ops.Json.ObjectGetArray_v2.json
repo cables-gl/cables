@@ -36,7 +36,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Json.ObjectGetArray2"
+        "name": "Ops.Json.ObjectGetArray_v2"
     },
     "summary": "Returns an array from a JSON-object",
     "issues": "",

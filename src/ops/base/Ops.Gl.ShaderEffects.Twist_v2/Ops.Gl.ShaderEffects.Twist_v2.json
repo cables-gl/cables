@@ -1,5 +1,4 @@
 {
-    "updated": 1516355236332,
     "authorName": "pandur",
     "id": "92aee475-63e8-45cc-902f-2a84154e0a93",
     "created": 1515176075838,
@@ -11,15 +10,18 @@
             },
             {
                 "type": "0",
-                "name": "Degree"
+                "name": "Degree",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Axis"
+                "name": "Axis index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -28,7 +30,7 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.Twist2"
+        "name": "Ops.Gl.ShaderEffects.Twist_v2"
     },
     "summary": "twist a mesh around an axis"
 }

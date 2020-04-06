@@ -10,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "Timing",
-                "subType": "string"
+                "name": "Timing index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -25,5 +25,22 @@
             }
         ],
         "name": "Ops.Value.Integer"
+    },
+    "summary": "Number op which only outputs integers ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Integer",
+                "text": "Integer number input"
+            },
+            {
+                "name": "Number out",
+                "text": "Integer number output"
+            }
+        ]
     }
 }

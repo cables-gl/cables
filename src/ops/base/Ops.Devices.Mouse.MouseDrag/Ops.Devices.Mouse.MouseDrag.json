@@ -15,8 +15,14 @@
                 "subType": "number"
             },
             {
-                "type": "5",
-                "name": "Input Type"
+                "type": "0",
+                "name": "Input Type index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

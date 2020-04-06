@@ -38,13 +38,13 @@
             },
             {
                 "type": "0",
-                "name": "filter",
-                "subType": "string"
+                "name": "filter index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap",
-                "subType": "string"
+                "name": "wrap index",
+                "subType": "integer"
             },
             {
                 "type": "0",

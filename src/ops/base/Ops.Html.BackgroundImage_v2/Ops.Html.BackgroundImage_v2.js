@@ -2,7 +2,7 @@ const
     inEle=op.inObject("Element"),
     active=op.inValueBool("active",true),
     filename=op.inUrl("image file"),
-    inSize=op.inValueSelect("Size",["auto","length","cover","contain","initial","inherit","75%","50%","25%"],"auto"),
+    inSize=op.inValueSelect("Size",["auto","length","cover","contain","initial","inherit","75%","50%","25%"],"cover"),
     inRepeat=op.inValueSelect("Repeat",["no-repeat","repeat","repeat-x","repeat-y"],"no-repeat"),
     inPosition=op.inValueSelect("Position",["left top","left center","left bottom","right top","right center","right bottom","center top","center center","center bottom"],"center center"),
 
@@ -18,12 +18,34 @@ inRepeat.onChange=
 active.onChange=
 filename.onChange=update;
 
-
 var ele=null;
+
+function remove()
+{
+    if(ele)
+    {
+        ele.style['background-image']='none';
+        ele.style['background-size']='initial';
+        ele.style['background-position']='initial';
+        ele.style['background-repeat']='initial';
+
+    }
+}
 
 function update()
 {
+
+    if(!inEle.get())
+    {
+        remove();
+        return;
+    }
+
+    op.setUiAttrib({"extendTitle":CABLES.basename(filename.get())});
+
     ele=inEle.get();
+
+
     if(ele && ele.style && filename.get())
     {
         if(!active.get())
@@ -38,11 +60,11 @@ function update()
             ele.style['background-repeat']=inRepeat.get();
         }
     }
-    else
-    {
-        // really needed ?
-        setTimeout(update,100);
-    }
+    // else
+    // {
+    //     // really needed ?
+    //     setTimeout(update,100);
+    // }
 
     outEle.set(inEle.get());
 }

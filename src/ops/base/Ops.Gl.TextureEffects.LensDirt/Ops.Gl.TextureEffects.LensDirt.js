@@ -37,7 +37,7 @@ updateIterations();
 function updateIterations()
 {
     var its=iterations.get();
-    its=Math.min(300,Math.max(0,its));
+    its=Math.min(300,Math.max(1,its));
     shader.define("ITERATIONS",its);
 }
 

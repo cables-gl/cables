@@ -120,9 +120,14 @@ function loadBin()
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
     closeTab();
+    op.setUiAttrib({"extendTitle":null});
+
 
     oReq.onload = function (oEvent)
     {
+        op.setUiAttrib({"extendTitle":CABLES.basename(inFile.get())});
+
+
         maxTime=0;
         var arrayBuffer = oReq.response;
         gltf=parseGltf(arrayBuffer);

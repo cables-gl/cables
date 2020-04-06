@@ -1,5 +1,4 @@
 {
-    "updated": 1535449324039,
     "authorName": "pandur",
     "id": "c2833486-717e-4f3c-9dd8-c62cc92ea46e",
     "created": 1517222044303,
@@ -8,6 +7,11 @@
             {
                 "type": "1",
                 "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Identity",
+                "subType": "boolean"
             },
             {
                 "type": "3",
@@ -20,7 +24,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.Matrix.setViewMatrix"
+        "name": "Ops.Gl.Matrix.MulViewMatrix"
     },
     "summary": "multiply view matrix",
     "docs": {

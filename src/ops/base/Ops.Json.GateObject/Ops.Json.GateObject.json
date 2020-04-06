@@ -19,6 +19,11 @@
                 "type": "0",
                 "name": "Pass Through",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Only Valid Objects",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

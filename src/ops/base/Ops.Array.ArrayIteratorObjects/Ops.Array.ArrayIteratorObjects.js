@@ -2,6 +2,7 @@ const
     exe=op.inTrigger("exe"),
     arr=op.inArray("array"),
     trigger=op.outTrigger('trigger'),
+    finished=op.outTrigger('finished'),
     idx=op.outValue("index"),
     val=op.outObject("value");
 
@@ -14,4 +15,5 @@ exe.onTriggered=function()
         val.set(arr.val[i]);
         trigger.trigger();
     }
+    finished.trigger();
 };

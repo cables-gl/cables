@@ -19,14 +19,14 @@ inEle.onLinkChanged=function()
 {
     // remove style when deleting op
     if(inEle.isLinked())return;
-    
+
     const ele=oldEle;//inEle.get();
 
     if(ele && ele.style)
     {
         var filter=ele.style.filter;
         var str='';
-        
+
         if(filter && filter.length>0)
         {
             var str='';
@@ -42,7 +42,7 @@ inEle.onLinkChanged=function()
         ele.style.filter=str;
     }
 
-    
+
 };
 
 function setValue()
@@ -55,7 +55,7 @@ function setValue()
         if(ele!=oldEle) oldEle=ele;
         var foundMyFilter=false;
         var filter=ele.style.filter;
-        
+
         if(filter && filter.length>0)
         {
             var parts=filter.split(' ');
@@ -67,10 +67,10 @@ function setValue()
                     parts[i]=getCSSFilterString();
                 }
             }
-            
+
             str=parts.join(' ');
         }
-    
+
         if(!foundMyFilter)
             str+=' '+getCSSFilterString();
 
@@ -82,9 +82,9 @@ function setValue()
 inMethod.onChange=function()
 {
     var m=inMethod.get();
-    
+
     prefix=inMethod.get()+":";
-    
+
     if(m=='blur') suffix='px';
     if(m=='brightness') suffix='';
     if(m=='contrast') suffix='%';

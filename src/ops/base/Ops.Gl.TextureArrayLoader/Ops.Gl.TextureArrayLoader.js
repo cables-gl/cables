@@ -85,9 +85,9 @@ function loadImage(i,nocache)
     }
     url=url.replace(replaceString, numberString);
     console.log('LOAD IMAGE: ', url);
-    
+
     // console.log(url);
-    
+
     url=op.patch.getFilePath(url);
     if(nocache)url+='?rnd='+CABLES.generateUUID();
 
@@ -126,7 +126,7 @@ function loadImage(i,nocache)
 
                 // textureOut.set(null);
                 // textureOut.set(tex);
-                
+
                 // tex.printInfo();
                 arrOut.set(null);
                 arrOut.set(arr);
@@ -163,11 +163,11 @@ function realReload(nocache)
     arr.length = 0;
     for(var i=Math.floor(indexStart.get());i<=Math.floor(indexEnd.get());i++)
     {
-        
+
         loadImage(i,nocache);
 
     }
-    
+
 
 }
 

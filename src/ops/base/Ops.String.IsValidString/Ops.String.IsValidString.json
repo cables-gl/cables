@@ -1,0 +1,65 @@
+{
+    "id": "a522235d-f220-46ea-bc26-13a5b20ec8c6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1584353579020
+        },
+        {
+            "message": "Ops.String.IsNull renamed to Ops.String.IsValidString",
+            "author": "pandur",
+            "date": 1584353819547
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1584353798919,
+    "summary": "check if string is null,undefined or empty",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Invalid if null",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid if undefined",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid if empty",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid if 0",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Last Valid String"
+            },
+            {
+                "type": "0",
+                "name": "Is Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.String.IsValidString"
+    }
+}

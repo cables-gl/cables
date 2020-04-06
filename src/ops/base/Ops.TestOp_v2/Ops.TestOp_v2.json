@@ -20,6 +20,14 @@
                 "type": "0",
                 "name": "test float 2",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Button"
+            },
+            {
+                "type": "1",
+                "name": "buttons"
             }
         ],
         "name": "Ops.TestOp_v2"

@@ -22,8 +22,8 @@
             },
             {
                 "type": "0",
-                "name": "Part",
-                "subType": "string"
+                "name": "Part index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

@@ -28,8 +28,8 @@
             },
             {
                 "type": "0",
-                "name": "Distribution",
-                "subType": "string"
+                "name": "Distribution index",
+                "subType": "integer"
             },
             {
                 "type": "0",

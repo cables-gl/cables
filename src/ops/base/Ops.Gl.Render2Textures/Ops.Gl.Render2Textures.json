@@ -10,8 +10,8 @@
             },
             {
                 "type": "0",
-                "name": "MSAA",
-                "subType": "string"
+                "name": "MSAA index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -20,18 +20,8 @@
             },
             {
                 "type": "0",
-                "name": "texture width",
+                "name": "Filter index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "texture height",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Filter",
-                "subType": "string"
             },
             {
                 "type": "0",

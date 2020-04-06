@@ -6,15 +6,13 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "MIDI Channel",
-                "group": "General",
-                "subType": "string"
+                "name": "MIDI Channel index",
+                "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Note",
-                "group": "General",
-                "subType": "string"
+                "name": "Note index",
+                "subType": "integer"
             },
             {
                 "type": "0",

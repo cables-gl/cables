@@ -63,6 +63,9 @@ function realReload(nocache)
     {
         loading.set(true);
 
+
+
+
         if(tex)tex.delete();
         tex=CGL.Texture.load(cgl,url,
             function(err)
@@ -103,7 +106,6 @@ function realReload(nocache)
                 filter:cgl_filter
             });
 
-        tex.oldTexFlip=true;
         textureOut.set(null);
         textureOut.set(tex);
 

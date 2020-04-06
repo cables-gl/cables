@@ -224,7 +224,8 @@ function updateId()
 
 function updateDivSize()
 {
-    var vp=cgl.getViewPort();
+    // var vp=cgl.getViewPort();
+
 
 
     mat4.multiply(mMatrix,cgl.vMatrix,cgl.mMatrix);
@@ -233,8 +234,8 @@ function updateDivSize()
 
 
 
-    var x1 = (trans[0] * vp[2]/2) + vp[2]/2;
-    var y1 = (trans[1] * vp[3]/2) + vp[3]/2;
+    var x1 = (trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2;
+    var y1 = (trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2;
 
 
     divAlignSize[0] = divAlign[0] + width.get();
@@ -243,8 +244,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x2 = ((trans[0] * vp[2]/2) + vp[2]/2);
-    var y2= ((trans[1] * vp[3]/2) + vp[3]/2);
+    var x2 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
+    var y2= ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
 
 
 
@@ -255,8 +256,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x3 = ((trans[0] * vp[2]/2) + vp[2]/2);
-    var y3= ((trans[1] * vp[3]/2) + vp[3]/2);
+    var x3 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
+    var y3= ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
 
 
 
@@ -267,15 +268,15 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x4 = ((trans[0] * vp[2]/2) + vp[2]/2);
-    var y4 = ((trans[1] * vp[3]/2) + vp[3]/2);
+    var x4 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
+    var y4 = ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
 
 
     divX=Math.min(x1,x2,x3,x4);
-    divY=Math.min(vp[3]-y1,vp[3]-y2,vp[3]-y3,vp[3]-y4);
+    divY=Math.min(cgl.canvasHeight-y1,cgl.canvasHeight-y2,cgl.canvasHeight-y3,cgl.canvasHeight-y4);
 
     var xb=Math.max(x1,x2,x3,x4);
-    var yb=Math.max(vp[3]-y1,vp[3]-y2,vp[3]-y3,vp[3]-y4);
+    var yb=Math.max(cgl.canvasHeight-y1,cgl.canvasHeight-y2,cgl.canvasHeight-y3,cgl.canvasHeight-y4);
 
     outTop.set(divY);
     outLeft.set(divX);

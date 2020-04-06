@@ -16,6 +16,11 @@
             {
                 "type": "1",
                 "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Delaying",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Time.DelayedTrigger"

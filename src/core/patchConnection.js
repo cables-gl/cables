@@ -32,14 +32,16 @@ const PatchConnectionReceiver = function (patch, options, connector)
 
 PatchConnectionReceiver.prototype._receive = function (ev)
 {
+    console.log("ev", ev);
     var data = {};
-    if (ev.event) data = ev;
+    if (ev.hasOwnProperty('event')) data = ev;
     else data = JSON.parse(ev.data);
 
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
     {
         Log.log("op create: data.vars.objName");
-        var op = this._patch.addOp(data.vars.objName);
+        if(this._patch.getOpById(data.vars.opId))return;
+        var op = this._patch.addOp(data.vars.objName,null,data.vars.opId);
         op.id = data.vars.opId;
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -133,6 +135,10 @@ PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
     this.bc.postMessage(JSON.stringify(data));
     // Log.log(data);
 };
+
+
+
+
 
 // -------------
 

@@ -75,7 +75,7 @@ function updateCode()
 
     srcBodyFrag=''
         .endl()+'float MOD_coord=MOD_round('+attrName+'Frag*1000.0)/1000.0+MOD_seed;'
-        
+
         .endl()+'col.rgb*= (MOD_rand(vec2(MOD_coord))*(MOD_max-MOD_min))+MOD_min ;'
 
         .endl()+'col.r+=MOD_rand(vec2(MOD_coord*2.0))*MOD_randR;'
@@ -107,7 +107,7 @@ render.onTriggered=function()
     // if(needsCodeUpdate)console.log('needsCodeUpdate');
     // if(!srcBodyFrag)console.log('srcBodyFrag');
     // if(cgl.getShader()!=shader)console.log('cgl.getShader',shader);
-    
+
     if(cgl.getShader()!=shader || needsCodeUpdate || !srcBodyFrag)
     {
         if(shader) removeModule();

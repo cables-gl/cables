@@ -18,9 +18,8 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Device",
-                "group": "Device",
-                "subType": "string"
+                "name": "Device index",
+                "subType": "integer"
             },
             {
                 "type": "2",

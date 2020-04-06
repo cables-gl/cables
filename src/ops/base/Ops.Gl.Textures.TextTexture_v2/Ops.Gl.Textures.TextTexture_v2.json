@@ -48,9 +48,19 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "align index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "align",
                 "group": "Alignment"
+            },
+            {
+                "type": "0",
+                "name": "vertical align index",
+                "subType": "integer"
             },
             {
                 "type": "5",
@@ -79,7 +89,7 @@
                 "name": "texture"
             }
         ],
-        "name": "Ops.Gl.Textures.Text_v2"
+        "name": "Ops.Gl.Textures.TextTexture_v2"
     },
     "summary": "Generates a texture which reads Text",
     "youtubeid": "z1Qf9dE67-w",

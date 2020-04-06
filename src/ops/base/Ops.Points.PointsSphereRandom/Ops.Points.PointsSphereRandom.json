@@ -28,11 +28,6 @@
                 "type": "0",
                 "name": "Distribution index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Distribution",
-                "subType": "string"
             }
         ],
         "portsOut": [

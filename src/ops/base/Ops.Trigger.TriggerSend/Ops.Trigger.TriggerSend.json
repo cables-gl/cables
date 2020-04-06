@@ -14,11 +14,6 @@
             {
                 "type": "1",
                 "name": "Trigger"
-            },
-            {
-                "type": "0",
-                "name": "Named Trigger",
-                "subType": "string"
             }
         ],
         "name": "Ops.Trigger.TriggerSend"

@@ -34,7 +34,7 @@ function updateName()
             return;
         }
 
-        op.setTitle('#'+op.varName.get());
+        op.setTitle('set #' + op.varName.get());
     }
     update();
 }

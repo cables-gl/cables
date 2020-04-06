@@ -3,11 +3,10 @@ const
     inEle=op.inObject("Element"),
     next=op.outTrigger("Next"),
     inScale=op.inFloat("Scale",1),
+    inOrtho=op.inBool("Orthogonal",false),
     inRotate=op.inFloat("Rotate",0),
     inAlignVert=op.inSwitch("Align Vertical",["Left","Center","Right"],"Left"),
     inAlignHor=op.inSwitch("Align Horizontal",["Top","Center","Bottom"],"Top");
-
-
 
 const cgl=op.patch.cgl;
 var x=0;
@@ -21,11 +20,10 @@ op.onDelete=removeProperties;
 
 var oldEle=null;
 
-
 inAlignHor.onChange=
-inAlignVert.onChange=
-inRotate.onChange=
-inScale.onChange=updateTransform;
+    inAlignVert.onChange=
+    inRotate.onChange=
+    inScale.onChange=updateTransform;
 
 function updateTransform()
 {
@@ -46,7 +44,6 @@ function updateTransform()
 
     const str="translate("+translateStr+") scale("+inScale.get()+") rotate("+inRotate.get()+"deg)";
     ele.style.transform=str;
-
 }
 
 inEle.onChange=function()
@@ -75,10 +72,22 @@ function getScreenCoord()
     mat4.multiply(m,cgl.vMatrix,cgl.mMatrix);
     vec3.transformMat4(pos, [0,0,0], m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
+
     var vp=cgl.getViewPort();
 
-    x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
-    y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
+    const w=cgl.canvasWidth/cgl.pixelDensity;
+    const h=cgl.canvasHeight/cgl.pixelDensity;
+
+    if(inOrtho.get())
+    {
+        x=( ( w * 0.5 + trans[0] * w * 0.5 / 1 ));
+        y=( ( h * 0.5 - trans[1] * h * 0.5 / 1 ));
+    }
+    else
+    {
+        x=( w - ( w * 0.5 - trans[0] * w * 0.5 / trans[2] ));
+        y=( h - ( h * 0.5 + trans[1] * h * 0.5 / trans[2] ));
+    }
 }
 
 function setProperties()
@@ -104,12 +113,11 @@ function removeProperties(ele)
         ele.style.top='initial';
         ele.style.left='initial';
         ele.style.transform='initial';
-
     }
 }
 
 op.addEventListener("onEnabledChange",function(enabled)
 {
     if(enabled) setProperties();
-        else removeProperties();
+    else removeProperties();
 });

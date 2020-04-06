@@ -26,6 +26,6 @@
                 "subType": "string"
             }
         ],
-        "name": "Ops.User.pandur.varSetTexture"
+        "name": "Ops.Vars.VarSetTexture"
     }
 }

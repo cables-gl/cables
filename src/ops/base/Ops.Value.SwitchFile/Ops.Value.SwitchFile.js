@@ -13,8 +13,9 @@ for(var i=0;i<10;i++)
 
 function update()
 {
-    if(idx.get()>=0 && valuePorts[idx.get()])
+    const index=idx.get();
+    if(index>=0 && valuePorts[index])
     {
-        result.set( valuePorts[idx.get()].get() );
+        result.set( valuePorts[index].get() );
     }
 }

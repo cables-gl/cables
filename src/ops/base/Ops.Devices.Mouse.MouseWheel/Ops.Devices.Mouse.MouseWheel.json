@@ -14,18 +14,8 @@
             },
             {
                 "type": "0",
-                "name": "Min Unlimited",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "min",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Max Unlimited",
-                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -62,8 +52,9 @@
                 "name": "Reset"
             },
             {
-                "type": "5",
-                "name": "Area"
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

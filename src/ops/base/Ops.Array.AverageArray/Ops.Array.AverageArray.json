@@ -36,8 +36,8 @@
             },
             {
                 "type": "0",
-                "name": "Mode",
-                "subType": "string"
+                "name": "Mode index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -51,7 +51,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Array.ArraySmooth"
+        "name": "Ops.Array.AverageArray"
     },
     "youtubeid": "",
     "issues": "",

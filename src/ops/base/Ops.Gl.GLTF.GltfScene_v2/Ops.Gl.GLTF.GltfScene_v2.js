@@ -74,10 +74,9 @@ function updateCenter()
 
         if(inCenter.get()=="XZ")
             boundsCenter[1]=-gltf.bounds.minY;
-
     }
-
 }
+
 
 inSwitchNormalsYZ.onChange=function()
 {
@@ -142,6 +141,8 @@ inExec.onTriggered=function()
     cgl.frameStore.currentScene=gltf;
     nextBefore.trigger();
 
+    if(needsMatUpdate) updateMaterials();
+
     if(gltf && inRender.get())
     {
         gltf.time=time;
@@ -154,7 +155,6 @@ inExec.onTriggered=function()
             cgl.popShader();
         }
 
-        if(needsMatUpdate) updateMaterials();
         for(var i=0;i<gltf.nodes.length;i++)
             if(!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
     }
@@ -195,8 +195,6 @@ function loadBin()
         updateCenter();
     };
 
-
-
     oReq.send(null);
 }
 
@@ -206,6 +204,15 @@ op.onFileChanged=function(fn)
     if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
 
 };
+
+op.onFileChanged=function(fn)
+{
+    if(inFile.get() && inFile.get().indexOf(fn)>-1)
+    {
+        reloadSoon(true);
+    }
+};
+
 
 function reloadSoon(nocache)
 {

@@ -49,9 +49,35 @@ var m=mat4.create();
 
 updateLimit();
 
-inRot.onChange=inColor.onChange =
+
+var
+    arrayChangedColor=true,
+    arrayChangedTrans=true;
+
+inRot.onChange=
+    inScales.onChange=
     inTranslates.onChange=
-    inScales.onChange=reset;
+        function()
+        {
+            arrayChangedTrans=true;
+            recalc=true;
+        };
+
+inColor.onChange =function()
+{
+    arrayChangedColor=true;
+    recalc=true;
+
+    if(shader) shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
+};
+
+function reset()
+{
+    arrayChangedColor=true,
+    arrayChangedTrans=true;
+    recalc=true;
+}
+
 
 inBlendMode.onChange = setBlendMode;
 
@@ -86,16 +112,13 @@ function removeModule()
     }
 }
 
-function reset()
-{
-    recalc=true;
-}
 
 
 function setupArray()
 {
 
     if(!mesh) return;
+    if(!shader)return;
 
     var transforms=inTranslates.get();
     if(!transforms)transforms=[0,0,0];
@@ -105,10 +128,8 @@ function setupArray()
     var colArr = inColor.get();
     var scales=inScales.get();
 
-    if (shader) {
-        if (colArr) shader.define("COLORIZE_INSTANCES");
-        else shader.removeDefine("COLORIZE_INSTANCES");
-    }
+    shader.toggleDefine("COLORIZE_INSTANCES",colArr);
+
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
     if(instColorArray.length!=num*4) instColorArray=new Float32Array(num*4);
 
@@ -132,12 +153,21 @@ function setupArray()
             mat4.rotateZ(m,m,rotArr[i*3+2]*CGL.DEG2RAD);
         }
 
-        if(colArr)
+        if(arrayChangedColor && colArr)
         {
             instColorArray[i*4+0] = colArr[i*4+0];
             instColorArray[i*4+1] = colArr[i*4+1];
             instColorArray[i*4+2] = colArr[i*4+2];
             instColorArray[i*4+3] = colArr[i*4+3];
+        }
+
+        if(arrayChangedColor && !colArr)
+        {
+            instColorArray[i*4+0] = 1;
+            instColorArray[i*4+1] = 1;
+            instColorArray[i*4+2] = 1;
+            instColorArray[i*4+3] = 1;
+
         }
 
         if(scales && scales.length>i) mat4.scale(m,m,[scales[i*3],scales[i*3+1],scales[i*3+2]]);
@@ -148,16 +178,16 @@ function setupArray()
 
     mesh.numInstances=num;
 
-    mesh.addAttribute('instMat', matrixArray, 16);
-    mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
+    if(arrayChangedTrans) mesh.addAttribute('instMat', matrixArray, 16);
+    if(arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
 
+    arrayChangedColor=false;
     recalc=false;
 }
 
 function updateLimit()
 {
-    if(doLimit.get()) inLimit.setUiAttribs({hidePort:false,greyout:false});
-        else inLimit.setUiAttribs({hidePort:true,greyout:true});
+    inLimit.setUiAttribs({"hidePort":!doLimit.get(),"greyout":!doLimit.get()});
 }
 
 function doRender()
@@ -165,9 +195,8 @@ function doRender()
     if(!mesh)return;
 
     if(recalc) setupArray();
-    if(recalc)return;
 
-    if(matrixArray.length<=1)return;
+    // if(matrixArray.length<=1)return;
 
     if(cgl.getShader() && cgl.getShader()!=shader)
     {
@@ -200,12 +229,10 @@ function doRender()
             inScale.uniform=new CGL.Uniform(shader,'f',mod.prefix+'scale',inScale);
         }
 
-        if (!inColor.get()) {
-            shader.removeDefine("COLORIZE_INSTANCES");
-        }
-        else {
-            shader.define("COLORIZE_INSTANCES");
-        }
+        shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
+
+
+
     }
 
 

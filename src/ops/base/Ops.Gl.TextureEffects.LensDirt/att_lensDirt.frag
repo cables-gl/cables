@@ -53,10 +53,8 @@ void main()
     uv *= uZoom;
     uv -= vec2(uOffsetX,uOffsetY);
 
-    // int loopSize = clamp(uIterations,0,300);
-
     float q = 0.0;
-    for (int i = 1; i < ITERATIONS; i++)
+    for (int i = 1; i < ITERATIONS ; i++)
     {
         q = float(i);
         vec2 h=hash22(vec2(q)+vec2(uRandomSeed));

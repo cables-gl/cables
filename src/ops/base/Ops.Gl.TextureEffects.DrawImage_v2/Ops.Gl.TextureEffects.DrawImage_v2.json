@@ -16,12 +16,6 @@
             },
             {
                 "type": "0",
-                "name": "blendMode",
-                "group": "Blending",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "amount",
                 "group": "Blending",
                 "subType": "number"
@@ -47,12 +41,6 @@
             },
             {
                 "type": "0",
-                "name": "alphaSrc",
-                "group": "Mask",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "invert alpha channel",
                 "group": "Mask",
                 "subType": "boolean"
@@ -67,12 +55,6 @@
                 "type": "0",
                 "name": "Stretch Axis index",
                 "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Stretch Axis",
-                "group": "Aspect Ratio",
-                "subType": "string"
             },
             {
                 "type": "0",

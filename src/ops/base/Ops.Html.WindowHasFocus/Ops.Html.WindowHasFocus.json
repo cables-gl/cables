@@ -6,6 +6,11 @@
                 "type": "0",
                 "name": "has focus",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Tab Visible",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Html.WindowHasFocus"

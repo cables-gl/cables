@@ -232,6 +232,30 @@ Patch.prototype.setVolume = function (v)
     for (var i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
 };
 
+
+/**
+ * get asset path
+ * @function getAssetPath
+ * @memberof Patch
+ * @instance
+ */
+Patch.prototype.getAssetPath=function()
+{
+    if(CABLES.UI)
+    {
+        return '/assets/'+gui.project()._id+'/';
+    }
+    else if(document.location.href.indexOf("cables.gl")>0)
+    {
+        const parts=document.location.href.split("/");
+        return '/assets/'+parts[parts.length-1]+'/';
+    }
+    else
+    {
+        return "assets/";
+    }
+}
+
 /**
  * get url/filepath for a filename
  * this uses prefixAssetpath in exported patches
@@ -240,7 +264,6 @@ Patch.prototype.setVolume = function (v)
  * @instance
  * @param {String} filename
  * @return {String} url
-
  */
 Patch.prototype.getFilePath = function (filename)
 {
@@ -1103,6 +1126,17 @@ Patch.prototype.setVariable = function (name, val)
     }
 };
 
+Patch.prototype._sortVars = function ()
+{
+    if(!CABLES.UI) return;
+    const ordered = {};
+    Object.keys(this._variables).sort().forEach((key)=>
+    {
+        ordered[key] = this._variables[key];
+    });
+    this._variables=ordered;
+}
+
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
@@ -1113,6 +1147,8 @@ Patch.prototype.setVarValue = function (name, val)
     else
     {
         this._variables[name] = new Patch.Variable(name, val);
+        this._sortVars();
+
         this.emitEvent("variablesChanged");
     }
     return this._variables[name];

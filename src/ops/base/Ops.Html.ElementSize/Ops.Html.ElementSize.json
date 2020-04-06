@@ -16,8 +16,9 @@
                 "name": "Update"
             },
             {
-                "type": "5",
-                "name": "Position"
+                "type": "0",
+                "name": "Position index",
+                "subType": "integer"
             },
             {
                 "type": "2",
