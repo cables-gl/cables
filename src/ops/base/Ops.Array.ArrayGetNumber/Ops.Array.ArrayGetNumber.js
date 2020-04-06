@@ -1,13 +1,22 @@
-var array=op.inArray("array");
-var index=op.inValueInt("index");
-var value=op.outValue("value");
+const
+    array=op.inArray("array"),
+    index=op.inValueInt("index"),
+    value=op.outValue("value");
 
 array.ignoreValueSerialize=true;
 
-index.onChange=update;
-array.onChange=update;
+index.onChange=array.onChange=update;
 
 function update()
 {
-    if(array.get()) value.set( array.get()[index.get()]);
+    if(array.get())
+    {
+        var input=array.get()[index.get()];
+        if(isNaN(input))
+        {
+            value.set(NaN);
+            return;
+        }
+        value.set(input);
+    }
 }
