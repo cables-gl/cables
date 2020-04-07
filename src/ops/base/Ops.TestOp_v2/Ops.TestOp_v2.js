@@ -11,6 +11,6 @@ op.onLoaded=function()
 
 buttons.onTriggered=function(e)
 {
-    console.log('BNUTTON PRESSED',e);
+    console.log('BUTTON PRESSED',e);
 
 };

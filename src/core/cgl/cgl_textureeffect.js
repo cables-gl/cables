@@ -52,6 +52,7 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._textureTarget = this._textureSource.clone();
 
         profileData.profileEffectBuffercreate++;
+
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
 
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._renderbuffer);

@@ -25,7 +25,10 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
  * @param {MouseEvent} event
  * @return {Number} normalized delta
  */
-export const isWindows = window.navigator.userAgent.indexOf("Windows") != -1;
+export isWindows = window.navigator.userAgent.indexOf("Windows") != -1;
+export isMac = window.navigator.userAgent.indexOf("Mac") != -1
+
+
 const getWheelDelta_ = function (event)
 {
     var normalized;
@@ -34,7 +37,7 @@ const getWheelDelta_ = function (event)
         // chrome
         normalized = (event.wheelDelta % 120) - 0 == -0 ? event.wheelDelta / 120 : event.wheelDelta / 30;
         normalized *= -1.5;
-        if (isWindows) normalized *= 2;
+
     }
     else
     {
@@ -43,8 +46,13 @@ const getWheelDelta_ = function (event)
         if (event.shiftKey) d = event.deltaX;
         var rawAmmount = d || event.detail;
         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
-        normalized *= -3;
+        normalized *= -1;
+
+        if(isMac) normalized/=3;
     }
+
+    if (isWindows) normalized /= 3;
+
 
     if (normalized > 20) normalized = 20;
     if (normalized < -20) normalized = -20;
