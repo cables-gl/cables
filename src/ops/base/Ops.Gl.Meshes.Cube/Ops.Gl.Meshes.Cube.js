@@ -94,20 +94,20 @@ function buildMesh()
             x,  y,  z,
             nx,  y, z,
             // Bottom face
-            nx, ny, nz,
-            x, ny, nz,
-            x, ny,  z,
             nx, ny,  z,
-            // Right face
+            x, ny,  z,
             x, ny, nz,
-            x, ny, z,
+            nx, ny, nz,
+            // Right face
             x,  y, z,
             x, y, nz,
-            // zeft face
-            nx, ny, nz,
-            nx, ny,  z,
+            x, ny, nz,
+            x, ny, z,
+            // Left face
+            nx,  y, nz,
             nx,  y,  z,
-            nx,  y, nz
+            nx, ny,  z,
+            nx, ny, nz
             ];
 
     else
@@ -137,7 +137,7 @@ function buildMesh()
             x,  y, nz,
             x,  y,  z,
             x, ny,  z,
-            // zeft face
+            // Left face
             nx, ny, nz,
             nx, ny,  z,
             nx,  y,  z,
@@ -172,15 +172,15 @@ function buildMesh()
               sx*2-bias, sy*3-bias,
               sx+bias, sy*3-bias,
               // Right face
-              sx*0+bias, sy+bias,
-              sx*1-bias, sy+bias,
-              sx*1-bias, sy*2-bias,
-              sx*0+bias, sy*2-bias,
-              // Left face
               sx*2+bias, sy+bias,
               sx*3-bias, sy+bias,
               sx*3-bias, sy*2-bias,
               sx*2+bias, sy*2-bias,
+               // Left face
+              sx*0+bias, sy+bias,
+              sx*1-bias, sy+bias,
+              sx*1-bias, sy*2-bias,
+              sx*0+bias, sy*2-bias,
             ]);
 
     }
@@ -305,4 +305,3 @@ op.onDelete=function()
 {
     if(mesh)mesh.dispose();
 };
-
