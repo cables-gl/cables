@@ -21,7 +21,7 @@ function()
 
     if(newArr.length!=arr.length)newArr.length=arr.length;
 
-    for(var i=0;i<arr.length;i++) newArr[i]=arr[i];
+    // for(var i=0;i<arr.length;i++) newArr[i]=arr[i];
 
     const idx=Math.floor(inIndex.get());
 

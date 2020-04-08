@@ -98,6 +98,8 @@ function removeEle()
 
 function updateURL()
 {
+    if(src.get()) outDirectLink.set("https://www.youtube.com/watch?v="+src.get());
+
     if(!initialized)return;
     if(!active.get()) return;
     var urlParams=[];
@@ -123,7 +125,6 @@ function updateURL()
 
     console.log("urlStr",urlStr);
 
-    outDirectLink.set("https://www.youtube.com/watch?v="+src.get());
 
 
 

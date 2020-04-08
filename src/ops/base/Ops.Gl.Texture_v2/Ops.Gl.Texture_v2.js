@@ -45,6 +45,7 @@ active.onChange=function()
     if(active.get())
     {
         if(loadedFilename!=filename.get()) realReload();
+        else textureOut.set(tex);
     }
     else textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 };

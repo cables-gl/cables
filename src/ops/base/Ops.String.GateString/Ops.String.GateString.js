@@ -9,7 +9,10 @@ passThroughPort.onChange = update;
 function update()
 {
     if(passThroughPort.get())
+    {
+        valueOutPort.set(null);
         valueOutPort.set(valueInPort.get());
+    }
         // else
         // valueOutPort.set('');
 }
