@@ -37,7 +37,7 @@ function doReset()
     lastTime=null;
     timer.setTime(0);
     outTime.set(0);
-};
+}
 
 inSyncTimeline.onChange=function()
 {
