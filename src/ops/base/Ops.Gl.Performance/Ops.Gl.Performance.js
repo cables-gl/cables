@@ -158,13 +158,18 @@ function updateText()
     if(CGL.profileData.profileGenMipMap>0)warn+='generating mip maps!';
 
 
-
     if(warn.length>0)
     {
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
     }
 
-    element.innerHTML=fps+" fps / "+Math.round(childsTime*100)/100+"ms "+warn;
+
+    var html=fps+" fps / ";
+    html+=Math.round(childsTime*100)/100+"ms / ";
+    html+=Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms ";
+    html+=warn;
+    element.innerHTML=html;
+
     if(op.patch.loading.getProgress()!=1.0)
     {
         element.innerHTML+="<br/>loading "+Math.round(op.patch.loading.getProgress()*100)+'% '+loadingChars[ (++loadingCounter)%loadingChars.length ];
@@ -214,6 +219,7 @@ function updateText()
         //     element.innerHTML+=' - '+ki+': <b>'+v+'</b><br/>';
         // }
     }
+
 
     CGL.profileData.profileUniformCount=0;
     CGL.profileData.profileShaderGetUniform=0;

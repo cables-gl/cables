@@ -420,7 +420,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
-        if (op.hasOwnProperty("onAnimFrame")) this.animFrameOps.push(op);
+        
+        if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
         this.ops.push(op);
@@ -437,6 +438,9 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 
 Patch.prototype.addOnAnimFrame = function (op)
 {
+    // if(!op.onAnimFrame)return;
+    for (var i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { console.log(111); return;}
+    
     this.animFrameOps.push(op);
 };
 
@@ -529,16 +533,21 @@ Patch.prototype.renderFrame = function (e)
     this.freeTimer.update();
     var time = this.timer.getTime();
 
+
+    const startTime=performance.now();
+
     for (var i = 0; i < this.animFrameCallbacks.length; ++i)
     {
         if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
     }
 
-
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
         if (this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
     }
+
+    CGL.profileData.profileOnAnimFrameOps=performance.now()-startTime;
+
     
     this.emitEvent("onRenderFrame", time);
 

@@ -12,6 +12,8 @@ const ProfileData = function ()
     this.profileMeshSetGeom=0;
     this.profileTextureNew=0;
     this.profileGenMipMap=0;
+    this.profileOnAnimFrameOps=0;
+
 };
 
 export const profileData = new ProfileData();
