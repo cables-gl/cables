@@ -1,0 +1,56 @@
+{
+    "id": "d1fce807-a626-433f-ba61-3f59149fe46e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1586341642680
+        },
+        {
+            "message": "Ops.User.cables.CubeMapMaterial_v2 renamed to Ops.Gl.CubeMap.CubeMapMaterial_v2",
+            "author": "simod",
+            "date": 1586341845509
+        }
+    ],
+    "authorName": "simod",
+    "created": 1586341651597,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Mip Level",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap"
+            },
+            {
+                "type": "0",
+                "name": "Reflection",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.cables.CubeMapMaterial_v2"
+    }
+}
