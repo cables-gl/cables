@@ -6,32 +6,27 @@ const
 
     resultNumberOut = op.outNumber("Result");
 
-var selectIndex = 0;
-
-const LOGIC_GREATER = 0,
-    LOGIC_LESS = 1,
-    LOGIC_GREATER_EQUALS = 2,
-    LOGIC_LESS_EQUALS = 3,
-    LOGIC_EQUAL = 4,
-    LOGIC_NOT_EQUAL = 5,
-    BETWEEN = 6,
-    BETWEEN_EQUALS = 7;
+var logicFunc;
 
 logicSelectMode.onChange=onFilterChange;
+
+numberIn_1.onChange = numberIn_2.onChange = numberIn_3.onChange=update;
+
+onFilterChange();
 
 function onFilterChange()
 {
     var logicSelectValue = logicSelectMode.get();
-    if(logicSelectValue === '>') selectIndex = LOGIC_GREATER;
-    else if(logicSelectValue === '<') selectIndex = LOGIC_LESS;
-    else if(logicSelectValue === '>=') selectIndex = LOGIC_GREATER_EQUALS;
-    else if(logicSelectValue === '<=') selectIndex = LOGIC_LESS_EQUALS;
-    else if(logicSelectValue === '==') selectIndex = LOGIC_EQUAL;
-    else if(logicSelectValue === '!=') selectIndex = LOGIC_NOT_EQUAL;
-    else if(logicSelectValue === '><') selectIndex = BETWEEN;
-    else if(logicSelectValue === '>=<') selectIndex = BETWEEN_EQUALS;
+    if(logicSelectValue === '>')        logicFunc = function(a,b,c) { if(a > b) return 1; return 0; };
+    else if(logicSelectValue === '<')   logicFunc = function(a,b,c) { if(a < b) return 1; return 0; };
+    else if(logicSelectValue === '>=')  logicFunc = function(a,b,c) { if(a >= b) return 1; return 0; };
+    else if(logicSelectValue === '<=')  logicFunc = function(a,b,c) { if(a <= b) return 1; return 0; };
+    else if(logicSelectValue === '==')  logicFunc = function(a,b,c) { if(a === b) return 1; return 0; };
+    else if(logicSelectValue === '!=')  logicFunc = function(a,b,c) { if(a !== b) return 1; return 0; };
+    else if(logicSelectValue === '><')  logicFunc = function(a,b,c) { if(a>Math.min(b,c) && a<Math.max(b,c ) ) return 1; return 0; };
+    else if(logicSelectValue === '>=<') logicFunc = function(a,b,c) { if(a>=Math.min(b,c) && a<=Math.max(b,c )) return 1; return 0; };
 
-    if (selectIndex === 6 || selectIndex == 7)
+    if (logicSelectValue === '><' || logicSelectValue === '>=<')
     {
         numberIn_3.setUiAttribs({greyout:false});
         numberIn_2.setUiAttribs({title:"Min"});
@@ -51,74 +46,11 @@ function update()
     var n2 = numberIn_2.get();
     var n3 = numberIn_3.get();
 
-    var resultNumber = 0;
-
-    if(selectIndex === LOGIC_GREATER)
-    {
-        if(n1 > n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === LOGIC_LESS)
-    {
-        if(n1 < n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === LOGIC_GREATER_EQUALS)
-    {
-        if(n1 >= n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === LOGIC_LESS_EQUALS)
-    {
-        if(n1 <= n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === LOGIC_EQUAL)
-    {
-        if(n1 === n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === LOGIC_NOT_EQUAL)
-    {
-        if(n1 !== n2)
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === BETWEEN)
-    {
-        if(n1 > Math.min(n2 , n3 )  &&
-            n1 < Math.max(n2 , n3 ) )
-        {
-            resultNumber=1;
-        }
-    }
-    else if(selectIndex === BETWEEN_EQUALS)
-    {
-        if(n1 >= Math.min(n2 , n3 )  &&
-            n1 <= Math.max(n2 , n3 ) )
-        {
-            resultNumber=1;
-        }
-    }
+    var resultNumber = logicFunc(n1,n2,n3);
 
     resultNumberOut.set(resultNumber);
-
-
 };
 
-numberIn_1.onChange = numberIn_2.onChange = numberIn_3.onChange=update;
-update();
-onFilterChange();
+
 
 
