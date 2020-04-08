@@ -35,13 +35,18 @@ exec.onTriggered=function()
 
         console.table(rows);
 
+
+        var rowsBranches=[];
         for(var i in branches)
         {
             var count=0;
             for(var j in branches[i].counts) count+=branches[i].counts[j];
 
-            console.log("branch",i,count,Math.round(count/numGlCalls*100)+"%",branches[i].counts);
+            console.log("branch",i,branches[i].counts);
+            rowsBranches.push([i,count,Math.round(count/numGlCalls*100)+"%"]);
         }
+        console.table(rowsBranches);
+
         resetStats();
         dumpFrame=false;
     }
