@@ -26,12 +26,10 @@ function delayedReload()
 
 op.onFileChanged=function(fn)
 {
-    if(filename.get() && filename.get().indexOf(fn)>-1) reload();
+    if(filename.get() && filename.get().indexOf(fn)>-1) reload(true);
 };
 
-
-
-function reload()
+function reload(addCachebuster)
 {
     if (!filename.get()) return;
 
@@ -47,8 +45,11 @@ function reload()
     let f = CABLES.ajax;
     if (jsonp.get()) f = CABLES.jsonp;
 
+    var url=op.patch.getFilePath(filename.get());
+    if(addCachebuster)url+='?rnd='+CABLES.generateUUID();
+
     f(
-        op.patch.getFilePath(filename.get()),
+        url,
         (err, _data, xhr) =>
         {
 

@@ -8,6 +8,7 @@ const cgl=op.patch.cgl;
 var originals={};
 var counts={};
 var durations={};
+var branches={};
 var dumpFrame=false;
 
 exec.onTriggered=function()
@@ -24,11 +25,28 @@ exec.onTriggered=function()
     {
         end();
         var rows=[];
+        var numGlCalls=0;
         for(var i in originals)
             if(counts[i]>0)
+            {
                 rows.push([i,counts[i],durations[i]]);
+                numGlCalls+=counts[i];
+            }
 
         console.table(rows);
+
+
+        var rowsBranches=[];
+        for(var i in branches)
+        {
+            var count=0;
+            for(var j in branches[i].counts) count+=branches[i].counts[j];
+
+            console.log("branch",i,branches[i].counts);
+            rowsBranches.push([i,count,Math.round(count/numGlCalls*100)+"%"]);
+        }
+        console.table(rowsBranches);
+
         resetStats();
         dumpFrame=false;
     }
@@ -38,9 +56,17 @@ function profile(func, funcName)
 {
     return function ()
     {
+
         var start = performance.now(),
         returnVal = func.apply(this, arguments),
         duration = performance.now() - start;
+
+        var branchName=CABLES.profilerBranches.join("_");
+        if(CABLES.profilerBranches.length==0)branchName="_unknown";
+        branches[branchName]=branches[branchName]||{};
+        branches[branchName].counts=branches[branchName].counts||{};
+        branches[branchName].counts[funcName]=branches[branchName].counts[funcName]||0;
+        branches[branchName].counts[funcName]++;
 
         durations[funcName]+=duration;
         counts[funcName]++;
@@ -50,6 +76,9 @@ function profile(func, funcName)
 
 function resetStats()
 {
+
+    branches={};
+
     for(var i in originals)
     {
         durations[i]=0;

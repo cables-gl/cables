@@ -165,11 +165,13 @@ inExec.onTriggered=function()
     cgl.popModelMatrix();
 };
 
-function loadBin()
+function loadBin(addCacheBuster)
 {
     if(!loadingId)loadingId=cgl.patch.loading.start('gltf',inFile.get());
 
-    const url = op.patch.getFilePath(String(inFile.get()));
+    var url = op.patch.getFilePath(String(inFile.get()));
+    if(addCacheBuster)url+='?rnd='+CABLES.generateUUID();
+
     var oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
@@ -201,7 +203,7 @@ function loadBin()
 op.onFileChanged=function(fn)
 {
 
-    if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon();
+    if(fn && fn.length>3 && inFile.get() && inFile.get().indexOf(fn)>-1) reloadSoon(true);
 
 };
 
@@ -220,7 +222,7 @@ function reloadSoon(nocache)
     clearTimeout(timedLoader);
     timedLoader=setTimeout(function()
     {
-        loadBin();
+        loadBin(nocache);
     },30);
 }
 

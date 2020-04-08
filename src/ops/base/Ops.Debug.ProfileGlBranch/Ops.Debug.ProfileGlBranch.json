@@ -1,0 +1,31 @@
+{
+    "id": "a0c93e10-2ac2-4e24-9a21-c8b13b5a31f1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586327559122
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586327592600,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "5",
+                "name": "Branch Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Debug.ProfileGlBranch"
+    }
+}
