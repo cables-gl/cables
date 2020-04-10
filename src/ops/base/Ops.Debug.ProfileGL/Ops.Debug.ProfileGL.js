@@ -11,6 +11,13 @@ var durations={};
 var branches={};
 var dumpFrame=false;
 
+var query=null;
+
+var started=false;
+
+const ext = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+
+
 exec.onTriggered=function()
 {
     if(dumpFrame)
@@ -19,7 +26,35 @@ exec.onTriggered=function()
         resetStats();
     }
 
+if(!query)
+{
+query = gl.createQuery();
+gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
+started=true;
+
+}
+
     next.trigger();
+
+if(query && started)
+{
+    gl.endQuery(ext.TIME_ELAPSED_EXT);
+    started=false;
+}
+
+if(query)
+{
+    const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
+    if (available)
+    {
+        const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
+        console.log("gpu ms",elapsedNanos/1000000);
+        query=null;
+    }
+
+}
+
+
 
     if(dumpFrame)
     {

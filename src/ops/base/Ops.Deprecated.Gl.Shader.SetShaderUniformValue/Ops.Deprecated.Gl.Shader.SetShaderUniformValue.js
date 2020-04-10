@@ -53,14 +53,9 @@ function updateShader(theShader)
     
     var uniformNames=[];
     
-    console.log(111);
-    
     if(!shader)return;
     needsUpdate=false;
     op.log('shader update!');
-
-
-    console.log(222);
     
     
     // shader.glslVersion=0;

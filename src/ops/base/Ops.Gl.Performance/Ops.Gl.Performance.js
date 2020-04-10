@@ -18,8 +18,9 @@ var fpsStartTime=0;
 var childsTime=0;
 var avgMsChilds=0;
 var queue=[];
-var queueChilds=[];
-var numBars=128;
+var timesMainloop=[];
+var timesOnFrame=[];
+var numBars=200;
 var avgMs=0;
 var selfTime=0;
 var canvas=null;
@@ -34,7 +35,8 @@ exe.onLinkChanged =
 for(var i=0;i<numBars;i++)
 {
     queue[i]=-1;
-    queueChilds[i]=-1;
+    timesMainloop[i]=-1;
+    timesOnFrame[i]=-1;
 }
 
 element.id="performance";
@@ -56,6 +58,7 @@ container.appendChild(element);
 
 element.addEventListener("click", toggleOpened);
 
+toggleOpened();
 
 op.onDelete=function()
 {
@@ -99,26 +102,34 @@ function toggleOpened()
     }
 }
 
+const colorBg="#222222";
+const colorRAF="#ffffff";
+const colorRAFSlow="#ff0000";
+
+
 function updateCanvas()
 {
-    ctx.fillStyle="#222222";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    var height=canvas.height;
 
-    ctx.fillStyle="#555555";
+    ctx.fillStyle=colorBg;
+    ctx.fillRect(0,0,canvas.width,height);
+
+    ctx.fillStyle=colorRAF;
     var k=0;
     for(k=numBars;k>=0;k--)
     {
-        if(queue[k]>30)ctx.fillStyle="#ff5555";
-        ctx.fillRect(numBars-k,canvas.height-queue[k]*2.5,1,queue[k]*2.5);
-        if(queue[k]>30)ctx.fillStyle="#555555";
+        if(queue[k]>30)ctx.fillStyle=colorRAFSlow;
+        ctx.fillRect(numBars-k,height-queue[k]*2.5,1,2);
+        if(queue[k]>30)ctx.fillStyle=colorRAF;
     }
+
 
     ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        if(queueChilds[k]>30)ctx.fillStyle="#ff00ff";
-        ctx.fillRect(numBars-k,canvas.height-queueChilds[k]*2.5,1,queueChilds[k]*2.5);
-        if(queueChilds[k]>30)ctx.fillStyle="#aaaaaa";
+        if(timesMainloop[k]>30)ctx.fillStyle="#ff00ff";
+        ctx.fillRect(numBars-k,height-timesMainloop[k]*2.5,1,timesMainloop[k]*2.5);
+        if(timesMainloop[k]>30)ctx.fillStyle="#aaaaaa";
     }
 
 }
@@ -128,7 +139,7 @@ function createCanvas()
     canvas = document.createElement('canvas');
     canvas.id     = "performance_"+op.patch.config.glCanvasId;
     canvas.width  = numBars;
-    canvas.height = "128";
+    canvas.height = "256";
     canvas.style.display   = "block";
     canvas.style.opacity   = 0.9;
     canvas.style.position  = "absolute";
@@ -188,9 +199,9 @@ function updateText()
                 count++;
             }
 
-            if(queueChilds[i]>-1)
+            if(timesMainloop[i]>-1)
             {
-                avgMsChilds+=queueChilds[i];
+                avgMsChilds+=timesMainloop[i];
             }
         }
 
@@ -397,8 +408,8 @@ exe.onTriggered=function()
             queue.push(timeUsed);
             queue.shift();
 
-            queueChilds.push(childsTime);
-            queueChilds.shift();
+            timesMainloop.push(childsTime);
+            timesMainloop.shift();
 
             updateCanvas();
         }

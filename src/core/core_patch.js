@@ -438,8 +438,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 
 Patch.prototype.addOnAnimFrame = function (op)
 {
-    // if(!op.onAnimFrame)return;
-    for (var i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { console.log(111); return;}
+    for (var i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { return;}
     
     this.animFrameOps.push(op);
 };
