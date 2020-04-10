@@ -1,5 +1,7 @@
 const ProfileData = function ()
 {
+
+    this.pause=false;
     this.profileUniformCount = 0;
     this.profileShaderBinds = 0;
     this.profileUniformCount = 0;

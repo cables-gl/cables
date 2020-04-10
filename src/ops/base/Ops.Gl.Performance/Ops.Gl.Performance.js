@@ -466,7 +466,7 @@ exe.onTriggered=function()
     {
         measures();
 
-        if(opened)
+        if(opened && !CGL.profileData.pause)
         {
             var timeUsed=performance.now()-lastTime;
             // if(timeUsed>30)op.log("peak ",performance.now()-lastTime);
@@ -506,9 +506,9 @@ exe.onTriggered=function()
 
     if(smoothGraph.get())
     {
-        childsTime=childsTime*0.8+nChildsTime*0.2;
-        currentTimeMainloop=currentTimeMainloop*0.8+nCurrentTimeMainloop*0.2;
-        currentTimeOnFrame=currentTimeOnFrame*0.8+nCurrentTimeOnFrame*0.2;
+        childsTime=childsTime*0.9+nChildsTime*0.1;
+        currentTimeMainloop=currentTimeMainloop*0.9+nCurrentTimeMainloop*0.1;
+        currentTimeOnFrame=currentTimeOnFrame*0.9+nCurrentTimeOnFrame*0.1;
 
     }
     else
@@ -530,8 +530,6 @@ function startGlQuery()
         gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
         startedQuery=true;
     }
-
-
 }
 
 function endGlQuery()
