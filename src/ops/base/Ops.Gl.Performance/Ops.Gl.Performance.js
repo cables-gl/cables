@@ -2,6 +2,7 @@ const
     exe=op.inTrigger("exe"),
     inShow=op.inValueBool("Visible",true),
     next=op.outTrigger("childs"),
+    smoothGraph=op.inBool("Smooth Graph",true),
     outFPS=op.outValue("FPS");
 
 // var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -223,7 +224,7 @@ function updateText()
         html+='<span style="color:'+colorRAF+'">■</span> '+fps+" fps ";
         html+='<span style="color:'+colorMainloop+'">■</span> '+Math.round(currentTimeMainloop*100)/100+'ms mainloop ';
         html+='<span style="color:'+colorOnFrame+'">■</span> '+Math.round(currentTimeOnFrame*100)/100+"ms onframe ";
-        html+='<span style="color:'+colorGPU+'">■</span> '+Math.round(currentTimeGPU*100)/100+"ms GPU";
+        if(ext) html+='<span style="color:'+colorGPU+'">■</span> '+Math.round(currentTimeGPU*100)/100+"ms GPU";
         html+=warn;
         element.innerHTML=html;
     }
@@ -231,7 +232,7 @@ function updateText()
     {
         html+=fps+" fps / ";
         html+='CPU: '+Math.round((currentTimeMainloop+CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs)*100)/100+'ms / ';
-        if(currentTimeGPU)html+='GPU: '+Math.round(currentTimeGPU*100)/100+'ms  ';
+        if(ext && currentTimeGPU)html+='GPU: '+Math.round(currentTimeGPU*100)/100+'ms  ';
         element.innerHTML=html;
     }
 
@@ -488,14 +489,31 @@ exe.onTriggered=function()
 
     endGlQuery();
 
-    childsTime=performance.now()-startTimeChilds;
-    currentTimeMainloop=CGL.profileData.profileMainloopMs;
-    currentTimeOnFrame=CGL.profileData.profileOnAnimFrameOps-currentTimeMainloop;
+
+    var nChildsTime=performance.now()-startTimeChilds;
+    var nCurrentTimeMainloop=CGL.profileData.profileMainloopMs;
+    var nCurrentTimeOnFrame=CGL.profileData.profileOnAnimFrameOps-currentTimeMainloop;
+
+    if(smoothGraph.get())
+    {
+        childsTime=childsTime*0.8+nChildsTime*0.2;
+        currentTimeMainloop=currentTimeMainloop*0.8+nCurrentTimeMainloop*0.2;
+        currentTimeOnFrame=currentTimeOnFrame*0.8+nCurrentTimeOnFrame*0.2;
+
+    }
+    else
+    {
+        childsTime=nChildsTime;
+        currentTimeMainloop=nCurrentTimeMainloop;
+        currentTimeOnFrame=nCurrentTimeOnFrame;
+
+    }
 
 };
 
 function startGlQuery()
 {
+    if(!ext)return;
     if(!query)
     {
         query = gl.createQuery();
@@ -508,6 +526,7 @@ function startGlQuery()
 
 function endGlQuery()
 {
+    if(!ext)return;
     if(query && startedQuery)
     {
         gl.endQuery(ext.TIME_ELAPSED_EXT);

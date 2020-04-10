@@ -10,6 +10,11 @@
                 "type": "0",
                 "name": "Visible",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Smooth Graph",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
