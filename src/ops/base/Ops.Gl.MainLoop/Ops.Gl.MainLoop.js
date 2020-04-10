@@ -130,6 +130,8 @@ function render(time)
     if(!active.get())return;
     if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
 
+    const startTime=performance.now();
+
     if(op.patch.loading.getProgress()<1.0 && reduceLoadingFPS.get())
     {
         op.patch.config.fpsLimit=5;
@@ -165,9 +167,7 @@ function render(time)
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     }
 
-    const startTime=performance.now();
     trigger.trigger();
-    CGL.profileData.profileMainloopMs=performance.now()-startTime;
 
     if(CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
@@ -188,6 +188,9 @@ function render(time)
 
     if(!cgl.frameStore.phong)cgl.frameStore.phong={};
     rframes++;
+
+    CGL.profileData.profileMainloopMs=performance.now()-startTime;
+
 };
 
 

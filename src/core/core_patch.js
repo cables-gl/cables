@@ -542,11 +542,18 @@ Patch.prototype.renderFrame = function (e)
 
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
-        if (this.animFrameOps[i].onAnimFrame) this.animFrameOps[i].onAnimFrame(time);
+        
+        if (this.animFrameOps[i].onAnimFrame)
+        {
+            // const start=performance.now();
+            this.animFrameOps[i].onAnimFrame(time);
+            // const used=performance.now()-start;
+            // console.log(used,this.animFrameOps[i].objName);
+        }
     }
 
     CGL.profileData.profileOnAnimFrameOps=performance.now()-startTime;
-
+    // console.log("----");
     
     this.emitEvent("onRenderFrame", time);
 

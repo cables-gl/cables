@@ -38,7 +38,10 @@ const colorGPU="#ffa600";
 
 // color: https://learnui.design/tools/data-color-picker.html
 var startedQuery=false;
-var lastGlQueryTimeMs=0;
+
+var currentTimeGPU=0;
+var currentTimeMainloop=0;
+var currentTimeOnFrame=0;
 
 
 const gl=op.patch.cgl.gl;
@@ -218,17 +221,17 @@ function updateText()
     if(opened)
     {
         html+='<span style="color:'+colorRAF+'">■</span> '+fps+" fps ";
-        html+='<span style="color:'+colorMainloop+'">■</span> '+Math.round(childsTime*100)/100+'ms mainloop ';
-        html+='<span style="color:'+colorOnFrame+'">■</span> '+Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms onframe ";
-        html+='<span style="color:'+colorGPU+'">■</span> '+Math.round(lastGlQueryTimeMs*100)/100+"ms GPU";
+        html+='<span style="color:'+colorMainloop+'">■</span> '+Math.round(currentTimeMainloop*100)/100+'ms mainloop ';
+        html+='<span style="color:'+colorOnFrame+'">■</span> '+Math.round(currentTimeOnFrame*100)/100+"ms onframe ";
+        html+='<span style="color:'+colorGPU+'">■</span> '+Math.round(currentTimeGPU*100)/100+"ms GPU";
         html+=warn;
         element.innerHTML=html;
     }
     else
     {
         html+=fps+" fps / ";
-        html+='CPU: '+Math.round((childsTime+CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs)*100)/100+'ms / ';
-        if(lastGlQueryTimeMs)html+='GPU: '+Math.round(lastGlQueryTimeMs*100)/100+'ms  ';
+        html+='CPU: '+Math.round((currentTimeMainloop+CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs)*100)/100+'ms / ';
+        if(currentTimeGPU)html+='GPU: '+Math.round(currentTimeGPU*100)/100+'ms  ';
         element.innerHTML=html;
     }
 
@@ -465,7 +468,7 @@ exe.onTriggered=function()
             timesOnFrame.push(CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs);
             timesOnFrame.shift();
 
-            timesGPU.push(lastGlQueryTimeMs);
+            timesGPU.push(currentTimeGPU);
             timesGPU.shift();
 
 
@@ -486,6 +489,8 @@ exe.onTriggered=function()
     endGlQuery();
 
     childsTime=performance.now()-startTimeChilds;
+    currentTimeMainloop=CGL.profileData.profileMainloopMs;
+    currentTimeOnFrame=CGL.profileData.profileOnAnimFrameOps-currentTimeMainloop;
 
 };
 
@@ -515,7 +520,7 @@ function endGlQuery()
         if (available)
         {
             const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-            lastGlQueryTimeMs=elapsedNanos/1000000;
+            currentTimeGPU=elapsedNanos/1000000;
             query=null;
         }
 
