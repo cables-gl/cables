@@ -1,0 +1,41 @@
+{
+    "id": "7c96fee9-4c2f-45e1-a41b-096b06d286b8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585044878051
+        },
+        {
+            "message": "Ops.User.pandur.IsTriggered renamed to Ops.Trigger.IsTriggered",
+            "author": "pandur",
+            "date": 1586427124794
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1585045179419,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Was Triggered",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.IsTriggered"
+    },
+    "summary": "return true Is this currently being triggered",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
