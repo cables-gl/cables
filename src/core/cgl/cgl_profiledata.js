@@ -15,6 +15,8 @@ const ProfileData = function ()
     this.profileOnAnimFrameOps=0;
 
     this.profileMainloopMs=0;
+    this.profileMeshDraw=0;
+    this.profileTextureEffect=0;
     
 
 };

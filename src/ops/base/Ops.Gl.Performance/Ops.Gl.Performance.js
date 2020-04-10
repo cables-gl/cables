@@ -274,6 +274,12 @@ function updateText()
             ' videos: '+CGL.profileData.profileVideosPlaying;
 
 
+        element.innerHTML+=
+        ' draw meshes: '+Math.ceil(CGL.profileData.profileMeshDraw/fps)+
+        ' framebuffer blit: '+Math.ceil(CGL.profileData.profileFramebuffer/fps)+
+        ' texeffect blit: '+Math.ceil(CGL.profileData.profileTextureEffect/fps);
+
+
         // var vars= CABLES.patch.getVars();
 
         // element.innerHTML+='<br/><br/>vars:<br/>';
@@ -302,6 +308,10 @@ function updateText()
     CGL.profileData.profileNonTypedAttribNames="";
     CGL.profileData.profileTextureNew=0;
     CGL.profileData.profileGenMipMap=0;
+    CGL.profileData.profileFramebuffer=0
+    CGL.profileData.profileMeshDraw=0;
+    CGL.profileData.profileTextureEffect=0;
+
 
 }
 

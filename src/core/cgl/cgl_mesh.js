@@ -601,6 +601,9 @@ Mesh.prototype.render = function (shader)
     else
     if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
     else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
+
+    profileData.profileMeshDraw++;
+
 };
 
 Mesh.prototype.setNumInstances = function (n)

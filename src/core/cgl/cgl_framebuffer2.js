@@ -264,6 +264,8 @@ Framebuffer2.prototype.renderStart = function() {
 Framebuffer2.prototype.renderEnd = function() {
     this._cgl.popPMatrix();
 
+    profileData.profileFramebuffer++;
+
     if (this._numRenderBuffers <= 1) {
         this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._frameBuffer);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);

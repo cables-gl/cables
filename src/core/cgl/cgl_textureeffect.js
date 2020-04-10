@@ -172,6 +172,8 @@ TextureEffect.prototype.finish = function ()
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
 
+    profileData.profileTextureEffect++;
+
     // this._textureTarget.updateMipMap();
 
     if (this._textureTarget.filter == Texture.FILTER_MIPMAP)
