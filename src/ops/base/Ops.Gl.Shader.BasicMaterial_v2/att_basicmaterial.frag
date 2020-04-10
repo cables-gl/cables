@@ -23,7 +23,8 @@ void main()
     vec4 col=color;
 
     #ifdef HAS_TEXTURES
-        vec2 uv=vec2(texCoord.s,1.0-texCoord.t);
+        // vec2 uv=vec2(texCoord.s,1.0-texCoord.t);
+        vec2 uv=texCoord;
 
         #ifdef HAS_TEXTURE_DIFFUSE
             col=texture(tex,uv);
@@ -37,7 +38,8 @@ void main()
         col.a*=color.a;
         #ifdef HAS_TEXTURE_OPACITY
             #ifdef TRANSFORMALPHATEXCOORDS
-                uv=vec2(texCoordOrig.s,1.0-texCoordOrig.t);
+                // uv=vec2(texCoordOrig.s,1.0-texCoordOrig.t);
+                uv=texCoordOrig;
             #endif
             #ifdef ALPHA_MASK_ALPHA
                 col.a*=texture(texOpacity,uv).a;

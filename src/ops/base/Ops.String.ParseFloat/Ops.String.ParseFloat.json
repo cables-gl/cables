@@ -19,7 +19,7 @@
         ],
         "name": "Ops.String.ParseFloat"
     },
-    "summary": "Parses a string and returns a floating point number ",
+    "summary": "Parses a string and returns a floating point number / string to number",
     "collections": [
         "converter"
     ],

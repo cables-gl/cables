@@ -24,14 +24,51 @@ var Gltf=class
     }
 };
 
+function Utf8ArrayToStr(array)
+{
+    if(window.TextDecoder) return new TextDecoder("utf-8").decode(array);
 
+    var out, i, len, c;
+    var char2, char3;
+
+    out = "";
+    len = array.length;
+    i = 0;
+    while(i < len) {
+        c = array[i++];
+        switch(c >> 4)
+        {
+            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
+            // 0xxxxxxx
+            out += String.fromCharCode(c);
+            break;
+            case 12: case 13:
+            // 110x xxxx   10xx xxxx
+            char2 = array[i++];
+            out += String.fromCharCode(((c & 0x1F) << 6) | (char2 & 0x3F));
+            break;
+            case 14:
+                // 1110 xxxx  10xx xxxx  10xx xxxx
+                char2 = array[i++];
+                char3 = array[i++];
+                out += String.fromCharCode(((c & 0x0F) << 12) |
+                    ((char2 & 0x3F) << 6) |
+                    ((char3 & 0x3F) << 0));
+                break;
+        }
+    }
+
+    return out;
+}
 
 function readChunk(dv,bArr,arrayBuffer,offset)
 {
     const chunk={};
 
     chunk.size=dv.getUint32(offset+0,le);
-    chunk.type = new TextDecoder("utf-8").decode(bArr.subarray(offset+4, offset+4+4));
+
+    // chunk.type = new TextDecoder("utf-8").decode(bArr.subarray(offset+4, offset+4+4));
+    chunk.type=Utf8ArrayToStr(bArr.subarray(offset+4, offset+4+4));
 
     if(chunk.type=="BIN\0")
     {
@@ -40,7 +77,8 @@ function readChunk(dv,bArr,arrayBuffer,offset)
     else
     if(chunk.type=="JSON")
     {
-        const json = new TextDecoder("utf-8").decode(bArr.subarray(offset+8, offset+8+chunk.size));
+        // const json = new TextDecoder("utf-8").decode(bArr.subarray(offset+8, offset+8+chunk.size));
+        const json = Utf8ArrayToStr(bArr.subarray(offset+8, offset+8+chunk.size));
 
         try
         {
@@ -117,7 +155,8 @@ function parseGltf(arrayBuffer)
     var byteArray = new Uint8Array(arrayBuffer);
     var pos=0;
 
-    var string = new TextDecoder("utf-8").decode(byteArray.subarray(pos, 4));
+    // var string = new TextDecoder("utf-8").decode(byteArray.subarray(pos, 4));
+    var string = Utf8ArrayToStr(byteArray.subarray(pos, 4));
     pos+=4;
     if(string!='glTF')
     {

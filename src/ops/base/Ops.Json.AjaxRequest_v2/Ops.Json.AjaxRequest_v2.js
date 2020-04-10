@@ -40,6 +40,7 @@ function reload(addCachebuster)
 
     op.setUiAttrib({"extendTitle":CABLES.basename(filename.get())});
 
+    op.setUiError("jsonerr", null);
 
     let f = CABLES.ajax;
     if (jsonp.get()) f = CABLES.jsonp;
@@ -51,6 +52,12 @@ function reload(addCachebuster)
         url,
         (err, _data, xhr) =>
         {
+
+            if(err)
+            {
+                console.error(err);
+                return;
+            }
             try
             {
                 var data = _data;
@@ -58,14 +65,14 @@ function reload(addCachebuster)
 
                 if (outData.get()) outData.set(null);
                 outData.set(data);
-                op.uiAttr({ error: "" });
+                op.uiAttr({ error: null });
                 op.patch.loading.finished(loadingId);
                 outTrigger.trigger();
                 isLoading.set(false);
             }
             catch (e)
             {
-                console.log(e);
+                console.error(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
@@ -74,7 +81,6 @@ function reload(addCachebuster)
         null,
         null,
         null,
-        null,
-        headers.get(),
+        headers.get()
     );
 }

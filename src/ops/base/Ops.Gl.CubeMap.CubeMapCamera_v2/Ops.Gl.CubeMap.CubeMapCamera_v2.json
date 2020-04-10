@@ -1,0 +1,17 @@
+{
+    "id": "2db05f08-ea89-4e56-bba9-8668d963a461",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1586341751085
+        },
+        {
+            "message": "Ops.User.cables.CubeMapCamera_v2 renamed to Ops.Gl.CubeMap.CubeMapCamera_v2",
+            "author": "simod",
+            "date": 1586341874965
+        }
+    ],
+    "authorName": "simod",
+    "created": 1586341790593
+}

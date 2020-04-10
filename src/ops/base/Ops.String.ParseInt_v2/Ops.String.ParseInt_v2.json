@@ -19,7 +19,7 @@
         ],
         "name": "Ops.String.ParseInt2"
     },
-    "summary": "Parse a string to a integer number",
+    "summary": "Parse a string to a integer number / string to number",
     "issues": "",
     "collections": [
         "converter"

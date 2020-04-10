@@ -110,7 +110,7 @@ function refresh()
         do
         {
             count++;
-            if(count>500)
+            if(count>(texHeight.get()+texWidth.get())/2 )
             {
                 op.log("too many iterations - maximize size");
                 break;

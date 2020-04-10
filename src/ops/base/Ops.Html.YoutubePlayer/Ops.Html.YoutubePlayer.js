@@ -40,11 +40,11 @@ op.onDelete=removeEle;
 
 active.onChange=update;
 
-console.log("---");
+// console.log("---");
 
 op.init=function()
 {
-    console.log("yt init",active.get());
+    // console.log("yt init",active.get());
     initialized=true;
     setTimeout(()=>{update();},100);
 
@@ -69,7 +69,7 @@ function addElement()
     if(!initialized)return;
     if(element) removeEle();
 
-console.log("ADD youtube element!",initialized);
+// console.log("ADD youtube element!",initialized);
 
     var parent = op.patch.cgl.canvas.parentElement;
     element = document.createElement('iframe');
@@ -98,6 +98,8 @@ function removeEle()
 
 function updateURL()
 {
+    if(src.get()) outDirectLink.set("https://www.youtube.com/watch?v="+src.get());
+
     if(!initialized)return;
     if(!active.get()) return;
     var urlParams=[];
@@ -111,19 +113,18 @@ function updateURL()
 
 
     var urlParamsStr='';
-    if(urlParams.length>0) urlParamsStr='?'+urlParams.join('&');
+    if(urlParams.length>0) urlParamsStr='?'+urlParams.join('&')+'&rel=0';
 
     const urlStr='https://www.youtube.com/embed/'+src.get()+urlParamsStr;
     if(element)
     {
         element.setAttribute('src',urlStr);
-        console.log("yes set element src");
+        // console.log("yes set element src");
     }
-    else console.log("no element for src url...");
+    // else console.log("no element for src url...");
 
-    console.log("urlStr",urlStr);
+    // console.log("urlStr",urlStr);
 
-    outDirectLink.set("https://www.youtube.com/watch?v="+src.get());
 
 
 

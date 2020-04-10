@@ -27,20 +27,28 @@ op.setPortGroup('Structure',[nColumns,nRows]);
 
 var geom=new CGL.Geometry('rectangle');
 var mesh=null;
+var needsRebuild=false;
 
-axis.onChange=rebuild;
-pivotX.onChange=rebuild;
-pivotY.onChange=rebuild;
-width.onChange=rebuild;
-height.onChange=rebuild;
-nRows.onChange=rebuild;
-nColumns.onChange=rebuild;
+axis.onChange=
+    pivotX.onChange=
+    pivotY.onChange=
+    width.onChange=
+    height.onChange=
+    nRows.onChange=
+    nColumns.onChange=rebuildLater;
 rebuild();
+
+function rebuildLater()
+{
+    needsRebuild=true;
+}
 
 op.preRender=
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
+
+    if(needsRebuild)rebuild();
 
 
     if(active.get() && mesh) mesh.render(cgl.getShader());
@@ -50,7 +58,7 @@ render.onTriggered=function()
 function rebuild()
 {
     var w=width.get();
-    var h=height.get();
+    var h=parseFloat(height.get());
     var x=0;
     var y=0;
 
@@ -142,6 +150,7 @@ function rebuild()
 
     geomOut.set(null);
     geomOut.set(geom);
+    needsRebuild=false;
 
 }
 

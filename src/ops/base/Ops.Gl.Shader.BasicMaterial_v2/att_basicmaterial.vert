@@ -26,8 +26,8 @@ void main()
     mat4 mvMatrix;
 
     norm=attrVertNormal;
-    texCoordOrig=attrTexCoord;
-    texCoord=attrTexCoord;
+    texCoordOrig=vec2(attrTexCoord.x,1.0-attrTexCoord.y);
+    texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);
     #ifdef HAS_TEXTURES
         texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
         texCoord.y=texCoord.y*diffuseRepeatY+texOffsetY;

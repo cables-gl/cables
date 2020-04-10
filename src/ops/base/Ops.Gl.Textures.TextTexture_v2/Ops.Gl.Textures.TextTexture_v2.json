@@ -53,19 +53,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "align",
-                "group": "Alignment"
-            },
-            {
                 "type": "0",
                 "name": "vertical align index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "vertical align",
-                "group": "Alignment"
             },
             {
                 "type": "0",
