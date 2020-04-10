@@ -54,11 +54,6 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Alpha Mask Source",
-                "group": "Opacity"
-            },
-            {
                 "type": "0",
                 "name": "Opacity TexCoords Transform",
                 "group": "Opacity",

@@ -226,7 +226,6 @@ function onMIDIMessage(_event) {
     {
       /* OLD EVENT v */
       deviceName,
-      output: outputDevice,
       inputId: 0, // what is this for?
       messageType,
       // ...,
@@ -301,20 +300,20 @@ function setDevice() {
   op.setTitle(`Midi ${name}`);
 
   const inputs = midi.inputs.values();
-  const outputs = midi.outputs.values();
+//  const outputs = midi.outputs.values();
 
   for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
     if (input.value.name === name) {
       input.value.onmidimessage = onMIDIMessage;
+      outputDevice = midi.inputs.get(input.value.id);
     } else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
   }
 
-  for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
+  /* for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
     if (output.value.name === name) {
       outputDevice = midi.outputs.get(output.value.id);
     }
-  }
-  // doResetLights();
+  } */
 }
 
 function onMIDIFailure() {
@@ -324,13 +323,13 @@ function onMIDIFailure() {
 function onMIDISuccess(midiAccess) {
   midi = midiAccess;
   const inputs = midi.inputs.values();
-  const outputs = midi.outputs.values();
   op.uiAttr({ info: 'no midi devices found' });
 
   const deviceNames = [];
 
-  for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
-    deviceNames.push(output.value.name);
+
+  for (let input = inputs.next(); input && !input.done; input = inputs.next()) {
+    deviceNames.push(input.value.name);
   }
 
   deviceSelect.uiAttribs.values = deviceNames;
@@ -360,14 +359,3 @@ learn.onTriggered = () => {
   if (!outputDevice) return;
   learning = true;
 };
-/*
-
-function doResetLights() {
-  if (outputDevice && resetLights.get()) {
-    for (let i = 0; i < 128; i++) {
-      outputDevice.send([0x90, i, 0]);
-      outputDevice.send([0xb0, i, 0]);
-    }
-  }
-}
-*/

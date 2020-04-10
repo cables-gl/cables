@@ -47,6 +47,9 @@ exec.onTriggered=function()
         }
         console.table(rowsBranches);
 
+
+        console.log(CABLES.profilerBranchesTimes);
+
         resetStats();
         dumpFrame=false;
     }
@@ -61,7 +64,7 @@ function profile(func, funcName)
         returnVal = func.apply(this, arguments),
         duration = performance.now() - start;
 
-        var branchName=CABLES.profilerBranches.join("_");
+        var branchName=CABLES.profilerBranches.join(" / ");
         if(CABLES.profilerBranches.length==0)branchName="_unknown";
         branches[branchName]=branches[branchName]||{};
         branches[branchName].counts=branches[branchName].counts||{};
@@ -78,6 +81,7 @@ function resetStats()
 {
 
     branches={};
+    CABLES.profilerBranchesTimes={};
 
     for(var i in originals)
     {

@@ -28,6 +28,11 @@
             },
             {
                 "type": "0",
+                "name": "Device",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "MIDI Channel",
                 "subType": "number"
             },

@@ -4,6 +4,7 @@ op.setPortGroup('MIDI', [inData]);
 
 /* OUTPUTS */
 const OUTPUT_KEYS = [
+  'Device',
   'MIDI Channel',
   'Message Type',
   'Note',
@@ -14,17 +15,26 @@ const OUTPUT_KEYS = [
   'NRPN Number',
   'NRPN Value',
 ];
+
 const eventOut = op.outObject('MIDI Event Out');
 const triggerOut = op.outTrigger('Trigger Out');
 
 // create outputs from keys specified above
-const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) => {
-  acc[cur] = op.outValue(cur, '-');
-  return acc;
-}, {});
+const OUTPUTS = {
+  'Device': op.outValue("Device", "-"),
+  'MIDI Channel': op.outValue("MIDI Channel", "-"),
+  'Message Type': op.outValue("Message Type", "-"),
+  'Note': op.outValue("Note", "-"),
+  'Note Velocity': op.outValue("Note Velocity", "-"),
+  'CC Number': op.outValue("CC Number", "-"),
+  'CC Value': op.outValue("CC Value", "-"),
+  'Pitch Bend Value': op.outValue("Pitch Bend Value", "-"),
+  'NRPN Number': op.outValue("NRPN Number", "-"),
+  'NRPN Value': op.outValue("NRPN Value", "-"),
+};
 
 op.setPortGroup('MIDI/Trigger Out', [eventOut, triggerOut]);
-op.setPortGroup('General Info', ['MIDI Channel', 'Message Type'].map(key => OUTPUTS[key]));
+op.setPortGroup('General Info', ['Device', 'MIDI Channel', 'Message Type'].map(key => OUTPUTS[key]));
 op.setPortGroup('Note', ['Note', 'Note Velocity'].map(key => OUTPUTS[key]));
 op.setPortGroup('CC', ['CC Number', 'CC Value'].map(key => OUTPUTS[key]));
 op.setPortGroup('Pitch Bend', [OUTPUTS['Pitch Bend Value']]);
@@ -50,7 +60,7 @@ function getPitchBendValue(dataByte1LSB, dataByte2MSB) {
 /* http://tetradev.blogspot.com/2010/03/nrpns-part-2-nrpns-in-ableton-with-max.html */
 /* https://sites.uci.edu/camp2014/2014/04/30/managing-midi-pitchbend-messages/ */
 
-inData.onChange = () => {
+inData.onChange = function() {
   const event = inData.get();
 
   if (!event || !event.data) return;
@@ -65,8 +75,9 @@ inData.onChange = () => {
     return;
   }
 
-  const { messageType } = event;
+  const { messageType, deviceName } = event;
 
+  OUTPUTS['Device'].set(deviceName);
   OUTPUTS['MIDI Channel'].set(getMIDIChannel(statusByte));
   OUTPUTS['Message Type'].set(messageType);
 
@@ -76,7 +87,8 @@ inData.onChange = () => {
       OUTPUTS['NRPN Value'].set(event.nrpnValue);
       Object.keys(OUTPUTS)
         .filter(
-          key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel',
+          key => !key.startsWith(messageType)
+          && key !== 'Message Type' && key !== 'MIDI Channel' && key !== 'Device',
         )
         .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
       break;
@@ -86,7 +98,8 @@ inData.onChange = () => {
       OUTPUTS['CC Value'].set(ccValue);
       Object.keys(OUTPUTS)
         .filter(
-          key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel',
+          key => !key.startsWith(messageType)
+          && key !== 'Message Type' && key !== 'MIDI Channel' && key !== 'Device',
         )
         .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
       break;
@@ -99,7 +112,8 @@ inData.onChange = () => {
       OUTPUTS['Note Velocity'].set(velocity);
       Object.keys(OUTPUTS)
         .filter(
-          key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel',
+          key => !key.startsWith(messageType)
+          && key !== 'Message Type' && key !== 'MIDI Channel' && key !== 'Device'
         )
         .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
       break;
@@ -107,13 +121,14 @@ inData.onChange = () => {
       OUTPUTS['Pitch Bend Value'].set(getPitchBendValue(dataByte1LSB, dataByte2MSB));
       Object.keys(OUTPUTS)
         .filter(
-          key => !key.startsWith(messageType) && key !== 'Message Type' && key !== 'MIDI Channel',
+          key => !key.startsWith(messageType)
+          && key !== 'Message Type' && key !== 'MIDI Channel' && key !== 'Device'
         )
         .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
       break;
     default:
       Object.keys(OUTPUTS)
-        .filter(key => key !== 'Message Type' && key !== 'MIDI Channel')
+        .filter(key => key !== 'Message Type' && key !== 'MIDI Channel' && key !== 'Device')
         .forEach(filteredKey => OUTPUTS[filteredKey].set('-'));
   }
 

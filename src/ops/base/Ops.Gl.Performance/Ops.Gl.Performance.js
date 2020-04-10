@@ -165,8 +165,8 @@ function updateText()
 
 
     var html=fps+" fps / ";
-    html+=Math.round(childsTime*100)/100+"ms / ";
-    html+=Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms ";
+    html+=Math.round(childsTime*100)/100+"ms mainloop / ";
+    html+=Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms onframe";
     html+=warn;
     element.innerHTML=html;
 
