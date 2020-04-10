@@ -14,6 +14,9 @@ const ProfileData = function ()
     this.profileGenMipMap=0;
     this.profileOnAnimFrameOps=0;
 
+    this.profileMainloopMs=0;
+    
+
 };
 
 export const profileData = new ProfileData();

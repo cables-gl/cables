@@ -20,6 +20,7 @@ var avgMsChilds=0;
 var queue=[];
 var timesMainloop=[];
 var timesOnFrame=[];
+var timesGPU=[];
 var numBars=200;
 var avgMs=0;
 var selfTime=0;
@@ -27,6 +28,23 @@ var canvas=null;
 var lastTime=0;
 var loadingCounter=0;
 var loadingChars=['|','/','-','\\'];
+
+const colorBg="#222222";
+const colorRAF="#003f5c";
+const colorRAFSlow="#ffffff";
+const colorMainloop="#7a5195";
+const colorOnFrame="#ef5675";
+const colorGPU="#ffa600";
+
+// color: https://learnui.design/tools/data-color-picker.html
+var startedQuery=false;
+var lastGlQueryTimeMs=0;
+
+
+const gl=op.patch.cgl.gl;
+const ext = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+var query=null;
+
 
 exe.onLinkChanged =
     inShow.onChange = updateVisibility;
@@ -37,6 +55,7 @@ for(var i=0;i<numBars;i++)
     queue[i]=-1;
     timesMainloop[i]=-1;
     timesOnFrame[i]=-1;
+    timesGPU[i]=-1;
 }
 
 element.id="performance";
@@ -102,14 +121,14 @@ function toggleOpened()
     }
 }
 
-const colorBg="#222222";
-const colorRAF="#ffffff";
-const colorRAFSlow="#ff0000";
+
 
 
 function updateCanvas()
 {
     var height=canvas.height;
+
+    var hmul=8;
 
     ctx.fillStyle=colorBg;
     ctx.fillRect(0,0,canvas.width,height);
@@ -119,18 +138,39 @@ function updateCanvas()
     for(k=numBars;k>=0;k--)
     {
         if(queue[k]>30)ctx.fillStyle=colorRAFSlow;
-        ctx.fillRect(numBars-k,height-queue[k]*2.5,1,2);
+        ctx.fillRect(numBars-k,height-queue[k]*hmul,1,queue[k]*hmul);
         if(queue[k]>30)ctx.fillStyle=colorRAF;
     }
 
 
-    ctx.fillStyle="#aaaaaa";
+    // ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        if(timesMainloop[k]>30)ctx.fillStyle="#ff00ff";
-        ctx.fillRect(numBars-k,height-timesMainloop[k]*2.5,1,timesMainloop[k]*2.5);
-        if(timesMainloop[k]>30)ctx.fillStyle="#aaaaaa";
+        // if(timesMainloop[k]>30)ctx.fillStyle="#ff00ff";
+        // ctx.fillRect(numBars-k,height-timesMainloop[k]*2.5,1,timesMainloop[k]*2.5);
+        // if(timesMainloop[k]>30)ctx.fillStyle="#aaaaaa";
+
+
+        var sum=0;
+        ctx.fillStyle=colorMainloop;
+        sum=timesMainloop[k];
+        ctx.fillRect(numBars-k,height-sum*hmul,1,timesMainloop[k]*hmul);
+
+        ctx.fillStyle=colorOnFrame;
+        sum+=timesOnFrame[k];
+        ctx.fillRect(numBars-k,height-sum*hmul,1,timesOnFrame[k]*hmul);
+
+        ctx.fillStyle=colorGPU;
+        sum+=timesGPU[k];
+        ctx.fillRect(numBars-k,height-sum*hmul,1,timesGPU[k]*hmul);
+
+
+
     }
+
+
+
+
 
 }
 
@@ -168,18 +208,29 @@ function updateText()
     if(CGL.profileData.profileTextureNew>0)warn+='new texture created! ';
     if(CGL.profileData.profileGenMipMap>0)warn+='generating mip maps!';
 
-
     if(warn.length>0)
     {
         warn='| <span style="color:#f80;">WARNING: '+warn+'<span>';
     }
 
+    var html='';
 
-    var html=fps+" fps / ";
-    html+=Math.round(childsTime*100)/100+"ms mainloop / ";
-    html+=Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms onframe";
-    html+=warn;
-    element.innerHTML=html;
+    if(opened)
+    {
+        html+='<span style="color:'+colorRAF+'">■</span> '+fps+" fps ";
+        html+='<span style="color:'+colorMainloop+'">■</span> '+Math.round(childsTime*100)/100+'ms mainloop ';
+        html+='<span style="color:'+colorOnFrame+'">■</span> '+Math.round(CGL.profileData.profileOnAnimFrameOps*100)/100+"ms onframe ";
+        html+='<span style="color:'+colorGPU+'">■</span> '+Math.round(lastGlQueryTimeMs*100)/100+"ms GPU";
+        html+=warn;
+        element.innerHTML=html;
+    }
+    else
+    {
+        html+=fps+" fps / ";
+        html+='CPU: '+Math.round((childsTime+CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs)*100)/100+'ms / ';
+        if(lastGlQueryTimeMs)html+='GPU: '+Math.round(lastGlQueryTimeMs*100)/100+'ms  ';
+        element.innerHTML=html;
+    }
 
     if(op.patch.loading.getProgress()!=1.0)
     {
@@ -411,6 +462,14 @@ exe.onTriggered=function()
             timesMainloop.push(childsTime);
             timesMainloop.shift();
 
+            timesOnFrame.push(CGL.profileData.profileOnAnimFrameOps-CGL.profileData.profileMainloopMs);
+            timesOnFrame.shift();
+
+            timesGPU.push(lastGlQueryTimeMs);
+            timesGPU.shift();
+
+
+
             updateCanvas();
         }
     }
@@ -419,10 +478,48 @@ exe.onTriggered=function()
     selfTime=performance.now()-selfTimeStart;
     var startTimeChilds=performance.now();
 
+
+    startGlQuery();
+
     next.trigger();
+
+    endGlQuery();
 
     childsTime=performance.now()-startTimeChilds;
 
 };
 
+function startGlQuery()
+{
+    if(!query)
+    {
+        query = gl.createQuery();
+        gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
+        startedQuery=true;
+    }
 
+
+}
+
+function endGlQuery()
+{
+    if(query && startedQuery)
+    {
+        gl.endQuery(ext.TIME_ELAPSED_EXT);
+        startedQuery=false;
+    }
+
+    if(query)
+    {
+        const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
+        if (available)
+        {
+            const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
+            lastGlQueryTimeMs=elapsedNanos/1000000;
+            query=null;
+        }
+
+    }
+
+
+}

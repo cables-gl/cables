@@ -26,33 +26,33 @@ exec.onTriggered=function()
         resetStats();
     }
 
-if(!query)
-{
-query = gl.createQuery();
-gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
-started=true;
+// if(!query)
+// {
+// query = gl.createQuery();
+// gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
+// started=true;
 
-}
+// }
 
     next.trigger();
 
-if(query && started)
-{
-    gl.endQuery(ext.TIME_ELAPSED_EXT);
-    started=false;
-}
+// if(query && started)
+// {
+//     gl.endQuery(ext.TIME_ELAPSED_EXT);
+//     started=false;
+// }
 
-if(query)
-{
-    const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
-    if (available)
-    {
-        const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-        console.log("gpu ms",elapsedNanos/1000000);
-        query=null;
-    }
+// if(query)
+// {
+//     const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
+//     if (available)
+//     {
+//         const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
+//         console.log("gpu ms",elapsedNanos/1000000);
+//         query=null;
+//     }
 
-}
+// }
 
 
 

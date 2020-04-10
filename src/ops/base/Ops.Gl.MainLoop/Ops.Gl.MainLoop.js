@@ -165,7 +165,9 @@ function render(time)
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     }
 
+    const startTime=performance.now();
     trigger.trigger();
+    CGL.profileData.profileMainloopMs=performance.now()-startTime;
 
     if(CGL.MESH.lastMesh)CGL.MESH.lastMesh.unBind();
 
