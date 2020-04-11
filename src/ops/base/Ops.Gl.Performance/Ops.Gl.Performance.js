@@ -2,6 +2,8 @@ const
     exe=op.inTrigger("exe"),
     inShow=op.inValueBool("Visible",true),
     next=op.outTrigger("childs"),
+    position=op.inSwitch("Position",['top','bottom'],'top'),
+    openDefault=op.inBool("Open",false),
     smoothGraph=op.inBool("Smooth Graph",true),
     outFPS=op.outValue("FPS");
 
@@ -52,7 +54,7 @@ var query=null;
 
 exe.onLinkChanged =
     inShow.onChange = updateVisibility;
-
+position.onChange= updatePos;
 
 for(var i=0;i<numBars;i++)
 {
@@ -65,7 +67,7 @@ for(var i=0;i<numBars;i++)
 element.id="performance";
 element.style.position="absolute";
 element.style.left="0px";
-element.style.top="0px";
+
 element.style.opacity="0.8";
 element.style.padding="10px";
 element.style.cursor="pointer";
@@ -74,6 +76,8 @@ element.style.color="white";
 element.style["font-family"]="monospace";
 element.style["font-size"]="12px";
 element.style["z-index"]="99999";
+
+
 element.innerHTML="&nbsp;";
 
 var container = op.patch.cgl.canvas.parentElement;
@@ -81,7 +85,8 @@ container.appendChild(element);
 
 element.addEventListener("click", toggleOpened);
 
-toggleOpened();
+updateOpened();
+updatePos();
 
 op.onDelete=function()
 {
@@ -90,25 +95,53 @@ op.onDelete=function()
 };
 
 
+function updatePos()
+{
+    if(position.get()=="top")
+    {
+        canvas.style.top=element.style.top="0px";
+        canvas.style.bottom=element.style.bottom="initial";
+    }
+    else
+    {
+        canvas.style.bottom=element.style.bottom="0px";
+        canvas.style.top=element.style.top="initial";
+    }
+}
+
 function updateVisibility()
 {
     if(!inShow.get() || !exe.isLinked())
     {
         element.style.display='none';
         element.style.opacity=0;
+        canvas.style.display='none';
     }
     else
     {
         element.style.display='block';
         element.style.opacity=1;
+        canvas.style.display='block';
     }
 }
+
+openDefault.onChange=function()
+{
+    opened=openDefault.get();
+    updateOpened();
+};
+
 
 function toggleOpened()
 {
     if(!inShow.get())return;
     element.style.opacity=1;
     opened=!opened;
+    updateOpened();
+}
+
+function updateOpened()
+{
     updateText();
     if(!canvas)createCanvas();
     if(opened)
@@ -123,7 +156,9 @@ function toggleOpened()
         element.style.left="0px";
         element.style["min-height"]="auto";
     }
+
 }
+
 
 
 

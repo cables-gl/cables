@@ -251,7 +251,9 @@ const Context = function (_patch)
 
     this.endFrame = function ()
     {
+        
         if(this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
+
 
         this.setPreviousShader();
         if (this._vMatrixStack.length() > 0) Log.warn("view matrix stack length !=0 at end of rendering...");

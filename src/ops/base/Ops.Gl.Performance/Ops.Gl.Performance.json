@@ -13,6 +13,16 @@
             },
             {
                 "type": "0",
+                "name": "Position index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Open",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Smooth Graph",
                 "subType": "boolean"
             }
