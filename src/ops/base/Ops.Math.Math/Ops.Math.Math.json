@@ -22,6 +22,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "math mode index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "math mode"
             }

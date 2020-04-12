@@ -102,7 +102,7 @@
             },
             {
                 "name": "Anisotropic",
-                "text": "Ansiotropic filter. See: (https://www.gamespot.com/articles/what-is-anisotropic-filtering-pc-graphics-settings/1100-6452221/)"
+                "text": "Anisotropic filter for mipmap mode. See: (https://www.gamespot.com/articles/what-is-anisotropic-filtering-pc-graphics-settings/1100-6452221/)"
             },
             {
                 "name": "texture",

@@ -12,6 +12,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "direction index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "direction"
             },

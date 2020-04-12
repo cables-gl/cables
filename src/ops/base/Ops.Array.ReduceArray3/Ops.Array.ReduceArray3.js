@@ -35,7 +35,7 @@ function update()
 
 
     var step=num.get()*3;
-    newArray.length=newLength;
+    // newArray.length=newLength;
 
     var count=0;
     var i=0;

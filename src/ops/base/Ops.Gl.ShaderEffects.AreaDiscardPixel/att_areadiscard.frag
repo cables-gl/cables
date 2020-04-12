@@ -21,6 +21,9 @@ float MOD_de=0.0;
 #ifdef MOD_AREA_AXIS_XZ
     MOD_de=abs(MOD_x-MOD_areaPos.x+MOD_areaPos.z);
 #endif
+#ifdef MOD_AREA_AXIS_YZ
+    MOD_de=abs(MOD_y-MOD_areaPos.y+MOD_areaPos.z);
+#endif
 #ifdef MOD_AREA_AXIS_Y
     MOD_de=abs(MOD_y-MOD_areaPos.y);
 #endif

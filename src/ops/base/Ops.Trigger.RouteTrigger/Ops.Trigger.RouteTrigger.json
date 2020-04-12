@@ -91,6 +91,38 @@
             },
             {
                 "type": "1",
+                "name": "Trigger 16"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 17"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 18"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 19"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 20"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 21"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 22"
+            },
+            {
+                "type": "1",
+                "name": "Trigger 23"
+            },
+            {
+                "type": "1",
                 "name": "Default Trigger"
             }
         ],

@@ -5,13 +5,21 @@ const num0 = op.inFloat("number 0",0),
 
 num0.onChange = num1.onChange = mathDropDown.onChange = update;
 
+
+mathDropDown.onChange=function()
+{
+    var mode = mathDropDown.get();
+    op.setUiAttrib({"extendTitle":mode});
+    update();
+};
+
+
 function update()
 {
     var mode = mathDropDown.get();
     var n0 = num0.get();
     var n1 = num1.get();
 
-    op.setUiAttrib({"extendTitle":mode});
 
     if(mode === "+")
     {

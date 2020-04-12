@@ -11,6 +11,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Source index",
+                "subType": "integer"
+            },
+            {
                 "type": "5",
                 "name": "Source",
                 "group": "Influence"
@@ -58,7 +63,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.AreaScaler_v2"
+        "name": "Ops.Gl.ShaderEffects.AreaScaler_v2"
     },
     "authorName": "pandur",
     "id": "b44cc257-8d84-43af-a07c-c003957bf258",

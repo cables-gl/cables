@@ -4,7 +4,7 @@ op.render=op.inTrigger("render");
 
 const
     inInvert=op.inValueBool("Invert"),
-    inArea=op.inValueSelect("Area",["Sphere","Box","Axis X","Axis Y","Axis Z","Axis XY","Axis XZ","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere"),
+    inArea=op.inValueSelect("Area",["Sphere","Box","Axis X","Axis Y","Axis Z","Axis XY","Axis XZ","Axis YZ","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere"),
     inSize=op.inValue("Size",1),
     inSizeX=op.inValueFloat("Size X",1),
     inSizeY=op.inValueFloat("Size Y",1),
@@ -84,6 +84,8 @@ function updateArea()
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_Z",inArea.get()=="Axis Z");
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_XY",inArea.get()=="Axis XY");
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_XZ",inArea.get()=="Axis XZ");
+    shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_YZ",inArea.get()=="Axis YZ");
+
 
 
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_X_INFINITE",inArea.get()=="Axis X Infinite");
