@@ -14,6 +14,10 @@ var videoElement=document.createElement('video');
 const eleId="webcam"+CABLES.uuid();
 videoElement.setAttribute("id", eleId);
 videoElement.style.display="none";
+videoElement.setAttribute('autoplay', '');
+videoElement.setAttribute('muted', '');
+videoElement.setAttribute('playsinline', '');
+
 outEleId.set(eleId);
 
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
