@@ -1,0 +1,21 @@
+{
+    "id": "4f5d56b9-28a0-47fe-86f7-7b765268d694",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586550085564
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586550107160,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Close"
+            }
+        ],
+        "name": "Ops.Html.WindowClose"
+    }
+}
