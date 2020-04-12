@@ -33,6 +33,11 @@
             },
             {
                 "type": "0",
+                "name": "Distribution",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Draw",
                 "subType": "boolean"
             }

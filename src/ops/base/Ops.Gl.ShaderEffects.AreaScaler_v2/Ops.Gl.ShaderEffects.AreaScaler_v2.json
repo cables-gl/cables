@@ -16,6 +16,11 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Source",
+                "group": "Influence"
+            },
+            {
                 "type": "0",
                 "name": "Strength",
                 "group": "Influence",

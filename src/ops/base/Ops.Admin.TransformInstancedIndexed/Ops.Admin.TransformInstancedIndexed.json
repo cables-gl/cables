@@ -1,0 +1,96 @@
+{
+    "authorName": "pandur",
+    "id": "6e24a513-708c-49b0-8e70-35a6f79e888d",
+    "created": 1585928349171,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Multiply",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Transform index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Transform"
+            },
+            {
+                "type": "0",
+                "name": "Input index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Input"
+            },
+            {
+                "type": "0",
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Axis"
+            },
+            {
+                "type": "0",
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Method"
+            },
+            {
+                "type": "0",
+                "name": "Normalize",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Smoothstep",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Colorize",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Color Mul",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "3",
+                "name": "Position Array"
+            }
+        ],
+        "name": "Ops.Admin.TransformInstancedIndexed"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.TransformInstancedIndexed renamed to Ops.Admin.TransformInstancedIndexed",
+            "author": "pandur",
+            "date": 1585940419717
+        }
+    ]
+}

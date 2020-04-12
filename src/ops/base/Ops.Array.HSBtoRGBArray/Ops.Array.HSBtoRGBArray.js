@@ -61,6 +61,13 @@ outArray.set(newArr);
 outLength.set(newArr.length);
 outTupleLength.set(newArr.length / 4);
 
+outArray.ignoreValueSerialize=true;
+inAlpha.ignoreValueSerialize=true;
+inBright.ignoreValueSerialize=true;
+inSat.ignoreValueSerialize=true;
+inHue.ignoreValueSerialize=true;
+
+
 
 
 var shouldRecalculate = true;

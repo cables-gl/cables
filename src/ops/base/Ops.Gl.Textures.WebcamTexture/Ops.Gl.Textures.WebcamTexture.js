@@ -16,8 +16,7 @@ videoElement.setAttribute("id", eleId);
 videoElement.style.display="none";
 outEleId.set(eleId);
 
-    var canvas = op.patch.cgl.canvas.parentElement;
-    canvas.appendChild(videoElement);
+op.patch.cgl.canvas.parentElement.appendChild(videoElement);
 
 var tex=new CGL.Texture(cgl);
 tex.setSize(8,8);
@@ -25,6 +24,14 @@ textureOut.set(tex);
 var timeout=null;
 
 var canceled=false;
+
+op.onDelete=removeElement;
+
+function removeElement()
+{
+    videoElement.remove();
+}
+
 
 inActive.onChange=function()
 {
@@ -58,34 +65,60 @@ function updateTexture()
     if(!canceled) timeout=setTimeout(updateTexture, 1000/fps.get());
 }
 
+function camInitComplete(stream)
+{
+    tex.videoElement=videoElement;
+    // videoElement.src = window.URL.createObjectURL(stream);
+    videoElement.srcObject = stream;
+    //tex.videoElement=stream;
+    videoElement.onloadedmetadata = function(e)
+    {
+        available.set(true);
+        tex.setSize(videoElement.videoWidth,videoElement.videoHeight);
+
+        outRatio.set(videoElement.videoWidth/videoElement.videoHeight);
+
+        videoElement.play();
+        updateTexture();
+
+    };
+
+}
+
+
 function startWebcam()
 {
     var constraints = { audio: false, video: true };
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
-    navigator.getUserMedia(constraints,
-        function(stream)
-        {
-            tex.videoElement=videoElement;
-            // videoElement.src = window.URL.createObjectURL(stream);
-            videoElement.srcObject = stream;
-            //tex.videoElement=stream;
-            videoElement.onloadedmetadata = function(e)
+
+    if(navigator.getUserMedia)
+    {
+        navigator.getUserMedia(constraints, camInitComplete,
+            function()
             {
-                available.set(true);
-                tex.setSize(videoElement.videoWidth,videoElement.videoHeight);
+                available.set(false);
+                // console.log('error webcam');
+            });
 
-                outRatio.set(videoElement.videoWidth/videoElement.videoHeight);
 
-                videoElement.play();
-                updateTexture();
+    }
+    else
+    {
 
-            };
-        },
-        function()
-        {
-            available.set(false);
-            // console.log('error webcam');
-        });
+        //ios
+
+console.log("THE IOS WAY");
+//      var constraints = { audio: true, video: { width: 1280, height: 720 } };
+
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(camInitComplete)
+          .catch(function(error) {
+            console.log(error.name + ": " + error.message);
+          });
+
+    }
+    // console.error("[webcamtexture] navigator.getUserMedia is not defined!");
+
 }
 
 startWebcam();

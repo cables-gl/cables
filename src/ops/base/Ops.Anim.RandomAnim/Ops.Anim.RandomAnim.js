@@ -9,6 +9,7 @@ var pause=op.inValue("pause between",0);
 var next=op.outTrigger("Next");
 var result=op.outValue("result");
 var looped=op.outTrigger("Looped");
+
 var anim=new CABLES.Anim();
 anim.createPort(op,"easing",reinit);
 
@@ -62,8 +63,11 @@ function updateExe()
 {
     if(needsReinit)reinit();
 
-    var t=op.patch.freeTimer.get();
-    var v=anim.getValue(t);
+    const t=op.patch.freeTimer.get();
+    const v=anim.getValue(t);
+
+    // console.log(t,anim.keys[anim.keys.length - 1].time);
+
 
     if(anim.hasEnded(t))
     {

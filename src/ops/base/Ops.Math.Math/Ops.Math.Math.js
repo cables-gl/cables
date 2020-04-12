@@ -24,12 +24,21 @@ function onFilterChange()
     op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
+
+mathDropDown.onChange=function()
+{
+    var mode = mathDropDown.get();
+    op.setUiAttrib({"extendTitle":mode});
+    update();
+};
+
+
 function update()
 {
-    var n0 = num0.get();
-    var n1 = num1.get();
+   var n0 = num0.get();
+   var n1 = num1.get();
 
-    result.set(mathFunc(n0,n1));
+   result.set(mathFunc(n0,n1));
 }
 
 onFilterChange();

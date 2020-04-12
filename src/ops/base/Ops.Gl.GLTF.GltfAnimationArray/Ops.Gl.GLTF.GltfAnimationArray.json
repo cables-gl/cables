@@ -61,7 +61,7 @@
         "name": "Ops.Gl.GLTF.GltfAnimationArray"
     },
     "summary": "Convert an animation into an array of coordinates",
-    "issues": "",
+    "issues": "Currently only supports positional data. \nRotation or scale data will be supported in the near future.",
     "collections": null,
     "relatedops": null,
     "youtubeids": [

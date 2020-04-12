@@ -8,7 +8,6 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
 {
     vec3 forcePos = vec3(MOD_x,MOD_y,MOD_z);
 
-
     #ifdef MOD_OBJECT_POS
         worldPos=mMatrix*vec4(0.0,0.0,0.0,1.0);
     #endif
@@ -17,7 +16,6 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
 
     float dist = abs(length(vecToOrigin));
     float distAlpha = (MOD_size - dist) ;
-
 
     if(MOD_smooth) distAlpha = smoothstep(0.0,MOD_size,distAlpha);
 

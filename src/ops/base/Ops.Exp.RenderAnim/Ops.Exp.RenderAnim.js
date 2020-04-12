@@ -17,7 +17,7 @@ const
 op.setPortGroup("Size",[inVpSize,inWidth,inHeight]);
 op.setPortGroup("Timing",[inStart,inEnd,inFps]);
 
-const cgl=gui.patch().scene.cgl;
+const cgl=op.patch.cgl;
 
 inVpSize.onChange=updateSizeInputs;
 updateSizeInputs();

@@ -7,7 +7,10 @@ var outZ=op.outValue("Z");
 
 inIndex.onChange=inArr.onChange=function()
 {
-    var i=Math.floor(inIndex.get())*3;
+    var i=inIndex.get();
+
+
+
     var fr=inIndex.get()-Math.floor(inIndex.get());
     var arr=inArr.get();
 
@@ -16,15 +19,19 @@ inIndex.onChange=inArr.onChange=function()
         return;
     }
 
-    if(i<0)return;
+    i=Math.floor((inIndex.get()))*3;
+    i=i%(arr.length);
+    // i=i%(arr.length/3);
+    // console.log(i);
 
-    if(i>=arr.length-3)
-    {
-        outX.set(arr[arr.length-1]);
-        outY.set(arr[arr.length-2]);
-        outZ.set(arr[arr.length-3]);
-        return;
-    }
+
+    // if(i>arr.length-3)
+    // {
+    //     outX.set(arr[arr.length-1]);
+    //     outY.set(arr[arr.length-2]);
+    //     outZ.set(arr[arr.length-3]);
+    //     return;
+    // }
 
 
     var x=arr[i+0];

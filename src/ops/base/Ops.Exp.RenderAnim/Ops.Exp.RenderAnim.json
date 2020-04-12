@@ -15,6 +15,11 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "Fileformat",
+                "subType": "string"
+            },
+            {
                 "type": "1",
                 "name": "Render"
             },

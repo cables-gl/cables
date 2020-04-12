@@ -25,7 +25,6 @@ pUpdate.onTriggered = function () {
 
     var realTexture = tex.get(), gl = cgl.gl;
 
-
     if (!realTexture) return;
     if (!fb) fb = gl.createFramebuffer();
 
@@ -41,11 +40,13 @@ pUpdate.onTriggered = function () {
         isFloatingPoint=realTexture.textureType==CGL.Texture.TYPE_FLOAT;
 
         if(isFloatingPoint) channelType=gl.FLOAT;
-            else channelType=gl.UNSIGNED_BYTE;
+        else channelType=gl.UNSIGNED_BYTE;
+
         outIsFloatingPoint.set(isFloatingPoint);
 
-        if(isFloatingPoint) pixelData = new Float32Array(realTexture.width*realTexture.height*4);
-            else pixelData = new Uint8Array(realTexture.width*realTexture.height*4);
+        const size=realTexture.width*realTexture.height*4;
+        if(isFloatingPoint) pixelData = new Float32Array(size);
+        else pixelData = new Uint8Array(size);
 
         texChanged = false;
     }
@@ -58,7 +59,6 @@ pUpdate.onTriggered = function () {
         realTexture.height,
         gl.RGBA,
         channelType,
-
         pixelData
     );
 

@@ -36,9 +36,13 @@ function reset()
     var verts=[];
     var texCoords=[];
     var vertColors=[];
-    verts.length=Math.round(num.get())*3;
-    texCoords.length=Math.round(num.get())*2;
-    vertColors.length=Math.round(num.get())*3;
+
+    var n=Math.max(0,Math.round(num.get()));
+
+
+    verts.length=n*3;
+    texCoords.length=n*2;
+    vertColors.length=n*3;
 
     Math.randomSeed=seed.get();
 

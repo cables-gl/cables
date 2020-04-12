@@ -10,6 +10,12 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "Device",
+                "group": "Device Select",
+                "subType": "string"
+            },
+            {
                 "type": "1",
                 "name": "Learn",
                 "group": "Controls"

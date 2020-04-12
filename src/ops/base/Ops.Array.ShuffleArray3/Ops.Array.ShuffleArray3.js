@@ -33,7 +33,7 @@ function update()
     var i = 0;
     var j = 0;
     var temp = null;
-    Math.randomSeed=inSeed.get();
+    Math.randomSeed=inSeed.get()+1;
 
     for (i = 0; i < arr.length; i += 3)
     {

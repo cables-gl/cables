@@ -47,6 +47,10 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "mapping"
+            },
+            {
                 "type": "0",
                 "name": "Spline",
                 "subType": "boolean"
