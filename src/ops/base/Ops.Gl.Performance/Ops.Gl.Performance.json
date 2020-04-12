@@ -25,6 +25,16 @@
                 "type": "0",
                 "name": "Smooth Graph",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
             }
         ],
         "portsOut": [

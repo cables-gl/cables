@@ -5,6 +5,8 @@ const
     position=op.inSwitch("Position",['top','bottom'],'top'),
     openDefault=op.inBool("Open",false),
     smoothGraph=op.inBool("Smooth Graph",true),
+    inScaleGraph=op.inFloat("Scale",4),
+    inSizeGraph=op.inFloat("Size",128),
     outFPS=op.outValue("FPS");
 
 // var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
@@ -24,7 +26,6 @@ var queue=[];
 var timesMainloop=[];
 var timesOnFrame=[];
 var timesGPU=[];
-var numBars=200;
 var avgMs=0;
 var selfTime=0;
 var canvas=null;
@@ -52,22 +53,15 @@ const ext = gl.getExtension('EXT_disjoint_timer_query_webgl2');
 var query=null;
 
 
+inSizeGraph.onChange=updateSize;
 exe.onLinkChanged =
     inShow.onChange = updateVisibility;
 position.onChange= updatePos;
 
-for(var i=0;i<numBars;i++)
-{
-    queue[i]=-1;
-    timesMainloop[i]=-1;
-    timesOnFrame[i]=-1;
-    timesGPU[i]=-1;
-}
 
 element.id="performance";
 element.style.position="absolute";
 element.style.left="0px";
-
 element.style.opacity="0.8";
 element.style.padding="10px";
 element.style.cursor="pointer";
@@ -85,9 +79,9 @@ container.appendChild(element);
 
 element.addEventListener("click", toggleOpened);
 
+updateSize();
 updateOpened();
 updatePos();
-
 op.onDelete=function()
 {
     if(canvas)canvas.remove();
@@ -125,6 +119,32 @@ function updateVisibility()
     }
 }
 
+function updateSize()
+{
+    if(!canvas)return;
+
+    var num=Math.max(0,parseInt(inSizeGraph.get()));
+
+
+    canvas.width  = num;
+    canvas.height = num;
+    element.style.left=num+"px";
+
+    queue.length=0;
+    timesMainloop.length=0;
+    timesOnFrame.length=0;
+    timesGPU.length=0;
+
+    for(var i=0;i<num;i++)
+    {
+        queue[i]=-1;
+        timesMainloop[i]=-1;
+        timesOnFrame[i]=-1;
+        timesGPU[i]=-1;
+    }
+
+}
+
 openDefault.onChange=function()
 {
     opened=openDefault.get();
@@ -147,7 +167,7 @@ function updateOpened()
     if(opened)
     {
         canvas.style.display="block";
-        element.style.left=numBars+"px";
+        element.style.left=inSizeGraph.get()+"px";
         element.style["min-height"]="56px";
     }
     else
@@ -156,24 +176,21 @@ function updateOpened()
         element.style.left="0px";
         element.style["min-height"]="auto";
     }
-
 }
-
-
-
 
 
 function updateCanvas()
 {
     var height=canvas.height;
-
-    var hmul=8;
+    var hmul=inScaleGraph.get();
 
     ctx.fillStyle=colorBg;
     ctx.fillRect(0,0,canvas.width,height);
-
     ctx.fillStyle=colorRAF;
+
     var k=0;
+    const numBars=Math.max(0,parseInt(inSizeGraph.get()));
+
     for(k=numBars;k>=0;k--)
     {
         if(queue[k]>30)ctx.fillStyle=colorRAFSlow;
@@ -181,15 +198,9 @@ function updateCanvas()
         if(queue[k]>30)ctx.fillStyle=colorRAF;
     }
 
-
     // ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
-        // if(timesMainloop[k]>30)ctx.fillStyle="#ff00ff";
-        // ctx.fillRect(numBars-k,height-timesMainloop[k]*2.5,1,timesMainloop[k]*2.5);
-        // if(timesMainloop[k]>30)ctx.fillStyle="#aaaaaa";
-
-
         var sum=0;
         ctx.fillStyle=colorMainloop;
         sum=timesMainloop[k];
@@ -202,13 +213,7 @@ function updateCanvas()
         ctx.fillStyle=colorGPU;
         sum+=timesGPU[k];
         ctx.fillRect(numBars-k,height-sum*hmul,1,timesGPU[k]*hmul);
-
-
-
     }
-
-
-
 
 
 }
@@ -217,8 +222,8 @@ function createCanvas()
 {
     canvas = document.createElement('canvas');
     canvas.id     = "performance_"+op.patch.config.glCanvasId;
-    canvas.width  = numBars;
-    canvas.height = "256";
+    canvas.width  = inSizeGraph.get();
+    canvas.height = inSizeGraph.get();
     canvas.style.display   = "block";
     canvas.style.opacity   = 0.9;
     canvas.style.position  = "absolute";
@@ -230,6 +235,8 @@ function createCanvas()
     ctx = canvas.getContext('2d');
 
     canvas.addEventListener("click", toggleOpened);
+
+    updateSize();
 
 }
 
@@ -516,8 +523,6 @@ exe.onTriggered=function()
 
             timesGPU.push(currentTimeGPU);
             timesGPU.shift();
-
-
 
             updateCanvas();
         }
