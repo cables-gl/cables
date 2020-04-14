@@ -1,0 +1,37 @@
+{
+    "id": "e285f072-0ad8-465a-ab4b-47f0ae499675",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1586869797706
+        }
+    ],
+    "authorName": "cables",
+    "created": 1586869813721,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Key",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyValue_v2"
+    }
+}
