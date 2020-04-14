@@ -1,12 +1,11 @@
-var inObject=op.inObject("Object");
-var outObject=op.outObject("Result Object");
+const
+    inObject=op.inObject("Object"),
+    outObject=op.outObject("Result Object"),
+    inKey=op.inString("Key"),
+    inValue=op.inString("Value");
 
-var inKey=op.inString("Key");
-var inValue=op.inString("Value");
-
-inObject.onChange=update;
-inKey.onChange=update;
-inValue.onChange=update;
+inObject.onChange=inKey.onChange=inValue.onChange=
+update;
 
 function update()
 {

@@ -16,14 +16,12 @@
                 "name": "Object"
             },
             {
-                "type": "0",
-                "name": "Key",
-                "subType": "string"
+                "type": "5",
+                "name": "Key"
             },
             {
-                "type": "0",
-                "name": "Value",
-                "subType": "string"
+                "type": "5",
+                "name": "Value"
             }
         ],
         "portsOut": [
