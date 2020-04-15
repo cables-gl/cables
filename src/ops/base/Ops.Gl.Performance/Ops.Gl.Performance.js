@@ -9,9 +9,6 @@ const
     inSizeGraph=op.inFloat("Size",128),
     outFPS=op.outValue("FPS");
 
-// var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-// var next=this.addOutPort(new CABLES.Port(this,"childs",CABLES.OP_PORT_TYPE_FUNCTION)) ;
-
 const cgl=op.patch.cgl;
 var element = document.createElement('div');
 var elementMeasures=null;
@@ -32,31 +29,29 @@ var canvas=null;
 var lastTime=0;
 var loadingCounter=0;
 var loadingChars=['|','/','-','\\'];
+var initMeasures=true;
 
-const colorBg="#222222";
-const colorRAF="#003f5c";
 const colorRAFSlow="#ffffff";
+const colorBg="#222222";
+const colorRAF="#003f5c"; // color: https://learnui.design/tools/data-color-picker.html
 const colorMainloop="#7a5195";
 const colorOnFrame="#ef5675";
 const colorGPU="#ffa600";
 
-// color: https://learnui.design/tools/data-color-picker.html
 var startedQuery=false;
 
 var currentTimeGPU=0;
 var currentTimeMainloop=0;
 var currentTimeOnFrame=0;
 
-
 const gl=op.patch.cgl.gl;
-const ext = gl.getExtension('EXT_disjoint_timer_query_webgl2');
+const ext=gl.getExtension('EXT_disjoint_timer_query_webgl2');
 var query=null;
 
-
-inSizeGraph.onChange=updateSize;
 exe.onLinkChanged =
     inShow.onChange = updateVisibility;
 position.onChange= updatePos;
+inSizeGraph.onChange=updateSize;
 
 
 element.id="performance";
@@ -71,23 +66,21 @@ element.style["font-family"]="monospace";
 element.style["font-size"]="12px";
 element.style["z-index"]="99999";
 
-
 element.innerHTML="&nbsp;";
+element.addEventListener("click", toggleOpened);
 
 var container = op.patch.cgl.canvas.parentElement;
 container.appendChild(element);
 
-element.addEventListener("click", toggleOpened);
-
 updateSize();
 updateOpened();
 updatePos();
+
 op.onDelete=function()
 {
     if(canvas)canvas.remove();
     if(element)element.remove();
 };
-
 
 function updatePos()
 {
@@ -124,7 +117,6 @@ function updateSize()
     if(!canvas)return;
 
     var num=Math.max(0,parseInt(inSizeGraph.get()));
-
 
     canvas.width  = num;
     canvas.height = num;
@@ -178,7 +170,6 @@ function updateOpened()
     }
 }
 
-
 function updateCanvas()
 {
     var height=canvas.height;
@@ -198,7 +189,6 @@ function updateCanvas()
         if(queue[k]>30)ctx.fillStyle=colorRAF;
     }
 
-    // ctx.fillStyle="#aaaaaa";
     for(k=numBars;k>=0;k--)
     {
         var sum=0;
@@ -214,8 +204,6 @@ function updateCanvas()
         sum+=timesGPU[k];
         ctx.fillRect(numBars-k,height-sum*hmul,1,timesGPU[k]*hmul);
     }
-
-
 }
 
 function createCanvas()
@@ -237,7 +225,6 @@ function createCanvas()
     canvas.addEventListener("click", toggleOpened);
 
     updateSize();
-
 }
 
 function updateText()
@@ -296,10 +283,7 @@ function updateText()
                 count++;
             }
 
-            if(timesMainloop[i]>-1)
-            {
-                avgMsChilds+=timesMainloop[i];
-            }
+            if(timesMainloop[i]>-1) avgMsChilds+=timesMainloop[i];
         }
 
         avgMs/=count;
@@ -321,19 +305,7 @@ function updateText()
         ' framebuffer blit: '+Math.ceil(CGL.profileData.profileFramebuffer/fps)+
         ' texeffect blit: '+Math.ceil(CGL.profileData.profileTextureEffect/fps);
 
-
-        // var vars= CABLES.patch.getVars();
-
-        // element.innerHTML+='<br/><br/>vars:<br/>';
-
-        // for(var ki in vars)
-        // {
-        //     var v=parseFloat(vars[ki].getValue());
-        //     if(isNaN(v)) v="[...]"
-        //     element.innerHTML+=' - '+ki+': <b>'+v+'</b><br/>';
-        // }
     }
-
 
     CGL.profileData.profileUniformCount=0;
     CGL.profileData.profileShaderGetUniform=0;
@@ -353,10 +325,7 @@ function updateText()
     CGL.profileData.profileFramebuffer=0
     CGL.profileData.profileMeshDraw=0;
     CGL.profileData.profileTextureEffect=0;
-
-
 }
-
 
 function styleMeasureEle(ele)
 {
@@ -430,20 +399,12 @@ function addMeasureChild(m,parentEle,timeSum,level)
             addMeasureChild(m.childs[i],m.ele,thisTimeSum,level+1);
         }
     }
-
 }
-
-var initMeasures=true;
 
 function clearMeasures(p)
 {
-    for(var i=0;i<p.childs.length;i++)
-    {
-        clearMeasures(p.childs[i]);
-    }
-
+    for(var i=0;i<p.childs.length;i++) clearMeasures(p.childs[i]);
     p.childs.length=0;
-
 }
 
 function measures()
@@ -460,20 +421,15 @@ function measures()
         elementMeasures.style.height="100px";
         elementMeasures.style.opacity="1";
         elementMeasures.style.position="absolute";
-
         elementMeasures.style['z-index']="99999";
         elementMeasures.innerHTML='';
         container.appendChild(elementMeasures);
     }
 
     var timeSum=0;
-
     var root=CGL.performanceMeasures[0];
 
-    for(var i=0;i<root.childs.length;i++)
-    {
-        timeSum+=root.childs[i].used;
-    }
+    for(var i=0;i<root.childs.length;i++) timeSum+=root.childs[i].used;
 
     addMeasureChild(CGL.performanceMeasures[0],elementMeasures,timeSum,0);
 
@@ -484,8 +440,6 @@ function measures()
     CGL.performanceMeasures.length=0;
     initMeasures=false;
 }
-
-
 
 exe.onTriggered=function()
 {
@@ -511,7 +465,6 @@ exe.onTriggered=function()
         if(opened && !CGL.profileData.pause)
         {
             var timeUsed=performance.now()-lastTime;
-            // if(timeUsed>30)op.log("peak ",performance.now()-lastTime);
             queue.push(timeUsed);
             queue.shift();
 
@@ -532,13 +485,9 @@ exe.onTriggered=function()
     selfTime=performance.now()-selfTimeStart;
     var startTimeChilds=performance.now();
 
-
     startGlQuery();
-
     next.trigger();
-
     endGlQuery();
-
 
     var nChildsTime=performance.now()-startTimeChilds;
     var nCurrentTimeMainloop=CGL.profileData.profileMainloopMs;
@@ -549,16 +498,13 @@ exe.onTriggered=function()
         childsTime=childsTime*0.9+nChildsTime*0.1;
         currentTimeMainloop=currentTimeMainloop*0.9+nCurrentTimeMainloop*0.1;
         currentTimeOnFrame=currentTimeOnFrame*0.9+nCurrentTimeOnFrame*0.1;
-
     }
     else
     {
         childsTime=nChildsTime;
         currentTimeMainloop=nCurrentTimeMainloop;
         currentTimeOnFrame=nCurrentTimeOnFrame;
-
     }
-
 };
 
 function startGlQuery()
@@ -590,8 +536,5 @@ function endGlQuery()
             currentTimeGPU=elapsedNanos/1000000;
             query=null;
         }
-
     }
-
-
 }

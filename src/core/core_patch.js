@@ -176,7 +176,7 @@ Patch.prototype.renderOneFrame = function ()
  */
 Patch.prototype.getFPS = function ()
 {
-    return this._fps;
+    return this._perf.fps;
 };
 
 /**
