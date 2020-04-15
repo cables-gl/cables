@@ -1,17 +1,23 @@
-var exe=op.inTrigger("Exe");
+const
+    exe=op.inTrigger("Exe"),
+    inArr1=op.inArray('Array 1'),
+    inArr2=op.inArray('Array 2'),
+    inPerc=op.inValueSlider("perc"),
+    next=op.outTrigger("Next"),
+    outArr=op.outArray("Result");
 
-var inArr1=op.inArray('Array 1');
-var inArr2=op.inArray('Array 2');
-
-var inPerc=op.inValueSlider("perc");
-
-var next=op.outTrigger("Next");
-var outArr=op.outArray("Result");
-
+var needsCalc = true;
 var resultArr=[];
 
+function calcLater()
+{
+    needsCalc=true;
+}
+inArr1.onChange=inArr2.onChange=inPerc.onChange=calcLater;
 
-exe.onTriggered=function()
+exe.onTriggered = execute;
+
+function execute()
 {
     var arr1=inArr1.get();
     var arr2=inArr2.get();
@@ -23,9 +29,10 @@ exe.onTriggered=function()
     if(!arr1 || !arr2 || arr1.length<arr2.length)
     {
         outArr.set(null);
+        return;
     }
 
-    else
+    if(needsCalc)
     {
         if(resultArr.length!=arr1.length) resultArr.length=arr1.length;
 
@@ -38,7 +45,7 @@ exe.onTriggered=function()
             m=(val2-val1)*perc+val1;
             resultArr[i]=m;
         }
-
+        needsCalc = false;
         outArr.set(null);
         outArr.set(resultArr);
     }
