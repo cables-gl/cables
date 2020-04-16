@@ -1,0 +1,17 @@
+{
+    "id": "1593cd67-2a90-43ab-b95e-ad6bbe9af37e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1587052722306
+        },
+        {
+            "message": "Ops.User.cables.ArrayOfObjectsToString renamed to Ops.Array.ArrayOfObjectsToString",
+            "author": "simod",
+            "date": 1587052754622
+        }
+    ],
+    "authorName": "simod",
+    "created": 1587052732489
+}
