@@ -18,5 +18,26 @@
             }
         ],
         "name": "Ops.Admin.SocketClusterSendTrigger"
+    },
+    "summary": "sends a trigger via socketcluster/websocket",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "data",
+                "text": "trigger"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            }
+        ]
     }
 }

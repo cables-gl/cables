@@ -48,19 +48,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "Align",
-                "group": "Alignment"
-            },
-            {
                 "type": "0",
                 "name": "Vertical Align index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Vertical Align",
-                "group": "Alignment"
             },
             {
                 "type": "0",

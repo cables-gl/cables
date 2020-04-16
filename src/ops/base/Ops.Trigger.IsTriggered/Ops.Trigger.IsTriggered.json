@@ -30,7 +30,7 @@
         ],
         "name": "Ops.User.pandur.IsTriggered"
     },
-    "summary": "return true Is this currently being triggered",
+    "summary": "outputs true if being triggered last frame",
     "issues": "",
     "collections": null,
     "relatedops": null,

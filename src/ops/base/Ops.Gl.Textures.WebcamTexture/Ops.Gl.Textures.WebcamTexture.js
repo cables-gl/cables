@@ -1,10 +1,27 @@
-var flip=op.inValueBool("flip");
-var fps=op.inValueInt("fps");
-var inActive=op.inValueBool("Active",true);
-var textureOut=op.outTexture("texture");
-var outRatio=op.outValue("Ratio");
-var available=op.outValue("Available");
-var outEleId=op.outString("Element Id");
+// todo: https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints/facingMode
+
+const
+    inFacing=op.inSwitch("Facing",['environment','user'],'user'),
+    flip=op.inValueBool("flip"),
+    fps=op.inValueInt("fps"),
+
+    width=op.inValueInt("Width",640),
+    height=op.inValueInt("Height",480),
+
+    inActive=op.inValueBool("Active",true),
+
+
+    textureOut=op.outTexture("texture"),
+    outRatio=op.outValue("Ratio"),
+    available=op.outValue("Available"),
+    outWidth=op.outNumber("Width"),
+    outHeight=op.outNumber("Height"),
+    outEleId=op.outString("Element Id");
+
+
+width.onChange=
+height.onChange=
+inFacing.onChange=startWebcam;
 
 fps.set(30);
 flip.set(true);
@@ -12,8 +29,12 @@ flip.set(true);
 var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 const eleId="webcam"+CABLES.uuid();
-videoElement.setAttribute("id", eleId);
 videoElement.style.display="none";
+videoElement.setAttribute("id", eleId);
+videoElement.setAttribute('autoplay', '');
+videoElement.setAttribute('muted', '');
+videoElement.setAttribute('playsinline', '');
+
 outEleId.set(eleId);
 
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
@@ -29,7 +50,8 @@ op.onDelete=removeElement;
 
 function removeElement()
 {
-    videoElement.remove();
+    if(videoElement) videoElement.remove();
+    clearTimeout(timeout);
 }
 
 
@@ -74,13 +96,16 @@ function camInitComplete(stream)
     videoElement.onloadedmetadata = function(e)
     {
         available.set(true);
+
+        outHeight.set(videoElement.videoHeight);
+        outWidth.set(videoElement.videoWidth);
+
         tex.setSize(videoElement.videoWidth,videoElement.videoHeight);
 
         outRatio.set(videoElement.videoWidth/videoElement.videoHeight);
 
         videoElement.play();
         updateTexture();
-
     };
 
 }
@@ -88,7 +113,13 @@ function camInitComplete(stream)
 
 function startWebcam()
 {
-    var constraints = { audio: false, video: true };
+    removeElement();
+    var constraints = { audio: false, video: {} };
+
+    constraints.video.facingMode = inFacing.get();
+    constraints.video.width = width.get();
+    constraints.video.height = height.get();
+
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
     if(navigator.getUserMedia)

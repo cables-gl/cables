@@ -28,6 +28,10 @@
                 "type": "0",
                 "name": "Number",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -37,5 +41,13 @@
             }
         ],
         "name": "Ops.Array.ArraySetNumber"
+    },
+    "summary": "set a number at index in an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

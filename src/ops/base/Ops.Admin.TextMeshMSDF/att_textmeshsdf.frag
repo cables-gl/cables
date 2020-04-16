@@ -41,9 +41,6 @@ void main()
         opacity *= texture(texMulMask, vec2(0.0,0.0)).r; //todo texcoords from char positioning
     #endif
 
-
-
-
     float pxRange=4.0;
 
     #ifdef SHADOW
@@ -54,7 +51,7 @@ void main()
         outColor = mix(bgColor, vec4(0.0,0.0,0.0,1.0), opacity1);
     #endif
 
-    vec2 msdfUnit = pxRange/texSize;
+    vec2 msdfUnit = pxRange/texSize*1.5;
     vec3 smpl = texture(tex, texCoord).rgb;
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));

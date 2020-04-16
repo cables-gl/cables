@@ -76,9 +76,6 @@ function init()
         geomVertical.vertices.push(0);
     }
 
-
-
-
     geomVertical.setTexCoords(tc);
     geomVertical.calculateNormals();
 

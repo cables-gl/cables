@@ -59,5 +59,46 @@
             }
         ],
         "name": "Ops.Admin.SocketCluster"
+    },
+    "summary": "connect to a socketcluster server and manage the connection",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "server hostname",
+                "text": "socketcluster server"
+            },
+            {
+                "name": "allow send",
+                "text": "allow sending of messages"
+            },
+            {
+                "name": "allow multiple senders",
+                "text": "send when other clients are allowed to send"
+            },
+            {
+                "name": "channel",
+                "text": "name of channel"
+            },
+            {
+                "name": "ready",
+                "text": "connection is ready"
+            },
+            {
+                "name": "socket",
+                "text": "socket object for send/recieve ops"
+            },
+            {
+                "name": "can send",
+                "text": "whether this client is allowed to send"
+            },
+            {
+                "name": "error",
+                "text": "error"
+            }
+        ]
     }
 }

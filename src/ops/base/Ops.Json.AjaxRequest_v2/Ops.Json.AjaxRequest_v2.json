@@ -66,8 +66,16 @@
                 "text": "a key/value-object of additional headers to send"
             },
             {
+                "name": "reload",
+                "text": "refresh data from remote"
+            },
+            {
                 "name": "data",
                 "text": "the data"
+            },
+            {
+                "name": "Is Loading",
+                "text": "currently loading"
             },
             {
                 "name": "Loaded",
