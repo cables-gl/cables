@@ -71,9 +71,7 @@ void main()
                 reflectDirection.x *= -1.;
             }
         #endif
-        #ifndef USE_SKYBOX
-            reflectDirection.x *= -1.;
-        #endif
+
         #ifdef FLIP_X
             reflectDirection.x *= -1.;
         #endif
@@ -89,7 +87,6 @@ void main()
     #endif
 
     #ifndef DO_REFLECTION
-          normal.x *= -1.;
         #ifdef FLIP_X
             normal.x *= -1.;
         #endif

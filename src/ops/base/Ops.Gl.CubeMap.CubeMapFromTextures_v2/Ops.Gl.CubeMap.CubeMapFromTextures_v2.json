@@ -13,5 +13,89 @@
         }
     ],
     "authorName": "simod",
-    "created": 1586341622293
+    "created": 1586341622293,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "posx"
+            },
+            {
+                "type": "5",
+                "name": "negx"
+            },
+            {
+                "type": "5",
+                "name": "posy"
+            },
+            {
+                "type": "5",
+                "name": "negy"
+            },
+            {
+                "type": "5",
+                "name": "posz"
+            },
+            {
+                "type": "5",
+                "name": "negz"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "cubemap"
+            }
+        ],
+        "name": "Ops.Gl.CubeMap.CubeMapFromTextures_v2"
+    },
+    "summary": "generate a cubemap from 6 textures",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.CubeMap.CubeMapMaterial_v2",
+        "Ops.Gl.CubeMap.CubeMapCamera_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "posx",
+                "text": "positive x file input"
+            },
+            {
+                "name": "negx",
+                "text": "negative x file input"
+            },
+            {
+                "name": "posy",
+                "text": "positive y file input"
+            },
+            {
+                "name": "negy",
+                "text": "negative y file input"
+            },
+            {
+                "name": "posz",
+                "text": "positive z file input"
+            },
+            {
+                "name": "negz",
+                "text": "negative z file input"
+            },
+            {
+                "name": "Flip Y",
+                "text": "flip cubemap along the y axis"
+            },
+            {
+                "name": "cubemap",
+                "text": "cubemap texture output"
+            }
+        ]
+    }
 }

@@ -85,13 +85,13 @@ function loadImages() {
 
         outTex.set({ "cubemap": skyboxCubemap });
 
-        cgl.patch.loading.finished(loadingId);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_CUBE_MAP, null);
+        cgl.patch.loading.finished(loadingId);
         op.setUiError("loading", null);
         }
     })
     .catch(err => {
-        console.error("error", err);
+        op.error("error", err);
         op.setUiError("loadingerror", "Could not load textures!" , 2);
     });
 }

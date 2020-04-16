@@ -1,0 +1,31 @@
+{
+    "id": "545e7225-73b0-4d40-923b-4b39940403a8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586424481505
+        },
+        {
+            "message": "Ops.Admin.ConsoleLog renamed to Ops.Debug.ConsoleLog",
+            "author": "pandur",
+            "date": 1587023874553
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586424511965,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.Admin.ConsoleLog"
+    }
+}
