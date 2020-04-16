@@ -1,12 +1,14 @@
 const
-    inTrigger=op.inTrigger("Execute"),
+    inTrigger=op.inTriggerButton("Execute"),
     inArray=op.inArray("Array"),
     inIndex=op.inInt("Index",0),
     inValue=op.inFloat("Number",1),
+    inReset=op.inTriggerButton("Reset"),
     outArray=op.outArray("Result");
 
 var newArr=[];
 
+inReset.onTriggered=function(){copyArray(true);}
 inArray.onChange=copyArray;
 
 inTrigger.onTriggered=
@@ -37,12 +39,12 @@ function()
 
 };
 
-function copyArray()
+function copyArray(force)
 {
 
     const arr=inArray.get();
 
-    if(arr && !outArray.get())
+    if(force || (arr && !outArray.get()))
     {
 
         if(newArr.length!=arr.length) newArr.length=arr.length;

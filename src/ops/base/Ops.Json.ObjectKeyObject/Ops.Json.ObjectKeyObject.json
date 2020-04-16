@@ -29,5 +29,17 @@
     "summary": "insert an object into an object",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectKeyObject renamed to Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1587020736177
+        },
+        {
+            "message": "Ops.Json.ObjectSetObject renamed to Ops.Json.ObjectKeyObject",
+            "author": "pandur",
+            "date": 1587020763279
+        }
+    ]
 }

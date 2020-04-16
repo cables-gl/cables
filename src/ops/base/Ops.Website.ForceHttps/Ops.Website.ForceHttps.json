@@ -8,5 +8,16 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1585908153315
+    "created": 1585908153315,
+    "summary": "will redirect to same URL using https protocol",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "name": "Ops.Website.ForceHttps"
+    }
 }

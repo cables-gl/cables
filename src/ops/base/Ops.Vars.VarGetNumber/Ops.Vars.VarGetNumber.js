@@ -17,7 +17,8 @@ function updateVarNamesDropdown()
 
         for(var i in vars)
             if(typeof vars[i].getValue()=="number" || typeof vars[i].getValue()=="boolean")
-                varnames.push(i);
+                if(i!="0")
+                    varnames.push(i);
 
         op.varName.uiAttribs.values=varnames;
     }

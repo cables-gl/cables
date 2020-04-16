@@ -1,7 +1,7 @@
 const filename = op.inUrl("file"),
     jsonp = op.inValueBool("JsonP", false),
     headers = op.inObject("headers", {}),
-    reloadTrigger = op.inTrigger("reload"),
+    reloadTrigger = op.inTriggerButton("reload"),
     outData = op.outObject("data"),
     isLoading = op.outValue("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
@@ -63,7 +63,8 @@ function reload(addCachebuster)
                 var data = _data;
                 if (typeof data === "string") data = JSON.parse(_data);
 
-                if (outData.get()) outData.set(null);
+                // if (outData.get())
+                outData.set(null);
                 outData.set(data);
                 op.uiAttr({ error: null });
                 op.patch.loading.finished(loadingId);

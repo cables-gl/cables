@@ -12,10 +12,27 @@
         ]
     },
     "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
         "portsOut": [
             {
                 "type": "0",
                 "name": "FPS",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Average FPS",
                 "subType": "number"
             }
         ],

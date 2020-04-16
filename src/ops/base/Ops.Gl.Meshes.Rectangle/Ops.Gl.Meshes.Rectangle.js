@@ -40,7 +40,8 @@ rebuild();
 
 function rebuildLater()
 {
-    needsRebuild=true;
+    rebuild();
+    // needsRebuild=true;
 }
 
 op.preRender=

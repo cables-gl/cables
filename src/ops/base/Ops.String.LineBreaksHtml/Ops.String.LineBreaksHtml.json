@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.String.LineBreaksHtml"
+    },
+    "summary": "Convert linebreaks to html breaks",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
