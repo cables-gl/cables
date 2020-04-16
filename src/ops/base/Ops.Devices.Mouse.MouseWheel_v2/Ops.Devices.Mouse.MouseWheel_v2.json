@@ -1,0 +1,59 @@
+{
+    "id": "7b9626db-536b-4bb4-85c3-95401bc60d1b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586273422836
+        },
+        {
+            "message": "Ops.Devices.MouseWheel2 renamed to Ops.Devices.Mouse.MouseWheel_v2",
+            "author": "pandur",
+            "date": 1587023620405
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586273436875,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "prevent scroll",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Direction",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "delta",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "browser event delta",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Devices.MouseWheel2"
+    }
+}
