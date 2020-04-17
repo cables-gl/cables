@@ -207,6 +207,19 @@ ANIM.Key.easeInElastic = function (t, key2)
     return ANIM.Key.linear(t, this, key2);
 };
 
+// function easeInOutElastic(x: number): number {
+//     const c5 = (2 * Math.PI) / 4.5;
+    
+//     return x === 0
+//       ? 0
+//       : x === 1
+//       ? 1
+//       : x < 0.5
+//       ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
+//       : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1;
+//     }
+
+    
 ANIM.Key.easeOutElastic = function (t, key2)
 {
     var s = 1.70158;

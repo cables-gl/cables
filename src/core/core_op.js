@@ -1475,7 +1475,6 @@ const Op = function ()
         {
             if(this.portsIn[i].getVariableName()) this.portsIn[i].setVariable( this.portsIn[i].getVariableName() );
         }
-
     };
 
 
@@ -1488,7 +1487,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if(this.patch && this.patch.isEditorMode()) gui.patch().refreshOpParams(this);
+        if(this.patch && this.patch.isEditorMode())  gui.opParams.show(this);
     };
 }
 

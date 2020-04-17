@@ -9,20 +9,26 @@
             {
                 "type": "0",
                 "name": "use viewport size",
-                "group": "Alignment",
+                "group": "Size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "texture width",
-                "group": "Alignment",
+                "group": "Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "texture height",
-                "group": "Alignment",
+                "group": "Size",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Auto Aspect",
+                "group": "Size",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -30,18 +36,9 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
-                "name": "filter",
-                "group": "Alignment"
-            },
-            {
                 "type": "0",
                 "name": "MSAA index",
                 "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "MSAA"
             },
             {
                 "type": "0",

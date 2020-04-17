@@ -5,6 +5,7 @@ const
     useVPSize=op.inValueBool("use viewport size",true),
     width=op.inValueInt("texture width",512),
     height=op.inValueInt("texture height",512),
+    aspect=op.inBool("Auto Aspect",false),
     tfilter=op.inSwitch("filter",['nearest','linear','mipmap'],'linear'),
     msaa=op.inSwitch("MSAA",["none","2x","4x","8x"],"none"),
     trigger=op.outTrigger('trigger'),
@@ -18,7 +19,7 @@ var fb=null;
 var reInitFb=true;
 tex.set(CGL.Texture.getEmptyTexture(cgl));
 
-op.setPortGroup('Alignment',[useVPSize,width,height,tfilter]);
+op.setPortGroup('Size',[useVPSize,width,height,aspect]);
 
 
 // todo why does it only work when we render a mesh before>?>?????
@@ -27,16 +28,9 @@ op.setPortGroup('Alignment',[useVPSize,width,height,tfilter]);
 useVPSize.onChange=updateVpSize;
 function updateVpSize()
 {
-    if(useVPSize.get())
-    {
-        width.setUiAttribs({greyout:true});
-        height.setUiAttribs({greyout:true});
-    }
-    else
-    {
-        width.setUiAttribs({greyout:false});
-        height.setUiAttribs({greyout:false});
-    }
+    width.setUiAttribs({"greyout":useVPSize.get()});
+    height.setUiAttribs({"greyout":useVPSize.get()});
+    aspect.setUiAttribs({"greyout":useVPSize.get()});
 }
 
 function initFbLater()
@@ -106,6 +100,9 @@ function doRender()
     }
 
     fb.renderStart(cgl);
+
+    if(aspect.get()) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
+
 
     trigger.trigger();
     fb.renderEnd(cgl);
