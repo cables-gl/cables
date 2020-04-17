@@ -1,5 +1,12 @@
 #ifdef MOD_AREA_SPHERE
-    float MOD_de=distance(vec3(MOD_x,MOD_y,MOD_z),vec3(MOD_areaPos.x*MOD_sizeX,MOD_areaPos.y,MOD_areaPos.z));
+    float MOD_de=distance(MOD_pos,vec3(MOD_areaPos.x*MOD_sizeX,MOD_areaPos.y,MOD_areaPos.z));
+#endif
+
+#ifdef MOD_AREA_BOX
+    float MOD_de=0.0;
+    if(abs(MOD_areaPos.y-MOD_pos.y)>MOD_size ||
+        abs(MOD_areaPos.x-MOD_pos.x)>MOD_size ||
+        abs(MOD_areaPos.z-MOD_pos.z)>MOD_size ) MOD_de=1.0;
 #endif
 
 #ifdef MOD_AREA_AXIS_X
@@ -29,9 +36,9 @@ MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
 #endif
 
 #ifdef MOD_BLEND_NORMAL
-    col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), MOD_de*MOD_amount);
+    col.rgb=mix(col.rgb,MOD_color, MOD_de*MOD_amount);
 #endif
 
 #ifdef MOD_BLEND_MULTIPLY
-    col.rgb=mix(col.rgb,col.rgb*vec3(MOD_r,MOD_g,MOD_b),MOD_de*MOD_amount);
+    col.rgb=mix(col.rgb,col.rgb*MOD_color,MOD_de*MOD_amount);
 #endif

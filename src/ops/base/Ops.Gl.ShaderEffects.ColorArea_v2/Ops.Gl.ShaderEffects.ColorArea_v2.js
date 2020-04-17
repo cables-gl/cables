@@ -1,6 +1,6 @@
 const
     render=op.inTrigger("Render"),
-    inArea=op.inValueSelect("Area",["Sphere","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere"),
+    inArea=op.inValueSelect("Area",["Sphere","Box","Axis X","Axis Y","Axis Z","Axis X Infinite","Axis Y Infinite","Axis Z Infinite"],"Sphere"),
     inSize=op.inValue("Size",1),
     inAmount=op.inValueSlider("Amount",0.5),
     inFalloff=op.inValueSlider("Falloff",0),
@@ -49,7 +49,6 @@ inWorldSpace.onChange=
 
 render.onTriggered=doRender;
 
-
 function updateDefines()
 {
     if(!shader)return;
@@ -66,6 +65,7 @@ function updateDefines()
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_Y_INFINITE",inArea.get()=="Axis Y Infinite");
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_Z_INFINITE",inArea.get()=="Axis Z Infinite");
     shader.toggleDefine(moduleVert.prefix+"AREA_SPHERE",inArea.get()=="Sphere");
+    shader.toggleDefine(moduleVert.prefix+"AREA_BOX",inArea.get()=="Box");
 }
 
 function removeModule()
@@ -124,15 +124,9 @@ function doRender()
         uniforms.inSize=new CGL.Uniform(shader,'f',moduleFrag.prefix+'size',inSize);
         uniforms.inAmount=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
 
-        uniforms.r=new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
-        uniforms.g=new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
-        uniforms.b=new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
-
-        uniforms.x=new CGL.Uniform(shader,'f',moduleFrag.prefix+'x',x);
-        uniforms.y=new CGL.Uniform(shader,'f',moduleFrag.prefix+'y',y);
-        uniforms.z=new CGL.Uniform(shader,'f',moduleFrag.prefix+'z',z);
+        uniforms.color=new CGL.Uniform(shader,'3f',moduleFrag.prefix+'color',r,g,b);
+        uniforms.pos=new CGL.Uniform(shader,'3f',moduleFrag.prefix+'pos',x,y,z);
         uniforms.sizeX=new CGL.Uniform(shader,'f',moduleFrag.prefix+'sizeX',sizeX);
-
         uniforms.inFalloff=new CGL.Uniform(shader,'f',moduleFrag.prefix+'falloff',inFalloff);
 
         updateDefines();
@@ -142,7 +136,6 @@ function doRender()
 
     shader.copyUniforms(origShader);
 
-    var texSlot=moduleVert.num+5;
     cgl.pushShader(shader);
     next.trigger();
     cgl.popShader();
