@@ -22,14 +22,30 @@ const ALIGN_HEIGHT=2;
 const ALIGN_BOTH=3;
 const ALIGN_AUTO=4;
 
-inStretch.onChange=
-inWhat.onChange=updateUi;
-
+inStretch.onChange=updateUi;
+inWhat.onChange=updateMethod;
 inCenter.onChange=
-inTrigger.onLinkChanged=removeStyles;
+    inTrigger.onLinkChanged=removeStyles;
 
 
-inPresets.onChange=function()
+inPresets.onChange=updateRatioPreset;
+
+const cgl=op.patch.cgl;
+
+updateUi();
+
+
+function updateMethod()
+{
+    if(inWhat.get()=="Aspect Ratio")
+    {
+        inRatio.set(100);
+        updateRatioPreset();
+    }
+    updateUi();
+}
+
+function updateRatioPreset()
 {
     const pr=inPresets.get();
     if(pr=='16:9')inRatio.set(16/9);
@@ -41,12 +57,8 @@ inPresets.onChange=function()
     else if(pr=='9:16')inRatio.set(9/16);
     else if(pr=='1:2')inRatio.set(0.5);
     else if(pr=='iPhoneXr Vert')inRatio.set(9/19.5);
+}
 
-};
-
-const cgl=op.patch.cgl;
-
-updateUi();
 
 inActive.onChange=function()
 {

@@ -62,15 +62,15 @@ function checkError(when)
 {
     var err=gl.getError();
     if (err != gl.NO_ERROR) {
-        console.log("error "+when);
-        console.log('error size',inSize.get());
-        if(err==cgl.gl.NO_ERROR)console.error("NO_ERROR");
-        if(err==cgl.gl.OUT_OF_MEMORY)console.error("OUT_OF_MEMORY");
-        if(err==cgl.gl.INVALID_ENUM)console.error("INVALID_ENUM");
-        if(err==cgl.gl.INVALID_OPERATION)console.error("INVALID_OPERATION");
-        if(err==cgl.gl.INVALID_FRAMEBUFFER_OPERATION)console.error("INVALID_FRAMEBUFFER_OPERATION");
-        if(err==cgl.gl.INVALID_VALUE)console.error("INVALID_VALUE");
-        if(err==cgl.gl.CONTEXT_LOST_WEBGL)console.error("CONTEXT_LOST_WEBGL");
+        op.log("error "+when);
+        op.log('error size',inSize.get());
+        if(err==cgl.gl.NO_ERROR)op.error("NO_ERROR");
+        if(err==cgl.gl.OUT_OF_MEMORY)op.error("OUT_OF_MEMORY");
+        if(err==cgl.gl.INVALID_ENUM)op.error("INVALID_ENUM");
+        if(err==cgl.gl.INVALID_OPERATION)op.error("INVALID_OPERATION");
+        if(err==cgl.gl.INVALID_FRAMEBUFFER_OPERATION)op.error("INVALID_FRAMEBUFFER_OPERATION");
+        if(err==cgl.gl.INVALID_VALUE)op.error("INVALID_VALUE");
+        if(err==cgl.gl.CONTEXT_LOST_WEBGL)op.error("CONTEXT_LOST_WEBGL");
 
         // throw "Some WebGL error occurred while trying to create framebuffer.  Maybe you need more resources; try another browser or computer.";
     }

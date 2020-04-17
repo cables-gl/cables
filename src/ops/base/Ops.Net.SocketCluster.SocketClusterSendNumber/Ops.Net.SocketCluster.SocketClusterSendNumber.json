@@ -30,5 +30,30 @@
             }
         ],
         "name": "Ops.Admin.SocketClusterSendNumber"
+    },
+    "summary": "sends a number via socketcluster/websocket",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "send",
+                "text": "execute"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "data",
+                "text": "number"
+            }
+        ]
     }
 }

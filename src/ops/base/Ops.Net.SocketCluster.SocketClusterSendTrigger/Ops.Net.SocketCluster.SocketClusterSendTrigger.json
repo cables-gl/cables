@@ -1,0 +1,43 @@
+{
+    "authorName": "stephan",
+    "id": "79a7fa39-fb66-455c-9c75-bcd506231dcd",
+    "created": 1584698133723,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "data"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterSendTrigger"
+    },
+    "summary": "sends a trigger via socketcluster/websocket",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "data",
+                "text": "trigger"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            }
+        ]
+    }
+}

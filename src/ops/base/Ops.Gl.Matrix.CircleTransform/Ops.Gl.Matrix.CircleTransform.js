@@ -30,12 +30,13 @@ function doRender()
 {
     if(needsCalc)calc();
     var doRot=inRotate.get();
+    const perc=percent.get();
     for(var i=0;i<pos.length;i++)
     {
         cgl.pushModelMatrix();
 
         mat4.translate(cgl.mMatrix,cgl.mMatrix, pos[i] );
-        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, (i/pos.length*percent.get())*CGL.DEG2RAD*-360);
+        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, (i/pos.length*perc)*CGL.DEG2RAD*-360);
 
         index.set(i);
         trigger.trigger();

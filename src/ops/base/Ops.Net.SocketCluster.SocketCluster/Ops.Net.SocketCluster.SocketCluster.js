@@ -1,4 +1,4 @@
-const serverHostname = op.inString("server hostname", "ws.dev.cables.gl");
+const serverHostname = op.inString("server hostname", "");
 const serverPort = op.inValue("server port", 443);
 const serverSecure = op.inBool("use ssl", true);
 const allowSend = op.inBool("allow send", false);

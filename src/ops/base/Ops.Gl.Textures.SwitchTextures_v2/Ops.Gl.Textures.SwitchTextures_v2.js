@@ -16,7 +16,7 @@ exec.onTriggered=function(){updateTexture();};
 defaultTransparent.onChange=function()
 {
     if(defaultTransparent.get()) tempTexture=CGL.Texture.getEmptyTexture(cgl);
-        else tempTexture=CGL.Texture.getTempTexture(cgl);
+    else tempTexture=CGL.Texture.getTempTexture(cgl);
 
     updateTexture(true);
 };

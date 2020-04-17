@@ -55,5 +55,13 @@
             }
         ],
         "name": "Ops.Html.ModalOverlay"
+    },
+    "summary": "create a modal HTML overlay with a darkened background",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

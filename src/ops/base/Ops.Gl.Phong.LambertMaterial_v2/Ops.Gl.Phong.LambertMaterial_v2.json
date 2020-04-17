@@ -35,7 +35,13 @@
             {
                 "type": "2",
                 "name": "Diffuse Texture",
-                "group": "Texture & Transforms"
+                "group": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Texture",
+                "group": "Texture",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -56,5 +62,51 @@
             "author": "simod",
             "date": 1583503042981
         }
-    ]
+    ],
+    "summary": "a simple shaded material ",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Phong.PhongMaterial_v4",
+        "Ops.Gl.Phong.PointLight_v4",
+        "Ops.Gl.Phong.DirectionalLight_v4",
+        "Ops.Gl.Phong.AmbientLight_v4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Diffuse R",
+                "text": "R component of the diffuse color"
+            },
+            {
+                "name": "Diffuse G",
+                "text": "G component of the diffuse color"
+            },
+            {
+                "name": "Diffuse B",
+                "text": "B component of the diffuse color"
+            },
+            {
+                "name": "Diffuse A",
+                "text": "Alpha channel of the diffuse color"
+            },
+            {
+                "name": "Diffuse Texture",
+                "text": "Texture input"
+            },
+            {
+                "name": "next",
+                "text": "Trigger output"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader output to be used with i.e. GLTF models"
+            }
+        ]
+    }
 }

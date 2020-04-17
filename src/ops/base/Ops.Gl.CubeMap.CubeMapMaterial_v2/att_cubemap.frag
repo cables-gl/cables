@@ -1,5 +1,6 @@
 {{MODULES_HEAD}}
-#define PI 3.14159265358 //97932384626433832795
+
+#define PI 3.14159265358
 #define PI_TWO 2.*PI
 #define RECIPROCAL_PI 1./PI
 #define RECIPROCAL_PI2 RECIPROCAL_PI/2.
@@ -16,6 +17,7 @@ IN vec3 fragPos;
 
 UNI vec3 camPos;
 UNI float inRotation;
+UNI vec3 inColor;
 
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube skybox;
@@ -40,24 +42,15 @@ UNI float miplevel;
 		sampleUV.x = -1. * (atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.75);
 		sampleUV.y = asin( clamp(direction.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
 
-        /* from finish thesis
-		sampleUV.x = (atan(newDirection.x, -newDirection.z) + PI) / (PI_TWO);
-		sampleUV.y = acos(-newDirection.y) / PI;
-        */
-
-      //  vec2 uv = vec2(atan(direction.z, direction.x), asin(direction.y+1e-6));
-    //    uv *= vec2(0.1591, 0.3183);
-      //  uv += 0.5;
-
         return textureLod(tex,sampleUV,lod);
     }
 #endif
 
 void main()
 {
-    float rot= inRotation * PI_TWO;
-    float sa=sin(rot);
-    float ca=cos(rot);
+    float rot = inRotation * PI_TWO;
+    float sa = sin(rot);
+    float ca = cos(rot);
     mat2 matRotation = mat2(ca,sa,-sa,ca);
 
     {{MODULE_BEGIN_FRAG}}
@@ -69,27 +62,49 @@ void main()
 
     #ifdef DO_REFLECTION
         vec3 envMapNormal = normal;
-        vec3 reflectDirection = normalize(reflect(-viewDirection, normal));
+        vec3 reflectDirection = reflect(-viewDirection, normal);
 
-        if (gl_FrontFacing) {
-            // reflectDirection = normalize(reflect(viewDirection, normal));
-            reflectDirection.yz *= -1.;
-        }
+        #ifdef USE_SKYBOX
+            if (gl_FrontFacing) {
+                reflectDirection.yz *= -1.;
+            } else {
+                reflectDirection.x *= -1.;
+            }
+        #endif
+
+        #ifdef FLIP_X
+            reflectDirection.x *= -1.;
+        #endif
+        #ifdef FLIP_Y
+            reflectDirection.y *= -1.;
+        #endif
+        #ifdef FLIP_Z
+            reflectDirection.z *= -1.;
+        #endif
+
         reflectDirection.xz *= matRotation;
-
         col = SAMPLETEX(skybox, reflectDirection,1. + miplevel*10.0);
     #endif
 
     #ifndef DO_REFLECTION
-        // normal.yz *= -1.;
-        if (gl_FrontFacing) {
-          normal.x *= -1.;
-        }
+        #ifdef FLIP_X
+            normal.x *= -1.;
+        #endif
+        #ifdef FLIP_Y
+            normal.y *= -1.;
+        #endif
+        #ifdef FLIP_Z
+            normal.z *= -1.;
+        #endif
+
         normal.xz *= matRotation;
 
-        col = SAMPLETEX(skybox, normal, miplevel*10.0);
+        col = SAMPLETEX(skybox, normal, miplevel * 10.0);
     #endif
 
+    #ifdef COLORIZE
+        col.rgb *= inColor;
+    #endif
     {{MODULE_COLOR}}
 
     outColor=col;

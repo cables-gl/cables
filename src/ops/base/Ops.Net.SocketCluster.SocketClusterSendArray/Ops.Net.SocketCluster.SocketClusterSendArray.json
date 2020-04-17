@@ -1,0 +1,51 @@
+{
+    "authorName": "stephan",
+    "id": "9916f8a7-9fd8-4a3e-ad63-077a86d37c78",
+    "created": 1584697986659,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "send"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            },
+            {
+                "type": "3",
+                "name": "data"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterSendArray"
+    },
+    "summary": "sends an array via socketcluster/websocket",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "send",
+                "text": "execute"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "data",
+                "text": "array"
+            }
+        ]
+    }
+}

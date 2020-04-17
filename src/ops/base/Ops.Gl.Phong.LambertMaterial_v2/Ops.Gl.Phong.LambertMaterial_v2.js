@@ -21,12 +21,11 @@ inDiffuseTexture.onChange = updateDiffuseTexture
 
 // TEXTURE TRANSFORMS
 const inColorizeTexture = op.inBool("Colorize Texture",false);
-inColorizeTexture.setUiAttribs({ hidePort: true });
 inColorizeTexture.onChange = function() {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 }
 
-op.setPortGroup("Texture & Transforms", [
+op.setPortGroup("Texture", [
     inDiffuseTexture,
     inColorizeTexture
 ]);

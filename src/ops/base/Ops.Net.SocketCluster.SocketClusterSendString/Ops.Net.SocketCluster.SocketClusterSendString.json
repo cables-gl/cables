@@ -1,0 +1,51 @@
+{
+    "authorName": "stephan",
+    "id": "eb36749d-dbd2-444d-a5cf-b15f7067198c",
+    "created": 1584697994599,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "send"
+            },
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            },
+            {
+                "type": "5",
+                "name": "data"
+            }
+        ],
+        "name": "Ops.Admin.SocketClusterSendString"
+    },
+    "summary": "sends a string via socketcluster/websocket",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "send",
+                "text": "execute"
+            },
+            {
+                "name": "socket",
+                "text": "socket object coming from SocketCluster Op"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "data",
+                "text": "string"
+            }
+        ]
+    }
+}

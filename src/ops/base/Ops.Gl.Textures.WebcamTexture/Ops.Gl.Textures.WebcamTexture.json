@@ -4,12 +4,27 @@
         "portsIn": [
             {
                 "type": "0",
+                "name": "Facing index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "flip",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "fps",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Height",
                 "subType": "integer"
             },
             {
@@ -31,6 +46,16 @@
             {
                 "type": "0",
                 "name": "Available",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
                 "subType": "number"
             },
             {

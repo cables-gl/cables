@@ -21,28 +21,56 @@
                 "name": "render"
             },
             {
-                "type": "0",
-                "name": "Mip Level",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Rotation",
-                "subType": "number"
-            },
-            {
                 "type": "2",
                 "name": "Cubemap"
             },
             {
                 "type": "0",
-                "name": "Reflection",
+                "name": "Use as Skybox",
+                "group": "Appearance",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Invert",
+                "name": "Use Reflection",
+                "group": "Appearance",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Blur",
+                "group": "Appearance",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation",
+                "group": "Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Colorize",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -51,6 +79,61 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.cables.CubeMapMaterial_v2"
+        "name": "Ops.Gl.CubeMap.CubeMapMaterial_v2"
+    },
+    "summary": "use a cubemap or equirectangular texture as a material",
+    "issues": "",
+    "collections": [
+        "Material"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Cubemap",
+                "text": "Texture input, either cubemap or equirectangular"
+            },
+            {
+                "name": "Use as Skybox",
+                "text": "Check to use material as a skybox"
+            },
+            {
+                "name": "Use Reflection",
+                "text": "Check to use the reflection vector"
+            },
+            {
+                "name": "Blur",
+                "text": "The amount of blur/miplevel"
+            },
+            {
+                "name": "Rotation",
+                "text": "Rotate the texture"
+            },
+            {
+                "name": "Colorize",
+                "text": "Check to multiply color to the texture"
+            },
+            {
+                "name": "R",
+                "text": "R component of the multiplied color"
+            },
+            {
+                "name": "G",
+                "text": "G component of the multiplied color"
+            },
+            {
+                "name": "B",
+                "text": "B component of the multiplied color"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger output"
+            }
+        ]
     }
 }

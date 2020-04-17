@@ -1,0 +1,83 @@
+{
+    "id": "fc5718d6-11a5-496e-8f16-1c78b1a2824c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587023107369
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587023114851,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "pivot x index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "pivot y index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "num columns",
+                "group": "Structure",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "num rows",
+                "group": "Structure",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "axis index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Rectangle_v2"
+    },
+    "summary": "draw a rectangle (plane)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

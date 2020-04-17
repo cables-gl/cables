@@ -14,10 +14,11 @@ var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
 var axis=op.inValueSelect("axis",["xy","xz"]);
 
 var isInteractive=op.inValueBool('Is Interactive',true);
-var active=op.inValueBool('Render',true);
+var renderRect=op.inValueBool('Render Rectangle',true);
 var divVisible=op.inValueBool('Show Boundings',true);
-
 var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
+var active=op.inValueBool('Render',true);
+
 
 var geomOut=op.outObject("geometry");
 geomOut.ignoreValueSerialize=true;
@@ -35,6 +36,8 @@ var outBottom=op.outValue("Bottom");
 var mouseClick=op.outTrigger("Left Click");
 
 var elementPort = op.outObject('Dom Element');
+
+active.setUiAttribs({"title":"Active"});
 
 var cgl=op.patch.cgl;
 axis.set('xy');
@@ -74,7 +77,7 @@ render.onTriggered=function()
     }
     updateDivSize();
 
-    if(active.get() && mesh) mesh.render(cgl.getShader());
+    if(active.get() && renderRect.get() && mesh) mesh.render(cgl.getShader());
 
     trigger.trigger();
 };
