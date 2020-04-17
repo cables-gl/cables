@@ -56,7 +56,7 @@ function updateDefines()
     shader.toggleDefine(moduleVert.prefix+"BLEND_MULTIPLY",inBlend.get()!="Normal");
 
     shader.toggleDefine(moduleVert.prefix+"AREA_INVERT",inInvert.get());
-    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",inWorldSpace.get());
+    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",!inWorldSpace.get());
 
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_X",inArea.get()=="Axis X");
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_Y",inArea.get()=="Axis Y");
