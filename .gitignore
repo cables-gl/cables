@@ -8,5 +8,3 @@ node_modules
 /dist/
 build/
 *.iml
-
-package-lock.json
