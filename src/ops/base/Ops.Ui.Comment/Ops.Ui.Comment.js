@@ -1,5 +1,5 @@
-op.inTitle=op.inValueString("title",' ');
-op.text=op.inValueText("text");
+op.inTitle=op.inString("title",' ');
+op.text=op.inTextarea("text");
 
 op.text.set(' ');
 op.name=' ';
@@ -13,32 +13,20 @@ op.onLoaded=update;
 
 update();
 
-function updateUI()
-{
-    if(CABLES.UI)
-    {
-        var uiOp=gui.patch().getUiOp(op);
-        if(!uiOp)return;
-
-        setTimeout(function()
-        {
-            op.name=op.inTitle.get();
-            uiOp.oprect.updateComment();
-        },30);
-
-    }
-}
 
 
 function update()
 {
     if(CABLES.UI)
     {
+        op.uiAttr(
+            {
+                'comment_title':op.inTitle.get(),
+                'comment_text':op.text.get()
+            });
 
-        op.uiAttr('title',op.inTitle.get());
         op.name=op.inTitle.get();
 
-        updateUI();
     }
 }
 
