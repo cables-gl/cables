@@ -3,17 +3,13 @@
 
 const render = op.inTrigger('render');
 const inCubemap = op.inObject("Cubemap");
-const inSkybox = op.inBool("Use as Skybox", false);
 const inUseReflection = op.inValueBool("Use Reflection", false);
 const inMiplevel = op.inValueSlider("Blur",0.0);
-op.setPortGroup("Appearance", [inMiplevel, inSkybox, inUseReflection]);
+op.setPortGroup("Appearance", [inMiplevel, inUseReflection]);
 const inRotation = op.inFloat("Rotation", 0);
 const inFlipX = op.inBool("Flip X", false);
 const inFlipY = op.inBool("Flip Y", false);
 const inFlipZ = op.inBool("Flip Z", false);
-inFlipX.setUiAttribs({ hidePort: true });
-inFlipY.setUiAttribs({ hidePort: true });
-inFlipZ.setUiAttribs({ hidePort: true });
 
 op.setPortGroup("Transforms", [inRotation, inFlipX, inFlipY, inFlipZ]);
 const inColorize = op.inBool("Colorize", false);
@@ -24,7 +20,7 @@ inR.setUiAttribs({ colorPick: true });
 
 op.setPortGroup("Color", [inColorize, inR, inG, inB]);
 
-inUseReflection.onChange = inSkybox.onChange = inCubemap.onChange =
+inUseReflection.onChange = inCubemap.onChange =
 inFlipX.onChange = inFlipY.onChange = inFlipZ.onChange = updateMapping;
 inColorize.onChange = function() {
     shader.toggleDefine("COLORIZE", inColorize.get());
@@ -74,7 +70,6 @@ function updateMapping()
     shader.toggleDefine("FLIP_Y", inFlipY.get());
     shader.toggleDefine("FLIP_Z", inFlipZ.get());
     shader.toggleDefine("DO_REFLECTION", inUseReflection.get());
-    shader.toggleDefine("USE_SKYBOX", inSkybox.get());
 
     if(inCubemap.get() && inCubemap.get().cubemap)
     {

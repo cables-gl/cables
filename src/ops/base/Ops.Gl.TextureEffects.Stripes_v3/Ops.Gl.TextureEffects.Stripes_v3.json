@@ -86,7 +86,7 @@
         ],
         "name": "Ops.Gl.TextureEffects.Stripes_v3"
     },
-    "summary": "Draw a texture with stripes ",
+    "summary": "Create a texture of stripes ",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -96,6 +96,58 @@
             {
                 "name": "Render",
                 "text": "Trigger in"
+            },
+            {
+                "name": "Blend Mode index",
+                "text": "Pick a blend mode with an integer"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blending"
+            },
+            {
+                "name": "Num",
+                "text": "Number of stripes"
+            },
+            {
+                "name": "Width",
+                "text": "width of each stripe"
+            },
+            {
+                "name": "Rotate",
+                "text": "rotate everything"
+            },
+            {
+                "name": "Offset",
+                "text": "offset stripes from zero"
+            },
+            {
+                "name": "Gradients",
+                "text": "Enable gradient mode"
+            },
+            {
+                "name": "Circular",
+                "text": "Enable circular stripes "
+            },
+            {
+                "name": "r",
+                "text": "red"
+            },
+            {
+                "name": "g",
+                "text": "green "
+            },
+            {
+                "name": "b",
+                "text": "blue "
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out "
             }
         ]
     }

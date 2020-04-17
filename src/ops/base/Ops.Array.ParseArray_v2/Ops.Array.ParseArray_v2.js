@@ -11,7 +11,13 @@ parse();
 
 function parse()
 {
-    if (!text.get()) return;
+    if (!text.get())
+    {
+        arr.set(null);
+        arr.set([]);
+        len.set(0);
+        return;
+    }
 
     var r = text.get().split(separator.get());
 

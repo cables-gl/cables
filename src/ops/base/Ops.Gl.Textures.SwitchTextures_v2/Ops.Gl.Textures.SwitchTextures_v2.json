@@ -97,5 +97,30 @@
             }
         ],
         "name": "Ops.Gl.Textures.SwitchTextures_v2"
+    },
+    "summary": "Switch between different textures ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exec",
+                "text": "Trigger in"
+            },
+            {
+                "name": "num",
+                "text": "Input port to pick texture from"
+            },
+            {
+                "name": "Default Texture Transparent",
+                "text": "Enable transparency"
+            },
+            {
+                "name": "texture",
+                "text": "Selected texture output"
+            }
+        ]
     }
 }

@@ -8,5 +8,62 @@
         }
     ],
     "authorName": "stephan",
-    "created": 1584535204347
+    "created": 1584535204347,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "client id"
+            },
+            {
+                "type": "0",
+                "name": "data",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "received"
+            }
+        ],
+        "name": "Ops.Net.SocketCluster.SocketClusterRecieveNumber"
+    },
+    "summary": "recieves number from the socketcluster socket/topic",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
+            },
+            {
+                "name": "data",
+                "text": "the number"
+            },
+            {
+                "name": "received",
+                "text": "received message"
+            }
+        ]
+    }
 }

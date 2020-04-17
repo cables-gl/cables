@@ -1,5 +1,53 @@
 {
     "authorName": "stephan",
     "id": "a1e9afb6-a0f8-4ec6-a86c-86f50a441bee",
-    "created": 1584698303551
+    "created": 1584698303551,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "client id"
+            },
+            {
+                "type": "1",
+                "name": "received"
+            }
+        ],
+        "name": "Ops.Net.SocketCluster.SocketClusterRecieveTrigger"
+    },
+    "summary": "Recieves trigger from the socketcluster socket/topic",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
+            },
+            {
+                "name": "received",
+                "text": "received message"
+            }
+        ]
+    }
 }

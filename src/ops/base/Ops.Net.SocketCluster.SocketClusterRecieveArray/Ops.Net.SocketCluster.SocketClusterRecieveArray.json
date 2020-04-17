@@ -1,5 +1,61 @@
 {
     "authorName": "stephan",
     "id": "76432cbb-5950-4447-ad6c-1a37e56c7a55",
-    "created": 1584698200859
+    "created": 1584698200859,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "socket"
+            },
+            {
+                "type": "5",
+                "name": "topic"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "client id"
+            },
+            {
+                "type": "3",
+                "name": "data"
+            },
+            {
+                "type": "1",
+                "name": "received"
+            }
+        ],
+        "name": "Ops.Net.SocketCluster.SocketClusterRecieveArray"
+    },
+    "summary": "recieves an array from the socketcluster topic",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
+            },
+            {
+                "name": "data",
+                "text": "the array"
+            },
+            {
+                "name": "received",
+                "text": "received message"
+            }
+        ]
+    }
 }

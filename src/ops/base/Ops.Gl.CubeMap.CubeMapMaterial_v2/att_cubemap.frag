@@ -64,13 +64,11 @@ void main()
         vec3 envMapNormal = normal;
         vec3 reflectDirection = reflect(-viewDirection, normal);
 
-        #ifdef USE_SKYBOX
-            if (gl_FrontFacing) {
-                reflectDirection.yz *= -1.;
-            } else {
-                reflectDirection.x *= -1.;
-            }
-        #endif
+        if (!gl_FrontFacing) {
+            reflectDirection.yz *= -1.;
+        } else {
+          // reflectDirection.x *= -1.;
+        }
 
         #ifdef FLIP_X
             reflectDirection.x *= -1.;
@@ -87,6 +85,8 @@ void main()
     #endif
 
     #ifndef DO_REFLECTION
+        if (!gl_FrontFacing) normal.x *= -1.;
+
         #ifdef FLIP_X
             normal.x *= -1.;
         #endif

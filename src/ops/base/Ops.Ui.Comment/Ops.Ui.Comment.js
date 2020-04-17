@@ -22,7 +22,7 @@ function updateUI()
 
         setTimeout(function()
         {
-            op.name=op.inTitle.get();
+            op.name=op.inTitle.get()||' ';
             uiOp.oprect.updateComment();
         },30);
 
@@ -36,7 +36,7 @@ function update()
     {
 
         op.uiAttr('title',op.inTitle.get());
-        op.name=op.inTitle.get();
+        op.name=op.inTitle.get()||' ';
 
         updateUI();
     }

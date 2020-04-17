@@ -106,8 +106,20 @@
                 "text": "Trigger in"
             },
             {
+                "name": "Blend Mode index",
+                "text": "Integer selects blend mode"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
                 "name": "Amount",
                 "text": "Amount of blend to apply"
+            },
+            {
+                "name": "Mode index",
+                "text": "Pick the gradient type with an integer"
             },
             {
                 "name": "Frequency",
@@ -124,6 +136,18 @@
             {
                 "name": "Rotate",
                 "text": "Rotate the texture"
+            },
+            {
+                "name": "r",
+                "text": "red "
+            },
+            {
+                "name": "g",
+                "text": "green "
+            },
+            {
+                "name": "b",
+                "text": "blue"
             },
             {
                 "name": "trigger",

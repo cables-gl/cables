@@ -8,7 +8,9 @@ const
 
 var newArr=[];
 
-inReset.onTriggered=function(){copyArray(true);}
+inReset.onTriggered=function(){
+    copyArray(true);
+};
 inArray.onChange=copyArray;
 
 inTrigger.onTriggered=
@@ -44,7 +46,9 @@ function copyArray(force)
 
     const arr=inArray.get();
 
-    if(force || (arr && !outArray.get()))
+    if(!arr) return;
+
+    if(force===true || (arr && !outArray.get()))
     {
 
         if(newArr.length!=arr.length) newArr.length=arr.length;

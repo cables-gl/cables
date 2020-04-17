@@ -104,6 +104,67 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode index",
+                "text": "pick a blend mode with an integer"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
+                "name": "Amount",
+                "text": "amount of blending"
+            },
+            {
+                "name": "Loop",
+                "text": "loop noise so there's no jumps in color"
+            },
+            {
+                "name": "RGB",
+                "text": "Enable RGB noise"
+            },
+            {
+                "name": "Minimum value",
+                "text": "minimum value of every pixel"
+            },
+            {
+                "name": "Maximum value",
+                "text": "maximum value of every pixel"
+            },
+            {
+                "name": "Scale",
+                "text": "Scale noise "
+            },
+            {
+                "name": "Orientation",
+                "text": "flip orientation"
+            },
+            {
+                "name": "X",
+                "text": "Move on the x axis"
+            },
+            {
+                "name": "Y",
+                "text": "Move on the y axis"
+            },
+            {
+                "name": "Z",
+                "text": "Use to animate the noise "
+            },
+            {
+                "name": "Seed",
+                "text": "random seed number "
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

@@ -123,6 +123,14 @@
                 "text": "Trigger in"
             },
             {
+                "name": "Blend Mode index",
+                "text": "Use an integer to pick a blend mode"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Selected blend mode"
+            },
+            {
                 "name": "Amount",
                 "text": "Amount of blend to apply"
             },

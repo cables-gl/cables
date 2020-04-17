@@ -26,12 +26,6 @@
             },
             {
                 "type": "0",
-                "name": "Use as Skybox",
-                "group": "Appearance",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Use Reflection",
                 "group": "Appearance",
                 "subType": "boolean"
@@ -47,6 +41,24 @@
                 "name": "Rotation",
                 "group": "Transforms",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Flip X",
+                "group": "Transforms",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Y",
+                "group": "Transforms",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flip Z",
+                "group": "Transforms",
+                "subType": "boolean"
             },
             {
                 "type": "0",

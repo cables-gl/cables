@@ -44,7 +44,8 @@ function buildMesh () {
         v = (i/stacks-.5)*Math.PI;
         y = Math.sin(v);
         a = Math.cos(v);
-        for (j = 0; j < slices+1; j++) {
+        // for (j = 0; j < slices+1; j++) {
+        for (j = slices; j >=0; j--) {
             u = (j/slices)*TAU;
             x = Math.cos(u)*a;
             z = Math.sin(u)*a;

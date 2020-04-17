@@ -48,7 +48,7 @@ var canvas = op.patch.cgl.canvas.parentElement;
 canvas.appendChild(element);
 
 
-width.onChange=updateSize;
+width.onChange=height.onChange=updateSize;
 src.onChange=updateURL;
 elId.onChange=updateID;
 inBorder.onChange=updateBorder;
