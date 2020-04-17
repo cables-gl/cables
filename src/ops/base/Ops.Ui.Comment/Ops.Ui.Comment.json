@@ -2,14 +2,12 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "title",
-                "subType": "string"
+                "type": "5",
+                "name": "title"
             },
             {
-                "type": "0",
-                "name": "text",
-                "subType": "string"
+                "type": "5",
+                "name": "text"
             }
         ],
         "name": "Ops.Ui.Comment"

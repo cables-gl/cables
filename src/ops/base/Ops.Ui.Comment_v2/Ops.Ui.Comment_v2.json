@@ -1,0 +1,25 @@
+{
+    "authorName": "pandur",
+    "id": "93492eeb-bf35-4a62-98f7-d85b0b79bfe5",
+    "created": 1587124394269,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Commentv2 renamed to Ops.Ui.Comment_v2",
+            "author": "pandur",
+            "date": 1587124673487
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "title"
+            },
+            {
+                "type": "5",
+                "name": "text"
+            }
+        ],
+        "name": "Ops.Ui.Comment_v2"
+    }
+}

@@ -337,6 +337,18 @@ const Op = function ()
         return p;
     };
 
+    Op.prototype.inTextarea = function (name, v)
+    {
+        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string", display: "text" }));
+        p.value = "";
+        if (v !== undefined)
+        {
+            p.set(v);
+            p.defaultValue = v;
+        }
+        return p;
+    };
+
     /**
      * create a String value input port displayed as editor
      * @function inStringEditor
