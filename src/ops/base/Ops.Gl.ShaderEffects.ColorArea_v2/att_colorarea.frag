@@ -1,32 +1,32 @@
 #ifdef MOD_AREA_SPHERE
-    float MOD_de=distance(MOD_pos,vec3(MOD_areaPos.x*MOD_sizeX,MOD_areaPos.y,MOD_areaPos.z));
+    float MOD_de=distance(MOD_pos,vec3(MOD_vertPos.x*MOD_sizeX,MOD_vertPos.y,MOD_vertPos.z));
 #endif
 
 #ifdef MOD_AREA_BOX
     float MOD_de=0.0;
-    if(abs(MOD_areaPos.y-MOD_pos.y)>MOD_size ||
-        abs(MOD_areaPos.x-MOD_pos.x)>MOD_size ||
-        abs(MOD_areaPos.z-MOD_pos.z)>MOD_size ) MOD_de=1.0;
+    if(abs(MOD_vertPos.y-MOD_pos.y)>MOD_size ||
+        abs(MOD_vertPos.x-MOD_pos.x)>MOD_size ||
+        abs(MOD_vertPos.z-MOD_pos.z)>MOD_size ) MOD_de=1.0;
 #endif
 
 #ifdef MOD_AREA_AXIS_X
-    float MOD_de=abs(MOD_x-MOD_areaPos.x);
+    float MOD_de=abs(MOD_x-MOD_vertPos.x);
 #endif
 #ifdef MOD_AREA_AXIS_Y
-    float MOD_de=abs(MOD_y-MOD_areaPos.y);
+    float MOD_de=abs(MOD_y-MOD_vertPos.y);
 #endif
 #ifdef MOD_AREA_AXIS_Z
-    float MOD_de=abs(MOD_z-MOD_areaPos.z);
+    float MOD_de=abs(MOD_z-MOD_vertPos.z);
 #endif
 
 #ifdef MOD_AREA_AXIS_X_INFINITE
-    float MOD_de=MOD_x-MOD_areaPos.x;
+    float MOD_de=MOD_x-MOD_vertPos.x;
 #endif
 #ifdef MOD_AREA_AXIS_Y_INFINITE
-    float MOD_de=MOD_y-MOD_areaPos.y;
+    float MOD_de=MOD_y-MOD_vertPos.y;
 #endif
 #ifdef MOD_AREA_AXIS_Z_INFINITE
-    float MOD_de=MOD_z-MOD_areaPos.z;
+    float MOD_de=MOD_z-MOD_vertPos.z;
 #endif
 
 MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);

@@ -1,4 +1,4 @@
-IN vec4 MOD_areaPos;
+IN vec4 MOD_vertPos;
 UNI float MOD_size;
 UNI float MOD_amount;
 UNI float MOD_falloff;

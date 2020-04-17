@@ -53,6 +53,7 @@ export const CONSTANTS = {
 
         EASING_ELASTIC_IN: 17,
         EASING_ELASTIC_OUT: 18,
+        EASING_ELASTIC_INOUT: 28,
 
         EASING_BOUNCE_IN: 19,
         EASING_BOUNCE_OUT: 21,

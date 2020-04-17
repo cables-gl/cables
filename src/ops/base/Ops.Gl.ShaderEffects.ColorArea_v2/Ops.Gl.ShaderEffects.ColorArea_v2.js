@@ -28,15 +28,15 @@ var shader=null;
 var origShader=null;
 
 const srcHeadVert=''
-    .endl()+'OUT vec4 MOD_areaPos;'
+    .endl()+'OUT vec4 MOD_vertPos;'
     .endl();
 
 const srcBodyVert=''
     .endl()+'#ifndef MOD_WORLDSPACE'
-    .endl()+'   MOD_areaPos=pos;'
+    .endl()+'   MOD_vertPos=vec4(vPosition,1.0);'
     .endl()+'#endif'
     .endl()+'#ifdef MOD_WORLDSPACE'
-    .endl()+'   MOD_areaPos=mMatrix*pos;'
+    .endl()+'   MOD_vertPos=mMatrix*pos;'
     .endl()+'#endif'
     .endl();
 
@@ -56,7 +56,7 @@ function updateDefines()
     shader.toggleDefine(moduleVert.prefix+"BLEND_MULTIPLY",inBlend.get()!="Normal");
 
     shader.toggleDefine(moduleVert.prefix+"AREA_INVERT",inInvert.get());
-    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",!inWorldSpace.get());
+    shader.toggleDefine(moduleVert.prefix+"WORLDSPACE",inWorldSpace.get());
 
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_X",inArea.get()=="Axis X");
     shader.toggleDefine(moduleVert.prefix+"AREA_AXIS_Y",inArea.get()=="Axis Y");
@@ -80,11 +80,11 @@ function doRender()
     if(CABLES.UI)
     {
         cgl.pushModelMatrix();
-        mat4.identity(cgl.mMatrix);
+        // mat4.identity(cgl.mMatrix);
 
         if(gui.patch().isCurrentOp(op)) gui.setTransformGizmo({posX:x,posY:y,posZ:z});
 
-        if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
+        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());

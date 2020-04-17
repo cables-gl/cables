@@ -207,16 +207,23 @@ ANIM.Key.easeInElastic = function (t, key2)
     return ANIM.Key.linear(t, this, key2);
 };
 
-// function easeInOutElastic(x: number): number {
-//     const c5 = (2 * Math.PI) / 4.5;
+export const easeElasticInOut = function (x,key2)
+{
+    const c5 = (2 * Math.PI) / 4.5;
     
-//     return x === 0
-//       ? 0
-//       : x === 1
-//       ? 1
-//       : x < 0.5
-//       ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
-//       : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1;
+    x= x === 0
+      ? 0
+      : x === 1
+      ? 1
+      : x < 0.5
+      ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
+      : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1;
+
+      return ANIM.Key.linear(x, this, key2);
+
+}
+
+// function easeInOutElastic(x: number): number {
 //     }
 
     
@@ -340,6 +347,7 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_BACK_INOUT) this.ease = ANIM.Key.easeInOutBack;
     else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_IN) this.ease = ANIM.Key.easeInElastic;
     else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_OUT) this.ease = ANIM.Key.easeOutElastic;
+    else if (this._easing == CONSTANTS.ANIM.EASING_ELASTIC_INOUT) this.ease = ANIM.Key.easeElasticInOut;
     else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_IN) this.ease = ANIM.Key.easeInBounce;
     else if (this._easing == CONSTANTS.ANIM.EASING_BOUNCE_OUT) this.ease = ANIM.Key.easeOutBounce;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUART_OUT) this.ease = ANIM.Key.easeOutQuart;
@@ -722,6 +730,7 @@ Anim.prototype.easingFromString = function (str)
 
     if (str == "Elastic In") return CONSTANTS.ANIM.EASING_ELASTIC_IN;
     if (str == "Elastic Out") return CONSTANTS.ANIM.EASING_ELASTIC_OUT;
+    if (str == "Elastic In Out") return CONSTANTS.ANIM.EASING_ELASTIC_INOUT;
 
     if (str == "Bounce In") return CONSTANTS.ANIM.EASING_BOUNCE_IN;
     if (str == "Bounce Out") return CONSTANTS.ANIM.EASING_BOUNCE_OUT;
