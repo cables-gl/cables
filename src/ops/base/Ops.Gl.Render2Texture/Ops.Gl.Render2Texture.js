@@ -26,6 +26,7 @@ op.setPortGroup('Size',[useVPSize,width,height,aspect]);
 // only happens with matcap material with normal map....
 
 useVPSize.onChange=updateVpSize;
+
 function updateVpSize()
 {
     width.setUiAttribs({"greyout":useVPSize.get()});

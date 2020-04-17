@@ -135,8 +135,8 @@ Shader.prototype.getName=function(){
 
 /**
  * enable an extension for the shader
- * @function copy
- * @memberof enableExtension
+ * @function enableExtension
+ * @memberof Shader
  * @instance
  * @param name extension name
  */
@@ -164,8 +164,8 @@ Shader.prototype.setWhyCompile=function(why)
 
 /**
  * copy all uniform values from another shader
- * @function copy
- * @memberof copyUniforms
+ * @function copyUniforms
+ * @memberof Shader
  * @instance
  * @param shader uniform values will be copied from this shader
  */
