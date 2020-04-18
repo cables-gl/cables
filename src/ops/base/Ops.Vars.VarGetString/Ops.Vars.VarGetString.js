@@ -16,7 +16,7 @@ function updateVarNamesDropdown()
         var vars=op.patch.getVars();
 
         for(var i in vars)
-            if(typeof vars[i].getValue()=="string")
+            if(i!="0" && typeof vars[i].getValue()=="string")
                 varnames.push(i);
 
         op.varName.uiAttribs.values=varnames;
