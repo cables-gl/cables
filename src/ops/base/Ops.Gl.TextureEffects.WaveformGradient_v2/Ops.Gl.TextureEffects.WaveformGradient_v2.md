@@ -1,0 +1,1 @@
+note square won't be visible unless pow is less than 1

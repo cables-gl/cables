@@ -1,0 +1,27 @@
+{
+    "id": "b5249226-6095-4828-8a1c-080654e192fa",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587021606549
+        },
+        {
+            "message": "Ops.Vars.VarSetNumber2 renamed to Ops.Vars.VarSetNumber_v2",
+            "author": "pandur",
+            "date": 1587115375796
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587021615034,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Vars.VarSetNumber2"
+    }
+}

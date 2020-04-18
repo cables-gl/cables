@@ -1,0 +1,1 @@
+Use an integer to switch between different textures

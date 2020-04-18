@@ -1,0 +1,1 @@
+Use this op to create cubemaps by adding 6 textures, 1 for each positive and negative axis (x, y, z).
