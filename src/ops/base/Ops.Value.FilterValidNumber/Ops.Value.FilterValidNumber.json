@@ -1,0 +1,57 @@
+{
+    "id": "5a4db4ef-33d2-4131-9825-aa926f1f5a98",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1585905995389
+        },
+        {
+            "message": "Ops.Value.ValidNumber renamed to Ops.Value.FilterValidNumber",
+            "author": "pandur",
+            "date": 1587047929256
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1585906041486,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invalid when 0",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid when <0",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Last Valid Number",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Value.ValidNumber"
+    },
+    "summary": "Filter valid numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

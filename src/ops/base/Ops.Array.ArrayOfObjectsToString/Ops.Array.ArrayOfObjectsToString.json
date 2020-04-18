@@ -13,5 +13,37 @@
         }
     ],
     "authorName": "simod",
-    "created": 1587052732489
+    "created": 1587052732489,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array In"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.Array.ArrayOfObjectsToString"
+    },
+    "summary": "convert an array of objects into readable string format",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array In",
+                "text": "array of objects input"
+            },
+            {
+                "name": "String",
+                "text": "string output"
+            }
+        ]
+    }
 }

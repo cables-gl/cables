@@ -1,0 +1,50 @@
+{
+    "id": "a851cddb-74e5-41e7-ac75-709beae914fd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587048683316
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587048768999,
+    "summary": "Filter valid objects",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Invalid when null",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Invalid when undefined",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Last Valid Object"
+            },
+            {
+                "type": "0",
+                "name": "Is Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Json.FilterValidObject"
+    }
+}
