@@ -11,7 +11,6 @@ op.setPortGroup("Variable",[op.varName,btnCreate]);
 op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
 op.init=updateErrorUi;
 updateVarNamesDropdown();
-// btnDelete.setUiAttribs({"hidePort":true,"buttonTitleClass":"button-small"});
 
 function updateErrorUi()
 {
