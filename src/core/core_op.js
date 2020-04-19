@@ -51,10 +51,10 @@ const Op = function ()
     this._needsLinkedToWork = [];
     this._needsParentOp = null;
     this._shortOpName = "";
-    
+
     this._hasUiErrors=false;
     this._uiErrors = {};
-    
+
 
     if (arguments[1])
     {
@@ -414,7 +414,7 @@ const Op = function ()
                 },
                 n,
             );
-    
+
             indexPort.onLinkChanged=function()
             {
                 valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
@@ -483,7 +483,7 @@ const Op = function ()
                 },
                 n
             );
-    
+
             indexPort.onLinkChanged=function()
             {
                 switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
@@ -885,6 +885,8 @@ const Op = function ()
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
+        if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
+
 
         op.portsIn = [];
         op.portsOut = [];
@@ -1193,7 +1195,7 @@ const Op = function ()
      * @memberof Op
      * @param {id} error id
      * @param {txt} text message
-     * @param {level} level 
+     * @param {level} level
      */
     Op.prototype.setUiError=function(id,txt,level)
     {
@@ -1210,21 +1212,21 @@ const Op = function ()
                 this._uiErrors[id]={"txt":txt,"level":level};
             }
         }
-        
+
         var errorArr=[];
         for(var i in this._uiErrors) errorArr.push(this._uiErrors[i]);
-        
+
         this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
         this._hasUiErrors=Object.keys(this._uiErrors).length;
     }
 
-    // todo: remove 
+    // todo: remove
     Op.prototype.setError =
     Op.prototype.error = function (id, txt)
     {
         console.warn("old error message op.error() - use op.setUiError()");
-        
+
         if(txt===undefined)
         {
             this.uiAttr({ error: id });
@@ -1244,13 +1246,13 @@ const Op = function ()
         }
     };
 
-    // // todo: remove 
+    // // todo: remove
     // Op.prototype.setHint = function (txt)
     // {
     //     if(txt!=this.uiAttribs.hint) this.uiAttr({ hint: txt });
     // };
 
-    // // todo: remove 
+    // // todo: remove
     // Op.prototype.setWarning = function (txt)
     // {
     //     if(txt!=this.uiAttribs.warning) this.uiAttr({ warning: txt });
@@ -1440,7 +1442,7 @@ const Op = function ()
             }
         }
 
-        if (!working) 
+        if (!working)
         {
             this.setUiAttrib({ working,notWorkingMsg:notWorkingMsg });
             this.setUiError("notworking",notWorkingMsg,1);
