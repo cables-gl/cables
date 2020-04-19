@@ -12,6 +12,8 @@ op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
 op.init=updateErrorUi;
 updateVarNamesDropdown();
 
+
+
 function updateErrorUi()
 {
     if(CABLES.UI)
@@ -29,6 +31,9 @@ function updateVarNamesDropdown()
         var vars=op.patch.getVars();
         for(var i in vars) if(i!="0") varnames.push(i);
         op.varName.uiAttribs.values=varnames;
+
+        const vari=op.patch.getVar(op.varName);
+        if(vari)vari.type="number";
     }
 }
 
@@ -43,6 +48,7 @@ function updateName()
     updateErrorUi();
     update();
 }
+
 
 function update()
 {

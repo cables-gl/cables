@@ -8,7 +8,7 @@ const
     str=op.inString("Text","cables"),
     inTex=op.inTexture("Texture"),
     inFontData=op.inObject("Font Data"),
-    scale=op.inFloat("Scale",1),
+    scale=op.inFloat("Scale",0.25),
     letterSpace=op.inFloat("Letter Spacing",0),
     lineHeight=op.inFloat("Line Height",1),
     doSDF=op.inBool("SDF",true),
