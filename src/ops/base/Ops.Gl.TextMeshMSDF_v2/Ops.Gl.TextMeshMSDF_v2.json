@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "626a44cd-a8c1-4a2a-8c14-f401fe13d4e0",
-    "created": 1583313486174,
+    "id": "b5c99363-a749-4040-884b-66f91294bcad",
+    "created": 1587309001718,
     "layout": {
         "portsIn": [
             {
@@ -13,14 +13,9 @@
                 "name": "Text"
             },
             {
-                "type": "2",
-                "name": "Texture",
-                "group": "Font"
-            },
-            {
-                "type": "2",
-                "name": "Font Data",
-                "group": "Font"
+                "type": "0",
+                "name": "Font index",
+                "subType": "integer"
             },
             {
                 "type": "0",
@@ -133,13 +128,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Admin.TextMeshMSDF"
-    },
-    "changelog": [
-        {
-            "message": "Ops.User.pandur.TextMeshMSDF renamed to Ops.Admin.TextMeshMSDF",
-            "author": "pandur",
-            "date": 1583935523715
-        }
-    ]
+        "name": "Ops.Gl.TextMeshMSDF_v2"
+    }
 }

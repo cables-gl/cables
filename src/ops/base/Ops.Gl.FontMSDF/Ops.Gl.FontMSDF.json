@@ -1,0 +1,46 @@
+{
+    "id": "d0ee96d2-e8ef-4c9a-91e2-f35367cfb3aa",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587298230023
+        },
+        {
+            "message": "Ops.User.pandur.FontFileMSDF renamed to Ops.Gl.FontMSDF",
+            "author": "pandur",
+            "date": 1587308524651
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587298300317,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Font Data"
+            },
+            {
+                "type": "5",
+                "name": "Font Image"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Total Chars",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Chars"
+            }
+        ],
+        "name": "Ops.Gl.FontMSDF"
+    }
+}
