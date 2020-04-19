@@ -21,7 +21,7 @@ ANIM.Key = function (obj)
     this.cb = null;
     this.cbTriggered = false;
 
-    var bezierAnim = null;
+    const bezierAnim = null;
     this._updateBezier = false;
 
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
@@ -182,13 +182,13 @@ ANIM.Key.easeOutBounce = function (t, key2)
 
 ANIM.Key.easeInElastic = function (t, key2)
 {
-    var s = 1.70158;
-    var p = 0;
-    var a = 1;
+    let s = 1.70158;
+    let p = 0;
+    let a = 1;
 
-    var b = 0;
-    var d = 1;
-    var c = 1;
+    const b = 0;
+    const d = 1;
+    const c = 1;
 
     if (t === 0) t = b;
     else if ((t /= d) == 1) t = b + c;
@@ -207,35 +207,16 @@ ANIM.Key.easeInElastic = function (t, key2)
     return ANIM.Key.linear(t, this, key2);
 };
 
-export const easeElasticInOut = function (x,key2)
-{
-    const c5 = (2 * Math.PI) / 4.5;
-    
-    x= x === 0
-      ? 0
-      : x === 1
-      ? 1
-      : x < 0.5
-      ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
-      : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1;
 
-      return ANIM.Key.linear(x, this, key2);
-
-}
-
-// function easeInOutElastic(x: number): number {
-//     }
-
-    
 ANIM.Key.easeOutElastic = function (t, key2)
 {
-    var s = 1.70158;
-    var p = 0;
-    var a = 1;
+    let s = 1.70158;
+    let p = 0;
+    let a = 1;
 
-    var b = 0;
-    var d = 1;
-    var c = 1;
+    const b = 0;
+    const d = 1;
+    const c = 1;
 
     if (t === 0) t = b;
     else if ((t /= d) == 1) t = b + c;
@@ -256,7 +237,7 @@ ANIM.Key.easeOutElastic = function (t, key2)
 
 ANIM.Key.easeInBack = function (t, key2)
 {
-    var s = 1.70158;
+    const s = 1.70158;
     t = t * t * ((s + 1) * t - s);
 
     return ANIM.Key.linear(t, this, key2);
@@ -264,7 +245,7 @@ ANIM.Key.easeInBack = function (t, key2)
 
 ANIM.Key.easeOutBack = function (t, key2)
 {
-    var s = 1.70158;
+    const s = 1.70158;
     t = (t = t / 1 - 1) * t * ((s + 1) * t + s) + 1;
 
     return ANIM.Key.linear(t, this, key2);
@@ -272,8 +253,8 @@ ANIM.Key.easeOutBack = function (t, key2)
 
 ANIM.Key.easeInOutBack = function (t, key2)
 {
-    var s = 1.70158;
-    var c = 1 / 2;
+    let s = 1.70158;
+    const c = 1 / 2;
     if ((t /= 1 / 2) < 1) t = c * (t * t * (((s *= 1.525) + 1) * t - s));
     else t = c * ((t -= 2) * t * (((s *= 1.525) + 1) * t + s) + 2);
 
@@ -314,14 +295,14 @@ ANIM.Key.easeCubicInOut = function (t, key2)
 ANIM.Key.easeSmoothStep = function (perc, key2)
 {
     // var x = Math.max(0, Math.min(1, (perc-0)/(1-0)));
-    var x = Math.max(0, Math.min(1, perc));
+    const x = Math.max(0, Math.min(1, perc));
     perc = x * x * (3 - 2 * x); // smoothstep
     return ANIM.Key.linear(perc, this, key2);
 };
 
 ANIM.Key.easeSmootherStep = function (perc, key2)
 {
-    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    const x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
     perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
     return ANIM.Key.linear(perc, this, key2);
 };
@@ -411,7 +392,7 @@ ANIM.Key.prototype.set = function (obj)
 
 ANIM.Key.prototype.getSerialized = function ()
 {
-    var obj = {};
+    const obj = {};
     obj.t = this.time;
     obj.v = this.value;
     obj.e = this._easing;
@@ -525,7 +506,7 @@ Anim.prototype.hasEnded = function (time)
 Anim.prototype.isRising = function (time)
 {
     if (this.hasEnded(time)) return false;
-    var ki = this.getKeyIndex(time);
+    const ki = this.getKeyIndex(time);
     if (this.keys[ki].value < this.keys[ki + 1].value) return true;
     return false;
 };
@@ -539,7 +520,7 @@ Anim.prototype.isRising = function (time)
  */
 Anim.prototype.clear = function (time)
 {
-    var v = 0;
+    let v = 0;
     if (time) v = this.getValue(time);
     this.keys.length = 0;
 
@@ -549,8 +530,7 @@ Anim.prototype.clear = function (time)
 
 Anim.prototype.sortKeys = function ()
 {
-    this.keys.sort((a, b) =>
-        parseFloat(a.time) - parseFloat(b.time));
+    this.keys.sort((a, b) => parseFloat(a.time) - parseFloat(b.time));
     this._needsSort = false;
 };
 
@@ -562,8 +542,8 @@ Anim.prototype.getLength = function ()
 
 Anim.prototype.getKeyIndex = function (time)
 {
-    var index = 0;
-    for (var i = 0; i < this.keys.length; i++)
+    let index = 0;
+    for (let i = 0; i < this.keys.length; i++)
     {
         if (time >= this.keys[i].time) index = i;
         if (this.keys[i].time > time) return index;
@@ -582,8 +562,8 @@ Anim.prototype.getKeyIndex = function (time)
  */
 Anim.prototype.setValue = function (time, value, cb)
 {
-    var found = false;
-    for (var i in this.keys)
+    let found = false;
+    for (const i in this.keys)
     {
         if (this.keys[i].time == time)
         {
@@ -596,9 +576,14 @@ Anim.prototype.setValue = function (time, value, cb)
 
     if (!found)
     {
-        this.keys.push(new ANIM.Key({
-            time, value, e: this.defaultEasing, cb,
-        }));
+        this.keys.push(
+            new ANIM.Key({
+                time,
+                value,
+                e: this.defaultEasing,
+                cb,
+            }),
+        );
     }
 
     if (this.onChange) this.onChange();
@@ -607,11 +592,11 @@ Anim.prototype.setValue = function (time, value, cb)
 
 Anim.prototype.getSerialized = function ()
 {
-    var obj = {};
+    const obj = {};
     obj.keys = [];
     obj.loop = this.loop;
 
-    for (var i in this.keys)
+    for (const i in this.keys)
     {
         obj.keys.push(this.keys[i].getSerialized());
     }
@@ -621,13 +606,13 @@ Anim.prototype.getSerialized = function ()
 
 Anim.prototype.getKey = function (time)
 {
-    var index = this.getKeyIndex(time);
+    const index = this.getKeyIndex(time);
     return this.keys[index];
 };
 
 Anim.prototype.getNextKey = function (time)
 {
-    var index = this.getKeyIndex(time) + 1;
+    let index = this.getKeyIndex(time) + 1;
     if (index >= this.keys.length) index = this.keys.length - 1;
 
     return this.keys[index];
@@ -660,10 +645,10 @@ Anim.prototype.getValue = function (time)
 
     if (time < this.keys[0].time) return this.keys[0].value;
 
-    var lastKeyIndex = this.keys.length - 1;
+    const lastKeyIndex = this.keys.length - 1;
     if (this.loop && time > this.keys[lastKeyIndex].time)
     {
-        var currentLoop = time / this.keys[lastKeyIndex].time;
+        const currentLoop = time / this.keys[lastKeyIndex].time;
         if (currentLoop > this._timesLooped)
         {
             this._timesLooped++;
@@ -673,22 +658,25 @@ Anim.prototype.getValue = function (time)
         time += this.keys[0].time;
     }
 
-    var index = this.getKeyIndex(time);
+    const index = this.getKeyIndex(time);
     if (index >= lastKeyIndex)
     {
         if (this.keys[lastKeyIndex].cb && !this.keys[lastKeyIndex].cbTriggered) this.keys[lastKeyIndex].trigger();
 
         return this.keys[lastKeyIndex].value;
     }
-    var index2 = parseInt(index, 10) + 1;
-    var key1 = this.keys[index];
-    var key2 = this.keys[index2];
+    const index2 = parseInt(index, 10) + 1;
+    const key1 = this.keys[index];
+    const key2 = this.keys[index2];
 
     if (key1.cb && !key1.cbTriggered) key1.trigger();
 
     if (!key2) return -1;
 
-    var perc = (time - key1.time) / (key2.time - key1.time);
+    const perc = (time - key1.time) / (key2.time - key1.time);
+
+    if (!key1.ease) console.log("has no ease", key1, key2);
+
     return key1.ease(perc, key2);
 };
 
@@ -730,7 +718,6 @@ Anim.prototype.easingFromString = function (str)
 
     if (str == "Elastic In") return CONSTANTS.ANIM.EASING_ELASTIC_IN;
     if (str == "Elastic Out") return CONSTANTS.ANIM.EASING_ELASTIC_OUT;
-    if (str == "Elastic In Out") return CONSTANTS.ANIM.EASING_ELASTIC_INOUT;
 
     if (str == "Bounce In") return CONSTANTS.ANIM.EASING_BOUNCE_IN;
     if (str == "Bounce Out") return CONSTANTS.ANIM.EASING_BOUNCE_OUT;
@@ -746,7 +733,7 @@ Anim.prototype.easingFromString = function (str)
 
 Anim.prototype.createPort = function (op, title, cb)
 {
-    var port = op.addInPort(
+    const port = op.addInPort(
         new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
             display: "dropdown",
             values: CONSTANTS.ANIM.EASINGS,
@@ -775,8 +762,8 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
         Anim.slerpQuaternion.q2 = quat.create();
     }
 
-    var i1 = animx.getKeyIndex(time);
-    var i2 = i1 + 1;
+    const i1 = animx.getKeyIndex(time);
+    let i2 = i1 + 1;
     if (i2 >= animx.keys.length) i2 = animx.keys.length - 1;
 
     if (i1 == i2)
@@ -785,9 +772,9 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     }
     else
     {
-        var key1Time = animx.keys[i1].time;
-        var key2Time = animx.keys[i2].time;
-        var perc = (time - key1Time) / (key2Time - key1Time);
+        const key1Time = animx.keys[i1].time;
+        const key2Time = animx.keys[i2].time;
+        const perc = (time - key1Time) / (key2Time - key1Time);
 
         quat.set(Anim.slerpQuaternion.q1, animx.keys[i1].value, animy.keys[i1].value, animz.keys[i1].value, animw.keys[i1].value);
 
@@ -797,7 +784,6 @@ Anim.slerpQuaternion = function (time, q, animx, animy, animz, animw)
     }
     return q;
 };
-
 
 const TL = ANIM;
 TL.Anim = Anim;

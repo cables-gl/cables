@@ -420,7 +420,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
-        
+
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
@@ -439,7 +439,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 Patch.prototype.addOnAnimFrame = function (op)
 {
     for (var i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { return;}
-    
+
     this.animFrameOps.push(op);
 };
 
@@ -542,7 +542,7 @@ Patch.prototype.renderFrame = function (e)
 
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
-        
+
         if (this.animFrameOps[i].onAnimFrame)
         {
             // const start=performance.now();
@@ -554,7 +554,7 @@ Patch.prototype.renderFrame = function (e)
 
     CGL.profileData.profileOnAnimFrameOps=performance.now()-startTime;
     // console.log("----");
-    
+
     this.emitEvent("onRenderFrame", time);
 
     this._frameNum++;
@@ -607,7 +607,7 @@ Patch.prototype.exec = function (e)
         this._frameWasdelayed = false;
     }
 
-    if (this._renderOneFrame) 
+    if (this._renderOneFrame)
     {
         if(this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
         this.emitEvent("renderedOneFrame");
@@ -620,7 +620,7 @@ Patch.prototype.exec = function (e)
         {
             this._perf.fps = this._perf._fpsFrameCount;
             this._perf.ms = Math.round(this._perf._fpsMsCount / this._perf._fpsFrameCount);
-            
+
             this.emitEvent("performance", this._perf);
 
             this._perf._fpsFrameCount = 0;
@@ -1036,10 +1036,11 @@ Patch.prototype.profile = function (enable)
  * @memberof Patch
  * @constructor
  */
-Patch.Variable = function (name, val)
+Patch.Variable = function (name, val, type)
 {
     this._name = name;
     this._changeListeners = [];
+    this.type = type;
     this.setValue(val);
 };
 
@@ -1344,7 +1345,7 @@ Patch.prototype.dispose = function ()
  * @property {Boolean} [doRequestAnimation=true] do requestAnimationFrame set to false if you want to trigger exec() from outside (only do if you know what you are doing)
  * @property {Boolean} [clearCanvasColor=true] clear canvas in transparent color every frame
  * @property {Boolean} [clearCanvasDepth=true] clear depth every frame
- * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders * 
+ * @property {Boolean} [glValidateShader=true] enable/disable validation of shaders *
  * @property {Boolean} [silent=false]
  * @property {Number} [fpsLimit=0] 0 for maximum possible frames per second
  * @property {String} [glslPrecision='mediump'] default precision for glsl shader
