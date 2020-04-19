@@ -32,7 +32,7 @@ function updateVarNamesDropdown()
         for(var i in vars) if(i!="0") varnames.push(i);
         op.varName.uiAttribs.values=varnames;
 
-        const vari=op.patch.getVar(op.varName);
+        const vari=op.patch.getVar(op.varName.get());
         if(vari)vari.type="number";
     }
 }
