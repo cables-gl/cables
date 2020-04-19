@@ -3,7 +3,6 @@
 // antialiasing:
 // https://github.com/Chlumsky/msdfgen/issues/22
 
-
 const
     render=op.inTrigger("Render"),
     str=op.inString("Text","cables"),
@@ -31,6 +30,7 @@ const
 
     inPosArr=op.inArray("Positions"),
     inScaleArr=op.inArray("Scalings"),
+    inRotArr=op.inArray("Rotations"),
 
     next=op.outTrigger("Next"),
     outArr=op.outArray("Positions Original"),
@@ -41,7 +41,7 @@ const
     outStartY=op.outNumber("Start Y"),
     outNumChars=op.outNumber("Num Chars");
 
-// inFontData.ignoreValueSerialize=true;
+op.setPortGroup("Character Transformations",[inScaleArr,inRotArr,inPosArr]);
 
 op.setPortGroup('Alignment',[align,valign]);
 op.setPortGroup('Color',[r,g,b,a]);
@@ -50,8 +50,10 @@ r.setUiAttribs({ colorPick: true });
 const cgl=op.patch.cgl;
 const fontDataVarPrefix="font_data_";
 const substrLength=fontDataVarPrefix.length;
+const alignVec=vec3.create();
+const vScale=vec3.create();
+const shader=new CGL.Shader(cgl,'TextMeshSDF');
 
-// var font={};
 var fontTex=null;
 var fontData=null;
 var fontChars=null;
@@ -60,15 +62,13 @@ var geom=null;
 var mesh=null;
 var disabled=false;
 var valignMode=1;
-const alignVec=vec3.create();
-const vScale=vec3.create();
 var heightAll=0,widthAll=0;
 var strings=[];
 var offY=0;
 var minY,maxY,minX,maxX;
+var needsUpdateTransmats=true;
+var transMats=null;
 
-
-const shader=new CGL.Shader(cgl,'TextMeshSDF');
 
 if (cgl.glVersion == 1)
 {
@@ -86,6 +86,11 @@ const
     uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0);
 
 scale.onChange=updateScale;
+
+inRotArr.onChange=
+    inPosArr.onChange=
+    inScaleArr.onChange=function(){ needsUpdateTransmats=true;};
+
 
 inTexColor.onChange=
 inTexMask.onChange=
@@ -200,7 +205,41 @@ function updateAlign()
 }
 
 
+function buildTransMats()
+{
+    needsUpdateTransmats=false;
 
+    if(!( inPosArr.get() || inScaleArr.get() || inRotArr.get()))
+    {
+        transMats=null;
+        return;
+    }
+
+    var transformations=[];
+    const translates=inPosArr.get()||outArr.get();
+    const scales=inScaleArr.get();
+    const rots=inRotArr.get();
+
+    for(var i=0;i<mesh.numInstances;i++)
+    {
+        const m=mat4.create();
+        mat4.translate(m,m,[translates[i*3+0],translates[i*3+1],translates[i*3+2]]);
+
+        if(scales) mat4.scale(m,m,[scales[i*3+0],scales[i*3+1],scales[i*3+2]]);
+
+        if(rots)
+        {
+            mat4.rotateX(m,m,rots[i*3+0]*CGL.DEG2RAD);
+            mat4.rotateY(m,m,rots[i*3+1]*CGL.DEG2RAD);
+            mat4.rotateZ(m,m,rots[i*3+2]*CGL.DEG2RAD);
+        }
+
+        transformations.push(Array.prototype.slice.call(m));
+    }
+
+    transMats = [].concat.apply([], transformations);
+
+}
 
 render.onTriggered=function()
 {
@@ -222,8 +261,6 @@ render.onTriggered=function()
         return;
     }
 
-
-
     if(needUpdate)
     {
         generateMesh();
@@ -235,11 +272,8 @@ render.onTriggered=function()
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.pushShader(shader);
 
-        // if(fontTex)
-        // {
-            cgl.setTexture(0,fontTex.tex);
-            uniTexSize.setValue([fontTex.width,fontTex.height]);
-        // }
+        cgl.setTexture(0,fontTex.tex);
+        uniTexSize.setValue([fontTex.width,fontTex.height]);
 
         if(inTexColor.get()) cgl.setTexture(1,inTexColor.get().tex);
         if(inTexMask.get()) cgl.setTexture(2,inTexMask.get().tex);
@@ -247,29 +281,8 @@ render.onTriggered=function()
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, alignVec);
 
-        if(inPosArr.get())
-        {
-            var arr=inPosArr.get();
-            var transformations=[];
-
-            var scales=inScaleArr.get();
-
-            for(var i=0;i<mesh.numInstances;i++)
-            {
-                const m=mat4.create();
-                mat4.translate(m,m,[arr[i*3+0],arr[i*3+1],arr[i*3+2]]);
-
-                if(scales)
-                {
-                    mat4.scale(m,m,[scales[i*3+0],scales[i*3+1],scales[i*3+2]]);
-                }
-
-                transformations.push(Array.prototype.slice.call(m));
-            }
-
-            var transMats = [].concat.apply([], transformations);
-            mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
-        }
+        if(needsUpdateTransmats) buildTransMats();
+        if(transMats) mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
 
         if(cgl.getShader())cgl.getShader().define('INSTANCING');
 
@@ -348,8 +361,8 @@ function generateMesh()
     outLines.set(strings.length);
 
     var transformations=[];
-    var tcOffsets=[];//new Float32Array(str.get().length*2);
-    var sizes=[];//new Float32Array(str.get().length*2);
+    var tcOffsets=[];
+    var sizes=[];
     var texPos=[];
     var tcSizes=[];
     var charCounter=0;
@@ -435,10 +448,6 @@ function generateMesh()
 
             minX=Math.min(pos-charWidth,minX);
             maxX=Math.max(pos+charWidth,maxX);
-
-
-
-            // widthMax=Math.max(pos,widthMax);
 
             transformations.push(Array.prototype.slice.call(m));
 

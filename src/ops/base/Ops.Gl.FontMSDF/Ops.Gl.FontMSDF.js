@@ -89,7 +89,7 @@ function load()
             // op.patch.setVarValue(varNameData,data);
             // op.patch.setVarValue(varNameData,{});
 
-
+op.patch.loading.finished(loadingId);
             loadedData=true;
             updateLoaded();
         }

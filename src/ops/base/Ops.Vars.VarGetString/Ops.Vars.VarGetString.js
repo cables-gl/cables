@@ -32,10 +32,7 @@ function init()
 {
     updateVarNamesDropdown();
 
-    if(variable)
-    {
-        variable.removeListener(onChange);
-    }
+    if(variable) variable.removeListener(onChange);
 
     variable=op.patch.getVar(op.varName.get());
 
@@ -45,13 +42,11 @@ function init()
         op.setUiError("unknownvar",null);
         op.setTitle('#'+op.varName.get());
         onChange(variable.getValue());
-
     }
     else
     {
         op.setUiError("unknownvar","unknown variable! - there is no setVariable with this name ("+op.varName.get()+")");
         op.setTitle('#invalid');
-
     }
 }
 

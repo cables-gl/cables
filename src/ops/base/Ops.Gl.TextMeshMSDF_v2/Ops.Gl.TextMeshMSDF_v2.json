@@ -86,11 +86,18 @@
             },
             {
                 "type": "3",
-                "name": "Positions"
+                "name": "Positions",
+                "group": "Character Transformations"
             },
             {
                 "type": "3",
-                "name": "Scalings"
+                "name": "Scalings",
+                "group": "Character Transformations"
+            },
+            {
+                "type": "3",
+                "name": "Rotations",
+                "group": "Character Transformations"
             }
         ],
         "portsOut": [
