@@ -1,0 +1,45 @@
+{
+    "id": "f2669593-eb06-48a6-b94c-4bc243747ee1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587048914639
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587048972966,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "0",
+                "name": "Invalid when length is 0",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Last Valid Array"
+            },
+            {
+                "type": "0",
+                "name": "Is Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Array.FilterValidArray"
+    },
+    "summary": "Filter valid arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
