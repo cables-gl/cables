@@ -1,5 +1,5 @@
+var val=op.outValue("Value");
 op.varName=op.inValueSelect("Variable",[],"",true);
-var val=op.outObject("Object");
 
 var variable=null;
 op.patch.addEventListener("variablesChanged",init);
@@ -15,7 +15,9 @@ function updateVarNamesDropdown()
         var varnames=[];
         var vars=op.patch.getVars();
 
-        for(var i in vars) if(i!="0" && vars[i].type=="object") varnames.push(i);
+        for(var i in vars)
+            if(vars[i].type=="number" && i!="0")
+                varnames.push(i);
 
         op.varName.uiAttribs.values=varnames;
     }
@@ -30,21 +32,26 @@ function init()
 {
     updateVarNamesDropdown();
 
-    if(variable) variable.removeListener(onChange);
+    if(variable)
+    {
+        variable.removeListener(onChange);
+    }
 
     variable=op.patch.getVar(op.varName.get());
 
     if(variable)
     {
         variable.addListener(onChange);
-        op.uiAttr({error:null,});
+        op.setUiError("unknownvar",null);
         op.setTitle('#'+op.varName.get());
         onChange(variable.getValue());
     }
     else
     {
-        op.uiAttr({error:"unknown variable! - there is no setVariable with this name"});
+        op.setUiError("unknownvar","unknown variable! - there is no setVariable with this name ("+op.varName.get()+")");
         op.setTitle('#invalid');
+
+        val.set(0);
     }
 }
 
@@ -57,5 +64,6 @@ function onChange(v)
 
 op.onDelete=function()
 {
-    if(variable) variable.removeListener(onChange);
+    if(variable)
+        variable.removeListener(onChange);
 };

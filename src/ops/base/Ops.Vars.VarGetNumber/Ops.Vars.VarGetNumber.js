@@ -16,7 +16,8 @@ function updateVarNamesDropdown()
         var vars=op.patch.getVars();
 
         for(var i in vars)
-            if(typeof vars[i].getValue()=="number" || typeof vars[i].getValue()=="boolean")
+            // if(typeof vars[i].getValue()=="number" || typeof vars[i].getValue()=="boolean")
+            // if(vars[i].type=="number")
                 if(i!="0")
                     varnames.push(i);
 

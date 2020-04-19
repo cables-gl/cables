@@ -118,26 +118,18 @@ inFont.onChange=updateFontData;
 
 updateFontList();
 
-
-
-
-
 function updateDefines()
 {
     shader.toggleDefine("SDF",doSDF.get());
     shader.toggleDefine("SHADOW",inShadow.get());
-
     shader.toggleDefine("TEXTURE_COLOR",inTexColor.isLinked());
     shader.toggleDefine("TEXTURE_MASK",inTexMask.isLinked());
 }
-
 
 function updateFontData()
 {
     updateFontList();
     const varname=fontDataVarPrefix+inFont.get();
-
-    console.log('update font DATA!',varname);
 
     fontData=null;
     fontTex=null;
@@ -145,113 +137,44 @@ function updateFontData()
 
     const dataVar=op.patch.getVar(varname);
 
-    console.log("datavar",dataVar);
-
-    if(!dataVar)
-    {
-        console.log("NO  fontData dataVar!");
-        return;
-    }
-
-    console.log("dataVar.getValue()",dataVar.getValue());
-
+    if(!dataVar) return;
 
     fontData=dataVar.getValue().data;
 
+    if(!fontData) return;
 
-    if(!fontData)
-    {
-        console.log("NO fontData!");
-        return;
-    }
-
-const basename=dataVar.getValue().basename;
-
-    console.log("BASENAME",basename);
+    const basename=dataVar.getValue().basename;
 
     var textVar=op.patch.getVar("font_tex_"+basename);
     if(!textVar)
     {
         fontTex=null;
         fontData=null;
-
         return;
     }
     fontTex=textVar.getValue()[0];
-    console.log(fontTex);
-
-
-    console.log('found DATA!');
-
 
     for(var i=0;i<fontData.chars.length;i++) fontChars[fontData.chars[i].char] = fontData.chars[i];
     needUpdate=true;
-
-
 }
-
 
 function updateFontList()
 {
-    console.log('vars changed!');
     var vars=op.patch.getVars();
-    console.log(vars);
     var names=[];
 
-
-
-    // for(var i=0;i<vars.length;i++)
     for(var i in vars)
-    {
         if(vars[i].type=="fontData")
-        {
-            console.log(i);
             names.push(i.substr(substrLength));
-        }
-    }
 
     inFont.uiAttribs.values=names;
-
 }
-
-
-// inFontData.onChange=function()
-// {
-//     var data=inFontData.get();
-
-//     if(!data)
-//     {
-//         op.setUiError("datawrong","No font data!");
-//         return;
-//     }
-//     if(!data.chars)
-//     {
-//         op.setUiError("datawrong","Invalid font data!");
-//         return;
-//     }
-
-//     if(data && data.chars)
-//     {
-//         font=data;
-//         fontChars={};
-
-//         for(var i=0;i<data.chars.length;i++) fontChars[data.chars[i].char]=data.chars[i];
-
-//         op.setUiError("datawrong",null);
-//     }
-
-//     needUpdate=true;
-// };
-
 
 function updateScale()
 {
     var s=scale.get();
     vec3.set(vScale, s,s,s);
 }
-
-
-
 
 function updateAlign()
 {
@@ -267,7 +190,6 @@ function updateAlign()
 
     vec3.set(alignVec, 0,offY,0);
 
-    // console.log({minX,maxX,minY,maxY});
 
     widthAll=(Math.abs(minX-maxX));
     heightAll=(Math.abs(minY-maxY));
@@ -287,7 +209,6 @@ render.onTriggered=function()
     if(!fontData)
     {
         op.setUiError("nodata","No font data!!!!!!");
-        console.log("no font da");
         updateFontData();
         next.trigger();
         return;
@@ -322,19 +243,6 @@ render.onTriggered=function()
 
         if(inTexColor.get()) cgl.setTexture(1,inTexColor.get().tex);
         if(inTexMask.get()) cgl.setTexture(2,inTexMask.get().tex);
-
-        // var mulTex=inMulTex.get();
-        // if(mulTex)cgl.setTexture(1,mulTex.tex);
-        // var mulTexMask=inMulTexMask.get();        // if(mulTexMask)cgl.setTexture(2,mulTexMask.tex);
-        // heightAll=(strings.length-1)*( lineHeight.get());
-        // outHeight.set(heightAll);
-
-
-
-
-
-
-
 
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, alignVec);
@@ -464,7 +372,6 @@ function generateMesh()
     avgHeight/=fontData.chars.length;
     avgHeight*=mulSize;
 
-    // console.log({avgHeight,font});
 
     for(var s=0;s<strings.length;s++)
     {

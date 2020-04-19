@@ -1,0 +1,15 @@
+{
+    "authorName": "pandur",
+    "id": "421f5b52-c0fa-47c4-8b7a-012b9e1c864a",
+    "created": 1587327233386,
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Vars.VarGetNumber_v2"
+    }
+}

@@ -23,74 +23,38 @@ function updateErrorUi()
 
 function updateVarNamesDropdown()
 {
+    updateName();
+
     if(CABLES.UI)
     {
         var varnames=[];
         var vars=op.patch.getVars();
-        for(var i in vars) if(i!="0") varnames.push(i);
+        for(var i in vars) if(vars[i].type=="string" && i!="0") varnames.push(i);
         op.varName.uiAttribs.values=varnames;
     }
+
 }
 
 function createVar()
 {
     CABLES.CMD.PATCH.createVariable(op);
+    updateName();
 }
 
 function updateName()
 {
     if(CABLES.UI) op.setTitle('set #' + op.varName.get());
     updateErrorUi();
+
+    const vari=op.patch.getVar(op.varName.get());
+    if(vari)vari.type="string";
+
     update();
 }
 
 function update()
 {
-    // op.patch.setVarValue(op.varName.get(),val.get());
     if(val.get()!==undefined && val.get()!==null) op.patch.setVarValue(op.varName.get(),val.get());
 
 }
 
-
-// op.varName=op.inValueSelect("Variable",[],"",true);
-// var val=op.inString("Value",'New String');
-
-// op.varName.onChange=updateName;
-// val.onChange=update;
-// val.changeAlways=true;
-
-// op.patch.addEventListener("variablesChanged",updateVarNamesDropdown);
-
-// updateVarNamesDropdown();
-
-// function updateVarNamesDropdown()
-// {
-//     if(CABLES.UI)
-//     {
-//         var varnames=[];
-//         var vars=op.patch.getVars();
-//         varnames.push('+ create new one');
-//         for(var i in vars) varnames.push(i);
-//         op.varName.uiAttribs.values=varnames;
-//     }
-// }
-
-// function updateName()
-// {
-//     if(CABLES.UI)
-//     {
-//         if(op.varName.get()=='+ create new one')
-//         {
-//             CABLES.CMD.PATCH.createVariable(op);
-//             return;
-//         }
-
-//         op.setTitle('set #' + op.varName.get());
-//     }
-//     update();
-// }
-
-// function update()
-// {
-//     if(val.get()!==undefined && val.get()!==null) op.patch.setVarValue(op.varName.get(),val.get());
-// }

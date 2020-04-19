@@ -1,5 +1,5 @@
 var val=op.outString("Value");
-op.varName=op.inValueSelect("Variable");
+op.varName=op.inValueSelect("Variable",[],"",true);
 
 var variable=null;
 op.patch.addEventListener("variablesChanged",init);
@@ -51,6 +51,7 @@ function init()
     {
         op.setUiError("unknownvar","unknown variable! - there is no setVariable with this name ("+op.varName.get()+")");
         op.setTitle('#invalid');
+
     }
 }
 

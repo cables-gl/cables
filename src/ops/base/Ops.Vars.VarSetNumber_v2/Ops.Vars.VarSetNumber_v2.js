@@ -29,23 +29,26 @@ function updateVarNamesDropdown()
     {
         var varnames=[];
         var vars=op.patch.getVars();
-        for(var i in vars) if(i!="0") varnames.push(i);
+        for(var i in vars) if(vars[i].type=="number" && i!="0") varnames.push(i);
         op.varName.uiAttribs.values=varnames;
-
-        const vari=op.patch.getVar(op.varName.get());
-        if(vari)vari.type="number";
     }
+    updateName();
 }
 
 function createVar()
 {
     CABLES.CMD.PATCH.createVariable(op);
+    updateName();
 }
 
 function updateName()
 {
     if(CABLES.UI) op.setTitle('set #' + op.varName.get());
     updateErrorUi();
+
+    const vari=op.patch.getVar(op.varName.get());
+    if(vari && !vari.type) vari.type="number";
+
     update();
 }
 

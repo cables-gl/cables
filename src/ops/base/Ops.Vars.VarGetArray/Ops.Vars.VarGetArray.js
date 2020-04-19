@@ -1,4 +1,4 @@
-op.varName=op.inValueSelect("Variable");
+op.varName=op.inValueSelect("Variable",[],"",true);
 var val=op.outArray("Array");
 
 var variable=null;
@@ -16,7 +16,7 @@ function updateVarNamesDropdown()
         var varnames=[];
         var vars=op.patch.getVars();
 
-        for(var i in vars) varnames.push(i);
+        for(var i in vars) if(i!="0" && vars[i].type=="array") varnames.push(i);
 
         // varnames.push('+ create new one');
         op.varName.uiAttribs.values=varnames;

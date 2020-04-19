@@ -15,13 +15,6 @@
     "authorName": "pandur",
     "created": 1556107994879,
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Variable index",
-                "subType": "integer"
-            }
-        ],
         "portsOut": [
             {
                 "type": "5",

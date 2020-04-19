@@ -5,13 +5,6 @@
     "created": 1513356276638,
     "summary": "Get a variable array",
     "layout": {
-        "portsIn": [
-            {
-                "type": "0",
-                "name": "Variable index",
-                "subType": "integer"
-            }
-        ],
         "portsOut": [
             {
                 "type": "3",

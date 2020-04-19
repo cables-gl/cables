@@ -44,7 +44,6 @@ function load()
     loadedData=loadedTex=false;
     updateLoaded();
 
-    console.log("loading font...");
 
     op.patch.loading.finished(loadingId);
     loadingId = op.patch.loading.start("jsonFile", "" + urlData.get());
@@ -67,7 +66,6 @@ function load()
         {
             var data = _data;
             if (typeof data === "string") data = JSON.parse(_data);
-            console.log(data);
             if(!data.chars || !data.info || !data.info.face)
             {
                 op.setUiError("invaliddata","data file is invalid");
@@ -106,8 +104,6 @@ function load()
     });
 
 
-
-
     // load font texture
     loadingIdTex=cgl.patch.loading.start('textureOp',urlTex.get());
 
@@ -118,26 +114,19 @@ function load()
         {
             if(err)
             {
-                console.log(err);
                 op.setUiError('texurlerror','could not load texture');
                 cgl.patch.loading.finished(loadingIdTex);
                 loadedTex=false;
                 return;
             }
 
-            console.log("yeeh loaded texture");
-
             textures[0]=tex;
             op.patch.setVarValue(varNameTex,null);
             op.patch.setVarValue(varNameTex,textures);
 
-
             loadedTex=true;
             cgl.patch.loading.finished(loadingIdTex);
             updateLoaded();
-            console.log("FLIPPO",tex.flip);
-
-
         },{
             filter:CGL.Texture.FILTER_LINEAR,
             flip:false
