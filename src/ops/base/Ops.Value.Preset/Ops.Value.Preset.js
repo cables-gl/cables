@@ -447,6 +447,7 @@ addPort.onLinkChanged=function()
     const oldValue=otherPort.get()
 
     op.patch.setVarValue(varname,oldValue);
+    op.patch.getVar(varname).type="preset";
 
     addPort.removeLinks();
     if(CABLES.UI && gui) gui.patch().removeDeadLinks();
