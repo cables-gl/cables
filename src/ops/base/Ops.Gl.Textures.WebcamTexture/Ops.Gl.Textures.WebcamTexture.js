@@ -4,13 +4,9 @@ const
     inFacing=op.inSwitch("Facing",['environment','user'],'user'),
     flip=op.inValueBool("flip"),
     fps=op.inValueInt("fps"),
-
     width=op.inValueInt("Width",640),
     height=op.inValueInt("Height",480),
-
     inActive=op.inValueBool("Active",true),
-
-
     textureOut=op.outTexture("texture"),
     outRatio=op.outValue("Ratio"),
     available=op.outValue("Available"),
@@ -18,10 +14,9 @@ const
     outHeight=op.outNumber("Height"),
     outEleId=op.outString("Element Id");
 
-
 width.onChange=
-height.onChange=
-inFacing.onChange=startWebcam;
+    height.onChange=
+    inFacing.onChange=startWebcam;
 
 fps.set(30);
 flip.set(true);
@@ -107,9 +102,7 @@ function camInitComplete(stream)
         videoElement.play();
         updateTexture();
     };
-
 }
-
 
 function startWebcam()
 {
@@ -130,16 +123,11 @@ function startWebcam()
                 available.set(false);
                 // console.log('error webcam');
             });
-
-
     }
     else
     {
 
-        //ios
-
-console.log("THE IOS WAY");
-//      var constraints = { audio: true, video: { width: 1280, height: 720 } };
+        // the ios way...
 
         navigator.mediaDevices.getUserMedia(constraints)
           .then(camInitComplete)
@@ -148,7 +136,6 @@ console.log("THE IOS WAY");
           });
 
     }
-    // console.error("[webcamtexture] navigator.getUserMedia is not defined!");
 
 }
 
