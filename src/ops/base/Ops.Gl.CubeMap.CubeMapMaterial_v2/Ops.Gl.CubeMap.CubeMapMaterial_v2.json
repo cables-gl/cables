@@ -111,10 +111,6 @@
                 "text": "Texture input, either cubemap or equirectangular"
             },
             {
-                "name": "Use as Skybox",
-                "text": "Check to use material as a skybox"
-            },
-            {
                 "name": "Use Reflection",
                 "text": "Check to use the reflection vector"
             },
@@ -125,6 +121,18 @@
             {
                 "name": "Rotation",
                 "text": "Rotate the texture"
+            },
+            {
+                "name": "Flip X",
+                "text": "flip the x axis"
+            },
+            {
+                "name": "Flip Y",
+                "text": "flip the y axis"
+            },
+            {
+                "name": "Flip Z",
+                "text": "flip the z axis"
             },
             {
                 "name": "Colorize",

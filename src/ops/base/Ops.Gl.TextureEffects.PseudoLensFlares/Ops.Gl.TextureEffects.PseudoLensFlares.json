@@ -48,8 +48,44 @@
         "name": "Ops.Gl.TextureEffects.PseudoLensFlares"
     },
     "summary": "simulate lens flare effect",
-    "youtubeid": "",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "render",
+                "text": "trigger input"
+            },
+            {
+                "name": "Ghosts",
+                "text": "intensity of rays from the middle"
+            },
+            {
+                "name": "Num Ghosts",
+                "text": "amount of rays"
+            },
+            {
+                "name": "Dispersal",
+                "text": "amount of rays in the middle & smear intensity"
+            },
+            {
+                "name": "Halo",
+                "text": "intensity of surrounding halo ring"
+            },
+            {
+                "name": "Halo Width",
+                "text": "width of surrounding halo ring"
+            },
+            {
+                "name": "Color Lookup",
+                "text": "color mask for color of light rays"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger output"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
