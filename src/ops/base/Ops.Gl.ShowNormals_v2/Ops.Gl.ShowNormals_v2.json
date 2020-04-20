@@ -81,8 +81,8 @@
                 "text": "geometry input"
             },
             {
-                "name": "Vectors",
-                "text": "choose which vectors to render: normals, tangents or bitangents"
+                "name": "Vectors index",
+                "text": "choose either: 0 - normals, 1 - tangents, 2 - bitangents"
             },
             {
                 "name": "Length",
