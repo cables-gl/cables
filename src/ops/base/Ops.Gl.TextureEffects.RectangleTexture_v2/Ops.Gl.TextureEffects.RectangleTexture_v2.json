@@ -1,0 +1,153 @@
+{
+    "authorName": "pandur",
+    "id": "fbe5f1c6-019b-4fa7-a65a-050a7cd7720e",
+    "created": 1536072067728,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "roundness",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.TextureEffects.Rectangle_v2"
+    },
+    "summary": "Draw a 2D rectangle with controllable parameters",
+    "collections": [
+        "generator"
+    ],
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Needs trigger to work"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the rectangle"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the rectangle"
+            },
+            {
+                "name": "X",
+                "text": "The x position of the rectangle"
+            },
+            {
+                "name": "Y",
+                "text": "The y position of the rectangle"
+            },
+            {
+                "name": "Rotate",
+                "text": "Rotates the rectangle"
+            },
+            {
+                "name": "roundness",
+                "text": "Softens the 4 corners"
+            },
+            {
+                "name": "r",
+                "text": "Red amount"
+            },
+            {
+                "name": "g",
+                "text": "Green amount"
+            },
+            {
+                "name": "b",
+                "text": "Blue amount"
+            },
+            {
+                "name": "a",
+                "text": "Alpha amount"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added : Blend modes",
+            "author": "andro",
+            "date": 1548344369982
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.Rectangle_v2 renamed to Ops.Gl.TextureEffects.RectangleTexture_v2",
+            "author": "pandur",
+            "date": 1587376356713
+        }
+    ],
+    "issues": "",
+    "youtubeids": []
+}

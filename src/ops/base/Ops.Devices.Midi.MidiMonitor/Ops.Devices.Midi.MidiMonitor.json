@@ -107,6 +107,10 @@
                 "text": "triggers whenever a midi event is received"
             },
             {
+                "name": "Device",
+                "text": "name of the device"
+            },
+            {
                 "name": "MIDI Channel",
                 "text": "the midi channel of the message"
             },

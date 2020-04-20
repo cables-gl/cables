@@ -1,0 +1,118 @@
+{
+    "updated": 1543930033650,
+    "authorName": "pandur",
+    "id": "e4f7fd96-cfbe-49db-99f5-126f389e3a85",
+    "created": 1519813822916,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exec"
+            },
+            {
+                "type": "0",
+                "name": "Num Particles",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "1",
+                "name": "Respawn all"
+            },
+            {
+                "type": "0",
+                "name": "Speed",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Damping",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Area",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Line Points",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Min LifeTime",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Max LifeTime",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Spawn Positions"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "color",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "force"
+            },
+            {
+                "type": "0",
+                "name": "offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "0",
+                "name": "Die Slow",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl2.ForceField.ForceFieldSimulationLines"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl2.ForceField.ForceFieldSimulationLines renamed to Ops.Deprecated.Gl2.ForceField.ForceFieldSimulationLines",
+            "author": "pandur",
+            "date": 1587376096573
+        }
+    ]
+}

@@ -1,0 +1,63 @@
+{
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "pandur",
+    "id": "542e6770-7a52-4ad7-ba61-034070317ed4",
+    "created": 1505163795440,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "0",
+                "name": "Range Radius",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "attraction",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Angle",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Show",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            }
+        ],
+        "name": "Ops.Gl2.ForceField.ForceFieldForce"
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl2.ForceField.ForceFieldForce renamed to Ops.Deprecated.Gl2.ForceField.ForceFieldForce",
+            "author": "pandur",
+            "date": 1587376067770
+        }
+    ]
+}

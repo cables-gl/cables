@@ -1,0 +1,50 @@
+{
+    "authorName": "pandur",
+    "id": "4638ff71-1901-4608-a2a1-9b71b9894cc0",
+    "created": 1519817123611,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Key",
+                "subType": "string"
+            },
+            {
+                "type": "2",
+                "name": "Object Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyObject"
+    },
+    "summary": "insert an object into an object",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectKeyObject renamed to Ops.Json.ObjectSetObject",
+            "author": "pandur",
+            "date": 1587020736177
+        },
+        {
+            "message": "Ops.Json.ObjectSetObject renamed to Ops.Json.ObjectKeyObject",
+            "author": "pandur",
+            "date": 1587020763279
+        },
+        {
+            "message": "Ops.Json.ObjectKeyObject renamed to Ops.Deprecated.Json.ObjectKeyObject",
+            "author": "pandur",
+            "date": 1587375884657
+        }
+    ]
+}

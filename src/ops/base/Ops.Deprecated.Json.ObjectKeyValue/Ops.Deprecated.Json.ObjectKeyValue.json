@@ -1,0 +1,40 @@
+{
+    "updated": 1519816677391,
+    "authorName": "pandur",
+    "id": "a4d5825e-fa94-46ce-90da-0a271791ce50",
+    "created": 1519816673125,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "0",
+                "name": "Key"
+            },
+            {
+                "type": "0",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectKeyValue"
+    },
+    "summary": "set value for key in an object",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "Ops.Json.ObjectKeyValue renamed to Ops.Deprecated.Json.ObjectKeyValue",
+            "author": "pandur",
+            "date": 1587375907850
+        }
+    ]
+}
