@@ -14,28 +14,21 @@
             },
             {
                 "type": "0",
-                "name": "Font index",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
                 "name": "Scale",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Letter Spacing",
+                "group": "Size",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Line Height",
+                "group": "Size",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "SDF",
-                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -70,6 +63,12 @@
                 "name": "a",
                 "group": "Color",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "SDF",
+                "group": "Color",
+                "subType": "boolean"
             },
             {
                 "type": "0",

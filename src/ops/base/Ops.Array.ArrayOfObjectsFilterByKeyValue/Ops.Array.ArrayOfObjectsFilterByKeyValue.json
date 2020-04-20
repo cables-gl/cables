@@ -1,0 +1,79 @@
+{
+    "id": "0d4b9bba-2c00-49f7-b486-86e4cde2428e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1586863769593
+        },
+        {
+            "message": "Ops.User.simod.ArrayOfObjectsFilterByKey renamed to Ops.User.simod.ArrayOfObjectsFilterByKeyValue",
+            "author": "simod",
+            "date": 1586867144493
+        },
+        {
+            "message": "Ops.User.simod.ArrayOfObjectsFilterByKeyValue renamed to Ops.Array.ArrayOfObjectsFilterByKeyValue",
+            "author": "simod",
+            "date": 1586878303281
+        }
+    ],
+    "authorName": "simod",
+    "created": 1586863771940,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "5",
+                "name": "Filter Key"
+            },
+            {
+                "type": "5",
+                "name": "Filter Value"
+            },
+            {
+                "type": "0",
+                "name": "Invert Filter",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "arrayOut"
+            }
+        ],
+        "name": "Ops.User.simod.ArrayOfObjectsFilterByKeyValue"
+    },
+    "summary": "filter key value pairs in objects in an array of objects",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array input"
+            },
+            {
+                "name": "Filter Key",
+                "text": "key to use"
+            },
+            {
+                "name": "Filter Value",
+                "text": "value to use"
+            },
+            {
+                "name": "Invert Filter",
+                "text": "invert result (discard all objects that have key-value pair)"
+            },
+            {
+                "name": "arrayOut",
+                "text": "output array"
+            }
+        ]
+    }
+}

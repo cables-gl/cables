@@ -6,15 +6,12 @@
 const
     render=op.inTrigger("Render"),
     str=op.inString("Text","cables"),
-
-    inFont=op.inDropDown("Font",[]),
-
-    // inTex=op.inTexture("Texture"),
-    // inFontData=op.inObject("Font Data"),
+    inFont=op.inDropDown("Font",[],"",true),
     scale=op.inFloat("Scale",0.25),
+
     letterSpace=op.inFloat("Letter Spacing",0),
     lineHeight=op.inFloat("Line Height",1),
-    doSDF=op.inBool("SDF",true),
+
     align=op.inSwitch("Align",['Left','Center','Right'],'Center'),
     valign=op.inSwitch("Vertical Align",['Top','Middle','Bottom'],'Middle'),
 
@@ -22,6 +19,7 @@ const
     g = op.inValueSlider("g", 1),
     b = op.inValueSlider("b", 1),
     a = op.inValueSlider("a", 1),
+    doSDF=op.inBool("SDF",true),
 
     inShadow = op.inBool("Shadow", false),
 
@@ -41,10 +39,12 @@ const
     outStartY=op.outNumber("Start Y"),
     outNumChars=op.outNumber("Num Chars");
 
+
+op.setPortGroup('Size',[letterSpace,lineHeight,scale]);
 op.setPortGroup("Character Transformations",[inScaleArr,inRotArr,inPosArr]);
 
 op.setPortGroup('Alignment',[align,valign]);
-op.setPortGroup('Color',[r,g,b,a]);
+op.setPortGroup('Color',[r,g,b,a,doSDF]);
 r.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
@@ -238,7 +238,6 @@ function buildTransMats()
     }
 
     transMats = [].concat.apply([], transformations);
-
 }
 
 render.onTriggered=function()
@@ -283,19 +282,15 @@ render.onTriggered=function()
 
         if(needsUpdateTransmats) buildTransMats();
         if(transMats) mesh.setAttribute('instMat',new Float32Array(transMats),16,{"instanced":true});
-
         if(cgl.getShader())cgl.getShader().define('INSTANCING');
 
         if(!disabled)
         {
             mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
-
             mesh.render(cgl.getShader());
         }
 
         cgl.popModelMatrix();
-
-
 
         cgl.setTexture(0,null);
         cgl.popShader();
@@ -473,7 +468,6 @@ function generateMesh()
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTcSize',new Float32Array(tcSizes),2,{"instanced":true});
     mesh.setAttribute('attrSize',new Float32Array(sizes),2,{"instanced":true});
-
 
     updateAlign();
     updateAlign();

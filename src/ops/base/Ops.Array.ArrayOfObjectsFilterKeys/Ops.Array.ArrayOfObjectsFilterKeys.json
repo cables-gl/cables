@@ -1,0 +1,74 @@
+{
+    "id": "8c9a7621-51c7-46b7-934b-1924cb0ff0b6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1586866960473
+        },
+        {
+            "message": "Ops.User.simod.ArrayOfObjectsFilterKeys renamed to Ops.Array.ArrayOfObjectsFilterKeys",
+            "author": "simod",
+            "date": 1586878316327
+        }
+    ],
+    "authorName": "simod",
+    "created": 1586866968147,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Array"
+            },
+            {
+                "type": "5",
+                "name": "Keys"
+            },
+            {
+                "type": "5",
+                "name": "Seperator"
+            },
+            {
+                "type": "0",
+                "name": "Invert Filter",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array Out"
+            }
+        ],
+        "name": "Ops.User.simod.ArrayOfObjectsFilterKeys"
+    },
+    "summary": "lose key-value pairs from objects in an array of objects",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "array of objects input"
+            },
+            {
+                "name": "Keys",
+                "text": "keys to keep in the objects"
+            },
+            {
+                "name": "Seperator",
+                "text": "the character to seperate the keys"
+            },
+            {
+                "name": "Invert Filter",
+                "text": "inverts the operation, drops all specified keys"
+            },
+            {
+                "name": "Array Out",
+                "text": "the resulting array of objects"
+            }
+        ]
+    }
+}
