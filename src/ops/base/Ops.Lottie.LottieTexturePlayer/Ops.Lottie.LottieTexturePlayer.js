@@ -1,6 +1,6 @@
 const exe=op.inTrigger("exe");
 // var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-const filename=op.inFile("File");
+const filename=op.inUrl("File");
 
 var play=op.addInPort(new CABLES.Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
 

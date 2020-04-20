@@ -29,9 +29,8 @@
                 "name": "exe"
             },
             {
-                "type": "0",
-                "name": "File",
-                "subType": "string"
+                "type": "5",
+                "name": "File"
             },
             {
                 "type": "0",
@@ -89,7 +88,7 @@
                 "name": "texture"
             }
         ],
-        "name": "Ops.User.pandur.LottiePlayer2"
+        "name": "Ops.Lottie.LottieTexturePlayer"
     },
     "summary": "Play a Lottie animation in a texture",
     "issues": "",
