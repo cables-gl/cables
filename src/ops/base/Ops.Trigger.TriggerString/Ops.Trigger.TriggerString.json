@@ -31,5 +31,13 @@
             }
         ],
         "name": "Ops.Trigger.TriggerString"
+    },
+    "summary": "trigger a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

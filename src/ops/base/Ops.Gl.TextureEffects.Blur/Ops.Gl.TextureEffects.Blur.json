@@ -43,7 +43,41 @@
     "id": "54f26f53-f637-44c1-9bfb-a2f2b722e998",
     "created": 1508233703583,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Triggerthe op"
+            },
+            {
+                "name": "amount",
+                "text": "Amount of blur to apply"
+            },
+            {
+                "name": "direction index",
+                "text": "Pick blur direction with an integer"
+            },
+            {
+                "name": "direction",
+                "text": "Both, vertical or horizontal"
+            },
+            {
+                "name": "Fast",
+                "text": "Fast mode. Sacrifice blur quality for speed"
+            },
+            {
+                "name": "mask",
+                "text": "Use a texture input black and white gradient to decide which pixels are blurred "
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     },
-    "youtubeid": "XmOk70epdf0"
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "XmOk70epdf0"
+    ]
 }

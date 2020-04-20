@@ -8,5 +8,37 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1553854210900
+    "created": 1553854210900,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "3",
+                "name": "Matrix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Scaling",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.GetMatrixScaling"
+    },
+    "summary": "Get the scalar scaling of a matrix",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

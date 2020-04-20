@@ -20,18 +20,17 @@
         ],
         "name": "Ops.Exp.Gl.DeviceOrientationCamera"
     },
-    "youtubeid": "",
     "collections": [
         "cameras",
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "docs": {
         "ports": []
     },
     "authorName": "pandur",
     "id": "c213a5b4-6a47-425a-9457-ae0b14c88e9a",
-    "created": 1554973647512
+    "created": 1554973647512,
+    "issues": "",
+    "youtubeids": []
 }

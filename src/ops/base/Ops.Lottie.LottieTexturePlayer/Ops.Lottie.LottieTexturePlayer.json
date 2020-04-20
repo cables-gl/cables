@@ -9,6 +9,11 @@
             "message": "Ops.User.pandur.LottiePlayer2 renamed to Ops.Admin.LottieTexturePlayer",
             "author": "pandur",
             "date": 1581088057174
+        },
+        {
+            "message": "Ops.Admin.LottieTexturePlayer renamed to Ops.Lottie.LottieTexturePlayer",
+            "author": "pandur",
+            "date": 1587367524875
         }
     ],
     "libs": [
@@ -85,5 +90,13 @@
             }
         ],
         "name": "Ops.User.pandur.LottiePlayer2"
+    },
+    "summary": "Play a Lottie animation in a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

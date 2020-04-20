@@ -53,6 +53,19 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "width",
+                "text": "Width of the iFrame"
+            },
+            {
+                "name": "height",
+                "text": "Height of the iFrame"
+            },
+            {
+                "name": "URL",
+                "text": "URL to load into the iFrame"
+            }
+        ]
     }
 }

@@ -136,7 +136,7 @@
         ],
         "name": "Ops.Gl.TextMeshMSDF_v2"
     },
-    "summary": "draw text to the screen",
+    "summary": "draw text ",
     "issues": "",
     "collections": [
         "drawText"

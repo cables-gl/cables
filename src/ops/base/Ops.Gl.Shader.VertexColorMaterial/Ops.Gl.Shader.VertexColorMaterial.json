@@ -23,7 +23,7 @@
         ],
         "name": "Ops.Gl.Shader.VertexColorMaterial"
     },
-    "summary": "",
+    "summary": "draw a mesh showing only it's vertex colors",
     "issues": "",
     "collections": [
         "Material"

@@ -63,6 +63,10 @@
                 "text": "X domain"
             },
             {
+                "name": "Array time",
+                "text": "Time domain"
+            },
+            {
                 "name": "Time in Y",
                 "text": "Y domain"
             },
@@ -77,6 +81,10 @@
             {
                 "name": "Array out",
                 "text": "Array out"
+            },
+            {
+                "name": "Array length out",
+                "text": "Length of array"
             }
         ]
     }

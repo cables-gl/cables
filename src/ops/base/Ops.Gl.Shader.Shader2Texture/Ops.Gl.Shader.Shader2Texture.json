@@ -61,6 +61,51 @@
     },
     "summary": "render a shader into a texture",
     "docs": {
-        "ports": []
-    }
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Shader",
+                "text": "Shader to turn into a texture"
+            },
+            {
+                "name": "Use Viewport Size",
+                "text": "When enabled the texture is the size of the viewport"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the texture in pixels"
+            },
+            {
+                "name": "Height",
+                "text": "Height of the texture in pixels"
+            },
+            {
+                "name": "filter index",
+                "text": "Pick a filter mode with an integer"
+            },
+            {
+                "name": "wrap index",
+                "text": "Pick a wrap mode with an integer"
+            },
+            {
+                "name": "Floating Point",
+                "text": "Enable floating point precision"
+            },
+            {
+                "name": "Next",
+                "text": "Trigger out"
+            },
+            {
+                "name": "Texture",
+                "text": "Texture out"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

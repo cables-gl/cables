@@ -32,6 +32,28 @@
             "message": "Ops.User.pandur.CallBack2 renamed to Ops.Patch.CallBackString",
             "author": "pandur",
             "date": 1576746553597
+        },
+        {
+            "message": "Ops.Patch.CallBackString renamed to Ops.Patch.CallBack_v2",
+            "author": "pandur",
+            "date": 1587362629023
         }
-    ]
+    ],
+    "summary": "Executes an external function (external javascript)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Calls the external function / executes the callback"
+            },
+            {
+                "name": "Callback Name",
+                "text": "Name of the function to call"
+            }
+        ]
+    }
 }

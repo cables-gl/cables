@@ -99,5 +99,15 @@
             "author": "pandur",
             "date": 1587104858014
         }
-    ]
+    ],
+    "summary": "colorize all meshes around current position",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cUU0fNw3rEg"
+    ],
+    "docs": {
+        "ports": []
+    }
 }
