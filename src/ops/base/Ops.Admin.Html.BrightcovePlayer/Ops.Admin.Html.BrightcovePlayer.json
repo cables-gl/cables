@@ -1,0 +1,52 @@
+{
+    "id": "385436f8-d0f1-4c87-91ec-d3d329f8b24e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1586951683903
+        },
+        {
+            "message": " added lib: brightcove-player-loader.min.js",
+            "author": "pandur",
+            "date": 1586956558453
+        },
+        {
+            "message": "Ops.Html.BrightcovePlayer renamed to Ops.Admin.Html.BrightcovePlayer",
+            "author": "pandur",
+            "date": 1587023770858
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1586951732104,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Video ID"
+            },
+            {
+                "type": "5",
+                "name": "Account"
+            },
+            {
+                "type": "5",
+                "name": "Style"
+            },
+            {
+                "type": "1",
+                "name": "Show"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "name": "Ops.Html.BrightcovePlayer"
+    },
+    "libs": [
+        "brightcove-player-loader.min.js"
+    ]
+}

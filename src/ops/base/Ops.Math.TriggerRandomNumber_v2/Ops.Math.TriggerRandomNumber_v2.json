@@ -45,5 +45,13 @@
             }
         ],
         "name": "Ops.Math.TriggerRandomNumber_v2"
+    },
+    "summary": "generate random number between min and max (was: random2)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

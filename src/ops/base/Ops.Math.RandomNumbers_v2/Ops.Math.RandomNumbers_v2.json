@@ -57,5 +57,15 @@
             }
         ],
         "name": "Ops.Math.RandomNumbers_v2"
+    },
+    "summary": "simple way to get random numbers without using arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "ASp7LEqZUIE"
+    ],
+    "docs": {
+        "ports": []
     }
 }

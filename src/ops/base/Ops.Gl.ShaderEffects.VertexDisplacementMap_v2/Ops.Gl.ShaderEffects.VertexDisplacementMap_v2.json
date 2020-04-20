@@ -26,11 +26,6 @@
             },
             {
                 "type": "0",
-                "name": "mode",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "extrude",
                 "subType": "number"
             },
@@ -77,5 +72,17 @@
             }
         ],
         "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v2"
+    },
+    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "issues": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null,
+    "youtubeids": [
+        "NjG85Qbbl0w"
+    ],
+    "docs": {
+        "ports": []
     }
 }

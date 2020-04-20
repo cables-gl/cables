@@ -38,5 +38,18 @@
             }
         ],
         "name": "Ops.Array.ArrayLogicBetween_v2"
+    },
+    "summary": "If value of array is between min and max then the value is 1 else 0",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "pass value when true",
+                "text": "When enabled values between are passed through instead of being 1"
+            }
+        ]
     }
 }

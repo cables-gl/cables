@@ -11,5 +11,15 @@
             }
         ],
         "name": "Ops.Vars.VarGetNumber_v2"
+    },
+    "summary": "read a variable number",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
     }
 }

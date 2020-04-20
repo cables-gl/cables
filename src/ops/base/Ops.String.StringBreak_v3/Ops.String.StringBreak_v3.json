@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.String.StringBreak_v3"
+    },
+    "summary": "insert linebreaks into a string after [num] chars",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

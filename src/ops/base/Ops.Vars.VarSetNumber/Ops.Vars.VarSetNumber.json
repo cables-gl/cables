@@ -13,10 +13,6 @@
     "docs": {
         "ports": [
             {
-                "name": "Variable",
-                "text": "Variable name"
-            },
-            {
                 "name": "Value",
                 "text": "Number in"
             }

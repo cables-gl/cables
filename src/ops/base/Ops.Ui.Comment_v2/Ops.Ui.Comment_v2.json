@@ -21,5 +21,13 @@
             }
         ],
         "name": "Ops.Ui.Comment_v2"
+    },
+    "summary": "Displays a comment in the patch area",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

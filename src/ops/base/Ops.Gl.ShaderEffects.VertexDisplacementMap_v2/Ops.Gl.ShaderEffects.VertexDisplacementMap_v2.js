@@ -4,7 +4,7 @@ const
     texture=op.inTexture("texture"),
     meth=op.inValueSelect("mode",['normal','normal xy','mul xyz','sub x','add x','add y','add z','mul y','mul z','sub z'],"normal"),
     extrude=op.inValue("extrude",0.5),
-    flip=op.inValueBool("flip",true),
+    flip=op.inValueBool("flip",false),
 
     removeZero=op.inValueBool("Ignore Zero Values"),
     invert=op.inValueBool("invert"),

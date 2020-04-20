@@ -8,5 +8,27 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1576832794203
+    "created": 1576832794203,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineSetTime"
+    },
+    "summary": "set current time of timeline",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

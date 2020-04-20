@@ -56,5 +56,18 @@
             }
         ],
         "name": "Ops.Sidebar.DropDown_v2"
+    },
+    "summary": "Shows a drop-down (select) element in the sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Values",
+                "text": "Array of options, use Ops.Array.ParseArray to enter manually"
+            }
+        ]
     }
 }

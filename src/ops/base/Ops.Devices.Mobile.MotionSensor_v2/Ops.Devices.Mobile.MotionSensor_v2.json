@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1574870824963
+        },
+        {
+            "message": "Ops.Devices.Mobile.MotionSensor2 renamed to Ops.Devices.Mobile.MotionSensor_v2",
+            "author": "pandur",
+            "date": 1587359680382
         }
     ],
     "authorName": "pandur",
@@ -89,7 +94,7 @@
         ],
         "name": "Ops.Devices.Mobile.MotionSensor2"
     },
-    "summary": "",
+    "summary": "get values from the device motion sensor mobile",
     "issues": "",
     "collections": null,
     "relatedops": null,

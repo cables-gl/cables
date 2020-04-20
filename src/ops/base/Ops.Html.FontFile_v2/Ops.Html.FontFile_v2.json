@@ -33,7 +33,7 @@
         ],
         "name": "Ops.Html.FontFile_v2"
     },
-    "summary": "Load a font file like .otf, .ttf, .woff",
+    "summary": "Load a font file like .otf, .ttf, .woff via css",
     "issues": "",
     "collections": null,
     "relatedops": null,

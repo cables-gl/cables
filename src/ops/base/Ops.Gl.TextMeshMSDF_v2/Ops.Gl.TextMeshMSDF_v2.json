@@ -135,5 +135,17 @@
             }
         ],
         "name": "Ops.Gl.TextMeshMSDF_v2"
+    },
+    "summary": "draw text to the screen",
+    "issues": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": [
+        "Ops.Gl.FontMSDF"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -22,5 +22,13 @@
             }
         ],
         "name": "Ops.Vars.VarGetTexture"
+    },
+    "summary": "get a texture from a variable",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

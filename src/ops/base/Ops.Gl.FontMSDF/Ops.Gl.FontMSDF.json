@@ -42,5 +42,17 @@
             }
         ],
         "name": "Ops.Gl.FontMSDF"
+    },
+    "summary": "Load MSDF Font data and texture to use ",
+    "issues": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": [
+        "Ops.Gl.TextMeshMSDF_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

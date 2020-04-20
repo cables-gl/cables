@@ -10,6 +10,16 @@
             "message": "Ops.User.cables.Renderanim2 renamed to Ops.Gl.Renderanim2",
             "author": "cables",
             "date": 1573993578343
+        },
+        {
+            "message": "Ops.Gl.Renderanim2 renamed to Ops.Gl.Renderanim_v2",
+            "author": "pandur",
+            "date": 1587361862143
+        },
+        {
+            "message": "Ops.Gl.Renderanim_v2 renamed to Ops.Gl.RenderAnim_v2",
+            "author": "pandur",
+            "date": 1587361904529
         }
     ],
     "authorName": "cables",
@@ -105,5 +115,18 @@
     },
     "libs": [
         "whammy.js"
-    ]
+    ],
+    "summary": "render an animation and save as file webm video or png image sequence",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "FPS",
+                "text": "Frames per second for render."
+            }
+        ]
+    }
 }

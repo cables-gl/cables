@@ -1,0 +1,1 @@
+Use a dropdown if you want to select one value out of many, e.g. `Circle` with options `Circle, Rectangle, Triangle`. To enter the values you can use Ops.Array.ParseArray.

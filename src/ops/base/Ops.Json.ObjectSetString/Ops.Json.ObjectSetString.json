@@ -8,5 +8,36 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1584025829483
+    "created": 1584025829483,
+    "summary": "set a string value by key in an object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "5",
+                "name": "Key"
+            },
+            {
+                "type": "5",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result Object"
+            }
+        ],
+        "name": "Ops.Json.ObjectSetString"
+    }
 }

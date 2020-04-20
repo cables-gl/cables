@@ -22,5 +22,13 @@
             }
         ],
         "name": "Ops.Vars.VarSetTexture"
+    },
+    "summary": "set a texture variable",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

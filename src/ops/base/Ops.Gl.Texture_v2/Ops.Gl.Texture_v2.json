@@ -68,5 +68,18 @@
             "author": "pandur",
             "date": 1581607147784
         }
-    ]
+    ],
+    "summary": "Load an image as a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.TextureArrayLoader",
+        "Ops.Gl.TextureArrayLoaderFromArray",
+        "Ops.Gl.Textures.VideoTexture",
+        "Ops.Gl.Textures.TextureSVG"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

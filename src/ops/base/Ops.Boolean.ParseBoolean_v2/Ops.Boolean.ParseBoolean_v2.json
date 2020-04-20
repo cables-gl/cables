@@ -24,5 +24,13 @@
             "author": "pandur",
             "date": 1582795056810
         }
-    ]
+    ],
+    "summary": "parse boolean from string/number",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

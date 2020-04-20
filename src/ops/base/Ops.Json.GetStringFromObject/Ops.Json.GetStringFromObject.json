@@ -26,7 +26,7 @@
                 "name": "result"
             }
         ],
-        "name": "Ops.Json.ObjectGetString"
+        "name": "Ops.Json.GetStringFromObject"
     },
     "summary": "get string from object",
     "youtubeid": "",

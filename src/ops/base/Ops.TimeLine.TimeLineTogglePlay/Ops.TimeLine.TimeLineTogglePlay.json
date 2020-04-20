@@ -8,5 +8,23 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1564783928413
+    "created": 1564783928413,
+    "summary": "toggle between timeline playing and being paused",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Play",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.TimeLine.TimeLineTogglePlay"
+    }
 }

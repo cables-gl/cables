@@ -27,5 +27,13 @@
             }
         ],
         "name": "Ops.Admin.ConsoleLog"
+    },
+    "summary": "Log incoming values to the console/dev tools",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

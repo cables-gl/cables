@@ -32,5 +32,18 @@
             }
         ],
         "name": "Ops.Sidebar.SidebarText_v2"
+    },
+    "summary": "Display text in the sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Text",
+                "text": "The text you want to show in the sidebar"
+            }
+        ]
     }
 }

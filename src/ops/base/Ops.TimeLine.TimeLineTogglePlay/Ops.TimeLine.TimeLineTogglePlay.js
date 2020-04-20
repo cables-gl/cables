@@ -1,6 +1,4 @@
-
-var play=op.inBool("Play",false);
-
+const play=op.inBool("Play",false);
 
 play.onChange=function()
 {
