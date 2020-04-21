@@ -10,23 +10,23 @@
 #endif
 
 #ifdef MOD_AREA_AXIS_X
-    float MOD_de=abs(MOD_x-MOD_vertPos.x);
+    float MOD_de=abs(MOD_pos.x-MOD_vertPos.x);
 #endif
 #ifdef MOD_AREA_AXIS_Y
-    float MOD_de=abs(MOD_y-MOD_vertPos.y);
+    float MOD_de=abs(MOD_pos.y-MOD_vertPos.y);
 #endif
 #ifdef MOD_AREA_AXIS_Z
-    float MOD_de=abs(MOD_z-MOD_vertPos.z);
+    float MOD_de=abs(MOD_pos.z-MOD_vertPos.z);
 #endif
 
 #ifdef MOD_AREA_AXIS_X_INFINITE
-    float MOD_de=MOD_x-MOD_vertPos.x;
+    float MOD_de=MOD_pos.x-MOD_vertPos.x;
 #endif
 #ifdef MOD_AREA_AXIS_Y_INFINITE
-    float MOD_de=MOD_y-MOD_vertPos.y;
+    float MOD_de=MOD_pos.y-MOD_vertPos.y;
 #endif
 #ifdef MOD_AREA_AXIS_Z_INFINITE
-    float MOD_de=MOD_z-MOD_vertPos.z;
+    float MOD_de=MOD_pos.z-MOD_vertPos.z;
 #endif
 
 MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
