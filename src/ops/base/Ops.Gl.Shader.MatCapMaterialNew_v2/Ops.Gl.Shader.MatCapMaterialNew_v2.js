@@ -218,6 +218,7 @@ function updateAlphaMaskMethod()
         else shader.removeDefine('ALPHA_MASK_B');
 }
 alphaMaskSource.onChange=updateAlphaMaskMethod;
+textureOpacity.onChange=updateOpacity;
 
 var textureOpacityUniform = null;
 
@@ -248,7 +249,6 @@ function updateOpacity()
     }
     updateAlphaMaskMethod();
 };
-textureOpacity.onChange=updateOpacity;
 
 discardTransPxl.onChange=function()
 {
@@ -256,23 +256,11 @@ discardTransPxl.onChange=function()
         else shader.removeDefine('DISCARDTRANS');
 };
 
-
 texCoordAlpha.onChange=function()
 {
     if(texCoordAlpha.get()) shader.define('TRANSFORMALPHATEXCOORDS');
         else shader.removeDefine('TRANSFORMALPHATEXCOORDS');
 };
-
-// function bindTextures()
-// {
-//      if(textureMatcap.get())     cgl.setTexture(0,textureMatcap.get().tex);
-//      if(textureDiffuse.get())    cgl.setTexture(1,textureDiffuse.get().tex);
-//      if(textureNormal.get())     cgl.setTexture(2,textureNormal.get().tex);
-//      if(textureSpec.get())       cgl.setTexture(3,textureSpec.get().tex);
-//      if(textureSpecMatCap.get()) cgl.setTexture(4,textureSpecMatCap.get().tex);
-//      if(textureAo.get())         cgl.setTexture(5,textureAo.get().tex);
-//      if(textureOpacity.get())    cgl.setTexture(6, textureOpacity.get().tex);
-// };
 
 op.onDelete=function()
 {
@@ -290,8 +278,6 @@ op.preRender=function()
 
 render.onTriggered=function()
 {
-    // shader.bindTextures=bindTextures;
-
     shader.popTextures();
     if(textureMatcap.get() && textureMatcapUniform)     shader.pushTexture(textureMatcapUniform,textureMatcap.get().tex);
     if(textureDiffuse.get() && textureDiffuseUniform)    shader.pushTexture(textureDiffuseUniform,textureDiffuse.get().tex);

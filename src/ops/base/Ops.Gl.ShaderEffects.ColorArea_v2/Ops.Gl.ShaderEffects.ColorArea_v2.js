@@ -102,7 +102,7 @@ function doRender()
     {
         if(shader) removeModule();
         origShader=cgl.getShader();
-        shader=origShader.copy();
+        shader=origShader;//.copy();
 
         moduleVert=shader.addModule(
             {
@@ -134,7 +134,7 @@ function doRender()
 
     if(!shader)return;
 
-    shader.copyUniforms(origShader);
+    // shader.copyUniforms(origShader);
 
     cgl.pushShader(shader);
     next.trigger();

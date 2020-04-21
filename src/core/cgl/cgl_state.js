@@ -158,7 +158,7 @@ const Context = function (_patch)
         this.gl.getExtension("OES_standard_derivatives");
         // this.gl.getExtension("GL_OES_standard_derivatives");
         var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
-        
+
         this.maxTextureUnits=this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
         this.maxTexSize=this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
 
@@ -251,7 +251,7 @@ const Context = function (_patch)
 
     this.endFrame = function ()
     {
-        
+
         if(this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
 

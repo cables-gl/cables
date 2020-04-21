@@ -182,7 +182,7 @@ Shader.prototype.copyUniforms = function(shader)
  * @function copy
  * @memberof Shader
  * @instance
- * @returns newShader 
+ * @returns newShader
  */
 Shader.prototype.copy = function()
 {
@@ -195,7 +195,7 @@ Shader.prototype.copy = function()
     shader._modGroupCount=this._modGroupCount;
     shader._moduleNames=this._moduleNames;
 
-    for(var i=0;i<this._uniforms.length;i++) 
+    for(var i=0;i<this._uniforms.length;i++)
     {
         var u=this._uniforms[i].copy(shader);
         u.resetLoc();
