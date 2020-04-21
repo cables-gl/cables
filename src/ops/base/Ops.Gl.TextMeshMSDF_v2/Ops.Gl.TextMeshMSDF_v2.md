@@ -1,0 +1,1 @@
+more information about the tech behind MSDF: https://github.com/Chlumsky/msdfgen
