@@ -65,6 +65,6 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.String.IsValidString"
+        "name": "Ops.String.FilterValidString"
     }
 }

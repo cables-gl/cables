@@ -50,11 +50,16 @@
             },
             {
                 "type": "0",
+                "name": "delta X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "browser event delta",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Devices.MouseWheel2"
+        "name": "Ops.Devices.Mouse.MouseWheel_v2"
     },
     "summary": "outputs delta values controlled by the mousewheel (scroll, zoom)",
     "issues": "",

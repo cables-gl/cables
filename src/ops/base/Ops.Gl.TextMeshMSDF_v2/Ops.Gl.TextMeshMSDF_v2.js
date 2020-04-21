@@ -209,11 +209,11 @@ function buildTransMats()
 {
     needsUpdateTransmats=false;
 
-    if(!( inPosArr.get() || inScaleArr.get() || inRotArr.get()))
-    {
-        transMats=null;
-        return;
-    }
+    // if(!( inPosArr.get() || inScaleArr.get() || inRotArr.get()))
+    // {
+    //     transMats=null;
+    //     return;
+    // }
 
     var transformations=[];
     const translates=inPosArr.get()||outArr.get();

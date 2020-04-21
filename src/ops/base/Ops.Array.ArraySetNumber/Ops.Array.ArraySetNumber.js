@@ -21,18 +21,13 @@ function()
 
     console.log({arr});
     if(!arr)return;
-
-
     if(newArr.length!=arr.length)newArr.length=arr.length;
-
-    // for(var i=0;i<arr.length;i++) newArr[i]=arr[i];
 
     const idx=Math.floor(inIndex.get());
 
     if(idx>=0)
     {
         newArr[idx]=inValue.get();
-
     }
 
     inArray.onChange=null;

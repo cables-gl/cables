@@ -3,8 +3,8 @@ const
     inStr=op.inString("String",""),
     checkNull=op.inBool("Invalid if null",true),
     checkUndefined=op.inBool("Invalid if undefined",true),
-    checkEmpty=op.inBool("Invalid if empty",false),
-    checkZero=op.inBool("Invalid if 0",false),
+    checkEmpty=op.inBool("Invalid if empty",true),
+    checkZero=op.inBool("Invalid if 0",true),
     outStr=op.outString("Last Valid String"),
     result=op.outBool("Is Valid");
 
