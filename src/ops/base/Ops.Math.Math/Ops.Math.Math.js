@@ -12,26 +12,17 @@ function onFilterChange()
 {
     var mathSelectValue = mathDropDown.get();
 
-    if(mathSelectValue === '+')         mathFunc = function(a,b){return a+b};
-    else if(mathSelectValue === '-')    mathFunc = function(a,b){return a-b};
-    else if(mathSelectValue === '*')    mathFunc = function(a,b){return a*b};
-    else if(mathSelectValue === '/')    mathFunc = function(a,b){return a/b};
-    else if(mathSelectValue === '%')    mathFunc = function(a,b){return a%b};
-    else if(mathSelectValue === 'min')  mathFunc = function(a,b){return Math.min(a,b)};
-    else if(mathSelectValue === 'max')  mathFunc = function(a,b){return Math.max(a,b)};
+    if(mathSelectValue == '+')         mathFunc = function(a,b){return a+b};
+    else if(mathSelectValue == '-')    mathFunc = function(a,b){return a-b};
+    else if(mathSelectValue == '*')    mathFunc = function(a,b){return a*b};
+    else if(mathSelectValue == '/')    mathFunc = function(a,b){return a/b};
+    else if(mathSelectValue == '%')    mathFunc = function(a,b){return a%b};
+    else if(mathSelectValue == 'min')  mathFunc = function(a,b){return Math.min(a,b)};
+    else if(mathSelectValue == 'max')  mathFunc = function(a,b){return Math.max(a,b)};
 
     update();
     op.setUiAttrib({"extendTitle":mathSelectValue});
 }
-
-
-mathDropDown.onChange=function()
-{
-    var mode = mathDropDown.get();
-    op.setUiAttrib({"extendTitle":mode});
-    update();
-};
-
 
 function update()
 {
