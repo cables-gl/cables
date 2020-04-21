@@ -121,7 +121,7 @@ Mesh.prototype._bufferArray=function(array,attr)
             {
                 console.log("_bufferArray create new float32array",array.length,attr.name);
             }
-        
+
             profileData.profileNonTypedAttrib++;
             profileData.profileNonTypedAttribNames = this._geom.name + " " + name;
         }
@@ -331,7 +331,7 @@ Mesh.prototype.setGeom = function (geom)
     this.updateTexCoords(this._geom);
     this.updateNormals(this._geom);
 
-    
+
 
     if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
     if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
@@ -365,17 +365,15 @@ Mesh.prototype._checkAttrLengths = function ()
 
     for (var i = 0; i < this._attributes.length; i++)
     {
-        if(this._attributes[0].floatArray.length/this._attributes[0].itemSize != 
-                this._attributes[i].floatArray.length/this._attributes[i].itemSize)
+        if(this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length/this._attributes[i].itemSize)
         {
-            console.warn(
-                this._geom.name+": "+this._attributes[i].name+
-                " wrong attr length. is:",this._attributes[i].floatArray.length/this._attributes[i].itemSize,
-                " should be:",this._attributes[0].floatArray.length/this._attributes[0].itemSize,
-                );
+            // console.warn(
+            //     this._geom.name+": "+this._attributes[i].name+
+            //     " wrong attr length. is:",this._attributes[i].floatArray.length/this._attributes[i].itemSize,
+            //     " should be:",this._attributes[0].floatArray.length/this._attributes[0].itemSize,
+            //     );
         }
     }
-
 }
 
 Mesh.prototype._bind = function (shader)
