@@ -2,7 +2,9 @@ const
     inTrigger=op.inTriggerButton("Execute"),
     inArray=op.inArray("Array"),
     inIndex=op.inInt("Index",0),
-    inValue=op.inFloat("Number",1),
+    inValueX=op.inFloat("X",1),
+    inValueY=op.inFloat("Y",1),
+    inValueZ=op.inFloat("Z",1),
     inReset=op.inTriggerButton("Reset"),
     outArray=op.outArray("Result");
 
@@ -27,7 +29,9 @@ function()
 
     if(idx>=0)
     {
-        newArr[idx]=inValue.get();
+        newArr[idx*3+0]=inValueX.get();
+        newArr[idx*3+1]=inValueY.get();
+        newArr[idx*3+2]=inValueZ.get();
     }
 
     inArray.onChange=null;

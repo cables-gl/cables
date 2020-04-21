@@ -50,6 +50,11 @@
             },
             {
                 "type": "0",
+                "name": "delta X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "browser event delta",
                 "subType": "number"
             }

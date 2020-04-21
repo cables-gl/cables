@@ -1,11 +1,13 @@
-const speed=op.inValue("Speed",1);
-const preventScroll=op.inValueBool("prevent scroll",true);
-const flip=op.inValueBool("Flip Direction");
-const area=op.inSwitch("Area",['Canvas','Document'],'Canvas');
-const active=op.inValueBool("active",true);
+const
+    speed=op.inValue("Speed",1),
+    preventScroll=op.inValueBool("prevent scroll",true),
+    flip=op.inValueBool("Flip Direction"),
+    area=op.inSwitch("Area",['Canvas','Document'],'Canvas'),
+    active=op.inValueBool("active",true),
 
-const delta=op.outValue("delta",0);
-const deltaOrig=op.outValue("browser event delta",0);
+    delta=op.outValue("delta",0),
+    deltaX=op.outValue("delta X",0),
+    deltaOrig=op.outValue("browser event delta",0);
 
 const cgl=op.patch.cgl;
 var value=0;
@@ -46,93 +48,59 @@ flip.onChange=function()
         else dir=1;
 };
 
-function normalizeWheel(/*object*/ event) /*object*/ {
-  var sX = 0, sY = 0;       // spinX, spinY
-    //   pX = 0, pY = 0;       // pixelX, pixelY
 
-  // Legacy
-  if ('detail'      in event) { sY = event.detail; }
+function normalizeWheel(event)
+{
+    var sY = 0;
 
-  if ('deltaY' in event) {
+    if ('detail' in event) { sY = event.detail; }
 
-      sY=event.deltaY;
-      if(event.deltaY>20)sY = 20;
-      else if(event.deltaY<-20)sY = -20;
-
-  }
-
-//   if ('wheelDelta'  in event) { sY = -event.wheelDelta / 120; }
-//   if ('wheelDeltaY' in event) { sY = -event.wheelDeltaY / 120; }
-//   if ('wheelDeltaX' in event) { sX = -event.wheelDeltaX / 120; }
-
-  // side scrolling on FF with DOMMouseScroll
-//   if ( 'axis' in event && event.axis === event.HORIZONTAL_AXIS ) {
-//     sX = sY;
-//     sY = 0;
-//   }
-
-//   pX = sX * PIXEL_STEP;
-//   pY = sY * PIXEL_STEP;
-
-//   if ('deltaY' in event) { pY = event.deltaY; }
-//   if ('deltaX' in event) { pX = event.deltaX; }
-
-//   if ((pX || pY) && event.deltaMode) {
-//     if (event.deltaMode == 1) {          // delta in LINE units
-//       pX *= LINE_HEIGHT;
-//     //   pY *= LINE_HEIGHT;
-//     } else {                             // delta in PAGE units
-//       pX *= PAGE_HEIGHT;
-//     //   pY *= PAGE_HEIGHT;
-//     }
-//   }
-
-  // Fall-back if spin cannot be determined
-//   if (pX && !sX) { sX = (pX < 1) ? -1 : 1; }
-//   if (pY && !sY) { sY = (pY < 1) ? -1 : 1; }
-
-    // console.log(sY);
+    if ('deltaY' in event) {
+        sY=event.deltaY;
+        if(event.deltaY>20)sY = 20;
+        else if(event.deltaY<-20)sY = -20;
+    }
     return sY;
-//   { spinX  : sX,
-//           spinY  : sY,
-//           pixelX : pX,
-//           pixelY : pY };
+}
+
+function normalizeWheelX(event)
+{
+    var sX = 0;
+
+    if ('deltaX' in event) {
+        sX=event.deltaX;
+        if(event.deltaX>20)sX = 20;
+        else if(event.deltaX<-20)sX = -20;
+    }
+    return sX;
 }
 
 var lastEvent=0;
 
 function onMouseWheel(e)
 {
-
     if(Date.now()-lastEvent<10)return;
     lastEvent=Date.now();
 
-    // var d= CGL.getWheelSpeed(e)*(dir)*speed.get();
-
-    // var d = ;
-
     deltaOrig.set(e.wheelDelta || e.deltaY);
 
+    if(e.deltaY)
+    {
+        var d=normalizeWheel(e);
+        d*=0.01*speed.get();
 
-    // d*=0.2;
+        delta.set(0);
+        delta.set(d);
+    }
 
-    // if(isWindows && isChrome) d*=0.5;
-    // if(isLinux && isFirefox) d*=0.5;
-    // if(isWindows  && isFirefox) d*=0.5;
-    // if(isMac && isFirefox) d*=0.5;
+    if(e.deltaX)
+    {
+        var dX=normalizeWheelX(e);
+        dX*=0.01*speed.get();
 
-    var d=normalizeWheel(e);
-
-    // console.log('n',d);
-
-    d*=0.01*speed.get();
-
-    delta.set(0);
-    delta.set(d);
-
-    // if(d>3)d=3;
-    // if(d<-3)d=-3;
-
+        deltaX.set(0);
+        deltaX.set(dX);
+    }
 
     if(preventScroll.get()) e.preventDefault();
 }
