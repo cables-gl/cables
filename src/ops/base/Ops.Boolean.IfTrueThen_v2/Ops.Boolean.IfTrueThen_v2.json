@@ -1,0 +1,44 @@
+{
+    "authorName": "pandur",
+    "id": "9549e2ed-a544-4d33-a672-05c7854ccf5d",
+    "created": 1587451965997,
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Iftruethen2 renamed to Ops.Boolean.IfTrueThen_v2",
+            "author": "pandur",
+            "date": 1587452042688
+        }
+    ],
+    "summary": "Switch, trigger one or the other trigger port based on the input value",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "0",
+                "name": "boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "then"
+            },
+            {
+                "type": "1",
+                "name": "else"
+            }
+        ],
+        "name": "Ops.Boolean.IfTrueThen_v2"
+    }
+}
