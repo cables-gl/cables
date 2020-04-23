@@ -99,7 +99,7 @@
                 "name": "shader"
             }
         ],
-        "name": "Ops.User.pandur.PointMat2"
+        "name": "Ops.Gl.Shader.PointMaterial_v2"
     },
     "changelog": [
         {

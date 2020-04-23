@@ -57,7 +57,7 @@ void main()
 
     #ifdef HAS_TEXTURE_COLORIZE
         #ifdef RANDOM_COLORIZE
-            colorize=texture(texColorize,vec2(rand(texCoord.x*texCoord.y),rand(texCoord.y+texCoord.x)));
+            colorize=texture(texColorize,vec2(rand(attrVertIndex+texCoord.x*texCoord.y+texCoord.y+texCoord.x),rand(texCoord.y*texCoord.x-texCoord.x-texCoord.y-attrVertIndex)));
         #endif
         #ifndef RANDOM_COLORIZE
             colorize=texture(texColorize,texCoord);
@@ -71,7 +71,7 @@ void main()
 
     vec4 model=mMatrix * pos;
 
-    psMul+=rand(texCoord.x*texCoord.y)*randomSize;
+    psMul+=rand(texCoord.x*texCoord.y+texCoord.y*3.0+texCoord.x*2.0+attrVertIndex)*randomSize;
     psMul*=sizeMultiply;
 
     #ifndef SCALE_BY_DISTANCE
