@@ -16,6 +16,8 @@ const
     textureMask=op.inTexture("Texture Mask"),
     textureColorize=op.inTexture("Texture Colorize"),
     colorizeRandom=op.inValueBool("Colorize Randomize",true),
+    flipTex=op.inValueBool("Flip Texture",false),
+
     trigger=op.outTrigger('trigger'),
     shaderOut=op.outObject("shader");
 
@@ -50,6 +52,7 @@ doScale.onChange=
     textureColorize.onChange=
     textureMask.onChange=
     colorizeRandom.onChange=
+    flipTex.onChange=
     textureColorize.onChange=
     vertCols.onChange=updateDefines;
 
@@ -92,5 +95,7 @@ function updateDefines()
     shader.toggleDefine('HAS_TEXTURE_DIFFUSE',texture.get());
     shader.toggleDefine('HAS_TEXTURE_MASK',textureMask.get());
     shader.toggleDefine('HAS_TEXTURE_COLORIZE',textureColorize.get());
+    shader.toggleDefine('FLIP_TEX',flipTex.get());
+
 }
 
