@@ -90,7 +90,7 @@ function addElement()
 
 function removeEle()
 {
-    if(element) element.parentNode.removeChild(element);
+    if(element && element.parentNode) element.parentNode.removeChild(element);
     element=null;
     outEle.set(null);
 }

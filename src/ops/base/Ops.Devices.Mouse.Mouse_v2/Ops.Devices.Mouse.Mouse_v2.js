@@ -5,6 +5,7 @@ const
     flipY=op.inValueBool("flip y",true),
     area=op.inValueSelect("Area",['Canvas','Document','Parent Element'],"Canvas"),
     rightClickPrevDef=op.inBool("right click prevent default",true),
+    touchscreen=op.inValueBool("Touch support",true),
     smooth=op.inValueBool("smooth"),
     smoothSpeed=op.inValueFloat("smoothSpeed",20),
     multiply=op.inValueFloat("multiply",1),
@@ -17,7 +18,7 @@ const
     mouseOver=op.outValueBool("mouseOver"),
     outButton=op.outValue("button");
 
-op.setPortGroup('Behavior',[relative,normalize,flipY,area,rightClickPrevDef]);
+op.setPortGroup('Behavior',[relative,normalize,flipY,area,rightClickPrevDef,touchscreen]);
 op.setPortGroup('Smoothing',[smooth,smoothSpeed,multiply]);
 
 var smoothTimer=0;
@@ -220,6 +221,12 @@ function ontouchend(event)
     onMouseUp();
 }
 
+touchscreen.onChange=function()
+{
+    removeListeners();
+    addListeners();
+}
+
 function removeListeners()
 {
     listenerElement.removeEventListener('touchend', ontouchend);
@@ -243,8 +250,11 @@ function addListeners()
     if(area.get()=='Document') listenerElement=document.body;
     if(area.get()=='Parent Element') listenerElement=cgl.canvas.parentElement;
 
-    listenerElement.addEventListener('touchend', ontouchend);
-    listenerElement.addEventListener('touchstart', ontouchstart);
+    if(touchscreen.get())
+    {
+        listenerElement.addEventListener('touchend', ontouchend);
+        listenerElement.addEventListener('touchstart', ontouchstart);
+    }
 
     listenerElement.addEventListener('click', onmouseclick);
     listenerElement.addEventListener('mousemove', onmousemove);

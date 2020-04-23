@@ -47,6 +47,12 @@
             },
             {
                 "type": "0",
+                "name": "Touch support",
+                "group": "Behavior",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "smooth",
                 "group": "Smoothing",
                 "subType": "boolean"

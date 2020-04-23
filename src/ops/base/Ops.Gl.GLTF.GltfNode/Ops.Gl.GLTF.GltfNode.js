@@ -40,11 +40,9 @@ inExec.onTriggered=function()
             {
                 node=cgl.frameStore.currentScene.nodes[i];
                 outFound.set(true);
-                console.log(node);
 
                 if(node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
                 else outGeom.set(null);
-                // console.log(node);
             }
         }
     }
