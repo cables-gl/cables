@@ -1,0 +1,111 @@
+{
+    "authorName": "pandur",
+    "id": "e545a244-1593-4fa9-a56b-de2487bccae9",
+    "created": 1587622250983,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "PointSize",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Random Size",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Round",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale by Distance",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "a",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "preMultiplied alpha",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Vertex Colors",
+                "group": "Color",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "texture",
+                "group": "Texture"
+            },
+            {
+                "type": "2",
+                "name": "Texture Mask",
+                "group": "Texture"
+            },
+            {
+                "type": "2",
+                "name": "Texture Colorize",
+                "group": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Randomize",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "shader"
+            }
+        ],
+        "name": "Ops.User.pandur.PointMat2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.PointMat2 renamed to Ops.Gl.Shader.PointMaterial_v2",
+            "author": "pandur",
+            "date": 1587624445853
+        }
+    ]
+}
