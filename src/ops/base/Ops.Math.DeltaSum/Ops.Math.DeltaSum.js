@@ -16,7 +16,15 @@ updateLimit();
 
 function resetValue()
 {
-    value=defVal.get();
+    var v=defVal.get();
+
+    if(inLimit.get())
+    {
+        v=Math.max(inMin.get(),v);
+        v=Math.min(inMax.get(),v);
+    }
+
+    value=v;
     outVal.set(value);
 
 }
