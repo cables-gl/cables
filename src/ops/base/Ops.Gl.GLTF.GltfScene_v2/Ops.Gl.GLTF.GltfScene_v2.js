@@ -122,7 +122,7 @@ inExec.onTriggered=function()
 
     cgl.pushModelMatrix();
 
-    outAnimTime.set(time);
+    outAnimTime.set(time||0);
 
     if(gltf && gltf.bounds)
     {
@@ -130,6 +130,7 @@ inExec.onTriggered=function()
         {
             const sc=inRescaleSize.get()/gltf.bounds.maxAxis;
             vec3.set(scale,sc,sc,sc);
+            // console.log(sc,sc,sc);
             mat4.scale(cgl.mMatrix,cgl.mMatrix,scale);
         }
         if(doCenter)
@@ -218,12 +219,8 @@ op.onFileChanged=function(fn)
 
 function reloadSoon(nocache)
 {
-
     clearTimeout(timedLoader);
-    timedLoader=setTimeout(function()
-    {
-        loadBin(nocache);
-    },30);
+    timedLoader=setTimeout(function(){ loadBin(nocache); },30);
 }
 
 
@@ -291,7 +288,6 @@ function saveData()
 {
     dataPort.set(JSON.stringify(data));
 }
-
 
 op.exposeNode=function(name)
 {

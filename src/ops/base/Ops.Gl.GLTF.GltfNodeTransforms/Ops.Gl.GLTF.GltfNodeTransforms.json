@@ -1,0 +1,48 @@
+{
+    "id": "1b02c7f5-656b-47d1-98eb-a02fbca94990",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587737466134
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransforms renamed to Ops.Gl.GLTF.GltfNodeTransforms",
+            "author": "pandur",
+            "date": 1587794804783
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1587737722544,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "Search"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Positions"
+            },
+            {
+                "type": "3",
+                "name": "Scale"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfNodeTransforms"
+    },
+    "summary": "output all transformations of nodes starting with [search]",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
