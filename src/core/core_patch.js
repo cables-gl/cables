@@ -52,6 +52,7 @@ const Patch = function (cfg)
     this.loading = new LoadingStatus(this);
     this._crashedOps = [];
     this._renderOneFrame=false;
+    this._animReq=null;
 
     this._perf = {
         fps: 0,
@@ -161,6 +162,7 @@ Patch.prototype.isRenderingOneFrame = function ()
 
 Patch.prototype.renderOneFrame = function ()
 {
+
     this._paused = true;
     this._renderOneFrame = true;
     this.exec();
@@ -199,6 +201,8 @@ Patch.prototype.isEditorMode = function ()
  */
 Patch.prototype.pause = function ()
 {
+    cancelAnimationFrame(this._animReq);
+    this._animReq=null;
     this._paused = true;
     this.freeTimer.pause();
 };
@@ -213,6 +217,8 @@ Patch.prototype.resume = function ()
 {
     if (this._paused)
     {
+        cancelAnimationFrame(this._animReq);
+
         this._paused = false;
         this.freeTimer.play();
         this.exec();
@@ -632,7 +638,7 @@ Patch.prototype.exec = function (e)
     this._perf._lastFrameTime = CABLES.now();
     this._perf._fpsFrameCount++;
 
-    if (this.config.doRequestAnimation) requestAnimationFrame(this.exec.bind(this));
+    if (this.config.doRequestAnimation) this._animReq=requestAnimationFrame(this.exec.bind(this));
 };
 
 /**
