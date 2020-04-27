@@ -1,0 +1,72 @@
+{
+    "id": "bc969951-32b5-4226-9944-80a719a65497",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1587983950443
+        }
+    ],
+    "authorName": "cables",
+    "created": 1587986662115,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "Object in"
+            },
+            {
+                "type": "2",
+                "name": "default object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Index 0 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 1 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 2 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 3 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 4 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 5 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 6 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 7 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 8 Object"
+            },
+            {
+                "type": "2",
+                "name": "Index 9 Object"
+            }
+        ],
+        "name": "Ops.Json.RouteObject"
+    }
+}

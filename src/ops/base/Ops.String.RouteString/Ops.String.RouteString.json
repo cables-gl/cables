@@ -1,0 +1,72 @@
+{
+    "id": "9998ff83-335b-40cd-aa0e-4cae558cb551",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1587983335384
+        }
+    ],
+    "authorName": "cables",
+    "created": 1587983344507,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "string in"
+            },
+            {
+                "type": "5",
+                "name": "default string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Index 0 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 1 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 2 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 3 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 4 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 5 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 6 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 7 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 8 string"
+            },
+            {
+                "type": "5",
+                "name": "Index 9 string"
+            }
+        ],
+        "name": "Ops.String.RouteString"
+    }
+}
