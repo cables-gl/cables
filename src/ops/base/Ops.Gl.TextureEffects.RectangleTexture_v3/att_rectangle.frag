@@ -37,6 +37,7 @@ mat2 rot(float angle)
 
 void main()
 {
+    vec2 centerOffset = vec2(0.);
     vec4 base=texture(tex,texCoord);
     vec4 col;
     vec2 p=texCoord;
@@ -45,7 +46,11 @@ void main()
     p.y*=aspect;
     float d=1.0;
 
-    vec2 pp=vec2(p.x-x,p.y-y);
+    #ifdef CENTER
+         centerOffset = vec2(width/2.,height/2.);
+    #endif
+
+    vec2 pp=vec2(p.x-x+centerOffset.x,p.y-y+centerOffset.y);
     pp-=vec2(width/2.0,height/2.0);
     pp=pp*rot(rotate*DEG2RAD/45.0);
 

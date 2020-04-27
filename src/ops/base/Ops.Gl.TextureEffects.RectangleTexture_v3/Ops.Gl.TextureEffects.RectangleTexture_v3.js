@@ -1,6 +1,7 @@
 const render=op.inTrigger('render'),
     blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
     amount=op.inValueSlider("Amount",1),
+    inCenterMode=op.inBool("Center",false),
     inWidth=op.inValueSlider("Width",0.25),
     inHeight=op.inValueSlider("Height",0.25),
     inAspect=op.inBool("Aspect Ratio",false),
@@ -48,6 +49,10 @@ var uniformAspect=new CGL.Uniform(shader,'f','aspect',1);
 CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
 var uniformAmount=new CGL.Uniform(shader,'f','amount',amount);
 
+inCenterMode.onChange=function()
+{
+    shader.toggleDefine('CENTER',inCenterMode.get());
+}
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
