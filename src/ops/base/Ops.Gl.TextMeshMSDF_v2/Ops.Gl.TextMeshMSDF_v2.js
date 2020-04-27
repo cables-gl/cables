@@ -416,6 +416,8 @@ function generateMesh()
             const chStr=txt.substring(i,i+1);
             const char=getChar(chStr);
 
+            if(!char) continue;
+
             pages.push(char.page||0);
             sizes.push(char.width,char.height);
 
@@ -426,10 +428,10 @@ function generateMesh()
             const charOffsetY=(char.yoffset/fontData.common.scaleH);
             const charOffsetX=char.xoffset/fontData.common.scaleW;
 
-            tcSizes.push(charWidth,charHeight);
+            if(chStr==" ") tcSizes.push(0,0);
+            else tcSizes.push(charWidth,charHeight);
 
             mat4.identity(m);
-
 
             var adv=(char.xadvance/2)*mulSize;
             pos+=adv;
@@ -439,7 +441,6 @@ function generateMesh()
 
             minX=Math.min(x-charWidth,minX);
             maxX=Math.max(x+charWidth,maxX);
-
             minY=Math.min(y-charHeight-avgHeight/2,minY);
             maxY=Math.max(y+charHeight+avgHeight/2,maxY);
 
