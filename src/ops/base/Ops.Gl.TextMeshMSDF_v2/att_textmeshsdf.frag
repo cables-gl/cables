@@ -1,5 +1,8 @@
 
-UNI sampler2D tex;
+UNI sampler2D tex0;
+UNI sampler2D tex1;
+UNI sampler2D tex2;
+UNI sampler2D tex3;
 IN vec2 texCoord;
 UNI vec4 color;
 UNI vec2 texSize;
@@ -10,6 +13,8 @@ UNI sampler2D texMulColor;
 #ifdef TEXTURE_MASK
 UNI sampler2D texMulMask;
 #endif
+
+flat IN int texIndex;
 
 
 #ifdef SHADOW
@@ -45,18 +50,31 @@ void main()
 
     #ifdef SHADOW
         vec2 msdfUnit1 = texSize;
-        vec3 smpl1 = texture(tex, vec2(texCoord.x-0.002,texCoord.y-0.002)).rgb;
+        vec2 tcv=vec2(texCoord.x-0.002,texCoord.y-0.002);
+        vec3 smpl1;
+        if(texIndex==0) smpl1 = texture(tex0, tcv).rgb;;
+        if(texIndex==1) smpl1 = texture(tex1, tcv).rgb;;
+        if(texIndex==2) smpl1 = texture(tex2, tcv).rgb;;
+        if(texIndex==3) smpl1 = texture(tex3, tcv).rgb;;
+
         float sigDist1 = median(smpl1.r, smpl1.g, smpl1.b) - 0.001;
         float opacity1 = smoothstep(0.0,0.9,sigDist1*sigDist1);
         outColor = mix(bgColor, vec4(0.0,0.0,0.0,1.0), opacity1);
     #endif
 
     vec2 msdfUnit = pxRange/texSize*1.5;
-    vec3 smpl = texture(tex, texCoord).rgb;
+
+
+    vec3 smpl;
+
+    if(texIndex==0) smpl = texture(tex0, texCoord).rgb;;
+    if(texIndex==1) smpl = texture(tex1, texCoord).rgb;;
+    if(texIndex==2) smpl = texture(tex2, texCoord).rgb;;
+    if(texIndex==3) smpl = texture(tex3, texCoord).rgb;;
+
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));
     opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
-
 
     outColor = mix(outColor, fgColor, opacity*color.a);
 }

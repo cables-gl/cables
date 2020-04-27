@@ -495,7 +495,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         cgl.patch.loading.finished(loadingId);
         if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
-        if (finishedCallback) finishedCallback();
+        if (finishedCallback) finishedCallback(null,texture);
     };
     texture.image.src = url;
 

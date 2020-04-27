@@ -1,6 +1,9 @@
 const
     urlData = op.inUrl("Font Data"),
     urlTex = op.inUrl("Font Image"),
+    urlTex1 = op.inUrl("Font Image 1"),
+    urlTex2 = op.inUrl("Font Image 2"),
+    urlTex3 = op.inUrl("Font Image 3"),
     outLoaded=op.outBool("Loaded"),
     outNumChars=op.outNumber("Total Chars"),
     outChars=op.outString("Chars"),
@@ -10,12 +13,14 @@ var
     loadedData=false,
     loadedTex=false,
     loadingId=0,
-    loadingIdTex=0,
-    tex;
+    loadingIdTex=0;
 
 
 urlData.onChange=
-    urlTex.onChange=load;
+    urlTex.onChange=
+    urlTex1.onChange=
+    urlTex2.onChange=
+    urlTex3.onChange=load;
 
 const textures=[];
 
@@ -86,10 +91,7 @@ function load()
                     "data":data
                 });
 
-            // op.patch.setVarValue(varNameData,data);
-            // op.patch.setVarValue(varNameData,{});
-
-op.patch.loading.finished(loadingId);
+            op.patch.loading.finished(loadingId);
             loadedData=true;
             updateLoaded();
         }
@@ -105,32 +107,45 @@ op.patch.loading.finished(loadingId);
 
 
     // load font texture
-    loadingIdTex=cgl.patch.loading.start('textureOp',urlTex.get());
 
-    var urlTexstr=op.patch.getFilePath(String(urlTex.get()));
+    for(var i=0;i<4;i++)
+    {
+        const num=i;
 
-    tex=CGL.Texture.load(cgl,urlTexstr,
-        function(err)
-        {
-            if(err)
+        var texPort=urlTex;
+        if(i==1)texPort=urlTex1;
+        if(i==2)texPort=urlTex2;
+        if(i==3)texPort=urlTex3;
+
+        if(!texPort.get())continue;
+
+        loadingIdTex=cgl.patch.loading.start('textureOp',texPort.get());
+        const urlTexstr=op.patch.getFilePath(String(texPort.get()));
+
+        CGL.Texture.load(cgl,urlTexstr,
+            function(err,tex)
             {
-                op.setUiError('texurlerror','could not load texture');
+                if(err)
+                {
+                    op.setUiError('texurlerror','could not load texture');
+                    cgl.patch.loading.finished(loadingIdTex);
+                    loadedTex=false;
+                    return;
+                }
+console.log("loaded...",tex);
+                textures[num]=tex;
+                op.patch.setVarValue(varNameTex,null);
+                op.patch.setVarValue(varNameTex,textures);
+
+                loadedTex=true;
                 cgl.patch.loading.finished(loadingIdTex);
-                loadedTex=false;
-                return;
-            }
+                updateLoaded();
+            },{
+                filter:CGL.Texture.FILTER_LINEAR,
+                flip:false
+            });
+    }
 
-            textures[0]=tex;
-            op.patch.setVarValue(varNameTex,null);
-            op.patch.setVarValue(varNameTex,textures);
-
-            loadedTex=true;
-            cgl.patch.loading.finished(loadingIdTex);
-            updateLoaded();
-        },{
-            filter:CGL.Texture.FILTER_LINEAR,
-            flip:false
-        });
 
 
 }
