@@ -1,11 +1,11 @@
 const
     NUM_PORTS = 10,
     indexPort = op.inInt('Index'),
-    valuePort = op.inString('String in',"cables"),
-    defaultStringPort = op.inString('Default string', ""),
+    valuePort = op.inBool('Boolean in',true),
+    defaultBoolPort = op.inBool('Default boolean', false),
     valuePorts = createOutPorts();
 
-indexPort.onChange = valuePort.onChange = defaultStringPort.onChange = update;
+indexPort.onChange = valuePort.onChange = defaultBoolPort.onChange = update;
 
 setDefaultValues();
 update();
@@ -15,7 +15,7 @@ function createOutPorts()
     var arr = [];
     for(var i=0; i<NUM_PORTS; i++)
     {
-        var port = op.outString('Index ' + i + ' string');
+        var port = op.outBool('Index ' + i + ' boolean');
         arr.push(port);
     }
     return arr;
@@ -23,11 +23,8 @@ function createOutPorts()
 
 function setDefaultValues()
 {
-    var defaultValue = defaultStringPort.get();
-    if(!defaultStringPort.get())
-    {
-        defaultValue = "";
-    }
+
+    var defaultValue = defaultBoolPort.get();
     valuePorts.forEach(port => port.set(defaultValue));
 };
 

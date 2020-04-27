@@ -1,0 +1,84 @@
+{
+    "id": "88b3f5ec-0e45-4651-89ca-33173d001ab6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1587993780448
+        }
+    ],
+    "authorName": "cables",
+    "created": 1587993796311,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Boolean in",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Default boolean",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Index 0 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 1 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 2 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 3 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 4 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 5 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 6 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 7 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 8 boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Index 9 boolean",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Boolean.RouteBoolean"
+    }
+}

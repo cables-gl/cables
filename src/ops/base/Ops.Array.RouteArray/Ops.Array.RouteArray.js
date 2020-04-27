@@ -7,9 +7,7 @@ const
     defaultArrayPort = op.inArray('default array', DEFAULT_ARRAY_DEFAULT),
     arrayPorts = createOutPorts(DEFAULT_ARRAY_DEFAULT);
 
-// change listeners
 indexPort.onChange = arrayPort.onChange = defaultArrayPort.onChange = update;
-//defaultArrayPort.onChange = setDefaultValues;
 
 setDefaultValues();
 update();

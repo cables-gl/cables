@@ -7,9 +7,7 @@ const
     defaultObjectPort = op.inObject('default object', DEFAULT_OBJECT),
     objectPorts = createOutPorts(DEFAULT_OBJECT);
 
-// change listeners
 indexPort.onChange = objectPort.onChange = defaultObjectPort.onChange = update;
-//defaultobjectPort.onChange = setDefaultValues;
 
 setDefaultValues();
 update();

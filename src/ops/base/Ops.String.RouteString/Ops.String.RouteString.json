@@ -13,16 +13,16 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "index",
+                "name": "Index",
                 "subType": "integer"
             },
             {
                 "type": "5",
-                "name": "string in"
+                "name": "String in"
             },
             {
                 "type": "5",
-                "name": "default string"
+                "name": "Default string"
             }
         ],
         "portsOut": [
