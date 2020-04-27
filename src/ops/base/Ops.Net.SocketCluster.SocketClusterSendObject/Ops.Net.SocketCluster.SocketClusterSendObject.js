@@ -14,4 +14,3 @@ const send = () =>
 };
 
 inTrigger.onTriggered = send;
-inData.onChange = send;

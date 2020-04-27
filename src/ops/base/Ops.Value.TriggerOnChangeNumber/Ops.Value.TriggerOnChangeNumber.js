@@ -1,8 +1,9 @@
-const
-    inval=op.inValue("Value"),
-    next=op.outTrigger("Next");
+const inval = op.inValue("Value");
+const next = op.outTrigger("Next");
+const number = op.outValue("Number");
 
-inval.onChange=function()
+inval.onChange = function ()
 {
+    number.set(inval.get());
     next.trigger();
 };

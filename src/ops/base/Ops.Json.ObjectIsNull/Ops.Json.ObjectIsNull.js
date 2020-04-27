@@ -1,13 +1,7 @@
+const inObj = op.inObject("Object");
+const outResult = op.outValueBool("Result");
 
-const inObj=op.inObject("Object");
-const outResult=op.outValueBool("Result");
-
-
-inObj.onChange=function()
+inObj.onChange = function ()
 {
-if(!inObj.get())
-{
-    outResult.set(true);
-}
-        
+    outResult.set(!inObj.get());
 };
