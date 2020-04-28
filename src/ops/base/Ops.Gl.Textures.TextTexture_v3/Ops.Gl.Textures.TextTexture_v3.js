@@ -1,6 +1,6 @@
 const
-    text=op.inStringEditor("text",'cables'),
-    doRefresh=op.inTriggerButton("Refresh"),
+    render=op.inTriggerButton("Render"),
+    text=op.inString("text",'cables'),
     font=op.inString("font","Arial"),
     maximize=op.inValueBool("Maximize Size"),
     inFontSize=op.inValueFloat("fontSize",30),
@@ -11,26 +11,19 @@ const
     valign=op.inSwitch("vertical align",['top','center','bottom'],'center'),
     border=op.inValueFloat("border",0),
     cachetexture=op.inValueBool("Reuse Texture",true),
+
+    drawMesh=op.inValueBool("Draw Mesh",true),
+    meshScale=op.inValueFloat("Scale Mesh",1.0),
+    renderHard=op.inValueBool("Hard Edges",false),
+
     outRatio=op.outValue("Ratio"),
-    textureOut=op.outTexture("texture");
+    textureOut=op.outTexture("texture"),
+    outAspect=op.outNumber("Aspect",1);
 
 op.setPortGroup('Size',[font,maximize,inFontSize,lineDistance]);
 op.setPortGroup('Texture Size',[texWidth,texHeight]);
 op.setPortGroup('Alignment',[valign,align]);
-
-textureOut.ignoreValueSerialize=true;
-
-const cgl=op.patch.cgl;
-const body = document.getElementsByTagName("body")[0];
-
-doRefresh.onTriggered=refresh;
-
-var fontImage = document.createElement('canvas');
-fontImage.id = "texturetext_"+CABLES.generateUUID();
-fontImage.style.display = "none";
-body.appendChild(fontImage);
-
-const ctx = fontImage.getContext('2d');
+op.setPortGroup('Rendering',[drawMesh,renderHard,meshScale]);
 
 align.onChange=
     valign.onChange=
@@ -39,27 +32,87 @@ align.onChange=
     font.onChange=
     border.onChange=
     lineDistance.onChange=
-    maximize.onChange=refresh;
+    maximize.onChange=function(){needsRefresh=true;};
 
 texWidth.onChange=
     texHeight.onChange=reSize;
 
-refresh();
-reSize();
+render.onTriggered=doRender;
+
+
+textureOut.ignoreValueSerialize=true;
+
+const cgl=op.patch.cgl;
+const body = document.getElementsByTagName("body")[0];
+
+var tex=new CGL.Texture(cgl);
+var fontImage = document.createElement('canvas');
+fontImage.id = "texturetext_"+CABLES.generateUUID();
+fontImage.style.display = "none";
+body.appendChild(fontImage);
+
+const ctx = fontImage.getContext('2d');
+var needsRefresh=true;
+var mesh=CGL.MESHES.getSimpleRect(cgl,"texttexture rect");
+
+
+const shader=new CGL.Shader(cgl,'texttexture');
+shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
+shader.setSource(attachments.text_vert,attachments.text_frag);
+const texUni=new CGL.Uniform(shader,'t','tex',0);
+const aspectUni=new CGL.Uniform(shader,'f','aspect',0);
+var vScale=vec3.create();
+
+renderHard.onChange=function()
+{
+    shader.toggleDefine("HARD_EDGE",renderHard.get());
+};
+
+function doRender()
+{
+    if(needsRefresh)
+    {
+        reSize();
+        refresh();
+    }
+
+    if(drawMesh.get())
+    {
+        vScale[0]=vScale[1]=vScale[2]=meshScale.get();
+        cgl.pushBlendMode(CGL.BLEND_NORMAL,false);
+        cgl.pushModelMatrix();
+        mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
+
+        shader.popTextures();
+        shader.pushTexture(texUni,tex.tex);
+        aspectUni.set(outAspect.get());
+
+        cgl.pushShader(shader);
+        mesh.render(shader);
+
+        cgl.popShader();
+        cgl.popBlendMode();
+        cgl.popModelMatrix();
+    }
+}
 
 function reSize()
 {
-    textureOut.get().setSize(texWidth.get(),texHeight.get());
+    if(!tex)return;
+    tex.setSize(texWidth.get(),texHeight.get());
 
     ctx.canvas.width=fontImage.width=texWidth.get();
     ctx.canvas.height=fontImage.height=texHeight.get();
-    refresh();
+
+    outAspect.set(fontImage.width/fontImage.height);
+
+    needsRefresh=true;
 }
 
 maximize.onChange =  function ()
 {
-    inFontSize.setUiAttribs({greyout:maximize.get()});
-    refresh();
+    inFontSize.setUiAttribs({"greyout":maximize.get()});
+    needsRefresh=true;
 };
 
 function refresh()
@@ -91,6 +144,8 @@ function refresh()
     txt=(text.get()+'').replace(/<br>/g, '\n');
     var strings = txt.split("\n");
     var posy=0;
+
+    needsRefresh=false;
 
     if(maximize.get())
     {
@@ -135,9 +190,13 @@ function refresh()
     ctx.restore();
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
-    if(!cachetexture.get() || !textureOut.get()) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+    if(!cachetexture.get() || !tex) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
 
-    textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
-    textureOut.get().unpackAlpha=true;
+    tex.initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
+    tex.unpackAlpha=true;
+
+
+
+
 }
 

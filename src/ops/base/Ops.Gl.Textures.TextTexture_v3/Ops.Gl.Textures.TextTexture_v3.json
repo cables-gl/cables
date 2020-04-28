@@ -1,16 +1,23 @@
 {
+    "id": "970de71d-f29f-46ca-95a1-a2b53d6b4a7b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1588078521527
+        }
+    ],
     "authorName": "pandur",
-    "id": "9fb1baae-db06-481c-8220-6d87d02c4c9e",
-    "created": 1542744846969,
+    "created": 1588078525311,
     "layout": {
         "portsIn": [
             {
-                "type": "5",
-                "name": "text"
+                "type": "1",
+                "name": "Render"
             },
             {
-                "type": "1",
-                "name": "Refresh"
+                "type": "5",
+                "name": "text"
             },
             {
                 "type": "5",
@@ -66,6 +73,24 @@
                 "type": "0",
                 "name": "Reuse Texture",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw Mesh",
+                "group": "Rendering",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Scale Mesh",
+                "group": "Rendering",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Hard Edges",
+                "group": "Rendering",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -77,34 +102,13 @@
             {
                 "type": "2",
                 "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Aspect",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Gl.Textures.TextTexture_v2"
-    },
-    "summary": "Generates a texture which reads Text",
-    "youtubeid": "z1Qf9dE67-w",
-    "docs": {
-        "ports": []
-    },
-    "collections": [
-        "drawText"
-    ],
-    "relatedops": null,
-    "changelog": [
-        {
-            "message": "fixed - ui redraws slowing down op",
-            "author": "andro",
-            "date": 1559037337970
-        },
-        {
-            "message": "fixed - maximize checkbox causes infinite loop in editor",
-            "author": "pandur",
-            "date": 1564739363830
-        },
-        {
-            "message": "Ops.Gl.Textures.Text_v2 renamed to Ops.Gl.Textures.TextTexture_v2",
-            "author": "pandur",
-            "date": 1572942501966
-        }
-    ]
+        "name": "Ops.Gl.Textures.TextTexture_v3"
+    }
 }
