@@ -46,7 +46,6 @@ void main()
         opacity *= texture(texMulMask, vec2(0.0,0.0)).r; //todo texcoords from char positioning
     #endif
 
-    float pxRange=4.0;
 
     #ifdef SHADOW
         vec2 msdfUnit1 = texSize;
@@ -62,9 +61,7 @@ void main()
         outColor = mix(bgColor, vec4(0.0,0.0,0.0,1.0), opacity1);
     #endif
 
-    vec2 msdfUnit = pxRange/texSize*1.5;
-
-
+    vec2 msdfUnit = 8.0/texSize;
     vec3 smpl;
 
     if(texIndex==0) smpl = texture(tex0, texCoord).rgb;;
@@ -78,3 +75,14 @@ void main()
 
     outColor = mix(outColor, fgColor, opacity*color.a);
 }
+
+
+
+
+
+
+
+
+
+
+
