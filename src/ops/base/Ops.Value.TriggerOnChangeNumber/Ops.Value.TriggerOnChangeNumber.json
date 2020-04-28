@@ -14,9 +14,14 @@
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Number",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Value.TriggerOnChange"
+        "name": "Ops.Value.TriggerOnChangeNumber"
     },
     "summary": "triggers every time the input value changed",
     "docs": {
@@ -28,6 +33,10 @@
             {
                 "name": "Next",
                 "text": "trigger out when number in changes"
+            },
+            {
+                "name": "Number",
+                "text": "the input value"
             }
         ]
     },

@@ -17,7 +17,7 @@ function()
     const str=inStr.get();
     var r=true;
 
-
+    if(r===false)r=false;
     if(r && checkZero.get() && (str===0 || str==="0")) r=false;
     if(r && checkNull.get() && str===null) r=false;
     if(r && checkUndefined.get() && str===undefined) r=false;

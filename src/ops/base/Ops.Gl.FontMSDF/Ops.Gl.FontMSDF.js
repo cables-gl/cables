@@ -12,8 +12,7 @@ const
 var
     loadedData=false,
     loadedTex=false,
-    loadingId=0,
-    loadingIdTex=0;
+    loadingId=0;
 
 
 urlData.onChange=
@@ -119,7 +118,7 @@ function load()
 
         if(!texPort.get())continue;
 
-        loadingIdTex=cgl.patch.loading.start('textureOp',texPort.get());
+        const loadingIdTex=cgl.patch.loading.start('textureOp',texPort.get());
         const urlTexstr=op.patch.getFilePath(String(texPort.get()));
 
         CGL.Texture.load(cgl,urlTexstr,
@@ -132,7 +131,7 @@ function load()
                     loadedTex=false;
                     return;
                 }
-console.log("loaded...",tex);
+// console.log("loaded...",tex);
                 textures[num]=tex;
                 op.patch.setVarValue(varNameTex,null);
                 op.patch.setVarValue(varNameTex,textures);

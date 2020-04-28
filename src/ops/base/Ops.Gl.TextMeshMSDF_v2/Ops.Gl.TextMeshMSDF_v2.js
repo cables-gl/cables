@@ -273,9 +273,10 @@ render.onTriggered=function()
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.pushShader(shader);
 
-        cgl.setTexture(0,fontTexs[0].tex);
-        uniTexSize.setValue([fontTexs[0].width,fontTexs[0].height]);
+        if(fontTexs[0] )uniTexSize.setValue([fontTexs[0].width,fontTexs[0].height]);
 
+        if(fontTexs[0] )cgl.setTexture(0,fontTexs[0].tex);
+        else cgl.setTexture(0,CGL.Texture.getEmptyTexture(cgl).tex);
         if(fontTexs[1])cgl.setTexture(1,fontTexs[1].tex);
         else cgl.setTexture(1,CGL.Texture.getEmptyTexture(cgl).tex);
         if(fontTexs[2])cgl.setTexture(2,fontTexs[2].tex);
