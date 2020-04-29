@@ -72,6 +72,42 @@
             },
             {
                 "type": "0",
+                "name": "Border",
+                "group": "Border",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Border Width",
+                "group": "Border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smoothness",
+                "group": "Border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Border r",
+                "group": "Border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Border g",
+                "group": "Border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Border b",
+                "group": "Border",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Shadow",
                 "subType": "boolean"
             },

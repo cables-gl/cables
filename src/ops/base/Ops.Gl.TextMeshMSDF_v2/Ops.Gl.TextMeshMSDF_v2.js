@@ -21,6 +21,13 @@ const
     a = op.inValueSlider("a", 1),
     doSDF=op.inBool("SDF",true),
 
+    inBorder = op.inBool("Border", false),
+    inBorderWidth=op.inFloatSlider("Border Width",0.5),
+    inBorderSmooth=op.inFloatSlider("Smoothness",0.25),
+    br = op.inValueSlider("Border r", 1),
+    bg = op.inValueSlider("Border g", 1),
+    bb = op.inValueSlider("Border b", 1),
+
     inShadow = op.inBool("Shadow", false),
 
     inTexColor=op.inTexture("Texture Color"),
@@ -45,7 +52,9 @@ op.setPortGroup("Character Transformations",[inScaleArr,inRotArr,inPosArr]);
 
 op.setPortGroup('Alignment',[align,valign]);
 op.setPortGroup('Color',[r,g,b,a,doSDF]);
+op.setPortGroup('Border',[br,bg,bb,inBorderSmooth,inBorderWidth,inBorder]);
 r.setUiAttribs({ colorPick: true });
+br.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const fontDataVarPrefix="font_data_";
@@ -54,7 +63,7 @@ const alignVec=vec3.create();
 const vScale=vec3.create();
 const shader=new CGL.Shader(cgl,'TextMeshSDF');
 
-var fontTex=null;
+var fontTexs=null;
 var fontData=null;
 var fontChars=null;
 var needUpdate=true;
@@ -63,7 +72,7 @@ var mesh=null;
 var disabled=false;
 var valignMode=1;
 var heightAll=0,widthAll=0;
-var strings=[];
+
 var offY=0;
 var minY,maxY,minX,maxX;
 var needsUpdateTransmats=true;
@@ -79,11 +88,20 @@ if (cgl.glVersion == 1)
 shader.setSource(attachments.textmeshsdf_vert,attachments.textmeshsdf_frag);
 
 const
-    uniTex=new CGL.Uniform(shader,'t','tex',0),
-    uniTexMul=new CGL.Uniform(shader,'t','texMulColor',1),
-    uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',2),
+    uniTex=new CGL.Uniform(shader,'t','tex0',0),
+    uniTex1=new CGL.Uniform(shader,'t','tex1',1),
+    uniTex2=new CGL.Uniform(shader,'t','tex2',2),
+    uniTex3=new CGL.Uniform(shader,'t','tex3',3),
+    uniTexMul=new CGL.Uniform(shader,'t','texMulColor',4),
+    uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',5),
     uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a),
-    uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0);
+    uniColorBorder=new CGL.Uniform(shader,'3f','colorBorder',br,bg,bb),
+
+    uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0),
+    uniborderSmooth=new CGL.Uniform(shader,'f','borderSmooth',inBorderSmooth),
+    uniborderWidth=new CGL.Uniform(shader,'f','borderWidth',inBorderWidth);
+
+
 
 scale.onChange=updateScale;
 
@@ -95,6 +113,7 @@ inRotArr.onChange=
 inTexColor.onChange=
 inTexMask.onChange=
 inShadow.onChange=
+inBorder.onChange=
 doSDF.onChange=
     updateDefines;
 
@@ -111,13 +130,10 @@ align.onChange=
         needUpdate=true;
     };
 
-
 valign.onChange=updateAlign;
 
 op.patch.addEventListener("variablesChanged",updateFontList);
-
 op.patch.addEventListener("FontLoadedMSDF",updateFontList);
-
 
 inFont.onChange=updateFontData;
 
@@ -127,8 +143,15 @@ function updateDefines()
 {
     shader.toggleDefine("SDF",doSDF.get());
     shader.toggleDefine("SHADOW",inShadow.get());
+    shader.toggleDefine("BORDER",inBorder.get());
     shader.toggleDefine("TEXTURE_COLOR",inTexColor.isLinked());
     shader.toggleDefine("TEXTURE_MASK",inTexMask.isLinked());
+
+    br.setUiAttribs({ greyout: !inBorder.get() });
+    bg.setUiAttribs({ greyout: !inBorder.get() });
+    bb.setUiAttribs({ greyout: !inBorder.get() });
+    inBorderSmooth.setUiAttribs({ greyout: !inBorder.get() });
+    inBorderWidth.setUiAttribs({ greyout: !inBorder.get() });
 }
 
 function updateFontData()
@@ -137,7 +160,7 @@ function updateFontData()
     const varname=fontDataVarPrefix+inFont.get();
 
     fontData=null;
-    fontTex=null;
+    fontTexs=null;
     fontChars={};
 
     const dataVar=op.patch.getVar(varname);
@@ -153,11 +176,12 @@ function updateFontData()
     var textVar=op.patch.getVar("font_tex_"+basename);
     if(!textVar)
     {
-        fontTex=null;
+        fontTexs=null;
         fontData=null;
         return;
     }
-    fontTex=textVar.getValue()[0];
+
+    fontTexs=textVar.getValue();
 
     for(var i=0;i<fontData.chars.length;i++) fontChars[fontData.chars[i].char] = fontData.chars[i];
     needUpdate=true;
@@ -190,14 +214,14 @@ function updateAlign()
 
     var offY=0;
 
-    if(valignMode===1) offY=heightAll/2;
-    else if(valignMode===2) offY=heightAll;
-
-    vec3.set(alignVec, 0,offY,0);
-
 
     widthAll=(Math.abs(minX-maxX));
     heightAll=(Math.abs(minY-maxY));
+
+    if(valignMode===1) offY=heightAll/2;
+    else if(valignMode===2) offY=heightAll;
+
+    vec3.set(alignVec,0,offY,0);
 
     outWidth.set(widthAll);
     outHeight.set(heightAll);
@@ -242,7 +266,6 @@ function buildTransMats()
 
 render.onTriggered=function()
 {
-    op.setUiError("nodata",null);
 
     if(!fontData)
     {
@@ -251,7 +274,7 @@ render.onTriggered=function()
         next.trigger();
         return;
     }
-    if(!fontTex)
+    if(!fontTexs)
     {
 
         op.setUiError("nodata","No font texture");
@@ -259,6 +282,8 @@ render.onTriggered=function()
         next.trigger();
         return;
     }
+
+    op.setUiError("nodata",null);
 
     if(needUpdate)
     {
@@ -271,11 +296,19 @@ render.onTriggered=function()
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.pushShader(shader);
 
-        cgl.setTexture(0,fontTex.tex);
-        uniTexSize.setValue([fontTex.width,fontTex.height]);
+        if(fontTexs[0] )uniTexSize.setValue([fontTexs[0].width,fontTexs[0].height]);
 
-        if(inTexColor.get()) cgl.setTexture(1,inTexColor.get().tex);
-        if(inTexMask.get()) cgl.setTexture(2,inTexMask.get().tex);
+        if(fontTexs[0] )cgl.setTexture(0,fontTexs[0].tex);
+        else cgl.setTexture(0,CGL.Texture.getEmptyTexture(cgl).tex);
+        if(fontTexs[1])cgl.setTexture(1,fontTexs[1].tex);
+        else cgl.setTexture(1,CGL.Texture.getEmptyTexture(cgl).tex);
+        if(fontTexs[2])cgl.setTexture(2,fontTexs[2].tex);
+        else cgl.setTexture(2,CGL.Texture.getEmptyTexture(cgl).tex);
+        if(fontTexs[3])cgl.setTexture(3,fontTexs[3].tex);
+        else cgl.setTexture(3,CGL.Texture.getEmptyTexture(cgl).tex);
+
+        if(inTexColor.get()) cgl.setTexture(4,inTexColor.get().tex);
+        if(inTexMask.get()) cgl.setTexture(5,inTexMask.get().tex);
 
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix, alignVec);
@@ -314,9 +347,11 @@ function generateMesh()
     if(!fontData || !fontChars)
     {
         outNumChars.set(0);
+        console.log("aborting, no font data...");
         return;
     }
-    var theString=String(str.get()+'');
+
+    const theString=String(str.get()+'');
 
     if(!geom)
     {
@@ -352,20 +387,20 @@ function generateMesh()
     if(mesh)mesh.dispose();
     mesh=new CGL.Mesh(cgl,geom);
 
-    strings=(theString).split('\n');
-    outLines.set(strings.length);
-
+    var strings=(theString).split('\n');
     var transformations=[];
     var tcOffsets=[];
     var sizes=[];
     var texPos=[];
     var tcSizes=[];
+    var pages=[];
     var charCounter=0;
+    var arrPositions=[];
 
     const mulSize=0.01;
 
-    var arrPositions=[];
 
+    outLines.set(strings.length);
     minY= 99999;
     maxY=-99999;
     minX= 99999;
@@ -379,7 +414,6 @@ function generateMesh()
     }
     avgHeight/=fontData.chars.length;
     avgHeight*=mulSize;
-
 
     for(var s=0;s<strings.length;s++)
     {
@@ -406,8 +440,9 @@ function generateMesh()
             const chStr=txt.substring(i,i+1);
             const char=getChar(chStr);
 
-            if(!char)continue;
+            if(!char) continue;
 
+            pages.push(char.page||0);
             sizes.push(char.width,char.height);
 
             tcOffsets.push(char.x/fontData.common.scaleW,(char.y/fontData.common.scaleH));
@@ -417,10 +452,10 @@ function generateMesh()
             const charOffsetY=(char.yoffset/fontData.common.scaleH);
             const charOffsetX=char.xoffset/fontData.common.scaleW;
 
-            tcSizes.push(charWidth,charHeight);
+            if(chStr==" ") tcSizes.push(0,0);
+            else tcSizes.push(charWidth,charHeight);
 
             mat4.identity(m);
-
 
             var adv=(char.xadvance/2)*mulSize;
             pos+=adv;
@@ -430,7 +465,6 @@ function generateMesh()
 
             minX=Math.min(x-charWidth,minX);
             maxX=Math.max(x+charWidth,maxX);
-
             minY=Math.min(y-charHeight-avgHeight/2,minY);
             maxY=Math.max(y+charHeight+avgHeight/2,maxY);
 
@@ -460,6 +494,7 @@ function generateMesh()
 
     if(mesh.numInstances==0)
     {
+        console.log("no instances");
         disabled=true;
         return;
     }
@@ -468,9 +503,10 @@ function generateMesh()
     mesh.setAttribute('attrTexOffsets',new Float32Array(tcOffsets),2,{"instanced":true});
     mesh.setAttribute('attrTcSize',new Float32Array(tcSizes),2,{"instanced":true});
     mesh.setAttribute('attrSize',new Float32Array(sizes),2,{"instanced":true});
+    mesh.setAttribute('attrPage',new Float32Array(pages),1,{"instanced":true});
 
+    // updateAlign();
     updateAlign();
-    updateAlign();
-
+    needsUpdateTransmats=true;
     outArr.set(arrPositions);
 }

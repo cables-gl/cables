@@ -1,13 +1,13 @@
-const bool0=op.inValueBool("bool 1");
-const bool1=op.inValueBool("bool 2");
-const bool2=op.inValueBool("bool 3");
-const bool3=op.inValueBool("bool 4");
-const bool4=op.inValueBool("bool 5");
-const bool5=op.inValueBool("bool 6");
-const bool6=op.inValueBool("bool 7");
-const bool7=op.inValueBool("bool 8");
-
-const result=op.outValueBool("result");
+const
+    bool0=op.inValueBool("bool 1"),
+    bool1=op.inValueBool("bool 2"),
+    bool2=op.inValueBool("bool 3"),
+    bool3=op.inValueBool("bool 4"),
+    bool4=op.inValueBool("bool 5"),
+    bool5=op.inValueBool("bool 6"),
+    bool6=op.inValueBool("bool 7"),
+    bool7=op.inValueBool("bool 8"),
+    result=op.outValueBool("result");
 
 bool0.onChange=
     bool1.onChange=

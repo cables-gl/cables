@@ -46,9 +46,10 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
     {
-        Log.log("load patch.....");
+        Log.log("PACO load patch.....");
         this._patch.clear();
         this._patch.deSerialize(data.vars.patch);
+        gui.patch().updateSubPatches();
     }
     else if (data.event == CONSTANTS.PACO.PACO_CLEAR)
     {
@@ -74,6 +75,11 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         var op1 = this._patch.getOpById(data.vars.op1);
         var op2 = this._patch.getOpById(data.vars.op2);
+        if(!op1 || !op2)
+        {
+            console.log('[paco] unlink op not found ');
+            return;
+        }
         var port1 = op1.getPort(data.vars.port1);
         var port2 = op2.getPort(data.vars.port2);
         port1.removeLinkTo(port2);

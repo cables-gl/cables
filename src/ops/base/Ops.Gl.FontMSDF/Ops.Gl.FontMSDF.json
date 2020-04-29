@@ -23,6 +23,18 @@
             {
                 "type": "5",
                 "name": "Font Image"
+            },
+            {
+                "type": "5",
+                "name": "Font Image 1"
+            },
+            {
+                "type": "5",
+                "name": "Font Image 2"
+            },
+            {
+                "type": "5",
+                "name": "Font Image 3"
             }
         ],
         "portsOut": [

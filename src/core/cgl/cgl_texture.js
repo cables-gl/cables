@@ -2,10 +2,8 @@ import { profileData } from "./cgl_profiledata";
 import { uuid } from "../utils";
 import { Log } from "../log";
 
-var tempTexture = null;
-// var tempTextureEmpty = null;
-var randomTexture = null;
-var tempTextureGradient = null;
+
+
 var DEFAULT_TEXTURE_SIZE = 8;
 
 /**
@@ -495,7 +493,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         cgl.patch.loading.finished(loadingId);
         if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
-        if (finishedCallback) finishedCallback();
+        if (finishedCallback) finishedCallback(null,texture);
     };
     texture.image.src = url;
 
@@ -512,8 +510,9 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  */
 Texture.getTempTexture = function (cgl)
 {
-    if (!tempTexture) tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
-    return tempTexture;
+    if(!cgl)console.error('[getTempTexture] no cgl!');
+    if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
+    return cgl.tempTexture;
 };
 
 /**
@@ -545,7 +544,8 @@ Texture.getEmptyTexture = function (cgl)
  */
 Texture.getRandomTexture = function (cgl)
 {
-    if (randomTexture) return randomTexture;
+    if(!cgl)console.error('[getRandomTexture] no cgl!');
+    if (cgl.randomTexture) return cgl.randomTexture;
 
     const size = 256;
     const data = new Uint8Array(size * size * 4);
@@ -558,10 +558,10 @@ Texture.getRandomTexture = function (cgl)
         data[x * 4 + 3] = 255;
     }
 
-    randomTexture = new Texture(cgl);
-    randomTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+    cgl.randomTexture = new Texture(cgl);
+    cgl.randomTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
-    return randomTexture;
+    return cgl.randomTexture;
 };
 
 /**
@@ -574,7 +574,9 @@ Texture.getRandomTexture = function (cgl)
  */
 Texture.getTempGradientTexture = function (cgl)
 {
-    if (tempTextureGradient) return tempTextureGradient;
+    if(!cgl)console.error('[getTempGradientTexture] no cgl!');
+
+    if (cgl.tempTextureGradient) return cgl.tempTextureGradient;
     var temptex = new Texture(cgl);
     const size = 256;
     var data = new Uint8Array(size * size * 4); // .fill(0);
@@ -589,7 +591,7 @@ Texture.getTempGradientTexture = function (cgl)
     }
 
     temptex.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
-    tempTextureGradient = temptex;
+    cgl.tempTextureGradient = temptex;
     return temptex;
 };
 
