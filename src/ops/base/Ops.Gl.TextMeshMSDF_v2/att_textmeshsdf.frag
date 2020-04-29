@@ -39,7 +39,11 @@ void main()
     float opacity=1.0;
 
     #ifndef SDF
-        outColor=texture(tex,texCoord);;
+        if(int(texIndex)==0) outColor = texture(tex0, texCoord);
+        if(int(texIndex)==1) outColor = texture(tex1, texCoord);
+        if(int(texIndex)==2) outColor = texture(tex2, texCoord);
+        if(int(texIndex)==3) outColor = texture(tex3, texCoord);
+
         return;
     #endif
 
@@ -73,8 +77,6 @@ void main()
     if(int(texIndex)==1) smpl = texture(tex1, texCoord).rgb;
     if(int(texIndex)==2) smpl = texture(tex2, texCoord).rgb;
     if(int(texIndex)==3) smpl = texture(tex3, texCoord).rgb;
-
-
 
 
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;

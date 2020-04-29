@@ -13,7 +13,7 @@ const
     lineHeight=op.inFloat("Line Height",1),
 
     align=op.inSwitch("Align",['Left','Center','Right'],'Center'),
-    valign=op.inSwitch("Vertical Align",['Top','Middle','Bottom'],'Middle'),
+    valign=op.inSwitch("Vertical Align",['Zero','Top','Middle','Bottom'],'Middle'),
 
     r = op.inValueSlider("r", 1),
     g = op.inValueSlider("g", 1),
@@ -49,10 +49,10 @@ const
 
 op.setPortGroup('Size',[letterSpace,lineHeight,scale]);
 op.setPortGroup("Character Transformations",[inScaleArr,inRotArr,inPosArr]);
-
 op.setPortGroup('Alignment',[align,valign]);
 op.setPortGroup('Color',[r,g,b,a,doSDF]);
 op.setPortGroup('Border',[br,bg,bb,inBorderSmooth,inBorderWidth,inBorder]);
+
 r.setUiAttribs({ colorPick: true });
 br.setUiAttribs({ colorPick: true });
 
@@ -72,12 +72,12 @@ var mesh=null;
 var disabled=false;
 var valignMode=1;
 var heightAll=0,widthAll=0;
-
+var avgHeight=0;
 var offY=0;
 var minY,maxY,minX,maxX;
 var needsUpdateTransmats=true;
 var transMats=null;
-
+var offY=0;
 
 if (cgl.glVersion == 1)
 {
@@ -201,31 +201,35 @@ function updateFontList()
 
 function updateScale()
 {
-    var s=scale.get();
+    const s=scale.get();
     vec3.set(vScale, s,s,s);
+
+    vec3.set(alignVec,0,offY*s,0);
+
+    outWidth.set(widthAll*s);
+    outHeight.set(heightAll*s);
+
+    outStartY.set((maxY+offY)*s);
 }
 
 function updateAlign()
 {
     if(minX==undefined)return;
-    if(valign.get()=='Top')valignMode=0;
-    else if(valign.get()=='Middle')valignMode=1;
-    else if(valign.get()=='Bottom')valignMode=2;
+    if(valign.get()=='Top') valignMode=0;
+    else if(valign.get()=='Middle') valignMode=1;
+    else if(valign.get()=='Bottom') valignMode=2;
+    else if(valign.get()=='Zero') valignMode=3;
 
-    var offY=0;
-
-
+    offY=0;
     widthAll=(Math.abs(minX-maxX));
     heightAll=(Math.abs(minY-maxY));
 
     if(valignMode===1) offY=heightAll/2;
     else if(valignMode===2) offY=heightAll;
 
-    vec3.set(alignVec,0,offY,0);
+    if(valignMode!=0)offY-=avgHeight;
 
-    outWidth.set(widthAll);
-    outHeight.set(heightAll);
-    outStartY.set(maxY+offY);
+    updateScale();
 }
 
 
@@ -296,14 +300,17 @@ render.onTriggered=function()
         cgl.pushBlendMode(CGL.BLEND_NORMAL,true);
         cgl.pushShader(shader);
 
-        if(fontTexs[0] )uniTexSize.setValue([fontTexs[0].width,fontTexs[0].height]);
+        if(fontTexs[0]) uniTexSize.setValue([fontTexs[0].width,fontTexs[0].height]);
 
-        if(fontTexs[0] )cgl.setTexture(0,fontTexs[0].tex);
+        if(fontTexs[0]) cgl.setTexture(0,fontTexs[0].tex);
         else cgl.setTexture(0,CGL.Texture.getEmptyTexture(cgl).tex);
+
         if(fontTexs[1])cgl.setTexture(1,fontTexs[1].tex);
         else cgl.setTexture(1,CGL.Texture.getEmptyTexture(cgl).tex);
+
         if(fontTexs[2])cgl.setTexture(2,fontTexs[2].tex);
         else cgl.setTexture(2,CGL.Texture.getEmptyTexture(cgl).tex);
+
         if(fontTexs[3])cgl.setTexture(3,fontTexs[3].tex);
         else cgl.setTexture(3,CGL.Texture.getEmptyTexture(cgl).tex);
 
@@ -406,7 +413,7 @@ function generateMesh()
     minX= 99999;
     maxX=-99999;
 
-    var avgHeight=0;
+    avgHeight=0;
 
     for(var i=0;i<fontData.chars.length;i++)
     {
