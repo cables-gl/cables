@@ -91,6 +91,11 @@
                 "name": "Hard Edges",
                 "group": "Rendering",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Opacity",
+                "subType": "number"
             }
         ],
         "portsOut": [

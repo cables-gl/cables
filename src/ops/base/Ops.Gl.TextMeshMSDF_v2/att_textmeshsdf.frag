@@ -14,8 +14,7 @@ UNI sampler2D texMulColor;
 UNI sampler2D texMulMask;
 #endif
 
-flat IN int texIndex;
-
+IN float texIndex;
 
 #ifdef SHADOW
     UNI float shadowWidth;
@@ -51,10 +50,10 @@ void main()
         vec2 msdfUnit1 = texSize;
         vec2 tcv=vec2(texCoord.x-0.002,texCoord.y-0.002);
         vec3 smpl1;
-        if(texIndex==0) smpl1 = texture(tex0, tcv).rgb;;
-        if(texIndex==1) smpl1 = texture(tex1, tcv).rgb;;
-        if(texIndex==2) smpl1 = texture(tex2, tcv).rgb;;
-        if(texIndex==3) smpl1 = texture(tex3, tcv).rgb;;
+        if(int(texIndex)==0) smpl1 = texture(tex0, tcv).rgb;
+        if(int(texIndex)==1) smpl1 = texture(tex1, tcv).rgb;
+        if(int(texIndex)==2) smpl1 = texture(tex2, tcv).rgb;
+        if(int(texIndex)==3) smpl1 = texture(tex3, tcv).rgb;
 
         float sigDist1 = median(smpl1.r, smpl1.g, smpl1.b) - 0.001;
         float opacity1 = smoothstep(0.0,0.9,sigDist1*sigDist1);
@@ -64,10 +63,10 @@ void main()
     vec2 msdfUnit = 8.0/texSize;
     vec3 smpl;
 
-    if(texIndex==0) smpl = texture(tex0, texCoord).rgb;;
-    if(texIndex==1) smpl = texture(tex1, texCoord).rgb;;
-    if(texIndex==2) smpl = texture(tex2, texCoord).rgb;;
-    if(texIndex==3) smpl = texture(tex3, texCoord).rgb;;
+    if(int(texIndex)==0) smpl = texture(tex0, texCoord).rgb;
+    if(int(texIndex)==1) smpl = texture(tex1, texCoord).rgb;
+    if(int(texIndex)==2) smpl = texture(tex2, texCoord).rgb;
+    if(int(texIndex)==3) smpl = texture(tex3, texCoord).rgb;
 
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));

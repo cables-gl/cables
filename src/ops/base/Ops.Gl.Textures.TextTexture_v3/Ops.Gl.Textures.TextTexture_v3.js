@@ -16,6 +16,8 @@ const
     meshScale=op.inValueFloat("Scale Mesh",1.0),
     renderHard=op.inValueBool("Hard Edges",false),
 
+    inOpacity=op.inFloatSlider("Opacity",1),
+
     outRatio=op.outValue("Ratio"),
     textureOut=op.outTexture("texture"),
     outAspect=op.outNumber("Aspect",1);
@@ -61,6 +63,9 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.setSource(attachments.text_vert,attachments.text_frag);
 const texUni=new CGL.Uniform(shader,'t','tex',0);
 const aspectUni=new CGL.Uniform(shader,'f','aspect',0);
+const opacityUni=new CGL.Uniform(shader,'f','a',inOpacity);
+
+
 var vScale=vec3.create();
 
 renderHard.onChange=function()

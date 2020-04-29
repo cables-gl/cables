@@ -1,4 +1,5 @@
 UNI sampler2D tex;
+UNI float a;
 IN vec2 texCoord;
 
 vec4 myround(vec4 col)
@@ -11,7 +12,7 @@ void main()
 {
 
 #ifndef HARD_EDGE
-    outColor= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r);
+    outColor= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r*a);
 #endif
 #ifdef HARD_EDGE
 
@@ -30,8 +31,9 @@ void main()
     col4=myround(col4);
     col5=myround(col5);
 
-    col.a=(col.a+col2.a+col3.a+col4.a+col5.a)/5.0;
+    col.a=(col.a+col2.a+col3.a+col4.a+col5.a)/5.0*a;
     outColor=col;
 #endif
+
 
 }
