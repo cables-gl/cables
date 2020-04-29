@@ -512,7 +512,7 @@ Texture.getTempTexture = function (cgl)
 {
     if(!cgl)console.error('[getTempTexture] no cgl!');
     if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
-    return tempTexture;
+    return cgl.tempTexture;
 };
 
 /**
