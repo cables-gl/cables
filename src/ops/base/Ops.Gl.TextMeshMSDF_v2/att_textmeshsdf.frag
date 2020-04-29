@@ -10,6 +10,7 @@ UNI vec2 texSize;
 #ifdef BORDER
     UNI float borderWidth;
     UNI float borderSmooth;
+    UNI vec3 colorBorder;
 #endif
 
 #ifdef TEXTURE_COLOR
@@ -84,7 +85,7 @@ void main()
         float sigDist1 = median(smpl.r, smpl.g, smpl.b) - 0.01;
         float bw=borderWidth*0.6+0.24;
         float opacity1 = smoothstep(bw-borderSmooth,bw+borderSmooth,sigDist1*sigDist1);
-        fgColor=mix(fgColor,vec4(0.0,0.0,0.0,1.0),1.0-opacity1);
+        fgColor=mix(fgColor,vec4(colorBorder,1.0),1.0-opacity1);
     #endif
 
 

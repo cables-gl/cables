@@ -95,6 +95,8 @@ const
     uniTexMul=new CGL.Uniform(shader,'t','texMulColor',4),
     uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',5),
     uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a),
+    uniColorBorder=new CGL.Uniform(shader,'3f','colorBorder',br,bg,bb),
+
     uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0),
     uniborderSmooth=new CGL.Uniform(shader,'f','borderSmooth',inBorderSmooth),
     uniborderWidth=new CGL.Uniform(shader,'f','borderWidth',inBorderWidth);
