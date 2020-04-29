@@ -21,6 +21,13 @@ const
     a = op.inValueSlider("a", 1),
     doSDF=op.inBool("SDF",true),
 
+    inBorder = op.inBool("Border", false),
+    inBorderWidth=op.inFloatSlider("Border Width",0.5),
+    inBorderSmooth=op.inFloatSlider("Smoothness",0.25),
+    br = op.inValueSlider("Border r", 1),
+    bg = op.inValueSlider("Border g", 1),
+    bb = op.inValueSlider("Border b", 1),
+
     inShadow = op.inBool("Shadow", false),
 
     inTexColor=op.inTexture("Texture Color"),
@@ -45,7 +52,9 @@ op.setPortGroup("Character Transformations",[inScaleArr,inRotArr,inPosArr]);
 
 op.setPortGroup('Alignment',[align,valign]);
 op.setPortGroup('Color',[r,g,b,a,doSDF]);
+op.setPortGroup('Border',[br,bg,bb,inBorderSmooth,inBorderWidth,inBorder]);
 r.setUiAttribs({ colorPick: true });
+br.setUiAttribs({ colorPick: true });
 
 const cgl=op.patch.cgl;
 const fontDataVarPrefix="font_data_";
@@ -86,7 +95,11 @@ const
     uniTexMul=new CGL.Uniform(shader,'t','texMulColor',4),
     uniTexMulMask=new CGL.Uniform(shader,'t','texMulMask',5),
     uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a),
-    uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0);
+    uniTexSize=new CGL.Uniform(shader,'2f','texSize',0,0),
+    uniborderSmooth=new CGL.Uniform(shader,'f','borderSmooth',inBorderSmooth),
+    uniborderWidth=new CGL.Uniform(shader,'f','borderWidth',inBorderWidth);
+
+
 
 scale.onChange=updateScale;
 
@@ -98,6 +111,7 @@ inRotArr.onChange=
 inTexColor.onChange=
 inTexMask.onChange=
 inShadow.onChange=
+inBorder.onChange=
 doSDF.onChange=
     updateDefines;
 
@@ -127,8 +141,15 @@ function updateDefines()
 {
     shader.toggleDefine("SDF",doSDF.get());
     shader.toggleDefine("SHADOW",inShadow.get());
+    shader.toggleDefine("BORDER",inBorder.get());
     shader.toggleDefine("TEXTURE_COLOR",inTexColor.isLinked());
     shader.toggleDefine("TEXTURE_MASK",inTexMask.isLinked());
+
+    br.setUiAttribs({ greyout: !inBorder.get() });
+    bg.setUiAttribs({ greyout: !inBorder.get() });
+    bb.setUiAttribs({ greyout: !inBorder.get() });
+    inBorderSmooth.setUiAttribs({ greyout: !inBorder.get() });
+    inBorderWidth.setUiAttribs({ greyout: !inBorder.get() });
 }
 
 function updateFontData()

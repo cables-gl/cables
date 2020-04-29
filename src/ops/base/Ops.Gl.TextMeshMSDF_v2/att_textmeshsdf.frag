@@ -7,6 +7,11 @@ IN vec2 texCoord;
 UNI vec4 color;
 UNI vec2 texSize;
 
+#ifdef BORDER
+    UNI float borderWidth;
+    UNI float borderSmooth;
+#endif
+
 #ifdef TEXTURE_COLOR
 UNI sampler2D texMulColor;
 #endif
@@ -68,11 +73,23 @@ void main()
     if(int(texIndex)==2) smpl = texture(tex2, texCoord).rgb;
     if(int(texIndex)==3) smpl = texture(tex3, texCoord).rgb;
 
+
+
+
     float sigDist = median(smpl.r, smpl.g, smpl.b) - 0.5;
     sigDist *= dot(msdfUnit, 0.5/fwidth(texCoord));
     opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
 
+    #ifdef BORDER
+        float sigDist1 = median(smpl.r, smpl.g, smpl.b) - 0.01;
+        float bw=borderWidth*0.6+0.24;
+        float opacity1 = smoothstep(bw-borderSmooth,bw+borderSmooth,sigDist1*sigDist1);
+        fgColor=mix(fgColor,vec4(0.0,0.0,0.0,1.0),1.0-opacity1);
+    #endif
+
+
     outColor = mix(outColor, fgColor, opacity*color.a);
+
 }
 
 

@@ -6,7 +6,6 @@ UNI sampler2D tex4;
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
-UNI float scale;
 
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
@@ -35,7 +34,5 @@ void main()
 
    mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;
 
-   #ifndef BILLBOARD
-       gl_Position = projMatrix * mvMatrix * vert;
-   #endif
+   gl_Position = projMatrix * mvMatrix * vert;
 }
