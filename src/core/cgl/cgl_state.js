@@ -310,7 +310,7 @@ const Context = function (_patch)
     this.popShader =
     this.setPreviousShader = function ()
     {
-        if (this._shaderStack.length === 0) throw "Invalid shader stack pop!";
+        if (this._shaderStack.length === 0) throw new Error("Invalid shader stack pop!");
         this._shaderStack.pop();
         currentShader = this._shaderStack[this._shaderStack.length - 1];
     };

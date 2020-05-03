@@ -1,5 +1,6 @@
 // todo: old... remove this from ops...
 
+
 // var CABLES=CABLES || {};
 
 const Variable = function ()
@@ -20,10 +21,10 @@ const Variable = function ()
     this.setValue = function (v)
     {
         value = v;
-        emitChanged();
+        this.emitChanged();
     };
 
-    var emitChanged = function ()
+    this.emitChanged = function ()
     {
         for (let i = 0; i < changedCallbacks.length; i++)
         {

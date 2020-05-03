@@ -37,7 +37,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         Log.log("op create: data.vars.objName");
         if (this._patch.getOpById(data.vars.opId)) return;
-        var op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
+        const op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
         op.id = data.vars.opId;
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -59,18 +59,18 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_ENABLE)
     {
-        var op = this._patch.getOpById(data.vars.op);
+        const op = this._patch.getOpById(data.vars.op);
         if (op) op.enabled = true;
     }
     else if (data.event == CONSTANTS.PACO.PACO_OP_DISABLE)
     {
-        var op = this._patch.getOpById(data.vars.op);
+        const op = this._patch.getOpById(data.vars.op);
         if (op) op.enabled = false;
     }
     else if (data.event == CONSTANTS.PACO.PACO_UNLINK)
     {
-        var op1 = this._patch.getOpById(data.vars.op1);
-        var op2 = this._patch.getOpById(data.vars.op2);
+        const op1 = this._patch.getOpById(data.vars.op1);
+        const op2 = this._patch.getOpById(data.vars.op2);
         if (!op1 || !op2)
         {
             console.log("[paco] unlink op not found ");
@@ -82,13 +82,13 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else if (data.event == CONSTANTS.PACO.PACO_LINK)
     {
-        var op1 = this._patch.getOpById(data.vars.op1);
-        var op2 = this._patch.getOpById(data.vars.op2);
+        const op1 = this._patch.getOpById(data.vars.op1);
+        const op2 = this._patch.getOpById(data.vars.op2);
         this._patch.link(op1, data.vars.port1, op2, data.vars.port2);
     }
     else if (data.event == CONSTANTS.PACO.PACO_VALUECHANGE)
     {
-        var op = this._patch.getOpById(data.vars.op);
+        const op = this._patch.getOpById(data.vars.op);
         const p = op.getPort(data.vars.port);
         p.set(data.vars.v);
     }

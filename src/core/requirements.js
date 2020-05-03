@@ -22,18 +22,20 @@ Requirements.prototype.checkRequirement = function (which, op)
     {
     case Requirements.WEBGL2:
         return op.patch.cgl.glVersion >= 2;
-        break;
+        // break;
     case Requirements.POINTERLOCK:
         return "exitPointerLock" in document;
-        break;
+        // break;
     case Requirements.MIDI:
         return "MIDIAccess" in window;
-        break;
+        // break;
     case Requirements.WEBAUDIO:
-        var has = false;
+        let has = false;
         if (window.audioContext) has = true;
         if (!has && ("webkitAudioContext" in window || "AudioContext" in window)) has = true;
         return has;
+        // break;
+    default:
         break;
     }
 };
@@ -56,7 +58,7 @@ Requirements.prototype.checkOp = function (op)
                     if (Requirements.infos[reqId].caniuse) title = "<a href=\"" + Requirements.infos[reqId].caniuse + "\" target=\"_blank\">" + Requirements.infos[reqId].title + " (" + op.objName + ")</a>";
                     // document.writeln('<pre>browser does not meet requirement: '+title+'</pre>');
                     // console.error("browser does not meet requirement: "+Requirements.infos[reqId].title);
-                    throw "this browser does not meet requirement: " + Requirements.infos[reqId].title + " (" + op.objName + ")";
+                    throw new Error("this browser does not meet requirement: " + Requirements.infos[reqId].title + " (" + op.objName + ")");
                 }
 
                 this.result[reqId] = {

@@ -253,7 +253,7 @@ TextureEffect.checkOpInEffect = function (op)
 
     if (!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.setUiError("texeffect", "This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>." , 1);
+        op.setUiError("texeffect", "This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>.", 1);
         return false;
     }
 
@@ -405,7 +405,7 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
 
 TextureEffect.AddBlendSelect = function (op, name)
 {
-    let p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
+    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
 
     return p;
 };

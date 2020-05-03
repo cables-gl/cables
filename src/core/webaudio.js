@@ -117,7 +117,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
                     {
                         port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode);
                     }
-                    catch (e)
+                    catch (er)
                     {
                         op.log(
                             "Disconnecting audio node with in/out port index, as well as without in/out-port-index did not work ",

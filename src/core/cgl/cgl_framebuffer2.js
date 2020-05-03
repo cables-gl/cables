@@ -248,7 +248,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) throw "Invalid framebuffer";
+    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
     switch (status)
     {
@@ -316,7 +316,7 @@ Framebuffer2.prototype.renderEnd = function ()
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.TEXTURE_2D, this._textureDepth.tex, 0);
 
-        for (var i = 0; i < this._numRenderBuffers; i++)
+        for (let i = 0; i < this._numRenderBuffers; i++)
         {
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);
             this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.RENDERBUFFER, this._colorRenderbuffers[i]);
@@ -346,7 +346,7 @@ Framebuffer2.prototype.renderEnd = function ()
 
     if (this._colorTextures[0].filter == Texture.FILTER_MIPMAP)
     {
-        for (var i = 0; i < this._numRenderBuffers; i++)
+        for (let i = 0; i < this._numRenderBuffers; i++)
         {
             this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex);
             this._colorTextures[i].updateMipMap();

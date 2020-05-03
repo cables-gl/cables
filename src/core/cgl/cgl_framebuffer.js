@@ -154,7 +154,7 @@ const Framebuffer = function (_cgl, w, h, options)
             );
         }
 
-        if (!cgl.gl.isFramebuffer(frameBuf)) throw "Invalid framebuffer";
+        if (!cgl.gl.isFramebuffer(frameBuf)) throw new Error("Invalid framebuffer");
         const status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
         switch (status)
         {

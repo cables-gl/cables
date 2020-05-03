@@ -276,10 +276,7 @@ Patch.prototype.getFilePath = function (filename)
 
     filename = filename.replace("//", "/");
 
-    const finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
-    // Log.log('finalFilename',finalFilename);
-
-    return finalFilename;
+    return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
 };
 
 Patch.prototype.clear = function ()
@@ -391,7 +388,7 @@ Patch.prototype.createOp = function (identifier, id)
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             this.exitError("INSTANCE_ERR", "Instancing Error " + objName);
-            throw "instancing error " + objName;
+            throw new Error("instancing error " + objName);
         }
     }
 
@@ -541,12 +538,12 @@ Patch.prototype.renderFrame = function (e)
 
     const startTime = performance.now();
 
-    for (var i = 0; i < this.animFrameCallbacks.length; ++i)
+    for (let i = 0; i < this.animFrameCallbacks.length; ++i)
     {
         if (this.animFrameCallbacks[i]) this.animFrameCallbacks[i](time, this._frameNum);
     }
 
-    for (var i = 0; i < this.animFrameOps.length; ++i)
+    for (let i = 0; i < this.animFrameOps.length; ++i)
     {
         if (this.animFrameOps[i].onAnimFrame)
         {
@@ -769,7 +766,7 @@ Patch.prototype.reloadOp = function (objName, cb)
     const ops = [];
     const oldOps = [];
 
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].objName == objName)
         {
@@ -777,7 +774,7 @@ Patch.prototype.reloadOp = function (objName, cb)
         }
     }
 
-    for (var i = 0; i < oldOps.length; i++)
+    for (let i = 0; i < oldOps.length; i++)
     {
         count++;
         const oldOp = oldOps[i];
@@ -848,12 +845,8 @@ Patch.prototype.getSubPatchOps = function (patchId)
 Patch.prototype.getSubPatchOp = function (patchId, objName)
 {
     for (const i in this.ops)
-    {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
-        {
             return this.ops[i];
-        }
-    }
     return false;
 };
 
@@ -885,7 +878,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     // Log.log('add ops ',obj.ops);
     // add ops...
-    for (var iop in obj.ops)
+    for (const iop in obj.ops)
     {
         const start = CABLES.now();
         const opData = obj.ops[iop];
@@ -900,7 +893,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         {
             // console.warn("something gone wrong");
             console.warn("[instancing error] op data:", opData, e);
-            throw "instancing error: " + opData.objName;
+            throw new Error("instancing error: " + opData.objName);
         }
 
         reqs.checkOp(op);
@@ -947,7 +940,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].onLoadedValueSet)
         {
@@ -960,7 +953,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     // create links...
     if (obj.ops)
     {
-        for (iop = 0; iop < obj.ops.length; iop++)
+        for (let iop = 0; iop < obj.ops.length; iop++)
         {
             if (obj.ops[iop].portsIn)
             {
@@ -981,7 +974,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].onLoaded)
         {
@@ -991,7 +984,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].init)
         {
@@ -1008,14 +1001,13 @@ Patch.prototype.deSerialize = function (obj, genIds)
             // this._variables = cfg.variables;
         }
     }
-    for (var i in this.ops) this.ops[i].initVarPorts();
+    for (const i in this.ops) this.ops[i].initVarPorts();
 
     setTimeout(
         () =>
         {
             this.loading.finished(loadingId);
-        },
-        100,
+        }, 100
     );
     if (this.config.onPatchLoaded) this.config.onPatchLoaded();
 

@@ -330,7 +330,7 @@ Geometry.prototype.calculateNormals = function (options)
         const norms = [];
         for (i = 0; i < this.vertices.length; i += 9)
         {
-            var triangle = [[this.vertices[i + 0], this.vertices[i + 1], this.vertices[i + 2]], [this.vertices[i + 3], this.vertices[i + 4], this.vertices[i + 5]], [this.vertices[i + 6], this.vertices[i + 7], this.vertices[i + 8]]];
+            const triangle = [[this.vertices[i + 0], this.vertices[i + 1], this.vertices[i + 2]], [this.vertices[i + 3], this.vertices[i + 4], this.vertices[i + 5]], [this.vertices[i + 6], this.vertices[i + 7], this.vertices[i + 8]]];
 
             const nn = calcNormal(triangle);
             norms.push(nn[0], nn[1], nn[2], nn[0], nn[1], nn[2], nn[0], nn[1], nn[2]);
@@ -344,7 +344,7 @@ Geometry.prototype.calculateNormals = function (options)
 
         for (i = 0; i < this.verticesIndices.length; i += 3)
         {
-            var triangle = [this.getVertexVec(this.verticesIndices[i + 0]), this.getVertexVec(this.verticesIndices[i + 1]), this.getVertexVec(this.verticesIndices[i + 2])];
+            const triangle = [this.getVertexVec(this.verticesIndices[i + 0]), this.getVertexVec(this.verticesIndices[i + 1]), this.getVertexVec(this.verticesIndices[i + 2])];
 
             faceNormals[i / 3] = calcNormal(triangle);
 
@@ -673,7 +673,7 @@ Geometry.prototype.mapTexCoords2d = function ()
     const bounds = this.getBounds();
     const num = this.vertices.length / 3;
 
-    this.texCoords = new Float32Array((length = num * 2));
+    this.texCoords = new Float32Array(num * 2);
 
     for (let i = 0; i < num; i++)
     {
@@ -702,9 +702,7 @@ Geometry.buildFromFaces = function (arr)
         for (let iv = 0; iv < vertices; iv += 3)
         {
             if (vertices[iv + 0] == a[0] && vertices[iv + 1] == a[1] && vertices[iv + 2] == a[2]) face[0] = iv / 3;
-
             if (vertices[iv + 0] == b[0] && vertices[iv + 1] == b[1] && vertices[iv + 2] == b[2]) face[1] = iv / 3;
-
             if (vertices[iv + 0] == c[0] && vertices[iv + 1] == c[1] && vertices[iv + 2] == c[2]) face[2] = iv / 3;
         }
 

@@ -235,7 +235,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 catch (ex)
                 {
                     this.crashed = true;
-                    this.setValue = function (v) {};
+                    this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
                     console.error("onvaluechanged exception cought", ex);

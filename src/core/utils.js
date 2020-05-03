@@ -20,11 +20,10 @@ UTILS.float32Concat = function (first, second)
     if (!(first instanceof Float32Array)) first = new Float32Array(first);
     if (!(second instanceof Float32Array)) second = new Float32Array(second);
 
-    let firstLength = first.length,
-        result = new Float32Array(firstLength + second.length);
+    const result = new Float32Array(first.length + second.length);
 
     result.set(first);
-    result.set(second, firstLength);
+    result.set(second, first.length);
 
     return result;
 };
@@ -61,7 +60,7 @@ export const shuffleArray = function (array)
 const _shortIds = {};
 const _shortId = function ()
 {
-    const str = Math.random().toString(36).substr(2, 9);
+    let str = Math.random().toString(36).substr(2, 9);
 
     if (_shortIds.hasOwnProperty(str)) str = _shortId();
     _shortIds[str] = true;
@@ -384,7 +383,7 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
  * @function ajax
  * @static
  */
-export const ajax = function (url, cb, method, post, contenttype, jsonp, headers = {})
+export const ajax = function (url, cb, method, post, contenttype, jsonP, headers = {})
 {
     request({
         url,
@@ -393,7 +392,7 @@ export const ajax = function (url, cb, method, post, contenttype, jsonp, headers
         "data:": post,
         contenttype,
         "sync": false,
-        jsonp,
+        jsonP,
         headers,
     });
 };
