@@ -72,54 +72,55 @@ Mesh.prototype.updateVertices = function (geom)
 
 Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
 {
-    for(var i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
-        if(this._attributes[i].name == attrName)
+        if (this._attributes[i].name == attrName)
         {
-            if(!this._attributes[i].pointer) this._attributes[i].pointer = [];
+            if (!this._attributes[i].pointer) this._attributes[i].pointer = [];
 
             this._attributes[i].pointer.push(
                 {
-                    loc: -1,
+                    "loc": -1,
                     name,
                     stride,
                     offset,
-                    instanced: attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
-                });
+                    "instanced": attrName == CONSTANTS.SHADER.SHADERVAR_INSTANCE_MMATRIX,
+                }
+            );
         }
     }
 };
 
 Mesh.prototype.getAttribute = function (name)
 {
-    for (var i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
+    for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
 };
 
-Mesh.prototype._bufferArray=function(array,attr)
+Mesh.prototype._bufferArray = function (array, attr)
 {
-    var floatArray = null;
-    if(!array)return;
+    let floatArray = null;
+    if (!array) return;
 
 
-    if(this._cgl.debugOneFrame)
+    if (this._cgl.debugOneFrame)
     {
-        console.log("_bufferArray",array.length,attr.name);
+        console.log("_bufferArray", array.length, attr.name);
     }
 
     if (!(array instanceof Float32Array))
     {
-        if(attr && attr.floatArray && attr.floatArray.length==array.length)
+        if (attr && attr.floatArray && attr.floatArray.length == array.length)
         {
             attr.floatArray.set(array);
-            floatArray=attr.floatArray;
+            floatArray = attr.floatArray;
         }
         else
         {
             floatArray = new Float32Array(array);
 
-            if(this._cgl.debugOneFrame)
+            if (this._cgl.debugOneFrame)
             {
-                console.log("_bufferArray create new float32array",array.length,attr.name);
+                console.log("_bufferArray create new float32array", array.length, attr.name);
             }
 
             profileData.profileNonTypedAttrib++;
@@ -128,7 +129,7 @@ Mesh.prototype._bufferArray=function(array,attr)
     }
     else floatArray = array;
 
-    if(attr && floatArray) attr.floatArray=floatArray;
+    if (attr && floatArray) attr.floatArray = floatArray;
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
@@ -145,10 +146,10 @@ Mesh.prototype._bufferArray=function(array,attr)
  */
 Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.setAttribute = function (name, array, itemSize, options)
 {
-    var cb = null;
-    var instanced = false;
-    var i = 0;
-    var numItems = array.length / itemSize;
+    let cb = null;
+    let instanced = false;
+    let i = 0;
+    const numItems = array.length / itemSize;
 
     if (numItems === 0) console.warn("CGL_MESH: num items in attribute " + name + " is ZERO");
 
@@ -174,7 +175,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
             // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
-            this._bufferArray(array,this._attributes[i]);
+            this._bufferArray(array, this._attributes[i]);
 
             return this._attributes[i];
         }
@@ -182,32 +183,29 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
     // create new buffer...
 
-    var buffer = this._cgl.gl.createBuffer();
+    const buffer = this._cgl.gl.createBuffer();
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, buffer);
     // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 
-    var type = this._cgl.gl.FLOAT;
+    let type = this._cgl.gl.FLOAT;
     if (options && options.type) type = options.type;
-    var attr = {
+    const attr = {
         buffer,
         name,
         cb,
         itemSize,
         numItems,
-        startItem: 0,
+        "startItem": 0,
         instanced,
         type
     };
 
-    this._bufferArray(array,attr);
+    this._bufferArray(array, attr);
 
     if (name == CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION) this._bufVertexAttrib = attr;
     this._attributes.push(attr);
     this._attribLocs = {};
-
-
-
 
 
     return attr;
@@ -233,7 +231,7 @@ Mesh.prototype.updateTexCoords = function (geom)
     }
     else
     {
-        var tcBuff = new Float32Array(Math.round((geom.vertices.length / 3) * 2));
+        const tcBuff = new Float32Array(Math.round((geom.vertices.length / 3) * 2));
         this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_TEXCOORD, tcBuff, 2);
     }
 };
@@ -254,23 +252,21 @@ Mesh.prototype.updateNormals = function (geom)
     }
     else
     {
-        var tcBuff = new Float32Array(Math.round((geom.vertices.length )));
+        const tcBuff = new Float32Array(Math.round((geom.vertices.length)));
         this.setAttribute("attrVertNormal", tcBuff, 3);
     }
 };
 
 
-
-
 Mesh.prototype._setVertexNumbers = function ()
 {
-    var numVerts = this._geom.vertices.length / 3;
+    const numVerts = this._geom.vertices.length / 3;
 
     if (!this._verticesNumbers || this._verticesNumbers.length != numVerts)
     {
         this._verticesNumbers = new Float32Array(numVerts);
 
-        for (var i = 0; i < numVerts; i++) this._verticesNumbers[i] = i;
+        for (let i = 0; i < numVerts; i++) this._verticesNumbers[i] = i;
 
         this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
         {
@@ -284,7 +280,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 {
     if (vertIndices.length > 0)
     {
-        for (var i = 0; i < vertIndices.length; i++)
+        for (let i = 0; i < vertIndices.length; i++)
         {
             if (vertIndices[i] >= this._geom.vertices.length / 3)
             {
@@ -318,7 +314,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 Mesh.prototype.setGeom = function (geom)
 {
     this._geom = geom;
-    if(geom.glPrimitive!=null) this._glPrimitive=geom.glPrimitive;
+    if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
 
     MESH.lastMesh = null;
     profileData.profileMeshSetGeom++;
@@ -332,25 +328,23 @@ Mesh.prototype.setGeom = function (geom)
     this.updateNormals(this._geom);
 
 
-
     if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
     if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
     if (this._geom.vertexColors.length > 0)
     {
-        if(this._geom.vertexColors.flat)this._geom.vertexColors.flat(100);
+        if (this._geom.vertexColors.flat) this._geom.vertexColors.flat(100);
         this.setAttribute("attrVertColor", this._geom.vertexColors, 4);
     }
 
     if (this.addVertexNumbers) this._setVertexNumbers();
 
-    var geomAttribs = this._geom.getAttributes();
-    for (var index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
-
+    const geomAttribs = this._geom.getAttributes();
+    for (const index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
 };
 
 Mesh.prototype._preBind = function (shader)
 {
-    for (var i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
         if (this._attributes[i].cb)
         {
@@ -363,9 +357,9 @@ Mesh.prototype._checkAttrLengths = function ()
 {
     // check length
 
-    for (var i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
-        if(this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length/this._attributes[i].itemSize)
+        if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
         {
             // console.warn(
             //     this._geom.name+": "+this._attributes[i].name+
@@ -374,18 +368,17 @@ Mesh.prototype._checkAttrLengths = function ()
             //     );
         }
     }
-}
+};
 
 Mesh.prototype._bind = function (shader)
 {
-
     if (shader != this._lastShader) this.unBind();
-    var attrLocs = [];
+    let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
 
     this._lastShader = shader;
-    var i = 0;
+    let i = 0;
     if (shader.lastCompile > this._lastAttrUpdate || attrLocs.length != this._attributes.length)
     {
         this._lastAttrUpdate = shader.lastCompile;
@@ -396,7 +389,7 @@ Mesh.prototype._bind = function (shader)
 
     for (i = 0; i < this._attributes.length; i++)
     {
-        var attribute = this._attributes[i];
+        const attribute = this._attributes[i];
         if (attrLocs[i] == -1)
         {
             if (attribute._attrLocationLastShaderTime != shader.lastCompile)
@@ -452,9 +445,9 @@ Mesh.prototype._bind = function (shader)
 
                 if (attribute.pointer)
                 {
-                    for (var ip = 0; ip < attribute.pointer.length; ip++)
+                    for (let ip = 0; ip < attribute.pointer.length; ip++)
                     {
-                        var pointer = attribute.pointer[ip];
+                        const pointer = attribute.pointer[ip];
 
                         if (pointer.loc == -1)
                         {
@@ -478,17 +471,17 @@ Mesh.prototype._bind = function (shader)
 
 Mesh.prototype.unBind = function ()
 {
-    var shader = this._lastShader;
+    const shader = this._lastShader;
     this._lastShader = null;
     if (!shader) return;
 
-    var attrLocs = [];
+    let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
 
     MESH.lastMesh = null;
 
-    for (var i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
         if (this._attributes[i].instanced)
         {
@@ -522,9 +515,8 @@ Mesh.prototype.meshChanged = function ()
 Mesh.prototype.printDebug = function (shader)
 {
     Log.log("--attributes");
-    for (i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
-
         Log.log("attribute " + i + " " + this._attributes[i].name);
     }
 };
@@ -546,7 +538,7 @@ Mesh.prototype.render = function (shader)
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
     if (!shader) return;
-    var i = 0;
+    const i = 0;
 
     if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
     if (shader.wireframe && this._geom.isIndexed())
@@ -559,7 +551,7 @@ Mesh.prototype.render = function (shader)
         this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
     }
 
-    var needsBind = false;
+    let needsBind = false;
     if (MESH.lastMesh != this)
     {
         if (MESH.lastMesh) MESH.lastMesh.unBind();
@@ -582,7 +574,7 @@ Mesh.prototype.render = function (shader)
 
     MESH.lastMesh = this;
 
-    var prim = this._cgl.gl.TRIANGLES;
+    let prim = this._cgl.gl.TRIANGLES;
     if (this._glPrimitive !== undefined) prim = this._glPrimitive;
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
@@ -601,18 +593,17 @@ Mesh.prototype.render = function (shader)
     else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
 
     profileData.profileMeshDraw++;
-
 };
 
 Mesh.prototype.setNumInstances = function (n)
 {
-    if(this._numInstances != n)
+    if (this._numInstances != n)
     {
         this._numInstances = n;
         // if (n <= 0)return;
-        var indexArr = new Float32Array(n);
-        for (var i = 0; i < n; i++) indexArr[i] = i;
-        this.setAttribute("instanceIndex", indexArr, 1, { instanced: true });
+        const indexArr = new Float32Array(n);
+        for (let i = 0; i < n; i++) indexArr[i] = i;
+        this.setAttribute("instanceIndex", indexArr, 1, { "instanced": true });
     }
 };
 
@@ -620,7 +611,7 @@ Mesh.prototype._disposeAttributes = function ()
 {
     if (!this._attributes) return;
 
-    for (var i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
         if (this._attributes[i].buffer)
         {

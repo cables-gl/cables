@@ -123,7 +123,6 @@ TextureEffect.prototype.startEffect = function ()
 
     // this._cgl.popBlend();
     // this._cgl.popBlendMode();
-
 };
 
 TextureEffect.prototype.endEffect = function ()
@@ -226,7 +225,7 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 {
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
-        op.uiAttr({ error: null });
+        op.uiAttr({ "error": null });
         return true;
     }
 
@@ -234,7 +233,7 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 
     if (op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.setUiError("textureeffect","This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs.",0);
+        op.setUiError("textureeffect", "This op can not be a child of a ImageCompose/texture effect! imagecompose should only have textureeffect childs.", 0);
         return false;
     }
 
@@ -246,7 +245,7 @@ TextureEffect.checkOpInEffect = function (op)
 {
     if (op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
     {
-        op.uiAttr({ error: null });
+        op.uiAttr({ "error": null });
         return true;
     }
 
@@ -254,7 +253,7 @@ TextureEffect.checkOpInEffect = function (op)
 
     if (!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
     {
-        op.setUiError("texeffect","This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>." ,1);
+        op.setUiError("texeffect", "This op must be a child of a texture effect! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>." , 1);
         return false;
     }
 
@@ -406,7 +405,7 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
 
 TextureEffect.AddBlendSelect = function (op, name)
 {
-    var p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
+    let p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
 
     return p;
 };
@@ -419,7 +418,7 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
     {
         TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
-        var str = blendMode.get();
+        let str = blendMode.get();
         if (str == "normal") str = null;
         else if (str == "multiply") str = "mul";
         else if (str == "multiply invert") str = "mulinv";
@@ -438,7 +437,7 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
         else if (str == "softlight") str = "soft";
         else if (str == "hardlight") str = "hard";
 
-        op.setUiAttrib({ extendTitle: str });
+        op.setUiAttrib({ "extendTitle": str });
     };
 };
 

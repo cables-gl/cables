@@ -16,12 +16,11 @@ const Link = function (scene)
 {
     EventTarget.apply(this);
 
-    this.id=CABLES.uuid();
+    this.id = CABLES.uuid();
     this.portIn = null;
     this.portOut = null;
     this.scene = scene; // todo: make private and rename to patch
     this.activityCounter = 0;
-
 };
 
 Link.prototype.setValue = function (v)
@@ -48,7 +47,7 @@ Link.prototype._setValue = function ()
         this.remove();
         return;
     }
-    var v = this.portOut.get();
+    const v = this.portOut.get();
 
     if (v == v)
     {
@@ -146,7 +145,7 @@ Link.prototype.link = function (p1, p2)
 
 Link.prototype.getSerialized = function ()
 {
-    var obj = {};
+    const obj = {};
 
     obj.portIn = this.portIn.getName();
     obj.portOut = this.portOut.getName();
@@ -170,7 +169,7 @@ Link.canLinkText = function (p1, p2)
 {
     if (p1.direction == p2.direction)
     {
-        var txt = "(out)";
+        let txt = "(out)";
         if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN) txt = "(in)";
         return "can not link: same direction " + txt;
     }

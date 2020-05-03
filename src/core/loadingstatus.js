@@ -36,7 +36,7 @@ LoadingStatus.prototype.checkStatus = function ()
     this._countFinished = 0;
     this._count = 0;
 
-    for (var i in this._loadingAssets)
+    for (const i in this._loadingAssets)
     {
         this._count++;
         if (!this._loadingAssets[i].finished)
@@ -49,7 +49,7 @@ LoadingStatus.prototype.checkStatus = function ()
 
     if (this._countFinished === 0)
     {
-        for (var j = 0; j < this._cbFinished.length; j++)
+        for (let j = 0; j < this._cbFinished.length; j++)
         {
             setTimeout(this._cbFinished[j], 200);
         }
@@ -61,9 +61,9 @@ LoadingStatus.prototype.print = function ()
 {
     if (this._patch.config.silent) return;
 
-    var rows = [];
+    const rows = [];
 
-    for (var i in this._loadingAssets)
+    for (const i in this._loadingAssets)
     {
         rows.push([
             this._loadingAssets[i].order,
@@ -94,15 +94,15 @@ LoadingStatus.prototype.finished = function (id)
 LoadingStatus.prototype.start = function (type, name)
 {
     if (this._startTime == 0) this._startTime = Date.now();
-    var id = generateUUID();
+    const id = generateUUID();
 
     this._loadingAssets[id] = {
         id,
         type,
         name,
-        finished: false,
-        timeStart: Date.now(),
-        order: this._order,
+        "finished": false,
+        "timeStart": Date.now(),
+        "order": this._order,
     };
     this._order++;
 

@@ -10,10 +10,10 @@ Requirements.WEBAUDIO = 2;
 Requirements.WEBGL2 = 3;
 
 Requirements.infos = [];
-Requirements.infos[Requirements.POINTERLOCK] = { title: "pointerLock", caniuse: "https://caniuse.com/#search=pointerlock" };
-Requirements.infos[Requirements.MIDI] = { title: "midi API", caniuse: "https://caniuse.com/#search=midi" };
-Requirements.infos[Requirements.WEBAUDIO] = { title: "web audio", caniuse: "https://caniuse.com/#search=webaudio" };
-Requirements.infos[Requirements.WEBGL2] = { title: "WebGL 2" };
+Requirements.infos[Requirements.POINTERLOCK] = { "title": "pointerLock", "caniuse": "https://caniuse.com/#search=pointerlock" };
+Requirements.infos[Requirements.MIDI] = { "title": "midi API", "caniuse": "https://caniuse.com/#search=midi" };
+Requirements.infos[Requirements.WEBAUDIO] = { "title": "web audio", "caniuse": "https://caniuse.com/#search=webaudio" };
+Requirements.infos[Requirements.WEBGL2] = { "title": "WebGL 2" };
 
 Requirements.prototype.checkRequirement = function (which, op)
 {
@@ -42,17 +42,17 @@ Requirements.prototype.checkOp = function (op)
 {
     if (op && op.requirements)
     {
-        for (var j = 0; j < op.requirements.length; j++)
+        for (let j = 0; j < op.requirements.length; j++)
         {
-            var reqId = op.requirements[j];
+            const reqId = op.requirements[j];
             if (!this.result[reqId])
             {
-                var success = this.checkRequirement(reqId, op);
+                const success = this.checkRequirement(reqId, op);
 
                 if (!success)
                 {
                     if (op.patch.cgl && op.patch.cgl.canvas) op.patch.cgl.canvas.remove();
-                    var title = Requirements.infos[reqId].title;
+                    let title = Requirements.infos[reqId].title;
                     if (Requirements.infos[reqId].caniuse) title = "<a href=\"" + Requirements.infos[reqId].caniuse + "\" target=\"_blank\">" + Requirements.infos[reqId].title + " (" + op.objName + ")</a>";
                     // document.writeln('<pre>browser does not meet requirement: '+title+'</pre>');
                     // console.error("browser does not meet requirement: "+Requirements.infos[reqId].title);
@@ -61,7 +61,7 @@ Requirements.prototype.checkOp = function (op)
 
                 this.result[reqId] = {
                     success,
-                    info: Requirements.infos[reqId],
+                    "info": Requirements.infos[reqId],
                 };
             }
         }

@@ -13,8 +13,8 @@ const EMBED = {};
  */
 EMBED.addPatch = function (_element, options)
 {
-    var el = _element;
-    var id = generateUUID();
+    let el = _element;
+    let id = generateUUID();
     if (typeof _element == "string")
     {
         id = _element;
@@ -27,7 +27,7 @@ EMBED.addPatch = function (_element, options)
         }
     }
 
-    var canvEl = document.createElement("canvas");
+    const canvEl = document.createElement("canvas");
     canvEl.id = "glcanvas_" + id;
     canvEl.width = el.clientWidth;
     canvEl.height = el.clientHeight;

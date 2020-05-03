@@ -3,9 +3,9 @@ import { Log } from "./log";
 
 const Profiler = function ()
 {
-    var items = {};
-    var currentId = null;
-    var currentStart = 0;
+    let items = {};
+    let currentId = null;
+    let currentStart = 0;
 
     this.getItems = function ()
     {
@@ -48,13 +48,13 @@ const Profiler = function ()
             if (!items[object.id])
             {
                 items[object.id] = {
-                    numTriggers: 0,
-                    timeUsed: 0,
+                    "numTriggers": 0,
+                    "timeUsed": 0,
                 };
             }
 
             items[object.id].numTriggers++;
-            items[object.id].title = object.parent.name +"."+ object.name;
+            items[object.id].title = object.parent.name + "." + object.name;
 
             currentId = object.id;
             currentStart = performance.now();
@@ -68,7 +68,7 @@ const Profiler = function ()
     this.print = function ()
     {
         Log.log("--------");
-        for (var i in items)
+        for (const i in items)
         {
             Log.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
         }

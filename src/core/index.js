@@ -49,5 +49,4 @@ const CABLES = Object.assign(
 
 export default CABLES;
 
-
-if(! (function() { return !this; })() ) console.log('not in strict mode: index core' );
+if (!(function () { return !this; }())) console.log("not in strict mode: index core");

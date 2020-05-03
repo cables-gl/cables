@@ -1,5 +1,4 @@
 import { uuid, UTILS } from "./utils";
-
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
@@ -23,7 +22,8 @@ import { Log } from "./log";
  * shader.setSource(attachments.shader_vert,attachments.shader_frag);
  */
 
-var Ops = {};
+const Ops = {};
+
 // var CABLES=CABLES || {};
 
 // export const OP_PORT_TYPE_VALUE = 0;
@@ -52,9 +52,8 @@ const Op = function ()
     this._needsParentOp = null;
     this._shortOpName = "";
 
-    this._hasUiErrors=false;
+    this._hasUiErrors = false;
     this._uiErrors = {};
-
 
     if (arguments[1])
     {
@@ -62,8 +61,11 @@ const Op = function ()
 
         if (this._shortOpName.indexOf(CONSTANTS.OP.OP_VERSION_PREFIX) > 0)
         {
-            var n = this._shortOpName.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
-            this._shortOpName = this._shortOpName.substring(0, this._shortOpName.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length);
+            const n = this._shortOpName.split(CONSTANTS.OP.OP_VERSION_PREFIX)[1];
+            this._shortOpName = this._shortOpName.substring(
+                0,
+                this._shortOpName.length - (CONSTANTS.OP.OP_VERSION_PREFIX + n).length
+            );
         }
 
         this.uiAttribs.title = this._shortOpName;
@@ -99,17 +101,17 @@ const Op = function ()
 {
     Op.prototype.clearUiAttrib = function (name)
     {
-        var obj = {};
+        const obj = {};
         obj.name = null;
         this.uiAttrib(obj);
     };
 
     Op.prototype.setTitle = function (name)
     {
-        var doFireEvent = this.name != name;
+        const doFireEvent = this.name != name;
 
         this.name = name;
-        this.uiAttr({ title: name });
+        this.uiAttr({ "title": name });
 
         if (doFireEvent) this.fireEvent("onTitleChange", name);
     };
@@ -117,7 +119,7 @@ const Op = function ()
     const _setUiAttrib = function (newAttribs)
     {
         if (!this.uiAttribs) this.uiAttribs = {};
-        for (var p in newAttribs)
+        for (const p in newAttribs)
         {
             this.uiAttribs[p] = newAttribs[p];
         }
@@ -161,15 +163,15 @@ const Op = function ()
         return p;
     };
 
-    Op.prototype.hasPort = function (name)
-    {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[i].getName() == name) return true;
-        return false;
-    };
+    // Op.prototype.hasPort = function(name) {
+    //     for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+    //         if (this.portsIn[i].getName() == name) return true;
+    //     return false;
+    // };
 
     Op.prototype.hasDynamicPort = function ()
     {
-        var i = 0;
+        let i = 0;
         for (i = 0; i < this.portsIn.length; i++)
         {
             if (this.portsIn[i].type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return true;
@@ -209,7 +211,7 @@ const Op = function ()
      */
     Op.prototype.inFunction = Op.prototype.inTrigger = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -225,19 +227,25 @@ const Op = function ()
      */
     Op.prototype.inFunctionButton = Op.prototype.inTriggerButton = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, { display: "button" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
+                "display": "button"
+            })
+        );
         if (v !== undefined) p.set(v);
         return p;
     };
-
 
     Op.prototype.inFunctionButton = Op.prototype.inUiTriggerButtons = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, { display: "buttons" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION, {
+                "display": "buttons"
+            })
+        );
         if (v !== undefined) p.set(v);
         return p;
     };
-
 
     /**
      * create a number value input port
@@ -253,7 +261,7 @@ const Op = function ()
     Op.prototype.inValueFloat = Op.prototype.inValue = Op.prototype.inFloat = function (name, v)
     {
         // old // old
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined)
         {
             p.set(v);
@@ -275,7 +283,11 @@ const Op = function ()
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
         // old
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "bool"
+            })
+        );
         if (v !== undefined)
         {
             p.set(v);
@@ -295,7 +307,11 @@ const Op = function ()
      */
     Op.prototype.inValueString = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "type": "string"
+            })
+        );
         p.value = "";
         if (v !== undefined)
         {
@@ -308,7 +324,11 @@ const Op = function ()
     // new string
     Op.prototype.inString = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "type": "string"
+            })
+        );
         v = v || "";
         p.value = v;
         p.set(v);
@@ -327,7 +347,12 @@ const Op = function ()
      */
     Op.prototype.inValueText = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string", display: "text" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "type": "string",
+                "display": "text"
+            })
+        );
         p.value = "";
         if (v !== undefined)
         {
@@ -339,7 +364,12 @@ const Op = function ()
 
     Op.prototype.inTextarea = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string", display: "text" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "type": "string",
+                "display": "text"
+            })
+        );
         p.value = "";
         if (v !== undefined)
         {
@@ -361,7 +391,13 @@ const Op = function ()
     // new string
     Op.prototype.inStringEditor = function (name, v, syntax)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string", display: "editor", editorSyntax: syntax }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "type": "string",
+                "display": "editor",
+                "editorSyntax": syntax
+            })
+        );
         p.value = "";
         if (v !== undefined)
         {
@@ -374,7 +410,13 @@ const Op = function ()
     // old
     Op.prototype.inValueEditor = function (name, v, syntax)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string", display: "editor", editorSyntax: syntax }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "type": "string",
+                "display": "editor",
+                "editorSyntax": syntax
+            })
+        );
         p.value = "";
         if (v !== undefined)
         {
@@ -394,12 +436,15 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v,noindex)
+    Op.prototype.inValueSelect = Op.prototype.inDropDown = function (name, values, v, noindex)
     {
-        var p=null;
-        if(!noindex)
+        let p = null;
+        if (!noindex)
         {
-            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "increment": "integer",
+                "hideParam": true
+            });
             const n = this.addInPort(indexPort);
 
             const valuePort = new ValueSelectPort(
@@ -407,17 +452,17 @@ const Op = function ()
                 name,
                 CONSTANTS.OP.OP_PORT_TYPE_VALUE,
                 {
-                    display: "dropdown",
-                    hidePort: true,
-                    type: "string",
-                    values,
+                    "display": "dropdown",
+                    "hidePort": true,
+                    "type": "string",
+                    values
                 },
-                n,
+                n
             );
 
-            indexPort.onLinkChanged=function()
+            indexPort.onLinkChanged = function ()
             {
-                valuePort.setUiAttribs({ greyout: indexPort.isLinked() });
+                valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
             };
 
             p = this.addInPort(valuePort);
@@ -433,22 +478,15 @@ const Op = function ()
         }
         else
         {
-            const valuePort = new Port(
-                this,
-                name,
-                CONSTANTS.OP.OP_PORT_TYPE_VALUE,
-                {
-                    display: "dropdown",
-                    hidePort: true,
-                    type: "string",
-                    values,
-                }
-            );
+            const valuePort = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "dropdown",
+                "hidePort": true,
+                "type": "string",
+                values
+            });
 
-             p = this.addInPort(valuePort);
-
+            p = this.addInPort(valuePort);
         }
-
 
         return p;
     };
@@ -463,12 +501,15 @@ const Op = function ()
      * @param {String} value default value
      * @return {Port} created port
      */
-    Op.prototype.inSwitch = function (name, values, v,noindex)
+    Op.prototype.inSwitch = function (name, values, v, noindex)
     {
-        var p=null;
-        if(!noindex)
+        let p = null;
+        if (!noindex)
         {
-            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer",hideParam:true });
+            const indexPort = new Port(this, name + " index", CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "increment": "integer",
+                "hideParam": true
+            });
             const n = this.addInPort(indexPort);
 
             const switchPort = new SwitchPort(
@@ -476,17 +517,17 @@ const Op = function ()
                 name,
                 CONSTANTS.OP.OP_PORT_TYPE_STRING,
                 {
-                    display: "switch",
-                    hidePort: true,
-                    type: "string",
-                    values,
+                    "display": "switch",
+                    "hidePort": true,
+                    "type": "string",
+                    values
                 },
                 n
             );
 
-            indexPort.onLinkChanged=function()
+            indexPort.onLinkChanged = function ()
             {
-                switchPort.setUiAttribs({ greyout: indexPort.isLinked() });
+                switchPort.setUiAttribs({ "greyout": indexPort.isLinked() });
             };
             p = this.addInPort(switchPort);
 
@@ -498,25 +539,17 @@ const Op = function ()
                 p.defaultValue = v;
                 n.defaultValue = index;
             }
-
         }
         else
         {
-            const switchPort = new Port(
-                this,
-                name,
-                CONSTANTS.OP.OP_PORT_TYPE_STRING,
-                {
-                    display: "switch",
-                    hidePort: true,
-                    type: "string",
-                    values,
-                }
-            );
+            const switchPort = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "display": "switch",
+                "hidePort": true,
+                "type": "string",
+                values
+            });
             p = this.addInPort(switchPort);
-
         }
-
 
         return p;
     };
@@ -533,7 +566,11 @@ const Op = function ()
     Op.prototype.inValueInt = Op.prototype.inInt = function (name, v)
     {
         // old
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { increment: "integer" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "increment": "integer"
+            })
+        );
         if (v !== undefined)
         {
             p.set(v);
@@ -552,7 +589,12 @@ const Op = function ()
      */
     Op.prototype.inFile = function (name, filter, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "file", filter:filter }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "file",
+                "filter": filter
+            })
+        );
         if (v !== undefined)
         {
             p.set(v);
@@ -563,7 +605,12 @@ const Op = function ()
 
     Op.prototype.inUrl = function (name, filter, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { display: "file", filter }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "display": "file",
+                filter
+            })
+        );
         if (v !== undefined)
         {
             p.set(v);
@@ -582,7 +629,12 @@ const Op = function ()
      */
     Op.prototype.inTexture = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { display: "texture", preview: true }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
+                "display": "texture",
+                "preview": true
+            })
+        );
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -597,14 +649,19 @@ const Op = function ()
      */
     Op.prototype.inObject = function (name, v, options)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, options));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, options));
         if (v !== undefined) p.set(v);
         return p;
     };
 
     Op.prototype.inGradient = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "gradient", hidePort: true }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "gradient",
+                "hidePort": true
+            })
+        );
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -619,7 +676,7 @@ const Op = function ()
      */
     Op.prototype.inArray = function (name, v)
     {
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -636,7 +693,11 @@ const Op = function ()
     Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v)
     {
         // old
-        var p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "range" }));
+        const p = this.addInPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "range"
+            })
+        );
         if (v !== undefined)
         {
             p.set(v);
@@ -656,7 +717,7 @@ const Op = function ()
     Op.prototype.outFunction = Op.prototype.outTrigger = function (name, v)
     {
         // old
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_FUNCTION));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -673,7 +734,7 @@ const Op = function ()
     Op.prototype.outValue = Op.prototype.outNumber = function (name, v)
     {
         // old
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -689,7 +750,11 @@ const Op = function ()
     Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
     {
         // old
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { display: "bool" }));
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "bool"
+            })
+        );
         if (v !== undefined) p.set(v);
         else p.set(false);
         return p;
@@ -705,13 +770,21 @@ const Op = function ()
      */
     Op.prototype.outValueString = function (name, v)
     {
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { type: "string" }));
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "type": "string"
+            })
+        );
         if (v !== undefined) p.set(v);
         return p;
     };
     Op.prototype.outString = function (name, v)
     {
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, { type: "string" }));
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
+                "type": "string"
+            })
+        );
         if (v !== undefined) p.set(v);
         else p.set("");
         return p;
@@ -727,7 +800,7 @@ const Op = function ()
      */
     Op.prototype.outObject = function (name, v)
     {
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -743,7 +816,7 @@ const Op = function ()
      */
     Op.prototype.outArray = function (name, v)
     {
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_ARRAY));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -759,7 +832,11 @@ const Op = function ()
      */
     Op.prototype.outTexture = function (name, v)
     {
-        var p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { preview: true }));
+        const p = this.addOutPort(
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
+                "preview": true
+            })
+        );
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -767,13 +844,13 @@ const Op = function ()
 
     Op.prototype.inDynamic = function (name, filter, options, v)
     {
-        var p = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC, options);
+        const p = new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC, options);
 
         p.shouldLink = function (p1, p2)
         {
             if (filter && UTILS.isArray(filter))
             {
-                for (var i = 0; i < filter.length; i++)
+                for (let i = 0; i < filter.length; i++)
                 {
                     if (p1 == this && p2.type === filter[i]) return true;
                     if (p2 == this && p1.type === filter[i]) return true;
@@ -794,19 +871,20 @@ const Op = function ()
 
     Op.prototype.printInfo = function ()
     {
-        for (var i = 0; i < this.portsIn.length; i++) Log.log("in: " + this.portsIn[i].getName());
+        for (let i = 0; i < this.portsIn.length; i++) Log.log("in: " + this.portsIn[i].getName());
 
-        for (var ipo in this.portsOut) Log.log("out: " + this.portsOut[ipo].getName());
+        for (const ipo in this.portsOut) Log.log("out: " + this.portsOut[ipo].getName());
     };
 
     Op.prototype.getOutChilds = function ()
     {
-        var childs = [];
-        for (var ipo in this.portsOut)
+        const childs = [];
+        for (const ipo in this.portsOut)
         {
-            for (var l in this.portsOut[ipo].links)
+            for (const l in this.portsOut[ipo].links)
             {
-                if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION) childs.push(this.portsOut[ipo].links[l].portIn.parent);
+                if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+                    childs.push(this.portsOut[ipo].links[l].portIn.parent);
             }
         }
         return childs;
@@ -815,22 +893,23 @@ const Op = function ()
     Op.prototype.markChilds = function ()
     {
         this.marked = true;
-        for (var ipo in this.portsOut)
+        for (const ipo in this.portsOut)
         {
-            for (var l in this.portsOut[ipo].links)
+            for (const l in this.portsOut[ipo].links)
             {
                 this.portsOut[ipo].parent.marked = true;
-                if (this.portsOut[ipo].links[l].portIn.parent != this) this.portsOut[ipo].links[l].portIn.parent.markChilds();
+                if (this.portsOut[ipo].links[l].portIn.parent != this)
+                    this.portsOut[ipo].links[l].portIn.parent.markChilds();
             }
         }
     };
 
     Op.prototype.deleteChilds = function ()
     {
-        var opsToDelete = [];
-        for (var ipo in this.portsOut)
+        const opsToDelete = [];
+        for (const ipo in this.portsOut)
         {
-            for (var l in this.portsOut[ipo].links)
+            for (const l in this.portsOut[ipo].links)
             {
                 if (this.portsOut[ipo].links[l].portIn.parent != this)
                 {
@@ -841,7 +920,7 @@ const Op = function ()
             }
         }
 
-        for (var i in opsToDelete)
+        for (const i in opsToDelete)
         {
             this.patch.deleteOp(opsToDelete[i].id);
         }
@@ -849,30 +928,30 @@ const Op = function ()
 
     Op.prototype.removeLinks = function ()
     {
-        for (var i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
-        for (var ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
+        for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].removeLinks();
+        for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
     };
 
     Op.prototype.countFittingPorts = function (otherPort)
     {
-        var count = 0;
-        for (var ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) count++;
+        let count = 0;
+        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) count++;
 
-        for (var ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) count++;
+        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) count++;
 
         return count;
     };
 
     Op.prototype.findFittingPort = function (otherPort)
     {
-        for (var ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
 
-        for (var ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
     };
 
     Op.prototype.getSerialized = function ()
     {
-        var op = {};
+        const op = {};
         // op.name=this.getName();
         // var nameParts=this.objName.split('.');
         // if(nameParts.length>0) if(op.name==nameParts[nameParts.length-1])delete op.name;
@@ -887,19 +966,18 @@ const Op = function ()
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
         if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
 
-
         op.portsIn = [];
         op.portsOut = [];
 
-        for (var i = 0; i < this.portsIn.length; i++) op.portsIn.push(this.portsIn[i].getSerialized());
-        for (var ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
+        for (let i = 0; i < this.portsIn.length; i++) op.portsIn.push(this.portsIn[i].getSerialized());
+        for (const ipo in this.portsOut) op.portsOut.push(this.portsOut[ipo].getSerialized());
 
         return op;
     };
 
     Op.prototype.getFirstOutPortByType = function (type)
     {
-        for (var ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
+        for (const ipo in this.portsOut) if (this.portsOut[ipo].type == type) return this.portsOut[ipo];
     };
 
     /**
@@ -912,8 +990,10 @@ const Op = function ()
      */
     Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
-        for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
+            if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
+        for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+            if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
     };
 
     /**
@@ -926,19 +1006,19 @@ const Op = function ()
      */
     Op.prototype.getPortById = function (id)
     {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].id == id) return this.portsIn[ipi];
-        for (var ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].id == id) return this.portsOut[ipo];
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++) if (this.portsIn[ipi].id == id) return this.portsIn[ipi];
+        for (let ipo = 0; ipo < this.portsOut.length; ipo++) if (this.portsOut[ipo].id == id) return this.portsOut[ipo];
     };
 
     Op.prototype.updateAnims = function ()
     {
-        for (var i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
+        for (let i = 0; i < this.portsIn.length; i++) this.portsIn[i].updateAnim();
     };
 
     Op.prototype.log = function ()
     {
         if (this.patch.silent) return;
-        var args = ["[op "+this._shortOpName+"]"];
+        const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.log, [console, args]);
     };
@@ -946,7 +1026,7 @@ const Op = function ()
     Op.prototype.error = function ()
     {
         if (this.patch.silent) return;
-        var args = ["[op "+this._shortOpName+"]"];
+        const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);
     };
@@ -954,11 +1034,10 @@ const Op = function ()
     Op.prototype.warn = function ()
     {
         if (this.patch.silent) return;
-        var args = ["[op "+this._shortOpName+"]"];
+        const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.warn, [console, args]);
     };
-
 
     /**
      * disconnect all links
@@ -968,8 +1047,8 @@ const Op = function ()
      */
     Op.prototype.unLink = function ()
     {
-        for (var ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi].removeLinks();
+        for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi].removeLinks();
     };
 
     Op.unLinkTempReLinkP1 = null;
@@ -982,9 +1061,14 @@ const Op = function ()
 
         if (this.oldLinks)
         {
-            for (var i = 0; i < this.oldLinks.length; i++)
+            for (let i = 0; i < this.oldLinks.length; i++)
             {
-                this.patch.link(this.oldLinks[i].in.parent, this.oldLinks[i].in.getName(), this.oldLinks[i].out.parent, this.oldLinks[i].out.getName());
+                this.patch.link(
+                    this.oldLinks[i].in.parent,
+                    this.oldLinks[i].in.getName(),
+                    this.oldLinks[i].out.parent,
+                    this.oldLinks[i].out.getName()
+                );
             }
             this.oldLinks.length = 0;
         }
@@ -995,15 +1079,20 @@ const Op = function ()
 
     Op.prototype.unLinkTemporary = function ()
     {
-        var tryRelink = true;
-        var i = 0;
+        const tryRelink = true;
+        let i = 0;
 
         this.shakeLink = null;
         this.oldLinks = [];
 
         if (tryRelink)
         {
-            if (this.portsIn.length > 0 && this.portsIn[0].isLinked() && (this.portsOut.length > 0 && this.portsOut[0].isLinked()))
+            if (
+                this.portsIn.length > 0 &&
+                this.portsIn[0].isLinked() &&
+                this.portsOut.length > 0 &&
+                this.portsOut[0].isLinked()
+            )
             {
                 if (this.portsIn[0].getType() == this.portsOut[0].getType())
                 {
@@ -1013,55 +1102,54 @@ const Op = function ()
             }
         }
 
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             for (i = 0; i < this.portsIn[ipi].links.length; i++)
             {
                 this.oldLinks.push({
-                    in: this.portsIn[ipi].links[i].portIn,
-                    out: this.portsIn[ipi].links[i].portOut,
+                    "in": this.portsIn[ipi].links[i].portIn,
+                    "out": this.portsIn[ipi].links[i].portOut
                 });
             }
         }
 
-        for (var ipo = 0; ipo < this.portsOut.length; ipo++)
-        {
+        for (let ipo = 0; ipo < this.portsOut.length; ipo++)
             for (i = 0; i < this.portsOut[ipo].links.length; i++)
-            {
                 this.oldLinks.push({
-                    in: this.portsOut[ipo].links[i].portIn,
-                    out: this.portsOut[ipo].links[i].portOut,
+                    "in": this.portsOut[ipo].links[i].portIn,
+                    "out": this.portsOut[ipo].links[i].portOut
                 });
-            }
-        }
 
         this.unLink();
 
         if (Op.unLinkTempReLinkP1 && Op.unLinkTempReLinkP2)
-        {
-            this.shakeLink = this.patch.link(Op.unLinkTempReLinkP1.parent, Op.unLinkTempReLinkP1.getName(), Op.unLinkTempReLinkP2.parent, Op.unLinkTempReLinkP2.getName());
-        }
+            this.shakeLink = this.patch.link(
+                Op.unLinkTempReLinkP1.parent,
+                Op.unLinkTempReLinkP1.getName(),
+                Op.unLinkTempReLinkP2.parent,
+                Op.unLinkTempReLinkP2.getName()
+            );
     };
 
     Op.prototype.profile = function (enable)
     {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             this.portsIn[ipi]._onTriggered = this.portsIn[ipi]._onTriggeredProfiling;
             this.portsIn[ipi].set = this.portsIn[ipi]._onSetProfiling;
         }
-
     };
 
     Op.prototype.findParent = function (objName)
     {
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             if (this.portsIn[ipi].isLinked())
             {
-                if (this.portsIn[ipi].links[0].portOut.parent.objName == objName) return this.portsIn[ipi].links[0].portOut.parent;
+                if (this.portsIn[ipi].links[0].portOut.parent.objName == objName)
+                    return this.portsIn[ipi].links[0].portOut.parent;
 
-                var found = null;
+                let found = null;
                 found = this.portsIn[ipi].links[0].portOut.parent.findParent(objName);
                 if (found) return found;
             }
@@ -1073,7 +1161,7 @@ const Op = function ()
     {
         if (this._instances)
         {
-            for (var i = 0; i < this._instances.length; i++)
+            for (let i = 0; i < this._instances.length; i++)
             {
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
             }
@@ -1085,8 +1173,8 @@ const Op = function ()
     {
         if (this.patch.instancing.numCycles() === 0) return false;
 
-        var i = 0;
-        var ipi = 0;
+        let i = 0;
+        let ipi = 0;
         if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
         {
             if (!this._instances) this._instances = [];
@@ -1101,11 +1189,13 @@ const Op = function ()
                 };
                 this._instances[i].uiAttr(this.uiAttribs);
 
-                for (var ipo = 0; ipo < this.portsOut.length; ipo++)
+                for (let ipo = 0; ipo < this.portsOut.length; ipo++)
                 {
                     if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
                     {
-                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
+                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[
+                            ipo
+                        ].trigger.bind(this.portsOut[ipo]);
                     }
                 }
             }
@@ -1117,10 +1207,13 @@ const Op = function ()
             }
         }
 
-        var theTriggerPort = null;
+        const theTriggerPort = null;
         for (ipi = 0; ipi < this.portsIn.length; ipi++)
         {
-            if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE || this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY)
+            if (
+                this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_VALUE ||
+                this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY
+            )
             {
                 this._instances[this.patch.instancing.index()].portsIn[ipi].set(this.portsIn[ipi].get());
             }
@@ -1178,9 +1271,9 @@ const Op = function ()
 
     Op.prototype.setValues = function (obj)
     {
-        for (var i in obj)
+        for (const i in obj)
         {
-            var port = this.getPortByName(i);
+            const port = this.getPortByName(i);
             if (port) port.set(obj[i]);
             else Log.log("op.setValues: port not found:", i);
         }
@@ -1195,49 +1288,48 @@ const Op = function ()
      * @param {txt} text message
      * @param {level} level
      */
-    Op.prototype.setUiError=function(id,txt,level)
+    Op.prototype.setUiError = function (id, txt, level)
     {
-        if(!txt && !this._hasUiErrors)return;
-        if(!txt && !this._uiErrors.hasOwnProperty(id))return;
-        if(this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt==txt) return;
+        if (!txt && !this._hasUiErrors) return;
+        if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
+        if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
 
-        if(!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
+        if (!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
         else
         {
-            if(txt && (!this._uiErrors.hasOwnProperty(id) || this._uiErrors[id].txt!=txt))
+            if (txt && (!this._uiErrors.hasOwnProperty(id) || this._uiErrors[id].txt != txt))
             {
-                if(level==undefined)level=2;
-                this._uiErrors[id]={"txt":txt,"level":level};
+                if (level == undefined) level = 2;
+                this._uiErrors[id] = { "txt": txt, "level": level };
             }
         }
 
-        var errorArr=[];
-        for(var i in this._uiErrors) errorArr.push(this._uiErrors[i]);
+        const errorArr = [];
+        for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
 
         this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
-        this._hasUiErrors=Object.keys(this._uiErrors).length;
-    }
+        this._hasUiErrors = Object.keys(this._uiErrors).length;
+    };
 
     // todo: remove
-    Op.prototype.setError =
-    Op.prototype.error = function (id, txt)
+    Op.prototype.setError = Op.prototype.error = function (id, txt)
     {
         console.warn("old error message op.error() - use op.setUiError()");
 
-        if(txt===undefined)
+        if (txt === undefined)
         {
-            this.uiAttr({ error: id });
+            this.uiAttr({ "error": id });
         }
         else
         {
-            if(this._uiErrors[id]!=txt)
+            if (this._uiErrors[id] != txt)
             {
-                this._uiErrors[id]=txt;
-                if(!txt)delete this._uiErrors[id];
+                this._uiErrors[id] = txt;
+                if (!txt) delete this._uiErrors[id];
 
-                var errorArr=[];
-                for(var i in this._uiErrors)errorArr.push(this._uiErrors[i]);
+                const errorArr = [];
+                for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
                 this.uiAttr({ "errors": errorArr });
                 console.log(errorArr);
             }
@@ -1278,7 +1370,7 @@ const Op = function ()
         {
             if (this._eventCallbacks[which])
             {
-                var idx = this._eventCallbacks[which].indexOf(cb);
+                const idx = this._eventCallbacks[which].indexOf(cb);
                 if (idx == -1) return false;
                 return true;
             }
@@ -1301,7 +1393,7 @@ const Op = function ()
     {
         if (this._eventCallbacks[which])
         {
-            var idx = this._eventCallbacks[which].indexOf(cb);
+            const idx = this._eventCallbacks[which].indexOf(cb);
             if (idx == -1) Log.log("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].slice(idx);
         }
@@ -1309,7 +1401,9 @@ const Op = function ()
 
     Op.prototype.fireEvent = function (which, params)
     {
-        if (this._eventCallbacks[which]) for (var i = 0; i < this._eventCallbacks[which].length; i++) if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i](params);
+        if (this._eventCallbacks[which])
+            for (let i = 0; i < this._eventCallbacks[which].length; i++)
+                if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i](params);
 
         if (this.onUiAttrChange && which == "onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
     };
@@ -1338,9 +1432,9 @@ const Op = function ()
      */
     Op.prototype.setPortGroup = function (name, ports)
     {
-        for (var i = 0; i < ports.length; i++)
+        for (let i = 0; i < ports.length; i++)
         {
-            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ group: name });
+            if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
             else
             {
                 console.error("setPortGroup: invalid port!");
@@ -1350,9 +1444,9 @@ const Op = function ()
 
     Op.prototype.setUiAxisPorts = function (px, py, pz)
     {
-        if (px) px.setUiAttribs({ axis: "X" });
-        if (py) py.setUiAttribs({ axis: "Y" });
-        if (pz) pz.setUiAttribs({ axis: "Z" });
+        if (px) px.setUiAttribs({ "axis": "X" });
+        if (py) py.setUiAttribs({ "axis": "Y" });
+        if (pz) pz.setUiAttribs({ "axis": "Z" });
     };
 
     /**
@@ -1365,7 +1459,7 @@ const Op = function ()
     Op.prototype.removePort = function (port)
     {
         // for(var ipi in this.portsIn)
-        for (var ipi = 0; ipi < this.portsIn.length; ipi++)
+        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
         {
             if (this.portsIn[ipi] == port)
             {
@@ -1376,8 +1470,6 @@ const Op = function ()
             }
         }
     };
-
-
 
     Op.prototype._checkLinksNeededToWork = function () {};
 
@@ -1399,24 +1491,23 @@ const Op = function ()
     Op.prototype.toWorkPortsNeedToBeLinked = function ()
     {
         if (!this.patch.isEditorMode()) return;
-        for (var i = 0; i < arguments.length; i++) if (this._needsLinkedToWork.indexOf(arguments[i]) == -1) this._needsLinkedToWork.push(arguments[i]);
+        for (let i = 0; i < arguments.length; i++)
+            if (this._needsLinkedToWork.indexOf(arguments[i]) == -1) this._needsLinkedToWork.push(arguments[i]);
     };
     Op.prototype.toWorkPortsNeedToBeLinkedReset = function ()
     {
         if (!this.patch.isEditorMode()) return;
         this._needsLinkedToWork.length = 0;
-        if(this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
+        if (this.checkLinkTimeWarnings) this.checkLinkTimeWarnings();
     };
 
     Op.prototype.initVarPorts = function ()
     {
-        for(var i=0;i<this.portsIn.length;i++)
+        for (let i = 0; i < this.portsIn.length; i++)
         {
-            if(this.portsIn[i].getVariableName()) this.portsIn[i].setVariable( this.portsIn[i].getVariableName() );
+            if (this.portsIn[i].getVariableName()) this.portsIn[i].setVariable(this.portsIn[i].getVariableName());
         }
     };
-
-
 
     /**
      * refresh op parameters, if current op is selected
@@ -1426,7 +1517,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if(this.patch && this.patch.isEditorMode())  gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode()) gui.opParams.show(this);
     };
 }
 

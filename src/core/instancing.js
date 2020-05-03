@@ -29,8 +29,8 @@ Instancing.prototype.numLoops = function ()
 Instancing.prototype.numCycles = function ()
 {
     if (this._loops.length === 0) return 0;
-    var num = this._loops[0];
-    for (var i = 1; i < this._loops.length; i++) num *= this._loops[i];
+    let num = this._loops[0];
+    for (let i = 1; i < this._loops.length; i++) num *= this._loops[i];
 
     return num;
 };

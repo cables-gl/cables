@@ -19,15 +19,11 @@ export function extendMeshWithFeedback(Mesh)
 
     Mesh.prototype.setFeedback = function (attrib, nameOut, initialArr)
     {
-        var fb = {
-            nameOut,
-        };
-
-        var found = false;
-
+        let fb = { nameOut, };
+        let found = false;
         this.unBindFeedbacks();
 
-        for (var i = 0; i < this._feedBacks.length; i++)
+        for (let i = 0; i < this._feedBacks.length; i++)
         {
             if (this._feedBacks[i].nameOut == nameOut)
             {
@@ -69,11 +65,11 @@ export function extendMeshWithFeedback(Mesh)
 
         this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, this._transformFeedBackLoc);
 
-        var found = false;
+        let found = false;
 
-        for (var i = 0; i < this._feedBacks.length; i++)
+        for (let i = 0; i < this._feedBacks.length; i++)
         {
-            var fb = this._feedBacks[i];
+            const fb = this._feedBacks[i];
 
             if (fb.attrib == attrib)
             {
@@ -99,11 +95,11 @@ export function extendMeshWithFeedback(Mesh)
 
     Mesh.prototype.drawFeedbacks = function (shader, prim)
     {
-        var i = 0;
+        let i = 0;
 
         if (this._feedBacksChanged)
         {
-            var names = [];
+            const names = [];
             this._cgl.gl.bindTransformFeedback(this._cgl.gl.TRANSFORM_FEEDBACK, this._transformFeedBackLoc);
 
             for (i = 0; i < this._feedBacks.length; i++) names.push(this._feedBacks[i].nameOut);
@@ -140,7 +136,7 @@ export function extendMeshWithFeedback(Mesh)
 
     Mesh.prototype.unBindFeedbacks = function ()
     {
-        for (var i = 0; i < this._feedBacks.length; i++)
+        for (let i = 0; i < this._feedBacks.length; i++)
         {
             // this._cgl.gl.disableVertexAttribArray(this._feedBacks[i].attrib.loc);
             this._cgl.gl.bindBufferBase(this._cgl.gl.TRANSFORM_FEEDBACK_BUFFER, i, null);
@@ -151,9 +147,9 @@ export function extendMeshWithFeedback(Mesh)
 
     Mesh.prototype.feedBacksSwapBuffers = function ()
     {
-        for (var i = 0; i < this._feedBacks.length; i++)
+        for (let i = 0; i < this._feedBacks.length; i++)
         {
-            var t = this._feedBacks[i].attrib.buffer;
+            const t = this._feedBacks[i].attrib.buffer;
             this._feedBacks[i].attrib.buffer = this._feedBacks[i].outBuffer;
             this._feedBacks[i].outBuffer = t;
         }

@@ -3,8 +3,7 @@ import { uuid } from "../utils";
 import { Log } from "../log";
 
 
-
-var DEFAULT_TEXTURE_SIZE = 8;
+const DEFAULT_TEXTURE_SIZE = 8;
 
 /**
  * A Texture
@@ -35,9 +34,9 @@ const Texture = function (__cgl, options)
     this.width = 0;
     this.height = 0;
     this.flip = true;
-    this.flipped=false;
+    this.flipped = false;
     this.shadowMap = false;
-    this.anisotropic=0;
+    this.anisotropic = 0;
     this.filter = Texture.FILTER_NEAREST;
     this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
     this.texTarget = this._cgl.gl.TEXTURE_2D;
@@ -64,13 +63,13 @@ const Texture = function (__cgl, options)
     else
     {
         options = {
-            width: DEFAULT_TEXTURE_SIZE,
-            height: DEFAULT_TEXTURE_SIZE,
+            "width": DEFAULT_TEXTURE_SIZE,
+            "height": DEFAULT_TEXTURE_SIZE,
         };
     }
 
-    var w=Math.min(options.width,this._cgl.maxTexSize);
-    var h=Math.min(options.height,this._cgl.maxTexSize);
+    const w = Math.min(options.width, this._cgl.maxTexSize);
+    const h = Math.min(options.height, this._cgl.maxTexSize);
 
     profileData.profileTextureNew++;
 
@@ -100,15 +99,15 @@ Texture.prototype.compareSettings = function (tex)
  */
 Texture.prototype.clone = function ()
 {
-    var newTex = new Texture(this._cgl, {
-        name: this.name,
-        filter: this.filter,
-        wrap: this.wrap,
-        textureType: this.textureType,
-        unpackAlpha: this.unpackAlpha,
-        flip: this.flip,
-        width: this.width,
-        height: this.height,
+    const newTex = new Texture(this._cgl, {
+        "name": this.name,
+        "filter": this.filter,
+        "wrap": this.wrap,
+        "textureType": this.textureType,
+        "unpackAlpha": this.unpackAlpha,
+        "flip": this.flip,
+        "width": this.width,
+        "height": this.height,
     });
 
     if (!this.compareSettings(newTex))
@@ -143,11 +142,11 @@ Texture.prototype.setSize = function (w, h)
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     profileData.profileTextureResize++;
 
-    var uarr = null;
+    const uarr = null;
 
-    if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR && !this._cgl.gl.getExtension('OES_texture_float_linear'))
+    if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
     {
-        console.warn('this graphics card does not support floating point texture linear interpolation!');
+        console.warn("this graphics card does not support floating point texture linear interpolation!");
         this.filter = Texture.FILTER_NEAREST;
     }
 
@@ -227,8 +226,8 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
 {
     this.filter = filter;
     this.wrap = wrap;
-    if(filter == undefined) this.filter = Texture.FILTER_LINEAR;
-    if(wrap == undefined) this.wrap = Texture.CLAMP_TO_EDGE;
+    if (filter == undefined) this.filter = Texture.FILTER_LINEAR;
+    if (wrap == undefined) this.wrap = Texture.CLAMP_TO_EDGE;
     this.width = w;
     this.height = h;
     this._fromData = true;
@@ -274,7 +273,7 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
-    this.flipped=!this.flip;
+    this.flipped = !this.flip;
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
@@ -294,8 +293,8 @@ Texture.prototype.initTexture = function (img, filter)
  */
 Texture.prototype.delete = function ()
 {
-    this.width=0;
-    this.height=0;
+    this.width = 0;
+    this.height = 0;
     profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
@@ -319,12 +318,12 @@ Texture.prototype.printInfo = function ()
 
 Texture.prototype.getInfoReadable = function ()
 {
-    var info = this.getInfo();
-    var html = "";
+    const info = this.getInfo();
+    let html = "";
 
     info.name = info.name.substr(0, info.name.indexOf("?rnd="));
 
-    for (var i in info)
+    for (const i in info)
     {
         html += "* " + i + ":  **" + info[i] + "**\n";
     }
@@ -334,13 +333,13 @@ Texture.prototype.getInfoReadable = function ()
 
 Texture.prototype.getInfo = function ()
 {
-    var obj = {};
+    const obj = {};
 
     obj.name = this.name;
     obj["power of two"] = this.isPowerOfTwo();
     obj.size = this.width + " x " + this.height;
 
-    var targetString = this.texTarget;
+    let targetString = this.texTarget;
     if (this.texTarget == this._cgl.gl.TEXTURE_2D) targetString = "TEXTURE_2D";
     obj.target = targetString;
 
@@ -360,7 +359,7 @@ Texture.prototype.getInfo = function ()
     else if (this.filter == Texture.FILTER_LINEAR) obj.filter = "FILTER_LINEAR";
     else if (this.filter == Texture.FILTER_MIPMAP) obj.filter = "FILTER_MIPMAP";
     // else if (this.filter == Texture.FILTER_ANISOTROPIC) obj.filter = "FILTER_ANISOTROPIC";
-    
+
     else obj.filter = "UNKNOWN";
     return obj;
 };
@@ -379,7 +378,7 @@ Texture.prototype._setFilter = function ()
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
-    if(this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
+    if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
         Log.log("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
@@ -436,13 +435,13 @@ Texture.prototype._setFilter = function ()
             throw new Error("unknown texture filter!" + this.filter);
         }
 
-        if(this.anisotropic)
+        if (this.anisotropic)
         {
-            var ext=this._cgl.gl.getExtension('EXT_texture_filter_anisotropic');
-            if(ext)
+            const ext = this._cgl.gl.getExtension("EXT_texture_filter_anisotropic");
+            if (ext)
             {
-                var max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
-                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max,this.anisotropic));
+                const max = this._cgl.gl.getParameter(ext.MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+                this._cgl.gl.texParameterf(this._cgl.gl.TEXTURE_2D, ext.TEXTURE_MAX_ANISOTROPY_EXT, Math.min(max, this.anisotropic));
             }
         }
     }
@@ -461,12 +460,12 @@ Texture.prototype._setFilter = function ()
  */
 Texture.load = function (cgl, url, finishedCallback, settings)
 {
-    var loadingId = cgl.patch.loading.start("texture", url);
-    var texture = new Texture(cgl);
+    const loadingId = cgl.patch.loading.start("texture", url);
+    const texture = new Texture(cgl);
 
     texture.name = url;
 
-    if(cgl.patch.isEditorMode()) gui.jobs().start({ id: "loadtexture" + loadingId, title: "loading texture (" + url + ")" });
+    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture (" + url + ")" });
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";
@@ -482,9 +481,9 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     {
         Log.warn("[cgl.texture.load] error loading texture", e);
         cgl.patch.loading.finished(loadingId);
-        var error = { error: true };
+        const error = { "error": true };
         if (finishedCallback) finishedCallback(error);
-        if(cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
+        if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
     };
 
     texture.image.onload = function (e)
@@ -493,7 +492,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         cgl.patch.loading.finished(loadingId);
         if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
-        if (finishedCallback) finishedCallback(null,texture);
+        if (finishedCallback) finishedCallback(null, texture);
     };
     texture.image.src = url;
 
@@ -510,7 +509,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  */
 Texture.getTempTexture = function (cgl)
 {
-    if(!cgl)console.error('[getTempTexture] no cgl!');
+    if (!cgl)console.error("[getTempTexture] no cgl!");
     if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
     return cgl.tempTexture;
 };
@@ -524,11 +523,11 @@ Texture.getTempTexture = function (cgl)
  */
 Texture.getEmptyTexture = function (cgl)
 {
-    if(!cgl)console.error('[getEmptyTexture] no cgl!');
+    if (!cgl)console.error("[getEmptyTexture] no cgl!");
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
     cgl.tempTextureEmpty = new Texture(cgl);
-    var data = new Uint8Array(8 * 8 * 4); // .fill(0);
+    const data = new Uint8Array(8 * 8 * 4); // .fill(0);
 
     cgl.tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
@@ -544,13 +543,13 @@ Texture.getEmptyTexture = function (cgl)
  */
 Texture.getRandomTexture = function (cgl)
 {
-    if(!cgl)console.error('[getRandomTexture] no cgl!');
+    if (!cgl)console.error("[getRandomTexture] no cgl!");
     if (cgl.randomTexture) return cgl.randomTexture;
 
     const size = 256;
     const data = new Uint8Array(size * size * 4);
 
-    for (var x = 0; x < size * size; x++)
+    for (let x = 0; x < size * size; x++)
     {
         data[x * 4 + 0] = Math.random() * 255;
         data[x * 4 + 1] = Math.random() * 255;
@@ -574,16 +573,16 @@ Texture.getRandomTexture = function (cgl)
  */
 Texture.getTempGradientTexture = function (cgl)
 {
-    if(!cgl)console.error('[getTempGradientTexture] no cgl!');
+    if (!cgl)console.error("[getTempGradientTexture] no cgl!");
 
     if (cgl.tempTextureGradient) return cgl.tempTextureGradient;
-    var temptex = new Texture(cgl);
+    const temptex = new Texture(cgl);
     const size = 256;
-    var data = new Uint8Array(size * size * 4); // .fill(0);
+    const data = new Uint8Array(size * size * 4); // .fill(0);
 
-    for (var y = 0; y < size; y++)
+    for (let y = 0; y < size; y++)
     {
-        for (var x = 0; x < size; x++)
+        for (let x = 0; x < size; x++)
         {
             data[(x + y * size) * 4 + 0] = data[(x + y * size) * 4 + 1] = data[(x + y * size) * 4 + 2] = 255 - y;
             data[(x + y * size) * 4 + 3] = 255;
@@ -597,11 +596,11 @@ Texture.getTempGradientTexture = function (cgl)
 
 Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
 {
-    var temptex = new Texture(cgl);
-    var arr = [];
-    for (var y = 0; y < size; y++)
+    const temptex = new Texture(cgl);
+    const arr = [];
+    for (let y = 0; y < size; y++)
     {
-        for (var x = 0; x < size; x++)
+        for (let x = 0; x < size; x++)
         {
             if ((x + y) % 64 < 32)
             {
@@ -619,7 +618,7 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
         }
     }
 
-    var data = new Uint8Array(arr);
+    const data = new Uint8Array(arr);
     temptex.initFromData(data, size, size, filter, wrap);
 
     return temptex;
@@ -636,8 +635,8 @@ Texture.getTemporaryTexture = function (cgl, size, filter, wrap)
  */
 Texture.createFromImage = function (cgl, img, options)
 {
-    options=options||{};
-    var texture = new Texture(cgl, options);
+    options = options || {};
+    const texture = new Texture(cgl, options);
     texture.flip = false;
     texture.image = img;
     texture.width = img.width;
@@ -652,7 +651,7 @@ Texture.fromImage = function (cgl, img, filter, wrap)
 {
     Log.error("deprecated texture from image...");
 
-    var texture = new Texture(cgl);
+    const texture = new Texture(cgl);
     texture.flip = false;
     if (filter) texture.filter = filter;
     if (wrap) texture.wrap = wrap;

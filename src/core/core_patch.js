@@ -51,15 +51,15 @@ const Patch = function (cfg)
     this.aborted = false;
     this.loading = new LoadingStatus(this);
     this._crashedOps = [];
-    this._renderOneFrame=false;
-    this._animReq=null;
+    this._renderOneFrame = false;
+    this._animReq = null;
 
     this._perf = {
-        fps: 0,
-        ms: 0,
-        _fpsFrameCount: 0,
-        _fpsMsCount: 0,
-        _fpsStart: 0,
+        "fps": 0,
+        "ms": 0,
+        "_fpsFrameCount": 0,
+        "_fpsMsCount": 0,
+        "_fpsStart": 0,
     };
 
 
@@ -77,19 +77,19 @@ const Patch = function (cfg)
     this._frameWasdelayed = true;
 
     this.config = cfg || {
-        glCanvasResizeToWindow: false,
-        // glCanvasId: 'glcanvas',
-        prefixAssetPath: "",
-        silent: false,
-        onError: null,
-        onFinishedLoading: null,
-        onFirstFrameRendered: null,
-        onPatchLoaded: null,
-        fpsLimit: 0,
+        "glCanvasResizeToWindow": false,
+
+        "prefixAssetPath": "",
+        "silent": false,
+        "onError": null,
+        "onFinishedLoading": null,
+        "onFirstFrameRendered": null,
+        "onPatchLoaded": null,
+        "fpsLimit": 0,
     };
 
 
-    if(! (function() { return !this; })() ) console.log('not in strict mode: core patch' );
+    if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
 
     Log.setSilent(this.config.silent);
@@ -129,10 +129,10 @@ const Patch = function (cfg)
                 this.config.patchFile,
                 (err, _data) =>
                 {
-                    var data = JSON.parse(_data);
+                    const data = JSON.parse(_data);
                     if (err)
                     {
-                        var txt = "";
+                        const txt = "";
                         Log.error("err", err);
                         Log.error("data", data);
                         Log.error("data", data.msg);
@@ -141,7 +141,6 @@ const Patch = function (cfg)
                     this.deSerialize(data);
                 }
             );
-
         }
         this.timer.play();
     }
@@ -162,7 +161,6 @@ Patch.prototype.isRenderingOneFrame = function ()
 
 Patch.prototype.renderOneFrame = function ()
 {
-
     this._paused = true;
     this._renderOneFrame = true;
     this.exec();
@@ -202,7 +200,7 @@ Patch.prototype.isEditorMode = function ()
 Patch.prototype.pause = function ()
 {
     cancelAnimationFrame(this._animReq);
-    this._animReq=null;
+    this._animReq = null;
     this._paused = true;
     this.freeTimer.pause();
 };
@@ -235,7 +233,7 @@ Patch.prototype.resume = function ()
 Patch.prototype.setVolume = function (v)
 {
     this.config.masterVolume = v;
-    for (var i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
+    for (let i = 0; i < this._volumeListeners.length; i++) this._volumeListeners[i].onMasterVolumeChanged(v);
 };
 
 
@@ -245,22 +243,22 @@ Patch.prototype.setVolume = function (v)
  * @memberof Patch
  * @instance
  */
-Patch.prototype.getAssetPath=function()
+Patch.prototype.getAssetPath = function ()
 {
-    if(this.isEditorMode())
+    if (this.isEditorMode())
     {
-        return '/assets/'+gui.project()._id+'/';
+        return "/assets/" + gui.project()._id + "/";
     }
-    else if(document.location.href.indexOf("cables.gl")>0)
+    else if (document.location.href.indexOf("cables.gl") > 0)
     {
-        const parts=document.location.href.split("/");
-        return '/assets/'+parts[parts.length-1]+'/';
+        const parts = document.location.href.split("/");
+        return "/assets/" + parts[parts.length - 1] + "/";
     }
     else
     {
         return "assets/";
     }
-}
+};
 
 /**
  * get url/filepath for a filename
@@ -278,7 +276,7 @@ Patch.prototype.getFilePath = function (filename)
 
     filename = filename.replace("//", "/");
 
-    var finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
+    const finalFilename = this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
     // Log.log('finalFilename',finalFilename);
 
     return finalFilename;
@@ -294,8 +292,8 @@ Patch.prototype.clear = function ()
 
 Patch.getOpClass = function (objName)
 {
-    var parts = objName.split(".");
-    var opObj = null;
+    const parts = objName.split(".");
+    let opObj = null;
 
     try
     {
@@ -318,9 +316,9 @@ Patch.getOpClass = function (objName)
 
 Patch.prototype.createOp = function (identifier, id)
 {
-    var parts = identifier.split(".");
-    var op = null;
-    var objName = "";
+    const parts = identifier.split(".");
+    let op = null;
+    let objName = "";
 
     try
     {
@@ -328,7 +326,7 @@ Patch.prototype.createOp = function (identifier, id)
         {
             // this should be a uuid, not a namespace
             // creating ops by id should be the default way from now on!
-            var opId = identifier;
+            const opId = identifier;
 
             if (CABLES.OPS[opId])
             {
@@ -338,7 +336,7 @@ Patch.prototype.createOp = function (identifier, id)
             }
             else
             {
-                throw new Error("could not find op by id: "+opId);
+                throw new Error("could not find op by id: " + opId);
             }
         }
 
@@ -346,32 +344,34 @@ Patch.prototype.createOp = function (identifier, id)
         {
             // fallback: create by objname!
             objName = identifier;
-            var opObj = Patch.getOpClass(objName);
+            const opObj = Patch.getOpClass(objName);
 
             if (!opObj)
             {
                 this.emitEvent("criticalError", "unknown op", "unknown op: " + objName);
 
-                Log.error('unknown op: ' + objName);
-                throw new Error('unknown op: ' + objName);
-            } else {
-                if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName,id);
-                else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName,id);
-                else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName,id);
-                else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName,id);
-                else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName,id);
-                else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName,id);
-                else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName,id);
-                else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName,id);
-                else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName,id);
-                else Log.log('parts.length', parts.length);
+                Log.error("unknown op: " + objName);
+                throw new Error("unknown op: " + objName);
+            }
+            else
+            {
+                if (parts.length == 2) op = new window[parts[0]][parts[1]](this, objName, id);
+                else if (parts.length == 3) op = new window[parts[0]][parts[1]][parts[2]](this, objName, id);
+                else if (parts.length == 4) op = new window[parts[0]][parts[1]][parts[2]][parts[3]](this, objName, id);
+                else if (parts.length == 5) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]](this, objName, id);
+                else if (parts.length == 6) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]](this, objName, id);
+                else if (parts.length == 7) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]](this, objName, id);
+                else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
+                else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
+                else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
+                else Log.log("parts.length", parts.length);
             }
 
             if (op)
             {
                 op.opId = null;
                 // Log.log("op created by objName:",objName);
-                for (var i in CABLES.OPS)
+                for (const i in CABLES.OPS)
                 {
                     if (CABLES.OPS[i].objName == objName) op.opId = i;
                 }
@@ -387,11 +387,11 @@ Patch.prototype.createOp = function (identifier, id)
         if (!this.isEditorMode())
         {
             Log.log(e);
-            Log.error('[instancing error] ' + objName,e);
+            Log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
-            this.exitError("INSTANCE_ERR",'Instancing Error ' + objName);
-            throw 'instancing error ' + objName;
+            this.exitError("INSTANCE_ERR", "Instancing Error " + objName);
+            throw "instancing error " + objName;
         }
     }
 
@@ -416,12 +416,12 @@ Patch.prototype.createOp = function (identifier, id)
  */
 Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 {
-    var op = this.createOp(opIdentifier, id);
+    const op = this.createOp(opIdentifier, id);
 
     if (op)
     {
-        if(uiAttribs && uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
-        if(uiAttribs && uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
+        if (uiAttribs && uiAttribs.hasOwnProperty("errors")) delete uiAttribs.errors;
+        if (uiAttribs && uiAttribs.hasOwnProperty("error")) delete uiAttribs.error;
 
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
@@ -444,14 +444,14 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
 
 Patch.prototype.addOnAnimFrame = function (op)
 {
-    for (var i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { return;}
+    for (let i = 0; i < this.animFrameOps.length; i++) if (this.animFrameOps[i] == op) { return; }
 
     this.animFrameOps.push(op);
 };
 
 Patch.prototype.removeOnAnimFrame = function (op)
 {
-    for (var i = 0; i < this.animFrameOps.length; i++)
+    for (let i = 0; i < this.animFrameOps.length; i++)
     {
         if (this.animFrameOps[i] == op)
         {
@@ -468,7 +468,7 @@ Patch.prototype.addOnAnimFrameCallback = function (cb)
 
 Patch.prototype.removeOnAnimCallback = function (cb)
 {
-    for (var i = 0; i < this.animFrameCallbacks.length; i++)
+    for (let i = 0; i < this.animFrameCallbacks.length; i++)
     {
         if (this.animFrameCallbacks[i] == cb)
         {
@@ -478,15 +478,15 @@ Patch.prototype.removeOnAnimCallback = function (cb)
     }
 };
 
-Patch.prototype.deleteOp = function (opid, tryRelink,reloadingOp)
+Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 {
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].id == opid)
         {
-            var op = this.ops[i];
-            var reLinkP1 = null;
-            var reLinkP2 = null;
+            const op = this.ops[i];
+            let reLinkP1 = null;
+            let reLinkP2 = null;
 
             if (op)
             {
@@ -502,7 +502,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink,reloadingOp)
                     }
                 }
 
-                var opToDelete = this.ops[i];
+                const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
                 if (this.onDelete)
@@ -512,7 +512,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink,reloadingOp)
                     this.onDelete(opToDelete);
                 }
 
-                this.emitEvent("onOpDelete", opToDelete,reloadingOp);
+                this.emitEvent("onOpDelete", opToDelete, reloadingOp);
                 this.ops.splice(i, 1);
 
                 if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
@@ -536,10 +536,10 @@ Patch.prototype.renderFrame = function (e)
 {
     this.timer.update();
     this.freeTimer.update();
-    var time = this.timer.getTime();
+    const time = this.timer.getTime();
 
 
-    const startTime=performance.now();
+    const startTime = performance.now();
 
     for (var i = 0; i < this.animFrameCallbacks.length; ++i)
     {
@@ -548,7 +548,6 @@ Patch.prototype.renderFrame = function (e)
 
     for (var i = 0; i < this.animFrameOps.length; ++i)
     {
-
         if (this.animFrameOps[i].onAnimFrame)
         {
             // const start=performance.now();
@@ -558,7 +557,7 @@ Patch.prototype.renderFrame = function (e)
         }
     }
 
-    CGL.profileData.profileOnAnimFrameOps=performance.now()-startTime;
+    CGL.profileData.profileOnAnimFrameOps = performance.now() - startTime;
     // console.log("----");
 
     this.emitEvent("onRenderFrame", time);
@@ -580,8 +579,8 @@ Patch.prototype.exec = function (e)
         this._frameInterval = 1000 / this.config.fpsLimit;
     }
 
-    var now = CABLES.now();
-    var frameDelta = now - this._frameNext;
+    const now = CABLES.now();
+    const frameDelta = now - this._frameNext;
 
     if (this.isEditorMode())
     {
@@ -600,7 +599,7 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame || this.config.fpsLimit === 0 || frameDelta > this._frameInterval || this._frameWasdelayed)
     {
-        var startFrameTime = CABLES.now();
+        const startFrameTime = CABLES.now();
         this.renderFrame();
         this._perf._fpsMsCount += CABLES.now() - startFrameTime;
 
@@ -615,7 +614,7 @@ Patch.prototype.exec = function (e)
 
     if (this._renderOneFrame)
     {
-        if(this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
+        if (this.onOneFrameRendered) this.onOneFrameRendered(); // todo remove everywhere and use propper event...
         this.emitEvent("renderedOneFrame");
         this._renderOneFrame = false;
     }
@@ -638,7 +637,7 @@ Patch.prototype.exec = function (e)
     this._perf._lastFrameTime = CABLES.now();
     this._perf._fpsFrameCount++;
 
-    if (this.config.doRequestAnimation) this._animReq=requestAnimationFrame(this.exec.bind(this));
+    if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
 
 /**
@@ -685,7 +684,7 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
 
     if (Link.canLink(port1, port2))
     {
-        var link = new Link(this);
+        const link = new Link(this);
         link.link(port1, port2);
 
         this.emitEvent("onLink", port1, port2, link);
@@ -695,11 +694,11 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
 
 Patch.prototype.serialize = function (asObj)
 {
-    var obj = {};
+    const obj = {};
 
     obj.ops = [];
     obj.settings = this.settings;
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         obj.ops.push(this.ops[i].getSerialized());
     }
@@ -710,7 +709,7 @@ Patch.prototype.serialize = function (asObj)
 
 Patch.prototype.getOpById = function (opid)
 {
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].id == opid) return this.ops[i];
     }
@@ -718,9 +717,9 @@ Patch.prototype.getOpById = function (opid)
 
 Patch.prototype.getOpsById = function (opIds)
 {
-    var ops=[];
-    for (var i in this.ops)
-        for(var j=0;j<opIds.length;j++)
+    const ops = [];
+    for (const i in this.ops)
+        for (let j = 0; j < opIds.length; j++)
             if (this.ops[i].id === opIds[j])
             {
                 ops.push(this.ops[i]);
@@ -731,16 +730,16 @@ Patch.prototype.getOpsById = function (opIds)
 
 Patch.prototype.getOpsByName = function (name)
 {
-    var arr = [];
-    for (var i in this.ops)
+    const arr = [];
+    for (const i in this.ops)
         if (this.ops[i].name == name) arr.push(this.ops[i]);
     return arr;
 };
 
 Patch.prototype.getOpsByObjName = function (name)
 {
-    var arr = [];
-    for (var i in this.ops)
+    const arr = [];
+    for (const i in this.ops)
         if (this.ops[i].objName == name) arr.push(this.ops[i]);
     return arr;
 };
@@ -751,7 +750,7 @@ Patch.prototype.loadLib = function (which)
         "/ui/libs/" + which + ".js",
         (err, res) =>
         {
-            var se = document.createElement("script");
+            const se = document.createElement("script");
             se.type = "text/javascript";
             se.text = res;
             document.getElementsByTagName("head")[0].appendChild(se);
@@ -766,9 +765,9 @@ Patch.prototype.loadLib = function (which)
 
 Patch.prototype.reloadOp = function (objName, cb)
 {
-    var count = 0;
-    var ops = [];
-    var oldOps = [];
+    let count = 0;
+    const ops = [];
+    const oldOps = [];
 
     for (var i in this.ops)
     {
@@ -781,19 +780,19 @@ Patch.prototype.reloadOp = function (objName, cb)
     for (var i = 0; i < oldOps.length; i++)
     {
         count++;
-        var oldOp = oldOps[i];
+        const oldOp = oldOps[i];
         oldOp.deleted = true;
-        var self = this;
+        const self = this;
 
-        var op = this.addOp(objName, oldOp.uiAttribs);
+        const op = this.addOp(objName, oldOp.uiAttribs);
         ops.push(op);
 
-        var j, k, l;
+        let j, k, l;
         for (j in oldOp.portsIn)
         {
             if (oldOp.portsIn[j].links.length === 0)
             {
-                var p = op.getPort(oldOp.portsIn[j].name);
+                const p = op.getPort(oldOp.portsIn[j].name);
                 if (!p) Log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
                 else p.set(oldOp.portsIn[j].get());
             }
@@ -801,9 +800,9 @@ Patch.prototype.reloadOp = function (objName, cb)
             {
                 while (oldOp.portsIn[j].links.length)
                 {
-                    var oldName = oldOp.portsIn[j].links[0].portIn.name;
-                    var oldOutName = oldOp.portsIn[j].links[0].portOut.name;
-                    var oldOutOp = oldOp.portsIn[j].links[0].portOut.parent;
+                    const oldName = oldOp.portsIn[j].links[0].portIn.name;
+                    const oldOutName = oldOp.portsIn[j].links[0].portOut.name;
+                    const oldOutOp = oldOp.portsIn[j].links[0].portOut.parent;
                     oldOp.portsIn[j].links[0].remove();
 
                     l = self.link(op, oldName, oldOutOp, oldOutName);
@@ -817,9 +816,9 @@ Patch.prototype.reloadOp = function (objName, cb)
         {
             while (oldOp.portsOut[j].links.length)
             {
-                var oldNewName = oldOp.portsOut[j].links[0].portOut.name;
-                var oldInName = oldOp.portsOut[j].links[0].portIn.name;
-                var oldInOp = oldOp.portsOut[j].links[0].portIn.parent;
+                const oldNewName = oldOp.portsOut[j].links[0].portOut.name;
+                const oldInName = oldOp.portsOut[j].links[0].portIn.name;
+                const oldInOp = oldOp.portsOut[j].links[0].portIn.parent;
                 oldOp.portsOut[j].links[0].remove();
 
                 l = self.link(op, oldNewName, oldInOp, oldInName);
@@ -828,15 +827,15 @@ Patch.prototype.reloadOp = function (objName, cb)
             }
         }
 
-        this.deleteOp(oldOp.id,false,true);
+        this.deleteOp(oldOp.id, false, true);
     }
     cb(count, ops);
 };
 
 Patch.prototype.getSubPatchOps = function (patchId)
 {
-    var ops = [];
-    for (var i in this.ops)
+    const ops = [];
+    for (const i in this.ops)
     {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId)
         {
@@ -848,7 +847,7 @@ Patch.prototype.getSubPatchOps = function (patchId)
 
 Patch.prototype.getSubPatchOp = function (patchId, objName)
 {
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         if (this.ops[i].uiAttribs && this.ops[i].uiAttribs.subPatch == patchId && this.ops[i].objName == objName)
         {
@@ -862,35 +861,35 @@ Patch.prototype.deSerialize = function (obj, genIds)
 {
     if (this.aborted) return;
 
-    var loadingId = this.loading.start("core", "deserialize");
+    const loadingId = this.loading.start("core", "deserialize");
     if (this.onLoadStart) this.onLoadStart();
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
 
     if (typeof obj === "string") obj = JSON.parse(obj);
-    var self = this;
+    const self = this;
 
     this.settings = obj.settings;
 
     function addLink(opinid, opoutid, inName, outName)
     {
-        var found = false;
+        const found = false;
         if (!found)
         {
             self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName);
         }
     }
 
-    var reqs = new Requirements(this);
+    const reqs = new Requirements(this);
 
     // Log.log('add ops ',obj.ops);
     // add ops...
     for (var iop in obj.ops)
     {
-        var start = CABLES.now();
-        var opData = obj.ops[iop];
-        var op = null;
+        const start = CABLES.now();
+        const opData = obj.ops[iop];
+        let op = null;
 
         try
         {
@@ -900,8 +899,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         catch (e)
         {
             // console.warn("something gone wrong");
-            console.warn("[instancing error] op data:",opData,e);
-            throw "instancing error: "+opData.objName;
+            console.warn("[instancing error] op data:", opData, e);
+            throw "instancing error: " + opData.objName;
         }
 
         reqs.checkOp(op);
@@ -912,10 +911,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
             op.portsInData = opData.portsIn;
             op._origData = opData;
 
-            for (var ipi in opData.portsIn)
+            for (const ipi in opData.portsIn)
             {
-                var objPort = opData.portsIn[ipi];
-                var port = op.getPort(objPort.name);
+                const objPort = opData.portsIn[ipi];
+                const port = op.getPort(objPort.name);
 
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
@@ -926,16 +925,16 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 {
                     if (!port.anim) port.anim = new Anim();
                     if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
-                    for (var ani in objPort.anim.keys)
+                    for (const ani in objPort.anim.keys)
                     {
                         port.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
                     }
                 }
             }
 
-            for (var ipo in opData.portsOut)
+            for (const ipo in opData.portsOut)
             {
-                var port2 = op.getPort(opData.portsOut[ipo].name);
+                const port2 = op.getPort(opData.portsOut[ipo].name);
                 if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
                 {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
@@ -943,7 +942,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             }
         }
 
-        var timeused = Math.round(100 * (CABLES.now() - start)) / 100;
+        const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
         // if(!this.silent && timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
@@ -965,11 +964,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
         {
             if (obj.ops[iop].portsIn)
             {
-                for (var ipi2 = 0; ipi2 < obj.ops[iop].portsIn.length; ipi2++)
+                for (let ipi2 = 0; ipi2 < obj.ops[iop].portsIn.length; ipi2++)
                 {
                     if (obj.ops[iop].portsIn[ipi2].links)
                     {
-                        for (var ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
+                        for (let ili = 0; ili < obj.ops[iop].portsIn[ipi2].links.length; ili++)
                         {
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
@@ -1003,7 +1002,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     if (this.config.variables)
     {
-        for (var varName in this.config.variables)
+        for (const varName in this.config.variables)
         {
             this.setVarValue(varName, this.config.variables[varName]);
             // this._variables = cfg.variables;
@@ -1026,7 +1025,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 Patch.prototype.profile = function (enable)
 {
     this.profiler = new Profiler();
-    for (var i in this.ops)
+    for (const i in this.ops)
     {
         this.ops[i].profile(enable);
     }
@@ -1083,7 +1082,7 @@ Patch.Variable.prototype.getName = function ()
 Patch.Variable.prototype.setValue = function (v)
 {
     this._v = v;
-    for (var i = 0; i < this._changeListeners.length; i++)
+    for (let i = 0; i < this._changeListeners.length; i++)
     {
         this._changeListeners[i](v);
     }
@@ -1110,7 +1109,7 @@ Patch.Variable.prototype.addListener = function (cb)
  */
 Patch.Variable.prototype.removeListener = function (cb)
 {
-    var ind = this._changeListeners.indexOf(cb);
+    const ind = this._changeListeners.indexOf(cb);
     this._changeListeners.splice(ind, 1);
 };
 
@@ -1150,14 +1149,14 @@ Patch.prototype.setVariable = function (name, val)
 
 Patch.prototype._sortVars = function ()
 {
-    if(!this.isEditorMode()) return;
+    if (!this.isEditorMode()) return;
     const ordered = {};
-    Object.keys(this._variables).sort().forEach((key)=>
+    Object.keys(this._variables).sort().forEach((key) =>
     {
         ordered[key] = this._variables[key];
     });
-    this._variables=ordered;
-}
+    this._variables = ordered;
+};
 
 // used internally
 Patch.prototype.setVarValue = function (name, val)
@@ -1205,11 +1204,11 @@ Patch.prototype.getVars = function ()
 
 Patch.prototype.deleteVar = function (name)
 {
-    for(var i=0;i<this.ops.length;i++)
+    for (let i = 0; i < this.ops.length; i++)
     {
-        for(var j=0;j<this.ops[i].portsIn.length;j++)
+        for (let j = 0; j < this.ops[i].portsIn.length; j++)
         {
-            if(this.ops[i].portsIn[j].getVariableName()==name)
+            if (this.ops[i].portsIn[j].getVariableName() == name)
             {
                 console.log("found!");
                 this.ops[i].portsIn[j].setVariable(null);
@@ -1253,10 +1252,10 @@ Patch.prototype.exitError = function (errorId, errorMessage)
 Patch.prototype.preRenderOps = function ()
 {
     Log.log("prerendering...");
-    var stopwatch = null;
+    let stopwatch = null;
     if (CABLES.StopWatch) stopwatch = new CABLES.StopWatch("prerendering");
 
-    for (var i = 0; i < this.ops.length; i++)
+    for (let i = 0; i < this.ops.length; i++)
     {
         if (this.ops[i].preRender)
         {

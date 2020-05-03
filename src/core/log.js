@@ -1,37 +1,37 @@
 
-var silent=false;
+let silent = false;
 
-const Log=
+const Log =
 {
-    log:function()
+    log()
     {
         if (silent) return;
         const args = ["[core]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.log, [console, args]);
     },
-    warn:function(a)
+    warn(a)
     {
         if (silent) return;
 
-        var args = ["[core]"];
+        const args = ["[core]"];
         args.push.apply(args, arguments);
 
         Function.prototype.apply.apply(console.warn, [console, args]);
     },
-    error:function(a)
+    error(a)
     {
-        var args = ["[core]"];
+        const args = ["[core]"];
         args.push.apply(args, arguments);
 
         Function.prototype.apply.apply(console.error, [console, args]);
     },
-    setSilent:function(s)
+    setSilent(s)
     {
-        silent=s;
+        silent = s;
     }
-    
-}
+
+};
 
 
-export { Log }
+export { Log };

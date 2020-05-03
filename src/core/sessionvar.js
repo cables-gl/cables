@@ -4,8 +4,8 @@
 
 const Variable = function ()
 {
-    var value = null;
-    var changedCallbacks = [];
+    let value = null;
+    const changedCallbacks = [];
 
     this.onChanged = function (f)
     {
@@ -25,7 +25,7 @@ const Variable = function ()
 
     var emitChanged = function ()
     {
-        for (var i = 0; i < changedCallbacks.length; i++)
+        for (let i = 0; i < changedCallbacks.length; i++)
         {
             changedCallbacks[i]();
         }

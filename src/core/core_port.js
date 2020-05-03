@@ -63,7 +63,7 @@ const Port = function (__parent, name, type, uiAttribs)
     this._warnedDeprecated = false;
     this._useVariableName = null;
 
-    this._tempLastUiValue=null;
+    this._tempLastUiValue = null;
     // this.onUiAttrChange=null;
 
     Object.defineProperty(this, "val", {
@@ -109,7 +109,7 @@ Port.prototype._onAnimToggle = function ()
  */
 Port.prototype.hidePort = function ()
 {
-    this.setUiAttribs({ hidePort: true });
+    this.setUiAttribs({ "hidePort": true });
 };
 
 /**
@@ -145,7 +145,7 @@ Port.prototype.remove = function ()
 Port.prototype.setUiAttribs = function (newAttribs)
 {
     if (!this.uiAttribs) this.uiAttribs = {};
-    for (var p in newAttribs)
+    for (const p in newAttribs)
     {
         this.uiAttribs[p] = newAttribs[p];
     }
@@ -200,11 +200,8 @@ Port.prototype.get = function ()
         this._lastAnimFrame = this.parent.patch.getFrameNum();
         this.value = this.anim.getValue(this.parent.patch.timer.getTime());
 
-        // if(this._oldAnimVal!=this.value)
-        {
-            this._oldAnimVal = this.value;
-            this.forceChange();
-        }
+        this._oldAnimVal = this.value;
+        this.forceChange();
     }
 
     return this.value;
@@ -253,7 +250,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                 if (this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
             }
 
-            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (var i = 0; i < this.links.length; ++i) this.links[i].setValue();
+            if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();
         }
     }
 };
@@ -319,7 +316,7 @@ Port.prototype.getTypeString = function ()
 
 Port.prototype.getSerialized = function ()
 {
-    var obj = {};
+    const obj = {};
     obj.name = this.getName();
 
     if (!this.ignoreValueSerialize && this.links.length === 0)
@@ -336,7 +333,7 @@ Port.prototype.getSerialized = function ()
     if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
     {
         obj.links = [];
-        for (var i in this.links)
+        for (const i in this.links)
         {
             if (this.links[i].portIn && this.links[i].portOut) obj.links.push(this.links[i].getSerialized());
         }
@@ -357,7 +354,7 @@ Port.prototype.shouldLink = function ()
  */
 Port.prototype.removeLinks = function ()
 {
-    var count = 0;
+    let count = 0;
     while (this.links.length > 0)
     {
         count++;
@@ -380,7 +377,7 @@ Port.prototype.removeLinks = function ()
  */
 Port.prototype.removeLink = function (link)
 {
-    for (var i in this.links)
+    for (const i in this.links)
     {
         if (this.links[i] == link)
         {
@@ -443,7 +440,7 @@ Port.prototype.addLink = function (l)
  */
 Port.prototype.getLinkTo = function (p2)
 {
-    for (var i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return this.links[i];
+    for (const i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return this.links[i];
 };
 
 /**
@@ -455,7 +452,7 @@ Port.prototype.getLinkTo = function (p2)
  */
 Port.prototype.removeLinkTo = function (p2)
 {
-    for (var i in this.links)
+    for (const i in this.links)
     {
         if (this.links[i].portIn == p2 || this.links[i].portOut == p2)
         {
@@ -476,7 +473,7 @@ Port.prototype.removeLinkTo = function (p2)
  */
 Port.prototype.isLinkedTo = function (p2)
 {
-    for (var i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return true;
+    for (const i in this.links) if (this.links[i].portIn == p2 || this.links[i].portOut == p2) return true;
 
     return false;
 };
@@ -492,10 +489,10 @@ Port.prototype.trigger = function ()
     if (this.links.length === 0) return;
     if (!this.parent.enabled) return;
 
-    var portTriggered = null;
+    let portTriggered = null;
     try
     {
-        for (var i = 0; i < this.links.length; ++i)
+        for (let i = 0; i < this.links.length; ++i)
         {
             if (this.links[i].portIn)
             {
@@ -545,7 +542,7 @@ Port.prototype.getVariableName = function ()
 Port.prototype.setVariable = function (v)
 {
     this.setAnimated(false);
-    var attr = { useVariable: false };
+    const attr = { "useVariable": false };
 
     if (this._variableIn)
     {
@@ -587,7 +584,7 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
-    this.setUiAttribs({ isAnimated: this._animated });
+    this.setUiAttribs({ "isAnimated": this._animated });
 };
 
 Port.prototype.toggleAnim = function (val)
@@ -596,7 +593,7 @@ Port.prototype.toggleAnim = function (val)
     if (this._animated && !this.anim) this.anim = new Anim();
     this.setAnimated(this._animated);
     this._onAnimToggle();
-    this.setUiAttribs({ isAnimated: this._animated });
+    this.setUiAttribs({ "isAnimated": this._animated });
 };
 
 /**

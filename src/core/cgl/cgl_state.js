@@ -6,7 +6,6 @@ import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
 
 
-
 /**
  * cables gl context/state manager
  * @external CGL
@@ -19,16 +18,16 @@ const Context = function (_patch)
     EventTarget.apply(this);
 
     // var self = this;
-    var viewPort = [0, 0, 0, 0];
+    const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
     this.clearCanvasTransparent = true;
     this.clearCanvasDepth = true;
     this.patch = _patch;
-    this.debugOneFrame=false;
+    this.debugOneFrame = false;
 
-    this.maxTextureUnits=0;
-    this.currentProgram=null;
+    this.maxTextureUnits = 0;
+    this.currentProgram = null;
 
     this.temporaryTexture = null;
     this.frameStore = {};
@@ -80,14 +79,14 @@ const Context = function (_patch)
     mat4.identity(this.mMatrix);
     mat4.identity(this.vMatrix);
 
-    var simpleShader = new Shader(this, "simpleshader");
+    const simpleShader = new Shader(this, "simpleshader");
 
     simpleShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
     simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
-    var currentShader = simpleShader;
-    var aborted = false;
-    var cbResize = [];
+    let currentShader = simpleShader;
+    const aborted = false;
+    const cbResize = [];
 
     this.addEventListener = function (event, cb)
     {
@@ -98,7 +97,7 @@ const Context = function (_patch)
     {
         if (event == "resize")
         {
-            for (var i in cbResize)
+            for (const i in cbResize)
             {
                 if (cbResize[i] == cb)
                 {
@@ -129,10 +128,10 @@ const Context = function (_patch)
         if (this.patch.config.hasOwnProperty("clearCanvasColor")) this.clearCanvasTransparent = this.patch.config.clearCanvasColor;
         if (this.patch.config.hasOwnProperty("clearCanvasDepth")) this.clearCanvasDepth = this.patch.config.clearCanvasDepth;
 
-        if(!this.patch.config.canvas.forceWebGl1)
+        if (!this.patch.config.canvas.forceWebGl1)
             this.gl = this.canvas.getContext("webgl2", this.patch.config.canvas);
 
-        if (this.gl && this.gl.getParameter(this.gl.VERSION)!="WebGL 1.0")
+        if (this.gl && this.gl.getParameter(this.gl.VERSION) != "WebGL 1.0")
         {
             this.glVersion = 2;
         }
@@ -161,10 +160,10 @@ const Context = function (_patch)
         }
         this.gl.getExtension("OES_standard_derivatives");
         // this.gl.getExtension("GL_OES_standard_derivatives");
-        var instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
+        const instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
 
-        this.maxTextureUnits=this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
-        this.maxTexSize=this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
+        this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
+        this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
 
         if (instancingExt.vertexAttribDivisorANGLE)
         {
@@ -183,8 +182,8 @@ const Context = function (_patch)
     this.canvasWidth = -1;
     this.canvasHeight = -1;
     this.canvasScale = 1;
-    var oldCanvasWidth = -1;
-    var oldCanvasHeight = -1;
+    let oldCanvasWidth = -1;
+    let oldCanvasHeight = -1;
 
     /**
      * @function getViewPort
@@ -223,7 +222,7 @@ const Context = function (_patch)
     };
 
 
-    this.screenShot = function (cb, doScreenshotClearAlpha,mimeType, quality)
+    this.screenShot = function (cb, doScreenshotClearAlpha, mimeType, quality)
     {
         if (doScreenshotClearAlpha)
         {
@@ -239,14 +238,13 @@ const Context = function (_patch)
             {
                 if (cb) cb(blob);
                 else Log.log("no screenshot callback...");
-            },mimeType,quality);
+            }, mimeType, quality);
         }
     };
 
     this.endFrame = function ()
     {
-
-        if(this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
+        if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
 
         this.setPreviousShader();
@@ -270,7 +268,7 @@ const Context = function (_patch)
             this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
             this.updateSize();
 
-            for (var i = 0; i < cbResize.length; i++) cbResize[i]();
+            for (let i = 0; i < cbResize.length; i++) cbResize[i]();
         }
     };
 
@@ -279,7 +277,7 @@ const Context = function (_patch)
     {
         if (currentShader) if (!this.frameStore || ((this.frameStore.renderOffscreen === true) == currentShader.offScreenPass) === true) return currentShader;
 
-        for (var i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
+        for (let i = this._shaderStack.length - 1; i >= 0; i--) if (this._shaderStack[i]) if (this.frameStore.renderOffscreen == this._shaderStack[i].offScreenPass) return this._shaderStack[i];
     };
 
     this.getDefaultShader = function ()
@@ -295,7 +293,7 @@ const Context = function (_patch)
      * @param {Object} shader
      * @function
      */
-    this.pushShader=
+    this.pushShader =
     this.setShader = function (shader)
     {
         this._shaderStack.push(shader);
@@ -309,7 +307,7 @@ const Context = function (_patch)
      * @instance
      * @function
      */
-    this.popShader=
+    this.popShader =
     this.setPreviousShader = function ()
     {
         if (this._shaderStack.length === 0) throw "Invalid shader stack pop!";
@@ -396,9 +394,9 @@ const Context = function (_patch)
         return this._frameBufferStack[this._frameBufferStack.length - 1];
     };
 
-    var identView = vec3.create();
+    const identView = vec3.create();
     vec3.set(identView, 0, 0, 2);
-    var ident = vec3.create();
+    const ident = vec3.create();
     vec3.set(ident, 0, 0, 0);
 
     this.renderStart = function (cgl, identTranslate, identTranslateView)
@@ -433,7 +431,7 @@ const Context = function (_patch)
 
         cgl.pushBlendMode(CONSTANTS.BLEND_MODES.BLEND_NORMAL, false);
 
-        for (var i = 0; i < this._textureslots.length; i++) this._textureslots[i] = null;
+        for (let i = 0; i < this._textureslots.length; i++) this._textureslots[i] = null;
 
         this.pushShader(simpleShader);
 
@@ -500,7 +498,7 @@ const Context = function (_patch)
     this._resizeToParentSize = function ()
     {
         // Log.log("_resizeToParentSize");
-        var p = this.canvas.parentElement;
+        const p = this.canvas.parentElement;
         if (!p)
         {
             console.error("cables: can not resize to container element");
@@ -532,10 +530,10 @@ const Context = function (_patch)
 
     this.printError = function (str)
     {
-        var error = this.gl.getError();
+        const error = this.gl.getError();
         if (error != this.gl.NO_ERROR)
         {
-            var errStr = "";
+            let errStr = "";
             if (error == this.gl.OUT_OF_MEMORY) errStr = "OUT_OF_MEMORY";
             if (error == this.gl.INVALID_ENUM) errStr = "INVALID_ENUM";
             if (error == this.gl.INVALID_OPERATION) errStr = "INVALID_OPERATION";
@@ -548,12 +546,12 @@ const Context = function (_patch)
         }
     };
 
-    this.saveScreenshot = function (filename, cb, pw, ph,noclearalpha)
+    this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)
     {
         this.patch.renderOneFrame();
 
-        var w = this.canvas.clientWidth;
-        var h = this.canvas.clientHeight;
+        let w = this.canvas.clientWidth;
+        let h = this.canvas.clientHeight;
 
         if (pw)
         {
@@ -571,30 +569,29 @@ const Context = function (_patch)
             return Array(n - String(nr).length + 1).join(str || "0") + nr;
         }
 
-        var d = new Date();
+        const d = new Date();
 
-        var dateStr = "".concat(String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate()), "_").concat(padLeft(d.getHours(), 2)).concat(padLeft(d.getMinutes(), 2)).concat(padLeft(d.getSeconds(), 2));
+        const dateStr = "".concat(String(d.getFullYear()) + String(d.getMonth() + 1) + String(d.getDate()), "_").concat(padLeft(d.getHours(), 2)).concat(padLeft(d.getMinutes(), 2)).concat(padLeft(d.getSeconds(), 2));
 
         if (!filename) filename = "cables_" + dateStr + ".png";
         else filename += ".png";
 
-        this.patch.cgl.screenShot(function(blob)
+        this.patch.cgl.screenShot(function (blob)
         {
             this.canvas.width = w;
             this.canvas.height = h;
             if (blob)
             {
-                var anchor = document.createElement("a");
+                const anchor = document.createElement("a");
 
                 anchor.download = filename;
                 anchor.href = URL.createObjectURL(blob);
 
-                setTimeout(function()
+                setTimeout(function ()
                 {
                     anchor.click();
                     if (cb) cb(blob);
-                },100);
-
+                }, 100);
             }
             else
             {
@@ -811,7 +808,7 @@ Context.prototype.pushCullFace = function (b)
 {
     this._stackCullFace.push(b);
 
-    if(b) this.gl.enable(this.gl.CULL_FACE);
+    if (b) this.gl.enable(this.gl.CULL_FACE);
     else this.gl.disable(this.gl.CULL_FACE);
 };
 
@@ -837,14 +834,13 @@ Context.prototype.popCullFace = function ()
 {
     this._stackCullFace.pop();
 
-    if(this._stackCullFace[this._stackCullFace.length - 1]) this.gl.enable(this.gl.CULL_FACE);
+    if (this._stackCullFace[this._stackCullFace.length - 1]) this.gl.enable(this.gl.CULL_FACE);
     else this.gl.disable(this.gl.CULL_FACE);
 };
 
 
 // --------------------------------------
 // state CullFace Facing
-
 
 
 /**
@@ -882,7 +878,7 @@ Context.prototype.stateCullFaceFacing = function ()
 Context.prototype.popCullFaceFacing = function ()
 {
     this._stackCullFaceFacing.pop();
-    if(this._stackCullFaceFacing.length>0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
+    if (this._stackCullFaceFacing.length > 0) this.gl.cullFace(this._stackCullFaceFacing[this._stackCullFaceFacing.length - 1]);
 };
 
 
@@ -931,7 +927,6 @@ Context.prototype.popDepthFunc = function ()
 };
 
 
-
 Context.prototype._stackBlend = [];
 
 /**
@@ -976,11 +971,11 @@ Context.prototype.stateBlend = function ()
 };
 
 export const BLENDS = {
-    BLEND_NONE: 0,
-    BLEND_NORMAL: 1,
-    BLEND_ADD: 2,
-    BLEND_SUB: 3,
-    BLEND_MUL: 4,
+    "BLEND_NONE": 0,
+    "BLEND_NORMAL": 1,
+    "BLEND_ADD": 2,
+    "BLEND_SUB": 3,
+    "BLEND_MUL": 4,
 };
 
 Context.prototype._stackBlendMode = [];

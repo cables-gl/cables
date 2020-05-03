@@ -1,5 +1,5 @@
 import { CONSTANTS } from "./constants";
-import { Log } from "./log"
+import { Log } from "./log";
 
 // export const togglePacoRenderer = function ()
 // {
@@ -29,15 +29,15 @@ const PatchConnectionReceiver = function (patch, options, connector)
 PatchConnectionReceiver.prototype._receive = function (ev)
 {
     console.log("ev", ev);
-    var data = {};
-    if (ev.hasOwnProperty('event')) data = ev;
+    let data = {};
+    if (ev.hasOwnProperty("event")) data = ev;
     else data = JSON.parse(ev.data);
 
     if (data.event == CONSTANTS.PACO.PACO_OP_CREATE)
     {
         Log.log("op create: data.vars.objName");
-        if(this._patch.getOpById(data.vars.opId))return;
-        var op = this._patch.addOp(data.vars.objName,null,data.vars.opId);
+        if (this._patch.getOpById(data.vars.opId)) return;
+        var op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
         op.id = data.vars.opId;
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -71,13 +71,13 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         var op1 = this._patch.getOpById(data.vars.op1);
         var op2 = this._patch.getOpById(data.vars.op2);
-        if(!op1 || !op2)
+        if (!op1 || !op2)
         {
-            console.log('[paco] unlink op not found ');
+            console.log("[paco] unlink op not found ");
             return;
         }
-        var port1 = op1.getPort(data.vars.port1);
-        var port2 = op2.getPort(data.vars.port2);
+        const port1 = op1.getPort(data.vars.port1);
+        const port2 = op2.getPort(data.vars.port2);
         port1.removeLinkTo(port2);
     }
     else if (data.event == CONSTANTS.PACO.PACO_LINK)
@@ -89,7 +89,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     else if (data.event == CONSTANTS.PACO.PACO_VALUECHANGE)
     {
         var op = this._patch.getOpById(data.vars.op);
-        var p = op.getPort(data.vars.port);
+        const p = op.getPort(data.vars.port);
         p.set(data.vars.v);
     }
     else
@@ -108,7 +108,8 @@ const PatchConnectionSender = function (patch)
     this.connectors.push(new PatchConnectorBroadcastChannel());
 
     patch.addEventListener("onOpDelete",
-        (op) => {
+        (op) =>
+        {
             this.send(CABLES.PACO_OP_DELETE, { "op": op.id });
         });
 
@@ -121,7 +122,8 @@ const PatchConnectionSender = function (patch)
             });
         });
 
-    patch.addEventListener("onUnLink",(p1, p2) => {
+    patch.addEventListener("onUnLink", (p1, p2) =>
+    {
         this.send(CABLES.PACO_UNLINK, {
             "op1": p1.parent.id,
             "op2": p2.parent.id,
@@ -130,7 +132,8 @@ const PatchConnectionSender = function (patch)
         });
     });
 
-    patch.addEventListener("onLink",(p1, p2) => {
+    patch.addEventListener("onLink", (p1, p2) =>
+    {
         this.send(CABLES.PACO_LINK, {
             "op1": p1.parent.id,
             "op2": p2.parent.id,
@@ -138,12 +141,11 @@ const PatchConnectionSender = function (patch)
             "port2": p2.name,
         });
     });
-
 };
 
 PatchConnectionSender.prototype.send = function (event, vars)
 {
-    for (var i = 0; i < this.connectors.length; i++)
+    for (let i = 0; i < this.connectors.length; i++)
     {
         this.connectors[i].send(event, vars);
     }
@@ -168,15 +170,12 @@ PatchConnectorBroadcastChannel.prototype.receive = function (paco)
 PatchConnectorBroadcastChannel.prototype.send = function (event, vars)
 {
     if (!this.bc) return;
-    var data = {};
+    const data = {};
     data.event = event;
     data.vars = vars;
     this.bc.postMessage(JSON.stringify(data));
     // Log.log(data);
 };
-
-
-
 
 
 // -------------

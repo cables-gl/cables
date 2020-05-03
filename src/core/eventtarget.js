@@ -3,8 +3,8 @@ import { Log } from "./log";
 const EventTarget = function ()
 {
     this._eventCallbacks = {};
-    this._logName="";
-    this._log=false;
+    this._logName = "";
+    this._log = false;
 
     this.addEventListener = this.on = function (which, cb)
     {
@@ -18,7 +18,7 @@ const EventTarget = function ()
         {
             if (this._eventCallbacks[which])
             {
-                var idx = this._eventCallbacks[which].indexOf(cb);
+                const idx = this._eventCallbacks[which].indexOf(cb);
                 if (idx == -1) return false;
                 return true;
             }
@@ -33,25 +33,25 @@ const EventTarget = function ()
     {
         if (this._eventCallbacks[which])
         {
-            var idx = this._eventCallbacks[which].indexOf(cb);
+            const idx = this._eventCallbacks[which].indexOf(cb);
             if (idx == -1) Log.warn("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].splice(idx);
         }
     };
 
-    this.logEvents=function(enabled,name)
+    this.logEvents = function (enabled, name)
     {
-        this._log=enabled;
-        this._logName=name;
+        this._log = enabled;
+        this._logName = name;
     };
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-        if(this._log) console.log("[event] ",this._logName,which,this._eventCallbacks);
+        if (this._log) console.log("[event] ", this._logName, which, this._eventCallbacks);
 
         if (this._eventCallbacks[which])
         {
-            for (var i = 0; i < this._eventCallbacks[which].length; i++)
+            for (let i = 0; i < this._eventCallbacks[which].length; i++)
             {
                 if (this._eventCallbacks[which][i])
                 {
@@ -62,7 +62,7 @@ const EventTarget = function ()
         else
         {
             // Log.warn("has no event callback",which,this._eventCallbacks);
-            if(this._log) console.log("[event] has no event callback",which,this._eventCallbacks);
+            if (this._log) console.log("[event] has no event callback", which, this._eventCallbacks);
         }
     };
 };

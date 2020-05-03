@@ -15,8 +15,6 @@
 //     return copy;
 // }
 
-
-
 // CGL.MatrixStackOld.prototype.pop=function()
 // {
 //     return this._arr.pop();
@@ -43,7 +41,7 @@ MatrixStack.prototype.push = function (m)
 
     if (this._index == this._arr.length)
     {
-        var copy = mat4.create();
+        const copy = mat4.create();
         this._arr.push(copy);
     }
 

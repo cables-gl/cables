@@ -28,7 +28,7 @@ export const onLoadingAssetsFinished = null; // deprecated / remove later
 export const isWindows = window.navigator.userAgent.indexOf("Windows") != -1;
 const getWheelDelta_ = function (event)
 {
-    var normalized;
+    let normalized;
     if (event.wheelDelta)
     {
         // chrome
@@ -39,9 +39,9 @@ const getWheelDelta_ = function (event)
     else
     {
         // firefox
-        var d = event.deltaY;
+        let d = event.deltaY;
         if (event.shiftKey) d = event.deltaX;
-        var rawAmmount = d || event.detail;
+        const rawAmmount = d || event.detail;
         normalized = -(rawAmmount % 3 ? rawAmmount * 10 : rawAmmount / 3);
         normalized *= -3;
     }

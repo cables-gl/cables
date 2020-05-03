@@ -6,7 +6,7 @@ const MESHES = {};
 
 MESHES.getSimpleRect = function (cgl, name)
 {
-    var geom = new Geometry(name);
+    const geom = new Geometry(name);
 
     geom.vertices = [1.0, 1.0, 0.0, -1.0, 1.0, 0.0, 1.0, -1.0, 0.0, -1.0, -1.0, 0.0];
     geom.texCoords = [1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0];

@@ -2,14 +2,14 @@ export const base64Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
 
 // Use a lookup table to find the index.
 const _base64lookup = new Uint8Array(256);
-for (var i = 0; i < base64Chars.length; i++) _base64lookup[base64Chars.charCodeAt(i)] = i;
+for (let i = 0; i < base64Chars.length; i++) _base64lookup[base64Chars.charCodeAt(i)] = i;
 
 export const base64lookup = _base64lookup;
 
 export const b64encTypesArray = function (arraybuffer)
 {
     if (arraybuffer.buffer) arraybuffer = arraybuffer.buffer;
-    var bytes = new Uint8Array(arraybuffer),
+    let bytes = new Uint8Array(arraybuffer),
         i,
         len = bytes.length,
         base64 = "";
@@ -30,7 +30,7 @@ export const b64encTypesArray = function (arraybuffer)
 
 export const b64decTypedArray = function (base64)
 {
-    var bufferLength = base64.length * 0.75,
+    let bufferLength = base64.length * 0.75,
         len = base64.length,
         i,
         p = 0,
@@ -45,7 +45,7 @@ export const b64decTypedArray = function (base64)
         if (base64[base64.length - 2] === "=") bufferLength--;
     }
 
-    var arraybuffer = new ArrayBuffer(bufferLength),
+    let arraybuffer = new ArrayBuffer(bufferLength),
         bytes = new Uint8Array(arraybuffer);
 
     for (i = 0; i < len; i += 4)

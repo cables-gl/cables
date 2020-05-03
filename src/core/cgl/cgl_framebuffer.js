@@ -17,40 +17,45 @@ import { Log } from "../log";
 
 const Framebuffer = function (_cgl, w, h, options)
 {
-    var cgl = _cgl;
+    const cgl = _cgl;
 
-    var depthTextureExt = cgl.gl.getExtension("WEBGL_depth_texture") || cgl.gl.getExtension("WEBKIT_WEBGL_depth_texture") || cgl.gl.getExtension("MOZ_WEBGL_depth_texture") || cgl.gl.DEPTH_TEXTURE;
+    const depthTextureExt =
+        cgl.gl.getExtension("WEBGL_depth_texture") ||
+        cgl.gl.getExtension("WEBKIT_WEBGL_depth_texture") ||
+        cgl.gl.getExtension("MOZ_WEBGL_depth_texture") ||
+        cgl.gl.DEPTH_TEXTURE;
+
     if (!depthTextureExt)
     {
         cgl.exitError("NO_DEPTH_TEXTURE", "no depth texture support");
         // return;
     }
 
-    var width = w || 512;
-    var height = h || 512;
+    let width = w || 512;
+    let height = h || 512;
 
     options = options || {
-        isFloatingPointTexture: false,
+        "isFloatingPointTexture": false,
     };
 
     if (!options.hasOwnProperty("filter")) options.filter = Texture.FILTER_LINEAR;
 
-    var texture = new Texture(cgl, {
-        isFloatingPointTexture: options.isFloatingPointTexture,
-        filter: options.filter,
-        wrap: Texture.CLAMP_TO_EDGE,
+    const texture = new Texture(cgl, {
+        "isFloatingPointTexture": options.isFloatingPointTexture,
+        "filter": options.filter,
+        "wrap": Texture.CLAMP_TO_EDGE,
     });
 
-    var textureDepth = null;
+    let textureDepth = null;
     if (depthTextureExt)
     {
         textureDepth = new Texture(cgl, {
-            isDepthTexture: true,
+            "isDepthTexture": true,
         });
     }
 
-    var frameBuf = cgl.gl.createFramebuffer();
-    var depthBuffer = cgl.gl.createRenderbuffer();
+    const frameBuf = cgl.gl.createFramebuffer();
+    const depthBuffer = cgl.gl.createRenderbuffer();
 
     this.getWidth = function ()
     {
@@ -150,7 +155,7 @@ const Framebuffer = function (_cgl, w, h, options)
         }
 
         if (!cgl.gl.isFramebuffer(frameBuf)) throw "Invalid framebuffer";
-        var status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
+        const status = cgl.gl.checkFramebufferStatus(cgl.gl.FRAMEBUFFER);
         switch (status)
         {
         case cgl.gl.FRAMEBUFFER_COMPLETE:

@@ -20,7 +20,7 @@ UTILS.float32Concat = function (first, second)
     if (!(first instanceof Float32Array)) first = new Float32Array(first);
     if (!(second instanceof Float32Array)) second = new Float32Array(second);
 
-    var firstLength = first.length,
+    let firstLength = first.length,
         result = new Float32Array(firstLength + second.length);
 
     result.set(first);
@@ -39,10 +39,10 @@ UTILS.float32Concat = function (first, second)
  */
 export const shuffleArray = function (array)
 {
-    for (var i = array.length - 1; i > 0; i--)
+    for (let i = array.length - 1; i > 0; i--)
     {
-        var j = Math.floor(Math.seededRandom() * (i + 1));
-        var temp = array[i];
+        const j = Math.floor(Math.seededRandom() * (i + 1));
+        const temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }
@@ -58,13 +58,13 @@ export const shuffleArray = function (array)
  * @static
  */
 
-const _shortIds={};
-const _shortId=function()
+const _shortIds = {};
+const _shortId = function ()
 {
-    const str=Math.random().toString(36).substr(2, 9);
+    const str = Math.random().toString(36).substr(2, 9);
 
-    if(_shortIds.hasOwnProperty(str)) str=_shortId();
-    _shortIds[str]=true;
+    if (_shortIds.hasOwnProperty(str)) str = _shortId();
+    _shortIds[str] = true;
     return str;
 };
 export const shortId = _shortId;
@@ -79,10 +79,10 @@ export const shortId = _shortId;
  */
 const _uuid = function ()
 {
-    var d = new Date().getTime();
-    var uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
+    let d = new Date().getTime();
+    const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) =>
     {
-        var r = (d + Math.random() * 16) % 16 | 0;
+        const r = (d + Math.random() * 16) % 16 | 0;
         d = Math.floor(d / 16);
         return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
     });
@@ -92,9 +92,6 @@ export const uuid = _uuid;
 export const generateUUID = _uuid;
 
 
-
-
-
 /**
  * generate a simple ID
  * @function simpleId
@@ -102,7 +99,7 @@ export const generateUUID = _uuid;
  * @return {Number} new id
  * @static
  */
-var simpleIdCounter = 0;
+let simpleIdCounter = 0;
 export const simpleId = function ()
 {
     simpleIdCounter++;
@@ -120,7 +117,7 @@ export const simpleId = function ()
  */
 export const smoothStep = function (perc)
 {
-    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    const x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
     perc = x * x * (3 - 2 * x); // smoothstep
     return perc;
 };
@@ -135,7 +132,7 @@ export const smoothStep = function (perc)
  */
 export const smootherStep = function (perc)
 {
-    var x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
+    const x = Math.max(0, Math.min(1, (perc - 0) / (1 - 0)));
     perc = x * x * x * (x * (x * 6 - 15) + 10); // smootherstep
     return perc;
 };
@@ -157,18 +154,18 @@ export const map = function (x, _oldMin, _oldMax, _newMin, _newMax, _easing)
     if (x >= _oldMax) return _newMax;
     if (x <= _oldMin) return _newMin;
 
-    var reverseInput = false;
-    var oldMin = Math.min(_oldMin, _oldMax);
-    var oldMax = Math.max(_oldMin, _oldMax);
+    let reverseInput = false;
+    const oldMin = Math.min(_oldMin, _oldMax);
+    const oldMax = Math.max(_oldMin, _oldMax);
     if (oldMin != _oldMin) reverseInput = true;
 
-    var reverseOutput = false;
-    var newMin = Math.min(_newMin, _newMax);
-    var newMax = Math.max(_newMin, _newMax);
+    let reverseOutput = false;
+    const newMin = Math.min(_newMin, _newMax);
+    const newMax = Math.max(_newMin, _newMax);
     if (newMin != _newMin) reverseOutput = true;
 
-    var portion = 0;
-    var r = 0;
+    let portion = 0;
+    let r = 0;
 
     if (reverseInput) portion = ((oldMax - x) * (newMax - newMin)) / (oldMax - oldMin);
     else portion = ((x - oldMin) * (newMax - newMin)) / (oldMax - oldMin);
@@ -220,7 +217,7 @@ Math.seededRandom = function (max, min)
     min = min || 0;
 
     Math.randomSeed = (Math.randomSeed * 9301 + 49297) % 233280;
-    var rnd = Math.randomSeed / 233280.0;
+    const rnd = Math.randomSeed / 233280.0;
 
     return min + rnd * (max - min);
 };
@@ -229,7 +226,7 @@ Math.seededRandom = function (max, min)
 
 UTILS.arrayWriteToEnd = function (arr, v)
 {
-    for (var i = 1; i < arr.length; i++) arr[i - 1] = arr[i];
+    for (let i = 1; i < arr.length; i++) arr[i - 1] = arr[i];
     arr[arr.length - 1] = v;
 };
 
@@ -322,35 +319,34 @@ export const cacheBust = function (url)
  * @function basename
  * @static
  * @memberof Utils
- * @param {String} url 
+ * @param {String} url
  * @return {String} just the filename
  */
 export const basename = function (url)
 {
-    var name="";
-    if(!url)return "";
-    const parts=(url+"").split("/");
-    if(parts.length>0)
+    let name = "";
+    if (!url) return "";
+    const parts = (url + "").split("/");
+    if (parts.length > 0)
     {
-        var str=parts[parts.length-1];
-        var parts2=str.split("?");
-        name=parts2[0];
-        parts2=name.split(".");
-        name=parts2[0];
+        const str = parts[parts.length - 1];
+        let parts2 = str.split("?");
+        name = parts2[0];
+        parts2 = name.split(".");
+        name = parts2[0];
     }
 
     return name;
 };
 
 
-
 // todo: is jsonp used anywhere ?
-var jsonpCounter = null;
+let jsonpCounter = null;
 export const jsonp = function (url, cb)
 {
     jsonpCounter = jsonpCounter || 0;
     jsonpCounter++;
-    var jsonPID = jsonpCounter;
+    const jsonPID = jsonpCounter;
 
     // Log.log("making jsonp request...");
 
@@ -360,10 +356,10 @@ export const jsonp = function (url, cb)
         cb(false, data);
     };
 
-    var paramChar = "?";
+    let paramChar = "?";
     if (url.indexOf(paramChar) > -1) paramChar = "&";
 
-    var s = document.createElement("script");
+    const s = document.createElement("script");
     s.setAttribute("src", url + paramChar + "callback=CABLES.jsonpFunc" + jsonPID);
     // s.onload=function()
     // {
@@ -377,9 +373,9 @@ export const ajaxSync = function (url, cb, method, post, contenttype)
         url,
         cb,
         method,
-        data: post,
+        "data": post,
         contenttype,
-        sync: true,
+        "sync": true,
     });
 };
 
@@ -396,7 +392,7 @@ export const ajax = function (url, cb, method, post, contenttype, jsonp, headers
         method,
         "data:": post,
         contenttype,
-        sync: false,
+        "sync": false,
         jsonp,
         headers,
     });
@@ -406,7 +402,7 @@ export const request = function (options)
 {
     if (!options.hasOwnProperty("asynch")) options.asynch = true;
 
-    var xhr;
+    let xhr;
     try
     {
         xhr = new XMLHttpRequest();
@@ -464,8 +460,8 @@ export const request = function (options)
 // ----------------------------------------------------------------
 
 window.performance = window.performance || {
-    offset: Date.now(),
-    now: function now()
+    "offset": Date.now(),
+    "now": function now()
     {
         return Date.now() - this.offset;
     },

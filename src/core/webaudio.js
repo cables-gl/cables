@@ -81,7 +81,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
 {
     if (!op || !portName || !audioNode)
     {
-        var msg = "ERROR: createAudioInPort needs three parameters, op, portName and audioNode";
+        const msg = "ERROR: createAudioInPort needs three parameters, op, portName and audioNode";
         op.log(msg);
         throw new Error(msg);
         // return;
@@ -92,7 +92,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
     }
     op.webAudio = op.webAudio || {};
     op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
-    var port = op.inObject(portName);
+    const port = op.inObject(portName);
     port.webAudio = {};
     port.webAudio.previousAudioInNode = null;
     port.webAudio.audioNode = audioNode;
@@ -101,7 +101,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
 
     port.onChange = function ()
     {
-        var audioInNode = port.get();
+        const audioInNode = port.get();
         // when port disconnected, disconnect audio nodes
         if (!audioInNode)
         {
@@ -164,7 +164,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
  */
 WEBAUDIO.replaceNodeInPort = function (port, oldNode, newNode)
 {
-    var connectedNode = port.webAudio.previousAudioInNode;
+    const connectedNode = port.webAudio.previousAudioInNode;
     // check if connected
     if (connectedNode && connectedNode.disconnect)
     {
@@ -207,12 +207,12 @@ WEBAUDIO.createAudioOutPort = function (op, portName, audioNode)
 {
     if (!op || !portName || !audioNode)
     {
-        var msg = "ERROR: createAudioOutPort needs three parameters, op, portName and audioNode";
+        const msg = "ERROR: createAudioOutPort needs three parameters, op, portName and audioNode";
         op.log(msg);
         throw new Error(msg);
     }
 
-    var port = op.outObject(portName);
+    const port = op.outObject(portName);
     // TODO: Maybe add subtype to audio-node-object?
     port.set(audioNode);
     return port;
@@ -240,7 +240,7 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
     op.webAudio = op.webAudio || {};
     op.webAudio.audioInPorts = op.webAudio.audioInPorts || [];
     // var port = op.inObject(portName);
-    var port = op.inDynamic(
+    const port = op.inDynamic(
         portName,
         [CONSTANTS.OP.OP_PORT_TYPE_VALUE, CONSTANTS.OP.OP_PORT_TYPE_OBJECT],
         options,
@@ -268,9 +268,9 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
 
     port.onChange = function ()
     {
-        var audioInNode = port.get();
-        var node = port.webAudio.audioNode;
-        var audioCtx = WEBAUDIO.getAudioContext();
+        const audioInNode = port.get();
+        const node = port.webAudio.audioNode;
+        const audioCtx = WEBAUDIO.getAudioContext();
 
         if (audioInNode != undefined)
         {
@@ -408,7 +408,6 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
 };
 
 
-
 /**
  * Loads an audio file and updates the loading indicators when cables is run in the editor.
  * @param {CABLES.Patch} patch - The cables patch, when called from inside an op this is `op.patch`
@@ -419,10 +418,10 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
  */
 WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
 {
-    var audioContext = WEBAUDIO.createAudioContext();
-    var loadingId = patch.loading.start("audio", url);
-    if (patch.isEditorMode()) gui.jobs().start({ id: "loadaudio" + loadingId, title: " loading audio (" + url + ")" });
-    var request = new XMLHttpRequest();
+    const audioContext = WEBAUDIO.createAudioContext();
+    const loadingId = patch.loading.start("audio", url);
+    if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
+    const request = new XMLHttpRequest();
     if (!url)
     {
         return;
@@ -449,7 +448,7 @@ WEBAUDIO.isValidToneTime = function (t)
 {
     try
     {
-        var time = new Tone.Time(t);
+        const time = new Tone.Time(t);
     }
     catch (e)
     {

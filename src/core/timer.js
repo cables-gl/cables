@@ -51,13 +51,13 @@ Timer.prototype._getTime = function ()
 Timer.prototype._eventPlayPause = function ()
 {
     if (this._eventsPaused) return;
-    for (var i in this.cbPlayPause) this.cbPlayPause[i]();
+    for (const i in this.cbPlayPause) this.cbPlayPause[i]();
 };
 
 Timer.prototype._eventTimeChange = function ()
 {
     if (this._eventsPaused) return;
-    for (var i in this.cbTimeChange) this.cbTimeChange[i]();
+    for (const i in this.cbTimeChange) this.cbTimeChange[i]();
 };
 
 Timer.prototype.setDelay = function (d)

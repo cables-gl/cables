@@ -580,7 +580,7 @@ Anim.prototype.setValue = function (time, value, cb)
             new ANIM.Key({
                 time,
                 value,
-                e: this.defaultEasing,
+                "e": this.defaultEasing,
                 cb,
             }),
         );
@@ -735,8 +735,8 @@ Anim.prototype.createPort = function (op, title, cb)
 {
     const port = op.addInPort(
         new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-            display: "dropdown",
-            values: CONSTANTS.ANIM.EASINGS,
+            "display": "dropdown",
+            "values": CONSTANTS.ANIM.EASINGS,
         }),
     );
 
