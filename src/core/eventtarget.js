@@ -62,6 +62,7 @@ const EventTarget = function ()
         else
         {
             // Log.warn("has no event callback",which,this._eventCallbacks);
+            if(this._log) console.log("[event] has no event callback",which,this._eventCallbacks);
         }
     };
 };

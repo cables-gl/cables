@@ -3,6 +3,8 @@ import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
+import { EventTarget } from "../eventtarget";
+
 
 
 /**
@@ -14,7 +16,9 @@ import { Log } from "../log";
  */
 const Context = function (_patch)
 {
-    var self = this;
+    EventTarget.apply(this);
+
+    // var self = this;
     var viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
@@ -167,7 +171,7 @@ const Context = function (_patch)
             this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
             this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
         }
-        self.updateSize();
+        this.updateSize();
     };
 
     this.updateSize = function ()
@@ -218,16 +222,6 @@ const Context = function (_patch)
         this.gl.viewport(viewPort[0], viewPort[1], viewPort[2], viewPort[3]);
     };
 
-    this.beginFrame = function ()
-    {
-        if(this.patch.isEditorMode())
-        {
-            gui.metaTexturePreviewer.render();
-            if (CABLES.UI.patchPreviewer) CABLES.UI.patchPreviewer.render();
-        }
-
-        this.pushShader(simpleShader);
-    };
 
     this.screenShot = function (cb, doScreenshotClearAlpha,mimeType, quality)
     {
@@ -269,11 +263,11 @@ const Context = function (_patch)
         if (this._stackCullFace.length > 0) Log.warn("this._stackCullFace length !=0 at end of rendering...");
         if (this._stackCullFaceFacing.length > 0) Log.warn("this._stackCullFaceFacing length !=0 at end of rendering...");
 
-        if (oldCanvasWidth != self.canvasWidth || oldCanvasHeight != self.canvasHeight)
+        if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
-            oldCanvasWidth = self.canvasWidth;
-            oldCanvasHeight = self.canvasHeight;
-            this.setSize(self.canvasWidth / this.pixelDensity, self.canvasHeight / this.pixelDensity);
+            oldCanvasWidth = this.canvasWidth;
+            oldCanvasHeight = this.canvasHeight;
+            this.setSize(this.canvasWidth / this.pixelDensity, this.canvasHeight / this.pixelDensity);
             this.updateSize();
 
             for (var i = 0; i < cbResize.length; i++) cbResize[i]();
@@ -441,7 +435,9 @@ const Context = function (_patch)
 
         for (var i = 0; i < this._textureslots.length; i++) this._textureslots[i] = null;
 
-        cgl.beginFrame();
+        this.pushShader(simpleShader);
+
+        this.emitEvent("beginFrame");
     };
 
     this.renderEnd = function (cgl, identTranslate)
