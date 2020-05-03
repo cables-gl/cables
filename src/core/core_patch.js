@@ -247,7 +247,7 @@ Patch.prototype.setVolume = function (v)
  */
 Patch.prototype.getAssetPath=function()
 {
-    if(CABLES.UI)
+    if(this.isEditorMode())
     {
         return '/assets/'+gui.project()._id+'/';
     }
@@ -1150,7 +1150,7 @@ Patch.prototype.setVariable = function (name, val)
 
 Patch.prototype._sortVars = function ()
 {
-    if(!CABLES.UI) return;
+    if(!this.isEditorMode()) return;
     const ordered = {};
     Object.keys(this._variables).sort().forEach((key)=>
     {

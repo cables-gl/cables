@@ -102,10 +102,47 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
 };
 
-const PatchConnectionSender = function (patch, options)
+
+// ---------------
+
+
+const PatchConnectionSender = function (patch)
 {
     this.connectors = [];
     this.connectors.push(new PatchConnectorBroadcastChannel());
+
+    patch.addEventListener("onOpDelete",
+        (op) => {
+            this.send(CABLES.PACO_OP_DELETE, { "op": op.id });
+        });
+
+    patch.addEventListener("onOpAdd",
+        (op) =>
+        {
+            this.send(CABLES.PACO_OP_CREATE, {
+                "opId": op.id,
+                "objName": op.objName
+            });
+        });
+
+    patch.addEventListener("onUnLink",(p1, p2) => {
+        this.send(CABLES.PACO_UNLINK, {
+            "op1": p1.parent.id,
+            "op2": p2.parent.id,
+            "port1": p1.getName(),
+            "port2": p2.getName()
+        });
+    });
+
+    patch.addEventListener("onLink",(p1, p2) => {
+        this.send(CABLES.PACO_LINK, {
+            "op1": p1.parent.id,
+            "op2": p2.parent.id,
+            "port1": p1.name,
+            "port2": p2.name,
+        });
+    });
+
 };
 
 PatchConnectionSender.prototype.send = function (event, vars)
