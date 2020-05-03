@@ -1,19 +1,15 @@
 import { CONSTANTS } from "./constants";
 import { Log } from "./log"
 
-// todo: this is optional?
-
-export const togglePacoRenderer = function ()
-{
-    var show = CABLES.UI.userSettings.get("pacoRenderer") || false;
-    CABLES.UI.userSettings.set("pacoRenderer", !show);
-    document.location.reload();
-};
-
-export const showPacoRenderer = function ()
-{
-
-};
+// export const togglePacoRenderer = function ()
+// {
+//     var show = CABLES.UI.userSettings.get("pacoRenderer") || false;
+//     CABLES.UI.userSettings.set("pacoRenderer", !show);
+//     document.location.reload();
+// };
+// export const showPacoRenderer = function ()
+// {
+// };
 
 const PatchConnectionReceiver = function (patch, options, connector)
 {

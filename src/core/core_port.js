@@ -511,9 +511,8 @@ Port.prototype.trigger = function ()
 
         if (this.parent.patch.isEditorMode())
         {
-            this.parent.patch.emitEvent("exception".ex, portTriggered.parent);
-
-            if (window.gui) gui.showOpCrash(portTriggered.parent);
+            this.parent.patch.emitEvent("exception", ex, portTriggered.parent);
+            this.parent.patch.emitEvent("opcrash", portTriggered);
         }
         Log.log("exception!");
         console.error("ontriggered exception cought", ex);
