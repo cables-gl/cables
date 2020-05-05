@@ -22,7 +22,13 @@ void main()
 {
     {{MODULE_BEGIN_FRAG}}
 
-    vec2 pointCoord=vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y));
+    #ifdef FLIP_TEX
+        vec2 pointCoord=vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y));
+    #endif
+    #ifndef FLIP_TEX
+        vec2 pointCoord=gl_PointCoord;
+    #endif
+
     vec4 col=color;
 
     #ifdef HAS_TEXTURES
