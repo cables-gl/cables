@@ -46,7 +46,10 @@ void main()
     float d=1.0;
 
     vec2 pp=vec2(p.x-x,p.y-y);
-    pp-=vec2(width/2.0,height/2.0);
+    #ifndef CENTER
+        pp-=vec2(width/2.0,height/2.0);
+    #endif
+
     pp=pp*rot(rotate*DEG2RAD/45.0);
 
     float roundn=roundness*min(width,height);
