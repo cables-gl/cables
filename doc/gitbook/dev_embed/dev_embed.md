@@ -7,6 +7,10 @@
 - The archive contains an `index.html`-file – put this on a web-server and load it, your project should be shown. You can open your browser’s developer tools to check if there are any errors.
 - An easy way to start a local web-server on your computer is by using a program like [anvil](anvilformac.com) – after you downloaded the zip file of your project and unpacked it, just drag the extracted folder onto the menu bar icon of *anvil* and click on the newly created local web-server to open it in your browser
 
+## Examples
+
+Have a look at our github example repository: [github](https://github.com/cables-gl/cables-embedding)
+
 ## Simple: Insert patch into an HTML container element
 
 use `CABLES.EMBED.addPatch(...)` to create a canvas element and insert it into a container element. You can then set the Size of the container Element and the canvas will be resized automatically.
