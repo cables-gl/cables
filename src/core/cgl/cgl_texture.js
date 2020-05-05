@@ -68,12 +68,10 @@ const Texture = function (__cgl, options)
         };
     }
 
-    const w = Math.min(options.width, this._cgl.maxTexSize);
-    const h = Math.min(options.height, this._cgl.maxTexSize);
 
     profileData.profileTextureNew++;
 
-    this.setSize(w, h);
+    this.setSize(options.width, options.height);
 };
 
 /**
@@ -132,6 +130,12 @@ Texture.prototype.setSize = function (w, h)
 {
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
     if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
+
+    if (w > this._cgl.maxTexSize || h > this._cgl.maxTexSize) console.error("texture size too big! " + w + "x" + h + " / max: " + this._cgl.maxTexSize);
+
+    w = Math.min(w, this._cgl.maxTexSize);
+    h = Math.min(h, this._cgl.maxTexSize);
+
     w = Math.floor(w);
     h = Math.floor(h);
     if (this.width == w && this.height == h) return;
