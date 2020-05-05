@@ -102,7 +102,7 @@
         ],
         "name": "Ops.Gl.Vr.MainloopWebVr"
     },
-    "summary": "experimental webvr rendering",
+    "summary": "experimental webvr rendering / currently not being developed due to XR update",
     "docs": {
         "ports": [
             {
@@ -190,7 +190,6 @@
     "libs": [
         "webvr-polyfill.js"
     ],
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -210,5 +209,6 @@
             "id": "97351b1e-0f1b-4aa7-a3a4-7818d2126ea9",
             "date": 1558009965640
         }
-    ]
+    ],
+    "youtubeids": []
 }

@@ -12,7 +12,7 @@ IN vec2 pointCoord;
     UNI sampler2D texMask;
 #endif
 #ifdef HAS_TEXTURE_COLORIZE
-    in vec4 colorize;
+    IN vec4 colorize;
 #endif
 #ifdef VERTEX_COLORS
     IN vec3 vertexColor;

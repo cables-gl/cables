@@ -16,7 +16,7 @@ OUT vec3 norm;
 #endif
 #ifdef HAS_TEXTURE_COLORIZE
    UNI sampler2D texColorize;
-   out vec4 colorize;
+   OUT vec4 colorize;
 #endif
 
 UNI mat4 projMatrix;

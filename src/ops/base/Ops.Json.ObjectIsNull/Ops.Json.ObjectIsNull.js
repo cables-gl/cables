@@ -9,5 +9,5 @@ if(!inObj.get())
 {
     outResult.set(true);
 }
-        
+
 };

@@ -13,6 +13,7 @@ exe.onTriggered=function()
     if(!theArr)
     {
         val.set(null);
+        return;
     }
 
     // op.patch.instancing.pushLoop(theArr.length);
