@@ -5,3 +5,4 @@ inObj.onChange = function ()
 {
     outResult.set(!inObj.get());
 };
+

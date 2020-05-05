@@ -112,5 +112,78 @@
             "author": "pandur",
             "date": 1587624445853
         }
-    ]
+    ],
+    "summary": "Draw all vertices as points / circles",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "PointSize",
+                "text": "The size of each point, distance has no effect unless \"scale by distance\" is enabled"
+            },
+            {
+                "name": "Random Size",
+                "text": "Causes point size to become more random with higher values"
+            },
+            {
+                "name": "Round",
+                "text": "Render points as circles , disable to render squares"
+            },
+            {
+                "name": "Scale by Distance",
+                "text": "Point size is changed with distance to the camera"
+            },
+            {
+                "name": "r",
+                "text": "Red colour component"
+            },
+            {
+                "name": "g",
+                "text": "Green colour component"
+            },
+            {
+                "name": "b",
+                "text": "Blue colour component"
+            },
+            {
+                "name": "a",
+                "text": "Alpha component"
+            },
+            {
+                "name": "preMultiplied alpha",
+                "text": "Enable pre-multiplied alpha with texture input"
+            },
+            {
+                "name": "texture",
+                "text": "This texture will be rendered on every single point"
+            },
+            {
+                "name": "Texture Mask",
+                "text": "A texture plugged in here will be used as a for mask points"
+            },
+            {
+                "name": "Texture Colorize",
+                "text": "A texture plugged into here will color each point based upon the texture "
+            },
+            {
+                "name": "Colorize Randomize",
+                "text": "Enable to randomize color on the texture colorize input"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            },
+            {
+                "name": "shader",
+                "text": "Shader out"
+            }
+        ]
+    }
 }

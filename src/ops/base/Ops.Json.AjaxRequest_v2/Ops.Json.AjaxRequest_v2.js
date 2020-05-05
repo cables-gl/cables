@@ -82,6 +82,9 @@ function reload(addCachebuster)
         null,
         null,
         null,
-        headers.get()
+        null,
+        headers.get()||{}
     );
+
+
 }
