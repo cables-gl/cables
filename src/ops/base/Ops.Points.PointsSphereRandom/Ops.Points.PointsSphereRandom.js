@@ -18,7 +18,7 @@ seed.onChange=
 num.onChange=
 size.onChange=
 distrib.onChange=
-distRand.onChange=generate;
+distRand.onChange=outArray.onLinkChanged=generate;
 
 function generate()
 {
