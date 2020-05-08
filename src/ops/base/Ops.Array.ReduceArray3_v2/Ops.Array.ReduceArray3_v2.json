@@ -56,6 +56,11 @@
             "message": "Ops.Array.ReduceArray3x renamed to Ops.Array.ReduceArray3",
             "author": "pandur",
             "date": 1560412313194
+        },
+        {
+            "message": "Ops.Array.ReduceArray3 renamed to Ops.Array.ReduceArray3_v2",
+            "author": "pandur",
+            "date": 1588935083065
         }
     ],
     "issues": "",
