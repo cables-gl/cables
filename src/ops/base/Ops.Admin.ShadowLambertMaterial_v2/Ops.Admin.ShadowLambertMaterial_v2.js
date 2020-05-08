@@ -561,7 +561,7 @@ execute.onTriggered=function()
         console.log("lambert has no shader...");
         return;
     }
-    if (cgl.shadowPass) {
+    if (cgl.shadowPass || cgl.frameStore.shadowPass) {
         next.trigger();
     } else {
         cgl.setShader(shader);

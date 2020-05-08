@@ -4,15 +4,20 @@ const compiler = require("webpack");
 const concat = require("gulp-concat");
 const rename = require("gulp-rename");
 const webpackConfig = require("./webpack.config");
+const libWebpackConfig = require("./webpack.config.libs");
 
-exports.default = exports.watch = gulp.series(gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _watch);
+exports.default = exports.watch = gulp.series(
+    gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax),
+    _watch
+);
 
-exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel);
+exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
     gulp.watch("libs/**/*", gulp.parallel(taskCoreLibs));
+    gulp.watch("src/libs/**/*", gulp.parallel(taskCoreLibsJsMax));
 }
 
 function taskCoreLibs()
@@ -38,7 +43,7 @@ function taskCoreJsMax()
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(false, false),
+                        "config": webpackConfig(false, false),
                     },
                     compiler,
                     (err, stats) =>
@@ -67,7 +72,7 @@ function taskCoreJsMaxBabel()
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(false, true),
+                        "config": webpackConfig(false, true),
                     },
                     compiler,
                     (err, stats) =>
@@ -97,7 +102,7 @@ function taskCoreJsMin()
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(true, false),
+                        "config": webpackConfig(true, false),
                     },
                     compiler,
                     (err, stats) =>
@@ -128,7 +133,7 @@ function taskCoreJsMinBabel()
             .pipe(
                 webpack(
                     {
-                        config: webpackConfig(true, true),
+                        "config": webpackConfig(true, true),
                     },
                     compiler,
                     (err, stats) =>
@@ -144,6 +149,36 @@ function taskCoreJsMinBabel()
             )
 
             .pipe(gulp.dest("build"))
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
+}
+
+function taskCoreLibsJsMax()
+{
+    return new Promise((resolve, reject) =>
+    {
+        gulp.src(["src/libs/**/*"])
+            .pipe(
+                webpack(
+                    {
+                        "config": libWebpackConfig(false, true),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        resolve();
+                    }
+                )
+            )
+            .pipe(gulp.dest("build/libs"))
             .on("error", (err) =>
             {
                 console.error("WEBPACK ERROR", err);

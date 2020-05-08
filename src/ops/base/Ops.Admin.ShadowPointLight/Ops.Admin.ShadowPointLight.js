@@ -465,7 +465,7 @@ inTrigger.onTriggered = function() {
     cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get()) {
-        if (!cgl.shadowPass) {
+        if (!cgl.frameStore.shadowPass) {
             if (!cubemapInitialized) initializeCubemap();
 
             cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);

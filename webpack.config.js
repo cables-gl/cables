@@ -13,66 +13,66 @@ const provideObject = glMatrixClasses.reduce((acc, val) =>
 }, {});
 
 module.exports = (isProduction, shouldBabel = false) => ({
-    mode: isProduction ? "production" : "development",
-    entry: [
+    "mode": isProduction ? "production" : "development",
+    "entry": [
         path.join(__dirname, "src", "core", "index.js"),
         // ...fs.readdirSync('./src/ops/').filter(file => file.match(/.*\.js$/)),
     ],
     // watch: true,
-    devtool: isProduction ? "source-map" : "cheap-module-eval-source-map",
-    output: {
-        path: path.join(__dirname, "build"),
+    "devtool": isProduction ? "source-map" : "cheap-module-eval-source-map",
+    "output": {
+        "path": path.join(__dirname, "build"),
         // publicPath: `${__dirname}dist/`,
-        filename: isProduction ?
-        (shouldBabel ? "babel.cables.min.js" : "cables.min.js")
-        : (shouldBabel ? "babel.cables.max.js" : "cables.max.js"),
+        "filename": isProduction ?
+            (shouldBabel ? "babel.cables.min.js" : "cables.min.js")
+            : (shouldBabel ? "babel.cables.max.js" : "cables.max.js"),
         // chunkFilename: '[name].js',
-        library: "CABLES",
-        libraryExport: "default",
-        libraryTarget: "var",
-        globalObject: "window",
+        "library": "CABLES",
+        "libraryExport": "default",
+        "libraryTarget": "var",
+        "globalObject": "window",
     },
-    stats: isProduction,
-    optimization: { minimize: isProduction },
-    module: {
-        rules: [
+    "stats": isProduction,
+    "optimization": { "minimize": isProduction },
+    "module": {
+        "rules": [
             shouldBabel && {
-                test: /.jsx?$/,
-                include: [path.resolve(__dirname, "src")],
-                exclude: [path.resolve(__dirname, "node_modules")],
-                loader: "babel-loader",
-                query: {
-                    presets: [
+                "test": /.jsx?$/,
+                "include": [path.resolve(__dirname, "src")],
+                "exclude": [path.resolve(__dirname, "node_modules")],
+                "loader": "babel-loader",
+                "query": {
+                    "presets": [
                         [
                             "@babel/env",
                             {
-                                targets: {
-                                    edge: "12",
-                                    ie: "11",
-                                    safari: "10",
+                                "targets": {
+                                    "edge": "12",
+                                    "ie": "11",
+                                    "safari": "10",
                                 },
                             },
                         ],
                     ],
-                    plugins: ["@babel/plugin-proposal-object-rest-spread","@babel/plugin-transform-object-assign"],
+                    "plugins": ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-object-assign"],
 
                 },
             },
         ].filter(Boolean),
     },
-    externals: ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
-    resolve: {
-        extensions: [".json", ".js", ".jsx"],
+    "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
+    "resolve": {
+        "extensions": [".json", ".js", ".jsx"],
         // alias: {
         //     CGL: path.resolve(__dirname, "./src/core/cgl/index.js"),
         // },
     },
     // devtool: "cheap-module-source-map",
-    plugins: [
+    "plugins": [
         isProduction
             && new BundleAnalyzerPlugin({
-                analyzerMode: "disabled",
-                generateStatsFile: true,
+                "analyzerMode": "disabled",
+                "generateStatsFile": true,
             }),
         // new webpack.ProvidePlugin(provideObject),
         // new webpack.ProvidePlugin({
