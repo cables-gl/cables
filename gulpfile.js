@@ -7,20 +7,20 @@ const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
 exports.default = exports.watch = gulp.series(
-    gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax),
+    gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax),
     _watch
 );
 
-exports.build = gulp.parallel(taskCoreLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax);
+exports.build = gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel, taskCoreLibsJsMax);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
-    gulp.watch("libs/**/*", gulp.parallel(taskCoreLibs));
+    gulp.watch("libs/**/*", gulp.parallel(taskExtentalLibs));
     gulp.watch("src/libs/**/*", gulp.parallel(taskCoreLibsJsMax));
 }
 
-function taskCoreLibs()
+function taskExtentalLibs()
 {
     return (
         gulp
