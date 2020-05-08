@@ -13,6 +13,7 @@ const
 const cgl=op.patch.cgl;
 
 var node=null;
+var currentSceneLoaded=null;
 
 inNodeName.onChange=function()
 {
@@ -24,6 +25,7 @@ inNodeName.onChange=function()
 inExec.onTriggered=function()
 {
     if(!cgl.frameStore.currentScene) return;
+    if(currentSceneLoaded!=cgl.frameStore.currentScene.loaded) node=null;
 
     if(!node)
     {
@@ -33,6 +35,7 @@ inExec.onTriggered=function()
         {
             return;
         }
+        currentSceneLoaded=cgl.frameStore.currentScene.loaded;
 
         for(var i=0;i<cgl.frameStore.currentScene.nodes.length;i++)
         {

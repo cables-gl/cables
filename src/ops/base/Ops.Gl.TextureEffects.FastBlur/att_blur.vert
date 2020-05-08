@@ -56,5 +56,18 @@ void main()
     coord5= attrTexCoord + (2.089778445362373* res);
     coord6= attrTexCoord + (3.0368997744118595 * res);
 
+    #ifdef CLAMP
+        coord0=clamp(coord0,0.0,1.0);
+        coord1=clamp(coord1,0.0,1.0);
+        coord2=clamp(coord2,0.0,1.0);
+        coord3=clamp(coord3,0.0,1.0);
+        coord4=clamp(coord4,0.0,1.0);
+        coord5=clamp(coord5,0.0,1.0);
+        coord6=clamp(coord6,0.0,1.0);
+    #endif
+
+
+
+
     gl_Position = projMatrix * mvMatrix * pos;
 }

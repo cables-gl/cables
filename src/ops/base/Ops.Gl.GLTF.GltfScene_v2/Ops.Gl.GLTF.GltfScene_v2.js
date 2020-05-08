@@ -55,15 +55,11 @@ dataPort.onChange=loadData;
 
 op.setPortGroup("Transform",[inRescale,inRescaleSize,inCenter]);
 
-inCenter.onChange=function()
-{
-    doCenter=inCenter.get()!="None";
-    updateCenter();
-
-};
+inCenter.onChange=updateCenter;
 
 function updateCenter()
 {
+    doCenter=inCenter.get()!="None";
 
     if(gltf && gltf.bounds)
     {
@@ -71,9 +67,8 @@ function updateCenter()
         boundsCenter[0]=-boundsCenter[0];
         boundsCenter[1]=-boundsCenter[1];
         boundsCenter[2]=-boundsCenter[2];
-
-        if(inCenter.get()=="XZ")
-            boundsCenter[1]=-gltf.bounds.minY;
+console.log("center gltf!!!",boundsCenter)
+        if(inCenter.get()=="XZ") boundsCenter[1]=-gltf.bounds.minY;
     }
 }
 
@@ -192,6 +187,7 @@ function loadBin(addCacheBuster)
         hideNodesFromData();
         if(tab)printInfo();
 
+        gltf.loaded=Date.now();
 
         outPoints.set(boundingPoints);
         outBounds.set(gltf.bounds);

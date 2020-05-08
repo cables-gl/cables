@@ -50,9 +50,7 @@ var gltfMesh=class
             }
         }
 
-
         if(!geom.vertexNormals.length) geom.calculateNormals();
-
 
         geom.calcTangentsBitangents();
     }

@@ -1,9 +1,11 @@
-const render=op.inTrigger("render");
-const trigger=op.outTrigger("trigger");
-const amount=op.inValue("amount");
+const
+    render=op.inTrigger("render"),
+    trigger=op.outTrigger("trigger"),
+    amount=op.inValue("amount"),
+    clamp=op.inBool("Clamp",false);
 
 const cgl=op.patch.cgl;
-amount.set(5);
+amount.set(3);
 
 const shader=new CGL.Shader(cgl);
 
@@ -27,6 +29,8 @@ direction.onValueChange(function()
     if(direction.get()=='vertical')dir=2;
 });
 
+clamp.onChange= () => { shader.toggleDefine("CLAMP",clamp.get()); };
+
 render.onTriggered=function()
 {
     if(!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -34,51 +38,37 @@ render.onTriggered=function()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
     var numPasses=amount.get();
-    
+
     for(var i=0;i<numPasses;i++)
     {
         cgl.pushShader(shader);
 
         uniPass.setValue(i/numPasses);
-    
+
         // first pass
         if(dir===0 || dir==2)
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            
-    
-            // if(mask.get() && mask.get().tex)
-            // {
-            //     cgl.setTexture(1,mask.get().tex);
-            //     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
-            // }
-    
+
             uniDirX.setValue(0.0);
             uniDirY.setValue(1.0+ (i*i ) );
-    
+
             cgl.currentTextureEffect.finish();
         }
-    
+
         // second pass
         if(dir===0 || dir==1)
         {
             cgl.currentTextureEffect.bind();
             cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-            
-    
-            // if(mask.get() && mask.get().tex)
-            // {
-            //     cgl.setTexture(1,mask.get().tex);
-            //     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, mask.get().tex );
-            // }
-    
+
             uniDirX.setValue(1.0+ (i*i ) );
             uniDirY.setValue(0.0);
-    
+
             cgl.currentTextureEffect.finish();
         }
-    
+
         cgl.popShader();
     }
 

@@ -13,6 +13,7 @@ var Gltf=class
         this.timing=[];
         this.startTime=performance.now();
         this.bounds=new CGL.BoundingBox();
+        this.loaded=Date.now();
     }
 
     getNode(n)
