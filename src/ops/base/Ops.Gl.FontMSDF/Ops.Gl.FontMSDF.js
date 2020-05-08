@@ -30,6 +30,19 @@ function updateLoaded()
     outLoaded.set(l);
 }
 
+op.onFileChanged=function(fn)
+{
+    if(
+        (urlTex.get() && urlTex.get().indexOf(fn)>-1) ||
+        (urlTex1.get() && urlTex1.get().indexOf(fn)>-1) ||
+        (urlTex2.get() && urlTex2.get().indexOf(fn)>-1) ||
+        (urlTex3.get() && urlTex3.get().indexOf(fn)>-1))
+    {
+        load();
+    }
+};
+
+
 function load()
 {
     if(!urlData.get() || !urlTex.get()) return;

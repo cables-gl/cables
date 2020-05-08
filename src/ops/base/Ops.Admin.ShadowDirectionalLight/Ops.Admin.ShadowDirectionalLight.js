@@ -365,7 +365,7 @@ function renderHelpers() {
 inTrigger.onTriggered = function() {
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
      // NOTE: how to handle this? fucks up the shadow map
-     // renderHelpers();
+     renderHelpers();
 
 
 

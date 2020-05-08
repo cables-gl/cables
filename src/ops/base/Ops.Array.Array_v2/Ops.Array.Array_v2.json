@@ -6,12 +6,12 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Mode select index",
+                "name": "Array length",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Array length",
+                "name": "Mode select index",
                 "subType": "integer"
             },
             {

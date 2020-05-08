@@ -2,11 +2,11 @@ const
     render=op.inTriggerButton("Render"),
     text=op.inString("text",'cables'),
     font=op.inString("font","Arial"),
-    maximize=op.inValueBool("Maximize Size"),
+    maximize=op.inValueBool("Maximize Size",true),
     inFontSize=op.inValueFloat("fontSize",30),
     lineDistance=op.inValueFloat("line distance",1),
     texWidth=op.inValueInt("texture width",512),
-    texHeight=op.inValueInt("texture height",512),
+    texHeight=op.inValueInt("texture height",128),
     align=op.inSwitch("align",['left','center','right'],'center'),
     valign=op.inSwitch("vertical align",['top','center','bottom'],'center'),
     border=op.inValueFloat("border",0),
@@ -56,6 +56,7 @@ body.appendChild(fontImage);
 const ctx = fontImage.getContext('2d');
 var needsRefresh=true;
 var mesh=CGL.MESHES.getSimpleRect(cgl,"texttexture rect");
+var vScale=vec3.create();
 
 
 const shader=new CGL.Shader(cgl,'texttexture');
@@ -66,7 +67,13 @@ const aspectUni=new CGL.Uniform(shader,'f','aspect',0);
 const opacityUni=new CGL.Uniform(shader,'f','a',inOpacity);
 
 
-var vScale=vec3.create();
+if (cgl.glVersion == 1)
+{
+    cgl.gl.getExtension("OES_standard_derivatives");
+    shader.enableExtension("GL_OES_standard_derivatives");
+}
+
+
 
 renderHard.onChange=function()
 {

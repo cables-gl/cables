@@ -1,5 +1,5 @@
 const
-    num=op.inValueInt("Amount of points",1000),
+    num=op.inValueInt("Amount of points",100),
     size=op.inValue("Sphere size",1),
     seed=op.inValue("Random seed",0),
     distRand=op.inValueSlider("Random distance from sphere",0),
@@ -19,12 +19,13 @@ num.onChange=
 size.onChange=
 distrib.onChange=
 distRand.onChange=outArray.onLinkChanged=generate;
+generate();
 
 function generate()
 {
 
     const verts=[];
-    verts.length=Math.round(num.get())*3;
+    verts.length=Math.max(0,Math.round(num.get())*3);
 
     Math.randomSeed=seed.get();
 
