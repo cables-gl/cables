@@ -6,7 +6,12 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Render Mesh",
+                "subType": "boolean"
             },
             {
                 "type": "0",
@@ -29,11 +34,7 @@
             {
                 "type": "0",
                 "name": "Center",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Active",
+                "group": "Geometry",
                 "subType": "boolean"
             },
             {
@@ -93,7 +94,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             },
             {
                 "type": "2",

@@ -10,13 +10,12 @@ next version:
 */
 
 const
-    render=op.inTrigger('render'),
+    render=op.inTrigger('Render'),
+    active=op.inValueBool('Render Mesh',true),
     width=op.inValue('Width',1),
     len=op.inValue('Length',1),
     height=op.inValue('Height',1),
     center=op.inValueBool('Center',true),
-    active=op.inValueBool('Active',true),
-
 
     mapping=op.inSwitch("Mapping",['Side','Cube +-'],'Side'),
     mappingBias=op.inValue('Bias',0),
@@ -29,13 +28,14 @@ const
     sideFront=op.inValueBool('Front',true),
     sideBack=op.inValueBool('Back',true),
 
-    trigger=op.outTrigger('trigger'),
+    trigger=op.outTrigger('Next'),
     geomOut=op.outObject("geometry");
 
 const cgl=op.patch.cgl;
+op.toWorkPortsNeedToBeLinked(render);
 
 op.setPortGroup("Mapping",[mapping,mappingBias,inFlipX]);
-op.setPortGroup("Geometry",[width,height,len]);
+op.setPortGroup("Geometry",[width,height,len,center]);
 op.setPortGroup("Sides",[sideTop,sideBottom,sideLeft,sideRight,sideFront,sideBack]);
 
 var geom=null,
@@ -56,12 +56,16 @@ mappingBias.onChange=
     len.onChange=
     center.onChange=buildMeshLater;
 
-buildMesh();
 
 
 function buildMeshLater()
 {
     needsRebuild=true;
+}
+
+render.onLinkChanged=function()
+{
+    if(!render.isLinked()) geomOut.set(null);
 }
 
 render.onTriggered=function()
