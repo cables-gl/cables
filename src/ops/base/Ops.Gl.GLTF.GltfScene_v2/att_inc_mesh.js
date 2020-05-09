@@ -40,13 +40,24 @@ var gltfMesh=class
 // multiplying against the w component of the tangent:
 // bitangent = cross(normal, tangent.xyz) * tangent.w
 
-        if(inSwitchNormalsYZ.get())
+        if(inNormFormat.get()=="X-ZY")
         {
             for(var i=0;i<geom.vertexNormals.length;i+=3)
             {
                 var t=geom.vertexNormals[i+2];
                 geom.vertexNormals[i+2]=geom.vertexNormals[i+1];
-                geom.vertexNormals[i+1]=t;
+                geom.vertexNormals[i+1]=-t;
+            }
+        }
+
+
+        if(inVertFormat.get()=="XZ-Y")
+        {
+            for(var i=0;i<geom.vertices.length;i+=3)
+            {
+                var t=geom.vertices[i+2];
+                geom.vertices[i+2]=-geom.vertices[i+1];
+                geom.vertices[i+1]=t;
             }
         }
 

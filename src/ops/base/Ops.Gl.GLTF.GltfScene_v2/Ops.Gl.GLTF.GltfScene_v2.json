@@ -58,8 +58,13 @@
             },
             {
                 "type": "0",
-                "name": "Switch Normals",
-                "subType": "boolean"
+                "name": "Normals Format index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Vertices Format index",
+                "subType": "integer"
             },
             {
                 "type": "2",

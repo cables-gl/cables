@@ -13,7 +13,11 @@ const
     inTimeLine=op.inBool("Sync to timeline",false),
     inLoop=op.inBool("Loop",true),
 
-    inSwitchNormalsYZ=op.inBool("Switch Normals",false),
+
+    inNormFormat=op.inSwitch("Normals Format",["XYZ","X-ZY"],"XYZ"),
+    inVertFormat=op.inSwitch("Vertices Format",["XYZ","XZ-Y"],"XYZ"),
+
+
 
     inMaterials=op.inObject("Materials"),
 
@@ -33,7 +37,9 @@ op.setPortGroup("Timing",[inTime,inTimeLine,inLoop]);
 
 const le=true; //little endian
 const cgl=op.patch.cgl;
-inFile.onChange=reloadSoon;
+inFile.onChange=
+    inVertFormat.onChange=
+    inNormFormat.onChange=reloadSoon;
 
 var boundingPoints=[];
 var gltf=null;
@@ -67,16 +73,10 @@ function updateCenter()
         boundsCenter[0]=-boundsCenter[0];
         boundsCenter[1]=-boundsCenter[1];
         boundsCenter[2]=-boundsCenter[2];
-console.log("center gltf!!!",boundsCenter)
         if(inCenter.get()=="XZ") boundsCenter[1]=-gltf.bounds.minY;
     }
 }
 
-
-inSwitchNormalsYZ.onChange=function()
-{
-    reloadSoon();
-};
 
 inRescale.onChange=function()
 {
