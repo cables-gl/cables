@@ -1,14 +1,3 @@
-
-/*
-next version:
-
-- make rebuildLater functionality
-- make mapping mode for unconnected sides: no more face mapping texture problems (then we don't need that bias...)
-- maybe checkboxes to disable some sides ?
-- tesselation
-
-*/
-
 const
     render=op.inTrigger('Render'),
     active=op.inValueBool('Render Mesh',true),
@@ -16,18 +5,15 @@ const
     len=op.inValue('Length',1),
     height=op.inValue('Height',1),
     center=op.inValueBool('Center',true),
-
     mapping=op.inSwitch("Mapping",['Side','Cube +-'],'Side'),
     mappingBias=op.inValue('Bias',0),
     inFlipX=op.inValueBool('Flip X',true),
-
     sideTop=op.inValueBool('Top',true),
     sideBottom=op.inValueBool('Bottom',true),
     sideLeft=op.inValueBool('Left',true),
     sideRight=op.inValueBool('Right',true),
     sideFront=op.inValueBool('Front',true),
     sideBack=op.inValueBool('Back',true),
-
     trigger=op.outTrigger('Next'),
     geomOut=op.outObject("geometry");
 
@@ -40,6 +26,7 @@ op.setPortGroup("Sides",[sideTop,sideBottom,sideLeft,sideRight,sideFront,sideBac
 
 var geom=null,
     mesh=null,
+    meshvalid=true,
     needsRebuild=true;
 
 mappingBias.onChange=
@@ -56,8 +43,6 @@ mappingBias.onChange=
     len.onChange=
     center.onChange=buildMeshLater;
 
-
-
 function buildMeshLater()
 {
     needsRebuild=true;
@@ -66,12 +51,12 @@ function buildMeshLater()
 render.onLinkChanged=function()
 {
     if(!render.isLinked()) geomOut.set(null);
-}
+};
 
 render.onTriggered=function()
 {
     if(needsRebuild)buildMesh();
-    if(active.get() && mesh) mesh.render(cgl.getShader());
+    if(active.get() && mesh && meshvalid) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
@@ -109,9 +94,19 @@ function buildMesh()
         nz*=0.5;
     }
 
-
     if(mapping.get()=='Side') sideMappedCube(geom,x,y,z,nx,ny,nz);
-    else  cubeMappedCube(geom,x,y,z,nx,ny,nz);
+    else cubeMappedCube(geom,x,y,z,nx,ny,nz);
+
+    geom.verticesIndices = [];
+    if(sideTop.get()) geom.verticesIndices.push( 8, 9, 10,     8, 10, 11);  // Top face
+    if(sideBottom.get()) geom.verticesIndices.push( 12, 13, 14,   12, 14, 15); // Bottom face
+    if(sideLeft.get()) geom.verticesIndices.push( 20, 21, 22,   20, 22, 23); // Left face
+    if(sideRight.get()) geom.verticesIndices.push( 16, 17, 18,   16, 18, 19); // Right face
+    if(sideBack.get()) geom.verticesIndices.push( 4, 5, 6,      4, 6, 7);    // Back face
+    if(sideFront.get()) geom.verticesIndices.push( 0, 1, 2,      0, 2, 3);    // Front face
+
+    if(geom.verticesIndices.length===0) meshvalid=false;
+    else meshvalid=true;
 
     if(mesh)mesh.dispose();
     mesh=new CGL.Mesh(cgl,geom);
@@ -120,7 +115,6 @@ function buildMesh()
 
     needsRebuild=false;
 }
-
 
 op.onDelete=function()
 {
@@ -271,28 +265,7 @@ function sideMappedCube(geom,x,y,z,nx,ny,nz)
         0,1,0, 0,1,0, 0,1,0, 0,1,0
     ];
 
-    geom.verticesIndices = [];
-
-    if(sideTop.get()) geom.verticesIndices.push( 8, 9, 10,     8, 10, 11);  // Top face
-    if(sideBottom.get()) geom.verticesIndices.push( 12, 13, 14,   12, 14, 15); // Bottom face
-    if(sideLeft.get()) geom.verticesIndices.push( 20, 21, 22,   20, 22, 23); // Left face
-    if(sideRight.get()) geom.verticesIndices.push( 16, 17, 18,   16, 18, 19); // Right face
-    if(sideFront.get()) geom.verticesIndices.push( 0, 1, 2,      0, 2, 3);    // Front face
-    if(sideBack.get()) geom.verticesIndices.push( 4, 5, 6,      4, 6, 7);    // Back face
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 function cubeMappedCube(geom,x,y,z,nx,ny,nz)
 {
@@ -328,8 +301,6 @@ function cubeMappedCube(geom,x,y,z,nx,ny,nz)
         nx,  y,  z,
         nx,  y, nz
         ];
-
-
 
         const sx=0.25;
         const sy=1/3;
@@ -389,7 +360,8 @@ function cubeMappedCube(geom,x,y,z,nx,ny,nz)
               flipx+sx*1-bias, 1.0-sy-bias,
               flipx+sx*1-bias, 1.0-sy*2+bias,
               flipx+sx*0+bias, 1.0-sy*2+bias );
-    geom.setTexCoords( tc);
+
+    geom.setTexCoords(tc);
 
     geom.vertexNormals = [
         // Front face
@@ -456,14 +428,5 @@ function cubeMappedCube(geom,x,y,z,nx,ny,nz)
         // left face
         0,1,0, 0,1,0, 0,1,0, 0,1,0
     ];
-
-    geom.verticesIndices = [];
-
-    if(sideTop.get()) geom.verticesIndices.push( 8, 9, 10,     8, 10, 11);  // Top face
-    if(sideBottom.get()) geom.verticesIndices.push( 12, 13, 14,   12, 14, 15); // Bottom face
-    if(sideLeft.get()) geom.verticesIndices.push( 20, 21, 22,   20, 22, 23); // Left face
-    if(sideRight.get()) geom.verticesIndices.push( 16, 17, 18,   16, 18, 19); // Right face
-    if(sideBack.get()) geom.verticesIndices.push( 4, 5, 6,      4, 6, 7);    // Back face
-    if(sideFront.get()) geom.verticesIndices.push( 0, 1, 2,      0, 2, 3);    // Front face
 
 }
