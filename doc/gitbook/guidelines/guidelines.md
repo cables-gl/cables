@@ -21,7 +21,7 @@ If a data type is converted to another then both data names should be in the op 
 # Ports
 Any op with a `trigger in` should have this as the first input port, it should also have a `trigger out` as well.<br>
 This avoids having to use too many sequence ops.
-If an op has a `finished` trigger when an action has been completed then this trigger port should always be to the right of the `trigger out` port. 
+If an op has a `finished` trigger when an action has been completed then this trigger port should always be to the right of the `trigger out` port.
 
 # Anim ops
 Should have a `boolean` finished output port to show if the state is running or not.
@@ -35,19 +35,29 @@ All arrays should make a copy of an array and not a reference.
 ```
 var arrIn;
 var newArray;
-// This line below is a reference.This will modify the array in the op before this one. 
+// This line below is a reference.This will modify the array in the op before this one.
 //Better to avoid doing this
-newArray = arrIn ; 
-//It's better to make a deep copy like this 
+newArray = arrIn ;
+//It's better to make a deep copy like this
 for(var i = 0 ; i < arrIn; i++)
 {
   newArray[i] = arrIn[i];
 }
 ```
 
+# Mesh ops
+All ops that work with 3D meshes should adhere to the following rules, to guarantee best integration with other ops.
+
+- If render input is NOT connected geometry output is always NULL
+- On creation of the op, geometry output is NULL
+- Toggle for rendering should be called "Render Mesh"
+- Next output trigger should be called "next"
+- Optimize meshes to not always rebuild the whole geometry (e.g. scaling of rectangle)
+- Add a checkbox "force update" to disable and change the mesh again
+
 # Namespaces
 
-Every op has two short name, e.g. `KeyboardInput` and a namespace, e.g. `Ops.Devices.Keyboard.KeyboardInput`.  
+Every op has two short name, e.g. `KeyboardInput` and a namespace, e.g. `Ops.Devices.Keyboard.KeyboardInput`.
 
 The name will be presented to the user in the patch-view, the long version exists to group similar ops together.<br>
 In the op-add-dialog (when pressing `ESC` in the patch-view) users can click on any part of the namespace to view all ops with that namespace.
