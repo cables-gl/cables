@@ -28,6 +28,7 @@ const Context = function (_patch)
 
     this.maxTextureUnits = 0;
     this.currentProgram = null;
+    this._hadStackError = false;
 
     this.temporaryTexture = null;
     this.frameStore = {};
@@ -248,18 +249,19 @@ const Context = function (_patch)
 
 
         this.setPreviousShader();
-        if (this._vMatrixStack.length() > 0) Log.warn("view matrix stack length !=0 at end of rendering...");
-        if (this._mMatrixStack.length() > 0) Log.warn("mvmatrix stack length !=0 at end of rendering...");
-        if (this._pMatrixStack.length() > 0) Log.warn("pmatrix stack length !=0 at end of rendering...");
-        if (this._glFrameBufferStack.length > 0) Log.warn("glFrameBuffer stack length !=0 at end of rendering...");
-        if (this._stackDepthTest.length > 0) Log.warn("depthtest stack length !=0 at end of rendering...");
-        if (this._stackDepthWrite.length > 0) Log.warn("depthwrite stack length !=0 at end of rendering...");
-        if (this._stackDepthFunc.length > 0) Log.warn("depthfunc stack length !=0 at end of rendering...");
-        if (this._stackBlend.length > 0) Log.warn("blend stack length !=0 at end of rendering...");
-        if (this._stackBlendMode.length > 0) Log.warn("blendMode stack length !=0 at end of rendering...");
-        if (this._shaderStack.length > 0) Log.warn("this._shaderStack length !=0 at end of rendering...");
-        if (this._stackCullFace.length > 0) Log.warn("this._stackCullFace length !=0 at end of rendering...");
-        if (this._stackCullFaceFacing.length > 0) Log.warn("this._stackCullFaceFacing length !=0 at end of rendering...");
+
+        if (this._vMatrixStack.length() > 0) this.logStackError("view matrix stack length !=0 at end of rendering...");
+        if (this._mMatrixStack.length() > 0) this.logStackError("mvmatrix stack length !=0 at end of rendering...");
+        if (this._pMatrixStack.length() > 0) this.logStackError("pmatrix stack length !=0 at end of rendering...");
+        if (this._glFrameBufferStack.length > 0) this.logStackError("glFrameBuffer stack length !=0 at end of rendering...");
+        if (this._stackDepthTest.length > 0) this.logStackError("depthtest stack length !=0 at end of rendering...");
+        if (this._stackDepthWrite.length > 0) this.logStackError("depthwrite stack length !=0 at end of rendering...");
+        if (this._stackDepthFunc.length > 0) this.logStackError("depthfunc stack length !=0 at end of rendering...");
+        if (this._stackBlend.length > 0) this.logStackError("blend stack length !=0 at end of rendering...");
+        if (this._stackBlendMode.length > 0) this.logStackError("blendMode stack length !=0 at end of rendering...");
+        if (this._shaderStack.length > 0) this.logStackError("this._shaderStack length !=0 at end of rendering...");
+        if (this._stackCullFace.length > 0) this.logStackError("this._stackCullFace length !=0 at end of rendering...");
+        if (this._stackCullFaceFacing.length > 0) this.logStackError("this._stackCullFaceFacing length !=0 at end of rendering...");
 
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
@@ -269,6 +271,15 @@ const Context = function (_patch)
             this.updateSize();
 
             for (let i = 0; i < cbResize.length; i++) cbResize[i]();
+        }
+    };
+
+    this.logStackError = function (str)
+    {
+        if (!this._hadStackError)
+        {
+            this._hadStackError = true;
+            console.warn(str);
         }
     };
 
