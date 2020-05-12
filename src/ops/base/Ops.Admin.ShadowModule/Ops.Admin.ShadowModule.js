@@ -6,6 +6,7 @@ function clamp(val, min, max) {
 
 
 const inTrigger = op.inTrigger("Trigger In");
+const inIgnore = op.inBool("Ignore in Shadowpass", false);
 const inShadow = op.inBool("Receive Shadow", false);
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
@@ -13,7 +14,7 @@ const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inPoissonSpread = op.inFloat("Poisson Spread", 500);
 inSamples.setUiAttribs({ greyout: true });
 inPoissonSpread.setUiAttribs({ greyout: true });
-op.setPortGroup("", [inShadow]);
+op.setPortGroup("", [inIgnore, inShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inPoissonSpread]);
 
 inShadow.onChange = () => {
@@ -349,37 +350,7 @@ function setUniforms(lightStack) {
 }
 
 
-function removeModulesAndDefines() {
-    if(shader && vertexModule) {
-        shader.removeDefine('SHADOW_MAP');
-        shader.removeDefine("MODE_" + inAlgorithm.get().toUpperCase());
-        shader.removeModule(vertexModule);
-        shader.removeModule(fragmentModule);
-        shader = null;
-    }
-}
-inTrigger.onLinkChanged = function() {
-    if (!inTrigger.isLinked()) {
-        removeModulesAndDefines();
-        lastLength = 0;
-    }
-}
-
-inTrigger.onTriggered = () => {
-    if (!inShadow.get()) {
-        outTrigger.trigger();
-        return;
-    }
-    if (cgl.frameStore.shadowPass) {
-        outTrigger.trigger();
-        return;
-    }
-
-    if (!cgl.frameStore.lightStack) {
-        outTrigger.trigger();
-        return;
-    }
-
+function updateShader() {
     const currentShader = cgl.getShader();
 
     if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength) {
@@ -412,5 +383,48 @@ inTrigger.onTriggered = () => {
     if (shader) {
         setUniforms(cgl.frameStore.lightStack);
     }
+}
+
+function removeModulesAndDefines() {
+    if(shader && vertexModule) {
+        shader.removeDefine('SHADOW_MAP');
+        shader.removeDefine("MODE_" + inAlgorithm.get().toUpperCase());
+        shader.removeModule(vertexModule);
+        shader.removeModule(fragmentModule);
+        shader = null;
+    }
+}
+inTrigger.onLinkChanged = function() {
+    if (!inTrigger.isLinked()) {
+        removeModulesAndDefines();
+        lastLength = 0;
+    }
+}
+
+inTrigger.onTriggered = () => {
+    if (inIgnore.get()) {
+        if (!cgl.frameStore.shadowPass) {
+            updateShader();
+            outTrigger.trigger();
+        }
+        return;
+    }
+
+    if (!inShadow.get()) {
+        outTrigger.trigger();
+        return;
+    }
+
+    if (cgl.frameStore.shadowPass) {
+        outTrigger.trigger();
+        return;
+    }
+
+    if (!cgl.frameStore.lightStack) {
+        outTrigger.trigger();
+        return;
+    }
+
+    updateShader();
     outTrigger.trigger();
 }
