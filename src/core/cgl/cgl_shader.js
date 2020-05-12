@@ -482,7 +482,6 @@ Shader.prototype.compile = function ()
 
 Shader.prototype.bind = function ()
 {
-    var i = 0;
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
@@ -497,7 +496,7 @@ Shader.prototype.bind = function ()
         this._camPosUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_VIEWPOS);
         this._normalMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_NORMALMAT);
         this._inverseViewMatrixUniform = this._cgl.gl.getUniformLocation(this._program, CONSTANTS.SHADER.SHADERVAR_UNI_INVVIEWMAT);
-        for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
+        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].needsUpdate = true;
     }
 
     if (this._cgl.currentProgram != this._program)
@@ -507,7 +506,7 @@ Shader.prototype.bind = function ()
         this._cgl.currentProgram = this._program;
     }
 
-    for (i = 0; i < this._uniforms.length; i++)
+    for (let i = 0; i < this._uniforms.length; i++)
         if (this._uniforms[i].needsUpdate) this._uniforms[i].updateValue();
 
     if (this._pMatrixState != this._cgl.getProjectionMatrixStateCount())
@@ -562,7 +561,7 @@ Shader.prototype.bind = function ()
         profileData.profileMVPMatrixCount++;
     }
 
-    for (var i = 0; i < this._libs.length; i++)
+    for (let i = 0; i < this._libs.length; i++)
     {
         if (this._libs[i].onBind) this._libs[i].onBind.bind(this._libs[i])(this._cgl, this);
     }
@@ -836,7 +835,7 @@ Shader.prototype._linkProgram = function (program)
             Log.log(this);
             Log.log("--------------------------------------");
 
-            name = "errorshader";
+            this._name = "errorshader";
             this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
         }
     }
@@ -1064,7 +1063,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         htmlWarning += "</div>";
 
-        name = "errorshader";
+        this._name = "errorshader";
         cglShader.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
     }
     else

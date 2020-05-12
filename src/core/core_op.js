@@ -1519,6 +1519,11 @@ const Op = function ()
     {
         if (this.patch && this.patch.isEditorMode()) gui.opParams.show(this);
     };
+
+    Op.prototype.isCurrentUiOp = function ()
+    {
+        if (window.gui) gui.patchView.isCurrentOp(this);
+    };
 }
 
 /**

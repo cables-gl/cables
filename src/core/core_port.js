@@ -742,7 +742,7 @@ class SwitchPort extends Port
             this.indexPort.setValue(intValue);
             this.set(values[intValue]);
 
-            if (this.parent.patch.isEditorMode() && window.gui && gui.patch().isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
+            if (this.parent.patch.isEditorMode() && window.gui && gui.patchView.isCurrentOp(this.parent)) gui.patch().showOpParams(this.parent);
         };
     }
 
