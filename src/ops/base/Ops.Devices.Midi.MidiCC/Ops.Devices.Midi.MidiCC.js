@@ -39,7 +39,7 @@ clear.onTriggered = () => {
   ccIndexDropdown.set(0);
   midiChannelDropdown.set(1);
   normalizeDropdown.set(normalizeDropdown.get('none'));
-  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
+  if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
 };
 
 inEvent.onChange = () => {

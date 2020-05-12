@@ -54,7 +54,7 @@ clear.onTriggered = () => {
   midiChannelDropdown.set(1);
   normalizeDropdown.set(normalizeDropdown.get('none'));
   gateType.set(false);
-  if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
+  if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
 };
 
 gateType.onChange = () => {

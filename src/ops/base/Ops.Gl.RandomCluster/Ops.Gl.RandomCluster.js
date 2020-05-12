@@ -32,7 +32,7 @@ var mat=mat4.create();
 function doRender()
 {
 
-    if(CABLES.UI && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
+    if(CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
     {
         CABLES.GL_MARKER.drawCube(op,
             size.get()/2*scaleX.get(),

@@ -125,7 +125,7 @@ Object.keys(inLight).forEach(function(key) {
 inTrigger.onTriggered = function() {
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) {
+    if(op.isCurrentUiOp()) {
         gui.setTransformGizmo({
             posX:inPosX,
             posY:inPosY,

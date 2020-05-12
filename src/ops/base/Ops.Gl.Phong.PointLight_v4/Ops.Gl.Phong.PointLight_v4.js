@@ -100,7 +100,7 @@ inTrigger.onTriggered = function() {
     // mat4.getScaling(sc,cgl.mMatrix);
     // light.radius=inRadius.get()*sc[0];
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) {
+    if(op.isCurrentUiOp()) {
         gui.setTransformGizmo({
             posX: inPosX,
             posY: inPosY,

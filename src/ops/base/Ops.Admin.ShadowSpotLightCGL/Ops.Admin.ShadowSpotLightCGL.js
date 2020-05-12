@@ -22,14 +22,14 @@ op.setPortGroup("Point At", pointAtIn);
 const inR = op.inFloatSlider("R", 1);
 const inG = op.inFloatSlider("G", 1);
 const inB = op.inFloatSlider("B", 1);
-inR.setUiAttribs({ colorPick: true });
+inR.setUiAttribs({ "colorPick": true });
 const colorIn = [inR, inG, inB];
 op.setPortGroup("Color", colorIn);
 
 const inSpecularR = op.inFloatSlider("Specular R", 1);
 const inSpecularG = op.inFloatSlider("Specular G", 1);
 const inSpecularB = op.inFloatSlider("Specular B", 1);
-inSpecularR.setUiAttribs({ colorPick: true });
+inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
@@ -40,11 +40,11 @@ const coneAttribsIn = [inConeAngle, inConeAngleInner, inSpotExponent];
 op.setPortGroup("Cone Attributes", coneAttribsIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.00001);
-const lightAttribsIn = [inIntensity, inRadius ];
+const lightAttribsIn = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
-const inMapSize = op.inSwitch("Map Size",[256, 512, 1024, 2048], 512);
+const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
@@ -52,8 +52,8 @@ const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
-op.setPortGroup("",[inCastShadow]);
-op.setPortGroup("Shadow Map Settings",[
+op.setPortGroup("", [inCastShadow]);
+op.setPortGroup("Shadow Map Settings", [
     inMapSize,
     inShadowStrength,
     inNear,
@@ -65,34 +65,36 @@ op.setPortGroup("Shadow Map Settings",[
 ]);
 
 
-inMapSize.setUiAttribs({ greyout: true, hidePort: true });
-inShadowStrength.setUiAttribs({ greyout: true });
-inNear.setUiAttribs({ greyout: true, hidePort: true });
-inFar.setUiAttribs({ greyout: true, hidePort: true });
-inBlur.setUiAttribs({ greyout: true, hidePort: true });
-inPolygonOffset.setUiAttribs({ greyout: true, hidePort: true });
-inNormalOffset.setUiAttribs({ greyout: true, hidePort: true });
-inBias.setUiAttribs({ greyout: true, hidePort: true });
+inMapSize.setUiAttribs({ "greyout": true, "hidePort": true });
+inShadowStrength.setUiAttribs({ "greyout": true });
+inNear.setUiAttribs({ "greyout": true, "hidePort": true });
+inFar.setUiAttribs({ "greyout": true, "hidePort": true });
+inBlur.setUiAttribs({ "greyout": true, "hidePort": true });
+inPolygonOffset.setUiAttribs({ "greyout": true, "hidePort": true });
+inNormalOffset.setUiAttribs({ "greyout": true, "hidePort": true });
+inBias.setUiAttribs({ "greyout": true, "hidePort": true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
-const inMSAA = op.inSwitch("MSAA",["none", "2x", "4x", "8x"], "none");
-const inFilterType = op.inSwitch("Texture Filter",['Linear', 'Nearest', 'Mip Map'], 'Linear');
-const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], '0');
-inMSAA.setUiAttribs({ greyout: true, hidePort: true });
-inFilterType.setUiAttribs({ greyout: true, hidePort: true });
-inAnisotropic.setUiAttribs({ greyout: true, hidePort: true });
-op.setPortGroup("Advanced Options",[inAdvanced, inMSAA, inFilterType, inAnisotropic]);
+const inMSAA = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none");
+const inFilterType = op.inSwitch("Texture Filter", ["Linear", "Nearest", "Mip Map"], "Linear");
+const inAnisotropic = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], "0");
+inMSAA.setUiAttribs({ "greyout": true, "hidePort": true });
+inFilterType.setUiAttribs({ "greyout": true, "hidePort": true });
+inAnisotropic.setUiAttribs({ "greyout": true, "hidePort": true });
+op.setPortGroup("Advanced Options", [inAdvanced, inMSAA, inFilterType, inAnisotropic]);
 
 let updating = false;
 
-inCastShadow.setUiAttribs({ hidePort: true });
-inAdvanced.setUiAttribs({ hidePort: true });
+inCastShadow.setUiAttribs({ "hidePort": true });
+inAdvanced.setUiAttribs({ "hidePort": true });
 
-inAdvanced.onChange = function() {
-    inMSAA.setUiAttribs({ greyout: !inAdvanced.get() });
-    inFilterType.setUiAttribs({ greyout: !inAdvanced.get() });
-    inAnisotropic.setUiAttribs({ greyout: !inAdvanced.get() });
-    if (!inAdvanced.get()) {
+inAdvanced.onChange = function ()
+{
+    inMSAA.setUiAttribs({ "greyout": !inAdvanced.get() });
+    inFilterType.setUiAttribs({ "greyout": !inAdvanced.get() });
+    inAnisotropic.setUiAttribs({ "greyout": !inAdvanced.get() });
+    if (!inAdvanced.get())
+{
         /* const size = Number(inMapSize.get());
         newLight.createFramebuffer(size, size, {});
         newLight.createBlurEffect({});
@@ -104,21 +106,22 @@ const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
 
 const newLight = new CGL.Light(cgl, {
-    type: "spot",
-    position: [0, 1, 2].map(function(i){ return positionIn[i].get() }),
-    color: [0 , 1, 2].map(function(i) { return colorIn[i].get() }),
-    specular: [0 , 1, 2].map(function(i) { return colorSpecularIn[i].get() }),
-    conePointAt: [0, 1, 2].map(function(i) { return pointAtIn[i].get() }),
-    intensity: inIntensity.get(),
-    radius: inRadius.get(),
-    falloff: inFalloff.get(),
-    cosConeAngleInner: Math.cos(CGL.DEG2RAD * inConeAngleInner.get()),
-    cosConeAngle: Math.cos(CGL.DEG2RAD * inConeAngle.get()),
-    spotExponent: inSpotExponent.get(),
-    castShadow: false,
+    "type": "spot",
+    "position": [0, 1, 2].map(function (i) { return positionIn[i].get(); }),
+    "color": [0, 1, 2].map(function (i) { return colorIn[i].get(); }),
+    "specular": [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); }),
+    "conePointAt": [0, 1, 2].map(function (i) { return pointAtIn[i].get(); }),
+    "intensity": inIntensity.get(),
+    "radius": inRadius.get(),
+    "falloff": inFalloff.get(),
+    "cosConeAngleInner": Math.cos(CGL.DEG2RAD * inConeAngleInner.get()),
+    "cosConeAngle": Math.cos(CGL.DEG2RAD * inConeAngle.get()),
+    "spotExponent": inSpotExponent.get(),
+    "castShadow": false,
 });
 
-if (inCastShadow.get()) {
+if (inCastShadow.get())
+{
     const size = Number(inMapSize.get());
     newLight.createFramebuffer(size, size, {});
     newLight.createShadowMapShader();
@@ -128,16 +131,16 @@ if (inCastShadow.get()) {
 
 
 const inLight = {
-  position: positionIn,
-  conePointAt: pointAtIn,
-  color: colorIn,
-  specular: colorSpecularIn,
-  intensity: inIntensity,
-  radius: inRadius,
-  falloff: inFalloff,
-  cosConeAngle: inConeAngle,
-  cosConeAngleInner: inConeAngleInner,
-  spotExponent: inSpotExponent
+    "position": positionIn,
+    "conePointAt": pointAtIn,
+    "color": colorIn,
+    "specular": colorSpecularIn,
+    "intensity": inIntensity,
+    "radius": inRadius,
+    "falloff": inFalloff,
+    "cosConeAngle": inConeAngle,
+    "cosConeAngleInner": inConeAngleInner,
+    "spotExponent": inSpotExponent
 };
 
 let updateLight = false;
@@ -146,64 +149,74 @@ inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.
 = inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
 = inSpotExponent.onChange = updateLightParameters;
 
-function updateLightParameters() {
+function updateLightParameters()
+{
     updateLight = true;
 }
 
 newLight.createProjectionMatrix(null, inNear.get(), inFar.get(), inLight.cosConeAngle.get());
 
-inCastShadow.onChange = function() {
+inCastShadow.onChange = function ()
+{
     updating = true;
     const castShadow = inCastShadow.get();
-    if (castShadow) {
+    if (castShadow)
+{
         const size = Number(inMapSize.get());
         newLight.createFramebuffer(size, size, {});
         newLight.createShadowMapShader();
         newLight.createBlurEffect({});
         newLight.createBlurShader();
-
-    } else {
+    }
+ else
+{
 
     }
 
     newLight.castShadow = castShadow;
 
-    inMapSize.setUiAttribs({ greyout: !castShadow });
-    inShadowStrength.setUiAttribs({ greyout: !castShadow });
-    inNear.setUiAttribs({ greyout: !castShadow });
-    inFar.setUiAttribs({ greyout: !castShadow });
-    inNormalOffset.setUiAttribs({ greyout: !castShadow });
-    inBlur.setUiAttribs({ greyout: !castShadow });
-    inBias.setUiAttribs({ greyout: !castShadow });
-    inPolygonOffset.setUiAttribs({ greyout: !castShadow });
+    inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inShadowStrength.setUiAttribs({ "greyout": !castShadow });
+    inNear.setUiAttribs({ "greyout": !castShadow });
+    inFar.setUiAttribs({ "greyout": !castShadow });
+    inNormalOffset.setUiAttribs({ "greyout": !castShadow });
+    inBlur.setUiAttribs({ "greyout": !castShadow });
+    inBias.setUiAttribs({ "greyout": !castShadow });
+    inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
     updating = false;
-}
+};
 
-var texelSize = 1/Number(inMapSize.get());
+let texelSize = 1 / Number(inMapSize.get());
 
-function updateBuffers() {
+function updateBuffers()
+{
     updating = true;
     const MSAA = Number(inMSAA.get().charAt(0));
 
     let filterType = null;
-    let anisotropyFactor = Number(inAnisotropic.get());
+    const anisotropyFactor = Number(inAnisotropic.get());
 
-    if (inFilterType.get() == "Linear") {
+    if (inFilterType.get() == "Linear")
+{
         filterType = CGL.Texture.FILTER_LINEAR;
-    } else if (inFilterType.get() == "Nearest") {
+    }
+ else if (inFilterType.get() == "Nearest")
+{
         filterType = CGL.Texture.FILTER_NEAREST;
-    } else if (inFilterType.get() == "Mip Map") {
+    }
+ else if (inFilterType.get() == "Mip Map")
+{
         filterType = CGL.Texture.FILTER_MIPMAP;
     }
 
     const mapSize = Number(inMapSize.get());
     const textureOptions = {
-        isFloatingPointTexture: true,
-        filter: filterType,
+        "isFloatingPointTexture": true,
+        "filter": filterType,
     };
 
-    if (MSAA) Object.assign(textureOptions, { multisampling: true, multisamplingSamples: MSAA });
-    Object.assign(textureOptions, { anisotropic: anisotropyFactor });
+    if (MSAA) Object.assign(textureOptions, { "multisampling": true, "multisamplingSamples": MSAA });
+    Object.assign(textureOptions, { "anisotropic": anisotropyFactor });
 
     newLight.createFramebuffer(mapSize, mapSize, textureOptions);
     newLight.createBlurEffect(textureOptions);
@@ -211,13 +224,14 @@ function updateBuffers() {
 }
 
 inMSAA.onChange = inAnisotropic.onChange = inFilterType.onChange = updateBuffers;
-inMapSize.onChange = function() {
+inMapSize.onChange = function ()
+{
     updating = true;
     const size = Number(inMapSize.get());
     newLight.setFramebufferSize(size, size);
     texelSize = 1 / size;
     updating = false;
-}
+};
 
 
 /*
@@ -235,7 +249,8 @@ function updateProjectionMatrix() {
 }
 */
 
-inNear.onChange = inFar.onChange = function() {
+inNear.onChange = inFar.onChange = function ()
+{
     newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
 };
 
@@ -244,33 +259,37 @@ const pointAtPos = vec3.create();
 const resultPos = vec3.create();
 const resultPointAt = vec3.create();
 
-function drawHelpers() {
-        if (cgl.frameStore.shadowPass) return;
-        if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
+function drawHelpers()
+{
+    if (cgl.frameStore.shadowPass) return;
+    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+{
         gui.setTransformGizmo({
-            posX:inPosX,
-            posY:inPosY,
-            posZ:inPosZ,
+            "posX": inPosX,
+            "posY": inPosY,
+            "posZ": inPosZ,
         });
         CABLES.GL_MARKER.drawLineSourceDest({
-            op: op,
-            sourceX: newLight.position[0],
-            sourceY: newLight.position[1],
-            sourceZ: newLight.position[2],
-            destX: newLight.conePointAt[0],
-            destY: newLight.conePointAt[1],
-            destZ: newLight.conePointAt[2],
+            op,
+            "sourceX": newLight.position[0],
+            "sourceY": newLight.position[1],
+            "sourceZ": newLight.position[2],
+            "destX": newLight.conePointAt[0],
+            "destY": newLight.conePointAt[1],
+            "destZ": newLight.conePointAt[2],
         });
     }
 }
 
-inTrigger.onTriggered = function() {
+inTrigger.onTriggered = function ()
+{
     if (updating) return;
-    if (updateLight) {
-        newLight.position = [0, 1, 2].map(function(i){ return positionIn[i].get() });
-        newLight.color = [0 , 1, 2].map(function(i) { return colorIn[i].get() });
-        newLight.specular = [0 , 1, 2].map(function(i) { return colorSpecularIn[i].get() });
-        newLight.conePointAt = [0, 1, 2].map(function(i) { return pointAtIn[i].get() });
+    if (updateLight)
+{
+        newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });
+        newLight.color = [0, 1, 2].map(function (i) { return colorIn[i].get(); });
+        newLight.specular = [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); });
+        newLight.conePointAt = [0, 1, 2].map(function (i) { return pointAtIn[i].get(); });
         newLight.intensity = inIntensity.get();
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
@@ -296,9 +315,10 @@ inTrigger.onTriggered = function() {
 
     cgl.frameStore.lightStack.push(newLight);
 
-    if (inCastShadow.get()) {
+    if (inCastShadow.get())
+{
         const blurAmount = 1.5 * inBlur.get() * texelSize;
-        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function() { outTrigger.trigger() });
+        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
         // remove light from stack and readd it with shadow map & mvp matrix
@@ -318,4 +338,4 @@ inTrigger.onTriggered = function() {
     outTrigger.trigger();
 
     cgl.frameStore.lightStack.pop();
-}
+};

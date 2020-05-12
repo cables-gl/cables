@@ -80,7 +80,7 @@ op.render.onTriggered=function()
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
 
-        if(CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))
+        if(CABLES.UI.renderHelper || op.isCurrentUiOp())
         {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
@@ -88,7 +88,7 @@ op.render.onTriggered=function()
             cgl.popModelMatrix();
         }
 
-        if(gui.patch().isCurrentOp(op))
+        if(op.isCurrentUiOp())
             gui.setTransformGizmo(
                 {
                     posX:x,

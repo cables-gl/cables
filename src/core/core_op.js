@@ -1520,9 +1520,16 @@ const Op = function ()
         if (this.patch && this.patch.isEditorMode()) gui.opParams.show(this);
     };
 
+    /**
+     * Returns true if op is selected and parameter are shown in the editor, can only return true if in editor/ui
+     * @function isCurrentUiOp
+     * @instance
+     * @memberof Op
+     * @returns {Boolean} - is current ui op
+     */
     Op.prototype.isCurrentUiOp = function ()
     {
-        if (window.gui) gui.patchView.isCurrentOp(this);
+        if (this.patch.isEditorMode()) return gui.patchView.isCurrentOp(this);
     };
 }
 

@@ -142,7 +142,7 @@ render.onTriggered=function() {
 
 
 	// GUI for dolly, boom and truck
-	if(CABLES.UI && gui.patch().isCurrentOp(op))
+	if(op.isCurrentUiOp())
 		gui.setTransformGizmo({
 			posX:posX,
 			posY:posY,

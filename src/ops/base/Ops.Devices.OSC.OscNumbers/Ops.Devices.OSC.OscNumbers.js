@@ -24,7 +24,7 @@ inMessage.onChange=function()
         {
             inAddress.set(msg.a);
             learning=false;
-            if(CABLES.UI && gui.patch().isCurrentOp(op)) gui.patch().showOpParams(op);
+            if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
             return;
         }
         return;

@@ -113,7 +113,7 @@ op.render.onTriggered=function()
     {
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
-        if(gui.patch().isCurrentOp(op))
+        if(op.isCurrentUiOp())
             gui.setTransformGizmo(
                 {
                     posX:x,
@@ -121,7 +121,7 @@ op.render.onTriggered=function()
                     posZ:z
                 });
 
-        if(CABLES.UI.renderHelper ||gui.patch().isCurrentOp(op))
+        if(CABLES.UI.renderHelper ||op.isCurrentUiOp())
         {
             mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
             CABLES.GL_MARKER.drawSphere(op,inSize.get());

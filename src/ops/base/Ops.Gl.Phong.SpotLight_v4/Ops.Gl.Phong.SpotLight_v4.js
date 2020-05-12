@@ -133,7 +133,7 @@ inTrigger.onTriggered = function() {
     light.position = resultPos;
     light.conePointAt = resultPointAt;
 
-    if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op))) {
+    if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp())) {
         gui.setTransformGizmo({
             posX:inPosX,
             posY:inPosY,

@@ -436,7 +436,7 @@ const transVec = vec3.create();
 initializeCubemap();
 
 function renderHelpers(renderRadius) {
-    if(CABLES.UI && gui.patch().isCurrentOp(op)) {
+    if(op.isCurrentUiOp()) {
         gui.setTransformGizmo({
             posX: inPosX,
             posY: inPosY,

@@ -37,7 +37,7 @@ op.render.onTriggered=function()
         return;
     }
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    if(op.isCurrentUiOp())
         gui.setTransformGizmo(
             {
                 posX:x,

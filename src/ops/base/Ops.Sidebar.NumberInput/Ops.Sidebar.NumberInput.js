@@ -42,7 +42,7 @@ setDefaultValueButtonPort.onTriggered = setDefaultValue;
 
 function setDefaultValue() {
     defaultValuePort.set(parseFloat(inputValuePort.get()));
-    if(CABLES.UI  && gui.patch().isCurrentOp(op)){
+    if(CABLES.UI  && op.isCurrentUiOp()){
         gui.patch().showOpParams(op); /* update DOM */
     }
 }
@@ -59,7 +59,7 @@ function onInput(ev) {
     if(isNaN(newVal)) { newVal = 0; }
     valuePort.set(newVal);
     inputValuePort.set(newVal);
-    if(CABLES.UI  && gui.patch().isCurrentOp(op)){
+    if(CABLES.UI  && op.isCurrentUiOp()){
         gui.patch().showOpParams(op); /* update DOM */
     }
 }

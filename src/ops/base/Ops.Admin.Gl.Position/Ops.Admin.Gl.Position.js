@@ -1,16 +1,16 @@
 const
-    render=op.inTrigger("render"),
-    posX=op.inValue("X",0),
-    posY=op.inValue("Y",0),
-    posZ=op.inValue("Z",0),
-    trigger=op.outTrigger("trigger"),
-    outX=op.outNumber("Pos X"),
-    outY=op.outNumber("Pos Y"),
-    outZ=op.outNumber("Pos Z");
+    render = op.inTrigger("render"),
+    posX = op.inValue("X", 0),
+    posY = op.inValue("Y", 0),
+    posZ = op.inValue("Z", 0),
+    trigger = op.outTrigger("trigger"),
+    outX = op.outNumber("Pos X"),
+    outY = op.outNumber("Pos Y"),
+    outZ = op.outNumber("Pos Z");
 
-op.setUiAxisPorts(posX,posY,posZ);
+op.setUiAxisPorts(posX, posY, posZ);
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
     outX.set(posX.get());
     outY.set(posY.get());
@@ -18,13 +18,11 @@ render.onTriggered=function()
 
     trigger.trigger();
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    if (op.isCurrentUiOp())
         gui.setTransformGizmo(
             {
-                posX:posX,
-                posY:posY,
-                posZ:posZ,
+                posX,
+                posY,
+                posZ,
             });
-
 };
-

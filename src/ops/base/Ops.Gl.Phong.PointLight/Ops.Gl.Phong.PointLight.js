@@ -127,7 +127,7 @@ exe.onTriggered=function()
     trigger.trigger();
     cgl.frameStore.phong.lights.pop();
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    if(op.isCurrentUiOp())
         gui.setTransformGizmo(
             {
                 posX:x,

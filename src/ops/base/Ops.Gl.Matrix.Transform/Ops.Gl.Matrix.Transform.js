@@ -58,7 +58,7 @@ render.onTriggered=function()
 
     if(CABLES.UI && CABLES.UI.showCanvasTransforms) gui.setTransform(op.id,posX.get(),posY.get(),posZ.get());
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    if(op.isCurrentUiOp())
         gui.setTransformGizmo(
             {
                 posX:posX,

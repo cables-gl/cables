@@ -125,7 +125,7 @@ function removeModule()
 op.render.onTriggered=function()
 {
 
-    if(CABLES.UI && gui.patch().isCurrentOp(op))
+    if(op.isCurrentUiOp())
         gui.setTransformGizmo(
             {
                 posX:x,
