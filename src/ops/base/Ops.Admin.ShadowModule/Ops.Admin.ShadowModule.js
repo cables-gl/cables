@@ -6,21 +6,21 @@ function clamp(val, min, max) {
 
 
 const inTrigger = op.inTrigger("Trigger In");
-const inIgnore = op.inBool("Ignore in Shadowpass", false);
-const inShadow = op.inBool("Receive Shadow", false);
+const inCastShadow = op.inBool("Cast Shadow", true);
+const inReceiveShadow = op.inBool("Receive Shadow", false);
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inPoissonSpread = op.inFloat("Poisson Spread", 500);
 inSamples.setUiAttribs({ greyout: true });
 inPoissonSpread.setUiAttribs({ greyout: true });
-op.setPortGroup("", [inIgnore, inShadow]);
+op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inPoissonSpread]);
 
-inShadow.onChange = () => {
-    inAlgorithm.setUiAttribs({ greyout: !inShadow.get() });
-    inSamples.setUiAttribs({ greyout: !inShadow.get() });
-    if (shader) shader.toggleDefine("SHADOW_MAP", inShadow.get());
+inReceiveShadow.onChange = () => {
+    inAlgorithm.setUiAttribs({ greyout: !inReceiveShadow.get() });
+    inSamples.setUiAttribs({ greyout: !inReceiveShadow.get() });
+    if (shader) shader.toggleDefine("SHADOW_MAP", inReceiveShadow.get());
 }
 
 inAlgorithm.onChange = () => {
@@ -103,7 +103,7 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
     if (type === "ambient") return '';
     let fragmentCode = `// VERTEX HEAD type: ${type} count: ${n}`;
 
-    if (inShadow.get()) {
+    if (inReceiveShadow.get()) {
         if (type === "spot") {
             // NOTE: no slope scaled depth bias because not all materials use lightDirection & lambert factor
             // float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
@@ -288,7 +288,7 @@ function createUniforms(lightsCount) {
 }
 
 function setUniforms(lightStack) {
-    const receiveShadow = inShadow.get();
+    const receiveShadow = inReceiveShadow.get();
     let castShadow = false;
 
     for (let i = 0; i < lightStack.length; i += 1) {
@@ -402,7 +402,7 @@ inTrigger.onLinkChanged = function() {
 }
 
 inTrigger.onTriggered = () => {
-    if (inIgnore.get()) {
+    if (!inCastShadow.get()) {
         if (!cgl.frameStore.shadowPass) {
             updateShader();
             outTrigger.trigger();
@@ -410,7 +410,7 @@ inTrigger.onTriggered = () => {
         return;
     }
 
-    if (!inShadow.get()) {
+    if (!inReceiveShadow.get()) {
         outTrigger.trigger();
         return;
     }
