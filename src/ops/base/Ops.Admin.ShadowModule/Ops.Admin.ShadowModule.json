@@ -22,6 +22,11 @@
             },
             {
                 "type": "0",
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Receive Shadow",
                 "subType": "boolean"
             },
