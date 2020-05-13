@@ -96,14 +96,15 @@ Mesh.prototype.getAttribute = function (name)
     for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
 };
 
-Mesh.prototype.setAttributeRange = function (attrName, array, start, end)
+Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 {
-    const attr = this.getAttribute(attrName);
-    if (!attr)
-    {
-        console.log("no attr found", attrName);
-        return;
-    }
+    if (!attr) return;
+    // const attr = this.getAttribute(attrName);
+    // if (!attr)
+    // {
+    //     // console.log("no attr found", attrName);
+    //     return;
+    // }
     if (!start && !end) return;
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
@@ -114,7 +115,7 @@ Mesh.prototype.setAttributeRange = function (attrName, array, start, end)
     this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
     // this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array, 0, 10000);
 
-    console.log("set range,", attrName, end - start);
+    // console.log("set range,", attrName, end - start);
 };
 
 Mesh.prototype._bufferArray = function (array, attr)
