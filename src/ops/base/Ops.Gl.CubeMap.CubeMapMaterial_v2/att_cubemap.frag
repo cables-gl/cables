@@ -19,15 +19,32 @@ UNI vec3 camPos;
 UNI float inRotation;
 UNI vec3 inColor;
 
+
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube skybox;
-    #define SAMPLETEX textureLod
+    #ifndef WEBGL1
+        #define SAMPLETEX textureLod
+    #endif
+    #ifdef WEBGL1
+        #define SAMPLETEX textureCubeLodEXT
+    #endif
 #endif
+
 #ifndef TEX_FORMAT_CUBEMAP
     #define TEX_FORMAT_EQUIRECT
     UNI sampler2D skybox;
+    #ifdef WEBGL1
+        // #extension GL_EXT_shader_texture_lod : enable
+        #ifdef GL_EXT_shader_texture_lod
+            #define textureLod texture2DLodEXT
+        #endif
+        // #define textureLod texture2D
+    #endif
     #define SAMPLETEX sampleEquirect
+
 #endif
+
+
 
 UNI mat4 modelMatrix;
 UNI mat4 inverseViewMatrix;
@@ -37,12 +54,20 @@ UNI float miplevel;
     const vec2 invAtan = vec2(0.1591, 0.3183);
     vec4 sampleEquirect(sampler2D tex,vec3 direction,float lod)
     {
-        vec3 newDirection = normalize(direction);
-		vec2 sampleUV;
-		sampleUV.x = -1. * (atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.75);
-		sampleUV.y = asin( clamp(direction.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
+        #ifndef WEBGL1
+            vec3 newDirection = normalize(direction);
+    		vec2 sampleUV;
+    		sampleUV.x = -1. * (atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.75);
+    		sampleUV.y = asin( clamp(direction.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
+        #endif
 
-        return textureLod(tex,sampleUV,lod);
+        #ifdef WEBGL1
+            vec3 newDirection = normalize(direction);
+        		vec2 sampleUV = vec2(atan(newDirection.z, newDirection.x), asin(newDirection.y+1e-6));
+                sampleUV *= vec2(0.1591, 0.3183);
+                sampleUV += 0.5;
+        #endif
+        return textureLod(tex, sampleUV, lod);
     }
 #endif
 

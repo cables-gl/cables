@@ -39,6 +39,24 @@ const srcFrag=attachments.cubemap_frag;
 const shader=new CGL.Shader(cgl,'cubemap material');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 
+if(cgl.glVersion == 1) {
+    if(!cgl.gl.getExtension('EXT_shader_texture_lod')) {
+        op.log("no EXT_shader_texture_lod texture extension");
+        throw "no EXT_shader_texture_lod texture extension";
+    } else {
+        shader.enableExtension('GL_EXT_shader_texture_lod');
+        cgl.gl.getExtension('OES_texture_float');
+        cgl.gl.getExtension('OES_texture_float_linear');
+        cgl.gl.getExtension('OES_texture_half_float');
+        cgl.gl.getExtension('OES_texture_half_float_linear');
+
+        shader.enableExtension("GL_OES_standard_derivatives");
+        shader.enableExtension("GL_OES_texture_float");
+        shader.enableExtension("GL_OES_texture_float_linear");
+        shader.enableExtension("GL_OES_texture_half_float");
+        shader.enableExtension("GL_OES_texture_half_float_linear");
+    }
+}
 
 
 shader.setSource(srcVert,srcFrag);
