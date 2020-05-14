@@ -34,8 +34,8 @@ const createOutputEntryObjectsFile = file => ({
     "output": {
         "filename": file,
         "path": path.join(__dirname, "build", "libs"),
-        "library": ["CABLES", raiseFirstChar(file).slice(0, -3)], // TODO: shuld this be done? or only for classes..
-        "libraryExport": raiseFirstChar(file.slice(0, -3)),
+        "library": ["CABLES", raiseFirstChar(path.parse(file).name)], // TODO: shuld this be done? or only for classes..
+        "libraryExport": raiseFirstChar(path.parse(file).name),
         "libraryTarget": "this",
     }
 });
@@ -58,47 +58,20 @@ const readLibraryFiles = () =>
 
 module.exports = (isProduction = false, shouldBabel = false) =>
 {
-    const outputObjects = readLibraryFiles();
+    const entryAndOutputObjects = readLibraryFiles();
     const defaultConfig = {
-        "mode": isProduction ? "production" : "development",
-        "devtool": isProduction ? "source-map" : "cheap-module-eval-source-map",
-
-        "stats": isProduction,
-        "optimization": { "minimize": isProduction },
-        /* "module": {
-            "rules": [
-            // shouldBabel &&
-                {
-                    "test": /.jsx?$/,
-                    "include": [path.resolve(__dirname, "src", "libs")],
-                    "exclude": [path.resolve(__dirname, "node_modules")],
-                    "loader": "babel-loader",
-                    "query": {
-                        "presets": [
-                            [
-                                "@babel/env",
-                                {
-                                    "targets": {
-                                        "edge": "12",
-                                        "ie": "11",
-                                        "safari": "10",
-                                    },
-                                },
-                            ],
-                        ],
-                        "plugins": ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-transform-object-assign"],
-
-                    },
-                },
-            ].filter(Boolean),
-        }, */
+        "mode": "production",
+        "devtool": "none",
+        "optimization": {
+            "minimize": true // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+        },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
         },
     };
 
-    return outputObjects.map((output, index) => ({
+    return entryAndOutputObjects.map((entryAndOutput, index) => ({
         ...defaultConfig,
-        ...output,
+        ...entryAndOutput,
     }));
 };
