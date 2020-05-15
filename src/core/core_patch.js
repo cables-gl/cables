@@ -1202,14 +1202,16 @@ Patch.prototype.deleteVar = function (name)
         {
             if (this.ops[i].portsIn[j].getVariableName() == name)
             {
-                console.log("found!");
                 this.ops[i].portsIn[j].setVariable(null);
             }
         }
     }
 
+
     delete this._variables[name];
-    // return this._variables;
+    this.emitEvent("variableDeleted", name);
+
+    this.emitEvent("variablesChanged");
 };
 
 

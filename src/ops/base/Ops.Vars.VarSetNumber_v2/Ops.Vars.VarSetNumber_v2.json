@@ -10,6 +10,16 @@
             "message": "Ops.Vars.VarSetNumber2 renamed to Ops.Vars.VarSetNumber_v2",
             "author": "pandur",
             "date": 1587115375796
+        },
+        {
+            "message": " added core lib: cgl_vars.js",
+            "author": "pandur",
+            "date": 1589536714482
+        },
+        {
+            "message": " added lib: cannon.js",
+            "author": "pandur",
+            "date": 1589536735030
         }
     ],
     "authorName": "pandur",
