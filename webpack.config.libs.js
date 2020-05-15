@@ -1,6 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const getDirectories = arr =>
     arr.filter(dirent => dirent.isDirectory())
@@ -65,6 +66,9 @@ module.exports = (isProduction = false, shouldBabel = false) =>
         "optimization": {
             "minimize": true // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
         },
+        "plugins": [
+            new CleanWebpackPlugin()
+        ],
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],
         },

@@ -44,7 +44,8 @@
         "webpack-bundle-analyzer": "3.4.1",
         "webpack-cli": "3.3.6",
         "webpack-dev-server": "3.8.0",
-        "webpack-stream": "5.2.1"
+        "webpack-stream": "5.2.1",
+        "clean-webpack-plugin": "3.0.0"
     },
     "dependencies": {
         "gl-matrix": "3.0.0"
