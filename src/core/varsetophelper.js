@@ -1,5 +1,3 @@
-
-
 class VarSetOpWrapper
 {
     constructor(op, type, valuePort, varNamePort)

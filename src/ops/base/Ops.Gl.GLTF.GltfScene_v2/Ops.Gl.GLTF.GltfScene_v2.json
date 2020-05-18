@@ -69,6 +69,10 @@
             {
                 "type": "2",
                 "name": "Materials"
+            },
+            {
+                "type": "3",
+                "name": "Hide Nodes"
             }
         ],
         "portsOut": [
