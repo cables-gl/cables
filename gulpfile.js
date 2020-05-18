@@ -3,23 +3,31 @@ const webpack = require("webpack-stream");
 const compiler = require("webpack");
 const concat = require("gulp-concat");
 const rename = require("gulp-rename");
+const clean = require("gulp-clean");
 const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
 exports.default = exports.watch = gulp.series(
     gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
+    _core_libs_clean,
     taskCoreLibsJsMax,
     _watch
 );
 
-exports.build = gulp.series(gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), taskCoreLibsJsMax);
+exports.build = gulp.series(gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _core_libs_clean, taskCoreLibsJsMax);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
     gulp.watch("libs/**/*", gulp.parallel(taskExtentalLibs));
-    gulp.watch("src/libs/**/*", gulp.parallel(taskCoreLibsJsMax));
+    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax)));
 }
+
+function _core_libs_clean()
+{
+    return gulp.src("build/libs/*", { "read": false }).pipe(clean());
+}
+
 
 function taskExtentalLibs()
 {

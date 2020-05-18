@@ -40,12 +40,12 @@
         "gulp": "4.0.2",
         "gulp-concat": "2.6.1",
         "gulp-rename": "1.4.0",
+        "gulp-clean": "0.4.0",
         "webpack": "4.39.1",
         "webpack-bundle-analyzer": "3.4.1",
         "webpack-cli": "3.3.6",
         "webpack-dev-server": "3.8.0",
-        "webpack-stream": "5.2.1",
-        "clean-webpack-plugin": "3.0.0"
+        "webpack-stream": "5.2.1"
     },
     "dependencies": {
         "gl-matrix": "3.0.0"

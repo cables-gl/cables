@@ -1,7 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 const webpack = require("webpack");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 const getDirectories = function (arr)
 {
