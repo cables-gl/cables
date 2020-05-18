@@ -56,7 +56,7 @@ var gltfNode=class
     {
         this.hidden=false;
         for(var i=0;i<this.children.length;i++)
-            this.children[i].unHide();
+            if(this.children[i].unHide) this.children[i].unHide();
     }
 
     calcBounds(gltf,mat,bounds)
