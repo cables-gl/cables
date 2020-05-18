@@ -11,16 +11,17 @@ exports.default = exports.watch = gulp.series(
     gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
     _core_libs_clean,
     taskCoreLibsJsMax,
+    _core_libs_copy,
     _watch
 );
 
-exports.build = gulp.series(gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _core_libs_clean, taskCoreLibsJsMax);
+exports.build = gulp.series(gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _core_libs_clean, taskCoreLibsJsMax, _core_libs_copy);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
     gulp.watch("libs/**/*", gulp.parallel(taskExtentalLibs));
-    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax)));
+    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax), _core_libs_copy));
 }
 
 function _core_libs_clean()
@@ -28,6 +29,10 @@ function _core_libs_clean()
     return gulp.src("build/libs/*", { "read": false }).pipe(clean());
 }
 
+function _core_libs_copy()
+{
+    return gulp.src("build/libs/*.js").pipe(gulp.dest("../cables_api/public/libs_core/"));
+}
 
 function taskExtentalLibs()
 {
