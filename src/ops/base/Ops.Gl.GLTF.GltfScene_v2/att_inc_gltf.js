@@ -98,11 +98,11 @@ function readChunk(dv,bArr,arrayBuffer,offset)
         }
         catch(e)
         {
-    }
+        }
     }
     else
     {
-}
+    }
 
     return chunk;
 }

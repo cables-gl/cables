@@ -39,6 +39,7 @@
             }
         ]
     },
+    "coreLibs":["vargetset.js"],
     "youtubeids": [
         "sUR6b0zvuSY"
     ]

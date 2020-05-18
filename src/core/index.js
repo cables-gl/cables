@@ -13,8 +13,6 @@ import { Instancing } from "./instancing";
 import { LoadingStatus } from "./loadingstatus";
 import { WEBAUDIO } from "./webaudio";
 import { Variable } from "./sessionvar";
-import { VarSetOpWrapper } from "./varsetophelper";
-import { VarGetOpWrapper } from "./vargetophelper";
 
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
@@ -35,8 +33,6 @@ const CABLES = Object.assign(
         Timer,
         WEBAUDIO,
         Variable,
-        VarSetOpWrapper,
-        VarGetOpWrapper,
         LoadingStatus,
         now,
         internalNow,
