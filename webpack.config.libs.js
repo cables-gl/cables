@@ -3,31 +3,63 @@ const fs = require("fs");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
-const getDirectories = arr =>
-    arr.filter(dirent => dirent.isDirectory())
-        .map(dirent => dirent.name);
-const getFiles = arr => arr.filter(dirent => !dirent.isDirectory()).map(d => d.name);
+const getDirectories = function (arr)
+{
+    const names = [];
+    for (let i = 0; i < arr.length; i++)
+    {
+        const dirent = arr[i];
+        if (dirent.isDirectory())
+        {
+            names.push(dirent.name);
+        }
+    }
+    return names;
+};
+
+
+const getFiles = function (arr)
+{
+    const names = [];
+    for (let i = 0; i < arr.length; i++)
+    {
+        const dirent = arr[i];
+        if (!dirent.isDirectory())
+        {
+            names.push(dirent.name);
+        }
+    }
+    return names;
+};
 
 const raiseFirstChar = str => str.charAt(0).toUpperCase() + str.substring(1);
 const flattenArray = arr => [].concat.apply([], arr); // .flat() only availible in Node 11+
 
 const createOutputEntryObjectsNamespace = (namespace) =>
 {
+    const outputs = [];
     const namespaceSubDirectories = getDirectories(fs.readdirSync(
         path.join(__dirname, "src", "libs", namespace),
         { "withFileTypes": true }
     ));
 
-    return namespaceSubDirectories.map(subdir => ({
-        "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
-        "output": {
-            "filename": namespace + "_" + subdir + ".js",
-            "path": path.join(__dirname, "build", "libs"),
-            "library": [namespace.toUpperCase(), raiseFirstChar(subdir)],
-            "libraryExport": raiseFirstChar(subdir),
-            "libraryTarget": "this",
-        }
-    }));
+    for (let i = 0; i < namespaceSubDirectories.length; i++)
+    {
+        const subdir = namespaceSubDirectories[i];
+        outputs.push(
+            {
+                "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
+                "output": {
+                    "filename": namespace + "_" + subdir + ".js",
+                    "path": path.join(__dirname, "build", "libs"),
+                    "library": [namespace.toUpperCase(), raiseFirstChar(subdir)],
+                    "libraryExport": raiseFirstChar(subdir),
+                    "libraryTarget": "this",
+                }
+            }
+        );
+    }
+    return outputs;
 };
 
 const createOutputEntryObjectsFile = file => ({
@@ -51,10 +83,20 @@ const readLibraryFiles = () =>
     const NAMESPACE_DIRS = getDirectories(LIB_FILES);
     const CABLES_NAMESPACE_FILES = getFiles(LIB_FILES);
 
-    const outputObjectsCables = CABLES_NAMESPACE_FILES.map(file => createOutputEntryObjectsFile(file));
-    const outputObjectsNamespace = NAMESPACE_DIRS.map(namespace => createOutputEntryObjectsNamespace(namespace));
+    const outputObjectsCables = [];
+    for (let i = 0; i < CABLES_NAMESPACE_FILES.length; i++)
+    {
+        const file = CABLES_NAMESPACE_FILES[i];
+        outputObjectsCables.push(createOutputEntryObjectsFile(file));
+    }
+    const outputObjectsNamespace = [];
+    for (let i = 0; i < NAMESPACE_DIRS.length; i++)
+    {
+        const namespace = NAMESPACE_DIRS[i];
+        outputObjectsNamespace.push(createOutputEntryObjectsNamespace(namespace));
+    }
 
-    return flattenArray([...outputObjectsCables, ...outputObjectsNamespace]);
+    return flattenArray([...outputObjectsNamespace, ...outputObjectsCables]);
 };
 
 module.exports = (isProduction = false, shouldBabel = false) =>
@@ -74,8 +116,13 @@ module.exports = (isProduction = false, shouldBabel = false) =>
         },
     };
 
-    return entryAndOutputObjects.map((entryAndOutput, index) => ({
-        ...defaultConfig,
-        ...entryAndOutput,
-    }));
+    const configs = [];
+
+    for (let i = 0; i < entryAndOutputObjects.length; i++)
+    {
+        const entryAndOutput = entryAndOutputObjects[i];
+        configs.push({ ...defaultConfig, ...entryAndOutput });
+    }
+
+    return configs;
 };
