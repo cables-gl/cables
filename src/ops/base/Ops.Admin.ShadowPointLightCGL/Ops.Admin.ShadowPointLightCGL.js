@@ -152,7 +152,7 @@ function renderCubemapProjection(cubemap, framebuffer) {
 
     cubeMapEffect.bind();
 
-    cgl.setTexture(0, cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+    cgl.setTexture(1, cubemap, cgl.gl.TEXTURE_CUBE_MAP);
 
     cgl.setTexture(0, cubeMapEffect.getCurrentSourceTexture().tex);
 
@@ -227,7 +227,7 @@ inTrigger.onTriggered = function() {
             newLight.castShadow = inCastShadow.get();
             newLight.shadowBias = inBias.get();
             newLight.shadowStrength = inShadowStrength.get();
-            renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+            if (newLight.shadowCubeMap) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
             cgl.frameStore.lightStack.push(newLight);
         }
     }

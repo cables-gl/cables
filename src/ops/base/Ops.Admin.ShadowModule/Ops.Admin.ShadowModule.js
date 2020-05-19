@@ -294,6 +294,7 @@ function setUniforms(lightStack) {
     for (let i = 0; i < lightStack.length; i += 1) {
         const light = lightStack[i];
         if (light.type === "ambient") continue;
+
         lightUniforms[i].position.setValue([
             light.position[0],
             light.position[1],
@@ -339,7 +340,6 @@ function setUniforms(lightStack) {
             if (lightUniforms[i].shadowCubeMap) lightUniforms[i].shadowMap = null;
         }
         castShadow = castShadow || light.castShadow;
-        console.log("final cast shadow", castShadow);
         shader.toggleDefine("SHADOW_MAP", receiveShadow && castShadow);
         /*if (receiveShadow && castShadow) {
             if(!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
