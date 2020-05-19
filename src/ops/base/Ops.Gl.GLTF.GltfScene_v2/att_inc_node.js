@@ -47,6 +47,16 @@ var gltfNode=class
                 this.children.push(node.children[i]);
             }
         }
+
+
+    }
+
+
+    unHide()
+    {
+        this.hidden=false;
+        for(var i=0;i<this.children.length;i++)
+            if(this.children[i].unHide) this.children[i].unHide();
     }
 
     calcBounds(gltf,mat,bounds)

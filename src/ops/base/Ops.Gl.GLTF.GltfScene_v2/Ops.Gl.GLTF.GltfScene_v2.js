@@ -13,13 +13,11 @@ const
     inTimeLine = op.inBool("Sync to timeline", false),
     inLoop = op.inBool("Loop", true),
 
-
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
 
-
     inMaterials = op.inObject("Materials"),
-
+    inHideNodes = op.inArray("Hide Nodes"),
 
     nextBefore = op.outTrigger("Render Before"),
     next = op.outTrigger("Next"),
@@ -57,6 +55,7 @@ const boundsCenter = vec3.create();
 inShow.onTriggered = printInfo;
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 dataPort.onChange = loadData;
+inHideNodes.onChange=hideNodesFromData;
 
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 
@@ -248,11 +247,35 @@ function updateMaterials()
     if (tab)printInfo();
 }
 
+
+function hideNodesFromArray()
+{
+    const hideArr=inHideNodes.get();
+
+    if(!gltf || !data || !data.hiddenNodes)return;
+    if(!hideArr)
+    {
+        return;
+    }
+
+    console.log('hiding...',hideArr);
+
+    for(var i=0;i<hideArr.length;i++)
+    {
+        const n = gltf.getNode(hideArr[i]);
+        if(n)n.hidden=true;
+    }
+
+};
+
 function hideNodesFromData()
 {
     if (!data)loadData();
+    if(!gltf)return;
 
-    if (gltf && data && data.hiddenNodes)
+    gltf.unHideAll();
+
+    if (data && data.hiddenNodes)
     {
         for (let i in data.hiddenNodes)
         {
@@ -261,6 +284,7 @@ function hideNodesFromData()
             else op.warn("node to be hidden not found", i, n);
         }
     }
+    hideNodesFromArray();
 }
 
 
@@ -302,9 +326,7 @@ op.assignMaterial = function (name)
 op.toggleNodeVisibility = function (name)
 {
     const n = gltf.getNode(name);
-
     n.hidden = !n.hidden;
-
     data.hiddenNodes = data.hiddenNodes || {};
 
     if (n)

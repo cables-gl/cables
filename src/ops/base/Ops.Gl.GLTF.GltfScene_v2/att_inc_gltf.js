@@ -23,6 +23,15 @@ var Gltf=class
             if(this.nodes[i].name==n)return this.nodes[i];
         }
     }
+
+    unHideAll()
+    {
+        for(var i=0;i<this.nodes.length;i++)
+        {
+            this.nodes[i].unHide();
+        }
+
+    }
 };
 
 function Utf8ArrayToStr(array)
@@ -89,11 +98,11 @@ function readChunk(dv,bArr,arrayBuffer,offset)
         }
         catch(e)
         {
-    }
+        }
     }
     else
     {
-}
+    }
 
     return chunk;
 }
