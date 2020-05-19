@@ -10,18 +10,23 @@ const libWebpackConfig = require("./webpack.config.libs");
 exports.default = exports.watch = gulp.series(
     gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
     _core_libs_clean,
-    taskCoreLibsJsMax,
+    gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin),
     _core_libs_copy,
     _watch
 );
 
-exports.build = gulp.series(gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel), _core_libs_clean, taskCoreLibsJsMax, _core_libs_copy);
+exports.build = gulp.series(
+    gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
+    _core_libs_clean,
+    gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin),
+    _core_libs_copy
+);
 
 function _watch()
 {
     gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
     gulp.watch("libs/**/*", gulp.parallel(taskExtentalLibs));
-    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax), _core_libs_copy));
+    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin), _core_libs_copy));
 }
 
 function _core_libs_clean()
@@ -178,7 +183,36 @@ function taskCoreLibsJsMax()
             .pipe(
                 webpack(
                     {
-                        "config": libWebpackConfig(false, true),
+                        "config": libWebpackConfig(false),
+                    },
+                    compiler,
+                    (err, stats) =>
+                    {
+                        if (err) throw err;
+                        if (stats.hasErrors())
+                        {
+                            return reject(new Error(stats.compilation.errors.join("\n")));
+                        }
+                        resolve();
+                    }
+                )
+            )
+            .pipe(gulp.dest("build/libs"))
+            .on("error", (err) =>
+            {
+                console.error("WEBPACK ERROR", err);
+            });
+    });
+}
+function taskCoreLibsJsMin()
+{
+    return new Promise((resolve, reject) =>
+    {
+        gulp.src(["src/libs/**/*"])
+            .pipe(
+                webpack(
+                    {
+                        "config": libWebpackConfig(true),
                     },
                     compiler,
                     (err, stats) =>
