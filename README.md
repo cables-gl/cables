@@ -91,7 +91,7 @@ When the library is built, the resulting class will be `CGL.Light`, to be found 
 
 #### Namespace libraries
 1. Only 1 export per `index.js` file. Only the first exported entity will be considered as the exported class.
-2. The second export will be put into the resulting file, but not accessible via code.
+2. The second export will be put into the resulting file, but not be accessible via code.
 3. It's good practice to split functionality into different files. Just make sure to import them in your `index.js`.
 4. Webpack is configured to read [**named**](https://stackoverflow.com/a/41283945) exports.
 Using default exports will not work.
@@ -102,3 +102,24 @@ Using default exports will not work.
     Good: **`export { Light }`**
 
 #### Root level libraries
+1. Only 1 export per file. Only the first exported entity will be considered as the exported class.
+If you want multiple objects/classes in one file, wrap them in a container, e.g:
+
+    `libs/math.js`:
+    ```javascript
+    const add = (num1, num2) => num1 + num2;
+    const sub = (num1, num2) => num1 - num2;
+
+    const Math = { add: add, sub: sub };
+    export { Math };
+
+    /** results in CABLES.Math.add(1, 2);
+2. For the above example the exported file would be called `math.max/min.js`. Root level libraries wil always be accessible by `CABLES.Filename`, e.g. `CABLES.Math`.
+
+#### Adding libraries to ops
+
+1. Click the op in the UI
+2. Go to the `Core Libs` tab
+3. Get your library file from the dropdown, click `Add`
+4. Reload patch
+
