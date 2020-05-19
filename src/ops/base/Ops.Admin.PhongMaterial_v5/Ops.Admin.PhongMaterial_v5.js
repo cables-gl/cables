@@ -21,7 +21,7 @@ UNI Light light0;
 
 const DEFAULT_FRAGMENT_BODY = `
 // DEFAULT_LIGHT
-vec3 lightDirection0 = normalize(light0.position - modelPos.xyz);
+vec3 lightDirection0 = normalize(light0.position - fragPos.xyz);
 float lambert0 = 1.; // inout variable
 vec3 diffuseColor0 = CalculateDiffuseColor(lightDirection0, normal, light0.color, baseColor, lambert0);
 // diffuseColor0 *= light0.lightProperties.INTENSITY;
@@ -39,7 +39,9 @@ calculatedColor += combinedColor0;
 `;
 
 const createFragmentHead = (n, type) => {
-    return `UNI Light light${n};`;
+    return `
+    UNI Light light${n};
+    `;
 };
 
 const createFragmentBody = (n, type) => {
@@ -54,8 +56,8 @@ const createFragmentBody = (n, type) => {
     let fragmentCode = `
     // ${type.toUpperCase()} LIGHT
     vec3 lightDirection${n} = ${type !== "directional" ?
-        `normalize(light${n}.position - modelPos.xyz)`
-        : `light${n}.position`};
+        `normalize(light${n}.position - fragPos.xyz)`
+        : `normalize(light${n}.position)`};
 
     float lambert${n} = 1.; // inout variable
 
@@ -64,13 +66,11 @@ const createFragmentBody = (n, type) => {
 
     #ifdef HAS_TEXTURES
         #ifdef HAS_TEXTURE_AO
-            float aoIntensity = inTextureIntensities.AO;
-            lightColor${n} *= mix(vec3(1.), texture(texAO, texCoord).rgb, aoIntensity);
+            lightColor${n} *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
         #endif
 
         #ifdef HAS_TEXTURE_SPECULAR
-            float specularIntensity = inTextureIntensities.SPECULAR;
-            lightSpecular${n} *= mix(1., texture(texSpecular, texCoord).r, specularIntensity);
+            lightSpecular${n} *= mix(1., texture(texSpecular, texCoord).r, inTextureIntensities.SPECULAR);
         #endif
     #endif
 
@@ -97,7 +97,7 @@ const createFragmentBody = (n, type) => {
     ` : ''}
 
     ${type !== "directional" ? `
-    // vec3 lightModelDiff${n} = light${n}.position - modelPos.xyz;
+    vec3 lightModelDiff${n} = light${n}.position - fragPos.xyz;
     combinedColor${n} *= CalculateFalloff(lightDirection${n}, light${n}.lightProperties.FALLOFF);
     ` : ''}
     `;

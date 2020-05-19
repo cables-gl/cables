@@ -10,6 +10,7 @@ IN vec4 cameraSpace_pos;
 
 IN mat3 normalMatrix; // when instancing...
 IN mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
+IN vec3 fragPos;
 
 IN vec3 mvNormal;
 IN vec3 mvTangent;

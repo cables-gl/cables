@@ -186,7 +186,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.User.cables.PhongMatNew"
+        "name": "Ops.Admin.PhongMaterial_v5"
     },
     "changelog": [
         {
