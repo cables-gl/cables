@@ -51,9 +51,9 @@ struct ModLight {
 #endif
 
 #ifdef MODE_PCF
-#define RIGHT_BOUND float(SAMPLE_AMOUNT/2.)
+#define RIGHT_BOUND float((SAMPLE_AMOUNT - 1.)/2.)
 #define LEFT_BOUND -RIGHT_BOUND
-#define PCF_DIVISOR float(SAMPLE_AMOUNT*4.)
+#define PCF_DIVISOR float(SAMPLE_AMOUNT*SAMPLE_AMOUNT)
 
 #define RIGHT_BOUND_POINT 0.01
 #define LEFT_BOUND_POINT -0.01
@@ -87,7 +87,7 @@ struct ModLight {
         }
 
         visibility /= PCF_DIVISOR_POINT;
-        return visibility;
+        return clamp(visibility, 0., 1.);
 
     }
 
@@ -166,7 +166,7 @@ struct ModLight {
             }
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
@@ -178,7 +178,7 @@ struct ModLight {
             }
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 #endif
 

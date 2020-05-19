@@ -86,10 +86,10 @@ const createVertexBody = (n, type) => {
 };
 
 const createFragmentHead = (n, type) => {
-    if (type === "ambient") return ""; //return `UNI Light light${n};`;
+    if (type === "ambient") return ""; //return `UNI Light modLight${n};`;
     return `
     // FRAGMENT HEAD type: ${type} count: ${n}
-    UNI ModLight light${n};
+    UNI ModLight modLight${n};
     ${type !== "point" ? `
     #ifdef SHADOW_MAP
         IN vec4 shadowCoord${n};
@@ -106,22 +106,22 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
     if (inReceiveShadow.get()) {
         if (type === "spot") {
             // NOTE: no slope scaled depth bias because not all materials use lightDirection & lambert factor
-            // float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+            // float bias${n} = clamp(modLight${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
+        if (modLight${n}.typeCastShadow.CAST_SHADOW == 1) {
 
             vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = light${n}.shadowStrength;
+            float shadowStrength${n} = modLight${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float bias${n} = clamp(modLight${n}.shadowProperties.BIAS, 0., 1.);
             #ifdef MODE_DEFAULT
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, modLight${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_POISSON
@@ -133,7 +133,7 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
@@ -142,19 +142,19 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
         else if (type === "directional") {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
+        if (modLight${n}.typeCastShadow.CAST_SHADOW == 1) {
             vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = light${n}.shadowStrength;
+            float shadowStrength${n} = modLight${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = light${n}.shadowProperties.BIAS;
+            float bias${n} = modLight${n}.shadowProperties.BIAS;
 
              #ifdef MODE_DEFAULT
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, modLight${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_POISSON
@@ -166,7 +166,7 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
@@ -175,17 +175,17 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
         else if (type === "point") {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirection${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
-            float shadowStrength${n} = light${n}.shadowStrength;
+        if (modLight${n}.typeCastShadow.CAST_SHADOW == 1) {
+            vec3 lightDirection${n} = normalize(modLight${n}.position - modelPosMOD${n}.xyz);
+            float shadowStrength${n} = modLight${n}.shadowStrength;
 
-            float cameraNear${n} = light${n}.shadowProperties.NEAR; // uniforms
-            float cameraFar${n} =  light${n}.shadowProperties.FAR;
+            float cameraNear${n} = modLight${n}.shadowProperties.NEAR; // uniforms
+            float cameraFar${n} =  modLight${n}.shadowProperties.FAR;
 
-            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - light${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
+            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - modLight${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
 
             float shadowMapDepth${n} = fromLightToFrag${n};
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float bias${n} = clamp(modLight${n}.shadowProperties.BIAS, 0., 1.);
 
             vec2 shadowMapSample${n} = textureCube(shadowMap${n}, -lightDirection${n}).rg;
 
@@ -207,7 +207,7 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
@@ -270,11 +270,11 @@ function createUniforms(lightsCount) {
         lightUniforms[i] = null;
         if (!lightUniforms[i]) {
             lightUniforms[i] = {
-                position: new CGL.Uniform(shader,'3f','light' + i + '.position',[0, 0, 0]),
-                typeCastShadow: new CGL.Uniform(shader, '2i', 'light' + i + '.typeCastShadow', [0, 0]),
+                position: new CGL.Uniform(shader,'3f','modLight' + i + '.position',[0, 0, 0]),
+                typeCastShadow: new CGL.Uniform(shader, '2i', 'modLight' + i + '.typeCastShadow', [0, 0]),
 
-                shadowProperties: new CGL.Uniform(shader, '4f', 'light' + i + '.shadowProperties', [0,0,0,0]),
-                shadowStrength: new CGL.Uniform(shader, 'f', 'light' + i + '.shadowStrength', 1),
+                shadowProperties: new CGL.Uniform(shader, '4f', 'modLight' + i + '.shadowProperties', [0,0,0,0]),
+                shadowStrength: new CGL.Uniform(shader, 'f', 'modLight' + i + '.shadowStrength', 1),
 
                 shadowMap: null,
 
@@ -339,12 +339,14 @@ function setUniforms(lightStack) {
             if (lightUniforms[i].shadowCubeMap) lightUniforms[i].shadowMap = null;
         }
         castShadow = castShadow || light.castShadow;
-        if (receiveShadow && castShadow) {
+        console.log("final cast shadow", castShadow);
+        shader.toggleDefine("SHADOW_MAP", receiveShadow && castShadow);
+        /*if (receiveShadow && castShadow) {
             if(!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
         }
         else {
-            if (!shader.hasDefine("SHADOW_MAP")) shader.removeDefine("SHADOW_MAP");
-        }
+            if (shader.hasDefine("SHADOW_MAP")) shader.removeDefine("SHADOW_MAP");
+        }*/
     }
 
 }
