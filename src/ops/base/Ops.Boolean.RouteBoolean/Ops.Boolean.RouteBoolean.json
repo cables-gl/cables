@@ -80,5 +80,26 @@
             }
         ],
         "name": "Ops.Boolean.RouteBoolean"
+    },
+    "summary": "Route a boolean to an output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Index",
+                "text": "port to route to"
+            },
+            {
+                "name": "Boolean in",
+                "text": "Boolean to route"
+            },
+            {
+                "name": "Default boolean",
+                "text": "Default value of all other ports"
+            }
+        ]
     }
 }

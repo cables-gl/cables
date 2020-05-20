@@ -68,5 +68,26 @@
             }
         ],
         "name": "Ops.Array.RouteArray"
+    },
+    "summary": "Route an array to an output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "index",
+                "text": "Port to route to"
+            },
+            {
+                "name": "array in",
+                "text": "Array to route"
+            },
+            {
+                "name": "default array",
+                "text": "Default array of all other ports"
+            }
+        ]
     }
 }

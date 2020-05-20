@@ -68,5 +68,26 @@
             }
         ],
         "name": "Ops.String.RouteString"
+    },
+    "summary": "Route a string to an output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Index",
+                "text": "Index of string port out to send string to"
+            },
+            {
+                "name": "String in",
+                "text": "String to route"
+            },
+            {
+                "name": "Default string",
+                "text": "The string which goes out of all other ports"
+            }
+        ]
     }
 }

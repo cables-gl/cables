@@ -115,5 +115,70 @@
             }
         ],
         "name": "Ops.Gl.Textures.TextTexture_v3"
+    },
+    "summary": "Generates a texture which reads Text",
+    "issues": "",
+    "collections": [
+        "drawText"
+    ],
+    "relatedops": null,
+    "youtubeids": [
+        "z1Qf9dE67-w"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "text",
+                "text": "text to render"
+            },
+            {
+                "name": "font",
+                "text": "font to use - check the font op"
+            },
+            {
+                "name": "Maximize Size",
+                "text": "make texture size as large as possible based upon the amount of characters used"
+            },
+            {
+                "name": "fontSize",
+                "text": "Size of the font - Maximize size overrides this"
+            },
+            {
+                "name": "line distance",
+                "text": "Distance between each line"
+            },
+            {
+                "name": "texture width",
+                "text": "Width of the texture - larger sizes for sharper textures"
+            },
+            {
+                "name": "texture height",
+                "text": "Height of the texture - larger sizes for sharper textures"
+            },
+            {
+                "name": "align index",
+                "text": "Left - center - right"
+            },
+            {
+                "name": "vertical align index",
+                "text": "Top - middle - bottom"
+            },
+            {
+                "name": "border",
+                "text": "Add border around texture"
+            },
+            {
+                "name": "Draw Mesh",
+                "text": "renders the mesh with the text"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            }
+        ]
     }
 }
