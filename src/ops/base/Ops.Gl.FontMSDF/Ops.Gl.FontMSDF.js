@@ -96,6 +96,7 @@ function load()
 
             op.setUiAttrib({"extendTitle":data.info.face});
 
+console.log("varNameData",varNameData);
             op.patch.setVarValue(varNameData,null);
             op.patch.setVarValue(varNameData,
                 {

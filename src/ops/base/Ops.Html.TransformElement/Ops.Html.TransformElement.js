@@ -85,8 +85,8 @@ function getScreenCoord()
     }
     else
     {
-        x=( w - ( w * 0.5 - trans[0] * w * 0.5 / trans[2] ));
-        y=( h - ( h * 0.5 + trans[1] * h * 0.5 / trans[2] ));
+        x=( w - ( w * 0.5 - trans[0] * w * 0.5 )); // / trans[2]
+        y=( h - ( h * 0.5 + trans[1] * h * 0.5 )); // / trans[2]
     }
 }
 

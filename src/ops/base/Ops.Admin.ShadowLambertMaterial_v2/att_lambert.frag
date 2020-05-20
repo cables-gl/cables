@@ -82,12 +82,12 @@ float CalculateFalloff(float radius, float falloff, float distLight)
 #endif
 
 #ifdef MODE_PCF
-#define RIGHT_BOUND float(SAMPLE_AMOUNT/2.)
+#define RIGHT_BOUND float((SAMPLE_AMOUNT-1.)/2.)
 #define LEFT_BOUND -RIGHT_BOUND
-#define PCF_DIVISOR float(SAMPLE_AMOUNT*4.)
+#define PCF_DIVISOR float(SAMPLE_AMOUNT*SAMPLE_AMOUNT)
 
-#define RIGHT_BOUND_POINT 0.01
-#define LEFT_BOUND_POINT -0.01
+#define RIGHT_BOUND_POINT (SAMPLE_AMOUNT*0.01-0.01 / 2.)
+#define LEFT_BOUND_POINT -RIGHT_BOUND_POINT
 #define PCF_INCREMENT_POINT RIGHT_BOUND_POINT/(SAMPLE_AMOUNT * 0.5)
 #define PCF_DIVISOR_POINT SAMPLE_AMOUNT*SAMPLE_AMOUNT*SAMPLE_AMOUNT
 
@@ -122,6 +122,22 @@ float CalculateFalloff(float radius, float falloff, float distLight)
 
     }
 
+    float LinearShadowMapSample(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float texelSize) {
+        vec2 pixelPos = shadowMapLookup/texelSize + vec2(0.5); // tl pixel corner to middle
+        vec2 fractPixelPos = fract(pixelPos);
+        vec2 startTexel = (pixelPos - fractPixelPos) * texelSize;
+
+        float bottomLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel).r);
+        float bottomRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, 0.)).r);
+        float topLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(0., texelSize)).r);
+        float topRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, texelSize)).r);
+
+        float mixA = mix(bottomLeftTexel, topLeftTexel, fractPixelPos.y);
+        float mixB = mix(bottomRightTexel, topRightTexel, fractPixelPos.y);
+
+        return mix(mixA, mixB, fractPixelPos.x);
+
+    }
     float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
         float texelSize = 1. / shadowMapSize;
         float visibility = 0.;
@@ -208,7 +224,7 @@ float CalculateFalloff(float radius, float falloff, float distLight)
             }
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 #endif
 
@@ -234,7 +250,7 @@ float CalculateFalloff(float radius, float falloff, float distLight)
             //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
             //pMax = variance / (variance + distanceToMean*distanceToMean);
             // visibility = clamp(pMax, 1., p);
-            float visibility = min(max(p, pMax), 1.);
+            float visibility = clamp(p, pMax, 1.);
 
             return visibility;
     }
@@ -267,10 +283,6 @@ void main()
 
     #ifdef DOUBLE_SIDED
         if(!gl_FrontFacing) normal = normal*-1.0;
-    #endif
-
-    #ifdef SHADOW_MAP
-        float shadowFactor = 1.;
     #endif
 
     //{SHADOW_FRAGMENT_BODY}

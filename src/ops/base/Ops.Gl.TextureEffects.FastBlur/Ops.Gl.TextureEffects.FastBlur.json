@@ -38,5 +38,34 @@
             "author": "pandur",
             "date": 1573490089072
         }
-    ]
+    ],
+    "summary": "Blurs a texture  - cheap and fast",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "amount",
+                "text": "Amount of blur"
+            },
+            {
+                "name": "Clamp",
+                "text": "Clamp texture output"
+            },
+            {
+                "name": "direction",
+                "text": "Both , vertical or horizontal"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

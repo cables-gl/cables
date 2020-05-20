@@ -26,9 +26,16 @@
     "summary": "get a texture from a variable",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Vars.VarSetTexture"
+    ],
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Object",
+                "text": "Texture out"
+            }
+        ]
     }
 }

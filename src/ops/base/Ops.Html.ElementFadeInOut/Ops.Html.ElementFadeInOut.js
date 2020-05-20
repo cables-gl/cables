@@ -18,6 +18,7 @@ update();
 
 var loaded=false;
 var oldvis=null;
+loaded=true;
 
 op.onLoaded=function()
 {
