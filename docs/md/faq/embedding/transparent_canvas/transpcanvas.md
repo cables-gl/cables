@@ -1,3 +1,3 @@
-# transparent canvas
+# Transparent Canvas
 
 text blablablabla

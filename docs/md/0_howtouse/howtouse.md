@@ -1,1 +1,3 @@
-# how to use
+# How To Use
+
+__TOC__
