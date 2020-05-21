@@ -30,12 +30,12 @@ static html outut: out/
 If you want to create a library, there are some steps you need to consider:
 
 1. Libraries can be found in `src/core/libs`
-2. The folder they are in defines their namespace.
-3. The subfolder they are in defines their classname.
-4. If a file ist at root level (directly in the `libs` folder), the namespace will be `CABLES`.
+2. The folder they are in defines their namespace. (`cgl/` will end up in `window.CGL`)
+3. The subfolder they are in defines their classname. (cgl/light/ will end up in `window.CGL.Light`)
+4. If a file ist at root level (directly in the namespace folder), the namespace has to be controlled by the file. (see below)
 5. The resulting filename will have the structure `namespace_classname.min/max.js`.
-6. If a file is at root level, the resulting filename will be `filename.js`
-7. Every namespace library needs an `index.js` as the main entry point.
+6. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
+7. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point.
 #### Example:
 
 Input structure:
@@ -44,10 +44,12 @@ libs
 ├── cgl
 │   ├── cubemap
 │   │   └── index.js
-│   └── light
-│       ├── createShaders.js
-│       └── index.js
-└── vargetset.js
+│   ├── light
+│   │   ├── createShaders.js
+│   │   └── index.js
+│   └── functions.js
+|── cables
+    └── vargetset.js
 ```
 
 Output structure:
@@ -57,6 +59,8 @@ libs
 ├── cgl_cubemap.min.js
 ├── cgl_light.max.js
 ├── cgl_light.min.js
+├── cgl_functions.max.js
+├── cgl_functions.min.js
 ├── vargetset.max.js
 └── vargetset.min.js
 ```
@@ -102,19 +106,19 @@ Using default exports will not work.
     Good: **`export { Light }`**
 
 #### Root level libraries
-1. Only 1 export per file. Only the first exported entity will be considered as the exported class.
-If you want multiple objects/classes in one file, wrap them in a container, e.g:
+1. For root level libraries the library itself has to "provide" an own or use an existing namespace, i.e.:
 
-    `libs/math.js`:
+    `libs/cables/math.js`:
     ```javascript
     const add = (num1, num2) => num1 + num2;
     const sub = (num1, num2) => num1 - num2;
 
-    const Math = { add: add, sub: sub };
-    export { Math };
+    CABLES.Math = { add: add, sub: sub };
 
     /** results in CABLES.Math.add(1, 2);
-2. For the above example the exported file would be called `math.max/min.js`. Root level libraries wil always be accessible by `CABLES.Filename`, e.g. `CABLES.Math`.
+2. For the above example the exported file would be called `math.max/min.js`.
+3. This also means that these libraries may be dependent on other libraries being loaded alongside or before them (as above with `CABLES`).
+4. Handle with care!
 
 #### Adding libraries to ops
 
