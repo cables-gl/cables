@@ -48,12 +48,32 @@
             },
             {
                 "type": "0",
-                "name": ".preset_r_rsmnvtw9l_c50sxz2w2",
+                "name": ".preset_posX_p4grr4lev_v8owjyraa",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": ".preset_g_rsmnvtw9l_dyrkdf6db",
+                "name": ".preset_posY_p4grr4lev_yt524sy6i",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_posZ_p4grr4lev_xekg32s5z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_rotX_p4grr4lev_qfctqm2to",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_rotY_p4grr4lev_c3hmum83g",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": ".preset_Hue_p4grr4lev_cbgqrfpiw",
                 "subType": "number"
             }
         ],

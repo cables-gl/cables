@@ -16,19 +16,14 @@ var eleId='css_'+CABLES.uuid();
 
 update();
 
-var loaded=false;
+var loaded=true;
 var oldvis=null;
 
 op.onLoaded=function()
 {
     loaded=true;
-
-
     updateVisibility();
-
-
     outShowing.set(inVisible.get());
-
 };
 
 function updateVisibility()

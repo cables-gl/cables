@@ -152,9 +152,9 @@ function refresh()
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
 
-    if(!cachetexture.get() || !textureOut.get()) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+    if(!cachetexture.get() || !textureOut.get()) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_LINEAR } ));
 
-    textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
+    textureOut.get().initTexture(fontImage,CGL.Texture.FILTER_LINEAR);
     textureOut.get().unpackAlpha=true;
 }
 

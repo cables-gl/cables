@@ -9,6 +9,7 @@ for(var i=0;i<10;i++)
     p.onChange=rebuild;
 }
 
+parentPort.onChange=rebuild;
 
 function rebuild()
 {

@@ -8,26 +8,37 @@ var mathFunc;
 num0.onChange = num1.onChange = update;
 mathDropDown.onChange = onFilterChange;
 
+var n0=0;
+var n1=0;
+
+const mathFuncAdd = function(a,b){return a+b};
+const mathFuncSub = function(a,b){return a-b};
+const mathFuncMul = function(a,b){return a*b};
+const mathFuncDiv = function(a,b){return a/b};
+const mathFuncMod = function(a,b){return a%b};
+const mathFuncMin = function(a,b){return Math.min(a,b)};
+const mathFuncMax = function(a,b){return Math.max(a,b)};
+
+
 function onFilterChange()
 {
     var mathSelectValue = mathDropDown.get();
 
-    if(mathSelectValue == '+')         mathFunc = function(a,b){return a+b};
-    else if(mathSelectValue == '-')    mathFunc = function(a,b){return a-b};
-    else if(mathSelectValue == '*')    mathFunc = function(a,b){return a*b};
-    else if(mathSelectValue == '/')    mathFunc = function(a,b){return a/b};
-    else if(mathSelectValue == '%')    mathFunc = function(a,b){return a%b};
-    else if(mathSelectValue == 'min')  mathFunc = function(a,b){return Math.min(a,b)};
-    else if(mathSelectValue == 'max')  mathFunc = function(a,b){return Math.max(a,b)};
-
+    if(mathSelectValue == '+')         mathFunc = mathFuncAdd;
+    else if(mathSelectValue == '-')    mathFunc = mathFuncSub;
+    else if(mathSelectValue == '*')    mathFunc = mathFuncMul;
+    else if(mathSelectValue == '/')    mathFunc = mathFuncDiv;
+    else if(mathSelectValue == '%')    mathFunc = mathFuncMod;
+    else if(mathSelectValue == 'min')  mathFunc = mathFuncMin;
+    else if(mathSelectValue == 'max')  mathFunc = mathFuncMax;
     update();
     op.setUiAttrib({"extendTitle":mathSelectValue});
 }
 
 function update()
 {
-   var n0 = num0.get();
-   var n1 = num1.get();
+   n0 = num0.get();
+   n1 = num1.get();
 
    result.set(mathFunc(n0,n1));
 }

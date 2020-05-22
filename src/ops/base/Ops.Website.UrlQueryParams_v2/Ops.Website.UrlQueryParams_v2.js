@@ -26,7 +26,7 @@ function update()
     {
         var v=query[paramName.get()];
         if(v==='true')v=true;
-            else if(v==='false')v=false;
+        else if(v==='false')v=false;
 
         result.set(v);
     }
