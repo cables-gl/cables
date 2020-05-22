@@ -8,5 +8,56 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1587710105864
+    "created": 1587710105864,
+    "summary": "outputs the first valid string",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String 1"
+            },
+            {
+                "type": "5",
+                "name": "String 2"
+            },
+            {
+                "type": "5",
+                "name": "String 3"
+            },
+            {
+                "type": "5",
+                "name": "String 4"
+            },
+            {
+                "type": "5",
+                "name": "String 5"
+            },
+            {
+                "type": "5",
+                "name": "String 6"
+            },
+            {
+                "type": "5",
+                "name": "String 7"
+            },
+            {
+                "type": "5",
+                "name": "String 8"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.OrString"
+    }
 }
