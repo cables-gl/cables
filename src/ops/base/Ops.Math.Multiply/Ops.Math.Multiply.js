@@ -14,8 +14,8 @@ function update()
     const n1=number1.get();
     const n2=number2.get();
 
-    if(isNaN(n1))n1=0;
-    if(isNaN(n2))n2=0;
+    // if(isNaN(n1))n1=0;
+    // if(isNaN(n2))n2=0;
 
     result.set( n1*n2 );
 }

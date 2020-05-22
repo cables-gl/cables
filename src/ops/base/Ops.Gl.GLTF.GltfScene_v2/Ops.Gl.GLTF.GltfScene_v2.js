@@ -188,7 +188,7 @@ function loadBin(addCacheBuster)
         gltf.loaded = Date.now();
 
         outPoints.set(boundingPoints);
-        outBounds.set(gltf.bounds);
+        if(gltf && gltf.bounds)outBounds.set(gltf.bounds);
         updateCenter();
     };
 

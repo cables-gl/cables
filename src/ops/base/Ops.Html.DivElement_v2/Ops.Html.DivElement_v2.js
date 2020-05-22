@@ -2,7 +2,7 @@ const
     inText=op.inString("Text","Hello Div"),
     inId=op.inString("Id"),
     inClass=op.inString("Class"),
-    inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css"),
+    inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","none"),
     inInteractive=op.inValueBool("Interactive",false),
     inVisible=op.inValueBool("Visible",true),
     inBreaks=op.inValueBool("Convert Line Breaks",false),
@@ -67,7 +67,7 @@ function updateText()
     if(str && inBreaks.get()) str = str.replace(/(?:\r\n|\r|\n)/g, '<br>');
 
     if(div.innerHTML!=str) div.innerHTML=str;
-    // outElement.set(null);
+    outElement.set(null);
     outElement.set(div);
 }
 

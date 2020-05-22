@@ -36,7 +36,7 @@
                 "name": "Finished"
             }
         ],
-        "name": "Ops.Anim.ValueChangeAnim"
+        "name": "Ops.Anim.AnimNumber"
     },
     "summary": "always animates to the current value",
     "authorName": "pandur",
