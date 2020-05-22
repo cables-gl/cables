@@ -57,11 +57,19 @@
             {
                 "type": "0",
                 "name": "colorize",
+                "group": "Colorize",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "colorize add",
+                "name": "Colorize Min",
+                "group": "Colorize",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Colorize Max",
+                "group": "Colorize",
                 "subType": "number"
             }
         ],
@@ -83,6 +91,47 @@
         "NjG85Qbbl0w"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "texture",
+                "text": "Texture to use for displacement"
+            },
+            {
+                "name": "mode index",
+                "text": "Different modes for displacement "
+            },
+            {
+                "name": "extrude",
+                "text": "Amount of extrusion based upon texture"
+            },
+            {
+                "name": "flip",
+                "text": "Flip extrusion values"
+            },
+            {
+                "name": "offset X",
+                "text": "Offset on the X axis for displacement"
+            },
+            {
+                "name": "offset Y",
+                "text": "Offset on the Y axis for displacement"
+            },
+            {
+                "name": "colorize",
+                "text": "Colors the mesh with the displacement texture"
+            },
+            {
+                "name": "colorize add",
+                "text": "Amount to add"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

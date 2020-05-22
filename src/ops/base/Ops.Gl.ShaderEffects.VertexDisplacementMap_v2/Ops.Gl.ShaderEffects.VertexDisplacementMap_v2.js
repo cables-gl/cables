@@ -12,7 +12,8 @@ const
     offsetY=op.inValueFloat("offset Y"),
 
     colorize=op.inValueBool("colorize",false),
-    colorizeAdd=op.inValueSlider("colorize add"),
+    colorizeMin=op.inValueSlider("Colorize Min",0),
+    colorizeMax=op.inValueSlider("Colorize Max",1),
 
     next=op.outTrigger("trigger");
 
@@ -27,7 +28,10 @@ var uniTextureFrag=null;
 var uniExtrude=null;
 var uniOffsetX=null;
 var uniOffsetY=null;
-var uniColorizeAdd=null;
+var uniColorizeMin=null;
+var uniColorizeMax=null;
+
+op.setPortGroup("Colorize",[colorize,colorizeMin,colorizeMax]);
 
 op.toWorkPortsNeedToBeLinked(texture,next,render);
 
@@ -51,15 +55,17 @@ const srcHeadVert=''
 const srcBodyVert=attachments.vertdisplace_body_vert;
 
 const srcHeadFrag=''
-    .endl()+'UNI float MOD_colorizeAdd;'
+    .endl()+'UNI float MOD_colorizeMin;'
+    .endl()+'UNI float MOD_colorizeMax;'
     .endl()+'IN float MOD_displHeightMapColor;'
     .endl()+'UNI sampler2D MOD_texture;'
+    .endl()+'float map(float value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}'
+
     .endl();
 
 const srcBodyFrag=''
     .endl()+'#ifdef MOD_HEIGHTMAP_COLORIZE'
-    .endl()+'   col.rgb*=MOD_displHeightMapColor*(1.0-MOD_colorizeAdd);'
-    .endl()+'   col+=MOD_colorizeAdd;'
+    .endl()+'   col.rgb*=map( MOD_displHeightMapColor, 0.0,1.0 , MOD_colorizeMin,MOD_colorizeMax);'
     .endl()+'#endif'
 
     .endl()+'#ifdef MOD_DISPLACE_REMOVE_ZERO'
@@ -129,8 +135,9 @@ function dorender()
                 name:'MODULE_COLOR',
                 srcHeadFrag:srcHeadFrag,
                 srcBodyFrag:srcBodyFrag
-            });
-        uniColorizeAdd=new CGL.Uniform(shader,'f',moduleFrag.prefix+'colorizeAdd',colorizeAdd);
+            },moduleVert);
+        uniColorizeMin=new CGL.Uniform(shader,'f',moduleVert.prefix+'colorizeMin',colorizeMin);
+        uniColorizeMax=new CGL.Uniform(shader,'f',moduleVert.prefix+'colorizeMax',colorizeMax);
 
         updateDefines();
     }

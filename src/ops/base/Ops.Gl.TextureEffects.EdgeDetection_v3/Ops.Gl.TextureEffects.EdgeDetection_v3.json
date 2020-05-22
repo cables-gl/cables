@@ -68,20 +68,23 @@
                 "text": "Trigger the op"
             },
             {
-                "name": "Blend Mode",
-                "text": "Blending mode"
-            },
-            {
                 "name": "Amount",
                 "text": "Amount of blending"
             },
             {
-                "name": "Strength",
                 "text": "Strength of effect"
             },
             {
                 "name": "Width",
-                "text": "Width of the highlighted pixels"
+                "text": "Strength of edge detection"
+            },
+            {
+                "name": "Width",
+                "text": "Width of pixels"
+            },
+            {
+                "name": "Mul Color",
+                "text": "Multiply the original color with the edges"
             },
             {
                 "name": "Trigger",
