@@ -22,7 +22,7 @@
     "docs": {
         "ports": []
     },
-    "coreLibs":["vargetset.js"],
+    "coreLibs":["vargetset"],
     "changelog": [
         {
             "message": "Ops.Vars.SetVariableString renamed to Ops.Vars.VarSetString",

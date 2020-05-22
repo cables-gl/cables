@@ -45,7 +45,6 @@ PatchConnectionReceiver.prototype._receive = function (ev)
         Log.log("PACO load patch.....");
         this._patch.clear();
         this._patch.deSerialize(data.vars.patch);
-        gui.patch().updateSubPatches();
     }
     else if (data.event == CONSTANTS.PACO.PACO_CLEAR)
     {

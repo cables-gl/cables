@@ -34,7 +34,7 @@ const getFiles = function (arr)
 const raiseFirstChar = str => str.charAt(0).toUpperCase() + str.substring(1);
 const flattenArray = arr => [].concat.apply([], arr); // .flat() only availible in Node 11+
 
-const createOutputEntryObjectsNamespace = (namespace) =>
+const createOutputEntryObjectsNamespace = (namespace, isProduction) =>
 {
     const outputs = [];
     const namespaceSubDirectories = getDirectories(fs.readdirSync(
@@ -49,7 +49,7 @@ const createOutputEntryObjectsNamespace = (namespace) =>
             {
                 "entry": path.join(__dirname, "src", "libs", namespace, subdir, "index.js"),
                 "output": {
-                    "filename": namespace + "_" + subdir + ".js",
+                    "filename": `${namespace}_${subdir}.${isProduction ? "min" : "max"}.js`,
                     "path": path.join(__dirname, "build", "libs"),
                     "library": [namespace.toUpperCase(), raiseFirstChar(subdir)],
                     "libraryExport": raiseFirstChar(subdir),
@@ -61,18 +61,29 @@ const createOutputEntryObjectsNamespace = (namespace) =>
     return outputs;
 };
 
-const createOutputEntryObjectsFile = file => ({
-    "entry": path.join(__dirname, "src", "libs", file),
-    "output": {
-        "filename": file,
-        "path": path.join(__dirname, "build", "libs"),
-        "library": ["CABLES", raiseFirstChar(path.parse(file).name)], // TODO: shuld this be done? or only for classes..
-        "libraryExport": raiseFirstChar(path.parse(file).name),
-        "libraryTarget": "this",
-    }
-});
+const createOutputEntryObjectsFile = (file, isProduction) =>
+{
+    const preExtension = isProduction ? ".min" : ".max";
+    const parsedFile = path.parse(file);
+    const filenameNoExtension = parsedFile.name;
+    const extension = parsedFile.ext;
 
-const readLibraryFiles = () =>
+    const filename = `${filenameNoExtension}${preExtension}${extension}`;
+    const raisedFilename = raiseFirstChar(filenameNoExtension);
+
+    return {
+        "entry": path.join(__dirname, "src", "libs", file),
+        "output": {
+            "filename": filename,
+            "path": path.join(__dirname, "build", "libs"),
+            "library": ["CABLES", raisedFilename], // TODO: shuld this be done? or only for classes..
+            "libraryExport": raisedFilename,
+            "libraryTarget": "this",
+        }
+    }
+;};
+
+const readLibraryFiles = (isProduction) =>
 {
     const LIB_FILES = fs.readdirSync(
         path.join(__dirname, "src", "libs"),
@@ -86,26 +97,27 @@ const readLibraryFiles = () =>
     for (let i = 0; i < CABLES_NAMESPACE_FILES.length; i++)
     {
         const file = CABLES_NAMESPACE_FILES[i];
-        outputObjectsCables.push(createOutputEntryObjectsFile(file));
+        console.log(file);
+        outputObjectsCables.push(createOutputEntryObjectsFile(file, isProduction));
     }
     const outputObjectsNamespace = [];
     for (let i = 0; i < NAMESPACE_DIRS.length; i++)
     {
         const namespace = NAMESPACE_DIRS[i];
-        outputObjectsNamespace.push(createOutputEntryObjectsNamespace(namespace));
+        outputObjectsNamespace.push(createOutputEntryObjectsNamespace(namespace, isProduction));
     }
 
     return flattenArray([...outputObjectsNamespace, ...outputObjectsCables]);
 };
 
-module.exports = (isProduction = false, shouldBabel = false) =>
+module.exports = (isProduction = false) =>
 {
-    const entryAndOutputObjects = readLibraryFiles();
+    const entryAndOutputObjects = readLibraryFiles(isProduction);
     const defaultConfig = {
         "mode": "production",
         "devtool": "none",
         "optimization": {
-            "minimize": true // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
+            "minimize": isProduction // * NOTE: hard to debug with this setting, if set to "false", file size increases but more readability
         },
         "resolve": {
             "extensions": [".json", ".js", ".jsx"],

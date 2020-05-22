@@ -55,5 +55,38 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.EdgeDetection3"
+    },
+    "summary": "Draw only the edges of an image",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Blend Mode",
+                "text": "Blending mode"
+            },
+            {
+                "name": "Amount",
+                "text": "Amount of blending"
+            },
+            {
+                "name": "Strength",
+                "text": "Strength of effect"
+            },
+            {
+                "name": "Width",
+                "text": "Width of the highlighted pixels"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

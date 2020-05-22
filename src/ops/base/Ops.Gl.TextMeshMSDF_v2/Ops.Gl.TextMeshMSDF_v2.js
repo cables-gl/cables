@@ -165,11 +165,19 @@ function updateFontData()
 
     const dataVar=op.patch.getVar(varname);
 
-    if(!dataVar) return;
+    if(!dataVar)
+    {
+        // console.log("no varname",varname);
+        return;
+    }
 
     fontData=dataVar.getValue().data;
 
-    if(!fontData) return;
+    if(!fontData)
+    {
+        // console.log("no fontdata in var");
+        return;
+    }
 
     const basename=dataVar.getValue().basename;
 
@@ -178,9 +186,11 @@ function updateFontData()
     {
         fontTexs=null;
         fontData=null;
+        // console.log('no font var:' + "font_tex_"+basename);
         return;
     }
 
+// console.log("ok got all fontdata");
     fontTexs=textVar.getValue();
 
     for(var i=0;i<fontData.chars.length;i++) fontChars[fontData.chars[i].char] = fontData.chars[i];
@@ -190,7 +200,7 @@ function updateFontData()
 function updateFontList()
 {
     var vars=op.patch.getVars();
-    var names=[];
+    var names=["..."];
 
     for(var i in vars)
         if(vars[i].type=="fontData")
@@ -273,8 +283,9 @@ render.onTriggered=function()
 
     if(!fontData)
     {
-        op.setUiError("nodata","No font data!!!!!!");
+        op.setUiError("nodata","No font data!");
         updateFontData();
+        // console.log("no font data")
         next.trigger();
         return;
     }
@@ -284,6 +295,7 @@ render.onTriggered=function()
         op.setUiError("nodata","No font texture");
         updateFontData();
         next.trigger();
+        // console.log("no texture")
         return;
     }
 
@@ -327,6 +339,7 @@ render.onTriggered=function()
         if(!disabled)
         {
             mat4.scale(cgl.mMatrix,cgl.mMatrix, vScale);
+
             mesh.render(cgl.getShader());
         }
 

@@ -442,7 +442,7 @@ function renderHelpers(renderRadius) {
             posY: inPosY,
             posZ: inPosZ,
         });
-        if (renderRadius) {
+        if (!cgl.frameStore.shadowPass) {
             cgl.pushModelMatrix();
             mat4.translate(cgl.mMatrix,cgl.mMatrix, transVec);
             CABLES.GL_MARKER.drawSphere(op, inRadius.get());
@@ -460,7 +460,7 @@ inTrigger.onTriggered = function() {
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     light.position = position;
 
-    renderHelpers(true);
+    renderHelpers();
 
     cgl.frameStore.lightStack.push(light);
 
@@ -473,7 +473,7 @@ inTrigger.onTriggered = function() {
             cgl.gl.enable(cgl.gl.DEPTH_TEST);
 
             cgl.frameStore.renderOffscreen = true;
-            cgl.shadowPass = true;
+            cgl.frameStore.shadowPass = true;
 
             cgl.gl.colorMask(true,true,false,false);
 
@@ -486,7 +486,7 @@ inTrigger.onTriggered = function() {
 
             renderCubemapProjection();
 
-            cgl.shadowPass = false;
+            cgl.frameStore.shadowPass = false;
             cgl.frameStore.renderOffscreen = false;
 
             cgl.frameStore.lightStack.pop();

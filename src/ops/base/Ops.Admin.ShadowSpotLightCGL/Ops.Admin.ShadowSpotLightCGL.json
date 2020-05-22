@@ -3,8 +3,9 @@
     "id": "76418c17-abd5-401b-82e2-688db6f966ee",
     "created": 1587556120293,
     "coreLibs": [
-        "cgl_cubemap.js",
-        "cgl_light.js"
+        "cgl_cubemap",
+        "cgl_light",
+        "vargetset"
     ],
     "layout": {
         "portsIn": [
@@ -143,6 +144,11 @@
             "message": "Ops.User.cables.ShadowSpotTestLightCGL renamed to Ops.Admin.ShadowSpotLightCGL",
             "author": "cables",
             "date": 1587654173156
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1589968927218
         }
     ]
 }

@@ -8,6 +8,13 @@ init();
 
 updateVarNamesDropdown();
 
+    op.patch.on("variableRename", (oldname, newname)=>
+    {
+        if (oldname != op.varName.get()) return;
+        op.varName.set(newname);
+        updateVarNamesDropdown();
+    });
+
 function updateVarNamesDropdown()
 {
     if(CABLES.UI)

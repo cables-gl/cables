@@ -2,7 +2,6 @@
     "libs": [
         "rhill-voronoi-core.js"
     ],
-    "updated": 1519816918245,
     "authorName": "pandur",
     "id": "750ca250-1ac8-4fb3-bd44-1e5e702dea08",
     "created": 1519816915531,
@@ -18,43 +17,53 @@
             },
             {
                 "type": "0",
-                "name": "Render"
+                "name": "Render",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Invert"
+                "name": "Invert",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Ignore Border Cells"
+                "name": "Ignore Border Cells",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Height"
+                "name": "Height",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Fill"
+                "name": "Fill",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Extrude Cell Center"
+                "name": "Extrude Cell Center",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Out Size Start"
+                "name": "Scale Out Size Start",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Scale Out Size End"
+                "name": "Scale Out Size End",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Calc Normals"
+                "name": "Calc Normals",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

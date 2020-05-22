@@ -1,0 +1,1 @@
+If no object is plugged into the default object port then the output is null
