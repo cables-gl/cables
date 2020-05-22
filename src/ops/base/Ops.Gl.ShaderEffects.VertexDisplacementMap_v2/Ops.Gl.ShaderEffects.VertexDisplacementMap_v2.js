@@ -66,7 +66,6 @@ const srcHeadFrag=''
 const srcBodyFrag=''
     .endl()+'#ifdef MOD_HEIGHTMAP_COLORIZE'
     .endl()+'   col.rgb*=map( MOD_displHeightMapColor, 0.0,1.0 , MOD_colorizeMin,MOD_colorizeMax);'
-    // .endl()+'   col*=map(;'
     .endl()+'#endif'
 
     .endl()+'#ifdef MOD_DISPLACE_REMOVE_ZERO'
