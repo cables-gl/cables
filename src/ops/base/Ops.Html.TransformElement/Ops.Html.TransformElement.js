@@ -73,6 +73,8 @@ function getScreenCoord()
     vec3.transformMat4(pos, [0,0,0], m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
+// console.log(cgl.pMatrix);
+
     var vp=cgl.getViewPort();
 
     const w=cgl.canvasWidth/cgl.pixelDensity;
