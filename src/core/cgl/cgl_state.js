@@ -451,7 +451,7 @@ const Context = function (_patch)
         this.emitEvent("beginFrame");
     };
 
-    this.renderEnd = function (cgl, identTranslate)
+    this.renderEnd = function (cgl)
     {
         cgl.popViewMatrix();
         cgl.popModelMatrix();
