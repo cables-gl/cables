@@ -86,19 +86,14 @@ float CalculateFalloff(float radius, float falloff, float distLight)
 #define LEFT_BOUND -RIGHT_BOUND
 #define PCF_DIVISOR float(SAMPLE_AMOUNT*SAMPLE_AMOUNT)
 
-#define RIGHT_BOUND_POINT (SAMPLE_AMOUNT*0.01-0.01 / 2.)
+#define RIGHT_BOUND_POINT  0.006
 #define LEFT_BOUND_POINT -RIGHT_BOUND_POINT
-#define PCF_INCREMENT_POINT RIGHT_BOUND_POINT/(SAMPLE_AMOUNT * 0.5)
-#define PCF_DIVISOR_POINT SAMPLE_AMOUNT*SAMPLE_AMOUNT*SAMPLE_AMOUNT
+#define PCF_INCREMENT_POINT RIGHT_BOUND_POINT/(SAMPLE_AMOUNT *0.5)
+#define PCF_DIVISOR_POINT float(SAMPLE_AMOUNT*SAMPLE_AMOUNT*SAMPLE_AMOUNT)
 
     // https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows
     float ShadowFactorPointPCF(samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float nearPlane, float farPlane, float bias, float shadowStrength) {
         float visibility  = 0.0;
-
-        // EARLY EXIT ... cant figure it out
-        if (shadowMapDepth - bias < textureCube(shadowMap, -lightDirection).r) {
-            return 1.;
-        }
 
         for(float x = LEFT_BOUND_POINT; x < RIGHT_BOUND_POINT; x += PCF_INCREMENT_POINT)
         {
@@ -106,19 +101,20 @@ float CalculateFalloff(float radius, float falloff, float distLight)
             {
                 for(float z = LEFT_BOUND_POINT; z < RIGHT_BOUND_POINT; z += PCF_INCREMENT_POINT)
                 {
-                    float closestDepth = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
+                    float shadowMapSample = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
 
-
-                    //if (closestDepth == 0.) return 1.; // early exit?
-                     // closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
-                    if(shadowMapDepth - bias < closestDepth)
-                        visibility += 1.0;
+                     //shadowMapSample *= (farPlane-nearPlane);
+                    // shadowMapSample += nearPlane;
+                    //if (shadowMapSample == 0.) return 1.; // early exit?
+                     // shadowMapSample = shadowMapSample; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
+                    if(shadowMapSample > shadowMapDepth - bias)
+                        visibility += 1.;
                 }
             }
         }
 
         visibility /= PCF_DIVISOR_POINT;
-        return visibility;
+        return clamp(visibility, 0., 1.);
 
     }
 
