@@ -1,0 +1,1 @@
+If no array is plugged into the default array port then the output is null
