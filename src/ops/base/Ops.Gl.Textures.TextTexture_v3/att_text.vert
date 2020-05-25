@@ -13,7 +13,7 @@ void main()
 
     pos.x*=aspect;
 
-   texCoord=vec2(attrTexCoord.x,attrTexCoord.y);;
+   texCoord=vec2(attrTexCoord.x,1.0-attrTexCoord.y);;
 
    gl_Position = projMatrix * mvMatrix * pos;
 }
