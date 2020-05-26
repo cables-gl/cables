@@ -42,7 +42,7 @@
             },
             {
                 "type": "0",
-                "name": "Poisson Spread",
+                "name": "Sample Spread",
                 "group": "Shadow Settings",
                 "subType": "number"
             }
