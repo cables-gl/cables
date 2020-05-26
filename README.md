@@ -30,12 +30,16 @@ static html outut: out/
 If you want to create a library, there are some steps you need to consider:
 
 1. Libraries can be found in `src/core/libs`
-2. The folder they are in defines their namespace. (`cgl/` will end up in `window.CGL`)
-3. The subfolder they are in defines their classname. (cgl/light/ will end up in `window.CGL.Light`)
-4. If a file ist at root level (directly in the namespace folder), the namespace has to be controlled by the file. (see below)
-5. The resulting filename will have the structure `namespace_classname.min/max.js`.
-6. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
-7. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point.
+2. Files sould be in folders that (by convention) are named after the namespace they export to
+3. Files in subfolders of these will not be built unless they are named `index.js`
+6. Files control their own namespaces, no exports are used (see below)
+7. The resulting filename will have the structure `folder_subfolder.min/max.js`.
+8. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
+9. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point.
+10. Webpack builds minified and non-minified versions to `build/libs/`
+11. use `npm run build` to build the libraries
+12. libraries are coped to `../cables_api/public/libs_core/`
+
 #### Example:
 
 Input structure:

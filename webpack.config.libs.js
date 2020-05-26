@@ -56,9 +56,9 @@ const createOutputEntryObjectsNamespace = (namespace, isProduction) =>
                 "output": {
                     "filename": `${targetName}.${isProduction ? "min" : "max"}.js`,
                     "path": path.join(__dirname, "build", "libs"),
-                    "library": [namespace.toUpperCase(), raiseFirstChar(file)],
+                    "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(baseName)],
                     "libraryExport": raiseFirstChar(namespace),
-                    "libraryTarget": "this",
+                    "libraryTarget": "this"
                 }
             }
         );
@@ -74,7 +74,7 @@ const createOutputEntryObjectsNamespace = (namespace, isProduction) =>
                 "output": {
                     "filename": `${targetName}.${isProduction ? "min" : "max"}.js`,
                     "path": path.join(__dirname, "build", "libs"),
-                    "library": [namespace.toUpperCase(), raiseFirstChar(subdir)],
+                    "library": [namespace.toUpperCase(), "COREMODULES", raiseFirstChar(subdir)],
                     "libraryExport": raiseFirstChar(subdir),
                     "libraryTarget": "this",
                 }
