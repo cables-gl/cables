@@ -49,20 +49,50 @@ UNI float sampleSpread;
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
-        if (shadowMapSample < shadowMapDepth - bias) return (1. - shadowStrength);
-        return 1.;
+        return shadowMapSample < shadowMapDepth - bias ? (1. - shadowStrength) : 1.; //step(shadowMapDepth - bias, shadowMapSample);
     }
 #endif
 
 #ifdef MODE_PCF
-    vec3 offsets[20] = vec3[]
-    (
-       vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
-       vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
-       vec3( 1,  1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1,  1,  0),
-       vec3( 1,  0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1,  0, -1),
-       vec3( 0,  1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0,  1, -1)
-    );
+
+    #ifdef WEBGL2
+        vec3 offsets[20] = vec3[]
+        (
+           vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
+           vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
+           vec3( 1,  1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1,  1,  0),
+           vec3( 1,  0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1,  0, -1),
+           vec3( 0,  1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0,  1, -1)
+        );
+    #endif
+    #ifdef WEBGL1
+        vec3 offsets[20];
+        int CALLED_FILL_PCF_ARRAY = 0;
+        void FillPCFArray() {
+            if (CALLED_FILL_PCF_ARRAY == 1) return;
+            offsets[0] = vec3( 1,  1,  1);
+            offsets[1] = vec3( 1, -1,  1);
+            offsets[2] = vec3(-1, -1,  1);
+            offsets[3] = vec3(-1,  1,  1);
+            offsets[4] = vec3( 1,  1, -1);
+            offsets[5] = vec3( 1, -1, -1);
+            offsets[6] = vec3(-1, -1, -1);
+            offsets[7] = vec3(-1,  1, -1);
+            offsets[8] = vec3( 1,  1,  0);
+            offsets[9] = vec3( 1, -1,  0);
+            offsets[10] = vec3(-1, -1,  0);
+            offsets[11] = vec3(-1,  1,  0);
+            offsets[12] = vec3( 1,  0,  1);
+            offsets[13] = vec3(-1,  0,  1);
+            offsets[14] = vec3( 1,  0, -1);
+            offsets[15] = vec3(-1,  0, -1);
+            offsets[16] = vec3( 0,  1,  1);
+            offsets[17] = vec3( 0, -1,  1);
+            offsets[18] = vec3( 0, -1, -1);
+            offsets[19] = vec3( 0,  1, -1);
+            CALLED_FILL_PCF_ARRAY = 1;
+        }
+    #endif
     // float diskRadius = 0.05;
     #define RIGHT_BOUND float((SAMPLE_AMOUNT-1.)/2.)
     #define LEFT_BOUND -RIGHT_BOUND
@@ -80,6 +110,9 @@ UNI float sampleSpread;
         float shadowStrength,
         vec3 modelPos
     ) {
+        #ifdef WEBGL1
+            FillPCFArray();
+        #endif
         float visibility  = 0.0;
         float viewDistance = length(camPos - modelPos.xyz);
         //float diskRadius = 1. / sampleSpread;
