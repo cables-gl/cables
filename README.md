@@ -69,48 +69,9 @@ libs
 └── vargetset.min.js
 ```
 #### Working with internal libraries
-Take a look at the input structure of `light`. We have two files: `createShaders.js` and `index.js`.
-
-`createShaders.js` includes utility functions for our main class, defined in `index.js`.
-
-Let's take a closer look at `index.js`:
-
-```javascript
-import {
-    getShadowPassVertexShader,
-    getShadowPassFragmentShader,
-    getBlurPassVertexShader,
-    getBlurPassFragmentShader
-} from "./createShaders";
-/* ... */
-function Light(cgl, config)
-{
-/* ... */
-};
-
-Light.prototype.getShadowPassVertexShader = getShadowPassVertexShader;
-
-export { Light };
-```
-
-As you can see, files from `createShaders.js` are being imported to `index.js`. `index.js` exports the main class to be used.
-
-When the library is built, the resulting class will be `CGL.Light`, to be found in `cgl_light.max/min.js`.
-
-#### Namespace libraries
-1. Only 1 export per `index.js` file. Only the first exported entity will be considered as the exported class.
-2. The second export will be put into the resulting file, but not be accessible via code.
-3. It's good practice to split functionality into different files. Just make sure to import them in your `index.js`.
-4. Webpack is configured to read [**named**](https://stackoverflow.com/a/41283945) exports.
-Using default exports will not work.
-
-    Bad:
-~~`export default Light`~~
-
-    Good: **`export { Light }`**
 
 #### Root level libraries
-1. For root level libraries the library itself has to "provide" an own or use an existing namespace, i.e.:
+1. All libraries have to "provide" and own or use an existing namespace, i.e.:
 
     `libs/cables/math.js`:
     ```javascript
@@ -119,10 +80,24 @@ Using default exports will not work.
 
     CABLES.Math = { add: add, sub: sub };
 
-    /** results in CABLES.Math.add(1, 2);
+    // results in CABLES.Math.add(1, 2);
 2. For the above example the exported file would be called `math.max/min.js`.
 3. This also means that these libraries may be dependent on other libraries being loaded alongside or before them (as above with `CABLES`).
 4. Handle with care!
+5. You can use shared includes in subfolders like this:
+
+    `libs/cables/math/index.js`:
+    ```javascript
+    import linearAlgebra from "./linearAlgebra" // make sure libs/cables/math/linearAlgebra.js exists!
+    const add = (num1, num2) => num1 + num2;
+    const sub = (num1, num2) => num1 - num2;
+
+    CABLES.Math = CABLES.MATH || {};
+    CABLES.Math.linearAlgebra = linearAlgebra;
+
+    // results in
+    //   - file:
+    //   - CABLES.Math.linearAlgebra;
 
 #### Adding libraries to ops
 
@@ -130,4 +105,3 @@ Using default exports will not work.
 2. Go to the `Core Libs` tab
 3. Get your library file from the dropdown, click `Add`
 4. Reload patch
-
