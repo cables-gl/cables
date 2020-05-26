@@ -11,40 +11,57 @@ const inReceiveShadow = op.inBool("Receive Shadow", false);
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
-const inSpread = op.inFloat("Sample Spread", 500);
+const inSpread = op.inInt("Sample Spread", 250);
+
 inSamples.setUiAttribs({ greyout: true });
 inSpread.setUiAttribs({ greyout: true });
+
+if (inReceiveShadow.get()) {
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
+    }
+    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default") {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+    }
+}
+
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
 inReceiveShadow.onChange = () => {
     inAlgorithm.setUiAttribs({ greyout: !inReceiveShadow.get() });
-    inSamples.setUiAttribs({ greyout: !inReceiveShadow.get() });
+    setAlgorithmGreyouts();
     if (shader) shader.toggleDefine("SHADOW_MAP", inReceiveShadow.get());
 }
 
 inAlgorithm.onChange = () => {
     if (!shader) return;
     const selectedAlgorithm = inAlgorithm.get();
+    shader.define("MODE_" + selectedAlgorithm.toUpperCase());
 
-    algorithms.forEach((algorithm) => {
-        if (selectedAlgorithm === algorithm) {
-            shader.define("MODE_" + algorithm.toUpperCase());
+    algorithms
+        .filter(alg => alg !== selectedAlgorithm)
+        .forEach(alg => shader.removeDefine("MODE_" + alg.toUpperCase()));
 
-            if (selectedAlgorithm !== "Default" && selectedAlgorithm !== "VSM") {
-                inSamples.setUiAttribs({ greyout: false });
-                if (selectedAlgorithm === "Poisson" || selectedAlgorithm === "PCF") {
-                    inSpread.setUiAttribs({ greyout: false });
-                }
-                else inSpread.setUiAttribs({ greyout: true });
-            } else {
-                inSamples.setUiAttribs({ greyout: true });
-                inSpread.setUiAttribs({ greyout: true });
-            }
-        }
-        else shader.removeDefine("MODE_" + algorithm.toUpperCase());
-    });
+    setAlgorithmGreyouts();
+}
 
+function setAlgorithmGreyouts() {
+    if (!inReceiveShadow.get()) {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+        return;
+    }
+
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
+    } else {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+    }
 }
 
 inSamples.onChange = () => {
@@ -92,10 +109,11 @@ const createFragmentHead = (n, type) => {
     return `
     // FRAGMENT HEAD type: ${type} count: ${n}
     UNI ModLight light${n};
+    IN vec4 modelPosMOD${n};
     ${type !== "point" ? `
     #ifdef SHADOW_MAP
         IN vec4 shadowCoord${n};
-    #endif` :`IN vec4 modelPosMOD${n};`}
+    #endif` :``}
 
     ${type === "point" ?  `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
     `;

@@ -44,7 +44,7 @@
                 "type": "0",
                 "name": "Sample Spread",
                 "group": "Shadow Settings",
-                "subType": "number"
+                "subType": "integer"
             }
         ],
         "portsOut": [

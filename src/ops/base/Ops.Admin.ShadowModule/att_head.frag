@@ -113,15 +113,14 @@ UNI float sampleSpread;
         #ifdef WEBGL1
             FillPCFArray();
         #endif
+
         float visibility  = 0.0;
         float viewDistance = length(camPos - modelPos.xyz);
-        //float diskRadius = 1. / sampleSpread;
-        //diskRadius *= clamp(viewDistance, 0.0002, 2.);
-         float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
+        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
 
         for (int i = 0; i < SAMPLE_AMOUNT_POINT; i++) {
             float shadowMapSample = textureCube(shadowMap, -lightDirection + offsets[i] * diskRadius).r;
-                visibility += step(shadowMapDepth - bias, shadowMapSample);
+            visibility += step(shadowMapDepth - bias, shadowMapSample);
         }
         visibility /= float(SAMPLE_AMOUNT_POINT);
         return clamp(visibility, 0., 1.);
@@ -151,9 +150,7 @@ UNI float sampleSpread;
         for (float x = LEFT_BOUND; x <= RIGHT_BOUND; x += 1.0) {
             for (float y = LEFT_BOUND; y <= RIGHT_BOUND; y += 1.0) {
                 float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
-                if (shadowMapDepth - bias < texelDepth) {
-                    visibility += 1.;
-                }
+                visibility += step(shadowMapDepth - bias, texelDepth);
             }
         }
 
@@ -209,28 +206,25 @@ UNI float sampleSpread;
         }
     #endif
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
+#define INV_SAMPLE_AMOUNT 1./SAMPLE_AMOUNT
     float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            if (textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r < shadowMapDepth - bias) {
-                visibility -= 0.2;
-            }
+            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r < shadowMapDepth - bias) {
-                visibility -= 0.2;
-            }
+            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 #endif
 
