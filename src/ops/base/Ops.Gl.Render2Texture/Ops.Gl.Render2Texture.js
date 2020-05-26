@@ -79,8 +79,8 @@ function doRender()
         }
 
         if(tfilter.get()=='nearest') fb.setFilter(CGL.Texture.FILTER_NEAREST);
-            else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
-            else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+        else if(tfilter.get()=='linear') fb.setFilter(CGL.Texture.FILTER_LINEAR);
+        else if(tfilter.get()=='mipmap') fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
         texDepth.set(fb.getTextureDepth());
         reInitFb=false;
@@ -94,7 +94,6 @@ function doRender()
 
     if(fb.getWidth()!=Math.ceil(width.get()) || fb.getHeight()!=Math.ceil(height.get()) )
     {
-
         fb.setSize(
             Math.max(1,Math.ceil(width.get())),
             Math.max(1,Math.ceil(height.get())) );

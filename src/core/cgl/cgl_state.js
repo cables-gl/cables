@@ -430,8 +430,8 @@ const Context = function (_patch)
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
-        // mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-        mat4.perspective(cgl.pMatrix, 45 * 0.0174533, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
+        mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
+        //mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
 
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
@@ -451,7 +451,7 @@ const Context = function (_patch)
         this.emitEvent("beginFrame");
     };
 
-    this.renderEnd = function (cgl, identTranslate)
+    this.renderEnd = function (cgl)
     {
         cgl.popViewMatrix();
         cgl.popModelMatrix();

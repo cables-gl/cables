@@ -1,0 +1,1 @@
+If nothing is plugged into default then the output is false by default

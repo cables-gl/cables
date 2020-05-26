@@ -59,13 +59,13 @@ const srcHeadFrag=''
     .endl()+'UNI float MOD_colorizeMax;'
     .endl()+'IN float MOD_displHeightMapColor;'
     .endl()+'UNI sampler2D MOD_texture;'
-    .endl()+'float map(float value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}'
+    .endl()+'float MOD_map(float value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}'
 
     .endl();
 
 const srcBodyFrag=''
     .endl()+'#ifdef MOD_HEIGHTMAP_COLORIZE'
-    .endl()+'   col.rgb*=map( MOD_displHeightMapColor, 0.0,1.0 , MOD_colorizeMin,MOD_colorizeMax);'
+    .endl()+'   col.rgb*=MOD_map( MOD_displHeightMapColor, 0.0,1.0 , MOD_colorizeMin,MOD_colorizeMax);'
     .endl()+'#endif'
 
     .endl()+'#ifdef MOD_DISPLACE_REMOVE_ZERO'

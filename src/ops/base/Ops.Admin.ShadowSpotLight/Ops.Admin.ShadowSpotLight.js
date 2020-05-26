@@ -333,7 +333,7 @@ function updateProjectionMatrix()
 {
     mat4.perspective(
         lightProjectionMatrix,
-        2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
@@ -461,8 +461,8 @@ function drawHelpers()
 }
 
 function enableGlStateOffscreenPasses() {
-    cgl.pushCullFace(true);
-    cgl.pushCullFaceFacing(cgl.gl.FRONT);
+    //cgl.pushCullFace(true);
+    //cgl.pushCullFaceFacing(cgl.gl.FRONT);
 
     cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
     cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
@@ -520,8 +520,8 @@ inTrigger.onTriggered = function ()
                 // cull face needs to be popped & polygon offset disabled
                 // before blur pass to avoid culling the mesh (full framebuffer size rectangle)
                 // that the texture effect is rendered on
-                cgl.popCullFaceFacing();
-                cgl.popCullFace();
+                //cgl.popCullFaceFacing();
+                //cgl.popCullFace();
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
                 if (inBlur.get() > 0 && !IS_WEBGL_1) blurShadowMap();

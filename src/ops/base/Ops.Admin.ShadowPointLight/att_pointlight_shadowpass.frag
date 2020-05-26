@@ -13,8 +13,7 @@ void main() {
 
     vec3 fromLightToFrag = (modelPos - lightPosition);
 
-    float depth = gl_FragCoord.z;
-    depth = (length(fromLightToFrag) - inNearFar.x) / (inNearFar.y - inNearFar.x);
+    float depth = (length(fromLightToFrag) - inNearFar.x) / (inNearFar.y - inNearFar.x);
 
     float dx = dFdx(depth); // for biasing depth-per-pixel
     float dy = dFdy(depth); // for biasing depth-per-pixel

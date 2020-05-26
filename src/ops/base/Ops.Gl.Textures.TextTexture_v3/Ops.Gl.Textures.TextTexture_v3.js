@@ -34,6 +34,7 @@ align.onChange=
     font.onChange=
     border.onChange=
     lineDistance.onChange=
+    cachetexture.onChange=
     maximize.onChange=function(){needsRefresh=true;};
 
 texWidth.onChange=
@@ -202,9 +203,16 @@ function refresh()
     ctx.restore();
     outRatio.set(ctx.canvas.height/ctx.canvas.width);
 
-    if(!cachetexture.get() || !tex) textureOut.set(new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_MIPMAP } ));
+    textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
-    tex.initTexture(fontImage,CGL.Texture.FILTER_MIPMAP);
+    if(!cachetexture.get() || !tex || !textureOut.get() || tex.width!=fontImage.width || tex.height != fontImage.height)
+    {
+        tex=new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_LINEAR } )
+
+    }
+tex.flip=false;
+    tex.initTexture(fontImage,CGL.Texture.FILTER_LINEAR);
+    textureOut.set(tex);
     tex.unpackAlpha=true;
 
 
