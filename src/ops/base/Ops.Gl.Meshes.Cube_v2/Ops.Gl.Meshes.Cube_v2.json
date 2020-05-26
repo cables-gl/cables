@@ -102,5 +102,18 @@
             }
         ],
         "name": "Ops.Gl.Meshes.Cube_v2"
+    },
+    "summary": "draw a cube",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Executes the op, renders a cube to the canvas."
+            }
+        ]
     }
 }

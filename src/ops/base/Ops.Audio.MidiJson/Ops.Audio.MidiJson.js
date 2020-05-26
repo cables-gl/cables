@@ -29,13 +29,13 @@ inObj.onChange=function()
 {
     midi=null;
     outNumTracks.set(0);
-    
+
     midi=inObj.get();
     if(!midi)return;
     if(!midi.tracks)return;
-    
+
     outNumTracks.set(midi.tracks.length);
-    
+
     arrNames.length=midi.tracks.length;
 
     bpm=midi.header.bpm;
@@ -56,25 +56,25 @@ inTime.onChange=function()
 {
     if(!midi)return;
     if(!midi.tracks)return;
-    
+
     var time=inTime.get();
     outNames.set(null);
     outProgress.set(null);
     outVelocity.set(null);
     outData.set(null);
-    
+
     for(var t=0;t<midi.tracks.length;t++)
     {
         arrNames[t]='';
         arrProgress[t]=0;
         arrVelocity[t]=0;
-        
+
         for(var n=0;n<midi.tracks[t].notes.length;n++)
         {
             var note=midi.tracks[t].notes[n];
 
             if(
-                time>note.time && 
+                time>note.time &&
                 time<note.timeEnd)
             {
                 arrProgress[t]=(time-note.time)/(note.duration);
@@ -83,14 +83,14 @@ inTime.onChange=function()
             }
         }
     }
-    
+
     outNames.set(arrNames);
     outProgress.set(arrProgress);
     outVelocity.set(arrVelocity);
-    
+
     var beat=Math.round(inTime.get()/60*(bpm));
     data.beat=beat;
     outData.set(data);
-    
+
     outBeat.set( beat);
 };

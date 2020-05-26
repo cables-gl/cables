@@ -51,5 +51,13 @@
             }
         ],
         "name": "Ops.Array.ArraySetNumber3"
+    },
+    "summary": "set number values in an array3 ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
