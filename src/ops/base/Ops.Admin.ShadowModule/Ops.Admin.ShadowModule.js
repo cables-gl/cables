@@ -135,7 +135,9 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
             float shadowStrength${n} = light${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
+            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+
             #ifdef MODE_DEFAULT
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
