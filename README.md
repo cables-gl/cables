@@ -84,7 +84,7 @@ libs
 2. For the above example the exported file would be called `math.max/min.js`.
 3. This also means that these libraries may be dependent on other libraries being loaded alongside or before them (as above with `CABLES`).
 4. Handle with care!
-5. You can use shared includes in subfolders like this:
+5. You can use shared imports in subfolders like this:
 
     `libs/cables/math/index.js`:
     ```javascript
