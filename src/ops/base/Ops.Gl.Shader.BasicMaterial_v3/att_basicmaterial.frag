@@ -2,10 +2,6 @@
 
 IN vec2 texCoord;
 UNI vec4 color;
-// UNI float r;
-// UNI float g;
-// UNI float b;
-// UNI float a;
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;

@@ -347,12 +347,12 @@ Shader.prototype.compile = function ()
         const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
 
         if (this._uniforms[i].shaderType == "vert")
-            if (vs.indexOf(uniStr == -1) || vs.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName() == -1))
-                vs += uniStr + ";".endl();
+            if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                vs += uniStr + "; // cgl generated".endl();
 
         if (this._uniforms[i].shaderType == "frag")
-            if (fs.indexOf(uniStr == -1) || fs.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName() == -1))
-                fs += uniStr + ";".endl();
+            if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                fs += uniStr + "; // cgl generated".endl();
     }
 
 

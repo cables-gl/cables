@@ -191,6 +191,7 @@ Uniform.prototype.getGlslTypeString = function ()
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
     if (this._type == "m4") return "mat4";
+    console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
 };
 
 
