@@ -806,21 +806,21 @@ Shader.prototype._addUniform = function (uni)
  * @instance
  * @function addUniformFrag
  */
-Shader.prototype.addUniformFrag = function (type, name, valueOrPort)
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "frag";
 };
 
-Shader.prototype.addUniformVert = function (type, name, valueOrPort)
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "vert";
 };
 
-Shader.prototype.addUniformBoth = function (type, name, valueOrPort)
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "both";
 };
 
