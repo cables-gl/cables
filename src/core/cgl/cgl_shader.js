@@ -344,15 +344,18 @@ Shader.prototype.compile = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+        if (this._uniforms[i].shaderType)
+        {
+            const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
 
-        if (this._uniforms[i].shaderType == "vert")
-            if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                vs += uniStr + "; // cgl generated".endl();
+            if (this._uniforms[i].shaderType == "vert")
+                if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    vs += uniStr + "; // cgl generated".endl();
 
-        if (this._uniforms[i].shaderType == "frag")
-            if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                fs += uniStr + "; // cgl generated".endl();
+            if (this._uniforms[i].shaderType == "frag")
+                if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    fs += uniStr + "; // cgl generated".endl();
+        }
     }
 
 
