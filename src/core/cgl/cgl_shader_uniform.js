@@ -46,8 +46,9 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._value = 0.00001;
     this._oldValue = null;
     this._port = null;
-    this._shader.addUniform(this);
+    this._shader._addUniform(this);
     this.needsUpdate = true;
+    this.shaderType = null;
 
     if (__type == "f")
     {
@@ -174,6 +175,24 @@ Uniform.prototype.copy = function (newShader)
 {
     return new Uniform(newShader, this._type, this._name);
 };
+
+/**
+ * returns type as glsl type string. e.g. 'f' returns 'float'
+ * @function getGlslTypeString
+ * @memberof Uniform
+ * @instance
+ * @return {string} type as string
+ */
+Uniform.prototype.getGlslTypeString = function ()
+{
+    if (this._type == "f") return "float";
+    if (this._type == "i") return "int";
+    if (this._type == "2f") return "vec2";
+    if (this._type == "3f") return "vec3";
+    if (this._type == "4f") return "vec4";
+    if (this._type == "m4") return "mat4";
+};
+
 
 Uniform.prototype.getType = function ()
 {

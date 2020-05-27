@@ -14,7 +14,11 @@ function doRender()
 var shader=new CGL.Shader(cgl,'MinimalMaterial');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
 shader.setSource(attachments.shader_vert,attachments.shader_frag);
-const uni=new CGL.Uniform(shader,'f','red',inRed);
+
+// const uni=new CGL.Uniform(shader,'f','red',inRed);
+shader.addUniformFrag("f","red",inRed);
+
+
 
 
 render.onTriggered=doRender;
