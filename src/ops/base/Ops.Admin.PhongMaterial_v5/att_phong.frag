@@ -55,8 +55,8 @@ struct Light {
 #define AO y
 #define SPECULAR z
 #define EMISSIVE w
-const float TWO_PI = 2.*PI;
-const float EIGHT_PI = 8.*PI;
+#define TWO_PI 2.*PI
+#define EIGHT_PI 8.*PI;
 
 // TEXTURES
 #ifdef HAS_TEXTURES

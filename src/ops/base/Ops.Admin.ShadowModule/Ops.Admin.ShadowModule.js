@@ -1,6 +1,6 @@
 const cgl = op.patch.cgl;
 const LIGHT_TYPES = { "point": 0, "directional": 1, "spot": 2 };
-function clamp(val, min, max) 
+function clamp(val, min, max)
 {
     return Math.min(Math.max(val, min), max);
 }
@@ -17,15 +17,15 @@ const inSpread = op.inInt("Sample Spread", 250);
 inSamples.setUiAttribs({ "greyout": true });
 inSpread.setUiAttribs({ "greyout": true });
 
-if (inReceiveShadow.get()) 
+if (inReceiveShadow.get())
 {
-    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") 
-{
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson")
+    {
         inSamples.setUiAttribs({ "greyout": false });
         inSpread.setUiAttribs({ "greyout": false });
     }
-    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default") 
-{
+    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default")
+    {
         inSamples.setUiAttribs({ "greyout": true });
         inSpread.setUiAttribs({ "greyout": true });
     }
@@ -34,14 +34,14 @@ if (inReceiveShadow.get())
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
-inReceiveShadow.onChange = () => 
+inReceiveShadow.onChange = () =>
 {
     inAlgorithm.setUiAttribs({ "greyout": !inReceiveShadow.get() });
     setAlgorithmGreyouts();
     if (shader) shader.toggleDefine("SHADOW_MAP", inReceiveShadow.get());
 };
 
-inAlgorithm.onChange = () => 
+inAlgorithm.onChange = () =>
 {
     if (!shader) return;
     const selectedAlgorithm = inAlgorithm.get();
@@ -54,28 +54,28 @@ inAlgorithm.onChange = () =>
     setAlgorithmGreyouts();
 };
 
-function setAlgorithmGreyouts() 
+function setAlgorithmGreyouts()
 {
-    if (!inReceiveShadow.get()) 
-{
+    if (!inReceiveShadow.get())
+    {
         inSamples.setUiAttribs({ "greyout": true });
         inSpread.setUiAttribs({ "greyout": true });
         return;
     }
 
-    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") 
-{
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson")
+    {
         inSamples.setUiAttribs({ "greyout": false });
         inSpread.setUiAttribs({ "greyout": false });
     }
- else 
-{
+    else
+    {
         inSamples.setUiAttribs({ "greyout": true });
         inSpread.setUiAttribs({ "greyout": true });
     }
 }
 
-inSamples.onChange = () => 
+inSamples.onChange = () =>
 {
     if (shader) shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 };
@@ -83,7 +83,7 @@ inSamples.onChange = () =>
 const outTrigger = op.outTrigger("Trigger Out");
 
 
-const createVertexHead = (n, type) => 
+const createVertexHead = (n, type) =>
 {
     if (type === "point") return `
 // VERTEX HEAD type: ${type} count: ${n}
@@ -102,7 +102,7 @@ const createVertexHead = (n, type) =>
 `;
 };
 
-const createVertexBody = (n, type) => 
+const createVertexBody = (n, type) =>
 {
     if (type === "point") return `
 // VERTEX BODY type: ${type} count: ${n}
@@ -118,9 +118,9 @@ const createVertexBody = (n, type) =>
     `;
 };
 
-const createFragmentHead = (n, type) => 
+const createFragmentHead = (n, type) =>
 {
-    if (type === "ambient") return ""; // return `UNI Light modLight${n};`;
+    if (type === "ambient") return ""; // return `UNI ModLight light${n};`;
     return `
     // FRAGMENT HEAD type: ${type} count: ${n}
     UNI ModLight light${n};
@@ -129,29 +129,28 @@ const createFragmentHead = (n, type) =>
     #ifdef SHADOW_MAP
         IN vec4 shadowCoord${n};
     #endif` : ""}
-
-    ${type === "point" ? `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
+    #ifdef SHADOW_MAP
+        ${type === "point" ? `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
+    #endif
     `;
 };
 
-const createFragmentBody = (n, type, shouldCastShadow) => 
+const createFragmentBody = (n, type) =>
 {
     if (type === "ambient") return "";
     let fragmentCode = `// FRAGMENT BODY type: ${type} count: ${n}`;
 
-    if (inReceiveShadow.get()) 
-{
-        if (type === "spot") 
-{
-            // NOTE: no slope scaled depth bias because not all materials use lightDirection & lambert factor
-            // float bias${n} = clamp(modLight${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+    if (inReceiveShadow.get())
+    {
+        if (type === "spot")
+        {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
         if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
             vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
             vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = modLight${n}.shadowStrength;
+            float shadowStrength${n} = light${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
             float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
             float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
@@ -161,7 +160,7 @@ const createFragmentBody = (n, type, shouldCastShadow) =>
             #endif
 
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, modLight${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_POISSON
@@ -173,29 +172,29 @@ const createFragmentBody = (n, type, shouldCastShadow) =>
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
         `);
         }
-        else if (type === "directional") 
-{
+        else if (type === "directional")
+        {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
-        if (modLight${n}.typeCastShadow.CAST_SHADOW == 1) {
+        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
             vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = modLight${n}.shadowStrength;
+            float shadowStrength${n} = light${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = modLight${n}.shadowProperties.BIAS;
+            float bias${n} = light${n}.shadowProperties.BIAS;
 
              #ifdef MODE_DEFAULT
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, modLight${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
 
             #ifdef MODE_POISSON
@@ -207,24 +206,24 @@ const createFragmentBody = (n, type, shouldCastShadow) =>
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
             `);
         }
-        else if (type === "point") 
-{
+        else if (type === "point")
+        {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
         if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
             vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
             float shadowStrength${n} = light${n}.shadowStrength;
 
-            float cameraNear${n} = modLight${n}.shadowProperties.NEAR; // uniforms
-            float cameraFar${n} =  modLight${n}.shadowProperties.FAR;
+            float cameraNear${n} = light${n}.shadowProperties.NEAR; // uniforms
+            float cameraFar${n} =  light${n}.shadowProperties.FAR;
 
-            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - modLight${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
+            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - light${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
 
             float shadowMapDepth${n} = fromLightToFrag${n};
             // float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
@@ -259,7 +258,7 @@ const createFragmentBody = (n, type, shouldCastShadow) =>
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, modLight${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
             #endif
         }
     #endif
@@ -272,7 +271,7 @@ const createFragmentBody = (n, type, shouldCastShadow) =>
 
 let lastLength = 0;
 
-function createModuleShaders(lightStack) 
+function createModuleShaders(lightStack)
 {
     if (lightStack.length === lastLength) return;
     let vertexHead = "";
@@ -280,8 +279,8 @@ function createModuleShaders(lightStack)
     let vertexBody = "";
     let fragmentBody = "";
 
-    for (let i = 0; i < lightStack.length; i += 1) 
-{
+    for (let i = 0; i < lightStack.length; i += 1)
+    {
         const light = lightStack[i];
         vertexHead = vertexHead.concat(createVertexHead(i, light.type));
         vertexBody = vertexBody.concat(createVertexBody(i, light.type));
@@ -316,22 +315,22 @@ let srcBodyFrag = srcBodyFragBase;
 
 let lightUniforms = [];
 let uniformSpread = null;
-function createUniforms(lightsCount) 
+function createUniforms(lightsCount)
 {
     if (!shader) return;
     lightUniforms = [];
 
-    for (let i = 0; i < lightsCount; i += 1) 
-{
+    for (let i = 0; i < lightsCount; i += 1)
+    {
         lightUniforms[i] = null;
-        if (!lightUniforms[i]) 
-{
+        if (!lightUniforms[i])
+        {
             lightUniforms[i] = {
-                "position": new CGL.Uniform(shader, "3f", "modLight" + i + ".position", [0, 0, 0]),
-                "typeCastShadow": new CGL.Uniform(shader, "2i", "modLight" + i + ".typeCastShadow", [0, 0]),
+                "position": new CGL.Uniform(shader, "3f", "light" + i + ".position", [0, 0, 0]),
+                "typeCastShadow": new CGL.Uniform(shader, "2i", "light" + i + ".typeCastShadow", [0, 0]),
 
-                "shadowProperties": new CGL.Uniform(shader, "4f", "modLight" + i + ".shadowProperties", [0, 0, 0, 0]),
-                "shadowStrength": new CGL.Uniform(shader, "f", "modLight" + i + ".shadowStrength", 1),
+                "shadowProperties": new CGL.Uniform(shader, "4f", "light" + i + ".shadowProperties", [0, 0, 0, 0]),
+                "shadowStrength": new CGL.Uniform(shader, "f", "light" + i + ".shadowStrength", 1),
 
                 "shadowMap": null,
 
@@ -344,13 +343,13 @@ function createUniforms(lightsCount)
     if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, "f", "sampleSpread", inSpread);
 }
 
-function setUniforms(lightStack) 
+function setUniforms(lightStack)
 {
     const receiveShadow = inReceiveShadow.get();
     let castShadow = false;
 
-    for (let i = 0; i < lightStack.length; i += 1) 
-{
+    for (let i = 0; i < lightStack.length; i += 1)
+    {
         const light = lightStack[i];
         if (light.type === "ambient") continue;
 
@@ -364,8 +363,8 @@ function setUniforms(lightStack)
             light.castShadow,
         ]);
 
-        if (light.shadowMap) 
-{
+        if (light.shadowMap)
+        {
             lightUniforms[i].lightMatrix.setValue(light.lightMatrix);
             lightUniforms[i].normalOffset.setValue(light.normalOffset);
             lightUniforms[i].shadowProperties.setValue([
@@ -376,14 +375,14 @@ function setUniforms(lightStack)
             ]);
             lightUniforms[i].shadowStrength.setValue(light.shadowStrength);
 
-            if (!lightUniforms[i].shadowMap) 
-{
+            if (!lightUniforms[i].shadowMap)
+            {
                 lightUniforms[i].shadowMap = new CGL.Uniform(shader, "t", "shadowMap" + i, i);
             }
             shader.pushTexture(lightUniforms[i].shadowMap, light.shadowMap.tex);
         }
- else if (light.shadowCubeMap) 
-{
+        else if (light.shadowCubeMap)
+        {
             lightUniforms[i].shadowProperties.setValue([
                 light.nearFar[0],
                 light.nearFar[1],
@@ -393,21 +392,21 @@ function setUniforms(lightStack)
 
             lightUniforms[i].shadowStrength.setValue(light.shadowStrength);
 
-            if (!lightUniforms[i].shadowMap) 
-{
+            if (!lightUniforms[i].shadowMap)
+            {
                 lightUniforms[i].shadowMap = new CGL.Uniform(shader, "t", "shadowMap" + i, i);
             }
 
             shader.pushTexture(lightUniforms[i].shadowMap, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         }
- else 
-{
+        else
+        {
             if (lightUniforms[i].shadowMap) lightUniforms[i].shadowMap = null;
             if (lightUniforms[i].shadowCubeMap) lightUniforms[i].shadowMap = null;
         }
         castShadow = castShadow || light.castShadow;
-        shader.toggleDefine("SHADOW_MAP", receiveShadow && castShadow);
-        /*if (receiveShadow && castShadow) {
+        shader.toggleDefine("SHADOW_MAP", receiveShadow);
+        /* if (receiveShadow && castShadow) {
             if(!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
         }
         else {
@@ -417,17 +416,17 @@ function setUniforms(lightStack)
 }
 
 
-function updateShader() 
+function updateShader()
 {
     const currentShader = cgl.getShader();
 
-    if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength) 
-{
+    if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength)
+    {
         removeModulesAndDefines();
         shader = currentShader;
         createModuleShaders(cgl.frameStore.lightStack);
-        if (!shader.hasDefine("SHADOW_MAP")) 
-{
+        if (!shader.hasDefine("SHADOW_MAP"))
+        {
             vertexModule = shader.addModule({
                 "name": "MODULE_VERTEX_POSITION",
                 "title": op.objName,
@@ -449,16 +448,16 @@ function updateShader()
         }
     }
 
-    if (shader) 
-{
+    if (shader)
+    {
         setUniforms(cgl.frameStore.lightStack);
     }
 }
 
-function removeModulesAndDefines() 
+function removeModulesAndDefines()
 {
-    if (shader && vertexModule) 
-{
+    if (shader && vertexModule)
+    {
         shader.removeDefine("SHADOW_MAP");
         shader.removeDefine("MODE_" + inAlgorithm.get().toUpperCase());
         shader.removeModule(vertexModule);
@@ -466,41 +465,41 @@ function removeModulesAndDefines()
         shader = null;
     }
 }
-inTrigger.onLinkChanged = function () 
+inTrigger.onLinkChanged = function ()
 {
-    if (!inTrigger.isLinked()) 
-{
+    if (!inTrigger.isLinked())
+    {
         removeModulesAndDefines();
         lastLength = 0;
     }
 };
 
-inTrigger.onTriggered = () => 
+inTrigger.onTriggered = () =>
 {
-    if (!inCastShadow.get()) 
-{
-        if (!cgl.frameStore.shadowPass) 
-{
+    if (!inCastShadow.get())
+    {
+        if (!cgl.frameStore.shadowPass)
+        {
             updateShader();
             outTrigger.trigger();
         }
         return;
     }
 
-    if (!inReceiveShadow.get()) 
-{
+    if (!inReceiveShadow.get())
+    {
         outTrigger.trigger();
         return;
     }
 
-    if (cgl.frameStore.shadowPass) 
-{
+    if (cgl.frameStore.shadowPass)
+    {
         outTrigger.trigger();
         return;
     }
 
-    if (!cgl.frameStore.lightStack) 
-{
+    if (!cgl.frameStore.lightStack)
+    {
         outTrigger.trigger();
         return;
     }

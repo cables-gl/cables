@@ -16,23 +16,23 @@ function Light(config) {
 const cgl = op.patch.cgl;
 
 const DEFAULT_FRAGMENT_HEAD = `
-UNI Light light0;
+UNI Light phongLight0;
 `;
 
 const DEFAULT_FRAGMENT_BODY = `
 // DEFAULT_LIGHT
-vec3 lightDirection0 = normalize(light0.position - fragPos.xyz);
-float lambert0 = 1.; // inout variable
-vec3 diffuseColor0 = CalculateDiffuseColor(lightDirection0, normal, light0.color, baseColor, lambert0);
-// diffuseColor0 *= light0.lightProperties.INTENSITY;
+vec3 phongLightDirection0 = normalize(phongLight0.position - fragPos.xyz);
+float phongLambert0 = 1.; // inout variable
+vec3 diffuseColor0 = CalculateDiffuseColor(phongLightDirection0, normal, phongLight0.color, baseColor, phongLambert0);
+// diffuseColor0 *= phongLight0.lightProperties.INTENSITY;
 vec3 specularColor0 = CalculateSpecularColor(
-    light0.specular,
+    phongLight0.specular,
     inMaterialProperties.SPECULAR_AMT,
     inMaterialProperties.SHININESS,
-    lightDirection0,
+    phongLightDirection0,
     viewDirection,
     normal,
-    lambert0
+    phongLambert0
 );
 vec3 combinedColor0 = (diffuseColor0 + specularColor0);
 calculatedColor += combinedColor0;
@@ -40,7 +40,7 @@ calculatedColor += combinedColor0;
 
 const createFragmentHead = (n, type) => {
     return `
-    UNI Light light${n};
+    UNI Light phongLight${n};
     `;
 };
 
@@ -48,21 +48,21 @@ const createFragmentBody = (n, type) => {
     if (type === "ambient") {
         return `
     // ${type.toUpperCase()} LIGHT
-    vec3 diffuseColor${n} = light${n}.lightProperties.INTENSITY*light${n}.color;
+    vec3 diffuseColor${n} = phongLight${n}.lightProperties.INTENSITY*phongLight${n}.color;
     calculatedColor += diffuseColor${n};
     `;
     }
 
     let fragmentCode = `
     // ${type.toUpperCase()} LIGHT
-    vec3 lightDirection${n} = ${type !== "directional" ?
-        `normalize(light${n}.position - fragPos.xyz)`
-        : `normalize(light${n}.position)`};
+    vec3 phongLightDirection${n} = ${type !== "directional" ?
+        `normalize(phongLight${n}.position - fragPos.xyz)`
+        : `normalize(phongLight${n}.position)`};
 
-    float lambert${n} = 1.; // inout variable
+    float phongLambert${n} = 1.; // inout variable
 
-    vec3 lightColor${n} = light${n}.color;
-    vec3 lightSpecular${n} = light${n}.specular;
+    vec3 lightColor${n} = phongLight${n}.color;
+    vec3 lightSpecular${n} = phongLight${n}.specular;
 
     #ifdef HAS_TEXTURES
         #ifdef HAS_TEXTURE_AO
@@ -74,36 +74,36 @@ const createFragmentBody = (n, type) => {
         #endif
     #endif
 
-    vec3 diffuseColor${n} = CalculateDiffuseColor(lightDirection${n}, normal, lightColor${n}, baseColor, lambert${n});
+    vec3 diffuseColor${n} = CalculateDiffuseColor(phongLightDirection${n}, normal, lightColor${n}, baseColor, phongLambert${n});
     vec3 specularColor${n} = CalculateSpecularColor(
         lightSpecular${n},
         inMaterialProperties.SPECULAR_AMT,
         inMaterialProperties.SHININESS,
-        lightDirection${n},
+        phongLightDirection${n},
         viewDirection,
         normal,
-        lambert${n}
+        phongLambert${n}
     );
 
     // vec3 combinedColor${n} = light.intensity * (diffuseColor + specularColor);
     vec3 combinedColor${n} = (diffuseColor${n} + specularColor${n});
     ${type === "spot" ? `
         float spotIntensity${n} = CalculateSpotLightEffect(
-            light${n}.position, light${n}.conePointAt, light${n}.spotProperties.COSCONEANGLE,
-            light${n}.spotProperties.COSCONEANGLEINNER, light${n}.spotProperties.SPOTEXPONENT,
-            lightDirection${n}
+            phongLight${n}.position, phongLight${n}.conePointAt, phongLight${n}.spotProperties.COSCONEANGLE,
+            phongLight${n}.spotProperties.COSCONEANGLEINNER, phongLight${n}.spotProperties.SPOTEXPONENT,
+            phongLightDirection${n}
         );
         combinedColor${n} *= spotIntensity${n};
     ` : ''}
 
     ${type !== "directional" ? `
-    vec3 lightModelDiff${n} = light${n}.position - fragPos.xyz;
-    combinedColor${n} *= CalculateFalloff(lightDirection${n}, light${n}.lightProperties.FALLOFF);
+    vec3 lightModelDiff${n} = phongLight${n}.position - fragPos.xyz;
+    combinedColor${n} *= CalculateFalloff(phongLightDirection${n}, phongLight${n}.lightProperties.FALLOFF);
     ` : ''}
     `;
 
     fragmentCode = fragmentCode.concat(`
-    combinedColor${n} *= light${n}.lightProperties.INTENSITY;
+    combinedColor${n} *= phongLight${n}.lightProperties.INTENSITY;
     calculatedColor += combinedColor${n};
     `);
 
@@ -487,20 +487,20 @@ function createUniforms(lightsCount) {
         lightUniforms[i] = null;
         if (!lightUniforms[i]) {
             lightUniforms[i] = {
-                color: new CGL.Uniform(shader,'3f','light' + i + '.color', [1,1,1]),
-                position: new CGL.Uniform(shader,'3f','light' + i + '.position',[0,11,0]),
-                specular: new CGL.Uniform(shader,'3f','light' + i + '.specular', [1,1,1]),
+                color: new CGL.Uniform(shader,'3f','phongLight' + i + '.color', [1,1,1]),
+                position: new CGL.Uniform(shader,'3f','phongLight' + i + '.position',[0,11,0]),
+                specular: new CGL.Uniform(shader,'3f','phongLight' + i + '.specular', [1,1,1]),
                 // intensity, attenuation, falloff, radius
-                lightProperties: new CGL.Uniform(shader, '4f', 'light' + i + '.lightProperties', [1,1,1,1]),
-                // typeCastShadow: new CGL.Uniform(shader, '2i', 'light' + i + '.typeCastShadow', [0, 0]),
-                // castShadow: new CGL.Uniform(shader,'i','light' + i + '.castShadow', 0),
+                lightProperties: new CGL.Uniform(shader, '4f', 'phongLight' + i + '.lightProperties', [1,1,1,1]),
+                // typeCastShadow: new CGL.Uniform(shader, '2i', 'phongLight' + i + '.typeCastShadow', [0, 0]),
+                // castShadow: new CGL.Uniform(shader,'i','phongLight' + i + '.castShadow', 0),
 
 
-                conePointAt: new CGL.Uniform(shader,'3f','light' + i + '.conePointAt', vec3.create()),
-                spotProperties: new CGL.Uniform(shader, '3f', 'light' + i + '.spotProperties', [0,0,0,0]),
+                conePointAt: new CGL.Uniform(shader,'3f','phongLight' + i + '.conePointAt', vec3.create()),
+                spotProperties: new CGL.Uniform(shader, '3f', 'phongLight' + i + '.spotProperties', [0,0,0,0]),
 
-                // shadowProperties: new CGL.Uniform(shader, '4f', 'light' + i + '.shadowProperties', [0,0,0,0]),
-                // shadowStrength: new CGL.Uniform(shader, 'f', 'light' + i + '.shadowStrength', 1),
+                // shadowProperties: new CGL.Uniform(shader, '4f', 'phongLight' + i + '.shadowProperties', [0,0,0,0]),
+                // shadowStrength: new CGL.Uniform(shader, 'f', 'phongLight' + i + '.shadowStrength', 1),
 
                 // shadowMap:  null,
 
@@ -578,27 +578,16 @@ let defaultUniform = null;
 
 function createDefaultUniform() {
     defaultUniform = {
-        color: new CGL.Uniform(shader,'3f','light' + 0 + '.color', [1,1,1]),
-        specular: new CGL.Uniform(shader,'3f','light' + 0 + '.specular', [1,1,1]),
-        position: new CGL.Uniform(shader,'3f','light' + 0 + '.position',[0,11,0]),
+        color: new CGL.Uniform(shader,'3f','phongLight' + 0 + '.color', [1,1,1]),
+        specular: new CGL.Uniform(shader,'3f','phongLight' + 0 + '.specular', [1,1,1]),
+        position: new CGL.Uniform(shader,'3f','phongLight' + 0 + '.position',[0,11,0]),
 
         // intensity, attenuation, falloff, radius
-        lightProperties: new CGL.Uniform(shader, '4f', 'light' + 0 + '.lightProperties', [1,1,1,1]),
-        //typeCastShadow: new CGL.Uniform(shader, '2i', 'light' + 0 + '.typeCastShadow', [0, 0]),
-        //castShadow: new CGL.Uniform(shader,'i','light' + 0 + '.castShadow', 0),
+        lightProperties: new CGL.Uniform(shader, '4f', 'phongLight' + 0 + '.lightProperties', [1,1,1,1]),
 
 
-        conePointAt: new CGL.Uniform(shader,'3f','light' + 0 + '.conePointAt', vec3.create()),
-        spotProperties: new CGL.Uniform(shader, '3f', 'light' + 0 + '.spotProperties', [0,0,0,0]),
-
-        // shadowProperties: new CGL.Uniform(shader, '4f', 'light' + 0 + '.shadowProperties', [0,0,0,0]),
-        // shadowStrength: new CGL.Uniform(shader, 'f', 'light' + 0 + '.shadowStrength', 1),
-
-        // shadowMap:  null,
-
-        // vertex shader
-        // normalOffset:  new CGL.Uniform(shader, 'f', 'normalOffset' + 0, 0),
-        // lightMatrix:  new CGL.Uniform(shader,'m4','lightMatrix' + 0, mat4.create()),
+        conePointAt: new CGL.Uniform(shader,'3f','phongLight' + 0 + '.conePointAt', vec3.create()),
+        spotProperties: new CGL.Uniform(shader, '3f', 'phongLight' + 0 + '.spotProperties', [0,0,0,0]),
     }
 }
 
@@ -685,23 +674,22 @@ inTrigger.onTriggered = function() {
         console.log("lambert has no shader...");
         return;
     }
-//    if (cgl.frameStore.shadowPass) {
-  //      outTrigger.trigger();
-//    } else {
-        cgl.setShader(shader);
 
-        shader.popTextures();
-        if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
-        if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
-        if (inNormalTexture.get())  shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
-        if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
-        if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
-        if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
-        updateLights();
-        outTrigger.trigger();
+    cgl.setShader(shader);
 
-        cgl.setPreviousShader();
-  //  }
+    shader.popTextures();
+    if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
+    if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
+    if (inNormalTexture.get())  shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
+    if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
+    if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
+    if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
+
+    updateLights();
+
+    outTrigger.trigger();
+
+    cgl.setPreviousShader();
 }
 
 updateDiffuseTexture();
@@ -709,4 +697,6 @@ updateSpecularTexture();
 updateNormalTexture();
 updateAoTexture();
 updateAlphaTexture();
+updateEmissiveTexture();
+
 
