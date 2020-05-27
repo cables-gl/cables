@@ -124,8 +124,8 @@ inMapSize.onChange = function() {
     // TODO: update this one
 
     const size = Number(inMapSize.get());
-    if (![256, 512, 1024, 2048].some(function(val) { val === size })) return; // had to add this check after update. returns 0 initially??
-
+    newLight.createFramebuffer(size, size, {});
+    newLight.createShadowMapShader();
 }
 
 let projectionShader = null;

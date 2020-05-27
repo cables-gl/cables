@@ -1,4 +1,4 @@
-CABLES.VarSetOpWrapper = class
+const VarSetOpWrapper = class
 {
     constructor(op, type, valuePort, varNamePort)
     {
@@ -89,8 +89,7 @@ CABLES.VarSetOpWrapper = class
     }
 };
 
-
-CABLES.VarGetOpWrapper = class
+const VarGetOpWrapper = class
 {
     constructor(op, type, varnamePort, valueOutPort)
     {
@@ -172,3 +171,6 @@ CABLES.VarGetOpWrapper = class
         }
     }
 };
+
+CABLES.VarSetOpWrapper = VarSetOpWrapper;
+CABLES.VarGetOpWrapper = VarGetOpWrapper;

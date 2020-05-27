@@ -405,4 +405,4 @@ Light.prototype.getShadowPassFragmentShader = getShadowPassFragmentShader;
 Light.prototype.getBlurPassVertexShader = getBlurPassVertexShader;
 Light.prototype.getBlurPassFragmentShader = getBlurPassFragmentShader;
 
-export { Light };
+CGL.Light = Light;

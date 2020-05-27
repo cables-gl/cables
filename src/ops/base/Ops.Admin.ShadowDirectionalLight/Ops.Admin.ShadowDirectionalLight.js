@@ -423,7 +423,7 @@ inTrigger.onTriggered = function ()
                 cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
 
 
-                cgl.gl.colorMask(true, true, false, false);
+                cgl.gl.colorMask(true, true, true, true);
                 renderShadowMap();
 
                 cgl.popBlend();
@@ -440,7 +440,7 @@ inTrigger.onTriggered = function ()
                 cgl.frameStore.shadowPass = false;
 
                 outTexture.set(null);
-                outTexture.set(fb.getTextureDepth());
+                outTexture.set(fb.getTextureColor());
 
 
                 // remove light from stack and readd it with shadow map & mvp matrix

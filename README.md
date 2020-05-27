@@ -30,12 +30,16 @@ static html outut: out/
 If you want to create a library, there are some steps you need to consider:
 
 1. Libraries can be found in `src/core/libs`
-2. The folder they are in defines their namespace.
-3. The subfolder they are in defines their classname.
-4. If a file ist at root level (directly in the `libs` folder), the namespace will be `CABLES`.
-5. The resulting filename will have the structure `namespace_classname.min/max.js`.
-6. If a file is at root level, the resulting filename will be `filename.js`
-7. Every namespace library needs an `index.js` as the main entry point.
+2. Files sould be in folders that (by convention) are named after the namespace they export to
+3. Files in subfolders of these will not be built unless they are named `index.js`
+6. Files control their own namespaces, no exports are used (see below)
+7. The resulting filename will have the structure `folder_subfolder.min/max.js`.
+8. If a file is in the `cables/` namespace, the resulting filename will be `filename.js`
+9. Every library in a subfolder (see 3.) needs an `index.js` as the main entry point.
+10. Webpack builds minified and non-minified versions to `build/libs/`
+11. use `npm run build` to build the libraries
+12. libraries are coped to `../cables_api/public/libs_core/`
+
 #### Example:
 
 Input structure:
@@ -44,10 +48,12 @@ libs
 ├── cgl
 │   ├── cubemap
 │   │   └── index.js
-│   └── light
-│       ├── createShaders.js
-│       └── index.js
-└── vargetset.js
+│   ├── light
+│   │   ├── createShaders.js
+│   │   └── index.js
+│   └── functions.js
+|── cables
+    └── vargetset.js
 ```
 
 Output structure:
@@ -57,64 +63,41 @@ libs
 ├── cgl_cubemap.min.js
 ├── cgl_light.max.js
 ├── cgl_light.min.js
+├── cgl_functions.max.js
+├── cgl_functions.min.js
 ├── vargetset.max.js
 └── vargetset.min.js
 ```
 #### Working with internal libraries
-Take a look at the input structure of `light`. We have two files: `createShaders.js` and `index.js`.
-
-`createShaders.js` includes utility functions for our main class, defined in `index.js`.
-
-Let's take a closer look at `index.js`:
-
-```javascript
-import {
-    getShadowPassVertexShader,
-    getShadowPassFragmentShader,
-    getBlurPassVertexShader,
-    getBlurPassFragmentShader
-} from "./createShaders";
-/* ... */
-function Light(cgl, config)
-{
-/* ... */
-};
-
-Light.prototype.getShadowPassVertexShader = getShadowPassVertexShader;
-
-export { Light };
-```
-
-As you can see, files from `createShaders.js` are being imported to `index.js`. `index.js` exports the main class to be used.
-
-When the library is built, the resulting class will be `CGL.Light`, to be found in `cgl_light.max/min.js`.
-
-#### Namespace libraries
-1. Only 1 export per `index.js` file. Only the first exported entity will be considered as the exported class.
-2. The second export will be put into the resulting file, but not be accessible via code.
-3. It's good practice to split functionality into different files. Just make sure to import them in your `index.js`.
-4. Webpack is configured to read [**named**](https://stackoverflow.com/a/41283945) exports.
-Using default exports will not work.
-
-    Bad:
-~~`export default Light`~~
-
-    Good: **`export { Light }`**
 
 #### Root level libraries
-1. Only 1 export per file. Only the first exported entity will be considered as the exported class.
-If you want multiple objects/classes in one file, wrap them in a container, e.g:
+1. All libraries have to "provide" and own or use an existing namespace, i.e.:
 
-    `libs/math.js`:
+    `libs/cables/math.js`:
     ```javascript
     const add = (num1, num2) => num1 + num2;
     const sub = (num1, num2) => num1 - num2;
 
-    const Math = { add: add, sub: sub };
-    export { Math };
+    CABLES.Math = { add: add, sub: sub };
 
-    /** results in CABLES.Math.add(1, 2);
-2. For the above example the exported file would be called `math.max/min.js`. Root level libraries wil always be accessible by `CABLES.Filename`, e.g. `CABLES.Math`.
+    // results in CABLES.Math.add(1, 2);
+2. For the above example the exported file would be called `math.max/min.js`.
+3. This also means that these libraries may be dependent on other libraries being loaded alongside or before them (as above with `CABLES`).
+4. Handle with care!
+5. You can use shared imports in subfolders like this:
+
+    `libs/cables/math/index.js`:
+    ```javascript
+    import linearAlgebra from "./linearAlgebra" // make sure libs/cables/math/linearAlgebra.js exists!
+    const add = (num1, num2) => num1 + num2;
+    const sub = (num1, num2) => num1 - num2;
+
+    CABLES.Math = CABLES.MATH || {};
+    CABLES.Math.linearAlgebra = linearAlgebra;
+
+    // results in
+    //   - file:
+    //   - CABLES.Math.linearAlgebra;
 
 #### Adding libraries to ops
 
@@ -122,4 +105,3 @@ If you want multiple objects/classes in one file, wrap them in a container, e.g:
 2. Go to the `Core Libs` tab
 3. Get your library file from the dropdown, click `Add`
 4. Reload patch
-

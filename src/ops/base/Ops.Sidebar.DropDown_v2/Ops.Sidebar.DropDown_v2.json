@@ -16,18 +16,16 @@
                 "name": "Link"
             },
             {
-                "type": "0",
-                "name": "Text",
-                "subType": "string"
+                "type": "5",
+                "name": "Text"
             },
             {
                 "type": "3",
                 "name": "Values"
             },
             {
-                "type": "0",
-                "name": "Default",
-                "subType": "string"
+                "type": "5",
+                "name": "Default"
             },
             {
                 "type": "0",
