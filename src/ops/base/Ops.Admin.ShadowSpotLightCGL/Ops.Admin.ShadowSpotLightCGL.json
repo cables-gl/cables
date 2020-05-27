@@ -4,9 +4,7 @@
     "created": 1587556120293,
     "coreLibs": [
         "cgl_cubemap",
-        "cgl_light",
-        "vargetset",
-        "cgl_functions"
+        "cgl_light"
     ],
     "layout": {
         "portsIn": [
