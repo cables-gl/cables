@@ -1,4 +1,6 @@
 const cgl = op.patch.cgl;
+const IS_WEBGL_1 = cgl.glVersion == 1;
+
 function Light(config)
 {
     this.type = config.type || "point";
@@ -19,14 +21,11 @@ function Light(config)
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
-
 const inIntensity = op.inFloat("Intensity", 5);
 const inRadius = op.inFloat("Radius", 10);
-
 const inPosX = op.inFloat("X", 1);
 const inPosY = op.inFloat("Y", 2);
 const inPosZ = op.inFloat("Z", 1);
-
 const positionIn = [inPosX, inPosY, inPosZ];
 op.setPortGroup("Position", positionIn);
 
@@ -141,12 +140,8 @@ const uniformLightPosition = new CGL.Uniform(shader, "3f", "lightPosition", vec3
 
 // * FRAMEBUFFER *
 let fb = null;
-let x, y;
 
-const IS_WEBGL_1 = cgl.glVersion == 1;
-
-if (IS_WEBGL_1)
-{
+function enableWebGL1Extensions() {
     cgl.gl.getExtension("OES_texture_float");
     cgl.gl.getExtension("OES_texture_float_linear");
     cgl.gl.getExtension("OES_texture_half_float");
@@ -157,18 +152,16 @@ if (IS_WEBGL_1)
     shader.enableExtension("GL_OES_texture_float_linear");
     shader.enableExtension("GL_OES_texture_half_float");
     shader.enableExtension("GL_OES_texture_half_float_linear");
-    /*
-    cgl.gl.getExtension("OES_standard_derivatives");
-    cgl.gl.getExtension('EXT_shader_texture_lod');
-    */
+}
+
+if (IS_WEBGL_1) {
+    enableWebGL1Extensions();
     fb = new CGL.Framebuffer(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
         "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
     });
-}
- else
-{
+} else {
     fb = new CGL.Framebuffer2(cgl, Number(inMapSize.get()), Number(inMapSize.get()), {
         "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
@@ -335,23 +328,17 @@ inCastShadow.onChange = function ()
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
 };
 
-const lightProjectionMatrix = mat4.create();
 
 function updateProjectionMatrix()
 {
     mat4.perspective(
         lightProjectionMatrix,
-        // CGL.DEG2RAD * inFOV.get(),
-        -2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
+        CGL.DEG2RAD * inLight.cosConeAngle.get(),
         1,
         inNear.get(),
         inFar.get()
     );
 }
-
-updateProjectionMatrix();
-
-inNear.onChange = inFar.onChange = updateProjectionMatrix;
 
 // * init vectors & matrices
 const lookAt = vec3.fromValues(0, 0, 0);
@@ -359,6 +346,7 @@ const up = vec3.fromValues(0, 1, 0);
 const camPos = vec3.create();
 
 const identityMat = mat4.create();
+const lightProjectionMatrix = mat4.create();
 const biasMatrix = mat4.fromValues(
     0.5, 0.0, 0.0, 0.0,
     0.0, 0.5, 0.0, 0.0,
@@ -366,8 +354,11 @@ const biasMatrix = mat4.fromValues(
     0.5, 0.5, 0.5, 1.0);
 const lightBiasMVPMatrix = mat4.create();
 
+inNear.onChange = inFar.onChange = updateProjectionMatrix;
 
-function renderBlur()
+updateProjectionMatrix();
+
+function blurShadowMap()
 {
     cgl.pushShader(blurShader);
 
@@ -397,18 +388,8 @@ function renderBlur()
 
 shader.offScreenPass = true;
 blurShader.offScreenPass = true;
-function renderShadowMap()
-{
-    // * set shader
 
-    cgl.pushShader(shader);
-
-    cgl.pushModelMatrix();
-    cgl.pushViewMatrix();
-    cgl.pushPMatrix();
-
-    fb.renderStart(cgl);
-
+function updateShadowMapMVPMatrices() {
     // * calculate matrices & camPos vector
     vec3.set(camPos, light.position[0], light.position[1], light.position[2]);
     mat4.copy(cgl.mMatrix, identityMat); // M
@@ -418,12 +399,27 @@ function renderShadowMap()
 
     mat4.copy(cgl.pMatrix, lightProjectionMatrix); // P
 
-    // * create light mvp bias matrix
+    // * calculate light mvp bias matrix
     mat4.mul(lightBiasMVPMatrix, cgl.pMatrix, cgl.vMatrix);
     mat4.mul(lightBiasMVPMatrix, cgl.mMatrix, lightBiasMVPMatrix);
     mat4.mul(lightBiasMVPMatrix, biasMatrix, lightBiasMVPMatrix);
+}
+
+function renderShadowMap()
+{
+    // * set shader
+    cgl.pushShader(shader);
+    // * use new MVP matrices
+    cgl.pushModelMatrix();
+    cgl.pushViewMatrix();
+    cgl.pushPMatrix();
+
+    fb.renderStart(cgl);
+
+    updateShadowMapMVPMatrices();
 
     cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT | cgl.gl.COLOR_BUFFER_BIT);
+
     outTrigger.trigger();
 
     fb.renderEnd(cgl);
@@ -464,6 +460,40 @@ function drawHelpers()
     }
 }
 
+function enableGlStateOffscreenPasses() {
+    //cgl.pushCullFace(true);
+    //cgl.pushCullFaceFacing(cgl.gl.FRONT);
+
+    cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
+    cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
+
+    cgl.pushBlend(false);
+    cgl.gl.colorMask(true, true, false, false);
+    cgl.frameStore.renderOffscreen = true;
+    cgl.frameStore.shadowPass = true;
+
+}
+
+function disableGlStateOffscreenPasses() {
+    cgl.gl.colorMask(true, true, true, true);
+
+
+    cgl.popBlend();
+
+    cgl.frameStore.shadowPass = false;
+    cgl.frameStore.renderOffscreen = false;
+}
+
+function updateLightParameters() {
+    // remove light from stack and readd it with shadow map & mvp matrix
+    light.lightMatrix = lightBiasMVPMatrix;
+    light.castShadow = inCastShadow.get();
+    light.shadowMap = fb.getTextureColor();
+    light.shadowMapDepth = fb.getTextureDepth();
+    light.normalOffset = inNormalOffset.get();
+    light.shadowBias = inBias.get();
+    light.shadowStrength = inShadowStrength.get();
+}
 inTrigger.onTriggered = function ()
 {
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
@@ -481,57 +511,36 @@ inTrigger.onTriggered = function ()
     drawHelpers();
 
     cgl.frameStore.lightStack.push(light);
-    if (inCastShadow.get())
-{
-        if (!cgl.shadowPass)
-{
-            if (fb)
-{
-                cgl.pushCullFace(true);
-                cgl.pushCullFaceFacing(cgl.gl.FRONT);
 
-                cgl.gl.enable(cgl.gl.POLYGON_OFFSET_FILL);
-                cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
-
-                cgl.frameStore.renderOffscreen = true;
-                cgl.shadowPass = true;
-
-                cgl.pushBlend(false);
-                cgl.gl.colorMask(true, true, false, false);
+    if (inCastShadow.get()) {
+        if (!cgl.frameStore.shadowPass) {
+                enableGlStateOffscreenPasses();
                 renderShadowMap();
 
-                cgl.gl.cullFace(cgl.gl.BACK);
-                cgl.gl.disable(cgl.gl.CULL_FACE);
+                // cull face needs to be popped & polygon offset disabled
+                // before blur pass to avoid culling the mesh (full framebuffer size rectangle)
+                // that the texture effect is rendered on
+                //cgl.popCullFaceFacing();
+                //cgl.popCullFace();
                 cgl.gl.disable(cgl.gl.POLYGON_OFFSET_FILL);
 
-                if (inBlur.get() > 0 && !IS_WEBGL_1) renderBlur();
-                cgl.gl.colorMask(true, true, true, true);
+                if (inBlur.get() > 0 && !IS_WEBGL_1) blurShadowMap();
 
-                cgl.popBlend();
-                cgl.popCullFaceFacing();
-                cgl.popCullFace();
-
-                cgl.shadowPass = false;
-                cgl.frameStore.renderOffscreen = false;
+                disableGlStateOffscreenPasses();
 
                 outTexture.set(null);
                 outTexture.set(fb.getTextureDepth());
-            }
         }
+
+        cgl.frameStore.lightStack.pop();
+
+        updateLightParameters();
+
+        cgl.frameStore.lightStack.push(light);
     }
 
-    // remove light from stack and readd it with shadow map & mvp matrix
-    cgl.frameStore.lightStack.pop();
 
-    light.lightMatrix = lightBiasMVPMatrix;
-    light.castShadow = inCastShadow.get();
-    light.shadowMap = fb.getTextureColor();
-    light.shadowMapDepth = fb.getTextureDepth();
-    light.normalOffset = inNormalOffset.get();
-    light.shadowBias = inBias.get();
-    light.shadowStrength = inShadowStrength.get();
 
-    cgl.frameStore.lightStack.push(light);
     outTrigger.trigger();
 
     cgl.frameStore.lightStack.pop();

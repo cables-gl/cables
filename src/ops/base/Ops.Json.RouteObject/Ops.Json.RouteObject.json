@@ -68,5 +68,26 @@
             }
         ],
         "name": "Ops.Json.RouteObject"
+    },
+    "summary": "Route an object to an output port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "index",
+                "text": "Port to route the input to"
+            },
+            {
+                "name": "Object in",
+                "text": "Object that is sent to output port"
+            },
+            {
+                "name": "default object",
+                "text": "Object to send out of all other ports"
+            }
+        ]
     }
 }

@@ -109,7 +109,7 @@ function updateOpacity()
         if(!textureOpacityUniform)textureOpacityUniform=new CGL.Uniform(shader,'t','texOpacity',1);
 
         alphaMaskSource.setUiAttribs({greyout:false});
-        discardTransPxl.setUiAttribs({greyout:false});
+        // discardTransPxl.setUiAttribs({greyout:false});
         texCoordAlpha.setUiAttribs({greyout:false});
     }
     else
@@ -119,7 +119,7 @@ function updateOpacity()
         textureOpacityUniform=null;
 
         alphaMaskSource.setUiAttribs({greyout:true});
-        discardTransPxl.setUiAttribs({greyout:true});
+        // discardTransPxl.setUiAttribs({greyout:true});
         texCoordAlpha.setUiAttribs({greyout:true});
     }
 

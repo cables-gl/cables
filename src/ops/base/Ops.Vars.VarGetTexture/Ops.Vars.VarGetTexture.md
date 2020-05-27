@@ -1,0 +1,1 @@
+Use to get a texture from an assigned variable with the Ops.Vars.VarSetTexture op

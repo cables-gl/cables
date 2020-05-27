@@ -1,6 +1,5 @@
 export function getShadowPassVertexShader()
 {
-    // TODO: convert to es5
     return `
 {{MODULES_HEAD}}
 IN vec3 vPosition;
@@ -20,6 +19,8 @@ void main() {
     texCoord=attrTexCoord;
     norm=attrVertNormal;
     vec4 pos = vec4(vPosition, 1.0);
+    mat4 mMatrix=modelMatrix;
+
 
     {{MODULE_VERTEX_POSITION}}
 
@@ -33,14 +34,13 @@ void main() {
 
 export function getShadowPassFragmentShader()
 {
-    return `// http://fabiensanglard.net/shadowmappingVSM/
-
+    /*
+    // http://fabiensanglard.net/shadowmappingVSM/
     #define SQRT3 1.73205081
     #define SQRT3DIV2 0.86602540378
     #define SQRT12DIV9 -0.38490017946
 
     // FOR MOMENT SHADOW MAPPING
-    /*
     const mat4 ENCODE_MATRIX = mat4(
     vec4(1.5, 0., SQRT3DIV2, 0.),
     vec4(0., 4., 0., 0.5),
@@ -48,7 +48,16 @@ export function getShadowPassFragmentShader()
     vec4(0., -4., 0., 0.5)
     );
     */
-
+    /*
+   dot(x, x) = x*x
+   Finally, it is usually beneficial to clamp the partial derivative portion of M 2
+   to avoid an excessively high variance if an occluder is almost parallel to the light direction.
+   Hardware-generated partial derivatives become somewhat unstable in these cases
+   and a correspondingly unstable variance can produce random, flashing pixels of light
+   in regions that should be fully shadowed.
+   https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
+   */
+    return `
    ${this.type === "point" ? "IN vec3 modelPos;" : ""}
    ${this.type === "point" ? "UNI vec3 inLightPosition;" : ""}
    ${this.type === "point" ? "UNI vec2 inNearFar;" : ""}
@@ -67,24 +76,11 @@ export function getShadowPassFragmentShader()
         float dx = dFdx(depth); // for biasing depth-per-pixel
         float dy = dFdy(depth); // for biasing depth-per-pixel
 
-        /*
-        dot(x, x) = x*x
-        Finally, it is usually beneficial to clamp the partial derivative portion of M 2
-        to avoid an excessively high variance if an occluder is almost parallel to the light direction.
-        Hardware-generated partial derivatives become somewhat unstable in these cases
-        and a correspondingly unstable variance can produce random, flashing pixels of light
-        in regions that should be fully shadowed.
-        https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
-        */
         float clampedDerivative = clamp(dot(dx, dx) + dot(dy, dy), 0., 1.);
         float moment2 = dot(depth, depth) + 0.25 * clampedDerivative;
 
 
-        outColor = vec4(
-        depth,
-        moment2,
-        depth,
-        moment2);
+        outColor = vec4(depth, moment2, depth, moment2);
     }
 `;
 }
@@ -168,7 +164,7 @@ void main() {
     color.xyz += texture(tex, coord5).xyz * 0.1383328848652136;   // 6/64
     color.xyz += texture(tex, coord6).xyz * 0.06927096443795711;  // 1/64
 
-    color.a = 1.; // for now, MSM needs the alpha channel
+    color.a = 1.;
 
     outColor = color;
 }

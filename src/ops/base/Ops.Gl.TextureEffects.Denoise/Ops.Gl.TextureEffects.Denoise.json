@@ -22,5 +22,26 @@
     "updated": 1542701451115,
     "authorName": "pandur",
     "id": "0abfea0f-1aa9-47bf-b540-f54f89a60a6c",
-    "created": 1542701445023
+    "created": 1542701445023,
+    "summary": "Denoise texture effect - used to smooth out noisy images",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in"
+            },
+            {
+                "name": "Exponent",
+                "text": "Denoise amount to apply"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    }
 }

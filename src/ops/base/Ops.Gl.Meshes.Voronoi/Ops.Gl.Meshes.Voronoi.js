@@ -63,27 +63,27 @@ var geom=null;
 
 function triangleArea(x0,y0,z0,x1,y1,z1,x2,y2,z2)
 {
-    // 1. calculate vectors e1 and e2 (which can be of 
+    // 1. calculate vectors e1 and e2 (which can be of
     // type Node, too) from N[0]->N[1] and N[0]->
 
     var e1x = x1 - x0;
     var e1y = y1 - y0;
     var e1z = z1 - z0;
-    
+
     var e2x = x2 - x0;
     var e2y = y2 - y0;
     var e2z = z2 - z0;
-    
+
     // 2. calculate e3 = e1 x e2 (cross product) :
-    
+
     var e3x = e1y*e2z - e1z*e2y;
     var e3y = e1z*e2x - e1x*e2z;
     var e3z = e1x*e2y - e1y*e2x;
-    
+
     // 3. the tria area is the half length of the  normal vector:
-    
+
     return 0.5*Math.sqrt(e3x*e3x + e3y*e3y + e3z*e3z);
-    
+
 }
 
 
@@ -149,17 +149,17 @@ function updateGeom()
             {
                 count++;
             }
-            
+
         }
     }
-    
+
     var filling=fill.get();
 
     if(filling<=0.0) verts=new Float32Array(count*3*3);
     else verts=new Float32Array(count*6*3);
-    
+
     // console.log(count*6);
-    
+
     count=0;
 
     for(var i=0;i<verts.length;i++)verts[i]=0;
@@ -182,7 +182,7 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         var mX=0;
         var mY=0;
         var check=0;
-        
+
         var w=pWidth.get();
         var h=pHeight.get();
 
@@ -191,7 +191,7 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         var maxDist=0;
         var ignoreCell=false;
 
-        if(ignoreBorderCells)    
+        if(ignoreBorderCells)
         {
             for(var j=0;j<cell.halfedges.length;j++)
             {
@@ -202,7 +202,7 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
                 if(Math.abs(edge.vb.y)>=pHeight.get()/2)ignoreCell=true;
             }
         }
-        
+
         var scale=1;
 
         for(var j=0;j<cell.halfedges.length;j++)
@@ -222,9 +222,9 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
 
 
         maxDist/=cell.halfedges.length;
-        
+
         // console.log(maxDist);
-    
+
         if(maxDist>maxSize.get())
         {
             var sizeDist=maxSizeEnd.get()-maxSize.get();
@@ -245,13 +245,13 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
 
             // if(invertFill)
                 // filli = (filling)* ( (maxDist/maxSize.get()) );
-            
+
             if(maxDist>maxSizeEnd.get())ignoreCell=true;
         }
 
         var filli=filling*scale;
 
-        
+
 // if(scale<1)scale=0;
 
         if(ignoreCell)
@@ -297,8 +297,8 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         {
             for(var j=0;j<cell.halfedges.length;j++)
             {
-                
-                
+
+
                 var edge=cell.halfedges[j].edge;
 
 
@@ -327,30 +327,30 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
                 }
                 else
                 {
-                    
+
                     if(invertFill)
                     {
                         verts[count++]=cell.site.x;
                         verts[count++]=cell.site.y;
                         verts[count++]=pExtrCenter.get();
-    
+
                         verts[count++]=edgevax-(edgevax-cell.site.x)*filli;
                         verts[count++]=edgevay-(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-    
+
                         verts[count++]=edgevbx-(edgevbx-cell.site.x)*filli;
                         verts[count++]=edgevby-(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
-                        
-                        
+
+
                         verts[count++]=cell.site.x;
                         verts[count++]=cell.site.y;
                         verts[count++]=pExtrCenter.get();
-    
+
                         verts[count++]=edgevax-(edgevax-cell.site.x)*filli;
                         verts[count++]=edgevay-(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-    
+
                         verts[count++]=edgevbx-(edgevbx-cell.site.x)*filli;
                         verts[count++]=edgevby-(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
@@ -361,11 +361,11 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
                         verts[count++]=cell.site.x+(edgevax-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-            
+
                         verts[count++]=edgevax;
                         verts[count++]=edgevay;
                         verts[count++]=0;
-        
+
                         verts[count++]=edgevbx;
                         verts[count++]=edgevby;
                         verts[count++]=0;
@@ -375,23 +375,23 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
                         verts[count++]=cell.site.x+(edgevbx-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevby-cell.site.y)*filli;
                         verts[count++]=0;
-            
+
                         verts[count++]=cell.site.x+(edgevax-cell.site.x)*filli;
                         verts[count++]=cell.site.y+(edgevay-cell.site.y)*filli;
                         verts[count++]=0;
-                        
+
                         verts[count++]=edgevbx;
                         verts[count++]=edgevby;
                         verts[count++]=0;
-                        
+
                     }
-                    
+
                 }
             }
         }
-        
 
-        
+
+
         // var md=99999;
 
         // for (var s = 0; s < sites.length; s++)
@@ -407,72 +407,72 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
         //         sites[ic].mdIndex=s;
         //     }
         // }
-        
+
         // md=md*md;
         // [vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
-        
+
     }
 
     // geom.unIndex();
-    
+
     if(pRender.get())
     {
         // tc.length=verts.length/3*2;
-        
-        
+
+
         if(indices.length<verts.length)
         {
             indices=new Uint16Array(verts.length/3);
             var c=0;
-            
+
             for(i=0;i<verts.length/3;i++)indices[i]=i;
-            
+
         }
-    
-    
+
+
         // indices.length=verts.length;
         // var c=0;
-        
+
         // for(i=0;i<verts.length/3;i++)indices.push(i);
-    
-    
-    
-    
+
+
+
+
         // for(i=0;i<verts.length/3;i++)
         // {
         //     tc[i*2+0]=0.0;
         //     tc[i*2+1]=0.0;
         // }
-    
+
         if(!geom)geom=new CGL.Geometry();
-    
+
         geom.vertices=verts;
         geom.verticesIndices=indices;
         // geom.texCoords=tc;
         if(inCalcNormals.get())
             geom.calculateNormals({"forceZUp":true});
-        
-        if(!mesh) 
+
+        if(!mesh)
         {
             mesh=new CGL.Mesh(op.patch.cgl,geom);
             console.log("new voronoi mesh");
         }
             // else mesh.setGeom(geom);
-            
+
         var attr=mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION,verts,3);
         attr.numItems=verts.length/3;
-        
+
         mesh.setVertexIndices(indices);
 
             // else mesh.updateVertices(geom);
 
         // console.log('verts ',verts.length);
         // mesh.pos=[sites[ic].x,sites[ic].y,0];
-        
+
     }
-    
+
     // console.log(verts.length);
-    
+
     outVerts.set(null);
     outVerts.set(verts);
 }
@@ -481,7 +481,7 @@ var ignoreBorderCells=pIgnoreBorderCells.get();
 render.onTriggered=function()
 {
     if(needsUpdate)updateGeom();
-    
+
     var shader=cgl.getShader();
     if(!shader)return;
     var oldPrim=shader.glPrimitive;
@@ -492,15 +492,15 @@ render.onTriggered=function()
 
         if(next.isLinked())
         {
-            cgl.pushModelMatrix();
-            mat4.translate(cgl.mvMatrix,cgl.mvMatrix, mesh.pos);
-            mat4.scale(cgl.mvMatrix,cgl.mvMatrix, mesh.scale);
+            // cgl.pushModelMatrix();
+            // mat4.translate(cgl.mMatrix,cgl.mMatrix, mesh.pos);
+            // mat4.scale(cgl.mMatrix,cgl.mMatrix, mesh.scale);
 
             next.trigger();
-            cgl.popModelMatrix();
+            // cgl.popModelMatrix();
         }
     // }
-    
+
 
 
 };

@@ -29,5 +29,34 @@
             }
         ],
         "name": "Ops.Admin.SocketClusterRecieveBoolean"
+    },
+    "summary": "Recieves boolean value from the socketcluster socket/topic",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "socket",
+                "text": "the socketcluster socket"
+            },
+            {
+                "name": "topic",
+                "text": "name of the topic"
+            },
+            {
+                "name": "client id",
+                "text": "sending client id"
+            },
+            {
+                "name": "data",
+                "text": "the number"
+            },
+            {
+                "name": "received",
+                "text": "received message"
+            }
+        ]
     }
 }

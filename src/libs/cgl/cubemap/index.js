@@ -191,4 +191,4 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.popViewMatrix();
 };
 
-export { Cubemap };
+CGL.Cubemap = Cubemap;

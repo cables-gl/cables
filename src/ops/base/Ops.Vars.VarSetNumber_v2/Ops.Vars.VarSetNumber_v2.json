@@ -41,7 +41,7 @@
     "youtubeids": [
         "sUR6b0zvuSY"
     ],
-    "coreLibs":["vargetset.js"],
+    "coreLibs":["vargetset"],
     "docs": {
         "ports": []
     }

@@ -1,8 +1,8 @@
 // inputs
 const parentPort = op.inObject('Link');
-const labelPort = op.inValueString('Text', 'Value');
+const labelPort = op.inString('Text', 'Value');
 const valuesPort = op.inArray('Values');
-const defaultValuePort = op.inValueString('Default', '');
+const defaultValuePort = op.inString('Default', '');
 const inGreyOut=op.inBool("Grey Out",false);
 const inVisible=op.inBool("Visible",true);
 

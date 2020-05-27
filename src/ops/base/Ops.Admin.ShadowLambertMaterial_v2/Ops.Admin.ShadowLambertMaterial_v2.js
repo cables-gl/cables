@@ -555,13 +555,12 @@ function updateLights() {
     }
 };
 
-execute.onTriggered=function()
-{
+execute.onTriggered = () => {
     if(!shader) {
         console.log("lambert has no shader...");
         return;
     }
-    if (cgl.shadowPass || cgl.frameStore.shadowPass) {
+    if (cgl.frameStore.shadowPass) {
         next.trigger();
     } else {
         cgl.setShader(shader);

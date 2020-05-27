@@ -399,18 +399,18 @@ inTrigger.onTriggered = function ()
 {
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
     // NOTE: how to handle this? fucks up the shadow map
-    renderHelpers();
+    if (!cgl.frameStore.shadowPass) renderHelpers();
 
 
     cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get())
 {
-        if (!cgl.shadowPass)
+        if (!cgl.frameStore.shadowPass)
 {
             if (fb)
 {
-                cgl.shadowPass = true;
+                cgl.frameStore.shadowPass = true;
                 cgl.frameStore.renderOffscreen = true;
 
 
@@ -423,7 +423,7 @@ inTrigger.onTriggered = function ()
                 cgl.gl.polygonOffset(inPolygonOffset.get(), inPolygonOffset.get());
 
 
-                cgl.gl.colorMask(true, true, false, false);
+                cgl.gl.colorMask(true, true, true, true);
                 renderShadowMap();
 
                 cgl.popBlend();
@@ -437,10 +437,10 @@ inTrigger.onTriggered = function ()
                 cgl.gl.colorMask(true, true, true, true);
 
                 cgl.frameStore.renderOffscreen = false;
-                cgl.shadowPass = false;
+                cgl.frameStore.shadowPass = false;
 
                 outTexture.set(null);
-                outTexture.set(fb.getTextureDepth());
+                outTexture.set(fb.getTextureColor());
 
 
                 // remove light from stack and readd it with shadow map & mvp matrix
