@@ -1,18 +1,3 @@
-function Light(config) {
-     this.type = config.type || "point";
-     this.color = config.color || [1, 1, 1];
-     this.specular = config.specular || [0, 0, 0];
-     this.position = config.position || null;
-     this.intensity = config.intensity || 1;
-     this.radius = config.radius || 1;
-     this.falloff = config.falloff || 1;
-     this.spotExponent = config.spotExponent || 1;
-     this.cosConeAngleInner = Math.cos(CGL.DEG2RAD*config.coneAngleInner) || 0; // spot light
-     this.cosConeAngle = config.cosConeAngle || 0;
-     this.conePointAt = config.conePointAt || [0, 0, 0];
-     return this;
-}
-
 const cgl = op.patch.cgl;
 
 const DEFAULT_FRAGMENT_HEAD = `
@@ -111,7 +96,7 @@ const createFragmentBody = (n, type) => {
 };
 
 function createDefaultShader() {
-    let vertexShader = attachments.simosphong_vert;
+    let vertexShader = attachments.phong_vert;
     let fragmentShader = attachments.phong_frag;
     fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_HEAD}", DEFAULT_FRAGMENT_HEAD);
     fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_BODY}", DEFAULT_FRAGMENT_BODY);
@@ -253,31 +238,22 @@ let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
 
 function createShader(lightStack) {
-    // let vertexShader = attachments.lambert_vert;
     let fragmentShader = attachments.phong_frag;
-
-    // let vertexHead = '';
-    // let vertexBody = '';
 
     let fragmentHead = '';
     let fragmentBody = '';
 
     for (let i = 0; i < lightStack.length; i += 1) {
         const light = lightStack[i];
-        // vertexHead = vertexHead.concat(createVertexHead(i, light.type));
-        // vertexBody = vertexBody.concat(createVertexBody(i, light.type));
 
         fragmentHead = fragmentHead.concat(createFragmentHead(i, light.type));
         fragmentBody = fragmentBody.concat(createFragmentBody(i, light.type));
     }
 
-    // vertexShader = vertexShader.replace("//{SHADOW_VERTEX_HEAD}", vertexHead);
-    // vertexShader = vertexShader.replace("//{SHADOW_VERTEX_BODY}", vertexBody);
-
     fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_HEAD}", fragmentHead);
     fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_BODY}", fragmentBody);
 
-    shader.setSource(attachments.simosphong_vert, fragmentShader);
+    shader.setSource(attachments.phong_vert, fragmentShader);
 
 }
 
@@ -627,28 +603,12 @@ function updateLights() {
     }
 };
 
-const initialLight = new Light({
-    type: "point",
-    color: [0.8, 0.8, 0.8],
-    specular: [1, 1, 1],
-    position: [0, 2, 2.75],
-    intensity: 1,
-    radius: 15,
-    falloff: 0.2,
-    cosConeAngleInner: null,
-    spotExponent: null,
-    coneAngle: null,
-    conePointAt: null,
-});
-
 const render = function() {
     if (!shader) {
         op.log("NO SHADER");
         return;
     }
-    // if (cgl.shadowPass) {
-    //    outTrigger.trigger();
-    //} else {
+
         cgl.pushShader(shader);
         shader.popTextures();
         shader.define("HAS_TEXTURES");

@@ -272,7 +272,6 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
 
 //{PHONG_FRAGMENT_HEAD}
 
-//{PHONG_FALLOFF_MODES}
 
 void main()
 {
