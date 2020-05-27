@@ -250,6 +250,7 @@ Shader.prototype.compile = function ()
             extensionString += "#extension " + this._extensions[i] + " : enable".endl();
 
     let definesStr = "";
+    if (this._defines.length) definesStr = "\n// cgl generated".endl();
     for (let i = 0; i < this._defines.length; i++)
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
@@ -342,6 +343,8 @@ Shader.prototype.compile = function ()
             .endl();
     }
 
+    let uniformsStrVert = "\n// cgl generated".endl();
+    let uniformsStrFrag = "\n// cgl generated".endl();
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType)
@@ -350,11 +353,11 @@ Shader.prototype.compile = function ()
 
             if (this._uniforms[i].shaderType == "vert")
                 if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                    vs += uniStr + "; // cgl generated".endl();
+                    uniformsStrVert += uniStr + ";".endl();
 
             if (this._uniforms[i].shaderType == "frag")
                 if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                    fs += uniStr + "; // cgl generated".endl();
+                    uniformsStrFrag += uniStr + ";".endl();
         }
     }
 
@@ -368,8 +371,8 @@ Shader.prototype.compile = function ()
         vs += "#define MOBILE".endl();
     }
 
-    vs = extensionString + vs + definesStr + this.srcVert;
-    fs = extensionString + fs + definesStr + this.srcFrag;
+    vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
+    fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
 
     let srcHeadVert = "";
     let srcHeadFrag = "";

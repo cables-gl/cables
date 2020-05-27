@@ -1,7 +1,6 @@
 {{MODULES_HEAD}}
 
 IN vec2 texCoord;
-UNI vec4 color;
 
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
