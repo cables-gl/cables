@@ -19,6 +19,8 @@ void main() {
     texCoord=attrTexCoord;
     norm=attrVertNormal;
     vec4 pos = vec4(vPosition, 1.0);
+    mat4 mMatrix=modelMatrix;
+
 
     {{MODULE_VERTEX_POSITION}}
 

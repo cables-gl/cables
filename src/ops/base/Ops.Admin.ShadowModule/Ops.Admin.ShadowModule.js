@@ -11,38 +11,57 @@ const inReceiveShadow = op.inBool("Receive Shadow", false);
 const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
-const inPoissonSpread = op.inFloat("Poisson Spread", 500);
+const inSpread = op.inInt("Sample Spread", 250);
+
 inSamples.setUiAttribs({ greyout: true });
-inPoissonSpread.setUiAttribs({ greyout: true });
+inSpread.setUiAttribs({ greyout: true });
+
+if (inReceiveShadow.get()) {
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
+    }
+    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default") {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+    }
+}
+
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
-op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inPoissonSpread]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
 inReceiveShadow.onChange = () => {
     inAlgorithm.setUiAttribs({ greyout: !inReceiveShadow.get() });
-    inSamples.setUiAttribs({ greyout: !inReceiveShadow.get() });
+    setAlgorithmGreyouts();
     if (shader) shader.toggleDefine("SHADOW_MAP", inReceiveShadow.get());
 }
 
 inAlgorithm.onChange = () => {
     if (!shader) return;
     const selectedAlgorithm = inAlgorithm.get();
+    shader.define("MODE_" + selectedAlgorithm.toUpperCase());
 
-    algorithms.forEach((algorithm) => {
-        if (selectedAlgorithm === algorithm) {
-            shader.define("MODE_" + algorithm.toUpperCase());
+    algorithms
+        .filter(alg => alg !== selectedAlgorithm)
+        .forEach(alg => shader.removeDefine("MODE_" + alg.toUpperCase()));
 
-            if (selectedAlgorithm !== "Default" && selectedAlgorithm !== "VSM") {
-                inSamples.setUiAttribs({ greyout: false });
-                if (selectedAlgorithm === "Poisson") inPoissonSpread.setUiAttribs({ greyout: false });
-                else inPoissonSpread.setUiAttribs({ greyout: true });
-            } else {
-                inSamples.setUiAttribs({ greyout: true });
-                inPoissonSpread.setUiAttribs({ greyout: true });
-            }
-        }
-        else shader.removeDefine("MODE_" + algorithm.toUpperCase());
-    });
+    setAlgorithmGreyouts();
+}
 
+function setAlgorithmGreyouts() {
+    if (!inReceiveShadow.get()) {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+        return;
+    }
+
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
+    } else {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
+    }
 }
 
 inSamples.onChange = () => {
@@ -90,10 +109,11 @@ const createFragmentHead = (n, type) => {
     return `
     // FRAGMENT HEAD type: ${type} count: ${n}
     UNI ModLight light${n};
+    IN vec4 modelPosMOD${n};
     ${type !== "point" ? `
     #ifdef SHADOW_MAP
         IN vec4 shadowCoord${n};
-    #endif` :`IN vec4 modelPosMOD${n};`}
+    #endif` :``}
 
     ${type === "point" ?  `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
     `;
@@ -101,7 +121,7 @@ const createFragmentHead = (n, type) => {
 
 const createFragmentBody = (n, type, shouldCastShadow) => {
     if (type === "ambient") return '';
-    let fragmentCode = `// VERTEX HEAD type: ${type} count: ${n}`;
+    let fragmentCode = `// FRAGMENT BODY type: ${type} count: ${n}`;
 
     if (inReceiveShadow.get()) {
         if (type === "spot") {
@@ -110,12 +130,14 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
         if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-
+            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
             vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
             float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
             float shadowStrength${n} = light${n}.shadowStrength;
             vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
+            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+
             #ifdef MODE_DEFAULT
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
@@ -176,7 +198,7 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             fragmentCode = fragmentCode.concat(`
     #ifdef SHADOW_MAP
         if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirection${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
+            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
             float shadowStrength${n} = light${n}.shadowStrength;
 
             float cameraNear${n} = light${n}.shadowProperties.NEAR; // uniforms
@@ -185,9 +207,10 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
             float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - light${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
 
             float shadowMapDepth${n} = fromLightToFrag${n};
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
-
-            vec2 shadowMapSample${n} = textureCube(shadowMap${n}, -lightDirection${n}).rg;
+            // float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
+            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+            vec2 shadowMapSample${n} = textureCube(shadowMap${n}, -lightDirectionMOD${n}).rg;
 
 
 
@@ -196,14 +219,23 @@ const createFragmentBody = (n, type, shouldCastShadow) => {
                  col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
             #endif
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPointPCF(shadowMap${n}, lightDirection${n}, shadowMapDepth${n}, cameraNear${n}, cameraFar${n}, bias${n}, shadowStrength${n});
+                 col.rgb *= ShadowFactorPointPCF(
+                    shadowMap${n},
+                    lightDirectionMOD${n},
+                    shadowMapDepth${n},
+                    cameraNear${n},
+                    cameraFar${n},
+                    bias${n},
+                    shadowStrength${n},
+                    modelPosMOD${n}.xyz
+                );
             #endif
             #ifdef MODE_POISSON
                 #ifdef WEBGL1
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= ShadowFactorPointPoisson(shadowMap${n}, lightDirection${n}, shadowMapDepth${n}, bias${n});
+                 col.rgb *= ShadowFactorPointPoisson(shadowMap${n}, lightDirectionMOD${n}, shadowMapDepth${n}, bias${n});
             #endif
 
             #ifdef MODE_VSM
@@ -261,7 +293,7 @@ let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
 
 let lightUniforms = [];
-let uniformPoissonSpread = null;
+let uniformSpread = null;
 function createUniforms(lightsCount) {
     if (!shader) return;
     lightUniforms = [];
@@ -284,7 +316,7 @@ function createUniforms(lightsCount) {
             };
         }
     }
-    if (!uniformPoissonSpread) uniformPoissonSpread = new CGL.Uniform(shader, 'f', "poissonSpread", inPoissonSpread);
+    if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, 'f', "sampleSpread", inSpread);
 }
 
 function setUniforms(lightStack) {
