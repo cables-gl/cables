@@ -257,7 +257,7 @@ float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosCo
 
 
 
-//{PHONG_FRAGMENT_HEAD}
+{{PHONG_FRAGMENT_HEAD}}
 
 
 void main()
@@ -291,8 +291,7 @@ void main()
         #endif
     #endif
 
-    //{PHONG_FRAGMENT_BODY}
-
+    {{PHONG_FRAGMENT_BODY}}
 
     #ifdef ENABLE_FRESNEL
         calculatedColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);

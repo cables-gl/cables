@@ -219,6 +219,7 @@ Light.prototype.setFramebufferSize = function (size)
 
 Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 {
+    if (this.type === "area") return;
     if (this.hasShadowMapShader()) return;
 
     this._shaderShadowMap.shader = new CGL.Shader(this._cgl, "shadowPass" + this.type.charAt(0).toUpperCase() + this.type.slice(1));
@@ -255,6 +256,7 @@ Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 Light.prototype.createBlurEffect = function (options)
 {
     if (this.type === "point") return;
+    if (this.type === "area") return;
     if (this.hasBlurEffect()) this._effectBlur.delete();
 
     this._effectBlur = new CGL.TextureEffect(
@@ -273,6 +275,7 @@ Light.prototype.createBlurEffect = function (options)
 Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 {
     if (this.hasBlurShader()) return;
+    if (this.type === "area") return;
     if (this.type === "point") return; // TODO: add cubemap convolution
 
     const vShader = vertexShader || this.getBlurPassVertexShader();
@@ -288,6 +291,7 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
+    if (this.type === "area") return;
     if (this._cgl.frameStore.shadowPass) return;
 
     this._cgl.pushCullFace(true);
@@ -331,6 +335,7 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
 
 Light.prototype.renderShadowPass = function (renderFunction)
 {
+    if (this.type === "area") return;
     if (this.type === "point")
     {
         this._shaderShadowMap.uniforms.nearFar.setValue(this.nearFar);
@@ -384,6 +389,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
 Light.prototype.renderBlurPass = function (blurAmount)
 {
+    if (this.type === "area") return;
     this._cgl.pushShader(this._shaderBlur.shader);
 
     this._effectBlur.setSourceTexture(this._framebuffer.getTextureColor()); // take shadow map as source

@@ -30,11 +30,9 @@ const snippets = {
     ambient: attachments.snippet_body_ambient_frag,
     directional: attachments.snippet_body_directional_frag,
 }
-const createFragmentHead = (n, type) => {
-    return attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
-};
-
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
+
+const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader() {
@@ -176,8 +174,10 @@ const shader = new CGL.Shader(cgl,"simosphong");
 shader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 let recompileShader = false;
-
 shader.define("FALLOFF_MODE_A");
+
+const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");
+const FRAGMENT_BODY_REGEX = new RegExp("{{PHONG_FRAGMENT_BODY}}", "g");
 
 function createShader(lightStack) {
     let fragmentShader = attachments.phong_frag;
@@ -188,12 +188,12 @@ function createShader(lightStack) {
     for (let i = 0; i < lightStack.length; i += 1) {
         const light = lightStack[i];
 
-        fragmentHead = fragmentHead.concat(createFragmentHead(i, light.type));
+        fragmentHead = fragmentHead.concat(createFragmentHead(i));
         fragmentBody = fragmentBody.concat(createFragmentBody(i, light.type));
     }
 
-    fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_HEAD}", fragmentHead);
-    fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_BODY}", fragmentBody);
+    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
+    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(attachments.phong_vert, fragmentShader);
 
