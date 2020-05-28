@@ -91,19 +91,6 @@ float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator 
 float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
 float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
 
-/* vec4 CalculateDiffuseColor(Material material, Light light, vec3 lightDirection, vec3 viewDirection, vec3 normal) {
-    #ifndef ENABLE_OREN_NAYAR_DIFFUSE
-        float lambertian = clamp(dot(lightDirection, normal), 0., 1.);
-    #endif
-
-    #ifdef ENABLE_OREN_NAYAR_DIFFUSE
-        float lambertian = CalculateOrenNayar(lightDirection, viewDirection, normal);
-    #endif
-
-    vec3 diffuseColor = lambertian*baseColor*light.color;
-    return vec4(diffuseColor, lambertian);
-} */
-
 #ifdef FALLOFF_MODE_A
     float CalculateFalloff(vec3 lightDirection, float falloff) {
         float distanceSquared = dot(lightDirection, lightDirection);
