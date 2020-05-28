@@ -38,8 +38,8 @@ const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX
 function createDefaultShader() {
     let vertexShader = attachments.phong_vert;
     let fragmentShader = attachments.phong_frag;
-    fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_HEAD}", DEFAULT_FRAGMENT_HEAD);
-    fragmentShader = fragmentShader.replace("//{PHONG_FRAGMENT_BODY}", DEFAULT_FRAGMENT_BODY);
+    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, DEFAULT_FRAGMENT_HEAD);
+    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, DEFAULT_FRAGMENT_BODY);
     shader.setSource(vertexShader, fragmentShader);
 }
 
