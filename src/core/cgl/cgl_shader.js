@@ -241,22 +241,21 @@ Shader.prototype._addLibs = function (src)
 
 Shader.prototype.compile = function ()
 {
-    let i = 0;
-
     profileData.profileShaderCompiles++;
     profileData.profileShaderCompileName = this._name;
 
     let extensionString = "";
     if (this._extensions)
-        for (i = 0; i < this._extensions.length; i++)
+        for (let i = 0; i < this._extensions.length; i++)
             extensionString += "#extension " + this._extensions[i] + " : enable".endl();
 
     let definesStr = "";
-    for (i = 0; i < this._defines.length; i++)
+    if (this._defines.length) definesStr = "\n// cgl generated".endl();
+    for (let i = 0; i < this._defines.length; i++)
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
     if (this._uniforms)
-        for (i = 0; i < this._uniforms.length; i++)
+        for (let i = 0; i < this._uniforms.length; i++)
             this._uniforms[i].resetLoc();
 
     if (this.hasTextureUniforms()) definesStr += "#define HAS_TEXTURES".endl();
@@ -284,7 +283,7 @@ Shader.prototype.compile = function ()
             let count = 0;
             drawBufferStr += "vec4 outColor;".endl();
 
-            for (i = 0; i < this._drawBuffers.length; i++)
+            for (let i = 0; i < this._drawBuffers.length; i++)
             {
                 if (count == 0) drawBufferStr += "#define gl_FragColor outColor" + i + "".endl();
                 drawBufferStr += "layout(location = " + i + ") out vec4 outColor" + i + ";".endl();
@@ -344,6 +343,25 @@ Shader.prototype.compile = function ()
             .endl();
     }
 
+    let uniformsStrVert = "\n// cgl generated".endl();
+    let uniformsStrFrag = "\n// cgl generated".endl();
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i].shaderType)
+        {
+            const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+
+            if (this._uniforms[i].shaderType == "vert")
+                if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrVert += uniStr + ";".endl();
+
+            if (this._uniforms[i].shaderType == "frag")
+                if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrFrag += uniStr + ";".endl();
+        }
+    }
+
+
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
 
@@ -353,8 +371,8 @@ Shader.prototype.compile = function ()
         vs += "#define MOBILE".endl();
     }
 
-    vs = extensionString + vs + definesStr + this.srcVert;
-    fs = extensionString + fs + definesStr + this.srcFrag;
+    vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
+    fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
 
     let srcHeadVert = "";
     let srcHeadFrag = "";
@@ -371,7 +389,7 @@ Shader.prototype.compile = function ()
 
     let addedAttributes = false;
 
-    for (i = 0; i < this._moduleNames.length; i++)
+    for (let i = 0; i < this._moduleNames.length; i++)
     {
         let srcVert = "";
         let srcFrag = "";
@@ -467,7 +485,7 @@ Shader.prototype.compile = function ()
 
         this._projMatrixUniform = null;
 
-        for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].resetLoc();
+        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].resetLoc();
     }
 
     this.finalShaderFrag = fs;
@@ -774,19 +792,41 @@ Shader.prototype.removeUniform = function (name)
     this.setWhyCompile("remove uniform " + name);
 };
 
-/**
- * add a uniform to the shader
- * @param {Uniform} uniform
- * @memberof Shader
- * @instance
- * @function
- */
-Shader.prototype.addUniform = function (uni)
+
+Shader.prototype._addUniform = function (uni)
 {
     this._uniforms.push(uni);
     this.setWhyCompile("add uniform " + name);
     this._needsRecompile = true;
 };
+
+/**
+ * add a uniform to the shader
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformFrag
+ */
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "frag";
+};
+
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "vert";
+};
+
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "both";
+};
+
 
 Shader.prototype._createProgram = function (vstr, fstr)
 {

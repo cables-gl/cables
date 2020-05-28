@@ -25,7 +25,8 @@ const b=op.inValueSlider("b",Math.random());
 const a=op.inValueSlider("a",1);
 r.setUiAttribs({"colorPick":true});
 
-const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
+// const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
+shader.addUniformFrag("4f","color",r,g,b,a);
 
 // diffuse outTexture
 
@@ -54,10 +55,10 @@ const diffuseRepeatY=op.inValue("diffuseRepeatY",1);
 const diffuseOffsetX=op.inValue("Tex Offset X",0);
 const diffuseOffsetY=op.inValue("Tex Offset Y",0);
 
-const diffuseRepeatXUniform=new CGL.Uniform(shader,'f','diffuseRepeatX',diffuseRepeatX);
-const diffuseRepeatYUniform=new CGL.Uniform(shader,'f','diffuseRepeatY',diffuseRepeatY);
-const diffuseOffsetXUniform=new CGL.Uniform(shader,'f','texOffsetX',diffuseOffsetX);
-const diffuseOffsetYUniform=new CGL.Uniform(shader,'f','texOffsetY',diffuseOffsetY);
+shader.addUniformFrag('f','diffuseRepeatX',diffuseRepeatX);
+shader.addUniformFrag('f','diffuseRepeatY',diffuseRepeatY);
+shader.addUniformFrag('f','texOffsetX',diffuseOffsetX);
+shader.addUniformFrag('f','texOffsetY',diffuseOffsetY);
 
 const doBillboard=op.inValueBool("billboard",false);
 
