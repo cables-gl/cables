@@ -40,6 +40,7 @@ UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 OUT mat3 normalMatrix;
+OUT mat4 mvMatrix;
 // UNI mat4 normalMatrix;
 
 
@@ -71,7 +72,7 @@ void main()
 {
     mat4 mMatrix=modelMatrix;
     vec4 pos=vec4(vPosition,  1.0);
-    mat4 mvMatrix;
+
     texCoord=attrTexCoord;
     texCoord.y = 1. - texCoord.y;
     norm=attrVertNormal;
@@ -102,15 +103,15 @@ void main()
 
    normInterpolated = vec3(normalMatrix*norm);
 
-        vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
-        vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
-        vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
+    vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
+    vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
+    vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
 
-        // re orthogonalization for smoother normals
-        tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
-        bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
+    // re orthogonalization for smoother normals
+    tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
+    bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
 
-        TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
+    TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
 
 
     fragPos = vec3((mMatrix) * pos);

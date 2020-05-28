@@ -29,6 +29,7 @@ const snippets = {
     spot: attachments.snippet_body_spot_frag,
     ambient: attachments.snippet_body_ambient_frag,
     directional: attachments.snippet_body_directional_frag,
+    area: attachments.snippet_body_area_frag,
 }
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
@@ -416,7 +417,9 @@ function createUniforms(lightsCount) {
 
                 conePointAt: new CGL.Uniform(shader,'3f','phongLight' + i + '.conePointAt', vec3.create()),
                 spotProperties: new CGL.Uniform(shader, '3f', 'phongLight' + i + '.spotProperties', [0,0,0,0]),
-
+                right: new CGL.Uniform(shader, "3f", "phongLight" + i + ".right", [0, 1, 0]),
+                width: new CGL.Uniform(shader, "f", "phongLight" + i + ".width", 2),
+                height: new CGL.Uniform(shader, "f", "phongLight" + i + ".height", 2),
                 // shadowProperties: new CGL.Uniform(shader, '4f', 'phongLight' + i + '.shadowProperties', [0,0,0,0]),
                 // shadowStrength: new CGL.Uniform(shader, 'f', 'phongLight' + i + '.shadowStrength', 1),
 
@@ -456,6 +459,10 @@ function setUniforms(lightStack) {
         lightUniforms[i].position.setValue(light.position);
         lightUniforms[i].color.setValue(light.color);
         lightUniforms[i].specular.setValue(light.specular);
+
+        lightUniforms[i].right.setValue(light.right);
+        lightUniforms[i].width.setValue(light.width);
+        lightUniforms[i].height.setValue(light.height);
 
         lightUniforms[i].lightProperties.setValue([
             light.intensity,

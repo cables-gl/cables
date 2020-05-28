@@ -15,6 +15,7 @@ IN vec3 fragPos;
 IN vec3 mvNormal;
 IN vec3 mvTangent;
 IN vec3 mvBiTangent;
+IN mat4 mvMatrix;
 
 UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
@@ -37,6 +38,10 @@ struct Light {
     #define SPOTEXPONENT z
     vec3 spotProperties;
 
+    // * AREA LIGHT * //
+    vec3 right;
+    float width;
+    float height;
     #define INTENSITY x
     #define ATTENUATION y
     #define FALLOFF z
@@ -88,8 +93,37 @@ struct Light {
 {{MODULES_HEAD}}
 
 float when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
+float when_lt(float x, float y) { return max(sign(y - x), 0.0); }
 float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
 float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
+float when_ge(float x, float y) { return 1.0 - when_lt(x, y); }
+float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
+
+float CalculateFalloffArea(float distance, float falloff) {
+    float distanceSquared = distance * distance;
+    float factor = distanceSquared * falloff;
+    float smoothFactor = clamp(1. - factor * factor, 0., 1.);
+    float attenuation = smoothFactor * smoothFactor;
+
+    return attenuation * 1. / max(distanceSquared, 0.00001);
+}
+
+vec3 ProjectOnPlane(in vec3 p, in vec3 pc, in vec3 pn)
+{
+    float distance = dot(pn, p-pc);
+    return p - distance*pn;
+}
+
+int SideOfPlane(in vec3 p, in vec3 pc, in vec3 pn) {
+    //return int(when_ge(dot(p - pc, pn), 0.));
+    if (dot(p - pc, pn)>=0.0) return 1;
+    return 0;
+}
+
+vec3 LinePlaneIntersect(in vec3 lp, in vec3 lv, in vec3 pc, in vec3 pn){
+   return lp + lv * (dot(pn, pc - lp) / dot(pn, lv));
+}
+
 
 #ifdef FALLOFF_MODE_A
     float CalculateFalloff(vec3 lightDirection, float falloff) {

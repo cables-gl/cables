@@ -37,6 +37,7 @@ function Light(cgl, config)
     // * area light specifig config
     this.width = config.width || 5;
     this.height = config.height || 5;
+    this.right = config.right || [0, 1, 0];
 
     // * shadow specific config
     this.castShadow = config.castShadow || false;
