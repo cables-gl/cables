@@ -23,77 +23,19 @@ vec3 combinedColor0 = (diffuseColor0 + specularColor0);
 calculatedColor += combinedColor0;
 `;
 
+const attachmentFragmentHead = attachments.snippet_head_frag;
+const snippets = {
+    point: attachments.snippet_body_point_frag,
+    spot: attachments.snippet_body_spot_frag,
+    ambient: attachments.snippet_body_ambient_frag,
+    directional: attachments.snippet_body_directional_frag,
+}
 const createFragmentHead = (n, type) => {
-    return `
-    UNI Light phongLight${n};
-    `;
+    return attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 };
 
-const createFragmentBody = (n, type) => {
-    if (type === "ambient") {
-        return `
-    // ${type.toUpperCase()} LIGHT
-    vec3 diffuseColor${n} = phongLight${n}.lightProperties.INTENSITY*phongLight${n}.color;
-    calculatedColor += diffuseColor${n};
-    `;
-    }
-
-    let fragmentCode = `
-    // ${type.toUpperCase()} LIGHT
-    vec3 phongLightDirection${n} = ${type !== "directional" ?
-        `normalize(phongLight${n}.position - fragPos.xyz)`
-        : `normalize(phongLight${n}.position)`};
-
-    float phongLambert${n} = 1.; // inout variable
-
-    vec3 lightColor${n} = phongLight${n}.color;
-    vec3 lightSpecular${n} = phongLight${n}.specular;
-
-    #ifdef HAS_TEXTURES
-        #ifdef HAS_TEXTURE_AO
-            lightColor${n} *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
-        #endif
-
-        #ifdef HAS_TEXTURE_SPECULAR
-            lightSpecular${n} *= mix(1., texture(texSpecular, texCoord).r, inTextureIntensities.SPECULAR);
-        #endif
-    #endif
-
-    vec3 diffuseColor${n} = CalculateDiffuseColor(phongLightDirection${n}, normal, lightColor${n}, baseColor, phongLambert${n});
-    vec3 specularColor${n} = CalculateSpecularColor(
-        lightSpecular${n},
-        inMaterialProperties.SPECULAR_AMT,
-        inMaterialProperties.SHININESS,
-        phongLightDirection${n},
-        viewDirection,
-        normal,
-        phongLambert${n}
-    );
-
-    // vec3 combinedColor${n} = light.intensity * (diffuseColor + specularColor);
-    vec3 combinedColor${n} = (diffuseColor${n} + specularColor${n});
-    ${type === "spot" ? `
-        float spotIntensity${n} = CalculateSpotLightEffect(
-            phongLight${n}.position, phongLight${n}.conePointAt, phongLight${n}.spotProperties.COSCONEANGLE,
-            phongLight${n}.spotProperties.COSCONEANGLEINNER, phongLight${n}.spotProperties.SPOTEXPONENT,
-            phongLightDirection${n}
-        );
-        combinedColor${n} *= spotIntensity${n};
-    ` : ''}
-
-    ${type !== "directional" ? `
-    vec3 lightModelDiff${n} = phongLight${n}.position - fragPos.xyz;
-    combinedColor${n} *= CalculateFalloff(phongLightDirection${n}, phongLight${n}.lightProperties.FALLOFF);
-    ` : ''}
-    `;
-
-    fragmentCode = fragmentCode.concat(`
-    combinedColor${n} *= phongLight${n}.lightProperties.INTENSITY;
-    calculatedColor += combinedColor${n};
-    `);
-
-    return fragmentCode;
-};
+const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
+const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader() {
     let vertexShader = attachments.phong_vert;

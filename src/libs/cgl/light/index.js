@@ -34,6 +34,10 @@ function Light(cgl, config)
     this.cosConeAngle = config.cosConeAngle || 0;
     this.conePointAt = config.conePointAt || [0, 0, 0];
 
+    // * area light specifig config
+    this.width = config.width || 5;
+    this.height = config.height || 5;
+
     // * shadow specific config
     this.castShadow = config.castShadow || false;
     this.nearFar = config.nearFar || [0, 0];
@@ -93,12 +97,16 @@ Light.prototype.getModifiableParameters = function ()
         "cosConeAngleInner",
         "cosConeAngle",
         "conePointAt",
+        // area light
+        "width",
+        "height"
     ];
 };
 
 Light.prototype.createProjectionMatrix = Light.prototype.updateProjectionMatrix = function (lrBottomTop, near, far, angle)
 {
-    if (this.type === "spot")
+    if (this.type === "area") return;
+    else if (this.type === "spot")
     {
         mat4.perspective(this._shaderShadowMap.matrices.projMatrix, -2 * CGL.DEG2RAD * angle, 1, near, far); // * angle in degrees
     }
