@@ -1,10 +1,11 @@
+const refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
+
 var audioCtx=CABLES.WEBAUDIO.createAudioContext(op);
 const inFftSize = op.inSwitch("FFT size",[64,128,256,512,1024],256);
 const analyser = audioCtx.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
 
-const refresh=op.addInPort(new CABLES.Port(op,"refresh",CABLES.OP_PORT_TYPE_FUNCTION));
 const audioIn = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", analyser);
 const anData=op.inValueSelect("Data",["Frequency","Time Domain"],"Frequency");
 

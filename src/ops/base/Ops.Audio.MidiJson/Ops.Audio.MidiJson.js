@@ -3,6 +3,7 @@ var inTime=op.inValue("Time");
 
 const outBeat=op.outValue("Beat");
 
+var outTrackNames=op.outArray("Track Names");
 var outNames=op.outArray("Names");
 var outProgress=op.outArray("Progress");
 var outVelocity=op.outArray("Velocity");
@@ -35,6 +36,17 @@ inObj.onChange=function()
     if(!midi.tracks)return;
 
     outNumTracks.set(midi.tracks.length);
+
+
+    var arrTrackNames=[];
+    for(let i=0;i<midi.tracks.length;i++)
+    {
+        arrTrackNames[i]=midi.tracks[i].name||"?";
+    }
+
+    outTrackNames.set(null);
+    outTrackNames.set(arrTrackNames);
+
 
     arrNames.length=midi.tracks.length;
 

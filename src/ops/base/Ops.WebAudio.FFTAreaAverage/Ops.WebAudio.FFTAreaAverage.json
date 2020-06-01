@@ -2,12 +2,12 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
-                "name": "FFT Array"
-            },
-            {
                 "type": "1",
                 "name": "refresh"
+            },
+            {
+                "type": "3",
+                "name": "FFT Array"
             },
             {
                 "type": "0",
