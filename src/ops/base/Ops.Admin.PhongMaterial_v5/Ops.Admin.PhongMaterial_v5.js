@@ -477,6 +477,8 @@ function setUniforms(lightStack) {
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
+        lightUniforms[i].width.setValue(light.width);
+        lightUniforms[i].height.setValue(light.height);
     }
 }
 

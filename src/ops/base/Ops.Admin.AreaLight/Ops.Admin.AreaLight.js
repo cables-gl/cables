@@ -44,7 +44,7 @@ inSpecularR.setUiAttribs({ colorPick: true });
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inRightX.onChange = inRightY.onChange = inRightZ.onChange
 = inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inIntensity.onChange = inFalloff.onChange =  updateLightParameters;
+= inIntensity.onChange = inFalloff.onChange = inWidth.onChange = inHeight.onChange = updateLightParameters;
 
 let updateLight = false;
 

@@ -146,7 +146,7 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.AreaLight"
+        "name": "Ops.Admin.AreaLight"
     },
     "coreLibs": [
         "cgl_light"

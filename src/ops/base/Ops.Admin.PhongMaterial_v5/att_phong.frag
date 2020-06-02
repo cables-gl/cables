@@ -110,7 +110,7 @@ float CalculateFalloffArea(float distance, float falloff) {
 
 vec3 ProjectOnPlane(in vec3 p, in vec3 pc, in vec3 pn)
 {
-    float distance = dot(pn, p - pc);
+    float distance = dot(pn, -1. * (p - pc));
     return p - distance * pn;
 }
 

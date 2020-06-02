@@ -9,19 +9,19 @@
     inout vec4 diffuse,
     inout vec4 specular
 ) { */
-    vec3 right = normalize((mvMatrix * vec4(phongLight{{LIGHT_INDEX}}.right, 1.)).xyz);
+    vec3 right = normalize((vec4(phongLight{{LIGHT_INDEX}}.right, 1.)).xyz);
     //normalize(vec3(mvMatrix * phongLight{{LIGHT_INDEX}}.right));
     // vec3 pnormal = normalize(phongLight{{LIGHT_INDEX}}.conePointAt);
     vec3 pnormal = normalize(phongLight{{LIGHT_INDEX}}.position - phongLight{{LIGHT_INDEX}}.conePointAt);
-    vec3 up = normalize(cross(right,pnormal));
+    vec3 up = normalize(cross(right, pnormal));
 
     //width and height of the area light:
     float width = phongLight{{LIGHT_INDEX}}.width;
     float height = phongLight{{LIGHT_INDEX}}.height;
 
     //project onto plane and calculate direction from center to the projection.
-    vec3 projection = ProjectOnPlane(-viewDirection, vec3(phongLight{{LIGHT_INDEX}}.position), pnormal);// projection in plane
-    vec3 dir = projection - vec3(phongLight{{LIGHT_INDEX}}.position);
+    vec3 projection = ProjectOnPlane(viewDirection, vec3(phongLight{{LIGHT_INDEX}}.position), pnormal);// projection in plane
+    vec3 dir =  phongLight{{LIGHT_INDEX}}.position - projection;
 
     //calculate distance from area:
     vec2 diagonal = vec2(dot(dir, right), dot(dir, up));
@@ -31,10 +31,10 @@
     );
     vec3 nearestPointInside = phongLight{{LIGHT_INDEX}}.position + (right * nearest2D.x + up * nearest2D.y);
 
-    float dist = distance(viewDirection, nearestPointInside);//real distance to area rectangle
+    float dist = distance(fragPos, nearestPointInside);//real distance to area rectangle
 
     vec3 L = normalize(nearestPointInside - viewDirection);
-    float attenuation = 1.; // CalculateFalloffArea(dist, phongLight{{LIGHT_INDEX}}.lightProperties.FALLOFF);
+    float attenuation = CalculateFalloffArea(dist, phongLight{{LIGHT_INDEX}}.lightProperties.FALLOFF);
 
     float nDotL = dot(pnormal, L); // actually -L
     vec3 diffuseColor{{LIGHT_INDEX}} = vec3(1.);
@@ -43,7 +43,7 @@
     // looking at the plane
     if (nDotL > 0.0 && SideOfPlane(viewDirection, phongLight{{LIGHT_INDEX}}.position, pnormal) == 1) {
         //shoot a ray to calculate specular:
-        vec3 R = reflect(normalize(viewDirection), normal);
+        vec3 R = reflect(normalize(-viewDirection), normal);
         vec3 E = LinePlaneIntersect(
             viewDirection,
             R,
@@ -62,13 +62,13 @@
             );
     	    float specFactor = 1.0 - clamp(length(nearestSpec2D - dirSpec2D) * inMaterialProperties.SHININESS, 0.0, 1.0);
             specularColor{{LIGHT_INDEX}} = phongLight{{LIGHT_INDEX}}.specular * baseColor * attenuation * specFactor * specAngle;
-            calculatedColor += vec3(0.,1.,0.);
+            // calculatedColor += vec3(0.,1.,0.);
         }
         // diffuseColor{{LIGHT_INDEX}} = phongLight{{LIGHT_INDEX}}.color * attenuation * nDotL;
     }
 
     vec3 combinedColor{{LIGHT_INDEX}} = (diffuseColor{{LIGHT_INDEX}} + specularColor{{LIGHT_INDEX}});
-    calculatedColor += combinedColor{{LIGHT_INDEX}}; // combinedColor{{LIGHT_INDEX}};
+    calculatedColor += phongLight{{LIGHT_INDEX}}.lightProperties.INTENSITY * diffuseColor{{LIGHT_INDEX}}; // combinedColor{{LIGHT_INDEX}};
     // ambient  += phongLight{{LIGHT_INDEX}}.ambient * attenuation;
 // }
 
