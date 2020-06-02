@@ -147,18 +147,13 @@ vec3 LinePlaneIntersect(in vec3 lp, in vec3 lv, in vec3 pc, in vec3 pn){
 #ifdef FALLOFF_MODE_C
     float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
         // https://blog.selfshadow.com/publications/s2013-shading-course/karis/s2013_pbs_epic_notes_v2.pdf
-        // return clamp(1. - (distance/radius), 0., 1.)
         float falloffNumerator = 1. - pow(distance/radius, 4.);
         falloffNumerator = clamp(falloffNumerator, 0., 1.);
         falloffNumerator *= falloffNumerator;
 
-        float denominator = distance*distance + falloff; //1.; //(falloff);
-        return falloffNumerator/denominator;
-        // float distanceSquared = dot(lightDirection, lightDirection);
+        float denominator = distance*distance + falloff;
 
-        // clamp((1. - sqrt(distanceSquared)/radius), 0., 1.)
-        // return 1.;
-       // return 1. / max((1. + 0.5 * sqrt(distanceSquared) + 0.1 * distanceSquared), 0.00001);
+        return falloffNumerator/denominator;
     }
 #endif
 
