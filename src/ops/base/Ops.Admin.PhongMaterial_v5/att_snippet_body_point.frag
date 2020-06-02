@@ -1,5 +1,7 @@
     // * POINT LIGHT {{LIGHT_INDEX}} *
+
     vec3 phongLightDirection{{LIGHT_INDEX}} = normalize(phongLight{{LIGHT_INDEX}}.position - fragPos.xyz);
+    float phongLightDistance{{LIGHT_INDEX}} = length(phongLightDirection{{LIGHT_INDEX}});
 
     float phongLambert{{LIGHT_INDEX}} = 1.; // inout variable
 
@@ -31,7 +33,12 @@
     vec3 combinedColor{{LIGHT_INDEX}} = (diffuseColor{{LIGHT_INDEX}} + specularColor{{LIGHT_INDEX}});
 
     vec3 lightModelDiff{{LIGHT_INDEX}} = phongLight{{LIGHT_INDEX}}.position - fragPos.xyz;
-    combinedColor{{LIGHT_INDEX}} *= CalculateFalloff(phongLightDirection{{LIGHT_INDEX}}, phongLight{{LIGHT_INDEX}}.lightProperties.FALLOFF);
+    combinedColor{{LIGHT_INDEX}} *= CalculateFalloff(
+        phongLightDistance{{LIGHT_INDEX}},
+        phongLightDirection{{LIGHT_INDEX}},
+        phongLight{{LIGHT_INDEX}}.lightProperties.FALLOFF,
+        phongLight{{LIGHT_INDEX}}.lightProperties.RADIUS
+    );
 
     combinedColor{{LIGHT_INDEX}} *= phongLight{{LIGHT_INDEX}}.lightProperties.INTENSITY;
     calculatedColor += combinedColor{{LIGHT_INDEX}};
