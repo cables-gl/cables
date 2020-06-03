@@ -185,10 +185,12 @@ function loadBin(addCacheBuster)
         hideNodesFromData();
         if (tab)printInfo();
 
-        gltf.loaded = Date.now();
-
         outPoints.set(boundingPoints);
-        if(gltf && gltf.bounds)outBounds.set(gltf.bounds);
+        if(gltf)
+        {
+            gltf.loaded = Date.now();
+            if(gltf.bounds)outBounds.set(gltf.bounds);
+        }
         updateCenter();
     };
 
