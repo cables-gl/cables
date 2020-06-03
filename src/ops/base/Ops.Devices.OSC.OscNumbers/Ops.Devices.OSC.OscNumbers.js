@@ -24,7 +24,7 @@ inMessage.onChange=function()
         {
             inAddress.set(msg.a);
             learning=false;
-            if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
+            if(op.isCurrentUiOp()) gui.opParams.show(op);
             return;
         }
         return;

@@ -90,7 +90,7 @@ reset.onTriggered = () => {
   learnCount = 0;
   learnedNotes = [];
   noteDropdowns.forEach(nd => nd.set(0));
-  if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
+  if(op.isCurrentUiOp()) gui.opParams.show(op);
 };
 
 inEvent.onChange = () => {
@@ -123,7 +123,7 @@ inEvent.onChange = () => {
 
     if (CABLES.UI) {
       op.uiAttr({ info: `bound to Note: ${noteDropdowns[learnCount].get()}` });
-      gui.patch().showOpParams(op);
+      gui.opParams.show(op);
     }
 
     learnCount += 1;

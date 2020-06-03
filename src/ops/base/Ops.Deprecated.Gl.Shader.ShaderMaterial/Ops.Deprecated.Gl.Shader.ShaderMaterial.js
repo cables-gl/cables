@@ -1,36 +1,36 @@
-var render=op.inTrigger('render');
-var fragmentShader=op.addInPort(new CABLES.Port(op,"fragment",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
-var vertexShader=op.addInPort(new CABLES.Port(op,"vertex",CABLES.OP_PORT_TYPE_VALUE,{display:'editor',editorSyntax:'glsl'}));
+let render = op.inTrigger("render");
+let fragmentShader = op.addInPort(new CABLES.Port(op, "fragment", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
+let vertexShader = op.addInPort(new CABLES.Port(op, "vertex", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
 
-var trigger=op.outTrigger('trigger');
-var outShader=op.outObject("Shader");
-var cgl=op.patch.cgl;
-var uniformInputs=[];
-var uniformTextures=[];
+let trigger = op.outTrigger("trigger");
+let outShader = op.outObject("Shader");
+let cgl = op.patch.cgl;
+let uniformInputs = [];
+let uniformTextures = [];
 
 
-var shader=new CGL.Shader(cgl,"shaderMaterial");
-shader.glslVersion=0;
+let shader = new CGL.Shader(cgl, "shaderMaterial");
+shader.glslVersion = 0;
 
 
 fragmentShader.set(shader.getDefaultFragmentShader());
 vertexShader.set(shader.getDefaultVertexShader());
 
-fragmentShader.onChange=updateLater;
-vertexShader.onChange=updateLater;
-render.onTriggered=doRender;
+fragmentShader.onChange = updateLater;
+vertexShader.onChange = updateLater;
+render.onTriggered = doRender;
 
-var needsUpdate=true;
+let needsUpdate = true;
 
 function updateLater()
 {
-    needsUpdate=true;
+    needsUpdate = true;
     updateShader();
 }
 
 function doRender()
 {
-    if(needsUpdate)updateShader();
+    if (needsUpdate)updateShader();
     cgl.pushShader(shader);
 
     bindTextures();
@@ -40,78 +40,77 @@ function doRender()
 
 function bindTextures()
 {
-    for(var i=0;i<uniformTextures.length;i++)
+    for (let i = 0; i < uniformTextures.length; i++)
     {
-        cgl.setTexture(0+i+3);
+        cgl.setTexture(0 + i + 3);
         cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, uniformTextures[i].get().tex);
     }
 }
 
 function hasUniformInput(name)
 {
-    var i=0;
-    for(i=0;i<uniformInputs.length;i++) if(uniformInputs[i].name==name)return true;
-    for(i=0;i<uniformTextures.length;i++) if(uniformTextures[i].name==name)return true;
+    let i = 0;
+    for (i = 0; i < uniformInputs.length; i++) if (uniformInputs[i].name == name) return true;
+    for (i = 0; i < uniformTextures.length; i++) if (uniformTextures[i].name == name) return true;
     return false;
 }
 
 function updateShader()
 {
-    needsUpdate=false;
+    needsUpdate = false;
 
     // shader.glslVersion=0;
-    shader.bindTextures=bindTextures;
+    shader.bindTextures = bindTextures;
 
-    shader.setSource(vertexShader.get(),fragmentShader.get());
+    shader.setSource(vertexShader.get(), fragmentShader.get());
     shader.compile();
 
-    var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
+    let activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
-    var i=0;
-    var countTexture=0;
-    for (i=0; i < activeUniforms; i++)
+    let i = 0;
+    let countTexture = 0;
+    for (i = 0; i < activeUniforms; i++)
     {
-        var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
+        let uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
 
-        if(!hasUniformInput(uniform.name))
+        if (!hasUniformInput(uniform.name))
         {
-            if(uniform.type==0x1406)
+            if (uniform.type == 0x1406)
             {
-                var newInput=op.inValue(uniform.name,newInput,0);
-                newInput.onChange=function(p)
+                var newInput = op.inValue(uniform.name, newInput, 0);
+                newInput.onChange = function (p)
                 {
                     // console.log('change',p.get());
-                    p.uniform.needsUpdate=true;
+                    p.uniform.needsUpdate = true;
                     p.uniform.setValue(p.get());
                 };
-                
+
                 uniformInputs.push(newInput);
-                newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput);
+                newInput.uniform = new CGL.Uniform(shader, "f", uniform.name, newInput);
             }
             else
-            if(uniform.type==0x8B5E )
+            if (uniform.type == 0x8B5E)
             {
-                var newInputTex=op.inObject(uniform.name);
-                newInputTex.uniform=new CGL.Uniform(shader,'t',uniform.name,3+countTexture);
+                let newInputTex = op.inObject(uniform.name);
+                newInputTex.uniform = new CGL.Uniform(shader, "t", uniform.name, 3 + countTexture);
                 uniformTextures.push(newInputTex);
                 countTexture++;
             }
             else
             {
-                console.log('unknown uniform type',uniform.type,uniform);
+                console.log("unknown uniform type", uniform.type, uniform);
             }
         }
     }
 
-    for(i=0;i<uniformInputs.length;i++)
+    for (i = 0; i < uniformInputs.length; i++)
     {
-        uniformInputs[i].uniform.needsUpdate=true;
+        uniformInputs[i].uniform.needsUpdate = true;
     }
 
-    if(CABLES.UI) gui.patch().showOpParams(op);
+    if (CABLES.UI) gui.opParams.show(op);
     outShader.set(null);
     outShader.set(shader);
-
 }
 
 

@@ -592,6 +592,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "display": "file",
+                "type": "string",
                 "filter": filter
             })
         );
@@ -608,6 +609,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "display": "file",
+                "type": "string",
                 filter
             })
         );
@@ -1517,7 +1519,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (this.patch && this.patch.isEditorMode()) gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) gui.opParams.show(this);
     };
 
     /**

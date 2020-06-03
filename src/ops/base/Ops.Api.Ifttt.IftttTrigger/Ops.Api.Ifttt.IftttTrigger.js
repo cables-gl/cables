@@ -18,12 +18,12 @@ trigger.onTriggered = function() {
     if(key.get().trim() == dummyKey) {
         if(CABLES.UI) {
             op.uiAttr( { 'warning': 'You have to enter your own API key first! Check out the docs below!' } );
-            gui.patch().showOpParams(op);
+            gui.opParams.show(op);
         }
     } else {
         if(CABLES.UI) {
             op.uiAttr( { 'warning': null } ); // clear UI warning
-            gui.patch().showOpParams(op);
+            gui.opParams.show(op);
         }
         CABLES.ajax (
             url,

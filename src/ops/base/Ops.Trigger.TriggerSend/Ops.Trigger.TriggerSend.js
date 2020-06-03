@@ -37,7 +37,7 @@ function updateName()
             return;
         }
 
-        gui.patch().showOpParams(op);
+        gui.opParams.show(op);
     }
 
     if(!op.patch.namedTriggers[varname.get()])
@@ -48,7 +48,7 @@ function updateName()
 
     op.setTitle('>' + varname.get());
 
-    if(CABLES.UI) gui.patch().showOpParams(op);
+    if(CABLES.UI) gui.opParams.show(op);
 }
 
 function doTrigger()

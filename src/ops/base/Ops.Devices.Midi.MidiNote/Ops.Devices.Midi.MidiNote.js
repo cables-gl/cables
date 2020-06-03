@@ -54,7 +54,7 @@ clear.onTriggered = () => {
   midiChannelDropdown.set(1);
   normalizeDropdown.set(normalizeDropdown.get('none'));
   gateType.set(false);
-  if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
+  if(op.isCurrentUiOp()) gui.opParams.show(op);
 };
 
 gateType.onChange = () => {
@@ -80,7 +80,7 @@ inEvent.onChange = () => {
 
     if (CABLES.UI) {
       op.uiAttr({ info: `bound to Note: ${noteDropdown.get()}` });
-      gui.patch().showOpParams(op);
+      gui.opParams.show(op);
     }
   }
 
