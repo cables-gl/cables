@@ -289,7 +289,7 @@ render.onTriggered=function()
     if(textureNormal.get() && textureNormalUniform) shader.pushTexture(textureNormalUniform,textureNormal.get().tex);
     if(textureSpec.get() && textureSpecUniform) shader.pushTexture(textureSpecUniform,textureSpec.get().tex);
     if(textureSpecMatCap.get() && textureSpecMatCapUniform) shader.pushTexture(textureSpecMatCapUniform,textureSpecMatCap.get().tex);
-    if(textureAo.get() && textureAoUniform)  der.pushTexture(textureAoUniform,textureAo.get().tex);
+    if(textureAo.get() && textureAoUniform) shader.pushTexture(textureAoUniform,textureAo.get().tex);
     if(textureOpacity.get() && textureOpacityUniform) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
 
 

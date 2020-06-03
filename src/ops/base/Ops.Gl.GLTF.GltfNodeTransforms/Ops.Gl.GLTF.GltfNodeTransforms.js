@@ -10,6 +10,10 @@ var needsupdate=true;
 outPos.onChange=function(){needsupdate=true;};
 inExec.onTriggered=exec;
 
+inStr.onChange=function()
+{
+    needsupdate=true;
+}
 function exec()
 {
     if(needsupdate)update();
