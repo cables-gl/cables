@@ -9,43 +9,56 @@ op.setPortGroup('Attributes',[src,elId]);
 
 let element=null;
 
-inStyle.onChange=updateStyle;
-src.onChange=updateURL;
-elId.onChange=updateID;
 op.onDelete=removeEle;
-active.onChange=updateActive;
 
-addElement();
-updateStyle();
-updateURL();
+op.onLoaded=()=>
+{
+    console.log("init!");
+    addElement();
+    updateSoon();
 
-outEle.set(element);
+    inStyle.onChange=
+    src.onChange=
+    elId.onChange=updateSoon;
+
+    active.onChange=updateActive;
+};
+
 
 function addElement()
 {
+    if(!active.get()) return;
+    if(element) removeEle();
     element = document.createElement('iframe');
+    updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);
+    outEle.set(element);
 }
 
-function updateStyle()
+let timeOut=null;
+
+function updateSoon()
 {
+    clearTimeout(timeOut);
+    timeOut=setTimeout(updateAttribs,30);
+}
+
+function updateAttribs()
+{
+    if(!element)return;
     element.setAttribute("style",inStyle.get());
-}
-
-function updateURL()
-{
     element.setAttribute('src',src.get());
-}
-
-function updateID()
-{
     element.setAttribute('id',elId.get());
+
+    console.log(src.get(),elId.get(),active.get());
 }
 
 function removeEle()
 {
     if(element && element.parentNode)element.parentNode.removeChild(element);
+    element=null;
+    outEle.set(element);
 }
 
 function updateActive()
@@ -58,3 +71,10 @@ function updateActive()
 
     addElement();
 }
+
+
+
+
+
+
+
