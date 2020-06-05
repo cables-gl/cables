@@ -18,6 +18,11 @@
             "message": "Ops.Vars.VariableArray renamed to Ops.Vars.VarGetArray",
             "author": "pandur",
             "date": 1560418815651
+        },
+        {
+            "message": " added core lib: cgl_light",
+            "author": "pandur",
+            "date": 1591286723223
         }
     ],
     "issues": "",
@@ -39,5 +44,8 @@
                 "text": "Array out"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_light"
+    ]
 }
