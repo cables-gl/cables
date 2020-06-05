@@ -449,6 +449,7 @@ Texture.prototype._setFilter = function ()
     }
 };
 
+
 /**
  * @function load
  * @static
