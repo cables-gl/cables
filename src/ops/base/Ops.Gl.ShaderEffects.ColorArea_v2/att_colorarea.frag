@@ -1,12 +1,15 @@
 #ifdef MOD_AREA_SPHERE
-    float MOD_de=distance(MOD_pos,vec3(MOD_vertPos.x*MOD_sizeX,MOD_vertPos.y,MOD_vertPos.z));
+    float MOD_de=distance(
+        MOD_pos,
+        vec3(MOD_vertPos.x*MOD_inSizeAmountFalloffSizeX.w,MOD_vertPos.y,MOD_vertPos.z)
+        );
 #endif
 
 #ifdef MOD_AREA_BOX
     float MOD_de=0.0;
-    if(abs(MOD_vertPos.y-MOD_pos.y)>MOD_size ||
-        abs(MOD_vertPos.x-MOD_pos.x)>MOD_size ||
-        abs(MOD_vertPos.z-MOD_pos.z)>MOD_size ) MOD_de=1.0;
+    if(abs(MOD_vertPos.y-MOD_pos.y)>MOD_inSizeAmountFalloffSizeX.x ||
+        abs(MOD_vertPos.x-MOD_pos.x)>MOD_inSizeAmountFalloffSizeX.x ||
+        abs(MOD_vertPos.z-MOD_pos.z)>MOD_inSizeAmountFalloffSizeX.x ) MOD_de=1.0;
 #endif
 
 #ifdef MOD_AREA_AXIS_X
@@ -29,16 +32,16 @@
     float MOD_de=MOD_pos.z-MOD_vertPos.z;
 #endif
 
-MOD_de=1.0-smoothstep(MOD_falloff*MOD_size,MOD_size,MOD_de);
+MOD_de=1.0-smoothstep(MOD_inSizeAmountFalloffSizeX.z*MOD_inSizeAmountFalloffSizeX.x,MOD_inSizeAmountFalloffSizeX.x,MOD_de);
 
 #ifdef MOD_AREA_INVERT
     MOD_de=1.0-MOD_de;
 #endif
 
 #ifdef MOD_BLEND_NORMAL
-    col.rgb=mix(col.rgb,MOD_color, MOD_de*MOD_amount);
+    col.rgb=mix(col.rgb,MOD_color, MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
 
 #ifdef MOD_BLEND_MULTIPLY
-    col.rgb=mix(col.rgb,col.rgb*MOD_color,MOD_de*MOD_amount);
+    col.rgb=mix(col.rgb,col.rgb*MOD_color,MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
