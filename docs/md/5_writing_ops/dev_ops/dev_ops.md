@@ -46,7 +46,7 @@ const outObject = op.outObject("Object Out");
 ```
 
 
-See [Ports](../dev_creating_ports/dev_creating_ports.md)
+See [Ports](../dev_creating_ports/dev_creating_ports)
 
 
 ### Op Constructor
@@ -81,7 +81,7 @@ When a link to a value or string-value port was removed the old value (from the 
 
 If a connection to an object or array-port is removed the port will contain `null`.
 
-Follow this [link](../dev_callbacks/dev_callbacks.md) for more information on Callbacks
+Follow this [link](../dev_callbacks/dev_callbacks) for more information on Callbacks
 
 
 ### Naming Conventions
@@ -93,7 +93,7 @@ UpperCamelCase, e.g. `KeyPressLearn` (`Ops.Devices.Keyboard.KeyPressLearn`). If 
 #### Port Names
 
 Use capitals with spaces for the user-visible names in the op-settings, e.g. `Inner Radius`. You can use all capital letters for port names like `BPM` or `MIDI`.
-Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.  
+Feel free to use whatever you prefer in code, most common is lowerCamelCase, e.g. `innerRadius`.
 If your op has one main-port which is needed to trigger it, call it `Execute`, if your op has an output-port to trigger other ops call it `Trigger`
 
 

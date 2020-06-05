@@ -2,7 +2,7 @@
 
 This page will explain how to create an input and output port of the type 'String'<br>
 
-![Button](../img/creating_ports_string_port_color.png)<br> 
+![Button](../img/creating_ports_string_port_color.png)<br>
 
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
@@ -34,5 +34,5 @@ function update()
 }
 ```
 
-Follow this [link](../../dev_callbacks/dev_callbacks.md) for more information on Callbacks
+Follow this [link](../../dev_callbacks/dev_callbacks) for more information on Callbacks
 

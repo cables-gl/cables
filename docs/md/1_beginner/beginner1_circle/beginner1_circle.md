@@ -3,7 +3,7 @@
 
 First, we need a project to work with, so press the `New Project`-button.
 
-To draw a circle, we need two operators:  
+To draw a circle, we need two operators:
 
 1. The `MainLoop`-op
 2. A `Circle`-op
@@ -25,7 +25,7 @@ To draw a circle, we need two operators:
 - Type `circle`, now the entry [Ops.Gl.Meshes.Circle](https://cables.gl/op/Ops.Gl.Meshes.Circle) should be selected
 - Press `[enter]` or click the `+` button to create it
 
-Now it should look like this:  
+Now it should look like this:
 
 ![](img/beginner1result.png)
 
@@ -39,4 +39,4 @@ Now it should look like this:
 
 ## Part 2
 
-Continue to [Part 2](../beginner2_transformations/beginner2_transformations.md) of the tutorial-series to learn how to use transformations.
+Continue to [Part 2](../beginner2_transformations/beginner2_transformations) of the tutorial-series to learn how to use transformations.

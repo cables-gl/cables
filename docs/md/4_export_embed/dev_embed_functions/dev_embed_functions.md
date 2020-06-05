@@ -6,7 +6,7 @@ Sometimes you need to trigger a cables-port from outside cables, e.g. when you e
 
 Using the op [Ops.Patch.Function](http://cables.gl/op/Ops.Patch.Function) you can define a function name which is visble from outside cables, just give it a name by setting the input-port `Function Name`, e.g. `myFunction` and you can trigger the op from your website’s JavaScript-code using `CABLES.patch.config.myFunction();`
 
-If you need to pass a parameter, you can set a cables variable first (see [Variables](../dev_embed_vars/dev_embed_vars.md)) and then trigger it.
+If you need to pass a parameter, you can set a cables variable first (see [Variables](../dev_embed_vars/dev_embed_vars)) and then trigger it.
 
 
 
@@ -53,12 +53,12 @@ If you want to test the above callback without leaving cables you can define a t
 Open the developer tools by pressing `cmd + alt + i` and enter:
 
 ```javascript
-gui.patch().scene.config.helloFromOutside = function() {
+gui.corePatch().config.helloFromOutside = function() {
     console.log('cables called... hello!?');
 };
 ```
 
 Based on the example above you should now be able to click somewhere on the canvas and see `cables called... hello!?` printed in the console.
 
-*Summarising: Inside cables test-callbacks have to be defined as a property of `gui.patch().scene.config`, in your outside JavaScript-code they must be defined as a property of `CABLES.patch.config`* .
+*Summarising: Inside cables test-callbacks have to be defined as a property of `gui.corePatch().config`, in your outside JavaScript-code they must be defined as a property of `CABLES.patch.config`* .
 

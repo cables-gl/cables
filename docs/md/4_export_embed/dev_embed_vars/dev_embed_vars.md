@@ -32,10 +32,10 @@ var myVar = CABLES.patch.getVar("IsInteracting");
 
 if(myVar) {
     // get the current value
-    var currentValue = myVar.getValue(); 
+    var currentValue = myVar.getValue();
 
     // change the value
-    myVar.setValue(true);    
+    myVar.setValue(true);
 }
 ```
 
@@ -74,14 +74,14 @@ you can overwrite the initial value of a variable in the patch config:
 
 ### Test setting / getting variables without leaving cables
 
-If you want to test certain aspects of your patch which involve getting / setting variables from outside cables you can do so from the terminal:  
+If you want to test certain aspects of your patch which involve getting / setting variables from outside cables you can do so from the terminal:
 
 - Open the browser terminal by hitting `cmd + alt + i`.
-- Switch the context to "editorframe" via the dropdown selector above the console. (cables editor runs in a iframe sandbox) 
+- Switch the context to "editorframe" via the dropdown selector above the console. (cables editor runs in a iframe sandbox)
 then enter:
 
 ```javascript
-var myCablesVar = gui.patch().scene.getVar('name of your variable');
+var myCablesVar = gui.corePatch().getVar('name of your variable');
 myCablesVar.setValue(123);
 console.log(myCablesVar.getValue()); // prints 123
 ```
@@ -89,4 +89,4 @@ console.log(myCablesVar.getValue()); // prints 123
 
 
 
-*Summarising*: If you want to access a variable from outside cables use `CABLES.patch.getVar…`, if you want to test getting / setting variables without leaving cables, use `gui.patch().scene.getVar…`.  
+*Summarising*: If you want to access a variable from outside cables use `CABLES.patch.getVar…`, if you want to test getting / setting variables without leaving cables, use `gui.corePatch().getVar…`.

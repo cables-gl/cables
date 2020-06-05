@@ -1,8 +1,8 @@
 # General op/Port Callbacks
 
-In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_creating_ports/dev_creating_ports.md)) or general op-events there are a number of callbacks your op can implement.
+In order to get informed on port-value-changes, function-triggers (also see [Ports](../dev_creating_ports/dev_creating_ports)) or general op-events there are a number of callbacks your op can implement.
 
-To be  informed of port-value-changes, function-triggers (also see [Ports](../dev_creating_ports/dev_creating_ports.md)) or general op-events there are a number of callbacks your op can implement.
+To be  informed of port-value-changes, function-triggers (also see [Ports](../dev_creating_ports/dev_creating_ports)) or general op-events there are a number of callbacks your op can implement.
 
 *Tip: It’s always a good idea to inspect the code of existing ops by selecting an op and then pressing `view code` in the op-settings on the right.*<br>
 ![Button](img/dev_callbacks_view_code_button.png)

@@ -1,12 +1,12 @@
 # Beginner 3: Color
 
-[Back to Part 2](../beginner2_transformations/beginner2_transformations.md)
+[Back to Part 2](../beginner2_transformations/beginner2_transformations)
 
 ## Adding Color
 
-To change the color and texture of 3d objects you can use materials.  
+To change the color and texture of 3d objects you can use materials.
 
-[Basicmaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial) is the most basic one.  
+[Basicmaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial) is the most basic one.
 
 ![](img/beginner3_color_basic_material_tweak_color.gif)
 
@@ -22,4 +22,4 @@ To change the color and texture of 3d objects you can use materials.
 
 ## Part 4
 
-Continue to [Part 4](../beginner4_more_transformations/beginner4_more_transformations.md) to learn more on transformations
+Continue to [Part 4](../beginner4_more_transformations/beginner4_more_transformations) to learn more on transformations

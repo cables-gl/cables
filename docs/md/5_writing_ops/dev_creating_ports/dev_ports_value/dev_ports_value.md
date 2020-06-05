@@ -1,7 +1,7 @@
 # Floating Point Number Ports
 
 This page will explain how to create an input and ouput port of the type `Number`<br>
-![Button](../img/creating_ports_value_port_color.png)<br> 
+![Button](../img/creating_ports_value_port_color.png)<br>
 Click this [link](https://cables.gl/ui/#/project/5b9f692e671e52e512ab3af3) to see an example of all port types and code examples
 
 JavaScript does not define different types of numbers, like integers, short, long, floating-point etc <br>
@@ -28,4 +28,4 @@ function update()
 }
 ```
 
-Follow this [link](../../dev_callbacks/dev_callbacks.md) for more information on Callbacks
+Follow this [link](../../dev_callbacks/dev_callbacks) for more information on Callbacks

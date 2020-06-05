@@ -30,8 +30,8 @@ inButton.onTriggered = update;
 function update()
 {
     //send a trigger out of the output port
-    outTrigger.trigger();    
+    outTrigger.trigger();
 }
 ```
 
-Follow this [link](../../dev_callbacks/dev_callbacks.md) for more information on Callbacks
+Follow this [link](../../dev_callbacks/dev_callbacks) for more information on Callbacks
