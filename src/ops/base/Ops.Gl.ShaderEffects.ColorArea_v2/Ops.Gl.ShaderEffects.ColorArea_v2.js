@@ -121,13 +121,9 @@ function doRender()
                 "srcBodyFrag": attachments.colorarea_frag
             }, moduleVert);
 
-        uniforms.inSize = new CGL.Uniform(shader, "f", moduleFrag.prefix + "size", inSize);
-        uniforms.inAmount = new CGL.Uniform(shader, "f", moduleFrag.prefix + "amount", inAmount);
-
+        uniforms.inSizeAmountFalloffSizeX = new CGL.Uniform(shader, "4f", moduleFrag.prefix + "inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
         uniforms.color = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "color", r, g, b);
         uniforms.pos = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "pos", x, y, z);
-        uniforms.sizeX = new CGL.Uniform(shader, "f", moduleFrag.prefix + "sizeX", sizeX);
-        uniforms.inFalloff = new CGL.Uniform(shader, "f", moduleFrag.prefix + "falloff", inFalloff);
 
         updateDefines();
     }
