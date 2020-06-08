@@ -619,7 +619,7 @@ Shader.prototype.toggleDefine = function (name, enabled)
  */
 Shader.prototype.define = function (name, value)
 {
-    if (!value) value = "";
+    if (value === null || value === undefined) value = "";
     for (let i = 0; i < this._defines.length; i++)
     {
         if (this._defines[i][0] == name && this._defines[i][1] == value) return;
