@@ -249,6 +249,8 @@ Shader.prototype._addLibs = function (src)
 
 Shader.prototype.compile = function ()
 {
+    const startTime = performance.now();
+
     profileData.profileShaderCompiles++;
     profileData.profileShaderCompileName = this._name;
 
@@ -504,6 +506,8 @@ Shader.prototype.compile = function ()
 
     this._needsRecompile = false;
     this.lastCompile = now();
+
+    CGL.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
 Shader.prototype.bind = function ()
