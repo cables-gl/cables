@@ -93,7 +93,7 @@ const Shader = function (_cgl, _name)
     this._pMatrixState = -1;
     this._vMatrixState = -1;
 
-    this._modGroupCount = 0;
+    this._modGroupCount = 0; // not needed anymore...
     this._feedBackNames = [];
     this._attributes = [];
 
@@ -745,8 +745,9 @@ Shader.prototype.addModule = function (mod, sibling)
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
 
-    if (sibling) mod.group = sibling.group;
-    else mod.group = this._modGroupCount++;
+    if (!mod.group)
+        if (sibling) mod.group = sibling.group;
+        else mod.group = simpleId();// this._modGroupCount++;
 
     mod.prefix = "mod" + mod.group;
 
