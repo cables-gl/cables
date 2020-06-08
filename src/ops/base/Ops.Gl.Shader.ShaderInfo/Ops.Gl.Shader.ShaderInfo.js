@@ -5,6 +5,7 @@ const
     showModules=op.inTriggerButton("Show Modules"),
     next=op.outTrigger("Next"),
     outName=op.outString("Name"),
+    outId=op.outString("Id"),
     outNumUniforms=op.outValue("Num Uniforms"),
     outNumAttributes=op.outValue("Num Attributes"),
     outAttributeNames=op.outArray("Arributes Names"),
@@ -52,6 +53,7 @@ exec.onTriggered=function()
         outAttributeNames.set(attribNames);
         outDefines.set(shader.getDefines());
         outName.set(shader.getName());
+        outId.set(shader.id);
 
         op.setUiError("prognull",null);
     }

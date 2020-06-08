@@ -170,11 +170,17 @@ Shader.prototype.setWhyCompile = function (why)
  * @instance
  * @param shader uniform values will be copied from this shader
  */
-Shader.prototype.copyUniforms = function (shader)
+Shader.prototype.copyUniformValues = function (origShader)
 {
-    for (let i = 0; i < shader._uniforms.length; i++)
+    for (let i = 0; i < origShader._uniforms.length; i++)
     {
-        this._uniforms[i].set(shader._uniforms[i].getValue());
+        if (!this._uniforms[i])
+        {
+            // console.log("unknown uniform?!");
+            continue;
+        }
+
+        this._uniforms[i].set(origShader._uniforms[i].getValue());
     }
 };
 
@@ -198,10 +204,12 @@ Shader.prototype.copy = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
+        console.log("copy uniform...", this._uniforms[i]);
         const u = this._uniforms[i].copy(shader);
         u.resetLoc();
     }
 
+    shader._needsRecompile = true;
     return shader;
 };
 

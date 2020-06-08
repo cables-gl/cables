@@ -28,6 +28,10 @@
                 "name": "Name"
             },
             {
+                "type": "5",
+                "name": "Id"
+            },
+            {
                 "type": "0",
                 "name": "Num Uniforms",
                 "subType": "number"

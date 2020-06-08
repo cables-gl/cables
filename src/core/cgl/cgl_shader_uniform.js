@@ -47,6 +47,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._oldValue = null;
     this._port = null;
     this._shader._addUniform(this);
+    this.shaderType = null;
     this.needsUpdate = true;
     this.shaderType = null;
 
@@ -173,7 +174,9 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
 
 Uniform.prototype.copy = function (newShader)
 {
-    return new Uniform(newShader, this._type, this._name);
+    const uni = new Uniform(newShader, this._type, this._name);
+    uni.shaderType = this.shaderType;
+    return uni;
 };
 
 /**
