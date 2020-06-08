@@ -355,19 +355,24 @@ Shader.prototype.compile = function ()
 
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
+
+    // console.log(this._uniforms);
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType)
         {
             const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+            let comment = "";
+            if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
-            if (this._uniforms[i].shaderType == "vert")
+            if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
                 if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                    uniformsStrVert += uniStr + ";".endl();
+                    uniformsStrVert += uniStr + ";" + comment.endl();
 
-            if (this._uniforms[i].shaderType == "frag")
+            if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
                 if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                    uniformsStrFrag += uniStr + ";".endl();
+                    uniformsStrFrag += uniStr + ";" + comment.endl();
         }
     }
 
@@ -749,6 +754,8 @@ Shader.prototype.addModule = function (mod, sibling)
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
 
+    if (sibling && !sibling.group) sibling.group = simpleId();
+
     if (!mod.group)
         if (sibling) mod.group = sibling.group;
         else mod.group = simpleId();// this._modGroupCount++;
@@ -826,20 +833,32 @@ Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4,
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "frag";
+    return uni;
 };
 
 Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "vert";
+    return uni;
 };
 
 Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
     uni.shaderType = "both";
+    return uni;
 };
 
+Shader.prototype.hasUniform = function (name)
+{
+    console.log("hasuniform", this._uniforms);
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i].getName() == name) return true;
+    }
+    return false;
+};
 
 Shader.prototype._createProgram = function (vstr, fstr)
 {
