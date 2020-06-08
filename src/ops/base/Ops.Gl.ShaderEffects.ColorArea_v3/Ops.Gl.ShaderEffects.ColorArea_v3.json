@@ -1,0 +1,111 @@
+{
+    "authorName": "pandur",
+    "id": "bc46bd2b-ea86-4b74-bb2b-7613e1a1a4f3",
+    "created": 1591626868159,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Area index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Blend  index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.pandur.ColorAreaAsShaderModule"
+    },
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1591626936196
+        },
+        {
+            "message": "Ops.User.pandur.ColorAreaAsShaderModule renamed to Ops.Gl.ShaderEffects.ColorArea_v3",
+            "author": "pandur",
+            "date": 1591627475894
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}

@@ -754,6 +754,8 @@ Shader.prototype.addModule = function (mod, sibling)
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
 
+    if (sibling && !sibling.group) sibling.group = simpleId();
+
     if (!mod.group)
         if (sibling) mod.group = sibling.group;
         else mod.group = simpleId();// this._modGroupCount++;
