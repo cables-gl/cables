@@ -42,9 +42,8 @@
                 "name": "text"
             },
             {
-                "type": "0",
-                "name": "separator",
-                "subType": "string"
+                "type": "5",
+                "name": "separator"
             },
             {
                 "type": "0",

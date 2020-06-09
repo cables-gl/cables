@@ -11,22 +11,26 @@ geom.clear();
 
 let thePoints=[];
 const cgl=op.patch.cgl;
-let points=[];
-let points2=[];
-let points3=[];
+let points=new Float32Array();
+let points2=new Float32Array();
+let points3=new Float32Array();
+let arrEdges=[];
 
 const verts=[0,0,0];
 
 let mesh=new CGL.Mesh(cgl,geom);
 mesh.addVertexNumbers=true;
 
+let rebuildLater=true;
+
 inHardEdges.onChange=
-inPoints.onChange=rebuild;
+    inPoints.onChange=()=>{rebuildLater=true;};
 
 render.onTriggered=renderMesh;
 
 function renderMesh()
 {
+    if(rebuildLater)rebuild();
     if(mesh && inRenderMesh.get()) mesh.render(cgl.getShader());
 }
 
@@ -46,8 +50,9 @@ function buildMesh()
     }
     geom.vertices=verts;
 
-    if(mesh)mesh.dispose();
-    mesh=new CGL.Mesh(cgl,geom);
+    // if(mesh)mesh.dispose();
+    if(!mesh)mesh=new CGL.Mesh(cgl,geom);
+    else mesh.setGeom(geom);
 }
 
 function rebuild()
@@ -63,7 +68,14 @@ function rebuild()
 
     if(inHardEdges.get()) thePoints=tessEdges(inPoints.get());
 
-    points.length=points2.length=thePoints.length*6;
+    const newLength=thePoints.length*6;
+
+    if(points.length!=newLength)
+    {
+        points  = new Float32Array(newLength);
+        points2 = new Float32Array(newLength);
+        points3 = new Float32Array(newLength);
+    }
 
     let count=0;
 
@@ -82,6 +94,8 @@ function rebuild()
     mesh.setAttribute("spline",points,3);
     mesh.setAttribute("spline2",points2,3);
     mesh.setAttribute("spline3",points3,3);
+
+    rebuildLater=false;
 }
 
 function ip(a,b,p)
@@ -92,24 +106,25 @@ function ip(a,b,p)
 function tessEdges(oldArr)
 {
     let count=0;
-    let arr=[];
 
     const step=0.001;
     const oneMinusStep=1-step;
 
+    arrEdges.length=oldArr.length*6;
+
     for(let i=0;i<oldArr.length-3;i+=3)
     {
-        arr[count++]=oldArr[i+0];
-        arr[count++]=oldArr[i+1];
-        arr[count++]=oldArr[i+2];
+        arrEdges[count++]=oldArr[i+0];
+        arrEdges[count++]=oldArr[i+1];
+        arrEdges[count++]=oldArr[i+2];
 
-        arr[count++]=ip(oldArr[i+0],oldArr[i+3],step);
-        arr[count++]=ip(oldArr[i+1],oldArr[i+4],step);
-        arr[count++]=ip(oldArr[i+2],oldArr[i+5],step);
+        arrEdges[count++]=ip(oldArr[i+0],oldArr[i+3],step);
+        arrEdges[count++]=ip(oldArr[i+1],oldArr[i+4],step);
+        arrEdges[count++]=ip(oldArr[i+2],oldArr[i+5],step);
 
-        arr[count++]=ip(oldArr[i+0],oldArr[i+3],oneMinusStep);
-        arr[count++]=ip(oldArr[i+1],oldArr[i+4],oneMinusStep);
-        arr[count++]=ip(oldArr[i+2],oldArr[i+5],oneMinusStep);
+        arrEdges[count++]=ip(oldArr[i+0],oldArr[i+3],oneMinusStep);
+        arrEdges[count++]=ip(oldArr[i+1],oldArr[i+4],oneMinusStep);
+        arrEdges[count++]=ip(oldArr[i+2],oldArr[i+5],oneMinusStep);
     }
-    return arr;
+    return arrEdges;
 }

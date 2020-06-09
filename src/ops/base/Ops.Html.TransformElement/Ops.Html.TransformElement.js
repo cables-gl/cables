@@ -43,7 +43,8 @@ function updateTransform()
 
 
     const str = "translate(" + translateStr + ") scale(" + inScale.get() + ") rotate(" + inRotate.get() + "deg)";
-    ele.style.transform = str;
+
+    if(ele.style.transform!=str) ele.style.transform = str;
 }
 
 inEle.onChange = function ()
@@ -100,8 +101,12 @@ function setProperties()
     {
         getScreenCoord();
         let offsetTop = cgl.canvas.offsetTop;
-        ele.style.top = offsetTop + y + "px";
-        ele.style.left = x + "px";
+
+        const ypx=offsetTop + y + "px";
+        const xpx=x + "px";
+
+        if(ele.style.top!=ypx) ele.style.top = ypx;
+        if(ele.style.left!=xpx) ele.style.left = xpx;
     }
 
     next.trigger();

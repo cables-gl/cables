@@ -1,0 +1,41 @@
+{
+    "id": "5ff7c643-cbea-44cc-9f34-fb18a44bcfff",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1591710348251
+        },
+        {
+            "message": "Ops.User.pandur.SplineMeshNewMaterial renamed to Ops.Admin.SplineMeshNewMaterial",
+            "author": "pandur",
+            "date": 1591710779962
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1591710354477,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "2",
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Admin.SplineMeshNewMaterial"
+    }
+}

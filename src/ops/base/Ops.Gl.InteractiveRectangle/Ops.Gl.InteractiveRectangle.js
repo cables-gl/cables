@@ -295,10 +295,21 @@ function updateDivSize()
     divWidth/=op.patch.cgl.pixelDensity;
     divHeight/=op.patch.cgl.pixelDensity;
 
-    div.style.left=divX+'px';
-    div.style.top=divY+'px';
-    div.style.width=divWidth+'px';
-    div.style.height=divHeight+'px';
+    // div.style.left=divX+'px';
+    // div.style.top=divY+'px';
+    // div.style.width=divWidth+'px';
+    // div.style.height=divHeight+'px';
+
+const divXpx=divX+'px';
+const divYpx=divY+'px';
+const divWidthPx=divWidth+'px';
+const divHeightPx=divHeight+'px';
+    if(divXpx!=div.style.left) div.style.left=divXpx;
+    if(divYpx!=div.style.top) div.style.top=divYpx;
+    if(div.style.width!=divWidthPx) div.style.width=divWidthPx;
+    if(div.style.height!=divHeightPx) div.style.height=divHeightPx;
+
+
 }
 
 function updateClassNames() {
