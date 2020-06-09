@@ -611,9 +611,20 @@ Shader.prototype.bind = function ()
  * @memberof Shader
  * @instance
  * @param {name} name
+ * @param {any} value or port
  */
 Shader.prototype.toggleDefine = function (name, enabled)
 {
+    if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
+    {
+        console.log(enabled);
+        enabled.on("change", (v) =>
+        {
+            this.toggleDefine(name, v);
+        });
+        enabled = enabled.get();
+    }
+
     if (enabled) this.define(name);
     else this.removeDefine(name);
 };
@@ -629,6 +640,17 @@ Shader.prototype.toggleDefine = function (name, enabled)
 Shader.prototype.define = function (name, value)
 {
     if (value === null || value === undefined) value = "";
+
+    if (typeof (value) == "object") // port
+    {
+        value.on("change", (v) =>
+        {
+            this.define(name, v);
+        });
+        value = value.get();
+    }
+
+
     for (let i = 0; i < this._defines.length; i++)
     {
         if (this._defines[i][0] == name && this._defines[i][1] == value) return;

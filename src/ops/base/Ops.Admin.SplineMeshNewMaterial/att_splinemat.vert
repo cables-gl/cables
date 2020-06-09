@@ -14,8 +14,6 @@ UNI float sizeAtt;
 
 IN vec3 spline,spline2,spline3;
 
-OUT float r;
-
 #define PI 3.1415926538
 
 vec2 rotate(vec2 v, float a)
@@ -26,18 +24,12 @@ vec2 rotate(vec2 v, float a)
 	return m * v;
 }
 
-// mat2 rotate2d(float _angle){
-//     return mat2(cos(_angle),-sin(_angle),
-//                 sin(_angle),cos(_angle));
-// }
-
 float aspect=1.7777;
 
 vec2 fix( vec4 i )
 {
     vec2 res = i.xy / i.w;
     res.x *= aspect;
-    // vCounters = counters;
     return res;
 }
 
@@ -51,7 +43,6 @@ void main()
 
     vec4 pos=vec4(vPosition,  1.0);
     mat4 mMatrix=modelMatrix;
-    r=vPosition.x;
 
     vec4 finalPosition  = projMatrix * (viewMatrix*mMatrix) * (vec4(spline2,1.0));
     vec4 finalPosition2 = projMatrix * (viewMatrix*mMatrix) * (vec4(spline3,1.0));
@@ -74,11 +65,10 @@ void main()
     // float wid=width*10.0;
 
     float wid=width*10.0;
-    if(sizeAtt>0.0) //todo as define
-    {
-        wid=width*finalPosition.w*0.5;
-    }
 
+    #ifdef PERSPWIDTH
+        wid=width*finalPosition.w*0.5;
+    #endif
 
     vec2 dir1 = normalize( screenPos2 - screenPos );
     vec2 dir2 = normalize( screenPos3 - screenPos2 );

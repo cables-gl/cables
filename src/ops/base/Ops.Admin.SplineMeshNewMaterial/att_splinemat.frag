@@ -1,19 +1,22 @@
 
 IN vec2 texCoord;
-IN float r;
-UNI float a;
+
+UNI vec4 color;
 UNI sampler2D tex;
 
 {{MODULES_HEAD}}
 void main()
 {
-    vec4 col=vec4(1.0,1.0,1.0,1.0);
+    vec4 col=color;
 
-    // vec4 col=vec4(r,r,1.0,0.5);
-
-    col.rg=texCoord.xy;
-
-    // col=texture(tex,texCoord);
+    #ifdef USE_TEXTURE
+        #ifdef COLORIZE_TEX
+            col*=texture(tex,texCoord);
+        #endif
+        #ifndef COLORIZE_TEX
+            col=texture(tex,texCoord);
+        #endif
+    #endif
 
     {{MODULE_COLOR}}
     outColor = col;
