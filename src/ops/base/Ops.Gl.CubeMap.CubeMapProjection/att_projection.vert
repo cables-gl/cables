@@ -11,6 +11,8 @@ UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 
+const vec2 scale = vec2(0.5, 0.5);
+
 void main()
 {
         texCoord=attrTexCoord;
@@ -19,16 +21,5 @@ void main()
 
         {{MODULE_VERTEX_POSITION}}
 
-        mat4 mMatrix=modelMatrix;
-        worldPos = vec3(mMatrix * pos);
-        mat4 rotView = mat4(mat3(viewMatrix)); // remove translation from the view matrix
-        vec4 clipPos = projMatrix * rotView * pos;
-
-        gl_Position = clipPos.xyww;
-        // gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;
+        gl_Position = pos;
 }
-
-/*  localPos = aPos;
-
-
-    */

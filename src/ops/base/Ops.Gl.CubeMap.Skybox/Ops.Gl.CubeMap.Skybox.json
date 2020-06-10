@@ -1,0 +1,41 @@
+{
+    "id": "97ce1d35-bd7a-43cb-a2bf-5b7e37fb8925",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1591782922945
+        },
+        {
+            "message": "Ops.User.cables.Skybox renamed to Ops.Gl.CubeMap.Skybox",
+            "author": "cables",
+            "date": 1591796283672
+        }
+    ],
+    "authorName": "cables",
+    "created": 1591792167287,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Render",
+                "subType": "boolean"
+            },
+            {
+                "type": "2",
+                "name": "Skybox"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.User.cables.Skybox"
+    }
+}

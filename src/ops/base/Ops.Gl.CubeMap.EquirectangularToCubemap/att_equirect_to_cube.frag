@@ -7,10 +7,10 @@ UNI sampler2D equirectangularMap;
 IN vec3 worldPos;
 
 vec4 sampleEquirect(sampler2D tex, vec3 direction) {
-	vec2 sampleUV;
-	vec3 newDirection = normalize(direction);
+vec2 sampleUV;
+vec3 newDirection = normalize(direction);
 
-	sampleUV.x = -1. * (atan( newDirection.z, newDirection.x ) * RECIPROCAL_PI2 + 0.75);
+sampleUV.x = -1. * (atan( newDirection.z, newDirection.x ) * RECIPROCAL_PI2 + 0.75);
     sampleUV.y = asin( clamp(newDirection.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
 
     return texture(tex, sampleUV);
@@ -24,5 +24,6 @@ void main() {
 
      outColor = vec4(1., 0., 0., 1.);
     vec3 newPos = worldPos;
-    outColor = vec4(sampleEquirect(equirectangularMap, worldPos));
+    outColor = vec4(sampleEquirect(equirectangularMap, newPos));
 }
+
