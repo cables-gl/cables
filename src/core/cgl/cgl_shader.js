@@ -184,6 +184,7 @@ Shader.prototype.copyUniformValues = function (origShader)
         this._uniforms[i].set(origShader._uniforms[i].getValue());
     }
 
+    this.popTextures();
     for (let i = 0; i < origShader._textureStackUni.length; i++)
     {
         this._textureStackUni[i] = origShader._textureStackUni[i];
@@ -1114,6 +1115,7 @@ Shader.prototype.popTexture = function ()
 Shader.prototype.popTextures = function ()
 {
     this._textureStackTex.length =
+    this._textureStackTexCgl.length =
     this._textureStackType.length =
     this._textureStackUni.length = 0;
 };
