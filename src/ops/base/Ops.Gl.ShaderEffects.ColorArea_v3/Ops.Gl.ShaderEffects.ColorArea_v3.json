@@ -91,7 +91,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.ColorAreaAsShaderModule"
+        "name": "Ops.Gl.ShaderEffects.ColorArea_v3"
     },
     "changelog": [
         {

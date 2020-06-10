@@ -21,11 +21,6 @@ op.setPortGroup("Color", [inBlend, r, g, b]);
 r.setUiAttribs({ "colorPick": true });
 
 const cgl = op.patch.cgl;
-let moduleFrag = null;
-let moduleVert = null;
-let uniforms = {};
-let shader = null;
-let origShader = null;
 
 const srcHeadVert = ""
     .endl() + "OUT vec4 MOD_vertPos;"
@@ -40,8 +35,6 @@ const srcBodyVert = ""
     .endl() + "#endif"
     .endl();
 
-render.onLinkChanged = removeModule;
-
 inWorldSpace.onChange =
     inArea.onChange =
     inInvert.onChange =
@@ -50,17 +43,17 @@ inWorldSpace.onChange =
 render.onTriggered = doRender;
 
 
-const mod=new CGL.ShaderModifier(cgl,op.objName);
+const mod=new CGL.ShaderModifier(cgl,"colorArea");
 mod.addModule({
                 "priority": 2,
-                "title": op.objName,
+                "title": "colorArea",
                 "name": "MODULE_VERTEX_POSITION",
                 srcHeadVert,
                 srcBodyVert
             });
 
 mod.addModule({
-                "title": op.objName,
+                "title": "colorArea",
                 "name": "MODULE_COLOR",
                 "srcHeadFrag": attachments.colorarea_head_frag,
                 "srcBodyFrag": attachments.colorarea_frag
@@ -69,26 +62,8 @@ mod.addModule({
 mod.addUniform( "4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
 mod.addUniform( "3f", "MOD_color", r, g, b);
 mod.addUniform( "3f", "MOD_pos", x, y, z);
+updateDefines();
 
-// mod.define("MOD_blue",0.51);
-
-
-    //     moduleVert = shader.addModule(
-    //         {
-    //             "priority": 2,
-    //             "title": op.objName,
-    //             "name": "MODULE_VERTEX_POSITION",
-    //             srcHeadVert,
-    //             srcBodyVert
-    //         });
-
-    //     moduleFrag = shader.addModule(
-    //         {
-    //             "title": op.objName,
-    //             "name": "MODULE_COLOR",
-    //             "srcHeadFrag": attachments.colorarea_head_frag,
-    //             "srcBodyFrag": attachments.colorarea_frag
-    //         }, moduleVert);
 
 function updateDefines()
 {
@@ -108,13 +83,6 @@ function updateDefines()
     mod.toggleDefine("MOD_AREA_BOX", inArea.get() == "Box");
 }
 
-function removeModule()
-{
-    if (shader) shader.dispose();
-    origShader = null;
-    shader = null;
-}
-
 function doRender()
 {
 
@@ -123,62 +91,4 @@ function doRender()
     next.trigger();
 
     mod.unbind();
-    // if (CABLES.UI)
-    // {
-    //     cgl.pushModelMatrix();
-    //     // mat4.identity(cgl.mMatrix);
-
-    //     if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
-
-    //     if (CABLES.UI.renderHelper || op.isCurrentUiOp())
-    //     {
-    //         mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
-    //         CABLES.GL_MARKER.drawSphere(op, inSize.get());
-    //     }
-    //     cgl.popModelMatrix();
-    // }
-
-    // if (!cgl.getShader())
-    // {
-    //     next.trigger();
-    //     return;
-    // }
-
-    // if (cgl.getShader() != origShader)
-    // {
-    //     if (shader) removeModule();
-    //     origShader = cgl.getShader();
-    //     shader = origShader;// .copy();
-
-    //     moduleVert = shader.addModule(
-    //         {
-    //             "priority": 2,
-    //             "title": op.objName,
-    //             "name": "MODULE_VERTEX_POSITION",
-    //             srcHeadVert,
-    //             srcBodyVert
-    //         });
-
-    //     moduleFrag = shader.addModule(
-    //         {
-    //             "title": op.objName,
-    //             "name": "MODULE_COLOR",
-    //             "srcHeadFrag": attachments.colorarea_head_frag,
-    //             "srcBodyFrag": attachments.colorarea_frag
-    //         }, moduleVert);
-
-    //     uniforms.inSizeAmountFalloffSizeX = new CGL.Uniform(shader, "4f", moduleFrag.prefix + "inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
-    //     uniforms.color = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "color", r, g, b);
-    //     uniforms.pos = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "pos", x, y, z);
-
-    //     updateDefines();
-    // }
-
-    // if (!shader) return;
-
-    // // shader.copyUniforms(origShader);
-
-    // cgl.pushShader(shader);
-    // next.trigger();
-    // cgl.popShader();
 }

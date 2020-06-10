@@ -3,6 +3,9 @@ const
     showFrag=op.inTriggerButton("Show Fragment"),
     showVert=op.inTriggerButton("Show Vertex"),
     showModules=op.inTriggerButton("Show Modules"),
+    showState=op.inTriggerButton("State Info"),
+
+
     next=op.outTrigger("Next"),
     outName=op.outString("Name"),
     outId=op.outString("Id"),
@@ -22,6 +25,15 @@ showFrag.onTriggered=function()
 showVert.onTriggered=function()
 {
     if(CABLES.UI && shader) CABLES.UI.MODAL.showCode('vertex shader',shader.finalShaderVert,"GLSL");
+};
+
+var doStateDump=false;
+
+showState.onTriggered=function()
+{
+    if(!CABLES.UI || !shader)return;
+    doStateDump=true;
+
 };
 
 exec.onTriggered=function()
@@ -65,7 +77,74 @@ exec.onTriggered=function()
         outAttributeNames.set(null);
     }
 
+    if(doStateDump)
+    {
+        doStateDump=false;
+        stateDump();
+    }
+
 };
+
+function stateDump()
+{
+
+    let txt="";
+    txt+="";
+
+    console.log(shader._textureStackUni);
+
+    txt+="defines ("+outDefines.get().length+")\n\n";
+
+    for(let i=0;i<outDefines.get().length;i++)
+    {
+        // console.log("i",shader.)
+        txt += "- ";
+        txt += outDefines.get()[i][0];
+        if(outDefines.get()[i][1])
+        {
+            txt += ": ";
+            txt += outDefines.get()[i][1];
+        }
+        txt += "\n";
+    }
+
+    txt+="\n\n";
+    txt+="texturestack ("+shader._textureStackUni.length+")\n\n";
+
+    for(let i=0;i<shader._textureStackUni.length;i++)
+    {
+        txt += "- ";
+        txt += shader._textureStackUni[i]._name;
+        txt += "("+shader._textureStackUni[i].shaderType+")\n";
+        if(shader._textureStackTexCgl[i]) txt +=JSON.stringify(shader._textureStackTexCgl[i].getInfo());
+        txt += "\n";
+    }
+
+    txt+="\n\n";
+    txt+="uniforms: ("+shader._uniforms.length+")\n\n";
+
+
+    for(let i=0;i<shader._uniforms.length;i++)
+    {
+        // console.log("i",shader.)
+        txt += "- ";
+        txt += shader._uniforms[i]._name;
+        txt += ": ";
+        txt += shader._uniforms[i].getValue();
+
+        if(shader._uniforms[i].comment)
+        {
+            txt += " // ";
+            txt += shader._uniforms[i].comment;
+        }
+        txt += "\n";
+    }
+
+
+    // console.log("txt",txt);
+
+    CABLES.UI.MODAL.showCode("state info",txt);
+}
 
 showModules.onTriggered=function()
 {
