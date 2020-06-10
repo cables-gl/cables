@@ -20,10 +20,13 @@ class ShaderModifier
         if (!shader) return;
 
         this._boundShader = this._shaders[shader.id];
-        if (!this._boundShader)
+        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile)
         {
+            if (this._boundShader) this._boundShader.shader.dispose();
+
             this._boundShader = this._shaders[shader.id] =
                 {
+                    "lastCompile": shader.lastCompile,
                     "orig": shader,
                     "shader": shader.copy()
                 };
