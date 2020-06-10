@@ -2,6 +2,8 @@
 
 IN vec3 vPosition;
 IN float attrVertIndex;
+IN float splineProgress;
+IN vec3 spline,spline2,spline3;
 
 OUT vec2 texCoord;
 OUT vec3 norm;
@@ -10,9 +12,7 @@ UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
 UNI float width;
 UNI float texOffset;
-UNI float sizeAtt;
-
-IN vec3 spline,spline2,spline3;
+// UNI float sizeAtt;
 
 #define PI 3.1415926538
 
@@ -33,13 +33,14 @@ vec2 fix( vec4 i )
     return res;
 }
 
-
-
 void main()
 {
     texCoord=vPosition.xy;
     texCoord.y=texCoord.y*0.5+0.5;
-    texCoord.x+=texOffset;
+
+    #ifdef TEX_MAP_FULL
+    texCoord.x=splineProgress;
+    #endif
 
     vec4 pos=vec4(vPosition,  1.0);
     mat4 mMatrix=modelMatrix;

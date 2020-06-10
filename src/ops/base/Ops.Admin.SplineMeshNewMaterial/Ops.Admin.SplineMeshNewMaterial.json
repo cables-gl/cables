@@ -32,11 +32,18 @@
             },
             {
                 "type": "2",
-                "name": "Texture"
+                "name": "Texture",
+                "group": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Mapping index",
+                "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "Colorize Texture",
+                "group": "Texture",
                 "subType": "boolean"
             },
             {

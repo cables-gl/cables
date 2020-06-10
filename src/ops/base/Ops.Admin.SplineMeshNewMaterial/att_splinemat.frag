@@ -10,13 +10,15 @@ void main()
     vec4 col=color;
 
     #ifdef USE_TEXTURE
-        #ifdef COLORIZE_TEX
+        #ifdef TEX_COLORIZE
             col*=texture(tex,texCoord);
         #endif
-        #ifndef COLORIZE_TEX
+        #ifndef TEX_COLORIZE
             col=texture(tex,texCoord);
         #endif
     #endif
+
+    col.a=1.0;
 
     {{MODULE_COLOR}}
     outColor = col;

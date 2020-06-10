@@ -14,6 +14,7 @@ const cgl=op.patch.cgl;
 let points=new Float32Array();
 let points2=new Float32Array();
 let points3=new Float32Array();
+let pointsProgress = new Float32Array();
 let arrEdges=[];
 
 const verts=[0,0,0];
@@ -52,7 +53,12 @@ function buildMesh()
 
     // if(mesh)mesh.dispose();
     if(!mesh)mesh=new CGL.Mesh(cgl,geom);
-    else mesh.setGeom(geom);
+
+    mesh.addVertexNumbers=true;
+    mesh.setGeom(geom);
+    mesh.addVertexNumbers=true;
+
+
 }
 
 function rebuild()
@@ -66,7 +72,10 @@ function rebuild()
 
     thePoints=inpoints;
 
+
     if(inHardEdges.get()) thePoints=tessEdges(inPoints.get());
+
+    buildMesh();
 
     const newLength=thePoints.length*6;
 
@@ -75,6 +84,11 @@ function rebuild()
         points  = new Float32Array(newLength);
         points2 = new Float32Array(newLength);
         points3 = new Float32Array(newLength);
+
+        pointsProgress = new Float32Array(newLength);
+        for(let i=0;i<newLength;i++) pointsProgress[i]=i/newLength*3;
+        console.log(pointsProgress);
+
     }
 
     let count=0;
@@ -89,11 +103,11 @@ function rebuild()
                 count++;
             }
 
-    buildMesh();
 
     mesh.setAttribute("spline",points,3);
     mesh.setAttribute("spline2",points2,3);
     mesh.setAttribute("spline3",points3,3);
+    mesh.setAttribute("splineProgress",pointsProgress,1);
 
     rebuildLater=false;
 }
