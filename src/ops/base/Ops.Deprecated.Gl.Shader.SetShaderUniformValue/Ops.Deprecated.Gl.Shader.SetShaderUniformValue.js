@@ -1,43 +1,43 @@
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+let render = op.inTrigger("render");
+let trigger = op.outTrigger("trigger");
 
-var uniformSelect=op.inValueSelect("Uniform");
-var unival=op.inValue("Value",0);
-var cgl=op.patch.cgl;
-var uniformInputs=[];
-var uniformTextures=[];
-var shader=null;
+let uniformSelect = op.inValueSelect("Uniform");
+let unival = op.inValue("Value", 0);
+let cgl = op.patch.cgl;
+let uniformInputs = [];
+let uniformTextures = [];
+let shader = null;
 
-render.onTriggered=doRender;
+render.onTriggered = doRender;
 
-var needsUpdate=true;
-var uniform=null;
-var needsUniformSetup=true;
+let needsUpdate = true;
+let uniform = null;
+let needsUniformSetup = true;
 
 function setupUniform()
 {
-    if(shader && shader.getProgram())
+    if (shader && shader.getProgram())
     {
-        uniform=new CGL.Uniform(shader,'f',uniformSelect.get(),unival);
-        needsUniformSetup=false;
+        uniform = new CGL.Uniform(shader, "f", uniformSelect.get(), unival);
+        needsUniformSetup = false;
     }
 }
 
-uniformSelect.onChange=function()
+uniformSelect.onChange = function ()
 {
-    needsUniformSetup=true;
+    needsUniformSetup = true;
 };
 
 
 function doRender()
 {
-    if(!cgl.getShader())return;
-    if(needsUpdate)
+    if (!cgl.getShader()) return;
+    if (needsUpdate)
     {
         updateShader(cgl.getShader());
     }
-    if(needsUniformSetup)
+    if (needsUniformSetup)
     {
         setupUniform();
     }
@@ -46,35 +46,35 @@ function doRender()
 
 function updateShader(theShader)
 {
-    if(shader!=theShader && theShader.getProgram())
+    if (shader != theShader && theShader.getProgram())
     {
-        shader=theShader;
+        shader = theShader;
     }
-    
-    var uniformNames=[];
-    
-    if(!shader)return;
-    needsUpdate=false;
-    op.log('shader update!');
-    
-    
+
+    let uniformNames = [];
+
+    if (!shader) return;
+    needsUpdate = false;
+    op.log("shader update!");
+
+
     // shader.glslVersion=0;
     // shader.bindTextures=bindTextures.bind(this);
 
     // shader.setSource(vertexShader.get(),fragmentShader.get());
     // shader.compile();
 
-    var activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
+    let activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
-    var i=0;
-    var countTexture=0;
-    for (i=0; i < activeUniforms; i++)
+    let i = 0;
+    let countTexture = 0;
+    for (i = 0; i < activeUniforms; i++)
     {
-        var uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
+        let uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
 
         // if(!hasUniformInput(uniform.name))
         {
-            if(uniform.type==0x1406)
+            if (uniform.type == 0x1406)
             {
                 console.log(uniform.name);
                 uniformNames.push(uniform.name);
@@ -98,7 +98,7 @@ function updateShader(theShader)
             // }
             else
             {
-                console.log('unknown uniform type',uniform.type,uniform);
+                console.log("unknown uniform type", uniform.type, uniform);
             }
         }
     }
@@ -108,19 +108,19 @@ function updateShader(theShader)
     //     uniformInputs[i].uniform.needsUpdate=true;
     // }
 
-    uniformNames.sort(function(a, b){
-        if(a < b) return -1;
-        if(a > b) return 1;
+    uniformNames.sort(function (a, b)
+ {
+        if (a < b) return -1;
+        if (a > b) return 1;
         return 0;
     });
 
-    uniformSelect.setUiAttribs({values:uniformNames});
+    uniformSelect.setUiAttribs({ "values": uniformNames });
 
-    // if(CABLES.UI) gui.patch().showOpParams(op);
+    // if(CABLES.UI) gui.opParams.show(op);
 
     // outShader.set(null);
     // outShader.set(shader);
-
 }
 
 

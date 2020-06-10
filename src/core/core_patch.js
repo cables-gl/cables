@@ -91,6 +91,7 @@ const Patch = function (cfg)
 
     if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
+    this._isLocal = document.location.href.indexOf("file:") === 0;
 
     Log.setSilent(this.config.silent);
 
@@ -271,6 +272,7 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
+    if (this._isLocal) alert("Browser security forbids loading files directly without a webserver. Upload files to a server to work.");
     if (!filename) return filename;
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
 

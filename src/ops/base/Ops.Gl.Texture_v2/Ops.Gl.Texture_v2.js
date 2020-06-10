@@ -107,7 +107,6 @@ function realReload(nocache)
                 textureOut.set(null);
                 textureOut.set(tex);
 
-
                 loaded.set(true);
                 cgl.patch.loading.finished(loadingId);
 

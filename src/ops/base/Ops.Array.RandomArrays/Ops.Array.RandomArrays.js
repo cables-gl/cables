@@ -1,5 +1,5 @@
-const inModeSwitch = op.inSwitch("Mode",["A","AB", "ABC", "ABCD"],"A");
 const numValues=op.inValueInt("Num Values",100);
+const inModeSwitch = op.inSwitch("Mode",["A","AB", "ABC", "ABCD"],"A");
 const inSeed = op.inValueFloat("Random Seed ", 0);
 const inInteger = op.inBool("Integer", false);
 

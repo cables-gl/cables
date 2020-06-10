@@ -63,7 +63,7 @@ window.speechSynthesis.onvoiceschanged = function() {
     voiceMapKeys = Object.keys(voiceMap);
     if(CABLES.UI) {
         voicePort.uiAttribs.values = voiceMapKeys; // update dropdown values
-        gui.patch().showOpParams(op); // update visible dropdown menu
+        gui.opParams.show(op); // update visible dropdown menu
     }
 };
 

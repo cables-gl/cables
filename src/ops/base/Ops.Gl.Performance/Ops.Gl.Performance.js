@@ -293,6 +293,7 @@ function updateText()
         element.innerHTML+='<br/>frame avg: '+Math.round(avgMsChilds*100)/100+' ms ('+Math.round(avgMsChilds/avgMs*100)+'%) / '+Math.round(avgMs*100)/100+' ms';
         element.innerHTML+=' (self: '+Math.round((selfTime)*100)/100+' ms) ';
 
+
         element.innerHTML+='<br/>shader binds: '+Math.ceil(CGL.profileData.profileShaderBinds/fps)+
             ' uniforms: '+Math.ceil(CGL.profileData.profileUniformCount/fps)+
             ' mvp_uni_mat4: '+Math.ceil(CGL.profileData.profileMVPMatrixCount/fps)+
@@ -304,6 +305,8 @@ function updateText()
         ' draw meshes: '+Math.ceil(CGL.profileData.profileMeshDraw/fps)+
         ' framebuffer blit: '+Math.ceil(CGL.profileData.profileFramebuffer/fps)+
         ' texeffect blit: '+Math.ceil(CGL.profileData.profileTextureEffect/fps);
+
+        element.innerHTML+='all shader compiletime: '+Math.round(CGL.profileData.shaderCompileTime*100)/100;
 
     }
 

@@ -1,6 +1,6 @@
 const
-    fftArr=op.inArray("FFT Array"),
     refresh=op.inTriggerButton("refresh"),
+    fftArr=op.inArray("FFT Array"),
     x=op.inValueSlider("x"),
     y=op.inValueSlider("y"),
     w=op.inValueSlider("width",0.2),

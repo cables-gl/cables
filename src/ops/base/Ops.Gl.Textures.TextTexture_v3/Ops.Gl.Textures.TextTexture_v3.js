@@ -7,6 +7,7 @@ const
     lineDistance=op.inValueFloat("line distance",1),
     texWidth=op.inValueInt("texture width",512),
     texHeight=op.inValueInt("texture height",128),
+    tfilter=op.inSwitch("filter",['nearest','linear','mipmap'],'linear'),
     align=op.inSwitch("align",['left','center','right'],'center'),
     valign=op.inSwitch("vertical align",['top','center','bottom'],'center'),
     border=op.inValueFloat("border",0),
@@ -18,12 +19,20 @@ const
 
     inOpacity=op.inFloatSlider("Opacity",1),
 
+    r=op.inValueSlider("r",Math.random()),
+    g=op.inValueSlider("g",Math.random()),
+    b=op.inValueSlider("b",Math.random()),
+
     outRatio=op.outValue("Ratio"),
     textureOut=op.outTexture("texture"),
     outAspect=op.outNumber("Aspect",1);
 
+r.setUiAttribs({"colorPick":true});
+
+
+op.setPortGroup("Color",[r,g,b]);
 op.setPortGroup('Size',[font,maximize,inFontSize,lineDistance]);
-op.setPortGroup('Texture Size',[texWidth,texHeight]);
+op.setPortGroup('Texture',[texWidth,texHeight,tfilter]);
 op.setPortGroup('Alignment',[valign,align]);
 op.setPortGroup('Rendering',[drawMesh,renderHard,meshScale]);
 
@@ -42,6 +51,12 @@ texWidth.onChange=
 
 render.onTriggered=doRender;
 
+
+tfilter.onChange= ()=>
+{
+    tex=null;
+    needsRefresh=true;
+};
 
 textureOut.ignoreValueSerialize=true;
 
@@ -62,10 +77,11 @@ var vScale=vec3.create();
 
 const shader=new CGL.Shader(cgl,'texttexture');
 shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG']);
-shader.setSource(attachments.text_vert,attachments.text_frag);
+shader.setSource(attachments.text_vert, attachments.text_frag);
 const texUni=new CGL.Uniform(shader,'t','tex',0);
 const aspectUni=new CGL.Uniform(shader,'f','aspect',0);
 const opacityUni=new CGL.Uniform(shader,'f','a',inOpacity);
+const uniColor=new CGL.Uniform(shader,'3f','color',r,g,b);
 
 
 if (cgl.glVersion == 1)
@@ -73,8 +89,6 @@ if (cgl.glVersion == 1)
     cgl.gl.getExtension("OES_standard_derivatives");
     shader.enableExtension("GL_OES_standard_derivatives");
 }
-
-
 
 renderHard.onChange=function()
 {
@@ -205,13 +219,17 @@ function refresh()
 
     textureOut.set(CGL.Texture.getEmptyTexture(cgl));
 
+    let f=CGL.Texture.FILTER_LINEAR;
+    if(tfilter.get()=="nearest")f=CGL.Texture.FILTER_NEAREST;
+    if(tfilter.get()=="mipmap")f=CGL.Texture.FILTER_MIPMAP;
+
     if(!cachetexture.get() || !tex || !textureOut.get() || tex.width!=fontImage.width || tex.height != fontImage.height)
     {
-        tex=new CGL.Texture.createFromImage( cgl, fontImage, { filter:CGL.Texture.FILTER_LINEAR } )
-
+        tex=new CGL.Texture.createFromImage( cgl, fontImage, { "filter":f } )
     }
-tex.flip=false;
-    tex.initTexture(fontImage,CGL.Texture.FILTER_LINEAR);
+
+    tex.flip=false;
+    tex.initTexture(fontImage,f);
     textureOut.set(tex);
     tex.unpackAlpha=true;
 

@@ -23,13 +23,13 @@ function removeModule()
     shader=null;
     uniformInputs.length=0;
     uniformTextures.length=0;
-    
+
     //todo remove those uniform ports again from op!!
 }
 
 function updateShaderModuleCode()
 {
-    reInitShader=true;    
+    reInitShader=true;
 }
 
 render.onTriggered=function()
@@ -57,13 +57,13 @@ render.onTriggered=function()
         needsUpdate=true;
 
         reInitShader=false;
-        
+
     }
 
     if(!shader)return;
-    
+
     if(needsUpdate)updateShader();
-    
+
     next.trigger();
 };
 
@@ -93,7 +93,7 @@ function updateShader()
     // if(!shader)return;
     // needsUpdate=false;
     if(!shader.getProgram())return;
-    
+
     needsUpdate=false;
     // op.log('shader update!',shader.getProgram());
     // console.log(shader);
@@ -113,7 +113,7 @@ function updateShader()
 
         if(!hasUniformInput(uniform.name))
         {
-            if(uniform.type==0x1406) // float 
+            if(uniform.type==0x1406) // float
             {
                 var newInput=op.inValue(uniform.name, 0);
                 newInput.onChange=function(p,p2)
@@ -121,7 +121,7 @@ function updateShader()
                     p.uniform.needsUpdate=true;
                     p.uniform.setValue(p.get());
                 };
-                
+
                 uniformInputs.push(newInput);
                 newInput.uniform=new CGL.Uniform(shader,'f',uniform.name,newInput.get());
             }
@@ -145,7 +145,7 @@ function updateShader()
         uniformInputs[i].uniform.needsUpdate=true;
     }
 
-    if(CABLES.UI) gui.patch().showOpParams(op);
+    if(CABLES.UI) gui.opParams.show(op);
 
     // outShader.set(null);
     // outShader.set(shader);

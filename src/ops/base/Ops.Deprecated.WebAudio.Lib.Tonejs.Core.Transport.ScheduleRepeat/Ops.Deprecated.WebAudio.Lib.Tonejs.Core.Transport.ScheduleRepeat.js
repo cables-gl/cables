@@ -26,25 +26,25 @@ function handleChange() {
     var duration = durationPort.get();
     var interval =  intervalPort.get();
     var startTime = startTimePort.get();
-    
+
     if(!interval || interval == 0) {
         op.log("Warning: Interval should not be 0!");
         return;
     }
-    
+
     // check if interval is valid
     try{
-	    var time = new Tone.TimeBase(interval);	
+	    var time = new Tone.TimeBase(interval);
     } catch(e) {
         // interval not valid
         op.uiAttr( { 'error': 'Interval not valid, Examples: "4n", "1m", 2' } );
-        if(window && window.gui && gui.patch) gui.patch().showOpParams(op); // update GUI
+        if(window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
     	return;
     }
     // reset UI warning
     op.uiAttr( { 'error': null } );
-    if(window && window.gui && gui.patch) gui.patch().showOpParams(op); // update GUI
-    
+    if(window && window.gui && gui.patch) gui.opParams.show(op); // update GUI
+
     // clear old schedule
     if(lastListenerId) {
         Tone.Transport.clear(lastListenerId);
@@ -59,22 +59,22 @@ function handleChange() {
     if(isValidTime(startTime)) {
         if(duration && duration !== INFINITE) {
             lastListenerId = Tone.Transport.scheduleRepeat(
-                cb, 
-                interval, 
+                cb,
+                interval,
                 startTime
-            );    
+            );
         } else {
             lastListenerId = Tone.Transport.scheduleRepeat(
-                cb, 
-                interval, 
+                cb,
+                interval,
                 startTime
             );
         }
     } else {
         lastListenerId = Tone.Transport.scheduleRepeat(
-            cb, 
+            cb,
             interval
-        );  
+        );
     }
 }
 

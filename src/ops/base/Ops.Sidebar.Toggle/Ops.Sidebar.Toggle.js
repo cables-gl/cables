@@ -1,29 +1,29 @@
 const DEFAULT_VALUE_DEFAULT = true;
 
 // inputs
-let parentPort = op.inObject("link");
-let labelPort = op.inValueString("Text", "Toggle");
+const parentPort = op.inObject("link");
+const labelPort = op.inValueString("Text", "Toggle");
 const inputValuePort = op.inValueBool("Input", DEFAULT_VALUE_DEFAULT);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
-let defaultValuePort = op.inValueBool("Default", DEFAULT_VALUE_DEFAULT);
+const defaultValuePort = op.inValueBool("Default", DEFAULT_VALUE_DEFAULT);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 
 // outputs
-let siblingsPort = op.outObject("childs");
-let valuePort = op.outValue("Value", defaultValuePort.get());
+const siblingsPort = op.outObject("childs");
+const valuePort = op.outValue("Value", defaultValuePort.get());
 
 // vars
-let el = document.createElement("div");
+const el = document.createElement("div");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__toggle");
 if (DEFAULT_VALUE_DEFAULT) el.classList.add("sidebar__toggle--active");
 
 el.addEventListener("click", onInputClick);
-let label = document.createElement("div");
+const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-let labelText = document.createTextNode(labelPort.get());
+const labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
 // var value = document.createElement('div');
@@ -35,12 +35,12 @@ el.appendChild(label);
 // el.appendChild(input);
 
 
-let icon = document.createElement("div");
+const icon = document.createElement("div");
 icon.classList.add("icon_toggle");
 el.appendChild(icon);
 
 
-let greyOut = document.createElement("div");
+const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
@@ -59,7 +59,7 @@ function setDefaultValue()
     const defaultValue = inputValuePort.get();
     defaultValuePort.set(defaultValue);
     valuePort.set(defaultValue);
-    if (CABLES.UI && op.isCurrentUiOp()) gui.patch().showOpParams(op); /* update DOM */
+    if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
 }
 
 function onInputClick()
@@ -73,8 +73,8 @@ function onInputClick()
         icon.classList.add("icon_toggle_true");
         icon.classList.remove("icon_toggle_false");
     }
- else
-{
+    else
+    {
         icon.classList.remove("icon_toggle_true");
         icon.classList.add("icon_toggle_false");
 
@@ -82,20 +82,20 @@ function onInputClick()
         inputValuePort.set(false);
         // value.textContent = 'false';
     }
-    if (CABLES.UI && op.isCurrentUiOp()) gui.patch().showOpParams(op); /* update DOM */
+    if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
 }
 
 function onInputValuePortChanged()
 {
-    let inputValue = inputValuePort.get();
+    const inputValue = inputValuePort.get();
     if (inputValue)
     {
         el.classList.add("sidebar__toggle--active");
         valuePort.set(true);
         // value.textContent = 'true';
     }
- else
-{
+    else
+    {
         el.classList.remove("sidebar__toggle--active");
         valuePort.set(false);
         // value.textContent = 'false';
@@ -118,14 +118,14 @@ function onDefaultValueChanged()
 
 function onLabelTextChanged()
 {
-    let labelText = labelPort.get();
+    const labelText = labelPort.get();
     label.textContent = labelText;
     if (CABLES.UI) op.setTitle("Toggle: " + labelText);
 }
 
 function onParentChanged()
 {
-    let parent = parentPort.get();
+    const parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);

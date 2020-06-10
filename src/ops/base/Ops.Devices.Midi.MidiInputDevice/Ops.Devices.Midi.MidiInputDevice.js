@@ -1,115 +1,115 @@
 
 // http://www.keithmcmillen.com/blog/making-music-in-the-browser-web-midi-api/
 
-//https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
+// https://ccrma.stanford.edu/~craig/articles/linuxmidi/misc/essenmidi.html
 
-op.requirements=[CABLES.Requirements.MIDI];
+op.requirements = [CABLES.Requirements.MIDI];
 
 
-var normalize=op.addInPort(new CABLES.Port(op,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var deviceSelect=op.addInPort(new CABLES.Port(op,"device",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:["none"]} ));
+let normalize = op.addInPort(new CABLES.Port(op, "normalize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+let deviceSelect = op.addInPort(new CABLES.Port(op, "device", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["none"] }));
 
-var resetLights=op.addInPort(new CABLES.Port(op,"Reset Lights",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'} ));
+let resetLights = op.addInPort(new CABLES.Port(op, "Reset Lights", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 
-var outEvent=op.addOutPort(new CABLES.Port(op,"Event",CABLES.OP_PORT_TYPE_OBJECT));
+let outEvent = op.addOutPort(new CABLES.Port(op, "Event", CABLES.OP_PORT_TYPE_OBJECT));
 
 resetLights.set(false);
 normalize.set(true);
 
-var midi=null;
-var outputDevice=null;
-var inputDevice=null;
+let midi = null;
+let outputDevice = null;
+let inputDevice = null;
 
-deviceSelect.onChange=setDevice;
+deviceSelect.onChange = setDevice;
 
-if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ sysex: false }).then(onMIDISuccess, onMIDIFailure);
-    else onMIDIFailure();
+if (navigator.requestMIDIAccess) navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
+else onMIDIFailure();
 
 
-resetLights.onChange=doResetLights;
+resetLights.onChange = doResetLights;
 function doResetLights()
 {
-    if(outputDevice && resetLights.get())
+    if (outputDevice && resetLights.get())
     {
-        for(var i=0;i<128;i++)
+        for (let i = 0; i < 128; i++)
         {
-            outputDevice.send( [0x90, i, 0] );
-            outputDevice.send( [0xb0, i, 0] );
+            outputDevice.send([0x90, i, 0]);
+            outputDevice.send([0xb0, i, 0]);
         }
     }
 }
 
 function setDevice()
 {
-    if(!midi || !midi.inputs)return;
-    var name=deviceSelect.get();
-    
-    op.setTitle("Midi " + name);
-    
-    var inputs = midi.inputs.values();
-    var outputs = midi.outputs.values();
+    if (!midi || !midi.inputs) return;
+    let name = deviceSelect.get();
 
-    for (var input = inputs.next(); input && !input.done; input = inputs.next())
+    op.setTitle("Midi " + name);
+
+    let inputs = midi.inputs.values();
+    let outputs = midi.outputs.values();
+
+    for (let input = inputs.next(); input && !input.done; input = inputs.next())
     {
-        if(input.value.name==name)
+        if (input.value.name == name)
             input.value.onmidimessage = onMIDIMessage;
         else
-            if(input.value.onmidimessage == onMIDIMessage)
-                input.value.onmidimessage=null;
+        if (input.value.onmidimessage == onMIDIMessage)
+            input.value.onmidimessage = null;
     }
 
-    for (var output = outputs.next(); output && !output.done; output = outputs.next())
-        if(output.value.name==name)
-            outputDevice=midi.outputs.get(output.value.id);
-            
+    for (let output = outputs.next(); output && !output.done; output = outputs.next())
+        if (output.value.name == name)
+            outputDevice = midi.outputs.get(output.value.id);
+
     doResetLights();
 }
 
 function onMIDIFailure()
 {
-    op.uiAttr({warning:"No MIDI support in your browser."});
+    op.uiAttr({ "warning": "No MIDI support in your browser." });
 }
 
 function onMIDISuccess(midiAccess)
 {
     midi = midiAccess;
-    var inputs = midi.inputs.values();
-    op.uiAttr({'info':'no midi devices found'});
+    let inputs = midi.inputs.values();
+    op.uiAttr({ "info": "no midi devices found" });
 
-    var deviceNames=[];
-    
-    for (var input = inputs.next(); input && !input.done; input = inputs.next())
+    let deviceNames = [];
+
+    for (let input = inputs.next(); input && !input.done; input = inputs.next())
         deviceNames.push(input.value.name);
 
-    deviceSelect.uiAttribs.values=deviceNames;
+    deviceSelect.uiAttribs.values = deviceNames;
 
-    if(CABLES.UI)gui.patch().showOpParams(op);
+    if (CABLES.UI)gui.opParams.show(op);
     setDevice();
 }
 
 function onMIDIMessage(_event)
 {
-    var data = _event.data;
-    var event=
+    let data = _event.data;
+    let event =
         {
-            "deviceName":deviceSelect.get(),
-            "output":outputDevice,
-            "inputId":0,
-            "cmd":data[0] >> 4,
-            "channel":data[0] & 0xf,
-            "type":data[0] & 0xf0,
-            "note":data[1],
+            "deviceName": deviceSelect.get(),
+            "output": outputDevice,
+            "inputId": 0,
+            "cmd": data[0] >> 4,
+            "channel": data[0] & 0xf,
+            "type": data[0] & 0xf0,
+            "note": data[1],
             "velocity": data[2],
-            "data":data
+            "data": data
         };
 
-    if(normalize.get())event.velocity/=127;
+    if (normalize.get())event.velocity /= 127;
 
     // with pressure and tilt off
-    // note off: 128, cmd: 8 
+    // note off: 128, cmd: 8
     // note on: 144, cmd: 9
     // pressure / tilt on
-    // pressure: 176, cmd 11: 
+    // pressure: 176, cmd 11:
     // bend: 224, cmd: 14
 
     outEvent.set(event);

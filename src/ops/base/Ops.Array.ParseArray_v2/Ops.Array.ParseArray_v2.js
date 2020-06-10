@@ -1,5 +1,5 @@
 const text = op.inStringEditor("text", "1,2,3"),
-    separator = op.inValueString("separator", ","),
+    separator = op.inString("separator", ","),
     toNumber = op.inValueBool("Numbers", true),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),

@@ -6,7 +6,7 @@ const
     inStrength=op.inValueFloat("Strength",1),
     inCalcNormals=op.inValueBool("Calc Normals",true),
     inFalloff=op.inValueSlider("Falloff",0.5),
-    output=op.inValueSelect("Output",['Mul Normal','Add XYZ','Add Z'],'Add XYZ'),
+    output=op.inValueSelect("Output",['Mul Normal','Add XYZ','Add X','Add Y','Add Z'],'Add XYZ'),
     x=op.inValueFloat("x"),
     y=op.inValueFloat("y"),
     z=op.inValueFloat("z"),
@@ -43,6 +43,8 @@ function updateOutput()
 
     shader.toggleDefine(moduleVert.prefix+"METH_ADD_XYZ",output.get()=='Add XYZ');
     shader.toggleDefine(moduleVert.prefix+"METH_ADD_Z",output.get()=='Add Z');
+    shader.toggleDefine(moduleVert.prefix+"METH_ADD_Y",output.get()=='Add Y');
+    shader.toggleDefine(moduleVert.prefix+"METH_ADD_X",output.get()=='Add X');
     shader.toggleDefine(moduleVert.prefix+"METH_MULNORM",output.get()=='Mul Normal');
 }
 

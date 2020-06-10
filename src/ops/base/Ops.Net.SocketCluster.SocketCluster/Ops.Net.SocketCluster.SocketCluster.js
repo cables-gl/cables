@@ -4,6 +4,7 @@ const serverSecure = op.inBool("use ssl", true);
 const allowSend = op.inBool("allow send", false);
 const allowMultipleSenders = op.inBool("allow multiple senders", false);
 const channelName = op.inString("channel", CABLES.generateUUID());
+const globalDelay = op.inInt("delay send (ms)", 0);
 const ready = op.outBool("ready", false);
 const socketOut = op.outObject("socket");
 const clientIdOut = op.outString("own client id");
@@ -26,12 +27,13 @@ const init = () =>
                 socket = null;
             }
             socket = socketClusterClient.create({
-                hostname: serverHostname.get(),
-                secure: serverSecure.get(),
-                port: serverPort.get(),
+                "hostname": serverHostname.get(),
+                "secure": serverSecure.get(),
+                "port": serverPort.get(),
             });
             socket.allowSend = allowSend.get();
             socket.channelName = channelName.get();
+            socket.globalDelay = globalDelay.get();
             sendOut.set(allowSend.get());
             clientIdOut.set(socket.clientId);
             console.info("socketcluster clientId", socket.clientId);
@@ -62,6 +64,16 @@ const init = () =>
     }
 };
 
+
+globalDelay.onChange = () =>
+{
+    if (socket)
+    {
+        socket.globalDelay = globalDelay.get();
+        socketOut.set(socket);
+    }
+};
+
 allowSend.onChange = () =>
 {
     if (socket)
@@ -69,7 +81,7 @@ allowSend.onChange = () =>
         socket.allowSend = allowSend.get();
         socketOut.set(socket);
         sendOut.set(allowSend.get());
-        const payload = { topic: "cablescontrol", clientId: socket.clientId, payload: { allowSend: allowSend.get() } };
+        const payload = { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } };
         socket.transmitPublish(channelName.get() + "/control", payload);
     }
 };

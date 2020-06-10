@@ -228,7 +228,7 @@ op.exposeNode = function (name)
 {
     console.log("HUND", name);
 
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
+    let newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
     newop.getPort("Node Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
@@ -237,7 +237,7 @@ op.exposeNode = function (name)
 
 op.assignMaterial = function (name)
 {
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
+    let newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patch().focusOp(newop.id, true);

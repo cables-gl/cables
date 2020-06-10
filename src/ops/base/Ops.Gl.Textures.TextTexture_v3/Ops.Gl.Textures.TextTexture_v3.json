@@ -45,13 +45,18 @@
             {
                 "type": "0",
                 "name": "texture width",
-                "group": "Texture Size",
+                "group": "Texture",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "texture height",
-                "group": "Texture Size",
+                "group": "Texture",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "filter index",
                 "subType": "integer"
             },
             {
@@ -95,6 +100,24 @@
             {
                 "type": "0",
                 "name": "Opacity",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
                 "subType": "number"
             }
         ],

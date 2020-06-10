@@ -16,6 +16,10 @@
             {
                 "type": "1",
                 "name": "Show Modules"
+            },
+            {
+                "type": "1",
+                "name": "State Info"
             }
         ],
         "portsOut": [
@@ -26,6 +30,10 @@
             {
                 "type": "5",
                 "name": "Name"
+            },
+            {
+                "type": "5",
+                "name": "Id"
             },
             {
                 "type": "0",
