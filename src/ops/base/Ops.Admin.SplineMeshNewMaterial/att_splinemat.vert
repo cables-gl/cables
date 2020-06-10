@@ -37,10 +37,10 @@ void main()
 {
     texCoord=vPosition.xy;
     texCoord.y=texCoord.y*0.5+0.5;
-
     #ifdef TEX_MAP_FULL
     texCoord.x=splineProgress;
     #endif
+    texCoord.x+=texOffset;
 
     vec4 pos=vec4(vPosition,  1.0);
     mat4 mMatrix=modelMatrix;

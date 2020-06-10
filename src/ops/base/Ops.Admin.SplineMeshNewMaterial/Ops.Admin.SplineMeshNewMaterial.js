@@ -6,6 +6,7 @@ const
     inTexture=op.inTexture("Texture"),
     inTexMap=op.inSwitch("Mapping",["Full","Face"],"Full"),
     inTexColorize=op.inBool("Colorize Texture",false),
+    inTexOffset=op.inFloat("Offset",0),
     r=op.inValueSlider("r",Math.random()),
     g=op.inValueSlider("g",Math.random()),
     b=op.inValueSlider("b",Math.random()),
@@ -30,6 +31,7 @@ shaderOut.set(shader);
 
 shader.addUniformFrag("4f","color",r,g,b,a);
 shader.addUniformFrag("f","width",inWidth);
+shader.addUniformFrag("f","texOffset",inTexOffset);
 shader.toggleDefine("PERSPWIDTH",inPerspective);
 shader.toggleDefine("USE_TEXTURE",inTexture);
 shader.toggleDefine("TEX_COLORIZE",inTexColorize);
