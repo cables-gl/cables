@@ -1,10 +1,9 @@
-
 IN vec2 texCoord;
-
 UNI vec4 color;
 UNI sampler2D tex;
 
 {{MODULES_HEAD}}
+
 void main()
 {
     vec4 col=color;
@@ -21,5 +20,6 @@ void main()
     col.a=1.0;
 
     {{MODULE_COLOR}}
+
     outColor = col;
 }

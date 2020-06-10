@@ -20,13 +20,16 @@ class ShaderModifier
         if (!shader) return;
 
         this._boundShader = this._shaders[shader.id];
-        if (!this._boundShader)
+        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile)
         {
+            if (this._boundShader) this._boundShader.shader.dispose();
+
             this._boundShader = this._shaders[shader.id] =
-            {
-                "orig": shader,
-                "shader": shader.copy()
-            };
+                {
+                    "lastCompile": shader.lastCompile,
+                    "orig": shader,
+                    "shader": shader.copy()
+                };
 
             this._addModulesToShader(this._boundShader.shader);
             this._updateDefinesShader(this._boundShader.shader);
@@ -38,9 +41,9 @@ class ShaderModifier
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
-        this._boundShader.shader.copyUniformValues(this._boundShader.orig);
 
         this._cgl.pushShader(this._boundShader.shader);
+        this._boundShader.shader.copyUniformValues(this._boundShader.orig);
     }
 
     unbind()
@@ -127,6 +130,8 @@ class ShaderModifier
 
     _updateDefinesShader(shader)
     {
+        // console.log("_updateDefinesShader", this._defines);
+
         for (const i in this._defines)
         {
             const name = this._getDefineName(i);

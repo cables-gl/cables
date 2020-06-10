@@ -113,6 +113,7 @@ const Shader = function (_cgl, _name)
     this._textureStackUni = [];
     this._textureStackTex = [];
     this._textureStackType = [];
+    this._textureStackTexCgl = [];
 
     this._tempNormalMatrix = mat4.create();
     this._tempCamPosMatrix = mat4.create();
@@ -182,6 +183,20 @@ Shader.prototype.copyUniformValues = function (origShader)
 
         this._uniforms[i].set(origShader._uniforms[i].getValue());
     }
+
+    this.popTextures();
+    for (let i = 0; i < origShader._textureStackUni.length; i++)
+    {
+        this._textureStackUni[i] = origShader._textureStackUni[i];
+        this._textureStackTex[i] = origShader._textureStackTex[i];
+        this._textureStackType[i] = origShader._textureStackType[i];
+        this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
+    }
+
+    // this._textureStackUni = [];
+    // this._textureStackTex = [];
+    // this._textureStackType = [];
+    // this._textureStackTexCgl = [];
 };
 
 /**
@@ -617,11 +632,15 @@ Shader.prototype.toggleDefine = function (name, enabled)
 {
     if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
     {
-        console.log(enabled);
-        enabled.on("change", (v) =>
+        console.log("toggleDefine", name, enabled);
+
+        enabled.removeEventListener("change", enabled.onToggleDefine);
+        enabled.onToggleDefine = (v) =>
         {
             this.toggleDefine(name, v);
-        });
+        };
+
+        enabled.on("change", enabled.onToggleDefine);
         enabled = enabled.get();
     }
 
@@ -643,10 +662,13 @@ Shader.prototype.define = function (name, value)
 
     if (typeof (value) == "object") // port
     {
-        value.on("change", (v) =>
+        value.removeEventListener("change", value.onDefineChange);
+        value.onDefineChange = (v) =>
         {
             this.define(name, v);
-        });
+        };
+        value.on("change", value.onDefineChange);
+
         value = value.get();
     }
 
@@ -1056,7 +1078,18 @@ Shader.prototype.pushTexture = function (uniform, t, type)
     // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
 
     this._textureStackUni.push(uniform);
-    this._textureStackTex.push(t);
+
+    if (t.tex)
+    {
+        this._textureStackTexCgl.push(t);
+        this._textureStackTex.push(t.tex);
+    }
+    else
+    {
+        this._textureStackTexCgl.push(null);
+        this._textureStackTex.push(t);
+    }
+
     this._textureStackType.push(type);
 };
 
@@ -1082,6 +1115,7 @@ Shader.prototype.popTexture = function ()
 Shader.prototype.popTextures = function ()
 {
     this._textureStackTex.length =
+    this._textureStackTexCgl.length =
     this._textureStackType.length =
     this._textureStackUni.length = 0;
 };

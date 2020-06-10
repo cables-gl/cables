@@ -1,4 +1,3 @@
-
 const
     render=op.inTrigger("Render"),
     inWidth=op.inFloat("Width",0.2),
@@ -15,7 +14,6 @@ const
     shaderOut=op.outObject("Shader");
 
 r.setUiAttribs({"colorPick":true});
-
 shaderOut.ignoreValueSerialize=true;
 
 const cgl=op.patch.cgl;
@@ -29,6 +27,7 @@ shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_BEGIN_FRAG'])
 shader.setSource(attachments.splinemat_vert,attachments.splinemat_frag);
 shaderOut.set(shader);
 
+const uniTex=shader.addUniformFrag("t","tex",inTexture);
 shader.addUniformFrag("4f","color",r,g,b,a);
 shader.addUniformFrag("f","width",inWidth);
 shader.addUniformFrag("f","texOffset",inTexOffset);
@@ -37,8 +36,6 @@ shader.toggleDefine("USE_TEXTURE",inTexture);
 shader.toggleDefine("TEX_COLORIZE",inTexColorize);
 
 inTexMap.on("change",updateMapping);
-
-const uniTex=shader.addUniformFrag("t","tex",inTexture);
 
 render.onTriggered=doRender;
 updateMapping();
@@ -50,8 +47,7 @@ function doRender()
     cgl.pushShader(shader);
     shader.popTextures();
 
-    if(uniTex && inTexture.get()) shader.pushTexture(uniTex,inTexture.get().tex);
-    // if(textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform,textureOpacity.get().tex);
+    if(uniTex && inTexture.get()) shader.pushTexture(uniTex,inTexture.get());
     trigger.trigger();
 
     cgl.popShader();

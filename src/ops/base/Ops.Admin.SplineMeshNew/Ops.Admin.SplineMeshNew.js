@@ -72,7 +72,6 @@ function rebuild()
 
     thePoints=inpoints;
 
-
     if(inHardEdges.get()) thePoints=tessEdges(inPoints.get());
 
     buildMesh();
@@ -87,8 +86,6 @@ function rebuild()
 
         pointsProgress = new Float32Array(newLength);
         for(let i=0;i<newLength;i++) pointsProgress[i]=i/newLength*3;
-        console.log(pointsProgress);
-
     }
 
     let count=0;
@@ -102,7 +99,6 @@ function rebuild()
                 points3[count]=thePoints[(i+1)*3+k];
                 count++;
             }
-
 
     mesh.setAttribute("spline",points,3);
     mesh.setAttribute("spline2",points2,3);
