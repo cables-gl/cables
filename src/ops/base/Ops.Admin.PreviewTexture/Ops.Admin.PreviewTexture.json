@@ -21,10 +21,15 @@
                 "name": "Texture"
             },
             {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
                 "type": "1",
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.PreviewTexture"
+        "name": "Ops.Admin.PreviewTexture"
     }
 }

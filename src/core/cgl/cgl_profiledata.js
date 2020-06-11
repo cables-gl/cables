@@ -18,6 +18,7 @@ const ProfileData = function ()
     this.profileMainloopMs = 0;
     this.profileMeshDraw = 0;
     this.profileTextureEffect = 0;
+    this.profileTexPreviews = 0;
     this.shaderCompileTime = 0;
 };
 
