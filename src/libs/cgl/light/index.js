@@ -98,8 +98,7 @@ Light.prototype.getModifiableParameters = function ()
 
 Light.prototype.createProjectionMatrix = Light.prototype.updateProjectionMatrix = function (lrBottomTop, near, far, angle)
 {
-    if (this.type === "area") return;
-    else if (this.type === "spot")
+    if (this.type === "spot")
     {
         mat4.perspective(this._shaderShadowMap.matrices.projMatrix, -2 * CGL.DEG2RAD * angle, 1, near, far); // * angle in degrees
     }
@@ -377,7 +376,6 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
 Light.prototype.renderBlurPass = function (blurAmount)
 {
-    if (this.type === "area") return;
     this._cgl.pushShader(this._shaderBlur.shader);
 
     this._effectBlur.setSourceTexture(this._framebuffer.getTextureColor()); // take shadow map as source
