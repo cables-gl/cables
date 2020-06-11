@@ -19,12 +19,8 @@
             {
                 "type": "2",
                 "name": "Texture"
-            },
-            {
-                "type": "1",
-                "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.PreviewTexture"
+        "name": "Ops.Admin.PreviewTexture"
     }
 }
