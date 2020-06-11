@@ -601,12 +601,9 @@ const render = function ()
 
     cgl.pushShader(shader);
     shader.popTextures();
-    // shader.define("HAS_TEXTURES");
-
 
     outTrigger.trigger();
     cgl.popShader();
-//    }
 };
 
 op.preRender = function ()
