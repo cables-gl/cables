@@ -240,7 +240,7 @@ function updateSpecularTexture()
         if (!shader.hasDefine("HAS_TEXTURE_SPECULAR"))
         {
             shader.define("HAS_TEXTURE_SPECULAR");
-            if (!specularTextureUniform) specularTextureUniform = new CGL.Uniform(shader, "t", "texSpecular", 1);
+            if (!specularTextureUniform) specularTextureUniform = new CGL.Uniform(shader, "t", "texSpecular", 0);
         }
     }
     else
@@ -258,7 +258,7 @@ function updateNormalTexture()
         if (!shader.hasDefine("HAS_TEXTURE_NORMAL"))
         {
             shader.define("HAS_TEXTURE_NORMAL");
-            if (!normalTextureUniform) normalTextureUniform = new CGL.Uniform(shader, "t", "texNormal", 2);
+            if (!normalTextureUniform) normalTextureUniform = new CGL.Uniform(shader, "t", "texNormal", 0);
         }
     }
     else
@@ -276,7 +276,7 @@ function updateAoTexture()
         if (!shader.hasDefine("HAS_TEXTURE_AO"))
         {
             shader.define("HAS_TEXTURE_AO");
-            if (!aoTextureUniform) aoTextureUniform = new CGL.Uniform(shader, "t", "texAO", 3);
+            if (!aoTextureUniform) aoTextureUniform = new CGL.Uniform(shader, "t", "texAO", 0);
         }
     }
     else
@@ -294,7 +294,7 @@ function updateEmissiveTexture()
         if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE"))
         {
             shader.define("HAS_TEXTURE_EMISSIVE");
-            if (!emissiveTextureUniform) emissiveTextureUniform = new CGL.Uniform(shader, "t", "texEmissive", 4);
+            if (!emissiveTextureUniform) emissiveTextureUniform = new CGL.Uniform(shader, "t", "texEmissive", 0);
         }
     }
     else
@@ -333,7 +333,7 @@ function updateAlphaTexture()
         if (alphaTextureUniform !== null) return;
         shader.removeUniform("texAlpha");
         shader.define("HAS_TEXTURE_ALPHA");
-        if (!alphaTextureUniform) alphaTextureUniform = new CGL.Uniform(shader, "t", "texAlpha", 5);
+        if (!alphaTextureUniform) alphaTextureUniform = new CGL.Uniform(shader, "t", "texAlpha", 0);
 
         alphaMaskSource.setUiAttribs({ "greyout": false });
         discardTransPxl.setUiAttribs({ "greyout": false });

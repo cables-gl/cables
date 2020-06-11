@@ -34,11 +34,6 @@ function Light(cgl, config)
     this.cosConeAngle = config.cosConeAngle || 0;
     this.conePointAt = config.conePointAt || [0, 0, 0];
 
-    // * area light specifig config
-    this.width = config.width || 5;
-    this.height = config.height || 5;
-    this.right = config.right || [0, 1, 0];
-
     // * shadow specific config
     this.castShadow = config.castShadow || false;
     this.nearFar = config.nearFar || [0, 0];
@@ -98,9 +93,6 @@ Light.prototype.getModifiableParameters = function ()
         "cosConeAngleInner",
         "cosConeAngle",
         "conePointAt",
-        // area light
-        "width",
-        "height"
     ];
 };
 
@@ -220,7 +212,6 @@ Light.prototype.setFramebufferSize = function (size)
 
 Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 {
-    if (this.type === "area") return;
     if (this.hasShadowMapShader()) return;
 
     this._shaderShadowMap.shader = new CGL.Shader(this._cgl, "shadowPass" + this.type.charAt(0).toUpperCase() + this.type.slice(1));
@@ -257,7 +248,6 @@ Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 Light.prototype.createBlurEffect = function (options)
 {
     if (this.type === "point") return;
-    if (this.type === "area") return;
     if (this.hasBlurEffect()) this._effectBlur.delete();
 
     this._effectBlur = new CGL.TextureEffect(
@@ -276,7 +266,6 @@ Light.prototype.createBlurEffect = function (options)
 Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 {
     if (this.hasBlurShader()) return;
-    if (this.type === "area") return;
     if (this.type === "point") return; // TODO: add cubemap convolution
 
     const vShader = vertexShader || this.getBlurPassVertexShader();
@@ -292,7 +281,6 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
-    if (this.type === "area") return;
     if (this._cgl.frameStore.shadowPass) return;
 
     this._cgl.pushCullFace(true);
@@ -336,7 +324,6 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
 
 Light.prototype.renderShadowPass = function (renderFunction)
 {
-    if (this.type === "area") return;
     if (this.type === "point")
     {
         this._shaderShadowMap.uniforms.nearFar.setValue(this.nearFar);

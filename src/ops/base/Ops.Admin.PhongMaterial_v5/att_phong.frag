@@ -34,10 +34,6 @@ struct Light {
     #define SPOTEXPONENT z
     vec3 spotProperties;
 
-    // * AREA LIGHT * //
-    vec3 right;
-    float width;
-    float height;
     #define INTENSITY x
     #define ATTENUATION y
     #define FALLOFF z
