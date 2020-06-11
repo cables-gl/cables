@@ -1,8 +1,3 @@
-/* #ifdef ENABLE_FRESNEL_MOD
-    UNI vec4 MOD_inFresnel;
-    UNI vec2 MOD_inFresnelWidthExponent;
-#endif */
-
 IN vec4 MOD_cameraSpace_pos;
 IN mat3 MOD_viewMatrix;
 IN vec3 MOD_norm;
