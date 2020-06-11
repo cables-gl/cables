@@ -381,7 +381,5 @@ void main() {
         if(col.a<0.2) discard;
     #endif
 
-    // outColor = vec4(1., 0., 0., 1.);
     outColor = clamp(col, 0., 1.);
-    //outColor = vec4()
 }

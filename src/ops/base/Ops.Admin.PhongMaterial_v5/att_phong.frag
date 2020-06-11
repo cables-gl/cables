@@ -1,7 +1,3 @@
-#define POINT 0
-#define DIRECTIONAL 1
-#define SPOT 2
-
 IN vec4 modelPos;
 IN vec3 viewDirection;
 IN vec3 normInterpolated;
@@ -98,32 +94,6 @@ float when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator 
 float when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
 float when_ge(float x, float y) { return 1.0 - when_lt(x, y); }
 float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
-
-float CalculateFalloffArea(float distance, float falloff) {
-    float distanceSquared = distance * distance;
-    float factor = distanceSquared * falloff;
-    float smoothFactor = clamp(1. - factor * factor, 0., 1.);
-    float attenuation = smoothFactor * smoothFactor;
-
-    return attenuation * 1. / max(distanceSquared, 0.00001);
-}
-
-vec3 ProjectOnPlane(in vec3 p, in vec3 pc, in vec3 pn)
-{
-    float distance = dot(pn, -1. * (p - pc));
-    return p - distance * pn;
-}
-
-int SideOfPlane(in vec3 p, in vec3 pc, in vec3 pn) {
-    //return int(when_ge(dot(p - pc, pn), 0.));
-    if (dot(p - pc, pn)>=0.0) return 1;
-    return 0;
-}
-
-vec3 LinePlaneIntersect(in vec3 lp, in vec3 lv, in vec3 pc, in vec3 pn){
-   return lp + lv * (dot(pn, pc - lp) / dot(pn, lv));
-}
-
 
 #ifdef FALLOFF_MODE_A
     float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
