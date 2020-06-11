@@ -103,15 +103,6 @@ inToggleFresnel.onChange = function ()
 {
     shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel);
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
-    /* if (inToggleFresnel.get())
-    {
-        shader.define("ENABLE_FRESNEL");
-    }
-    else
-    {
-        shader.removeDefine("ENABLE_FRESNEL");
-        fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": true }); });
-    } */
 };
 
 // * SPECULAR *
@@ -610,7 +601,7 @@ const render = function ()
 
     cgl.pushShader(shader);
     shader.popTextures();
-    shader.define("HAS_TEXTURES");
+    // shader.define("HAS_TEXTURES");
 
 
     outTrigger.trigger();
