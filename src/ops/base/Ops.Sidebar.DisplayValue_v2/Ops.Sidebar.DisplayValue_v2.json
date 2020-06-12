@@ -1,0 +1,32 @@
+{
+    "authorName": "pandur",
+    "id": "3dd9927e-0d34-4442-8a8a-0ab843aee6e3",
+    "created": 1591883446091,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "5",
+                "name": "Value"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.DisplayValue_v2"
+    },
+    "summary": "display a value or string",
+    "docs": {
+        "ports": []
+    }
+}
