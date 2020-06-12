@@ -1,0 +1,81 @@
+{
+    "id": "89979937-68a6-4736-8241-3c6b748103d4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1591873359998
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "cables",
+            "date": 1591873499703
+        },
+        {
+            "message": "Ops.User.cables.FresnelGlow renamed to Ops.Gl.ShaderEffects.FresnelGlow",
+            "author": "cables",
+            "date": 1591880094697
+        }
+    ],
+    "authorName": "simod",
+    "created": 1591873381967,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel Intensity",
+                "group": "Fresnel Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel Width",
+                "group": "Fresnel Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fresnel Exponent",
+                "group": "Fresnel Settings",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.FresnelGlow"
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}
