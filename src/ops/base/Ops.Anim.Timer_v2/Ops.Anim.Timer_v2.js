@@ -1,23 +1,23 @@
 const
-    inSpeed=op.inValue("Speed",1),
-    playPause=op.inValueBool("Play",true),
-    reset=op.inTriggerButton("Reset"),
-    inSyncTimeline=op.inValueBool("Sync to timeline",false),
-    outTime=op.outValue("Time");
+    inSpeed = op.inValue("Speed", 1),
+    playPause = op.inValueBool("Play", true),
+    reset = op.inTriggerButton("Reset"),
+    inSyncTimeline = op.inValueBool("Sync to timeline", false),
+    outTime = op.outValue("Time");
 
-op.setPortGroup("Controls",[playPause,reset,inSpeed]);
+op.setPortGroup("Controls", [playPause, reset, inSpeed]);
 
-const timer=new CABLES.Timer();
-var lastTime=null;
-var time=0;
-var syncTimeline=false;
+const timer = new CABLES.Timer();
+let lastTime = null;
+let time = 0;
+let syncTimeline = false;
 
-playPause.onChange=setState;
+playPause.onChange = setState;
 setState();
 
 function setState()
 {
-    if(playPause.get())
+    if (playPause.get())
     {
         timer.play();
         op.patch.addOnAnimFrame(op);
@@ -29,62 +29,54 @@ function setState()
     }
 }
 
-reset.onTriggered=doReset;
+reset.onTriggered = doReset;
 
 function doReset()
 {
-    time=0;
-    lastTime=null;
+    time = 0;
+    lastTime = null;
     timer.setTime(0);
     outTime.set(0);
 }
 
-inSyncTimeline.onChange=function()
+inSyncTimeline.onChange = function ()
 {
-    syncTimeline=inSyncTimeline.get();
-    playPause.setUiAttribs({greyout:syncTimeline});
-    reset.setUiAttribs({greyout:syncTimeline});
+    syncTimeline = inSyncTimeline.get();
+    playPause.setUiAttribs({ "greyout": syncTimeline });
+    reset.setUiAttribs({ "greyout": syncTimeline });
 };
 
-op.onAnimFrame=function(tt)
+op.onAnimFrame = function (tt)
 {
-    if(timer.isPlaying())
+    if (timer.isPlaying())
     {
-
-        if(CABLES.overwriteTime!==undefined)
+        if (CABLES.overwriteTime !== undefined)
         {
-            outTime.set(CABLES.overwriteTime*inSpeed.get());
+            outTime.set(CABLES.overwriteTime * inSpeed.get());
+        }
+        else
 
-        } else
-
-        if(syncTimeline)
+        if (syncTimeline)
         {
-            outTime.set(tt*inSpeed.get());
+            outTime.set(tt * inSpeed.get());
         }
         else
         {
             timer.update();
-            var timerVal=timer.get();
+            const timerVal = timer.get();
 
-
-
-            if(lastTime===null)
+            if (lastTime === null)
             {
-                lastTime=timerVal;
+                lastTime = timerVal;
                 return;
             }
 
-            var t=Math.abs(timerVal-lastTime);
-            lastTime=timerVal;
+            const t = Math.abs(timerVal - lastTime);
+            lastTime = timerVal;
 
-
-
-
-            time+=t*inSpeed.get();
-            if(time!=time)time=0;
+            time += t * inSpeed.get();
+            if (time != time)time = 0;
             outTime.set(time);
         }
     }
 };
-
-

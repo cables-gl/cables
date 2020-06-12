@@ -3,25 +3,22 @@ const
     inActive = op.inBool("Active", true),
     intrig = op.inTrigger("Trigger");
 
-
 const ele = document.createElement("canvas");
 
-let width=250;
-let height=250;
+const width = 250;
+const height = 250;
 
 ele.style.position = "absolute";
 ele.style["z-index"] = 5;
-ele.style.width = width+"px";
-ele.style.height = height+"px";
+ele.style.width = width + "px";
+ele.style.height = height + "px";
 ele.style["pointer-events"] = "none";
-ele.style["transform-origin"]="top left";
-
+ele.style["transform-origin"] = "top left";
 
 document.body.appendChild(ele);
 op.addEventListener("onUiAttribsChange", updatePos);
 
-
-let wasPositioned=false;
+let wasPositioned = false;
 
 const a = {};
 let lastTime = 0;
@@ -43,16 +40,16 @@ op.onDelete = function ()
 function updateOutOfCanvas()
 {
     if (!gui.patchView.boundingRect) return;
-    let old=outOfCanvas;
+    const old = outOfCanvas;
     outOfCanvas = false;
     if (screenX < -width || screenY < -height) outOfCanvas = true;
     if (screenX > gui.patchView.boundingRect.width + gui.patchView.boundingRect.x || screenY > gui.patchView.boundingRect.height + gui.patchView.boundingRect.y)
         outOfCanvas = true;
 
-    if(outOfCanvas!=old)
+    if (outOfCanvas != old)
     {
-        if(outOfCanvas) ele.style.display="none";
-        else ele.style.display="block";
+        if (outOfCanvas) ele.style.display = "none";
+        else ele.style.display = "block";
     }
 }
 
@@ -63,11 +60,9 @@ op.patch.cgl.on("beginFrame", () =>
     if (performance.now() - lastTime < 30) return;
     if (outOfCanvas) return;
 
-
     gui.metaTexturePreviewer._renderTexture(inTex, ele);
     lastTime = performance.now();
 });
-
 
 op.onAnimFrame = function (tt)
 {
@@ -81,10 +76,9 @@ intrig.onTriggered = () =>
 
 inTex.onChange = () =>
 {
-    if(!inTex.get()) ele.style.display="none";
-    else ele.style.display="block";
+    if (!inTex.get()) ele.style.display = "none";
+    else ele.style.display = "block";
 };
-
 
 function updatePos()
 {
@@ -93,13 +87,12 @@ function updatePos()
     if (!uiOp || !uiOp.oprect) return;
     const ctm = uiOp.oprect.getScreenCTM();
 
-
-    ele.style.transform = "scale("+gui.patch()._viewBox._zoom+")";
+    ele.style.transform = "scale(" + gui.patch()._viewBox._zoom + ")";
 
     if (ctm)
     {
         screenX = ctm.e;
-        screenY = ctm.f+(28*gui.patch()._viewBox._zoom);
+        screenY = ctm.f + (28 * gui.patch()._viewBox._zoom);
 
         updateOutOfCanvas();
 
@@ -111,6 +104,6 @@ function updatePos()
         if (screenXpx != ele.style.left) ele.style.left = screenXpx;
         if (screenYpx != ele.style.top) ele.style.top = screenYpx;
 
-        wasPositioned=true;
+        wasPositioned = true;
     }
 }

@@ -43,25 +43,25 @@ inWorldSpace.onChange =
 render.onTriggered = doRender;
 
 
-const mod=new CGL.ShaderModifier(cgl,"colorArea");
+const mod = new CGL.ShaderModifier(cgl, "colorArea");
 mod.addModule({
-                "priority": 2,
-                "title": "colorArea",
-                "name": "MODULE_VERTEX_POSITION",
-                srcHeadVert,
-                srcBodyVert
-            });
+    "priority": 2,
+    "title": "colorArea",
+    "name": "MODULE_VERTEX_POSITION",
+    srcHeadVert,
+    srcBodyVert
+});
 
 mod.addModule({
-                "title": "colorArea",
-                "name": "MODULE_COLOR",
-                "srcHeadFrag": attachments.colorarea_head_frag,
-                "srcBodyFrag": attachments.colorarea_frag
-            });
+    "title": "colorArea",
+    "name": "MODULE_COLOR",
+    "srcHeadFrag": attachments.colorarea_head_frag,
+    "srcBodyFrag": attachments.colorarea_frag
+});
 
-mod.addUniform( "4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
-mod.addUniform( "3f", "MOD_color", r, g, b);
-mod.addUniform( "3f", "MOD_pos", x, y, z);
+mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
+mod.addUniform("3f", "MOD_color", r, g, b);
+mod.addUniform("3f", "MOD_pos", x, y, z);
 updateDefines();
 
 
@@ -85,7 +85,6 @@ function updateDefines()
 
 function doRender()
 {
-
     mod.bind();
 
     next.trigger();
