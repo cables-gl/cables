@@ -12,7 +12,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
     #define textureCube texture
 #endif
 
-UNI vec3 camPos;
+// UNI vec3 camPos;
 
 struct ModLight {
 /*

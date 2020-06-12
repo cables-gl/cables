@@ -116,6 +116,14 @@ class ShaderModifier
         }
     }
 
+    removeUniform(name)
+    {
+        if (this._getUniform(name))
+        {
+
+        }
+    }
+
     _getDefineName(name)
     {
         const prefix = this._mods[0].group;
