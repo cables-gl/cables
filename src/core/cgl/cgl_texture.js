@@ -126,6 +126,17 @@ Texture.prototype.clone = function ()
  * @param {Number} width
  * @param {Number} height
  */
+
+function a()
+{
+    if (1)x();
+}
+
+function x()
+{
+    if (1) return 1;
+}
+
 Texture.prototype.setSize = function (w, h)
 {
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;

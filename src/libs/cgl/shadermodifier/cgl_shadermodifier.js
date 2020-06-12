@@ -120,7 +120,7 @@ class ShaderModifier
     {
         if (this._getUniform(name))
         {
-
+            this._changedUniforms = true;
         }
     }
 

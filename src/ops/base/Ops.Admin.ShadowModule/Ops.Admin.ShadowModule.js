@@ -1,5 +1,7 @@
 const cgl = op.patch.cgl;
+const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 const LIGHT_TYPES = { point: 0, directional: 1, spot: 2 };
+
 function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
 }
@@ -72,180 +74,39 @@ const outTrigger = op.outTrigger("Trigger Out");
 
 
 const createVertexHead = (n, type) => {
-if (type === "point") return `
-// VERTEX HEAD type: ${type} count: ${n}
-#ifdef SHADOW_MAP
-    OUT vec4 modelPosMOD${n};
-#endif
-`;
-return `
-// VERTEX HEAD type: ${type} count: ${n}
-#ifdef SHADOW_MAP
-    OUT vec4 modelPosMOD${n};
-    UNI float normalOffset${n};
-    UNI mat4 lightMatrix${n};
-    OUT vec4 shadowCoord${n};
-#endif
-`;
+    if (type === "ambient") return "";
+    if (type === "point") return attachments.shadow_head_point_vert.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "spot") return attachments.shadow_head_spot_vert.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "directional") return attachments.shadow_head_directional_vert.replace(LIGHT_INDEX_REGEX, n);
 };
 
 const createVertexBody = (n, type) => {
-    if (type === "point") return `
-// VERTEX BODY type: ${type} count: ${n}
-#ifdef SHADOW_MAP
-    modelPosMOD${n} = mMatrix * pos;
-#endif
-`;
-    return `
-#ifdef SHADOW_MAP
-    modelPosMOD${n} = mMatrix*pos;
-    shadowCoord${n} = lightMatrix${n} * (modelPosMOD${n} + vec4(norm, 1) * normalOffset${n});
-#endif
-    `;
+    if (type === "ambient") return "";
+    if (type === "point") return attachments.shadow_body_point_vert.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "spot") return attachments.shadow_body_spot_vert.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "directional") return attachments.shadow_body_directional_vert.replace(LIGHT_INDEX_REGEX, n);
 };
 
 const createFragmentHead = (n, type) => {
-    if (type === "ambient") return ""; //return `UNI Light light${n};`;
-    return `
-    // FRAGMENT HEAD type: ${type} count: ${n}
-    UNI ModLight light${n};
-    IN vec4 modelPosMOD${n};
-    ${type !== "point" ? `
-    #ifdef SHADOW_MAP
-        IN vec4 shadowCoord${n};
-    #endif` :``}
-
-    ${type === "point" ?  `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
-    `;
+    if (type === "ambient") return "";
+    if (type === "point") return attachments.shadow_head_point_frag.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "spot") return attachments.shadow_head_spot_frag.replace(LIGHT_INDEX_REGEX, n);
+    if (type === "directional") return attachments.shadow_head_directional_frag.replace(LIGHT_INDEX_REGEX, n);
 };
 
-const createFragmentBody = (n, type, shouldCastShadow) => {
+const createFragmentBody = (n, type) => {
     if (type === "ambient") return '';
-    let fragmentCode = `// FRAGMENT BODY type: ${type} count: ${n}`;
-
-    if (inReceiveShadow.get()) {
+    let fragmentCode = "";
+    // if (inReceiveShadow.get()) {
         if (type === "spot") {
-            // NOTE: no slope scaled depth bias because not all materials use lightDirection & lambert factor
-            // float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
-            fragmentCode = fragmentCode.concat(`
-    #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
-            vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
-            float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = light${n}.shadowStrength;
-            vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
-
-            #ifdef MODE_DEFAULT
-                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
-            #endif
-
-            #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
-            #endif
-
-            #ifdef MODE_POISSON
-                #ifdef WEBGL1
-                    FillPoissonArray();
-                #endif
-
-                 col.rgb *= ShadowFactorPoisson(shadowMap${n}, shadowMapLookup${n}, shadowMapDepth${n}, bias${n});
-            #endif
-
-            #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
-            #endif
-        }
-    #endif
-        `);
+            fragmentCode = fragmentCode.concat(attachments.shadow_body_spot_frag.replace(LIGHT_INDEX_REGEX, n));
         }
         else if (type === "directional") {
-            fragmentCode = fragmentCode.concat(`
-    #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-            vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
-            float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
-            float shadowStrength${n} = light${n}.shadowStrength;
-            vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
-            float bias${n} = light${n}.shadowProperties.BIAS;
-
-             #ifdef MODE_DEFAULT
-                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
-            #endif
-
-            #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
-            #endif
-
-            #ifdef MODE_POISSON
-                #ifdef WEBGL1
-                    FillPoissonArray();
-                #endif
-
-                 col.rgb *= ShadowFactorPoisson(shadowMap${n}, shadowMapLookup${n}, shadowMapDepth${n}, bias${n});
-            #endif
-
-            #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
-            #endif
+    fragmentCode = fragmentCode.concat(attachments.shadow_body_directional_frag.replace(LIGHT_INDEX_REGEX, n));
+        } else if (type === "point") {
+            fragmentCode = fragmentCode.concat(attachments.shadow_body_point_frag.replace(LIGHT_INDEX_REGEX, n));
         }
-    #endif
-            `);
-        }
-        else if (type === "point") {
-            fragmentCode = fragmentCode.concat(`
-    #ifdef SHADOW_MAP
-        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
-            float shadowStrength${n} = light${n}.shadowStrength;
-
-            float cameraNear${n} = light${n}.shadowProperties.NEAR; // uniforms
-            float cameraFar${n} =  light${n}.shadowProperties.FAR;
-
-            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - light${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
-
-            float shadowMapDepth${n} = fromLightToFrag${n};
-            // float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
-            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
-            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
-            vec2 shadowMapSample${n} = textureCube(shadowMap${n}, -lightDirectionMOD${n}).rg;
-
-
-
-
-            #ifdef MODE_DEFAULT
-                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
-            #endif
-            #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPointPCF(
-                    shadowMap${n},
-                    lightDirectionMOD${n},
-                    shadowMapDepth${n},
-                    cameraNear${n},
-                    cameraFar${n},
-                    bias${n},
-                    shadowStrength${n},
-                    modelPosMOD${n}.xyz
-                );
-            #endif
-            #ifdef MODE_POISSON
-                #ifdef WEBGL1
-                    FillPoissonArray();
-                #endif
-
-                 col.rgb *= ShadowFactorPointPoisson(shadowMap${n}, lightDirectionMOD${n}, shadowMapDepth${n}, bias${n});
-            #endif
-
-            #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
-            #endif
-        }
-    #endif
-        `);
-        }
-    }
+    // }
 
     return fragmentCode;
 };
