@@ -33,10 +33,12 @@ inHardEdges.onChange =
 
 render.onTriggered = renderMesh;
 
+
 function renderMesh()
 {
     if (rebuildLater)rebuild();
-    if (mesh && inRenderMesh.get()) mesh.render(cgl.getShader());
+    if (mesh && inRenderMesh.get())
+        mesh.render(cgl.getShader());
 }
 
 function buildMesh()
@@ -94,6 +96,7 @@ function rebuild()
     }
     else
     {
+        splineIndex = null;
         thePoints = inpoints;
     }
 
@@ -102,28 +105,31 @@ function rebuild()
     buildMesh();
 
     const newLength = thePoints.length * 6;
+    let count = 0;
+    let lastIndex = 0;
+    let drawable = 0;
 
     if (points.length != newLength)
     {
         points = new Float32Array(newLength);
         points2 = new Float32Array(newLength);
         points3 = new Float32Array(newLength);
-        doDraw = new Float32Array(newLength);
 
+        doDraw = new Float32Array(newLength / 3);
         pointsProgress = new Float32Array(newLength / 3);
+
         for (let i = 0; i < newLength / 3; i++) pointsProgress[i] = i / (newLength / 3);
     }
 
-    let count = 0;
-    let lastIndex = 0;
-    let drawable = 0;
-
     for (let i = 0; i < thePoints.length / 3; i++)
     {
-        if (i > 1 && lastIndex != splineIndex[i]) drawable = 0.0;
+        if (splineIndex)
+        {
+            if (i > 1 && lastIndex != splineIndex[i]) drawable = 0.0;
+            else drawable = 1.0;
+            lastIndex = splineIndex[i];
+        }
         else drawable = 1.0;
-        lastIndex = splineIndex[i];
-        // drawable= splineIndex[i];
 
         for (let j = 0; j < 6; j++)
         {
@@ -142,7 +148,6 @@ function rebuild()
     mesh.setAttribute("spline", points, 3);
     mesh.setAttribute("spline2", points2, 3);
     mesh.setAttribute("spline3", points3, 3);
-    // console.log(doDraw);
     mesh.setAttribute("splineDoDraw", doDraw, 1);
     mesh.setAttribute("splineProgress", pointsProgress, 1);
 
@@ -157,14 +162,14 @@ function ip(a, b, p)
 function tessEdges(oldArr)
 {
     let count = 0;
-
     const step = 0.001;
     const oneMinusStep = 1 - step;
-
-    arrEdges.length = oldArr.length * 6;
+    const l = oldArr.length * 3 - 3;
+    arrEdges.length = l;
 
     const tessSplineIndex = [];
 
+    if (splineIndex) tessSplineIndex[0] = splineIndex[1];
 
     for (let i = 0; i < oldArr.length - 3; i += 3)
     {
@@ -184,7 +189,7 @@ function tessEdges(oldArr)
         if (splineIndex) tessSplineIndex[count / 3] = splineIndex[i / 3];
     }
 
-    splineIndex = tessSplineIndex;
+    if (splineIndex) splineIndex = tessSplineIndex;
 
     return arrEdges;
 }
