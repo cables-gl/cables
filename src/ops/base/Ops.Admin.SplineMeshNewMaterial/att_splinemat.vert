@@ -4,7 +4,9 @@ IN vec3 vPosition;
 IN float attrVertIndex;
 IN float splineProgress;
 IN vec3 spline,spline2,spline3;
+IN float splineDoDraw;
 
+OUT float splineDoDrawFrag;
 OUT vec2 texCoord;
 OUT vec3 norm;
 UNI mat4 projMatrix;
@@ -45,6 +47,7 @@ void main()
     mat4 mMatrix=modelMatrix;
     mat4 mvMatrix=viewMatrix * mMatrix;
 
+    splineDoDrawFrag=splineDoDraw;
 
     // vec4 pos=vec4((spline2+spline3+spline)/3.0*vPosition,1.0);
     vec4 pos=vec4(spline2,1.0);
