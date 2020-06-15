@@ -1,19 +1,14 @@
 const
     inTex = op.inTexture("Texture"),
     inActive = op.inBool("Active", true),
-    inSize=op.inFloat("Size",250),
+    inSize = op.inFloat("Size", 250),
     intrig = op.inTrigger("Trigger");
 
 const ele = document.createElement("canvas");
 
-<<<<<<< HEAD
-let width=250;
-let height=250;
-let zoom=1;
-=======
-const width = 250;
-const height = 250;
->>>>>>> 15198ab31221def7a57b08ee4181a2114c5edabf
+let width = 250;
+let height = 250;
+let zoom = 1;
 
 ele.style.position = "absolute";
 ele.style["z-index"] = 5;
@@ -44,21 +39,20 @@ op.onDelete = function ()
     ele.remove();
 };
 
-inSize.onChange=function()
+inSize.onChange = function ()
 {
-    width=inSize.get();
-    height=width;
-ele.style.width = width+"px";
-ele.style.height = height+"px";
-
-}
+    width = inSize.get();
+    height = width;
+    ele.style.width = width + "px";
+    ele.style.height = height + "px";
+};
 
 function updateOutOfCanvas()
 {
     if (!gui.patchView.boundingRect) return;
     const old = outOfCanvas;
     outOfCanvas = false;
-    if (screenX < -width*zoom || screenY < -height*zoom) outOfCanvas = true;
+    if (screenX < -width * zoom || screenY < -height * zoom) outOfCanvas = true;
     if (screenX > gui.patchView.boundingRect.width + gui.patchView.boundingRect.x || screenY > gui.patchView.boundingRect.height + gui.patchView.boundingRect.y)
         outOfCanvas = true;
 
@@ -103,14 +97,14 @@ function updatePos()
     if (!uiOp || !uiOp.oprect) return;
     const ctm = uiOp.oprect.getScreenCTM();
 
-    zoom=gui.patch()._viewBox._zoom;
-    if(zoom===null)zoom=1;
+    zoom = gui.patch()._viewBox._zoom;
+    if (zoom === null)zoom = 1;
     ele.style.transform = "scale(" + zoom + ")";
 
     if (ctm)
     {
         screenX = ctm.e;
-        screenY = ctm.f+(28*zoom);
+        screenY = ctm.f + (28 * zoom);
 
         updateOutOfCanvas();
 
@@ -119,7 +113,7 @@ function updatePos()
         const screenXpx = screenX + "px";
         const screenYpx = screenY + "px";
 
-        ele.style.transform = "scale("+zoom+")";
+        ele.style.transform = "scale(" + zoom + ")";
         if (screenXpx != ele.style.left) ele.style.left = screenXpx;
         if (screenYpx != ele.style.top) ele.style.top = screenYpx;
 

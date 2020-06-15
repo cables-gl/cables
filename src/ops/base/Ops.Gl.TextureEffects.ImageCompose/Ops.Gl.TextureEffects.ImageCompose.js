@@ -17,7 +17,6 @@ const outRatio = op.outValue("Aspect Ratio");
 op.setPortGroup("Texture Size", [useVPSize, width, height]);
 op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture]);
 
-
 const cgl = op.patch.cgl;
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 let effect = null;
@@ -26,6 +25,7 @@ let tex = null;
 let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
+
 
 const bgFrag = ""
     .endl() + "uniform float a;"

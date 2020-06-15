@@ -104,7 +104,7 @@ function updateOpacity()
         if (textureOpacityUniform !== null) return;
         shader.removeUniform("texOpacity");
         shader.define("HAS_TEXTURE_OPACITY");
-        if (!textureOpacityUniform)textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity", 1);
+        if (!textureOpacityUniform)textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity");
 
         alphaMaskSource.setUiAttribs({ "greyout": false });
         texCoordAlpha.setUiAttribs({ "greyout": false });
@@ -127,7 +127,7 @@ function updateDiffuseTexture()
     if (diffuseTexture.get())
     {
         if (!shader.hasDefine("HAS_TEXTURE_DIFFUSE"))shader.define("HAS_TEXTURE_DIFFUSE");
-        if (!diffuseTextureUniform)diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse", 0);
+        if (!diffuseTextureUniform)diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse");
 
         diffuseRepeatX.setUiAttribs({ "greyout": false });
         diffuseRepeatY.setUiAttribs({ "greyout": false });
