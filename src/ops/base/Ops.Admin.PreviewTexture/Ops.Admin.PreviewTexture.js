@@ -4,26 +4,28 @@ const
     inSize=op.inFloat("Size",250),
     intrig = op.inTrigger("Trigger");
 
-
 const ele = document.createElement("canvas");
 
+<<<<<<< HEAD
 let width=250;
 let height=250;
 let zoom=1;
+=======
+const width = 250;
+const height = 250;
+>>>>>>> 15198ab31221def7a57b08ee4181a2114c5edabf
 
 ele.style.position = "absolute";
 ele.style["z-index"] = 5;
-ele.style.width = width+"px";
-ele.style.height = height+"px";
+ele.style.width = width + "px";
+ele.style.height = height + "px";
 ele.style["pointer-events"] = "none";
-ele.style["transform-origin"]="top left";
-
+ele.style["transform-origin"] = "top left";
 
 document.body.appendChild(ele);
 op.addEventListener("onUiAttribsChange", updatePos);
 
-
-let wasPositioned=false;
+let wasPositioned = false;
 
 const a = {};
 let lastTime = 0;
@@ -54,16 +56,16 @@ ele.style.height = height+"px";
 function updateOutOfCanvas()
 {
     if (!gui.patchView.boundingRect) return;
-    let old=outOfCanvas;
+    const old = outOfCanvas;
     outOfCanvas = false;
     if (screenX < -width*zoom || screenY < -height*zoom) outOfCanvas = true;
     if (screenX > gui.patchView.boundingRect.width + gui.patchView.boundingRect.x || screenY > gui.patchView.boundingRect.height + gui.patchView.boundingRect.y)
         outOfCanvas = true;
 
-    if(outOfCanvas!=old)
+    if (outOfCanvas != old)
     {
-        if(outOfCanvas) ele.style.display="none";
-        else ele.style.display="block";
+        if (outOfCanvas) ele.style.display = "none";
+        else ele.style.display = "block";
     }
 }
 
@@ -74,11 +76,9 @@ op.patch.cgl.on("beginFrame", () =>
     if (performance.now() - lastTime < 30) return;
     if (outOfCanvas) return;
 
-
     gui.metaTexturePreviewer._renderTexture(inTex, ele);
     lastTime = performance.now();
 });
-
 
 op.onAnimFrame = function (tt)
 {
@@ -92,10 +92,9 @@ intrig.onTriggered = () =>
 
 inTex.onChange = () =>
 {
-    if(!inTex.get()) ele.style.display="none";
-    else ele.style.display="block";
+    if (!inTex.get()) ele.style.display = "none";
+    else ele.style.display = "block";
 };
-
 
 function updatePos()
 {
@@ -106,6 +105,7 @@ function updatePos()
 
     zoom=gui.patch()._viewBox._zoom;
     if(zoom===null)zoom=1;
+    ele.style.transform = "scale(" + zoom + ")";
 
     if (ctm)
     {
@@ -123,6 +123,6 @@ function updatePos()
         if (screenXpx != ele.style.left) ele.style.left = screenXpx;
         if (screenYpx != ele.style.top) ele.style.top = screenYpx;
 
-        wasPositioned=true;
+        wasPositioned = true;
     }
 }

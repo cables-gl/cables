@@ -17,6 +17,7 @@ const smoothness = op.inValueSlider("Smoothness", 1.0);
 const speedX = op.inValue("Speed X", 1);
 const speedY = op.inValue("Speed Y", 1);
 
+<<<<<<< HEAD
 
 const active = op.inValueBool("Active", true);
 
