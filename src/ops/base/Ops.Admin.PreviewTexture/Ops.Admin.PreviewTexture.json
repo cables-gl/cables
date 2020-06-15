@@ -26,6 +26,11 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
                 "type": "1",
                 "name": "Trigger"
             }
