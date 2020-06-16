@@ -16,7 +16,7 @@
         #endif
     #endif
 
-    vec3 diffuseColor{{LIGHT_INDEX}} = CalculateDiffuseColor(phongLightDirection{{LIGHT_INDEX}}, normal, lightColor{{LIGHT_INDEX}}, baseColor, phongLambert{{LIGHT_INDEX}});
+    vec3 diffuseColor{{LIGHT_INDEX}} = CalculateDiffuseColor(phongLightDirection{{LIGHT_INDEX}}, viewDirection, normal, lightColor{{LIGHT_INDEX}}, baseColor, phongLambert{{LIGHT_INDEX}});
     vec3 specularColor{{LIGHT_INDEX}} = CalculateSpecularColor(
         lightSpecular{{LIGHT_INDEX}},
         inMaterialProperties.SPECULAR_AMT,

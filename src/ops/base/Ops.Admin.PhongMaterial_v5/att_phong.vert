@@ -29,7 +29,7 @@ OUT vec4 modelPos;
 
 OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 OUT vec4 cameraSpace_pos;
-OUT vec3 viewDirection;
+OUT vec3 v_viewDirection;
 
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;
@@ -115,7 +115,7 @@ void main()
 
 
     fragPos = vec3((mMatrix) * pos);
-    viewDirection = normalize(camPos - fragPos);
+    v_viewDirection = normalize(camPos - fragPos);
     modelPos=mMatrix*pos;
 
     gl_Position = projMatrix * mvMatrix * pos;

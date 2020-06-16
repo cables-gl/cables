@@ -151,7 +151,7 @@ const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
 const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
-const inEmissiveIntensity = op.inFloat("Emissive Intensity", 1);
+const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Texture Transforms", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
