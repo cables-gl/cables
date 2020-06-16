@@ -14,7 +14,7 @@ void main()
     vec4 col;
 
     #ifndef HARD_EDGE
-        outColor= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r*a);
+        col= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r*a);
     #endif
     #ifdef HARD_EDGE
 
@@ -33,7 +33,7 @@ void main()
         col4=myround(col4);
         col5=myround(col5);
 
-        col.a=(col.a+col2.a+col3.a+col4.a+col5.a)/5.0*a;
+        // col.a=(col.a+col2.a+col3.a+col4.a+col5.a)/5.0*a;
 
     #endif
 

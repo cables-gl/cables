@@ -1,4 +1,5 @@
 IN vec2 texCoord;
+IN float splineDoDrawFrag;
 UNI vec4 color;
 UNI sampler2D tex;
 
@@ -20,6 +21,9 @@ void main()
     col.a=1.0;
 
     {{MODULE_COLOR}}
+
+    // if(splineDoDrawFrag==0.0) col.rgb=vec3(1.0,0.0,0.0);
+    if(splineDoDrawFrag==0.0)discard;
 
     outColor = col;
 }
