@@ -198,7 +198,7 @@ vec3 CalculateDiffuseColor(
     vec3 normal,
     vec3 lightColor,
     vec3 materialColor,
-    in float lambert
+    inout float lambert
 ) {
     #ifndef ENABLE_OREN_NAYAR_DIFFUSE
         lambert = clamp(dot(lightDirection, normal), 0., 1.);
