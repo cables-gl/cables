@@ -194,7 +194,7 @@ vec3 CalculateDiffuseColor(
     #endif
 
     #ifdef ENABLE_OREN_NAYAR_DIFFUSE
-        float lambertian = CalculateOrenNayar(lightDirection, viewDirection, normal);
+        lambert = CalculateOrenNayar(lightDirection, viewDirection, normal);
     #endif
 
     vec3 diffuseColor = lambert * lightColor * materialColor;
