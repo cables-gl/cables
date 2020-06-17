@@ -116,10 +116,19 @@ class ShaderModifier
         }
     }
 
+    _removeUniformFromShader(name, shader)
+    {
+        shader.removeUniform(name);
+    }
+
     removeUniform(name)
     {
         if (this._getUniform(name))
         {
+            for (const shader in this._shaders)
+            {
+                this._removeUniformFromShader(name, shader);
+            }
             this._changedUniforms = true;
         }
     }
