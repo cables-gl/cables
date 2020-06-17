@@ -1,10 +1,9 @@
 // * POINT LIGHT {{LIGHT_INDEX}} *
 
 vec3 phongLightDirection{{LIGHT_INDEX}} = phongLight{{LIGHT_INDEX}}.position - fragPos.xyz;
-// * get length before normalization
-    phongLightDirection{{LIGHT_INDEX}} = normalize( phongLightDirection{{LIGHT_INDEX}});
-
+// * get length before normalization for falloff calculation
 float phongLightDistance{{LIGHT_INDEX}} = length(phongLightDirection{{LIGHT_INDEX}});
+    phongLightDirection{{LIGHT_INDEX}} = normalize(phongLightDirection{{LIGHT_INDEX}});
 
 float phongLambert{{LIGHT_INDEX}} = 1.; // inout variable
 

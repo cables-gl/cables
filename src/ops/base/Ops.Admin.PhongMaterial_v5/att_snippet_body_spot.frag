@@ -1,6 +1,5 @@
     // * SPOT LIGHT {{LIGHT_INDEX}} *
     vec3 phongLightDirection{{LIGHT_INDEX}} = phongLight{{LIGHT_INDEX}}.position - fragPos.xyz;
-    // * get length before normalization
     float phongLightDistance{{LIGHT_INDEX}} = length(phongLightDirection{{LIGHT_INDEX}});
     phongLightDirection{{LIGHT_INDEX}} = normalize( phongLightDirection{{LIGHT_INDEX}});
 
