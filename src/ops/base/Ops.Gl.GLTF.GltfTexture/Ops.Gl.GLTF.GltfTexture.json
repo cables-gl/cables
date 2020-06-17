@@ -1,0 +1,32 @@
+{
+    "id": "6479a948-7a48-42a3-b40a-794f4364715f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592403141954
+        },
+        {
+            "message": "Ops.User.pandur.GltfTexture renamed to Ops.Gl.GLTF.GltfTexture",
+            "author": "pandur",
+            "date": 1592429648315
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1592403235970,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.User.pandur.GltfTexture"
+    }
+}
