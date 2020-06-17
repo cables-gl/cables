@@ -77,5 +77,50 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "add fresnel glow to any material",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger input"
+            },
+            {
+                "name": "Active",
+                "text": "activate or disactivate fresnel effect"
+            },
+            {
+                "name": "R",
+                "text": "R channel of fresnel color"
+            },
+            {
+                "name": "G",
+                "text": "G channel of fresnel color"
+            },
+            {
+                "name": "B",
+                "text": "B channel of fresnel color"
+            },
+            {
+                "name": "Fresnel Intensity",
+                "text": "intensity of the effect"
+            },
+            {
+                "name": "Fresnel Width",
+                "text": "width of the effect"
+            },
+            {
+                "name": "Fresnel Exponent",
+                "text": "falloff of the effect"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            }
+        ]
+    }
 }

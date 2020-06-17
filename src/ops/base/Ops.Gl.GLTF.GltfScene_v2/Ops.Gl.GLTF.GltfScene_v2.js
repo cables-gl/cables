@@ -328,21 +328,43 @@ op.exposeNode = function (name, tree)
             if (gltf.nodes[i].name == name)
             {
                 const node = gltf.nodes[i];
-                console.log(node);
                 const arrHierarchy = [];
                 findParents(arrHierarchy, i);
-                console.log(arrHierarchy);
+
+                arrHierarchy.push(node, node);
+
+                let prevPort = next.name;
+                let prevOp = op;
+                for (let j = 0; j < arrHierarchy.length; j++)
+                {
+                    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+                    newop.getPort("Node Name").set(arrHierarchy[j].name);
+                    op.patch.link(prevOp, prevPort, newop, "Render");
+
+                    if (j == arrHierarchy.length - 1)
+                    {
+                        newop.getPort("Transformation").set(false);
+                    }
+                    else
+                    {
+                        newop.getPort("Draw Mesh").set(false);
+                        newop.getPort("Draw Childs").set(false);
+                    }
+
+                    prevPort = "Next";
+                    prevOp = newop;
+                }
             }
         }
     }
     else
     {
-        const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
+        const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
         newop.getPort("Node Name").set(name);
         op.patch.link(op, next.name, newop, "Render");
         gui.patch().focusOp(newop.id, true);
-        CABLES.UI.MODAL.hide();
     }
+    CABLES.UI.MODAL.hide();
 };
 
 op.assignMaterial = function (name)

@@ -56,5 +56,38 @@
             }
         ],
         "name": "Ops.Gl.CubeMap.EquirectangularToCubemap"
+    },
+    "summary": "convert an equirectangular map to a cubemap",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Equirectangular Map",
+                "text": "equirectangular texture input"
+            },
+            {
+                "name": "Refresh",
+                "text": "trigger to convert input texture again"
+            },
+            {
+                "name": "Cubemap Size index",
+                "text": "size of the cubemap"
+            },
+            {
+                "name": "Advanced",
+                "text": "check to use a different texture filter"
+            },
+            {
+                "name": "Filter index",
+                "text": "index of different filter types"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "cubemap output"
+            }
+        ]
     }
 }
