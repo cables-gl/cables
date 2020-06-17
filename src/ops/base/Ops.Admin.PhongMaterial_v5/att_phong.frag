@@ -7,6 +7,7 @@ IN vec4 cameraSpace_pos;
 IN mat3 normalMatrix; // when instancing...
 IN mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
 IN vec3 fragPos;
+IN vec3 v_viewDirection;
 
 IN vec3 mvNormal;
 IN vec3 mvTangent;
@@ -16,6 +17,10 @@ IN mat4 mvMatrix;
 UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
 UNI mat4 viewMatrix;
+
+#ifdef ADD_EMISSIVE_COLOR
+    UNI vec4 inEmissiveColor; // .w = intensity
+#endif
 
 #ifdef ENABLE_FRESNEL
     UNI vec4 inFresnel;
@@ -42,7 +47,6 @@ struct Light {
 };
 
 /* CONSTANTS */
-#define PI 3.1415926535897932384626433832795
 #define NONE -1
 #define ALBEDO x
 #define ROUGHNESS y
@@ -52,8 +56,9 @@ struct Light {
 #define AO y
 #define SPECULAR z
 #define EMISSIVE w
-#define TWO_PI 2.*PI
-#define EIGHT_PI 8.*PI;
+const float PI = 3.1415926535897932384626433832795;
+const float TWO_PI = (2. * PI);
+const float EIGHT_PI = (8. * PI);
 
 // TEXTURES
 #ifdef HAS_TEXTURES
@@ -93,20 +98,22 @@ float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
 
 #ifdef FALLOFF_MODE_A
     float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
+        // * original falloff
+        float denom = distance / radius + 1.0;
+        float attenuation = 1.0 / (denom*denom);
+        float t = (attenuation - falloff) / (1.0 - falloff);
+        return max(t, 0.0);
+    }
+#endif
+
+#ifdef FALLOFF_MODE_B
+    float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
         float distanceSquared = dot(lightDirection, lightDirection);
         float factor = distanceSquared * falloff;
         float smoothFactor = clamp(1. - factor * factor, 0., 1.);
         float attenuation = smoothFactor * smoothFactor;
 
         return attenuation * 1. / max(distanceSquared, 0.00001);
-    }
-#endif
-
-#ifdef FALLOFF_MODE_B
-    float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
-        // inverse square falloff, "physically correct"
-        return 1.0 / max(distance * distance, 0.0001);
-        //return 1.0 / max(dot(lightDirection, lightDirection), 0.0001);
     }
 #endif
 
@@ -120,6 +127,13 @@ float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
         float denominator = distance*distance + falloff;
 
         return falloffNumerator/denominator;
+    }
+#endif
+
+#ifdef FALLOFF_MODE_D
+    float CalculateFalloff(float distance, vec3 lightDirection, float falloff, float radius) {
+        // inverse square falloff, "physically correct"
+        return 1.0 / max(distance * distance, 0.0001);
     }
 #endif
 
@@ -184,6 +198,7 @@ float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
 
 vec3 CalculateDiffuseColor(
     vec3 lightDirection,
+    vec3 viewDirection,
     vec3 normal,
     vec3 lightColor,
     vec3 materialColor,
@@ -194,7 +209,7 @@ vec3 CalculateDiffuseColor(
     #endif
 
     #ifdef ENABLE_OREN_NAYAR_DIFFUSE
-        float lambertian = CalculateOrenNayar(lightDirection, viewDirection, normal);
+        lambert = CalculateOrenNayar(lightDirection, viewDirection, normal);
     #endif
 
     vec3 diffuseColor = lambert * lightColor * materialColor;
@@ -208,7 +223,7 @@ vec3 CalculateSpecularColor(
     vec3 lightDirection,
     vec3 viewDirection,
     vec3 normal,
-    inout float lambertian
+    float lambertian
 ) {
     vec3 resultColor = vec3(0.);
 
@@ -241,12 +256,12 @@ vec3 CalculateSpecularColor(
         exponent = -(exponent*exponent);
         float specularFactor = exp(exponent);
 
-        resultColor = lambertian*specularFactor * specularCoefficient * specularColor;
+        resultColor = lambertian * specularFactor * specularCoefficient * specularColor;
     #endif
 
     #ifdef CONSERVE_ENERGY
         float conserveEnergyFactor = EnergyConservation(shininess);
-        resultColor = conserveEnergyFactor * specularColor;
+        resultColor = conserveEnergyFactor * resultColor;
     #endif
 
     return resultColor;
@@ -276,6 +291,7 @@ void main()
     vec3 calculatedColor = vec3(0.);
     vec3 normal = normalize(normInterpolated);
     vec3 baseColor = inDiffuseColor.rgb;
+    vec3 viewDirection = normalize(v_viewDirection);
 
     #ifdef DOUBLE_SIDED
         if(!gl_FrontFacing) normal = normal * -1.0;
@@ -323,9 +339,16 @@ void main()
         #endif
     #endif
 
-    #ifdef HAS_TEXTURE_EMISSIVE
-        float emissiveIntensity = inTextureIntensities.EMISSIVE;
-        calculatedColor += emissiveIntensity * baseColor * texture(texEmissive, texCoord).r;
+    #ifdef ADD_EMISSIVE_COLOR
+        vec3 emissiveRadiance = inEmissiveColor.rgb * inEmissiveColor.w; // .w = intensity of color;
+
+        #ifdef HAS_TEXTURE_EMISSIVE
+            float emissiveIntensity = inTextureIntensities.EMISSIVE;
+            // calculatedColor += emissiveIntensity * baseColor * texture(texEmissive, texCoord).r;
+            emissiveRadiance *= (emissiveIntensity * texture(texEmissive, texCoord).rgb);
+        #endif
+
+        calculatedColor += emissiveRadiance;
     #endif
 
 
