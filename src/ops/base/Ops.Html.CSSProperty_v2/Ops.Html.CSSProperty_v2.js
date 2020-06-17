@@ -25,7 +25,7 @@ inEle.onChange = inEle.onLinkChanged = function ()
 function updateProperty()
 {
     update();
-    op.setUiAttrib({ "extendTitle": inProperty.get() });
+    op.setUiAttrib({ "extendTitle": inProperty.get() + "" });
 }
 
 function update()
@@ -34,7 +34,14 @@ function update()
     if (ele && ele.style)
     {
         const str = inValue.get() + inValueSuffix.get();
-        ele.style[inProperty.get()] = str;
+        try
+        {
+            ele.style[inProperty.get()] = str;
+        }
+        catch (e)
+        {
+            console.log(e);
+        }
     }
 
     outEle.set(inEle.get());
