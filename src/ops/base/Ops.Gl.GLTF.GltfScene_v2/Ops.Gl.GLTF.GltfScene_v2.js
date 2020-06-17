@@ -318,6 +318,15 @@ function findParents(nodes, childNodeIndex)
 }
 
 
+op.exposeTexture = function (name)
+{
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
+    newop.getPort("Name").set(name);
+    op.patch.link(op, next.name, newop, "Render");
+    gui.patch().focusOp(newop.id, true);
+};
+
+
 op.exposeNode = function (name, tree)
 {
     if (tree)
