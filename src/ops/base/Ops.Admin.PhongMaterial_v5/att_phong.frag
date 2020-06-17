@@ -18,6 +18,10 @@ UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
 UNI mat4 viewMatrix;
 
+#ifdef ADD_EMISSIVE_COLOR
+    UNI vec4 inEmissiveColor; // .w = intensity
+#endif
+
 #ifdef ENABLE_FRESNEL
     UNI vec4 inFresnel;
     UNI vec2 inFresnelWidthExponent;
@@ -335,9 +339,16 @@ void main()
         #endif
     #endif
 
-    #ifdef HAS_TEXTURE_EMISSIVE
-        float emissiveIntensity = inTextureIntensities.EMISSIVE;
-        calculatedColor += emissiveIntensity * baseColor * texture(texEmissive, texCoord).r;
+    #ifdef ADD_EMISSIVE_COLOR
+        vec3 emissiveRadiance = inEmissiveColor.rgb * inEmissiveColor.w; // .w = intensity of color;
+
+        #ifdef HAS_TEXTURE_EMISSIVE
+            float emissiveIntensity = inTextureIntensities.EMISSIVE;
+            // calculatedColor += emissiveIntensity * baseColor * texture(texEmissive, texCoord).r;
+            emissiveRadiance *= (emissiveIntensity * texture(texEmissive, texCoord).rgb);
+        #endif
+
+        calculatedColor += emissiveRadiance;
     #endif
 
 

@@ -82,6 +82,36 @@
             },
             {
                 "type": "0",
+                "name": "Emissive Active",
+                "group": "Emissive Color",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Color Intensity",
+                "group": "Emissive Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Emissive R",
+                "group": "Emissive Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Emissive G",
+                "group": "Emissive Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Emissive B",
+                "group": "Emissive Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Shininess",
                 "group": "Specular",
                 "subType": "number"

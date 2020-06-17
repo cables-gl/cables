@@ -1,28 +1,4 @@
 const cgl = op.patch.cgl;
-
-const DEFAULT_FRAGMENT_HEAD = `
-UNI Light phongLight0;
-`;
-
-const DEFAULT_FRAGMENT_BODY = `
-// DEFAULT_LIGHT
-vec3 phongLightDirection0 = normalize(phongLight0.position - fragPos.xyz);
-float phongLambert0 = 1.; // inout variable
-vec3 diffuseColor0 = CalculateDiffuseColor(phongLightDirection0, normal, phongLight0.color, baseColor, phongLambert0);
-// diffuseColor0 *= phongLight0.lightProperties.INTENSITY;
-vec3 specularColor0 = CalculateSpecularColor(
-    phongLight0.specular,
-    inMaterialProperties.SPECULAR_AMT,
-    inMaterialProperties.SHININESS,
-    phongLightDirection0,
-    viewDirection,
-    normal,
-    phongLambert0
-);
-vec3 combinedColor0 = (diffuseColor0 + specularColor0);
-calculatedColor += combinedColor0;
-`;
-
 const attachmentFragmentHead = attachments.snippet_head_frag;
 const snippets = {
     "point": attachments.snippet_body_point_frag,
@@ -33,15 +9,24 @@ const snippets = {
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
-const createFragmentHead = n => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader()
 {
     const vertexShader = attachments.phong_vert;
     let fragmentShader = attachments.phong_frag;
-    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, DEFAULT_FRAGMENT_HEAD);
-    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, DEFAULT_FRAGMENT_BODY);
+    let fragmentHead = "";
+    let fragmentBody = "";
+
+
+    fragmentHead = fragmentHead.concat(createFragmentHead(0));
+    fragmentBody = fragmentBody.concat(createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type));
+
+
+    fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
+    fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
+
     shader.setSource(vertexShader, fragmentShader);
 }
 
@@ -70,18 +55,9 @@ op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]
 
 inToggleOrenNayar.onChange = function ()
 {
-    if (inToggleOrenNayar.get())
-    {
-        shader.define("ENABLE_OREN_NAYAR_DIFFUSE");
-        inAlbedo.setUiAttribs({ "greyout": false });
-        inRoughness.setUiAttribs({ "greyout": false });
-    }
-    else
-    {
-        shader.removeDefine("ENABLE_OREN_NAYAR_DIFFUSE");
-        inAlbedo.setUiAttribs({ "greyout": true });
-        inRoughness.setUiAttribs({ "greyout": true });
-    }
+    shader.toggleDefine("ENABLE_OREN_NAYAR_DIFFUSE", inToggleOrenNayar);
+    inAlbedo.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
+    inRoughness.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
 };
 
 // * FRESNEL *
@@ -104,7 +80,28 @@ inToggleFresnel.onChange = function ()
     shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel);
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
 };
+// * EMISSIVE *
+const inEmissiveActive = op.inBool("Emissive Active", false);
+const inEmissiveColorIntensity = op.inFloatSlider("Color Intensity", 0.3);
+const inEmissiveR = op.inFloatSlider("Emissive R", Math.random());
+const inEmissiveG = op.inFloatSlider("Emissive G", Math.random());
+const inEmissiveB = op.inFloatSlider("Emissive B", Math.random());
+inEmissiveR.setUiAttribs({ "colorPick": true });
+op.setPortGroup("Emissive Color", [inEmissiveActive, inEmissiveColorIntensity, inEmissiveR, inEmissiveG, inEmissiveB]);
 
+inEmissiveColorIntensity.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+
+inEmissiveActive.onChange = () =>
+{
+    shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
+    inEmissiveColorIntensity.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+    inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+    inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+    inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+};
 // * SPECULAR *
 const inShininess = op.inFloat("Shininess", 4);
 const inSpecularCoefficient = op.inFloatSlider("Specular Amount", 1);
@@ -118,16 +115,16 @@ op.setPortGroup("Specular", specularColors);
 // * LIGHT *
 const inEnergyConservation = op.inValueBool("Energy Conservation", false);
 const inToggleDoubleSided = op.inBool("Double Sided Material", false);
-const inFalloffMode = op.inSwitch("Falloff Mode", ["A", "B", "C"], "A");
+const inFalloffMode = op.inSwitch("Falloff Mode", ["A", "B", "C", "D"], "A");
 inEnergyConservation.setUiAttribs({ "hidePort": true });
 inToggleDoubleSided.setUiAttribs({ "hidePort": true });
 inFalloffMode.setUiAttribs({ "hidePort": true });
 inFalloffMode.onChange = () =>
 {
-    const MODES = ["A", "B", "C"];
+    const MODES = ["A", "B", "C", "D"];
     shader.define("FALLOFF_MODE_" + inFalloffMode.get());
-    MODES.filter(mode => mode !== inFalloffMode.get())
-        .forEach(mode => shader.removeDefine("FALLOFF_MODE_" + mode));
+    MODES.filter((mode) => mode !== inFalloffMode.get())
+        .forEach((mode) => shader.removeDefine("FALLOFF_MODE_" + mode));
 };
 
 const lightProps = [inEnergyConservation, inToggleDoubleSided, inFalloffMode];
@@ -417,6 +414,7 @@ const initialUniforms = [
     new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
     new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
     new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
+    new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
     new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent),
 
 ];
