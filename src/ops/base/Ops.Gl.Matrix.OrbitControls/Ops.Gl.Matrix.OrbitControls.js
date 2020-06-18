@@ -96,7 +96,10 @@ pointerLock.onChange = function ()
 
 function reset()
 {
-    px %= (Math.PI * 2);
+    // px %= (Math.PI * 2);
+    // py %= (Math.PI * 2);
+
+
     py %= (Math.PI * 2);
 
     vec3.set(vOffset, 0, 0, 0);
@@ -105,6 +108,7 @@ function reset()
 
     percX = (initialX.get() * Math.PI * 2);
     percY = (initialAxis.get() - 0.5);
+
     radius = initialRadius.get();
     eye = circlePos(percY);
 }
