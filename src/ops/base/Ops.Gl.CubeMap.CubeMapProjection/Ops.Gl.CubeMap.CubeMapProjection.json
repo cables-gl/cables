@@ -37,5 +37,30 @@
             }
         ],
         "name": "Ops.User.cables.CubeMapProjection"
+    },
+    "summary": "visualize cubemap as folded texture or equirectangular texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Cubemap",
+                "text": "cubemap to visualize"
+            },
+            {
+                "name": "Equirectangular",
+                "text": "visualisation mode: switch between folded cube and equirectangular"
+            },
+            {
+                "name": "Refresh",
+                "text": "refresh input"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "texture output"
+            }
+        ]
     }
 }

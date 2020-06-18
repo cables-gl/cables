@@ -37,5 +37,30 @@
             }
         ],
         "name": "Ops.User.cables.Skybox"
+    },
+    "summary": "render an equirectangular map or a cubemap as scene background",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger input"
+            },
+            {
+                "name": "Render",
+                "text": "check to render skybox"
+            },
+            {
+                "name": "Skybox",
+                "text": "equirectangular map or cubemap input"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "output trigger"
+            }
+        ]
     }
 }

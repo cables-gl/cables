@@ -46,7 +46,7 @@ let needsMatUpdate = true;
 let timedLoader = null;
 let loadingId = null;
 let data = null;
-let scale = vec3.create();
+const scale = vec3.create();
 let lastTime = 0;
 let doCenter = false;
 
@@ -55,7 +55,7 @@ const boundsCenter = vec3.create();
 inShow.onTriggered = printInfo;
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 dataPort.onChange = loadData;
-inHideNodes.onChange=hideNodesFromData;
+inHideNodes.onChange = hideNodesFromData;
 
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 
@@ -166,7 +166,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
-    let oReq = new XMLHttpRequest();
+    const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
     closeTab();
@@ -176,7 +176,7 @@ function loadBin(addCacheBuster)
         boundingPoints = [];
 
         maxTime = 0;
-        let arrayBuffer = oReq.response;
+        const arrayBuffer = oReq.response;
         gltf = parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate = true;
@@ -188,7 +188,7 @@ function loadBin(addCacheBuster)
         gltf.loaded = Date.now();
 
         outPoints.set(boundingPoints);
-        if(gltf && gltf.bounds)outBounds.set(gltf.bounds);
+        if (gltf && gltf.bounds)outBounds.set(gltf.bounds);
         updateCenter();
     };
 
@@ -250,34 +250,33 @@ function updateMaterials()
 
 function hideNodesFromArray()
 {
-    const hideArr=inHideNodes.get();
+    const hideArr = inHideNodes.get();
 
-    if(!gltf || !data || !data.hiddenNodes)return;
-    if(!hideArr)
+    if (!gltf || !data || !data.hiddenNodes) return;
+    if (!hideArr)
     {
         return;
     }
 
-    console.log('hiding...',hideArr);
+    console.log("hiding...", hideArr);
 
-    for(var i=0;i<hideArr.length;i++)
+    for (let i = 0; i < hideArr.length; i++)
     {
         const n = gltf.getNode(hideArr[i]);
-        if(n)n.hidden=true;
+        if (n)n.hidden = true;
     }
-
-};
+}
 
 function hideNodesFromData()
 {
     if (!data)loadData();
-    if(!gltf)return;
+    if (!gltf) return;
 
     gltf.unHideAll();
 
     if (data && data.hiddenNodes)
     {
-        for (let i in data.hiddenNodes)
+        for (const i in data.hiddenNodes)
         {
             const n = gltf.getNode(i);
             if (n) n.hidden = true;
@@ -305,18 +304,81 @@ function saveData()
     dataPort.set(JSON.stringify(data));
 }
 
-op.exposeNode = function (name)
+function findParents(nodes, childNodeIndex)
 {
-    let newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
-    newop.getPort("Node Name").set(name);
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        if (gltf.nodes[i].children.indexOf(childNodeIndex) >= 0)
+        {
+            console.log("found parent", gltf.nodes[i].name);
+            nodes.push(gltf.nodes[i]);
+            if (gltf.nodes[i].isChild) findParents(nodes, i);
+        }
+    }
+}
+
+
+op.exposeTexture = function (name)
+{
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
+    newop.getPort("Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
+};
+
+
+op.exposeNode = function (name, tree)
+{
+    if (tree)
+    {
+        console.log(gltf.nodes);
+        for (let i = 0; i < gltf.nodes.length; i++)
+        {
+            if (gltf.nodes[i].name == name)
+            {
+                const node = gltf.nodes[i];
+                const arrHierarchy = [];
+                findParents(arrHierarchy, i);
+
+                arrHierarchy.push(node, node);
+
+                let prevPort = next.name;
+                let prevOp = op;
+                for (let j = 0; j < arrHierarchy.length; j++)
+                {
+                    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+                    newop.getPort("Node Name").set(arrHierarchy[j].name);
+                    op.patch.link(prevOp, prevPort, newop, "Render");
+
+                    if (j == arrHierarchy.length - 1)
+                    {
+                        newop.getPort("Transformation").set(false);
+                    }
+                    else
+                    {
+                        newop.getPort("Draw Mesh").set(false);
+                        newop.getPort("Draw Childs").set(false);
+                    }
+
+                    prevPort = "Next";
+                    prevOp = newop;
+                }
+            }
+        }
+    }
+    else
+    {
+        const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+        newop.getPort("Node Name").set(name);
+        op.patch.link(op, next.name, newop, "Render");
+        gui.patch().focusOp(newop.id, true);
+    }
     CABLES.UI.MODAL.hide();
 };
 
 op.assignMaterial = function (name)
 {
-    let newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patch().focusOp(newop.id, true);
