@@ -55,7 +55,7 @@ class ShaderModifier
     _addModulesToShader(shader)
     {
         let firstMod;
-        if (this._mods.length > 1)firstMod = this._mods[0];
+        if (this._mods.length > 1) firstMod = this._mods[0];
         for (let i = 0; i < this._mods.length; i++)
             shader.addModule(this._mods[i], firstMod);
     }
@@ -88,6 +88,28 @@ class ShaderModifier
             this._updateUniformsShader(this._shaders[j].shader);
 
         this._changedUniforms = false;
+    }
+
+    _setUniformValue(shader, uniformName, value)
+    {
+        shader.getUniform(uniformName).setValue(value);
+    }
+
+    setUniformValue(name, value)
+    {
+        const uni = this._getUniform(name);
+        if (!uni)
+        {
+            return;
+        }
+
+        const defineName = this._getDefineName(name);
+
+        for (const j in this._shaders)
+        {
+            console.log("shader", this._shaders[j]);
+            this._setUniformValue(this._shaders[j].shader, defineName, value);
+        }
     }
 
     _getUniform(name)
@@ -125,13 +147,18 @@ class ShaderModifier
     {
         if (this._getUniform(name))
         {
+            console.log("ayyyy removing uniform", { "shaders": Object.keys(this._shaders).length, "obj": "this is an obj jo" });
+            // console.log("this shaders", !!this._shaders);
             for (const shader in this._shaders)
             {
-                this._removeUniformFromShader(name, shader);
+                console.log("bro", shader); // , "define name", this._getDefineName(name));
+                this._removeUniformFromShader(this._getDefineName(name), this._shaders[shader].shader);
             }
+            console.log("im here");
             this._changedUniforms = true;
         }
     }
+
 
     _getDefineName(name)
     {

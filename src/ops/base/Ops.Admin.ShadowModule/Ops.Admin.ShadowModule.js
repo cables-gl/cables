@@ -165,8 +165,6 @@ let shader = null;
 let vertexModule = null;
 let fragmentModule = null;
 
-const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
-shaderModule.toggleDefine("SHADOW_MAP", inReceiveShadow);
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
 const srcHeadFragBase = attachments.head_frag;
@@ -176,6 +174,33 @@ let srcHeadVert = srcHeadVertBase;
 let srcBodyVert = srcBodyVertBase;
 let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
+
+
+const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
+shaderModule.addModule({
+    "name": "MODULE_VERTEX_POSITION",
+    "title": op.objName,
+    "priority": -2,
+    "srcHeadVert": srcHeadVert,
+    "srcBodyVert": srcBodyVert
+});
+
+shaderModule.addModule({
+    "name": "MODULE_COLOR",
+    "priority": -2,
+    "title": op.objName,
+    "srcHeadFrag": srcHeadFrag,
+    "srcBodyFrag": srcBodyFrag,
+});
+
+shaderModule.toggleDefine("SHADOW_MAP", inReceiveShadow);
+shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
+console.log("XX after add", shaderModule._shaders);
+shaderModule.setUniformValue("MOD_sampleSpread", 1000);
+console.log("XX after set", Object.keys(shaderModule._shaders));
+shaderModule.removeUniform("MOD_sampleSpread");
+console.log("XX after remove", shaderModule._shaders);
+
 
 let lightUniforms = [];
 let uniformSpread = null;
@@ -333,7 +358,7 @@ inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked())
     {
-        removeModulesAndDefines();
+        // removeModulesAndDefines();
         lastLength = 0;
     }
 };
@@ -344,7 +369,7 @@ inTrigger.onTriggered = () =>
     {
         if (!cgl.frameStore.shadowPass)
         {
-            updateShader();
+            // updateShader();
             outTrigger.trigger();
         }
         return;
@@ -368,6 +393,10 @@ inTrigger.onTriggered = () =>
         return;
     }
 
-    updateShader();
+    // updateShader();
+    shaderModule.bind();
+    shaderModule.setUniformValue("MOD_sampleSpread", 1000);
+    console.log("XX after set", shaderModule);
     outTrigger.trigger();
+    shaderModule.unbind();
 };

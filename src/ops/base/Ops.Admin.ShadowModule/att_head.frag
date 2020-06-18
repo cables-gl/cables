@@ -45,7 +45,7 @@ struct ModLight {
 
 };
 
-UNI float sampleSpread;
+// UNI float sampleSpread;
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
