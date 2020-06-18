@@ -73,8 +73,10 @@ inExec.onTriggered = function ()
     tex = CGL.Texture.load(cgl, sourceURI,
         function (err)
         {
-            // if(err)
-            // {
+            if (err)
+            {
+                outFound.set(false);
+            }
             //     setTempTexture();
             //     console.log(err);
             //     op.setUiError('urlerror','could not load texture:<br/>"'+filename.get()+'"',2);
@@ -83,21 +85,13 @@ inExec.onTriggered = function ()
             // }
             // else op.setUiError('urlerror',null);
             outTex.set(tex);
-            // width.set(tex.width);
-            // height.set(tex.height);
-            // ratio.set(tex.width/tex.height);
-
-            // if(!tex.isPowerOfTwo())  op.setUiError('npot','Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.',0);
-            // else op.setUiError('npot',null);
 
             width.set(tex.width);
             height.set(tex.height);
             type.set(img.mimeType);
             outTex.set(null);
             outTex.set(tex);
-
-            // loaded.set(true);
-            // cgl.patch.loading.finished(loadingId);
+            outFound.set(true);
         }, {
             "anisotropic": cgl_aniso,
             "wrap": cgl_wrap,
