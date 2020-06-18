@@ -14,6 +14,7 @@ var gltfNode=class
         this.mesh=null;
         this.children=[];
         this._node=node;
+        this.absMat=mat4.create();
 
 
         if(node.translation) mat4.translate(this.mat,this.mat,node.translation);
@@ -102,6 +103,13 @@ var gltfNode=class
         else console.warn("unknown anim path",path,anims);
     }
 
+    modelMatAbs()
+    {
+        return this.absMat;
+        // if(!this._animTrans) return this.mat;
+        // else return this._animMat;
+    }
+
     transform(cgl,_time)
     {
         if(!_time )_time=time;
@@ -149,6 +157,7 @@ var gltfNode=class
 
             mat4.mul(cgl.mMatrix,cgl.mMatrix,this._animMat);
         }
+        mat4.copy(this.absMat,cgl.mMatrix);
     }
 
     render(cgl,dontTransform,dontDrawMesh,ignoreMaterial,ignoreChilds,drawHidden,_time)
