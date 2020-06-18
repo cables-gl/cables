@@ -65,6 +65,17 @@ class ShaderModifier
         this._mods.push(mod);
     }
 
+    removeModule(title)
+    {
+        for (let i = 0; i < this._mods.length; i++)
+        {
+            if (this._mods[i].title == title)
+            {
+                this._mods.splice(i, 1);
+            }
+        }
+    }
+
     _updateUniformsShader(shader)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -98,6 +109,7 @@ class ShaderModifier
 
     setUniformValue(name, value)
     {
+        console.log(name, "setting value", value);
         const uni = this._getUniform(name);
         if (!uni)
         {
@@ -108,7 +120,6 @@ class ShaderModifier
 
         for (const j in this._shaders)
         {
-            console.log("shader", this._shaders[j]);
             this._setUniformValue(this._shaders[j].shader, defineName, value);
         }
     }
@@ -187,7 +198,7 @@ class ShaderModifier
         {
             name = name.substr("MOD_".length);
             name = "mod" + prefix + name;
-            console.log("name", name);
+            // console.log("name", name);
         }
         return name;
     }

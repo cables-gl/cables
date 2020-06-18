@@ -45,13 +45,8 @@ inReceiveShadow.onChange = () =>
 
 inAlgorithm.onChange = () =>
 {
-    if (!shader) return;
-    const selectedAlgorithm = inAlgorithm.get();
-    shader.define("MODE_" + selectedAlgorithm.toUpperCase());
-
-    algorithms
-        .filter((alg) => alg !== selectedAlgorithm)
-        .forEach((alg) => shader.removeDefine("MODE_" + alg.toUpperCase()));
+    const current = inAlgorithm.get();
+    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -79,7 +74,7 @@ function setAlgorithmGreyouts()
 
 inSamples.onChange = () =>
 {
-    if (shader) shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
+    shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 };
 
 const outTrigger = op.outTrigger("Trigger Out");
@@ -162,8 +157,8 @@ function createModuleShaders(lightStack)
 
 
 let shader = null;
-let vertexModule = null;
-let fragmentModule = null;
+const vertexModule = null;
+const fragmentModule = null;
 
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
@@ -193,17 +188,14 @@ shaderModule.addModule({
     "srcBodyFrag": srcBodyFrag,
 });
 
+shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("SHADOW_MAP", inReceiveShadow);
 shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
-console.log("XX after add", shaderModule._shaders);
-shaderModule.setUniformValue("MOD_sampleSpread", 1000);
-console.log("XX after set", Object.keys(shaderModule._shaders));
-shaderModule.removeUniform("MOD_sampleSpread");
-console.log("XX after remove", shaderModule._shaders);
+shaderModule.addUniform("3f", "MOD_camPos", null);
 
 
 let lightUniforms = [];
-let uniformSpread = null;
+const uniformSpread = null;
 function createUniforms(lightsCount)
 {
     if (!shader) return;
@@ -211,6 +203,7 @@ function createUniforms(lightsCount)
 
     for (let i = 0; i < lightsCount; i += 1)
     {
+        /*
         lightUniforms[i] = null;
         if (!lightUniforms[i])
         {
@@ -228,8 +221,9 @@ function createUniforms(lightsCount)
                 "lightMatrix": new CGL.Uniform(shader, "m4", "lightMatrix" + i, mat4.create()),
             };
         }
+        */
     }
-    if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, "f", "sampleSpread", inSpread);
+    // if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, "f", "sampleSpread", inSpread);
 }
 
 function setUniforms(lightStack)
@@ -307,6 +301,11 @@ function setUniforms(lightStack)
 
 function updateShader()
 {
+    if (cgl.frameStore.lightStack.length !== lastLength)
+    {
+
+    }
+    /*
     const currentShader = cgl.getShader();
 
     if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength)
@@ -337,10 +336,12 @@ function updateShader()
         }
     }
 
+
     if (shader)
     {
         setUniforms(cgl.frameStore.lightStack);
     }
+    */
 }
 
 function removeModulesAndDefines()
@@ -362,6 +363,8 @@ inTrigger.onLinkChanged = function ()
         lastLength = 0;
     }
 };
+
+const _tempCamPosMatrix = mat4.create();
 
 inTrigger.onTriggered = () =>
 {
@@ -394,11 +397,16 @@ inTrigger.onTriggered = () =>
     }
 
     // updateShader();
+    mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
+    // this._cgl.gl.uniform3f(this._camPosUniform, _tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]);
+
+
     shaderModule.bind();
+    shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
     shaderModule.setUniformValue("MOD_sampleSpread", 1000);
-    console.log("XX after set", shaderModule);
-    shaderModule.removeUniform("MOD_sampleSpread");
-    console.log("XX after remove", shaderModule);
+    // console.log("XX after set", shaderModule);
+    // shaderModule.removeUniform("MOD_sampleSpread");
+    // console.log("XX after remove", shaderModule);
     outTrigger.trigger();
     shaderModule.unbind();
 };
