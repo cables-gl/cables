@@ -92,7 +92,8 @@ class ShaderModifier
 
     _setUniformValue(shader, uniformName, value)
     {
-        shader.getUniform(uniformName).setValue(value);
+        const uniform = shader.getUniform(uniformName);
+        if (uniform) uniform.setValue(value);
     }
 
     setUniformValue(name, value)
@@ -138,23 +139,42 @@ class ShaderModifier
         }
     }
 
+    pushTexture(uniformName, tex, texType)
+    {
+        if (!tex) throw (new Error("no texture given to texturestack"));
+        if (this._getUniform(uniformName))
+        {
+            const name = this._getDefineName(uniformName);
+            for (const j in this._shaders)
+            {
+                const shader = this._shaders[j].shader;
+                const uni = shader.getUniform(name);
+                if (uni) shader.pushTexture(uni, tex, texType);
+            }
+        }
+    }
+
     _removeUniformFromShader(name, shader)
     {
-        shader.removeUniform(name);
+        if (shader.hasUniform(name)) shader.removeUniform(name);
     }
 
     removeUniform(name)
     {
         if (this._getUniform(name))
         {
-            console.log("ayyyy removing uniform", { "shaders": Object.keys(this._shaders).length, "obj": "this is an obj jo" });
-            // console.log("this shaders", !!this._shaders);
-            for (const shader in this._shaders)
+            for (const j in this._shaders)
             {
-                console.log("bro", shader); // , "define name", this._getDefineName(name));
-                this._removeUniformFromShader(this._getDefineName(name), this._shaders[shader].shader);
+                this._removeUniformFromShader(this._getDefineName(name), this._shaders[j].shader);
             }
-            console.log("im here");
+
+            for (let i = 0; i < this._uniforms.length; i++)
+            {
+                if (this._uniforms[i].name == name)
+                {
+                    this._uniforms.splice(i, 1);
+                }
+            }
             this._changedUniforms = true;
         }
     }

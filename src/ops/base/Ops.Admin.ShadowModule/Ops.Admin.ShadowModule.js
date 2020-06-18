@@ -397,6 +397,8 @@ inTrigger.onTriggered = () =>
     shaderModule.bind();
     shaderModule.setUniformValue("MOD_sampleSpread", 1000);
     console.log("XX after set", shaderModule);
+    shaderModule.removeUniform("MOD_sampleSpread");
+    console.log("XX after remove", shaderModule);
     outTrigger.trigger();
     shaderModule.unbind();
 };
