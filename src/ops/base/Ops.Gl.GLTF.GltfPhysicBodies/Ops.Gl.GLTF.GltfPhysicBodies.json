@@ -41,7 +41,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.pandur.GltfPhysicBodies"
+        "name": "Ops.Gl.GLTF.GltfPhysicBodies"
     },
     "libs": [
         "cannon.js"
