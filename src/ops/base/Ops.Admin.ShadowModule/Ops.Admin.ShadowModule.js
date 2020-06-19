@@ -194,15 +194,33 @@ shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
 shaderModule.addUniform("3f", "MOD_camPos", null);
 
 
-let lightUniforms = [];
+const lightUniforms = [];
 const uniformSpread = null;
 function createUniforms(lightsCount)
 {
-    if (!shader) return;
-    lightUniforms = [];
+    // if (!shader) return;
+    // lightUniforms = [];
+
+    for (let i = 0; i < lastLength; i += 1)
+    {
+        shaderModule.removeUniform("MOD_light" + i + ".position");
+        shaderModule.removeUniform("MOD_light" + i + ".typeCastShadow");
+        shaderModule.removeUniform("MOD_light" + i + ".shadowProperties");
+        shaderModule.removeUniform("MOD_light" + i + ".shadowStrength");
+        shaderModule.removeUniform("shadowMap" + i);
+        shaderModule.removeUniform("normalOffset" + i);
+        shaderModule.removeUniform("lightMatrix" + i);
+    }
 
     for (let i = 0; i < lightsCount; i += 1)
     {
+        shaderModule.addUniform("3f", "MOD_light" + i + ".position", [0, 0, 0]);
+        shaderModule.addUniform("2i", "MOD_light" + i + ".typeCastShadow", [0, 0]);
+        shaderModule.addUniform("4f", "MOD_light" + i + ".shadowProperties", [0, 0, 0, 0]);
+        shaderModule.addUniform("f", "MOD_light" + i + ".shadowStrength", 1);
+        shaderModule.addUniform("t", "shadowMap" + i, 0);
+        shaderModule.addUniform("f", "normalOffset" + i, 0);
+        shaderModule.addUniform("m4", "lightMatrix" + i, mat4.create());
         /*
         lightUniforms[i] = null;
         if (!lightUniforms[i])
@@ -223,6 +241,7 @@ function createUniforms(lightsCount)
         }
         */
     }
+    lastLength = lightsCount;
     // if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, "f", "sampleSpread", inSpread);
 }
 
@@ -303,7 +322,7 @@ function updateShader()
 {
     if (cgl.frameStore.lightStack.length !== lastLength)
     {
-
+        createUniforms(cgl.frameStore.lightStack.length);
     }
     /*
     const currentShader = cgl.getShader();
@@ -400,10 +419,10 @@ inTrigger.onTriggered = () =>
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
     // this._cgl.gl.uniform3f(this._camPosUniform, _tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]);
 
-
+    updateShader();
     shaderModule.bind();
-    shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
-    shaderModule.setUniformValue("MOD_sampleSpread", 1000);
+    // shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
+    // shaderModule.setUniformValue("MOD_sampleSpread", 1000);
     // console.log("XX after set", shaderModule);
     // shaderModule.removeUniform("MOD_sampleSpread");
     // console.log("XX after remove", shaderModule);

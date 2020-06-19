@@ -37,7 +37,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName)
 {
     this._loc = -1;
     this._type = __type;
@@ -46,6 +46,9 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._value = 0.00001;
     this._oldValue = null;
     this._port = null;
+    this._structName = _structName;
+    this._structUniformName = _structUniformName;
+    console.log("create uniform", this);
     this._shader._addUniform(this);
     this.shaderType = null;
     this.needsUpdate = true;
@@ -207,6 +210,7 @@ Uniform.prototype.getGlslTypeString = function ()
 {
     if (this._type == "f") return "float";
     if (this._type == "i") return "int";
+    if (this._type == "2i") return "ivec2";
     if (this._type == "2f") return "vec2";
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
