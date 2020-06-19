@@ -22,24 +22,25 @@ inNodeName.onChange = function ()
 
 inExec.onTriggered = function ()
 {
-    if (!cgl.frameStore.currentScene) return;
-    if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) node = null;
+    const scene = cgl.frameStore.currentScene;
+    if (!scene) return;
+    if (currentSceneLoaded != scene.loaded) node = null;
 
     if (!node)
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.frameStore || !scene || !scene.nodes)
         {
             return;
         }
-        currentSceneLoaded = cgl.frameStore.currentScene.loaded;
+        currentSceneLoaded = scene.loaded;
 
-        for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
+        for (let i = 0; i < scene.nodes.length; i++)
         {
-            if (cgl.frameStore.currentScene.nodes[i].name == name)
+            if (scene.nodes[i].name == name)
             {
-                node = cgl.frameStore.currentScene.nodes[i];
+                node = scene.nodes[i];
                 outFound.set(true);
 
                 if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
