@@ -48,10 +48,7 @@ var gltfNode=class
                 this.children.push(node.children[i]);
             }
         }
-
-
     }
-
 
     unHide()
     {
