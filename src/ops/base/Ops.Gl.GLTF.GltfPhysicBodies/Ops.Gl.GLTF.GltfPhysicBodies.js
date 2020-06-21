@@ -88,7 +88,7 @@ let world = null;
 function addToWorld()
 {
     const scene = cgl.frameStore.currentScene;
-    if (!cgl.frameStore.world) return;
+    if (!scene || !cgl.frameStore.world) return;
 
     if (world != cgl.frameStore.world || currentSceneLoaded != scene.loaded)removeFromWorld();
 
