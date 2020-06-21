@@ -29,10 +29,8 @@ inExec.onTriggered = function ()
     {
         const name = inNodeName.get();
 
-        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
-        {
-            return;
-        }
+        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes) return;
+
         currentSceneLoaded = cgl.frameStore.currentScene.loaded;
 
         for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)

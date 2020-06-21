@@ -38,6 +38,21 @@
                 "type": "0",
                 "name": "Translate Z",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Z",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -51,6 +66,6 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Gl.GLTF.GltfNodeTransform"
+        "name": "Ops.Gl.GLTF.GltfTransformNode"
     }
 }
