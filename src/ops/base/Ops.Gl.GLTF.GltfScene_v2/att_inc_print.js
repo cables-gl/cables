@@ -122,6 +122,8 @@ function printInfo()
 {
     if(!gltf)return;
 
+    console.log(gltf);
+
     const sizes={};
 
     var html='<div style="overflow:scroll;width:100%;height:100%">';
@@ -350,6 +352,37 @@ function printInfo()
         }
         html+='</table>';
     }
+
+
+    if(gltf.json.cameras)
+    {
+        html+='<h3>Cameras ('+gltf.json.cameras.length+')</h3>';
+        html+='<table class="table treetable">';
+
+        html+='<tr>';
+        html+='  <th>name</th>';
+        html+='  <th>type</th>';
+        html+='  <th>info</th>';
+        html+='</tr>';
+
+        for(var i=0;i<gltf.json.cameras.length;i++)
+        {
+            html+='<tr>';
+            html+='<td>'+gltf.json.cameras[i].name+'</td>';
+            html+='<td>'+gltf.json.cameras[i].type+'</td>';
+            html+='<td>';
+            html+='yfov: '+Math.round(gltf.json.cameras[i].perspective.yfov*100)/100;
+            html+=", ";
+            html+='zfar: '+Math.round(gltf.json.cameras[i].perspective.zfar*100)/100;
+            html+=", ";
+            html+='znear: '+Math.round(gltf.json.cameras[i].perspective.znear*100)/100;
+            html+='</td>';
+
+            html+='<tr>';
+        }
+        html+='</table>';
+    }
+
 
 
     // html+='data size: '+;
