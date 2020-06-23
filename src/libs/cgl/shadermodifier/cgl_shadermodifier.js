@@ -109,7 +109,6 @@ class ShaderModifier
 
     setUniformValue(name, value)
     {
-        console.log(name, "setting value", value);
         const uni = this._getUniform(name);
         if (!uni)
         {
@@ -154,19 +153,14 @@ class ShaderModifier
 
     addUniformsStruct(structUniformName, structName, structMembers)
     {
-        console.log("addingStruct", structName, structUniformName, structMembers);
-
         if (!structName) return;
         if (!structMembers) return;
 
         for (let i = 0; i < structMembers.length; i += 1)
         {
-            console.log("ayayay", i);
             const member = structMembers[i];
             this.addUniform(member.type, member.name, member.v1, member.v2, member.v3, member.v4, structUniformName, structName);
         }
-
-        console.log("uniforms after add stuct", this._uniforms);
     }
 
     pushTexture(uniformName, tex, texType)
@@ -195,7 +189,10 @@ class ShaderModifier
         {
             for (const j in this._shaders)
             {
-                this._removeUniformFromShader(this._getDefineName(name), this._shaders[j].shader);
+                this._removeUniformFromShader(
+                    this._getDefineName(name),
+                    this._shaders[j].shader
+                );
             }
 
             for (let i = 0; i < this._uniforms.length; i++)

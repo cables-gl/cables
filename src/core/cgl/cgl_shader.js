@@ -262,6 +262,59 @@ Shader.prototype._addLibs = function (src)
     return src;
 };
 
+Shader.prototype.createStructUniforms = function ()
+{
+    // * create structs
+    let structStrFrag = "";
+    const structStrVert = ""; // TODO: not used yet
+
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i]._structName)
+        {
+            const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
+
+            // * check if struct is not already part of shader
+            if (this._structNames.indexOf(this._uniforms[i]._structName) === -1)
+            {
+                // * create struct definition with placeholder string to inject
+                const structDefinition = "struct "
+                    + this._uniforms[i]._structName + " {".endl()
+                    + injectionString.endl()
+                    + "};".endl().endl();
+
+                structStrFrag = structStrFrag.concat(structDefinition);
+
+                this._structNames.push(this._uniforms[i]._structName);
+                this._structUniformNames.push(this._uniforms[i]._structUniformName);
+            }
+
+            // * create member & comment
+            let comment = "";
+            if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
+
+            const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
+                 + " " + this._uniforms[i].getName() + ";"
+                 + comment.endl();
+
+            // * inject member before {injectionString}
+            const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+            structStrFrag =
+             structStrFrag.slice(0, insertionIndexFrag)
+             + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+        }
+    }
+
+    // * remove struct injection points and add uniform
+    for (let i = 0; i < this._structNames.length; i += 1)
+    {
+        const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structNames[i] + "}}";
+        structStrFrag = structStrFrag.replace(injectionString, "");
+        structStrFrag += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
+    }
+
+    return structStrFrag;
+};
 
 Shader.prototype.compile = function ()
 {
@@ -372,114 +425,25 @@ Shader.prototype.compile = function ()
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
 
-    // console.log(this._uniforms);
+    const structStrFrag = this.createStructUniforms();
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        // if (this._uniforms[i]._structUniformName)
-        // {
-        //     if (this._structUniformNames.indexOf(this._uniforms[i]._structUniformName) == -1)
-        //     {
-        //         this._structUniformNames.push(this._uniforms[i]._structUniformName);
-        //     }
-        // }
-
-        if (this._uniforms[i].shaderType)
+        if (this._uniforms[i].shaderType && !this._uniforms[i]._structName)
         {
-            // * check if uni has a struct name
-            if (this._uniforms[i]._structName)
-            {
-                console.log("IF STRUCTNAME", this._structNames.indexOf(this._uniforms[i]._structName) > -1);
-                // * check if struct is already part of shader
-                if (this._structNames.indexOf(this._uniforms[i]._structName) > -1)
-                {
-                    // * TODO: remove code duplication in if else
-                    const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
-                    const insertionIndexFrag = uniformsStrFrag.lastIndexOf(injectionString);
-                    // const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
+            const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+            let comment = "";
+            if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
-                    // * create member & comment
-                    let comment = "";
-                    if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
+            if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
+                if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrVert += uniStr + ";" + comment.endl();
 
-                    const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
-                        + " " + this._uniforms[i].getName() + ";"
-                        + comment.endl();
-
-                    // * inject member before {injectionString}
-                    uniformsStrFrag =
-                    uniformsStrFrag.slice(0, insertionIndexFrag)
-                    + stringToInsert + uniformsStrFrag.slice(insertionIndexFrag - 1);
-                    console.log("string after first struct", uniformsStrFrag);
-                }
-                else
-                {
-                    console.log("should be here first", this._uniforms[i]._structName, this._structNames);
-                    const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
-                    const structStr = "struct "
-                        + this._uniforms[i]._structName + " {".endl()
-                        + injectionString.endl()
-                        + "};".endl().endl();
-                    this._structNames.push(this._uniforms[i]._structName);
-                    this._structUniformNames.push(this._uniforms[i]._structUniformName);
-                    // * add struct to shader code, TODO: check if uni should onyl be in one of the shaders
-                    uniformsStrFrag += structStr;
-                    // uniformsStrVert += structStr;
-
-                    const insertionIndexFrag = uniformsStrFrag.lastIndexOf(injectionString);
-                    // const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
-
-                    // * create member & comment
-                    let comment = "";
-                    if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
-
-                    const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
-                        + " " + this._uniforms[i].getName() + ";"
-                        + comment.endl();
-
-                    // * inject member before {injectionString}
-                    uniformsStrFrag = uniformsStrFrag.slice(0, insertionIndexFrag)
-                    + stringToInsert + uniformsStrFrag.slice(insertionIndexFrag - 1);
-                    console.log("unistring after insertion & creatin struct", uniformsStrFrag);
-                }
-            }
-            else
-            {
-                const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
-                let comment = "";
-                if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
-
-                if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
-                    if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                        uniformsStrVert += uniStr + ";" + comment.endl();
-
-                if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
-                    if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
-                        uniformsStrFrag += uniStr + ";" + comment.endl();
-            }
+            if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
+                if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrFrag += uniStr + ";" + comment.endl();
         }
     }
-    console.log("yo im here", uniformsStrFrag, this._structNames.length, this._structNames);
-    // * remove struct injection points and add uniform
-    for (let i = 0; i < this._structNames.length; i += 1)
-    {
-        console.log("loopin through struct names", this._uniforms[i]._name, this._structNames[i], this._structUniformNames[i]);
-        const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structNames[i] + "}}";
-        uniformsStrFrag = uniformsStrFrag.replace(injectionString, "");
-        // uniformsStrVert = uniformsStrVert.replace(injectionString, "");
-
-        uniformsStrFrag += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
-        console.log("after 1 loop unistring", uniformsStrFrag);
-
-        // TODO: THE CREATED STRING IS CORRECT BUT GETS OVERWRITTEN SOMEWHERE FML.. START HERE ON TUESDAY
-        // uniformsStrVert += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
-    }
-
-    console.log("after mobile define", uniformsStrFrag);
-    // // * add struct uniforms
-    // for (let i = 0; i < this._structUniformNames.length; i += 1)
-    // {
-    // }
 
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
@@ -490,8 +454,8 @@ Shader.prototype.compile = function ()
         vs += "#define MOBILE".endl();
     }
     vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
-    fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
-    console.log("fs after loop", fs);
+    fs = extensionString + fs + definesStr + structStrFrag + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
+
     let srcHeadVert = "";
     let srcHeadFrag = "";
 
