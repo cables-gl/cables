@@ -219,14 +219,16 @@ function loadBin(addCacheBuster)
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
-        if (tab)printInfo();
-
-        gltf.loaded = Date.now();
+        if(tab)printInfo();
 
         updateCamera();
         setCam();
         outPoints.set(boundingPoints);
-        if (gltf && gltf.bounds)outBounds.set(gltf.bounds);
+        if(gltf)
+        {
+            gltf.loaded = Date.now();
+            if(gltf.bounds)outBounds.set(gltf.bounds);
+        }
         updateCenter();
     };
 
