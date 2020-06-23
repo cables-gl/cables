@@ -36,9 +36,20 @@
                 "name": "Exec"
             },
             {
+                "type": "5",
+                "name": "Filter Meshes"
+            },
+            {
                 "type": "0",
                 "name": "Render Boundings",
                 "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Meshes",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfPhysicBodies"

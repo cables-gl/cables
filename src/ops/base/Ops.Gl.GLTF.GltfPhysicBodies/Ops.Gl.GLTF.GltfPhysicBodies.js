@@ -1,6 +1,8 @@
 const
     inExec = op.inTrigger("Exec"),
-    doRender = op.inBool("Render Boundings", true);
+    inNames = op.inString("Filter Meshes", ""),
+    doRender = op.inBool("Render Boundings", true),
+    outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
 const bodies = [];
@@ -21,10 +23,16 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
+let world = null;
+inNames.onChange = () =>
+{
+    removeFromWorld();
+    added = false;
+};
+
 function update()
 {
     if (!added) addToWorld();
-
 
     for (let i = 0; i < bodies.length; i++)
     {
@@ -77,13 +85,13 @@ function removeFromWorld()
         {
             world.removeBody(bodies[i].body);
         }
-        bodies.length = 0;
     }
+    bodies.length = 0;
+    outNum.set(bodies.length);
     world = null;
     added = false;
 }
 
-let world = null;
 
 function addToWorld()
 {
@@ -97,6 +105,7 @@ function addToWorld()
     if (!world)
     {
         console.log("no physics world!?");
+        outNum.set(0);
         return;
     }
     if (!scene) return;
@@ -105,19 +114,15 @@ function addToWorld()
     for (let i = 0; i < scene.nodes.length; i++)
     {
         if (!scene.nodes[i].mesh) continue;
-
+        if (scene.nodes[i].name.indexOf(inNames.get()) == -1) continue;
 
         let shape = null;
 
         const bounds = new CGL.BoundingBox();
         scene.nodes[i].calcBounds(scene, null, bounds);
 
-        // console.log(scene.nodes[i].name, bounds.size);
-
-
         const size = vec3.create();
         vec3.set(size, bounds.size[0] / 2, bounds.size[1] / 2, bounds.size[2] / 2);
-        // vec3.set(sizeVec,1.8,0.8,0.8);
         shape = new CANNON.Box(new CANNON.Vec3(size[0], size[1], size[2]));
         // shape = new CANNON.Sphere(size);
 
@@ -137,16 +142,9 @@ function addToWorld()
         });
 
         world.addBody(body);
-
-        // if (scene.nodes[i].name == name)
-        // {
-        //     node = scene.nodes[i];
-        //     outFound.set(true);
-
-        //     if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
-        //     else outGeom.set(null);
-        // }
     }
+
+    outNum.set(bodies.length);
 
     added = true;
 }
