@@ -569,7 +569,9 @@ const Context = function (_patch)
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             Log.log("gl error: ", str, error, errStr);
+            return true;
         }
+        return false;
     };
 
     this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)
