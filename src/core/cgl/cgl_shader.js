@@ -396,7 +396,7 @@ Shader.prototype.compile = function ()
                     // * TODO: remove code duplication in if else
                     const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
                     const insertionIndexFrag = uniformsStrFrag.lastIndexOf(injectionString);
-                    const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
+                    // const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
 
                     // * create member & comment
                     let comment = "";
@@ -407,7 +407,8 @@ Shader.prototype.compile = function ()
                         + comment.endl();
 
                     // * inject member before {injectionString}
-                    uniformsStrFrag = uniformsStrFrag.slice(0, insertionIndexFrag)
+                    uniformsStrFrag =
+                    uniformsStrFrag.slice(0, insertionIndexFrag)
                     + stringToInsert + uniformsStrFrag.slice(insertionIndexFrag - 1);
                     console.log("string after first struct", uniformsStrFrag);
                 }
@@ -423,10 +424,10 @@ Shader.prototype.compile = function ()
                     this._structUniformNames.push(this._uniforms[i]._structUniformName);
                     // * add struct to shader code, TODO: check if uni should onyl be in one of the shaders
                     uniformsStrFrag += structStr;
-                    uniformsStrVert += structStr;
+                    // uniformsStrVert += structStr;
 
                     const insertionIndexFrag = uniformsStrFrag.lastIndexOf(injectionString);
-                    const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
+                    // const insertionIndexVert = uniformsStrVert.lastIndexOf(injectionString);
 
                     // * create member & comment
                     let comment = "";
@@ -458,14 +459,14 @@ Shader.prototype.compile = function ()
             }
         }
     }
-    console.log("yo im here", this._structNames.length, this._structNames);
+    console.log("yo im here", uniformsStrFrag, this._structNames.length, this._structNames);
     // * remove struct injection points and add uniform
     for (let i = 0; i < this._structNames.length; i += 1)
     {
         console.log("loopin through struct names", this._uniforms[i]._name, this._structNames[i], this._structUniformNames[i]);
         const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structNames[i] + "}}";
         uniformsStrFrag = uniformsStrFrag.replace(injectionString, "");
-        uniformsStrVert = uniformsStrVert.replace(injectionString, "");
+        // uniformsStrVert = uniformsStrVert.replace(injectionString, "");
 
         uniformsStrFrag += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
         console.log("after 1 loop unistring", uniformsStrFrag);
@@ -474,6 +475,7 @@ Shader.prototype.compile = function ()
         // uniformsStrVert += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
     }
 
+    console.log("after mobile define", uniformsStrFrag);
     // // * add struct uniforms
     // for (let i = 0; i < this._structUniformNames.length; i += 1)
     // {
@@ -487,10 +489,9 @@ Shader.prototype.compile = function ()
         fs += "#define MOBILE".endl();
         vs += "#define MOBILE".endl();
     }
-
     vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
     fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
-
+    console.log("fs after loop", fs);
     let srcHeadVert = "";
     let srcHeadFrag = "";
 
@@ -585,13 +586,16 @@ Shader.prototype.compile = function ()
     }
     vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
     fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
-
+    console.log("fs after almost everything", fs);
     vs = this._addLibs(vs);
     fs = this._addLibs(fs);
+    console.log("fs after add libs", fs);
 
     if (!this._program)
     {
+        console.log("fs before create program", fs);
         this._program = this._createProgram(vs, fs);
+        console.log("fs after create program", fs);
     }
     else
     {
@@ -606,7 +610,9 @@ Shader.prototype.compile = function ()
     }
 
     this.finalShaderFrag = fs;
+    console.log("FINAL SHADER frag", this.finalShaderFrag);
     this.finalShaderVert = vs;
+    console.log("FINAL SHADER vert", this.finalShaderFrag);
 
     MESH.lastMesh = null;
     MESH.lastShader = null;
