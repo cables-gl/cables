@@ -165,11 +165,8 @@ const Context = function (_patch)
         if (dbgRenderInfo)
         {
             const webGlRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
-            if (webGlRenderer === "Google SwiftShader")
-            {
-                console.log("detected slow renderer!");
-                this.glSlowRenderer = true;
-            }
+            console.log(webGlRenderer);
+            if (webGlRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 
         this.gl.getExtension("OES_standard_derivatives");
