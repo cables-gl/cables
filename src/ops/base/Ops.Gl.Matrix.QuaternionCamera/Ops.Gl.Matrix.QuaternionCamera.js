@@ -16,12 +16,19 @@ const
     vecUpZ=op.inValueFloat("upZ",0);
 
 const cgl=op.patch.cgl;
-var vUp=vec3.create();
-var vEye=vec3.create();
-var vCenter=vec3.create();
-var vQuat=quat.create();
-var transMatrix = mat4.create();
+const vUp=vec3.create();
+const vEye=vec3.create();
+const vCenter=vec3.create();
+const vQuat=quat.create();
+const transMatrix = mat4.create();
 mat4.identity(transMatrix);
+
+
+
+            // arr[i*3+0]=n._animTrans[0].getValue(t);
+
+            // arrRot[i*4+3]=n._animRot[3].getValue(t);
+
 
 var arr=[];
 

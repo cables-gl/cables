@@ -183,7 +183,7 @@ function loadBin(addCacheBuster)
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
-        if (tab)printInfo();
+        if(tab)printInfo();
 
         outPoints.set(boundingPoints);
         if(gltf)
