@@ -204,6 +204,11 @@ Texture.prototype.setSize = function (w, h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
+    if (this._cgl.printError("cgltex"))
+    {
+        console.log("cgl tex settings", this.options);
+    }
+
     // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
     // {
     //     this._cgl.gl.generateMipmap(this.texTarget);

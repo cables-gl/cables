@@ -11,6 +11,7 @@ const Gltf = class
         this.nodes = [];
         this.shaders = [];
         this.timing = [];
+        this.cams = [];
         this.startTime = performance.now();
         this.bounds = new CGL.BoundingBox();
         this.loaded = Date.now();
@@ -155,6 +156,16 @@ function loadAnims(gltf)
     }
 }
 
+function loadCams(gltf)
+{
+    if(!gltf || !gltf.json.cameras) return;
+
+    for(var i=0;i<gltf.json.cameras.length;i++)
+    {
+        gltf.cams.push(new gltfCamera(gltf,gltf.json.cameras[i]));
+    }
+}
+
 function parseGltf(arrayBuffer)
 {
     let j = 0, i = 0;
@@ -287,6 +298,10 @@ function parseGltf(arrayBuffer)
     gltf.timing.push("load anims", Math.round((performance.now() - gltf.startTime)));
 
     if (gltf.json.animations) loadAnims(gltf);
+
+    gltf.timing.push("load cameras", Math.round((performance.now() - gltf.startTime)));
+
+    if (gltf.json.cameras) loadCams(gltf);
 
     gltf.timing.push("finished", Math.round((performance.now() - gltf.startTime)));
 
