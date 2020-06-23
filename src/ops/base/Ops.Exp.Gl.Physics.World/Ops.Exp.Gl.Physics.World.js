@@ -101,4 +101,6 @@ exec.onTriggered = function ()
 
 
     lastTime = time;
+
+    console.log(world.bodies);
 };

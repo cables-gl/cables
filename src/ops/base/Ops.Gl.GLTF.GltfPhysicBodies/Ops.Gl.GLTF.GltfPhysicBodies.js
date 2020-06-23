@@ -10,6 +10,8 @@ const vec = vec3.create();
 const empty = vec3.create();
 const trMat = mat4.create();
 const size = 1.0;
+let world = null;
+let scene = null;
 
 let currentSceneLoaded = 0;
 inExec.onTriggered = update;
@@ -23,7 +25,6 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
-let world = null;
 inNames.onChange = () =>
 {
     removeFromWorld();
@@ -37,9 +38,9 @@ function update()
     for (let i = 0; i < bodies.length; i++)
     {
         vec3.transformMat4(vec, empty, bodies[i].node.modelMatAbs());
-        bodies[i].body.position.x = vec[0];
-        bodies[i].body.position.y = vec[1];
-        bodies[i].body.position.z = vec[2];
+        bodies[i].body.position.x = vec[0] * scene.scale;
+        bodies[i].body.position.y = vec[1] * scene.scale;
+        bodies[i].body.position.z = vec[2] * scene.scale;
 
         if (bodies[i].node.hidden && !bodies[i].hidden)
         {
@@ -95,10 +96,12 @@ function removeFromWorld()
 
 function addToWorld()
 {
-    const scene = cgl.frameStore.currentScene;
+    scene = cgl.frameStore.currentScene;
     if (!scene || !cgl.frameStore.world) return;
 
-    if (world != cgl.frameStore.world || currentSceneLoaded != scene.loaded)removeFromWorld();
+    if (
+        world != cgl.frameStore.world ||
+        currentSceneLoaded != scene.loaded)removeFromWorld();
 
     world = cgl.frameStore.world;
 
@@ -122,7 +125,10 @@ function addToWorld()
         scene.nodes[i].calcBounds(scene, null, bounds);
 
         const size = vec3.create();
-        vec3.set(size, bounds.size[0] / 2, bounds.size[1] / 2, bounds.size[2] / 2);
+        vec3.set(size,
+            bounds.size[0] * scene.scale,
+            bounds.size[1] * scene.scale,
+            bounds.size[2] * scene.scale);
         shape = new CANNON.Box(new CANNON.Vec3(size[0], size[1], size[2]));
         // shape = new CANNON.Sphere(size);
 
