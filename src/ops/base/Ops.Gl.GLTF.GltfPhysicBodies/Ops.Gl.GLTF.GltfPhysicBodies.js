@@ -112,7 +112,7 @@ function addToWorld()
         const bounds = new CGL.BoundingBox();
         scene.nodes[i].calcBounds(scene, null, bounds);
 
-        console.log(scene.nodes[i].name, bounds.size);
+        // console.log(scene.nodes[i].name, bounds.size);
 
 
         const size = vec3.create();

@@ -5,7 +5,7 @@ const
     inExec = op.inTrigger("Render"),
     inFile = op.inUrl("glb File"),
     inRender = op.inBool("Draw", true),
-    inCamera = op.inDropDown("Camera", ["None"], "None"),
+    // inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
@@ -42,6 +42,7 @@ inFile.onChange =
     inVertFormat.onChange =
     inNormFormat.onChange = reloadSoon;
 
+const cam = null;
 let boundingPoints = [];
 let gltf = null;
 let maxTime = 0;
@@ -67,17 +68,16 @@ inCenter.onChange = updateCenter;
 
 function updateCamera()
 {
-    const arr = ["None"];
-    if (gltf && gltf.json.cameras)
-    {
-        for (let i = 0; i < gltf.json.cameras.length; i++)
-        {
-            arr.push(gltf.json.cameras[i].name);
-        }
-    }
-    inCamera.uiAttribs.values = arr;
+    // const arr = ["None"];
+    // if (gltf && gltf.json.cameras)
+    // {
+    //     for (let i = 0; i < gltf.json.cameras.length; i++)
+    //     {
+    //         arr.push(gltf.json.cameras[i].name);
+    //     }
+    // }
+    // inCamera.uiAttribs.values = arr;
 }
-
 
 function updateCenter()
 {
@@ -92,7 +92,6 @@ function updateCenter()
         if (inCenter.get() == "XZ") boundsCenter[1] = -gltf.bounds.minY;
     }
 }
-
 
 inRescale.onChange = function ()
 {
@@ -113,6 +112,21 @@ inTimeLine.onChange = function ()
 {
     inTime.setUiAttribs({ "greyout": inTimeLine.get() });
 };
+
+
+// inCamera.onChange = setCam;
+
+function setCam()
+{
+    // cam = null;
+    // if (!gltf) return;
+
+    // for (let i = 0; i < gltf.cams.length; i++)
+    // {
+    //     if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
+    // }
+
+}
 
 
 inExec.onTriggered = function ()
@@ -155,6 +169,8 @@ inExec.onTriggered = function ()
 
     if (needsMatUpdate) updateMaterials();
 
+    if (cam)cam.start();
+
     if (gltf && inRender.get())
     {
         gltf.time = time;
@@ -175,6 +191,8 @@ inExec.onTriggered = function ()
     cgl.frameStore.currentScene = null;
 
     cgl.popModelMatrix();
+
+    if (cam)cam.end();
 };
 
 function loadBin(addCacheBuster)
@@ -206,6 +224,7 @@ function loadBin(addCacheBuster)
         gltf.loaded = Date.now();
 
         updateCamera();
+        setCam();
         outPoints.set(boundingPoints);
         if (gltf && gltf.bounds)outBounds.set(gltf.bounds);
         updateCenter();
@@ -227,13 +246,11 @@ op.onFileChanged = function (fn)
     }
 };
 
-
 function reloadSoon(nocache)
 {
     clearTimeout(timedLoader);
     timedLoader = setTimeout(function () { loadBin(nocache); }, 30);
 }
-
 
 function updateMaterials()
 {
@@ -336,7 +353,6 @@ function findParents(nodes, childNodeIndex)
     }
 }
 
-
 op.exposeTexture = function (name)
 {
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
@@ -344,7 +360,6 @@ op.exposeTexture = function (name)
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
 };
-
 
 op.exposeNode = function (name, tree)
 {

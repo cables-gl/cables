@@ -29,6 +29,7 @@ const Context = function (_patch)
     this.maxTextureUnits = 0;
     this.currentProgram = null;
     this._hadStackError = false;
+    this.glSlowRenderer = false;
 
     this.temporaryTexture = null;
     this.frameStore = {};
@@ -159,6 +160,14 @@ const Context = function (_patch)
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL.");
             return;
         }
+
+        const dbgRenderInfo = this.gl.getExtension("WEBGL_debug_renderer_info");
+        if (dbgRenderInfo)
+        {
+            const webGlRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
+            if (webGlRenderer === "Google SwiftShader") this.glSlowRenderer = true;
+        }
+
         this.gl.getExtension("OES_standard_derivatives");
         // this.gl.getExtension("GL_OES_standard_derivatives");
         const instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
@@ -431,7 +440,7 @@ const Context = function (_patch)
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-        //mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
+        // mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
 
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);

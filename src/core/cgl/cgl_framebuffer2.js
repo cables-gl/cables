@@ -53,6 +53,7 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     if (this._options.multisamplingSamples)
     {
+        if (this._cgl.glSlowRenderer) this._options.multisamplingSamples = 0;
         if (!this._cgl.gl.MAX_SAMPLES) this._options.multisamplingSamples = 0;
         else this._options.multisamplingSamples = Math.min(this._cgl.gl.getParameter(this._cgl.gl.MAX_SAMPLES), this._options.multisamplingSamples);
     }

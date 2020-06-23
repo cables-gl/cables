@@ -160,10 +160,9 @@ function loadCams(gltf)
 {
     if(!gltf || !gltf.json.cameras) return;
 
-    console.log("CAMS",gltf.json.cameras);
     for(var i=0;i<gltf.json.cameras.length;i++)
     {
-        gltf.cams.push(new gltfCamera(gltf.json.cameras[i]));
+        gltf.cams.push(new gltfCamera(gltf,gltf.json.cameras[i]));
     }
 }
 
