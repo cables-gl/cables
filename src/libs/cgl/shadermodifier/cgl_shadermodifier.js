@@ -104,19 +104,24 @@ class ShaderModifier
     _setUniformValue(shader, uniformName, value)
     {
         const uniform = shader.getUniform(uniformName);
+        console.log("uniname", uniformName, uniform);
         if (uniform) uniform.setValue(value);
     }
 
     setUniformValue(name, value)
     {
         const uni = this._getUniform(name);
+
         if (!uni)
         {
             return;
         }
 
-        const defineName = this._getDefineName(name);
+        // TODO:  if the name is not like the struct uni.. i.e. light.position,
+        // TODO: location will ALWAYS be -1 FML gotta fix this tomorrow
 
+        const defineName = this._getDefineName(name);
+        console.log("name", name, "definename", defineName, "val", value, "uni", uni);
         for (const j in this._shaders)
         {
             this._setUniformValue(this._shaders[j].shader, defineName, value);
@@ -159,7 +164,16 @@ class ShaderModifier
         for (let i = 0; i < structMembers.length; i += 1)
         {
             const member = structMembers[i];
-            this.addUniform(member.type, member.name, member.v1, member.v2, member.v3, member.v4, structUniformName, structName);
+            this.addUniform(
+                member.type,
+                member.name,
+                member.v1,
+                member.v2,
+                member.v3,
+                member.v4,
+                structUniformName,
+                structName
+            );
         }
     }
 
