@@ -208,6 +208,7 @@ class ShaderModifier
                     member.v4,
                     structUniformName,
                     structName,
+                    null,
                     member.isCubemap
                 );
             }
