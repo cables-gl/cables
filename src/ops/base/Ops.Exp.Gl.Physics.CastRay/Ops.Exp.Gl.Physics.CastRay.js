@@ -36,13 +36,15 @@ const
     cgl = op.patch.cgl;
 exec.onTriggered = render;
 
-let ray = new CANNON.Ray(
-    new CANNON.Vec3(0, 0, 0),
-    new CANNON.Vec3(0, 0, 0)
-);
+let rayResult = null;
 const mat = mat4.create();
 
-function setRay()
+// let ray = new CANNON.Ray(
+//     new CANNON.Vec3(0, 0, 0),
+//     new CANNON.Vec3(0, 0, 0)
+// );
+
+function setRay(world)
 {
     mat4.identity(mat);
     // var x = 2.0 * (inX.get() / cgl.canvas.clientWidth) -1;
@@ -86,10 +88,10 @@ function setRay()
     to[1] -= vy * huge;
     to[2] -= vz * huge;
 
-    ray = new CANNON.Ray(
-        new CANNON.Vec3(to[0], to[1], to[2]),
-        new CANNON.Vec3(origin[0], origin[1], origin[2])
-    );
+    // ray = new CANNON.Ray(
+    //     new CANNON.Vec3(to[0], to[1], to[2]),
+    //     new CANNON.Vec3(origin[0], origin[1], origin[2])
+    // );
 
     fromX.set(origin[0]);
     fromY.set(origin[1]);
@@ -98,6 +100,14 @@ function setRay()
     toX.set(to[0]);
     toY.set(to[1]);
     toZ.set(to[2]);
+
+
+    rayResult = new CANNON.RaycastResult();
+    world.raycastClosest(
+        new CANNON.Vec3(origin[0], origin[1], origin[2]),
+        new CANNON.Vec3(to[0], to[1], to[2]),
+        {},
+        rayResult);
 }
 
 function render()
@@ -107,44 +117,44 @@ function render()
 
     let hitBody = null;
 
+    setRay(world);
 
-    setRay();
+    // const r = ray.intersectWorld(world, {});
 
-    const r = ray.intersectWorld(world, {});
 
-    if (r && ray.result)
+    if (rayResult)
     {
-        // console.log(ray.result);
-        // console.log(ray.result);
-        hasHit.set(ray.result.hasHit);
+        // console.log(rayResult);
+        // console.log(rayResult);
+        hasHit.set(rayResult.hasHit);
         // ray.skipBackFaces = true;
-        if (ray.result.body)
+        if (rayResult.body)
         {
-            aabbX.set(ray.result.body.aabb.lowerBound.x);
-            aabbX.set(ray.result.body.aabb.lowerBound.y);
-            aabbX.set(ray.result.body.aabb.lowerBound.z);
+            aabbX.set(rayResult.body.aabb.lowerBound.x);
+            aabbX.set(rayResult.body.aabb.lowerBound.y);
+            aabbX.set(rayResult.body.aabb.lowerBound.z);
 
-            aabbX2.set(ray.result.body.aabb.upperBound.x);
-            aabbX2.set(ray.result.body.aabb.upperBound.y);
-            aabbX2.set(ray.result.body.aabb.upperBound.z);
+            aabbX2.set(rayResult.body.aabb.upperBound.x);
+            aabbX2.set(rayResult.body.aabb.upperBound.y);
+            aabbX2.set(rayResult.body.aabb.upperBound.z);
 
-            // ray.result.body.dispatchEvent({type:"raycasthit"});
-            hitBody = ray.result.body;
+            // rayResult.body.dispatchEvent({type:"raycasthit"});
+            hitBody = rayResult.body;
             hitBody.raycastHit = true;
         }
 
-        // console.log(ray.result);
+        // console.log(rayResult);
 
-        hitX.set(ray.result.hitPointWorld.x);
-        hitY.set(ray.result.hitPointWorld.y);
-        hitZ.set(ray.result.hitPointWorld.z);
+        hitX.set(rayResult.hitPointWorld.x);
+        hitY.set(rayResult.hitPointWorld.y);
+        hitZ.set(rayResult.hitPointWorld.z);
 
-        hitNormalX.set(ray.result.hitNormalWorld.x);
-        hitNormalY.set(ray.result.hitNormalWorld.y);
-        hitNormalZ.set(ray.result.hitNormalWorld.z);
+        hitNormalX.set(rayResult.hitNormalWorld.x);
+        hitNormalY.set(rayResult.hitNormalWorld.y);
+        hitNormalZ.set(rayResult.hitNormalWorld.z);
     }
     else hasHit.set(false);
-    hitResult.set(ray.result);
+    hitResult.set(rayResult);
 
 
     for (let i = 0; i < world.bodies.length; i++)

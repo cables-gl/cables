@@ -1,15 +1,14 @@
-const exec = op.inTrigger("Exec");
+const exec = op.inTrigger("Exec"),
 
-const reset = op.inTriggerButton("Reset");
+    reset = op.inTriggerButton("Reset"),
+    doDraw = op.inValueBool("Draw Bodies", false),
+    groundPlane = op.inValueBool("Groundplane", false),
 
-const groundPlane = op.inValueBool("Groundplane", false);
+    gravX = op.inValue("Gravity X"),
+    gravY = op.inValue("Gravity Y", -9.82),
+    gravZ = op.inValue("Gravity Z"),
 
-
-const gravX = op.inValue("Gravity X");
-const gravY = op.inValue("Gravity Y", -9.82);
-const gravZ = op.inValue("Gravity Z");
-
-const next = op.outTrigger("next");
+    next = op.outTrigger("next");
 
 gravX.onChange = setGravity;
 gravY.onChange = setGravity;
@@ -35,6 +34,8 @@ function setup()
 {
     console.log("world setup");
     world = new CANNON.World();
+    world.uuid = CABLES.uuid();
+
     world.broadphase = new CANNON.NaiveBroadphase();
     world.solver.iterations = 13;
 
@@ -84,6 +85,47 @@ const fixedTimeStep = 1.0 / 60.0; // seconds
 const maxSubSteps = 11;
 let lastTime;
 
+const meshCube = new CGL.WireCube(cgl);
+const wireSphere = new CGL.WirePoint(cgl);
+
+function draw()
+{
+    cgl.pushDepthTest(false);
+
+
+    for (let i = 0; i < world.bodies.length; i++)
+    {
+        // if (i == 0)console.log(world.bodies[i]);
+        cgl.pushModelMatrix();
+        // console.log(world.bodies[i].position);
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, [world.bodies[i].position.x, world.bodies[i].position.y, world.bodies[i].position.z]);
+        wireSphere.render(cgl, 0.05);
+
+
+        if (world.bodies[i].shapes[0].type == CANNON.Shape.types.BOX)
+        {
+            meshCube.render(cgl,
+                world.bodies[i].shapes[0].halfExtents.x,
+                world.bodies[i].shapes[0].halfExtents.y,
+                world.bodies[i].shapes[0].halfExtents.z);
+        }
+        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.PLANE) console.log("plane!");
+        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
+        {
+            // console.log("sphere!");
+            wireSphere.render(cgl, 1.0);
+        }
+        else console.log("unknown!", world.bodies[i].shapes[0].type);
+
+        // console.log(world.bodies[i]);
+
+        cgl.popModelMatrix();
+    }
+
+    cgl.popDepthTest();
+}
+
+
 exec.onTriggered = function ()
 {
     if (!world)setup();
@@ -102,5 +144,5 @@ exec.onTriggered = function ()
 
     lastTime = time;
 
-    console.log(world.bodies);
+    if (doDraw.get()) draw();
 };

@@ -38,11 +38,6 @@
             {
                 "type": "5",
                 "name": "Filter Meshes"
-            },
-            {
-                "type": "0",
-                "name": "Render Boundings",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
