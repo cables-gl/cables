@@ -90,7 +90,6 @@ class ShaderModifier
             {
                 structUniformName = this._getDefineName(uni.structUniformName);
                 structName = this._getDefineName(uni.structName);
-                console.log("bro...", name, structUniformName, structName);
             }
 
             if (!shader.hasUniform(name))
@@ -126,11 +125,7 @@ class ShaderModifier
             return;
         }
 
-        // TODO:  if the name is not like the struct uni.. i.e. light.position,
-        // TODO: location will ALWAYS be -1 FML gotta fix this tomorrow
-
         const defineName = this._getDefineName(name);
-        console.log("name", name, "definename", defineName, "val", value, "uni", uni);
         for (const j in this._shaders)
         {
             this._setUniformValue(this._shaders[j].shader, defineName, value);

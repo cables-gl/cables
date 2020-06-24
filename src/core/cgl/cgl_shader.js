@@ -268,8 +268,14 @@ Shader.prototype.createStructUniforms = function ()
     let structStrFrag = "";
     const structStrVert = ""; // TODO: not used yet
 
+    // * reset the arrays holding the value each recompile so we don't skip structs
+    this._structNames = [];
+    this._structUniformNames = [];
+
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
+        // * only add uniforms to struct that have a struct name property
         if (this._uniforms[i]._structName)
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
@@ -550,16 +556,14 @@ Shader.prototype.compile = function ()
     }
     vs = vs.replace("{{MODULES_HEAD}}", srcHeadVert);
     fs = fs.replace("{{MODULES_HEAD}}", srcHeadFrag);
-    console.log("fs after almost everything", fs);
+
     vs = this._addLibs(vs);
     fs = this._addLibs(fs);
-    console.log("fs after add libs", fs);
+
 
     if (!this._program)
     {
-        console.log("fs before create program", fs);
         this._program = this._createProgram(vs, fs);
-        console.log("fs after create program", fs);
     }
     else
     {
@@ -574,9 +578,8 @@ Shader.prototype.compile = function ()
     }
 
     this.finalShaderFrag = fs;
-    console.log("FINAL SHADER frag", this.finalShaderFrag);
     this.finalShaderVert = vs;
-    console.log("FINAL SHADER vert", this.finalShaderFrag);
+
 
     MESH.lastMesh = null;
     MESH.lastShader = null;
