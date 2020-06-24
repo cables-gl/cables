@@ -83,10 +83,20 @@ class ShaderModifier
             const uni = this._uniforms[i];
 
             const name = this._getDefineName(uni.name);
+            let structUniformName = uni.structUniformName;
+            let structName = uni.structName;
+
+            if (uni.structUniformName && uni.structName)
+            {
+                structUniformName = this._getDefineName(uni.structUniformName);
+                structName = this._getDefineName(uni.structName);
+                console.log("bro...", name, structUniformName, structName);
+            }
+
             if (!shader.hasUniform(name))
             {
                 console.log("adding addUniformBoth", name, uni);
-                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, uni.structUniformName, uni.structName, uni.propertyName);
+                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
                 un.comment = "mod: " + this._name;
             }
             else console.log("has uni", name);
@@ -104,7 +114,6 @@ class ShaderModifier
     _setUniformValue(shader, uniformName, value)
     {
         const uniform = shader.getUniform(uniformName);
-        console.log("uniname", uniformName, uniform);
         if (uniform) uniform.setValue(value);
     }
 
@@ -169,16 +178,17 @@ class ShaderModifier
         for (let i = 0; i < structMembers.length; i += 1)
         {
             const member = structMembers[i];
-            this.addUniform(
-                member.type,
-                member.name,
-                member.v1,
-                member.v2,
-                member.v3,
-                member.v4,
-                structUniformName,
-                structName
-            );
+            if (!this._getUniform(name))
+                this.addUniform(
+                    member.type,
+                    member.name,
+                    member.v1,
+                    member.v2,
+                    member.v3,
+                    member.v4,
+                    structUniformName,
+                    structName
+                );
         }
     }
 
