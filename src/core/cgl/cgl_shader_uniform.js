@@ -37,7 +37,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName, _isCubemap)
 {
     this._loc = -1;
     this._type = __type;
@@ -49,6 +49,8 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._structName = _structName;
     this._structUniformName = _structUniformName;
     this._propertyName = _propertyName;
+
+    this._isCubemap = _isCubemap;
 
     this._shader._addUniform(this);
     this.shaderType = null;
@@ -216,7 +218,7 @@ Uniform.prototype.getGlslTypeString = function ()
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
     if (this._type == "m4") return "mat4";
-    if (this._type == "t") return "sampler2D";
+    if (this._type == "t") return this._isCubemap ? "samplerCube" : "sampler2D";
 
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
 };

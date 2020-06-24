@@ -95,7 +95,7 @@ class ShaderModifier
             if (!shader.hasUniform(name))
             {
                 console.log("adding addUniformBoth", name, uni);
-                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName, uni.isCubemap);
                 un.comment = "mod: " + this._name;
             }
             else console.log("has uni", name);
@@ -145,7 +145,7 @@ class ShaderModifier
         return false;
     }
 
-    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName)
+    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, isCubemap)
     {
         if (structUniformName)
         {
@@ -162,10 +162,11 @@ class ShaderModifier
                         "structUniformName": structUniformName,
                         "structName": structName,
                         "propertyName": name,
+                        "isCubemap": isCubemap,
                     });
                 this._changedUniforms = true;
-                return;
             }
+            return;
         }
 
         if (!this._getUniform(name))
@@ -181,6 +182,7 @@ class ShaderModifier
                     "structUniformName": structUniformName,
                     "structName": structName,
                     "propertyName": name,
+                    "isCubemap": isCubemap,
                 });
             this._changedUniforms = true;
         }
@@ -205,7 +207,8 @@ class ShaderModifier
                     member.v3,
                     member.v4,
                     structUniformName,
-                    structName
+                    structName,
+                    member.isCubemap
                 );
             }
         }
