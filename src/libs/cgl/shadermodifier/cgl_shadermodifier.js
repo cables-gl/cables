@@ -86,7 +86,7 @@ class ShaderModifier
             if (!shader.hasUniform(name))
             {
                 console.log("adding addUniformBoth", name, uni);
-                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, uni.structUniformName, uni.structName);
+                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, uni.structUniformName, uni.structName, uni.propertyName);
                 un.comment = "mod: " + this._name;
             }
             else console.log("has uni", name);
@@ -133,24 +133,29 @@ class ShaderModifier
         for (let i = 0; i < this._uniforms.length; i++)
         {
             if (this._uniforms[i].name == name) return this._uniforms[i];
+            if (this._uniforms[i].structName)
+            {
+                if (this._uniforms[i].propertyName == name) return this._uniforms[i];
+            }
         }
         return false;
     }
 
-    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName)
+    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName)
     {
         if (!this._getUniform(name))
         {
             this._uniforms.push(
                 {
                     "type": type,
-                    "name": name,
+                    "name": structUniformName ? (structUniformName + "." + name) : name,
                     "v1": valOrPort,
                     "v2": v2,
                     "v3": v3,
                     "v4": v4,
                     "structUniformName": structUniformName,
                     "structName": structName,
+                    "propertyName": name,
                 });
             this._changedUniforms = true;
         }

@@ -294,7 +294,7 @@ Shader.prototype.createStructUniforms = function ()
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
             const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
-                 + " " + this._uniforms[i].getName() + ";"
+                 + " " + this._uniforms[i]._propertyName + ";"
                  + comment.endl();
 
             // * inject member before {injectionString}
@@ -944,9 +944,9 @@ Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4,
     return uni;
 };
 
-Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName)
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "both";
     return uni;
 };

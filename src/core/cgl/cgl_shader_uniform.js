@@ -37,7 +37,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 {
     this._loc = -1;
     this._type = __type;
@@ -48,7 +48,12 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._port = null;
     this._structName = _structName;
     this._structUniformName = _structUniformName;
-    console.log("create uniform", this);
+    this._propertyName = _propertyName;
+    // if (this._structName && this._structUniformName)
+    // {
+    //     this._propertyName = this._name;
+    //     this._name = this._structUniformName + "." + this._name;
+    // }
     this._shader._addUniform(this);
     this.shaderType = null;
     this.needsUpdate = true;
