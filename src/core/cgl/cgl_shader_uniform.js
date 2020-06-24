@@ -49,11 +49,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._structName = _structName;
     this._structUniformName = _structUniformName;
     this._propertyName = _propertyName;
-    // if (this._structName && this._structUniformName)
-    // {
-    //     this._propertyName = this._name;
-    //     this._name = this._structUniformName + "." + this._name;
-    // }
+
     this._shader._addUniform(this);
     this.shaderType = null;
     this.needsUpdate = true;
