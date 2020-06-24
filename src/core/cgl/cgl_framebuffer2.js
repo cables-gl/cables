@@ -218,7 +218,8 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
 
     let depthType = this._cgl.gl.DEPTH_COMPONENT32F;
-    if (this._cgl.glSlowRenderer) depthType = this._cgl.gl.DEPTH_COMPONENT24;
+
+    if (this._cgl.glSlowRenderer) depthType = this._cgl.gl.DEPTH_COMPONENT16;
     if (depth)
     {
         this._textureDepth.setSize(this._width, this._height);

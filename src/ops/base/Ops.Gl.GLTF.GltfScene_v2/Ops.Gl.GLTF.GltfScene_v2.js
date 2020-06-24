@@ -5,7 +5,7 @@ const
     inExec = op.inTrigger("Render"),
     inFile = op.inUrl("glb File"),
     inRender = op.inBool("Draw", true),
-    // inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
+    inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
@@ -42,7 +42,7 @@ inFile.onChange =
     inVertFormat.onChange =
     inNormFormat.onChange = reloadSoon;
 
-const cam = null;
+let cam = null;
 let boundingPoints = [];
 let gltf = null;
 let maxTime = 0;
@@ -68,15 +68,15 @@ inCenter.onChange = updateCenter;
 
 function updateCamera()
 {
-    // const arr = ["None"];
-    // if (gltf && gltf.json.cameras)
-    // {
-    //     for (let i = 0; i < gltf.json.cameras.length; i++)
-    //     {
-    //         arr.push(gltf.json.cameras[i].name);
-    //     }
-    // }
-    // inCamera.uiAttribs.values = arr;
+    const arr = ["None"];
+    if (gltf && gltf.json.cameras)
+    {
+        for (let i = 0; i < gltf.json.cameras.length; i++)
+        {
+            arr.push(gltf.json.cameras[i].name);
+        }
+    }
+    inCamera.uiAttribs.values = arr;
 }
 
 function updateCenter()
@@ -114,18 +114,17 @@ inTimeLine.onChange = function ()
 };
 
 
-// inCamera.onChange = setCam;
+inCamera.onChange = setCam;
 
 function setCam()
 {
-    // cam = null;
-    // if (!gltf) return;
+    cam = null;
+    if (!gltf) return;
 
-    // for (let i = 0; i < gltf.cams.length; i++)
-    // {
-    //     if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
-    // }
-
+    for (let i = 0; i < gltf.cams.length; i++)
+    {
+        if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
+    }
 }
 
 
@@ -154,6 +153,7 @@ inExec.onTriggered = function ()
         if (inRescale.get())
         {
             const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
             // console.log(sc,sc,sc);
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
@@ -219,14 +219,16 @@ function loadBin(addCacheBuster)
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
-        if (tab)printInfo();
-
-        gltf.loaded = Date.now();
+        if(tab)printInfo();
 
         updateCamera();
         setCam();
         outPoints.set(boundingPoints);
-        if (gltf && gltf.bounds)outBounds.set(gltf.bounds);
+        if(gltf)
+        {
+            gltf.loaded = Date.now();
+            if(gltf.bounds)outBounds.set(gltf.bounds);
+        }
         updateCenter();
     };
 
