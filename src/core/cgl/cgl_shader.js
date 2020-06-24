@@ -271,7 +271,7 @@ Shader.prototype.createStructUniforms = function ()
     // * reset the arrays holding the value each recompile so we don't skip structs
     this._structNames = [];
     this._structUniformNames = [];
-
+    this._injectedStrings = [];
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
@@ -286,37 +286,50 @@ Shader.prototype.createStructUniforms = function ()
                 // * create struct definition with placeholder string to inject
                 const structDefinition = "struct "
                     + this._uniforms[i]._structName + " {".endl()
-                    + injectionString.endl()
+                    + injectionString // .endl()
                     + "};".endl().endl();
 
                 structStrFrag = structStrFrag.concat(structDefinition);
 
                 this._structNames.push(this._uniforms[i]._structName);
-                this._structUniformNames.push(this._uniforms[i]._structUniformName);
             }
-
+            this._structUniformNames.push({ "name": this._uniforms[i]._structUniformName, "structName": this._uniforms[i]._structName });
             // * create member & comment
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
             const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
                  + " " + this._uniforms[i]._propertyName + ";"
-                 + comment.endl();
+                 + comment; // .endl();
+
 
             // * inject member before {injectionString}
-            const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
-            structStrFrag =
-             structStrFrag.slice(0, insertionIndexFrag)
-             + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+            if (this._injectedStrings.indexOf(stringToInsert) === -1)
+            {
+                const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+                structStrFrag =
+                    structStrFrag.slice(0, insertionIndexFrag)
+                    + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+                this._injectedStrings.push(stringToInsert);
+            }
         }
     }
 
+    // * reuse array to dedupe injected uni declarations
+    this._injectedStrings = [];
+
     // * remove struct injection points and add uniform
-    for (let i = 0; i < this._structNames.length; i += 1)
+    for (let i = 0; i < this._structUniformNames.length; i += 1)
     {
-        const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structNames[i] + "}}";
-        structStrFrag = structStrFrag.replace(injectionString, "");
-        structStrFrag += "UNI " + this._structNames[i] + " " + this._structUniformNames[i] + ";".endl();
+        const uniDeclarationString = "UNI " + this._structUniformNames[i].structName + " " + this._structUniformNames[i].name + ";".endl();
+
+        if (this._injectedStrings.indexOf(uniDeclarationString) === -1)
+        {
+            const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structUniformNames[i].structName + "}}";
+            structStrFrag = structStrFrag.replace(injectionString, "");
+            structStrFrag += uniDeclarationString;
+            this._injectedStrings.push(uniDeclarationString);
+        }
     }
 
     return structStrFrag;

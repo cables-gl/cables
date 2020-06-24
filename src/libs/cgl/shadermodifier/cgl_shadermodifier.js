@@ -147,6 +147,27 @@ class ShaderModifier
 
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName)
     {
+        if (structUniformName)
+        {
+            if (!this._getUniform(structUniformName + "." + name))
+            {
+                this._uniforms.push(
+                    {
+                        "type": type,
+                        "name": structUniformName ? (structUniformName + "." + name) : name,
+                        "v1": valOrPort,
+                        "v2": v2,
+                        "v3": v3,
+                        "v4": v4,
+                        "structUniformName": structUniformName,
+                        "structName": structName,
+                        "propertyName": name,
+                    });
+                this._changedUniforms = true;
+                return;
+            }
+        }
+
         if (!this._getUniform(name))
         {
             this._uniforms.push(
@@ -165,15 +186,41 @@ class ShaderModifier
         }
     }
 
+    _getStructUniform(name, structUniformName)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].name == name && this._uniforms[i].structUniformName === structUniformName)
+            {
+                console.log("returning this uni", this._uniforms[i]);
+                return this._uniforms[i];
+            }
+            // if (this._uniforms[i].structName)
+            // {
+            //     if (this._uniforms[i].propertyName == name) return this._uniforms[i];
+            // }
+        }
+        return false;
+    }
+
     addUniformsStruct(structUniformName, structName, structMembers)
     {
         if (!structName) return;
         if (!structMembers) return;
-
+        console.log("structuniname", structUniformName);
         for (let i = 0; i < structMembers.length; i += 1)
         {
             const member = structMembers[i];
             if (!this._getUniform(name))
+            {
+                console.log("adding structuni member", member.type,
+                    member.name,
+                    member.v1,
+                    member.v2,
+                    member.v3,
+                    member.v4,
+                    structUniformName,
+                    structName);
                 this.addUniform(
                     member.type,
                     member.name,
@@ -184,6 +231,8 @@ class ShaderModifier
                     structUniformName,
                     structName
                 );
+                console.log("uniforms after add", this._uniforms);
+            }
         }
     }
 
