@@ -51,7 +51,6 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._propertyName = _propertyName;
 
     this._shader._addUniform(this);
-    this.shaderType = null;
     this.needsUpdate = true;
     this.shaderType = null;
     this.comment = null;
@@ -238,6 +237,10 @@ Uniform.prototype.getName = function ()
 Uniform.prototype.getValue = function ()
 {
     return this._value;
+};
+Uniform.prototype.getShaderType = function ()
+{
+    return this.shaderType;
 };
 Uniform.prototype.resetLoc = function ()
 {

@@ -289,11 +289,21 @@ Shader.prototype.createStructUniforms = function ()
                     + injectionString // .endl()
                     + "};".endl().endl();
 
-                structStrFrag = structStrFrag.concat(structDefinition);
-                structStrVert = structStrVert.concat(structDefinition);
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "frag")
+                    structStrFrag = structStrFrag.concat(structDefinition);
+
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "vert")
+                    structStrVert = structStrVert.concat(structDefinition);
+
                 this._structNames.push(this._uniforms[i]._structName);
             }
-            this._structUniformNames.push({ "name": this._uniforms[i]._structUniformName, "structName": this._uniforms[i]._structName });
+
+            this._structUniformNames.push({
+                "name": this._uniforms[i]._structUniformName,
+                "structName": this._uniforms[i]._structName,
+                "shaderType": this._uniforms[i]._shaderType
+            });
+
             // * create member & comment
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
@@ -307,13 +317,17 @@ Shader.prototype.createStructUniforms = function ()
             if (this._injectedStrings.indexOf(stringToInsert) === -1)
             {
                 const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+                const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
 
-                structStrFrag =
-                    structStrFrag.slice(0, insertionIndexFrag)
-                    + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
-                structStrVert =
-                structStrVert.slice(0, insertionIndexFrag)
-                + stringToInsert + structStrVert.slice(insertionIndexFrag - 1);
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "frag")
+                    structStrFrag =
+                        structStrFrag.slice(0, insertionIndexFrag)
+                        + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "vert")
+                    structStrVert =
+                        structStrVert.slice(0, insertionIndexFrag)
+                        + stringToInsert + structStrVert.slice(insertionIndexFrag - 1);
 
                 this._injectedStrings.push(stringToInsert);
             }
@@ -331,11 +345,16 @@ Shader.prototype.createStructUniforms = function ()
         if (this._injectedStrings.indexOf(uniDeclarationString) === -1)
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structUniformNames[i].structName + "}}";
+
             structStrFrag = structStrFrag.replace(injectionString, "");
-            structStrFrag += uniDeclarationString;
+
+            if (this._structUniformNames[i].shaderType === "both" || this._structUniformNames[i].shaderType === "frag")
+                structStrFrag += uniDeclarationString;
 
             structStrVert = structStrVert.replace(injectionString, "");
-            structStrVert += uniDeclarationString;
+
+            if (this._structUniformNames[i].shaderType === "both" || this._structUniformNames[i].shaderType === "vert")
+                structStrVert += uniDeclarationString;
 
             this._injectedStrings.push(uniDeclarationString);
         }
