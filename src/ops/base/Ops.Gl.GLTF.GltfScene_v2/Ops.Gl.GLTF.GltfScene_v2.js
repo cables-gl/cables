@@ -169,7 +169,8 @@ inExec.onTriggered = function ()
 
     if (needsMatUpdate) updateMaterials();
 
-    if (cam)cam.start();
+
+    if (cam) cam.start(time);
 
     if (gltf && inRender.get())
     {
@@ -219,15 +220,15 @@ function loadBin(addCacheBuster)
         op.refreshParams();
         outAnimLength.set(maxTime);
         hideNodesFromData();
-        if(tab)printInfo();
+        if (tab)printInfo();
 
         updateCamera();
         setCam();
         outPoints.set(boundingPoints);
-        if(gltf)
+        if (gltf)
         {
             gltf.loaded = Date.now();
-            if(gltf.bounds)outBounds.set(gltf.bounds);
+            if (gltf.bounds)outBounds.set(gltf.bounds);
         }
         updateCenter();
     };

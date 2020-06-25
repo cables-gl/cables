@@ -10,8 +10,8 @@ const exec = op.inTrigger("Exec"),
 
     next = op.outTrigger("next");
 
-gravX.onChange = setGravity;
-gravY.onChange = setGravity;
+gravX.onChange =
+gravY.onChange =
 gravZ.onChange = setGravity;
 
 groundPlane.onChange = setup;
@@ -19,6 +19,15 @@ groundPlane.onChange = setup;
 const cgl = op.patch.cgl;
 let world = null;
 cgl.frameStore = cgl.frameStore || {};
+
+
+const fixedTimeStep = 1.0 / 60.0; // seconds
+const maxSubSteps = 11;
+let lastTime;
+
+const meshCube = new CGL.WireCube(cgl);
+const wireSphere = new CGL.WirePoint(cgl);
+
 
 reset.onTriggered = function ()
 {
@@ -71,8 +80,10 @@ function setup()
         // groundBody.quaternion = rotY;//.mult(groundBody.quaternion);
 
         const groundBody = new CANNON.Body({ "mass": 0 });
+        groundBody.name = "groundplane";
         const s = 10000;
         groundBody.addShape(new CANNON.Box(new CANNON.Vec3(s, s, s)));
+        // groundBody.position.set(0, -s, 0);
         groundBody.position.set(0, -s, 0);
 
 
@@ -80,13 +91,6 @@ function setup()
     }
 }
 
-
-const fixedTimeStep = 1.0 / 60.0; // seconds
-const maxSubSteps = 11;
-let lastTime;
-
-const meshCube = new CGL.WireCube(cgl);
-const wireSphere = new CGL.WirePoint(cgl);
 
 function draw()
 {
@@ -133,7 +137,7 @@ exec.onTriggered = function ()
 
     next.trigger();
 
-    const time = Date.now();
+    const time = performance.now();
 
     if (lastTime !== undefined)
     {
