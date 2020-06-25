@@ -95,7 +95,7 @@ class ShaderModifier
             if (!shader.hasUniform(name))
             {
                 console.log("adding addUniformBoth", name, uni);
-                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName, uni.isCubemap);
+                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
                 un.comment = "mod: " + this._name;
             }
             else console.log("has uni", name);
@@ -119,11 +119,8 @@ class ShaderModifier
     setUniformValue(name, value)
     {
         const uni = this._getUniform(name);
+        if (!uni) return;
 
-        if (!uni)
-        {
-            return;
-        }
 
         const defineName = this._getDefineName(name);
         for (const j in this._shaders)
@@ -145,7 +142,7 @@ class ShaderModifier
         return false;
     }
 
-    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, isCubemap)
+    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName)
     {
         if (structUniformName)
         {
@@ -162,7 +159,6 @@ class ShaderModifier
                         "structUniformName": structUniformName,
                         "structName": structName,
                         "propertyName": name,
-                        "isCubemap": isCubemap,
                     });
                 this._changedUniforms = true;
             }
@@ -182,7 +178,6 @@ class ShaderModifier
                     "structUniformName": structUniformName,
                     "structName": structName,
                     "propertyName": name,
-                    "isCubemap": isCubemap,
                 });
             this._changedUniforms = true;
         }
@@ -209,7 +204,6 @@ class ShaderModifier
                     structUniformName,
                     structName,
                     null,
-                    member.isCubemap
                 );
             }
         }

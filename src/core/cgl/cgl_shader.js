@@ -946,23 +946,23 @@ Shader.prototype._addUniform = function (uni)
  * @instance
  * @function addUniformFrag
  */
-Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap)
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "frag";
     return uni;
 };
 
-Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap)
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "vert";
     return uni;
 };
 
-Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap)
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName, isCubemap);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "both";
     return uni;
 };
