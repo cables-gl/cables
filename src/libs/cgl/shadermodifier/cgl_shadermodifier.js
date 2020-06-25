@@ -94,9 +94,26 @@ class ShaderModifier
 
             if (!shader.hasUniform(name))
             {
-                console.log("adding addUniformBoth", name, uni);
-                const un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
-                un.comment = "mod: " + this._name;
+                // console.log("adding addUniformBoth", name, type, uni);
+                let un = null;
+                if (uni.shaderType === "both")
+                {
+                    console.log("adding addUniformBoth", name, uni.type, uni);
+                    un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un.comment = "mod: " + this._name;
+                }
+                else if (uni.shaderType === "frag")
+                {
+                    console.log("adding addUniformFrag", name, uni.type, uni);
+                    un = shader.addUniformFrag(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un.comment = "mod: " + this._name;
+                }
+                else if (uni.shaderType === "vert")
+                {
+                    console.log("adding addUniformVert", name, uni.type, uni);
+                    un = shader.addUniformVert(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un.comment = "mod: " + this._name;
+                }
             }
             else console.log("has uni", name);
         }
@@ -123,6 +140,7 @@ class ShaderModifier
 
 
         const defineName = this._getDefineName(name);
+        // console.log("setting", name, defineName, value);
         for (const j in this._shaders)
         {
             this._setUniformValue(this._shaders[j].shader, defineName, value);
@@ -142,12 +160,15 @@ class ShaderModifier
         return false;
     }
 
-    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName)
+    addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
         if (structUniformName)
         {
             if (!this._getUniform(structUniformName + "." + name))
             {
+                let _shaderType = "both";
+                if (shaderType) _shaderType = shaderType;
+                console.log("NAME", name, "TYPE", type, "SHADERTYPE", _shaderType);
                 this._uniforms.push(
                     {
                         "type": type,
@@ -159,6 +180,7 @@ class ShaderModifier
                         "structUniformName": structUniformName,
                         "structName": structName,
                         "propertyName": name,
+                        "shaderType": _shaderType,
                     });
                 this._changedUniforms = true;
             }
@@ -167,6 +189,9 @@ class ShaderModifier
 
         if (!this._getUniform(name))
         {
+            let _shaderType = "both";
+            if (shaderType) _shaderType = shaderType;
+
             this._uniforms.push(
                 {
                     "type": type,
@@ -178,13 +203,14 @@ class ShaderModifier
                     "structUniformName": structUniformName,
                     "structName": structName,
                     "propertyName": name,
+                    "shaderType": _shaderType,
                 });
             this._changedUniforms = true;
         }
     }
 
 
-    addUniformsStruct(structUniformName, structName, structMembers)
+    addUniformsStruct(structUniformName, structName, structMembers, shaderType)
     {
         if (!structName) return;
         if (!structMembers) return;
@@ -192,8 +218,11 @@ class ShaderModifier
         for (let i = 0; i < structMembers.length; i += 1)
         {
             const member = structMembers[i];
+
             if (!this._getUniform(name))
             {
+                let _shaderType = "both";
+                if (shaderType) _shaderType = shaderType;
                 this.addUniform(
                     member.type,
                     member.name,
@@ -204,6 +233,7 @@ class ShaderModifier
                     structUniformName,
                     structName,
                     null,
+                    _shaderType
                 );
             }
         }
@@ -293,6 +323,13 @@ class ShaderModifier
     {
         this._defines[what] = value;
         this._changedDefines = true;
+    }
+
+    hasDefine(name)
+    {
+    //    console.log("hasDefine", this._defines);
+        if (this._defines[name] !== null && this._defines[name] !== undefined) return true;
+        return false;
     }
 
     toggleDefine(name, b)

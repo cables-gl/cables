@@ -266,7 +266,7 @@ Shader.prototype.createStructUniforms = function ()
 {
     // * create structs
     let structStrFrag = "";
-    const structStrVert = ""; // TODO: not used yet
+    let structStrVert = ""; // TODO: not used yet
 
     // * reset the arrays holding the value each recompile so we don't skip structs
     this._structNames = [];
@@ -290,7 +290,7 @@ Shader.prototype.createStructUniforms = function ()
                     + "};".endl().endl();
 
                 structStrFrag = structStrFrag.concat(structDefinition);
-
+                structStrVert = structStrVert.concat(structDefinition);
                 this._structNames.push(this._uniforms[i]._structName);
             }
             this._structUniformNames.push({ "name": this._uniforms[i]._structUniformName, "structName": this._uniforms[i]._structName });
@@ -307,9 +307,14 @@ Shader.prototype.createStructUniforms = function ()
             if (this._injectedStrings.indexOf(stringToInsert) === -1)
             {
                 const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+
                 structStrFrag =
                     structStrFrag.slice(0, insertionIndexFrag)
                     + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+                structStrVert =
+                structStrVert.slice(0, insertionIndexFrag)
+                + stringToInsert + structStrVert.slice(insertionIndexFrag - 1);
+
                 this._injectedStrings.push(stringToInsert);
             }
         }
@@ -328,11 +333,15 @@ Shader.prototype.createStructUniforms = function ()
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._structUniformNames[i].structName + "}}";
             structStrFrag = structStrFrag.replace(injectionString, "");
             structStrFrag += uniDeclarationString;
+
+            structStrVert = structStrVert.replace(injectionString, "");
+            structStrVert += uniDeclarationString;
+
             this._injectedStrings.push(uniDeclarationString);
         }
     }
 
-    return structStrFrag;
+    return [structStrVert, structStrFrag];
 };
 
 Shader.prototype.compile = function ()
@@ -444,7 +453,7 @@ Shader.prototype.compile = function ()
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
 
-    const structStrFrag = this.createStructUniforms();
+    const structStrings = this.createStructUniforms();
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
@@ -466,14 +475,14 @@ Shader.prototype.compile = function ()
 
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     {
         fs += "#define MOBILE".endl();
         vs += "#define MOBILE".endl();
     }
-    vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
-    fs = extensionString + fs + definesStr + structStrFrag + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
+    vs = extensionString + vs + definesStr + structStrings[0] + uniformsStrVert + "\n// -- \n" + this.srcVert;
+    fs = extensionString + fs + definesStr + structStrings[1] + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
+
 
     let srcHeadVert = "";
     let srcHeadFrag = "";
@@ -572,7 +581,6 @@ Shader.prototype.compile = function ()
 
     vs = this._addLibs(vs);
     fs = this._addLibs(fs);
-
 
     if (!this._program)
     {
@@ -705,7 +713,7 @@ Shader.prototype.toggleDefine = function (name, enabled)
 {
     if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
     {
-        console.log("toggleDefine", name, enabled);
+        // console.log("toggleDefine", name, enabled);
 
         enabled.removeEventListener("change", enabled.onToggleDefine);
         enabled.onToggleDefine = (v) =>

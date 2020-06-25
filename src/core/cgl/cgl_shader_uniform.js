@@ -331,6 +331,7 @@ Uniform.prototype.updateValue2I = function ()
     }
 
     this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
+
     this.needsUpdate = false;
     profileData.profileUniformCount++;
 };
