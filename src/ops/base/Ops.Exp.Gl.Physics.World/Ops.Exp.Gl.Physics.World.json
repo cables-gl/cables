@@ -18,6 +18,11 @@
             },
             {
                 "type": "0",
+                "name": "Draw Bodies",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Groundplane",
                 "subType": "boolean"
             },

@@ -1,16 +1,16 @@
 const
-    v=op.inValueEditor("value",""),
-    syntax=op.inValueSelect("Syntax",['text','glsl','css'],"text"),
-    result=op.outString("Result");
+    v = op.inValueEditor("value", ""),
+    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css"], "text"),
+    result = op.outString("Result");
 
-v.setUiAttribs({"hidePort":true});
+v.setUiAttribs({ "hidePort": true });
 
-syntax.onChange=function()
+syntax.onChange = function ()
 {
-    v.setUiAttribs({editorSyntax:syntax.get()});
+    v.setUiAttribs({ "editorSyntax": syntax.get() });
 };
 
-v.onChange=function()
+v.onChange = function ()
 {
     result.set(v.get());
 };

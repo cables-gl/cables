@@ -1,7 +1,7 @@
 const
     inExec = op.inTrigger("Exec"),
     inNames = op.inString("Filter Meshes", ""),
-    doRender = op.inBool("Render Boundings", true),
+    inMass = op.inFloat("Mass kg", 0),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -11,6 +11,7 @@ const empty = vec3.create();
 const trMat = mat4.create();
 const size = 1.0;
 let world = null;
+let worldId = null;
 let scene = null;
 
 let currentSceneLoaded = 0;
@@ -25,22 +26,26 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
-inNames.onChange = () =>
+
+inMass.onChange =
+inNames.onChange =
+inExec.onLinkChanged = () =>
 {
     removeFromWorld();
     added = false;
 };
 
+
 function update()
 {
-    if (!added) addToWorld();
+    if (!added || worldId != cgl.frameStore.world.uuid) addToWorld();
 
     for (let i = 0; i < bodies.length; i++)
     {
         vec3.transformMat4(vec, empty, bodies[i].node.modelMatAbs());
-        bodies[i].body.position.x = vec[0] * scene.scale;
-        bodies[i].body.position.y = vec[1] * scene.scale;
-        bodies[i].body.position.z = vec[2] * scene.scale;
+        bodies[i].body.position.x = vec[0];
+        bodies[i].body.position.y = vec[1];
+        bodies[i].body.position.z = vec[2];
 
         if (bodies[i].node.hidden && !bodies[i].hidden)
         {
@@ -60,18 +65,18 @@ function update()
         mat4.fromRotationTranslation(trMat, [0, 0, 0, 0], vec);
 
         mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
-        if (doRender.get())
-        {
-            if (shape == SHAPE_BOX)
-            {
-                if (bodies[i].size)
-                    meshCube.render(cgl, bodies[i].size[0], bodies[i].size[1], bodies[i].size[2]);
-            }
-            else
-            {
-                CABLES.GL_MARKER.drawSphere(op, size);
-            }
-        }
+        // if (doRender.get())
+        // {
+        //     if (shape == SHAPE_BOX)
+        //     {
+        //         if (bodies[i].size)
+        //             meshCube.render(cgl, bodies[i].size[0], bodies[i].size[1], bodies[i].size[2]);
+        //     }
+        //     else
+        //     {
+        //         CABLES.GL_MARKER.drawSphere(op, size);
+        //     }
+        // }
 
         cgl.popModelMatrix();
     }
@@ -90,6 +95,7 @@ function removeFromWorld()
     bodies.length = 0;
     outNum.set(bodies.length);
     world = null;
+    worldId = null;
     added = false;
 }
 
@@ -99,8 +105,11 @@ function addToWorld()
     scene = cgl.frameStore.currentScene;
     if (!scene || !cgl.frameStore.world) return;
 
+
+    console.log("gltf bodies readd");
+
     if (
-        world != cgl.frameStore.world ||
+        worldId != cgl.frameStore.world.uuid ||
         currentSceneLoaded != scene.loaded)removeFromWorld();
 
     world = cgl.frameStore.world;
@@ -112,6 +121,8 @@ function addToWorld()
         return;
     }
     if (!scene) return;
+
+    worldId = world.uuid;
 
     currentSceneLoaded = scene.loaded;
     for (let i = 0; i < scene.nodes.length; i++)
@@ -126,9 +137,9 @@ function addToWorld()
 
         const size = vec3.create();
         vec3.set(size,
-            bounds.size[0] * scene.scale,
-            bounds.size[1] * scene.scale,
-            bounds.size[2] * scene.scale);
+            bounds.size[0] * 0.5,
+            bounds.size[1] * 0.5,
+            bounds.size[2] * 0.5);
         shape = new CANNON.Box(new CANNON.Vec3(size[0], size[1], size[2]));
         // shape = new CANNON.Sphere(size);
 
@@ -136,7 +147,7 @@ function addToWorld()
 
             "name": scene.nodes[i].name + "!",
             "gltfnode": scene.nodes[i],
-            "mass": 0, // kg
+            "mass": inMass.get(), // kg
             shape
         });
         body.name = scene.nodes[i].name;
