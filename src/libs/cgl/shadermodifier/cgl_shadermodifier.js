@@ -160,6 +160,19 @@ class ShaderModifier
         return false;
     }
 
+    _isStructUniform(name)
+    {
+        for (let i = 0; i < this._uniforms.length; i++)
+        {
+            if (this._uniforms[i].name == name) return false;
+            if (this._uniforms[i].structName)
+            {
+                if (this._uniforms[i].propertyName == name) return true;
+            }
+        }
+        return false;
+    }
+
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
         if (structUniformName)
