@@ -219,10 +219,11 @@ class ShaderModifier
         {
             const member = structMembers[i];
 
-            if (!this._getUniform(name))
+            if (!this._getUniform(structUniformName + "." + member.name))
             {
                 let _shaderType = "both";
                 if (shaderType) _shaderType = shaderType;
+
                 this.addUniform(
                     member.type,
                     member.name,
