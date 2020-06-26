@@ -10,6 +10,11 @@
             },
             {
                 "type": "0",
+                "name": "Reduce FPS not focussed",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Reduce FPS loading",
                 "subType": "boolean"
             },
