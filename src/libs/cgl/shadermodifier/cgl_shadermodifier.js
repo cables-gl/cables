@@ -279,6 +279,7 @@ class ShaderModifier
         {
             for (const j in this._shaders)
             {
+                console.log("removing", this._getDefineName(name));
                 this._removeUniformFromShader(
                     this._getDefineName(name),
                     this._shaders[j].shader
@@ -316,7 +317,7 @@ class ShaderModifier
         for (const i in this._defines)
         {
             const name = this._getDefineName(i);
-            if (this._defines[i]) shader.define(name, this._defines[i]);
+            if (this._defines[i] !== null || this._defines[i] !== undefined) shader.define(name, this._defines[i]);
             else shader.removeDefine(name);
         }
 

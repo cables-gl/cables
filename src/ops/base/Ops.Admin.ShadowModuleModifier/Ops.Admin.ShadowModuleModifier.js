@@ -129,7 +129,7 @@ let lastLength = 0;
 
 function createModuleShaders(lightStack)
 {
-    if (lightStack.length === lastLength) return;
+    // if (lightStack.length === lastLength) return;
     let vertexHead = "";
     let fragmentHead = "";
     let vertexBody = "";
@@ -152,6 +152,7 @@ function createModuleShaders(lightStack)
 
     lastLength = lightStack.length;
 
+    shaderModule.removeModule(op.objName);
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
@@ -159,7 +160,7 @@ function createModuleShaders(lightStack)
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
-
+    // shaderModule.removeModule(op.objName);
     shaderModule.addModule({
         "name": "MODULE_COLOR",
         "priority": -2,
@@ -217,6 +218,7 @@ function createUniforms(lightsCount)
         shaderModule.removeUniform("MOD_shadowMap" + i);
         shaderModule.removeUniform("MOD_normalOffset" + i);
         shaderModule.removeUniform("MOD_lightMatrix" + i);
+        console.log("SHOULD REMOVE", shaderModule);
     }
 
     for (let i = 0; i < lightsCount; i += 1)
@@ -234,6 +236,7 @@ function createUniforms(lightsCount)
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "both");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "both");
     }
+
     lastLength = lightsCount;
 }
 
@@ -280,6 +283,7 @@ function setUniforms(lightStack)
             }
 
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            // console.log("CBEMA", shaderModule._shaders);
         }
         else
         {
