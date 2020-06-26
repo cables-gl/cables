@@ -51,6 +51,7 @@ inAlgorithm.onChange = () =>
     setAlgorithmGreyouts();
 };
 
+
 function setAlgorithmGreyouts()
 {
     if (!inReceiveShadow.get())
@@ -167,11 +168,18 @@ function createModuleShaders(lightStack)
         "srcBodyFrag": srcBodyFrag,
     });
 
-    createUniforms(lastLength);
+    if (lastLength === 0) shaderModule.removeDefine("HAS_SHADOW_MAP");
+    if (lastLength > 0 && !shaderModule.hasDefine("HAS_SHADOW_MAP"))
+    {
+        op.log("ay", shaderModule.hasDefine("HAS_SHADOW_MAP"));
+        shaderModule.define("HAS_SHADOW_MAP", true);
+        op.log("ay after", shaderModule.hasDefine("HAS_SHADOW_MAP"));
+        createUniforms(lastLength);
+    }
 }
 
 
-let shader = null;
+const shader = null;
 const vertexModule = null;
 const fragmentModule = null;
 
@@ -193,6 +201,7 @@ shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
 shaderModule.addUniform("3f", "MOD_camPos", [0, 0, 0], null, null, null, null, null, null, "frag");
 
+algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
@@ -224,7 +233,6 @@ function createUniforms(lightsCount)
         hasShadowMap[i] = false;
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "both");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "both");
-
     }
     lastLength = lightsCount;
 }
@@ -246,7 +254,6 @@ function setUniforms(lightStack)
 
         if (light.shadowMap)
         {
-
             shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
             shaderModule.setUniformValue("MOD_normalOffset" + i, light.normalOffset);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
@@ -281,13 +288,11 @@ function setUniforms(lightStack)
         castShadow = castShadow || light.castShadow;
         if (receiveShadow && castShadow)
         {
-            if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) {
-                shaderModule.define("HAS_SHADOW_MAP");
-            }
+            // if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.define("HAS_SHADOW_MAP");
         }
         else
         {
-            if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
+            // if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
         }
     }
 }

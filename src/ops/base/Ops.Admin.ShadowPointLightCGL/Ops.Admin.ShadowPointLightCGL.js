@@ -162,7 +162,7 @@ projectionShader = new CGL.Shader(cgl, "cubemapProjection");
 uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubeMap", 1);
 
 projectionShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-projectionShader.setSource(projectionShader.getDefaultVertexShader(), attachments.cubemapprojection_frag);
+projectionShader.setSource(attachments.cubemapprojection_vert, attachments.cubemapprojection_frag);
 
 
 function renderCubemapProjection(cubemap, framebuffer)

@@ -316,7 +316,8 @@ class ShaderModifier
         for (const i in this._defines)
         {
             const name = this._getDefineName(i);
-            shader.define(name, this._defines[i]);
+            if (this._defines[i]) shader.define(name, this._defines[i]);
+            else shader.removeDefine(name);
         }
 
         for (const i in this._definesToggled)
@@ -336,6 +337,12 @@ class ShaderModifier
     define(what, value)
     {
         this._defines[what] = value;
+        this._changedDefines = true;
+    }
+
+    removeDefine(name)
+    {
+        this._defines[name] = null;
         this._changedDefines = true;
     }
 

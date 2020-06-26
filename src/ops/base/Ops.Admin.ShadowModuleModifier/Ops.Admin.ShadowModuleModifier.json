@@ -41,7 +41,7 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.ShadowModuleWithoutStruct"
+        "name": "Ops.Admin.ShadowModuleModifier"
     },
     "changelog": [
         {
