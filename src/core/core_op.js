@@ -1,3 +1,4 @@
+import { EventTarget } from "./eventtarget";
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
@@ -38,6 +39,8 @@ const Ops = {};
 
 const Op = function ()
 {
+    EventTarget.apply(this);
+
     this.data = {}; // reserved for op-specific user-data
     this.objName = "";
     this.portsOut = [];

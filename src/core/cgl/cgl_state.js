@@ -165,7 +165,6 @@ const Context = function (_patch)
         if (dbgRenderInfo)
         {
             const webGlRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
-            console.log(webGlRenderer);
             if (webGlRenderer === "Google SwiftShader") this.glSlowRenderer = true;
         }
 

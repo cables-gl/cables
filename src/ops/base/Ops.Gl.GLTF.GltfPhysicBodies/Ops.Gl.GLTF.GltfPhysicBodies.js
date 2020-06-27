@@ -1,6 +1,7 @@
 const
     inExec = op.inTrigger("Exec"),
     inNames = op.inString("Filter Meshes", ""),
+    inMass = op.inFloat("Mass kg", 0),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -25,8 +26,10 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
-inExec.onLinkChanged =
-inNames.onChange = () =>
+
+inMass.onChange =
+inNames.onChange =
+inExec.onLinkChanged = () =>
 {
     removeFromWorld();
     added = false;
@@ -144,7 +147,7 @@ function addToWorld()
 
             "name": scene.nodes[i].name + "!",
             "gltfnode": scene.nodes[i],
-            "mass": 0, // kg
+            "mass": inMass.get(), // kg
             shape
         });
         body.name = scene.nodes[i].name;

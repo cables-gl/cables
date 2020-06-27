@@ -25,28 +25,13 @@ const gltfCamera = class
             this.node._node.translation[1],
             this.node._node.translation[2]);
 
-        vec3.set(this.quat,
+        quat.set(this.quat,
             this.node._node.rotation[0],
             this.node._node.rotation[1],
             this.node._node.rotation[2],
             this.node._node.rotation[3]);
 
-        if (this.node._node._animTrans)
-        {
-            const t = 0;
 
-            vec3.set(this.pos,
-                this.node._node._animTrans[0].getValue(t),
-                this.node._node._animTrans[1].getValue(t),
-                this.node._node._animTrans[2].getValue(t));
-
-            vec3.set(this.quat,
-                this.node._node._animRot[0].getValue(t),
-                this.node._node._animRot[1].getValue(t),
-                this.node._node._animRot[2].getValue(t),
-                this.node._node._animRot[3].getValue(t));
-            console.log("USING ANIMATYED CAM !!!", this.node._node);
-        }
 
         // vec3.set(this.quatOr,
         //     this.nodeOrient._node.rotation[0],
@@ -61,17 +46,36 @@ const gltfCamera = class
         // console.log("this.node._node.rotation",this.quat);
     }
 
-    start()
+    updateAnim(time)
     {
+        if (this.node._animTrans)
+        {
+
+            vec3.set(this.pos,
+                this.node._animTrans[0].getValue(time),
+                this.node._animTrans[1].getValue(time),
+                this.node._animTrans[2].getValue(time));
+
+            quat.set(this.quat,
+                this.node._animRot[0].getValue(time),
+                this.node._animRot[1].getValue(time),
+                this.node._animRot[2].getValue(time),
+                this.node._animRot[3].getValue(time));
+        }
+    }
+
+    start(time)
+    {
+        this.updateAnim(time);
         const asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
 
         cgl.pushPMatrix();
-        // mat4.perspective(
-        //     cgl.pMatrix,
-        //     this.config.perspective.yfov,
-        //     asp,
-        //     this.config.perspective.znear,
-        //     this.config.perspective.zfar);
+        mat4.perspective(
+            cgl.pMatrix,
+            this.config.perspective.yfov,
+            asp,
+            this.config.perspective.znear,
+            this.config.perspective.zfar);
 
         cgl.pushViewMatrix();
         // mat4.identity(cgl.vMatrix);
