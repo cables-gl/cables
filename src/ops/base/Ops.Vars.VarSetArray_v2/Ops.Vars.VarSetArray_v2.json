@@ -1,0 +1,21 @@
+{
+    "id": "8088290f-45d4-4312-b4ca-184d34ca4667",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593236588538
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593236617821,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.VarSetArray_v2"
+    }
+}
