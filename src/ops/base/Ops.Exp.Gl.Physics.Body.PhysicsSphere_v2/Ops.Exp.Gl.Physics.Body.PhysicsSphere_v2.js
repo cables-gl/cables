@@ -35,10 +35,19 @@ inReset.onTriggered = function ()
     needSetup = true;
 };
 
+exec.onLinkChanged =
+op.onDelete =
+function ()
+{
+    if (body && lastWorld)lastWorld.removeBody(body);
+    body = null;
+    lastWorld = null;
+};
+
 function setup(modelScale)
 {
     modelScale = modelScale || 1;
-    let world = cgl.frameStore.world;
+    const world = cgl.frameStore.world;
     if (!world) return;
 
     if (body)world.removeBody(body);
@@ -52,7 +61,7 @@ function setup(modelScale)
     world.addBody(body);
 
     body.addEventListener("collide", function (e)
- {
+    {
         collided = true;
     });
 
@@ -67,9 +76,9 @@ const scale = vec3.create();
 
 function getScaling(mat)
 {
-    let m31 = mat[8];
-    let m32 = mat[9];
-    let m33 = mat[10];
+    const m31 = mat[8];
+    const m32 = mat[9];
+    const m33 = mat[10];
     return Math.hypot(m31, m32, m33);
 }
 
@@ -82,11 +91,11 @@ function render()
 
     outHit.set(body.raycastHit);
 
-    let staticPos = inMass.get() == 0;
+    const staticPos = inMass.get() == 0;
 
     const modelScale = getScaling(cgl.mMatrix);
     // if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
-    let r = inRadius.get() * modelScale;
+    const r = inRadius.get() * modelScale;
     if (shape.radius != r)
     {
         body.shapes.length = 0;// removeShape(shape);

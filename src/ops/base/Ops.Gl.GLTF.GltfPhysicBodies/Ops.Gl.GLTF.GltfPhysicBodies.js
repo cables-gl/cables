@@ -148,7 +148,7 @@ function addToWorld()
             "name": scene.nodes[i].name + "!",
             "gltfnode": scene.nodes[i],
             "mass": inMass.get(), // kg
-            shape
+            "shape": shape
         });
         body.name = scene.nodes[i].name;
 

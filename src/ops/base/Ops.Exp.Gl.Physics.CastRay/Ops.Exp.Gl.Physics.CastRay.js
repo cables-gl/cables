@@ -155,6 +155,7 @@ function render()
     }
     else hasHit.set(false);
     hitResult.set(rayResult);
+    // console.log(rayResult);
 
 
     for (let i = 0; i < world.bodies.length; i++)
