@@ -111,7 +111,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Gl.Renderanim2"
+        "name": "Ops.Gl.RenderAnim_v2"
     },
     "libs": [
         "whammy.js"

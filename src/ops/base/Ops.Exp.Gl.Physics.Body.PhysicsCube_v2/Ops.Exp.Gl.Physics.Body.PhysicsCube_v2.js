@@ -1,11 +1,14 @@
 const
     exec = op.inTrigger("Exec"),
-    inMass = op.inValue("Mass"),
-    inRadius = op.inValue("Radius", 1),
+    inMass = op.inValue("Mass", 0),
+    // inRadius = op.inValue("Radius", 1),
+    sizeX = op.inValue("sizeX", 1),
+    sizeY = op.inValue("sizeY", 1),
+    sizeZ = op.inValue("sizeZ", 1),
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
-    outRadius = op.outValue("Out Radius"),
+    // outRadius = op.outValue("Out Radius"),
     outX = op.outValue("X"),
     outY = op.outValue("Y"),
     outZ = op.outValue("Z"),
@@ -24,8 +27,8 @@ let collided = false;
 let needSetup = true;
 let body = null;
 let shape = null;
-inMass.onChange = setup;
-inRadius.onChange = setup;
+
+inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange = setup;
 exec.onTriggered = render;
 
 op.toWorkNeedsParent("Ops.Exp.Gl.Physics.World");
@@ -51,11 +54,14 @@ function setup(modelScale)
     if (!world) return;
 
     if (body)world.removeBody(body);
-    shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
+    // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
+    shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
+
     body = new CANNON.Body({
+        "name": "test!!",
         "mass": inMass.get(), // kg
         //   position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-        shape
+        "shape": shape
     });
 
     world.addBody(body);
@@ -67,7 +73,7 @@ function setup(modelScale)
 
     lastWorld = world;
     needSetup = false;
-    outRadius.set(inRadius.get());
+    // outRadius.set(inRadius.get());
     console.log("setup");
 }
 
@@ -95,19 +101,19 @@ function render()
 
     const modelScale = getScaling(cgl.mMatrix);
     // if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
-    const r = inRadius.get() * modelScale;
-    if (shape.radius != r)
-    {
-        body.shapes.length = 0;// removeShape(shape);
+    // const r = inRadius.get() * modelScale;
+    // if (shape.radius != r)
+    // {
+    //     body.shapes.length = 0;// removeShape(shape);
 
-        shape.radius = r;
-        body.addShape(shape);
+    //     shape.radius = r;
+    //     body.addShape(shape);
 
-        // shape.updateBoundingSphereRadius();
-        // console.log(shape.radius);
-        body.updateBoundingRadius();
-        // body.computeAABB();
-    }
+    //     // shape.updateBoundingSphereRadius();
+    //     // console.log(shape.radius);
+    //     body.updateBoundingRadius();
+    //     // body.computeAABB();
+    // }
 
 
     if (staticPos)
@@ -141,12 +147,12 @@ function render()
         mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
     }
 
-    if (doRender.get())wire.render(cgl, inRadius.get() * 2);
-    if (CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
-    {
-        // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-        CABLES.GL_MARKER.drawSphere(op, inRadius.get());
-    }
+    // if (doRender.get())wire.render(cgl, inRadius.get() * 2);
+    // if (CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+    // {
+    // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
+    // CABLES.GL_MARKER.drawSphere(op, inRadius.get());
+    // }
 
 
     outX.set(body.position.x);

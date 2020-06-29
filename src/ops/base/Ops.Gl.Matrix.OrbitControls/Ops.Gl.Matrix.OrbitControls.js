@@ -94,19 +94,37 @@ pointerLock.onChange = function ()
     console.log("doLockPointer", doLockPointer);
 };
 
+
+const halfCircle = Math.PI;
+const fullCircle = Math.PI * 2;
+
 function reset()
 {
-    // px %= (Math.PI * 2);
-    // py %= (Math.PI * 2);
+    let off = 0;
 
+    if (px % fullCircle < -halfCircle)
+    {
+        off = -fullCircle;
+        px %= -fullCircle;
+        // console.log("MINUS YES");
+    }
+    else
+    if (px % fullCircle > halfCircle)
+    {
+        off = fullCircle;
+        px %= fullCircle;
+        // console.log("PLUSS YES");
+    }
+    else px %= fullCircle;
 
-    py %= (Math.PI * 2);
+    py %= (Math.PI);
+
 
     vec3.set(vOffset, 0, 0, 0);
     vec3.set(vCenter, 0, 0, 0);
     vec3.set(vUp, 0, 1, 0);
 
-    percX = (initialX.get() * Math.PI * 2);
+    percX = (initialX.get() * Math.PI * 2 + off);
     percY = (initialAxis.get() - 0.5);
 
     radius = initialRadius.get();

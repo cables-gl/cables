@@ -1,42 +1,42 @@
 const
-    render=op.inTrigger('render'),
-    segments=op.inValueInt("segments",40),
-    radius=op.inValueFloat("radius",1),
-    percent=op.inValueSlider("percent",1),
-    numAbs=op.inBool('Absolute',true),
-    flip=op.inBool('Flip',false),
-    inRotate=op.inValueBool("Rotate"),
-    trigger=op.outTrigger('trigger'),
-    index=op.outValue("index");
+    render = op.inTrigger("render"),
+    segments = op.inValueInt("segments", 40),
+    radius = op.inValueFloat("radius", 1),
+    percent = op.inValueSlider("percent", 1),
+    numAbs = op.inBool("Absolute", true),
+    flip = op.inBool("Flip", false),
+    inRotate = op.inValueBool("Rotate"),
+    trigger = op.outTrigger("trigger"),
+    index = op.outValue("index");
 
-var cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
 segments.set(40);
 radius.set(1);
 percent.set(1);
 
-var pos=[];
-flip.onChange=
-    numAbs.onChange=
-    segments.onChange=
-    radius.onChange=
-    percent.onChange=calcLater;
+const pos = [];
+flip.onChange =
+    numAbs.onChange =
+    segments.onChange =
+    radius.onChange =
+    percent.onChange = calcLater;
 
-var needsCalc=true;
+let needsCalc = true;
 
-render.onTriggered=doRender;
+render.onTriggered = doRender;
 
 function doRender()
 {
-    if(needsCalc)calc();
-    var doRot=inRotate.get();
-    const perc=percent.get();
-    for(var i=0;i<pos.length;i++)
+    if (needsCalc)calc();
+    const doRot = inRotate.get();
+    const perc = percent.get();
+    for (let i = 0; i < pos.length; i++)
     {
         cgl.pushModelMatrix();
 
-        mat4.translate(cgl.mMatrix,cgl.mMatrix, pos[i] );
-        if(doRot)mat4.rotateZ(cgl.mMatrix,cgl.mMatrix, (i/pos.length*perc)*CGL.DEG2RAD*-360);
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, pos[i]);
+        if (doRot)mat4.rotateZ(cgl.mMatrix, cgl.mMatrix, (i / pos.length * perc) * CGL.DEG2RAD * -360);
 
         index.set(i);
         trigger.trigger();
@@ -47,37 +47,36 @@ function doRender()
 
 function calcLater()
 {
-    needsCalc=true;
+    needsCalc = true;
 }
 
 function calc()
 {
-    pos.length=0;
+    pos.length = 0;
 
-    var i=0,degInRad=0;
-    var segs=segments.get();
-    if(segs<1)segs=1;
+    let i = 0, degInRad = 0;
+    let segs = segments.get();
+    if (segs < 1)segs = 1;
 
-    var num=Math.round(segs*percent.get());
-    var step=(360/Math.round(segs));
+    let num = Math.round(segs * percent.get());
+    let step = (360 / Math.round(segs));
 
 
-    if(!numAbs.get())
+    if (!numAbs.get())
     {
-        num=segs;
-        step=(360/Math.round(segs)*percent.get());
+        num = segs;
+        step = (360 / Math.round(segs) * percent.get());
     }
 
 
-    var doflip=flip.get();
+    const doflip = flip.get();
 
-    for (i=0; i < num; i++)
+    for (i = 0; i < num; i++)
     {
-        if(doflip)degInRad = (360-(step*i))*CGL.DEG2RAD;
-        else degInRad = step*i*CGL.DEG2RAD;
-        pos.push([ Math.sin(degInRad)*radius.get(), Math.cos(degInRad)*radius.get(), 0]);
+        if (doflip)degInRad = (360 - (step * i)) * CGL.DEG2RAD;
+        else degInRad = step * i * CGL.DEG2RAD;
+        pos.push([Math.sin(degInRad) * radius.get(), Math.cos(degInRad) * radius.get(), 0]);
     }
 
-    needsCalc=false;
+    needsCalc = false;
 }
-
