@@ -46,6 +46,11 @@
             {
                 "type": "1",
                 "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Num Bodies",
+                "subType": "number"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.World"

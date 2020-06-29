@@ -80,7 +80,7 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Body.Sphere2"
+        "name": "Ops.Exp.Gl.Physics.Body.PhysicsSphere_v2"
     },
     "summary": "Physical Sphere Body",
     "youtubeid": "",
