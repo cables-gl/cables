@@ -1025,7 +1025,7 @@ Context.prototype.pushBlendMode = function (blendMode, premul)
 
 /**
  * pop predefined blendmode / switch back to previous blendmode
- * @function pushBlendMode
+ * @function popBlendMode
  * @memberof Context
  * @instance
  */
@@ -1038,7 +1038,7 @@ Context.prototype.popBlendMode = function ()
 
     this.popBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
 
-    if (n > 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
+    if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
 };
 
 Context.prototype.glGetAttribLocation = function (prog, name)

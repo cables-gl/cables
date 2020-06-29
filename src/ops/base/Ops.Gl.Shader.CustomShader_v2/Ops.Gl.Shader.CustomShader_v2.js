@@ -7,16 +7,16 @@ const
     outShader = op.outObject("Shader");
 
 const cgl = op.patch.cgl;
-let uniformInputs = [];
-let uniformTextures = [];
-let vectors = [];
+const uniformInputs = [];
+const uniformTextures = [];
+const vectors = [];
 
 op.toWorkPortsNeedToBeLinked(render);
 
 fragmentShader.setUiAttribs({ "editorSyntax": "glsl" });
 vertexShader.setUiAttribs({ "editorSyntax": "glsl" });
 
-let shader = new CGL.Shader(cgl, "shaderMaterial");
+const shader = new CGL.Shader(cgl, "shaderMaterial");
 
 
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -76,7 +76,7 @@ function hasUniformInput(name)
     return false;
 }
 
-let tempMat4 = mat4.create();
+const tempMat4 = mat4.create();
 // var lastm4;
 // const uniformNameBlacklist = [
 //     'modelMatrix',
@@ -88,13 +88,13 @@ let tempMat4 = mat4.create();
 //     'camPos'
 // ];
 let countTexture = 0;
-let foundNames = [];
+const foundNames = [];
 
 
 function parseUniforms(src)
 {
     const lblines = src.split("\n");
-    let groupUniforms = [];
+    const groupUniforms = [];
 
     for (let k = 0; k < lblines.length; k++)
     {
@@ -109,7 +109,7 @@ function parseUniforms(src)
             if (words[0] === "UNI" || words[0] === "uniform")
             {
                 let varnames = words[2];
-                if (words.length > 4)for (var j = 3; j < words.length; j++)varnames += words[j];
+                if (words.length > 4) for (var j = 3; j < words.length; j++)varnames += words[j];
 
                 words = words.filter(function (el) { return el !== ""; });
                 const type = words[1];
@@ -159,10 +159,15 @@ function parseUniforms(src)
                         foundNames.push(uniName);
                         if (!hasUniformInput(uniName))
                         {
-                            let newInputTex = op.inObject(uniName);
+                            const newInputTex = op.inObject(uniName);
                             newInputTex.uniform = new CGL.Uniform(shader, "t", uniName, 3 + uniformTextures.length);
                             uniformTextures.push(newInputTex);
                             groupUniforms.push(newInputTex);
+                            newInputTex.set(CGL.Texture.getTempTexture(cgl));
+                            newInputTex.on("change", (v, p) =>
+                            {
+                                if (!v)p.set(CGL.Texture.getTempTexture(cgl));
+                            });
                             countTexture++;
                         }
                     }
@@ -178,8 +183,8 @@ function parseUniforms(src)
 
                         if (!hasUniformInput(uniName + " X"))
                         {
-                            let group = [];
-                            let vec = {
+                            const group = [];
+                            const vec = {
                                 "name": uniName,
                                 "num": num,
                                 "changed": false
@@ -235,7 +240,7 @@ function updateShader()
     shader.setSource(vertexShader.get(), fragmentShader.get());
 
     if (cgl.glVersion == 1)
-{
+    {
         cgl.gl.getExtension("OES_standard_derivatives");
         // cgl.gl.getExtension('OES_texture_float');
         // cgl.gl.getExtension('OES_texture_float_linear');
@@ -304,7 +309,7 @@ function setVectorValues()
 {
     for (let i = 0; i < vectors.length; i++)
     {
-        let v = vectors[i];
+        const v = vectors[i];
         if (v.changed)
         {
             if (v.num === 2) v.uni.setValue([v.x.get(), v.y.get()]);

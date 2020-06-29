@@ -47,7 +47,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Exp.Gl.Shader.CustomShader2"
+        "name": "Ops.Gl.Shader.CustomShader_v2"
     },
     "summary": "Write your own custom shader",
     "issues": "",

@@ -292,7 +292,7 @@ Port.prototype.forceChange = function ()
         // if(params.length>0) console.warn('TOM: port has onchange params!',this.parent.objName,this.name);
     }
 
-    this.emitEvent("change", this.value);
+    this.emitEvent("change", this.value, this);
 
     if (this.onChange) this.onChange(this, this.value);
     else if (this.onValueChanged) this.onValueChanged(this, this.value); // deprecated
