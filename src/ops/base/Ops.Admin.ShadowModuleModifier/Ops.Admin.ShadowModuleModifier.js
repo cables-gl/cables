@@ -129,6 +129,7 @@ let lastLength = 0;
 
 function createModuleShaders(lightStack)
 {
+    console.log("im here yo");
     // if (lightStack.length === lastLength) return;
     let vertexHead = "";
     let fragmentHead = "";
@@ -150,9 +151,12 @@ function createModuleShaders(lightStack)
     srcHeadFrag = srcHeadFragBase.concat(fragmentHead);
     srcBodyFrag = srcBodyFragBase.concat(fragmentBody);
 
-    lastLength = lightStack.length;
+    // lastLength = lightStack.length;
 
+    op.log("before remove", { lastLength, "lsLength": lightStack.length });
+    op.log("before remove", shaderModule);
     shaderModule.removeModule(op.objName);
+    op.log("after remove", shaderModule);
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
@@ -169,14 +173,15 @@ function createModuleShaders(lightStack)
         "srcBodyFrag": srcBodyFrag,
     });
 
-    if (lastLength === 0) shaderModule.removeDefine("HAS_SHADOW_MAP");
-    if (lastLength > 0 && !shaderModule.hasDefine("HAS_SHADOW_MAP"))
+    if (lightStack.length === 0) shaderModule.removeDefine("HAS_SHADOW_MAP");
+    if (lightStack.length > 0 && !shaderModule.hasDefine("HAS_SHADOW_MAP"))
     {
         op.log("ay", shaderModule.hasDefine("HAS_SHADOW_MAP"));
         shaderModule.define("HAS_SHADOW_MAP", true);
         op.log("ay after", shaderModule.hasDefine("HAS_SHADOW_MAP"));
-        createUniforms(lastLength);
     }
+    createUniforms(lightStack.length);
+    op.log("after createUniform", lastLength, lightStack.length);
 }
 
 
@@ -209,6 +214,7 @@ const hasShadowMap = [];
 
 function createUniforms(lightsCount)
 {
+    op.log("createUniforms", { lightsCount, lastLength });
     for (let i = 0; i < lastLength; i += 1)
     {
         shaderModule.removeUniform("MOD_light" + i + ".position");
@@ -238,6 +244,7 @@ function createUniforms(lightsCount)
     }
 
     lastLength = lightsCount;
+    op.log("SHOUDL BE $EQUAL", lastLength, lightsCount);
 }
 
 function setUniforms(lightStack)
@@ -305,7 +312,9 @@ function setUniforms(lightStack)
 function updateShader()
 {
     if (cgl.frameStore.lightStack.length !== lastLength)
+    {
         createModuleShaders(cgl.frameStore.lightStack);
+    }
 
     setUniforms(cgl.frameStore.lightStack);
 }

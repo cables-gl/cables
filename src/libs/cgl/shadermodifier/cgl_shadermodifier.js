@@ -60,6 +60,15 @@ class ShaderModifier
             shader.addModule(this._mods[i], firstMod);
     }
 
+    _removeModulesFromShader(mod)
+    {
+        for (const j in this._shaders)
+        {
+            this._shaders[j].shader.removeModule(mod);
+            console.log("removed", mod, "in shader", this._shaders[j].shader);
+        }
+    }
+
     addModule(mod)
     {
         this._mods.push(mod);
@@ -67,12 +76,22 @@ class ShaderModifier
 
     removeModule(title)
     {
+        const indicesToRemove = [];
         for (let i = 0; i < this._mods.length; i++)
         {
             if (this._mods[i].title == title)
             {
-                this._mods.splice(i, 1);
+                console.log("index", i, "length", this._mods.length, "removing", this._mods[i].title, this._mods[i]);
+                this._removeModulesFromShader(this._mods[i]);
+                indicesToRemove.push(i);
+
+                console.log("index", i, "length", this._mods.length, "after remove");
             }
+        }
+
+        for (let j = 0; j < indicesToRemove.length; j += 1)
+        {
+            this._mods.splice(indicesToRemove[j], 1);
         }
     }
 
