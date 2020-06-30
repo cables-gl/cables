@@ -26,7 +26,8 @@ const fixedTimeStep = 1.0 / 60.0; // seconds
 const maxSubSteps = 11;
 let lastTime;
 
-const meshCube = new CGL.WireCube(cgl);
+
+const meshCube = new CGL.WireframeCube(cgl);
 const wireSphere = new CGL.WirePoint(cgl);
 const marker = new CGL.Marker(cgl);
 
@@ -105,12 +106,12 @@ function draw()
         // console.log(world.bodies[i].position);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, [world.bodies[i].position.x, world.bodies[i].position.y, world.bodies[i].position.z]);
         // wireSphere.render(cgl, 0.05);
-        marker.draw(cgl, 0.2);
+        // marker.draw(cgl, 0.02);
 
         if (world.bodies[i].shapes[0].type == CANNON.Shape.types.BOX)
         {
             // console.log("BOX!",world.bodies[i].position,world.bodies[i].shapes[0].halfExtents);
-            meshCube.render(cgl,
+            meshCube.render(
                 world.bodies[i].shapes[0].halfExtents.x,
                 world.bodies[i].shapes[0].halfExtents.y,
                 world.bodies[i].shapes[0].halfExtents.z);

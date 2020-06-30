@@ -7,6 +7,8 @@ import { MatrixStack } from "./cgl_matrixstack";
 import { Mesh, MESH } from "./cgl_mesh";
 import { Uniform } from "./cgl_shader_uniform";
 import { ShaderLibMods } from "./cgl_shader_lib";
+import { UniColorShader } from "./cgl_unicolorshader";
+
 
 import { Shader } from "./cgl_shader";
 import { MESHES } from "./cgl_simplerect";
@@ -46,6 +48,7 @@ const CGL = Object.assign(
         getWheelDelta,
         onLoadingAssetsFinished,
         profileData,
+        UniColorShader
     },
     CONSTANTS.BLEND_MODES,
     CONSTANTS.SHADER,

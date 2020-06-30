@@ -66,5 +66,20 @@
             "id": "04becc10-d6b3-415a-87f1-8ea3bf0fb214",
             "date": 1558347928358
         }
+    ],
+    "changelog": [
+        {
+            "message": " added core lib: cgl_WireframeMeshes",
+            "author": "pandur",
+            "date": 1593498575949
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1593499136219
+        }
+    ],
+    "coreLibs": [
+        "cgl_wireframes"
     ]
 }
