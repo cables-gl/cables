@@ -976,8 +976,8 @@ Shader.prototype.addModule = function (mod, sibling)
         else mod.group = simpleId();// this._modGroupCount++;
 
     mod.prefix = "mod" + mod.group;
-
     this._modules.push(mod);
+    console.log("CGL.Shader.addModule() after most stuff, module:", mod, "shader:", this);
     this._needsRecompile = true;
     this.setWhyCompile("add module " + mod.title);
     this._moduleNumId++;
@@ -1067,7 +1067,6 @@ Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4,
 
 Shader.prototype.hasUniform = function (name)
 {
-    console.log("hasuniform", this._uniforms);
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].getName() == name) return true;

@@ -125,10 +125,15 @@ const createFragmentBody = (n, type) =>
     return fragmentCode;
 };
 
-let lastLength = 0;
+const STATE = {
+    "lastLength": 0,
+    "updating": false
+};
 
 function createModuleShaders(lightStack)
 {
+    STATE.updating = true;
+    removeUniforms();
     console.log("im here yo");
     // if (lightStack.length === lastLength) return;
     let vertexHead = "";
@@ -151,12 +156,12 @@ function createModuleShaders(lightStack)
     srcHeadFrag = srcHeadFragBase.concat(fragmentHead);
     srcBodyFrag = srcBodyFragBase.concat(fragmentBody);
 
-    // lastLength = lightStack.length;
+    // STATE.lastLength = lightStack.length;
 
-    op.log("before remove", { lastLength, "lsLength": lightStack.length });
-    op.log("before remove", shaderModule);
+    op.log("createModuleShaders: before remove", shaderModule);
     shaderModule.removeModule(op.objName);
-    op.log("after remove", shaderModule);
+    op.log("createModuleShaders: after remove", shaderModule);
+
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
@@ -201,7 +206,8 @@ let srcBodyFrag = srcBodyFragBase;
 
 
 const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
-
+CGL.shaderModule = shaderModule;
+op.log("shadermod after create", shaderModule);
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
@@ -210,10 +216,9 @@ algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(
 
 const hasShadowMap = [];
 
-function createUniforms(lightsCount)
+function removeUniforms()
 {
-    op.log("createUniforms", { lightsCount, lastLength });
-    for (let i = 0; i < lastLength; i += 1)
+    for (let i = 0; i < STATE.lastLength; i += 1)
     {
         shaderModule.removeUniform("MOD_light" + i + ".position");
         shaderModule.removeUniform("MOD_light" + i + ".typeCastShadow");
@@ -224,13 +229,15 @@ function createUniforms(lightsCount)
         shaderModule.removeUniform("MOD_lightMatrix" + i);
     }
 
-    if (lastLength > 0)
+    if (STATE.lastLength > 0)
     {
         shaderModule.removeUniform("MOD_sampleSpread");
         shaderModule.removeUniform("MOD_camPos");
     }
-    console.log("SHOULD REMOVE", shaderModule);
+}
 
+function createUniforms(lightsCount)
+{
     for (let i = 0; i < lightsCount; i += 1)
     {
         const light = cgl.frameStore.lightStack[i];
@@ -253,8 +260,8 @@ function createUniforms(lightsCount)
         shaderModule.addUniform("3f", "MOD_camPos", [0, 0, 0], null, null, null, null, null, null, "frag");
     }
 
-    lastLength = lightsCount;
-    op.log("SHOUDL BE $EQUAL", lastLength, lightsCount);
+    STATE.lastLength = lightsCount;
+    STATE.updating = false;
 }
 
 function setUniforms(lightStack)
@@ -321,7 +328,7 @@ function setUniforms(lightStack)
 
 function updateShader()
 {
-    if (cgl.frameStore.lightStack.length !== lastLength)
+    if (cgl.frameStore.lightStack.length !== STATE.lastLength)
     {
         createModuleShaders(cgl.frameStore.lightStack);
     }
@@ -331,13 +338,14 @@ function updateShader()
 
 inTrigger.onLinkChanged = function ()
 {
-    if (!inTrigger.isLinked()) lastLength = 0;
+    if (!inTrigger.isLinked()) STATE.lastLength = 0;
 };
 
 const _tempCamPosMatrix = mat4.create();
 
 inTrigger.onTriggered = () =>
 {
+    if (STATE.updating) return;
     if (!inCastShadow.get())
     {
         if (!cgl.frameStore.shadowPass)
