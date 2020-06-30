@@ -89,10 +89,9 @@ class ShaderModifier
             }
         }
 
-        for (let j = 0; j < indicesToRemove.length; j += 1)
-        {
+        // * go in reverse order so the indices of the mods stay the same
+        for (let j = indicesToRemove.length; j >= 0; j -= 1)
             this._mods.splice(indicesToRemove[j], 1);
-        }
     }
 
     _updateUniformsShader(shader)

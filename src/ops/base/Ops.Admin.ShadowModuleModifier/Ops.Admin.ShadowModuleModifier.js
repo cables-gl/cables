@@ -181,7 +181,7 @@ function createModuleShaders(lightStack)
         op.log("ay after", shaderModule.hasDefine("HAS_SHADOW_MAP"));
     }
     createUniforms(lightStack.length);
-    op.log("after createUniform", lastLength, lightStack.length);
+    op.log("after createUniform", shaderModule, lightStack.length);
 }
 
 
