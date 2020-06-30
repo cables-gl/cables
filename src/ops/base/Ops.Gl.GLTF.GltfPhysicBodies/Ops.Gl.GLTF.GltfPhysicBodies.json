@@ -43,6 +43,11 @@
                 "type": "0",
                 "name": "Mass kg",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size Multiply",
+                "subType": "number"
             }
         ],
         "portsOut": [
