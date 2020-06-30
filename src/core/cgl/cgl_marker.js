@@ -53,9 +53,9 @@ export const Marker = function (cgl)
 
     this._vScale = vec3.create();
 
-    this.draw = function (cgl)
+    this.draw = function (cgl, _size)
     {
-        const size = 2;
+        const size = _size || 2;
         cgl.pushModelMatrix();
 
 
