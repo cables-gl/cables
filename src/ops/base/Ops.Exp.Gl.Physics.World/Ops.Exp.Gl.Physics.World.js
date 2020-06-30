@@ -106,7 +106,7 @@ function draw()
         // console.log(world.bodies[i].position);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, [world.bodies[i].position.x, world.bodies[i].position.y, world.bodies[i].position.z]);
         // wireSphere.render(cgl, 0.05);
-        // marker.draw(cgl, 0.02);
+        marker.draw(cgl, 0.02);
 
         if (world.bodies[i].shapes[0].type == CANNON.Shape.types.BOX)
         {

@@ -65,18 +65,7 @@ function update()
         mat4.fromRotationTranslation(trMat, [0, 0, 0, 0], vec);
 
         mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
-        // if (doRender.get())
-        // {
-        //     if (shape == SHAPE_BOX)
-        //     {
-        //         if (bodies[i].size)
-        //             meshCube.render(cgl, bodies[i].size[0], bodies[i].size[1], bodies[i].size[2]);
-        //     }
-        //     else
-        //     {
-        //         CABLES.GL_MARKER.drawSphere(op, size);
-        //     }
-        // }
+
 
         cgl.popModelMatrix();
     }
@@ -137,9 +126,9 @@ function addToWorld()
 
         const size = vec3.create();
         vec3.set(size,
-            bounds.size[0] * 0.5,
-            bounds.size[1] * 0.5,
-            bounds.size[2] * 0.5);
+            bounds.size[0] * 0.5 * 0.006,
+            bounds.size[1] * 0.5 * 0.006,
+            bounds.size[2] * 0.5 * 0.006);
         shape = new CANNON.Box(new CANNON.Vec3(size[0], size[1], size[2]));
         // shape = new CANNON.Sphere(size);
 
