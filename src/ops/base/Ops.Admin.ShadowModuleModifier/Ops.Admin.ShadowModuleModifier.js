@@ -204,8 +204,6 @@ const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
-shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
-shaderModule.addUniform("3f", "MOD_camPos", [0, 0, 0], null, null, null, null, null, null, "frag");
 
 algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
@@ -224,8 +222,14 @@ function createUniforms(lightsCount)
         shaderModule.removeUniform("MOD_shadowMap" + i);
         shaderModule.removeUniform("MOD_normalOffset" + i);
         shaderModule.removeUniform("MOD_lightMatrix" + i);
-        console.log("SHOULD REMOVE", shaderModule);
     }
+
+    if (lastLength > 0)
+    {
+        shaderModule.removeUniform("MOD_sampleSpread");
+        shaderModule.removeUniform("MOD_camPos");
+    }
+    console.log("SHOULD REMOVE", shaderModule);
 
     for (let i = 0; i < lightsCount; i += 1)
     {
@@ -241,6 +245,12 @@ function createUniforms(lightsCount)
         hasShadowMap[i] = false;
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "both");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "both");
+    }
+
+    if (lightsCount > 0)
+    {
+        shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
+        shaderModule.addUniform("3f", "MOD_camPos", [0, 0, 0], null, null, null, null, null, null, "frag");
     }
 
     lastLength = lightsCount;
@@ -358,6 +368,7 @@ inTrigger.onTriggered = () =>
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
 
     updateShader();
+
     shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
 
     shaderModule.bind();
