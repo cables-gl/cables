@@ -53,9 +53,9 @@ export const Marker = function (cgl)
 
     this._vScale = vec3.create();
 
-    this.draw = function (cgl)
+    this.draw = function (cgl, _size)
     {
-        const size = 2;
+        const size = _size || 2;
         cgl.pushModelMatrix();
 
 
@@ -209,8 +209,6 @@ export const WireCube = function (cgl)
 
         cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
         cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
-
-        // cgl.gl.disableVertexAttribArray(1);
 
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
         cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);

@@ -2,6 +2,7 @@ const
     inExec = op.inTrigger("Exec"),
     inNames = op.inString("Filter Meshes", ""),
     inMass = op.inFloat("Mass kg", 0),
+    inMulSize = op.inFloat("Size Multiply", 1),
     outNum = op.outNumber("Meshes", 0);
 
 const cgl = op.patch.cgl;
@@ -61,24 +62,29 @@ function update()
             console.log("addbody");
         }
 
-        cgl.pushModelMatrix();
-        mat4.fromRotationTranslation(trMat, [0, 0, 0, 0], vec);
 
-        mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
-        // if (doRender.get())
-        // {
-        //     if (shape == SHAPE_BOX)
-        //     {
-        //         if (bodies[i].size)
-        //             meshCube.render(cgl, bodies[i].size[0], bodies[i].size[1], bodies[i].size[2]);
-        //     }
-        //     else
-        //     {
-        //         CABLES.GL_MARKER.drawSphere(op, size);
-        //     }
-        // }
+        if (bodies[i].bounds && bodies[i].body)
+        {
+            const sc = vec3.create();
+            mat4.getScaling(sc, bodies[i].node.modelMatAbs());
+            // console.log(sc);
 
-        cgl.popModelMatrix();
+            const mul = inMulSize.get();
+            bodies[i].body.shapes[0].halfExtents.x = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
+            bodies[i].body.shapes[0].halfExtents.y = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
+            bodies[i].body.shapes[0].halfExtents.z = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
+        }
+        // bounds.size[1] * 0.5 * 0.006,
+        // bounds.size[2] * 0.5 * 0.006
+
+
+        // cgl.pushModelMatrix();
+        // mat4.fromRotationTranslation(trMat, [0, 0, 0, 0], vec);
+
+        // mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
+
+
+        // cgl.popModelMatrix();
     }
 }
 
@@ -136,10 +142,7 @@ function addToWorld()
         scene.nodes[i].calcBounds(scene, null, bounds);
 
         const size = vec3.create();
-        vec3.set(size,
-            bounds.size[0] * 0.5,
-            bounds.size[1] * 0.5,
-            bounds.size[2] * 0.5);
+        vec3.set(size, 1, 1, 1);
         shape = new CANNON.Box(new CANNON.Vec3(size[0], size[1], size[2]));
         // shape = new CANNON.Sphere(size);
 
@@ -155,6 +158,7 @@ function addToWorld()
         bodies.push({
             "node": scene.nodes[i],
             "size": size,
+            "bounds": bounds,
             "body": body
         });
 

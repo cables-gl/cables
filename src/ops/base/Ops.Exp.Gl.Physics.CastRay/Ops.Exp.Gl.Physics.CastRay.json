@@ -134,6 +134,10 @@
                 "type": "0",
                 "name": "from z",
                 "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Name"
             }
         ],
         "name": "Ops.Exp.Gl.Physics.CastRay"

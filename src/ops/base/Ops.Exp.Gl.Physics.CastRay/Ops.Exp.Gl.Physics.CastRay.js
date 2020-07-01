@@ -33,6 +33,8 @@ const
     fromY = op.outValue("from y"),
     fromZ = op.outValue("from z"),
 
+    outName = op.outString("Name"),
+
     cgl = op.patch.cgl;
 exec.onTriggered = render;
 
@@ -138,10 +140,13 @@ function render()
             aabbX2.set(rayResult.body.aabb.upperBound.y);
             aabbX2.set(rayResult.body.aabb.upperBound.z);
 
+            outName.set(rayResult.body.name || "");
+
             // rayResult.body.dispatchEvent({type:"raycasthit"});
             hitBody = rayResult.body;
             hitBody.raycastHit = true;
         }
+        else outName.set(null);
 
         // console.log(rayResult);
 
@@ -153,7 +158,11 @@ function render()
         hitNormalY.set(rayResult.hitNormalWorld.y);
         hitNormalZ.set(rayResult.hitNormalWorld.z);
     }
-    else hasHit.set(false);
+    else
+    {
+        hasHit.set(false);
+        outName.set(null);
+    }
     hitResult.set(rayResult);
     // console.log(rayResult);
 
