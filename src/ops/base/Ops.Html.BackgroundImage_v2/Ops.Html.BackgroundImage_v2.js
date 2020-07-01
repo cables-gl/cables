@@ -52,7 +52,7 @@ function update()
         }
         else
         {
-            ele.style["background-image"] = "url(" + filename.get() + ")";
+            ele.style["background-image"] = "url(" + op.patch.getFilePath(String(filename.get())) + ")";
             ele.style["background-size"] = inSize.get();
             ele.style["background-position"] = inPosition.get();
             ele.style["background-repeat"] = inRepeat.get();

@@ -48,19 +48,19 @@ function update()
         bodies[i].body.position.y = vec[1];
         bodies[i].body.position.z = vec[2];
 
-        if (bodies[i].node.hidden && !bodies[i].hidden)
-        {
-            bodies[i].hidden = true;
-            world.removeBody(bodies[i].body);
-            console.log("removebody");
-            continue;
-        }
-        if (!bodies[i].node.hidden && bodies[i].hidden)
-        {
-            bodies[i].hidden = false;
-            world.addBody(bodies[i].body);
-            console.log("addbody");
-        }
+        // if (bodies[i].node.hidden && !bodies[i].hidden)
+        // {
+        //     bodies[i].hidden = true;
+        //     world.removeBody(bodies[i].body);
+        //     console.log("removebody");
+        //     continue;
+        // }
+        // if (!bodies[i].node.hidden && bodies[i].hidden)
+        // {
+        //     bodies[i].hidden = false;
+        //     world.addBody(bodies[i].body);
+        //     console.log("addbody");
+        // }
 
 
         if (bodies[i].bounds && bodies[i].body)
