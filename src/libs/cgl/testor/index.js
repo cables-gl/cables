@@ -1,2 +1,0 @@
-
-CGL.Test = { "test": true };
