@@ -16,6 +16,10 @@
                 "name": "Exec"
             },
             {
+                "type": "5",
+                "name": "Name"
+            },
+            {
                 "type": "0",
                 "name": "Mass",
                 "subType": "number"

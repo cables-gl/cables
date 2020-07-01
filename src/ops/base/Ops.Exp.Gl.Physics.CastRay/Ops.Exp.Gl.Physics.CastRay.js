@@ -38,6 +38,7 @@ const
     cgl = op.patch.cgl;
 exec.onTriggered = render;
 
+const results = [];
 let rayResult = null;
 const mat = mat4.create();
 
@@ -105,11 +106,40 @@ function setRay(world)
 
 
     rayResult = new CANNON.RaycastResult();
-    world.raycastClosest(
+    // world.raycastClosest(
+    //     new CANNON.Vec3(origin[0], origin[1], origin[2]),
+    //     new CANNON.Vec3(to[0], to[1], to[2]),
+    //     {},
+    //     rayResult);
+
+    results.length = 0;
+    // console.log("---");
+    world.raycastAll(
         new CANNON.Vec3(origin[0], origin[1], origin[2]),
         new CANNON.Vec3(to[0], to[1], to[2]),
-        {},
-        rayResult);
+        { "skipBackfaces": true },
+        function (r)
+        {
+            // todo sort all results by distance to find closest ?
+
+
+            // check if visible on screen or behind cam...
+            const pos = vec3.create();
+            vec3.set(pos, r.hitPointWorld.x, r.hitPointWorld.y, r.hitPointWorld.z);
+            vec3.transformMat4(pos, pos, cgl.vMatrix);
+
+            const screenTrans = vec3.create();
+            vec3.transformMat4(screenTrans, pos, cgl.pMatrix);
+
+            const vp = cgl.getViewPort();
+
+            const xp = (screenTrans[0] * vp[2] / 2) + vp[2] / 2;
+            const yp = (screenTrans[1] * vp[3] / 2) + vp[3] / 2;
+
+            const visi = screenTrans[2] < 1 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3];
+
+            if (visi)rayResult = r;
+        });
 }
 
 function render()
