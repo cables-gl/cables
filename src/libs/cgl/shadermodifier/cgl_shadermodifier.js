@@ -12,6 +12,7 @@ class ShaderModifier
         this._boundShader = null;
         this._changedDefines = true;
         this._changedUniforms = true;
+        this._modulesChanged = false;
     }
 
     bind()
@@ -21,7 +22,7 @@ class ShaderModifier
 
         this._boundShader = this._shaders[shader.id];
 
-        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile)
+        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
 
@@ -33,6 +34,7 @@ class ShaderModifier
                 };
 
             this._addModulesToShader(this._boundShader.shader);
+            this._modulesChanged = false;
             this._updateDefinesShader(this._boundShader.shader);
             this._updateUniformsShader(this._boundShader.shader);
 
@@ -55,30 +57,46 @@ class ShaderModifier
 
     _addModulesToShader(shader)
     {
-        console.log("addModulesToShader()", shader);
+        // console.log("addModulesToShader()", shader);
+        // for (let j = this._mods.length - 1; j <= 0; j += 1)
+        // {
+        //     if (this._mods[j].scheduleDeletion) this._removeModulesFromShader(this._mods[j]);
+        //     this._mods.splice(j, 1);
+        // }
+
         let firstMod;
+
         if (this._mods.length > 1) firstMod = this._mods[0];
+
         for (let i = 0; i < this._mods.length; i++)
+        {
             shader.addModule(this._mods[i], firstMod);
+            console.log("_addModulesToShader() shader:", shader._name, "firstMod", firstMod.prefix, "mod", this._mods[i].title, "prefix", this._mods[i].prefix);
+        }
     }
 
     _removeModulesFromShader(mod)
     {
+        console.log("_removeModulesFromShader()", mod.title, this._mods);
         for (const j in this._shaders)
         {
             this._shaders[j].shader.removeModule(mod);
-            console.log("removed", mod, "in shader", this._shaders[j].shader);
+            console.log("removed", mod.title, "with prefix", mod.prefix, "in shader", this._shaders[j].shader._name);
         }
     }
 
     addModule(mod)
     {
-        console.log("addModule()");
+        console.log("addModule()", mod.id, mod.group, mod.prefix);
+        console.log("addModule() mods before add", this._mods);
         this._mods.push(mod);
+        console.log("addModule() mods after add", this._mods);
+        this._modulesChanged = true;
     }
 
     removeModule(title)
     {
+        console.log("removeModule() removing", title, this._mods);
         const indicesToRemove = [];
 
         for (let i = 0; i < this._mods.length; i++)
@@ -86,6 +104,7 @@ class ShaderModifier
             if (this._mods[i].title == title)
             {
                 this._removeModulesFromShader(this._mods[i]);
+                // this._mods[i].scheduleDeletion = true;
                 indicesToRemove.push(i);
             }
         }
@@ -96,6 +115,8 @@ class ShaderModifier
             this._mods.splice(indicesToRemove[j], 1);
             console.log("index", indicesToRemove[j], "length", this._mods, "after remove");
         }
+        console.log("removeModule() removed:", title, this._mods);
+        this._modulesChanged = true;
     }
 
     _updateUniformsShader(shader)

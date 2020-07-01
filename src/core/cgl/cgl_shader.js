@@ -915,6 +915,7 @@ Shader.prototype.removeDefine = function (name)
  */
 Shader.prototype.removeModule = function (mod)
 {
+    console.log("CGL.Shader.removeModule()", mod);
     for (let i = 0; i < this._modules.length; i++)
     {
         if (mod && mod.id)
@@ -965,6 +966,8 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
  */
 Shader.prototype.addModule = function (mod, sibling)
 {
+    console.log("CGL.Shader.addModule() start:", "mod", mod, "sibling", sibling);
+
     if (!mod.id) mod.id = generateUUID();
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;

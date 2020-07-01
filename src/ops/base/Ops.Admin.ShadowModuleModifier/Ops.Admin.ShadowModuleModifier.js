@@ -158,9 +158,9 @@ function createModuleShaders(lightStack)
 
     // STATE.lastLength = lightStack.length;
 
-    op.log("createModuleShaders: before remove", shaderModule);
+    // op.log("createModuleShaders: before remove", shaderModule);
     shaderModule.removeModule(op.objName);
-    op.log("createModuleShaders: after remove", shaderModule);
+    // op.log("createModuleShaders: after remove", shaderModule);
 
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
@@ -181,12 +181,10 @@ function createModuleShaders(lightStack)
     if (lightStack.length === 0) shaderModule.removeDefine("HAS_SHADOW_MAP");
     if (lightStack.length > 0 && !shaderModule.hasDefine("HAS_SHADOW_MAP"))
     {
-        op.log("ay", shaderModule.hasDefine("HAS_SHADOW_MAP"));
         shaderModule.define("HAS_SHADOW_MAP", true);
-        op.log("ay after", shaderModule.hasDefine("HAS_SHADOW_MAP"));
     }
     createUniforms(lightStack.length);
-    op.log("after createUniform", shaderModule, lightStack.length);
+    // op.log("after createUniform", shaderModule, lightStack.length);
 }
 
 
@@ -207,7 +205,7 @@ let srcBodyFrag = srcBodyFragBase;
 
 const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 CGL.shaderModule = shaderModule;
-op.log("shadermod after create", shaderModule);
+// op.log("shadermod after create", shaderModule);
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
