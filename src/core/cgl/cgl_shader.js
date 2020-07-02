@@ -277,6 +277,7 @@ Shader.prototype.createStructUniforms = function ()
     this._structUniformNamesIndicesVert = [];
     for (let i = 0; i < this._uniforms.length; i++)
     {
+        console.log("uniforms in for loop", this._uniforms[i], this._uniforms);
         // * only add uniforms to struct that have a struct name property
         if (this._uniforms[i]._structName)
         {
@@ -383,6 +384,7 @@ Shader.prototype.createStructUniforms = function ()
             structStrFrag += uniDeclarationString;
 
             this._uniDeclarationsFrag.push(uniDeclarationString);
+            console.log("Added uni dec frag", uniDeclarationString);
         }
     }
 
@@ -392,7 +394,6 @@ Shader.prototype.createStructUniforms = function ()
         const index = this._structUniformNamesIndicesVert[i];
 
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
-        console.log("unidecString vert", uniDeclarationString, this._structUniformNamesIndicesVert.length);
 
         if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
         {
