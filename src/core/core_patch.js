@@ -274,6 +274,7 @@ Patch.prototype.getFilePath = function (filename)
 {
     if (this._isLocal) alert("Browser security forbids loading files directly without a webserver. Upload files to a server to work.");
     if (!filename) return filename;
+    filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
 
     filename = filename.replace("//", "/");
