@@ -80,13 +80,6 @@ class ShaderModifier
 
     _addModulesToShader(shader)
     {
-        // console.log("addModulesToShader()", shader);
-        // for (let j = this._mods.length - 1; j <= 0; j += 1)
-        // {
-        //     if (this._mods[j].scheduleDeletion) this._removeModulesFromShader(this._mods[j]);
-        //     this._mods.splice(j, 1);
-        // }
-
         let firstMod;
 
         if (this._mods.length > 1) firstMod = this._mods[0];
@@ -127,7 +120,6 @@ class ShaderModifier
             if (this._mods[i].title == title)
             {
                 this._removeModulesFromShader(this._mods[i]);
-                // this._mods[i].scheduleDeletion = true;
                 indicesToRemove.push(i);
             }
         }
@@ -158,7 +150,7 @@ class ShaderModifier
                 structName = this._getDefineName(uni.structName);
             }
 
-            if (!uni.scheduleDeletion && !shader.hasUniform(name))
+            if (!shader.hasUniform(name))
             {
                 // console.log("adding addUniformBoth", name, type, uni);
                 let un = null;
@@ -185,20 +177,6 @@ class ShaderModifier
             {
                 console.log("has uni", uni);
             }
-
-            // for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
-            // {
-            //     const uniToRemove = this._uniforms[j];
-            //     const nameToRemove = uni.name;
-
-            //     if (uniToRemove.scheduleDeletion)
-            //     {
-            //         // TODO: removing needs to be reversed: 1. uniform 2. modules
-            //         console.log("updateUniformsShader() removing", nameToRemove, this._getDefineName(nameToRemove));
-            //         this._removeUniformFromShader(this._getDefineName(nameToRemove), shader);
-            //         this._uniforms.splice(j, 1);
-            //     }
-            // }
         }
     }
 
@@ -354,25 +332,14 @@ class ShaderModifier
 
     removeUniform(name)
     {
-        console.log("removeUniform()", "namePassed", name, "getUniform(name)", this._getUniform(name));
         if (this._getUniform(name))
         {
-            for (let i = 0; i < this._uniforms.length; i++)
-            {
-                if (this._uniforms[i].name == name)
-                {
-                    this._uniforms[i].scheduleDeletion = true;
-                    console.log("scheduling deletion for", name);
-                    // this._uniforms.splice(i, 1);
-                }
-            }
-
             for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
             {
                 const uniToRemove = this._uniforms[j];
                 const nameToRemove = name;
 
-                if (uniToRemove.scheduleDeletion)
+                if (this._uniforms[j].name == name)
                 {
                     // TODO: removing needs to be reversed: 1. uniform 2. modules
                     console.log("updateUniformsShader() removing", nameToRemove, this._getDefineName(nameToRemove));
@@ -402,8 +369,6 @@ class ShaderModifier
 
     _updateDefinesShader(shader)
     {
-        // console.log("_updateDefinesShader", this._defines);
-
         for (const i in this._defines)
         {
             const name = this._getDefineName(i);
