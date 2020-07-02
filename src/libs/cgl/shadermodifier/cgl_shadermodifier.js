@@ -9,10 +9,12 @@ class ShaderModifier
         this._definesToggled = {};
         this._defines = {};
         this._mods = [];
+        this._textures = [];
         this._boundShader = null;
         this._changedDefines = true;
         this._changedUniforms = true;
         this._modulesChanged = false;
+        this.needsTexturePush = false;
     }
 
     bind()
@@ -44,6 +46,23 @@ class ShaderModifier
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
+        if (this.needsTexturePush)
+        {
+            for (let j = 0; j < this._textures.length; j += 1)
+            {
+                const uniformName = this._textures[j][0];
+                const tex = this._textures[j][1];
+                const texType = this._textures[j][2];
+                if (this._getUniform(uniformName))
+                {
+                    const name = this._getDefineName(uniformName);
+                    const uni = shader.getUniform(name);
+                    if (uni) this._boundShader.shader.pushTexture(uni, tex, texType);
+                }
+            }
+            this._textures = [];
+            this.needsTexturePush = false;
+        }
 
         this._cgl.pushShader(this._boundShader.shader);
         this._boundShader.shader.copyUniformValues(this._boundShader.orig);
@@ -320,16 +339,8 @@ class ShaderModifier
     pushTexture(uniformName, tex, texType)
     {
         if (!tex) throw (new Error("no texture given to texturestack"));
-        if (this._getUniform(uniformName))
-        {
-            const name = this._getDefineName(uniformName);
-            for (const j in this._shaders)
-            {
-                const shader = this._shaders[j].shader;
-                const uni = shader.getUniform(name);
-                if (uni) shader.pushTexture(uni, tex, texType);
-            }
-        }
+        this._textures.push([uniformName, tex, texType]);
+        this.needsTexturePush = true;
     }
 
     _removeUniformFromShader(name, shader)
