@@ -83,6 +83,7 @@ function taskCoreJsMax()
             });
     });
 }
+
 function taskCoreJsMaxBabel()
 {
     return new Promise((resolve, reject) =>
@@ -177,59 +178,52 @@ function taskCoreJsMinBabel()
 
 function taskCoreLibsJsMax()
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/libs/**/*"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/libs/**/*"])
+        .pipe(
+            webpack(
+                {
+                    "config": libWebpackConfig(false),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": libWebpackConfig(false),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        return new Error(stats.compilation.errors.join("\n"));
                     }
-                )
+                }
             )
-            .pipe(gulp.dest("build/libs"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        )
+        .pipe(gulp.dest("build/libs"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
+
 function taskCoreLibsJsMin()
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/libs/**/*"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/libs/**/*"])
+        .pipe(
+            webpack(
+                {
+                    "config": libWebpackConfig(true),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": libWebpackConfig(true),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        return new Error(stats.compilation.errors.join("\n"));
                     }
-                )
+                }
             )
-            .pipe(gulp.dest("build/libs"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        )
+        .pipe(gulp.dest("build/libs"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
