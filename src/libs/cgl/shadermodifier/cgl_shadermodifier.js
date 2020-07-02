@@ -71,7 +71,7 @@ class ShaderModifier
         for (let i = 0; i < this._mods.length; i++)
         {
             shader.addModule(this._mods[i], firstMod);
-            console.log("_addModulesToShader() shader:", shader._name, "firstMod", firstMod.prefix, "mod", this._mods[i].title, "prefix", this._mods[i].prefix);
+            console.log("_addModulesToShader() shader:", shader._name, "firstMod", firstMod ? firstMod.prefix : "nop", "mod", this._mods[i].title, "prefix", this._mods[i].prefix);
         }
     }
 
@@ -288,6 +288,7 @@ class ShaderModifier
 
     addUniformsStruct(structUniformName, structName, structMembers, shaderType)
     {
+        console.log("addUniformsStruct()", structUniformName, structName, structMembers, shaderType);
         if (!structName) return;
         if (!structMembers) return;
 

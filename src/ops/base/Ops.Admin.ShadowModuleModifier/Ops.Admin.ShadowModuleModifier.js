@@ -248,13 +248,13 @@ function createUniforms(lightsCount)
         ], "frag");
 
         hasShadowMap[i] = false;
-        shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "both");
-        shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "both");
+        shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "vert");
+        shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "vert");
     }
 
     if (lightsCount > 0)
     {
-        shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
+        shaderModule.addUniform("f", "MOD_sampleSpread", inSpread, null, null, null, null, null, null, "frag");
         shaderModule.addUniform("3f", "MOD_camPos", [0, 0, 0], null, null, null, null, null, null, "frag");
     }
 
