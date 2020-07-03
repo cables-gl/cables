@@ -83,34 +83,23 @@ class ShaderModifier
         if (this._mods.length > 1) firstMod = this._mods[0];
 
         for (let i = 0; i < this._mods.length; i++)
-        {
             shader.addModule(this._mods[i], firstMod);
-            console.log("_addModulesToShader() shader:", shader._name, "firstMod", firstMod ? firstMod.prefix : "nop", "mod", this._mods[i].title, "prefix", this._mods[i].prefix);
-        }
     }
 
     _removeModulesFromShader(mod)
     {
-        console.log("_removeModulesFromShader()", mod.title, this._mods);
         for (const j in this._shaders)
-        {
             this._shaders[j].shader.removeModule(mod);
-            console.log("removed", mod.title, "with prefix", mod.prefix, "in shader", this._shaders[j].shader._name);
-        }
     }
 
     addModule(mod)
     {
-        console.log("addModule()", mod.id, mod.group, mod.prefix);
-        console.log("addModule() mods before add", this._mods);
         this._mods.push(mod);
-        console.log("addModule() mods after add", this._mods);
         this._modulesChanged = true;
     }
 
     removeModule(title)
     {
-        console.log("removeModule() removing", title, this._mods);
         const indicesToRemove = [];
 
         for (let i = 0; i < this._mods.length; i++)
@@ -124,11 +113,8 @@ class ShaderModifier
 
         // * go in reverse order so the indices of the mods stay the same
         for (let j = indicesToRemove.length - 1; j >= 0; j -= 1)
-        {
             this._mods.splice(indicesToRemove[j], 1);
-            console.log("index", indicesToRemove[j], "length", this._mods, "after remove");
-        }
-        console.log("removeModule() removed:", title, this._mods);
+
         this._modulesChanged = true;
     }
 
@@ -154,19 +140,16 @@ class ShaderModifier
                 let un = null;
                 if (uni.shaderType === "both")
                 {
-                    console.log("adding addUniformBoth", name, uni.type, uni);
                     un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
                     un.comment = "mod: " + this._name;
                 }
                 else if (uni.shaderType === "frag")
                 {
-                    console.log("adding addUniformFrag", name, uni.type, uni);
                     un = shader.addUniformFrag(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
                     un.comment = "mod: " + this._name;
                 }
                 else if (uni.shaderType === "vert")
                 {
-                    console.log("adding addUniformVert", name, uni.type, uni);
                     un = shader.addUniformVert(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
                     un.comment = "mod: " + this._name;
                 }
@@ -238,7 +221,6 @@ class ShaderModifier
         {
             if (!this._getUniform(structUniformName + "." + name))
             {
-                console.log("addUniform(): adding struct uniform", structUniformName + "." + name);
                 let _shaderType = "both";
                 if (shaderType) _shaderType = shaderType;
 
@@ -262,8 +244,6 @@ class ShaderModifier
 
         if (!this._getUniform(name))
         {
-            console.log("addUniform(): adding normal uniform", name);
-
             let _shaderType = "both";
             if (shaderType) _shaderType = shaderType;
 
@@ -287,7 +267,6 @@ class ShaderModifier
 
     addUniformsStruct(structUniformName, structName, structMembers, shaderType)
     {
-        console.log("addUniformsStruct()", structUniformName, structName, structMembers, shaderType);
         if (!structName) return;
         if (!structMembers) return;
 
@@ -340,8 +319,6 @@ class ShaderModifier
 
                 if (this._uniforms[j].name == name)
                 {
-                    // TODO: removing needs to be reversed: 1. uniform 2. modules
-                    console.log("updateUniformsShader() removing", nameToRemove, this._getDefineName(nameToRemove));
                     for (const k in this._shaders) this._removeUniformFromShader(this._getDefineName(nameToRemove), this._shaders[k].shader);
                     this._uniforms.splice(j, 1);
                 }
@@ -403,7 +380,6 @@ class ShaderModifier
 
     hasDefine(name)
     {
-    //    console.log("hasDefine", this._defines);
         if (this._defines[name] !== null && this._defines[name] !== undefined) return true;
         return false;
     }
