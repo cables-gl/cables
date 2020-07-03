@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1559035880114
+        },
+        {
+            "message": " added core lib: cgl_testor",
+            "author": "pandur",
+            "date": 1593601695067
         }
     ],
     "authorName": "pandur",
@@ -31,5 +36,8 @@
             }
         ],
         "name": "Ops.TestOp_v2"
-    }
+    },
+    "coreLibs": [
+        "cgl_testor"
+    ]
 }

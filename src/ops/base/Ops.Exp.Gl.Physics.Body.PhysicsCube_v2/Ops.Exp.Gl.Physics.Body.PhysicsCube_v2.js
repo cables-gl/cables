@@ -1,5 +1,6 @@
 const
     exec = op.inTrigger("Exec"),
+    inName = op.inString("Name", ""),
     inMass = op.inValue("Mass", 0),
     // inRadius = op.inValue("Radius", 1),
     sizeX = op.inValue("sizeX", 1),
@@ -39,6 +40,7 @@ inReset.onTriggered = function ()
 };
 
 exec.onLinkChanged =
+inName.onChange =
 op.onDelete =
 function ()
 {
@@ -54,6 +56,8 @@ function setup(modelScale)
     if (!world) return;
 
     if (body)world.removeBody(body);
+
+
     // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
     shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
 
@@ -64,6 +68,7 @@ function setup(modelScale)
         "shape": shape
     });
 
+    body.name = inName.get();
     world.addBody(body);
 
     body.addEventListener("collide", function (e)
@@ -166,6 +171,7 @@ function render()
     }
 
     CABLES.physicsCurrentBody = body;
+
 
     next.trigger();
 
