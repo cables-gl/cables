@@ -46,10 +46,6 @@ class ShaderModifier
         if (this._changedDefines) this._updateDefines();
         if (this._changedUniforms) this._updateUniforms();
 
-
-        console.log("bind() before needsTexturePush", this.needsTexturePush, this._textures);
-
-
         this._cgl.pushShader(this._boundShader.shader);
         this._boundShader.shader.copyUniformValues(this._boundShader.orig);
 
@@ -60,26 +56,17 @@ class ShaderModifier
                 const uniformName = this._textures[j][0];
                 const tex = this._textures[j][1];
                 const texType = this._textures[j][2];
-                console.log("bind() before pushTexture & for loop", uniformName, this._textures);
 
                 if (this._getUniform(uniformName))
                 {
                     const name = this._getDefineName(uniformName);
                     const uni = this._boundShader.shader.getUniform(name);
-                    console.log("SHADER ?! DO YOU HAVE UNIFORM?", this._boundShader.shader._uniforms);
-                    console.log("bind() before pushTexture after _getUniform()", this._textures, name, uni);
                     if (uni) this._boundShader.shader.pushTexture(uni, tex, texType);
                 }
             }
 
-            if (this.needsTexturePush)
-            {
-                this.needsTexturePush = false;
-                this._textures.length = 0;
-                console.log("bind() reseting texturePush");
-            }
-            // this._textures = [];
-            // this.needsTexturePush = false;
+            this.needsTexturePush = false;
+            this._textures.length = 0;
         }
     }
 
@@ -331,13 +318,10 @@ class ShaderModifier
 
     pushTexture(uniformName, tex, texType)
     {
-        console.log("modifier: pushTexture()", uniformName, tex, texType);
         if (!tex) throw (new Error("no texture given to texturestack"));
 
         this._textures.push([uniformName, tex, texType]);
         this.needsTexturePush = true;
-
-        console.log("modifier: pushTexture() after", this.needsTexturePush);
     }
 
     _removeUniformFromShader(name, shader)

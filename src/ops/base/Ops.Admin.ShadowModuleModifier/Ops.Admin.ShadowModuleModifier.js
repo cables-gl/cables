@@ -274,7 +274,7 @@ function setUniforms(lightStack)
         shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
         shaderModule.setUniformValue("MOD_light" + i + ".typeCastShadow", [
             LIGHT_TYPES[light.type],
-            light.castShadow,
+            Number(light.castShadow),
         ]);
 
         if (light.shadowMap)
@@ -298,12 +298,18 @@ function setUniforms(lightStack)
         }
         else if (light.shadowCubeMap)
         {
+            shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
+                light.nearFar[0],
+                light.nearFar[1],
+                light.shadowCubeMap.size,
+                light.shadowBias
+            ]);
+            shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
             if (!hasShadowMap[i])
             {
                 shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
-
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
             // console.log("CBEMA", shaderModule._shaders);
         }
