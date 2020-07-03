@@ -283,13 +283,14 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
             // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
-            op.log(light.shadowMap);
+
             if (!hasShadowMap[i])
             {
                 hasShadowMap[i] = true;
             }
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
         }
+
         else if (light.shadowCubeMap)
         {
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
@@ -383,7 +384,7 @@ inTrigger.onTriggered = () =>
         }
     }
     outTrigger.trigger();
-    op.log("hasShadowMap", hasShadowMap);
+
     if (cgl.frameStore.lightStack)
     {
         if (cgl.frameStore.lightStack.length)

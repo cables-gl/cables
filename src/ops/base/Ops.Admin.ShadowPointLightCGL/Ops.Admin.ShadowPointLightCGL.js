@@ -81,14 +81,14 @@ inCastShadow.onChange = function ()
         newLight.createShadowMapShader();
     }
 
-    newLight.castShadow = castShadow;
+
     inMapSize.setUiAttribs({ "greyout": !castShadow });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
     inFar.setUiAttribs({ "greyout": !castShadow });
     inBias.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
-
+    updateLight = true;
     updating = false;
 };
 
@@ -236,6 +236,7 @@ inTrigger.onTriggered = function ()
         newLight.intensity = inIntensity.get();
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
+        newLight.castShadow = inCastShadow.get();
         newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), null);
         updateLight = false;
     }
