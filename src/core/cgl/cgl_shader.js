@@ -220,7 +220,6 @@ Shader.prototype.copy = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        console.log("copy uniform...", this._uniforms[i]);
         const u = this._uniforms[i].copy(shader);
         u.resetLoc();
     }
@@ -516,7 +515,7 @@ Shader.prototype.compile = function ()
     let uniformsStrFrag = "\n// cgl generated".endl();
 
     const structStrings = this.createStructUniforms();
-    console.log("structStrings", structStrings);
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i]._structName)
@@ -887,7 +886,6 @@ Shader.prototype.removeDefine = function (name)
  */
 Shader.prototype.removeModule = function (mod)
 {
-    console.log("CGL.Shader.removeModule()", mod);
     for (let i = 0; i < this._modules.length; i++)
     {
         if (mod && mod.id)
@@ -938,8 +936,6 @@ Shader.prototype.getCurrentModules = function () { return this._modules; };
  */
 Shader.prototype.addModule = function (mod, sibling)
 {
-    console.log("CGL.Shader.addModule() start:", "mod", mod, "sibling", sibling);
-
     if (!mod.id) mod.id = generateUUID();
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
@@ -952,7 +948,7 @@ Shader.prototype.addModule = function (mod, sibling)
 
     mod.prefix = "mod" + mod.group;
     this._modules.push(mod);
-    console.log("CGL.Shader.addModule() after most stuff, module:", mod, "shader:", this);
+
     this._needsRecompile = true;
     this.setWhyCompile("add module " + mod.title);
     this._moduleNumId++;
