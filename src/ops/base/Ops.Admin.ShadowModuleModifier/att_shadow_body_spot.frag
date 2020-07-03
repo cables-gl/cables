@@ -1,7 +1,7 @@
 // FRAGMENT BODY type: SPOT count: {{LIGHT_INDEX}}
  #ifdef HAS_SHADOW_MAP
         if (MOD_light{{LIGHT_INDEX}}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirectionMOD{{LIGHT_INDEX}} = normalize(MOD_light{{LIGHT_INDEX}}.position - modelPosMOD{{LIGHT_INDEX}}.xyz);
+            vec3 lightDirectionMOD{{LIGHT_INDEX}} = normalize(MOD_light{{LIGHT_INDEX}}.position - MOD_modelPos{{LIGHT_INDEX}}.xyz);
             vec2 shadowMapLookup{{LIGHT_INDEX}} = shadowCoord{{LIGHT_INDEX}}.xy / shadowCoord{{LIGHT_INDEX}}.w;
             float shadowMapDepth{{LIGHT_INDEX}} = shadowCoord{{LIGHT_INDEX}}.z  / shadowCoord{{LIGHT_INDEX}}.w;
             float shadowStrength{{LIGHT_INDEX}} = MOD_light{{LIGHT_INDEX}}.shadowStrength;
@@ -22,7 +22,7 @@
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= ShadowFactorPoisson(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}});
+                 col.rgb *= ShadowFactorPoisson(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
             #endif
 
             #ifdef MODE_VSM

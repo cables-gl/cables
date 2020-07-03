@@ -59,7 +59,7 @@ class ShaderModifier
 
                 if (this._getUniform(uniformName))
                 {
-                    const name = this._getDefineName(uniformName);
+                    const name = this.getPrefixedName(uniformName);
                     const uni = this._boundShader.shader.getUniform(name);
                     if (uni) this._boundShader.shader.pushTexture(uni, tex, texType);
                 }
@@ -124,14 +124,14 @@ class ShaderModifier
         {
             const uni = this._uniforms[i];
 
-            const name = this._getDefineName(uni.name);
+            const name = this.getPrefixedName(uni.name);
             let structUniformName = uni.structUniformName;
             let structName = uni.structName;
 
             if (uni.structUniformName && uni.structName)
             {
-                structUniformName = this._getDefineName(uni.structUniformName);
-                structName = this._getDefineName(uni.structName);
+                structUniformName = this.getPrefixedName(uni.structUniformName);
+                structName = this.getPrefixedName(uni.structName);
             }
 
             if (!shader.hasUniform(name))
@@ -181,7 +181,7 @@ class ShaderModifier
         if (!uni) return;
 
 
-        const defineName = this._getDefineName(name);
+        const defineName = this.getPrefixedName(name);
         // console.log("setting", name, defineName, value);
         for (const j in this._shaders)
         {
@@ -319,7 +319,7 @@ class ShaderModifier
 
                 if (this._uniforms[j].name == name)
                 {
-                    for (const k in this._shaders) this._removeUniformFromShader(this._getDefineName(nameToRemove), this._shaders[k].shader);
+                    for (const k in this._shaders) this._removeUniformFromShader(this.getPrefixedName(nameToRemove), this._shaders[k].shader);
                     this._uniforms.splice(j, 1);
                 }
             }
@@ -328,7 +328,7 @@ class ShaderModifier
     }
 
 
-    _getDefineName(name)
+    getPrefixedName(name)
     {
         const prefix = this._mods[0].group;
         if (prefix === undefined)
@@ -347,14 +347,14 @@ class ShaderModifier
     {
         for (const i in this._defines)
         {
-            const name = this._getDefineName(i);
+            const name = this.getPrefixedName(i);
             if (this._defines[i] !== null || this._defines[i] !== undefined) shader.define(name, this._defines[i]);
             else shader.removeDefine(name);
         }
 
         for (const i in this._definesToggled)
         {
-            const name = this._getDefineName(i);
+            const name = this.getPrefixedName(i);
             shader.toggleDefine(name, this._definesToggled[i]);
         }
     }

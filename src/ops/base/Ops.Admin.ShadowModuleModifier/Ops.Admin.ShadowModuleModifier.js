@@ -40,7 +40,6 @@ inReceiveShadow.onChange = () =>
 {
     inAlgorithm.setUiAttribs({ "greyout": !inReceiveShadow.get() });
     setAlgorithmGreyouts();
-    // if (shader) shader.toggleDefine("RECEIVE_SHADOW", inReceiveShadow.get());
 };
 
 inAlgorithm.onChange = () =>
@@ -134,8 +133,7 @@ function createModuleShaders(lightStack)
 {
     STATE.updating = true;
     removeUniforms();
-    console.log("im here yo");
-    // if (lightStack.length === lastLength) return;
+
     let vertexHead = "";
     let fragmentHead = "";
     let vertexBody = "";
@@ -156,11 +154,7 @@ function createModuleShaders(lightStack)
     srcHeadFrag = srcHeadFragBase.concat(fragmentHead);
     srcBodyFrag = srcBodyFragBase.concat(fragmentBody);
 
-    // STATE.lastLength = lightStack.length;
-
-    // op.log("createModuleShaders: before remove", shaderModule);
     shaderModule.removeModule(op.objName);
-    // op.log("createModuleShaders: after remove", shaderModule);
 
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
@@ -169,7 +163,7 @@ function createModuleShaders(lightStack)
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
-    // shaderModule.removeModule(op.objName);
+
     shaderModule.addModule({
         "name": "MODULE_COLOR",
         "priority": -2,
@@ -184,7 +178,6 @@ function createModuleShaders(lightStack)
         shaderModule.define("HAS_SHADOW_MAP", true);
     }
     createUniforms(lightStack.length);
-    // op.log("after createUniform", shaderModule, lightStack.length);
 }
 
 
@@ -204,8 +197,6 @@ let srcBodyFrag = srcBodyFragBase;
 
 
 const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
-CGL.shaderModule = shaderModule;
-// op.log("shadermod after create", shaderModule);
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
@@ -311,7 +302,6 @@ function setUniforms(lightStack)
                 hasShadowMap[i] = true;
             }
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-            // console.log("CBEMA", shaderModule._shaders);
         }
         else
         {
@@ -320,11 +310,11 @@ function setUniforms(lightStack)
         castShadow = castShadow || light.castShadow;
         if (receiveShadow && castShadow)
         {
-            // if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.define("HAS_SHADOW_MAP");
+            if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.define("HAS_SHADOW_MAP");
         }
         else
         {
-            // if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
+            if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
         }
     }
 }
@@ -381,10 +371,20 @@ inTrigger.onTriggered = () =>
 
     updateShader();
 
-    shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
-
-    shaderModule.bind();
-
+    if (cgl.frameStore.lightStack)
+    {
+        if (cgl.frameStore.lightStack.length)
+        {
+            shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
+            shaderModule.bind();
+        }
+    }
     outTrigger.trigger();
-    shaderModule.unbind();
+    if (cgl.frameStore.lightStack)
+    {
+        if (cgl.frameStore.lightStack.length)
+        {
+            shaderModule.unbind();
+        }
+    }
 };

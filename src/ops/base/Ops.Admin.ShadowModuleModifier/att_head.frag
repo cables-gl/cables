@@ -1,3 +1,15 @@
+#define TYPE x
+#define CAST_SHADOW y
+
+#define NEAR x
+#define FAR y
+#define MAP_SIZE z
+#define BIAS w
+
+#ifdef WEBGL2
+    #define textureCube texture
+#endif
+
 float when_gt_MOD(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
 float when_eq_MOD(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
 float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator function
@@ -8,44 +20,9 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
     }
 #endif
 
-#ifdef WEBGL2
-    #define textureCube texture
-#endif
 
-// UNI vec3 MOD_camPos;
 
-struct ModLight {
-/*
-    vec3 color;*/
-    // * SPOT LIGHT * //
-    /*vec3 conePointAt;
-    #define COSCONEANGLE x
-    #define COSCONEANGLEINNER y
-    #define SPOTEXPONENT z
-    vec3 spotProperties;*/
 
-    /*#define INTENSITY x
-    #define ATTENUATION y
-    #define FALLOFF z
-    #define RADIUS w
-    vec4 lightProperties;
-    */
-
-    vec3 position;
-    #define TYPE x
-    #define CAST_SHADOW y
-    ivec2 typeCastShadow;
-
-    #define NEAR x
-    #define FAR y
-    #define MAP_SIZE z
-    #define BIAS w
-    vec4 shadowProperties;
-    float shadowStrength;
-
-};
-
-// UNI float MOD_sampleSpread;
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
@@ -108,15 +85,17 @@ struct ModLight {
         float farPlane,
         float bias,
         float shadowStrength,
-        vec3 modelPos
+        vec3 modelPos,
+        vec3 camPos,
+        float sampleSpread
     ) {
         #ifdef WEBGL1
             FillPCFArray();
         #endif
 
         float visibility  = 0.0;
-        float viewDistance = length(MOD_camPos - modelPos.xyz);
-        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / MOD_sampleSpread;
+        float viewDistance = length(camPos - modelPos.xyz);
+        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
 
         for (int i = 0; i < SAMPLE_AMOUNT_POINT; i++) {
             float shadowMapSample = textureCube(shadowMap, -lightDirection + offsets[i] * diskRadius).r;
@@ -126,22 +105,6 @@ struct ModLight {
         return clamp(visibility, 0., 1.);
     }
 
-    float LinearShadowMapSample(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float texelSize) {
-        vec2 pixelPos = shadowMapLookup/texelSize + vec2(0.5); // tl pixel corner to middle
-        vec2 fractPixelPos = fract(pixelPos);
-        vec2 startTexel = (pixelPos - fractPixelPos) * texelSize;
-
-        float bottomLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel).r);
-        float bottomRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, 0.)).r);
-        float topLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(0., texelSize)).r);
-        float topRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, texelSize)).r);
-
-        float mixA = mix(bottomLeftTexel, topLeftTexel, fractPixelPos.y);
-        float mixB = mix(bottomRightTexel, topRightTexel, fractPixelPos.y);
-
-        return mix(mixA, mixB, fractPixelPos.x);
-
-    }
     float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
         float texelSize = 1. / shadowMapSize;
         float visibility = 0.;
@@ -207,21 +170,21 @@ struct ModLight {
     #endif
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
 #define INV_SAMPLE_AMOUNT 1./SAMPLE_AMOUNT
-    float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias) {
+    float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias, float sampleSpread) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/MOD_sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);
     }
 
-    float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
+    float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias, float sampleSpread) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/MOD_sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);

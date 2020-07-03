@@ -1,13 +1,13 @@
 // FRAGMENT BODY type: POINT count: {{LIGHT_INDEX}}
  #ifdef HAS_SHADOW_MAP
         if (MOD_light{{LIGHT_INDEX}}.typeCastShadow.CAST_SHADOW == 1) {
-            vec3 lightDirectionMOD{{LIGHT_INDEX}} = normalize(MOD_light{{LIGHT_INDEX}}.position - modelPosMOD{{LIGHT_INDEX}}.xyz);
+            vec3 lightDirectionMOD{{LIGHT_INDEX}} = normalize(MOD_light{{LIGHT_INDEX}}.position - MOD_modelPos{{LIGHT_INDEX}}.xyz);
             float shadowStrength{{LIGHT_INDEX}} = MOD_light{{LIGHT_INDEX}}.shadowStrength;
 
             float cameraNear{{LIGHT_INDEX}} = MOD_light{{LIGHT_INDEX}}.shadowProperties.NEAR; // uniforms
             float cameraFar{{LIGHT_INDEX}} =  MOD_light{{LIGHT_INDEX}}.shadowProperties.FAR;
 
-            float fromLightToFrag{{LIGHT_INDEX}} = (length(modelPosMOD{{LIGHT_INDEX}}.xyz - MOD_light{{LIGHT_INDEX}}.position) - cameraNear{{LIGHT_INDEX}}) / (cameraFar{{LIGHT_INDEX}} - cameraNear{{LIGHT_INDEX}});
+            float fromLightToFrag{{LIGHT_INDEX}} = (length(MOD_modelPos{{LIGHT_INDEX}}.xyz - MOD_light{{LIGHT_INDEX}}.position) - cameraNear{{LIGHT_INDEX}}) / (cameraFar{{LIGHT_INDEX}} - cameraNear{{LIGHT_INDEX}});
 
             float shadowMapDepth{{LIGHT_INDEX}} = fromLightToFrag{{LIGHT_INDEX}};
             // float bias{{LIGHT_INDEX}} = clamp(MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, 0., 1.);
@@ -30,7 +30,9 @@
                     cameraFar{{LIGHT_INDEX}},
                     bias{{LIGHT_INDEX}},
                     shadowStrength{{LIGHT_INDEX}},
-                    modelPosMOD{{LIGHT_INDEX}}.xyz
+                    MOD_modelPos{{LIGHT_INDEX}}.xyz,
+                    MOD_camPos,
+                    MOD_sampleSpread
                 );
             #endif
             #ifdef MODE_POISSON
@@ -38,7 +40,7 @@
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= ShadowFactorPointPoisson(MOD_shadowMap{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}});
+                 col.rgb *= ShadowFactorPointPoisson(MOD_shadowMap{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
             #endif
 
             #ifdef MODE_VSM
