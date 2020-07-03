@@ -223,6 +223,7 @@ function removeUniforms()
         shaderModule.removeUniform("MOD_sampleSpread");
         shaderModule.removeUniform("MOD_camPos");
     }
+    hasShadowMap.length = 0;
 }
 
 function createUniforms(lightsCount)
@@ -268,6 +269,8 @@ function setUniforms(lightStack)
             Number(light.castShadow),
         ]);
 
+        shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+
         if (light.shadowMap)
         {
             shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
@@ -279,10 +282,10 @@ function setUniforms(lightStack)
                 light.shadowBias
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
-
+            // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+            op.log(light.shadowMap);
             if (!hasShadowMap[i])
             {
-                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
@@ -296,9 +299,9 @@ function setUniforms(lightStack)
                 light.shadowBias
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
+
             if (!hasShadowMap[i])
             {
-                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
             shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
@@ -380,6 +383,7 @@ inTrigger.onTriggered = () =>
         }
     }
     outTrigger.trigger();
+    op.log("hasShadowMap", hasShadowMap);
     if (cgl.frameStore.lightStack)
     {
         if (cgl.frameStore.lightStack.length)

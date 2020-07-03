@@ -94,7 +94,7 @@ inAdvanced.onChange = function ()
     inFilterType.setUiAttribs({ "greyout": !inAdvanced.get() });
     inAnisotropic.setUiAttribs({ "greyout": !inAdvanced.get() });
     if (!inAdvanced.get())
-{
+    {
         /* const size = Number(inMapSize.get());
         newLight.createFramebuffer(size, size, {});
         newLight.createBlurEffect({});
@@ -161,16 +161,12 @@ inCastShadow.onChange = function ()
     updating = true;
     const castShadow = inCastShadow.get();
     if (castShadow)
-{
+    {
         const size = Number(inMapSize.get());
         newLight.createFramebuffer(size, size, {});
         newLight.createShadowMapShader();
         newLight.createBlurEffect({});
         newLight.createBlurShader();
-    }
- else
-{
-
     }
 
     newLight.castShadow = castShadow;
@@ -197,15 +193,15 @@ function updateBuffers()
     const anisotropyFactor = Number(inAnisotropic.get());
 
     if (inFilterType.get() == "Linear")
-{
+    {
         filterType = CGL.Texture.FILTER_LINEAR;
     }
- else if (inFilterType.get() == "Nearest")
-{
+    else if (inFilterType.get() == "Nearest")
+    {
         filterType = CGL.Texture.FILTER_NEAREST;
     }
- else if (inFilterType.get() == "Mip Map")
-{
+    else if (inFilterType.get() == "Mip Map")
+    {
         filterType = CGL.Texture.FILTER_MIPMAP;
     }
 
@@ -263,7 +259,7 @@ function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
     if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
-{
+    {
         gui.setTransformGizmo({
             "posX": inPosX,
             "posY": inPosY,
@@ -285,7 +281,7 @@ inTrigger.onTriggered = function ()
 {
     if (updating) return;
     if (updateLight)
-{
+    {
         newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });
         newLight.color = [0, 1, 2].map(function (i) { return colorIn[i].get(); });
         newLight.specular = [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); });
@@ -316,7 +312,7 @@ inTrigger.onTriggered = function ()
     cgl.frameStore.lightStack.push(newLight);
 
     if (inCastShadow.get())
-{
+    {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
