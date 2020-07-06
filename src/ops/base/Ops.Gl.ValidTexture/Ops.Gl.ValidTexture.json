@@ -1,0 +1,45 @@
+{
+    "id": "51c24850-aa8b-41e4-936e-68ba718b5e39",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593415973445
+        },
+        {
+            "message": "Ops.User.pandur.ValidTexture renamed to Ops.Gl.ValidTexture",
+            "author": "pandur",
+            "date": 1594019990599
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593416037892,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Default index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.ValidTexture"
+    },
+    "summary": "output current input texture or a default texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -156,7 +156,7 @@ function rebuild()
 
 function ip(a, b, p)
 {
-    return a + ((b - a) * p);
+    return a + p * (b - a);
 }
 
 function tessEdges(oldArr)
