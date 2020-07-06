@@ -46,6 +46,6 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.pandur.BoundingBoxVisible"
+        "name": "Ops.Gl.Geometry.BoundingBoxVisible"
     }
 }
