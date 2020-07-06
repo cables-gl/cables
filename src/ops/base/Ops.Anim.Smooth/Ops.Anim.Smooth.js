@@ -1,10 +1,11 @@
-const exec = op.inTrigger("Update");
-const inMode = op.inBool("Separate inc/dec", false);
-const inVal = op.inValue("Value");
-const next = op.outTrigger("Next");
-const inDivisorUp = op.inValue("Inc factor", 4);
-const inDivisorDown = op.inValue("Dec factor", 4);
-const result = op.outValue("Result", 0);
+const
+    exec = op.inTrigger("Update"),
+    inMode = op.inBool("Separate inc/dec", false),
+    inVal = op.inValue("Value"),
+    next = op.outTrigger("Next"),
+    inDivisorUp = op.inValue("Inc factor", 4),
+    inDivisorDown = op.inValue("Dec factor", 4),
+    result = op.outValue("Result", 0);
 
 let val = 0;
 let goal = 0;
@@ -81,19 +82,16 @@ inDivisorUp.onChange = function ()
 function update()
 {
     let tm = 1;
-    if (CABLES.now() - lastTrigger > 500 || lastTrigger === 0)val = inVal.get();
-    else tm = (CABLES.now() - lastTrigger) / 16;
-    lastTrigger = CABLES.now();
+    if (performance.now() - lastTrigger > 500 || lastTrigger === 0)val = inVal.get();
+    else tm = (performance.now() - lastTrigger) / 16;
+    lastTrigger = performance.now();
 
     if (divisor <= 0)divisor = 0.0001;
 
     const diff = goal - val;
 
-    if (diff >= 0)
-        val += (diff) / (divisorDown * tm);
-    else
-        val += (diff) / (divisorUp * tm);
-    // val=val+(goal-val)/(divisor*tm);
+    if (diff >= 0) val += (diff) / (divisorDown * tm);
+    else val += (diff) / (divisorUp * tm);
 
     if (val > 0 && val < 0.000000001)val = 0;
     if (divisor != divisor)val = 0;

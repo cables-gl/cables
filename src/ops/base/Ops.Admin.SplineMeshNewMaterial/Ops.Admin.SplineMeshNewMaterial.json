@@ -36,6 +36,10 @@
                 "group": "Texture"
             },
             {
+                "type": "2",
+                "name": "Texture Mask"
+            },
+            {
                 "type": "0",
                 "name": "Mapping index",
                 "subType": "integer"
