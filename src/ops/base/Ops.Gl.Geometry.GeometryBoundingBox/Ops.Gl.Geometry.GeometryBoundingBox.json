@@ -61,6 +61,6 @@
                 "name": "MaxMin Points"
             }
         ],
-        "name": "Ops.User.pandur.GeometryBoundingBox"
+        "name": "Ops.Gl.Geometry.GeometryBoundingBox"
     }
 }
