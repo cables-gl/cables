@@ -78,9 +78,12 @@ inCastShadow.onChange = function ()
 
     if (castShadow)
     {
-        const size = inMapSize.get();
-        newLight.createFramebuffer(size, size, {});
-        newLight.createShadowMapShader();
+        if (!newLight.hasFramebuffer())
+        {
+            const size = inMapSize.get();
+            newLight.createFramebuffer(size, size, {});
+            newLight.createShadowMapShader();
+        }
     }
 
 
@@ -108,8 +111,11 @@ const newLight = new CGL.Light(cgl, {
     "falloff": inFalloff.get(),
 });
 
-newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
-newLight.createShadowMapShader();
+if (!newLight.hasFramebuffer())
+{
+    newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+    newLight.createShadowMapShader();
+}
 
 let updateLight = false;
 
@@ -154,7 +160,7 @@ else
 }
 
 projectionShader = new CGL.Shader(cgl, "cubemapProjection");
-uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubeMap", 1);
+uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubeMap", 0);
 
 projectionShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 projectionShader.setSource(attachments.cubemapprojection_vert, attachments.cubemapprojection_frag);
@@ -165,11 +171,12 @@ function renderCubemapProjection(cubemap, framebuffer)
     if (!cubemap) return;
     cgl.frameStore.renderOffscreen = true;
 
+    projectionShader.popTextures();
+
     fb.renderStart(cgl);
     projectionShader.pushTexture(uniformCubemap, cubemap, cgl.gl.TEXTURE_CUBE_MAP);
     mesh.render(projectionShader);
     fb.renderEnd();
-    projectionShader.popTextures();
 
     cgl.frameStore.renderOffscreen = false;
 
@@ -234,7 +241,7 @@ inTrigger.onTriggered = function ()
 
     cgl.frameStore.lightStack.push(newLight);
 
-    if (inCastShadow.get() || !hasRenderedCubemapOnce)
+    if (inCastShadow.get())
     {
         newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
 

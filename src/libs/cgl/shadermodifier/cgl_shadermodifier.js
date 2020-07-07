@@ -156,7 +156,7 @@ class ShaderModifier
             }
             else
             {
-                console.log("has uni", uni);
+                // console.log("has uni", uni);
             }
         }
     }
@@ -348,7 +348,7 @@ class ShaderModifier
         for (const i in this._defines)
         {
             const name = this.getPrefixedName(i);
-            if (this._defines[i] !== null || this._defines[i] !== undefined) shader.define(name, this._defines[i]);
+            if (this._defines[i] !== null && this._defines[i] !== undefined) shader.define(name, this._defines[i]);
             else shader.removeDefine(name);
         }
 

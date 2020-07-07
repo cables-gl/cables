@@ -172,11 +172,6 @@ function createModuleShaders(lightStack)
         "srcBodyFrag": srcBodyFrag,
     });
 
-    if (lightStack.length === 0) shaderModule.removeDefine("HAS_SHADOW_MAP");
-    if (lightStack.length > 0 && !shaderModule.hasDefine("HAS_SHADOW_MAP"))
-    {
-        shaderModule.define("HAS_SHADOW_MAP", true);
-    }
     createUniforms(lightStack.length);
 }
 
@@ -216,6 +211,7 @@ function removeUniforms()
         shaderModule.removeUniform("MOD_shadowMap" + i);
         shaderModule.removeUniform("MOD_normalOffset" + i);
         shaderModule.removeUniform("MOD_lightMatrix" + i);
+        shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
     }
 
     if (STATE.lastLength > 0)
@@ -242,6 +238,7 @@ function createUniforms(lightsCount)
         hasShadowMap[i] = false;
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "vert");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "vert");
+        shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
     }
 
     if (lightsCount > 0)
@@ -274,7 +271,7 @@ function setUniforms(lightStack)
         {
             if (!hasShadowMap[i])
             {
-                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
@@ -296,7 +293,7 @@ function setUniforms(lightStack)
         {
             if (!hasShadowMap[i])
             {
-                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
