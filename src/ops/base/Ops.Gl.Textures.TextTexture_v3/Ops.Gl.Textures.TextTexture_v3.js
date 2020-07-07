@@ -169,7 +169,7 @@ function refresh()
     let i = 0;
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     txt = (text.get() + "").replace(/<br>/g, "\n");
-    const strings = txt.split("\n");
+    let strings = txt.split("\n");
     let posy = 0;
 
     needsRefresh = false;
@@ -199,41 +199,51 @@ function refresh()
     }
     else
     {
-        const found = true;
-        // const newStrings = [];
+        let found = true;
+        const newStrings = [];
 
-        // let count=0;
-        //         if(texWidth.get()>128)
-        //         while (found)
-        //         {
-        //             strings = txt.split("\n");
-        //             found = false;
-        //             let newString = "";
-        // count++;
-        // if(count>100)break;
-        //             for (let i = 0; i < strings.length; i++)
-        //             {
-        //                 let sumWidth = 0;
-        //                 const words = strings[i].split(" ");
+        let count = 0;
+        if (texWidth.get() > 128)
+        {
+            while (found)
+            {
+                count++;
+                if (count > 100)
+                {
+                    found = false;
+                    break;
+                }
 
-        //                 for (let j = 0; j < words.length; j++)
-        //                 {
-        //                     sumWidth += ctx.measureText(words[j] + " ").width;
+                strings = txt.split("\n");
+                found = false;
+                let newString = "";
 
-        //                     if (sumWidth > texWidth.get())
-        //                     {
-        //                         found = true;
-        //                         newString += "\n" + words[j] + " ";
-        //                         // new line...
-        //                     }
-        //                     else
-        //                     {
-        //                         newString += words[j] + " ";
-        //                     }
-        //                 }
-        //             }
-        //             txt = newString;
-        //         }
+
+                for (let i = 0; i < strings.length; i++)
+                {
+                    let sumWidth = 0;
+                    const words = strings[i].split(" ");
+
+                    for (let j = 0; j < words.length; j++)
+                    {
+                        if (words[j] == "") continue;
+                        sumWidth += ctx.measureText(words[j] + " ").width;
+
+                        if (sumWidth > texWidth.get())
+                        {
+                            found = true;
+                            newString += "\n" + words[j] + " ";
+                            sumWidth = ctx.measureText(words[j] + " ").width;
+                        }
+                        else
+                        {
+                            newString += words[j] + " ";
+                        }
+                    }
+                }
+                txt = newString;
+            }
+        }
     }
 
     if (valign.get() == "center")
