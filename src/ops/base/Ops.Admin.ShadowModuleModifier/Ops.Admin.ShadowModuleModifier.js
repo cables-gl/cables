@@ -344,9 +344,15 @@ function updateShader()
 inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
+    hasShadowMap.length = 0;
 };
-
+outTrigger.onLinkChanged = function ()
+{
+    if (!outTrigger.isLinked()) STATE.lastLength = 0;
+    hasShadowMap.length = 0;
+};
 const _tempCamPosMatrix = mat4.create();
+
 
 inTrigger.onTriggered = () =>
 {
@@ -381,6 +387,7 @@ inTrigger.onTriggered = () =>
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
 
     updateShader();
+
 
     if (cgl.frameStore.lightStack)
     {
