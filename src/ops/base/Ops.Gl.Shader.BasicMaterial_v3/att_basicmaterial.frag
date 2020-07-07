@@ -20,6 +20,10 @@ void main()
     #ifdef HAS_TEXTURES
         vec2 uv=texCoord;
 
+        #ifdef CROP_TEXCOORDS
+            if(uv.x<0.0 || uv.x>1.0 || uv.y<0.0 || uv.y>1.0) discard;
+        #endif
+
         #ifdef HAS_TEXTURE_DIFFUSE
             col=texture(tex,uv);
 
