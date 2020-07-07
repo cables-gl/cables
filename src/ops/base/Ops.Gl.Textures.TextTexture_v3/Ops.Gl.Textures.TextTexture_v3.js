@@ -240,8 +240,11 @@ function refresh()
                             newString += words[j] + " ";
                         }
                     }
+                    newString += "\n";
                 }
                 txt = newString;
+                strings = txt.split("\n");
+                // console.log(strings);
             }
         }
     }
