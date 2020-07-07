@@ -36,8 +36,5 @@
             }
         ],
         "name": "Ops.TestOp_v2"
-    },
-    "coreLibs": [
-        "cgl_testor"
-    ]
+    }
 }

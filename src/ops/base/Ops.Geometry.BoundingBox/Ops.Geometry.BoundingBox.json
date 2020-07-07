@@ -1,0 +1,38 @@
+{
+    "id": "73dc3511-7c1d-4e42-9e00-f86bc952058a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1594041582774
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1594041625407,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Depth",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Geometry.BoundingBox"
+    }
+}

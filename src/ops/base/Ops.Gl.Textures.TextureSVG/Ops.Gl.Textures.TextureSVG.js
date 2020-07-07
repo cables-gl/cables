@@ -98,6 +98,8 @@ function reload()
     );
 }
 
+let startTime = 0;
+
 function update()
 {
     const img = new Image();
@@ -116,6 +118,7 @@ function update()
 
     img.onload = function ()
     {
+        // console.log("textsvg",performance.now()-startTime);
         createCanvas();
         op.patch.loading.finished(loadingId);
         canvas.width = texWidth.get();
@@ -135,6 +138,7 @@ function update()
     };
 
     img.src = data;
+    startTime = performance.now();
 }
 
 op.onFileChanged = function (fn)

@@ -1,110 +1,110 @@
-var filenames=op.inArray("urls");
+const filenames = op.inArray("urls");
 
-var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
-var wrap=op.inValueSelect("wrap",['repeat','mirrored repeat','clamp to edge'],"clamp to edge");
-var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var unpackAlpha=op.addInPort(new CABLES.Port(op,"unpackPreMultipliedAlpha",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-
-var arrOut=op.outArray('TextureArray');
+const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
+const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
+const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const inCaching = op.inBool("Caching", false);
+const arrOut = op.outArray("TextureArray");
 
 // var textureOut=op.outTexture("texture");
-var width=op.addOutPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
-var height=op.addOutPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
-var loading=op.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_VALUE));
-var ratio=op.outValue("Aspect Ratio");
+const width = op.addOutPort(new CABLES.Port(op, "width", CABLES.OP_PORT_TYPE_VALUE));
+const height = op.addOutPort(new CABLES.Port(op, "height", CABLES.OP_PORT_TYPE_VALUE));
+const loading = op.addOutPort(new CABLES.Port(op, "loading", CABLES.OP_PORT_TYPE_VALUE));
+const ratio = op.outValue("Aspect Ratio");
 
 flip.set(false);
 unpackAlpha.set(false);
 
-var cgl=op.patch.cgl;
-var cgl_filter=0;
-var cgl_wrap=0;
-var loadingId=null;
-var arr=[];
+const cgl = op.patch.cgl;
+let cgl_filter = 0;
+let cgl_wrap = 0;
+let loadingId = null;
+const arr = [];
 arrOut.set(arr);
 
-flip.onChange=function(){reload();};
-filenames.onChange=reload;
+flip.onChange = function () { reload(); };
+filenames.onChange = reload;
 
-tfilter.onChange=onFilterChange;
-wrap.onChange=onWrapChange;
-unpackAlpha.onChange=function(){ reload(); };
+tfilter.onChange = onFilterChange;
+wrap.onChange = onWrapChange;
+unpackAlpha.onChange = function () { reload(); };
 
-var timedLoader=0;
+let timedLoader = 0;
 
-var setTempTexture=function()
+const setTempTexture = function ()
 {
-    var t=CGL.Texture.getTempTexture(cgl);
+    const t = CGL.Texture.getTempTexture(cgl);
     // textureOut.set(t);
 };
 
 function reload(nocache)
 {
     clearTimeout(timedLoader);
-    timedLoader=setTimeout(function()
+    timedLoader = setTimeout(function ()
     {
         realReload(nocache);
-    },30);
+    }, 30);
 }
 
-function loadImage(_i,_url,nocache,cb)
+function loadImage(_i, _url, nocache, cb)
 {
-    var url=_url;
-    var i=_i;
-    if(!url)return;
+    let url = _url;
+    const i = _i;
+    if (!url) return;
     // url=url.replace("XXX",i);
 
     // console.log(url);
 
-    url=op.patch.getFilePath(url);
-    if(nocache)url+='?rnd='+CABLES.generateUUID();
+    url = op.patch.getFilePath(url);
+    if (!inCaching.get())
+        if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
     // if((filename.get() && filename.get().length>1))
     {
         loading.set(true);
 
-        var tex=CGL.Texture.load(cgl,url,
-            function(err)
+        var tex = CGL.Texture.load(cgl, url,
+            function (err)
             {
                 // console.log('tex loaded!!');
 
-                if(err)
+                if (err)
                 {
                     setTempTexture();
-                    const errMsg='could not load texture "'+url+'"';
-                    op.uiAttr({'error':errMsg});
-                    console.warn('[TextureArrayLoader] '+errMsg);
-                    if(cb)cb();
+                    const errMsg = "could not load texture \"" + url + "\"";
+                    op.uiAttr({ "error": errMsg });
+                    console.warn("[TextureArrayLoader] " + errMsg);
+                    if (cb)cb();
                     return;
                 }
-                else op.uiAttr({'error':null});
+                else op.uiAttr({ "error": null });
                 // textureOut.set(tex);
                 width.set(tex.width);
                 height.set(tex.height);
-                ratio.set(tex.width/tex.height);
+                ratio.set(tex.width / tex.height);
 
 
-                arr[i]=tex;
-                if(!tex.isPowerOfTwo()) op.uiAttr(
+                arr[i] = tex;
+                if (!tex.isPowerOfTwo()) op.uiAttr(
                     {
-                        hint:'texture dimensions not power of two! - texture filtering will not work.',
-                        warning:null
+                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
+                        "warning": null
                     });
-                    else op.uiAttr(
-                        {
-                            hint:null,
-                            warning:null
-                        });
+                else op.uiAttr(
+                    {
+                        "hint": null,
+                        "warning": null
+                    });
 
                 arrOut.set(null);
                 arrOut.set(arr);
-                if(cb)cb();
-
-            },{
-                wrap:cgl_wrap,
-                flip:flip.get(),
-                unpackAlpha:unpackAlpha.get(),
-                filter:cgl_filter
+                if (cb)cb();
+            }, {
+                "wrap": cgl_wrap,
+                "flip": flip.get(),
+                "unpackAlpha": unpackAlpha.get(),
+                "filter": cgl_filter
             });
 
 
@@ -116,54 +116,52 @@ function loadImage(_i,_url,nocache,cb)
         // }
         loading.set(false);
     }
-
-
 }
 
 function realReload(nocache)
 {
-    var files=filenames.get();
+    const files = filenames.get();
 
-    if(!files||files.length==0)return;
+    if (!files || files.length == 0) return;
 
-    if(loadingId)cgl.patch.loading.finished(loadingId);
-    loadingId=cgl.patch.loading.start('texturearray',CABLES.uuid());
+    if (loadingId)cgl.patch.loading.finished(loadingId);
+    loadingId = cgl.patch.loading.start("texturearray", CABLES.uuid());
 
     // arr.length=files.length;
 
 
-    for(var i=0;i<files.length;i++)
+    for (let i = 0; i < files.length; i++)
     {
-        arr[i]=CGL.Texture.getEmptyTexture(cgl);
-        var cb=null;
-        if(i==files.length-1)cb=function()
-            {
-                cgl.patch.loading.finished(loadingId);
-                // console.log('loaded all');
-            };
-        loadImage(i,files[i],nocache,cb);
+        arr[i] = CGL.Texture.getEmptyTexture(cgl);
+        let cb = null;
+        if (i == files.length - 1)cb = function ()
+        {
+            cgl.patch.loading.finished(loadingId);
+            // console.log('loaded all');
+        };
+        loadImage(i, files[i], nocache, cb);
     }
 }
 
 function onFilterChange()
 {
-    if(tfilter.get()=='nearest') cgl_filter=CGL.Texture.FILTER_NEAREST;
-    if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
-    if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+    if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
 
     reload();
 }
 
 function onWrapChange()
 {
-    if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
-    if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
+    if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     reload();
 }
 
-op.onFileChanged=function(fn)
+op.onFileChanged = function (fn)
 {
     // if(filename.get() && filename.get().indexOf(fn)>-1)
     // {
@@ -175,6 +173,5 @@ op.onFileChanged=function(fn)
 };
 
 
-tfilter.set('linear');
-wrap.set('repeat');
-
+tfilter.set("linear");
+wrap.set("repeat");

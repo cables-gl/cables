@@ -6,14 +6,15 @@ const
     inOrtho = op.inBool("Orthogonal", false),
     inRotate = op.inFloat("Rotate", 0),
     inAlignVert = op.inSwitch("Align Vertical", ["Left", "Center", "Right"], "Left"),
-    inAlignHor = op.inSwitch("Align Horizontal", ["Top", "Center", "Bottom"], "Top");
+    inAlignHor = op.inSwitch("Align Horizontal", ["Top", "Center", "Bottom"], "Top"),
+    inActive = op.inBool("Active", true);
 
 const cgl = op.patch.cgl;
 let x = 0;
 let y = 0;
-let m = mat4.create();
-let pos = vec3.create();
-let trans = vec3.create();
+const m = mat4.create();
+const pos = vec3.create();
+const trans = vec3.create();
 
 exec.onTriggered = setProperties;
 op.onDelete = removeProperties;
@@ -44,7 +45,7 @@ function updateTransform()
 
     const str = "translate(" + translateStr + ") scale(" + inScale.get() + ") rotate(" + inRotate.get() + "deg)";
 
-    if(ele.style.transform!=str) ele.style.transform = str;
+    if (ele.style.transform != str) ele.style.transform = str;
 }
 
 inEle.onChange = function ()
@@ -76,7 +77,7 @@ function getScreenCoord()
 
     // console.log(cgl.pMatrix);
 
-    let vp = cgl.getViewPort();
+    const vp = cgl.getViewPort();
 
     const w = cgl.canvasWidth / cgl.pixelDensity;
     const h = cgl.canvasHeight / cgl.pixelDensity;
@@ -95,18 +96,24 @@ function getScreenCoord()
 
 function setProperties()
 {
-    let ele = inEle.get();
+    if (!inActive.get())
+    {
+        next.trigger();
+        return;
+    }
+
+    const ele = inEle.get();
     oldEle = ele;
     if (ele && ele.style)
     {
         getScreenCoord();
-        let offsetTop = cgl.canvas.offsetTop;
+        const offsetTop = cgl.canvas.offsetTop;
 
-        const ypx=offsetTop + y + "px";
-        const xpx=x + "px";
+        const ypx = offsetTop + y + "px";
+        const xpx = x + "px";
 
-        if(ele.style.top!=ypx) ele.style.top = ypx;
-        if(ele.style.left!=xpx) ele.style.left = xpx;
+        if (ele.style.top != ypx) ele.style.top = ypx;
+        if (ele.style.left != xpx) ele.style.left = xpx;
     }
 
     next.trigger();

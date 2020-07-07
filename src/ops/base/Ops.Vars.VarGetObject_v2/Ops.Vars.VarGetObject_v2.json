@@ -5,8 +5,16 @@
             "message": "created op",
             "author": "pandur",
             "date": 1593236804398
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1594107141217
         }
     ],
     "authorName": "pandur",
-    "created": 1593236823526
+    "created": 1593236823526,
+    "coreLibs": [
+        "vargetset"
+    ]
 }

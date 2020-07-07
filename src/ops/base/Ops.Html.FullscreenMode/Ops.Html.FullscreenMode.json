@@ -8,6 +8,11 @@
             {
                 "type": "1",
                 "name": "Exit Fullscreen"
+            },
+            {
+                "type": "0",
+                "name": "Element index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

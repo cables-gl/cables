@@ -100,6 +100,21 @@
                 "type": "0",
                 "name": "Can Play Through",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Textures.VideoTexture"

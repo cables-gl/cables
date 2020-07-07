@@ -28,6 +28,11 @@
                 "type": "0",
                 "name": "unpackPreMultipliedAlpha",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Caching",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
