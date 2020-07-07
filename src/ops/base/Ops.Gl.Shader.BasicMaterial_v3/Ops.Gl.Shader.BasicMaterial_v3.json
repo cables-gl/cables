@@ -91,6 +91,12 @@
             },
             {
                 "type": "0",
+                "name": "Crop TexCoords",
+                "group": "Texture Transform",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "billboard",
                 "subType": "boolean"
             }

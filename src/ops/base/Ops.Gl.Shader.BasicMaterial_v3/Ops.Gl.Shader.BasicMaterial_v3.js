@@ -48,10 +48,13 @@ const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 // texture coords
 
-const diffuseRepeatX = op.inValue("diffuseRepeatX", 1);
-const diffuseRepeatY = op.inValue("diffuseRepeatY", 1);
-const diffuseOffsetX = op.inValue("Tex Offset X", 0);
-const diffuseOffsetY = op.inValue("Tex Offset Y", 0);
+const
+    diffuseRepeatX = op.inValue("diffuseRepeatX", 1),
+    diffuseRepeatY = op.inValue("diffuseRepeatY", 1),
+    diffuseOffsetX = op.inValue("Tex Offset X", 0),
+    diffuseOffsetY = op.inValue("Tex Offset Y", 0),
+    cropRepeat = op.inBool("Crop TexCoords", false);
+
 
 shader.addUniformFrag("f", "diffuseRepeatX", diffuseRepeatX);
 shader.addUniformFrag("f", "diffuseRepeatY", diffuseRepeatY);
@@ -64,13 +67,14 @@ alphaMaskSource.onChange =
     doBillboard.onChange =
     discardTransPxl.onChange =
     texCoordAlpha.onChange =
+    cropRepeat.onChange =
     colorizeTexture.onChange = updateDefines;
 
 
 op.setPortGroup("Color", [r, g, b, a]);
 op.setPortGroup("Color Texture", [diffuseTexture, colorizeTexture]);
 op.setPortGroup("Opacity", [textureOpacity, alphaMaskSource, discardTransPxl, texCoordAlpha]);
-op.setPortGroup("Texture Transform", [diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY]);
+op.setPortGroup("Texture Transform", [diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY, cropRepeat]);
 
 
 updateOpacity();
@@ -151,6 +155,7 @@ function updateDiffuseTexture()
 
 function updateDefines()
 {
+    shader.toggleDefine("CROP_TEXCOORDS", cropRepeat.get());
     shader.toggleDefine("COLORIZE_TEXTURE", colorizeTexture.get());
     shader.toggleDefine("TRANSFORMALPHATEXCOORDS", texCoordAlpha.get());
     shader.toggleDefine("DISCARDTRANS", discardTransPxl.get());

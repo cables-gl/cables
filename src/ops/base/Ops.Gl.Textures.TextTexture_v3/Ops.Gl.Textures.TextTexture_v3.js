@@ -169,7 +169,7 @@ function refresh()
     let i = 0;
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     txt = (text.get() + "").replace(/<br>/g, "\n");
-    const strings = txt.split("\n");
+    let strings = txt.split("\n");
     let posy = 0;
 
     needsRefresh = false;
@@ -200,33 +200,51 @@ function refresh()
     else
     {
         let found = true;
-        // const newStrings = [];
+        const newStrings = [];
 
-        const strings = txt.split("\n");
-
-        while (found)
+        let count = 0;
+        if (texWidth.get() > 128)
         {
-            found = false;
-            let newString = "";
-
-            for (let i = 0; i < strings.length; i++)
+            while (found)
             {
-                let sumWidth = 0;
-                const words = strings[i].split(" ");
-
-                for (let j = 0; j < words.length; j++)
+                count++;
+                if (count > 100)
                 {
-                    sumWidth += ctx.measureText(words[j]).width;
-
-                    if (sumWidth > texWidth.get())
-                    {
-                        found = true;
-                        newString += "\n" + words[j] + " ";
-                        // new line...
-                    }
-
-                    newString += words[j] + " ";
+                    found = false;
+                    break;
                 }
+
+                strings = txt.split("\n");
+                found = false;
+                let newString = "";
+
+
+                for (let i = 0; i < strings.length; i++)
+                {
+                    let sumWidth = 0;
+                    const words = strings[i].split(" ");
+
+                    for (let j = 0; j < words.length; j++)
+                    {
+                        if (words[j] == "") continue;
+                        sumWidth += ctx.measureText(words[j] + " ").width;
+
+                        if (sumWidth > texWidth.get())
+                        {
+                            found = true;
+                            newString += "\n" + words[j] + " ";
+                            sumWidth = ctx.measureText(words[j] + " ").width;
+                        }
+                        else
+                        {
+                            newString += words[j] + " ";
+                        }
+                    }
+                    newString += "\n";
+                }
+                txt = newString;
+                strings = txt.split("\n");
+                // console.log(strings);
             }
         }
     }
