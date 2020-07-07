@@ -486,7 +486,6 @@ const Context = function (_patch)
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
-            console.log("State.setTexture(), Failing with", type, t, "in slot ", slot);
             this.gl.bindTexture(type || this.gl.TEXTURE_2D, t);
             this._textureslots[slot] = t;
         }

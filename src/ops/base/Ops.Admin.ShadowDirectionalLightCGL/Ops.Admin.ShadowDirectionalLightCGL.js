@@ -83,6 +83,11 @@ const newLight = new CGL.Light(cgl, {
     "castShadow": false,
 });
 
+newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+newLight.createShadowMapShader();
+newLight.createBlurEffect({});
+newLight.createBlurShader();
+
 let updating = false;
 
 function updateBuffers()
@@ -140,14 +145,6 @@ function updateLightParameters(param)
     updateLight = true;
 }
 
-if (inCastShadow.get())
-{
-    const size = Number(inMapSize.get());
-    newLight.createFramebuffer(size, size, {});
-    newLight.createShadowMapShader();
-    newLight.createBlurEffect({});
-    newLight.createBlurShader();
-}
 
 inCastShadow.onChange = function ()
 {
@@ -157,11 +154,14 @@ inCastShadow.onChange = function ()
     const castShadow = inCastShadow.get();
     if (castShadow)
     {
-        const size = Number(inMapSize.get());
-        newLight.createFramebuffer(size, size, {});
-        newLight.createShadowMapShader();
-        newLight.createBlurEffect({});
-        newLight.createBlurShader();
+        if (!newLight.hasFramebuffer())
+        {
+            const size = Number(inMapSize.get());
+            newLight.createFramebuffer(size, size, {});
+            newLight.createShadowMapShader();
+            newLight.createBlurEffect({});
+            newLight.createBlurShader();
+        }
     }
     /* else
     {
@@ -180,7 +180,6 @@ inCastShadow.onChange = function ()
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
 
     updating = false;
-    op.log("end of castShadow onChange");
 };
 
 const lightProjectionMatrix = mat4.create();
@@ -237,7 +236,6 @@ inTrigger.onTriggered = function ()
 
     if (inCastShadow.get())
     {
-        op.log("start renderOasses");
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
@@ -245,19 +243,13 @@ inTrigger.onTriggered = function ()
         // remove light from stack and readd it with shadow map & mvp matrix
         cgl.frameStore.lightStack.pop();
 
-        // light.lightMatrix = lightBiasMVPMatrix;
         newLight.castShadow = inCastShadow.get();
-        // newLight.shadowMap = fb.getTextureColor();
-        // newLight.shadowMapDepth = fb.getTextureDepth();
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
         cgl.frameStore.lightStack.push(newLight);
-        op.log("end renderOasses");
     }
-    // light.lightMatrix = lightBiasMVPMatrix;
-    // op.log(cgl.frameStore.lightStack);
-    outTrigger.trigger();
 
+    outTrigger.trigger();
     cgl.frameStore.lightStack.pop();
 };

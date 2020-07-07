@@ -1,7 +1,7 @@
 
 // FRAGMENT BODY type: DIRECTIONAL count: {{LIGHT_INDEX}}
 #ifdef RECEIVE_SHADOW
-    #ifdef HAS_SHADOW_MAP
+    #ifdef HAS_SHADOW_MAP_{{LIGHT_INDEX}}
             if (MOD_light{{LIGHT_INDEX}}.typeCastShadow.CAST_SHADOW == 1) {
                 vec2 shadowMapLookup{{LIGHT_INDEX}} = shadowCoord{{LIGHT_INDEX}}.xy / shadowCoord{{LIGHT_INDEX}}.w;
                 float shadowMapDepth{{LIGHT_INDEX}} = shadowCoord{{LIGHT_INDEX}}.z  / shadowCoord{{LIGHT_INDEX}}.w;

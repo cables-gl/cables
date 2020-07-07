@@ -161,7 +161,6 @@ TextureEffect.prototype.bind = function ()
 
 TextureEffect.prototype.finish = function ()
 {
-    console.log("TextureEffect.finish() start");
     if (this._textureSource === null)
     {
         Log.log("no base texture set!");
@@ -193,7 +192,6 @@ TextureEffect.prototype.finish = function ()
     }
 
     this.switched = !this.switched;
-    console.log("TextureEffect.finish() end");
 };
 
 TextureEffect.prototype.getCurrentTargetTexture = function ()

@@ -144,11 +144,14 @@ inCastShadow.onChange = function ()
     const castShadow = inCastShadow.get();
     if (castShadow)
     {
-        const size = Number(inMapSize.get());
-        newLight.createFramebuffer(size, size, {});
-        newLight.createShadowMapShader();
-        newLight.createBlurEffect({});
-        newLight.createBlurShader();
+        if (!newLight.hasFramebuffer())
+        {
+            const size = Number(inMapSize.get());
+            newLight.createFramebuffer(size, size, {});
+            newLight.createShadowMapShader();
+            newLight.createBlurEffect({});
+            newLight.createBlurShader();
+        }
     }
 
     newLight.castShadow = castShadow;
@@ -243,7 +246,7 @@ function drawHelpers()
     }
 }
 
-let hasRenderedMapOnce = false;
+const hasRenderedMapOnce = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
@@ -278,7 +281,7 @@ inTrigger.onTriggered = function ()
 
     cgl.frameStore.lightStack.push(newLight);
 
-    if (inCastShadow.get() || !hasRenderedMapOnce)
+    if (inCastShadow.get())
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
@@ -294,7 +297,6 @@ inTrigger.onTriggered = function ()
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
         cgl.frameStore.lightStack.push(newLight);
-        hasRenderedMapOnce = true;
     }
 
 

@@ -257,7 +257,7 @@ function createUniforms(lightsCount)
 function setUniforms(lightStack)
 {
     const receiveShadow = inReceiveShadow.get();
-    let castShadow = false;
+    const castShadow = false;
 
     for (let i = 0; i < lightStack.length; i += 1)
     {
@@ -269,10 +269,16 @@ function setUniforms(lightStack)
             Number(light.castShadow),
         ]);
 
-        shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
 
         if (light.shadowMap)
         {
+            if (!hasShadowMap[i])
+            {
+                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+                hasShadowMap[i] = true;
+            }
+            if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
+
             shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
             shaderModule.setUniformValue("MOD_normalOffset" + i, light.normalOffset);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
@@ -283,17 +289,18 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (!hasShadowMap[i])
-            {
-                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
-                hasShadowMap[i] = true;
-            }
-
             if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
         }
 
         else if (light.shadowCubeMap)
         {
+            if (!hasShadowMap[i])
+            {
+                shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+                hasShadowMap[i] = true;
+            }
+            if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
+
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
                 light.nearFar[0],
                 light.nearFar[1],
@@ -302,18 +309,19 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (!hasShadowMap[i])
-            {
-                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
-                hasShadowMap[i] = true;
-            }
             if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         }
         else
         {
-            if (hasShadowMap[i]) hasShadowMap[i] = false;
+            if (hasShadowMap[i])
+            {
+                if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
+                hasShadowMap[i] = false;
+            }
         }
+        /*
         castShadow = castShadow || light.castShadow;
+
         if (receiveShadow && castShadow)
         {
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.define("HAS_SHADOW_MAP");
@@ -321,7 +329,7 @@ function setUniforms(lightStack)
         else
         {
             if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
-        }
+        } */
     }
 }
 

@@ -1,5 +1,5 @@
 // FRAGMENT BODY type: SPOT count: {{LIGHT_INDEX}}
- #ifdef HAS_SHADOW_MAP
+ #ifdef HAS_SHADOW_MAP_{{LIGHT_INDEX}}
         if (MOD_light{{LIGHT_INDEX}}.typeCastShadow.CAST_SHADOW == 1) {
             vec3 lightDirectionMOD{{LIGHT_INDEX}} = normalize(MOD_light{{LIGHT_INDEX}}.position - MOD_modelPos{{LIGHT_INDEX}}.xyz);
             vec2 shadowMapLookup{{LIGHT_INDEX}} = shadowCoord{{LIGHT_INDEX}}.xy / shadowCoord{{LIGHT_INDEX}}.w;
