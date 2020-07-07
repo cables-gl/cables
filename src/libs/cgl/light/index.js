@@ -48,6 +48,9 @@ function Light(cgl, config)
 
     // * internal config
     this._cgl = cgl;
+    this.state = {
+        "isUpdating": false
+    };
     this._framebuffer = null;
     this._shaderShadowMap = {
         "shader": null,
@@ -145,6 +148,9 @@ Light.prototype.getShadowMapDepth = function ()
 
 Light.prototype.createFramebuffer = function (width, height, options)
 {
+    console.log("createFramebuffer() start");
+    this.state.isUpdating = true;
+
     if (this.hasFramebuffer()) this._framebuffer.delete();
 
     const fbWidth = width || 512;
@@ -202,6 +208,9 @@ Light.prototype.createFramebuffer = function (width, height, options)
 
         this._cubemap.initializeCubemap();
     }
+
+    this.state.isUpdating = false;
+    console.log("createFramebuffer() end");
 };
 
 Light.prototype.setFramebufferSize = function (size)
@@ -212,6 +221,8 @@ Light.prototype.setFramebufferSize = function (size)
 Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 {
     if (this.hasShadowMapShader()) return;
+
+    this.state.isUpdating = true;
 
     this._shaderShadowMap.shader = new CGL.Shader(this._cgl, "shadowPass" + this.type.charAt(0).toUpperCase() + this.type.slice(1));
     this._shaderShadowMap.shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -242,11 +253,14 @@ Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
         this._shaderShadowMap.shader.enableExtension("GL_OES_texture_half_float");
         this._shaderShadowMap.shader.enableExtension("GL_OES_texture_half_float_linear");
     }
+
+    this.state.isUpdating = false;
 };
 
 Light.prototype.createBlurEffect = function (options)
 {
     if (this.type === "point") return;
+    this.state.isUpdating = true;
     if (this.hasBlurEffect()) this._effectBlur.delete();
 
     this._effectBlur = new CGL.TextureEffect(
@@ -260,12 +274,20 @@ Light.prototype.createBlurEffect = function (options)
             options,
         ),
     );
+    this.state.isUpdating = false;
 };
 
 Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 {
-    if (this.hasBlurShader()) return;
+    console.log("createBlurShader() start");
+    if (this.hasBlurShader())
+    {
+        console.log("createBlurShader() earlyExit");
+        return;
+    }
     if (this.type === "point") return; // TODO: add cubemap convolution
+
+    this.state.isUpdating = true;
 
     const vShader = vertexShader || this.getBlurPassVertexShader();
     const fShader = fragmentShader || this.getBlurPassFragmentShader();
@@ -276,10 +298,13 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
     this._shaderBlur.uniforms.XY = new CGL.Uniform(this._shaderBlur.shader, "2f", "inXY", vec2.create());
     this._shaderBlur.shader.offScreenPass = true;
+    console.log("createBlurShader() end");
+    this.state.isUpdating = false;
 };
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
+    if (this.state.isUpdating) return;
     if (this._cgl.frameStore.shadowPass) return;
 
     this._cgl.pushCullFace(true);
@@ -341,7 +366,9 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._cgl.pushViewMatrix();
     this._cgl.pushPMatrix();
 
+    console.log("renderShadowPass() before framebuffer.renderStart");
     this._framebuffer.renderStart(this._cgl);
+    console.log("renderShadowPass() after framebuffer.renderStart");
 
     // * create MVP matrices
     mat4.copy(this._cgl.mMatrix, this._shaderShadowMap.matrices.modelMatrix);
@@ -364,9 +391,9 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._cgl.gl.clear(this._cgl.gl.DEPTH_BUFFER_BIT | this._cgl.gl.COLOR_BUFFER_BIT);
 
     if (renderFunction) renderFunction(); // * e.g. op.trigger();
-
+    console.log("renderShadowPass() before framebuffer.renderEnd");
     this._framebuffer.renderEnd(this._cgl);
-
+    console.log("renderShadowPass() after framebuffer.renderEnd");
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
@@ -382,15 +409,17 @@ Light.prototype.renderBlurPass = function (blurAmount)
     this._effectBlur.startEffect();
 
     this._effectBlur.bind();
-    this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
 
+    console.log("renderBlurPass() failing here before first bind?");
+    this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
+    console.log("renderBlurPass() failing here after first bind?");
     this._shaderBlur.uniforms.XY.setValue([blurAmount, 0]);
     this._effectBlur.finish();
 
     this._effectBlur.bind();
-
+    console.log("renderBlurPass() failing here before second bind?");
     this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
-
+    console.log("renderBlurPass() failing here after second bind?");
     this._shaderBlur.uniforms.XY.setValue([0, blurAmount]);
 
     this._effectBlur.finish();

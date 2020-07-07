@@ -120,28 +120,10 @@ const newLight = new CGL.Light(cgl, {
     "castShadow": false,
 });
 
-if (inCastShadow.get())
-{
-    const size = Number(inMapSize.get());
-    newLight.createFramebuffer(size, size, {});
-    newLight.createShadowMapShader();
-    newLight.createBlurEffect({});
-    newLight.createBlurShader();
-}
-
-
-const inLight = {
-    "position": positionIn,
-    "conePointAt": pointAtIn,
-    "color": colorIn,
-    "specular": colorSpecularIn,
-    "intensity": inIntensity,
-    "radius": inRadius,
-    "falloff": inFalloff,
-    "cosConeAngle": inConeAngle,
-    "cosConeAngleInner": inConeAngleInner,
-    "spotExponent": inSpotExponent
-};
+newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+newLight.createShadowMapShader();
+newLight.createBlurEffect({});
+newLight.createBlurShader();
 
 let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
@@ -154,7 +136,7 @@ function updateLightParameters()
     updateLight = true;
 }
 
-newLight.createProjectionMatrix(null, inNear.get(), inFar.get(), inLight.cosConeAngle.get());
+newLight.createProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
 
 inCastShadow.onChange = function ()
 {
@@ -229,22 +211,6 @@ inMapSize.onChange = function ()
     updating = false;
 };
 
-
-/*
-const lightProjectionMatrix = mat4.create();
-
-function updateProjectionMatrix() {
-        mat4.perspective(
-        lightProjectionMatrix,
-        //CGL.DEG2RAD * inFOV.get(),
-        -2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
-        1,
-        inNear.get(),
-        inFar.get()
-    );
-}
-*/
-
 inNear.onChange = inFar.onChange = function ()
 {
     newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
@@ -277,6 +243,7 @@ function drawHelpers()
     }
 }
 
+let hasRenderedMapOnce = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
@@ -292,7 +259,7 @@ inTrigger.onTriggered = function ()
         newLight.cosConeAngleInner = Math.cos(CGL.DEG2RAD * inConeAngleInner.get());
         newLight.cosConeAngle = Math.cos(CGL.DEG2RAD * inConeAngle.get());
         newLight.spotExponent = inSpotExponent.get();
-        newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inLight.cosConeAngle.get());
+        newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
     }
 
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
@@ -311,23 +278,23 @@ inTrigger.onTriggered = function ()
 
     cgl.frameStore.lightStack.push(newLight);
 
-    if (inCastShadow.get())
+    if (inCastShadow.get() || !hasRenderedMapOnce)
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
+
         // remove light from stack and readd it with shadow map & mvp matrix
         cgl.frameStore.lightStack.pop();
 
-        // light.lightMatrix = lightBiasMVPMatrix;
         newLight.castShadow = inCastShadow.get();
-        // newLight.shadowMap = fb.getTextureColor();
-        // newLight.shadowMapDepth = fb.getTextureDepth();
+
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
         cgl.frameStore.lightStack.push(newLight);
+        hasRenderedMapOnce = true;
     }
 
 

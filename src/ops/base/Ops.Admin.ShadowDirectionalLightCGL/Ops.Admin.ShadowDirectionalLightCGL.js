@@ -163,10 +163,10 @@ inCastShadow.onChange = function ()
         newLight.createBlurEffect({});
         newLight.createBlurShader();
     }
-    else
+    /* else
     {
 
-    }
+    } */
     newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
@@ -180,6 +180,7 @@ inCastShadow.onChange = function ()
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
 
     updating = false;
+    op.log("end of castShadow onChange");
 };
 
 const lightProjectionMatrix = mat4.create();
@@ -236,6 +237,7 @@ inTrigger.onTriggered = function ()
 
     if (inCastShadow.get())
     {
+        op.log("start renderOasses");
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
@@ -251,6 +253,7 @@ inTrigger.onTriggered = function ()
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
         cgl.frameStore.lightStack.push(newLight);
+        op.log("end renderOasses");
     }
     // light.lightMatrix = lightBiasMVPMatrix;
     // op.log(cgl.frameStore.lightStack);

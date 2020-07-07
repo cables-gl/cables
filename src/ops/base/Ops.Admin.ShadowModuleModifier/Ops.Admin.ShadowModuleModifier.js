@@ -282,13 +282,14 @@ function setUniforms(lightStack)
                 light.shadowBias
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
-            // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
 
             if (!hasShadowMap[i])
             {
+                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
-            shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
+
+            if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
         }
 
         else if (light.shadowCubeMap)
@@ -303,9 +304,10 @@ function setUniforms(lightStack)
 
             if (!hasShadowMap[i])
             {
+                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
-            shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         }
         else
         {

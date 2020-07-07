@@ -352,9 +352,11 @@ Framebuffer2.prototype.renderEnd = function ()
     {
         for (let i = 0; i < this._numRenderBuffers; i++)
         {
+            console.log("renderEnd fb bindTexture methods before");
             this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex);
             this._colorTextures[i].updateMipMap();
             this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+            console.log("renderEnd fb bindTexture methods after");
         }
     }
 };
