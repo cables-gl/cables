@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1593236765771
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1594107151238
         }
     ],
     "authorName": "pandur",
@@ -17,5 +22,8 @@
             }
         ],
         "name": "Ops.Vars.VarSetObject_v2"
-    }
+    },
+    "coreLibs": [
+        "vargetset"
+    ]
 }

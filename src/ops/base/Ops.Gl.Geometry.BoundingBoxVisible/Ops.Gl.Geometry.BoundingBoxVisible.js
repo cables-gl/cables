@@ -106,11 +106,15 @@ function lineToScreen(posA, posB)
     vec3.transformMat4(pos, posA, m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
+    if (pos[2] > 0.0) return false;
+
     const x1 = (trans[0] * vp[2] / 2) + vp[2] / 2;
     const y1 = (trans[1] * vp[3] / 2) + vp[3] / 2;
 
     vec3.transformMat4(pos, posB, m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
+
+    if (pos[2] > 0.0) return false;
 
     const x2 = (trans[0] * vp[2] / 2) + vp[2] / 2;
     const y2 = (trans[1] * vp[3] / 2) + vp[3] / 2;

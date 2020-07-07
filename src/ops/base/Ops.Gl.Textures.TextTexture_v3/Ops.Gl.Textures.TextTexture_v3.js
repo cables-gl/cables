@@ -197,6 +197,39 @@ function refresh()
         }
         while (maxWidth > ctx.canvas.width || maxHeight > ctx.canvas.height);
     }
+    else
+    {
+        let found = true;
+        // const newStrings = [];
+
+        const strings = txt.split("\n");
+
+        while (found)
+        {
+            found = false;
+            let newString = "";
+
+            for (let i = 0; i < strings.length; i++)
+            {
+                let sumWidth = 0;
+                const words = strings[i].split(" ");
+
+                for (let j = 0; j < words.length; j++)
+                {
+                    sumWidth += ctx.measureText(words[j]).width;
+
+                    if (sumWidth > texWidth.get())
+                    {
+                        found = true;
+                        newString += "\n" + words[j] + " ";
+                        // new line...
+                    }
+
+                    newString += words[j] + " ";
+                }
+            }
+        }
+    }
 
     if (valign.get() == "center")
     {
