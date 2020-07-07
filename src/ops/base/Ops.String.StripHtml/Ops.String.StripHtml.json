@@ -8,5 +8,20 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1593242178355
+    "created": 1593242178355,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StripHtml"
+    }
 }
