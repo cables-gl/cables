@@ -159,14 +159,14 @@ function createModuleShaders(lightStack)
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
-        "priority": 5,
+        "priority": -2,
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
 
     shaderModule.addModule({
         "name": "MODULE_COLOR",
-        "priority": 5,
+        "priority": -2,
         "title": op.objName,
         "srcHeadFrag": srcHeadFrag,
         "srcBodyFrag": srcBodyFrag,
@@ -199,7 +199,7 @@ algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(
 
 
 const hasShadowMap = [];
-
+const hasShadowCubemap = [];
 function removeUniforms()
 {
     for (let i = 0; i < STATE.lastLength; i += 1)
@@ -237,6 +237,7 @@ function createUniforms(lightsCount)
         ], "frag");
 
         hasShadowMap[i] = false;
+        hasShadowCubemap[i] = false;
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "vert");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "vert");
         shaderModule.addUniform(light.type !== "point" ? "t" : "tc", light.type !== "point" ? "MOD_shadowMap" + i : "MOD_shadowMapCube" + i, 0, null, null, null, null, null, null, "frag");
@@ -254,6 +255,7 @@ function createUniforms(lightsCount)
 
 function setUniforms(lightStack)
 {
+    if (STATE.updating) return;
     const receiveShadow = inReceiveShadow.get();
     const castShadow = false;
 
@@ -272,8 +274,8 @@ function setUniforms(lightStack)
         {
             if (!hasShadowMap[i])
             {
-                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
+                hasShadowCubemap[i] = false;
             }
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
 
@@ -290,11 +292,12 @@ function setUniforms(lightStack)
             if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
         }
 
-        else if (light.shadowCubeMap)
+        if (light.shadowCubeMap)
         {
-            if (!hasShadowMap[i])
+            if (!hasShadowCubemap[i])
             {
-                hasShadowMap[i] = true;
+                hasShadowCubemap[i] = true;
+                hasShadowMap[i] = false;
             }
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
 
@@ -306,17 +309,20 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (hasShadowMap[i])
-            {
-                shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-            }
+            if (hasShadowCubemap[i]) shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         }
+
         else
         {
             if (hasShadowMap[i])
             {
                 if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
                 hasShadowMap[i] = false;
+            }
+            if (hasShadowCubemap[i])
+            {
+                if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
+                hasShadowCubemap[i] = false;
             }
         }
     }
@@ -351,7 +357,6 @@ inTrigger.onTriggered = () =>
     if (STATE.updating)
     {
         outTrigger.trigger();
-        op.log("state.updating");
         return;
     }
     if (!inCastShadow.get())
