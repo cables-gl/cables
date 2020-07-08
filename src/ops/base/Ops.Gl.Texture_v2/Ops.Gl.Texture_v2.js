@@ -68,6 +68,7 @@ function reloadSoon(nocache)
 function realReload(nocache)
 {
     if (!active.get()) return;
+    // if (filename.get() === null) return;
     if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get());
 
     let url = op.patch.getFilePath(String(filename.get()));

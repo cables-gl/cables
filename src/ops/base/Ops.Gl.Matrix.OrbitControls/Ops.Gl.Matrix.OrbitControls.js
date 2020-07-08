@@ -453,11 +453,11 @@ function bind()
     element.addEventListener("mouseleave", onMouseUp);
     element.addEventListener("mouseenter", onMouseEnter);
     element.addEventListener("contextmenu", function (e) { e.preventDefault(); });
-    element.addEventListener("wheel", onMouseWheel);
+    element.addEventListener("wheel", onMouseWheel, { "passive": true });
 
-    element.addEventListener("touchmove", ontouchmove);
-    element.addEventListener("touchstart", ontouchstart);
-    element.addEventListener("touchend", ontouchend);
+    element.addEventListener("touchmove", ontouchmove, { "passive": true });
+    element.addEventListener("touchstart", ontouchstart, { "passive": true });
+    element.addEventListener("touchend", ontouchend, { "passive": true });
 }
 
 function unbind()

@@ -125,7 +125,7 @@ function updateArea()
 function addListener()
 {
     if (!listenerElement)updateArea();
-    listenerElement.addEventListener("wheel", onMouseWheel);
+    listenerElement.addEventListener("wheel", onMouseWheel, { "passive": true });
 }
 
 function removeListener()

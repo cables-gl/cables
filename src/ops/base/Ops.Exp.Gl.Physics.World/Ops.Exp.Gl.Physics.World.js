@@ -96,7 +96,7 @@ function setup()
 
 function draw()
 {
-    cgl.pushDepthTest(false);
+    // cgl.pushDepthTest(false);
 
 
     for (let i = 0; i < world.bodies.length; i++)
@@ -129,7 +129,7 @@ function draw()
         cgl.popModelMatrix();
     }
 
-    cgl.popDepthTest();
+    // cgl.popDepthTest();
 }
 
 
