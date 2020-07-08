@@ -2,14 +2,12 @@ const
     exec = op.inTrigger("Exec"),
     inName = op.inString("Name", ""),
     inMass = op.inValue("Mass", 0),
-    // inRadius = op.inValue("Radius", 1),
     sizeX = op.inValue("sizeX", 1),
     sizeY = op.inValue("sizeY", 1),
     sizeZ = op.inValue("sizeZ", 1),
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
-    // outRadius = op.outValue("Out Radius"),
     outX = op.outValue("X"),
     outY = op.outValue("Y"),
     outZ = op.outValue("Z"),
@@ -22,6 +20,7 @@ const vec = vec3.create();
 const q = quat.create();
 const empty = vec3.create();
 const trMat = mat4.create();
+const scale = vec3.create();
 
 let lastWorld = null;
 let collided = false;
@@ -40,14 +39,14 @@ inReset.onTriggered = function ()
 };
 
 exec.onLinkChanged =
-inName.onChange =
-op.onDelete =
-function ()
-{
-    if (body && lastWorld)lastWorld.removeBody(body);
-    body = null;
-    lastWorld = null;
-};
+    inName.onChange =
+    op.onDelete =
+    function ()
+    {
+        if (body && lastWorld)lastWorld.removeBody(body);
+        body = null;
+        lastWorld = null;
+    };
 
 function setup(modelScale)
 {
@@ -57,14 +56,12 @@ function setup(modelScale)
 
     if (body)world.removeBody(body);
 
-
     // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
     shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
 
     body = new CANNON.Body({
         "name": "test!!",
         "mass": inMass.get(), // kg
-        //   position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
         "shape": shape
     });
 
@@ -78,12 +75,8 @@ function setup(modelScale)
 
     lastWorld = world;
     needSetup = false;
-    // outRadius.set(inRadius.get());
     console.log("setup");
 }
-
-
-const scale = vec3.create();
 
 function getScaling(mat)
 {
@@ -92,7 +85,6 @@ function getScaling(mat)
     const m33 = mat[10];
     return Math.hypot(m31, m32, m33);
 }
-
 
 function render()
 {
@@ -103,23 +95,7 @@ function render()
     outHit.set(body.raycastHit);
 
     const staticPos = inMass.get() == 0;
-
     const modelScale = getScaling(cgl.mMatrix);
-    // if(shape.radius!=inRadius.get()*modelScale) setup(modelScale);
-    // const r = inRadius.get() * modelScale;
-    // if (shape.radius != r)
-    // {
-    //     body.shapes.length = 0;// removeShape(shape);
-
-    //     shape.radius = r;
-    //     body.addShape(shape);
-
-    //     // shape.updateBoundingSphereRadius();
-    //     // console.log(shape.radius);
-    //     body.updateBoundingRadius();
-    //     // body.computeAABB();
-    // }
-
 
     if (staticPos)
     {
@@ -152,14 +128,6 @@ function render()
         mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
     }
 
-    // if (doRender.get())wire.render(cgl, inRadius.get() * 2);
-    // if (CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
-    // {
-    // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-    // CABLES.GL_MARKER.drawSphere(op, inRadius.get());
-    // }
-
-
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
@@ -171,7 +139,6 @@ function render()
     }
 
     CABLES.physicsCurrentBody = body;
-
 
     next.trigger();
 
