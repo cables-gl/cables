@@ -601,6 +601,10 @@ Patch.prototype.exec = function (e)
     {
         const startFrameTime = CABLES.now();
         this.renderFrame();
+
+        this._perf._lastFrameTime = CABLES.now();
+        this._perf._fpsFrameCount++;
+
         this._perf._fpsMsCount += CABLES.now() - startFrameTime;
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
@@ -634,8 +638,6 @@ Patch.prototype.exec = function (e)
         }
     }
 
-    this._perf._lastFrameTime = CABLES.now();
-    this._perf._fpsFrameCount++;
 
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
