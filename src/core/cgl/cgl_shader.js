@@ -520,6 +520,7 @@ Shader.prototype.compile = function ()
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i]._structName)
         {
+            console.log("adding uniform", this._uniforms[i]);
             const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;

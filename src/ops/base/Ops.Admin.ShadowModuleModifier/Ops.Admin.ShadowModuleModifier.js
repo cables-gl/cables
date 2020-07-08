@@ -159,14 +159,14 @@ function createModuleShaders(lightStack)
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
-        "priority": -2,
+        "priority": 5,
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
 
     shaderModule.addModule({
         "name": "MODULE_COLOR",
-        "priority": -2,
+        "priority": 5,
         "title": op.objName,
         "srcHeadFrag": srcHeadFrag,
         "srcBodyFrag": srcBodyFrag,
