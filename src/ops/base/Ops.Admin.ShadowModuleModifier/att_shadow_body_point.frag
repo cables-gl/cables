@@ -13,7 +13,7 @@
             // float bias{{LIGHT_INDEX}} = clamp(MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, 0., 1.);
             float lambert{{LIGHT_INDEX}} = clamp(dot(lightDirectionMOD{{LIGHT_INDEX}}, normalize(MOD_normal{{LIGHT_INDEX}})), 0., 1.);
             float bias{{LIGHT_INDEX}} = clamp(MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS * tan(acos(lambert{{LIGHT_INDEX}})), 0., 0.1);
-            vec2 shadowMapSample{{LIGHT_INDEX}} = textureCube(MOD_shadowMap{{LIGHT_INDEX}}, -lightDirectionMOD{{LIGHT_INDEX}}).rg;
+            vec2 shadowMapSample{{LIGHT_INDEX}} = textureCube(MOD_shadowMapCube{{LIGHT_INDEX}}, -lightDirectionMOD{{LIGHT_INDEX}}).rg;
 
 
 
@@ -23,7 +23,7 @@
             #endif
             #ifdef MODE_PCF
                  col.rgb *= ShadowFactorPointPCF(
-                    MOD_shadowMap{{LIGHT_INDEX}},
+                    MOD_shadowMapCube{{LIGHT_INDEX}},
                     lightDirectionMOD{{LIGHT_INDEX}},
                     shadowMapDepth{{LIGHT_INDEX}},
                     cameraNear{{LIGHT_INDEX}},
@@ -40,7 +40,7 @@
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= ShadowFactorPointPoisson(MOD_shadowMap{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
+                 col.rgb *= ShadowFactorPointPoisson(MOD_shadowMapCube{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
             #endif
 
             #ifdef MODE_VSM

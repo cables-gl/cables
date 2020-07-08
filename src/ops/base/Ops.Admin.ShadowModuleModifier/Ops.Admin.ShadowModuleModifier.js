@@ -209,6 +209,7 @@ function removeUniforms()
         shaderModule.removeUniform("MOD_light" + i + ".shadowProperties");
         shaderModule.removeUniform("MOD_light" + i + ".shadowStrength");
         shaderModule.removeUniform("MOD_shadowMap" + i);
+        shaderModule.removeUniform("MOD_shadowMapCube" + i);
         shaderModule.removeUniform("MOD_normalOffset" + i);
         shaderModule.removeUniform("MOD_lightMatrix" + i);
         shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
@@ -238,7 +239,7 @@ function createUniforms(lightsCount)
         hasShadowMap[i] = false;
         shaderModule.addUniform("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null, null, null, null, "vert");
         shaderModule.addUniform("f", "MOD_normalOffset" + i, 0, null, null, null, null, null, null, "vert");
-        shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
+        shaderModule.addUniform(light.type !== "point" ? "t" : "tc", light.type !== "point" ? "MOD_shadowMap" + i : "MOD_shadowMapCube" + i, 0, null, null, null, null, null, null, "frag");
     }
 
     if (lightsCount > 0)
@@ -293,7 +294,6 @@ function setUniforms(lightStack)
         {
             if (!hasShadowMap[i])
             {
-                // shaderModule.addUniform(light.type !== "point" ? "t" : "tc", "MOD_shadowMap" + i, 0, null, null, null, null, null, null, "frag");
                 hasShadowMap[i] = true;
             }
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
@@ -306,7 +306,10 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            if (hasShadowMap[i])
+            {
+                shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            }
         }
         else
         {
@@ -316,17 +319,6 @@ function setUniforms(lightStack)
                 hasShadowMap[i] = false;
             }
         }
-        /*
-        castShadow = castShadow || light.castShadow;
-
-        if (receiveShadow && castShadow)
-        {
-            if (!shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.define("HAS_SHADOW_MAP");
-        }
-        else
-        {
-            if (shaderModule.hasDefine("HAS_SHADOW_MAP")) shaderModule.removeDefine("HAS_SHADOW_MAP");
-        } */
     }
 }
 
@@ -356,7 +348,12 @@ const _tempCamPosMatrix = mat4.create();
 
 inTrigger.onTriggered = () =>
 {
-    if (STATE.updating) return;
+    if (STATE.updating)
+    {
+        outTrigger.trigger();
+        op.log("state.updating");
+        return;
+    }
     if (!inCastShadow.get())
     {
         if (!cgl.frameStore.shadowPass)

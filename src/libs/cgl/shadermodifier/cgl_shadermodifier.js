@@ -40,7 +40,7 @@ class ShaderModifier
             this._updateDefinesShader(this._boundShader.shader);
             this._updateUniformsShader(this._boundShader.shader);
 
-            console.log("copied shader...", this._boundShader.shader);
+            // console.log("copied shader...", this._boundShader.shader);
         }
 
         if (this._changedDefines) this._updateDefines();
