@@ -2,7 +2,7 @@ name: 'nightly merge'
 
 on:
   schedule:
-    - cron:  '40 16 * * *'
+    - cron:  '0 3 * * *'
 
 jobs:
   nightly-merge:
