@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: docs
 
 on:
@@ -57,3 +58,28 @@ jobs:
       with:
         args: deploy --dir=doc/gitbook/_book --prod
         secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
+=======
+name: 'Nightly Merge'
+
+on:
+  schedule:
+    - cron:  '20 14 * * *'
+
+jobs:
+  nightly-merge:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: Nightly Merge
+      uses: robotology/gh-action-nightly-merge@v1.2.0
+      with:
+        stable_branch: 'develop'
+        development_branch: 'nightly'
+        allow_ff: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+>>>>>>> develop
