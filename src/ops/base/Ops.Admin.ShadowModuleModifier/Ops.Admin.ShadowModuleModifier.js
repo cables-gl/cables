@@ -200,6 +200,8 @@ algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(
 
 const hasShadowMap = [];
 const hasShadowCubemap = [];
+const prevLightTypes = [];
+
 function removeUniforms()
 {
     for (let i = 0; i < STATE.lastLength; i += 1)
@@ -221,6 +223,8 @@ function removeUniforms()
         shaderModule.removeUniform("MOD_camPos");
     }
     hasShadowMap.length = 0;
+    hasShadowCubemap.length = 0;
+    prevLightTypes.length = 0;
 }
 
 function createUniforms(lightsCount)
@@ -262,13 +266,14 @@ function setUniforms(lightStack)
     for (let i = 0; i < lightStack.length; i += 1)
     {
         const light = lightStack[i];
+
         if (light.type === "ambient") continue;
+
         shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
         shaderModule.setUniformValue("MOD_light" + i + ".typeCastShadow", [
             LIGHT_TYPES[light.type],
             Number(light.castShadow),
         ]);
-
 
         if (light.shadowMap)
         {
@@ -277,7 +282,10 @@ function setUniforms(lightStack)
                 hasShadowMap[i] = true;
                 hasShadowCubemap[i] = false;
             }
-            if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
+            if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i))
+            {
+                shaderModule.define("HAS_SHADOW_MAP_" + i, true);
+            }
 
             shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
             shaderModule.setUniformValue("MOD_normalOffset" + i, light.normalOffset);
@@ -290,6 +298,7 @@ function setUniforms(lightStack)
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
             if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
+            continue;
         }
 
         if (light.shadowCubeMap)
@@ -299,6 +308,7 @@ function setUniforms(lightStack)
                 hasShadowCubemap[i] = true;
                 hasShadowMap[i] = false;
             }
+
             if (!shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.define("HAS_SHADOW_MAP_" + i, "");
 
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
@@ -309,22 +319,32 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
+            if (cgl.frameStore.shadowPass) op.log("Yup im here also in shadowpass");
             if (hasShadowCubemap[i]) shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            continue;
         }
 
         else
         {
             if (hasShadowMap[i])
             {
-                if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
+                if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i))
+                {
+                    shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
+                    op.log("yup im here");
+                }
                 hasShadowMap[i] = false;
             }
-            if (hasShadowCubemap[i])
+            else if (hasShadowCubemap[i])
             {
+                op.log("but also here thats weird");
                 if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
                 hasShadowCubemap[i] = false;
             }
+            continue;
         }
+
+        // prevLightTypes[i] = light.type;
     }
 }
 
@@ -343,12 +363,17 @@ inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
+    hasShadowCubemap.length = 0;
+    prevLightTypes.length = 0;
 };
 outTrigger.onLinkChanged = function ()
 {
     if (!outTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
+    hasShadowCubemap.length = 0;
+    prevLightTypes.length = 0;
 };
+
 const _tempCamPosMatrix = mat4.create();
 
 
@@ -387,9 +412,9 @@ inTrigger.onTriggered = () =>
     }
 
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
-
+    cgl.printError("shadowmodule before updateShader");
     updateShader();
-
+    cgl.printError("shadowmodule after updateShader");
 
     if (cgl.frameStore.lightStack)
     {
@@ -399,6 +424,7 @@ inTrigger.onTriggered = () =>
             shaderModule.bind();
         }
     }
+
     outTrigger.trigger();
 
     if (cgl.frameStore.lightStack)

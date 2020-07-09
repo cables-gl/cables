@@ -128,7 +128,7 @@ Cubemap.prototype.initializeCubemap = function ()
                 this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
             }
         }
-        else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA32F, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+        else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
 
         // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
@@ -174,6 +174,8 @@ Cubemap.prototype.getCubemap = function ()
 
 Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 {
+    debugger;
+    this._cgl.printError("beforeRenderCubemap");
     this._cgl.pushShader(shader);
     // uniformLightPos.setValue(light.position);
     // uniformNearFar.setValue([inNear.get(), inFar.get()]);
@@ -190,18 +192,13 @@ Cubemap.prototype.renderCubemap = function (shader, renderFunction)
     } */
     for (let i = 0; i < 6; i += 1) this.renderCubeSide(i, renderFunction);
 
-    /* if (this.cullFaces)
-    {
-        this._cgl.popCullFace();
-        this._cgl.popCullFaceFacing();
-    } */
-
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
 
     this._cgl.resetViewPort();
     this._cgl.popShader();
+    this._cgl.printError("afterRenderCubemap");
 };
 
 Cubemap.prototype.renderCubeSide = function (index, renderFunction)
@@ -211,7 +208,13 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.pushPMatrix();
 
     this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.cubemap, 0);
+    if (this._cgl.printError("renderCubeSide"))
+    {
+        console.log("erroring with framebuvffer", this);
+    }
+    // console.log("cubemao bri", this.cubemap);
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+
 
     this._cgl.gl.clearColor(1, 1, 1, 1);
 
@@ -231,6 +234,8 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
+    this._cgl.printError("renderCubeSideEnd");
+    debugger;
 };
 
 CGL.Cubemap = Cubemap;

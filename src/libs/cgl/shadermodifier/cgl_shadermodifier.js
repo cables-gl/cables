@@ -19,6 +19,7 @@ class ShaderModifier
 
     bind()
     {
+        this._cgl.printError(`modifier: beforebind ${this.type}`);
         const shader = this._cgl.getShader();
         if (!shader) return;
 
@@ -36,7 +37,7 @@ class ShaderModifier
                 };
 
             this._addModulesToShader(this._boundShader.shader);
-            this._modulesChanged = false;
+
             this._updateDefinesShader(this._boundShader.shader);
             this._updateUniformsShader(this._boundShader.shader);
 
@@ -51,27 +52,47 @@ class ShaderModifier
 
         if (this.needsTexturePush)
         {
+            // // * get original textures from shader in stack and insert them at beginning
+            // for (let k = 0; k < this._boundShader.shader._textureStackTexCgl.length; k += 1)
+            // {
+            //     this._textures.unshift([
+            //         this._boundShader.shader._textureStackUni[k],
+            //         this._boundShader.shader._textureStackTexCgl[k],
+            //         this._boundShader.shader._textureStackType[k]
+            //     ]);
+            // }
+
+            // this._boundShader.shader.popTextures();
+            // this._textureStackTexCgl.length =
+            // this._textureStackType.length =
+            // this._textureStackUni.length = 0;
             for (let j = 0; j < this._textures.length; j += 1)
             {
                 const uniformName = this._textures[j][0];
                 const tex = this._textures[j][1];
                 const texType = this._textures[j][2];
+                // pushTexture(uniformName, tex, texType)
 
                 if (this._getUniform(uniformName))
                 {
                     const name = this.getPrefixedName(uniformName);
                     const uni = this._boundShader.shader.getUniform(name);
+                    this._cgl.printError(`modifier: beforetexturepush ${uniformName}`);
                     if (uni) this._boundShader.shader.pushTexture(uni, tex, texType);
+                    this._cgl.printError(`modifier: aftertexturepush ${uniformName}`);
                 }
             }
 
             this.needsTexturePush = false;
             this._textures.length = 0;
         }
+
+        this._modulesChanged = false;
     }
 
     unbind()
     {
+        // this._cgl.printError("modifier: beforeunbind");
         if (this._boundShader) this._cgl.popShader();
         this._boundShader = null;
     }

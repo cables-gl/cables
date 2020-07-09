@@ -117,6 +117,15 @@ if (!newLight.hasFramebuffer())
     newLight.createShadowMapShader();
 }
 
+inTrigger.onLinkChanged = function ()
+{
+    if (!inTrigger.isLinked())
+    {
+        newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+        newLight.createShadowMapShader();
+    }
+};
+
 let updateLight = false;
 
 inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChange = inB.onChange
@@ -156,6 +165,7 @@ else
         "isFloatingPointTexture": true,
         "filter": CGL.Texture.FILTER_LINEAR,
         "wrap": CGL.Texture.WRAP_REPEAT,
+        "name": "cubemapprojection",
     });
 }
 
@@ -237,7 +247,7 @@ inTrigger.onTriggered = function ()
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     newLight.position = position;
 
-    drawHelpers();
+    // drawHelpers();
 
     cgl.frameStore.lightStack.push(newLight);
 

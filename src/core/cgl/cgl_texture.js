@@ -206,7 +206,7 @@ Texture.prototype.setSize = function (w, h)
 
     if (this._cgl.printError("cgltex"))
     {
-        console.log("cgl tex settings", this.options);
+        console.log("cgl tex settings", this);
     }
 
     // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)

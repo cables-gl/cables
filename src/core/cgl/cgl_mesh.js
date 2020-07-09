@@ -585,12 +585,16 @@ Mesh.prototype.render = function (shader)
     //         }
     if (needsBind) this._preBind(shader);
 
+
     shader.bind();
 
     if (shader.bindTextures) shader.bindTextures();
 
+
     // if(needsBind)
+
     this._bind(shader);
+
     if (this.addVertexNumbers) this._setVertexNumbers();
 
     MESH.lastMesh = this;
@@ -610,7 +614,10 @@ Mesh.prototype.render = function (shader)
         else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
     }
     else
-    if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+    if (this._numInstances === 0)
+    {
+        this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+    }
     else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
 
     profileData.profileMeshDraw++;

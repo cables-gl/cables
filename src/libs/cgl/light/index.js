@@ -150,10 +150,24 @@ Light.prototype.createFramebuffer = function (width, height, options)
 {
     this.state.isUpdating = true;
 
-    if (this.hasFramebuffer()) this._framebuffer.delete();
-
     const fbWidth = width || 512;
     const fbHeight = height || 512;
+
+    if (this.type === "point")
+    {
+        this._cubemap = new CGL.Cubemap(this._cgl, {
+            "camPos": this.position,
+            "cullFaces": true,
+            "size": fbWidth,
+        });
+
+        this._cubemap.initializeCubemap();
+        this.state.isUpdating = false;
+        return;
+    }
+
+    if (this.hasFramebuffer()) this._framebuffer.delete();
+
 
     if (options)
     {
@@ -174,7 +188,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
                 {
                     "isFloatingPointTexture": true,
                     "filter": CGL.Texture.FILTER_LINEAR,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+                    "wrap": CGL.Texture.WRAP_REPEAT,
                 },
                 options,
             ),
@@ -190,22 +204,12 @@ Light.prototype.createFramebuffer = function (width, height, options)
                 {
                     "isFloatingPointTexture": true,
                     "filter": CGL.Texture.FILTER_LINEAR,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+                    "wrap": CGL.Texture.WRAP_REPEAT,
+                    "name": this.type
                 },
                 options,
             ),
         );
-    }
-
-    if (this.type === "point")
-    {
-        this._cubemap = new CGL.Cubemap(this._cgl, {
-            "camPos": this.position,
-            "cullFaces": true,
-            "size": fbWidth,
-        });
-
-        this._cubemap.initializeCubemap();
     }
 
     this.state.isUpdating = false;
@@ -299,6 +303,8 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
+    this._cgl.printError(`cgllight: beforerenderpasses ${this.type}`);
+
     if (this.state.isUpdating) return;
     if (this._cgl.frameStore.shadowPass) return;
 
@@ -340,6 +346,7 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
         this.shadowMap = null;
         this.shadowMapDepth = null;
     }
+    this._cgl.printError("cgllight: afterrenderpasses");
 };
 
 Light.prototype.renderShadowPass = function (renderFunction)
