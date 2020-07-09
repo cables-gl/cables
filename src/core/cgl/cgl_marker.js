@@ -188,13 +188,11 @@ export const WireCube = function (cgl)
         points.push(1, -1, 1);
         points.push(1, -1, -1);
 
-
         cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
         cgl.gl.bufferData(cgl.gl.ARRAY_BUFFER, new Float32Array(points), cgl.gl.STATIC_DRAW);
         buffer.itemSize = 3;
         buffer.numItems = points.length / buffer.itemSize;
     }
-
 
     this.render = function (cgl, sizeX, sizeY, sizeZ)
     {

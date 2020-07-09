@@ -62,8 +62,13 @@
             {
                 "type": "1",
                 "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Total Bodies",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.PhysicsBodies"
+        "name": "Ops.Exp.Gl.Physics.PhysicsBodiesArray"
     }
 }

@@ -139,7 +139,9 @@ function realReload(nocache)
             cgl.patch.loading.finished(loadingId);
             // console.log('loaded all');
         };
-        loadImage(i, files[i], nocache, cb);
+
+        if (!files[i]) { if (cb) cb(); }
+        else loadImage(i, files[i], nocache, cb);
     }
 }
 

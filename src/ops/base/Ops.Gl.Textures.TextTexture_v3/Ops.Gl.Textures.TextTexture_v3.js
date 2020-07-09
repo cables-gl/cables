@@ -5,6 +5,7 @@ const
     maximize = op.inValueBool("Maximize Size", true),
     inFontSize = op.inValueFloat("fontSize", 30),
     lineDistance = op.inValueFloat("line distance", 1),
+    limitLines = op.inValueInt("Limit Lines", 0),
     texWidth = op.inValueInt("texture width", 512),
     texHeight = op.inValueInt("texture height", 128),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
@@ -44,6 +45,7 @@ align.onChange =
     border.onChange =
     lineDistance.onChange =
     cachetexture.onChange =
+    limitLines.onChange =
     maximize.onChange = function () { needsRefresh = true; };
 
 texWidth.onChange =
@@ -157,18 +159,12 @@ function refresh()
         ctx.beginPath();
         ctx.lineWidth = "" + border.get();
         ctx.strokeStyle = "white";
-        ctx.rect(
-            0,
-            0,
-            texWidth.get(),
-            texHeight.get()
-        );
+        ctx.rect(0, 0, texWidth.get(), texHeight.get());
         ctx.stroke();
     }
 
     let i = 0;
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
-    txt = (text.get() + "").replace(/<br>/g, "\n");
     let strings = txt.split("\n");
     let posy = 0;
 
@@ -202,50 +198,42 @@ function refresh()
         let found = true;
         const newStrings = [];
 
-        let count = 0;
         if (texWidth.get() > 128)
         {
-            while (found)
+            found = false;
+            let newString = "";
+
+            for (let i = 0; i < strings.length; i++)
             {
-                count++;
-                if (count > 100)
+                if (!strings[i]) continue;
+                let sumWidth = 0;
+                const words = strings[i].split(" ");
+
+                for (let j = 0; j < words.length; j++)
                 {
-                    found = false;
-                    break;
-                }
+                    if (!words[j]) continue;
+                    sumWidth += ctx.measureText(words[j] + " ").width;
 
-                strings = txt.split("\n");
-                found = false;
-                let newString = "";
-
-
-                for (let i = 0; i < strings.length; i++)
-                {
-                    let sumWidth = 0;
-                    const words = strings[i].split(" ");
-
-                    for (let j = 0; j < words.length; j++)
+                    if (sumWidth > texWidth.get())
                     {
-                        if (words[j] == "") continue;
-                        sumWidth += ctx.measureText(words[j] + " ").width;
-
-                        if (sumWidth > texWidth.get())
-                        {
-                            found = true;
-                            newString += "\n" + words[j] + " ";
-                            sumWidth = ctx.measureText(words[j] + " ").width;
-                        }
-                        else
-                        {
-                            newString += words[j] + " ";
-                        }
+                        found = true;
+                        newString += "\n" + words[j] + " ";
+                        sumWidth = ctx.measureText(words[j] + " ").width;
                     }
-                    newString += "\n";
+                    else
+                    {
+                        newString += words[j] + " ";
+                    }
                 }
-                txt = newString;
-                strings = txt.split("\n");
-                // console.log(strings);
+                newString += "\n";
             }
+            txt = newString;
+            strings = txt.split("\n");
+        }
+        if (limitLines.get() > 0 && strings.length > limitLines.get())
+        {
+            strings.length = limitLines.get();
+            strings[strings.length - 1] += "...";
         }
     }
 
