@@ -243,6 +243,10 @@ Uniform.prototype.getShaderType = function ()
 {
     return this.shaderType;
 };
+Uniform.prototype.isStructMember = function ()
+{
+    return !!this._structName;
+};
 Uniform.prototype.resetLoc = function ()
 {
     this._loc = -1;

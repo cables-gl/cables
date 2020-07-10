@@ -297,7 +297,10 @@ function setUniforms(lightStack)
             ]);
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (hasShadowMap[i]) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
+            if (hasShadowMap[i])
+            {
+                if (light.shadowMap.tex) shaderModule.pushTexture("MOD_shadowMap" + i, light.shadowMap.tex);
+            }
             continue;
         }
 

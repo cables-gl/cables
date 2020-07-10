@@ -276,8 +276,8 @@ Shader.prototype.createStructUniforms = function ()
     this._structUniformNamesIndicesVert = [];
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        // * only add uniforms to struct that have a struct name property
-        if (this._uniforms[i]._structName)
+        // * only add uniforms to struct that are a member of a struct
+        if (this._uniforms[i].isStructMember())
         {
             const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
 
@@ -518,7 +518,7 @@ Shader.prototype.compile = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        if (this._uniforms[i].shaderType && !this._uniforms[i]._structName)
+        if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
         {
             console.log("adding uniform", this._uniforms[i]);
             const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
@@ -1035,6 +1035,10 @@ Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4,
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "both";
     return uni;
+};
+Shader.prototype.addUniformStruct = function ()
+{
+
 };
 
 Shader.prototype.hasUniform = function (name)
