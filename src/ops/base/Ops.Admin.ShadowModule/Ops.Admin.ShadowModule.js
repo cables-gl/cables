@@ -1,9 +1,6 @@
 const cgl = op.patch.cgl;
-const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
-const LIGHT_TYPES = { "point": 0, "directional": 1, "spot": 2 };
-
-function clamp(val, min, max)
-{
+const LIGHT_TYPES = { point: 0, directional: 1, spot: 2 };
+function clamp(val, min, max) {
     return Math.min(Math.max(val, min), max);
 }
 
@@ -11,133 +8,258 @@ function clamp(val, min, max)
 const inTrigger = op.inTrigger("Trigger In");
 const inCastShadow = op.inBool("Cast Shadow", true);
 const inReceiveShadow = op.inBool("Receive Shadow", false);
-const algorithms = ["Default", "PCF", "Poisson", "VSM"];
-const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
+const algorithms = ['Default', 'PCF', 'Poisson', 'VSM'];
+const inAlgorithm = op.inSwitch("Algorithm", algorithms, 'Default');
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inSpread = op.inInt("Sample Spread", 250);
 
-inSamples.setUiAttribs({ "greyout": true });
-inSpread.setUiAttribs({ "greyout": true });
+inSamples.setUiAttribs({ greyout: true });
+inSpread.setUiAttribs({ greyout: true });
 
-if (inReceiveShadow.get())
-{
-    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson")
-    {
-        inSamples.setUiAttribs({ "greyout": false });
-        inSpread.setUiAttribs({ "greyout": false });
+if (inReceiveShadow.get()) {
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
     }
-    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default")
-    {
-        inSamples.setUiAttribs({ "greyout": true });
-        inSpread.setUiAttribs({ "greyout": true });
+    else if (inAlgorithm.get() === "VSM" || inAlgorithm.get() === "Default") {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
     }
 }
 
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
-inReceiveShadow.onChange = () =>
-{
-    inAlgorithm.setUiAttribs({ "greyout": !inReceiveShadow.get() });
+inReceiveShadow.onChange = () => {
+    inAlgorithm.setUiAttribs({ greyout: !inReceiveShadow.get() });
     setAlgorithmGreyouts();
     if (shader) shader.toggleDefine("SHADOW_MAP", inReceiveShadow.get());
-};
+}
 
-inAlgorithm.onChange = () =>
-{
-    const current = inAlgorithm.get();
-    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+inAlgorithm.onChange = () => {
+    if (!shader) return;
+    const selectedAlgorithm = inAlgorithm.get();
+    shader.define("MODE_" + selectedAlgorithm.toUpperCase());
+
+    algorithms
+        .filter(alg => alg !== selectedAlgorithm)
+        .forEach(alg => shader.removeDefine("MODE_" + alg.toUpperCase()));
 
     setAlgorithmGreyouts();
-};
+}
 
-function setAlgorithmGreyouts()
-{
-    if (!inReceiveShadow.get())
-    {
-        inSamples.setUiAttribs({ "greyout": true });
-        inSpread.setUiAttribs({ "greyout": true });
+function setAlgorithmGreyouts() {
+    if (!inReceiveShadow.get()) {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
         return;
     }
 
-    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson")
-    {
-        inSamples.setUiAttribs({ "greyout": false });
-        inSpread.setUiAttribs({ "greyout": false });
-    }
-    else
-    {
-        inSamples.setUiAttribs({ "greyout": true });
-        inSpread.setUiAttribs({ "greyout": true });
+    if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson") {
+        inSamples.setUiAttribs({ greyout: false });
+        inSpread.setUiAttribs({ greyout: false });
+    } else {
+        inSamples.setUiAttribs({ greyout: true });
+        inSpread.setUiAttribs({ greyout: true });
     }
 }
 
-inSamples.onChange = () =>
-{
-    shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
-};
+inSamples.onChange = () => {
+    if (shader) shader.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
+}
 
 const outTrigger = op.outTrigger("Trigger Out");
 
 
-const createVertexHead = (n, type) =>
-{
-    if (type === "ambient") return "";
-    if (type === "point") return attachments.shadow_head_point_vert.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "spot") return attachments.shadow_head_spot_vert.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "directional") return attachments.shadow_head_directional_vert.replace(LIGHT_INDEX_REGEX, n);
+const createVertexHead = (n, type) => {
+if (type === "point") return `
+// VERTEX HEAD type: ${type} count: ${n}
+#ifdef SHADOW_MAP
+    OUT vec4 modelPosMOD${n};
+#endif
+`;
+return `
+// VERTEX HEAD type: ${type} count: ${n}
+#ifdef SHADOW_MAP
+    OUT vec4 modelPosMOD${n};
+    UNI float normalOffset${n};
+    UNI mat4 lightMatrix${n};
+    OUT vec4 shadowCoord${n};
+#endif
+`;
 };
 
-const createVertexBody = (n, type) =>
-{
-    if (type === "ambient") return "";
-    if (type === "point") return attachments.shadow_body_point_vert.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "spot") return attachments.shadow_body_spot_vert.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "directional") return attachments.shadow_body_directional_vert.replace(LIGHT_INDEX_REGEX, n);
+const createVertexBody = (n, type) => {
+    if (type === "point") return `
+// VERTEX BODY type: ${type} count: ${n}
+#ifdef SHADOW_MAP
+    modelPosMOD${n} = mMatrix * pos;
+#endif
+`;
+    return `
+#ifdef SHADOW_MAP
+    modelPosMOD${n} = mMatrix*pos;
+    shadowCoord${n} = lightMatrix${n} * (modelPosMOD${n} + vec4(norm, 1) * normalOffset${n});
+#endif
+    `;
 };
 
-const createFragmentHead = (n, type) =>
-{
-    if (type === "ambient") return "";
-    if (type === "point") return attachments.shadow_head_point_frag.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "spot") return attachments.shadow_head_spot_frag.replace(LIGHT_INDEX_REGEX, n);
-    if (type === "directional") return attachments.shadow_head_directional_frag.replace(LIGHT_INDEX_REGEX, n);
+const createFragmentHead = (n, type) => {
+    if (type === "ambient") return ""; //return `UNI Light light${n};`;
+    return `
+    // FRAGMENT HEAD type: ${type} count: ${n}
+    UNI ModLight light${n};
+    IN vec4 modelPosMOD${n};
+    ${type !== "point" ? `
+    #ifdef SHADOW_MAP
+        IN vec4 shadowCoord${n};
+    #endif` :``}
+
+    ${type === "point" ?  `UNI samplerCube shadowMap${n}; \n` : `UNI sampler2D shadowMap${n}; \n`}
+    `;
 };
 
-const createFragmentBody = (n, type) =>
-{
-    if (type === "ambient") return "";
-    let fragmentCode = "";
-    // if (inReceiveShadow.get()) {
-    if (type === "spot")
-    {
-        fragmentCode = fragmentCode.concat(attachments.shadow_body_spot_frag.replace(LIGHT_INDEX_REGEX, n));
+const createFragmentBody = (n, type, shouldCastShadow) => {
+    if (type === "ambient") return '';
+    let fragmentCode = `// FRAGMENT BODY type: ${type} count: ${n}`;
+
+    if (inReceiveShadow.get()) {
+        if (type === "spot") {
+            // NOTE: no slope scaled depth bias because not all materials use lightDirection & lambert factor
+            // float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+            fragmentCode = fragmentCode.concat(`
+    #ifdef SHADOW_MAP
+        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
+            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
+            vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
+            float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
+            float shadowStrength${n} = light${n}.shadowStrength;
+            vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
+            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
+            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+
+            #ifdef MODE_DEFAULT
+                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+            #endif
+
+            #ifdef MODE_PCF
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+            #endif
+
+            #ifdef MODE_POISSON
+                #ifdef WEBGL1
+                    FillPoissonArray();
+                #endif
+
+                 col.rgb *= ShadowFactorPoisson(shadowMap${n}, shadowMapLookup${n}, shadowMapDepth${n}, bias${n});
+            #endif
+
+            #ifdef MODE_VSM
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+            #endif
+        }
+    #endif
+        `);
+        }
+        else if (type === "directional") {
+            fragmentCode = fragmentCode.concat(`
+    #ifdef SHADOW_MAP
+        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
+            vec2 shadowMapLookup${n} = shadowCoord${n}.xy / shadowCoord${n}.w;
+            float shadowMapDepth${n} = shadowCoord${n}.z  / shadowCoord${n}.w;
+            float shadowStrength${n} = light${n}.shadowStrength;
+            vec2 shadowMapSample${n} = texture(shadowMap${n}, shadowMapLookup${n}).rg;
+            float bias${n} = light${n}.shadowProperties.BIAS;
+
+             #ifdef MODE_DEFAULT
+                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+            #endif
+
+            #ifdef MODE_PCF
+                 col.rgb *= ShadowFactorPCF(shadowMap${n}, shadowMapLookup${n}, light${n}.shadowProperties.MAP_SIZE, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+            #endif
+
+            #ifdef MODE_POISSON
+                #ifdef WEBGL1
+                    FillPoissonArray();
+                #endif
+
+                 col.rgb *= ShadowFactorPoisson(shadowMap${n}, shadowMapLookup${n}, shadowMapDepth${n}, bias${n});
+            #endif
+
+            #ifdef MODE_VSM
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+            #endif
+        }
+    #endif
+            `);
+        }
+        else if (type === "point") {
+            fragmentCode = fragmentCode.concat(`
+    #ifdef SHADOW_MAP
+        if (light${n}.typeCastShadow.CAST_SHADOW == 1) {
+            vec3 lightDirectionMOD${n} = normalize(light${n}.position - modelPosMOD${n}.xyz);
+            float shadowStrength${n} = light${n}.shadowStrength;
+
+            float cameraNear${n} = light${n}.shadowProperties.NEAR; // uniforms
+            float cameraFar${n} =  light${n}.shadowProperties.FAR;
+
+            float fromLightToFrag${n} = (length(modelPosMOD${n}.xyz - light${n}.position) - cameraNear${n}) / (cameraFar${n} - cameraNear${n});
+
+            float shadowMapDepth${n} = fromLightToFrag${n};
+            // float bias${n} = clamp(light${n}.shadowProperties.BIAS, 0., 1.);
+            float lambert${n} = clamp(dot(lightDirectionMOD${n}, normal), 0., 1.);
+            float bias${n} = clamp(light${n}.shadowProperties.BIAS * tan(acos(lambert${n})), 0., 0.1);
+            vec2 shadowMapSample${n} = textureCube(shadowMap${n}, -lightDirectionMOD${n}).rg;
+
+
+
+
+            #ifdef MODE_DEFAULT
+                 col.rgb *= ShadowFactorDefault(shadowMapSample${n}.r, shadowMapDepth${n}, bias${n}, shadowStrength${n});
+            #endif
+            #ifdef MODE_PCF
+                 col.rgb *= ShadowFactorPointPCF(
+                    shadowMap${n},
+                    lightDirectionMOD${n},
+                    shadowMapDepth${n},
+                    cameraNear${n},
+                    cameraFar${n},
+                    bias${n},
+                    shadowStrength${n},
+                    modelPosMOD${n}.xyz
+                );
+            #endif
+            #ifdef MODE_POISSON
+                #ifdef WEBGL1
+                    FillPoissonArray();
+                #endif
+
+                 col.rgb *= ShadowFactorPointPoisson(shadowMap${n}, lightDirectionMOD${n}, shadowMapDepth${n}, bias${n});
+            #endif
+
+            #ifdef MODE_VSM
+                 col.rgb *= ShadowFactorVSM(shadowMapSample${n}, light${n}.shadowProperties.BIAS, shadowMapDepth${n}, shadowStrength${n});
+            #endif
+        }
+    #endif
+        `);
+        }
     }
-    else if (type === "directional")
-    {
-        fragmentCode = fragmentCode.concat(attachments.shadow_body_directional_frag.replace(LIGHT_INDEX_REGEX, n));
-    }
-    else if (type === "point")
-    {
-        fragmentCode = fragmentCode.concat(attachments.shadow_body_point_frag.replace(LIGHT_INDEX_REGEX, n));
-    }
-    // }
 
     return fragmentCode;
 };
 
 let lastLength = 0;
 
-function createModuleShaders(lightStack)
-{
+function createModuleShaders(lightStack) {
     if (lightStack.length === lastLength) return;
-    let vertexHead = "";
-    let fragmentHead = "";
-    let vertexBody = "";
-    let fragmentBody = "";
+        let vertexHead = "";
+        let fragmentHead = "";
+        let vertexBody = "";
+        let fragmentBody = "";
 
-    for (let i = 0; i < lightStack.length; i += 1)
-    {
+    for (let i = 0; i < lightStack.length; i += 1) {
         const light = lightStack[i];
         vertexHead = vertexHead.concat(createVertexHead(i, light.type));
         vertexBody = vertexBody.concat(createVertexBody(i, light.type));
@@ -157,8 +279,8 @@ function createModuleShaders(lightStack)
 
 
 let shader = null;
-const vertexModule = null;
-const fragmentModule = null;
+let vertexModule = null;
+let fragmentModule = null;
 
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
@@ -170,88 +292,38 @@ let srcBodyVert = srcBodyVertBase;
 let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
 
+let lightUniforms = [];
+let uniformSpread = null;
+function createUniforms(lightsCount) {
+    if (!shader) return;
+    lightUniforms = [];
 
-const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
-shaderModule.addModule({
-    "name": "MODULE_VERTEX_POSITION",
-    "title": op.objName,
-    "priority": -2,
-    "srcHeadVert": srcHeadVert,
-    "srcBodyVert": srcBodyVert
-});
-
-shaderModule.addModule({
-    "name": "MODULE_COLOR",
-    "priority": -2,
-    "title": op.objName,
-    "srcHeadFrag": srcHeadFrag,
-    "srcBodyFrag": srcBodyFrag,
-});
-
-shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
-shaderModule.toggleDefine("SHADOW_MAP", inReceiveShadow);
-shaderModule.addUniform("f", "MOD_sampleSpread", inSpread);
-shaderModule.addUniform("3f", "MOD_camPos", null);
-
-
-const lightUniforms = [];
-const uniformSpread = null;
-function createUniforms(lightsCount)
-{
-    // if (!shader) return;
-    // lightUniforms = [];
-
-    for (let i = 0; i < lastLength; i += 1)
-    {
-        shaderModule.removeUniform("MOD_light" + i + ".position");
-        shaderModule.removeUniform("MOD_light" + i + ".typeCastShadow");
-        shaderModule.removeUniform("MOD_light" + i + ".shadowProperties");
-        shaderModule.removeUniform("MOD_light" + i + ".shadowStrength");
-        shaderModule.removeUniform("shadowMap" + i);
-        shaderModule.removeUniform("normalOffset" + i);
-        shaderModule.removeUniform("lightMatrix" + i);
-    }
-
-    for (let i = 0; i < lightsCount; i += 1)
-    {
-        shaderModule.addUniform("3f", "MOD_light" + i + ".position", [0, 0, 0]);
-        shaderModule.addUniform("2i", "MOD_light" + i + ".typeCastShadow", [0, 0]);
-        shaderModule.addUniform("4f", "MOD_light" + i + ".shadowProperties", [0, 0, 0, 0]);
-        shaderModule.addUniform("f", "MOD_light" + i + ".shadowStrength", 1);
-        shaderModule.addUniform("t", "shadowMap" + i, 0);
-        shaderModule.addUniform("f", "normalOffset" + i, 0);
-        shaderModule.addUniform("m4", "lightMatrix" + i, mat4.create());
-        /*
+    for (let i = 0; i < lightsCount; i += 1) {
         lightUniforms[i] = null;
-        if (!lightUniforms[i])
-        {
+        if (!lightUniforms[i]) {
             lightUniforms[i] = {
-                "position": new CGL.Uniform(shader, "3f", "light" + i + ".position", [0, 0, 0]),
-                "typeCastShadow": new CGL.Uniform(shader, "2i", "light" + i + ".typeCastShadow", [0, 0]),
+                position: new CGL.Uniform(shader,'3f','light' + i + '.position',[0, 0, 0]),
+                typeCastShadow: new CGL.Uniform(shader, '2i', 'light' + i + '.typeCastShadow', [0, 0]),
 
-                "shadowProperties": new CGL.Uniform(shader, "4f", "light" + i + ".shadowProperties", [0, 0, 0, 0]),
-                "shadowStrength": new CGL.Uniform(shader, "f", "light" + i + ".shadowStrength", 1),
+                shadowProperties: new CGL.Uniform(shader, '4f', 'light' + i + '.shadowProperties', [0,0,0,0]),
+                shadowStrength: new CGL.Uniform(shader, 'f', 'light' + i + '.shadowStrength', 1),
 
-                "shadowMap": null,
+                shadowMap: null,
 
                 // vertex shader
-                "normalOffset": new CGL.Uniform(shader, "f", "normalOffset" + i, 0),
-                "lightMatrix": new CGL.Uniform(shader, "m4", "lightMatrix" + i, mat4.create()),
+                normalOffset:  new CGL.Uniform(shader, 'f', 'normalOffset' + i, 0),
+                lightMatrix:  new CGL.Uniform(shader,'m4', 'lightMatrix' + i, mat4.create()),
             };
         }
-        */
     }
-    lastLength = lightsCount;
-    // if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, "f", "sampleSpread", inSpread);
+    if (!uniformSpread) uniformSpread = new CGL.Uniform(shader, 'f', "sampleSpread", inSpread);
 }
 
-function setUniforms(lightStack)
-{
+function setUniforms(lightStack) {
     const receiveShadow = inReceiveShadow.get();
     let castShadow = false;
 
-    for (let i = 0; i < lightStack.length; i += 1)
-    {
+    for (let i = 0; i < lightStack.length; i += 1) {
         const light = lightStack[i];
         if (light.type === "ambient") continue;
         lightUniforms[i].position.setValue([
@@ -264,8 +336,7 @@ function setUniforms(lightStack)
             light.castShadow,
         ]);
 
-        if (light.shadowMap)
-        {
+        if (light.shadowMap) {
             lightUniforms[i].lightMatrix.setValue(light.lightMatrix);
             lightUniforms[i].normalOffset.setValue(light.normalOffset);
             lightUniforms[i].shadowProperties.setValue([
@@ -276,15 +347,12 @@ function setUniforms(lightStack)
             ]);
             lightUniforms[i].shadowStrength.setValue(light.shadowStrength);
 
-            if (!lightUniforms[i].shadowMap)
-            {
-                lightUniforms[i].shadowMap = new CGL.Uniform(shader, "t", "shadowMap" + i, i);
+            if (!lightUniforms[i].shadowMap) {
+                lightUniforms[i].shadowMap = new CGL.Uniform(shader, 't', 'shadowMap' + i, i);
             }
             shader.pushTexture(lightUniforms[i].shadowMap, light.shadowMap.tex);
-        }
-        else if (light.shadowCubeMap)
-        {
-            lightUniforms[i].shadowProperties.setValue([
+        } else if (light.shadowCubeMap) {
+             lightUniforms[i].shadowProperties.setValue([
                 light.nearFar[0],
                 light.nearFar[1],
                 light.shadowCubeMap.width,
@@ -293,61 +361,50 @@ function setUniforms(lightStack)
 
             lightUniforms[i].shadowStrength.setValue(light.shadowStrength);
 
-            if (!lightUniforms[i].shadowMap)
-            {
-                lightUniforms[i].shadowMap = new CGL.Uniform(shader, "t", "shadowMap" + i, i);
+            if (!lightUniforms[i].shadowMap) {
+                lightUniforms[i].shadowMap = new CGL.Uniform(shader, 't', 'shadowMap' + i, i);
             }
 
             shader.pushTexture(lightUniforms[i].shadowMap, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-        }
-        else
-        {
+        } else {
             if (lightUniforms[i].shadowMap) lightUniforms[i].shadowMap = null;
             if (lightUniforms[i].shadowCubeMap) lightUniforms[i].shadowMap = null;
         }
         castShadow = castShadow || light.castShadow;
-        if (receiveShadow && castShadow)
-        {
-            if (!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
+        if (receiveShadow && castShadow) {
+            if(!shader.hasDefine("SHADOW_MAP")) shader.define("SHADOW_MAP");
         }
-        else
-        {
+        else {
             if (!shader.hasDefine("SHADOW_MAP")) shader.removeDefine("SHADOW_MAP");
         }
     }
+
 }
 
 
-function updateShader()
-{
-    if (cgl.frameStore.lightStack.length !== lastLength)
-    {
-        createUniforms(cgl.frameStore.lightStack.length);
-    }
-    /*
+function updateShader() {
     const currentShader = cgl.getShader();
 
-    if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength)
-    {
+    if (currentShader && currentShader != shader || cgl.frameStore.lightStack.length !== lastLength) {
+
         removeModulesAndDefines();
         shader = currentShader;
         createModuleShaders(cgl.frameStore.lightStack);
-        if (!shader.hasDefine("SHADOW_MAP"))
-        {
+        if (!shader.hasDefine("SHADOW_MAP")) {
             vertexModule = shader.addModule({
-                "name": "MODULE_VERTEX_POSITION",
-                "title": op.objName,
-                "priority": -2,
-                "srcHeadVert": srcHeadVert,
-                "srcBodyVert": srcBodyVert
+                name: 'MODULE_VERTEX_POSITION',
+                title: op.objName,
+                priority:-2,
+                srcHeadVert: srcHeadVert,
+                srcBodyVert: srcBodyVert
             });
 
             fragmentModule = shader.addModule({
-                "name": "MODULE_COLOR",
-                "priority": -2,
-                "title": op.objName,
-                "srcHeadFrag": srcHeadFrag,
-                "srcBodyFrag": srcBodyFrag,
+                name: "MODULE_COLOR",
+                priority: -2,
+                title: op.objName,
+                srcHeadFrag:srcHeadFrag,
+                srcBodyFrag:srcBodyFrag,
             }, vertexModule);
             shader.define("SHADOW_MAP");
             shader.define("MODE_" + inAlgorithm.get().toUpperCase());
@@ -355,77 +412,51 @@ function updateShader()
         }
     }
 
-
-    if (shader)
-    {
+    if (shader) {
         setUniforms(cgl.frameStore.lightStack);
     }
-    */
 }
 
-function removeModulesAndDefines()
-{
-    if (shader && vertexModule)
-    {
-        shader.removeDefine("SHADOW_MAP");
+function removeModulesAndDefines() {
+    if(shader && vertexModule) {
+        shader.removeDefine('SHADOW_MAP');
         shader.removeDefine("MODE_" + inAlgorithm.get().toUpperCase());
         shader.removeModule(vertexModule);
         shader.removeModule(fragmentModule);
         shader = null;
     }
 }
-inTrigger.onLinkChanged = function ()
-{
-    if (!inTrigger.isLinked())
-    {
-        // removeModulesAndDefines();
+inTrigger.onLinkChanged = function() {
+    if (!inTrigger.isLinked()) {
+        removeModulesAndDefines();
         lastLength = 0;
     }
-};
+}
 
-const _tempCamPosMatrix = mat4.create();
-
-inTrigger.onTriggered = () =>
-{
-    if (!inCastShadow.get())
-    {
-        if (!cgl.frameStore.shadowPass)
-        {
-            // updateShader();
+inTrigger.onTriggered = () => {
+    if (!inCastShadow.get()) {
+        if (!cgl.frameStore.shadowPass) {
+            updateShader();
             outTrigger.trigger();
         }
         return;
     }
 
-    if (!inReceiveShadow.get())
-    {
+    if (!inReceiveShadow.get()) {
         outTrigger.trigger();
         return;
     }
 
-    if (cgl.frameStore.shadowPass)
-    {
+    if (cgl.frameStore.shadowPass) {
         outTrigger.trigger();
         return;
     }
 
-    if (!cgl.frameStore.lightStack)
-    {
+    if (!cgl.frameStore.lightStack) {
         outTrigger.trigger();
         return;
     }
-
-    // updateShader();
-    mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
-    // this._cgl.gl.uniform3f(this._camPosUniform, _tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]);
 
     updateShader();
-    shaderModule.bind();
-    // shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
-    // shaderModule.setUniformValue("MOD_sampleSpread", 1000);
-    // console.log("XX after set", shaderModule);
-    // shaderModule.removeUniform("MOD_sampleSpread");
-    // console.log("XX after remove", shaderModule);
     outTrigger.trigger();
-    shaderModule.unbind();
-};
+}

@@ -564,7 +564,6 @@ const Context = function (_patch)
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             Log.log("gl error: ", str, error, errStr);
-            Log.log("stacktrace:", "STACK:", (new Error()).stack);
             return true;
         }
         return false;

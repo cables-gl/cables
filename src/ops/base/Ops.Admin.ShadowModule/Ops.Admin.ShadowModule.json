@@ -10,11 +10,6 @@
             "message": "Ops.User.cables.ShadowModule renamed to Ops.Admin.ShadowModule",
             "author": "cables",
             "date": 1588166898814
-        },
-        {
-            "message": " added core lib: cgl_shadermodifier",
-            "author": "cables",
-            "date": 1591957834207
         }
     ],
     "authorName": "cables",
@@ -59,8 +54,5 @@
             }
         ],
         "name": "Ops.Admin.ShadowModule"
-    },
-    "coreLibs": [
-        "cgl_shadermodifier"
-    ]
+    }
 }

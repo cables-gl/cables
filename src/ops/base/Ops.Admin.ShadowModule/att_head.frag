@@ -12,7 +12,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
     #define textureCube texture
 #endif
 
-// UNI vec3 MOD_camPos;
+UNI vec3 camPos;
 
 struct ModLight {
 /*
@@ -45,7 +45,7 @@ struct ModLight {
 
 };
 
-// UNI float MOD_sampleSpread;
+UNI float sampleSpread;
 
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
@@ -115,8 +115,8 @@ struct ModLight {
         #endif
 
         float visibility  = 0.0;
-        float viewDistance = length(MOD_camPos - modelPos.xyz);
-        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / MOD_sampleSpread;
+        float viewDistance = length(camPos - modelPos.xyz);
+        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
 
         for (int i = 0; i < SAMPLE_AMOUNT_POINT; i++) {
             float shadowMapSample = textureCube(shadowMap, -lightDirection + offsets[i] * diskRadius).r;
@@ -211,7 +211,7 @@ struct ModLight {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/MOD_sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);
@@ -221,7 +221,7 @@ struct ModLight {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/MOD_sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);
