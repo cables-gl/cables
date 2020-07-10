@@ -10,12 +10,12 @@
     #define textureCube texture
 #endif
 
-float when_gt_MOD(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
-float when_eq_MOD(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
-float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator function
+float MOD_when_gt(float x, float y) { return max(sign(x - y), 0.0); } // comparator function
+float MOD_when_eq(float x, float y) { return 1. - abs(sign(x - y)); } // comparator function
+float MOD_when_neq(float x, float y) { return abs(sign(x - y)); } // comparator function
 
 #ifdef MODE_VSM
-    float linstep(float value, float low, float high) {
+    float MOD_linstep(float value, float low, float high) {
         return clamp((value - low)/(high-low), 0., 1.);
     }
 #endif
@@ -25,7 +25,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
 
 
 #ifdef MODE_DEFAULT
-    float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
+    float MOD_ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
         return shadowMapSample < shadowMapDepth - bias ? (1. - shadowStrength) : 1.; //step(shadowMapDepth - bias, shadowMapSample);
     }
 #endif
@@ -33,7 +33,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
 #ifdef MODE_PCF
 
     #ifdef WEBGL2
-        vec3 offsets[20] = vec3[]
+        vec3 MOD_offsets[20] = vec3[]
         (
            vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
            vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
@@ -43,31 +43,31 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
         );
     #endif
     #ifdef WEBGL1
-        vec3 offsets[20];
-        int CALLED_FILL_PCF_ARRAY = 0;
-        void FillPCFArray() {
+        vec3 MOD_offsets[20];
+        int MOD_CALLED_FILL_PCF_ARRAY = 0;
+        void MOD_FillPCFArray() {
             if (CALLED_FILL_PCF_ARRAY == 1) return;
-            offsets[0] = vec3( 1,  1,  1);
-            offsets[1] = vec3( 1, -1,  1);
-            offsets[2] = vec3(-1, -1,  1);
-            offsets[3] = vec3(-1,  1,  1);
-            offsets[4] = vec3( 1,  1, -1);
-            offsets[5] = vec3( 1, -1, -1);
-            offsets[6] = vec3(-1, -1, -1);
-            offsets[7] = vec3(-1,  1, -1);
-            offsets[8] = vec3( 1,  1,  0);
-            offsets[9] = vec3( 1, -1,  0);
-            offsets[10] = vec3(-1, -1,  0);
-            offsets[11] = vec3(-1,  1,  0);
-            offsets[12] = vec3( 1,  0,  1);
-            offsets[13] = vec3(-1,  0,  1);
-            offsets[14] = vec3( 1,  0, -1);
-            offsets[15] = vec3(-1,  0, -1);
-            offsets[16] = vec3( 0,  1,  1);
-            offsets[17] = vec3( 0, -1,  1);
-            offsets[18] = vec3( 0, -1, -1);
-            offsets[19] = vec3( 0,  1, -1);
-            CALLED_FILL_PCF_ARRAY = 1;
+            MOD_offsets[0] = vec3( 1,  1,  1);
+            MOD_offsets[1] = vec3( 1, -1,  1);
+            MOD_offsets[2] = vec3(-1, -1,  1);
+            MOD_offsets[3] = vec3(-1,  1,  1);
+            MOD_offsets[4] = vec3( 1,  1, -1);
+            MOD_offsets[5] = vec3( 1, -1, -1);
+            MOD_offsets[6] = vec3(-1, -1, -1);
+            MOD_offsets[7] = vec3(-1,  1, -1);
+            MOD_offsets[8] = vec3( 1,  1,  0);
+            MOD_offsets[9] = vec3( 1, -1,  0);
+            MOD_offsets[10] = vec3(-1, -1,  0);
+            MOD_offsets[11] = vec3(-1,  1,  0);
+            MOD_offsets[12] = vec3( 1,  0,  1);
+            MOD_offsets[13] = vec3(-1,  0,  1);
+            MOD_offsets[14] = vec3( 1,  0, -1);
+            MOD_offsets[15] = vec3(-1,  0, -1);
+            MOD_offsets[16] = vec3( 0,  1,  1);
+            MOD_offsets[17] = vec3( 0, -1,  1);
+            MOD_offsets[18] = vec3( 0, -1, -1);
+            MOD_offsets[19] = vec3( 0,  1, -1);
+            MOD_CALLED_FILL_PCF_ARRAY = 1;
         }
     #endif
     // float diskRadius = 0.05;
@@ -77,7 +77,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
 
     #define SAMPLE_AMOUNT_POINT int(SAMPLE_AMOUNT * 2. + 4.)
     // https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows
-    float ShadowFactorPointPCF(
+    float MOD_ShadowFactorPointPCF(
         samplerCube shadowMap,
         vec3 lightDirection,
         float shadowMapDepth,
@@ -90,7 +90,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
         float sampleSpread
     ) {
         #ifdef WEBGL1
-            FillPCFArray();
+            MOD_FillPCFArray();
         #endif
 
         float visibility  = 0.0;
@@ -98,14 +98,14 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
         float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
 
         for (int i = 0; i < SAMPLE_AMOUNT_POINT; i++) {
-            float shadowMapSample = textureCube(shadowMap, -lightDirection + offsets[i] * diskRadius).r;
+            float shadowMapSample = textureCube(shadowMap, -lightDirection + MOD_offsets[i] * diskRadius).r;
             visibility += step(shadowMapDepth - bias, shadowMapSample);
         }
         visibility /= float(SAMPLE_AMOUNT_POINT);
         return clamp(visibility, 0., 1.);
     }
 
-    float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
+    float MOD_ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
         float texelSize = 1. / shadowMapSize;
         float visibility = 0.;
 
@@ -124,7 +124,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
 
 #ifdef MODE_POISSON
     #ifdef WEBGL2
-        vec2 poissonDisk[16] = vec2[16](
+        vec2 MOD_poissonDisk[16] = vec2[16](
         vec2( -0.94201624, -0.39906216 ),
         vec2( 0.94558609, -0.76890725 ),
         vec2( -0.094184101, -0.92938870 ),
@@ -144,9 +144,9 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
         );
     #endif
     #ifdef WEBGL1
-    int CALLED_FILL_POISSON_ARRAY = 0;
+    int MOD_CALLED_FILL_POISSON_ARRAY = 0;
     // cannot allocate arrays like above in webgl1
-        vec2 poissonDisk[16];
+        vec2 MOD_poissonDisk[16];
         void FillPoissonArray() {
             if (CALLED_FILL_POISSON_ARRAY == 1) return;
             poissonDisk[0] = vec2( -0.94201624, -0.39906216 );
@@ -165,26 +165,26 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
             poissonDisk[13] = vec2( -0.81409955, 0.91437590 );
             poissonDisk[14] = vec2( 0.19984126, 0.78641367 );
             poissonDisk[15] = vec2( 0.14383161, -0.14100790);
-            CALLED_FILL_POISSON_ARRAY = 1;
+            MOD_CALLED_FILL_POISSON_ARRAY = 1;
         }
     #endif
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
 #define INV_SAMPLE_AMOUNT 1./SAMPLE_AMOUNT
-    float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias, float sampleSpread) {
+    float MOD_ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias, float sampleSpread) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + MOD_poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);
     }
 
-    float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias, float sampleSpread) {
+    float MOD_ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias, float sampleSpread) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
+            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + MOD_poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
         }
 
         return clamp(visibility, 0., 1.);
@@ -192,7 +192,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
 #endif
 
 #ifdef MODE_VSM
-    float ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth, float shadowStrength) {
+    float MOD_ShadowFactorVSM(vec2 moments, float shadowBias, float shadowMapDepth, float shadowStrength) {
 
             float depthScale = shadowBias * 0.01 * shadowMapDepth; // - shadowBias;
             float minVariance = depthScale*depthScale; // = 0.00001
@@ -209,7 +209,7 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
             // little hack: clamp pMax 0.2 - 1. then subtract - 0,2
             // bottom line helps make the shadows darker
             // float pMax = linstep((variance - bias) / (variance - bias + (distanceToMean * distanceToMean)), 0.0001, 1.);
-            float pMax = linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
+            float pMax = MOD_linstep((variance) / (variance + (distanceToMean * distanceToMean)), shadowBias, 1.);
             //float pMax = clamp(variance / (variance + distanceToMean*distanceToMean), 0.2, 1.) - 0.2;
             //pMax = variance / (variance + distanceToMean*distanceToMean);
             // visibility = clamp(pMax, 1., p);

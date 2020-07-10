@@ -19,10 +19,10 @@
 
 
             #ifdef MODE_DEFAULT
-                 col.rgb *= ShadowFactorDefault(shadowMapSample{{LIGHT_INDEX}}.r, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 col.rgb *= MOD_ShadowFactorDefault(shadowMapSample{{LIGHT_INDEX}}.r, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
             #endif
             #ifdef MODE_PCF
-                 col.rgb *= ShadowFactorPointPCF(
+                 col.rgb *= MOD_ShadowFactorPointPCF(
                     MOD_shadowMapCube{{LIGHT_INDEX}},
                     lightDirectionMOD{{LIGHT_INDEX}},
                     shadowMapDepth{{LIGHT_INDEX}},
@@ -40,11 +40,11 @@
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= ShadowFactorPointPoisson(MOD_shadowMapCube{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
+                 col.rgb *= MOD_ShadowFactorPointPoisson(MOD_shadowMapCube{{LIGHT_INDEX}}, lightDirectionMOD{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= ShadowFactorVSM(shadowMapSample{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, shadowMapDepth{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 col.rgb *= MOD_ShadowFactorVSM(shadowMapSample{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, shadowMapDepth{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
             #endif
         }
 #endif
