@@ -45,7 +45,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -195,7 +195,7 @@ const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
@@ -320,7 +320,10 @@ function setUniforms(lightStack)
             shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
             if (cgl.frameStore.shadowPass) op.log("Yup im here also in shadowpass");
-            if (hasShadowCubemap[i]) shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            if (hasShadowCubemap[i])
+            {
+                if (light.shadowCubeMap.cubemap) shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+            }
             continue;
         }
 

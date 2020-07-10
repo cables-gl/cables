@@ -144,8 +144,8 @@ inMapSize.onChange = function ()
     newLight.createShadowMapShader();
 };
 
-let projectionShader = null;
-let uniformCubemap = null;
+const projectionShader = null;
+const uniformCubemap = null;
 
 // * FRAMEBUFFER *
 let fb = null;
@@ -169,15 +169,16 @@ else
     });
 }
 
-projectionShader = new CGL.Shader(cgl, "cubemapProjection");
+/* projectionShader = new CGL.Shader(cgl, "cubemapProjection");
 uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubeMap", 0);
 
 projectionShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 projectionShader.setSource(attachments.cubemapprojection_vert, attachments.cubemapprojection_frag);
-
+*/
 
 function renderCubemapProjection(cubemap, framebuffer)
 {
+    /*
     if (!cubemap) return;
     cgl.frameStore.renderOffscreen = true;
 
@@ -189,15 +190,15 @@ function renderCubemapProjection(cubemap, framebuffer)
     fb.renderEnd();
 
     cgl.frameStore.renderOffscreen = false;
-
-    outProjection.set(null);
+    */
+/*    outProjection.set(null);
     outProjection.set(fb.getTextureColor());
     outCubemap.set(null);
-    outCubemap.set(newLight.shadowCubeMap);
+    outCubemap.set(newLight.shadowCubeMap); */
 }
 
 
-projectionShader.offScreenPass = true;
+// projectionShader.offScreenPass = true;
 
 
 const sc = vec3.create();

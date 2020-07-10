@@ -48,6 +48,7 @@ class ShaderModifier
         if (this._changedUniforms) this._updateUniforms();
 
         this._cgl.pushShader(this._boundShader.shader);
+
         this._boundShader.shader.copyUniformValues(this._boundShader.orig);
 
         if (this.needsTexturePush)
@@ -288,6 +289,12 @@ class ShaderModifier
 
     addUniformsStruct(structUniformName, structName, structMembers, shaderType)
     {
+        // shaderModule.addUniformsStruct("MOD_light" + i, "MOD_Light", [
+        //     { "type": "3f", "name": "position", "v1": null },
+        //     { "type": "2i", "name": "typeCastShadow", "v1": null },
+        //     { "type": "4f", "name": "shadowProperties", "v1": null },
+        //     { "type": "f", "name": "shadowStrength", "v1": null },
+        // ], "frag");
         if (!structName) return;
         if (!structMembers) return;
 
