@@ -1,0 +1,23 @@
+name: 'nightly merge'
+
+on:
+  schedule:
+    - cron:  '0 3 * * *'
+
+jobs:
+  nightly-merge:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+
+    - name: nightly merge
+      uses: robotology/gh-action-nightly-merge@v1.2.0
+      with:
+        stable_branch: 'develop'
+        development_branch: 'nightly'
+        allow_ff: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
