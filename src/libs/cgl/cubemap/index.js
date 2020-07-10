@@ -174,7 +174,6 @@ Cubemap.prototype.getCubemap = function ()
 
 Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 {
-    debugger;
     this._cgl.printError("beforeRenderCubemap");
     this._cgl.pushShader(shader);
     // uniformLightPos.setValue(light.position);
@@ -235,7 +234,6 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
     this._cgl.printError("renderCubeSideEnd");
-    debugger;
 };
 
 CGL.Cubemap = Cubemap;

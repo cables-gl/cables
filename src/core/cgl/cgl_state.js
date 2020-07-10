@@ -420,8 +420,6 @@ const Context = function (_patch)
 
     this.renderStart = function (cgl, identTranslate, identTranslateView)
     {
-        cgl.printError("sstate rederStart");
-
         if (!identTranslate) identTranslate = ident;
         if (!identTranslateView) identTranslateView = identView;
 
@@ -1050,7 +1048,6 @@ Context.prototype.glGetAttribLocation = function (prog, name)
     if (l == -1)
     {
         // Log.log("get attr loc -1 ",name);
-        // debugger;
     }
     return l;
 };
