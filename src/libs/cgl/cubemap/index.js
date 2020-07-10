@@ -174,7 +174,7 @@ Cubemap.prototype.getCubemap = function ()
 
 Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 {
-    this._cgl.printError("beforeRenderCubemap");
+    // this._cgl.printError("beforeRenderCubemap");
     this._cgl.pushShader(shader);
     // uniformLightPos.setValue(light.position);
     // uniformNearFar.setValue([inNear.get(), inFar.get()]);
@@ -197,7 +197,7 @@ Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 
     this._cgl.resetViewPort();
     this._cgl.popShader();
-    this._cgl.printError("afterRenderCubemap");
+    // this._cgl.printError("afterRenderCubemap");
 };
 
 Cubemap.prototype.renderCubeSide = function (index, renderFunction)
@@ -207,11 +207,11 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.pushPMatrix();
 
     this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.cubemap, 0);
-    if (this._cgl.printError("renderCubeSide"))
-    {
-        console.log("erroring with framebuvffer", this);
-    }
-    // console.log("cubemao bri", this.cubemap);
+    // if (this._cgl.printError("renderCubeSide"))
+    // {
+    //     console.log("erroring with framebuvffer", this);
+    // }
+    // // console.log("cubemao bri", this.cubemap);
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
 
@@ -233,7 +233,7 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
-    this._cgl.printError("renderCubeSideEnd");
+    // this._cgl.printError("renderCubeSideEnd");
 };
 
 CGL.Cubemap = Cubemap;

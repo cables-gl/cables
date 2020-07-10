@@ -208,10 +208,10 @@ Framebuffer2.prototype.setSize = function (w, h)
     for (i = 0; i < this._numRenderBuffers; i++)
     {
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0 + i, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
-        if (this._cgl.printError("setSize FB"))
-        {
-            console.log("erroring with framebuvffer", this);
-        }
+        // if (this._cgl.printError("setSize FB"))
+        // {
+        //     console.log("erroring with framebuvffer", this);
+        // }
     }
 
     if (this._options.depth)
@@ -334,10 +334,10 @@ Framebuffer2.prototype.renderEnd = function ()
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this.Framebuffer2FinalFramebuffer);
 
             this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cgl.gl.TEXTURE_2D, this._colorTextures[i].tex, 0);
-            if (this._cgl.printError("renderEnd FB"))
-            {
-                console.log("erroring with framebuvffer", this);
-            }
+            // if (this._cgl.printError("renderEnd FB"))
+            // {
+            //     console.log("erroring with framebuvffer", this);
+            // }
             this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
             this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this.Framebuffer2BlittingFramebuffer);

@@ -19,7 +19,7 @@ class ShaderModifier
 
     bind()
     {
-        this._cgl.printError(`modifier: beforebind ${this.type}`);
+        // this._cgl.printError(`modifier: beforebind ${this.type}`);
         const shader = this._cgl.getShader();
         if (!shader) return;
 
@@ -77,9 +77,9 @@ class ShaderModifier
                 {
                     const name = this.getPrefixedName(uniformName);
                     const uni = this._boundShader.shader.getUniform(name);
-                    this._cgl.printError(`modifier: beforetexturepush ${uniformName}`);
+                    // this._cgl.printError(`modifier: beforetexturepush ${uniformName}`);
                     if (uni) this._boundShader.shader.pushTexture(uni, tex, texType);
-                    this._cgl.printError(`modifier: aftertexturepush ${uniformName}`);
+                    // this._cgl.printError(`modifier: aftertexturepush ${uniformName}`);
                 }
             }
 
