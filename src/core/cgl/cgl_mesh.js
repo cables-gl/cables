@@ -617,7 +617,7 @@ Mesh.prototype.render = function (shader)
     if (this._numInstances === 0)
     {
         this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
-        cgl.printError("Mesh.render() after drawElements");
+        this._cgl.printError("Mesh.render() after drawElements");
     }
     else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
 
