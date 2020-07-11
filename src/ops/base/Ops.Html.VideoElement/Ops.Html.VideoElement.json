@@ -23,6 +23,11 @@
             },
             {
                 "type": "0",
+                "name": "Play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Controls",
                 "subType": "boolean"
             },
@@ -32,8 +37,17 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            },
+            {
                 "type": "5",
                 "name": "Style"
+            },
+            {
+                "type": "1",
+                "name": "Rewind"
             }
         ],
         "portsOut": [
@@ -50,6 +64,11 @@
                 "type": "0",
                 "name": "canplaythrough",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
             }
         ],
         "name": "Ops.Html.VideoElement"

@@ -2,12 +2,17 @@ const
     // src=op.inString("URL",'https://undev.studio'),
     src = op.inUrl("File"),
     elId = op.inString("ID"),
+    play = op.inBool("Play"),
     controls = op.inBool("Controls", true),
     active = op.inBool("Active", true),
+    loop = op.inBool("Loop", false),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
+    rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),
     outPlaying = op.outBool("Playing"),
-    outCanplaythrough = op.outBool("canplaythrough");
+    outCanplaythrough = op.outBool("canplaythrough"),
+    outTime = op.outNumber("Time");
+
 
 op.setPortGroup("Attributes", [src, elId]);
 
@@ -32,13 +37,29 @@ function init()
 }
 init();
 
-controls.onChange = updateControls;
+loop.onChange =
+controls.onChange = updateVideoSettings;
 
-function updateControls()
+function updateVideoSettings()
 {
     if (controls.get()) element.controls = "true";
     else element.removeAttribute("controls");
+
+    if (loop.get()) element.loop = "true";
+    else element.removeAttribute("loop");
 }
+
+play.onChange = () =>
+{
+    if (play.get())element.play();
+    else element.pause();
+};
+
+rewind.onTriggered = function ()
+{
+    element.currentTime = 0;
+};
+
 
 function addElement()
 {
@@ -48,7 +69,7 @@ function addElement()
     element.setAttribute("playsinline", "");
     element.setAttribute("webkit-playsinline", "");
     element.preload = "true";
-    updateControls();
+    updateVideoSettings();
     element.setAttribute("crossOrigin", "anonymous");
     outCanplaythrough.set(false);
 
@@ -64,6 +85,12 @@ function addElement()
     {
         outPlaying.set(false);
     }, true);
+
+    element.addEventListener("timeupdate", () =>
+    {
+        outTime.set(element.currentTime);
+    }, true);
+
 
     // element.playbackRate = speed.get();
     // if (!addedListeners)
