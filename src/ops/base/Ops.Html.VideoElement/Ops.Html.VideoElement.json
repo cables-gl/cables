@@ -1,0 +1,57 @@
+{
+    "id": "5315a156-3a4f-4ff3-80c7-1b73c839d388",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1594469929039
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1594469942229,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "File",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "ID",
+                "group": "Attributes"
+            },
+            {
+                "type": "0",
+                "name": "Controls",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Style"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Element"
+            },
+            {
+                "type": "0",
+                "name": "Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "canplaythrough",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Html.VideoElement"
+    }
+}
