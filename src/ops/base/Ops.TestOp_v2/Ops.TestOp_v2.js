@@ -19,4 +19,4 @@ buttons.onTriggered = function (e)
 };
 
 
-console.log(CGL.Test);
+// console.log(CGL.Test);
