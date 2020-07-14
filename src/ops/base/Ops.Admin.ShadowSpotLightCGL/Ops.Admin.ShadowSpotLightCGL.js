@@ -277,7 +277,7 @@ inTrigger.onTriggered = function ()
     newLight.conePointAt = resultPointAt;
 
 
-    // drawHelpers();
+    drawHelpers();
 
     cgl.frameStore.lightStack.push(newLight);
 
