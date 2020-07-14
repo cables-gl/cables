@@ -1029,27 +1029,41 @@ Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4,
     uni.shaderType = "vert";
     return uni;
 };
-
 Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
     uni.shaderType = "both";
     return uni;
 };
-Shader.prototype.addStruct = function (structName, uniformName, shaderType, members)
+
+Shader.prototype.addUniformStructFrag = function (structName, uniformName, members)
 {
     if (!members) return;
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
-
-        if (shaderType === "frag")
-            this.addUniformFrag(member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-
-        else if (shaderType === "vert")
-            this.addUniformVert(member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-
-        else this.addUniformBoth(member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "frag";
+    }
+};
+Shader.prototype.addUniformStructVert = function (structName, uniformName, members)
+{
+    if (!members) return;
+    for (let i = 0; i < members.length; i += 1)
+    {
+        const member = members[i];
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "vert";
+    }
+};
+Shader.prototype.addUniformStructBoth = function (structName, uniformName, members)
+{
+    if (!members) return;
+    for (let i = 0; i < members.length; i += 1)
+    {
+        const member = members[i];
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "both";
     }
 };
 

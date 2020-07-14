@@ -256,7 +256,6 @@ inTrigger.onTriggered = function ()
     {
         newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
 
-        // TODO: add projection code
         if (!cgl.frameStore.shadowPass)
         {
             cgl.frameStore.lightStack.pop();
