@@ -173,21 +173,13 @@ Cubemap.prototype.getCubemap = function ()
 
 Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 {
-    // this._cgl.printError("beforeRenderCubemap");
     this._cgl.pushShader(shader);
-    // uniformLightPos.setValue(light.position);
-    // uniformNearFar.setValue([inNear.get(), inFar.get()]);
 
     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.cubemap);
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
     this._cgl.gl.viewport(0, 0, this.size, this.size);
 
-    /*    if (this.cullFaces)
-    {
-        this._cgl.pushCullFace(true);
-        this._cgl.pushCullFaceFacing(this.cullFaceFacing);
-    } */
     for (let i = 0; i < 6; i += 1) this.renderCubeSide(i, renderFunction);
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);

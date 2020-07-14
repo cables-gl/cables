@@ -303,8 +303,6 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
-    // this._cgl.printError(`cgllight: beforerenderpasses ${this.type}`);
-
     if (this.state.isUpdating) return;
     if (this._cgl.frameStore.shadowPass) return;
 
@@ -346,7 +344,6 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
         this.shadowMap = null;
         this.shadowMapDepth = null;
     }
-    // this._cgl.printError("cgllight: afterrenderpasses");
 };
 
 Light.prototype.renderShadowPass = function (renderFunction)

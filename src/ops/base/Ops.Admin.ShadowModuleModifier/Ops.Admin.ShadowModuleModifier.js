@@ -45,7 +45,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -195,7 +195,7 @@ const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
@@ -420,9 +420,7 @@ inTrigger.onTriggered = () =>
     }
 
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
-    // cgl.printError("shadowmodule before updateShader");
     updateShader();
-    // cgl.printError("shadowmodule after updateShader");
 
     if (cgl.frameStore.lightStack)
     {
