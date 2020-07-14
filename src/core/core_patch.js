@@ -985,6 +985,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
                         {
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
+                                console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut);
+
                                 addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
                             }
                         }
