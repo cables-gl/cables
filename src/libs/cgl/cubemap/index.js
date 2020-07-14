@@ -75,22 +75,39 @@ Cubemap.prototype.setSize = function (size)
     this.initializeCubemap();
 };
 
+Cubemap.prototype.checkError = function (when)
+{
+    const err = this._cgl.gl.getError();
+    if (err != this._cgl.gl.NO_ERROR)
+    {
+        console.log("error " + when);
+        console.log("error size", this.size);
+        if (err == this._cgl.gl.NO_ERROR)console.error("NO_ERROR");
+        if (err == this._cgl.gl.OUT_OF_MEMORY)console.error("OUT_OF_MEMORY");
+        if (err == this._cgl.gl.INVALID_ENUM)console.error("INVALID_ENUM");
+        if (err == this._cgl.gl.INVALID_OPERATION)console.error("INVALID_OPERATION");
+        if (err == this._cgl.gl.INVALID_FRAMEBUFFER_OPERATION)console.error("INVALID_FRAMEBUFFER_OPERATION");
+        if (err == this._cgl.gl.INVALID_VALUE)console.error("INVALID_VALUE");
+        if (err == this._cgl.gl.CONTEXT_LOST_WEBGL)console.error("CONTEXT_LOST_WEBGL");
+
+        // throw "Some WebGL error occurred while trying to create framebuffer.  Maybe you need more resources; try another browser or computer.";
+    }
+};
 Cubemap.prototype.initializeCubemap = function ()
 {
     let i = 0;
+    this.checkError(221);
 
-    // checkError(221);
+    if (!this.cubemap) this.cubemap = this._cgl.gl.createTexture(); // Create the texture object for the reflection map
 
-    this.cubemap = this._cgl.gl.createTexture(); // Create the texture object for the reflection map
-
-    // checkError(111);
+    this.checkError(111);
 
     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.cubemap); // create storage for the reflection map images
     this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_CUBE_MAP, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR);
     this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_CUBE_MAP, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.LINEAR);
     this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_CUBE_MAP, this._cgl.gl.TEXTURE_WRAP_S, this._cgl.gl.CLAMP_TO_EDGE);
     this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_CUBE_MAP, this._cgl.gl.TEXTURE_WRAP_T, this._cgl.gl.CLAMP_TO_EDGE);
-    // checkError(122);
+    this.checkError(122);
 
     for (i = 0; i < 6; i++)
     {
@@ -110,27 +127,27 @@ Cubemap.prototype.initializeCubemap = function ()
                 this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
             }
         }
-        else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA32F, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-
+        else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+        // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
-    // checkError(1);
+    this.checkError(1);
 
     this._framebuffer = this._cgl.gl.createFramebuffer(); // crate the framebuffer that will draw to the reflection map
 
-    // checkError(2);
+    this.checkError(2);
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
-    // checkError(3);
+    this.checkError(3);
 
     this._depthbuffer = this._cgl.gl.createRenderbuffer(); // renderbuffer for depth buffer in framebuffer
-    // checkError(4);
+    this.checkError(4);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
-    // checkError(5);
+    this.checkError(5);
     this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.size, this.size);
-    // checkError(6);
+    this.checkError(6);
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
-    // checkError(7);
+    this.checkError(7);
     // The same framebuffer will be used to draw all six faces of the cubemap.  Each side will be attached
     // as the color buffer of the framebuffer while that side is being drawn.
 
@@ -157,26 +174,13 @@ Cubemap.prototype.getCubemap = function ()
 Cubemap.prototype.renderCubemap = function (shader, renderFunction)
 {
     this._cgl.pushShader(shader);
-    // uniformLightPos.setValue(light.position);
-    // uniformNearFar.setValue([inNear.get(), inFar.get()]);
 
     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.cubemap);
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
     this._cgl.gl.viewport(0, 0, this.size, this.size);
 
-    /*    if (this.cullFaces)
-    {
-        this._cgl.pushCullFace(true);
-        this._cgl.pushCullFaceFacing(this.cullFaceFacing);
-    } */
     for (let i = 0; i < 6; i += 1) this.renderCubeSide(i, renderFunction);
-
-    /* if (this.cullFaces)
-    {
-        this._cgl.popCullFace();
-        this._cgl.popCullFaceFacing();
-    } */
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
@@ -195,6 +199,7 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.cubemap, 0);
 
     this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+
 
     this._cgl.gl.clearColor(1, 1, 1, 1);
 
