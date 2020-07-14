@@ -944,9 +944,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // if (performance.now() - startTime > 100) console.log("op crerate took long: ", opData.objName);
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 100)console.warn("long op init ", obj.ops[iop].objName, timeused);
+        if (!this.silent && timeused > 1)console.warn("long op init ", obj.ops[iop].objName, timeused);
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
+
+    console.log("[patchload] valueset callbacks");
 
     for (const i in this.ops)
     {
@@ -957,6 +959,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i]._origData = null;
         }
     }
+
+    console.log("[patchload] create links");
 
     // create links...
     if (obj.ops)
@@ -982,6 +986,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
+    console.log("[patchload] ops onloaded");
+
     for (const i in this.ops)
     {
         if (this.ops[i].onLoaded)
@@ -992,6 +998,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
+    console.log("[patchload] ops init");
+
     for (const i in this.ops)
     {
         if (this.ops[i].init)
@@ -1000,6 +1008,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i].init = null;
         }
     }
+
+    console.log("[patchload] variables");
 
     if (this.config.variables)
     {
