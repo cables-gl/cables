@@ -865,7 +865,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
 
-    if (typeof obj === "string") obj = JSON.parse(obj);
+    if (typeof obj === "string")
+    {
+        console.log("[patchload] parse json...");
+        obj = JSON.parse(obj);
+    }
     const self = this;
 
     this.settings = obj.settings;
@@ -880,6 +884,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
     }
 
     const reqs = new Requirements(this);
+
+
+    console.log("[patchload] add ops...");
+
 
     // Log.log('add ops ',obj.ops);
     // add ops...
