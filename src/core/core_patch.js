@@ -711,17 +711,18 @@ Patch.prototype.serialize = function (asObj)
 
 Patch.prototype.getOpById = function (opid)
 {
-    this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
+    return this._opIdCache[opid];
+    // this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
 
-    const startTime = performance.now();
-    for (const i in this.ops)
-    {
-        if (this.ops[i].id == opid)
-        {
-            this.timeNeededGetOpById += (performance.now() - startTime);
-            return this.ops[i];
-        }
-    }
+    // const startTime = performance.now();
+    // for (const i in this.ops)
+    // {
+    //     if (this.ops[i].id == opid)
+    //     {
+    //         this.timeNeededGetOpById += (performance.now() - startTime);
+    //         return this.ops[i];
+    //     }
+    // }
 };
 
 Patch.prototype.getOpsById = function (opIds)
@@ -909,6 +910,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         {
             if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
             else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
+
+            this._opIdCache[op.id] = op;
         }
         catch (e)
         {
