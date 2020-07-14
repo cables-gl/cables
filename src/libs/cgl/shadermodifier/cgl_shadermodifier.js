@@ -254,8 +254,7 @@ class ShaderModifier
         this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "both");
     }
 
-
-    addUniformStructFrag(structName, uniformName, members)
+    addUniformStruct(structName, uniformName, members, shaderType)
     {
         for (let i = 0; i < members.length; i += 1)
         {
@@ -273,7 +272,7 @@ class ShaderModifier
                     uniformName,
                     structName,
                     member.name,
-                    "frag"
+                    shaderType
                 );
             }
         }
@@ -281,52 +280,19 @@ class ShaderModifier
 
     addUniformStructVert(structName, uniformName, members)
     {
-        for (let i = 0; i < members.length; i += 1)
-        {
-            const member = members[i];
+        this.addUniformStruct(structName, uniformName, members, "vert");
+    }
 
-            if (!this._getUniform(uniformName + "." + member.name))
-            {
-                this.addUniform(
-                    member.type,
-                    member.name,
-                    member.v1,
-                    member.v2,
-                    member.v3,
-                    member.v4,
-                    uniformName,
-                    structName,
-                    member.name,
-                    "vert"
-                );
-            }
-        }
+    addUniformStructFrag(structName, uniformName, members)
+    {
+        this.addUniformStruct(structName, uniformName, members, "frag");
     }
 
     addUniformStructBoth(structName, uniformName, members)
     {
-        const shaderType = "both";
-        for (let i = 0; i < members.length; i += 1)
-        {
-            const member = members[i];
-
-            if (!this._getUniform(uniformName + "." + member.name))
-            {
-                this.addUniform(
-                    member.type,
-                    member.name,
-                    member.v1,
-                    member.v2,
-                    member.v3,
-                    member.v4,
-                    uniformName,
-                    structName,
-                    member.name,
-                    "both"
-                );
-            }
-        }
+        this.addUniformStruct(structName, uniformName, members, "both");
     }
+
 
     pushTexture(uniformName, tex, texType)
     {
