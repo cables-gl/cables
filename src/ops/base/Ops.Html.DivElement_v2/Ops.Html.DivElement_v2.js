@@ -32,6 +32,7 @@ updateStyle();
 
 op.onDelete = removeElement;
 
+outElement.onLinkChanged = updateStyle;
 
 function setCSSVisible(visible)
 {
