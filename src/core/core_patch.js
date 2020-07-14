@@ -427,11 +427,11 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
-
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
         this.ops.push(op);
+        this._opIdCache[op.id] = op;
 
         // if (this.onAdd) this.onAdd(op);
         this.emitEvent("onOpAdd", op);
@@ -553,15 +553,11 @@ Patch.prototype.renderFrame = function (e)
     {
         if (this.animFrameOps[i].onAnimFrame)
         {
-            // const start=performance.now();
             this.animFrameOps[i].onAnimFrame(time);
-            // const used=performance.now()-start;
-            // console.log(used,this.animFrameOps[i].objName);
         }
     }
 
     CGL.profileData.profileOnAnimFrameOps = performance.now() - startTime;
-    // console.log("----");
 
     this.emitEvent("onRenderFrame", time);
 
@@ -878,7 +874,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     if (typeof obj === "string")
     {
-        // console.log("[patchload] parse json...");
         obj = JSON.parse(obj);
     }
     const self = this;
@@ -897,9 +892,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
     const reqs = new Requirements(this);
 
 
-    // console.log("[patchload] add ops...");
-
-
     // Log.log('add ops ',obj.ops);
     // add ops...
     for (const iop in obj.ops)
@@ -913,8 +905,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         {
             if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
             else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
-
-            this._opIdCache[op.id] = op;
         }
         catch (e)
         {
@@ -969,8 +959,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
-    // console.log("[patchload] valueset callbacks");
-
     for (const i in this.ops)
     {
         if (this.ops[i].onLoadedValueSet)
@@ -980,8 +968,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i]._origData = null;
         }
     }
-
-    // console.log("[patchload] create links");
 
     // create links...
     if (obj.ops)
@@ -1011,8 +997,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    // console.log("[patchload] ops onloaded");
-
     for (const i in this.ops)
     {
         if (this.ops[i].onLoaded)
@@ -1023,8 +1007,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    // console.log("[patchload] ops init");
-
     for (const i in this.ops)
     {
         if (this.ops[i].init)
@@ -1034,19 +1016,12 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    // console.log("[patchload] variables");
-
     if (this.config.variables)
-    {
         for (const varName in this.config.variables)
-        {
             this.setVarValue(varName, this.config.variables[varName]);
-            // this._variables = cfg.variables;
-        }
-    }
+
     for (const i in this.ops) this.ops[i].initVarPorts();
 
-    console.log("CABLES.timeUsedGetPortByName", CABLES.timeUsedGetPortByName);
 
     // const subpatchNumOps = {};
     // for (let i = 0; i < this.ops.length; i++)
