@@ -82,12 +82,12 @@ op.setPortGroup("Advanced Options", [inAdvanced, inMSAA, inFilterType, inAnisotr
 inAdvanced.onChange = function ()
 {
     if (inAdvanced.get())
-{
+    {
         inMSAA.setUiAttribs({ "greyout": false });
         inFilterType.setUiAttribs({ "greyout": false });
     }
- else
-{
+    else
+    {
         inMSAA.setUiAttribs({ "greyout": true });
         inFilterType.setUiAttribs({ "greyout": true });
         inMSAA.setValue("none");
@@ -173,16 +173,16 @@ function updateBuffers()
     let anisotropicFactor;
 
     if (inFilterType.get() == "Linear")
-{
+    {
         filterType = CGL.Texture.FILTER_LINEAR;
     }
- else if (inFilterType.get() == "Anisotropic")
-{
+    else if (inFilterType.get() == "Anisotropic")
+    {
         filterType = CGL.Texture.FILTER_LINEAR;
         anisotropicFactor = Number(inAnisotropic.get());
     }
- else if (inFilterType.get() == "Mip Map")
-{
+    else if (inFilterType.get() == "Mip Map")
+    {
         filterType = CGL.Texture.FILTER_MIPMAP;
     }
 
@@ -197,11 +197,11 @@ function updateBuffers()
     if (anisotropicFactor !== undefined) Object.assign(textureOptions, { "anisotropic": anisotropicFactor });
 
     if (cgl.glVersion == 1)
-{
+    {
         fb = new CGL.Framebuffer(cgl, mapSize, mapSize, textureOptions);
     }
- else
-{
+    else
+    {
         fb = new CGL.Framebuffer2(cgl, mapSize, mapSize, textureOptions);
         effect = new CGL.TextureEffect(cgl, textureOptions);
     }
@@ -212,11 +212,11 @@ inMSAA.onChange = inAnisotropic.onChange = updateBuffers;
 inFilterType.onChange = function ()
 {
     if (inFilterType.get() === "Anisotropic")
-{
+    {
         inAnisotropic.setUiAttribs({ "greyout": false });
     }
- else
-{
+    else
+    {
         inAnisotropic.setUiAttribs({ "greyout": true });
     }
 
@@ -233,19 +233,19 @@ const inLight = {
 Object.keys(inLight).forEach(function (key)
 {
     if (inLight[key].length)
-{
+    {
         for (let i = 0; i < inLight[key].length; i += 1)
-{
+        {
             inLight[key][i].onChange = function ()
-{
+            {
                 light[key][i] = inLight[key][i].get();
             };
         }
     }
- else
-{
+    else
+    {
         inLight[key].onChange = function ()
-{
+        {
             light[key] = inLight[key].get();
         };
     }
@@ -381,8 +381,9 @@ function renderShadowMap()
 
 function renderHelpers()
 {
-    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
-{
+    if (cgl.shouldDrawHelpers(op))
+
+    {
         CABLES.GL_MARKER.drawLineSourceDest({
             op,
             "sourceX": -200 * light.position[0],
@@ -405,11 +406,11 @@ inTrigger.onTriggered = function ()
     cgl.frameStore.lightStack.push(light);
 
     if (inCastShadow.get())
-{
+    {
         if (!cgl.frameStore.shadowPass)
-{
+        {
             if (fb)
-{
+            {
                 cgl.frameStore.shadowPass = true;
                 cgl.frameStore.renderOffscreen = true;
 

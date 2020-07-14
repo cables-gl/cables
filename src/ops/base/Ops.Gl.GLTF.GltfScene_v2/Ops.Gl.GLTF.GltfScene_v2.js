@@ -176,7 +176,7 @@ inExec.onTriggered = function ()
     {
         gltf.time = time;
 
-        if (gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+        if (gltf.bounds && CABLES.UI && cgl.shouldDrawHelpers(op))
         {
             if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
             else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));

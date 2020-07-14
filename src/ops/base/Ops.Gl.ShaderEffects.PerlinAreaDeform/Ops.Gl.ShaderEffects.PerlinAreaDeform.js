@@ -85,7 +85,7 @@ op.render.onTriggered=function()
          return;
     }
 
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if (cgl.shouldDrawHelpers(op))
     {
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);

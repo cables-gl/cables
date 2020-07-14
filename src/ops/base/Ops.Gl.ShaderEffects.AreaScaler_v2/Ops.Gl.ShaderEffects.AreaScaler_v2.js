@@ -1,96 +1,96 @@
 const
-    exec=op.inTrigger("render"),
-    inSize=op.inValue("Area size",1),
-    inSrc=op.inSwitch("Source",['Vertex position','Object position'],'Vertex position'),
-    inStrength=op.inValue("Strength",1),
-    inSmooth=op.inValueBool("Smoothstep",false),
-    inToZero=op.inValueBool("Min Size Original",false),
-    x=op.inValue("Pos X"),
-    y=op.inValue("Pos Y"),
-    z=op.inValue("Pos Z"),
-    next=op.outTrigger("Next");
+    exec = op.inTrigger("render"),
+    inSize = op.inValue("Area size", 1),
+    inSrc = op.inSwitch("Source", ["Vertex position", "Object position"], "Vertex position"),
+    inStrength = op.inValue("Strength", 1),
+    inSmooth = op.inValueBool("Smoothstep", false),
+    inToZero = op.inValueBool("Min Size Original", false),
+    x = op.inValue("Pos X"),
+    y = op.inValue("Pos Y"),
+    z = op.inValue("Pos Z"),
+    next = op.outTrigger("Next");
 
-const cgl=op.patch.cgl;
-var needsUpdateToZero=true;
-var mscaleUni=null;
-var shader=null;
-op.setPortGroup("Position",[x,y,z]);
-op.setPortGroup("Influence",[inSrc,inStrength,inSmooth,inToZero]);
+const cgl = op.patch.cgl;
+let needsUpdateToZero = true;
+let mscaleUni = null;
+let shader = null;
+op.setPortGroup("Position", [x, y, z]);
+op.setPortGroup("Influence", [inSrc, inStrength, inSmooth, inToZero]);
 
-const srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal,mMatrix);' //modelMatrix*
+const srcBodyVert = ""
+    .endl() + "pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal,mMatrix);" // modelMatrix*
     .endl();
 
-var moduleVert=null;
+let moduleVert = null;
 
-op.onDelete=exec.onLinkChanged=removeModule;
-inToZero.onChange=inSrc.onChange=updateToZero;
+op.onDelete = exec.onLinkChanged = removeModule;
+inToZero.onChange = inSrc.onChange = updateToZero;
 
 function removeModule()
 {
-    if(shader && moduleVert) shader.removeModule(moduleVert);
-    shader=null;
+    if (shader && moduleVert) shader.removeModule(moduleVert);
+    shader = null;
 }
 
 function updateToZero()
 {
-    if(!shader)
+    if (!shader)
     {
-        needsUpdateToZero=true;
+        needsUpdateToZero = true;
         return;
     }
 
-    shader.toggleDefine(moduleVert.prefix+"TO_ZERO",inToZero.get());
-    shader.toggleDefine(moduleVert.prefix+"OBJECT_POS",inSrc.get()=="Object position");
-    needsUpdateToZero=false;
+    shader.toggleDefine(moduleVert.prefix + "TO_ZERO", inToZero.get());
+    shader.toggleDefine(moduleVert.prefix + "OBJECT_POS", inSrc.get() == "Object position");
+    needsUpdateToZero = false;
 }
 
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    if(!cgl.getShader())
+    if (!cgl.getShader())
     {
         next.trigger();
         return;
     }
 
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        if(op.isCurrentUiOp()) gui.setTransformGizmo({posX:x,posY:y,posZ:z});
+        if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
-        if(op.isCurrentUiOp() ||  CABLES.UI.renderHelper)
+        if (cgl.shouldDrawHelpers(op))
         {
             cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
+            CABLES.GL_MARKER.drawSphere(op, inSize.get());
             cgl.popModelMatrix();
         }
     }
 
-    if(cgl.getShader()!=shader)
+    if (cgl.getShader() != shader)
     {
-        if(shader) removeModule();
-        shader=cgl.getShader();
+        if (shader) removeModule();
+        shader = cgl.getShader();
 
-        moduleVert=shader.addModule(
+        moduleVert = shader.addModule(
             {
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:attachments.areascale_vert,
-                srcBodyVert:srcBodyVert
+                "title": op.objName,
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": attachments.areascale_vert,
+                "srcBodyVert": srcBodyVert
             });
 
-        inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
-        inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-        inSmooth.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'smooth',inSmooth);
+        inSize.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "size", inSize);
+        inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
+        inSmooth.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "smooth", inSmooth);
 
-        x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
-        y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
-        z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
+        x.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);
+        y.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "y", y);
+        z.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "z", z);
     }
 
-    if(needsUpdateToZero)updateToZero();
-    if(!shader)return;
+    if (needsUpdateToZero)updateToZero();
+    if (!shader) return;
 
     next.trigger();
 };

@@ -19,8 +19,8 @@ function doRender()
     if(mesh)
     {
         mesh.render(cgl.getShader());
-        
-        if(CABLES.UI && CABLES.UI.renderHelper)
+
+        if (cgl.shouldDrawHelpers(op))
         {
             CABLES.GL_MARKER.drawCube(op,
                 size.get()/2*scaleX.get(),
@@ -46,7 +46,7 @@ function reset()
     verts.length=n*3;
     texCoords.length=n*2;
     vertColors.length=n*3;
-    
+
     Math.randomSeed=seed.get()+0.01;
 
     var sizeMul=size.get();
@@ -56,15 +56,15 @@ function reset()
         verts[i*3+0]=scaleX.get()*(Math.seededRandom()-0.5)*sizeMul;
         verts[i*3+1]=scaleY.get()*(Math.seededRandom()-0.5)*sizeMul;
         verts[i*3+2]=scaleZ.get()*(Math.seededRandom()-0.5)*sizeMul;
-        
+
         vertColors[i*3+0]=Math.seededRandom();
         vertColors[i*3+1]=Math.seededRandom();
         vertColors[i*3+2]=Math.seededRandom();
-        
+
         texCoords[i*2]=Math.seededRandom();
         texCoords[i*2+1]=Math.seededRandom();
     }
-    
+
     geom.setPointVertices(verts);
     geom.vertColors=vertColors;
     geom.texCoords=texCoords;

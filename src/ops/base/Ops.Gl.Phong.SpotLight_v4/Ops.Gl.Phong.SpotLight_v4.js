@@ -1,19 +1,19 @@
 
-function Light(config) {
-     this.type = config.type || "point";
-     this.color = config.color || [1, 1, 1];
-     this.specular = config.specular || [0, 0, 0];
-     this.position = config.position || null;
-     this.intensity = config.intensity || 1;
-     this.radius = config.radius || 1;
-     this.falloff = config.falloff || 1;
-     this.spotExponent = config.spotExponent || 1;
-     this.cosConeAngleInner = config.cosConeAngleInner || 0; // spot light
-     this.cosConeAngle = config.cosConeAngle || 0;
-     this.conePointAt = config.conePointAt || [0, 0, 0];
-     return this;
+function Light(config)
+{
+    this.type = config.type || "point";
+    this.color = config.color || [1, 1, 1];
+    this.specular = config.specular || [0, 0, 0];
+    this.position = config.position || null;
+    this.intensity = config.intensity || 1;
+    this.radius = config.radius || 1;
+    this.falloff = config.falloff || 1;
+    this.spotExponent = config.spotExponent || 1;
+    this.cosConeAngleInner = config.cosConeAngleInner || 0; // spot light
+    this.cosConeAngle = config.cosConeAngle || 0;
+    this.conePointAt = config.conePointAt || [0, 0, 0];
+    return this;
 }
-
 
 
 // * OP START *
@@ -38,14 +38,14 @@ op.setPortGroup("Point At", pointAtIn);
 const inR = op.inFloatSlider("R", 1);
 const inG = op.inFloatSlider("G", 1);
 const inB = op.inFloatSlider("B", 1);
-inR.setUiAttribs({ colorPick: true });
+inR.setUiAttribs({ "colorPick": true });
 const colorIn = [inR, inG, inB];
 op.setPortGroup("Color", colorIn);
 
 const inSpecularR = op.inFloatSlider("Specular R", 1);
 const inSpecularG = op.inFloatSlider("Specular G", 1);
 const inSpecularB = op.inFloatSlider("Specular B", 1);
-inSpecularR.setUiAttribs({ colorPick: true });
+inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
@@ -56,63 +56,74 @@ const coneAttribsIn = [inConeAngle, inConeAngleInner, inSpotExponent];
 op.setPortGroup("Cone Attributes", coneAttribsIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.00001);
-const lightAttribsIn = [inIntensity, inRadius ];
+const lightAttribsIn = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 
 const outTrigger = op.outTrigger("Trigger Out");
 
 const inLight = {
-  position: positionIn,
-  conePointAt: pointAtIn,
-  color: colorIn,
-  specular: colorSpecularIn,
-  intensity: inIntensity,
-  radius: inRadius,
-  falloff: inFalloff,
-  cosConeAngle: inConeAngle,
-  cosConeAngleInner: inConeAngleInner,
-  spotExponent: inSpotExponent
+    "position": positionIn,
+    "conePointAt": pointAtIn,
+    "color": colorIn,
+    "specular": colorSpecularIn,
+    "intensity": inIntensity,
+    "radius": inRadius,
+    "falloff": inFalloff,
+    "cosConeAngle": inConeAngle,
+    "cosConeAngleInner": inConeAngleInner,
+    "spotExponent": inSpotExponent
 };
 
 const cgl = op.patch.cgl;
 
 const light = new Light({
-    type: "spot",
-    position: [0, 1, 2].map(function(i){ return positionIn[i].get() }),
-    color: [0 , 1, 2].map(function(i) { return colorIn[i].get() }),
-    specular: [0 , 1, 2].map(function(i) { return colorSpecularIn[i].get() }),
-    conePointAt: [0, 1, 2].map(function(i) { return pointAtIn[i].get() }),
-    intensity: inIntensity.get(),
-    radius: inRadius.get(),
-    falloff: inFalloff.get(),
-    cosConeAngleInner: Math.cos(CGL.DEG2RAD * inConeAngleInner.get()),
-    cosConeAngle: Math.cos(CGL.DEG2RAD * inConeAngle.get()),
-    spotExponent: inSpotExponent.get()
+    "type": "spot",
+    "position": [0, 1, 2].map(function (i) { return positionIn[i].get(); }),
+    "color": [0, 1, 2].map(function (i) { return colorIn[i].get(); }),
+    "specular": [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); }),
+    "conePointAt": [0, 1, 2].map(function (i) { return pointAtIn[i].get(); }),
+    "intensity": inIntensity.get(),
+    "radius": inRadius.get(),
+    "falloff": inFalloff.get(),
+    "cosConeAngleInner": Math.cos(CGL.DEG2RAD * inConeAngleInner.get()),
+    "cosConeAngle": Math.cos(CGL.DEG2RAD * inConeAngle.get()),
+    "spotExponent": inSpotExponent.get()
 });
 
-Object.keys(inLight).forEach(function(key) {
-    if (inLight[key].length) {
-        for (let i = 0; i < inLight[key].length; i += 1) {
-            inLight[key][i].onChange = function() {
+Object.keys(inLight).forEach(function (key)
+{
+    if (inLight[key].length)
+    {
+        for (let i = 0; i < inLight[key].length; i += 1)
+        {
+            inLight[key][i].onChange = function ()
+            {
                 light[key][i] = inLight[key][i].get();
-            }
-        }
-    } else {
-        if (inLight[key]) {
-        inLight[key].onChange = function() {
-            if (key === "coneAngle" || key === "coneAngleInner" || key === "coneAngleOuter") {
-                light[key] = CGL.DEG2RAD*inLight[key].get();
-            } else if (key === "cosConeAngle") {
-                light[key] = Math.cos(CGL.DEG2RAD*(inLight[key].get()));
-
-            }
-            else if (key === "cosConeAngleInner") {
-                light[key] = Math.cos(CGL.DEG2RAD*(inLight[key].get()));
-            }
-            else light[key] = inLight[key].get();
+            };
         }
     }
+    else
+    {
+        if (inLight[key])
+        {
+            inLight[key].onChange = function ()
+            {
+                if (key === "coneAngle" || key === "coneAngleInner" || key === "coneAngleOuter")
+                {
+                    light[key] = CGL.DEG2RAD * inLight[key].get();
+                }
+                else if (key === "cosConeAngle")
+                {
+                    light[key] = Math.cos(CGL.DEG2RAD * (inLight[key].get()));
+                }
+                else if (key === "cosConeAngleInner")
+                {
+                    light[key] = Math.cos(CGL.DEG2RAD * (inLight[key].get()));
+                }
+                else light[key] = inLight[key].get();
+            };
+        }
     }
 });
 
@@ -121,7 +132,8 @@ const pointAtPos = vec3.create();
 const resultPos = vec3.create();
 const resultPointAt = vec3.create();
 
-inTrigger.onTriggered = function() {
+inTrigger.onTriggered = function ()
+{
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     vec3.set(position, inPosX.get(), inPosY.get(), inPosZ.get());
@@ -133,27 +145,26 @@ inTrigger.onTriggered = function() {
     light.position = resultPos;
     light.conePointAt = resultPointAt;
 
-    if(op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp())) {
+    if (op.patch.isEditorMode() && cgl.shouldDrawHelpers(op))
+    {
         gui.setTransformGizmo({
-            posX:inPosX,
-            posY:inPosY,
-            posZ:inPosZ,
+            "posX": inPosX,
+            "posY": inPosY,
+            "posZ": inPosZ,
         });
         CABLES.GL_MARKER.drawLineSourceDest({
-            op: op,
-            sourceX: light.position[0],
-            sourceY: light.position[1],
-            sourceZ: light.position[2],
-            destX: light.conePointAt[0],
-            destY: light.conePointAt[1],
-            destZ: light.conePointAt[2],
-        })
+            "op": op,
+            "sourceX": light.position[0],
+            "sourceY": light.position[1],
+            "sourceZ": light.position[2],
+            "destX": light.conePointAt[0],
+            "destY": light.conePointAt[1],
+            "destZ": light.conePointAt[2],
+        });
     }
 
     cgl.frameStore.lightStack.push(light);
 
     outTrigger.trigger();
     cgl.frameStore.lightStack.pop();
-}
-
-
+};
