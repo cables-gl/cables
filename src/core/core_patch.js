@@ -952,7 +952,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // if (performance.now() - startTime > 100) console.log("op crerate took long: ", opData.objName);
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 1)console.warn("long op init ", obj.ops[iop].objName, timeused);
+        if (!this.silent && timeused > 200)console.warn("long op init ", obj.ops[iop].objName, timeused);
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
@@ -985,9 +985,12 @@ Patch.prototype.deSerialize = function (obj, genIds)
                         {
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
-                                console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut);
-
+                                const startTime = performance.now();
                                 addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                                const took = performance.now() - startTime;
+
+                                if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                             }
                         }
                     }
