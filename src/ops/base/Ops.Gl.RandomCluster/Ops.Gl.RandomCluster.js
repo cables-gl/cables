@@ -31,7 +31,7 @@ const mat = mat4.create();
 
 function doRender()
 {
-    if (CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+    if (cgl.shouldDrawHelpers(op))
     {
         CABLES.GL_MARKER.drawCube(op,
             size.get() / 2 * scaleX.get(),

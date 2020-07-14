@@ -10,7 +10,7 @@ const inAmount = op.inValueSlider("Amount", 0.5);
 
 const inFalloff = op.inValueSlider("Falloff", 0);
 const inInvert = op.inValueBool("Invert");
-let inBlend = op.inSwitch("Blend ", ["Normal", "Multiply"], "Normal");
+const inBlend = op.inSwitch("Blend ", ["Normal", "Multiply"], "Normal");
 
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());
@@ -30,11 +30,11 @@ const inWorldSpace = op.inValueBool("WorldSpace", true);
 
 let shader = null;
 
-let srcHeadVert = ""
+const srcHeadVert = ""
     .endl() + "OUT vec4 MOD_areaPos;"
     .endl();
 
-let srcBodyVert = ""
+const srcBodyVert = ""
     .endl() + "#ifndef MOD_WORLDSPACE"
     .endl() + "   MOD_areaPos=pos;"
     .endl() + "#endif"
@@ -120,7 +120,7 @@ op.render.onTriggered = function ()
                     "posZ": z
                 });
 
-        if (CABLES.UI.renderHelper || op.isCurrentUiOp())
+        if (cgl.shouldDrawHelpers(op))
         {
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
             CABLES.GL_MARKER.drawSphere(op, inSize.get());
@@ -177,7 +177,7 @@ op.render.onTriggered = function ()
     }
 
     if (!shader) return;
-    let texSlot = moduleVert.num + 5;
+    const texSlot = moduleVert.num + 5;
 
     op.trigger.trigger();
 };

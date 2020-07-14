@@ -10,7 +10,7 @@ const
     rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),
     outPlaying = op.outBool("Playing"),
-    outCanplaythrough = op.outBool("canplaythrough"),
+    outCanplaythrough = op.outBool("Can Play Through"),
     outTime = op.outNumber("Time");
 
 
@@ -25,7 +25,6 @@ op.onLoaded = init;
 
 function init()
 {
-    console.log("INIT VIDEOELEMENT!!!!!!!!!!");
     addElement();
     updateSoon();
 
