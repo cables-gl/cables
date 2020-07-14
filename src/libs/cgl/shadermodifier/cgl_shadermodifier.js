@@ -180,9 +180,8 @@ class ShaderModifier
         const uni = this._getUniform(name);
         if (!uni) return;
 
-
         const defineName = this.getPrefixedName(name);
-        // console.log("setting", name, defineName, value);
+
         for (const j in this._shaders)
         {
             this._setUniformValue(this._shaders[j].shader, defineName, value);
@@ -215,33 +214,9 @@ class ShaderModifier
         return false;
     }
 
+
     addUniform(type, name, valOrPort, v2, v3, v4, structUniformName, structName, propertyName, shaderType)
     {
-        if (structUniformName)
-        {
-            if (!this._getUniform(structUniformName + "." + name))
-            {
-                let _shaderType = "both";
-                if (shaderType) _shaderType = shaderType;
-
-                this._uniforms.push(
-                    {
-                        "type": type,
-                        "name": structUniformName ? (structUniformName + "." + name) : name,
-                        "v1": valOrPort,
-                        "v2": v2,
-                        "v3": v3,
-                        "v4": v4,
-                        "structUniformName": structUniformName,
-                        "structName": structName,
-                        "propertyName": name,
-                        "shaderType": _shaderType,
-                    });
-                this._changedUniforms = true;
-            }
-            return;
-        }
-
         if (!this._getUniform(name))
         {
             let _shaderType = "both";
@@ -250,41 +225,68 @@ class ShaderModifier
             this._uniforms.push(
                 {
                     "type": type,
-                    "name": structUniformName ? (structUniformName + "." + name) : name,
+                    "name": name,
                     "v1": valOrPort,
                     "v2": v2,
                     "v3": v3,
                     "v4": v4,
                     "structUniformName": structUniformName,
                     "structName": structName,
-                    "propertyName": name,
+                    "propertyName": propertyName,
                     "shaderType": _shaderType,
                 });
             this._changedUniforms = true;
         }
     }
 
-
-    addUniformsStruct(structUniformName, structName, structMembers, shaderType)
+    addUniformFrag(type, name, valOrPort, v2, v3, v4)
     {
-        // shaderModule.addUniformsStruct("MOD_light" + i, "MOD_Light", [
-        //     { "type": "3f", "name": "position", "v1": null },
-        //     { "type": "2i", "name": "typeCastShadow", "v1": null },
-        //     { "type": "4f", "name": "shadowProperties", "v1": null },
-        //     { "type": "f", "name": "shadowStrength", "v1": null },
-        // ], "frag");
-        if (!structName) return;
-        if (!structMembers) return;
+        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "frag");
+    }
 
-        for (let i = 0; i < structMembers.length; i += 1)
+    addUniformVert(type, name, valOrPort, v2, v3, v4)
+    {
+        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "vert");
+    }
+
+    addUniformBoth(type, name, valOrPort, v2, v3, v4)
+    {
+        this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "both");
+    }
+
+
+    addUniformStructFrag(structName, uniformName, members)
+    {
+        for (let i = 0; i < members.length; i += 1)
         {
-            const member = structMembers[i];
+            const member = members[i];
 
-            if (!this._getUniform(structUniformName + "." + member.name))
+            if (!this._getUniform(uniformName + "." + member.name))
             {
-                let _shaderType = "both";
-                if (shaderType) _shaderType = shaderType;
+                this.addUniform(
+                    member.type,
+                    uniformName + "." + member.name,
+                    member.v1,
+                    member.v2,
+                    member.v3,
+                    member.v4,
+                    uniformName,
+                    structName,
+                    member.name,
+                    "frag"
+                );
+            }
+        }
+    }
 
+    addUniformStructVert(structName, uniformName, members)
+    {
+        for (let i = 0; i < members.length; i += 1)
+        {
+            const member = members[i];
+
+            if (!this._getUniform(uniformName + "." + member.name))
+            {
                 this.addUniform(
                     member.type,
                     member.name,
@@ -292,10 +294,35 @@ class ShaderModifier
                     member.v2,
                     member.v3,
                     member.v4,
-                    structUniformName,
+                    uniformName,
                     structName,
-                    null,
-                    _shaderType
+                    member.name,
+                    "vert"
+                );
+            }
+        }
+    }
+
+    addUniformStructBoth(structName, uniformName, members)
+    {
+        const shaderType = "both";
+        for (let i = 0; i < members.length; i += 1)
+        {
+            const member = members[i];
+
+            if (!this._getUniform(uniformName + "." + member.name))
+            {
+                this.addUniform(
+                    member.type,
+                    member.name,
+                    member.v1,
+                    member.v2,
+                    member.v3,
+                    member.v4,
+                    uniformName,
+                    structName,
+                    member.name,
+                    "both"
                 );
             }
         }
@@ -325,7 +352,14 @@ class ShaderModifier
 
                 if (this._uniforms[j].name == name)
                 {
-                    for (const k in this._shaders) this._removeUniformFromShader(this.getPrefixedName(nameToRemove), this._shaders[k].shader);
+                    for (const k in this._shaders)
+                    {
+                        this._removeUniformFromShader(
+                            this.getPrefixedName(nameToRemove),
+                            this._shaders[k].shader
+                        );
+                    }
+
                     this._uniforms.splice(j, 1);
                 }
             }
