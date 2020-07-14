@@ -1046,7 +1046,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     const subpatchNumOps = {};
     for (let i = 0; i < this.ops.length; i++)
     {
-        const key = op.uiAttribs.subPatch || "UNKNOWN?";
+        const key = this.ops[i].uiAttribs.subPatch || "UNKNOWN?";
 
         subpatchNumOps[key] = subpatchNumOps[key] || 0;
         subpatchNumOps[key]++;
