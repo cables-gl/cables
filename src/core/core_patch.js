@@ -53,6 +53,7 @@ const Patch = function (cfg)
     this._crashedOps = [];
     this._renderOneFrame = false;
     this._animReq = null;
+    this._opIdCache = {};
 
     this._perf = {
         "fps": 0,
