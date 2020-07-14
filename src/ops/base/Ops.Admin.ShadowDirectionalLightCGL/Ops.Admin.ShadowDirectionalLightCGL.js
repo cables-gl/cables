@@ -200,8 +200,7 @@ inLRBT.onChange = inNear.onChange = inFar.onChange = function ()
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || gui.patch().isCurrentOp(op)))
-    {
+    if (cgl.shouldDrawHelpers(op))
         CABLES.GL_MARKER.drawLineSourceDest({
             "op": op,
             "sourceX": -200 * newLight.position[0],
@@ -211,7 +210,6 @@ function drawHelpers()
             "destY": 200 * newLight.position[1],
             "destZ": 200 * newLight.position[2],
         });
-    }
 }
 
 inTrigger.onTriggered = function ()
@@ -229,7 +227,7 @@ inTrigger.onTriggered = function ()
     }
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
-    // drawHelpers();
+    drawHelpers();
 
 
     cgl.frameStore.lightStack.push(newLight);

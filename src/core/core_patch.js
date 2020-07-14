@@ -889,6 +889,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const opData = obj.ops[iop];
         let op = null;
 
+
         try
         {
             if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
@@ -940,8 +941,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
             }
         }
 
+        // if (performance.now() - startTime > 100) console.log("op crerate took long: ", opData.objName);
+
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        // if(!this.silent && timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
+        if (!this.silent && timeused > 100)console.warn("long op init ", obj.ops[iop].objName, timeused);
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 

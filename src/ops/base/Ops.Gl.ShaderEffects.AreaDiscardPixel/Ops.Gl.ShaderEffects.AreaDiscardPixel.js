@@ -133,7 +133,7 @@ op.render.onTriggered=function()
                 posZ:z
             });
 
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if (cgl.shouldDrawHelpers(op))
     {
         CABLES.GL_MARKER.drawSphere(op,inSize.get());
     }

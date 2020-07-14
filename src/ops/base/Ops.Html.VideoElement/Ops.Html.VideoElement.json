@@ -62,7 +62,7 @@
             },
             {
                 "type": "0",
-                "name": "canplaythrough",
+                "name": "Can Play Through",
                 "subType": "boolean"
             },
             {

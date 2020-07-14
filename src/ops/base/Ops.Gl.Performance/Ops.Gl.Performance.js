@@ -11,6 +11,7 @@ const
 
 const cgl = op.patch.cgl;
 const element = document.createElement("div");
+
 let elementMeasures = null;
 let ctx = null;
 let opened = false;
@@ -296,6 +297,8 @@ function updateText()
         element.innerHTML += "<br/>shader binds: " + Math.ceil(CGL.profileData.profileShaderBinds / fps) +
             " uniforms: " + Math.ceil(CGL.profileData.profileUniformCount / fps) +
             " mvp_uni_mat4: " + Math.ceil(CGL.profileData.profileMVPMatrixCount / fps) +
+            " num glPrimitives: " + Math.ceil(CGL.profileData.profileMeshNumElements / (fps)) +
+
             " mesh.setGeom: " + CGL.profileData.profileMeshSetGeom +
             " videos: " + CGL.profileData.profileVideosPlaying +
             " tex preview: " + CGL.profileData.profileTexPreviews;
@@ -327,6 +330,7 @@ function updateText()
     CGL.profileData.profileMeshDraw = 0;
     CGL.profileData.profileTextureEffect = 0;
     CGL.profileData.profileTexPreviews = 0;
+    CGL.profileData.profileMeshNumElements = 0;
 }
 
 function styleMeasureEle(ele)

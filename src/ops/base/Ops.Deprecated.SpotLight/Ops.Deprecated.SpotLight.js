@@ -104,25 +104,25 @@ const light = new Light({
 Object.keys(inLight).forEach(function (key)
 {
     if (inLight[key].length)
-{
+    {
         for (let i = 0; i < inLight[key].length; i += 1)
-{
+        {
             inLight[key][i].onChange = function ()
-{
+            {
                 light[key][i] = inLight[key][i].get();
             };
         }
     }
- else
-{
+    else
+    {
         inLight[key].onChange = function ()
-{
+        {
             if (key === "coneAngle" || key === "coneAngleInner" || key === "coneAngleOuter")
-{
+            {
                 light[key] = CGL.DEG2RAD * inLight[key].get();
             }
- else if (key === "cosConeAngle" || key === "cosConeAngleInner")
- {
+            else if (key === "cosConeAngle" || key === "cosConeAngleInner")
+            {
                 light[key] = Math.cos(CGL.DEG2RAD * inLight[key].get());
             }
             else light[key] = inLight[key].get();
@@ -135,8 +135,8 @@ inTrigger.onTriggered = function ()
 {
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
-    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
-{
+    if (cgl.shouldDrawHelpers(op))
+    {
         gui.setTransformGizmo({
             "posX": inPosX,
             "posY": inPosY,
