@@ -410,7 +410,7 @@ const onMouseWheel = function (event)
         radius += (parseFloat(delta)) * 1.2;
 
         eye = circlePos(percY);
-        event.preventDefault();
+        // event.preventDefault();
     }
 };
 
