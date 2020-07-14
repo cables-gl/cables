@@ -81,6 +81,7 @@ const newLight = new CGL.Light(cgl, {
     "specular": [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); }),
     "intensity": inIntensity.get(),
     "castShadow": false,
+    "shadowStrength": inShadowStrength.get(),
 });
 
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
@@ -223,6 +224,10 @@ inTrigger.onTriggered = function ()
         newLight.position = [inPosX.get(), inPosY.get(), inPosZ.get()];
         newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
         newLight.castShadow = inCastShadow.get();
+
+        newLight.normalOffset = inNormalOffset.get();
+        newLight.shadowBias = inBias.get();
+        newLight.shadowStrength = inShadowStrength.get();
         updateLight = false;
     }
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
@@ -241,10 +246,6 @@ inTrigger.onTriggered = function ()
         // remove light from stack and readd it with shadow map & mvp matrix
         cgl.frameStore.lightStack.pop();
 
-        newLight.castShadow = inCastShadow.get();
-        newLight.normalOffset = inNormalOffset.get();
-        newLight.shadowBias = inBias.get();
-        newLight.shadowStrength = inShadowStrength.get();
         cgl.frameStore.lightStack.push(newLight);
     }
 

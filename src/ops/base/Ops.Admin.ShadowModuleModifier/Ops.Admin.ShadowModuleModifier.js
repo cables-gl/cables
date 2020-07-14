@@ -234,7 +234,7 @@ function createUniforms(lightsCount)
             { "type": "3f", "name": "position", "v1": null },
             { "type": "2i", "name": "typeCastShadow", "v1": null },
             { "type": "4f", "name": "shadowProperties", "v1": null },
-            { "type": "f", "name": "shadowStrength", "v1": null },
+            { "type": "f", "name": "shadowStrength", "v1": light.shadowStrength },
         ]);
 
         hasShadowMap[i] = false;
@@ -279,6 +279,7 @@ function setUniforms(lightStack)
             LIGHT_TYPES[light.type],
             Number(light.castShadow),
         ]);
+        shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
         if (light.shadowMap)
         {
@@ -300,7 +301,7 @@ function setUniforms(lightStack)
                 light.shadowMap.width,
                 light.shadowBias
             ]);
-            shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
+
 
             if (hasShadowMap[i])
             {
@@ -325,9 +326,7 @@ function setUniforms(lightStack)
                 light.shadowCubeMap.size,
                 light.shadowBias
             ]);
-            shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
-            if (cgl.frameStore.shadowPass) op.log("Yup im here also in shadowpass");
             if (hasShadowCubemap[i])
             {
                 if (light.shadowCubeMap.cubemap) shaderModule.pushTexture("MOD_shadowMapCube" + i, light.shadowCubeMap.cubemap, cgl.gl.TEXTURE_CUBE_MAP);
@@ -342,13 +341,11 @@ function setUniforms(lightStack)
                 if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i))
                 {
                     shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
-                    op.log("yup im here");
                 }
                 hasShadowMap[i] = false;
             }
             else if (hasShadowCubemap[i])
             {
-                op.log("but also here thats weird");
                 if (shaderModule.hasDefine("HAS_SHADOW_MAP_" + i)) shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
                 hasShadowCubemap[i] = false;
             }

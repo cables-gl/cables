@@ -45,7 +45,7 @@ op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
-const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
+const inShadowStrength = op.inFloatSlider("Shadow Strength", 0.99);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
@@ -118,12 +118,16 @@ const newLight = new CGL.Light(cgl, {
     "cosConeAngle": Math.cos(CGL.DEG2RAD * inConeAngle.get()),
     "spotExponent": inSpotExponent.get(),
     "castShadow": false,
+    "shadowStrength": inShadowStrength.get(),
+    "shadowBias": inBias.get(),
+    "normalOffset": inNormalOffset.get(),
 });
 
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 newLight.createShadowMapShader();
 newLight.createBlurEffect({});
 newLight.createBlurShader();
+newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
 
 let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
@@ -165,6 +169,7 @@ inCastShadow.onChange = function ()
     inBias.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
     updating = false;
+    updateLight = true;
 };
 
 let texelSize = 1 / Number(inMapSize.get());

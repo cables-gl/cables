@@ -37,9 +37,9 @@ function Light(cgl, config)
     // * shadow specific config
     this.castShadow = config.castShadow || false;
     this.nearFar = config.nearFar || [0, 0];
-    this.normalOffset = 0;
-    this.shadowBias = 0;
-    this.shadowStrength = 0;
+    this.normalOffset = config.normalOffset || 0;
+    this.shadowBias = config.shadowBias || 0;
+    this.shadowStrength = config.shadowStrength || 0;
     this.lightMatrix = null;
 
     this.shadowMap = null;

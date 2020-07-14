@@ -93,8 +93,9 @@ inCastShadow.onChange = function ()
     inFar.setUiAttribs({ "greyout": !castShadow });
     inBias.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
-    updateLight = true;
+    newLight.castShadow = castShadow;
     updating = false;
+    updateLight = true;
 };
 
 const outTrigger = op.outTrigger("Trigger Out");
@@ -109,6 +110,8 @@ const newLight = new CGL.Light(cgl, {
     "intensity": inIntensity.get(),
     "radius": inRadius.get(),
     "falloff": inFalloff.get(),
+    "shadowStrength": inShadowStrength.get(),
+    "shadowBias": inBias.get()
 });
 
 if (!newLight.hasFramebuffer())
