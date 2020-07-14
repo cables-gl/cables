@@ -711,9 +711,16 @@ Patch.prototype.serialize = function (asObj)
 
 Patch.prototype.getOpById = function (opid)
 {
+    this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
+
+    const startTime = performance.now();
     for (const i in this.ops)
     {
-        if (this.ops[i].id == opid) return this.ops[i];
+        if (this.ops[i].id == opid)
+        {
+            this.timeNeededGetOpById += (performance.now() - startTime);
+            return this.ops[i];
+        }
     }
 };
 
@@ -1033,6 +1040,19 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
     for (const i in this.ops) this.ops[i].initVarPorts();
+
+    console.log("this.timeNeededGetOpById", this.timeNeededGetOpById);
+
+    const subpatchNumOps = {};
+    for (let i = 0; i < this.ops.length; i++)
+    {
+        const key = op.uiAttribs.subPatch || "UNKNOWN?";
+
+        subpatchNumOps[key] = subpatchNumOps[key] || 0;
+        subpatchNumOps[key]++;
+    }
+    console.log(subpatchNumOps);
+
 
     setTimeout(
         () =>
