@@ -84,7 +84,7 @@ function doRender()
 
         if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
-        if (if (cgl.shouldDrawHelpers(op))op.isCurrentUiOp())
+        if (cgl.shouldDrawHelpers(op))
         {
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
             CABLES.GL_MARKER.drawSphere(op, inSize.get());
