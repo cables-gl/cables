@@ -237,18 +237,19 @@ function createUniforms(lightsCount)
             { "type": "f", "name": "shadowStrength", "v1": null },
         ]);
 
-        shaderModule.addUniformStructBoth("MOD_LightClassTest", "MOD_class" + i, [
-            { "type": "3f", "name": "xxx", "v1": null },
-            { "type": "2f", "name": "yyy", "v1": null },
-            { "type": "4f", "name": "zzz", "v1": null },
-            { "type": "f", "name": "www", "v1": null },
-        ]);
-
         hasShadowMap[i] = false;
         hasShadowCubemap[i] = false;
+
         shaderModule.addUniformVert("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null);
         shaderModule.addUniformVert("f", "MOD_normalOffset" + i, 0, null, null, null, null);
-        shaderModule.addUniformFrag(light.type !== "point" ? "t" : "tc", light.type !== "point" ? "MOD_shadowMap" + i : "MOD_shadowMapCube" + i, 0, null, null, null);
+        if (light.type !== "point")
+        {
+            shaderModule.addUniformFrag("t", "MOD_shadowMap" + i, 0, null, null, null);
+        }
+        else
+        {
+            shaderModule.addUniformFrag("tc", "MOD_shadowMapCube" + i, 0, null, null, null);
+        }
     }
 
     if (lightsCount > 0)
