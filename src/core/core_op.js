@@ -995,21 +995,13 @@ const Op = function ()
      */
     Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
-        CABLES.timeUsedGetPortByName = CABLES.timeUsedGetPortByName || 0;
-
-        const startTime = performance.now();
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
             if (this.portsIn[ipi].getName() == name)
-            {
-                CABLES.timeUsedGetPortByName += performance.now() - startTime;
                 return this.portsIn[ipi];
-            }
+
         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
             if (this.portsOut[ipo].getName() == name)
-            {
-                CABLES.timeUsedGetPortByName += performance.now() - startTime;
                 return this.portsOut[ipo];
-            }
     };
 
     /**
