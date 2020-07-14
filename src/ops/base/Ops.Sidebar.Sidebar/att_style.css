@@ -258,7 +258,6 @@
     width: calc(50% - 7px);
     margin-right: 7px;
     margin-top: 2px;
-    max-height: 1em;
     text-overflow: ellipsis;
     /* overflow: hidden; */
 }
