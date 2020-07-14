@@ -523,6 +523,8 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 {
                     this.link(reLinkP1.parent, reLinkP1.getName(), reLinkP2.parent, reLinkP2.getName());
                 }
+
+                delete this._opIdCache[opid];
             }
         }
     }
@@ -876,7 +878,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     if (typeof obj === "string")
     {
-        console.log("[patchload] parse json...");
+        // console.log("[patchload] parse json...");
         obj = JSON.parse(obj);
     }
     const self = this;
@@ -895,7 +897,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     const reqs = new Requirements(this);
 
 
-    console.log("[patchload] add ops...");
+    // console.log("[patchload] add ops...");
 
 
     // Log.log('add ops ',obj.ops);
@@ -967,7 +969,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
-    console.log("[patchload] valueset callbacks");
+    // console.log("[patchload] valueset callbacks");
 
     for (const i in this.ops)
     {
@@ -979,7 +981,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    console.log("[patchload] create links");
+    // console.log("[patchload] create links");
 
     // create links...
     if (obj.ops)
@@ -996,12 +998,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
                         {
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
-                                const startTime = performance.now();
+                                // const startTime = performance.now();
                                 addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
 
-                                const took = performance.now() - startTime;
-
-                                if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
+                                // const took = performance.now() - startTime;
+                                // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                             }
                         }
                     }
@@ -1010,7 +1011,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    console.log("[patchload] ops onloaded");
+    // console.log("[patchload] ops onloaded");
 
     for (const i in this.ops)
     {
@@ -1022,7 +1023,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    console.log("[patchload] ops init");
+    // console.log("[patchload] ops init");
 
     for (const i in this.ops)
     {
@@ -1033,7 +1034,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    console.log("[patchload] variables");
+    // console.log("[patchload] variables");
 
     if (this.config.variables)
     {
@@ -1045,17 +1046,17 @@ Patch.prototype.deSerialize = function (obj, genIds)
     }
     for (const i in this.ops) this.ops[i].initVarPorts();
 
-    console.log("this.timeNeededGetOpById", this.timeNeededGetOpById);
+    console.log("CABLES.timeUsedGetPortByName", CABLES.timeUsedGetPortByName);
 
-    const subpatchNumOps = {};
-    for (let i = 0; i < this.ops.length; i++)
-    {
-        const key = this.ops[i].uiAttribs.subPatch || "UNKNOWN?";
+    // const subpatchNumOps = {};
+    // for (let i = 0; i < this.ops.length; i++)
+    // {
+    //     const key = this.ops[i].uiAttribs.subPatch || "UNKNOWN?";
 
-        subpatchNumOps[key] = subpatchNumOps[key] || 0;
-        subpatchNumOps[key]++;
-    }
-    console.log(subpatchNumOps);
+    //     subpatchNumOps[key] = subpatchNumOps[key] || 0;
+    //     subpatchNumOps[key]++;
+    // }
+    // console.log(subpatchNumOps);
 
 
     setTimeout(
