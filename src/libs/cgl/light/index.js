@@ -205,7 +205,6 @@ Light.prototype.createFramebuffer = function (width, height, options)
                     "isFloatingPointTexture": true,
                     "filter": CGL.Texture.FILTER_LINEAR,
                     "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-                    "name": this.type
                 },
                 options,
             ),

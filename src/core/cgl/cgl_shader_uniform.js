@@ -199,7 +199,6 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
 
 Uniform.prototype.copy = function (newShader)
 {
-    // __shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName;
     const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
     uni.shaderType = this.shaderType;
     return uni;

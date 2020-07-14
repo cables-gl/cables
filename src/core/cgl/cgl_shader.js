@@ -774,8 +774,6 @@ Shader.prototype.toggleDefine = function (name, enabled)
 {
     if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
     {
-        // console.log("toggleDefine", name, enabled);
-
         enabled.removeEventListener("change", enabled.onToggleDefine);
         enabled.onToggleDefine = (v) =>
         {

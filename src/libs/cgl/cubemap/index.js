@@ -128,7 +128,7 @@ Cubemap.prototype.initializeCubemap = function ()
             }
         }
         else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
-
+        // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
     this.checkError(1);
