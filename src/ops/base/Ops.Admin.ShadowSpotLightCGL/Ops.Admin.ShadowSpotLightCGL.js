@@ -45,7 +45,7 @@ op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
-const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
+const inShadowStrength = op.inFloatSlider("Shadow Strength", 0.99);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
@@ -94,7 +94,7 @@ inAdvanced.onChange = function ()
     inFilterType.setUiAttribs({ "greyout": !inAdvanced.get() });
     inAnisotropic.setUiAttribs({ "greyout": !inAdvanced.get() });
     if (!inAdvanced.get())
-{
+    {
         /* const size = Number(inMapSize.get());
         newLight.createFramebuffer(size, size, {});
         newLight.createBlurEffect({});
@@ -118,30 +118,16 @@ const newLight = new CGL.Light(cgl, {
     "cosConeAngle": Math.cos(CGL.DEG2RAD * inConeAngle.get()),
     "spotExponent": inSpotExponent.get(),
     "castShadow": false,
+    "shadowStrength": inShadowStrength.get(),
+    "shadowBias": inBias.get(),
+    "normalOffset": inNormalOffset.get(),
 });
 
-if (inCastShadow.get())
-{
-    const size = Number(inMapSize.get());
-    newLight.createFramebuffer(size, size, {});
-    newLight.createShadowMapShader();
-    newLight.createBlurEffect({});
-    newLight.createBlurShader();
-}
-
-
-const inLight = {
-    "position": positionIn,
-    "conePointAt": pointAtIn,
-    "color": colorIn,
-    "specular": colorSpecularIn,
-    "intensity": inIntensity,
-    "radius": inRadius,
-    "falloff": inFalloff,
-    "cosConeAngle": inConeAngle,
-    "cosConeAngleInner": inConeAngleInner,
-    "spotExponent": inSpotExponent
-};
+newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+newLight.createShadowMapShader();
+newLight.createBlurEffect({});
+newLight.createBlurShader();
+newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
 
 let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
@@ -154,23 +140,22 @@ function updateLightParameters()
     updateLight = true;
 }
 
-newLight.createProjectionMatrix(null, inNear.get(), inFar.get(), inLight.cosConeAngle.get());
+newLight.createProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
 
 inCastShadow.onChange = function ()
 {
     updating = true;
     const castShadow = inCastShadow.get();
     if (castShadow)
-{
-        const size = Number(inMapSize.get());
-        newLight.createFramebuffer(size, size, {});
-        newLight.createShadowMapShader();
-        newLight.createBlurEffect({});
-        newLight.createBlurShader();
-    }
- else
-{
-
+    {
+        if (!newLight.hasFramebuffer())
+        {
+            const size = Number(inMapSize.get());
+            newLight.createFramebuffer(size, size, {});
+            newLight.createShadowMapShader();
+            newLight.createBlurEffect({});
+            newLight.createBlurShader();
+        }
     }
 
     newLight.castShadow = castShadow;
@@ -184,6 +169,7 @@ inCastShadow.onChange = function ()
     inBias.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
     updating = false;
+    updateLight = true;
 };
 
 let texelSize = 1 / Number(inMapSize.get());
@@ -197,15 +183,15 @@ function updateBuffers()
     const anisotropyFactor = Number(inAnisotropic.get());
 
     if (inFilterType.get() == "Linear")
-{
+    {
         filterType = CGL.Texture.FILTER_LINEAR;
     }
- else if (inFilterType.get() == "Nearest")
-{
+    else if (inFilterType.get() == "Nearest")
+    {
         filterType = CGL.Texture.FILTER_NEAREST;
     }
- else if (inFilterType.get() == "Mip Map")
-{
+    else if (inFilterType.get() == "Mip Map")
+    {
         filterType = CGL.Texture.FILTER_MIPMAP;
     }
 
@@ -233,22 +219,6 @@ inMapSize.onChange = function ()
     updating = false;
 };
 
-
-/*
-const lightProjectionMatrix = mat4.create();
-
-function updateProjectionMatrix() {
-        mat4.perspective(
-        lightProjectionMatrix,
-        //CGL.DEG2RAD * inFOV.get(),
-        -2 * CGL.DEG2RAD * inLight.cosConeAngle.get(),
-        1,
-        inNear.get(),
-        inFar.get()
-    );
-}
-*/
-
 inNear.onChange = inFar.onChange = function ()
 {
     newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
@@ -263,8 +233,7 @@ function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
-
-{
+    {
         gui.setTransformGizmo({
             "posX": inPosX,
             "posY": inPosY,
@@ -282,11 +251,12 @@ function drawHelpers()
     }
 }
 
+const hasRenderedMapOnce = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
     if (updateLight)
-{
+    {
         newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });
         newLight.color = [0, 1, 2].map(function (i) { return colorIn[i].get(); });
         newLight.specular = [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); });
@@ -297,7 +267,7 @@ inTrigger.onTriggered = function ()
         newLight.cosConeAngleInner = Math.cos(CGL.DEG2RAD * inConeAngleInner.get());
         newLight.cosConeAngle = Math.cos(CGL.DEG2RAD * inConeAngle.get());
         newLight.spotExponent = inSpotExponent.get();
-        newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inLight.cosConeAngle.get());
+        newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get());
     }
 
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
@@ -317,18 +287,17 @@ inTrigger.onTriggered = function ()
     cgl.frameStore.lightStack.push(newLight);
 
     if (inCastShadow.get())
-{
+    {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
         newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
+
         // remove light from stack and readd it with shadow map & mvp matrix
         cgl.frameStore.lightStack.pop();
 
-        // light.lightMatrix = lightBiasMVPMatrix;
         newLight.castShadow = inCastShadow.get();
-        // newLight.shadowMap = fb.getTextureColor();
-        // newLight.shadowMapDepth = fb.getTextureDepth();
+
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();
