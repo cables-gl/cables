@@ -206,10 +206,7 @@ function removeUniforms()
 {
     for (let i = 0; i < STATE.lastLength; i += 1)
     {
-        shaderModule.removeUniform("MOD_light" + i + ".position");
-        shaderModule.removeUniform("MOD_light" + i + ".typeCastShadow");
-        shaderModule.removeUniform("MOD_light" + i + ".shadowProperties");
-        shaderModule.removeUniform("MOD_light" + i + ".shadowStrength");
+        shaderModule.removeUniformStruct("MOD_light" + i);
         shaderModule.removeUniform("MOD_shadowMap" + i);
         shaderModule.removeUniform("MOD_shadowMapCube" + i);
         shaderModule.removeUniform("MOD_normalOffset" + i);
@@ -238,6 +235,13 @@ function createUniforms(lightsCount)
             { "type": "2i", "name": "typeCastShadow", "v1": null },
             { "type": "4f", "name": "shadowProperties", "v1": null },
             { "type": "f", "name": "shadowStrength", "v1": null },
+        ]);
+
+        shaderModule.addUniformStructBoth("MOD_LightClassTest", "MOD_class" + i, [
+            { "type": "3f", "name": "xxx", "v1": null },
+            { "type": "2f", "name": "yyy", "v1": null },
+            { "type": "4f", "name": "zzz", "v1": null },
+            { "type": "f", "name": "www", "v1": null },
         ]);
 
         hasShadowMap[i] = false;

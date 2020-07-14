@@ -6,6 +6,7 @@ class ShaderModifier
         this._name = name;
         this._shaders = {};
         this._uniforms = [];
+        this._structUniforms = [];
         this._definesToggled = {};
         this._defines = {};
         this._mods = [];
@@ -125,38 +126,53 @@ class ShaderModifier
         for (let i = 0; i < this._uniforms.length; i++)
         {
             const uni = this._uniforms[i];
-
             const name = this.getPrefixedName(uni.name);
-            let structUniformName = uni.structUniformName;
-            let structName = uni.structName;
 
-            if (uni.structUniformName && uni.structName)
-            {
-                structUniformName = this.getPrefixedName(uni.structUniformName);
-                structName = this.getPrefixedName(uni.structName);
-            }
-
-            if (!shader.hasUniform(name))
+            if (!shader.hasUniform(name) && !uni.structName)
             {
                 let un = null;
                 if (uni.shaderType === "both")
                 {
-                    un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un = shader.addUniformBoth(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
                     un.comment = "mod: " + this._name;
                 }
                 else if (uni.shaderType === "frag")
                 {
-                    un = shader.addUniformFrag(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un = shader.addUniformFrag(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
                     un.comment = "mod: " + this._name;
                 }
                 else if (uni.shaderType === "vert")
                 {
-                    un = shader.addUniformVert(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4, structUniformName, structName, uni.propertyName);
+                    un = shader.addUniformVert(uni.type, name, uni.v1, uni.v2, uni.v3, uni.v4);
                     un.comment = "mod: " + this._name;
                 }
             }
             else
             {
+            }
+        }
+
+        for (let j = 0; j < this._structUniforms.length; j += 1)
+        {
+            const structUniform = this._structUniforms[j];
+            let structUniformName = structUniform.uniformName;
+            let structName = structUniform.structName;
+            const members = structUniform.members;
+
+            structUniformName = this.getPrefixedName(structUniform.uniformName);
+            structName = this.getPrefixedName(structUniform.structName);
+
+            if (structUniform.shaderType === "frag")
+            {
+                shader.addUniformStructFrag(structName, structUniformName, members);
+            }
+            if (structUniform.shaderType === "vert")
+            {
+                shader.addUniformStructVert(structName, structUniformName, members);
+            }
+            if (structUniform.shaderType === "both")
+            {
+                shader.addUniformStructBoth(structName, structUniformName, members);
             }
         }
     }
@@ -199,6 +215,16 @@ class ShaderModifier
             }
         }
         return false;
+    }
+
+    _getStructUniform(uniName)
+    {
+        for (let i = 0; i < this._structUniforms.length; i += 1)
+        {
+            if (this._structUniforms[i].uniformName === uniName) return this._structUniforms[i];
+        }
+
+        return null;
     }
 
     _isStructUniform(name)
@@ -259,6 +285,8 @@ class ShaderModifier
         for (let i = 0; i < members.length; i += 1)
         {
             const member = members[i];
+            if ((member.type === "2i" || member.type === "i" || member.type === "3i") && shaderType === "both")
+                console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
 
             if (!this._getUniform(uniformName + "." + member.name))
             {
@@ -275,6 +303,15 @@ class ShaderModifier
                     shaderType
                 );
             }
+        }
+        if (!this._getStructUniform(uniformName))
+        {
+            this._structUniforms.push({
+                "structName": structName,
+                "uniformName": uniformName,
+                "members": members,
+                "shaderType": shaderType,
+            });
         }
     }
 
@@ -316,7 +353,7 @@ class ShaderModifier
                 const uniToRemove = this._uniforms[j];
                 const nameToRemove = name;
 
-                if (this._uniforms[j].name == name)
+                if (this._uniforms[j].name == name && !this._uniforms[j].structName)
                 {
                     for (const k in this._shaders)
                     {
@@ -329,6 +366,36 @@ class ShaderModifier
                     this._uniforms.splice(j, 1);
                 }
             }
+            this._changedUniforms = true;
+        }
+    }
+
+    removeUniformStruct(uniformName)
+    {
+        if (this._getStructUniform(uniformName))
+        {
+            for (let i = this._structUniforms.length - 1; i >= 0; i -= 1)
+            {
+                const structToRemove = this._structUniforms[i];
+
+                if (structToRemove.uniformName === uniformName)
+                {
+                    for (const j in this._shaders)
+                    {
+                        for (let k = 0; k < structToRemove.members.length; k += 1)
+                        {
+                            const member = structToRemove.members[k];
+                            this._removeUniformFromShader(
+                                this.getPrefixedName(member.name),
+                                this._shaders[j].shader
+                            );
+                        }
+                    }
+
+                    this._structUniforms.splice(i, 1);
+                }
+            }
+
             this._changedUniforms = true;
         }
     }

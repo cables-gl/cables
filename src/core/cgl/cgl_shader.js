@@ -520,7 +520,6 @@ Shader.prototype.compile = function ()
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
         {
-            console.log("adding uniform", this._uniforms[i]);
             const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
@@ -1016,22 +1015,22 @@ Shader.prototype._addUniform = function (uni)
  * @instance
  * @function addUniformFrag
  */
-Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "frag";
     return uni;
 };
 
-Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "vert";
     return uni;
 };
-Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName)
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, structUniformName, structName, propertyName);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "both";
     return uni;
 };
@@ -1059,9 +1058,13 @@ Shader.prototype.addUniformStructVert = function (structName, uniformName, membe
 Shader.prototype.addUniformStructBoth = function (structName, uniformName, members)
 {
     if (!members) return;
+
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
+        if ((member.type === "2i" || member.type === "i" || member.type === "3i"))
+            console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
+
         const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
         uni.shaderType = "both";
     }
