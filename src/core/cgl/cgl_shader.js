@@ -1005,13 +1005,14 @@ Shader.prototype._addUniform = function (uni)
 };
 
 /**
- * add a uniform to the shader
+ * add a uniform to the fragment shader
  * @param {String} type ['f','t', etc]
  * @param {String} name
  * @param {any} value or port
  * @memberof Shader
  * @instance
  * @function addUniformFrag
+ * @returns {CGL.Uniform}
  */
 Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4)
 {
@@ -1020,12 +1021,32 @@ Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4)
     return uni;
 };
 
+/**
+ * add a uniform to the vertex shader
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformVert
+ * @returns {CGL.Uniform}
+ */
 Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4)
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "vert";
     return uni;
 };
+/**
+ * add a uniform to both shaders
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformBoth
+ * @returns {CGL.Uniform}
+ */
 Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4)
 {
     const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
@@ -1033,29 +1054,99 @@ Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4)
     return uni;
 };
 
+/**
+ * add a struct & its uniforms to the fragment shader
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructFrag
+ * @returns {Object}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructFrag("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
 Shader.prototype.addUniformStructFrag = function (structName, uniformName, members)
 {
-    if (!members) return;
+    const uniforms = {};
+
+    if (!members) return uniforms;
+
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
         const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
         uni.shaderType = "frag";
+        uniforms[uniformName + "." + member.name] = uni;
     }
+
+    return uniforms;
 };
+
+/**
+ * add a struct & its uniforms to the vertex shader
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructVert
+ * @returns {CGL.Uniform}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructVert("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
 Shader.prototype.addUniformStructVert = function (structName, uniformName, members)
 {
-    if (!members) return;
+    const uniforms = {};
+
+    if (!members) return uniforms;
+
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
         const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
         uni.shaderType = "vert";
+        uniforms[uniformName + "." + member.name] = uni;
     }
+
+    return uniforms;
 };
+
+/**
+ * add a struct & its uniforms to the both shaders. PLEASE NOTE: it is not possible to add the same struct to both shaders when it contains ANY integer members.
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructBoth
+ * @returns {Object}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructBoth("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
 Shader.prototype.addUniformStructBoth = function (structName, uniformName, members)
 {
-    if (!members) return;
+    const uniforms = {};
+
+    if (!members) return uniforms;
 
     for (let i = 0; i < members.length; i += 1)
     {
@@ -1065,7 +1156,10 @@ Shader.prototype.addUniformStructBoth = function (structName, uniformName, membe
 
         const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
         uni.shaderType = "both";
+        uniforms[uniformName + "." + member.name] = uni;
     }
+
+    return uniforms;
 };
 
 Shader.prototype.hasUniform = function (name)
