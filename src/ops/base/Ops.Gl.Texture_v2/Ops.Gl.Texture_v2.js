@@ -1,5 +1,5 @@
 const
-    filename = op.inUrl("File", "image"),
+    filename = op.inUrl("File", [".jpg", ".png", ".webp", ".jpeg"]),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"]),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
