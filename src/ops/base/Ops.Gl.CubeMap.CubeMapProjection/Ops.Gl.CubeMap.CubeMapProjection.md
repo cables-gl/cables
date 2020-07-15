@@ -1,1 +1,0 @@
-Helper op to visualize a cubemap.

@@ -1,1 +1,0 @@
-Handy op to convert an equirectangular map to a cubemap.

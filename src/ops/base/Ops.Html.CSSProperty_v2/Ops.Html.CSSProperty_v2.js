@@ -36,7 +36,9 @@ function update()
         const str = inValue.get() + inValueSuffix.get();
         try
         {
-            ele.style[inProperty.get()] = str;
+            // console.log("css",inProperty.get(),str);
+            if (ele.style[inProperty.get()] != str)
+                ele.style[inProperty.get()] = str;
         }
         catch (e)
         {
