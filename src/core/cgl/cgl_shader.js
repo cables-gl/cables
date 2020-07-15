@@ -217,7 +217,7 @@ Shader.prototype.copy = function ()
 
     shader._modGroupCount = this._modGroupCount;
     shader._moduleNames = this._moduleNames;
-
+    shader.offScreenPass = this.offScreenPass;
     for (let i = 0; i < this._uniforms.length; i++)
     {
         const u = this._uniforms[i].copy(shader);

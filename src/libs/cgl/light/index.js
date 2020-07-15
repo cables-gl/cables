@@ -4,14 +4,6 @@ import {
     getBlurPassVertexShader,
     getBlurPassFragmentShader
 } from "./createShaders";
-// import { Framebuffer } from "./cgl_framebuffer";
-// import { CGL.Framebuffer2 } from "./cgl_framebuffer2";
-// import { Texture } from "./cgl_texture";
-// import { CGL.TextureEffect } from "./cgl_textureeffect";
-// import { Shader } from "./cgl_shader";
-// import { CGL.Uniform } from "./cgl_shader_uniform";
-// import { CGL.DEG2RAD } from "./cgl_utils";
-// import { Cubemap } from "./cgl_cubemap";
 
 /**
  *

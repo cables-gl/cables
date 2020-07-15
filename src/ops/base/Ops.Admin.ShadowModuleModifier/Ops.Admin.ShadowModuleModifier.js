@@ -15,9 +15,13 @@ const algorithms = ["Default", "PCF", "Poisson", "VSM"];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inSpread = op.inInt("Sample Spread", 250);
+const inDiscardTransparent = op.inBool("Discard Transparent", false);
+const inOpacityTexture = op.inTexture("Opacity Texture");
 
 inSamples.setUiAttribs({ "greyout": true });
 inSpread.setUiAttribs({ "greyout": true });
+op.setPortGroup("", [inCastShadow, inReceiveShadow]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
 if (inReceiveShadow.get())
 {
@@ -33,8 +37,6 @@ if (inReceiveShadow.get())
     }
 }
 
-op.setPortGroup("", [inCastShadow, inReceiveShadow]);
-op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 
 inReceiveShadow.onChange = () =>
 {
@@ -45,7 +47,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -76,6 +78,7 @@ inSamples.onChange = () =>
 {
     shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 };
+
 
 const outTrigger = op.outTrigger("Trigger Out");
 
@@ -175,10 +178,25 @@ function createModuleShaders(lightStack)
     createUniforms(lightStack.length);
 }
 
-
-const shader = null;
-const vertexModule = null;
-const fragmentModule = null;
+// * SHADOW PASS MODULE *
+const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier");
+shadowShaderModule.addModule({
+    "name": "MODULE_COLOR",
+    "priority": -2,
+    "title": op.objName + "shadowPass",
+    "srcHeadFrag": `
+  //  #ifdef HAS_TEXTURE_OPACITY
+//        UNI sampler2D texOpacity;
+ //   #endif
+    `,
+    "srcBodyFrag": `
+    #ifdef HAS_TEXTURE_OPACITY
+        outColor.a *= dot(vec3(0.2126,0.7152,0.0722), texture(texOpacity, texCoord).rgb);
+        if (outColor.a < 0.2) discard;
+    #endif
+    `,
+});
+shadowShaderModule.addUniformFrag("t", "texOpacity", 0);
 
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
@@ -191,11 +209,12 @@ let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
 
 
+// * MAIN PASS MODULE *
 const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
@@ -367,6 +386,11 @@ function updateShader()
     setUniforms(cgl.frameStore.lightStack);
 }
 
+function updateShadowPassShaders()
+{
+
+}
+
 inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
@@ -401,17 +425,37 @@ inTrigger.onTriggered = () =>
         return;
     }
 
+    if (cgl.frameStore.shadowPass)
+    {
+        const currentShader = cgl.getShader();
+        if (inDiscardTransparent.get())
+        {
+            if (inOpacityTexture.get())
+            {
+                if (!shadowShaderModule.hasDefine("HAS_TEXTURE_OPACITY")) shadowShaderModule.define("HAS_TEXTURE_OPACITY", "");
+
+                shadowShaderModule.pushTexture("texOpacity", inOpacityTexture.get().tex);
+                shadowShaderModule.bind();
+            }
+            else
+            {
+                if (shadowShaderModule.hasDefine("HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("HAS_TEXTURE_OPACITY");
+            }
+        }
+
+        outTrigger.trigger();
+
+        shadowShaderModule.unbind();
+
+        return;
+    }
+
     if (!inReceiveShadow.get())
     {
         outTrigger.trigger();
         return;
     }
 
-    if (cgl.frameStore.shadowPass)
-    {
-        outTrigger.trigger();
-        return;
-    }
 
     if (!cgl.frameStore.lightStack)
     {

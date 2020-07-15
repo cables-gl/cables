@@ -132,6 +132,7 @@ inMapSize.onChange = function ()
 {
     const size = Number(inMapSize.get());
     texelSize = 1 / size;
+    newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 };
 
 newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
