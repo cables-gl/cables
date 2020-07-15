@@ -50,8 +50,25 @@
                 "subType": "boolean"
             },
             {
+                "type": "0",
+                "name": "Opacity Threshold",
+                "group": "Opacity Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Opacity Settings"
+            },
+            {
                 "type": "2",
-                "name": "Opacity Texture"
+                "name": "Opacity Texture",
+                "group": "Opacity Settings"
             }
         ],
         "portsOut": [
