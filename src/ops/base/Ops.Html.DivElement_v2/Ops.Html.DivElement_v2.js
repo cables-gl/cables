@@ -29,6 +29,7 @@ inVisible.onChange = updateVisibility;
 
 updateText();
 updateStyle();
+warning();
 
 op.onDelete = removeElement;
 
@@ -76,7 +77,7 @@ function removeElement()
 {
     if (div && div.parentNode) div.parentNode.removeChild(div);
 }
-
+// inline css inisde div
 function updateStyle()
 {
     if (inStyle.get() != div.style)
@@ -86,11 +87,13 @@ function updateStyle()
         outElement.set(null);
         outElement.set(div);
     }
+    warning();
 }
 
 function updateClass()
 {
     div.setAttribute("class", inClass.get());
+    warning();
 }
 
 function onMouseEnter()
@@ -146,5 +149,18 @@ function addListeners()
 
 op.addEventListener("onEnabledChange", function (enabled)
 {
+    op.log("css changed");
     setCSSVisible(div.style.visibility != "visible");
 });
+
+function warning()
+{
+    if (inClass.get() && inStyle.get())
+    {
+        op.setUiError("error", "DIV uses external and inline CSS", 1);
+    }
+    else
+    {
+        op.setUiError("error", null);
+    }
+}
