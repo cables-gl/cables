@@ -1,5 +1,4 @@
 IN vec2 texCoord;
-// UNI sampler2D tex;
 UNI float threshholdLow;
 UNI float threshholdHigh;
 UNI sampler2D text;
@@ -18,9 +17,9 @@ void main()
    #endif
 
    #ifdef INVERT
-       if(gray < threshholdLow || gray > threshholdHigh) col.r=col.g=col.b=col.a=1.0;
+       if(gray > threshholdLow && gray < threshholdHigh) col.r=col.g=col.b=col.a=0.0;
        #ifdef BLACKWHITE
-           else col.r=col.g=col.b=col.a=0.0;
+           else col.r=col.g=col.b=col.a=1.0;
        #endif
    #endif
 
