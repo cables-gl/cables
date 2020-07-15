@@ -1047,9 +1047,25 @@ Context.prototype.glGetAttribLocation = function (prog, name)
     if (l == -1)
     {
         // Log.log("get attr loc -1 ",name);
-        // debugger;
     }
     return l;
+};
+
+
+/**
+ * should an op now draw helpermeshes
+ * @function shouldDrawHelpers
+ * @memberof Context
+ * @instance
+ */
+Context.prototype.shouldDrawHelpers = function (op)
+{
+    if (!op.patch.isEditorMode() ||
+        !CABLES.UI.renderHelper ||
+        !op.isCurrentUiOp() ||
+        this.frameStore.shadowPass) return false;
+
+    return true;
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)

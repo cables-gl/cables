@@ -17,6 +17,10 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Position"
+            },
+            {
                 "type": "0",
                 "name": "Open",
                 "subType": "boolean"

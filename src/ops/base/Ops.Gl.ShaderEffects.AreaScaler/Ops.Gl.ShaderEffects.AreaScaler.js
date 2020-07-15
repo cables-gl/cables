@@ -1,113 +1,111 @@
 
-op.render=op.inTrigger("render");
-op.trigger=op.outTrigger("trigger");
+op.render = op.inTrigger("render");
+op.trigger = op.outTrigger("trigger");
 
-var inSize=op.inValue("Size",1);
-var inStrength=op.inValue("Strength",1);
-var inSmooth=op.inValueBool("Smooth",true);
-var inToZero=op.inValueBool("Keep Min Size",true);
+const inSize = op.inValue("Size", 1);
+const inStrength = op.inValue("Strength", 1);
+const inSmooth = op.inValueBool("Smooth", true);
+const inToZero = op.inValueBool("Keep Min Size", true);
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-var x=op.inValue("x");
-var y=op.inValue("y");
-var z=op.inValue("z");
+const x = op.inValue("x");
+const y = op.inValue("y");
+const z = op.inValue("z");
 
-var needsUpdateToZero=true;
-var mscaleUni=null;
+let needsUpdateToZero = true;
+const mscaleUni = null;
 
-var shader=null;
+let shader = null;
 
-var srcHeadVert=attachments.areascale_vert;
+const srcHeadVert = attachments.areascale_vert;
 
-var srcBodyVert=''
-    .endl()+'pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal);' //modelMatrix*
+const srcBodyVert = ""
+    .endl() + "pos=MOD_scaler(pos,mMatrix*pos,attrVertNormal);" // modelMatrix*
     .endl();
 
-var moduleVert=null;
+let moduleVert = null;
 
 function removeModule()
 {
-    if(shader && moduleVert) shader.removeModule(moduleVert);
-    shader=null;
+    if (shader && moduleVert) shader.removeModule(moduleVert);
+    shader = null;
 }
 
-inToZero.onChange=updateToZero;
+inToZero.onChange = updateToZero;
 
 function updateToZero()
 {
-    if(!shader)
+    if (!shader)
     {
-        needsUpdateToZero=true;
+        needsUpdateToZero = true;
         return;
     }
-    if(inToZero.get()) shader.removeDefine(moduleVert.prefix+"TO_ZERO");
-        else shader.define(moduleVert.prefix+"TO_ZERO");
+    if (inToZero.get()) shader.removeDefine(moduleVert.prefix + "TO_ZERO");
+    else shader.define(moduleVert.prefix + "TO_ZERO");
 
-    needsUpdateToZero=false;
-
+    needsUpdateToZero = false;
 }
 
 
+op.render.onLinkChanged = removeModule;
 
-op.render.onLinkChanged=removeModule;
-
-op.render.onTriggered=function()
+op.render.onTriggered = function ()
 {
-    if(!cgl.getShader())
+    if (!cgl.getShader())
     {
-         op.trigger.trigger();
-         return;
+        op.trigger.trigger();
+        return;
     }
 
 
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        if(op.isCurrentUiOp())
+        if (op.isCurrentUiOp())
             gui.setTransformGizmo(
                 {
-                    posX:x,
-                    posY:y,
-                    posZ:z
+                    "posX": x,
+                    "posY": y,
+                    "posZ": z
                 });
 
-        if(op.isCurrentUiOp() ||  CABLES.UI.renderHelper)
+        if (cgl.shouldDrawHelpers(op))
         {
             cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
+            CABLES.GL_MARKER.drawSphere(op, inSize.get());
             cgl.popModelMatrix();
         }
     }
 
 
-    if(cgl.getShader()!=shader)
+    if (cgl.getShader() != shader)
     {
-        if(shader) removeModule();
-        shader=cgl.getShader();
+        if (shader) removeModule();
+        shader = cgl.getShader();
 
-        moduleVert=shader.addModule(
+        moduleVert = shader.addModule(
             {
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                "title": op.objName,
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
 
-        inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
-        inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-        inSmooth.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'smooth',inSmooth);
+        inSize.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "size", inSize);
+        inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
+        inSmooth.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "smooth", inSmooth);
 
-        x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
-        y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
-        z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
+        x.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);
+        y.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "y", y);
+        z.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "z", z);
     }
 
 
-    if(needsUpdateToZero)updateToZero();
+    if (needsUpdateToZero)updateToZero();
 
-    if(!shader)return;
+    if (!shader) return;
 
     op.trigger.trigger();
 };

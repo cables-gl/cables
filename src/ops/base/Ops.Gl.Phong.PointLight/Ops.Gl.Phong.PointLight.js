@@ -107,7 +107,7 @@ exe.onTriggered=function()
     light.type=0;
 
 
-    if(CABLES.UI && CABLES.UI.renderHelper)
+    if (cgl.shouldDrawHelpers(op))
     {
         cgl.pushModelMatrix();
         mat4.translate(cgl.mMatrix,cgl.mMatrix,transVec);

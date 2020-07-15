@@ -23,7 +23,7 @@ r.setUiAttribs({ "colorPick": true });
 const cgl = op.patch.cgl;
 let moduleFrag = null;
 let moduleVert = null;
-let uniforms = {};
+const uniforms = {};
 let shader = null;
 let origShader = null;
 
@@ -84,7 +84,7 @@ function doRender()
 
         if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
-        if (CABLES.UI.renderHelper || op.isCurrentUiOp())
+        if (cgl.shouldDrawHelpers(op))
         {
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
             CABLES.GL_MARKER.drawSphere(op, inSize.get());

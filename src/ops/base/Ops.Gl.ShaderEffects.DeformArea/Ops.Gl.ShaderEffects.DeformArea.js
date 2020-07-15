@@ -1,84 +1,84 @@
-const render=op.inTrigger("render");
-const next=op.outTrigger("trigger");
-const inSize=op.inValue("Size",1);
-const inStrength=op.inValue("Strength",0.5);
-const inSmooth=op.inValueBool("Smooth",true);
-const inWorldSpace=op.inValueBool("WorldSpace",false);
-const x=op.inValue("x");
-const y=op.inValue("y");
-const z=op.inValue("z");
+const render = op.inTrigger("render");
+const next = op.outTrigger("trigger");
+const inSize = op.inValue("Size", 1);
+const inStrength = op.inValue("Strength", 0.5);
+const inSmooth = op.inValueBool("Smooth", true);
+const inWorldSpace = op.inValueBool("WorldSpace", false);
+const x = op.inValue("x");
+const y = op.inValue("y");
+const z = op.inValue("z");
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-inWorldSpace.onChange=updateWorldspace;
+inWorldSpace.onChange = updateWorldspace;
 
-var shader=null;
-var srcHeadVert=attachments.deformarea_vert;
-render.onLinkChanged=removeModule;
+let shader = null;
+const srcHeadVert = attachments.deformarea_vert;
+render.onLinkChanged = removeModule;
 
-var srcBodyVert=''
-    .endl()+'pos=MOD_deform(pos,mMatrix);'
+const srcBodyVert = ""
+    .endl() + "pos=MOD_deform(pos,mMatrix);"
     .endl();
 
-var moduleVert=null;
+let moduleVert = null;
 
 function removeModule()
 {
-    if(shader && moduleVert) shader.removeModule(moduleVert);
-    shader=null;
+    if (shader && moduleVert) shader.removeModule(moduleVert);
+    shader = null;
 }
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        if(op.isCurrentUiOp()) gui.setTransformGizmo({posX:x,posY:y,posZ:z});
+        if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
-        if(CABLES.UI.renderHelper || op.isCurrentUiOp())
+        if (cgl.shouldDrawHelpers(op))
         {
             cgl.pushModelMatrix();
-            mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
-            CABLES.GL_MARKER.drawSphere(op,inSize.get());
+            mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
+            CABLES.GL_MARKER.drawSphere(op, inSize.get());
             cgl.popModelMatrix();
         }
     }
 
-    if(!cgl.getShader())
+    if (!cgl.getShader())
     {
-         next.trigger();
-         return;
+        next.trigger();
+        return;
     }
 
-    if(cgl.getShader()!=shader)
+    if (cgl.getShader() != shader)
     {
-        if(shader) removeModule();
-        shader=cgl.getShader();
+        if (shader) removeModule();
+        shader = cgl.getShader();
 
-        moduleVert=shader.addModule(
+        moduleVert = shader.addModule(
             {
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                "title": op.objName,
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
-        inSize.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'size',inSize);
-        inStrength.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'strength',inStrength);
-        inSmooth.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'smooth',inSmooth);
+        inSize.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "size", inSize);
+        inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
+        inSmooth.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "smooth", inSmooth);
 
-        x.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'x',x);
-        y.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'y',y);
-        z.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'z',z);
+        x.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);
+        y.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "y", y);
+        z.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "z", z);
         updateWorldspace();
     }
 
-    if(!shader)return;
+    if (!shader) return;
     next.trigger();
 };
 
 function updateWorldspace()
 {
-    if(!shader)return;
-    if(inWorldSpace.get()) shader.define(moduleVert.prefix+"WORLDSPACE");
-        else shader.removeDefine(moduleVert.prefix+"WORLDSPACE");
+    if (!shader) return;
+    if (inWorldSpace.get()) shader.define(moduleVert.prefix + "WORLDSPACE");
+    else shader.removeDefine(moduleVert.prefix + "WORLDSPACE");
 }

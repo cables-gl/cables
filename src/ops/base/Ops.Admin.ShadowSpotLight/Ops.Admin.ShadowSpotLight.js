@@ -439,7 +439,8 @@ const resultPointAt = vec3.create();
 
 function drawHelpers()
 {
-    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+    if (cgl.shouldDrawHelpers(op))
+
 {
         gui.setTransformGizmo({
             "posX": inPosX,

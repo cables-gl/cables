@@ -996,9 +996,12 @@ const Op = function ()
     Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-            if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
+            if (this.portsIn[ipi].getName() == name)
+                return this.portsIn[ipi];
+
         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-            if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
+            if (this.portsOut[ipo].getName() == name)
+                return this.portsOut[ipo];
     };
 
     /**
