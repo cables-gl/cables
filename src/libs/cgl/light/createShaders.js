@@ -71,6 +71,9 @@ export function getShadowPassFragmentShader()
         vec4 col = vec4(1.);
 
 
+        outColor = vec4(1.);
+
+        {{MODULE_COLOR}}
 
         ${this.type === "point" ? "vec3 fromLightToFrag = (modelPos - inLightPosition);" : ""}
 
@@ -83,9 +86,9 @@ export function getShadowPassFragmentShader()
         float clampedDerivative = clamp(dot(dx, dx) + dot(dy, dy), 0., 1.);
         float moment2 = dot(depth, depth) + 0.25 * clampedDerivative;
 
-        outColor = vec4(depth, moment2, depth, 1.);
-
-        {{MODULE_COLOR}}
+        outColor.x = depth;
+        outColor.y = moment2;
+        outColor.z = depth;
     }
 `;
 }

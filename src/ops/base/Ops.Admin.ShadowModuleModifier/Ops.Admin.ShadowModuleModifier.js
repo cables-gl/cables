@@ -29,6 +29,7 @@ op.setPortGroup("", [inCastShadow, inReceiveShadow]);
 op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
 op.setPortGroup("", [inDiscardTransparent]);
 op.setPortGroup("Opacity Settings", [inOpacityThreshold, inAlphaMaskSource, inOpacityTexture]);
+
 if (inReceiveShadow.get())
 {
     if (inAlgorithm.get() === "PCF" || inAlgorithm.get() === "Poisson")
@@ -48,6 +49,7 @@ inDiscardTransparent.onChange = () =>
     inOpacityThreshold.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
     inAlphaMaskSource.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
 };
+
 inAlphaMaskSource.onChange = () =>
 {
     shadowShaderModule.toggleDefine("ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
@@ -56,7 +58,6 @@ inAlphaMaskSource.onChange = () =>
     shadowShaderModule.toggleDefine("ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
     shadowShaderModule.toggleDefine("ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
 };
-
 
 inReceiveShadow.onChange = () =>
 {
@@ -277,7 +278,6 @@ algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(
 
 const hasShadowMap = [];
 const hasShadowCubemap = [];
-const prevLightTypes = [];
 
 function removeUniforms()
 {
@@ -298,7 +298,6 @@ function removeUniforms()
     }
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 }
 
 function createUniforms(lightsCount)
@@ -428,8 +427,6 @@ function setUniforms(lightStack)
             }
             continue;
         }
-
-        // prevLightTypes[i] = light.type;
     }
 }
 
@@ -449,14 +446,12 @@ inTrigger.onLinkChanged = function ()
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 };
 outTrigger.onLinkChanged = function ()
 {
     if (!outTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 };
 
 const _tempCamPosMatrix = mat4.create();
@@ -491,9 +486,7 @@ inTrigger.onTriggered = () =>
         return;
     }
 
-
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
-
 
     if (cgl.frameStore.lightStack)
     {
