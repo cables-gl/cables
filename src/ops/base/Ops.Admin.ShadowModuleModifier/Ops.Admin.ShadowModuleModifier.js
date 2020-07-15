@@ -386,11 +386,6 @@ function updateShader()
     setUniforms(cgl.frameStore.lightStack);
 }
 
-function updateShadowPassShaders()
-{
-
-}
-
 inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
@@ -427,7 +422,6 @@ inTrigger.onTriggered = () =>
 
     if (cgl.frameStore.shadowPass)
     {
-        const currentShader = cgl.getShader();
         if (inDiscardTransparent.get())
         {
             if (inOpacityTexture.get())
