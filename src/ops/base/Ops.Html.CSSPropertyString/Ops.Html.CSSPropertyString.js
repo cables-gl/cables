@@ -1,16 +1,14 @@
 const
     inEle = op.inObject("Element"),
     inProperty = op.inString("Property"),
-    inValue = op.inFloat("Value"),
-    inValueSuffix = op.inString("Value Suffix", "px"),
+    inValue = op.inString("Value"),
     outEle = op.outObject("HTML Element");
 
 op.setPortGroup("Element", [inEle]);
-op.setPortGroup("Attributes", [inProperty, inValue, inValueSuffix]);
+op.setPortGroup("Attributes", [inProperty, inValue]);
 
 inProperty.onChange = updateProperty;
 inValue.onChange = update;
-inValueSuffix.onChange = update;
 let ele = null;
 
 inEle.onChange = inEle.onLinkChanged = function ()
@@ -33,12 +31,10 @@ function update()
     ele = inEle.get();
     if (ele && ele.style)
     {
-        const str = inValue.get() + inValueSuffix.get();
+        const str = inValue.get();
         try
         {
-            // console.log("css",inProperty.get(),str);
-            if (ele.style[inProperty.get()] != str)
-                ele.style[inProperty.get()] = str;
+            ele.style[inProperty.get()] = str;
         }
         catch (e)
         {

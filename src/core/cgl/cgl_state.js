@@ -1047,7 +1047,6 @@ Context.prototype.glGetAttribLocation = function (prog, name)
     if (l == -1)
     {
         // Log.log("get attr loc -1 ",name);
-        // debugger;
     }
     return l;
 };

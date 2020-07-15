@@ -109,7 +109,8 @@ const Shader = function (_cgl, _name)
     this._moduleNumId = 0;
 
     this._libs = [];
-
+    this._structNames = [];
+    this._structUniformNames = [];
     this._textureStackUni = [];
     this._textureStackTex = [];
     this._textureStackType = [];
@@ -219,7 +220,6 @@ Shader.prototype.copy = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        console.log("copy uniform...", this._uniforms[i]);
         const u = this._uniforms[i].copy(shader);
         u.resetLoc();
     }
@@ -261,6 +261,149 @@ Shader.prototype._addLibs = function (src)
     return src;
 };
 
+Shader.prototype.createStructUniforms = function ()
+{
+    // * create structs
+    let structStrFrag = "";
+    let structStrVert = ""; // TODO: not used yet
+
+    // * reset the arrays holding the value each recompile so we don't skip structs
+    this._structNames = [];
+    this._injectedStringsFrag = [];
+    this._injectedStringsVert = [];
+
+    this._structUniformNamesIndicesFrag = [];
+    this._structUniformNamesIndicesVert = [];
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        // * only add uniforms to struct that are a member of a struct
+        if (this._uniforms[i].isStructMember())
+        {
+            const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[i]._structName + "}}";
+
+            // * check if struct is not already part of shader
+            if (this._structNames.indexOf(this._uniforms[i]._structName) === -1)
+            {
+                // * create struct definition with placeholder string to inject
+                const structDefinition = "struct "
+                    + this._uniforms[i]._structName + " {".endl()
+                    + injectionString
+                    + "};".endl().endl();
+
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "frag")
+                    structStrFrag = structStrFrag.concat(structDefinition);
+
+                if (this._uniforms[i].getShaderType() === "both" || this._uniforms[i].getShaderType() === "vert")
+                    structStrVert = structStrVert.concat(structDefinition);
+
+                this._structNames.push(this._uniforms[i]._structName);
+            }
+
+            // * create member & comment
+            let comment = "";
+            if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
+
+            const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
+                 + " " + this._uniforms[i]._propertyName + ";"
+                 + comment;
+
+            if (this._uniforms[i].getShaderType() === "both")
+            {
+                // * inject member before {injectionString}
+                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1 && this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                {
+                    const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+                    const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
+
+                    structStrFrag =
+                        structStrFrag.slice(0, insertionIndexFrag)
+                        + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+
+                    structStrVert =
+                        structStrVert.slice(0, insertionIndexVert)
+                        + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
+
+                    this._injectedStringsFrag.push(stringToInsert);
+                    this._injectedStringsVert.push(stringToInsert);
+                }
+
+                if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
+                if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
+            }
+            else if (this._uniforms[i].getShaderType() === "frag")
+            {
+                // * inject member before {injectionString}
+                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1)
+                {
+                    const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
+
+                    structStrFrag =
+                        structStrFrag.slice(0, insertionIndexFrag)
+                        + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
+                    this._injectedStringsFrag.push(stringToInsert);
+                }
+
+                if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
+            }
+            else if (this._uniforms[i].getShaderType() === "vert")
+            {
+                // * inject member before {injectionString}
+                if (this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                {
+                    const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
+
+                    structStrVert =
+                        structStrVert.slice(0, insertionIndexVert)
+                        + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
+
+                    this._injectedStringsVert.push(stringToInsert);
+                }
+
+                if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
+            }
+        }
+    }
+
+    // * dedupe injected uni declarations
+    this._uniDeclarationsFrag = [];
+    this._uniDeclarationsVert = [];
+
+    // * remove struct injection points and add uniform in fragment
+    for (let i = 0; i < this._structUniformNamesIndicesFrag.length; i += 1)
+    {
+        const index = this._structUniformNamesIndicesFrag[i];
+        const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
+
+        if (this._uniDeclarationsFrag.indexOf(uniDeclarationString) === -1)
+        {
+            const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
+
+            structStrFrag = structStrFrag.replace(injectionString, "");
+            structStrFrag += uniDeclarationString;
+
+            this._uniDeclarationsFrag.push(uniDeclarationString);
+        }
+    }
+
+    // * remove struct injection points and add uniform in vertex
+    for (let i = 0; i < this._structUniformNamesIndicesVert.length; i += 1)
+    {
+        const index = this._structUniformNamesIndicesVert[i];
+
+        const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
+
+        if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
+        {
+            const injectionString = "{{INJECTION_POINT_STRUCT_" + this._uniforms[index]._structName + "}}";
+
+            structStrVert = structStrVert.replace(injectionString, "");
+            structStrVert += uniDeclarationString;
+            this._uniDeclarationsVert.push(uniDeclarationString);
+        }
+    }
+
+    return [structStrVert, structStrFrag];
+};
 
 Shader.prototype.compile = function ()
 {
@@ -371,11 +514,11 @@ Shader.prototype.compile = function ()
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
 
-    // console.log(this._uniforms);
+    const structStrings = this.createStructUniforms();
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
-        if (this._uniforms[i].shaderType)
+        if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
         {
             const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
             let comment = "";
@@ -391,18 +534,16 @@ Shader.prototype.compile = function ()
         }
     }
 
-
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
-
     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     {
         fs += "#define MOBILE".endl();
         vs += "#define MOBILE".endl();
     }
+    vs = extensionString + vs + definesStr + structStrings[0] + uniformsStrVert + "\n// -- \n" + this.srcVert;
+    fs = extensionString + fs + definesStr + structStrings[1] + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
 
-    vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
-    fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
 
     let srcHeadVert = "";
     let srcHeadFrag = "";
@@ -521,6 +662,7 @@ Shader.prototype.compile = function ()
     this.finalShaderFrag = fs;
     this.finalShaderVert = vs;
 
+
     MESH.lastMesh = null;
     MESH.lastShader = null;
 
@@ -632,8 +774,6 @@ Shader.prototype.toggleDefine = function (name, enabled)
 {
     if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
     {
-        console.log("toggleDefine", name, enabled);
-
         enabled.removeEventListener("change", enabled.onToggleDefine);
         enabled.onToggleDefine = (v) =>
         {
@@ -805,8 +945,8 @@ Shader.prototype.addModule = function (mod, sibling)
         else mod.group = simpleId();// this._modGroupCount++;
 
     mod.prefix = "mod" + mod.group;
-
     this._modules.push(mod);
+
     this._needsRecompile = true;
     this.setWhyCompile("add module " + mod.title);
     this._moduleNumId++;
@@ -865,38 +1005,165 @@ Shader.prototype._addUniform = function (uni)
 };
 
 /**
- * add a uniform to the shader
+ * add a uniform to the fragment shader
  * @param {String} type ['f','t', etc]
  * @param {String} name
  * @param {any} value or port
  * @memberof Shader
  * @instance
  * @function addUniformFrag
+ * @returns {CGL.Uniform}
  */
-Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "frag";
     return uni;
 };
 
-Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+/**
+ * add a uniform to the vertex shader
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformVert
+ * @returns {CGL.Uniform}
+ */
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "vert";
     return uni;
 };
-
-Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+/**
+ * add a uniform to both shaders
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformBoth
+ * @returns {CGL.Uniform}
+ */
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4)
 {
-    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4);
     uni.shaderType = "both";
     return uni;
 };
 
+/**
+ * add a struct & its uniforms to the fragment shader
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructFrag
+ * @returns {Object}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructFrag("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
+Shader.prototype.addUniformStructFrag = function (structName, uniformName, members)
+{
+    const uniforms = {};
+
+    if (!members) return uniforms;
+
+    for (let i = 0; i < members.length; i += 1)
+    {
+        const member = members[i];
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "frag";
+        uniforms[uniformName + "." + member.name] = uni;
+    }
+
+    return uniforms;
+};
+
+/**
+ * add a struct & its uniforms to the vertex shader
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructVert
+ * @returns {CGL.Uniform}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructVert("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
+Shader.prototype.addUniformStructVert = function (structName, uniformName, members)
+{
+    const uniforms = {};
+
+    if (!members) return uniforms;
+
+    for (let i = 0; i < members.length; i += 1)
+    {
+        const member = members[i];
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "vert";
+        uniforms[uniformName + "." + member.name] = uni;
+    }
+
+    return uniforms;
+};
+
+/**
+ * add a struct & its uniforms to the both shaders. PLEASE NOTE: it is not possible to add the same struct to both shaders when it contains ANY integer members.
+ * @param {String} structName name of the struct, i.e.: LightStruct
+ * @param {String} uniformName name of the struct uniform in the shader, i.e.: lightUni
+ * @param {Array} members array of objects containing the struct members. see example for structure
+
+ * @memberof Shader
+ * @instance
+ * @function addUniformStructBoth
+ * @returns {Object}
+ * @example
+ * const shader = new CGL.Shader(cgl, 'MinimalMaterial');
+ * shader.setSource(attachments.shader_vert, attachments.shader_frag);
+ * shader.addUniformStructBoth("Light", "uniformLight", [
+ * { "type": "3f", "name": "position", "v1": null },
+ * { "type": "4f", "name": "color", "v1": inR, v2: inG, v3: inB, v4: inAlpha }
+ * ]);
+ */
+Shader.prototype.addUniformStructBoth = function (structName, uniformName, members)
+{
+    const uniforms = {};
+
+    if (!members) return uniforms;
+
+    for (let i = 0; i < members.length; i += 1)
+    {
+        const member = members[i];
+        if ((member.type === "2i" || member.type === "i" || member.type === "3i"))
+            console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
+
+        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+        uni.shaderType = "both";
+        uniforms[uniformName + "." + member.name] = uni;
+    }
+
+    return uniforms;
+};
+
 Shader.prototype.hasUniform = function (name)
 {
-    console.log("hasuniform", this._uniforms);
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].getName() == name) return true;

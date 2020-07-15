@@ -37,7 +37,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 {
     this._loc = -1;
     this._type = __type;
@@ -46,8 +46,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._value = 0.00001;
     this._oldValue = null;
     this._port = null;
+    this._structName = _structName;
+    this._structUniformName = _structUniformName;
+    this._propertyName = _propertyName;
+
     this._shader._addUniform(this);
-    this.shaderType = null;
     this.needsUpdate = true;
     this.shaderType = null;
     this.comment = null;
@@ -122,6 +125,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         this.set = this.setValue = this.setValueT.bind(this);
         this.updateValue = this.updateValueT.bind(this);
     }
+    else if (__type == "tc")
+    {
+        this.set = this.setValue = this.setValueT.bind(this);
+        this.updateValue = this.updateValueT.bind(this);
+    }
     else if (__type == "t[]")
     {
         this.set = this.setValue = this.setValueArrayT.bind(this);
@@ -191,7 +199,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
 
 Uniform.prototype.copy = function (newShader)
 {
-    const uni = new Uniform(newShader, this._type, this._name);
+    const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
     uni.shaderType = this.shaderType;
     return uni;
 };
@@ -207,12 +215,13 @@ Uniform.prototype.getGlslTypeString = function ()
 {
     if (this._type == "f") return "float";
     if (this._type == "i") return "int";
+    if (this._type == "2i") return "ivec2";
     if (this._type == "2f") return "vec2";
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
     if (this._type == "m4") return "mat4";
     if (this._type == "t") return "sampler2D";
-
+    if (this._type == "tc") return "samplerCube";
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
 };
 
@@ -228,6 +237,14 @@ Uniform.prototype.getName = function ()
 Uniform.prototype.getValue = function ()
 {
     return this._value;
+};
+Uniform.prototype.getShaderType = function ()
+{
+    return this.shaderType;
+};
+Uniform.prototype.isStructMember = function ()
+{
+    return !!this._structName;
 };
 Uniform.prototype.resetLoc = function ()
 {
@@ -321,6 +338,7 @@ Uniform.prototype.updateValue2I = function ()
     }
 
     this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
+
     this.needsUpdate = false;
     profileData.profileUniformCount++;
 };
