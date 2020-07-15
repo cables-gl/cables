@@ -16,7 +16,7 @@ const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inSpread = op.inInt("Sample Spread", 250);
 const inDiscardTransparent = op.inBool("Discard Transparent", false);
-const inOpacityThreshold = op.inFloatSlider("Opacity Threshold", 0.2);
+const inOpacityThreshold = op.inFloatSlider("Opacity Threshold", 0.5);
 const ALPHA_MASK_SOURCE = ["Luminance", "R", "G", "B", "A"];
 const inAlphaMaskSource = op.inSwitch("Alpha Mask Source", ALPHA_MASK_SOURCE, "Luminance");
 const inOpacityTexture = op.inTexture("Opacity Texture");
@@ -225,11 +225,7 @@ shadowShaderModule.addModule({
     "name": "MODULE_COLOR",
     "priority": -2,
     "title": op.objName + "shadowPass",
-    "srcHeadFrag": `
-  //  #ifdef HAS_TEXTURE_OPACITY
-//        UNI sampler2D texOpacity;
- //   #endif
-    `,
+    "srcHeadFrag": "",
     "srcBodyFrag": `
     #ifdef HAS_TEXTURE_OPACITY
         #ifdef ALPHA_MASK_LUMINANCE
