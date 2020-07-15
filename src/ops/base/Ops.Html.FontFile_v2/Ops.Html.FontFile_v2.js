@@ -1,5 +1,5 @@
 const
-    filename = op.inUrl("file"),
+    filename = op.inUrl("file", [".otf", ".ttf", ".woff", ".woff2"]),
     fontname = op.inString("family"),
     outLoaded = op.outValue("Loaded"),
     loadedTrigger = op.outTrigger("Loaded Trigger");
