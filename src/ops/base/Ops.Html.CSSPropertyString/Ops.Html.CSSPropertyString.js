@@ -1,7 +1,7 @@
 const
     inEle = op.inObject("Element"),
     inProperty = op.inString("Property"),
-    inValue = op.inString("Values"),
+    inValue = op.inString("Value"),
     outEle = op.outObject("HTML Element");
 
 op.setPortGroup("Element", [inEle]);
