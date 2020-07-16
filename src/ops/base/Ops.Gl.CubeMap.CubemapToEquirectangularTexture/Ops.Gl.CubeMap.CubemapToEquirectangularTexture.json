@@ -10,6 +10,11 @@
             "message": "Ops.User.cables.CubeMapProjection renamed to Ops.Gl.CubeMap.CubeMapProjection",
             "author": "cables",
             "date": 1591796266258
+        },
+        {
+            "message": "Ops.Gl.CubeMap.CubeMapProjection renamed to Ops.Gl.CubeMap.CubemapToEquirectangularTexture",
+            "author": "pandur",
+            "date": 1594815899510
         }
     ],
     "authorName": "simod",
