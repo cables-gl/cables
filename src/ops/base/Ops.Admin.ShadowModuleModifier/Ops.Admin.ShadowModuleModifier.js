@@ -233,16 +233,16 @@ shadowShaderModule.addModule({
             outColor.a *= dot(vec3(0.2126,0.7152,0.0722), texture(MOD_texOpacity, texCoord).rgb);
         #endif
         #ifdef MOD_ALPHA_MASK_R
-            outColor.a*=texture(MOD_texOpacity, texCoord).r;
+            outColor.a *= texture(MOD_texOpacity, texCoord).r;
         #endif
         #ifdef MOD_ALPHA_MASK_G
-            outColor.a*=texture(MOD_texOpacity, texCoord).g;
+            outColor.a *= texture(MOD_texOpacity, texCoord).g;
         #endif
         #ifdef MOD_ALPHA_MASK_B
-            outColor.a*=texture(MOD_texOpacity, texCoord).b;
+            outColor.a *= texture(MOD_texOpacity, texCoord).b;
         #endif
         #ifdef MOD_ALPHA_MASK_A
-            outColor.a*=texture(MOD_texOpacity, texCoord).a;
+            outColor.a *= texture(MOD_texOpacity, texCoord).a;
         #endif
         if (outColor.a < MOD_inOpacityThreshold) discard;
     #endif
