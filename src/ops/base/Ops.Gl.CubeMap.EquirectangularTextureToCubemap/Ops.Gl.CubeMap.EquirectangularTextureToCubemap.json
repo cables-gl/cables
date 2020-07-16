@@ -15,6 +15,11 @@
             "message": "Ops.User.cables.EquirectangularToCubemap renamed to Ops.Gl.CubeMap.EquirectangularToCubemap",
             "author": "cables",
             "date": 1591796248839
+        },
+        {
+            "message": "Ops.Gl.CubeMap.EquirectangularToCubemap renamed to Ops.Gl.CubeMap.EquirectangularTextureToCubemap",
+            "author": "pandur",
+            "date": 1594815872989
         }
     ],
     "authorName": "simod",
