@@ -52,11 +52,11 @@ inDiscardTransparent.onChange = () =>
 
 inAlphaMaskSource.onChange = () =>
 {
-    shadowShaderModule.toggleDefine("ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
-    shadowShaderModule.toggleDefine("ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
-    shadowShaderModule.toggleDefine("ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
-    shadowShaderModule.toggleDefine("ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
-    shadowShaderModule.toggleDefine("ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
 };
 
 inReceiveShadow.onChange = () =>
