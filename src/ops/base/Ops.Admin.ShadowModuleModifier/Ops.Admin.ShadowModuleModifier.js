@@ -159,14 +159,14 @@ function renderShadowPassWithModule()
     {
         if (inOpacityTexture.get())
         {
-            if (!shadowShaderModule.hasDefine("HAS_TEXTURE_OPACITY")) shadowShaderModule.define("HAS_TEXTURE_OPACITY", "");
+            if (!shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.define("MOD_HAS_TEXTURE_OPACITY", "");
 
-            shadowShaderModule.pushTexture("texOpacity", inOpacityTexture.get().tex);
+            shadowShaderModule.pushTexture("MOD_texOpacity", inOpacityTexture.get().tex);
             shadowShaderModule.bind();
         }
         else
         {
-            if (shadowShaderModule.hasDefine("HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("HAS_TEXTURE_OPACITY");
+            if (shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("MOD_HAS_TEXTURE_OPACITY");
         }
     }
 
@@ -228,34 +228,34 @@ shadowShaderModule.addModule({
     "title": op.objName + "shadowPass",
     "srcHeadFrag": "",
     "srcBodyFrag": `
-    #ifdef HAS_TEXTURE_OPACITY
-        #ifdef ALPHA_MASK_LUMINANCE
-            outColor.a *= dot(vec3(0.2126,0.7152,0.0722), texture(texOpacity, texCoord).rgb);
+    #ifdef MOD_HAS_TEXTURE_OPACITY
+        #ifdef MOD_ALPHA_MASK_LUMINANCE
+            outColor.a *= dot(vec3(0.2126,0.7152,0.0722), texture(MOD_texOpacity, texCoord).rgb);
         #endif
-        #ifdef ALPHA_MASK_R
-            outColor.a*=texture(texOpacity, texCoord).r;
+        #ifdef MOD_ALPHA_MASK_R
+            outColor.a*=texture(MOD_texOpacity, texCoord).r;
         #endif
-        #ifdef ALPHA_MASK_G
-            outColor.a*=texture(texOpacity, texCoord).g;
+        #ifdef MOD_ALPHA_MASK_G
+            outColor.a*=texture(MOD_texOpacity, texCoord).g;
         #endif
-        #ifdef ALPHA_MASK_B
-            outColor.a*=texture(texOpacity, texCoord).b;
+        #ifdef MOD_ALPHA_MASK_B
+            outColor.a*=texture(MOD_texOpacity, texCoord).b;
         #endif
-        #ifdef ALPHA_MASK_A
-            outColor.a*=texture(texOpacity, texCoord).a;
+        #ifdef MOD_ALPHA_MASK_A
+            outColor.a*=texture(MOD_texOpacity, texCoord).a;
         #endif
-        if (outColor.a < inOpacityThreshold) discard;
+        if (outColor.a < MOD_inOpacityThreshold) discard;
     #endif
     `,
 });
-shadowShaderModule.addUniformFrag("t", "texOpacity", 0);
-shadowShaderModule.addUniformFrag("f", "inOpacityThreshold", inOpacityThreshold);
+shadowShaderModule.addUniformFrag("t", "MOD_texOpacity", 0);
+shadowShaderModule.addUniformFrag("f", "MOD_inOpacityThreshold", inOpacityThreshold);
 
-shadowShaderModule.toggleDefine("ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
-shadowShaderModule.toggleDefine("ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
-shadowShaderModule.toggleDefine("ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
-shadowShaderModule.toggleDefine("ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
-shadowShaderModule.toggleDefine("ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
 
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
