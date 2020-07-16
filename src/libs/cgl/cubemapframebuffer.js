@@ -93,7 +93,7 @@ class CubemapFramebuffer
             this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
         }
 
-        this._frameBuffer = this._cgl.gl.createFramebuffer();
+        this._framebuffer = this._cgl.gl.createFramebuffer();
         this._textureFrameBuffer = this._cgl.gl.createFramebuffer();
 
         this._colorTexture.setSize(this._width, this._height); // TODO: this wont work
@@ -106,6 +106,54 @@ class CubemapFramebuffer
     {
         this._colorTexture.filter = filter;
         this._colorTexture.setSize(this._width, this._height);
+    }
+
+    renderStart()
+    {
+        this._cgl.pushModelMatrix();
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
+        this._cgl.pushGlFrameBuffer(this._framebuffer);
+        this._cgl.pushFrameBuffer(this);
+
+        this._cgl.pushPMatrix();
+        this._cgl.gl.viewport(0, 0, this._width, this._height);
+
+        // TODO: draw code for cubemap here?
+        this._cgl.gl.drawBuffers(this._drawTargetArray);
+
+        if (this._options.clear)
+        {
+            this._cgl.gl.clearColor(0, 0, 0, 0);
+            this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+        }
+    }
+
+    renderEnd()
+    {
+        this._cgl.popPMatrix();
+        CGL.profileData.profileFramebuffer++;
+
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._framebuffer);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);
+
+        this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
+        this._cgl.gl.blitFramebuffer(0, 0, this._width, this._height, 0, 0, this._width, this._height, this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST);
+
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
+        this._cgl.popFrameBuffer();
+
+        this._cgl.popModelMatrix();
+        this._cgl.resetViewPort();
+
+        if (this._colorTexture.filter == CGL.Texture.FILTER_MIPMAP)
+        {
+            for (let i = 0; i < this._numRenderBuffers; i++)
+            {
+                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._colorTexture.tex);
+                this._colorTexture.updateMipMap();
+                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
+            }
+        }
     }
 }
 
