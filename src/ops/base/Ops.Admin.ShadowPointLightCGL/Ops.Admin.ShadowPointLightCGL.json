@@ -94,6 +94,11 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow Map Settings"
+            },
+            {
                 "type": "0",
                 "name": "Shadow Strength",
                 "group": "Shadow Map Settings",

@@ -11,12 +11,14 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
+
 OUT vec2 texCoord;
 OUT vec3 norm;
 
 ${this.type === "point" ? "OUT vec3 modelPos;" : ""}
 void main() {
     texCoord=attrTexCoord;
+    texCoord.y = 1. - texCoord.y;
     norm=attrVertNormal;
     vec4 pos = vec4(vPosition, 1.0);
     mat4 mMatrix=modelMatrix;
@@ -62,9 +64,14 @@ export function getShadowPassFragmentShader()
    ${this.type === "point" ? "UNI vec3 inLightPosition;" : ""}
    ${this.type === "point" ? "UNI vec2 inNearFar;" : ""}
 
+    IN vec2 texCoord;
+
     void main() {
         {{MODULE_BEGIN_FRAG}}
         vec4 col = vec4(1.);
+
+
+        outColor = vec4(1.);
 
         {{MODULE_COLOR}}
 
@@ -79,8 +86,9 @@ export function getShadowPassFragmentShader()
         float clampedDerivative = clamp(dot(dx, dx) + dot(dy, dy), 0., 1.);
         float moment2 = dot(depth, depth) + 0.25 * clampedDerivative;
 
-
-        outColor = vec4(depth, moment2, depth, moment2);
+        outColor.x = depth;
+        outColor.y = moment2;
+        outColor.z = depth;
     }
 `;
 }

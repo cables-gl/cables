@@ -1,5 +1,4 @@
 {
-    "updated": 1535880764913,
     "authorName": "pandur",
     "id": "3e2bc72c-8af4-4fdb-a998-555aaf62cc9d",
     "created": 1518855898265,
@@ -17,47 +16,63 @@
             },
             {
                 "type": "0",
-                "name": "glGetError"
+                "name": "glGetError",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Depthtest"
+                "name": "Depthtest",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Stack Depthtest"
+                "name": "Stack Depthtest",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Depth Writing"
+                "name": "Depth Writing",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Stack Depth Writing"
+                "name": "Stack Depth Writing",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "DepthFunc"
+                "name": "DepthFunc",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Stack DepthFunc"
+                "name": "Stack DepthFunc",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Blend"
+                "name": "Blend",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Blend Stack"
+                "name": "Blend Stack",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Cull Mode"
+                "name": "Cull Mode",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Face Culling"
+                "name": "Face Culling",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Is Shadowpass",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Debug.GlDebug"

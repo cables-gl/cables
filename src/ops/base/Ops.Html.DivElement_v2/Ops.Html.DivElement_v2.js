@@ -29,6 +29,7 @@ inVisible.onChange = updateVisibility;
 
 updateText();
 updateStyle();
+warning();
 
 op.onDelete = removeElement;
 
@@ -86,11 +87,13 @@ function updateStyle()
         outElement.set(null);
         outElement.set(div);
     }
+    warning();
 }
 
 function updateClass()
 {
     div.setAttribute("class", inClass.get());
+    warning();
 }
 
 function onMouseEnter()
@@ -148,3 +151,15 @@ op.addEventListener("onEnabledChange", function (enabled)
 {
     setCSSVisible(div.style.visibility != "visible");
 });
+
+function warning()
+{
+    if (inClass.get() && inStyle.get())
+    {
+        op.setUiError("error", "DIV uses external and inline CSS", 1);
+    }
+    else
+    {
+        op.setUiError("error", null);
+    }
+}
