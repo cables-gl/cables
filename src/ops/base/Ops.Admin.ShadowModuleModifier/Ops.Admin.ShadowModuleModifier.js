@@ -15,9 +15,20 @@ const algorithms = ["Default", "PCF", "Poisson", "VSM"];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inSpread = op.inInt("Sample Spread", 250);
+const inDiscardTransparent = op.inBool("Discard Transparent", false);
+const inOpacityThreshold = op.inFloatSlider("Opacity Threshold", 0.5);
+const ALPHA_MASK_SOURCE = ["Luminance", "R", "G", "B", "A"];
+const inAlphaMaskSource = op.inSwitch("Alpha Mask Source", ALPHA_MASK_SOURCE, "Luminance");
+const inOpacityTexture = op.inTexture("Opacity Texture");
 
+inOpacityThreshold.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
+inAlphaMaskSource.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
 inSamples.setUiAttribs({ "greyout": true });
 inSpread.setUiAttribs({ "greyout": true });
+op.setPortGroup("", [inCastShadow, inReceiveShadow]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
+op.setPortGroup("", [inDiscardTransparent]);
+op.setPortGroup("Opacity Settings", [inOpacityThreshold, inAlphaMaskSource, inOpacityTexture]);
 
 if (inReceiveShadow.get())
 {
@@ -33,8 +44,20 @@ if (inReceiveShadow.get())
     }
 }
 
-op.setPortGroup("", [inCastShadow, inReceiveShadow]);
-op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
+inDiscardTransparent.onChange = () =>
+{
+    inOpacityThreshold.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
+    inAlphaMaskSource.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
+};
+
+inAlphaMaskSource.onChange = () =>
+{
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
+    shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
+};
 
 inReceiveShadow.onChange = () =>
 {
@@ -45,7 +68,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -76,6 +99,7 @@ inSamples.onChange = () =>
 {
     shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 };
+
 
 const outTrigger = op.outTrigger("Trigger Out");
 
@@ -129,6 +153,27 @@ const STATE = {
     "updating": false
 };
 
+function renderShadowPassWithModule()
+{
+    if (inDiscardTransparent.get())
+    {
+        if (inOpacityTexture.get())
+        {
+            if (!shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.define("MOD_HAS_TEXTURE_OPACITY", "");
+
+            shadowShaderModule.pushTexture("MOD_texOpacity", inOpacityTexture.get().tex);
+            shadowShaderModule.bind();
+        }
+        else
+        {
+            if (shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("MOD_HAS_TEXTURE_OPACITY");
+        }
+    }
+
+    outTrigger.trigger();
+
+    shadowShaderModule.unbind();
+}
 function createModuleShaders(lightStack)
 {
     STATE.updating = true;
@@ -175,10 +220,42 @@ function createModuleShaders(lightStack)
     createUniforms(lightStack.length);
 }
 
+// * SHADOW PASS MODULE *
+const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier");
+shadowShaderModule.addModule({
+    "name": "MODULE_COLOR",
+    "priority": -2,
+    "title": op.objName + "shadowPass",
+    "srcHeadFrag": "",
+    "srcBodyFrag": `
+    #ifdef MOD_HAS_TEXTURE_OPACITY
+        #ifdef MOD_ALPHA_MASK_LUMINANCE
+            outColor.a *= dot(vec3(0.2126,0.7152,0.0722), texture(MOD_texOpacity, texCoord).rgb);
+        #endif
+        #ifdef MOD_ALPHA_MASK_R
+            outColor.a *= texture(MOD_texOpacity, texCoord).r;
+        #endif
+        #ifdef MOD_ALPHA_MASK_G
+            outColor.a *= texture(MOD_texOpacity, texCoord).g;
+        #endif
+        #ifdef MOD_ALPHA_MASK_B
+            outColor.a *= texture(MOD_texOpacity, texCoord).b;
+        #endif
+        #ifdef MOD_ALPHA_MASK_A
+            outColor.a *= texture(MOD_texOpacity, texCoord).a;
+        #endif
+        if (outColor.a < MOD_inOpacityThreshold) discard;
+    #endif
+    `,
+});
+shadowShaderModule.addUniformFrag("t", "MOD_texOpacity", 0);
+shadowShaderModule.addUniformFrag("f", "MOD_inOpacityThreshold", inOpacityThreshold);
 
-const shader = null;
-const vertexModule = null;
-const fragmentModule = null;
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_R", inAlphaMaskSource.get() === "R");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_G", inAlphaMaskSource.get() === "G");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_B", inAlphaMaskSource.get() === "B");
+shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_A", inAlphaMaskSource.get() === "A");
 
 const srcHeadVertBase = attachments.head_vert;
 const srcBodyVertBase = "";
@@ -191,16 +268,16 @@ let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
 
 
+// * MAIN PASS MODULE *
 const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
 const hasShadowCubemap = [];
-const prevLightTypes = [];
 
 function removeUniforms()
 {
@@ -221,7 +298,6 @@ function removeUniforms()
     }
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 }
 
 function createUniforms(lightsCount)
@@ -351,8 +427,6 @@ function setUniforms(lightStack)
             }
             continue;
         }
-
-        // prevLightTypes[i] = light.type;
     }
 }
 
@@ -372,14 +446,12 @@ inTrigger.onLinkChanged = function ()
     if (!inTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 };
 outTrigger.onLinkChanged = function ()
 {
     if (!outTrigger.isLinked()) STATE.lastLength = 0;
     hasShadowMap.length = 0;
     hasShadowCubemap.length = 0;
-    prevLightTypes.length = 0;
 };
 
 const _tempCamPosMatrix = mat4.create();
@@ -394,10 +466,17 @@ inTrigger.onTriggered = () =>
     }
     if (!inCastShadow.get())
     {
-        if (!cgl.frameStore.shadowPass)
+        if (!cgl.frameStore.shadowPass) outTrigger.trigger();
+        return;
+    }
+
+    if (cgl.frameStore.shadowPass)
+    {
+        if (!inCastShadow.get())
         {
-            outTrigger.trigger();
+            return;
         }
+        renderShadowPassWithModule();
         return;
     }
 
@@ -407,37 +486,21 @@ inTrigger.onTriggered = () =>
         return;
     }
 
-    if (cgl.frameStore.shadowPass)
-    {
-        outTrigger.trigger();
-        return;
-    }
-
-    if (!cgl.frameStore.lightStack)
-    {
-        outTrigger.trigger();
-        return;
-    }
-
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
-    updateShader();
 
     if (cgl.frameStore.lightStack)
     {
         if (cgl.frameStore.lightStack.length)
         {
+            updateShader();
             shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
             shaderModule.bind();
-        }
-    }
-
-    outTrigger.trigger();
-
-    if (cgl.frameStore.lightStack)
-    {
-        if (cgl.frameStore.lightStack.length)
-        {
+            outTrigger.trigger();
             shaderModule.unbind();
         }
+    }
+    else
+    {
+        outTrigger.trigger();
     }
 };
