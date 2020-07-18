@@ -3,7 +3,7 @@
 const
     dataPort = op.inString("data"),
     inExec = op.inTrigger("Render"),
-    inFile = op.inUrl("glb File"),
+    inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
     inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
