@@ -5,22 +5,21 @@ const inActive = op.inBool("Active", true);
 const inR = op.inFloatSlider("R", Math.random());
 const inG = op.inFloatSlider("G", Math.random());
 const inB = op.inFloatSlider("B", Math.random());
-inR.setUiAttribs({ colorPick: true });
+inR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Color", [inR, inG, inB]);
 const inIntensity = op.inFloat("Fresnel Intensity", 1);
-const inWidth = op.inFloat("Fresnel Width", 0.5);
-const inExponent = op.inFloat("Fresnel Exponent", 0.5);
-op.setPortGroup("Fresnel Settings", [inIntensity, inWidth, inExponent]);
+const inExponent = op.inFloat("Fresnel Exponent", 2.5);
+op.setPortGroup("Fresnel Settings", [inIntensity, inExponent]);
 
-inActive.onChange = () => {
+inActive.onChange = () =>
+{
     mod.toggleDefine("ENABLE_FRESNEL_MOD", inActive);
-    inR.setUiAttribs({ greyout: !inActive.get() });
-    inG.setUiAttribs({ greyout: !inActive.get() });
-    inB.setUiAttribs({ greyout: !inActive.get() });
-    inIntensity.setUiAttribs({ greyout: !inActive.get() });
-    inWidth.setUiAttribs({ greyout: !inActive.get() });
-    inExponent.setUiAttribs({ greyout: !inActive.get() });
-}
+    inR.setUiAttribs({ "greyout": !inActive.get() });
+    inG.setUiAttribs({ "greyout": !inActive.get() });
+    inB.setUiAttribs({ "greyout": !inActive.get() });
+    inIntensity.setUiAttribs({ "greyout": !inActive.get() });
+    inExponent.setUiAttribs({ "greyout": !inActive.get() });
+};
 
 const outTrigger = op.outTrigger("Trigger Out");
 
@@ -32,8 +31,8 @@ mod.addModule({
     "priority": 2,
     "title": "fresnelGlow",
     "name": "MODULE_VERTEX_POSITION",
-    srcHeadVert: attachments.fresnel_head_vert,
-    srcBodyVert: attachments.fresnel_body_vert
+    "srcHeadVert": attachments.fresnel_head_vert,
+    "srcBodyVert": attachments.fresnel_body_vert
 });
 
 mod.addModule({
@@ -43,11 +42,12 @@ mod.addModule({
     "srcBodyFrag": attachments.fresnel_body_frag
 });
 
-mod.addUniform( "4f", "MOD_inFresnel", inR, inG, inB, inIntensity);
-mod.addUniform( "2f", "MOD_inFresnelWidthExponent", inWidth, inExponent);
+mod.addUniform("4f", "MOD_inFresnel", inR, inG, inB, inIntensity);
+mod.addUniform("f", "MOD_inFresnelExponent", inExponent);
 
-inTrigger.onTriggered = () => {
+inTrigger.onTriggered = () =>
+{
     mod.bind();
     outTrigger.trigger();
     mod.unbind();
-}
+};

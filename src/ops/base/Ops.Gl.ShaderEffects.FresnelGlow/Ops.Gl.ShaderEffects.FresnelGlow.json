@@ -56,12 +56,6 @@
             },
             {
                 "type": "0",
-                "name": "Fresnel Width",
-                "group": "Fresnel Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "Fresnel Exponent",
                 "group": "Fresnel Settings",
                 "subType": "number"

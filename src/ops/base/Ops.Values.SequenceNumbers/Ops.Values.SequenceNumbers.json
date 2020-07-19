@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SequenceNumbers renamed to Ops.Admin.SequenceNumbers",
             "author": "pandur",
             "date": 1593425294139
+        },
+        {
+            "message": "Ops.Admin.SequenceNumbers renamed to Ops.Values.SequenceNumbers",
+            "author": "pandur",
+            "date": 1595152348833
         }
     ],
     "authorName": "pandur",
