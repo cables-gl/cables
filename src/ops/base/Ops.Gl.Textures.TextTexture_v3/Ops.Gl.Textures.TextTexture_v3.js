@@ -46,13 +46,11 @@ align.onChange =
     lineDistance.onChange =
     cachetexture.onChange =
     limitLines.onChange =
+    texWidth.onChange =
+    texHeight.onChange =
     maximize.onChange = function () { needsRefresh = true; };
 
-texWidth.onChange =
-    texHeight.onChange = reSize;
-
 render.onTriggered = doRender;
-
 
 tfilter.onChange = () =>
 {
@@ -146,6 +144,8 @@ maximize.onChange = function ()
 
 function refresh()
 {
+    cgl.checkFrameStarted("texttrexture refresh");
+
     ctx.clearRect(0, 0, fontImage.width, fontImage.height);
     ctx.fillStyle = "white";
     let fontSize = parseFloat(inFontSize.get());

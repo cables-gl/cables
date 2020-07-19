@@ -33,6 +33,7 @@ const Texture = function (__cgl, options)
     this.id = uuid();
     this.width = 0;
     this.height = 0;
+    this.loading = false;
     this.flip = true;
     this.flipped = false;
     this.shadowMap = false;
@@ -270,6 +271,7 @@ Texture.prototype.updateMipMap = function ()
  */
 Texture.prototype.initTexture = function (img, filter)
 {
+    this._cgl.checkFrameStarted("texture inittexture");
     this._fromData = false;
     // if(filter) this.unpackAlpha=filter.unpackAlpha||this.unpackAlpha;
 
@@ -300,6 +302,13 @@ Texture.prototype.initTexture = function (img, filter)
  */
 Texture.prototype.delete = function ()
 {
+    if (this.loading)
+    {
+        // cant delete texture when still loading
+        setTimeout(this.delete.bind(this), 50);
+        return;
+    }
+
     this.width = 0;
     this.height = 0;
     profileData.profileTextureDelete++;
@@ -477,7 +486,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";
-
+    texture.loading = true;
 
     if (settings && settings.hasOwnProperty("filter")) texture.filter = settings.filter;
     if (settings && settings.hasOwnProperty("flip")) texture.flip = settings.flip;
@@ -485,9 +494,10 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     if (settings && settings.hasOwnProperty("anisotropic")) texture.anisotropic = settings.anisotropic;
     if (settings && settings.hasOwnProperty("unpackAlpha")) texture.unpackAlpha = settings.unpackAlpha;
 
-    texture.image.onabort = texture.image.onerror = function (e)
+    texture.image.onabort = texture.image.onerror = (e) =>
     {
-        Log.warn("[cgl.texture.load] error loading texture", e);
+        Log.warn("[cgl.texture.load] error loading texture", url, e);
+        texture.loading = false;
         cgl.patch.loading.finished(loadingId);
         const error = { "error": true };
         if (finishedCallback) finishedCallback(error);
@@ -496,11 +506,15 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.image.onload = function (e)
     {
-        texture.initTexture(texture.image);
-        cgl.patch.loading.finished(loadingId);
-        if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
+        cgl.addNextFrameOnceCallback(() =>
+        {
+            texture.initTexture(texture.image);
+            cgl.patch.loading.finished(loadingId);
+            texture.loading = false;
+            if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
-        if (finishedCallback) finishedCallback(null, texture);
+            if (finishedCallback) finishedCallback(null, texture);
+        });
     };
     texture.image.src = url;
 
