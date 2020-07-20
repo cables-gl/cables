@@ -226,8 +226,6 @@ function saveData()
 
 op.exposeNode = function (name)
 {
-    console.log("HUND", name);
-
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
     newop.getPort("Node Name").set(name);
     op.patch.link(op, next.name, newop, "Render");

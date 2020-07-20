@@ -281,6 +281,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
 Framebuffer2.prototype.renderStart = function ()
 {
+    this._cgl.checkFrameStarted("fb2 renderstart");
     this._cgl.pushModelMatrix(); // needed ??
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuffer);
     this._cgl.pushGlFrameBuffer(this._frameBuffer);
