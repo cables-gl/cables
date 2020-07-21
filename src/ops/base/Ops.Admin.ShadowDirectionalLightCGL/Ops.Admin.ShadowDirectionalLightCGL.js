@@ -203,15 +203,15 @@ function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
-        CABLES.GL_MARKER.drawLineSourceDest({
-            "op": op,
-            "sourceX": -200 * newLight.position[0],
-            "sourceY": -200 * newLight.position[1],
-            "sourceZ": -200 * newLight.position[2],
-            "destX": 200 * newLight.position[0],
-            "destY": 200 * newLight.position[1],
-            "destZ": 200 * newLight.position[2],
-        });
+        // CABLES.GL_MARKER.drawLineSourceDest({
+        //     "op": op,
+        //     "sourceX": -200 * newLight.position[0],
+        //     "sourceY": -200 * newLight.position[1],
+        //     "sourceZ": -200 * newLight.position[2],
+        //     "destX": 200 * newLight.position[0],
+        //     "destY": 200 * newLight.position[1],
+        //     "destZ": 200 * newLight.position[2],
+        // });
 }
 
 inTrigger.onTriggered = function ()

@@ -220,10 +220,10 @@ function drawHelpers()
             "posZ": inPosZ,
         });
 
-        cgl.pushModelMatrix();
-        mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
-        CABLES.GL_MARKER.drawSphere(op, inRadius.get());
-        cgl.popModelMatrix();
+        // cgl.pushModelMatrix();
+        // mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
+        // CABLES.GL_MARKER.drawSphere(op, inRadius.get());
+        // cgl.popModelMatrix();
     }
 }
 
