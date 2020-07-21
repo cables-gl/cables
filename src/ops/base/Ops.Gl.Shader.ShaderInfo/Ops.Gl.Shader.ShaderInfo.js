@@ -3,7 +3,6 @@ const
     showFrag = op.inTriggerButton("Show Fragment"),
     showVert = op.inTriggerButton("Show Vertex"),
     showModules = op.inTriggerButton("Show Modules"),
-    showUniforms = op.inTriggerButton("Show Uniforms"),
     showState = op.inTriggerButton("State Info"),
 
 
@@ -29,7 +28,6 @@ showVert.onTriggered = function ()
 };
 
 let doStateDump = false;
-let doUniformDump = false;
 
 showState.onTriggered = function ()
 {
@@ -37,15 +35,8 @@ showState.onTriggered = function ()
     doStateDump = true;
 };
 
-showUniforms.onTriggered = function ()
-{
-    if (!CABLES.UI || !shader) return;
-    doUniformDump = true;
-};
-
 exec.onTriggered = function ()
 {
-    if (cgl.frameStore.shadowPass) return;
     shader = cgl.getShader();
     next.trigger();
 
@@ -83,12 +74,6 @@ exec.onTriggered = function ()
         outNumAttributes.set(0);
         outDefines.set(0);
         outAttributeNames.set(null);
-    }
-
-    if (doUniformDump)
-    {
-        console.log(shader._uniforms);
-        doUniformDump = false;
     }
 
     if (doStateDump)

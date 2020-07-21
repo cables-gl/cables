@@ -163,7 +163,6 @@ class ShaderModifier
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
-            console.log("broski", structUniformName + "." + structPropertyName);
 
             if (structUniform.shaderType === "frag")
             {
