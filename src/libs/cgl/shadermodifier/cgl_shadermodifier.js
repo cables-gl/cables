@@ -157,23 +157,45 @@ class ShaderModifier
             const structUniform = this._structUniforms[j];
             let structUniformName = structUniform.uniformName;
             let structName = structUniform.structName;
+
             const members = structUniform.members;
+            const structPropertyName = structUniform.propertyName;
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
+            if (!shader.hasUniform(structUniformName + "." + structPropertyName))
+            {
+                if (structUniform.shaderType === "frag")
+                {
+                    shader.addUniformStructFrag(structName, structUniformName, members);
+                }
+                if (structUniform.shaderType === "vert")
+                {
+                    shader.addUniformStructVert(structName, structUniformName, members);
+                }
+                if (structUniform.shaderType === "both")
+                {
+                    shader.addUniformStructBoth(structName, structUniformName, members);
+                }
+            }
 
-            if (structUniform.shaderType === "frag")
-            {
-                shader.addUniformStructFrag(structName, structUniformName, members);
-            }
-            if (structUniform.shaderType === "vert")
-            {
-                shader.addUniformStructVert(structName, structUniformName, members);
-            }
-            if (structUniform.shaderType === "both")
-            {
-                shader.addUniformStructBoth(structName, structUniformName, members);
-            }
+            // const members = structUniform.members;
+
+            // structUniformName = this.getPrefixedName(structUniform.uniformName);
+            // structName = this.getPrefixedName(structUniform.structName);
+
+            // if (structUniform.shaderType === "frag")
+            // {
+            //     shader.addUniformStructFrag(structName, structUniformName, members);
+            // }
+            // if (structUniform.shaderType === "vert")
+            // {
+            //     shader.addUniformStructVert(structName, structUniformName, members);
+            // }
+            // if (structUniform.shaderType === "both")
+            // {
+            //     shader.addUniformStructBoth(structName, structUniformName, members);
+            // }
         }
     }
 
