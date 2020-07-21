@@ -60,6 +60,7 @@ export function getShadowPassFragmentShader()
    https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
    */
     return `
+   {{MODULES_HEAD}}
    ${this.type === "point" ? "IN vec3 modelPos;" : ""}
    ${this.type === "point" ? "UNI vec3 inLightPosition;" : ""}
    ${this.type === "point" ? "UNI vec2 inNearFar;" : ""}
