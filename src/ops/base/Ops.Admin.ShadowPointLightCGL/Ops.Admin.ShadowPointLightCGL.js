@@ -251,7 +251,7 @@ inTrigger.onTriggered = function ()
     vec3.transformMat4(position, transVec, cgl.mMatrix);
     newLight.position = position;
 
-    // drawHelpers();
+    drawHelpers();
 
     cgl.frameStore.lightStack.push(newLight);
 
