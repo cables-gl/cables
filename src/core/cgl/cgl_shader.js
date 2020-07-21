@@ -268,12 +268,13 @@ Shader.prototype.createStructUniforms = function ()
     let structStrVert = ""; // TODO: not used yet
 
     // * reset the arrays holding the value each recompile so we don't skip structs
-    this._structNames = [];
-    this._injectedStringsFrag = [];
-    this._injectedStringsVert = [];
+    // * key value mapping so the same struct can be added twice (two times the same modifier)
+    this._injectedStringsFrag = {};
+    this._injectedStringsVert = {};
 
     this._structUniformNamesIndicesFrag = [];
     this._structUniformNamesIndicesVert = [];
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         // * only add uniforms to struct that are a member of a struct
@@ -297,6 +298,8 @@ Shader.prototype.createStructUniforms = function ()
                     structStrVert = structStrVert.concat(structDefinition);
 
                 this._structNames.push(this._uniforms[i]._structName);
+                this._injectedStringsFrag[this._uniforms[i]._structName] = [];
+                this._injectedStringsVert[this._uniforms[i]._structName] = [];
             }
 
             // * create member & comment
@@ -310,7 +313,10 @@ Shader.prototype.createStructUniforms = function ()
             if (this._uniforms[i].getShaderType() === "both")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1 && this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                if (
+                    this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
+                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
+                )
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -323,8 +329,8 @@ Shader.prototype.createStructUniforms = function ()
                         structStrVert.slice(0, insertionIndexVert)
                         + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
 
-                    this._injectedStringsFrag.push(stringToInsert);
-                    this._injectedStringsVert.push(stringToInsert);
+                    this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
+                    this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
@@ -333,14 +339,15 @@ Shader.prototype.createStructUniforms = function ()
             else if (this._uniforms[i].getShaderType() === "frag")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1)
+                if (this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
 
                     structStrFrag =
                         structStrFrag.slice(0, insertionIndexFrag)
                         + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
-                    this._injectedStringsFrag.push(stringToInsert);
+
+                    this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
@@ -348,7 +355,7 @@ Shader.prototype.createStructUniforms = function ()
             else if (this._uniforms[i].getShaderType() === "vert")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                if (this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
 
@@ -356,7 +363,7 @@ Shader.prototype.createStructUniforms = function ()
                         structStrVert.slice(0, insertionIndexVert)
                         + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
 
-                    this._injectedStringsVert.push(stringToInsert);
+                    this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
