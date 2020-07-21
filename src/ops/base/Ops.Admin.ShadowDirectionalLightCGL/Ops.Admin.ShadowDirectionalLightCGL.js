@@ -1,4 +1,4 @@
-const cgl = op.patch.cgl;
+git stconst cgl = op.patch.cgl;
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");

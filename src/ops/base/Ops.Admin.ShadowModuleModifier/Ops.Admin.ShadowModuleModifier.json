@@ -40,7 +40,7 @@
             },
             {
                 "type": "0",
-                "name": "Sample Spread",
+                "name": "Sample Distribution",
                 "group": "Shadow Settings",
                 "subType": "integer"
             },
