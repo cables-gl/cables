@@ -422,6 +422,8 @@ Shader.prototype.compile = function ()
     for (let i = 0; i < this._defines.length; i++)
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
+    const structStrings = this.createStructUniforms();
+
     if (this._uniforms)
         for (let i = 0; i < this._uniforms.length; i++)
             this._uniforms[i].resetLoc();
@@ -514,7 +516,6 @@ Shader.prototype.compile = function ()
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
 
-    const structStrings = this.createStructUniforms();
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
