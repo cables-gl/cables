@@ -163,39 +163,19 @@ class ShaderModifier
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
-            if (!shader.hasUniform(structUniformName + "." + structPropertyName))
+
+            if (structUniform.shaderType === "frag")
             {
-                if (structUniform.shaderType === "frag")
-                {
-                    shader.addUniformStructFrag(structName, structUniformName, members);
-                }
-                if (structUniform.shaderType === "vert")
-                {
-                    shader.addUniformStructVert(structName, structUniformName, members);
-                }
-                if (structUniform.shaderType === "both")
-                {
-                    shader.addUniformStructBoth(structName, structUniformName, members);
-                }
+                shader.addUniformStructFrag(structName, structUniformName, members);
             }
-
-            // const members = structUniform.members;
-
-            // structUniformName = this.getPrefixedName(structUniform.uniformName);
-            // structName = this.getPrefixedName(structUniform.structName);
-
-            // if (structUniform.shaderType === "frag")
-            // {
-            //     shader.addUniformStructFrag(structName, structUniformName, members);
-            // }
-            // if (structUniform.shaderType === "vert")
-            // {
-            //     shader.addUniformStructVert(structName, structUniformName, members);
-            // }
-            // if (structUniform.shaderType === "both")
-            // {
-            //     shader.addUniformStructBoth(structName, structUniformName, members);
-            // }
+            if (structUniform.shaderType === "vert")
+            {
+                shader.addUniformStructVert(structName, structUniformName, members);
+            }
+            if (structUniform.shaderType === "both")
+            {
+                shader.addUniformStructBoth(structName, structUniformName, members);
+            }
         }
     }
 

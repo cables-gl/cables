@@ -1082,9 +1082,12 @@ Shader.prototype.addUniformStructFrag = function (structName, uniformName, membe
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "frag";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "frag";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;
@@ -1117,9 +1120,12 @@ Shader.prototype.addUniformStructVert = function (structName, uniformName, membe
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "vert";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "vert";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;
@@ -1154,10 +1160,12 @@ Shader.prototype.addUniformStructBoth = function (structName, uniformName, membe
         const member = members[i];
         if ((member.type === "2i" || member.type === "i" || member.type === "3i"))
             console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
-
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "both";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "both";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;
