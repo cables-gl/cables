@@ -203,6 +203,11 @@ function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
     // if (cgl.shouldDrawHelpers(op))
+    gui.setTransformGizmo({
+        "posX": inPosX,
+        "posY": inPosY,
+        "posZ": inPosZ,
+    });
     //     CABLES.GL_MARKER.drawLineSourceDest({
     //         "op": op,
     //         "sourceX": -200 * newLight.position[0],
