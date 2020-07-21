@@ -14,7 +14,8 @@
             #endif
 
             #ifdef MODE_PCF
-                 col.rgb *= MOD_ShadowFactorPCF(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.MAP_SIZE, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 float MOD_shadowFactor{{LIGHT_INDEX}} = MOD_ShadowFactorPCF(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.MAP_SIZE, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 col.rgb *= clamp((MOD_shadowFactor{{LIGHT_INDEX}} + (1. - shadowStrength{{LIGHT_INDEX}})), 0., 1.);
             #endif
 
             #ifdef MODE_POISSON
@@ -22,11 +23,13 @@
                     FillPoissonArray();
                 #endif
 
-                 col.rgb *= MOD_ShadowFactorPoisson(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
+                 float MOD_shadowFactor{{LIGHT_INDEX}} = MOD_ShadowFactorPoisson(MOD_shadowMap{{LIGHT_INDEX}}, shadowMapLookup{{LIGHT_INDEX}}, shadowMapDepth{{LIGHT_INDEX}}, bias{{LIGHT_INDEX}}, MOD_sampleSpread);
+                 col.rgb *= clamp((MOD_shadowFactor{{LIGHT_INDEX}} + (1. - shadowStrength{{LIGHT_INDEX}})), 0., 1.);
             #endif
 
             #ifdef MODE_VSM
-                 col.rgb *= MOD_ShadowFactorVSM(shadowMapSample{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, shadowMapDepth{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 float MOD_shadowFactor{{LIGHT_INDEX}} = MOD_ShadowFactorVSM(shadowMapSample{{LIGHT_INDEX}}, MOD_light{{LIGHT_INDEX}}.shadowProperties.BIAS, shadowMapDepth{{LIGHT_INDEX}}, shadowStrength{{LIGHT_INDEX}});
+                 col.rgb *= clamp((MOD_shadowFactor{{LIGHT_INDEX}} + (1. - shadowStrength{{LIGHT_INDEX}})), 0., 1.);
             #endif
         }
     #endif

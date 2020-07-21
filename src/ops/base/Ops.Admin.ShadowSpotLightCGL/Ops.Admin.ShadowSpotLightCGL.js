@@ -133,7 +133,7 @@ let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange
 = inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
-= inSpotExponent.onChange = updateLightParameters;
+= inSpotExponent.onChange = inShadowStrength.onChange = updateLightParameters;
 
 function updateLightParameters()
 {
