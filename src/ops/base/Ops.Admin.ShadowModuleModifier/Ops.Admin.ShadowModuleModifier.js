@@ -289,7 +289,6 @@ function removeUniforms()
         shaderModule.removeUniform("MOD_normalOffset" + i);
         shaderModule.removeUniform("MOD_lightMatrix" + i);
         shaderModule.removeDefine("HAS_SHADOW_MAP_" + i);
-        op.log("moduel after remove", shaderModule);
     }
 
     if (STATE.lastLength > 0)
