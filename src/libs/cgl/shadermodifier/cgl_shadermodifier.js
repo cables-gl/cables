@@ -16,6 +16,14 @@ class ShaderModifier
         this._changedUniforms = true;
         this._modulesChanged = false;
         this.needsTexturePush = false;
+
+        if (this._cgl.glVersion == 1)
+        {
+            this._cgl.gl.getExtension("OES_texture_float");
+            this._cgl.gl.getExtension("OES_texture_float_linear");
+            this._cgl.gl.getExtension("OES_texture_half_float");
+            this._cgl.gl.getExtension("OES_texture_half_float_linear");
+        }
     }
 
     bind()
@@ -35,6 +43,15 @@ class ShaderModifier
                     "orig": shader,
                     "shader": shader.copy()
                 };
+
+            if (this._cgl.glVersion == 1)
+            {
+                this._boundShader.shader.enableExtension("GL_OES_standard_derivatives");
+                this._boundShader.shader.enableExtension("GL_OES_texture_float");
+                this._boundShader.shader.enableExtension("GL_OES_texture_float_linear");
+                this._boundShader.shader.enableExtension("GL_OES_texture_half_float");
+                this._boundShader.shader.enableExtension("GL_OES_texture_half_float_linear");
+            }
 
             this._addModulesToShader(this._boundShader.shader);
 
@@ -206,6 +223,11 @@ class ShaderModifier
         }
     }
 
+    hasUniform(name)
+    {
+        return this._getUniform(name);
+    }
+
     _getUniform(name)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -352,7 +374,6 @@ class ShaderModifier
         {
             for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
             {
-                const uniToRemove = this._uniforms[j];
                 const nameToRemove = name;
 
                 if (this._uniforms[j].name == name && !this._uniforms[j].structName)
