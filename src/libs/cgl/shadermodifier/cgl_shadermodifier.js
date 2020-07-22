@@ -206,6 +206,11 @@ class ShaderModifier
         }
     }
 
+    hasUniform(name)
+    {
+        return this._getUniform(name);
+    }
+
     _getUniform(name)
     {
         for (let i = 0; i < this._uniforms.length; i++)
@@ -352,7 +357,6 @@ class ShaderModifier
         {
             for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
             {
-                const uniToRemove = this._uniforms[j];
                 const nameToRemove = name;
 
                 if (this._uniforms[j].name == name && !this._uniforms[j].structName)
