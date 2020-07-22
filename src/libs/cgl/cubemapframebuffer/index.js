@@ -1,8 +1,12 @@
+import { CubemapTexture } from "./cubemaptexture";
+
 class CubemapFramebuffer
 {
     constructor(cgl, width, height, options)
     {
         this._cgl = cgl;
+        this.width = width || 8;
+        this.height = height || 8;
         this._cubemapProperties = [
             // targets for use in some gl functions for working with cubemaps
             {
@@ -21,9 +25,9 @@ class CubemapFramebuffer
                 "up": vec3.fromValues(0.0, 0.0, 1.0),
             },
             {
+                "face": this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
                 "lookAt": vec3.fromValues(0.0, -1.0, 0.0),
                 "up": vec3.fromValues(0.0, 0.0, -1.0),
-                "face": this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
             },
             {
                 "face": this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
@@ -44,7 +48,12 @@ class CubemapFramebuffer
         this._textureDepth = null;
 
         // * TEST PARAMETERS
-        this.texture = null;
+        this.texture = new CGL.Texture(cgl, {
+            "isFloatingPointTexture": true,
+            "isCubemap": true,
+            "width": this.width,
+            "height": this.height
+        });
         this.glFramebuffer = null;
         this.glRenderbuffer = null;
 
@@ -72,6 +81,8 @@ class CubemapFramebuffer
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
 
         this._colorTexture = this._cgl.gl.createTexture();
+        this.initializeRenderbuffers();
+        this.setSize(this.width, this.height);
     }
 
     initializeRenderbuffers()
@@ -188,11 +199,45 @@ class CubemapFramebuffer
             this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
         }
 
-        this._framebuffer = this._cgl.gl.createFramebuffer();
-        this._textureFrameBuffer = this._cgl.gl.createFramebuffer();
+        this._framebuffer = this._cgl.gl.createFramebuffer(); // crate the framebuffer that will draw to the reflection map
+        this._depthbuffer = this._cgl.gl.createRenderbuffer(); // renderbuffer for depth buffer in framebuffer
 
-        this._colorTexture.setSize(this._width, this._height); // TODO: this wont work
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
 
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+
+        this.texture.setSize(this.width, this.height); // TODO: this wont work
+
+
+        if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
+        const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
+        switch (status)
+        {
+        case this._cgl.gl.FRAMEBUFFER_COMPLETE:
+            break;
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+            console.error("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", width, height, this.texture.tex, this._depthBuffer);
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+            console.error("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+            console.error("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+        case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
+            console.error("FRAMEBUFFER_UNSUPPORTED");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        default:
+            console.error("incomplete framebuffer", status);
+            throw new Error("Incomplete framebuffer: " + status);
+            // throw("Incomplete framebuffer: " + status);
+        }
+
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
         // TODO: continue set size later when init works
         // this._render;
     }
@@ -205,20 +250,35 @@ class CubemapFramebuffer
 
     renderStart()
     {
-        this._cgl.pushModelMatrix();
-        this._cgl.pushPMatrix();
-
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
-        this._cgl.gl.viewport(0, 0, this._width, this._height);
+        this._cgl.gl.viewport(0, 0, this.width, this.height);
         this._cgl.pushGlFrameBuffer(this._framebuffer);
         this._cgl.pushFrameBuffer(this);
+    }
 
+    renderStartCubemapFace(index)
+    {
+        this._cgl.pushModelMatrix();
+        this._cgl.pushViewMatrix();
+        this._cgl.pushPMatrix();
+
+        this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.texture.tex, 0);
+
+        this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
         if (this._options.clear)
         {
             this._cgl.gl.clearColor(0, 0, 0, 0);
             this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
         }
+    }
+
+    renderEndCubemapFace()
+    {
+        this._cgl.popPMatrix();
+        this._cgl.popModelMatrix();
+        this._cgl.popViewMatrix();
     }
 
     renderEnd()
