@@ -133,7 +133,7 @@ let updateLight = false;
 
 inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChange = inB.onChange
 = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange = inIntensity.onChange
-= inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = function ()
+= inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = inShadowStrength.onChange = function ()
         {
             updateLight = true;
         };
