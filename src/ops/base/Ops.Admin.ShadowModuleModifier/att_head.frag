@@ -46,7 +46,7 @@ float MOD_when_neq(float x, float y) { return abs(sign(x - y)); } // comparator 
         vec3 MOD_offsets[20];
         int MOD_CALLED_FILL_PCF_ARRAY = 0;
         void MOD_FillPCFArray() {
-            if (CALLED_FILL_PCF_ARRAY == 1) return;
+            if (MOD_CALLED_FILL_PCF_ARRAY == 1) return;
             MOD_offsets[0] = vec3( 1,  1,  1);
             MOD_offsets[1] = vec3( 1, -1,  1);
             MOD_offsets[2] = vec3(-1, -1,  1);
@@ -148,23 +148,23 @@ float MOD_when_neq(float x, float y) { return abs(sign(x - y)); } // comparator 
     // cannot allocate arrays like above in webgl1
         vec2 MOD_poissonDisk[16];
         void FillPoissonArray() {
-            if (CALLED_FILL_POISSON_ARRAY == 1) return;
-            poissonDisk[0] = vec2( -0.94201624, -0.39906216 );
-            poissonDisk[1] = vec2( 0.94558609, -0.76890725 );
-            poissonDisk[2] = vec2( -0.094184101, -0.92938870 );
-            poissonDisk[3] = vec2( 0.34495938, 0.29387760 );
-            poissonDisk[4] = vec2( -0.91588581, 0.45771432 );
-            poissonDisk[5] = vec2( -0.81544232, -0.87912464 );
-            poissonDisk[6] = vec2( -0.38277543, 0.27676845 );
-            poissonDisk[7] = vec2( 0.97484398, 0.75648379 );
-            poissonDisk[8] = vec2( 0.44323325, -0.97511554 );
-            poissonDisk[9] = vec2( 0.53742981, -0.47373420 );
-            poissonDisk[10] = vec2( -0.26496911, -0.41893023 );
-            poissonDisk[11] = vec2( 0.79197514, 0.19090188 );
-            poissonDisk[12] = vec2( -0.24188840, 0.99706507 );
-            poissonDisk[13] = vec2( -0.81409955, 0.91437590 );
-            poissonDisk[14] = vec2( 0.19984126, 0.78641367 );
-            poissonDisk[15] = vec2( 0.14383161, -0.14100790);
+            if (MOD_CALLED_FILL_POISSON_ARRAY == 1) return;
+            MOD_poissonDisk[0] = vec2( -0.94201624, -0.39906216 );
+            MOD_poissonDisk[1] = vec2( 0.94558609, -0.76890725 );
+            MOD_poissonDisk[2] = vec2( -0.094184101, -0.92938870 );
+            MOD_poissonDisk[3] = vec2( 0.34495938, 0.29387760 );
+            MOD_poissonDisk[4] = vec2( -0.91588581, 0.45771432 );
+            MOD_poissonDisk[5] = vec2( -0.81544232, -0.87912464 );
+            MOD_poissonDisk[6] = vec2( -0.38277543, 0.27676845 );
+            MOD_poissonDisk[7] = vec2( 0.97484398, 0.75648379 );
+            MOD_poissonDisk[8] = vec2( 0.44323325, -0.97511554 );
+            MOD_poissonDisk[9] = vec2( 0.53742981, -0.47373420 );
+            MOD_poissonDisk[10] = vec2( -0.26496911, -0.41893023 );
+            MOD_poissonDisk[11] = vec2( 0.79197514, 0.19090188 );
+            MOD_poissonDisk[12] = vec2( -0.24188840, 0.99706507 );
+            MOD_poissonDisk[13] = vec2( -0.81409955, 0.91437590 );
+            MOD_poissonDisk[14] = vec2( 0.19984126, 0.78641367 );
+            MOD_poissonDisk[15] = vec2( 0.14383161, -0.14100790);
             MOD_CALLED_FILL_POISSON_ARRAY = 1;
         }
     #endif
