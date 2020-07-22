@@ -77,7 +77,7 @@ function removeElement()
 {
     if (div && div.parentNode) div.parentNode.removeChild(div);
 }
-
+// inline css inisde div
 function updateStyle()
 {
     if (inStyle.get() != div.style)
@@ -149,6 +149,7 @@ function addListeners()
 
 op.addEventListener("onEnabledChange", function (enabled)
 {
+    op.log("css changed");
     setCSSVisible(div.style.visibility != "visible");
 });
 

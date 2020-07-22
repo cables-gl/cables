@@ -1,13 +1,13 @@
 const
     inTex = op.inTexture("Texture"),
     inActive = op.inBool("Active", true),
-    inSize = op.inFloat("Size", 250),
+    inSize = op.inFloat("Size", 1),
     intrig = op.inTrigger("Trigger");
 
 const ele = document.createElement("canvas");
 
 let width = 250;
-let height = 250;
+const height = 250;
 let zoom = 1;
 
 ele.style.position = "absolute";
@@ -39,12 +39,12 @@ op.onDelete = function ()
     ele.remove();
 };
 
+const sizeMul = 250;
+
 inSize.onChange = function ()
 {
-    width = inSize.get();
-    height = width;
+    width = inSize.get() * sizeMul;
     ele.style.width = width + "px";
-    ele.style.height = height + "px";
 };
 
 function updateOutOfCanvas()
@@ -69,6 +69,10 @@ op.patch.cgl.on("beginFrame", () =>
     if (!inActive.get() || !inTex.get()) return;
     if (performance.now() - lastTime < 30) return;
     if (outOfCanvas) return;
+
+    const newHeight = inSize.get() * sizeMul * (inTex.get().height / inTex.get().width);
+
+    if (ele.style.height != newHeight + "px")ele.style.height = newHeight + "px";
 
     gui.metaTexturePreviewer._renderTexture(inTex, ele);
     lastTime = performance.now();

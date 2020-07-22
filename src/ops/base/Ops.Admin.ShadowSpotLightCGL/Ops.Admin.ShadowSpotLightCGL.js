@@ -133,7 +133,7 @@ let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange
 = inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
-= inSpotExponent.onChange = updateLightParameters;
+= inSpotExponent.onChange = inShadowStrength.onChange = updateLightParameters;
 
 function updateLightParameters()
 {
@@ -232,22 +232,24 @@ const resultPointAt = vec3.create();
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (cgl.shouldDrawHelpers(op))
+    if (op.isCurrentUiOp())
     {
         gui.setTransformGizmo({
             "posX": inPosX,
             "posY": inPosY,
             "posZ": inPosZ,
         });
-        CABLES.GL_MARKER.drawLineSourceDest({
-            op,
-            "sourceX": newLight.position[0],
-            "sourceY": newLight.position[1],
-            "sourceZ": newLight.position[2],
-            "destX": newLight.conePointAt[0],
-            "destY": newLight.conePointAt[1],
-            "destZ": newLight.conePointAt[2],
-        });
+
+
+        // CABLES.GL_MARKER.drawLineSourceDest({
+        //     op,
+        //     "sourceX": newLight.position[0],
+        //     "sourceY": newLight.position[1],
+        //     "sourceZ": newLight.position[2],
+        //     "destX": newLight.conePointAt[0],
+        //     "destY": newLight.conePointAt[1],
+        //     "destZ": newLight.conePointAt[2],
+        // });
     }
 }
 

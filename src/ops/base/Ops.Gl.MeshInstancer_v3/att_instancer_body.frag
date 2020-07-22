@@ -13,5 +13,4 @@
         col.rgb = frag_instColor.rgb;
         col.a = frag_instColor.a;
     #endif
-
 #endif

@@ -22,6 +22,7 @@ void main()
    col*=a;
    if(col.a==0.0)discard;
 
+
     #ifdef DO_MULTEX
         col*=texture(texMul,texPos);
     #endif
@@ -29,6 +30,7 @@ void main()
     #ifdef DO_MULTEX_MASK
         col*=texture(texMulMask,texPos).r;
     #endif
+
 
 
    outColor=col;

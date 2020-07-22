@@ -139,7 +139,7 @@ newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
 
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPosX.onChange = inPosY.onChange = inPosZ.onChange = inIntensity.onChange = updateLightParameters;
+= inPosX.onChange = inPosY.onChange = inPosZ.onChange = inIntensity.onChange = inShadowStrength.onChange = updateLightParameters;
 
 let updateLight = false;
 function updateLightParameters(param)
@@ -202,16 +202,21 @@ inLRBT.onChange = inNear.onChange = inFar.onChange = function ()
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (cgl.shouldDrawHelpers(op))
-        CABLES.GL_MARKER.drawLineSourceDest({
-            "op": op,
-            "sourceX": -200 * newLight.position[0],
-            "sourceY": -200 * newLight.position[1],
-            "sourceZ": -200 * newLight.position[2],
-            "destX": 200 * newLight.position[0],
-            "destY": 200 * newLight.position[1],
-            "destZ": 200 * newLight.position[2],
-        });
+    // if (cgl.shouldDrawHelpers(op))
+    gui.setTransformGizmo({
+        "posX": inPosX,
+        "posY": inPosY,
+        "posZ": inPosZ,
+    });
+    //     CABLES.GL_MARKER.drawLineSourceDest({
+    //         "op": op,
+    //         "sourceX": -200 * newLight.position[0],
+    //         "sourceY": -200 * newLight.position[1],
+    //         "sourceZ": -200 * newLight.position[2],
+    //         "destX": 200 * newLight.position[0],
+    //         "destY": 200 * newLight.position[1],
+    //         "destZ": 200 * newLight.position[2],
+    //     });
 }
 
 inTrigger.onTriggered = function ()
