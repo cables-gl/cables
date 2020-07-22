@@ -25,7 +25,7 @@ class ShaderModifier
 
         this._boundShader = this._shaders[shader.id];
 
-        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged)
+        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
 
