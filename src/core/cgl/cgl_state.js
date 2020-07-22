@@ -493,7 +493,7 @@ const Context = function (_patch)
     };
 
     /**
-     * log warning to console if the rendering of one frame has not been started
+     * log warning to console if the rendering of one frame has not been started / handy to check for async problems
      * @function checkFrameStarted
      * @memberof Context
      * @instance

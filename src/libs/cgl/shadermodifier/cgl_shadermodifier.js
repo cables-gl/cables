@@ -157,7 +157,9 @@ class ShaderModifier
             const structUniform = this._structUniforms[j];
             let structUniformName = structUniform.uniformName;
             let structName = structUniform.structName;
+
             const members = structUniform.members;
+            const structPropertyName = structUniform.propertyName;
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);

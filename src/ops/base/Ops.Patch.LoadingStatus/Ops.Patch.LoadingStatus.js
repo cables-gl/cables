@@ -1,45 +1,45 @@
-var self=this;
-const cgl=op.patch.cgl;
-const patch=op.patch;
+const self = this;
+const cgl = op.patch.cgl;
+const patch = op.patch;
 
-this.exe=this.addInPort(new CABLES.Port(op,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-this.finished=this.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_FUNCTION));
-var result=this.addOutPort(new CABLES.Port(op,"status",CABLES.OP_PORT_TYPE_VALUE));
-var isFinishedPort = op.outValue('all loaded', false);
-var preRenderStatus=this.addOutPort(new CABLES.Port(op,"preRenderStatus",CABLES.OP_PORT_TYPE_VALUE));
-var preRenderTimeFrames=this.addInPort(new CABLES.Port(op,"preRenderTimes",CABLES.OP_PORT_TYPE_VALUE));
-var preRenderOps=op.inValueBool("PreRender Ops");
-var startTimeLine=op.inBool("Play Timeline",true);
+this.exe = this.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+this.finished = this.addOutPort(new CABLES.Port(op, "finished", CABLES.OP_PORT_TYPE_FUNCTION));
+const result = this.addOutPort(new CABLES.Port(op, "status", CABLES.OP_PORT_TYPE_VALUE));
+const isFinishedPort = op.outValue("all loaded", false);
+const preRenderStatus = this.addOutPort(new CABLES.Port(op, "preRenderStatus", CABLES.OP_PORT_TYPE_VALUE));
+const preRenderTimeFrames = this.addInPort(new CABLES.Port(op, "preRenderTimes", CABLES.OP_PORT_TYPE_VALUE));
+const preRenderOps = op.inValueBool("PreRender Ops");
+const startTimeLine = op.inBool("Play Timeline", true);
 preRenderStatus.set(0);
-this.numAssets=this.addOutPort(new CABLES.Port(op,"numAssets",CABLES.OP_PORT_TYPE_VALUE));
-this.loading=this.addOutPort(new CABLES.Port(op,"loading",CABLES.OP_PORT_TYPE_FUNCTION));
-var loadingFinished=op.outTrigger("loading finished");//this.addOutPort(new CABLES.Port(op,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
+this.numAssets = this.addOutPort(new CABLES.Port(op, "numAssets", CABLES.OP_PORT_TYPE_VALUE));
+this.loading = this.addOutPort(new CABLES.Port(op, "loading", CABLES.OP_PORT_TYPE_FUNCTION));
+const loadingFinished = op.outTrigger("loading finished");// this.addOutPort(new CABLES.Port(op,"loading finished",CABLES.OP_PORT_TYPE_FUNCTION));
 
-var finishedAll=false;
-var preRenderTimes=[];
-var firstTime=true;
+let finishedAll = false;
+const preRenderTimes = [];
+let firstTime = true;
 
-var identTranslate=vec3.create();
-vec3.set(identTranslate, 0,0,0);
-var identTranslateView=vec3.create();
-vec3.set(identTranslateView, 0,0,-2);
+const identTranslate = vec3.create();
+vec3.set(identTranslate, 0, 0, 0);
+const identTranslateView = vec3.create();
+vec3.set(identTranslateView, 0, 0, -2);
 
 document.body.classList.add("cables-loading");
 
 
-var prerenderCount=0;
-var preRenderAnimFrame=function(t)
+let prerenderCount = 0;
+const preRenderAnimFrame = function (t)
 {
-    var time=preRenderTimes[prerenderCount];
+    const time = preRenderTimes[prerenderCount];
 
-    preRenderStatus.set(prerenderCount/(preRenderTimeFrames.anim.keys.length-1));
+    preRenderStatus.set(prerenderCount / (preRenderTimeFrames.anim.keys.length - 1));
 
     op.patch.timer.setTime(time);
-    cgl.renderStart(cgl,identTranslate,identTranslateView);
+    cgl.renderStart(cgl, identTranslate, identTranslateView);
 
     self.finished.trigger();
 
-    cgl.gl.clearColor(0,0,0,1);
+    cgl.gl.clearColor(0, 0, 0, 1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
     self.loading.trigger();
@@ -48,64 +48,64 @@ var preRenderAnimFrame=function(t)
     prerenderCount++;
 };
 
-this.onAnimFrame=null;
-var loadingIdPrerender='';
+this.onAnimFrame = null;
+const loadingIdPrerender = "";
 
-this.onLoaded=function()
+this.onLoaded = function ()
 {
-    if(preRenderTimeFrames.isAnimated())
-    if(preRenderTimeFrames.anim)
-        for(var i=0;i<preRenderTimeFrames.anim.keys.length;i++)
-            preRenderTimes.push( preRenderTimeFrames.anim.keys[i].time );
+    if (preRenderTimeFrames.isAnimated())
+        if (preRenderTimeFrames.anim)
+            for (let i = 0; i < preRenderTimeFrames.anim.keys.length; i++)
+                preRenderTimes.push(preRenderTimeFrames.anim.keys[i].time);
 
     preRenderTimes.push(1);
 };
 
 function checkPreRender()
 {
-    if(patch.loading.getProgress()>=1.0)
+    if (patch.loading.getProgress() >= 1.0)
     {
-        if(preRenderTimeFrames.anim && prerenderCount>=preRenderTimeFrames.anim.keys.length)
+        if (preRenderTimeFrames.anim && prerenderCount >= preRenderTimeFrames.anim.keys.length)
         {
-            self.onAnimFrame=function(){};
+            self.onAnimFrame = function () {};
             isFinishedPort.set(true);
-            finishedAll=true;
+            finishedAll = true;
         }
         else
         {
-            setTimeout(checkPreRender,30);
+            setTimeout(checkPreRender, 30);
         }
     }
     else
     {
-        setTimeout(checkPreRender,100);
+        setTimeout(checkPreRender, 100);
     }
 }
 
-var loadingId=patch.loading.start('delayloading','delayloading');
-setTimeout(function()
+const loadingId = patch.loading.start("delayloading", "delayloading");
+setTimeout(function ()
 {
     patch.loading.finished(loadingId);
-},100);
+}, 100);
 
-this.exe.onTriggered= function()
+this.exe.onTriggered = function ()
 {
     result.set(patch.loading.getProgress());
     self.numAssets.set(patch.loading.getNumAssets());
 
-    if(patch.loading.getProgress()>=1.0 && finishedAll)
+    if (patch.loading.getProgress() >= 1.0 && finishedAll)
     {
-        if(firstTime)
+        if (firstTime)
         {
-            if(preRenderOps.get()) op.patch.preRenderOps();
+            if (preRenderOps.get()) op.patch.preRenderOps();
             loadingFinished.trigger();
             op.patch.timer.setTime(0);
-            if(startTimeLine.get())
+            if (startTimeLine.get())
             {
                 op.patch.timer.play();
                 isFinishedPort.set(true);
             }
-            firstTime=false;
+            firstTime = false;
         }
 
         self.finished.trigger();
@@ -114,27 +114,26 @@ this.exe.onTriggered= function()
     }
     else
     {
-        if(!preRenderTimeFrames.anim)
+        if (!preRenderTimeFrames.anim)
         {
-            finishedAll=true;
-            self.onAnimFrame=function(){};
+            finishedAll = true;
+            self.onAnimFrame = function () {};
         }
 
-        if(preRenderTimeFrames.anim && patch.loading.getProgress()>=1.0
-            && prerenderCount<preRenderTimeFrames.anim.keys.length
+        if (preRenderTimeFrames.anim && patch.loading.getProgress() >= 1.0
+            && prerenderCount < preRenderTimeFrames.anim.keys.length
         )
         {
-            self.onAnimFrame=preRenderAnimFrame;
+            self.onAnimFrame = preRenderAnimFrame;
             checkPreRender();
-            self.loading.trigger();
+            op.loading.trigger();
         }
 
-        if(patch.loading.getProgress()<1.0)
+        if (patch.loading.getProgress() < 1.0)
         {
-            self.loading.trigger();
+            op.loading.trigger();
             op.patch.timer.setTime(0);
             op.patch.timer.pause();
         }
     }
-
 };
