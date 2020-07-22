@@ -315,8 +315,7 @@ Shader.prototype.createStructUniforms = function ()
                 // * inject member before {injectionString}
                 if (
                     this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
-                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
-                )
+                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -396,7 +395,6 @@ Shader.prototype.createStructUniforms = function ()
     for (let i = 0; i < this._structUniformNamesIndicesVert.length; i += 1)
     {
         const index = this._structUniformNamesIndicesVert[i];
-
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
         if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
@@ -439,6 +437,14 @@ Shader.prototype.compile = function ()
 
     let vs = "";
     let fs = "";
+
+    if (!this.srcFrag)
+    {
+        console.error("[cgl shader] has no fragment source!");
+        this.srcVert = this.getDefaultVertexShader();
+        this.srcFrag = this.getDefaultFragmentShader();
+        // return;
+    }
 
     if (this.glslVersion == 300)
     {

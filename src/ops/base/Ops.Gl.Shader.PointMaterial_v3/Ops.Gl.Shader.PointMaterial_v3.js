@@ -3,14 +3,14 @@ const cgl = op.patch.cgl;
 const
     render = op.inTrigger("render"),
     pointSize = op.inValueFloat("PointSize", 3),
-    randomSize = op.inValue("Random Size", 3),
+    inPixelSize = op.inBool("Size in Pixels", false),
+    randomSize = op.inValue("Random Size", 0),
     makeRound = op.inValueBool("Round", true),
     doScale = op.inValueBool("Scale by Distance", false),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
     a = op.inValueSlider("a", 1),
-    preMultipliedAlpha = op.inValueBool("preMultiplied alpha"),
     vertCols = op.inBool("Vertex Colors", false),
     texture = op.inTexture("texture"),
     textureMask = op.inTexture("Texture Mask"),
@@ -23,8 +23,8 @@ const
     shaderOut = op.outObject("shader");
 
 op.setPortGroup("Texture", [texture, textureMask, texMaskChan, textureColorize]);
-op.setPortGroup("Color", [r, g, b, a, preMultipliedAlpha, vertCols]);
-op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale]);
+op.setPortGroup("Color", [r, g, b, a, vertCols]);
+op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize]);
 r.setUiAttribs({ "colorPick": true });
 
 const shader = new CGL.Shader(cgl, "PointMaterial");
@@ -41,7 +41,7 @@ const
     textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize", 0),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 0);
 
-shader.setSource(attachments.shader_vert, attachments.shader_frag);
+shader.setSource(attachments.pointmat_vert, attachments.pointmat_frag);
 shader.glPrimitive = cgl.gl.POINTS;
 shaderOut.set(shader);
 shaderOut.ignoreValueSerialize = true;
@@ -56,6 +56,7 @@ doScale.onChange =
     flipTex.onChange =
     textureColorize.onChange =
     texMaskChan.onChange =
+    inPixelSize.onChange =
     vertCols.onChange = updateDefines;
 
 
@@ -77,12 +78,7 @@ function doRender()
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
 
-
-    if (preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
-
     trigger.trigger();
-
-    if (preMultipliedAlpha.get())cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.popShader();
 }
@@ -101,4 +97,5 @@ function updateDefines()
     shader.toggleDefine("TEXTURE_MASK_R", texMaskChan.get() == "R");
     shader.toggleDefine("TEXTURE_MASK_A", texMaskChan.get() == "A");
     shader.toggleDefine("TEXTURE_MASK_LUMI", texMaskChan.get() == "Luminance");
+    shader.toggleDefine("PIXELSIZE", inPixelSize.get());
 }
