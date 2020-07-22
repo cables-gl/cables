@@ -2,7 +2,6 @@ const
     exe = op.inTrigger("exe"),
     geom = op.inObject("geom"),
     inScale = op.inValue("Scale", 1),
-
     doLimit = op.inValueBool("Limit Instances", false),
     inLimit = op.inValueInt("Limit", 100),
 
@@ -26,14 +25,31 @@ const m = mat4.create();
 let
     matrixArray = new Float32Array(1),
     instColorArray = new Float32Array(1),
-    mod = null,
-    fragMod = null,
     mesh = null,
-    shader = null,
     recalc = true,
     num = 0,
     arrayChangedColor = true,
     arrayChangedTrans = true;
+
+
+const mod = new CGL.ShaderModifier(cgl, "colorArea");
+mod.addModule({
+    "name": "MODULE_VERTEX_POSITION",
+    "title": op.objName,
+    "priority": -2,
+    "srcHeadVert": attachments.instancer_head_vert,
+    "srcBodyVert": attachments.instancer_body_vert
+});
+
+mod.addModule({
+    "name": "MODULE_COLOR",
+    "priority": -2,
+    "title": op.objName,
+    "srcHeadFrag": attachments.instancer_head_frag,
+    "srcBodyFrag": attachments.instancer_body_frag,
+});
+
+mod.addUniformVert("f", "MOD_scale", inScale);
 
 
 inBlendMode.onChange = updateDefines;
@@ -71,11 +87,10 @@ function reset()
 
 function updateDefines()
 {
-    if (!shader) return;
-    shader.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    shader.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
-    shader.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
-    shader.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
+    mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+    mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
+    mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
+    mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
 }
 
 geom.onChange = function ()
@@ -92,29 +107,22 @@ geom.onChange = function ()
 
 function removeModule()
 {
-    if (shader && mod)
-    {
-        shader.removeDefine("INSTANCING");
-        shader.removeModule(mod);
-        shader.removeModule(fragMod);
-        shader = null;
-    }
+
 }
 
 function setupArray()
 {
     if (!mesh) return;
-    if (!shader) return;
 
     let transforms = inTranslates.get();
-    if (!transforms)transforms = [0, 0, 0];
+    if (!transforms) transforms = [0, 0, 0];
 
     num = Math.floor(transforms.length / 3);
 
     const colArr = inColor.get();
     const scales = inScales.get();
 
-    shader.toggleDefine("COLORIZE_INSTANCES", colArr);
+    // shader.toggleDefine("COLORIZE_INSTANCES", colArr);
 
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
     if (instColorArray.length != num * 4) instColorArray = new Float32Array(num * 4);
@@ -175,49 +183,67 @@ function updateLimit()
     inLimit.setUiAttribs({ "hidePort": !doLimit.get(), "greyout": !doLimit.get() });
 }
 
+
 function doRender()
 {
     if (!mesh) return;
     if (recalc) setupArray();
 
-    if (cgl.getShader() && cgl.getShader() != shader)
-    {
-        removeModule();
-        shader = cgl.getShader();
 
-        if (!shader.hasDefine("INSTANCING"))
-        {
-            mod = shader.addModule(
-                {
-                    "name": "MODULE_VERTEX_POSITION",
-                    "title": op.objName,
-                    "priority": -2,
-                    "srcHeadVert": attachments.instancer_head_vert,
-                    "srcBodyVert": attachments.instancer_body_vert
-                });
-
-            fragMod = shader.addModule({
-                "name": "MODULE_COLOR",
-                "priority": -2,
-                "title": op.objName,
-                "srcHeadFrag": attachments.instancer_head_frag,
-                "srcBodyFrag": attachments.instancer_body_frag,
-            });
-
-            shader.define("INSTANCING");
-
-            updateDefines();
-            inScale.uniform = new CGL.Uniform(shader, "f", mod.prefix + "scale", inScale);
-        }
-
-        shader.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    }
+    mod.bind();
 
     if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
     else mesh.numInstances = num;
 
     outNum.set(mesh.numInstances);
 
-    if (mesh.numInstances > 0) mesh.render(shader);
+    if (mesh.numInstances > 0) mesh.render(cgl.getShader());
+
+    mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+
     outTrigger.trigger();
+
+    mod.unbind();
+
+
+    // if (cgl.getShader() && cgl.getShader() != shader)
+    // {
+    //     removeModule();
+    //     shader = cgl.getShader();
+
+    //     if (!shader.hasDefine("INSTANCING"))
+    //     {
+    //         mod = shader.addModule(
+    //             {
+    //                 "name": "MODULE_VERTEX_POSITION",
+    //                 "title": op.objName,
+    //                 "priority": -2,
+    //                 "srcHeadVert": attachments.instancer_head_vert,
+    //                 "srcBodyVert": attachments.instancer_body_vert
+    //             });
+
+    //         fragMod = shader.addModule({
+    //             "name": "MODULE_COLOR",
+    //             "priority": -2,
+    //             "title": op.objName,
+    //             "srcHeadFrag": attachments.instancer_head_frag,
+    //             "srcBodyFrag": attachments.instancer_body_frag,
+    //         });
+
+    //         shader.define("INSTANCING");
+
+    //         updateDefines();
+    //         inScale.uniform = new CGL.Uniform(shader, "f", mod.prefix + "scale", inScale);
+    //     }
+
+    //     shader.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+    // }
+
+    // if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
+    // else mesh.numInstances = num;
+
+    // outNum.set(mesh.numInstances);
+
+    // if (mesh.numInstances > 0) mesh.render(shader);
+    // outTrigger.trigger();
 }
