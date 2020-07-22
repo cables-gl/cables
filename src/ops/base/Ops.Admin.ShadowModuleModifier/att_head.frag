@@ -26,7 +26,7 @@ float MOD_when_neq(float x, float y) { return abs(sign(x - y)); } // comparator 
 
 #ifdef MODE_DEFAULT
     float MOD_ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
-        return shadowMapSample < shadowMapDepth - bias ? (1. - shadowStrength) : 1.; //step(shadowMapDepth - bias, shadowMapSample);
+        return step(shadowMapDepth - bias, shadowMapSample);
     }
 #endif
 

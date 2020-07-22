@@ -15,6 +15,11 @@ const algorithms = ["Default", "PCF", "Poisson", "VSM"];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
 const inSpread = op.inInt("Sample Distribution", 250);
+
+const inShadowColorR = op.inFloatSlider("R", 0);
+const inShadowColorG = op.inFloatSlider("G", 0);
+const inShadowColorB = op.inFloatSlider("B", 0);
+inShadowColorR.setUiAttribs({ "colorPick": true });
 const inDiscardTransparent = op.inBool("Discard Transparent", false);
 const inOpacityThreshold = op.inFloatSlider("Opacity Threshold", 0.5);
 const ALPHA_MASK_SOURCE = ["Luminance", "R", "G", "B", "A"];
@@ -26,7 +31,7 @@ inAlphaMaskSource.setUiAttribs({ "greyout": !inDiscardTransparent.get() });
 inSamples.setUiAttribs({ "greyout": true });
 inSpread.setUiAttribs({ "greyout": true });
 op.setPortGroup("", [inCastShadow, inReceiveShadow]);
-op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread]);
+op.setPortGroup("Shadow Settings", [inAlgorithm, inSamples, inSpread, inShadowColorR, inShadowColorG, inShadowColorB]);
 op.setPortGroup("", [inDiscardTransparent]);
 op.setPortGroup("Opacity Settings", [inOpacityThreshold, inAlphaMaskSource, inOpacityTexture]);
 
@@ -330,6 +335,7 @@ function createUniforms(lightsCount)
 
     if (lightsCount > 0)
     {
+        shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
         shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
