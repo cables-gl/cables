@@ -45,7 +45,7 @@ showUniforms.onTriggered = function ()
 
 exec.onTriggered = function ()
 {
-    if (cgl.frameStore.shadowPass) return;
+    // if (cgl.frameStore.shadowPass) return;
     shader = cgl.getShader();
     next.trigger();
 

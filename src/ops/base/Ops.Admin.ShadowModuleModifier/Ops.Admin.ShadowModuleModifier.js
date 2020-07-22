@@ -160,25 +160,33 @@ const STATE = {
 
 function renderShadowPassWithModule()
 {
+    shadowShaderModule.bind();
+
     if (inDiscardTransparent.get())
     {
         if (inOpacityTexture.get())
         {
-            if (!shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.define("MOD_HAS_TEXTURE_OPACITY", "");
+            if (!shadowShaderModule.hasUniform("MOD_texOpacity"))
+            {
+                shadowShaderModule.addUniformFrag("t", "MOD_texOpacity", 0);
+            }
 
+            if (!shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.define("MOD_HAS_TEXTURE_OPACITY", "");
             shadowShaderModule.pushTexture("MOD_texOpacity", inOpacityTexture.get().tex);
-            shadowShaderModule.bind();
         }
         else
         {
+            if (shadowShaderModule.hasUniform("MOD_texOpacity"))
+                shadowShaderModule.removeUniform("MOD_texOpacity");
+
             if (shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("MOD_HAS_TEXTURE_OPACITY");
         }
     }
 
     outTrigger.trigger();
-
     shadowShaderModule.unbind();
 }
+
 function createModuleShaders(lightStack)
 {
     STATE.updating = true;
@@ -251,9 +259,9 @@ shadowShaderModule.addModule({
         #endif
         if (outColor.a < MOD_inOpacityThreshold) discard;
     #endif
-    `,
+    `
 });
-shadowShaderModule.addUniformFrag("t", "MOD_texOpacity", 0);
+
 shadowShaderModule.addUniformFrag("f", "MOD_inOpacityThreshold", inOpacityThreshold);
 
 shadowShaderModule.toggleDefine("MOD_ALPHA_MASK_LUMINANCE", inAlphaMaskSource.get() === "Luminance");
@@ -321,23 +329,20 @@ function createUniforms(lightsCount)
         hasShadowMap[i] = false;
         hasShadowCubemap[i] = false;
 
-        shaderModule.addUniformVert("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null);
-        shaderModule.addUniformVert("f", "MOD_normalOffset" + i, 0, null, null, null, null);
         if (light.type !== "point")
         {
+            shaderModule.addUniformVert("m4", "MOD_lightMatrix" + i, mat4.create(), null, null, null);
+            shaderModule.addUniformVert("f", "MOD_normalOffset" + i, 0, null, null, null, null);
             shaderModule.addUniformFrag("t", "MOD_shadowMap" + i, 0, null, null, null);
         }
-        else
-        {
-            shaderModule.addUniformFrag("tc", "MOD_shadowMapCube" + i, 0, null, null, null);
-        }
+        else shaderModule.addUniformFrag("tc", "MOD_shadowMapCube" + i, 0, null, null, null);
     }
 
     if (lightsCount > 0)
     {
         shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
-        shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
+        if (cgl.frameStore.lightStack.map((l) => l.type).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
 
     STATE.lastLength = lightsCount;
@@ -376,14 +381,19 @@ function setUniforms(lightStack)
                 shaderModule.define("HAS_SHADOW_MAP_" + i, true);
             }
 
-            shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
-            shaderModule.setUniformValue("MOD_normalOffset" + i, light.normalOffset);
+            if (light.type !== "point")
+            {
+                shaderModule.setUniformValue("MOD_lightMatrix" + i, light.lightMatrix);
+                shaderModule.setUniformValue("MOD_normalOffset" + i, light.normalOffset);
+            }
+
             shaderModule.setUniformValue("MOD_light" + i + ".shadowProperties", [
                 light.nearFar[0],
                 light.nearFar[1],
                 light.shadowMap.width,
                 light.shadowBias
             ]);
+            if (light.type === "point") shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
 
 
             if (hasShadowMap[i])
@@ -441,9 +451,7 @@ function setUniforms(lightStack)
 function updateShader()
 {
     if (cgl.frameStore.lightStack.length !== STATE.lastLength)
-    {
         createModuleShaders(cgl.frameStore.lightStack);
-    }
 
     setUniforms(cgl.frameStore.lightStack);
 }
@@ -471,18 +479,10 @@ inTrigger.onTriggered = () =>
         outTrigger.trigger();
         return;
     }
-    if (!inCastShadow.get())
-    {
-        if (!cgl.frameStore.shadowPass) outTrigger.trigger();
-        return;
-    }
 
     if (cgl.frameStore.shadowPass)
     {
-        if (!inCastShadow.get())
-        {
-            return;
-        }
+        if (!inCastShadow.get()) return;
         renderShadowPassWithModule();
         return;
     }
@@ -500,14 +500,11 @@ inTrigger.onTriggered = () =>
         if (cgl.frameStore.lightStack.length)
         {
             updateShader();
-            shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
+
             shaderModule.bind();
             outTrigger.trigger();
             shaderModule.unbind();
         }
     }
-    else
-    {
-        outTrigger.trigger();
-    }
+    else outTrigger.trigger();
 };
