@@ -267,6 +267,7 @@ Shader.prototype.createStructUniforms = function ()
     let structStrFrag = "";
     let structStrVert = ""; // TODO: not used yet
 
+    this._structNames = [];
     // * reset the arrays holding the value each recompile so we don't skip structs
     // * key value mapping so the same struct can be added twice (two times the same modifier)
     this._injectedStringsFrag = {};

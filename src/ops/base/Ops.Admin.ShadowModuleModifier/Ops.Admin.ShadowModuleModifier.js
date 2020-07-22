@@ -355,6 +355,7 @@ function setUniforms(lightStack)
             LIGHT_TYPES[light.type],
             Number(light.castShadow),
         ]);
+
         shaderModule.setUniformValue("MOD_light" + i + ".shadowStrength", light.shadowStrength);
 
         if (light.shadowMap)
