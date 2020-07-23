@@ -29,15 +29,6 @@ const Texture = function (__cgl, options)
     if (!__cgl) throw new Error("no cgl");
 
     this._cgl = __cgl;
-    this.CUBEMAP_FACES = [
-        this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-        this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-        this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-        this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-        this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
-    ];
-
     this.tex = this._cgl.gl.createTexture();
     this.id = uuid();
     this.width = 0;
@@ -55,7 +46,7 @@ const Texture = function (__cgl, options)
     this.unpackAlpha = true;
     this._fromData = true;
     this.name = "unknown";
-    this.isCubemap = false;
+
     if (options)
     {
         this.name = options.name || this.name;
@@ -69,11 +60,6 @@ const Texture = function (__cgl, options)
         if ("flip" in options) this.flip = options.flip;
         if ("shadowMap" in options) this.shadowMap = options.shadowMap;
         if ("anisotropic" in options) this.anisotropic = options.anisotropic;
-        if ("isCubemap" in options)
-        {
-            this.isCubemap = true;
-            this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
-        }
     }
     else
     {
@@ -170,35 +156,34 @@ Texture.prototype.setSize = function (w, h)
     }
 
     this._setFilter();
-    if (!this.isCubemap)
+
+    if (this.textureType == Texture.TYPE_FLOAT)
     {
-        if (this.textureType == Texture.TYPE_FLOAT)
-        {
         // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
         // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
 
-            if (this._cgl.glVersion == 1)
-            {
-                if (this._cgl.glUseHalfFloatTex)
-                {
-                    const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                    if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
-
-                    this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
-                }
-                else
-                {
-                    const ext = this._cgl.gl.getExtension("OES_texture_float");
-
-                    this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
-                }
-            }
-            else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-        }
-        else if (this.textureType == Texture.TYPE_DEPTH)
+        if (this._cgl.glVersion == 1)
         {
-            if (this._cgl.glVersion == 1)
+            if (this._cgl.glUseHalfFloatTex)
             {
+                const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+
+                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+            }
+            else
+            {
+                const ext = this._cgl.gl.getExtension("OES_texture_float");
+
+                this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
+            }
+        }
+        else this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+    }
+    else if (this.textureType == Texture.TYPE_DEPTH)
+    {
+        if (this._cgl.glVersion == 1)
+        {
             // if(this._cgl.gl.getExtension('OES_texture_half_float'))
             // {
             //     Log.log("is half float");
@@ -206,73 +191,20 @@ Texture.prototype.setSize = function (w, h)
             //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
             // }
             // else
-                const tcomp = this._cgl.gl.DEPTH_COMPONENT;
-                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
-            }
-            else
-            {
-                const tcomp = this._cgl.gl.DEPTH_COMPONENT32F;
-                this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
-            }
+            const tcomp = this._cgl.gl.DEPTH_COMPONENT;
+            this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
         }
         else
         {
-            this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
+            const tcomp = this._cgl.gl.DEPTH_COMPONENT32F;
+            this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
         }
     }
     else
     {
-        for (let i = 0; i < 6; i += 1)
-        {
-            if (this.textureType == Texture.TYPE_FLOAT)
-            {
-            // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
-            // should also check for HALF_FLOAT and use this if this is available, but no float... (some ios devices)
-
-                if (this._cgl.glVersion == 1)
-                {
-                    if (this._cgl.glUseHalfFloatTex)
-                    {
-                        const ext = this._cgl.gl.getExtension("OES_texture_half_float");
-                        if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
-
-                        this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
-                    }
-                    else
-                    {
-                        const ext = this._cgl.gl.getExtension("OES_texture_float");
-
-                        this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null); // UNSIGNED_SHORT
-                    }
-                }
-                else this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, this._cgl.gl.RGBA32F, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
-            }
-            else if (this.textureType == Texture.TYPE_DEPTH)
-            {
-                if (this._cgl.glVersion == 1)
-                {
-                // if(this._cgl.gl.getExtension('OES_texture_half_float'))
-                // {
-                //     Log.log("is half float");
-                //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
-                //     this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
-                // }
-                // else
-                    const tcomp = this._cgl.gl.DEPTH_COMPONENT;
-                    this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.UNSIGNED_SHORT, null);
-                }
-                else
-                {
-                    const tcomp = this._cgl.gl.DEPTH_COMPONENT32F;
-                    this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, tcomp, w, h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.FLOAT, null);
-                }
-            }
-            else
-            {
-                this._cgl.gl.texImage2D(this.CUBEMAP_FACES[i], 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
-            }
-        }
+        this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
+
     if (this._cgl.printError("cgltex"))
     {
         console.log("cgl tex settings", this.options);

@@ -83,6 +83,7 @@ class CubemapFramebuffer
         this._colorTexture = this._cgl.gl.createTexture();
         this.initializeRenderbuffers();
         this.setSize(this.width, this.height);
+        this.initializeTexture();
     }
 
     initializeRenderbuffers()
@@ -93,7 +94,7 @@ class CubemapFramebuffer
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
 
-        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this._width, this._height);
+        this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
@@ -102,8 +103,8 @@ class CubemapFramebuffer
 
     initializeTexture()
     {
-        this.texture = this._cgl.gl.createTexture(); // Create the texture object for the reflection map
-        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.cubemap); // create storage for the reflection map images
+        this.texture = { "tex": this._cgl.gl.createTexture() }; // Create the texture object for the reflection map
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex); // create storage for the reflection map images
 
         // * TODO: add filter & wrap type switch
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_CUBE_MAP, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.LINEAR);
@@ -120,16 +121,16 @@ class CubemapFramebuffer
                     const ext = this._cgl.gl.getExtension("OES_texture_half_float");
                     if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
 
-                    this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this._width, this._height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+                    this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
                 }
                 else
                 {
                     const ext = this._cgl.gl.getExtension("OES_texture_float");
 
-                    this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this._width, this._height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                    this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
                 }
             }
-            else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this._width, this._height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
@@ -142,12 +143,12 @@ class CubemapFramebuffer
 
     getWidth()
     {
-        return this._width;
+        return this.width;
     }
 
     getHeight()
     {
-        return this._height;
+        return this.height;
     }
 
     getGlFrameBuffer()
@@ -185,10 +186,10 @@ class CubemapFramebuffer
 
     setSize(width, height)
     {
-        this._width = Math.floor(width);
-        this._height = Math.floor(height);
-        this._width = Math.min(this._width, this._cgl.maxTexSize);
-        this._height = Math.min(this._height, this._cgl.maxTexSize);
+        this.width = Math.floor(width);
+        this.height = Math.floor(height);
+        this.width = Math.min(this.width, this._cgl.maxTexSize);
+        this.height = Math.min(this.height, this._cgl.maxTexSize);
 
         CGL.profileData.profileFrameBuffercreate++;
 
@@ -245,14 +246,14 @@ class CubemapFramebuffer
     setFilter(filter)
     {
         this._colorTexture.filter = filter;
-        this._colorTexture.setSize(this._width, this._height);
+        this._colorTexture.setSize(this.width, this.height);
     }
 
     renderStart()
     {
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
-        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+        // this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
         this._cgl.gl.viewport(0, 0, this.width, this.height);
         this._cgl.pushGlFrameBuffer(this._framebuffer);
         this._cgl.pushFrameBuffer(this);
@@ -265,8 +266,8 @@ class CubemapFramebuffer
         this._cgl.pushPMatrix();
 
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.texture.tex, 0);
-
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+
         if (this._options.clear)
         {
             this._cgl.gl.clearColor(0, 0, 0, 0);
@@ -292,7 +293,7 @@ class CubemapFramebuffer
         this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
 
         // * NOTE: webgl2 only
-        // this._cgl.gl.blitFramebuffer(0, 0, this._width, this._height, 0, 0, this._width, this._height, this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST);
+        // this._cgl.gl.blitFramebuffer(0, 0, this.width, this.height, 0, 0, this.width, this.height, this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT, this._cgl.gl.NEAREST);
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
         this._cgl.popFrameBuffer();
