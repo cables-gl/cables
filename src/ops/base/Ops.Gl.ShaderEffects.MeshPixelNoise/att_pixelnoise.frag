@@ -1,3 +1,8 @@
+UNI float MOD_scale;
+UNI float MOD_amount;
+UNI float MOD_r,MOD_g,MOD_b;
+UNI float MOD_x,MOD_y,MOD_z;
+
 IN vec4 MOD_pos;
 
 float MOD_mod289(float x){return x - floor(x * (1.0 / 289.0)) * 289.0;}
