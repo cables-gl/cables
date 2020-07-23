@@ -1,0 +1,67 @@
+{
+    "id": "663e32a2-45a1-4141-a387-d8a44d4977d5",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1595496753560
+        },
+        {
+            "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
+            "author": "simod",
+            "date": 1595500253680
+        }
+    ],
+    "authorName": "simod",
+    "created": 1595496771056,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "3",
+                "name": "A",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "B",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "C",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "D",
+                "group": "Parameters"
+            },
+            {
+                "type": "5",
+                "name": "Equation",
+                "group": "Equation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Result"
+            },
+            {
+                "type": "0",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Equation Valid",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Equation"
+            }
+        ],
+        "name": "Ops.Array.ArrayMathExpression"
+    }
+}

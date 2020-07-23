@@ -1,0 +1,67 @@
+{
+    "id": "d2343a1e-64ea-45b2-99ed-46e167bbdcd3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1595496213023
+        },
+        {
+            "message": "Ops.User.simod.MathExpression renamed to Ops.Math.MathExpression",
+            "author": "simod",
+            "date": 1595496245906
+        }
+    ],
+    "authorName": "simod",
+    "created": 1595496215377,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "A",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "C",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "D",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Equation",
+                "group": "Equation"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Equation Valid",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Equation"
+            }
+        ],
+        "name": "Ops.Math.MathExpression"
+    }
+}
