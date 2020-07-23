@@ -687,6 +687,11 @@ Shader.prototype.compile = function ()
     CGL.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
+Shader.hasChanged = function ()
+{
+    return this._needsRecompile;
+};
+
 Shader.prototype.bind = function ()
 {
     MESH.lastShader = this;
