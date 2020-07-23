@@ -46,6 +46,24 @@
             },
             {
                 "type": "0",
+                "name": "R",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Shadow Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Discard Transparent",
                 "subType": "boolean"
             },

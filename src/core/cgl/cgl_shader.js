@@ -267,6 +267,7 @@ Shader.prototype.createStructUniforms = function ()
     let structStrFrag = "";
     let structStrVert = ""; // TODO: not used yet
 
+    this._structNames = [];
     // * reset the arrays holding the value each recompile so we don't skip structs
     // * key value mapping so the same struct can be added twice (two times the same modifier)
     this._injectedStringsFrag = {};
@@ -315,8 +316,7 @@ Shader.prototype.createStructUniforms = function ()
                 // * inject member before {injectionString}
                 if (
                     this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
-                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
-                )
+                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -396,7 +396,6 @@ Shader.prototype.createStructUniforms = function ()
     for (let i = 0; i < this._structUniformNamesIndicesVert.length; i += 1)
     {
         const index = this._structUniformNamesIndicesVert[i];
-
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
         if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
@@ -439,6 +438,14 @@ Shader.prototype.compile = function ()
 
     let vs = "";
     let fs = "";
+
+    if (!this.srcFrag)
+    {
+        console.error("[cgl shader] has no fragment source!");
+        this.srcVert = this.getDefaultVertexShader();
+        this.srcFrag = this.getDefaultFragmentShader();
+        // return;
+    }
 
     if (this.glslVersion == 300)
     {
@@ -678,6 +685,11 @@ Shader.prototype.compile = function ()
     this.lastCompile = now();
 
     CGL.profileData.shaderCompileTime += performance.now() - startTime;
+};
+
+Shader.hasChanged = function ()
+{
+    return this._needsRecompile;
 };
 
 Shader.prototype.bind = function ()

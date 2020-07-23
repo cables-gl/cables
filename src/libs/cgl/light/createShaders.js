@@ -26,9 +26,9 @@ void main() {
 
     {{MODULE_VERTEX_POSITION}}
 
-    mat4 mvMatrix=viewMatrix * modelMatrix;
+    mat4 mvMatrix=viewMatrix * mMatrix;
     vec4 vPos = projMatrix * mvMatrix * vec4(vPosition, 1.);
-    ${this.type === "point" ? "modelPos = (modelMatrix * pos).xyz;" : ""}
+    ${this.type === "point" ? "modelPos = (mMatrix * pos).xyz;" : ""}
     gl_Position = vPos;
 }
 `;

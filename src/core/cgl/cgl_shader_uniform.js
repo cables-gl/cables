@@ -599,7 +599,6 @@ Uniform.prototype.updateValueT = function ()
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
         profileData.profileShaderGetUniformName = this._name;
-        if (!this._isValidLoc()) Log.log("texture this._loc unknown!!");
     }
     profileData.profileUniformCount++;
 
