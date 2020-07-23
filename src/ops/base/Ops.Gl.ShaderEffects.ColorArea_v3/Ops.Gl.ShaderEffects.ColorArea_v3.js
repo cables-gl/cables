@@ -42,18 +42,19 @@ inWorldSpace.onChange =
 
 render.onTriggered = doRender;
 
+console.log(op.name, op);
 
-const mod = new CGL.ShaderModifier(cgl, "colorArea");
+const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "priority": 2,
-    "title": "colorArea",
+    "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     srcHeadVert,
     srcBodyVert
 });
 
 mod.addModule({
-    "title": "colorArea",
+    "title": op.name,
     "name": "MODULE_COLOR",
     "srcHeadFrag": attachments.colorarea_head_frag,
     "srcBodyFrag": attachments.colorarea_frag

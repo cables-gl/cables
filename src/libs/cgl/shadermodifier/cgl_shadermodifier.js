@@ -36,7 +36,7 @@ class ShaderModifier
         if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
-
+            if (shader._needsRecompile) shader.compile();
             this._boundShader = this._origShaders[shader.id] =
                 {
                     "lastCompile": shader.lastCompile,
@@ -434,7 +434,7 @@ class ShaderModifier
         if (name.indexOf("MOD_") == 0)
         {
             name = name.substr("MOD_".length);
-            name = "mod" + prefix + name;
+            name = "mod" + prefix + "_" + name;
         }
         return name;
     }
