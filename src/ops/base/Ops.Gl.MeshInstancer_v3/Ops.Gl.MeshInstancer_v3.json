@@ -10,6 +10,11 @@
             "message": "Ops.User.cables.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v3",
             "author": "cables",
             "date": 1573754593215
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595421930259
         }
     ],
     "authorName": "cables",
@@ -147,5 +152,8 @@
                 "text": "Total number of instances/shapes"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }
