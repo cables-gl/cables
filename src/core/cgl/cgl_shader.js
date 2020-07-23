@@ -962,7 +962,7 @@ Shader.prototype.addModule = function (mod, sibling)
 
     if (!mod.group)
         if (sibling) mod.group = sibling.group;
-        else mod.group = simpleId();// this._modGroupCount++;
+        else mod.group = simpleId();
 
     mod.prefix = "mod" + mod.group + "_";
     this._modules.push(mod);
