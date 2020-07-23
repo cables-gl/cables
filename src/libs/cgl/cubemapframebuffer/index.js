@@ -169,10 +169,10 @@ class CubemapFramebuffer
     getTextureColor()
     {
         return {
-            // "tex": this.texture.tex,
             "cubemap": this.texture.tex,
             "width": this.width,
             "height": this.height,
+            "size": this.width,
         };
     }
 
@@ -284,15 +284,15 @@ class CubemapFramebuffer
             this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
         }
 
-        // mat4.invert(this.invertedViewMatrix, this._cgl.vMatrix);
-        // vec3.set(this.camPos, this.invertedViewMatrix[12], this.invertedViewMatrix[13], this.invertedViewMatrix[14]);
-        // vec3.set(this.camPos, 0, 0, 0);
+        this.setMatricesCubemapFace(index);
+    }
+
+    setMatricesCubemapFace(index)
+    {
         vec3.add(this._lookAtTemp, vec3.fromValues(0, 0, 0), this._cubemapProperties[index].lookAt);
         mat4.lookAt(this._cgl.vMatrix, vec3.fromValues(0, 0, 0), this._lookAtTemp, this._cubemapProperties[index].up); // V
         mat4.copy(this._cgl.pMatrix, this.projectionMatrix);
         mat4.copy(this._cgl.mMatrix, this.modelMatrix);
-
-        // mat4.perspective(this._cgl.pMatrix, CGL.DEG2RAD * 90, 1, 0.1, 1000);
     }
 
     renderEndCubemapFace()
