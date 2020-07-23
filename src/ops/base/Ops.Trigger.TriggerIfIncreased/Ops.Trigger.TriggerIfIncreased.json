@@ -1,0 +1,28 @@
+{
+    "id": "bc820891-48c7-4287-9b5e-4196e192741b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1595510263075
+        }
+    ],
+    "authorName": "andro",
+    "created": 1595510287906,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerIfIncreased"
+    }
+}
