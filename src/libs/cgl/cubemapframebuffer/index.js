@@ -40,7 +40,12 @@ class CubemapFramebuffer
                 "up": vec3.fromValues(0.0, -1.0, 0.0),
             },
         ];
-
+        this._lookAtTemp = vec3.fromValues(0, 0, 0);
+        this.camPos = vec3.fromValues(0, 0, 0);
+        this.invertedViewMatrix = mat4.create();
+        this.projectionMatrix = mat4.create();
+        mat4.perspective(this.projectionMatrix, CGL.DEG2RAD * 90, 1, 0.1, 1000);
+        this.modelMatrix = mat4.create();
         this._depthRenderbuffer = null;
         this._framebuffer = null;
         this._depthbuffer = null;
@@ -163,7 +168,12 @@ class CubemapFramebuffer
 
     getTextureColor()
     {
-        return this._colorTexture;
+        return {
+            // "tex": this.texture.tex,
+            "cubemap": this.texture.tex,
+            "width": this.width,
+            "height": this.height,
+        };
     }
 
     getTextureDepth()
@@ -209,7 +219,7 @@ class CubemapFramebuffer
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
-        this.texture.setSize(this.width, this.height); // TODO: this wont work
+        // this.texture.setSize(this.width, this.height); // TODO: this wont work
 
 
         if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
@@ -253,7 +263,7 @@ class CubemapFramebuffer
     {
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
-        // this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
         this._cgl.gl.viewport(0, 0, this.width, this.height);
         this._cgl.pushGlFrameBuffer(this._framebuffer);
         this._cgl.pushFrameBuffer(this);
@@ -273,6 +283,16 @@ class CubemapFramebuffer
             this._cgl.gl.clearColor(0, 0, 0, 0);
             this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
         }
+
+        // mat4.invert(this.invertedViewMatrix, this._cgl.vMatrix);
+        // vec3.set(this.camPos, this.invertedViewMatrix[12], this.invertedViewMatrix[13], this.invertedViewMatrix[14]);
+        // vec3.set(this.camPos, 0, 0, 0);
+        vec3.add(this._lookAtTemp, vec3.fromValues(0, 0, 0), this._cubemapProperties[index].lookAt);
+        mat4.lookAt(this._cgl.vMatrix, vec3.fromValues(0, 0, 0), this._lookAtTemp, this._cubemapProperties[index].up); // V
+        mat4.copy(this._cgl.pMatrix, this.projectionMatrix);
+        mat4.copy(this._cgl.mMatrix, this.modelMatrix);
+
+        // mat4.perspective(this._cgl.pMatrix, CGL.DEG2RAD * 90, 1, 0.1, 1000);
     }
 
     renderEndCubemapFace()
@@ -284,7 +304,8 @@ class CubemapFramebuffer
 
     renderEnd()
     {
-        this._cgl.popPMatrix();
+        // this._cgl.popPMatrix();
+        // this._cgl.popViewMatrix();
         CGL.profileData.profileFramebuffer++;
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._framebuffer);
@@ -298,18 +319,8 @@ class CubemapFramebuffer
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
         this._cgl.popFrameBuffer();
 
-        this._cgl.popModelMatrix();
+        // this._cgl.popModelMatrix();
         this._cgl.resetViewPort();
-
-        if (this._colorTexture.filter == CGL.Texture.FILTER_MIPMAP)
-        {
-            for (let i = 0; i < this._numRenderBuffers; i++)
-            {
-                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._colorTexture.tex);
-                this._colorTexture.updateMipMap();
-                this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
-            }
-        }
     }
 }
 
