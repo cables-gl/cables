@@ -608,7 +608,7 @@ Texture.getTempTexture = function (cgl)
  * @function getEmptyTexture
  * @memberof Texture
  * @instance
- * @description returns a reference to a small empty texture
+ * @description returns a reference to a small empty (transparent) texture
  * @return {Texture}
  */
 Texture.getEmptyTexture = function (cgl)
