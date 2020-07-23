@@ -3,16 +3,16 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
+            "author": "simod",
             "date": 1595496753560
         },
         {
             "message": "Ops.User.cables.ArrayMathExpression renamed to Ops.Array.ArrayMathExpression",
-            "author": "cables",
+            "author": "simod",
             "date": 1595500253680
         }
     ],
-    "authorName": "cables",
+    "authorName": "simod",
     "created": 1595496771056,
     "layout": {
         "portsIn": [

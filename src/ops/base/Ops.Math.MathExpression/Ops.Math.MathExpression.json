@@ -3,16 +3,16 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
+            "author": "simod",
             "date": 1595496213023
         },
         {
-            "message": "Ops.User.cables.MathExpression renamed to Ops.Math.MathExpression",
-            "author": "cables",
+            "message": "Ops.User.simod.MathExpression renamed to Ops.Math.MathExpression",
+            "author": "simod",
             "date": 1595496245906
         }
     ],
-    "authorName": "cables",
+    "authorName": "simod",
     "created": 1595496215377,
     "layout": {
         "portsIn": [
