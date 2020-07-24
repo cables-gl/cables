@@ -1,14 +1,7 @@
 {
-    "id": "a1be1b16-7afe-4fa5-ae31-7853e2fdb063",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1585311485374
-        }
-    ],
     "authorName": "pandur",
-    "created": 1585311491788,
+    "id": "2a6f08a1-dee0-4d3a-af7d-41791539c4fb",
+    "created": 1595514808846,
     "layout": {
         "portsIn": [
             {
@@ -37,6 +30,11 @@
             {
                 "type": "0",
                 "name": "flip",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Calc Normals",
                 "subType": "boolean"
             },
             {
@@ -84,59 +82,13 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v2"
+        "name": "Ops.User.pandur.VertexDisplacementMap3"
     },
-    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
-    "issues": "",
-    "collections": [
-        "vertexDeformers"
-    ],
-    "relatedops": null,
-    "youtubeids": [
-        "NjG85Qbbl0w"
-    ],
-    "docs": {
-        "ports": [
-            {
-                "name": "render",
-                "text": "Trigger in"
-            },
-            {
-                "name": "texture",
-                "text": "Texture to use for displacement"
-            },
-            {
-                "name": "mode index",
-                "text": "Different modes for displacement "
-            },
-            {
-                "name": "extrude",
-                "text": "Amount of extrusion based upon texture"
-            },
-            {
-                "name": "flip",
-                "text": "Flip extrusion values"
-            },
-            {
-                "name": "offset X",
-                "text": "Offset on the X axis for displacement"
-            },
-            {
-                "name": "offset Y",
-                "text": "Offset on the Y axis for displacement"
-            },
-            {
-                "name": "colorize",
-                "text": "Colors the mesh with the displacement texture"
-            },
-            {
-                "name": "colorize add",
-                "text": "Amount to add"
-            },
-            {
-                "name": "trigger",
-                "text": "Trigger out"
-            }
-        ]
-    }
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.VertexDisplacementMap3 renamed to Ops.Gl.ShaderEffects.VertexDisplacementMap_v3",
+            "author": "pandur",
+            "date": 1595516692734
+        }
+    ]
 }

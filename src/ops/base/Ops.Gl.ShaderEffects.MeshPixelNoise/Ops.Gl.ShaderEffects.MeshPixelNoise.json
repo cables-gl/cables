@@ -117,5 +117,27 @@
                 "text": "Trigger out"
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.ShaderEffects.MeshPixelNoise renamed to Ops.Gl.ShaderEffects.MeshPixelNoise_v2",
+            "author": "pandur",
+            "date": 1595498025032
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.MeshPixelNoise_v2 renamed to Ops.Gl.ShaderEffects.MeshPixelNoise2_v2",
+            "author": "pandur",
+            "date": 1595498113151
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.MeshPixelNoise2_v2 renamed to Ops.Gl.ShaderEffects.MeshPixelNoise_v2",
+            "author": "pandur",
+            "date": 1595498133519
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.MeshPixelNoise_v2 renamed to Ops.Gl.ShaderEffects.MeshPixelNoise",
+            "author": "pandur",
+            "date": 1595498174473
+        }
+    ]
 }

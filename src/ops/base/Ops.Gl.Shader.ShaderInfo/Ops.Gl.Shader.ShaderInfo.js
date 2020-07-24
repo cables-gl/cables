@@ -88,6 +88,21 @@ exec.onTriggered = function ()
     if (doUniformDump)
     {
         console.log(shader._uniforms);
+
+        const json = [];
+        for (let i = 0; i < shader._uniforms.length; i++)
+        {
+            json.push({
+                "validLoc": shader._uniforms[i]._isValidLoc(),
+                "name": shader._uniforms[i]._name,
+                "type": shader._uniforms[i]._type,
+                "value": shader._uniforms[i]._value,
+                "structName": shader._uniforms[i]._structName,
+                "structUniformName": shader._uniforms[i]._structUniformName
+            });
+        }
+        CABLES.UI.MODAL.showCode("shader uniforms", JSON.stringify(json, false, 2), "json");
+
         doUniformDump = false;
     }
 

@@ -104,7 +104,7 @@ inEmissiveActive.onChange = () =>
 };
 // * SPECULAR *
 const inShininess = op.inFloat("Shininess", 4);
-const inSpecularCoefficient = op.inFloatSlider("Specular Amount", 1);
+const inSpecularCoefficient = op.inFloatSlider("Specular Amount", 0.5);
 const inSpecularMode = op.inSwitch("Specular Model", ["Blinn", "Schlick", "Phong", "Gauss"], "Blinn");
 
 inSpecularMode.setUiAttribs({ "hidePort": true });
