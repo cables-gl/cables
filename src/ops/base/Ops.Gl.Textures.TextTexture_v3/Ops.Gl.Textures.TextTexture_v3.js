@@ -9,6 +9,8 @@ const
     texWidth = op.inValueInt("texture width", 512),
     texHeight = op.inValueInt("texture height", 128),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
+    aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
+
     align = op.inSwitch("align", ["left", "center", "right"], "center"),
     valign = op.inSwitch("vertical align", ["top", "center", "bottom"], "center"),
     border = op.inValueFloat("border", 0),
@@ -33,7 +35,7 @@ r.setUiAttribs({ "colorPick": true });
 
 op.setPortGroup("Color", [r, g, b]);
 op.setPortGroup("Size", [font, maximize, inFontSize, lineDistance]);
-op.setPortGroup("Texture", [texWidth, texHeight, tfilter]);
+op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);
 op.setPortGroup("Alignment", [valign, align]);
 op.setPortGroup("Rendering", [drawMesh, renderHard, meshScale]);
 
@@ -41,6 +43,7 @@ align.onChange =
     valign.onChange =
     text.onChange =
     inFontSize.onChange =
+    aniso.onChange =
     font.onChange =
     border.onChange =
     lineDistance.onChange =
@@ -52,6 +55,7 @@ align.onChange =
 
 render.onTriggered = doRender;
 
+aniso.onChange =
 tfilter.onChange = () =>
 {
     tex = null;
@@ -132,6 +136,7 @@ function reSize()
     ctx.canvas.height = fontImage.height = texHeight.get();
 
     outAspect.set(fontImage.width / fontImage.height);
+
 
     needsRefresh = true;
 }
@@ -254,6 +259,7 @@ function refresh()
     }
 
     ctx.restore();
+
     outRatio.set(ctx.canvas.height / ctx.canvas.width);
 
     textureOut.set(CGL.Texture.getEmptyTexture(cgl));
@@ -262,9 +268,9 @@ function refresh()
     if (tfilter.get() == "nearest") f = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "mipmap") f = CGL.Texture.FILTER_MIPMAP;
 
-    if (!cachetexture.get() || !tex || !textureOut.get() || tex.width != fontImage.width || tex.height != fontImage.height)
+    if (!cachetexture.get() || !tex || !textureOut.get() || tex.width != fontImage.width || tex.height != fontImage.height || tex.anisotropic != parseFloat(aniso.get()))
     {
-        tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f });
+        tex = new CGL.Texture.createFromImage(cgl, fontImage, { "filter": f, "anisotropic": parseFloat(aniso.get()) });
     }
 
     tex.flip = false;
