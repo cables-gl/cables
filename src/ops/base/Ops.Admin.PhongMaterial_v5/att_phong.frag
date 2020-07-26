@@ -63,6 +63,12 @@ const float EIGHT_PI = (8. * PI);
 // TEXTURES
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureIntensities;
+
+    #ifdef HAS_TEXTURE_ENV
+        UNI sampler2D texEnv;
+        UNI float texEnvStrength;
+    #endif
+
     #ifdef HAS_TEXTURE_DIFFUSE
         UNI sampler2D texDiffuse;
     #endif
@@ -317,6 +323,17 @@ void main()
 
     {{PHONG_FRAGMENT_BODY}}
 
+
+
+#ifdef HAS_TEXTURE_ENV
+    vec3 reflected = reflect(viewDirection, normal);
+    float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
+
+    float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
+    calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
+#endif
+
+
     #ifdef ENABLE_FRESNEL
         calculatedColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);
     #endif
@@ -358,6 +375,7 @@ void main()
 
 
     col.rgb = clamp(calculatedColor, 0., 1.);
+
 
     {{MODULE_COLOR}}
 

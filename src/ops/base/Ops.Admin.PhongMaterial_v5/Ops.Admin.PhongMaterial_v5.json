@@ -197,6 +197,16 @@
                 "group": "Textures"
             },
             {
+                "type": "2",
+                "name": "Environment Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "0",
+                "name": "Environment Texture Strength",
+                "subType": "number"
+            },
+            {
                 "type": "0",
                 "name": "Colorize Texture",
                 "group": "Texture Transforms",
