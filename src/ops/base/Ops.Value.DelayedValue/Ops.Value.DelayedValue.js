@@ -1,24 +1,31 @@
+const
+    exe = op.inTrigger("Update"),
+    v = op.inValue("Value", 0),
+    delay = op.inValue("Delay", 0.5),
+    result = op.outValue("Result", 0),
+    clear = op.inValueBool("Clear on Change", false);
 
-var exe=op.inTrigger("Update");
-var v=op.inValue("Value",0);
-var delay=op.inValue("Delay",0.5);
-var result=op.outValue("Result",0);
-var clear=op.inValueBool("Clear on Change",false);
+const anim = new CABLES.Anim();
+anim.createPort(op, "easing", function () {}).set("absolute");
 
-var anim=new CABLES.Anim();
-anim.createPort(op,"easing",function(){}).set("absolute");
-
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    result.set(anim.getValue( op.patch.freeTimer.get() )||0);
+    result.set(anim.getValue(op.patch.freeTimer.get()) || 0);
 };
 
-v.onChange=function()
+v.onChange = function ()
 {
-    var current=anim.getValue( op.patch.freeTimer.get() );
-    var t=op.patch.freeTimer.get();
+    const current = anim.getValue(op.patch.freeTimer.get());
+    const t = op.patch.freeTimer.get();
 
-    if(clear.get()) anim.clear(t);
+    if (clear.get()) anim.clear(t);
 
-    anim.setValue(t+delay.get(),v.get());
+    anim.setValue(t + delay.get(), v.get());
+
+    let lastKey = 0;
+    for (let i = 0; i < anim.keys.length; i++)
+    {
+        if (anim.keys[i].time < t)lastKey = i;
+    }
+    if (lastKey > 2) anim.keys.splice(0, lastKey);
 };

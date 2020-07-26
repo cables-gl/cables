@@ -13,7 +13,7 @@
         "portsIn": [
             {
                 "type": "5",
-                "name": "URL"
+                "name": "file"
             },
             {
                 "type": "0",
