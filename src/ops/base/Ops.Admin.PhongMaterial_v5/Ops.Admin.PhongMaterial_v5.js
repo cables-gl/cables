@@ -137,7 +137,7 @@ const inNormalTexture = op.inTexture("Normal Map");
 const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
-const inEnvTexture = op.inTexture("Environment Texture");
+const inEnvTexture = op.inTexture("Environment Reflection Texture");
 op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture]);
 
 const inEnvStrength = op.inFloat("Environment Texture Strength", 1);
