@@ -26,6 +26,8 @@ const
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
 
+    next = op.outTrigger("Next"),
+
     outRatio = op.outValue("Ratio"),
     textureOut = op.outTexture("texture"),
     outAspect = op.outNumber("Aspect", 1);
@@ -101,6 +103,7 @@ renderHard.onChange = function ()
 
 function doRender()
 {
+    if (ctx.canvas.width != texWidth.get())needsRefresh = true;
     if (needsRefresh)
     {
         reSize();
@@ -125,6 +128,8 @@ function doRender()
         cgl.popBlendMode();
         cgl.popModelMatrix();
     }
+
+    next.trigger();
 }
 
 function reSize()

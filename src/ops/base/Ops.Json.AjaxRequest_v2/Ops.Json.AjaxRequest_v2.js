@@ -1,4 +1,4 @@
-const filename = op.inUrl("URL"),
+const filename = op.inUrl("file"),
     jsonp = op.inValueBool("JsonP", false),
     headers = op.inObject("headers", {}),
     inBody = op.inStringEditor("body", ""),
@@ -10,6 +10,8 @@ const filename = op.inUrl("URL"),
     outString = op.outString("response"),
     isLoading = op.outValue("Is Loading", false),
     outTrigger = op.outTrigger("Loaded");
+
+filename.setUiAttribs({ "title": "URL" });
 
 outData.ignoreValueSerialize = true;
 

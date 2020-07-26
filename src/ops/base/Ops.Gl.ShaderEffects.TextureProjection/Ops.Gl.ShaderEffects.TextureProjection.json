@@ -1,0 +1,108 @@
+{
+    "authorName": "pandur",
+    "id": "e22f8347-a88b-47fc-a01e-6b8414b0ba26",
+    "created": 1555568576562,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blendmode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Blendmode"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot X",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Y",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rot Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Mapping index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Mapping",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Discard",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.MapTextureLayer"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.MapTextureLayer renamed to Ops.Gl.ShaderEffects.TextureProjection",
+            "author": "pandur",
+            "date": 1595755811366
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595755878412
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}
