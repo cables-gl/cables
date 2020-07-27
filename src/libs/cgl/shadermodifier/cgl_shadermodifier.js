@@ -16,6 +16,7 @@ class ShaderModifier
         this._changedUniforms = true;
         this._modulesChanged = false;
         this.needsTexturePush = false;
+        this._lastShader = null;
 
         if (this._cgl.glVersion == 1)
         {
@@ -33,7 +34,15 @@ class ShaderModifier
 
         this._boundShader = this._origShaders[shader.id];
 
-        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
+        let missingMod = false;
+
+        if (this._boundShader && this._lastShader != this._boundShader.shader) // shader changed since last bind
+        {
+            if (!this._boundShader.shader.hasModule(this._mods[0].id)) missingMod = true;
+        }
+
+
+        if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
             if (shader._needsRecompile) shader.compile();
