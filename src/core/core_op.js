@@ -692,16 +692,25 @@ const Op = function ()
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} name
+     * @param {number} defaultvalue
+     * @param {number} min
+     * @param {number} max
      * @return {Port} created port
      */
-    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v)
+    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v, min, max)
     {
-        // old
+        const uiattribs = {
+            "display": "range"
+        };
+
+        if (min != undefined && max != undefined)
+        {
+            uiattribs.min = min;
+            uiattribs.max = max;
+        }
+
         const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                "display": "range"
-            })
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, uiattribs)
         );
         if (v !== undefined)
         {
