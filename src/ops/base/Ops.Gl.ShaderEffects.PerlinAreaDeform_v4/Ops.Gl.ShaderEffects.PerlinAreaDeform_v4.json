@@ -85,13 +85,21 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.PerlinAreaDeform_v4"
+        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform_v4"
     },
     "changelog": [
         {
             "message": "Ops.User.pandur.PerlinAreaDeform_v4 renamed to Ops.Gl.ShaderEffects.PerlinAreaDeform_v4",
             "author": "pandur",
             "date": 1595514396287
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595835879962
         }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
     ]
 }

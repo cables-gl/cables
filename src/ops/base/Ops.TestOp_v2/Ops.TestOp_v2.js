@@ -17,6 +17,3 @@ buttons.onTriggered = function (e)
 {
     console.log("BUTTON PRESSED", e);
 };
-
-
-// console.log(CGL.Test);

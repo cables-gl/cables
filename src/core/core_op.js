@@ -699,9 +699,7 @@ const Op = function ()
      */
     Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v, min, max)
     {
-        const uiattribs = {
-            "display": "range"
-        };
+        const uiattribs = { "display": "range" };
 
         if (min != undefined && max != undefined)
         {
@@ -709,9 +707,7 @@ const Op = function ()
             uiattribs.max = max;
         }
 
-        const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, uiattribs)
-        );
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, uiattribs));
         if (v !== undefined)
         {
             p.set(v);

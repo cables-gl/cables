@@ -4,7 +4,7 @@ const
     inScale = op.inValueFloat("Scale", 1),
     inSize = op.inValueFloat("Size", 1),
     inStrength = op.inValueFloat("Strength", 1),
-    inCalcNormals = op.inValueBool("Calc Normals", true),
+    inCalcNormals = op.inValueBool("Calc Normals", false),
     inFalloff = op.inValueSlider("Falloff", 0.5),
     output = op.inValueSelect("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
     x = op.inValueFloat("x"),
@@ -16,12 +16,12 @@ const
 
 const cgl = op.patch.cgl;
 inCalcNormals.onChange = updateCalcNormals;
-let inWorldSpace = op.inValueBool("WorldSpace");
+const inWorldSpace = op.inValueBool("WorldSpace");
 
-let moduleVert = null;
+const moduleVert = null;
 output.onChange = updateOutput;
 
-let mscaleUni = null;
+const mscaleUni = null;
 inWorldSpace.onChange = updateWorldspace;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -33,20 +33,20 @@ mod.addModule({
 });
 
 
-mod.addUniformVert( "f", "MOD_size", inSize);
-mod.addUniformVert( "f", "MOD_strength", inStrength);
-mod.addUniformVert( "f", "MOD_scale", inScale);
+mod.addUniformVert("f", "MOD_size", inSize);
+mod.addUniformVert("f", "MOD_strength", inStrength);
+mod.addUniformVert("f", "MOD_scale", inScale);
 
-mod.addUniformVert( "f", "MOD_scrollx", scrollx);
-mod.addUniformVert( "f", "MOD_scrolly", scrolly);
-mod.addUniformVert( "f", "MOD_scrollz", scrollz);
+mod.addUniformVert("f", "MOD_scrollx", scrollx);
+mod.addUniformVert("f", "MOD_scrolly", scrolly);
+mod.addUniformVert("f", "MOD_scrollz", scrollz);
 
-mod.addUniformVert( "f", "MOD_x", x);
-mod.addUniformVert( "f", "MOD_y", y);
-mod.addUniformVert( "f", "MOD_z", z);
-mod.addUniformVert( "f", "MOD_fallOff", inFalloff);
+mod.addUniformVert("f", "MOD_x", x);
+mod.addUniformVert("f", "MOD_y", y);
+mod.addUniformVert("f", "MOD_z", z);
+mod.addUniformVert("f", "MOD_fallOff", inFalloff);
 
-mod.addUniformVert( "f", "MOD_mScale", 1);
+mod.addUniformVert("f", "MOD_mScale", 1);
 
 
 updateOutput();
@@ -61,7 +61,7 @@ function updateCalcNormals()
 
 function updateWorldspace()
 {
-    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get() );
+    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
 }
 
 function updateOutput()
@@ -76,9 +76,9 @@ function updateOutput()
 
 function getScaling(mat)
 {
-    let m31 = mat[8];
-    let m32 = mat[9];
-    let m33 = mat[10];
+    const m31 = mat[8];
+    const m32 = mat[9];
+    const m33 = mat[10];
     return Math.hypot(m31, m32, m33);
 }
 
@@ -90,7 +90,7 @@ render.onTriggered = function ()
         return;
     }
 
-    let modelScale = getScaling(cgl.mMatrix);
+    const modelScale = getScaling(cgl.mMatrix);
     if (mscaleUni)mscaleUni.setValue(modelScale);
 
     if (CABLES.UI)
