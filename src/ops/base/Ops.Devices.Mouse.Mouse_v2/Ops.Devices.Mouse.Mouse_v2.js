@@ -1,106 +1,106 @@
 const
-    active=op.inValueBool("Active",true),
-    relative=op.inValueBool("relative"),
-    normalize=op.inValueBool("normalize"),
-    flipY=op.inValueBool("flip y",true),
-    area=op.inValueSelect("Area",['Canvas','Document','Parent Element'],"Canvas"),
-    rightClickPrevDef=op.inBool("right click prevent default",true),
-    touchscreen=op.inValueBool("Touch support",true),
-    smooth=op.inValueBool("smooth"),
-    smoothSpeed=op.inValueFloat("smoothSpeed",20),
-    multiply=op.inValueFloat("multiply",1),
-    outMouseX=op.outValue("x"),
-    outMouseY=op.outValue("y"),
-    mouseDown=op.outValueBool("button down"),
-    mouseClick=op.outTrigger("click"),
-    mouseUp=op.outTrigger("Button Up"),
-    mouseClickRight=op.outTrigger("click right"),
-    mouseOver=op.outValueBool("mouseOver"),
-    outButton=op.outValue("button");
+    active = op.inValueBool("Active", true),
+    relative = op.inValueBool("relative"),
+    normalize = op.inValueBool("normalize"),
+    flipY = op.inValueBool("flip y", true),
+    area = op.inValueSelect("Area", ["Canvas", "Document", "Parent Element"], "Canvas"),
+    rightClickPrevDef = op.inBool("right click prevent default", true),
+    touchscreen = op.inValueBool("Touch support", true),
+    smooth = op.inValueBool("smooth"),
+    smoothSpeed = op.inValueFloat("smoothSpeed", 20),
+    multiply = op.inValueFloat("multiply", 1),
+    outMouseX = op.outValue("x"),
+    outMouseY = op.outValue("y"),
+    mouseDown = op.outValueBool("button down"),
+    mouseClick = op.outTrigger("click"),
+    mouseUp = op.outTrigger("Button Up"),
+    mouseClickRight = op.outTrigger("click right"),
+    mouseOver = op.outValueBool("mouseOver"),
+    outButton = op.outValue("button");
 
-op.setPortGroup('Behavior',[relative,normalize,flipY,area,rightClickPrevDef,touchscreen]);
-op.setPortGroup('Smoothing',[smooth,smoothSpeed,multiply]);
+op.setPortGroup("Behavior", [relative, normalize, flipY, area, rightClickPrevDef, touchscreen]);
+op.setPortGroup("Smoothing", [smooth, smoothSpeed, multiply]);
 
-var smoothTimer=0;
-var cgl=op.patch.cgl;
-var listenerElement=null;
+let smoothTimer = 0;
+const cgl = op.patch.cgl;
+let listenerElement = null;
 
-function setValue(x,y)
+function setValue(x, y)
 {
-    if(normalize.get())
+    if (normalize.get())
     {
-        var w=cgl.canvas.width/cgl.pixelDensity;
-        var h=cgl.canvas.height/cgl.pixelDensity;
-        if(listenerElement==document.body)
+        let w = cgl.canvas.width / cgl.pixelDensity;
+        let h = cgl.canvas.height / cgl.pixelDensity;
+        if (listenerElement == document.body)
         {
-            w=listenerElement.clientWidth/cgl.pixelDensity;
-            h=listenerElement.clientHeight/cgl.pixelDensity;
+            w = listenerElement.clientWidth / cgl.pixelDensity;
+            h = listenerElement.clientHeight / cgl.pixelDensity;
         }
-        outMouseX.set( (x/w*2.0-1.0)*multiply.get() );
-        outMouseY.set( (y/h*2.0-1.0)*multiply.get() );
+        outMouseX.set((x / w * 2.0 - 1.0) * multiply.get());
+        outMouseY.set((y / h * 2.0 - 1.0) * multiply.get());
     }
     else
     {
-        outMouseX.set( x*multiply.get() );
-        outMouseY.set( y*multiply.get() );
+        outMouseX.set(x * multiply.get());
+        outMouseY.set(y * multiply.get());
     }
 }
 
-smooth.onChange=function()
+smooth.onChange = function ()
 {
-    if(smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
-        else if(smoothTimer)clearTimeout(smoothTimer);
+    if (smooth.get()) smoothTimer = setInterval(updateSmooth, 5);
+    else if (smoothTimer)clearTimeout(smoothTimer);
 };
 
-var smoothX,smoothY;
-var lineX=0,lineY=0;
+let smoothX, smoothY;
+let lineX = 0, lineY = 0;
 
-normalize.onChange=function()
+normalize.onChange = function ()
 {
-    mouseX=0;
-    mouseY=0;
-    setValue(mouseX,mouseY);
+    mouseX = 0;
+    mouseY = 0;
+    setValue(mouseX, mouseY);
 };
 
-var mouseX=cgl.canvas.width/2;
-var mouseY=cgl.canvas.height/2;
+var mouseX = cgl.canvas.width / 2;
+var mouseY = cgl.canvas.height / 2;
 
-lineX=mouseX;
-lineY=mouseY;
+lineX = mouseX;
+lineY = mouseY;
 
 outMouseX.set(mouseX);
 outMouseY.set(mouseY);
 
-var relLastX=0;
-var relLastY=0;
-var offsetX=0;
-var offsetY=0;
+let relLastX = 0;
+let relLastY = 0;
+let offsetX = 0;
+let offsetY = 0;
 addListeners();
 
-area.onChange=addListeners;
+area.onChange = addListeners;
 
-var speed=0;
+let speed = 0;
 
 function updateSmooth()
 {
-    speed=smoothSpeed.get();
-    if(speed<=0)speed=0.01;
-    var distanceX = Math.abs(mouseX - lineX);
-    var speedX = Math.round( distanceX / speed, 0 );
+    speed = smoothSpeed.get();
+    if (speed <= 0)speed = 0.01;
+    const distanceX = Math.abs(mouseX - lineX);
+    const speedX = Math.round(distanceX / speed, 0);
     lineX = (lineX < mouseX) ? lineX + speedX : lineX - speedX;
 
-    var distanceY = Math.abs(mouseY - lineY);
-    var speedY = Math.round( distanceY / speed, 0 );
+    const distanceY = Math.abs(mouseY - lineY);
+    const speedY = Math.round(distanceY / speed, 0);
     lineY = (lineY < mouseY) ? lineY + speedY : lineY - speedY;
 
-    setValue(lineX,lineY);
+    setValue(lineX, lineY);
 }
 
 function onMouseEnter(e)
 {
     mouseDown.set(false);
     mouseOver.set(true);
-    speed=smoothSpeed.get();
+    speed = smoothSpeed.get();
 }
 
 function onMouseDown(e)
@@ -119,7 +119,7 @@ function onMouseUp(e)
 function onClickRight(e)
 {
     mouseClickRight.trigger();
-    if(rightClickPrevDef.get()) e.preventDefault();
+    if (rightClickPrevDef.get()) e.preventDefault();
 }
 
 function onmouseclick(e)
@@ -130,12 +130,12 @@ function onmouseclick(e)
 
 function onMouseLeave(e)
 {
-    relLastX=0;
-    relLastY=0;
+    relLastX = 0;
+    relLastY = 0;
 
-    speed=100;
+    speed = 100;
 
-    //disabled for now as it makes no sense that the mouse bounces back to the center
+    // disabled for now as it makes no sense that the mouse bounces back to the center
     // if(area.get()!='Document')
     // {
     //     // leave anim
@@ -150,69 +150,69 @@ function onMouseLeave(e)
     mouseDown.set(false);
 }
 
-relative.onChange=function()
+relative.onChange = function ()
 {
-    offsetX=0;
-    offsetY=0;
-}
+    offsetX = 0;
+    offsetY = 0;
+};
 
 function onmousemove(e)
 {
     mouseOver.set(true);
 
-    if(!relative.get())
+    if (!relative.get())
     {
-        if(area.get()!="Document")
+        if (area.get() != "Document")
         {
-            offsetX=e.offsetX;
-            offsetY=e.offsetY;
+            offsetX = e.offsetX;
+            offsetY = e.offsetY;
         }
         else
         {
-            offsetX=e.clientX;
-            offsetY=e.clientY;
+            offsetX = e.clientX;
+            offsetY = e.clientY;
         }
 
-        if(smooth.get())
+        if (smooth.get())
         {
-            mouseX=offsetX;
+            mouseX = offsetX;
 
-            if(flipY.get()) mouseY=listenerElement.clientHeight-offsetY;
-                else mouseY=offsetY;
+            if (flipY.get()) mouseY = listenerElement.clientHeight - offsetY;
+            else mouseY = offsetY;
         }
         else
         {
-            if(flipY.get()) setValue(offsetX,listenerElement.clientHeight-offsetY);
-                else setValue(offsetX,offsetY);
+            if (flipY.get()) setValue(offsetX, listenerElement.clientHeight - offsetY);
+            else setValue(offsetX, offsetY);
         }
     }
     else
     {
-        if(relLastX!=0 && relLastY!=0)
+        if (relLastX != 0 && relLastY != 0)
         {
-            offsetX=e.offsetX-relLastX;
-            offsetY=e.offsetY-relLastY;
+            offsetX = e.offsetX - relLastX;
+            offsetY = e.offsetY - relLastY;
         }
         else
         {
 
         }
 
-        relLastX=e.offsetX;
-        relLastY=e.offsetY;
+        relLastX = e.offsetX;
+        relLastY = e.offsetY;
 
-        mouseX+=offsetX;
-        mouseY+=offsetY;
+        mouseX += offsetX;
+        mouseY += offsetY;
 
-        if(mouseY>460)mouseY=460;
+        if (mouseY > 460)mouseY = 460;
     }
-};
+}
 
 function ontouchstart(event)
 {
     mouseDown.set(true);
 
-    if(event.touches && event.touches.length>0) onMouseDown(event.touches[0]);
+    if (event.touches && event.touches.length > 0) onMouseDown(event.touches[0]);
 }
 
 function ontouchend(event)
@@ -221,57 +221,59 @@ function ontouchend(event)
     onMouseUp();
 }
 
-touchscreen.onChange=function()
+touchscreen.onChange = function ()
 {
     removeListeners();
     addListeners();
-}
+};
 
 function removeListeners()
 {
-    listenerElement.removeEventListener('touchend', ontouchend);
-    listenerElement.removeEventListener('touchstart', ontouchstart);
+    if (!listenerElement) return;
+    listenerElement.removeEventListener("touchend", ontouchend);
+    listenerElement.removeEventListener("touchstart", ontouchstart);
 
-    listenerElement.removeEventListener('click', onmouseclick);
-    listenerElement.removeEventListener('mousemove', onmousemove);
-    listenerElement.removeEventListener('mouseleave', onMouseLeave);
-    listenerElement.removeEventListener('mousedown', onMouseDown);
-    listenerElement.removeEventListener('mouseup', onMouseUp);
-    listenerElement.removeEventListener('mouseenter', onMouseEnter);
-    listenerElement.removeEventListener('contextmenu', onClickRight);
-    listenerElement=null;
+    listenerElement.removeEventListener("click", onmouseclick);
+    listenerElement.removeEventListener("mousemove", onmousemove);
+    listenerElement.removeEventListener("mouseleave", onMouseLeave);
+    listenerElement.removeEventListener("mousedown", onMouseDown);
+    listenerElement.removeEventListener("mouseup", onMouseUp);
+    listenerElement.removeEventListener("mouseenter", onMouseEnter);
+    listenerElement.removeEventListener("contextmenu", onClickRight);
+    listenerElement = null;
 }
 
 function addListeners()
 {
-    if(listenerElement)removeListeners();
+    if (listenerElement || !active.get())removeListeners();
+    if (!active.get()) return;
 
-    listenerElement=cgl.canvas;
-    if(area.get()=='Document') listenerElement=document.body;
-    if(area.get()=='Parent Element') listenerElement=cgl.canvas.parentElement;
+    listenerElement = cgl.canvas;
+    if (area.get() == "Document") listenerElement = document.body;
+    if (area.get() == "Parent Element") listenerElement = cgl.canvas.parentElement;
 
-    if(touchscreen.get())
+    if (touchscreen.get())
     {
-        listenerElement.addEventListener('touchend', ontouchend);
-        listenerElement.addEventListener('touchstart', ontouchstart);
+        listenerElement.addEventListener("touchend", ontouchend);
+        listenerElement.addEventListener("touchstart", ontouchstart);
     }
 
-    listenerElement.addEventListener('click', onmouseclick);
-    listenerElement.addEventListener('mousemove', onmousemove);
-    listenerElement.addEventListener('mouseleave', onMouseLeave);
-    listenerElement.addEventListener('mousedown', onMouseDown);
-    listenerElement.addEventListener('mouseup', onMouseUp);
-    listenerElement.addEventListener('mouseenter', onMouseEnter);
-    listenerElement.addEventListener('contextmenu', onClickRight);
+    listenerElement.addEventListener("click", onmouseclick);
+    listenerElement.addEventListener("mousemove", onmousemove);
+    listenerElement.addEventListener("mouseleave", onMouseLeave);
+    listenerElement.addEventListener("mousedown", onMouseDown);
+    listenerElement.addEventListener("mouseup", onMouseUp);
+    listenerElement.addEventListener("mouseenter", onMouseEnter);
+    listenerElement.addEventListener("contextmenu", onClickRight);
 }
 
-active.onChange=function()
+active.onChange = function ()
 {
-    if(listenerElement)removeListeners();
-    if(active.get())addListeners();
-}
+    if (listenerElement)removeListeners();
+    if (active.get())addListeners();
+};
 
-op.onDelete=function()
+op.onDelete = function ()
 {
     removeListeners();
 };
