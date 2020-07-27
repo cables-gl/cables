@@ -51,8 +51,8 @@ void main()
 
     // vec4 pos=vec4((spline2+spline3+spline)/3.0*vPosition,1.0);
     vec4 pos=vec4(spline2,1.0);
-    {{MODULE_VERTEX_POSITION}}
 
+    {{MODULE_VERTEX_POSITION}}
 
     vec4 finalPosition  = projMatrix * mvMatrix * (vec4(spline2,1.0));
     vec4 finalPosition2 = projMatrix * mvMatrix * (vec4(spline3,1.0));

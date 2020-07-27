@@ -44,7 +44,9 @@
     "summary": "Set css style properties of a html element",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Html.CSSPropertyString"
+    ],
     "youtubeids": [],
     "docs": {
         "ports": []
