@@ -45,6 +45,11 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Mapping",
+                "group": "Texture"
+            },
+            {
                 "type": "0",
                 "name": "Colorize Texture",
                 "group": "Texture",

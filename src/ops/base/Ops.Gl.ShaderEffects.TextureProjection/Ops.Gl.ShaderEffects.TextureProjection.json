@@ -88,7 +88,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.MapTextureLayer"
+        "name": "Ops.Gl.ShaderEffects.TextureProjection"
     },
     "changelog": [
         {

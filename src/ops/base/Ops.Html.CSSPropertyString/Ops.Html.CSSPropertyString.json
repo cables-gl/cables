@@ -34,5 +34,28 @@
             }
         ],
         "name": "Ops.Html.CSSPropertyString"
+    },
+    "summary": "Modify a css property of an element with a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Html.CSSProperty_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Parent element to modify"
+            },
+            {
+                "name": "Property",
+                "text": "Property to modify"
+            },
+            {
+                "name": "Value",
+                "text": "String value in "
+            }
+        ]
     }
 }
