@@ -30,7 +30,7 @@ use this to test your apikey via command line:
 
 #### exporting cables projects
 
-(cables command line exporter)[https://github.com/cables-gl/cables-cli]
+[cables command line exporter](https://github.com/cables-gl/cables-cli)
 
 
 

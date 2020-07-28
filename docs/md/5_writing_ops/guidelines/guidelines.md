@@ -70,6 +70,6 @@ All namespace-segments as well as the op name must be written in upper camel cas
 
 If your op uses an abbreviation, e.g. `MIDI` only the first character should be capitalized, so if you made a MIDI-input, a good name would be `MidiInput`.
 
-**Please note:** Op-namespaces can not contain the full namespace of another op, e.g. if an op `Ops.Devices.Keyboard` exists,s you cannot put your newly created op in the namespace `Ops.Devices.Keyboard.KeyboardInput`.
+**Please note:** Op-namespaces can not contain the full namespace of another op, e.g. if an op `Ops.Devices.Keyboard` exists, you cannot put your newly created op in the namespace `Ops.Devices.Keyboard.KeyboardInput`.
 
 
