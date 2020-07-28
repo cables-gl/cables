@@ -499,7 +499,8 @@ inTrigger.onTriggered = () =>
     {
         if (cgl.frameStore.lightStack.length === 0)
         {
-            op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 0);
+            op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 1);
+            outTrigger.trigger();
         }
         else
         {

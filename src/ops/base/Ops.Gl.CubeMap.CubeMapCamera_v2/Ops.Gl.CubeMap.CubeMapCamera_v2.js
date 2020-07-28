@@ -1,6 +1,4 @@
-// adapted from: math.hws.edu/graphicsbook/source/webgl/cube-camera.html
 const cgl = op.patch.cgl;
-const gl = cgl.gl;
 
 const inTrigger = op.inTrigger("Render");
 const outTrigger = op.outTrigger("Next");
@@ -9,6 +7,7 @@ const outTex = op.outObject("cubemap");
 const inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 let sizeChanged = true;
 inSize.onChange = () => sizeChanged = true;
+
 const fb = new CGL.CubemapFramebuffer(cgl, Number(inSize.get()), Number(inSize.get()), {
 
 });
