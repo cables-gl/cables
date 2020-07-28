@@ -42,10 +42,10 @@ class CubemapFramebuffer
         ];
         this._lookAtTemp = vec3.fromValues(0, 0, 0);
         this.camPos = vec3.fromValues(0, 0, 0);
-        this.invertedViewMatrix = mat4.create();
-        this.projectionMatrix = mat4.create();
-        mat4.perspective(this.projectionMatrix, CGL.DEG2RAD * 90, 1, 0.1, 1000);
-        this.modelMatrix = mat4.create();
+
+        this._modelMatrix = mat4.create();
+        this._viewMatrix = mat4.create();
+        this._projectionMatrix = mat4.perspective(mat4.create(), CGL.DEG2RAD * 90, 1, 0.1, 10.0);
         this._depthRenderbuffer = null;
         this._framebuffer = null;
         this._depthbuffer = null;
@@ -53,12 +53,12 @@ class CubemapFramebuffer
         this._textureDepth = null;
 
         // * TEST PARAMETERS
-        this.texture = new CGL.Texture(cgl, {
-            "isFloatingPointTexture": true,
-            "isCubemap": true,
-            "width": this.width,
-            "height": this.height
-        });
+        // this.texture = new CGL.Texture(cgl, {
+        //     "isFloatingPointTexture": true,
+        //     "isCubemap": true,
+        //     "width": this.width,
+        //     "height": this.height
+        // });
         this.glFramebuffer = null;
         this.glRenderbuffer = null;
 
@@ -259,6 +259,18 @@ class CubemapFramebuffer
         this._colorTexture.setSize(this.width, this.height);
     }
 
+    setCamPos(camPos)
+    {
+        this.camPos = camPos || this.camPos;
+    }
+
+    setMatrices(M, V, P)
+    {
+        this._modelMatrix = M || this._modelMatrix;
+        this._viewMatrix = V || this._viewMatrix;
+        this._projectionMatrix = P || this._projectionMatrix;
+    }
+
     renderStart()
     {
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.texture.tex);
@@ -280,19 +292,22 @@ class CubemapFramebuffer
 
         if (this._options.clear)
         {
-            this._cgl.gl.clearColor(0, 0, 0, 0);
-            this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+            this._cgl.gl.clearColor(1, 1, 1, 1);
         }
 
         this.setMatricesCubemapFace(index);
+        this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
     }
 
     setMatricesCubemapFace(index)
     {
-        vec3.add(this._lookAtTemp, vec3.fromValues(0, 0, 0), this._cubemapProperties[index].lookAt);
-        mat4.lookAt(this._cgl.vMatrix, vec3.fromValues(0, 0, 0), this._lookAtTemp, this._cubemapProperties[index].up); // V
-        mat4.copy(this._cgl.pMatrix, this.projectionMatrix);
-        mat4.copy(this._cgl.mMatrix, this.modelMatrix);
+        mat4.copy(this._cgl.mMatrix, this._modelMatrix);
+        vec3.add(this._lookAtTemp, this.camPos, this._cubemapProperties[index].lookAt);
+        console.log("lookAt vec", this._lookAtTemp);
+        mat4.lookAt(this._cgl.vMatrix, this.camPos, this._lookAtTemp, this._cubemapProperties[index].up); // V
+        console.log("vMatrix", this._cgl.vMatrix);
+        // mat4.copy(this._cgl.vMatrix, this._viewMatrix);
+        mat4.copy(this._cgl.pMatrix, this._projectionMatrix);
     }
 
     renderEndCubemapFace()
@@ -325,3 +340,5 @@ class CubemapFramebuffer
 }
 
 CGL.CubemapFramebuffer = CubemapFramebuffer;
+
+export { CubemapFramebuffer };

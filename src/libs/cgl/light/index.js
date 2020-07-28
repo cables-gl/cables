@@ -342,13 +342,14 @@ Light.prototype.renderShadowPass = function (renderFunction)
     if (this.state.isUpdating) return;
     if (this.type === "point")
     {
+        // console.log("shadowpass");
         this._shaderShadowMap.uniforms.nearFar.setValue(this.nearFar);
         this._shaderShadowMap.uniforms.lightPosition.setValue(this.position);
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(this._shaderShadowMap.matrices.modelMatrix, this._shaderShadowMap.matrices.viewMatrix, this._shaderShadowMap.matrices.projMatrix);
         this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
-        this.shadowCubeMap = this._cubemap.getCubemap();
+        this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
         return;
     }
 

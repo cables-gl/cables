@@ -267,6 +267,8 @@ inTrigger.onTriggered = function ()
             newLight.shadowStrength = inShadowStrength.get();
             // if (newLight.shadowCubeMap.cubemap) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
             cgl.frameStore.lightStack.push(newLight);
+            outCubemap.set(null);
+            outCubemap.set(newLight.shadowCubeMap);
         }
 
         hasRenderedCubemapOnce = true;
