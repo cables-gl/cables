@@ -668,13 +668,11 @@ Context.prototype.addNextFrameOnceCallback = function (cb)
  * push a matrix to the view matrix stack
  * @function pushviewMatrix
  * @memberof Context
- * @param {boolean} force: push the viewmatrix even in a shadow pass
  * @instance
  * @param {mat4} viewmatrix
  */
-Context.prototype.pushViewMatrix = function (force)
+Context.prototype.pushViewMatrix = function ()
 {
-    if (!force && this.frameStore.shadowPass) return;
     this.vMatrix = this._vMatrixStack.push(this.vMatrix);
 };
 
@@ -682,14 +680,12 @@ Context.prototype.pushViewMatrix = function (force)
  * pop view matrix stack
  * @function popViewMatrix
  * @memberof Context
- * @param {boolean} force: pop the viewmatrix even in a shadow pass
  * @instance
  * @returns {mat4} current viewmatrix
  * @function
  */
-Context.prototype.popViewMatrix = function (force)
+Context.prototype.popViewMatrix = function ()
 {
-    if (!force && this.frameStore.shadowPass) return;
     this.vMatrix = this._vMatrixStack.pop();
 };
 
@@ -1103,12 +1099,9 @@ Context.prototype.glGetAttribLocation = function (prog, name)
  */
 Context.prototype.shouldDrawHelpers = function (op)
 {
-    if (!op.patch.isEditorMode() ||
-        !CABLES.UI.renderHelper ||
-        !op.isCurrentUiOp() ||
-        this.frameStore.shadowPass) return false;
-
-    return true;
+    if (this.frameStore.shadowPass) return false;
+    if (!op.patch.isEditorMode()) return false;
+    return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)
