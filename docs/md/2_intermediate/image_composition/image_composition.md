@@ -5,7 +5,7 @@ In this example we compose a new image / texture out of one image and some 2d ef
 
 ## Basic Setup
 
-![](img/example_imgcomp_a_new.PNG)
+![](img/example_imgcomp_a_new.png)
 
 - `Image compose` creates a new texture, the children ops of `Image Compose` apply 2D effects onto the texture
 - `DrawImage` applies an image
@@ -16,7 +16,7 @@ In this example we compose a new image / texture out of one image and some 2d ef
 - To blur the image we add `Blur` to the end of the image composition chain
 - The image is now blurred, you can change the `Blur` parameters, or animate them
 
-![](img/example_imgcomp_b_new.PNG)
+![](img/example_imgcomp_b_new.png)
 
 ## Add an Alpha Mask
 
