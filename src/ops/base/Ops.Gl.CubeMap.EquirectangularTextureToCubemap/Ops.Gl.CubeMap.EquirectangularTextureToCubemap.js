@@ -91,7 +91,7 @@ function createCubemap()
 
     cubemap = null;
 
-    if (fb) fb.dispose();
+    if (fb) fb.delete();
 
     const textureOptions = {
         "isFloatingPointTexture": true,

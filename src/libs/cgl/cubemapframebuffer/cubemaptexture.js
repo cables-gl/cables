@@ -11,7 +11,19 @@ class CubemapTexture
 
 
         this._cgl = cgl;
+
+        this._cubemapFaces = [
+            this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+            this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+            this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+            this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+            this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+            this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
+        ];
+
+
         this.tex = this._cgl.gl.createTexture();
+        this.cubemap = this.tex;
         this.id = CABLES.uuid();
 
         this.texTarget = this._cgl.gl.TEXTURE_CUBE_MAP;
@@ -59,6 +71,30 @@ class CubemapTexture
         }
 
         this._setFilter();
+
+        for (let i = 0; i < 6; i++)
+        {
+            if (this._cgl.glVersion == 1)
+            {
+                if (this._cgl.glUseHalfFloatTex)
+                {
+                    const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                    if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+
+                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+                }
+                else
+                {
+                    const ext = this._cgl.gl.getExtension("OES_texture_float");
+
+                    this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+                }
+            }
+            else this._cgl.gl.texImage2D(this._cubemapFaces[i], 0, this._cgl.gl.RGBA, this.width, this.height, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+            // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
+        }
+
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
     }
 
     _setFilter()
