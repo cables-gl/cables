@@ -151,6 +151,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
             "camPos": this.position,
             "cullFaces": true,
             "size": fbWidth,
+            "isShadowMap": true
         });
 
         this._cubemap.initializeCubemap();
@@ -347,8 +348,13 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(this._shaderShadowMap.matrices.modelMatrix, this._shaderShadowMap.matrices.viewMatrix, this._shaderShadowMap.matrices.projMatrix);
-        this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
-        this.shadowCubeMap = this._cubemap.getCubemap();
+
+        this._cgl.pushShader(this._shaderShadowMap.shader);
+
+        this._cubemap.renderCubemap(renderFunction);
+
+        this._cgl.popShader();
+        this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
         return;
     }
 

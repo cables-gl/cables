@@ -271,6 +271,8 @@ inTrigger.onTriggered = function ()
                 outCubemap.set(newLight.shadowCubeMap); // renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
             }
             cgl.frameStore.lightStack.push(newLight);
+            outCubemap.set(null);
+            outCubemap.set(newLight.shadowCubeMap);
         }
 
         hasRenderedCubemapOnce = true;

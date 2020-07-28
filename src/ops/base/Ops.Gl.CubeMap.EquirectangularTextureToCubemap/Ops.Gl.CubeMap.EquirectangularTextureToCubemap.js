@@ -1,15 +1,18 @@
 const cgl = op.patch.cgl;
+const geometry = new CGL.Geometry("unit cube");
 
+
+const inTrigger = op.inTrigger("Trigger In");
 const inTexture = op.inTexture("Equirectangular Map");
 const inRefresh = op.inTriggerButton("Refresh");
 const inSize = op.inDropDown("Cubemap Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 const inAdvanced = op.inBool("Advanced", false);
 const inTextureFilter = op.inSwitch("Filter", ["Nearest", "Linear"], "Linear");
 op.setPortGroup("Cubemap Options", [inSize, inAdvanced, inTextureFilter]);
+const outTrigger = op.outTrigger("Trigger Out");
 const outCubemap = op.outObject("Cubemap Projection");
 
 inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() });
-const geometry = new CGL.Geometry("unit cube");
 
 inAdvanced.onChange = () => inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() });
 geometry.vertices = new Float32Array([
@@ -73,15 +76,10 @@ equiToCubeShader.offScreenPass = true;
 
 inTexture.onChange = inSize.onChange = inTextureFilter.onChange = resetCubemap;
 
+let reinitCubemap = true;
 function resetCubemap()
 {
-    if (!inTexture.get())
-    {
-        outCubemap.set(null);
-        return;
-    }
-    createCubemap();
-    renderCubemap();
+    reinitCubemap = true;
 }
 
 function createCubemap()
@@ -116,39 +114,43 @@ function createCubemap()
 
     cubemap = new CGL.Cubemap(cgl, { "size": Number(inSize.get()) });
     cubemap.initializeCubemap();
+    reinitCubemap = false;
 }
 
-function renderCubemap()
+inTrigger.onTriggered = function ()
 {
     if (!inTexture.get())
     {
-        outCubemap.set(null);
+        // outCubemap.set(null);
+        outTrigger.trigger();
         return;
     }
 
-    if (!cubemap) createCubemap();
+    if (reinitCubemap)
+    {
+        createCubemap();
+    }
 
     equiToCubeShader.popTextures();
 
     cgl.frameStore.renderOffscreen = true;
 
-    if (inTexture.get().tex)
+    if (inTexture.get() && inTexture.get().tex)
     {
-        fb.renderStart(cgl);
+        // fb.renderStart(cgl);
 
-        console.log("ay im here");
         equiToCubeShader.pushTexture(uniformEquirectangularMap, inTexture.get().tex);
 
-        cubemap.renderCubemap(equiToCubeShader, () => mesh.render(equiToCubeShader));
+        cgl.pushShader(equiToCubeShader);
+        cubemap.renderCubemap(() => mesh.render(equiToCubeShader));
+        cgl.popShader();
 
-        fb.renderEnd();
+        // fb.renderEnd();
         cgl.frameStore.renderOffscreen = false;
 
         outCubemap.set(null);
         outCubemap.set(cubemap.getCubemap());
     }
-}
 
-inRefresh.onTriggered = renderCubemap;
-
-renderCubemap();
+    outTrigger.trigger();
+};

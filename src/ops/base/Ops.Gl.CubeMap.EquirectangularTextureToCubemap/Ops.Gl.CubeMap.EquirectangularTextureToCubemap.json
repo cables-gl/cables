@@ -30,6 +30,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
                 "type": "2",
                 "name": "Equirectangular Map"
             },
@@ -44,6 +48,12 @@
             },
             {
                 "type": "0",
+                "name": "Cubemap Size",
+                "group": "Cubemap Options",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Advanced",
                 "group": "Cubemap Options",
                 "subType": "boolean"
@@ -52,15 +62,24 @@
                 "type": "0",
                 "name": "Filter index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Filter",
+                "group": "Cubemap Options"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
             {
                 "type": "2",
                 "name": "Cubemap Projection"
             }
         ],
-        "name": "Ops.Gl.CubeMap.EquirectangularToCubemap"
+        "name": "Ops.Gl.CubeMap.EquirectangularTextureToCubemap"
     },
     "summary": "convert an equirectangular map to a cubemap",
     "issues": "",

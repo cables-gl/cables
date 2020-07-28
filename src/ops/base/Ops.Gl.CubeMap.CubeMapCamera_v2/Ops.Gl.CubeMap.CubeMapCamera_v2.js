@@ -2,89 +2,89 @@
 const cgl = op.patch.cgl;
 const gl = cgl.gl;
 
-const render=op.inTrigger("Render");
-const next=op.outTrigger("Next");
-const outTex=op.outObject("cubemap");
+const render = op.inTrigger("Render");
+const next = op.outTrigger("Next");
+const outTex = op.outObject("cubemap");
 
-const inSize=op.inInt("Size", 512);
+const inSize = op.inInt("Size", 512);
 
 
+let cubemapInitialized = false;
+let initialized = false;
+const modelview = mat4.create();
 
-var cubemapInitialized = false;
-var initialized=false;
-var modelview = mat4.create();
+inSize.onChange = reInit;
+render.onTriggered = doRender;
+op.preRender = doRender;
 
-inSize.onChange=reInit;
-render.onTriggered=doRender;
-op.preRender=doRender;
+const cubemapTargets = [ // targets for use in some gl functions for working with cubemaps
+    gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+    gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+    gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
+];
 
-var cubemapTargets=[  // targets for use in some gl functions for working with cubemaps
-        gl.TEXTURE_CUBE_MAP_POSITIVE_X, gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        gl.TEXTURE_CUBE_MAP_POSITIVE_Y, gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
-        gl.TEXTURE_CUBE_MAP_POSITIVE_Z, gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
-    ];
-
-const CUBEMAP_PROPERTIES = [  // targets for use in some gl functions for working with cubemaps
+const CUBEMAP_PROPERTIES = [ // targets for use in some gl functions for working with cubemaps
     {
-        face: gl.TEXTURE_CUBE_MAP_POSITIVE_X,
-        lookAt: vec3.fromValues(1.0, 0.0, 0.0),
-        up: vec3.fromValues(0.0, -1.0, 0.0),
+        "face": gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+        "lookAt": vec3.fromValues(1.0, 0.0, 0.0),
+        "up": vec3.fromValues(0.0, -1.0, 0.0),
     }, {
-        face: gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
-        lookAt: vec3.fromValues(-1.0, 0.0, 0.0),
-        up: vec3.fromValues(0.0, -1.0, 0.0),
+        "face": gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+        "lookAt": vec3.fromValues(-1.0, 0.0, 0.0),
+        "up": vec3.fromValues(0.0, -1.0, 0.0),
     }, {
-        face: gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
-        lookAt: vec3.fromValues(0.0, 1.0, 0.0),
-        up: vec3.fromValues(0.0, 0.0, 1.0),
+        "face": gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+        "lookAt": vec3.fromValues(0.0, 1.0, 0.0),
+        "up": vec3.fromValues(0.0, 0.0, 1.0),
     }, {
-        lookAt: vec3.fromValues(0.0, -1.0, 0.0),
-        up: vec3.fromValues(0.0, 0.0, -1.0),
-        face: gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+        "lookAt": vec3.fromValues(0.0, -1.0, 0.0),
+        "up": vec3.fromValues(0.0, 0.0, -1.0),
+        "face": gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
     }, {
-        face: gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
-        lookAt: vec3.fromValues(0.0, 0.0, 1.0),
-        up: vec3.fromValues(0.0, -1.0, 0.0),
+        "face": gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+        "lookAt": vec3.fromValues(0.0, 0.0, 1.0),
+        "up": vec3.fromValues(0.0, -1.0, 0.0),
     }, {
-        face: gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
-        lookAt: vec3.fromValues(0.0, 0.0, -1.0),
-        up: vec3.fromValues(0.0, -1.0, 0.0),
+        "face": gl.TEXTURE_CUBE_MAP_NEGATIVE_Z,
+        "lookAt": vec3.fromValues(0.0, 0.0, -1.0),
+        "up": vec3.fromValues(0.0, -1.0, 0.0),
     },
 ];
 
 function reInit()
 {
-    if(dynamicCubemap)cgl.gl.deleteTexture(dynamicCubemap);
+    if (dynamicCubemap)cgl.gl.deleteTexture(dynamicCubemap);
     init();
 }
 
 function checkError(when)
 {
-    var err=gl.getError();
-    if (err != gl.NO_ERROR) {
-        op.log("error "+when);
-        op.log('error size',inSize.get());
-        if(err==cgl.gl.NO_ERROR)op.error("NO_ERROR");
-        if(err==cgl.gl.OUT_OF_MEMORY)op.error("OUT_OF_MEMORY");
-        if(err==cgl.gl.INVALID_ENUM)op.error("INVALID_ENUM");
-        if(err==cgl.gl.INVALID_OPERATION)op.error("INVALID_OPERATION");
-        if(err==cgl.gl.INVALID_FRAMEBUFFER_OPERATION)op.error("INVALID_FRAMEBUFFER_OPERATION");
-        if(err==cgl.gl.INVALID_VALUE)op.error("INVALID_VALUE");
-        if(err==cgl.gl.CONTEXT_LOST_WEBGL)op.error("CONTEXT_LOST_WEBGL");
+    const err = gl.getError();
+    if (err != gl.NO_ERROR)
+    {
+        op.log("error " + when);
+        op.log("error size", inSize.get());
+        if (err == cgl.gl.NO_ERROR)op.error("NO_ERROR");
+        if (err == cgl.gl.OUT_OF_MEMORY)op.error("OUT_OF_MEMORY");
+        if (err == cgl.gl.INVALID_ENUM)op.error("INVALID_ENUM");
+        if (err == cgl.gl.INVALID_OPERATION)op.error("INVALID_OPERATION");
+        if (err == cgl.gl.INVALID_FRAMEBUFFER_OPERATION)op.error("INVALID_FRAMEBUFFER_OPERATION");
+        if (err == cgl.gl.INVALID_VALUE)op.error("INVALID_VALUE");
+        if (err == cgl.gl.CONTEXT_LOST_WEBGL)op.error("CONTEXT_LOST_WEBGL");
 
         // throw "Some WebGL error occurred while trying to create framebuffer.  Maybe you need more resources; try another browser or computer.";
     }
-
 }
 
-var framebuffer = null;
-var depthBuffer = null;
-const cubeMap = { cubemap: null, size: null };
+let framebuffer = null;
+let depthBuffer = null;
+const cubeMap = { "cubemap": null, "size": null };
 var dynamicCubemap = null;
 
 
-function initializeCubemap() {
-    var i=0;
+function initializeCubemap()
+{
+    let i = 0;
 
     checkError(221);
 
@@ -92,7 +92,7 @@ function initializeCubemap() {
 
     checkError(111);
 
-    gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);  // create storage for the reflection map images
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap); // create storage for the reflection map images
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_CUBE_MAP, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
@@ -111,19 +111,19 @@ function initializeCubemap() {
             gl.RGBA,
             gl.UNSIGNED_BYTE,
             null
-            );
-        //With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
+        );
+        // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
     checkError(1);
 
-    framebuffer = gl.createFramebuffer();  // crate the framebuffer that will draw to the reflection map
+    framebuffer = gl.createFramebuffer(); // crate the framebuffer that will draw to the reflection map
 
     checkError(2);
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);  // select the framebuffer, so we can attach the depth buffer to it
+    gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer); // select the framebuffer, so we can attach the depth buffer to it
     checkError(3);
 
-    depthBuffer = gl.createRenderbuffer();   // renderbuffer for depth buffer in framebuffer
+    depthBuffer = gl.createRenderbuffer(); // renderbuffer for depth buffer in framebuffer
     checkError(4);
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer); // so we can create storage for the depthBuffer
     checkError(5);
@@ -131,12 +131,12 @@ function initializeCubemap() {
     checkError(6);
     gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
     checkError(7);
-        // The same framebuffer will be used to draw all six faces of the cubemap.  Each side will be attached
-        // as the color buffer of the framebuffer while that side is being drawn.
+    // The same framebuffer will be used to draw all six faces of the cubemap.  Each side will be attached
+    // as the color buffer of the framebuffer while that side is being drawn.
 
     // Check form WebGL errors (since I'm not sure all platforms will be able to create the framebuffer)
 
-    outTex.set({ cubemap: dynamicCubemap });
+    outTex.set({ "cubemap": dynamicCubemap });
 
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, null);
     gl.bindRenderbuffer(gl.RENDERBUFFER, null);
@@ -147,7 +147,8 @@ function initializeCubemap() {
 
 const identityMat = mat4.create();
 const lookAt = vec3.create();
-function renderCubeSide(index) {
+function renderCubeSide(index)
+{
     cgl.pushModelMatrix();
     cgl.pushViewMatrix();
     cgl.pushPMatrix();
@@ -185,7 +186,8 @@ function renderCubeSide(index) {
     cgl.popViewMatrix();
 }
 
-function renderCubemap() {
+function renderCubemap()
+{
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);
     gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer);
@@ -203,7 +205,7 @@ function renderCubemap() {
 
 function init()
 {
-    var i=0;
+    let i = 0;
 
     checkError(221);
 
@@ -211,26 +213,26 @@ function init()
 
     checkError(111);
 
-    gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);  // create storage for the reflection map images
+    gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap); // create storage for the reflection map images
 
     checkError(122);
 
     for (i = 0; i < 6; i++)
     {
         gl.texImage2D(cubemapTargets[i], 0, gl.RGBA, inSize.get(), inSize.get(), 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-        //With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
+        // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
     checkError(1);
 
-    framebuffer = gl.createFramebuffer();  // crate the framebuffer that will draw to the reflection map
+    framebuffer = gl.createFramebuffer(); // crate the framebuffer that will draw to the reflection map
 
     checkError(2);
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER,framebuffer);  // select the framebuffer, so we can attach the depth buffer to it
+    gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer); // select the framebuffer, so we can attach the depth buffer to it
 
     checkError(3);
 
-    var depthBuffer = gl.createRenderbuffer();   // renderbuffer for depth buffer in framebuffer
+    const depthBuffer = gl.createRenderbuffer(); // renderbuffer for depth buffer in framebuffer
     checkError(4);
     gl.bindRenderbuffer(gl.RENDERBUFFER, depthBuffer); // so we can create storage for the depthBuffer
     checkError(5);
@@ -238,21 +240,21 @@ function init()
     checkError(6);
     gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
     checkError(7);
-        // The same framebuffer will be used to draw all six faces of the cubemap.  Each side will be attached
-        // as the color buffer of the framebuffer while that side is being drawn.
+    // The same framebuffer will be used to draw all six faces of the cubemap.  Each side will be attached
+    // as the color buffer of the framebuffer while that side is being drawn.
 
     // Check form WebGL errors (since I'm not sure all platforms will be able to create the framebuffer)
 
-    outTex.set({"cubemap":dynamicCubemap});
+    outTex.set({ "cubemap": dynamicCubemap });
 
 
-    initialized=true;
+    initialized = true;
 }
 
 
 function doRender()
 {
-    if(!cubemapInitialized) initializeCubemap();
+    if (!cubemapInitialized) initializeCubemap();
 
     renderCubemap();
     /*
@@ -303,10 +305,6 @@ function doRender()
     next.trigger();
 
 
-
-
-
-
     gl.bindTexture(gl.TEXTURE_CUBE_MAP, dynamicCubemap);
     gl.generateMipmap( gl.TEXTURE_CUBE_MAP );
     cgl.popPMatrix();
@@ -316,4 +314,4 @@ function doRender()
 
     cgl.resetViewPort();
     */
-};
+}

@@ -22,6 +22,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": "1",
+                "name": "In Trigger"
+            },
+            {
                 "type": "2",
                 "name": "Cubemap"
             },
@@ -29,19 +33,19 @@
                 "type": "0",
                 "name": "Equirectangular",
                 "subType": "boolean"
-            },
-            {
-                "type": "1",
-                "name": "Refresh"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Out Trigger"
+            },
             {
                 "type": "2",
                 "name": "Cubemap Projection"
             }
         ],
-        "name": "Ops.User.cables.CubeMapProjection"
+        "name": "Ops.Gl.CubeMap.CubemapToEquirectangularTexture"
     },
     "summary": "visualize cubemap as folded texture or equirectangular texture",
     "issues": "",
