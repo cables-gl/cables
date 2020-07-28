@@ -343,7 +343,6 @@ Light.prototype.renderShadowPass = function (renderFunction)
     if (this.state.isUpdating) return;
     if (this.type === "point")
     {
-        // console.log("shadowpass");
         this._shaderShadowMap.uniforms.nearFar.setValue(this.nearFar);
         this._shaderShadowMap.uniforms.lightPosition.setValue(this.position);
 
@@ -352,7 +351,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cgl.pushShader(this._shaderShadowMap.shader);
 
-        this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
+        this._cubemap.renderCubemap(renderFunction);
 
         this._cgl.popShader();
         this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();

@@ -54,12 +54,7 @@ class CubemapFramebuffer
         this._textureDepth = null;
 
         // * TEST PARAMETERS
-        // this.texture = new CGL.Texture(cgl, {
-        //     "isFloatingPointTexture": true,
-        //     "isCubemap": true,
-        //     "width": this.width,
-        //     "height": this.height
-        // });
+
         this.glFramebuffer = null;
         this.glRenderbuffer = null;
 
@@ -171,6 +166,7 @@ class CubemapFramebuffer
     {
         return {
             "cubemap": this.texture.tex,
+            // "tex": this.texture.tex,
             "width": this.width,
             "height": this.height,
             "size": this.width,

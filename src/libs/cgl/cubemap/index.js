@@ -175,16 +175,12 @@ Cubemap.prototype.initializeCubemap = function ()
 
 Cubemap.prototype.getCubemap = function ()
 {
-    return {
-        "cubemap": this.cubemap,
-        "width": this.size,
-        "cubeDepthMap": this._depthbuffer,
-    };
+    if (this._framebuffer) return this._framebuffer.getTextureColor();
+    return null;
 };
 
-Cubemap.prototype.renderCubemap = function (shader, renderFunction)
+Cubemap.prototype.renderCubemap = function (renderFunction)
 {
-    this._cgl.pushShader(shader);
     this._framebuffer.renderStart();
 
     for (let i = 0; i < 6; i += 1)
@@ -195,20 +191,6 @@ Cubemap.prototype.renderCubemap = function (shader, renderFunction)
     }
 
     this._framebuffer.renderEnd();
-
-    // this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, this.cubemap.tex);
-    // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer);
-    // this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer);
-    // this._cgl.gl.viewport(0, 0, this.size, this.size);
-
-    // for (let i = 0; i < 6; i += 1) this.renderCubeSide(i, renderFunction);
-
-    // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
-    // this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-    // this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
-
-    // this._cgl.resetViewPort();
-    this._cgl.popShader();
 };
 
 Cubemap.prototype.renderCubeSide = function (index, renderFunction)
