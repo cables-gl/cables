@@ -17,9 +17,9 @@ const Cubemap = function (cgl, options)
     this.isInitialized = false;
     this.size = options.size || 512;
     this.camPos = options.camPos || vec3.fromValues(0, 0, 0);
-    this.isShadowMap = options.isShadowMap;
+
     this._framebuffer = new CubemapFramebuffer(this._cgl, this.size, this.size, {
-        "forceViewMatrixPush": this.isShadowMap,
+
     });
     this._framebuffer.setMatrices(this._modelMatrix, null, this._projectionMatrix);
     this._framebuffer.setCamPos(this.camPos);
