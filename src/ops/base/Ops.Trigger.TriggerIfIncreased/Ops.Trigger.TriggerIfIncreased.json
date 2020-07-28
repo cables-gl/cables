@@ -24,5 +24,24 @@
             }
         ],
         "name": "Ops.Trigger.TriggerIfIncreased"
+    },
+    "summary": "Outputs a trigger if the value of a number increases",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.TriggerIfDecreased"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Value",
+                "text": "Value to evaluate"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out if value increases"
+            }
+        ]
     }
 }

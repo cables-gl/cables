@@ -227,7 +227,7 @@ Uniform.prototype.getGlslTypeString = function ()
 
 Uniform.prototype._isValidLoc = function ()
 {
-    return this._loc != -1 && this._loc != null;
+    return this._loc != -1;// && this._loc != null;
 };
 
 

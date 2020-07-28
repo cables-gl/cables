@@ -974,6 +974,15 @@ Shader.prototype.addModule = function (mod, sibling)
     return mod;
 };
 
+Shader.prototype.hasModule = function (modId)
+{
+    for (let i = 0; i < this._modules.length; i++)
+    {
+        if (this._modules[i].id == modId) return true;
+    }
+    return false;
+};
+
 Shader.prototype.setModules = function (names)
 {
     this._moduleNames = names;
