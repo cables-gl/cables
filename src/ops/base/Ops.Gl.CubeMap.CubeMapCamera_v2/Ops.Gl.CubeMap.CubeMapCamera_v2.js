@@ -15,11 +15,12 @@ const fb = new CGL.CubemapFramebuffer(cgl, Number(inSize.get()), Number(inSize.g
 
 inTrigger.onTriggered = function ()
 {
-    /* if (sizeChanged)
+    if (sizeChanged)
     {
-        fb.setSize(Number(inSize.get()), Number(inSize.get()));
+        if (fb) fb.setSize(Number(inSize.get()), Number(inSize.get()));
         sizeChanged = false;
-    } */
+    }
+
     if (fb)
     {
         fb.renderStart();

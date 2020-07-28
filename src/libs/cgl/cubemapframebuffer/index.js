@@ -164,7 +164,7 @@ class CubemapFramebuffer
         {
             this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
             this._cgl.gl.deleteFramebuffer(this._framebuffer);
-            this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
+            // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
         }
 
         this._framebuffer = this._cgl.gl.createFramebuffer(); // crate the framebuffer that will draw to the reflection map
@@ -176,7 +176,7 @@ class CubemapFramebuffer
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
-        // this.texture.setSize(this.width, this.height); // TODO: this wont work
+        this.texture.setSize(this.width, this.height); // TODO: this wont work
 
 
         if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
@@ -184,7 +184,7 @@ class CubemapFramebuffer
         const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
         this.checkErrorsByStatus(status);
 
-        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
+        // this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     }
