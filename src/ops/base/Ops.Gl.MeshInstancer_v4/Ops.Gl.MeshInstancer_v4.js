@@ -8,13 +8,14 @@ const
     inTranslates = op.inArray("positions"),
     inScales = op.inArray("Scale Array"),
     inRot = op.inArray("Rotations"),
+    inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions"], "Euler"),
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors"),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outValue("Num");
 
 op.setPortGroup("Limit Number of Instances", [inLimit, doLimit]);
-op.setPortGroup("Parameters", [inScales, inRot, inTranslates]);
+op.setPortGroup("Parameters", [inScales, inRot, inTranslates, inRotMeth]);
 op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
 
@@ -65,6 +66,7 @@ updateLimit();
 inRot.onChange =
 inScales.onChange =
 inTranslates.onChange =
+inRotMeth.onChange =
     function ()
     {
         arrayChangedTrans = true;
@@ -125,9 +127,15 @@ function setupArray()
     // shader.toggleDefine("COLORIZE_INSTANCES", colArr);
 
     if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
-    if (instColorArray.length != num * 4) instColorArray = new Float32Array(num * 4);
+    if (instColorArray.length != num * 4)
+    {
+        arrayChangedColor = true;
+        instColorArray = new Float32Array(num * 4);
+    }
 
     const rotArr = inRot.get();
+
+    const useQuats = inRotMeth.get() == "Quaternions";
 
     for (let i = 0; i < num; i++)
     {
@@ -142,9 +150,18 @@ function setupArray()
 
         if (rotArr)
         {
-            mat4.rotateX(m, m, rotArr[i * 3 + 0] * CGL.DEG2RAD);
-            mat4.rotateY(m, m, rotArr[i * 3 + 1] * CGL.DEG2RAD);
-            mat4.rotateZ(m, m, rotArr[i * 3 + 2] * CGL.DEG2RAD);
+            if (useQuats)
+            {
+                const mq = mat4.create();
+                mat4.fromQuat(mq, [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]]);
+                mat4.mul(m, m, mq);
+            }
+            else
+            {
+                mat4.rotateX(m, m, rotArr[i * 3 + 0] * CGL.DEG2RAD);
+                mat4.rotateY(m, m, rotArr[i * 3 + 1] * CGL.DEG2RAD);
+                mat4.rotateZ(m, m, rotArr[i * 3 + 2] * CGL.DEG2RAD);
+            }
         }
 
         if (arrayChangedColor && colArr)

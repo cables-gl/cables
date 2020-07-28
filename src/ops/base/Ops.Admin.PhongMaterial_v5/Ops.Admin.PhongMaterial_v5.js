@@ -104,7 +104,7 @@ inEmissiveActive.onChange = () =>
 };
 // * SPECULAR *
 const inShininess = op.inFloat("Shininess", 4);
-const inSpecularCoefficient = op.inFloatSlider("Specular Amount", 1);
+const inSpecularCoefficient = op.inFloatSlider("Specular Amount", 0.5);
 const inSpecularMode = op.inSwitch("Specular Model", ["Blinn", "Schlick", "Phong", "Gauss"], "Blinn");
 
 inSpecularMode.setUiAttribs({ "hidePort": true });
@@ -137,7 +137,10 @@ const inNormalTexture = op.inTexture("Normal Map");
 const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
-op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture]);
+const inEnvTexture = op.inTexture("Environment Reflection Texture");
+op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture]);
+
+const inEnvStrength = op.inFloat("Environment Texture Strength", 1);
 
 // TEXTURE TRANSFORMS
 const inColorizeTexture = op.inBool("Colorize Texture", false);
@@ -206,12 +209,15 @@ let normalTextureUniform = null;
 let aoTextureUniform = null;
 let emissiveTextureUniform = null;
 let alphaTextureUniform = null;
+let envTextureUniform = null;
 
 
 inColorizeTexture.onChange = function ()
 {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 };
+
+
 function updateDiffuseTexture()
 {
     if (inDiffuseTexture.get())
@@ -302,6 +308,30 @@ function updateEmissiveTexture()
     }
 }
 
+function updateEnvTexture()
+{
+    if (inEnvTexture.get())
+    {
+        if (!shader.hasDefine("HAS_TEXTURE_ENV"))
+        {
+            shader.define("HAS_TEXTURE_ENV");
+            if (!envTextureUniform)
+            {
+                envTextureUniform = new CGL.Uniform(shader, "t", "texEnv", 0);
+                const inEnvStrengthUni = new CGL.Uniform(shader, "f", "texEnvStrength", inEnvStrength);
+            }
+        }
+    }
+    else
+    {
+        shader.removeUniform("texEnvStrength");
+        shader.removeUniform("texEnv");
+        shader.removeDefine("HAS_TEXTURE_ENV");
+        envTextureUniform = null;
+    }
+}
+
+
 // TEX OPACITY
 
 function updateAlphaMaskMethod()
@@ -322,6 +352,7 @@ function updateAlphaMaskMethod()
     else shader.removeDefine("ALPHA_MASK_B");
 }
 alphaMaskSource.onChange = updateAlphaMaskMethod;
+
 
 function updateAlphaTexture()
 {
@@ -358,6 +389,7 @@ inNormalTexture.onChange = updateNormalTexture;
 inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
+inEnvTexture.onChange = updateEnvTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
@@ -414,10 +446,12 @@ const initialUniforms = [
     new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
     new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
     new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
-    new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
+    // new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
     new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent),
 
 ];
+
+shader.addUniformFrag("4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
 
 const lightUniforms = [];
 let oldCount = 0;
@@ -632,6 +666,7 @@ inTrigger.onTriggered = function ()
     if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
     if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
     if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
+    if (inEnvTexture.get()) shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
 
     updateLights();
 

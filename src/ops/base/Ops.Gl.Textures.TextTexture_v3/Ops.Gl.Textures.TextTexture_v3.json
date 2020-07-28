@@ -71,6 +71,16 @@
             },
             {
                 "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Texture"
+            },
+            {
+                "type": "0",
                 "name": "align index",
                 "subType": "integer"
             },
@@ -142,6 +152,10 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "0",
                 "name": "Ratio",

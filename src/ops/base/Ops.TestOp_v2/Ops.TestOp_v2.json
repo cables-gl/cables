@@ -27,6 +27,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "name",
+                "subType": "number"
+            },
+            {
                 "type": "1",
                 "name": "Button"
             },

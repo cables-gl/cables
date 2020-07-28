@@ -15,6 +15,11 @@
             "message": "Ops.Gl.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v4",
             "author": "pandur",
             "date": 1595496283122
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595510032968
         }
     ],
     "authorName": "cables",
@@ -63,6 +68,16 @@
             },
             {
                 "type": "0",
+                "name": "Rotation Type index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Rotation Type",
+                "group": "Parameters"
+            },
+            {
+                "type": "0",
                 "name": "Material blend mode index",
                 "subType": "integer"
             },
@@ -86,7 +101,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.MeshInstancer_v3"
+        "name": "Ops.Gl.MeshInstancer_v4"
     },
     "summary": "Draw the same mesh multiple times on the GPU",
     "issues": "",
@@ -152,5 +167,8 @@
                 "text": "Total number of instances/shapes"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

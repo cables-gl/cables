@@ -26,6 +26,11 @@
             },
             {
                 "type": "0",
+                "name": "mode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "extrude",
                 "subType": "number"
             },

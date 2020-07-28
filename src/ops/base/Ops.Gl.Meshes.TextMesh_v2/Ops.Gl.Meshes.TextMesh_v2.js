@@ -7,6 +7,10 @@ const
     valign = op.inValueSelect("vertical align", ["Top", "Middle", "Bottom"], "Middle"),
     lineHeight = op.inValueFloat("Line Height", 1),
     letterSpace = op.inValueFloat("Letter Spacing"),
+
+    tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "mipmap"),
+    aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
+
     inMulTex = op.inTexture("Texture Color"),
     inMulTexMask = op.inTexture("Texture Mask"),
     next = op.outTrigger("Next"),
@@ -19,7 +23,7 @@ const cgl = op.patch.cgl;
 
 op.setPortGroup("Masking", [inMulTex, inMulTexMask]);
 
-const filter = CGL.Texture.FILTER_MIPMAP;
+
 const textureSize = 1024;
 let fontLoaded = false;
 let needUpdate = true;
@@ -44,6 +48,13 @@ let mesh = null;
 
 let createMesh = true;
 let createTexture = true;
+
+aniso.onChange =
+tfilter.onChange = () =>
+{
+    getFont().texture = null;
+    createTexture = true;
+};
 
 inMulTexMask.onChange =
 inMulTex.onChange = function ()
@@ -381,8 +392,13 @@ function printChars(fontSize, simulate)
     return result;
 }
 
+
 function generateTexture()
 {
+    let filter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "nearest") filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
+
     const font = getFont();
     let string = String(str.get());
     if (string == null || string == undefined)string = "";
@@ -402,7 +418,8 @@ function generateTexture()
     if (!font.texture)
         font.texture = CGL.Texture.createFromImage(cgl, font.canvas,
             {
-                "filter": filter
+                "filter": filter,
+                "anisotropic": parseFloat(aniso.get())
             });
 
     font.texture.setSize(textureSize, textureSize);

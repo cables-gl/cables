@@ -95,6 +95,11 @@ const ontouchmove = function (event)
     if (disableDefault.get() || (disableScaleWeb.get() && event.scale !== 1))
     {
         event.preventDefault();
+        document.body.style["touch-action"] = "none";
+    }
+    else
+    {
+        document.body.style["touch-action"] = "initial";
     }
 };
 

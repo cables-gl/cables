@@ -389,7 +389,7 @@ export const ajax = function (url, cb, method, post, contenttype, jsonP, headers
         url,
         cb,
         method,
-        "data:": post,
+        "data": post,
         contenttype,
         "sync": false,
         jsonP,

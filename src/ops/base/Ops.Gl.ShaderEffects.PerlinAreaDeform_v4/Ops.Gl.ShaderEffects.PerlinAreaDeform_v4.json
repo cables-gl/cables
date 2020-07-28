@@ -1,0 +1,105 @@
+{
+    "authorName": "pandur",
+    "id": "060ef3c1-bb79-46a5-9ec0-3272067fe504",
+    "created": 1595514110103,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Calc Normals",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Output index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Output",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scroll Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "WorldSpace",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.PerlinAreaDeform_v4"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.PerlinAreaDeform_v4 renamed to Ops.Gl.ShaderEffects.PerlinAreaDeform_v4",
+            "author": "pandur",
+            "date": 1595514396287
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595835879962
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}

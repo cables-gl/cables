@@ -4,7 +4,7 @@ const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const MIDIChannels = Array.from(Array(16).keys()).map(i => i + 1);
+const MIDIChannels = Array.from(Array(16).keys()).map((i) => i + 1);
 
 function getMIDINote(dataByte1LSB)
 {
@@ -15,11 +15,11 @@ function getMIDINote(dataByte1LSB)
 
 function getNoteIndexFromMIDINote(midiNote)
 {
-    if (midiNote === "NO NOTE") return null;
+    if (!midiNote || midiNote === "NO NOTE") return null;
     const string = midiNote.split("- ")[1];
     return Number(string);
 }
-const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
+const noteValues = Array.from(Array(128).keys()).map((key) => getMIDINote(key));
 
 /* IN */
 // persistent array for learned notes
@@ -60,7 +60,7 @@ let learning = false;
 learn.onTriggered = () =>
 {
     if (learnedNotesIn.get().length > 0)
-{
+    {
         learnedNotesIn.set([]);
     }
     learning = true;
@@ -77,10 +77,10 @@ reset.onTriggered = () =>
 
 noteStartDropdown.onChange = () =>
 {
-    let learnedNotes = learnedNotesIn.get();
+    const learnedNotes = learnedNotesIn.get();
     learnedNotes[0] = getNoteIndexFromMIDINote(noteStartDropdown.get());
     if (learnedNotes.length === 2)
-{
+    {
         learnedNotes.sort((a, b) => a - b);
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
@@ -91,10 +91,10 @@ noteStartDropdown.onChange = () =>
 
 noteEndDropdown.onChange = () =>
 {
-    let learnedNotes = learnedNotesIn.get();
+    const learnedNotes = learnedNotesIn.get();
     learnedNotes[1] = getNoteIndexFromMIDINote(noteEndDropdown.get());
     if (learnedNotes.length === 2)
-{
+    {
         learnedNotes.sort((a, b) => a - b);
         const [start, end] = learnedNotes;
         noteStartDropdown.set(getMIDINote(start));
@@ -118,19 +118,19 @@ inEvent.onChange = () =>
     const learnedNotes = learnedNotesIn.get();
 
     if (learning)
-{
+    {
         if (statusByte >> 4 === NOTE_OFF)
-{
+        {
             eventOut.set(event);
             return;
         }
         if (!learnedNotes.includes(midiNote) && learnedNotes.length < 2)
-{
+        {
             learnedNotes.push(noteIndex);
             learnedNotesIn.set(learnedNotes);
         }
         if (learnedNotes.length === 2)
-{
+        {
             learnedNotes.sort((a, b) => a - b);
             learnedNotesIn.set(learnedNotes);
             const [start, end] = learnedNotes;
@@ -143,7 +143,7 @@ inEvent.onChange = () =>
         midiChannelDropdown.set(event.channel + 1);
 
         if (CABLES.UI)
-{
+        {
             op.uiAttr({ "info": `Start bound to Note: ${noteStartDropdown.get()}` });
             op.uiAttr({ "info": `End bound to Note: ${noteEndDropdown.get()}` });
             gui.opParams.show(op);
@@ -153,34 +153,34 @@ inEvent.onChange = () =>
     }
 
     if (event.channel === midiChannelDropdown.get() - 1 && learnedNotes.length === 2)
-{
+    {
         const [start, end] = learnedNotes;
         if (start <= noteIndex && noteIndex <= end)
-{
+        {
             if (statusByte >> 4 === NOTE_OFF || velocity === 0)
-{
+            {
                 gateOut.set(false);
                 if (velocity === 0) velocityOut.set(0);
             }
             if (statusByte >> 4 === NOTE_ON)
-{
+            {
                 gateOut.set(true);
 
                 noteIndexOut.set(noteIndex);
                 triggerOut.trigger();
 
                 if (normalizeDropdown.get() === "0 to 1")
-{
+                {
                     // (max'-min')/(max-min)*(value-min)+min'
                     velocityOut.set((1 / 126) * (velocity - 1));
                 }
- else if (normalizeDropdown.get() === "-1 to 1")
-{
+                else if (normalizeDropdown.get() === "-1 to 1")
+                {
                     // (max'-min')/(max-min)*(value-min)+min'
                     const normalizedValue = (2 / 126) * (velocity - 1) - 1;
                     velocityOut.set(normalizedValue);
                 }
- else if (normalizeDropdown.get() === "none") velocityOut.set(velocity);
+                else if (normalizeDropdown.get() === "none") velocityOut.set(velocity);
             }
         }
     }
