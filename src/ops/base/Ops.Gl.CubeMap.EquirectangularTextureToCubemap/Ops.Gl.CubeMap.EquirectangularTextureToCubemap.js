@@ -4,7 +4,7 @@ const geometry = new CGL.Geometry("unit cube");
 
 const inTrigger = op.inTrigger("Trigger In");
 const inTexture = op.inTexture("Equirectangular Map");
-const inRefresh = op.inTriggerButton("Refresh");
+
 const inSize = op.inDropDown("Cubemap Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 const inAdvanced = op.inBool("Advanced", false);
 const inTextureFilter = op.inSwitch("Filter", ["Nearest", "Linear"], "Linear");
