@@ -303,9 +303,9 @@ class CubemapFramebuffer
     {
         mat4.copy(this._cgl.mMatrix, this._modelMatrix);
         vec3.add(this._lookAtTemp, this.camPos, this._cubemapProperties[index].lookAt);
-        console.log("lookAt vec", this._lookAtTemp);
+
         mat4.lookAt(this._cgl.vMatrix, this.camPos, this._lookAtTemp, this._cubemapProperties[index].up); // V
-        console.log("vMatrix", this._cgl.vMatrix);
+
         // mat4.copy(this._cgl.vMatrix, this._viewMatrix);
         mat4.copy(this._cgl.pMatrix, this._projectionMatrix);
     }
