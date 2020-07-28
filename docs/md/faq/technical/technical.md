@@ -32,6 +32,10 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 If you have a finished patch you can run it without an internet connection straight from a USB stick. 
 It's called Daplaya, you can download it and get started [here](https://github.com/cables-gl/cables-daplaya)
 
+#### Can I embed a cables patch in a wordpress page?
+
+-Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.  
+
 #### Can I make my own custom ops?
 
 - Yes you can. We have a [youtube playlist](https://www.youtube.com/watch?v=vJ47_rYdezU&list=PLYimpE2xWgBvKQg65p9q5sa2jJaHGO7Ka&index=2&t=0s) with lots of entry level turorials and a github repo called [coding with cables](https://github.com/cables-gl/coding-with-cables).

@@ -23,3 +23,7 @@ You own all the intellectual rights to to the work you create with cables. We al
 #### Do I have to give credit to cables gl with any of my published works for myself and or with clients?
 
 No, but we would really like it if you do! We love to hear it when cables gets used in real worl projects.
+
+#### I found a bug! What should I do now?
+
+- Post a bug report over on the [forums](https://forum.cables.gl/)
