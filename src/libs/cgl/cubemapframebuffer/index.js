@@ -46,7 +46,7 @@ class CubemapFramebuffer
 
         this._modelMatrix = mat4.create();
         this._viewMatrix = mat4.create();
-        this._projectionMatrix = mat4.perspective(mat4.create(), CGL.DEG2RAD * 90, 1, 0.1, 10.0);
+        this._projectionMatrix = mat4.perspective(mat4.create(), CGL.DEG2RAD * 90, 1, 0.1, 1000.0);
         this._depthRenderbuffer = null;
         this._framebuffer = null;
         this._depthbuffer = null;
@@ -180,7 +180,17 @@ class CubemapFramebuffer
 
 
         if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
+
         const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
+        this.checkErrorsByStatus(status);
+
+        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
+        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
+    }
+
+    checkErrorsByStatus(status)
+    {
         switch (status)
         {
         case this._cgl.gl.FRAMEBUFFER_COMPLETE:
@@ -200,14 +210,7 @@ class CubemapFramebuffer
         default:
             console.error("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);
-            // throw("Incomplete framebuffer: " + status);
         }
-
-        this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
-        this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
-        this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
-        // TODO: continue set size later when init works
-        // this._render;
     }
 
     setFilter(filter)
