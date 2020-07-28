@@ -265,7 +265,11 @@ inTrigger.onTriggered = function ()
             newLight.castShadow = inCastShadow.get();
             newLight.shadowBias = inBias.get();
             newLight.shadowStrength = inShadowStrength.get();
-            // if (newLight.shadowCubeMap.cubemap) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+            if (newLight.shadowCubeMap.cubemap)
+            {
+                outCubemap.set(null);
+                outCubemap.set(newLight.shadowCubeMap); // renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+            }
             cgl.frameStore.lightStack.push(newLight);
         }
 

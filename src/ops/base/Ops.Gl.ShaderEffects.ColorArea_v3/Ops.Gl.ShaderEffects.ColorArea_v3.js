@@ -42,8 +42,6 @@ inWorldSpace.onChange =
 
 render.onTriggered = doRender;
 
-console.log(op.name, op);
-
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "priority": 2,
@@ -84,10 +82,17 @@ function updateDefines()
     mod.toggleDefine("MOD_AREA_BOX", inArea.get() == "Box");
 }
 
+function drawHelpers()
+{
+    if (cgl.frameStore.shadowPass) return;
+    if (cgl.shouldDrawHelpers(op)) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
+}
+
+
 function doRender()
 {
     mod.bind();
-
+    drawHelpers();
     next.trigger();
 
     mod.unbind();

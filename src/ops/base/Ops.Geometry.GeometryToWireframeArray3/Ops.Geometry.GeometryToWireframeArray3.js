@@ -6,9 +6,11 @@ const
 inGeom.onChange = function ()
 {
     const g = inGeom.get();
+
+    outArr.set(null);
+
     if (!g) return;
 
-    console.log(g);
     const arr = [];
 
     for (let i = 0; i < g.verticesIndices.length; i += 3)
@@ -38,11 +40,8 @@ inGeom.onChange = function ()
 
             g.vertices[g.verticesIndices[i + 0] * 3 + 0],
             g.vertices[g.verticesIndices[i + 0] * 3 + 1],
-            g.vertices[g.verticesIndices[i + 0] * 3 + 2]
-
-        );
+            g.vertices[g.verticesIndices[i + 0] * 3 + 2]);
     }
 
-    outArr.set(null);
     outArr.set(arr);
 };

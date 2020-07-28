@@ -143,5 +143,13 @@
             }
         ],
         "name": "Ops.Values.SequenceObjects"
+    },
+    "summary": "control order and flow of objects",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

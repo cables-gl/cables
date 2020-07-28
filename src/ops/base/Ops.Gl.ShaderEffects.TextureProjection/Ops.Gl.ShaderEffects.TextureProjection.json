@@ -104,5 +104,13 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "texture projection on meshes",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
