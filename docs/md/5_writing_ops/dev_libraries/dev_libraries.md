@@ -1,5 +1,15 @@
-# Licences and payment
+# Libraries
 
-all the legal fun!
+#### How can I use external libraries in cables?
 
-__TOC__
+- There is a variety of extenal libraries available in cables. Once you created your [own OP](../../dev_ops/dev_ops) you find
+the selection of libraries from the "code" menu on the right side of the editor, when the op is selected. Select any available
+libraries, save and reload the patch and you can use them in your ops.
+
+![Button](img/libs.png)
+
+#### How do I get "libXYZ.js" into cables (add new libraries)?
+
+- If the library is not in the list above, drop us a mail or talk to us on discord, we are usually very open to make more
+libraries available in cables. Sometimes there may be licencing issued (preferrably pick libraries that have been put unter
+MIT-Licence) or we already have the functionality in cables. So this is a bit of a vested process.
