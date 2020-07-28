@@ -361,7 +361,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._cgl.pushShader(this._shaderShadowMap.shader);
 
     this._cgl.pushModelMatrix();
-    this._cgl.pushViewMatrix(true);
+    this._cgl.pushViewMatrix();
     this._cgl.pushPMatrix();
 
     this._framebuffer.renderStart(this._cgl);
@@ -390,7 +390,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._framebuffer.renderEnd(this._cgl);
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
-    this._cgl.popViewMatrix(true);
+    this._cgl.popViewMatrix();
 
     this._cgl.popShader();
 };
