@@ -6,7 +6,7 @@
 
 To change the color and texture of 3d objects you can use materials.
 
-[Basicmaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial) is the most basic one.
+[Basicmaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial_v3) is the most basic one.
 
 ![](img/beginner3_color_basic_material_tweak_color.gif)
 
