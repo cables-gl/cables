@@ -38,10 +38,6 @@
                 "name": "Equirectangular Map"
             },
             {
-                "type": "1",
-                "name": "Refresh"
-            },
-            {
                 "type": "0",
                 "name": "Cubemap Size index",
                 "subType": "integer"

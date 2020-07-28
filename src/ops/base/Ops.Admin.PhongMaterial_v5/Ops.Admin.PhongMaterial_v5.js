@@ -590,6 +590,15 @@ const iViewMatrix = mat4.create();
 
 function updateLights()
 {
+    if (cgl.frameStore.lightStack)
+    {
+        if (cgl.frameStore.lightStack.length === 0)
+        {
+            op.setUiError("deflight", "Default light is enabled. Please add lights to your patch to make this warning disappear.", 1);
+        }
+        else op.setUiError("deflight", null);
+    }
+
     if ((!cgl.frameStore.lightStack || !cgl.frameStore.lightStack.length))
     {
         // if no light in light stack, use default light & set count to -1

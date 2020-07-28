@@ -315,7 +315,7 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
     this._cgl.gl.disable(this._cgl.gl.CULL_FACE);
     this._cgl.gl.disable(this._cgl.gl.POLYGON_OFFSET_FILL);
 
-    if (this._cgl.glVersion != 1 && this.type !== "point") this.renderBlurPass(blurAmount);
+    if (this.type !== "point") this.renderBlurPass(blurAmount);
 
     this._cgl.gl.colorMask(true, true, true, true);
 
