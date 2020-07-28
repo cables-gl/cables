@@ -1103,12 +1103,9 @@ Context.prototype.glGetAttribLocation = function (prog, name)
  */
 Context.prototype.shouldDrawHelpers = function (op)
 {
-    if (!op.patch.isEditorMode() ||
-        !CABLES.UI.renderHelper ||
-        !op.isCurrentUiOp() ||
-        this.frameStore.shadowPass) return false;
-
-    return true;
+    if (this.frameStore.shadowPass) return false;
+    if (!op.patch.isEditorMode()) return false;
+    return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)
