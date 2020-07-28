@@ -78,5 +78,13 @@
             }
         ],
         "name": "Ops.Gl.Matrix.QuaternionCamera"
+    },
+    "summary": "Set up a camera, rotated by a quaternion",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.PhysicsBodies renamed to Ops.Exp.Gl.Physics.PhysicsBodiesArray",
             "author": "pandur",
             "date": 1594124060331
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.PhysicsBodiesArray renamed to Ops.Physics.PhysicsBodiesArray",
+            "author": "pandur",
+            "date": 1595851365537
         }
     ],
     "authorName": "pandur",
@@ -70,5 +75,13 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.PhysicsBodiesArray"
+    },
+    "summary": "create an array of physics bodies and add them to current world",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

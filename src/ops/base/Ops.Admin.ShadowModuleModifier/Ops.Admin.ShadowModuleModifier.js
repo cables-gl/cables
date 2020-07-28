@@ -217,14 +217,14 @@ function createModuleShaders(lightStack)
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
-        "priority": -2,
+        // "priority": -2,
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
 
     shaderModule.addModule({
         "name": "MODULE_COLOR",
-        "priority": -2,
+        // "priority": -2,
         "title": op.objName,
         "srcHeadFrag": srcHeadFrag,
         "srcBodyFrag": srcBodyFrag,
@@ -237,7 +237,7 @@ function createModuleShaders(lightStack)
 const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier");
 shadowShaderModule.addModule({
     "name": "MODULE_COLOR",
-    "priority": -2,
+    // "priority": -2,
     "title": op.objName + "shadowPass",
     "srcHeadFrag": "",
     "srcBodyFrag": `
