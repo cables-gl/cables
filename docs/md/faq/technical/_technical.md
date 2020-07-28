@@ -20,7 +20,7 @@ Then again a lot of amazing patches run on mobile devices so it's all down to th
 
 #### Is syphon or spout texture sharing available in cables?
 
-- Not yet.
+- cables cannot support this because it is running in the browser, you need 3rd party capturing software that captures a part of the desktop which is **syphon/spout** compatible.
 
 #### Can I use my soundcard with cables?
 
@@ -34,7 +34,7 @@ It's called Daplaya, you can download it and get started [here](https://github.c
 
 #### Can I embed a cables patch in a wordpress page?
 
--Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.  
+- Yes you can. Check the cables-wordpress-plugin [page](https://github.com/cables-gl/cables-wordpress-plugin) to get started.  
 
 #### Can I make my own custom ops?
 
