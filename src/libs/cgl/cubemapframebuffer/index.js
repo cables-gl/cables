@@ -40,6 +40,9 @@ class CubemapFramebuffer
                 "up": vec3.fromValues(0.0, -1.0, 0.0),
             },
         ];
+
+        this.forceViewMatrixPush = options.forceViewMatrixPush;
+
         this._lookAtTemp = vec3.fromValues(0, 0, 0);
         this.camPos = vec3.fromValues(0, 0, 0);
 
@@ -284,7 +287,7 @@ class CubemapFramebuffer
     renderStartCubemapFace(index)
     {
         this._cgl.pushModelMatrix();
-        this._cgl.pushViewMatrix();
+        this._cgl.pushViewMatrix(this.forceViewMatrixPush);
         this._cgl.pushPMatrix();
 
         this._cgl.gl.framebufferTexture2D(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.COLOR_ATTACHMENT0, this._cubemapProperties[index].face, this.texture.tex, 0);
@@ -314,7 +317,7 @@ class CubemapFramebuffer
     {
         this._cgl.popPMatrix();
         this._cgl.popModelMatrix();
-        this._cgl.popViewMatrix();
+        this._cgl.popViewMatrix(this.forceViewMatrixPush);
     }
 
     renderEnd()

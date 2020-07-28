@@ -151,6 +151,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
             "camPos": this.position,
             "cullFaces": true,
             "size": fbWidth,
+            "isShadowMap": true
         });
 
         this._cubemap.initializeCubemap();
@@ -348,7 +349,12 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(this._shaderShadowMap.matrices.modelMatrix, this._shaderShadowMap.matrices.viewMatrix, this._shaderShadowMap.matrices.projMatrix);
+
+        this._cgl.pushShader(this._shaderShadowMap.shader);
+
         this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
+
+        this._cgl.popShader();
         this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
         return;
     }
@@ -356,7 +362,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._cgl.pushShader(this._shaderShadowMap.shader);
 
     this._cgl.pushModelMatrix();
-    this._cgl.pushViewMatrix();
+    this._cgl.pushViewMatrix(true);
     this._cgl.pushPMatrix();
 
     this._framebuffer.renderStart(this._cgl);
@@ -385,7 +391,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     this._framebuffer.renderEnd(this._cgl);
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
-    this._cgl.popViewMatrix();
+    this._cgl.popViewMatrix(true);
 
     this._cgl.popShader();
 };
