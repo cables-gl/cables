@@ -57,12 +57,27 @@
         ],
         "portsOut": [
             {
+                "type": "0",
+                "name": "Result Number",
+                "subType": "number"
+            },
+            {
                 "type": "3",
-                "name": "Result"
+                "name": "Result Array"
             },
             {
                 "type": "0",
                 "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Current Index",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Result per Index",
                 "subType": "number"
             },
             {
