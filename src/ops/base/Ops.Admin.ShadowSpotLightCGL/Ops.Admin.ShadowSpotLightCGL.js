@@ -232,7 +232,7 @@ const resultPointAt = vec3.create();
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (op.isCurrentUiOp())
+    if (cgl.shouldDrawHelpers(op))
     {
         gui.setTransformGizmo({
             "posX": inPosX,
@@ -241,15 +241,15 @@ function drawHelpers()
         });
 
 
-        // CABLES.GL_MARKER.drawLineSourceDest({
-        //     op,
-        //     "sourceX": newLight.position[0],
-        //     "sourceY": newLight.position[1],
-        //     "sourceZ": newLight.position[2],
-        //     "destX": newLight.conePointAt[0],
-        //     "destY": newLight.conePointAt[1],
-        //     "destZ": newLight.conePointAt[2],
-        // });
+        CABLES.GL_MARKER.drawLineSourceDest({
+            op,
+            "sourceX": newLight.position[0],
+            "sourceY": newLight.position[1],
+            "sourceZ": newLight.position[2],
+            "destX": newLight.conePointAt[0],
+            "destY": newLight.conePointAt[1],
+            "destZ": newLight.conePointAt[2],
+        });
     }
 }
 

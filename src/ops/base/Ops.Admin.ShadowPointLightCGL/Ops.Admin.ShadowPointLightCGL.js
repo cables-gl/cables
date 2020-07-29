@@ -212,7 +212,7 @@ const transVec = vec3.create();
 function drawHelpers()
 {
     if (cgl.frameStore.shadowPass) return;
-    if (op.isCurrentUiOp())
+    if (cgl.shouldDrawHelpers(op))
     {
         gui.setTransformGizmo({
             "posX": inPosX,
@@ -220,10 +220,10 @@ function drawHelpers()
             "posZ": inPosZ,
         });
 
-        // cgl.pushModelMatrix();
-        // mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
-        // CABLES.GL_MARKER.drawSphere(op, inRadius.get());
-        // cgl.popModelMatrix();
+        cgl.pushModelMatrix();
+        mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
+        CABLES.GL_MARKER.drawSphere(op, inRadius.get());
+        cgl.popModelMatrix();
     }
 }
 
@@ -271,6 +271,8 @@ inTrigger.onTriggered = function ()
                 outCubemap.set(newLight.shadowCubeMap); // renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
             }
             cgl.frameStore.lightStack.push(newLight);
+            outCubemap.set(null);
+            outCubemap.set(newLight.shadowCubeMap);
         }
 
         hasRenderedCubemapOnce = true;

@@ -1,6 +1,10 @@
 IN vec2 texCoord;
 UNI samplerCube cubemap;
 
+#ifdef WEBGL2
+    #define textureCube texture
+#endif
+
 void main() {
     #ifdef EQUIRECTANGULAR
 
@@ -11,7 +15,7 @@ void main() {
         vec3 dir = vec3(cos(phi)*cos(theta),sin(theta),sin(phi)*cos(theta));
 
         //In this example i use a depthmap with only 1 channel, but the projection should work with a colored cubemap to
-        vec4 color = texture(cubemap, dir ).rgba;
+        vec4 color = textureCube(cubemap, dir ).rgba;
         outColor = color;
 
     #endif
@@ -39,7 +43,7 @@ void main() {
                 vec3 dir=vec3(localST.s*2.-1.,-1.,-localST.t*2.+1.);//Due to the (arbitrary) way I choose as up in my depth-viewmatrix, i her emultiply the latter coordinate with -1
 
                 #ifdef WEBGL2
-                depth = texture( cubemap, dir );
+                depth = textureCube( cubemap, dir );
                 #endif
 
                 #ifdef WEBGL1
@@ -52,7 +56,7 @@ void main() {
                             vec3 dir=vec3(localST.s*2.-1.,1.,localST.t*2.-1.);//Get lower y texture, which is projected to the +y part of my cubemap
 
                 #ifdef WEBGL2
-                depth = texture( cubemap, dir );
+                depth = textureCube( cubemap, dir );
                 #endif
 
                 #ifdef WEBGL1
@@ -65,13 +69,7 @@ void main() {
             {
                 vec3 dir=vec3(localST.s*2.-1.,-localST.t*2.+1.,1.);
 
-                #ifdef WEBGL2
-                depth = texture( cubemap, dir );
-                #endif
-
-                #ifdef WEBGL1
-                depth = textureCube(cubemap, dir);
-                #endif
+                depth = textureCube( cubemap, dir );
 
             }
 
@@ -84,40 +82,23 @@ void main() {
             {
                 vec3 dir=vec3(-1.,-localST.t*2.+1.,localST.s*2.-1.);
 
-                #ifdef WEBGL2
-                depth = texture( cubemap, dir );
-                #endif
 
-                #ifdef WEBGL1
-                depth = textureCube(cubemap, dir);
-                #endif
+                depth = textureCube( cubemap, dir );
 
             }
             else if (texCoord.x*4. < 3.)//right (+x) quad (front was done above)
             {
                 vec3 dir=vec3(1,-localST.t*2.+1.,-localST.s*2.+1.);
 
-                #ifdef WEBGL2
-                depth = texture( cubemap, dir );
-                #endif
 
-                #ifdef WEBGL1
                 depth = textureCube(cubemap, dir);
-                #endif
 
             }
             else //back (+z) quad
             {
                 vec3 dir=vec3(-localST.s*2.+1.,-localST.t*2.+1.,-1.);
 
-                #ifdef WEBGL2
-                depth = texture( cubemap, dir );
-                #endif
-
-                #ifdef WEBGL1
                 depth = textureCube(cubemap, dir);
-                #endif
-
             }
 
 

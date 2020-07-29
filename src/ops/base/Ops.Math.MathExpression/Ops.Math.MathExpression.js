@@ -45,3 +45,4 @@ const evaluateFunction = () =>
 
 inA.onChange = inB.onChange = inC.onChange = inD.onChange = evaluateFunction;
 inEquation.onChange = createFunction;
+createFunction();
