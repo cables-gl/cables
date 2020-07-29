@@ -224,6 +224,10 @@ function drawHelpers()
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
+
+    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+    else op.setUiError("lightUsed", null);
+
     if (updateLight)
     {
         newLight.color = [inR.get(), inG.get(), inB.get()];
@@ -239,16 +243,14 @@ inTrigger.onTriggered = function ()
         updateLight = false;
     }
 
-    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
-    else op.setUiError("lightUsed", null);
 
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     drawHelpers();
 
     newLight.isUsed = false;
-
     cgl.frameStore.lightStack.push(newLight);
+
 
     if (inCastShadow.get())
     {
@@ -263,5 +265,8 @@ inTrigger.onTriggered = function ()
     }
 
     outTrigger.trigger();
+    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+    else op.setUiError("lightUsed", null);
+    // op.log(cgl.frameStore.lightStack.indexOf(newLight));
     cgl.frameStore.lightStack.pop();
 };

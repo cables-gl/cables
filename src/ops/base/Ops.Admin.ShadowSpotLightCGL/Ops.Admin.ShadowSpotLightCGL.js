@@ -257,6 +257,10 @@ const hasRenderedMapOnce = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
+
+    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+    else op.setUiError("lightUsed", null);
+
     if (updateLight)
     {
         newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });
@@ -285,6 +289,8 @@ inTrigger.onTriggered = function ()
 
 
     drawHelpers();
+
+    newLight.isUsed = false;
 
     cgl.frameStore.lightStack.push(newLight);
 

@@ -510,6 +510,7 @@ function setUniforms(lightStack)
     for (let i = 0; i < lightStack.length; i += 1)
     {
         const light = lightStack[i];
+        light.isUsed = true;
 
         lightUniforms[i].position.setValue(light.position);
         lightUniforms[i].color.setValue(light.color);
