@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "85846539-6ef7-46ba-aaf5-156bb6f49b87",
-    "created": 1516276730775,
+    "id": "0d39986b-c594-44d5-815d-c46a280fe16c",
+    "created": 1596031051954,
     "layout": {
         "portsIn": [
             {
@@ -88,88 +88,13 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.AreaDiscardPixel"
-    },
-    "summary": "do not draw pixels inside a defined 3d area",
-    "docs": {
-        "ports": [
-            {
-                "name": "render",
-                "text": "Trigger in"
-            },
-            {
-                "name": "Invert",
-                "text": "Invert area "
-            },
-            {
-                "name": "Area",
-                "text": "Sphere, Box, Axis X Y or Z, Axis XY or XZ, Axis X Y or Z infinite"
-            },
-            {
-                "name": "Size",
-                "text": "Size of area"
-            },
-            {
-                "name": "Size X",
-                "text": "Size of the X axis"
-            },
-            {
-                "name": "Size Y",
-                "text": "Size of the Y axis"
-            },
-            {
-                "name": "Size Z",
-                "text": "Size of the Z axis"
-            },
-            {
-                "name": "Repeat",
-                "text": "Enable repeat mode"
-            },
-            {
-                "name": "Repeat Distance",
-                "text": "Distance between the discarded and non discarded areas"
-            },
-            {
-                "name": "x",
-                "text": "Moves the X axis"
-            },
-            {
-                "name": "y",
-                "text": "Moves the Y axis"
-            },
-            {
-                "name": "z",
-                "text": "Moves the Z axis"
-            },
-            {
-                "name": "WorldSpace",
-                "text": "Enable to move area around in world space"
-            },
-            {
-                "name": "trigger",
-                "text": "Trigger out"
-            }
-        ]
+        "name": "Ops.User.pandur.AreaDiscarPixel2"
     },
     "changelog": [
         {
-            "message": "added repeat mode and diagonal axis",
+            "message": "Ops.User.pandur.AreaDiscarPixel2 renamed to Ops.Gl.ShaderEffects.AreaDiscardPixel_v2",
             "author": "pandur",
-            "date": 1554653768876
-        },
-        {
-            "message": "added box shape ",
-            "author": "andro",
-            "date": 1580204731724
-        },
-        {
-            "message": "scale area per axis",
-            "author": "andro",
-            "date": 1580204738758
+            "date": 1596031345309
         }
-    ],
-    "issues": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": []
+    ]
 }
