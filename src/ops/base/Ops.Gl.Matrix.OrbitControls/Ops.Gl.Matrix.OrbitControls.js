@@ -151,7 +151,7 @@ const lastPx = 0;
 
 render.onTriggered = function ()
 {
-    if (cgl.frameStore.shadowPass) return trigger.trigger();
+    // if (cgl.frameStore.shadowPass) return trigger.trigger();
 
     cgl.pushViewMatrix();
 
