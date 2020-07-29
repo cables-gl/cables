@@ -487,14 +487,20 @@ inTrigger.onTriggered = () =>
         return;
     }
 
+    if (!inReceiveShadow.get())
+    {
+        outTrigger.trigger();
+        return;
+    }
+
     mat4.invert(_tempCamPosMatrix, cgl.vMatrix);
 
     if (cgl.frameStore.lightStack)
     {
         if (cgl.frameStore.lightStack.length === 0)
         {
-            op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
-            outTrigger.trigger();
+            op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 1);
+            // outTrigger.trigger();
         }
         else
         {
@@ -502,23 +508,8 @@ inTrigger.onTriggered = () =>
 
             for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
 
-            if (oneLightCastsShadow)
-            {
-                if (inReceiveShadow.get())
-                {
-                    op.setUiError("nolights", null);
-                    op.setUiError("inReceiveShadowActive", null);
-                }
-                else
-                {
-                    op.setUiError("inReceiveShadowActive", "Your lights cast shadows but the \"Receive Shadow\" option in this op is not active. Please enable it to use shadows.", 1);
-                    outTrigger.trigger();
-                }
-            }
-            else
-            {
-                op.setUiError("nolights", "There are lights in the patch but none that cast shadows. Please activate the \"Cast Shadow\" property on one of your lights in the patch to make shadows visible.", 1);
-            }
+            if (oneLightCastsShadow) op.setUiError("nolights", null);
+            else op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 0);
         }
         if (cgl.frameStore.lightStack.length)
         {
@@ -531,3 +522,44 @@ inTrigger.onTriggered = () =>
     }
     else outTrigger.trigger();
 };
+
+
+function checkUiErrors()
+{
+    if (cgl.frameStore.lightStack)
+    {
+        if (cgl.frameStore.lightStack.length === 0)
+        {
+            op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
+        }
+        else
+        {
+            op.setUiError("nolights", null);
+            let oneLightCastsShadow = false;
+
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+
+            if (oneLightCastsShadow)
+            {
+                op.setUiError("nolights2", null);
+                if (inReceiveShadow.get())
+                {
+                    op.setUiError("inReceiveShadowActive", null);
+                }
+                else
+                {
+                    op.setUiError("inReceiveShadowActive", "Your lights cast shadows but the \"Receive Shadow\" option in this op is not active. Please enable it to use shadows.", 1);
+                }
+            }
+            else
+            {
+                op.setUiError("nolights2", "There are lights in the patch but none that cast shadows. Please activate the \"Cast Shadow\" property of one of your lights in the patch to make shadows visible.", 1);
+                op.setUiError("inReceiveShadowActive", null);
+            }
+        }
+    }
+    else
+    {
+        op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
+    }
+}

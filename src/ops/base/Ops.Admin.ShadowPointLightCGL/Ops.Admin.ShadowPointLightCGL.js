@@ -246,6 +246,9 @@ inTrigger.onTriggered = function ()
         updateLight = false;
     }
 
+    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+    else op.setUiError("lightUsed", null);
+
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
@@ -253,6 +256,8 @@ inTrigger.onTriggered = function ()
     newLight.position = position;
 
     drawHelpers();
+
+    newLight.isUsed = false;
 
     cgl.frameStore.lightStack.push(newLight);
 

@@ -139,7 +139,7 @@ newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
 
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPosX.onChange = inPosY.onChange = inPosZ.onChange = inIntensity.onChange = inShadowStrength.onChange = updateLightParameters;
+= inPosX.onChange = inPosY.onChange = inPosZ.onChange = inBias.onChange = inIntensity.onChange = inShadowStrength.onChange = updateLightParameters;
 
 let updateLight = false;
 function updateLightParameters(param)
@@ -238,10 +238,15 @@ inTrigger.onTriggered = function ()
         newLight.shadowStrength = inShadowStrength.get();
         updateLight = false;
     }
+
+    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+    else op.setUiError("lightUsed", null);
+
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
     drawHelpers();
 
+    newLight.isUsed = false;
 
     cgl.frameStore.lightStack.push(newLight);
 
