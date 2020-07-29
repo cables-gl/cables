@@ -137,10 +137,9 @@ const inNormalTexture = op.inTexture("Normal Map");
 const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
-const inEnvTexture = op.inTexture("Environment Reflection Texture");
+const inEnvTexture = op.inTexture("Environment Map");
 op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture]);
 
-const inEnvStrength = op.inFloat("Environment Texture Strength", 1);
 
 // TEXTURE TRANSFORMS
 const inColorizeTexture = op.inBool("Colorize Texture", false);
@@ -152,9 +151,10 @@ const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
+const inEnvStrength = op.inFloatSlider("Env Map Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
-op.setPortGroup("Texture Transforms", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
+op.setPortGroup("Texture Transforms", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX, inEnvStrength]);
 
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
