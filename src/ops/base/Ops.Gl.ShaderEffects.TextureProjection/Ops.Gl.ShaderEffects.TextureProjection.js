@@ -14,7 +14,7 @@ const
     inRotZ = op.inFloat("Rot Z", 0),
 
     inTex = op.inTexture("Texture"),
-    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ"], "XY"),
+    inMethod = op.inValueSelect("Mapping", ["Triplanar", "XY", "XZ", "YZ", "Screen"], "XY"),
     inDiscard = op.inValueBool("Discard"),
     inWorldSpace = op.inValueBool("WorldSpace");
 
@@ -45,11 +45,14 @@ mod.addUniformBoth("f", "MOD_rotX", inRotX);
 mod.addUniformBoth("f", "MOD_rotY", inRotY);
 mod.addUniformBoth("f", "MOD_rotZ", inRotZ);
 
-
 mod.addUniformFrag("t", "MOD_tex");
 mod.addUniformBoth("f", "MOD_scale", inScale);
 mod.addUniformBoth("f", "MOD_amount", inAmount);
-mod.addUniformVert("2f", "MOD_offset", inPosX, inPosY);
+mod.addUniformBoth("2f", "MOD_offset", inPosX, inPosY);
+
+
+const uniWidth = mod.addUniformFrag("f", "MOD_viewPortW");
+const uniHeight = mod.addUniformFrag("f", "MOD_viewPortH");
 
 updateDefines();
 
@@ -60,6 +63,7 @@ function updateDefines()
     mod.toggleDefine("MOD_MAP_XY", inMethod.get() == "XY");
     mod.toggleDefine("MOD_MAP_XZ", inMethod.get() == "XZ");
     mod.toggleDefine("MOD_MAP_YZ", inMethod.get() == "YZ");
+    mod.toggleDefine("MOD_MAP_SCREEN", inMethod.get() == "Screen");
     mod.toggleDefine("MOD_MAP_TRIPLANAR", inMethod.get() == "Triplanar");
     mod.toggleDefine("MOD_DISCARD", inDiscard.get());
 
@@ -102,13 +106,17 @@ render.onTriggered = function ()
     //     // new CGL.Uniform(shader,'2f','MOD_offset',inPosX,inPosY);
 
     //     // new CGL.Uniform(shader,'t',moduleFrag.prefix+'tex',5);
-
-
     //     updateDefines();
     // }
 
     // if(!shader)return;
     // if(inTex.get()) cgl.setTexture(5, inTex.get().tex);
+
+    const vp = cgl.getViewPort();
+    // console.log(vp);
+
+    mod.setUniformValue("MOD_viewPortW", vp[2]);
+    mod.setUniformValue("MOD_viewPortH", vp[3]);
 
     mod.bind();
     mod.pushTexture("MOD_tex", inTex.get().tex);

@@ -1,8 +1,11 @@
 const inA = op.inArray("A");
 const inB = op.inArray("B");
 const inC = op.inArray("C");
-const inD = op.inArray("D");
-op.setPortGroup("Parameters", [inA, inB, inC, inD]);
+
+const inX = op.inFloat("X", 1);
+const inY = op.inFloat("Y", 1);
+const inZ = op.inFloat("Z", 1);
+op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
 const inEquation = op.inString("Equation", "a*(b+c+d)");
 op.setPortGroup("Equation", [inEquation]);
 const outResult = op.outArray("Result");
@@ -17,7 +20,7 @@ const createFunction = () =>
 {
     try
     {
-        currentFunction = new Function("m", "a", "b", "c", "d", `with(m) { return ${inEquation.get()} }`);
+        currentFunction = new Function("m", "a", "b", "c", "x", "y", "z", `with(m) { return ${inEquation.get()} }`);
         functionValid = true;
         evaluateFunction();
         outEquation.set(inEquation.get());
@@ -41,9 +44,8 @@ const evaluateFunction = () =>
     const arrayA = inA.get();
     const arrayB = inB.get();
     const arrayC = inC.get();
-    const arrayD = inD.get();
 
-    const arrays = [arrayA, arrayB, arrayC, arrayD];
+    const arrays = [arrayA, arrayB, arrayC];
 
     // * check if we have at least 2 arrays that are valid
     if (arrays.filter(Boolean).length < 2)
@@ -115,5 +117,5 @@ const evaluateFunction = () =>
 };
 
 
-inA.onChange = inB.onChange = inC.onChange = inD.onChange = evaluateFunction;
+inA.onChange = inB.onChange = inC.onChange = evaluateFunction;
 inEquation.onChange = createFunction;
