@@ -23,5 +23,13 @@
             }
         ],
         "name": "Ops.String.StripHtml"
+    },
+    "summary": "remove html tags from a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

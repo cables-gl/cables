@@ -10,7 +10,7 @@ function clamp(val, min, max)
 
 const inTrigger = op.inTrigger("Trigger In");
 const inCastShadow = op.inBool("Cast Shadow", true);
-const inReceiveShadow = op.inBool("Receive Shadow", false);
+const inReceiveShadow = op.inBool("Receive Shadow", true);
 const algorithms = ["Default", "PCF", "Poisson", "VSM"];
 const inAlgorithm = op.inSwitch("Algorithm", algorithms, "Default");
 const inSamples = op.inSwitch("Samples", [1, 2, 4, 8], 4);
@@ -217,14 +217,14 @@ function createModuleShaders(lightStack)
     shaderModule.addModule({
         "name": "MODULE_VERTEX_POSITION",
         "title": op.objName,
-        "priority": -2,
+        // "priority": -2,
         "srcHeadVert": srcHeadVert,
         "srcBodyVert": srcBodyVert
     });
 
     shaderModule.addModule({
         "name": "MODULE_COLOR",
-        "priority": -2,
+        // "priority": -2,
         "title": op.objName,
         "srcHeadFrag": srcHeadFrag,
         "srcBodyFrag": srcBodyFrag,
@@ -237,7 +237,7 @@ function createModuleShaders(lightStack)
 const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier");
 shadowShaderModule.addModule({
     "name": "MODULE_COLOR",
-    "priority": -2,
+    // "priority": -2,
     "title": op.objName + "shadowPass",
     "srcHeadFrag": "",
     "srcBodyFrag": `
@@ -497,6 +497,20 @@ inTrigger.onTriggered = () =>
 
     if (cgl.frameStore.lightStack)
     {
+        if (cgl.frameStore.lightStack.length === 0)
+        {
+            op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 1);
+            outTrigger.trigger();
+        }
+        else
+        {
+            let oneLightCastsShadow = false;
+
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+
+            if (oneLightCastsShadow) op.setUiError("nolights", null);
+            else op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 0);
+        }
         if (cgl.frameStore.lightStack.length)
         {
             updateShader();

@@ -27,5 +27,13 @@
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryMergeSimple"
+    },
+    "summary": "merge two geometries",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

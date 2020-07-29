@@ -151,6 +151,8 @@ const lastPx = 0;
 
 render.onTriggered = function ()
 {
+    if (cgl.frameStore.shadowPass) return trigger.trigger();
+
     cgl.pushViewMatrix();
 
     px = ip(px, percX);
@@ -240,7 +242,6 @@ render.onTriggered = function ()
     // outPosX.set(finalEyeAbs[0]);
     // outPosY.set(finalEyeAbs[1]);
     // outPosZ.set(finalEyeAbs[2]);
-
 
     trigger.trigger();
     cgl.popViewMatrix();

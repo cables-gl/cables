@@ -63,5 +63,13 @@
             }
         ],
         "name": "Ops.Array.ArrayOfArrays"
+    },
+    "summary": "Create an array filled with other arrays",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
