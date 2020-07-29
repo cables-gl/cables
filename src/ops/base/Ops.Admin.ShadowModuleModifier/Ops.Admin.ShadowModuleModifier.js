@@ -187,7 +187,7 @@ function renderShadowPassWithModule()
     shadowShaderModule.unbind();
 }
 
-function createModuleShaders(lightStack)
+function createModuleShaders()
 {
     STATE.updating = true;
     removeUniforms();
@@ -197,9 +197,9 @@ function createModuleShaders(lightStack)
     let vertexBody = "";
     let fragmentBody = "";
 
-    for (let i = 0; i < lightStack.length; i += 1)
+    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
     {
-        const light = lightStack[i];
+        const light = cgl.frameStore.lightStack[i];
         vertexHead = vertexHead.concat(createVertexHead(i, light.type));
         vertexBody = vertexBody.concat(createVertexBody(i, light.type));
 
@@ -230,7 +230,7 @@ function createModuleShaders(lightStack)
         "srcBodyFrag": srcBodyFrag,
     });
 
-    createUniforms(lightStack.length);
+    createUniforms();
 }
 
 // * SHADOW PASS MODULE *
@@ -313,9 +313,9 @@ function removeUniforms()
     hasShadowCubemap.length = 0;
 }
 
-function createUniforms(lightsCount)
+function createUniforms()
 {
-    for (let i = 0; i < lightsCount; i += 1)
+    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
     {
         const light = cgl.frameStore.lightStack[i];
 
@@ -339,30 +339,31 @@ function createUniforms(lightsCount)
         else shaderModule.addUniformFrag("tc", "MOD_shadowMapCube" + i, 0, null, null, null);
     }
 
-    if (lightsCount > 0)
+    if (cgl.frameStore.lightStack.length > 0)
     {
         shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
         if (cgl.frameStore.lightStack.map((l) => l.type).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
 
-    STATE.lastLength = lightsCount;
+    STATE.lastLength = cgl.frameStore.lightStack.length;
     STATE.updating = false;
 }
 
-function setUniforms(lightStack)
+function setUniforms()
 {
+    if (cgl.frameStore.shadowPass) op.log("setting unis in shadowmapss");
     if (STATE.updating) return;
     const receiveShadow = inReceiveShadow.get();
-    const castShadow = false;
 
-    for (let i = 0; i < lightStack.length; i += 1)
+
+    for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
     {
-        const light = lightStack[i];
+        const light = cgl.frameStore.lightStack[i];
 
         if (light.type === "ambient") continue;
 
-        light.isUsed = true;
+        if (!light.isUsed) light.isUsed = true;
 
         shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
         shaderModule.setUniformValue("MOD_light" + i + ".typeCastShadow", [
@@ -454,9 +455,9 @@ function setUniforms(lightStack)
 function updateShader()
 {
     if (cgl.frameStore.lightStack.length !== STATE.lastLength)
-        createModuleShaders(cgl.frameStore.lightStack);
+        createModuleShaders();
 
-    setUniforms(cgl.frameStore.lightStack);
+    setUniforms();
 }
 
 inTrigger.onLinkChanged = function ()
