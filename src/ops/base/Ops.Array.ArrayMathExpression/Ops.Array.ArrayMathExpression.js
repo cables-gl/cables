@@ -1,3 +1,4 @@
+const inTrigger = op.inTrigger("Trigger In");
 const inA = op.inArray("A");
 const inB = op.inArray("B");
 const inC = op.inArray("C");
@@ -9,6 +10,8 @@ const inZ = op.inFloat("Z", 1);
 op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
 const inEquation = op.inString("Equation", "a*(b+c+d)");
 op.setPortGroup("Equation", [inEquation]);
+
+const outTrigger = op.outTrigger("Trigger Out");
 const outResultFloat = op.outNumber("Result Number");
 const outResultArray = op.outArray("Result Array");
 const outLength = op.outNumber("Array Length");
@@ -19,6 +22,8 @@ const outEquation = op.outString("Equation");
 
 let currentFunction = inEquation.get();
 let functionValid = false;
+let functionChanged = false;
+let inputsChanged = false;
 
 const createFunction = () =>
 {
@@ -135,7 +140,22 @@ const evaluateFunction = () =>
     outEquationIsValid.set(functionValid);
 };
 
+inTrigger.onTriggered = () =>
+{
+    if (functionChanged)
+    {
+        createFunction();
+        functionChanged = false;
+    }
+
+    if (inputsChanged)
+    {
+        evaluateFunction();
+        inputsChanged = false;
+    }
+};
 
 inA.onChange = inB.onChange = inC.onChange
-= inX.onChange = inY.onChange = inZ.onChange = evaluateFunction;
-inEquation.onChange = createFunction;
+= inX.onChange = inY.onChange = inZ.onChange = () => inputsChanged = true;
+// evaluateFunction;
+inEquation.onChange = () => functionChanged = true;
