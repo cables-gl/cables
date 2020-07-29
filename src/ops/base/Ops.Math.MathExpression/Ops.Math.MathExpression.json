@@ -42,8 +42,8 @@
             },
             {
                 "type": "5",
-                "name": "Equation",
-                "group": "Equation"
+                "name": "Expression",
+                "group": "Expression"
             }
         ],
         "portsOut": [
@@ -54,14 +54,55 @@
             },
             {
                 "type": "0",
-                "name": "Equation Valid",
+                "name": "Expression Valid",
                 "subType": "boolean"
             },
             {
                 "type": "5",
-                "name": "Equation"
+                "name": "Expression"
             }
         ],
         "name": "Ops.Math.MathExpression"
+    },
+    "summary": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "A",
+                "text": "a input"
+            },
+            {
+                "name": "B",
+                "text": "b input"
+            },
+            {
+                "name": "C",
+                "text": "c input"
+            },
+            {
+                "name": "D",
+                "text": "d input"
+            },
+            {
+                "name": "Equation",
+                "text": "equation to evaluate, e.g. a+b+c+d"
+            },
+            {
+                "name": "Result",
+                "text": "result of the equation"
+            },
+            {
+                "name": "Equation Valid",
+                "text": "indicates if the equation is a valid mathematical expression"
+            },
+            {
+                "name": "Equation",
+                "text": "equation to evaluate, e.g. a+b+c+d"
+            }
+        ]
     }
 }

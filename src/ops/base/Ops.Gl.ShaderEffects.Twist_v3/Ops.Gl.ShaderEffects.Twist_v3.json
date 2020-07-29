@@ -1,7 +1,7 @@
 {
     "authorName": "pandur",
-    "id": "92aee475-63e8-45cc-902f-2a84154e0a93",
-    "created": 1515176075838,
+    "id": "4635abe3-a6b1-413f-9cd1-fbf64f8c4942",
+    "created": 1596029829412,
     "layout": {
         "portsIn": [
             {
@@ -22,6 +22,11 @@
                 "type": "0",
                 "name": "Axis index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Axis",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -30,19 +35,21 @@
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.Twist_v2"
+        "name": "Ops.User.pandur.Twist3"
     },
-    "summary": "twist a mesh around an axis",
     "changelog": [
         {
-            "message": "Ops.Gl.ShaderEffects.Twist_v2 renamed to Ops.Gl.ShaderEffects.Twist_v3",
+            "message": "Ops.User.pandur.Twist3 renamed to Ops.Gl.ShaderEffects.Twist_v3",
             "author": "pandur",
-            "date": 1596029913466
-        },
-        {
-            "message": "Ops.Gl.ShaderEffects.Twist_v3 renamed to Ops.Gl.ShaderEffects.Twist_v2",
-            "author": "pandur",
-            "date": 1596029956686
+            "date": 1596029978529
         }
-    ]
+    ],
+    "summary": "twist a mesh around an axis",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

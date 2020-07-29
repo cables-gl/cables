@@ -43,5 +43,38 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.LumaKey_v2"
+    },
+    "summary": "Remove darkest or brightest parts of the image",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "trigger the op"
+            },
+            {
+                "name": "Invert",
+                "text": "Invert output"
+            },
+            {
+                "name": "Black White",
+                "text": "if within threshold pixel is white else black"
+            },
+            {
+                "name": "Threshold low ",
+                "text": "Low threshold"
+            },
+            {
+                "name": "Threshold high",
+                "text": "High threshold"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
     }
 }

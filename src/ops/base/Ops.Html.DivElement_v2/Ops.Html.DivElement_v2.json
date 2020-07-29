@@ -55,12 +55,48 @@
         "name": "Ops.Html.DivElement_v2"
     },
     "summary": "Create a html DIV element",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Text",
+                "text": "text to display within the div"
+            },
+            {
+                "name": "Id",
+                "text": "Unique ID of div"
+            },
+            {
+                "name": "Class",
+                "text": "class to be accessed from CSS op"
+            },
+            {
+                "name": "Style",
+                "text": "write css styling for the div with the built in editor"
+            },
+            {
+                "name": "Interactive",
+                "text": "Allows interaction from mouse or touch screen"
+            },
+            {
+                "name": "Visible",
+                "text": "decides if the div is included in the css layout"
+            },
+            {
+                "name": "Convert Line Breaks",
+                "text": "convert line breaks in text string"
+            },
+            {
+                "name": "Hover",
+                "text": "outputs a 1 if the mouse hovers over the div"
+            },
+            {
+                "name": "Clicked",
+                "text": "Triggers when clicked"
+            }
+        ]
     },
     "changelog": [
         {
@@ -68,5 +104,6 @@
             "author": "pandur",
             "date": 1560335654025
         }
-    ]
+    ],
+    "youtubeids": []
 }
