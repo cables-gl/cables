@@ -25,13 +25,6 @@ To convert a file upload it, then click it in the file browser. on the right you
 
 this is done using [assimp2json](https://github.com/acgessler/assimp2json)
 
-### pointcloud - EXAMPLE PATCH WONT LOAD !
-
-file ending: `.pc.txt`
-
-export the pointcloud as .txt file from e.g. agisoft photoscan. Rename it to `.pc.txt` before uploading.
-
-use with op [Ops.Gl.Particles.PointCloudFile](https://cables.gl/op/Ops.Gl.Particles.PointCloudFile)
 
 
 ### SVG to mesh
