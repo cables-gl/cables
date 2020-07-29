@@ -62,11 +62,12 @@ const inPolygonOffset = op.inInt("Polygon Offset", 1);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
 const shadowProperties = [inNear, inFar];
-inMapSize.setUiAttribs({ "greyout": true });
-inShadowStrength.setUiAttribs({ "greyout": true });
-inNear.setUiAttribs({ "greyout": true });
-inFar.setUiAttribs({ "greyout": true });
-inPolygonOffset.setUiAttribs({ "greyout": true });
+inMapSize.setUiAttribs({ "greyout": !inCastShadow.get() });
+inShadowStrength.setUiAttribs({ "greyout": !inCastShadow.get() });
+inNear.setUiAttribs({ "greyout": !inCastShadow.get() });
+inBias.setUiAttribs({ "greyout": !inCastShadow.get() });
+inFar.setUiAttribs({ "greyout": !inCastShadow.get() });
+inPolygonOffset.setUiAttribs({ "greyout": !inCastShadow.get() });
 
 let updating = false;
 
