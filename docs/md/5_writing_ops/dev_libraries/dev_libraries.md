@@ -2,7 +2,7 @@
 
 #### How can I use external libraries in cables?
 
-- There is a variety of extenal libraries available in cables. Once you created your [own OP](../../dev_ops/dev_ops) you find
+- There is a variety of external libraries available in cables. Once you created your [own OP](https://dev.cables.gl/docs/5_writing_ops/dev_hello_op/dev_hello_op) you find
 the selection of libraries from the "code" menu on the right side of the editor, when the op is selected. Select any available
 libraries, save and reload the patch and you can use them in your ops.
 

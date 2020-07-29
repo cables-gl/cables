@@ -1,7 +1,5 @@
 # General questions
 
-__TOC__
-
 #### How do i create an account?
 
 - Head on over to https://cables.gl/ and hit the register button. Respond to the e-mail authentification and then your account will be active.
