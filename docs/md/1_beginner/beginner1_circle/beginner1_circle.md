@@ -1,7 +1,8 @@
 
 # Beginner 1: Drawing A Circle
 
-First, we need a project to work with, so press the `New Project`-button.
+First, we need a project to work with.If you're on the main webpage click the `Create` tab and then `Empty Project`.
+If you're already in a patch click in the top left tab and select `New patch` then `empty`.
 
 To draw a circle, we need two operators:
 
