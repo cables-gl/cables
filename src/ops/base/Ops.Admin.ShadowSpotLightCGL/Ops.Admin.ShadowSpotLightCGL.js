@@ -253,10 +253,28 @@ function drawHelpers()
     }
 }
 
-const hasRenderedMapOnce = false;
+let errorActive = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
+
+    if (!cgl.frameStore.shadowPass)
+    {
+        if (!newLight.isUsed && !errorActive)
+        {
+            op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+            errorActive = true;
+        }
+        else if (!newLight.isUsed && errorActive) {}
+        else if (newLight.isUsed && errorActive)
+        {
+            op.setUiError("lightUsed", null);
+            errorActive = false;
+        }
+        else if (newLight.isUsed && !errorActive) {}
+        newLight.isUsed = false;
+    }
+
     if (updateLight)
     {
         newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });

@@ -62,11 +62,12 @@ const inPolygonOffset = op.inInt("Polygon Offset", 1);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
 const shadowProperties = [inNear, inFar];
-inMapSize.setUiAttribs({ "greyout": true });
-inShadowStrength.setUiAttribs({ "greyout": true });
-inNear.setUiAttribs({ "greyout": true });
-inFar.setUiAttribs({ "greyout": true });
-inPolygonOffset.setUiAttribs({ "greyout": true });
+inMapSize.setUiAttribs({ "greyout": !inCastShadow.get() });
+inShadowStrength.setUiAttribs({ "greyout": !inCastShadow.get() });
+inNear.setUiAttribs({ "greyout": !inCastShadow.get() });
+inBias.setUiAttribs({ "greyout": !inCastShadow.get() });
+inFar.setUiAttribs({ "greyout": !inCastShadow.get() });
+inPolygonOffset.setUiAttribs({ "greyout": !inCastShadow.get() });
 
 let updating = false;
 
@@ -227,11 +228,29 @@ function drawHelpers()
     }
 }
 
-let hasRenderedCubemapOnce = false;
-
+let errorActive = false;
 inTrigger.onTriggered = function ()
 {
     if (updating) return;
+
+    if (!cgl.frameStore.shadowPass)
+    {
+        if (!newLight.isUsed && !errorActive)
+        {
+            op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
+            errorActive = true;
+        }
+        else if (!newLight.isUsed && errorActive) {}
+        else if (newLight.isUsed && errorActive)
+        {
+            op.setUiError("lightUsed", null);
+            errorActive = false;
+        }
+        else if (newLight.isUsed && !errorActive) {}
+
+        newLight.isUsed = false;
+    }
+
     if (updateLight)
     {
         newLight.position = [0, 1, 2].map(function (i) { return positionIn[i].get(); });
@@ -252,6 +271,7 @@ inTrigger.onTriggered = function ()
     newLight.position = position;
 
     drawHelpers();
+
 
     cgl.frameStore.lightStack.push(newLight);
 
@@ -274,8 +294,6 @@ inTrigger.onTriggered = function ()
             outCubemap.set(null);
             outCubemap.set(newLight.shadowCubeMap);
         }
-
-        hasRenderedCubemapOnce = true;
     }
 
     outTrigger.trigger();

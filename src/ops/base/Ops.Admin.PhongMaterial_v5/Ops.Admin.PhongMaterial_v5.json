@@ -198,13 +198,8 @@
             },
             {
                 "type": "2",
-                "name": "Environment Reflection Texture",
+                "name": "Environment Map",
                 "group": "Textures"
-            },
-            {
-                "type": "0",
-                "name": "Environment Texture Strength",
-                "subType": "number"
             },
             {
                 "type": "0",
@@ -257,6 +252,12 @@
             {
                 "type": "0",
                 "name": "Emissive Intensity",
+                "group": "Texture Transforms",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Env Map Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
