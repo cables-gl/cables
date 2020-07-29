@@ -17,7 +17,7 @@ In a typical Situations you have one `SetVariable` / `SetVariableString` op and 
 
 ## Settings variables from outside cables
 
-When you embed a patch into your website (see [Docs: Embedding](https://docs.cables.gl/dev_embed/dev_embed.html)) you can set cables-variables in your JavaScript-code:
+When you embed a patch into your website (see [Docs: Embedding](https://dev.cables.gl/docs/4_export_embed/dev_embed/dev_embed)) you can set cables-variables in your JavaScript-code:
 
 short version:
 
