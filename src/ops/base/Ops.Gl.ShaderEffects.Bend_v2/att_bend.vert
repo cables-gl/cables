@@ -1,7 +1,4 @@
-UNI float MOD_amount;
-UNI vec2 MOD_range;
-UNI mat4 MOD_transMatrix;
-UNI mat4 MOD_invTransMatrix;
+
 
 void MOD_bendDistort(inout vec3 pos, inout vec3 norm)
 {
