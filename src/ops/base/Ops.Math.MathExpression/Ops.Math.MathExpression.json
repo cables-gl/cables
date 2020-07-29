@@ -56,15 +56,11 @@
                 "type": "0",
                 "name": "Expression Valid",
                 "subType": "boolean"
-            },
-            {
-                "type": "5",
-                "name": "Expression"
             }
         ],
         "name": "Ops.Math.MathExpression"
     },
-    "summary": "",
+    "summary": "calculates a user defined mathematical expression with up to 4 variables",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -73,35 +69,35 @@
         "ports": [
             {
                 "name": "A",
-                "text": "a input"
+                "text": "a input, default value if not connected: 0"
             },
             {
                 "name": "B",
-                "text": "b input"
+                "text": "b input, default value if not connected: 0"
             },
             {
                 "name": "C",
-                "text": "c input"
+                "text": "c input, default value if not connected: 0"
             },
             {
                 "name": "D",
-                "text": "d input"
+                "text": "d input, default value if not connected: 0"
             },
             {
-                "name": "Equation",
-                "text": "equation to evaluate, e.g. a+b+c+d"
+                "name": "Expression",
+                "text": "mathematical expression to be calculated: the variables a, b, c, d can be used here"
             },
             {
                 "name": "Result",
                 "text": "result of the equation"
             },
             {
-                "name": "Equation Valid",
-                "text": "indicates if the equation is a valid mathematical expression"
+                "name": "Expression Valid",
+                "text": "returns true if the expression is valid, false otherwise"
             },
             {
-                "name": "Equation",
-                "text": "equation to evaluate, e.g. a+b+c+d"
+                "name": "Expression",
+                "text": "mathematical expression to be calculated: the variables a, b, c, d can be used here"
             }
         ]
     }

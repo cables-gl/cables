@@ -10,6 +10,11 @@
             "message": "Ops.User.cables.ShadowModule renamed to Ops.Admin.ShadowModule",
             "author": "cables",
             "date": 1588166898814
+        },
+        {
+            "message": "Ops.Admin.ShadowModule renamed to Ops.Deprecated.Admin.ShadowModule",
+            "author": "pandur",
+            "date": 1596056018705
         }
     ],
     "authorName": "cables",

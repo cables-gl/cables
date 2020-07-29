@@ -80,5 +80,13 @@
             }
         ],
         "name": "Ops.Exp.Gl.Physics.Body.PhysicsCube_v2"
+    },
+    "summary": "physical body in form of a cube",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

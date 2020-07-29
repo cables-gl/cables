@@ -1,7 +1,7 @@
 {
     "authorName": "cables",
-    "id": "724eeabe-b9a3-4605-9383-c2f3878b5397",
-    "created": 1578011163119,
+    "id": "6a9182dd-7317-4aeb-85c5-5f2aef2d88e6",
+    "created": 1580225100838,
     "layout": {
         "portsIn": [
             {
@@ -36,6 +36,24 @@
                 "type": "0",
                 "name": "Z",
                 "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At X",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Y",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Z",
+                "group": "Point At",
                 "subType": "number"
             },
             {
@@ -76,48 +94,32 @@
             },
             {
                 "type": "0",
-                "name": "Falloff",
+                "name": "Cone Angle",
+                "group": "Cone Attributes",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Cast Shadow",
-                "subType": "boolean"
+                "name": "Inner Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Map Size index",
-                "subType": "integer"
+                "name": "Spot Exponent",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Shadow Strength",
                 "group": "Shadow Map Settings",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Near",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Far",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Bias",
-                "group": "Shadow Map Settings",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Polygon Offset",
-                "group": "Shadow Map Settings",
-                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -127,20 +129,16 @@
             },
             {
                 "type": "2",
-                "name": "Cubemap"
-            },
-            {
-                "type": "2",
-                "name": "Cubemap Projection"
+                "name": "Shadow Map"
             }
         ],
-        "name": "Ops.Admin.ShadowPointLight"
+        "name": "Ops.Admin.ShadowSpotLight"
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowLambertPointLight renamed to Ops.Admin.ShadowPointLight",
-            "author": "cables",
-            "date": 1578416772916
+            "message": "Ops.Admin.ShadowSpotLight renamed to Ops.Admin.SimoBachelorSpot",
+            "author": "pandur",
+            "date": 1596055970851
         }
     ]
 }

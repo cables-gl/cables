@@ -96,5 +96,13 @@
             "author": "pandur",
             "date": 1596031345309
         }
-    ]
+    ],
+    "summary": "do not draw pixels inside a defined 3d area",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

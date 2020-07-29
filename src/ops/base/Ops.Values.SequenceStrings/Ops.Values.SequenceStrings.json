@@ -148,5 +148,13 @@
             }
         ],
         "name": "Ops.Values.SequenceStrings"
+    },
+    "summary": "control order and flow of strings",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

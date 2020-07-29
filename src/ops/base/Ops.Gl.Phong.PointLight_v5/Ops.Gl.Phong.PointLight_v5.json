@@ -150,6 +150,116 @@
             "message": "Ops.User.cables.ShadowPointLightCGL renamed to Ops.Admin.ShadowPointLightCGL",
             "author": "cables",
             "date": 1588083927621
+        },
+        {
+            "message": "Ops.Admin.ShadowPointLightCGL renamed to Ops.Gl.Phong.PointLight_v5",
+            "author": "pandur",
+            "date": 1596055745231
         }
-    ]
+    ],
+    "summary": "Point light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the point light"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the point light"
+            },
+            {
+                "name": "X",
+                "text": "position x"
+            },
+            {
+                "name": "Y",
+                "text": "position y"
+            },
+            {
+                "name": "Z",
+                "text": "position z"
+            },
+            {
+                "name": "R",
+                "text": "diffuse color channel R"
+            },
+            {
+                "name": "G",
+                "text": "diffuse color channel G"
+            },
+            {
+                "name": "B",
+                "text": "diffuse color channel B"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular color channel B"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff within effective radius"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if activated, light will generate a shadow map to be used with the shadow material extension"
+            },
+            {
+                "name": "Map Size index",
+                "text": "index of the map size"
+            },
+            {
+                "name": "Map Size",
+                "text": "the size of the generated shadow map, possible values: 256, 512, 1024, 2048"
+            },
+            {
+                "name": "Shadow Strength",
+                "text": "strength of the shadows"
+            },
+            {
+                "name": "Near",
+                "text": "the near value of the shadow camera's frustum"
+            },
+            {
+                "name": "Far",
+                "text": "the far value of the shadow camera's frustum"
+            },
+            {
+                "name": "Bias",
+                "text": "biasing for the shadow comparison, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Polygon Offset",
+                "text": "polygon offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            },
+            {
+                "name": "Cubemap",
+                "text": "generated shadow cubemap output"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "equirectangular projection of shadow cubemap"
+            }
+        ]
+    }
 }

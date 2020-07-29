@@ -7,7 +7,6 @@ const inExpression = op.inString("Expression", "a*(b+c+d)");
 op.setPortGroup("Expression", [inExpression]);
 const outResult = op.outNumber("Result");
 const outExpressionIsValid = op.outBool("Expression Valid");
-const outExpression = op.outString("Expression");
 
 let currentFunction = inExpression.get();
 let functionValid = false;
@@ -19,13 +18,11 @@ const createFunction = () =>
         currentFunction = new Function("m", "a", "b", "c", "d", `with(m) { return ${inExpression.get()} }`);
         functionValid = true;
         evaluateFunction();
-        outExpression.set(inExpression.get());
         outExpressionIsValid.set(functionValid);
     }
     catch (e)
     {
         functionValid = false;
-        outExpression.set("");
         outExpressionIsValid.set(functionValid);
         if (e instanceof ReferenceError || e instanceof SyntaxError) return;
     }

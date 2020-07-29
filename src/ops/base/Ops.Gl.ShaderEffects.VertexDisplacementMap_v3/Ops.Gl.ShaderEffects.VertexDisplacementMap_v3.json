@@ -98,5 +98,17 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "Displace the vertices of a mesh with the pixels brightness values from a texture",
+    "issues": "",
+    "collections": [
+        "vertexDeformers"
+    ],
+    "relatedops": null,
+    "youtubeids": [
+        "NjG85Qbbl0w"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

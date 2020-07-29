@@ -34,5 +34,15 @@
             }
         ],
         "name": "Ops.Sidebar.Button_v2"
+    },
+    "summary": "sidebar push button/trigger element",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cpRVswVdvI0"
+    ],
+    "docs": {
+        "ports": []
     }
 }

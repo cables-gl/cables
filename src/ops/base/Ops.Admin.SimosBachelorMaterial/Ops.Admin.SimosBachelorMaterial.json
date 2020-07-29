@@ -1,7 +1,7 @@
 {
     "authorName": "cables",
-    "id": "292a9149-4933-4f30-bbe0-0d2b26504c4c",
-    "created": 1576687797849,
+    "id": "d01fcb62-dd50-4748-b8d7-bc7851b1b84d",
+    "created": 1583495367450,
     "layout": {
         "portsIn": [
             {
@@ -40,8 +40,19 @@
             },
             {
                 "type": "0",
+                "name": "Algorithm index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Samples index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Poisson Spread",
+                "group": "Shadow Settings",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -54,13 +65,13 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Admin.ShadowLambertMaterial"
+        "name": "Ops.Admin.ShadowLambertMaterial_v2"
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowLambertMaterial renamed to Ops.Admin.ShadowLambertMaterial",
-            "author": "cables",
-            "date": 1578416716883
+            "message": "Ops.Admin.ShadowLambertMaterial_v2 renamed to Ops.Admin.SimosBachelorMaterial",
+            "author": "pandur",
+            "date": 1596055873046
         }
     ]
 }

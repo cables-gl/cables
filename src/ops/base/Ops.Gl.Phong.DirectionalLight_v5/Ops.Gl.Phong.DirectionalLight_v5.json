@@ -1,7 +1,7 @@
 {
     "authorName": "cables",
-    "id": "76418c17-abd5-401b-82e2-688db6f966ee",
-    "created": 1587556120293,
+    "id": "9f41bf91-f4e0-4ce4-89d8-72627b76261e",
+    "created": 1587646911645,
     "coreLibs": [
         "cgl_cubemap",
         "cgl_light"
@@ -14,50 +14,20 @@
             },
             {
                 "type": "0",
-                "name": "Intensity",
-                "group": "Light Attributes",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Radius",
-                "group": "Light Attributes",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "X",
-                "group": "Position",
+                "group": "Direction",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Y",
-                "group": "Position",
+                "group": "Direction",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Z",
-                "group": "Position",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Point At X",
-                "group": "Point At",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Point At Y",
-                "group": "Point At",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Point At Z",
-                "group": "Point At",
+                "group": "Direction",
                 "subType": "number"
             },
             {
@@ -98,25 +68,8 @@
             },
             {
                 "type": "0",
-                "name": "Cone Angle",
-                "group": "Cone Attributes",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Inner Cone Angle",
-                "group": "Cone Attributes",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Spot Exponent",
-                "group": "Cone Attributes",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Falloff",
+                "name": "Intensity",
+                "group": "Light Attributes",
                 "subType": "number"
             },
             {
@@ -137,6 +90,12 @@
             {
                 "type": "0",
                 "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "LR-BottomTop",
                 "group": "Shadow Map Settings",
                 "subType": "number"
             },
@@ -223,23 +182,135 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.Admin.ShadowSpotLightCGL"
+        "name": "Ops.Admin.ShadowDirectionalLightCGL"
     },
     "changelog": [
         {
-            "message": "Ops.User.cables.ShadowSpotTestLightCGL renamed to Ops.Admin.ShadowSpotLightCGL",
+            "message": "Ops.User.cables.ShadowDirectionalLightCGL renamed to Ops.Admin.ShadowDirectionalLightCGL",
             "author": "cables",
-            "date": 1587654173156
+            "date": 1587654151910
         },
         {
-            "message": " added core lib: vargetset",
-            "author": "stephan",
-            "date": 1589968927218
-        },
-        {
-            "message": " added core lib: cgl_functions",
-            "author": "stephan",
-            "date": 1590495514991
+            "message": "Ops.Admin.ShadowDirectionalLightCGL renamed to Ops.Gl.Phong.DirectionalLight_v5",
+            "author": "pandur",
+            "date": 1596055839393
         }
-    ]
+    ],
+    "summary": "Directional light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "X",
+                "text": "Direction X"
+            },
+            {
+                "name": "Y",
+                "text": "Direction Y"
+            },
+            {
+                "name": "Z",
+                "text": "Direction Z"
+            },
+            {
+                "name": "R",
+                "text": "R color channel"
+            },
+            {
+                "name": "G",
+                "text": "G color channel"
+            },
+            {
+                "name": "B",
+                "text": "B color channel"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular reflection color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular reflection color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular reflection color channel B"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the directional light"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if activated, light will generate a shadow map to be used with the shadow material extension"
+            },
+            {
+                "name": "Map Size index",
+                "text": "index of the map size"
+            },
+            {
+                "name": "Map Size",
+                "text": "the size of the generated shadow map, possible values: 256, 512, 1024, 2048"
+            },
+            {
+                "name": "Shadow Strength",
+                "text": "strength of the shadows"
+            },
+            {
+                "name": "LR-BottomTop",
+                "text": "L, R, Bottom and Top culling of the shadow map camera's frustum"
+            },
+            {
+                "name": "Near",
+                "text": "near culling of the shadow map camera's frustum"
+            },
+            {
+                "name": "Far",
+                "text": "far culling of the shadow map camera's frustum"
+            },
+            {
+                "name": "Bias",
+                "text": "biasing for the shadow comparison, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Polygon Offset",
+                "text": "polygon offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Normal Offset",
+                "text": "normal offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Blur Amount",
+                "text": "blur factor for the VSM shadow algorithm, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "MSAA",
+                "text": "MSAA factor"
+            },
+            {
+                "name": "Texture Filter",
+                "text": "texture filter type"
+            },
+            {
+                "name": "Anisotropic",
+                "text": "anisotropic factor"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            },
+            {
+                "name": "Shadow Map",
+                "text": "generated shadow map output"
+            }
+        ]
+    }
 }

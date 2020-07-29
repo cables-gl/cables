@@ -295,6 +295,11 @@
             "message": "Ops.User.cables.PhongMatNew renamed to Ops.Admin.PhongMaterial_v5",
             "author": "cables",
             "date": 1589464726083
+        },
+        {
+            "message": "Ops.Admin.PhongMaterial_v5 renamed to Ops.Gl.Phong.PhongMaterial_v5",
+            "author": "pandur",
+            "date": 1596055546117
         }
     ],
     "summary": "A shaded material for lighting objects",

@@ -103,6 +103,11 @@
             "message": "Ops.User.cables.ShadowLambertDirLight renamed to Ops.Admin.ShadowDirectionalLight",
             "author": "cables",
             "date": 1578416828896
+        },
+        {
+            "message": "Ops.Admin.ShadowDirectionalLight renamed to Ops.Admin.SimoBachelorDirectional",
+            "author": "pandur",
+            "date": 1596055992711
         }
     ]
 }

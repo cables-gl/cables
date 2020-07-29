@@ -17,5 +17,13 @@
             }
         ],
         "name": "Ops.Vars.VarSetArray_v2"
+    },
+    "summary": "Set a variable array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

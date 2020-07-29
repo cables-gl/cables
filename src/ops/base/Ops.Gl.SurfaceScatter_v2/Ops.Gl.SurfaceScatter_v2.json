@@ -104,5 +104,13 @@
             "author": "pandur",
             "date": 1595578570122
         }
-    ]
+    ],
+    "summary": "Scatter an object on the surface of a mesh with different distribution methods",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

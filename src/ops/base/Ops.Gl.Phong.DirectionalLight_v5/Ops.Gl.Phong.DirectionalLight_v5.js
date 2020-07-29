@@ -42,7 +42,7 @@ const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
-inMapSize.setUiAttribs({ "greyout": true, "hidePort": true });
+inMapSize.setUiAttribs({ "greyout": true });
 inShadowStrength.setUiAttribs({ "greyout": true });
 inLRBT.setUiAttribs({ "greyout": true, "hidePort": true });
 inNear.setUiAttribs({ "greyout": true, "hidePort": true });
@@ -50,7 +50,7 @@ inFar.setUiAttribs({ "greyout": true, "hidePort": true });
 inBias.setUiAttribs({ "greyout": true, "hidePort": true });
 inNormalOffset.setUiAttribs({ "greyout": true, "hidePort": true });
 inPolygonOffset.setUiAttribs({ "greyout": true, "hidePort": true });
-inBlur.setUiAttribs({ "greyout": true, "hidePort": true });
+inBlur.setUiAttribs({ "greyout": true });
 
 const inAdvanced = op.inBool("Enable Advanced", false);
 const inMSAA = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none");

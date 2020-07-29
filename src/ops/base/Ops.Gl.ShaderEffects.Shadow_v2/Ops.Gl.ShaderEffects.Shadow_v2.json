@@ -107,9 +107,79 @@
             "message": " added core lib: cgl_shadermodifier",
             "author": "cables",
             "date": 1593523129570
+        },
+        {
+            "message": "Ops.Admin.ShadowModuleModifier renamed to Ops.Gl.ShaderEffects.Shadow_v2",
+            "author": "pandur",
+            "date": 1596055676603
         }
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "add shadow capabilities to any material",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger input"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if true, following meshes will cast shadows, if false, following geometries will NOT cast shadows"
+            },
+            {
+                "name": "Receive Shadow",
+                "text": "if true, following meshes will receive shadows"
+            },
+            {
+                "name": "Algorithm index",
+                "text": "index for algorithm"
+            },
+            {
+                "name": "Algorithm",
+                "text": "choose between the 4 algorithms: Default, PCF (Percentage-Closer Filtered Shadows), Poisson, VSM (Variance Shadow Mapping)"
+            },
+            {
+                "name": "Samples",
+                "text": "only active when PCF or Poisson algorithm is used: amount of samples taken to soften shadows"
+            },
+            {
+                "name": "Sample Distribution",
+                "text": "distribution of sampled points, the higher the value, the smaller the \"wash\", if the value is too low, step artefacts can occur"
+            },
+            {
+                "name": "R",
+                "text": "R color channel of the shadow"
+            },
+            {
+                "name": "G",
+                "text": "G color channel of the shadow"
+            },
+            {
+                "name": "B",
+                "text": "B color channel of the shadow"
+            },
+            {
+                "name": "Opacity Threshold",
+                "text": "alpha threshold for discarding pixels "
+            },
+            {
+                "name": "Alpha Mask Source",
+                "text": "source channel of texture for discarding pixels: r, g, b, a or luminance"
+            },
+            {
+                "name": "Opacity Texture",
+                "text": "alpha texture input"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            }
+        ]
+    }
 }
