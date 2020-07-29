@@ -352,7 +352,6 @@ function createUniforms()
 
 function setUniforms()
 {
-    if (cgl.frameStore.shadowPass) op.log("setting unis in shadowmapss");
     if (STATE.updating) return;
     const receiveShadow = inReceiveShadow.get();
 
@@ -503,20 +502,6 @@ inTrigger.onTriggered = () =>
 
     if (cgl.frameStore.lightStack)
     {
-        if (cgl.frameStore.lightStack.length === 0)
-        {
-            // op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 1);
-            // outTrigger.trigger();
-        }
-        else
-        {
-            let oneLightCastsShadow = false;
-
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
-
-            // if (oneLightCastsShadow) op.setUiError("nolights", null);
-            // else op.setUiError("nolights", "There are no lights that cast shadows. Please add lights to your patch to make this warning disappear.", 0);
-        }
         if (cgl.frameStore.lightStack.length)
         {
             updateShader();
@@ -537,7 +522,6 @@ function checkUiErrors()
         if (cgl.frameStore.lightStack.length === 0)
         {
             op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
-            op.log("JA!");
         }
         else
         {
@@ -556,12 +540,10 @@ function checkUiErrors()
                 else
                 {
                     op.setUiError("inReceiveShadowActive", "Your lights cast shadows but the \"Receive Shadow\" option in this op is not active. Please enable it to use shadows.", 1);
-                    op.log("JA2!");
                 }
             }
             else
             {
-                op.log("JA3!");
                 op.setUiError("nolights2", "There are lights in the patch but none that cast shadows. Please activate the \"Cast Shadow\" property of one of your lights in the patch to make shadows visible.", 1);
                 op.setUiError("inReceiveShadowActive", null);
             }
@@ -570,6 +552,5 @@ function checkUiErrors()
     else
     {
         op.setUiError("nolights", "There are no lights in the patch. Please add lights before this op and activate their \"Cast Shadow\" property to be able to use shadows.", 1);
-        op.log("JA4!");
     }
 }

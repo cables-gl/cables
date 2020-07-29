@@ -280,8 +280,6 @@ inTrigger.onTriggered = function ()
     }
 
     outTrigger.trigger();
-    if (!newLight.isUsed) op.setUiError("lightUsed", "No operator is using this light. Make sure this op is positioned before an operator that uses lights. Also make sure there is an operator that uses lights after this.", 1); // newLight.isUsed = false;
-    else op.setUiError("lightUsed", null);
-    // op.log(cgl.frameStore.lightStack.indexOf(newLight));
+
     cgl.frameStore.lightStack.pop();
 };
