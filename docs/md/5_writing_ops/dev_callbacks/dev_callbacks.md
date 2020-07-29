@@ -151,6 +151,7 @@ The following line of of code will print 'hello world' to the console
 op.log( 'hello world' );
 ```
 <br>
+
 ![Button](img/dev_callbacks_console_log_devtools_chrome.png)
 
 Do **not** use `console.log()`!

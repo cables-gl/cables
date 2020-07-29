@@ -64,7 +64,7 @@ file ending: `.mid`
 
 converts midi to json
 
-(example)[https://cables.gl/p/59b3e840188615644c270992]
+[example](https://cables.gl/op/Ops.Audio.MidiJson)
 
 ### Mesh sequence
 
@@ -72,7 +72,7 @@ file ending: `.seq.zip`
 
 converts a sequence of obj files to a morphing animation
 
-(example)[https://cables.gl/p/56e66f3c8b0badb6435485f0]
+[example](https://cables.gl/op/Ops.Gl.MeshSequence)
 
 
 

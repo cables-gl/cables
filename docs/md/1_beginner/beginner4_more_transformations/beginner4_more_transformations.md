@@ -4,7 +4,7 @@
 [Back to part 3](../beginner3_color/beginner3_color)
 
 
-To reuse the circle and draw multiple instances of them you can use the [Ops.Trigger.Repeat](https://cables.gl/op/Ops.Trigger.Repeat)
+To reuse the circle and draw multiple instances of them you can use the [Ops.Trigger.Repeat](https://cables.gl/op/Ops.Trigger.Repeat_v2)
 
 Add it like this:
 

@@ -3,7 +3,7 @@
 ## When does this happen?
 
 Sometimes you want to access ressouces on different servers than your patch is running on, these may be
-images, some api or any different file. Check [this patch](https://dev.cables.gl/p/5FQ08W) for example, that
+images, some api or any different file. Check [this patch](https://cables.gl/p/5FQ08W) for example, that
 loads data from an API to get the current temperature in Berlin.
 
 For this the provider of the API has to allow for access of the data from a browser by providing
