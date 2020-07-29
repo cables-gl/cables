@@ -32,5 +32,17 @@
         ],
         "name": "Ops.Gl.ShaderEffects.Twist_v2"
     },
-    "summary": "twist a mesh around an axis"
+    "summary": "twist a mesh around an axis",
+    "changelog": [
+        {
+            "message": "Ops.Gl.ShaderEffects.Twist_v2 renamed to Ops.Gl.ShaderEffects.Twist_v3",
+            "author": "pandur",
+            "date": 1596029913466
+        },
+        {
+            "message": "Ops.Gl.ShaderEffects.Twist_v3 renamed to Ops.Gl.ShaderEffects.Twist_v2",
+            "author": "pandur",
+            "date": 1596029956686
+        }
+    ]
 }

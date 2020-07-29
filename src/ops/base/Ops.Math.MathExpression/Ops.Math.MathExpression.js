@@ -3,30 +3,30 @@ const inB = op.inFloat("B", 1);
 const inC = op.inFloat("C", 2);
 const inD = op.inFloat("D", 3);
 op.setPortGroup("Parameters", [inA, inB, inC, inD]);
-const inEquation = op.inString("Equation", "a*(b+c+d)");
-op.setPortGroup("Equation", [inEquation]);
+const inExpression = op.inString("Expression", "a*(b+c+d)");
+op.setPortGroup("Expression", [inExpression]);
 const outResult = op.outNumber("Result");
-const outEquationIsValid = op.outBool("Equation Valid");
-const outEquation = op.outString("Equation");
+const outExpressionIsValid = op.outBool("Expression Valid");
+const outExpression = op.outString("Expression");
 
-let currentFunction = inEquation.get();
+let currentFunction = inExpression.get();
 let functionValid = false;
 
 const createFunction = () =>
 {
     try
     {
-        currentFunction = new Function("m", "a", "b", "c", "d", `with(m) { return ${inEquation.get()} }`);
+        currentFunction = new Function("m", "a", "b", "c", "d", `with(m) { return ${inExpression.get()} }`);
         functionValid = true;
         evaluateFunction();
-        outEquation.set(inEquation.get());
-        outEquationIsValid.set(functionValid);
+        outExpression.set(inExpression.get());
+        outExpressionIsValid.set(functionValid);
     }
     catch (e)
     {
         functionValid = false;
-        outEquation.set("");
-        outEquationIsValid.set(functionValid);
+        outExpression.set("");
+        outExpressionIsValid.set(functionValid);
         if (e instanceof ReferenceError || e instanceof SyntaxError) return;
     }
 };
@@ -36,13 +36,13 @@ const evaluateFunction = () =>
     if (functionValid)
     {
         outResult.set(currentFunction(Math, inA.get(), inB.get(), inC.get(), inD.get()));
-        if (!inEquation.get()) outResult.set(0);
+        if (!inExpression.get()) outResult.set(0);
     }
 
-    outEquationIsValid.set(functionValid);
+    outExpressionIsValid.set(functionValid);
 };
 
 
 inA.onChange = inB.onChange = inC.onChange = inD.onChange = evaluateFunction;
-inEquation.onChange = createFunction;
+inExpression.onChange = createFunction;
 createFunction();
