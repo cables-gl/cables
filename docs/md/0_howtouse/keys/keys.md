@@ -28,6 +28,8 @@
 - `[mod] + a`: Select all ops
 - `[mod] + z`: Undo
 
+---
+
 ## Editor
 
 *cables* uses the editor [Ace](https://ace.c9.io) which has a good support for various keyboard shortcut, check [their docs](https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts) for a full reference.
@@ -39,8 +41,8 @@
 
 ## Timeline
 
-- `h`: Scale timeline to show all keys 
-- `j/k`: Jump to previous / next key 
+- `h`: Scale timeline to show all keys
+- `j/k`: Jump to previous / next key
 - `left` / `right` move scrubber 1 frame left / right
 - `[mod] + a`: Select all keys
 - `[mod] + z`: Undo
