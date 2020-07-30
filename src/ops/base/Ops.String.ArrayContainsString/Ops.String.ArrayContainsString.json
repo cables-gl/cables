@@ -14,13 +14,30 @@
     ],
     "authorName": "pandur",
     "created": 1591695070465,
-    "summary": "Check if an array contains a string (find,search,indexOf)",
+    "summary": "Check if an array contains a string which can also be a number (find,search,indexOf)",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array to search through"
+            },
+            {
+                "name": "SearchValue",
+                "text": "value to find"
+            },
+            {
+                "name": "Found",
+                "text": "outputs a boolean if found"
+            },
+            {
+                "name": "Index",
+                "text": "index in array that string was found at"
+            }
+        ]
     },
     "layout": {
         "portsIn": [

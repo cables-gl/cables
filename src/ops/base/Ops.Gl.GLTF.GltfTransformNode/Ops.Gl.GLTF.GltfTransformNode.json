@@ -67,5 +67,13 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfTransformNode"
+    },
+    "summary": "set transformation of a gltf node",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
