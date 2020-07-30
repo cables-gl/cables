@@ -61,5 +61,13 @@
     },
     "libs": [
         "cannon.js"
-    ]
+    ],
+    "summary": "create physics bodies/bounding boxes for gltf nodes",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

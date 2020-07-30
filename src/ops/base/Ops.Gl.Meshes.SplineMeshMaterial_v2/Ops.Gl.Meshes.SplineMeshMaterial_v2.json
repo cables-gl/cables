@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.SplineMeshNewMaterial renamed to Ops.Admin.SplineMeshNewMaterial",
             "author": "pandur",
             "date": 1591710779962
+        },
+        {
+            "message": "Ops.Admin.SplineMeshNewMaterial renamed to Ops.Gl.Meshes.SplineMeshMaterial_v2",
+            "author": "pandur",
+            "date": 1596102602453
         }
     ],
     "authorName": "pandur",
