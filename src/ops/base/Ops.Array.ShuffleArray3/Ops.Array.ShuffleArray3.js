@@ -14,7 +14,7 @@ function fisherYatesShuffle(array)
     var j = 0;
     var temp = null;
 
-    for (i = array.length - 1; i > 0; i -= 1)
+    for (i = array.length - 1; i >= 0; i -= 1)
     {
         j = Math.floor(Math.seededRandom() * (i + 1));
         temp = array[i];
@@ -35,12 +35,9 @@ function update()
     var temp = null;
     Math.randomSeed=inSeed.get()+1;
 
-    for (i = 0; i < arr.length; i += 3)
-    {
-        rndArr[i/3]=i;
-    }
+    for (i = 0; i < arr.length; i += 3) rndArr[i/3]=i;
 
-    fisherYatesShuffle(rndArr);
+    for(let i=0;i<4;i++) fisherYatesShuffle(rndArr);
 
     for (i = 0; i < arr.length; i += 3)
     {

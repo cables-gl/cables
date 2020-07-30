@@ -30,6 +30,7 @@ var cgl=op.patch.cgl;
 var videoElement=document.createElement('video');
 videoElement.setAttribute('playsinline', '');
 videoElement.setAttribute('webkit-playsinline', '');
+// document.body.appendChild(videoElement);
 var intervalID=null;
 fps.set(25);
 volume.set(1);
@@ -150,10 +151,29 @@ function updateTexture()
     }
 
     if(!tex)reInitTexture();
+    if(!canPlayThrough.get())return;
     if(!videoElementPlaying)return;
+    if(!videoElement)return;
+    if(videoElement.videoHeight<=0)
+    {
+        console.log("video size is 0!");
+        console.log(videoElement);
+        return;
+    }
+    if(videoElement.videoWidth<=0)
+    {
+        console.log("video width is 0!");
+        console.log(videoElement);
+        return;
+    }
+
+    // console.log("dur",videoElement.duration);
+
 
     tex.height=videoElement.videoHeight;
     tex.width=videoElement.videoWidth;
+
+    // console.log("videoElement.videoHeight",videoElement.videoHeight);
 
     var perc=(videoElement.currentTime)/videoElement.duration;
     if(!isNaN(perc)) outProgress.set(perc);

@@ -125,13 +125,20 @@ function setupArray()
 
     num=Math.floor(transforms.length/3);
 
+
     var colArr = inColor.get();
     var scales=inScales.get();
 
     shader.toggleDefine("COLORIZE_INSTANCES",colArr);
 
     if(matrixArray.length!=num*16) matrixArray=new Float32Array(num*16);
-    if(instColorArray.length!=num*4) instColorArray=new Float32Array(num*4);
+    if(instColorArray.length!=num*4)
+    {
+        arrayChangedColor=true;
+        instColorArray=new Float32Array(num*4);
+    }
+
+
 
     const rotArr=inRot.get();
 
@@ -180,6 +187,7 @@ function setupArray()
 
     if(arrayChangedTrans) mesh.addAttribute('instMat', matrixArray, 16);
     if(arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { instanced: true });
+// console.log("num",num,matrixArray.length/16);
 
     arrayChangedColor=false;
     recalc=false;
@@ -230,9 +238,6 @@ function doRender()
         }
 
         shader.toggleDefine("COLORIZE_INSTANCES",inColor.get());
-
-
-
     }
 
 
