@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1580310541911
+        },
+        {
+            "message": "Ops.String.StringBreak_v3 renamed to Ops.Deprecated.String.StringBreak_v3",
+            "author": "pandur",
+            "date": 1596094357463
         }
     ],
     "authorName": "pandur",

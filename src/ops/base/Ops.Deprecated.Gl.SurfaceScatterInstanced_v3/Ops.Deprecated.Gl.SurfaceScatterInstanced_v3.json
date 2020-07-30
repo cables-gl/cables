@@ -10,6 +10,11 @@
             "message": "now works with non indexed geometries",
             "author": "pandur",
             "date": 1567170200747
+        },
+        {
+            "message": "Ops.Gl.SurfaceScatterInstanced_v3 renamed to Ops.Deprecated.Gl.SurfaceScatterInstanced_v3",
+            "author": "pandur",
+            "date": 1596094124322
         }
     ],
     "authorName": "pandur",

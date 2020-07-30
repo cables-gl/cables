@@ -30,5 +30,12 @@
             }
         ],
         "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByAttribute"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.LimitMeshByAttribute renamed to Ops.Deprecated.Exp.Gl.ShaderEffects.LimitMeshByAttribute",
+            "author": "pandur",
+            "date": 1596094279257
+        }
+    ]
 }

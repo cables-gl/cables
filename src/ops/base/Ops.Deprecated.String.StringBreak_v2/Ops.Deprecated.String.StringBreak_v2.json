@@ -30,5 +30,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.String.StringBreak_v2 renamed to Ops.Deprecated.String.StringBreak_v2",
+            "author": "pandur",
+            "date": 1596094375376
+        }
+    ]
 }

@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1559035867747
+        },
+        {
+            "message": "Ops.TestOp renamed to Ops.Admin.TestOp",
+            "author": "pandur",
+            "date": 1596094417404
         }
     ],
     "authorName": "pandur",

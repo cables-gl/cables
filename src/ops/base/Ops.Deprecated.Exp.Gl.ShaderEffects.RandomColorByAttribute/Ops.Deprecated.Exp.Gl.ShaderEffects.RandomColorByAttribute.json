@@ -55,5 +55,12 @@
             }
         ],
         "name": "Ops.Exp.Gl.ShaderEffects.RandomColorByAttribute"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.RandomColorByAttribute renamed to Ops.Deprecated.Exp.Gl.ShaderEffects.RandomColorByAttribute",
+            "author": "pandur",
+            "date": 1596094257482
+        }
+    ]
 }

@@ -62,5 +62,12 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "Ops.Gl.SurfaceScatterInstanced_v2 renamed to Ops.Deprecated.Gl.SurfaceScatterInstanced_v2",
+            "author": "pandur",
+            "date": 1596094151611
+        }
+    ]
 }
