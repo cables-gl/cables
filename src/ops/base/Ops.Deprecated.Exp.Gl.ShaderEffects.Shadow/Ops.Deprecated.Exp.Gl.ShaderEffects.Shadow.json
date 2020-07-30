@@ -31,5 +31,12 @@
     "summary": "adds shadow to a material",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.Shadow renamed to Ops.Deprecated.Exp.Gl.ShaderEffects.Shadow",
+            "author": "pandur",
+            "date": 1596093660325
+        }
+    ]
 }

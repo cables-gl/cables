@@ -38,5 +38,12 @@
     "summary": "set velocity of a physic object",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.Physics.SetVelocity renamed to Ops.Physics.SetVelocity",
+            "author": "pandur",
+            "date": 1596093483022
+        }
+    ]
 }

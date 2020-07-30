@@ -18,5 +18,12 @@
         ],
         "name": "Ops.Gl.IgnoreInShadowPass"
     },
-    "summary": "do not trigger next when rendering the shadow pass"
+    "summary": "do not trigger next when rendering the shadow pass",
+    "changelog": [
+        {
+            "message": "Ops.Gl.IgnoreInShadowPass renamed to Ops.Deprecated.Gl.IgnoreInShadowPass",
+            "author": "pandur",
+            "date": 1596093701032
+        }
+    ]
 }

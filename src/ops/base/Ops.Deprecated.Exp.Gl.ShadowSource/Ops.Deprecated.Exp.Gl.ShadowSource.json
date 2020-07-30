@@ -83,5 +83,12 @@
                 "text": "Adjust this if you have weird artifacts on your shadow."
             }
         ]
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.ShadowSource renamed to Ops.Deprecated.Exp.Gl.ShadowSource",
+            "author": "pandur",
+            "date": 1596093681654
+        }
+    ]
 }

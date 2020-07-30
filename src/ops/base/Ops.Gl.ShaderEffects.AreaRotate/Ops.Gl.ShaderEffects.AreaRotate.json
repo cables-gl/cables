@@ -58,6 +58,11 @@
             "message": "fixed - ports",
             "author": "andro",
             "date": 1559038475780
+        },
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.AreaRotate renamed to Ops.Gl.ShaderEffects.AreaRotate",
+            "author": "pandur",
+            "date": 1596093602153
         }
     ]
 }

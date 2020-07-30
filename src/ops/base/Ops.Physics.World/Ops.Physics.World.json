@@ -77,6 +77,11 @@
             "message": " added core lib: cgl_wireframes",
             "author": "pandur",
             "date": 1593499136219
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.World renamed to Ops.Physics.World",
+            "author": "pandur",
+            "date": 1596093306885
         }
     ],
     "coreLibs": [

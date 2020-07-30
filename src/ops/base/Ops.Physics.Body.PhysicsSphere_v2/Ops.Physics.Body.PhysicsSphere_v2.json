@@ -15,6 +15,11 @@
             "message": "Ops.Exp.Gl.Physics.Body.BodySphere_v2 renamed to Ops.Exp.Gl.Physics.Body.PhysicsSphere_v2",
             "author": "pandur",
             "date": 1560413822704
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.Body.PhysicsSphere_v2 renamed to Ops.Physics.Body.PhysicsSphere_v2",
+            "author": "pandur",
+            "date": 1596093434475
         }
     ],
     "authorName": "pandur",

@@ -108,6 +108,11 @@
             "message": "added sine animation",
             "author": "pandur",
             "date": 1555495594918
+        },
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.LimitMeshByTexCoord renamed to Ops.Gl.ShaderEffects.LimitMeshByTexCoord",
+            "author": "pandur",
+            "date": 1596093630339
         }
     ],
     "youtubeid": "",

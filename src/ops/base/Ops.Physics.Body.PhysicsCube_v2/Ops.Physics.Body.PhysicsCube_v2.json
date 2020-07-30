@@ -1,13 +1,28 @@
 {
-    "author": "59d794f763898eb73bd67a7e",
+    "id": "c3779911-688a-4f4e-a295-90529c95bd8d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593431098973
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.Body.PhysicsCube_v2 renamed to Ops.Physics.Body.PhysicsCube_v2",
+            "author": "pandur",
+            "date": 1596093418363
+        }
+    ],
     "authorName": "pandur",
-    "id": "c529ee2b-87cb-4631-82c6-a84a61271d17",
-    "created": 1510070485832,
+    "created": 1593431107187,
     "layout": {
         "portsIn": [
             {
                 "type": "1",
                 "name": "Exec"
+            },
+            {
+                "type": "5",
+                "name": "Name"
             },
             {
                 "type": "0",
@@ -16,7 +31,17 @@
             },
             {
                 "type": "0",
-                "name": "Radius",
+                "name": "sizeX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "sizeY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "sizeZ",
                 "subType": "number"
             },
             {
@@ -25,58 +50,14 @@
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Pos X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Pos Z",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "dir X",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "dir Y",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "dir Z",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Speed",
-                "subType": "number"
-            },
-            {
                 "type": "1",
                 "name": "Reset"
-            },
-            {
-                "type": "1",
-                "name": "Spawn"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
                 "name": "Next"
-            },
-            {
-                "type": "0",
-                "name": "Out Radius",
-                "subType": "number"
             },
             {
                 "type": "0",
@@ -95,21 +76,22 @@
             },
             {
                 "type": "0",
-                "name": "Index",
-                "subType": "number"
+                "name": "Ray Hit",
+                "subType": "boolean"
             },
             {
                 "type": "1",
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Cannon"
+        "name": "Ops.Exp.Gl.Physics.Body.PhysicsCube_v2"
     },
-    "summary": "shoot physic objects",
+    "summary": "physical body in form of a cube",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
     "docs": {
         "ports": []
-    },
-    "libs": [
-        "cannon.js"
-    ]
+    }
 }

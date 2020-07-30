@@ -16,5 +16,12 @@
             }
         ],
         "name": "Ops.Sidebar.SidebarAsObject"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Sidebar.SidebarAsObject renamed to Ops.Deprecated.Sidebar.SidebarAsObject",
+            "author": "pandur",
+            "date": 1596093718836
+        }
+    ]
 }

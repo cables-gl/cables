@@ -12,5 +12,12 @@
     },
     "authorName": "pandur",
     "id": "d6554d6c-0742-4559-b0a4-29ad0ae1e25b",
-    "created": 1558014381304
+    "created": 1558014381304,
+    "changelog": [
+        {
+            "message": "Ops.Html.WebGlVersion renamed to Ops.Gl.WebGlVersion",
+            "author": "pandur",
+            "date": 1596093575068
+        }
+    ]
 }
