@@ -32,5 +32,12 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Gl.Shader.VertexColorMaterial renamed to Ops.Deprecated.Gl.Shader.VertexColorMaterial",
+            "author": "pandur",
+            "date": 1596093928557
+        }
+    ]
 }

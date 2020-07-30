@@ -38,5 +38,12 @@
     "summary": "request a file from a webserver and output it as a string",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Net.AjaxRequestString renamed to Ops.Deprecated.Net.AjaxRequestString",
+            "author": "pandur",
+            "date": 1596093839117
+        }
+    ]
 }

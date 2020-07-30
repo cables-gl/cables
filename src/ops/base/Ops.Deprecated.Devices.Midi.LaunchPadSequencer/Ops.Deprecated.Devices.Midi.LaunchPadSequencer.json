@@ -41,5 +41,12 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Devices.Midi.LaunchPadSequencer renamed to Ops.Deprecated.Devices.Midi.LaunchPadSequencer",
+            "author": "pandur",
+            "date": 1596093793586
+        }
+    ]
 }

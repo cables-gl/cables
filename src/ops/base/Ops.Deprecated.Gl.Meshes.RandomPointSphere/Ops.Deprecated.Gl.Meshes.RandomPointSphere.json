@@ -77,5 +77,12 @@
             "id": "b585a1b4-8c92-43cc-b6db-35f02e064280",
             "date": 1568967370746
         }
+    ],
+    "changelog": [
+        {
+            "message": "Ops.Gl.Meshes.RandomPointSphere renamed to Ops.Deprecated.Gl.Meshes.RandomPointSphere",
+            "author": "pandur",
+            "date": 1596093988609
+        }
     ]
 }

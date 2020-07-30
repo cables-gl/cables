@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1565725804019
+        },
+        {
+            "message": "Ops.Exp.LaserSimpleLine renamed to Ops.Deprecated.Exp.LaserSimpleLine",
+            "author": "pandur",
+            "date": 1596093823027
         }
     ],
     "authorName": "pandur",

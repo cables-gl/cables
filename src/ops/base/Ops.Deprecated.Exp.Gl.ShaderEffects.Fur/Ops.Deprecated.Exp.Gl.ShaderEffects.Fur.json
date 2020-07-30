@@ -57,5 +57,12 @@
     "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.Fur renamed to Ops.Deprecated.Exp.Gl.ShaderEffects.Fur",
+            "author": "pandur",
+            "date": 1596093912256
+        }
+    ]
 }

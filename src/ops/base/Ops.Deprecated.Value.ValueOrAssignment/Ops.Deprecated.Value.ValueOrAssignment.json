@@ -25,5 +25,12 @@
     "summary": "outputs value or if false, default value",
     "docs": {
         "ports": []
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Value.ValueOrAssignment renamed to Ops.Deprecated.Value.ValueOrAssignment",
+            "author": "pandur",
+            "date": 1596093966744
+        }
+    ]
 }

@@ -93,6 +93,11 @@
             "message": "added: draw parameter",
             "author": "pandur",
             "date": 1550863269608
+        },
+        {
+            "message": "Ops.Gl.Geometry.GeometryBounds renamed to Ops.Deprecated.Gl.Geometry.GeometryBounds",
+            "author": "pandur",
+            "date": 1596093896253
         }
     ]
 }

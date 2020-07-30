@@ -76,5 +76,12 @@
             }
         ],
         "name": "Ops.Exp.LaserMergeLines"
-    }
+    },
+    "changelog": [
+        {
+            "message": "Ops.Exp.LaserMergeLines renamed to Ops.Deprecated.Exp.LaserMergeLines",
+            "author": "pandur",
+            "date": 1596093810398
+        }
+    ]
 }
