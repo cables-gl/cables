@@ -229,7 +229,6 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     this._attributes.push(attr);
     this._attribLocs = {};
 
-
     return attr;
 };
 

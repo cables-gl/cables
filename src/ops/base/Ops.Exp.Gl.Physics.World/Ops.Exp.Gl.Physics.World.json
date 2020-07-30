@@ -1,5 +1,4 @@
 {
-    "updated": 1510390321850,
     "author": "58dabd06a0d7ec8d1a982e66",
     "authorName": "pandur",
     "id": "78989530-a0cd-49e4-bf54-83ce3220c4b5",
@@ -19,19 +18,23 @@
             },
             {
                 "type": "0",
-                "name": "Groundplane"
+                "name": "Groundplane",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Gravity X"
+                "name": "Gravity X",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Gravity Y"
+                "name": "Gravity Y",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Gravity Z"
+                "name": "Gravity Z",
+                "subType": "number"
             }
         ],
         "portsOut": [

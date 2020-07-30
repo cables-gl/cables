@@ -68,10 +68,12 @@ function printNode(html,node,level)
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
 
-    html+='<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Expose</a>';
+    html+='Expose: ';
+    html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\',true)" class="treebutton">Hierarchy</a>';
+    html+=' <a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Node</a>';
     html+='&nbsp;';
 
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().scene.getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
+    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.corePatch().getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
@@ -104,7 +106,7 @@ function printMaterial(mat,idx)
 
         // html+='<td>';
     }
-    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
+    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.corePatch().getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
     html+='<td>';
 
 
@@ -119,6 +121,8 @@ function printMaterial(mat,idx)
 function printInfo()
 {
     if(!gltf)return;
+
+    console.log(gltf);
 
     const sizes={};
 
@@ -327,6 +331,8 @@ function printInfo()
         html+='<tr>';
         html+='  <th>name</th>';
         html+='  <th>type</th>';
+        html+='  <th>func</th>';
+
         html+='</tr>';
 
         sizes.images=0;
@@ -338,10 +344,45 @@ function printInfo()
             html+='<tr>';
             html+='<td>'+gltf.json.images[i].name+'</td>';
             html+='<td>'+gltf.json.images[i].mimeType+'</td>';
+            html+='<td>';
+            html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeTexture(\''+gltf.json.images[i].name+'\')" class="treebutton">Expose</a>';
+            html+='</td>';
+
             html+='<tr>';
         }
         html+='</table>';
     }
+
+
+    if(gltf.json.cameras)
+    {
+        html+='<h3>Cameras ('+gltf.json.cameras.length+')</h3>';
+        html+='<table class="table treetable">';
+
+        html+='<tr>';
+        html+='  <th>name</th>';
+        html+='  <th>type</th>';
+        html+='  <th>info</th>';
+        html+='</tr>';
+
+        for(var i=0;i<gltf.json.cameras.length;i++)
+        {
+            html+='<tr>';
+            html+='<td>'+gltf.json.cameras[i].name+'</td>';
+            html+='<td>'+gltf.json.cameras[i].type+'</td>';
+            html+='<td>';
+            html+='yfov: '+Math.round(gltf.json.cameras[i].perspective.yfov*100)/100;
+            html+=", ";
+            html+='zfar: '+Math.round(gltf.json.cameras[i].perspective.zfar*100)/100;
+            html+=", ";
+            html+='znear: '+Math.round(gltf.json.cameras[i].perspective.znear*100)/100;
+            html+='</td>';
+
+            html+='<tr>';
+        }
+        html+='</table>';
+    }
+
 
 
     // html+='data size: '+;

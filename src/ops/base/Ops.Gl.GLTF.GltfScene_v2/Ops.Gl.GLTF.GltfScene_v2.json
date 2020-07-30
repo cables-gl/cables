@@ -19,6 +19,15 @@
             },
             {
                 "type": "0",
+                "name": "Camera index",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Show Structure"
+            },
+            {
+                "type": "0",
                 "name": "Center index",
                 "subType": "integer"
             },
@@ -33,10 +42,6 @@
                 "name": "Rescale Size",
                 "group": "Transform",
                 "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Show Structure"
             },
             {
                 "type": "0",

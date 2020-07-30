@@ -1,107 +1,121 @@
-var learnedKeyCode = op.inValueInt("key code");
-var canvasOnly=op.inValueBool("canvas only");
-var modKey=op.inValueSelect("Mod Key",['none','alt'],"none");
-var inEnable=op.inValueBool("Enabled",true);
-var preventDefault=op.inValueBool("Prevent Default");
-var learn = op.inTriggerButton("learn");
-var onPress=op.outTrigger("on press");
-var onRelease=op.outTrigger("on release");
-var outPressed=op.outValue("Pressed",false);
+let learnedKeyCode = op.inValueInt("key code");
+let canvasOnly = op.inValueBool("canvas only");
+let modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none");
+let inEnable = op.inValueBool("Enabled", true);
+let preventDefault = op.inValueBool("Prevent Default");
+let learn = op.inTriggerButton("learn");
+let onPress = op.outTrigger("on press");
+let onRelease = op.outTrigger("on release");
+let outPressed = op.outValue("Pressed", false);
 
-const cgl=op.patch.cgl;
-var learning = false;
+const cgl = op.patch.cgl;
+let learning = false;
 
 function onKeyDown(e)
 {
-    if(learning){
+    if (learning)
+ {
         learnedKeyCode.set(e.keyCode);
-        if(CABLES.UI){
-            gui.patch().showOpParams(op);
+        if (CABLES.UI)
+ {
+            gui.opParams.show(op);
         }
         // op.log("Learned key code: " + learnedKeyCode.get());
         learning = false;
         removeListeners();
         addListener();
-    } else {
-        if(e.keyCode == learnedKeyCode.get()){
-
-            if(modKey.get()=='alt' )
+    }
+ else
+{
+        if (e.keyCode == learnedKeyCode.get())
+ {
+            if (modKey.get() == "alt")
             {
-                if(e.altKey===true)
+                if (e.altKey === true)
                 {
                     onPress.trigger();
                     outPressed.set(true);
-                    if(preventDefault.get())e.preventDefault();
+                    if (preventDefault.get())e.preventDefault();
                 }
             }
             else
             {
                 onPress.trigger();
                 outPressed.set(true);
-                if(preventDefault.get())e.preventDefault();
+                if (preventDefault.get())e.preventDefault();
             }
-
         }
     }
 }
 
-function onKeyUp(e) {
-    if(e.keyCode == learnedKeyCode.get()) {
+function onKeyUp(e)
+{
+    if (e.keyCode == learnedKeyCode.get())
+{
         // op.log("Key released, key code: " + e.keyCode);
         onRelease.trigger();
         outPressed.set(false);
     }
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    cgl.canvas.removeEventListener('keyup', onKeyUp, false);
-    cgl.canvas.removeEventListener('keydown', onKeyDown, false);
+    cgl.canvas.removeEventListener("keyup", onKeyUp, false);
+    cgl.canvas.removeEventListener("keydown", onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);
     document.removeEventListener("keydown", onKeyDown, false);
 };
 
-learn.onTriggered = function(){
+learn.onTriggered = function ()
+ {
     // op.log("Listening for key...");
     learning = true;
     addDocumentListener();
 
-    setTimeout(function(){
+    setTimeout(function ()
+ {
         learning = false;
         removeListeners();
         addListener();
     }, 3000);
 };
 
-function addListener() {
-    if(canvasOnly.get() === true) {
+function addListener()
+{
+    if (canvasOnly.get() === true)
+{
         addCanvasListener();
-    } else {
+    }
+ else
+{
         addDocumentListener();
     }
 }
 
-function removeListeners() {
+function removeListeners()
+{
     document.removeEventListener("keydown", onKeyDown, false);
     document.removeEventListener("keyup", onKeyUp, false);
-    cgl.canvas.removeEventListener('keydown', onKeyDown, false);
-    cgl.canvas.removeEventListener('keyup', onKeyUp, false);
+    cgl.canvas.removeEventListener("keydown", onKeyDown, false);
+    cgl.canvas.removeEventListener("keyup", onKeyUp, false);
     outPressed.set(false);
 }
 
-function addCanvasListener() {
-    cgl.canvas.addEventListener("keydown", onKeyDown, false );
-    cgl.canvas.addEventListener("keyup", onKeyUp, false );
+function addCanvasListener()
+{
+    cgl.canvas.addEventListener("keydown", onKeyDown, false);
+    cgl.canvas.addEventListener("keyup", onKeyUp, false);
 }
 
-function addDocumentListener() {
+function addDocumentListener()
+{
     document.addEventListener("keydown", onKeyDown, false);
     document.addEventListener("keyup", onKeyUp, false);
 }
 
-inEnable.onChange=function()
+inEnable.onChange = function ()
 {
-    if(!inEnable.get())
+    if (!inEnable.get())
     {
         removeListeners();
     }
@@ -109,9 +123,10 @@ inEnable.onChange=function()
     {
         addListener();
     }
-}
+};
 
-canvasOnly.onChange=function(){
+canvasOnly.onChange = function ()
+ {
     removeListeners();
     addListener();
 };

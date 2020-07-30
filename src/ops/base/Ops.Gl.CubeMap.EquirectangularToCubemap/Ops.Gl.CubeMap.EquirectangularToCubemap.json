@@ -1,0 +1,93 @@
+{
+    "id": "e4cbae17-10bf-44cd-a4e8-4b16dd849d0c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1591782773866
+        },
+        {
+            "message": " added core lib: cgl_cubemap",
+            "author": "cables",
+            "date": 1591782815740
+        },
+        {
+            "message": "Ops.User.cables.EquirectangularToCubemap renamed to Ops.Gl.CubeMap.EquirectangularToCubemap",
+            "author": "cables",
+            "date": 1591796248839
+        }
+    ],
+    "authorName": "simod",
+    "created": 1591782786302,
+    "coreLibs": [
+        "cgl_cubemap"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Equirectangular Map"
+            },
+            {
+                "type": "1",
+                "name": "Refresh"
+            },
+            {
+                "type": "0",
+                "name": "Cubemap Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Advanced",
+                "group": "Cubemap Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Filter index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Cubemap Projection"
+            }
+        ],
+        "name": "Ops.Gl.CubeMap.EquirectangularToCubemap"
+    },
+    "summary": "convert an equirectangular map to a cubemap",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Equirectangular Map",
+                "text": "equirectangular texture input"
+            },
+            {
+                "name": "Refresh",
+                "text": "trigger to convert input texture again"
+            },
+            {
+                "name": "Cubemap Size index",
+                "text": "size of the cubemap"
+            },
+            {
+                "name": "Advanced",
+                "text": "check to use a different texture filter"
+            },
+            {
+                "name": "Filter index",
+                "text": "index of different filter types"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "cubemap output"
+            }
+        ]
+    }
+}

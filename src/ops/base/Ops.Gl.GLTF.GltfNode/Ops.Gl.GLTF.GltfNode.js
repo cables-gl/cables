@@ -1,50 +1,49 @@
 const
-    inExec=op.inTrigger("Render"),
-    inNodeName=op.inString("Node Name"),
-    inTrans=op.inBool("Transformation",true),
-    inDraw=op.inBool("Draw Mesh",true),
-    inChilds=op.inBool("Draw Childs",true),
-    inIgnMaterial=op.inBool("Ignore Material",true),
-    next=op.outTrigger("Next"),
-    outGeom=op.outObject("Geometry"),
-    outFound=op.outBool("Found")
-    ;
+    inExec = op.inTrigger("Render"),
+    inNodeName = op.inString("Node Name"),
+    inTrans = op.inBool("Transformation", true),
+    inDraw = op.inBool("Draw Mesh", true),
+    inChilds = op.inBool("Draw Childs", true),
+    inIgnMaterial = op.inBool("Ignore Material", true),
+    next = op.outTrigger("Next"),
+    outGeom = op.outObject("Geometry"),
+    outFound = op.outBool("Found");
+const cgl = op.patch.cgl;
 
-const cgl=op.patch.cgl;
+let node = null;
+let currentSceneLoaded = null;
 
-var node=null;
-var currentSceneLoaded=null;
-
-inNodeName.onChange=function()
+inNodeName.onChange = function ()
 {
     outGeom.set(null);
-    node=null;
+    node = null;
     outFound.set(false);
 };
 
-inExec.onTriggered=function()
+inExec.onTriggered = function ()
 {
-    if(!cgl.frameStore.currentScene) return;
-    if(currentSceneLoaded!=cgl.frameStore.currentScene.loaded) node=null;
+    const scene = cgl.frameStore.currentScene;
+    if (!scene) return;
+    if (currentSceneLoaded != scene.loaded) node = null;
 
-    if(!node)
+    if (!node)
     {
-        const name=inNodeName.get();
+        const name = inNodeName.get();
 
-        if(!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.frameStore || !scene || !scene.nodes)
         {
             return;
         }
-        currentSceneLoaded=cgl.frameStore.currentScene.loaded;
+        currentSceneLoaded = scene.loaded;
 
-        for(var i=0;i<cgl.frameStore.currentScene.nodes.length;i++)
+        for (let i = 0; i < scene.nodes.length; i++)
         {
-            if(cgl.frameStore.currentScene.nodes[i].name==name)
+            if (scene.nodes[i].name == name)
             {
-                node=cgl.frameStore.currentScene.nodes[i];
+                node = scene.nodes[i];
                 outFound.set(true);
 
-                if(node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
+                if (node && node.mesh && node.mesh.meshes && node.mesh.meshes[0].geom) outGeom.set(node.mesh.meshes[0].geom);
                 else outGeom.set(null);
             }
         }
@@ -52,25 +51,24 @@ inExec.onTriggered=function()
 
     cgl.pushModelMatrix();
 
-    if(node)
+    if (node)
     {
-        if(inTrans.get())
+        if (inTrans.get())
         {
             cgl.pushModelMatrix();
             node.transform(cgl);
         }
 
-        node.render(cgl, false, !inDraw.get(), inIgnMaterial.get(),!inChilds.get(),true);
+        node.render(cgl, false, !inDraw.get(), inIgnMaterial.get(), !inChilds.get(), true);
     }
 
 
     next.trigger();
 
-    if(node)
+    if (node)
     {
-        if(inTrans.get()) cgl.popModelMatrix();
+        if (inTrans.get()) cgl.popModelMatrix();
     }
 
     cgl.popModelMatrix();
-
 };

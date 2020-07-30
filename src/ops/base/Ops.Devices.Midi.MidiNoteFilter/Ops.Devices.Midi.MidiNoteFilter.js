@@ -15,9 +15,6 @@ function getMIDINote(dataByte1LSB)
 
 function getNoteIndexFromMIDINote(midiNote)
 {
-    if (typeof midiNote === "number") {
-        midiNote = noteValues[midiNote];
-    }
     if (midiNote === "NO NOTE") return null;
     const string = midiNote.split("- ")[1];
     return Number(string);
@@ -72,8 +69,8 @@ reset.onTriggered = () =>
 {
     learning = false;
     learnedNotesIn.set([]);
-    // noteStartDropdown.set("C-2 - 0");
-    //noteEndDropdown.set("C-2 - 0");
+    noteStartDropdown.set(0);
+    noteEndDropdown.set(0);
     midiChannelDropdown.set(1);
     if (op.isCurrentUiOp()) gui.opParams.show(op);
 };
@@ -86,8 +83,8 @@ noteStartDropdown.onChange = () =>
 {
         learnedNotes.sort((a, b) => a - b);
         const [start, end] = learnedNotes;
-        //noteStartDropdown.set(getMIDINote(start));
-        //noteEndDropdown.set(getMIDINote(end));
+        noteStartDropdown.set(getMIDINote(start));
+        noteEndDropdown.set(getMIDINote(end));
     }
     learnedNotesIn.set(learnedNotes);
 };
@@ -100,9 +97,8 @@ noteEndDropdown.onChange = () =>
 {
         learnedNotes.sort((a, b) => a - b);
         const [start, end] = learnedNotes;
-        //op.log(learnedNotes);
-        //noteStartDropdown.set(getMIDINote(start));
-        //noteEndDropdown.set(getMIDINote(end));
+        noteStartDropdown.set(getMIDINote(start));
+        noteEndDropdown.set(getMIDINote(end));
     }
     learnedNotesIn.set(learnedNotes);
 };
@@ -121,7 +117,8 @@ inEvent.onChange = () =>
     const midiNote = getMIDINote(noteIndex);
     const learnedNotes = learnedNotesIn.get();
 
-    if (learning) {
+    if (learning)
+{
         if (statusByte >> 4 === NOTE_OFF)
 {
             eventOut.set(event);
@@ -190,3 +187,5 @@ inEvent.onChange = () =>
 
     eventOut.set(event);
 };
+
+

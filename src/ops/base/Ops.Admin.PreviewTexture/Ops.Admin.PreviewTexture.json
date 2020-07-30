@@ -1,0 +1,40 @@
+{
+    "id": "4ea2d7b0-ca74-45db-962b-4d1965ac20c0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1591630315193
+        },
+        {
+            "message": "Ops.User.pandur.PreviewTexture renamed to Ops.Admin.PreviewTexture",
+            "author": "pandur",
+            "date": 1591801952881
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1591630325323,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Admin.PreviewTexture"
+    }
+}

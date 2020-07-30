@@ -193,6 +193,12 @@ vec3 MOD_deform(vec3 pos,vec3 norm)
         #ifdef MOD_METH_ADD_Z
             pos.z+=p*fallOff;
         #endif
+        #ifdef MOD_METH_ADD_Y
+            pos.y+=p*fallOff;
+        #endif
+        #ifdef MOD_METH_ADD_X
+            pos.x+=p*fallOff;
+        #endif
     }
 
     return pos;

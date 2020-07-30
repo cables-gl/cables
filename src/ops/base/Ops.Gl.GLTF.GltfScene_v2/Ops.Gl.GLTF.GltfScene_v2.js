@@ -5,13 +5,16 @@ const
     inExec = op.inTrigger("Render"),
     inFile = op.inUrl("glb File"),
     inRender = op.inBool("Draw", true),
+    inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
+    inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
     inRescaleSize = op.inFloat("Rescale Size", 2.5),
-    inShow = op.inTriggerButton("Show Structure"),
+
     inTime = op.inFloat("Time"),
     inTimeLine = op.inBool("Sync to timeline", false),
     inLoop = op.inBool("Loop", true),
+
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
@@ -32,12 +35,14 @@ const
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
+
 const le = true; // little endian
 const cgl = op.patch.cgl;
 inFile.onChange =
     inVertFormat.onChange =
     inNormFormat.onChange = reloadSoon;
 
+let cam = null;
 let boundingPoints = [];
 let gltf = null;
 let maxTime = 0;
@@ -46,7 +51,7 @@ let needsMatUpdate = true;
 let timedLoader = null;
 let loadingId = null;
 let data = null;
-let scale = vec3.create();
+const scale = vec3.create();
 let lastTime = 0;
 let doCenter = false;
 
@@ -55,11 +60,24 @@ const boundsCenter = vec3.create();
 inShow.onTriggered = printInfo;
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 dataPort.onChange = loadData;
-inHideNodes.onChange=hideNodesFromData;
+inHideNodes.onChange = hideNodesFromData;
 
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 
 inCenter.onChange = updateCenter;
+
+function updateCamera()
+{
+    const arr = ["None"];
+    if (gltf && gltf.json.cameras)
+    {
+        for (let i = 0; i < gltf.json.cameras.length; i++)
+        {
+            arr.push(gltf.json.cameras[i].name);
+        }
+    }
+    inCamera.uiAttribs.values = arr;
+}
 
 function updateCenter()
 {
@@ -74,7 +92,6 @@ function updateCenter()
         if (inCenter.get() == "XZ") boundsCenter[1] = -gltf.bounds.minY;
     }
 }
-
 
 inRescale.onChange = function ()
 {
@@ -95,6 +112,20 @@ inTimeLine.onChange = function ()
 {
     inTime.setUiAttribs({ "greyout": inTimeLine.get() });
 };
+
+
+inCamera.onChange = setCam;
+
+function setCam()
+{
+    cam = null;
+    if (!gltf) return;
+
+    for (let i = 0; i < gltf.cams.length; i++)
+    {
+        if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
+    }
+}
 
 
 inExec.onTriggered = function ()
@@ -122,6 +153,7 @@ inExec.onTriggered = function ()
         if (inRescale.get())
         {
             const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
             // console.log(sc,sc,sc);
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
@@ -136,6 +168,8 @@ inExec.onTriggered = function ()
     nextBefore.trigger();
 
     if (needsMatUpdate) updateMaterials();
+
+    if (cam)cam.start();
 
     if (gltf && inRender.get())
     {
@@ -157,6 +191,8 @@ inExec.onTriggered = function ()
     cgl.frameStore.currentScene = null;
 
     cgl.popModelMatrix();
+
+    if (cam)cam.end();
 };
 
 function loadBin(addCacheBuster)
@@ -166,7 +202,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
-    let oReq = new XMLHttpRequest();
+    const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
     closeTab();
@@ -176,7 +212,7 @@ function loadBin(addCacheBuster)
         boundingPoints = [];
 
         maxTime = 0;
-        let arrayBuffer = oReq.response;
+        const arrayBuffer = oReq.response;
         gltf = parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate = true;
@@ -185,6 +221,8 @@ function loadBin(addCacheBuster)
         hideNodesFromData();
         if(tab)printInfo();
 
+        updateCamera();
+        setCam();
         outPoints.set(boundingPoints);
         if(gltf)
         {
@@ -210,13 +248,11 @@ op.onFileChanged = function (fn)
     }
 };
 
-
 function reloadSoon(nocache)
 {
     clearTimeout(timedLoader);
     timedLoader = setTimeout(function () { loadBin(nocache); }, 30);
 }
-
 
 function updateMaterials()
 {
@@ -252,34 +288,33 @@ function updateMaterials()
 
 function hideNodesFromArray()
 {
-    const hideArr=inHideNodes.get();
+    const hideArr = inHideNodes.get();
 
-    if(!gltf || !data || !data.hiddenNodes)return;
-    if(!hideArr)
+    if (!gltf || !data || !data.hiddenNodes) return;
+    if (!hideArr)
     {
         return;
     }
 
-    console.log('hiding...',hideArr);
+    console.log("hiding...", hideArr);
 
-    for(var i=0;i<hideArr.length;i++)
+    for (let i = 0; i < hideArr.length; i++)
     {
         const n = gltf.getNode(hideArr[i]);
-        if(n)n.hidden=true;
+        if (n)n.hidden = true;
     }
-
-};
+}
 
 function hideNodesFromData()
 {
     if (!data)loadData();
-    if(!gltf)return;
+    if (!gltf) return;
 
     gltf.unHideAll();
 
     if (data && data.hiddenNodes)
     {
-        for (let i in data.hiddenNodes)
+        for (const i in data.hiddenNodes)
         {
             const n = gltf.getNode(i);
             if (n) n.hidden = true;
@@ -307,18 +342,79 @@ function saveData()
     dataPort.set(JSON.stringify(data));
 }
 
-op.exposeNode = function (name)
+function findParents(nodes, childNodeIndex)
 {
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
-    newop.getPort("Node Name").set(name);
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        if (gltf.nodes[i].children.indexOf(childNodeIndex) >= 0)
+        {
+            console.log("found parent", gltf.nodes[i].name);
+            nodes.push(gltf.nodes[i]);
+            if (gltf.nodes[i].isChild) findParents(nodes, i);
+        }
+    }
+}
+
+op.exposeTexture = function (name)
+{
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
+    newop.getPort("Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
+};
+
+op.exposeNode = function (name, tree)
+{
+    if (tree)
+    {
+        console.log(gltf.nodes);
+        for (let i = 0; i < gltf.nodes.length; i++)
+        {
+            if (gltf.nodes[i].name == name)
+            {
+                const node = gltf.nodes[i];
+                const arrHierarchy = [];
+                findParents(arrHierarchy, i);
+
+                arrHierarchy.push(node, node);
+
+                let prevPort = next.name;
+                let prevOp = op;
+                for (let j = 0; j < arrHierarchy.length; j++)
+                {
+                    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+                    newop.getPort("Node Name").set(arrHierarchy[j].name);
+                    op.patch.link(prevOp, prevPort, newop, "Render");
+
+                    if (j == arrHierarchy.length - 1)
+                    {
+                        newop.getPort("Transformation").set(false);
+                    }
+                    else
+                    {
+                        newop.getPort("Draw Mesh").set(false);
+                        newop.getPort("Draw Childs").set(false);
+                    }
+
+                    prevPort = "Next";
+                    prevOp = newop;
+                }
+            }
+        }
+    }
+    else
+    {
+        const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+        newop.getPort("Node Name").set(name);
+        op.patch.link(op, next.name, newop, "Render");
+        gui.patch().focusOp(newop.id, true);
+    }
     CABLES.UI.MODAL.hide();
 };
 
 op.assignMaterial = function (name)
 {
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patch().focusOp(newop.id, true);

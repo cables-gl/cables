@@ -12,6 +12,8 @@ float when_neq_MOD(float x, float y) { return abs(sign(x - y)); } // comparator 
     #define textureCube texture
 #endif
 
+UNI vec3 camPos;
+
 struct ModLight {
 /*
     vec3 color;*/
@@ -43,54 +45,103 @@ struct ModLight {
 
 };
 
+UNI float sampleSpread;
+
 #ifdef MODE_DEFAULT
     float ShadowFactorDefault(float shadowMapSample, float shadowMapDepth, float bias, float shadowStrength) {
-        if (shadowMapSample < shadowMapDepth - bias) return (1. - shadowStrength);
-        return 1.;
+        return shadowMapSample < shadowMapDepth - bias ? (1. - shadowStrength) : 1.; //step(shadowMapDepth - bias, shadowMapSample);
     }
 #endif
 
 #ifdef MODE_PCF
-#define RIGHT_BOUND float(SAMPLE_AMOUNT/2.)
-#define LEFT_BOUND -RIGHT_BOUND
-#define PCF_DIVISOR float(SAMPLE_AMOUNT*4.)
 
-#define RIGHT_BOUND_POINT 0.01
-#define LEFT_BOUND_POINT -0.01
-#define PCF_INCREMENT_POINT RIGHT_BOUND_POINT/(SAMPLE_AMOUNT * 0.5)
-#define PCF_DIVISOR_POINT SAMPLE_AMOUNT*SAMPLE_AMOUNT*SAMPLE_AMOUNT
+    #ifdef WEBGL2
+        vec3 offsets[20] = vec3[]
+        (
+           vec3( 1,  1,  1), vec3( 1, -1,  1), vec3(-1, -1,  1), vec3(-1,  1,  1),
+           vec3( 1,  1, -1), vec3( 1, -1, -1), vec3(-1, -1, -1), vec3(-1,  1, -1),
+           vec3( 1,  1,  0), vec3( 1, -1,  0), vec3(-1, -1,  0), vec3(-1,  1,  0),
+           vec3( 1,  0,  1), vec3(-1,  0,  1), vec3( 1,  0, -1), vec3(-1,  0, -1),
+           vec3( 0,  1,  1), vec3( 0, -1,  1), vec3( 0, -1, -1), vec3( 0,  1, -1)
+        );
+    #endif
+    #ifdef WEBGL1
+        vec3 offsets[20];
+        int CALLED_FILL_PCF_ARRAY = 0;
+        void FillPCFArray() {
+            if (CALLED_FILL_PCF_ARRAY == 1) return;
+            offsets[0] = vec3( 1,  1,  1);
+            offsets[1] = vec3( 1, -1,  1);
+            offsets[2] = vec3(-1, -1,  1);
+            offsets[3] = vec3(-1,  1,  1);
+            offsets[4] = vec3( 1,  1, -1);
+            offsets[5] = vec3( 1, -1, -1);
+            offsets[6] = vec3(-1, -1, -1);
+            offsets[7] = vec3(-1,  1, -1);
+            offsets[8] = vec3( 1,  1,  0);
+            offsets[9] = vec3( 1, -1,  0);
+            offsets[10] = vec3(-1, -1,  0);
+            offsets[11] = vec3(-1,  1,  0);
+            offsets[12] = vec3( 1,  0,  1);
+            offsets[13] = vec3(-1,  0,  1);
+            offsets[14] = vec3( 1,  0, -1);
+            offsets[15] = vec3(-1,  0, -1);
+            offsets[16] = vec3( 0,  1,  1);
+            offsets[17] = vec3( 0, -1,  1);
+            offsets[18] = vec3( 0, -1, -1);
+            offsets[19] = vec3( 0,  1, -1);
+            CALLED_FILL_PCF_ARRAY = 1;
+        }
+    #endif
+    // float diskRadius = 0.05;
+    #define RIGHT_BOUND float((SAMPLE_AMOUNT-1.)/2.)
+    #define LEFT_BOUND -RIGHT_BOUND
+    #define PCF_DIVISOR float(SAMPLE_AMOUNT*SAMPLE_AMOUNT)
 
+    #define SAMPLE_AMOUNT_POINT int(SAMPLE_AMOUNT * 2. + 4.)
     // https://learnopengl.com/Advanced-Lighting/Shadows/Point-Shadows
-    float ShadowFactorPointPCF(samplerCube shadowMap, vec3 lightDirection, float shadowMapDepth, float nearPlane, float farPlane, float bias, float shadowStrength) {
+    float ShadowFactorPointPCF(
+        samplerCube shadowMap,
+        vec3 lightDirection,
+        float shadowMapDepth,
+        float nearPlane,
+        float farPlane,
+        float bias,
+        float shadowStrength,
+        vec3 modelPos
+    ) {
+        #ifdef WEBGL1
+            FillPCFArray();
+        #endif
+
         float visibility  = 0.0;
+        float viewDistance = length(camPos - modelPos.xyz);
+        float diskRadius = (1.0 + ((viewDistance) / (farPlane - nearPlane))) / sampleSpread;
 
-        // EARLY EXIT ... cant figure it out
-        if (shadowMapDepth - bias < textureCube(shadowMap, -lightDirection).r) {
-            return 1.;
+        for (int i = 0; i < SAMPLE_AMOUNT_POINT; i++) {
+            float shadowMapSample = textureCube(shadowMap, -lightDirection + offsets[i] * diskRadius).r;
+            visibility += step(shadowMapDepth - bias, shadowMapSample);
         }
-
-        for(float x = LEFT_BOUND_POINT; x < RIGHT_BOUND_POINT; x += PCF_INCREMENT_POINT)
-        {
-            for(float y = LEFT_BOUND_POINT; y < RIGHT_BOUND_POINT; y += PCF_INCREMENT_POINT)
-            {
-                for(float z = LEFT_BOUND_POINT; z < RIGHT_BOUND_POINT; z += PCF_INCREMENT_POINT)
-                {
-                    float closestDepth = textureCube(shadowMap, -lightDirection + vec3(x, y, z)).r;
-
-
-                    //if (closestDepth == 0.) return 1.; // early exit?
-                     // closestDepth = closestDepth; // / farPlane*0.1; // * nearPlane; //   * (farPlane+nearPlane);   // Undo mapping [0;1]
-                    if(shadowMapDepth - bias < closestDepth)
-                        visibility += 1.0;
-                }
-            }
-        }
-
-        visibility /= PCF_DIVISOR_POINT;
-        return visibility;
-
+        visibility /= float(SAMPLE_AMOUNT_POINT);
+        return clamp(visibility, 0., 1.);
     }
 
+    float LinearShadowMapSample(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float texelSize) {
+        vec2 pixelPos = shadowMapLookup/texelSize + vec2(0.5); // tl pixel corner to middle
+        vec2 fractPixelPos = fract(pixelPos);
+        vec2 startTexel = (pixelPos - fractPixelPos) * texelSize;
+
+        float bottomLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel).r);
+        float bottomRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, 0.)).r);
+        float topLeftTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(0., texelSize)).r);
+        float topRightTexel = step(shadowMapDepth, texture(shadowMap, startTexel + vec2(texelSize, texelSize)).r);
+
+        float mixA = mix(bottomLeftTexel, topLeftTexel, fractPixelPos.y);
+        float mixB = mix(bottomRightTexel, topRightTexel, fractPixelPos.y);
+
+        return mix(mixA, mixB, fractPixelPos.x);
+
+    }
     float ShadowFactorPCF(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapSize, float shadowMapDepth, float bias, float shadowStrength) {
         float texelSize = 1. / shadowMapSize;
         float visibility = 0.;
@@ -99,9 +150,7 @@ struct ModLight {
         for (float x = LEFT_BOUND; x <= RIGHT_BOUND; x += 1.0) {
             for (float y = LEFT_BOUND; y <= RIGHT_BOUND; y += 1.0) {
                 float texelDepth = texture(shadowMap, shadowMapLookup + vec2(x, y) * texelSize).r;
-                if (shadowMapDepth - bias < texelDepth) {
-                    visibility += 1.;
-                }
+                visibility += step(shadowMapDepth - bias, texelDepth);
             }
         }
 
@@ -109,8 +158,8 @@ struct ModLight {
     }
 #endif
 
+
 #ifdef MODE_POISSON
-    UNI float poissonSpread;
     #ifdef WEBGL2
         vec2 poissonDisk[16] = vec2[16](
         vec2( -0.94201624, -0.39906216 ),
@@ -157,28 +206,25 @@ struct ModLight {
         }
     #endif
 #define SAMPLE_AMOUNT_INT int(SAMPLE_AMOUNT)
+#define INV_SAMPLE_AMOUNT 1./SAMPLE_AMOUNT
     float ShadowFactorPointPoisson(samplerCube shadowCubeMap, vec3 lightDirection, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            if (textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/poissonSpread)).r < shadowMapDepth - bias) {
-                visibility -= 0.2;
-            }
+            visibility -= INV_SAMPLE_AMOUNT * step(textureCube(shadowCubeMap, (-lightDirection + poissonDisk[i].xyx/sampleSpread)).r, shadowMapDepth - bias);
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 
     float ShadowFactorPoisson(sampler2D shadowMap, vec2 shadowMapLookup, float shadowMapDepth, float bias) {
         float visibility = 1.;
 
         for (int i = 0; i < SAMPLE_AMOUNT_INT; i++) {
-            if (texture(shadowMap, (shadowMapLookup + poissonDisk[i]/poissonSpread)).r < shadowMapDepth - bias) {
-                visibility -= 0.2;
-            }
+            visibility -= INV_SAMPLE_AMOUNT * step(texture(shadowMap, (shadowMapLookup + poissonDisk[i]/sampleSpread)).r, shadowMapDepth - bias);
         }
 
-        return visibility;
+        return clamp(visibility, 0., 1.);
     }
 #endif
 

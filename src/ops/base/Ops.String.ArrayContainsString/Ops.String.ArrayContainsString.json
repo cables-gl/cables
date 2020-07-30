@@ -1,0 +1,17 @@
+{
+    "id": "bace9c9b-5e96-4a82-9bcd-02e316afb9de",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1591695049278
+        },
+        {
+            "message": "Ops.User.pandur.ArrayContainsString renamed to Ops.String.ArrayContainsString",
+            "author": "pandur",
+            "date": 1591695115051
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1591695070465
+}

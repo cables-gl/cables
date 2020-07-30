@@ -1,34 +1,47 @@
 const
-    inEle=op.inObject("Element"),
-    inProperty=op.inString("Property"),
-    inValue=op.inFloat("Value"),
-    inValueSuffix=op.inString("Value Suffix",'px'),
-    outEle=op.outObject("HTML Element");
+    inEle = op.inObject("Element"),
+    inProperty = op.inString("Property"),
+    inValue = op.inFloat("Value"),
+    inValueSuffix = op.inString("Value Suffix", "px"),
+    outEle = op.outObject("HTML Element");
 
-op.setPortGroup("Element",[inEle]);
-op.setPortGroup("Attributes",[inProperty,inValue,inValueSuffix]);
+op.setPortGroup("Element", [inEle]);
+op.setPortGroup("Attributes", [inProperty, inValue, inValueSuffix]);
 
-inProperty.onChange=update;
-inValue.onChange=update;
-inValueSuffix.onChange=update;
-var ele=null;
+inProperty.onChange = updateProperty;
+inValue.onChange = update;
+inValueSuffix.onChange = update;
+let ele = null;
 
-inEle.onChange=inEle.onLinkChanged=function()
+inEle.onChange = inEle.onLinkChanged = function ()
 {
-    if(ele && ele.style)
+    if (ele && ele.style)
     {
-        ele.style[inProperty.get()]='initial';
+        ele.style[inProperty.get()] = "initial";
     }
     update();
 };
 
+function updateProperty()
+{
+    update();
+    op.setUiAttrib({ "extendTitle": inProperty.get() + "" });
+}
+
 function update()
 {
-    ele=inEle.get();
-    if(ele && ele.style)
+    ele = inEle.get();
+    if (ele && ele.style)
     {
-        var str=inValue.get()+inValueSuffix.get();
-        ele.style[inProperty.get()]=str;
+        const str = inValue.get() + inValueSuffix.get();
+        try
+        {
+            ele.style[inProperty.get()] = str;
+        }
+        catch (e)
+        {
+            console.log(e);
+        }
     }
 
     outEle.set(inEle.get());

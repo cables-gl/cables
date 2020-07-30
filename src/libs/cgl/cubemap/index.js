@@ -9,7 +9,7 @@ const Cubemap = function (cgl, options)
     this._framebuffer = null;
     this._depthbuffer = null;
     this._modelMatrix = mat4.create();
-    this._projectionMatrix = mat4.create();
+    this._projectionMatrix = mat4.perspective(mat4.create(), CGL.DEG2RAD * 90, 1, 0.1, 10.0);
     this._viewMatrix = mat4.create();
     this._lookAtTemp = vec3.fromValues(0, 0, 0);
 
@@ -17,8 +17,9 @@ const Cubemap = function (cgl, options)
     this.isInitialized = false;
     this.size = options.size || 512;
     this.camPos = options.camPos || vec3.fromValues(0, 0, 0);
-    this.cullFaces = options.cullFaces || false;
-    this.cullFaceFacing = options.cullFaceFacing || this._cgl.gl.FRONT;
+
+    this.depthAttachment = null;
+    this.colorAttachment = null;
 
     this._cubemapProperties = [
         // targets for use in some gl functions for working with cubemaps
@@ -67,6 +68,13 @@ Cubemap.prototype.setCamPos = function (camPos)
     this.camPos = camPos || this.camPos;
 };
 
+Cubemap.prototype.setSize = function (size)
+{
+    this.size = size;
+    this.isInitialized = false;
+    this.initializeCubemap();
+};
+
 Cubemap.prototype.initializeCubemap = function ()
 {
     let i = 0;
@@ -86,7 +94,24 @@ Cubemap.prototype.initializeCubemap = function ()
 
     for (i = 0; i < 6; i++)
     {
-        this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, null);
+        if (this._cgl.glVersion == 1)
+        {
+            if (this._cgl.glUseHalfFloatTex)
+            {
+                const ext = this._cgl.gl.getExtension("OES_texture_half_float");
+                if (this._cgl.glVersion == 1 && !ext) throw new Error("no half float texture extension");
+
+                this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, ext.HALF_FLOAT_OES, null);
+            }
+            else
+            {
+                const ext = this._cgl.gl.getExtension("OES_texture_float");
+
+                this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+            }
+        }
+        else this._cgl.gl.texImage2D(this._cubemapProperties[i].face, 0, this._cgl.gl.RGBA32F, this.size, this.size, 0, this._cgl.gl.RGBA, this._cgl.gl.FLOAT, null);
+
         // With null as the last parameter, the previous function allocates memory for the texture and fills it with zeros.
     }
     // checkError(1);
@@ -191,4 +216,4 @@ Cubemap.prototype.renderCubeSide = function (index, renderFunction)
     this._cgl.popViewMatrix();
 };
 
-export { Cubemap };
+CGL.Cubemap = Cubemap;

@@ -1,0 +1,71 @@
+{
+    "id": "bccdb19d-6786-4656-90d7-e798346ea644",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592575974267
+        },
+        {
+            "message": "Ops.Gl.GLTF.GltfNodeTransform renamed to Ops.Gl.GLTF.GltfTransformNode",
+            "author": "pandur",
+            "date": 1592717084269
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1592576017304,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "Node Name"
+            },
+            {
+                "type": "0",
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfTransformNode"
+    }
+}

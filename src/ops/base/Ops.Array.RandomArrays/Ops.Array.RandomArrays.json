@@ -18,12 +18,12 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "Mode index",
+                "name": "Num Values",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Num Values",
+                "name": "Mode index",
                 "subType": "integer"
             },
             {

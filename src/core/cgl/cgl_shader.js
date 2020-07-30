@@ -93,7 +93,7 @@ const Shader = function (_cgl, _name)
     this._pMatrixState = -1;
     this._vMatrixState = -1;
 
-    this._modGroupCount = 0;
+    this._modGroupCount = 0; // not needed anymore...
     this._feedBackNames = [];
     this._attributes = [];
 
@@ -113,6 +113,7 @@ const Shader = function (_cgl, _name)
     this._textureStackUni = [];
     this._textureStackTex = [];
     this._textureStackType = [];
+    this._textureStackTexCgl = [];
 
     this._tempNormalMatrix = mat4.create();
     this._tempCamPosMatrix = mat4.create();
@@ -170,12 +171,32 @@ Shader.prototype.setWhyCompile = function (why)
  * @instance
  * @param shader uniform values will be copied from this shader
  */
-Shader.prototype.copyUniforms = function (shader)
+Shader.prototype.copyUniformValues = function (origShader)
 {
-    for (let i = 0; i < shader._uniforms.length; i++)
+    for (let i = 0; i < origShader._uniforms.length; i++)
     {
-        this._uniforms[i].set(shader._uniforms[i].getValue());
+        if (!this._uniforms[i])
+        {
+            // console.log("unknown uniform?!");
+            continue;
+        }
+
+        this._uniforms[i].set(origShader._uniforms[i].getValue());
     }
+
+    this.popTextures();
+    for (let i = 0; i < origShader._textureStackUni.length; i++)
+    {
+        this._textureStackUni[i] = origShader._textureStackUni[i];
+        this._textureStackTex[i] = origShader._textureStackTex[i];
+        this._textureStackType[i] = origShader._textureStackType[i];
+        this._textureStackTexCgl[i] = origShader._textureStackTexCgl[i];
+    }
+
+    // this._textureStackUni = [];
+    // this._textureStackTex = [];
+    // this._textureStackType = [];
+    // this._textureStackTexCgl = [];
 };
 
 /**
@@ -198,10 +219,12 @@ Shader.prototype.copy = function ()
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
+        console.log("copy uniform...", this._uniforms[i]);
         const u = this._uniforms[i].copy(shader);
         u.resetLoc();
     }
 
+    shader._needsRecompile = true;
     return shader;
 };
 
@@ -241,22 +264,23 @@ Shader.prototype._addLibs = function (src)
 
 Shader.prototype.compile = function ()
 {
-    let i = 0;
+    const startTime = performance.now();
 
     profileData.profileShaderCompiles++;
     profileData.profileShaderCompileName = this._name;
 
     let extensionString = "";
     if (this._extensions)
-        for (i = 0; i < this._extensions.length; i++)
+        for (let i = 0; i < this._extensions.length; i++)
             extensionString += "#extension " + this._extensions[i] + " : enable".endl();
 
     let definesStr = "";
-    for (i = 0; i < this._defines.length; i++)
+    if (this._defines.length) definesStr = "\n// cgl generated".endl();
+    for (let i = 0; i < this._defines.length; i++)
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
     if (this._uniforms)
-        for (i = 0; i < this._uniforms.length; i++)
+        for (let i = 0; i < this._uniforms.length; i++)
             this._uniforms[i].resetLoc();
 
     if (this.hasTextureUniforms()) definesStr += "#define HAS_TEXTURES".endl();
@@ -284,7 +308,7 @@ Shader.prototype.compile = function ()
             let count = 0;
             drawBufferStr += "vec4 outColor;".endl();
 
-            for (i = 0; i < this._drawBuffers.length; i++)
+            for (let i = 0; i < this._drawBuffers.length; i++)
             {
                 if (count == 0) drawBufferStr += "#define gl_FragColor outColor" + i + "".endl();
                 drawBufferStr += "layout(location = " + i + ") out vec4 outColor" + i + ";".endl();
@@ -344,6 +368,30 @@ Shader.prototype.compile = function ()
             .endl();
     }
 
+    let uniformsStrVert = "\n// cgl generated".endl();
+    let uniformsStrFrag = "\n// cgl generated".endl();
+
+    // console.log(this._uniforms);
+
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i].shaderType)
+        {
+            const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+            let comment = "";
+            if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
+
+            if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both")
+                if (this.srcVert.indexOf(uniStr) == -1 && this.srcVert.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrVert += uniStr + ";" + comment.endl();
+
+            if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both")
+                if (this.srcFrag.indexOf(uniStr) == -1 && this.srcFrag.indexOf("uniform " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName()) == -1)
+                    uniformsStrFrag += uniStr + ";" + comment.endl();
+        }
+    }
+
+
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
 
@@ -353,8 +401,8 @@ Shader.prototype.compile = function ()
         vs += "#define MOBILE".endl();
     }
 
-    vs = extensionString + vs + definesStr + this.srcVert;
-    fs = extensionString + fs + definesStr + this.srcFrag;
+    vs = extensionString + vs + definesStr + uniformsStrVert + "\n// -- \n" + this.srcVert;
+    fs = extensionString + fs + definesStr + uniformsStrFrag + "\n// -- \n" + this.srcFrag;
 
     let srcHeadVert = "";
     let srcHeadFrag = "";
@@ -371,7 +419,7 @@ Shader.prototype.compile = function ()
 
     let addedAttributes = false;
 
-    for (i = 0; i < this._moduleNames.length; i++)
+    for (let i = 0; i < this._moduleNames.length; i++)
     {
         let srcVert = "";
         let srcFrag = "";
@@ -467,7 +515,7 @@ Shader.prototype.compile = function ()
 
         this._projMatrixUniform = null;
 
-        for (i = 0; i < this._uniforms.length; i++) this._uniforms[i].resetLoc();
+        for (let i = 0; i < this._uniforms.length; i++) this._uniforms[i].resetLoc();
     }
 
     this.finalShaderFrag = fs;
@@ -478,6 +526,8 @@ Shader.prototype.compile = function ()
 
     this._needsRecompile = false;
     this.lastCompile = now();
+
+    CGL.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
 Shader.prototype.bind = function ()
@@ -576,9 +626,24 @@ Shader.prototype.bind = function ()
  * @memberof Shader
  * @instance
  * @param {name} name
+ * @param {any} value or port
  */
 Shader.prototype.toggleDefine = function (name, enabled)
 {
+    if (enabled && typeof (enabled) == "object" && enabled.addEventListener) // port
+    {
+        console.log("toggleDefine", name, enabled);
+
+        enabled.removeEventListener("change", enabled.onToggleDefine);
+        enabled.onToggleDefine = (v) =>
+        {
+            this.toggleDefine(name, v);
+        };
+
+        enabled.on("change", enabled.onToggleDefine);
+        enabled = enabled.get();
+    }
+
     if (enabled) this.define(name);
     else this.removeDefine(name);
 };
@@ -593,7 +658,21 @@ Shader.prototype.toggleDefine = function (name, enabled)
  */
 Shader.prototype.define = function (name, value)
 {
-    if (!value) value = "";
+    if (value === null || value === undefined) value = "";
+
+    if (typeof (value) == "object") // port
+    {
+        value.removeEventListener("change", value.onDefineChange);
+        value.onDefineChange = (v) =>
+        {
+            this.define(name, v);
+        };
+        value.on("change", value.onDefineChange);
+
+        value = value.get();
+    }
+
+
     for (let i = 0; i < this._defines.length; i++)
     {
         if (this._defines[i][0] == name && this._defines[i][1] == value) return;
@@ -719,8 +798,11 @@ Shader.prototype.addModule = function (mod, sibling)
     if (!mod.numId) mod.numId = this._moduleNumId;
     if (!mod.num)mod.num = this._modules.length;
 
-    if (sibling) mod.group = sibling.group;
-    else mod.group = this._modGroupCount++;
+    if (sibling && !sibling.group) sibling.group = simpleId();
+
+    if (!mod.group)
+        if (sibling) mod.group = sibling.group;
+        else mod.group = simpleId();// this._modGroupCount++;
 
     mod.prefix = "mod" + mod.group;
 
@@ -774,18 +856,52 @@ Shader.prototype.removeUniform = function (name)
     this.setWhyCompile("remove uniform " + name);
 };
 
-/**
- * add a uniform to the shader
- * @param {Uniform} uniform
- * @memberof Shader
- * @instance
- * @function
- */
-Shader.prototype.addUniform = function (uni)
+
+Shader.prototype._addUniform = function (uni)
 {
     this._uniforms.push(uni);
     this.setWhyCompile("add uniform " + name);
     this._needsRecompile = true;
+};
+
+/**
+ * add a uniform to the shader
+ * @param {String} type ['f','t', etc]
+ * @param {String} name
+ * @param {any} value or port
+ * @memberof Shader
+ * @instance
+ * @function addUniformFrag
+ */
+Shader.prototype.addUniformFrag = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "frag";
+    return uni;
+};
+
+Shader.prototype.addUniformVert = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "vert";
+    return uni;
+};
+
+Shader.prototype.addUniformBoth = function (type, name, valueOrPort, p2, p3, p4, p5, p6, p7)
+{
+    const uni = new CGL.Uniform(this, type, name, valueOrPort, p2, p3, p4, p5, p6, p7);
+    uni.shaderType = "both";
+    return uni;
+};
+
+Shader.prototype.hasUniform = function (name)
+{
+    console.log("hasuniform", this._uniforms);
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i].getName() == name) return true;
+    }
+    return false;
 };
 
 Shader.prototype._createProgram = function (vstr, fstr)
@@ -962,7 +1078,18 @@ Shader.prototype.pushTexture = function (uniform, t, type)
     // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
 
     this._textureStackUni.push(uniform);
-    this._textureStackTex.push(t);
+
+    if (t.tex)
+    {
+        this._textureStackTexCgl.push(t);
+        this._textureStackTex.push(t.tex);
+    }
+    else
+    {
+        this._textureStackTexCgl.push(null);
+        this._textureStackTex.push(t);
+    }
+
     this._textureStackType.push(type);
 };
 
@@ -988,6 +1115,7 @@ Shader.prototype.popTexture = function ()
 Shader.prototype.popTextures = function ()
 {
     this._textureStackTex.length =
+    this._textureStackTexCgl.length =
     this._textureStackType.length =
     this._textureStackUni.length = 0;
 };

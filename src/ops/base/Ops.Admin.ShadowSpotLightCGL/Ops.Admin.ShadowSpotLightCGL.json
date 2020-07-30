@@ -4,8 +4,7 @@
     "created": 1587556120293,
     "coreLibs": [
         "cgl_cubemap",
-        "cgl_light",
-        "vargetset"
+        "cgl_light"
     ],
     "layout": {
         "portsIn": [
@@ -149,6 +148,11 @@
             "message": " added core lib: vargetset",
             "author": "stephan",
             "date": 1589968927218
+        },
+        {
+            "message": " added core lib: cgl_functions",
+            "author": "stephan",
+            "date": 1590495514991
         }
     ]
 }

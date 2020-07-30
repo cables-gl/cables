@@ -46,8 +46,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._value = 0.00001;
     this._oldValue = null;
     this._port = null;
-    this._shader.addUniform(this);
+    this._shader._addUniform(this);
+    this.shaderType = null;
     this.needsUpdate = true;
+    this.shaderType = null;
+    this.comment = null;
 
     if (__type == "f")
     {
@@ -135,7 +138,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     {
         this._port = _value;
         this._value = this._port.get();
-        this._port.onValueChanged = this.updateFromPort.bind(this);
+
 
         if (_port2 && _port3 && _port4)
         {
@@ -143,9 +146,13 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
             this._port2 = _port2;
             this._port3 = _port3;
             this._port4 = _port4;
-            this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(
-                this,
-            );
+
+            this._port.on("change", this.updateFromPort4f.bind(this));
+            this._port2.on("change", this.updateFromPort4f.bind(this));
+            this._port3.on("change", this.updateFromPort4f.bind(this));
+            this._port4.on("change", this.updateFromPort4f.bind(this));
+
+            // this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
             this.updateFromPort4f();
         }
         else if (_port2 && _port3)
@@ -153,15 +160,27 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
             this._value = [0, 0, 0];
             this._port2 = _port2;
             this._port3 = _port3;
-            this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
+            // this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
+            this._port.on("change", this.updateFromPort3f.bind(this));
+            this._port2.on("change", this.updateFromPort3f.bind(this));
+            this._port3.on("change", this.updateFromPort3f.bind(this));
+
             this.updateFromPort3f();
         }
         else if (_port2)
         {
             this._value = [0, 0];
             this._port2 = _port2;
-            this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
+            // this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
+            this._port.on("change", this.updateFromPort2f.bind(this));
+            this._port2.on("change", this.updateFromPort2f.bind(this));
+
             this.updateFromPort2f();
+        }
+        else
+        {
+            // this._port.on = this.updateFromPort.bind(this);
+            this._port.on("change", this.updateFromPort.bind(this));
         }
     }
     else this._value = _value;
@@ -172,8 +191,31 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
 
 Uniform.prototype.copy = function (newShader)
 {
-    return new Uniform(newShader, this._type, this._name);
+    const uni = new Uniform(newShader, this._type, this._name);
+    uni.shaderType = this.shaderType;
+    return uni;
 };
+
+/**
+ * returns type as glsl type string. e.g. 'f' returns 'float'
+ * @function getGlslTypeString
+ * @memberof Uniform
+ * @instance
+ * @return {string} type as string
+ */
+Uniform.prototype.getGlslTypeString = function ()
+{
+    if (this._type == "f") return "float";
+    if (this._type == "i") return "int";
+    if (this._type == "2f") return "vec2";
+    if (this._type == "3f") return "vec3";
+    if (this._type == "4f") return "vec4";
+    if (this._type == "m4") return "mat4";
+    if (this._type == "t") return "sampler2D";
+
+    console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
+};
+
 
 Uniform.prototype.getType = function ()
 {
