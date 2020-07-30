@@ -101,5 +101,13 @@
             }
         ],
         "name": "Ops.Admin.SplineMeshNewMaterial"
+    },
+    "summary": "material for splinemesh",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

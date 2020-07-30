@@ -70,6 +70,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Update",
+                "text": "combine all arrays"
+            },
+            {
+                "name": "Result",
+                "text": "array of arrays out"
+            }
+        ]
     }
 }
