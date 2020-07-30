@@ -1,0 +1,265 @@
+{
+    "authorName": "cables",
+    "id": "54e5d3f5-e3f4-4381-990d-d5e32b9a2d39",
+    "created": 1587737932336,
+    "coreLibs": [
+        "cgl_cubemap",
+        "cgl_light"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow Map Settings"
+            },
+            {
+                "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow Map Settings",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap"
+            },
+            {
+                "type": "2",
+                "name": "Cubemap Projection"
+            }
+        ],
+        "name": "Ops.Admin.ShadowPointLightCGL"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowPointLightCGL renamed to Ops.Admin.ShadowPointLightCGL",
+            "author": "cables",
+            "date": 1588083927621
+        },
+        {
+            "message": "Ops.Admin.ShadowPointLightCGL renamed to Ops.Gl.Phong.PointLight_v5",
+            "author": "pandur",
+            "date": 1596055745231
+        }
+    ],
+    "summary": "Point light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the point light"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the point light"
+            },
+            {
+                "name": "X",
+                "text": "position x"
+            },
+            {
+                "name": "Y",
+                "text": "position y"
+            },
+            {
+                "name": "Z",
+                "text": "position z"
+            },
+            {
+                "name": "R",
+                "text": "diffuse color channel R"
+            },
+            {
+                "name": "G",
+                "text": "diffuse color channel G"
+            },
+            {
+                "name": "B",
+                "text": "diffuse color channel B"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular color channel B"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff within effective radius"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if activated, light will generate a shadow map to be used with the shadow material extension"
+            },
+            {
+                "name": "Map Size index",
+                "text": "index of the map size"
+            },
+            {
+                "name": "Map Size",
+                "text": "the size of the generated shadow map, possible values: 256, 512, 1024, 2048"
+            },
+            {
+                "name": "Shadow Strength",
+                "text": "strength of the shadows"
+            },
+            {
+                "name": "Near",
+                "text": "the near value of the shadow camera's frustum"
+            },
+            {
+                "name": "Far",
+                "text": "the far value of the shadow camera's frustum"
+            },
+            {
+                "name": "Bias",
+                "text": "biasing for the shadow comparison, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Polygon Offset",
+                "text": "polygon offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            },
+            {
+                "name": "Cubemap",
+                "text": "generated shadow cubemap output"
+            },
+            {
+                "name": "Cubemap Projection",
+                "text": "equirectangular projection of shadow cubemap"
+            }
+        ]
+    }
+}

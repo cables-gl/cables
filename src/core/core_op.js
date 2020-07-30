@@ -959,7 +959,7 @@ const Op = function ()
         for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
     };
 
-    Op.prototype.getSerialized = function ()
+    Op.prototype.getSerialized = function (cleanUp)
     {
         const op = {};
         // op.name=this.getName();
@@ -974,7 +974,11 @@ const Op = function ()
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
-        if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
+
+        if (cleanUp)
+        {
+            if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
+        }
 
         op.portsIn = [];
         op.portsOut = [];
@@ -1320,7 +1324,7 @@ const Op = function ()
         const errorArr = [];
         for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
 
-        this.uiAttr({ "error": null });
+        // this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
         this._hasUiErrors = Object.keys(this._uiErrors).length;
     };

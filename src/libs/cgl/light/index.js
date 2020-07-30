@@ -384,6 +384,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     mat4.mul(this.lightMatrix, this._cgl.mMatrix, this.lightMatrix);
     mat4.mul(this.lightMatrix, this._shaderShadowMap.matrices.biasMatrix, this.lightMatrix);
 
+    this._cgl.gl.clearColor(1, 1, 1, 1);
     this._cgl.gl.clear(this._cgl.gl.DEPTH_BUFFER_BIT | this._cgl.gl.COLOR_BUFFER_BIT);
 
     if (renderFunction) renderFunction(); // * e.g. op.trigger();

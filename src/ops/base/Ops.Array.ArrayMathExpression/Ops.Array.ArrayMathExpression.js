@@ -1,67 +1,70 @@
 const inA = op.inArray("A");
 const inB = op.inArray("B");
 const inC = op.inArray("C");
-const inD = op.inArray("D");
-op.setPortGroup("Parameters", [inA, inB, inC, inD]);
-const inEquation = op.inString("Equation", "a*(b+c+d)");
-op.setPortGroup("Equation", [inEquation]);
-const outResult = op.outArray("Result");
-const outLength = op.outNumber("Array Length");
-const outEquationIsValid = op.outBool("Equation Valid");
-const outEquation = op.outString("Equation");
 
-let currentFunction = inEquation.get();
+const inX = op.inFloat("X", 1);
+const inY = op.inFloat("Y", 1);
+const inZ = op.inFloat("Z", 1);
+
+op.setPortGroup("Parameters", [inA, inB, inC, inX, inY, inZ]);
+const inExpression = op.inString("Expression", "a*(b+c+d)");
+op.setPortGroup("Expression", [inExpression]);
+
+const outResultArray = op.outArray("Result Array");
+const outLength = op.outNumber("Array Length");
+const outExpressionIsValid = op.outBool("Expression Valid");
+
+
+let currentFunction = inExpression.get();
 let functionValid = false;
+const functionChanged = false;
+const inputsChanged = false;
 
 const createFunction = () =>
 {
     try
     {
-        currentFunction = new Function("m", "a", "b", "c", "d", `with(m) { return ${inEquation.get()} }`);
+        currentFunction = new Function("m", "a", "b", "c", "x", "y", "z", "i", "len", `with(m) { return ${inExpression.get()} }`);
         functionValid = true;
         evaluateFunction();
-        outEquation.set(inEquation.get());
-        outEquationIsValid.set(functionValid);
+
+        outExpressionIsValid.set(functionValid);
     }
     catch (e)
     {
         functionValid = false;
-        outEquation.set("");
-        outEquationIsValid.set(functionValid);
+
+        outExpressionIsValid.set(functionValid);
+        outResultArray.set(null);
+
         if (e instanceof ReferenceError || e instanceof SyntaxError) return;
     }
 };
 
 const resultArray = [];
 let showingError = false;
-let showingErrorLength = false;
 
 const evaluateFunction = () =>
 {
     const arrayA = inA.get();
     const arrayB = inB.get();
     const arrayC = inC.get();
-    const arrayD = inD.get();
+    const arrays = [arrayA, arrayB, arrayC];
 
-    const arrays = [arrayA, arrayB, arrayC, arrayD];
+    const x = inX.get();
+    const y = inY.get();
+    const z = inZ.get();
 
     // * check if we have at least 2 arrays that are valid
-    if (arrays.filter(Boolean).length < 2)
+    if (arrays.filter(Boolean).length === 0)
     {
-        outResult.set(null);
+        outResultArray.set(null);
         outLength.set(0);
-        if (!showingErrorLength) op.uiAttr({ "error": "Cannot calculate with less than two arrays !" });
-        showingErrorLength = true;
+        outResultArray.set(null);
         return;
     }
     else
     {
-        if (showingErrorLength)
-        {
-            op.uiAttr({ "error": null });
-            showingErrorLength = false;
-        }
-
         const arrayLengths = arrays.map((arr) => (arr ? arr.length : undefined));
         const firstValidArrayLength = arrayLengths.find(Boolean);
         const sameLength = arrayLengths.filter(Boolean).every((length) => length === firstValidArrayLength);
@@ -70,22 +73,17 @@ const evaluateFunction = () =>
 
         if (sameLength)
         {
-            if (showingError)
-            {
-                op.uiAttr({ "error": null });
-                showingError = false;
-            }
+            op.setUiError("notsamelength", null);
 
 
             const firstValidArray = arrays.find(Boolean);
 
             validArrays = arrays.map((arr, index) =>
             {
+                // * map all undefined arrays to 0 values
                 if (!arr)
-                {
-                    // * map all undefined arrays to 0 values
                     arr = arrays.find(Boolean).map((x) => 0);
-                }
+
                 return arr;
             });
 
@@ -95,25 +93,38 @@ const evaluateFunction = () =>
             {
                 for (let i = 0; i < firstValidArray.length; i += 1)
                 {
-                    resultArray[i] = currentFunction(Math, validArrays[0][i], validArrays[1][i], validArrays[2][i], validArrays[3][i]);
+                    resultArray[i] = currentFunction(
+                        Math,
+                        validArrays[0][i],
+                        validArrays[1][i],
+                        validArrays[2][i],
+                        x,
+                        y,
+                        z,
+                        i,
+                        resultArray.length
+                    );
                 }
-                outResult.set(null);
-                outResult.set(resultArray);
+
+                outResultArray.set(null);
+                outResultArray.set(resultArray);
                 outLength.set(resultArray.length);
             }
         }
         else
         {
-            outResult.set(null);
+            outResultArray.set(null);
             outLength.set(0);
-            op.uiAttr({ "error": "Arrays do not have the same length !" });
+            op.setUiError("notsamelength", "Arrays do not have the same length!", 2);
             showingError = true;
         }
     }
 
-    outEquationIsValid.set(functionValid);
+    outExpressionIsValid.set(functionValid);
 };
 
 
-inA.onChange = inB.onChange = inC.onChange = inD.onChange = evaluateFunction;
-inEquation.onChange = createFunction;
+inA.onChange = inB.onChange = inC.onChange
+= inX.onChange = inY.onChange = inZ.onChange = evaluateFunction;
+// evaluateFunction;
+inExpression.onChange = createFunction;

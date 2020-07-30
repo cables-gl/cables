@@ -48,43 +48,29 @@ function update()
         bodies[i].body.position.y = vec[1];
         bodies[i].body.position.z = vec[2];
 
-        // if (bodies[i].node.hidden && !bodies[i].hidden)
-        // {
-        //     bodies[i].hidden = true;
-        //     world.removeBody(bodies[i].body);
-        //     console.log("removebody");
-        //     continue;
-        // }
-        // if (!bodies[i].node.hidden && bodies[i].hidden)
-        // {
-        //     bodies[i].hidden = false;
-        //     world.addBody(bodies[i].body);
-        //     console.log("addbody");
-        // }
-
-
         if (bodies[i].bounds && bodies[i].body)
         {
             const sc = vec3.create();
             mat4.getScaling(sc, bodies[i].node.modelMatAbs());
-            // console.log(sc);
 
             const mul = inMulSize.get();
-            bodies[i].body.shapes[0].halfExtents.x = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
-            bodies[i].body.shapes[0].halfExtents.y = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
-            bodies[i].body.shapes[0].halfExtents.z = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
+
+            const hex = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
+            const hey = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
+            const hez = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
+
+            if (bodies[i].body.shapes[0].halfExtents.x != hex ||
+            bodies[i].body.shapes[0].halfExtents.y != hey ||
+            bodies[i].body.shapes[0].halfExtents.z != hez)
+            {
+                bodies[i].body.shapes[0].halfExtents.x = bodies[i].bounds.size[0] * 0.5 * mul * sc[0];
+                bodies[i].body.shapes[0].halfExtents.y = bodies[i].bounds.size[1] * 0.5 * mul * sc[1];
+                bodies[i].body.shapes[0].halfExtents.z = bodies[i].bounds.size[2] * 0.5 * mul * sc[2];
+
+                // bodies[i].body.computeAABB();
+                bodies[i].body.updateBoundingRadius();
+            }
         }
-        // bounds.size[1] * 0.5 * 0.006,
-        // bounds.size[2] * 0.5 * 0.006
-
-
-        // cgl.pushModelMatrix();
-        // mat4.fromRotationTranslation(trMat, [0, 0, 0, 0], vec);
-
-        // mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
-
-
-        // cgl.popModelMatrix();
     }
 }
 

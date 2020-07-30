@@ -1,0 +1,395 @@
+{
+    "authorName": "cables",
+    "id": "76418c17-abd5-401b-82e2-688db6f966ee",
+    "created": 1587556120293,
+    "coreLibs": [
+        "cgl_cubemap",
+        "cgl_light"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In"
+            },
+            {
+                "type": "0",
+                "name": "Intensity",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Radius",
+                "group": "Light Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At X",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Y",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Point At Z",
+                "group": "Point At",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "R",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "G",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular R",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular G",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Specular B",
+                "group": "Specular Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Inner Cone Angle",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Spot Exponent",
+                "group": "Cone Attributes",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Cast Shadow",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Map Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Map Size",
+                "group": "Shadow Map Settings"
+            },
+            {
+                "type": "0",
+                "name": "Shadow Strength",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Near",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Far",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bias",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Polygon Offset",
+                "group": "Shadow Map Settings",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Normal Offset",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blur Amount",
+                "group": "Shadow Map Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Enable Advanced",
+                "group": "Advanced Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "MSAA index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "MSAA",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Texture Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Texture Filter",
+                "group": "Advanced Options"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Advanced Options"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Shadow Map"
+            }
+        ],
+        "name": "Ops.Admin.ShadowSpotLightCGL"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.cables.ShadowSpotTestLightCGL renamed to Ops.Admin.ShadowSpotLightCGL",
+            "author": "cables",
+            "date": 1587654173156
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1589968927218
+        },
+        {
+            "message": " added core lib: cgl_functions",
+            "author": "stephan",
+            "date": 1590495514991
+        },
+        {
+            "message": "Ops.Admin.ShadowSpotLightCGL renamed to Ops.Gl.Phong.SpotLight_v5",
+            "author": "pandur",
+            "date": 1596055767931
+        }
+    ],
+    "summary": "spot light for phong shading",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "Trigger input"
+            },
+            {
+                "name": "Intensity",
+                "text": "intensity of the spotlight"
+            },
+            {
+                "name": "Radius",
+                "text": "effective radius of the spot light"
+            },
+            {
+                "name": "X",
+                "text": "X position of the light"
+            },
+            {
+                "name": "Y",
+                "text": "Y position of the light"
+            },
+            {
+                "name": "Z",
+                "text": "Z position of the light"
+            },
+            {
+                "name": "Point At X",
+                "text": "where the light points at X"
+            },
+            {
+                "name": "Point At Y",
+                "text": "where the light points at Y"
+            },
+            {
+                "name": "Point At Z",
+                "text": "where the light points at Z"
+            },
+            {
+                "name": "R",
+                "text": "diffuse color channel R"
+            },
+            {
+                "name": "G",
+                "text": "diffuse color channel G"
+            },
+            {
+                "name": "B",
+                "text": "diffuse color channel B"
+            },
+            {
+                "name": "Specular R",
+                "text": "specular color channel R"
+            },
+            {
+                "name": "Specular G",
+                "text": "specular color channel G"
+            },
+            {
+                "name": "Specular B",
+                "text": "specular color channel B"
+            },
+            {
+                "name": "Cone Angle",
+                "text": "outter cone angle of the spot light, this parameter affects the camera of the shadow mapping"
+            },
+            {
+                "name": "Inner Cone Angle",
+                "text": "inner cone angle (soft area) of the spot light's cutoff"
+            },
+            {
+                "name": "Spot Exponent",
+                "text": "appearance of the spot light"
+            },
+            {
+                "name": "Falloff",
+                "text": "falloff in respect to effective radius"
+            },
+            {
+                "name": "Cast Shadow",
+                "text": "if activated, light will generate a shadow map to be used with the shadow material extension"
+            },
+            {
+                "name": "Map Size index",
+                "text": "index of the map size"
+            },
+            {
+                "name": "Map Size",
+                "text": "the size of the generated shadow map, possible values: 256, 512, 1024, 2048"
+            },
+            {
+                "name": "Shadow Strength",
+                "text": "strength of the shadows"
+            },
+            {
+                "name": "Near",
+                "text": "the near value of the shadow camera's frustum"
+            },
+            {
+                "name": "Far",
+                "text": "the far value of the shadow camera's frustum"
+            },
+            {
+                "name": "Bias",
+                "text": "biasing for the shadow comparison, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Polygon Offset",
+                "text": "polygon offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Normal Offset",
+                "text": "normal offset for the shadow map rendering, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "Blur Amount",
+                "text": "blur factor for the variance shadow algorithm, refer to the shadow op for an in depth explanation"
+            },
+            {
+                "name": "MSAA",
+                "text": "MSAA factor"
+            },
+            {
+                "name": "Texture Filter",
+                "text": "texture filter type"
+            },
+            {
+                "name": "Anisotropic",
+                "text": "anisotropic factor"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            },
+            {
+                "name": "Shadow Map",
+                "text": "generated shadow map output"
+            }
+        ]
+    }
+}

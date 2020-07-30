@@ -17,5 +17,15 @@
             }
         ],
         "name": "Ops.Vars.VarGetArray_v2"
+    },
+    "summary": "Get a variable array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
     }
 }

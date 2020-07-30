@@ -25,5 +25,15 @@
     },
     "coreLibs": [
         "vargetset"
-    ]
+    ],
+    "summary": "Set a variable object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

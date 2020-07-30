@@ -176,13 +176,7 @@ inExec.onTriggered = function ()
     {
         gltf.time = time;
 
-
-        console.log("should draw helper", CABLES.UI.renderHelper);
-        // ,  !CABLES.UI.renderHelper ,op.isCurrentUiOp() );
-
-        // console.log("should draw helper",gltf.bounds , CABLES.UI , cgl.shouldDrawHelpers(op));
-
-        if (gltf.bounds && CABLES.UI && cgl.shouldDrawHelpers(op))
+        if (gltf.bounds && cgl.shouldDrawHelpers(op))
         {
             if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
             else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));

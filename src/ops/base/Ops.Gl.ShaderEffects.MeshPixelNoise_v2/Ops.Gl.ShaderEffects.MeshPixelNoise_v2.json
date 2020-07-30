@@ -20,6 +20,15 @@
             },
             {
                 "type": "0",
+                "name": "Blendmode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Blendmode"
+            },
+            {
+                "type": "0",
                 "name": "WorldSpace",
                 "subType": "boolean"
             },
@@ -66,13 +75,29 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.MeshPixelNoise_v2"
+        "name": "Ops.Gl.ShaderEffects.MeshPixelNoise_v2"
     },
     "changelog": [
         {
             "message": "Ops.User.pandur.MeshPixelNoise_v2 renamed to Ops.Gl.ShaderEffects.MeshPixelNoise_v2",
             "author": "pandur",
             "date": 1595498625438
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1596015921285
         }
-    ]
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ],
+    "summary": "3d space noise for mesh materials",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
