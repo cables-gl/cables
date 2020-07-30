@@ -37,7 +37,8 @@ const cgl = op.patch.cgl;
 const videoElement = document.createElement("video");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("webkit-playsinline", "");
-const intervalID = null;
+
+
 fps.set(25);
 volume.set(1);
 
@@ -158,6 +159,7 @@ function updateTexture()
         return;
     }
 
+
     if (!tex)reInitTexture();
     if (!videoElementPlaying) return;
 
@@ -168,9 +170,26 @@ function updateTexture()
     outHeight.set(tex.height);
     outAspect.set(tex.width / tex.height);
 
+    if (!tex)reInitTexture();
+    if (!canPlayThrough.get()) return;
+    if (!videoElementPlaying) return;
+    if (!videoElement) return;
+    if (videoElement.videoHeight <= 0)
+    {
+        console.log("video size is 0!");
+        console.log(videoElement);
+        return;
+    }
+    if (videoElement.videoWidth <= 0)
+    {
+        console.log("video width is 0!");
+        console.log(videoElement);
+        return;
+    }
 
     const perc = (videoElement.currentTime) / videoElement.duration;
     if (!isNaN(perc)) outProgress.set(perc);
+
     outTime.set(videoElement.currentTime);
 
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, tex.tex);

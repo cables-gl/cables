@@ -4,7 +4,7 @@ const NOTE_OFF = 0x8;
 const NOTE_ON = 0x9;
 const NOTE_VALUES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
-const MIDIChannels = Array.from(Array(16).keys()).map((i) => i + 1);
+const MIDIChannels = Array.from(Array(16).keys()).map(i => i + 1);
 
 function getMIDINote(dataByte1LSB)
 {
@@ -19,7 +19,8 @@ function getNoteIndexFromMIDINote(midiNote)
     const string = midiNote.split("- ")[1];
     return Number(string);
 }
-const noteValues = Array.from(Array(128).keys()).map((key) => getMIDINote(key));
+
+const noteValues = Array.from(Array(128).keys()).map(key => getMIDINote(key));
 
 /* IN */
 // persistent array for learned notes

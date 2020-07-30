@@ -4,7 +4,7 @@ var result=op.outValue("Result");
 
 idx.onChange=update;
 
-for(var i=0;i<10;i++)
+for(var i=0;i<16;i++)
 {
     var p=op.inValue("Value "+i);
     valuePorts.push( p );
