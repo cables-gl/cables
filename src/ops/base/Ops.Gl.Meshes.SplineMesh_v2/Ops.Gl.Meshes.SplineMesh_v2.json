@@ -47,5 +47,13 @@
             }
         ],
         "name": "Ops.Admin.SplineMeshNew"
+    },
+    "summary": "draw splines/lines",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
