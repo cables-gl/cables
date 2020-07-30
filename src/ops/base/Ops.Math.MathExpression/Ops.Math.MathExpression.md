@@ -5,6 +5,7 @@ Here are a few example equations to get you started:
 (a+b)*c-d
 sin(a+b)-cos(c-d)
 a*log(b + c * 2) / pow(b, 4)
+<<<<<<< HEAD
 
 
 
