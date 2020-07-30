@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.Geometry.GeometryToWireframeArray3"
+    },
+    "summary": "generate an array of lines from a mesh to render a wireframe",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
