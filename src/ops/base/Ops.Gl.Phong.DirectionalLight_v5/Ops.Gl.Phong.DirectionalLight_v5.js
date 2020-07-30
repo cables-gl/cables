@@ -139,7 +139,8 @@ newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
 
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPosX.onChange = inPosY.onChange = inPosZ.onChange = inBias.onChange = inIntensity.onChange = inShadowStrength.onChange = updateLightParameters;
+= inPosX.onChange = inPosY.onChange = inPosZ.onChange
+= inBias.onChange = inIntensity.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
 
 let updateLight = false;
 function updateLightParameters(param)

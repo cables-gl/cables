@@ -288,7 +288,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Admin.PhongMaterial_v5"
+        "name": "Ops.Gl.Phong.PhongMaterial_v5"
     },
     "changelog": [
         {

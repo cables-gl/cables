@@ -182,7 +182,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.Admin.ShadowDirectionalLightCGL"
+        "name": "Ops.Gl.Phong.DirectionalLight_v5"
     },
     "changelog": [
         {

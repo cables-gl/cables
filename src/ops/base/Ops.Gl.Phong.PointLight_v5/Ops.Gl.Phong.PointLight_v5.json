@@ -143,7 +143,7 @@
                 "name": "Cubemap Projection"
             }
         ],
-        "name": "Ops.Admin.ShadowPointLightCGL"
+        "name": "Ops.Gl.Phong.PointLight_v5"
     },
     "changelog": [
         {
