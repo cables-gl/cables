@@ -1,2 +1,2 @@
 # cables-docs
-cables documentation docs.cables.gl
+cables documentation https://cables.gl/docs/docs
