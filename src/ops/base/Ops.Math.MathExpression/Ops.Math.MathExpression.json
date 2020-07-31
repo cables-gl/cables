@@ -94,10 +94,6 @@
             {
                 "name": "Expression Valid",
                 "text": "returns true if the expression is valid, false otherwise"
-            },
-            {
-                "name": "Expression",
-                "text": "mathematical expression to be calculated: the variables a, b, c, d can be used here"
             }
         ]
     }

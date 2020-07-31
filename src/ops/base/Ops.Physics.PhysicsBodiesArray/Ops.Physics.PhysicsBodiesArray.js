@@ -28,7 +28,7 @@ const body = null;
 
 exec.onTriggered = render;
 
-op.toWorkNeedsParent("Ops.Exp.Gl.Physics.World");
+op.toWorkNeedsParent("Ops.Physics.World");
 
 inPositions.onChange =
     function ()

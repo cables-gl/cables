@@ -74,7 +74,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.PhysicsBodiesArray"
+        "name": "Ops.Physics.PhysicsBodiesArray"
     },
     "summary": "create an array of physics bodies and add them to current world",
     "issues": "",

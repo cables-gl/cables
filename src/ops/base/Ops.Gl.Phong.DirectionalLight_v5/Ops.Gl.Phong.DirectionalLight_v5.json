@@ -182,7 +182,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.Admin.ShadowDirectionalLightCGL"
+        "name": "Ops.Gl.Phong.DirectionalLight_v5"
     },
     "changelog": [
         {
@@ -199,7 +199,13 @@
     "summary": "Directional light for phong shading",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Gl.Phong.PhongMaterial_v5",
+        "Ops.Gl.Phong.AmbientLight_v4",
+        "Ops.Gl.Phong.PointLight_v5",
+        "Ops.Gl.Phong.SpotLight_v5",
+        "Ops.Gl.ShaderEffects.Shadow_v2"
+    ],
     "youtubeids": [],
     "docs": {
         "ports": [

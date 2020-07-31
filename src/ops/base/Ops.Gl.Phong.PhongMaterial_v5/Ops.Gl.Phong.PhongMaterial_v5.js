@@ -477,9 +477,6 @@ function createUniforms(lightsCount)
 
                 "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + i + ".conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + i + ".spotProperties", [0, 0, 0, 0]),
-                "right": new CGL.Uniform(shader, "3f", "phongLight" + i + ".right", [0, 1, 0]),
-                "width": new CGL.Uniform(shader, "f", "phongLight" + i + ".width", 2),
-                "height": new CGL.Uniform(shader, "f", "phongLight" + i + ".height", 2),
             };
         }
     }
@@ -516,10 +513,6 @@ function setUniforms(lightStack)
         lightUniforms[i].color.setValue(light.color);
         lightUniforms[i].specular.setValue(light.specular);
 
-        lightUniforms[i].right.setValue(light.right);
-        lightUniforms[i].width.setValue(light.width);
-        lightUniforms[i].height.setValue(light.height);
-
         lightUniforms[i].lightProperties.setValue([
             light.intensity,
             light.attenuation,
@@ -533,8 +526,6 @@ function setUniforms(lightStack)
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
-        lightUniforms[i].width.setValue(light.width);
-        lightUniforms[i].height.setValue(light.height);
     }
 }
 

@@ -47,5 +47,13 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfNodeTransform"
+    },
+    "summary": "get current transformation of a gltf node",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

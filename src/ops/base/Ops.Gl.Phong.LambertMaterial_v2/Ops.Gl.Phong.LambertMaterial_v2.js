@@ -1,5 +1,4 @@
 const LIGHT_TYPES = { "ambient": 0, "point": 1, "directional": 2, "spot": 3 };
-
 const execute = op.inTrigger("Execute");
 const r = op.inValueSlider("Diffuse R", Math.random());
 const g = op.inValueSlider("Diffuse G", Math.random());

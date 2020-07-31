@@ -1,0 +1,144 @@
+{
+    "author": "59db805b08bab26e1ab7a0f2",
+    "authorName": "pandur",
+    "id": "b7482d75-913d-4564-92ae-81f8dbead3ce",
+    "created": 1513777600653,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Axis index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "treshhold",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sine Animation",
+                "group": "Sine Animation",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Time",
+                "group": "Sine Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sine Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Frequency",
+                "group": "Sine Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Amplitude",
+                "group": "Sine Animation",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Exp.Gl.ShaderEffects.LimitMeshByTexCoord"
+    },
+    "summary": "discard pixel if texture coordinate is below threshold",
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger in "
+            },
+            {
+                "name": "Axis",
+                "text": "Axis to use to discard pixels. Multiple modes"
+            },
+            {
+                "name": "treshhold",
+                "text": "Threshold used to discard pixels"
+            },
+            {
+                "name": "Sine Animation",
+                "text": "Enable or disable sine animation"
+            },
+            {
+                "name": "Time",
+                "text": "Time used to animate the sine option"
+            },
+            {
+                "name": "Sine Source",
+                "text": "Uses tex co-ordinate x or y, normally its the opposite Axis mode"
+            },
+            {
+                "name": "Frequency",
+                "text": "Frequency of the sine animation"
+            },
+            {
+                "name": "Amplitude",
+                "text": "Amplitude of the sine animation"
+            },
+            {
+                "name": "trigger",
+                "text": "Trigger out"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "added more axis options",
+            "author": "pandur",
+            "date": 1555423838907
+        },
+        {
+            "message": "added sine animation",
+            "author": "pandur",
+            "date": 1555495594918
+        },
+        {
+            "message": "Ops.Exp.Gl.ShaderEffects.LimitMeshByTexCoord renamed to Ops.Gl.ShaderEffects.LimitMeshByTexCoord",
+            "author": "pandur",
+            "date": 1596093630339
+        }
+    ],
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Json3d.Json3dMesh"
+    ],
+    "todos": [
+        {
+            "message": "Treshhold port name is incorrect should be Threshhold ",
+            "author": "andro",
+            "id": "94662ea6-0201-481d-9960-44d7b9229928",
+            "date": 1558012659008
+        },
+        {
+            "message": "Whoops Treshhold port name is incorrect should be Threshold",
+            "author": "andro",
+            "id": "d5888278-366c-44ae-859e-e34e90803dbb",
+            "date": 1558012676684
+        },
+        {
+            "message": "Sine source checkbox doesn't seem to affect anything",
+            "author": "andro",
+            "id": "3f56824a-7601-4b63-8945-53420f057eb7",
+            "date": 1558012834607
+        }
+    ]
+}
