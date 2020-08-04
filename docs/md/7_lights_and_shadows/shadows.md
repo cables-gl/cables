@@ -62,7 +62,10 @@ We are able to set the amount of sampling with the parameter `Sample Amount` fea
 
 ### VSM (Variance Shadow Mapping)
 
-TBD
+The *VSM*, or *Variance Shadow Mapping*, algorithm is a more recent one, developed by [Donelly and Lauritzen](https://www.punkuser.net/vsm/vsm_paper.pdf). It uses probability theory behind the scenes to soften shadows.
+
+We are able to soften the shadows by increasing the `Blur Amount` in the [Directional Light](https://cables.gl/op/Ops.Gl.Phong.DirectionalLight_v5) and [Spot Light](https://cables.gl/op/Ops.Gl.Phong.SpotLight_v5) operators.
+Blurring point light shadows does **not** work, as there is no way in WebGL (1 and 2). Though VSM looks the best and is relatively cheap compared to Poisson and PCF, it comes with its own caveats; the main one being so called *Light Leaking* (explained in the chapter "Common Problems & Artifacts"). If you experience light leaking, try increasing the `Bias` parameter until leaking disappears. There are more solutions to tackle light leaking, also presented in the chapter "Common Problems & Artifacts".
 
 
 ## Common Problems & Artifacts
