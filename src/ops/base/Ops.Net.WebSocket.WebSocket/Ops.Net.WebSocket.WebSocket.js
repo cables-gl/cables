@@ -1,51 +1,51 @@
 // ws://192.168.1.235
 
-var inUrl=op.inValueString("url");
+const inUrl = op.inValueString("url");
 
-var outResult=op.outObject("result");
-var outConnected=op.outValue("connected");
-var outConnection=this.outObject("Connection");
+const outResult = op.outObject("result");
+const outConnected = op.outValue("connected");
+const outConnection = this.outObject("Connection");
 
-var outReceived=op.outTrigger("Received Data");
+const outReceived = op.outTrigger("Received Data");
 
-var connection=null;
-var timeout=null;
-var connectedTo='';
+let connection = null;
+let timeout = null;
+let connectedTo = "";
 
-inUrl.onChange=connect;
-timeout=setTimeout(checkConnection,2000);
+inUrl.onChange = connect;
+timeout = setTimeout(checkConnection, 2000);
 
 inUrl.set();
 
-var connecting=false;
+let connecting = false;
 
 
 function checkConnection()
 {
-    if(outConnected.get()===false && !connecting)
+    if (outConnected.get() === false && !connecting)
     {
-        console.log("reconnect websocket...");
+        op.log("reconnect websocket...");
         connect();
     }
 
-    timeout=setTimeout(checkConnection,2000);
+    timeout = setTimeout(checkConnection, 2000);
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    if(outConnected.get()===true)connection.close();
-    connecting=false;
+    if (outConnected.get() === true)connection.close();
+    connecting = false;
     clearTimeout(timeout);
 };
 
 function connect()
 {
-    if(outConnected.get()===true && connectedTo==inUrl.get()) return;
+    if (outConnected.get() === true && connectedTo == inUrl.get()) return;
     // if(outConnected.get()===true)connection.close();
 
-    if(!inUrl.get() || inUrl.get()==='')
+    if (!inUrl.get() || inUrl.get() === "")
     {
-        console.log("websocket: invalid url ");
+        op.log("websocket: invalid url ");
         outConnected.set(false);
         return;
     }
@@ -53,44 +53,44 @@ function connect()
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
     if (!window.WebSocket)
-        console.error('Sorry, but your browser doesn\'t support WebSockets.');
+        console.error("Sorry, but your browser doesn't support WebSockets.");
 
     try
     {
-        connecting=true;
-        if(connection!==null)connection.close();
+        connecting = true;
+        if (connection !== null)connection.close();
         connection = new WebSocket(inUrl.get());
     }
     catch (e)
     {
-        console.log('could not connect to',inUrl.get());
-        connecting=false;
-        console.log(e);
+        op.log("could not connect to", inUrl.get());
+        connecting = false;
+        op.log(e);
     }
 
-    if(connection)
+    if (connection)
     {
         connection.onerror = function (message)
         {
-            connecting=false;
-            console.log("ws error");
+            connecting = false;
+            op.log("ws error");
             outConnected.set(false);
             outConnection.set(null);
         };
 
         connection.onclose = function (message)
         {
-            connecting=false;
-            console.log("ws close");
+            connecting = false;
+            op.log("ws close");
             outConnected.set(false);
             outConnection.set(null);
         };
 
         connection.onopen = function (message)
         {
-            connecting=false;
+            connecting = false;
             outConnected.set(true);
-            connectedTo=inUrl.get();
+            connectedTo = inUrl.get();
             outConnection.set(connection);
         };
 
@@ -98,21 +98,16 @@ function connect()
         {
             try
             {
-                var json = JSON.parse(message.data);
+                let json = JSON.parse(message.data);
                 outResult.set(null);
                 outResult.set(json);
                 outReceived.trigger();
-
             }
-            catch(e)
+            catch (e)
             {
-                console.log(e);
-                console.log('This doesn\'t look like a valid JSON: ', message.data);
-                return;
+                op.log(e);
+                op.log("This doesn't look like a valid JSON: ", message.data);
             }
         };
-
     }
-
 }
-
