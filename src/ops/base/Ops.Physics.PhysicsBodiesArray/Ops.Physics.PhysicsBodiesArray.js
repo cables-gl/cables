@@ -166,7 +166,7 @@ function setBodyPositions(pos)
 {
     if (!pos)pos = inPositions.get();
 
-    console.log(pos);
+    // console.log(pos);
     for (let i = 0; i < pos.length; i += 3)
     {
         const body = bodies[i / 3];
@@ -197,7 +197,7 @@ function updatePositions()
     else
     {
         setSimulatedPositions(pos);
-        console.log("set simulated...");
+        // console.log("set simulated...");
     }
 
 
