@@ -9,6 +9,7 @@ const
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
+    resultArrPos = op.outArray("Simulated Positions"),
     outNum = op.outNumber("Total Bodies");
 
 const cgl = op.patch.cgl;
@@ -24,21 +25,42 @@ let lastWorld = null;
 let needSetup = true;
 const bodies = [];
 const body = null;
-
+let skipSimulation = false;
 
 exec.onTriggered = render;
 
-op.toWorkNeedsParent("Ops.Physics.World");
+// op.toWorkNeedsParent("Ops.Physics.World");
 
 inPositions.onChange =
     function ()
     {
+        needSetup = true;
         const pos = inPositions.get();
-        if (!pos) return;
-        if (pos.length / 3 != bodies.length) needSetup = true;
+        if (!pos)
+        {
+            removeBodies(lastWorld);
+            return;
+        }
+        if (pos.length / 3 != bodies.length)
+        {
+            removeBodies(lastWorld);
+        }
+        setBodyPositions();
+        skipSimulation = true;
     };
 
-inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange = inName.onChange = inReset.onTriggered =
+inReset.onTriggered = () =>
+{
+    const staticPos = inMass.get() == 0;
+    if (!staticPos)
+    {
+        setBodyPositions();
+    }
+    skipSimulation = true;
+};
+
+
+inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange = inName.onChange =
     function ()
     {
         needSetup = true;
@@ -58,6 +80,11 @@ function removeBodies(world)
         world = world || cgl.frameStore.world;
         if (bodies[i] && world)lastWorld.removeBody(bodies[i]);
     }
+
+    resultsPositions.length = 0;
+    resultArrPos.set(null);
+    resultArrPos.set(resultsPositions);
+
 
     bodies.length = 0;
 }
@@ -90,9 +117,9 @@ function setup(modelScale)
     }
 
     lastWorld = world;
-    setPosFromArray();
+    setBodyPositions();
     needSetup = false;
-    console.log("setup", bodies);
+    skipSimulation = true;
 }
 
 function getScaling(mat)
@@ -103,34 +130,25 @@ function getScaling(mat)
     return Math.hypot(m31, m32, m33);
 }
 
-function setPosFromArray()
+const resultsPositions = [];
+
+function setSimulatedPositions(pos)
 {
-    const staticPos = inMass.get() == 0;
-    const modelScale = getScaling(cgl.mMatrix);
-
-    const pos = inPositions.get();
-    if (!pos || pos.length < 3) return false;
-
     for (let i = 0; i < pos.length; i += 3)
     {
         const body = bodies[i / 3];
 
         if (!body) continue;
-        if (staticPos)
-        {
-            vec3.transformMat4(vec, empty, cgl.mMatrix);
-            body.position.x = vec[0] + pos[i + 0];
-            body.position.y = vec[1] + pos[i + 1];
-            body.position.z = vec[2] + pos[i + 2];
-        }
-        else
-        {
-            vec3.set(vec,
-                body.position.x,
-                body.position.y,
-                body.position.z
-            );
-        }
+
+        vec3.set(vec,
+            body.position.x,
+            body.position.y,
+            body.position.z
+        );
+
+        resultsPositions[i + 0] = vec[0];
+        resultsPositions[i + 1] = vec[1];
+        resultsPositions[i + 2] = vec[2];
 
         // quat.set(q,
         //     body.quaternion.x,
@@ -141,27 +159,70 @@ function setPosFromArray()
 
         // cgl.pushModelMatrix();
     }
+}
+
+
+function setBodyPositions(pos)
+{
+    if (!pos)pos = inPositions.get();
+
+    console.log(pos);
+    for (let i = 0; i < pos.length; i += 3)
+    {
+        const body = bodies[i / 3];
+
+        if (!body) continue;
+
+        vec3.transformMat4(vec, empty, cgl.mMatrix);
+
+        resultsPositions[i + 0] = body.position.x = vec[0] + pos[i + 0];
+        resultsPositions[i + 1] = body.position.y = vec[1] + pos[i + 1];
+        resultsPositions[i + 2] = body.position.z = vec[2] + pos[i + 2];
+    }
+}
+function updatePositions()
+{
+    const staticPos = inMass.get() == 0;
+    const modelScale = getScaling(cgl.mMatrix);
+
+    const pos = inPositions.get();
+    if (!pos || pos.length < 3) return false;
+
+    resultsPositions.length = pos.length;
+
+    if (staticPos)
+    {
+        setBodyPositions(pos);
+    }
+    else
+    {
+        setSimulatedPositions(pos);
+        console.log("set simulated...");
+    }
+
 
     return true;
 }
 
 function render()
 {
-    if (needSetup)setup();
-    if (lastWorld != cgl.frameStore.world)setup();
-
+    if (needSetup) setup();
+    if (lastWorld != cgl.frameStore.world) setup();
 
     outNum.set(bodies.length);
 
-    setPosFromArray();
+    if (!skipSimulation)
+    {
+        updatePositions();
+    }
 
-    // outX.set(body.position.x);
-    // outY.set(body.position.y);
-    // outZ.set(body.position.z);
+    skipSimulation = false;
 
-    // CABLES.physicsCurrentBody = body;
+    resultArrPos.set(null);
+    resultArrPos.set(resultsPositions);
 
     next.trigger();
+
 
     // CABLES.physicsCurrentBody = null;
     // cgl.popModelMatrix();
