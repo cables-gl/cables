@@ -95,7 +95,7 @@
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.Admin.ShadowModuleModifier"
+        "name": "Ops.Gl.ShaderEffects.Shadow_v2"
     },
     "changelog": [
         {

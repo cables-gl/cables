@@ -53,12 +53,16 @@
             {
                 "type": "2",
                 "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "Finished",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.AudioBufferPlayer"
     },
     "summary": "Plays back audio data stored in an AudioBuffer",
-    "updated": 1522776025335,
     "created": 1506598843485,
     "docs": {
         "ports": [
