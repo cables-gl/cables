@@ -90,6 +90,7 @@ function setup(modelScale)
     }
 
     lastWorld = world;
+    setPosFromArray();
     needSetup = false;
     console.log("setup", bodies);
 }
@@ -102,19 +103,13 @@ function getScaling(mat)
     return Math.hypot(m31, m32, m33);
 }
 
-function render()
+function setPosFromArray()
 {
-    if (needSetup)setup();
-    if (lastWorld != cgl.frameStore.world)setup();
-
-
     const staticPos = inMass.get() == 0;
     const modelScale = getScaling(cgl.mMatrix);
 
     const pos = inPositions.get();
-    if (!pos || pos.length < 3) return;
-
-    outNum.set(bodies.length);
+    if (!pos || pos.length < 3) return false;
 
     for (let i = 0; i < pos.length; i += 3)
     {
@@ -147,6 +142,18 @@ function render()
         // cgl.pushModelMatrix();
     }
 
+    return true;
+}
+
+function render()
+{
+    if (needSetup)setup();
+    if (lastWorld != cgl.frameStore.world)setup();
+
+
+    outNum.set(bodies.length);
+
+    setPosFromArray();
 
     // outX.set(body.position.x);
     // outY.set(body.position.y);
