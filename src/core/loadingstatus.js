@@ -57,8 +57,8 @@ LoadingStatus.prototype.checkStatus = function ()
 
         if (!this._wasFinishedPrinted)
         {
-            this.print();
             this._wasFinishedPrinted = true;
+            this.print();
         }
     }
 };
