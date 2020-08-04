@@ -71,7 +71,9 @@
     ],
     "summary": "a simple shaded material ",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": [
         "Ops.Gl.Phong.PhongMaterial_v5",
         "Ops.Gl.Phong.PointLight_v5",
