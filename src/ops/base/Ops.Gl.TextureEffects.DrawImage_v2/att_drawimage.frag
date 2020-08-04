@@ -72,6 +72,11 @@ void main()
                 colImgAlphaAlpha=1.0-(gray.r+gray.g+gray.b)/3.0;
             #endif
 
+            #ifdef INVERT_ALPHA
+            colImgAlphaAlpha=clamp(colImgAlphaAlpha,0.0,1.0);
+            colImgAlphaAlpha=1.0-colImgAlphaAlpha;
+            #endif
+
             blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
         #endif
     #endif

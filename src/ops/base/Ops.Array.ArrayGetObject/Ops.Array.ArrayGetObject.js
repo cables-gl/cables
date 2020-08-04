@@ -1,44 +1,43 @@
 const
-    array=op.inArray("array"),
-    index=op.inValueInt("index"),
-    value=op.outObject("value");
+    array = op.inArray("array"),
+    index = op.inValueInt("index"),
+    value = op.outObject("value");
 
-var last=null;
+let last = null;
 
-array.ignoreValueSerialize=true;
-value.ignoreValueSerialize=true;
+array.ignoreValueSerialize = true;
+value.ignoreValueSerialize = true;
 
-index.onChange=update;
-array.onChange=update;
+index.onChange = update;
+array.onChange = update;
 
-op.toWorkPortsNeedToBeLinked(array,value);
+op.toWorkPortsNeedToBeLinked(array);
 
 function update()
 {
-    if(index.get()<0)
+    if (index.get() < 0)
     {
-        value.set( null);
+        value.set(null);
         return;
     }
 
-    var arr=array.get();
-    if(!arr)
+    const arr = array.get();
+    if (!arr)
     {
-        value.set( null);
+        value.set(null);
         return;
     }
 
-    var ind=index.get();
-    if(ind>=arr.length)
+    const ind = index.get();
+    if (ind >= arr.length)
     {
-        value.set( null);
+        value.set(null);
         return;
     }
-    if(arr[ind])
+    if (arr[ind])
     {
         value.set(null);
         value.set(arr[ind]);
-        last=arr[ind];
+        last = arr[ind];
     }
 }
-
