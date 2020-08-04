@@ -16,19 +16,53 @@ The following op(s) allow to receive shadows:
 
 in conjuction with any [Material](https://cables.gl/ops/collection/Material).
 
-## Algorithm Overview
 
-TBD
+Before we dive into creating shadows, we need to cover the basic terminology first:
+
+## Theoretical Overview
+
+There are 3 entities at work when talking about shadows: the light source, the occluder and the receiver.
+
+![receiveroccluder](img/03_2_umbra_penumbra.png)
+
+The *light source* emits light. The *occluder* is an object that *casts* a shadow onto a *receiver*. A receiver *receives* the shadow cast by the occluder.
+Shadows are achieved through the occluder blocking the light from the light source that is supposed to reach the receiver, therefore coloring the part of the receiver that is occluded darker than the rest.
+
+The shadow that is being cast can be split in two zones:
+the *umbra*, the hard part of the shadow, and the *penumbra*, the soft part at the edge of the shadow.
+
+When we talk about *soft shadows*, we mean shadows that feature a soft penumbra. When we talk about *hard shadows*, the shadows do **not** display a penumbra.
+
+Okay, enough with the theory, let's dive in to the algorithms!
+
+## Algorithms
+The shadow system of cables currently features 4 shadow algorithms that can be selected in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. They will be briefly introduced in this section:
 
 ### Default
+The default shadow algorithm is only able to produce hard shadows. This algorithm is the fastest & cheapest and is based on the [1978 algorithm by Williams](http://cseweb.ucsd.edu/~ravir/274/15/papers/p270-williams.pdf).
 
- TBD
 
 ### PCF (Percentage-Closer-Filtering)
+The *PCF*, or *Percentage-Closer-Filtering*, algorithm is an extension of the default algorithm. It is able to produce *soft shadows* by linearly interpolating between the pixels of the shadow map. We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op.
+The higher the `Sample Amount`, the more expensive the calculations become. Most of the time, an amount of **4** samples should be enough to soften the shadows' edges.
+
+#### A note on the [Point Light](https://cables.gl/op/Ops.Gl.Phong.PointLight_v5) op:
+
+When using a point light, it is possible to use the `Sample Distribution` parameter to either:
+
+ 1) combat *shadow acne* (explained in the section *Common Problems & Artifacts*)
+ 2) change the appearance of the shadows so that there are "multiple" shadows that overlap each other
+
+With the PCF algorithm, this parameter only works with a point light.
 
 ### Poisson
+The *Poisson* algorithm (named after the famous french mathematician [Siméon Denis Poisson](https://en.wikipedia.org/wiki/Siméon_Denis_Poisson)) works like the PCF algorithm, with the difference that samples are not taken by linearly interpolating between values, but instead using *random offsets* distributed on a [Poisson Disc](https://medium.com/@hemalatha.psna/implementation-of-poisson-disc-sampling-in-javascript-17665e406ce1).
+
+We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. In most cases, taking **4** samples will be enough. The `Sample Distribution` parameter allows us to change the "amount of sample points" used. The higher the value, the denser the sample distribution. Try keeping the value between **250** - **800** for best results.
 
 ### VSM (Variance Shadow Mapping)
+
+TBD
 
 
 ## Common Problems & Artifacts
