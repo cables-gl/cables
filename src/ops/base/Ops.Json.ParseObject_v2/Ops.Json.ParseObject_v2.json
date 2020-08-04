@@ -14,10 +14,6 @@
             {
                 "type": "5",
                 "name": "JSON String"
-            },
-            {
-                "type": "1",
-                "name": "Show Structure"
             }
         ],
         "portsOut": [

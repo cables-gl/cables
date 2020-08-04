@@ -1,16 +1,10 @@
 const
     str = op.inStringEditor("JSON String", "{}", "json"),
     outObj = op.outObject("Result"),
-    isValid = op.outValue("Valid"),
-    inShow = op.inTriggerButton("Show Structure");
+    isValid = op.outValue("Valid");
 
 str.onChange = parse;
 parse();
-
-let json = null;
-
-inShow.onTriggered = printJsonInfo;
-inShow.hidePort();
 
 function parse()
 {
@@ -20,7 +14,6 @@ function parse()
         outObj.set(null);
         outObj.set(obj);
         isValid.set(true);
-        json = obj;
         op.setUiError("invalidjson", null);
     }
     catch (ex)
@@ -45,22 +38,3 @@ function parse()
         op.setUiError("invalidjson", "INVALID JSON<br/>can not parse string to object:<br/><b> " + ex.message + "</b><br/>" + outStr);
     }
 }
-
-
-op.exposeNode = function (path)
-{
-    const newop = gui.corePatch().addOp("Ops.Json.ObjectGetByPath");
-    newop.getPort("Path").set(path);
-    op.patch.link(op, outObj.name, newop, "Object");
-    gui.patch().focusOp(newop.id, true);
-    CABLES.UI.MODAL.hide();
-};
-
-op.exposeArray = function (path)
-{
-    const newop = gui.corePatch().addOp("Ops.Json.ObjectGetArrayByPath");
-    newop.getPort("Path").set(path);
-    op.patch.link(op, outObj.name, newop, "Object");
-    gui.patch().focusOp(newop.id, true);
-    CABLES.UI.MODAL.hide();
-};
