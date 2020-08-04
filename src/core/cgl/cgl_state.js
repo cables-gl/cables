@@ -485,6 +485,8 @@ const Context = function (_patch)
         this.popBlendMode();
 
         cgl.endFrame();
+
+        this.emitEvent("endFrame");
     };
 
     this.getTexture = function (slot)
