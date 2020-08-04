@@ -10,6 +10,11 @@
             "message": "Ops.User.cables.CubeMapCamera_v2 renamed to Ops.Gl.CubeMap.CubeMapCamera_v2",
             "author": "simod",
             "date": 1586341874965
+        },
+        {
+            "message": " added core lib: cgl_cubemapframebuffer",
+            "author": "cables",
+            "date": 1595947131060
         }
     ],
     "authorName": "simod",
@@ -22,8 +27,13 @@
             },
             {
                 "type": "0",
-                "name": "Size",
+                "name": "Size index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -62,5 +72,8 @@
                 "text": "Cubemap Texture output"
             }
         ]
-    }
+    },
+    "coreLibs": [
+        "cgl_cubemapframebuffer"
+    ]
 }

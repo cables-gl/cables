@@ -12,7 +12,7 @@ IN vec3 MOD_norm;
 
         float cosine = dot(halfDirection, nDirection);
         float product = max(cosine, 0.0);
-        float factor = pow(product, MOD_inFresnelWidthExponent.y);
+        float factor = pow(product, MOD_inFresnelExponent);
 
         return 5. * factor;
 

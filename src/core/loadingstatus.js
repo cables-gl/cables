@@ -14,6 +14,7 @@ const LoadingStatus = function (patch)
     this._order = 0;
     this._startTime = 0;
     this._patch = patch;
+    this._wasFinishedPrinted = false;
 };
 
 LoadingStatus.prototype.setOnFinishedLoading = function (cb)
@@ -53,7 +54,12 @@ LoadingStatus.prototype.checkStatus = function ()
         {
             setTimeout(this._cbFinished[j], 200);
         }
-        this.print();
+
+        if (!this._wasFinishedPrinted)
+        {
+            this._wasFinishedPrinted = true;
+            this.print();
+        }
     }
 };
 

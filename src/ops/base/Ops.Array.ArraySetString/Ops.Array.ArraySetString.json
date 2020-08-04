@@ -36,5 +36,34 @@
             }
         ],
         "name": "Ops.Array.ArraySetString"
+    },
+    "summary": "Set a string in an array at index",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Execute",
+                "text": "update the array"
+            },
+            {
+                "name": "Array",
+                "text": "Array to modify"
+            },
+            {
+                "name": "Index",
+                "text": "index to update with a new string"
+            },
+            {
+                "name": "String",
+                "text": "String to input at index"
+            },
+            {
+                "name": "Result",
+                "text": "Modified array out"
+            }
+        ]
     }
 }

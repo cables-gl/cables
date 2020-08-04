@@ -267,13 +267,15 @@ Shader.prototype.createStructUniforms = function ()
     let structStrFrag = "";
     let structStrVert = ""; // TODO: not used yet
 
-    // * reset the arrays holding the value each recompile so we don't skip structs
     this._structNames = [];
-    this._injectedStringsFrag = [];
-    this._injectedStringsVert = [];
+    // * reset the arrays holding the value each recompile so we don't skip structs
+    // * key value mapping so the same struct can be added twice (two times the same modifier)
+    this._injectedStringsFrag = {};
+    this._injectedStringsVert = {};
 
     this._structUniformNamesIndicesFrag = [];
     this._structUniformNamesIndicesVert = [];
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         // * only add uniforms to struct that are a member of a struct
@@ -297,6 +299,8 @@ Shader.prototype.createStructUniforms = function ()
                     structStrVert = structStrVert.concat(structDefinition);
 
                 this._structNames.push(this._uniforms[i]._structName);
+                this._injectedStringsFrag[this._uniforms[i]._structName] = [];
+                this._injectedStringsVert[this._uniforms[i]._structName] = [];
             }
 
             // * create member & comment
@@ -310,7 +314,9 @@ Shader.prototype.createStructUniforms = function ()
             if (this._uniforms[i].getShaderType() === "both")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1 && this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                if (
+                    this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1
+                && this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
@@ -323,8 +329,8 @@ Shader.prototype.createStructUniforms = function ()
                         structStrVert.slice(0, insertionIndexVert)
                         + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
 
-                    this._injectedStringsFrag.push(stringToInsert);
-                    this._injectedStringsVert.push(stringToInsert);
+                    this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
+                    this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
@@ -333,14 +339,15 @@ Shader.prototype.createStructUniforms = function ()
             else if (this._uniforms[i].getShaderType() === "frag")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsFrag.indexOf(stringToInsert) === -1)
+                if (this._injectedStringsFrag[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexFrag = structStrFrag.lastIndexOf(injectionString);
 
                     structStrFrag =
                         structStrFrag.slice(0, insertionIndexFrag)
                         + stringToInsert + structStrFrag.slice(insertionIndexFrag - 1);
-                    this._injectedStringsFrag.push(stringToInsert);
+
+                    this._injectedStringsFrag[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesFrag.indexOf(i) === -1) this._structUniformNamesIndicesFrag.push(i);
@@ -348,7 +355,7 @@ Shader.prototype.createStructUniforms = function ()
             else if (this._uniforms[i].getShaderType() === "vert")
             {
                 // * inject member before {injectionString}
-                if (this._injectedStringsVert.indexOf(stringToInsert) === -1)
+                if (this._injectedStringsVert[this._uniforms[i]._structName].indexOf(stringToInsert) === -1)
                 {
                     const insertionIndexVert = structStrVert.lastIndexOf(injectionString);
 
@@ -356,7 +363,7 @@ Shader.prototype.createStructUniforms = function ()
                         structStrVert.slice(0, insertionIndexVert)
                         + stringToInsert + structStrVert.slice(insertionIndexVert - 1);
 
-                    this._injectedStringsVert.push(stringToInsert);
+                    this._injectedStringsVert[this._uniforms[i]._structName].push(stringToInsert);
                 }
 
                 if (this._structUniformNamesIndicesVert.indexOf(i) === -1) this._structUniformNamesIndicesVert.push(i);
@@ -389,7 +396,6 @@ Shader.prototype.createStructUniforms = function ()
     for (let i = 0; i < this._structUniformNamesIndicesVert.length; i += 1)
     {
         const index = this._structUniformNamesIndicesVert[i];
-
         const uniDeclarationString = "UNI " + this._uniforms[index]._structName + " " + this._uniforms[index]._structUniformName + ";".endl();
 
         if (this._uniDeclarationsVert.indexOf(uniDeclarationString) === -1)
@@ -422,6 +428,8 @@ Shader.prototype.compile = function ()
     for (let i = 0; i < this._defines.length; i++)
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
+    const structStrings = this.createStructUniforms();
+
     if (this._uniforms)
         for (let i = 0; i < this._uniforms.length; i++)
             this._uniforms[i].resetLoc();
@@ -430,6 +438,14 @@ Shader.prototype.compile = function ()
 
     let vs = "";
     let fs = "";
+
+    if (!this.srcFrag)
+    {
+        console.error("[cgl shader] has no fragment source!");
+        this.srcVert = this.getDefaultVertexShader();
+        this.srcFrag = this.getDefaultFragmentShader();
+        // return;
+    }
 
     if (this.glslVersion == 300)
     {
@@ -514,7 +530,6 @@ Shader.prototype.compile = function ()
     let uniformsStrVert = "\n// cgl generated".endl();
     let uniformsStrFrag = "\n// cgl generated".endl();
 
-    const structStrings = this.createStructUniforms();
 
     for (let i = 0; i < this._uniforms.length; i++)
     {
@@ -670,6 +685,11 @@ Shader.prototype.compile = function ()
     this.lastCompile = now();
 
     CGL.profileData.shaderCompileTime += performance.now() - startTime;
+};
+
+Shader.hasChanged = function ()
+{
+    return this._needsRecompile;
 };
 
 Shader.prototype.bind = function ()
@@ -942,9 +962,9 @@ Shader.prototype.addModule = function (mod, sibling)
 
     if (!mod.group)
         if (sibling) mod.group = sibling.group;
-        else mod.group = simpleId();// this._modGroupCount++;
+        else mod.group = simpleId();
 
-    mod.prefix = "mod" + mod.group;
+    mod.prefix = "mod" + mod.group + "_";
     this._modules.push(mod);
 
     this._needsRecompile = true;
@@ -952,6 +972,15 @@ Shader.prototype.addModule = function (mod, sibling)
     this._moduleNumId++;
 
     return mod;
+};
+
+Shader.prototype.hasModule = function (modId)
+{
+    for (let i = 0; i < this._modules.length; i++)
+    {
+        if (this._modules[i].id == modId) return true;
+    }
+    return false;
 };
 
 Shader.prototype.setModules = function (names)
@@ -1081,9 +1110,12 @@ Shader.prototype.addUniformStructFrag = function (structName, uniformName, membe
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "frag";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "frag";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;
@@ -1116,9 +1148,12 @@ Shader.prototype.addUniformStructVert = function (structName, uniformName, membe
     for (let i = 0; i < members.length; i += 1)
     {
         const member = members[i];
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "vert";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "vert";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;
@@ -1153,10 +1188,12 @@ Shader.prototype.addUniformStructBoth = function (structName, uniformName, membe
         const member = members[i];
         if ((member.type === "2i" || member.type === "i" || member.type === "3i"))
             console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
-
-        const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
-        uni.shaderType = "both";
-        uniforms[uniformName + "." + member.name] = uni;
+        if (!this.hasUniform(uniformName + "." + member.name))
+        {
+            const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
+            uni.shaderType = "both";
+            uniforms[uniformName + "." + member.name] = uni;
+        }
     }
 
     return uniforms;

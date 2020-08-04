@@ -1,0 +1,174 @@
+{
+    "id": "322d8c8d-851b-481d-9bee-ec1cf7d57a35",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1573749960932
+        },
+        {
+            "message": "Ops.User.cables.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v3",
+            "author": "cables",
+            "date": 1573754593215
+        },
+        {
+            "message": "Ops.Gl.MeshInstancer_v3 renamed to Ops.Gl.MeshInstancer_v4",
+            "author": "pandur",
+            "date": 1595496283122
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1595510032968
+        }
+    ],
+    "authorName": "cables",
+    "created": 1573750008766,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "exe"
+            },
+            {
+                "type": "2",
+                "name": "geom"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Limit Instances",
+                "group": "Limit Number of Instances",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Limit",
+                "group": "Limit Number of Instances",
+                "subType": "integer"
+            },
+            {
+                "type": "3",
+                "name": "positions",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "Scale Array",
+                "group": "Parameters"
+            },
+            {
+                "type": "3",
+                "name": "Rotations",
+                "group": "Parameters"
+            },
+            {
+                "type": "0",
+                "name": "Rotation Type index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Rotation Type",
+                "group": "Parameters"
+            },
+            {
+                "type": "0",
+                "name": "Material blend mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Material blend mode"
+            },
+            {
+                "type": "3",
+                "name": "Colors"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.MeshInstancer_v4"
+    },
+    "summary": "Draw the same mesh multiple times on the GPU",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Array.RandomArrays",
+        "Ops.Array.RandomNumbersArray3",
+        "Ops.Array.RandomNumbersArray4"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "exe",
+                "text": "Trigger In"
+            },
+            {
+                "name": "geom",
+                "text": "The shape that will be instanced"
+            },
+            {
+                "name": "Scale",
+                "text": "Global scale for all instances, disabled if scale array is used"
+            },
+            {
+                "name": "Limit Instances",
+                "text": "Enable to set a limit on how many instances are created"
+            },
+            {
+                "name": "Limit",
+                "text": "If limit instances is enabled this number determines how many instances are created"
+            },
+            {
+                "name": "positions",
+                "text": "Needs an XYZ array to determine the positions of each instance"
+            },
+            {
+                "name": "Scale Array",
+                "text": "Needs an XYZ array to determine the scale of each instance"
+            },
+            {
+                "name": "Rotations",
+                "text": "Needs an XYZ array to determine the XYZ rotation of each instance. 0 - 360 degrees."
+            },
+            {
+                "name": "Material blend mode index",
+                "text": "Pick a material blend mode with an integer"
+            },
+            {
+                "name": "Material blend mode",
+                "text": "Multiply, Add or Normal. Pick the blending mode the material for instances "
+            },
+            {
+                "name": "Colors",
+                "text": "Needs an RGBA array to determine the color of each instance."
+            },
+            {
+                "name": "Trigger Out",
+                "text": "Trigger Out"
+            },
+            {
+                "name": "Num",
+                "text": "Total number of instances/shapes"
+            }
+        ]
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}

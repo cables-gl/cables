@@ -25,6 +25,29 @@
                 "name": "headers"
             },
             {
+                "type": "5",
+                "name": "body"
+            },
+            {
+                "type": "0",
+                "name": "HTTP Method index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "HTTP Method",
+                "subType": "string"
+            },
+            {
+                "type": "5",
+                "name": "Content-Type"
+            },
+            {
+                "type": "0",
+                "name": "parse json",
+                "subType": "boolean"
+            },
+            {
                 "type": "1",
                 "name": "reload"
             }
@@ -33,6 +56,10 @@
             {
                 "type": "2",
                 "name": "data"
+            },
+            {
+                "type": "5",
+                "name": "response"
             },
             {
                 "type": "0",
@@ -54,8 +81,8 @@
     "docs": {
         "ports": [
             {
-                "name": "file",
-                "text": "file or url"
+                "name": "URL",
+                "text": "the url of the reques"
             },
             {
                 "name": "JsonP",
@@ -66,12 +93,36 @@
                 "text": "a key/value-object of additional headers to send"
             },
             {
+                "name": "body",
+                "text": "an optional body to send (for POST/PATCH/PUT)"
+            },
+            {
+                "name": "HTTP Method index",
+                "text": "the http method to use"
+            },
+            {
+                "name": "HTTP Method",
+                "text": "the http method to use"
+            },
+            {
+                "name": "Content-Type",
+                "text": "the content type of the body sent (if any)"
+            },
+            {
+                "name": "parse json",
+                "text": "do we expect the response to be JSON, then parse the output"
+            },
+            {
                 "name": "reload",
                 "text": "refresh data from remote"
             },
             {
                 "name": "data",
                 "text": "the data"
+            },
+            {
+                "name": "response",
+                "text": "the unparsed response of the request"
             },
             {
                 "name": "Is Loading",

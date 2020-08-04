@@ -26,9 +26,9 @@ void main() {
 
     {{MODULE_VERTEX_POSITION}}
 
-    mat4 mvMatrix=viewMatrix * modelMatrix;
+    mat4 mvMatrix=viewMatrix * mMatrix;
     vec4 vPos = projMatrix * mvMatrix * vec4(vPosition, 1.);
-    ${this.type === "point" ? "modelPos = (modelMatrix * pos).xyz;" : ""}
+    ${this.type === "point" ? "modelPos = (mMatrix * pos).xyz;" : ""}
     gl_Position = vPos;
 }
 `;
@@ -60,6 +60,7 @@ export function getShadowPassFragmentShader()
    https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
    */
     return `
+   {{MODULES_HEAD}}
    ${this.type === "point" ? "IN vec3 modelPos;" : ""}
    ${this.type === "point" ? "UNI vec3 inLightPosition;" : ""}
    ${this.type === "point" ? "UNI vec2 inNearFar;" : ""}

@@ -18,7 +18,6 @@ closed.onChange = max.onChange =
     min.onChange =
     numValues.onChange =
     seed.onChange =
-    values.onLinkChanged =
     inInteger.onChange = init;
 
 const arr = [];

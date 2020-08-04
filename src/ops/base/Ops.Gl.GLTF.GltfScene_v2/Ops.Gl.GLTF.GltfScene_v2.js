@@ -3,7 +3,7 @@
 const
     dataPort = op.inString("data"),
     inExec = op.inTrigger("Render"),
-    inFile = op.inUrl("glb File"),
+    inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
     inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
@@ -176,7 +176,7 @@ inExec.onTriggered = function ()
     {
         gltf.time = time;
 
-        if (gltf.bounds && CABLES.UI && cgl.shouldDrawHelpers(op))
+        if (gltf.bounds && cgl.shouldDrawHelpers(op))
         {
             if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
             else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));

@@ -3,6 +3,7 @@ const
     showFrag = op.inTriggerButton("Show Fragment"),
     showVert = op.inTriggerButton("Show Vertex"),
     showModules = op.inTriggerButton("Show Modules"),
+    showUniforms = op.inTriggerButton("Show Uniforms"),
     showState = op.inTriggerButton("State Info"),
 
 
@@ -28,6 +29,7 @@ showVert.onTriggered = function ()
 };
 
 let doStateDump = false;
+let doUniformDump = false;
 
 showState.onTriggered = function ()
 {
@@ -35,8 +37,15 @@ showState.onTriggered = function ()
     doStateDump = true;
 };
 
+showUniforms.onTriggered = function ()
+{
+    if (!CABLES.UI || !shader) return;
+    doUniformDump = true;
+};
+
 exec.onTriggered = function ()
 {
+    if (cgl.frameStore.shadowPass) return;
     shader = cgl.getShader();
     next.trigger();
 
@@ -74,6 +83,27 @@ exec.onTriggered = function ()
         outNumAttributes.set(0);
         outDefines.set(0);
         outAttributeNames.set(null);
+    }
+
+    if (doUniformDump)
+    {
+        console.log(shader._uniforms);
+
+        const json = [];
+        for (let i = 0; i < shader._uniforms.length; i++)
+        {
+            json.push({
+                "validLoc": shader._uniforms[i]._isValidLoc(),
+                "name": shader._uniforms[i]._name,
+                "type": shader._uniforms[i]._type,
+                "value": shader._uniforms[i]._value,
+                "structName": shader._uniforms[i]._structName,
+                "structUniformName": shader._uniforms[i]._structUniformName
+            });
+        }
+        CABLES.UI.MODAL.showCode("shader uniforms", JSON.stringify(json, false, 2), "json");
+
+        doUniformDump = false;
     }
 
     if (doStateDump)

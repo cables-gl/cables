@@ -70,6 +70,9 @@ function updateDefines()
 
 function removeModule()
 {
+    if (shader && moduleFrag) shader.removeModule(moduleFrag);
+    if (shader && moduleVert) shader.removeModule(moduleVert);
+
     if (shader) shader.dispose();
     origShader = null;
     shader = null;

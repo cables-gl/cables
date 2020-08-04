@@ -47,5 +47,13 @@
             }
         ],
         "name": "Ops.Gl.Geometry.BoundingBoxVisible"
+    },
+    "summary": "Test if a boundingbox could be visible in the current viewport",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

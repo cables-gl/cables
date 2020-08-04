@@ -42,18 +42,17 @@ inWorldSpace.onChange =
 
 render.onTriggered = doRender;
 
-
-const mod = new CGL.ShaderModifier(cgl, "colorArea");
+const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "priority": 2,
-    "title": "colorArea",
+    "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     srcHeadVert,
     srcBodyVert
 });
 
 mod.addModule({
-    "title": "colorArea",
+    "title": op.name,
     "name": "MODULE_COLOR",
     "srcHeadFrag": attachments.colorarea_head_frag,
     "srcBodyFrag": attachments.colorarea_frag
@@ -83,10 +82,17 @@ function updateDefines()
     mod.toggleDefine("MOD_AREA_BOX", inArea.get() == "Box");
 }
 
+function drawHelpers()
+{
+    if (cgl.frameStore.shadowPass) return;
+    if (cgl.shouldDrawHelpers(op)) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
+}
+
+
 function doRender()
 {
     mod.bind();
-
+    drawHelpers();
     next.trigger();
 
     mod.unbind();

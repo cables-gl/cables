@@ -16,10 +16,25 @@
     },
     "summary": "trigger if a value decreases / gets smaller",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Value",
+                "text": "Value to evaluate"
+            },
+            {
+                "name": "Trigger",
+                "text": "Trigger out if value decreases"
+            }
+        ]
     },
     "updated": 1536260094440,
     "authorName": "andro",
     "id": "16ec4069-3682-461e-95ff-1d86e3f44512",
-    "created": 1536260087428
+    "created": 1536260087428,
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.TriggerIfIncreased"
+    ],
+    "youtubeids": []
 }

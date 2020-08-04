@@ -124,7 +124,6 @@ exe.onTriggered=function()
         }
         else
         {
-            console.log("JA...");
             textureOut.get().initTexture(canvasImage);
         }
     }
@@ -171,7 +170,7 @@ function reload(force)
 
         op.log("canvas size",canvas.width,canvas.height);
 
-        canvas.style.display   = "none";
+        // canvas.style.display   = "block";
         // canvas.style['z-index']   = "99999";
         var body = document.getElementsByTagName("body")[0];
         body.appendChild(canvas);

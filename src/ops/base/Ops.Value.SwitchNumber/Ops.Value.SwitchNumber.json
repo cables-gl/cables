@@ -1,5 +1,4 @@
 {
-    "updated": 1520702112437,
     "authorName": "pandur",
     "id": "fbb89f72-f2e3-4d34-ad01-7d884a1bcdc0",
     "created": 1519816588260,
@@ -59,6 +58,36 @@
                 "type": "0",
                 "name": "Value 9",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 10",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 11",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 12",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 13",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 14",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Value 15",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -68,7 +97,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Value.ValueSwitcherNew"
+        "name": "Ops.Value.SwitchNumber"
     },
     "summary": "switch between number values by index",
     "docs": {

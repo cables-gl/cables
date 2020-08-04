@@ -16,5 +16,31 @@
     "created": 1593236823526,
     "coreLibs": [
         "vargetset"
-    ]
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.VarGetObject_v2"
+    },
+    "summary": "Get a variable object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

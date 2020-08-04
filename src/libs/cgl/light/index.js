@@ -151,6 +151,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
             "camPos": this.position,
             "cullFaces": true,
             "size": fbWidth,
+            "isShadowMap": true
         });
 
         this._cubemap.initializeCubemap();
@@ -314,7 +315,7 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
     this._cgl.gl.disable(this._cgl.gl.CULL_FACE);
     this._cgl.gl.disable(this._cgl.gl.POLYGON_OFFSET_FILL);
 
-    if (this._cgl.glVersion != 1 && this.type !== "point") this.renderBlurPass(blurAmount);
+    if (this.type !== "point") this.renderBlurPass(blurAmount);
 
     this._cgl.gl.colorMask(true, true, true, true);
 
@@ -347,8 +348,13 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(this._shaderShadowMap.matrices.modelMatrix, this._shaderShadowMap.matrices.viewMatrix, this._shaderShadowMap.matrices.projMatrix);
-        this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
-        this.shadowCubeMap = this._cubemap.getCubemap();
+
+        this._cgl.pushShader(this._shaderShadowMap.shader);
+
+        this._cubemap.renderCubemap(renderFunction);
+
+        this._cgl.popShader();
+        this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
         return;
     }
 
@@ -378,6 +384,7 @@ Light.prototype.renderShadowPass = function (renderFunction)
     mat4.mul(this.lightMatrix, this._cgl.mMatrix, this.lightMatrix);
     mat4.mul(this.lightMatrix, this._shaderShadowMap.matrices.biasMatrix, this.lightMatrix);
 
+    this._cgl.gl.clearColor(1, 1, 1, 1);
     this._cgl.gl.clear(this._cgl.gl.DEPTH_BUFFER_BIT | this._cgl.gl.COLOR_BUFFER_BIT);
 
     if (renderFunction) renderFunction(); // * e.g. op.trigger();

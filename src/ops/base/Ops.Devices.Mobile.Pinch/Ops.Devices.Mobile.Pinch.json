@@ -22,6 +22,11 @@
             {
                 "type": "1",
                 "name": "Reset Scale"
+            },
+            {
+                "type": "0",
+                "name": "Limit",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -33,6 +38,11 @@
             {
                 "type": "2",
                 "name": "Event Details"
+            },
+            {
+                "type": "0",
+                "name": "Delta",
+                "subType": "number"
             }
         ],
         "name": "Ops.Devices.Mobile.Pinch"

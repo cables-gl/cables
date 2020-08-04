@@ -33,6 +33,7 @@ const Context = function (_patch)
 
     this.temporaryTexture = null;
     this.frameStore = {};
+    this._onetimeCallbacks = [];
     this.gl = null;
 
     /**
@@ -271,6 +272,8 @@ const Context = function (_patch)
         if (this._stackCullFace.length > 0) this.logStackError("this._stackCullFace length !=0 at end of rendering...");
         if (this._stackCullFaceFacing.length > 0) this.logStackError("this._stackCullFaceFacing length !=0 at end of rendering...");
 
+        this._frameStarted = false;
+
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
             oldCanvasWidth = this.canvasWidth;
@@ -456,6 +459,14 @@ const Context = function (_patch)
 
         this.pushShader(simpleShader);
 
+        this._frameStarted = true;
+
+        if (this._onetimeCallbacks.length > 0)
+        {
+            for (let i = 0; i < this._onetimeCallbacks.length; i++) this._onetimeCallbacks[i]();
+            this._onetimeCallbacks.length = 0;
+        }
+
         this.emitEvent("beginFrame");
     };
 
@@ -474,6 +485,8 @@ const Context = function (_patch)
         this.popBlendMode();
 
         cgl.endFrame();
+
+        this.emitEvent("endFrame");
     };
 
     this.getTexture = function (slot)
@@ -481,8 +494,24 @@ const Context = function (_patch)
         return this._textureslots[slot];
     };
 
+    /**
+     * log warning to console if the rendering of one frame has not been started / handy to check for async problems
+     * @function checkFrameStarted
+     * @memberof Context
+     * @instance
+     */
+    this.checkFrameStarted = function (string)
+    {
+        if (!this._frameStarted)
+        {
+            console.warn("frame not started " + string);
+            console.log(new Error().stack);
+        }
+    };
+
     this.setTexture = function (slot, t, type)
     {
+        this.checkFrameStarted("cgl setTexture");
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
@@ -624,6 +653,18 @@ const Context = function (_patch)
     };
 };
 
+
+/**
+ * execute the callback next frame, once
+ * @function addNextFrameOnceCallback
+ * @memberof Context
+ * @instance
+ * @param {function} callback
+ */
+Context.prototype.addNextFrameOnceCallback = function (cb)
+{
+    if (cb) this._onetimeCallbacks.push(cb);
+};
 
 /**
  * push a matrix to the view matrix stack
@@ -1060,12 +1101,9 @@ Context.prototype.glGetAttribLocation = function (prog, name)
  */
 Context.prototype.shouldDrawHelpers = function (op)
 {
-    if (!op.patch.isEditorMode() ||
-        !CABLES.UI.renderHelper ||
-        !op.isCurrentUiOp() ||
-        this.frameStore.shadowPass) return false;
-
-    return true;
+    if (this.frameStore.shadowPass) return false;
+    if (!op.patch.isEditorMode()) return false;
+    return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)

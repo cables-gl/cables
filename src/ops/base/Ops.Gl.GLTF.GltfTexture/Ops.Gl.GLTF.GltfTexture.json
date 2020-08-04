@@ -76,5 +76,13 @@
             }
         ],
         "name": "Ops.Gl.GLTF.GltfTexture"
+    },
+    "summary": "load textures from inside a .glb file",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

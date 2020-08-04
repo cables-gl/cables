@@ -15,6 +15,11 @@
             },
             {
                 "type": "0",
+                "name": "Area",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Size",
                 "subType": "number"
             },
@@ -37,6 +42,11 @@
                 "type": "0",
                 "name": "Blend  index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Blend ",
+                "group": "Color"
             },
             {
                 "type": "0",
@@ -107,5 +117,15 @@
     ],
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "colorize all meshes around current position",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cUU0fNw3rEg"
+    ],
+    "docs": {
+        "ports": []
+    }
 }

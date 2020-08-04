@@ -4,7 +4,7 @@ class ShaderModifier
     {
         this._cgl = cgl;
         this._name = name;
-        this._shaders = {};
+        this._origShaders = {};
         this._uniforms = [];
         this._structUniforms = [];
         this._definesToggled = {};
@@ -16,6 +16,15 @@ class ShaderModifier
         this._changedUniforms = true;
         this._modulesChanged = false;
         this.needsTexturePush = false;
+        this._lastShader = null;
+
+        if (this._cgl.glVersion == 1)
+        {
+            this._cgl.gl.getExtension("OES_texture_float");
+            this._cgl.gl.getExtension("OES_texture_float_linear");
+            this._cgl.gl.getExtension("OES_texture_half_float");
+            this._cgl.gl.getExtension("OES_texture_half_float_linear");
+        }
     }
 
     bind()
@@ -23,18 +32,35 @@ class ShaderModifier
         const shader = this._cgl.getShader();
         if (!shader) return;
 
-        this._boundShader = this._shaders[shader.id];
+        this._boundShader = this._origShaders[shader.id];
 
-        if (!this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged)
+        let missingMod = false;
+
+        if (this._boundShader && this._lastShader != this._boundShader.shader) // shader changed since last bind
+        {
+            if (!this._boundShader.shader.hasModule(this._mods[0].id)) missingMod = true;
+        }
+
+
+        if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {
             if (this._boundShader) this._boundShader.shader.dispose();
-
-            this._boundShader = this._shaders[shader.id] =
+            if (shader._needsRecompile) shader.compile();
+            this._boundShader = this._origShaders[shader.id] =
                 {
                     "lastCompile": shader.lastCompile,
                     "orig": shader,
                     "shader": shader.copy()
                 };
+
+            if (this._cgl.glVersion == 1)
+            {
+                this._boundShader.shader.enableExtension("GL_OES_standard_derivatives");
+                this._boundShader.shader.enableExtension("GL_OES_texture_float");
+                this._boundShader.shader.enableExtension("GL_OES_texture_float_linear");
+                this._boundShader.shader.enableExtension("GL_OES_texture_half_float");
+                this._boundShader.shader.enableExtension("GL_OES_texture_half_float_linear");
+            }
 
             this._addModulesToShader(this._boundShader.shader);
 
@@ -91,8 +117,8 @@ class ShaderModifier
 
     _removeModulesFromShader(mod)
     {
-        for (const j in this._shaders)
-            this._shaders[j].shader.removeModule(mod);
+        for (const j in this._origShaders)
+            this._origShaders[j].shader.removeModule(mod);
     }
 
     addModule(mod)
@@ -157,7 +183,9 @@ class ShaderModifier
             const structUniform = this._structUniforms[j];
             let structUniformName = structUniform.uniformName;
             let structName = structUniform.structName;
+
             const members = structUniform.members;
+            const structPropertyName = structUniform.propertyName;
 
             structUniformName = this.getPrefixedName(structUniform.uniformName);
             structName = this.getPrefixedName(structUniform.structName);
@@ -179,8 +207,8 @@ class ShaderModifier
 
     _updateUniforms()
     {
-        for (const j in this._shaders)
-            this._updateUniformsShader(this._shaders[j].shader);
+        for (const j in this._origShaders)
+            this._updateUniformsShader(this._origShaders[j].shader);
 
         this._changedUniforms = false;
     }
@@ -198,10 +226,15 @@ class ShaderModifier
 
         const defineName = this.getPrefixedName(name);
 
-        for (const j in this._shaders)
+        for (const j in this._origShaders)
         {
-            this._setUniformValue(this._shaders[j].shader, defineName, value);
+            this._setUniformValue(this._origShaders[j].shader, defineName, value);
         }
+    }
+
+    hasUniform(name)
+    {
+        return this._getUniform(name);
     }
 
     _getUniform(name)
@@ -350,16 +383,15 @@ class ShaderModifier
         {
             for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
             {
-                const uniToRemove = this._uniforms[j];
                 const nameToRemove = name;
 
                 if (this._uniforms[j].name == name && !this._uniforms[j].structName)
                 {
-                    for (const k in this._shaders)
+                    for (const k in this._origShaders)
                     {
                         this._removeUniformFromShader(
                             this.getPrefixedName(nameToRemove),
-                            this._shaders[k].shader
+                            this._origShaders[k].shader
                         );
                     }
 
@@ -380,14 +412,14 @@ class ShaderModifier
 
                 if (structToRemove.uniformName === uniformName)
                 {
-                    for (const j in this._shaders)
+                    for (const j in this._origShaders)
                     {
                         for (let k = 0; k < structToRemove.members.length; k += 1)
                         {
                             const member = structToRemove.members[k];
                             this._removeUniformFromShader(
                                 this.getPrefixedName(member.name),
-                                this._shaders[j].shader
+                                this._origShaders[j].shader
                             );
                         }
                     }
@@ -411,7 +443,7 @@ class ShaderModifier
         if (name.indexOf("MOD_") == 0)
         {
             name = name.substr("MOD_".length);
-            name = "mod" + prefix + name;
+            name = "mod" + prefix + "_" + name;
         }
         return name;
     }
@@ -434,7 +466,7 @@ class ShaderModifier
 
     _updateDefines()
     {
-        for (const j in this._shaders) this._updateDefinesShader(this._shaders[j].shader);
+        for (const j in this._origShaders) this._updateDefinesShader(this._origShaders[j].shader);
 
         this._changedDefines = false;
     }

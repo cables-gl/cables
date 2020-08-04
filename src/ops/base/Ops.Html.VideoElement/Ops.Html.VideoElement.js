@@ -50,6 +50,7 @@ function updateVideoSettings()
 
 play.onChange = () =>
 {
+    if (!element) return;
     if (play.get())element.play();
     else element.pause();
 };

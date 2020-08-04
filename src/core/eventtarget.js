@@ -29,14 +29,13 @@ const EventTarget = function ()
         }
     };
 
-    this.removeEventListener = function (which, cb)
+    this.removeEventListener = this.off = function (which, cb)
     {
         if (this._eventCallbacks[which])
         {
-            const idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) Log.warn("eventlistener " + which + " not found...");
-            else this._eventCallbacks[which].splice(idx);
+            delete this._eventCallbacks[which];
         }
+        else console.warn("[removeEventListener] not found " + which);
     };
 
     this.logEvents = function (enabled, name)

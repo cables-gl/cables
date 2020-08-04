@@ -225,6 +225,11 @@ Uniform.prototype.getGlslTypeString = function ()
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
 };
 
+Uniform.prototype._isValidLoc = function ()
+{
+    return this._loc != -1;// && this._loc != null;
+};
+
 
 Uniform.prototype.getType = function ()
 {
@@ -301,7 +306,7 @@ Uniform.prototype.updateFromPort = function ()
 
 Uniform.prototype.updateValueF = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1f(this._loc, this._value);
@@ -319,7 +324,7 @@ Uniform.prototype.setValueF = function (v)
 
 Uniform.prototype.updateValueI = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1i(this._loc, this._value);
@@ -330,7 +335,7 @@ Uniform.prototype.updateValue2I = function ()
 {
     if (!this._value) return;
 
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -346,7 +351,7 @@ Uniform.prototype.updateValue2I = function ()
 Uniform.prototype.updateValue3I = function ()
 {
     if (!this._value) return;
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -360,7 +365,7 @@ Uniform.prototype.updateValue3I = function ()
 
 Uniform.prototype.updateValue4I = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -424,7 +429,7 @@ Uniform.prototype.setValue4I = function (v)
 
 Uniform.prototype.updateValueBool = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
     this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0);
 
@@ -447,7 +452,7 @@ Uniform.prototype.setValueArray4F = function (v)
 
 Uniform.prototype.updateValueArray4F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -463,7 +468,7 @@ Uniform.prototype.setValueArray3F = function (v)
 
 Uniform.prototype.updateValueArray3F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -479,7 +484,7 @@ Uniform.prototype.setValueArray2F = function (v)
 
 Uniform.prototype.updateValueArray2F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -495,7 +500,7 @@ Uniform.prototype.setValueArrayF = function (v)
 
 Uniform.prototype.updateValueArrayF = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -511,7 +516,7 @@ Uniform.prototype.setValueArrayT = function (v)
 
 Uniform.prototype.updateValueArrayT = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -522,7 +527,7 @@ Uniform.prototype.updateValueArrayT = function ()
 Uniform.prototype.updateValue3F = function ()
 {
     if (!this._value) return;
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -557,7 +562,7 @@ Uniform.prototype.updateValue2F = function ()
 {
     if (!this._value) return;
 
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -589,12 +594,11 @@ Uniform.prototype.setValue2F = function (v)
 
 Uniform.prototype.updateValueT = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
         profileData.profileShaderGetUniformName = this._name;
-        if (this._loc == -1) Log.log("texture this._loc unknown!!");
     }
     profileData.profileUniformCount++;
 
@@ -610,7 +614,7 @@ Uniform.prototype.setValueT = function (v)
 
 Uniform.prototype.updateValue4F = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -631,7 +635,7 @@ Uniform.prototype.setValue4F = function (v)
 
 Uniform.prototype.updateValueM4 = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
