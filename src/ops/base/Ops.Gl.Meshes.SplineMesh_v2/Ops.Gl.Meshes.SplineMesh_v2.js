@@ -39,6 +39,8 @@ function renderMesh()
     if (rebuildLater)rebuild();
     if (mesh && inRenderMesh.get())
         mesh.render(cgl.getShader());
+
+    next.trigger();
 }
 
 function buildMesh()

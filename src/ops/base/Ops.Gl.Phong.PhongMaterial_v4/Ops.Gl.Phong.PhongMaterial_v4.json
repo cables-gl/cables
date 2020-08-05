@@ -202,9 +202,7 @@
     ],
     "summary": "A shaded material for lighting objects",
     "issues": "",
-    "collections": [
-        "Material"
-    ],
+    "collections": null,
     "relatedops": [
         "Ops.Gl.Phong.AmbientLight_v4",
         "Ops.Gl.Phong.DirectionalLight_v4",
@@ -235,20 +233,12 @@
                 "text": "Opacity"
             },
             {
-                "name": "Enable",
-                "text": "Enables or disables the Oren-Nayar diffuse calculation"
-            },
-            {
                 "name": "Albedo",
                 "text": "Albedo of the diffuse color"
             },
             {
                 "name": "Roughness",
                 "text": "Roughness of the diffuse color"
-            },
-            {
-                "name": "Active",
-                "text": "Enables or disables the Fresnel effect"
             },
             {
                 "name": "Fresnel Intensity",
@@ -275,18 +265,6 @@
                 "text": "Amount of the specular reflection"
             },
             {
-                "name": "Specular Model",
-                "text": "1 of 4 specular models: Blinn-Phong, Schlick, Phong or Gaussian"
-            },
-            {
-                "name": "Energy Conservation",
-                "text": "Enable or disable physically correct light energy conservation"
-            },
-            {
-                "name": "Double Sided Material",
-                "text": "Invert normals when not front-facing (useful for e.g. ParametricSurface)"
-            },
-            {
                 "name": "Diffuse Texture",
                 "text": "Diffuse texture input"
             },
@@ -309,10 +287,6 @@
             {
                 "name": "Opacity Texture",
                 "text": "Opacity texture input"
-            },
-            {
-                "name": "Colorize Texture",
-                "text": "Multiply texture color with material color"
             },
             {
                 "name": "Diffuse Repeat X",
@@ -345,18 +319,6 @@
             {
                 "name": "Emissive Intensity",
                 "text": "intension of the emissive map"
-            },
-            {
-                "name": "Alpha Mask Source",
-                "text": "which channel of a texture should be used for alpha blending: Luminance, R, G or B"
-            },
-            {
-                "name": "Opacity TexCoords Transform",
-                "text": "Flip opacity texture coordinates"
-            },
-            {
-                "name": "Discard Transparent Pixels",
-                "text": "Discard transparent pixels"
             },
             {
                 "name": "Trigger Out",

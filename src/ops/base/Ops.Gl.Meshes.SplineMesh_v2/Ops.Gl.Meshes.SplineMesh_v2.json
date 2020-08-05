@@ -46,7 +46,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.Admin.SplineMeshNew"
+        "name": "Ops.Gl.Meshes.SplineMesh_v2"
     },
     "summary": "draw splines/lines",
     "issues": "",

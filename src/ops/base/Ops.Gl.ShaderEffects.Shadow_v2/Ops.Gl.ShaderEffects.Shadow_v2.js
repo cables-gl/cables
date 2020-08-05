@@ -160,8 +160,6 @@ const STATE = {
 
 function renderShadowPassWithModule()
 {
-    shadowShaderModule.bind();
-
     if (inDiscardTransparent.get())
     {
         if (inOpacityTexture.get())
@@ -181,10 +179,15 @@ function renderShadowPassWithModule()
 
             if (shadowShaderModule.hasDefine("MOD_HAS_TEXTURE_OPACITY")) shadowShaderModule.removeDefine("MOD_HAS_TEXTURE_OPACITY");
         }
-    }
 
-    outTrigger.trigger();
-    shadowShaderModule.unbind();
+        shadowShaderModule.bind();
+        outTrigger.trigger();
+        shadowShaderModule.unbind();
+    }
+    else
+    {
+        outTrigger.trigger();
+    }
 }
 
 function createModuleShaders()
@@ -510,8 +513,18 @@ inTrigger.onTriggered = () =>
             outTrigger.trigger();
             shaderModule.unbind();
         }
+        else
+        {
+            outTrigger.trigger();
+            STATE.lastLength = 0;
+            hasShadowMap.length = 0;
+            hasShadowCubemap.length = 0;
+        }
     }
-    else outTrigger.trigger();
+    else
+    {
+        outTrigger.trigger();
+    }
 };
 
 

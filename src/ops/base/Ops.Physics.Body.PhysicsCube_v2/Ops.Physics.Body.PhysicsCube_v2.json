@@ -84,7 +84,7 @@
                 "name": "Collision"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.Body.PhysicsCube_v2"
+        "name": "Ops.Physics.Body.PhysicsCube_v2"
     },
     "summary": "physical body in form of a cube",
     "issues": "",
