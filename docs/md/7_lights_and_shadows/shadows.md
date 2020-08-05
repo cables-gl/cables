@@ -4,7 +4,7 @@ Since the July 2020 Cables update, it is possible to add shadows to any material
 
 ## Introduction
 
-<iframe width="640" height="360"  src="https://cables.gl/p/J4R3_e" frameborder="0"></iframe>
+<iframe width="640" height="360"  src="https://sandbox.cables.gl/viewer/5f2a82e5565f4e7e4d42ff15" frameborder="0"></iframe>
 Please refer to the [basic example](https://cables.gl/p/p-Pnre) to see the most basic setup for enabling shadows.
 
 The following ops are able to cast shadows:
