@@ -1,10 +1,10 @@
 # Shadows
 
-Since the July 2020 Cables update, it is possible to add shadows to any material. In this section of the documentation, we will explore how the system works and how to use it efficiently. We will also look into common problems that can occur with adding shadows to a scene. Please keep in mind that the operators are subject to change in the future. We will try to keep the documentation as up to date as possible but if you find outdated parts or explanations that don't hold true anymore, do not hesitate to [contact us](www.google.com).
+Since the July 2020 Cables update, it is possible to add shadows to any material. In this section of the documentation, we will explore how the system works and how to use it efficiently. We will also look into common problems that can occur with adding shadows to a scene. Please keep in mind that the operators are subject to change in the future. We will try to keep the documentation as up to date as possible but if you find outdated parts or explanations that don't hold true anymore, do not hesitate to [contact us on Discord](https://discord.gg/AGTarWv).
 
 ## Introduction
 
-<iframe width="640" height="360"  src="https://sandbox.cables.gl/viewer/5f2a82e5565f4e7e4d42ff15" frameborder="0"></iframe>
+<!-- <iframe width="640" height="360"  src="https://sandbox.cables.gl/viewer/5f2a82e5565f4e7e4d42ff15" frameborder="0"></iframe> -->
 Please refer to the [basic example](https://cables.gl/p/p-Pnre) to see the most basic setup for enabling shadows.
 
 The following ops are able to cast shadows:
@@ -35,16 +35,59 @@ the *umbra*, the hard part of the shadow, and the *penumbra*, the soft part at t
 
 When we talk about *soft shadows*, we mean shadows that feature a soft penumbra. When we talk about *hard shadows*, the shadows do **not** display a penumbra.
 
+Cables' shadow system is based on the principle of [shadow mapping](https://en.wikipedia.org/wiki/Shadow_mapping).
+
+How shadow mapping works in a nutshell:
+
+We render the scene we want to shadow from the light's perspective into a texture where we store the distance of the scene's objects to the camera. We compare the distances stored in this texture to the distance of the scene's objects to our scene's camera. Pixels that are closer to the light than to our scene's camera will be shadowed.
+
 Okay, enough with the theory, let's dive into creating shadows!
 
 ## Basic Setup
 ![shadowminimalmage](img/01_minimal_patch_shadows.png)
 
-In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. While allowing you to generate shadows, this setup does not allow for flexible routing/setup capabilities.
+In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/J4R3_e). While allowing you to generate shadows, this setup does not allow for much control.
+You can add multiple [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) before meshes to enable or disable shadow casting.
+
+![castingdisabled](img/01_disable_shadow_casting.png)
+Check out [this patch](https://cables.gl/p/Iqob_e), an extension of our minimal example that features 3 toruses, the middle one not casting a shadow.
+
+## Multiple Lights
+
+All lights except our [Ambient Light](https://cables.gl/op/Ops.Gl.Phong.AmbientLight_v4) operator are able to cast shadows. You are able to preview the shadow map when you click on a light operator and the property `Cast Shadow` is activated.
+
+![shadowmappreview](img/01_map_and_shadows.png)
+
+It is possible that multiple lights cast shadows.
+
+![multiplelights](img/01_multiple_lights.png)
+
+Whenever you are using multiple lights in a scene, make sure to tame parameters like `Intensity` to get a more natural look.
+
+[The patch for this screenshot is availible here](https://cables.gl/p/5f2aad23565f4e7e4d42ff23).
+
+### Shadow Map Settings
+
+It is important to get the light's camera right to achieve good-looking shadows. Take a look at the following screenshot:
+
+![shadowmapsettings](img/01_shadowmapsettings.png)
+
+Here we can see the shadow map settings for [Directional Light](https://cables.gl/op/Ops.Gl.Phong.DirectionalLight_v5). The properties `LR-BottomTop`, `Near`, and `Far` are responsible for setting up the camera. These properties define the shadow camera's view frustum. Here are some good guidelines while setting these up:
+
+1. Make sure the camera captures the scene and the scene only. Anything that does not cast a shadow or is empty space should not be seen by the camera. This ensures that we have as little jagged stair-case artefacts as possible (More on that in the chapter "Perspective Aliasing").
+2. Whenever an object is not visible in the shadow map preview, it will most-likely not cast a shadow.
+
+#### A note on Point and Spot Lights
+
+The camera settings for these 2 lights differ a little bit.
+
+The [Point Light](https://cables.gl/op/Ops.Gl.Phong.PointLight_v5) renders its shadow information into a cubemap instead of a texture. You can only set the `Near` and `Far` values and they will be applied to each side of the cubemap. Currently it is not possible to set different `Near` and `Far` values per side.
+
+The [Spot Light](https://cables.gl/op/Ops.Gl.Phong.SpotLight_v5)'s shadow camera exposes `Near` and `Far` values aswell, but does not expose `LR-Bottom-Top`. Instead, the FOV of the camera is defined by the spot light's `Cone Angle` property.
 
 ## Algorithms
 
-The shadow system of cables currently features 4 shadow algorithms that can be selected in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. They will be briefly introduced in this section:
+The shadow system of cables currently features 4 shadow mapping algorithms that can be selected in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. They will be briefly introduced in this section:
 
 ### Default
 
