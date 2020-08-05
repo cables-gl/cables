@@ -1,7 +1,10 @@
-
 # Shadows
 
-## Basic Setup
+Since the July 2020 Cables update, it is possible to add shadows to any material. In this section of the documentation, we will explore how the system works and how to use it efficiently. We will also look into common problems that can occur with adding shadows to a scene. Please keep in mind that the operators are subject to change in the future. We will try to keep the documentation as up to date as possible but if you find outdated parts or explanations that don't hold true anymore, do not hesitate to [contact us](www.google.com).
+
+## Introduction
+
+<iframe width="640" height="360"  src="https://cables.gl/p/J4R3_e" frameborder="0"></iframe>
 Please refer to the [basic example](https://cables.gl/p/p-Pnre) to see the most basic setup for enabling shadows.
 
 The following ops are able to cast shadows:
@@ -15,7 +18,6 @@ The following op(s) allow to receive shadows:
 - [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2)
 
 in conjuction with any [Material](https://cables.gl/ops/collection/Material).
-
 
 Before we dive into creating shadows, we need to cover the basic terminology first:
 
@@ -33,17 +35,25 @@ the *umbra*, the hard part of the shadow, and the *penumbra*, the soft part at t
 
 When we talk about *soft shadows*, we mean shadows that feature a soft penumbra. When we talk about *hard shadows*, the shadows do **not** display a penumbra.
 
-Okay, enough with the theory, let's dive in to the algorithms!
+Okay, enough with the theory, let's dive into creating shadows!
+
+## Basic Setup
+![shadowminimalmage](img/01_minimal_patch_shadows.png)
+
+In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. While allowing you to generate shadows, this setup does not allow for flexible routing/setup capabilities.
 
 ## Algorithms
+
 The shadow system of cables currently features 4 shadow algorithms that can be selected in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. They will be briefly introduced in this section:
 
 ### Default
+
 The default shadow algorithm is only able to produce hard shadows. This algorithm is the fastest & cheapest and is based on the [1978 algorithm by Williams](http://cseweb.ucsd.edu/~ravir/274/15/papers/p270-williams.pdf).
 
 
 ### PCF (Percentage-Closer-Filtering)
-The *PCF*, or *Percentage-Closer-Filtering*, algorithm is an extension of the default algorithm. It is able to produce *soft shadows* by linearly interpolating between the pixels of the shadow map. We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op.
+
+The *PCF*, or *Percentage-Cl oser-Filtering*, algorithm is an extension of the default algorithm. It is able to produce *soft shadows* by linearly interpolating between the pixels of the shadow map. We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op.
 The higher the `Sample Amount`, the more expensive the calculations become. Most of the time, an amount of **4** samples should be enough to soften the shadows' edges.
 
 #### A note on the [Point Light](https://cables.gl/op/Ops.Gl.Phong.PointLight_v5) op:
@@ -56,6 +66,7 @@ When using a point light, it is possible to use the `Sample Distribution` parame
 With the PCF algorithm, this parameter only works with a point light.
 
 ### Poisson
+
 The *Poisson* algorithm (named after the famous french mathematician [Siméon Denis Poisson](https://en.wikipedia.org/wiki/Siméon_Denis_Poisson)) works like the PCF algorithm, with the difference that samples are not taken by linearly interpolating between values, but instead using *random offsets* distributed on a [Poisson Disc](https://medium.com/@hemalatha.psna/implementation-of-poisson-disc-sampling-in-javascript-17665e406ce1).
 
 We are able to set the amount of sampling with the parameter `Sample Amount` featured in the [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) op. In most cases, taking **4** samples will be enough. The `Sample Distribution` parameter allows us to change the "amount of sample points" used. The higher the value, the denser the sample distribution. Try keeping the value between **250** - **800** for best results.
@@ -66,7 +77,6 @@ The *VSM*, or *Variance Shadow Mapping*, algorithm is a more recent one, develop
 
 We are able to soften the shadows by increasing the `Blur Amount` in the [Directional Light](https://cables.gl/op/Ops.Gl.Phong.DirectionalLight_v5) and [Spot Light](https://cables.gl/op/Ops.Gl.Phong.SpotLight_v5) operators.
 Blurring point light shadows does **not** work, as there is no way in WebGL (1 and 2). Though VSM looks the best and is relatively cheap compared to Poisson and PCF, it comes with its own caveats; the main one being so called *Light Leaking* (explained in the chapter "Common Problems & Artifacts"). If you experience light leaking, try increasing the `Bias` parameter until leaking disappears. There are more solutions to tackle light leaking, also presented in the chapter "Common Problems & Artifacts".
-
 
 ## Common Problems & Artifacts
 
@@ -94,8 +104,8 @@ Peter Panning basically means that your object appears to be hovering, even thou
 There are 4 solutions to get rid of it:
 
 1. Set the `Near` and `Far` properties of the `Shadow Map Settings` of the casting light so, that:
-   1. The `Near`-plane of the shadow camera starts as far away from its position as possible.
-   2. The `Far`-plane of the shadow camera is as close to its position as possible.
+   1. The `Near`-plane of the shadow camera starts as close to the occluders as possible.
+   2. The `Far`-plane of the shadow camera spans **only** the scene and nothing more. Try fitting the camera's viewport as tightly to the scene as possible.
 2. Do not use geometries that have no width. If you want to have a floor, lose a very thin cube instead of a rectangle.
 3. Compose your scene so it contains as little touching geometries as possible.
 4. Use the `Normal Offset` property of the casting light to move the shadow along the normal of the receiving geometry (does not work with PointLight).
@@ -132,3 +142,9 @@ To get rid of perspective aliasing, you can do the following:
 *Light Bleeding*, also called *Light Leaking*, happens with the `VSM`, or *Variance Shadow Mapping*, algorithm only. The problem occurs when multiple occluders cover the same area of a receiver. You can try getting rid of light leaking by increasing the `Bias` property. The more you increase the bias, the less soft your shadows will appear. Be careful when adjusting.
 
 In general it is advised to use VSM with wide scenes or scenes where objects have a bit of distance to each other and don't overlap.
+
+## Problems
+
+### Shadows not visible
+
+If you find yourself in a situation where
