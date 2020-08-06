@@ -88,6 +88,7 @@ const newLight = new CGL.Light(cgl, {
     "castShadow": false,
     "shadowStrength": inShadowStrength.get(),
 });
+newLight.castLight = inCastLight.get();
 
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 newLight.createShadowMapShader();

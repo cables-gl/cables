@@ -127,6 +127,8 @@ const newLight = new CGL.Light(cgl, {
     "normalOffset": inNormalOffset.get(),
 });
 
+newLight.castLight = inCastLight.get();
+
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 newLight.createShadowMapShader();
 newLight.createBlurEffect({});

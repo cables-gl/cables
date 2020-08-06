@@ -118,6 +118,7 @@ const newLight = new CGL.Light(cgl, {
     "shadowStrength": inShadowStrength.get(),
     "shadowBias": inBias.get()
 });
+newLight.castLight = inCastLight.get();
 
 if (!newLight.hasFramebuffer())
 {
