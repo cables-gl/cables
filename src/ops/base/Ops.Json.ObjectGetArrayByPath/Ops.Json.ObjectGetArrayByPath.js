@@ -37,7 +37,6 @@ function update()
         {
             op.setUiError("notiterable", null);
             const parts = path.split(".");
-            console.log("parts", parts);
 
             // find first array in path
             let checkPath = "";
@@ -47,7 +46,6 @@ function update()
             for (let i = 0; i < parts.length; i++)
             {
                 checkPath += parts[i];
-                console.log("checking", checkPath, data);
                 checkData = resolve(checkPath, data);
                 if (Array.isArray(checkData))
                 {
@@ -57,7 +55,6 @@ function update()
                 }
                 checkPath += ".";
             }
-            console.log("checkData", checkData, checkPath);
             if (checkData)
             {
                 if (parts.length > 1)
@@ -71,12 +68,10 @@ function update()
                         }
                         const resolvedData = resolve(resolvePath, data);
                         result.push(resolvedData);
-                        console.log("resolving", resolvePath, resolvedData);
                     }
                 }
                 else
                 {
-                    console.log("here?", checkData);
                     if (Array.isArray(checkData))
                     {
                         result = checkData;
@@ -92,7 +87,6 @@ function update()
                 op.setUiAttrib({ "extendTitle": extendTitle });
             }
 
-            console.log("result", result);
             resultOut.set(result);
         }
     }
