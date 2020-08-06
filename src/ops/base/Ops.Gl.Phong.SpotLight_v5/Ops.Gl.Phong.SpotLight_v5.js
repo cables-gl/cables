@@ -317,7 +317,7 @@ inTrigger.onTriggered = function ()
         cgl.frameStore.lightStack.pop();
 
         newLight.castShadow = inCastShadow.get();
-
+        newLight.blurAmount = inBlur.get();
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();

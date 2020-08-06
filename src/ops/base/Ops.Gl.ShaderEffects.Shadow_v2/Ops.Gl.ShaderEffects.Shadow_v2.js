@@ -540,8 +540,14 @@ function checkUiErrors()
         {
             op.setUiError("nolights", null);
             let oneLightCastsShadow = false;
+            let allLightsBlurAboveZero = true;
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+            {
+                oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
 
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+                if (cgl.frameStore.lightStack[i].castShadow && cgl.frameStore.lightStack[i].type !== "point")
+                    allLightsBlurAboveZero = allLightsBlurAboveZero && (cgl.frameStore.lightStack[i].blurAmount > 0);
+            }
 
             if (oneLightCastsShadow)
             {
@@ -559,6 +565,22 @@ function checkUiErrors()
             {
                 op.setUiError("nolights2", "There are lights in the patch but none that cast shadows. Please activate the \"Cast Shadow\" property of one of your lights in the patch to make shadows visible.", 1);
                 op.setUiError("inReceiveShadowActive", null);
+            }
+
+            if (!allLightsBlurAboveZero)
+            {
+                if (inAlgorithm.get() === "VSM")
+                {
+                    op.setUiError("vsmBlurZero", "You chose the VSM algorithm but one of your lights still has a blur amount of 0. For VSM to work correctly, consider raising the blur amount in your lights.", 1);
+                }
+                else
+                {
+                    op.setUiError("vsmBlurZero", null);
+                }
+            }
+            else
+            {
+                op.setUiError("vsmBlurZero", null);
             }
         }
     }

@@ -223,7 +223,7 @@
                 "name": "Shadow Map"
             }
         ],
-        "name": "Ops.Admin.ShadowSpotLightCGL"
+        "name": "Ops.Gl.Phong.SpotLight_v5"
     },
     "changelog": [
         {
