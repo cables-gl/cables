@@ -21,6 +21,7 @@ function Light(config)
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
+const inCastLight = op.inBool("Cast Light", true);
 const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 15);
 
@@ -49,7 +50,7 @@ op.setPortGroup("Specular Color", colorSpecularIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.5);
 
-const attribIns = [inIntensity, inRadius];
+const attribIns = [inIntensity, inCastLight, inRadius];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
@@ -137,7 +138,7 @@ let updateLight = false;
 
 inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChange = inB.onChange
 = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange = inIntensity.onChange
-= inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = inShadowStrength.onChange = function ()
+= inCastLight.onChange = inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = inShadowStrength.onChange = function ()
         {
             updateLight = true;
         };
@@ -263,6 +264,7 @@ inTrigger.onTriggered = function ()
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
         newLight.castShadow = inCastShadow.get();
+        newLight.castLight = inCastLight.get();
         newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), null);
         updateLight = false;
     }

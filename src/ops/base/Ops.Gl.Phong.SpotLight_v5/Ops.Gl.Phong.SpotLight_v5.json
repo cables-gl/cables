@@ -14,6 +14,12 @@
             },
             {
                 "type": "0",
+                "name": "Cast Light",
+                "group": "Light Attributes",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Intensity",
                 "group": "Light Attributes",
                 "subType": "number"

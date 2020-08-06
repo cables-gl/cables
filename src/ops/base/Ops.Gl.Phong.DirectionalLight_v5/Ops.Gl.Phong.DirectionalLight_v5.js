@@ -2,6 +2,12 @@ const cgl = op.patch.cgl;
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
+
+const inCastLight = op.inBool("Cast Light", true);
+const inIntensity = op.inFloat("Intensity", 1);
+const attribIns = [inCastLight, inIntensity];
+op.setPortGroup("Light Attributes", attribIns);
+
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 3);
 const inPosZ = op.inFloat("Z", 5);
@@ -25,9 +31,6 @@ inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
-const inIntensity = op.inFloat("Intensity", 1);
-const attribIns = [inIntensity];
-op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inRenderMapActive = op.inBool("Rendering Active", true);
@@ -142,7 +145,7 @@ newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inBias.onChange = inIntensity.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
+= inBias.onChange = inIntensity.onChange = inCastLight.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
 
 let updateLight = false;
 function updateLightParameters(param)
@@ -252,6 +255,7 @@ inTrigger.onTriggered = function ()
         newLight.color = [inR.get(), inG.get(), inB.get()];
         newLight.specular = [inSpecularR.get(), inSpecularG.get(), inSpecularB.get()];
         newLight.intensity = inIntensity.get();
+        newLight.castLight = inCastLight.get();
         newLight.position = [inPosX.get(), inPosY.get(), inPosZ.get()];
         newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
         newLight.castShadow = inCastShadow.get();

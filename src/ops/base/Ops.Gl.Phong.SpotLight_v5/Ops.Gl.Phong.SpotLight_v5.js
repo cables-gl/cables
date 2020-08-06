@@ -3,6 +3,7 @@ const cgl = op.patch.cgl;
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 
+const inCastLight = op.inBool("Cast Light", true);
 const inIntensity = op.inFloat("Intensity", 5);
 const inRadius = op.inFloat("Radius", 10);
 
@@ -40,7 +41,7 @@ const coneAttribsIn = [inConeAngle, inConeAngleInner, inSpotExponent];
 op.setPortGroup("Cone Attributes", coneAttribsIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.00001);
-const lightAttribsIn = [inIntensity, inRadius];
+const lightAttribsIn = [inCastLight, inIntensity, inRadius];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
@@ -134,8 +135,8 @@ newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get
 
 let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
+= inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange;
+inCastLight.onChange = inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
 = inSpotExponent.onChange = inShadowStrength.onChange = updateLightParameters;
 
 function updateLightParameters()
@@ -286,6 +287,7 @@ inTrigger.onTriggered = function ()
         newLight.specular = [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); });
         newLight.conePointAt = [0, 1, 2].map(function (i) { return pointAtIn[i].get(); });
         newLight.intensity = inIntensity.get();
+        newLight.castLight = inCastLight.get();
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
         newLight.cosConeAngleInner = Math.cos(CGL.DEG2RAD * inConeAngleInner.get());
