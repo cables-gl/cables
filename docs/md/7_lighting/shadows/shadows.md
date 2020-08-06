@@ -189,4 +189,10 @@ In general it is advised to use VSM with wide scenes or scenes where objects hav
 
 ## Advanced
 
-Have a look at [this patch] and play around with it to see the potential the new shadow system has.
+Have a look at [this patch](https://cables.gl/p/M0F2We) and play around with it to see the potential the new shadow system has.
+
+We are very excited to see what you can come up with! Don't be afraid to publish your patches.
+
+## Last notes
+
+If you experience any problems not listed in this documentation, feel free to post on our [forum](https://forum.cables.gl) and let us know if we can help you.
