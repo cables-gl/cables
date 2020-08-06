@@ -108,6 +108,9 @@ inAdvanced.onChange = function ()
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
+const outWorldPosX = op.outNumber("World Position X");
+const outWorldPosY = op.outNumber("World Position Y");
+const outWorldPosZ = op.outNumber("World Position Z");
 
 const newLight = new CGL.Light(cgl, {
     "type": "spot",
@@ -309,6 +312,9 @@ inTrigger.onTriggered = function ()
     newLight.position = resultPos;
     newLight.conePointAt = resultPointAt;
 
+    outWorldPosX.set(newLight.position[0]);
+    outWorldPosY.set(newLight.position[1]);
+    outWorldPosZ.set(newLight.position[2]);
 
     drawHelpers();
 

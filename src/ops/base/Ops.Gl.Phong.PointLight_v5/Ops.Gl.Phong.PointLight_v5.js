@@ -106,6 +106,9 @@ inCastShadow.onChange = function ()
 const outTrigger = op.outTrigger("Trigger Out");
 const outCubemap = op.outObject("Cubemap");
 const outProjection = op.outTexture("Cubemap Projection");
+const outWorldPosX = op.outNumber("World Position X");
+const outWorldPosY = op.outNumber("World Position Y");
+const outWorldPosZ = op.outNumber("World Position Z");
 
 const newLight = new CGL.Light(cgl, {
     "type": "point",
@@ -274,7 +277,12 @@ inTrigger.onTriggered = function ()
 
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
+
     newLight.position = position;
+
+    outWorldPosX.set(newLight.position[0]);
+    outWorldPosY.set(newLight.position[1]);
+    outWorldPosZ.set(newLight.position[2]);
 
     drawHelpers();
 

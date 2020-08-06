@@ -153,6 +153,21 @@
             {
                 "type": "2",
                 "name": "Cubemap Projection"
+            },
+            {
+                "type": "0",
+                "name": "World Position X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Phong.PointLight_v5"

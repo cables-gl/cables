@@ -233,6 +233,21 @@
             {
                 "type": "2",
                 "name": "Shadow Map"
+            },
+            {
+                "type": "0",
+                "name": "World Position X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Phong.SpotLight_v5"
