@@ -4,11 +4,11 @@ const cgl = op.patch.cgl;
 const inTrigger = op.inTrigger("Trigger In");
 
 const inCastLight = op.inBool("Cast Light", true);
-const inIntensity = op.inFloat("Intensity", 5);
+const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 10);
 
 const inPosX = op.inFloat("X", 1);
-const inPosY = op.inFloat("Y", 2);
+const inPosY = op.inFloat("Y", 3);
 const inPosZ = op.inFloat("Z", 1);
 
 const positionIn = [inPosX, inPosY, inPosZ];
@@ -34,7 +34,7 @@ inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
-const inConeAngle = op.inFloat("Cone Angle", 130);
+const inConeAngle = op.inFloat("Cone Angle", 120);
 const inConeAngleInner = op.inFloat("Inner Cone Angle", 60);
 const inSpotExponent = op.inFloat("Spot Exponent", 0.97);
 const coneAttribsIn = [inConeAngle, inConeAngleInner, inSpotExponent];
@@ -50,9 +50,9 @@ const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 0.99);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
-const inBias = op.inFloatSlider("Bias", 0.004);
-const inPolygonOffset = op.inInt("Polygon Offset", 1);
-const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
+const inBias = op.inFloatSlider("Bias", 0.0001);
+const inPolygonOffset = op.inInt("Polygon Offset", 0);
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [

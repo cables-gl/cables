@@ -568,7 +568,7 @@ function createDefaultUniform()
         "lightProperties": new CGL.Uniform(shader, "4f", "phongLight" + 0 + ".lightProperties", [1, 1, 1, 1]),
         "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".conePointAt", vec3.create()),
         "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".spotProperties", [0, 0, 0, 0]),
-        "castLight": new CGL.Uniform(shader, "i", "phongLight" + i + ".castLight", 1),
+        "castLight": new CGL.Uniform(shader, "i", "phongLight" + 0 + ".castLight", 1),
     };
 }
 
