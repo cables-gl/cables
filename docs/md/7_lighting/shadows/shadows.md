@@ -186,8 +186,6 @@ To get rid of perspective aliasing, you can do the following:
 
 In general it is advised to use VSM with wide scenes or scenes where objects have a bit of distance to each other and don't overlap.
 
-## Problems
+## Advanced
 
-### Shadows not visible
-
-If you find yourself in a situation where
+Have a look at [this patch] and play around with it to see the potential the new shadow system has.
