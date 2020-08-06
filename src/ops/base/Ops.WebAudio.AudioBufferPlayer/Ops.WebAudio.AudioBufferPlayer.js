@@ -1,58 +1,73 @@
-var audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
+const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
-var audioBufferPort = op.inObject("Audio Buffer");
-var playPort = op.inValueBool("Start / Stop", false);
-var startTimePort = op.inValue("Start Time", 0);
-var stopTimePort = op.inValue("Stop Time", 0);
-var offsetPort = op.inValue("Offset", 0);
-var autoPlayPort = op.inValueBool("Autoplay", false);
-var loopPort = op.inValueBool("Loop", false);
-var detunePort = op.inValue("Detune", 0);
-var playbackRatePort = op.inValue("Playback Rate", 1);
+const audioBufferPort = op.inObject("Audio Buffer");
+const playPort = op.inValueBool("Start / Stop", false);
+const startTimePort = op.inValue("Start Time", 0);
+const stopTimePort = op.inValue("Stop Time", 0);
+const offsetPort = op.inValue("Offset", 0);
+const autoPlayPort = op.inValueBool("Autoplay", false);
+const loopPort = op.inValueBool("Loop", false);
+const detunePort = op.inValue("Detune", 0);
+const playbackRatePort = op.inValue("Playback Rate", 1);
 
 // output ports
-var audioOutPort = op.outObject("Audio Out");
+const audioOutPort = op.outObject("Audio Out");
+const outEnded = op.outBool("Finished", false);
 
 // vars
-var source = null;
+let source = null;
 
 // change listeners
-audioBufferPort.onChange = function() {
+audioBufferPort.onChange = function ()
+{
     createAudioBufferSource();
-    if(
+    outEnded.set(false);
+    if (
         (autoPlayPort.get() && audioBufferPort.get()) ||
     (playPort.get() && audioBufferPort.get())
-    ) {
+    )
+    {
         start(startTimePort.get());
     }
 };
-playPort.onChange = function() {
-    if(source) {
-        if(playPort.get()) {
-            var startTime = startTimePort.get() || 0;
-            start(startTime);    
-        } else {
-            var stopTime = stopTimePort.get() || 0;
-            stop(stopTime);    
-        } 
+playPort.onChange = function ()
+{
+    if (source)
+    {
+        if (playPort.get())
+        {
+            const startTime = startTimePort.get() || 0;
+            start(startTime);
+            outEnded.set(false);
+        }
+        else
+        {
+            const stopTime = stopTimePort.get() || 0;
+            stop(stopTime);
+        }
     }
 };
-loopPort.onChange = function() {
-    if(source) {
-        source.loop = loopPort.get() ? true : false;
+loopPort.onChange = function ()
+{
+    if (source)
+    {
+        source.loop = !!loopPort.get();
     }
 };
 
 detunePort.onChange = setDetune;
 
-function setDetune() {
-    if(source) {
-        var detune = detunePort.get() || 0;
-        if(source.detune) {
+function setDetune()
+{
+    if (source)
+    {
+        const detune = detunePort.get() || 0;
+        if (source.detune)
+        {
             source.detune.setValueAtTime(
                 detune,
-                audioCtx.currentTime    
+                audioCtx.currentTime
             );
         }
     }
@@ -60,24 +75,29 @@ function setDetune() {
 
 playbackRatePort.onChange = setPlaybackRate;
 
-function setPlaybackRate() {
-    if(source) {
-        var playbackRate = playbackRatePort.get() || 0;
-        if(playbackRate >= source.playbackRate.minValue && playbackRate <= source.playbackRate.maxValue) {
+function setPlaybackRate()
+{
+    if (source)
+    {
+        const playbackRate = playbackRatePort.get() || 0;
+        if (playbackRate >= source.playbackRate.minValue && playbackRate <= source.playbackRate.maxValue)
+        {
             source.playbackRate.setValueAtTime(
                 playbackRate,
-                audioCtx.currentTime    
-            );    
+                audioCtx.currentTime
+            );
         }
     }
 }
 
 // functions
-function createAudioBufferSource() {
-    if(source)stop(0);
+function createAudioBufferSource()
+{
+    if (source)stop(0);
     source = audioCtx.createBufferSource();
-    var buffer = audioBufferPort.get();
-    if(buffer) {
+    const buffer = audioBufferPort.get();
+    if (buffer)
+    {
         source.buffer = buffer;
     }
     source.onended = onPlaybackEnded;
@@ -87,23 +107,32 @@ function createAudioBufferSource() {
     audioOutPort.set(source);
 }
 
-function start(time) {
-    try {
-        source.start(time,offsetPort.get()); // 0 = now
-    } catch(e){
+function start(time)
+{
+    try
+    {
+        source.start(time, offsetPort.get()); // 0 = now
+    }
+    catch (e)
+    {
         // console.log(e);
     } // already playing!?
 }
 
-function stop(time) {
-    try {
+function stop(time)
+{
+    try
+    {
         source.stop(time); // 0 = now
-    } catch(e) 
+    }
+    catch (e)
     {
         // console.log(e);
     } // not playing!?
 }
 
-function onPlaybackEnded() {
+function onPlaybackEnded()
+{
+    outEnded.set(true);
     createAudioBufferSource(); // we can only play back once, so we need to create a new one
 }
