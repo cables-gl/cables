@@ -90,6 +90,12 @@
             },
             {
                 "type": "0",
+                "name": "Rendering Active",
+                "group": "Shadow Map Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Map Size index",
                 "subType": "integer"
             },

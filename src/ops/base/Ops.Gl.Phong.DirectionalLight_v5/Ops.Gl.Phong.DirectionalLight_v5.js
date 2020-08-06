@@ -30,6 +30,7 @@ const attribIns = [inIntensity];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
@@ -40,9 +41,10 @@ const inPolygonOffset = op.inInt("Polygon Offset", 1);
 const inNormalOffset = op.inFloatSlider("Normal Offset", 0.024);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings", [inMapSize, inRenderMapActive, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
 inMapSize.setUiAttribs({ "greyout": true });
+inRenderMapActive.setUiAttribs({ "greyout": true });
 inShadowStrength.setUiAttribs({ "greyout": true });
 inLRBT.setUiAttribs({ "greyout": true, "hidePort": true });
 inNear.setUiAttribs({ "greyout": true, "hidePort": true });
@@ -173,6 +175,7 @@ inCastShadow.onChange = function ()
     newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !castShadow });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inLRBT.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
@@ -271,7 +274,7 @@ inTrigger.onTriggered = function ()
     if (inCastShadow.get())
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
-        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         newLight.blurAmount = inBlur.get();
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());

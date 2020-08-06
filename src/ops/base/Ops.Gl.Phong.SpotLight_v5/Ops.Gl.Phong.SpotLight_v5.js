@@ -44,6 +44,7 @@ const lightAttribsIn = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 0.99);
 const inNear = op.inFloat("Near", 0.1);
@@ -55,6 +56,7 @@ const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [
     inMapSize,
+    inRenderMapActive,
     inShadowStrength,
     inNear,
     inFar,
@@ -66,6 +68,7 @@ op.setPortGroup("Shadow Map Settings", [
 
 
 inMapSize.setUiAttribs({ "greyout": true, "hidePort": true });
+inRenderMapActive.setUiAttribs({ "greyout": true });
 inShadowStrength.setUiAttribs({ "greyout": true });
 inNear.setUiAttribs({ "greyout": true, "hidePort": true });
 inFar.setUiAttribs({ "greyout": true, "hidePort": true });
@@ -161,6 +164,7 @@ inCastShadow.onChange = function ()
     newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !castShadow });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
     inFar.setUiAttribs({ "greyout": !castShadow });
@@ -309,7 +313,7 @@ inTrigger.onTriggered = function ()
     if (inCastShadow.get())
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
-        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
 

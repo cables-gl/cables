@@ -53,6 +53,7 @@ const attribIns = [inIntensity, inRadius];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
@@ -60,9 +61,10 @@ const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
 const inPolygonOffset = op.inInt("Polygon Offset", 1);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
+op.setPortGroup("Shadow Map Settings", [inMapSize, inRenderMapActive, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
 const shadowProperties = [inNear, inFar];
 inMapSize.setUiAttribs({ "greyout": !inCastShadow.get() });
+inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
 inShadowStrength.setUiAttribs({ "greyout": !inCastShadow.get() });
 inNear.setUiAttribs({ "greyout": !inCastShadow.get() });
 inBias.setUiAttribs({ "greyout": !inCastShadow.get() });
@@ -89,6 +91,7 @@ inCastShadow.onChange = function ()
 
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
     inFar.setUiAttribs({ "greyout": !castShadow });
@@ -277,7 +280,7 @@ inTrigger.onTriggered = function ()
 
     if (inCastShadow.get())
     {
-        newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
 
         if (!cgl.frameStore.shadowPass)
         {
@@ -285,11 +288,20 @@ inTrigger.onTriggered = function ()
             newLight.castShadow = inCastShadow.get();
             newLight.shadowBias = inBias.get();
             newLight.shadowStrength = inShadowStrength.get();
-            if (newLight.shadowCubeMap.cubemap)
+
+            if (newLight.shadowCubeMap)
             {
-                outCubemap.set(null);
-                outCubemap.set(newLight.shadowCubeMap);
-                if (cgl.shouldDrawHelpers(op)) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+                if (newLight.shadowCubeMap.cubemap)
+                {
+                    outCubemap.set(null);
+                    outCubemap.set(newLight.shadowCubeMap);
+                    if (inRenderMapActive.get())
+                    {
+                        // needs to be "cloned", cannot save reference.
+                        newLight.positionForShadowMap = [newLight.position[0], newLight.position[1], newLight.position[2]];
+                        if (cgl.shouldDrawHelpers(op)) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+                    }
+                }
             }
             cgl.frameStore.lightStack.push(newLight);
         }

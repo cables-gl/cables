@@ -367,7 +367,11 @@ function setUniforms()
 
         if (!light.isUsed) light.isUsed = true;
 
-        shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
+        if (light.type !== "point") shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
+        else
+        {
+            shaderModule.setUniformValue("MOD_light" + i + ".position", light.positionForShadowMap);
+        }
         shaderModule.setUniformValue("MOD_light" + i + ".typeCastShadow", [
             LIGHT_TYPES[light.type],
             Number(light.castShadow),
@@ -399,6 +403,7 @@ function setUniforms()
                 light.shadowMap.width,
                 light.shadowBias
             ]);
+
             if (light.type === "point") shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
 
 
@@ -539,8 +544,10 @@ function checkUiErrors()
         else
         {
             op.setUiError("nolights", null);
+
             let oneLightCastsShadow = false;
             let allLightsBlurAboveZero = true;
+
             for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
             {
                 oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
