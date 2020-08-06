@@ -26,7 +26,7 @@ const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 15);
 
 const inPosX = op.inFloat("X", 0);
-const inPosY = op.inFloat("Y", 1);
+const inPosY = op.inFloat("Y", 2);
 const inPosZ = op.inFloat("Z", 0.75);
 
 const positionIn = [inPosX, inPosY, inPosZ];
@@ -60,7 +60,7 @@ const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
-const inPolygonOffset = op.inInt("Polygon Offset", 1);
+const inPolygonOffset = op.inInt("Polygon Offset", 0);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [inMapSize, inRenderMapActive, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
 const shadowProperties = [inNear, inFar];
