@@ -46,7 +46,8 @@ Okay, enough with the theory, let's dive into creating shadows!
 ## Basic Setup
 ![shadowminimalmage](img/01_minimal_patch_shadows.png)
 
-In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/J4R3_e). While allowing you to generate shadows, this setup does not allow for much control.
+In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/J4R3_e).
+
 You can add multiple [Shadow](https://cables.gl/op/Ops.Gl.ShaderEffects.Shadow_v2) before meshes to enable or disable shadow casting.
 
 ![castingdisabled](img/01_disable_shadow_casting.png)
