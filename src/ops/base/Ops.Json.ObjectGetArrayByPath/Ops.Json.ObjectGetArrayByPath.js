@@ -8,19 +8,36 @@ pathIn.onChange = update;
 function update()
 {
     const data = objectIn.get();
-    const result = [];
+    let result = [];
     const path = pathIn.get();
 
     if (data && path)
     {
-        if (!Array.isArray(data) && !(typeof data === "object"))
+        if (!Array.isArray(data) && (typeof data !== "object"))
         {
             op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+        }
+        else if (Array.isArray(data))
+        {
+            op.setUiError("notiterable", null);
+            const parts = path.split(".");
+
+            const pathSuffix = parts.slice(1).join(".");
+
+            for (let i = 0; i < data.length; i++)
+            {
+                const resolvePath = i + "." + pathSuffix;
+                result.push(resolve(resolvePath, data));
+            }
+            const titleParts = pathIn.get().split(".");
+            op.setUiAttrib({ "extendTitle": titleParts[titleParts.length - 1] + "" });
+            resultOut.set(result);
         }
         else
         {
             op.setUiError("notiterable", null);
             const parts = path.split(".");
+            console.log("parts", parts);
 
             // find first array in path
             let checkPath = "";
@@ -30,6 +47,7 @@ function update()
             for (let i = 0; i < parts.length; i++)
             {
                 checkPath += parts[i];
+                console.log("checking", checkPath, data);
                 checkData = resolve(checkPath, data);
                 if (Array.isArray(checkData))
                 {
@@ -39,13 +57,42 @@ function update()
                 }
                 checkPath += ".";
             }
-            for (let i = 0; i < checkData.length; i++)
+            console.log("checkData", checkData, checkPath);
+            if (checkData)
             {
-                const resolvePath = pathPrefix + "." + i + "." + pathSuffix;
-                result.push(resolve(resolvePath, data));
+                if (parts.length > 1)
+                {
+                    for (let i = 0; i < checkData.length; i++)
+                    {
+                        let resolvePath = pathPrefix + "." + i;
+                        if (pathSuffix && pathSuffix !== "")
+                        {
+                            resolvePath += "." + pathSuffix;
+                        }
+                        const resolvedData = resolve(resolvePath, data);
+                        result.push(resolvedData);
+                        console.log("resolving", resolvePath, resolvedData);
+                    }
+                }
+                else
+                {
+                    console.log("here?", checkData);
+                    if (Array.isArray(checkData))
+                    {
+                        result = checkData;
+                    }
+                    else
+                    {
+                        result = [checkData];
+                    }
+                }
+
+                const titleParts = pathIn.get().split(".");
+                const extendTitle = titleParts[titleParts.length - 1] + "";
+                op.setUiAttrib({ "extendTitle": extendTitle });
             }
-            const titleParts = pathIn.get().split(".");
-            op.setUiAttrib({ "extendTitle": titleParts[titleParts.length - 1] + "" });
+
+            console.log("result", result);
             resultOut.set(result);
         }
     }

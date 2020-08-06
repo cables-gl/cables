@@ -1,7 +1,7 @@
 {
     "authorName": "cables",
-    "id": "574513c7-472b-433c-bf99-d906d3c737cd",
-    "created": 1596729422402,
+    "id": "609a645e-5e24-4a5e-a379-804c5b64f5d5",
+    "created": 1596713958059,
     "layout": {
         "portsIn": [
             {
@@ -15,10 +15,10 @@
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": "3",
                 "name": "Output"
             }
         ],
-        "name": "Ops.Json.ObjectGetByPath"
+        "name": "Ops.Json.ObjectGetArrayByPath"
     }
 }
