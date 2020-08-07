@@ -44,6 +44,8 @@ struct Light {
     #define FALLOFF z
     #define RADIUS w
     vec4 lightProperties;
+
+    int castLight;
 };
 
 /* CONSTANTS */

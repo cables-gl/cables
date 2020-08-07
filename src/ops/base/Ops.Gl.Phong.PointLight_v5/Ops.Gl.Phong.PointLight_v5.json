@@ -14,6 +14,12 @@
             },
             {
                 "type": "0",
+                "name": "Cast Light",
+                "group": "Light Attributes",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Intensity",
                 "group": "Light Attributes",
                 "subType": "number"
@@ -90,6 +96,12 @@
             },
             {
                 "type": "0",
+                "name": "Rendering Active",
+                "group": "Shadow Map Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Map Size index",
                 "subType": "integer"
             },
@@ -141,6 +153,21 @@
             {
                 "type": "2",
                 "name": "Cubemap Projection"
+            },
+            {
+                "type": "0",
+                "name": "World Position X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "World Position Z",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Phong.PointLight_v5"

@@ -73,6 +73,7 @@ const DEFAULT_LIGHTSTACK = [{
     "attenuation": 0,
     "falloff": 0.5,
     "radius": 80,
+    "castLight": 1
 }];
 
 
@@ -91,6 +92,7 @@ function createDefaultUniform()
         "type": new CGL.Uniform(shader, "i", "lights[0].type", 0),
         "conePointAt": new CGL.Uniform(shader, "3f", "lights[0].conePointAt", vec3.create()),
         "spotProperties": new CGL.Uniform(shader, "3f", "lights[0].spotProperties", [0, 0, 0, 0]),
+        "castLight": new CGL.Uniform(shader, "i", "lights[0].castLight", 1),
     };
 }
 
@@ -139,6 +141,7 @@ function createUniforms(lightsCount)
                 "type": new CGL.Uniform(shader, "i", "lights[" + i + "].type", 0),
                 "conePointAt": new CGL.Uniform(shader, "3f", "lights[" + i + "].conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "lights[" + i + "].spotProperties", [0, 0, 0, 0]),
+                "castLight": new CGL.Uniform(shader, "i", "lights[" + i + "].castLight", 1)
             };
         }
     }
@@ -149,7 +152,7 @@ function setUniforms(lightStack)
     for (let i = 0; i < lightStack.length; i += 1)
     {
         const light = lightStack[i];
-        light.isUsed = true;
+        light.isUsed = true; // this property is used to set UI warnings in the lights
 
         lightUniforms[i].position.setValue(light.position);
         lightUniforms[i].color.setValue(light.color);
@@ -168,6 +171,7 @@ function setUniforms(lightStack)
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
+        lightUniforms[i].castLight.setValue(light.castLight);
     }
 }
 
