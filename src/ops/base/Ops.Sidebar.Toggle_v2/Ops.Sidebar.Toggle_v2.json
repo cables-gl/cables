@@ -1,0 +1,53 @@
+{
+    "authorName": "pandur",
+    "id": "98bf9661-6aa4-4c33-970f-ed99428a94aa",
+    "created": 1591882766572,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "link"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "0",
+                "name": "Input",
+                "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Set Default"
+            },
+            {
+                "type": "0",
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "childs"
+            },
+            {
+                "type": "0",
+                "name": "Value",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Sidebar.Toggle_v2"
+    },
+    "summary": "sidebar boolean toggle/switch element",
+    "youtubeid": "cpRVswVdvI0",
+    "docs": {
+        "ports": []
+    }
+}

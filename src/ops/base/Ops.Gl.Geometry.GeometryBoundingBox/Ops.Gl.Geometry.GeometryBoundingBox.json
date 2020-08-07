@@ -1,0 +1,74 @@
+{
+    "id": "7c13487b-87b2-40c9-b363-c5f699968579",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1594028866736
+        },
+        {
+            "message": "Ops.User.pandur.GeometryBoundingBox renamed to Ops.Gl.Geometry.GeometryBoundingBox",
+            "author": "pandur",
+            "date": 1594029475865
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1594028902109,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Boundings"
+            },
+            {
+                "type": "0",
+                "name": "Min X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min Z",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Z",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "MaxMin Points"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.GeometryBoundingBox"
+    },
+    "summary": "Calculate a bounding box from a geometry",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -229,7 +229,6 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     this._attributes.push(attr);
     this._attribLocs = {};
 
-
     return attr;
 };
 
@@ -601,18 +600,26 @@ Mesh.prototype.render = function (shader)
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
 
+    let elementDiv = 1;
+
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
     }
     else if (this._bufVerticesIndizes.numItems === 0)
     {
+        if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
         if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
         else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
     }
     else
-    if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
-    else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
+    {
+        if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
+        else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
+    }
+
+    profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
 
     profileData.profileMeshDraw++;
 };

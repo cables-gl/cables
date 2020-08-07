@@ -34,7 +34,7 @@ let needsMatUpdate = true;
 let timedLoader = null;
 let loadingId = null;
 let data = null;
-let scale = vec3.create();
+const scale = vec3.create();
 let lastTime = 0;
 
 inShow.onTriggered = printInfo;
@@ -92,7 +92,7 @@ inExec.onTriggered = function ()
     {
         gltf.time = time;
 
-        if (gltf.bounds && CABLES.UI && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+        if (gltf.bounds && cgl.shouldDrawHelpers(op))
         {
             if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
             else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
@@ -116,7 +116,7 @@ function loadBin()
     if (!loadingId)loadingId = cgl.patch.loading.start("gltf", inFile.get());
 
     const url = op.patch.getFilePath(String(inFile.get()));
-    let oReq = new XMLHttpRequest();
+    const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
     closeTab();
@@ -129,7 +129,7 @@ function loadBin()
 
 
         maxTime = 0;
-        let arrayBuffer = oReq.response;
+        const arrayBuffer = oReq.response;
         gltf = parseGltf(arrayBuffer);
         cgl.patch.loading.finished(loadingId);
         needsMatUpdate = true;
@@ -196,7 +196,7 @@ function hideNodesFromData()
 
     if (gltf && data && data.hiddenNodes)
     {
-        for (let i in data.hiddenNodes)
+        for (const i in data.hiddenNodes)
         {
             const n = gltf.getNode(i);
             if (n) n.hidden = true;
@@ -226,9 +226,7 @@ function saveData()
 
 op.exposeNode = function (name)
 {
-    console.log("HUND", name);
-
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfNode");
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
     newop.getPort("Node Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
@@ -237,7 +235,7 @@ op.exposeNode = function (name)
 
 op.assignMaterial = function (name)
 {
-    let newop = gui.patch().scene.addOp("Ops.Gl.GLTF.GltfSetMaterial");
+    const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patch().focusOp(newop.id, true);

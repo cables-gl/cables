@@ -11,12 +11,14 @@ UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
 UNI mat4 viewMatrix;
 
+
 OUT vec2 texCoord;
 OUT vec3 norm;
 
 ${this.type === "point" ? "OUT vec3 modelPos;" : ""}
 void main() {
     texCoord=attrTexCoord;
+    texCoord.y = 1. - texCoord.y;
     norm=attrVertNormal;
     vec4 pos = vec4(vPosition, 1.0);
     mat4 mMatrix=modelMatrix;
@@ -24,9 +26,9 @@ void main() {
 
     {{MODULE_VERTEX_POSITION}}
 
-    mat4 mvMatrix=viewMatrix * modelMatrix;
+    mat4 mvMatrix=viewMatrix * mMatrix;
     vec4 vPos = projMatrix * mvMatrix * vec4(vPosition, 1.);
-    ${this.type === "point" ? "modelPos = (modelMatrix * pos).xyz;" : ""}
+    ${this.type === "point" ? "modelPos = (mMatrix * pos).xyz;" : ""}
     gl_Position = vPos;
 }
 `;
@@ -58,13 +60,19 @@ export function getShadowPassFragmentShader()
    https://developer.nvidia.com/gpugems/gpugems3/part-ii-light-and-shadows/chapter-8-summed-area-variance-shadow-maps
    */
     return `
+   {{MODULES_HEAD}}
    ${this.type === "point" ? "IN vec3 modelPos;" : ""}
    ${this.type === "point" ? "UNI vec3 inLightPosition;" : ""}
    ${this.type === "point" ? "UNI vec2 inNearFar;" : ""}
 
+    IN vec2 texCoord;
+
     void main() {
         {{MODULE_BEGIN_FRAG}}
         vec4 col = vec4(1.);
+
+
+        outColor = vec4(1.);
 
         {{MODULE_COLOR}}
 
@@ -79,8 +87,9 @@ export function getShadowPassFragmentShader()
         float clampedDerivative = clamp(dot(dx, dx) + dot(dy, dy), 0., 1.);
         float moment2 = dot(depth, depth) + 0.25 * clampedDerivative;
 
-
-        outColor = vec4(depth, moment2, depth, moment2);
+        outColor.x = depth;
+        outColor.y = moment2;
+        outColor.z = depth;
     }
 `;
 }

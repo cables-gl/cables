@@ -29,9 +29,11 @@ const Context = function (_patch)
     this.maxTextureUnits = 0;
     this.currentProgram = null;
     this._hadStackError = false;
+    this.glSlowRenderer = false;
 
     this.temporaryTexture = null;
     this.frameStore = {};
+    this._onetimeCallbacks = [];
     this.gl = null;
 
     /**
@@ -159,6 +161,14 @@ const Context = function (_patch)
             this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL.");
             return;
         }
+
+        const dbgRenderInfo = this.gl.getExtension("WEBGL_debug_renderer_info");
+        if (dbgRenderInfo)
+        {
+            const webGlRenderer = this.gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
+            if (webGlRenderer === "Google SwiftShader") this.glSlowRenderer = true;
+        }
+
         this.gl.getExtension("OES_standard_derivatives");
         // this.gl.getExtension("GL_OES_standard_derivatives");
         const instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
@@ -247,7 +257,6 @@ const Context = function (_patch)
     {
         if (this.patch.isEditorMode()) CABLES.GL_MARKER.drawMarkerLayer(this);
 
-
         this.setPreviousShader();
 
         if (this._vMatrixStack.length() > 0) this.logStackError("view matrix stack length !=0 at end of rendering...");
@@ -262,6 +271,8 @@ const Context = function (_patch)
         if (this._shaderStack.length > 0) this.logStackError("this._shaderStack length !=0 at end of rendering...");
         if (this._stackCullFace.length > 0) this.logStackError("this._stackCullFace length !=0 at end of rendering...");
         if (this._stackCullFaceFacing.length > 0) this.logStackError("this._stackCullFaceFacing length !=0 at end of rendering...");
+
+        this._frameStarted = false;
 
         if (oldCanvasWidth != this.canvasWidth || oldCanvasHeight != this.canvasHeight)
         {
@@ -431,7 +442,7 @@ const Context = function (_patch)
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
 
         mat4.perspective(cgl.pMatrix, 45, cgl.canvasWidth / cgl.canvasHeight, 0.1, 1000.0);
-        //mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
+        // mat4.perspective(cgl.pMatrix, 45, this.getViewPort()[2] / this.getViewPort()[3], 0.1, 1000.0);
 
         mat4.identity(cgl.mMatrix);
         mat4.identity(cgl.vMatrix);
@@ -447,6 +458,14 @@ const Context = function (_patch)
         for (let i = 0; i < this._textureslots.length; i++) this._textureslots[i] = null;
 
         this.pushShader(simpleShader);
+
+        this._frameStarted = true;
+
+        if (this._onetimeCallbacks.length > 0)
+        {
+            for (let i = 0; i < this._onetimeCallbacks.length; i++) this._onetimeCallbacks[i]();
+            this._onetimeCallbacks.length = 0;
+        }
 
         this.emitEvent("beginFrame");
     };
@@ -466,6 +485,8 @@ const Context = function (_patch)
         this.popBlendMode();
 
         cgl.endFrame();
+
+        this.emitEvent("endFrame");
     };
 
     this.getTexture = function (slot)
@@ -473,8 +494,24 @@ const Context = function (_patch)
         return this._textureslots[slot];
     };
 
+    /**
+     * log warning to console if the rendering of one frame has not been started / handy to check for async problems
+     * @function checkFrameStarted
+     * @memberof Context
+     * @instance
+     */
+    this.checkFrameStarted = function (string)
+    {
+        if (!this._frameStarted)
+        {
+            console.warn("frame not started " + string);
+            console.log(new Error().stack);
+        }
+    };
+
     this.setTexture = function (slot, t, type)
     {
+        this.checkFrameStarted("cgl setTexture");
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
@@ -556,7 +593,9 @@ const Context = function (_patch)
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             Log.log("gl error: ", str, error, errStr);
+            return true;
         }
+        return false;
     };
 
     this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)
@@ -614,6 +653,18 @@ const Context = function (_patch)
     };
 };
 
+
+/**
+ * execute the callback next frame, once
+ * @function addNextFrameOnceCallback
+ * @memberof Context
+ * @instance
+ * @param {function} callback
+ */
+Context.prototype.addNextFrameOnceCallback = function (cb)
+{
+    if (cb) this._onetimeCallbacks.push(cb);
+};
 
 /**
  * push a matrix to the view matrix stack
@@ -1015,7 +1066,7 @@ Context.prototype.pushBlendMode = function (blendMode, premul)
 
 /**
  * pop predefined blendmode / switch back to previous blendmode
- * @function pushBlendMode
+ * @function popBlendMode
  * @memberof Context
  * @instance
  */
@@ -1028,7 +1079,7 @@ Context.prototype.popBlendMode = function ()
 
     this.popBlend(this._stackBlendMode[n] !== CONSTANTS.BLEND_MODES.BLEND_NONE);
 
-    if (n > 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
+    if (n >= 0) this._setBlendMode(this._stackBlendMode[n], this._stackBlendModePremul[n]);
 };
 
 Context.prototype.glGetAttribLocation = function (prog, name)
@@ -1037,9 +1088,22 @@ Context.prototype.glGetAttribLocation = function (prog, name)
     if (l == -1)
     {
         // Log.log("get attr loc -1 ",name);
-        // debugger;
     }
     return l;
+};
+
+
+/**
+ * should an op now draw helpermeshes
+ * @function shouldDrawHelpers
+ * @memberof Context
+ * @instance
+ */
+Context.prototype.shouldDrawHelpers = function (op)
+{
+    if (this.frameStore.shadowPass) return false;
+    if (!op.patch.isEditorMode()) return false;
+    return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 
 Context.prototype._setBlendMode = function (blendMode, premul)

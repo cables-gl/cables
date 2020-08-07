@@ -41,11 +41,11 @@ eventIn.onChange=function()
         note.set(event.note);
         channel.set(event.channel);
         learning=false;
-        
+
         if(CABLES.UI)
         {
             op.uiAttr({info:'bound to note: ' + note.get()});
-            gui.patch().showOpParams(op);
+            gui.opParams.show(op);
         }
     }
 
@@ -53,7 +53,7 @@ eventIn.onChange=function()
     {
         value.set(event.velocity);
     }
-    
+
     eventOut.set(event);
     lastEvent=event;
 };

@@ -1,5 +1,5 @@
 const text = op.inStringEditor("text", "1,2,3"),
-    separator = op.inValueString("separator", ","),
+    separator = op.inString("separator", ","),
     toNumber = op.inValueBool("Numbers", true),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
@@ -19,7 +19,7 @@ function parse()
         return;
     }
 
-    var r = text.get().split(separator.get());
+    const r = text.get().split(separator.get());
 
     if (r[r.length - 1] === "") r.length -= 1;
 
@@ -28,8 +28,8 @@ function parse()
     op.setUiError("notnum", null);
     if (toNumber.get())
     {
-        var hasStrings = false;
-        for (var i = 0; i < r.length; i++)
+        let hasStrings = false;
+        for (let i = 0; i < r.length; i++)
         {
             r[i] = Number(r[i]);
             if (!CABLES.UTILS.isNumeric(r[i]))

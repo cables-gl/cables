@@ -1,0 +1,70 @@
+{
+    "authorName": "pandur",
+    "id": "7476156e-3ca3-445a-bd30-1b9373a6af4c",
+    "created": 1596030575082,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RotX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RotY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RotZ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Limited",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.Bend_v2"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Bend2 renamed to Ops.Gl.ShaderEffects.Bend_v2",
+            "author": "kusma",
+            "date": 1596030693591
+        }
+    ],
+    "summary": "bend objects along an axis",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

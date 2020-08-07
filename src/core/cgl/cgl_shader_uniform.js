@@ -37,7 +37,7 @@ import { Log } from "../log";
  * const pv=new CGL.Uniform(shader,'f','myfloat',myPort);
  *
  */
-export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4)
+export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 {
     this._loc = -1;
     this._type = __type;
@@ -46,9 +46,14 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     this._value = 0.00001;
     this._oldValue = null;
     this._port = null;
+    this._structName = _structName;
+    this._structUniformName = _structUniformName;
+    this._propertyName = _propertyName;
+
     this._shader._addUniform(this);
     this.needsUpdate = true;
     this.shaderType = null;
+    this.comment = null;
 
     if (__type == "f")
     {
@@ -120,6 +125,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         this.set = this.setValue = this.setValueT.bind(this);
         this.updateValue = this.updateValueT.bind(this);
     }
+    else if (__type == "tc")
+    {
+        this.set = this.setValue = this.setValueT.bind(this);
+        this.updateValue = this.updateValueT.bind(this);
+    }
     else if (__type == "t[]")
     {
         this.set = this.setValue = this.setValueArrayT.bind(this);
@@ -136,7 +146,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     {
         this._port = _value;
         this._value = this._port.get();
-        this._port.onValueChanged = this.updateFromPort.bind(this);
+
 
         if (_port2 && _port3 && _port4)
         {
@@ -144,9 +154,13 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
             this._port2 = _port2;
             this._port3 = _port3;
             this._port4 = _port4;
-            this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(
-                this,
-            );
+
+            this._port.on("change", this.updateFromPort4f.bind(this));
+            this._port2.on("change", this.updateFromPort4f.bind(this));
+            this._port3.on("change", this.updateFromPort4f.bind(this));
+            this._port4.on("change", this.updateFromPort4f.bind(this));
+
+            // this._port.onChange = this._port2.onChange = this._port3.onChange = this._port4.onChange = this.updateFromPort4f.bind(this);
             this.updateFromPort4f();
         }
         else if (_port2 && _port3)
@@ -154,15 +168,27 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
             this._value = [0, 0, 0];
             this._port2 = _port2;
             this._port3 = _port3;
-            this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
+            // this._port.onChange = this._port2.onChange = this._port3.onChange = this.updateFromPort3f.bind(this);
+            this._port.on("change", this.updateFromPort3f.bind(this));
+            this._port2.on("change", this.updateFromPort3f.bind(this));
+            this._port3.on("change", this.updateFromPort3f.bind(this));
+
             this.updateFromPort3f();
         }
         else if (_port2)
         {
             this._value = [0, 0];
             this._port2 = _port2;
-            this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
+            // this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
+            this._port.on("change", this.updateFromPort2f.bind(this));
+            this._port2.on("change", this.updateFromPort2f.bind(this));
+
             this.updateFromPort2f();
+        }
+        else
+        {
+            // this._port.on = this.updateFromPort.bind(this);
+            this._port.on("change", this.updateFromPort.bind(this));
         }
     }
     else this._value = _value;
@@ -173,7 +199,9 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
 
 Uniform.prototype.copy = function (newShader)
 {
-    return new Uniform(newShader, this._type, this._name);
+    const uni = new Uniform(newShader, this._type, this._name, this._value, this._port2, this._port3, this._port4, this._structUniformName, this._structName, this._propertyName);
+    uni.shaderType = this.shaderType;
+    return uni;
 };
 
 /**
@@ -187,13 +215,19 @@ Uniform.prototype.getGlslTypeString = function ()
 {
     if (this._type == "f") return "float";
     if (this._type == "i") return "int";
+    if (this._type == "2i") return "ivec2";
     if (this._type == "2f") return "vec2";
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
     if (this._type == "m4") return "mat4";
     if (this._type == "t") return "sampler2D";
-
+    if (this._type == "tc") return "samplerCube";
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
+};
+
+Uniform.prototype._isValidLoc = function ()
+{
+    return this._loc != -1;// && this._loc != null;
 };
 
 
@@ -208,6 +242,14 @@ Uniform.prototype.getName = function ()
 Uniform.prototype.getValue = function ()
 {
     return this._value;
+};
+Uniform.prototype.getShaderType = function ()
+{
+    return this.shaderType;
+};
+Uniform.prototype.isStructMember = function ()
+{
+    return !!this._structName;
 };
 Uniform.prototype.resetLoc = function ()
 {
@@ -264,7 +306,7 @@ Uniform.prototype.updateFromPort = function ()
 
 Uniform.prototype.updateValueF = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1f(this._loc, this._value);
@@ -282,7 +324,7 @@ Uniform.prototype.setValueF = function (v)
 
 Uniform.prototype.updateValueI = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     this._shader.getCgl().gl.uniform1i(this._loc, this._value);
@@ -293,7 +335,7 @@ Uniform.prototype.updateValue2I = function ()
 {
     if (!this._value) return;
 
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -301,6 +343,7 @@ Uniform.prototype.updateValue2I = function ()
     }
 
     this._shader.getCgl().gl.uniform2i(this._loc, this._value[0], this._value[1]);
+
     this.needsUpdate = false;
     profileData.profileUniformCount++;
 };
@@ -308,7 +351,7 @@ Uniform.prototype.updateValue2I = function ()
 Uniform.prototype.updateValue3I = function ()
 {
     if (!this._value) return;
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -322,7 +365,7 @@ Uniform.prototype.updateValue3I = function ()
 
 Uniform.prototype.updateValue4I = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -386,7 +429,7 @@ Uniform.prototype.setValue4I = function (v)
 
 Uniform.prototype.updateValueBool = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
     this._shader.getCgl().gl.uniform1i(this._loc, this._value ? 1 : 0);
 
@@ -409,7 +452,7 @@ Uniform.prototype.setValueArray4F = function (v)
 
 Uniform.prototype.updateValueArray4F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -425,7 +468,7 @@ Uniform.prototype.setValueArray3F = function (v)
 
 Uniform.prototype.updateValueArray3F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -441,7 +484,7 @@ Uniform.prototype.setValueArray2F = function (v)
 
 Uniform.prototype.updateValueArray2F = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -457,7 +500,7 @@ Uniform.prototype.setValueArrayF = function (v)
 
 Uniform.prototype.updateValueArrayF = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -473,7 +516,7 @@ Uniform.prototype.setValueArrayT = function (v)
 
 Uniform.prototype.updateValueArrayT = function ()
 {
-    if (this._loc == -1) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
     else this.needsUpdate = false;
 
     if (!this._value) return;
@@ -484,7 +527,7 @@ Uniform.prototype.updateValueArrayT = function ()
 Uniform.prototype.updateValue3F = function ()
 {
     if (!this._value) return;
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -519,7 +562,7 @@ Uniform.prototype.updateValue2F = function ()
 {
     if (!this._value) return;
 
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
@@ -551,12 +594,11 @@ Uniform.prototype.setValue2F = function (v)
 
 Uniform.prototype.updateValueT = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
         profileData.profileShaderGetUniformName = this._name;
-        if (this._loc == -1) Log.log("texture this._loc unknown!!");
     }
     profileData.profileUniformCount++;
 
@@ -572,12 +614,15 @@ Uniform.prototype.setValueT = function (v)
 
 Uniform.prototype.updateValue4F = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
         profileData.profileShaderGetUniformName = this._name;
     }
+
+    this.needsUpdate = false;
+
     this._shader.getCgl().gl.uniform4f(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
     profileData.profileUniformCount++;
 };
@@ -590,7 +635,7 @@ Uniform.prototype.setValue4F = function (v)
 
 Uniform.prototype.updateValueM4 = function ()
 {
-    if (this._loc == -1)
+    if (!this._isValidLoc())
     {
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;

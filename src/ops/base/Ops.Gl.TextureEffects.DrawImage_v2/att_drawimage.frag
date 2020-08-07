@@ -72,12 +72,23 @@ void main()
                 colImgAlphaAlpha=1.0-(gray.r+gray.g+gray.b)/3.0;
             #endif
 
+            #ifdef INVERT_ALPHA
+            colImgAlphaAlpha=clamp(colImgAlphaAlpha,0.0,1.0);
+            colImgAlphaAlpha=1.0-colImgAlphaAlpha;
+            #endif
+
             blendRGBA.a=colImgAlphaAlpha*blendRGBA.a;
         #endif
     #endif
 
+    float am=amount;
+
     #ifdef CLIP_REPEAT
-        if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0)colNew.rgb=vec3(0.0);
+        if(tc.y>1.0 || tc.y<0.0 || tc.x>1.0 || tc.x<0.0)
+        {
+            // colNew.rgb=vec3(0.0);
+            am=0.0;
+        }
     #endif
 
     #ifdef ASPECT_RATIO
@@ -86,7 +97,9 @@ void main()
         #endif
     #endif
 
-    blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*amount);
+
+
+    blendRGBA.rgb=mix( colNew, base ,1.0-blendRGBA.a*am);
     blendRGBA.a=1.0;
 
     outColor= blendRGBA;

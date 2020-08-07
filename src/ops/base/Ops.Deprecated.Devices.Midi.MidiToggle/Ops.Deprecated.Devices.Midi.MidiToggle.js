@@ -1,50 +1,49 @@
-var eventIn=op.inObject("Event Input");
-var note=op.addInPort(new CABLES.Port(op,"note"));
-var channel=op.inValueInt("Channel",0);
-var learn=op.inTriggerButton("learn");
-var eventOut=op.outObject("Event Output");
+let eventIn = op.inObject("Event Input");
+let note = op.addInPort(new CABLES.Port(op, "note"));
+let channel = op.inValueInt("Channel", 0);
+let learn = op.inTriggerButton("learn");
+let eventOut = op.outObject("Event Output");
 
-var value=op.addOutPort(new CABLES.Port(op,"pressed"));
+let value = op.addOutPort(new CABLES.Port(op, "pressed"));
 
-learn.onTriggered=function(){ learning=true; };
+learn.onTriggered = function () { learning = true; };
 value.set(false);
 note.set(1);
 
-var learning=false;
-var lastValue=-1;
+var learning = false;
+let lastValue = -1;
 
 
-eventIn.onChange=function()
+eventIn.onChange = function ()
 {
-    var event=eventIn.get();
-    if(!event)return;
-    if(learning)
+    let event = eventIn.get();
+    if (!event) return;
+    if (learning)
     {
         note.set(event.note);
         channel.set(event.channel);
-        learning=false;
+        learning = false;
 
-        if(CABLES.UI)
+        if (CABLES.UI)
         {
-            op.uiAttr({info:'Bound to note: ' + note.get()});
-            gui.patch().showOpParams(op);
+            op.uiAttr({ "info": "Bound to note: " + note.get() });
+            gui.opParams.show(op);
         }
     }
 
-    if(note.get()==event.note && event.channel==channel.get())
+    if (note.get() == event.note && event.channel == channel.get())
     {
-        var v=event.velocity;
+        let v = event.velocity;
 
-        if(v==1 && lastValue!=1)
+        if (v == 1 && lastValue != 1)
         {
             value.set(!value.get());
-            var noteOnMessage = [0x90, note.get(), 0];
-            if(value.get()) noteOnMessage = [0x90, note.get(), 120];
+            let noteOnMessage = [0x90, note.get(), 0];
+            if (value.get()) noteOnMessage = [0x90, note.get(), 120];
 
-            event.output.send( noteOnMessage );
+            event.output.send(noteOnMessage);
         }
-        lastValue=v;
+        lastValue = v;
     }
     eventOut.set(event);
 };
-

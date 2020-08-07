@@ -3,6 +3,7 @@ import { MESHES } from "./cgl_simplerect";
 import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
+
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;

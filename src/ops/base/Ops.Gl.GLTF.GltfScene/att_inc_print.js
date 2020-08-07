@@ -68,10 +68,10 @@ function printNode(html,node,level)
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
 
-    html+='<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Expose</a>';
+    html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Expose</a>';
     html+='&nbsp;';
 
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.patch().scene.getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
+    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.corePatch().getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
@@ -104,7 +104,7 @@ function printMaterial(mat,idx)
 
         // html+='<td>';
     }
-    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.patch().scene.getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
+    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.corePatch().getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
     html+='<td>';
 
 

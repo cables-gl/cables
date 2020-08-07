@@ -1,3 +1,4 @@
+import { EventTarget } from "./eventtarget";
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
@@ -38,6 +39,8 @@ const Ops = {};
 
 const Op = function ()
 {
+    EventTarget.apply(this);
+
     this.data = {}; // reserved for op-specific user-data
     this.objName = "";
     this.portsOut = [];
@@ -592,6 +595,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "display": "file",
+                "type": "string",
                 "filter": filter
             })
         );
@@ -608,6 +612,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "display": "file",
+                "type": "string",
                 filter
             })
         );
@@ -687,17 +692,22 @@ const Op = function ()
      * @instance
      * @memberof Op
      * @param {String} name
-     * @param {number} name
+     * @param {number} defaultvalue
+     * @param {number} min
+     * @param {number} max
      * @return {Port} created port
      */
-    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v)
+    Op.prototype.inValueSlider = Op.prototype.inFloatSlider = function (name, v, min, max)
     {
-        // old
-        const p = this.addInPort(
-            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-                "display": "range"
-            })
-        );
+        const uiattribs = { "display": "range" };
+
+        if (min != undefined && max != undefined)
+        {
+            uiattribs.min = min;
+            uiattribs.max = max;
+        }
+
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, uiattribs));
         if (v !== undefined)
         {
             p.set(v);
@@ -949,7 +959,7 @@ const Op = function ()
         for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
     };
 
-    Op.prototype.getSerialized = function ()
+    Op.prototype.getSerialized = function (cleanUp)
     {
         const op = {};
         // op.name=this.getName();
@@ -964,7 +974,11 @@ const Op = function ()
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
-        if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
+
+        if (cleanUp)
+        {
+            if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
+        }
 
         op.portsIn = [];
         op.portsOut = [];
@@ -991,9 +1005,12 @@ const Op = function ()
     Op.prototype.getPort = Op.prototype.getPortByName = function (name)
     {
         for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-            if (this.portsIn[ipi].getName() == name) return this.portsIn[ipi];
+            if (this.portsIn[ipi].getName().toLowerCase() == name.toLowerCase())
+                return this.portsIn[ipi];
+
         for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-            if (this.portsOut[ipo].getName() == name) return this.portsOut[ipo];
+            if (this.portsOut[ipo].getName().toLowerCase() == name.toLowerCase())
+                return this.portsOut[ipo];
     };
 
     /**
@@ -1307,7 +1324,7 @@ const Op = function ()
         const errorArr = [];
         for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
 
-        this.uiAttr({ "error": null });
+        // this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
         this._hasUiErrors = Object.keys(this._uiErrors).length;
     };
@@ -1517,7 +1534,7 @@ const Op = function ()
      */
     Op.prototype.refreshParams = function ()
     {
-        if (this.patch && this.patch.isEditorMode()) gui.opParams.show(this);
+        if (this.patch && this.patch.isEditorMode() && this.isCurrentUiOp()) gui.opParams.show(this);
     };
 
     /**

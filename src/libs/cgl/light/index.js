@@ -4,14 +4,6 @@ import {
     getBlurPassVertexShader,
     getBlurPassFragmentShader
 } from "./createShaders";
-// import { Framebuffer } from "./cgl_framebuffer";
-// import { CGL.Framebuffer2 } from "./cgl_framebuffer2";
-// import { Texture } from "./cgl_texture";
-// import { CGL.TextureEffect } from "./cgl_textureeffect";
-// import { Shader } from "./cgl_shader";
-// import { CGL.Uniform } from "./cgl_shader_uniform";
-// import { CGL.DEG2RAD } from "./cgl_utils";
-// import { Cubemap } from "./cgl_cubemap";
 
 /**
  *
@@ -37,9 +29,9 @@ function Light(cgl, config)
     // * shadow specific config
     this.castShadow = config.castShadow || false;
     this.nearFar = config.nearFar || [0, 0];
-    this.normalOffset = 0;
-    this.shadowBias = 0;
-    this.shadowStrength = 0;
+    this.normalOffset = config.normalOffset || 0;
+    this.shadowBias = config.shadowBias || 0;
+    this.shadowStrength = config.shadowStrength || 0;
     this.lightMatrix = null;
 
     this.shadowMap = null;
@@ -48,6 +40,9 @@ function Light(cgl, config)
 
     // * internal config
     this._cgl = cgl;
+    this.state = {
+        "isUpdating": false
+    };
     this._framebuffer = null;
     this._shaderShadowMap = {
         "shader": null,
@@ -145,10 +140,27 @@ Light.prototype.getShadowMapDepth = function ()
 
 Light.prototype.createFramebuffer = function (width, height, options)
 {
-    if (this.hasFramebuffer()) this._framebuffer.delete();
+    this.state.isUpdating = true;
 
     const fbWidth = width || 512;
     const fbHeight = height || 512;
+
+    if (this.type === "point")
+    {
+        this._cubemap = new CGL.Cubemap(this._cgl, {
+            "camPos": this.position,
+            "cullFaces": true,
+            "size": fbWidth,
+            "isShadowMap": true
+        });
+
+        this._cubemap.initializeCubemap();
+        this.state.isUpdating = false;
+        return;
+    }
+
+    if (this.hasFramebuffer()) this._framebuffer.delete();
+
 
     if (options)
     {
@@ -192,16 +204,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
         );
     }
 
-    if (this.type === "point")
-    {
-        this._cubemap = new CGL.Cubemap(this._cgl, {
-            "camPos": this.position,
-            "cullFaces": true,
-            "size": fbWidth,
-        });
-
-        this._cubemap.initializeCubemap();
-    }
+    this.state.isUpdating = false;
 };
 
 Light.prototype.setFramebufferSize = function (size)
@@ -212,6 +215,8 @@ Light.prototype.setFramebufferSize = function (size)
 Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
 {
     if (this.hasShadowMapShader()) return;
+
+    this.state.isUpdating = true;
 
     this._shaderShadowMap.shader = new CGL.Shader(this._cgl, "shadowPass" + this.type.charAt(0).toUpperCase() + this.type.slice(1));
     this._shaderShadowMap.shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -242,11 +247,14 @@ Light.prototype.createShadowMapShader = function (vertexShader, fragmentShader)
         this._shaderShadowMap.shader.enableExtension("GL_OES_texture_half_float");
         this._shaderShadowMap.shader.enableExtension("GL_OES_texture_half_float_linear");
     }
+
+    this.state.isUpdating = false;
 };
 
 Light.prototype.createBlurEffect = function (options)
 {
     if (this.type === "point") return;
+    this.state.isUpdating = true;
     if (this.hasBlurEffect()) this._effectBlur.delete();
 
     this._effectBlur = new CGL.TextureEffect(
@@ -260,12 +268,18 @@ Light.prototype.createBlurEffect = function (options)
             options,
         ),
     );
+    this.state.isUpdating = false;
 };
 
 Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 {
-    if (this.hasBlurShader()) return;
+    if (this.hasBlurShader())
+    {
+        return;
+    }
     if (this.type === "point") return; // TODO: add cubemap convolution
+
+    this.state.isUpdating = true;
 
     const vShader = vertexShader || this.getBlurPassVertexShader();
     const fShader = fragmentShader || this.getBlurPassFragmentShader();
@@ -276,10 +290,12 @@ Light.prototype.createBlurShader = function (vertexShader, fragmentShader)
 
     this._shaderBlur.uniforms.XY = new CGL.Uniform(this._shaderBlur.shader, "2f", "inXY", vec2.create());
     this._shaderBlur.shader.offScreenPass = true;
+    this.state.isUpdating = false;
 };
 
 Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFunction)
 {
+    if (this.state.isUpdating) return;
     if (this._cgl.frameStore.shadowPass) return;
 
     this._cgl.pushCullFace(true);
@@ -294,11 +310,12 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
     this._cgl.gl.colorMask(true, true, this.type === "point", this.type === "point"); // * for now just 2 channels, with MSM we need 4
 
     this.renderShadowPass(renderFunction);
+
     this._cgl.gl.cullFace(this._cgl.gl.BACK);
     this._cgl.gl.disable(this._cgl.gl.CULL_FACE);
     this._cgl.gl.disable(this._cgl.gl.POLYGON_OFFSET_FILL);
 
-    if (this._cgl.glVersion != 1 && this.type !== "point") this.renderBlurPass(blurAmount);
+    if (this.type !== "point") this.renderBlurPass(blurAmount);
 
     this._cgl.gl.colorMask(true, true, true, true);
 
@@ -323,6 +340,7 @@ Light.prototype.renderPasses = function (polygonOffset, blurAmount, renderFuncti
 
 Light.prototype.renderShadowPass = function (renderFunction)
 {
+    if (this.state.isUpdating) return;
     if (this.type === "point")
     {
         this._shaderShadowMap.uniforms.nearFar.setValue(this.nearFar);
@@ -330,8 +348,13 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(this._shaderShadowMap.matrices.modelMatrix, this._shaderShadowMap.matrices.viewMatrix, this._shaderShadowMap.matrices.projMatrix);
-        this._cubemap.renderCubemap(this._shaderShadowMap.shader, renderFunction);
-        this.shadowCubeMap = this._cubemap.getCubemap();
+
+        this._cgl.pushShader(this._shaderShadowMap.shader);
+
+        this._cubemap.renderCubemap(renderFunction);
+
+        this._cgl.popShader();
+        this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
         return;
     }
 
@@ -361,12 +384,11 @@ Light.prototype.renderShadowPass = function (renderFunction)
     mat4.mul(this.lightMatrix, this._cgl.mMatrix, this.lightMatrix);
     mat4.mul(this.lightMatrix, this._shaderShadowMap.matrices.biasMatrix, this.lightMatrix);
 
+    this._cgl.gl.clearColor(1, 1, 1, 1);
     this._cgl.gl.clear(this._cgl.gl.DEPTH_BUFFER_BIT | this._cgl.gl.COLOR_BUFFER_BIT);
 
     if (renderFunction) renderFunction(); // * e.g. op.trigger();
-
     this._framebuffer.renderEnd(this._cgl);
-
     this._cgl.popPMatrix();
     this._cgl.popModelMatrix();
     this._cgl.popViewMatrix();
@@ -376,21 +398,20 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
 Light.prototype.renderBlurPass = function (blurAmount)
 {
+    if (this.state.isUpdating) return;
     this._cgl.pushShader(this._shaderBlur.shader);
 
     this._effectBlur.setSourceTexture(this._framebuffer.getTextureColor()); // take shadow map as source
     this._effectBlur.startEffect();
 
     this._effectBlur.bind();
-    this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
 
+    this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
     this._shaderBlur.uniforms.XY.setValue([blurAmount, 0]);
     this._effectBlur.finish();
 
     this._effectBlur.bind();
-
     this._cgl.setTexture(0, this._effectBlur.getCurrentSourceTexture().tex);
-
     this._shaderBlur.uniforms.XY.setValue([0, blurAmount]);
 
     this._effectBlur.finish();

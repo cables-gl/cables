@@ -1,31 +1,31 @@
 const
-    inMessage=op.inObject("Message"),
-    inAddress=op.inString("Address"),
-    learn=op.inTriggerButton("Learn"),
-    outMsg=op.outObject("Message"),
-    outValue=op.outNumber("Value"),
-    outTrig=op.outTrigger("Received");
+    inMessage = op.inObject("Message"),
+    inAddress = op.inString("Address"),
+    learn = op.inTriggerButton("Learn"),
+    outMsg = op.outObject("Message"),
+    outValue = op.outNumber("Value"),
+    outTrig = op.outTrigger("Received");
 
-var learning = false;
-learn.onTriggered = function() { learning = true; };
+let learning = false;
+learn.onTriggered = function () { learning = true; };
 
-inMessage.onChange=function()
+inMessage.onChange = function ()
 {
-    const msg=inMessage.get();
+    const msg = inMessage.get();
 
-    if(learning)
+    if (learning)
     {
-        if(msg && msg.a)
+        if (msg && msg.a)
         {
             inAddress.set(msg.a);
-            learning=false;
-            if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
+            learning = false;
+            if (op.isCurrentUiOp()) gui.opParams.show(op);
             return;
         }
         return;
     }
 
-    if(!msg || !msg.a || msg.a!=inAddress.get())
+    if (!msg || !msg.a || msg.a != inAddress.get())
     {
         return;
     }
@@ -36,5 +36,4 @@ inMessage.onChange=function()
     }
 
     outMsg.set(msg);
-
 };

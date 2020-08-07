@@ -17,7 +17,9 @@ const VarSetOpWrapper = class
 
         this._op.setPortGroup("Variable", [this._helper, this._varNamePort, this._btnCreate]);
 
-        this._op.patch.addEventListener("variableDeleted", this._updateVarNamesDropdown.bind(this));
+        this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
+
+        // this._op.patch.addEventListener("variableDeleted", this._updateVarNamesDropdown.bind(this));
         this._op.patch.addEventListener("variablesChanged", this._updateName.bind(this));
         this._op.patch.addEventListener("variableRename", this._renameVar.bind(this));
 
@@ -99,6 +101,7 @@ const VarGetOpWrapper = class
         this._variable = null;
         this._valueOutPort = valueOutPort;
 
+        this._op.on("uiParamPanel", this._updateVarNamesDropdown.bind(this));
         this._op.patch.on("variableRename", this._renameVar.bind(this));
         this._op.patch.on("variableDeleted", (oldname) =>
         {

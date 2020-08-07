@@ -48,21 +48,21 @@ portamentoPort.onChange = function() {
     if(CABLES.WEBAUDIO.isValidToneTime(portamento)) {
         node.set("portamento", portamento);
         op.uiAttr( { 'warning': null } );
-        gui.patch().showOpParams(op); // update GUI
+        gui.opParams.show(op); // update GUI
     } else {
         op.uiAttr( { 'warning': 'Portamento is not a valid tone time' } );
-        gui.patch().showOpParams(op); // update GUI
+        gui.opParams.show(op); // update GUI
     }
 };
 
 //outputs
 var audioOutPort = CABLES.WEBAUDIO.createAudioOutPort(op, "Audio Out", node);
 //var oscillatorPort = op.outObject("OmniOscillator");
-//oscillatorPort.shouldLink = shouldLinkOmniOscillator; 
+//oscillatorPort.shouldLink = shouldLinkOmniOscillator;
 //var filterPort = op.outObject("Filter");
 //filterPort.shouldLink = shouldLinkFilter;
 //var envelopePort = op.outObject("Envelope (AmplitudeEnvelope)");
-//envelopePort.shouldLink = shouldLinkAmplitudeEnvelope; 
+//envelopePort.shouldLink = shouldLinkAmplitudeEnvelope;
 //var filterEnvelopePort = op.outObject("Filter Envelope (FrequencyEnvelope)");
 //filterEnvelopePort.shouldLink = shouldLinkFrequencyEnvelope;
 

@@ -36,6 +36,7 @@ struct Light {
     vec4 lightProperties;
 
     int type;
+    int castLight;
 };
 #ifdef HAS_TEXTURES
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -117,6 +118,7 @@ void main()
         if (lights[l].type == AMBIENT) {
             col.rgb += lights[l].lightProperties.INTENSITY*lights[l].color;
         } else {
+            if (lights[l].castLight == 0) continue;
             vec3 lightModelDiff=lights[l].position - modelPos.xyz;
             vec3 lightDirection = normalize(lightModelDiff);
 

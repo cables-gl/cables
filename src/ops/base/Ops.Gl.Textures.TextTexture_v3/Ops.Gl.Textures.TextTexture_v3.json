@@ -44,15 +44,40 @@
             },
             {
                 "type": "0",
+                "name": "Limit Lines",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "texture width",
-                "group": "Texture Size",
+                "group": "Texture",
                 "subType": "integer"
             },
             {
                 "type": "0",
                 "name": "texture height",
-                "group": "Texture Size",
+                "group": "Texture",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "filter",
+                "group": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Anisotropic index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Anisotropic",
+                "group": "Texture"
             },
             {
                 "type": "0",
@@ -60,9 +85,19 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "align",
+                "group": "Alignment"
+            },
+            {
                 "type": "0",
                 "name": "vertical align index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "vertical align",
+                "group": "Alignment"
             },
             {
                 "type": "0",
@@ -96,9 +131,31 @@
                 "type": "0",
                 "name": "Opacity",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
             {
                 "type": "0",
                 "name": "Ratio",

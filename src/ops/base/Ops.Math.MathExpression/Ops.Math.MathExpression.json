@@ -1,0 +1,100 @@
+{
+    "id": "d2343a1e-64ea-45b2-99ed-46e167bbdcd3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1595496213023
+        },
+        {
+            "message": "Ops.User.simod.MathExpression renamed to Ops.Math.MathExpression",
+            "author": "simod",
+            "date": 1595496245906
+        }
+    ],
+    "authorName": "simod",
+    "created": 1595496215377,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "A",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "B",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "C",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "D",
+                "group": "Parameters",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Expression",
+                "group": "Expression"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Result",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Expression Valid",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Math.MathExpression"
+    },
+    "summary": "calculates a user defined mathematical expression with up to 4 variables",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "A",
+                "text": "a input, default value if not connected: 0"
+            },
+            {
+                "name": "B",
+                "text": "b input, default value if not connected: 0"
+            },
+            {
+                "name": "C",
+                "text": "c input, default value if not connected: 0"
+            },
+            {
+                "name": "D",
+                "text": "d input, default value if not connected: 0"
+            },
+            {
+                "name": "Expression",
+                "text": "mathematical expression to be calculated: the variables a, b, c, d can be used here"
+            },
+            {
+                "name": "Result",
+                "text": "result of the equation"
+            },
+            {
+                "name": "Expression Valid",
+                "text": "returns true if the expression is valid, false otherwise"
+            }
+        ]
+    }
+}

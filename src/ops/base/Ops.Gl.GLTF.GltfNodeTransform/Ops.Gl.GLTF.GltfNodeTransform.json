@@ -1,0 +1,59 @@
+{
+    "id": "3c855eb9-2533-4e6a-a622-847c4d9e0db8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592717115260
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1592717159646,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "5",
+                "name": "Node Name"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfNodeTransform"
+    },
+    "summary": "get current transformation of a gltf node",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

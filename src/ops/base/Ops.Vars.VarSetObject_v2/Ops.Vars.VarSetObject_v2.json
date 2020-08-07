@@ -1,0 +1,39 @@
+{
+    "id": "c7608375-5b45-4bca-87ef-d0c5e970779a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593236765771
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1594107151238
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593236784303,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.VarSetObject_v2"
+    },
+    "coreLibs": [
+        "vargetset"
+    ],
+    "summary": "Set a variable object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

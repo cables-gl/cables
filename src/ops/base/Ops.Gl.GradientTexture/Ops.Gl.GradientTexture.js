@@ -14,12 +14,12 @@ op.onLoaded = update;
 
 function update()
 {
-    var width = Math.round(inSize.get());
+    let width = Math.round(inSize.get());
     if (width < 4) width = 4;
-    var keys = null;
+    let keys = null;
 
-    op.setUiError("nodata",null);
-    op.setUiError("parse",null);
+    op.setUiError("nodata", null);
+    op.setUiError("parse", null);
 
     if (Array.isArray(inGradArray.get()))
     {
@@ -27,10 +27,10 @@ function update()
     }
     else
     {
-        var grad = null;
+        let grad = null;
         if (!inGrad.get() || inGrad.get() == "")
         {
-            op.setUiError("nodata","gradient no data");
+            op.setUiError("nodata", "gradient no data");
             return;
         }
 
@@ -40,27 +40,27 @@ function update()
         }
         catch (e)
         {
-            op.setUiError("parse","could not parse gradient data");
+            op.setUiError("parse", "could not parse gradient data");
         }
 
         if (!grad || !grad.keys)
         {
-            op.setUiError("nodata","gradient no data");
+            op.setUiError("nodata", "gradient no data");
             return;
         }
         keys = grad.keys;
     }
 
-    var pixels = new Uint8Array(width * 4);
+    const pixels = new Uint8Array(width * 4);
 
-    for (var i = 0; i < keys.length - 1; i++)
+    for (let i = 0; i < keys.length - 1; i++)
     {
-        var keyA = keys[i];
-        var keyB = keys[i + 1];
+        const keyA = keys[i];
+        const keyB = keys[i + 1];
 
-        for (var x = keyA.pos * width; x < keyB.pos * width; x++)
+        for (let x = keyA.pos * width; x < keyB.pos * width; x++)
         {
-            var p = CABLES.map(x, keyA.pos * width, keyB.pos * width, 0, 1);
+            let p = CABLES.map(x, keyA.pos * width, keyB.pos * width, 0, 1);
             if (inSmoothstep.get()) p = CABLES.smoothStep(p);
             x = Math.round(x);
 
@@ -79,7 +79,7 @@ function update()
         }
     }
 
-    var tex = new CGL.Texture(cgl);
+    const tex = new CGL.Texture(cgl);
 
     if (inDir.get() == "X") tex.initFromData(pixels, width, 1);
     if (inDir.get() == "Y") tex.initFromData(pixels, 1, width);

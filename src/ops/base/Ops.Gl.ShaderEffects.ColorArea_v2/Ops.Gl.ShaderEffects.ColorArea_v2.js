@@ -23,7 +23,7 @@ r.setUiAttribs({ "colorPick": true });
 const cgl = op.patch.cgl;
 let moduleFrag = null;
 let moduleVert = null;
-let uniforms = {};
+const uniforms = {};
 let shader = null;
 let origShader = null;
 
@@ -70,6 +70,9 @@ function updateDefines()
 
 function removeModule()
 {
+    if (shader && moduleFrag) shader.removeModule(moduleFrag);
+    if (shader && moduleVert) shader.removeModule(moduleVert);
+
     if (shader) shader.dispose();
     origShader = null;
     shader = null;
@@ -84,7 +87,7 @@ function doRender()
 
         if (op.isCurrentUiOp()) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 
-        if (CABLES.UI.renderHelper || op.isCurrentUiOp())
+        if (cgl.shouldDrawHelpers(op))
         {
             mat4.translate(cgl.mMatrix, cgl.mMatrix, [x.get(), y.get(), z.get()]);
             CABLES.GL_MARKER.drawSphere(op, inSize.get());
@@ -121,13 +124,9 @@ function doRender()
                 "srcBodyFrag": attachments.colorarea_frag
             }, moduleVert);
 
-        uniforms.inSize = new CGL.Uniform(shader, "f", moduleFrag.prefix + "size", inSize);
-        uniforms.inAmount = new CGL.Uniform(shader, "f", moduleFrag.prefix + "amount", inAmount);
-
+        uniforms.inSizeAmountFalloffSizeX = new CGL.Uniform(shader, "4f", moduleFrag.prefix + "inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
         uniforms.color = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "color", r, g, b);
         uniforms.pos = new CGL.Uniform(shader, "3f", moduleFrag.prefix + "pos", x, y, z);
-        uniforms.sizeX = new CGL.Uniform(shader, "f", moduleFrag.prefix + "sizeX", sizeX);
-        uniforms.inFalloff = new CGL.Uniform(shader, "f", moduleFrag.prefix + "falloff", inFalloff);
 
         updateDefines();
     }

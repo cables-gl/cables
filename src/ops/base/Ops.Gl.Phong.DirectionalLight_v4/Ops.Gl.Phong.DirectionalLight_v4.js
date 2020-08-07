@@ -97,7 +97,8 @@ inTrigger.onTriggered = function ()
     // vec3.transformMat4(result, position, cgl.mMatrix);
     //  light.position = result;
 
-    if (op.patch.isEditorMode() && (CABLES.UI.renderHelper || op.isCurrentUiOp()))
+    if (cgl.shouldDrawHelpers(op))
+
 {
         CABLES.GL_MARKER.drawLineSourceDest({
             op,

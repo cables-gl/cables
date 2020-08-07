@@ -38,6 +38,23 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "trigger to output the string"
+            },
+            {
+                "name": "String",
+                "text": "String to output on trigger"
+            },
+            {
+                "name": "Next",
+                "text": "trigger out"
+            },
+            {
+                "name": "Result",
+                "text": "String output"
+            }
+        ]
     }
 }

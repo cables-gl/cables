@@ -1,0 +1,61 @@
+{
+    "id": "a7abdfb9-4c2a-4ddb-8fc6-55b3fdfbdaf3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1594657868344
+        }
+    ],
+    "authorName": "andro",
+    "created": 1594657882461,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Element",
+                "group": "Element"
+            },
+            {
+                "type": "5",
+                "name": "Property",
+                "group": "Attributes"
+            },
+            {
+                "type": "5",
+                "name": "Value",
+                "group": "Attributes"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "HTML Element"
+            }
+        ],
+        "name": "Ops.Html.CSSPropertyString"
+    },
+    "summary": "Modify a css property of an element with a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Html.CSSProperty_v2"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Element",
+                "text": "Parent element to modify"
+            },
+            {
+                "name": "Property",
+                "text": "Property to modify"
+            },
+            {
+                "name": "Value",
+                "text": "String value in "
+            }
+        ]
+    }
+}

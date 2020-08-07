@@ -1,0 +1,77 @@
+{
+    "id": "10d09387-0085-4162-ab5b-b89eebbf3cf4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592407895084
+        },
+        {
+            "message": "Ops.User.pandur.GltfNode_v2 renamed to Ops.Gl.GLTF.GltfNode_v2",
+            "author": "pandur",
+            "date": 1592409514095
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1592407897295,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "5",
+                "name": "Node Name"
+            },
+            {
+                "type": "0",
+                "name": "Transformation",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw Mesh",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw Childs",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Ignore Material",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            },
+            {
+                "type": "0",
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.User.pandur.GltfNode_v2"
+    },
+    "summary": "Control a single node from the GLTFscene op",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.GLTF.GltfScene"
+    ],
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

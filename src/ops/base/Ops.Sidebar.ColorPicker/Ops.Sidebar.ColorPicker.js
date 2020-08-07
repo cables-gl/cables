@@ -1,54 +1,54 @@
 // constants
-const DEFAULT_COLOR_HEX = '#07F78C';
+const DEFAULT_COLOR_HEX = "#07F78C";
 
 // inputs
-const parentPort = op.inObject('Link');
-const labelPort = op.inValueString('Text', 'Hex Color');
+const parentPort = op.inObject("Link");
+const labelPort = op.inValueString("Text", "Hex Color");
 const defaultColorArr = hexToRgbNorm(DEFAULT_COLOR_HEX);
-const inputRedPort = op.inValueSlider('Input Red', defaultColorArr[0]);
-const inputGreenPort = op.inValueSlider('Input Green', defaultColorArr[1]);
-const inputBluePort = op.inValueSlider('Input Blue', defaultColorArr[2]);
+const inputRedPort = op.inValueSlider("Input Red", defaultColorArr[0]);
+const inputGreenPort = op.inValueSlider("Input Green", defaultColorArr[1]);
+const inputBluePort = op.inValueSlider("Input Blue", defaultColorArr[2]);
 // const inputValuePort = op.inValueString('Input', DEFAULT_COLOR_HEX);
-const setDefaultValueButtonPort = op.inTriggerButton('Set Default');
-const defaultValuePort = op.inValueString('Default', DEFAULT_COLOR_HEX);
-defaultValuePort.setUiAttribs({ hidePort: true, greyout: true });
+const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
+const defaultValuePort = op.inValueString("Default", DEFAULT_COLOR_HEX);
+defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
 // outputs
-const siblingsPort = op.outObject('Children');
+const siblingsPort = op.outObject("Children");
 // const valuePort = op.outValue('Result', defaultValuePort.get());
-const redPort = op.outValue('Red', 0.0);
-const greenPort = op.outValue('Green', 0.0);
-const bluePort = op.outValue('Blue', 0.0);
+const redPort = op.outValue("Red", 0.0);
+const greenPort = op.outValue("Green", 0.0);
+const bluePort = op.outValue("Blue", 0.0);
 
-const outHex=op.outString("Hex", DEFAULT_COLOR_HEX);
+const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 
 // vars
-var el = document.createElement('div');
-el.classList.add('sidebar__item');
-el.classList.add('sidebar__color-picker');
-var label = document.createElement('div');
-label.classList.add('sidebar__item-label');
-var labelText = document.createTextNode(labelPort.get());
+let el = document.createElement("div");
+el.classList.add("sidebar__item");
+el.classList.add("sidebar__color-picker");
+let label = document.createElement("div");
+label.classList.add("sidebar__item-label");
+let labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-//var inputWrapper = document.createElement('div');
-//inputWrapper.classList.add('sidebar__text-input-input-wrapper');
-//el.appendChild(inputWrapper);
-var input = document.createElement('input');
-input.classList.add('sidebar__color-picker-input');
+// var inputWrapper = document.createElement('div');
+// inputWrapper.classList.add('sidebar__text-input-input-wrapper');
+// el.appendChild(inputWrapper);
+let input = document.createElement("input");
+input.classList.add("sidebar__color-picker-input");
 /* input.classList.add('jscolor'); */ /* color picker library */
-input.setAttribute('type', 'text');
-input.setAttribute('value', defaultValuePort.get());
-//inputWrapper.appendChild(input);
+input.setAttribute("type", "text");
+input.setAttribute("value", defaultValuePort.get());
+// inputWrapper.appendChild(input);
 el.appendChild(input);
-input.addEventListener('input', onInput);
-var colorInput = document.createElement('input');
-colorInput.classList.add('sidebar__color-picker-color-input');
-colorInput.setAttribute('type', 'color');
-colorInput.setAttribute('value', defaultValuePort.get());
+input.addEventListener("input", onInput);
+let colorInput = document.createElement("input");
+colorInput.classList.add("sidebar__color-picker-color-input");
+colorInput.setAttribute("type", "color");
+colorInput.setAttribute("value", defaultValuePort.get());
 colorInput.addEventListener("change", onColorPickerChange, false);
 el.appendChild(colorInput);
-input.addEventListener('input', onInput);
+input.addEventListener("input", onInput);
 
 onDefaultValueChanged(); /* initialize once */
 
@@ -65,7 +65,8 @@ inputBluePort.onChange = inputColorChanged;
 
 // functions
 
-function inputColorChanged() {
+function inputColorChanged()
+{
     const hex = getInputColorHex();
     // defaultValuePort.set(hex);
     colorInput.value = hex;
@@ -73,7 +74,7 @@ function inputColorChanged() {
     setColorOutPorts(hex);
     /*
     if(CABLES.UI){
-        gui.patch().showOpParams(op); // update DOM
+        gui.opParams.show(op); // update DOM
     }
     */
 }
@@ -81,7 +82,8 @@ function inputColorChanged() {
 /**
  * Returns the color of the op params ("input red", "input green", "input blue") as hex
  */
-function getInputColorHex() {
+function getInputColorHex()
+{
     const r = inputRedPort.get();
     const g = inputGreenPort.get();
     const b = inputBluePort.get();
@@ -89,13 +91,15 @@ function getInputColorHex() {
     return hex;
 }
 
-function setDefaultColor() {
+function setDefaultColor()
+{
     // let hexCol = inputValuePort.get().trim();
     const hex = getInputColorHex();
     defaultValuePort.set(hex);
     outHex.set(hex);
-    if(CABLES.UI){
-        gui.patch().showOpParams(op); /* update DOM */
+    if (CABLES.UI)
+ {
+        gui.opParams.show(op); /* update DOM */
     }
 }
 
@@ -113,22 +117,24 @@ function onInputValuePortChange() {
 }
 */
 
-function hexToRgbNorm(hexColor) {
-    if(!hexColor || hexColor.length !== 7) { return; }
+function hexToRgbNorm(hexColor)
+{
+    if (!hexColor || hexColor.length !== 7) { return; }
     return hexColor
         .match(/[A-Za-z0-9]{2}/g)
-        .map(function(v) {
+        .map(function (v)
+{
             return parseInt(v, 16) / 255;
         });
-
 }
 
 /**
  * Helper for rgbNormToHex / rgbToHex
  * Converts a number in range [0..255] to hex [00..FF] (with left padding)
  */
-function componentToHex(c) {
-    var hex = c.toString(16);
+function componentToHex(c)
+{
+    let hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
 }
 
@@ -142,19 +148,22 @@ function rgbToHex(r, g, b) {
  * r, g, b in range [0..1]
  * @returns {string} e.g. "#ff0000"
  */
-function rgbNormToHex(r, g, b) {
+function rgbNormToHex(r, g, b)
+{
     return "#" + componentToHex(Math.floor(255 * r)) + componentToHex(Math.floor(255 * g)) + componentToHex(Math.floor(255 * b));
 }
 
-function onColorPickerChange(event) {
+function onColorPickerChange(event)
+{
     const hex = event.target.value;
     setColorOutPorts(hex);
     input.value = hex;
     // inputValuePort.set(hex)
     outHex.set(hex);
     setInputsByHex(hex);
-    if(CABLES.UI){
-        gui.patch().showOpParams(op); /* update DOM */
+    if (CABLES.UI)
+ {
+        gui.opParams.show(op); /* update DOM */
     }
 }
 
@@ -162,34 +171,39 @@ function onColorPickerChange(event) {
  * Sets the op param color input ports by hex value (e.g. "#FF0000")
  * Does NOT update the gui
  */
-function setInputsByHex(hex) {
+function setInputsByHex(hex)
+{
     const colorArr = hexToRgbNorm(hex);
     inputRedPort.set(colorArr[0]);
     inputGreenPort.set(colorArr[1]);
     inputBluePort.set(colorArr[2]);
     outHex.set(hex);
-
 }
 
-function onInput(ev) {
-    var newValue = ev.target.value;
-    if(newValue.length === 6 && newValue.charAt(0) !== '#') {
-        newValue = '#' + newValue;
+function onInput(ev)
+{
+    let newValue = ev.target.value;
+    if (newValue.length === 6 && newValue.charAt(0) !== "#")
+{
+        newValue = "#" + newValue;
     }
-    if(newValue.length === 7) {
+    if (newValue.length === 7)
+{
         colorInput.value = newValue;
         setColorOutPorts(newValue);
         // inputValuePort.set(newValue)
         setInputsByHex(newValue);
         outHex.set(newValue);
-        if(CABLES.UI){
-            gui.patch().showOpParams(op); /* update DOM */
+        if (CABLES.UI)
+ {
+            gui.opParams.show(op); /* update DOM */
         }
     }
 }
 
 // hex must be 7 digits
-function setColorOutPorts(hex) {
+function setColorOutPorts(hex)
+{
     const colorArr = hexToRgbNorm(hex);
     outHex.set(hex);
     redPort.set(colorArr[0]);
@@ -197,14 +211,18 @@ function setColorOutPorts(hex) {
     bluePort.set(colorArr[2]);
 }
 
-function onDefaultValueChanged() {
-    var defaultValue = defaultValuePort.get();
-    input.setAttribute('value', defaultValue);
-    if(defaultValue) {
-        if(defaultValue.length === 6 && defaultValue.charAt(0) !== '#') {
-            defaultValue = '#' + defaultValue;
+function onDefaultValueChanged()
+{
+    let defaultValue = defaultValuePort.get();
+    input.setAttribute("value", defaultValue);
+    if (defaultValue)
+{
+        if (defaultValue.length === 6 && defaultValue.charAt(0) !== "#")
+{
+            defaultValue = "#" + defaultValue;
         }
-        if(defaultValue.length === 7) {
+        if (defaultValue.length === 7)
+{
             input.value = defaultValue;
             colorInput.value = defaultValue;
             setColorOutPorts(defaultValue);
@@ -212,46 +230,60 @@ function onDefaultValueChanged() {
     }
 }
 
-function onLabelTextChanged() {
-    var labelText = labelPort.get();
+function onLabelTextChanged()
+{
+    let labelText = labelPort.get();
     label.textContent = labelText;
 
-    if(CABLES.UI) {
-        op.setTitle('Color Picker: ' + labelText);
+    if (CABLES.UI)
+{
+        op.setTitle("Color Picker: " + labelText);
     }
 }
 
-function onParentChanged() {
-    var parent = parentPort.get();
-    if(parent && parent.parentElement) {
+function onParentChanged()
+{
+    let parent = parentPort.get();
+    if (parent && parent.parentElement)
+{
         parent.parentElement.appendChild(el);
         siblingsPort.set(null);
         siblingsPort.set(parent);
-    } else { // detach
-        if(el.parentElement) {
+    }
+ else
+{ // detach
+        if (el.parentElement)
+{
             el.parentElement.removeChild(el);
         }
     }
 }
 
-function showElement(el) {
-    if(el) {
-        el.style.display = 'block';
+function showElement(el)
+{
+    if (el)
+{
+        el.style.display = "block";
     }
 }
 
-function hideElement(el) {
-    if(el) {
-        el.style.display = 'none';
+function hideElement(el)
+{
+    if (el)
+{
+        el.style.display = "none";
     }
 }
 
-function onDelete() {
+function onDelete()
+{
     removeElementFromDOM(el);
 }
 
-function removeElementFromDOM(el) {
-    if(el && el.parentNode && el.parentNode.removeChild) {
+function removeElementFromDOM(el)
+{
+    if (el && el.parentNode && el.parentNode.removeChild)
+{
         el.parentNode.removeChild(el);
     }
 }

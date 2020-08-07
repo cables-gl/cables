@@ -1,0 +1,90 @@
+{
+    "id": "7141c048-615e-47b5-9d8b-d0ceaad9bd79",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1590408417324
+        },
+        {
+            "message": "Ops.User.pandur.QuaternionCamera renamed to Ops.Gl.Matrix.QuaternionCamera",
+            "author": "pandur",
+            "date": 1590516293771
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1590408547203,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "eyeX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "eyeY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "eyeZ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "quatX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "quatY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "quatZ",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "quatW",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "upX",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "upY",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "upZ",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.QuaternionCamera"
+    },
+    "summary": "Set up a camera, rotated by a quaternion",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

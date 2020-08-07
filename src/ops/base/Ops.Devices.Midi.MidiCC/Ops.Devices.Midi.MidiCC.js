@@ -39,7 +39,7 @@ clear.onTriggered = () => {
   ccIndexDropdown.set(0);
   midiChannelDropdown.set(1);
   normalizeDropdown.set(normalizeDropdown.get('none'));
-  if(op.isCurrentUiOp()) gui.patch().showOpParams(op);
+  if(op.isCurrentUiOp()) gui.opParams.show(op);
 };
 
 inEvent.onChange = () => {
@@ -56,7 +56,7 @@ inEvent.onChange = () => {
 
     if (CABLES.UI) {
       op.uiAttr({ info: `bound to CC: ${ccIndexDropdown.get()}` });
-      gui.patch().showOpParams(op);
+      gui.opParams.show(op);
     }
   }
 

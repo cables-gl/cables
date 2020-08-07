@@ -1,0 +1,59 @@
+{
+    "id": "a4a8d0ca-296e-4bf5-a7be-4585f875bc06",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1594029555069
+        },
+        {
+            "message": "Ops.User.pandur.BoundingBoxVisible renamed to Ops.Gl.Geometry.BoundingBoxVisible",
+            "author": "pandur",
+            "date": 1594032913689
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1594029610729,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "2",
+                "name": "Boundings"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Draw",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Geometry.BoundingBoxVisible"
+    },
+    "summary": "Test if a boundingbox could be visible in the current viewport",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

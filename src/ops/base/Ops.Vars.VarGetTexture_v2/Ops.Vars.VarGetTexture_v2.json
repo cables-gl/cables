@@ -1,0 +1,44 @@
+{
+    "id": "5f8ce5fc-9787-45c9-9a83-0eebd2c6de15",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593236971543
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1596041964907
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593236984145,
+    "coreLibs": [
+        "vargetset"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Value"
+            }
+        ],
+        "name": "Ops.Vars.VarGetTexture_v2"
+    },
+    "summary": "get a texture from a variable",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

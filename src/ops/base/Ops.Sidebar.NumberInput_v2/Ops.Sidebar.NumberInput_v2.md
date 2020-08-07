@@ -1,0 +1,1 @@
+In most cases to enter numbers using the Ops.Sidebar.Slider op is recommended, in some cases you want to enter numbers by hand tho (e.g. when the numbers are not in a specific range).

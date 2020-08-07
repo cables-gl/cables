@@ -1,0 +1,35 @@
+{
+    "id": "8a868fc7-363f-4221-9789-67ffe5830e36",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593242175286
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1593242178355,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.StripHtml"
+    },
+    "summary": "remove html tags from a string",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

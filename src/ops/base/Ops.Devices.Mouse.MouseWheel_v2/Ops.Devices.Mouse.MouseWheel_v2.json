@@ -33,8 +33,17 @@
             },
             {
                 "type": "0",
+                "name": "Simple Delta",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Area index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Area"
             },
             {
                 "type": "0",

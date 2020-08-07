@@ -53,6 +53,7 @@ const Patch = function (cfg)
     this._crashedOps = [];
     this._renderOneFrame = false;
     this._animReq = null;
+    this._opIdCache = {};
 
     this._perf = {
         "fps": 0,
@@ -91,6 +92,7 @@ const Patch = function (cfg)
 
     if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
+    this._isLocal = document.location.href.indexOf("file:") === 0;
 
     Log.setSilent(this.config.silent);
 
@@ -271,7 +273,9 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
+    if (this._isLocal) alert("Browser security forbids loading files directly without a webserver. Upload files to a server to work.");
     if (!filename) return filename;
+    filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
 
     filename = filename.replace("//", "/");
@@ -423,11 +427,11 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         op.uiAttr(uiAttribs);
         if (op.onCreate) op.onCreate();
 
-
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
         this.ops.push(op);
+        this._opIdCache[op.id] = op;
 
         // if (this.onAdd) this.onAdd(op);
         this.emitEvent("onOpAdd", op);
@@ -519,6 +523,8 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 {
                     this.link(reLinkP1.parent, reLinkP1.getName(), reLinkP2.parent, reLinkP2.getName());
                 }
+
+                delete this._opIdCache[opid];
             }
         }
     }
@@ -547,15 +553,11 @@ Patch.prototype.renderFrame = function (e)
     {
         if (this.animFrameOps[i].onAnimFrame)
         {
-            // const start=performance.now();
             this.animFrameOps[i].onAnimFrame(time);
-            // const used=performance.now()-start;
-            // console.log(used,this.animFrameOps[i].objName);
         }
     }
 
     CGL.profileData.profileOnAnimFrameOps = performance.now() - startTime;
-    // console.log("----");
 
     this.emitEvent("onRenderFrame", time);
 
@@ -598,6 +600,10 @@ Patch.prototype.exec = function (e)
     {
         const startFrameTime = CABLES.now();
         this.renderFrame();
+
+        this._perf._lastFrameTime = CABLES.now();
+        this._perf._fpsFrameCount++;
+
         this._perf._fpsMsCount += CABLES.now() - startFrameTime;
 
         if (this._frameInterval) this._frameNext = now - (frameDelta % this._frameInterval);
@@ -631,8 +637,6 @@ Patch.prototype.exec = function (e)
         }
     }
 
-    this._perf._lastFrameTime = CABLES.now();
-    this._perf._fpsFrameCount++;
 
     if (this.config.doRequestAnimation) this._animReq = requestAnimationFrame(this.exec.bind(this));
 };
@@ -706,10 +710,18 @@ Patch.prototype.serialize = function (asObj)
 
 Patch.prototype.getOpById = function (opid)
 {
-    for (const i in this.ops)
-    {
-        if (this.ops[i].id == opid) return this.ops[i];
-    }
+    return this._opIdCache[opid];
+    // this.timeNeededGetOpById = this.timeNeededGetOpById || 0;
+
+    // const startTime = performance.now();
+    // for (const i in this.ops)
+    // {
+    //     if (this.ops[i].id == opid)
+    //     {
+    //         this.timeNeededGetOpById += (performance.now() - startTime);
+    //         return this.ops[i];
+    //     }
+    // }
 };
 
 Patch.prototype.getOpsById = function (opIds)
@@ -860,7 +872,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
 
-    if (typeof obj === "string") obj = JSON.parse(obj);
+    if (typeof obj === "string")
+    {
+        obj = JSON.parse(obj);
+    }
     const self = this;
 
     this.settings = obj.settings;
@@ -876,6 +891,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     const reqs = new Requirements(this);
 
+
     // Log.log('add ops ',obj.ops);
     // add ops...
     for (const iop in obj.ops)
@@ -883,6 +899,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const start = CABLES.now();
         const opData = obj.ops[iop];
         let op = null;
+
 
         try
         {
@@ -935,8 +952,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
             }
         }
 
+        // if (performance.now() - startTime > 100) console.log("op crerate took long: ", opData.objName);
+
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        // if(!this.silent && timeused>10)console.warn('long op init ',obj.ops[iop].objName,timeused);
+        if (!this.silent && timeused > 200)console.warn("long op init ", obj.ops[iop].objName, timeused);
         // else Log.log('op time',obj.ops[iop].objName,timeused);
     }
 
@@ -965,7 +984,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
                         {
                             if (obj.ops[iop].portsIn[ipi2].links[ili])
                             {
+                                // const startTime = performance.now();
                                 addLink(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, obj.ops[iop].portsIn[ipi2].links[ili].portIn, obj.ops[iop].portsIn[ipi2].links[ili].portOut);
+
+                                // const took = performance.now() - startTime;
+                                // if (took > 100)console.log(obj.ops[iop].portsIn[ipi2].links[ili].objIn, obj.ops[iop].portsIn[ipi2].links[ili].objOut, took);
                             }
                         }
                     }
@@ -994,14 +1017,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
     }
 
     if (this.config.variables)
-    {
         for (const varName in this.config.variables)
-        {
             this.setVarValue(varName, this.config.variables[varName]);
-            // this._variables = cfg.variables;
-        }
-    }
+
     for (const i in this.ops) this.ops[i].initVarPorts();
+
 
     setTimeout(
         () =>

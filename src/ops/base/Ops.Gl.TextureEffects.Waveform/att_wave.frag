@@ -111,12 +111,8 @@ float TriangleWave(vec2 p, float amplitude, float frequency, float line_width, f
     float d = fCapsule2D(p, 0.0, 0.5 * length(vec2(inverse_frequency, 2.0 * amplitude)));
     d -= line_width;
 
-    if (solid == false)
-    {
-        return smoothstep(0.0, line_glow, d);
-    }
-    else
-        return smoothstep(0.0, line_glow, min(d,p.x));
+    if (solid == false) return smoothstep(0.0, line_glow, d);
+    else return smoothstep(0.0, line_glow, min(d,p.x));
 }
 
 float SquareWave(vec2 p, float amplitude, float frequency, float line_width, float line_glow, bool solid)
@@ -130,19 +126,15 @@ float SquareWave(vec2 p, float amplitude, float frequency, float line_width, flo
     float cell = pMod1(p.x, inverse_frequency);
 
     if(cell < 0.0) cell = -cell + 1.0;
-    if(int(cell * 0.5) % 2 == 1) p.y -= amplitude;
-        else p.y += amplitude;
+    if( mod(cell * 0.5,2.0) == 1.0) p.y -= amplitude;
+    else p.y += amplitude;
 
     float d = fCapsule2D(p.yx, 0.0, abs(inverse_frequency));
     d = min(d, d1);
     d -= line_width;
 
-    if (solid == false)
-    {
-        return smoothstep(0.0, line_glow, d);
-    }
-    else
-        return smoothstep(0.0, line_glow, p.y);
+    if (solid == false) return smoothstep(0.0, line_glow, d);
+    else return smoothstep(0.0, line_glow, p.y);
 }
 
 void main()
