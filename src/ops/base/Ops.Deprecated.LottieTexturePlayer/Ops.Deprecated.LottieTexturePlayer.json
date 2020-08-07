@@ -62,12 +62,6 @@
             "title": "cables",
             "author": "undefined development",
             "url": "http://undev.studio"
-        },
-        {
-            "title": "glmatrix",
-            "author": "toji",
-            "url": "https://github.com/toji/gl-matrix",
-
         }
     ],
     "author": "55d744634cdc152216eb9aad",

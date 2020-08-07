@@ -7,6 +7,14 @@
     "libs": [
         "conway-hart.js"
     ],
+    "credits": [
+        {
+            "title": "conway-heart",
+            "author": "mikolalysenko",
+            "url": "https://github.com/mikolalysenko/conway-hart",
+            "licence": "GPL"
+        }
+    ],
     "layout": {
         "portsIn": [
             {
