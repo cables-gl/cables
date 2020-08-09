@@ -7,20 +7,22 @@ class WireframeRect
         this.cgl = _cgl;
         this.geom = new CGL.Geometry("marker");
 
+        const fr = -1.0;
+        const to = 1.0;
 
         this.geom.setPointVertices(
             [
-                0, 0, 0,
-                1, 0, 0,
+                fr, fr, 0,
+                to, fr, 0,
 
-                1, 0, 0,
-                1, 1, 0,
+                to, fr, 0,
+                to, to, 0,
 
-                1, 1, 0,
-                0, 1, 0,
+                to, to, 0,
+                fr, to, 0,
 
-                0, 1, 0,
-                0, 0, 0,
+                fr, to, 0,
+                fr, fr, 0,
             ]
         );
 
@@ -28,7 +30,7 @@ class WireframeRect
         this.mesh.setGeom(this.geom);
 
         this.colorShader = new CGL.UniColorShader(this.cgl);
-        this.colorShader.setColor([1, 0.3, 0, 1]);
+        this.colorShader.setColor([0, 1, 1, 1]);
 
         this._vScale = vec3.create();
     }
