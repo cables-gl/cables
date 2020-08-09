@@ -477,6 +477,8 @@ function createUniforms(lightsCount)
 
                 "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + i + ".conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + i + ".spotProperties", [0, 0, 0, 0]),
+                "castLight": new CGL.Uniform(shader, "i", "phongLight" + i + ".castLight", 1),
+
             };
         }
     }
@@ -526,6 +528,8 @@ function setUniforms(lightStack)
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
+
+        lightUniforms[i].castLight.setValue(light.castLight);
     }
 }
 
@@ -564,6 +568,7 @@ function createDefaultUniform()
         "lightProperties": new CGL.Uniform(shader, "4f", "phongLight" + 0 + ".lightProperties", [1, 1, 1, 1]),
         "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".conePointAt", vec3.create()),
         "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".spotProperties", [0, 0, 0, 0]),
+        "castLight": new CGL.Uniform(shader, "i", "phongLight" + 0 + ".castLight", 1),
     };
 }
 
@@ -576,6 +581,7 @@ const DEFAULT_LIGHTSTACK = [{
     "attenuation": 0,
     "falloff": 0.5,
     "radius": 80,
+    "castLight": 1,
 }];
 
 const iViewMatrix = mat4.create();
@@ -661,6 +667,7 @@ inTrigger.onTriggered = function ()
     cgl.setShader(shader);
 
     shader.popTextures();
+
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
     if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
     if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);

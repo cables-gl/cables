@@ -21,11 +21,12 @@ function Light(config)
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
+const inCastLight = op.inBool("Cast Light", true);
 const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 15);
 
 const inPosX = op.inFloat("X", 0);
-const inPosY = op.inFloat("Y", 1);
+const inPosY = op.inFloat("Y", 2);
 const inPosZ = op.inFloat("Z", 0.75);
 
 const positionIn = [inPosX, inPosY, inPosZ];
@@ -49,20 +50,22 @@ op.setPortGroup("Specular Color", colorSpecularIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.5);
 
-const attribIns = [inIntensity, inRadius];
+const attribIns = [inIntensity, inCastLight, inRadius];
 op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
-const inPolygonOffset = op.inInt("Polygon Offset", 1);
+const inPolygonOffset = op.inInt("Polygon Offset", 0);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
+op.setPortGroup("Shadow Map Settings", [inMapSize, inRenderMapActive, inShadowStrength, inNear, inFar, inBias, inPolygonOffset]);
 const shadowProperties = [inNear, inFar];
 inMapSize.setUiAttribs({ "greyout": !inCastShadow.get() });
+inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
 inShadowStrength.setUiAttribs({ "greyout": !inCastShadow.get() });
 inNear.setUiAttribs({ "greyout": !inCastShadow.get() });
 inBias.setUiAttribs({ "greyout": !inCastShadow.get() });
@@ -89,6 +92,7 @@ inCastShadow.onChange = function ()
 
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
     inFar.setUiAttribs({ "greyout": !castShadow });
@@ -102,6 +106,9 @@ inCastShadow.onChange = function ()
 const outTrigger = op.outTrigger("Trigger Out");
 const outCubemap = op.outObject("Cubemap");
 const outProjection = op.outTexture("Cubemap Projection");
+const outWorldPosX = op.outNumber("World Position X");
+const outWorldPosY = op.outNumber("World Position Y");
+const outWorldPosZ = op.outNumber("World Position Z");
 
 const newLight = new CGL.Light(cgl, {
     "type": "point",
@@ -114,6 +121,7 @@ const newLight = new CGL.Light(cgl, {
     "shadowStrength": inShadowStrength.get(),
     "shadowBias": inBias.get()
 });
+newLight.castLight = inCastLight.get();
 
 if (!newLight.hasFramebuffer())
 {
@@ -134,7 +142,7 @@ let updateLight = false;
 
 inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChange = inB.onChange
 = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange = inIntensity.onChange
-= inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = inShadowStrength.onChange = function ()
+= inCastLight.onChange = inRadius.onChange = inFalloff.onChange = inNear.onChange = inFar.onChange = inShadowStrength.onChange = function ()
         {
             updateLight = true;
         };
@@ -260,6 +268,7 @@ inTrigger.onTriggered = function ()
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
         newLight.castShadow = inCastShadow.get();
+        newLight.castLight = inCastLight.get();
         newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), null);
         updateLight = false;
     }
@@ -268,7 +277,12 @@ inTrigger.onTriggered = function ()
 
     vec3.set(transVec, inPosX.get(), inPosY.get(), inPosZ.get());
     vec3.transformMat4(position, transVec, cgl.mMatrix);
+
     newLight.position = position;
+
+    outWorldPosX.set(newLight.position[0]);
+    outWorldPosY.set(newLight.position[1]);
+    outWorldPosZ.set(newLight.position[2]);
 
     drawHelpers();
 
@@ -277,7 +291,7 @@ inTrigger.onTriggered = function ()
 
     if (inCastShadow.get())
     {
-        newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), null, function () { outTrigger.trigger(); });
 
         if (!cgl.frameStore.shadowPass)
         {
@@ -285,11 +299,20 @@ inTrigger.onTriggered = function ()
             newLight.castShadow = inCastShadow.get();
             newLight.shadowBias = inBias.get();
             newLight.shadowStrength = inShadowStrength.get();
-            if (newLight.shadowCubeMap.cubemap)
+
+            if (newLight.shadowCubeMap)
             {
-                outCubemap.set(null);
-                outCubemap.set(newLight.shadowCubeMap);
-                if (cgl.shouldDrawHelpers(op)) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+                if (newLight.shadowCubeMap.cubemap)
+                {
+                    outCubemap.set(null);
+                    outCubemap.set(newLight.shadowCubeMap);
+                    if (inRenderMapActive.get())
+                    {
+                        // needs to be "cloned", cannot save reference.
+                        newLight.positionForShadowMap = [newLight.position[0], newLight.position[1], newLight.position[2]];
+                        if (cgl.shouldDrawHelpers(op)) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
+                    }
+                }
             }
             cgl.frameStore.lightStack.push(newLight);
         }
