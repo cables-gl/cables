@@ -53,7 +53,7 @@ class WireframeCube
         this.mesh.setGeom(this.geom);
 
         this.colorShader = new CGL.UniColorShader(this.cgl);
-        this.colorShader.setColor([1, 0.3, 0, 1]);
+        this.colorShader.setColor([0, 1, 1, 1]);
 
         this._vScale = vec3.create();
     }
