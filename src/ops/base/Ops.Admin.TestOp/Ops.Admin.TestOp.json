@@ -10,6 +10,11 @@
             "message": "Ops.TestOp renamed to Ops.Admin.TestOp",
             "author": "pandur",
             "date": 1596094417404
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1596976606704
         }
     ],
     "authorName": "pandur",
@@ -25,9 +30,13 @@
                 "type": "0",
                 "name": "aaaa",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Render"
             }
         ],
-        "name": "Ops.testop"
+        "name": "Ops.Admin.TestOp"
     },
     "libs": [
         "cannon.js",
@@ -36,5 +45,8 @@
         "webvr-polyfill.js",
         "webaudio-peaks.js",
         "twitterFetcher_min.js"
+    ],
+    "coreLibs": [
+        "cgl_wireframes"
     ]
 }

@@ -1,51 +1,28 @@
-export { WireframeCube };
+export { WireframeRect };
 
-class WireframeCube
+class WireframeRect
 {
     constructor(_cgl)
     {
         this.cgl = _cgl;
         this.geom = new CGL.Geometry("marker");
+
+        const fr = -1.0;
+        const to = 1.0;
+
         this.geom.setPointVertices(
             [
-                // frontal
-                -1, -1, 1,
-                1, -1, 1,
+                fr, fr, 0,
+                to, fr, 0,
 
-                1, 1, 1,
-                -1, 1, 1,
+                to, fr, 0,
+                to, to, 0,
 
-                -1, -1, -1,
-                1, -1, -1,
+                to, to, 0,
+                fr, to, 0,
 
-                -1, 1, -1,
-                1, 1, -1,
-
-                // vertical lines
-                1, -1, -1,
-                1, 1, -1,
-
-                -1, 1, -1,
-                -1, -1, -1,
-
-                1, 1, 1,
-                1, -1, 1,
-
-                -1, 1, 1,
-                -1, -1, 1,
-
-                // horizontal lines
-                1, 1, -1,
-                1, 1, 1,
-
-                -1, 1, -1,
-                -1, 1, 1,
-
-                1, -1, 1,
-                1, -1, -1,
-
-                -1, -1, 1,
-                -1, -1, -1,
+                fr, to, 0,
+                fr, fr, 0,
             ]
         );
 

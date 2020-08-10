@@ -16,6 +16,7 @@ const
     next = op.outTrigger("Next"),
     textureOut = op.outTexture("texture"),
     outLines = op.outNumber("Total Lines", 0),
+    outWidth = op.outNumber("Width", 0),
     loaded = op.outValue("Font Available", 0);
 
 const cgl = op.patch.cgl;
@@ -256,6 +257,7 @@ function generateMesh()
     createTexture = false;
     const m = mat4.create();
 
+    let maxWidth = 0;
 
     for (let s = 0; s < strings.length; s++)
     {
@@ -276,6 +278,8 @@ function generateMesh()
                 width += letterSpace.get();
             }
         }
+
+
         width -= letterSpace.get();
 
         height = 0;
@@ -306,6 +310,8 @@ function generateMesh()
                 mat4.translate(m, m, [pos - offX, 0 - s * lineHeight.get(), 0]);
 
                 pos += (char.texCoordWidth / char.texCoordHeight) + letterSpace.get();
+                maxWidth = Math.max(maxWidth, pos - offX);
+
                 transformations.push(Array.prototype.slice.call(m));
 
                 charCounter++;
@@ -326,6 +332,7 @@ function generateMesh()
         return;
     }
 
+    outWidth.set(maxWidth * scale.get());
     mesh.setAttribute("instMat", new Float32Array(transMats), 16, { "instanced": true });
     mesh.setAttribute("attrTexOffsets", new Float32Array(tcOffsets), 2, { "instanced": true });
     mesh.setAttribute("attrTexSize", new Float32Array(tcSize), 2, { "instanced": true });

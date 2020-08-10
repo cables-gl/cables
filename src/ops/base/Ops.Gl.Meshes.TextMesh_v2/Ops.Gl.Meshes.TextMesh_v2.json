@@ -124,6 +124,11 @@
             },
             {
                 "type": "0",
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Font Available",
                 "subType": "number"
             }
