@@ -18,6 +18,11 @@
             },
             {
                 "type": "0",
+                "name": "Mod Key",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Enabled",
                 "subType": "boolean"
             },

@@ -1,38 +1,40 @@
-var val=op.outValue("Value");
-op.varName=op.inValueSelect("Variable",[],"",true);
+const val = op.outValue("Value");
+op.varName = op.inValueSelect("Variable", [], "", true);
 
-var variable=null;
-op.patch.addEventListener("variablesChanged",init);
+let variable = null;
+op.patch.addEventListener("variablesChanged", init);
+
+val.changeAlways = true;
 
 init();
 
 updateVarNamesDropdown();
 
-    op.patch.on("variableRename", (oldname, newname)=>
-    {
-        if (oldname != op.varName.get()) return;
-        op.varName.set(newname);
-        updateVarNamesDropdown();
-    });
+op.patch.on("variableRename", (oldname, newname) =>
+{
+    if (oldname != op.varName.get()) return;
+    op.varName.set(newname);
+    updateVarNamesDropdown();
+});
 
 function updateVarNamesDropdown()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        var varnames=[];
-        var vars=op.patch.getVars();
+        const varnames = [];
+        const vars = op.patch.getVars();
 
-        for(var i in vars)
+        for (const i in vars)
             // if(typeof vars[i].getValue()=="number" || typeof vars[i].getValue()=="boolean")
             // if(vars[i].type=="number")
-                if(i!="0")
-                    varnames.push(i);
+            if (i != "0")
+                varnames.push(i);
 
-        op.varName.uiAttribs.values=varnames;
+        op.varName.uiAttribs.values = varnames;
     }
 }
 
-op.varName.onChange=function()
+op.varName.onChange = function ()
 {
     init();
 };
@@ -50,25 +52,25 @@ function init()
     //     }
     // }
 
-    if(variable)
+    if (variable)
     {
         variable.removeListener(onChange);
     }
 
-    variable=op.patch.getVar(op.varName.get());
+    variable = op.patch.getVar(op.varName.get());
 
-    if(variable)
+    if (variable)
     {
         variable.addListener(onChange);
-        op.setUiError("unknownvar",null);
-        op.setTitle('#'+op.varName.get());
+        op.setUiError("unknownvar", null);
+        op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
         // console.log("var value ",variable.getName(),variable.getValue());
     }
     else
     {
-        op.setUiError("unknownvar","unknown variable! - there is no setVariable with this name ("+op.varName.get()+")");
-        op.setTitle('#invalid');
+        op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + op.varName.get() + ")");
+        op.setTitle("#invalid");
     }
 }
 
@@ -79,8 +81,8 @@ function onChange(v)
     val.set(v);
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    if(variable)
+    if (variable)
         variable.removeListener(onChange);
 };

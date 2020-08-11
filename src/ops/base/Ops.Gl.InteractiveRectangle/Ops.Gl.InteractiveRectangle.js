@@ -1,74 +1,74 @@
 
-var render=op.inTrigger("render");
-var trigger=op.outTrigger('trigger');
+const render = op.inTrigger("render");
+const trigger = op.outTrigger("trigger");
 
-var width=op.inValue("width",1);
-var height=op.inValue("height",1);
+const width = op.inValue("width", 1);
+const height = op.inValue("height", 1);
 
-var inId=op.inValueString("id");
-var classPort = op.inValueString("Class");
+const inId = op.inValueString("id");
+const classPort = op.inValueString("Class");
 
-var pivotX=op.inValueSelect("pivot x",["center","left","right"]);
-var pivotY=op.inValueSelect("pivot y",["center","top","bottom"]);
+const pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]);
+const pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]);
 
-var axis=op.inValueSelect("axis",["xy","xz"]);
+const axis = op.inValueSelect("axis", ["xy", "xz"]);
 
-var isInteractive=op.inValueBool('Is Interactive',true);
-var renderRect=op.inValueBool('Render Rectangle',true);
-var divVisible=op.inValueBool('Show Boundings',true);
-var cursorPort=op.inValueSelect("Cursor",["auto","crosshair","pointer","Hand","move","n-resize","ne-resize","e-resize","se-resize","s-resize","sw-resize","w-resize","nw-resize","text","wait","help", "none"],"pointer");
-var active=op.inValueBool('Render',true);
+const isInteractive = op.inValueBool("Is Interactive", true);
+const renderRect = op.inValueBool("Render Rectangle", true);
+const divVisible = op.inValueBool("Show Boundings", true);
+const cursorPort = op.inValueSelect("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer");
+const active = op.inValueBool("Render", true);
 
 
-var geomOut=op.outObject("geometry");
-geomOut.ignoreValueSerialize=true;
+const geomOut = op.outObject("geometry");
+geomOut.ignoreValueSerialize = true;
 
-var mouseOver=op.outValue("Pointer Hover",false);
-var mouseDown=op.outValue("Pointer Down",false);
-var outX=op.outValue("Pointer X");
-var outY=op.outValue("Pointer Y");
+const mouseOver = op.outValue("Pointer Hover", false);
+const mouseDown = op.outValue("Pointer Down", false);
+const outX = op.outValue("Pointer X");
+const outY = op.outValue("Pointer Y");
 
-var outTop=op.outValue("Top");
-var outLeft=op.outValue("Left");
-var outRight=op.outValue("Right");
-var outBottom=op.outValue("Bottom");
+const outTop = op.outValue("Top");
+const outLeft = op.outValue("Left");
+const outRight = op.outValue("Right");
+const outBottom = op.outValue("Bottom");
 
-var mouseClick=op.outTrigger("Left Click");
+const mouseClick = op.outTrigger("Left Click");
 
-var elementPort = op.outObject('Dom Element');
+const elementPort = op.outObject("Dom Element");
 
-active.setUiAttribs({"title":"Active"});
+active.setUiAttribs({ "title": "Active" });
 
-var cgl=op.patch.cgl;
-axis.set('xy');
-pivotX.set('center');
-pivotY.set('center');
+const cgl = op.patch.cgl;
+axis.set("xy");
+pivotX.set("center");
+pivotY.set("center");
 
-var geom=new CGL.Geometry();
-var mesh=null;
-var div=null;
-var m=mat4.create();
-var trans=mat4.create();
-var pos=vec3.create();
-var divAlign=vec3.create();
-var divAlignSize=vec3.create();
+const geom = new CGL.Geometry();
+let mesh = null;
+let div = null;
+const m = mat4.create();
+const trans = mat4.create();
+const pos = vec3.create();
+const divAlign = vec3.create();
+const divAlignSize = vec3.create();
 
-axis.onChange=rebuild;
-pivotX.onChange=rebuild;
-pivotY.onChange=rebuild;
-width.onChange=rebuild;
-height.onChange=rebuild;
-cursorPort.onChange=updateCursor;
+axis.onChange = rebuild;
+pivotX.onChange = rebuild;
+pivotY.onChange = rebuild;
+width.onChange = rebuild;
+height.onChange = rebuild;
+cursorPort.onChange = updateCursor;
 rebuild();
 
 
-var modelMatrix=mat4.create();
-var identViewMatrix=mat4.create();
-var zeroVec3=vec3.create();
+const modelMatrix = mat4.create();
+const identViewMatrix = mat4.create();
+const zeroVec3 = vec3.create();
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!div)
+    if (!div)
     {
         setUpDiv();
         addListeners();
@@ -77,76 +77,76 @@ render.onTriggered=function()
     }
     updateDivSize();
 
-    if(active.get() && renderRect.get() && mesh) mesh.render(cgl.getShader());
+    if (active.get() && renderRect.get() && mesh) mesh.render(cgl.getShader());
 
     trigger.trigger();
 };
 
 function rebuild()
 {
-    var w=width.get();
-    var h=height.get();
-    var x=0;
-    var y=0;
+    let w = width.get();
+    let h = height.get();
+    let x = 0;
+    let y = 0;
 
-    if(typeof w=='string')w=parseFloat(w);
-    if(typeof h=='string')h=parseFloat(h);
+    if (typeof w == "string")w = parseFloat(w);
+    if (typeof h == "string")h = parseFloat(h);
 
-    if(pivotX.get()=='center')
+    if (pivotX.get() == "center")
     {
-        x=0;
-        divAlign[0]=-w/2;
+        x = 0;
+        divAlign[0] = -w / 2;
     }
-    if(pivotX.get()=='right')
+    if (pivotX.get() == "right")
     {
-        x=-w/2;
+        x = -w / 2;
     }
-    if(pivotX.get()=='left')
+    if (pivotX.get() == "left")
     {
-        x=w/2;
+        x = w / 2;
     }
 
-    if(pivotY.get()=='center')
+    if (pivotY.get() == "center")
     {
-        y=0;
-        divAlign[1]=-h/2;
+        y = 0;
+        divAlign[1] = -h / 2;
     }
-    if(pivotY.get()=='top') y=-h/2;
-    if(pivotY.get()=='bottom') y=+h/2;
+    if (pivotY.get() == "top") y = -h / 2;
+    if (pivotY.get() == "bottom") y = +h / 2;
 
-    var verts=[];
-    var tc=[];
-    var norms=[];
-    var indices=[];
+    const verts = [];
+    const tc = [];
+    const norms = [];
+    const indices = [];
 
-    var numRows=1;
-    var numColumns=1;
+    const numRows = 1;
+    const numColumns = 1;
 
-    var stepColumn=w/numColumns;
-    var stepRow=h/numRows;
+    const stepColumn = w / numColumns;
+    const stepRow = h / numRows;
 
-    var c,r;
+    let c, r;
 
-    for(r=0;r<=numRows;r++)
+    for (r = 0; r <= numRows; r++)
     {
-        for(c=0;c<=numColumns;c++)
+        for (c = 0; c <= numColumns; c++)
         {
-            verts.push( c*stepColumn - width.get()/2+x );
-            if(axis.get()=='xz') verts.push( 0.0 );
-            verts.push( r*stepRow - height.get()/2+y );
-            if(axis.get()=='xy') verts.push( 0.0 );
+            verts.push(c * stepColumn - width.get() / 2 + x);
+            if (axis.get() == "xz") verts.push(0.0);
+            verts.push(r * stepRow - height.get() / 2 + y);
+            if (axis.get() == "xy") verts.push(0.0);
 
-            tc.push( c/numColumns );
-            tc.push( 1.0-r/numRows );
+            tc.push(c / numColumns);
+            tc.push(1.0 - r / numRows);
 
-            if(axis.get()=='xz')
+            if (axis.get() == "xz")
             {
                 norms.push(0);
                 norms.push(1);
                 norms.push(0);
             }
 
-            if(axis.get()=='xy')
+            if (axis.get() == "xy")
             {
                 norms.push(0);
                 norms.push(0);
@@ -155,15 +155,15 @@ function rebuild()
         }
     }
 
-    for(c=0;c<numColumns;c++)
+    for (c = 0; c < numColumns; c++)
     {
-        for(r=0;r<numRows;r++)
+        for (r = 0; r < numRows; r++)
         {
-            var ind = c+(numColumns+1)*r;
-            var v1=ind;
-            var v2=ind+1;
-            var v3=ind+numColumns+1;
-            var v4=ind+1+numColumns+1;
+            const ind = c + (numColumns + 1) * r;
+            const v1 = ind;
+            const v2 = ind + 1;
+            const v3 = ind + numColumns + 1;
+            const v4 = ind + 1 + numColumns + 1;
 
             indices.push(v1);
             indices.push(v3);
@@ -176,41 +176,40 @@ function rebuild()
     }
 
     geom.clear();
-    geom.vertices=verts;
-    geom.texCoords=tc;
-    geom.verticesIndices=indices;
-    geom.vertexNormals=norms;
+    geom.vertices = verts;
+    geom.texCoords = tc;
+    geom.verticesIndices = indices;
+    geom.vertexNormals = norms;
 
-    if(!mesh) mesh=new CGL.Mesh(cgl,geom);
-        else mesh.setGeom(geom);
+    if (!mesh) mesh = new CGL.Mesh(cgl, geom);
+    else mesh.setGeom(geom);
 
     geomOut.set(null);
     geomOut.set(geom);
-
 }
 
-var divX=0;
-var divY=0;
-var divWidth=0;
-var divHeight=0;
+let divX = 0;
+let divY = 0;
+let divWidth = 0;
+let divHeight = 0;
 
-var mMatrix=mat4.create();
-divVisible.onChange=updateDivVisibility;
-inId.onChange=updateId;
+const mMatrix = mat4.create();
+divVisible.onChange = updateDivVisibility;
+inId.onChange = updateId;
 classPort.onChange = updateClassNames;
 
 function updateDivVisibility()
 {
-    if(div)
+    if (div)
     {
-        if(divVisible.get()) div.style.border='1px solid red';
-        else div.style.border='none';
+        if (divVisible.get()) div.style.border = "1px solid red";
+        else div.style.border = "none";
     }
 }
 
 function updateCursor()
 {
-    if(div)
+    if (div)
     {
         div.style.cursor = cursorPort.get();
     }
@@ -218,10 +217,9 @@ function updateCursor()
 
 function updateId()
 {
-    if(div)
+    if (div)
     {
-        div.setAttribute('id',inId.get());
-
+        div.setAttribute("id", inId.get());
     }
 }
 
@@ -230,15 +228,13 @@ function updateDivSize()
     // var vp=cgl.getViewPort();
 
 
-
-    mat4.multiply(mMatrix,cgl.vMatrix,cgl.mMatrix);
+    mat4.multiply(mMatrix, cgl.vMatrix, cgl.mMatrix);
     vec3.transformMat4(pos, divAlign, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
 
-
-    var x1 = (trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2;
-    var y1 = (trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2;
+    const x1 = (trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2;
+    const y1 = (trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2;
 
 
     divAlignSize[0] = divAlign[0] + width.get();
@@ -247,10 +243,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x2 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
-    var y2= ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
-
-
+    const x2 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
+    const y2 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
 
 
     divAlignSize[0] = divAlign[0];
@@ -259,10 +253,8 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x3 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
-    var y3= ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
-
-
+    const x3 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
+    const y3 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
 
 
     divAlignSize[0] = divAlign[0] + width.get();
@@ -271,83 +263,84 @@ function updateDivSize()
     vec3.transformMat4(pos, divAlignSize, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    var x4 = ((trans[0] * cgl.canvasWidth/2) + cgl.canvasWidth/2);
-    var y4 = ((trans[1] * cgl.canvasHeight/2) + cgl.canvasHeight/2);
+    const x4 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
+    const y4 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
 
 
-    divX=Math.min(x1,x2,x3,x4);
-    divY=Math.min(cgl.canvasHeight-y1,cgl.canvasHeight-y2,cgl.canvasHeight-y3,cgl.canvasHeight-y4);
+    divX = Math.min(x1, x2, x3, x4);
+    divY = Math.min(cgl.canvasHeight - y1, cgl.canvasHeight - y2, cgl.canvasHeight - y3, cgl.canvasHeight - y4);
 
-    var xb=Math.max(x1,x2,x3,x4);
-    var yb=Math.max(cgl.canvasHeight-y1,cgl.canvasHeight-y2,cgl.canvasHeight-y3,cgl.canvasHeight-y4);
+    const xb = Math.max(x1, x2, x3, x4);
+    const yb = Math.max(cgl.canvasHeight - y1, cgl.canvasHeight - y2, cgl.canvasHeight - y3, cgl.canvasHeight - y4);
 
     outTop.set(divY);
     outLeft.set(divX);
     outRight.set(xb);
     outBottom.set(yb);
 
-    divWidth=Math.abs(xb-divX);
-    divHeight=Math.abs(yb-divY);
+    divWidth = Math.abs(xb - divX);
+    divHeight = Math.abs(yb - divY);
 
 
-    divX/=op.patch.cgl.pixelDensity;
-    divY/=op.patch.cgl.pixelDensity;
-    divWidth/=op.patch.cgl.pixelDensity;
-    divHeight/=op.patch.cgl.pixelDensity;
+    divX /= op.patch.cgl.pixelDensity;
+    divY /= op.patch.cgl.pixelDensity;
+    divWidth /= op.patch.cgl.pixelDensity;
+    divHeight /= op.patch.cgl.pixelDensity;
 
     // div.style.left=divX+'px';
     // div.style.top=divY+'px';
     // div.style.width=divWidth+'px';
     // div.style.height=divHeight+'px';
 
-const divXpx=divX+'px';
-const divYpx=divY+'px';
-const divWidthPx=divWidth+'px';
-const divHeightPx=divHeight+'px';
-    if(divXpx!=div.style.left) div.style.left=divXpx;
-    if(divYpx!=div.style.top) div.style.top=divYpx;
-    if(div.style.width!=divWidthPx) div.style.width=divWidthPx;
-    if(div.style.height!=divHeightPx) div.style.height=divHeightPx;
-
-
+    const divXpx = divX + "px";
+    const divYpx = divY + "px";
+    const divWidthPx = divWidth + "px";
+    const divHeightPx = divHeight + "px";
+    if (divXpx != div.style.left) div.style.left = divXpx;
+    if (divYpx != div.style.top) div.style.top = divYpx;
+    if (div.style.width != divWidthPx) div.style.width = divWidthPx;
+    if (div.style.height != divHeightPx) div.style.height = divHeightPx;
 }
 
-function updateClassNames() {
-    if(div) {
+function updateClassNames()
+{
+    if (div)
+    {
         div.className = classPort.get();
     }
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    if(div)div.remove();
-}
+    if (div)div.remove();
+};
 
 function setUpDiv()
 {
-    if(!div)
+    if (!div)
     {
-        div = document.createElement('div');
-        div.dataset.op=op.id;
-        div.oncontextmenu = function(e){
+        div = document.createElement("div");
+        div.dataset.op = op.id;
+        div.oncontextmenu = function (e)
+        {
             console.log("context menu canceled!");
             e.preventDefault();
-        }
+        };
 
-        div.style.padding="0px";
-        div.style.position="absolute";
-        div.style['box-sizing']="border-box";
-        div.style.border="1px solid red";
+        div.style.padding = "0px";
+        div.style.position = "absolute";
+        div.style["box-sizing"] = "border-box";
+        div.style.border = "1px solid red";
         // div.style['border-left']="1px solid blue";
         // div.style['border-top']="1px solid green";
-        div.style["z-index"]="9999";
+        div.style["z-index"] = "1000";
 
-        div.style["-webkit-user-select"]="none";
-        div.style["user-select"]="none";
-        div.style["-webkit-tap-highlight-color"]="rgba(0,0,0,0)";
-        div.style["-webkit-touch-callout"]="none";
+        div.style["-webkit-user-select"] = "none";
+        div.style["user-select"] = "none";
+        div.style["-webkit-tap-highlight-color"] = "rgba(0,0,0,0)";
+        div.style["-webkit-touch-callout"] = "none";
 
-        var canvas = op.patch.cgl.canvas.parentElement;
+        const canvas = op.patch.cgl.canvas.parentElement;
         canvas.appendChild(div);
         updateCursor();
         updateIsInteractive();
@@ -358,15 +351,15 @@ function setUpDiv()
     elementPort.set(div);
 }
 
-var listenerElement=null;
+let listenerElement = null;
 
 function onMouseMove(e)
 {
-    var offsetX=-width.get()/2;
-    var offsetY=-height.get()/2;
+    const offsetX = -width.get() / 2;
+    const offsetY = -height.get() / 2;
 
-    outX.set( Math.max(0.0,Math.min(1.0,e.offsetX/divWidth)));
-    outY.set( Math.max(0.0,Math.min(1.0,1.0-e.offsetY/divHeight)));
+    outX.set(Math.max(0.0, Math.min(1.0, e.offsetX / divWidth)));
+    outY.set(Math.max(0.0, Math.min(1.0, 1.0 - e.offsetY / divHeight)));
 }
 
 function onMouseLeave(e)
@@ -399,21 +392,21 @@ function onTouchMove(e)
 {
     // console.log('touchmoveevent',e);
 
-    var targetEle=document.elementFromPoint(e.targetTouches[0].pageX,e.targetTouches[0].pageY);
+    const targetEle = document.elementFromPoint(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
 
-    if(targetEle==div)
+    if (targetEle == div)
     {
         mouseOver.set(true);
-        if(e.touches && e.touches.length>0)
+        if (e.touches && e.touches.length > 0)
         {
-            var rect = div.getBoundingClientRect(); //e.target
-            var x = e.targetTouches[0].pageX - rect.left;
-            var y = e.targetTouches[0].pageY - rect.top;
+            const rect = div.getBoundingClientRect(); // e.target
+            const x = e.targetTouches[0].pageX - rect.left;
+            const y = e.targetTouches[0].pageY - rect.top;
 
-            var touch=e.touches[0];
+            const touch = e.touches[0];
 
-            outX.set( Math.max(0.0,Math.min(1.0,x/divWidth)));
-            outY.set( Math.max(0.0,Math.min(1.0,1.0-y/divHeight)));
+            outX.set(Math.max(0.0, Math.min(1.0, x / divWidth)));
+            outY.set(Math.max(0.0, Math.min(1.0, 1.0 - y / divHeight)));
 
             onMouseMove(touch);
         }
@@ -425,78 +418,75 @@ function onTouchMove(e)
 }
 
 
-active.onChange=updateActiveRender;
+active.onChange = updateActiveRender;
 function updateActiveRender()
 {
-    if(active.get())
+    if (active.get())
     {
         addListeners();
-        if(div) div.style['display']='block';
+        if (div) div.style.display = "block";
     }
     else
     {
         removeListeners();
-        if(div) div.style['display']='none';
+        if (div) div.style.display = "none";
     }
-
 }
 
-isInteractive.onChange=updateIsInteractive;
+isInteractive.onChange = updateIsInteractive;
 function updateIsInteractive()
 {
-    if(isInteractive.get())
+    if (isInteractive.get())
     {
         addListeners();
-        if(div)div.style['pointer-events']='initial';
+        if (div)div.style["pointer-events"] = "initial";
     }
     else
     {
         removeListeners();
         mouseDown.set(false);
         mouseOver.set(false);
-        if(div)div.style['pointer-events']='none';
+        if (div)div.style["pointer-events"] = "none";
     }
 }
 
 function removeListeners()
 {
-    if(listenerElement)
+    if (listenerElement)
     {
-        document.removeEventListener('touchmove', onTouchMove);
-        listenerElement.removeEventListener('touchend', onMouseUp);
-        listenerElement.removeEventListener('touchstart', onMouseDown);
+        document.removeEventListener("touchmove", onTouchMove);
+        listenerElement.removeEventListener("touchend", onMouseUp);
+        listenerElement.removeEventListener("touchstart", onMouseDown);
 
-        listenerElement.removeEventListener('click', onmouseclick);
-        listenerElement.removeEventListener('mousemove', onMouseMove);
-        listenerElement.removeEventListener('mouseleave', onMouseLeave);
-        listenerElement.removeEventListener('mousedown', onMouseDown);
-        listenerElement.removeEventListener('mouseup', onMouseUp);
-        listenerElement.removeEventListener('mouseenter', onMouseEnter);
+        listenerElement.removeEventListener("click", onmouseclick);
+        listenerElement.removeEventListener("mousemove", onMouseMove);
+        listenerElement.removeEventListener("mouseleave", onMouseLeave);
+        listenerElement.removeEventListener("mousedown", onMouseDown);
+        listenerElement.removeEventListener("mouseup", onMouseUp);
+        listenerElement.removeEventListener("mouseenter", onMouseEnter);
         // listenerElement.removeEventListener('contextmenu', onClickRight);
-        listenerElement=null;
+        listenerElement = null;
     }
 }
 
 function addListeners()
 {
-    if(listenerElement)removeListeners();
+    if (listenerElement)removeListeners();
 
-    listenerElement=div;
+    listenerElement = div;
 
-    if(listenerElement)
+    if (listenerElement)
     {
-        document.addEventListener('touchmove', onTouchMove);
-        listenerElement.addEventListener('touchend', onMouseUp);
-        listenerElement.addEventListener('touchstart', onMouseDown);
+        document.addEventListener("touchmove", onTouchMove);
+        listenerElement.addEventListener("touchend", onMouseUp);
+        listenerElement.addEventListener("touchstart", onMouseDown);
 
-        listenerElement.addEventListener('click', onmouseclick);
-        listenerElement.addEventListener('mousemove', onMouseMove);
-        listenerElement.addEventListener('mouseleave', onMouseLeave);
-        listenerElement.addEventListener('mousedown', onMouseDown);
-        listenerElement.addEventListener('mouseup', onMouseUp);
-        listenerElement.addEventListener('mouseenter', onMouseEnter);
+        listenerElement.addEventListener("click", onmouseclick);
+        listenerElement.addEventListener("mousemove", onMouseMove);
+        listenerElement.addEventListener("mouseleave", onMouseLeave);
+        listenerElement.addEventListener("mousedown", onMouseDown);
+        listenerElement.addEventListener("mouseup", onMouseUp);
+        listenerElement.addEventListener("mouseenter", onMouseEnter);
         // listenerElement.addEventListener('contextmenu', onClickRight);
-
     }
 }
-

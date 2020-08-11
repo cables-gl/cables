@@ -1,5 +1,12 @@
 {
     "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Variable",
+                "subType": "string"
+            }
+        ],
         "portsOut": [
             {
                 "type": "0",

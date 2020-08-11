@@ -1,56 +1,57 @@
-const exe=op.inTrigger("exe");
+const exe = op.inTrigger("exe");
 // var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-const filename=op.inUrl("File");
+const filename = op.inUrl("File");
 
-var play=op.addInPort(new CABLES.Port(op,"play",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' } ));
+const play = op.addInPort(new CABLES.Port(op, "play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 
 
+const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
+const wrap = op.addInPort(new CABLES.Port(op, "wrap", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["repeat", "mirrored repeat", "clamp to edge"] }));
+const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 
-var tfilter=op.addInPort(new CABLES.Port(op,"filter",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['nearest','linear','mipmap']}));
-var wrap=op.addInPort(new CABLES.Port(op,"wrap",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['repeat','mirrored repeat','clamp to edge']}));
-var flip=op.addInPort(new CABLES.Port(op,"flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
+const width = op.addInPort(new CABLES.Port(op, "texture width"));
+const height = op.addInPort(new CABLES.Port(op, "texture height"));
 
-var width=op.addInPort(new CABLES.Port(op,"texture width"));
-var height=op.addInPort(new CABLES.Port(op,"texture height"));
+const bmScale = op.addInPort(new CABLES.Port(op, "scale", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["fit", "nofit"] }));
 
-var bmScale=op.addInPort(new CABLES.Port(op,"scale",CABLES.OP_PORT_TYPE_VALUE,{display:'dropdown',values:['fit','nofit']}));
+const rewind = op.addInPort(new CABLES.Port(op, "rewind", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
+const speed = op.addInPort(new CABLES.Port(op, "speed"));
+const frame = op.addInPort(new CABLES.Port(op, "frame"));
 
-var rewind=op.addInPort(new CABLES.Port(op,"rewind",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
-var speed=op.addInPort(new CABLES.Port(op,"speed"));
-var frame=op.addInPort(new CABLES.Port(op,"frame"));
+const textureOut = op.outTexture("texture");
 
-var textureOut=op.outTexture("texture");
+const canvasId = "bodymovin_" + CABLES.generateUUID();
 
-var canvasId="bodymovin_"+CABLES.generateUUID();
+bmScale.set("fit");
 
-bmScale.set('fit');
+tfilter.set("linear");
 
-tfilter.set('linear');
-tfilter.onChange=onFilterChange;
-filename.onChange=reload;
+let createTexture = false;
 
-bmScale.onChange=reloadForce;
-width.onChange=reloadForce;
-height.onChange=reloadForce;
+tfilter.onChange = onFilterChange;
+filename.onChange = reload;
 
-var canvasImage=null;
-var cgl=op.patch.cgl;
+bmScale.onChange = reloadForce;
+width.onChange = reloadForce;
+height.onChange = reloadForce;
+
+let canvasImage = null;
+const cgl = op.patch.cgl;
 
 speed.set(1);
 
-var anim=null;
-var ctx=null;
-var canvas=null;
-var cgl_filter=CGL.Texture.FILTER_NEAREST;
-var cgl_wrap=CGL.Texture.WRAP_REPEAT;
+let anim = null;
+let ctx = null;
+let canvas = null;
+let cgl_filter = CGL.Texture.FILTER_NEAREST;
+let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 width.set(1280);
 height.set(720);
-var createTexture=false;
 
 
-play.onChange=function()
+play.onChange = function ()
 {
-    if(play.get())
+    if (play.get())
     {
         anim.play();
 
@@ -60,140 +61,137 @@ play.onChange=function()
 };
 
 
-rewind.onTriggered=function()
+rewind.onTriggered = function ()
 {
-
     anim.goToAndPlay(0, true);
 };
 
-speed.onChange=function()
+speed.onChange = function ()
 {
-    if(anim) anim.setSpeed(speed.get());
+    if (anim) anim.setSpeed(speed.get());
 };
 
-flip.onChange=function()
+flip.onChange = function ()
 {
-    createTexture=true;
+    createTexture = true;
 };
 
-wrap.onChange=function()
+wrap.onChange = function ()
 {
     // op.log(wrap.get());
-    if(wrap.get()=='repeat') cgl_wrap=CGL.Texture.WRAP_REPEAT;
-    if(wrap.get()=='mirrored repeat') cgl_wrap=CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if(wrap.get()=='clamp to edge') cgl_wrap=CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
+    if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    createTexture=true;
+    createTexture = true;
 };
 
 function onFilterChange()
 {
-    cgl_filter=CGL.Texture.FILTER_NEAREST;
-    if(tfilter.get()=='linear') cgl_filter=CGL.Texture.FILTER_LINEAR;
-    if(tfilter.get()=='mipmap') cgl_filter=CGL.Texture.FILTER_MIPMAP;
+    cgl_filter = CGL.Texture.FILTER_NEAREST;
+    if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
+    if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
 
-    createTexture=true;
+    createTexture = true;
 }
 
 
-
-var lastFrame=-2;
-exe.onTriggered=function()
+let lastFrame = -2;
+exe.onTriggered = function ()
 {
-    if(!canvasImage || !canvas)return;
+    if (!canvasImage || !canvas) return;
 
-    if(lastFrame!=frame.get())
+    if (lastFrame != frame.get())
     {
-        lastFrame=frame.get();
-        if(frame.get()!=-1.0)
+        lastFrame = frame.get();
+        if (frame.get() != -1.0)
         {
-            anim.goToAndStop(frame.get(),true);
+            anim.goToAndStop(frame.get(), true);
         }
 
-        if(!textureOut.get() || createTexture)
+        if (!textureOut.get() || createTexture)
         {
-            var texOpts=
+            const texOpts =
             {
-                wrap:cgl_wrap,
-                filter:cgl_filter,
-                flip:flip.get()
+                "wrap": cgl_wrap,
+                "filter": cgl_filter,
+                "flip": flip.get()
             };
 
-            textureOut.set(new CGL.Texture.createFromImage(cgl,canvasImage,texOpts));
-            createTexture=false;
+            textureOut.set(new CGL.Texture.createFromImage(cgl, canvasImage, texOpts));
+            createTexture = false;
         }
         else
         {
             textureOut.get().initTexture(canvasImage);
         }
     }
-
 };
 
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    op.log('delete bodymovin...');
-    if(anim)anim.stop();
-    anim=null;
+    op.log("delete bodymovin...");
+    if (anim)anim.stop();
+    anim = null;
 };
-
 
 
 function reloadForce()
 {
-    createTexture=true;
+    createTexture = true;
     reload(true);
 }
 
 
 function reload(force)
 {
-    if(anim)
+    if (anim)
     {
         anim.stop();
     }
 
-    if(!canvasImage || force)
+    if (!canvasImage || force)
     {
-        op.log("create canvas...");
-        if(canvas)
+        // op.log("create canvas...");
+        if (canvas)
         {
             canvas.remove();
         }
-        canvas = document.createElement('canvas');
-        canvas.id     = canvasId;
-        op.log('canvasId',canvasId);
+        canvas = document.createElement("canvas");
+        canvas.id = canvasId;
+        // op.log('canvasId',canvasId);
 
-        canvas.width  = width.get();
+        canvas.width = width.get();
         canvas.height = height.get();
+        canvas.style.display = "none";
 
-        op.log("canvas size",canvas.width,canvas.height);
+
+        // op.log("canvas size",canvas.width,canvas.height);
 
         // canvas.style.display   = "block";
         // canvas.style['z-index']   = "99999";
-        var body = document.getElementsByTagName("body")[0];
+        const body = document.getElementsByTagName("body")[0];
         body.appendChild(canvas);
 
         canvasImage = document.getElementById(canvas.id);
-        ctx = canvasImage.getContext('2d');
+        ctx = canvasImage.getContext("2d");
     }
 
-    var animData= {
-        animType: 'canvas',
-        loop: false,
-        prerender: true,
-        autoplay: true,
-        path: filename.get(),
-        rendererSettings:
+    const animData = {
+        "animType": "canvas",
+        "loop": false,
+        "prerender": true,
+        "autoplay": true,
+        "path": filename.get(),
+        "rendererSettings":
         {
-            context: ctx,
-            clearCanvas: true,
-            scaleMode:bmScale.get()
+            "context": ctx,
+            "clearCanvas": true,
+            "scaleMode": bmScale.get()
         }
     };
     anim = bodymovin.loadAnimation(animData);
     anim.setSpeed(speed.get());
     anim.play();
-
 }
