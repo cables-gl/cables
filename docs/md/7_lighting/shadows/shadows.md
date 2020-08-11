@@ -44,6 +44,7 @@ We render the scene we want to shadow from the light's perspective into a textur
 Okay, enough with the theory, let's dive into creating shadows!
 
 ## Basic Setup
+
 ![shadowminimalmage](img/01_minimal_patch_shadows.png)
 
 In the screenshot above you see the minimum amount of operators needed to get shadows on the screen. [The patch for the screenshot is availible here](https://cables.gl/p/J4R3_e).
