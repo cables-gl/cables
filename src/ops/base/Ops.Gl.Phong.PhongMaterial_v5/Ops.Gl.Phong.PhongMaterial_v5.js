@@ -147,6 +147,7 @@ const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 1);
 const inDiffuseRepeatY = op.inFloat("Diffuse Repeat Y", 1);
 const inTextureOffsetX = op.inFloat("Texture Offset X", 0);
 const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
+const inEnvMapMode = op.inBool("Env as MatCap", false);
 const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
@@ -154,8 +155,8 @@ const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
 const inEnvStrength = op.inFloatSlider("Env Map Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
-op.setPortGroup("Texture Transforms", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX, inEnvStrength]);
-
+op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX, inEnvMapMode]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvStrength]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -217,6 +218,10 @@ inColorizeTexture.onChange = function ()
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 };
 
+inEnvMapMode.onChange = function ()
+{
+    shader.toggleDefine("ENVMAP_MATCAP", inEnvMapMode.get());
+};
 
 function updateDiffuseTexture()
 {

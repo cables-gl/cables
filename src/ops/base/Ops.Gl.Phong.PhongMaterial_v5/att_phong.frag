@@ -331,11 +331,17 @@ void main()
 
 
 #ifdef HAS_TEXTURE_ENV
-    vec3 reflected = reflect(viewDirection, normal);
-    float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
+    #ifdef ENVMAP_MATCAP
+        vec3 reflected = reflect(viewDirection, normal);
+        float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
 
-    float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
-    calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
+        float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
+        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
+    #endif
+
+    #ifndef ENVMAP_MATCAP
+
+    #endif
 #endif
 
 
