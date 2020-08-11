@@ -65,13 +65,60 @@ const float PI = 3.1415926535897932384626433832795;
 const float TWO_PI = (2. * PI);
 const float EIGHT_PI = (8. * PI);
 
+#define RECIPROCAL_PI 1./PI
+#define RECIPROCAL_PI2 RECIPROCAL_PI/2.
+
 // TEXTURES
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureIntensities;
 
     #ifdef HAS_TEXTURE_ENV
-        UNI sampler2D texEnv;
+    #define TEX_FORMAT_EQUIRECT // TODO: remove and replace with toggleDefine
+        #ifdef TEX_FORMAT_EQUIRECT
+            const vec2 invAtan = vec2(0.1591, 0.3183);
+            vec4 sampleEquirect(sampler2D tex,vec3 direction, float lod)
+            {
+                #ifndef WEBGL1
+                    vec3 newDirection = normalize(direction);
+            		vec2 sampleUV;
+            		sampleUV.x = -1. * (atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.75);
+            		sampleUV.y = asin( clamp(direction.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
+                #endif
+
+                #ifdef WEBGL1
+                    vec3 newDirection = normalize(direction);
+                		vec2 sampleUV = vec2(atan(newDirection.z, newDirection.x), asin(newDirection.y+1e-6));
+                        sampleUV *= vec2(0.1591, 0.3183);
+                        sampleUV += 0.5;
+                #endif
+                return textureLod(tex, sampleUV, lod);
+            }
+        #endif
+
         UNI float texEnvStrength;
+
+        #ifdef TEX_FORMAT_CUBEMAP
+            UNI samplerCube texEnv;
+            #ifndef WEBGL1
+                #define SAMPLETEX textureLod
+            #endif
+            #ifdef WEBGL1
+                #define SAMPLETEX textureCubeLodEXT
+            #endif
+        #endif
+
+        #ifndef TEX_FORMAT_CUBEMAP
+            #define TEX_FORMAT_EQUIRECT
+            UNI sampler2D texEnv;
+            #ifdef WEBGL1
+                // #extension GL_EXT_shader_texture_lod : enable
+                #ifdef GL_EXT_shader_texture_lod
+                    #define textureLod texture2DLodEXT
+                #endif
+                // #define textureLod texture2D
+            #endif
+            #define SAMPLETEX sampleEquirect
+        #endif
     #endif
 
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -340,7 +387,18 @@ void main()
     #endif
 
     #ifndef ENVMAP_MATCAP
+        float environmentMapWidth = 5376.;
+        float glossyExponent = 20.;
+        float lambertianCoefficient = 0.4;
+        float glossyCoefficient = 1.5;
+        vec3 reflectDirection = reflect(-viewDirection, normal);
+        float maxMIPLevel = 10.;
+        float MIPlevel = log2(environmentMapWidth * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
 
+        calculatedColor.rgb +=  lambertianCoefficient * SAMPLETEX(texEnv,
+                                       normal,
+                                       maxMIPLevel).rgb
+                               + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, MIPlevel).rgb;
     #endif
 #endif
 
