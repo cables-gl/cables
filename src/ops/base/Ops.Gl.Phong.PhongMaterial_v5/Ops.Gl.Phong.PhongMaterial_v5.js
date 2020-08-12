@@ -138,7 +138,8 @@ const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
 const inEnvTexture = op.inTexture("Environment Map");
-op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture]);
+const inLuminanceMaskTexture = op.inTexture("Luminance Mask");
+op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
 
 
 // TEXTURE TRANSFORMS
@@ -153,10 +154,11 @@ const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
 const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
+const inLuminanceMaskIntensity = op.inFloatSlider("Env Mask Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
-op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapIntensity]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -213,6 +215,9 @@ let alphaTextureUniform = null;
 let envTextureUniform = null;
 let inEnvMapIntensityUni = null;
 let inEnvMapWidthUni = null;
+let luminanceTextureUniform = null;
+let inLuminanceMaskIntensityUniform = null;
+
 inColorizeTexture.onChange = function ()
 {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
@@ -355,6 +360,26 @@ function updateEnvTexture()
     }
 }
 
+function updateLuminanceMaskTexture()
+{
+    if (inLuminanceMaskTexture.get())
+    {
+        if (!luminanceTextureUniform)
+        {
+            shader.define("HAS_TEXTURE_LUMINANCE_MASK");
+            luminanceTextureUniform = new CGL.Uniform(shader, "t", "texLuminance", 0);
+            inLuminanceMaskIntensityUniform = new CGL.Uniform(shader, "f", "inLuminanceMaskIntensity", inLuminanceMaskIntensity);
+        }
+    }
+    else
+    {
+        shader.removeDefine("HAS_TEXTURE_LUMINANCE_MASK");
+        shader.removeUniform("inLuminanceMaskIntensity");
+        shader.removeUniform("texLuminance");
+        luminanceTextureUniform = null;
+        inLuminanceMaskIntensityUniform = null;
+    }
+}
 
 // TEX OPACITY
 
@@ -414,6 +439,7 @@ inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 inEnvTexture.onChange = updateEnvTexture;
+inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
@@ -702,6 +728,11 @@ inTrigger.onTriggered = function ()
     {
         if (inEnvTexture.get().cubemap) shader.pushTexture(envTextureUniform, inEnvTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         else shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+    }
+
+    if (inLuminanceMaskTexture.get())
+    {
+        shader.pushTexture(luminanceTextureUniform, inLuminanceMaskTexture.get().tex);
     }
 
     updateLights();

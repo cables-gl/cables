@@ -122,6 +122,11 @@ const float EIGHT_PI = (8. * PI);
         #endif
     #endif
 
+    #ifdef HAS_TEXTURE_LUMINANCE_MASK
+        UNI sampler2D texLuminance;
+        UNI float inLuminanceMaskIntensity;
+    #endif
+
     #ifdef HAS_TEXTURE_DIFFUSE
         UNI sampler2D texDiffuse;
     #endif
@@ -426,14 +431,20 @@ void main()
         vec3 reflected = reflect(normalize(-viewDirection), normal);
         float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
 
-        float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
-        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*inEnvMapIntensity;
+        float lumi=dot(vec3(0.2126,0.7152,0.0722), baseColor.rgb);
+
+        vec3 luminanceColor = (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*inEnvMapIntensity;
+        #ifdef HAS_TEXTURE_LUMINANCE_MASK
+            luminanceColor *= texture(texLuminance, texCoord).r * inLuminanceMaskIntensity;
+        #endif
+
+        calculatedColor.rgb += luminanceColor;
     #endif
 
     #ifndef ENVMAP_MATCAP
         float environmentMapWidth = inEnvMapWidth;
         float glossyExponent = inMaterialProperties.SHININESS;
-        float lambertianCoefficient = 0.44;
+        float lambertianCoefficient = 0.44; // TODO: need prefiltered map for this
         float glossyCoefficient = inMaterialProperties.SPECULAR_AMT;
 
         vec3 envMapNormal =  normal;
@@ -450,7 +461,8 @@ void main()
         calculatedColor.rgb +=  inEnvMapIntensity * (
             lambertianCoefficient * inDiffuseColor.rgb
             * SAMPLETEX(texEnv, envMapNormal, maxMIPLevel).rgb
-            + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, 1.).rgb);
+            + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, 1.).rgb
+        );
     #endif
 #endif
 
