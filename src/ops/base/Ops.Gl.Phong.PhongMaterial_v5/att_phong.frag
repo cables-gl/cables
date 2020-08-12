@@ -377,30 +377,7 @@ void main()
 
 
 
-#ifdef HAS_TEXTURE_ENV
-    #ifdef ENVMAP_MATCAP
-        vec3 reflected = reflect(viewDirection, normal);
-        float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
 
-        float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
-        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
-    #endif
-
-    #ifndef ENVMAP_MATCAP
-        float environmentMapWidth = 5376.;
-        float glossyExponent = 20.;
-        float lambertianCoefficient = 0.4;
-        float glossyCoefficient = 1.5;
-        vec3 reflectDirection = reflect(-viewDirection, normal);
-        float maxMIPLevel = 10.;
-        float MIPlevel = log2(environmentMapWidth * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
-
-        calculatedColor.rgb +=  lambertianCoefficient * SAMPLETEX(texEnv,
-                                       normal,
-                                       maxMIPLevel).rgb
-                               + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, MIPlevel).rgb;
-    #endif
-#endif
 
 
     #ifdef ENABLE_FRESNEL
@@ -442,6 +419,34 @@ void main()
         if(col.a<0.2) discard;
     #endif
 
+
+    #ifdef HAS_TEXTURE_ENV
+    #ifdef ENVMAP_MATCAP
+        vec3 reflected = reflect(viewDirection, normal);
+        float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
+
+        float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
+        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
+    #endif
+
+    #ifndef ENVMAP_MATCAP
+        float environmentMapWidth = 5376.;
+        float glossyExponent = 20000.;
+        float lambertianCoefficient = 0.44;
+        float glossyCoefficient = 0.9;
+
+        vec3 envMapNormal =  normal;
+        vec3 reflectDirection = reflect(normalize(-viewDirection), normal);
+
+        float maxMIPLevel = 8.;
+        float MIPlevel = log2(environmentMapWidth * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
+
+        calculatedColor.rgb +=  lambertianCoefficient * SAMPLETEX(texEnv,
+                                       envMapNormal,
+                                       maxMIPLevel).rgb +
+                                glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, 1.).rgb;
+    #endif
+#endif
 
     col.rgb = clamp(calculatedColor, 0., 1.);
 
