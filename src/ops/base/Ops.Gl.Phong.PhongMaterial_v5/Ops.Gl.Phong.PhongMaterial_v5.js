@@ -147,16 +147,16 @@ const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 1);
 const inDiffuseRepeatY = op.inFloat("Diffuse Repeat Y", 1);
 const inTextureOffsetX = op.inFloat("Texture Offset X", 0);
 const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
-const inEnvMapMode = op.inBool("Env as MatCap", false);
+
 const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
-const inEnvStrength = op.inFloatSlider("Env Map Intensity", 1);
+const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
-op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX, inEnvMapMode]);
-op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvStrength]);
+op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapIntensity]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -211,16 +211,11 @@ let aoTextureUniform = null;
 let emissiveTextureUniform = null;
 let alphaTextureUniform = null;
 let envTextureUniform = null;
-
-
+let inEnvMapIntensityUni = null;
+let inEnvMapWidthUni = null;
 inColorizeTexture.onChange = function ()
 {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
-};
-
-inEnvMapMode.onChange = function ()
-{
-    shader.toggleDefine("ENVMAP_MATCAP", inEnvMapMode.get());
 };
 
 function updateDiffuseTexture()
@@ -258,6 +253,7 @@ function updateSpecularTexture()
         specularTextureUniform = null;
     }
 }
+
 
 function updateNormalTexture()
 {
@@ -323,8 +319,28 @@ function updateEnvTexture()
             if (!envTextureUniform)
             {
                 envTextureUniform = new CGL.Uniform(shader, "t", "texEnv", 0);
-                const inEnvStrengthUni = new CGL.Uniform(shader, "f", "texEnvStrength", inEnvStrength);
             }
+        }
+
+        if (inEnvTexture.get().cubemap)
+        {
+            shader.define("TEX_FORMAT_CUBEMAP");
+            shader.removeDefine("TEX_FORMAT_EQUIRECT");
+            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
+        }
+        else
+        {
+            shader.removeDefine("TEX_FORMAT_CUBEMAP");
+            shader.define("TEX_FORMAT_EQUIRECT");
+            if (inEnvTexture.get().width === inEnvTexture.get().height)
+            {
+                shader.define("ENVMAP_MATCAP");
+            }
+            else shader.removeDefine("ENVMAP_MATCAP");
+
+            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
         }
     }
     else
@@ -333,6 +349,7 @@ function updateEnvTexture()
         shader.removeUniform("texEnv");
         shader.removeDefine("HAS_TEXTURE_ENV");
         envTextureUniform = null;
+        inEnvMapIntensityUni = null;
     }
 }
 
@@ -679,7 +696,11 @@ inTrigger.onTriggered = function ()
     if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
     if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
     if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
-    if (inEnvTexture.get()) shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+    if (inEnvTexture.get())
+    {
+        if (inEnvTexture.get().cubemap) shader.pushTexture(envTextureUniform, inEnvTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        else shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+    }
 
     updateLights();
 

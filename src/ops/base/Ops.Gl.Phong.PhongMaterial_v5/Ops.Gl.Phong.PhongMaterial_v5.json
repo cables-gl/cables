@@ -233,12 +233,6 @@
             },
             {
                 "type": "0",
-                "name": "Env as MatCap",
-                "group": "Texture Transforms",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Specular Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"

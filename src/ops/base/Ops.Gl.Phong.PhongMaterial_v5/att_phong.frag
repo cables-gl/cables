@@ -73,7 +73,7 @@ const float EIGHT_PI = (8. * PI);
     UNI vec4 inTextureIntensities;
 
     #ifdef HAS_TEXTURE_ENV
-    #define TEX_FORMAT_EQUIRECT // TODO: remove and replace with toggleDefine
+    // #define TEX_FORMAT_EQUIRECT // TODO: remove and replace with toggleDefine
         #ifdef TEX_FORMAT_EQUIRECT
             const vec2 invAtan = vec2(0.1591, 0.3183);
             vec4 sampleEquirect(sampler2D tex,vec3 direction, float lod)
@@ -95,7 +95,8 @@ const float EIGHT_PI = (8. * PI);
             }
         #endif
 
-        UNI float texEnvStrength;
+        UNI float inEnvMapIntensity;
+        UNI float inEnvMapWidth;
 
         #ifdef TEX_FORMAT_CUBEMAP
             UNI samplerCube texEnv;
@@ -422,29 +423,34 @@ void main()
 
     #ifdef HAS_TEXTURE_ENV
     #ifdef ENVMAP_MATCAP
-        vec3 reflected = reflect(viewDirection, normal);
+        vec3 reflected = reflect(normalize(-viewDirection), normal);
         float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
 
         float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
-        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
+        calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*inEnvMapIntensity;
     #endif
 
     #ifndef ENVMAP_MATCAP
-        float environmentMapWidth = 5376.;
-        float glossyExponent = 20000.;
+        float environmentMapWidth = inEnvMapWidth;
+        float glossyExponent = inMaterialProperties.SHININESS;
         float lambertianCoefficient = 0.44;
-        float glossyCoefficient = 0.9;
+        float glossyCoefficient = inMaterialProperties.SPECULAR_AMT;
 
         vec3 envMapNormal =  normal;
         vec3 reflectDirection = reflect(normalize(-viewDirection), normal);
 
+        float specularAngle = max(dot(reflectDirection, viewDirection), 0.);
+        float specularFactor = pow(specularAngle, max(0., glossyExponent));
+
+        glossyExponent = specularFactor;
+
         float maxMIPLevel = 8.;
         float MIPlevel = log2(environmentMapWidth * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
 
-        calculatedColor.rgb +=  lambertianCoefficient * SAMPLETEX(texEnv,
-                                       envMapNormal,
-                                       maxMIPLevel).rgb +
-                                glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, 1.).rgb;
+        calculatedColor.rgb +=  inEnvMapIntensity * (
+            lambertianCoefficient * inDiffuseColor.rgb
+            * SAMPLETEX(texEnv, envMapNormal, maxMIPLevel).rgb
+            + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, 1.).rgb);
     #endif
 #endif
 
