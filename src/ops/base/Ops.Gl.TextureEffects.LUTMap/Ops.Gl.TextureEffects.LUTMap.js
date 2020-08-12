@@ -26,7 +26,7 @@ render.onTriggered=function()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-    
+
 
     cgl.setTexture(1, inLut.get().tex );
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inLut.get().tex );

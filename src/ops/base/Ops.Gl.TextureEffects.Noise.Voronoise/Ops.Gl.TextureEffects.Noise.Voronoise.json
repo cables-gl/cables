@@ -70,7 +70,8 @@
         {
             "title": "Voronoise Shader",
             "author": "Patricio Gonzalez Vivo & Jen Lowe",
-            "url": "https://thebookofshaders.com/12/"
+            "url": "https://thebookofshaders.com/12/",
+            "licence": "Copyright 2015 Patricio Gonzalez Vivo"
         }
     ],
     "author": "55d744634cdc152216eb9aad",
