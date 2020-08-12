@@ -345,9 +345,11 @@ function updateEnvTexture()
     }
     else
     {
-        shader.removeUniform("texEnvStrength");
+        shader.removeUniform("inEnvMapIntensity");
+        shader.removeUniform("inEnvMapWidth");
         shader.removeUniform("texEnv");
         shader.removeDefine("HAS_TEXTURE_ENV");
+        shader.removeDefine("ENVMAP_MATCAP");
         envTextureUniform = null;
         inEnvMapIntensityUni = null;
     }
