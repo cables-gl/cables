@@ -25,7 +25,9 @@ Before we dive into creating shadows, we need to cover the basic terminology fir
 
 There are 3 entities at work when talking about shadows: the light source, the occluder and the receiver.
 
-![receiveroccluder](img/03_2_umbra_penumbra.png)
+![receiveroccluder](img/03_2_umbra_penumbra.png)[Source 1]
+
+[Source 1]: http://www.realtimerendering.com/book.html
 
 The *light source* emits light. The *occluder* is an object that *casts* a shadow onto a *receiver*. A receiver *receives* the shadow cast by the occluder.
 Shadows are achieved through the occluder blocking the light from the light source that is supposed to reach the receiver, therefore coloring the part of the receiver that is occluded darker than the rest.
@@ -142,7 +144,9 @@ Here the `Bias` is not used to counter shadow acne, but so called `Light Leaking
 
 ## Peter Panning
 
-![peter panning image](img/03_7_peter_panning.png)
+![peter panning image](img/03_7_peter_panning.png)[Source 2]
+
+[Source 2]: http://www.opengl-tutorial.org/intermediate-tutorials/tutorial-16-shadow-mapping/#peter-panning
 
 Peter Panning basically means that your object appears to be hovering, even though it shouldn't be.
 
