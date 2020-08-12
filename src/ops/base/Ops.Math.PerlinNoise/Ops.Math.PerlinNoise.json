@@ -35,7 +35,7 @@
             "title": "Perlin Noise Library",
             "author": "Stefan Gustavson / josephg",
             "url": "https://github.com/josephg/noisejs/blob/master/perlin.js",
-            "license": "Public Domain"
+            "licence": "Public Domain"
         }
     ],
     "authorName": "pandur",

@@ -99,7 +99,8 @@
         {
             "title": "Domain Warping Shader",
             "author": "inigo quilez",
-            "url": "http://iquilezles.org/www/articles/warp/warp.htm"
+            "url": "http://iquilezles.org/www/articles/warp/warp.htm",
+            "licence": "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported"
         }
     ],
     "summary": "fractional brownian motion noise ",
