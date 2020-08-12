@@ -1,12 +1,12 @@
-let learnedKeyCode = op.inValueInt("key code");
-let canvasOnly = op.inValueBool("canvas only");
-let modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none");
-let inEnable = op.inValueBool("Enabled", true);
-let preventDefault = op.inValueBool("Prevent Default");
-let learn = op.inTriggerButton("learn");
-let onPress = op.outTrigger("on press");
-let onRelease = op.outTrigger("on release");
-let outPressed = op.outValue("Pressed", false);
+const learnedKeyCode = op.inValueInt("key code");
+const canvasOnly = op.inValueBool("canvas only");
+const modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none");
+const inEnable = op.inValueBool("Enabled", true);
+const preventDefault = op.inValueBool("Prevent Default");
+const learn = op.inTriggerButton("learn");
+const onPress = op.outTrigger("on press");
+const onRelease = op.outTrigger("on release");
+const outPressed = op.outValue("Pressed", false);
 
 const cgl = op.patch.cgl;
 let learning = false;
@@ -14,10 +14,10 @@ let learning = false;
 function onKeyDown(e)
 {
     if (learning)
- {
+    {
         learnedKeyCode.set(e.keyCode);
         if (CABLES.UI)
- {
+        {
             gui.opParams.show(op);
         }
         // op.log("Learned key code: " + learnedKeyCode.get());
@@ -25,10 +25,13 @@ function onKeyDown(e)
         removeListeners();
         addListener();
     }
- else
-{
+    else
+    {
+        // console.log("keys", e.keyCode, learnedKeyCode.get());
         if (e.keyCode == learnedKeyCode.get())
- {
+        {
+            // console.log("keys", e.keyCode, learnedKeyCode.get());
+
             if (modKey.get() == "alt")
             {
                 if (e.altKey === true)
@@ -51,7 +54,7 @@ function onKeyDown(e)
 function onKeyUp(e)
 {
     if (e.keyCode == learnedKeyCode.get())
-{
+    {
         // op.log("Key released, key code: " + e.keyCode);
         onRelease.trigger();
         outPressed.set(false);
@@ -67,13 +70,13 @@ op.onDelete = function ()
 };
 
 learn.onTriggered = function ()
- {
+{
     // op.log("Listening for key...");
     learning = true;
     addDocumentListener();
 
     setTimeout(function ()
- {
+    {
         learning = false;
         removeListeners();
         addListener();
@@ -83,11 +86,11 @@ learn.onTriggered = function ()
 function addListener()
 {
     if (canvasOnly.get() === true)
-{
+    {
         addCanvasListener();
     }
- else
-{
+    else
+    {
         addDocumentListener();
     }
 }
@@ -126,7 +129,7 @@ inEnable.onChange = function ()
 };
 
 canvasOnly.onChange = function ()
- {
+{
     removeListeners();
     addListener();
 };
