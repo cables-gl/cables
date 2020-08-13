@@ -65,13 +65,65 @@ const float PI = 3.1415926535897932384626433832795;
 const float TWO_PI = (2. * PI);
 const float EIGHT_PI = (8. * PI);
 
+#define RECIPROCAL_PI 1./PI
+#define RECIPROCAL_PI2 RECIPROCAL_PI/2.
+
 // TEXTURES
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureIntensities;
 
     #ifdef HAS_TEXTURE_ENV
+    #ifdef TEX_FORMAT_CUBEMAP
+        UNI samplerCube texEnv;
+        #ifndef WEBGL1
+            #define SAMPLETEX textureLod
+        #endif
+        #ifdef WEBGL1
+            #define SAMPLETEX textureCubeLodEXT
+        #endif
+    #endif
+
+    #ifndef TEX_FORMAT_CUBEMAP
+        #define TEX_FORMAT_EQUIRECT
         UNI sampler2D texEnv;
-        UNI float texEnvStrength;
+        #ifdef WEBGL1
+            // #extension GL_EXT_shader_texture_lod : enable
+            #ifdef GL_EXT_shader_texture_lod
+                #define textureLod texture2DLodEXT
+            #endif
+            // #define textureLod texture2D
+        #endif
+        #define SAMPLETEX sampleEquirect
+
+    #endif
+        #ifdef TEX_FORMAT_EQUIRECT
+            const vec2 invAtan = vec2(0.1591, 0.3183);
+            vec4 sampleEquirect(sampler2D tex,vec3 direction,float lod)
+            {
+                #ifndef WEBGL1
+                    vec3 newDirection = normalize(direction);
+            		vec2 sampleUV;
+            		sampleUV.x = -1. * (atan( direction.z, direction.x ) * RECIPROCAL_PI2 + 0.75);
+            		sampleUV.y = asin( clamp(direction.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
+                #endif
+
+                #ifdef WEBGL1
+                    vec3 newDirection = normalize(direction);
+                		vec2 sampleUV = vec2(atan(newDirection.z, newDirection.x), asin(newDirection.y+1e-6));
+                        sampleUV *= vec2(0.1591, 0.3183);
+                        sampleUV += 0.5;
+                #endif
+                return textureLod(tex, sampleUV, lod);
+            }
+        #endif
+
+        UNI float inEnvMapIntensity;
+        UNI float inEnvMapWidth;
+    #endif
+
+    #ifdef HAS_TEXTURE_LUMINANCE_MASK
+        UNI sampler2D texLuminance;
+        UNI float inLuminanceMaskIntensity;
     #endif
 
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -330,13 +382,7 @@ void main()
 
 
 
-#ifdef HAS_TEXTURE_ENV
-    vec3 reflected = reflect(viewDirection, normal);
-    float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
 
-    float lumi=dot(vec3(0.2126,0.7152,0.0722),calculatedColor.rgb);
-    calculatedColor.rgb+= (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*texEnvStrength;
-#endif
 
 
     #ifdef ENABLE_FRESNEL
@@ -378,6 +424,50 @@ void main()
         if(col.a<0.2) discard;
     #endif
 
+
+    #ifdef HAS_TEXTURE_ENV
+        vec3 luminanceColor = vec3(0.);
+        #ifdef ENVMAP_MATCAP
+            vec3 reflected = reflect(normalize(-viewDirection), normal);
+            float m = 2.8284271247461903 * sqrt( reflected.z+1.0 );
+
+            float lumi=dot(vec3(0.2126,0.7152,0.0722), baseColor.rgb);
+
+            luminanceColor = (lumi*texture(texEnv,reflected.xy / m + 0.5).rgb)*inEnvMapIntensity;
+        #endif
+
+        #ifndef ENVMAP_MATCAP
+            float environmentMapWidth = inEnvMapWidth;
+            float glossyExponent = inMaterialProperties.SHININESS;
+            float glossyCoefficient = inMaterialProperties.SPECULAR_AMT;
+
+            vec3 envMapNormal =  normal;
+            vec3 reflectDirection = reflect(normalize(-viewDirection), normal);
+
+            float lambertianCoefficient = dot(viewDirection, reflectDirection); //0.44; // TODO: need prefiltered map for this
+            lambertianCoefficient = 1.;
+            float specularAngle = max(dot(reflectDirection, viewDirection), 0.);
+            float specularFactor = pow(specularAngle, max(0., inMaterialProperties.SHININESS));
+
+            glossyExponent = specularFactor;
+
+            float maxMIPLevel = 9.;
+            float MIPlevel = log2(environmentMapWidth / 1024. * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
+
+            luminanceColor = inEnvMapIntensity * (
+                lambertianCoefficient * inDiffuseColor.rgb
+                * SAMPLETEX(texEnv, envMapNormal, maxMIPLevel).rgb
+                + glossyCoefficient * SAMPLETEX(texEnv, reflectDirection, MIPlevel).rgb
+            );
+        #endif
+
+
+        #ifdef HAS_TEXTURE_LUMINANCE_MASK
+            luminanceColor *= texture(texLuminance, texCoord).r * inLuminanceMaskIntensity;
+        #endif
+
+        calculatedColor.rgb += luminanceColor;
+    #endif
 
     col.rgb = clamp(calculatedColor, 0., 1.);
 

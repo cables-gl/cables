@@ -202,6 +202,11 @@
                 "group": "Textures"
             },
             {
+                "type": "2",
+                "name": "Luminance Mask",
+                "group": "Textures"
+            },
+            {
                 "type": "0",
                 "name": "Colorize Texture",
                 "group": "Texture Transforms",
@@ -234,31 +239,37 @@
             {
                 "type": "0",
                 "name": "Specular Intensity",
-                "group": "Texture Transforms",
+                "group": "Texture Intensities",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Normal Map Intensity",
-                "group": "Texture Transforms",
+                "group": "Texture Intensities",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "AO Intensity",
-                "group": "Texture Transforms",
+                "group": "Texture Intensities",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Emissive Intensity",
-                "group": "Texture Transforms",
+                "group": "Texture Intensities",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Env Map Intensity",
-                "group": "Texture Transforms",
+                "group": "Texture Intensities",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Env Mask Intensity",
+                "group": "Texture Intensities",
                 "subType": "number"
             },
             {
