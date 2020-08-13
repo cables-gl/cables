@@ -1,4 +1,5 @@
 const cgl = op.patch.cgl;
+
 const attachmentFragmentHead = attachments.snippet_head_frag;
 const snippets = {
     "point": attachments.snippet_body_point_frag,
@@ -741,6 +742,29 @@ inTrigger.onTriggered = function ()
 
     cgl.setPreviousShader();
 };
+
+if (cgl.glVersion == 1)
+{
+    if (!cgl.gl.getExtension("EXT_shader_texture_lod"))
+    {
+        op.log("no EXT_shader_texture_lod texture extension");
+        // throw "no EXT_shader_texture_lod texture extension";
+    }
+    else
+    {
+        shader.enableExtension("GL_EXT_shader_texture_lod");
+        cgl.gl.getExtension("OES_texture_float");
+        cgl.gl.getExtension("OES_texture_float_linear");
+        cgl.gl.getExtension("OES_texture_half_float");
+        cgl.gl.getExtension("OES_texture_half_float_linear");
+
+        shader.enableExtension("GL_OES_standard_derivatives");
+        shader.enableExtension("GL_OES_texture_float");
+        shader.enableExtension("GL_OES_texture_float_linear");
+        shader.enableExtension("GL_OES_texture_half_float");
+        shader.enableExtension("GL_OES_texture_half_float_linear");
+    }
+}
 
 updateDiffuseTexture();
 updateSpecularTexture();

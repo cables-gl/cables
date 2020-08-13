@@ -73,10 +73,32 @@ const float EIGHT_PI = (8. * PI);
     UNI vec4 inTextureIntensities;
 
     #ifdef HAS_TEXTURE_ENV
-    // #define TEX_FORMAT_EQUIRECT // TODO: remove and replace with toggleDefine
+    #ifdef TEX_FORMAT_CUBEMAP
+        UNI samplerCube texEnv;
+        #ifndef WEBGL1
+            #define SAMPLETEX textureLod
+        #endif
+        #ifdef WEBGL1
+            #define SAMPLETEX textureCubeLodEXT
+        #endif
+    #endif
+
+    #ifndef TEX_FORMAT_CUBEMAP
+        #define TEX_FORMAT_EQUIRECT
+        UNI sampler2D texEnv;
+        #ifdef WEBGL1
+            // #extension GL_EXT_shader_texture_lod : enable
+            #ifdef GL_EXT_shader_texture_lod
+                #define textureLod texture2DLodEXT
+            #endif
+            // #define textureLod texture2D
+        #endif
+        #define SAMPLETEX sampleEquirect
+
+    #endif
         #ifdef TEX_FORMAT_EQUIRECT
             const vec2 invAtan = vec2(0.1591, 0.3183);
-            vec4 sampleEquirect(sampler2D tex,vec3 direction, float lod)
+            vec4 sampleEquirect(sampler2D tex,vec3 direction,float lod)
             {
                 #ifndef WEBGL1
                     vec3 newDirection = normalize(direction);
@@ -97,29 +119,6 @@ const float EIGHT_PI = (8. * PI);
 
         UNI float inEnvMapIntensity;
         UNI float inEnvMapWidth;
-
-        #ifdef TEX_FORMAT_CUBEMAP
-            UNI samplerCube texEnv;
-            #ifndef WEBGL1
-                #define SAMPLETEX textureLod
-            #endif
-            #ifdef WEBGL1
-                #define SAMPLETEX textureCubeLodEXT
-            #endif
-        #endif
-
-        #ifndef TEX_FORMAT_CUBEMAP
-            #define TEX_FORMAT_EQUIRECT
-            UNI sampler2D texEnv;
-            #ifdef WEBGL1
-                // #extension GL_EXT_shader_texture_lod : enable
-                #ifdef GL_EXT_shader_texture_lod
-                    #define textureLod texture2DLodEXT
-                #endif
-                // #define textureLod texture2D
-            #endif
-            #define SAMPLETEX sampleEquirect
-        #endif
     #endif
 
     #ifdef HAS_TEXTURE_LUMINANCE_MASK
