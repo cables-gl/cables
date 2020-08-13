@@ -1,18 +1,21 @@
-IN vec4 modelPos;
 IN vec3 viewDirection;
 IN vec3 normInterpolated;
 IN vec2 texCoord;
-IN vec4 cameraSpace_pos;
 
-IN mat3 normalMatrix; // when instancing...
-IN mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
+#ifdef ENABLE_FRESNEL
+    IN vec4 cameraSpace_pos;
+#endif
+
+// IN mat3 normalMatrix; // when instancing...
+
+#ifdef HAS_TEXTURE_NORMAL
+    IN mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
+#endif
+
 IN vec3 fragPos;
 IN vec3 v_viewDirection;
 
-IN vec3 mvNormal;
-IN vec3 mvTangent;
-IN vec3 mvBiTangent;
-IN mat4 mvMatrix;
+// IN mat4 mvMatrix;
 
 UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
