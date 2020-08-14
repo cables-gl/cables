@@ -6,11 +6,16 @@ The main ops that you'll need are:
 - shader2Texture op
 - fullscreen rectangle op
 
+standard glsl in [shadertoy](https://www.shadertoy.com/) and the equivalant in cables is :
+```javascript
+fragCoord.xy                                //pixel coordinates in shadertoy
+gl_FragCoord.xy                             //pixel coordinates in cables
+```
 The uniforms on [shadertoy](https://www.shadertoy.com/) and their equivalent in cables are as follows:
 
 ```javascript
 uniform vec3      iResolution;              // viewport resolution (in pixels)
-UNI vec3          iResolution               // get width and height output from mainloop,canvasinfo for aspect ratio/z
+UNI vec3          iResolution;              // get width and height output from mainloop,canvasinfo for aspect ratio/z
 
 uniform float     iTime;                    // shader playback time (in seconds)
 UNI float         iTime;                    // Use the output of the timer op
@@ -25,7 +30,7 @@ uniform float     iChannelTime[4];          // channel playback time (in seconds
 UNI float         iChannelTime0;            // get the current playtime from the relevant media op
 
 uniform vec3      iChannelResolution[4];    // channel resolution (in pixels)
-// UNI vec3      iChannelResolution0..3;       // channel resolution (in pixels)
+UNI vec3      iChannelResolution0..3;       // channel resolution (in pixels)
 
 // uniform vec4      iMouse;                   // mouse pixel coords. xy: current (if MLB down), zw: click   
 
