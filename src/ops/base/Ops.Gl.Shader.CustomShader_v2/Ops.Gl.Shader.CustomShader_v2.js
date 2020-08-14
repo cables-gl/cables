@@ -212,7 +212,7 @@ function parseUniforms(src)
                                 group.push(newInputZ);
                                 vec.z = newInputZ;
                             }
-                            else if (num > 3)
+                            if (num > 3)
                             {
                                 const newInputW = op.inFloat(uniName + " W", 0);
                                 newInputW.onChange = function () { this.changed = true; }.bind(vec);
