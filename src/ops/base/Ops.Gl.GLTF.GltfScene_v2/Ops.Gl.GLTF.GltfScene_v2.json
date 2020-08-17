@@ -94,6 +94,11 @@
                 "name": "Vertices Format"
             },
             {
+                "type": "0",
+                "name": "Calc Normals",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "Materials"
             },

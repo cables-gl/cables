@@ -18,6 +18,7 @@ const
 
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
+    inCalcNormals = op.inBool("Calc Normals", false),
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
@@ -40,6 +41,7 @@ const le = true; // little endian
 const cgl = op.patch.cgl;
 inFile.onChange =
     inVertFormat.onChange =
+    inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
 let cam = null;

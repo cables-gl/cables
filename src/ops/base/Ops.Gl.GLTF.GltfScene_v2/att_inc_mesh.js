@@ -42,26 +42,34 @@ var gltfMesh=class
 
         if(inNormFormat.get()=="X-ZY")
         {
-            for(var i=0;i<geom.vertexNormals.length;i+=3)
+            for(let i=0;i<geom.vertexNormals.length;i+=3)
             {
-                var t=geom.vertexNormals[i+2];
+                let t=geom.vertexNormals[i+2];
                 geom.vertexNormals[i+2]=geom.vertexNormals[i+1];
                 geom.vertexNormals[i+1]=-t;
             }
+
+            // for(let i=0;i<geom.tangents.length;i+=3)
+            // {
+            //     let t=geom.tangents[i+2];
+            //     geom.tangents[i+2]=geom.tangents[i+1];
+            //     geom.tangents[i+1]=-t;
+
+            // }
         }
 
 
         if(inVertFormat.get()=="XZ-Y")
         {
-            for(var i=0;i<geom.vertices.length;i+=3)
+            for(let i=0;i<geom.vertices.length;i+=3)
             {
-                var t=geom.vertices[i+2];
+                let t=geom.vertices[i+2];
                 geom.vertices[i+2]=-geom.vertices[i+1];
                 geom.vertices[i+1]=t;
             }
         }
 
-        if(!geom.vertexNormals.length) geom.calculateNormals();
+        if(!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
 
         geom.calcTangentsBitangents();
     }
