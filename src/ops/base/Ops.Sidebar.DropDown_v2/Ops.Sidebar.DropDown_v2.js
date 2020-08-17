@@ -85,6 +85,7 @@ function onValuesPortChange()
     {
         valuePort.set("");
     }
+
     setSelectedProperty(); /* set the selected property for the default value */
 }
 
@@ -94,7 +95,7 @@ function setSelectedProperty()
     const optionElements = input.querySelectorAll("option");
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.value === defaultItem)
+        if (optionElement.value.trim() === defaultItem.trim())
         {
             optionElement.setAttribute("selected", "");
             outIndex.set(index);

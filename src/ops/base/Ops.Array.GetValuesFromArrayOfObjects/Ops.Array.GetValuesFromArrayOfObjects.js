@@ -24,7 +24,7 @@ function exec()
     {
         const obj = arr[i];
 
-        if (obj.hasOwnProperty(key))
+        if (obj && obj.hasOwnProperty(key))
         {
             if (numsonly)
             {

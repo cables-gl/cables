@@ -1,5 +1,4 @@
 {
-    "updated": 1541834703631,
     "authorName": "pandur",
     "id": "aa47bb8b-d5d7-4175-b217-ab0157d3365d",
     "created": 1541806753392,
@@ -17,7 +16,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.String.StringLength2"
+        "name": "Ops.String.StringLength_v2"
     },
     "summary": "number of characters in a string",
     "youtubeid": "",

@@ -339,7 +339,8 @@ function printInfo()
 
         for(var i=0;i<gltf.json.images.length;i++)
         {
-            sizes.images+=gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
+            if(gltf.json.images[i].bufferView)
+                sizes.images+=gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
 
             html+='<tr>';
             html+='<td>'+gltf.json.images[i].name+'</td>';

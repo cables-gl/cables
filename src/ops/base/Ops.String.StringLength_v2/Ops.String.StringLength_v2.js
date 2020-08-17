@@ -1,9 +1,9 @@
 const
-    inStr=op.inString("String"),
-    result=op.outValue("Result");
+    inStr = op.inString("String"),
+    result = op.outValue("Result");
 
-inStr.onChange=function()
+inStr.onChange = function ()
 {
-    if(!inStr.get()) result.set(-1);
-        else result.set( inStr.get().length );
+    if (!inStr.get()) result.set(-1);
+    else result.set(String(inStr.get()).length);
 };
