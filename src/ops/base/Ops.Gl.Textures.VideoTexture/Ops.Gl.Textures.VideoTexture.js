@@ -255,25 +255,27 @@ function embedVideo(force)
 {
     canPlayThrough.set(false);
     if (filename.get() != 0 && filename.get().length > 1)
-        if (inPreload.get() || force)
-        {
+        firstTime = true;
+
+    if (inPreload.get() || force)
+    {
         // console.log("embedVideo"+filename.get() );
-            clearTimeout(timeout);
-            loading.set(true);
-            videoElement.preload = "true";
-            const url = op.patch.getFilePath(filename.get());
-            videoElement.setAttribute("src", url);
-            videoElement.setAttribute("crossOrigin", "anonymous");
-            videoElement.playbackRate = speed.get();
-            if (!addedListeners)
-            {
-                addedListeners = true;
-                videoElement.addEventListener("canplaythrough", initVideo, true);
-                videoElement.addEventListener("loadedmetadata", loadedMetaData);
-                videoElement.addEventListener("playing", function () { videoElementPlaying = true; }, true);
-            }
-            embedded = true;
+        clearTimeout(timeout);
+        loading.set(true);
+        videoElement.preload = "true";
+        const url = op.patch.getFilePath(filename.get());
+        videoElement.setAttribute("src", url);
+        videoElement.setAttribute("crossOrigin", "anonymous");
+        videoElement.playbackRate = speed.get();
+        if (!addedListeners)
+        {
+            addedListeners = true;
+            videoElement.addEventListener("canplaythrough", initVideo, true);
+            videoElement.addEventListener("loadedmetadata", loadedMetaData);
+            videoElement.addEventListener("playing", function () { videoElementPlaying = true; }, true);
         }
+        embedded = true;
+    }
 }
 
 
