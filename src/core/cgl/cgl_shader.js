@@ -217,6 +217,7 @@ Shader.prototype.copy = function ()
 
     shader._modGroupCount = this._modGroupCount;
     shader._moduleNames = this._moduleNames;
+    shader.glPrimitive = this.glPrimitive;
     shader.offScreenPass = this.offScreenPass;
     for (let i = 0; i < this._uniforms.length; i++)
     {
