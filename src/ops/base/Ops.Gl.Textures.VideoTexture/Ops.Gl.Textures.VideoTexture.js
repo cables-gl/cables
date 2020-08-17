@@ -7,7 +7,7 @@ const volume = op.inValueSlider("Volume");
 const muted = op.inValueBool("mute", true);
 const speed = op.inValueFloat("speed", 1);
 
-const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
+const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear");
 const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 
 const flip = op.inValueBool("flip", true);
@@ -24,12 +24,10 @@ const outTime = op.outValue("CurrentTime");
 const loading = op.outValue("Loading");
 const canPlayThrough = op.outValueBool("Can Play Through", false);
 
-
 const
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
     outAspect = op.outNumber("Aspect Ratio");
-
 
 let videoElementPlaying = false;
 let embedded = false;
@@ -37,7 +35,6 @@ const cgl = op.patch.cgl;
 const videoElement = document.createElement("video");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("webkit-playsinline", "");
-
 
 fps.set(25);
 volume.set(1);
@@ -136,6 +133,7 @@ tfilter.onChange = function ()
     if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
     if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
+    loadVideo();
     tex = null;
 };
 
@@ -144,6 +142,7 @@ wrap.onChange = function ()
     if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
     if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
     if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    loadVideo();
     tex = null;
 };
 
@@ -159,8 +158,8 @@ function updateTexture()
         return;
     }
 
-
     if (!tex)reInitTexture();
+
     if (!videoElementPlaying) return;
 
     tex.height = videoElement.videoHeight;
@@ -248,7 +247,6 @@ function loadedMetaData()
     // console.log('buffered ',videoElement.buffered);
 }
 
-
 let addedListeners = false;
 
 function embedVideo(force)
@@ -277,7 +275,6 @@ function embedVideo(force)
         embedded = true;
     }
 }
-
 
 function loadVideo()
 {
