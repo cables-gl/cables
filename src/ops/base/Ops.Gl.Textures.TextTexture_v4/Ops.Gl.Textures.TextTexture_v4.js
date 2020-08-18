@@ -247,6 +247,7 @@ function refresh()
             txt = newString;
             strings = txt.split("\n");
         }
+        strings = removeEmptyLines(strings);
 
         if (limitLines.get() > 0 && strings.length > limitLines.get())
         {

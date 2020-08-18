@@ -51,13 +51,14 @@ height.set(720);
 
 play.onChange = function ()
 {
-    if (play.get())
-    {
-        anim.play();
+    if (anim)
+        if (play.get())
+        {
+            anim.play();
 
         // updateTexture();
-    }
-    else anim.pause();
+        }
+        else anim.pause();
 };
 
 

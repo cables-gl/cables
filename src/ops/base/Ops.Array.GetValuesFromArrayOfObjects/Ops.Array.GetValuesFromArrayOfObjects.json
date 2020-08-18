@@ -41,7 +41,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArrayOfObjectsValueArray"
+        "name": "Ops.Array.GetValuesFromArrayOfObjects"
     },
     "summary": "Get an array of values by key of objects in an array",
     "issues": "",

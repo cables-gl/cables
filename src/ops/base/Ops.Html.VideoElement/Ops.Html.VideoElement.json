@@ -69,6 +69,19 @@
                 "type": "0",
                 "name": "Time",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Ended"
+            },
+            {
+                "type": "0",
+                "name": "Has Error",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Error Message"
             }
         ],
         "name": "Ops.Html.VideoElement"
