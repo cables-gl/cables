@@ -1,21 +1,20 @@
 const
-    trigger=op.inTriggerButton("trigger"),
-    reset=op.inTriggerButton("reset"),
-    outBool=op.outValue("result");
+    trigger = op.inTriggerButton("trigger"),
+    reset = op.inTriggerButton("reset"),
+    outBool = op.outBool("result");
 
-var theBool=false;
+let theBool = false;
 outBool.set(theBool);
-outBool.ignoreValueSerialize=true;
+outBool.ignoreValueSerialize = true;
 
-trigger.onTriggered=function()
+trigger.onTriggered = function ()
 {
-    theBool=!theBool;
+    theBool = !theBool;
     outBool.set(theBool);
 };
 
-reset.onTriggered=function()
+reset.onTriggered = function ()
 {
-    theBool=false;
+    theBool = false;
     outBool.set(theBool);
 };
-
