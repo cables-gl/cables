@@ -1,14 +1,14 @@
 {
-    "id": "e7ad2b7f-469e-438e-9d3d-fcc7254902f1",
+    "id": "02ca1ecb-b087-4000-90f9-de96dca2f459",
     "changelog": [
         {
             "message": "created op",
             "author": "andro",
-            "date": 1597834451525
+            "date": 1597848371922
         }
     ],
     "authorName": "andro",
-    "created": 1597834522898,
+    "created": 1597848388840,
     "layout": {
         "portsIn": [
             {
@@ -27,6 +27,6 @@
                 "name": "Array out"
             }
         ],
-        "name": "Ops.Array.StringToArray"
+        "name": "Ops.Array.StringToCharArray"
     }
 }
