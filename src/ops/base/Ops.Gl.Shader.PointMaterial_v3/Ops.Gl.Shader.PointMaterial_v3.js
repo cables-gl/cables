@@ -17,14 +17,17 @@ const
     texMaskChan = op.inSwitch("Mask Channel", ["R", "A", "Luminance"], "R"),
     textureColorize = op.inTexture("Texture Colorize"),
     colorizeRandom = op.inValueBool("Colorize Randomize", true),
+    texturePointSize = op.inTexture("Texture Point Size"),
+    texturePointSizeMul = op.inFloat("Texture Point Size Mul", 1),
     flipTex = op.inValueBool("Flip Texture", false),
 
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader");
 
 op.setPortGroup("Texture", [texture, textureMask, texMaskChan, textureColorize]);
+
 op.setPortGroup("Color", [r, g, b, a, vertCols]);
-op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize]);
+op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize, texturePointSize, texturePointSizeMul]);
 r.setUiAttribs({ "colorPick": true });
 
 const shader = new CGL.Shader(cgl, "PointMaterial");
@@ -33,12 +36,15 @@ shader.define("MAKE_ROUND");
 
 const
     uniPointSize = new CGL.Uniform(shader, "f", "pointSize", pointSize),
+    texturePointSizeMulUniform = new CGL.Uniform(shader, "f", "texPointSizeMul", texturePointSizeMul),
     uniRandomSize = new CGL.Uniform(shader, "f", "randomSize", randomSize),
     uniColor = new CGL.Uniform(shader, "4f", "color", r, g, b, a),
     uniWidth = new CGL.Uniform(shader, "f", "canvasWidth", cgl.canvasWidth),
     uniHeight = new CGL.Uniform(shader, "f", "canvasHeight", cgl.canvasHeight),
     textureUniform = new CGL.Uniform(shader, "t", "diffTex", 0),
     textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize", 0),
+    textureColoPointSize = new CGL.Uniform(shader, "t", "texColorize", 0),
+    texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize", 0),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 0);
 
 shader.setSource(attachments.pointmat_vert, attachments.pointmat_frag);
@@ -57,6 +63,7 @@ doScale.onChange =
     textureColorize.onChange =
     texMaskChan.onChange =
     inPixelSize.onChange =
+    texturePointSize.onChange =
     vertCols.onChange = updateDefines;
 
 
@@ -77,6 +84,7 @@ function doRender()
     if (texture.get()) shader.pushTexture(textureUniform, texture.get().tex);
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
+    if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get().tex);
 
     trigger.trigger();
 
@@ -93,6 +101,8 @@ function updateDefines()
     shader.toggleDefine("HAS_TEXTURE_DIFFUSE", texture.get());
     shader.toggleDefine("HAS_TEXTURE_MASK", textureMask.get());
     shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.get());
+    shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.get());
+
     shader.toggleDefine("FLIP_TEX", flipTex.get());
     shader.toggleDefine("TEXTURE_MASK_R", texMaskChan.get() == "R");
     shader.toggleDefine("TEXTURE_MASK_A", texMaskChan.get() == "A");

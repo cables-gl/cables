@@ -72,8 +72,11 @@ function realReload(nocache)
     if (!loadingId)loadingId = cgl.patch.loading.start("textureOp", filename.get());
 
     let url = op.patch.getFilePath(String(filename.get()));
+
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
+
+    if (filename.get().indexOf("data:") == 0) url = filename.get();
 
     loadedFilename = filename.get();
 
