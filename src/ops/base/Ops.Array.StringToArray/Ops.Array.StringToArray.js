@@ -1,5 +1,6 @@
 const
     strIn = op.inString("String", "test"),
+    convertToNumbersBool = op.inBool("Convert to numbers", false),
     arrOut = op.outArray("Array out");
 
 const arr = [];
@@ -11,10 +12,19 @@ function update()
 
     arr.length = 0;
     arr.length = strLength;
-
-    for (let i = 0; i < strLength; i++)
+    if (convertToNumbersBool.get())
     {
-        arr[i] = str.charAt(i);
+        for (let i = 0; i < strLength; i++)
+        {
+            arr[i] = str.charCodeAt(i);
+        }
+    }
+    else
+    {
+        for (let i = 0; i < strLength; i++)
+        {
+            arr[i] = str.charAt(i);
+        }
     }
 
     arrOut.set(null);
@@ -22,4 +32,4 @@ function update()
 }
 
 update();
-strIn.onChange = update;
+strIn.onChange = convertToNumbersBool.onChange = update;

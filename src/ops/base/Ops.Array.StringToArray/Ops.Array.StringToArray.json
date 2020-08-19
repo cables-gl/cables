@@ -14,6 +14,11 @@
             {
                 "type": "5",
                 "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Convert to numbers",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
