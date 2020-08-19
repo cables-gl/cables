@@ -1,0 +1,27 @@
+{
+    "id": "e7ad2b7f-469e-438e-9d3d-fcc7254902f1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1597834451525
+        }
+    ],
+    "authorName": "andro",
+    "created": 1597834522898,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.StringToArray"
+    }
+}
