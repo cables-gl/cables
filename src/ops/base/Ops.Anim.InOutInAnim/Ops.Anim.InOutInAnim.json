@@ -22,6 +22,11 @@
             },
             {
                 "type": "0",
+                "name": "Hold duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Duration In",
                 "subType": "number"
             },
@@ -52,7 +57,15 @@
             },
             {
                 "type": "1",
+                "name": "Started"
+            },
+            {
+                "type": "1",
                 "name": "Middle"
+            },
+            {
+                "type": "1",
+                "name": "finished"
             }
         ],
         "name": "Ops.Anim.InOutInAnim"
