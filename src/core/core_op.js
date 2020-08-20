@@ -975,10 +975,7 @@ const Op = function ()
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
 
-        if (cleanUp)
-        {
-            if (this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
-        }
+        if (cleanUp && this.uiAttribs.hasOwnProperty("uierrors")) delete this.uiAttribs.uierrors;
 
         op.portsIn = [];
         op.portsOut = [];

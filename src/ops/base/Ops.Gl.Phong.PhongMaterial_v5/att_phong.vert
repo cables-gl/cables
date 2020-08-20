@@ -20,16 +20,20 @@ IN vec3 attrTangent;
 IN vec3 attrBiTangent;
 
 OUT vec2 texCoord;
-OUT vec3 norm;
 OUT vec3 normInterpolated;
-OUT vec3 tangent;
-OUT vec3 bitangent;
 OUT vec3 fragPos;
-OUT vec4 modelPos;
 
-OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
-OUT vec4 cameraSpace_pos;
+#ifdef HAS_TEXTURE_NORMAL
+    OUT mat3 TBN_Matrix; // tangent bitangent normal space transform matrix
+#endif
+
+#ifdef ENABLE_FRESNEL
+    OUT vec4 cameraSpace_pos;
+#endif
+
 OUT vec3 v_viewDirection;
+OUT mat3 normalMatrix;
+OUT mat4 mvMatrix;
 
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;
@@ -39,8 +43,6 @@ UNI vec3 camPos;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
-OUT mat3 normalMatrix;
-OUT mat4 mvMatrix;
 // UNI mat4 normalMatrix;
 
 
@@ -75,10 +77,10 @@ void main()
 
     texCoord=attrTexCoord;
     texCoord.y = 1. - texCoord.y;
-    norm=attrVertNormal;
+    vec3 norm=attrVertNormal;
 
-    tangent = attrTangent;
-    bitangent = attrBiTangent;
+    vec3 tangent = attrTangent;
+    vec3 bitangent = attrBiTangent;
 
     {{MODULE_VERTEX_POSITION}}
 
@@ -87,7 +89,9 @@ void main()
 
 
 
-    cameraSpace_pos = mvMatrix * pos;
+    #ifdef ENABLE_FRESNEL
+        cameraSpace_pos = mvMatrix * pos;
+    #endif
 
     #ifdef HAS_TEXTURES
         float repeatX = inTextureRepeatOffset.TEX_REPEAT_X;
@@ -103,20 +107,22 @@ void main()
 
    normInterpolated = vec3(normalMatrix*norm);
 
-    vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
-    vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
-    vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
+    #ifdef HAS_TEXTURE_NORMAL
+        vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
+        vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
+        vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
 
-    // re orthogonalization for smoother normals
-    tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
-    bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
+        // re orthogonalization for smoother normals
+        tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
+        bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
 
-    TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
 
+        TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
+    #endif
 
     fragPos = vec3((mMatrix) * pos);
     v_viewDirection = normalize(camPos - fragPos);
-    modelPos=mMatrix*pos;
+    // modelPos=mMatrix*pos;
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

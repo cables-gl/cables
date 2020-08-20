@@ -367,7 +367,11 @@ function setUniforms()
 
         if (!light.isUsed) light.isUsed = true;
 
-        shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
+        if (light.type !== "point") shaderModule.setUniformValue("MOD_light" + i + ".position", light.position);
+        else
+        {
+            shaderModule.setUniformValue("MOD_light" + i + ".position", light.positionForShadowMap);
+        }
         shaderModule.setUniformValue("MOD_light" + i + ".typeCastShadow", [
             LIGHT_TYPES[light.type],
             Number(light.castShadow),
@@ -399,6 +403,7 @@ function setUniforms()
                 light.shadowMap.width,
                 light.shadowBias
             ]);
+
             if (light.type === "point") shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
 
 
@@ -539,9 +544,17 @@ function checkUiErrors()
         else
         {
             op.setUiError("nolights", null);
-            let oneLightCastsShadow = false;
 
-            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1) oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+            let oneLightCastsShadow = false;
+            let allLightsBlurAboveZero = true;
+
+            for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
+            {
+                oneLightCastsShadow = oneLightCastsShadow || cgl.frameStore.lightStack[i].castShadow;
+
+                if (cgl.frameStore.lightStack[i].castShadow && cgl.frameStore.lightStack[i].type !== "point")
+                    allLightsBlurAboveZero = allLightsBlurAboveZero && (cgl.frameStore.lightStack[i].blurAmount > 0);
+            }
 
             if (oneLightCastsShadow)
             {
@@ -559,6 +572,22 @@ function checkUiErrors()
             {
                 op.setUiError("nolights2", "There are lights in the patch but none that cast shadows. Please activate the \"Cast Shadow\" property of one of your lights in the patch to make shadows visible.", 1);
                 op.setUiError("inReceiveShadowActive", null);
+            }
+
+            if (!allLightsBlurAboveZero)
+            {
+                if (inAlgorithm.get() === "VSM")
+                {
+                    op.setUiError("vsmBlurZero", "You chose the VSM algorithm but one of your lights still has a blur amount of 0. For VSM to work correctly, consider raising the blur amount in your lights.", 1);
+                }
+                else
+                {
+                    op.setUiError("vsmBlurZero", null);
+                }
+            }
+            else
+            {
+                op.setUiError("vsmBlurZero", null);
             }
         }
     }

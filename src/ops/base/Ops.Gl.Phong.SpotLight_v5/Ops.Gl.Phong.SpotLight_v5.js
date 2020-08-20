@@ -3,11 +3,12 @@ const cgl = op.patch.cgl;
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 
-const inIntensity = op.inFloat("Intensity", 5);
+const inCastLight = op.inBool("Cast Light", true);
+const inIntensity = op.inFloat("Intensity", 2);
 const inRadius = op.inFloat("Radius", 10);
 
 const inPosX = op.inFloat("X", 1);
-const inPosY = op.inFloat("Y", 2);
+const inPosY = op.inFloat("Y", 3);
 const inPosZ = op.inFloat("Z", 1);
 
 const positionIn = [inPosX, inPosY, inPosZ];
@@ -33,28 +34,30 @@ inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
-const inConeAngle = op.inFloat("Cone Angle", 130);
+const inConeAngle = op.inFloat("Cone Angle", 120);
 const inConeAngleInner = op.inFloat("Inner Cone Angle", 60);
 const inSpotExponent = op.inFloat("Spot Exponent", 0.97);
 const coneAttribsIn = [inConeAngle, inConeAngleInner, inSpotExponent];
 op.setPortGroup("Cone Attributes", coneAttribsIn);
 
 const inFalloff = op.inFloatSlider("Falloff", 0.00001);
-const lightAttribsIn = [inIntensity, inRadius];
+const lightAttribsIn = [inCastLight, inIntensity, inRadius];
 op.setPortGroup("Light Attributes", lightAttribsIn);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 0.99);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
-const inBias = op.inFloatSlider("Bias", 0.004);
-const inPolygonOffset = op.inInt("Polygon Offset", 1);
-const inNormalOffset = op.inFloatSlider("Normal Offset", 0.027);
+const inBias = op.inFloatSlider("Bias", 0.0001);
+const inPolygonOffset = op.inInt("Polygon Offset", 0);
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
 op.setPortGroup("Shadow Map Settings", [
     inMapSize,
+    inRenderMapActive,
     inShadowStrength,
     inNear,
     inFar,
@@ -66,6 +69,7 @@ op.setPortGroup("Shadow Map Settings", [
 
 
 inMapSize.setUiAttribs({ "greyout": true, "hidePort": true });
+inRenderMapActive.setUiAttribs({ "greyout": true });
 inShadowStrength.setUiAttribs({ "greyout": true });
 inNear.setUiAttribs({ "greyout": true, "hidePort": true });
 inFar.setUiAttribs({ "greyout": true, "hidePort": true });
@@ -104,6 +108,9 @@ inAdvanced.onChange = function ()
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
+const outWorldPosX = op.outNumber("World Position X");
+const outWorldPosY = op.outNumber("World Position Y");
+const outWorldPosZ = op.outNumber("World Position Z");
 
 const newLight = new CGL.Light(cgl, {
     "type": "spot",
@@ -123,6 +130,8 @@ const newLight = new CGL.Light(cgl, {
     "normalOffset": inNormalOffset.get(),
 });
 
+newLight.castLight = inCastLight.get();
+
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 newLight.createShadowMapShader();
 newLight.createBlurEffect({});
@@ -131,8 +140,8 @@ newLight.updateProjectionMatrix(null, inNear.get(), inFar.get(), inConeAngle.get
 
 let updateLight = false;
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
-= inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
+= inPointAtX.onChange = inPointAtY.onChange = inPointAtZ.onChange = inPosX.onChange = inPosY.onChange = inPosZ.onChange;
+inCastLight.onChange = inIntensity.onChange = inRadius.onChange = inFalloff.onChange = inConeAngle.onChange = inConeAngleInner.onChange
 = inSpotExponent.onChange = inShadowStrength.onChange = updateLightParameters;
 
 function updateLightParameters()
@@ -161,6 +170,7 @@ inCastShadow.onChange = function ()
     newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !castShadow });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
     inFar.setUiAttribs({ "greyout": !castShadow });
@@ -282,6 +292,7 @@ inTrigger.onTriggered = function ()
         newLight.specular = [0, 1, 2].map(function (i) { return colorSpecularIn[i].get(); });
         newLight.conePointAt = [0, 1, 2].map(function (i) { return pointAtIn[i].get(); });
         newLight.intensity = inIntensity.get();
+        newLight.castLight = inCastLight.get();
         newLight.radius = inRadius.get();
         newLight.falloff = inFalloff.get();
         newLight.cosConeAngleInner = Math.cos(CGL.DEG2RAD * inConeAngleInner.get());
@@ -301,6 +312,9 @@ inTrigger.onTriggered = function ()
     newLight.position = resultPos;
     newLight.conePointAt = resultPointAt;
 
+    outWorldPosX.set(newLight.position[0]);
+    outWorldPosY.set(newLight.position[1]);
+    outWorldPosZ.set(newLight.position[2]);
 
     drawHelpers();
 
@@ -309,7 +323,7 @@ inTrigger.onTriggered = function ()
     if (inCastShadow.get())
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
-        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
 
@@ -317,7 +331,7 @@ inTrigger.onTriggered = function ()
         cgl.frameStore.lightStack.pop();
 
         newLight.castShadow = inCastShadow.get();
-
+        newLight.blurAmount = inBlur.get();
         newLight.normalOffset = inNormalOffset.get();
         newLight.shadowBias = inBias.get();
         newLight.shadowStrength = inShadowStrength.get();

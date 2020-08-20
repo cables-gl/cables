@@ -505,7 +505,7 @@ const Context = function (_patch)
         if (!this._frameStarted)
         {
             console.warn("frame not started " + string);
-            console.log(new Error().stack);
+            // console.log(new Error().stack);
         }
     };
 

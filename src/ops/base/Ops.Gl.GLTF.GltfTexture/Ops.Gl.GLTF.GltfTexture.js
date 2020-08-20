@@ -36,6 +36,11 @@ inExec.onTriggered = function ()
 
     if (!cgl.frameStore.currentScene || !cgl.frameStore.currentScene.json) return;
 
+    if (cgl.frameStore.currentScene.chunks.length < 2)
+    {
+        return;
+    }
+
     console.log(cgl.frameStore.currentScene);
 
     // const texInfo = cgl.frameStore.currentScene.json.textures[0];
@@ -62,6 +67,8 @@ inExec.onTriggered = function ()
 
     const buffView = cgl.frameStore.currentScene.json.bufferViews[img.bufferView];
     const dv = cgl.frameStore.currentScene.chunks[1].dataView;
+
+    if (!buffView) return;
     const data = new Uint8Array(buffView.byteLength);
 
     for (let i = 0; i < buffView.byteLength; i++)

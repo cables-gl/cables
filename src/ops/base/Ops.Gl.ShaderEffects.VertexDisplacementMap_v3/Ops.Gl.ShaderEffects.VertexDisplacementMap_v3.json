@@ -82,7 +82,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.VertexDisplacementMap3"
+        "name": "Ops.Gl.ShaderEffects.VertexDisplacementMap_v3"
     },
     "changelog": [
         {

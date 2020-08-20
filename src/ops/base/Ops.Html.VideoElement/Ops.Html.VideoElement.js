@@ -11,12 +11,13 @@ const
     outEle = op.outObject("Element"),
     outPlaying = op.outBool("Playing"),
     outCanplaythrough = op.outBool("Can Play Through"),
-    outTime = op.outNumber("Time");
-
-
+    outTime = op.outNumber("Time"),
+    outEnded = op.outTrigger("Ended"),
+    outHasError = op.outBool("Has Error"),
+    outError = op.outString("Error Message");
 op.setPortGroup("Attributes", [src, elId]);
 
-let element = null;
+let element = document.createElement("video");
 let timeOut = null;
 
 op.onDelete = removeEle;
@@ -41,23 +42,36 @@ controls.onChange = updateVideoSettings;
 
 function updateVideoSettings()
 {
+    if (!element) return;
     if (controls.get()) element.controls = "true";
-    else element.removeAttribute("controls");
+    else
+    {
+        element.controls = "true";
+        element.removeAttribute("controls");
+    }
 
     if (loop.get()) element.loop = "true";
     else element.removeAttribute("loop");
+
+    console.log("element.controls", element.controls);
 }
 
-play.onChange = () =>
+function updatePlay()
 {
     if (!element) return;
     if (play.get())element.play();
     else element.pause();
+}
+
+play.onChange = () =>
+{
+    updatePlay();
 };
+
 
 rewind.onTriggered = function ()
 {
-    element.currentTime = 0;
+    if (element) element.currentTime = 0;
 };
 
 
@@ -73,6 +87,9 @@ function addElement()
     element.setAttribute("crossOrigin", "anonymous");
     outCanplaythrough.set(false);
 
+    outHasError.set(false);
+    outError.set("");
+
     element.addEventListener("canplaythrough", () =>
     {
         outCanplaythrough.set(true);
@@ -81,6 +98,10 @@ function addElement()
     {
         outPlaying.set(true);
     }, true);
+    element.addEventListener("ended", () =>
+    {
+        outEnded.trigger();
+    }, true);
     element.addEventListener("pause", () =>
     {
         outPlaying.set(false);
@@ -88,9 +109,18 @@ function addElement()
 
     element.addEventListener("timeupdate", () =>
     {
-        outTime.set(element.currentTime);
+        if (element)outTime.set(element.currentTime);
     }, true);
 
+    element.onerror = function ()
+    {
+        outHasError.set(true);
+        if (element)
+        {
+            outError.set("Error " + element.error.code + "/" + element.error.message);
+            op.log("Error " + element.error.code + "; details: " + element.error.message);
+        }
+    };
 
     // element.playbackRate = speed.get();
     // if (!addedListeners)
@@ -104,6 +134,10 @@ function addElement()
     updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);
+    updateVideoSettings();
+
+    if (play.get())updatePlay();
+
     outEle.set(element);
 }
 

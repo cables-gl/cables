@@ -2,6 +2,12 @@ const cgl = op.patch.cgl;
 
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
+
+const inCastLight = op.inBool("Cast Light", true);
+const inIntensity = op.inFloat("Intensity", 1);
+const attribIns = [inCastLight, inIntensity];
+op.setPortGroup("Light Attributes", attribIns);
+
 const inPosX = op.inFloat("X", 0);
 const inPosY = op.inFloat("Y", 3);
 const inPosZ = op.inFloat("Z", 5);
@@ -25,24 +31,23 @@ inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
-const inIntensity = op.inFloat("Intensity", 1);
-const attribIns = [inIntensity];
-op.setPortGroup("Light Attributes", attribIns);
 
 const inCastShadow = op.inBool("Cast Shadow", false);
+const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
 const inShadowStrength = op.inFloatSlider("Shadow Strength", 1);
 const inLRBT = op.inFloat("LR-BottomTop", 8);
 const inNear = op.inFloat("Near", 0.1);
 const inFar = op.inFloat("Far", 30);
 const inBias = op.inFloatSlider("Bias", 0.004);
-const inPolygonOffset = op.inInt("Polygon Offset", 1);
-const inNormalOffset = op.inFloatSlider("Normal Offset", 0.024);
+const inPolygonOffset = op.inInt("Polygon Offset", 0);
+const inNormalOffset = op.inFloatSlider("Normal Offset", 0);
 const inBlur = op.inFloatSlider("Blur Amount", 0);
 op.setPortGroup("", [inCastShadow]);
-op.setPortGroup("Shadow Map Settings", [inMapSize, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
+op.setPortGroup("Shadow Map Settings", [inMapSize, inRenderMapActive, inShadowStrength, inLRBT, inNear, inFar, inBias, inPolygonOffset, inNormalOffset, inBlur]);
 
 inMapSize.setUiAttribs({ "greyout": true });
+inRenderMapActive.setUiAttribs({ "greyout": true });
 inShadowStrength.setUiAttribs({ "greyout": true });
 inLRBT.setUiAttribs({ "greyout": true, "hidePort": true });
 inNear.setUiAttribs({ "greyout": true, "hidePort": true });
@@ -83,6 +88,7 @@ const newLight = new CGL.Light(cgl, {
     "castShadow": false,
     "shadowStrength": inShadowStrength.get(),
 });
+newLight.castLight = inCastLight.get();
 
 newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
 newLight.createShadowMapShader();
@@ -140,7 +146,7 @@ newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPosX.onChange = inPosY.onChange = inPosZ.onChange
-= inBias.onChange = inIntensity.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
+= inBias.onChange = inIntensity.onChange = inCastLight.onChange = inShadowStrength.onChange = inNormalOffset.onChange = updateLightParameters;
 
 let updateLight = false;
 function updateLightParameters(param)
@@ -173,6 +179,7 @@ inCastShadow.onChange = function ()
     newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
+    inRenderMapActive.setUiAttribs({ "greyout": !castShadow });
     inShadowStrength.setUiAttribs({ "greyout": !castShadow });
     inLRBT.setUiAttribs({ "greyout": !castShadow });
     inNear.setUiAttribs({ "greyout": !castShadow });
@@ -249,6 +256,7 @@ inTrigger.onTriggered = function ()
         newLight.color = [inR.get(), inG.get(), inB.get()];
         newLight.specular = [inSpecularR.get(), inSpecularG.get(), inSpecularB.get()];
         newLight.intensity = inIntensity.get();
+        newLight.castLight = inCastLight.get();
         newLight.position = [inPosX.get(), inPosY.get(), inPosZ.get()];
         newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
         newLight.castShadow = inCastShadow.get();
@@ -271,7 +279,8 @@ inTrigger.onTriggered = function ()
     if (inCastShadow.get())
     {
         const blurAmount = 1.5 * inBlur.get() * texelSize;
-        newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
+        if (inRenderMapActive.get()) newLight.renderPasses(inPolygonOffset.get(), blurAmount, function () { outTrigger.trigger(); });
+        newLight.blurAmount = inBlur.get();
         outTexture.set(null);
         outTexture.set(newLight.getShadowMapDepth());
         // remove light from stack and readd it with shadow map & mvp matrix

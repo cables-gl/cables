@@ -1,4 +1,5 @@
 const cgl = op.patch.cgl;
+
 const attachmentFragmentHead = attachments.snippet_head_frag;
 const snippets = {
     "point": attachments.snippet_body_point_frag,
@@ -138,7 +139,8 @@ const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
 const inEnvTexture = op.inTexture("Environment Map");
-op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture]);
+const inLuminanceMaskTexture = op.inTexture("Luminance Mask");
+op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
 
 
 // TEXTURE TRANSFORMS
@@ -147,15 +149,17 @@ const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 1);
 const inDiffuseRepeatY = op.inFloat("Diffuse Repeat Y", 1);
 const inTextureOffsetX = op.inFloat("Texture Offset X", 0);
 const inTextureOffsetY = op.inFloat("Texture Offset Y", 0);
+
 const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
-const inEnvStrength = op.inFloatSlider("Env Map Intensity", 1);
+const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
+const inLuminanceMaskIntensity = op.inFloatSlider("Env Mask Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
-op.setPortGroup("Texture Transforms", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX, inEnvStrength]);
-
+op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -210,13 +214,15 @@ let aoTextureUniform = null;
 let emissiveTextureUniform = null;
 let alphaTextureUniform = null;
 let envTextureUniform = null;
-
+let inEnvMapIntensityUni = null;
+let inEnvMapWidthUni = null;
+let luminanceTextureUniform = null;
+let inLuminanceMaskIntensityUniform = null;
 
 inColorizeTexture.onChange = function ()
 {
     shader.toggleDefine("COLORIZE_TEXTURE", inColorizeTexture.get());
 };
-
 
 function updateDiffuseTexture()
 {
@@ -253,6 +259,7 @@ function updateSpecularTexture()
         specularTextureUniform = null;
     }
 }
+
 
 function updateNormalTexture()
 {
@@ -318,19 +325,62 @@ function updateEnvTexture()
             if (!envTextureUniform)
             {
                 envTextureUniform = new CGL.Uniform(shader, "t", "texEnv", 0);
-                const inEnvStrengthUni = new CGL.Uniform(shader, "f", "texEnvStrength", inEnvStrength);
             }
+        }
+
+        if (inEnvTexture.get().cubemap)
+        {
+            shader.define("TEX_FORMAT_CUBEMAP");
+            shader.removeDefine("TEX_FORMAT_EQUIRECT");
+            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
+        }
+        else
+        {
+            shader.removeDefine("TEX_FORMAT_CUBEMAP");
+            shader.define("TEX_FORMAT_EQUIRECT");
+            if (inEnvTexture.get().width === inEnvTexture.get().height)
+            {
+                shader.define("ENVMAP_MATCAP");
+            }
+            else shader.removeDefine("ENVMAP_MATCAP");
+
+            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
         }
     }
     else
     {
-        shader.removeUniform("texEnvStrength");
+        shader.removeUniform("inEnvMapIntensity");
+        shader.removeUniform("inEnvMapWidth");
         shader.removeUniform("texEnv");
         shader.removeDefine("HAS_TEXTURE_ENV");
+        shader.removeDefine("ENVMAP_MATCAP");
         envTextureUniform = null;
+        inEnvMapIntensityUni = null;
     }
 }
 
+function updateLuminanceMaskTexture()
+{
+    if (inLuminanceMaskTexture.get())
+    {
+        if (!luminanceTextureUniform)
+        {
+            shader.define("HAS_TEXTURE_LUMINANCE_MASK");
+            luminanceTextureUniform = new CGL.Uniform(shader, "t", "texLuminance", 0);
+            inLuminanceMaskIntensityUniform = new CGL.Uniform(shader, "f", "inLuminanceMaskIntensity", inLuminanceMaskIntensity);
+        }
+    }
+    else
+    {
+        shader.removeDefine("HAS_TEXTURE_LUMINANCE_MASK");
+        shader.removeUniform("inLuminanceMaskIntensity");
+        shader.removeUniform("texLuminance");
+        luminanceTextureUniform = null;
+        inLuminanceMaskIntensityUniform = null;
+    }
+}
 
 // TEX OPACITY
 
@@ -390,6 +440,7 @@ inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 inEnvTexture.onChange = updateEnvTexture;
+inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
@@ -477,6 +528,8 @@ function createUniforms(lightsCount)
 
                 "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + i + ".conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + i + ".spotProperties", [0, 0, 0, 0]),
+                "castLight": new CGL.Uniform(shader, "i", "phongLight" + i + ".castLight", 1),
+
             };
         }
     }
@@ -526,6 +579,8 @@ function setUniforms(lightStack)
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
+
+        lightUniforms[i].castLight.setValue(light.castLight);
     }
 }
 
@@ -564,6 +619,7 @@ function createDefaultUniform()
         "lightProperties": new CGL.Uniform(shader, "4f", "phongLight" + 0 + ".lightProperties", [1, 1, 1, 1]),
         "conePointAt": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".conePointAt", vec3.create()),
         "spotProperties": new CGL.Uniform(shader, "3f", "phongLight" + 0 + ".spotProperties", [0, 0, 0, 0]),
+        "castLight": new CGL.Uniform(shader, "i", "phongLight" + 0 + ".castLight", 1),
     };
 }
 
@@ -576,6 +632,7 @@ const DEFAULT_LIGHTSTACK = [{
     "attenuation": 0,
     "falloff": 0.5,
     "radius": 80,
+    "castLight": 1,
 }];
 
 const iViewMatrix = mat4.create();
@@ -661,13 +718,23 @@ inTrigger.onTriggered = function ()
     cgl.setShader(shader);
 
     shader.popTextures();
+
     if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
     if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
     if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
     if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
     if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
     if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
-    if (inEnvTexture.get()) shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+    if (inEnvTexture.get())
+    {
+        if (inEnvTexture.get().cubemap) shader.pushTexture(envTextureUniform, inEnvTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        else shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+    }
+
+    if (inLuminanceMaskTexture.get())
+    {
+        shader.pushTexture(luminanceTextureUniform, inLuminanceMaskTexture.get().tex);
+    }
 
     updateLights();
 
@@ -675,6 +742,29 @@ inTrigger.onTriggered = function ()
 
     cgl.setPreviousShader();
 };
+
+if (cgl.glVersion == 1)
+{
+    if (!cgl.gl.getExtension("EXT_shader_texture_lod"))
+    {
+        op.log("no EXT_shader_texture_lod texture extension");
+        // throw "no EXT_shader_texture_lod texture extension";
+    }
+    else
+    {
+        shader.enableExtension("GL_EXT_shader_texture_lod");
+        cgl.gl.getExtension("OES_texture_float");
+        cgl.gl.getExtension("OES_texture_float_linear");
+        cgl.gl.getExtension("OES_texture_half_float");
+        cgl.gl.getExtension("OES_texture_half_float_linear");
+
+        shader.enableExtension("GL_OES_standard_derivatives");
+        shader.enableExtension("GL_OES_texture_float");
+        shader.enableExtension("GL_OES_texture_float_linear");
+        shader.enableExtension("GL_OES_texture_half_float");
+        shader.enableExtension("GL_OES_texture_half_float_linear");
+    }
+}
 
 updateDiffuseTexture();
 updateSpecularTexture();
