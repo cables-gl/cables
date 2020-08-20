@@ -19,6 +19,6 @@
                 "name": "Output"
             }
         ],
-        "name": "Ops.Json.StringGetByPath"
+        "name": "Ops.Json.ObjectGetStringByPath"
     }
 }
