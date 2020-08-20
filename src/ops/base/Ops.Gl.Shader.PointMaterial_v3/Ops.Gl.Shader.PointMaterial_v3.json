@@ -99,6 +99,17 @@
                 "subType": "boolean"
             },
             {
+                "type": "2",
+                "name": "Texture Point Size",
+                "group": "Size"
+            },
+            {
+                "type": "0",
+                "name": "Texture Point Size Mul",
+                "group": "Size",
+                "subType": "number"
+            },
+            {
                 "type": "0",
                 "name": "Flip Texture",
                 "subType": "boolean"

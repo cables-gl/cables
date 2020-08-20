@@ -6,32 +6,28 @@ const
     extrude = op.inValue("extrude", 0.5),
     flip = op.inValueBool("flip", false),
     calcNormals = op.inValueBool("Calc Normals", false),
-
-
     removeZero = op.inValueBool("Ignore Zero Values"),
     invert = op.inValueBool("invert"),
     offsetX = op.inValueFloat("offset X"),
     offsetY = op.inValueFloat("offset Y"),
-
     colorize = op.inValueBool("colorize", false),
     colorizeMin = op.inValueSlider("Colorize Min", 0),
     colorizeMax = op.inValueSlider("Colorize Max", 1),
-
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 
 var uniExtrude, uniTexture;
-let moduleFrag = null;
-let moduleVert = null;
+const moduleFrag = null;
+const moduleVert = null;
 
 var uniTexture = null;
 const uniTextureFrag = null;
 var uniExtrude = null;
-let uniOffsetX = null;
-let uniOffsetY = null;
-let uniColorizeMin = null;
-let uniColorizeMax = null;
+const uniOffsetX = null;
+const uniOffsetY = null;
+const uniColorizeMin = null;
+const uniColorizeMax = null;
 
 op.setPortGroup("Colorize", [colorize, colorizeMin, colorizeMax]);
 
@@ -44,7 +40,7 @@ colorize.onChange =
     invert.onChange =
     removeZero.onChange =
     flip.onChange =
-    calcNormals.onChange=
+    calcNormals.onChange =
     meth.onChange = updateDefines;
 
 const srcHeadVert = attachments.vertdisplace_head_vert;
@@ -93,14 +89,13 @@ mod.addUniformVert("f", "MOD_offsetX", offsetX);
 mod.addUniformVert("f", "MOD_offsetY", offsetY);
 
 mod.addUniformFrag("f", "MOD_colorizeMin", colorizeMin);
-mod.addUniformFrag("f", "MODre_colorizeMax", colorizeMax);
+mod.addUniformFrag("f", "MOD_colorizeMax", colorizeMax);
 
 updateDefines();
 
 
 function updateDefines()
 {
-
     mod.toggleDefine("MOD_HEIGHTMAP_COLORIZE", colorize.get());
     mod.toggleDefine("MOD_HEIGHTMAP_INVERT", invert.get());
     mod.toggleDefine("MOD_DISPLACE_REMOVE_ZERO", removeZero.get());
@@ -117,22 +112,16 @@ function updateDefines()
     mod.toggleDefine("MOD_DISPLACE_METH_NORMAL_XY", meth.get() == "normal xy");
 
     mod.toggleDefine("CALC_NORMALS", calcNormals.get());
-
 }
 
 function dorender()
 {
-
     mod.bind();
-
-
 
     if (texture.get()) mod.pushTexture("MOD_texture", texture.get().tex);
     else mod.pushTexture("MOD_texture", CGL.Texture.getEmptyTexture(cgl).tex);
-    //shader.pushTexture(uniTexture, texture.get().tex);
 
     next.trigger();
 
     mod.unbind();
-
 }

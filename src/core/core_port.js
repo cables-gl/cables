@@ -77,8 +77,22 @@ const Port = function (__parent, name, type, uiAttribs)
             this.setValue(v);
             // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
-        },
+        }
     });
+};
+
+Port.prototype.getValueForDisplay = function ()
+{
+    let str = String(this.val);
+
+    if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
+    {
+        if (!this.val) str = "false";
+        else str = "true";
+    }
+    else if (str.length > 100) str = str.substring(0, 100);
+
+    return str;
 };
 
 /**

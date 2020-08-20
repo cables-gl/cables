@@ -1,0 +1,32 @@
+{
+    "id": "02ca1ecb-b087-4000-90f9-de96dca2f459",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1597848371922
+        }
+    ],
+    "authorName": "andro",
+    "created": 1597848388840,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "String"
+            },
+            {
+                "type": "0",
+                "name": "Convert to numbers",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Array out"
+            }
+        ],
+        "name": "Ops.Array.StringToCharArray"
+    }
+}
