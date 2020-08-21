@@ -1,0 +1,25 @@
+{
+    "authorName": "cables",
+    "id": "ec736baf-feb8-4d8d-b04c-173fc197759c",
+    "created": 1596729430591,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Object"
+            },
+            {
+                "type": "5",
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Output",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetNumberByPath"
+    }
+}

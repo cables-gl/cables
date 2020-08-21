@@ -1,24 +1,24 @@
-const str=op.inValueEditor("JSON String",'{}');
-const outObj=op.outObject("Result");
-const isValid=op.outValue("Valid");
+const str = op.inValueEditor("JSON String", "{}");
+const outObj = op.outObject("Result");
+const isValid = op.outValue("Valid");
 
-str.onChange=parse;
+str.onChange = parse;
 parse();
 
 function parse()
 {
     try
     {
-        var obj=JSON.parse(str.get());
+        const obj = JSON.parse(str.get());
         outObj.set(null);
         outObj.set(obj);
         isValid.set(true);
-        op.setUiError("invalidjson",null);
+        op.setUiError("invalidjson", null);
     }
-    catch(ex)
+    catch (ex)
     {
         console.log(ex);
         isValid.set(false);
-        op.setUiError("invalidjson","INVALID JSON<br/> can not parse string to object:<br/><b> "+ex.message+'</b>');
+        op.setUiError("invalidjson", "INVALID JSON<br/> can not parse string to object:<br/><b> " + ex.message + "</b>");
     }
 }
