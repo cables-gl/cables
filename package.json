@@ -13,11 +13,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pandrr/cables.git"
+        "url": "git@github.com:pandrr/cables.git"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/pandrr/cables/issues"
     },
