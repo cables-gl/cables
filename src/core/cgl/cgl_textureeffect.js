@@ -11,6 +11,7 @@ const TextureEffect = function (cgl, options)
     if (!cgl.TextureEffectMesh) this.createMesh();
 
     this._textureSource = null;
+    this._options = options;
 
     // TODO: do we still need the options ?
     // var opts=options ||
@@ -121,6 +122,13 @@ TextureEffect.prototype.startEffect = function ()
 
     this._cgl.pushModelMatrix();
     mat4.identity(this._cgl.mvMatrix);
+
+
+    if (this._options.clear)
+    {
+        this._cgl.gl.clearColor(0, 0, 0, 0);
+        this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
+    }
 
     // this._cgl.popBlend();
     // this._cgl.popBlendMode();
