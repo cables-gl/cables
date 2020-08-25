@@ -4,6 +4,7 @@
 UNI vec4 color;
 IN vec2 texCoord;
 IN vec2 pointCoord;
+IN float ps;
 
 #ifdef HAS_TEXTURE_DIFFUSE
     UNI sampler2D diffTex;
@@ -21,6 +22,8 @@ IN vec2 pointCoord;
 void main()
 {
     {{MODULE_BEGIN_FRAG}}
+
+    if(ps<1.0)discard;
 
     #ifdef FLIP_TEX
         vec2 pointCoord=vec2(gl_PointCoord.x,(1.0-gl_PointCoord.y));

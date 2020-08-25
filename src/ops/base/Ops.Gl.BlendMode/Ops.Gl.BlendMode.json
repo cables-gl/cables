@@ -36,6 +36,11 @@
             },
             {
                 "type": "0",
+                "name": "Blendmode",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Premultiplied",
                 "subType": "boolean"
             }

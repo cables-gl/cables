@@ -42,7 +42,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.Fog"
+        "name": "Ops.Gl.ShaderEffects.FogEffect"
     },
     "authorName": "pandur",
     "id": "ad61e198-f178-42d0-8be9-cc776365cd3b",

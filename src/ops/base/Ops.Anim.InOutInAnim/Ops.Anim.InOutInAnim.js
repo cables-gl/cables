@@ -1,37 +1,34 @@
+const anim = new CABLES.Anim();
 
-var anim=new CABLES.Anim();
+const
+    update = op.inTrigger("Update"),
+    duration1 = op.inValue("Duration Out", 0.25),
+    easing1 = anim.createPort(op, "Easing Out"),
+    value1 = op.inValue("Value Out", 0),
+    holdDuration = op.inValue("Hold duration", 0.0),
+    duration2 = op.inValue("Duration In", 0.25),
+    easing2 = anim.createPort(op, "Easing In"),
+    value2 = op.inValue("Value In", 1),
+    trigger = op.inTriggerButton("Start"),
+    next = op.outTrigger("Next"),
+    outVal = op.outValue("Result", 0),
+    started = op.outTrigger("Started"),
+    middle = op.outTrigger("Middle"),
+    finished = op.outTrigger("finished");
 
-var update=op.inTrigger("Update");
+let time = 0;
+trigger.onTriggered = setupAnim;
 
-var duration1=op.inValue("Duration Out",0.25);
-var easing1=anim.createPort(op,"Easing Out");
-var value1=op.inValue("Value Out",0);
-
-var duration2=op.inValue("Duration In",0.25);
-var easing2=anim.createPort(op,"Easing In");
-var value2=op.inValue("Value In",1);
-
-var trigger=op.inTriggerButton("Start");
-var next=op.outTrigger("Next");
-
-var outVal=op.outValue("Result",0);
-
-var middle=op.outTrigger("Middle");
-
-trigger.onTriggered=setupAnim;
-
-
-// outVal.set(1);
-
-
-update.onTriggered=function()
+update.onTriggered = function ()
 {
-    var time=CABLES.now()/1000.0;
-    if(anim.isStarted(time)) outVal.set(anim.getValue(time));
-        else outVal.set(value2.get());
+    time = CABLES.now() / 1000.0;
+    if (anim.isStarted(time)) outVal.set(anim.getValue(time));
+    else outVal.set(value2.get());
+
+    next.trigger();
 };
 
-value2.onChange=function()
+value2.onChange = function ()
 {
     outVal.set(value2.get());
 };
@@ -39,22 +36,34 @@ value2.onChange=function()
 function setupAnim()
 {
     anim.clear();
-    anim.setValue(CABLES.now()/1000.0, value2.get());
+    // start
+    anim.setValue(time, value2.get(), function ()
+    {
+        started.trigger();
+    });
+    // attack
+    anim.setValue(time +
+                        duration1.get(), value1.get(), function ()
+    {
 
-    anim.setValue(CABLES.now()/1000.0+
-                        duration1.get(), value1.get(),function()
-                        {
-                            middle.trigger();
-                        });
-
-    anim.setValue(CABLES.now()/1000.0+
-                        duration1.get()+
-                        duration2.get(), value2.get());
+    });
+    // Hold
+    anim.setValue(time +
+                        duration1.get() + holdDuration.get(), value1.get(), function ()
+    {
+        middle.trigger();
+    });
+    // release
+    anim.setValue(time +
+                        duration1.get() +
+                        duration2.get() + holdDuration.get(), value2.get(), function ()
+    {
+        finished.trigger();
+    });
 
     anim.keys[0].setEasing(
-        anim.easingFromString( easing1.get()) );
+        anim.easingFromString(easing1.get()));
 
-    anim.keys[1].setEasing(
-        anim.easingFromString( easing2.get()) );
-
+    anim.keys[2].setEasing(
+        anim.easingFromString(easing2.get()));
 }
