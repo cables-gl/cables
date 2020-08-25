@@ -1,12 +1,15 @@
 const
     render = op.inTrigger("render"),
     inTexture = op.inTexture("Texture"),
+    inTextureMask = op.inTexture("Alpha Mask"),
     useVPSize = op.inValueBool("use original size"),
     width = op.inValueInt("width"),
     height = op.inValueInt("height"),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]),
     fpTexture = op.inValueBool("HDR"),
+    alphaMaskMethod = op.inSwitch("Alpha Mask Source", ["R", "A", "Luminance"]),
+
     trigger = op.outTrigger("trigger"),
     texOut = op.outTexture("texture_out"),
     outRatio = op.outValue("Aspect Ratio");
@@ -25,17 +28,23 @@ op.setPortGroup("Size", [useVPSize, width, height]);
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
 bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.copytexture_frag);
 const textureUniform = new CGL.Uniform(bgShader, "t", "tex", 0);
+let textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
+alphaMaskMethod.onChange =
+    inTextureMask.onChange = updateDefines;
+
+updateDefines();
 
 function initEffect()
 {
     if (effect)effect.delete();
     if (tex)tex.delete();
 
-    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get() });
+    effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get(), "clear": false });
+
 
     tex = new CGL.Texture(cgl,
         {
@@ -160,9 +169,14 @@ const doRender = function ()
     cgl.pushShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, inTexture.get().tex);
+    if (inTextureMask.get())cgl.setTexture(1, inTextureMask.get().tex);
+
+    cgl.pushBlend(false);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();
+
+    cgl.popBlend();
 
     texOut.set(effect.getCurrentSourceTexture());
 
@@ -175,6 +189,12 @@ const doRender = function ()
     trigger.trigger();
 };
 
+function updateDefines()
+{
+    bgShader.toggleDefine("TEX_MASK", inTextureMask.get());
+
+    textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
+}
 
 function onWrapChange()
 {
