@@ -143,17 +143,18 @@ function parseUniforms(src)
                             groupUniforms.push(newInput);
                         }
                     }
-                    // else if(type==="bool")
-                    // {
-                    //     foundNames.push(uniName);
-                    //     if(!hasUniformInput(uniName))
-                    //     {
-                    //         const newInput=op.inBool(uniName,false);
-                    //         newInput.uniform=new CGL.Uniform(shader,'b',uniName,newInput);
-                    //         uniformInputs.push(newInput);
-                    //         groupUniforms.push(newInput);
-                    //     }
-                    // }
+                    else if (type === "bool")
+                    {
+                        foundNames.push(uniName);
+                        console.log("shader uni name is " + uniName);
+                        if (!hasUniformInput(uniName))
+                        {
+                            const newInput = op.inBool(uniName, false);
+                            newInput.uniform = new CGL.Uniform(shader, "b", uniName, newInput);
+                            uniformInputs.push(newInput);
+                            groupUniforms.push(newInput);
+                        }
+                    }
                     else if (type === "sampler2D")
                     {
                         foundNames.push(uniName);
@@ -228,7 +229,7 @@ function parseUniforms(src)
             }
         }
     }
-
+    console.log(groupUniforms);
     op.setPortGroup("uniforms", groupUniforms);
 }
 
