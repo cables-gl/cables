@@ -28,6 +28,11 @@
                 "type": "0",
                 "name": "Id",
                 "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -40,6 +45,6 @@
                 "name": "Data URL"
             }
         ],
-        "name": "Ops.User.pandur.LocalFileToDataUrl"
+        "name": "Ops.Sidebar.LocalFileToDataUrl"
     }
 }

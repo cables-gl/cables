@@ -1,5 +1,5 @@
 const inGrad = op.inGradient("Gradient"),
-    inSmoothstep = op.inValueBool("Smoothstep", true),
+    inSmoothstep = op.inValueBool("Smoothstep", false),
     inSize = op.inValueInt("Size", 256),
     inGradArray = op.inArray("Gradient Array"),
     outTex = op.outTexture("Texture"),
