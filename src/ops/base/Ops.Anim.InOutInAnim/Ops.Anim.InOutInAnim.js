@@ -45,11 +45,14 @@ function setupAnim()
     anim.setValue(time +
                         duration1.get(), value1.get(), function ()
     {
-        middle.trigger();
+
     });
     // Hold
     anim.setValue(time +
-                        duration1.get() + holdDuration.get(), value1.get());
+                        duration1.get() + holdDuration.get(), value1.get(), function ()
+    {
+        middle.trigger();
+    });
     // release
     anim.setValue(time +
                         duration1.get() +

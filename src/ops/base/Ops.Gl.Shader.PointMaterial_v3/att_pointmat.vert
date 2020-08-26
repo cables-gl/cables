@@ -11,6 +11,7 @@ IN vec3 attrBiTangent;
 #endif
 
 OUT vec3 norm;
+OUT float ps;
 #ifdef HAS_TEXTURES
     OUT vec2 texCoord;
 #endif
@@ -93,13 +94,17 @@ void main()
         addPointSize=texture(texPointSize,texCoord).r*texPointSizeMul;
     #endif
 
+
+    ps=0.0;
     #ifndef SCALE_BY_DISTANCE
-        gl_PointSize = (pointSize+addPointSize) * psMul;
+        ps = (pointSize+addPointSize) * psMul;
     #endif
     #ifdef SCALE_BY_DISTANCE
         float cameraDist = distance(model.xyz, camPos);
-        gl_PointSize = ( (pointSize+addPointSize) / cameraDist) * psMul;
+        ps = ( (pointSize+addPointSize) / cameraDist) * psMul;
     #endif
+
+    gl_PointSize = ps;
 
     gl_Position = projMatrix * viewMatrix * model;
 }

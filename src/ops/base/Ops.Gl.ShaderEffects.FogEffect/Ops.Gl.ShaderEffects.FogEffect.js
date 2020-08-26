@@ -1,120 +1,74 @@
-const cgl=op.patch.cgl;
-var id='mod'+Math.floor(Math.random()*10000);
-
-op.render=op.inTrigger("render");
-op.trigger=op.outTrigger("trigger");
-
-var inStart=op.inValue("Start",2);
-var inEnd=op.inValue("End",12);
-
-var inAmount=op.inValueSlider("Amount",0.5);
-
-
-const r = op.inValueSlider("r", Math.random());
-const g = op.inValueSlider("g", Math.random());
-const b = op.inValueSlider("b", Math.random());
-r.setUiAttribs({ colorPick: true });
+const
+    id = "mod" + Math.floor(Math.random() * 10000),
+    render = op.inTrigger("render"),
+    next = op.outTrigger("trigger"),
+    inStart = op.inValue("Start", 2),
+    inEnd = op.inValue("End", 12),
+    inAmount = op.inValueSlider("Amount", 0.5),
+    r = op.inValueSlider("r", Math.random()),
+    g = op.inValueSlider("g", Math.random()),
+    b = op.inValueSlider("b", Math.random());
 
 
-var shader=null;
+const cgl = op.patch.cgl;
+r.setUiAttribs({ "colorPick": true });
 
-var srcHeadVert=''
-    .endl()+'OUT vec4 MOD_fogPos;'
+
+const srcHeadVert = ""
+    .endl() + "OUT vec4 MOD_fogPos;"
     .endl();
 
-var srcBodyVert=''
-    .endl()+'MOD_fogPos=viewMatrix*modelMatrix*pos;'
+const srcBodyVert = ""
+    .endl() + "MOD_fogPos=viewMatrix*modelMatrix*pos;"
     .endl();
 
-var srcHeadFrag=''
-    .endl()+'IN vec4 MOD_fogPos;'
-    .endl()+'UNI float MOD_start;'
-    .endl()+'UNI float MOD_end;'
-    .endl()+'UNI float MOD_amount;'
-
-    .endl()+'UNI float MOD_r;'
-    .endl()+'UNI float MOD_g;'
-    .endl()+'UNI float MOD_b;'
+const srcHeadFrag = ""
+    .endl() + "IN vec4 MOD_fogPos;"
     .endl();
 
-var srcBodyFrag=''
-    .endl()+'   float MOD_de=(MOD_fogPos.z+MOD_start)/(-1.0*MOD_end);'
-    .endl()+'   col.rgb=mix(col.rgb,vec3(MOD_r,MOD_g,MOD_b), clamp(MOD_de*MOD_amount,0.0,1.0));'
+const srcBodyFrag = ""
+    .endl() + "   float MOD_de=(MOD_fogPos.z+MOD_start)/(-1.0*MOD_end);"
+    .endl() + "   float mx=clamp(MOD_de*MOD_amount,0.0,1.0);"
+// .endl() + "       mx=1.0-mx;"
+
+    .endl() + "       col.rgb=mix(col.rgb,vec3(MOD_color.r,MOD_color.g,MOD_color.b), mx);"
+
+// .endl() + "   #ifdef MOD_ALPHA"
+// .endl() + "       col.a=1.0-clamp(MOD_de*MOD_amount,0.0,1.0);"
+// .endl() + "   #endif"
+
     .endl();
 
 
-var moduleFrag=null;
-var moduleVert=null;
+const moduleFrag = null;
+const moduleVert = null;
 
-function removeModule()
-{
-    if(shader && moduleFrag) shader.removeModule(moduleFrag);
-    if(shader && moduleVert) shader.removeModule(moduleVert);
-    shader=null;
-}
+const mod = new CGL.ShaderModifier(cgl, op.name);
 
-
-
-op.render.onLinkChanged=removeModule;
-
-op.render.onTriggered=function()
-{
-    if(!cgl.getShader())
+mod.addModule(
     {
-         op.trigger.trigger();
-         return;
-    }
+        "title": op.objName,
+        "name": "MODULE_VERTEX_POSITION",
+        "srcHeadVert": srcHeadVert,
+        "srcBodyVert": srcBodyVert
+    });
 
-    if(cgl.getShader()!=shader)
+mod.addModule(
     {
-        if(shader) removeModule();
-        shader=cgl.getShader();
+        "title": op.objName,
+        "name": "MODULE_COLOR",
+        "srcHeadFrag": srcHeadFrag,
+        "srcBodyFrag": srcBodyFrag
+    });
 
-        moduleVert=shader.addModule(
-            {
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
-            });
+mod.addUniform("f", "MOD_amount", inAmount);
+mod.addUniform("f", "MOD_start", inStart);
+mod.addUniform("f", "MOD_end", inEnd);
+mod.addUniform("3f", "MOD_color", r, g, b);
 
-        // uniOffsetX=new CGL.Uniform(shader,'f',moduleVert.prefix+'_offsetX',offsetX);
-        // uniOffsetY=new CGL.Uniform(shader,'f',moduleVert.prefix+'_offsetY',offsetY);
-
-
-        moduleFrag=shader.addModule(
-            {
-                title:op.objName,
-                name:'MODULE_COLOR',
-                srcHeadFrag:srcHeadFrag,
-                srcBodyFrag:srcBodyFrag
-            },moduleVert);
-        inStart.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'start',inStart);
-        inEnd.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'end',inEnd);
-        inAmount.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'amount',inAmount);
-        r.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'r',r);
-        g.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'g',g);
-        b.uniform=new CGL.Uniform(shader,'f',moduleFrag.prefix+'b',b);
-
-
-    }
-
-
-    if(!shader)return;
-    var texSlot=moduleVert.num+5;
-
-    op.trigger.trigger();
+render.onTriggered = function ()
+{
+    mod.bind();
+    next.trigger();
+    mod.unbind();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
