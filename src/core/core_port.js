@@ -158,14 +158,15 @@ Port.prototype.remove = function ()
  */
 Port.prototype.setUiAttribs = function (newAttribs)
 {
+    let changed = false;
     if (!this.uiAttribs) this.uiAttribs = {};
     for (const p in newAttribs)
     {
+        if (this.uiAttribs[p] != newAttribs[p]) changed = true;
         this.uiAttribs[p] = newAttribs[p];
     }
-    // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
 
-    this.emitEvent("onUiAttrChange", newAttribs);
+    if (changed) this.emitEvent("onUiAttrChange", newAttribs);
 };
 
 /**
