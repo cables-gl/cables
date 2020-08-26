@@ -2,9 +2,9 @@ const
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
-    a = op.inValueSlider("a", 1.0);
+    a = op.inValueSlider("a", 1.0),
+    texOut = op.outTexture("texture_out");
 
-const texOut = op.outTexture("texture_out");
 r.setUiAttribs({ "colorPick": true });
 const cgl = op.patch.cgl;
 let fb = null;
