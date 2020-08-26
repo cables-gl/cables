@@ -75,8 +75,7 @@ function realReload(nocache)
 
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
-
-    if (filename.get().indexOf("data:") == 0) url = filename.get();
+    if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
     loadedFilename = filename.get();
 

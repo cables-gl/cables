@@ -9,7 +9,7 @@ const
     nRows = op.inValueInt("num rows", 1),
     axis = op.inSwitch("axis", ["xy", "xz"], "xy"),
     active = op.inValueBool("Active", true),
-    geomOut = op.outObject("geometry");
+    geomOut = op.outObject("geometry", null, "geometry");
 
 geomOut.ignoreValueSerialize = true;
 
