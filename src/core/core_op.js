@@ -637,6 +637,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
                 "display": "texture",
+                "objTypr": "texture",
                 "preview": true
             })
         );
@@ -652,9 +653,9 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.inObject = function (name, v, options)
+    Op.prototype.inObject = function (name, v, objType)
     {
-        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, options));
+        const p = this.addInPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType }));
         if (v !== undefined) p.set(v);
         return p;
     };
@@ -808,9 +809,9 @@ const Op = function ()
      * @param {String} name
      * @return {Port} created port
      */
-    Op.prototype.outObject = function (name, v)
+    Op.prototype.outObject = function (name, v, objType)
     {
-        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT));
+        const p = this.addOutPort(new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, { "objType": objType || null }));
         if (v !== undefined) p.set(v);
         p.ignoreValueSerialize = true;
         return p;
@@ -844,7 +845,8 @@ const Op = function ()
     {
         const p = this.addOutPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
-                "preview": true
+                "preview": true,
+                "objType": "texture"
             })
         );
         if (v !== undefined) p.set(v);

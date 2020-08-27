@@ -946,9 +946,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             {
                 const port2 = op.getPort(opData.portsOut[ipo].name);
                 if (port2 && port2.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE && opData.portsOut[ipo].hasOwnProperty("value"))
-                {
                     port2.set(obj.ops[iop].portsOut[ipo].value);
-                }
             }
         }
 
