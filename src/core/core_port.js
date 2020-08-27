@@ -694,10 +694,13 @@ Port.prototype._onSetProfiling = function (v)
 Port.prototype._onTriggeredProfiling = function ()
 {
     // this.parent.updateAnims();
-    this.parent.patch.profiler.add("port", this);
 
-    if (this.parent.enabled && this.onTriggered) this.onTriggered();
-    this.parent.patch.profiler.add("port", null);
+    if (this.parent.enabled && this.onTriggered)
+    {
+        this.parent.patch.profiler.add("port", this);
+        this.onTriggered();
+        this.parent.patch.profiler.add("port", null);
+    }
 };
 
 Port.prototype.onValueChange = function (cb)
