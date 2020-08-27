@@ -49,6 +49,7 @@ const Profiler = function ()
             }
 
             items[object.id].numTriggers++;
+            items[object.id].opid = object.parent.id;
             items[object.id].title = object.parent.name + "." + object.name;
             items[object.id].subPatch = object.parent.uiAttribs.subPatch;
 
