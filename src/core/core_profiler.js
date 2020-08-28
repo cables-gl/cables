@@ -7,6 +7,7 @@ const Profiler = function ()
     let currentId = null;
     let currentStart = 0;
 
+
     this.getItems = function ()
     {
         return items;
