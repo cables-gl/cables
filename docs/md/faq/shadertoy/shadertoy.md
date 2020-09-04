@@ -37,10 +37,8 @@ UNI float         iChannelTime0;            // get the current playtime from the
 uniform vec3      iChannelResolution[4];    // channel resolution (in pixels)
 UNI vec3          iChannelResolution0..3;   // channel resolution (in pixels)
 
-// uniform vec4      iMouse;                   // mouse pixel coords. xy: current (if MLB down), zw: click   
-
 uniform samplerXX iChannel0..3;             // input channel. XX = 2D/Cube
-UNI  sampler2D    iChannel0..3;             // Creates a texture input which can be used
+UNI sampler2D     iChannel0..3;             // Creates a texture input which can be used
 
 uniform vec4      iDate;                    // (year, month, day, time in seconds)
 UNI vec4          iDate;                    // (year, month, day, time in seconds)
@@ -49,7 +47,7 @@ uniform float     iSampleRate;              // sound sample rate (i.e., 44100)
 UNI float         iSampleRate;              // Use the audiobuffer op to access this
 
 uniform vec4      iMouse;                   // mouse pixel coords. xy: current (if MLB down), zw: click
-UNI vec4          iMouse                    //use mouse op. see example patch for in depth explanation.
+UNI vec4          iMouse                    // use mouse op. see example patch for in depth explanation.
 ```
 
 
