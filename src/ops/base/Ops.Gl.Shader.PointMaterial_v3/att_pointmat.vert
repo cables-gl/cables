@@ -20,6 +20,10 @@ OUT float ps;
    UNI sampler2D texColorize;
    OUT vec4 colorize;
 #endif
+#ifdef HAS_TEXTURE_OPACITY
+    UNI sampler2D texOpacity;
+    OUT float opacity;
+#endif
 
 #ifdef HAS_TEXTURE_POINTSIZE
    UNI sampler2D texPointSize;
@@ -70,6 +74,12 @@ void main()
         texCoord=attrTexCoord;
     #endif
 
+    #ifdef HAS_TEXTURE_OPACITY
+        // opacity=texture(texOpacity,vec2(rand(attrVertIndex+texCoord.x*texCoord.y+texCoord.y+texCoord.x),rand(texCoord.y*texCoord.x-texCoord.x-texCoord.y-attrVertIndex))).r;
+        opacity=texture(texOpacity,texCoord).r;
+    #endif
+
+
     #ifdef HAS_TEXTURE_COLORIZE
         #ifdef RANDOM_COLORIZE
             colorize=texture(texColorize,vec2(rand(attrVertIndex+texCoord.x*texCoord.y+texCoord.y+texCoord.x),rand(texCoord.y*texCoord.x-texCoord.x-texCoord.y-attrVertIndex)));
@@ -91,7 +101,26 @@ void main()
 
     float addPointSize=0.0;
     #ifdef HAS_TEXTURE_POINTSIZE
-        addPointSize=texture(texPointSize,texCoord).r*texPointSizeMul;
+
+        #ifdef POINTSIZE_CHAN_R
+            addPointSize=texture(texPointSize,texCoord).r;
+        #endif
+        #ifdef POINTSIZE_CHAN_G
+            addPointSize=texture(texPointSize,texCoord).g;
+        #endif
+        #ifdef POINTSIZE_CHAN_B
+            addPointSize=texture(texPointSize,texCoord).b;
+        #endif
+
+        #ifdef DOTSIZEREMAPABS
+            // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
+
+            addPointSize=1.0-(distance(texture(texPointSize,texCoord).r,0.5)*2.0);
+
+            // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
+
+        #endif
+        addPointSize*=texPointSizeMul;
     #endif
 
 

@@ -17,6 +17,11 @@
             },
             {
                 "type": "0",
+                "name": "Separate inc/dec",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Value",
                 "subType": "number"
             },

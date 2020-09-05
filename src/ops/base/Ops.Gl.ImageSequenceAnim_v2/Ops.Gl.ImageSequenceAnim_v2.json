@@ -23,6 +23,11 @@
                 "type": "0",
                 "name": "Num Y",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Frames",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -57,7 +62,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.ImageSequenceAnim2"
+        "name": "Ops.Gl.ImageSequenceAnim_v2"
     },
     "summary": "play a image sprite animation",
     "docs": {
@@ -107,5 +112,12 @@
     "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added max num of frames, if atlas has blank frames at the end",
+            "author": "pandur",
+            "date": 1598544310528
+        }
+    ]
 }
