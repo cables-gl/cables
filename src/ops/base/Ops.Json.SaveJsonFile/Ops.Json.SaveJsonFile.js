@@ -1,16 +1,14 @@
 
-var download=op.inTriggerButton("download");
-var filename=op.inValueString("Filename","jsonexport");
-var inObject=op.inObject("Object");
+const download = op.inTriggerButton("download");
+const filename = op.inValueString("Filename", "jsonexport");
+const inObject = op.inObject("Object");
 
-download.onTriggered=function()
+download.onTriggered = function ()
 {
-
-    var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(inObject.get()));
-    var downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href",     dataStr);
-    downloadAnchorNode.setAttribute("download", filename.get()+".json");
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(inObject.get(), null, 2));
+    const downloadAnchorNode = document.createElement("a");
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", filename.get() + ".json");
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
-
 };
