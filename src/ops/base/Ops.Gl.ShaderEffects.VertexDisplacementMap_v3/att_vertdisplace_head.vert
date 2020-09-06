@@ -1,8 +1,29 @@
 OUT float MOD_displHeightMapColor;
 
+mat4 rotationX( in float angle ) {
+	return mat4(	1.0,		0,			0,			0,
+			 		0, 	cos(angle),	-sin(angle),		0,
+					0, 	sin(angle),	 cos(angle),		0,
+					0, 			0,			  0, 		1);
+}
+
+mat4 rotationY( in float angle ) {
+	return mat4(	cos(angle),		0,		sin(angle),	0,
+			 				0,		1.0,			 0,	0,
+					-sin(angle),	0,		cos(angle),	0,
+							0, 		0,				0,	1);
+}
+
+mat4 rotationZ( in float angle ) {
+	return mat4(	cos(angle),		-sin(angle),	0,	0,
+			 		sin(angle),		cos(angle),		0,	0,
+							0,				0,		1,	0,
+							0,				0,		0,	1);
+}
+
 vec3 MOD_calcNormal(sampler2D tex,vec2 uv)
 {
-    float strength=12.0;
+    float strength=13.0;
     float texelSize=1.0/512.0;
 
     float tl = abs(texture(tex, uv + texelSize * vec2(-1.0, -1.0)).x);   // top left

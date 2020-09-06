@@ -1,0 +1,27 @@
+{
+    "id": "0285022c-846a-43d4-8656-35ba3b5e03a6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1598536722290
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1598536817651,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Generate"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Id"
+            }
+        ],
+        "name": "Ops.String.UUID"
+    }
+}

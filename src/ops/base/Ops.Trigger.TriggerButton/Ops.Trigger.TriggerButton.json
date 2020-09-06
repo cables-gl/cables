@@ -1,0 +1,27 @@
+{
+    "id": "21630924-39e4-4df5-9965-b9136510d156",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1598969973299
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1598970012440,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerButton"
+    }
+}
