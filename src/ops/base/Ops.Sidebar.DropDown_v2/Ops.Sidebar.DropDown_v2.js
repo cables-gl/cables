@@ -72,7 +72,7 @@ function onValuesPortChange()
         {
             const optionEl = document.createElement("option");
             optionEl.setAttribute("value", option);
-            if (option === defaultValue)
+            if (option === defaultValue || option === valuePort.get())
             {
                 optionEl.setAttribute("selected", "");
             }
@@ -95,7 +95,7 @@ function setSelectedProperty()
     const optionElements = input.querySelectorAll("option");
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.value.trim() === defaultItem.trim())
+        if (optionElement.value.trim() === defaultItem.trim() || optionElement.value.trim() === valuePort.get())
         {
             optionElement.setAttribute("selected", "");
             outIndex.set(index);

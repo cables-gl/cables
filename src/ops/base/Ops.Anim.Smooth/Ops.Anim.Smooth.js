@@ -81,6 +81,10 @@ inDivisorUp.onChange = function ()
 
 function update()
 {
+    // next.trigger();
+    // result.set(goal);
+    // return;
+
     let tm = 1;
     if (performance.now() - lastTrigger > 500 || lastTrigger === 0) val = inVal.get();
     else tm = (performance.now() - lastTrigger) / (performance.now() - lastTrigger);

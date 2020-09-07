@@ -2,7 +2,7 @@
 const
     render = op.inTrigger("render"),
     texture = op.inTexture("texture"),
-    meth = op.inValueSelect("mode", ["normal", "normal xy", "mul xyz", "sub x", "add x", "add y", "add z", "mul y", "mul z", "sub z"], "normal"),
+    meth = op.inValueSelect("mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
     extrude = op.inValue("extrude", 0.5),
     flip = op.inValueBool("flip", false),
     calcNormals = op.inValueBool("Calc Normals", false),
@@ -102,14 +102,20 @@ function updateDefines()
 
     mod.toggleDefine("MOD_FLIPY", flip.get());
     mod.toggleDefine("MOD_DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
+    mod.toggleDefine("MOD_DISPLACE_METH_MULXY", meth.get() == "mul xy");
     mod.toggleDefine("MOD_DISPLACE_METH_ADDZ", meth.get() == "add z");
     mod.toggleDefine("MOD_DISPLACE_METH_ADDY", meth.get() == "add y");
     mod.toggleDefine("MOD_DISPLACE_METH_ADDX", meth.get() == "add x");
+    mod.toggleDefine("MOD_DISPLACE_METH_ADDXY", meth.get() == "add xy");
     mod.toggleDefine("MOD_DISPLACE_METH_SUBX", meth.get() == "sub x");
     mod.toggleDefine("MOD_DISPLACE_METH_MULY", meth.get() == "mul y");
     mod.toggleDefine("MOD_DISPLACE_METH_MULZ", meth.get() == "mul z");
     mod.toggleDefine("MOD_DISPLACE_METH_NORMAL", meth.get() == "normal");
     mod.toggleDefine("MOD_DISPLACE_METH_NORMAL_XY", meth.get() == "normal xy");
+    mod.toggleDefine("MOD_DISPLACE_METH_NORMAL2", meth.get() == "normal2");
+
+    mod.toggleDefine("MOD_DISPLACE_METH_NORMAL_RGB", meth.get() == "normal RGB");
+    mod.toggleDefine("MOD_DISPLACE_METH_14", meth.get() == "m14");
 
     mod.toggleDefine("CALC_NORMALS", calcNormals.get());
 }

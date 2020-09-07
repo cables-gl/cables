@@ -88,7 +88,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
     else
     if (chunk.type == "JSON")
     {
-        // const json = new TextDecoder("utf-8").decode(bArr.subarray(offset+8, offset+8+chunk.size));
         const json = Utf8ArrayToStr(bArr.subarray(offset + 8, offset + 8 + chunk.size));
 
         try
@@ -230,7 +229,7 @@ function parseGltf(arrayBuffer)
             // 5120 (BYTE)	1
             // 5121(UNSIGNED_BYTE)	1
             // 5122 (SHORT)	2
-            if (acc.componentType == 5126) // FLOAT
+            if (acc.componentType == 5126 || acc.componentType ==  5125) // 4byte FLOAT or INT
             {
                 stride = stride || 4;
                 dataBuff = new Float32Array(num);

@@ -16,18 +16,21 @@ const
     textureMask = op.inTexture("Texture Mask"),
     texMaskChan = op.inSwitch("Mask Channel", ["R", "A", "Luminance"], "R"),
     textureColorize = op.inTexture("Texture Colorize"),
+    textureOpacity = op.inTexture("Texture Opacity"),
     colorizeRandom = op.inValueBool("Colorize Randomize", true),
     texturePointSize = op.inTexture("Texture Point Size"),
+    texturePointSizeChannel = op.inSwitch("Point Size Channel", ["R", "G", "B"], "R"),
     texturePointSizeMul = op.inFloat("Texture Point Size Mul", 1),
+    texturePointSizeMap = op.inSwitch("Map Size 0", ["Black", "Grey"], "Black"),
     flipTex = op.inValueBool("Flip Texture", false),
 
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader");
 
-op.setPortGroup("Texture", [texture, textureMask, texMaskChan, textureColorize]);
+op.setPortGroup("Texture", [texture, textureMask, texMaskChan, textureColorize, textureOpacity]);
 
 op.setPortGroup("Color", [r, g, b, a, vertCols]);
-op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize, texturePointSize, texturePointSizeMul]);
+op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
 r.setUiAttribs({ "colorPick": true });
 
 const shader = new CGL.Shader(cgl, "PointMaterial");
@@ -43,6 +46,8 @@ const
     uniHeight = new CGL.Uniform(shader, "f", "canvasHeight", cgl.canvasHeight),
     textureUniform = new CGL.Uniform(shader, "t", "diffTex", 0),
     textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize", 0),
+    textureOpacityUniform = new CGL.Uniform(shader, "t", "TextureOpacity", 0),
+
     textureColoPointSize = new CGL.Uniform(shader, "t", "texColorize", 0),
     texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize", 0),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 0);
@@ -64,6 +69,8 @@ doScale.onChange =
     texMaskChan.onChange =
     inPixelSize.onChange =
     texturePointSize.onChange =
+    texturePointSizeMap.onChange =
+    texturePointSizeChannel.onChange =
     vertCols.onChange = updateDefines;
 
 
@@ -84,6 +91,7 @@ function doRender()
     if (texture.get()) shader.pushTexture(textureUniform, texture.get().tex);
     if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
     if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
+    if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
     if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get().tex);
 
     trigger.trigger();
@@ -101,11 +109,20 @@ function updateDefines()
     shader.toggleDefine("HAS_TEXTURE_DIFFUSE", texture.get());
     shader.toggleDefine("HAS_TEXTURE_MASK", textureMask.get());
     shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.get());
+    shader.toggleDefine("HAS_TEXTURE_OPACITY", textureOpacity.get());
     shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.get());
+
 
     shader.toggleDefine("FLIP_TEX", flipTex.get());
     shader.toggleDefine("TEXTURE_MASK_R", texMaskChan.get() == "R");
     shader.toggleDefine("TEXTURE_MASK_A", texMaskChan.get() == "A");
     shader.toggleDefine("TEXTURE_MASK_LUMI", texMaskChan.get() == "Luminance");
     shader.toggleDefine("PIXELSIZE", inPixelSize.get());
+
+
+    shader.toggleDefine("POINTSIZE_CHAN_R", texturePointSizeChannel.get() == "R");
+    shader.toggleDefine("POINTSIZE_CHAN_G", texturePointSizeChannel.get() == "G");
+    shader.toggleDefine("POINTSIZE_CHAN_B", texturePointSizeChannel.get() == "B");
+
+    shader.toggleDefine("DOTSIZEREMAPABS", texturePointSizeMap.get() == "Grey");
 }

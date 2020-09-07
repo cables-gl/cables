@@ -146,7 +146,6 @@ function parseUniforms(src)
                     else if (type === "bool")
                     {
                         foundNames.push(uniName);
-                        console.log("shader uni name is " + uniName);
                         if (!hasUniformInput(uniName))
                         {
                             const newInput = op.inBool(uniName, false);
