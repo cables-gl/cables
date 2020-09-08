@@ -206,7 +206,8 @@ Texture.prototype.setSize = function (w, h)
 
     if (this._cgl.printError("cgltex"))
     {
-        console.log("cgl tex settings", this.options);
+        console.log("cgl tex settings");
+        this.printInfo();
         console.log((new Error()).stack);
     }
 
