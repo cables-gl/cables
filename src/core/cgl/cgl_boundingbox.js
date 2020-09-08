@@ -99,7 +99,7 @@ class BoundingBox
     {
         if (!geom)
         {
-            console.warn("[boundingbox] no geom/vertices", geom);
+            // console.warn("[boundingbox] no geom/vertices", geom);
             return;
         }
 

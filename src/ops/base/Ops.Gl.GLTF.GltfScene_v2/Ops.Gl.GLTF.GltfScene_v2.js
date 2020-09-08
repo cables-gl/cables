@@ -210,32 +210,36 @@ function loadBin(addCacheBuster)
     oReq.responseType = "arraybuffer";
     closeTab();
 
-    oReq.onload = function (oEvent)
+    cgl.patch.loading.addAssetLoadingTask(() =>
     {
-        boundingPoints = [];
-
-        maxTime = 0;
-        const arrayBuffer = oReq.response;
-        gltf = parseGltf(arrayBuffer);
-        cgl.patch.loading.finished(loadingId);
-        needsMatUpdate = true;
-        op.refreshParams();
-        outAnimLength.set(maxTime);
-        hideNodesFromData();
-        if (tab)printInfo();
-
-        updateCamera();
-        setCam();
-        outPoints.set(boundingPoints);
-        if (gltf)
+        oReq.onload = function (oEvent)
         {
-            gltf.loaded = Date.now();
-            if (gltf.bounds)outBounds.set(gltf.bounds);
-        }
-        updateCenter();
-    };
+            boundingPoints = [];
 
-    oReq.send(null);
+            maxTime = 0;
+            const arrayBuffer = oReq.response;
+            gltf = parseGltf(arrayBuffer);
+            cgl.patch.loading.finished(loadingId);
+            needsMatUpdate = true;
+            op.refreshParams();
+            outAnimLength.set(maxTime);
+            hideNodesFromData();
+            if (tab)printInfo();
+
+            updateCamera();
+            setCam();
+            outPoints.set(boundingPoints);
+            if (gltf)
+            {
+                gltf.loaded = Date.now();
+                if (gltf.bounds)outBounds.set(gltf.bounds);
+            }
+            updateCenter();
+            // op.log("finished loading gltf");
+        };
+
+        oReq.send(null);
+    });
 }
 
 op.onFileChanged = function (fn)
