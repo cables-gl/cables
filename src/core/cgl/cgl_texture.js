@@ -71,6 +71,7 @@ const Texture = function (__cgl, options)
 
     profileData.profileTextureNew++;
 
+    console.log("options size", options.width, options.height);
     this.setSize(options.width, options.height);
 };
 
