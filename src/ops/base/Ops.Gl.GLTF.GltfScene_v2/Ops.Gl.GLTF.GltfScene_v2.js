@@ -235,6 +235,7 @@ function loadBin(addCacheBuster)
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }
             updateCenter();
+            // op.log("finished loading gltf");
         };
 
         oReq.send(null);
