@@ -482,7 +482,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.name = url;
 
-    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture (" + url + ")" });
+    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture " + CABLES.basename(url) });
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";

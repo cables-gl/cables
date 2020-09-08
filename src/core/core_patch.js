@@ -39,6 +39,16 @@ const Patch = function (cfg)
 
     this.ops = [];
     this.settings = {};
+    this.config = cfg || {
+        "glCanvasResizeToWindow": false,
+        "prefixAssetPath": "",
+        "silent": false,
+        "onError": null,
+        "onFinishedLoading": null,
+        "onFirstFrameRendered": null,
+        "onPatchLoaded": null,
+        "fpsLimit": 0,
+    };
     this.timer = new Timer();
     this.freeTimer = new Timer();
     this.animFrameOps = [];
@@ -49,11 +59,12 @@ const Patch = function (cfg)
     this.onLoadStart = null;
     this.onLoadEnd = null;
     this.aborted = false;
-    this.loading = new LoadingStatus(this);
     this._crashedOps = [];
     this._renderOneFrame = false;
     this._animReq = null;
     this._opIdCache = {};
+
+    this.loading = new LoadingStatus(this);
 
     this._perf = {
         "fps": 0,
@@ -76,18 +87,6 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
-
-    this.config = cfg || {
-        "glCanvasResizeToWindow": false,
-
-        "prefixAssetPath": "",
-        "silent": false,
-        "onError": null,
-        "onFinishedLoading": null,
-        "onFirstFrameRendered": null,
-        "onPatchLoaded": null,
-        "fpsLimit": 0,
-    };
 
 
     if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
