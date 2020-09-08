@@ -52,6 +52,7 @@ float rand(float n){return fract(sin(n) * 5711.5711123);}
 
 void main()
 {
+    norm=attrVertNormal;
     #ifdef PIXELSIZE
         float psMul=1.0;
     #endif
@@ -115,7 +116,7 @@ void main()
         #ifdef DOTSIZEREMAPABS
             // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
 
-            addPointSize=1.0-(distance(texture(texPointSize,texCoord).r,0.5)*2.0);
+            addPointSize=1.0-(distance(texture(texPointSize,texCoord).b,0.5)*2.0);
 
             // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
 
