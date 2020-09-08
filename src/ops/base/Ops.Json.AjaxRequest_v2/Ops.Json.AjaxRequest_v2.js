@@ -46,7 +46,6 @@ function reload(addCachebuster)
     isLoading.set(true);
 
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
-
     op.setUiError("jsonerr", null);
 
     let httpClient = CABLES.ajax;
@@ -55,44 +54,47 @@ function reload(addCachebuster)
     let url = op.patch.getFilePath(filename.get());
     if (addCachebuster)url += "?rnd=" + CABLES.generateUUID();
 
-    const body = inBody.get();
-    httpClient(
-        url,
-        (err, _data, xhr) =>
-        {
-            if (err)
+    op.patch.loading.addAssetLoadingTask(() =>
+    {
+        const body = inBody.get();
+        httpClient(
+            url,
+            (err, _data, xhr) =>
             {
-                op.error(err);
-                return;
-            }
-            try
-            {
-                let data = _data;
-                outData.set(null);
-                if (typeof data === "string" && inParseJson.get())
+                if (err)
                 {
-                    data = JSON.parse(_data);
-                    outData.set(data);
+                    op.error(err);
+                    return;
                 }
-                outString.set(null);
-                outString.set(_data);
-                op.uiAttr({ "error": null });
-                op.patch.loading.finished(loadingId);
-                outTrigger.trigger();
-                isLoading.set(false);
-            }
-            catch (e)
-            {
-                op.error(e);
-                op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
-                op.patch.loading.finished(loadingId);
-                isLoading.set(false);
-            }
-        },
-        inMethod.get(),
-        (body && body.length > 0) ? body : null,
-        inContentType.get(),
-        null,
-        headers.get() || {}
-    );
+                try
+                {
+                    let data = _data;
+                    outData.set(null);
+                    if (typeof data === "string" && inParseJson.get())
+                    {
+                        data = JSON.parse(_data);
+                        outData.set(data);
+                    }
+                    outString.set(null);
+                    outString.set(_data);
+                    op.uiAttr({ "error": null });
+                    op.patch.loading.finished(loadingId);
+                    outTrigger.trigger();
+                    isLoading.set(false);
+                }
+                catch (e)
+                {
+                    op.error(e);
+                    op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
+                    op.patch.loading.finished(loadingId);
+                    isLoading.set(false);
+                }
+            },
+            inMethod.get(),
+            (body && body.length > 0) ? body : null,
+            inContentType.get(),
+            null,
+            headers.get() || {}
+        );
+    });
 }

@@ -158,14 +158,15 @@ Port.prototype.remove = function ()
  */
 Port.prototype.setUiAttribs = function (newAttribs)
 {
+    let changed = false;
     if (!this.uiAttribs) this.uiAttribs = {};
     for (const p in newAttribs)
     {
+        if (this.uiAttribs[p] != newAttribs[p]) changed = true;
         this.uiAttribs[p] = newAttribs[p];
     }
-    // if(this.onUiAttrChange) this.onUiAttrChange(newAttribs);
 
-    this.emitEvent("onUiAttrChange", newAttribs);
+    if (changed) this.emitEvent("onUiAttrChange", newAttribs);
 };
 
 /**
@@ -693,10 +694,13 @@ Port.prototype._onSetProfiling = function (v)
 Port.prototype._onTriggeredProfiling = function ()
 {
     // this.parent.updateAnims();
-    this.parent.patch.profiler.add("port", this);
 
-    if (this.parent.enabled && this.onTriggered) this.onTriggered();
-    this.parent.patch.profiler.add("port", null);
+    if (this.parent.enabled && this.onTriggered)
+    {
+        this.parent.patch.profiler.add("port", this);
+        this.onTriggered();
+        this.parent.patch.profiler.add("port", null);
+    }
 };
 
 Port.prototype.onValueChange = function (cb)

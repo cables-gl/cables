@@ -404,7 +404,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
         this.texCoords = new Float32Array(texCoordLength);
         for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;
     }
-    if (!this.verticesIndices.length)
+    if (!this.verticesIndices || !this.verticesIndices.length)
     {
         console.error("Cannot calculate tangents/bitangents without vertex indices.");
         return;
@@ -509,7 +509,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
 
         const intermDot = vec3.dot(crossPd, tempVertices[vert + vertexCount]);
 
-        const w = intermDot < 0.0 ? -1.0 : 1.0;
+        const w = 1.0;// intermDot < 0.0 ? -1.0 : 1.0;
 
         vec3.scale(tan, normalized, 1 / w);
         vec3.cross(bitan, normal, tan);

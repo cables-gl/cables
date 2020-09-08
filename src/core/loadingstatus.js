@@ -2,12 +2,19 @@ import { generateUUID } from "./utils";
 // eslint-disable-next-line
 import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
 
-// "use strict";
-
+/**
+ * LoadingStatus class, manages asynchronous loading jobs
+ *
+ * @external CABLES
+ * @namespace LoadingStatus
+ * @hideconstructor
+ * @class
+ */
 const LoadingStatus = function (patch)
 {
     this._loadingAssets = {};
     this._cbFinished = [];
+    this._assetTasks = [];
     this._percent = 0;
     this._count = 0;
     this._countFinished = 0;
@@ -15,6 +22,7 @@ const LoadingStatus = function (patch)
     this._startTime = 0;
     this._patch = patch;
     this._wasFinishedPrinted = false;
+    this._loadingAssetTaskCb = false;
 };
 
 LoadingStatus.prototype.setOnFinishedLoading = function (cb)
@@ -95,6 +103,34 @@ LoadingStatus.prototype.finished = function (id)
     }
 
     this.checkStatus();
+};
+
+LoadingStatus.prototype._startAssetTasks = function ()
+{
+    for (let i = 0; i < this._assetTasks.length; i++) this._assetTasks[i]();
+    this._assetTasks.length = 0;
+};
+
+/**
+ * delay an asset loading task, mainly to wait for ui to be finished loading and showing, and only then start loading assets
+ * @function addAssetLoadingTask
+ * @instance
+ * @memberof Op
+ * @param {function} callback
+ */
+LoadingStatus.prototype.addAssetLoadingTask = function (cb)
+{
+    if (this._patch.isEditorMode() && !CABLES.UI.loaded)
+    {
+        this._assetTasks.push(cb);
+
+        if (!this._loadingAssetTaskCb)window.gui.addEventListener("uiloaded", this._startAssetTasks.bind(this));
+        this._loadingAssetTaskCb = true;
+    }
+    else
+    {
+        cb();
+    }
 };
 
 LoadingStatus.prototype.start = function (type, name)

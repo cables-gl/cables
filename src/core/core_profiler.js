@@ -7,6 +7,7 @@ const Profiler = function ()
     let currentId = null;
     let currentStart = 0;
 
+
     this.getItems = function ()
     {
         return items;
@@ -30,11 +31,6 @@ const Profiler = function ()
 
                     if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)
                     {
-                        // if (items[currentId].peak > 1 && object)
-                        // {
-                        //     Log.log("PEAK ", object.parent.objName);
-                        // }
-
                         items[currentId].peak = 0;
                         items[currentId].peakTime = now();
                     }
@@ -54,7 +50,9 @@ const Profiler = function ()
             }
 
             items[object.id].numTriggers++;
+            items[object.id].opid = object.parent.id;
             items[object.id].title = object.parent.name + "." + object.name;
+            items[object.id].subPatch = object.parent.uiAttribs.subPatch;
 
             currentId = object.id;
             currentStart = performance.now();

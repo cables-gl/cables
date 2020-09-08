@@ -75,8 +75,7 @@ function realReload(nocache)
 
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
-
-    if (filename.get().indexOf("data:") == 0) url = filename.get();
+    if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 
     loadedFilename = filename.get();
 
@@ -87,42 +86,45 @@ function realReload(nocache)
         op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
         op.refreshParams();
 
-        if (tex)tex.delete();
-        tex = CGL.Texture.load(cgl, url,
-            function (err)
-            {
-                if (err)
+        cgl.patch.loading.addAssetLoadingTask(() =>
+        {
+            if (tex)tex.delete();
+            tex = CGL.Texture.load(cgl, url,
+                function (err)
                 {
-                    setTempTexture();
-                    console.log(err);
-                    op.setUiError("urlerror", "could not load texture:<br/>\"" + filename.get() + "\"", 2);
+                    if (err)
+                    {
+                        setTempTexture();
+                        console.log(err);
+                        op.setUiError("urlerror", "could not load texture:<br/>\"" + filename.get() + "\"", 2);
+                        cgl.patch.loading.finished(loadingId);
+                        return;
+                    }
+                    else op.setUiError("urlerror", null);
+                    textureOut.set(tex);
+                    width.set(tex.width);
+                    height.set(tex.height);
+                    ratio.set(tex.width / tex.height);
+
+                    if (!tex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
+                    else op.setUiError("npot", null);
+
+                    textureOut.set(null);
+                    textureOut.set(tex);
+
+                    loaded.set(true);
                     cgl.patch.loading.finished(loadingId);
-                    return;
-                }
-                else op.setUiError("urlerror", null);
-                textureOut.set(tex);
-                width.set(tex.width);
-                height.set(tex.height);
-                ratio.set(tex.width / tex.height);
+                }, {
+                    "anisotropic": cgl_aniso,
+                    "wrap": cgl_wrap,
+                    "flip": flip.get(),
+                    "unpackAlpha": unpackAlpha.get(),
+                    "filter": cgl_filter
+                });
 
-                if (!tex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
-                else op.setUiError("npot", null);
-
-                textureOut.set(null);
-                textureOut.set(tex);
-
-                loaded.set(true);
-                cgl.patch.loading.finished(loadingId);
-            }, {
-                "anisotropic": cgl_aniso,
-                "wrap": cgl_wrap,
-                "flip": flip.get(),
-                "unpackAlpha": unpackAlpha.get(),
-                "filter": cgl_filter
-            });
-
-        textureOut.set(null);
-        textureOut.set(tex);
+            textureOut.set(null);
+            textureOut.set(tex);
+        });
     }
     else
     {

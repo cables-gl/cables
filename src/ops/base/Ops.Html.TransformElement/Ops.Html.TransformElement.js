@@ -16,6 +16,9 @@ const m = mat4.create();
 const pos = vec3.create();
 const trans = vec3.create();
 
+let cachedTop = -1;
+let cachedLeft = -1;
+
 exec.onTriggered = setProperties;
 op.onDelete = removeProperties;
 
@@ -75,8 +78,6 @@ function getScreenCoord()
     vec3.transformMat4(pos, [0, 0, 0], m);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-    // console.log(cgl.pMatrix);
-
     const vp = cgl.getViewPort();
 
     const w = cgl.canvasWidth / cgl.pixelDensity;
@@ -107,13 +108,19 @@ function setProperties()
     if (ele && ele.style)
     {
         getScreenCoord();
-        const offsetTop = cgl.canvas.offsetTop;
+        const yy = cgl.canvas.offsetTop + y;
 
-        const ypx = offsetTop + y + "px";
-        const xpx = x + "px";
+        if (yy != cachedLeft)
+        {
+            ele.style.top = yy + "px";
+            cachedTop = yy;
+        }
 
-        if (ele.style.top != ypx) ele.style.top = ypx;
-        if (ele.style.left != xpx) ele.style.left = xpx;
+        if (x != cachedLeft)
+        {
+            ele.style.left = x + "px";
+            cachedLeft = x;
+        }
     }
 
     next.trigger();

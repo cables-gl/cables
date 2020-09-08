@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 
 const trigger = op.outTrigger("trigger");
-const shaderOut = op.outObject("shader");
+const shaderOut = op.outObject("shader", null, "shader");
 
 shaderOut.ignoreValueSerialize = true;
 
