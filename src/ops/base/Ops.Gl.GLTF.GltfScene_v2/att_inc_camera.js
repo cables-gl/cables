@@ -8,7 +8,7 @@ const gltfCamera = class
 
         if (!this.node)
         {
-            console.log("gltf camera - no node!!");
+            // console.log("gltf camera - no node!!");
             return;
         }
         // this.nodeOrient=gltf.getNode(this.name+"_Orientation");
