@@ -63,12 +63,11 @@ const Texture = function (__cgl, options)
     }
     else
     {
-        options = {
-            "width": DEFAULT_TEXTURE_SIZE,
-            "height": DEFAULT_TEXTURE_SIZE,
-        };
+        options = {};
     }
 
+    if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
+    if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
     profileData.profileTextureNew++;
 
