@@ -1,6 +1,6 @@
 # Shadertoy
 
-Go this [example page](https://cables.gl/p/5f4cbae9f131bc0ec30591da) to see a basic setup of shadertoy in cables.
+Go to this [example page](https://cables.gl/p/5f4cbae9f131bc0ec30591da) to see a basic setup of shadertoy in cables.
 Youtube tutorial [porting shadertoy to cables part 01](https://youtu.be/j_ins4RW0c8)
 
 Porting shaders from shadertoy isn't that difficult once you know the basics.
@@ -8,7 +8,7 @@ The main ops that you'll need are:
 - [custom shader op](https://cables.gl/op/Ops.Gl.Shader.CustomShader_v2)
 - [shader2Texture op](https://cables.gl/op/Ops.Gl.Shader.Shader2Texture)
 
-standard glsl in [shadertoy](https://www.shadertoy.com/) and the equivalent in cables is :
+standard glsl in [shadertoy](https://www.shadertoy.com/) and the equivalent in cables is:
 ```javascript
 fragCoord.xy                                //pixel coordinates in shadertoy
 gl_FragCoord.xy                             //pixel coordinates in cables
