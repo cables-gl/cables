@@ -1,7 +1,7 @@
 # Shadertoy
 
-Go this [example page](https://dev.cables.gl/edit/5f4cbae9f131bc0ec30591da) to see a basic setup of shadertoy in cables.
-Youtube tutorial - ADD LATER
+Go this [example page](https://cables.gl/p/5f4cbae9f131bc0ec30591da) to see a basic setup of shadertoy in cables.
+Youtube tutorial [porting shadertoy to cables part 01](https://youtu.be/j_ins4RW0c8)
 
 Porting shaders from shadertoy isn't that difficult once you know the basics.
 The main ops that you'll need are:
