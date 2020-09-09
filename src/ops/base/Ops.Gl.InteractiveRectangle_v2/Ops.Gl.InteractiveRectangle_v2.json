@@ -1,0 +1,157 @@
+{
+    "id": "334728ca-60a2-4a42-a059-d9b5f3fe4d32",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599663936812
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1599663953139,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "width",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "height",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "id"
+            },
+            {
+                "type": "5",
+                "name": "Class"
+            },
+            {
+                "type": "0",
+                "name": "pivot x index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "pivot x",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "pivot y index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "pivot y",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "axis index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "axis",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Is Interactive",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Render Rectangle",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Show Boundings",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Cursor index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Cursor",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Render",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "2",
+                "name": "geometry"
+            },
+            {
+                "type": "0",
+                "name": "Pointer Hover",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pointer Down",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pointer X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pointer Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Top",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Left",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Right",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Bottom",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Left Click"
+            },
+            {
+                "type": "2",
+                "name": "Dom Element"
+            }
+        ],
+        "name": "Ops.Gl.InteractiveRectangle_v2"
+    }
+}
