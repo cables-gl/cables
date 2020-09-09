@@ -35,6 +35,8 @@ const cgl = op.patch.cgl;
 
 const viewMatrix = mat4.create();
 
+op.toWorkPortsNeedToBeLinked(render);
+
 render.onTriggered = function ()
 {
     if (cgl.frameStore.shadowPass) return trigger.trigger();
@@ -139,7 +141,6 @@ function calcCameraMovement()
 
     const mulSpeed = 0.016;
 
-
     speedx = camMovementXComponent * mulSpeed;
     speedy = camMovementYComponent * mulSpeed;
     speedz = camMovementZComponent * mulSpeed;
@@ -208,11 +209,15 @@ document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
 
 document.getElementById("glcanvas").addEventListener("mousedown", function ()
 {
-    document.addEventListener("mousemove", moveCallback, false);
-    canvas.requestPointerLock = canvas.requestPointerLock ||
-                                canvas.mozRequestPointerLock ||
-                                canvas.webkitRequestPointerLock;
-    canvas.requestPointerLock();
+    const test = false;
+    if (render.isLinked())
+    {
+        document.addEventListener("mousemove", moveCallback, false);
+        canvas.requestPointerLock = canvas.requestPointerLock ||
+                                    canvas.mozRequestPointerLock ||
+                                    canvas.webkitRequestPointerLock;
+        canvas.requestPointerLock();
+    }
 });
 
 let lastMove = 0;
