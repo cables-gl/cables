@@ -509,7 +509,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
 
         const intermDot = vec3.dot(crossPd, tempVertices[vert + vertexCount]);
 
-        const w = 1.0;// intermDot < 0.0 ? -1.0 : 1.0;
+        const w = intermDot < 0.0 ? -1.0 : 1.0;
 
         vec3.scale(tan, normalized, 1 / w);
         vec3.cross(bitan, normal, tan);
