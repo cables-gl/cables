@@ -1,0 +1,61 @@
+{
+    "id": "23957c3c-963e-48bb-924e-6957be3da858",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1599660449801
+        }
+    ],
+    "authorName": "tim",
+    "created": 1599660471595,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "play",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Autoplay",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "volume",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Synchronized Player",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Loop",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            },
+            {
+                "type": "0",
+                "name": "playing",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "ended"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioPlayer_v2"
+    }
+}

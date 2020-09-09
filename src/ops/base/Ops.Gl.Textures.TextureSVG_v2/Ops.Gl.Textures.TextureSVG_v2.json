@@ -1,0 +1,62 @@
+{
+    "id": "e4f3d8f1-8a49-460a-896c-4d7adcda2494",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1599662324663
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1599662335078,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "file"
+            },
+            {
+                "type": "0",
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "wrap",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "filter",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Textures.TextureSVG_v2"
+    }
+}
