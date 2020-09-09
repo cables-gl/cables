@@ -59,6 +59,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     }
 
     if (!this._options.hasOwnProperty("filter")) this._options.filter = Texture.FILTER_LINEAR;
+    if (!this._options.hasOwnProperty("wrap")) this._options.wrap = Texture.WRAP_REPEAT;
 
     this._numRenderBuffers = this._options.numRenderBuffers;
     this._colorTextures = [];

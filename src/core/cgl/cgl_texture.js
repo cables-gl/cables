@@ -63,12 +63,11 @@ const Texture = function (__cgl, options)
     }
     else
     {
-        options = {
-            "width": DEFAULT_TEXTURE_SIZE,
-            "height": DEFAULT_TEXTURE_SIZE,
-        };
+        options = {};
     }
 
+    if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
+    if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
     profileData.profileTextureNew++;
 
@@ -207,7 +206,9 @@ Texture.prototype.setSize = function (w, h)
 
     if (this._cgl.printError("cgltex"))
     {
-        console.log("cgl tex settings", this.options);
+        console.log("cgl tex settings");
+        this.printInfo();
+        console.log((new Error()).stack);
     }
 
     // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
@@ -482,7 +483,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.name = url;
 
-    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture (" + url + ")" });
+    if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture " + CABLES.basename(url) });
 
     texture.image = new Image();
     texture.image.crossOrigin = "anonymous";
