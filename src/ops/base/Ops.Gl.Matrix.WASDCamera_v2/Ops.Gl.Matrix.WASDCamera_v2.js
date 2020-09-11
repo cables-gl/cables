@@ -1,5 +1,6 @@
 op.requirements = [CABLES.Requirements.POINTERLOCK];
 const render = op.inTrigger("render");
+const enablePointerLock = op.inBool("Enable pointer lock", true);
 const trigger = op.outTrigger("trigger");
 
 const isLocked = op.outValue("isLocked", false);
@@ -210,7 +211,7 @@ document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
 document.getElementById("glcanvas").addEventListener("mousedown", function ()
 {
     const test = false;
-    if (render.isLinked())
+    if (render.isLinked() && enablePointerLock.get())
     {
         document.addEventListener("mousemove", moveCallback, false);
         canvas.requestPointerLock = canvas.requestPointerLock ||
