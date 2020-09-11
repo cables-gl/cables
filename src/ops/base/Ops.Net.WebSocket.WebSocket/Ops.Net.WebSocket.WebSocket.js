@@ -1,9 +1,9 @@
 // ws://192.168.1.235
 
-const inUrl = op.inValueString("url");
+const inUrl = op.inValueString("URL");
 
-const outResult = op.outObject("result");
-const outConnected = op.outValue("connected");
+const outResult = op.outObject("Result");
+const outConnected = op.outValue("Connected");
 const outConnection = this.outObject("Connection");
 
 const outReceived = op.outTrigger("Received Data");
@@ -98,7 +98,7 @@ function connect()
         {
             try
             {
-                let json = JSON.parse(message.data);
+                const json = JSON.parse(message.data);
                 outResult.set(null);
                 outResult.set(json);
                 outReceived.trigger();

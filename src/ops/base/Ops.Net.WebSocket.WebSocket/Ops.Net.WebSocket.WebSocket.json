@@ -3,18 +3,18 @@
         "portsIn": [
             {
                 "type": "0",
-                "name": "url",
+                "name": "URL",
                 "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
-                "name": "result"
+                "name": "Result"
             },
             {
                 "type": "0",
-                "name": "connected",
+                "name": "Connected",
                 "subType": "number"
             },
             {

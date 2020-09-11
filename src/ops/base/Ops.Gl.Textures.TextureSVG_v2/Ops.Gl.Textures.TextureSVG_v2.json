@@ -13,43 +13,43 @@
         "portsIn": [
             {
                 "type": "5",
-                "name": "file"
+                "name": "File"
             },
             {
                 "type": "0",
-                "name": "texture width",
+                "name": "Texture width",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "texture height",
+                "name": "Texture height",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap index",
+                "name": "Wrap index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "wrap",
+                "name": "Wrap",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "filter index",
+                "name": "Filter index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "filter",
+                "name": "Filter",
                 "subType": "string"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
-                "name": "texture"
+                "name": "Texture"
             },
             {
                 "type": "0",

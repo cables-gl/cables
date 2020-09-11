@@ -13,21 +13,21 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Trigger in"
             },
             {
                 "type": "0",
-                "name": "width",
+                "name": "Width",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height",
+                "name": "Height",
                 "subType": "number"
             },
             {
                 "type": "5",
-                "name": "id"
+                "name": "ID"
             },
             {
                 "type": "5",
@@ -35,32 +35,32 @@
             },
             {
                 "type": "0",
-                "name": "pivot x index",
+                "name": "Pivot x index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "pivot x",
+                "name": "Pivot x",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "pivot y index",
+                "name": "Pivot y index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "pivot y",
+                "name": "Pivot y",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "axis index",
+                "name": "Axis index",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "axis",
+                "name": "Axis",
                 "subType": "string"
             },
             {
@@ -97,7 +97,7 @@
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Trigger out"
             },
             {
                 "type": "2",

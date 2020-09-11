@@ -1,16 +1,16 @@
 const self = this;
 const patch = this.patch;
 
-this.file = op.inUrl("file", "audio");
-const play = op.inBool("play", false);
+this.file = op.inUrl("File", "audio");
+const play = op.inBool("Play", false);
 const autoPlay = op.inBool("Autoplay", false);
 
-const volume = op.inFloatSlider("volume", 1.0);
+const volume = op.inFloatSlider("Volume", 1.0);
 const synchronizedPlayer = op.inBool("Synchronized Player", false);
 
-this.audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
-const outPlaying = this.addOutPort(new CABLES.Port(this, "playing", CABLES.OP_PORT_TYPE_VALUE));
-const outEnded = this.addOutPort(new CABLES.Port(this, "ended", CABLES.OP_PORT_TYPE_FUNCTION));
+this.audioOut = this.addOutPort(new CABLES.Port(this, "Audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const outPlaying = this.addOutPort(new CABLES.Port(this, "Playing", CABLES.OP_PORT_TYPE_VALUE));
+const outEnded = this.addOutPort(new CABLES.Port(this, "Ended", CABLES.OP_PORT_TYPE_FUNCTION));
 
 const doLoop = op.inBool("Loop", false);
 

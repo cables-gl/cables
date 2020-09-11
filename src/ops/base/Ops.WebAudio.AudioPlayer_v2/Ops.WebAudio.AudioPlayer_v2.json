@@ -13,11 +13,11 @@
         "portsIn": [
             {
                 "type": "5",
-                "name": "file"
+                "name": "File"
             },
             {
                 "type": "0",
-                "name": "play",
+                "name": "Play",
                 "subType": "boolean"
             },
             {
@@ -27,7 +27,7 @@
             },
             {
                 "type": "0",
-                "name": "volume",
+                "name": "Volume",
                 "subType": "number"
             },
             {
@@ -44,16 +44,16 @@
         "portsOut": [
             {
                 "type": "2",
-                "name": "audio out"
+                "name": "Audio out"
             },
             {
                 "type": "0",
-                "name": "playing",
+                "name": "Playing",
                 "subType": "number"
             },
             {
                 "type": "1",
-                "name": "ended"
+                "name": "Ended"
             }
         ],
         "name": "Ops.WebAudio.AudioPlayer_v2"
