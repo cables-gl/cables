@@ -539,8 +539,6 @@ Patch.prototype.renderFrame = function (e)
     this.timer.update();
     this.freeTimer.update();
     const time = this.timer.getTime();
-
-
     const startTime = performance.now();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
@@ -890,7 +888,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     const reqs = new Requirements(this);
 
-
     // Log.log('add ops ',obj.ops);
     // add ops...
     for (const iop in obj.ops)
@@ -898,7 +895,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const start = CABLES.now();
         const opData = obj.ops[iop];
         let op = null;
-
 
         try
         {
@@ -965,6 +961,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i]._origData = null;
         }
     }
+
+    console.log("----------deserialize before linking");
 
     // create links...
     if (obj.ops)
