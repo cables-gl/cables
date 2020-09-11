@@ -1,5 +1,6 @@
 op.requirements = [CABLES.Requirements.POINTERLOCK];
 const render = op.inTrigger("render");
+const enablePointerLock = op.inBool("Enable pointer lock", true);
 const trigger = op.outTrigger("trigger");
 
 const isLocked = op.outValue("isLocked", false);
@@ -34,6 +35,8 @@ let posZ = 0;
 const cgl = op.patch.cgl;
 
 const viewMatrix = mat4.create();
+
+op.toWorkPortsNeedToBeLinked(render);
 
 render.onTriggered = function ()
 {
@@ -139,7 +142,6 @@ function calcCameraMovement()
 
     const mulSpeed = 0.016;
 
-
     speedx = camMovementXComponent * mulSpeed;
     speedy = camMovementYComponent * mulSpeed;
     speedz = camMovementZComponent * mulSpeed;
@@ -208,11 +210,15 @@ document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
 
 document.getElementById("glcanvas").addEventListener("mousedown", function ()
 {
-    document.addEventListener("mousemove", moveCallback, false);
-    canvas.requestPointerLock = canvas.requestPointerLock ||
-                                canvas.mozRequestPointerLock ||
-                                canvas.webkitRequestPointerLock;
-    canvas.requestPointerLock();
+    const test = false;
+    if (render.isLinked() && enablePointerLock.get())
+    {
+        document.addEventListener("mousemove", moveCallback, false);
+        canvas.requestPointerLock = canvas.requestPointerLock ||
+                                    canvas.mozRequestPointerLock ||
+                                    canvas.webkitRequestPointerLock;
+        canvas.requestPointerLock();
+    }
 });
 
 let lastMove = 0;

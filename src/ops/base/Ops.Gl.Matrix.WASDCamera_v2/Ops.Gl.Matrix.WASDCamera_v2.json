@@ -11,6 +11,11 @@
             },
             {
                 "type": "0",
+                "name": "Enable pointer lock",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Allow Flying",
                 "subType": "boolean"
             },
