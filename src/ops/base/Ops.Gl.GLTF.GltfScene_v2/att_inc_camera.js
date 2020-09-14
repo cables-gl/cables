@@ -31,8 +31,6 @@ const gltfCamera = class
             this.node._node.rotation[2],
             this.node._node.rotation[3]);
 
-
-
         // vec3.set(this.quatOr,
         //     this.nodeOrient._node.rotation[0],
         //     this.nodeOrient._node.rotation[1],

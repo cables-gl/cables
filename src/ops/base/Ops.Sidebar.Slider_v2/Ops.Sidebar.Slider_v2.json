@@ -54,6 +54,11 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Default",
+                "subType": "number"
             }
         ],
         "portsOut": [
