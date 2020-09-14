@@ -278,7 +278,6 @@ Patch.prototype.getFilePath = function (filename)
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
 
     filename = filename.replace("//", "/");
-
     return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
 };
 
@@ -433,6 +432,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         this._opIdCache[op.id] = op;
 
         // if (this.onAdd) this.onAdd(op);
+        // console.log("onop add event!");
+
         this.emitEvent("onOpAdd", op);
 
         if (op.init) op.init();

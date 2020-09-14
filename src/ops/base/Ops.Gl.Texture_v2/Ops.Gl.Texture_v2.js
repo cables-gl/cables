@@ -88,6 +88,7 @@ function realReload(nocache)
 
         cgl.patch.loading.addAssetLoadingTask(() =>
         {
+            op.setUiError("urlerror", null);
             if (tex)tex.delete();
             tex = CGL.Texture.load(cgl, url,
                 function (err)
@@ -100,7 +101,7 @@ function realReload(nocache)
                         cgl.patch.loading.finished(loadingId);
                         return;
                     }
-                    else op.setUiError("urlerror", null);
+
                     textureOut.set(tex);
                     width.set(tex.width);
                     height.set(tex.height);
