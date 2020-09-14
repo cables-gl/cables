@@ -9,6 +9,7 @@ update();
 
 function update()
 {
-    if (!inNum.get())result.set(inOr.get());
+    const n = inNum.get();
+    if (!n || n != n)result.set(inOr.get());
     else result.set(inNum.get());
 }

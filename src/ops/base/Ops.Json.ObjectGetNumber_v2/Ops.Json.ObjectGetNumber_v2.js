@@ -1,19 +1,24 @@
 const
-    data=op.inObject("Data"),
+    data = op.inObject("Data"),
     key = op.inString("Key"),
-    result=op.outValue("Result");
+    result = op.outValue("Result");
 
-result.ignoreValueSerialize=true;
-data.ignoreValueSerialize=true;
+result.ignoreValueSerialize = true;
+data.ignoreValueSerialize = true;
 
-key.onChange=exec;
-data.onChange=exec;
+data.onChange = exec;
+
+key.onChange = function ()
+{
+    op.setUiAttrib({ "extendTitle": key.get() });
+    exec();
+};
 
 function exec()
 {
-    if(data.get() && data.get().hasOwnProperty(key.get()))
+    if (data.get() && data.get().hasOwnProperty(key.get()))
     {
-        result.set( data.get()[key.get()] );
+        result.set(data.get()[key.get()]);
     }
     else
     {

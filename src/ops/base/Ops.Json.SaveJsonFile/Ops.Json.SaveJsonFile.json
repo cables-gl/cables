@@ -13,9 +13,8 @@
                 "name": "download"
             },
             {
-                "type": "0",
-                "name": "Filename",
-                "subType": "string"
+                "type": "5",
+                "name": "Filename"
             },
             {
                 "type": "2",

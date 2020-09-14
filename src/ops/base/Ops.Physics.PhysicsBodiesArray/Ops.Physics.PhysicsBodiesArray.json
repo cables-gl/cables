@@ -73,6 +73,10 @@
                 "name": "Simulated Positions"
             },
             {
+                "type": "3",
+                "name": "Names"
+            },
+            {
                 "type": "0",
                 "name": "Total Bodies",
                 "subType": "number"

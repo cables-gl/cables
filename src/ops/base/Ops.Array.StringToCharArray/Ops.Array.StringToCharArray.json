@@ -28,5 +28,26 @@
             }
         ],
         "name": "Ops.Array.StringToCharArray"
+    },
+    "summary": "Turns a string into an array of single characters or ASCII numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "String in"
+            },
+            {
+                "name": "Convert to numbers",
+                "text": "Convert to array of ASCII numbers"
+            },
+            {
+                "name": "Array out",
+                "text": "Array out"
+            }
+        ]
     }
 }
