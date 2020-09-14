@@ -524,8 +524,7 @@ const Op = function ()
                     "hidePort": true,
                     "type": "string",
                     values
-                },
-                n
+                }, n
             );
 
             indexPort.onLinkChanged = function ()
