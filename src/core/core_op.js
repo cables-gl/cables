@@ -955,11 +955,18 @@ const Op = function ()
         return count;
     };
 
-    Op.prototype.findFittingPort = function (otherPort)
+    Op.prototype.findFittingPort = function (otherPort, inPortsFirst = false)
     {
-        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-
-        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        if (inPortsFirst)
+        {
+            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+        }
+        else
+        {
+            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        }
     };
 
     Op.prototype.getSerialized = function (cleanUp)
