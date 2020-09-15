@@ -392,13 +392,14 @@ const Op = function ()
      * @return {Port} created port
      */
     // new string
-    Op.prototype.inStringEditor = function (name, v, syntax)
+    Op.prototype.inStringEditor = function (name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "type": "string",
                 "display": "editor",
-                "editorSyntax": syntax
+                "editorSyntax": syntax,
+                hideFormatButton
             })
         );
         p.value = "";
@@ -411,13 +412,14 @@ const Op = function ()
     };
 
     // old
-    Op.prototype.inValueEditor = function (name, v, syntax)
+    Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "type": "string",
                 "display": "editor",
-                "editorSyntax": syntax
+                "editorSyntax": syntax,
+                hideFormatButton
             })
         );
         p.value = "";
