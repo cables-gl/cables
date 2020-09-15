@@ -25,6 +25,8 @@ const valuePort = op.outValue("Result", defaultValuePort.get());
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 op.setPortGroup("Range", [minPort, maxPort, stepPort]);
 op.setPortGroup("Visibility", [inGreyOut, inVisible]);
+let inutValueDelayed = 0;
+
 
 // vars
 const el = document.createElement("div");
@@ -189,21 +191,26 @@ function stepPortChanged()
     updateActiveTrack();
 }
 
+
 function updateActiveTrack(val)
 {
-    let valueToUse = parseFloat(input.value);
-    if (typeof val !== "undefined") valueToUse = val;
-    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
-    if (availableWidth === 0) { availableWidth = 206; }
-    const trackWidth = CABLES.map(
-        valueToUse,
-        parseFloat(input.min),
-        parseFloat(input.max),
-        0,
-        availableWidth - 16 /* subtract slider thumb width */
-    );
-    // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
-    activeTrack.style.width = trackWidth + "px";
+    clearTimeout(inutValueDelayed);
+    inutValueDelayed = setTimeout(() =>
+    {
+        let valueToUse = parseFloat(input.value);
+        if (typeof val !== "undefined") valueToUse = val;
+        let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
+        if (availableWidth === 0) { availableWidth = 206; }
+        const trackWidth = CABLES.map(
+            valueToUse,
+            parseFloat(input.min),
+            parseFloat(input.max),
+            0,
+            availableWidth - 16 /* subtract slider thumb width */
+        );
+        // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
+        activeTrack.style.width = trackWidth + "px";
+    }, 50);
 }
 
 function onMinPortChange()

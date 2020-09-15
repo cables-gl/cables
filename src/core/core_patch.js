@@ -278,7 +278,6 @@ Patch.prototype.getFilePath = function (filename)
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
 
     filename = filename.replace("//", "/");
-
     return this.config.prefixAssetPath + filename + (this.config.suffixAssetPath || "");
 };
 
@@ -433,6 +432,8 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         this._opIdCache[op.id] = op;
 
         // if (this.onAdd) this.onAdd(op);
+        // console.log("onop add event!");
+
         this.emitEvent("onOpAdd", op);
 
         if (op.init) op.init();
@@ -539,8 +540,6 @@ Patch.prototype.renderFrame = function (e)
     this.timer.update();
     this.freeTimer.update();
     const time = this.timer.getTime();
-
-
     const startTime = performance.now();
 
     for (let i = 0; i < this.animFrameCallbacks.length; ++i)
@@ -890,7 +889,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     const reqs = new Requirements(this);
 
-
     // Log.log('add ops ',obj.ops);
     // add ops...
     for (const iop in obj.ops)
@@ -898,7 +896,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const start = CABLES.now();
         const opData = obj.ops[iop];
         let op = null;
-
 
         try
         {
@@ -965,6 +962,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i]._origData = null;
         }
     }
+
+    console.log("----------deserialize before linking");
 
     // create links...
     if (obj.ops)
