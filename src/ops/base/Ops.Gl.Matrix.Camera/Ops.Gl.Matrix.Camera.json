@@ -193,5 +193,13 @@
     "youtubeid": "vIeAMFGA96E",
     "collections": null,
     "relatedops": null,
-    "issues": ""
+    "issues": "",
+    "todos": [
+        {
+            "message": "when creating a new version: fix spelling errors in dropdown",
+            "author": "pandur",
+            "id": "0d9fde38-60b7-486b-8aa1-86e5b02ca44a",
+            "date": 1599818244067
+        }
+    ]
 }

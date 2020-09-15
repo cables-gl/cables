@@ -25,7 +25,7 @@ const textures = [];
 
 function updateLoaded()
 {
-    let l = loadedData && loadedTex;
+    const l = loadedData && loadedTex;
     if (!outLoaded.get() && l) op.patch.emitEvent("FontLoadedMSDF");
     outLoaded.set(l);
 }
@@ -69,53 +69,55 @@ function load()
     op.setUiError("jsonerr", null);
     op.setUiError("texurlerror", null);
 
-    let urlDatastr = op.patch.getFilePath(String(urlData.get()));
+    const urlDatastr = op.patch.getFilePath(String(urlData.get()));
 
-
-    // load font data json
-    CABLES.ajax(urlDatastr, (err, _data, xhr) =>
-{
-        if (err)
+    cgl.patch.loading.addAssetLoadingTask(() =>
+    {
+        // load font data json
+        CABLES.ajax(urlDatastr, (err, _data, xhr) =>
         {
-            console.error(err);
-            return;
-        }
-        try
-        {
-            let data = _data;
-            if (typeof data === "string") data = JSON.parse(_data);
-            if (!data.chars || !data.info || !data.info.face)
+            if (err)
             {
-                op.setUiError("invaliddata", "data file is invalid");
+                console.error(err);
                 return;
             }
-
-            outNumChars.set(data.chars.length);
-            let allChars = "";
-            for (let i = 0; i < data.chars.length; i++)allChars += data.chars[i].char;
-            outChars.set(allChars);
-
-            op.setUiAttrib({ "extendTitle": data.info.face });
-
-            op.patch.setVarValue(varNameData, null);
-            op.patch.setVarValue(varNameData,
+            try
+            {
+                let data = _data;
+                if (typeof data === "string") data = JSON.parse(_data);
+                if (!data.chars || !data.info || !data.info.face)
                 {
-                    "basename": CABLES.basename(urlData.get()),
-                    "data": data
-                });
+                    op.setUiError("invaliddata", "data file is invalid");
+                    return;
+                }
 
-            op.patch.loading.finished(loadingId);
-            loadedData = true;
-            updateLoaded();
-        }
-        catch (e)
-        {
-            console.error(e);
-            op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
-            op.patch.loading.finished(loadingId);
-            updateLoaded();
-            isLoading.set(false);
-        }
+                outNumChars.set(data.chars.length);
+                let allChars = "";
+                for (let i = 0; i < data.chars.length; i++)allChars += data.chars[i].char;
+                outChars.set(allChars);
+
+                op.setUiAttrib({ "extendTitle": data.info.face });
+
+                op.patch.setVarValue(varNameData, null);
+                op.patch.setVarValue(varNameData,
+                    {
+                        "basename": CABLES.basename(urlData.get()),
+                        "data": data
+                    });
+
+                op.patch.loading.finished(loadingId);
+                loadedData = true;
+                updateLoaded();
+            }
+            catch (e)
+            {
+                console.error(e);
+                op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
+                op.patch.loading.finished(loadingId);
+                updateLoaded();
+                // isLoading.set(false);
+            }
+        });
     });
 
 

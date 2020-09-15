@@ -228,7 +228,6 @@ function parseUniforms(src)
             }
         }
     }
-    console.log(groupUniforms);
     op.setPortGroup("uniforms", groupUniforms);
 }
 

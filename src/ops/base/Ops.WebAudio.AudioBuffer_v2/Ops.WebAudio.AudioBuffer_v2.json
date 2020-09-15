@@ -1,0 +1,52 @@
+{
+    "id": "5f1d6a2f-1c04-4744-b0fb-910825beceee",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "tim",
+            "date": 1599661030365
+        }
+    ],
+    "authorName": "tim",
+    "created": 1599661049643,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "URL"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Buffer"
+            },
+            {
+                "type": "0",
+                "name": "Finished Loading",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Sample Rate",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Number of Channels",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioBuffer_v2"
+    }
+}

@@ -1,7 +1,8 @@
 
-const download = op.inTriggerButton("download");
-const filename = op.inValueString("Filename", "jsonexport");
-const inObject = op.inObject("Object");
+const
+    download = op.inTriggerButton("download"),
+    filename = op.inString("Filename", "jsonexport"),
+    inObject = op.inObject("Object");
 
 download.onTriggered = function ()
 {

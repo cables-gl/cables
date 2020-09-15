@@ -5,7 +5,7 @@ const
     maximize = op.inValueBool("Maximize Size", true),
     inFontSize = op.inValueFloat("fontSize", 30),
     lineDistance = op.inValueFloat("Line Height", 1),
-    lineOffset = op.inValueFloat("Vertical Offset", 1),
+    lineOffset = op.inValueFloat("Vertical Offset", 0),
     drawDebug = op.inBool("Show Debug", false),
     limitLines = op.inValueInt("Limit Lines", 0),
     texWidth = op.inValueInt("texture width", 512),

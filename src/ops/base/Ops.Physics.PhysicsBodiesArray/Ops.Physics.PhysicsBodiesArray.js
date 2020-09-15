@@ -10,6 +10,7 @@ const
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     resultArrPos = op.outArray("Simulated Positions"),
+    outNames = op.outArray("Names"),
     outNum = op.outNumber("Total Bodies");
 
 const cgl = op.patch.cgl;
@@ -96,6 +97,7 @@ function setup(modelScale)
     const world = cgl.frameStore.world;
     if (!world) return;
 
+    const names = [];
 
     const pos = inPositions.get();
     if (!pos || pos.length < 3) return;
@@ -111,11 +113,16 @@ function setup(modelScale)
             "shape": shape
         });
 
+
         body.name = inName.get() + "." + (i / 3);
+        names.push(body.name);
+
         bodies.push(body);
         world.addBody(body);
     }
 
+
+    outNames.set(names);
     lastWorld = world;
     setBodyPositions();
     needSetup = false;
