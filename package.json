@@ -23,7 +23,7 @@
     },
     "homepage": "https://github.com/pandrr/cables#readme",
     "engines": {
-        "node": "14.8.0"
+        "node": "14.10.1"
     },
     "dependencies": {
         "gl-matrix": "3.3.0"
