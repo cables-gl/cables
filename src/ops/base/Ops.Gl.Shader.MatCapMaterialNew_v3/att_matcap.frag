@@ -1,7 +1,9 @@
 {{MODULES_HEAD}}
 
-IN vec3 norm;
-IN vec2 texCoord;
+#ifdef HAS_TEXTURES
+    IN vec2 texCoord;
+#endif
+
 IN vec3 v_viewDirection;
 IN vec3 transformedNormal;
 

@@ -89,7 +89,6 @@ op.setPortGroup("Advanced Options", [inAdvanced, inMSAA, inFilterType, inAnisotr
 
 let updating = false;
 
-inCastShadow.setUiAttribs({ "hidePort": true });
 inAdvanced.setUiAttribs({ "hidePort": true });
 
 inAdvanced.onChange = function ()

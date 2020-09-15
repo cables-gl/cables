@@ -15,13 +15,33 @@
             },
             {
                 "type": "0",
+                "name": "MSAA",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "use viewport size",
                 "subType": "boolean"
             },
             {
                 "type": "0",
+                "name": "texture width",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "texture height",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Filter index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Filter",
+                "subType": "string"
             },
             {
                 "type": "0",
