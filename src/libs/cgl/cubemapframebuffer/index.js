@@ -53,12 +53,6 @@ class CubemapFramebuffer
         this._textureFrameBuffer = null;
         this._textureDepth = null;
 
-        // * TEST PARAMETERS
-
-        this.glFramebuffer = null;
-        this.glRenderbuffer = null;
-
-
         this._options = options || {
             "isFloatingPointTexture": false
         };
@@ -254,10 +248,10 @@ class CubemapFramebuffer
         if (this._options.clear)
         {
             this._cgl.gl.clearColor(1, 1, 1, 1);
+            this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
         }
 
         this.setMatricesCubemapFace(index);
-        this._cgl.gl.clear(this._cgl.gl.COLOR_BUFFER_BIT | this._cgl.gl.DEPTH_BUFFER_BIT);
     }
 
     setMatricesCubemapFace(index)
@@ -281,12 +275,13 @@ class CubemapFramebuffer
     {
         CGL.profileData.profileFramebuffer++;
 
-
         if (this._cgl.glVersion !== 1)
         {
             this._cgl.gl.bindFramebuffer(this._cgl.gl.READ_FRAMEBUFFER, this._framebuffer);
             this._cgl.gl.bindFramebuffer(this._cgl.gl.DRAW_FRAMEBUFFER, this._textureFrameBuffer);
-            this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
+            // * NOTE: the line below is commented out because it clears the screen to black after
+            // * point light shadow map has been rendered
+            // this._cgl.gl.clearBufferfv(this._cgl.gl.COLOR, 0, [0.0, 0.0, 0.0, 1.0]);
         }
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
