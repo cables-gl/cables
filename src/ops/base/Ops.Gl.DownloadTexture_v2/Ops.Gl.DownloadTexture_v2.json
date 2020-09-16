@@ -8,5 +8,29 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1599663137521
+    "created": 1599663137521,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "1",
+                "name": "Download"
+            },
+            {
+                "type": "5",
+                "name": "Filename"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Finished",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.DownloadTexture_v2"
+    }
 }

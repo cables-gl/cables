@@ -18,7 +18,7 @@
         "portsIn": [
             {
                 "type": "1",
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": "2",
@@ -27,32 +27,32 @@
             {
                 "type": "2",
                 "name": "Diffuse",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "2",
                 "name": "Normal",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "2",
                 "name": "Specular Mask",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "2",
                 "name": "Specular MatCap",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "2",
                 "name": "AO Texture",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "2",
                 "name": "Opacity Texture",
-                "group": "Texture maps"
+                "group": "Texture Maps"
             },
             {
                 "type": "0",
@@ -116,36 +116,15 @@
             },
             {
                 "type": "0",
-                "name": "projectCoords index",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "projectCoords",
-                "group": "Texture Transforms",
-                "subType": "string"
-            },
-            {
-                "type": "0",
                 "name": "Screen Space Normals",
                 "group": "Texture Transforms",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "calc normal tangents",
+                "name": "Calc normal tangents",
                 "group": "Texture Transforms",
                 "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Alpha Mask Source index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Alpha Mask Source",
-                "group": "Texture Opacity"
             },
             {
                 "type": "0",
@@ -158,12 +137,22 @@
                 "name": "Discard Transparent Pixels",
                 "group": "Texture Opacity",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Alpha Mask Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Texture Opacity"
             }
         ],
         "portsOut": [
             {
                 "type": "1",
-                "name": "trigger"
+                "name": "Next"
             },
             {
                 "type": "2",
@@ -171,5 +160,118 @@
             }
         ],
         "name": "Ops.Gl.Shader.MatCapMaterialNew_v3"
+    },
+    "summary": "Easy to use image based lighting Material",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "trigger input"
+            },
+            {
+                "name": "MatCap",
+                "text": "matcap texture input"
+            },
+            {
+                "name": "Diffuse",
+                "text": "diffuse texture input"
+            },
+            {
+                "name": "Normal",
+                "text": "normal map input"
+            },
+            {
+                "name": "Specular Mask",
+                "text": "specular mask input"
+            },
+            {
+                "name": "Specular MatCap",
+                "text": "specular matcap input"
+            },
+            {
+                "name": "AO Texture",
+                "text": "AO texture input"
+            },
+            {
+                "name": "Opacity Texture",
+                "text": "opacity texture input"
+            },
+            {
+                "name": "r",
+                "text": "R channel of diffuse color"
+            },
+            {
+                "name": "g",
+                "text": "G channel of diffuse color"
+            },
+            {
+                "name": "b",
+                "text": "B channel of diffuse color"
+            },
+            {
+                "name": "Opacity",
+                "text": "Alpha channel of diffuse color"
+            },
+            {
+                "name": "AO Intensity",
+                "text": "Intensity of AO texture"
+            },
+            {
+                "name": "Normal Map Intensity",
+                "text": "Intensity of Normal Map"
+            },
+            {
+                "name": "Repeat X",
+                "text": "Texture Repeat along the x-axis"
+            },
+            {
+                "name": "Repeat Y",
+                "text": "Texture Repeat along the y-axis"
+            },
+            {
+                "name": "Offset X",
+                "text": "Texture Coordinate offset along the x-axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Texture Coordinate offset along the y-axis"
+            },
+            {
+                "name": "Screen Space Normals",
+                "text": "check to use screen space normals (flat shading)"
+            },
+            {
+                "name": "Calc normal tangents",
+                "text": "calculate normals & tangents"
+            },
+            {
+                "name": "Opacity TexCoords Transform",
+                "text": "invert y-axis of opacity texture texture coordinates"
+            },
+            {
+                "name": "Discard Transparent Pixels",
+                "text": "discard transparent pixels under a threshold of 0.2"
+            },
+            {
+                "name": "Alpha Mask Source index",
+                "text": "switch to choose which channel of the texture should be used for alpha mapping"
+            },
+            {
+                "name": "Alpha Mask Source",
+                "text": "switch to choose which channel of the texture should be used for alpha mapping"
+            },
+            {
+                "name": "Next",
+                "text": "output trigger"
+            },
+            {
+                "name": "Shader",
+                "text": "shader output"
+            }
+        ]
     }
 }
