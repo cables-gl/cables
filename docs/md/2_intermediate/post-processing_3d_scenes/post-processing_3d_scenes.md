@@ -1,5 +1,8 @@
 
 # Post-Processing 3D Scenes
+checkout these two videos on youtube for more advanced techniques.
+[Post processing for beginners part 1](https://www.youtube.com/watch?v=x2jKZgmFVq4&list=PLYimpE2xWgBunnSc59xrSviLRxG1GWxP3&index=10&t=1s)
+[Post processing effects part 2](https://www.youtube.com/watch?v=r4_EHvNTntE&list=PLYimpE2xWgBunnSc59xrSviLRxG1GWxP3&index=11&t=1s)
 
 You can find the finished patch here: [postprocessing](https://cables.gl/p/5645f59a9a013fa25927562a).
 

@@ -1,5 +1,7 @@
 # Hello Op - Part 1
 
+For more advanced tutorials check out the [youtube playlist](https://www.youtube.com/playlist?list=PLYimpE2xWgBvKQg65p9q5sa2jJaHGO7Ka) which shows how to code your own ops inside of cables
+
 Let’s write our first op, which has a value input and output.
 
 Create a new op by clicking `Op` -> `Create` (in the navigation bar at the top left part of the screen).
