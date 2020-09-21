@@ -2,12 +2,12 @@ const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
-    offsetRedX = op.inValue("Red offset X", 0.05),
-    offsetRedY = op.inValue("Red offset Y", 0.1),
-    offsetGreenX = op.inValue("Green offset X", 0.0),
-    offsetGreenY = op.inValue("Green offset Y", 0.0),
-    offsetBlueX = op.inValueSlider("Blue offset X", 0),
-    offsetBlueY = op.inValueSlider("Blue offset Y", 0),
+    offsetRedX = op.inFloat("Red offset X", 0.05),
+    offsetRedY = op.inFloat("Red offset Y", 0.1),
+    offsetGreenX = op.inFloat("Green offset X", 0.0),
+    offsetGreenY = op.inFloat("Green offset Y", 0.0),
+    offsetBlueX = op.inFloat("Blue offset X", 0),
+    offsetBlueY = op.inFloat("Blue offset Y", 0),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
