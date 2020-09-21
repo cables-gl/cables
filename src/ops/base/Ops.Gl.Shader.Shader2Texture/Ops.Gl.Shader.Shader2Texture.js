@@ -7,20 +7,30 @@ const
     tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inFloatingPoint = op.inValueBool("Floating Point", false),
+    inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
     next = op.outTrigger("Next"),
-    outTex = op.outTexture("Texture");
+    outTex = op.outTexture("Texture"),
+    outTex2 = op.outTexture("Texture 2"),
+    outTex3 = op.outTexture("Texture 3"),
+    outTex4 = op.outTexture("Texture 4");
+
 
 op.setPortGroup("Texture Size", [inVPSize, inWidth, inHeight]);
 op.setPortGroup("Texture settings", [tfilter, twrap, inFloatingPoint]);
 
+let numTextures = 1;
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
+
+let lastShader = null;
+let shader = null;
 
 inWidth.onChange =
     inHeight.onChange =
     inFloatingPoint.onChange =
     tfilter.onChange =
+    inNumTex.onChange =
     twrap.onChange = initFbLater;
 
 inVPSize.onChange = updateUI;
@@ -38,6 +48,7 @@ tfilter.set("nearest");
 
 updateUI();
 
+
 function warning()
 {
     if (tfilter.get() == "mipmap" && inFloatingPoint.get())
@@ -52,7 +63,6 @@ function warning()
 
 function updateUI()
 {
-    op.log("bool checked");
     if (inVPSize.get() === true)
     {
         inWidth.setUiAttribs({ "greyout": true });
@@ -72,11 +82,31 @@ function initFbLater()
     needInit = true;
     warning();
 }
+const drawBuffArr = [];
+
+function resetShader()
+{
+    if (shader) shader.dispose();
+    lastShader = null;
+    shader = null;
+}
 
 function initFb()
 {
     needInit = false;
     if (fb)fb.delete();
+
+
+    const oldLen = drawBuffArr.length;
+    numTextures = parseInt(inNumTex.get());
+    drawBuffArr.length = 0;
+    for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
+    console.log(drawBuffArr);
+    if (oldLen != drawBuffArr.length)
+    {
+        resetShader();
+    }
+
     fb = null;
 
     const w = inWidth.get();
@@ -96,6 +126,7 @@ function initFb()
             {
                 "isFloatingPointTexture": inFloatingPoint.get(),
                 "multisampling": false,
+                "numRenderBuffers": numTextures,
                 "wrap": selectedWrap,
                 "filter": filter,
                 "depth": true,
@@ -114,21 +145,32 @@ function initFb()
     }
 }
 
+
 exec.onTriggered = function ()
 {
     const vp = cgl.getViewPort();
 
-    const shader = inShader.get();
-    if (!shader)
-    {
-        outTex.set(null);
-        return;
-    }
     if (!fb || needInit)initFb();
     if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height))
     {
         initFb();
     }
+
+    if (inShader.get() != lastShader)
+    {
+        lastShader = inShader.get();
+        shader = inShader.get().copy();
+
+        shader.setDrawBuffers(drawBuffArr);
+    }
+
+
+    if (!shader)
+    {
+        outTex.set(null);
+        return;
+    }
+
 
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];
@@ -156,7 +198,16 @@ exec.onTriggered = function ()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-    outTex.set(fb.getTextureColor());
+
+    if (numTextures >= 2)
+    {
+        outTex.set(fb.getTextureColorNum(0));
+        outTex2.set(fb.getTextureColorNum(1));
+        outTex3.set(fb.getTextureColorNum(2));
+        outTex4.set(fb.getTextureColorNum(3));
+    }
+    else outTex.set(fb.getTextureColor());
+
 
     cgl.popShader();
 

@@ -1,5 +1,7 @@
+const cgl = op.patch.cgl;
+
 const
-    render = op.inTrigger("render"),
+    render = op.inTrigger("Render"),
     textureMatcap = op.inTexture("MatCap"),
     textureDiffuse = op.inTexture("Diffuse"),
     textureNormal = op.inTexture("Normal"),
@@ -17,10 +19,12 @@ const
     repeatY = op.inValue("Repeat Y", 1),
     offsetX = op.inValue("Offset X", 0),
     offsetY = op.inValue("Offset Y", 0),
-    projectCoords = op.inValueSelect("projectCoords", ["no", "xy", "yz", "xz"], "no"),
     ssNormals = op.inValueBool("Screen Space Normals"),
-    calcTangents = op.inValueBool("calc normal tangents", true),
-    next = op.outTrigger("trigger"),
+    calcTangents = op.inValueBool("Calc normal tangents", true),
+    texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false),
+    discardTransPxl = op.inValueBool("Discard Transparent Pixels"),
+
+    next = op.outTrigger("Next"),
     shaderOut = op.outObject("Shader");
 
 r.setUiAttribs({ "colorPick": true });
@@ -28,15 +32,13 @@ r.setUiAttribs({ "colorPick": true });
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
-const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
-const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 op.setPortGroup("Texture Opacity", [alphaMaskSource, texCoordAlpha, discardTransPxl]);
-op.setPortGroup("Texture Transforms", [aoIntensity, normalMapIntensity, repeatX, repeatY, offsetX, offsetY, calcTangents, projectCoords, ssNormals]);
-op.setPortGroup("Texture maps", [textureDiffuse, textureNormal, textureSpec, textureSpecMatCap, textureAo, textureOpacity]);
+op.setPortGroup("Texture Transforms", [aoIntensity, normalMapIntensity, repeatX, repeatY, offsetX, offsetY, calcTangents, ssNormals]);
+op.setPortGroup("Texture Maps", [textureDiffuse, textureNormal, textureSpec, textureSpecMatCap, textureAo, textureOpacity]);
 op.setPortGroup("Color", [r, g, b, pOpacity]);
 
-const cgl = op.patch.cgl;
+
 const shader = new CGL.Shader(cgl, "MatCapMaterialNew");
 const uniOpacity = new CGL.Uniform(shader, "f", "opacity", pOpacity);
 
@@ -56,10 +58,6 @@ const repeatUniform = new CGL.Uniform(shader, "2f", "texRepeat", repeatX, repeat
 
 const aoIntensityUniform = new CGL.Uniform(shader, "f", "aoIntensity", aoIntensity);
 const colorUniform = new CGL.Uniform(shader, "4f", "inColor", r, g, b, pOpacity);
-b.uniform = new CGL.Uniform(shader, "f", "b", b);
-g.uniform = new CGL.Uniform(shader, "f", "g", g);
-r.uniform = new CGL.Uniform(shader, "f", "r", r);
-
 
 calcTangents.onChange = updateDefines;
 updateDefines();
@@ -83,13 +81,6 @@ ssNormals.onChange = function ()
         shader.define("CALC_SSNORMALS");
     }
     else shader.removeDefine("CALC_SSNORMALS");
-};
-
-projectCoords.onChange = function ()
-{
-    shader.toggleDefine("DO_PROJECT_COORDS_XY", projectCoords.get() == "xy");
-    shader.toggleDefine("DO_PROJECT_COORDS_YZ", projectCoords.get() == "yz");
-    shader.toggleDefine("DO_PROJECT_COORDS_XZ", projectCoords.get() == "xz");
 };
 
 textureMatcap.onChange = updateMatcap;
@@ -250,19 +241,6 @@ texCoordAlpha.onChange = function ()
     else shader.removeDefine("TRANSFORMALPHATEXCOORDS");
 };
 
-op.onDelete = function ()
-{
-    // if(cgl.defaultMatcapTex)
-    // {
-    //     cgl.defaultMatcapTex.delete();
-    //     cgl.defaultMatcapTex=null;
-    // }
-};
-
-op.preRender = function ()
-{
-    shader.bind();
-};
 
 function checkUiErrors()
 {
@@ -291,6 +269,7 @@ function checkUiErrors()
 render.onTriggered = function ()
 {
     checkUiErrors();
+
     if (!cgl.defaultMatcapTex) updateMatcap();
     shader.popTextures();
 

@@ -1,6 +1,6 @@
 const
     v = op.inValueEditor("value", ""),
-    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml"], "text"),
+    syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json"], "text"),
     result = op.outString("Result");
 
 v.setUiAttribs({ "hidePort": true });
