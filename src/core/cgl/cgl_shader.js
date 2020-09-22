@@ -1280,6 +1280,8 @@ Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = functi
         .endl() + "IN vec3 vPosition;"
         .endl() + "IN vec2 attrTexCoord;"
         .endl() + "IN vec3 attrVertNormal;"
+        .endl() + "IN vec3 attrTangent,attrBiTangent;"
+
         .endl() + "IN float attrVertIndex;"
 
         .endl() + "OUT vec2 texCoord;"

@@ -228,8 +228,8 @@ Geometry.prototype.merge = function (geom)
     this.vertices = UTILS.float32Concat(this.vertices, geom.vertices);
     this.texCoords = UTILS.float32Concat(this.texCoords, geom.texCoords);
     this.vertexNormals = UTILS.float32Concat(this.vertexNormals, geom.vertexNormals);
-    this.tangents = UTILS.float32Concat(this.vertexNormals, geom.tangents);
-    this.bitangents = UTILS.float32Concat(this.vertexNormals, geom.bitangents);
+    this.tangents = UTILS.float32Concat(this.tangents, geom.tangents);
+    this.bitangents = UTILS.float32Concat(this.bitangents, geom.bitangents);
 };
 
 Geometry.prototype.copy = function ()

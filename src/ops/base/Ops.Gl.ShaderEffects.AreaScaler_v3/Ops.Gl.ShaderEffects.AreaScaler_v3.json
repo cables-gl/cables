@@ -1,0 +1,102 @@
+{
+    "id": "15e6e027-8c7b-4af2-905a-d22d0d508146",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1600684687592
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1600684697019,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "0",
+                "name": "Area size",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Source index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Source",
+                "group": "Influence"
+            },
+            {
+                "type": "0",
+                "name": "Type index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Type"
+            },
+            {
+                "type": "0",
+                "name": "Strength",
+                "group": "Influence",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Smoothstep",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Min Size Original",
+                "group": "Influence",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Clamp size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Clamp min",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Clamp max",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Pos Z",
+                "group": "Position",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.AreaScaler_v3"
+    }
+}
