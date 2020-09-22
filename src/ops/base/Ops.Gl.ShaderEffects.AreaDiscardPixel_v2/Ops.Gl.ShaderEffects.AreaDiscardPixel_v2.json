@@ -95,6 +95,11 @@
             "message": "Ops.User.pandur.AreaDiscarPixel2 renamed to Ops.Gl.ShaderEffects.AreaDiscardPixel_v2",
             "author": "pandur",
             "date": 1596031345309
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1600251246126
         }
     ],
     "summary": "do not draw pixels inside a defined 3d area",
@@ -104,5 +109,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

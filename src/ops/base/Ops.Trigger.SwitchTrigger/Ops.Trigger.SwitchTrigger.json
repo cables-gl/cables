@@ -1,0 +1,92 @@
+{
+    "id": "aee29293-0c4f-404d-b724-484bbb57361e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1600442920679
+        }
+    ],
+    "authorName": "andro",
+    "created": 1600442978422,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Trigger Index",
+                "subType": "integer"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 0"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 1"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 2"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 3"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 4"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 5"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 6"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 7"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 8"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 9"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 10"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 11"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 12"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 13"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 14"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in 15"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger out"
+            }
+        ],
+        "name": "Ops.Trigger.SwitchTrigger"
+    }
+}

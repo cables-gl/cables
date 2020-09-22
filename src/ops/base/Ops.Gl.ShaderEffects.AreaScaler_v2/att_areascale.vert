@@ -1,8 +1,8 @@
-
 UNI bool MOD_smooth;
 UNI float MOD_x,MOD_y,MOD_z;
 UNI float MOD_strength;
 UNI float MOD_size;
+UNI float MOD_clampMin,MOD_clampMax;
 
 vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
 {
@@ -13,8 +13,12 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
     #endif
 
     vec3 vecToOrigin = worldPos.xyz-forcePos;
+    float dist = 0.;
 
-    float dist = abs(length(vecToOrigin));
+    #ifdef MOD_DISTANCE
+        dist = abs(length(vecToOrigin));
+    #endif
+
     float distAlpha = (MOD_size - dist) ;
 
     if(MOD_smooth) distAlpha = smoothstep(0.0,MOD_size,distAlpha);
@@ -25,16 +29,13 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
         m+=1.0;
     #endif
 
-
-
-
-
-
     if(m<0.0)m=0.0;
 
-
-
-    pos.xyz*=m;
+    #ifdef MOD_CLAMP_SIZE
+        pos.xyz*=clamp(m,MOD_clampMin,MOD_clampMax);
+    #else
+        pos.xyz*=m ;
+    #endif
 
     return pos;
 }

@@ -392,13 +392,14 @@ const Op = function ()
      * @return {Port} created port
      */
     // new string
-    Op.prototype.inStringEditor = function (name, v, syntax)
+    Op.prototype.inStringEditor = function (name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_STRING, {
                 "type": "string",
                 "display": "editor",
-                "editorSyntax": syntax
+                "editorSyntax": syntax,
+                hideFormatButton
             })
         );
         p.value = "";
@@ -411,13 +412,14 @@ const Op = function ()
     };
 
     // old
-    Op.prototype.inValueEditor = function (name, v, syntax)
+    Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)
     {
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "type": "string",
                 "display": "editor",
-                "editorSyntax": syntax
+                "editorSyntax": syntax,
+                hideFormatButton
             })
         );
         p.value = "";
@@ -953,11 +955,18 @@ const Op = function ()
         return count;
     };
 
-    Op.prototype.findFittingPort = function (otherPort)
+    Op.prototype.findFittingPort = function (otherPort, inPortsFirst = false)
     {
-        for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
-
-        for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        if (inPortsFirst)
+        {
+            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+        }
+        else
+        {
+            for (const ipo in this.portsOut) if (Link.canLink(otherPort, this.portsOut[ipo])) return this.portsOut[ipo];
+            for (const ipi in this.portsIn) if (Link.canLink(otherPort, this.portsIn[ipi])) return this.portsIn[ipi];
+        }
     };
 
     Op.prototype.getSerialized = function (cleanUp)
