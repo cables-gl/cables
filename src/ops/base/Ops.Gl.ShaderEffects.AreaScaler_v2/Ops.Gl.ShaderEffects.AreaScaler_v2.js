@@ -2,9 +2,13 @@ const
     exec = op.inTrigger("render"),
     inSize = op.inValue("Area size", 1),
     inSrc = op.inSwitch("Source", ["Vertex position", "Object position"], "Vertex position"),
+    inScalarOrDistance = op.inSwitch("Type", ["Distance", "Scalar"], "Distance"),
     inStrength = op.inValue("Strength", 1),
     inSmooth = op.inValueBool("Smoothstep", false),
     inToZero = op.inValueBool("Min Size Original", false),
+    inClampBool = op.inBool("Clamp size", false),
+    inClampMin = op.inFloat("Clamp min", 0),
+    inClampMax = op.inFloat("Clamp max", 1.0),
     x = op.inValue("Pos X"),
     y = op.inValue("Pos Y"),
     z = op.inValue("Pos Z"),
@@ -12,8 +16,9 @@ const
 
 const cgl = op.patch.cgl;
 let needsUpdateToZero = true;
-let mscaleUni = null;
+const mscaleUni = null;
 let shader = null;
+
 op.setPortGroup("Position", [x, y, z]);
 op.setPortGroup("Influence", [inSrc, inStrength, inSmooth, inToZero]);
 
@@ -24,7 +29,8 @@ const srcBodyVert = ""
 let moduleVert = null;
 
 op.onDelete = exec.onLinkChanged = removeModule;
-inToZero.onChange = inSrc.onChange = updateToZero;
+inToZero.onChange = inSrc.onChange =
+inScalarOrDistance.onChange = inClampBool.onChange = updateToZero;
 
 function removeModule()
 {
@@ -42,7 +48,33 @@ function updateToZero()
 
     shader.toggleDefine(moduleVert.prefix + "TO_ZERO", inToZero.get());
     shader.toggleDefine(moduleVert.prefix + "OBJECT_POS", inSrc.get() == "Object position");
+    shader.toggleDefine(moduleVert.prefix + "DISTANCE", inScalarOrDistance.get() == "Distance");
+    shader.toggleDefine(moduleVert.prefix + "CLAMP_SIZE", inClampBool.get());
+
     needsUpdateToZero = false;
+
+    if (inClampBool.get())
+    {
+        inClampMin.setUiAttribs({ "greyout": false });
+        inClampMax.setUiAttribs({ "greyout": false });
+    }
+    else
+    {
+        inClampMin.setUiAttribs({ "greyout": true });
+        inClampMax.setUiAttribs({ "greyout": true });
+    }
+    if (inScalarOrDistance.get() == "Scalar")
+    {
+        x.setUiAttribs({ "greyout": true });
+        y.setUiAttribs({ "greyout": true });
+        z.setUiAttribs({ "greyout": true });
+    }
+    else
+    {
+        x.setUiAttribs({ "greyout": false });
+        y.setUiAttribs({ "greyout": false });
+        z.setUiAttribs({ "greyout": false });
+    }
 }
 
 
@@ -87,6 +119,9 @@ exec.onTriggered = function ()
         x.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);
         y.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "y", y);
         z.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "z", z);
+
+        inClampMin.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "clampMin", inClampMin);
+        inClampMax.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "clampMax", inClampMax);
     }
 
     if (needsUpdateToZero)updateToZero();
