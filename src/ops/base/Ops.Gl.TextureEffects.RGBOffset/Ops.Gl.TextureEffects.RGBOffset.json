@@ -35,31 +35,55 @@
             {
                 "type": "0",
                 "name": "Red offset X",
+                "group": "Red",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Red offset Y",
+                "group": "Red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Red amount",
+                "group": "Red",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Green offset X",
+                "group": "Green",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Green offset Y",
+                "group": "Green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Green amount",
+                "group": "Green",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Blue offset X",
+                "group": "Blue",
                 "subType": "number"
             },
             {
                 "type": "0",
                 "name": "Blue offset Y",
+                "group": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blue amount",
+                "group": "Blue",
                 "subType": "number"
             }
         ],
