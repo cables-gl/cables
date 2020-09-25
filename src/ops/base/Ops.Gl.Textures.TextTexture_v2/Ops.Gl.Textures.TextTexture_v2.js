@@ -49,7 +49,7 @@ reSize();
 
 op.patch.on("fontLoaded", (fontName) =>
 {
-    if (fontName == inFont.get())
+    if (fontName == font.get())
     {
         needsRefresh = true;
     }
