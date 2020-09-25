@@ -29,6 +29,10 @@ const Log =
     setSilent(s)
     {
         silent = s;
+    },
+    stack()
+    {
+        console.log(new Error().stack);
     }
 
 };

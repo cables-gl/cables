@@ -399,6 +399,7 @@ Texture.prototype._setFilter = function ()
     {
         Log.log("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
+        Log.stack();
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())

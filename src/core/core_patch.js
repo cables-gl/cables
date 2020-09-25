@@ -963,7 +963,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
     }
 
-    console.log("----------deserialize before linking");
 
     // create links...
     if (obj.ops)
