@@ -4,6 +4,7 @@ const
     inSrc = op.inSwitch("Source", ["Vertex position", "Object position"], "Vertex position"),
     inScalarOrDistance = op.inSwitch("Type", ["Distance", "Scalar"], "Distance"),
     inStrength = op.inValue("Strength", 1),
+    inFalloff = op.inFloatSlider("Falloff", 1),
     inSmooth = op.inValueBool("Smoothstep", false),
     inToZero = op.inValueBool("Min Size Original", false),
     inClampBool = op.inBool("Clamp size", false),
@@ -49,6 +50,7 @@ function updateToZero()
     shader.toggleDefine(moduleVert.prefix + "TO_ZERO", inToZero.get());
     shader.toggleDefine(moduleVert.prefix + "OBJECT_POS", inSrc.get() == "Object position");
     shader.toggleDefine(moduleVert.prefix + "DISTANCE", inScalarOrDistance.get() == "Distance");
+    shader.toggleDefine(moduleVert.prefix + "SCALAR", inScalarOrDistance.get() == "Scalar");
     shader.toggleDefine(moduleVert.prefix + "CLAMP_SIZE", inClampBool.get());
 
     needsUpdateToZero = false;
@@ -63,18 +65,18 @@ function updateToZero()
         inClampMin.setUiAttribs({ "greyout": true });
         inClampMax.setUiAttribs({ "greyout": true });
     }
-    if (inScalarOrDistance.get() == "Scalar")
-    {
-        x.setUiAttribs({ "greyout": true });
-        y.setUiAttribs({ "greyout": true });
-        z.setUiAttribs({ "greyout": true });
-    }
-    else
-    {
-        x.setUiAttribs({ "greyout": false });
-        y.setUiAttribs({ "greyout": false });
-        z.setUiAttribs({ "greyout": false });
-    }
+    // if (inScalarOrDistance.get() == "Scalar")
+    // {
+    //     x.setUiAttribs({ "greyout": true });
+    //     y.setUiAttribs({ "greyout": true });
+    //     z.setUiAttribs({ "greyout": true });
+    // }
+    // else
+    // {
+    //     x.setUiAttribs({ "greyout": false });
+    //     y.setUiAttribs({ "greyout": false });
+    //     z.setUiAttribs({ "greyout": false });
+    // }
 }
 
 
@@ -114,6 +116,7 @@ exec.onTriggered = function ()
 
         inSize.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "size", inSize);
         inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
+        inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "falloff", inFalloff);
         inSmooth.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "smooth", inSmooth);
 
         x.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "x", x);

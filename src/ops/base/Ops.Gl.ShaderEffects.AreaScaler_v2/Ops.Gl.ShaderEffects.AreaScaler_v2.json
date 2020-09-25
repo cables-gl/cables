@@ -37,6 +37,11 @@
             },
             {
                 "type": "0",
+                "name": "Falloff",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Smoothstep",
                 "group": "Influence",
                 "subType": "boolean"
