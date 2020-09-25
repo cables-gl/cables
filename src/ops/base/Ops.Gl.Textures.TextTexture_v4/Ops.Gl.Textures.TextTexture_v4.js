@@ -93,6 +93,14 @@ if (cgl.glVersion == 1)
     shader.enableExtension("GL_OES_standard_derivatives");
 }
 
+op.patch.on("fontLoaded", (fontName) =>
+{
+    if (fontName == inFont.get())
+    {
+        needsRefresh = true;
+    }
+});
+
 renderHard.onChange = function ()
 {
     shader.toggleDefine("HARD_EDGE", renderHard.get());
