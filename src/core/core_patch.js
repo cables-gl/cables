@@ -1168,6 +1168,7 @@ Patch.prototype._sortVars = function ()
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
+    console.log("var " + name + " " + val);
     if (this._variables.hasOwnProperty(name))
     {
         this._variables[name].setValue(val);
