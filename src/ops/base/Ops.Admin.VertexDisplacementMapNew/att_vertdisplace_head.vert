@@ -21,6 +21,7 @@ OUT vec3 MOD_displHeightMapColor;
 // 							0,				0,		0,	1);
 // }
 
+
 vec3 MOD_calcNormal(sampler2D tex,vec2 uv)
 {
     float strength=13.0;

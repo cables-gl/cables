@@ -112,16 +112,21 @@ void main()
         #ifdef POINTSIZE_CHAN_B
             addPointSize=texture(texPointSize,texCoord).b;
         #endif
+
+
         #ifdef DOTSIZEREMAPABS
             // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
 
             addPointSize=1.0-(distance(addPointSize,0.5)*2.0);
+            // addPointSize=abs(1.0-(distance(addPointSize,0.5)*2.0));
+addPointSize=addPointSize*addPointSize*addPointSize*2.0;
 
             // addPointSize=(( (texture(texPointSize,texCoord).r) * texPointSizeMul)-0.5)*2.0;
         #endif
 
+addPointSize*=texPointSizeMul;
 
-        addPointSize*=texPointSizeMul;
+
     #endif
 
 
