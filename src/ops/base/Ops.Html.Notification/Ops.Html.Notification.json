@@ -1,0 +1,101 @@
+{
+    "id": "cf3960f3-ced0-4928-9082-a9cf7f8573a6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "andro",
+            "date": 1600939466512
+        }
+    ],
+    "authorName": "andro",
+    "created": 1600939484776,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger animation"
+            },
+            {
+                "type": "0",
+                "name": "Animation duration",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Side index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Side"
+            },
+            {
+                "type": "0",
+                "name": "mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "mode"
+            },
+            {
+                "type": "0",
+                "name": "Start point",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "End point",
+                "subType": "number"
+            },
+            {
+                "type": "5",
+                "name": "Text"
+            },
+            {
+                "type": "5",
+                "name": "Id"
+            },
+            {
+                "type": "5",
+                "name": "Class"
+            },
+            {
+                "type": "0",
+                "name": "Style",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Interactive",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Convert Line Breaks",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "DOM Element"
+            },
+            {
+                "type": "0",
+                "name": "Hover",
+                "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Clicked"
+            }
+        ],
+        "name": "Ops.Html.Notification"
+    }
+}
