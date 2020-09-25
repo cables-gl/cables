@@ -187,6 +187,7 @@ function popUpAnim()
     {
         document.getElementById(inId.get()).animate(
             {
+                "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.42, 0.0, 0.58, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "bottom": [start, end, end, start]
             },
@@ -196,6 +197,7 @@ function popUpAnim()
     {
         document.getElementById(inId.get()).animate(
             {
+                "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.42, 0.0, 0.58, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "top": [start, end, end, start]
             },
