@@ -146,5 +146,94 @@
             "author": "pandur",
             "date": 1600088689393
         }
-    ]
+    ],
+    "summary": "Play a video file and use it as a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "file",
+                "text": "File to play"
+            },
+            {
+                "name": "play",
+                "text": "Start playback"
+            },
+            {
+                "name": "loop",
+                "text": "Loop file when it reaches the end"
+            },
+            {
+                "name": "auto play",
+                "text": "Automatically plays when the patch opens"
+            },
+            {
+                "name": "Volume",
+                "text": "Audio volume"
+            },
+            {
+                "name": "mute",
+                "text": "mute audio"
+            },
+            {
+                "name": "speed",
+                "text": "Speed of playback"
+            },
+            {
+                "name": "filter index",
+                "text": "Texture filter type - pick with index or dropdown"
+            },
+            {
+                "name": "filter",
+                "text": "Selected texture filter type "
+            },
+            {
+                "name": "wrap index",
+                "text": "Texture wrap type - pick with index or dropdown"
+            },
+            {
+                "name": "wrap",
+                "text": "Selected wrap mode"
+            },
+            {
+                "name": "flip",
+                "text": "Flip the texture"
+            },
+            {
+                "name": "set time",
+                "text": "Set time to trigger playback from"
+            },
+            {
+                "name": "rewind",
+                "text": "rewind to start of file"
+            },
+            {
+                "name": "Preload",
+                "text": "Load into memory - useful when loading from a URL"
+            },
+            {
+                "name": "texture",
+                "text": "Texture out"
+            },
+            {
+                "name": "duration",
+                "text": "Duration of loaded media"
+            },
+            {
+                "name": "progress",
+                "text": "Playback progress"
+            },
+            {
+                "name": "Width",
+                "text": "Width of texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of texture"
+            }
+        ]
+    }
 }

@@ -72,6 +72,16 @@ inFont.onChange = function ()
     checkFont();
 };
 
+op.patch.on("fontLoaded", (fontName) =>
+{
+    if (fontName == inFont.get())
+    {
+        createTexture = true;
+        createMesh = true;
+    }
+});
+
+
 function checkFont()
 {
     const oldFontLoaded = fontLoaded;

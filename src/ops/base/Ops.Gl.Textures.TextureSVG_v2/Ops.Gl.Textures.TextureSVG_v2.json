@@ -58,5 +58,50 @@
             }
         ],
         "name": "Ops.Gl.Textures.TextureSVG_v2"
+    },
+    "summary": "Load a SVG image and convert to a texture of pixels",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "File",
+                "text": "File to load"
+            },
+            {
+                "name": "Texture width",
+                "text": "Width of the texture"
+            },
+            {
+                "name": "Texture height",
+                "text": "Height of the texture"
+            },
+            {
+                "name": "Wrap index",
+                "text": "Wrap mode for texture - pick with an integer"
+            },
+            {
+                "name": "Wrap",
+                "text": "Current wrap mode"
+            },
+            {
+                "name": "Filter index",
+                "text": "Filter mode for texture - pick with an integer"
+            },
+            {
+                "name": "Filter",
+                "text": "Current filter mode"
+            },
+            {
+                "name": "Texture",
+                "text": "texture out"
+            },
+            {
+                "name": "Loaded",
+                "text": "is true when texture has been created"
+            }
+        ]
     }
 }

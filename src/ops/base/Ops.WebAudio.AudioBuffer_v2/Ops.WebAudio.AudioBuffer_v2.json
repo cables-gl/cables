@@ -48,5 +48,42 @@
             }
         ],
         "name": "Ops.WebAudio.AudioBuffer_v2"
+    },
+    "summary": "Holds an audio file / sample in a buffer ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "URL",
+                "text": "The audio file to load. Mostly you will drag an audio file into the cables window and select it via the file-chooser in the op parameter view. Depending on the browser you use (or user who will see / hear your exported patch) only certain file types can be played back. MP3 seems to be the best supported audio format."
+            },
+            {
+                "name": "Audio Buffer",
+                "text": "The loaded audio buffer, can be connected to e.g. AudioBufferPlayer"
+            },
+            {
+                "name": "Finished Loading",
+                "text": "True when the file is loaded"
+            },
+            {
+                "name": "Sample Rate",
+                "text": "Samples per second of the PCM data stored in the buffer."
+            },
+            {
+                "name": "Length",
+                "text": "Length of the buffer, in sample-frames, of the PCM data stored in the buffer."
+            },
+            {
+                "name": "Duration",
+                "text": "Duration, in seconds, of the PCM data stored in the buffer"
+            },
+            {
+                "name": "Number of Channels",
+                "text": "How many channels the audio file contains, 2 is stereo, 1 is mono"
+            }
+        ]
     }
 }

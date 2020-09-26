@@ -51,6 +51,8 @@ function addStyle()
                 loadedTrigger.trigger();
                 op.patch.cgl.patch.loading.finished(loadingId);
 
+                op.patch.emitEvent("fontLoaded", fontname.get());
+
                 // Throw an error if loading wasn't successful
             }, (fontFace) =>
             {

@@ -5,7 +5,7 @@ const
     strip = op.inBool("Line Strip", true),
     outGeom = op.outObject("Geometry"),
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!
-    texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random"], "0"),
+    texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random", "Fill"], "0"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
@@ -22,6 +22,7 @@ let attr;
 let currentTexCoords = "";
 
 texCoords.onChange =
+    numPoints.onChange =
     inPoints.onChange =
     function () { needsRebuild = true; };
 
@@ -67,18 +68,45 @@ function rebuild()
 
         if (texCoords.get() == "0-1")
         {
-            for (var i = 0; i < numTc; i += 2)
+            for (let i = 0; i < numTc; i += 2)
             {
                 bufTexCoord[i] = i / numTc;
+                // bufTexCoord[i+1] = i / numTc;
                 bufTexCoord[i + 1] = 0.5;
+            }
+        }
+        else if (texCoords.get() == "Fill")
+        {
+            const sizel = Math.sqrt(numTc / 2);
+            console.log("fill", numTc, sizel);
+
+            let idx = 0;
+            for (let j = 0; j < sizel; j++)
+            {
+                for (let i = 0; i < sizel; i++)
+                {
+                    idx++;
+                    bufTexCoord[idx * 2 + 0] = i / sizel;
+                    bufTexCoord[idx * 2 + 1] = j / sizel;
+                    // bufTexCoord[i + j * sizel] = (i) / sizel;
+                    // bufTexCoord[i + j * sizel + 1] = j / sizel;
+                }
             }
         }
         else if (texCoords.get() == "Random")
         {
-            for (var i = 0; i < numTc; i += 2)
+            for (let i = 0; i < numTc; i += 2)
             {
                 bufTexCoord[i] = Math.random();
                 bufTexCoord[i + 1] = Math.random();
+            }
+        }
+        else
+        {
+            for (let i = 0; i < numTc; i += 2)
+            {
+                bufTexCoord[i] = 0;
+                bufTexCoord[i + 1] = 0;
             }
         }
         const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD, bufTexCoord, 2);

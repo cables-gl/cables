@@ -36,6 +36,14 @@ module.exports = (isProduction, shouldBabel = false) => ({
     "optimization": { "minimize": isProduction },
     "module": {
         "rules": [
+            {
+                "test": /buildInfo.js$/,
+                "use": [
+                    {
+                        "loader": "val-loader",
+                    },
+                ],
+            },
             shouldBabel && {
                 "test": /.jsx?$/,
                 "include": [path.resolve(__dirname, "src")],

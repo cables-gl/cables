@@ -57,5 +57,50 @@
             }
         ],
         "name": "Ops.WebAudio.AudioPlayer_v2"
+    },
+    "summary": "Plays an audio file, linked to the timeline",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "File",
+                "text": "The audio file you want to play"
+            },
+            {
+                "name": "Play",
+                "text": "Starts the playback when set to true"
+            },
+            {
+                "name": "Autoplay",
+                "text": "When true starts playback automatically"
+            },
+            {
+                "name": "Volume",
+                "text": "How loud the audio file should be played back"
+            },
+            {
+                "name": "Synchronized Player",
+                "text": "Sync to timeline"
+            },
+            {
+                "name": "Loop",
+                "text": "Set to true to enable looping"
+            },
+            {
+                "name": "Audio out",
+                "text": "The audio out object, can be connected to the Ops.WebAudio.Output op"
+            },
+            {
+                "name": "Playing",
+                "text": "True if it is currently playing"
+            },
+            {
+                "name": "Ended",
+                "text": "Triggers once the playback has ended"
+            }
+        ]
     }
 }

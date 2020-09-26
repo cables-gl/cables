@@ -79,7 +79,7 @@ void main()
     #endif
 
     #ifdef HAS_TEXTURE_MASK
-        col.a=mask;
+        col.a*=mask;
 
     #endif
 

@@ -119,12 +119,28 @@
                 "text": "Vertex position or Object position"
             },
             {
+                "name": "Type index",
+                "text": "Distance or scalar. Scalar scales everything to one value."
+            },
+            {
                 "name": "Strength",
                 "text": "Strength of the effect"
             },
             {
                 "name": "Smoothstep",
                 "text": "Smoothstep mode to influence "
+            },
+            {
+                "name": "Clamp size",
+                "text": "Clamp the size to defined min max"
+            },
+            {
+                "name": "Clamp min",
+                "text": "Minimum size if clamp is enabled"
+            },
+            {
+                "name": "Clamp max",
+                "text": "Maximum size if clamp is enabled"
             },
             {
                 "name": "Pos X",

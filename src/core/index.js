@@ -18,7 +18,6 @@ import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
 
-
 const CABLES = Object.assign(
     {
         EventTarget,
@@ -47,6 +46,7 @@ const CABLES = Object.assign(
     CONSTANTS.ANIM,
     CONSTANTS.OP,
 );
+CABLES.build = require("../../buildInfo");
 
 export default CABLES;
 

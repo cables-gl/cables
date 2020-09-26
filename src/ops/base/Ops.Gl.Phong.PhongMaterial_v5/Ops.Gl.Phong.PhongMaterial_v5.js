@@ -332,18 +332,23 @@ function updateEnvTexture()
         {
             shader.define("TEX_FORMAT_CUBEMAP");
             shader.removeDefine("TEX_FORMAT_EQUIRECT");
+            shader.removeDefine("ENVMAP_MATCAP");
             inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
             inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
         }
         else
         {
             shader.removeDefine("TEX_FORMAT_CUBEMAP");
-            shader.define("TEX_FORMAT_EQUIRECT");
             if (inEnvTexture.get().width === inEnvTexture.get().height)
             {
                 shader.define("ENVMAP_MATCAP");
+                shader.removeDefine("TEX_FORMAT_EQUIRECT");
             }
-            else shader.removeDefine("ENVMAP_MATCAP");
+            else
+            {
+                shader.removeDefine("ENVMAP_MATCAP");
+                shader.define("TEX_FORMAT_EQUIRECT");
+            }
 
             inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
             inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
