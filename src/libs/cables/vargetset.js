@@ -47,13 +47,14 @@ const VarSetOpWrapper = class
 
     _updateName()
     {
-        if (CABLES.UI) this._op.setTitle("set #" + this._varNamePort.get());
+        const varname = this._varNamePort.get();
+        if (CABLES.UI) this._op.setTitle("set #" + varname);
         this._updateErrorUi();
 
-        const vari = this._op.patch.getVar(this._varNamePort.get());
+        const vari = this._op.patch.getVar(varname);
         if (vari && !vari.type) vari.type = this._type;
 
-
+        if (!this._op.patch.hasVar(varname)) this._setVarValue();
         this._updateVarNamesDropdown();
 
         if (this._op.isCurrentUiOp())
