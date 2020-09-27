@@ -109,6 +109,11 @@ const Op = function ()
         this.uiAttrib(obj);
     };
 
+    Op.prototype.getTitle = function (name)
+    {
+        return this.uiAttribs.title || this.name;
+    };
+
     Op.prototype.setTitle = function (name)
     {
         const doFireEvent = this.name != name;
