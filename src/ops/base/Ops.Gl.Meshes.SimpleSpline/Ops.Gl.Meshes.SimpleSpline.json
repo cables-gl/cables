@@ -24,6 +24,10 @@
                 "type": "0",
                 "name": "TexCoords index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "TexCoords"
             }
         ],
         "portsOut": [

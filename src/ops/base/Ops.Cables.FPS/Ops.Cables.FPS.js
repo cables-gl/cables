@@ -18,7 +18,7 @@ function update(p)
 {
     if (active.get())
     {
-        console.log(p);
+        // console.log(p);
         outFPS.set(p.fps);
         countFps += p.fps;
         countFpsNums++;

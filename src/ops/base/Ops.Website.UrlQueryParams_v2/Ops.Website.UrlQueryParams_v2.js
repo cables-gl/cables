@@ -1,34 +1,40 @@
 const
-    paramName=op.inString("parameter"),
-    def=op.inString("Default"),
-    result=op.outString("result");
+    paramName = op.inString("parameter"),
+    def = op.inString("Default"),
+    result = op.outString("result");
 
-def.onChange=paramName.onChange=update;
+def.onChange = update;
+paramName.onChange = updateParam;
 
-var query = {};
-var a = window.location.search.substr(1).split('&');
+const query = {};
+const a = window.location.search.substr(1).split("&");
 
 update();
 
-for (var i = 0; i < a.length; i++)
+for (let i = 0; i < a.length; i++)
 {
-    var b = a[i].split('=');
-    query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || '');
+    const b = a[i].split("=");
+    query[decodeURIComponent(b[0])] = decodeURIComponent(b[1] || "");
+}
+
+function updateParam()
+{
+    op.setUiAttrib({ "extendTitle": paramName.get() });
+    update();
 }
 
 function update()
 {
-    if(!query.hasOwnProperty(paramName.get()))
+    if (!query.hasOwnProperty(paramName.get()))
     {
-        result.set(def.get()||null);
+        result.set(def.get() || null);
     }
     else
     {
-        var v=query[paramName.get()];
-        if(v==='true')v=true;
-        else if(v==='false')v=false;
+        let v = query[paramName.get()];
+        if (v === "true")v = true;
+        else if (v === "false")v = false;
 
         result.set(v);
     }
 }
-
