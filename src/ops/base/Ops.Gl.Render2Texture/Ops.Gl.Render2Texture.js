@@ -7,6 +7,7 @@ const
     height = op.inValueInt("texture height", 512),
     aspect = op.inBool("Auto Aspect", false),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
+    twrap = op.inSwitch("Wrap", ["Clamp", "Repeat", "Mirror"], "Repeat"),
     msaa = op.inSwitch("MSAA", ["none", "2x", "4x", "8x"], "none"),
     trigger = op.outTrigger("trigger"),
     tex = op.outTexture("texture"),
@@ -43,6 +44,7 @@ fpTexture.onChange =
     depth.onChange =
     clear.onChange =
     tfilter.onChange =
+    twrap.onChange =
     msaa.onChange = initFbLater;
 
 function doRender()
@@ -50,6 +52,11 @@ function doRender()
     if (!fb || reInitFb)
     {
         if (fb) fb.delete();
+
+        let selectedWrap = CGL.Texture.WRAP_REPEAT;
+        if (twrap.get() == "Clamp") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+        else if (twrap.get() == "Mirror") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+
         if (cgl.glVersion >= 2)
         {
             let ms = true;
@@ -60,14 +67,15 @@ function doRender()
                 msSamples = 0;
                 ms = false;
             }
-            if (msaa.get() == "2x")msSamples = 2;
-            if (msaa.get() == "4x")msSamples = 4;
-            if (msaa.get() == "8x")msSamples = 8;
+            if (msaa.get() == "2x") msSamples = 2;
+            if (msaa.get() == "4x") msSamples = 4;
+            if (msaa.get() == "8x") msSamples = 8;
 
             fb = new CGL.Framebuffer2(cgl, 8, 8,
                 {
                     "isFloatingPointTexture": fpTexture.get(),
                     "multisampling": ms,
+                    "wrap": selectedWrap,
                     "depth": depth.get(),
                     "multisamplingSamples": msSamples,
                     "clear": clear.get()
@@ -81,6 +89,7 @@ function doRender()
         if (tfilter.get() == "nearest") fb.setFilter(CGL.Texture.FILTER_NEAREST);
         else if (tfilter.get() == "linear") fb.setFilter(CGL.Texture.FILTER_LINEAR);
         else if (tfilter.get() == "mipmap") fb.setFilter(CGL.Texture.FILTER_MIPMAP);
+
 
         texDepth.set(fb.getTextureDepth());
         reInitFb = false;
