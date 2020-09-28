@@ -138,6 +138,7 @@ function popUpAnim()
     const end = endPosition.get() + mode;
 
     if (!inId.get()) return;
+    div.style.display = "block";
     if (divSide.get() == "bottom")
     {
         document.getElementById(inId.get()).animate(
@@ -145,7 +146,7 @@ function popUpAnim()
                 "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.0, 0.0, 0.2, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "bottom": [start, end, end, start],
-                "offset": [0, 0.25, 0.5, 0.55]
+                "offset": [0, 0.25, 0.9, 0.975]
             },
             animDuration.get() * 1000);
     }
@@ -156,8 +157,9 @@ function popUpAnim()
                 "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.42, 0.0, 0.58, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "top": [start, end, end, start],
-                "offset": [0, 0.25, 0.5, 0.55]
+                "offset": [0, 0.25, 0.9, 0.975]
             },
             animDuration.get() * 1000);
     }
+    // div.style.display = "none";
 }
