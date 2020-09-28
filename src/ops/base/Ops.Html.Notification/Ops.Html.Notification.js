@@ -9,7 +9,7 @@ const
     inId = op.inString("Id", "popup"),
     inClass = op.inString("Class"),
     inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
-    inVisible = op.inValueBool("Visible", true),
+    inVisible = op.inValueBool("Active", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
     outElement = op.outObject("DOM Element");
 
@@ -133,12 +133,16 @@ function warning()
 
 function popUpAnim()
 {
+    // if(!inVisible.get())return;
+
     const mode = percentOrPixel.get();
     const start = startPosition.get() + mode;
     const end = endPosition.get() + mode;
 
     if (!inId.get()) return;
+    const targetDiv = document.getElementById(inId.get());
     div.style.display = "block";
+
     if (divSide.get() == "bottom")
     {
         document.getElementById(inId.get()).animate(
@@ -148,7 +152,10 @@ function popUpAnim()
                 "bottom": [start, end, end, start],
                 "offset": [0, 0.25, 0.9, 0.975]
             },
-            animDuration.get() * 1000);
+            animDuration.get() * 1000).onfinish = function ()
+        {
+            div.style.display = "none";
+        };
     }
     else
     {
@@ -159,7 +166,9 @@ function popUpAnim()
                 "top": [start, end, end, start],
                 "offset": [0, 0.25, 0.9, 0.975]
             },
-            animDuration.get() * 1000);
+            animDuration.get() * 1000).onfinish = function ()
+        {
+            div.style.display = "none";
+        };
     }
-    // div.style.display = "none";
 }

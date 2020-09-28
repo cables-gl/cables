@@ -76,7 +76,7 @@
             },
             {
                 "type": "0",
-                "name": "Visible",
+                "name": "Active",
                 "group": "HTML CSS",
                 "subType": "boolean"
             },
