@@ -25,7 +25,7 @@ const body = document.getElementsByTagName("body")[0];
 
 doRefresh.onTriggered = refresh;
 
-let fontImage = document.createElement("canvas");
+const fontImage = document.createElement("canvas");
 fontImage.id = "texturetext_" + CABLES.generateUUID();
 fontImage.style.display = "none";
 body.appendChild(fontImage);
@@ -46,6 +46,14 @@ texWidth.onChange =
 
 refresh();
 reSize();
+
+op.patch.on("fontLoaded", (fontName) =>
+{
+    if (fontName == font.get())
+    {
+        needsRefresh = true;
+    }
+});
 
 function reSize()
 {
@@ -89,7 +97,7 @@ function refresh()
     let i = 0;
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     txt = (text.get() + "").replace(/<br>/g, "\n");
-    let strings = txt.split("\n");
+    const strings = txt.split("\n");
     let posy = 0;
 
     if (maximize.get())
@@ -118,7 +126,7 @@ function refresh()
 
     if (valign.get() == "center")
     {
-        let maxy = (strings.length - 1.5) * fontSize + parseFloat(lineDistance.get());
+        const maxy = (strings.length - 1.5) * fontSize + parseFloat(lineDistance.get());
         posy = ctx.canvas.height / 2 - maxy / 2;
     }
     else if (valign.get() == "top") posy = fontSize;

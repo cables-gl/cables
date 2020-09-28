@@ -31,6 +31,7 @@ const VarSetOpWrapper = class
         this._op.init = () =>
         {
             this._updateName();
+            this._setVarValue();
             this._updateErrorUi();
         };
     }
@@ -52,7 +53,7 @@ const VarSetOpWrapper = class
         const vari = this._op.patch.getVar(this._varNamePort.get());
         if (vari && !vari.type) vari.type = this._type;
 
-        this._setVarValue();
+
         this._updateVarNamesDropdown();
 
         if (this._op.isCurrentUiOp())

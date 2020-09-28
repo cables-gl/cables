@@ -1176,7 +1176,6 @@ Patch.prototype.setVarValue = function (name, val)
     {
         this._variables[name] = new Patch.Variable(name, val);
         this._sortVars();
-
         this.emitEvent("variablesChanged");
     }
     return this._variables[name];
