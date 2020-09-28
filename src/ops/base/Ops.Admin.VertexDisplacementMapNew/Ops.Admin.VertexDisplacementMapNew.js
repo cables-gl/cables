@@ -4,13 +4,13 @@ const
 
     // meth = op.inValueSelect("Mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
     extrude = op.inValue("Extrude", 0.5),
-    meth=op.inSwitch("Mode",['Norm','Tang','BiTang','*','+','/'],'Normals'),
-    axis=op.inSwitch("Axis",['XYZ','XY','X','Y','Z'],'XYZ'),
+    meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Normals"),
+    axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
 
     texture = op.inTexture("Texture"),
-    channel = op.inSwitch("Channel",['Luminance','R','G','B','A','RGB'],'Luminance'),
-    flip = op.inSwitch("Flip",['None','X','Y','XY'],'None'),
-    range = op.inSwitch("Range",["0-1","1-0","Normalized"],"0-1"),
+    channel = op.inSwitch("Channel", ["Luminance", "R", "G", "B", "A", "RGB"], "Luminance"),
+    flip = op.inSwitch("Flip", ["None", "X", "Y", "XY"], "None"),
+    range = op.inSwitch("Range", ["0-1", "1-0", "Normalized"], "0-1"),
     offsetX = op.inValueFloat("Offset X"),
     offsetY = op.inValueFloat("Offset Y"),
 
@@ -23,7 +23,7 @@ const
 
 const cgl = op.patch.cgl;
 
-op.setPortGroup("Input",[texture,flip,channel,range,offsetX,offsetY]);
+op.setPortGroup("Input", [texture, flip, channel, range, offsetX, offsetY]);
 op.setPortGroup("Colorize", [colorize, colorizeMin, colorizeMax]);
 
 op.toWorkPortsNeedToBeLinked(texture, next, render);
@@ -32,7 +32,7 @@ render.onTriggered = dorender;
 
 channel.onChange =
 colorize.onChange =
-axis.onChange=
+axis.onChange =
     range.onChange =
     removeZero.onChange =
     flip.onChange =
@@ -89,8 +89,8 @@ function updateDefines()
 {
     mod.toggleDefine("MOD_HEIGHTMAP_COLORIZE", colorize.get());
 
-    mod.toggleDefine("MOD_HEIGHTMAP_INVERT", range.get()=="1-0");
-    mod.toggleDefine("MOD_HEIGHTMAP_NORMALIZE", range.get()=="Normalized");
+    mod.toggleDefine("MOD_HEIGHTMAP_INVERT", range.get() == "1-0");
+    mod.toggleDefine("MOD_HEIGHTMAP_NORMALIZE", range.get() == "Normalized");
 
     mod.toggleDefine("MOD_DISPLACE_REMOVE_ZERO", removeZero.get());
 
@@ -118,6 +118,8 @@ function updateDefines()
     mod.toggleDefine("MOD_MODE_MUL", meth.get() == "*");
     mod.toggleDefine("MOD_MODE_ADD", meth.get() == "+");
     mod.toggleDefine("MOD_MODE_DIV", meth.get() == "/");
+    mod.toggleDefine("MOD_SMOOTHSTEP", 0);
+
 
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXY", meth.get() == "mul xy");

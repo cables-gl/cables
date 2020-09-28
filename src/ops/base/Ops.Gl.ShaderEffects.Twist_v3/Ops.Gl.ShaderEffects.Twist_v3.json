@@ -51,5 +51,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

@@ -85,7 +85,7 @@ vec3 MOD_mask=vec3(1.0);
 #endif
 
 
-// MOD_disp=smoothstep(0.,1.,MOD_disp*MOD_disp*MOD_disp);
+// MOD_disp=smoothstep(-1.,1.,MOD_disp*MOD_disp*MOD_disp);
 // MOD_disp=MOD_disp*MOD_disp*MOD_disp;
 
 // #ifdef MOD_FLIP_Y
@@ -110,14 +110,26 @@ vec3 MOD_mask=vec3(1.0);
     pos.xyz+=MOD_disp*MOD_mask;
 #endif
 #ifdef MOD_MODE_NORMAL
-    pos.xyz+=norm*MOD_disp*MOD_mask;//*normalize(norm.xyz);
+
+    vec3 MOD_t=norm;
+    #ifdef MOD_SMOOTHSTEP
+        MOD_t=smoothstep(-1.,1.,MOD_t);
+    #endif
+
+    pos.xyz+=MOD_t*MOD_disp*MOD_mask;//*normalize(norm.xyz);
 #endif
 #ifdef MOD_MODE_TANGENT
 
     // vec3 t=attrTangent;
     // t.z*=-1.0;
     MOD_disp*=-1.0;
-    pos.xyz+=(attrTangent)*MOD_disp*MOD_mask;//*normalize(attrTangent.xyz);
+
+    vec3 MOD_t=attrTangent;
+    #ifdef MOD_SMOOTHSTEP
+        MOD_t=smoothstep(-1.,1.,MOD_t);
+    #endif
+
+    pos.xyz+=MOD_t*MOD_disp*MOD_mask;//*normalize(attrTangent.xyz);
 #endif
 #ifdef MOD_MODE_BITANGENT
 
@@ -135,7 +147,19 @@ vec3 MOD_mask=vec3(1.0);
     // t=normalize(t);
 // t.x-=0.29;
 
-    pos.xyz+=attrBiTangent*MOD_disp*MOD_mask;//*normalize(attrBiTangent.xyz);
+    //  bt=attrBiTangent;
+    // vec3 MOD_t=smoothstep(-1.,1.,0.0,1.0,attrBiTangent);
+    vec3 MOD_t=attrBiTangent;//normalize(vec3(attrBiTangent.x,attrBiTangent.z,attrBiTangent.y));
+
+    // MOD_t*=-1.0;//normalize(MOD_t);
+    // MOD_t.z*=-1.0
+
+    #ifdef MOD_SMOOTHSTEP
+        MOD_t=smoothstep(-1.,1.,MOD_t);
+    #endif
+
+
+    pos.xyz+=MOD_t*MOD_disp*MOD_mask;//*normalize(attrBiTangent.xyz);
 #endif
 
 

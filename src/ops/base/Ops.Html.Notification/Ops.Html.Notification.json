@@ -97,5 +97,46 @@
             }
         ],
         "name": "Ops.Html.Notification"
+    },
+    "summary": "Trigger a simple pop up notification on the screen",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger animation",
+                "text": "Trigger the animation"
+            },
+            {
+                "name": "Animation duration",
+                "text": "Animation duration for each stage"
+            },
+            {
+                "name": "Side index",
+                "text": "Pick from top or bottom"
+            },
+            {
+                "name": "Start point",
+                "text": "Starting point can be pixels or percentage"
+            },
+            {
+                "name": "End point",
+                "text": "Starting point can be pixels or percentage"
+            },
+            {
+                "name": "Style",
+                "text": "CSS styling"
+            },
+            {
+                "name": "Interactive",
+                "text": "If true then div can be interacted with"
+            },
+            {
+                "name": "Visible",
+                "text": "Set visibility on screen"
+            }
+        ]
     }
 }

@@ -1,22 +1,29 @@
 const
-    exe=op.inTrigger("exe"),
-    delay=op.inValueFloat("delay",1),
-    next=op.outTrigger("next"),
-    outDelaying=op.outBool("Delaying");
+    exe = op.inTrigger("exe"),
+    delay = op.inValueFloat("delay", 1),
+    cancel = op.inTrigger("Cancel"),
+    next = op.outTrigger("next"),
+    outDelaying = op.outBool("Delaying");
 
-var lastTimeout=null;
+let lastTimeout = null;
 
-exe.onTriggered=function()
+cancel.onTriggered = function ()
+{
+    if (lastTimeout)clearTimeout(lastTimeout);
+    lastTimeout = null;
+};
+
+exe.onTriggered = function ()
 {
     outDelaying.set(true);
-    if(lastTimeout)clearTimeout(lastTimeout);
+    if (lastTimeout)clearTimeout(lastTimeout);
 
-    lastTimeout=setTimeout(
-        function()
+    lastTimeout = setTimeout(
+        function ()
         {
             outDelaying.set(false);
-            lastTimeout=null;
+            lastTimeout = null;
             next.trigger();
         },
-        delay.get()*1000);
+        delay.get() * 1000);
 };

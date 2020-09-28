@@ -65,7 +65,6 @@ doScale.onChange =
     textureMask.onChange =
     colorizeRandom.onChange =
     flipTex.onChange =
-    textureColorize.onChange =
     texMaskChan.onChange =
     inPixelSize.onChange =
     texturePointSize.onChange =
