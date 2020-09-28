@@ -473,12 +473,10 @@ Mesh.prototype._bind = function (shader)
                         if (pointer.loc == -1)
                         {
                             pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
-                            // console.log('pointer.loc',attribute.name,pointer.loc);
                         }
                         profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
-                        // this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attribute.buffer);
                         this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
                     }
                 }
@@ -599,9 +597,7 @@ Mesh.prototype.render = function (shader)
     if (this._glPrimitive !== undefined) prim = this._glPrimitive;
     if (shader.glPrimitive !== null) prim = shader.glPrimitive;
 
-
     let elementDiv = 1;
-
 
     if (this.hasFeedbacks())
     {
@@ -620,12 +616,12 @@ Mesh.prototype.render = function (shader)
     }
 
     profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
-
     profileData.profileMeshDraw++;
 };
 
 Mesh.prototype.setNumInstances = function (n)
 {
+    n = Math.max(0, n);
     if (this._numInstances != n)
     {
         this._numInstances = n;
