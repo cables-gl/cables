@@ -649,7 +649,7 @@ Patch.prototype.exec = function (e)
  * @param {Op} op2
  * @param {String} portName2
  */
-Patch.prototype.link = function (op1, port1Name, op2, port2Name)
+Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase)
 {
     if (!op1)
     {
@@ -661,8 +661,9 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name)
         Log.log("link: op2 is null");
         return;
     }
-    const port1 = op1.getPort(port1Name);
-    const port2 = op2.getPort(port2Name);
+
+    const port1 = op1.getPort(port1Name, lowerCase);
+    const port2 = op2.getPort(port2Name, lowerCase);
 
     if (!port1)
     {
