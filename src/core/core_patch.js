@@ -1165,6 +1165,18 @@ Patch.prototype._sortVars = function ()
     this._variables = ordered;
 };
 
+/**
+ * has variable
+ * @function hasVariable
+ * @memberof Patch
+ * @instance
+ * @param {String} name of variable
+ */
+Patch.prototype.hasVar = function (name)
+{
+    return this._variables.hasOwnProperty("name");
+};
+
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
