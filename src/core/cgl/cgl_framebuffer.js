@@ -14,8 +14,7 @@ import { Log } from "../log";
  * @param {Number} height
  * @param {Object} [options]
  */
-
-const Framebuffer = function (_cgl, w, h, options)
+const Framebuffer = function (_cgl, _w, _h, options)
 {
     const cgl = _cgl;
 
@@ -31,8 +30,8 @@ const Framebuffer = function (_cgl, w, h, options)
         // return;
     }
 
-    let width = w || 512;
-    let height = h || 512;
+    let width = _w || 512;
+    let height = _h || 512;
 
     options = options || {
         "isFloatingPointTexture": false,
@@ -43,7 +42,7 @@ const Framebuffer = function (_cgl, w, h, options)
     const texture = new Texture(cgl, {
         "isFloatingPointTexture": options.isFloatingPointTexture,
         "filter": options.filter,
-        "wrap": Texture.CLAMP_TO_EDGE,
+        "wrap": options.wrap || Texture.CLAMP_TO_EDGE
     });
 
     let textureDepth = null;

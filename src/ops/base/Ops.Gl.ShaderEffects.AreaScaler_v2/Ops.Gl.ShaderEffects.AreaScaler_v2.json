@@ -22,15 +22,6 @@
             },
             {
                 "type": "0",
-                "name": "Type index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Type"
-            },
-            {
-                "type": "0",
                 "name": "Strength",
                 "group": "Influence",
                 "subType": "number"

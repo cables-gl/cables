@@ -1014,16 +1014,30 @@ const Op = function ()
      * @param {String} portName
      * @return {Port}
      */
-    Op.prototype.getPort = Op.prototype.getPortByName = function (name)
+    Op.prototype.getPort = Op.prototype.getPortByName = function (name, lowerCase)
     {
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-            if (this.portsIn[ipi].getName() == name)
-                return this.portsIn[ipi];
+        if (lowerCase)
+        {
+            for (let ipi = 0; ipi < this.portsIn.length; ipi++)
+                if (this.portsIn[ipi].getName().toLowerCase() == name)
+                    return this.portsIn[ipi];
 
-        for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-            if (this.portsOut[ipo].getName() == name)
-                return this.portsOut[ipo];
+            for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+                if (this.portsOut[ipo].getName().toLowerCase() == name)
+                    return this.portsOut[ipo];
+        }
+        else
+        {
+            for (let ipi = 0; ipi < this.portsIn.length; ipi++)
+                if (this.portsIn[ipi].getName() == name)
+                    return this.portsIn[ipi];
+
+            for (let ipo = 0; ipo < this.portsOut.length; ipo++)
+                if (this.portsOut[ipo].getName() == name)
+                    return this.portsOut[ipo];
+        }
     };
+
 
     /**
      * return port by the name id

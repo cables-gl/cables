@@ -41,6 +41,15 @@
             },
             {
                 "type": "0",
+                "name": "Wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Wrap"
+            },
+            {
+                "type": "0",
                 "name": "MSAA index",
                 "subType": "integer"
             },

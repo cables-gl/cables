@@ -17,17 +17,9 @@
             },
             {
                 "type": "0",
-                "name": "Animation duration",
+                "name": "Duration",
+                "group": "Animation",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Side index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Side"
             },
             {
                 "type": "0",
@@ -36,48 +28,62 @@
             },
             {
                 "type": "5",
-                "name": "mode"
+                "name": "mode",
+                "group": "Positioning"
             },
             {
                 "type": "0",
-                "name": "Start point",
+                "name": "Side index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Side",
+                "group": "Positioning"
+            },
+            {
+                "type": "0",
+                "name": "Starting position",
+                "group": "Positioning",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "End point",
+                "name": "Ending position",
+                "group": "Positioning",
                 "subType": "number"
             },
             {
                 "type": "5",
-                "name": "Text"
+                "name": "Text",
+                "group": "HTML CSS"
             },
             {
                 "type": "5",
-                "name": "Id"
+                "name": "Id",
+                "group": "HTML CSS"
             },
             {
                 "type": "5",
-                "name": "Class"
+                "name": "Class",
+                "group": "HTML CSS"
             },
             {
                 "type": "0",
                 "name": "Style",
+                "group": "HTML CSS",
                 "subType": "string"
             },
             {
                 "type": "0",
-                "name": "Interactive",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
                 "name": "Visible",
+                "group": "HTML CSS",
                 "subType": "boolean"
             },
             {
                 "type": "0",
                 "name": "Convert Line Breaks",
+                "group": "HTML CSS",
                 "subType": "boolean"
             }
         ],
@@ -85,15 +91,6 @@
             {
                 "type": "2",
                 "name": "DOM Element"
-            },
-            {
-                "type": "0",
-                "name": "Hover",
-                "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Clicked"
             }
         ],
         "name": "Ops.Html.Notification"
