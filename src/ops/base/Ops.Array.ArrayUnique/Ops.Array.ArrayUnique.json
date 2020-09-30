@@ -7,12 +7,26 @@
             {
                 "type": "3",
                 "name": "array"
+            },
+            {
+                "type": "0",
+                "name": "Format index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Format"
             }
         ],
         "portsOut": [
             {
                 "type": "3",
                 "name": "arrayOut"
+            },
+            {
+                "type": "0",
+                "name": "Array Length Out",
+                "subType": "number"
             }
         ],
         "name": "Ops.Array.ArrayUnique"

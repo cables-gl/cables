@@ -78,7 +78,64 @@
     },
     "summary": "simple camera you control with W,A,S,D keys like in a FPS game",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "render",
+                "text": "Trigger the op"
+            },
+            {
+                "name": "Enable pointer lock",
+                "text": "If true pointer lock can be enabled"
+            },
+            {
+                "name": "Allow Flying",
+                "text": "Allows vertical movement"
+            },
+            {
+                "name": "Speed",
+                "text": "Movement speed multiplier - default 1"
+            },
+            {
+                "name": "trigger",
+                "text": "trigger out"
+            },
+            {
+                "name": "isLocked",
+                "text": "If pointer lock is active this is true"
+            },
+            {
+                "name": "posX",
+                "text": "X position in space"
+            },
+            {
+                "name": "posY",
+                "text": "Y position in space"
+            },
+            {
+                "name": "posZ",
+                "text": "Z position in space"
+            },
+            {
+                "name": "Mouse Left",
+                "text": "Trigger out on left mouse button down"
+            },
+            {
+                "name": "Mouse Right",
+                "text": "Trigger out on right mouse button down"
+            },
+            {
+                "name": "Dir X",
+                "text": "Direction of camera X"
+            },
+            {
+                "name": "Dir Y",
+                "text": "Direction of camera Y"
+            },
+            {
+                "name": "Dir Z",
+                "text": "Direction of camera Z"
+            }
+        ]
     },
     "changelog": [
         {
@@ -86,5 +143,9 @@
             "author": "cables",
             "date": 1565358593987
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

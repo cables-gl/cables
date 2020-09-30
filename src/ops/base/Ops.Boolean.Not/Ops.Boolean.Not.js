@@ -1,9 +1,10 @@
-var bool=op.inValueBool("Boolean");
-var outbool=op.outValue("Result");
+const bool = op.inValueBool("Boolean");
+const outbool = op.outValue("Result");
 
-bool.changeAlways=true;
+bool.changeAlways = true;
 
-bool.onChange=function()
+bool.onChange = function ()
 {
-    outbool.set( ! (true==bool.get()) );
+    // outbool.set( ! (true==bool.get()) );
+    outbool.set(!bool.get());
 };

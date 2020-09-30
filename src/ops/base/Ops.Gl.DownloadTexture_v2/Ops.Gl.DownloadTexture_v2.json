@@ -32,5 +32,30 @@
             }
         ],
         "name": "Ops.Gl.DownloadTexture_v2"
+    },
+    "summary": "Download a texture as png file",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Texture",
+                "text": "Texture in to capture"
+            },
+            {
+                "name": "Download",
+                "text": "Trigger to download the texture/image"
+            },
+            {
+                "name": "Filename",
+                "text": "The name of the downloaded file"
+            },
+            {
+                "name": "Finished",
+                "text": "When the texture is downloaded outputs true"
+            }
+        ]
     }
 }

@@ -35,19 +35,19 @@ exec.onTriggered = render;
 inPositions.onChange =
     function ()
     {
-        needSetup = true;
         const pos = inPositions.get();
-        if (!pos)
+        // if (!pos)
+        // {
+        //     removeBodies(lastWorld);
+        // }
+        if (!pos || pos.length / 3 != bodies.length)
         {
+            needSetup = true;
             removeBodies(lastWorld);
+            skipSimulation = true;
             return;
         }
-        if (pos.length / 3 != bodies.length)
-        {
-            removeBodies(lastWorld);
-        }
         setBodyPositions();
-        skipSimulation = true;
     };
 
 inReset.onTriggered = () =>
