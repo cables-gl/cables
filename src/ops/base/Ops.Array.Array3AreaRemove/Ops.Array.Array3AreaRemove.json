@@ -1,0 +1,170 @@
+{
+    "id": "db93f8c7-6bad-467e-b38f-333e84838d1d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1600853779070
+        },
+        {
+            "message": "Ops.User.simod.PointRemoval renamed to Ops.Array.Array3AreaRemove",
+            "author": "simod",
+            "date": 1601387357399
+        }
+    ],
+    "authorName": "simod",
+    "created": 1600853813835,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "In Trigger"
+            },
+            {
+                "type": "3",
+                "name": "In Array"
+            },
+            {
+                "type": "0",
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Mode",
+                "group": "Settings",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Size",
+                "group": "Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Invert",
+                "group": "Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "group": "Position",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Z",
+                "group": "Position",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Out Trigger"
+            },
+            {
+                "type": "3",
+                "name": "Out Array"
+            },
+            {
+                "type": "0",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Out X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Out Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Out Z",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.simod.PointRemoval"
+    },
+    "summary": "remove points from an array3 with different shapes",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "In Trigger",
+                "text": "trigger input"
+            },
+            {
+                "name": "In Array",
+                "text": "array input"
+            },
+            {
+                "name": "Mode index",
+                "text": "choose on of following removal modes: \"Sphere, Box, Axis X, Axis Y, Axis Z, Axis X Infinite, Axis Y Infinite, Axis Z Infinite\" "
+            },
+            {
+                "name": "Mode",
+                "text": "choose on of following removal modes: \"Sphere, Box, Axis X, Axis Y, Axis Z, Axis X Infinite, Axis Y Infinite, Axis Z Infinite\" "
+            },
+            {
+                "name": "Size",
+                "text": "size of the removal area"
+            },
+            {
+                "name": "Invert",
+                "text": "invert the removal area "
+            },
+            {
+                "name": "X",
+                "text": "x position"
+            },
+            {
+                "name": "Y",
+                "text": "y position"
+            },
+            {
+                "name": "Z",
+                "text": "z position"
+            },
+            {
+                "name": "Out Trigger",
+                "text": "trigger output"
+            },
+            {
+                "name": "Out Array",
+                "text": "array output with removed coordinates"
+            },
+            {
+                "name": "Array Length",
+                "text": "length of the new array"
+            },
+            {
+                "name": "Out X",
+                "text": "x position out"
+            },
+            {
+                "name": "Out Y",
+                "text": "y position out"
+            },
+            {
+                "name": "Out Z",
+                "text": "z position out"
+            }
+        ]
+    }
+}
