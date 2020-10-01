@@ -139,7 +139,7 @@ const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
 const inAlphaTexture = op.inTexture("Opacity Texture");
 const inEnvTexture = op.inTexture("Environment Map");
-const inLuminanceMaskTexture = op.inTexture("Luminance Mask");
+const inLuminanceMaskTexture = op.inTexture("Env Map Mask");
 op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
 
 

@@ -47,5 +47,6 @@ function updateName()
 
 function update()
 {
-    op.patch.setVarValue(op.varName.get(), val.get());
+    const v = op.patch.setVarValue(op.varName.get(), val.get());
+    v.type = "number";
 }

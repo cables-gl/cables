@@ -85,6 +85,7 @@ op.onDelete = function ()
 
 function updatePos()
 {
+    canvas.style["pointer-events"] = "none";
     if (position.get() == "top")
     {
         canvas.style.top = element.style.top = "0px";
