@@ -33,6 +33,10 @@ const
     fromY = op.outValue("from y"),
     fromZ = op.outValue("from z"),
 
+    bodyX = op.outValue("Body x"),
+    bodyY = op.outValue("Body y"),
+    bodyZ = op.outValue("Body z"),
+
     outName = op.outString("Name"),
 
     cgl = op.patch.cgl;
@@ -114,6 +118,7 @@ function setRay(world)
 
     results.length = 0;
     // console.log("---");
+
     world.raycastAll(
         new CANNON.Vec3(origin[0], origin[1], origin[2]),
         new CANNON.Vec3(to[0], to[1], to[2]),
@@ -121,7 +126,6 @@ function setRay(world)
         function (r)
         {
             // todo sort all results by distance to find closest ?
-
 
             // check if visible on screen or behind cam...
             const pos = vec3.create();
@@ -144,6 +148,9 @@ function setRay(world)
 
 function render()
 {
+    next.trigger();
+
+
     const world = cgl.frameStore.world;
     if (!world) return;
 
@@ -175,6 +182,10 @@ function render()
             // rayResult.body.dispatchEvent({type:"raycasthit"});
             hitBody = rayResult.body;
             hitBody.raycastHit = true;
+
+            bodyX.set(hitBody.position.x);
+            bodyY.set(hitBody.position.y);
+            bodyZ.set(hitBody.position.z);
         }
         else outName.set(null);
 
@@ -199,7 +210,4 @@ function render()
 
     for (let i = 0; i < world.bodies.length; i++)
         if (world.bodies[i] != hitBody)world.bodies[i].raycastHit = false;
-
-
-    next.trigger();
 }
