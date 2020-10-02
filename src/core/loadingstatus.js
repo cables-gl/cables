@@ -60,7 +60,7 @@ LoadingStatus.prototype.checkStatus = function ()
     {
         for (let j = 0; j < this._cbFinished.length; j++)
         {
-            setTimeout(this._cbFinished[j], 200);
+            setTimeout(() => { this._cbFinished[j](this._patch); }, 200);
         }
 
         if (!this._wasFinishedPrinted)
