@@ -173,6 +173,8 @@ function setBodyPositions(pos)
 {
     if (!pos)pos = inPositions.get();
 
+    const vpos = vec3.create();
+
     // console.log(pos);
     for (let i = 0; i < pos.length; i += 3)
     {
@@ -180,11 +182,18 @@ function setBodyPositions(pos)
 
         if (!body) continue;
 
-        vec3.transformMat4(vec, empty, cgl.mMatrix);
+        // vec3.transformMat4(vec, empty, cgl.mMatrix);
+        // resultsPositions[i + 0] = body.position.x = vec[0] + pos[i + 0];
+        // resultsPositions[i + 1] = body.position.y = vec[1] + pos[i + 1];
+        // resultsPositions[i + 2] = body.position.z = vec[2] + pos[i + 2];
 
-        resultsPositions[i + 0] = body.position.x = vec[0] + pos[i + 0];
-        resultsPositions[i + 1] = body.position.y = vec[1] + pos[i + 1];
-        resultsPositions[i + 2] = body.position.z = vec[2] + pos[i + 2];
+        vpos[0] = pos[i + 0];
+        vpos[1] = pos[i + 1];
+        vpos[2] = pos[i + 2];
+        vec3.transformMat4(vpos, vpos, cgl.mMatrix);
+        resultsPositions[i + 0] = body.position.x = vpos[0];
+        resultsPositions[i + 1] = body.position.y = vpos[1];
+        resultsPositions[i + 2] = body.position.z = vpos[2];
     }
 }
 function updatePositions()
