@@ -1019,13 +1019,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
     for (const i in this.ops) this.ops[i].initVarPorts();
 
 
-    setTimeout(
-        () =>
-        {
-            this.loading.finished(loadingId);
-        }, 100
-    );
-    if (this.config.onPatchLoaded) this.config.onPatchLoaded();
+    setTimeout(() => { this.loading.finished(loadingId); }, 100);
+    if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
     if (this.onLoadEnd) this.onLoadEnd();
 };
