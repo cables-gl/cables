@@ -562,8 +562,8 @@ Shader.prototype.compile = function ()
             if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both") countUniFrag++;
         }
     }
-    if (countUniFrag >= countUniFrag) console.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
-    if (countUniVert >= countUniVert) console.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
+    if (countUniFrag >= this._cgl.maxUniformsFrag) console.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
+    if (countUniVert >= this._cgl.maxUniformsVert) console.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
 
 
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
