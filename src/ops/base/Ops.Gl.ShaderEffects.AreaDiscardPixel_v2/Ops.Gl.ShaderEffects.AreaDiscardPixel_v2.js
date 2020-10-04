@@ -33,9 +33,6 @@ const srcBodyVert = ""
     .endl() + "#endif"
     .endl();
 
-let moduleFrag = null;
-let moduleVert = null;
-
 inWorldSpace.onChange =
 inInvert.onChange =
 inRepeat.onChange =
