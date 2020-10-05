@@ -1,7 +1,7 @@
 const exec = op.inTrigger("Exec"),
 
     reset = op.inTriggerButton("Reset"),
-    doDraw = op.inValueBool("Draw Bodies", false),
+    doDraw = op.inValueBool("Draw Bodies", true),
     groundPlane = op.inValueBool("Groundplane", false),
 
     gravX = op.inValue("Gravity X"),
@@ -43,7 +43,6 @@ function setGravity()
 
 function setup()
 {
-    console.log("world setup");
     world = new CANNON.World();
     world.uuid = CABLES.uuid();
 
@@ -109,6 +108,9 @@ function draw()
         // wireSphere.render(cgl, 0.05);
         marker.draw(cgl, 0.8);
 
+        if (world.bodies[i].raycastHit)meshCube.colorShader.setColor([1, 0, 1, 0]);
+        else meshCube.colorShader.setColor([0, 1, 1, 1]);
+
         if (world.bodies[i].shapes[0].type == CANNON.Shape.types.BOX)
         {
             meshCube.render(
@@ -116,10 +118,12 @@ function draw()
                 world.bodies[i].shapes[0].halfExtents.y,
                 world.bodies[i].shapes[0].halfExtents.z);
         }
-        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.PLANE) console.log("plane!");
+        else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.PLANE)
+        {
+            console.log("plane!");
+        }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
         {
-            // console.log("sphere!");
             wireSphere.render(cgl, 1.0);
         }
         else console.log("unknown!", world.bodies[i].shapes[0].type);
@@ -136,6 +140,7 @@ function draw()
 exec.onTriggered = function ()
 {
     if (!world)setup();
+    const old = cgl.frameStore.world;
     cgl.frameStore.world = world;
 
     next.trigger();
@@ -150,8 +155,8 @@ exec.onTriggered = function ()
         world.step(fixedTimeStep, dt, maxSubSteps);
     }
 
-
     lastTime = time;
 
     if (doDraw.get()) draw();
+    cgl.frameStore.world = old;
 };

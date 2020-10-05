@@ -1,17 +1,21 @@
 // inputs
-var value0port = op.inValue("Value 0", 0);
-var value1port = op.inValue("Value 1", 1);
-var useValue1Port = op.inValueBool("Use Value 1", false);
+const useValue1Port = op.inValueBool("Use Value 1", false);
+const value0port = op.inValue("Value 0", 0);
+const value1port = op.inValue("Value 1", 1);
 
 // outputs
-var outValuePort = op.outValue("Out Value", 0);
+const outValuePort = op.outValue("Out Value", 0);
 
 // functions
-function setOutput() {
-    var useValue1 = useValue1Port.get();
-    if(useValue1) {
+function setOutput()
+{
+    const useValue1 = useValue1Port.get();
+    if (useValue1)
+    {
         outValuePort.set(value1port.get());
-    } else {
+    }
+    else
+    {
         outValuePort.set(value0port.get());
     }
 }

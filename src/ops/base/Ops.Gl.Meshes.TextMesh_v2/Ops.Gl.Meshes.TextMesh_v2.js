@@ -250,7 +250,7 @@ function generateMesh()
 
         font.geom.verticesIndices = [
             0, 1, 2,
-            3, 1, 2
+            2, 1, 3
         ];
     }
 

@@ -419,6 +419,7 @@ Shader.prototype.compile = function ()
     profileData.profileShaderCompiles++;
     profileData.profileShaderCompileName = this._name;
 
+
     let extensionString = "";
     if (this._extensions)
         for (let i = 0; i < this._extensions.length; i++)
@@ -549,6 +550,21 @@ Shader.prototype.compile = function ()
                     uniformsStrFrag += uniStr + ";" + comment.endl();
         }
     }
+
+
+    let countUniFrag = 0;
+    let countUniVert = 0;
+    for (let i = 0; i < this._uniforms.length; i++)
+    {
+        if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
+        {
+            if (this._uniforms[i].shaderType == "vert" || this._uniforms[i].shaderType == "both") countUniVert++;
+            if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both") countUniFrag++;
+        }
+    }
+    if (countUniFrag >= this._cgl.maxUniformsFrag) console.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
+    if (countUniVert >= this._cgl.maxUniformsVert) console.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
+
 
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
     if (vs.indexOf("precision") == -1) vs = "precision " + this.precision + " float;".endl() + vs;
