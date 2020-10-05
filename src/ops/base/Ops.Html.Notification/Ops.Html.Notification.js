@@ -1,21 +1,21 @@
 const
     triggerAnim = op.inTriggerButton("Trigger animation"),
-    animDuration = op.inFloat("Duration", 1.5),
-    percentOrPixel = op.inSwitch("mode", ["%", "px"], "%"),
-    divSide = op.inSwitch("Side", ["bottom", "top"], "bottom"),
-    startPosition = op.inFloat("Starting position", 0),
-    endPosition = op.inFloat("Ending position", 5),
     inText = op.inString("Text", "Pop-up"),
     inId = op.inString("Id", "popup"),
     inClass = op.inString("Class"),
     inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
     inVisible = op.inValueBool("Active", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
+    animDuration = op.inFloat("Duration", 1.5),
+    percentOrPixel = op.inSwitch("mode", ["%", "px"], "%"),
+    divSide = op.inSwitch("Side", ["bottom", "top"], "bottom"),
+    startPosition = op.inFloat("Starting position", 0),
+    endPosition = op.inFloat("Ending position", 5),
     outElement = op.outObject("DOM Element");
 
 op.setPortGroup("Animation", [animDuration]);
-op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
 op.setPortGroup("HTML CSS", [inText, inId, inClass, inStyle, inVisible, inBreaks]);
+op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
 
 // inStyle.setUiAttribs({editorSyntax:'css'});
 const listenerElement = null;
@@ -57,10 +57,9 @@ function setCSSVisible(visible)
     }
     else
     {
-        // prevDisplay=div.style.display||'block';
         if (prevDisplay == "none") prevDisplay = "block";
         div.style.visibility = "visible";
-        div.style.display = prevDisplay;
+        div.style.display = "none";
     }
 }
 
@@ -133,13 +132,12 @@ function warning()
 
 function popUpAnim()
 {
-    // if(!inVisible.get())return;
-
     const mode = percentOrPixel.get();
     const start = startPosition.get() + mode;
     const end = endPosition.get() + mode;
 
     if (!inId.get()) return;
+    if (!inVisible.get()) return;
     const targetDiv = document.getElementById(inId.get());
     div.style.display = "block";
 

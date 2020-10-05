@@ -16,6 +16,39 @@
                 "name": "Trigger animation"
             },
             {
+                "type": "5",
+                "name": "Text",
+                "group": "HTML CSS"
+            },
+            {
+                "type": "5",
+                "name": "Id",
+                "group": "HTML CSS"
+            },
+            {
+                "type": "5",
+                "name": "Class",
+                "group": "HTML CSS"
+            },
+            {
+                "type": "0",
+                "name": "Style",
+                "group": "HTML CSS",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Active",
+                "group": "HTML CSS",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Convert Line Breaks",
+                "group": "HTML CSS",
+                "subType": "boolean"
+            },
+            {
                 "type": "0",
                 "name": "Duration",
                 "group": "Animation",
@@ -52,39 +85,6 @@
                 "name": "Ending position",
                 "group": "Positioning",
                 "subType": "number"
-            },
-            {
-                "type": "5",
-                "name": "Text",
-                "group": "HTML CSS"
-            },
-            {
-                "type": "5",
-                "name": "Id",
-                "group": "HTML CSS"
-            },
-            {
-                "type": "5",
-                "name": "Class",
-                "group": "HTML CSS"
-            },
-            {
-                "type": "0",
-                "name": "Style",
-                "group": "HTML CSS",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Active",
-                "group": "HTML CSS",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Convert Line Breaks",
-                "group": "HTML CSS",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
