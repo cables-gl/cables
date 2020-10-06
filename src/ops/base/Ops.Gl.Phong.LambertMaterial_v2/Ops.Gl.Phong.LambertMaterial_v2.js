@@ -119,18 +119,35 @@ function setDefaultUniform(light)
 }
 
 const lightUniforms = [];
+const hasLight = {
+    "directional": false,
+    "spot": false,
+    "ambient": false,
+    "point": false,
+};
 
-function createUniforms(lightsCount)
+function createUniforms(lightStack)
 {
     for (let i = 0; i < lightUniforms.length; i += 1)
     {
         lightUniforms[i] = null;
     }
 
-    for (let i = 0; i < lightsCount; i += 1)
+    hasLight.directional = false;
+    hasLight.spot = false;
+    hasLight.ambient = false;
+    hasLight.point = false;
+
+    for (let i = 0; i < lightStack.length; i += 1)
     {
         if (i === MAX_LIGHTS) return;
         lightUniforms[i] = null;
+
+        const light = lightStack[i];
+        const type = light.type;
+
+        if (!hasLight[type]) hasLight[type] = true;
+
         if (!lightUniforms[i])
         {
             lightUniforms[i] = {
@@ -143,6 +160,26 @@ function createUniforms(lightsCount)
                 "spotProperties": new CGL.Uniform(shader, "3f", "lights[" + i + "].spotProperties", [0, 0, 0, 0]),
                 "castLight": new CGL.Uniform(shader, "i", "lights[" + i + "].castLight", 1)
             };
+        }
+    }
+
+    for (let i = 0, keys = Object.keys(hasLight); i < keys.length; i += 1)
+    {
+        const key = keys[i];
+
+        if (hasLight[key])
+        {
+            if (!shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.define("HAS_" + key.toUpperCase());
+            }
+        }
+        else
+        {
+            if (shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.removeDefine("HAS_" + key.toUpperCase());
+            }
         }
     }
 }
@@ -180,7 +217,7 @@ function compareLights(lightStack)
 {
     if (lightStack.length !== oldCount)
     {
-        createUniforms(lightStack.length);
+        createUniforms(lightStack);
         oldCount = lightStack.length;
         shader.define("NUM_LIGHTS", "" + Math.max(oldCount, 1));
         setUniforms(lightStack);

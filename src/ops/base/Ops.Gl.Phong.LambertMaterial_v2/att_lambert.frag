@@ -23,11 +23,13 @@ struct Light {
     vec3 position;
     vec3 color;
     // * SPOT LIGHT * //
-    vec3 conePointAt;
-    #define COSCONEANGLE x
-    #define COSCONEANGLEINNER y
-    #define SPOTEXPONENT z
-    vec3 spotProperties;
+    #ifdef HAS_SPOT
+        vec3 conePointAt;
+        #define COSCONEANGLE x
+        #define COSCONEANGLEINNER y
+        #define SPOTEXPONENT z
+        vec3 spotProperties;
+    #endif
 
     #define INTENSITY x
     #define ATTENUATION y
@@ -116,10 +118,10 @@ void main()
 
     for(int l=0;l<NUM_LIGHTS;l++) {
         if (lights[l].type == AMBIENT) {
-            col.rgb += lights[l].lightProperties.INTENSITY*lights[l].color;
+            col.rgb += lights[l].lightProperties.INTENSITY * lights[l].color;
         } else {
             if (lights[l].castLight == 0) continue;
-            vec3 lightModelDiff=lights[l].position - modelPos.xyz;
+            vec3 lightModelDiff= lights[l].position - modelPos.xyz;
             vec3 lightDirection = normalize(lightModelDiff);
 
             if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
@@ -128,11 +130,14 @@ void main()
             vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, matColor, lambert);
 
             if (lights[l].type != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
-            if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
-                lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
-                lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
-                lightDirection
-            );
+
+            #ifdef HAS_SPOT
+                if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
+                    lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
+                    lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
+                    lightDirection
+                );
+            #endif
 
             diffuseColor *= lights[l].lightProperties.INTENSITY;
             col.rgb += diffuseColor;
