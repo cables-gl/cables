@@ -29,6 +29,10 @@ function createDefaultShader()
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(vertexShader, fragmentShader);
+    shader.define("HAS_POINT");
+    shader.removeDefine("HAS_SPOT");
+    shader.removeDefine("HAS_DIRECTIONAL");
+    shader.removeDefine("HAS_AMBIENT");
 }
 
 
