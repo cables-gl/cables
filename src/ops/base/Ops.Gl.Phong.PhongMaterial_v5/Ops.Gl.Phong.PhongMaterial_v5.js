@@ -183,6 +183,13 @@ shader.define("FALLOFF_MODE_A");
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");
 const FRAGMENT_BODY_REGEX = new RegExp("{{PHONG_FRAGMENT_BODY}}", "g");
 
+const hasLight = {
+    "directional": false,
+    "spot": false,
+    "ambient": false,
+    "point": false,
+};
+
 function createShader(lightStack)
 {
     let fragmentShader = attachments.phong_frag;
@@ -190,9 +197,21 @@ function createShader(lightStack)
     let fragmentHead = "";
     let fragmentBody = "";
 
+    hasLight.directional = false;
+    hasLight.spot = false;
+    hasLight.ambient = false;
+    hasLight.point = false;
+
     for (let i = 0; i < lightStack.length; i += 1)
     {
         const light = lightStack[i];
+
+        const type = light.type;
+
+        if (!hasLight[type])
+        {
+            hasLight[type] = true;
+        }
 
         fragmentHead = fragmentHead.concat(createFragmentHead(i));
         fragmentBody = fragmentBody.concat(createFragmentBody(i, light.type));
@@ -202,6 +221,26 @@ function createShader(lightStack)
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(attachments.phong_vert, fragmentShader);
+    op.log("light types", hasLight);
+    for (let i = 0, keys = Object.keys(hasLight); i < keys.length; i += 1)
+    {
+        const key = keys[i];
+
+        if (hasLight[key])
+        {
+            if (!shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.define("HAS_" + key.toUpperCase());
+            }
+        }
+        else
+        {
+            if (shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.removeDefine("HAS_" + key.toUpperCase());
+            }
+        }
+    }
 }
 
 
