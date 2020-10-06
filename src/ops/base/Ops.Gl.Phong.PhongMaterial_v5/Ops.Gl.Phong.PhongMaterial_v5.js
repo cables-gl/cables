@@ -447,7 +447,7 @@ inAlphaTexture.onChange = updateAlphaTexture;
 inEnvTexture.onChange = updateEnvTexture;
 inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
 
-const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());

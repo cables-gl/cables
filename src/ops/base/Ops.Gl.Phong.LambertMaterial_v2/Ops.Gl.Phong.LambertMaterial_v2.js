@@ -61,7 +61,7 @@ const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
 const outShader = op.outObject("Shader");
 outShader.set(shader);
 
-const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.setSource(attachments.lambert_vert, attachments.lambert_frag);
