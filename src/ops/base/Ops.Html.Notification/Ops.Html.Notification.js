@@ -1,21 +1,21 @@
 const
     triggerAnim = op.inTriggerButton("Trigger animation"),
+    inText = op.inString("Text", "Pop-up"),
+    inId = op.inString("Id", "popup"),
+    inClass = op.inString("Class"),
+    inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
+    inVisible = op.inValueBool("Active", true),
+    inBreaks = op.inValueBool("Convert Line Breaks", false),
     animDuration = op.inFloat("Duration", 1.5),
     percentOrPixel = op.inSwitch("mode", ["%", "px"], "%"),
     divSide = op.inSwitch("Side", ["bottom", "top"], "bottom"),
     startPosition = op.inFloat("Starting position", 0),
     endPosition = op.inFloat("Ending position", 5),
-    inText = op.inString("Text", "Pop-up"),
-    inId = op.inString("Id", "popup"),
-    inClass = op.inString("Class"),
-    inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
-    inVisible = op.inValueBool("Visible", true),
-    inBreaks = op.inValueBool("Convert Line Breaks", false),
     outElement = op.outObject("DOM Element");
 
 op.setPortGroup("Animation", [animDuration]);
-op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
 op.setPortGroup("HTML CSS", [inText, inId, inClass, inStyle, inVisible, inBreaks]);
+op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
 
 // inStyle.setUiAttribs({editorSyntax:'css'});
 const listenerElement = null;
@@ -57,10 +57,9 @@ function setCSSVisible(visible)
     }
     else
     {
-        // prevDisplay=div.style.display||'block';
         if (prevDisplay == "none") prevDisplay = "block";
         div.style.visibility = "visible";
-        div.style.display = prevDisplay;
+        div.style.display = "none";
     }
 }
 
@@ -138,6 +137,10 @@ function popUpAnim()
     const end = endPosition.get() + mode;
 
     if (!inId.get()) return;
+    if (!inVisible.get()) return;
+    const targetDiv = document.getElementById(inId.get());
+    div.style.display = "block";
+
     if (divSide.get() == "bottom")
     {
         document.getElementById(inId.get()).animate(
@@ -145,9 +148,12 @@ function popUpAnim()
                 "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.0, 0.0, 0.2, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "bottom": [start, end, end, start],
-                "offset": [0, 0.25, 0.5, 0.55]
+                "offset": [0, 0.25, 0.9, 0.975]
             },
-            animDuration.get() * 1000);
+            animDuration.get() * 1000).onfinish = function ()
+        {
+            div.style.display = "none";
+        };
     }
     else
     {
@@ -156,8 +162,11 @@ function popUpAnim()
                 "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.42, 0.0, 0.58, 1.0)"],
                 "opacity": [0, 1, 1, 0],
                 "top": [start, end, end, start],
-                "offset": [0, 0.25, 0.5, 0.55]
+                "offset": [0, 0.25, 0.9, 0.975]
             },
-            animDuration.get() * 1000);
+            animDuration.get() * 1000).onfinish = function ()
+        {
+            div.style.display = "none";
+        };
     }
 }

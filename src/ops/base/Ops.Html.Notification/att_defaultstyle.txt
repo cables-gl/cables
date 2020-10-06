@@ -1,13 +1,13 @@
 visibility: hidden;
-min-width: 250px;
-margin-left: -125px;
-left: 50%;
 background-color: #282828;
 color: #fff;
-text-align: center;
+
 padding: 16px;
 position: absolute;
 z-index: 9999;
 font-size: 17px;
 opacity:0;
 border-radius:10px;
+text-align:center;
+left: 50%;
+transform: translate(-50%, 0);
