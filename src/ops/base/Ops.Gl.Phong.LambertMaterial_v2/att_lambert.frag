@@ -39,6 +39,9 @@ struct Light {
 
     int type;
     int castLight;
+    #define CASTLIGHT x
+    #define TYPE y
+    ivec2 castLightType;
 };
 #ifdef HAS_TEXTURES
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -117,22 +120,22 @@ void main()
     #endif
 
     for(int l=0;l<NUM_LIGHTS;l++) {
-        if (lights[l].type == AMBIENT) {
+        if (lights[l].castLightType.TYPE == AMBIENT) {
             col.rgb += lights[l].lightProperties.INTENSITY * lights[l].color;
         } else {
-            if (lights[l].castLight == 0) continue;
+            if (lights[l].castLightType.CASTLIGHT == 0) continue;
             vec3 lightModelDiff= lights[l].position - modelPos.xyz;
             vec3 lightDirection = normalize(lightModelDiff);
 
-            if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
+            if (lights[l].castLightType.TYPE == DIRECTIONAL) lightDirection = lights[l].position;
 
             float lambert = 1.; // inout variable
             vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, matColor, lambert);
 
-            if (lights[l].type != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
+            if (lights[l].castLightType.TYPE != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
 
             #ifdef HAS_SPOT
-                if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
+                if (lights[l].castLightType.TYPE == SPOT) diffuseColor *= CalculateSpotLightEffect(
                     lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
                     lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
                     lightDirection
