@@ -13,11 +13,9 @@ vec4 MOD_scaler(vec4 pos,vec4 worldPos,vec3 normal,mat4 mMatrix)
     #endif
 
     vec3 vecToOrigin = worldPos.xyz-forcePos;
-    float dist = 0.;
 
-    #ifdef MOD_DISTANCE
-        dist = abs(length(vecToOrigin));
-    #endif
+    float dist = abs(length(vecToOrigin)) ;
+
 
     float distAlpha = (MOD_size - dist) ;
 

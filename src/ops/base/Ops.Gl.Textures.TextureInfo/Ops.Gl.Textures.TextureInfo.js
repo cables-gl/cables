@@ -24,7 +24,16 @@ inTex.onChange = function ()
         else if (inTex.get().filter == CGL.Texture.FILTER_MIPMAP)strFilter = "mipmap";
 
         outFilter.set(inTex.get().filter + " " + strFilter);
-        outWrap.set(inTex.get().wrap);
+
+        let strWrap = "unknown";
+
+        if (inTex.get().wrap == CGL.Texture.WRAP_CLAMP_TO_EDGE) strWrap = "clamp to edge";
+        else if (inTex.get().wrap == CGL.Texture.WRAP_REPEAT) strWrap = "repeat";
+        else if (inTex.get().wrap == CGL.Texture.WRAP_MIRRORED_REPEAT) strWrap = "mirrored repeat";
+
+        outWrap.set(inTex.get().wrap + " " + strWrap);
+
+
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
     }
