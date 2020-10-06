@@ -78,17 +78,18 @@ float Falloff2(vec3 lightDirection, float falloff) {
     return attenuation * 1. / max(distanceSquared, 0.00001);
 }
 
-float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
-    vec3 spotLightDirection = normalize(lightPosition-conePointAt);
-    float spotAngle = dot(-lightDirection, spotLightDirection);
-    float epsilon = cosConeAngle - cosConeAngleInner;
+#ifdef HAS_SPOT
+    float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
+        vec3 spotLightDirection = normalize(lightPosition-conePointAt);
+        float spotAngle = dot(-lightDirection, spotLightDirection);
+        float epsilon = cosConeAngle - cosConeAngleInner;
 
-    float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
-    spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
+        float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
+        spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
 
-    return max(0., spotIntensity);
-}
-
+        return max(0., spotIntensity);
+    }
+#endif
 vec3 CalculateDiffuseColor(vec3 lightDirection, vec3 normal, vec3 lightColor, vec3 materialColor, inout float lambert) {
     lambert = clamp(dot(lightDirection, normal), 0., 1.);
     vec3 diffuseColor = lambert * lightColor * materialColor;
@@ -124,6 +125,7 @@ void main()
             col.rgb += lights[l].lightProperties.INTENSITY * lights[l].color;
         } else {
             if (lights[l].castLightType.CASTLIGHT == 0) continue;
+
             vec3 lightModelDiff= lights[l].position - modelPos.xyz;
             vec3 lightDirection = normalize(lightModelDiff);
 
@@ -148,9 +150,9 @@ void main()
     }
 
 
-    col.a=materialColor.a;
+    col.a = materialColor.a;
 
     {{MODULE_COLOR}}
 
-    outColor=col;
+    outColor = col;
 }
