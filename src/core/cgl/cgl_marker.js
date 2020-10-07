@@ -5,10 +5,7 @@ import { Shader } from "./cgl_shader";
 import { DEG2RAD } from "./cgl_utils";
 
 
-// TODO CAN THIS BE REMOVED ?
-
-
-export const Marker = function (cgl)
+export const Marker = function (_cgl)
 {
     const geom = new Geometry("marker");
     geom.setPointVertices(
@@ -18,10 +15,10 @@ export const Marker = function (cgl)
             0, 0, 0.00001, 0, 0, 1,
         ]
     );
-    const mesh = new Mesh(cgl, geom, cgl.gl.LINES);
+    const mesh = new Mesh(_cgl, geom, _cgl.gl.LINES);
     mesh.setGeom(geom);
 
-    const shader = new Shader(cgl, "markermaterial");
+    const shader = new Shader(_cgl, "markermaterial");
 
     const frag = ""
         .endl() + "precision highp float;"
@@ -53,20 +50,18 @@ export const Marker = function (cgl)
 
     this._vScale = vec3.create();
 
-    this.draw = function (cgl, _size)
+    this.draw = function (cgl, _size, depthTest)
     {
         const size = _size || 2;
         cgl.pushModelMatrix();
 
-
         cgl.pushShader(shader);
-
 
         vec3.set(this._vScale, size, size, size);
         mat4.scale(cgl.mvMatrix, cgl.mvMatrix, this._vScale);
 
         // cgl.gl.disable(cgl.gl.DEPTH_TEST);
-        cgl.pushDepthTest(false);
+        cgl.pushDepthTest(depthTest == true);
 
         mesh.render(cgl.getShader());
 
@@ -81,7 +76,7 @@ export const Marker = function (cgl)
 };
 
 
-export const WirePoint = function (cgl, size)
+export const WirePoint = function (cgl)
 {
     const buffer = cgl.gl.createBuffer();
     const vScale = vec3.create();
@@ -124,26 +119,26 @@ export const WirePoint = function (cgl, size)
     }
 
 
-    this.render = function (cgl, size)
+    this.render = function (_cgl, _size)
     {
-        cgl.pushModelMatrix();
+        _cgl.pushModelMatrix();
 
-        vec3.set(vScale, size, size, size);
-        mat4.scale(cgl.mvMatrix, cgl.mvMatrix, vScale);
+        vec3.set(vScale, _size, _size, _size);
+        mat4.scale(_cgl.mvMatrix, _cgl.mvMatrix, vScale);
 
         // var shader=cgl.getDefaultShader();
-        const shader = cgl.getShader();
+        const shader = _cgl.getShader();
 
         shader.bind();
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
 
-        cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
-        cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+        _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
+        _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
 
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-        cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
+        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+        _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
-        cgl.popModelMatrix();
+        _cgl.popModelMatrix();
     };
 
     bufferData();
@@ -161,7 +156,6 @@ export const WireCube = function (cgl)
         const tc = [];
         const norms = [];
         const segments = 24;
-        let i = 0, degInRad = 0;
         const radius = 0.5;
 
         points.push(-1, -1, 1);
@@ -194,24 +188,24 @@ export const WireCube = function (cgl)
         buffer.numItems = points.length / buffer.itemSize;
     }
 
-    this.render = function (cgl, sizeX, sizeY, sizeZ)
+    this.render = function (_cgl, sizeX, sizeY, sizeZ)
     {
-        cgl.pushModelMatrix();
+        _cgl.pushModelMatrix();
 
         vec3.set(vScale, sizeX || 1, sizeY || 1, sizeZ || 1);
-        mat4.scale(cgl.mvMatrix, cgl.mvMatrix, vScale);
+        mat4.scale(_cgl.mvMatrix, _cgl.mvMatrix, vScale);
 
-        const shader = cgl.getShader();
+        const shader = _cgl.getShader();
         shader.bind();
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
+        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
 
-        cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, cgl.gl.FLOAT, false, 0, 0);
-        cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+        _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
+        _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
 
-        cgl.gl.bindBuffer(cgl.gl.ARRAY_BUFFER, buffer);
-        cgl.gl.drawArrays(cgl.gl.LINE_STRIP, 0, buffer.numItems);
+        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+        _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
 
-        cgl.popModelMatrix();
+        _cgl.popModelMatrix();
     };
 
     bufferData();
