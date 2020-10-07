@@ -112,6 +112,8 @@ function setDefaultUniform(light)
         shader.removeDefine("HAS_AMBIENT");
     }
 
+    if (!shader.hasDefine("HAS_POINT")) shader.define("HAS_POINT");
+
     defaultUniform.position.setValue(light.position);
     defaultUniform.color.setValue(light.color);
 
@@ -184,7 +186,8 @@ function createUniforms(lightStack)
     {
         const key = keys[i];
 
-        if (hasLight[key])
+        shader.toggleDefine("HAS_" + key.toUpperCase(), hasLight[key]);
+        /* if (hasLight[key])
         {
             if (!shader.hasDefine("HAS_" + key.toUpperCase()))
             {
@@ -197,7 +200,7 @@ function createUniforms(lightStack)
             {
                 shader.removeDefine("HAS_" + key.toUpperCase());
             }
-        }
+        } */
     }
 }
 

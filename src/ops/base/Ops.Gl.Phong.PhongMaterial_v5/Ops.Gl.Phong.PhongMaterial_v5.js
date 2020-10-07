@@ -247,7 +247,7 @@ function createShader(lightStack)
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(attachments.phong_vert, fragmentShader);
-    op.log("light types", hasLight);
+
     for (let i = 0, keys = Object.keys(hasLight); i < keys.length; i += 1)
     {
         const key = keys[i];
