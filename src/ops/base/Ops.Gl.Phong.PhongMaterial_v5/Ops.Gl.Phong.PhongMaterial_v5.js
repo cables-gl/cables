@@ -29,6 +29,10 @@ function createDefaultShader()
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(vertexShader, fragmentShader);
+    shader.define("HAS_POINT");
+    shader.removeDefine("HAS_SPOT");
+    shader.removeDefine("HAS_DIRECTIONAL");
+    shader.removeDefine("HAS_AMBIENT");
 }
 
 
@@ -76,9 +80,31 @@ const fresnelArr = [inFresnel, inFresnelWidth, inFresnelExponent, inFresnelR, in
 fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": true }); });
 op.setPortGroup("Fresnel", fresnelArr.concat([inToggleFresnel]));
 
+let uniFresnel = null;
+let uniFresnelWidthExponent = null;
 inToggleFresnel.onChange = function ()
 {
     shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel);
+    if (inToggleFresnel.get())
+    {
+        if (!uniFresnel) uniFresnel = new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel);
+        if (!uniFresnelWidthExponent) uniFresnelWidthExponent = new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent);
+    }
+    else
+    {
+        if (uniFresnel)
+        {
+            shader.removeUniform("inFresnel");
+            uniFresnel = null;
+        }
+
+        if (uniFresnelWidthExponent)
+        {
+            shader.removeUniform("inFresnelWidthExponent");
+            uniFresnelWidthExponent = null;
+        }
+    }
+
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
 };
 // * EMISSIVE *
@@ -183,6 +209,13 @@ shader.define("FALLOFF_MODE_A");
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");
 const FRAGMENT_BODY_REGEX = new RegExp("{{PHONG_FRAGMENT_BODY}}", "g");
 
+const hasLight = {
+    "directional": false,
+    "spot": false,
+    "ambient": false,
+    "point": false,
+};
+
 function createShader(lightStack)
 {
     let fragmentShader = attachments.phong_frag;
@@ -190,9 +223,21 @@ function createShader(lightStack)
     let fragmentHead = "";
     let fragmentBody = "";
 
+    hasLight.directional = false;
+    hasLight.spot = false;
+    hasLight.ambient = false;
+    hasLight.point = false;
+
     for (let i = 0; i < lightStack.length; i += 1)
     {
         const light = lightStack[i];
+
+        const type = light.type;
+
+        if (!hasLight[type])
+        {
+            hasLight[type] = true;
+        }
 
         fragmentHead = fragmentHead.concat(createFragmentHead(i));
         fragmentBody = fragmentBody.concat(createFragmentBody(i, light.type));
@@ -202,6 +247,26 @@ function createShader(lightStack)
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
 
     shader.setSource(attachments.phong_vert, fragmentShader);
+
+    for (let i = 0, keys = Object.keys(hasLight); i < keys.length; i += 1)
+    {
+        const key = keys[i];
+
+        if (hasLight[key])
+        {
+            if (!shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.define("HAS_" + key.toUpperCase());
+            }
+        }
+        else
+        {
+            if (shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.removeDefine("HAS_" + key.toUpperCase());
+            }
+        }
+    }
 }
 
 
@@ -447,7 +512,7 @@ inAlphaTexture.onChange = updateAlphaTexture;
 inEnvTexture.onChange = updateEnvTexture;
 inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
 
-const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());
@@ -496,18 +561,13 @@ inToggleDoubleSided.onChange = function ()
 };
 
 // * INIT UNIFORMS *
-const initialUniforms = [
-    new CGL.Uniform(shader, "4f", "inMaterialProperties", inAlbedo, inRoughness, inShininess, inSpecularCoefficient),
-    new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA),
-    new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity),
-    new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY),
-    new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel),
-    // new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
-    new CGL.Uniform(shader, "2f", "inFresnelWidthExponent", inFresnelWidth, inFresnelExponent),
 
-];
-
-shader.addUniformFrag("4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
+const uniMaterialProps = new CGL.Uniform(shader, "4f", "inMaterialProperties", inAlbedo, inRoughness, inShininess, inSpecularCoefficient);
+const uniDiffuseColor = new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
+const uniTextureIntensities = new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity);
+const uniTextureRepeatOffset = new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY);
+// new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
+const uniEmissiveColor = new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
 
 const lightUniforms = [];
 let oldCount = 0;
