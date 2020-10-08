@@ -447,7 +447,7 @@ Shader.prototype.compile = function ()
             if (nextIndex > -1) indicesToRemove.push(i);
         }
 
-        // * after that, we go through the uniforms backwards and remove the indices
+        // * after that, we go through the uniforms backwards (so we keep the order) and remove the indices
         for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
         {
             if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
