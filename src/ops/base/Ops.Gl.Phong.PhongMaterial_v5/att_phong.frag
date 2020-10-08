@@ -15,32 +15,34 @@ IN vec2 texCoord;
 IN vec3 fragPos;
 IN vec3 v_viewDirection;
 
-// IN mat4 mvMatrix;
-
 UNI vec4 inDiffuseColor;
 UNI vec4 inMaterialProperties;
-UNI mat4 viewMatrix;
 
 #ifdef ADD_EMISSIVE_COLOR
     UNI vec4 inEmissiveColor; // .w = intensity
 #endif
 
 #ifdef ENABLE_FRESNEL
+    UNI mat4 viewMatrix;
     UNI vec4 inFresnel;
     UNI vec2 inFresnelWidthExponent;
 #endif
 
 
 struct Light {
-    vec3 position;
     vec3 color;
+    vec3 position;
     vec3 specular;
+
+
     // * SPOT LIGHT * //
-    vec3 conePointAt;
-    #define COSCONEANGLE x
-    #define COSCONEANGLEINNER y
-    #define SPOTEXPONENT z
-    vec3 spotProperties;
+    #ifdef HAS_SPOT
+        vec3 conePointAt;
+        #define COSCONEANGLE x
+        #define COSCONEANGLEINNER y
+        #define SPOTEXPONENT z
+        vec3 spotProperties;
+    #endif
 
     #define INTENSITY x
     #define ATTENUATION y
@@ -349,16 +351,18 @@ vec3 CalculateSpecularColor(
     return resultColor;
 }
 
-float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
-    vec3 spotLightDirection = normalize(lightPosition-conePointAt);
-    float spotAngle = dot(-lightDirection, spotLightDirection);
-    float epsilon = cosConeAngle - cosConeAngleInner;
+#ifdef HAS_SPOT
+    float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
+        vec3 spotLightDirection = normalize(lightPosition-conePointAt);
+        float spotAngle = dot(-lightDirection, spotLightDirection);
+        float epsilon = cosConeAngle - cosConeAngleInner;
 
-    float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
-    spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
+        float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
+        spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
 
-    return max(0., spotIntensity);
-}
+        return max(0., spotIntensity);
+    }
+#endif
 
 
 
