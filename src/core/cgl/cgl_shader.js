@@ -433,8 +433,32 @@ Shader.prototype.compile = function ()
     const structStrings = this.createStructUniforms();
 
     if (this._uniforms)
+    {
+        // * we create an array of the uniform names to check our indices & an array to save them
+        const uniNames = this._uniforms.map(uni => uni._name);
+        const indicesToRemove = [];
+
+        // * we go through our uniforms and check if the same name is contained somewhere further in the array
+        // * if so, we add the current index to be removed later
         for (let i = 0; i < this._uniforms.length; i++)
-            this._uniforms[i].resetLoc();
+        {
+            const uni = this._uniforms[i];
+            const nextIndex = uniNames.indexOf(uni._name, i + 1);
+            if (nextIndex > -1) indicesToRemove.push(i);
+        }
+
+        // * after that, we go through the uniforms backwards and remove the indices
+        for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
+        {
+            if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
+        }
+
+        // * in the end, we reset the locations of all the valid uniforms
+        for (let k = 0; k < this._uniforms.length; k += 1)
+        {
+            this._uniforms[k].resetLoc();
+        }
+    }
 
     if (this.hasTextureUniforms()) definesStr += "#define HAS_TEXTURES".endl();
 
