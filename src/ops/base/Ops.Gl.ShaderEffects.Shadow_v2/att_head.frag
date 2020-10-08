@@ -1,4 +1,3 @@
-#define TYPE x
 #define CAST_SHADOW y
 
 #define NEAR x

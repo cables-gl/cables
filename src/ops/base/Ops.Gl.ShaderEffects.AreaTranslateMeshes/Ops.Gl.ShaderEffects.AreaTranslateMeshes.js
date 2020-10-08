@@ -12,12 +12,12 @@ const cgl = op.patch.cgl;
 
 op.setPortGroup("Area Position", [x, y, z]);
 
-let needsUpdateToZero = true;
-let mscaleUni = null;
+const needsUpdateToZero = true;
+const mscaleUni = null;
 let shader = null;
-let srcHeadVert = attachments.areascale_vert;
-let uniforms = {};
-let srcBodyVert = ""
+const srcHeadVert = attachments.areascale_vert;
+const uniforms = {};
+const srcBodyVert = ""
     .endl() + "mMatrix=MOD_translate(mMatrix);" // modelMatrix*
     .endl();
 

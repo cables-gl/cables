@@ -11,6 +11,15 @@
             {
                 "type": "2",
                 "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Normalize index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Normalize"
             }
         ],
         "portsOut": [

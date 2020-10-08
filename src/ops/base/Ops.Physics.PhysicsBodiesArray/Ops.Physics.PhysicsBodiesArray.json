@@ -54,11 +54,6 @@
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Render",
-                "subType": "boolean"
-            },
-            {
                 "type": "1",
                 "name": "Reset"
             }

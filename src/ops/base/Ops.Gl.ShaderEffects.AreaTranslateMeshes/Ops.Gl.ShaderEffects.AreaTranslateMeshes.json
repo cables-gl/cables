@@ -40,6 +40,21 @@
                 "name": "z",
                 "group": "Area Position",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiply x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiply y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Multiply z",
+                "subType": "number"
             }
         ],
         "portsOut": [

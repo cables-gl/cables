@@ -27,8 +27,8 @@ void main()
     float c=0.0;
     if(n+s+e+w/4.0>((1.0-strength)*0.4)) c=1.0;
 
-    vec4 col=vec4(r*c,g*c,b*c,1.0);
     vec4 base=texture(tex,texCoord);
+    vec4 col=vec4(r*c,g*c,b*c,1.0);
 
     outColor=cgl_blend(base,col,amount);
 }

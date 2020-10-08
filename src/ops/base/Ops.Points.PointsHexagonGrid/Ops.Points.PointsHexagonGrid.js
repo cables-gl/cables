@@ -15,7 +15,8 @@ op.setPortGroup("Spacing", [tileXOffsetIn, tileYOffsetIn, multiplierIn]);
 
 update();
 
-function update() {
+function update()
+{
     const arr = [];
 
     let offsetX = 0;
@@ -26,23 +27,29 @@ function update() {
 
     const multiplier = multiplierIn.get();
 
-    if (pointyOrTopped.get() === "Pointy") {
+    if (pointyOrTopped.get() === "Pointy")
+    {
         w = numyIn.get();
         h = numxIn.get();
 
         offsetX = tileXOffsetIn.get() * 1.7;
         offsetY = tileYOffsetIn.get() * 1.432;
 
-        for (let x = 0; x < w; x++) {
-            for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++)
+        {
+            for (let y = 0; y < h; y++)
+            {
                 let yFlipped = y;
                 if (flipCorners.get()) yFlipped = y + 1;
 
-                if (yFlipped % 2 == 0) {
+                if (yFlipped % 2 == 0)
+                {
                     arr.push((x - w / 2) * offsetX * multiplier);
                     arr.push((y - h / 2) * offsetY * multiplier);
                     arr.push(0);
-                } else {
+                }
+                else
+                {
                     arr.push(
                         ((x - w / 2) * offsetX + offsetX / 2) * multiplier
                     );
@@ -51,23 +58,30 @@ function update() {
                 }
             }
         }
-    } else {
+    }
+    else
+    {
         w = numxIn.get();
         h = numyIn.get();
 
         offsetX = tileYOffsetIn.get() * 1.7;
         offsetY = tileXOffsetIn.get() * 1.432;
 
-        for (let x = 0; x < w; x++) {
-            for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w; x++)
+        {
+            for (let y = 0; y < h; y++)
+            {
                 let yFlipped = y;
                 if (flipCorners.get()) yFlipped = y + 1;
 
-                if (yFlipped % 2 == 0) {
+                if (yFlipped % 2 == 0)
+                {
                     arr.push((y - h / 2) * offsetY * multiplier);
                     arr.push((x - w / 2) * offsetX * multiplier);
                     arr.push(0);
-                } else {
+                }
+                else
+                {
                     arr.push((y - h / 2) * offsetY * multiplier);
                     arr.push(
                         ((x - w / 2) * offsetX + offsetX / 2) * multiplier
