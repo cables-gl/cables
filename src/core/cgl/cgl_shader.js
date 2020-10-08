@@ -448,15 +448,11 @@ Shader.prototype.compile = function ()
         }
 
         // * after that, we go through the uniforms backwards (so we keep the order) and remove the indices
+        // * also, we reset the locations of all the other valid uniforms
         for (let j = this._uniforms.length - 1; j >= 0; j -= 1)
         {
             if (indicesToRemove.indexOf(j) > -1) this._uniforms.splice(j, 1);
-        }
-
-        // * in the end, we reset the locations of all the valid uniforms
-        for (let k = 0; k < this._uniforms.length; k += 1)
-        {
-            this._uniforms[k].resetLoc();
+            else this._uniforms[j].resetLoc();
         }
     }
 
