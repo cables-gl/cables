@@ -50,7 +50,19 @@
             },
             {
                 "type": "0",
-                "name": "Duration",
+                "name": "Fade in",
+                "group": "Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Hold ",
+                "group": "Animation",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fade out",
                 "group": "Animation",
                 "subType": "number"
             },
@@ -88,6 +100,15 @@
             }
         ],
         "portsOut": [
+            {
+                "type": "1",
+                "name": "Finished trigger"
+            },
+            {
+                "type": "0",
+                "name": "Finished",
+                "subType": "boolean"
+            },
             {
                 "type": "2",
                 "name": "DOM Element"
