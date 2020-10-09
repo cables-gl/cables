@@ -177,7 +177,8 @@ const Context = function (_patch)
         this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
         this.maxUniformsFrag = this.gl.getParameter(this.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
         this.maxUniformsVert = this.gl.getParameter(this.gl.MAX_VERTEX_UNIFORM_VECTORS);
-        this.maxSamples = this.gl.getParameter(this.gl.MAX_SAMPLES);
+        this.maxSamples = 0;
+        if (this.gl.MAX_SAMPLES) this.maxSamples = this.gl.getParameter(this.gl.MAX_SAMPLES);
 
         if (instancingExt.vertexAttribDivisorANGLE)
         {
