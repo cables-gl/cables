@@ -1,19 +1,23 @@
 const
     triggerAnim = op.inTriggerButton("Trigger animation"),
-    inText = op.inString("Text", "Pop-up"),
+    inText = op.inString("Text", "Pop-up <br> line 2"),
     inId = op.inString("Id", "popup"),
     inClass = op.inString("Class"),
     inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
     inVisible = op.inValueBool("Active", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
-    animDuration = op.inFloat("Duration", 1.5),
+    fadeInDuration = op.inFloat("Fade in", 0.5),
+    holdDuration = op.inFloat("Hold ", 2.0),
+    fadeOutDuration = op.inFloat("Fade out", 0.8),
     percentOrPixel = op.inSwitch("mode", ["%", "px"], "%"),
     divSide = op.inSwitch("Side", ["bottom", "top"], "bottom"),
     startPosition = op.inFloat("Starting position", 0),
     endPosition = op.inFloat("Ending position", 5),
+    finishedTrigger = op.outTrigger("Finished trigger"),
+    finished = op.outBool("Finished", false),
     outElement = op.outObject("DOM Element");
 
-op.setPortGroup("Animation", [animDuration]);
+op.setPortGroup("Animation", [fadeInDuration, holdDuration, fadeOutDuration]);
 op.setPortGroup("HTML CSS", [inText, inId, inClass, inStyle, inVisible, inBreaks]);
 op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
 
@@ -46,6 +50,8 @@ warning();
 op.onDelete = removeElement;
 
 outElement.onLinkChanged = updateStyle;
+
+let animInProgress = false;
 
 function setCSSVisible(visible)
 {
@@ -120,53 +126,78 @@ op.addEventListener("onEnabledChange", function (enabled)
 
 function warning()
 {
-    if (inClass.get() && inStyle.get())
-    {
-        op.setUiError("error", "DIV uses external and inline CSS", 1);
-    }
-    else
-    {
-        op.setUiError("error", null);
-    }
+    if (inClass.get() && inStyle.get()) op.setUiError("error", "DIV uses external and inline CSS", 1);
+    else op.setUiError("error", null);
 }
 
 function popUpAnim()
 {
+    if (!inId.get() || !inVisible.get()) return;
+
     const mode = percentOrPixel.get();
     const start = startPosition.get() + mode;
     const end = endPosition.get() + mode;
 
-    if (!inId.get()) return;
-    if (!inVisible.get()) return;
+
     const targetDiv = document.getElementById(inId.get());
     div.style.display = "block";
 
-    if (divSide.get() == "bottom")
+    const animData = {};
+    // this function cascades into each stage when started
+    startAnim(mode, start, end, animData);
+}
+
+function startAnim(mode, start, end, animData)
+{
+    // stop the glitches from it being triggered multiple times
+    if (animInProgress) return;
+
+    finished.set(false);
+    animInProgress = true;
+
+    animData.easing = ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear"];
+    animData.opacity = [0, 1];
+
+    if (divSide.get() == "bottom") animData.bottom = [start, end];
+    else animData.top = [start, end];
+
+    document.getElementById(inId.get()).animate(
+        animData, fadeInDuration.get() * 1000).onfinish = function ()
     {
-        document.getElementById(inId.get()).animate(
-            {
-                "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.0, 0.0, 0.2, 1.0)"],
-                "opacity": [0, 1, 1, 0],
-                "bottom": [start, end, end, start],
-                "offset": [0, 0.25, 0.9, 0.975]
-            },
-            animDuration.get() * 1000).onfinish = function ()
-        {
-            div.style.display = "none";
-        };
-    }
-    else
+        holdAnim(mode, start, end, animData);
+    };
+}
+
+function holdAnim(mode, start, end, animData)
+{
+    animData.easing = ["linear", "linear"];
+    animData.opacity = [1, 1];
+
+    if (divSide.get() == "bottom") animData.bottom = [end, end];
+    else animData.top = [end, end];
+
+    document.getElementById(inId.get()).animate(
+        animData, holdDuration.get() * 1000).onfinish =
+    function ()
     {
-        document.getElementById(inId.get()).animate(
-            {
-                "easing": ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear", "linear", "cubic-bezier(0.42, 0.0, 0.58, 1.0)"],
-                "opacity": [0, 1, 1, 0],
-                "top": [start, end, end, start],
-                "offset": [0, 0.25, 0.9, 0.975]
-            },
-            animDuration.get() * 1000).onfinish = function ()
-        {
-            div.style.display = "none";
-        };
-    }
+        endAnim(mode, start, end, animData);
+    };
+}
+
+function endAnim(mode, start, end, animData)
+{
+    animData.easing = ["cubic-bezier(0.0, 0.0, 0.2, 1.0)", "linear"];
+    animData.opacity = [1, 0];
+
+    if (divSide.get() == "bottom") animData.bottom = [end, start];
+    else animData.top = [end, start];
+
+    document.getElementById(inId.get()).animate(
+        animData, fadeOutDuration.get() * 1000).onfinish = function ()
+    {
+        div.style.display = "none";
+        animInProgress = false;
+        finishedTrigger.trigger();
+        finished.set(true);
+    };
 }

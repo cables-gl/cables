@@ -19,7 +19,7 @@ const
 const cgl = op.patch.cgl;
 
 const posArr = [];
-let shader = null;
+const shader = null;
 
 inAxis.onChange =
 inMeth.onChange =
@@ -38,15 +38,12 @@ const srcHeadVert = ""
     .endl() + "#ifdef MOD_COLORIZE"
     .endl() + "   OUT vec4 MOD_color;"
     .endl() + "#endif"
-    .endl() + "UNI sampler2D MOD_tex;"
-    .endl() + "UNI float MOD_strength;"
 
     .endl();
 
 
 const srcHeadFrag = ""
     .endl() + "#ifdef MOD_COLORIZE"
-    .endl() + "   UNI float MOD_colorMul;"
     .endl() + "   IN vec4 MOD_color;"
     .endl() + "#endif"
     .endl();
@@ -57,53 +54,61 @@ const srcBodyFrag = ""
     .endl() + "#endif"
     .endl();
 
-let moduleVert = null;
-let moduleFrag = null;
-function removeModule()
-{
-    if (shader && moduleVert) shader.removeModule(moduleVert);
-    if (shader && moduleFrag) shader.removeModule(moduleFrag);
-    shader = null;
-}
+const moduleVert = null;
+const moduleFrag = null;
 
-op.onDelete = removeModule;
-render.onLinkChanged = removeModule;
 inTex.onChange = updateLookupTexture;
+
+
+const mod = new CGL.ShaderModifier(cgl, op.name);
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_VERTEX_POSITION",
+    "srcHeadVert": srcHeadVert,
+    "srcBodyVert": attachments.transformByTex_vert
+});
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_COLOR",
+    srcHeadFrag,
+    srcBodyFrag
+});
+mod.addUniform("f", "MOD_strength", inStrength);
+mod.addUniform("t", "MOD_tex", 0);
+mod.addUniform("f", "MOD_colorMul", inColorMul);
 
 
 function updateDefines()
 {
-    if (!shader) return;
-    shader.toggleDefine(moduleVert.prefix + "AXIS_X", inAxis.get() == "X");
-    shader.toggleDefine(moduleVert.prefix + "AXIS_Y", inAxis.get() == "Y");
-    shader.toggleDefine(moduleVert.prefix + "AXIS_Z", inAxis.get() == "Z");
-    shader.toggleDefine(moduleVert.prefix + "AXIS_ALL", inAxis.get() == "All");
+    mod.toggleDefine("MOD_AXIS_X", inAxis.get() == "X");
+    mod.toggleDefine("MOD_AXIS_Y", inAxis.get() == "Y");
+    mod.toggleDefine("MOD_AXIS_Z", inAxis.get() == "Z");
+    mod.toggleDefine("MOD_AXIS_ALL", inAxis.get() == "All");
 
-    shader.toggleDefine(moduleVert.prefix + "INPUT_R", inInput.get() == "R");
-    shader.toggleDefine(moduleVert.prefix + "INPUT_G", inInput.get() == "G");
-    shader.toggleDefine(moduleVert.prefix + "INPUT_B", inInput.get() == "B");
+    mod.toggleDefine("MOD_INPUT_R", inInput.get() == "R");
+    mod.toggleDefine("MOD_INPUT_G", inInput.get() == "G");
+    mod.toggleDefine("MOD_INPUT_B", inInput.get() == "B");
 
-    shader.toggleDefine(moduleVert.prefix + "MATH_ADD", inMeth.get() == "+");
-    shader.toggleDefine(moduleVert.prefix + "MATH_SUB", inMeth.get() == "-");
-    shader.toggleDefine(moduleVert.prefix + "MATH_MUL", inMeth.get() == "*");
-    shader.toggleDefine(moduleVert.prefix + "MATH_DIV", inMeth.get() == "/");
+    mod.toggleDefine("MOD_MATH_ADD", inMeth.get() == "+");
+    mod.toggleDefine("MOD_MATH_SUB", inMeth.get() == "-");
+    mod.toggleDefine("MOD_MATH_MUL", inMeth.get() == "*");
+    mod.toggleDefine("MOD_MATH_DIV", inMeth.get() == "/");
 
-    shader.toggleDefine(moduleVert.prefix + "NORMALIZE", inNormalize.get());
-    shader.toggleDefine(moduleVert.prefix + "COLORIZE", inColorize.get());
-    shader.toggleDefine(moduleVert.prefix + "SMOOTHSTEP", inSmoothstep.get());
+    mod.toggleDefine("MOD_NORMALIZE", inNormalize.get());
+    mod.toggleDefine("MOD_COLORIZE", inColorize.get());
+    mod.toggleDefine("MOD_SMOOTHSTEP", inSmoothstep.get());
 }
 
 
 function updateLookupTexture()
 {
-    if (!inTex.get()) return;
-    if (!shader) return;
+    const tex = inTex.get() || CGL.Texture.getEmptyTexture(cgl);
+    // if (!inTex.get()) return;
+    // if (!shader) return;
 
 
-    const tex = inTex.get();
-
-    shader.define(moduleVert.prefix + "TEX_WIDTH", tex.width + ".0");
-    shader.define(moduleVert.prefix + "TEX_HEIGHT", tex.height + ".0");
+    mod.define("MOD_TEX_WIDTH", tex.width + ".0");
+    mod.define("MOD_TEX_HEIGHT", tex.height + ".0");
 
     const wh = tex.width * tex.height;
     if (outArr.get() && outArr.get().length == wh * 3) return;
@@ -141,42 +146,47 @@ render.onTriggered = function ()
 
         if (cgl.getShader() != shader)
         {
-            if (shader) removeModule();
-            shader = cgl.getShader();
+            // if (shader) removeModule();
+            // shader = cgl.getShader();
 
-            moduleVert = shader.addModule(
-                {
-                    "title": op.objName,
-                    "name": "MODULE_VERTEX_POSITION",
-                    "srcHeadVert": srcHeadVert,
-                    "srcBodyVert": attachments.transformByTex_vert
-                });
-
-
-            moduleFrag = shader.addModule(
-                {
-                    "title": op.objName,
-                    "name": "MODULE_COLOR",
-                    "srcHeadFrag": srcHeadFrag,
-                    "srcBodyFrag": srcBodyFrag
-                }, moduleVert);
-
-            inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
-            inTex.uniform = new CGL.Uniform(shader, "t", moduleVert.prefix + "tex", 0);
-
-            inColorMul.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "colorMul", inColorMul);
+            // moduleVert = shader.addModule(
+            //     {
+            //         "title": op.objName,
+            //         "name": "MODULE_VERTEX_POSITION",
+            //         "srcHeadVert": srcHeadVert,
+            //         "srcBodyVert": attachments.transformByTex_vert
+            //     });
 
 
-            updateDefines();
-            updateLookupTexture();
+            // moduleFrag = shader.addModule(
+            //     {
+            //         "title": op.objName,
+            //         "name": "MODULE_COLOR",
+            //         "srcHeadFrag": srcHeadFrag,
+            //         "srcBodyFrag": srcBodyFrag
+            //     }, moduleVert);
+
+            // inStrength.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "strength", inStrength);
+            // inTex.uniform = new CGL.Uniform(shader, "t", moduleVert.prefix + "tex", 0);
+            // inColorMul.uniform = new CGL.Uniform(shader, "f", moduleVert.prefix + "colorMul", inColorMul);
+
+
+            // updateDefines();
+            // updateLookupTexture();
         }
 
 
-        shader.pushTexture(inTex.uniform, inTex.get().tex);
+        // shader.pushTexture(inTex.uniform, inTex.get().tex);
 
-        cgl.setTexture(7, inTex.get().tex);
+        if (inTex.get()) mod.pushTexture("MOD_tex", inTex.get().tex);
+        else mod.pushTexture("MOD_tex", CGL.Texture.getEmptyTexture(cgl).tex);
+
+        // cgl.setTexture(7, inTex.get().tex);
     }
 
+    mod.bind();
 
     next.trigger();
+
+    mod.unbind();
 };

@@ -63,6 +63,9 @@ function reload(addCachebuster)
             {
                 if (err)
                 {
+                    op.patch.loading.finished(loadingId);
+                    isLoading.set(false);
+
                     op.error(err);
                     return;
                 }

@@ -20,15 +20,15 @@ float adjustFrag( mat4 adjustments,float val, vec2 coord )
 
     vec4 col;
     if (xMod == 0) col = adjustments[0];
-        else if (xMod == 1) col = adjustments[1];
-        else if (xMod == 2) col = adjustments[2];
-        else if (xMod == 3) col = adjustments[3];
+    else if (xMod == 1) col = adjustments[1];
+    else if (xMod == 2) col = adjustments[2];
+    else if (xMod == 3) col = adjustments[3];
 
     float adjustment;
     if (yMod == 0) adjustment = col.x;
-        else if (yMod == 1) adjustment = col.y;
-        else if (yMod == 2) adjustment = col.z;
-        else if (yMod == 3) adjustment = col.w;
+    else if (yMod == 1) adjustment = col.y;
+    else if (yMod == 2) adjustment = col.z;
+    else if (yMod == 3) adjustment = col.w;
 
     return val + (val * adjustment);
 }
@@ -49,7 +49,7 @@ void main()
     lum = adjustFrag(adjustments,lum, texCoord.xy);
 
     if (lum > threshold) color = vec4(1, 1, 1, 1);
-        else color = vec4(0, 0, 0, 1);
+    else color = vec4(0, 0, 0, 1);
 
     outColor=cgl_blend(base,color,amount);
 }
