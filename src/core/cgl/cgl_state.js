@@ -175,6 +175,9 @@ const Context = function (_patch)
 
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
         this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
+        this.maxUniformsFrag = this.gl.getParameter(this.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+        this.maxUniformsVert = this.gl.getParameter(this.gl.MAX_VERTEX_UNIFORM_VECTORS);
+        this.maxSamples = this.gl.getParameter(this.gl.MAX_SAMPLES);
 
         if (instancingExt.vertexAttribDivisorANGLE)
         {
@@ -1103,6 +1106,7 @@ Context.prototype.shouldDrawHelpers = function (op)
 {
     if (this.frameStore.shadowPass) return false;
     if (!op.patch.isEditorMode()) return false;
+
     return CABLES.UI.renderHelper || (CABLES.UI.renderHelperCurrent && op.isCurrentUiOp());
 };
 

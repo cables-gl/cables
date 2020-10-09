@@ -141,11 +141,26 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Body x",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Body y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Body z",
+                "subType": "number"
+            },
+            {
                 "type": "5",
                 "name": "Name"
             }
         ],
-        "name": "Ops.Exp.Gl.Physics.CastRay"
+        "name": "Ops.Physics.CastRay"
     },
     "libs": [
         "cannon.js"

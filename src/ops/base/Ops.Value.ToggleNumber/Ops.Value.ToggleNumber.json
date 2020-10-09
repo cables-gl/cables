@@ -3,6 +3,11 @@
         "portsIn": [
             {
                 "type": "0",
+                "name": "Use Value 1",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Value 0",
                 "subType": "number"
             },
@@ -10,11 +15,6 @@
                 "type": "0",
                 "name": "Value 1",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Use Value 1",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -24,7 +24,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Value.ValueToggle"
+        "name": "Ops.Value.ToggleNumber"
     },
     "summary": "Switches two number values using a boolean",
     "docs": {

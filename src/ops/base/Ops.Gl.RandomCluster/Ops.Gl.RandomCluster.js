@@ -41,14 +41,14 @@ function doRender()
 
     if (scrollX.get() != 0)
     {
-        for (var i = 0; i < origRandoms.length; i++)
+        for (let i = 0; i < origRandoms.length; i++)
         {
             randoms[i][0] = origRandoms[i][0] + scrollX.get();
             randoms[i][0] = (randoms[i][0] % size.get()) - (size.get() / 2);
         }
     }
 
-    for (var i = 0; i < randoms.length; i++)
+    for (let i = 0; i < randoms.length; i++)
     {
         cgl.pushModelMatrix();
 

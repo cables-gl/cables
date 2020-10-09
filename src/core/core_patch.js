@@ -272,7 +272,7 @@ Patch.prototype.getAssetPath = function ()
  */
 Patch.prototype.getFilePath = function (filename)
 {
-    if (this._isLocal) alert("Browser security forbids loading files directly without a webserver. Upload files to a server to work.");
+    if (this._isLocal && !this.config.allowLocalFileAccess) alert("Browser security forbids loading files directly without a webserver. Upload files to a server to work.");
     if (!filename) return filename;
     filename = String(filename);
     if (filename.indexOf("https:") === 0 || filename.indexOf("http:") === 0) return filename;
@@ -1019,13 +1019,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
     for (const i in this.ops) this.ops[i].initVarPorts();
 
 
-    setTimeout(
-        () =>
-        {
-            this.loading.finished(loadingId);
-        }, 100
-    );
-    if (this.config.onPatchLoaded) this.config.onPatchLoaded();
+    setTimeout(() => { this.loading.finished(loadingId); }, 100);
+    if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
     if (this.onLoadEnd) this.onLoadEnd();
 };

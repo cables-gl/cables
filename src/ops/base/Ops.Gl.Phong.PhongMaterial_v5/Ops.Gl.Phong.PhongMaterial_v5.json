@@ -203,7 +203,7 @@
             },
             {
                 "type": "2",
-                "name": "Luminance Mask",
+                "name": "Env Map Mask",
                 "group": "Textures"
             },
             {
