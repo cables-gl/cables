@@ -27,9 +27,12 @@ const TEX_SLOT = 0;
 const shader = new CGL.Shader(cgl);
 const attribs = [inScale.get(), inNumLayers.get(), inFactor.get(), 0];
 shader.setSource(shader.getDefaultVertexShader(), attachments.layernoise_frag);
-shader._addUniform(
-    new CGL.Uniform(shader, "4f", "attribs", attribs)
-);
+// shader._addUniform(
+//     new CGL.Uniform(shader, "4f", "attribs", attribs)
+// );
+// this works, code above doesn't though I'm sure it used to.
+const attributes = new CGL.Uniform(shader, "4f", "attribs", attribs);
+
 const uniMode = new CGL.Uniform(shader, "i", "mode", 1);
 shader._addUniform(uniMode);
 const uniRGBA = new CGL.Uniform(shader, "b", "rgba", false);
@@ -51,7 +54,7 @@ inTrigger.onTriggered = function ()
         attribs[0] = inScale.get();
         attribs[1] = inNumLayers.get();
 
-        let layerMode = inLayerMode.get();
+        const layerMode = inLayerMode.get();
         if (layerMode == "linear")
             uniMode.set(0);
         else if (layerMode == "exponential")
@@ -66,6 +69,9 @@ inTrigger.onTriggered = function ()
         scroll[1] = inScrollY.get();
         scroll[2] = inScrollZ.get();
         uniScroll.set(scroll);
+        // new line here
+        attributes.set(attribs);
+
         needsUpdate = false;
     }
 
@@ -81,7 +87,7 @@ inTrigger.onTriggered = function ()
 };
 
 
-let tile = op.inValueBool("Tileable", false);
+const tile = op.inValueBool("Tileable", false);
 tile.onChange = updateTileable;
 function updateTileable()
 {
