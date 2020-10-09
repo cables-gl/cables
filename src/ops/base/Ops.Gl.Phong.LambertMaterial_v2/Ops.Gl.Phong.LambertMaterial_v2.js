@@ -61,7 +61,7 @@ const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
 const outShader = op.outObject("Shader");
 outShader.set(shader);
 
-const MAX_UNIFORM_FRAGMENTS = cgl.gl.getParameter(cgl.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
+const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
 const MAX_LIGHTS = MAX_UNIFORM_FRAGMENTS === 64 ? 6 : 16;
 
 shader.setSource(attachments.lambert_vert, attachments.lambert_frag);
@@ -73,9 +73,8 @@ const DEFAULT_LIGHTSTACK = [{
     "attenuation": 0,
     "falloff": 0.5,
     "radius": 80,
-    "castLight": 1
+    "castLight": 1,
 }];
-
 
 shader.define("MAX_LIGHTS", MAX_LIGHTS.toString());
 
@@ -89,16 +88,32 @@ function createDefaultUniform()
 
         // intensity, attenuation, falloff, radius
         "lightProperties": new CGL.Uniform(shader, "4f", "lights[0].lightProperties", [1, 1, 1, 1]),
-        "type": new CGL.Uniform(shader, "i", "lights[0].type", 0),
+
         "conePointAt": new CGL.Uniform(shader, "3f", "lights[0].conePointAt", vec3.create()),
         "spotProperties": new CGL.Uniform(shader, "3f", "lights[0].spotProperties", [0, 0, 0, 0]),
-        "castLight": new CGL.Uniform(shader, "i", "lights[0].castLight", 1),
+
+        "castLightType": new CGL.Uniform(shader, "2i", "lights[0].castLightType", [0, 0])
     };
 }
 
 function setDefaultUniform(light)
 {
     shader.define("NUM_LIGHTS", "1");
+    if (shader.hasDefine("HAS_SPOT"))
+    {
+        shader.removeDefine("HAS_SPOT");
+    }
+    if (shader.hasDefine("HAS_DIRECTIONAL"))
+    {
+        shader.removeDefine("HAS_DIRECTIONAL");
+    }
+    if (shader.hasDefine("HAS_AMBIENT"))
+    {
+        shader.removeDefine("HAS_AMBIENT");
+    }
+
+    if (!shader.hasDefine("HAS_POINT")) shader.define("HAS_POINT");
+
     defaultUniform.position.setValue(light.position);
     defaultUniform.color.setValue(light.color);
 
@@ -108,8 +123,11 @@ function setDefaultUniform(light)
         light.falloff,
         light.radius,
     ]);
-    defaultUniform.type.setValue(LIGHT_TYPES[light.type]);
 
+    defaultUniform.castLightType.setValue([
+        1,
+        LIGHT_TYPES[light.type]
+    ]);
     defaultUniform.conePointAt.setValue(light.conePointAt);
     defaultUniform.spotProperties.setValue([
         light.cosConeAngle,
@@ -119,18 +137,35 @@ function setDefaultUniform(light)
 }
 
 const lightUniforms = [];
+const hasLight = {
+    "directional": false,
+    "spot": false,
+    "ambient": false,
+    "point": false,
+};
 
-function createUniforms(lightsCount)
+function createUniforms(lightStack)
 {
     for (let i = 0; i < lightUniforms.length; i += 1)
     {
         lightUniforms[i] = null;
     }
 
-    for (let i = 0; i < lightsCount; i += 1)
+    hasLight.directional = false;
+    hasLight.spot = false;
+    hasLight.ambient = false;
+    hasLight.point = false;
+
+    for (let i = 0; i < lightStack.length; i += 1)
     {
         if (i === MAX_LIGHTS) return;
         lightUniforms[i] = null;
+
+        const light = lightStack[i];
+        const type = light.type;
+
+        if (!hasLight[type]) hasLight[type] = true;
+
         if (!lightUniforms[i])
         {
             lightUniforms[i] = {
@@ -138,12 +173,34 @@ function createUniforms(lightsCount)
                 "position": new CGL.Uniform(shader, "3f", "lights[" + i + "].position", [0, 11, 0]),
                 // intensity, attenuation, falloff, radius
                 "lightProperties": new CGL.Uniform(shader, "4f", "lights[" + i + "].lightProperties", [1, 1, 1, 1]),
-                "type": new CGL.Uniform(shader, "i", "lights[" + i + "].type", 0),
+
                 "conePointAt": new CGL.Uniform(shader, "3f", "lights[" + i + "].conePointAt", vec3.create()),
                 "spotProperties": new CGL.Uniform(shader, "3f", "lights[" + i + "].spotProperties", [0, 0, 0, 0]),
-                "castLight": new CGL.Uniform(shader, "i", "lights[" + i + "].castLight", 1)
+
+                "castLightType": new CGL.Uniform(shader, "2i", "lights[" + i + "].castLightType", [0, 0])
             };
         }
+    }
+
+    for (let i = 0, keys = Object.keys(hasLight); i < keys.length; i += 1)
+    {
+        const key = keys[i];
+
+        shader.toggleDefine("HAS_" + key.toUpperCase(), hasLight[key]);
+        /* if (hasLight[key])
+        {
+            if (!shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.define("HAS_" + key.toUpperCase());
+            }
+        }
+        else
+        {
+            if (shader.hasDefine("HAS_" + key.toUpperCase()))
+            {
+                shader.removeDefine("HAS_" + key.toUpperCase());
+            }
+        } */
     }
 }
 
@@ -163,7 +220,7 @@ function setUniforms(lightStack)
             light.falloff,
             light.radius,
         ]);
-        lightUniforms[i].type.setValue(LIGHT_TYPES[light.type]);
+
 
         lightUniforms[i].conePointAt.setValue(light.conePointAt);
         lightUniforms[i].spotProperties.setValue([
@@ -171,7 +228,11 @@ function setUniforms(lightStack)
             light.cosConeAngleInner,
             light.spotExponent,
         ]);
-        lightUniforms[i].castLight.setValue(light.castLight);
+
+        lightUniforms[i].castLightType.setValue([
+            Number(light.castLight),
+            LIGHT_TYPES[light.type]
+        ]);
     }
 }
 
@@ -180,7 +241,7 @@ function compareLights(lightStack)
 {
     if (lightStack.length !== oldCount)
     {
-        createUniforms(lightStack.length);
+        createUniforms(lightStack);
         oldCount = lightStack.length;
         shader.define("NUM_LIGHTS", "" + Math.max(oldCount, 1));
         setUniforms(lightStack);

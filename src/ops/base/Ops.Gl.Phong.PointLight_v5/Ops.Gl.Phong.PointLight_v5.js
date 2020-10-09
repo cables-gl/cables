@@ -123,12 +123,6 @@ const newLight = new CGL.Light(cgl, {
 });
 newLight.castLight = inCastLight.get();
 
-if (!newLight.hasFramebuffer())
-{
-    newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
-    newLight.createShadowMapShader();
-}
-
 inTrigger.onLinkChanged = function ()
 {
     if (!inTrigger.isLinked())
@@ -179,6 +173,17 @@ else
         "wrap": CGL.Texture.WRAP_REPEAT,
         "name": "cubemapprojection",
     });
+}
+
+if (inCastShadow.get())
+{
+    if (!newLight.hasFramebuffer())
+    {
+        // if (cgl.glVersion !== 1) {
+        newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+        newLight.createShadowMapShader();
+        // }
+    }
 }
 
 

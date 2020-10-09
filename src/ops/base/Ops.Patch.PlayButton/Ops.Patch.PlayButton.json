@@ -31,6 +31,10 @@
                 "type": "0",
                 "name": "Clicked",
                 "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Clicked Trigger"
             }
         ],
         "name": "Ops.Patch.PlayButton"

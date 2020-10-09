@@ -94,5 +94,13 @@
             }
         ],
         "name": "Ops.Gl.TextureEffects.RGBOffset"
+    },
+    "summary": "Offsets the xy components of an RGB texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

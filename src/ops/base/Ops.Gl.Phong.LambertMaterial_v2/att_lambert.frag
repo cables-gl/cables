@@ -23,11 +23,13 @@ struct Light {
     vec3 position;
     vec3 color;
     // * SPOT LIGHT * //
-    vec3 conePointAt;
-    #define COSCONEANGLE x
-    #define COSCONEANGLEINNER y
-    #define SPOTEXPONENT z
-    vec3 spotProperties;
+    #ifdef HAS_SPOT
+        vec3 conePointAt;
+        #define COSCONEANGLE x
+        #define COSCONEANGLEINNER y
+        #define SPOTEXPONENT z
+        vec3 spotProperties;
+    #endif
 
     #define INTENSITY x
     #define ATTENUATION y
@@ -37,6 +39,9 @@ struct Light {
 
     int type;
     int castLight;
+    #define CASTLIGHT x
+    #define TYPE y
+    ivec2 castLightType;
 };
 #ifdef HAS_TEXTURES
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -73,17 +78,18 @@ float Falloff2(vec3 lightDirection, float falloff) {
     return attenuation * 1. / max(distanceSquared, 0.00001);
 }
 
-float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
-    vec3 spotLightDirection = normalize(lightPosition-conePointAt);
-    float spotAngle = dot(-lightDirection, spotLightDirection);
-    float epsilon = cosConeAngle - cosConeAngleInner;
+#ifdef HAS_SPOT
+    float CalculateSpotLightEffect(vec3 lightPosition, vec3 conePointAt, float cosConeAngle, float cosConeAngleInner, float spotExponent, vec3 lightDirection) {
+        vec3 spotLightDirection = normalize(lightPosition-conePointAt);
+        float spotAngle = dot(-lightDirection, spotLightDirection);
+        float epsilon = cosConeAngle - cosConeAngleInner;
 
-    float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
-    spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
+        float spotIntensity = clamp((spotAngle - cosConeAngle)/epsilon, 0.0, 1.0);
+        spotIntensity = pow(spotIntensity, max(0.01, spotExponent));
 
-    return max(0., spotIntensity);
-}
-
+        return max(0., spotIntensity);
+    }
+#endif
 vec3 CalculateDiffuseColor(vec3 lightDirection, vec3 normal, vec3 lightColor, vec3 materialColor, inout float lambert) {
     lambert = clamp(dot(lightDirection, normal), 0., 1.);
     vec3 diffuseColor = lambert * lightColor * materialColor;
@@ -115,24 +121,28 @@ void main()
     #endif
 
     for(int l=0;l<NUM_LIGHTS;l++) {
-        if (lights[l].type == AMBIENT) {
-            col.rgb += lights[l].lightProperties.INTENSITY*lights[l].color;
+        if (lights[l].castLightType.TYPE == AMBIENT) {
+            col.rgb += lights[l].lightProperties.INTENSITY * lights[l].color;
         } else {
-            if (lights[l].castLight == 0) continue;
-            vec3 lightModelDiff=lights[l].position - modelPos.xyz;
+            if (lights[l].castLightType.CASTLIGHT == 0) continue;
+
+            vec3 lightModelDiff= lights[l].position - modelPos.xyz;
             vec3 lightDirection = normalize(lightModelDiff);
 
-            if (lights[l].type == DIRECTIONAL) lightDirection = lights[l].position;
+            if (lights[l].castLightType.TYPE == DIRECTIONAL) lightDirection = lights[l].position;
 
             float lambert = 1.; // inout variable
             vec3 diffuseColor = CalculateDiffuseColor(lightDirection, normal, lights[l].color, matColor, lambert);
 
-            if (lights[l].type != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
-            if (lights[l].type == SPOT) diffuseColor *= CalculateSpotLightEffect(
-                lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
-                lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
-                lightDirection
-            );
+            if (lights[l].castLightType.TYPE != DIRECTIONAL) diffuseColor *= Falloff2(lightDirection, lights[l].lightProperties.FALLOFF);
+
+            #ifdef HAS_SPOT
+                if (lights[l].castLightType.TYPE == SPOT) diffuseColor *= CalculateSpotLightEffect(
+                    lights[l].position, lights[l].conePointAt, lights[l].spotProperties.COSCONEANGLE,
+                    lights[l].spotProperties.COSCONEANGLEINNER, lights[l].spotProperties.SPOTEXPONENT,
+                    lightDirection
+                );
+            #endif
 
             diffuseColor *= lights[l].lightProperties.INTENSITY;
             col.rgb += diffuseColor;
@@ -140,9 +150,9 @@ void main()
     }
 
 
-    col.a=materialColor.a;
+    col.a = materialColor.a;
 
     {{MODULE_COLOR}}
 
-    outColor=col;
+    outColor = col;
 }
