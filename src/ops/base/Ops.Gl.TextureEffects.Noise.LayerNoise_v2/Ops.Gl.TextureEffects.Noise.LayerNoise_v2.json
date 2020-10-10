@@ -1,7 +1,14 @@
 {
+    "id": "b918b3f1-53ee-4d32-92b7-73a1d00e0d69",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "_LJ_",
+            "date": 1602251402379
+        }
+    ],
     "authorName": "_LJ_",
-    "id": "f04bbc15-04f0-4b84-9825-14eec51e1365",
-    "created": 1532440814903,
+    "created": 1602251426270,
     "layout": {
         "portsIn": [
             {
@@ -87,24 +94,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.Noise.LayerNoise"
-    },
-    "summary": "multilayer perlin noise variation",
-    "docs": {
-        "ports": []
-    },
-    "changelog": [
-        {
-            "message": "added : Blend modes",
-            "author": "andro",
-            "date": 1548344194920
-        }
-    ],
-    "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
-    "relatedops": null,
-    "youtubeids": []
+        "name": "Ops.Gl.TextureEffects.Noise.LayerNoise_v2"
+    }
 }
