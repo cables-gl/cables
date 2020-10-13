@@ -219,6 +219,8 @@ Shader.prototype.copy = function ()
     shader._moduleNames = this._moduleNames;
     shader.glPrimitive = this.glPrimitive;
     shader.offScreenPass = this.offScreenPass;
+    shader._extensions = this._extensions;
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         const u = this._uniforms[i].copy(shader);

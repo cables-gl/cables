@@ -206,6 +206,21 @@ shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
 
+
+if (cgl.glVersion < 2)
+{
+    cgl.gl.getExtension("OES_texture_float");
+    cgl.gl.getExtension("OES_texture_float_linear");
+    cgl.gl.getExtension("OES_texture_half_float");
+    cgl.gl.getExtension("OES_texture_half_float_linear");
+
+    shader.enableExtension("GL_OES_standard_derivatives");
+    shader.enableExtension("GL_OES_texture_float");
+    shader.enableExtension("GL_OES_texture_float_linear");
+    shader.enableExtension("GL_OES_texture_half_float");
+    shader.enableExtension("GL_OES_texture_half_float_linear");
+}
+
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");
 const FRAGMENT_BODY_REGEX = new RegExp("{{PHONG_FRAGMENT_BODY}}", "g");
 
