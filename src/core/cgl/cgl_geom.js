@@ -288,7 +288,6 @@ Geometry.prototype.calculateNormals = function (options)
     const u = vec3.create();
     const v = vec3.create();
     const n = vec3.create();
-    let i = 0;
 
     function calcNormal(triangle)
     {
@@ -320,7 +319,7 @@ Geometry.prototype.calculateNormals = function (options)
 
     if (!(this.vertexNormals instanceof Float32Array) || this.vertexNormals.length != this.vertices.length) this.vertexNormals = new Float32Array(this.vertices.length);
 
-    for (i = 0; i < this.vertices.length; i++)
+    for (let i = 0; i < this.vertices.length; i++)
     {
         this.vertexNormals[i] = 0;
     }
@@ -328,7 +327,7 @@ Geometry.prototype.calculateNormals = function (options)
     if (!this.isIndexed())
     {
         const norms = [];
-        for (i = 0; i < this.vertices.length; i += 9)
+        for (let i = 0; i < this.vertices.length; i += 9)
         {
             const triangle = [[this.vertices[i + 0], this.vertices[i + 1], this.vertices[i + 2]], [this.vertices[i + 3], this.vertices[i + 4], this.vertices[i + 5]], [this.vertices[i + 6], this.vertices[i + 7], this.vertices[i + 8]]];
 
@@ -342,7 +341,8 @@ Geometry.prototype.calculateNormals = function (options)
         const faceNormals = [];
         faceNormals.length = this.verticesIndices.length / 3;
 
-        for (i = 0; i < this.verticesIndices.length; i += 3)
+
+        for (let i = 0; i < this.verticesIndices.length; i += 3)
         {
             const triangle = [this.getVertexVec(this.verticesIndices[i + 0]), this.getVertexVec(this.verticesIndices[i + 1]), this.getVertexVec(this.verticesIndices[i + 2])];
 
@@ -361,7 +361,7 @@ Geometry.prototype.calculateNormals = function (options)
             this.vertexNormals[this.verticesIndices[i + 2] * 3 + 2] += faceNormals[i / 3][2];
         }
 
-        for (i = 0; i < this.verticesIndices.length; i += 3) // faces
+        for (let i = 0; i < this.verticesIndices.length; i += 3) // faces
         {
             for (let k = 0; k < 3; k++) // triangles
             {

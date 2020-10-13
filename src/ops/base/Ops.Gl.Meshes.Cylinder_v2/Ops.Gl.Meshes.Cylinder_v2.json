@@ -59,6 +59,11 @@
                 "type": "0",
                 "name": "Caps",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Flat Normals",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
