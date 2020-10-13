@@ -36,6 +36,9 @@ const Context = function (_patch)
     this._onetimeCallbacks = [];
     this.gl = null;
 
+    this._cursor = "auto";
+    this._currentCursor = "";
+
     /**
      * Current projection matrix
      * @memberof Context
@@ -286,6 +289,11 @@ const Context = function (_patch)
             this.updateSize();
 
             for (let i = 0; i < cbResize.length; i++) cbResize[i]();
+        }
+
+        if (this._cursor != this._currentCursor)
+        {
+            this._currentCursor = this.canvas.style.cursor = this._cursor;
         }
     };
 
@@ -1176,5 +1184,19 @@ Context.prototype._setBlendMode = function (blendMode, premul)
         Log.log("setblendmode: unknown blendmode");
     }
 };
+
+
+/**
+ * set cursor
+ * @function setCursor
+ * @memberof Context
+ * @instance
+ * @param {String} css cursor string
+ */
+Context.prototype.setCursor = function (str)
+{
+    this._cursor = str;
+};
+
 
 export { Context };
