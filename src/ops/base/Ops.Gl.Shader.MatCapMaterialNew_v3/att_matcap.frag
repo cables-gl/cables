@@ -51,8 +51,8 @@ UNI sampler2D texMatcap;
 #endif
 
 // * taken & modified from https://github.com/mrdoob/three.js/blob/dev/src/renderers/shaders/ShaderLib/meshmatcap_frag.glsl.js
-vec2 getMatCapUV(vec3 viewPosition, vec3 normal) {
-    vec3 viewDir = normalize(-viewPosition);
+vec2 getMatCapUV(vec3 viewSpacePosition, vec3 normal) {
+    vec3 viewDir = normalize(-viewSpacePosition);
 	vec3 x = normalize(vec3(viewDir.z, 0.0, - viewDir.x));
 	vec3 y = normalize(cross(viewDir, x));
 	vec2 uv = vec2(dot(x, normal), dot(y, normal)) * 0.495 + 0.5; // 0.495 to remove artifacts caused by undersized matcap disks
