@@ -4,8 +4,8 @@
     IN vec2 texCoord;
 #endif
 
-IN vec3 v_viewDirection;
 IN vec3 transformedNormal;
+IN vec3 viewSpacePosition;
 
 UNI vec4 inColor;
 
@@ -51,12 +51,11 @@ UNI sampler2D texMatcap;
 #endif
 
 // * taken & modified from https://github.com/mrdoob/three.js/blob/dev/src/renderers/shaders/ShaderLib/meshmatcap_frag.glsl.js
-vec2 getMatCapUV(vec3 normal) {
-    vec3 viewDir = normalize(v_viewDirection);
+vec2 getMatCapUV(vec3 viewPosition, vec3 normal) {
+    vec3 viewDir = normalize(-viewPosition);
 	vec3 x = normalize(vec3(viewDir.z, 0.0, - viewDir.x));
-	vec3 y = cross(viewDir, x);
+	vec3 y = normalize(cross(viewDir, x));
 	vec2 uv = vec2(dot(x, normal), dot(y, normal)) * 0.495 + 0.5; // 0.495 to remove artifacts caused by undersized matcap disks
-
 	return uv;
 }
 
@@ -76,17 +75,15 @@ void main()
 
 
    #ifdef HAS_NORMAL_TEXTURE
-
-        vec3 normalFromMap =texture( texNormal, texCoord ).xyz * 2.0 - 1.0;
-
-        normalFromMap = normalize(normalFromMap * normalMapIntensity);
+        vec3 normalFromMap = texture( texNormal, texCoord ).xyz * 2.0 - 1.0;
+        normalFromMap = normalize(normalFromMap);
 
         vec3 tangent;
         vec3 binormal;
 
         #ifdef CALC_TANGENT
-            vec3 c1 = cross(norm, vec3(0.0, 0.0, 1.0));
-            vec3 c2 = cross(norm, vec3(0.0, 1.0, 0.0));
+            vec3 c1 = cross(normalFromMap, vec3(0.0, 0.0, 1.0));
+            vec3 c2 = cross(normalFromMap, vec3(0.0, 1.0, 0.0));
 
             tangent = c1;
             tangent = normalize(tangent);
@@ -96,7 +93,8 @@ void main()
 
         #ifndef CALC_TANGENT
             tangent = normalize(normalMatrix * vTangent);
-            binormal = normalize(normalMatrix * cross(normalize(viewSpaceNormal), normalize(vBiTangent)));
+            vec3 bitangent = normalize(normalMatrix * vBiTangent);
+            binormal = normalize(cross(viewSpaceNormal, bitangent));
         #endif
 
         normalFromMap = normalize(
@@ -110,7 +108,7 @@ void main()
         viewSpaceNormal = mixedNormal;
     #endif
 
-    vec4 col = texture(texMatcap, getMatCapUV(viewSpaceNormal));
+    vec4 col = texture(texMatcap, getMatCapUV(viewSpacePosition, viewSpaceNormal));
 
     #ifdef HAS_DIFFUSE_TEXTURE
         col = col*texture(texDiffuse, texCoords);
@@ -129,7 +127,7 @@ void main()
     #endif
 
     #ifdef USE_SPECULAR_TEXTURE
-        vec4 spec = texture(texSpecMatCap, getMatCapUV(viewSpaceNormal));
+        vec4 spec = texture(texSpecMatCap, getMatCapUV(viewSpacePosition, viewSpaceNormal));
         spec *= texture(texSpec, texCoords);
         col += spec;
     #endif
