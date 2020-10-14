@@ -9,6 +9,7 @@ const
     inUVMode = op.inValueSelect("UV mode", ["simple", "atlas"], "simple"),
     flipSideMapping = op.inValueBool("Flip Mapping", false),
     inCaps = op.inValueBool("Caps", true),
+    inFlat = op.inValueBool("Flat Normals", false),
     outTrigger = op.outTrigger("next"),
     outGeometry = op.outObject("geometry"),
     geom = new CGL.Geometry("cylinder");
@@ -280,6 +281,8 @@ function buildMesh()
     geom.biTangents = biTangents;
     geom.verticesIndices = indices;
 
+    if (inFlat.get()) geom.unIndex();
+
     outGeometry.set(null);
     outGeometry.set(geom);
 
@@ -305,6 +308,7 @@ inCaps.onChange =
 inLength.onChange =
 flipSideMapping.onChange =
 inStacks.onChange =
+inFlat.onChange =
 inUVMode.onChange = function ()
 {
     // only calculate once, even after multiple settings could were changed

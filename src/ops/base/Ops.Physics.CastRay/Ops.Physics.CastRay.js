@@ -5,6 +5,7 @@ const
     inY = op.inValueFloat("Screen Y"),
     inZ = op.inValueFloat("Screen Z"),
 
+    inCursor = op.inBool("Change Cursor", true),
 
     next = op.outTrigger("Next"),
 
@@ -44,6 +45,7 @@ exec.onTriggered = render;
 
 const results = [];
 let rayResult = null;
+let didsetCursor = false;
 const mat = mat4.create();
 
 // let ray = new CANNON.Ray(
@@ -166,6 +168,18 @@ function render()
         // console.log(rayResult);
         // console.log(rayResult);
         hasHit.set(rayResult.hasHit);
+
+
+        if (rayResult.hasHit && inCursor.get())
+        {
+            op.patch.cgl.setCursor("pointer");
+            didsetCursor = true;
+        }
+        else if (didsetCursor)
+        {
+            op.patch.cgl.setCursor("auto");
+            didsetCursor = false;
+        }
         // ray.skipBackFaces = true;
         if (rayResult.body)
         {

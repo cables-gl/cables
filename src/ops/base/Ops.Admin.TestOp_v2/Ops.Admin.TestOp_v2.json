@@ -28,11 +28,6 @@
             },
             {
                 "type": "0",
-                "name": "test float 2",
-                "subType": "number"
-            },
-            {
-                "type": "0",
                 "name": "name",
                 "subType": "number"
             },
@@ -43,6 +38,13 @@
             {
                 "type": "1",
                 "name": "buttons"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "test float 1",
+                "subType": "number"
             }
         ],
         "name": "Ops.Admin.TestOp_v2"
