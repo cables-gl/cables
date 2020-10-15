@@ -26,7 +26,7 @@ UNI vec3 camPos;
 #endif
 
 OUT mat3 normalMatrix;
-OUT vec3 v_viewDirection;
+OUT vec3 viewSpacePosition;
 OUT vec3 transformedNormal;
 
 {{MODULES_HEAD}}
@@ -80,17 +80,18 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     mvMatrix = viewMatrix * mMatrix;
-    normalMatrix = transposeMat3(inverseMat3(mat3(mMatrix)));
+    vec3 normal = attrVertNormal;
 
-    vec3 fragPos = vec3((mMatrix) * pos);
-    v_viewDirection = camPos - fragPos;
+    normalMatrix = transposeMat3(inverseMat3(mat3(mvMatrix)));
+
+    vec3 fragPos = vec3((mvMatrix) * pos);
+    viewSpacePosition = normalize(fragPos);
 
     #ifdef CALC_SSNORMALS
-        eye_relative_pos = -v_viewDirection;
+        eye_relative_pos = -(vec3(viewMatrix * vec4(camPos, 1.)) - fragPos);
     #endif
 
-    v_viewDirection = normalize(v_viewDirection);
-    transformedNormal = normalize(mat3(normalMatrix) * attrVertNormal);
+    transformedNormal = normalize(mat3(normalMatrix) * normal);
 
    gl_Position = projMatrix * mvMatrix * pos;
 

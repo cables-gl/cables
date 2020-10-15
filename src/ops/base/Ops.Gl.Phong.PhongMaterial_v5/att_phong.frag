@@ -28,6 +28,10 @@ UNI vec4 inMaterialProperties;
     UNI vec2 inFresnelWidthExponent;
 #endif
 
+#ifdef ENVMAP_MATCAP
+    IN vec3 viewSpaceNormal;
+    IN vec3 viewSpacePosition;
+#endif
 
 struct Light {
     vec3 color;
@@ -128,12 +132,11 @@ const float EIGHT_PI = (8. * PI);
 
 
             // * taken & modified from https://github.com/mrdoob/three.js/blob/dev/src/renderers/shaders/ShaderLib/meshmatcap_frag.glsl.js
-            vec2 getMatCapUV(vec3 normal) {
-                vec3 viewDir = normalize(v_viewDirection);
+            vec2 getMatCapUV(vec3 viewSpacePosition, vec3 viewSpaceNormal) {
+                vec3 viewDir = normalize(-viewSpacePosition);
             	vec3 x = normalize(vec3(viewDir.z, 0.0, - viewDir.x));
-            	vec3 y = cross(viewDir, x);
-            	vec2 uv = vec2(dot(x, normal), dot(y, normal)) * 0.495 + 0.5; // 0.495 to remove artifacts caused by undersized matcap disks
-
+            	vec3 y = normalize(cross(viewDir, x));
+            	vec2 uv = vec2(dot(x, viewSpaceNormal), dot(y, viewSpaceNormal)) * 0.495 + 0.5; // 0.495 to remove artifacts caused by undersized matcap disks
             	return uv;
             }
         #endif
@@ -451,24 +454,24 @@ void main()
     #ifdef HAS_TEXTURE_ENV
         vec3 luminanceColor = vec3(0.);
 
-        float environmentMapWidth = inEnvMapWidth;
-        float glossyExponent = inMaterialProperties.SHININESS;
-        float glossyCoefficient = inMaterialProperties.SPECULAR_AMT;
-
-        vec3 envMapNormal =  normal;
-        vec3 reflectDirection = reflect(normalize(-viewDirection), normal);
-
-        float lambertianCoefficient = dot(viewDirection, reflectDirection); //0.44; // TODO: need prefiltered map for this
-        // lambertianCoefficient = 1.;
-        float specularAngle = max(dot(reflectDirection, viewDirection), 0.);
-        float specularFactor = pow(specularAngle, max(0., inMaterialProperties.SHININESS));
-
-        glossyExponent = specularFactor;
-
-        float maxMIPLevel = 10.;
-        float MIPlevel = log2(environmentMapWidth / 1024. * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
-
         #ifndef ENVMAP_MATCAP
+            float environmentMapWidth = inEnvMapWidth;
+            float glossyExponent = inMaterialProperties.SHININESS;
+            float glossyCoefficient = inMaterialProperties.SPECULAR_AMT;
+
+            vec3 envMapNormal =  normal;
+            vec3 reflectDirection = reflect(normalize(-viewDirection), normal);
+
+            float lambertianCoefficient = dot(viewDirection, reflectDirection); //0.44; // TODO: need prefiltered map for this
+            // lambertianCoefficient = 1.;
+            float specularAngle = max(dot(reflectDirection, viewDirection), 0.);
+            float specularFactor = pow(specularAngle, max(0., inMaterialProperties.SHININESS));
+
+            glossyExponent = specularFactor;
+
+            float maxMIPLevel = 10.;
+            float MIPlevel = log2(environmentMapWidth / 1024. * sqrt(3.)) - 0.5 * log2(glossyExponent + 1.);
+
             luminanceColor = inEnvMapIntensity * (
                 inDiffuseColor.rgb *
                 SAMPLETEX(texEnv, envMapNormal, maxMIPLevel).rgb
@@ -478,10 +481,11 @@ void main()
         #endif
         #ifdef ENVMAP_MATCAP
             luminanceColor = inEnvMapIntensity * (
-                inDiffuseColor.rgb
-                * textureLod(texEnv, getMatCapUV(envMapNormal), maxMIPLevel).rgb
-                +
-                glossyCoefficient * textureLod(texEnv, getMatCapUV(reflectDirection), MIPlevel).rgb
+                texture(texEnv, getMatCapUV(viewSpacePosition, viewSpaceNormal)).rgb
+                //inDiffuseColor.rgb
+                //* textureLod(texEnv, getMatCapUV(envMapNormal), maxMIPLevel).rgb
+                //+
+                //glossyCoefficient * textureLod(texEnv, getMatCapUV(reflectDirection), MIPlevel).rgb
             );
         #endif
 
