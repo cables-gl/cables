@@ -1,0 +1,103 @@
+{
+    "id": "ec3e0121-b2c2-4c31-bbda-a6982080f73f",
+    "authorName": "cables",
+    "created": 1602760318455,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Html.BrowserCheck_v2",
+            "author": "simod",
+            "date": 1602760318455
+        },
+        {
+            "message": " added lib: platform.js",
+            "author": "simod",
+            "date": 1602760393579
+        },
+        {
+            "message": "Ops.User.cables.BrowserCheck renamed to Ops.Html.BrowserInfo",
+            "author": "simod",
+            "date": 1602760602158
+        }
+    ],
+    "layout": {
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Is Mobile",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is IE",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Edge",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Chrome",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Firefox",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Opera",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Safari",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Windows",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Linux",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Mac",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is iOS",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Android",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Is Electron",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Language"
+            },
+            {
+                "type": "5",
+                "name": "User Agent"
+            }
+        ],
+        "name": "Ops.User.cables.BrowserCheck"
+    },
+    "libs": [
+        "platform.js"
+    ]
+}
