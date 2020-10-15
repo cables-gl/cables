@@ -17,6 +17,11 @@
             "message": "Ops.User.cables.BrowserCheck renamed to Ops.Html.BrowserInfo",
             "author": "simod",
             "date": 1602760602158
+        },
+        {
+            "message": "Ops.Html.BrowserInfo renamed to Ops.Html.BrowserCheck_v3",
+            "author": "cables",
+            "date": 1602763157290
         }
     ],
     "layout": {
@@ -88,6 +93,18 @@
             },
             {
                 "type": "5",
+                "name": "Operating System"
+            },
+            {
+                "type": "5",
+                "name": "Browser Name"
+            },
+            {
+                "type": "5",
+                "name": "OS Version"
+            },
+            {
+                "type": "5",
                 "name": "Language"
             },
             {
@@ -95,7 +112,7 @@
                 "name": "User Agent"
             }
         ],
-        "name": "Ops.User.cables.BrowserCheck"
+        "name": "Ops.Html.BrowserCheck_v3"
     },
     "libs": [
         "platform.js"

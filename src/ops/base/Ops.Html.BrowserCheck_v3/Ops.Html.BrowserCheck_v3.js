@@ -12,12 +12,15 @@ const
     isIos = op.outBool("Is iOS", false),
     isAndroid = op.outBool("Is Android", false),
     isElectron = op.outBool("Is Electron", false),
+    outOS = op.outString("Operating System", ""),
+    outBrowserName = op.outString("Browser Name", ""),
+    outVersion = op.outString("OS Version", ""),
     outNav = op.outString("Language"),
     outUA = op.outString("User Agent");
 
 op.setPortGroup("Browsers", [isIe, isEdge, isChrome, isFirefox, isOpera, isSafari]);
 op.setPortGroup("Operating Systems", [isWindows, isLinux, isMac, isIos, isAndroid, isElectron]);
-
+op.setPortGroup("Textual Information", [outOS, outBrowserName, outNav, outVersion, outUA]);
 const pf = platform;
 
 const osFamily = pf.os.family;
@@ -74,5 +77,6 @@ isElectron.set(isElectronBool);
 
 outNav.set(navigator.language || navigator.userLanguage);
 outUA.set(pf.ua);
-
-
+outVersion.set(pf.os.version);
+outOS.set(pf.os.toString());
+outBrowserName.set(pf.name);
