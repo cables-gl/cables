@@ -43,7 +43,11 @@ UNI vec3 camPos;
 UNI mat4 projMatrix;
 UNI mat4 viewMatrix;
 UNI mat4 modelMatrix;
-// UNI mat4 normalMatrix;
+
+#ifdef ENVMAP_MATCAP
+    OUT vec3 viewSpaceNormal;
+    OUT vec3 viewSpacePosition;
+#endif
 
 
 mat3 transposeMat3(mat3 m)
@@ -124,5 +128,10 @@ void main()
     v_viewDirection = normalize(camPos - fragPos);
     // modelPos=mMatrix*pos;
 
+    #ifdef ENVMAP_MATCAP
+        mat3 viewSpaceNormalMatrix = normalMatrix = transposeMat3(inverseMat3(mat3(mvMatrix)));
+        viewSpaceNormal = normalize(viewSpaceNormalMatrix * norm);
+        viewSpacePosition = vec3(mvMatrix * pos);
+    #endif
     gl_Position = projMatrix * mvMatrix * pos;
 }

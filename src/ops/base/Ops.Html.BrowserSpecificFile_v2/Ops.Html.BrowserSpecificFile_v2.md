@@ -1,0 +1,2 @@
+Browsers support file-types differently. E.g. to create a gapless audio loop, you cannot simply loop an MP3 file, you need to create an M4A-file for Safari, an OGG-file for Firefox and an MP3-file for Chrome (and the other browsers). Otherwise the loop will have a tiny, but noticeable gap.
+This op let’s you specify filenames specific for each browser. It does not handle loading of files, just the filenames.

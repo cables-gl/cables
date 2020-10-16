@@ -1,0 +1,68 @@
+{
+    "id": "d6432fde-9bc5-4183-a9be-bd87ffcb5392",
+    "authorName": "simod",
+    "created": 1602764204882,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Html.BrowserSpecificFile",
+            "author": "simod",
+            "date": 1602764204882
+        },
+        {
+            "message": " added lib: platform.js",
+            "author": "simod",
+            "date": 1602764242276
+        },
+        {
+            "message": "Ops.User.cables.BrowserSpecificFile_v2 renamed to Ops.Html.BrowserSpecificFile_v2",
+            "author": "simod",
+            "date": 1602764377410
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Chrome File"
+            },
+            {
+                "type": "5",
+                "name": "Firefox File"
+            },
+            {
+                "type": "5",
+                "name": "Safari File"
+            },
+            {
+                "type": "5",
+                "name": "IE <= 11 File"
+            },
+            {
+                "type": "5",
+                "name": "Edge File"
+            },
+            {
+                "type": "5",
+                "name": "Opera File"
+            },
+            {
+                "type": "5",
+                "name": "Default File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "Browser Specific File"
+            },
+            {
+                "type": "5",
+                "name": "Detected Browser"
+            }
+        ],
+        "name": "Ops.User.cables.BrowserSpecificFile_v2"
+    },
+    "libs": [
+        "platform.js"
+    ]
+}
