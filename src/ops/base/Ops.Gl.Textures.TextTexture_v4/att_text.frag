@@ -14,7 +14,8 @@ void main()
     vec4 col;
 
     #ifndef HARD_EDGE
-        col= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r*a);
+        // col= vec4(1.0,1.0,1.0,texture(tex,vec2(texCoord.x,(1.0-texCoord.y))).r*a);
+        col = texture(tex,vec2(texCoord.x,(1.0-texCoord.y)));
     #endif
     #ifdef HARD_EDGE
 
@@ -37,7 +38,8 @@ void main()
 
     #endif
 
-    col.rgb*=color.rgb;
+    col.rgb=color.rgb;
+
     outColor=col;
 
 }

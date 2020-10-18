@@ -13,11 +13,12 @@ const
     a = op.inValueSlider("a", 1),
     vertCols = op.inBool("Vertex Colors", false),
     texture = op.inTexture("texture"),
+    textureMulColor = op.inBool("Colorize Texture"),
     textureMask = op.inTexture("Texture Mask"),
     texMaskChan = op.inSwitch("Mask Channel", ["R", "A", "Luminance"], "R"),
     textureColorize = op.inTexture("Texture Colorize"),
-    textureOpacity = op.inTexture("Texture Opacity"),
     colorizeRandom = op.inValueBool("Colorize Randomize", true),
+    textureOpacity = op.inTexture("Texture Opacity"),
     texturePointSize = op.inTexture("Texture Point Size"),
     texturePointSizeChannel = op.inSwitch("Point Size Channel", ["R", "G", "B"], "R"),
     texturePointSizeMul = op.inFloat("Texture Point Size Mul", 1),
@@ -27,7 +28,7 @@ const
     trigger = op.outTrigger("trigger"),
     shaderOut = op.outObject("shader");
 
-op.setPortGroup("Texture", [texture, textureMask, texMaskChan, textureColorize, textureOpacity]);
+op.setPortGroup("Texture", [texture, textureMulColor, textureMask, texMaskChan, textureColorize, textureOpacity, colorizeRandom]);
 
 op.setPortGroup("Color", [r, g, b, a, vertCols]);
 op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
@@ -70,6 +71,7 @@ doScale.onChange =
     texturePointSize.onChange =
     texturePointSizeMap.onChange =
     texturePointSizeChannel.onChange =
+    textureMulColor.onChange =
     vertCols.onChange = updateDefines;
 
 
@@ -110,6 +112,8 @@ function updateDefines()
     shader.toggleDefine("HAS_TEXTURE_COLORIZE", textureColorize.get());
     shader.toggleDefine("HAS_TEXTURE_OPACITY", textureOpacity.get());
     shader.toggleDefine("HAS_TEXTURE_POINTSIZE", texturePointSize.get());
+
+    shader.toggleDefine("TEXTURE_COLORIZE_MUL", textureMulColor.get());
 
 
     shader.toggleDefine("FLIP_TEX", flipTex.get());

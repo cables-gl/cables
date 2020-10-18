@@ -116,5 +116,86 @@
     },
     "libs": [
         "platform.js"
-    ]
+    ],
+    "summary": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Is Mobile",
+                "text": "true if mobile platform, false if not"
+            },
+            {
+                "name": "Is IE",
+                "text": "True if the browser is any of IE 9, IE 10, IE 11"
+            },
+            {
+                "name": "Is Edge",
+                "text": "True if the browser is Edge "
+            },
+            {
+                "name": "Is Chrome",
+                "text": "True if the browser is Chrome or Chrome Mobile"
+            },
+            {
+                "name": "Is Firefox",
+                "text": "True if the browser is Firefox or Firefox mobile"
+            },
+            {
+                "name": "Is Opera",
+                "text": "True if the browser is Opera"
+            },
+            {
+                "name": "Is Safari",
+                "text": "True if the browser is Safari (iOS & macOS & OS X)"
+            },
+            {
+                "name": "Is Windows",
+                "text": "true if operating system is windows"
+            },
+            {
+                "name": "Is Linux",
+                "text": "true if operating system is linux "
+            },
+            {
+                "name": "Is Mac",
+                "text": "true if operating system is mac"
+            },
+            {
+                "name": "Is iOS",
+                "text": "true if operating system is iOS"
+            },
+            {
+                "name": "Is Android",
+                "text": "true if operating system is Android"
+            },
+            {
+                "name": "Is Electron",
+                "text": "true if cables electron app is used"
+            },
+            {
+                "name": "Operating System",
+                "text": "exact name of the operating system"
+            },
+            {
+                "name": "Browser Name",
+                "text": "name of the browser"
+            },
+            {
+                "name": "OS Version",
+                "text": "version of the os"
+            },
+            {
+                "name": "Language",
+                "text": "browser language"
+            },
+            {
+                "name": "User Agent",
+                "text": "current user agent "
+            }
+        ]
+    }
 }

@@ -6,7 +6,6 @@ IN vec2 texCoord;
 IN vec2 pointCoord;
 IN float ps;
 
-
 #ifdef HAS_TEXTURE_DIFFUSE
     UNI sampler2D diffTex;
 #endif
@@ -34,7 +33,6 @@ void main()
     {{MODULE_BEGIN_FRAG}}
 
     if(ps<1.0)discard;
-
 
     vec4 col=color;
 
@@ -78,9 +76,12 @@ void main()
         col*=colorize;
     #endif
 
+    #ifdef TEXTURE_COLORIZE_MUL
+        col*=color;
+    #endif
+
     #ifdef HAS_TEXTURE_MASK
         col.a*=mask;
-
     #endif
 
     #ifdef HAS_TEXTURE_OPACITY
