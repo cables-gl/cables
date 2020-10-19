@@ -48,5 +48,5 @@ MOD_de=1.0-smoothstep(MOD_inSizeAmountFalloffSizeX.z*MOD_inSizeAmountFalloffSize
 #endif
 
 #ifdef MOD_BLEND_OPACITY
-    col.a*=(1.0-MOD_de);
+    col.a*=(1.0-MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif

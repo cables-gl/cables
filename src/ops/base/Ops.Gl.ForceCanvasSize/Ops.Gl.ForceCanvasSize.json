@@ -32,19 +32,23 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Force"
+            },
+            {
                 "type": "0",
                 "name": "Center In Parent",
                 "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Width",
+                "name": "Set Width",
                 "group": "Size",
                 "subType": "integer"
             },
             {
                 "type": "0",
-                "name": "Height",
+                "name": "Set Height",
                 "group": "Size",
                 "subType": "integer"
             },
@@ -52,6 +56,12 @@
                 "type": "0",
                 "name": "Aspect Ratio index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Aspect Ratio",
+                "group": "Proportions",
+                "subType": "string"
             },
             {
                 "type": "0",
@@ -63,6 +73,12 @@
                 "type": "0",
                 "name": "Fill Parent index",
                 "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Fill Parent",
+                "group": "Proportions",
+                "subType": "string"
             }
         ],
         "portsOut": [
@@ -108,6 +124,14 @@
             {
                 "name": "Next",
                 "text": "Trigger out"
+            },
+            {
+                "name": "Width",
+                "text": "The new width"
+            },
+            {
+                "name": "Height",
+                "text": "The new height"
             }
         ]
     }

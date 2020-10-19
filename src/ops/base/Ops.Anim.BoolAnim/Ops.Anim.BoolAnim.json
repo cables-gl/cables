@@ -29,6 +29,11 @@
             },
             {
                 "type": "0",
+                "name": "Direction",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "value false",
                 "group": "Values",
                 "subType": "number"

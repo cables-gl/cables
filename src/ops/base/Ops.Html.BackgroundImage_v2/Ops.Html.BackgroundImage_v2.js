@@ -2,7 +2,7 @@ const
     inEle = op.inObject("Element"),
     active = op.inValueBool("active", true),
     filename = op.inUrl("image file"),
-    inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "25%"], "cover"),
+    inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "25%", "20%", "10%"], "cover"),
     inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
     inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
 
@@ -19,6 +19,20 @@ active.onChange =
 filename.onChange = update;
 
 let ele = null;
+let cacheBust = null;
+
+op.onFileChanged = function (fn)
+{
+    console.log("FILE CHANGED!!" + fn, filename.get());
+
+    if (filename.get() && filename.get().indexOf(fn) > -1)
+    {
+        if (ele)ele.style["background-image"] = "none";
+        cacheBust = CABLES.uuid();
+        update();
+    }
+};
+
 
 function remove()
 {
@@ -52,7 +66,10 @@ function update()
         }
         else
         {
-            ele.style["background-image"] = "url(" + op.patch.getFilePath(String(filename.get())) + ")";
+            let cb = "";
+            if (cacheBust)cb = "?cb=" + cacheBust;
+
+            ele.style["background-image"] = "url(" + op.patch.getFilePath(String(filename.get())) + cb + ")";
             ele.style["background-size"] = inSize.get();
             ele.style["background-position"] = inPosition.get();
             ele.style["background-repeat"] = inRepeat.get();

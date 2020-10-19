@@ -64,5 +64,50 @@
     },
     "libs": [
         "platform.js"
-    ]
+    ],
+    "summary": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Chrome File",
+                "text": "Filename to be used in Googe Chrome"
+            },
+            {
+                "name": "Firefox File",
+                "text": "Filename to be used in Firefox"
+            },
+            {
+                "name": "Safari File",
+                "text": "Filename to be used in Safari"
+            },
+            {
+                "name": "IE <= 11 File",
+                "text": "Filename to be used in Internet Explorer <= 11"
+            },
+            {
+                "name": "Edge File",
+                "text": "Filename to be used in Edge"
+            },
+            {
+                "name": "Opera File",
+                "text": "Filename to be used in Opera"
+            },
+            {
+                "name": "Default File",
+                "text": "Filename to be used if there is no specific file defined for the current browser"
+            },
+            {
+                "name": "Browser Specific File",
+                "text": "The filename specific to the current browser"
+            },
+            {
+                "name": "Detected Browser",
+                "text": "The detected browser"
+            }
+        ]
+    }
 }

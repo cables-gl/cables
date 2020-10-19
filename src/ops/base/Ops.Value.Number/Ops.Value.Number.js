@@ -1,9 +1,9 @@
-const v=op.inValueFloat("value");
-const result=op.outValue("result");
+const v = op.inValueFloat("value");
+const result = op.outValue("result");
 
-v.onChange=exec;
+v.onChange = exec;
 
 function exec()
 {
-    result.set(parseFloat(v.get()));
+    result.set(v.get());
 }

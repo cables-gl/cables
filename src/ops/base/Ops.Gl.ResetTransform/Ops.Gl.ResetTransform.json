@@ -47,6 +47,6 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.TransformReset"
+        "name": "Ops.Gl.ResetTransform"
     }
 }

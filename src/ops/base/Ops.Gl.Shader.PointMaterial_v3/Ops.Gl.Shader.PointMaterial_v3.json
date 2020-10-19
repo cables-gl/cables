@@ -74,6 +74,12 @@
                 "group": "Texture"
             },
             {
+                "type": "0",
+                "name": "Colorize Texture",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "Texture Mask",
                 "group": "Texture"
@@ -94,14 +100,15 @@
                 "group": "Texture"
             },
             {
+                "type": "0",
+                "name": "Colorize Randomize",
+                "group": "Texture",
+                "subType": "boolean"
+            },
+            {
                 "type": "2",
                 "name": "Texture Opacity",
                 "group": "Texture"
-            },
-            {
-                "type": "0",
-                "name": "Colorize Randomize",
-                "subType": "boolean"
             },
             {
                 "type": "2",

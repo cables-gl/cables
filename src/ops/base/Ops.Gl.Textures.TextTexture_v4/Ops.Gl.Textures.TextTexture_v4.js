@@ -1,3 +1,14 @@
+function componentToHex(c)
+{
+    const hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b)
+{
+    return "#" + componentToHex(Math.floor(r * 255)) + componentToHex(Math.floor(g * 255)) + componentToHex(Math.floor(b * 255));
+}
+
 const
     render = op.inTriggerButton("Render"),
     text = op.inString("text", "cables"),
@@ -50,6 +61,18 @@ align.onChange =
     texHeight.onChange =
     maximize.onChange = function () { needsRefresh = true; };
 
+r.onChange = g.onChange = b.onChange = inOpacity.onChange = function ()
+{
+    if (!drawMesh.get() || textureOut.isLinked())
+    {
+        needsRefresh = true;
+    }
+};
+textureOut.onLinkChanged = () =>
+{
+    if (textureOut.isLinked()) needsRefresh = true;
+};
+
 render.onTriggered = doRender;
 
 aniso.onChange =
@@ -83,23 +106,15 @@ const texUni = new CGL.Uniform(shader, "t", "tex");
 const aspectUni = new CGL.Uniform(shader, "f", "aspect", 0);
 const opacityUni = new CGL.Uniform(shader, "f", "a", inOpacity);
 const uniColor = new CGL.Uniform(shader, "3f", "color", r, g, b);
-
+// const uniformColor = new CGL.Uniform(shader, "4f", "")
 
 if (op.patch.isEditorMode()) CABLES.UI.SIMPLEWIREFRAMERECT = CABLES.UI.SIMPLEWIREFRAMERECT || new CGL.WireframeRect(cgl);
 
-if (cgl.glVersion == 1)
+if (cgl.glVersion < 2)
 {
     cgl.gl.getExtension("OES_standard_derivatives");
     shader.enableExtension("GL_OES_standard_derivatives");
 }
-
-op.patch.on("fontLoaded", (fontName) =>
-{
-    if (fontName == inFont.get())
-    {
-        needsRefresh = true;
-    }
-});
 
 renderHard.onChange = function ()
 {
@@ -179,7 +194,12 @@ function refresh()
     cgl.checkFrameStarted("texttrexture refresh");
 
     ctx.clearRect(0, 0, fontImage.width, fontImage.height);
-    ctx.fillStyle = "white";
+    const rgbString = "rgba(" + Math.floor(r.get() * 255) + ","
+        + Math.floor(g.get() * 255) + "," + Math.floor(b.get() * 255) + ","
+        + inOpacity.get() + ")";
+    // ctx.fillStyle = "white";
+    ctx.fillStyle = rgbString;
+    op.log("rgbstring", rgbString);
     let fontSize = parseFloat(inFontSize.get());
     let fontname = font.get();
     if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
@@ -189,7 +209,7 @@ function refresh()
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     let strings = txt.split("\n");
 
-    console.log("strings", strings);
+    // console.log("strings", strings);
 
     needsRefresh = false;
 
@@ -284,7 +304,6 @@ function refresh()
         let posx = 0;
         if (align.get() == "center") posx = ctx.canvas.width / 2;
         if (align.get() == "right") posx = ctx.canvas.width;
-        // if (align.get() == "left") posx= 0;
 
         ctx.fillText(strings[i], posx, posy);
 
@@ -311,12 +330,12 @@ function refresh()
         ctx.strokeRect(0, miny, ctx.canvas.width - 3, maxy - miny);
     }
 
-    console.log({
+    /* console.log({
         "lines": strings.length,
         posy,
         fontSize,
         "text_height": textHeight
-    });
+    }); */
 
     ctx.restore();
 

@@ -1,6 +1,6 @@
 const
     triggerAnim = op.inTriggerButton("Trigger animation"),
-    inText = op.inString("Text", "Pop-up <br> line 2"),
+    inText = op.inString("Text", "Hello! <br> This is a pop up"),
     inId = op.inString("Id", "popup"),
     inClass = op.inString("Class"),
     inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),

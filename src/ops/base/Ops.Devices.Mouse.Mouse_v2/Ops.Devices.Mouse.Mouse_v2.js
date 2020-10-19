@@ -9,8 +9,8 @@ const
     smooth = op.inValueBool("smooth"),
     smoothSpeed = op.inValueFloat("smoothSpeed", 20),
     multiply = op.inValueFloat("multiply", 1),
-    outMouseX = op.outValue("x"),
-    outMouseY = op.outValue("y"),
+    outMouseX = op.outValue("x", 0),
+    outMouseY = op.outValue("y", 0),
     mouseDown = op.outValueBool("button down"),
     mouseClick = op.outTrigger("click"),
     mouseUp = op.outTrigger("Button Up"),
@@ -36,13 +36,13 @@ function setValue(x, y)
             w = listenerElement.clientWidth / cgl.pixelDensity;
             h = listenerElement.clientHeight / cgl.pixelDensity;
         }
-        outMouseX.set((x / w * 2.0 - 1.0) * multiply.get());
-        outMouseY.set((y / h * 2.0 - 1.0) * multiply.get());
+        outMouseX.set(((x || 0) / w * 2.0 - 1.0) * multiply.get());
+        outMouseY.set(((y || 0) / h * 2.0 - 1.0) * multiply.get());
     }
     else
     {
-        outMouseX.set(x * multiply.get());
-        outMouseY.set(y * multiply.get());
+        outMouseX.set((x || 0) * multiply.get());
+        outMouseY.set((y || 0) * multiply.get());
     }
 }
 
