@@ -119,7 +119,11 @@ render.onTriggered = function ()
     mod.setUniformValue("MOD_viewPortH", vp[3]);
 
     mod.bind();
-    mod.pushTexture("MOD_tex", inTex.get().tex);
+    let tex = inTex.get();
+    if (!tex) tex = CGL.Texture.getEmptyTexture(cgl).tex;
+    else tex = tex.tex;
+
+    mod.pushTexture("MOD_tex", tex);
 
     next.trigger();
     mod.unbind();

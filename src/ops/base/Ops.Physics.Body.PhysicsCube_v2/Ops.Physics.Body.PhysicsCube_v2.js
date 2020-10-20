@@ -60,12 +60,12 @@ function setup(modelScale)
     shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
 
     body = new CANNON.Body({
-        "name": "test!!",
+        "name": inName.get(),
         "mass": inMass.get(), // kg
         "shape": shape
     });
 
-    body.name = inName.get();
+
     world.addBody(body);
 
     body.addEventListener("collide", function (e)
