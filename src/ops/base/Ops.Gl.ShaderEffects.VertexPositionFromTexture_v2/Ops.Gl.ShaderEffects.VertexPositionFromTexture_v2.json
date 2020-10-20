@@ -1,0 +1,45 @@
+{
+    "id": "30eea555-afda-456e-9c50-9a40b370fa1f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1602105139180
+        },
+        {
+            "message": "Ops.User.pandur.Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2 renamed to Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2",
+            "author": "pandur",
+            "date": 1602361099605
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1602105147043,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "2",
+                "name": "Texture"
+            },
+            {
+                "type": "0",
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Mode"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.User.pandur.Ops.Gl.ShaderEffects.VertexPositionFromTexture_v2"
+    }
+}
