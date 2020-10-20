@@ -1,0 +1,1 @@
+for this to work in default exported html, remove "position:absolute;" from styling of the canvas element.
