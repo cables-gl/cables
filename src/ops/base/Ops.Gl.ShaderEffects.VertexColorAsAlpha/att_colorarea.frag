@@ -10,10 +10,10 @@ float MOD_vca=1.0;
     MOD_vca=vertColor.r;
 #endif
 #ifdef MOD_INPUT_G
-    MOD_vca=vertColor.r;
+    MOD_vca=vertColor.g;
 #endif
 #ifdef MOD_INPUT_B
-    MOD_vca=vertColor.r;
+    MOD_vca=vertColor.b;
 #endif
 
 #ifdef MOD_INVERT

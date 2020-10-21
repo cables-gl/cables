@@ -44,6 +44,6 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.VertexColorAsAlpha"
+        "name": "Ops.Gl.ShaderEffects.VertexColorAsAlpha"
     }
 }
