@@ -16,6 +16,14 @@
             {
                 "type": "1",
                 "name": "Reset"
+            },
+            {
+                "type": "5",
+                "name": "Style Outer"
+            },
+            {
+                "type": "5",
+                "name": "Style Inner"
             }
         ],
         "portsOut": [
@@ -24,8 +32,16 @@
                 "name": "Next"
             },
             {
+                "type": "1",
+                "name": "Not Clicked"
+            },
+            {
                 "type": "5",
                 "name": "Audiocontext State"
+            },
+            {
+                "type": "2",
+                "name": "Element"
             },
             {
                 "type": "0",

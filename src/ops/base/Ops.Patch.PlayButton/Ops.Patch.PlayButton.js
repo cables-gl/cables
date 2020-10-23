@@ -2,8 +2,12 @@ const
     inExec = op.inTrigger("Trigger"),
     inIfSuspended = op.inValueBool("Only if Audio Suspended"),
     inReset = op.inTriggerButton("Reset"),
+    inStyleOuter = op.inStringEditor("Style Outer", attachments.outer_css),
+    inStyleInner = op.inStringEditor("Style Inner", attachments.inner_css),
     outNext = op.outTrigger("Next"),
+    notClickedNext = op.outTrigger("Not Clicked"),
     outState = op.outString("Audiocontext State"),
+    outEle = op.outObject("Element"),
     outClicked = op.outValueBool("Clicked", false),
     outClickedTrigger = op.outTrigger("Clicked Trigger");
 
@@ -15,40 +19,24 @@ let ele = null;
 let elePlay = null;
 createElements();
 
+inStyleOuter.onChange =
+    inStyleInner.onChange = createElements;
+
 function createElements()
 {
     if (elePlay) elePlay.remove();
     if (ele) ele.remove();
 
     ele = document.createElement("div");
-    elePlay = document.createElement("div");
-
-
-    ele.style.width = "100px";
-    ele.style.height = "100px";
-    ele.style.left = "50%";
-    ele.style.top = "25%";
-    ele.style["border-radius"] = "50px";
-    ele.style["margin-left"] = "-50px";
-    ele.style["margin-top"] = "-50px";
-    ele.style.position = "absolute";
-    ele.style.cursor = "pointer";
-    ele.style.opacity = 0.7;
-    ele.style["z-index"] = 999999;
-    ele.style["background-color"] = "rgba(55,55,55)";
-
-    elePlay.style["border-style"] = "solid";
-    elePlay.style["border-color"] = "transparent transparent transparent #ccc";
-    elePlay.style["box-sizing"] = "border-box";
-    elePlay.style.width = "50px";
-    elePlay.style.height = "50px";
-    elePlay.style["margin-top"] = "15px";
-    elePlay.style["margin-left"] = "33px";
-    elePlay.style["border-width"] = "35px 0px 35px 50px";
-    elePlay.style["pointer-events"] = "none";
-
+    ele.style = inStyleOuter.get();
+    outEle.set(ele);
     canvas.appendChild(ele);
+
+    elePlay = document.createElement("div");
+    elePlay.style = inStyleInner.get();
+
     ele.appendChild(elePlay);
+
     ele.addEventListener("mouseenter", hover);
     ele.addEventListener("mouseleave", hoverOut);
     ele.addEventListener("click", clicked);
@@ -72,6 +60,7 @@ inExec.onTriggered = function ()
 
     if (inIfSuspended.get() && window.audioContext.state == "running") clicked();
     if (wasClicked) outNext.trigger();
+    else notClickedNext.trigger();
 };
 
 function clicked()

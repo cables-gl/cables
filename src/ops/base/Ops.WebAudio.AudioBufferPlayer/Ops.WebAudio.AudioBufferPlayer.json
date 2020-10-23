@@ -44,6 +44,10 @@
                 "subType": "number"
             },
             {
+                "type": "1",
+                "name": "Restart"
+            },
+            {
                 "type": "0",
                 "name": "Playback Rate",
                 "subType": "number"
