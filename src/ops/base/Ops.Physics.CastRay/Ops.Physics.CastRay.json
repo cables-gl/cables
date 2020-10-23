@@ -151,10 +151,11 @@
         "cannon.js"
     ],
     "summary": "cast a ray and test intersection with physic bodies",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
-    "relatedops": null,
+    "relatedops": [
+        "Ops.Physics.PhysicsBodiesArray"
+    ],
     "docs": {
         "ports": [
             {
@@ -202,5 +203,6 @@
             "id": "6844885b-d287-4e56-ac71-6b4fc59ff2b2",
             "date": 1558347670614
         }
-    ]
+    ],
+    "youtubeids": []
 }

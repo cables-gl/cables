@@ -112,10 +112,6 @@
                 "text": "Pick which mesh is loaded with multiple meshes in one file"
             },
             {
-                "name": "Calculate Normals",
-                "text": "Mode to select if normals are calculated or not"
-            },
-            {
                 "name": "Resize",
                 "text": "Normalizes the size of a mesh to 1"
             },

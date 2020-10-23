@@ -51,7 +51,9 @@
     },
     "summary": "Write your own custom shader",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": [
         "Ops.Gl.Shader.Shader2Texture"
     ],

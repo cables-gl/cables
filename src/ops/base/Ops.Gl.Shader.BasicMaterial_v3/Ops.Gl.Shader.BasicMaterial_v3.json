@@ -54,6 +54,11 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Alpha Mask Source",
+                "group": "Opacity"
+            },
+            {
                 "type": "0",
                 "name": "Opacity TexCoords Transform",
                 "group": "Opacity",
@@ -115,7 +120,9 @@
     },
     "summary": "A material without shading",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": null,
     "youtubeids": [
         "F-CUdHq40Pc"

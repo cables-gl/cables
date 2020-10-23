@@ -1,5 +1,5 @@
 const cgl = op.patch.cgl;
-const id = "mod" + Math.floor(Math.random() * 10000);
+// const id = "mod" + Math.floor(Math.random() * 10000);
 
 op.render = op.inTrigger("render");
 op.trigger = op.outTrigger("trigger");
@@ -21,17 +21,17 @@ colorize.set(false);
 
 function updateColorize()
 {
-    if (shader) shader.toggleDefine(id + "HEIGHTMAP_COLORIZE", colorize.get());
+    if (shader) shader.toggleDefine("MOD_HEIGHTMAP_COLORIZE", colorize.get());
 }
 
 function updateInvert()
 {
-    if (shader) shader.toggleDefine(id + "HEIGHTMAP_INVERT", invert.get());
+    if (shader) shader.toggleDefine("MOD_HEIGHTMAP_INVERT", invert.get());
 }
 
 function updateRemoveZero()
 {
-    if (shader) shader.toggleDefine(id + "DISPLACE_REMOVE_ZERO", removeZero.get());
+    if (shader) shader.toggleDefine("MOD_DISPLACE_REMOVE_ZERO", removeZero.get());
 }
 
 colorize.onChange = updateColorize;
@@ -44,16 +44,16 @@ const updateMethod = function ()
     if (shader)
     {
         // if(flip.get()) shader.define(id+'FLIPY');
-        shader.toggleDefine(id + "FLIPY", flip.get());
-        shader.toggleDefine(id + "DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
-        shader.toggleDefine(id + "DISPLACE_METH_ADDZ", meth.get() == "add z");
-        shader.toggleDefine(id + "DISPLACE_METH_ADDY", meth.get() == "add y");
-        shader.toggleDefine(id + "DISPLACE_METH_ADDX", meth.get() == "add x");
-        shader.toggleDefine(id + "DISPLACE_METH_SUBX", meth.get() == "sub x");
-        shader.toggleDefine(id + "DISPLACE_METH_MULY", meth.get() == "mul y");
-        shader.toggleDefine(id + "DISPLACE_METH_MULZ", meth.get() == "mul z");
-        shader.toggleDefine(id + "DISPLACE_METH_NORMAL", meth.get() == "normal");
-        shader.toggleDefine(id + "DISPLACE_METH_NORMAL_XY", meth.get() == "normal xy");
+        shader.toggleDefine(moduleVert.prefix + "FLIPY", flip.get());
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_ADDZ", meth.get() == "add z");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_ADDY", meth.get() == "add y");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_ADDX", meth.get() == "add x");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_SUBX", meth.get() == "sub x");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_MULY", meth.get() == "mul y");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_MULZ", meth.get() == "mul z");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_NORMAL", meth.get() == "normal");
+        shader.toggleDefine(moduleVert.prefix + "DISPLACE_METH_NORMAL_XY", meth.get() == "normal xy");
 
         updateRemoveZero();
     }
@@ -73,75 +73,75 @@ const srcHeadVert = ""
     .endl() + "UNI float MOD_offsetX;"
     .endl() + "UNI float MOD_offsetY;"
 
-    .endl() + "OUT float " + id + "displHeightMapColor;"
+    .endl() + "OUT float MOD_displHeightMapColor;"
     .endl();
 
 const srcBodyVert = ""
 
 
-    .endl() + "vec2 MODtc=texCoord;"
-// .endl()+'vec2 MODtc=vec2(pos.x,pos.y);'
+    .endl() + "vec2 MOD_tc=texCoord;"
+// .endl()+'vec2 MOD_tc=vec2(pos.x,pos.y);'
 
-    .endl() + "#ifdef " + id + "FLIPY"
-    .endl() + "    MODtc.y=1.0-MODtc.y;"
+    .endl() + "#ifdef MOD_FLIPY"
+    .endl() + "    MOD_tc.y=1.0-MOD_tc.y;"
     .endl() + "#endif"
 
 
-    .endl() + "float MOD_texVal=texture2D( MOD_texture, vec2(MODtc.x+MOD_offsetX,MODtc.y+MOD_offsetY) ).b;"
+    .endl() + "float MOD_texVal=texture2D( MOD_texture, vec2(MOD_tc.x+MOD_offsetX,MOD_tc.y+MOD_offsetY) ).b;"
 
-    .endl() + "#ifdef " + id + "HEIGHTMAP_INVERT"
+    .endl() + "#ifdef MOD_HEIGHTMAP_INVERT"
     .endl() + "   MOD_texVal=1.0-MOD_texVal;"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_MULXYZ"
+    .endl() + "#ifdef MOD_DISPLACE_METH_MULXYZ"
     .endl() + "   MOD_texVal+=1.0;"
     .endl() + "   pos.xyz *= MOD_texVal * MOD_extrude;"
     // .endl()+'   norm=normalize(norm+normalize(pos.xyz+vec3(MOD_texVal)* MOD_extrude));'
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_ADDZ"
+    .endl() + "#ifdef MOD_DISPLACE_METH_ADDZ"
     .endl() + "   pos.z+=(MOD_texVal * MOD_extrude);"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_ADDY"
+    .endl() + "#ifdef MOD_DISPLACE_METH_ADDY"
     .endl() + "   pos.y+=(MOD_texVal * MOD_extrude);"
     .endl() + "#endif"
 
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_ADDX"
+    .endl() + "#ifdef MOD_DISPLACE_METH_ADDX"
     .endl() + "   pos.x+=(MOD_texVal * MOD_extrude);"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_SUBX"
+    .endl() + "#ifdef MOD_DISPLACE_METH_SUBX"
     .endl() + "   pos.x-=(MOD_texVal * MOD_extrude);"
     .endl() + "#endif"
 
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_MULY"
+    .endl() + "#ifdef MOD_DISPLACE_METH_MULY"
     .endl() + "   pos.y+=((MOD_texVal-0.5) * MOD_extrude);"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_MULZ"
+    .endl() + "#ifdef MOD_DISPLACE_METH_MULZ"
     .endl() + "   pos.z+=((MOD_texVal-0.5) * MOD_extrude);"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_NORMAL"
+    .endl() + "#ifdef MOD_DISPLACE_METH_NORMAL"
     .endl() + "   pos.xyz+=norm*MOD_texVal*MOD_extrude;"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_METH_NORMAL_XY"
+    .endl() + "#ifdef MOD_DISPLACE_METH_NORMAL_XY"
     .endl() + "   pos.xy+=(pos.xy*MOD_texVal*MOD_extrude).xy;"
     // .endl()+'   pos.x+=(norm*MOD_texVal*MOD_extrude).x;'
     .endl() + "#endif"
 
 
-    .endl() + "" + id + "displHeightMapColor=MOD_texVal;"
+    .endl() + "MOD_displHeightMapColor=MOD_texVal;"
 
     .endl();
 
 const srcHeadFrag = ""
     .endl() + "UNI float MOD_colorizeAdd;"
-    .endl() + "IN float " + id + "displHeightMapColor;"
+    .endl() + "IN float MOD_displHeightMapColor;"
     .endl() + "UNI sampler2D MOD_texture;"
 // .endl()+'IN vec3 vViewPosition;'
 
@@ -149,13 +149,13 @@ const srcHeadFrag = ""
 
 const srcBodyFrag = ""
 
-    .endl() + "#ifdef " + id + "HEIGHTMAP_COLORIZE"
-    .endl() + "   col.rgb*=" + id + "displHeightMapColor*(1.0-MOD_colorizeAdd);"
+    .endl() + "#ifdef MOD_HEIGHTMAP_COLORIZE"
+    .endl() + "   col.rgb*=MOD_displHeightMapColor*(1.0-MOD_colorizeAdd);"
     .endl() + "   col+=MOD_colorizeAdd;"
     .endl() + "#endif"
 
-    .endl() + "#ifdef " + id + "DISPLACE_REMOVE_ZERO"
-    .endl() + "if(" + id + "displHeightMapColor==0.0)discard;"
+    .endl() + "#ifdef MOD_DISPLACE_REMOVE_ZERO"
+    .endl() + "if(MOD_displHeightMapColor==0.0)discard;"
     .endl() + "#endif"
     .endl();
 
@@ -203,10 +203,10 @@ op.render.onTriggered = function ()
                 "srcBodyVert": srcBodyVert
             });
 
-        uniTexture = new CGL.Uniform(shader, "t", "MOD_texture", 0);
-        uniExtrude = new CGL.Uniform(shader, "f", "MOD_extrude", extrude);
-        uniOffsetX = new CGL.Uniform(shader, "f", "MOD_offsetX", offsetX);
-        uniOffsetY = new CGL.Uniform(shader, "f", "MOD_offsetY", offsetY);
+        uniTexture = new CGL.Uniform(shader, "t", moduleVert.prefix + "texture", 0);
+        uniExtrude = new CGL.Uniform(shader, "f", moduleVert.prefix + "extrude", extrude);
+        uniOffsetX = new CGL.Uniform(shader, "f", moduleVert.prefix + "offsetX", offsetX);
+        uniOffsetY = new CGL.Uniform(shader, "f", moduleVert.prefix + "offsetY", offsetY);
 
         moduleFrag = shader.addModule(
             {
@@ -215,8 +215,8 @@ op.render.onTriggered = function ()
                 "srcHeadFrag": srcHeadFrag,
                 "srcBodyFrag": srcBodyFrag
             });
-        uniTextureFrag = new CGL.Uniform(shader, "t", "MOD_texture", 0);
-        uniColorizeAdd = new CGL.Uniform(shader, "f", "MOD_colorizeAdd", colorizeAdd);
+        uniTextureFrag = new CGL.Uniform(shader, "t", moduleVert.prefix + "texture", 0);
+        uniColorizeAdd = new CGL.Uniform(shader, "f", moduleVert.prefix + "colorizeAdd", colorizeAdd);
 
         updateMethod();
         updateInvert();

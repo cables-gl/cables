@@ -78,12 +78,24 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
     chunk.size = dv.getUint32(offset + 0, le);
 
+
     // chunk.type = new TextDecoder("utf-8").decode(bArr.subarray(offset+4, offset+4+4));
     chunk.type = Utf8ArrayToStr(bArr.subarray(offset + 4, offset + 4 + 4));
 
     if (chunk.type == "BIN\0")
     {
+
+        // console.log(chunk.size,arrayBuffer.length,offset);
+        // try
+        // {
+
         chunk.dataView = new DataView(arrayBuffer, offset + 8, chunk.size);
+        // }
+        // catch(e)
+        // {
+        //     chunk.dataView = null;
+        //     console.log(e);
+        // }
     }
     else
     if (chunk.type == "JSON")
@@ -230,6 +242,9 @@ function parseGltf(arrayBuffer)
             // 5120 (BYTE)	1
             // 5121(UNSIGNED_BYTE)	1
             // 5122 (SHORT)	2
+
+            if(chunks[1].dataView)
+            {
             if (acc.componentType == 5126) // FLOAT
             {
                 stride = stride || 4;
@@ -261,6 +276,8 @@ function parseGltf(arrayBuffer)
             else
             {
                 console.error("unknown component type", acc.componentType);
+            }
+
             }
 
             gltf.accBuffers.push(dataBuff);

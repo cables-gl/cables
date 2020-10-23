@@ -125,7 +125,9 @@
     ],
     "summary": "Draw all vertices as points / circles",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": null,
     "youtubeids": [],
     "docs": {
