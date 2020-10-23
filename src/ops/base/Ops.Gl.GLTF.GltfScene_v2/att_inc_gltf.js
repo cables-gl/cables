@@ -84,7 +84,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
     if (chunk.type == "BIN\0")
     {
-
         // console.log(chunk.size,arrayBuffer.length,offset);
         // try
         // {
@@ -169,11 +168,11 @@ function loadAnims(gltf)
 
 function loadCams(gltf)
 {
-    if(!gltf || !gltf.json.cameras) return;
+    if (!gltf || !gltf.json.cameras) return;
 
-    for(var i=0;i<gltf.json.cameras.length;i++)
+    for (let i = 0; i < gltf.json.cameras.length; i++)
     {
-        gltf.cams.push(new gltfCamera(gltf,gltf.json.cameras[i]));
+        gltf.cams.push(new gltfCamera(gltf, gltf.json.cameras[i]));
     }
 }
 
@@ -241,46 +240,41 @@ function parseGltf(arrayBuffer)
             // 5120 (BYTE)	1
             // 5121(UNSIGNED_BYTE)	1
             // 5122 (SHORT)	2
-<<<<<<< HEAD
-            if (acc.componentType == 5126 || acc.componentType ==  5125) // 4byte FLOAT or INT
-=======
 
-            if(chunks[1].dataView)
+            if (chunks[1].dataView)
             {
-            if (acc.componentType == 5126) // FLOAT
->>>>>>> master
-            {
-                stride = stride || 4;
-                dataBuff = new Float32Array(num);
-
-                for (j = 0; j < num; j++)
+                if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
                 {
-                    dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+                    stride = stride || 4;
+                    dataBuff = new Float32Array(num);
 
-                    if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
-                    accPos += 4;
+                    for (j = 0; j < num; j++)
+                    {
+                        dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+
+                        if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
+                        accPos += 4;
+                    }
                 }
-            }
-            else if (acc.componentType == 5123) // UNSIGNED_SHORT
-            {
-                stride = stride || 2;
-
-                dataBuff = new Uint16Array(num);
-
-                for (j = 0; j < num; j++)
+                else if (acc.componentType == 5123) // UNSIGNED_SHORT
                 {
-                    dataBuff[j] = chunks[1].dataView.getUint16(accPos, le);
+                    stride = stride || 2;
 
-                    if (stride != 2 && (j + 1) % numComps === 0) accPos += stride - (numComps * 2);
+                    dataBuff = new Uint16Array(num);
 
-                    accPos += 2;
+                    for (j = 0; j < num; j++)
+                    {
+                        dataBuff[j] = chunks[1].dataView.getUint16(accPos, le);
+
+                        if (stride != 2 && (j + 1) % numComps === 0) accPos += stride - (numComps * 2);
+
+                        accPos += 2;
+                    }
                 }
-            }
-            else
-            {
-                console.error("unknown component type", acc.componentType);
-            }
-
+                else
+                {
+                    console.error("unknown component type", acc.componentType);
+                }
             }
 
             gltf.accBuffers.push(dataBuff);
