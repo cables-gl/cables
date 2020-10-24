@@ -9,6 +9,7 @@ const offsetPort = op.inValue("Offset", 0);
 const autoPlayPort = op.inValueBool("Autoplay", false);
 const loopPort = op.inValueBool("Loop", false);
 const detunePort = op.inValue("Detune", 0);
+const inResetStart = op.inTriggerButton("Restart");
 const playbackRatePort = op.inValue("Playback Rate", 1);
 
 // output ports
@@ -90,6 +91,20 @@ function setPlaybackRate()
     }
 }
 
+inResetStart.onTriggered = function ()
+{
+    if (source)
+    {
+        if (playPort.get())
+        {
+            stop(0);
+            setTimeout(function ()
+            {
+                start(0);
+            }, 30);
+        }
+    }
+};
 // functions
 function createAudioBufferSource()
 {

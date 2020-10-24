@@ -23,6 +23,10 @@
                 "type": "0",
                 "name": "Value False",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
             }
         ],
         "portsOut": [

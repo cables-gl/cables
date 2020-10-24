@@ -24,8 +24,8 @@ exec.onTriggered = function ()
     const xp = (trans[0] * vp[2] / 2) + vp[2] / 2;
     const yp = (trans[1] * vp[3] / 2) + vp[3] / 2;
 
-    x.set(xp);
-    y.set(yp);
+    x.set(xp / cgl.pixelDensity);
+    y.set(yp / cgl.pixelDensity);
 
     visi.set(pos[2] < 0.0 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3]);
 

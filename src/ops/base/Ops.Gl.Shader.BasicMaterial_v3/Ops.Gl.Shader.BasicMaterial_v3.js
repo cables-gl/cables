@@ -161,7 +161,7 @@ function updateDefines()
     shader.toggleDefine("DISCARDTRANS", discardTransPxl.get());
     shader.toggleDefine("BILLBOARD", doBillboard.get());
 
-    shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "Alpha Channel");
+    shader.toggleDefine("ALPHA_MASK_ALPHA", alphaMaskSource.get() == "A");
     shader.toggleDefine("ALPHA_MASK_LUMI", alphaMaskSource.get() == "Luminance");
     shader.toggleDefine("ALPHA_MASK_R", alphaMaskSource.get() == "R");
     shader.toggleDefine("ALPHA_MASK_G", alphaMaskSource.get() == "G");

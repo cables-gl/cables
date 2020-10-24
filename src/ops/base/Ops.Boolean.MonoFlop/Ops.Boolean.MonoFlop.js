@@ -1,22 +1,30 @@
 const
-    trigger=op.inTriggerButton("Trigger"),
-    duration=op.inValue("Duration",1),
-    valueTrue=op.inValue("Value True",1),
-    valueFalse=op.inValue("Value False",0),
-    outAct=op.outTrigger("Activated"),
-    result=op.outValue("Result",false);
+    trigger = op.inTriggerButton("Trigger"),
+    duration = op.inValue("Duration", 1),
+    valueTrue = op.inValue("Value True", 1),
+    valueFalse = op.inValue("Value False", 0),
+    resetButton = op.inTriggerButton("Reset"),
+    outAct = op.outTrigger("Activated"),
+    result = op.outValue("Result", false);
 
-var lastTimeout=-1;
+let lastTimeout = -1;
 
-trigger.onTriggered=function()
+resetButton.onTriggered = function ()
 {
-    if(result.get()==valueFalse.get())outAct.trigger();
-    result.set(valueTrue.get());
+    result.set(valueFalse.get());
 
     clearTimeout(lastTimeout);
-    lastTimeout=setTimeout(function()
+};
+
+trigger.onTriggered = function ()
+{
+    if (result.get() == valueFalse.get())outAct.trigger();
+    result.set(valueTrue.get());
+
+
+    clearTimeout(lastTimeout);
+    lastTimeout = setTimeout(function ()
     {
         result.set(valueFalse.get());
-    },duration.get()*1000);
-
+    }, duration.get() * 1000);
 };

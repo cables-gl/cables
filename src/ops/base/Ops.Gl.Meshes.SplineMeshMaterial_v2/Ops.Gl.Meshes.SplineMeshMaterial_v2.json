@@ -104,7 +104,9 @@
     },
     "summary": "material for splinemesh",
     "issues": "",
-    "collections": null,
+    "collections": [
+        "Material"
+    ],
     "relatedops": null,
     "youtubeids": [],
     "docs": {

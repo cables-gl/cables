@@ -170,9 +170,7 @@
         ]
     },
     "issues": "",
-    "collections": [
-        "Material"
-    ],
+    "collections": null,
     "relatedops": [
         "Ops.Gl.Meshes.PointCloudFromArray"
     ],
