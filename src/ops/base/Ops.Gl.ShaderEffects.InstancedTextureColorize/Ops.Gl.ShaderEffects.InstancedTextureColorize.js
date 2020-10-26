@@ -1,0 +1,54 @@
+const
+    inTrigger=op.inTrigger("Trigger"),
+    inTex=op.inTexture("Texture"),
+    inStrength=op.inFloatSlider("Strength",1),
+    inScale=op.inFloat("Scale",1),
+    inClamp=op.inBool("Clamp",false),
+    inDebug=op.inBool("Debug Bounds",false),
+    inOffsetX=op.inFloat("Offset X",0),
+    inOffsetY=op.inFloat("Offset Y",0),
+    next=op.outTrigger("Next");
+
+inTex.onChange=
+    inClamp.onChange=
+    inDebug.onChange=updateDefines;
+inTrigger.onTriggered=render;
+
+const cgl=op.patch.cgl;
+
+const mod = new CGL.ShaderModifier(cgl, op.name);
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_VERTEX_POSITION",
+    "srcHeadVert": attachments.displace_head_vert || "",
+    "srcBodyVert": attachments.displace_vert || ""
+});
+
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_COLOR",
+    "srcHeadFrag": attachments.colorize_head_frag,
+    "srcBodyFrag": attachments.colorize_frag
+});
+
+mod.addUniformVert("t", "MOD_texture", 0);
+mod.addUniformVert("2f", "MOD_offset", inOffsetX,inOffsetY);
+mod.addUniformVert("f", "MOD_scale", inScale);
+mod.addUniformVert("f", "MOD_strength", inStrength);
+
+function updateDefines()
+{
+    mod.toggleDefine("MOD_CLAMP",inClamp.get());
+    mod.toggleDefine("MOD_DEBUG",inDebug.get());
+}
+
+function render()
+{
+    mod.bind();
+
+    if (inTex.get()) mod.pushTexture("MOD_texture", inTex.get().tex);
+    else mod.pushTexture("MOD_texture", CGL.Texture.getEmptyTexture(cgl).tex);
+
+    next.trigger();
+    mod.unbind();
+}
