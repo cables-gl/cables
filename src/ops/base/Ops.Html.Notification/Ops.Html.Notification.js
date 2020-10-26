@@ -1,7 +1,6 @@
 const
     triggerAnim = op.inTriggerButton("Trigger animation"),
     inText = op.inString("Text", "Hello! <br> This is a pop up"),
-    inId = op.inString("Id", "popup"),
     inClass = op.inString("Class"),
     inStyle = op.inValueEditor("Style", attachments.defaultstyle_txt, "none"),
     inVisible = op.inValueBool("Active", true),
@@ -18,8 +17,10 @@ const
     outElement = op.outObject("DOM Element");
 
 op.setPortGroup("Animation", [fadeInDuration, holdDuration, fadeOutDuration]);
-op.setPortGroup("HTML CSS", [inText, inId, inClass, inStyle, inVisible, inBreaks]);
+op.setPortGroup("HTML CSS", [inText, inClass, inStyle, inVisible, inBreaks]);
 op.setPortGroup("Positioning", [percentOrPixel, divSide, startPosition, endPosition]);
+
+const divid = "notification_" + CABLES.uuid();
 
 // inStyle.setUiAttribs({editorSyntax:'css'});
 const listenerElement = null;
@@ -29,7 +30,7 @@ let prevDisplay = "block";
 
 const div = document.createElement("div");
 div.dataset.op = op.id;
-div.id = inId.get();
+div.id = divid;
 
 const canvas = op.patch.cgl.canvas.parentElement;
 
@@ -112,11 +113,6 @@ function updateClass()
     warning();
 }
 
-inId.onChange = function ()
-{
-    div.id = inId.get();
-};
-
 
 op.addEventListener("onEnabledChange", function (enabled)
 {
@@ -132,14 +128,14 @@ function warning()
 
 function popUpAnim()
 {
-    if (!inId.get() || !inVisible.get()) return;
+    if (!inVisible.get()) return;
 
     const mode = percentOrPixel.get();
     const start = startPosition.get() + mode;
     const end = endPosition.get() + mode;
 
 
-    const targetDiv = document.getElementById(inId.get());
+    const targetDiv = document.getElementById(divid);
     div.style.display = "block";
 
     const animData = {};
@@ -161,7 +157,7 @@ function startAnim(mode, start, end, animData)
     if (divSide.get() == "bottom") animData.bottom = [start, end];
     else animData.top = [start, end];
 
-    document.getElementById(inId.get()).animate(
+    document.getElementById(divid).animate(
         animData, fadeInDuration.get() * 1000).onfinish = function ()
     {
         holdAnim(mode, start, end, animData);
@@ -176,7 +172,7 @@ function holdAnim(mode, start, end, animData)
     if (divSide.get() == "bottom") animData.bottom = [end, end];
     else animData.top = [end, end];
 
-    document.getElementById(inId.get()).animate(
+    document.getElementById(divid).animate(
         animData, holdDuration.get() * 1000).onfinish =
     function ()
     {
@@ -192,7 +188,7 @@ function endAnim(mode, start, end, animData)
     if (divSide.get() == "bottom") animData.bottom = [end, start];
     else animData.top = [end, start];
 
-    document.getElementById(inId.get()).animate(
+    document.getElementById(divid).animate(
         animData, fadeOutDuration.get() * 1000).onfinish = function ()
     {
         div.style.display = "none";
