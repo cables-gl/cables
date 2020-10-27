@@ -76,6 +76,7 @@ container.appendChild(element);
 updateSize();
 updateOpened();
 updatePos();
+updateVisibility();
 
 op.onDelete = function ()
 {

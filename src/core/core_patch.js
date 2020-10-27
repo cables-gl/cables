@@ -481,6 +481,7 @@ Patch.prototype.removeOnAnimCallback = function (cb)
 
 Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 {
+    let found = false;
     for (const i in this.ops)
     {
         if (this.ops[i].id == opid)
@@ -491,6 +492,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
 
             if (op)
             {
+                found = true;
                 if (tryRelink)
                 {
                     if (this.ops[i].portsIn.length > 0 && this.ops[i].portsIn[0].isLinked() && (this.ops[i].portsOut.length > 0 && this.ops[i].portsOut[0].isLinked()))
@@ -528,6 +530,8 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
             }
         }
     }
+
+    if (!found)console.log("core patch deleteop: not found...");
 };
 
 Patch.prototype.getFrameNum = function ()

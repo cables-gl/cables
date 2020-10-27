@@ -51,6 +51,6 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.GltfMeshSequence"
+        "name": "Ops.Gl.GLTF.GltfMeshSequence"
     }
 }
