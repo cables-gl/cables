@@ -513,6 +513,22 @@ Anim.prototype.isRising = function (time)
 };
 
 /**
+ * remove all keys from animation before time
+ * @param {Number} time
+ * @memberof Anim
+ * @instance
+ * @function
+ */
+Anim.prototype.clearBefore = function (time)
+{
+    const v = this.getValue(time);
+    const ki = this.getKeyIndex(time);
+
+    this.setValue(time, v);
+
+    if (ki > 1) this.keys.splice(0, ki);
+};
+/**
  * remove all keys from animation
  * @param {Number} [time=0] set a new key at time with the old value at time
  * @memberof Anim
