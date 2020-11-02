@@ -20,6 +20,11 @@
             },
             {
                 "type": "0",
+                "name": "Depth Test Method",
+                "subType": "string"
+            },
+            {
+                "type": "0",
                 "name": "Write to depth buffer",
                 "subType": "boolean"
             }

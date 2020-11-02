@@ -59,7 +59,6 @@ const VarSetOpWrapper = class
 
         if (this._op.isCurrentUiOp())
         {
-            console.log("OP REFRESH PARAMS");
             this._op.refreshParams();
         }
     }

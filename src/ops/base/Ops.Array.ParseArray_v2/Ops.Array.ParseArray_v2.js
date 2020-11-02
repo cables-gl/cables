@@ -19,7 +19,10 @@ function parse()
         return;
     }
 
-    const r = text.get().split(separator.get());
+    const sep = separator.get();
+    if (separator.get() == "\\n")sep == "\n";
+    const r = text.get().split(sep);
+
 
     if (r[r.length - 1] === "") r.length -= 1;
 

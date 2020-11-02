@@ -1,5 +1,5 @@
 const learnedKeyCode = op.inValueInt("key code");
-const canvasOnly = op.inValueBool("canvas only");
+const canvasOnly = op.inValueBool("canvas only", true);
 const modKey = op.inValueSelect("Mod Key", ["none", "alt"], "none");
 const inEnable = op.inValueBool("Enabled", true);
 const preventDefault = op.inValueBool("Prevent Default");
@@ -134,5 +134,4 @@ canvasOnly.onChange = function ()
     addListener();
 };
 
-canvasOnly.set(true);
 addCanvasListener();

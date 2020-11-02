@@ -125,7 +125,7 @@
                 "name": "shader"
             }
         ],
-        "name": "Ops.Exp.Gl.PhongMaterial3"
+        "name": "Ops.Gl.Phong.PhongMaterial_v3"
     },
     "changelog": [
         {

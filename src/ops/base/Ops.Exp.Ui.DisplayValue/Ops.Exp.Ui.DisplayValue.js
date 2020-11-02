@@ -1,11 +1,15 @@
-const v=op.inValueFloat("value");
-const result=op.outValue("result");
+const v = op.inValueFloat("value");
+const result = op.outValue("result");
 
-v.onChange=exec;
+v.onChange = exec;
 
 function exec()
 {
-    op.setTitle(v.get());
+    let title = "Value";
+
+    if (v.isLinked())title = v.links[0].getOtherPort(v).name;
+
+    op.setUiAttrib({ "extendTitle": String(v.get()), "title": String(title) });
+
     result.set(v.get());
 }
-

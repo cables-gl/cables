@@ -464,6 +464,7 @@ export { ANIM };
  */
 const Anim = function (cfg)
 {
+    cfg = cfg || {};
     this.keys = [];
     this.onChange = null;
     this.stayInTimeline = false;
@@ -475,7 +476,7 @@ const Anim = function (cfg)
      * @instance
      * @type {Number}
      */
-    this.defaultEasing = CONSTANTS.ANIM.EASING_LINEAR;
+    this.defaultEasing = cfg.defaultEasing || CONSTANTS.ANIM.EASING_LINEAR;
     this.onLooped = null;
 
     this._timesLooped = 0;
