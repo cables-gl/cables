@@ -5,6 +5,11 @@ v.onChange = exec;
 
 function exec()
 {
-    op.setTitle(v.get());
+    let title = "Value";
+
+    if (v.isLinked())title = v.links[0].getOtherPort(v).name;
+
+    op.setUiAttrib({ "extendTitle": String(v.get()), "title": String(title) });
+
     result.set(v.get());
 }

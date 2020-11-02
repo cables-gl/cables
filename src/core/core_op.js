@@ -132,6 +132,7 @@ const Op = function ()
             this.uiAttribs[p] = newAttribs[p];
         }
 
+        if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
         this.fireEvent("onUiAttribsChange", newAttribs);
     };
     /**

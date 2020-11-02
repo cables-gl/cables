@@ -10,14 +10,6 @@ how to don't get binary merge conflicts:
 
 ### docs
 
-#### build gitbook doc:
-
-```
-cd doc/gitbook/
-npx gitbook build
-```
-static html outut: _book/
-
 #### build jsdoc
 
 ```
