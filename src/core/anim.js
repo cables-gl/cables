@@ -464,6 +464,7 @@ export { ANIM };
  */
 const Anim = function (cfg)
 {
+    cfg = cfg || {};
     this.keys = [];
     this.onChange = null;
     this.stayInTimeline = false;
@@ -475,7 +476,7 @@ const Anim = function (cfg)
      * @instance
      * @type {Number}
      */
-    this.defaultEasing = CONSTANTS.ANIM.EASING_LINEAR;
+    this.defaultEasing = cfg.defaultEasing || CONSTANTS.ANIM.EASING_LINEAR;
     this.onLooped = null;
 
     this._timesLooped = 0;
@@ -511,6 +512,22 @@ Anim.prototype.isRising = function (time)
     return false;
 };
 
+/**
+ * remove all keys from animation before time
+ * @param {Number} time
+ * @memberof Anim
+ * @instance
+ * @function
+ */
+Anim.prototype.clearBefore = function (time)
+{
+    const v = this.getValue(time);
+    const ki = this.getKeyIndex(time);
+
+    this.setValue(time, v);
+
+    if (ki > 1) this.keys.splice(0, ki);
+};
 /**
  * remove all keys from animation
  * @param {Number} [time=0] set a new key at time with the old value at time

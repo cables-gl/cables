@@ -76,6 +76,7 @@ void main()
     #endif
 
     vec4 pos = vec4(vPosition, 1.);
+    vec3 norm = attrVertNormal;
 
     {{MODULE_VERTEX_POSITION}}
 

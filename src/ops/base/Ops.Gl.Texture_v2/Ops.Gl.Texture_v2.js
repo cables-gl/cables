@@ -73,7 +73,7 @@ function realReload(nocache)
 
     let url = op.patch.getFilePath(String(filename.get()));
 
-    if (nocache)url += "?rnd=" + CABLES.generateUUID();
+    if (nocache)url += "?rnd=" + CABLES.uuid();
 
     if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
 

@@ -1,1 +1,0 @@
-!INCLUDE "timer.js.html"

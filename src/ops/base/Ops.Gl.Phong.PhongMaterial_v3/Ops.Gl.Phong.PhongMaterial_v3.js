@@ -1,104 +1,102 @@
-var execute=op.inTrigger("execute"),
+const execute = op.inTrigger("execute"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
     a = op.inValueSlider("a", 1.0);
-r.setUiAttribs({ colorPick: true });
+r.setUiAttribs({ "colorPick": true });
 
-const inFesnel=op.inValueSlider("Fesnel",0),
-    inShininess=op.inValueSlider("Specular Shininess",0.75),
-    inSpecAmount=op.inValueSlider("Specular Amount",0.5),
-    next=op.outTrigger("next");
+const inFesnel = op.inValueSlider("Fesnel", 0),
+    inShininess = op.inValueSlider("Specular Shininess", 0.75),
+    inSpecAmount = op.inValueSlider("Specular Amount", 0.5),
+    next = op.outTrigger("next");
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'PhongMaterial3');
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "PhongMaterial3");
 // shader.setModules(['MODULE_VERTEX_POSITION','MODULE_COLOR','MODULE_NORMAL','MODULE_BEGIN_FRAG']);
-shader.define('NUM_LIGHTS','1');
+shader.define("NUM_LIGHTS", "1");
 
-var shaderOut=op.outObject("shader");
+const shaderOut = op.outObject("shader");
 shaderOut.set(shader);
-shaderOut.ignoreValueSerialize=true;
+shaderOut.ignoreValueSerialize = true;
 
-r.uniform=new CGL.Uniform(shader,'f','r',r);
-g.uniform=new CGL.Uniform(shader,'f','g',g);
-b.uniform=new CGL.Uniform(shader,'f','b',b);
-a.uniform=new CGL.Uniform(shader,'f','a',a);
+r.uniform = new CGL.Uniform(shader, "f", "r", r);
+g.uniform = new CGL.Uniform(shader, "f", "g", g);
+b.uniform = new CGL.Uniform(shader, "f", "b", b);
+a.uniform = new CGL.Uniform(shader, "f", "a", a);
 
 a.set(1.0);
-var inColorize=op.inValueBool("Colorize Texture",false);
-var inDoubleSided=op.inValueBool("Double Sided",false);
+const inColorize = op.inValueBool("Colorize Texture", false);
+const inDoubleSided = op.inValueBool("Double Sided", false);
 
-inFesnel.uniform=new CGL.Uniform(shader,'f','fresnel',inFesnel);
-inShininess.uniform=new CGL.Uniform(shader,'f','specShininess',inShininess);
-inSpecAmount.uniform=new CGL.Uniform(shader,'f','specAmount',inSpecAmount);
+inFesnel.uniform = new CGL.Uniform(shader, "f", "fresnel", inFesnel);
+inShininess.uniform = new CGL.Uniform(shader, "f", "specShininess", inShininess);
+inSpecAmount.uniform = new CGL.Uniform(shader, "f", "specAmount", inSpecAmount);
 
-var MAX_LIGHTS=16;
-var lights=[];
-for(var i=0;i<MAX_LIGHTS;i++)
+const MAX_LIGHTS = 16;
+const lights = [];
+for (let i = 0; i < MAX_LIGHTS; i++)
 {
-    var count=i;
-    lights[count]={};
-    lights[count].pos=new CGL.Uniform(shader,'3f','lights['+count+'].pos',[0,11,0]);
-    lights[count].target=new CGL.Uniform(shader,'3f','lights['+count+'].target',[0,0,0]);
-    lights[count].color=new CGL.Uniform(shader,'3f','lights['+count+'].color',[1,1,1]);
-    lights[count].attenuation=new CGL.Uniform(shader,'f','lights['+count+'].attenuation',0.1);
-    lights[count].type=new CGL.Uniform(shader,'f','lights['+count+'].type',0);
-    lights[count].cone=new CGL.Uniform(shader,'f','lights['+count+'].cone',0.8);
-    lights[count].mul=new CGL.Uniform(shader,'f','lights['+count+'].mul',1);
+    const count = i;
+    lights[count] = {};
+    lights[count].pos = new CGL.Uniform(shader, "3f", "lights[" + count + "].pos", [0, 11, 0]);
+    lights[count].target = new CGL.Uniform(shader, "3f", "lights[" + count + "].target", [0, 0, 0]);
+    lights[count].color = new CGL.Uniform(shader, "3f", "lights[" + count + "].color", [1, 1, 1]);
+    lights[count].attenuation = new CGL.Uniform(shader, "f", "lights[" + count + "].attenuation", 0.1);
+    lights[count].type = new CGL.Uniform(shader, "f", "lights[" + count + "].type", 0);
+    lights[count].cone = new CGL.Uniform(shader, "f", "lights[" + count + "].cone", 0.8);
+    lights[count].mul = new CGL.Uniform(shader, "f", "lights[" + count + "].mul", 1);
 
-    lights[count].ambient=new CGL.Uniform(shader,'3f','lights['+count+'].ambient',1);
+    lights[count].ambient = new CGL.Uniform(shader, "3f", "lights[" + count + "].ambient", 1);
 
-    lights[count].fallOff=new CGL.Uniform(shader,'f','lights['+count+'].falloff',0);
-    lights[count].radius=new CGL.Uniform(shader,'f','lights['+count+'].radius',10);
+    lights[count].fallOff = new CGL.Uniform(shader, "f", "lights[" + count + "].falloff", 0);
+    lights[count].radius = new CGL.Uniform(shader, "f", "lights[" + count + "].radius", 10);
 }
 
-shader.setSource(attachments.phong_vert,attachments.phong_frag);
+shader.setSource(attachments.phong_vert, attachments.phong_frag);
 
-var numLights=-1;
-var updateLights=function()
+let numLights = -1;
+const updateLights = function ()
 {
-    var count=0;
-    var i=0;
-    var num=0;
-    if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    let count = 0;
+    let i = 0;
+    let num = 0;
+    if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
     {
-        num=0;
+        num = 0;
     }
     else
     {
-        for(i in cgl.frameStore.phong.lights)
+        for (i in cgl.frameStore.phong.lights)
         {
             num++;
         }
     }
 
-    if(num!=numLights)
+    if (num != numLights)
     {
-        numLights=num;
-        shader.define('NUM_LIGHTS',''+Math.max(numLights,1));
+        numLights = num;
+        shader.define("NUM_LIGHTS", "" + Math.max(numLights, 1));
     }
 
-    if(!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
+    if (!cgl.frameStore.phong || !cgl.frameStore.phong.lights)
     {
-        lights[count].pos.setValue([5,5,5]);
-        lights[count].color.setValue([1,1,1]);
-        lights[count].ambient.setValue([0.1,0.1,0.1]);
+        lights[count].pos.setValue([5, 5, 5]);
+        lights[count].color.setValue([1, 1, 1]);
+        lights[count].ambient.setValue([0.1, 0.1, 0.1]);
         lights[count].mul.setValue(1);
         lights[count].fallOff.setValue(0.5);
-
-
     }
     else
     {
-        count=0;
-        if(shader)
-            for(i in cgl.frameStore.phong.lights)
+        count = 0;
+        if (shader)
+            for (i in cgl.frameStore.phong.lights)
             {
                 lights[count].pos.setValue(cgl.frameStore.phong.lights[i].pos);
                 // if(cgl.frameStore.phong.lights[i].changed)
                 {
-                    cgl.frameStore.phong.lights[i].changed=false;
-                    if(cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
+                    cgl.frameStore.phong.lights[i].changed = false;
+                    if (cgl.frameStore.phong.lights[i].target) lights[count].target.setValue(cgl.frameStore.phong.lights[i].target);
 
                     lights[count].fallOff.setValue(cgl.frameStore.phong.lights[i].fallOff);
                     lights[count].radius.setValue(cgl.frameStore.phong.lights[i].radius);
@@ -108,10 +106,10 @@ var updateLights=function()
                     // lights[count].specular.setValue(cgl.frameStore.phong.lights[i].specular);
                     lights[count].attenuation.setValue(cgl.frameStore.phong.lights[i].attenuation);
                     lights[count].type.setValue(cgl.frameStore.phong.lights[i].type);
-                    if(cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
-                    if(cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex=cgl.frameStore.phong.lights[i].depthTex;
+                    if (cgl.frameStore.phong.lights[i].cone) lights[count].cone.setValue(cgl.frameStore.phong.lights[i].cone);
+                    if (cgl.frameStore.phong.lights[i].depthTex) lights[count].texDepthTex = cgl.frameStore.phong.lights[i].depthTex;
 
-                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul||1);
+                    lights[count].mul.setValue(cgl.frameStore.phong.lights[i].mul || 1);
                 }
 
                 count++;
@@ -120,141 +118,139 @@ var updateLights=function()
 };
 
 
-
-inColorize.onChange=function()
+inColorize.onChange = function ()
 {
-    if(inColorize.get()) shader.define('COLORIZE_TEXTURE');
-        else shader.removeDefine('COLORIZE_TEXTURE');
+    if (inColorize.get()) shader.define("COLORIZE_TEXTURE");
+    else shader.removeDefine("COLORIZE_TEXTURE");
 };
 
-inDoubleSided.onChange=function()
+inDoubleSided.onChange = function ()
 {
-    if(inDoubleSided.get()) shader.define('DOUBLESIDED');
-        else shader.removeDefine('DOUBLESIDED');
+    if (inDoubleSided.get()) shader.define("DOUBLESIDED");
+    else shader.removeDefine("DOUBLESIDED");
 };
 
 
 function texturingChanged()
 {
-    if(diffuseTexture.get() || normalTexture.get() || specTexture.get()|| aoTexture.get()|| emissiveTexture.get())
+    if (diffuseTexture.get() || normalTexture.get() || specTexture.get() || aoTexture.get() || emissiveTexture.get())
     {
-        shader.define('HAS_TEXTURES');
+        shader.define("HAS_TEXTURES");
     }
     else
     {
-        shader.removeDefine('HAS_TEXTURES');
+        shader.removeDefine("HAS_TEXTURES");
     }
 }
 
 
 // diffuse texture
-var diffuseTexture=op.inTexture("Diffuse Texture");
-var diffuseTextureUniform=null;
-shader.bindTextures=bindTextures;
+var diffuseTexture = op.inTexture("Diffuse Texture");
+let diffuseTextureUniform = null;
+shader.bindTextures = bindTextures;
 
-diffuseTexture.onChange=function()
+diffuseTexture.onChange = function ()
 {
     texturingChanged();
-    if(diffuseTexture.get())
+    if (diffuseTexture.get())
     {
-        if(diffuseTextureUniform!==null)return;
-        shader.removeUniform('texDiffuse');
-        shader.define('HAS_TEXTURE_DIFFUSE');
-        diffuseTextureUniform=new CGL.Uniform(shader,'t','texDiffuse',0);
+        if (diffuseTextureUniform !== null) return;
+        shader.removeUniform("texDiffuse");
+        shader.define("HAS_TEXTURE_DIFFUSE");
+        diffuseTextureUniform = new CGL.Uniform(shader, "t", "texDiffuse", 0);
     }
     else
     {
-        shader.removeUniform('texDiffuse');
-        shader.removeDefine('HAS_TEXTURE_DIFFUSE');
-        diffuseTextureUniform=null;
+        shader.removeUniform("texDiffuse");
+        shader.removeDefine("HAS_TEXTURE_DIFFUSE");
+        diffuseTextureUniform = null;
     }
 };
 
 // normal texture
-var normalTexture=op.inTexture("Normal Texture");
-var normalTextureUniform=null;
+var normalTexture = op.inTexture("Normal Texture");
+let normalTextureUniform = null;
 
-normalTexture.onChange=function()
+normalTexture.onChange = function ()
 {
     texturingChanged();
-    if(normalTexture.get())
+    if (normalTexture.get())
     {
-        if(normalTextureUniform!==null)return;
-        shader.removeUniform('texNormal');
-        shader.define('HAS_TEXTURE_NORMAL');
-        normalTextureUniform=new CGL.Uniform(shader,'t','texNormal',3);
+        if (normalTextureUniform !== null) return;
+        shader.removeUniform("texNormal");
+        shader.define("HAS_TEXTURE_NORMAL");
+        normalTextureUniform = new CGL.Uniform(shader, "t", "texNormal", 3);
     }
     else
     {
-        shader.removeUniform('texNormal');
-        shader.removeDefine('HAS_TEXTURE_NORMAL');
-        normalTextureUniform=null;
+        shader.removeUniform("texNormal");
+        shader.removeDefine("HAS_TEXTURE_NORMAL");
+        normalTextureUniform = null;
     }
 };
 
 // specular texture
-var specTexture=op.inTexture("Specular Texture");
-var specTextureUniform=null;
+var specTexture = op.inTexture("Specular Texture");
+let specTextureUniform = null;
 
-specTexture.onChange=function()
+specTexture.onChange = function ()
 {
-    if(specTexture.get())
+    if (specTexture.get())
     {
-        if(specTextureUniform!==null)return;
-        shader.removeUniform('texSpecular');
-        shader.define('HAS_TEXTURE_SPECULAR');
-        specTextureUniform=new CGL.Uniform(shader,'t','texSpecular',2);
+        if (specTextureUniform !== null) return;
+        shader.removeUniform("texSpecular");
+        shader.define("HAS_TEXTURE_SPECULAR");
+        specTextureUniform = new CGL.Uniform(shader, "t", "texSpecular", 2);
     }
     else
     {
-        shader.removeUniform('texSpecular');
-        shader.removeDefine('HAS_TEXTURE_SPECULAR');
-        specTextureUniform=null;
+        shader.removeUniform("texSpecular");
+        shader.removeDefine("HAS_TEXTURE_SPECULAR");
+        specTextureUniform = null;
     }
 };
 
 // ao texture
-var aoTexture=op.inTexture("AO Texture");
-var aoTextureUniform=null;
-aoTexture.ignoreValueSerialize=true;
-shader.bindTextures=bindTextures;
+var aoTexture = op.inTexture("AO Texture");
+let aoTextureUniform = null;
+aoTexture.ignoreValueSerialize = true;
+shader.bindTextures = bindTextures;
 
-aoTexture.onChange=function()
+aoTexture.onChange = function ()
 {
-    if(aoTexture.get())
+    if (aoTexture.get())
     {
-        if(aoTextureUniform!==null)return;
-        shader.removeUniform('texAo');
-        shader.define('HAS_TEXTURE_AO');
-        aoTextureUniform=new CGL.Uniform(shader,'t','texAo',1);
+        if (aoTextureUniform !== null) return;
+        shader.removeUniform("texAo");
+        shader.define("HAS_TEXTURE_AO");
+        aoTextureUniform = new CGL.Uniform(shader, "t", "texAo", 1);
     }
     else
     {
-        shader.removeUniform('texAo');
-        shader.removeDefine('HAS_TEXTURE_AO');
-        aoTextureUniform=null;
+        shader.removeUniform("texAo");
+        shader.removeDefine("HAS_TEXTURE_AO");
+        aoTextureUniform = null;
     }
 };
 
 // emissive texture
-var emissiveTexture=op.inTexture("Emissive Texture");
-emissiveTexture.uniform=new CGL.Uniform(shader,'t','texEmissive',4);
-emissiveTexture.ignoreValueSerialize=true;
-shader.bindTextures=bindTextures;
+var emissiveTexture = op.inTexture("Emissive Texture");
+emissiveTexture.uniform = new CGL.Uniform(shader, "t", "texEmissive", 4);
+emissiveTexture.ignoreValueSerialize = true;
+shader.bindTextures = bindTextures;
 
-emissiveTexture.onChange=function()
+emissiveTexture.onChange = function ()
 {
-    if(emissiveTexture.get())
+    if (emissiveTexture.get())
     {
         // if(aoTextureUniform!==null)return;
         // shader.removeUniform('texEmissive');
-        shader.define('HAS_TEXTURE_EMISSIVE');
-
+        shader.define("HAS_TEXTURE_EMISSIVE");
     }
     else
     {
         // shader.removeUniform('texAo');
-        shader.removeDefine('HAS_TEXTURE_EMISSIVE');
+        shader.removeDefine("HAS_TEXTURE_EMISSIVE");
         // aoTextureUniform=null;
     }
 };
@@ -262,116 +258,113 @@ emissiveTexture.onChange=function()
 
 function bindTextures()
 {
-    if(diffuseTexture.get())
+    if (diffuseTexture.get())
     {
-        cgl.setTexture(0,diffuseTexture.get().tex);
+        cgl.setTexture(0, diffuseTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, diffuseTexture.get().tex);
     }
 
-    if(aoTexture.get())
+    if (aoTexture.get())
     {
-        cgl.setTexture(1,aoTexture.get().tex);
+        cgl.setTexture(1, aoTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, aoTexture.get().tex);
     }
 
-    if(specTexture.get())
+    if (specTexture.get())
     {
-        cgl.setTexture(2,specTexture.get().tex);
+        cgl.setTexture(2, specTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, specTexture.get().tex);
     }
 
-    if(normalTexture.get())
+    if (normalTexture.get())
     {
-        cgl.setTexture(3,normalTexture.get().tex);
+        cgl.setTexture(3, normalTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, normalTexture.get().tex);
     }
 
-    if(emissiveTexture.get())
+    if (emissiveTexture.get())
     {
-        cgl.setTexture(4,emissiveTexture.get().tex);
+        cgl.setTexture(4, emissiveTexture.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, emissiveTexture.get().tex);
     }
-
 }
 
 
-var toggleLambert=op.inValueBool("Toggle Light Shading",true);
-toggleLambert.setUiAttribs({"hidePort":true});
-toggleLambert.onChange=updateToggles;
+const toggleLambert = op.inValueBool("Toggle Light Shading", true);
+toggleLambert.setUiAttribs({ "hidePort": true });
+toggleLambert.onChange = updateToggles;
 
-var toggleDiffuse=op.inValueBool("Toggle Diffuse Texture",true);
-toggleDiffuse.setUiAttribs({"hidePort":true});
-toggleDiffuse.onChange=updateToggles;
+const toggleDiffuse = op.inValueBool("Toggle Diffuse Texture", true);
+toggleDiffuse.setUiAttribs({ "hidePort": true });
+toggleDiffuse.onChange = updateToggles;
 
-var toggleNormal=op.inValueBool("Toggle Normal Texture",true);
-toggleNormal.setUiAttribs({"hidePort":true});
-toggleNormal.onChange=updateToggles;
+const toggleNormal = op.inValueBool("Toggle Normal Texture", true);
+toggleNormal.setUiAttribs({ "hidePort": true });
+toggleNormal.onChange = updateToggles;
 
 
 // var toggleSpecular=op.inValueBool("Toggle Specular",true);
 // toggleSpecular.setUiAttribs({"hidePort":true});
 // toggleSpecular.onChange=updateToggles;
 
-var toggleAo=op.inValueBool("Toggle Ao Texture",true);
-toggleAo.setUiAttribs({"hidePort":true});
-toggleAo.onChange=updateToggles;
+const toggleAo = op.inValueBool("Toggle Ao Texture", true);
+toggleAo.setUiAttribs({ "hidePort": true });
+toggleAo.onChange = updateToggles;
 
-var toggleFalloff=op.inValueBool("Toggle Falloff",true);
-toggleFalloff.setUiAttribs({"hidePort":true});
-toggleFalloff.onChange=updateToggles;
+const toggleFalloff = op.inValueBool("Toggle Falloff", true);
+toggleFalloff.setUiAttribs({ "hidePort": true });
+toggleFalloff.onChange = updateToggles;
 
-var toggleEmissive=op.inValueBool("Toggle Emissive",true);
-toggleEmissive.setUiAttribs({"hidePort":true});
-toggleEmissive.onChange=updateToggles;
+const toggleEmissive = op.inValueBool("Toggle Emissive", true);
+toggleEmissive.setUiAttribs({ "hidePort": true });
+toggleEmissive.onChange = updateToggles;
 
 
-var toggleSpecular=op.inValueBool("Toggle Specular",true);
-toggleSpecular.setUiAttribs({"hidePort":true});
-toggleSpecular.onChange=updateToggles;
+const toggleSpecular = op.inValueBool("Toggle Specular", true);
+toggleSpecular.setUiAttribs({ "hidePort": true });
+toggleSpecular.onChange = updateToggles;
 
-var toggleFresnel=op.inValueBool("Toggle Fresnel",true);
-toggleFresnel.setUiAttribs({"hidePort":true});
-toggleFresnel.onChange=updateToggles;
+const toggleFresnel = op.inValueBool("Toggle Fresnel", true);
+toggleFresnel.setUiAttribs({ "hidePort": true });
+toggleFresnel.onChange = updateToggles;
 
 
 function updateToggles()
 {
-    if(toggleLambert.get())shader.define("SHOW_LAMBERT");
-        else shader.removeDefine("SHOW_LAMBERT");
+    if (toggleLambert.get())shader.define("SHOW_LAMBERT");
+    else shader.removeDefine("SHOW_LAMBERT");
 
-    if(toggleDiffuse.get())shader.define("SHOW_DIFFUSE");
-        else shader.removeDefine("SHOW_DIFFUSE");
+    if (toggleDiffuse.get())shader.define("SHOW_DIFFUSE");
+    else shader.removeDefine("SHOW_DIFFUSE");
 
-    if(toggleSpecular.get())shader.define("SHOW_SPECULAR");
-        else shader.removeDefine("SHOW_SPECULAR");
+    if (toggleSpecular.get())shader.define("SHOW_SPECULAR");
+    else shader.removeDefine("SHOW_SPECULAR");
 
-    if(toggleNormal.get())shader.define("SHOW_NORMAL");
-        else shader.removeDefine("SHOW_NORMAL");
+    if (toggleNormal.get())shader.define("SHOW_NORMAL");
+    else shader.removeDefine("SHOW_NORMAL");
 
-    if(toggleAo.get())shader.define("SHOW_AO");
-        else shader.removeDefine("SHOW_AO");
+    if (toggleAo.get())shader.define("SHOW_AO");
+    else shader.removeDefine("SHOW_AO");
 
-    if(toggleFalloff.get())shader.define("SHOW_FALLOFF");
-        else shader.removeDefine("SHOW_FALLOFF");
+    if (toggleFalloff.get())shader.define("SHOW_FALLOFF");
+    else shader.removeDefine("SHOW_FALLOFF");
 
-    if(toggleEmissive.get())shader.define("SHOW_EMISSIVE");
-        else shader.removeDefine("SHOW_EMISSIVE");
+    if (toggleEmissive.get())shader.define("SHOW_EMISSIVE");
+    else shader.removeDefine("SHOW_EMISSIVE");
 
-    if(toggleFresnel.get())shader.define("ENABLE_FRESNEL");
-        else shader.removeDefine("ENABLE_FRESNEL");
+    if (toggleFresnel.get())shader.define("ENABLE_FRESNEL");
+    else shader.removeDefine("ENABLE_FRESNEL");
 
-    if(toggleSpecular.get())shader.define("ENABLE_SPECULAR");
-        else shader.removeDefine("ENABLE_SPECULAR");
-
-
+    if (toggleSpecular.get())shader.define("ENABLE_SPECULAR");
+    else shader.removeDefine("ENABLE_SPECULAR");
 }
 
 updateToggles();
 
-op.preRender=
-execute.onTriggered=function()
+op.preRender =
+execute.onTriggered = function ()
 {
-    if(!shader)return;
+    if (!shader) return;
 
     cgl.pushShader(shader);
     updateLights();
