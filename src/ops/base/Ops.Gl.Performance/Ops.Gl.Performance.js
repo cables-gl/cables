@@ -313,26 +313,7 @@ function updateText()
         element.innerHTML += " all shader compiletime: " + Math.round(CGL.profileData.shaderCompileTime * 100) / 100;
     }
 
-    CGL.profileData.profileUniformCount = 0;
-    CGL.profileData.profileShaderGetUniform = 0;
-    CGL.profileData.profileShaderCompiles = 0;
-    CGL.profileData.profileShaderBinds = 0;
-    CGL.profileData.profileTextureResize = 0;
-    CGL.profileData.profileFrameBuffercreate = 0;
-    CGL.profileData.profileEffectBuffercreate = 0;
-    CGL.profileData.profileTextureDelete = 0;
-    CGL.profileData.profileMeshSetGeom = 0;
-    CGL.profileData.profileVideosPlaying = 0;
-    CGL.profileData.profileMVPMatrixCount = 0;
-    CGL.profileData.profileNonTypedAttrib = 0;
-    CGL.profileData.profileNonTypedAttribNames = "";
-    CGL.profileData.profileTextureNew = 0;
-    CGL.profileData.profileGenMipMap = 0;
-    CGL.profileData.profileFramebuffer = 0;
-    CGL.profileData.profileMeshDraw = 0;
-    CGL.profileData.profileTextureEffect = 0;
-    CGL.profileData.profileTexPreviews = 0;
-    CGL.profileData.profileMeshNumElements = 0;
+    CGL.profileData.clear();
 }
 
 function styleMeasureEle(ele)
@@ -459,7 +440,7 @@ exe.onTriggered = function ()
     {
         fps = frameCount;
         frameCount = 0;
-        frames = 0;
+        // frames = 0;
         outFPS.set(fps);
         if (inShow.get())updateText();
 

@@ -1,54 +1,47 @@
-var inIndex=op.inValue("Index Position");
-var inArr=op.inArray("Array");
+const inIndex = op.inValue("Index Position");
+const inArr = op.inArray("Array");
 
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
+const outX = op.outValue("X");
+const outY = op.outValue("Y");
+const outZ = op.outValue("Z");
 
-inIndex.onChange=inArr.onChange=function()
+inIndex.onChange = inArr.onChange = function ()
 {
-    var i=inIndex.get();
+    let i = inIndex.get();
+    const arr = inArr.get();
 
-
-
-    var fr=inIndex.get()-Math.floor(inIndex.get());
-    var arr=inArr.get();
-
-    if(i<0 || !arr)
+    if (i < 0 || !arr)
     {
         return;
     }
 
-    i=Math.floor((inIndex.get()))*3;
-    i=i%(arr.length);
-    // i=i%(arr.length/3);
-    // console.log(i);
+    const maxIdx = Math.floor((arr.length / 3) - 1);
+    const intIdx = Math.floor(inIndex.get());
+    if (intIdx == maxIdx)
+    {
+        outX.set(arr[arr.length - 3]);
+        outY.set(arr[arr.length - 2]);
+        outZ.set(arr[arr.length - 1]);
+        return;
+    }
 
+    const fr = inIndex.get() - Math.floor(inIndex.get());
+    i = Math.floor((inIndex.get())) * 3;
+    i %= (arr.length);
 
-    // if(i>arr.length-3)
-    // {
-    //     outX.set(arr[arr.length-1]);
-    //     outY.set(arr[arr.length-2]);
-    //     outZ.set(arr[arr.length-3]);
-    //     return;
-    // }
+    let x = arr[i + 0];
+    let y = arr[i + 1];
+    let z = arr[i + 2];
 
+    const x2 = arr[i + 3];
+    const y2 = arr[i + 4];
+    const z2 = arr[i + 5];
 
-    var x=arr[i+0];
-    var y=arr[i+1];
-    var z=arr[i+2];
-
-    var x2=arr[i+3];
-    var y2=arr[i+4];
-    var z2=arr[i+5];
-
-
-    x=x+ (x2 - x) * fr;
-    y=y+ (y2 - y) * fr;
-    z=z+ (z2 - z) * fr;
+    x += (x2 - x) * fr;
+    y += (y2 - y) * fr;
+    z += (z2 - z) * fr;
 
     outX.set(x);
     outY.set(y);
     outZ.set(z);
-
 };

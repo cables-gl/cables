@@ -109,6 +109,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
 
+    profileData.profileMeshAttributes += (end - start) || 0;
     // void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);
     // void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
 
@@ -173,7 +174,9 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     let i = 0;
     const numItems = array.length / itemSize;
 
-    if (numItems === 0) console.warn("CGL_MESH: num items in attribute " + name + " is ZERO");
+    profileData.profileMeshAttributes += numItems || 0;
+
+    if (numItems === 0) console.warn("CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
 
     if (typeof options == "function")
     {
@@ -196,6 +199,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
             this._attributes[i].numItems = numItems;
 
             this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
+
             // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
             this._bufferArray(array, this._attributes[i]);
 
