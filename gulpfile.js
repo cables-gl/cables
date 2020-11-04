@@ -7,26 +7,12 @@ const clean = require("gulp-clean");
 const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
-exports.default = exports.watch = gulp.series(
-    gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
-    _core_libs_clean,
-    gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin),
-    _core_libs_copy,
-    _watch
-);
-
-exports.build = gulp.series(
-    gulp.parallel(taskExtentalLibs, taskCoreJsMax, taskCoreJsMin, taskCoreJsMaxBabel, taskCoreJsMinBabel),
-    _core_libs_clean,
-    gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin),
-    _core_libs_copy
-);
 
 function _watch()
 {
-    gulp.watch("src/core/**/*", gulp.parallel(taskCoreJsMax, taskCoreJsMin));
-    gulp.watch("libs/**/*", gulp.parallel(taskExtentalLibs));
-    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(taskCoreLibsJsMax, taskCoreLibsJsMin), _core_libs_copy));
+    gulp.watch("src/core/**/*", gulp.parallel(_corejs_max, _corejs_min));
+    gulp.watch("libs/**/*", gulp.parallel(_external_libs));
+    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _core_libs_copy));
 }
 
 function _core_libs_clean()
@@ -39,7 +25,7 @@ function _core_libs_copy()
     return gulp.src("build/libs/*.js").pipe(gulp.dest("../cables_api/public/libs_core/"));
 }
 
-function taskExtentalLibs()
+function _external_libs()
 {
     return (
         gulp
@@ -54,7 +40,7 @@ function taskExtentalLibs()
     );
 }
 
-function taskCoreJsMax()
+function _corejs_max()
 {
     return new Promise((resolve, reject) =>
     {
@@ -84,7 +70,7 @@ function taskCoreJsMax()
     });
 }
 
-function taskCoreJsMaxBabel()
+function _corejs_max_babel()
 {
     return new Promise((resolve, reject) =>
     {
@@ -114,7 +100,7 @@ function taskCoreJsMaxBabel()
     });
 }
 
-function taskCoreJsMin()
+function _corejs_min()
 {
     return new Promise((resolve, reject) =>
     {
@@ -145,7 +131,7 @@ function taskCoreJsMin()
     });
 }
 
-function taskCoreJsMinBabel()
+function _corejs_min_babel()
 {
     return new Promise((resolve, reject) =>
     {
@@ -176,7 +162,7 @@ function taskCoreJsMinBabel()
     });
 }
 
-function taskCoreLibsJsMax()
+function _corelibsjs_max()
 {
     return gulp.src(["src/libs/**/*"])
         .pipe(
@@ -202,7 +188,7 @@ function taskCoreLibsJsMax()
         });
 }
 
-function taskCoreLibsJsMin()
+function _corelibsjs_min()
 {
     return gulp.src(["src/libs/**/*"])
         .pipe(
@@ -227,3 +213,59 @@ function taskCoreLibsJsMin()
             console.error("WEBPACK ERROR", err);
         });
 }
+
+/*
+ * -------------------------------------------------------------------------------------------
+ * MAIN TASKS
+ * -------------------------------------------------------------------------------------------
+ */
+
+gulp.task("default", gulp.series(
+    gulp.parallel(
+        _external_libs,
+        _corejs_max,
+        _corejs_min,
+        _corejs_max_babel,
+        _corejs_min_babel
+    ),
+    _core_libs_clean,
+    gulp.parallel(
+        _corelibsjs_max,
+        _corelibsjs_min
+    ),
+    _core_libs_copy,
+    _watch
+));
+
+gulp.task("watch", gulp.series(
+    gulp.parallel(
+        _external_libs,
+        _corejs_max,
+        _corejs_min,
+        _corejs_max_babel,
+        _corejs_min_babel
+    ),
+    _core_libs_clean,
+    gulp.parallel(
+        _corelibsjs_max,
+        _corelibsjs_min
+    ),
+    _core_libs_copy,
+    _watch
+));
+
+gulp.task("build", gulp.series(
+    gulp.parallel(
+        _external_libs,
+        _corejs_max,
+        _corejs_min,
+        _corejs_max_babel,
+        _corejs_min_babel
+    ),
+    _core_libs_clean,
+    gulp.parallel(
+        _corelibsjs_max,
+        _corelibsjs_min
+    ),
+    _core_libs_copy
+));

@@ -13,39 +13,37 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/pandrr/cables.git"
+        "url": "git@github.com:pandrr/cables.git"
     },
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "bugs": {
         "url": "https://github.com/pandrr/cables/issues"
     },
     "homepage": "https://github.com/pandrr/cables#readme",
     "engines": {
-        "node": "10.19.0"
+        "node": "14.15.0"
     },
     "devDependencies": {
-        "@babel/core": "7.5.5",
-        "@babel/plugin-proposal-object-rest-spread": "7.5.5",
-        "@babel/plugin-transform-object-assign": "7.2.0",
-        "@babel/preset-env": "7.5.5",
         "add-module-exports-webpack-plugin": "1.0.0",
-        "babel-loader": "8.0.6",
-        "babel-plugin-transform-object-rest-spread": "6.26.0",
-        "babel-preset-env": "1.7.0",
-        "cross-env": "5.2.1",
-        "error-overlay-webpack-plugin": "0.4.0",
-        "glob": "7.1.4",
+        "@babel/core": "7.11.4",
+        "@babel/plugin-proposal-object-rest-spread": "7.11.0",
+        "@babel/plugin-transform-object-assign": "7.10.4",
+        "@babel/preset-env": "7.11.0",
+        "babel-loader": "8.1.0",
+        "cross-env": "7.0.2",
+        "error-overlay-webpack-plugin": "0.4.1",
+        "glob": "7.1.6",
         "gulp": "4.0.2",
         "gulp-concat": "2.6.1",
-        "gulp-rename": "1.4.0",
+        "gulp-rename": "2.0.0",
         "gulp-clean": "0.4.0",
+        "webpack": "4.44.1",
         "val-loader": "2.1.1",
-        "webpack": "4.39.1",
-        "webpack-bundle-analyzer": "3.4.1",
-        "webpack-cli": "3.3.6",
-        "webpack-dev-server": "3.8.0",
+        "webpack-bundle-analyzer": "3.8.0",
+        "webpack-cli": "3.3.12",
+        "webpack-dev-server": "3.11.0",
         "webpack-stream": "5.2.1"
     },
     "dependencies": {
