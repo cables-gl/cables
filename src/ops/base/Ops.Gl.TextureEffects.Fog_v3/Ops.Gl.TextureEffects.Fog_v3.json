@@ -1,0 +1,113 @@
+{
+    "id": "bad0307c-470e-415b-9206-ae04508013cf",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1604488025107
+        },
+        {
+            "message": "Ops.User.simod.Fog_v3 renamed to Ops.Gl.TextureEffects.Fog_v3",
+            "author": "simod",
+            "date": 1604488474831
+        }
+    ],
+    "authorName": "simod",
+    "created": 1604488036224,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "render"
+            },
+            {
+                "type": "0",
+                "name": "blendMode index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "blendMode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Depth Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "2",
+                "name": "Gradient Texture",
+                "group": "Textures"
+            },
+            {
+                "type": "0",
+                "name": "Fog Start",
+                "group": "Fog Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog End",
+                "group": "Fog Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog Density",
+                "group": "Fog Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "nearplane",
+                "group": "Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "farplane",
+                "group": "Frustum",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog R",
+                "group": "Fog Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog G",
+                "group": "Fog Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog B",
+                "group": "Fog Color",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Fog A",
+                "group": "Fog Color",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            }
+        ],
+        "name": "Ops.User.simod.Fog_v3"
+    }
+}
