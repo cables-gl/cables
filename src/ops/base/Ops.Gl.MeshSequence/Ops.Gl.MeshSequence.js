@@ -1,192 +1,193 @@
-var self=this;
-var cgl=this.patch.cgl;
+const self = this;
+const cgl = this.patch.cgl;
 
-var render=op.inTrigger("render");
-var filename=op.inFile("file");
+const render = op.inTrigger("render");
+const filename = op.inFile("file");
 
-var frame=op.inValueFloat("frame");
+const frame = op.inValueFloat("frame");
 frame.set(0);
-const trigger=op.outTrigger("trigger");
+const trigger = op.outTrigger("trigger");
 
-var calcVertexNormals=this.inValueBool("smooth");
+const calcVertexNormals = this.inValueBool("smooth");
 calcVertexNormals.set(true);
 
-var doDraw=op.inValueBool("Render",true);
+const doDraw = op.inValueBool("Render", true);
 
-var outNumFrames=op.outValue("Num Frames");
-var outName=op.outValue("Frame Name");
+const outNumFrames = op.outValue("Num Frames");
+const outName = op.outValue("Frame Name");
 
-var outGeomA=op.outObject("Geometry A");
-var outGeomB=op.outObject("Geometry B");
-var geoms=[];
-var mesh=null;
-window.meshsequencecounter=window.meshsequencecounter||1;
+const outGeomA = op.outObject("Geometry A");
+const outGeomB = op.outObject("Geometry B");
+const geoms = [];
+let mesh = null;
+window.meshsequencecounter = window.meshsequencecounter || 1;
 window.meshsequencecounter++;
-var prfx=String.fromCharCode(97 + window.meshsequencecounter);
-var needsUpdateFrame=false;
+const prfx = window.meshsequencecounter + "";
+let needsUpdateFrame = false;
 
-var srcHeadVert=''
-    .endl()+'IN vec3 '+prfx+'_attrMorphTargetA;'
-    .endl()+'IN vec3 '+prfx+'_attrMorphTargetB;'
+const srcHeadVert = ""
+    .endl() + "IN vec3 ATTR" + prfx + "_MorphTargetA;"
+    .endl() + "IN vec3 ATTR" + prfx + "_MorphTargetB;"
     // .endl()+'IN vec3 attrMorphTargetAN;'
     // .endl()+'IN vec3 attrMorphTargetBN;'
-    .endl()+'uniform float {{mod}}_fade;'
-    .endl()+'uniform float {{mod}}_doMorph;'
+    .endl() + "uniform float MOD_fade;"
+    .endl() + "uniform float MOD_doMorph;"
     .endl();
 
-var srcBodyVert=''
+const srcBodyVert = ""
     // .endl()+'   pos =vec4(vPosition,1.0);'
-    .endl()+' if({{mod}}_doMorph==1.0){'
-    .endl()+'   pos = vec4( '+prfx+'_attrMorphTargetA * {{mod}}_fade + '+prfx+'_attrMorphTargetB * (1.0 - {{mod}}_fade ), 1. );'
-    // .endl()+'   pos = vec4( attrMorphTargetA * {{mod}}_fade + vPosition * (1.0 - {{mod}}_fade ), 1. );'
-    // .endl()+'   norm = (attrMorphTargetBN * {{mod}}_fade + norm * (1.0 - {{mod}}_fade ) );'
-    // .endl()+'   norm = vec3(attrMorphTargetAN * {{mod}}_fade + attrMorphTargetBN * (1.0 - {{mod}}_fade ) );'
+    // .endl() + " if(MOD_doMorph==1.0){"
+    .endl() + "   pos = vec4( ATTR" + prfx + "_MorphTargetA * MOD_fade + ATTR" + prfx + "_MorphTargetB * (1.0 - MOD_fade ), 1. );"
+    // .endl()+'   pos = vec4( attrMorphTargetA * MOD_fade + vPosition * (1.0 - MOD_fade ), 1. );'
+    // .endl()+'   norm = (attrMorphTargetBN * MOD_fade + norm * (1.0 - MOD_fade ) );'
+    // .endl()+'   norm = vec3(attrMorphTargetAN * MOD_fade + attrMorphTargetBN * (1.0 - MOD_fade ) );'
     // .endl()+'   norm = attrMorphTargetAN;'
-    .endl()+' }'
+    // .endl() + " }"
     .endl();
 
-var uniFade=null;
-var module=null;
-var shader=null;
-var lastFrame=0;
-var needsReload=false;
+let uniFade = null;
+let module = null;
+let shader = null;
+let lastFrame = 0;
+let needsReload = false;
 function removeModule()
 {
-    if(shader && module)
+    if (shader && module)
     {
         shader.removeModule(module);
-        shader=null;
+        shader = null;
     }
 }
 
 function doRender()
 {
-    if(needsReload)reload();
-    if(needsUpdateFrame)updateFrame();
-    var fade=frame.get()%1;
-    if(cgl.getShader() && cgl.getShader()!=shader)
+    if (needsReload)reload();
+    if (needsUpdateFrame)updateFrame();
+    const fade = frame.get() % 1;
+    if (cgl.getShader() && cgl.getShader() != shader)
     {
-        if(shader) removeModule();
+        if (shader) removeModule();
 
-        shader=cgl.getShader();
+        shader = cgl.getShader();
 
-        module=shader.addModule(
+        module = shader.addModule(
             {
-                name: 'MODULE_VERTEX_POSITION',
-                srcHeadVert: srcHeadVert,
-                srcBodyVert: srcBodyVert
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
-        uniFade=new CGL.Uniform(shader,'f',module.prefix+'_fade',fade);
-        uniDoMorph=new CGL.Uniform(shader,'f',module.prefix+'_doMorph',0);
+
+        uniFade = new CGL.Uniform(shader, "f", "MOD_fade", fade);
+        uniDoMorph = new CGL.Uniform(shader, "f", "MOD_doMorph", 0);
+
+        // uniFade = new CGL.Uniform(shader, "f", "MOD_fade", fade);
+        // uniDoMorph = new CGL.Uniform(shader, "f", "MOD_doMorph", 0);
     }
 
-    if(uniDoMorph)
+    if (uniDoMorph)
     {
         uniFade.setValue(fade);
         uniDoMorph.setValue(1.0);
-        if(doDraw.get() && mesh!==null) mesh.render(cgl.getShader());
+        if (doDraw.get() && mesh !== null) mesh.render(cgl.getShader());
         uniDoMorph.setValue(0);
         trigger.trigger();
     }
 }
 
 
-
-
 function updateFrameLater()
 {
-    needsUpdateFrame=true;
+    needsUpdateFrame = true;
 }
 
 function updateFrame()
 {
-    if(mesh && geoms.length>0)
+    if (mesh && geoms.length > 0)
     {
-        var n=Math.floor(frame.get());
-        if(n<0)n=0;
-        n=n%(geoms.length-1);
+        let n = Math.floor(frame.get());
+        if (n < 0)n = 0;
+        n %= (geoms.length - 1);
 
-        if(n+1>geoms.length-1) n=0;
+        if (n + 1 > geoms.length - 1) n = 0;
 
-        if(n!=lastFrame && module && geoms[n+1])
+        if (n != lastFrame && module && geoms[n + 1])
         {
-            if(doDraw.get())
+            if (doDraw.get())
             {
-                mesh.updateAttribute(prfx+'_attrMorphTargetA',geoms[n+1].verticesTyped);
-                mesh.updateAttribute(prfx+'_attrMorphTargetB',geoms[n].verticesTyped);
+                mesh.updateAttribute("ATTR" + prfx + "_MorphTargetA", geoms[n + 1].verticesTyped);
+                mesh.updateAttribute("ATTR" + prfx + "_MorphTargetB", geoms[n].verticesTyped);
             }
 
             outGeomA.set(geoms[n]);
-            outGeomB.set(geoms[n+1]);
+            outGeomB.set(geoms[n + 1]);
             // mesh.updateAttribute('attrMorphTargetBN',geoms[n].vertexNormals);
 
-            lastFrame=n;
+            lastFrame = n;
         }
         outName.set(geoms[n].name);
     }
-    needsUpdateFrame=false;
+    needsUpdateFrame = false;
 }
 
-var uniDoMorph=null;
-var loadingId=-1;
-
+var uniDoMorph = null;
+let loadingId = -1;
 
 
 function reload()
 {
-    if(!filename.get() || filename.get()=='')return;
+    if (!filename.get() || filename.get() == "") return;
 
-    needsReload=false;
+    needsReload = false;
 
-    loadingId=op.patch.loading.start('json mesh sequence',filename.get());
+    loadingId = op.patch.loading.start("json mesh sequence", filename.get());
 
-    lastFrame=0;
+    lastFrame = 0;
 
     CABLES.ajax(
         op.patch.getFilePath(filename.get()),
-        function(err,_data,xhr)
+        function (err, _data, xhr)
         {
-            if(err)
+            if (err)
             {
-                if(CABLES.UI)self.uiAttr({"error":"file not found"});
-                console.log('ajax error:',err);
+                if (CABLES.UI)self.uiAttr({ "error": "file not found" });
+                console.log("ajax error:", err);
                 op.patch.loading.finished(loadingId);
                 return;
             }
-            else if(CABLES.UI)self.uiAttr({"error":null});
+            else if (CABLES.UI)self.uiAttr({ "error": null });
 
-            var data=null;
+            let data = null;
 
             try
             {
-                data=JSON.parse(_data);
+                data = JSON.parse(_data);
             }
-            catch(e)
+            catch (e)
             {
-                if(CABLES.UI)self.uiAttr({"error":"could not load file..."});
-                console.log("meshsequence could not load file..."+filename.get());
+                if (CABLES.UI)self.uiAttr({ "error": "could not load file..." });
+                console.log("meshsequence could not load file..." + filename.get());
                 return;
             }
 
-            geoms.length=0;
+            geoms.length = 0;
 
-            for(var i=0;i<data.meshes.length;i++)
+            for (let i = 0; i < data.meshes.length; i++)
             {
-                var geom=new CGL.Geometry();
+                const geom = new CGL.Geometry();
 
-                geom.verticesIndices=[];
-                geom.verticesIndices=[].concat.apply([], data.meshes[0].faces);
-                geom.vertices=data.meshes[i].vertices;
+                geom.verticesIndices = [];
+                geom.verticesIndices = [].concat.apply([], data.meshes[0].faces);
+                geom.vertices = data.meshes[i].vertices;
 
                 // console.log('seq verts:',geom.vertices.length);
 
-                geom.texCoords=data.meshes[0].texturecoords;
+                geom.texCoords = data.meshes[0].texturecoords;
 
                 // console.log('seq texcoords:',geom.texCoords.length);
                 // console.log('first texcoord:',data.meshes[0].texturecoords.length);
 
-                if(calcVertexNormals.get())
+                if (calcVertexNormals.get())
                 {
                     geom.calculateNormals();
                 }
@@ -196,43 +197,41 @@ function reload()
                     geom.calculateNormals();
                 }
 
-                geom.name=data.meshes[i].name;
+                geom.name = data.meshes[i].name;
 
-                geom.verticesTyped=new Float32Array( geom.vertices );
+                geom.verticesTyped = new Float32Array(geom.vertices);
 
                 geoms.push(geom);
             }
 
             rebuildMesh();
             outNumFrames.set(geoms.length);
-            needsUpdateFrame=true;
+            needsUpdateFrame = true;
 
-            self.uiAttribs.info='num frames: '+data.meshes.length;
+            self.uiAttribs.info = "num frames: " + data.meshes.length;
 
             op.patch.loading.finished(loadingId);
-            loadingId=-1;
-
+            loadingId = -1;
         });
 }
 
 function rebuildMesh()
 {
-    if(geoms.length>0)
+    if (geoms.length > 0)
     {
         geoms[0].calculateNormals();
 
-        mesh=new CGL.Mesh(cgl,geoms[0]);
-        mesh.addVertexNumbers=true;
+        mesh = new CGL.Mesh(cgl, geoms[0]);
+        mesh.addVertexNumbers = true;
         mesh.setGeom(geoms[0]);
-        mesh.addAttribute(prfx+'_attrMorphTargetA',geoms[0].vertices,3);
-        mesh.addAttribute(prfx+'_attrMorphTargetB',geoms[0].vertices,3);
-
+        mesh.addAttribute("ATTR" + prfx + "_MorphTargetA", geoms[0].vertices, 3);
+        mesh.addAttribute("ATTR" + prfx + "_MorphTargetB", geoms[0].vertices, 3);
     }
 }
 
 function reloadLater()
 {
-    needsReload=true;
+    needsReload = true;
 }
 
 frame.onChange = updateFrameLater;

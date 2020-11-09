@@ -112,7 +112,8 @@ function startWebcam()
     constraints.video.width = width.get();
     constraints.video.height = height.get();
 
-    navigator.getUserMedia = navigator.getUserMedia || navigator.mediaDevices.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia;
+    // navigator.mediaDevices.getUserMedia ||
 
     if (navigator.getUserMedia)
     {
