@@ -46,7 +46,6 @@ const
     outStartY = op.outNumber("Start Y"),
     outNumChars = op.outNumber("Num Chars");
 
-
 op.setPortGroup("Size", [letterSpace, lineHeight, scale]);
 op.setPortGroup("Character Transformations", [inScaleArr, inRotArr, inPosArr]);
 op.setPortGroup("Alignment", [align, valign]);
@@ -100,13 +99,11 @@ const
     uniborderSmooth = new CGL.Uniform(shader, "f", "borderSmooth", inBorderSmooth),
     uniborderWidth = new CGL.Uniform(shader, "f", "borderWidth", inBorderWidth);
 
-
 scale.onChange = updateScale;
 
 inRotArr.onChange =
     inPosArr.onChange =
     inScaleArr.onChange = function () { needsUpdateTransmats = true; };
-
 
 inTexColor.onChange =
 inTexMask.onChange =
@@ -117,7 +114,6 @@ doSDF.onChange =
 
 updateDefines();
 updateScale();
-
 
 align.onChange =
     str.onChange =
@@ -163,9 +159,11 @@ function updateFontData()
 
     const dataVar = op.patch.getVar(varname);
 
-    if (!dataVar)
+    if (!dataVar || !dataVar.getValue())
     {
-        // console.log("no varname",varname);
+        fontData = null;
+
+        console.log("no varname", varname);
         return;
     }
 
@@ -239,7 +237,6 @@ function updateAlign()
 
     updateScale();
 }
-
 
 function buildTransMats()
 {
@@ -355,7 +352,6 @@ function getChar(chStr)
     return fontChars[String(chStr)] || fontChars["?"] || fontChars._ || fontChars.X;
 }
 
-
 function generateMesh()
 {
     outArr.set(null);
@@ -366,7 +362,6 @@ function generateMesh()
         console.log("aborting, no font data...");
         return;
     }
-
 
     const theString = String(str.get() + "");
 
@@ -415,7 +410,6 @@ function generateMesh()
     const arrPositions = [];
 
     const mulSize = 0.01;
-
 
     outLines.set(strings.length);
     minY = 99999;

@@ -66,7 +66,6 @@ function load()
     loadedData = loadedTex = false;
     updateLoaded();
 
-
     op.patch.loading.finished(loadingId);
     loadingId = op.patch.loading.start("jsonFile", "" + urlData.get());
 
@@ -75,7 +74,6 @@ function load()
     op.setUiError("texurlerror", null);
 
     const urlDatastr = op.patch.getFilePath(String(urlData.get()));
-
 
     // load font data json
     cgl.patch.loading.addAssetLoadingTask(() =>
@@ -117,15 +115,17 @@ function load()
             }
             catch (e)
             {
+                op.patch.setVarValue(varNameData, null);
+                op.patch.setVarValue(varNameTex, null);
+
                 console.error(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 updateLoaded();
-                isLoading.set(false);
+                outLoaded.set(false);
             }
         });
     });
-
 
     // load font texture
 
