@@ -136,7 +136,7 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
         {
             try
             {
-                audioInNode.connect(port.webAudio.audioNode, 0, inputChannelIndex);
+                if (audioInNode.connect) audioInNode.connect(port.webAudio.audioNode, 0, inputChannelIndex);
             }
             catch (e)
             {
