@@ -8,6 +8,10 @@
                 "subType": "integer"
             },
             {
+                "type": "5",
+                "name": "Facing"
+            },
+            {
                 "type": "0",
                 "name": "flip",
                 "subType": "boolean"

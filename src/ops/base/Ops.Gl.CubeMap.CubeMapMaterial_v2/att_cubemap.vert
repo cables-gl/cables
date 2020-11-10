@@ -17,6 +17,9 @@ OUT vec3 fragPos;
 OUT vec4 modelPos;
 IN vec3 vPosition;
 IN vec3 attrVertNormal;
+IN vec3 attrTangent;
+IN vec3 attrBiTangent;
+IN vec2 attrTexCoord;
 
 OUT mat4 mvMatrix;
 OUT vec2 texCoord;
@@ -51,7 +54,9 @@ void main()
 
 
     norm=attrVertNormal;
-
+        texCoord=attrTexCoord;
+    vec3 tangent = attrTangent;
+    vec3 bitangent = attrBiTangent;
 
     {{MODULE_VERTEX_POSITION}}
 

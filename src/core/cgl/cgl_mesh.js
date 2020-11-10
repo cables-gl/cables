@@ -107,6 +107,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     // }
     if (!start && !end) return;
 
+
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
 
     profileData.profileMeshAttributes += (end - start) || 0;
