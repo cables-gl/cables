@@ -30,10 +30,16 @@ audioIn.onChange = function ()
                 console.log(e);
             }
         }
+        op.setUiError("audioCtx", null);
     }
     else
     {
-        if (audioIn.val.connect) audioIn.val.connect(gainNode);
+        if (audioIn.val.connect)
+        {
+            audioIn.val.connect(gainNode);
+            op.setUiError("audioCtx", null);
+        }
+        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
     }
     oldAudioIn = audioIn.get();
 };
