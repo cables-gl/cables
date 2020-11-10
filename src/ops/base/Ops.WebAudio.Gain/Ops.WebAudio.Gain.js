@@ -1,5 +1,5 @@
 const audioIn = op.inObject("audio in");
-const gain = op.inFloatSlider("Gain", 1);
+const gain = op.inFloatSlider("gain", 1);
 gain.onChange = updateGain;
 const audioOut = op.outObject("audio out");
 
