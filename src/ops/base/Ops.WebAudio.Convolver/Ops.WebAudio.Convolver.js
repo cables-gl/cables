@@ -1,7 +1,8 @@
 if (!window.audioContext) { audioContext = new AudioContext(); }
 
 const audioIn = op.inObject("audio in");
-const impulseResponse = op.inUrl("impulse response");
+// const impulseResponse = op.inUrl("impulse response");
+const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
 const normalize = op.inBool("normalize", true);
 const audioOut = op.outObject("audio out");
 
