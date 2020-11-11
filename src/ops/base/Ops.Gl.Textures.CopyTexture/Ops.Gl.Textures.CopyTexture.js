@@ -45,7 +45,6 @@ function initEffect()
 
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get(), "clear": false });
 
-
     tex = new CGL.Texture(cgl,
         {
             "name": "copytexture",
@@ -108,7 +107,6 @@ function updateResolution()
             op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
         }
 }
-
 
 function updateSizePorts()
 {

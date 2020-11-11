@@ -126,6 +126,7 @@ const Op = function ()
 
     const _setUiAttrib = function (newAttribs)
     {
+        if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
         for (const p in newAttribs)
         {
