@@ -1,59 +1,88 @@
-if(!window.audioContext){ audioContext = new AudioContext(); }
+if (!window.audioContext) { audioContext = new AudioContext(); }
 
-var NORMALIZE_DEF = true;
+const NORMALIZE_DEF = true;
 
-var convolver = audioContext.createConvolver();
+const audioIn = this.addInPort(new CABLES.Port(this, "audio in", CABLES.OP_PORT_TYPE_OBJECT));
+const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const normalize = this.addInPort(new CABLES.Port(this, "normalize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
+const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
 
-var audioIn=this.addInPort(new CABLES.Port(this,"audio in",CABLES.OP_PORT_TYPE_OBJECT));
-var impulseResponse=this.addInPort(new CABLES.Port(this,"impulse response",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-var normalize = this.addInPort(new CABLES.Port(this,"normalize",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var audioOut=this.addOutPort(new CABLES.Port(this,"audio out",CABLES.OP_PORT_TYPE_OBJECT));
+const convolver = audioContext.createConvolver();
+let oldAudioIn = null;
+let myImpulseBuffer;
+let impulseResponseLoaded = false;
 
-var oldAudioIn = null;
+function getImpulse()
+{
+    const impulseUrl = impulseResponse.get();
+    const ajaxRequest = new XMLHttpRequest();
+    const url = op.patch.getFilePath(impulseUrl);
+    if (impulseUrl)
+    {
+        impulseResponseLoaded = false;
+        ajaxRequest.open("GET", url, true);
+        ajaxRequest.responseType = "arraybuffer";
+        ajaxRequest.onload = function ()
+        {
+            const impulseData = ajaxRequest.response;
 
-var convolver = audioContext.createConvolver();
-var myImpulseBuffer;
-
-function getImpulse() {
-    var impulseUrl = impulseResponse.get();
-    var ajaxRequest = new XMLHttpRequest();
-    var url = op.patch.getFilePath(impulseUrl);
-    if(typeof url === 'string' && url.length > 1) {
-        ajaxRequest.open('GET', url, true);
-        ajaxRequest.responseType = 'arraybuffer';
-        ajaxRequest.onload = function() {
-            var impulseData = ajaxRequest.response;
-
-            audioContext.decodeAudioData(impulseData, function(buffer) {
-                if(buffer.sampleRate != audioContext.sampleRate) {
-                    op.log('[impulse response] Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate);
-                    op.uiAttr( { 'warning': 'Sample rate of the impulse response does not match! Should be ' + audioContext.sampleRate } );
+            audioContext.decodeAudioData(impulseData, function (buffer)
+            {
+                if (buffer.sampleRate != audioContext.sampleRate)
+                {
+                    op.log("[impulse response] Sample rate of the impulse response does not match! Should be " + audioContext.sampleRate);
+                    op.setUiError("wrongSampleRate", "Sample rate of the impulse response does not match! Should be " + audioContext.sampleRate, 2);
                     return;
+                }
+                else
+                {
+                    op.setUiError("wrongSampleRate", null);
                 }
                 myImpulseBuffer = buffer;
                 convolver.buffer = myImpulseBuffer;
                 convolver.loop = false;
         		convolver.normalize = normalize.get();
-        		try{
+        		audioOut.set(null);
+        		try
+                {
         		    audioIn.get().connect(convolver);
-        		} catch(e){
+        		}
+                catch (e)
+                {
         		    op.log("[audio in] Could not connect audio in to convolver" + e);
         		}
-                audioOut.set(convolver);
-                op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
-            }, function(e){
-              op.log("[impulse response] Error decoding audio data" + e.err);
 
+                audioOut.set(convolver);
+
+                op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
+
+                impulseResponseLoaded = true;
+                op.setUiError("noIR", null);
+            }, function (e)
+            {
+                op.log("[impulse response] Error decoding audio data" + e.err);
+                impulseResponseLoaded = false;
             });
         };
 
-      ajaxRequest.send();
+        ajaxRequest.send();
+    }
+    else
+    {
+        impulseResponseLoaded = false;
+        op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
+        if (oldAudioIn)
+        {
+            oldAudioIn.disconnect(convolver);
+            audioOut.set(oldAudioIn);
+        }
+        else audioOut.set(audioIn.get());
     }
 }
 
-impulseResponse.onChange=getImpulse;
+impulseResponse.onChange = getImpulse;
 
-function onLinkChange(){
+/* function onLinkChange(){
     if(!audioIn.isLinked()){
         if(oldAudioIn){
             try{
@@ -64,25 +93,57 @@ function onLinkChange(){
             }
         }
     }
-}
+} */
 
-audioIn.onLinkChanged = onLinkChange;
+// audioIn.onLinkChanged = onLinkChange;
 
-audioIn.onChange=function() {
-    if (audioIn.get()) {
+audioIn.onChange = function ()
+{
+    if (audioIn.get())
+    {
+        if (!audioIn.get().connect)
+        {
+            op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+            oldAudioIn = null;
+            return;
+        }
+        else
+        {
+            op.setUiError("audioCtx", null);
+        }
         op.log("[audio in] connected");
-        try{
+        try
+        {
             audioIn.get().connect(convolver);
             oldAudioIn = audioIn.get();
-        } catch(e){
+        }
+        catch (e)
+        {
             op.log("[audio in] Could not connect" + e);
         }
-        audioOut.set(convolver);
+
+        if (!impulseResponseLoaded)
+        {
+            op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
+            audioOut.set(oldAudioIn);
+        }
+        else
+        {
+            op.setUiError("noIR", null);
+            audioOut.set(convolver);
+        }
+    }
+    else
+    {
+        if (impulseResponseLoaded) op.setUiError("noIR", null);
+        op.setUiError("audioCtx", null);
+        audioOut.set(null);
     }
 };
 
 normalize.set(NORMALIZE_DEF);
 
-normalize.onChange= function() {
+normalize.onChange = function ()
+{
     convolver.normalize = normalize.get();
 };
