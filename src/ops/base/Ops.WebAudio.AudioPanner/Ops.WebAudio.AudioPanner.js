@@ -10,7 +10,6 @@ const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PO
 
 if (!window.audioContext) { audioContext = new AudioContext(); }
 
-
 let isIOS = false;
 let panNode = null;
 
@@ -40,18 +39,18 @@ function updateGain()
     }
 }
 
-
 let oldAudioIn = null;
 
 audioIn.onChange = function ()
 {
     if (!audioIn.get())
     {
+        op.setUiError("audioCtx", null);
         if (oldAudioIn)
         {
             try
             {
-                oldAudioIn.disconnect(panNode);
+                if (oldAudioIn.disconnect) oldAudioIn.disconnect(panNode);
             }
             catch (e)
             {
@@ -61,7 +60,15 @@ audioIn.onChange = function ()
     }
     else
     {
-        audioIn.val.connect(panNode);
+        if (audioIn.val.connect)
+        {
+            op.setUiError("audioCtx", null);
+            audioIn.val.connect(panNode);
+        }
+        else
+        {
+            op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        }
     }
     oldAudioIn = audioIn.get();
 };
