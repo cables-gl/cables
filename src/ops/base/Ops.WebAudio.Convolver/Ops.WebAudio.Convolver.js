@@ -1,11 +1,9 @@
 if (!window.audioContext) { audioContext = new AudioContext(); }
 
-const NORMALIZE_DEF = true;
-
-const audioIn = this.addInPort(new CABLES.Port(this, "audio in", CABLES.OP_PORT_TYPE_OBJECT));
-const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
-const normalize = this.addInPort(new CABLES.Port(this, "normalize", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
-const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const audioIn = op.inObject("audio in");
+const impulseResponse = op.inUrl("impulse response");
+const normalize = op.inBool("normalize", true);
+const audioOut = op.outObject("audio out");
 
 const convolver = audioContext.createConvolver();
 let oldAudioIn = null;
@@ -135,13 +133,14 @@ audioIn.onChange = function ()
     }
     else
     {
-        if (impulseResponseLoaded) op.setUiError("noIR", null);
+        if (impulseResponseLoaded)
+        {
+            op.setUiError("noIR", null);
+        }
         op.setUiError("audioCtx", null);
         audioOut.set(null);
     }
 };
-
-normalize.set(NORMALIZE_DEF);
 
 normalize.onChange = function ()
 {
