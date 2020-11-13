@@ -54,7 +54,6 @@ exe.onLinkChanged =
 position.onChange = updatePos;
 inSizeGraph.onChange = updateSize;
 
-
 element.id = "performance";
 element.style.position = "absolute";
 element.style.left = "0px";
@@ -144,7 +143,6 @@ openDefault.onChange = function ()
     opened = openDefault.get();
     updateOpened();
 };
-
 
 function toggleOpened()
 {
@@ -295,7 +293,6 @@ function updateText()
         element.innerHTML += "<br/>frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
         element.innerHTML += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
 
-
         element.innerHTML += "<br/>shader binds: " + Math.ceil(CGL.profileData.profileShaderBinds / fps) +
             " uniforms: " + Math.ceil(CGL.profileData.profileUniformCount / fps) +
             " mvp_uni_mat4: " + Math.ceil(CGL.profileData.profileMVPMatrixCount / fps) +
@@ -347,7 +344,6 @@ function addMeasureChild(m, parentEle, timeSum, level)
 
         parentEle.appendChild(newEle);
     }
-
 
     if (!m.isRoot)
     {

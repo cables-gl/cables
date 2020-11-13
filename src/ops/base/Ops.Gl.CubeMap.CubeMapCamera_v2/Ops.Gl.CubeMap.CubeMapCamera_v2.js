@@ -2,7 +2,7 @@ const cgl = op.patch.cgl;
 
 const inTrigger = op.inTrigger("Render");
 const outTrigger = op.outTrigger("Next");
-const outTex = op.outObject("cubemap");
+const outTex = op.outTexture("cubemap");
 
 const inSize = op.inDropDown("Size", [32, 64, 128, 256, 512, 1024, 2048], 512);
 let sizeChanged = true;

@@ -15,7 +15,6 @@ const
     inTimeLine = op.inBool("Sync to timeline", false),
     inLoop = op.inBool("Loop", true),
 
-
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
     inCalcNormals = op.inBool("Calc Normals", false),
@@ -35,7 +34,6 @@ const
     outAnimFinished = op.outTrigger("Finished");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
-
 
 const le = true; // little endian
 const cgl = op.patch.cgl;
@@ -115,7 +113,6 @@ inTimeLine.onChange = function ()
     inTime.setUiAttribs({ "greyout": inTimeLine.get() });
 };
 
-
 inCamera.onChange = setCam;
 
 function setCam()
@@ -128,7 +125,6 @@ function setCam()
         if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
     }
 }
-
 
 inExec.onTriggered = function ()
 {
@@ -170,7 +166,6 @@ inExec.onTriggered = function ()
     nextBefore.trigger();
 
     if (needsMatUpdate) updateMaterials();
-
 
     if (cam) cam.start(time);
 
@@ -292,7 +287,6 @@ function updateMaterials()
     if (tab)printInfo();
 }
 
-
 function hideNodesFromArray()
 {
     const hideArr = inHideNodes.get();
@@ -330,7 +324,6 @@ function hideNodesFromData()
     }
     hideNodesFromArray();
 }
-
 
 function loadData()
 {
