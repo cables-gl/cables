@@ -8,7 +8,7 @@ const inGradientTexture = op.inTexture("Gradient Texture");
 const inFogStart = op.inFloat("Fog Start", 1);
 const inFogEnd = op.inFloat("Fog End", 8);
 const inFogDensity = op.inFloatSlider("Fog Density", 1);
-const inFogMode = op.inSwitch("Fog Mode", ["Default", "Exp", "Exp2"], "Default");
+const inFogMode = op.inSwitch("Fog Mode", ["Default", "Linear", "Exp", "Exp2"], "Default");
 const nearPlane = op.inValue("nearplane", 0.1);
 const farPlane = op.inValue("farplane", 10);
 const inFogR = op.inFloatSlider("Fog R", Math.random());
@@ -21,9 +21,8 @@ const trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Textures", [image, inGradientTexture]);
 op.setPortGroup("Frustum", [farPlane, nearPlane]);
-op.setPortGroup("Fog Options", [inFogStart, inFogEnd, inFogDensity]);
+op.setPortGroup("Fog Options", [inFogStart, inFogEnd, inFogMode, inFogDensity]);
 op.setPortGroup("Fog Color", [inFogR, inFogG, inFogB, inFogA]);
-
 
 const shader = new CGL.Shader(cgl, "Fog");
 const srcFrag = attachments.fog_frag;
@@ -44,7 +43,6 @@ const uniFogDensity = new CGL.Uniform(shader, "f", "inFogDensity", inFogDensity)
 const uniFogStart = new CGL.Uniform(shader, "f", "inFogStart", inFogStart);
 const uniFogEnd = new CGL.Uniform(shader, "f", "inFogEnd", inFogEnd);
 
-
 inGradientTexture.onChange = () =>
 {
     if (inGradientTexture.get() && inGradientTexture.get().tex) shader.define("HAS_GRADIENT_TEX");
@@ -54,6 +52,7 @@ inGradientTexture.onChange = () =>
 inFogMode.onChange = () =>
 {
     shader.toggleDefine("FOG_MODE_DEFAULT", inFogMode.get() === "Default");
+    shader.toggleDefine("FOG_MODE_LINEAR", inFogMode.get() === "Linear");
     shader.toggleDefine("FOG_MODE_EXP", inFogMode.get() === "Exp");
     shader.toggleDefine("FOG_MODE_EXP2", inFogMode.get() === "Exp2");
 };
@@ -61,6 +60,7 @@ inFogMode.onChange = () =>
 CGL.TextureEffect.setupBlending(op, shader, blendMode, inAmount);
 
 shader.toggleDefine("FOG_MODE_DEFAULT", inFogMode.get() === "Default");
+shader.toggleDefine("FOG_MODE_LINEAR", inFogMode.get() === "Linear");
 shader.toggleDefine("FOG_MODE_EXP", inFogMode.get() === "Exp");
 shader.toggleDefine("FOG_MODE_EXP2", inFogMode.get() === "Exp2");
 
