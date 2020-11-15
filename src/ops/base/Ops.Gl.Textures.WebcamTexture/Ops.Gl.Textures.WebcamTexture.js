@@ -49,7 +49,6 @@ function removeElement()
     clearTimeout(timeout);
 }
 
-
 inActive.onChange = function ()
 {
     if (inActive.get())
@@ -121,7 +120,6 @@ function startWebcam()
             function ()
             {
                 available.set(false);
-                // console.log('error webcam');
             });
     }
     else
@@ -132,7 +130,7 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                console.log(error.name + ": " + error.message);
+                op.error(error.name + ": " + error.message);
             });
     }
 }

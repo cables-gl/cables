@@ -1,37 +1,37 @@
-var trigger=op.inTriggerButton("Trigger");
-var varname=op.inValueSelect("Named Trigger",[],"",true);
+const trigger = op.inTriggerButton("Trigger");
+const varname = op.inValueSelect("Named Trigger", [], "", true);
 
-varname.onChange=updateName;
+varname.onChange = updateName;
 
-trigger.onTriggered=doTrigger;
+trigger.onTriggered = doTrigger;
 
-op.patch.addEventListener('namedTriggersChanged',updateVarNamesDropdown);
+op.patch.addEventListener("namedTriggersChanged", updateVarNamesDropdown);
 
 updateVarNamesDropdown();
 
 function updateVarNamesDropdown()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        var varnames=[];
-        var vars=op.patch.namedTriggers;
-        varnames.push('+ create new one');
-        for(var i in vars) varnames.push(i);
-        varname.uiAttribs.values=varnames;
+        const varnames = [];
+        const vars = op.patch.namedTriggers;
+        varnames.push("+ create new one");
+        for (const i in vars) varnames.push(i);
+        varname.uiAttribs.values = varnames;
     }
 }
 
 function updateName()
 {
-    if(CABLES.UI)
+    if (CABLES.UI)
     {
-        if(varname.get()=='+ create new one')
+        if (varname.get() == "+ create new one")
         {
-        	CABLES.UI.MODAL.prompt("New Trigger","enter a name for the new trigger",'',
-        		function(str)
+        	CABLES.UI.MODAL.prompt("New Trigger", "enter a name for the new trigger", "",
+        		function (str)
         		{
         		    varname.set(str);
-                    op.patch.namedTriggers[str]=op.patch.namedTriggers[str]||[];
+                    op.patch.namedTriggers[str] = op.patch.namedTriggers[str] || [];
                     updateVarNamesDropdown();
         		});
             return;
@@ -40,42 +40,29 @@ function updateName()
         gui.opParams.show(op);
     }
 
-    if(!op.patch.namedTriggers[varname.get()])
+    if (!op.patch.namedTriggers[varname.get()])
     {
-        op.patch.namedTriggers[varname.get()]=op.patch.namedTriggers[varname.get()]||[];
+        op.patch.namedTriggers[varname.get()] = op.patch.namedTriggers[varname.get()] || [];
         op.patch.emitEvent("namedTriggersChanged");
     }
 
-    op.setTitle('>' + varname.get());
+    op.setTitle(">" + varname.get());
 
-    if(CABLES.UI) gui.opParams.show(op);
+    if (CABLES.UI) gui.opParams.show(op);
 }
 
 function doTrigger()
 {
-    var arr=op.patch.namedTriggers[varname.get()];
+    const arr = op.patch.namedTriggers[varname.get()];
 
-    if(!arr)
+    if (!arr)
     {
-        console.log("unknown trigger array!",varname.get());
+        op.error("unknown trigger array!", varname.get());
         return;
     }
 
-    for(var i=0;i<arr.length;i++)
+    for (let i = 0; i < arr.length; i++)
     {
         arr[i]();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

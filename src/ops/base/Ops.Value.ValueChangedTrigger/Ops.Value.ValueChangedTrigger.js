@@ -1,20 +1,20 @@
-var val=op.addInPort(new CABLES.Port(op,"Value"));
-var exe=op.inTrigger("Execute");
-var trigger=op.outTrigger('trigger');
+const
+    val = op.inFloat("Value", 0),
+    exe = op.inTrigger("Execute"),
+    trigger = op.outTrigger("trigger");
 
-var changed=false;
+let changed = false;
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    if(changed)
+    if (changed)
     {
-        changed=false;
+        changed = false;
         trigger.trigger();
     }
 };
 
-val.onChange=function()
+val.onChange = function ()
 {
-    changed=true;
+    changed = true;
 };
-

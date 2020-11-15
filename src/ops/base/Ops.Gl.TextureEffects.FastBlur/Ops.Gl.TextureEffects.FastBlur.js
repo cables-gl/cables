@@ -1,11 +1,10 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-    amount = op.inValue("amount"),
+    amount = op.inFloat("amount", 3),
     clamp = op.inBool("Clamp", false);
 
 const cgl = op.patch.cgl;
-amount.set(3);
 
 const shader = new CGL.Shader(cgl);
 
@@ -17,17 +16,17 @@ const uniWidth = new CGL.Uniform(shader, "f", "width", 0);
 const uniHeight = new CGL.Uniform(shader, "f", "height", 0);
 const uniPass = new CGL.Uniform(shader, "f", "pass", 0);
 const uniAmount = new CGL.Uniform(shader, "f", "amount", amount.get());
-amount.onValueChange(function () { uniAmount.setValue(amount.get()); });
+amount.onChange = () => { uniAmount.setValue(amount.get()); };
 
-const direction = op.addInPort(new CABLES.Port(op, "direction", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["both", "vertical", "horizontal"] }));
+const direction = op.inDropDown("direction", ["both", "vertical", "horizontal"]);
 let dir = 0;
 direction.set("both");
-direction.onValueChange(function ()
+direction.onChange = () =>
 {
     if (direction.get() == "both")dir = 0;
     if (direction.get() == "horizontal")dir = 1;
     if (direction.get() == "vertical")dir = 2;
-});
+};
 
 clamp.onChange = () => { shader.toggleDefine("CLAMP", clamp.get()); };
 

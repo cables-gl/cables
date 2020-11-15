@@ -57,11 +57,9 @@ function updateVisibility()
     setCSSVisible(inVisible.get());
 }
 
-
 function updateText()
 {
     let str = inText.get();
-    // console.log(oldStr,str);
 
     if (oldStr === str) return;
     oldStr = str;
@@ -77,6 +75,7 @@ function removeElement()
 {
     if (div && div.parentNode) div.parentNode.removeChild(div);
 }
+
 // inline css inisde div
 function updateStyle()
 {
