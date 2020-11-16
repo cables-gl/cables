@@ -1,7 +1,6 @@
 const cgl = op.patch.cgl;
 const geometry = new CGL.Geometry("unit cube");
 
-
 const inTrigger = op.inTrigger("Trigger In");
 const inTexture = op.inTexture("Equirectangular Map");
 
@@ -10,7 +9,7 @@ const inAdvanced = op.inBool("Advanced", false);
 const inTextureFilter = op.inSwitch("Filter", ["Nearest", "Linear"], "Linear");
 op.setPortGroup("Cubemap Options", [inSize, inAdvanced, inTextureFilter]);
 const outTrigger = op.outTrigger("Trigger Out");
-const outCubemap = op.outObject("Cubemap Projection");
+const outCubemap = op.outTexture("Cubemap Projection");
 
 inTextureFilter.setUiAttribs({ "greyout": !inAdvanced.get() });
 

@@ -1,160 +1,150 @@
-var exec=op.inTrigger("Exec");
-var inMass=op.inValue("Mass");
-var inRadius=op.inValue("Radius");
+const exec = op.inTrigger("Exec");
+const inMass = op.inValue("Mass");
+const inRadius = op.inValue("Radius");
 
-var doRender=op.inValueBool("Render",true);
+const doRender = op.inValueBool("Render", true);
 
-var posX=op.inValue("Pos X");
-var posY=op.inValue("Pos Y");
-var posZ=op.inValue("Pos Z");
+const posX = op.inValue("Pos X");
+const posY = op.inValue("Pos Y");
+const posZ = op.inValue("Pos Z");
 
-var dirX=op.inValue("dir X");
-var dirY=op.inValue("dir Y");
-var dirZ=op.inValue("dir Z");
+const dirX = op.inValue("dir X");
+const dirY = op.inValue("dir Y");
+const dirZ = op.inValue("dir Z");
 
-var speed=op.inValue("Speed");
+const speed = op.inValue("Speed");
 
-var inReset=op.inTriggerButton("Reset");
-var inSpawn=op.inTriggerButton("Spawn");
+const inReset = op.inTriggerButton("Reset");
+const inSpawn = op.inTriggerButton("Spawn");
 
+const next = op.outTrigger("Next");
+const outRadius = op.outValue("Out Radius");
+const outX = op.outValue("X");
+const outY = op.outValue("Y");
+const outZ = op.outValue("Z");
+const outIndex = op.outNumber("Index");
 
-var next=op.outTrigger("Next");
-var outRadius=op.outValue("Out Radius");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
-var outIndex=op.outNumber("Index");
+const outCollision = op.outTrigger("Collision");
 
-var outCollision=op.outTrigger("Collision");
+const cgl = op.patch.cgl;
 
-var cgl=op.patch.cgl;
+const m = new CGL.WirePoint(cgl, 1);
 
-var m=new CGL.WirePoint(cgl,1);
+exec.onTriggered = render;
 
-exec.onTriggered=render;
+let needSetup = true;
 
-var needSetup=true;
+inMass.onChange = setup;
+inRadius.onChange = setup;
+inSpawn.onTriggered = spawn;
 
+let lastWorld = null;
 
-inMass.onChange=setup;
-inRadius.onChange=setup;
-inSpawn.onTriggered=spawn;
+let collided = false;
 
-var lastWorld=null;
-
-var collided=false;
-
-inReset.onTriggered=function()
+inReset.onTriggered = function ()
 {
-    var world=cgl.frameStore.world;
-    for(var i=0;i<bodies.length;i++)
+    const world = cgl.frameStore.world;
+    for (let i = 0; i < bodies.length; i++)
     {
         world.removeBody(bodies[i]);
     }
-    bodies.length=0;
+    bodies.length = 0;
 };
 
-var bodies=[];
-
+var bodies = [];
 
 function spawn()
 {
-    var world=cgl.frameStore.world;
-    if(!world)return;
+    const world = cgl.frameStore.world;
+    if (!world) return;
 
-    var body = new CANNON.Body({
-      mass: inMass.get(), // kg
-      position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-      shape: new CANNON.Sphere(inRadius.get())
+    const body = new CANNON.Body({
+        "mass": inMass.get(), // kg
+        "position": new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
+        "shape": new CANNON.Sphere(inRadius.get())
     });
 
-
-    var velo=speed.get();
+    const velo = speed.get();
     // body.velocity.set(Math.random()*velo,Math.random()*velo,Math.random()*velo);
     body.velocity.set(
-        dirX.get()*velo,
-        dirY.get()*velo,
-        dirZ.get()*velo);
+        dirX.get() * velo,
+        dirY.get() * velo,
+        dirZ.get() * velo);
 
     bodies.push(body);
     world.addBody(body);
 
-    body.addEventListener("collide",function(e){
+    body.addEventListener("collide", function (e)
+    {
         // collided=true;
         // collision.trigger();
-        // console.log("The sphere just collided with the ground!");
-        // console.log("Collided with body:",e.body);
-        // console.log("Contact between bodies:",e.contact);
     });
-
-
 }
 
 function setup()
 {
-    var world=cgl.frameStore.world;
-    if(!world)return;
+    const world = cgl.frameStore.world;
+    if (!world) return;
 
     // if(body)world.removeBody(body);
 
-    lastWorld=world;
-    needSetup=false;
+    lastWorld = world;
+    needSetup = false;
     outRadius.set(inRadius.get());
 }
 
-var vec=vec3.create();
-var q=quat.create();
+const vec = vec3.create();
+const q = quat.create();
 
-var trMat=mat4.create();
+const trMat = mat4.create();
 function render()
 {
-    if(needSetup)setup();
-    if(lastWorld!=cgl.frameStore.world)setup();
+    if (needSetup)setup();
+    if (lastWorld != cgl.frameStore.world)setup();
 
-
-    for(var i=0;i<bodies.length;i++)
+    for (let i = 0; i < bodies.length; i++)
     {
-        var body=bodies[i];
+        const body = bodies[i];
         // if(!body)return;
 
-outIndex.set(i);
+        outIndex.set(i);
 
         vec3.set(vec,
             body.position.x,
             body.position.y,
             body.position.z
-            );
+        );
 
         quat.set(q,
             body.quaternion.x,
             body.quaternion.y,
             body.quaternion.z,
             body.quaternion.w);
-        quat.invert(q,q);
+        quat.invert(q, q);
 
         cgl.pushModelMatrix();
 
-        mat4.fromRotationTranslation(trMat,q,vec);
-        mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+        mat4.fromRotationTranslation(trMat, q, vec);
+        mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
 
-        if(doRender.get())m.render(cgl,inRadius.get()*2);
+        if (doRender.get())m.render(cgl, inRadius.get() * 2);
 
         outX.set(body.position.x);
         outY.set(body.position.y);
         outZ.set(body.position.z);
 
-        if(collided)
+        if (collided)
         {
-            collided=false;
+            collided = false;
             outCollision.trigger();
         }
 
-        CABLES.physicsCurrentBody=body;
+        CABLES.physicsCurrentBody = body;
 
         next.trigger();
 
-        CABLES.physicsCurrentBody=null;
+        CABLES.physicsCurrentBody = null;
         cgl.popModelMatrix();
     }
-
 }

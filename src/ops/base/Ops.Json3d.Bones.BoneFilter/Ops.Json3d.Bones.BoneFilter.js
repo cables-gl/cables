@@ -1,73 +1,57 @@
-var exec=op.inTrigger("Exec");
-var joint=op.inValueSelect("Joint");
-var next=op.outTrigger("Next");
+const exec = op.inTrigger("Exec");
+const joint = op.inValueSelect("Joint");
+const next = op.outTrigger("Next");
 
-var cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-var oldBones=null;
-var oldBonesNum=0;
-var boneIndex=-1;
+let oldBones = null;
+let oldBonesNum = 0;
+let boneIndex = -1;
 
 
-joint.onChange=function()
+joint.onChange = function ()
 {
-    if(oldBones)
+    if (oldBones)
     {
-        for(var i=0;i<oldBones.length;i++)
+        for (let i = 0; i < oldBones.length; i++)
         {
-            if(joint.get()==oldBones[i].name)boneIndex=i;
+            if (joint.get() == oldBones[i].name)boneIndex = i;
         }
-
     }
-
 };
 
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-
-    if(cgl.frameStore.bones!=oldBones || oldBonesNum!=cgl.frameStore.bones.length)
+    if (cgl.frameStore.bones != oldBones || oldBonesNum != cgl.frameStore.bones.length)
     {
-        var bones=oldBones=cgl.frameStore.bones;
-        oldBonesNum=cgl.frameStore.bones.length;
+        const bones = oldBones = cgl.frameStore.bones;
+        oldBonesNum = cgl.frameStore.bones.length;
 
-        var values=[];
-        var oldValue=joint.get();
+        const values = [];
+        const oldValue = joint.get();
 
-        for(var i=0;i<bones.length;i++)
+        for (let i = 0; i < bones.length; i++)
         {
-            // console.log(i,bones[i].name );
             values.push(bones[i].name);
 
-            if(joint.get()==bones[i].name)boneIndex=i;
-
+            if (joint.get() == bones[i].name)boneIndex = i;
         }
 
         // joint=op.inValueSelect("Joint",values,oldValue);
-        joint.setUiAttribs({"values":values});
+        joint.setUiAttribs({ "values": values });
     }
 
 
-    if(cgl.frameStore.bones)
+    if (cgl.frameStore.bones)
     {
+        const bone = cgl.frameStore.bones[boneIndex];
+        cgl.pushModelMatrix();
 
-        // for(var i=0;i<cgl.frameStore.bones.length;i++)
-
-        var bone=cgl.frameStore.bones[boneIndex];
-        {
-            // if(i)
-            cgl.pushModelMatrix();
-
-            mat4.mul(cgl.mMatrix,cgl.mMatrix,bone.boneMatrix);
-            // mat4.translate()
-            // cgl.frameStore.bones.transformed
-            next.trigger();
-            cgl.popModelMatrix();
-
-
-        }
-
+        mat4.mul(cgl.mMatrix, cgl.mMatrix, bone.boneMatrix);
+        // mat4.translate()
+        // cgl.frameStore.bones.transformed
+        next.trigger();
+        cgl.popModelMatrix();
     }
-
 };
-

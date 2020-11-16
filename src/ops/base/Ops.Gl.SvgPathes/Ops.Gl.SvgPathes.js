@@ -1,53 +1,50 @@
-var render=op.inTrigger('render');
-var svgFile=op.addInPort(new CABLES.Port(op,"object",CABLES.OP_PORT_TYPE_OBJECT));
+const render = op.inTrigger("render");
+const svgFile = op.addInPort(new CABLES.Port(op, "object", CABLES.OP_PORT_TYPE_OBJECT));
 
-var thickness=op.addInPort(new CABLES.Port(op,"thickness",CABLES.OP_PORT_TYPE_VALUE));
+const thickness = op.addInPort(new CABLES.Port(op, "thickness", CABLES.OP_PORT_TYPE_VALUE));
 
-var outEach=op.outTrigger("Each");
-var outPoints=op.outArray("Points");
+const outEach = op.outTrigger("Each");
+const outPoints = op.outArray("Points");
 
 
 thickness.set(0.1);
 
-var paths=[];
+const paths = [];
 
-var cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    
-    for(var i=0;i<paths.length;i++)
+    for (let i = 0; i < paths.length; i++)
     {
         outPoints.set(null);
         outPoints.set(paths[i]);
         outEach.trigger();
     }
-
 };
 
-svgFile.onChange=parse;
-thickness.onChange=parse;
-var doCenter=parse;
+svgFile.onChange = parse;
+thickness.onChange = parse;
+const doCenter = parse;
 
 function parse()
 {
+    const arr = svgFile.get();
+    const geom = null;
+    paths.length = 0;
 
-    var arr=svgFile.get();
-    var geom=null;
-    paths.length=0;
-
-    for(var i in arr)
+    for (const i in arr)
     {
-        var verts=[];
+        const verts = [];
 
-        for(var j in arr[i])
+        for (const j in arr[i])
         {
-            verts.push(arr[i][j][0]-200);
-            verts.push(arr[i][j][1]-150);
+            verts.push(arr[i][j][0] - 200);
+            verts.push(arr[i][j][1] - 150);
             verts.push(0);
         }
 
-paths.push(verts);
+        paths.push(verts);
 
 
         // var newGeom=CGL.Geometry.LinesToGeom(verts,{thickness:thickness.get()});
@@ -72,6 +69,4 @@ paths.push(verts);
     // {
     //     meshes.push(new CGL.Mesh(cgl,geom));
     // }
-
-    console.log(paths.length+' meshes!');
 }

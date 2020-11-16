@@ -85,7 +85,6 @@ function setRay(world)
     vx = v3[0];
     vy = v3[1];
     vz = v3[2];
-    // console.log(vx,vy,vz);
 
     const huge = 99999;
 
@@ -110,7 +109,6 @@ function setRay(world)
     toY.set(to[1]);
     toZ.set(to[2]);
 
-
     rayResult = new CANNON.RaycastResult();
     // world.raycastClosest(
     //     new CANNON.Vec3(origin[0], origin[1], origin[2]),
@@ -119,7 +117,6 @@ function setRay(world)
     //     rayResult);
 
     results.length = 0;
-    // console.log("---");
 
     world.raycastAll(
         new CANNON.Vec3(origin[0], origin[1], origin[2]),
@@ -152,7 +149,6 @@ function render()
 {
     next.trigger();
 
-
     const world = cgl.frameStore.world;
     if (!world) return;
 
@@ -162,13 +158,9 @@ function render()
 
     // const r = ray.intersectWorld(world, {});
 
-
     if (rayResult)
     {
-        // console.log(rayResult);
-        // console.log(rayResult);
         hasHit.set(rayResult.hasHit);
-
 
         if (rayResult.hasHit && inCursor.get())
         {
@@ -203,8 +195,6 @@ function render()
         }
         else outName.set(null);
 
-        // console.log(rayResult);
-
         hitX.set(rayResult.hitPointWorld.x);
         hitY.set(rayResult.hitPointWorld.y);
         hitZ.set(rayResult.hitPointWorld.z);
@@ -219,8 +209,6 @@ function render()
         outName.set(null);
     }
     hitResult.set(rayResult);
-    // console.log(rayResult);
-
 
     for (let i = 0; i < world.bodies.length; i++)
         if (world.bodies[i] != hitBody)world.bodies[i].raycastHit = false;

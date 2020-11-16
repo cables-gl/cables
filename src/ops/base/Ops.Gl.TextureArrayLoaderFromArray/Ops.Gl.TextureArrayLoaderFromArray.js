@@ -54,8 +54,6 @@ function loadImage(_i, _url, nocache, cb)
     if (!url) return;
     // url=url.replace("XXX",i);
 
-    // console.log(url);
-
     url = op.patch.getFilePath(url);
     if (!inCaching.get())
         if (nocache)url += "?rnd=" + CABLES.generateUUID();
@@ -67,14 +65,12 @@ function loadImage(_i, _url, nocache, cb)
         var tex = CGL.Texture.load(cgl, url,
             function (err)
             {
-                // console.log('tex loaded!!');
-
                 if (err)
                 {
                     setTempTexture();
                     const errMsg = "could not load texture \"" + url + "\"";
                     op.uiAttr({ "error": errMsg });
-                    console.warn("[TextureArrayLoader] " + errMsg);
+                    op.warn("[TextureArrayLoader] " + errMsg);
                     if (cb)cb();
                     return;
                 }
@@ -83,7 +79,6 @@ function loadImage(_i, _url, nocache, cb)
                 width.set(tex.width);
                 height.set(tex.height);
                 ratio.set(tex.width / tex.height);
-
 
                 arr[i] = tex;
                 if (!tex.isPowerOfTwo()) op.uiAttr(
@@ -107,7 +102,6 @@ function loadImage(_i, _url, nocache, cb)
                 "filter": cgl_filter
             });
 
-
         // textureOut.set(null);
         // textureOut.set(tex);
 
@@ -129,7 +123,6 @@ function realReload(nocache)
 
     // arr.length=files.length;
 
-
     for (let i = 0; i < files.length; i++)
     {
         arr[i] = CGL.Texture.getEmptyTexture(cgl);
@@ -137,7 +130,6 @@ function realReload(nocache)
         if (i == files.length - 1)cb = function ()
         {
             cgl.patch.loading.finished(loadingId);
-            // console.log('loaded all');
         };
 
         if (!files[i]) { if (cb) cb(); }
@@ -173,7 +165,6 @@ op.onFileChanged = function (fn)
     //     realReload(true);
     // }
 };
-
 
 tfilter.set("linear");
 wrap.set("repeat");

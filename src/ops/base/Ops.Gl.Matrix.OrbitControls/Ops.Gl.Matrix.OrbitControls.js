@@ -106,14 +106,12 @@ function reset()
     {
         off = -fullCircle;
         px %= -fullCircle;
-        // console.log("MINUS YES");
     }
     else
     if (px % fullCircle > halfCircle)
     {
         off = fullCircle;
         px %= fullCircle;
-        // console.log("PLUSS YES");
     }
     else px %= fullCircle;
 
@@ -345,7 +343,7 @@ function onMouseDown(event)
         const el = op.patch.cgl.canvas;
         el.requestPointerLock = el.requestPointerLock || el.mozRequestPointerLock || el.webkitRequestPointerLock;
         if (el.requestPointerLock) el.requestPointerLock();
-        else console.log("no t found");
+        else op.warn("no requestPointerLock found");
         // document.addEventListener("mousemove", onmousemove, false);
 
         document.addEventListener("pointerlockchange", lockChange, false);
@@ -377,7 +375,6 @@ function lockChange()
     if (document.pointerLockElement === el || document.mozPointerLockElement === el || document.webkitPointerLockElement === el)
     {
         document.addEventListener("mousemove", onmousemove, false);
-        console.log("listening...");
     }
 }
 

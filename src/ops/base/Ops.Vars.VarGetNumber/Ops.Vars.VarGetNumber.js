@@ -65,7 +65,6 @@ function init()
         op.setUiError("unknownvar", null);
         op.setTitle("#" + op.varName.get());
         onChange(variable.getValue());
-        // console.log("var value ",variable.getName(),variable.getValue());
     }
     else
     {

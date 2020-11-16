@@ -113,7 +113,6 @@ function updateClass()
     warning();
 }
 
-
 op.addEventListener("onEnabledChange", function (enabled)
 {
     op.log("css changed");
@@ -133,7 +132,6 @@ function popUpAnim()
     const mode = percentOrPixel.get();
     const start = startPosition.get() + mode;
     const end = endPosition.get() + mode;
-
 
     const targetDiv = document.getElementById(divid);
     div.style.display = "block";
@@ -172,12 +170,11 @@ function holdAnim(mode, start, end, animData)
     if (divSide.get() == "bottom") animData.bottom = [end, end];
     else animData.top = [end, end];
 
-    document.getElementById(divid).animate(
-        animData, holdDuration.get() * 1000).onfinish =
-    function ()
-    {
-        endAnim(mode, start, end, animData);
-    };
+    document.getElementById(divid).animate(animData, holdDuration.get() * 1000).onfinish =
+        function ()
+        {
+            endAnim(mode, start, end, animData);
+        };
 }
 
 function endAnim(mode, start, end, animData)

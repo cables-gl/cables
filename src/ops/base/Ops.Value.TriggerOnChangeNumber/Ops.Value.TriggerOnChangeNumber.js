@@ -1,6 +1,7 @@
-const inval = op.inValue("Value");
-const next = op.outTrigger("Next");
-const number = op.outValue("Number");
+const
+    inval = op.inFloat("Value"),
+    next = op.outTrigger("Next"),
+    number = op.outNumber("Number");
 
 inval.onChange = function ()
 {

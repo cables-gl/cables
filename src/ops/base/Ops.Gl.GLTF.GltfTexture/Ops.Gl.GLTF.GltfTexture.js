@@ -13,7 +13,6 @@ const
     type = op.outString("Type"),
     outFound = op.outBool("Found");
 
-
 const cgl = op.patch.cgl;
 let tex = null;
 let cgl_filter = 0;
@@ -23,7 +22,6 @@ let cgl_aniso = 0;
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
 imgName.onChange = flip.onChange = unpackAlpha.onChange = function () { reloadSoon(); };
-
 
 function reloadSoon()
 {
@@ -41,11 +39,6 @@ inExec.onTriggered = function ()
         return;
     }
 
-    console.log(cgl.frameStore.currentScene);
-
-    // const texInfo = cgl.frameStore.currentScene.json.textures[0];
-
-    // const img = cgl.frameStore.currentScene.json.images[texInfo.source];
     let img = null;
 
     for (let i = 0; i < cgl.frameStore.currentScene.json.images.length; i++)
@@ -84,13 +77,7 @@ inExec.onTriggered = function ()
             {
                 outFound.set(false);
             }
-            //     setTempTexture();
-            //     console.log(err);
-            //     op.setUiError('urlerror','could not load texture:<br/>"'+filename.get()+'"',2);
-            //     cgl.patch.loading.finished(loadingId);
-            //     return;
-            // }
-            // else op.setUiError('urlerror',null);
+
             outTex.set(tex);
 
             width.set(tex.width);
@@ -110,7 +97,6 @@ inExec.onTriggered = function ()
     outTex.set(null);
     outTex.set(tex);
 };
-
 
 function onFilterChange()
 {

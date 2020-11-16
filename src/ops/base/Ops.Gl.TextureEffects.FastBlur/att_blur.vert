@@ -7,8 +7,6 @@ OUT vec3 norm;
 UNI mat4 projMatrix;
 UNI mat4 mvMatrix;
 UNI mat4 modelMatrix;
-// .endl()+'uniform mat4 normalMatrix;'
-
 
 UNI float pass;
 UNI float dirX;
@@ -36,18 +34,9 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     vec2 dir=vec2(dirX,dirY);
-
-    // dir+=pass;
-
-    // vec2 res=vec2(width+(pass*0.01),height+(pass*0.01));
     vec2 res=vec2( (1.) / width , (1.) / height )*dir;
 
-
     coord3= attrTexCoord;
-
-
-// uniform float offset[3] = float[](0.0, 1.3846153846, 3.2307692308);
-// uniform float weight[3] = float[](0.2270270270, 0.3162162162, 0.0702702703);
 
     coord0= attrTexCoord + (-3.0368997744118595 * res);
     coord1= attrTexCoord + (-2.089778445362373 * res);
@@ -65,9 +54,6 @@ void main()
         coord5=clamp(coord5,0.0,1.0);
         coord6=clamp(coord6,0.0,1.0);
     #endif
-
-
-
 
     gl_Position = projMatrix * mvMatrix * pos;
 }

@@ -27,7 +27,7 @@ start.onTriggered = function ()
     if (!canRead)
     {
         outFinished.set(true);
-        console.log("cannot read texture!");
+        op.error("cannot read texture!");
         return;
     }
 

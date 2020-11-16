@@ -1,116 +1,112 @@
-const inEle=op.inObject("HTML Element");
-const inVisible=op.inValueBool("Visible",true);
-const inDuration=op.inValue("Duration",0.5);
-const inOpacity=op.inValue("Opacity",1);
-const outShowing=op.outValueBool("Is Showing",false);
+const inEle = op.inObject("HTML Element");
+const inVisible = op.inValueBool("Visible", true);
+const inDuration = op.inValue("Duration", 0.5);
+const inOpacity = op.inValue("Opacity", 1);
+const outShowing = op.outValueBool("Is Showing", false);
 
-var theTimeout=null;
-inDuration.onChange=update;
-inOpacity.onChange=update;
+let theTimeout = null;
+inDuration.onChange = update;
+inOpacity.onChange = update;
 
-inVisible.onChange=updateVisibility;
-inEle.onChange=updateVisibility;
+inVisible.onChange = updateVisibility;
+inEle.onChange = updateVisibility;
 
-var styleEle=null;
-var eleId='css_'+CABLES.uuid();
+let styleEle = null;
+const eleId = "css_" + CABLES.uuid();
 
 update();
 
-var loaded=true;
-var oldvis=null;
-loaded=true;
+let loaded = true;
+const oldvis = null;
+loaded = true;
 
-op.onLoaded=function()
+op.onLoaded = function ()
 {
-    loaded=true;
+    loaded = true;
     updateVisibility();
     outShowing.set(inVisible.get());
 };
 
 function updateVisibility()
 {
-    const ele=inEle.get();
-    if(!loaded)
+    const ele = inEle.get();
+    if (!loaded)
     {
         return;
     }
 
-    if(styleEle && ele)
+    if (styleEle && ele)
     {
-        if(inVisible.get())
+        if (inVisible.get())
         {
             outShowing.set(true);
-            if(ele && ele.classList && !ele.classList.contains('CABLES_animFadeIn'))
+            if (ele && ele.classList && !ele.classList.contains("CABLES_animFadeIn"))
             {
-
                 clearTimeout(theTimeout);
                 ele.classList.remove("CABLES_animFadedOut");
                 ele.classList.remove("CABLES_animFadeOut");
                 ele.classList.add("CABLES_animFadeIn");
-                theTimeout=setTimeout(function()
-                    {
-                        ele.classList.remove("CABLES_animFadeIn");
-                        outShowing.set(true);
-                    },inDuration.get()*1000);
-
+                theTimeout = setTimeout(function ()
+                {
+                    ele.classList.remove("CABLES_animFadeIn");
+                    outShowing.set(true);
+                }, inDuration.get() * 1000);
             }
         }
         else
         {
             outShowing.set(true);
-            if(ele && ele.classList && !ele.classList.contains('CABLES_animFadeOut'))
+            if (ele && ele.classList && !ele.classList.contains("CABLES_animFadeOut"))
             {
-
                 clearTimeout(theTimeout);
                 ele.classList.remove("CABLES_animFadeIn");
                 ele.classList.add("CABLES_animFadeOut");
-                theTimeout=setTimeout(function()
-                    {
-                        ele.classList.add("CABLES_animFadedOut");
-                        outShowing.set(false);
-                    },inDuration.get()*1000);
+                theTimeout = setTimeout(function ()
+                {
+                    ele.classList.add("CABLES_animFadedOut");
+                    outShowing.set(false);
+                }, inDuration.get() * 1000);
             }
         }
     }
     else
     {
-        // console.log("fadeInOut: no html element???");
+        op.error("no html element");
     }
 }
 
-
 function getCssContent()
 {
-    var css=attachments.fadeInOut_css;
+    let css = attachments.fadeInOut_css;
 
-    while(css.indexOf("$LENGTH")>-1)css=css.replace('$LENGTH',inDuration.get());
-    while(css.indexOf("$FULLOPACITY")>-1)css=css.replace('$FULLOPACITY',inOpacity.get());
+    while (css.indexOf("$LENGTH") > -1)css = css.replace("$LENGTH", inDuration.get());
+    while (css.indexOf("$FULLOPACITY") > -1)css = css.replace("$FULLOPACITY", inOpacity.get());
 
     return css;
 }
 
 function update()
 {
-    styleEle=document.getElementById(eleId);
+    styleEle = document.getElementById(eleId);
 
-    if(styleEle)
+    if (styleEle)
     {
-        styleEle.textContent=getCssContent();
+        styleEle.textContent = getCssContent();
     }
     else
     {
-        styleEle  = document.createElement('style');
-        styleEle.type = 'text/css';
+        styleEle = document.createElement("style");
+        styleEle.type = "text/css";
         styleEle.id = eleId;
-        styleEle.textContent=getCssContent();
+        styleEle.textContent = getCssContent();
 
-        var head  = document.getElementsByTagName('body')[0];
+        const head = document.getElementsByTagName("body")[0];
         head.appendChild(styleEle);
     }
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    styleEle=document.getElementById(eleId);
-    if(styleEle)styleEle.remove();
+    styleEle = document.getElementById(eleId);
+    if (styleEle)styleEle.remove();
 };

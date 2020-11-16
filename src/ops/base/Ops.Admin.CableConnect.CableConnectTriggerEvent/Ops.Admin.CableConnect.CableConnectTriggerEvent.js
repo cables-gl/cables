@@ -1,17 +1,16 @@
-var connection=op.inObject("Connection");
-var evnt=op.inValueString("Event");
+const connection = op.inObject("Connection");
+const evnt = op.inValueString("Event");
 
-var next=op.outTrigger("Trigger");
+const next = op.outTrigger("Trigger");
 
-connection.onChange=function()
+connection.onChange = function ()
 {
-    var conn=connection.get();
-    if(!conn)return;
+    const conn = connection.get();
+    if (!conn) return;
 
-    conn.on("event",function(r)
+    conn.on("event", function (r)
     {
-        console.log(r);
-        if(r==evnt.get()) next.trigger();
+        op.log(r);
+        if (r == evnt.get()) next.trigger();
     });
 };
-

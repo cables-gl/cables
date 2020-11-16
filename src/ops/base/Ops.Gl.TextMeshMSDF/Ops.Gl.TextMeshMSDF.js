@@ -160,8 +160,6 @@ function updateAlign()
 
     vec3.set(alignVec, 0, offY, 0);
 
-    // console.log({minX,maxX,minY,maxY});
-
     widthAll = (Math.abs(minX - maxX));
     heightAll = (Math.abs(minY - maxY));
 
@@ -334,8 +332,6 @@ function generateMesh()
     }
     avgHeight /= font.chars.length;
     avgHeight *= mulSize;
-
-    // console.log({avgHeight,font});
 
     for (let s = 0; s < strings.length; s++)
     {

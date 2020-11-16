@@ -98,7 +98,6 @@ var needsRefresh = true;
 const mesh = CGL.MESHES.getSimpleRect(cgl, "texttexture rect");
 const vScale = vec3.create();
 
-
 const shader = new CGL.Shader(cgl, "texttexture");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 shader.setSource(attachments.text_vert, attachments.text_frag);
@@ -208,8 +207,6 @@ function refresh()
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
     let strings = txt.split("\n");
-
-    // console.log("strings", strings);
 
     needsRefresh = false;
 
@@ -329,13 +326,6 @@ function refresh()
         ctx.strokeStyle = "#FF0000";
         ctx.strokeRect(0, miny, ctx.canvas.width - 3, maxy - miny);
     }
-
-    /* console.log({
-        "lines": strings.length,
-        posy,
-        fontSize,
-        "text_height": textHeight
-    }); */
 
     ctx.restore();
 

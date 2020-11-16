@@ -36,13 +36,12 @@ function update()
         const str = inValue.get() + inValueSuffix.get();
         try
         {
-            // console.log("css",inProperty.get(),str);
             if (ele.style[inProperty.get()] != str)
                 ele.style[inProperty.get()] = str;
         }
         catch (e)
         {
-            console.log(e);
+            op.error(e);
         }
     }
 

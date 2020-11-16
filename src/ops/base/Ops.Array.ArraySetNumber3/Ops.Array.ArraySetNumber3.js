@@ -21,7 +21,6 @@ function ()
 {
     const arr = inArray.get();
 
-    // console.log({arr});
     if (!arr) return;
     if (newArr.length != arr.length)newArr.length = arr.length;
 

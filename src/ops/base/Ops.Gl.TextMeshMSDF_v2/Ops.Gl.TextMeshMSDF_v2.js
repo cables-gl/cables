@@ -163,7 +163,7 @@ function updateFontData()
     {
         fontData = null;
 
-        console.log("no varname", varname);
+        op.warn("no varname", varname);
         return;
     }
 
@@ -171,7 +171,6 @@ function updateFontData()
 
     if (!fontData)
     {
-        // console.log("no fontdata in var");
         return;
     }
 
@@ -182,11 +181,9 @@ function updateFontData()
     {
         fontTexs = null;
         fontData = null;
-        // console.log('no font var:' + "font_tex_"+basename);
         return;
     }
 
-    // console.log("ok got all fontdata");
     fontTexs = textVar.getValue();
 
     for (let i = 0; i < fontData.chars.length; i++) fontChars[fontData.chars[i].char] = fontData.chars[i];
@@ -303,7 +300,7 @@ render.onTriggered = function ()
 
     if (mesh && mesh.numInstances > 0)
     {
-        cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
+        // cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
         cgl.pushShader(shader);
 
         if (fontTexs[0]) uniTexSize.setValue([fontTexs[0].width, fontTexs[0].height]);
@@ -341,7 +338,7 @@ render.onTriggered = function ()
 
         cgl.setTexture(0, null);
         cgl.popShader();
-        cgl.popBlendMode();
+        // cgl.popBlendMode();
     }
 
     next.trigger();
@@ -359,7 +356,6 @@ function generateMesh()
     if (!fontData || !fontChars)
     {
         outNumChars.set(0);
-        console.log("aborting, no font data...");
         return;
     }
 
@@ -504,7 +500,6 @@ function generateMesh()
 
     if (mesh.numInstances == 0)
     {
-        console.log("no instances");
         disabled = true;
         return;
     }

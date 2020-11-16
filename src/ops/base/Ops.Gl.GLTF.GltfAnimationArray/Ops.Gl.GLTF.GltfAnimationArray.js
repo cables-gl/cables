@@ -1,91 +1,87 @@
 const
-    inExec=op.inTrigger("Render"),
-    inNodeName=op.inString("Node Name"),
-    inNum=op.inInt("Steps",100),
-    inFullAnim=op.inBool("Full Animation",true),
-    inAnimStart=op.inFloat("Start",0),
-    inAnimLen=op.inFloat("Length",10),
-    next=op.outTrigger("Next"),
-    outFound=op.outBool("Found"),
-    outArr=op.outArray("Positions");
+    inExec = op.inTrigger("Render"),
+    inNodeName = op.inString("Node Name"),
+    inNum = op.inInt("Steps", 100),
+    inFullAnim = op.inBool("Full Animation", true),
+    inAnimStart = op.inFloat("Start", 0),
+    inAnimLen = op.inFloat("Length", 10),
+    next = op.outTrigger("Next"),
+    outFound = op.outBool("Found"),
+    outArr = op.outArray("Positions");
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-op.setPortGroup("Timing",[inFullAnim,inAnimStart,inAnimLen]);
-var node=null;
+op.setPortGroup("Timing", [inFullAnim, inAnimStart, inAnimLen]);
+let node = null;
 
-inFullAnim.onChange=function()
+inFullAnim.onChange = function ()
 {
-    inAnimStart.setUiAttribs({"greyout":inFullAnim.get()});
-    inAnimLen.setUiAttribs({"greyout":inFullAnim.get()});
+    inAnimStart.setUiAttribs({ "greyout": inFullAnim.get() });
+    inAnimLen.setUiAttribs({ "greyout": inFullAnim.get() });
 };
 
-inNodeName.onChange=function()
+inNodeName.onChange = function ()
 {
     outArr.set(null);
-    node=null;
+    node = null;
     outFound.set(false);
 };
 
-
-inExec.onTriggered=function()
+inExec.onTriggered = function ()
 {
-    if(!cgl.frameStore.currentScene) return;
+    if (!cgl.frameStore.currentScene) return;
 
-    if(!node)
+    if (!node)
     {
-        const name=inNodeName.get();
+        const name = inNodeName.get();
 
-        if(!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
+        if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes)
         {
             return;
         }
 
-        for(var i=0;i<cgl.frameStore.currentScene.nodes.length;i++)
+        for (var i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
         {
-            if(cgl.frameStore.currentScene.nodes[i].name==name)
+            if (cgl.frameStore.currentScene.nodes[i].name == name)
             {
-                node=cgl.frameStore.currentScene.nodes[i];
-                // console.log("NODE",node);
+                node = cgl.frameStore.currentScene.nodes[i];
                 outFound.set(true);
             }
         }
     }
 
-
     // var idx=inNode.get();
     // idx=Math.max(0,idx);
     // idx=Math.min(cgl.frameStore.currentScene.nodes.length-1,idx);
 
-    var n=node;
-    var arr=[];
+    const n = node;
+    const arr = [];
 
-    if(n && n._animTrans&& n._animTrans.length)
+    if (n && n._animTrans && n._animTrans.length)
     {
         outArr.set(null);
 
-        const num=inNum.get();
-        var len=n._animTrans[0].getLength();
-        var add=0;
+        const num = inNum.get();
+        let len = n._animTrans[0].getLength();
+        let add = 0;
 
-        if(!inFullAnim.get())
+        if (!inFullAnim.get())
         {
-            len=inAnimLen.get();
-            add=inAnimStart.get();
+            len = inAnimLen.get();
+            add = inAnimStart.get();
         }
 
-        for(var i=0;i<num;i++)
+        for (var i = 0; i < num; i++)
         {
-            var t=len*i/num+add;
+            const t = len * i / num + add;
 
-            arr[i*3+0]=n._animTrans[0].getValue(t);
-            arr[i*3+1]=n._animTrans[1].getValue(t);
-            arr[i*3+2]=n._animTrans[2].getValue(t);
+            arr[i * 3 + 0] = n._animTrans[0].getValue(t);
+            arr[i * 3 + 1] = n._animTrans[1].getValue(t);
+            arr[i * 3 + 2] = n._animTrans[2].getValue(t);
         }
 
         outArr.set(arr);
     }
 
     next.trigger();
-
 };

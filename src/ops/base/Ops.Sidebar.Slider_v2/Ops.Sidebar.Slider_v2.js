@@ -27,7 +27,6 @@ op.setPortGroup("Range", [minPort, maxPort, stepPort]);
 op.setPortGroup("Visibility", [inGreyOut, inVisible]);
 let inutValueDelayed = 0;
 
-
 // vars
 const el = document.createElement("div");
 el.classList.add("sidebar__item");
@@ -60,7 +59,6 @@ const inputWrapper = document.createElement("div");
 inputWrapper.classList.add("sidebar__slider-input-wrapper");
 el.appendChild(inputWrapper);
 
-
 const activeTrack = document.createElement("div");
 activeTrack.classList.add("sidebar__slider-input-active-track");
 inputWrapper.appendChild(activeTrack);
@@ -73,7 +71,6 @@ input.setAttribute("step", stepPort.get());
 input.setAttribute("value", defaultValuePort.get());
 input.style.display = "block"; /* needed because offsetWidth returns 0 otherwise */
 inputWrapper.appendChild(input);
-
 
 updateActiveTrack();
 input.addEventListener("input", onSliderInput);
@@ -112,7 +109,7 @@ reset.onTriggered = function ()
     value.value = newValue;
     input.value = newValue;
     inputValuePort.set(newValue);
-    // console.log(newValue);
+
     updateActiveTrack();
 };
 
@@ -190,7 +187,6 @@ function stepPortChanged()
     input.setAttribute("step", step);
     updateActiveTrack();
 }
-
 
 function updateActiveTrack(val)
 {

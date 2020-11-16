@@ -1,22 +1,18 @@
 const
-    outCookie=op.outObject("Cookie"),
-    outString=op.outString("Cookie String");
-
+    outCookie = op.outObject("Cookie"),
+    outString = op.outString("Cookie String");
 
 update();
 
 function str_obj(str)
 {
-    str = str.split(';');
+    str = str.split(";");
+    const result = {};
 
-    // console.log('strings',str);
-
-    var result = {};
-
-    for (var i = 0; i < str.length; i++)
+    for (let i = 0; i < str.length; i++)
     {
-        var cur = str[i].split('=');
-        if(cur.length>1) result[cur[0].trim()] = cur[1].trim();
+        const cur = str[i].split("=");
+        if (cur.length > 1) result[cur[0].trim()] = cur[1].trim();
     }
     return result;
 }

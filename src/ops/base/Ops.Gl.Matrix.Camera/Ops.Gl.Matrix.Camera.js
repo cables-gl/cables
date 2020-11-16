@@ -29,7 +29,6 @@ const rotX = op.inValue("tilt", 0);
 const rotY = op.inValue("pan", 0);
 const rotZ = op.inValue("roll", 0);
 
-
 /* Outputs */
 const outAsp = op.outValue("Aspect");
 const outArr = op.outArray("Look At Array");
@@ -57,7 +56,6 @@ let updateCameraMovementMatrix = true;
 render.onTriggered = function ()
 {
     if (cgl.frameStore.shadowPass) return trigger.trigger();
-
 
     // Aspect ration
     if (!autoAspect.get()) asp = aspect.get();
@@ -116,7 +114,6 @@ render.onTriggered = function ()
         );
     }
 
-
     arr[0] = eyeX.get();
     arr[1] = eyeY.get();
     arr[2] = eyeZ.get();
@@ -137,7 +134,6 @@ render.onTriggered = function ()
     vec3.set(vCenter, centerX.get(), centerY.get(), centerZ.get());
 
     mat4.lookAt(transMatrix, vEye, vCenter, vUp);
-    // console.log(transMatrix, mat4.invert(mat4.create(), transMatrix));
 
     mat4.multiply(cgl.vMatrix, cgl.vMatrix, transMatrix);
 
@@ -147,7 +143,6 @@ render.onTriggered = function ()
     cgl.popPMatrix();
 
     cgl.popViewMatrix();
-
 
     // GUI for dolly, boom and truck
     if (op.isCurrentUiOp())

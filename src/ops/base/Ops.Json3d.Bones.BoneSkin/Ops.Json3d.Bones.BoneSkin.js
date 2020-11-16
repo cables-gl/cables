@@ -1,4 +1,3 @@
-
 // https://www.khronos.org/opengl/wiki/Skeletal_Animation
 
 const render = op.inTrigger("Render");
@@ -65,9 +64,6 @@ function setupIndexWeights(jsonMesh)
         return;
     }
 
-    // if(!vertWeights) console.log('no vertWeights');
-    //     else if(vertWeights.length!=geom.vertices.length/3) console.log('wrong length');
-
     if (!vertWeights || vertWeights.length != geom.vertices.length / 3)
     {
         vertWeights = [];
@@ -117,7 +113,7 @@ function setupIndexWeights(jsonMesh)
                     vertWeights[index][3] = weight;
                     vertIndex[index][3] = i;
                 }
-                else console.log("too many weights for vertex!!!!!!!");
+                else op.warn("too many weights for vertex!");
         }
     }
 
@@ -135,20 +131,11 @@ render.onTriggered = function ()
     if (!cgl.getShader()) return;
     const scene = cgl.frameStore.currentScene.getValue();
 
-    if (cgl.getShader() != shader)
-    {
-        // console.log("NEW SHADER!");
-    }
-
     if ((mesh && scene && scene.meshes && scene.meshes.length > meshIndex) || cgl.getShader() != shader)
     {
         if (cgl.getShader() != shader)
         {
-            // console.log('bonesys RECOMPILE');
-
-
             var startInit = CABLES.now();
-            // console.log("starting bone skin shader init...");
 
             if (shader)removeModule();
             shader = cgl.getShader();
@@ -164,18 +151,15 @@ render.onTriggered = function ()
             shader.define("SKIN_NUM_BONES", 1);
             boneMatricesUniform = new CGL.Uniform(shader, "m4", "bone", []);
             attribWeightsScene = null;
-            // console.log("finished bone skin shader init...",(CABLES.now()-startInit));
         }
 
         if (attribWeightsScene != scene)
         {
             var startInit = CABLES.now();
-            // console.log("starting bone skin weights init...");
             vertWeights = null;
             setGeom();
             attribWeightsScene = scene;
             setupIndexWeights(scene.meshes[meshIndex]);
-            // console.log("finished bone skin  weights init...",(CABLES.now()-startInit));
         }
 
         const bones = scene.meshes[meshIndex].bones;
@@ -187,17 +171,14 @@ render.onTriggered = function ()
                 if (boneMatrices.length != bones.length * 16)
                     boneMatrices.length = bones.length * 16;
 
-                // console.log('.');
-
                 for (let mi = 0; mi < 16; mi++)
                     boneMatrices[i * 16 + mi] = bones[i].matrix[mi];
             }
             else
             {
-                // console.log('no bone matrix',i);
+                op.warn("no bone matrix", i);
             }
         }
-        // console.log(boneMatrices);
 
         boneMatricesUniform.setValue(boneMatrices);
     }

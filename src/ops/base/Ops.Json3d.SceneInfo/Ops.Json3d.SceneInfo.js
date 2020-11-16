@@ -1,90 +1,88 @@
-var render=op.inTrigger("Render");
-var next=op.outTrigger("Next");
+const render = op.inTrigger("Render");
+const next = op.outTrigger("Next");
 
-var numNodes=op.outValue("Num Nodes");
-var numMaterials=op.outValue("Num Materials");
-var numMeshes=op.outValue("Num Meshes");
-var numBones=op.outValue("Num Bones");
+const numNodes = op.outValue("Num Nodes");
+const numMaterials = op.outValue("Num Materials");
+const numMeshes = op.outValue("Num Meshes");
+const numBones = op.outValue("Num Bones");
 
-var numAnims=op.outValue("Num Animations");
-var numAnimsChannels=op.outValue("Num Anim Channels");
-var outDuration=op.outValue("Anim Duration");
+const numAnims = op.outValue("Num Animations");
+const numAnimsChannels = op.outValue("Num Anim Channels");
+const outDuration = op.outValue("Anim Duration");
 
+const inDump = op.inTriggerButton("Dump Console");
 
-var inDump=op.inTriggerButton("Dump Console");
+const cgl = op.patch.cgl;
+const scene = null;
 
-var cgl=op.patch.cgl;
-var scene=null;
-
-inDump.onTriggered=function()
+inDump.onTriggered = function ()
 {
-    console.log(scene);
+    op.log(scene);
 };
 
 function isBone(name)
 {
-    if(!scene) return false;
-    for(var j=0;j<scene.meshes.length;j++)
-        if(scene.meshes[j].bones)
-            for(var i=0;i<scene.meshes[j].bones.length;i++)
-                if(scene.meshes[j].bones[i].name==name)
+    if (!scene) return false;
+    for (let j = 0; j < scene.meshes.length; j++)
+        if (scene.meshes[j].bones)
+            for (let i = 0; i < scene.meshes[j].bones.length; i++)
+                if (scene.meshes[j].bones[i].name == name)
                     return true;
     return false;
 }
 
-function findBoneChilds(n,bones)
+function findBoneChilds(n, bones)
 {
-    for(var i=0;i<n.children.length;i++)
+    for (let i = 0; i < n.children.length; i++)
     {
-        if(isBone(n.children[i].name))
+        if (isBone(n.children[i].name))
             bones++;
-        if(n.children[i].children)bones=findBoneChilds(n.children[i],bones);
+        if (n.children[i].children)bones = findBoneChilds(n.children[i], bones);
     }
     return bones;
 }
 
-function countNodes(n,count)
+function countNodes(n, count)
 {
     count++;
-    if(n.children)
+    if (n.children)
     {
-        for(var i=0;i<n.children.length;i++)
+        for (let i = 0; i < n.children.length; i++)
         {
-            count=countNodes(n.children[i],count);
+            count = countNodes(n.children[i], count);
         }
     }
     return count;
 }
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(cgl.frameStore.currentScene)
+    if (cgl.frameStore.currentScene)
     {
-        var scene=cgl.frameStore.currentScene.getValue();
+        const scene = cgl.frameStore.currentScene.getValue();
 
-        if(scene)
+        if (scene)
         {
-            if(scene.animations)numAnims.set(scene.animations.length);
-            if(scene.animations)
+            if (scene.animations)numAnims.set(scene.animations.length);
+            if (scene.animations)
             {
-                var num=0;
-                for(var i=0;i<scene.animations.length;i++)
+                let num = 0;
+                for (let i = 0; i < scene.animations.length; i++)
                 {
-                    num+=scene.animations[i].channels.length||0;
+                    num += scene.animations[i].channels.length || 0;
                 }
                 numAnimsChannels.set(num);
             }
-            if(scene.materials)numMaterials.set(scene.materials.length);
-            if(scene.meshes)numMeshes.set(scene.meshes.length);
-    
-            if(scene.animations && scene.animations[0].duration)outDuration.set(scene.animations[0].duration);
-    
-            var bones=findBoneChilds(scene.rootnode,0);
+            if (scene.materials)numMaterials.set(scene.materials.length);
+            if (scene.meshes)numMeshes.set(scene.meshes.length);
+
+            if (scene.animations && scene.animations[0].duration)outDuration.set(scene.animations[0].duration);
+
+            const bones = findBoneChilds(scene.rootnode, 0);
             numBones.set(bones);
-            
-            numNodes.set( countNodes(scene.rootnode,0) );
+
+            numNodes.set(countNodes(scene.rootnode, 0));
         }
     }
     next.trigger();
 };
-

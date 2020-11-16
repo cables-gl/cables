@@ -12,6 +12,8 @@ const
     available = op.outValue("Available"),
     outWidth = op.outNumber("Width"),
     outHeight = op.outNumber("Height"),
+    outError = op.outString("Error"),
+    outElement = op.outObject("HTML Element"),
     outEleId = op.outString("Element Id");
 
 width.onChange =
@@ -49,7 +51,6 @@ function removeElement()
     clearTimeout(timeout);
 }
 
-
 inActive.onChange = function ()
 {
     if (inActive.get())
@@ -84,12 +85,14 @@ function updateTexture()
 function camInitComplete(stream)
 {
     tex.videoElement = videoElement;
+    outElement.set(videoElement);
     // videoElement.src = window.URL.createObjectURL(stream);
     videoElement.srcObject = stream;
     // tex.videoElement=stream;
     videoElement.onloadedmetadata = function (e)
     {
         available.set(true);
+        console.log(videoElement);
 
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);
@@ -112,27 +115,28 @@ function startWebcam()
     constraints.video.width = width.get();
     constraints.video.height = height.get();
 
-    // navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mediaDevices.getUserMedia;
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
     // navigator.mediaDevices.getUserMedia ||
 
-    if (navigator.getUserMedia)
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     {
-        navigator.getUserMedia(constraints, camInitComplete,
-            function ()
-            {
-                available.set(false);
-                // console.log('error webcam');
-            });
-    }
-    else
-    {
-        // the ios way...
-
         navigator.mediaDevices.getUserMedia(constraints)
             .then(camInitComplete)
             .catch(function (error)
             {
-                console.log(error.name + ": " + error.message);
+                available.set(false);
+                op.error(error.name + ": " + error.message);
+                outError.set(error.name + ": " + error.message);
+            });
+    }
+    else
+    if (navigator.getUserMedia)
+    {
+        navigator.getUserMedia(constraints, camInitComplete,
+            function (error)
+            {
+                op.error(error.name + ": " + error.message);
+                available.set(false);
             });
     }
 }

@@ -26,8 +26,6 @@ void main()
 {
     vec4 color = vec4(0.0);
 
-// color += texture(tex, texCoord+1.0/1024.0*0.5);
-
     color += texture(tex, coord0) * 0.06927096443792478;
     color += texture(tex, coord1) * 0.1383328848652136;
     color += texture(tex, coord2) * 0.21920904690397863;

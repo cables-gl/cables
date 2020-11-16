@@ -36,13 +36,13 @@ const init = () =>
             socket.globalDelay = globalDelay.get();
             sendOut.set(allowSend.get());
             clientIdOut.set(socket.clientId);
-            console.info("socketcluster clientId", socket.clientId);
+
             (async () =>
             {
                 for await (const { error } of socket.listener("error"))
                 {
                     op.setUiError("connectionError", `error in socketcluster connection (${error.name})`, 2);
-                    console.error(error);
+                    op.error(error);
                     errorOut.set(error);
                     ready.set(false);
                 }
@@ -63,7 +63,6 @@ const init = () =>
         }, 1000);
     }
 };
-
 
 globalDelay.onChange = () =>
 {

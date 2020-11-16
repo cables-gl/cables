@@ -15,7 +15,6 @@ const
     inTimeLine = op.inBool("Sync to timeline", false),
     inLoop = op.inBool("Loop", true),
 
-
     inNormFormat = op.inSwitch("Normals Format", ["XYZ", "X-ZY"], "XYZ"),
     inVertFormat = op.inSwitch("Vertices Format", ["XYZ", "XZ-Y"], "XYZ"),
     inCalcNormals = op.inBool("Calc Normals", false),
@@ -35,7 +34,6 @@ const
     outAnimFinished = op.outTrigger("Finished");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
-
 
 const le = true; // little endian
 const cgl = op.patch.cgl;
@@ -115,7 +113,6 @@ inTimeLine.onChange = function ()
     inTime.setUiAttribs({ "greyout": inTimeLine.get() });
 };
 
-
 inCamera.onChange = setCam;
 
 function setCam()
@@ -128,7 +125,6 @@ function setCam()
         if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
     }
 }
-
 
 inExec.onTriggered = function ()
 {
@@ -157,7 +153,6 @@ inExec.onTriggered = function ()
             const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
             gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
-            // console.log(sc,sc,sc);
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
         }
         if (doCenter)
@@ -170,7 +165,6 @@ inExec.onTriggered = function ()
     nextBefore.trigger();
 
     if (needsMatUpdate) updateMaterials();
-
 
     if (cam) cam.start(time);
 
@@ -292,7 +286,6 @@ function updateMaterials()
     if (tab)printInfo();
 }
 
-
 function hideNodesFromArray()
 {
     const hideArr = inHideNodes.get();
@@ -302,8 +295,6 @@ function hideNodesFromArray()
     {
         return;
     }
-
-    console.log("hiding...", hideArr);
 
     for (let i = 0; i < hideArr.length; i++)
     {
@@ -331,7 +322,6 @@ function hideNodesFromData()
     hideNodesFromArray();
 }
 
-
 function loadData()
 {
     data = dataPort.get();
@@ -355,7 +345,6 @@ function findParents(nodes, childNodeIndex)
     {
         if (gltf.nodes[i].children.indexOf(childNodeIndex) >= 0)
         {
-            console.log("found parent", gltf.nodes[i].name);
             nodes.push(gltf.nodes[i]);
             if (gltf.nodes[i].isChild) findParents(nodes, i);
         }
@@ -374,7 +363,6 @@ op.exposeNode = function (name, tree)
 {
     if (tree)
     {
-        console.log(gltf.nodes);
         for (let i = 0; i < gltf.nodes.length; i++)
         {
             if (gltf.nodes[i].name == name)

@@ -1,53 +1,49 @@
+const
+    exec = op.inTrigger("Render"),
+    inNum = op.inValue("Num Times", 3),
+    inSeed = op.inValue("Seed", 1),
+    inOnlyOnce = op.inValueBool("Only Once"),
+    outIndex = op.outValue("Index");
 
-var exec=op.inTrigger("Render");
+const linked = [];
+const triggers = [];
 
-var inNum=op.inValue("Num Times",3);
-var inSeed=op.inValue("Seed",1);
-var inOnlyOnce=op.inValueBool("Only Once");
-var outIndex=op.outValue("Index");
-
-var linked=[];
-var triggers=[];
-
-for(var i=0;i<8;i++)
+for (let i = 0; i < 8; i++)
 {
-    var newIn=op.addOutPort(new CABLES.Port(op,"trigger "+i,CABLES.OP_PORT_TYPE_FUNCTION));
-    triggers.push( newIn );
-    newIn.onLinkChanged=updateLinkedArray;
+    const newIn = op.addOutPort(new CABLES.Port(op, "trigger " + i, CABLES.OP_PORT_TYPE_FUNCTION));
+    triggers.push(newIn);
+    newIn.onLinkChanged = updateLinkedArray;
 }
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    if(linked.length==0)return;
-    
-    Math.randomSeed=inSeed.get();
+    if (linked.length == 0) return;
 
-    var numTriggered=0;
+    Math.randomSeed = inSeed.get();
 
-    if(inOnlyOnce.get())
+    let numTriggered = 0;
+
+    if (inOnlyOnce.get())
     {
-        for(var i=0;i<linked.length;i++)
-            linked[i].RTwasTriggered=false;
-        
+        for (var i = 0; i < linked.length; i++)
+            linked[i].RTwasTriggered = false;
     }
 
-
-
-    for(var i=0;i<inNum.get();i++)
+    for (var i = 0; i < inNum.get(); i++)
     {
         outIndex.set(i);
-        
-        var r=Math.floor(Math.seededRandom()*linked.length);
-        
-        if(linked[r])
+
+        const r = Math.floor(Math.seededRandom() * linked.length);
+
+        if (linked[r])
         {
-            if(inOnlyOnce.get())
+            if (inOnlyOnce.get())
             {
-                if(numTriggered==linked.length)
+                if (numTriggered == linked.length)
                 {
                     return;
                 }
-                if(!linked[r].RTwasTriggered)
+                if (!linked[r].RTwasTriggered)
                 {
                     linked[r].trigger();
                     numTriggered++;
@@ -58,20 +54,17 @@ exec.onTriggered=function()
             {
                 linked[r].trigger();
             }
-            linked[r].RTwasTriggered=true;
+            linked[r].RTwasTriggered = true;
         }
     }
-    
-    
 };
 
 function updateLinkedArray()
 {
-    linked.length=0;
-    for(var i=0;i<triggers.length;i++)
+    linked.length = 0;
+    for (let i = 0; i < triggers.length; i++)
     {
-        if(triggers[i].isLinked())
+        if (triggers[i].isLinked())
             linked.push(triggers[i]);
     }
-    // console.log("CGHANGE");
 }
