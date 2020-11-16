@@ -50,7 +50,7 @@ EMBED.addPatch = function (_element, options)
     {
         options.onError = function (err)
         {
-            Log.log(err);
+            Log.error(err);
         };
     }
 
