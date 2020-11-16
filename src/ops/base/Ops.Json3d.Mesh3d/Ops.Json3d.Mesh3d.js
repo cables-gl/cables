@@ -76,11 +76,7 @@ function calcNormals()
 {
     if (!geom)
     {
-<<<<<<< HEAD
         op.error("calc normals: no geom!");
-=======
-        console.log("calc normals: no geom!");
->>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
         return;
     }
 
