@@ -1,60 +1,58 @@
 const
-    exe=op.inTrigger("Render"),
-    filename=op.inUrl("file",'3d json'),
-    meshIndex=op.inValueInt("Mesh Index",0),
-    inNormals=op.inSwitch("Calculate Normals",["no","smooth","flat"],"no"),
-    inResize=op.inBool("Resize",true),
-    inSize=op.inValue("New Size",1),
-    centerPivot=op.inValueBool("Center",true),
-    merge=op.inValueBool("Merge All",false),
-    next=op.outTrigger("trigger"),
-    draw=op.inValueBool("Draw",true),
-    geometryOut=op.outObject("Geometry"),
-    outScale=op.outValue("Scaling",1.0),
-    outName=op.outString("Mesh Name");
+    exe = op.inTrigger("Render"),
+    filename = op.inUrl("file", "3d json"),
+    meshIndex = op.inValueInt("Mesh Index", 0),
+    inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no"),
+    inResize = op.inBool("Resize", true),
+    inSize = op.inValue("New Size", 1),
+    centerPivot = op.inValueBool("Center", true),
+    merge = op.inValueBool("Merge All", false),
+    next = op.outTrigger("trigger"),
+    draw = op.inValueBool("Draw", true),
+    geometryOut = op.outObject("Geometry"),
+    outScale = op.outValue("Scaling", 1.0),
+    outName = op.outString("Mesh Name");
 
-op.setPortGroup("Geometry",[centerPivot,merge,inNormals,inSize,inResize]);
+op.setPortGroup("Geometry", [centerPivot, merge, inNormals, inSize, inResize]);
 
-const cgl=op.patch.cgl;
-var scene=new CABLES.Variable();
+const cgl = op.patch.cgl;
+const scene = new CABLES.Variable();
 
-var origVerts=[];
-var geom=null;
-var data=null;
-var mesh=null;
-var meshes=[];
-var currentIndex=-1;
-var bounds={};
-var needSetMesh=true;
-var hasError=false;
+const origVerts = [];
+let geom = null;
+let data = null;
+let mesh = null;
+const meshes = [];
+let currentIndex = -1;
+let bounds = {};
+let needSetMesh = true;
+let hasError = false;
 
-op.preRender=
-    exe.onTriggered=render;
+op.preRender =
+    exe.onTriggered = render;
 
-filename.onChange=
-    inNormals.onChange=reload;
+filename.onChange =
+    inNormals.onChange = reload;
 
-centerPivot.onChange=
-    inSize.onChange=
-    meshIndex.onChange=
-    merge.onChange=setMeshLater;
+centerPivot.onChange =
+    inSize.onChange =
+    meshIndex.onChange =
+    merge.onChange = setMeshLater;
 
-inResize.onChange=
-    merge.onChange=updateResizeUi;
+inResize.onChange =
+    merge.onChange = updateResizeUi;
 
 
 function getMeshName(idx)
 {
+    if (data && data.meshes && data.meshes[idx] && data.meshes[idx].name) return data.meshes[idx].name;
 
-    if(data && data.meshes && data.meshes[idx] && data.meshes[idx].name)return data.meshes[idx].name;
-
-    if(data && data.rootnode && data.rootnode.children && data.rootnode.children.length>idx-1)
+    if (data && data.rootnode && data.rootnode.children && data.rootnode.children.length > idx - 1)
     {
-        for(var i=0;i<data.rootnode.children.length;i++)
+        for (let i = 0; i < data.rootnode.children.length; i++)
         {
-            if(data.rootnode.children[i].meshes && data.rootnode.children[i].meshes.length==1 && data.rootnode.children[i].meshes[0]==idx) return data.rootnode.children[i].name;
+            if (data.rootnode.children[i].meshes && data.rootnode.children[i].meshes.length == 1 && data.rootnode.children[i].meshes[0] == idx) return data.rootnode.children[i].name;
         }
-
     }
 
 
@@ -63,21 +61,21 @@ function getMeshName(idx)
 
 function updateResizeUi()
 {
-    inSize.setUiAttribs({greyout:!inResize.get()});
-    meshIndex.setUiAttribs({greyout:merge.get()});
+    inSize.setUiAttribs({ "greyout": !inResize.get() });
+    meshIndex.setUiAttribs({ "greyout": merge.get() });
     setMeshLater();
 }
 
 function calcNormals()
 {
-    if(!geom)
+    if (!geom)
     {
-        console.log('calc normals: no geom!');
+        op.error("calc normals: no geom!");
         return;
     }
 
-    if(inNormals.get()=='smooth')geom.calculateNormals();
-    else if(inNormals.get()=='flat')
+    if (inNormals.get() == "smooth")geom.calculateNormals();
+    else if (inNormals.get() == "flat")
     {
         geom.unIndex();
         geom.calculateNormals();
@@ -86,28 +84,28 @@ function calcNormals()
 
 function render()
 {
-    if(needSetMesh) setMesh();
+    if (needSetMesh) setMesh();
 
-    if(draw.get())
+    if (draw.get())
     {
-        if(mesh) mesh.render(cgl.getShader());
+        if (mesh) mesh.render(cgl.getShader());
         next.trigger();
     }
 }
 
 function setMeshLater()
 {
-    needSetMesh=true;
+    needSetMesh = true;
 }
 
 function updateScale()
 {
-    if(!geom) return;
+    if (!geom) return;
 
-    if(inResize.get())
+    if (inResize.get())
     {
-        var scale=inSize.get()/bounds.maxAxis;
-        for(var i=0;i<geom.vertices.length;i++)geom.vertices[i]*=scale;
+        const scale = inSize.get() / bounds.maxAxis;
+        for (let i = 0; i < geom.vertices.length; i++)geom.vertices[i] *= scale;
         outScale.set(scale);
     }
     else
@@ -118,70 +116,70 @@ function updateScale()
 
 function updateInfo(geom)
 {
-    if(!CABLES.UI)return;
+    if (!CABLES.UI) return;
 
-    var nfo='<div class="panel">';
+    let nfo = "<div class=\"panel\">";
 
-    if(data)
+    if (data)
     {
-        nfo += 'Mesh '+(currentIndex+1)+' of '+data.meshes.length+'<br/>';
-        nfo += '<br/>';
+        nfo += "Mesh " + (currentIndex + 1) + " of " + data.meshes.length + "<br/>";
+        nfo += "<br/>";
     }
 
-    if(geom)
+    if (geom)
     {
-        nfo += (geom.verticesIndices||[]).length/3+' faces <br/>';
-        nfo += (geom.vertices||[]).length/3+' vertices <br/>';
-        nfo += (geom.texCoords||[]).length/2+' texturecoords <br/>';
-        nfo += (geom.vertexNormals||[]).length/3+' normals <br/>';
-        nfo += (geom.tangents||[]).length/3+' tangents <br/>';
-        nfo += (geom.biTangents||[]).length/3+' bitangents <br/>';
+        nfo += (geom.verticesIndices || []).length / 3 + " faces <br/>";
+        nfo += (geom.vertices || []).length / 3 + " vertices <br/>";
+        nfo += (geom.texCoords || []).length / 2 + " texturecoords <br/>";
+        nfo += (geom.vertexNormals || []).length / 3 + " normals <br/>";
+        nfo += (geom.tangents || []).length / 3 + " tangents <br/>";
+        nfo += (geom.biTangents || []).length / 3 + " bitangents <br/>";
     }
 
-    nfo+="</div>";
+    nfo += "</div>";
 
-    op.uiAttr({info:nfo});
+    op.uiAttr({ "info": nfo });
 }
 
 function setMesh()
 {
-    if(mesh)
+    if (mesh)
     {
         mesh.dispose();
-        mesh=null;
+        mesh = null;
     }
 
-    var index=Math.floor(meshIndex.get());
+    const index = Math.floor(meshIndex.get());
 
-    if(!data || index!=index || !CABLES.UTILS.isNumeric(index) || index<0 || index>=data.meshes.length)
+    if (!data || index != index || !CABLES.UTILS.isNumeric(index) || index < 0 || index >= data.meshes.length)
     {
-        op.uiAttr({'warning':'mesh not found - index out of range / or no file selected '});
-        meshes[index]=null;
-        hasError=true;
+        op.uiAttr({ "warning": "mesh not found - index out of range / or no file selected " });
+        meshes[index] = null;
+        hasError = true;
         outName.set("");
         return;
     }
     else
     {
-        if(hasError)
+        if (hasError)
         {
-            op.uiAttr({'warning':null});
-            hasError=false;
+            op.uiAttr({ "warning": null });
+            hasError = false;
         }
     }
 
-    currentIndex=index;
+    currentIndex = index;
 
-    geom=new CGL.Geometry();
+    geom = new CGL.Geometry();
 
-    if(merge.get())
+    if (merge.get())
     {
-        for(var i=0;i<data.meshes.length;i++)
+        for (let i = 0; i < data.meshes.length; i++)
         {
-            var jsonGeom=data.meshes[i];
-            if(jsonGeom)
+            var jsonGeom = data.meshes[i];
+            if (jsonGeom)
             {
-                var geomNew=CGL.Geometry.json2geom(jsonGeom);
+                const geomNew = CGL.Geometry.json2geom(jsonGeom);
                 geom.merge(geomNew);
             }
         }
@@ -189,84 +187,82 @@ function setMesh()
     }
     else
     {
-        var jsonGeom=data.meshes[index];
+        var jsonGeom = data.meshes[index];
 
         outName.set(getMeshName(index));
 
-        if(!jsonGeom)
+        if (!jsonGeom)
         {
-            mesh=null;
-            op.uiAttr({warning:'mesh not found'});
+            mesh = null;
+            op.uiAttr({ "warning": "mesh not found" });
             return;
         }
 
-        geom=CGL.Geometry.json2geom(jsonGeom);
+        geom = CGL.Geometry.json2geom(jsonGeom);
     }
 
-    if(centerPivot.get())geom.center();
+    if (centerPivot.get())geom.center();
 
-    bounds=geom.getBounds();
+    bounds = geom.getBounds();
     updateScale();
     updateInfo(geom);
 
-    if(inNormals.get()!='no')calcNormals();
+    if (inNormals.get() != "no")calcNormals();
     geometryOut.set(null);
     geometryOut.set(geom);
 
-    if(mesh)mesh.dispose();
+    if (mesh)mesh.dispose();
 
-    mesh=new CGL.Mesh(cgl,geom);
-    needSetMesh=false;
-    meshes[index]=mesh;
+    mesh = new CGL.Mesh(cgl, geom);
+    needSetMesh = false;
+    meshes[index] = mesh;
 
-    op.uiAttr({'warning':null});
+    op.uiAttr({ "warning": null });
 }
 
 function reload()
 {
-    if(!filename.get())return;
-    currentIndex=-1;
-
-    // console.log("reload",filename.get());
+    if (!filename.get()) return;
+    currentIndex = -1;
 
     function doLoad()
     {
         CABLES.ajax(
             op.patch.getFilePath(filename.get()),
-            function(err,_data,xhr)
+            function (err, _data, xhr)
             {
-                if(err)
+                if (err)
                 {
-                    if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
+                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
 
-                    console.error('ajax error:',err);
+                    op.error("ajax error:", err);
                     op.patch.loading.finished(loadingId);
                     return;
                 }
                 else
                 {
-                    if(CABLES.UI)op.uiAttr({'error':null});
+                    if (CABLES.UI)op.uiAttr({ "error": null });
                 }
 
                 try
                 {
-                    data=JSON.parse(_data);
+                    data = JSON.parse(_data);
                 }
-                catch(ex)
+                catch (ex)
                 {
-                    if(CABLES.UI)op.uiAttr({'error':'could not load file...'});
+                    if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
                     op.patch.loading.finished(loadingId);
                     return;
                 }
 
-                needSetMesh=true;
+                needSetMesh = true;
                 op.patch.loading.finished(loadingId);
-                if(CABLES.UI) gui.jobs().finish('loading3d'+loadingId);
+                if (CABLES.UI) gui.jobs().finish("loading3d" + loadingId);
             });
     }
 
-    var loadingId=op.patch.loading.start('json3dMesh',filename.get());
+    var loadingId = op.patch.loading.start("json3dMesh", filename.get());
 
-    if(CABLES.UI) gui.jobs().start({id:'loading3d'+loadingId,title:'loading 3d data'},doLoad);
+    if (CABLES.UI) gui.jobs().start({ "id": "loading3d" + loadingId, "title": "loading 3d data" }, doLoad);
     else doLoad();
 }

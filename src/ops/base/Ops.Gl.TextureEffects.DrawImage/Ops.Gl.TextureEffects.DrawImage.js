@@ -1,48 +1,48 @@
-var render=op.inTrigger('render');
-var amount=op.inFloatSlider("amount");
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"blendMode");
+const render = op.inTrigger("render");
+const amount = op.inFloatSlider("amount");
+const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 
-var image=op.inTexture("image");
+const image = op.inTexture("image");
 
-var imageAlpha=op.inTexture("imageAlpha");
-var alphaSrc=op.inValueSelect("alphaSrc",['alpha channel','luminance']);
-var removeAlphaSrc=op.inValueBool("removeAlphaSrc");
+const imageAlpha = op.inTexture("imageAlpha");
+const alphaSrc = op.inValueSelect("alphaSrc", ["alpha channel", "luminance"]);
+const removeAlphaSrc = op.inValueBool("removeAlphaSrc");
 
-var invAlphaChannel=op.inValueBool("invert alpha channel");
-var trigger=op.outTrigger('trigger');
+const invAlphaChannel = op.inValueBool("invert alpha channel");
+const trigger = op.outTrigger("trigger");
 
 op.toWorkPortsNeedToBeLinked(image);
 
-blendMode.set('normal');
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl,'drawimage');
+blendMode.set("normal");
+const cgl = op.patch.cgl;
+const shader = new CGL.Shader(cgl, "drawimage");
 
 amount.set(1.0);
 
-render.onTriggered=doRender;
+render.onTriggered = doRender;
 
-shader.setSource(attachments.drawimage_vert,attachments.drawimage_frag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
-var textureDisplaceUniform=new CGL.Uniform(shader,'t','image',1);
-var textureAlpha=new CGL.Uniform(shader,'t','imageAlpha',2);
+shader.setSource(attachments.drawimage_vert, attachments.drawimage_frag);
+const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
+const textureDisplaceUniform = new CGL.Uniform(shader, "t", "image", 1);
+const textureAlpha = new CGL.Uniform(shader, "t", "imageAlpha", 2);
 
-invAlphaChannel.onChange=function()
+invAlphaChannel.onChange = function ()
 {
-    if(invAlphaChannel.get()) shader.define('INVERT_ALPHA');
-        else shader.removeDefine('INVERT_ALPHA');
+    if (invAlphaChannel.get()) shader.define("INVERT_ALPHA");
+    else shader.removeDefine("INVERT_ALPHA");
 };
 
-removeAlphaSrc.onChange=function()
+removeAlphaSrc.onChange = function ()
 {
-    if(removeAlphaSrc.get()) shader.define('REMOVE_ALPHA_SRC');
-        else shader.removeDefine('REMOVE_ALPHA_SRC');
+    if (removeAlphaSrc.get()) shader.define("REMOVE_ALPHA_SRC");
+    else shader.removeDefine("REMOVE_ALPHA_SRC");
 };
 removeAlphaSrc.set(true);
 
-alphaSrc.onChange=function()
+alphaSrc.onChange = function ()
 {
-    if(alphaSrc.get()=='luminance') shader.define('ALPHA_FROM_LUMINANCE');
-        else shader.removeDefine('ALPHA_FROM_LUMINANCE');
+    if (alphaSrc.get() == "luminance") shader.define("ALPHA_FROM_LUMINANCE");
+    else shader.removeDefine("ALPHA_FROM_LUMINANCE");
 };
 
 alphaSrc.set("alpha channel");
@@ -52,19 +52,19 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    var flipX=op.inValueBool("flip x");
-    var flipY=op.inValueBool("flip y");
+    const flipX = op.inValueBool("flip x");
+    const flipY = op.inValueBool("flip y");
 
-    flipX.onChange=function()
+    flipX.onChange = function ()
     {
-        if(flipX.get()) shader.define('TEX_FLIP_X');
-            else shader.removeDefine('TEX_FLIP_X');
+        if (flipX.get()) shader.define("TEX_FLIP_X");
+        else shader.removeDefine("TEX_FLIP_X");
     };
 
-    flipY.onChange=function()
+    flipY.onChange = function ()
     {
-        if(flipY.get()) shader.define('TEX_FLIP_Y');
-            else shader.removeDefine('TEX_FLIP_Y');
+        if (flipY.get()) shader.define("TEX_FLIP_Y");
+        else shader.removeDefine("TEX_FLIP_Y");
     };
 }
 
@@ -72,27 +72,27 @@ alphaSrc.set("alpha channel");
     //
     // texture transform
     //
-    var scale=op.inValueFloat("scale");
-    var posX=op.inValueFloat("pos x");
-    var posY=op.inValueFloat("pos y");
-    var rotate=op.inValueFloat("rotate");
+    const scale = op.inValueFloat("scale");
+    const posX = op.inValueFloat("pos x");
+    const posY = op.inValueFloat("pos y");
+    const rotate = op.inValueFloat("rotate");
 
     scale.set(1.0);
 
-    var uniScale=new CGL.Uniform(shader,'f','scale',scale.get());
-    var uniPosX=new CGL.Uniform(shader,'f','posX',posX.get());
-    var uniPosY=new CGL.Uniform(shader,'f','posY',posY.get());
-    var uniRotate=new CGL.Uniform(shader,'f','rotate',rotate.get());
+    const uniScale = new CGL.Uniform(shader, "f", "scale", scale.get());
+    const uniPosX = new CGL.Uniform(shader, "f", "posX", posX.get());
+    const uniPosY = new CGL.Uniform(shader, "f", "posY", posY.get());
+    const uniRotate = new CGL.Uniform(shader, "f", "rotate", rotate.get());
 
     function updateTransform()
     {
-        if(scale.get()!=1.0 || posX.get()!=0.0 || posY.get()!=0.0 || rotate.get()!=0.0 )
+        if (scale.get() != 1.0 || posX.get() != 0.0 || posY.get() != 0.0 || rotate.get() != 0.0)
         {
-            if(!shader.hasDefine('TEX_TRANSFORM')) shader.define('TEX_TRANSFORM');
-            uniScale.setValue( parseFloat(scale.get()) );
-            uniPosX.setValue( posX.get() );
-            uniPosY.setValue( posY.get() );
-            uniRotate.setValue( rotate.get() );
+            if (!shader.hasDefine("TEX_TRANSFORM")) shader.define("TEX_TRANSFORM");
+            uniScale.setValue(parseFloat(scale.get()));
+            uniPosX.setValue(posX.get());
+            uniPosY.setValue(posY.get());
+            uniRotate.setValue(rotate.get());
         }
         else
         {
@@ -100,17 +100,17 @@ alphaSrc.set("alpha channel");
         }
     }
 
-    scale.onChange=updateTransform;
-    posX.onChange=updateTransform;
-    posY.onChange=updateTransform;
-    rotate.onChange=updateTransform;
+    scale.onChange = updateTransform;
+    posX.onChange = updateTransform;
+    posY.onChange = updateTransform;
+    rotate.onChange = updateTransform;
 }
 
-CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-var oldHadImageAlpha=false;
+const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
+let oldHadImageAlpha = false;
 
 // op.preRender=function()
 // {
@@ -122,33 +122,32 @@ function doRender()
 {
     // if(!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if(imageAlpha.get() && !oldHadImageAlpha || !imageAlpha.get() && oldHadImageAlpha)
+    if (imageAlpha.get() && !oldHadImageAlpha || !imageAlpha.get() && oldHadImageAlpha)
     {
-        if(imageAlpha.get() && imageAlpha.get().tex)
+        if (imageAlpha.get() && imageAlpha.get().tex)
         {
-            console.log("HAS TEX ALPHA!");
-            shader.define('HAS_TEXTUREALPHA');
-            oldHadImageAlpha=true;
+            shader.define("HAS_TEXTUREALPHA");
+            oldHadImageAlpha = true;
         }
         else
         {
-            shader.removeDefine('HAS_TEXTUREALPHA');
-            oldHadImageAlpha=false;
+            shader.removeDefine("HAS_TEXTUREALPHA");
+            oldHadImageAlpha = false;
         }
     }
 
-    if(image.get() && image.get().tex && amount.get()>0.0)
+    if (image.get() && image.get().tex && amount.get() > 0.0)
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
-        if(image.get() && image.get().tex) cgl.setTexture(1, image.get().tex );
-            else cgl.setTexture(1, null);
+        if (image.get() && image.get().tex) cgl.setTexture(1, image.get().tex);
+        else cgl.setTexture(1, null);
 
-        if(imageAlpha.get() && imageAlpha.get().tex) cgl.setTexture(2, imageAlpha.get().tex );
-            else cgl.setTexture(2,null);
+        if (imageAlpha.get() && imageAlpha.get().tex) cgl.setTexture(2, imageAlpha.get().tex);
+        else cgl.setTexture(2, null);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();
@@ -156,4 +155,3 @@ function doRender()
 
     trigger.trigger();
 }
-

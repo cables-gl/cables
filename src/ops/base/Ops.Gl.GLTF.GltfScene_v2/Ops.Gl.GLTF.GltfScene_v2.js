@@ -153,7 +153,6 @@ inExec.onTriggered = function ()
             const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
             gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
-            // console.log(sc,sc,sc);
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
         }
         if (doCenter)
@@ -297,8 +296,6 @@ function hideNodesFromArray()
         return;
     }
 
-    console.log("hiding...", hideArr);
-
     for (let i = 0; i < hideArr.length; i++)
     {
         const n = gltf.getNode(hideArr[i]);
@@ -348,7 +345,6 @@ function findParents(nodes, childNodeIndex)
     {
         if (gltf.nodes[i].children.indexOf(childNodeIndex) >= 0)
         {
-            console.log("found parent", gltf.nodes[i].name);
             nodes.push(gltf.nodes[i]);
             if (gltf.nodes[i].isChild) findParents(nodes, i);
         }
@@ -367,7 +363,6 @@ op.exposeNode = function (name, tree)
 {
     if (tree)
     {
-        console.log(gltf.nodes);
         for (let i = 0; i < gltf.nodes.length; i++)
         {
             if (gltf.nodes[i].name == name)

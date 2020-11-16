@@ -1,30 +1,28 @@
-var inGeom=op.inObject("Geometry");
-var inGeom2=op.inObject("Geometry 2");
-var inMerge=op.inTriggerButton("Merge");
-var inReset=op.inTriggerButton("Reset");
+const
+    inGeom = op.inObject("Geometry"),
+    inGeom2 = op.inObject("Geometry 2"),
+    inMerge = op.inTriggerButton("Merge"),
+    inReset = op.inTriggerButton("Reset"),
+    outGeom = op.outObject("Geometry Result");
 
-var outGeom=op.outObject("Geometry Result");
-var geom=new CGL.Geometry();
+const geom = new CGL.Geometry();
 
 outGeom.set(geom);
 
-inReset.onTriggered=function()
+inReset.onTriggered = function ()
 {
     geom.clear();
     outGeom.set(null);
     outGeom.set(geom);
-    console.log('reset');
 };
 
-inMerge.onTriggered=function()
+inMerge.onTriggered = function ()
 {
-    if(inGeom.get() || inGeom2.get())
+    if (inGeom.get() || inGeom2.get())
     {
-        console.log("merge geom!");
-        if(inGeom.get())geom.merge(inGeom.get());
-        if(inGeom2.get())geom.merge(inGeom2.get());
+        if (inGeom.get())geom.merge(inGeom.get());
+        if (inGeom2.get())geom.merge(inGeom2.get());
         outGeom.set(null);
         outGeom.set(geom);
     }
-
 };

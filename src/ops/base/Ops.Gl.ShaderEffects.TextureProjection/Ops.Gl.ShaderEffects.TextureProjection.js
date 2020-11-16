@@ -25,7 +25,6 @@ inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChang
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
 op.setPortGroup("Position", [inPosX, inPosY]);
 
-
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "title": op.name,
@@ -50,12 +49,10 @@ mod.addUniformBoth("f", "MOD_scale", inScale);
 mod.addUniformBoth("f", "MOD_amount", inAmount);
 mod.addUniformBoth("2f", "MOD_offset", inPosX, inPosY);
 
-
 const uniWidth = mod.addUniformFrag("f", "MOD_viewPortW");
 const uniHeight = mod.addUniformFrag("f", "MOD_viewPortH");
 
 updateDefines();
-
 
 function updateDefines()
 {
@@ -71,7 +68,6 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_ADD", inBlend.get() == "Add");
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
 }
-
 
 render.onTriggered = function ()
 {
@@ -113,7 +109,6 @@ render.onTriggered = function ()
     // if(inTex.get()) cgl.setTexture(5, inTex.get().tex);
 
     const vp = cgl.getViewPort();
-    // console.log(vp);
 
     mod.setUniformValue("MOD_viewPortW", vp[2]);
     mod.setUniformValue("MOD_viewPortH", vp[3]);

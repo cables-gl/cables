@@ -1,18 +1,18 @@
-let render = op.inTrigger("render");
-let fragmentShader = op.addInPort(new CABLES.Port(op, "fragment", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
-let vertexShader = op.addInPort(new CABLES.Port(op, "vertex", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
+const render = op.inTrigger("render");
+const fragmentShader = op.addInPort(new CABLES.Port(op, "fragment", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
+const vertexShader = op.addInPort(new CABLES.Port(op, "vertex", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor", "editorSyntax": "glsl" }));
 
-let trigger = op.outTrigger("trigger");
-let outShader = op.outObject("Shader");
-let cgl = op.patch.cgl;
-let uniformInputs = [];
-let uniformTextures = [];
+const trigger = op.outTrigger("trigger");
+const outShader = op.outObject("Shader");
+const cgl = op.patch.cgl;
+const uniformInputs = [];
+const uniformTextures = [];
 
 
 op.toWorkPortsNeedToBeLinked(outShader);
 
 
-let shader = new CGL.Shader(cgl, "shaderMaterial");
+const shader = new CGL.Shader(cgl, "shaderMaterial");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 
 // shader.glslVersion=0;
@@ -76,7 +76,7 @@ function hasUniformInput(name)
     return false;
 }
 
-let tempMat4 = mat4.create();
+const tempMat4 = mat4.create();
 // var lastm4;
 
 const uniformNameBlacklist = [
@@ -102,13 +102,13 @@ function updateShader()
     shader.compile();
 
 
-    let activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
+    const activeUniforms = cgl.gl.getProgramParameter(shader.getProgram(), cgl.gl.ACTIVE_UNIFORMS);
 
     let i = 0;
     let countTexture = 0;
     for (i = 0; i < activeUniforms; i++)
     {
-        let uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
+        const uniform = cgl.gl.getActiveUniform(shader.getProgram(), i);
 
         if (
             hasUniformInput(uniform.name) ||
@@ -148,7 +148,7 @@ function updateShader()
         else
         if (uniform.type == cgl.gl.FLOAT_MAT4)
         {
-            let newInputM4 = op.inArray(uniform.name);
+            const newInputM4 = op.inArray(uniform.name);
             newInputM4.onChange = function (p)
             {
                 if (p.get() && p.isLinked())
@@ -166,14 +166,14 @@ function updateShader()
         else
         if (uniform.type == cgl.gl.SAMPLER_2D)
         {
-            let newInputTex = op.inObject(uniform.name);
+            const newInputTex = op.inObject(uniform.name);
             newInputTex.uniform = new CGL.Uniform(shader, "t", uniform.name, 3 + countTexture);
             uniformTextures.push(newInputTex);
             countTexture++;
         }
         else
         {
-            console.log("unsupported uniform type", uniform.type, uniform);
+            op.error("unsupported uniform type", uniform.type, uniform);
         }
     }
 

@@ -68,7 +68,6 @@ function setup(modelScale)
     lastWorld = world;
     needSetup = false;
     outRadius.set(inRadius.get());
-    console.log("setup");
 }
 
 
@@ -104,7 +103,6 @@ function render()
         body.addShape(shape);
 
         // shape.updateBoundingSphereRadius();
-        // console.log(shape.radius);
         body.updateBoundingRadius();
         // body.computeAABB();
     }

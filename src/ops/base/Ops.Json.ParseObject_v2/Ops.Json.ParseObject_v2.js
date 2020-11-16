@@ -18,7 +18,7 @@ function parse()
     }
     catch (ex)
     {
-        console.log(JSON.stringify(ex));
+        op.error(ex);
         isValid.set(false);
 
         let outStr = "";

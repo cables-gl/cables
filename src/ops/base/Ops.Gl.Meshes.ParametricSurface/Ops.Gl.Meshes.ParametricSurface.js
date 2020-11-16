@@ -685,7 +685,7 @@ shapes.onChange = ({ value }) =>
 {
     const [shape] = parametricBodies.filter(s => s.title === value);
     Object.keys(inObj).forEach((key) =>
-{
+    {
         inObj[key].set(shape[key]);
     });
 
@@ -701,7 +701,7 @@ let geom = null;
 const create = () =>
 {
     if (shouldRender)
-{
+    {
         const uSegments = inSegmentsU.get();
         const vSegments = inSegmentsV.get();
 
@@ -738,15 +738,15 @@ const create = () =>
         let bitangents;
 
         try
-{
+        {
             xFunction = new Function("m", "u", "v", `with(m) { return ${xFunctionString} }`);
             yFunction = new Function("m", "u", "v", `with(m) { return ${yFunctionString} }`);
             zFunction = new Function("m", "u", "v", `with(m) { return ${zFunctionString} }`);
 
             for (let i = 0; i <= uSegments; i += 1)
-{
+            {
                 for (let j = 0; j <= vSegments; j += 1)
-{
+                {
                     const u_tex = uMin + (i * (uMax - uMin) / uSegments);
                     const v_tex = vMin + (j * (vMax - vMin) / vSegments);
 
@@ -758,7 +758,7 @@ const create = () =>
                     let z = zFunction(Math, u, v);
 
                     if (shouldScale)
-{
+                    {
                         x *= scaleX;
                         y *= scaleY;
                         z *= scaleZ;
@@ -770,7 +770,7 @@ const create = () =>
                     texCoords.push(CABLES.map(u_tex, uMin, uMax, 0, 1), CABLES.map(v_tex, vMin, vMax, 1, 0));
 
                     if (i < uSegments && j < vSegments)
-{
+                    {
                         paramVertexIndices.push(i * (vSegments + 1) + j);
                         paramVertexIndices.push((i + 1) * (vSegments + 1) + j);
                         paramVertexIndices.push((i) * (vSegments + 1) + j + 1);
@@ -785,12 +785,11 @@ const create = () =>
             tangents = [];
             bitangents = [];
             normals = [];
-
         }
- catch (e)
-{
-            if (e instanceof ReferenceError || e instanceof SyntaxError) { console.error(e); return; }
-            console.log(e);
+        catch (e)
+        {
+            if (e instanceof ReferenceError || e instanceof SyntaxError) { op.error(e); return; }
+            op.log(e);
         }
         geom = new CGL.Geometry("parametric surface");
         geom.clear();
@@ -804,11 +803,11 @@ const create = () =>
         if (geom.vertices.length == 0) return;
 
         if (!mesh)
-{
+        {
             mesh = new CGL.Mesh(cgl, geom);
         }
- else
-{
+        else
+        {
             mesh.setGeom(geom);
         }
         geomOut.set(null);

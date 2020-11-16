@@ -323,7 +323,6 @@ function setUpDiv()
         div.dataset.op = op.id;
         div.oncontextmenu = function (e)
         {
-            console.log("context menu canceled!");
             e.preventDefault();
         };
 
@@ -390,8 +389,6 @@ function onmouseclick(e)
 
 function onTouchMove(e)
 {
-    // console.log('touchmoveevent',e);
-
     const targetEle = document.elementFromPoint(e.targetTouches[0].pageX, e.targetTouches[0].pageY);
 
     if (targetEle == div)

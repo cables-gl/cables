@@ -22,7 +22,6 @@ op.setPortGroup("Youtube Options", [paramAutoplay, paramCC, paramLoop, paramFs, 
 
 // https://developers.google.com/youtube/player_parameters
 
-
 let element = null;
 let initialized = false;
 
@@ -40,11 +39,8 @@ op.onDelete = removeEle;
 
 active.onChange = update;
 
-// console.log("---");
-
 op.init = function ()
 {
-    // console.log("yt init",active.get());
     initialized = true;
     setTimeout(() => { update(); }, 100);
 };
@@ -62,13 +58,10 @@ function update()
     addElement();
 }
 
-
 function addElement()
 {
     if (!initialized) return;
     if (element) removeEle();
-
-    // console.log("ADD youtube element!",initialized);
 
     const parent = op.patch.cgl.canvas.parentElement;
     element = document.createElement("iframe");
@@ -79,7 +72,6 @@ function addElement()
     element.allow = "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
 
     parent.appendChild(element);
-
 
     updateURL();
     updateID();
@@ -96,7 +88,6 @@ function removeEle()
     outEle.set(null);
 }
 
-
 function updateURL()
 {
     if (src.get()) outDirectLink.set("https://www.youtube.com/watch?v=" + src.get());
@@ -112,19 +103,12 @@ function updateURL()
     if (paramControls.get()) urlParams.push("controls=0");
     if (paramStart.get() > 0) urlParams.push("start=" + paramStart.get());
 
-
     let urlParamsStr = "";
     if (urlParams.length > 0) urlParamsStr = "?" + urlParams.join("&") + "&rel=0";
 
     const urlStr = "https://www.youtube.com/embed/" + src.get() + urlParamsStr;
     if (element)
-    {
         element.setAttribute("src", urlStr);
-        // console.log("yes set element src");
-    }
-    // else console.log("no element for src url...");
-
-    // console.log("urlStr",urlStr);
 }
 
 function updateID()

@@ -184,7 +184,6 @@ function setupArray()
 
     if (arrayChangedTrans) mesh.addAttribute("instMat", matrixArray, 16);
     if (arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { "instanced": true });
-    // console.log("num",num,matrixArray.length/16);
 
     arrayChangedColor = false;
     recalc = false;
@@ -198,10 +197,7 @@ function updateLimit()
 function doRender()
 {
     if (!mesh) return;
-
     if (recalc) setupArray();
-
-    // if(matrixArray.length<=1)return;
 
     if (cgl.getShader() && cgl.getShader() != shader)
     {

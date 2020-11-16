@@ -1,28 +1,27 @@
 const
-    filename=op.inUrl("file"),
-    result=op.outArray("result"),
-    len=op.outNumber("num items");
+    filename = op.inUrl("file"),
+    result = op.outArray("result"),
+    len = op.outNumber("num items");
 
-var reload=function()
+const reload = function ()
 {
     CABLES.ajax(
         op.patch.getFilePath(filename.val),
-        function(err,_data,xhr)
+        function (err, _data, xhr)
         {
             try
             {
-                var data=JSON.parse(_data);
+                const data = JSON.parse(_data);
                 result.set(data);
                 len.set(data.length);
             }
-            catch(e)
+            catch (e)
             {
-                console.log(e);
+                op.error(e);
                 result.set(null);
                 len.set(0);
             }
         });
-
 };
 
-filename.onChange=reload;
+filename.onChange = reload;

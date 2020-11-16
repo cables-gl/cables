@@ -1,11 +1,7 @@
-
-const outConfig=op.outObject('Config');
-const outName=op.outValueString('Name');
-const outPatchId=op.outValueString('Patch Id');
-const outNamespace=op.outValueString('Namespace');
-
-
-console.log(op.patch);
+const outConfig = op.outObject("Config");
+const outName = op.outValueString("Name");
+const outPatchId = op.outValueString("Patch Id");
+const outNamespace = op.outValueString("Namespace");
 
 outConfig.set(op.patch.config);
 outName.set(op.patch.name);

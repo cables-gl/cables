@@ -1,4 +1,4 @@
 
-var exePort = op.inTriggerButton('Trace');
+const exePort = op.inTriggerButton("Trace");
 
 exePort.onTriggered = console.trace;

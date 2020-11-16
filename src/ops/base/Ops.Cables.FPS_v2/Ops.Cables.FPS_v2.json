@@ -1,12 +1,1 @@
-{
-    "id": "6dbb866c-b57a-4875-9f1d-22172162eaa8",
-    "changelog": [
-        {
-            "message": "created op",
-            "author": "pandur",
-            "date": 1600117343664
-        }
-    ],
-    "authorName": "pandur",
-    "created": 1600117397013
-}
+{"id":"6dbb866c-b57a-4875-9f1d-22172162eaa8","changelog":[{"message":"created op","author":"pandur","date":1600117343664}],"authorName":"pandur","created":1600117397013,"summary":"output current frames per second","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]},"layout":{"portsIn":[{"type":"0","name":"Active","subType":"boolean"}],"portsOut":[{"type":"0","name":"FPS","subType":"number"},{"type":"0","name":"MS","subType":"number"}],"name":"Ops.Cables.FPS_v2"}}

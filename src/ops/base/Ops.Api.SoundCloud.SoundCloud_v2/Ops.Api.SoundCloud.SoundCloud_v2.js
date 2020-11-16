@@ -32,7 +32,7 @@ function resolve()
                 }
                 catch (e)
                 {
-                    console.log(e);
+                    op.error(e);
                 }
             });
 }

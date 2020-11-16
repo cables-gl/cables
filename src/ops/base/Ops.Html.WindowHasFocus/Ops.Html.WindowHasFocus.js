@@ -1,9 +1,20 @@
-const outFocussed = op.outBool("has focus");
-const outVisible = op.outBool("Tab Visible", true);
+const
+    outFocussed = op.outBool("has focus"),
+    outVisible = op.outBool("Tab Visible", true);
+
 const focused = true;
 
 outFocussed.set(document.hasFocus());
 
+window.addEventListener("blur", handleBlur);
+window.addEventListener("focus", handleFocus);
+
+document.addEventListener("visibilitychange", updateVisibility);
+
+op.onDelete = function ()
+{
+    document.removeEventListener("visibilitychange", updateVisibility);
+};
 
 function handleFocus()
 {
@@ -17,17 +28,5 @@ function handleBlur()
 
 function updateVisibility(e)
 {
-    console.log(e, document.hidden);
     outVisible.set(!document.hidden);
-    // console.log(document.visibilityState);
 }
-
-window.addEventListener("blur", handleBlur);
-window.addEventListener("focus", handleFocus);
-
-document.addEventListener("visibilitychange", updateVisibility);
-
-op.onDelete = function ()
-{
-    document.removeEventListener("visibilitychange", updateVisibility);
-};
