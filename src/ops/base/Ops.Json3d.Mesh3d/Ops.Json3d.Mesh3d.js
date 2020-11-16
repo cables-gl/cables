@@ -42,8 +42,6 @@ centerPivot.onChange =
 inResize.onChange =
     merge.onChange = updateResizeUi;
 
-<<<<<<< HEAD
-=======
 exe.onLinkChanged =
 
 () =>
@@ -51,7 +49,6 @@ exe.onLinkChanged =
     if (!exe.isLinked()) geometryOut.set(null);
     else geometryOut.set(geom);
 };
->>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
 
 function getMeshName(idx)
 {
