@@ -38,7 +38,7 @@ function update()
         }
         catch (e)
         {
-            console.log(e);
+            op.error(e);
         }
     }
 

@@ -304,6 +304,11 @@ Mesh.prototype._setVertexNumbers = function ()
 
 Mesh.prototype.setVertexIndices = function (vertIndices)
 {
+    if (!this._bufVerticesIndizes)
+    {
+        Log.warn("no bufVerticesIndizes");
+        return;
+    }
     if (vertIndices.length > 0)
     {
         for (let i = 0; i < vertIndices.length; i++)

@@ -4,7 +4,7 @@ const
     loop = op.inValueBool("loop"),
     autoPlay = op.inValueBool("auto play", false),
 
-    volume = op.inValueSlider("Volume",1),
+    volume = op.inValueSlider("Volume", 1),
     muted = op.inValueBool("mute", true),
     speed = op.inValueFloat("speed", 1),
 
@@ -31,16 +31,12 @@ const
     outHasError = op.outBool("Has Error"),
     outError = op.outString("Error Message");
 
-
 let videoElementPlaying = false;
 let embedded = false;
 const cgl = op.patch.cgl;
 const videoElement = document.createElement("video");
 videoElement.setAttribute("playsinline", "");
 videoElement.setAttribute("webkit-playsinline", "");
-
-
-
 
 let cgl_filter = 0;
 let cgl_wrap = 0;
@@ -111,22 +107,23 @@ play.onChange = function ()
 
         // try
         // {
-        let promise=videoElement.play();
+        const promise = videoElement.play();
 
         if (promise)
-        promise.then(function() {
-        // Automatic playback started!
-        }).catch(function(error)
-        {
-            op.warn('exc',error);
-        // Automatic playback failed.
-        // Show a UI element to let the user manually start playback.
-        });
+            promise.then(function ()
+            {
+                // Automatic playback started!
+            }).catch(function (error)
+            {
+                op.warn("exc", error);
+                // Automatic playback failed.
+                // Show a UI element to let the user manually start playback.
+            });
 
         // }
         // catch(e)
         // {
-            // op.warn('exc',e);
+        // op.warn('exc',e);
         // }
 
         updateTexture();
@@ -172,11 +169,11 @@ function updateTexture(force)
 {
     if (!filename.get())
     {
-        textureOut.set( emptyTexture );
+        textureOut.set(emptyTexture);
         return;
     }
 
-    if(!force)
+    if (!force)
     {
         if (play.get())
         {
@@ -187,7 +184,6 @@ function updateTexture(force)
         {
             return;
         }
-
     }
 
     if (!tex)reInitTexture();
@@ -207,14 +203,14 @@ function updateTexture(force)
     if (!videoElement) return;
     if (videoElement.videoHeight <= 0)
     {
-        console.log("video size is 0!");
-        console.log(videoElement);
+        op.error("video size is 0!");
+        op.log(videoElement);
         return;
     }
     if (videoElement.videoWidth <= 0)
     {
-        console.log("video width is 0!");
-        console.log(videoElement);
+        op.error("video width is 0!");
+        op.log(videoElement);
         return;
     }
 
@@ -243,7 +239,6 @@ function updateTexture(force)
 
     CGL.profileData.profileVideosPlaying++;
 
-
     if (videoElement.readyState == 4) loading.set(false);
     else loading.set(false);
 }
@@ -266,17 +261,9 @@ function updateVolume()
 volume.onChange = updateVolume;
 op.onMasterVolumeChanged = updateVolume;
 
-
 function loadedMetaData()
 {
     outDuration.set(videoElement.duration);
-
-    // console.log('loaded metadata...');
-    // console.log('length ',videoElement.buffered.length);
-    // console.log('duration ',videoElement.duration);
-    // console.log('bytesTotal ',videoElement.bytesTotal);
-    // console.log('bufferedBytes ',videoElement.bufferedBytes);
-    // console.log('buffered ',videoElement.buffered);
 }
 
 let addedListeners = false;
@@ -288,7 +275,7 @@ function embedVideo(force)
     canPlayThrough.set(false);
     if (filename.get() && String(filename.get()).length > 1) firstTime = true;
 
-    if(!filename.get())
+    if (!filename.get())
     {
         outError.set(true);
     }
@@ -300,10 +287,10 @@ function embedVideo(force)
         videoElement.preload = "true";
 
         let url = op.patch.getFilePath(filename.get());
-        if(String(filename.get()).indexOf("data:")==0) url=filename.get();
-        if(!url)return;
+        if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
+        if (!url) return;
 
-        videoElement.style.display="none";
+        videoElement.style.display = "none";
         videoElement.setAttribute("src", url);
         videoElement.setAttribute("crossOrigin", "anonymous");
         videoElement.playbackRate = speed.get();
@@ -322,7 +309,6 @@ function embedVideo(force)
                     op.warn("Error " + videoElement.error.code + "; details: " + videoElement.error.message);
                 }
             };
-
         }
         embedded = true;
     }

@@ -21,7 +21,6 @@ const
     outTouchStart = op.outTrigger("Touch Start"),
     outTouchEnd = op.outTrigger("Touch End");
 
-
 area.onChange = updateArea;
 
 function setPos(event)
@@ -103,7 +102,6 @@ const ontouchmove = function (event)
     }
 };
 
-
 const cgl = op.patch.cgl;
 let listenerElement = null;
 function addListeners()
@@ -111,8 +109,6 @@ function addListeners()
     listenerElement.addEventListener("touchmove", ontouchmove, { "passive": true });
     listenerElement.addEventListener("touchstart", ontouchstart, { "passive": true });
     listenerElement.addEventListener("touchend", ontouchend, { "passive": true });
-
-    // console.log("added touchscreen listeners",listenerElement,{passive:true});
 }
 
 function updateArea()
@@ -133,7 +129,6 @@ function removeListeners()
         listenerElement.removeEventListener("touchstart", ontouchstart);
         listenerElement.removeEventListener("touchend", ontouchend);
     }
-    // console.log("removed touchscreen listeners");
     listenerElement = null;
 }
 

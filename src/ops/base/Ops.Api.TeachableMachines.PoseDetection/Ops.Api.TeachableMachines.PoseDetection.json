@@ -45,9 +45,8 @@
         "name": "Ops.Api.TeachableMachines.PoseDetection"
     },
     "summary": "Use the Teachable Machines pose detection. Insert the uploaded model URL.",
-    "updated": ,
     "author": "",
     "authorName": "mickey",
     "id": "",
-    "created": 
+    "created":0
 }

@@ -59,7 +59,6 @@ inReset.onTriggered = () =>
     skipSimulation = true;
 };
 
-
 inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange = inName.onChange =
     function ()
     {
@@ -85,10 +84,8 @@ function removeBodies(world)
     resultArrPos.set(null);
     resultArrPos.set(resultsPositions);
 
-
     bodies.length = 0;
 }
-
 
 function setup(modelScale)
 {
@@ -112,14 +109,12 @@ function setup(modelScale)
             "shape": shape
         });
 
-
         body.name = inName.get() + "." + (i / 3);
         names.push(body.name);
 
         bodies.push(body);
         world.addBody(body);
     }
-
 
     outNames.set(names);
     lastWorld = world;
@@ -167,14 +162,12 @@ function setSimulatedPositions(pos)
     }
 }
 
-
 function setBodyPositions(pos)
 {
     if (!pos)pos = inPositions.get();
 
     const vpos = vec3.create();
 
-    // console.log(pos);
     for (let i = 0; i < pos.length; i += 3)
     {
         const body = bodies[i / 3];
@@ -212,9 +205,7 @@ function updatePositions()
     else
     {
         setSimulatedPositions(pos);
-        // console.log("set simulated...");
     }
-
 
     return true;
 }
@@ -237,7 +228,6 @@ function render()
     resultArrPos.set(resultsPositions);
 
     next.trigger();
-
 
     // CABLES.physicsCurrentBody = null;
     // cgl.popModelMatrix();

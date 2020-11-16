@@ -75,7 +75,6 @@ function setup(modelScale)
 
     lastWorld = world;
     needSetup = false;
-    console.log("setup");
 }
 
 function getScaling(mat)

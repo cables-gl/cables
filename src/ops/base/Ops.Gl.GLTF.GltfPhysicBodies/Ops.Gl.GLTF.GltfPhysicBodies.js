@@ -27,7 +27,6 @@ const sizeVec = vec3.create();
 
 const meshCube = new CGL.WireCube(cgl);
 
-
 inMass.onChange =
 inNames.onChange =
 inExec.onLinkChanged = () =>
@@ -35,7 +34,6 @@ inExec.onLinkChanged = () =>
     removeFromWorld();
     added = false;
 };
-
 
 function update()
 {
@@ -91,14 +89,10 @@ function removeFromWorld()
     added = false;
 }
 
-
 function addToWorld()
 {
     scene = cgl.frameStore.currentScene;
     if (!scene || !cgl.frameStore.world) return;
-
-
-    console.log("gltf bodies readd");
 
     if (
         worldId != cgl.frameStore.world.uuid ||
@@ -108,7 +102,7 @@ function addToWorld()
 
     if (!world)
     {
-        console.log("no physics world!?");
+        op.error("no physics world!?");
         outNum.set(0);
         return;
     }

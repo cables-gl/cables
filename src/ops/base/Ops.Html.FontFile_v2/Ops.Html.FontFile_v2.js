@@ -23,7 +23,6 @@ function addStyle()
         if (document.fonts)
         {
             fontFaceObj = new FontFace(fontname.get(), "url(" + op.patch.getFilePath(String(filename.get())) + ")");
-            // console.log(fontFaceObj);
 
             loadingId = op.patch.cgl.patch.loading.start("FontFile", filename.get());
 
@@ -32,21 +31,16 @@ function addStyle()
 
             // Get the current status of the FontFace
             // (should be 'unloaded')
-            // console.info('Current status', fontFaceObj.status);
 
             // Load the FontFace
             fontFaceObj.load();
 
             // Get the current status of the Fontface
             // (should be 'loading' or 'loaded' if cached)
-            // console.info('Current status', fontFaceObj.status);
 
             // Wait until the font has been loaded, log the current status.
             fontFaceObj.loaded.then((fontFace) =>
             {
-                // console.info('Current status', fontFace.status);
-                // console.log(fontFace.family, 'loaded successfully.');
-
                 outLoaded.set(true);
                 loadedTrigger.trigger();
                 op.patch.cgl.patch.loading.finished(loadingId);
@@ -56,7 +50,8 @@ function addStyle()
                 // Throw an error if loading wasn't successful
             }, (fontFace) =>
             {
-                console.error("Font loading error! Current status", fontFaceObj.status);
+                op.setUiError("loadingerror", "Font loading error!" + fontFaceObj.status);
+                // op.error("Font loading error! Current status", fontFaceObj.status);
             });
         }
         else

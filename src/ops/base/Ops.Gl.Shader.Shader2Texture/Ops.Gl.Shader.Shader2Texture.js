@@ -82,6 +82,7 @@ function initFbLater()
     needInit = true;
     warning();
 }
+
 const drawBuffArr = [];
 
 function resetShader()
@@ -101,7 +102,7 @@ function initFb()
     numTextures = parseInt(inNumTex.get());
     drawBuffArr.length = 0;
     for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
-    console.log(drawBuffArr);
+
     if (oldLen != drawBuffArr.length)
     {
         resetShader();

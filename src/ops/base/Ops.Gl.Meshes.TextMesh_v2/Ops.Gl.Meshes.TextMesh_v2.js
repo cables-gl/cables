@@ -91,7 +91,7 @@ function checkFont()
     }
     catch (ex)
     {
-        console.log(ex);
+        op.error(ex);
     }
 
     if (!oldFontLoaded && fontLoaded)

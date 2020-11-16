@@ -52,8 +52,6 @@ function updateVideoSettings()
 
     if (loop.get()) element.loop = "true";
     else element.removeAttribute("loop");
-
-    console.log("element.controls", element.controls);
 }
 
 function updatePlay()
@@ -68,12 +66,10 @@ play.onChange = () =>
     updatePlay();
 };
 
-
 rewind.onTriggered = function ()
 {
     if (element) element.currentTime = 0;
 };
-
 
 function addElement()
 {

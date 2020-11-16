@@ -1,10 +1,9 @@
 const
     exec = op.inTriggerButton("Update"),
-    filename = op.inFile("file"),
+    filename = op.inUrl("file"),
     offX = op.inValueInt("Offset X"),
     offY = op.inValueInt("Offset Y"),
     next = op.outTrigger("Next");
-
 
 offX.onChange =
     offY.onChange =
@@ -24,7 +23,6 @@ function update()
     op.patch.cgl.setCursor(str);
     next.trigger();
 }
-
 
 exec.onLinkChanged =
 next.onLinkChanged = () =>

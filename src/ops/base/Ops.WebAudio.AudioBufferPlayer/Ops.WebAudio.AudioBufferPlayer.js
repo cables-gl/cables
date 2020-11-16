@@ -130,7 +130,7 @@ function start(time)
     }
     catch (e)
     {
-        // console.log(e);
+        op.error(e);
     } // already playing!?
 }
 
@@ -142,7 +142,7 @@ function stop(time)
     }
     catch (e)
     {
-        // console.log(e);
+        op.error(e);
     } // not playing!?
 }
 

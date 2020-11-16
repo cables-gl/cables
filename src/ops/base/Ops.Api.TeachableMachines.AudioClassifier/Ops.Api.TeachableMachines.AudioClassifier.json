@@ -19,9 +19,8 @@
         "name": "Ops.Api.TeachableMachines.AudioClassifier"
     },
     "summary": "Use the Teachable Machines audio classifier. Insert the uploaded model URL.",
-    "updated": ,
     "author": "",
     "authorName": "mickey",
     "id": "",
-    "created": 
+    "created":0
 }

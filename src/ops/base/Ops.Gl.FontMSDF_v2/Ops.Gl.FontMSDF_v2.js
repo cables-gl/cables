@@ -82,7 +82,7 @@ function load()
         {
             if (err)
             {
-                console.error(err);
+                op.error(err);
                 return;
             }
             try
@@ -118,7 +118,7 @@ function load()
                 op.patch.setVarValue(varNameData, null);
                 op.patch.setVarValue(varNameTex, null);
 
-                console.error(e);
+                op.error(e);
                 op.setUiError("jsonerr", "Problem while loading json:<br/>" + e);
                 op.patch.loading.finished(loadingId);
                 updateLoaded();
@@ -153,7 +153,6 @@ function load()
                     loadedTex = false;
                     return;
                 }
-                // console.log("loaded...",tex);
                 textures[num] = tex;
                 op.patch.setVarValue(varNameTex, null);
                 op.patch.setVarValue(varNameTex, textures);

@@ -124,7 +124,8 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                console.error(error.name + ": " + error.message);
+                available.set(false);
+                op.error(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
@@ -132,10 +133,10 @@ function startWebcam()
     if (navigator.getUserMedia)
     {
         navigator.getUserMedia(constraints, camInitComplete,
-            function ()
+            function (error)
             {
+                op.error(error.name + ": " + error.message);
                 available.set(false);
-                // console.log('error webcam');
             });
     }
 }

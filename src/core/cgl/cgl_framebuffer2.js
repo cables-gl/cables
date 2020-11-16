@@ -260,19 +260,19 @@ Framebuffer2.prototype.setSize = function (w, h)
     case this._cgl.gl.FRAMEBUFFER_COMPLETE:
         break;
     case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-        Log.log("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
+        Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
         throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
     case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-        Log.log("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+        Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
         throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
     case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-        Log.log("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+        Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
     case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-        Log.log("FRAMEBUFFER_UNSUPPORTED");
+        Log.warn("FRAMEBUFFER_UNSUPPORTED");
         throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
     default:
-        Log.log("incomplete framebuffer", status);
+        Log.warn("incomplete framebuffer", status);
         throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
     }
