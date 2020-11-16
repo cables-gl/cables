@@ -4,6 +4,6 @@ const
 
 inStr.onChange = function ()
 {
-    if (!inStr.get()) result.set(-1);
+    if (!inStr.get()) result.set(0);
     else result.set(String(inStr.get()).length);
 };

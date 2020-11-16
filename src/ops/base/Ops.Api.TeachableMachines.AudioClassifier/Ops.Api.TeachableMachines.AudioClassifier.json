@@ -1,0 +1,27 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Model URL"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in"
+            }
+        ],
+        "portsOut": [
+            {
+                "name": "Array",
+                "text": "Array output with value"
+            }
+        ],
+        "name": "Ops.Api.TeachableMachines.AudioClassifier"
+    },
+    "summary": "Use the Teachable Machines audio classifier. Insert the uploaded model URL.",
+    "updated": ,
+    "author": "",
+    "authorName": "mickey",
+    "id": "",
+    "created": 
+}

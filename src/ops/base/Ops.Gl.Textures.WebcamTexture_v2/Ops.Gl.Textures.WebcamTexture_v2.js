@@ -2,39 +2,46 @@
 
 const
     inFacing = op.inSwitch("Facing", ["environment", "user"], "user"),
-    flip = op.inValueBool("flip"),
-    fps = op.inValueInt("fps"),
+    flip = op.inValueBool("flip",true),
+    fps = op.inValueInt("fps",30),
+    inActive = op.inValueBool("Genrate Texture", true),
+
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
-    inActive = op.inValueBool("Active", true),
+
+    inAsDOM = op.inValueBool("Show HTML Element", false),
     textureOut = op.outTexture("texture"),
+    inCss=op.inStringEditor("CSS","z-index:99999;position:absolute;"),
     outRatio = op.outValue("Ratio"),
     available = op.outValue("Available"),
-    outWidth = op.outNumber("Width"),
-    outHeight = op.outNumber("Height"),
+    outWidth = op.outNumber("Size Width"),
+    outHeight = op.outNumber("Size Height"),
     outError = op.outString("Error"),
-    outElement = op.outObject("HTML Element"),
-    outEleId = op.outString("Element Id");
+    outElement = op.outObject("HTML Element");
+
+
+
+op.setPortGroup("Texture",[flip,fps,inActive]);
+op.setPortGroup("Video Element",[inAsDOM,inCss]);
 
 width.onChange =
     height.onChange =
     inFacing.onChange = startWebcam;
 
-fps.set(30);
-flip.set(true);
-
 const cgl = op.patch.cgl;
 const videoElement = document.createElement("video");
 const eleId = "webcam" + CABLES.uuid();
-videoElement.style.display = "none";
+// videoElement.style.display = "none";
 videoElement.setAttribute("id", eleId);
 videoElement.setAttribute("autoplay", "");
 videoElement.setAttribute("muted", "");
 videoElement.setAttribute("playsinline", "");
-
-outEleId.set(eleId);
-
+videoElement.setAttribute("style",inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
+
+
+
+
 
 const tex = new CGL.Texture(cgl);
 tex.setSize(8, 8);
@@ -45,11 +52,28 @@ let canceled = false;
 
 op.onDelete = removeElement;
 
+inAsDOM.onChange=
+    inCss.onChange=updateStyle;
+
+updateStyle();
+
 function removeElement()
 {
     if (videoElement) videoElement.remove();
     clearTimeout(timeout);
 }
+
+
+function updateStyle()
+{
+
+    if(!inAsDOM.get())
+    videoElement.setAttribute("style","display:none;");
+    else
+    videoElement.setAttribute("style",inCss.get());
+
+}
+
 
 inActive.onChange = function ()
 {
@@ -100,7 +124,7 @@ function camInitComplete(stream)
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
 
         outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
-
+outError.set("");
         videoElement.play();
         updateTexture();
     };
@@ -108,7 +132,7 @@ function camInitComplete(stream)
 
 function startWebcam()
 {
-    removeElement();
+    // removeElement();
     const constraints = { "audio": false, "video": {} };
 
     constraints.video.facingMode = inFacing.get();
@@ -124,8 +148,7 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                available.set(false);
-                op.error(error.name + ": " + error.message);
+                console.error(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
@@ -133,10 +156,10 @@ function startWebcam()
     if (navigator.getUserMedia)
     {
         navigator.getUserMedia(constraints, camInitComplete,
-            function (error)
+            function ()
             {
-                op.error(error.name + ": " + error.message);
                 available.set(false);
+                // console.log('error webcam');
             });
     }
 }

@@ -300,7 +300,7 @@ render.onTriggered = function ()
 
     if (mesh && mesh.numInstances > 0)
     {
-        cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
+        // cgl.pushBlendMode(CGL.BLEND_NORMAL, true);
         cgl.pushShader(shader);
 
         if (fontTexs[0]) uniTexSize.setValue([fontTexs[0].width, fontTexs[0].height]);
@@ -338,7 +338,7 @@ render.onTriggered = function ()
 
         cgl.setTexture(0, null);
         cgl.popShader();
-        cgl.popBlendMode();
+        // cgl.popBlendMode();
     }
 
     next.trigger();

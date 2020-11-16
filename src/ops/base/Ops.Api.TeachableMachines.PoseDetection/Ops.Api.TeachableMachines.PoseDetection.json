@@ -1,0 +1,53 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "1",
+                "name": "Initialize"
+            },
+            {
+                "type": "0",
+                "name": "Model URL"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            },
+            {
+                "type": "0",
+                "name": "Flip image",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "name": "Array",
+                "text": "Classifier results"
+            },
+            {
+                "name": "Array",
+                "text": "Pose positions"
+            },
+            {
+                "type": "0",
+                "name": "Image flipped",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Api.TeachableMachines.PoseDetection"
+    },
+    "summary": "Use the Teachable Machines pose detection. Insert the uploaded model URL.",
+    "updated": ,
+    "author": "",
+    "authorName": "mickey",
+    "id": "",
+    "created": 
+}

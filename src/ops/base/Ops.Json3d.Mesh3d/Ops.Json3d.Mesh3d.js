@@ -42,6 +42,16 @@ centerPivot.onChange =
 inResize.onChange =
     merge.onChange = updateResizeUi;
 
+<<<<<<< HEAD
+=======
+exe.onLinkChanged =
+
+() =>
+{
+    if (!exe.isLinked()) geometryOut.set(null);
+    else geometryOut.set(geom);
+};
+>>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
 
 function getMeshName(idx)
 {
@@ -54,7 +64,6 @@ function getMeshName(idx)
             if (data.rootnode.children[i].meshes && data.rootnode.children[i].meshes.length == 1 && data.rootnode.children[i].meshes[0] == idx) return data.rootnode.children[i].name;
         }
     }
-
 
     return "unknown";
 }
@@ -70,7 +79,11 @@ function calcNormals()
 {
     if (!geom)
     {
+<<<<<<< HEAD
         op.error("calc normals: no geom!");
+=======
+        console.log("calc normals: no geom!");
+>>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
         return;
     }
 
@@ -157,6 +170,7 @@ function setMesh()
         meshes[index] = null;
         hasError = true;
         outName.set("");
+        geometryOut.set(null);
         return;
     }
     else
@@ -222,8 +236,14 @@ function setMesh()
 
 function reload()
 {
-    if (!filename.get()) return;
+
+    if (!filename.get())
+    {
+        geometryOut.set(null);
+        return;
+    }
     currentIndex = -1;
+
 
     function doLoad()
     {
@@ -234,8 +254,12 @@ function reload()
                 if (err)
                 {
                     if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
+<<<<<<< HEAD
 
                     op.error("ajax error:", err);
+=======
+                    console.error("ajax error:", err);
+>>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
                     op.patch.loading.finished(loadingId);
                     return;
                 }
@@ -252,6 +276,7 @@ function reload()
                 {
                     if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
                     op.patch.loading.finished(loadingId);
+                    geometryOut.set(null);
                     return;
                 }
 
