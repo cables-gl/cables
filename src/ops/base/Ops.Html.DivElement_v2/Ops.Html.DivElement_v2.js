@@ -57,7 +57,6 @@ function updateVisibility()
     setCSSVisible(inVisible.get());
 }
 
-
 function updateText()
 {
     let str = inText.get();
@@ -87,6 +86,14 @@ function updateStyle()
         outElement.set(null);
         outElement.set(div);
     }
+
+    if (!div.parentElement)
+    {
+        canvas.appendChild(div);
+
+        // console.log("parent:", div.parentElement);
+    }
+
     warning();
 }
 
