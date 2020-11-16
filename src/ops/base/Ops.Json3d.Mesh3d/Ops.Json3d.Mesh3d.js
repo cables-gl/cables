@@ -229,7 +229,6 @@ function setMesh()
 
 function reload()
 {
-
     if (!filename.get())
     {
         geometryOut.set(null);
@@ -247,12 +246,8 @@ function reload()
                 if (err)
                 {
                     if (CABLES.UI)op.uiAttr({ "error": "could not load file..." });
-<<<<<<< HEAD
 
                     op.error("ajax error:", err);
-=======
-                    console.error("ajax error:", err);
->>>>>>> 512bfc92e9e548790cfb55c1f01c930764dfcb29
                     op.patch.loading.finished(loadingId);
                     return;
                 }
