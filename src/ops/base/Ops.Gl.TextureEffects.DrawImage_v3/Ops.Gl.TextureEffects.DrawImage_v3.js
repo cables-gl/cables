@@ -2,12 +2,12 @@ const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 const amount = op.inValueSlider("amount", 1);
 
-const image = op.inTexture("image");
+const image = op.inTexture("Image");
 const removeAlphaSrc = op.inValueBool("removeAlphaSrc", false);
 
-const imageAlpha = op.inTexture("imageAlpha");
-const alphaSrc = op.inValueSelect("alphaSrc", ["alpha channel", "luminance", "luminance inv"]);
-const invAlphaChannel = op.inValueBool("invert alpha channel");
+const imageAlpha = op.inTexture("Mask");
+const alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance");
+const invAlphaChannel = op.inValueBool("Invert alpha channel");
 
 const inAspect = op.inValueBool("Aspect Ratio", false);
 const inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X");
