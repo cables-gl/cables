@@ -1359,7 +1359,7 @@ const Op = function ()
     };
 
     // todo: remove
-    Op.prototype.setError = Op.prototype.error = function (id, txt)
+    Op.prototype.setError = function (id, txt)
     {
         console.warn("old error message op.error() - use op.setUiError()");
 
