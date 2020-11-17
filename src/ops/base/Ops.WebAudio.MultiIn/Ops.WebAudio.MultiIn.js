@@ -8,7 +8,7 @@ const inAudio4 = op.inObject("audio in 4");
 const inAudio5 = op.inObject("audio in 5");
 const inAudio6 = op.inObject("audio in 6");
 const inAudio7 = op.inObject("audio in 7");
-const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const audioOut = op.outObject("audio out");
 
 const gain = audioContext.createGain();
 audioOut.set(gain);
@@ -44,7 +44,7 @@ const createValueChangedFunction = function (port)
             {
                 if (oldAudioIns[port] && oldAudioIns[port].disconnect) oldAudioIns[port].disconnect(gain);
             }
-            catch (e) { op.log("yup im here, index: ", port); op.log("[Error] " + e); }
+            catch (e) { op.log("[Error] " + e); }
         }
     };
 };
@@ -54,12 +54,3 @@ audioIns.forEach((port, index) =>
     port.onChange = createValueChangedFunction(index);
     port.audioInPortNr = index;
 });
-
-/*
-for (let i = 0; i < N_PORTS; i++)
-{
-    const audioIn = this.addInPort(new CABLES.Port(this, "audio in " + i, CABLES.OP_PORT_TYPE_OBJECT));
-    audioIn.audioInPortNr = i;
-    audioIn.onChange = createValueChangedFunction(i);
-    audioIns.push(audioIn);
-} */
