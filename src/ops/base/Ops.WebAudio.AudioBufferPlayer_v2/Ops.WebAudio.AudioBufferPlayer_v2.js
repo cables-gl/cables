@@ -20,14 +20,20 @@ const audioOutPort = op.outObject("Audio Out");
 const outPlaying = op.outBool("Is Playing", false);
 // vars
 let source = null;
-let oldSource = null;
 let isPlaying = false;
 
 const gainNode = audioCtx.createGain();
 // change listeners
 audioBufferPort.onChange = function ()
 {
-    if (audioBufferPort.get()) {
+    if (audioBufferPort.get())
+    {
+        if (!(audioBufferPort.get() instanceof AudioBuffer))
+        {
+            op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
+            return;
+        }
+        op.setUiError("noAudioBuffer", null);
         createAudioBufferSource();
 
         if (
@@ -37,12 +43,17 @@ audioBufferPort.onChange = function ()
         {
             start(startTimePort.get());
         }
-    } else {
-        if (isPlaying) {
+    }
+    else
+    {
+        op.setUiError("noAudioBuffer", null);
+        if (isPlaying)
+        {
             stop(0);
-            setTimeout(function() {
+            setTimeout(function ()
+            {
                 if (isPlaying) source.stop();
-        }, 30)
+            }, 30);
         }
     }
 };
@@ -55,7 +66,6 @@ playPort.onChange = function ()
             const startTime = startTimePort.get() || 0;
             createAudioBufferSource();
             start(startTime);
-
         }
         else
         {
@@ -124,8 +134,10 @@ inResetStart.onTriggered = function ()
 // functions
 function createAudioBufferSource()
 {
-    if (source) {
-        if (isPlaying) {
+    if (source)
+    {
+        if (isPlaying)
+        {
             stop(0);
         }
         source.disconnect(gainNode);
@@ -170,13 +182,15 @@ function stop(time)
     {
         gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
-        setTimeout(function() {
-            if (isPlaying) {
+        setTimeout(function ()
+        {
+            if (isPlaying)
+            {
                 source.stop();
             }
             isPlaying = false;
             outPlaying.set(false);
-        }, 30)
+        }, 30);
     }
     catch (e)
     {
