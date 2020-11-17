@@ -85,7 +85,6 @@ function onParentChanged()
     }
 }
 
-
 function deSerializeSidebar(obj)
 {
     if (!obj) return;
@@ -102,34 +101,26 @@ function deSerializeSidebar(obj)
                 if (p)
                 {
                     p.set(obj.ops[i].ports[portName].value);
-                    // console.log('set value ',portName,obj.ops[i].ports[portName]);
-                    // console.log(obj.ops[i].ports);
                 }
                 else
                 {
-                    console.log("unknown p!");
+                    op.warn("unknown preset");
                 }
 
                 const def = theOp.getPortByName("Input");
                 if (def)
                 {
-                    // console.log("SET input!!!");
                     def.set(obj.ops[i].ports[portName]);
                 }
             }
         }
-
-        // console.log(i);
     }
 }
 
-
-// inSet.onTriggered=setSidebar;
 function setSidebar(idx)
 {
     const obj = presetPorts[idx].get();
     deSerializeSidebar(obj);
-    // console.log(obj);
 }
 
 function onDelete()
@@ -151,10 +142,8 @@ function updatePreset()
     const idx = selectList.options[selectList.selectedIndex].value;
 
     const valueOp = presetPorts[idx].links[0].getOtherPort(presetPorts[idx]).parent;
-    console.log(valueOp);
     valueOp.getPortByName("JSON String").set(JSON.stringify(r));
 }
-
 
 function serializeSidebar()
 {
@@ -169,8 +158,6 @@ function serializeSidebar()
             op.patch.ops[i].objName.indexOf("Ops.Sidebar") === 0
         )
         {
-            // console.log("objname",op.patch.ops[i].objName);
-
             let foundPort = false;
 
             const theOp = op.patch.ops[i];
@@ -198,7 +185,6 @@ function serializeSidebar()
     return r;
 }
 
-
 function addPreset()
 {
     let freePort = 0;
@@ -214,16 +200,13 @@ function addPreset()
 
     const r = serializeSidebar();
 
-    console.log(r);
-
     const newOp = op.patch.addOp("Ops.Json.ParseObject");
-    console.log(r);
+
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
     if (CABLES.UI)gui.patch().focusOp(newOp);
 
     op.patch.link(op, freePort.name, newOp, "Result");
 }
-
 
 op.serializeSidebar = serializeSidebar;
 op.deSerializeSidebar = deSerializeSidebar;

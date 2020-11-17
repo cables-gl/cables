@@ -14,7 +14,6 @@ key.onChange = function ()
     exec();
 };
 
-
 function exec()
 {
     const dat = data.get();

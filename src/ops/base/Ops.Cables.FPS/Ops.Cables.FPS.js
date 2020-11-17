@@ -13,12 +13,10 @@ op.onDelete = function ()
     op.patch.removeEventListener("performance", update);
 };
 
-
 function update(p)
 {
     if (active.get())
     {
-        // console.log(p);
         outFPS.set(p.fps);
         countFps += p.fps;
         countFpsNums++;

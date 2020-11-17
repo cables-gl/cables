@@ -82,8 +82,6 @@ inTrigger.onTriggered = function ()
     cgl.currentTextureEffect.finish();
     cgl.popShader();
     outTrigger.trigger();
-
-    // console.log(shader.finalShaderFrag);
 };
 
 

@@ -1,28 +1,28 @@
-const inRender=op.inTrigger("Render");
-const inSelect=op.inValueSelect("Uniform");
-const inValue=op.inValue("Value");
-const next=op.outTrigger("Next");
+const inRender = op.inTrigger("Render");
+const inSelect = op.inValueSelect("Uniform");
+const inValue = op.inValue("Value");
+const next = op.outTrigger("Next");
 
-var shader=null;
-const cgl=op.patch.cgl;
-var doSetupUniform=true;
-var uniform=null;
-var shaderLastCompile=-1;
+let shader = null;
+const cgl = op.patch.cgl;
+let doSetupUniform = true;
+let uniform = null;
+let shaderLastCompile = -1;
 
-inRender.onTriggered=function()
+inRender.onTriggered = function ()
 {
-    if(cgl.getShader() && ( shader!=cgl.getShader() || shader.lastCompile!=shaderLastCompile ) )
+    if (cgl.getShader() && (shader != cgl.getShader() || shader.lastCompile != shaderLastCompile))
     {
-        shader=cgl.getShader();
+        shader = cgl.getShader();
         setupShader();
-        doSetupUniform=true;
+        doSetupUniform = true;
     }
 
-    if(doSetupUniform) setupUniform();
+    if (doSetupUniform) setupUniform();
 
-    if(uniform)
+    if (uniform)
     {
-        var oldValue=uniform.getValue();
+        const oldValue = uniform.getValue();
         uniform.setValue(inValue.get());
         next.trigger();
         uniform.setValue(oldValue);
@@ -33,36 +33,35 @@ inRender.onTriggered=function()
     }
 };
 
-inSelect.onChange=function()
+inSelect.onChange = function ()
 {
-    doSetupUniform=true;
+    doSetupUniform = true;
 };
 
 function setupUniform()
 {
-    if(shader)
+    if (shader)
     {
-        uniform=shader.getUniform(inSelect.get());
-        // console.log('uniform!!!',uniform);
+        uniform = shader.getUniform(inSelect.get());
 
-        if(!uniform) op.uiAttr({'error':'uniform unknown. maybe shader changed'});
-            else op.uiAttr({'error':null});
+        if (!uniform) op.uiAttr({ "error": "uniform unknown. maybe shader changed" });
+        else op.uiAttr({ "error": null });
 
-        doSetupUniform=false;
+        doSetupUniform = false;
     }
 }
 
 function setupShader()
 {
-    var unis=shader.getUniforms();
-    // console.log('num uniforms',unis.length);
-    shaderLastCompile=shader.lastCompile;
-    var names=['none'];
+    const unis = shader.getUniforms();
 
-    for(var i=0;i<unis.length;i++)
+    shaderLastCompile = shader.lastCompile;
+    const names = ["none"];
+
+    for (let i = 0; i < unis.length; i++)
     {
-        names.push( unis[i].getName() );
+        names.push(unis[i].getName());
     }
 
-    inSelect.setUiAttribs({values:names});
+    inSelect.setUiAttribs({ "values": names });
 }

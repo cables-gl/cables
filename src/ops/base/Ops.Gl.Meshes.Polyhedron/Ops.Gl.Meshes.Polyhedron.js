@@ -1,153 +1,133 @@
+const notation = op.inValueString("Receipt", "djmeD");
 
-var notation=op.inValueString("Receipt","djmeD");
+const outGeom = op.outObject("Geometry");
 
-var outGeom=op.outObject("Geometry");
+let obj = {};
 
+let faces = [];
+let vertices = [];
+let vertexColors = [];
 
-var obj={};
-
-var faces=[];
-var vertices=[];
-var vertexColors=[];
-
-notation.onChange=buildMesh;
+notation.onChange = buildMesh;
 buildMesh();
 
 function getCellVertices(cellArr)
 {
-    
-    var verts=[];
-    for(var i=0;i<cellArr.length;i++)
+    const verts = [];
+    for (let i = 0; i < cellArr.length; i++)
     {
-        verts.push( obj.positions[cellArr[i]] );
+        verts.push(obj.positions[cellArr[i]]);
     }
     return verts;
 }
 
-
 function addFace(verts)
 {
-    var colR=Math.random();
-    var colG=Math.random();
-    var colB=Math.random();
-    
-    if(verts.length==3)
+    const colR = Math.random();
+    const colG = Math.random();
+    const colB = Math.random();
+
+    if (verts.length == 3)
     {
-        for(var i=0;i<verts.length;i++)
+        for (var i = 0; i < verts.length; i++)
         {
-            vertices.push(verts[i][0],verts[i][1],verts[i][2]);
-            
-            var index=vertices.length/3-1;
+            vertices.push(verts[i][0], verts[i][1], verts[i][2]);
+
+            var index = vertices.length / 3 - 1;
             faces.push(index);
-            vertexColors.push(colR,colG,colB);
+            vertexColors.push(colR, colG, colB);
         }
-        
     }
     else
-    if(verts.length==4)
+    if (verts.length == 4)
     {
-
-        for(var i=0;i<verts.length;i++)
+        for (var i = 0; i < verts.length; i++)
         {
-            vertices.push(verts[i][0],verts[i][1],verts[i][2]);
-            vertexColors.push(colR,colG,colB);
+            vertices.push(verts[i][0], verts[i][1], verts[i][2]);
+            vertexColors.push(colR, colG, colB);
         }
-        
-        var index=vertices.length/3-4;
+
+        var index = vertices.length / 3 - 4;
         faces.push(index);
-        faces.push(index+1);
-        faces.push(index+2);
+        faces.push(index + 1);
+        faces.push(index + 2);
 
-        faces.push(index+2);
-        faces.push(index+3);
-        faces.push(index+0);
-
+        faces.push(index + 2);
+        faces.push(index + 3);
+        faces.push(index + 0);
     }
     else
     {
-        var avgX=0;
-        var avgY=0;
-        var avgZ=0;
+        let avgX = 0;
+        let avgY = 0;
+        let avgZ = 0;
 
-        for(var i=0;i<verts.length;i++)
+        for (var i = 0; i < verts.length; i++)
         {
-            avgX+=verts[i][0];
-            avgY+=verts[i][1];
-            avgZ+=verts[i][2];
+            avgX += verts[i][0];
+            avgY += verts[i][1];
+            avgZ += verts[i][2];
         }
-        avgX/=verts.length;
-        avgY/=verts.length;
-        avgZ/=verts.length;
+        avgX /= verts.length;
+        avgY /= verts.length;
+        avgZ /= verts.length;
 
-        vertices.push(avgX,avgY,avgZ);
-        vertexColors.push(colR,colG,colB);
+        vertices.push(avgX, avgY, avgZ);
+        vertexColors.push(colR, colG, colB);
 
-        var index=vertices.length/3-1;
+        var index = vertices.length / 3 - 1;
 
-        for(var i=0;i<verts.length;i++)
+        for (var i = 0; i < verts.length; i++)
         {
-            vertices.push(verts[i][0],verts[i][1],verts[i][2]);
-            vertexColors.push(colR,colG,colB);
+            vertices.push(verts[i][0], verts[i][1], verts[i][2]);
+            vertexColors.push(colR, colG, colB);
         }
-        
-        var indexEnd=vertices.length/3-1;
-        
-        for(var i=index;i<indexEnd;i++)
+
+        const indexEnd = vertices.length / 3 - 1;
+
+        for (var i = index; i < indexEnd; i++)
         {
             faces.push(index);
             faces.push(i);
-            faces.push(i+1);
+            faces.push(i + 1);
         }
 
         faces.push(index);
         faces.push(indexEnd);
-        faces.push(index+1);
-
-
-
-        
-        
-
-
-        // console.log('verts.length',verts.length);
-        // return;
-        
+        faces.push(index + 1);
     }
-
-    
 }
 
 function buildMesh()
 {
-    obj={};
-    
-    faces=[];
-    vertices=[];
-    vertexColors=[];
-    var geom=new CGL.Geometry();
+    obj = {};
+
+    faces = [];
+    vertices = [];
+    vertexColors = [];
+    const geom = new CGL.Geometry();
 
     try
     {
-        obj=conwayhart(String(notation.get()));
+        obj = conwayhart(String(notation.get()));
     }
-    catch(ex)
+    catch (ex)
     {
-        console.log(ex);
+        op.error(ex);
         return;
     }
 
-    for(var i=0;i<obj.cells.length;i++)
+    for (let i = 0; i < obj.cells.length; i++)
     {
-        var verts=getCellVertices(obj.cells[i]);
-        addFace(verts,geom);
+        const verts = getCellVertices(obj.cells[i]);
+        addFace(verts, geom);
     }
 
-    geom.vertices=vertices;
-    geom.verticesIndices=faces;
-    geom.vertexColors=vertexColors;
+    geom.vertices = vertices;
+    geom.verticesIndices = faces;
+    geom.vertexColors = vertexColors;
     geom.calculateNormals();
 
     outGeom.set(null);
     outGeom.set(geom);
-    
 }

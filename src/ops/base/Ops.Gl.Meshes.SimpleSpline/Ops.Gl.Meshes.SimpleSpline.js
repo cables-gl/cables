@@ -78,7 +78,6 @@ function rebuild()
         else if (texCoords.get() == "Fill")
         {
             const sizel = Math.sqrt(numTc / 2);
-            console.log("fill", numTc, sizel);
 
             let idx = 0;
             for (let j = 0; j < sizel; j++)

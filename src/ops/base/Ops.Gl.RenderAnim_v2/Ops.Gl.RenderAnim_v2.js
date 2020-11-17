@@ -121,7 +121,6 @@ function render()
     {
         CABLES.internalNow = function ()
         {
-            // console.log("YO");
             return time * 1000;
         };
 

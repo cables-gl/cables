@@ -9,7 +9,6 @@ numberLengthPort.setUiAttribs({ "hidePort": !USE_LEFT_PAD_DEFAULT, "greyout": !U
 const indexStart = op.inValueInt("Index Start");
 const indexEnd = op.inValueInt("Index End");
 
-
 const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]);
 const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
@@ -87,10 +86,8 @@ function loadImage(i, nocache)
         numberString = pad(i, numberLengthPort.get());
     }
     url = url.replace(replaceString, numberString);
-
-    // console.log(url);
-
     url = op.patch.getFilePath(url);
+
     if (nocache)url += "?rnd=" + CABLES.generateUUID();
 
     if ((filename.get() && filename.get().length > 1))
@@ -100,8 +97,6 @@ function loadImage(i, nocache)
         var tex = CGL.Texture.load(cgl, url,
             function (err)
             {
-                // console.log('tex loaded!!');
-
                 if (err)
                 {
                     setTempTexture();
@@ -139,7 +134,6 @@ function loadImage(i, nocache)
                 "filter": cgl_filter
             });
 
-
         // textureOut.set(null);
         // textureOut.set(tex);
 
@@ -170,7 +164,6 @@ function realReload(nocache)
     }
 }
 
-
 function onFilterChange()
 {
     if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
@@ -199,7 +192,6 @@ op.onFileChanged = function (fn)
     //     realReload(true);
     // }
 };
-
 
 tfilter.set("linear");
 wrap.set("repeat");

@@ -10,7 +10,6 @@ const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PO
 
 if (!window.audioContext) { audioContext = new AudioContext(); }
 
-
 let isIOS = false;
 let panNode = null;
 
@@ -39,7 +38,6 @@ function updateGain()
         panNode.setPosition(panning, 0, 1 - Math.abs(panning));
     }
 }
-
 
 let oldAudioIn = null;
 

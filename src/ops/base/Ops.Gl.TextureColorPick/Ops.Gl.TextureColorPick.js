@@ -1,15 +1,15 @@
 const
     cgl = op.patch.cgl,
     pUpdate = op.inTrigger("update"),
-    inNormalize = op.inSwitch("Coordinate", ["Pixel", "Normalized"], "Pixel"),
-    inX=op.inInt("X",0),
-    inY=op.inInt("Y",0),
+    // inNormalize = op.inSwitch("Coordinate", ["Pixel", "Normalized"], "Pixel"),
+    inX = op.inInt("X", 0),
+    inY = op.inInt("Y", 0),
     tex = op.inObject("texture"),
     outTrigger = op.outTrigger("trigger"),
-    outR=op.outNumber("Red"),
-    outG=op.outNumber("Green"),
-    outB=op.outNumber("Blue"),
-    outA=op.outNumber("Alpha");
+    outR = op.outNumber("Red"),
+    outG = op.outNumber("Green"),
+    outB = op.outNumber("Blue"),
+    outA = op.outNumber("Alpha");
 
 let
     fb = null,
@@ -53,7 +53,7 @@ pUpdate.onTriggered = function ()
 
     gl.readPixels(
         inX.get(), inY.get(),
-        1,1,
+        1, 1,
         gl.RGBA,
         channelType,
         pixelData
@@ -61,20 +61,19 @@ pUpdate.onTriggered = function ()
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    if(isFloatingPoint)
+    if (isFloatingPoint)
     {
         outR.set(pixelData[0]);
         outG.set(pixelData[1]);
         outB.set(pixelData[2]);
         outA.set(pixelData[3]);
-
     }
     else
     {
-        outR.set(pixelData[0]/255);
-        outG.set(pixelData[1]/255);
-        outB.set(pixelData[2]/255);
-        outB.set(pixelData[3]/255);
+        outR.set(pixelData[0] / 255);
+        outG.set(pixelData[1] / 255);
+        outB.set(pixelData[2] / 255);
+        outB.set(pixelData[3] / 255);
     }
 
     outTrigger.trigger();

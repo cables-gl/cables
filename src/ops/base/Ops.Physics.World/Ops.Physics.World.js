@@ -21,11 +21,9 @@ const cgl = op.patch.cgl;
 let world = null;
 cgl.frameStore = cgl.frameStore || {};
 
-
 const fixedTimeStep = 1.0 / 60.0; // seconds
 const maxSubSteps = 11;
 let lastTime;
-
 
 const meshCube = new CGL.WireframeCube(cgl);
 const wireSphere = new CGL.WirePoint(cgl);
@@ -57,7 +55,6 @@ function setup()
     // world.gravity.set(gravX.get(),gravY.get(),gravZ.get() ); // m/s²
     setGravity();
 
-
     if (groundPlane.get())
     {
         // Create a plane
@@ -87,23 +84,18 @@ function setup()
         // groundBody.position.set(0, -s, 0);
         groundBody.position.set(0, -s, 0);
 
-
         world.addBody(groundBody);
     }
 }
-
 
 function draw()
 {
     // cgl.pushDepthTest(false);
 
-
     for (let i = 0; i < world.bodies.length; i++)
     {
-        // if (i == 0)console.log(world.bodies[i]);
         cgl.pushModelMatrix();
         mat4.identity(cgl.mMatrix);
-        // console.log(world.bodies[i].position);
         mat4.translate(cgl.mMatrix, cgl.mMatrix, [world.bodies[i].position.x, world.bodies[i].position.y, world.bodies[i].position.z]);
         // wireSphere.render(cgl, 0.05);
         // marker.draw(cgl, 0.8, true);
@@ -120,22 +112,19 @@ function draw()
         }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.PLANE)
         {
-            console.log("plane!");
+            // op.log("plane!");
         }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
         {
             wireSphere.render(cgl, 1.0);
         }
-        else console.log("unknown!", world.bodies[i].shapes[0].type);
-
-        // console.log(world.bodies[i]);
+        // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
         cgl.popModelMatrix();
     }
 
     // cgl.popDepthTest();
 }
-
 
 exec.onTriggered = function ()
 {

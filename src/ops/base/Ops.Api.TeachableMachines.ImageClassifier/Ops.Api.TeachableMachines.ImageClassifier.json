@@ -1,0 +1,35 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Model URL"
+            },
+            {
+                "type": "1",
+                "name": "Trigger in"
+            },
+            {
+                "type": "1",
+                "name": "Initialize"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "name": "Array",
+                "text": "Array output with value"
+            }
+        ],
+        "name": "Ops.Api.TeachableMachines.ImageClassifier"
+    },
+    "summary": "Use the Teachable Machines image classifier. Insert the uploaded model URL.",
+    "updated": 0,
+    "author": "",
+    "authorName": "mickey",
+    "id": "",
+    "created": 0
+}

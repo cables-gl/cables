@@ -5,8 +5,6 @@ const
     showModules = op.inTriggerButton("Show Modules"),
     showUniforms = op.inTriggerButton("Show Uniforms"),
     showState = op.inTriggerButton("State Info"),
-
-
     next = op.outTrigger("Next"),
     outName = op.outString("Name"),
     outId = op.outString("Id"),
@@ -87,8 +85,6 @@ exec.onTriggered = function ()
 
     if (doUniformDump)
     {
-        console.log(shader._uniforms);
-
         const json = [];
         for (let i = 0; i < shader._uniforms.length; i++)
         {
@@ -118,13 +114,10 @@ function stateDump()
     let txt = "";
     txt += "";
 
-    console.log(shader._textureStackUni);
-
     txt += "defines (" + outDefines.get().length + ")\n\n";
 
     for (let i = 0; i < outDefines.get().length; i++)
     {
-        // console.log("i",shader.)
         txt += "- ";
         txt += outDefines.get()[i][0];
         if (outDefines.get()[i][1])
@@ -150,10 +143,8 @@ function stateDump()
     txt += "\n\n";
     txt += "uniforms: (" + shader._uniforms.length + ")\n\n";
 
-
     for (let i = 0; i < shader._uniforms.length; i++)
     {
-        // console.log("i",shader.)
         txt += "- ";
         txt += shader._uniforms[i]._name;
         txt += ": ";
@@ -166,9 +157,6 @@ function stateDump()
         }
         txt += "\n";
     }
-
-
-    // console.log("txt",txt);
 
     CABLES.UI.MODAL.showCode("state info", txt);
 }

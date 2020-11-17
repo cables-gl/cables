@@ -5,8 +5,6 @@ Here are a few example equations to get you started:
 (a+b)*c-d
 sin(a+b)-cos(c-d)
 a*log(b + c * 2) / pow(b, 4)
-<<<<<<< HEAD
-
 
 
 For a reference of mathematical functions availible, please refer to the Javascript Math object: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math

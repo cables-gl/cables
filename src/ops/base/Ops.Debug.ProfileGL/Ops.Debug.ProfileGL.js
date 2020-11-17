@@ -60,7 +60,7 @@ exec.onTriggered = function ()
         end();
         const rows = [];
         let numGlCalls = 0;
-        for (var i in originals)
+        for (const i in originals)
             if (counts[i] > 0)
             {
                 rows.push([i, counts[i], durations[i]]);
@@ -71,7 +71,7 @@ exec.onTriggered = function ()
 
 
         const rowsBranches = [];
-        for (var i in branches)
+        for (const i in branches)
         {
             let count = 0;
             for (const j in branches[i].counts) count += branches[i].counts[j];

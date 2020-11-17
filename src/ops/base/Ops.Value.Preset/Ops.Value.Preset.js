@@ -24,7 +24,7 @@ const
     outDbgSets = op.outArray("dbg_sets");
 let data = [];
 let presets = [];
-let valuePorts = [];
+const valuePorts = [];
 let interpolate = 0;
 
 presetB.changeAlways = true;
@@ -56,10 +56,9 @@ updateButtons();
 
 function movePreset(from, to)
 {
-    let f = presets.splice(from, 1)[0];
+    const f = presets.splice(from, 1)[0];
     presets.splice(to, 0, f);
 }
-
 
 move.onTriggered = function (which)
 {
@@ -77,10 +76,10 @@ op.init = function ()
 {
     if (presets.length > 0 && data.length == 0)
     {
-        console.error("it happened again!!");
+        op.error("it happened again!!");
 
         // this happened only once for now, find out how to reproduce it!!!
-        let keys = Object.keys(presets[0].values);
+        const keys = Object.keys(presets[0].values);
 
         for (let i = 0; i < keys.length; i++)
         {
@@ -96,10 +95,9 @@ op.init = function ()
     }
 };
 
-
 function updateInterpolation()
 {
-    let ip = inInterPolate.get();
+    const ip = inInterPolate.get();
     if (ip === "None")
     {
         interpolate = 0;
@@ -138,7 +136,7 @@ function updateFade()
 
     if (interpolate === 2) // a-b
     {
-        let pr = presetA.get();
+        const pr = presetA.get();
         idxa = Math.floor(pr);
         idxb = Math.ceil(pr);
         fade = pr % 1;
@@ -153,24 +151,23 @@ function updateFade()
         idxb = Math.floor(presetB.get());
     }
 
-    let a = presets[idxa];
-    let b = presets[idxb];
+    const a = presets[idxa];
+    const b = presets[idxb];
 
     if (!a || !b)
     {
-        console.warn("preset not found");
+        op.warn("preset not found");
         return;
     }
 
     // todo: cache variable, so no string lookup needed every time...
 
-    for (let i in a.values)
+    for (const i in a.values)
     {
-        let ip = a.values[i] + (b.values[i] - a.values[i]) * fade;
+        const ip = a.values[i] + (b.values[i] - a.values[i]) * fade;
         op.patch.setVarValue(i, ip);
     }
 }
-
 
 function saveData()
 {
@@ -201,7 +198,6 @@ function updateButtons()
     presetDelete.setUiAttribs({ "greyout": presetNames.uiAttribs.values.length == 0 });
     presetUpdate.setUiAttribs({ "greyout": presetNames.uiAttribs.values.length == 0 });
     presetRename.setUiAttribs({ "greyout": presetNames.uiAttribs.values.length == 0 });
-
 
     move.setUiAttribs({ "greyout": presetNames.uiAttribs.values.length == 0 });
 
@@ -250,7 +246,7 @@ function updatePreset()
 
     for (let i = 0; i < varnames.length; i++)
     {
-        let p = op.getPort(varnames[i]);
+        const p = op.getPort(varnames[i]);
         if (p)
         {
             p.set(preset.values[varnames[i]]);
@@ -326,7 +322,7 @@ dataPort.onChange = function ()
 
     for (let i = 0; i < data.length; i++)
     {
-        let portObject = data[i];
+        const portObject = data[i];
 
         const varname = portObject.varname;
 
@@ -334,8 +330,8 @@ dataPort.onChange = function ()
         {
         	if (portObject.type == CABLES.OP_PORT_TYPE_VALUE)
         	{
-                let val = op.patch.getVarValue(varname);
-        	    let port = op.inFloat(varname, val);
+                const val = op.patch.getVarValue(varname);
+        	    const port = op.inFloat(varname, val);
 
         	    port.setUiAttribs({
         	        "editableTitle": true,
@@ -353,7 +349,6 @@ dataPort.onChange = function ()
     // dataPort.onChange=null;
 };
 
-
 function listenPortChange(port, varname)
 {
     valuePorts.push(port);
@@ -367,7 +362,7 @@ op.patch.addEventListener("onOpDelete", (optodelete) =>
 {
     if (optodelete.objName.indexOf("VarGet") == -1) return;
 
-    let newData = [];
+    const newData = [];
     for (let i = 0; i < data.length; i++)
     {
         let found = false;
@@ -389,7 +384,6 @@ op.patch.addEventListener("onOpDelete", (optodelete) =>
 
         if (found)
         {
-            console.log("found!");
             newData.push(data[i]);
         }
         else
@@ -401,7 +395,6 @@ op.patch.addEventListener("onOpDelete", (optodelete) =>
     data = newData;
     saveData();
 
-
     op.refreshParams();
     setTimeout(op.refreshParams.bind(this), 1000);
 });
@@ -412,7 +405,6 @@ function setDebugOutput()
     outDbgSets.set(presets);
 }
 
-
 addPort.onLinkChanged = function ()
 {
     if (addPort.links.length === 0)
@@ -421,8 +413,8 @@ addPort.onLinkChanged = function ()
         return;
     }
 
-    let link = addPort.links[0];
-    let otherPort = link.getOtherPort(addPort);
+    const link = addPort.links[0];
+    const otherPort = link.getOtherPort(addPort);
 
     const varname = ".preset_" + otherPort.name + "_" + id.get() + "_" + CABLES.shortId();
 
@@ -434,8 +426,6 @@ addPort.onLinkChanged = function ()
             "title": otherPort.parent.name + " " + otherPort.name,
             "type": otherPort.type
         });
-
-    // console.log("otherPort.get()",otherPort.get());
 
     const oldValue = otherPort.get();
 
@@ -449,7 +439,6 @@ addPort.onLinkChanged = function ()
 
     otherPort.setVariable(varname);
 };
-
 
 op.onDelete = (reloading) =>
 {

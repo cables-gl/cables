@@ -5,9 +5,7 @@ const
     inSize = op.inValueSelect("Size", ["auto", "length", "cover", "contain", "initial", "inherit", "75%", "50%", "25%", "20%", "10%"], "cover"),
     inRepeat = op.inValueSelect("Repeat", ["no-repeat", "repeat", "repeat-x", "repeat-y"], "no-repeat"),
     inPosition = op.inValueSelect("Position", ["left top", "left center", "left bottom", "right top", "right center", "right bottom", "center top", "center center", "center bottom"], "center center"),
-
     outEle = op.outObject("HTML Element");
-
 
 op.onLoadedValueSet =
 op.onLoaded =
@@ -23,8 +21,6 @@ let cacheBust = null;
 
 op.onFileChanged = function (fn)
 {
-    console.log("FILE CHANGED!!" + fn, filename.get());
-
     if (filename.get() && filename.get().indexOf(fn) > -1)
     {
         if (ele)ele.style["background-image"] = "none";
@@ -32,7 +28,6 @@ op.onFileChanged = function (fn)
         update();
     }
 };
-
 
 function remove()
 {
@@ -56,7 +51,6 @@ function update()
     op.setUiAttrib({ "extendTitle": CABLES.basename(filename.get()) });
 
     ele = inEle.get();
-
 
     if (ele && ele.style && filename.get())
     {
