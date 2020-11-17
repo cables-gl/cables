@@ -40,6 +40,7 @@ const createValueChangedFunction = function (port)
         }
         else if (!audioIns[port].isLinked())
         {
+            op.setUiError("audioCtx" + port, null);
             try
             {
                 if (oldAudioIns[port] && oldAudioIns[port].disconnect) oldAudioIns[port].disconnect(gain);
