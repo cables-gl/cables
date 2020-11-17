@@ -28,7 +28,7 @@ const N_PORTS = 8;
 const audioIns = [inAudio0, inAudio1, inAudio2, inAudio3, inAudio4, inAudio5, inAudio6, inAudio7];
 const audioInGains = [inAudio0Gain, inAudio1Gain, inAudio2Gain, inAudio3Gain, inAudio4Gain, inAudio5Gain, inAudio6Gain, inAudio7Gain];
 op.setPortGroup("Audio Inputs", audioIns);
-op.setPortGroup("Input Gains", audioInGains);
+op.setPortGroup("Input", audioInGains);
 op.setPortGroup("Output ", [inMasterGain]);
 const oldAudioIns = [];
 
