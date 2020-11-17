@@ -3,15 +3,22 @@ if (!window.audioContext) { audioContext = new AudioContext(); }
 const audioIn = op.inObject("audio in");
 // const impulseResponse = op.inUrl("impulse response");
 const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const inConvolverGain = op.inFloatSlider("IR Gain", 1);
 const normalize = op.inBool("normalize", true);
+const inOutputGain = op.inFloatSlider("Output Gain", 1);
 const audioOut = op.outObject("audio out");
 
+op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize]);
+op.setPortGroup("Output", [inOutputGain]);
 const convolver = audioContext.createConvolver();
+const convolverGain = audioContext.createGain();
+const outputNode = audioContext.createGain();
+
 let oldAudioIn = null;
 let myImpulseBuffer;
 let impulseResponseLoaded = false;
 
-function getImpulse()
+impulseResponse.onChange = () =>
 {
     const impulseUrl = impulseResponse.get();
     const ajaxRequest = new XMLHttpRequest();
@@ -41,17 +48,22 @@ function getImpulse()
                 convolver.buffer = myImpulseBuffer;
                 convolver.loop = false;
         		convolver.normalize = normalize.get();
+        		convolverGain.gain.value = inConvolverGain.get();
+
         		audioOut.set(null);
+
         		try
                 {
-        		    audioIn.get().connect(convolver);
+        		    audioIn.get().connect(convolverGain);
+        		    convolverGain.connect(convolver);
+        		    convolver.connect(outputNode);
         		}
                 catch (e)
                 {
         		    op.log("[audio in] Could not connect audio in to convolver" + e);
         		}
 
-                audioOut.set(convolver);
+                audioOut.set(outputNode);
 
                 op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
 
@@ -77,24 +89,17 @@ function getImpulse()
         }
         else audioOut.set(audioIn.get());
     }
-}
+};
 
-impulseResponse.onChange = getImpulse;
+inConvolverGain.onChange = () =>
+{
+    convolverGain.gain.setValueAtTime((inConvolverGain.get() || 0), audioContext.currentTime);
+};
 
-/* function onLinkChange(){
-    if(!audioIn.isLinked()){
-        if(oldAudioIn){
-            try{
-                op.log("[audio in] Disconnected...");
-                oldAudioIn.disconnect(convolver);
-            } catch(e){
-                op.log("[audio in] Could not disconnect" + e);
-            }
-        }
-    }
-} */
-
-// audioIn.onLinkChanged = onLinkChange;
+inOutputGain.onChange = () =>
+{
+    outputNode.gain.setValueAtTime((inOutputGain.get() || 0), audioContext.currentTime);
+};
 
 audioIn.onChange = function ()
 {
@@ -111,9 +116,10 @@ audioIn.onChange = function ()
             op.setUiError("audioCtx", null);
         }
         op.log("[audio in] connected");
+
         try
         {
-            audioIn.get().connect(convolver);
+            audioIn.get().connect(outputNode);
             oldAudioIn = audioIn.get();
         }
         catch (e)
@@ -129,7 +135,7 @@ audioIn.onChange = function ()
         else
         {
             op.setUiError("noIR", null);
-            audioOut.set(convolver);
+            audioOut.set(outputNode);
         }
     }
     else
