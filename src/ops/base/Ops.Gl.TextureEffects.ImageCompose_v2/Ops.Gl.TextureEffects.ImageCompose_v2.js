@@ -23,7 +23,6 @@ let reInitEffect = true;
 
 const bgFrag = ""
 
-
     .endl() + "void main()"
     .endl() + "{"
     .endl() + "   outColor= vec4(0.0,0.0,0.0,0.0);"
@@ -31,7 +30,6 @@ const bgFrag = ""
 
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
 bgShader.setSource(bgShader.getDefaultVertexShader(), bgFrag);
-
 
 function initEffect()
 {
@@ -58,7 +56,6 @@ fpTexture.onChange = function ()
 {
     reInitEffect = true;
 };
-
 
 function updateResolution()
 {
@@ -99,10 +96,9 @@ function updateResolution()
     }
 
     if (texOut.get())
-        if (!texOut.get().isPowerOfTwo()) op.uiAttr({ "warning": "texture dimensions not power of two! - texture filtering will not work." });
-        else op.uiAttr({ "warning": "" }); // todo only when needed...
+        if (!texOut.get().isPowerOfTwo()) op.setUiError("warningNPOT", "texture dimensions not power of two! - texture filtering will not work.", 1);
+        else op.setUiError("warningNPOT", null);
 }
-
 
 useVPSize.onChange = function ()
 {
@@ -118,7 +114,6 @@ useVPSize.onChange = function ()
     }
     updateResolution();
 };
-
 
 const doRender = function ()
 {
@@ -144,7 +139,6 @@ const doRender = function ()
 
         // cgl.gl.disable( cgl.gl.BLEND );
         cgl.pushBlend(false);
-
 
         cgl.pushShader(bgShader);
         cgl.currentTextureEffect.bind();
@@ -172,7 +166,6 @@ const doRender = function ()
     cgl.currentTextureEffect = null;
     cgl.popBlend();
 };
-
 
 function onFilterChange()
 {
