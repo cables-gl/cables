@@ -24,25 +24,15 @@ let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
-const bgFrag = ""
-    .endl() + "UNI float a;"
-    .endl() + "void main()"
-    .endl() + "{"
-    .endl() + "   outColor= vec4(0.0,0.0,0.0,a);"
-    .endl() + "}";
-
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
-bgShader.setSource(bgShader.getDefaultVertexShader(), bgFrag);
+bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
 
 const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 0);
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-twrap.set("repeat");
 twrap.onChange = onWrapChange;
-
-tfilter.set("linear");
 tfilter.onChange = onFilterChange;
 
 render.onTriggered = op.preRender = doRender;
