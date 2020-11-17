@@ -126,11 +126,12 @@ const Op = function ()
 
     const _setUiAttrib = function (newAttribs)
     {
+        if (!newAttribs) return;
+
         if (newAttribs.error) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
         if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
         if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
-        if (!newAttribs) return;
         if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
         for (const p in newAttribs)
