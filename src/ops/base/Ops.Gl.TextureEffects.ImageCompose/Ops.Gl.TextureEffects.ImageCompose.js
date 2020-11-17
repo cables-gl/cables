@@ -1,5 +1,4 @@
 const render = op.inTrigger("render");
-// const useVPSize=op.addInPort(new CABLES.Port(op,"use viewport size",CABLES.OP_PORT_TYPE_VALUE,{ display:'bool' }));
 const useVPSize = op.inBool("use viewport size");
 const width = op.inValueInt("width");
 const height = op.inValueInt("height");
@@ -11,7 +10,7 @@ const fpTexture = op.inValueBool("HDR");
 const trigger = op.outTrigger("trigger");
 const texOut = op.outTexture("texture_out");
 
-const bgAlpha = op.inValueSlider("Background Alpha", 1);
+const bgAlpha = op.inValueSlider("Background Alpha", 0);
 const outRatio = op.outValue("Aspect Ratio");
 
 op.setPortGroup("Texture Size", [useVPSize, width, height]);
@@ -25,7 +24,6 @@ let tex = null;
 let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
-
 
 const bgFrag = ""
     .endl() + "uniform float a;"
@@ -121,7 +119,6 @@ function updateResolution()
         }
 }
 
-
 function updateSizePorts()
 {
     if (useVPSize.get())
@@ -135,7 +132,6 @@ function updateSizePorts()
         height.setUiAttribs({ "greyout": false });
     }
 }
-
 
 useVPSize.onChange = function ()
 {
@@ -153,13 +149,11 @@ useVPSize.onChange = function ()
     updateResolution();
 };
 
-
 op.preRender = function ()
 {
     doRender();
     bgShader.bind();
 };
-
 
 var doRender = function ()
 {
@@ -194,7 +188,6 @@ var doRender = function ()
     texOut.set(effect.getCurrentSourceTexture());
     // texOut.set(effect.getCurrentTargetTexture());
 
-
     // if(effect.getCurrentSourceTexture.filter==CGL.Texture.FILTER_MIPMAP)
     // {
     //         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture.tex);
@@ -212,12 +205,10 @@ var doRender = function ()
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
-
     cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
     cgl.currentTextureEffect = null;
 };
-
 
 function onWrapChange()
 {
@@ -231,7 +222,6 @@ function onWrapChange()
 
 twrap.set("repeat");
 twrap.onChange = onWrapChange;
-
 
 function onFilterChange()
 {
@@ -251,7 +241,6 @@ tfilter.onChange = onFilterChange;
 useVPSize.set(true);
 render.onTriggered = doRender;
 op.preRender = doRender;
-
 
 width.set(640);
 height.set(360);
