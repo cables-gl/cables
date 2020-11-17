@@ -6,6 +6,7 @@ const
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
     twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     fpTexture = op.inValueBool("HDR"),
+    inTransp = op.inValueBool("Transparent", true),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
@@ -13,7 +14,7 @@ const
 
 const cgl = op.patch.cgl;
 op.setPortGroup("Texture Size", [useVPSize, width, height]);
-op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture]);
+op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture, inTransp]);
 
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 let effect = null;
@@ -24,13 +25,16 @@ const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
 const bgFrag = ""
+    .endl() + "UNI float a;"
     .endl() + "void main()"
     .endl() + "{"
-    .endl() + "   outColor= vec4(0.0,0.0,0.0,0.0);"
+    .endl() + "   outColor= vec4(0.0,0.0,0.0,a);"
     .endl() + "}";
 
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
 bgShader.setSource(bgShader.getDefaultVertexShader(), bgFrag);
+
+const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 0);
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -46,6 +50,11 @@ render.onTriggered = op.preRender = doRender;
 onFilterChange();
 onWrapChange();
 updateSizePorts();
+
+inTransp.onChange = () =>
+{
+    uniAlpha.setValue(!inTransp.get());
+};
 
 function initEffect()
 {
