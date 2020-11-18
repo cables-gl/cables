@@ -10,12 +10,12 @@
                 "name": "Initialize"
             },
             {
-                "type": "0",
+                "type": "5",
                 "name": "Model URL"
             },
             {
                 "type": "2",
-                "name": "texture"
+                "name": "Webcam texture"
             },
             {
                 "type": "0",
@@ -29,12 +29,16 @@
                 "name": "Trigger"
             },
             {
-                "name": "Array",
-                "text": "Classifier results"
+                "type": "1",
+                "name": "Initialized"
             },
             {
-                "name": "Array",
-                "text": "Pose positions"
+                "type": "3",
+                "name": "Classifier"
+            },
+            {
+                "type": "3",
+                "name": "Pose positions"
             },
             {
                 "type": "0",
@@ -45,8 +49,18 @@
         "name": "Ops.Api.TeachableMachines.PoseDetection"
     },
     "summary": "Use the Teachable Machines pose detection. Insert the uploaded model URL.",
-    "author": "",
+    "author": "mickey",
     "authorName": "mickey",
-    "id": "",
-    "created":0
+    "id": "0391393f-c1cd-4cff-b580-bc5eddfa74c5",
+    "created": 1605703736459,
+    "changelog": [
+        {
+            "message": " added lib: teachablemachine_tf_speech_image_pose.js",
+            "author": "cables",
+            "date": 1605703409690
+        }
+    ],
+    "libs": [
+        "teachablemachine_tf_speech_image_pose.js"
+    ]
 }

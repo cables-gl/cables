@@ -2,25 +2,47 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Model URL"
+                "type": "1",
+                "name": "Trigger In"
             },
             {
                 "type": "1",
-                "name": "Trigger in"
+                "name": "Initialize"
+            },
+            {
+                "type": "5",
+                "name": "Model URL"
             }
         ],
         "portsOut": [
             {
-                "name": "Array",
-                "text": "Array output with value"
+                "type": "1",
+                "name": "Trigger"
+            },
+            {
+                "type": "1",
+                "name": "Initialized"
+            },
+            {
+                "type": "3",
+                "name": "classifier"
             }
         ],
         "name": "Ops.Api.TeachableMachines.AudioClassifier"
     },
     "summary": "Use the Teachable Machines audio classifier. Insert the uploaded model URL.",
-    "author": "",
+    "author": "mickey",
     "authorName": "mickey",
-    "id": "",
-    "created":0
+    "id": "9710eaec-8b4e-43a6-814c-49c87440e0ac",
+    "created": 1605703785006,
+    "changelog": [
+        {
+            "message": " added lib: teachablemachine_tf_speech_image_pose.js",
+            "author": "cables",
+            "date": 1605702012489
+        }
+    ],
+    "libs": [
+        "teachablemachine_tf_speech_image_pose.js"
+    ]
 }
