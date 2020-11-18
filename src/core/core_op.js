@@ -127,6 +127,11 @@ const Op = function ()
     const _setUiAttrib = function (newAttribs)
     {
         if (!newAttribs) return;
+
+        if (newAttribs.error) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
+        if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
+        if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
+
         if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
         for (const p in newAttribs)
@@ -1359,7 +1364,7 @@ const Op = function ()
     };
 
     // todo: remove
-    Op.prototype.setError = Op.prototype.error = function (id, txt)
+    Op.prototype.setError = function (id, txt)
     {
         console.warn("old error message op.error() - use op.setUiError()");
 

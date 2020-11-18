@@ -1,0 +1,44 @@
+{
+    "id": "8933d01f-39ac-428c-a64b-902c534a4fc0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "GeertVanDamme",
+            "date": 1605644922445
+        }
+    ],
+    "authorName": "GeertVanDamme",
+    "created": 1605644930764,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Timestamp",
+                "subType": "number"
+            },
+            {
+                "type": "2",
+                "name": "Date"
+            },
+            {
+                "type": "5",
+                "name": "Format"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "StringDate"
+            }
+        ],
+        "name": "Ops.Date.DateFormatter"
+    },
+    "summary": "String representation of a date",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

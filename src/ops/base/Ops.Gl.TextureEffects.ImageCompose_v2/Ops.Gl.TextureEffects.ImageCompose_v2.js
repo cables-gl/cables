@@ -1,42 +1,50 @@
-const render = op.inTrigger("render");
-const useVPSize = op.inBool("use viewport size");
-const width = op.inValueInt("width");
-const height = op.inValueInt("height");
+const
+    render = op.inTrigger("Render"),
+    useVPSize = op.inBool("Use viewport size", true),
+    width = op.inValueInt("Width", 640),
+    height = op.inValueInt("Height", 480),
+    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
+    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    fpTexture = op.inValueBool("HDR"),
+    inTransp = op.inValueBool("Transparent", true),
 
-const tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear");
-const twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]);
-const fpTexture = op.inValueBool("HDR");
-
-const trigger = op.outTrigger("trigger");
-const texOut = op.outTexture("texture_out");
-
-const bgAlpha = op.inValueSlider("Background Alpha", 0);
-const outRatio = op.outValue("Aspect Ratio");
-
-op.setPortGroup("Texture Size", [useVPSize, width, height]);
-op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture]);
+    trigger = op.outTrigger("Next"),
+    texOut = op.outTexture("texture_out"),
+    outRatio = op.outValue("Aspect Ratio");
 
 const cgl = op.patch.cgl;
+op.setPortGroup("Texture Size", [useVPSize, width, height]);
+op.setPortGroup("Texture Settings", [twrap, tfilter, fpTexture, inTransp]);
+
 texOut.set(CGL.Texture.getEmptyTexture(cgl));
 let effect = null;
 let tex = null;
-
 let w = 8, h = 8;
+
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
-const bgFrag = ""
-    .endl() + "uniform float a;"
-    .endl() + "void main()"
-    .endl() + "{"
-    .endl() + "   outColor= vec4(0.0,0.0,0.0,a);"
-    .endl() + "}";
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
-bgShader.setSource(bgShader.getDefaultVertexShader(), bgFrag);
-const uniBgAlpha = new CGL.Uniform(bgShader, "f", "a", bgAlpha);
+bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
+
+const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 0);
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+twrap.onChange = onWrapChange;
+tfilter.onChange = onFilterChange;
+
+render.onTriggered = op.preRender = doRender;
+
+onFilterChange();
+onWrapChange();
+updateSizePorts();
+
+inTransp.onChange = () =>
+{
+    uniAlpha.setValue(!inTransp.get());
+};
 
 function initEffect()
 {
@@ -57,22 +65,13 @@ function initEffect()
 
     effect.setSourceTexture(tex);
     texOut.set(CGL.Texture.getEmptyTexture(cgl));
-    // texOut.set(effect.getCurrentSourceTexture());
-
-    // texOut.set(effect.getCurrentSourceTexture());
 
     reInitEffect = false;
-
-    // op.log("reinit effect");
-    // tex.printInfo();
 }
 
 fpTexture.onChange = function ()
 {
     reInitEffect = true;
-
-    // var e1=cgl.gl.getExtension('EXT_color_buffer_float');
-    // var e2=cgl.gl.getExtension('EXT_float_blend');
 };
 
 function updateResolution()
@@ -97,40 +96,19 @@ function updateResolution()
         tex.setSize(w, h);
         outRatio.set(w / h);
         effect.setSourceTexture(tex);
-        // texOut.set(null);
         texOut.set(CGL.Texture.getEmptyTexture(cgl));
         texOut.set(tex);
     }
 
     if (texOut.get())
-        if (!texOut.get().isPowerOfTwo())
-        {
-            if (!op.uiAttribs.hint)
-                op.uiAttr(
-                    {
-                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
-                        "warning": null
-                    });
-        }
-        else
-        if (op.uiAttribs.hint)
-        {
-            op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
-        }
+        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering will not work.", 0);
+        else op.setUiError("hintnpot", null, 0);
 }
 
 function updateSizePorts()
 {
-    if (useVPSize.get())
-    {
-        width.setUiAttribs({ "greyout": true });
-        height.setUiAttribs({ "greyout": true });
-    }
-    else
-    {
-        width.setUiAttribs({ "greyout": false });
-        height.setUiAttribs({ "greyout": false });
-    }
+    width.setUiAttribs({ "greyout": useVPSize.get() });
+    height.setUiAttribs({ "greyout": useVPSize.get() });
 }
 
 useVPSize.onChange = function ()
@@ -155,19 +133,17 @@ op.preRender = function ()
     bgShader.bind();
 };
 
-var doRender = function ()
+function doRender()
 {
-    if (!effect || reInitEffect)
-    {
-        initEffect();
-    }
+    if (!effect || reInitEffect) initEffect();
+
     const vp = cgl.getViewPort();
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];
     prevViewPort[2] = vp[2];
     prevViewPort[3] = vp[3];
 
-    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+    cgl.pushBlend(false);
 
     updateResolution();
 
@@ -176,7 +152,6 @@ var doRender = function ()
 
     effect.startEffect();
 
-    // render background color...
     cgl.pushShader(bgShader);
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
@@ -186,29 +161,14 @@ var doRender = function ()
     trigger.trigger();
 
     texOut.set(effect.getCurrentSourceTexture());
-    // texOut.set(effect.getCurrentTargetTexture());
-
-    // if(effect.getCurrentSourceTexture.filter==CGL.Texture.FILTER_MIPMAP)
-    // {
-    //         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, effect.getCurrentSourceTexture.tex);
-    //         effect.getCurrentSourceTexture.updateMipMap();
-    //     // else
-    //     // {
-    //     //     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, this._textureSource.tex);;
-    //     //     this._textureSource.updateMipMap();
-    //     // }
-
-    //     this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_2D, null);
-    // }
 
     effect.endEffect();
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
-    cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
-
+    cgl.popBlend(false);
     cgl.currentTextureEffect = null;
-};
+}
 
 function onWrapChange()
 {
@@ -220,9 +180,6 @@ function onWrapChange()
     updateResolution();
 }
 
-twrap.set("repeat");
-twrap.onChange = onWrapChange;
-
 function onFilterChange()
 {
     if (tfilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
@@ -231,19 +188,4 @@ function onFilterChange()
 
     reInitEffect = true;
     updateResolution();
-    // effect.setSourceTexture(tex);
-    // updateResolution();
 }
-
-tfilter.set("linear");
-tfilter.onChange = onFilterChange;
-
-useVPSize.set(true);
-render.onTriggered = doRender;
-op.preRender = doRender;
-
-width.set(640);
-height.set(360);
-onFilterChange();
-onWrapChange();
-updateSizePorts();

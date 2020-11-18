@@ -2,18 +2,17 @@ const render = op.inTrigger("render");
 const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 const amount = op.inValueSlider("amount", 1);
 
-const image = op.inTexture("image");
+const image = op.inTexture("Image");
 const removeAlphaSrc = op.inValueBool("removeAlphaSrc", false);
 
-const imageAlpha = op.inTexture("imageAlpha");
-const alphaSrc = op.inValueSelect("alphaSrc", ["alpha channel", "luminance", "luminance inv"]);
-const invAlphaChannel = op.inValueBool("invert alpha channel");
+const imageAlpha = op.inTexture("Mask");
+const alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance");
+const invAlphaChannel = op.inValueBool("Invert alpha channel");
 
 const inAspect = op.inValueBool("Aspect Ratio", false);
 const inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X");
 const inAspectPos = op.inValueSlider("Position", 0.0);
 const inAspectCrop = op.inValueBool("Crop", false);
-
 
 const trigger = op.outTrigger("trigger");
 
@@ -21,12 +20,10 @@ blendMode.set("normal");
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "drawimage");
 
-
 imageAlpha.onLinkChanged = updateAlphaPorts;
 
 op.setPortGroup("Mask", [imageAlpha, alphaSrc, invAlphaChannel]);
 op.setPortGroup("Aspect Ratio", [inAspect, inAspectPos, inAspectCrop, inAspectAxis]);
-
 
 removeAlphaSrc.onChange = updateRemoveAlphaSrc;
 
@@ -62,7 +59,6 @@ invAlphaChannel.onChange = function ()
     else shader.removeDefine("INVERT_ALPHA");
 };
 
-
 inAspect.onChange = updateAspectRatio;
 inAspectCrop.onChange = updateAspectRatio;
 inAspectAxis.onChange = updateAspectRatio;
@@ -80,7 +76,6 @@ function updateAspectRatio()
 
         if (inAspectAxis.get() == "X") shader.define("ASPECT_AXIS_X");
         if (inAspectAxis.get() == "Y") shader.define("ASPECT_AXIS_Y");
-
 
         inAspectPos.setUiAttribs({ "greyout": false });
         inAspectCrop.setUiAttribs({ "greyout": false });
@@ -101,13 +96,11 @@ function updateAspectRatio()
     }
 }
 
-
 function updateRemoveAlphaSrc()
 {
     if (removeAlphaSrc.get()) shader.define("REMOVE_ALPHA_SRC");
     else shader.removeDefine("REMOVE_ALPHA_SRC");
 }
-
 
 alphaSrc.onChange = function ()
 {
@@ -116,7 +109,6 @@ alphaSrc.onChange = function ()
 };
 
 alphaSrc.set("alpha channel");
-
 
 {
     //
@@ -161,7 +153,6 @@ alphaSrc.set("alpha channel");
         if (inClipRepeat.get()) shader.define("CLIP_REPEAT");
         else shader.removeDefine("CLIP_REPEAT");
     }
-
 
     const uniScaleX = new CGL.Uniform(shader, "f", "scaleX", scaleX);
     const uniScaleY = new CGL.Uniform(shader, "f", "scaleY", scaleY);
@@ -238,7 +229,6 @@ function doRender()
         cgl.setTexture(0, imgTex.tex);
 
         uniTexAspect.setValue(1 / (tex.height / tex.width * imgTex.width / imgTex.height));
-
 
         cgl.setTexture(1, tex.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );

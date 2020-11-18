@@ -1,9 +1,0 @@
-{
-    "changelog": [
-        {
-            "message": "Ops.User.pandur.DrawImage3 renamed to Ops.Exp.DrawImageTranspFix",
-            "author": "pandur",
-            "date": 1600110938609
-        }
-    ]
-}
