@@ -5,7 +5,7 @@ const webcamTex = op.inObject("Webcam texture");
 
 const outTrigger = op.outTrigger("Trigger");
 const loadingFinished = op.outTrigger("Initialized");
-const arrayOut = op.outArray("Array out");
+const arrayOut = op.outArray("Classifier");
 
 inExecute.onTriggered = loop;
 initButton.onTriggered = init;
