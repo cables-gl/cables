@@ -1,44 +1,42 @@
-var code=op.inStringEditor("css code");
+const code = op.inStringEditor("css code");
 
-code.setUiAttribs({editorSyntax:'css'});
+code.setUiAttribs({ "editorSyntax": "css" });
 
+let styleEle = null;
+const eleId = "css_" + CABLES.uuid();
 
-var styleEle=null;
-var eleId='css_'+CABLES.uuid();
-
-code.onChange=update;
+code.onChange = update;
 update();
-
 
 function getCssContent()
 {
-    var css=code.get();
+    let css = code.get();
     css = css.replace(/{{ASSETPATH}}/g, op.patch.getAssetPath());
     return css;
 }
 
 function update()
 {
-    styleEle=document.getElementById(eleId);
+    styleEle = document.getElementById(eleId);
 
-    if(styleEle)
+    if (styleEle)
     {
-        styleEle.textContent=getCssContent();
+        styleEle.textContent = getCssContent();
     }
     else
     {
-        styleEle  = document.createElement('style');
-        styleEle.type = 'text/css';
+        styleEle = document.createElement("style");
+        styleEle.type = "text/css";
         styleEle.id = eleId;
-        styleEle.textContent=getCssContent();
+        styleEle.textContent = attachments.css_spinner;
 
-        var head  = document.getElementsByTagName('body')[0];
+        const head = document.getElementsByTagName("body")[0];
         head.appendChild(styleEle);
     }
 }
 
-op.onDelete=function()
+op.onDelete = function ()
 {
-    styleEle=document.getElementById(eleId);
-    if(styleEle)styleEle.remove();
+    styleEle = document.getElementById(eleId);
+    if (styleEle)styleEle.remove();
 };
