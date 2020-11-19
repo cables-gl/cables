@@ -380,7 +380,7 @@ Patch.prototype.createOp = function (identifier, id)
     catch (e)
     {
         this._crashedOps.push(objName);
-
+        console.error(e);
         this.emitEvent("exceptionOp", e, objName);
 
         if (!this.isEditorMode())
@@ -398,6 +398,10 @@ Patch.prototype.createOp = function (identifier, id)
     {
         op.objName = objName;
         op.patch = this;
+    }
+    else
+    {
+        console.log("no op was created!?");
     }
     return op;
 };
@@ -431,15 +435,15 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
-        // if (this.onAdd) this.onAdd(op);
-        // console.log("onop add event!");
-
         this.emitEvent("onOpAdd", op);
 
         if (op.init) op.init();
     }
+    else
+    {
+        console.error("addop: no op.....");
+    }
 
-    // if(next) next(op);
     return op;
 };
 
@@ -511,12 +515,12 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 if (this.onDelete)
                 {
                     // todo: remove
-                    Log.log("deprecated this.onDelete", this.onDelete);
+                    Log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
-                this.emitEvent("onOpDelete", opToDelete, reloadingOp);
                 this.ops.splice(i, 1);
+                this.emitEvent("onOpDelete", opToDelete, reloadingOp);
 
                 if (opToDelete.onDelete) opToDelete.onDelete(reloadingOp);
                 opToDelete.cleanUp();
