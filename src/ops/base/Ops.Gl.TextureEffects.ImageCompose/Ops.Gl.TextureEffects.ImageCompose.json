@@ -73,8 +73,13 @@
     "authorName": "pandur",
     "id": "5c04608d-1e42-4e36-be00-1be4a81fc309",
     "created": 1505424175620,
-    "youtubeid": "ZZKdaQw1bMo",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "ZZKdaQw1bMo"
+    ]
 }
