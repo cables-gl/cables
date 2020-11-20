@@ -1,1 +1,74 @@
-{"id":"060e740a-2432-4685-a081-5df6ab7418e4","changelog":[{"message":"created op","author":"pandur","date":1605275395652},{"message":"Ops.User.pandur.TexturePickColor renamed to Ops.Gl.TextureColorPick","author":"pandur","date":1605276409800}],"authorName":"pandur","created":1605275408120,"layout":{"portsIn":[{"type":"1","name":"update"},{"type":"0","name":"X","subType":"integer"},{"type":"0","name":"Y","subType":"integer"},{"type":"2","name":"texture"}],"portsOut":[{"type":"1","name":"trigger"},{"type":"0","name":"Red","subType":"number"},{"type":"0","name":"Green","subType":"number"},{"type":"0","name":"Blue","subType":"number"},{"type":"0","name":"Alpha","subType":"number"}],"name":"Ops.Gl.TextureColorPick"},"summary":"get the color of a pixel in a texture","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "060e740a-2432-4685-a081-5df6ab7418e4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1605275395652
+        },
+        {
+            "message": "Ops.User.pandur.TexturePickColor renamed to Ops.Gl.TextureColorPick",
+            "author": "pandur",
+            "date": 1605276409800
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1605275408120,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "update"
+            },
+            {
+                "type": "0",
+                "name": "X",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Y",
+                "subType": "integer"
+            },
+            {
+                "type": "2",
+                "name": "texture"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "trigger"
+            },
+            {
+                "type": "0",
+                "name": "Red",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Green",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Alpha",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.TextureColorPick"
+    },
+    "summary": "get the color of a pixel in a texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

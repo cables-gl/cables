@@ -27,7 +27,7 @@ let reInitEffect = true;
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
 bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
 
-const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 0);
+const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 1);
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
