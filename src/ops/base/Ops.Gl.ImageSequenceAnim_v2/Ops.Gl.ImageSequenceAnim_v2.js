@@ -28,16 +28,18 @@ function setRepeat()
 {
     texRepeatY.set(1.0 / numY.get());
     texRepeatX.set(1.0 / numX.get());
+    update();
 }
 
-inTime.onChange = function ()
+inTime.onChange = update;
+
+function update()
 {
     let frame = Math.floor(Math.abs(inTime.get()) * fps.get());
     let numFrames = numX.get() * numY.get();
     if (maxFrames.get() !== 0) numFrames = maxFrames.get();
 
     frame %= numFrames;
-
 
     const row = Math.floor(frame / (numX.get()));
     const col = frame - (row * (numX.get()));
@@ -47,4 +49,4 @@ inTime.onChange = function ()
 
     texU.set(texRepeatX.get() * col);
     texV.set(texRepeatY.get() * row);
-};
+}
