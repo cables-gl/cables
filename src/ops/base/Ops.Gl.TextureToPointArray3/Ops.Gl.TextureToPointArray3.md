@@ -1,0 +1,1 @@
+threshold parameter to remove below a certain luminosity

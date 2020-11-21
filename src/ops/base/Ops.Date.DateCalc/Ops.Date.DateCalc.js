@@ -1,6 +1,5 @@
 // DateCalc
-// have a look at the documentation at:
-// https://docs.cables.gl/dev_hello_op/dev_hello_op.html
+
 const inTimestamp = op.inValue("timestamp");
 const inDiff = op.inInt("difference");
 const diffType = op.inDropDown("type", ["years", "months", "days", "hours", "minutes", "seconds"]);

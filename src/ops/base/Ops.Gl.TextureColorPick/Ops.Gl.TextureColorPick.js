@@ -42,7 +42,7 @@ pUpdate.onTriggered = function ()
         if (isFloatingPoint) channelType = gl.FLOAT;
         else channelType = gl.UNSIGNED_BYTE;
 
-        const size = 1 * 4;
+        const size = 4 * 4;
         if (isFloatingPoint) pixelData = new Float32Array(size);
         else pixelData = new Uint8Array(size);
 
@@ -73,7 +73,7 @@ pUpdate.onTriggered = function ()
         outR.set(pixelData[0] / 255);
         outG.set(pixelData[1] / 255);
         outB.set(pixelData[2] / 255);
-        outB.set(pixelData[3] / 255);
+        outA.set(pixelData[3] / 255);
     }
 
     outTrigger.trigger();
