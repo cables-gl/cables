@@ -33,10 +33,11 @@ const m = new CGL.WirePoint(cgl, 1);
 exec.onTriggered = render;
 
 let needSetup = true;
+let needsSpawn = false;
 
 inMass.onChange = setup;
 inRadius.onChange = setup;
-inSpawn.onTriggered = spawn;
+inSpawn.onTriggered = () => { needsSpawn = true; };
 
 let lastWorld = null;
 
@@ -56,8 +57,13 @@ var bodies = [];
 
 function spawn()
 {
+    needsSpawn = false;
     const world = cgl.frameStore.world;
-    if (!world) return;
+    if (!world)
+    {
+        op.error("cannon has no world");
+        return;
+    }
 
     const body = new CANNON.Body({
         "mass": inMass.get(), // kg
@@ -102,6 +108,8 @@ function render()
 {
     if (needSetup)setup();
     if (lastWorld != cgl.frameStore.world)setup();
+
+    if (needsSpawn)spawn();
 
     for (let i = 0; i < bodies.length; i++)
     {
