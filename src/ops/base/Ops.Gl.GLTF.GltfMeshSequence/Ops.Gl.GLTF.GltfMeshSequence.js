@@ -5,7 +5,9 @@ const
     inTrans = op.inBool("Transformation", true),
     inIgnMaterial = op.inBool("Ignore Material", true),
     next = op.outTrigger("Next"),
-    outFound = op.outNumber("Found");
+    outFound = op.outNumber("Found"),
+    outIndex = op.outNumber("Current Index");
+
 const cgl = op.patch.cgl;
 
 const nodes = [];
@@ -47,7 +49,6 @@ inExec.onTriggered = function ()
 
     cgl.pushModelMatrix();
 
-
     const index = Math.floor(inIndex.get() % nodes.length);
     const node = nodes[index];
 
@@ -59,9 +60,9 @@ inExec.onTriggered = function ()
             node.transform(cgl);
         }
 
+        outIndex.set(index);
         node.render(cgl, !inTrans.get(), false, inIgnMaterial.get(), true, true);
     }
-
 
     next.trigger();
 

@@ -7,6 +7,7 @@ const
     zFar = op.inValue("frustum far", 500),
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
+    zeroY = op.inBool("Zero Y", false),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
@@ -43,7 +44,6 @@ function exec()
         xr = width.get();
         yb = height.get();
     }
-
 
     if (flipX.get())
     {

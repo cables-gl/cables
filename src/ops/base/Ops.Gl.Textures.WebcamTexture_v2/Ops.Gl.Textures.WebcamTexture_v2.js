@@ -2,8 +2,8 @@
 
 const
     inFacing = op.inSwitch("Facing", ["environment", "user"], "user"),
-    flip = op.inValueBool("flip",true),
-    fps = op.inValueInt("fps",30),
+    flip = op.inValueBool("flip", true),
+    fps = op.inValueInt("fps", 30),
     inActive = op.inValueBool("Genrate Texture", true),
 
     width = op.inValueInt("Width", 640),
@@ -11,7 +11,7 @@ const
 
     inAsDOM = op.inValueBool("Show HTML Element", false),
     textureOut = op.outTexture("texture"),
-    inCss=op.inStringEditor("CSS","z-index:99999;position:absolute;"),
+    inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
     outRatio = op.outValue("Ratio"),
     available = op.outValue("Available"),
     outWidth = op.outNumber("Size Width"),
@@ -19,10 +19,8 @@ const
     outError = op.outString("Error"),
     outElement = op.outObject("HTML Element");
 
-
-
-op.setPortGroup("Texture",[flip,fps,inActive]);
-op.setPortGroup("Video Element",[inAsDOM,inCss]);
+op.setPortGroup("Texture", [flip, fps, inActive]);
+op.setPortGroup("Video Element", [inAsDOM, inCss]);
 
 width.onChange =
     height.onChange =
@@ -36,12 +34,8 @@ videoElement.setAttribute("id", eleId);
 videoElement.setAttribute("autoplay", "");
 videoElement.setAttribute("muted", "");
 videoElement.setAttribute("playsinline", "");
-videoElement.setAttribute("style",inCss.get());
+videoElement.setAttribute("style", inCss.get());
 op.patch.cgl.canvas.parentElement.appendChild(videoElement);
-
-
-
-
 
 const tex = new CGL.Texture(cgl);
 tex.setSize(8, 8);
@@ -52,8 +46,8 @@ let canceled = false;
 
 op.onDelete = removeElement;
 
-inAsDOM.onChange=
-    inCss.onChange=updateStyle;
+inAsDOM.onChange =
+    inCss.onChange = updateStyle;
 
 updateStyle();
 
@@ -63,17 +57,13 @@ function removeElement()
     clearTimeout(timeout);
 }
 
-
 function updateStyle()
 {
-
-    if(!inAsDOM.get())
-    videoElement.setAttribute("style","display:none;");
+    if (!inAsDOM.get())
+        videoElement.setAttribute("style", "display:none;");
     else
-    videoElement.setAttribute("style",inCss.get());
-
+        videoElement.setAttribute("style", inCss.get());
 }
-
 
 inActive.onChange = function ()
 {
@@ -116,7 +106,6 @@ function camInitComplete(stream)
     videoElement.onloadedmetadata = function (e)
     {
         available.set(true);
-        console.log(videoElement);
 
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);
@@ -124,7 +113,7 @@ function camInitComplete(stream)
         tex.setSize(videoElement.videoWidth, videoElement.videoHeight);
 
         outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
-outError.set("");
+        outError.set("");
         videoElement.play();
         updateTexture();
     };
@@ -148,7 +137,7 @@ function startWebcam()
             .then(camInitComplete)
             .catch(function (error)
             {
-                console.error(error.name + ": " + error.message);
+                op.error(error.name + ": " + error.message);
                 outError.set(error.name + ": " + error.message);
             });
     }
@@ -159,7 +148,6 @@ function startWebcam()
             function ()
             {
                 available.set(false);
-                // console.log('error webcam');
             });
     }
 }

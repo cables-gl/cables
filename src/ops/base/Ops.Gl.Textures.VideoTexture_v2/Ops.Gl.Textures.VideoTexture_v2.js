@@ -203,13 +203,13 @@ function updateTexture(force)
     if (!videoElement) return;
     if (videoElement.videoHeight <= 0)
     {
-        op.error("video size is 0!");
+        op.setUiError("videosize", "video width is 0!");
         op.log(videoElement);
         return;
     }
     if (videoElement.videoWidth <= 0)
     {
-        op.error("video width is 0!");
+        op.setUiError("videosize", "video height is 0!");
         op.log(videoElement);
         return;
     }
@@ -290,10 +290,12 @@ function embedVideo(force)
         if (String(filename.get()).indexOf("data:") == 0) url = filename.get();
         if (!url) return;
 
+        op.setUiError("onerror", null);
         videoElement.style.display = "none";
         videoElement.setAttribute("src", url);
         videoElement.setAttribute("crossOrigin", "anonymous");
         videoElement.playbackRate = speed.get();
+
         if (!addedListeners)
         {
             addedListeners = true;
@@ -306,7 +308,7 @@ function embedVideo(force)
                 if (videoElement)
                 {
                     outError.set("Error " + videoElement.error.code + "/" + videoElement.error.message);
-                    op.warn("Error " + videoElement.error.code + "; details: " + videoElement.error.message);
+                    op.setUiError("onerror", "Could not load video / " + videoElement.error.message, 2);
                 }
             };
         }
