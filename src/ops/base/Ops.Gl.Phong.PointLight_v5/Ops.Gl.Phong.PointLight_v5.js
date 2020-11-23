@@ -89,6 +89,7 @@ inCastShadow.onChange = function ()
     }
     else
     {
+
     }
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
@@ -99,6 +100,7 @@ inCastShadow.onChange = function ()
     inBias.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
     newLight.castShadow = castShadow;
+
     updating = false;
     updateLight = true;
 };
@@ -143,10 +145,13 @@ inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChang
 inMapSize.onChange = function ()
 {
     // TODO: update this one
+    updating = true;
 
     const size = Number(inMapSize.get());
     newLight.createFramebuffer(size, size, {});
     newLight.createShadowMapShader();
+
+    updating = false;
 };
 
 const projectionShader = null;
