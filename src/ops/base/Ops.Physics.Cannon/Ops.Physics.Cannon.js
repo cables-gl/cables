@@ -43,9 +43,11 @@ let lastWorld = null;
 
 let collided = false;
 
+let world = null;
+
 inReset.onTriggered = function ()
 {
-    const world = cgl.frameStore.world;
+    if (!world) return;
     for (let i = 0; i < bodies.length; i++)
     {
         world.removeBody(bodies[i]);
@@ -58,7 +60,7 @@ var bodies = [];
 function spawn()
 {
     needsSpawn = false;
-    const world = cgl.frameStore.world;
+    world = cgl.frameStore.world;
     if (!world)
     {
         op.error("cannon has no world");
@@ -90,7 +92,7 @@ function spawn()
 
 function setup()
 {
-    const world = cgl.frameStore.world;
+    world = cgl.frameStore.world;
     if (!world) return;
 
     // if(body)world.removeBody(body);
