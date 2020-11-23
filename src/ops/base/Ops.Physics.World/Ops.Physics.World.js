@@ -116,7 +116,11 @@ function draw()
         }
         else if (world.bodies[i].shapes[0].type == CANNON.Shape.types.SPHERE)
         {
-            wireSphere.render(cgl, 1.0);
+            // wireSphere.render(cgl, 1.0);
+            meshCube.render(
+                1.0,
+                1.0,
+                1.0);
         }
         // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
