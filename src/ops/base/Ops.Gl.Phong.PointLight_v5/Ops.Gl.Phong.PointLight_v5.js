@@ -18,7 +18,6 @@ function Light(config)
     return this;
 }
 
-
 // * OP START *
 const inTrigger = op.inTrigger("Trigger In");
 const inCastLight = op.inBool("Cast Light", true);
@@ -74,7 +73,6 @@ inPolygonOffset.setUiAttribs({ "greyout": !inCastShadow.get() });
 
 let updating = false;
 
-
 inCastShadow.onChange = function ()
 {
     updating = true;
@@ -89,7 +87,9 @@ inCastShadow.onChange = function ()
             newLight.createShadowMapShader();
         }
     }
-
+    else
+    {
+    }
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
     inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
@@ -105,7 +105,6 @@ inCastShadow.onChange = function ()
 
 const outTrigger = op.outTrigger("Trigger Out");
 const outCubemap = op.outObject("Cubemap");
-const outProjection = op.outTexture("Cubemap Projection");
 const outWorldPosX = op.outNumber("World Position X");
 const outWorldPosY = op.outNumber("World Position Y");
 const outWorldPosZ = op.outNumber("World Position Z");
@@ -150,73 +149,8 @@ inMapSize.onChange = function ()
     newLight.createShadowMapShader();
 };
 
-let projectionShader = null;
-let uniformCubemap = null;
-
-// * FRAMEBUFFER *
-let fb = null;
-const IS_WEBGL_1 = cgl.glVersion == 1;
-
-if (IS_WEBGL_1)
-{
-    fb = new CGL.Framebuffer(cgl, 512, 512, {
-        "isFloatingPointTexture": true,
-        "filter": CGL.Texture.FILTER_LINEAR,
-        "wrap": CGL.Texture.WRAP_REPEAT
-    });
-}
-else
-{
-    fb = new CGL.Framebuffer2(cgl, 512, 512, {
-        "isFloatingPointTexture": true,
-        "filter": CGL.Texture.FILTER_LINEAR,
-        "wrap": CGL.Texture.WRAP_REPEAT,
-        "name": "cubemapprojection",
-    });
-}
-
-if (inCastShadow.get())
-{
-    if (!newLight.hasFramebuffer())
-    {
-        // if (cgl.glVersion !== 1) {
-        newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
-        newLight.createShadowMapShader();
-        // }
-    }
-}
-
-
-projectionShader = new CGL.Shader(cgl, "cubemapProjection");
-uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubeMap", 0);
-
-projectionShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
-projectionShader.setSource(attachments.cubemapprojection_vert, attachments.cubemapprojection_frag);
-
-
-function renderCubemapProjection(cubemap, framebuffer)
-{
-    if (!cubemap) return;
-    cgl.frameStore.renderOffscreen = true;
-
-    projectionShader.popTextures();
-
-    fb.renderStart(cgl);
-    projectionShader.pushTexture(uniformCubemap, cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    mesh.render(projectionShader);
-    fb.renderEnd();
-
-    cgl.frameStore.renderOffscreen = false;
-
-    outProjection.set(null);
-    outProjection.set(fb.getTextureColor());
-    outCubemap.set(null);
-    outCubemap.set(newLight.shadowCubeMap);
-}
-
-
-projectionShader.offScreenPass = true;
-
+const projectionShader = null;
+const uniformCubemap = null;
 
 const sc = vec3.create();
 const result = vec3.create();
@@ -291,7 +225,6 @@ inTrigger.onTriggered = function ()
 
     drawHelpers();
 
-
     cgl.frameStore.lightStack.push(newLight);
 
     if (inCastShadow.get())
@@ -315,7 +248,6 @@ inTrigger.onTriggered = function ()
                     {
                         // needs to be "cloned", cannot save reference.
                         newLight.positionForShadowMap = [newLight.position[0], newLight.position[1], newLight.position[2]];
-                        if (cgl.shouldDrawHelpers(op)) renderCubemapProjection(newLight.shadowCubeMap.cubemap, newLight._framebuffer);
                     }
                 }
             }
