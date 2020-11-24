@@ -177,8 +177,6 @@ inCastShadow.onChange = function ()
     inBias.setUiAttribs({ "greyout": !castShadow });
     inNormalOffset.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
-
-    // updating = false;
 };
 
 inLRBT.onChange = inNear.onChange = inFar.onChange = function ()

@@ -106,19 +106,6 @@ const newLight = new CGL.Light(cgl, {
 });
 newLight.castLight = inCastLight.get();
 
-inTrigger.onLinkChanged = function ()
-{
-    if (inTrigger.isLinked())
-    {
-        updating = true;
-    }
-    /* if (!inTrigger.isLinked())
-    {
-        newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
-        newLight.createShadowMapShader();
-    } */
-};
-
 let updateLight = false;
 
 inPosX.onChange = inPosY.onChange = inPosZ.onChange = inR.onChange = inG.onChange = inB.onChange
