@@ -13,6 +13,7 @@ const
     render = op.inTriggerButton("Render"),
     text = op.inString("text", "cables"),
     font = op.inString("font", "Arial"),
+    weight = op.inString("weight", "normal"),
     maximize = op.inValueBool("Maximize Size", true),
     inFontSize = op.inValueFloat("fontSize", 30),
     lineDistance = op.inValueFloat("Line Height", 1),
@@ -43,7 +44,7 @@ r.setUiAttribs({ "colorPick": true });
 
 op.setPortGroup("Color", [r, g, b]);
 op.setPortGroup("Size", [font, maximize, inFontSize, lineDistance, lineOffset]);
-op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);
+op.setPortGroup("Texture", [texWidth, weight, texHeight, tfilter, aniso]);
 op.setPortGroup("Alignment", [valign, align]);
 op.setPortGroup("Rendering", [drawMesh, renderHard, meshScale]);
 
@@ -51,11 +52,13 @@ align.onChange =
     valign.onChange =
     text.onChange =
     inFontSize.onChange =
+    weight.onChange =
     aniso.onChange =
     font.onChange =
     lineOffset.onChange =
     lineDistance.onChange =
     cachetexture.onChange =
+
     limitLines.onChange =
     texWidth.onChange =
     texHeight.onChange =
@@ -198,11 +201,13 @@ function refresh()
         + inOpacity.get() + ")";
     // ctx.fillStyle = "white";
     ctx.fillStyle = rgbString;
-    op.log("rgbstring", rgbString);
+    // op.log("rgbstring", rgbString);
     let fontSize = parseFloat(inFontSize.get());
     let fontname = font.get();
     if (fontname.indexOf(" ") > -1) fontname = "\"" + fontname + "\"";
-    ctx.font = fontSize + "px " + fontname + "";
+    ctx.font = weight.get() + " " + fontSize + "px " + fontname + "";
+    // ctx["font-weight"] = 300;
+
     ctx.textAlign = align.get();
 
     let txt = (text.get() + "").replace(/<br\/>/g, "\n");
@@ -228,7 +233,7 @@ function refresh()
                 break;
             }
             fontSize -= 5;
-            ctx.font = fontSize + "px \"" + font.get() + "\"";
+            ctx.font = weight.get() + " " + fontSize + "px \"" + font.get() + "\"";
             maxWidth = 0;
 
             maxHeight = (fontSize + (strings.length - 1) * getLineHeight(fontSize)) * 1.2;

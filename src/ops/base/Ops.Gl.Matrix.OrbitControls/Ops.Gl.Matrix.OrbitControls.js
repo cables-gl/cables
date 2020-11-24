@@ -30,18 +30,11 @@ const outRadius = op.outValue("radius");
 const outXDeg = op.outValue("Rot X");
 const outYDeg = op.outValue("Rot Y");
 
-
-// const
-//     outPosX=op.outNumber("Eye Pos X"),
-//     outPosY=op.outNumber("Eye Pos Y"),
-//     outPosZ=op.outNumber("Eye Pos Z");
-
 const inReset = op.inTriggerButton("Reset");
 
 op.setPortGroup("Initial Values", [initialAxis, initialX, initialRadius]);
 op.setPortGroup("Interaction", [mul, smoothness, speedX, speedY]);
 op.setPortGroup("Boundaries", [minRotY, maxRotY, minDist, maxDist]);
-
 
 mul.set(1);
 minDist.set(0.05);
@@ -60,14 +53,12 @@ const finalEyeAbs = vec3.create();
 
 initialAxis.set(0.5);
 
-
 let mouseDown = false;
 let radius = 5;
 outRadius.set(radius);
 
 let lastMouseX = 0, lastMouseY = 0;
 let percX = 0, percY = 0;
-
 
 vec3.set(vCenter, 0, 0, 0);
 vec3.set(vUp, 0, 1, 0);
@@ -94,7 +85,6 @@ pointerLock.onChange = function ()
     console.log("doLockPointer", doLockPointer);
 };
 
-
 const halfCircle = Math.PI;
 const fullCircle = Math.PI * 2;
 
@@ -116,7 +106,6 @@ function reset()
     else px %= fullCircle;
 
     py %= (Math.PI);
-
 
     vec3.set(vOffset, 0, 0, 0);
     vec3.set(vCenter, 0, 0, 0);
@@ -158,7 +147,6 @@ render.onTriggered = function ()
 
     let degY = (py + 0.5) * 180;
 
-
     if (minRotY.get() !== 0 && degY < minRotY.get())
     {
         degY = minRotY.get();
@@ -192,7 +180,6 @@ render.onTriggered = function ()
     finalCenter[1] = ip(finalCenter[1], tempCenter[1]);
     finalCenter[2] = ip(finalCenter[2], tempCenter[2]);
 
-
     const empty = vec3.create();
     // var fpm=mat4.create();
 
@@ -205,20 +192,17 @@ render.onTriggered = function ()
     // outPosY.set(finalEyeAbs[1]);
     // outPosZ.set(finalEyeAbs[2]);
 
-
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
 
     // finaly multiply current scene viewmatrix
     mat4.multiply(cgl.vMatrix, cgl.vMatrix, viewMatrix);
 
-
     // vec3.transformMat4(finalEyeAbs, empty, cgl.vMatrix);
 
     // outPosX.set(finalEyeAbs[0]);
     // outPosY.set(finalEyeAbs[1]);
     // outPosZ.set(finalEyeAbs[2]);
-
 
     // var fpm=mat4.create();
     // mat4.identity(fpm);
@@ -235,7 +219,6 @@ render.onTriggered = function ()
     // // mat4.getTranslation(finalEyeAbs,fpm);
     // var pos=vec3.create();
     // vec3.transformMat4(finalEyeAbs, empty, fpm);
-
 
     // outPosX.set(finalEyeAbs[0]);
     // outPosY.set(finalEyeAbs[1]);
@@ -263,7 +246,6 @@ function circlePosi(vec, perc)
         0);
     return vec;
 }
-
 
 function circlePos(perc)
 {
@@ -338,6 +320,9 @@ function onMouseDown(event)
     lastMouseY = event.clientY;
     mouseDown = true;
 
+    try { element.setPointerCapture(event.pointerId); }
+    catch (e) {}
+
     if (doLockPointer)
     {
         const el = op.patch.cgl.canvas;
@@ -352,10 +337,13 @@ function onMouseDown(event)
     }
 }
 
-function onMouseUp()
+function onMouseUp(e)
 {
     mouseDown = false;
     // cgl.canvas.style.cursor='url(/ui/img/rotate.png),pointer';
+
+    try { element.releasePointerCapture(e.pointerId); }
+    catch (e) {}
 
     if (doLockPointer)
     {
@@ -444,38 +432,37 @@ function setElement(ele)
 
 function bind()
 {
-    element.addEventListener("mousemove", onmousemove);
-    element.addEventListener("mousedown", onMouseDown);
-    element.addEventListener("mouseup", onMouseUp);
-    element.addEventListener("mouseleave", onMouseUp);
-    element.addEventListener("mouseenter", onMouseEnter);
+    element.addEventListener("pointermove", onmousemove);
+    element.addEventListener("pointerdown", onMouseDown);
+    element.addEventListener("pointerup", onMouseUp);
+    element.addEventListener("pointerleave", onMouseUp);
+    element.addEventListener("pointerenter", onMouseEnter);
     element.addEventListener("contextmenu", function (e) { e.preventDefault(); });
     element.addEventListener("wheel", onMouseWheel, { "passive": true });
 
-    element.addEventListener("touchmove", ontouchmove, { "passive": true });
-    element.addEventListener("touchstart", ontouchstart, { "passive": true });
-    element.addEventListener("touchend", ontouchend, { "passive": true });
+    // element.addEventListener("touchmove", ontouchmove, { "passive": true });
+    // element.addEventListener("touchstart", ontouchstart, { "passive": true });
+    // element.addEventListener("touchend", ontouchend, { "passive": true });
 }
 
 function unbind()
 {
     if (!element) return;
 
-    element.removeEventListener("mousemove", onmousemove);
-    element.removeEventListener("mousedown", onMouseDown);
-    element.removeEventListener("mouseup", onMouseUp);
-    element.removeEventListener("mouseleave", onMouseUp);
-    element.removeEventListener("mouseenter", onMouseUp);
+    element.removeEventListener("pointermove", onmousemove);
+    element.removeEventListener("pointerdown", onMouseDown);
+    element.removeEventListener("pointerup", onMouseUp);
+    element.removeEventListener("pointerleave", onMouseUp);
+    element.removeEventListener("pointerenter", onMouseUp);
     element.removeEventListener("wheel", onMouseWheel);
 
-    element.removeEventListener("touchmove", ontouchmove);
-    element.removeEventListener("touchstart", ontouchstart);
-    element.removeEventListener("touchend", ontouchend);
+    // element.removeEventListener("touchmove", ontouchmove);
+    // element.removeEventListener("touchstart", ontouchstart);
+    // element.removeEventListener("touchend", ontouchend);
 }
 
 eye = circlePos(0);
 setElement(cgl.canvas);
-
 
 bind();
 
