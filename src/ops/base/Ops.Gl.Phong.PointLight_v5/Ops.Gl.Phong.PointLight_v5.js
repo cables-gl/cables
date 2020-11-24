@@ -106,8 +106,6 @@ const newLight = new CGL.Light(cgl, {
 });
 newLight.castLight = inCastLight.get();
 
-op.log("newLight", newLight);
-
 inTrigger.onLinkChanged = function ()
 {
     if (inTrigger.isLinked())
