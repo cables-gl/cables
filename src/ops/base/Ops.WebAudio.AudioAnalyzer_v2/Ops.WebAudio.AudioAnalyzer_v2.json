@@ -1,0 +1,107 @@
+{
+    "authorName": "cables",
+    "id": "ff9bf46c-676f-4aa1-95bf-5595a6813ed7",
+    "created": 1606233766581,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In",
+                "group": "Inputs"
+            },
+            {
+                "type": "2",
+                "name": "Audio In",
+                "group": "Inputs"
+            },
+            {
+                "type": "0",
+                "name": "Domain index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Domain",
+                "group": "FFT Options"
+            },
+            {
+                "type": "0",
+                "name": "FFT size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "FFT size",
+                "group": "FFT Options"
+            },
+            {
+                "type": "0",
+                "name": "Smoothing",
+                "group": "FFT Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "group": "Range (in dBFS)",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "group": "Range (in dBFS)",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "Average Volume",
+                "subType": "number"
+            },
+            {
+                "type": "3",
+                "name": "FFT"
+            },
+            {
+                "type": "0",
+                "name": "FFT Array Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioAnalyzer_v2"
+    },
+    "summary": "Extracts FFT or Waveform data from the incoming audio signal",
+    "docs": {
+        "ports": []
+    },
+    "issues": "",
+    "collections": [
+        "FFT audio"
+    ],
+    "relatedops": [
+        "Ops.WebAudio.FFTAreaAverage",
+        "Ops.WebAudio.FftTexture"
+    ],
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.AudioAnalyzer",
+            "author": "cables",
+            "date": 1606233766582
+        },
+        {
+            "message": "Ops.User.cables.AudioAnalyzer_v2 renamed to Ops.WebAudio.AudioAnalyzer_v2",
+            "author": "cables",
+            "date": 1606239122057
+        }
+    ]
+}

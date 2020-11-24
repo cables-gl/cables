@@ -18,6 +18,7 @@ const inAudio5Gain = op.inFloatSlider("In 5 Gain", 1);
 const inAudio6Gain = op.inFloatSlider("In 6 Gain", 1);
 const inAudio7Gain = op.inFloatSlider("In 7 Gain", 1);
 const inMasterGain = op.inFloatSlider("Output Gain", 1);
+
 const audioOut = op.outObject("audio out");
 
 const gain = audioContext.createGain();

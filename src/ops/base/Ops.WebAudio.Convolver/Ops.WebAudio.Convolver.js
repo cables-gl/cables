@@ -6,10 +6,12 @@ const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response",
 const inConvolverGain = op.inFloatSlider("IR Gain", 1);
 const normalize = op.inBool("normalize", true);
 const inOutputGain = op.inFloatSlider("Output Gain", 1);
+
 const audioOut = op.outObject("audio out");
 
 op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize]);
 op.setPortGroup("Output", [inOutputGain]);
+
 const convolver = audioContext.createConvolver();
 const convolverGain = audioContext.createGain();
 const outputNode = audioContext.createGain();
