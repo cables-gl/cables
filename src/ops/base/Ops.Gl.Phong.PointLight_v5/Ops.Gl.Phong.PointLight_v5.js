@@ -174,6 +174,7 @@ inTrigger.onTriggered = function ()
 {
     if (updating)
     {
+        if (cgl.frameStore.shadowPass) return;
         updateShadowMapFramebuffer();
     }
 
@@ -250,6 +251,10 @@ inTrigger.onTriggered = function ()
             }
             cgl.frameStore.lightStack.push(newLight);
         }
+    }
+    else
+    {
+        outCubemap.set(null);
     }
 
     outTrigger.trigger();
