@@ -183,11 +183,11 @@ class CubemapFramebuffer
         // * NOTE: an error that is found in a WebGL extension (WEBGL_draw_buffers) not supported by most iOS devices
         // * NOTE: see https://gist.github.com/TimvanScherpenzeel/2a604e178013a5ac4b411fbcbfd2fa33
         // * NOTE: also, this error is nowhere to be found in the official WebGL 1 spec
-        if (this._cgl.glVersion !== 1)
-        {
-            const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
-            this.checkErrorsByStatus(status);
-        }
+        // if (this._cgl.glVersion !== 1)
+        // {
+        const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
+        this.checkErrorsByStatus(status);
+        // }
 
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
@@ -212,6 +212,9 @@ class CubemapFramebuffer
         case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             console.error("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        case 0x8CDB:
+            console.error("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
+            break;
         default:
             console.error("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);
