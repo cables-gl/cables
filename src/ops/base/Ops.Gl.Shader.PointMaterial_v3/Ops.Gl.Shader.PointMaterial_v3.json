@@ -34,6 +34,12 @@
             },
             {
                 "type": "0",
+                "name": "Round Antialias",
+                "group": "Size",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Scale by Distance",
                 "group": "Size",
                 "subType": "boolean"

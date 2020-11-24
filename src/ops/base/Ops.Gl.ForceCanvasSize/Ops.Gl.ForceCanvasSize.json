@@ -42,6 +42,11 @@
             },
             {
                 "type": "0",
+                "name": "Scale to fit Parent",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
                 "name": "Set Width",
                 "group": "Size",
                 "subType": "integer"

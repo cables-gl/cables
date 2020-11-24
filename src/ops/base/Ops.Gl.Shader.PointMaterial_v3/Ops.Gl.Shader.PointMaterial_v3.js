@@ -6,6 +6,7 @@ const
     inPixelSize = op.inBool("Size in Pixels", false),
     randomSize = op.inValue("Random Size", 0),
     makeRound = op.inValueBool("Round", true),
+    makeRoundAA = op.inValueBool("Round Antialias", false),
     doScale = op.inValueBool("Scale by Distance", false),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
@@ -31,7 +32,7 @@ const
 op.setPortGroup("Texture", [texture, textureMulColor, textureMask, texMaskChan, textureColorize, textureOpacity, colorizeRandom]);
 
 op.setPortGroup("Color", [r, g, b, a, vertCols]);
-op.setPortGroup("Size", [pointSize, randomSize, makeRound, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
+op.setPortGroup("Size", [pointSize, randomSize, makeRound, makeRoundAA, doScale, inPixelSize, texturePointSize, texturePointSizeMul, texturePointSizeChannel]);
 r.setUiAttribs({ "colorPick": true });
 
 const shader = new CGL.Shader(cgl, "PointMaterial");
@@ -61,6 +62,7 @@ shaderOut.ignoreValueSerialize = true;
 render.onTriggered = doRender;
 doScale.onChange =
     makeRound.onChange =
+    makeRoundAA.onChange =
     texture.onChange =
     textureColorize.onChange =
     textureMask.onChange =
@@ -74,13 +76,11 @@ doScale.onChange =
     textureMulColor.onChange =
     vertCols.onChange = updateDefines;
 
-
 op.preRender = function ()
 {
     if (shader)shader.bind();
     doRender();
 };
-
 
 function doRender()
 {
@@ -100,11 +100,12 @@ function doRender()
     cgl.popShader();
 }
 
-
 function updateDefines()
 {
     shader.toggleDefine("SCALE_BY_DISTANCE", doScale.get());
     shader.toggleDefine("MAKE_ROUND", makeRound.get());
+    shader.toggleDefine("MAKE_ROUNDAA", makeRoundAA.get());
+
     shader.toggleDefine("VERTEX_COLORS", vertCols.get());
     shader.toggleDefine("RANDOM_COLORIZE", colorizeRandom.get());
     shader.toggleDefine("HAS_TEXTURE_DIFFUSE", texture.get());
@@ -115,13 +116,11 @@ function updateDefines()
 
     shader.toggleDefine("TEXTURE_COLORIZE_MUL", textureMulColor.get());
 
-
     shader.toggleDefine("FLIP_TEX", flipTex.get());
     shader.toggleDefine("TEXTURE_MASK_R", texMaskChan.get() == "R");
     shader.toggleDefine("TEXTURE_MASK_A", texMaskChan.get() == "A");
     shader.toggleDefine("TEXTURE_MASK_LUMI", texMaskChan.get() == "Luminance");
     shader.toggleDefine("PIXELSIZE", inPixelSize.get());
-
 
     shader.toggleDefine("POINTSIZE_CHAN_R", texturePointSizeChannel.get() == "R");
     shader.toggleDefine("POINTSIZE_CHAN_G", texturePointSizeChannel.get() == "G");

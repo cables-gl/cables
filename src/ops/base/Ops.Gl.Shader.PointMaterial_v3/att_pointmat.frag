@@ -65,7 +65,19 @@ void main()
     {{MODULE_COLOR}}
 
     #ifdef MAKE_ROUND
-        if ((gl_PointCoord.x-0.5)*(gl_PointCoord.x-0.5) + (gl_PointCoord.y-0.5)*(gl_PointCoord.y-0.5) > 0.25) discard; //col.a=0.0;
+
+        #ifndef MAKE_ROUNDAA
+            if ((gl_PointCoord.x-0.5)*(gl_PointCoord.x-0.5) + (gl_PointCoord.y-0.5)*(gl_PointCoord.y-0.5) > 0.25) discard; //col.a=0.0;
+        #endif
+
+        #ifdef MAKE_ROUNDAA
+            float circ=(gl_PointCoord.x-0.5)*(gl_PointCoord.x-0.5) + (gl_PointCoord.y-0.5)*(gl_PointCoord.y-0.5);
+
+            float a=smoothstep(0.25,0.25-fwidth(gl_PointCoord.x),circ);
+            if(a==0.0)discard;
+            col.a=a;
+            col.r=0.0;
+        #endif
     #endif
 
     #ifdef VERTEX_COLORS

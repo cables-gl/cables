@@ -1,1 +1,93 @@
-{"author":"58dabd06a0d7ec8d1a982e66","authorName":"pandur","id":"78989530-a0cd-49e4-bf54-83ce3220c4b5","created":1509660353584,"libs":["cannon.js"],"layout":{"portsIn":[{"type":"1","name":"Exec"},{"type":"1","name":"Reset"},{"type":"0","name":"Draw Bodies","subType":"boolean"},{"type":"0","name":"Groundplane","subType":"boolean"},{"type":"0","name":"Gravity X","subType":"number"},{"type":"0","name":"Gravity Y","subType":"number"},{"type":"0","name":"Gravity Z","subType":"number"}],"portsOut":[{"type":"1","name":"next"},{"type":"0","name":"Num Bodies","subType":"number"}],"name":"Ops.Physics.World"},"summary":"start/configure a world with physic simulation","docs":{"ports":[]},"todos":[{"message":"Needs example file and docs","author":"andro","id":"04becc10-d6b3-415a-87f1-8ea3bf0fb214","date":1558347928358,"deleted":true,"deletedBy":"cables","deletedDate":1605511621610}],"changelog":[{"message":" added core lib: cgl_WireframeMeshes","author":"pandur","date":1593498575949},{"message":" added core lib: cgl_wireframes","author":"pandur","date":1593499136219},{"message":"Ops.Exp.Gl.Physics.World renamed to Ops.Physics.World","author":"pandur","date":1596093306885}],"coreLibs":["cgl_wireframes"]}
+{
+    "author": "58dabd06a0d7ec8d1a982e66",
+    "authorName": "pandur",
+    "id": "78989530-a0cd-49e4-bf54-83ce3220c4b5",
+    "created": 1509660353584,
+    "libs": [
+        "cannon.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Exec"
+            },
+            {
+                "type": "1",
+                "name": "Reset"
+            },
+            {
+                "type": "0",
+                "name": "Draw Bodies",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Groundplane",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Gravity X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gravity Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Gravity Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "next"
+            },
+            {
+                "type": "0",
+                "name": "Num Bodies",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Physics.World"
+    },
+    "summary": "start/configure a world with physic simulation",
+    "docs": {
+        "ports": []
+    },
+    "todos": [
+        {
+            "message": "Needs example file and docs",
+            "author": "andro",
+            "id": "04becc10-d6b3-415a-87f1-8ea3bf0fb214",
+            "date": 1558347928358,
+            "deleted": true,
+            "deletedBy": "cables",
+            "deletedDate": 1605511621610
+        }
+    ],
+    "changelog": [
+        {
+            "message": " added core lib: cgl_WireframeMeshes",
+            "author": "pandur",
+            "date": 1593498575949
+        },
+        {
+            "message": " added core lib: cgl_wireframes",
+            "author": "pandur",
+            "date": 1593499136219
+        },
+        {
+            "message": "Ops.Exp.Gl.Physics.World renamed to Ops.Physics.World",
+            "author": "pandur",
+            "date": 1596093306885
+        }
+    ],
+    "coreLibs": [
+        "cgl_wireframes"
+    ]
+}

@@ -3,6 +3,7 @@ const
     inActive = op.inBool("Active", true),
     inWhat = op.inSwitch("Force", ["Resolution", "Aspect Ratio"], "Resolution"),
     inCenter = op.inBool("Center In Parent", true),
+    inScaleFit = op.inBool("Scale to fit Parent", false),
     inWidth = op.inInt("Set Width", 300),
     inHeight = op.inInt("Set Height", 200),
     inPresets = op.inDropDown("Aspect Ratio", ["21:9", "2:1", "16:9", "16:10", "4:3", "1:1", "9:16", "1:2", "iPhoneXr Vert"], "16:9"),
@@ -27,13 +28,11 @@ inWhat.onChange = updateMethod;
 inCenter.onChange =
     inTrigger.onLinkChanged = removeStyles;
 
-
 inPresets.onChange = updateRatioPreset;
 
 const cgl = op.patch.cgl;
 
 updateUi();
-
 
 function updateMethod()
 {
@@ -58,7 +57,6 @@ function updateRatioPreset()
     else if (pr == "1:2")inRatio.set(0.5);
     else if (pr == "iPhoneXr Vert")inRatio.set(9 / 19.5);
 }
-
 
 inActive.onChange = function ()
 {
@@ -95,7 +93,6 @@ function removeStyles()
     const rect = cgl.canvas.parentNode.getBoundingClientRect();
     cgl.setSize(rect.width, rect.height);
 }
-
 
 inTrigger.onTriggered = function ()
 {
@@ -148,6 +145,26 @@ inTrigger.onTriggered = function ()
         const rect = cgl.canvas.parentNode.getBoundingClientRect();
         cgl.canvas.style["margin-top"] = (rect.height - h) / 2 + "px";
         cgl.canvas.style["margin-left"] = (rect.width - w) / 2 + "px";
+    }
+    else
+    {
+        cgl.canvas.style["margin-top"] = "0";
+        cgl.canvas.style["margin-left"] = "0";
+    }
+
+    if (inScaleFit.get())
+    {
+        const rect = cgl.canvas.parentNode.getBoundingClientRect();
+        const scX = rect.width / inWidth.get();
+        const scY = rect.height / inHeight.get();
+        // console.log("w", rect.width,inWidth.get());
+        // console.log("h", rect.height,inHeight.get());
+        // console.log("scXY!!", scX, scY);
+        cgl.canvas.style.transform = "scale(" + Math.min(scX, scY) + ")";
+    }
+    else
+    {
+        cgl.canvas.style.transform = "scale(1)";
     }
 
     if (cgl.canvas.width / cgl.pixelDensity != w || cgl.canvas.height / cgl.pixelDensity != h)
