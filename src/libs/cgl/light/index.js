@@ -218,10 +218,6 @@ Light.prototype.hasCubemap = function ()
 
 Light.prototype.setFramebufferSize = function (size)
 {
-    if (this.type === "point")
-    {
-
-    }
     if (this.hasFramebuffer()) this._framebuffer.setSize(size, size);
 };
 
