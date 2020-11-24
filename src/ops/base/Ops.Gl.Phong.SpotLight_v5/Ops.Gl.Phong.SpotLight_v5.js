@@ -92,14 +92,9 @@ inAdvanced.setUiAttribs({ "hidePort": true });
 
 inAdvanced.onChange = function ()
 {
-    updating = true;
     inMSAA.setUiAttribs({ "greyout": !inAdvanced.get() });
     inFilterType.setUiAttribs({ "greyout": !inAdvanced.get() });
     inAnisotropic.setUiAttribs({ "greyout": !inAdvanced.get() });
-    if (!inAdvanced.get())
-    {
-
-    }
 };
 
 const outTrigger = op.outTrigger("Trigger Out");
