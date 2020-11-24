@@ -2,7 +2,7 @@ const
     inMessage = op.inObject("Message"),
     inAddress = op.inString("Address"),
     learn = op.inTriggerButton("Learn"),
-    outMsg = op.outObject("Message"),
+    outMsg = op.outObject("Result Message"),
     outArray = op.outArray("Array out"),
     outArrayLength = op.outNumber("Array length"),
     outTrig = op.outTrigger("Received");
