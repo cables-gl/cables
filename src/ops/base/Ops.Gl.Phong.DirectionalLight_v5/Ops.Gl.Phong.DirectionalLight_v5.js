@@ -88,8 +88,6 @@ const newLight = new CGL.Light(cgl, {
 });
 newLight.castLight = inCastLight.get();
 
-op.log("dir light", newLight);
-
 let updating = false;
 
 function updateBuffers()
