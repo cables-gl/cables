@@ -76,33 +76,15 @@ let updating = false;
 inCastShadow.onChange = function ()
 {
     updating = true;
-    const castShadow = inCastShadow.get();
-
-    if (castShadow)
-    {
-        if (!newLight.hasFramebuffer())
-        {
-            const size = inMapSize.get();
-            newLight.createFramebuffer(size, size, {});
-            newLight.createShadowMapShader();
-        }
-    }
-    else
-    {
-
-    }
-
-    inMapSize.setUiAttribs({ "greyout": !castShadow });
-    inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
-    inShadowStrength.setUiAttribs({ "greyout": !castShadow });
-    inNear.setUiAttribs({ "greyout": !castShadow });
-    inFar.setUiAttribs({ "greyout": !castShadow });
-    inBias.setUiAttribs({ "greyout": !castShadow });
-    inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
-    newLight.castShadow = castShadow;
-
-    updating = false;
     updateLight = true;
+
+    inMapSize.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inRenderMapActive.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inShadowStrength.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inNear.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inFar.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inBias.setUiAttribs({ "greyout": !inCastShadow.get() });
+    inPolygonOffset.setUiAttribs({ "greyout": !inCastShadow.get() });
 };
 
 const outTrigger = op.outTrigger("Trigger Out");
@@ -124,13 +106,19 @@ const newLight = new CGL.Light(cgl, {
 });
 newLight.castLight = inCastLight.get();
 
+op.log("newLight", newLight);
+
 inTrigger.onLinkChanged = function ()
 {
-    if (!inTrigger.isLinked())
+    if (inTrigger.isLinked())
+    {
+        updating = true;
+    }
+    /* if (!inTrigger.isLinked())
     {
         newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
         newLight.createShadowMapShader();
-    }
+    } */
 };
 
 let updateLight = false;
@@ -146,16 +134,18 @@ inMapSize.onChange = function ()
 {
     // TODO: update this one
     updating = true;
-
-    const size = Number(inMapSize.get());
-    newLight.createFramebuffer(size, size, {});
-    newLight.createShadowMapShader();
-
-    updating = false;
 };
 
-const projectionShader = null;
-const uniformCubemap = null;
+function updateShadowMapFramebuffer()
+{
+    if (inCastShadow.get())
+    {
+        const size = inMapSize.get();
+        newLight.createFramebuffer(size, size, {});
+        newLight.createShadowMapShader();
+    }
+    updating = false;
+}
 
 const sc = vec3.create();
 const result = vec3.create();
@@ -181,9 +171,13 @@ function drawHelpers()
 }
 
 let errorActive = false;
+
 inTrigger.onTriggered = function ()
 {
-    if (updating) return;
+    if (updating)
+    {
+        updateShadowMapFramebuffer();
+    }
 
     if (!cgl.frameStore.shadowPass)
     {
@@ -228,7 +222,7 @@ inTrigger.onTriggered = function ()
     outWorldPosY.set(newLight.position[1]);
     outWorldPosZ.set(newLight.position[2]);
 
-    drawHelpers();
+    if (!cgl.frameStore.shadowPass) drawHelpers();
 
     cgl.frameStore.lightStack.push(newLight);
 
