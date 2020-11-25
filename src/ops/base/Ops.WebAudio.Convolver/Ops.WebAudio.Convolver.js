@@ -25,6 +25,16 @@ impulseResponse.onChange = () =>
     const impulseUrl = impulseResponse.get();
     const ajaxRequest = new XMLHttpRequest();
     const url = op.patch.getFilePath(impulseUrl);
+    const ext = url.substr(url.lastIndexOf(".") + 1);
+
+    if (ext === "wav")
+    {
+        op.setUiError("wavExt", "Even though impulse responses are .wav files most of the time, if you plan on using WebAudio in Safari, make sure you use a .wav file that is 16bit or use an .mp3 file instead.", 1);
+    }
+    else
+    {
+        op.setUiError("wavExt", null);
+    }
     if (impulseUrl)
     {
         impulseResponseLoaded = false;
