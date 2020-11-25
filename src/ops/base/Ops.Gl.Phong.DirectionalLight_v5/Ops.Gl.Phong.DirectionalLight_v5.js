@@ -31,7 +31,6 @@ inSpecularR.setUiAttribs({ "colorPick": true });
 const colorSpecularIn = [inSpecularR, inSpecularG, inSpecularB];
 op.setPortGroup("Specular Color", colorSpecularIn);
 
-
 const inCastShadow = op.inBool("Cast Shadow", false);
 const inRenderMapActive = op.inBool("Rendering Active", true);
 const inMapSize = op.inSwitch("Map Size", [256, 512, 1024, 2048], 512);
@@ -76,7 +75,6 @@ inAdvanced.onChange = function ()
 const outTrigger = op.outTrigger("Trigger Out");
 const outTexture = op.outTexture("Shadow Map");
 
-
 let texelSize = 1 / Number(inMapSize.get());
 
 const newLight = new CGL.Light(cgl, {
@@ -89,11 +87,6 @@ const newLight = new CGL.Light(cgl, {
     "shadowStrength": inShadowStrength.get(),
 });
 newLight.castLight = inCastLight.get();
-
-newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
-newLight.createShadowMapShader();
-newLight.createBlurEffect({});
-newLight.createBlurShader();
 
 let updating = false;
 
@@ -132,17 +125,30 @@ function updateBuffers()
     updating = false;
 }
 
-inMSAA.onChange = inAnisotropic.onChange = inFilterType.onChange = updateBuffers;
-
-inMapSize.onChange = function ()
+function updateShadowMapFramebuffer()
 {
     const size = Number(inMapSize.get());
     texelSize = 1 / size;
-    newLight.setFramebufferSize(Number(inMapSize.get()), Number(inMapSize.get()));
+
+    if (inCastShadow.get())
+    {
+        newLight.createFramebuffer(Number(inMapSize.get()), Number(inMapSize.get()), {});
+        newLight.createShadowMapShader();
+        newLight.createBlurEffect({});
+        newLight.createBlurShader();
+        newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
+    }
+
+    if (inAdvanced.get()) updateBuffers();
+
+    updating = false;
+    updateLight = true;
+}
+
+inMSAA.onChange = inAnisotropic.onChange = inFilterType.onChange = inMapSize.onChange = function ()
+{
+    updating = true;
 };
-
-newLight.createProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
-
 
 inR.onChange = inG.onChange = inB.onChange = inSpecularR.onChange = inSpecularG.onChange = inSpecularB.onChange
 = inPosX.onChange = inPosY.onChange = inPosZ.onChange
@@ -154,29 +160,12 @@ function updateLightParameters(param)
     updateLight = true;
 }
 
-
 inCastShadow.onChange = function ()
 {
     updating = true;
     updateLight = true;
 
     const castShadow = inCastShadow.get();
-    if (castShadow)
-    {
-        if (!newLight.hasFramebuffer())
-        {
-            const size = Number(inMapSize.get());
-            newLight.createFramebuffer(size, size, {});
-            newLight.createShadowMapShader();
-            newLight.createBlurEffect({});
-            newLight.createBlurShader();
-        }
-    }
-    /* else
-    {
-
-    } */
-    newLight.castShadow = castShadow;
 
     inMapSize.setUiAttribs({ "greyout": !castShadow });
     inRenderMapActive.setUiAttribs({ "greyout": !castShadow });
@@ -188,28 +177,15 @@ inCastShadow.onChange = function ()
     inBias.setUiAttribs({ "greyout": !castShadow });
     inNormalOffset.setUiAttribs({ "greyout": !castShadow });
     inPolygonOffset.setUiAttribs({ "greyout": !castShadow });
-
-    updating = false;
 };
-
-const lightProjectionMatrix = mat4.create();
-mat4.ortho(lightProjectionMatrix,
-    -1 * inLRBT.get(),
-    inLRBT.get(),
-    -1 * inLRBT.get(),
-    inLRBT.get(),
-    inNear.get(),
-    inFar.get()
-);
 
 inLRBT.onChange = inNear.onChange = inFar.onChange = function ()
 {
-    newLight.updateProjectionMatrix(inLRBT.get(), inNear.get(), inFar.get(), null);
+    updateLight = true;
 };
 
 function drawHelpers()
 {
-    if (cgl.frameStore.shadowPass) return;
     if (cgl.shouldDrawHelpers(op))
     {
         gui.setTransformGizmo({
@@ -232,7 +208,11 @@ function drawHelpers()
 let errorActive = false;
 inTrigger.onTriggered = function ()
 {
-    if (updating) return;
+    if (updating)
+    {
+        if (cgl.frameStore.shadowPass) return;
+        updateShadowMapFramebuffer();
+    }
 
     if (!cgl.frameStore.shadowPass)
     {
@@ -267,14 +247,11 @@ inTrigger.onTriggered = function ()
         updateLight = false;
     }
 
-
     if (!cgl.frameStore.lightStack) cgl.frameStore.lightStack = [];
 
-    drawHelpers();
-
+    if (!cgl.frameStore.shadowPass) drawHelpers();
 
     cgl.frameStore.lightStack.push(newLight);
-
 
     if (inCastShadow.get())
     {
@@ -287,6 +264,10 @@ inTrigger.onTriggered = function ()
         cgl.frameStore.lightStack.pop();
 
         cgl.frameStore.lightStack.push(newLight);
+    }
+    else
+    {
+        outTexture.set(null);
     }
 
     outTrigger.trigger();
