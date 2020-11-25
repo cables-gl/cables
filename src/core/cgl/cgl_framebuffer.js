@@ -171,6 +171,9 @@ const Framebuffer = function (_cgl, _w, _h, options)
         case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             Log.warn("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        case 0x8CDB:
+            Log.warn("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
+            break;
         default:
             Log.warn("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);

@@ -70,6 +70,7 @@ function Light(cgl, config)
         },
     };
     this._cubemap = null;
+
     return this;
 }
 
@@ -147,12 +148,15 @@ Light.prototype.createFramebuffer = function (width, height, options)
 
     if (this.type === "point")
     {
-        this._cubemap = new CGL.Cubemap(this._cgl, {
-            "camPos": this.position,
-            "cullFaces": true,
-            "size": fbWidth,
-            "isShadowMap": true
-        });
+        if (!this.hasCubemap())
+        {
+            this._cubemap = new CGL.Cubemap(this._cgl, {
+                "camPos": this.position,
+                "cullFaces": true,
+                "size": fbWidth,
+                "isShadowMap": true
+            });
+        }
 
         this._cubemap.initializeCubemap();
         this.state.isUpdating = false;
@@ -205,6 +209,11 @@ Light.prototype.createFramebuffer = function (width, height, options)
     }
 
     this.state.isUpdating = false;
+};
+
+Light.prototype.hasCubemap = function ()
+{
+    return !!this._cubemap;
 };
 
 Light.prototype.setFramebufferSize = function (size)
