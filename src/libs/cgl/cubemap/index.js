@@ -77,6 +77,16 @@ Cubemap.prototype.setCamPos = function (camPos)
     this._framebuffer.setCamPos(this.camPos);
 };
 
+Cubemap.prototype.hasFramebuffer = function ()
+{
+    return !!this._framebuffer;
+};
+
+Cubemap.prototype.deleteFramebuffer = function ()
+{
+    if (this._framebuffer) this._framebuffer.dispose();
+};
+
 Cubemap.prototype.setSize = function (size)
 {
     this.size = size;

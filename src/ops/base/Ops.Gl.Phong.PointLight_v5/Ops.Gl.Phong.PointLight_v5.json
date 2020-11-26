@@ -151,10 +151,6 @@
                 "name": "Cubemap"
             },
             {
-                "type": "2",
-                "name": "Cubemap Projection"
-            },
-            {
                 "type": "0",
                 "name": "World Position X",
                 "subType": "number"

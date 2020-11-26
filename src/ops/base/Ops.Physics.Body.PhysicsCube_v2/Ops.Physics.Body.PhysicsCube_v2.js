@@ -27,12 +27,13 @@ let collided = false;
 let needSetup = true;
 let body = null;
 let shape = null;
+let timeout = null;
 
-inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange = setup;
 exec.onTriggered = render;
 
-op.toWorkNeedsParent("Ops.Exp.Gl.Physics.World");
+// op.toWorkNeedsParent("Ops.Physics.World");
 
+inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange =
 inReset.onTriggered = function ()
 {
     needSetup = true;
@@ -43,10 +44,15 @@ exec.onLinkChanged =
     op.onDelete =
     function ()
     {
-        if (body && lastWorld)lastWorld.removeBody(body);
+        removeBody();
         body = null;
         lastWorld = null;
     };
+
+function removeBody()
+{
+    if (body && lastWorld)lastWorld.removeBody(body);
+}
 
 function setup(modelScale)
 {
@@ -54,7 +60,9 @@ function setup(modelScale)
     const world = cgl.frameStore.world;
     if (!world) return;
 
-    if (body)world.removeBody(body);
+    if (body)lastWorld.removeBody(body);
+
+    console.log("make new!", sizeX.get());
 
     // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
     shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
@@ -65,6 +73,7 @@ function setup(modelScale)
         "shape": shape
     });
 
+    body.name = inName.get();
 
     world.addBody(body);
 
@@ -85,8 +94,17 @@ function getScaling(mat)
     return Math.hypot(m31, m32, m33);
 }
 
+function stoppedRendering()
+{
+    removeBody();
+    needSetup = true;
+}
+
 function render()
 {
+    clearTimeout(timeout);
+    timeout = setTimeout(stoppedRendering, 300);
+
     if (needSetup)setup();
     if (lastWorld != cgl.frameStore.world)setup();
     if (!body) return;
