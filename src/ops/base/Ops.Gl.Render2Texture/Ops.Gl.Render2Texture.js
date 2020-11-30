@@ -22,7 +22,6 @@ tex.set(CGL.Texture.getEmptyTexture(cgl));
 
 op.setPortGroup("Size", [useVPSize, width, height, aspect]);
 
-
 // todo why does it only work when we render a mesh before>?>?????
 // only happens with matcap material with normal map....
 
@@ -90,7 +89,6 @@ function doRender()
         else if (tfilter.get() == "linear") fb.setFilter(CGL.Texture.FILTER_LINEAR);
         else if (tfilter.get() == "mipmap") fb.setFilter(CGL.Texture.FILTER_MIPMAP);
 
-
         texDepth.set(fb.getTextureDepth());
         reInitFb = false;
     }
@@ -112,7 +110,6 @@ function doRender()
 
     if (aspect.get()) mat4.perspective(cgl.pMatrix, 45, width.get() / height.get(), 0.1, 1000.0);
 
-
     trigger.trigger();
     fb.renderEnd(cgl);
 
@@ -123,9 +120,7 @@ function doRender()
     tex.set(fb.getTextureColor());
 }
 
-
 render.onTriggered = doRender;
 op.preRender = doRender;
-
 
 updateVpSize();

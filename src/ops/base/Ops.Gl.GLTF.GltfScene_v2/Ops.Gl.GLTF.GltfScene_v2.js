@@ -194,7 +194,7 @@ inExec.onTriggered = function ()
 
 function loadBin(addCacheBuster)
 {
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltf", inFile.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
@@ -214,6 +214,7 @@ function loadBin(addCacheBuster)
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
             cgl.patch.loading.finished(loadingId);
+            loadingId = null;
             needsMatUpdate = true;
             op.refreshParams();
             outAnimLength.set(maxTime);
