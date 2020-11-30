@@ -1,1 +1,58 @@
-{"id":"313ebceb-fa16-4400-aa2b-20859614c7c6","changelog":[{"message":"created op","author":"simod","date":1601997483978},{"message":"Ops.User.simod.PanningNode renamed to Ops.WebAudio.AudioPanner","author":"simod","date":1602000296248}],"authorName":"simod","created":1601997494173,"layout":{"portsIn":[{"type":"2","name":"audio in"},{"type":"0","name":"Pan","subType":"number"}],"portsOut":[{"type":"2","name":"audio out"}],"name":"Ops.WebAudio.AudioPanner"},"summary":"pan an audio signal from left to right","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"audio in","text":"audio input"},{"name":"Pan","text":"audio pan position from -1 to 1"},{"name":"audio out","text":"panned audio out"}]}}
+{
+    "id": "313ebceb-fa16-4400-aa2b-20859614c7c6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1601997483978
+        },
+        {
+            "message": "Ops.User.simod.PanningNode renamed to Ops.WebAudio.AudioPanner",
+            "author": "simod",
+            "date": 1602000296248
+        }
+    ],
+    "authorName": "simod",
+    "created": 1601997494173,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "audio in"
+            },
+            {
+                "type": "0",
+                "name": "Pan",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "audio out"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioPanner"
+    },
+    "summary": "pan an audio signal from left to right",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "audio in",
+                "text": "audio input"
+            },
+            {
+                "name": "Pan",
+                "text": "audio pan position from -1 to 1"
+            },
+            {
+                "name": "audio out",
+                "text": "panned audio out"
+            }
+        ]
+    }
+}

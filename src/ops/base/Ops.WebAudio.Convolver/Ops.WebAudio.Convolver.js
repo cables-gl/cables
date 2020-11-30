@@ -1,4 +1,6 @@
+let audioContext = null;
 if (!window.audioContext) { audioContext = new AudioContext(); }
+else audioContext = window.audioContext;
 
 const audioIn = op.inObject("audio in");
 // const impulseResponse = op.inUrl("impulse response");

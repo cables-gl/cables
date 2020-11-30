@@ -3,8 +3,10 @@ const gain = op.inFloatSlider("gain", 1);
 gain.onChange = updateGain;
 const audioOut = op.outObject("audio out");
 
-if (!window.audioContext) { audioContext = new AudioContext(); }
+let audioContext = null;
 
+if (!window.audioContext) { audioContext = new AudioContext(); }
+else audioContext = window.audioContext;
 const gainNode = audioContext.createGain();
 
 function updateGain()

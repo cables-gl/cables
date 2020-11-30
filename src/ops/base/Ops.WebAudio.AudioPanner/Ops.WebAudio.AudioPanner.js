@@ -3,23 +3,26 @@ function clamp(val, min, max)
     return Math.min(Math.max(val, min), max);
 }
 
-const audioIn = this.addInPort(new CABLES.Port(this, "audio in", CABLES.OP_PORT_TYPE_OBJECT));
+const audioIn = op.inObject("audio in");
 const pan = op.inFloat("Pan", 0);
 pan.onChange = updateGain;
-const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const audioOut = op.outObject("audio out");
+
+let audioContext = null;
 
 if (!window.audioContext) { audioContext = new AudioContext(); }
+else audioContext = window.audioContext;
 
 let isIOS = false;
 let panNode = null;
 
-if (window.audioContext.createStereoPanner)
+if (audioContext.createStereoPanner)
 {
     panNode = audioContext.createStereoPanner();
 }
 else
 {
-    panNode = window.audioContext.createPanner();
+    panNode = audioContext.createPanner();
     panNode.panningModel = "equalpower";
     isIOS = true;
 }
@@ -31,10 +34,9 @@ function updateGain()
     // gainNode.gain.value = parseFloat( gain.get() )||0;
     const panning = clamp(pan.get(), -1, 1);
 
-    if (!isIOS) panNode.pan.setValueAtTime(panning, window.audioContext.currentTime);
+    if (!isIOS) panNode.pan.setValueAtTime(panning, audioContext.currentTime);
     else
     {
-        op.log("imehrehrehre");
         panNode.setPosition(panning, 0, 1 - Math.abs(panning));
     }
 }
