@@ -1345,13 +1345,15 @@ const Op = function ()
         if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
         if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
 
+        if (id.indexOf(" ") > -1) console.warn("setuierror id cant have spaces!");
+
         if (!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
         else
         {
             if (txt && (!this._uiErrors.hasOwnProperty(id) || this._uiErrors[id].txt != txt))
             {
                 if (level == undefined) level = 2;
-                this._uiErrors[id] = { "txt": txt, "level": level };
+                this._uiErrors[id] = { "txt": txt, "level": level, "id": id };
             }
         }
 
