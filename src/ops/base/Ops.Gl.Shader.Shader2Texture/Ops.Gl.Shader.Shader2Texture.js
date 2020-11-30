@@ -14,7 +14,6 @@ const
     outTex3 = op.outTexture("Texture 3"),
     outTex4 = op.outTexture("Texture 4");
 
-
 op.setPortGroup("Texture Size", [inVPSize, inWidth, inHeight]);
 op.setPortGroup("Texture settings", [tfilter, twrap, inFloatingPoint]);
 
@@ -47,7 +46,6 @@ op.toWorkPortsNeedToBeLinked(inShader);
 tfilter.set("nearest");
 
 updateUI();
-
 
 function warning()
 {
@@ -97,7 +95,6 @@ function initFb()
     needInit = false;
     if (fb)fb.delete();
 
-
     const oldLen = drawBuffArr.length;
     numTextures = parseInt(inNumTex.get());
     drawBuffArr.length = 0;
@@ -146,16 +143,14 @@ function initFb()
     }
 }
 
-
 exec.onTriggered = function ()
 {
     const vp = cgl.getViewPort();
 
     if (!fb || needInit)initFb();
-    if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height))
-    {
-        initFb();
-    }
+    if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height)) initFb();
+
+    if (!inShader.get()) return;
 
     if (inShader.get() != lastShader)
     {
@@ -165,13 +160,11 @@ exec.onTriggered = function ()
         shader.setDrawBuffers(drawBuffArr);
     }
 
-
     if (!shader)
     {
         outTex.set(null);
         return;
     }
-
 
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];
@@ -199,7 +192,6 @@ exec.onTriggered = function ()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-
     if (numTextures >= 2)
     {
         outTex.set(fb.getTextureColorNum(0));
@@ -208,7 +200,6 @@ exec.onTriggered = function ()
         outTex4.set(fb.getTextureColorNum(3));
     }
     else outTex.set(fb.getTextureColor());
-
 
     cgl.popShader();
 
