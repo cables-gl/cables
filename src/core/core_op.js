@@ -1454,7 +1454,7 @@ const Op = function ()
     {
         if (this._eventCallbacks[which])
             for (let i = 0; i < this._eventCallbacks[which].length; i++)
-                if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i](params);
+                if (this._eventCallbacks[which][i]) this._eventCallbacks[which][i].cb(params);
 
         if (this.onUiAttrChange && which == "onUiAttribsChange") this.onUiAttrChange(params); // todo: use normal eventlistener
     };
