@@ -31,7 +31,8 @@ const
     outJson = op.outObject("Json"),
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
-    outAnimFinished = op.outTrigger("Finished");
+    outAnimFinished = op.outTrigger("Finished"),
+    outLoaded = op.outBool("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -199,6 +200,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
+    outLoaded.set(false);
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
@@ -230,6 +232,7 @@ function loadBin(addCacheBuster)
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }
             updateCenter();
+            outLoaded.set(true);
             // op.log("finished loading gltf");
         };
 

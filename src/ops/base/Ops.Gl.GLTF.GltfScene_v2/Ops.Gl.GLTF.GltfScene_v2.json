@@ -150,6 +150,11 @@
             {
                 "type": "1",
                 "name": "Finished"
+            },
+            {
+                "type": "0",
+                "name": "Loaded",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfScene_v2"
