@@ -6,6 +6,7 @@ const EventTarget = function ()
     this._logName = "";
     this._log = false;
 
+
     this.addEventListener = this.on = function (which, cb)
     {
         if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
@@ -31,9 +32,21 @@ const EventTarget = function ()
 
     this.removeEventListener = this.off = function (which, cb)
     {
-        if (this._eventCallbacks[which])
+        let index = null;
+        for (let i = 0; i < this._eventCallbacks[which].length; i++)
         {
-            delete this._eventCallbacks[which];
+            if (this._eventCallbacks[which][i] == cb)
+            {
+                console.log("FOUND!@!", index, i);
+                index = i;
+            }
+        }
+
+
+        if (index !== null)
+        {
+            console.log("[removeEventListener] !!! found " + which);
+            delete this._eventCallbacks[index];
         }
         else console.warn("[removeEventListener] not found " + which);
     };
