@@ -4,9 +4,9 @@ const
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
-    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
+    twrap = op.inValueSelect("Wrap", ["clamp to edge", "repeat", "mirrored repeat"], "repeat"),
     fpTexture = op.inValueBool("HDR"),
-    inTransp = op.inValueBool("Transparent", true),
+    inTransp = op.inValueBool("Transparent", false),
 
     trigger = op.outTrigger("Next"),
     texOut = op.outTexture("texture_out"),
@@ -27,7 +27,7 @@ let reInitEffect = true;
 const bgShader = new CGL.Shader(cgl, "imgcompose bg");
 bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
 
-const uniAlpha = new CGL.Uniform(bgShader, "f", "a", 1);
+const uniAlpha = new CGL.Uniform(bgShader, "f", "a", !inTransp.get());
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;

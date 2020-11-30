@@ -5,16 +5,27 @@ const EventTarget = function ()
     this._eventCallbacks = {};
     this._logName = "";
     this._log = false;
-
+    this._listeners = {};
 
     this.addEventListener = this.on = function (which, cb)
     {
-        if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [cb];
-        else this._eventCallbacks[which].push(cb);
+        const event =
+        {
+            "id": CABLES.uuid(),
+            "name": which,
+            "cb": cb,
+        };
+        if (!this._eventCallbacks[which]) this._eventCallbacks[which] = [event];
+        else this._eventCallbacks[which].push(event);
+
+        this._listeners[event.id] = event;
+
+        return event.id;
     };
 
     this.hasEventListener = function (which, cb)
     {
+        console.warn("old eventtarget function haseventlistener!");
         if (which && cb)
         {
             if (this._eventCallbacks[which])
@@ -32,20 +43,45 @@ const EventTarget = function ()
 
     this.removeEventListener = this.off = function (which, cb)
     {
-        let index = null;
-        for (let i = 0; i < this._eventCallbacks[which].length; i++)
+        if (!cb) // new style, remove by id, not by name/callback
         {
-            if (this._eventCallbacks[which][i] == cb)
+            const event = this._listeners[which];
+            if (!event)
             {
-                console.log("FOUND!@!", index, i);
-                index = i;
+                console.log("could not find event...");
+                return;
             }
+
+            let index = -1;
+            for (let i = 0; i < this._eventCallbacks[event.name].length; i++)
+            {
+                if (this._eventCallbacks[event.name][i].id == which)
+                {
+                    console.log("FOUND!@!", index, i);
+                    index = i;
+                }
+            }
+
+            if (index !== -1)
+            {
+                console.log("[removeEventListener] !!! found " + which);
+                this._eventCallbacks[event.name].splice(index, 1);
+                delete this._listeners[which];
+            }
+            else console.warn("[removeEventListener] not found " + which);
+
+            return;
         }
 
+        console.warn("[eventtarget] old function signature: removeEventListener!");
+
+        let index = null;
+        for (let i = 0; i < this._eventCallbacks[which].length; i++)
+            if (this._eventCallbacks[which][i].cb == cb)
+                index = i;
 
         if (index !== null)
         {
-            console.log("[removeEventListener] !!! found " + which);
             delete this._eventCallbacks[index];
         }
         else console.warn("[removeEventListener] not found " + which);
@@ -67,7 +103,7 @@ const EventTarget = function ()
             {
                 if (this._eventCallbacks[which][i])
                 {
-                    this._eventCallbacks[which][i](param1, param2, param3, param4, param5, param6);
+                    this._eventCallbacks[which][i].cb(param1, param2, param3, param4, param5, param6);
                 }
             }
         }
@@ -78,4 +114,5 @@ const EventTarget = function ()
         }
     };
 };
+
 export { EventTarget };
