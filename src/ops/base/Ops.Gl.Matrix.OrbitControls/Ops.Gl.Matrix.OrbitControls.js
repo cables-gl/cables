@@ -284,13 +284,13 @@ function onmousemove(event)
     movementX *= speedX.get();
     movementY *= speedY.get();
 
-    if (event.which == 3 && allowPanning.get())
+    if (event.buttons == 2 && allowPanning.get())
     {
         vOffset[2] += movementX * 0.01 * mul.get();
         vOffset[1] += movementY * 0.01 * mul.get();
     }
     else
-    if (event.which == 2 && allowZooming.get())
+    if (event.buttons == 4 && allowZooming.get())
     {
         radius += movementY * 0.05;
         eye = circlePos(percY);
