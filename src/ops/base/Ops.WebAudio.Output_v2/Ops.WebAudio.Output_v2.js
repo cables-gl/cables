@@ -5,14 +5,11 @@ function clamp(val, min, max)
 
 op.requirements = [CABLES.Requirements.WEBAUDIO];
 
-let audioCtx = null;
-if (!window.audioContext) { audioCtx = new AudioContext(); }
-else audioCtx = window.audioContext;
+let audioCtx = CABLES.WEBAUDIO.createAudioContext();
 
 // vars
 const gainNode = audioCtx.createGain();
 const destinationNode = audioCtx.destination;
-
 
 // inputs
 const inAudio = op.inObject("Audio In");
@@ -33,8 +30,9 @@ inAudio.onChange = function ()
         {
             try
             {
-                if (oldAudioIn.disconnect) {
-                        oldAudioIn.disconnect(gainNode);
+                if (oldAudioIn.disconnect)
+                {
+                    oldAudioIn.disconnect(gainNode);
                 }
             }
             catch (e)
@@ -43,11 +41,11 @@ inAudio.onChange = function ()
             }
         }
         op.setUiError("audioCtx", null);
-        if (connectedToOut) {
+        if (connectedToOut)
+        {
             gainNode.disconnect(destinationNode);
             connectedToOut = false;
         }
-
     }
     else
     {
@@ -60,7 +58,8 @@ inAudio.onChange = function ()
     }
     oldAudioIn = inAudio.get();
 
-    if (!connectedToOut) {
+    if (!connectedToOut)
+    {
         gainNode.connect(destinationNode);
         connectedToOut = true;
     }
@@ -68,34 +67,41 @@ inAudio.onChange = function ()
 
 // functions
 // sets the volume, multiplied by master volume
-function setVolume() {
-    var volume = inGain.get() * masterVolume;
-        gainNode.gain.setValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime);
+function setVolume()
+{
+    let volume = inGain.get() * masterVolume;
+    gainNode.gain.setValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime);
 }
 
-function mute(b) {
-    if(b) {
+function mute(b)
+{
+    if (b)
+    {
         gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    } else {
+    }
+    else
+    {
         setVolume();
     }
 }
 
 // change listeners
-inMute.onChange = () => {
+inMute.onChange = () =>
+{
     mute(inMute.get());
 };
 
-inGain.onChange = () => {
-    if(inMute.get()) {
+inGain.onChange = () =>
+{
+    if (inMute.get())
+    {
         return;
     }
     setVolume();
 };
 
-op.onMasterVolumeChanged = (v) => {
+op.onMasterVolumeChanged = (v) =>
+{
     masterVolume = v;
     setVolume();
 };
-
-

@@ -1,4 +1,4 @@
-if (!window.audioContext) { window.audioContext = new AudioContext(); }
+const audioCtx = CABLES.WEBAUDIO.createAudioContext();
 
 const inAudio0 = op.inObject("Audio In 0");
 const inAudio1 = op.inObject("Audio In 1");
@@ -35,10 +35,10 @@ const oldAudioIns = [];
 
 audioInGains.forEach((port, index) =>
 {
-    port.gainNode = window.audioContext.createGain();
+    port.gainNode = audioCtx.createGain();
     port.onChange = () =>
     {
-        port.gainNode.gain.setValueAtTime((audioInGains[index].get() || 0), window.audioContext.currentTime);
+        port.gainNode.gain.setValueAtTime((audioInGains[index].get() || 0), audioCtx.currentTime);
     };
 });
 // returns a function that closes around the `current_i` formal parameter.
@@ -84,4 +84,4 @@ audioIns.forEach((port, index) =>
     port.audioInPortNr = index;
 });
 
-inMasterGain.onChange = () => gain.gain.setValueAtTime((inMasterGain.get() || 0), window.audioContext.currentTime);
+inMasterGain.onChange = () => gain.gain.setValueAtTime((inMasterGain.get() || 0), audioCtx.currentTime);

@@ -1,10 +1,8 @@
 const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
 const MAX_DBFS_RANGE_24_BIT = -144;
 const MAX_DBFS_RANGE_26_BIT = -96;
-let audioCtx = null;
 
-if (!window.audioContext) { audioCtx = new AudioContext(); }
-else audioCtx = window.audioContext;
+let audioCtx = CABLES.WEBAUDIO.createAudioContext();
 
 const inTrigger = op.inTrigger("Trigger In");
 
