@@ -1,4 +1,44 @@
 {
+    "authorName": "tim",
+    "id": "b01d12b1-c940-448c-be93-986ec7a39f10",
+    "created": 1606497317726,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "2",
+                "name": "MQTT Object"
+            },
+            {
+                "type": "5",
+                "name": "Channel"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "MQTT Object - Out"
+            },
+            {
+                "type": "5",
+                "name": "Message String"
+            },
+            {
+                "type": "0",
+                "name": "Message Float",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Message Boolean",
+                "subType": "boolean"
+            },
+            {
+                "type": "5",
+                "name": "Topic"
+            }
+        ],
+        "name": "Ops.Net.Mqtt.MqttReceive_v2"
+    },
     "libs": [
         "mqttws31-min.js"
     ],
@@ -30,48 +70,5 @@
                 "text": "Currently the same as the input port `Channel`. In MQTT you could also subscribe via wildcards, e.g. `/sensor1/#`, this will subscribe to `/sensor1/x` as well as `/sensor1/y`. Currently not supported…"
             }
         ]
-    },
-    "layout": {
-        "portsIn": [
-            {
-                "type": "2",
-                "name": "MQTT Object"
-            },
-            {
-                "type": "0",
-                "name": "Channel",
-                "subType": "string"
-            },
-            {
-                "type": "0",
-                "name": "Message Type index",
-                "subType": "integer"
-            },
-            {
-                "type": "0",
-                "name": "Message Type",
-                "subType": "string"
-            }
-        ],
-        "portsOut": [
-            {
-                "type": "2",
-                "name": "MQTT Object"
-            },
-            {
-                "type": "0",
-                "name": "Message",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Topic",
-                "subType": "number"
-            }
-        ],
-        "name": "Ops.Net.Mqtt.MqttReceive"
-    },
-    "authorName": "tim",
-    "id": "c4d87284-5969-47e2-9f96-e6aed7fe3edb",
-    "created": 1558103586128
+    }
 }

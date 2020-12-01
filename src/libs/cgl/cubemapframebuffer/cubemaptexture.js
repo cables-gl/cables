@@ -9,7 +9,6 @@ class CubemapTexture
             "height": DEFAULT_TEXTURE_SIZE
         };
 
-
         this._cgl = cgl;
 
         this._cubemapFaces = [

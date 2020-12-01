@@ -162,22 +162,32 @@ class CubemapFramebuffer
             // this._cgl.gl.deleteFramebuffer(this._textureFrameBuffer);
         }
 
+
         this._framebuffer = this._cgl.gl.createFramebuffer();
         this._depthbuffer = this._cgl.gl.createRenderbuffer();
 
+
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._framebuffer); // select the framebuffer, so we can attach the depth buffer to it
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, this._depthbuffer); // so we can create storage for the depthBuffer
+
 
         this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.DEPTH_COMPONENT16, this.width, this.height);
         this._cgl.gl.framebufferRenderbuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.gl.DEPTH_ATTACHMENT, this._cgl.gl.RENDERBUFFER, this._depthbuffer);
 
         this.texture.setSize(this.width, this.height);
 
-
         if (!this._cgl.gl.isFramebuffer(this._framebuffer)) throw new Error("Invalid framebuffer");
 
+
+        // * NOTE: if we check for the error in Safari, we get error code 36059 aka 0x8CDB
+        // * NOTE: an error that is found in a WebGL extension (WEBGL_draw_buffers) not supported by most iOS devices
+        // * NOTE: see https://gist.github.com/TimvanScherpenzeel/2a604e178013a5ac4b411fbcbfd2fa33
+        // * NOTE: also, this error is nowhere to be found in the official WebGL 1 spec
+        // if (this._cgl.glVersion !== 1)
+        // {
         const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
         this.checkErrorsByStatus(status);
+        // }
 
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
         this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
@@ -191,7 +201,7 @@ class CubemapFramebuffer
         case this._cgl.gl.FRAMEBUFFER_COMPLETE:
             break;
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            console.error("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", width, height, this.texture.tex, this._depthBuffer);
+            console.error("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this.width, this.height, this.texture.tex, this._depthBuffer);
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
             console.error("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
@@ -202,6 +212,9 @@ class CubemapFramebuffer
         case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
             console.error("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        case 0x8CDB:
+            console.error("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
+            break;
         default:
             console.error("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);

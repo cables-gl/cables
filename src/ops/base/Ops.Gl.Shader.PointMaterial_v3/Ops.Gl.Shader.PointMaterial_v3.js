@@ -70,6 +70,7 @@ doScale.onChange =
     flipTex.onChange =
     texMaskChan.onChange =
     inPixelSize.onChange =
+    textureOpacity.onChange =
     texturePointSize.onChange =
     texturePointSizeMap.onChange =
     texturePointSizeChannel.onChange =
