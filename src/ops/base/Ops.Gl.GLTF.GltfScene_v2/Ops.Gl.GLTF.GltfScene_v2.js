@@ -31,7 +31,8 @@ const
     outJson = op.outObject("Json"),
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
-    outAnimFinished = op.outTrigger("Finished");
+    outAnimFinished = op.outTrigger("Finished"),
+    outLoaded = op.outBool("Loaded");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -194,11 +195,12 @@ inExec.onTriggered = function ()
 
 function loadBin(addCacheBuster)
 {
-    if (!loadingId)loadingId = cgl.patch.loading.start("gltf", inFile.get());
+    if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
+    outLoaded.set(false);
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
@@ -214,6 +216,7 @@ function loadBin(addCacheBuster)
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
             cgl.patch.loading.finished(loadingId);
+            loadingId = null;
             needsMatUpdate = true;
             op.refreshParams();
             outAnimLength.set(maxTime);
@@ -229,6 +232,7 @@ function loadBin(addCacheBuster)
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }
             updateCenter();
+            outLoaded.set(true);
             // op.log("finished loading gltf");
         };
 

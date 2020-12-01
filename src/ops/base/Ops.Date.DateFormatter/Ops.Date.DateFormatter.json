@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "GeertVanDamme",
             "date": 1605644922445
+        },
+        {
+            "message": " added lib: moment.js",
+            "author": "pandur",
+            "date": 1606335426722
         }
     ],
     "authorName": "GeertVanDamme",
@@ -40,5 +45,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "libs": [
+        "moment.js"
+    ]
 }
