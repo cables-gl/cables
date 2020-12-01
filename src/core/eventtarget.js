@@ -7,11 +7,11 @@ const EventTarget = function ()
     this._log = false;
     this._listeners = {};
 
-    this.addEventListener = this.on = function (which, cb)
+    this.addEventListener = this.on = function (which, cb, idPrefix)
     {
         const event =
         {
-            "id": CABLES.uuid(),
+            "id": (idPrefix || "") + CABLES.uuid(),
             "name": which,
             "cb": cb,
         };
@@ -43,32 +43,37 @@ const EventTarget = function ()
 
     this.removeEventListener = this.off = function (which, cb)
     {
+        if (which === null || which === undefined) return;
+
         if (!cb) // new style, remove by id, not by name/callback
         {
             const event = this._listeners[which];
             if (!event)
             {
-                console.log("could not find event...");
+                // console.log("could not find event...");
                 return;
             }
 
-            let index = -1;
-            for (let i = 0; i < this._eventCallbacks[event.name].length; i++)
+            let found = true;
+            while (found)
             {
-                if (this._eventCallbacks[event.name][i].id == which)
+                found = false;
+                let index = -1;
+                for (let i = 0; i < this._eventCallbacks[event.name].length; i++)
                 {
-                    console.log("FOUND!@!", index, i);
-                    index = i;
+                    if (this._eventCallbacks[event.name][i].id.indexOf(which) === 0) // this._eventCallbacks[event.name][i].id == which ||
+                    {
+                        found = true;
+                        index = i;
+                    }
+                }
+
+                if (index !== -1)
+                {
+                    this._eventCallbacks[event.name].splice(index, 1);
+                    delete this._listeners[which];
                 }
             }
-
-            if (index !== -1)
-            {
-                console.log("[removeEventListener] !!! found " + which);
-                this._eventCallbacks[event.name].splice(index, 1);
-                delete this._listeners[which];
-            }
-            else console.warn("[removeEventListener] not found " + which);
 
             return;
         }
