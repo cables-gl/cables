@@ -9,6 +9,11 @@
                 "type": "0",
                 "name": "gain",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mute",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
