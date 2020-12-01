@@ -201,6 +201,7 @@ Patch.prototype.isEditorMode = function ()
 Patch.prototype.pause = function ()
 {
     cancelAnimationFrame(this._animReq);
+    this.emitEvent("pause");
     this._animReq = null;
     this._paused = true;
     this.freeTimer.pause();
@@ -217,7 +218,7 @@ Patch.prototype.resume = function ()
     if (this._paused)
     {
         cancelAnimationFrame(this._animReq);
-
+        this.emitEvent("resume");
         this._paused = false;
         this.freeTimer.play();
         this.exec();
