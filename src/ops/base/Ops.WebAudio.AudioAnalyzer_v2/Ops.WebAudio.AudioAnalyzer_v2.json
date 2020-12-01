@@ -16,16 +16,6 @@
             },
             {
                 "type": "0",
-                "name": "Domain index",
-                "subType": "integer"
-            },
-            {
-                "type": "5",
-                "name": "Domain",
-                "group": "FFT Options"
-            },
-            {
-                "type": "0",
                 "name": "FFT size index",
                 "subType": "integer"
             },
@@ -64,17 +54,25 @@
                 "name": "Audio Out"
             },
             {
-                "type": "0",
-                "name": "Average Volume",
-                "subType": "number"
+                "type": "3",
+                "name": "FFT Array"
             },
             {
                 "type": "3",
-                "name": "FFT"
+                "name": "Waveform Array"
+            },
+            {
+                "type": "3",
+                "name": "Frequencies by Index Array"
             },
             {
                 "type": "0",
-                "name": "FFT Array Length",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RMS Volume",
                 "subType": "number"
             }
         ],
