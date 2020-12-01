@@ -30,9 +30,10 @@
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": "0",
                 "name": "FFT size",
-                "group": "FFT Options"
+                "group": "FFT Options",
+                "subType": "string"
             },
             {
                 "type": "0",

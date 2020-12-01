@@ -12,10 +12,12 @@ const analyser = audioCtx.createAnalyser();
 analyser.smoothingTimeConstant = 0.3;
 analyser.fftSize = 256;
 
+const FFT_BUFFER_SIZES = [32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
+
 const audioIn = op.inObject("Audio In");
 const inAnalyserDomain = op.inSwitch("Domain", ["Frequency", "Time"], "Frequency");
-const inFFTSize = op.inSwitch("FFT size", [64, 128, 256, 512, 1024, 2048], 256);
-const inSmoothing = op.inFloatSlider("Smoothing", 0.3);
+const inFFTSize = op.inDropDown("FFT size", FFT_BUFFER_SIZES, 2048);
+const inSmoothing = op.inFloatSlider("Smoothing", 0.5);
 
 const inRangeMin = op.inFloat("Min", -96);
 const inRangeMax = op.inFloat("Max", 0);
@@ -26,13 +28,14 @@ op.setPortGroup("Range (in dBFS)", [inRangeMin, inRangeMax]);
 const outTrigger = op.outTrigger("Trigger Out");
 const audioOut = op.outObject("Audio Out");
 const avgVolume = op.outNumber("Average Volume");
-const fftOut = op.outArray("FFT"); // op.addOutPort(new CABLES.Port(op, "fft", CABLES.OP_PORT_TYPE_ARRAY));
+const fftOut = op.outArray("FFT");
 const fftLength = op.outNumber("FFT Array Length");
 
 let updating = false;
 
 let fftBufferLength = analyser.frequencyBinCount;
 let fftDataArray = new Uint8Array(fftBufferLength);
+
 let getFreq = true;
 const array = null;
 let oldAudioIn = null;
@@ -143,13 +146,18 @@ inTrigger.onTriggered = function ()
     try
     {
         // TODO: check this method for compatibility etc
-        if (getFreq) analyser.getByteFrequencyData(fftDataArray);
+        if (getFreq)
+        {
+            analyser.getByteFrequencyData(fftDataArray);
+            analyser.getFloatFrequencyData(fftFloatDataArray);
+        }
         else analyser.getByteTimeDomainData(fftDataArray);
     }
     catch (e) { op.log(e); }
 
     fftOut.set(null);
     fftOut.set(fftDataArray);
+
     fftLength.set(fftDataArray.length);
     outTrigger.trigger();
 };
