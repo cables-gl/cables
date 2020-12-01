@@ -1,4 +1,4 @@
-let audioContext = CABLES.WEBAUDIO.createAudioContext();
+let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 const audioIn = op.inObject("audio in");
 // const impulseResponse = op.inUrl("impulse response");

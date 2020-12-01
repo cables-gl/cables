@@ -8,7 +8,7 @@ const pan = op.inFloat("Pan", 0);
 pan.onChange = updateGain;
 const audioOut = op.outObject("audio out");
 
-let audioContext = CABLES.WEBAUDIO.createAudioContext();
+let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 let isIOS = false;
 let panNode = null;

@@ -3,7 +3,7 @@ function clamp(val, min, max)
     return Math.min(Math.max(val, min), max);
 }
 
-let audioContext = CABLES.WEBAUDIO.createAudioContext();
+let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values + min and max
 const FREQUENCY_MIN = 10;

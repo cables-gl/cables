@@ -5,7 +5,7 @@ function clamp(val, min, max)
 
 op.requirements = [CABLES.Requirements.WEBAUDIO];
 
-let audioCtx = CABLES.WEBAUDIO.createAudioContext();
+let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
 const gainNode = audioCtx.createGain();

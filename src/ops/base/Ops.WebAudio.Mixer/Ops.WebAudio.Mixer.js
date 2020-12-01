@@ -1,4 +1,4 @@
-const audioCtx = CABLES.WEBAUDIO.createAudioContext();
+const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 const inAudio0 = op.inObject("Audio In 0");
 const inAudio1 = op.inObject("Audio In 1");
