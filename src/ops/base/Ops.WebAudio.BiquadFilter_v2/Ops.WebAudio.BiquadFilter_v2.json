@@ -42,12 +42,30 @@
                 "name": "detune",
                 "group": "Detune (in cents)",
                 "subType": "integer"
+            },
+            {
+                "type": "3",
+                "name": "Frequency Array",
+                "group": "Filter Response Input"
             }
         ],
         "portsOut": [
             {
                 "type": "2",
                 "name": "Audio Out"
+            },
+            {
+                "type": "3",
+                "name": "Magnitude Response Array"
+            },
+            {
+                "type": "3",
+                "name": "Phase Response Array"
+            },
+            {
+                "type": "0",
+                "name": "Response Arrays Length",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.BiquadFilter_v2"

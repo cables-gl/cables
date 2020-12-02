@@ -24,14 +24,62 @@ const inQ = op.inFloat("q", 0.0001);
 const inGain = op.inFloat("gain", 0);
 
 const inDetune = op.inInt("detune", 0);
+const inFrequencyArray = op.inArray("Frequency Array");
 
 op.setPortGroup("Filter Settings", [inFilterType, inFrequency, inQ, inGain]);
 op.setPortGroup("Detune (in cents)", [inDetune]);
+op.setPortGroup("Filter Response Input", [inFrequencyArray]);
 const outAudio = op.outObject("Audio Out");
+const outMagnitudeResponseArray = op.outArray("Magnitude Response Array");
+const outPhaseResponseArray = op.outArray("Phase Response Array");
+const responseArraysLength = op.outNumber("Response Arrays Length");
 
 let oldAudioIn = null;
 filterNode.type = inFilterType.get();
 
+let oldLength = 0;
+let frequencyArray = null;
+let phaseResponseArray = null;
+let magnitudeResponseArray = null;
+
+function updateFrequencyResponse()
+{
+    /* TODO optimize */
+    const frequencies = inFrequencyArray.get();
+    if (!frequencies) return;
+
+    if (inAudio.get())
+    {
+        if (oldLength !== frequencies.length)
+        {
+            frequencyArray = new Float32Array(frequencies);
+            phaseResponseArray = new Float32Array(frequencies.length);
+            magnitudeResponseArray = new Float32Array(frequencies.length);
+            oldLength = frequencies.length;
+        }
+
+        if (oldLength)
+        {
+            biquadFilter.getFrequencyResponse(frequencyArray, phaseResponseArray, magnitudeResponseArray);
+
+            outMagnitudeResponseArray.set(null);
+            outMagnitudeResponseArray.set(magnitudeResponseArray);
+
+            outPhaseResponseArray.set(null);
+            outPhaseResponseArray.set(phaseResponseArray);
+
+            responseArraysLength.set(frequencies.length);
+        }
+        else
+        {
+            outMagnitudeResponseArray.set(null);
+            outPhaseResponseArray.set(null);
+            responseArraysLength.set(0);
+        }
+    }
+}
+
+inFrequencyArray.onChange = () => updateFrequencyResponse();
 inAudio.onChange = function ()
 {
     if (!inAudio.get())
@@ -75,6 +123,7 @@ inFilterType.onChange = () =>
     });
 
     filterNode.type = type;
+    updateFrequencyResponse();
 };
 
 inFrequency.onChange = () =>
@@ -96,11 +145,13 @@ inFrequency.onChange = () =>
             op.setUiError("freqRange", "The frequency you selected is higher than the possible frequency of " + FREQUENCY_MAX + " Hz.", 1);
         }
     }
+    updateFrequencyResponse();
 };
 
 inDetune.onChange = () =>
 {
     filterNode.detune.setValueAtTime(inDetune.get(), audioContext.currentTime);
+    updateFrequencyResponse();
 };
 
 inQ.onChange = () =>
@@ -114,6 +165,7 @@ inQ.onChange = () =>
     {
         op.setUiError("qRange", null);
     }
+    updateFrequencyResponse();
 };
 
 inGain.onChange = () =>
@@ -126,4 +178,5 @@ inGain.onChange = () =>
     {
         op.setUiError("gainRange", null);
     }
+    updateFrequencyResponse();
 };
