@@ -53,6 +53,7 @@ highFilterNodes.forEach((node, index) =>
     node.frequency.setValueAtTime(clamp(freq, FREQUENCY_MIN, FREQUENCY_MAX), audioContext.currentTime);
     node.gain.setValueAtTime(clamp(0, GAIN_MIN, GAIN_MAX), audioContext.currentTime);
     node.Q.setValueAtTime(clamp(Number(inHighQ.get()), Q_MIN, Q_MAX), audioContext.currentTime);
+
     if (index < SLOPES.length - 1) node.connect(highFilterNodes[index + 1]);
 });
 
@@ -142,7 +143,7 @@ inAudio.onChange = function ()
         else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
     }
     oldAudioIn = inAudio.get();
-    outAudio.set(highFilterNodes[2]);
+    outAudio.set(highFilterNodes[SLOPES.length - 1]);
 };
 
 /*
