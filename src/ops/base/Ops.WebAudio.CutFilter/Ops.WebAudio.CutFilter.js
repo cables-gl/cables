@@ -12,34 +12,102 @@ const Q_MIN = 0.0001;
 const Q_MAX = 1000;
 const GAIN_MIN = -40;
 const GAIN_MAX = 40;
-const SLOPES = [12, 24, 48];
+const SLOPES = [12, 24, 36, 48];
 const inAudio = op.inObject("Audio In");
 
+const inLowActive = op.inBool("Highpass active ", true);
 const inLowSlope = op.inSwitch("Highpass Slope (in dB)", SLOPES, 12);
 const inLowFrequency = op.inFloat("Low Frequency", 250);
 const inLowQ = op.inFloat("Low Q", 0.0001);
-op.setPortGroup("Highpass", [inLowSlope, inLowFrequency, inLowQ]);
+op.setPortGroup("Highpass / Lowcut", [inLowActive, inLowSlope, inLowFrequency, inLowQ]);
 
+const inHighActive = op.inBool("Lowpass active ", true);
 const inHighSlope = op.inSwitch("Lowpass Slope (in dB)", SLOPES, 12);
 const inHighFrequency = op.inFloat("High Frequency", 5000);
 const inHighQ = op.inFloat("High Q", 0.0001);
-op.setPortGroup("Lowpass", [inHighSlope, inHighFrequency, inHighQ]);
+op.setPortGroup("Lowpass / Highcut", [inHighActive, inHighSlope, inHighFrequency, inHighQ]);
 
-const lowFilterNodes = [0, 1, 2]
-    .map(() => audioContext.createBiquadFilter())
-    .forEach((node, index) => {
-        if (index === 0) node.type = "highpass";
+const lowFilterNodes = SLOPES.map((entry) => audioContext.createBiquadFilter());
+const highFilterNodes = SLOPES.map(() => audioContext.createBiquadFilter());
+
+lowFilterNodes.forEach((node, index) =>
+{
+    if (index === 0) node.type = "highpass";
+    else node.type = "peaking";
+
+    const freq = inLowFrequency.get();
+    node.frequency.setValueAtTime(clamp(freq, FREQUENCY_MIN, FREQUENCY_MAX), audioContext.currentTime);
+    node.gain.setValueAtTime(clamp(0, GAIN_MIN, GAIN_MAX), audioContext.currentTime);
+    node.Q.setValueAtTime(clamp(Number(inLowQ.get()), Q_MIN, Q_MAX), audioContext.currentTime);
+
+    if (index < SLOPES.length - 1) node.connect(lowFilterNodes[index + 1]);
+    else node.connect(highFilterNodes[0]);
+});
+
+highFilterNodes.forEach((node, index) =>
+{
+    if (index === 0) node.type = "lowpass";
+    else node.type = "peaking";
+
+    const freq = inHighFrequency.get();
+    node.frequency.setValueAtTime(clamp(freq, FREQUENCY_MIN, FREQUENCY_MAX), audioContext.currentTime);
+    node.gain.setValueAtTime(clamp(0, GAIN_MIN, GAIN_MAX), audioContext.currentTime);
+    node.Q.setValueAtTime(clamp(Number(inHighQ.get()), Q_MIN, Q_MAX), audioContext.currentTime);
+    if (index < SLOPES.length - 1) node.connect(highFilterNodes[index + 1]);
+});
+
+inHighFrequency.onChange = () =>
+{
+    for (let i = 0; i < SLOPES.length; i += 1)
+    {
+        const node = highFilterNodes[i];
+        const freq = inHighFrequency.get();
+        node.frequency.setValueAtTime(clamp(freq, FREQUENCY_MIN, FREQUENCY_MAX), audioContext.currentTime);
+    }
+};
+
+inLowFrequency.onChange = () =>
+{
+    for (let i = 0; i < SLOPES.length; i += 1)
+    {
+        const node = lowFilterNodes[i];
+        const freq = inLowFrequency.get();
+        node.frequency.setValueAtTime(clamp(freq, FREQUENCY_MIN, FREQUENCY_MAX), audioContext.currentTime);
+    }
+};
+
+inLowSlope.onChange = () =>
+{
+    const cascadeAmount = SLOPES.indexOf(Number(inLowSlope.get()));
+    op.log(cascadeAmount);
+    if (cascadeAmount < 0) return;
+
+    for (let i = 0; i < SLOPES.length; i += 1)
+    {
+        const node = lowFilterNodes[i];
+        if (i <= cascadeAmount) node.type = "highpass";
         else node.type = "peaking";
-    });
-const highFilterNodes = [0, 1, 2]
-    .map(() => audioContext.createBiquadFilter())
-    .forEach((node, index) => {
-        if (index === 0) node.type = "lowpass";
+    }
+    op.log(lowFilterNodes.map((node) => node.type));
+};
+
+inHighSlope.onChange = () =>
+{
+    const cascadeAmount = SLOPES.indexOf(Number(inHighSlope.get()));
+    op.log(cascadeAmount);
+    if (cascadeAmount < 0) return;
+
+    for (let i = 0; i < SLOPES.length; i += 1)
+    {
+        const node = highFilterNodes[i];
+        if (i <= cascadeAmount) node.type = "lowpass";
         else node.type = "peaking";
-    });
+    }
+
+    op.log(highFilterNodes.map((node) => node.type));
+};
 
 const outAudio = op.outObject("Audio Out");
-
 
 let oldAudioIn = null;
 
@@ -51,8 +119,9 @@ inAudio.onChange = function ()
         {
             try
             {
-                if (oldAudioIn.disconnect) {
-                    // oldAudioIn.disconnect(lowFilterNode);
+                if (oldAudioIn.disconnect)
+                {
+                    oldAudioIn.disconnect(lowFilterNodes[0]);
                 }
             }
             catch (e)
@@ -67,13 +136,13 @@ inAudio.onChange = function ()
     {
         if (inAudio.val.connect)
         {
-            // inAudio.val.connect(lowFilterNode);
+            inAudio.val.connect(lowFilterNodes[0]);
             op.setUiError("audioCtx", null);
         }
         else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
     }
     oldAudioIn = inAudio.get();
-    outAudio.set(oldAudioIn);
+    outAudio.set(highFilterNodes[2]);
 };
 
 /*
@@ -95,7 +164,6 @@ const FILTER_QS = [
 let lowCascadeAmount = 1;
 let highCascadeAmount = 1;
 
-
 FILTER_SLOPES.forEach((obj, index) => {
     obj.port.onChange = () => {
         const slope = Number(obj.port.get());
@@ -104,8 +172,6 @@ FILTER_SLOPES.forEach((obj, index) => {
         if (cascadeAmount < 1) return;
 
         // https://github.com/Tonejs/Tone.js/blob/dev/Tone/component/filter/Filter.ts
-
-
 
     }
 });
@@ -145,7 +211,5 @@ FILTER_QS.forEach((obj, index) => {
         }
     }
 });
-
-
 
 */
