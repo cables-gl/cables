@@ -3,26 +3,30 @@
 // constants
 const SAMPLES_PER_PIXEL_MIN = 100; // might crash when this is too low
 
-function findMinMax(array) {
-    var min = Infinity;
-    var max = -Infinity;
-    var i = 0;
-    var len = array.length;
-    var curr;
+function findMinMax(array)
+{
+    let min = Infinity;
+    let max = -Infinity;
+    let i = 0;
+    let len = array.length;
+    let curr;
 
-    for(; i < len; i++) {
+    for (; i < len; i++)
+    {
         curr = array[i];
-        if (min > curr) {
+        if (min > curr)
+        {
             min = curr;
         }
-        if (max < curr) {
+        if (max < curr)
+        {
             max = curr;
         }
     }
 
     return {
-        min: min,
-        max: max
+        "min": min,
+        "max": max
     };
 }
 
@@ -41,7 +45,7 @@ const widthPort = op.inValue("Width", 30);
 const samplesPerPixelPort = op.inValue("Samples Per Pixel", 10000);
 const inCalculateUV = op.inBool("Calculate Tex Coords", true);
 const inCalculateTangents = op.inBool("Calculate Tangents/Bitangents", false);
-op.setPortGroup("Render Options",[renderActivePort, showBottomHalfPort, centerPort]);
+op.setPortGroup("Render Options", [renderActivePort, showBottomHalfPort, centerPort]);
 op.setPortGroup("Waveform Settings", [widthPort, samplesPerPixelPort]);
 op.setPortGroup("Mesh Options", [inCalculateUV, inCalculateTangents]);
 // output
@@ -53,12 +57,15 @@ let updating = true;
 audioBufferPort.onChange = samplesPerPixelPort.onChange
 = showBottomHalfPort.onChange = centerPort.onChange
 = widthPort.onChange = inCalculateTangents.onChange
-= inCalculateUV.onChange = () => {
-    updating = true;
-}
+= inCalculateUV.onChange = () =>
+            {
+                updating = true;
+            };
 
-renderPort.onTriggered = () => {
-    if (updating) {
+renderPort.onTriggered = () =>
+{
+    if (updating)
+    {
         extractPeaks();
         updating = false;
     }
@@ -67,15 +74,17 @@ renderPort.onTriggered = () => {
         mesh.render(cgl.getShader());
     }
     nextPort.trigger();
-}
+};
 
 // functions
-function calculateUV(meshPoints) {
+function calculateUV(meshPoints)
+{
     const texCoordsNew = [];
     const xTex = [];
     const yTex = [];
 
-    for (let i = 0; i < meshPoints.length; i += 3) {
+    for (let i = 0; i < meshPoints.length; i += 3)
+    {
         xTex.push(meshPoints[i + 0]);
         yTex.push(meshPoints[i + 1]);
     }
@@ -83,13 +92,14 @@ function calculateUV(meshPoints) {
     const minMaxX = findMinMax(xTex);
     const minMaxY = findMinMax(yTex);
 
-    const normalizedTexX = xTex.map(val => mapRange(val, minMaxX.min, minMaxX.max, 0, 1));
-    const normalizedTexY = yTex.map(val => mapRange(val, minMaxY.min, minMaxY.max, 0, 1));
+    const normalizedTexX = xTex.map((val) => mapRange(val, minMaxX.min, minMaxX.max, 0, 1));
+    const normalizedTexY = yTex.map((val) => mapRange(val, minMaxY.min, minMaxY.max, 0, 1));
 
     const finalTexCoords = [];
 
-    for (let i = 0; i < normalizedTexX.length; i += 1) {
-        finalTexCoords.push(normalizedTexX[i], 1. - normalizedTexY[i]);
+    for (let i = 0; i < normalizedTexX.length; i += 1)
+    {
+        finalTexCoords.push(normalizedTexX[i], 1.0 - normalizedTexY[i]);
     }
 
     return finalTexCoords;
@@ -99,18 +109,21 @@ function createMesh(meshPoints)
 {
     geom.vertices = meshPoints;
 
-    if (inCalculateUV.get()) {
+    if (inCalculateUV.get())
+    {
         const texCoords = calculateUV(meshPoints);
         geom.setTexCoords(texCoords);
-    } else {
+    }
+    else
+    {
         geom.setTexCoords([]);
     }
 
     if (inCalculateTangents.get()) geom.calcTangentsBitangents();
     geom.calculateNormals();
 
-
-    for (let i = 0; i < geom.vertexNormals.length; i += 3) {
+    for (let i = 0; i < geom.vertexNormals.length; i += 3)
+    {
         geom.vertexNormals[i + 2] *= -1;
     }
 
@@ -202,7 +215,9 @@ function extractPeaks()
         {
             op.setUiError("minSamples", "The value for \"Samples Per Pixel\" is lower than the minimum value " + SAMPLES_PER_PIXEL_MIN + ". Therefore the value has been set to " + SAMPLES_PER_PIXEL_MIN + ".", 1);
             samplesPerPixel = SAMPLES_PER_PIXEL_MIN;
-        } else {
+        }
+        else
+        {
             op.setUiError("minSamples", null);
         }
 
@@ -218,15 +233,12 @@ function extractPeaks()
         normalizedArray.length = regularArr.length;
 
         const minMax = findMinMax(regularArr);
-        op.log(minMax);
-        for (let i = 0; i < regularArr.length; i += 1) {
+
+        for (let i = 0; i < regularArr.length; i += 1)
+        {
             normalizedArray[i] = mapRange(regularArr[i], minMax.min, minMax.max, -1, 1);
         }
 
-        for (let i = 0; i < regularArr.length; i += 1) {
-            const xCoord = i / regularArr.length;
-            const yCoord = mapRange(normalizedArray[i], -1, 1, 0, 1);
-        }
         // currently the array contains values like this: [y1top, y1bottom, y2top, ...]
         // we want it to be: [y1top, y2top, ..., y2bottom, y1bottom]
 
@@ -241,7 +253,7 @@ function extractPeaks()
 
         for (var i = 1; i < normalizedArray.length; i += 2)
         {
-            const xCoord = i/normalizedArray.length;
+            const xCoord = i / normalizedArray.length;
             const yCoord = normalizedArray[i];
 
             resortedArr.push(xCoord - offset, yCoord, 0);
@@ -250,17 +262,15 @@ function extractPeaks()
         const minX = resortedArr[0];
         const maxX = resortedArr[resortedArr.length - 3];
 
-
         if (showBottomHalfPort.get())
         {
             for (var i = normalizedArray.length - 2; i >= 0; i -= 2)
             {
-                const xCoord = i/regularArr.length;
+                const xCoord = i / regularArr.length;
                 const yCoord = normalizedArray[i];
                 resortedArr.push(xCoord - offset, yCoord, 0);
             }
         }
-
 
         // re-map range of x-coordinates
         let toMin = 0;
