@@ -723,6 +723,8 @@ Shader.prototype.compile = function ()
     this._needsRecompile = false;
     this.lastCompile = now();
 
+    this._cgl.printError("shader compile");
+
     CGL.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
