@@ -127,7 +127,12 @@ function extractPeaks()
         let samplesPerPixel = samplesPerPixelPort.get();
         if (samplesPerPixel < SAMPLES_PER_PIXEL_MIN)
         {
+            op.setUiError("minSamples", "The value for \"Samples Per Pixel\" is lower than the minimum value " + SAMPLES_PER_PIXEL_MIN + ". Therefore the value has been set to " + SAMPLES_PER_PIXEL_MIN + ".", 1);
             samplesPerPixel = SAMPLES_PER_PIXEL_MIN;
+        }
+        else
+        {
+            op.setUiError("minSamples", null);
         }
         let useMono = true; // TODO: If we make this a parameter, we have to check if the audio actually is stereo
         const peaks = webaudioPeaks(audioBuffer, samplesPerPixel, useMono);
