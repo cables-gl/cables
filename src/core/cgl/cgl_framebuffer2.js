@@ -69,7 +69,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._colorTextures[i] = new Texture(cgl, {
-            "name": "framebuffer2 texture " + i,
+            "name": "fb2 " + this.name + " " + i,
             "isFloatingPointTexture": this._options.isFloatingPointTexture,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
@@ -80,7 +80,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
 
     this._textureDepth = new Texture(cgl, {
-        "name": "framebuffer2 depth texture",
+        "name": "fb2 depth " + this.name,
         "isDepthTexture": true,
         "filter": fil,
         "shadowMap": this._options.shadowMap || false,
