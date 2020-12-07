@@ -91,7 +91,7 @@ const Context = function (_patch)
     simpleShader.setSource(Shader.getDefaultVertexShader(), Shader.getDefaultFragmentShader());
 
     let currentShader = simpleShader;
-    const aborted = false;
+    this.aborted = false;
     const cbResize = [];
 
     this.addEventListener = function (event, cb)
@@ -601,7 +601,11 @@ const Context = function (_patch)
             if (error == this.gl.INVALID_OPERATION) errStr = "INVALID_OPERATION";
             if (error == this.gl.INVALID_FRAMEBUFFER_OPERATION) errStr = "INVALID_FRAMEBUFFER_OPERATION";
             if (error == this.gl.INVALID_VALUE) errStr = "INVALID_VALUE";
-            if (error == this.gl.CONTEXT_LOST_WEBGL) errStr = "CONTEXT_LOST_WEBGL";
+            if (error == this.gl.CONTEXT_LOST_WEBGL)
+            {
+                this.aborted = true;
+                errStr = "CONTEXT_LOST_WEBGL";
+            }
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
             Log.log("gl error: ", str, error, errStr);
