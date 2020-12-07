@@ -553,7 +553,7 @@ Texture.getEmptyTexture = function (cgl)
     if (!cgl)console.error("[getEmptyTexture] no cgl!");
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
-    cgl.tempTextureEmpty = new Texture(cgl);
+    cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
     const data = new Uint8Array(8 * 8 * 4); // .fill(0);
 
     cgl.tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
