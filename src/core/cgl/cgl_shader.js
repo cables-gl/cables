@@ -1284,8 +1284,8 @@ Shader.prototype._linkProgram = function (program)
 
         if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
         {
-            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
-            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
+            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader) || "empty shader infolog");
+            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             console.error(name + " shader linking fail...");
 
             Log.log("srcFrag", this.srcFrag);
