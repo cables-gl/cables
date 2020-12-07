@@ -209,7 +209,6 @@ Texture.prototype.setSize = function (w, h)
 
     if (this._cgl.printError("cgltex"))
     {
-        console.log("wrong cgl tex settings");
         this.printInfo();
         console.log((new Error()).stack);
     }
@@ -296,8 +295,12 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
+    if (this._cgl.printError("[cgl_texture] init"));
+
     this._setFilter();
     this.updateMipMap();
+
+    if (this._cgl.printError("[cgl_texture] init2"));
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
