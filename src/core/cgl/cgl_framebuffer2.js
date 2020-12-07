@@ -79,16 +79,20 @@ const Framebuffer2 = function (cgl, w, h, options)
     let fil = Texture.FILTER_NEAREST;
     if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
 
+    const defaultTexSize = 512;
+
     this._textureDepth = new Texture(cgl, {
         "name": "fb2 depth " + this.name,
         "isDepthTexture": true,
         "filter": fil,
         "shadowMap": this._options.shadowMap || false,
+        "width": w || defaultTexSize,
+        "height": h || defaultTexSize,
     });
 
     if (cgl.aborted) return;
 
-    this.setSize(w || 512, h || 512);
+    this.setSize(w || defaultTexSize, h || defaultTexSize);
 };
 
 Framebuffer2.prototype.getWidth = function ()
