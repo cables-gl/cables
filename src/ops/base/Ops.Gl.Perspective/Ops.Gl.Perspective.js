@@ -9,7 +9,6 @@ const aspect = op.inValue("Aspect Ratio");
 
 const trigger = op.outTrigger("trigger");
 
-
 const cgl = op.patch.cgl;
 
 fovY.onChange = zFar.onChange = zNear.onChange = changed;
@@ -33,6 +32,8 @@ render.onTriggered = function ()
         asp,
         zNear.get(),
         zFar.get());
+
+    // mat4.translate(cgl.pMatrix,cgl.pMatrix,[-0.5,0,0]);
 
     trigger.trigger();
 

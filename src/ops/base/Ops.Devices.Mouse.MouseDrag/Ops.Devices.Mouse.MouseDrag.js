@@ -19,7 +19,6 @@ area.onChange = updateArea;
 
 updateArea();
 
-
 function onMouseMove(e)
 {
     if (e.touches) e = e.touches[0];
@@ -45,21 +44,25 @@ function onMouseMove(e)
     }
 }
 
-
 function onMouseDown(e)
 {
+    try { listenerElement.setPointerCapture(e.pointerId); }
+    catch (_e) {}
+
     pressed = true;
 }
 
 function onMouseUp(e)
 {
+    try { listenerElement.releasePointerCapture(e.pointerId); }
+    catch (e) {}
+
     pressed = false;
     outDragging.set(false);
     lastX = 0;
     lastY = 0;
     firstMove = true;
 }
-
 
 function updateArea()
 {
@@ -111,7 +114,6 @@ active.onChange = function ()
     if (active.get())addListener();
     else removeListener();
 };
-
 
 op.onDelete = function ()
 {
