@@ -21,7 +21,7 @@ function render()
     if (!fb)
     {
         if (cgl.glVersion == 1) fb = new CGL.Framebuffer(cgl, 8, 8, { "name": "colorTexture" });
-        else fb = new CGL.Framebuffer2(cgl, 8, 8, { "name": "colorTexture" });
+        else fb = new CGL.Framebuffer2(cgl, 8, 8, { "name": "colorTexture", "depth": false });
         fb.setFilter(CGL.Texture.FILTER_MIPMAP);
     }
 
