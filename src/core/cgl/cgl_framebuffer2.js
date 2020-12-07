@@ -84,6 +84,8 @@ const Framebuffer2 = function (cgl, w, h, options)
         "shadowMap": this._options.shadowMap || false,
     });
 
+    if (cgl.aborted) return;
+
     this.setSize(w || 512, h || 512);
 };
 
