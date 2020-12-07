@@ -51,6 +51,7 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
 
+
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get() });
 
     tex = new CGL.Texture(cgl,

@@ -73,6 +73,7 @@ const Shader = function (_cgl, _name)
     if (_cgl.glVersion > 1) this.glslVersion = 300;
 
     this.id = simpleId();
+    this._isValid = true;
     this._program = null;
     this._uniforms = [];
     this._drawBuffers = [true];
@@ -121,6 +122,11 @@ const Shader = function (_cgl, _name)
     this._tempInverseViewMatrix = mat4.create();
 
     this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+};
+
+Shader.prototype.isValid = function ()
+{
+    return this._isValid;
 };
 
 Shader.prototype.getCgl = function ()
@@ -735,6 +741,7 @@ Shader.hasChanged = function ()
 
 Shader.prototype.bind = function ()
 {
+    if (!this._isValid) return;
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
@@ -1277,6 +1284,7 @@ Shader.prototype._linkProgram = function (program)
     }
 
     this._cgl.gl.linkProgram(program);
+    this._isValid = true;
 
     if (this._cgl.patch.config.glValidateShader !== false)
     {
@@ -1295,6 +1303,7 @@ Shader.prototype._linkProgram = function (program)
             Log.log("--------------------------------------");
             Log.log(this);
             Log.log("--------------------------------------");
+            this._isValid = false;
 
             this._name = "errorshader";
             this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
