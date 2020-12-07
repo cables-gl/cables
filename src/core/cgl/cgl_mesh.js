@@ -403,6 +403,7 @@ Mesh.prototype._checkAttrLengths = function ()
 
 Mesh.prototype._bind = function (shader)
 {
+    if (!shader.isValid()) return;
     if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
@@ -566,7 +567,7 @@ Mesh.prototype.render = function (shader)
 {
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
-    if (!shader) return;
+    if (!shader || !shader.isValid()) return;
     const i = 0;
 
     if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
