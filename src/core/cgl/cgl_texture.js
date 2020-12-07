@@ -286,6 +286,8 @@ Texture.prototype.initTexture = function (img, filter)
     if (img.width > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.width, this._cgl.maxTexSize);
     if (img.height > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.height, this._cgl.maxTexSize);
 
+    console.log("loaded texture", img.width, img.height);
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
     this.flipped = !this.flip;
