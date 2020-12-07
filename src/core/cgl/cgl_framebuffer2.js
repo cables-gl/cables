@@ -257,27 +257,32 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
-    switch (status)
+
+    if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
     {
-    case this._cgl.gl.FRAMEBUFFER_COMPLETE:
-        break;
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-    case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-        Log.warn("FRAMEBUFFER_UNSUPPORTED");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
-    default:
-        Log.warn("incomplete framebuffer", status, this);
-        throw new Error("Incomplete framebuffer: " + status);
+        console.log("framebuffer incomplete", this);
+        switch (status)
+        {
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+        case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
+            Log.warn("FRAMEBUFFER_UNSUPPORTED");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        default:
+            Log.warn("incomplete framebuffer", status);
+            throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
+        }
     }
+
+
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
