@@ -261,7 +261,7 @@ Framebuffer2.prototype.setSize = function (w, h)
         console.log(err);
     }
 
-    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) throw new Error("Invalid framebuffer");
+    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) console.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
 
     if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
