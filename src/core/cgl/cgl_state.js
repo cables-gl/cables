@@ -176,6 +176,13 @@ const Context = function (_patch)
         // this.gl.getExtension("GL_OES_standard_derivatives");
         const instancingExt = this.gl.getExtension("ANGLE_instanced_arrays") || this.gl;
 
+        this.canvas.addEventListener("webglcontextlost", (event) =>
+        {
+            console.log("canvas lost...", event);
+            this.aborted = true;
+        });
+
+
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
         this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
         this.maxUniformsFrag = this.gl.getParameter(this.gl.MAX_FRAGMENT_UNIFORM_VECTORS);
@@ -188,6 +195,8 @@ const Context = function (_patch)
             this.gl.vertexAttribDivisor = instancingExt.vertexAttribDivisorANGLE.bind(instancingExt);
             this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
         }
+
+
         this.updateSize();
     };
 
