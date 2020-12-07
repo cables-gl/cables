@@ -1547,7 +1547,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     {
         // Log.log(name+' shader compiled...');
     }
-    this._cgl.printError("shader create2");
+    cgl.printError("shader create2");
     return shader;
 };
 
