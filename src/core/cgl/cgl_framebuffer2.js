@@ -274,7 +274,7 @@ Framebuffer2.prototype.setSize = function (w, h)
         Log.warn("FRAMEBUFFER_UNSUPPORTED");
         throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
     default:
-        Log.warn("incomplete framebuffer", status);
+        Log.warn("incomplete framebuffer", status, this);
         throw new Error("Incomplete framebuffer: " + status);
         // throw("Incomplete framebuffer: " + status);
     }
