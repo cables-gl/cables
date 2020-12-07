@@ -39,7 +39,7 @@ a glimpse into your dev-console would help here also.
 
 Which browser are you using? Which operating system? Is the patch exported or running on cables (in the editor)?
 Are you encountering this on a mobile phone? Is your patch integrated into some kind of CMS (i.e. Wordpress)?
-Is your connection to the internet slow? Maybe include the link provided on (cables.gl/browser)[https://cables.gl/browser].
+Is your connection to the internet slow? Maybe include the link provided on [cables.gl/browser](https://cables.gl/browser).
 
 ## Okay, did that, and now?
 
