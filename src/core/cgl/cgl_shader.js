@@ -1482,6 +1482,8 @@ Shader.getErrorFragmentShader = function ()
 
 Shader.createShader = function (cgl, str, type, cglShader)
 {
+    this._cgl.printError("shader create1");
+
     function getBadLines(infoLog)
     {
         const basLines = [];
@@ -1505,9 +1507,9 @@ Shader.createShader = function (cgl, str, type, cglShader)
         if (type == cgl.gl.VERTEX_SHADER) Log.log("VERTEX_SHADER");
         if (type == cgl.gl.FRAGMENT_SHADER) Log.log("FRAGMENT_SHADER");
 
-        console.warn(cgl.gl.getShaderInfoLog(shader));
+        // console.warn(cgl.gl.getShaderInfoLog(shader));
 
-        let infoLog = cgl.gl.getShaderInfoLog(shader);
+        let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<div class=\"shaderErrorCode\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
@@ -1545,6 +1547,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     {
         // Log.log(name+' shader compiled...');
     }
+    this._cgl.printError("shader create2");
     return shader;
 };
 
