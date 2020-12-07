@@ -144,13 +144,14 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 
 Framebuffer2.prototype.setSize = function (w, h)
 {
-    console.log("fb setsize", w, h);
     let i = 0;
     this._width = Math.floor(w);
     this._height = Math.floor(h);
     this._width = Math.min(this._width, this._cgl.maxTexSize);
     this._height = Math.min(this._height, this._cgl.maxTexSize);
 
+
+    console.log("fb setsize", this._width, this._height, this);
 
     profileData.profileFrameBuffercreate++;
 
