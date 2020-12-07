@@ -114,17 +114,17 @@ function updateSizePorts()
 useVPSize.onChange = function ()
 {
     updateSizePorts();
-    if (useVPSize.get())
-    {
-        width.onChange = null;
-        height.onChange = null;
-    }
-    else
-    {
-        width.onChange = updateResolution;
-        height.onChange = updateResolution;
-    }
-    updateResolution();
+    // if (useVPSize.get())
+    // {
+    //     width.onChange = null;
+    //     height.onChange = null;
+    // }
+    // else
+    // {
+    //     width.onChange = updateResolution;
+    //     height.onChange = updateResolution;
+    // }
+    // updateResolution();
 };
 
 op.preRender = function ()
@@ -177,7 +177,7 @@ function onWrapChange()
     if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     reInitEffect = true;
-    updateResolution();
+    // updateResolution();
 }
 
 function onFilterChange()
@@ -187,5 +187,5 @@ function onFilterChange()
     if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
 
     reInitEffect = true;
-    updateResolution();
+    // updateResolution();
 }
