@@ -42,6 +42,8 @@ const Framebuffer2 = function (cgl, w, h, options)
         "isFloatingPointTexture": false,
     };
 
+    this.name = this._options.name || "unknown";
+
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
     if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
@@ -268,7 +270,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
     {
-        console.log("framebuffer incomplete", this);
+        console.log("framebuffer incomplete: " + this.name, this);
         switch (status)
         {
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
