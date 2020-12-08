@@ -27,11 +27,8 @@ function onKeyDown(e)
     }
     else
     {
-        // console.log("keys", e.keyCode, learnedKeyCode.get());
         if (e.keyCode == learnedKeyCode.get())
         {
-            // console.log("keys", e.keyCode, learnedKeyCode.get());
-
             if (modKey.get() == "alt")
             {
                 if (e.altKey === true)

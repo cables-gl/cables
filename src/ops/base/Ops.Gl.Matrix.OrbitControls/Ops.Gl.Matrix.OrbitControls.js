@@ -82,7 +82,7 @@ let doLockPointer = false;
 pointerLock.onChange = function ()
 {
     doLockPointer = pointerLock.get();
-    console.log("doLockPointer", doLockPointer);
+    op.log("doLockPointer", doLockPointer);
 };
 
 const halfCircle = Math.PI;

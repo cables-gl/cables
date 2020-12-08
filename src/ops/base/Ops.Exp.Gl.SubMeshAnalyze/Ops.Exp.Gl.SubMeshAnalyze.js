@@ -1,172 +1,152 @@
 
-var inGeom=op.inObject("geometry");
+let inGeom = op.inObject("geometry");
 
-var inSort=op.inValueSelect("Sort",["None","Z"],"None");
+let inSort = op.inValueSelect("Sort", ["None", "Z"], "None");
 
-var outMin=op.outValue("Min Value");
-var outMax=op.outValue("Max Value");
+let outMin = op.outValue("Min Value");
+let outMax = op.outValue("Max Value");
 
-var outGeom=op.outObject("Result");
-var outValues=op.outArray("Values");
+let outGeom = op.outObject("Result");
+let outValues = op.outArray("Values");
 
-var faceGroups=[];
+let faceGroups = [];
 
-inSort.onChange=analyze;
-inGeom.onChange=analyze;
+inSort.onChange = analyze;
+inGeom.onChange = analyze;
 
 function analyze()
 {
-    var startInit=CABLES.now();
-    // console.log("start submesh analyze...");
-    var sort=inSort.get();
+    let startInit = CABLES.now();
+    let sort = inSort.get();
 
-    var geom=inGeom.get();
-    if(!geom)return;
+    let geom = inGeom.get();
+    if (!geom) return;
 
-    var verts=geom.vertices;
-    var faces=geom.verticesIndices;
-    var i=0;
+    let verts = geom.vertices;
+    let faces = geom.verticesIndices;
+    let i = 0;
 
-    function changeVertIndex(from,to)
+    function changeVertIndex(from, to)
     {
-        for(var i=0;i<faces.length;i++)
+        for (let i = 0; i < faces.length; i++)
         {
-            if(faces[i]==from)
+            if (faces[i] == from)
             {
-                faces[i]=to;
+                faces[i] = to;
             }
         }
     }
 
     // find dupes
-    for(i=0;i<verts.length/3;i++)
+    for (i = 0; i < verts.length / 3; i++)
     {
-        for(var j=0;j<verts.length/3;j++)
+        for (let j = 0; j < verts.length / 3; j++)
         {
-            if(i!=j)
+            if (i != j)
             {
-                if(verts[i*3+0]==verts[j*3+0] && verts[i*3+1]==verts[j*3+1] && verts[i*3+2]==verts[j*3+2] )
+                if (verts[i * 3 + 0] == verts[j * 3 + 0] && verts[i * 3 + 1] == verts[j * 3 + 1] && verts[i * 3 + 2] == verts[j * 3 + 2])
                 {
-                    changeVertIndex(j,i);
+                    changeVertIndex(j, i);
                 }
             }
         }
     }
 
-    var groupCounter=0;
-    faceGroups.length=faces.length/3;
+    let groupCounter = 0;
+    faceGroups.length = faces.length / 3;
 
-    var faceGroupPosCount=[];
-    var faceGroupPos=[];
-    faceGroupPos.length=faces.length/3;
-    faceGroupPosCount.length=faces.length/3;
+    let faceGroupPosCount = [];
+    let faceGroupPos = [];
+    faceGroupPos.length = faces.length / 3;
+    faceGroupPosCount.length = faces.length / 3;
 
-    for(i=0;i<faceGroups.length;i++)
+    for (i = 0; i < faceGroups.length; i++)
     {
-        faceGroups[i]=-1;
+        faceGroups[i] = -1;
     }
 
-    function setFaceGroupByVertIndex(idx,group)
+    function setFaceGroupByVertIndex(idx, group)
     {
-        var i=0;
-        for(i=0;i<faces.length/3;i++)
+        let i = 0;
+        for (i = 0; i < faces.length / 3; i++)
         {
-            if(faceGroups[i]!=group)
+            if (faceGroups[i] != group)
             {
-                if(faces[i*3+0]==idx || faces[i*3+1]==idx || faces[i*3+2]==idx )
+                if (faces[i * 3 + 0] == idx || faces[i * 3 + 1] == idx || faces[i * 3 + 2] == idx)
                 {
-                    faceGroups[i]=group;
+                    faceGroups[i] = group;
 
-                    faceGroupPos[group]=faceGroupPos[group]||0;
-                    faceGroupPosCount[group]=faceGroupPosCount[group]||0;
+                    faceGroupPos[group] = faceGroupPos[group] || 0;
+                    faceGroupPosCount[group] = faceGroupPosCount[group] || 0;
 
-                    if(sort=="Z")
+                    if (sort == "Z")
                     {
-                        faceGroupPos[group]+=(
-                            verts[faces[i*3+0]*3+2]+
-                            verts[faces[i*3+1]*3+2]+
-                            verts[faces[i*3+2]*3+2]
-                            )/3;
+                        faceGroupPos[group] += (
+                            verts[faces[i * 3 + 0] * 3 + 2] +
+                            verts[faces[i * 3 + 1] * 3 + 2] +
+                            verts[faces[i * 3 + 2] * 3 + 2]
+                        ) / 3;
                         faceGroupPosCount[group]++;
                     }
 
-                    if( faces[i*3+0]!=idx ) setFaceGroupByVertIndex( faces[i*3+0], group);
-                    if( faces[i*3+1]!=idx ) setFaceGroupByVertIndex( faces[i*3+1], group);
-                    if( faces[i*3+2]!=idx ) setFaceGroupByVertIndex( faces[i*3+2], group);
+                    if (faces[i * 3 + 0] != idx) setFaceGroupByVertIndex(faces[i * 3 + 0], group);
+                    if (faces[i * 3 + 1] != idx) setFaceGroupByVertIndex(faces[i * 3 + 1], group);
+                    if (faces[i * 3 + 2] != idx) setFaceGroupByVertIndex(faces[i * 3 + 2], group);
                 }
             }
         }
     }
 
-    for(i=0;i<faces.length/3;i++)
+    for (i = 0; i < faces.length / 3; i++)
     {
-        if( faceGroups[i] == -1 )
+        if (faceGroups[i] == -1)
         {
-            setFaceGroupByVertIndex( faces[i*3+0], groupCounter);
-            setFaceGroupByVertIndex( faces[i*3+1], groupCounter);
-            setFaceGroupByVertIndex( faces[i*3+2], groupCounter);
+            setFaceGroupByVertIndex(faces[i * 3 + 0], groupCounter);
+            setFaceGroupByVertIndex(faces[i * 3 + 1], groupCounter);
+            setFaceGroupByVertIndex(faces[i * 3 + 2], groupCounter);
             groupCounter++;
         }
     }
 
-    var arrSubmesh=[];
-    arrSubmesh.length=verts.length/3;
-    groupCounter-=1;
+    let arrSubmesh = [];
+    arrSubmesh.length = verts.length / 3;
+    groupCounter -= 1;
 
-    var maxGroupValue=-999999;
-    var minGroupValue=999999;
+    let maxGroupValue = -999999;
+    let minGroupValue = 999999;
 
 
-    if(sort=="Z")
+    if (sort == "Z")
     {
-        for(i=0;i<faceGroups.length;i++)
+        for (i = 0; i < faceGroups.length; i++)
         {
             var group = faceGroups[i];
-            if(group!=null && faceGroupPosCount[group]!=0)
-                faceGroupPos[group] = (faceGroupPosCount[group]-faceGroupPos[group]) / faceGroupPosCount[group];
-            faceGroupPosCount[group]=0;
+            if (group != null && faceGroupPosCount[group] != 0)
+                faceGroupPos[group] = (faceGroupPosCount[group] - faceGroupPos[group]) / faceGroupPosCount[group];
+            faceGroupPosCount[group] = 0;
         }
     }
 
-    for(i=0;i<faceGroups.length;i++)
+    for (i = 0; i < faceGroups.length; i++)
     {
-        var group=faceGroups[i];// / groupCounter;
+        var group = faceGroups[i];// / groupCounter;
 
-        if(sort=="Z") group=faceGroupPos[group];
+        if (sort == "Z") group = faceGroupPos[group];
 
-        maxGroupValue=Math.max(maxGroupValue,group);
-        minGroupValue=Math.min(minGroupValue,group);
+        maxGroupValue = Math.max(maxGroupValue, group);
+        minGroupValue = Math.min(minGroupValue, group);
 
-        arrSubmesh[faces[i*3+0]]=group;
-        arrSubmesh[faces[i*3+1]]=group;
-        arrSubmesh[faces[i*3+2]]=group;
+        arrSubmesh[faces[i * 3 + 0]] = group;
+        arrSubmesh[faces[i * 3 + 1]] = group;
+        arrSubmesh[faces[i * 3 + 2]] = group;
     }
 
-    // console.log(arrSubmesh);
-    geom.setAttribute("attrSubmesh",arrSubmesh,1);
-
-    // console.log('groups',groupCounter);
-    // console.log('faces',faces.length/3);
-
+    geom.setAttribute("attrSubmesh", arrSubmesh, 1);
     outValues.set(null);
     outValues.set(arrSubmesh);
 
     outGeom.set(null);
     outGeom.set(geom);
-    // console.log(geom.getAttributes());
     outMax.set(maxGroupValue);
     outMin.set(minGroupValue);
-
-
-    // console.log("finished submesh analyze...",(CABLES.now()-startInit));
-
-
-};
-
-
-
-
-
-
-
-
+}

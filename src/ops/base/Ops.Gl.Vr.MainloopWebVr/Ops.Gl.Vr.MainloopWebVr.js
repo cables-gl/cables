@@ -1,112 +1,97 @@
-var inStartVr=op.inTriggerButton("Start VR");
-var inStopVr = op.inTriggerButton('Stop VR');
+let inStartVr = op.inTriggerButton("Start VR");
+let inStopVr = op.inTriggerButton("Stop VR");
 
-var inResMul = op.inValueSlider('Scale Resolution',1);
+let inResMul = op.inValueSlider("Scale Resolution", 1);
 
-var inResizeCancas=op.inValueBool("Resize Canvas",false);
+let inResizeCancas = op.inValueBool("Resize Canvas", false);
 
-var nextVr=op.outTrigger("VR Mainloop");
-var nextNonVr=op.outTrigger("NoVR Mainloop");
+let nextVr = op.outTrigger("VR Mainloop");
+let nextNonVr = op.outTrigger("NoVR Mainloop");
 
-//width and height, needed for raycasting to raycaster ?
-const width=op.outValue("width");
-const height=op.outValue("height");
+// width and height, needed for raycasting to raycaster ?
+const width = op.outValue("width");
+const height = op.outValue("height");
 
-//headset or mobile data
-var outSupported=op.outValue("Supported");
-var outControllerSupport=op.outValue("Controller support");
-var outTotalControllers =op.outValue("Controllers amount");
-var outDisplayName=op.outValue("VR Display");
+// headset or mobile data
+let outSupported = op.outValue("Supported");
+let outControllerSupport = op.outValue("Controller support");
+let outTotalControllers = op.outValue("Controllers amount");
+let outDisplayName = op.outValue("VR Display");
 
-//eyes
-var outFps=op.outValue("FPS");
-var outEye=op.outValue("Eye");
+// eyes
+let outFps = op.outValue("FPS");
+let outEye = op.outValue("Eye");
 
-//controllers
-var outGamePadLeft = op.outObject("Gamepad object Left");
-var outGamePadRight = op.outObject("Gamepad object Right");
+// controllers
+let outGamePadLeft = op.outObject("Gamepad object Left");
+let outGamePadRight = op.outObject("Gamepad object Right");
 
-//single trigger for now with things like average interpolation
-var singleTrigger = op.outTrigger("single trigger out");
-var useGamepads=op.inValueBool("use gamepads",false);
+// single trigger for now with things like average interpolation
+let singleTrigger = op.outTrigger("single trigger out");
+let useGamepads = op.inValueBool("use gamepads", false);
 
-var outPMatrix=op.outArray("Left PMatrix");
-
-
-const outStarted=op.outValueBool("Started VR",false);
-var buttonEle=null;
-
-const cgl=op.patch.cgl;
-var vrDisplay=null;
-var zero=vec3.create();
-var frameCount=0;
-var frameLast=0;
-var frameData=null;
-var initialRun = true;
-
-var polyfill=null;
-if(window.WebVRPolyfill)polyfill = new WebVRPolyfill({BUFFER_SCALE: 0.5});
+let outPMatrix = op.outArray("Left PMatrix");
 
 
-op.onDelete=function()
+const outStarted = op.outValueBool("Started VR", false);
+let buttonEle = null;
+
+const cgl = op.patch.cgl;
+let vrDisplay = null;
+let zero = vec3.create();
+let frameCount = 0;
+let frameLast = 0;
+let frameData = null;
+let initialRun = true;
+
+let polyfill = null;
+if (window.WebVRPolyfill)polyfill = new WebVRPolyfill({ "BUFFER_SCALE": 0.5 });
+
+
+op.onDelete = function ()
 {
     stopVr();
-    if(buttonEle)removeButton();
-    console.log("deleted");
+    if (buttonEle)removeButton();
+    op.log("deleted");
 };
-inStopVr.onTriggered =stopVr;
+inStopVr.onTriggered = stopVr;
 
-//remove batteries from controllers if both don't connect :(
+let leftEye, rightEye;
 
-// window.addEventListener("gamepadconnected", function(e) {
-//   console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
-//     e.gamepad.index, e.gamepad.id,
-//     e.gamepad.buttons.length, e.gamepad.axes.length);
-
-// });
-
-// window.addEventListener("gamepaddisconnected", function(e) {
-//   console.log("Gamepad disconnected from index %d: %s",
-//     e.gamepad.index, e.gamepad.id);
-// });
-
-var leftEye,rightEye;
-
-var identTranslate=vec3.create();
-vec3.set(identTranslate, 0,0,0);
-var identTranslateView=vec3.create();
-vec3.set(identTranslateView, 0,0,-2);
+let identTranslate = vec3.create();
+vec3.set(identTranslate, 0, 0, 0);
+let identTranslateView = vec3.create();
+vec3.set(identTranslateView, 0, 0, -2);
 
 requestAnimationFrame(renderNoVr);
 
-var started=false;
-inStartVr.onTriggered=startVr;
+let started = false;
+inStartVr.onTriggered = startVr;
 
 
-
-if(navigator.getVRDisplays)
+if (navigator.getVRDisplays)
 {
     outSupported.set(true);
-    navigator.getVRDisplays().then(function(displays)
+    navigator.getVRDisplays().then(function (displays)
     {
         // If a display is available, use it to present the scene
-        if(displays.length > 0)
+        if (displays.length > 0)
         {
             vrDisplay = displays[0];
             outDisplayName.set(vrDisplay.displayName);
-            console.log('Display found',vrDisplay.displayName);
+            op.log("Display found", vrDisplay.displayName);
         }
 
-        if(navigator.getVRDisplays && navigator.getGamepads)
+        if (navigator.getVRDisplays && navigator.getGamepads)
         {
-            console.log('WebVR API and Gamepad API supported.');
+            op.log("WebVR API and Gamepad API supported.");
             outControllerSupport.set(true);
 
-            reportDisplays();//leave for now
+            reportDisplays();// leave for now
         }
         else
         {
-            console.error("could not find vr display...");
+            op.error("could not find vr display...");
         }
     });
 }
@@ -116,56 +101,49 @@ else
 }
 
 
-
-
-
-
-if(outSupported.get())initButton();
-
-
+if (outSupported.get())initButton();
 
 
 function removeButton()
 {
-    if(buttonEle && buttonEle.parentNode)buttonEle.parentNode.removeChild(buttonEle);
-    buttonEle=null;
+    if (buttonEle && buttonEle.parentNode)buttonEle.parentNode.removeChild(buttonEle);
+    buttonEle = null;
 }
 
 function initButton()
 {
-    if(buttonEle)
+    if (buttonEle)
     {
         removeButton();
-        buttonEle=null;
+        buttonEle = null;
     }
 
-    buttonEle = document.createElement('div');
-    var container = op.patch.cgl.canvas.parentElement;
-    if(container)container.appendChild(buttonEle);
-    buttonEle.addEventListener('click', startVr );
-    buttonEle.addEventListener('touchstart', startVr );
+    buttonEle = document.createElement("div");
+    let container = op.patch.cgl.canvas.parentElement;
+    if (container)container.appendChild(buttonEle);
+    buttonEle.addEventListener("click", startVr);
+    buttonEle.addEventListener("touchstart", startVr);
 
-    buttonEle.style.padding="10px";
-    buttonEle.style.position="absolute";
-    buttonEle.style.right="25px";
-    buttonEle.style.top="25px";
-    buttonEle.style.width="50px";
-    buttonEle.style.height="50px";
-    buttonEle.style.cursor="pointer";
-    buttonEle.style['border-radius']="40px";
-    buttonEle.style.background="#444";
-    buttonEle.style["background-repeat"]="no-repeat";
-    buttonEle.style["background-size"]="70%";
-    buttonEle.style["background-position"]="center center";
-    buttonEle.style["z-index"]="9999";
-    buttonEle.style["background-image"]='url(data:image/svg+xml,'+attachments.icon_svg+')';
+    buttonEle.style.padding = "10px";
+    buttonEle.style.position = "absolute";
+    buttonEle.style.right = "25px";
+    buttonEle.style.top = "25px";
+    buttonEle.style.width = "50px";
+    buttonEle.style.height = "50px";
+    buttonEle.style.cursor = "pointer";
+    buttonEle.style["border-radius"] = "40px";
+    buttonEle.style.background = "#444";
+    buttonEle.style["background-repeat"] = "no-repeat";
+    buttonEle.style["background-size"] = "70%";
+    buttonEle.style["background-position"] = "center center";
+    buttonEle.style["z-index"] = "9999";
+    buttonEle.style["background-image"] = "url(data:image/svg+xml," + attachments.icon_svg + ")";
 }
-
 
 
 function renderNoVr()
 {
-    if(started)return;
+    if (started) return;
 
     width.set(cgl.canvasWidth);
     height.set(cgl.canvasHeight);
@@ -198,34 +176,34 @@ function startVr()
     stopVr();
     outStarted.set(false);
 
-    op.patch.cgl.pixelDensity=window.devicePixelRatio;
+    op.patch.cgl.pixelDensity = window.devicePixelRatio;
     op.patch.cgl.updateSize();
-    if(CABLES.UI) gui.setLayout();
+    if (CABLES.UI) gui.setLayout();
 
-    vrDisplay.requestPresent([{ source: cgl.canvas }]).then(
-        function()
+    vrDisplay.requestPresent([{ "source": cgl.canvas }]).then(
+        function ()
         {
-            console.log('Presenting to WebVR display');
-            leftEye = vrDisplay.getEyeParameters('left');
-            rightEye = vrDisplay.getEyeParameters('right');
-            frameData=new VRFrameData();
+            op.log("Presenting to WebVR display");
+            leftEye = vrDisplay.getEyeParameters("left");
+            rightEye = vrDisplay.getEyeParameters("right");
+            frameData = new VRFrameData();
             vrDisplay.requestAnimationFrame(mainloopVr);
-            started=true;
-            if(buttonEle)removeButton();
+            started = true;
+            if (buttonEle)removeButton();
         });
 }
 
 
 function stopVr()
 {
-    if(vrDisplay)
+    if (vrDisplay)
     {
         vrDisplay.exitPresent();
-        console.log('Stopped presenting to WebVR display');
+        op.log("Stopped presenting to WebVR display");
         vrDisplay.cancelAnimationFrame(mainloopVr);
     }
     outStarted.set(false);
-    started=false;
+    started = false;
 
     renderNoVr();
 }
@@ -233,32 +211,32 @@ function stopVr()
 
 function mainloopVr()
 {
-    if(!started)return;
-    //get width and height, maybe need to divide by 2 ?
-    if(cgl.aborted || cgl.canvas.clientWidth===0 || cgl.canvas.clientHeight===0)return;
+    if (!started) return;
+    // get width and height, maybe need to divide by 2 ?
+    if (cgl.aborted || cgl.canvas.clientWidth === 0 || cgl.canvas.clientHeight === 0) return;
 
     mat4.identity(cgl.pMatrix);
     mat4.identity(cgl.vMatrix);
 
-    if(!cgl.canvas && cgl.canvasWidth==-1)
+    if (!cgl.canvas && cgl.canvasWidth == -1)
     {
         cgl.setCanvas(op.patch.config.glCanvasId);
         return;
     }
 
-    if(inResizeCancas.get())
+    if (inResizeCancas.get())
     {
-        cgl.canvas.style.width=leftEye.renderWidth*2;
-        cgl.canvas.style.height=leftEye.renderHeight;
+        cgl.canvas.style.width = leftEye.renderWidth * 2;
+        cgl.canvas.style.height = leftEye.renderHeight;
 
         width.set(leftEye.renderWidth);
         height.set(leftEye.renderHeight);
 
         cgl.updateSize();
-        if(gui)
+        if (gui)
         {
-            gui.rendererWidth=leftEye.renderWidth*2;
-            gui.rendererHeight=leftEye.renderHeight;
+            gui.rendererWidth = leftEye.renderWidth * 2;
+            gui.rendererHeight = leftEye.renderHeight;
             gui.setLayout();
         }
     }
@@ -269,25 +247,24 @@ function mainloopVr()
     }
 
 
-    //VR stuff
-    var vrSceneFrame = vrDisplay.requestAnimationFrame(mainloopVr);
+    // VR stuff
+    let vrSceneFrame = vrDisplay.requestAnimationFrame(mainloopVr);
 
     vrDisplay.getFrameData(frameData);
 
 
-
-    if(useGamepads.get())
+    if (useGamepads.get())
     {
-        var gamepads = navigator.getGamepads();
+        let gamepads = navigator.getGamepads();
         gamePadsOut(gamepads);
     }
 
 
-    if(CABLES.now()-frameLast>1000)
+    if (CABLES.now() - frameLast > 1000)
     {
         outFps.set(frameCount);
-        frameCount=0;
-        frameLast=CABLES.now();
+        frameCount = 0;
+        frameLast = CABLES.now();
     }
 
     renderPre();
@@ -302,7 +279,6 @@ function mainloopVr()
     frameCount++;
 
     singleTrigger.trigger();
-
 }
 
 function renderPre()
@@ -313,9 +289,8 @@ function renderPre()
 
     // cgl.renderStart(cgl,zero,zero);
 
-    CGL.MESH.lastShader=null;
-    CGL.MESH.lastMesh=null;
-
+    CGL.MESH.lastShader = null;
+    CGL.MESH.lastMesh = null;
 }
 
 function renderPost()
@@ -323,7 +298,6 @@ function renderPost()
     cgl.popViewMatrix();
     cgl.popPMatrix();
     // cgl.popBlend(true);
-
 }
 
 function renderEye(which)
@@ -331,60 +305,52 @@ function renderEye(which)
     outEye.set(which);
 
     cgl.pushBlend(true);
-    cgl.gl.blendEquationSeparate( cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD );
-    cgl.gl.blendFuncSeparate( cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA );
+    cgl.gl.blendEquationSeparate(cgl.gl.FUNC_ADD, cgl.gl.FUNC_ADD);
+    cgl.gl.blendFuncSeparate(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA, cgl.gl.ONE, cgl.gl.ONE_MINUS_SRC_ALPHA);
 
-    if(which==0)
+    if (which == 0)
     {
-        cgl.gl.clearColor(0,0,0,1);
+        cgl.gl.clearColor(0, 0, 0, 1);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-
     }
 
     // left eye
 
     cgl.pushPMatrix();
 
-    if(!started)
+    if (!started)
     {
 
     }
     // else if(which==0) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.leftProjectionMatrix);
     // else if(which==1) mat4.multiply(cgl.pMatrix,cgl.pMatrix,frameData.rightProjectionMatrix);
-    else if(which==0)
+    else if (which == 0)
     {
-        cgl.pMatrix=frameData.leftProjectionMatrix;
+        cgl.pMatrix = frameData.leftProjectionMatrix;
         outPMatrix.set(frameData.leftProjectionMatrix);
     }
-    else if(which==1)cgl.pMatrix=frameData.rightProjectionMatrix;
-
+    else if (which == 1)cgl.pMatrix = frameData.rightProjectionMatrix;
 
 
     cgl.pushViewMatrix();
 
     mat4.identity(cgl.vMatrix);
 
-    if(!frameData)
+    if (!frameData)
     {
 
     }
-    else if(which==0) cgl.vMatrix=frameData.leftViewMatrix;
-    else if(which==1) cgl.vMatrix=frameData.rightViewMatrix;
+    else if (which == 0) cgl.vMatrix = frameData.leftViewMatrix;
+    else if (which == 1) cgl.vMatrix = frameData.rightViewMatrix;
 
-// if(frameData)
-// console.log(frameData.leftViewMatrix);
-
-    if(!started)
+    if (!started)
     {
 
     }
-    else if(which==1) cgl.setViewPort(cgl.canvasWidth * 0.5, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
-    else if(which==0) cgl.setViewPort(0, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
+    else if (which == 1) cgl.setViewPort(cgl.canvasWidth * 0.5, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
+    else if (which == 0) cgl.setViewPort(0, 0, cgl.canvasWidth * 0.5, cgl.canvasHeight);
 
-        // console.log(leftEye.renderWidth,leftEye.renderHeight);
-
-
-    if(started)nextVr.trigger();
+    if (started)nextVr.trigger();
     else nextNonVr.trigger();
 
     cgl.popViewMatrix();
@@ -392,32 +358,30 @@ function renderEye(which)
 }
 
 
-
 function reportDisplays()
 {
-    navigator.getVRDisplays().then(function(displays)
+    navigator.getVRDisplays().then(function (displays)
     {
-        console.log(displays.length + ' displays');
+        op.log(displays.length + " displays");
 
-        for(var i = 0; i < displays.length; i++)
+        for (let i = 0; i < displays.length; i++)
         {
-            var cap = displays[i].capabilities;
+            let cap = displays[i].capabilities;
             // cap is a VRDisplayCapabilities object
 
-            console.log('Display ' + (i+1) + "\n"
-                  + 'VR Display ID: ' + displays[i].displayId + "\n"
-                  + 'VR Display Name: ' + displays[i].displayName + "\n"
-                  + 'Display can present content: ' + cap.canPresent + "\n"
-                  + 'Display is separate from the computer\'s main display: ' + cap.hasExternalDisplay + "\n"
-                  + 'Display can return position info: ' + cap.hasPosition + "\n"
-                  + 'Display can return orientation info: ' + cap.hasOrientation + "\n"
-                  + 'Display max layers: ' + cap.maxLayers);
+            op.log("Display " + (i + 1) + "\n"
+                  + "VR Display ID: " + displays[i].displayId + "\n"
+                  + "VR Display Name: " + displays[i].displayName + "\n"
+                  + "Display can present content: " + cap.canPresent + "\n"
+                  + "Display is separate from the computer's main display: " + cap.hasExternalDisplay + "\n"
+                  + "Display can return position info: " + cap.hasPosition + "\n"
+                  + "Display can return orientation info: " + cap.hasOrientation + "\n"
+                  + "Display max layers: " + cap.maxLayers);
         }
-    // For VR, controllers will only be active after their corresponding headset is active
-    setTimeout(reportGamepads, 500);
-  });
+        // For VR, controllers will only be active after their corresponding headset is active
+        setTimeout(reportGamepads, 500);
+    });
 }
-
 
 
 function gamePadsOut(gamepads)
@@ -435,13 +399,13 @@ function reportGamepads()
 {
     // //report total controllers connected
     // outTotalControllers.set(gamepads.length);
-    // //if(gamepads.length ===0) console.log("No controllers are connected !");
+    // //if(gamepads.length ===0) op.log("No controllers are connected !");
     // for(var i = 0; i < gamepads.length; ++i)
     // {
     //     var gp = gamepads[i];
     //     if(!gp)continue;
 
-    //     console.log('Gamepad ' + gp.index + '(' + gp.id + ')' + "'\n"
+    //     op.log('Gamepad ' + gp.index + '(' + gp.id + ')' + "'\n"
     //              + 'Associated with VR Display ID: ' + gp.displayId + "'\n"
     //              + 'Gamepad associated with which hand: ' + gp.hand + "'\n"
     //              + 'Available haptic actuators: ' + gp.hapticActuators.length + "'\n"

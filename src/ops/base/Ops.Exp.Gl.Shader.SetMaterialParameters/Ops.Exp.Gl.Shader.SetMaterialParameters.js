@@ -1,24 +1,24 @@
-const exec=op.inTrigger("Trigger");
-const inShader=op.inObject("Shader");
+const exec = op.inTrigger("Trigger");
+const inShader = op.inObject("Shader");
 
-const next=op.outTrigger("Next");
-const outShader=op.outObject("Result Shader");
+const next = op.outTrigger("Next");
+const outShader = op.outObject("Result Shader");
 
-var cgl=op.patch.cgl;
-var shaderLastCompile=0;
-var shader=null;
-var uniformPorts=[];
+let cgl = op.patch.cgl;
+let shaderLastCompile = 0;
+let shader = null;
+let uniformPorts = [];
 
 
-op.onLoaded=function()
+op.onLoaded = function ()
 {
-    if(op.portsInData)
+    if (op.portsInData)
     {
-        for(var i=0;i<op.portsInData.length;i++)
+        for (let i = 0; i < op.portsInData.length; i++)
         {
-            for(var j=0;j<uniformPorts.length;j++)
+            for (let j = 0; j < uniformPorts.length; j++)
             {
-                if(uniformPorts[j].name==op.portsInData[i].name && op.portsInData[i].value!==undefined)
+                if (uniformPorts[j].name == op.portsInData[i].name && op.portsInData[i].value !== undefined)
                 {
                     uniformPorts[j].set(op.portsInData[i].value);
                 }
@@ -29,59 +29,58 @@ op.onLoaded=function()
 
 function setupPorts(uniforms)
 {
-    for(var i=0;i<uniforms.length;i++)
+    for (let i = 0; i < uniforms.length; i++)
     {
-        var p=null;
-        for(var j=0;j<uniformPorts.length;j++)
-            if(uniformPorts[j].name==uniforms[i].getName())
-                p=uniformPorts[j];
+        let p = null;
+        for (let j = 0; j < uniformPorts.length; j++)
+            if (uniformPorts[j].name == uniforms[i].getName())
+                p = uniformPorts[j];
 
-        if(!p && uniforms[i].getType()=='f')
+        if (!p && uniforms[i].getType() == "f")
         {
-            p=op.inValue(uniforms[i].getName(),uniforms[i].getValue());
+            p = op.inValue(uniforms[i].getName(), uniforms[i].getValue());
         }
-        else if(!p && uniforms[i].getType()=='t')
+        else if (!p && uniforms[i].getType() == "t")
         {
-            p=op.inTexture(uniforms[i].getName());
+            p = op.inTexture(uniforms[i].getName());
         }
 
-        if(p)
+        if (p)
         {
-            p.uniform=uniforms[i];
-            // console.log(p.name,p.uniform.getValue());
-            uniformPorts[i]=p;
+            p.uniform = uniforms[i];
+            uniformPorts[i] = p;
         }
     }
 }
 
 function resetUniforms()
 {
-    var uniforms=shader.getUniforms();
-    for(var i=0;i<uniforms.length;i++)
+    let uniforms = shader.getUniforms();
+    for (let i = 0; i < uniforms.length; i++)
     {
-        var p=uniformPorts[i];
-        if(!p)continue;
+        let p = uniformPorts[i];
+        if (!p) continue;
         p.uniform.setValue(p.oldValue);
     }
 }
 
 function bindTextures()
 {
-    if(oldBindTexture)oldBindTexture();
+    if (oldBindTexture)oldBindTexture();
 
-    var uniforms=shader.getUniforms();
-    for(var i=0;i<uniforms.length;i++)
+    let uniforms = shader.getUniforms();
+    for (let i = 0; i < uniforms.length; i++)
     {
-        var p=uniformPorts[i];
-        if(!p)continue;
-        if(p.type==CABLES.OP_PORT_TYPE_TEXTURE)
+        let p = uniformPorts[i];
+        if (!p) continue;
+        if (p.type == CABLES.OP_PORT_TYPE_TEXTURE)
         {
-            const slot=p.uniform.getValue();
-            p.oldValue=p.uniform.getValue();
-            
-            if(p.get())
+            const slot = p.uniform.getValue();
+            p.oldValue = p.uniform.getValue();
+
+            if (p.get())
             {
-                cgl.setTexture(0+slot,p.get().tex);
+                cgl.setTexture(0 + slot, p.get().tex);
                 // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, p.get().tex);
             }
         }
@@ -90,87 +89,84 @@ function bindTextures()
 
 function setUniforms()
 {
-    
-    var uniforms=shader.getUniforms();
-    for(var i=0;i<uniforms.length;i++)
+    let uniforms = shader.getUniforms();
+    for (let i = 0; i < uniforms.length; i++)
     {
-        var p=uniformPorts[i];
-        if(!p)continue;
-        if(p.type!=CABLES.OP_PORT_TYPE_TEXTURE)
+        let p = uniformPorts[i];
+        if (!p) continue;
+        if (p.type != CABLES.OP_PORT_TYPE_TEXTURE)
         {
-            p.oldValue=p.uniform.getValue();
+            p.oldValue = p.uniform.getValue();
             p.uniform.setValue(p.get());
         }
     }
 }
 
-var oldBindTexture=null;
+var oldBindTexture = null;
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    if(!shader)return;
-    
+    if (!shader) return;
+
     cgl.pushShader(shader);
 
-    if(shaderLastCompile!=shader.lastCompile)
+    if (shaderLastCompile != shader.lastCompile)
     {
-        console.log('shader has changed...');
+        op.log("shader has changed...");
         resetShader();
     }
 
-    if(shader.bindTextures)
+    if (shader.bindTextures)
     {
-        oldBindTexture=shader.bindTextures;
-        shader.bindTextures=bindTextures;
+        oldBindTexture = shader.bindTextures;
+        shader.bindTextures = bindTextures;
     }
     // if(shader.bindTextures) shader.bindTextures();
     setUniforms();
     next.trigger();
-    
-    shader.bindTextures=oldBindTexture;
+
+    shader.bindTextures = oldBindTexture;
     resetUniforms();
-    
+
     cgl.popShader();
 };
 
-inShader.onChange=resetShader;
+inShader.onChange = resetShader;
 
 function resetShader()
 {
-    shader=inShader.get();
+    shader = inShader.get();
 
-    if(!shader)
+    if (!shader)
     {
-        console.log("RESET!!!");
+        op.log("RESET!!!");
         return;
     }
 
-    var unis=shader.getUniforms();
+    let unis = shader.getUniforms();
 
-    shaderLastCompile=shader.lastCompile;
+    shaderLastCompile = shader.lastCompile;
 
     setupPorts(unis);
-    
+
     // remove unneeded ports...
-    for(var i=0;i<uniformPorts.length;i++)
+    for (let i = 0; i < uniformPorts.length; i++)
     {
-        var foundUni=false;
-        for(var j=0;j<unis.length;j++)
+        let foundUni = false;
+        for (let j = 0; j < unis.length; j++)
         {
-            if(uniformPorts[i].name!=unis[j].getName())
+            if (uniformPorts[i].name != unis[j].getName())
             {
-                foundUni=true;
+                foundUni = true;
             }
         }
-    
-        if(!foundUni)
+
+        if (!foundUni)
         {
-            console.log('found port to remove',uniformPorts[i].name);
+            op.log("found port to remove", uniformPorts[i].name);
             uniformPorts[i].remove();
         }
-
-
     }
-    
+
     outShader.set(shader);
 }

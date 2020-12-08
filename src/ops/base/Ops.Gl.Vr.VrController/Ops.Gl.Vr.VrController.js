@@ -30,8 +30,5 @@ function update()
     outPosY.set(gp.pose.position[1]);
     outPosZ.set(gp.pose.position[2]);
 
-
-    // console.log(gp);
-
     next.trigger();
 }

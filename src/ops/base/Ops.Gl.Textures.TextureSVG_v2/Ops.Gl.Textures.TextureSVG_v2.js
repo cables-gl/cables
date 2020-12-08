@@ -88,7 +88,6 @@ function reload()
             data = "data:image/svg+xml," + _data;
 
             data = data.replace(/#/g, "%23");
-            // console.log(data);
 
             op.patch.loading.finished(loadingId);
             update();
@@ -108,15 +107,12 @@ function update()
         outLoaded.set(false);
     //     op.patch.loading.finished(loadingId);
     //     op.uiAttr( { 'error': 'Could not load SVG file!' } );
-    //     console.log('Could not load SVG file');
-    //     console.log(e);
     };
 
     outLoaded.set(false);
 
     img.onload = function ()
     {
-        // console.log("textsvg",performance.now()-startTime);
         createCanvas();
         op.patch.loading.finished(loadingId);
         canvas.width = texWidth.get();
