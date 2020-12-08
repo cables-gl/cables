@@ -1,20 +1,22 @@
 const
-    inTrigger=op.inTrigger("Trigger"),
-    inTex=op.inTexture("Texture"),
-    inStrength=op.inFloatSlider("Strength",1),
-    inScale=op.inFloat("Scale",1),
-    inClamp=op.inBool("Clamp",false),
-    inDebug=op.inBool("Debug Bounds",false),
-    inOffsetX=op.inFloat("Offset X",0),
-    inOffsetY=op.inFloat("Offset Y",0),
-    next=op.outTrigger("Next");
+    inTrigger = op.inTrigger("Trigger"),
+    inTex = op.inTexture("Texture"),
+    inStrength = op.inFloatSlider("Strength", 1),
+    inScale = op.inFloat("Scale", 1),
+    inClamp = op.inBool("Clamp", false),
+    inDebug = op.inBool("Debug Bounds", false),
+    inOffsetX = op.inFloat("Offset X", 0),
+    inOffsetY = op.inFloat("Offset Y", 0),
+    inMode = op.inSwitch("Method", ["Add", "Mul"], "Add"),
+    next = op.outTrigger("Next");
 
-inTex.onChange=
-    inClamp.onChange=
-    inDebug.onChange=updateDefines;
-inTrigger.onTriggered=render;
+inTex.onChange =
+    inClamp.onChange =
+    inMode.onChange =
+    inDebug.onChange = updateDefines;
+inTrigger.onTriggered = render;
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -32,14 +34,16 @@ mod.addModule({
 });
 
 mod.addUniformVert("t", "MOD_texture", 0);
-mod.addUniformVert("2f", "MOD_offset", inOffsetX,inOffsetY);
+mod.addUniformVert("2f", "MOD_offset", inOffsetX, inOffsetY);
 mod.addUniformVert("f", "MOD_scale", inScale);
 mod.addUniformVert("f", "MOD_strength", inStrength);
 
 function updateDefines()
 {
-    mod.toggleDefine("MOD_CLAMP",inClamp.get());
-    mod.toggleDefine("MOD_DEBUG",inDebug.get());
+    mod.toggleDefine("MOD_CLAMP", inClamp.get());
+    mod.toggleDefine("MOD_DEBUG", inDebug.get());
+    mod.toggleDefine("METH_ADD", inMode.get() == "Add");
+    mod.toggleDefine("METH_MUL", inMode.get() == "Mul");
 }
 
 function render()

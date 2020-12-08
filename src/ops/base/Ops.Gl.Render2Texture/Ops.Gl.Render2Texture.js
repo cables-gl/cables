@@ -72,6 +72,7 @@ function doRender()
 
             fb = new CGL.Framebuffer2(cgl, 8, 8,
                 {
+                    "name": "render2texture " + op.id,
                     "isFloatingPointTexture": fpTexture.get(),
                     "multisampling": ms,
                     "wrap": selectedWrap,
