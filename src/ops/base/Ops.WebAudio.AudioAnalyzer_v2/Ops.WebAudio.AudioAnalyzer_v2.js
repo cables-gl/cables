@@ -78,7 +78,7 @@ function updateAnalyser()
         analyser.minDecibels = minDecibels;
         analyser.maxDecibels = maxDecibels;
 
-        if (minDecibels < MAX_DBFS_RANGE_24_BIT)
+        if (minDecibels <= MAX_DBFS_RANGE_24_BIT)
         {
             op.setUiError("maxDbRangeMin",
                 "Your minimum is below the lowest possible dBFS value: "
