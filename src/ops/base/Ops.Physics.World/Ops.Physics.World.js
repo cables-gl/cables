@@ -121,6 +121,7 @@ function draw()
 
         if (world.bodies[i].shapes[0].type == CANNON.Shape.types.BOX)
         {
+            // console.log(world.bodies[i].shapes[0].halfExtents);
             meshCube.render(
                 world.bodies[i].shapes[0].halfExtents.x,
                 world.bodies[i].shapes[0].halfExtents.y,

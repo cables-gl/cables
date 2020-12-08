@@ -65,14 +65,14 @@ function updateUI()
     {
         inWidth.setUiAttribs({ "greyout": true });
         inHeight.setUiAttribs({ "greyout": true });
-        inWidth.set(cgl.getViewPort()[2]);
-        inHeight.set(cgl.getViewPort()[3]);
     }
     else if (inVPSize.get() === false)
     {
         inWidth.setUiAttribs({ "greyout": false });
         inHeight.setUiAttribs({ "greyout": false });
     }
+    inWidth.set(cgl.getViewPort()[2]);
+    inHeight.set(cgl.getViewPort()[3]);
 }
 
 function initFbLater()
@@ -107,8 +107,14 @@ function initFb()
 
     fb = null;
 
-    const w = inWidth.get();
-    const h = inHeight.get();
+    let w = inWidth.get();
+    let h = inHeight.get();
+
+    if (inVPSize.get())
+    {
+        w = cgl.getViewPort()[2];
+        h = cgl.getViewPort()[3];
+    }
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
