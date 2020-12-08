@@ -82,6 +82,7 @@ function initFb()
 
     fb = new CGL.Framebuffer2(cgl, w, h,
         {
+            "name": "shader2texture" + op.id,
             "isFloatingPointTexture": inFloatingPoint.get(),
             "multisampling": false,
             "wrap": selectedWrap,

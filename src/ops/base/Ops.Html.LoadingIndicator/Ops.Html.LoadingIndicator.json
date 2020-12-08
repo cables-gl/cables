@@ -1,0 +1,41 @@
+{
+    "id": "e102834c-6dcf-459c-9e22-44ebccfc0d3b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1605699580894
+        },
+        {
+            "message": "Ops.User.pandur.loadingicon renamed to Ops.Html.LoadingIcon",
+            "author": "pandur",
+            "date": 1607066550466
+        },
+        {
+            "message": "Ops.Html.LoadingIcon renamed to Ops.Html.LoadingIndicator",
+            "author": "pandur",
+            "date": 1607066879753
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1605699652435,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Style index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Style"
+            }
+        ],
+        "name": "Ops.Html.LoadingIndicator"
+    }
+}

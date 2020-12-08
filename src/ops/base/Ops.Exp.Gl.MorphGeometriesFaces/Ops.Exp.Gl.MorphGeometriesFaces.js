@@ -1,125 +1,123 @@
-var render=op.inTrigger("Render");
-var next=op.outTrigger("Next");
+let render = op.inTrigger("Render");
+let next = op.outTrigger("Next");
 
-var inGeomA=op.inObject("Geometry 1");
-var inGeomB=op.inObject("Geometry 2");
+let inGeomA = op.inObject("Geometry 1");
+let inGeomB = op.inObject("Geometry 2");
 
-var inFade=op.inValueSlider("Fade");
+let inFade = op.inValueSlider("Fade");
 
-var inStart=op.inValueSlider("Start");
-var inEnd=op.inValueSlider("End");
+let inStart = op.inValueSlider("Start");
+let inEnd = op.inValueSlider("End");
 
 
-var cgl=op.patch.cgl;
-var shader=null;
-var mesh=null;
-var module=null;
-var needsRebuild=true;
-var uniFade=null;
-inGeomA.onChange=rebuildLater;
-inGeomB.onChange=rebuildLater;
+let cgl = op.patch.cgl;
+let shader = null;
+let mesh = null;
+let module = null;
+let needsRebuild = true;
+let uniFade = null;
+inGeomA.onChange = rebuildLater;
+inGeomB.onChange = rebuildLater;
 
-var srcHeadVert=''
-    .endl()+'IN vec3 MOD_morphTarget;'
+let srcHeadVert = ""
+    .endl() + "IN vec3 MOD_morphTarget;"
     // .endl()+'UNI float MOD_fade;'
-    .endl()+'UNI float MOD_vert_start;'
-    .endl()+'UNI float MOD_vert_end;'
+    .endl() + "UNI float MOD_vert_start;"
+    .endl() + "UNI float MOD_vert_end;"
     .endl();
 
-var srcBodyVert=attachments.morph_faces_vert;
+let srcBodyVert = attachments.morph_faces_vert;
 
 
 function removeModule()
 {
-    if(shader && module)
+    if (shader && module)
     {
         shader.removeModule(module);
-        shader=null;
+        shader = null;
     }
 }
 
-render.onLinkChanged=removeModule;
+render.onLinkChanged = removeModule;
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    
-    if(cgl.getShader()!=shader)
+    if (cgl.getShader() != shader)
     {
-        if(shader) removeModule();
+        if (shader) removeModule();
 
-        shader=cgl.getShader();
+        shader = cgl.getShader();
 
-        module=shader.addModule(
+        module = shader.addModule(
             {
-                priority:-11,
-                title:op.objName,
+                "priority": -11,
+                "title": op.objName,
 
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
-        console.log('morph module inited');
-    
-        uniFade=new CGL.Uniform(shader,'f',module.prefix+'fade',inFade);
-        
-        inStart.uni=new CGL.Uniform(shader,'f',module.prefix+'vert_start',0);
-        inEnd.uni=new CGL.Uniform(shader,'f',module.prefix+'vert_end',2000);
-        
+        op.log("morph module inited");
+
+        uniFade = new CGL.Uniform(shader, "f", module.prefix + "fade", inFade);
+
+        inStart.uni = new CGL.Uniform(shader, "f", module.prefix + "vert_start", 0);
+        inEnd.uni = new CGL.Uniform(shader, "f", module.prefix + "vert_end", 2000);
+
         updateStart();
         updateEnd();
 
-        needsRebuild=true;
+        needsRebuild = true;
     }
 
-    if(needsRebuild)rebuild();
-    if(!mesh)return;
+    if (needsRebuild)rebuild();
+    if (!mesh) return;
 
     mesh.render(cgl.getShader());
-    
+
     next.trigger();
 };
 
-inStart.onChange=updateStart;
-inEnd.onChange=updateEnd;
+inStart.onChange = updateStart;
+inEnd.onChange = updateEnd;
 
 function updateStart()
 {
-    if(inStart.uni && inGeomA.get())
-        inStart.uni.setValue(inStart.get()*inGeomA.get().vertices.length/3);
+    if (inStart.uni && inGeomA.get())
+        inStart.uni.setValue(inStart.get() * inGeomA.get().vertices.length / 3);
 }
 
 function updateEnd()
 {
-    if(inEnd.uni && inGeomA.get())
-        inEnd.uni.setValue(inEnd.get()*inGeomA.get().vertices.length/3);
+    if (inEnd.uni && inGeomA.get())
+        inEnd.uni.setValue(inEnd.get() * inGeomA.get().vertices.length / 3);
 }
 
 function doRender()
 {
-    next.trigger();    
+    next.trigger();
 }
 
 function rebuildLater()
 {
-    needsRebuild=true;
+    needsRebuild = true;
 }
 
 function rebuild()
 {
-    if(inGeomB.get() && inGeomA.get() && module)
+    if (inGeomB.get() && inGeomA.get() && module)
     {
-        var geom=inGeomA.get();
+        let geom = inGeomA.get();
 
-        mesh=new CGL.Mesh(cgl,geom);
-        mesh.addVertexNumbers=true;
-        mesh.addAttribute(module.prefix+'morphTarget',inGeomB.get().vertices,3);
+        mesh = new CGL.Mesh(cgl, geom);
+        mesh.addVertexNumbers = true;
+        mesh.addAttribute(module.prefix + "morphTarget", inGeomB.get().vertices, 3);
 
-        needsRebuild=false;
+        needsRebuild = false;
     }
     else
     {
-        // console.log('no rebuild');
-        mesh=null;
+        mesh = null;
     }
 }

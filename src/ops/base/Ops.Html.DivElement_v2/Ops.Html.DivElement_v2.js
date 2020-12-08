@@ -90,8 +90,6 @@ function updateStyle()
     if (!div.parentElement)
     {
         canvas.appendChild(div);
-
-        // console.log("parent:", div.parentElement);
     }
 
     warning();

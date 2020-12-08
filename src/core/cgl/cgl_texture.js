@@ -136,9 +136,12 @@ Texture.prototype.setSize = function (w, h)
     w = Math.min(w, this._cgl.maxTexSize);
     h = Math.min(h, this._cgl.maxTexSize);
 
+
     w = Math.floor(w);
     h = Math.floor(h);
     if (this.width == w && this.height == h) return;
+
+    console.log("tex setsize", this.name, w, h, this.id);
 
     this.width = w;
     this.height = h;
@@ -206,7 +209,6 @@ Texture.prototype.setSize = function (w, h)
 
     if (this._cgl.printError("cgltex"))
     {
-        console.log("wrong cgl tex settings");
         this.printInfo();
         console.log((new Error()).stack);
     }
@@ -281,6 +283,11 @@ Texture.prototype.initTexture = function (img, filter)
     if (img.height) this.height = img.height;
     if (filter) this.filter = filter;
 
+    if (img.width > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.width, this._cgl.maxTexSize);
+    if (img.height > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.height, this._cgl.maxTexSize);
+
+    console.log("loaded texture", img.width, img.height);
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
     this.flipped = !this.flip;
@@ -288,8 +295,12 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
+    if (this._cgl.printError("[cgl_texture] init"));
+
     this._setFilter();
     this.updateMipMap();
+
+    if (this._cgl.printError("[cgl_texture] init2"));
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
@@ -550,7 +561,7 @@ Texture.getEmptyTexture = function (cgl)
     if (!cgl)console.error("[getEmptyTexture] no cgl!");
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
-    cgl.tempTextureEmpty = new Texture(cgl);
+    cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
     const data = new Uint8Array(8 * 8 * 4); // .fill(0);
 
     cgl.tempTextureEmpty.initFromData(data, 8, 8, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);

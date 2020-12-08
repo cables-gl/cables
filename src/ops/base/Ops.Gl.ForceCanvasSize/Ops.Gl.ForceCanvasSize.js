@@ -157,9 +157,6 @@ inTrigger.onTriggered = function ()
         const rect = cgl.canvas.parentNode.getBoundingClientRect();
         const scX = rect.width / inWidth.get();
         const scY = rect.height / inHeight.get();
-        // console.log("w", rect.width,inWidth.get());
-        // console.log("h", rect.height,inHeight.get());
-        // console.log("scXY!!", scX, scY);
         cgl.canvas.style.transform = "scale(" + Math.min(scX, scY) + ")";
     }
     else

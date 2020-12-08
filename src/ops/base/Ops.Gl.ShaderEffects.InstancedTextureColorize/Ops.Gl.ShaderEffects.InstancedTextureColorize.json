@@ -63,6 +63,15 @@
                 "type": "0",
                 "name": "Offset Y",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Method"
             }
         ],
         "portsOut": [
@@ -71,7 +80,7 @@
                 "name": "Next"
             }
         ],
-        "name": "Ops.User.pandur.TextureColorizeInstanced"
+        "name": "Ops.Gl.ShaderEffects.InstancedTextureColorize"
     },
     "summary": "colorize instanced meshes using a texture",
     "issues": "",
