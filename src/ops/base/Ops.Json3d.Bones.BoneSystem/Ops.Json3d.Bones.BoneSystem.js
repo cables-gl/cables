@@ -1,212 +1,209 @@
 // https://www.khronos.org/opengl/wiki/Skeletal_Animation
 // http://ogldev.atspace.co.uk/www/tutorial38/tutorial38.html
 
-var render=op.inTrigger("Render");
-var inMeshIndex=op.inValueInt("Mesh Index");
+let render = op.inTrigger("Render");
+let inMeshIndex = op.inValueInt("Mesh Index");
 
-var inTime=op.inValue("Time");
+let inTime = op.inValue("Time");
 
-var inFade=op.inValueSlider("Fade Times");
-var inTime2=op.inValue("Time2");
+let inFade = op.inValueSlider("Fade Times");
+let inTime2 = op.inValue("Time2");
 
 
-var next=op.outTrigger("Next");
-var outNumBounes=op.outValue("Num Bones");
-var outSpline=op.outArray("Spline");
-var outJoint=op.outTrigger("Joint Trigger");
+let next = op.outTrigger("Next");
+let outNumBounes = op.outValue("Num Bones");
+let outSpline = op.outArray("Spline");
+let outJoint = op.outTrigger("Joint Trigger");
 
-var points=[];
-var tempMat=mat4.create();
-var tempVec=vec3.create();
-var emptyVec=vec3.create();
-var transVec=vec3.create();
+let points = [];
+let tempMat = mat4.create();
+let tempVec = vec3.create();
+let emptyVec = vec3.create();
+let transVec = vec3.create();
 
-var alwaysEmptyVec=vec3.create();
-var q=quat.create();
-var q2=quat.create();
-var qMat=mat4.create();
-var boneMatrix=mat4.create();
+let alwaysEmptyVec = vec3.create();
+let q = quat.create();
+let q2 = quat.create();
+let qMat = mat4.create();
+let boneMatrix = mat4.create();
 
-var cgl=op.patch.cgl;
-var scene=null;
-var meshIndex=0;
-var bones=0;
-var oldScene=null;
-var boneList=[];
-var fillBoneList=true;
-var pointCounter=0;
+let cgl = op.patch.cgl;
+let scene = null;
+let meshIndex = 0;
+let bones = 0;
+let oldScene = null;
+let boneList = [];
+let fillBoneList = true;
+let pointCounter = 0;
 
-inMeshIndex.onChange=function()
+inMeshIndex.onChange = function ()
 {
-    meshIndex=inMeshIndex.get();
+    meshIndex = inMeshIndex.get();
 };
 
-function findBoneChilds(n,parent,foundBone)
+function findBoneChilds(n, parent, foundBone)
 {
     function isBone(name)
     {
-        if(scene.meshes[meshIndex].bones)
-            for(var i=0;i<scene.meshes[meshIndex].bones.length;i++)
-                if(scene.meshes[meshIndex].bones[i].name==name)
+        if (scene.meshes[meshIndex].bones)
+            for (let i = 0; i < scene.meshes[meshIndex].bones.length; i++)
+                if (scene.meshes[meshIndex].bones[i].name == name)
                     return scene.meshes[meshIndex].bones[i];
         return false;
     }
 
     function findAnimation(name)
     {
-        var an=0;
-        for(var an=0;an<scene.animations.length;an++)
+        var an = 0;
+        for (var an = 0; an < scene.animations.length; an++)
 
-            for(var i=0;i<scene.animations[an].channels.length;i++)
-                if(scene.animations[an].channels[i].name==name)
+            for (let i = 0; i < scene.animations[an].channels.length; i++)
+                if (scene.animations[an].channels[i].name == name)
                     return scene.animations[an].channels[i];
 
         return null;
     }
 
-// if(parent)console.log(parent.name+'  -  '+n.name);
-
-    var time=op.patch.timer.getTime();
-    if(inTime.isLinked() || inTime.get()!==0)time=inTime.get();
-    var time2=inTime2.get();
-
+    let time = op.patch.timer.getTime();
+    if (inTime.isLinked() || inTime.get() !== 0)time = inTime.get();
+    let time2 = inTime2.get();
 
 
     cgl.pushModelMatrix();
 
-    var bone=isBone(n.name);
+    let bone = isBone(n.name);
 
-    if( (bone||foundBone) && n!=scene.rootnode)
+    if ((bone || foundBone) && n != scene.rootnode)
     {
-        foundBone=true;
+        foundBone = true;
 
-        if(!n.anim)
+        if (!n.anim)
         {
             // create anim objects for translation/rotation
-            var anim=findAnimation(n.name);
-            if(anim)
+            let anim = findAnimation(n.name);
+            if (anim)
             {
-                n.anim=anim;
+                n.anim = anim;
 
-                if(anim && !n.quatAnimX && anim.rotationkeys)
+                if (anim && !n.quatAnimX && anim.rotationkeys)
                 {
-                    n.quatAnimX=new CABLES.Anim();
-                    n.quatAnimY=new CABLES.Anim();
-                    n.quatAnimZ=new CABLES.Anim();
-                    n.quatAnimW=new CABLES.Anim();
+                    n.quatAnimX = new CABLES.Anim();
+                    n.quatAnimY = new CABLES.Anim();
+                    n.quatAnimZ = new CABLES.Anim();
+                    n.quatAnimW = new CABLES.Anim();
 
-                    for(var k in anim.rotationkeys)
+                    for (var k in anim.rotationkeys)
                     {
-                        n.quatAnimX.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][1] );
-                        n.quatAnimY.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][2] );
-                        n.quatAnimZ.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][3] );
-                        n.quatAnimW.setValue( anim.rotationkeys[k][0],anim.rotationkeys[k][1][0] );
+                        n.quatAnimX.setValue(anim.rotationkeys[k][0], anim.rotationkeys[k][1][1]);
+                        n.quatAnimY.setValue(anim.rotationkeys[k][0], anim.rotationkeys[k][1][2]);
+                        n.quatAnimZ.setValue(anim.rotationkeys[k][0], anim.rotationkeys[k][1][3]);
+                        n.quatAnimW.setValue(anim.rotationkeys[k][0], anim.rotationkeys[k][1][0]);
                     }
                 }
-                if(anim && !n.posAnimX && anim.positionkeys)
+                if (anim && !n.posAnimX && anim.positionkeys)
                 {
-                    n.posAnimX=new CABLES.Anim();
-                    n.posAnimY=new CABLES.Anim();
-                    n.posAnimZ=new CABLES.Anim();
+                    n.posAnimX = new CABLES.Anim();
+                    n.posAnimY = new CABLES.Anim();
+                    n.posAnimZ = new CABLES.Anim();
 
-                    for(var k in anim.positionkeys)
+                    for (var k in anim.positionkeys)
                     {
-                        n.posAnimX.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][0] );
-                        n.posAnimY.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][1] );
-                        n.posAnimZ.setValue( anim.positionkeys[k][0],anim.positionkeys[k][1][2] );
+                        n.posAnimX.setValue(anim.positionkeys[k][0], anim.positionkeys[k][1][0]);
+                        n.posAnimY.setValue(anim.positionkeys[k][0], anim.positionkeys[k][1][1]);
+                        n.posAnimZ.setValue(anim.positionkeys[k][0], anim.positionkeys[k][1][2]);
                     }
                 }
             }
         }
 
-        if(n.posAnimX)
+        if (n.posAnimX)
         {
-            transVec[0]=n.posAnimX.getValue(time);
-            transVec[1]=n.posAnimY.getValue(time);
-            transVec[2]=n.posAnimZ.getValue(time);
+            transVec[0] = n.posAnimX.getValue(time);
+            transVec[1] = n.posAnimY.getValue(time);
+            transVec[2] = n.posAnimZ.getValue(time);
 
-            if(inFade.get()!=0)
+            if (inFade.get() != 0)
             {
-                transVec[0]=(transVec[0]*(1.0-inFade.get())) + (n.posAnimX.getValue(time2)*inFade.get());
-                transVec[1]=(transVec[1]*(1.0-inFade.get())) + (n.posAnimY.getValue(time2)*inFade.get());
-                transVec[2]=(transVec[2]*(1.0-inFade.get())) + (n.posAnimZ.getValue(time2)*inFade.get());
+                transVec[0] = (transVec[0] * (1.0 - inFade.get())) + (n.posAnimX.getValue(time2) * inFade.get());
+                transVec[1] = (transVec[1] * (1.0 - inFade.get())) + (n.posAnimY.getValue(time2) * inFade.get());
+                transVec[2] = (transVec[2] * (1.0 - inFade.get())) + (n.posAnimZ.getValue(time2) * inFade.get());
 
-                mat4.translate(cgl.mMatrix,cgl.mMatrix,transVec);
+                mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
             }
             else
             {
-                mat4.translate(cgl.mMatrix,cgl.mMatrix,transVec);
+                mat4.translate(cgl.mMatrix, cgl.mMatrix, transVec);
             }
         }
 
-        if(n.quatAnimX)
+        if (n.quatAnimX)
         {
-            CABLES.TL.Anim.slerpQuaternion(time,q,
+            CABLES.TL.Anim.slerpQuaternion(time, q,
                 n.quatAnimX,
                 n.quatAnimY,
                 n.quatAnimZ,
                 n.quatAnimW);
 
-            if(inFade.get()!=0)
+            if (inFade.get() != 0)
             {
-                CABLES.TL.Anim.slerpQuaternion(time2,q2,
+                CABLES.TL.Anim.slerpQuaternion(time2, q2,
                     n.quatAnimX,
                     n.quatAnimY,
                     n.quatAnimZ,
                     n.quatAnimW);
-                quat.slerp(q,q,q2,inFade.get());
+                quat.slerp(q, q, q2, inFade.get());
             }
 
             mat4.fromQuat(qMat, q);
-            mat4.multiply(cgl.mMatrix,cgl.mMatrix, qMat);
+            mat4.multiply(cgl.mMatrix, cgl.mMatrix, qMat);
         }
 
         // get position
-        vec3.transformMat4( tempVec, alwaysEmptyVec, cgl.mMatrix );
-        if(!n.boneMatrix)
+        vec3.transformMat4(tempVec, alwaysEmptyVec, cgl.mMatrix);
+        if (!n.boneMatrix)
         {
-            n.boneMatrix=mat4.create();
-            n.transformed=vec3.create();
+            n.boneMatrix = mat4.create();
+            n.transformed = vec3.create();
         }
-        vec3.copy(n.transformed,tempVec);
+        vec3.copy(n.transformed, tempVec);
 
-        mat4.copy(n.boneMatrix,cgl.mMatrix);
+        mat4.copy(n.boneMatrix, cgl.mMatrix);
 
         // store absolute bone matrix
-        if(bone)
+        if (bone)
         {
-            if(!bone.matrix)bone.matrix=mat4.create();
-            mat4.copy(bone.matrix,cgl.mMatrix);
+            if (!bone.matrix)bone.matrix = mat4.create();
+            mat4.copy(bone.matrix, cgl.mMatrix);
 
-            if(!bone.transposedOffsetMatrix)
+            if (!bone.transposedOffsetMatrix)
             {
-                mat4.transpose( bone.offsetmatrix, bone.offsetmatrix );
-                bone.transposedOffsetMatrix=true;
+                mat4.transpose(bone.offsetmatrix, bone.offsetmatrix);
+                bone.transposedOffsetMatrix = true;
             }
-            mat4.mul(bone.matrix,bone.matrix,bone.offsetmatrix);
+            mat4.mul(bone.matrix, bone.matrix, bone.offsetmatrix);
         }
 
-        if(parent && parent.transformed)
+        if (parent && parent.transformed)
         {
-            points[pointCounter++]=parent.transformed[0];
-            points[pointCounter++]=parent.transformed[1];
-            points[pointCounter++]=parent.transformed[2];
+            points[pointCounter++] = parent.transformed[0];
+            points[pointCounter++] = parent.transformed[1];
+            points[pointCounter++] = parent.transformed[2];
 
-            points[pointCounter++]=tempVec[0];
-            points[pointCounter++]=tempVec[1];
-            points[pointCounter++]=tempVec[2];
+            points[pointCounter++] = tempVec[0];
+            points[pointCounter++] = tempVec[1];
+            points[pointCounter++] = tempVec[2];
         }
 
-        if(fillBoneList) boneList.push(n);
-        cgl.frameStore.bone=n;
+        if (fillBoneList) boneList.push(n);
+        cgl.frameStore.bone = n;
     }
 
-    if(n.children)
+    if (n.children)
     {
-        for(var i=0;i<n.children.length;i++)
+        for (let i = 0; i < n.children.length; i++)
         {
-            if(isBone(n.children[i].name)) bones++;
-            findBoneChilds(n.children[i],n,foundBone);
+            if (isBone(n.children[i].name)) bones++;
+            findBoneChilds(n.children[i], n, foundBone);
         }
     }
 
@@ -215,33 +212,31 @@ function findBoneChilds(n,parent,foundBone)
     return bones;
 }
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    pointCounter=0;
-    bones=0;
-    scene=cgl.frameStore.currentScene.getValue();
-    cgl.frameStore.bones=boneList;
+    pointCounter = 0;
+    bones = 0;
+    scene = cgl.frameStore.currentScene.getValue();
+    cgl.frameStore.bones = boneList;
 
-    if(!scene)return;
-    if(scene!=oldScene)
+    if (!scene) return;
+    if (scene != oldScene)
     {
-        fillBoneList=true;
-        boneList.length=0;
-        oldScene=scene;
+        fillBoneList = true;
+        boneList.length = 0;
+        oldScene = scene;
     }
 
     cgl.pushModelMatrix();
     mat4.identity(cgl.mMatrix);
-    findBoneChilds(scene.rootnode,null,false);
+    findBoneChilds(scene.rootnode, null, false);
     cgl.popModelMatrix();
 
-outSpline.set(null);
+    outSpline.set(null);
     outSpline.set(points);
     outNumBounes.set(bones);
-    fillBoneList=false;
+    fillBoneList = false;
 
     next.trigger();
-    cgl.frameStore.bones=null;
+    cgl.frameStore.bones = null;
 };
-
-

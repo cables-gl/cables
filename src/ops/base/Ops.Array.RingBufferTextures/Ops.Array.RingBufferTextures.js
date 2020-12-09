@@ -36,7 +36,6 @@ inExec.onTriggered = render;
 function init()
 {
     if (inNum.get() == 0) return;
-    // console.log("INIT");
     for (let i = 0; i < textures.length; i++)
     {
         textures[i].delete();
@@ -45,16 +44,14 @@ function init()
     if (!inTexture.get()) return;
     textures.length = inNum.get();
     sorted.length = inNum.get();
-    // console.log("INIT 2");
 
-    console.log(inTexture.get());
+    op.log(inTexture.get());
 
     for (let i = 0; i < inNum.get(); i++)
     {
         textures[i] = inTexture.get().clone();
     }
 
-    // console.log(textures[0],inTexture.get());
     // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
 
     // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
@@ -100,13 +97,13 @@ function render()
 {
     if (!inTexture.get())
     {
-        console.log("no tex 1");
+        op.log("no tex 1");
         return;
     }
 
     if (!inTexture.get().tex)
     {
-        console.log("no tex 2");
+        op.log("no tex 2");
         return;
     }
 
@@ -114,7 +111,7 @@ function render()
     if (!inited || !frameBuf)init();
     if (!textures[0] || textures.length == 0)
     {
-        console.log("no tex");
+        op.log("no tex");
         return;
     }
 

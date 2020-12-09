@@ -30,20 +30,20 @@ const triggerOut = op.outTrigger("Trigger Out");
 const killAllNotes = () =>
 {
     for (let i = 0; i < 128; i += 1)
-{
+    {
         for (let channel = 0; channel < 16; channel += 1)
-{
+        {
             eventOut.set(null);
             eventOut.set({ "data": [(NOTE_OFF << 4 | channel), i, 0] });
         }
-        console.log("killAllNotes transpose");
+        op.log("killAllNotes transpose");
     }
 };
 
 const killAllNotesAgain = () =>
 {
     for (let channel = 0; channel < 16; channel += 1)
-{
+    {
         eventOut.set(null);
         eventOut.set({ "data": [(CC_MSG << 4 | channel), 123, 0] });
     }
@@ -52,7 +52,7 @@ inTranspose.onChange = function ()
 {
     killAllNotesAgain();
     if (lastTransposedNote)
-{
+    {
         // eventOut.set(null);
         // eventOut.set({ data: [(NOTE_OFF << 4 | lastTransposedNote.channel), lastTransposedNote.index, 0] });
     }
@@ -74,18 +74,18 @@ inEvent.onChange = () =>
     if (!event.newNote) return;
 
     if (learning)
-{
+    {
         midiChannelDropdown.set(event.channel + 1);
         learning = false;
         if (CABLES.UI)
-{
+        {
             op.uiAttr({ "info": `bound to MIDI Channel: ${midiChannelDropdown.get()}` });
             gui.opParams.show(op);
         }
     }
 
     if (event.channel === midiChannelDropdown.get() - 1)
-{
+    {
         const newEvent = Object.assign({}, event);
 
         const note = event.index;
@@ -93,7 +93,7 @@ inEvent.onChange = () =>
         const newNoteIndex = Math.min(Math.max(note + transposeAmount, 0), 127);
 
         if (event.data[0] === (NOTE_ON << 4 | (event.channel)))
-{
+        {
             eventOut.set(null);
             eventOut.set(Object.assign({}, newEvent, {
                 "data": [(NOTE_OFF << 4 | (event.channel)), note, 0],
@@ -113,8 +113,8 @@ inEvent.onChange = () =>
 
         eventOut.set(newEvent);
     }
- else
-{
+    else
+    {
         eventOut.set(event);
     }
     triggerOut.trigger();

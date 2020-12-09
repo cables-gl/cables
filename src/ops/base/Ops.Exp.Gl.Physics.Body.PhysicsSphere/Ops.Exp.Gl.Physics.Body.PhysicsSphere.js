@@ -1,48 +1,48 @@
-var exec=op.inTrigger("Exec");
-var inMass=op.inValue("Mass");
-var inRadius=op.inValue("Radius",1);
+let exec = op.inTrigger("Exec");
+let inMass = op.inValue("Mass");
+let inRadius = op.inValue("Radius", 1);
 
-var doRender=op.inValueBool("Render",true);
+let doRender = op.inValueBool("Render", true);
 
-var posX=op.inValue("Pos X");
-var posY=op.inValue("Pos Y");
-var posZ=op.inValue("Pos Z");
+let posX = op.inValue("Pos X");
+let posY = op.inValue("Pos Y");
+let posZ = op.inValue("Pos Z");
 
-var inReset=op.inTriggerButton("Reset");
+let inReset = op.inTriggerButton("Reset");
 
 
-var next=op.outTrigger("Next");
-var outRadius=op.outValue("Out Radius");
-var outX=op.outValue("X");
-var outY=op.outValue("Y");
-var outZ=op.outValue("Z");
+let next = op.outTrigger("Next");
+let outRadius = op.outValue("Out Radius");
+let outX = op.outValue("X");
+let outY = op.outValue("Y");
+let outZ = op.outValue("Z");
 
-var outHit=op.outValueBool("Ray Hit",false);
+let outHit = op.outValueBool("Ray Hit", false);
 
-var outCollision=op.outTrigger("Collision");
+let outCollision = op.outTrigger("Collision");
 
-var cgl=op.patch.cgl;
+let cgl = op.patch.cgl;
 
-var m=new CGL.WirePoint(cgl,1);
+let m = new CGL.WirePoint(cgl, 1);
 
-exec.onTriggered=render;
+exec.onTriggered = render;
 
-var needSetup=true;
-var body=null;
+let needSetup = true;
+let body = null;
 
-inMass.onChange=setup;
-inRadius.onChange=setup;
+inMass.onChange = setup;
+inRadius.onChange = setup;
 // posX.onChange=setup;
 // posY.onChange=setup;
 // posZ.onChange=setup;
 
-var lastWorld=null;
+let lastWorld = null;
 
-var collided=false;
+let collided = false;
 
-inReset.onTriggered=function()
+inReset.onTriggered = function ()
 {
-    needSetup=true;
+    needSetup = true;
 };
 
 // function createTetra()
@@ -71,52 +71,48 @@ inReset.onTriggered=function()
 
 function setup()
 {
-    var world=cgl.frameStore.world;
-    if(!world)return;
+    let world = cgl.frameStore.world;
+    if (!world) return;
 
-    if(body)world.removeBody(body);
+    if (body)world.removeBody(body);
 
     body = new CANNON.Body({
-      mass: inMass.get(), // kg
-      position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
-      shape: new CANNON.Sphere(Math.max(0,inRadius.get()))
+        "mass": inMass.get(), // kg
+        "position": new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
+        "shape": new CANNON.Sphere(Math.max(0, inRadius.get()))
     });
 
 
     world.addBody(body);
 
-    body.addEventListener("collide",function(e){
-        collided=true;
+    body.addEventListener("collide", function (e)
+    {
+        collided = true;
         // collision.trigger();
-        // console.log("The sphere just collided with the ground!");
-        // console.log("Collided with body:",e.body);
-        // console.log("Contact between bodies:",e.contact);
     });
 
-    body.addEventListener("raycasthit",function(e){
-        console.log("rauyca!!");
+    body.addEventListener("raycasthit", function (e)
+    {
+        op.log("rauyca!!");
         // collision.trigger();
-        // console.log("The sphere just collided with the ground!");
-        // console.log("Collided with body:",e.body);
-        // console.log("Contact between bodies:",e.contact);
     });
 
 
-    lastWorld=world;
-    needSetup=false;
+    lastWorld = world;
+    needSetup = false;
     outRadius.set(inRadius.get());
 }
 
-var vec=vec3.create();
-var q=quat.create();
+let vec = vec3.create();
+let q = quat.create();
 
-var trMat=mat4.create();
+let trMat = mat4.create();
 function render()
 {
-    if(needSetup)setup();
-    if(lastWorld!=cgl.frameStore.world)setup();
+    if (needSetup)setup();
+    if (lastWorld != cgl.frameStore.world)setup();
 
-    if(!body)return;
+    if (!body) return;
 
     outHit.set(body.raycastHit);
 
@@ -124,36 +120,36 @@ function render()
         body.position.x,
         body.position.y,
         body.position.z
-        );
+    );
 
     quat.set(q,
         body.quaternion.x,
         body.quaternion.y,
         body.quaternion.z,
         body.quaternion.w);
-    quat.invert(q,q);
+    quat.invert(q, q);
 
     cgl.pushModelMatrix();
 
-    mat4.fromRotationTranslation(trMat,q,vec);
-    mat4.mul(cgl.mMatrix,trMat,cgl.mMatrix);
+    mat4.fromRotationTranslation(trMat, q, vec);
+    mat4.mul(cgl.mMatrix, trMat, cgl.mMatrix);
 
-    if(doRender.get())m.render(cgl,inRadius.get()*2);
+    if (doRender.get())m.render(cgl, inRadius.get() * 2);
 
     outX.set(body.position.x);
     outY.set(body.position.y);
     outZ.set(body.position.z);
 
-    if(collided)
+    if (collided)
     {
-        collided=false;
+        collided = false;
         outCollision.trigger();
     }
 
-    CABLES.physicsCurrentBody=body;
+    CABLES.physicsCurrentBody = body;
 
     next.trigger();
 
-    CABLES.physicsCurrentBody=null;
+    CABLES.physicsCurrentBody = null;
     cgl.popModelMatrix();
 }

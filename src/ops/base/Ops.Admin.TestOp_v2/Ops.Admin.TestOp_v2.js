@@ -10,10 +10,10 @@ paramtest_1.setUiAttribs({ "hidePort": true });
 
 op.onLoaded = function ()
 {
-    console.log("op loaded!");
+    op.log("op loaded!");
 };
 
 buttons.onTriggered = function (e)
 {
-    console.log("BUTTON PRESSED", e);
+    op.log("BUTTON PRESSED", e);
 };

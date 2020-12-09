@@ -48,7 +48,6 @@ exec.onTriggered = function ()
     //     if (available)
     //     {
     //         const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-    //         console.log("gpu ms",elapsedNanos/1000000);
     //         query=null;
     //     }
 
@@ -76,13 +75,13 @@ exec.onTriggered = function ()
             let count = 0;
             for (const j in branches[i].counts) count += branches[i].counts[j];
 
-            console.log("branch", i, branches[i].counts);
+            op.log("branch", i, branches[i].counts);
             rowsBranches.push([i, count, Math.round(count / numGlCalls * 100) + "%"]);
         }
         console.table(rowsBranches);
 
 
-        console.log(CABLES.profilerBranchesTimes);
+        op.log(CABLES.profilerBranchesTimes);
 
         resetStats();
         dumpFrame = false;
@@ -127,7 +126,7 @@ function resetStats()
 
 function start()
 {
-    console.log("-----------------------------");
+    op.log("-----------------------------");
     cgl.debugOneFrame = true;
     for (const i in gl)
     {
