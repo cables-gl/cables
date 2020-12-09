@@ -9,8 +9,14 @@
             {
                 "type": "0",
                 "name": "Volume",
-                "group": "Playback Options",
+                "group": "Volume Controls",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mute",
+                "group": "Volume Controls",
+                "subType": "boolean"
             },
             {
                 "type": "1",
@@ -29,7 +35,7 @@
             },
             {
                 "type": "1",
-                "name": "Jump To Seek Position",
+                "name": "Jump To Position",
                 "group": "Seek Options"
             },
             {
@@ -41,12 +47,18 @@
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Audio Out"
+                "type": "0",
+                "name": "Duration",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Duration",
+                "name": "Is Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Current Time",
                 "subType": "number"
             }
         ],
