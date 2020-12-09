@@ -136,12 +136,11 @@ Texture.prototype.setSize = function (w, h)
     w = Math.min(w, this._cgl.maxTexSize);
     h = Math.min(h, this._cgl.maxTexSize);
 
-
     w = Math.floor(w);
     h = Math.floor(h);
     if (this.width == w && this.height == h) return;
 
-    console.log("tex setsize", this.name, w, h, this.id);
+    // console.log("tex setsize", this.name, w, h, this.id);
 
     this.width = w;
     this.height = h;
@@ -286,7 +285,7 @@ Texture.prototype.initTexture = function (img, filter)
     if (img.width > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.width, this._cgl.maxTexSize);
     if (img.height > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.height, this._cgl.maxTexSize);
 
-    console.log("loaded texture", img.width, img.height);
+    // console.log("loaded texture", img.width, img.height);
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 

@@ -162,7 +162,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._height = Math.min(this._height, this._cgl.maxTexSize);
 
 
-    console.log("fb setsize", this._width, this._height, this);
+    // console.log("fb setsize", this._width, this._height, this);
 
     profileData.profileFrameBuffercreate++;
 
