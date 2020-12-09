@@ -59,11 +59,12 @@ function rewindPlayback()
     if (audio)
     {
         gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.05);
+        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.01);
         setTimeout(function ()
         {
             const level = !inMute.get() ? Number(volume.get()) * masterVolume : 0;
-            gainNode.gain.linearRampToValueAtTime(clamp(level, 0, 1), audioContext.currentTime + 0.03);
+            gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
+            gainNode.gain.linearRampToValueAtTime(clamp(level, 0, 1), audioContext.currentTime + 0.01);
             audio.currentTime = 0;
         }, 30);
     }
@@ -82,13 +83,13 @@ function startPlayback()
         {
             const level = !inMute.get() ? Number(volume.get()) * masterVolume : 0;
             audio.play();
+            gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
             gainNode.gain.linearRampToValueAtTime(clamp(level, 0.0, 1.0), audioContext.currentTime + 0.03);
             isPlaying = true;
         }
         catch (e)
         {
-            op.log("yo", e);
-            op.setUiError(e);
+            op.log("error on start: ", e);
         }
     }
 }
@@ -112,7 +113,7 @@ function pausePlayback()
         }
         catch (e)
         {
-            op.setUiError(e);
+            op.log("error on pause: ", e);
         }
     }
 }
@@ -147,7 +148,7 @@ function loadMediaFile()
 
     audio.addEventListener("timeupdate", () =>
     {
-        // outCurrentTime.set(audio.currentTime);
+        outCurrentTime.set(audio.currentTime);
     });
 
     media.connect(gainNode);
