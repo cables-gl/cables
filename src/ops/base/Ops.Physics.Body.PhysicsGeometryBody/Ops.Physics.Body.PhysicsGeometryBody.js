@@ -1,10 +1,9 @@
 const
     exec = op.inTrigger("Exec"),
+    inShape = op.inSwitch("Shape", ["Box", "Sphere"], "Box"),
     inName = op.inString("Name", ""),
     inMass = op.inValue("Mass", 0),
-    sizeX = op.inValue("sizeX", 1),
-    sizeY = op.inValue("sizeY", 1),
-    sizeZ = op.inValue("sizeZ", 1),
+    inGeom = op.inObject("Geometry"),
     doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
@@ -27,45 +26,68 @@ let collided = false;
 let needSetup = true;
 let body = null;
 let shape = null;
+let bb = null;
 let timeout = null;
-
 exec.onTriggered = render;
+let oldmodelScale = 0.0;
+op.toWorkNeedsParent("Ops.Gl.Physics.World");
 
-// op.toWorkNeedsParent("Ops.Physics.World");
-
-inMass.onChange = sizeX.onChange = sizeY.onChange = sizeZ.onChange =
+inShape.onChange =
+inMass.onChange =
+inGeom.onChange =
 inReset.onTriggered = function ()
 {
     needSetup = true;
 };
 
+
 exec.onLinkChanged =
     inName.onChange =
-    op.onDelete =
-    function ()
+    op.onDelete = () =>
     {
         removeBody();
-        body = null;
         lastWorld = null;
     };
+
 
 function removeBody()
 {
     if (body && lastWorld)lastWorld.removeBody(body);
+    body = null;
 }
+
 
 function setup(modelScale)
 {
+    const geom = inGeom.get();
+
+    if (!geom)
+    {
+        removeBody();
+        return;
+    }
+
     modelScale = modelScale || 1;
     const world = cgl.frameStore.world;
     if (!world) return;
 
+
     if (body)lastWorld.removeBody(body);
 
-    op.log("make new!", sizeX.get());
+    bb = new CGL.BoundingBox(geom);
 
-    // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
-    shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
+    // bb.mulMat4(cgl.mMatrix);
+
+    op.log(bb);
+
+    oldmodelScale = modelScale;
+
+    if (inShape.get() == "Sphere") shape = new CANNON.Sphere(Math.max(0, 1.0 * modelScale));
+    if (inShape.get() == "Box") shape = new CANNON.Box(new CANNON.Vec3(
+        bb._size[0] * 0.5 * modelScale,
+        bb._size[1] * 0.5 * modelScale,
+        bb._size[2] * 0.5 * modelScale));
+    if (inShape.get() == "Trimesh") shape = new CANNON.Trimesh(geom.vertices, geom.verticesIndices);
 
     body = new CANNON.Body({
         "name": inName.get(),
@@ -104,15 +126,17 @@ function render()
 {
     clearTimeout(timeout);
     timeout = setTimeout(stoppedRendering, 300);
+    const modelScale = getScaling(cgl.mMatrix);
 
-    if (needSetup)setup();
-    if (lastWorld != cgl.frameStore.world)setup();
+    if (needSetup)setup(modelScale);
+    if (lastWorld != cgl.frameStore.world)setup(modelScale);
     if (!body) return;
+
+    if (oldmodelScale != modelScale)setup(modelScale);
 
     outHit.set(body.raycastHit);
 
     const staticPos = inMass.get() == 0;
-    const modelScale = getScaling(cgl.mMatrix);
 
     if (staticPos)
     {

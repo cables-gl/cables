@@ -43,7 +43,7 @@ exec.onTriggered = function ()
     outError.set(errorToString(cgl.gl.getError()));
     isShadowPass.set(cgl.frameStore.shadowPass);
 
-    console.log(cgl._textureslots);
+    op.log(cgl._textureslots);
     next.trigger();
 };
 

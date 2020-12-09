@@ -1,178 +1,171 @@
 
-var inVal=op.inValue("Delta");
+let inVal = op.inValue("Delta");
 
-var snapVals=op.inArray("Snap at Values");
-var snapDist=op.inValue("Snap Distance");
-var snapDistRelease=op.inValue("Snap Distance Release");
-var inSlow=op.inValue("Slowdown",0.4);
-var inBlock=op.inValue("Block Input after snap");
-var inReset=op.inTriggerButton("Reset");
-var inMin=op.inValue("Min",0);
-var inMax=op.inValue("Max",0);
+let snapVals = op.inArray("Snap at Values");
+let snapDist = op.inValue("Snap Distance");
+let snapDistRelease = op.inValue("Snap Distance Release");
+let inSlow = op.inValue("Slowdown", 0.4);
+let inBlock = op.inValue("Block Input after snap");
+let inReset = op.inTriggerButton("Reset");
+let inMin = op.inValue("Min", 0);
+let inMax = op.inValue("Max", 0);
 
-var inMul=op.inValue("Value Mul",1);
-var inEnabled=op.inValueBool("Enabled",true);
+let inMul = op.inValue("Value Mul", 1);
+let inEnabled = op.inValueBool("Enabled", true);
 
-var outVal=op.outValue("Result");
-var outDist=op.outValue("Distance");
-var outSnapped=op.outValue("Snapped");
-var outWasSnapped=op.outValue("was snapped");
-
-
-inVal.onChange=update;
-inVal.changeAlways=true;
-
-var snapped=false;
-var val=0;
-var hasError=false;
-var timeout=0;
-var blocking=false;
-var lastValue=-1;
-var snappedArr=[];
-
-snapVals.onChange=checkError;
+let outVal = op.outValue("Result");
+let outDist = op.outValue("Distance");
+let outSnapped = op.outValue("Snapped");
+let outWasSnapped = op.outValue("was snapped");
 
 
+inVal.onChange = update;
+inVal.changeAlways = true;
 
-inReset.onTriggered=function()
+let snapped = false;
+let val = 0;
+let hasError = false;
+let timeout = 0;
+let blocking = false;
+let lastValue = -1;
+let snappedArr = [];
+
+snapVals.onChange = checkError;
+
+
+inReset.onTriggered = function ()
 {
-    val=0;
+    val = 0;
     outVal.set(val);
     // update();
 };
 
 function checkError()
 {
-    var snaps=snapVals.get();
-    if(!snaps || snaps.length==0)
+    let snaps = snapVals.get();
+    if (!snaps || snaps.length == 0)
     {
-        op.setUiError("snapsnull","needs array containing snap points");
-        hasError=true;
+        op.setUiError("snapsnull", "needs array containing snap points");
+        hasError = true;
         return;
     }
-    
-    if(hasError)
+
+    if (hasError)
     {
-        op.setUiError("snapsnull",null);
-        hasError=false;
-        setTimeout(update,500);
-    }
-    
-    
-    snappedArr=[];
-    for(var i=0;i<snapVals.length;i++)
-    {
-        snappedArr[i]=false;
+        op.setUiError("snapsnull", null);
+        hasError = false;
+        setTimeout(update, 500);
     }
 
+
+    snappedArr = [];
+    for (let i = 0; i < snapVals.length; i++)
+    {
+        snappedArr[i] = false;
+    }
 }
 
 function update()
 {
-    if(blocking)return;
-    var snaps=snapVals.get();
+    if (blocking) return;
+    let snaps = snapVals.get();
 
-    var d=999999999;
-    var snapvalue=0;
-    var currentIndex=-1;
-    
-    
-    
-    for(var i=0;i<snaps.length;i++)
+    let d = 999999999;
+    let snapvalue = 0;
+    let currentIndex = -1;
+
+
+    for (let i = 0; i < snaps.length; i++)
     {
-        var dd=Math.abs(val-snaps[i])+0.01;
-        if(dd<d)
+        let dd = Math.abs(val - snaps[i]) + 0.01;
+        if (dd < d)
         {
-            d=dd;
-            snapvalue=snaps[i];
-            currentIndex=i;
+            d = dd;
+            snapvalue = snaps[i];
+            currentIndex = i;
         }
 
-        if(val>snaps[i] && !snappedArr[i])
+        if (val > snaps[i] && !snappedArr[i])
         {
-            val=snaps[i];
-            d=0;
-            currentIndex=i;
+            val = snaps[i];
+            d = 0;
+            currentIndex = i;
         }
-
     }
 
-    if(d===0)return;
-    if(inVal.get()===0)return;
-    
-    if(d<snapDistRelease.get())
+    if (d === 0) return;
+    if (inVal.get() === 0) return;
+
+    if (d < snapDistRelease.get())
     {
-        var vv=inVal.get()*Math.abs(((d/snapDistRelease.get())*inSlow.get()))*inMul.get();
-        val+=vv;
+        let vv = inVal.get() * Math.abs(((d / snapDistRelease.get()) * inSlow.get())) * inMul.get();
+        val += vv;
 
         clearTimeout(timeout);
-        
-        // console.log("Snap dist release!~");
-        timeout=setTimeout(function()
-            {
-                val=snapvalue;
-                outVal.set(val);
-            },250);
+
+        timeout = setTimeout(function ()
+        {
+            val = snapvalue;
+            outVal.set(val);
+        }, 250);
     }
     else
     {
         clearTimeout(timeout);
-        val+=inVal.get();
+        val += inVal.get();
     }
-    
-    if(!inEnabled.get())
+
+    if (!inEnabled.get())
     {
         outVal.set(val);
-        lastValue=val;
+        lastValue = val;
     }
 
     inVal.set(0);
 
-    d=Math.abs(val-snapvalue);
+    d = Math.abs(val - snapvalue);
     outDist.set(d);
-    var wassnapped=false;
+    let wassnapped = false;
 
-    if(d>snapDist.get() )
+    if (d > snapDist.get())
     {
-        snapped=false;
-        wassnapped=false;
+        snapped = false;
+        wassnapped = false;
     }
 
-    if(!snapped)
+    if (!snapped)
     {
-        if(d<snapDist.get()  )
+        if (d < snapDist.get())
         {
-            val=snapvalue;
-            if(inBlock.get()>0)
+            val = snapvalue;
+            if (inBlock.get() > 0)
             {
-                blocking=true;
-                setTimeout(function()
-                    {
-                        blocking=false;
-                        
-                    },inBlock.get()*1000);
+                blocking = true;
+                setTimeout(function ()
+                {
+                    blocking = false;
+                }, inBlock.get() * 1000);
             }
-            snappedArr[currentIndex]=true;
-            snapped=true;
-            wassnapped=true;
+            snappedArr[currentIndex] = true;
+            snapped = true;
+            wassnapped = true;
         }
         else
         {
-            snapped=false;
+            snapped = false;
         }
     }
 
     outSnapped.set(snapped);
     outWasSnapped.set(wassnapped);
-    
-    if(inMax.get()!=inMin.get()!=0)
-    {
-        if(val>inMax.get())val=inMax.get();
-        else if(val<inMin.get())val=inMin.get();
-    }
-    
-    
-    outVal.set(val);
-    lastValue=val;
 
+    if (inMax.get() != inMin.get() != 0)
+    {
+        if (val > inMax.get())val = inMax.get();
+        else if (val < inMin.get())val = inMin.get();
+    }
+
+
+    outVal.set(val);
+    lastValue = val;
 }

@@ -144,7 +144,6 @@ function draw()
                 1.0,
                 1.0,
                 1.0);
-            // console.log(world.bodies[i].shapes[0])
         }
         // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
