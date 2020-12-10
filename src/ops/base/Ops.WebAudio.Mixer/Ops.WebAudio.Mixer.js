@@ -19,9 +19,9 @@ const inAudio6Gain = op.inFloatSlider("In 6 Gain", 1);
 const inAudio7Gain = op.inFloatSlider("In 7 Gain", 1);
 const inMasterGain = op.inFloatSlider("Output Gain", 1);
 
-const audioOut = op.outObject("audio out");
+const audioOut = op.outObject("Audio Out");
 
-const gain = audioContext.createGain();
+const gain = audioCtx.createGain();
 audioOut.set(gain);
 
 const N_PORTS = 8;

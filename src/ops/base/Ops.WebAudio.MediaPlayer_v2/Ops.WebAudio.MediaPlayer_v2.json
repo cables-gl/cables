@@ -1,5 +1,5 @@
 {
-    "summary": "Plays back audio files",
+    "summary": "Plays audio files",
     "layout": {
         "portsIn": [
             {
@@ -65,7 +65,7 @@
         "name": "Ops.WebAudio.MediaPlayer_v2"
     },
     "author": "56cdab144f85abfb36c6c089",
-    "authorName": "cables",
+    "authorName": "simod",
     "id": "0e4e31a2-dce6-412b-b0b0-1e7466003812",
     "created": 1607448105502,
     "docs": {

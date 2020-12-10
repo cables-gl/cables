@@ -3,7 +3,7 @@ function clamp(val, min, max)
     return Math.min(Math.max(val, min), max);
 }
 
-let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
+const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 // default values + min and max
 const FREQUENCY_MIN = 10;
@@ -19,11 +19,11 @@ const filterNode = audioContext.createBiquadFilter();
 const inAudio = op.inObject("Audio In");
 const inFilterType = op.inDropDown("Type", ["peaking", "lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass"], "peaking");
 
-const inFrequency = op.inFloat("frequency", 2000);
-const inQ = op.inFloat("q", 0.0001);
-const inGain = op.inFloat("gain", 0);
+const inFrequency = op.inFloat("Frequency", 2000);
+const inQ = op.inFloat("Q", 0.0001);
+const inGain = op.inFloat("Gain", 0);
 
-const inDetune = op.inInt("detune", 0);
+const inDetune = op.inInt("Detune", 0);
 const inFrequencyArray = op.inArray("Frequency Array");
 
 op.setPortGroup("Filter Settings", [inFilterType, inFrequency, inQ, inGain]);
@@ -44,7 +44,6 @@ let magnitudeResponseArray = null;
 
 function updateFrequencyResponse()
 {
-    /* TODO optimize */
     const frequencies = inFrequencyArray.get();
     if (!frequencies) return;
 

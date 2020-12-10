@@ -5,8 +5,8 @@ const
     fftArr = op.inArray("FFT Array"),
     x = op.inValueSlider("X Position"),
     y = op.inValueSlider("Y Position"),
-    w = op.inValueSlider("width", 0.2),
-    h = op.inValueSlider("height", 0.2),
+    w = op.inValueSlider("Width", 0.2),
+    h = op.inValueSlider("Height", 0.2),
     drawTex = op.inValueBool("Create Texture", true),
     inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
     texOut = op.outTexture("Texture Out"),
@@ -20,15 +20,15 @@ inCanvasSize.onChange = () =>
 {
     updateTexture = true;
 };
-let data = [];
-let line = 0;
+const data = [];
+const line = 0;
 let size = Number(inCanvasSize.get());
 
 const canvas = document.createElement("canvas");
 canvas.id = "fft_" + CABLES.uuid();
 canvas.width = canvas.height = size;
 canvas.style.display = "none";
-let body = document.getElementsByTagName("body")[0];
+const body = document.getElementsByTagName("body")[0];
 body.appendChild(canvas);
 const ctx = canvas.getContext("2d");
 
@@ -43,13 +43,13 @@ let amount = 0;
 
 refresh.onTriggered = function ()
 {
-    let arr = fftArr.get();
+    const arr = fftArr.get();
     if (!arr)
     {
         return;
     }
 
-    let width = arr.length;
+    const width = arr.length;
 
     const draw = drawTex.get();
 
@@ -85,7 +85,7 @@ refresh.onTriggered = function ()
     if (draw)ctx.rect(areaX, areaY, areaW, areaH);
     if (draw)ctx.stroke();
 
-    let val = 0;
+    const val = 0;
     let count = 0;
     for (let xc = areaX; xc < areaX + areaW; xc++)
         for (let yc = areaY; yc < areaY + areaH; yc++)

@@ -11,7 +11,7 @@ const inTextureSize = op.inSwitch("Texture Size", [64, 128, 256, 512, 1024, 2048
 op.setPortGroup("Texture Options", [inTextureSize]);
 op.setPortGroup("Mirror Options", [inMirrorActive, inMirrorWidth]);
 
-const outTexture = op.outTexture("texture_out");
+const outTexture = op.outTexture("Texture Out");
 
 let updateTextureSize = false;
 inTextureSize.onChange = () =>

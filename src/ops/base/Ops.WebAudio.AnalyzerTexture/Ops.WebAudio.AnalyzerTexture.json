@@ -1,6 +1,6 @@
 {
     "author": "56cdab144f85abfb36c6c089",
-    "authorName": "cables",
+    "authorName": "simod",
     "id": "decba955-636b-41c5-bfb8-c2506cbcabd2",
     "layout": {
         "portsIn": [
@@ -38,7 +38,7 @@
         "portsOut": [
             {
                 "type": "2",
-                "name": "texture_out"
+                "name": "Texture Out"
             }
         ],
         "name": "Ops.WebAudio.AnalyzerTexture"
