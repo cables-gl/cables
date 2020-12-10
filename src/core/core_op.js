@@ -55,7 +55,7 @@ const Op = function ()
     this._needsParentOp = null;
     this._shortOpName = "";
 
-    this._hasUiErrors = false;
+    this.hasUiErrors = false;
     this._uiErrors = {};
 
     if (arguments[1])
@@ -1341,7 +1341,7 @@ const Op = function ()
      */
     Op.prototype.setUiError = function (id, txt, level)
     {
-        if (!txt && !this._hasUiErrors) return;
+        if (!txt && !this.hasUiErrors) return;
         if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
         if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
 
@@ -1362,7 +1362,7 @@ const Op = function ()
 
         // this.uiAttr({ "error": null });
         this.uiAttr({ "uierrors": errorArr });
-        this._hasUiErrors = Object.keys(this._uiErrors).length;
+        this.hasUiErrors = Object.keys(this._uiErrors).length;
     };
 
     // todo: remove

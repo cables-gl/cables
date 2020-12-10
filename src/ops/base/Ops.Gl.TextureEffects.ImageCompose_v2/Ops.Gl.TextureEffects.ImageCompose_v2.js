@@ -51,6 +51,8 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
 
+    if (fpTexture.get() && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and HDR at the same time, many systems do not support this.");
+    else op.setUiError("fpmipmap", null);
 
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get() });
 
