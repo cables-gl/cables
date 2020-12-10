@@ -2,18 +2,42 @@ let microphone = null;
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 const inInit = op.inTriggerButton("Start");
-const inInputDevices = op.inValueSelect("Audio Input", ["none"]);
-const inGain = op.inFloatSlider("Volume", 0);
-const audioOut = op.outObject("audio out");
-const recording = op.outValueBool("Listening", false);
+const inInputDevices = op.inDropDown("Audio Input", ["None"]);
+const inGain = op.inFloatSlider("Volume", 1);
+const inMute = op.inBool("Mute", false);
+const audioOut = op.outObject("Audio Out");
+const recording = op.outBool("Listening", false);
+
+op.setPortGroup("Volume Settings", [inGain, inMute]);
+let audioInputsLoaded = false;
+const gainNode = audioCtx.createGain();
 
 function streamAudio(stream)
 {
     microphone = audioCtx.createMediaStreamSource(stream);
-    audioOut.set(microphone);
+    microphone.connect(gainNode);
+    audioOut.set(gainNode);
     op.log("[microphoneIn] streaming mic audio!", stream, microphone);
     recording.set(true);
 }
+
+inGain.onChange = () =>
+{
+    if (inMute.get()) return;
+    gainNode.gain.setValueAtTime(Number(inGain.get()) || 0, audioCtx.currentTime);
+};
+
+inMute.onChange = () =>
+{
+    if (inMute.get())
+    {
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    }
+    else
+    {
+        gainNode.gain.setValueAtTime(Number(inGain.get()) || 0, audioCtx.currentTime);
+    }
+};
 
 inInit.onTriggered = function ()
 {
@@ -26,21 +50,41 @@ inInit.onTriggered = function ()
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
     {
         op.log("[microphoneIn] new micro");
-        /*
-        navigator.mediaDevices.getUserMedia({ "audio": true })
-            .then(function (stream)
+
+        if (audioInputsLoaded)
+        {
+            op.setUiError("noAudioInputs", null);
+
+            const device = inInputDevices.get();
+
+            if (device === "None")
             {
-                microphone = audioCtx.createMediaStreamSource(stream);
-                audioOut.set(microphone);
-                op.log("streaming mic audio!", stream, microphone);
-                recording.set(true);
-            })
-            .catch(function (err)
+                op.setUiError("noDeviceSelected", "No audio device selected!", 1);
+                return;
+            }
+            else
             {
-                op.log("[microphoneIn] could not get usermedia promise", err);
-                recording.set(false);
-            });
-            */
+                op.setUiError("noDeviceSelected", null);
+            }
+            const constraints = {
+                "audio": { "deviceId": device },
+            };
+
+            navigator.mediaDevices.getUserMedia(constraints)
+                .then((stream) =>
+                {
+                    microphone = audioCtx.createMediaStreamSource(stream);
+                    microphone.connect(gainNode);
+                    audioOut.set(gainNode);
+                    op.log("streaming mic audio!", stream, microphone, gainNode);
+                    recording.set(true);
+                    op.setUiError("devicesLoaded", null);
+                });
+        }
+        else
+        {
+            op.setUiError("noAudioInputs", "There are no audio inputs to use the MicrophoneIn op with.", 2);
+        }
     }
     else
     {
@@ -67,6 +111,7 @@ inInit.onTriggered = function ()
     }
 };
 
+/* INIT FUNCTION */
 navigator.mediaDevices.getUserMedia({ "audio": true })
     .then((res) =>
         navigator.mediaDevices.enumerateDevices())
@@ -77,5 +122,11 @@ navigator.mediaDevices.getUserMedia({ "audio": true })
             .map((deviceInfo, index) => deviceInfo.label || `microphone ${index + 1}`);
 
         inInputDevices.uiAttribs.values = audioInputDevices;
+        op.setUiError("devicesLoaded", "Input devices have been loaded. Please choose a device from the dropdown menu and click the \"Start\" button to activate the microphone input.", 0);
+        audioInputsLoaded = true;
     })
-    .catch((e) => op.log("error", e));
+    .catch((e) =>
+    {
+        op.log("error", e);
+        audioInputsLoaded = false;
+    });
