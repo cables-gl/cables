@@ -27,6 +27,10 @@
                 "type": "0",
                 "name": "align index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "align"
             }
         ],
         "name": "Ops.Gl.LineFont"
