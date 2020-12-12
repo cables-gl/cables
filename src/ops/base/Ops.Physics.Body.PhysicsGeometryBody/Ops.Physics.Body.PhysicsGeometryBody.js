@@ -40,7 +40,6 @@ inReset.onTriggered = function ()
     needSetup = true;
 };
 
-
 exec.onLinkChanged =
     inName.onChange =
     op.onDelete = () =>
@@ -49,13 +48,11 @@ exec.onLinkChanged =
         lastWorld = null;
     };
 
-
 function removeBody()
 {
     if (body && lastWorld)lastWorld.removeBody(body);
     body = null;
 }
-
 
 function setup(modelScale)
 {
@@ -70,7 +67,6 @@ function setup(modelScale)
     modelScale = modelScale || 1;
     const world = cgl.frameStore.world;
     if (!world) return;
-
 
     if (body)lastWorld.removeBody(body);
 

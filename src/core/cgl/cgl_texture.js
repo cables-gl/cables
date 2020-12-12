@@ -294,7 +294,7 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
-    if (this._cgl.printError("[cgl_texture] init"));
+    if (this._cgl.printError("[cgl_texture] init " + this.name));
 
     this._setFilter();
     this.updateMipMap();
