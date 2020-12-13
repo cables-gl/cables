@@ -204,7 +204,7 @@ function sideMappedCube(geom, x, y, z, nx, ny, nz)
         fzero + bias, 0 + bias,
     ]);
 
-    geom.vertexNormals = [
+    geom.vertexNormals = new Float32Array([
         // Front face
         0.0, 0.0, 1.0,
         0.0, 0.0, 1.0,
@@ -240,8 +240,9 @@ function sideMappedCube(geom, x, y, z, nx, ny, nz)
         -1.0, 0.0, 0.0,
         -1.0, 0.0, 0.0,
         -1.0, 0.0, 0.0
-    ];
-    geom.tangents = [
+    ]);
+    geom.tangents = new Float32Array([
+
         // front face
         -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
         // back face
@@ -254,8 +255,8 @@ function sideMappedCube(geom, x, y, z, nx, ny, nz)
         0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
         // left face
         0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1
-    ];
-    geom.biTangents = [
+    ]);
+    geom.biTangents = new Float32Array([
         // front face
         0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
         // back face
@@ -268,7 +269,7 @@ function sideMappedCube(geom, x, y, z, nx, ny, nz)
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
         // left face
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0
-    ];
+    ]);
 }
 
 function cubeMappedCube(geom, x, y, z, nx, ny, nz)
@@ -404,7 +405,7 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
         -1.0, 0.0, 0.0,
         -1.0, 0.0, 0.0
     ];
-    geom.tangents = [
+    geom.tangents = new Float32Array([
         // front face
         -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0,
         // back face
@@ -417,8 +418,8 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
         0, 0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1,
         // left face
         0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1
-    ];
-    geom.biTangents = [
+    ]);
+    geom.biTangents = new Float32Array([
         // front face
         0, -1, 0, 0, -1, 0, 0, -1, 0, 0, -1, 0,
         // back face
@@ -431,5 +432,5 @@ function cubeMappedCube(geom, x, y, z, nx, ny, nz)
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0,
         // left face
         0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0
-    ];
+    ]);
 }

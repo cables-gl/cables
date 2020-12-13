@@ -294,12 +294,12 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, img);
 
-    if (this._cgl.printError("[cgl_texture] init"));
+    // if (this._cgl.printError("[cgl_texture] init " + this.name));
 
     this._setFilter();
     this.updateMipMap();
 
-    if (this._cgl.printError("[cgl_texture] init2"));
+    // if (this._cgl.printError("[cgl_texture] init2"));
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
