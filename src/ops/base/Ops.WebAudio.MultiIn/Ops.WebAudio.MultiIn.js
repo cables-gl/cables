@@ -1,14 +1,21 @@
+const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
-if (!window.audioContext) { window.audioContext = new AudioContext(); }
-
-const audioOut = this.addOutPort(new CABLES.Port(this, "audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const inAudio0 = op.inObject("audio in 0");
+const inAudio1 = op.inObject("audio in 1");
+const inAudio2 = op.inObject("audio in 2");
+const inAudio3 = op.inObject("audio in 3");
+const inAudio4 = op.inObject("audio in 4");
+const inAudio5 = op.inObject("audio in 5");
+const inAudio6 = op.inObject("audio in 6");
+const inAudio7 = op.inObject("audio in 7");
+const audioOut = op.outObject("audio out");
 
 const gain = audioContext.createGain();
 audioOut.set(gain);
 
 const N_PORTS = 8;
 
-const audioIns = [];
+const audioIns = [inAudio0, inAudio1, inAudio2, inAudio3, inAudio4, inAudio5, inAudio6, inAudio7];
 const oldAudioIns = [];
 
 // returns a function that closes around the `current_i` formal parameter.
@@ -22,25 +29,29 @@ const createValueChangedFunction = function (port)
             oldAudioIns[port] = audioIns[port].get();
             try
             {
-                audioIns[port].get().connect(gain);
+                if (audioIns[port].get().connect)
+                {
+                    audioIns[port].get().connect(gain);
+                    op.setUiError("audioCtx" + port, null);
+                }
+                else op.setUiError("audioCtx" + port, "The input passed to port " + port + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
             }
             catch (e) { op.log("[Error] " + e); }
         }
         else if (!audioIns[port].isLinked())
         {
+            op.setUiError("audioCtx" + port, null);
             try
             {
-                oldAudioIns[port].disconnect(gain);
+                if (oldAudioIns[port] && oldAudioIns[port].disconnect) oldAudioIns[port].disconnect(gain);
             }
             catch (e) { op.log("[Error] " + e); }
         }
     };
 };
 
-for (let i = 0; i < N_PORTS; i++)
+audioIns.forEach((port, index) =>
 {
-    const audioIn = this.addInPort(new CABLES.Port(this, "audio in " + i, CABLES.OP_PORT_TYPE_OBJECT));
-    audioIn.audioInPortNr = i;
-    audioIn.onChange = createValueChangedFunction(i);
-    audioIns.push(audioIn);
-}
+    port.onChange = createValueChangedFunction(index);
+    port.audioInPortNr = index;
+});

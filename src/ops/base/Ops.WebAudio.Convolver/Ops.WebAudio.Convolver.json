@@ -11,12 +11,26 @@
             {
                 "type": "0",
                 "name": "impulse response",
+                "group": "IR Options",
                 "subType": "string"
             },
             {
                 "type": "0",
+                "name": "IR Gain",
+                "group": "IR Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "normalize",
+                "group": "IR Options",
                 "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Output Gain",
+                "group": "Output",
+                "subType": "number"
             }
         ],
         "portsOut": [
