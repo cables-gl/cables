@@ -63,13 +63,11 @@ mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 updateDefines();
 
-
 function updateDefines()
 {
     mod.toggleDefine("MOD_BLEND_NORMAL", inBlend.get() == "Normal");
     mod.toggleDefine("MOD_BLEND_OPACITY", inBlend.get() == "Opacity");
     mod.toggleDefine("MOD_BLEND_MULTIPLY", inBlend.get() == "Multiply");
-
 
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
@@ -89,7 +87,6 @@ function drawHelpers()
     if (cgl.frameStore.shadowPass) return;
     if (cgl.shouldDrawHelpers(op)) gui.setTransformGizmo({ "posX": x, "posY": y, "posZ": z });
 }
-
 
 function doRender()
 {

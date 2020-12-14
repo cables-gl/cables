@@ -561,6 +561,38 @@ Shader.prototype.compile = function ()
     let uniformsStrFrag = "\n// cgl generated".endl();
 
 
+    fs += "\n// mods: --------------- ";
+    vs += "\n// mods: --------------- ";
+
+    let foundModsFrag = false;
+    let foundModsVert = false;
+    for (let i = 0; i < this._moduleNames.length; i++)
+    {
+        for (let j = 0; j < this._modules.length; j++)
+        {
+            if (this._modules[j].name == this._moduleNames[i])
+            {
+                // console.log(this._modules[j]);
+
+                if (this._modules[j].srcBodyFrag || this._modules[j].srcHeadFrag)
+                {
+                    foundModsFrag = true;
+                    fs += "\n// " + i + "." + j + ". " + this._modules[j].title + " (" + this._modules[j].name + ")";
+                }
+                if (this._modules[j].srcBodyVert || this._modules[j].srcHeadVert)
+                {
+                    vs += "\n// " + i + "." + j + ". " + this._modules[j].title + " (" + this._modules[j].name + ")";
+                    foundModsVert = true;
+                }
+            }
+        }
+    }
+    if (!foundModsVert)fs += "\n// no mods used...";
+    if (!foundModsFrag)fs += "\n// no mods used...";
+    fs += "\n";
+    vs += "\n";
+
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
@@ -634,6 +666,7 @@ Shader.prototype.compile = function ()
 
                 srcVert += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
                 srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
+
 
                 if (!addedAttributes)
                 {

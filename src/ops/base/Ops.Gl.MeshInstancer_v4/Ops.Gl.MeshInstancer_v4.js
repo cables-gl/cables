@@ -32,11 +32,10 @@ let
     arrayChangedColor = true,
     arrayChangedTrans = true;
 
-
-const mod = new CGL.ShaderModifier(cgl, "colorArea");
+const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "name": "MODULE_VERTEX_POSITION",
-    "title": op.objName,
+    "title": op.name,
     "priority": -2,
     "srcHeadVert": attachments.instancer_head_vert,
     "srcBodyVert": attachments.instancer_body_vert
@@ -45,13 +44,12 @@ mod.addModule({
 mod.addModule({
     "name": "MODULE_COLOR",
     "priority": -2,
-    "title": op.objName,
+    "title": op.name,
     "srcHeadFrag": attachments.instancer_head_frag,
     "srcBodyFrag": attachments.instancer_body_frag,
 });
 
 mod.addUniformVert("f", "MOD_scale", inScale);
-
 
 inBlendMode.onChange = updateDefines;
 doLimit.onChange = updateLimit;
@@ -200,12 +198,10 @@ function updateLimit()
     inLimit.setUiAttribs({ "hidePort": !doLimit.get(), "greyout": !doLimit.get() });
 }
 
-
 function doRender()
 {
     if (!mesh) return;
     if (recalc) setupArray();
-
 
     mod.bind();
 
@@ -221,7 +217,6 @@ function doRender()
     outTrigger.trigger();
 
     mod.unbind();
-
 
     // if (cgl.getShader() && cgl.getShader() != shader)
     // {
