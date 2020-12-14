@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
     inType = op.inDropDown("File Type", ["PNG", "JPG", "WebP", "WebM"], "PNG"),
+    inZip = op.inBool("ZIP multiple files", false),
     inFilePrefix = op.inString("Filename", "cables"),
     inQuality = op.inFloatSlider("Quality", 0.8),
     inDurType = op.inSwitch("Duration Type", ["Seconds", "Frames"], "Seconds"),
@@ -20,7 +21,6 @@ op.setPortGroup("File", [inType, inFilePrefix, inQuality]);
 op.setPortGroup("Size", [useCanvasSize, inWidth, inHeight]);
 op.setPortGroup("Timing", [inFps, inDurType, inDuration]);
 
-
 exec.onTriggered = render;
 
 let started = false;
@@ -35,6 +35,8 @@ let frameStarted = false;
 const frames = [];
 let lastFrame = -1;
 let time = 0;
+
+let zip = null;
 
 let oldSizeW = op.patch.cgl.canvasWidth;
 let oldSizeH = op.patch.cgl.canvasHeight;
@@ -66,6 +68,8 @@ inStart.onTriggered = function ()
     shortId = CABLES.shortId();
     updateTime();
 
+    if (inZip.get()) zip = new JSZip();
+
     if (!useCanvasSize.get())
     {
         oldSizeW = CABLES.patch.cgl.canvasWidth;
@@ -73,7 +77,6 @@ inStart.onTriggered = function ()
         op.patch.cgl.setSize(inWidth.get(), inHeight.get());
         op.patch.cgl.updateSize();
     }
-
 
     if (numFrames == 1)
     {
@@ -87,7 +90,6 @@ inStart.onTriggered = function ()
         lastFrame = -9999;
     }
 };
-
 
 function updateTime()
 {
@@ -152,6 +154,18 @@ function render()
 
         stopRendering();
 
+        if (zip)
+        {
+            zip.generateAsync({ "type": "blob" })
+                .then(function (blob)
+                {
+                    const anchor = document.createElement("a");
+                    anchor.download = inFilePrefix.get() + ".zip";
+                    anchor.href = URL.createObjectURL(blob);
+                    anchor.click();
+                });
+        }
+
         if (inType.get() == "WebM")
         {
             outStatus.set("Creating Video File from frames");
@@ -175,7 +189,6 @@ function render()
             op.patch.cgl.setSize(oldSizeW, oldSizeH);
             op.patch.cgl.updateSize();
         }
-
 
         return;
     }
@@ -208,16 +221,27 @@ function render()
             {
                 if (blob)
                 {
-                    const anchor = document.createElement("a");
-                    anchor.download = inFilePrefix.get() + "_" + shortId + "_" + countFrames + "." + suffix;
-                    anchor.href = URL.createObjectURL(blob);
-
-                    setTimeout(() =>
+                    let filename = inFilePrefix.get() + "_" + shortId + "_" + countFrames + "." + suffix;
+                    if (zip)
                     {
-                        anchor.click();
+                        zip.file(filename, blob, { "base64": false });
+                        console.log("add zip file...");
                         countFrames++;
                         updateTime();
-                    }, 200);
+                    }
+                    else
+                    {
+                        const anchor = document.createElement("a");
+                        anchor.download = filename;
+                        anchor.href = URL.createObjectURL(blob);
+
+                        setTimeout(() =>
+                        {
+                            anchor.click();
+                            countFrames++;
+                            updateTime();
+                        }, 200);
+                    }
                 }
                 else
                 {

@@ -20,6 +20,11 @@
             "message": "Ops.Gl.Renderanim_v2 renamed to Ops.Gl.RenderAnim_v2",
             "author": "pandur",
             "date": 1587361904529
+        },
+        {
+            "message": " added lib: jszip.js",
+            "author": "cables",
+            "date": 1607928609198
         }
     ],
     "authorName": "cables",
@@ -36,6 +41,17 @@
                 "subType": "integer"
             },
             {
+                "type": "0",
+                "name": "File Type",
+                "group": "File",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "ZIP multiple files",
+                "subType": "boolean"
+            },
+            {
                 "type": "5",
                 "name": "Filename",
                 "group": "File"
@@ -50,6 +66,11 @@
                 "type": "0",
                 "name": "Duration Type index",
                 "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Duration Type",
+                "group": "Timing"
             },
             {
                 "type": "0",
@@ -114,7 +135,8 @@
         "name": "Ops.Gl.RenderAnim_v2"
     },
     "libs": [
-        "whammy.js"
+        "whammy.js",
+        "jszip.js"
     ],
     "summary": "render an animation and save as file webm video or png image sequence",
     "issues": "",
