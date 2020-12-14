@@ -119,7 +119,7 @@ function render()
 
     const oldInternalNow = CABLES.internalNow;
 
-    if (numFrames > 1)
+    if (numFrames >= 0)
     {
         CABLES.internalNow = function ()
         {
@@ -149,8 +149,8 @@ function render()
     frameStarted = false;
     if (countFrames > numFrames)
     {
-        op.log("FINISHED>,...");
-        op.log("ffmpeg -y -framerate 30 -f image2 -i " + inFilePrefix.get() + "_" + shortId + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
+        console.log("FINISHED>,...");
+        console.log("ffmpeg -y -framerate 30 -f image2 -i " + inFilePrefix.get() + "_" + shortId + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
 
         stopRendering();
 
@@ -168,17 +168,25 @@ function render()
 
         if (inType.get() == "WebM")
         {
-            outStatus.set("Creating Video File from frames");
-            op.log("webm frames", frames.length);
+            try
+            {
+                outStatus.set("Creating Video File from frames");
+                console.log("webm frames", frames.length);
 
-            const video = Whammy.fromImageArray(frames, fps);
-            const url = window.URL.createObjectURL(video);
-            const anchor = document.createElement("a");
+                const video = Whammy.fromImageArray(frames, fps);
+                const url = window.URL.createObjectURL(video);
+                const anchor = document.createElement("a");
 
-            anchor.setAttribute("download", inFilePrefix.get() + ".webm");
-            anchor.setAttribute("href", url);
-            document.body.appendChild(anchor);
-            anchor.click();
+                anchor.setAttribute("download", inFilePrefix.get() + ".webm");
+                anchor.setAttribute("href", url);
+                document.body.appendChild(anchor);
+                anchor.click();
+            }
+            catch (e)
+            {
+                console.error(e);
+            }
+
             frames.length = 0;
         }
 
@@ -252,7 +260,7 @@ function render()
     else
     {
         outStatus.set("Prerendering...");
-        op.log("pre ", countFrames, time);
+        console.log("pre ", countFrames, time);
         countFrames++;
         updateTime();
     }

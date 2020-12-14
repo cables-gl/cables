@@ -35,7 +35,7 @@ inTime.onChange = update;
 
 function update()
 {
-    let frame = Math.floor(Math.abs(inTime.get()) * fps.get());
+    let frame = Math.ceil(Math.abs(inTime.get()) * (fps.get()));
     let numFrames = numX.get() * numY.get();
     if (maxFrames.get() !== 0) numFrames = maxFrames.get();
 

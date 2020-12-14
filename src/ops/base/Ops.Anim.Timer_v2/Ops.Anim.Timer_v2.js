@@ -52,6 +52,7 @@ op.onAnimFrame = function (tt)
     {
         if (CABLES.overwriteTime !== undefined)
         {
+            console.log("overwritten time!", CABLES.overwriteTime);
             outTime.set(CABLES.overwriteTime * inSpeed.get());
         }
         else

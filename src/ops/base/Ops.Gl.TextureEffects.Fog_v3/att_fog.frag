@@ -16,24 +16,55 @@ UNI float inFogEnd;
 
 {{CGL.BLENDMODES}}
 
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
 float CalcFogDensity(float depth) {
     float fogAmount = 1.;
 
+    float newDepth = map(depth, nearPlane, farPlane, 0., 1.);
+    float fogStart = map(inFogStart, nearPlane, farPlane, 0., 1.);
+    float fogEnd = map(inFogEnd, nearPlane, farPlane, 0., 1.);
+
     #ifdef FOG_MODE_DEFAULT
-        fogAmount = pow(depth, inFogDensity);
-        fogAmount = smoothstep(inFogStart, inFogEnd, fogAmount);
+        float MAGIC_NUMBER = 0.9;
+
+        fogAmount = clamp(pow(newDepth, 1. - MAGIC_NUMBER * inFogDensity), 0., 1.);
+
+        // same as: if (newDepth < fogStart) fogAmount = 0.;
+        fogAmount *= step(fogStart, newDepth);
+
+        //if (newDepth > fogEnd) fogAmount = 1.;
+
+         fogAmount *= inFogDensity;
     #endif
 
     #ifdef FOG_MODE_LINEAR
-        fogAmount = (inFogEnd - depth) / (inFogEnd - inFogStart);
+        float MAGIC_NUMBER = 1.5;
+        MAGIC_NUMBER = 1.;
+
+        fogAmount = 1.0-clamp( (inFogEnd-depth)/(inFogEnd-inFogStart), 0.0, 1.0);
+
+        fogAmount *= step(fogStart, newDepth);
+        fogAmount *= MAGIC_NUMBER * inFogDensity;
+
     #endif
 
     #ifdef FOG_MODE_EXP
-        fogAmount = exp(-inFogDensity * depth);
+        float MAGIC_NUMBER = 10.;
+        // MAGIC_NUMBER = 1.;
+
+        fogAmount = 1. - exp(MAGIC_NUMBER * -inFogDensity * newDepth);
+        fogAmount *= step(fogStart, newDepth);
     #endif
 
     #ifdef FOG_MODE_EXP2
-        fogAmount = exp(-pow(inFogDensity * depth, 2.0));
+        float MAGIC_NUMBER = 10.;
+        // MAGIC_NUMBER = 1.;
+
+        fogAmount = 1.0-clamp(exp(-pow(MAGIC_NUMBER * inFogDensity*newDepth, 2.0)), 0.0, 1.0);
+        fogAmount *= step(fogStart, newDepth);
     #endif
 
 
@@ -59,9 +90,9 @@ void main()
 
 
     fogColor = color * (1.0 - fogAmount) + fogColor * fogAmount;
-    // fogColor = mix(fogColor, color, 1.0 - fogAmount);
+//    fogColor = mix(color, fogColor, fogAmount);
 
-    if(distanceToCamera_viewSpace > inFogStart) outColor = cgl_blend(color, fogColor, inAmount);
 
-    else outColor = color;
+    outColor = cgl_blend(color, fogColor, inAmount);
+
 }

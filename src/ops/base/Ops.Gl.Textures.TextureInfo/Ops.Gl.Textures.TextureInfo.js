@@ -7,7 +7,12 @@ const
     outFilter = op.outValue("Filter"),
     outWrap = op.outValue("Wrap"),
     outFlipped = op.outValue("Flipped"),
+    outDefaultEmpty = op.outValue("Is Empty Default Texture", false),
+    outDefaultTex = op.outValue("Is Default Texture", false),
     outId = op.outValue("Id");
+
+const emptyTex = CGL.Texture.getEmptyTexture(op.patch.cgl);
+const defaultTex = CGL.Texture.getTempTexture(op.patch.cgl);
 
 inTex.onChange = function ()
 {
@@ -33,7 +38,6 @@ inTex.onChange = function ()
 
         outWrap.set(inTex.get().wrap + " " + strWrap);
 
-
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
     }
@@ -48,4 +52,7 @@ inTex.onChange = function ()
         outId.set(null);
         outFlipped.set(false);
     }
+
+    outDefaultEmpty.set(inTex.get() == emptyTex);
+    outDefaultTex.set(inTex.get() == defaultTex);
 };
