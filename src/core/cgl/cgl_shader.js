@@ -561,8 +561,8 @@ Shader.prototype.compile = function ()
     let uniformsStrFrag = "\n// cgl generated".endl();
 
 
-    fs += "\n// mods: --------------- ";
-    vs += "\n// mods: --------------- ";
+    fs += "\n// active mods: --------------- ";
+    vs += "\n// active mods: --------------- ";
 
     let foundModsFrag = false;
     let foundModsVert = false;
