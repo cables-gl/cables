@@ -12,6 +12,18 @@ const
 inUrlPort.onChange = function ()
 {
     const url = op.patch.getFilePath(inUrlPort.get());
+
+    const ext = url.substr(url.lastIndexOf(".") + 1);
+
+    if (ext === "wav")
+    {
+        op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
+    }
+    else
+    {
+        op.setUiError("wavFormat", null);
+    }
+
     if (typeof url === "string" && url.length > 1)
     {
         CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
@@ -26,7 +38,6 @@ function onLoadFinished(buffer)
     sampleRatePort.set(buffer.sampleRate);
     audioBufferPort.set(buffer);
     finishedLoadingPort.set(true);
-    // op.log("AudioBuffer loaded: ", buffer);
 }
 
 function onLoadFailed(e)

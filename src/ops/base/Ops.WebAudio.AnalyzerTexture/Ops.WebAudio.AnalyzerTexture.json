@@ -1,0 +1,60 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "simod",
+    "id": "decba955-636b-41c5-bfb8-c2506cbcabd2",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Refresh"
+            },
+            {
+                "type": "3",
+                "name": "FFT Array"
+            },
+            {
+                "type": "0",
+                "name": "Mirror Active",
+                "group": "Mirror Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Mirror Width",
+                "group": "Mirror Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Texture Size index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Texture Size",
+                "group": "Texture Options"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture Out"
+            }
+        ],
+        "name": "Ops.WebAudio.AnalyzerTexture"
+    },
+    "summary": "Creates a texture from an audio FFT array",
+    "created": 1607427491104,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.AnalyserTexture",
+            "author": "cables",
+            "date": 1607427491104
+        },
+        {
+            "message": "Ops.User.cables.AnalyzerTexture renamed to Ops.WebAudio.AnalyzerTexture",
+            "author": "cables",
+            "date": 1607441709142
+        }
+    ]
+}

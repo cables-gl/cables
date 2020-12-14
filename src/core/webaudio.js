@@ -109,7 +109,8 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
             {
                 try
                 {
-                    port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode, 0, inputChannelIndex);
+                    if (port.webAudio.previousAudioInNode.disconnect) port.webAudio.previousAudioInNode.disconnect(port.webAudio.audioNode, 0, inputChannelIndex);
+                    op.setUiError("audioCtx", null);
                 }
                 catch (e)
                 {
@@ -136,7 +137,12 @@ WEBAUDIO.createAudioInPort = function (op, portName, audioNode, inputChannelInde
         {
             try
             {
-                audioInNode.connect(port.webAudio.audioNode, 0, inputChannelIndex);
+                if (audioInNode.connect)
+                {
+                    audioInNode.connect(port.webAudio.audioNode, 0, inputChannelIndex);
+                    op.setUiError("audioCtx", null);
+                }
+                else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
             }
             catch (e)
             {
