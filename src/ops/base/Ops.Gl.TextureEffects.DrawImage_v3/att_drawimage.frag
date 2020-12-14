@@ -104,11 +104,15 @@ void main()
 
 
 
-    blendRGBA.rgb=mix( colNew, base ,1.0-am);
+    // blendRGBA.rgb=mix( colNew, base ,1.0-am);
 
+    // blendRGBA.a=clamp((blendRGBA.a*am),0.,1.);
+
+    blendRGBA.rgb=mix( colNew, base ,1.0-(am*blendRGBA.a));
     blendRGBA.a=clamp(baseRGBA.a+(blendRGBA.a*am),0.,1.);
-    // blendRGBA.a=1.0;
+
 
     outColor= blendRGBA;
 
 }
+
