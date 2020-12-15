@@ -54,13 +54,25 @@
                 "text": "The audio file used for the convolution. Must use the same [sample rate](https://developer.mozilla.org/de/docs/Web/API/AudioContext/sampleRate) as the audio context (44100 in most cases)."
             },
             {
+                "name": "IR Gain",
+                "text": "gain of the convolving signal (aka dry - wet)"
+            },
+            {
                 "name": "normalize",
                 "text": "When set to true, the impulse response will be normalized. "
+            },
+            {
+                "name": "Output Gain",
+                "text": "output volume"
             },
             {
                 "name": "audio out",
                 "text": "The convolver applied to the audio input"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

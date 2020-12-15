@@ -41,9 +41,9 @@
                 "name": "Texture Out"
             }
         ],
-        "name": "Ops.WebAudio.AnalyzerTexture"
+        "name": "Ops.WebAudio.AnalyzerTexture_v2"
     },
-    "summary": "Creates a texture from an audio FFT array",
+    "summary": "Creates a spectrogram texture from an audio FFT array",
     "created": 1607427491104,
     "changelog": [
         {
@@ -55,6 +55,43 @@
             "message": "Ops.User.cables.AnalyzerTexture renamed to Ops.WebAudio.AnalyzerTexture",
             "author": "cables",
             "date": 1607441709142
+        },
+        {
+            "message": "Ops.WebAudio.AnalyzerTexture renamed to Ops.WebAudio.AnalyzerTexture_v2",
+            "author": "simod",
+            "date": 1608037518062
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Refresh",
+                "text": "trigger input"
+            },
+            {
+                "name": "FFT Array",
+                "text": "FFT array input"
+            },
+            {
+                "name": "Mirror Active",
+                "text": "mirror the texture in the middle"
+            },
+            {
+                "name": "Mirror Width",
+                "text": "width of the mirror effect"
+            },
+            {
+                "name": "Texture Size",
+                "text": "set the texture size"
+            },
+            {
+                "name": "Texture Out",
+                "text": "texture output"
+            }
+        ]
+    }
 }

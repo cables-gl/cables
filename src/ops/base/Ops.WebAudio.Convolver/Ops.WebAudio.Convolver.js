@@ -1,4 +1,5 @@
-let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
+const cgl = op.patch.cgl;
+const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 const audioIn = op.inObject("audio in");
 // const impulseResponse = op.inUrl("impulse response");
@@ -19,9 +20,11 @@ const outputNode = audioContext.createGain();
 let oldAudioIn = null;
 let myImpulseBuffer;
 let impulseResponseLoaded = false;
+let loadingId = null;
 
 impulseResponse.onChange = () =>
 {
+    loadingId = cgl.patch.loading.start("IR convolver", "");
     const impulseUrl = impulseResponse.get();
     const ajaxRequest = new XMLHttpRequest();
     const url = op.patch.getFilePath(impulseUrl);
@@ -66,7 +69,7 @@ impulseResponse.onChange = () =>
 
         		try
                 {
-        		    audioIn.get().connect(convolverGain);
+        		    if (audioIn.get().connect) audioIn.get().connect(convolverGain);
         		    convolverGain.connect(convolver);
         		    convolver.connect(outputNode);
         		}
@@ -80,6 +83,7 @@ impulseResponse.onChange = () =>
                 op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
 
                 impulseResponseLoaded = true;
+                cgl.patch.loading.finished(loadingId);
                 op.setUiError("noIR", null);
             }, function (e)
             {
@@ -96,7 +100,7 @@ impulseResponse.onChange = () =>
         op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
         if (oldAudioIn)
         {
-            oldAudioIn.disconnect(convolver);
+            oldAudioIn.disconnect(outputNode);
             audioOut.set(oldAudioIn);
         }
         else audioOut.set(audioIn.get());

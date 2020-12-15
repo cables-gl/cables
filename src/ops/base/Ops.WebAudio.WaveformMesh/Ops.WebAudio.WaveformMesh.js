@@ -38,16 +38,16 @@ const cgl = op.patch.cgl;
 // input
 const renderPort = op.inTrigger("Render");
 const audioBufferPort = op.inObject("Audio Buffer");
-const renderActivePort = op.inValueBool("Render Active", true);
-const showBottomHalfPort = op.inValueBool("Show bottom half", true);
-const centerPort = op.inValueBool("Center Origin", true);
+const renderActivePort = op.inBool("Render Active", true);
+const showBottomHalfPort = op.inBool("Show bottom half", true);
+const centerPort = op.inBool("Center Origin", true);
 const widthPort = op.inValue("Width", 30);
-const samplesPerPixelPort = op.inValue("Samples Per Pixel", 10000);
+const samplesPerPixelPort = op.inInt("Samples Per Pixel", 10000);
 const inCalculateUV = op.inBool("Calculate Tex Coords", true);
-const inCalculateTangents = op.inBool("Calculate Tangents/Bitangents", false);
+
 op.setPortGroup("Render Options", [renderActivePort, showBottomHalfPort, centerPort]);
 op.setPortGroup("Waveform Settings", [widthPort, samplesPerPixelPort]);
-op.setPortGroup("Mesh Options", [inCalculateUV, inCalculateTangents]);
+op.setPortGroup("Mesh Options", [inCalculateUV]);
 // output
 const nextPort = op.outTrigger("Next");
 const geometryPort = op.outObject("Geometry");
@@ -56,11 +56,10 @@ const geometryPort = op.outObject("Geometry");
 let updating = true;
 audioBufferPort.onChange = samplesPerPixelPort.onChange
 = showBottomHalfPort.onChange = centerPort.onChange
-= widthPort.onChange = inCalculateTangents.onChange
-= inCalculateUV.onChange = () =>
-            {
-                updating = true;
-            };
+= widthPort.onChange = inCalculateUV.onChange = () =>
+        {
+            updating = true;
+        };
 
 renderPort.onTriggered = () =>
 {
@@ -107,6 +106,7 @@ function calculateUV(meshPoints)
 
 function createMesh(meshPoints)
 {
+    geom.clear();
     geom.vertices = meshPoints;
 
     if (inCalculateUV.get())
@@ -119,7 +119,6 @@ function createMesh(meshPoints)
         geom.setTexCoords([]);
     }
 
-    if (inCalculateTangents.get()) geom.calcTangentsBitangents();
     geom.calculateNormals();
 
     for (let i = 0; i < geom.vertexNormals.length; i += 3)

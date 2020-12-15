@@ -90,7 +90,7 @@ function updateFFT()
         // Number(inTextureSize.get()),
         // Number(inTextureSize.get()),
         CGL.Texture.FILTER_LINEAR,
-        CGL.Texture.CLAMP_TO_EDGE
+        CGL.Texture.WRAP_CLAMP_TO_EDGE
     );
 }
 
