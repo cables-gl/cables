@@ -23,13 +23,13 @@
             },
             {
                 "type": "0",
-                "name": "width",
+                "name": "Width",
                 "group": "Area Settings",
                 "subType": "number"
             },
             {
                 "type": "0",
-                "name": "height",
+                "name": "Height",
                 "group": "Area Settings",
                 "subType": "number"
             },
@@ -69,7 +69,48 @@
     "created": 1607443373884,
     "summary": "get average value in an area of a fft audio analysis buffer",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Refresh",
+                "text": "trigger input"
+            },
+            {
+                "name": "FFT Array",
+                "text": "FFT array input"
+            },
+            {
+                "name": "X Position",
+                "text": "x position of area to scan"
+            },
+            {
+                "name": "Y Position",
+                "text": "y position of area to scan"
+            },
+            {
+                "name": "width",
+                "text": "width of area to scan"
+            },
+            {
+                "name": "height",
+                "text": "height of area to scan"
+            },
+            {
+                "name": "Create Texture",
+                "text": "check to create texture"
+            },
+            {
+                "name": "Texture Size",
+                "text": "choose texture size"
+            },
+            {
+                "name": "Texture Out",
+                "text": "texture output"
+            },
+            {
+                "name": "Area Average Volume",
+                "text": "average volume of the scanned area"
+            }
+        ]
     },
     "issues": "",
     "collections": [

@@ -34,15 +34,15 @@
                 "group": "Playback Options"
             },
             {
-                "type": "1",
-                "name": "Jump To Position",
-                "group": "Seek Options"
-            },
-            {
                 "type": "0",
                 "name": "Seek Position (Seconds)",
                 "group": "Seek Options",
                 "subType": "number"
+            },
+            {
+                "type": "1",
+                "name": "Jump To Position",
+                "group": "Seek Options"
             }
         ],
         "portsOut": [

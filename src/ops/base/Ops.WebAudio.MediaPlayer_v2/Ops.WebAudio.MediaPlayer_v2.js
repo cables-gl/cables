@@ -10,8 +10,8 @@ const inMute = op.inBool("Mute", false);
 const play = op.inTriggerButton("Play");
 const pause = op.inTriggerButton("Pause");
 const rewind = op.inTriggerButton("Rewind");
-const jumpToSeekPosition = op.inTriggerButton("Jump To Position");
 const seekPosition = op.inFloat("Seek Position (Seconds)", 0);
+const jumpToSeekPosition = op.inTriggerButton("Jump To Position");
 
 op.setPortGroup("Volume Controls", [volume, inMute]);
 op.setPortGroup("Playback Options", [play, pause, rewind]);
@@ -174,7 +174,9 @@ function handleVolumeChange()
         const level = Number(volume.get()) * masterVolume;
         gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
         gainNode.gain.exponentialRampToValueAtTime(clamp(level, 0.0001, 1), audioContext.currentTime + 0.01);
-        if (volume.get() === 0) gainNode.gain.setValueAtTime(0, audioContext.currentTime + 0.06);
+
+        // if condition fixes clicks on safari when going from 0 -> higher
+        if (volume.get() >= 0 && volume.get <= 0.0001) gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.01);
     }
 }
 

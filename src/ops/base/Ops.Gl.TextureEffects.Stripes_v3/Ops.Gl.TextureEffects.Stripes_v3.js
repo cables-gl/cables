@@ -8,6 +8,7 @@ const
     offset = op.inValue("Offset", 0),
     smoothed = op.inValueBool("Gradients"),
     circular = op.inValueBool("Circular"),
+    invert = op.inValueBool("Invert"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
@@ -17,11 +18,13 @@ r.setUiAttribs({ "colorPick": true });
 
 smoothed.onChange = updateDefines;
 circular.onChange = updateDefines;
+invert.onChange = updateDefines;
 
 function updateDefines()
 {
     shader.toggleDefine("STRIPES_SMOOTHED", smoothed.get());
     shader.toggleDefine("CIRCULAR", circular.get());
+    shader.toggleDefine("INVERT", invert.get());
 }
 
 const
