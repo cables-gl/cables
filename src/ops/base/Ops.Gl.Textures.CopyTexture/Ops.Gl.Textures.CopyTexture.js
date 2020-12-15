@@ -91,35 +91,34 @@ function updateResolution()
         effect.setSourceTexture(tex);
     }
 
-    if (texOut.get())
-        if (!texOut.get().isPowerOfTwo())
-        {
-            if (!op.uiAttribs.hint)
-                op.uiAttr(
-                    {
-                        "hint": "texture dimensions not power of two! - texture filtering will not work.",
-                        "warning": null
-                    });
-        }
-        else
-        if (op.uiAttribs.hint)
-        {
-            op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
-        }
+    if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
+    {
+        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
+        else op.setUiError("hintnpot", null, 0);
+    }
+    else op.setUiError("hintnpot", null, 0);
+
+    // if (texOut.get())
+    //     if (!texOut.get().isPowerOfTwo())
+    //     {
+    //         if (!op.uiAttribs.hint)
+    //             op.uiAttr(
+    //                 {
+    //                     "hint": "texture dimensions not power of two! - texture filtering will not work.",
+    //                     "warning": null
+    //                 });
+    //     }
+    //     else
+    //     if (op.uiAttribs.hint)
+    //     {
+    //         op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
+    //     }
 }
 
 function updateSizePorts()
 {
-    if (useVPSize.get())
-    {
-        width.setUiAttribs({ "greyout": true });
-        height.setUiAttribs({ "greyout": true });
-    }
-    else
-    {
-        width.setUiAttribs({ "greyout": false });
-        height.setUiAttribs({ "greyout": false });
-    }
+    width.setUiAttribs({ "greyout": useVPSize.get() });
+    height.setUiAttribs({ "greyout": useVPSize.get() });
 }
 
 useVPSize.onChange = function ()

@@ -1,5 +1,4 @@
 {
-    "updated": 1509119130191,
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "89651899-be79-42f6-89b7-c97aa6fbd788",
@@ -19,23 +18,28 @@
             },
             {
                 "type": "0",
-                "name": "Width"
+                "name": "Width",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Samples Per Pixel"
+                "name": "Samples Per Pixel",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Show bottom half"
+                "name": "Show bottom half",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Center Origin"
+                "name": "Center Origin",
+                "subType": "boolean"
             },
             {
                 "type": "0",
-                "name": "Render Active"
+                "name": "Render Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

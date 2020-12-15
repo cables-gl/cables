@@ -168,7 +168,13 @@
     animate: height;
     /* max-height: 1000px; */
     /* transition: max-height 0.5s; */
-    --sidebar-group-header-height: 28px;
+--sidebar-group-header-height: 33px;
+}
+
+.sidebar__group-items
+{
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .sidebar__group--closed {
@@ -201,7 +207,7 @@
   /*text-align: center;*/
   overflow: hidden;
   padding: 0 15px;
-  padding-top:2px;
+  padding-top:5px;
   font-weight:bold;
 }
 
@@ -280,7 +286,7 @@
 .sidebar__item + .sidebar__group,
 .sidebar__group + .sidebar__item,
 .sidebar__group + .sidebar__group {
-    border-top: 1px solid #272727;
+    /*border-top: 1px solid #272727;*/
 }
 
 /*
