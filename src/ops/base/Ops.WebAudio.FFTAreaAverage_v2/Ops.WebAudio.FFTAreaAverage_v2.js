@@ -85,7 +85,7 @@ refresh.onTriggered = function ()
     if (draw)ctx.rect(areaX, areaY, areaW, areaH);
     if (draw)
     {
-        ctx.lineWidth = multiplier;
+        ctx.lineWidth = 2 * multiplier;
         ctx.stroke();
     }
 
