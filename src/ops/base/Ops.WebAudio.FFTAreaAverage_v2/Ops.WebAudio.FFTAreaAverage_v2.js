@@ -83,7 +83,11 @@ refresh.onTriggered = function ()
     areaH = h.get() * size / 2;
 
     if (draw)ctx.rect(areaX, areaY, areaW, areaH);
-    if (draw)ctx.stroke();
+    if (draw)
+    {
+        ctx.lineWidth = multiplier;
+        ctx.stroke();
+    }
 
     const val = 0;
     let count = 0;
@@ -99,7 +103,7 @@ refresh.onTriggered = function ()
     if (draw)
     {
         ctx.fillStyle = "#ff0";
-        ctx.fillRect(0, 0, amount * canvas.width, 5 * multiplier);
+        ctx.fillRect(0, 0, amount * canvas.width, 6 * multiplier);
 
         if (texOut.get()) texOut.get().initTexture(canvas, CGL.Texture.FILTER_NEAREST);
         else
