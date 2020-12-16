@@ -48,6 +48,10 @@ void main()
        stripe= r * smoothstep(0.,1., abs((((m-rm) )/(rm))));
     #endif
 
+    #ifdef INVERT
+    stripe=1.0-stripe;
+    #endif
+
     //blend section
     vec4 col=vec4(vec3(r,g,b),1.0);
     vec4 base=texture(tex,texCoord);

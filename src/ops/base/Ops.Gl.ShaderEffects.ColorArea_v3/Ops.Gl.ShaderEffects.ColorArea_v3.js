@@ -44,7 +44,7 @@ render.onTriggered = doRender;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    "priority": 2,
+    // "priority": 2,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     srcHeadVert,

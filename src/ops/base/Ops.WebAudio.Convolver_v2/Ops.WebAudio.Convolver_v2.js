@@ -1,14 +1,13 @@
 const cgl = op.patch.cgl;
 const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
-const audioIn = op.inObject("audio in");
-// const impulseResponse = op.inUrl("impulse response");
-const impulseResponse = this.addInPort(new CABLES.Port(this, "impulse response", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const audioIn = op.inObject("Audio In");
+const impulseResponse = op.inUrl("Impulse Response");
 const inConvolverGain = op.inFloatSlider("IR Gain", 1);
-const normalize = op.inBool("normalize", true);
+const normalize = op.inBool("Normalize", true);
 const inOutputGain = op.inFloatSlider("Output Gain", 1);
 
-const audioOut = op.outObject("audio out");
+const audioOut = op.outObject("Audio Out");
 
 op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize]);
 op.setPortGroup("Output", [inOutputGain]);
@@ -20,12 +19,14 @@ const outputNode = audioContext.createGain();
 let oldAudioIn = null;
 let myImpulseBuffer;
 let impulseResponseLoaded = false;
+let scheduleConnection = false;
 let loadingId = null;
 
 impulseResponse.onChange = () =>
 {
     loadingId = cgl.patch.loading.start("IR convolver", "");
     const impulseUrl = impulseResponse.get();
+
     const ajaxRequest = new XMLHttpRequest();
     const url = op.patch.getFilePath(impulseUrl);
     const ext = url.substr(url.lastIndexOf(".") + 1);
@@ -69,16 +70,23 @@ impulseResponse.onChange = () =>
 
         		try
                 {
-        		    if (audioIn.get().connect) audioIn.get().connect(convolverGain);
-        		    convolverGain.connect(convolver);
-        		    convolver.connect(outputNode);
+                    if (audioIn.get())
+                    {
+                        audioIn.get().connect(convolverGain);
+                        audioIn.get().connect(outputNode);
+            		    convolverGain.connect(convolver);
+            		    convolver.connect(outputNode);
+                        audioOut.set(outputNode);
+                    }
+                    else
+                    {
+                        scheduleConnection = true;
+                    }
         		}
                 catch (e)
                 {
         		    op.log("[audio in] Could not connect audio in to convolver" + e);
         		}
-
-                audioOut.set(outputNode);
 
                 op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
 
@@ -89,6 +97,7 @@ impulseResponse.onChange = () =>
             {
                 op.log("[impulse response] Error decoding audio data" + e.err);
                 impulseResponseLoaded = false;
+                cgl.patch.loading.finished(loadingId);
             });
         };
 
@@ -98,12 +107,9 @@ impulseResponse.onChange = () =>
     {
         impulseResponseLoaded = false;
         op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
-        if (oldAudioIn)
-        {
-            oldAudioIn.disconnect(outputNode);
-            audioOut.set(oldAudioIn);
-        }
-        else audioOut.set(audioIn.get());
+
+        convolver.buffer = null;
+        audioOut.set(outputNode);
     }
 };
 
@@ -136,6 +142,15 @@ audioIn.onChange = function ()
         try
         {
             audioIn.get().connect(outputNode);
+            audioIn.get().connect(convolverGain);
+
+            if (scheduleConnection)
+            {
+    		    convolverGain.connect(convolver);
+    		    convolver.connect(outputNode);
+    		    scheduleConnection = false;
+            }
+
             oldAudioIn = audioIn.get();
         }
         catch (e)
@@ -146,7 +161,7 @@ audioIn.onChange = function ()
         if (!impulseResponseLoaded)
         {
             op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
-            audioOut.set(oldAudioIn);
+            audioOut.set(outputNode);
         }
         else
         {
@@ -161,7 +176,9 @@ audioIn.onChange = function ()
             op.setUiError("noIR", null);
         }
         op.setUiError("audioCtx", null);
+        if (oldAudioIn) oldAudioIn.disconnect(outputNode);
         audioOut.set(null);
+        oldAudioIn = null;
     }
 };
 

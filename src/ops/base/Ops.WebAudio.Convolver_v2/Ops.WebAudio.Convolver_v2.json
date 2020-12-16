@@ -1,18 +1,17 @@
 {
     "author": "56cdab144f85abfb36c6c089",
-    "authorName": "tim",
-    "id": "e3cf4ccd-e318-48f0-acd0-5bd911090023",
+    "authorName": "simod",
+    "id": "63c619be-2256-4bbe-a83f-36b2bb6faa52",
     "layout": {
         "portsIn": [
             {
                 "type": "2",
-                "name": "audio in"
+                "name": "Audio In"
             },
             {
-                "type": "0",
-                "name": "impulse response",
-                "group": "IR Options",
-                "subType": "string"
+                "type": "5",
+                "name": "Impulse Response",
+                "group": "IR Options"
             },
             {
                 "type": "0",
@@ -22,7 +21,7 @@
             },
             {
                 "type": "0",
-                "name": "normalize",
+                "name": "Normalize",
                 "group": "IR Options",
                 "subType": "boolean"
             },
@@ -36,12 +35,12 @@
         "portsOut": [
             {
                 "type": "2",
-                "name": "audio out"
+                "name": "Audio Out"
             }
         ],
-        "name": "Ops.WebAudio.Convolver"
+        "name": "Ops.WebAudio.Convolver_v2"
     },
-    "created": 1510741688555,
+    "created": 1607959999477,
     "summary": "Audio reverb using an impulse response (sample)",
     "docs": {
         "ports": [
@@ -54,16 +53,8 @@
                 "text": "The audio file used for the convolution. Must use the same [sample rate](https://developer.mozilla.org/de/docs/Web/API/AudioContext/sampleRate) as the audio context (44100 in most cases)."
             },
             {
-                "name": "IR Gain",
-                "text": "gain of the convolving signal (aka dry - wet)"
-            },
-            {
                 "name": "normalize",
                 "text": "When set to true, the impulse response will be normalized. "
-            },
-            {
-                "name": "Output Gain",
-                "text": "output volume"
             },
             {
                 "name": "audio out",
@@ -71,8 +62,16 @@
             }
         ]
     },
-    "issues": "",
-    "collections": null,
-    "relatedops": null,
-    "youtubeids": []
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.Convolver",
+            "author": "cables",
+            "date": 1607959999477
+        },
+        {
+            "message": "Ops.User.cables.Convolver_v2 renamed to Ops.WebAudio.Convolver_v2",
+            "author": "cables",
+            "date": 1607960035143
+        }
+    ]
 }

@@ -36,6 +36,8 @@ const frames = [];
 let lastFrame = -1;
 let time = 0;
 
+let filenamePrefix = "";
+
 let zip = null;
 
 let oldSizeW = op.patch.cgl.canvasWidth;
@@ -60,6 +62,8 @@ function updateSize()
 
 inStart.onTriggered = function ()
 {
+    filenamePrefix = inFilePrefix.get();
+    console.log("pref", filenamePrefix);
     frames.length = 0;
     outStatus.set("Starting");
     fps = inFps.get();
@@ -105,6 +109,7 @@ function stopRendering()
 {
     started = false;
     CABLES.overwriteTime = undefined;
+    outStatus.set("Finished");
 }
 
 function render()
@@ -150,9 +155,13 @@ function render()
     if (countFrames > numFrames)
     {
         console.log("FINISHED>,...");
-        console.log("ffmpeg -y -framerate 30 -f image2 -i " + inFilePrefix.get() + "_" + shortId + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
+        console.log("ffmpeg -y -framerate 30 -f image2 -i " + filenamePrefix + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
 
-        stopRendering();
+        if (!useCanvasSize.get())
+        {
+            op.patch.cgl.setSize(oldSizeW, oldSizeH);
+            op.patch.cgl.updateSize();
+        }
 
         if (zip)
         {
@@ -160,12 +169,13 @@ function render()
                 .then(function (blob)
                 {
                     const anchor = document.createElement("a");
-                    anchor.download = inFilePrefix.get() + ".zip";
+                    anchor.download = filenamePrefix + ".zip";
                     anchor.href = URL.createObjectURL(blob);
                     anchor.click();
+                    stopRendering();
                 });
         }
-
+        else
         if (inType.get() == "WebM")
         {
             try
@@ -177,10 +187,11 @@ function render()
                 const url = window.URL.createObjectURL(video);
                 const anchor = document.createElement("a");
 
-                anchor.setAttribute("download", inFilePrefix.get() + ".webm");
+                anchor.setAttribute("download", filenamePrefix + ".webm");
                 anchor.setAttribute("href", url);
                 document.body.appendChild(anchor);
                 anchor.click();
+                stopRendering();
             }
             catch (e)
             {
@@ -189,14 +200,8 @@ function render()
 
             frames.length = 0;
         }
-
-        outStatus.set("Finished");
-
-        if (!useCanvasSize.get())
-        {
-            op.patch.cgl.setSize(oldSizeW, oldSizeH);
-            op.patch.cgl.updateSize();
-        }
+        else
+            stopRendering();
 
         return;
     }
@@ -229,9 +234,10 @@ function render()
             {
                 if (blob)
                 {
-                    let filename = inFilePrefix.get() + "_" + shortId + "_" + countFrames + "." + suffix;
                     if (zip)
                     {
+                        let filename = filenamePrefix + "_" + countFrames + "." + suffix;
+
                         zip.file(filename, blob, { "base64": false });
                         console.log("add zip file...");
                         countFrames++;
@@ -239,6 +245,8 @@ function render()
                     }
                     else
                     {
+                        let filename = filenamePrefix + "_" + shortId + "_" + countFrames + "." + suffix;
+
                         const anchor = document.createElement("a");
                         anchor.download = filename;
                         anchor.href = URL.createObjectURL(blob);

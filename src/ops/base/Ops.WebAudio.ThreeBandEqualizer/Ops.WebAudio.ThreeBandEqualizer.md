@@ -1,0 +1,1 @@
+This op is 3 biquad filters in one. It is heavily inspired by Ableton's EQ3. 
