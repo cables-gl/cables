@@ -49,6 +49,8 @@ function setup()
 
     world.defaultContactMaterial.contactEquationStiffness = 1e10;
     world.defaultContactMaterial.contactEquationRelaxation = 4;
+    // world.defaultContactMaterial.friction = 9999999999999;
+    // world.defaultContactMaterial.restitution = 0;
 
     // world.gravity.set(0,-9.82,0 ); // m/s²
     // world.gravity.set(0,-9.82,0 ); // m/s²
