@@ -12,7 +12,7 @@ window.addEventListener("deviceorientation", onOrientationChange, true);
 let tempQuat = quat.create();
 mat4.identity(transMatrix);
 
-let viewDirQuat = quat.create();
+const viewDirQuat = quat.create();
 
 render.onTriggered = function ()
 {
@@ -66,16 +66,16 @@ render.onTriggered = function ()
 // frp, http://asterixcreative.com/blog/mobile-gyroscope-with-javascript-and-quaternions-programming-tutorial-part-1/
 function quatFromEuler(quat, alpha, beta, gamma)
 {
-    let x = CGL.DEG2RAD * beta;
-    let y = CGL.DEG2RAD * gamma;
-    let z = CGL.DEG2RAD * alpha;
+    const x = CGL.DEG2RAD * beta;
+    const y = CGL.DEG2RAD * gamma;
+    const z = CGL.DEG2RAD * alpha;
 
-    let cX = Math.cos(x / 2);
-    let cY = Math.cos(y / 2);
-    let cZ = Math.cos(z / 2);
-    let sX = Math.sin(x / 2);
-    let sY = Math.sin(y / 2);
-    let sZ = Math.sin(z / 2);
+    const cX = Math.cos(x / 2);
+    const cY = Math.cos(y / 2);
+    const cZ = Math.cos(z / 2);
+    const sX = Math.sin(x / 2);
+    const sY = Math.sin(y / 2);
+    const sZ = Math.sin(z / 2);
 
     quat[0] = sX * cY * cZ - cX * sY * sZ;
     quat[1] = cX * sY * cZ + sX * cY * sZ;
@@ -87,9 +87,9 @@ function quatFromEuler(quat, alpha, beta, gamma)
 
 function onOrientationChange(event)
 {
-    let alpha = (event.alpha || 0);
-    let beta = (event.beta || 0);
-    let gamma = (event.gamma || 0);
+    const alpha = (event.alpha || 0);
+    const beta = (event.beta || 0);
+    const gamma = (event.gamma || 0);
 
     winOrient.set(window.orientation || 0);
     quatFromEuler(viewDirQuat, alpha, beta, gamma);
