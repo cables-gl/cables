@@ -31,6 +31,11 @@
             },
             {
                 "type": "0",
+                "name": "Shape index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
                 "name": "Shape",
                 "subType": "string"
             },
@@ -75,7 +80,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.RandomInstancer"
+        "name": "Ops.Deprecated.Gl.RandomInstancer"
     },
     "summary": "draw one mesh multiple times very fast",
     "youtubeid": "",

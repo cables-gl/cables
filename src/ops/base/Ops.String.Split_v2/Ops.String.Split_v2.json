@@ -11,6 +11,11 @@
             {
                 "type": "5",
                 "name": "Separator"
+            },
+            {
+                "type": "0",
+                "name": "Split Lines",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -19,7 +24,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.String.Split2"
+        "name": "Ops.String.Split_v2"
     },
     "summary": "Splits a string with separator into an array of strings",
     "issues": "",

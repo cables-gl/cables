@@ -2,12 +2,11 @@ const increment = op.inTriggerButton("Increment");
 const decrement = op.inTriggerButton("Decrement");
 const inLength = op.inValueInt("Length");
 const reset = op.inTriggerButton("Reset");
-const inMode = op.inValueSelect("Mode", ["Rewind", "Stop at Max"]);
+const inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind");
 const outChanged = op.outTrigger("Changed");
 const value = op.outValue("Value");
 
 const outRestarted = op.outTrigger("Restarted");
-
 
 value.ignoreValueSerialize = true;
 inLength.set(10);

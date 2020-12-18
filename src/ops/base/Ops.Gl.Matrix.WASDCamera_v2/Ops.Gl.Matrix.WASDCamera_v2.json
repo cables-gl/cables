@@ -16,13 +16,18 @@
             },
             {
                 "type": "0",
-                "name": "Allow Flying",
-                "subType": "boolean"
+                "name": "Speed",
+                "subType": "number"
             },
             {
                 "type": "0",
-                "name": "Speed",
+                "name": "Mouse Speed",
                 "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Allow Flying",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
