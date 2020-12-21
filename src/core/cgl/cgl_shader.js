@@ -73,6 +73,7 @@ const Shader = function (_cgl, _name)
     if (_cgl.glVersion > 1) this.glslVersion = 300;
 
     this.id = simpleId();
+    this._isValid = true;
     this._program = null;
     this._uniforms = [];
     this._drawBuffers = [true];
@@ -121,6 +122,11 @@ const Shader = function (_cgl, _name)
     this._tempInverseViewMatrix = mat4.create();
 
     this.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+};
+
+Shader.prototype.isValid = function ()
+{
+    return this._isValid;
 };
 
 Shader.prototype.getCgl = function ()
@@ -555,6 +561,38 @@ Shader.prototype.compile = function ()
     let uniformsStrFrag = "\n// cgl generated".endl();
 
 
+    fs += "\n// active mods: --------------- ";
+    vs += "\n// active mods: --------------- ";
+
+    let foundModsFrag = false;
+    let foundModsVert = false;
+    for (let i = 0; i < this._moduleNames.length; i++)
+    {
+        for (let j = 0; j < this._modules.length; j++)
+        {
+            if (this._modules[j].name == this._moduleNames[i])
+            {
+                // console.log(this._modules[j]);
+
+                if (this._modules[j].srcBodyFrag || this._modules[j].srcHeadFrag)
+                {
+                    foundModsFrag = true;
+                    fs += "\n// " + i + "." + j + ". " + this._modules[j].title + " (" + this._modules[j].name + ")";
+                }
+                if (this._modules[j].srcBodyVert || this._modules[j].srcHeadVert)
+                {
+                    vs += "\n// " + i + "." + j + ". " + this._modules[j].title + " (" + this._modules[j].name + ")";
+                    foundModsVert = true;
+                }
+            }
+        }
+    }
+    if (!foundModsVert)fs += "\n// no mods used...";
+    if (!foundModsFrag)fs += "\n// no mods used...";
+    fs += "\n";
+    vs += "\n";
+
+
     for (let i = 0; i < this._uniforms.length; i++)
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
@@ -628,6 +666,7 @@ Shader.prototype.compile = function ()
 
                 srcVert += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
                 srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
+
 
                 if (!addedAttributes)
                 {
@@ -723,6 +762,8 @@ Shader.prototype.compile = function ()
     this._needsRecompile = false;
     this.lastCompile = now();
 
+    this._cgl.printError("shader compile");
+
     CGL.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
@@ -733,6 +774,7 @@ Shader.hasChanged = function ()
 
 Shader.prototype.bind = function ()
 {
+    if (!this._isValid) return;
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
@@ -1275,6 +1317,7 @@ Shader.prototype._linkProgram = function (program)
     }
 
     this._cgl.gl.linkProgram(program);
+    this._isValid = true;
 
     if (this._cgl.patch.config.glValidateShader !== false)
     {
@@ -1282,8 +1325,8 @@ Shader.prototype._linkProgram = function (program)
 
         if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
         {
-            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader));
-            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader));
+            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader) || "empty shader infolog");
+            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             console.error(name + " shader linking fail...");
 
             Log.log("srcFrag", this.srcFrag);
@@ -1293,6 +1336,7 @@ Shader.prototype._linkProgram = function (program)
             Log.log("--------------------------------------");
             Log.log(this);
             Log.log("--------------------------------------");
+            this._isValid = false;
 
             this._name = "errorshader";
             this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
@@ -1480,6 +1524,9 @@ Shader.getErrorFragmentShader = function ()
 
 Shader.createShader = function (cgl, str, type, cglShader)
 {
+    if (cgl.aborted) return;
+    cgl.printError("shader create1");
+
     function getBadLines(infoLog)
     {
         const basLines = [];
@@ -1503,9 +1550,9 @@ Shader.createShader = function (cgl, str, type, cglShader)
         if (type == cgl.gl.VERTEX_SHADER) Log.log("VERTEX_SHADER");
         if (type == cgl.gl.FRAGMENT_SHADER) Log.log("FRAGMENT_SHADER");
 
-        console.warn(cgl.gl.getShaderInfoLog(shader));
+        // console.warn(cgl.gl.getShaderInfoLog(shader));
 
-        let infoLog = cgl.gl.getShaderInfoLog(shader);
+        let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
         const badLines = getBadLines(infoLog);
         let htmlWarning = "<div class=\"shaderErrorCode\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
@@ -1543,6 +1590,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     {
         // Log.log(name+' shader compiled...');
     }
+    cgl.printError("shader create2");
     return shader;
 };
 

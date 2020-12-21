@@ -8,9 +8,19 @@ const exec = op.inTrigger("Exec"),
     gravY = op.inValue("Gravity Y", -9.82),
     gravZ = op.inValue("Gravity Z"),
 
+    inIter = op.inInt("Solver Iterations", 13),
+
+    inDefStiff = op.inInt("Contact Stiffness", 1),
+    inDefRelax = op.inInt("Contact Relaxation", 4),
+
+    inSimulate = op.inBool("Simulate", true),
+
     next = op.outTrigger("next"),
     outNum = op.outNumber("Num Bodies");
 
+inDefRelax.onChange =
+inDefStiff.onChange =
+inIter.onChange =
 gravX.onChange =
 gravY.onChange =
 gravZ.onChange = setGravity;
@@ -36,7 +46,10 @@ reset.onTriggered = function ()
 
 function setGravity()
 {
-    if (world) world.gravity.set(gravX.get(), gravY.get(), gravZ.get()); // m/s²
+    if (!world) return;
+
+    world.gravity.set(gravX.get(), gravY.get(), gravZ.get()); // m/s²
+    world.solver.iterations = inIter.get();
 }
 
 function setup()
@@ -45,10 +58,11 @@ function setup()
     world.uuid = CABLES.uuid();
 
     world.broadphase = new CANNON.NaiveBroadphase();
-    world.solver.iterations = 13;
 
-    world.defaultContactMaterial.contactEquationStiffness = 1e10;
-    world.defaultContactMaterial.contactEquationRelaxation = 4;
+    world.defaultContactMaterial.contactEquationStiffness = inDefStiff.get() * 1e10;
+    world.defaultContactMaterial.contactEquationRelaxation = inDefRelax.get();
+    // world.defaultContactMaterial.contactEquationStiffness = 1e10;
+    // world.defaultContactMaterial.contactEquationRelaxation = 4;
     // world.defaultContactMaterial.friction = 9999999999999;
     // world.defaultContactMaterial.restitution = 0;
 
@@ -130,7 +144,6 @@ function draw()
                 1.0,
                 1.0,
                 1.0);
-            // console.log(world.bodies[i].shapes[0])
         }
         // else op.log("unknown!", world.bodies[i].shapes[0].type);
 
@@ -152,7 +165,7 @@ exec.onTriggered = function ()
 
     const time = performance.now();
 
-    if (lastTime !== undefined)
+    if (inSimulate.get() && lastTime !== undefined)
     {
         const dt = (time - lastTime) / 1000;
         world.step(fixedTimeStep, dt, maxSubSteps);

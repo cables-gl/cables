@@ -1,0 +1,1 @@
+The BiquadFilterNode represents a simple low-order filter. It can represent different kinds of filters, tone control devices, and graphic equalizers.

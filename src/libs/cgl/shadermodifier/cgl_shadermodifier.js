@@ -32,6 +32,7 @@ class ShaderModifier
         const shader = this._cgl.getShader();
         if (!shader) return;
 
+
         this._boundShader = this._origShaders[shader.id];
 
         let missingMod = false;
@@ -40,7 +41,6 @@ class ShaderModifier
         {
             if (!this._boundShader.shader.hasModule(this._mods[0].id)) missingMod = true;
         }
-
 
         if (missingMod || !this._boundShader || shader.lastCompile != this._boundShader.lastCompile || this._modulesChanged || shader._needsRecompile)
         {

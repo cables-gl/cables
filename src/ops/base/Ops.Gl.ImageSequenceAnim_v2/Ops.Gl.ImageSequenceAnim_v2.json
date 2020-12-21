@@ -1,1 +1,132 @@
-{"authorName":"pandur","id":"282203ae-8e8c-4ff7-a0a6-f0cb0ec1ca25","created":1516721369528,"layout":{"portsIn":[{"type":"0","name":"Time","subType":"number"},{"type":"0","name":"FPS","subType":"number"},{"type":"0","name":"Num X","subType":"number"},{"type":"0","name":"Num Y","subType":"number"},{"type":"0","name":"Max Frames","subType":"integer"}],"portsOut":[{"type":"0","name":"Repeat X","subType":"number"},{"type":"0","name":"Repeat Y","subType":"number"},{"type":"0","name":"Offset X","subType":"number"},{"type":"0","name":"Offset Y","subType":"number"},{"type":"0","name":"Frame","subType":"number"},{"type":"0","name":"Progress","subType":"number"}],"name":"Ops.Gl.ImageSequenceAnim_v2"},"summary":"play a image sprite animation","docs":{"ports":[{"name":"Time","text":"Time used to animate the op, plug a timer into this to animate"},{"name":"FPS","text":"FPS of the animation"},{"name":"Num X","text":"Set this to the amount of images on the X axis"},{"name":"Num Y","text":"Set this to the amount of images on the Y axis"},{"name":"Repeat X","text":"Used to set the `X` size the repeat setting of the texture"},{"name":"Repeat Y","text":"Used to set the `Y` size the repeat setting of the texture"},{"name":"Offset X","text":"Used to offset the texture on the `X` axis"},{"name":"Offset Y","text":"Used to offset the texture on the `Y` axis"},{"name":"Frame","text":"Current frame number determined by FPS parameter"},{"name":"Progress","text":"Progress through the animation, range `0-1`"}]},"youtubeid":"","issues":"","collections":null,"relatedops":null,"changelog":[{"message":"added max num of frames, if atlas has blank frames at the end","author":"pandur","date":1598544310528}]}
+{
+    "authorName": "pandur",
+    "id": "282203ae-8e8c-4ff7-a0a6-f0cb0ec1ca25",
+    "created": 1516721369528,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "0",
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Unit index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Unit"
+            },
+            {
+                "type": "0",
+                "name": "FPS",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Num Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max Frames",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "0",
+                "name": "Repeat X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Repeat Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset X",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Offset Y",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Frame",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Progress",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.ImageSequenceAnim_v2"
+    },
+    "summary": "play a image sprite animation",
+    "docs": {
+        "ports": [
+            {
+                "name": "Time",
+                "text": "Time used to animate the op, plug a timer into this to animate"
+            },
+            {
+                "name": "FPS",
+                "text": "FPS of the animation"
+            },
+            {
+                "name": "Num X",
+                "text": "Set this to the amount of images on the X axis"
+            },
+            {
+                "name": "Num Y",
+                "text": "Set this to the amount of images on the Y axis"
+            },
+            {
+                "name": "Repeat X",
+                "text": "Used to set the `X` size the repeat setting of the texture"
+            },
+            {
+                "name": "Repeat Y",
+                "text": "Used to set the `Y` size the repeat setting of the texture"
+            },
+            {
+                "name": "Offset X",
+                "text": "Used to offset the texture on the `X` axis"
+            },
+            {
+                "name": "Offset Y",
+                "text": "Used to offset the texture on the `Y` axis"
+            },
+            {
+                "name": "Frame",
+                "text": "Current frame number determined by FPS parameter"
+            },
+            {
+                "name": "Progress",
+                "text": "Progress through the animation, range `0-1`"
+            }
+        ]
+    },
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "added max num of frames, if atlas has blank frames at the end",
+            "author": "pandur",
+            "date": 1598544310528
+        }
+    ]
+}

@@ -1,5 +1,3 @@
-op.requirements = [CABLES.Requirements.POINTERLOCK];
-
 const render = op.inTrigger("render");
 const enablePointerLock = op.inBool("Enable pointer lock", true);
 const trigger = op.outTrigger("trigger");

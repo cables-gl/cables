@@ -1,0 +1,133 @@
+{
+    "author": "56cdab144f85abfb36c6c089",
+    "authorName": "simod",
+    "id": "9f61a958-90b1-46df-a893-de48a5844583",
+    "created": 1607338112054,
+    "libs": [
+        "webaudio-peaks.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Render"
+            },
+            {
+                "type": "2",
+                "name": "Audio Buffer"
+            },
+            {
+                "type": "0",
+                "name": "Render Active",
+                "group": "Render Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Show bottom half",
+                "group": "Render Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Center Origin",
+                "group": "Render Options",
+                "subType": "boolean"
+            },
+            {
+                "type": "0",
+                "name": "Width",
+                "group": "Waveform Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Samples Per Pixel",
+                "group": "Waveform Settings",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Calculate Tex Coords",
+                "group": "Mesh Options",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Next"
+            },
+            {
+                "type": "2",
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.WebAudio.WaveformMesh"
+    },
+    "summary": "Outputs the waveform of an audio file as a geometry",
+    "docs": {
+        "ports": [
+            {
+                "name": "Render",
+                "text": "Renders the waveform and triggers `Next` when done"
+            },
+            {
+                "name": "Audio Buffer",
+                "text": "Connect this to an Ops.WebAudio.AudioBuffer op, which loads and holds an audio sample"
+            },
+            {
+                "name": "Render Active",
+                "text": "if true mesh is rendered"
+            },
+            {
+                "name": "Show bottom half",
+                "text": "When enabled the top half of the waveform will be mirrored, when disabled only the upper half is drawn"
+            },
+            {
+                "name": "Center Origin",
+                "text": "When enabled the waveform will be centered around the origin, e.g. useful when using `OrbitControls` and rotating around the origin. When disabled the waveform will start at the origin."
+            },
+            {
+                "name": "Width",
+                "text": "The width of the waveform"
+            },
+            {
+                "name": "Samples Per Pixel",
+                "text": "Controls how detailled the waveform is, the smaller the value the more detail and the wider the output. "
+            },
+            {
+                "name": "Calculate Tex Coords",
+                "text": "check to calculate texture coordinates"
+            },
+            {
+                "name": "Calculate Tangents/Bitangents",
+                "text": "check to calculate tangents & bitangents"
+            },
+            {
+                "name": "Next",
+                "text": "Called after `Render` was called, triggers the next op"
+            },
+            {
+                "name": "Geometry",
+                "text": "The geometry of the waveform, can be drawn e.g. with `RenderGeometry`"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.Waveform",
+            "author": "cables",
+            "date": 1607338112054
+        },
+        {
+            "message": "Ops.User.cables.WaveformMesh renamed to Ops.WebAudio.WaveformMesh",
+            "author": "cables",
+            "date": 1607353452535
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
+}

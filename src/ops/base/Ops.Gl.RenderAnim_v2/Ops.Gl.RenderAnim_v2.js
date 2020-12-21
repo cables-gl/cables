@@ -2,6 +2,7 @@ const
     exec = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
     inType = op.inDropDown("File Type", ["PNG", "JPG", "WebP", "WebM"], "PNG"),
+    inZip = op.inBool("ZIP multiple files", false),
     inFilePrefix = op.inString("Filename", "cables"),
     inQuality = op.inFloatSlider("Quality", 0.8),
     inDurType = op.inSwitch("Duration Type", ["Seconds", "Frames"], "Seconds"),
@@ -13,13 +14,14 @@ const
     inHeight = op.inValueInt("texture height", 512),
     inStart = op.inTriggerButton("Start"),
     outProgress = op.outNumber("Progress", 0),
+    outFrame = op.outNumber("Frame", 0),
     outStatus = op.outString("Status", "Waiting"),
-    outStarted = op.outBool("Started");
+    outStarted = op.outBool("Started"),
+    outFinished = op.outTrigger("Finished");
 
 op.setPortGroup("File", [inType, inFilePrefix, inQuality]);
 op.setPortGroup("Size", [useCanvasSize, inWidth, inHeight]);
 op.setPortGroup("Timing", [inFps, inDurType, inDuration]);
-
 
 exec.onTriggered = render;
 
@@ -35,6 +37,10 @@ let frameStarted = false;
 const frames = [];
 let lastFrame = -1;
 let time = 0;
+
+let filenamePrefix = "";
+
+let zip = null;
 
 let oldSizeW = op.patch.cgl.canvasWidth;
 let oldSizeH = op.patch.cgl.canvasHeight;
@@ -58,6 +64,8 @@ function updateSize()
 
 inStart.onTriggered = function ()
 {
+    filenamePrefix = inFilePrefix.get();
+    console.log("pref", filenamePrefix);
     frames.length = 0;
     outStatus.set("Starting");
     fps = inFps.get();
@@ -65,6 +73,8 @@ inStart.onTriggered = function ()
     if (inDurType.get() == "Frames")numFrames = inDuration.get();
     shortId = CABLES.shortId();
     updateTime();
+
+    if (inZip.get()) zip = new JSZip();
 
     if (!useCanvasSize.get())
     {
@@ -74,8 +84,7 @@ inStart.onTriggered = function ()
         op.patch.cgl.updateSize();
     }
 
-
-    if (numFrames == 1)
+    if (numFrames == 0)
     {
         countFrames = 0;
         started = true;
@@ -88,14 +97,14 @@ inStart.onTriggered = function ()
     }
 };
 
-
 function updateTime()
 {
-    if (numFrames > 1)
+    if (numFrames >= 0)
     {
-        time = countFrames * 1.0 / fps;
+        time = Math.max(0, countFrames * (1.0 / fps));
         op.patch.timer.setTime(time);
-        CABLES.overwriteTime = time - 1 / fps;
+        CABLES.overwriteTime = time;// - 1 / fps;
+        op.patch.freeTimer.setTime(time);
     }
 }
 
@@ -103,6 +112,7 @@ function stopRendering()
 {
     started = false;
     CABLES.overwriteTime = undefined;
+    outStatus.set("Finished");
 }
 
 function render()
@@ -117,16 +127,17 @@ function render()
 
     const oldInternalNow = CABLES.internalNow;
 
-    if (numFrames > 1)
+    if (started)
     {
         CABLES.internalNow = function ()
         {
             return time * 1000;
         };
 
-        CABLES.overwriteTime = time;
-        op.patch.timer.setTime(time);
-        op.patch.freeTimer.setTime(time);
+        updateTime();
+        // CABLES.overwriteTime = time;
+        // op.patch.timer.setTime(time);
+        // op.patch.freeTimer.setTime(time);
     }
 
     if (lastFrame == countFrames)
@@ -136,39 +147,21 @@ function render()
     }
 
     lastFrame = countFrames;
+
+    let prog = countFrames / numFrames;
+    if (prog < 0.0) prog = 0.0;
+    outProgress.set(prog);
+    outFrame.set(countFrames);
+
     next.trigger();
 
     CABLES.internalNow = oldInternalNow;
 
-    let prog = countFrames / numFrames;
-    if (prog < 0.0)prog = 0.0;
-    outProgress.set(prog);
-
     frameStarted = false;
     if (countFrames > numFrames)
     {
-        console.log("FINISHED>,...");
-        console.log("ffmpeg -y -framerate 30 -f image2 -i " + inFilePrefix.get() + "_" + shortId + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
-
-        stopRendering();
-
-        if (inType.get() == "WebM")
-        {
-            outStatus.set("Creating Video File from frames");
-            console.log("webm frames", frames.length);
-
-            const video = Whammy.fromImageArray(frames, fps);
-            const url = window.URL.createObjectURL(video);
-            const anchor = document.createElement("a");
-
-            anchor.setAttribute("download", inFilePrefix.get() + ".webm");
-            anchor.setAttribute("href", url);
-            document.body.appendChild(anchor);
-            anchor.click();
-            frames.length = 0;
-        }
-
-        outStatus.set("Finished");
+        console.log("FINISHED...");
+        console.log("ffmpeg -y -framerate 30 -f image2 -i " + filenamePrefix + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
 
         if (!useCanvasSize.get())
         {
@@ -176,6 +169,47 @@ function render()
             op.patch.cgl.updateSize();
         }
 
+        if (zip)
+        {
+            zip.generateAsync({ "type": "blob" })
+                .then(function (blob)
+                {
+                    const anchor = document.createElement("a");
+                    anchor.download = filenamePrefix + ".zip";
+                    anchor.href = URL.createObjectURL(blob);
+                    anchor.click();
+                    stopRendering();
+                    outFinished.trigger();
+                });
+        }
+        else
+        if (inType.get() == "WebM")
+        {
+            try
+            {
+                outStatus.set("Creating Video File from frames");
+                console.log("webm frames", frames.length);
+
+                const video = Whammy.fromImageArray(frames, fps);
+                const url = window.URL.createObjectURL(video);
+                const anchor = document.createElement("a");
+
+                anchor.setAttribute("download", filenamePrefix + ".webm");
+                anchor.setAttribute("href", url);
+                document.body.appendChild(anchor);
+                anchor.click();
+                stopRendering();
+                outFinished.trigger();
+            }
+            catch (e)
+            {
+                console.error(e);
+            }
+
+            frames.length = 0;
+        }
+        else
+            stopRendering();
 
         return;
     }
@@ -197,6 +231,7 @@ function render()
     if (countFrames > 0)
     {
         outStatus.set("Rendering Frame " + countFrames + " of " + numFrames);
+        console.log("Rendering Frame " + countFrames + " of " + numFrames, time);
         if (inType.get() == "WebM")
         {
             frames.push(op.patch.cgl.canvas.toDataURL("image/webp", inQuality.get()));
@@ -204,32 +239,51 @@ function render()
             updateTime();
         }
         else
+        {
+            console.log("screenshotting frame...", countFrames);
             op.patch.cgl.screenShot((blob) =>
             {
                 if (blob)
                 {
-                    const anchor = document.createElement("a");
-                    anchor.download = inFilePrefix.get() + "_" + shortId + "_" + countFrames + "." + suffix;
-                    anchor.href = URL.createObjectURL(blob);
-
-                    setTimeout(() =>
+                    if (zip)
                     {
-                        anchor.click();
+                        let filename = filenamePrefix + "_" + countFrames + "." + suffix;
+
+                        zip.file(filename, blob, { "base64": false });
                         countFrames++;
                         updateTime();
-                    }, 200);
+                    }
+                    else
+                    {
+                        let filename = filenamePrefix + "_" + shortId + "_" + countFrames + "." + suffix;
+
+                        const anchor = document.createElement("a");
+                        anchor.download = filename;
+                        anchor.href = URL.createObjectURL(blob);
+
+                        setTimeout(() =>
+                        {
+                            anchor.click();
+                            countFrames++;
+                            updateTime();
+                        }, 200);
+                    }
                 }
                 else
                 {
                     Log.log("screenshot: no blob");
                 }
             }, !inTransparency.get(), mimetype, inQuality.get());
+        }
     }
     else
     {
         outStatus.set("Prerendering...");
         console.log("pre ", countFrames, time);
-        countFrames++;
-        updateTime();
+        op.patch.cgl.screenShot((blob) =>
+        {
+            countFrames++;
+            updateTime();
+        });
     }
 }

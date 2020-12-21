@@ -434,6 +434,7 @@ exe.onTriggered = function ()
     if (fpsStartTime === 0)fpsStartTime = Date.now();
     if (Date.now() - fpsStartTime >= 1000)
     {
+        // query=null;
         fps = frameCount;
         frameCount = 0;
         // frames = 0;

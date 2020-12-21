@@ -32,6 +32,9 @@ const uniAlpha = new CGL.Uniform(bgShader, "f", "a", !inTransp.get());
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
+const fps = 0;
+const fpsStart = 0;
+
 twrap.onChange = onWrapChange;
 tfilter.onChange = onFilterChange;
 
@@ -51,11 +54,14 @@ function initEffect()
     if (effect)effect.delete();
     if (tex)tex.delete();
 
+    if (fpTexture.get() && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and HDR at the same time, many systems do not support this.");
+    else op.setUiError("fpmipmap", null);
+
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get() });
 
     tex = new CGL.Texture(cgl,
         {
-            "name": "image compose",
+            "name": "image_compose_v2" + op.id,
             "isFloatingPointTexture": fpTexture.get(),
             "filter": selectedFilter,
             "wrap": selectedWrap,
@@ -100,9 +106,12 @@ function updateResolution()
         texOut.set(tex);
     }
 
-    if (texOut.get())
-        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering will not work.", 0);
+    if (texOut.get() && selectedFilter != CGL.Texture.FILTER_NEAREST)
+    {
+        if (!texOut.get().isPowerOfTwo()) op.setUiError("hintnpot", "texture dimensions not power of two! - texture filtering when scaling will not work on ios devices.", 0);
         else op.setUiError("hintnpot", null, 0);
+    }
+    else op.setUiError("hintnpot", null, 0);
 }
 
 function updateSizePorts()
@@ -114,17 +123,6 @@ function updateSizePorts()
 useVPSize.onChange = function ()
 {
     updateSizePorts();
-    if (useVPSize.get())
-    {
-        width.onChange = null;
-        height.onChange = null;
-    }
-    else
-    {
-        width.onChange = updateResolution;
-        height.onChange = updateResolution;
-    }
-    updateResolution();
 };
 
 op.preRender = function ()
@@ -166,6 +164,24 @@ function doRender()
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
+    // if(selectedFilter == CGL.Texture.FILTER_MIPMAP)
+    // {
+    // fps++;
+
+    // if(performance.now()-fpsStart>1000)
+    // {
+    //     if(fps>10)
+    //     {
+    //     op.setUiError("manymipmap", "generating mipmaps", 1);
+    //     }
+    //     else op.setUiError("manymipmap", null, 1);
+
+    //     fps=0;
+    //     fpsStart=performance.now();
+
+    // }
+    // }
+
     cgl.popBlend(false);
     cgl.currentTextureEffect = null;
 }
@@ -177,7 +193,7 @@ function onWrapChange()
     if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
     reInitEffect = true;
-    updateResolution();
+    // updateResolution();
 }
 
 function onFilterChange()
@@ -187,5 +203,5 @@ function onFilterChange()
     if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
 
     reInitEffect = true;
-    updateResolution();
+    // updateResolution();
 }

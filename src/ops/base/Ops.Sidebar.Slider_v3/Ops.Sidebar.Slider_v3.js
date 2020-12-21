@@ -1,0 +1,269 @@
+// constants
+const STEP_DEFAULT = 0.00001;
+
+// inputs
+const parentPort = op.inObject("link");
+const labelPort = op.inString("Text", "Slider");
+const minPort = op.inValue("Min", 0);
+const maxPort = op.inValue("Max", 1);
+const stepPort = op.inValue("Step", STEP_DEFAULT);
+
+const inGreyOut = op.inBool("Grey Out", false);
+const inVisible = op.inBool("Visible", true);
+
+const inputValuePort = op.inValue("Input", 0.5);
+const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
+const reset = op.inTriggerButton("Reset");
+
+const defaultValuePort = op.inValue("Default", 0.5);
+defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
+
+// outputs
+const siblingsPort = op.outObject("childs");
+const valuePort = op.outValue("Result", defaultValuePort.get());
+
+op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
+op.setPortGroup("Range", [minPort, maxPort, stepPort]);
+op.setPortGroup("Visibility", [inGreyOut, inVisible]);
+
+// vars
+const el = document.createElement("div");
+el.classList.add("sidebar__item");
+el.classList.add("sidebar__slider");
+const label = document.createElement("div");
+label.classList.add("sidebar__item-label");
+
+const greyOut = document.createElement("div");
+greyOut.classList.add("sidebar__greyout");
+el.appendChild(greyOut);
+greyOut.style.display = "none";
+
+const labelText = document.createTextNode(labelPort.get());
+label.appendChild(labelText);
+el.appendChild(label);
+
+const value = document.createElement("input");
+value.value = defaultValuePort.get();
+value.classList.add("sidebar__text-input-input");
+// value.setAttribute('type', 'number'); /* not possible to use '.' instead of ',' as separator on German computer, so not usable... */
+value.setAttribute("type", "text");
+// value.setAttribute('lang', 'en-US'); // force '.' as decimal separator
+// value.setAttribute('pattern', '[0-9]+([\.][0-9]+)?'); // only allow '.' as separator
+// value.setAttribute('step', 'any'); /* we cannot use the slider step, as it restricts valid numbers to be entered */
+// value.setAttribute('formnovalidate', '');
+value.oninput = onTextInputChanged;
+el.appendChild(value);
+
+const inputWrapper = document.createElement("div");
+inputWrapper.classList.add("sidebar__slider-input-wrapper");
+el.appendChild(inputWrapper);
+
+const activeTrack = document.createElement("div");
+activeTrack.classList.add("sidebar__slider-input-active-track");
+inputWrapper.appendChild(activeTrack);
+const input = document.createElement("input");
+input.classList.add("sidebar__slider-input");
+input.setAttribute("min", minPort.get());
+input.setAttribute("max", maxPort.get());
+input.setAttribute("type", "range");
+input.setAttribute("step", stepPort.get());
+input.setAttribute("value", defaultValuePort.get());
+input.style.display = "block"; /* needed because offsetWidth returns 0 otherwise */
+inputWrapper.appendChild(input);
+
+updateActiveTrack();
+input.addEventListener("input", onSliderInput);
+
+// events
+parentPort.onChange = onParentChanged;
+labelPort.onChange = onLabelTextChanged;
+inputValuePort.onChange = onInputValuePortChanged;
+defaultValuePort.onChange = onDefaultValueChanged;
+setDefaultValueButtonPort.onTriggered = onSetDefaultValueButtonPress;
+minPort.onChange = onMinPortChange;
+maxPort.onChange = onMaxPortChange;
+stepPort.onChange = stepPortChanged;
+op.onDelete = onDelete;
+
+// op.onLoadedValueSet=function()
+op.onLoaded = op.onInit = function ()
+{
+    if (op.patch.config.sidebar)
+    {
+        op.patch.config.sidebar[labelPort.get()];
+        valuePort.set(op.patch.config.sidebar[labelPort.get()]);
+    }
+    else
+    {
+        valuePort.set(parseFloat(defaultValuePort.get()));
+        inputValuePort.set(parseFloat(defaultValuePort.get()));
+        // onInputValuePortChanged();
+    }
+};
+
+reset.onTriggered = function ()
+{
+    const newValue = parseFloat(defaultValuePort.get());
+    valuePort.set(newValue);
+    value.value = newValue;
+    input.value = newValue;
+    inputValuePort.set(newValue);
+    updateActiveTrack();
+};
+
+inGreyOut.onChange = function ()
+{
+    greyOut.style.display = inGreyOut.get() ? "block" : "none";
+};
+
+inVisible.onChange = function ()
+{
+    el.style.display = inVisible.get() ? "block" : "none";
+};
+
+function onTextInputChanged(ev)
+{
+    let newValue = parseFloat(ev.target.value);
+    if (isNaN(newValue)) newValue = 0;
+    const min = minPort.get();
+    const max = maxPort.get();
+    if (newValue < min) { newValue = min; }
+    else if (newValue > max) { newValue = max; }
+    // input.value = newValue;
+    valuePort.set(newValue);
+    updateActiveTrack();
+    inputValuePort.set(newValue);
+    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+}
+
+function onInputValuePortChanged()
+{
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if (newValue > maxValue) { newValue = maxValue; }
+    else if (newValue < minValue) { newValue = minValue; }
+    value.value = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    updateActiveTrack();
+}
+
+function onSetDefaultValueButtonPress()
+{
+    let newValue = parseFloat(inputValuePort.get());
+    const minValue = minPort.get();
+    const maxValue = maxPort.get();
+    if (newValue > maxValue) { newValue = maxValue; }
+    else if (newValue < minValue) { newValue = minValue; }
+    value.value = newValue;
+    input.value = newValue;
+    valuePort.set(newValue);
+    defaultValuePort.set(newValue);
+    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+
+    updateActiveTrack();
+}
+
+function onSliderInput(ev)
+{
+    ev.preventDefault();
+    ev.stopPropagation();
+    value.value = ev.target.value;
+    const inputFloat = parseFloat(ev.target.value);
+    valuePort.set(inputFloat);
+    inputValuePort.set(inputFloat);
+    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+
+    updateActiveTrack();
+    return false;
+}
+
+function stepPortChanged()
+{
+    const step = stepPort.get();
+    input.setAttribute("step", step);
+    updateActiveTrack();
+}
+
+function updateActiveTrack(val)
+{
+    let valueToUse = parseFloat(input.value);
+    if (typeof val !== "undefined") valueToUse = val;
+    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
+    if (availableWidth === 0) { availableWidth = 206; }
+    const trackWidth = CABLES.map(
+        valueToUse,
+        parseFloat(input.min),
+        parseFloat(input.max),
+        0,
+        availableWidth - 16 /* subtract slider thumb width */
+    );
+    // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
+    activeTrack.style.width = trackWidth + "px";
+}
+
+function onMinPortChange()
+{
+    const min = minPort.get();
+    input.setAttribute("min", min);
+    updateActiveTrack();
+}
+
+function onMaxPortChange()
+{
+    const max = maxPort.get();
+    input.setAttribute("max", max);
+    updateActiveTrack();
+}
+
+function onDefaultValueChanged()
+{
+    const defaultValue = defaultValuePort.get();
+    valuePort.set(parseFloat(defaultValue));
+    onMinPortChange();
+    onMaxPortChange();
+    input.value = defaultValue;
+    value.value = defaultValue;
+
+    updateActiveTrack(defaultValue); // needs to be passed as argument, is this async?
+}
+
+function onLabelTextChanged()
+{
+    const labelText = labelPort.get();
+    label.textContent = labelText;
+    if (CABLES.UI) op.setTitle("Slider: " + labelText);
+}
+
+function onParentChanged()
+{
+    const parent = parentPort.get();
+    if (parent && parent.parentElement)
+    {
+        parent.parentElement.appendChild(el);
+        siblingsPort.set(null);
+        siblingsPort.set(parent);
+    }
+    else if (el.parentElement) el.parentElement.removeChild(el);
+}
+
+function showElement(el)
+{
+    if (el)el.style.display = "block";
+}
+
+function hideElement(el)
+{
+    if (el)el.style.display = "none";
+}
+
+function onDelete()
+{
+    removeElementFromDOM(el);
+}
+
+function removeElementFromDOM(el)
+{
+    if (el && el.parentNode && el.parentNode.removeChild) el.parentNode.removeChild(el);
+}

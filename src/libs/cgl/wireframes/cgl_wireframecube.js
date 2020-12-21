@@ -64,7 +64,13 @@ class WireframeCube
         this.cgl.pushShader(this.colorShader.shader);
         this.cgl.pushDepthTest(false);
 
-        vec3.set(this._vScale, _scaleX || 1, _scaleY || _scaleX || 1, _scaleZ || _scaleX || 1);
+        if (_scaleX == undefined) _scaleX = 1.0;
+        if (_scaleY == undefined) _scaleY = _scaleX;
+        if (_scaleZ == undefined) _scaleZ = _scaleX;
+
+
+        // vec3.set(this._vScale, _scaleX || 1, _scaleY || _scaleX || 1, _scaleZ || _scaleX || 1);
+        vec3.set(this._vScale, _scaleX, _scaleY, _scaleZ);
         mat4.scale(this.cgl.mvMatrix, this.cgl.mvMatrix, this._vScale);
 
         this.mesh.render(this.cgl.getShader());

@@ -42,6 +42,8 @@ const Framebuffer2 = function (cgl, w, h, options)
         "isFloatingPointTexture": false,
     };
 
+    this.name = this._options.name || "unknown";
+
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
     if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
@@ -67,7 +69,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     for (let i = 0; i < this._numRenderBuffers; i++)
     {
         this._colorTextures[i] = new Texture(cgl, {
-            "name": "framebuffer2 texture " + i,
+            "name": "fb2 " + this.name + " " + i,
             "isFloatingPointTexture": this._options.isFloatingPointTexture,
             "filter": this._options.filter,
             "wrap": this._options.wrap,
@@ -77,14 +79,23 @@ const Framebuffer2 = function (cgl, w, h, options)
     let fil = Texture.FILTER_NEAREST;
     if (this._options.shadowMap) fil = Texture.FILTER_LINEAR;
 
-    this._textureDepth = new Texture(cgl, {
-        "name": "framebuffer2 depth texture",
-        "isDepthTexture": true,
-        "filter": fil,
-        "shadowMap": this._options.shadowMap || false,
-    });
+    const defaultTexSize = 512;
 
-    this.setSize(w || 512, h || 512);
+    if (this._options.depth)
+    {
+        this._textureDepth = new Texture(cgl, {
+            "name": "fb2 depth " + this.name,
+            "isDepthTexture": true,
+            "filter": fil,
+            "shadowMap": this._options.shadowMap || false,
+            "width": w || defaultTexSize,
+            "height": h || defaultTexSize,
+        });
+    }
+
+    if (cgl.aborted) return;
+
+    this.setSize(w || defaultTexSize, h || defaultTexSize);
 };
 
 Framebuffer2.prototype.getWidth = function ()
@@ -151,6 +162,8 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._height = Math.min(this._height, this._cgl.maxTexSize);
 
 
+    // console.log("fb setsize", this._width, this._height, this);
+
     profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
@@ -185,6 +198,8 @@ Framebuffer2.prototype.setSize = function (w, h)
 
         if (this._options.isFloatingPointTexture)
         {
+            // this._cgl.gl.getExtension("EXT_float_blend"); // remove firefox warning...
+
             if (this._options.multisampling) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
             else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
         }
@@ -253,31 +268,44 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) throw new Error("Invalid framebuffer");
-    const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
-    switch (status)
+    const err = this._cgl.printError("fb setsize1");
+    if (err)
     {
-    case this._cgl.gl.FRAMEBUFFER_COMPLETE:
-        break;
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
-    case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-        Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
-    case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-        Log.warn("FRAMEBUFFER_UNSUPPORTED");
-        throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
-    default:
-        Log.warn("incomplete framebuffer", status);
-        throw new Error("Incomplete framebuffer: " + status);
-        // throw("Incomplete framebuffer: " + status);
+        console.log(err);
     }
+
+    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) console.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
+    const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
+
+    if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
+    {
+        console.log("framebuffer incomplete: " + this.name, this);
+        switch (status)
+        {
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", this);
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+        case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
+            Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+        case this._cgl.gl.FRAMEBUFFER_UNSUPPORTED:
+            Log.warn("FRAMEBUFFER_UNSUPPORTED");
+            throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
+        default:
+            Log.warn("incomplete framebuffer", status);
+            throw new Error("Incomplete framebuffer: " + status);
+        // throw("Incomplete framebuffer: " + status);
+        }
+    }
+
+
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
+
+    this._cgl.printError("fb setsize");
 };
 
 Framebuffer2.prototype.renderStart = function ()

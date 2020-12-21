@@ -41,9 +41,9 @@ function initFbLater()
 
 fpTexture.onChange =
     depth.onChange =
-    clear.onChange =
+clear.onChange =
     tfilter.onChange =
-    twrap.onChange =
+twrap.onChange =
     msaa.onChange = initFbLater;
 
 function doRender()
@@ -55,6 +55,9 @@ function doRender()
         let selectedWrap = CGL.Texture.WRAP_REPEAT;
         if (twrap.get() == "Clamp") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
         else if (twrap.get() == "Mirror") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+
+        if (fpTexture.get() && tfilter.get() == "mipmap") op.setUiError("fpmipmap", "Don't use mipmap and HDR at the same time, many systems do not support this.");
+        else op.setUiError("fpmipmap", null);
 
         if (cgl.glVersion >= 2)
         {
@@ -72,6 +75,7 @@ function doRender()
 
             fb = new CGL.Framebuffer2(cgl, 8, 8,
                 {
+                    "name": "render2texture " + op.id,
                     "isFloatingPointTexture": fpTexture.get(),
                     "multisampling": ms,
                     "wrap": selectedWrap,

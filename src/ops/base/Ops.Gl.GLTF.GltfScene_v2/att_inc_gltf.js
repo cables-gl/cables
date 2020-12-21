@@ -87,7 +87,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
         // console.log(chunk.size,arrayBuffer.length,offset);
         // try
         // {
-console.log(chunk.size);
         chunk.dataView = new DataView(arrayBuffer, offset + 8, chunk.size);
         // }
         // catch(e)

@@ -151,7 +151,7 @@ function reload()
             if (err)
             {
                 if (CABLES.UI)self.uiAttr({ "error": "file not found" });
-                console.log("ajax error:", err);
+                op.log("ajax error:", err);
                 op.patch.loading.finished(loadingId);
                 return;
             }
@@ -166,7 +166,7 @@ function reload()
             catch (e)
             {
                 if (CABLES.UI)self.uiAttr({ "error": "could not load file..." });
-                console.log("meshsequence could not load file..." + filename.get());
+                op.log("meshsequence could not load file..." + filename.get());
                 return;
             }
 
@@ -180,12 +180,7 @@ function reload()
                 geom.verticesIndices = [].concat.apply([], data.meshes[0].faces);
                 geom.vertices = data.meshes[i].vertices;
 
-                // console.log('seq verts:',geom.vertices.length);
-
                 geom.texCoords = data.meshes[0].texturecoords;
-
-                // console.log('seq texcoords:',geom.texCoords.length);
-                // console.log('first texcoord:',data.meshes[0].texturecoords.length);
 
                 if (calcVertexNormals.get())
                 {

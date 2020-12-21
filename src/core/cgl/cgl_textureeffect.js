@@ -408,7 +408,6 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
 TextureEffect.AddBlendSelect = function (op, name)
 {
     const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
-
     return p;
 };
 
