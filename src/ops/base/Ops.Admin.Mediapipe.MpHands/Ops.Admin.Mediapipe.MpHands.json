@@ -1,0 +1,66 @@
+{
+    "id": "5251e50f-abaf-4ca3-a809-61f8ca58ec35",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1608577899421
+        },
+        {
+            "message": " added lib: hands.js",
+            "author": "pandur",
+            "date": 1608577918392
+        },
+        {
+            "message": " added lib: camera_utils.js",
+            "author": "pandur",
+            "date": 1608578877969
+        },
+        {
+            "message": "Ops.User.cables.MpHands renamed to Ops.Admin.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1608582896776
+        }
+    ],
+    "authorName": "cables",
+    "created": 1608577908279,
+    "libs": [
+        "mp_hands.js",
+        "mp_camera_utils.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Update"
+            },
+            {
+                "type": "2",
+                "name": "Element"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "3",
+                "name": "Points"
+            },
+            {
+                "type": "3",
+                "name": "Lines"
+            },
+            {
+                "type": "3",
+                "name": "Points 2"
+            },
+            {
+                "type": "3",
+                "name": "Lines 2"
+            },
+            {
+                "type": "1",
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.User.cables.MpHands"
+    }
+}
