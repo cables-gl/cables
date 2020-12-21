@@ -108,7 +108,7 @@ op.patch.on("pause", () =>
 
 op.patch.on("resume", () =>
 {
-    if (op.patch.config.masterVolume !== 0) masterVolume = 1;
+    if (op.patch.config.masterVolume !== 0) masterVolume = op.patch.config.masterVolume;
     else masterVolume = 0;
     setVolume();
 });

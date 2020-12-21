@@ -123,6 +123,11 @@
                 "subType": "number"
             },
             {
+                "type": "0",
+                "name": "Frame",
+                "subType": "number"
+            },
+            {
                 "type": "5",
                 "name": "Status"
             },
@@ -130,6 +135,10 @@
                 "type": "0",
                 "name": "Started",
                 "subType": "boolean"
+            },
+            {
+                "type": "1",
+                "name": "Finished"
             }
         ],
         "name": "Ops.Gl.RenderAnim_v2"

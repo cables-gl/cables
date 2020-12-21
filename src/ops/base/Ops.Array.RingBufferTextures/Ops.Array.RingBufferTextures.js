@@ -177,7 +177,7 @@ function render()
     {
         for (let i = 0; i < textures.length; i++)
         {
-            sorted[textures.length - i] = textures[(index + i + 1) % inNum.get()];
+            sorted[textures.length - i - 1] = textures[(index + i + 1) % inNum.get()];
         }
 
         outArr.set(sorted);

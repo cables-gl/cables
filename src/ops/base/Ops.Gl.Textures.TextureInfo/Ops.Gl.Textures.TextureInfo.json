@@ -44,6 +44,11 @@
             },
             {
                 "type": "0",
+                "name": "HDR",
+                "subType": "number"
+            },
+            {
+                "type": "0",
                 "name": "Is Empty Default Texture",
                 "subType": "number"
             },
