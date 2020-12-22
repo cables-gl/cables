@@ -11,6 +11,15 @@
             },
             {
                 "type": "0",
+                "name": "Unit index",
+                "subType": "integer"
+            },
+            {
+                "type": "5",
+                "name": "Unit"
+            },
+            {
+                "type": "0",
                 "name": "FPS",
                 "subType": "number"
             },

@@ -7,6 +7,7 @@ const
     outFilter = op.outValue("Filter"),
     outWrap = op.outValue("Wrap"),
     outFlipped = op.outValue("Flipped"),
+    outFp = op.outValue("HDR"),
     outDefaultEmpty = op.outValue("Is Empty Default Texture", false),
     outDefaultTex = op.outValue("Is Default Texture", false),
     outId = op.outValue("Id");
@@ -40,6 +41,7 @@ inTex.onChange = function ()
 
         outId.set(inTex.get().id);
         outFlipped.set(inTex.get().flipped);
+        outFp.set(inTex.get().textureType == CGL.Texture.TYPE_FLOAT);
     }
     else
     {
@@ -51,6 +53,7 @@ inTex.onChange = function ()
         outWrap.set(null);
         outId.set(null);
         outFlipped.set(false);
+        outFp.set(false);
     }
 
     outDefaultEmpty.set(inTex.get() == emptyTex);

@@ -1,5 +1,6 @@
 const
     inTime = op.inValue("Time"),
+    inType = op.inSwitch("Unit", ["Seconds", "Frames"], "Seconds"),
     fps = op.inValueFloat("FPS", 10),
     numX = op.inValueFloat("Num X", 4),
     numY = op.inValueFloat("Num Y", 4),
@@ -36,6 +37,7 @@ inTime.onChange = update;
 function update()
 {
     let frame = Math.ceil(Math.abs(inTime.get()) * (fps.get()));
+    if (inType.get() == "Frames") frame = inTime.get();
     let numFrames = numX.get() * numY.get();
     if (maxFrames.get() !== 0) numFrames = maxFrames.get();
 
