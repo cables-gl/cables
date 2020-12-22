@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1593236588538
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1608654775834
         }
     ],
     "authorName": "pandur",
@@ -25,5 +30,7 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+    ]
 }
