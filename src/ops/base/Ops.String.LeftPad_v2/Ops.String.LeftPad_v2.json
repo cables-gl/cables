@@ -1,0 +1,40 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Value"
+            },
+            {
+                "type": "5",
+                "name": "Char"
+            },
+            {
+                "type": "0",
+                "name": "Num",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "5",
+                "name": "String"
+            }
+        ],
+        "name": "Ops.String.LeftPad_v2"
+    },
+    "summary": "create a fixed length string from a number 1 -> 0001",
+    "authorName": "pandur",
+    "id": "da8aba9f-9e9c-4fca-87c9-2726b6e101e2",
+    "created": 1608735356297,
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.String.LeftPad",
+            "author": "stephan",
+            "date": 1608735356297
+        }
+    ]
+}
