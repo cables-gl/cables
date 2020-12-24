@@ -31,36 +31,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "Update"
-            },
-            {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Points"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Lines"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Points 2"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Lines 2"
             },
             {
-                "type": "1",
-                "name": "Next"
+                "type": 2,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Found Hands",
+                "subType": "number"
             }
         ],
-        "name": "Ops.User.cables.MpHands"
+        "name": "Ops.Admin.Mediapipe.MpHands"
     }
 }
