@@ -23,7 +23,7 @@ const PatchConnectionReceiver = function (patch, options, connector)
     {
         this.connector = new PatchConnectorBroadcastChannel();
     }
-    this.connector.receive(this);
+    // this.connector.receive(this);
 };
 
 PatchConnectionReceiver.prototype._receive = function (ev)
