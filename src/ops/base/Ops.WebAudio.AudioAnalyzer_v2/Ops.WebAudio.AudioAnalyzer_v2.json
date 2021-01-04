@@ -1,1 +1,163 @@
-{"authorName":"simod","id":"ff9bf46c-676f-4aa1-95bf-5595a6813ed7","created":1606233766581,"layout":{"portsIn":[{"type":"1","name":"Trigger In","group":"Inputs"},{"type":"2","name":"Audio In","group":"Inputs"},{"type":"0","name":"FFT size index","subType":"integer"},{"type":"0","name":"FFT size","group":"FFT Options","subType":"string"},{"type":"0","name":"Smoothing","group":"FFT Options","subType":"number"},{"type":"0","name":"Min","group":"Range (in dBFS)","subType":"number"},{"type":"0","name":"Max","group":"Range (in dBFS)","subType":"number"}],"portsOut":[{"type":"1","name":"Trigger Out"},{"type":"2","name":"Audio Out"},{"type":"3","name":"FFT Array"},{"type":"3","name":"Waveform Array"},{"type":"3","name":"Frequencies by Index Array"},{"type":"0","name":"Array Length","subType":"number"},{"type":"0","name":"RMS Volume","subType":"number"}],"name":"Ops.WebAudio.AudioAnalyzer_v2"},"summary":"Extracts FFT, RMS & Waveform data from an incoming audio signal","docs":{"ports":[{"name":"Trigger In","text":"trigger input"},{"name":"Audio In","text":"audio input"},{"name":"FFT size","text":"bin size of FFT"},{"name":"Smoothing","text":"smoothing factor of analysis"},{"name":"Min","text":"minimum dB value for analyzation"},{"name":"Max","text":"maximum dB value for analyzation"},{"name":"Trigger Out","text":"trigger output"},{"name":"Audio Out","text":"audio output"},{"name":"FFT Array","text":"fft analysis array output"},{"name":"Waveform Array","text":"amplitude analysis output"},{"name":"Frequencies by Index Array","text":"corresponding frequencies of the fft & amplitude analysis bin"},{"name":"Array Length","text":"array length "},{"name":"RMS Volume","text":"average volume output"}]},"issues":"","collections":["FFT audio"],"relatedops":["Ops.WebAudio.FFTAreaAverage_v2"],"youtubeids":[],"changelog":[{"message":"cloned op from Ops.WebAudio.AudioAnalyzer","author":"cables","date":1606233766582},{"message":"Ops.User.cables.AudioAnalyzer_v2 renamed to Ops.WebAudio.AudioAnalyzer_v2","author":"cables","date":1606239122057}]}
+{
+    "authorName": "simod",
+    "id": "ff9bf46c-676f-4aa1-95bf-5595a6813ed7",
+    "created": 1606233766581,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Trigger In",
+                "group": "Inputs"
+            },
+            {
+                "type": "2",
+                "name": "Audio In",
+                "group": "Inputs"
+            },
+            {
+                "type": "0",
+                "name": "FFT size index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "FFT size",
+                "group": "FFT Options",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Smoothing",
+                "group": "FFT Options",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Min",
+                "group": "Range (in dBFS)",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Max",
+                "group": "Range (in dBFS)",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "1",
+                "name": "Trigger Out"
+            },
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "3",
+                "name": "FFT Array"
+            },
+            {
+                "type": "3",
+                "name": "Waveform Array"
+            },
+            {
+                "type": "3",
+                "name": "Frequencies by Index Array"
+            },
+            {
+                "type": "0",
+                "name": "Array Length",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "average volume",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "RMS Volume",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioAnalyzer_v2"
+    },
+    "summary": "Extracts FFT, RMS & Waveform data from an incoming audio signal",
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger In",
+                "text": "trigger input"
+            },
+            {
+                "name": "Audio In",
+                "text": "audio input"
+            },
+            {
+                "name": "FFT size",
+                "text": "bin size of FFT"
+            },
+            {
+                "name": "Smoothing",
+                "text": "smoothing factor of analysis"
+            },
+            {
+                "name": "Min",
+                "text": "minimum dB value for analyzation"
+            },
+            {
+                "name": "Max",
+                "text": "maximum dB value for analyzation"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "trigger output"
+            },
+            {
+                "name": "Audio Out",
+                "text": "audio output"
+            },
+            {
+                "name": "FFT Array",
+                "text": "fft analysis array output"
+            },
+            {
+                "name": "Waveform Array",
+                "text": "amplitude analysis output"
+            },
+            {
+                "name": "Frequencies by Index Array",
+                "text": "corresponding frequencies of the fft & amplitude analysis bin"
+            },
+            {
+                "name": "Array Length",
+                "text": "array length "
+            },
+            {
+                "name": "RMS Volume",
+                "text": "average volume output"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": [
+        "FFT audio"
+    ],
+    "relatedops": [
+        "Ops.WebAudio.FFTAreaAverage_v2"
+    ],
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.AudioAnalyzer",
+            "author": "cables",
+            "date": 1606233766582
+        },
+        {
+            "message": "Ops.User.cables.AudioAnalyzer_v2 renamed to Ops.WebAudio.AudioAnalyzer_v2",
+            "author": "cables",
+            "date": 1606239122057
+        }
+    ]
+}
