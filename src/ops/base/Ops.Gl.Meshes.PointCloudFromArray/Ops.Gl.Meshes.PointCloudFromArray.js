@@ -37,14 +37,8 @@ function doRender()
     if (CABLES.UI)
     {
         let shader = cgl.getShader();
-        if (shader && shader.glPrimitive != cgl.gl.POINTS)
-        {
-            op.setUiError("nopointmat", "Using a Material not made for point rendering. Try to use PointMaterial.");
-        }
-        else
-        {
-            op.setUiError("nopointmat", null);
-        }
+        if (shader.glPrimitive != cgl.gl.POINTS) op.setUiError("nopointmat", "Using a Material not made for point rendering. Try to use PointMaterial.");
+        else op.setUiError("nopointmat", null);
     }
 
     if (needsRebuild || !mesh)rebuild();
