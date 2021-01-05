@@ -21,52 +21,13 @@ float map(float value, float min1, float max1, float min2, float max2) {
 }
 
 float CalcFogDensity(float depth) {
-    float fogAmount = 1.;
-
     float newDepth = map(depth, nearPlane, farPlane, 0., 1.);
-    float fogStart = map(inFogStart, nearPlane, farPlane, 0., 1.);
-    float fogEnd = map(inFogEnd, nearPlane, farPlane, 0., 1.);
+    float fogAmount = 1.0 - clamp((inFogEnd - depth) / (inFogEnd - inFogStart), 0.0, 1.0);
 
-    #ifdef FOG_MODE_DEFAULT
-        float MAGIC_NUMBER = 0.9;
+    // EXPONENTIAL: fogAmount = 1. - exp(MAGIC_NUMBER * -inFogDensity * newDepth); // smoothstep(fogStart, fogEnd, newDepth));
+    // EXP2: fogAmount = 1. - exp(-pow(MAGIC_NUMBER * inFogDensity * smoothstep(fogStart, fogEnd, newDepth), 2.0));
 
-        fogAmount = clamp(pow(newDepth, 1. - MAGIC_NUMBER * inFogDensity), 0., 1.);
-
-        // same as: if (newDepth < fogStart) fogAmount = 0.;
-        fogAmount *= step(fogStart, newDepth);
-
-        //if (newDepth > fogEnd) fogAmount = 1.;
-
-         fogAmount *= inFogDensity;
-    #endif
-
-    #ifdef FOG_MODE_LINEAR
-        float MAGIC_NUMBER = 1.5;
-        MAGIC_NUMBER = 1.;
-
-        fogAmount = 1.0-clamp( (inFogEnd-depth)/(inFogEnd-inFogStart), 0.0, 1.0);
-
-        fogAmount *= step(fogStart, newDepth);
-        fogAmount *= MAGIC_NUMBER * inFogDensity;
-
-    #endif
-
-    #ifdef FOG_MODE_EXP
-        float MAGIC_NUMBER = 10.;
-        // MAGIC_NUMBER = 1.;
-
-        fogAmount = 1. - exp(MAGIC_NUMBER * -inFogDensity * newDepth);
-        fogAmount *= step(fogStart, newDepth);
-    #endif
-
-    #ifdef FOG_MODE_EXP2
-        float MAGIC_NUMBER = 10.;
-        // MAGIC_NUMBER = 1.;
-
-        fogAmount = 1.0-clamp(exp(-pow(MAGIC_NUMBER * inFogDensity*newDepth, 2.0)), 0.0, 1.0);
-        fogAmount *= step(fogStart, newDepth);
-    #endif
-
+    fogAmount *= inFogDensity;
 
     return fogAmount;
 }
@@ -90,7 +51,7 @@ void main()
 
 
     fogColor = color * (1.0 - fogAmount) + fogColor * fogAmount;
-//    fogColor = mix(color, fogColor, fogAmount);
+    // fogColor = mix(color, fogColor, fogAmount);
 
 
     outColor = cgl_blend(color, fogColor, inAmount);

@@ -67,16 +67,6 @@
             },
             {
                 "type": 0,
-                "name": "Fog Mode index",
-                "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Fog Mode",
-                "group": "Fog Options"
-            },
-            {
-                "type": 0,
                 "name": "nearplane",
                 "group": "Frustum",
                 "subType": "number"
