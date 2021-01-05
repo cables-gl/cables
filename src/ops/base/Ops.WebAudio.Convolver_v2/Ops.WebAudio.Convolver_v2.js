@@ -70,13 +70,16 @@ impulseResponse.onChange = () =>
 
         		try
                 {
-                    if (audioIn.get()) {
+                    if (audioIn.get())
+                    {
                         audioIn.get().connect(convolverGain);
                         audioIn.get().connect(outputNode);
             		    convolverGain.connect(convolver);
             		    convolver.connect(outputNode);
                         audioOut.set(outputNode);
-                    } else {
+                    }
+                    else
+                    {
                         scheduleConnection = true;
                     }
         		}
@@ -84,7 +87,6 @@ impulseResponse.onChange = () =>
                 {
         		    op.log("[audio in] Could not connect audio in to convolver" + e);
         		}
-
 
                 op.log("[impulse response] Impulse Response (" + impulseUrl + ") loaded");
 
@@ -95,6 +97,7 @@ impulseResponse.onChange = () =>
             {
                 op.log("[impulse response] Error decoding audio data" + e.err);
                 impulseResponseLoaded = false;
+                cgl.patch.loading.finished(loadingId);
             });
         };
 
@@ -141,7 +144,8 @@ audioIn.onChange = function ()
             audioIn.get().connect(outputNode);
             audioIn.get().connect(convolverGain);
 
-            if (scheduleConnection) {
+            if (scheduleConnection)
+            {
     		    convolverGain.connect(convolver);
     		    convolver.connect(outputNode);
     		    scheduleConnection = false;

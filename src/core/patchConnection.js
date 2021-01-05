@@ -14,16 +14,9 @@ import { Log } from "./log";
 const PatchConnectionReceiver = function (patch, options, connector)
 {
     this._patch = patch;
+    this.connector = connector;
 
-    if (connector)
-    {
-        this.connector = connector;
-    }
-    else
-    {
-        this.connector = new PatchConnectorBroadcastChannel();
-    }
-    this.connector.receive(this);
+    // this.connector.receive(this);
 };
 
 PatchConnectionReceiver.prototype._receive = function (ev)
@@ -104,7 +97,7 @@ PatchConnectionReceiver.prototype._receive = function (ev)
 const PatchConnectionSender = function (patch)
 {
     this.connectors = [];
-    this.connectors.push(new PatchConnectorBroadcastChannel());
+    // this.connectors.push(new PatchConnectorBroadcastChannel());
 
     patch.addEventListener("onOpDelete",
         (op) =>

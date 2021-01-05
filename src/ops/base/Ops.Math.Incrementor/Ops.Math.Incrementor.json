@@ -25,9 +25,8 @@
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Mode",
-                "subType": "string"
+                "type": "5",
+                "name": "Mode"
             }
         ],
         "portsOut": [

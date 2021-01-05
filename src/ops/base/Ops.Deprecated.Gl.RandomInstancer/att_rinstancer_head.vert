@@ -1,4 +1,4 @@
-UNI float {{mod}}_time;
+UNI float {{mod}}time;
 IN mat4 instMat;
 
 float osci(float v)

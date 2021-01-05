@@ -1,3 +1,5 @@
+const cgl = op.patch.cgl;
+
 let microphone = null;
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -7,9 +9,12 @@ const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
 const audioOut = op.outObject("Audio Out");
 const recording = op.outBool("Listening", false);
+const outDevices = op.outArray("List of Input Devices");
 
 op.setPortGroup("Volume Settings", [inGain, inMute]);
 let audioInputsLoaded = false;
+let loadingId = null;
+
 const gainNode = audioCtx.createGain();
 
 function streamAudio(stream)
@@ -79,6 +84,10 @@ inInit.onTriggered = function ()
                     op.log("streaming mic audio!", stream, microphone, gainNode);
                     recording.set(true);
                     op.setUiError("devicesLoaded", null);
+                })
+                .catch((e) =>
+                {
+                    op.log("ERROR STREAMNG", e);
                 });
         }
         else
@@ -112,6 +121,7 @@ inInit.onTriggered = function ()
 };
 
 /* INIT FUNCTION */
+loadingId = cgl.patch.loading.start("MIC inputs", "");
 navigator.mediaDevices.getUserMedia({ "audio": true })
     .then((res) =>
         navigator.mediaDevices.enumerateDevices())
@@ -123,10 +133,14 @@ navigator.mediaDevices.getUserMedia({ "audio": true })
 
         inInputDevices.uiAttribs.values = audioInputDevices;
         op.setUiError("devicesLoaded", "Input devices have been loaded. Please choose a device from the dropdown menu and click the \"Start\" button to activate the microphone input.", 0);
+        cgl.patch.loading.finished(loadingId);
         audioInputsLoaded = true;
+        outDevices.set(null);
+        outDevices.set(audioInputDevices);
     })
     .catch((e) =>
     {
         op.log("error", e);
+        cgl.patch.loading.finished(loadingId);
         audioInputsLoaded = false;
     });

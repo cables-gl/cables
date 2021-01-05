@@ -1,16 +1,10 @@
-op.requirements = [CABLES.Requirements.POINTERLOCK];
 const render = op.inTrigger("render");
 const enablePointerLock = op.inBool("Enable pointer lock", true);
 const trigger = op.outTrigger("trigger");
-
 const isLocked = op.outValue("isLocked", false);
 
-const vPos = vec3.create();
-let speedx = 0, speedy = 0, speedz = 0;
-const movementSpeedFactor = 0.5;
-
-const fly = op.inValueBool("Allow Flying", true);
 const moveSpeed = op.inFloat("Speed", 1);
+const mouseSpeed = op.inFloat("Mouse Speed", 1);
 
 const outPosX = op.outValue("posX");
 const outPosY = op.outValue("posY");
@@ -23,6 +17,17 @@ const outDirX = op.outValue("Dir X");
 const outDirY = op.outValue("Dir Y");
 const outDirZ = op.outValue("Dir Z");
 
+const vPos = vec3.create();
+let speedx = 0, speedy = 0, speedz = 0;
+const movementSpeedFactor = 0.5;
+
+const fly = op.inValueBool("Allow Flying", true);
+
+let mouseNoPL = { "firstMove": true,
+    "deltaX": 0,
+    "deltaY": 0,
+};
+
 const DEG2RAD = 3.14159 / 180.0;
 
 let rotX = 0;
@@ -32,11 +37,21 @@ let posX = 0;
 let posY = 0;
 let posZ = 0;
 
+let pressedW = false;
+let pressedA = false;
+let pressedS = false;
+let pressedD = false;
+
 const cgl = op.patch.cgl;
 
 const viewMatrix = mat4.create();
 
 op.toWorkPortsNeedToBeLinked(render);
+let lastMove = 0;
+
+initListener();
+
+enablePointerLock.onChange = initListener;
 
 render.onTriggered = function ()
 {
@@ -122,10 +137,11 @@ function calcCameraMovement()
         camMovementZComponent += (movementSpeedFactor * (Math.cos(DEG2RAD * rotY))) * yawFactor;
     }
 
+    let yRotRad = DEG2RAD * rotY;
+
     if (pressedA)
     {
         // Calculate our Y-Axis rotation in radians once here because we use it twice
-        var yRotRad = DEG2RAD * rotY;
 
         camMovementXComponent += -movementSpeedFactor * (Math.cos(yRotRad));
         camMovementZComponent += -movementSpeedFactor * (Math.sin(yRotRad));
@@ -134,7 +150,6 @@ function calcCameraMovement()
     if (pressedD)
     {
         // Calculate our Y-Axis rotation in radians once here because we use it twice
-        var yRotRad = DEG2RAD * rotY;
 
         camMovementXComponent += movementSpeedFactor * (Math.cos(yRotRad));
         camMovementZComponent += movementSpeedFactor * (Math.sin(yRotRad));
@@ -145,7 +160,6 @@ function calcCameraMovement()
     speedx = camMovementXComponent * mulSpeed;
     speedy = camMovementYComponent * mulSpeed;
     speedz = camMovementZComponent * mulSpeed;
-
 
     if (speedx > movementSpeedFactor) speedx = movementSpeedFactor;
     if (speedx < -movementSpeedFactor) speedx = -movementSpeedFactor;
@@ -160,8 +174,8 @@ function calcCameraMovement()
 function moveCallback(e)
 {
     const mouseSensitivity = 0.1;
-    rotX += e.movementY * mouseSensitivity;
-    rotY += e.movementX * mouseSensitivity;
+    rotX += e.movementY * mouseSensitivity * mouseSpeed.get();
+    rotY += e.movementX * mouseSensitivity * mouseSpeed.get();
 
     if (rotX < -90.0) rotX = -90.0;
     if (rotX > 90.0) rotX = 90.0;
@@ -176,7 +190,6 @@ function mouseDown(e)
     if (e.which == 3) outMouseDownRight.trigger();
     else outMouseDown.trigger();
 }
-
 
 function lockChangeCallback(e)
 {
@@ -204,11 +217,7 @@ function lockChangeCallback(e)
     }
 }
 
-document.addEventListener("pointerlockchange", lockChangeCallback, false);
-document.addEventListener("mozpointerlockchange", lockChangeCallback, false);
-document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
-
-document.getElementById("glcanvas").addEventListener("mousedown", function ()
+function startPointerLock()
 {
     const test = false;
     if (render.isLinked() && enablePointerLock.get())
@@ -219,9 +228,64 @@ document.getElementById("glcanvas").addEventListener("mousedown", function ()
                                     canvas.webkitRequestPointerLock;
         canvas.requestPointerLock();
     }
-});
+}
 
-let lastMove = 0;
+function initListener()
+{
+    if (enablePointerLock.get())
+    {
+        document.addEventListener("pointerlockchange", lockChangeCallback, false);
+        document.addEventListener("mozpointerlockchange", lockChangeCallback, false);
+        document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
+        document.getElementById("glcanvas").addEventListener("mousedown", startPointerLock);
+
+        cgl.canvas.removeEventListener("mousemove", moveCallbackNoPL, false);
+        cgl.canvas.removeEventListener("mouseup", upCallbackNoPL, false);
+        cgl.canvas.removeEventListener("keydown", keyDown, false);
+        cgl.canvas.removeEventListener("keyup", keyUp, false);
+    }
+    else
+    {
+        cgl.canvas.addEventListener("pointermove", moveCallbackNoPL, false);
+        cgl.canvas.addEventListener("pointerup", upCallbackNoPL, false);
+        cgl.canvas.addEventListener("keydown", keyDown, false);
+        cgl.canvas.addEventListener("keyup", keyUp, false);
+    }
+}
+
+function upCallbackNoPL(e)
+{
+    try { cgl.canvas.releasePointerCapture(e.pointerId); }
+    catch (e) {}
+    mouseNoPL.firstMove = true;
+}
+
+function moveCallbackNoPL(e)
+{
+    if (e && e.buttons == 1)
+    {
+        try { cgl.canvas.setPointerCapture(e.pointerId); }
+        catch (_e) {}
+
+        if (!mouseNoPL.firstMove)
+        {
+            // outDragging.set(true);
+            const deltaX = (e.clientX - mouseNoPL.lastX) * mouseSpeed.get() * 0.5;
+            const deltaY = (e.clientY - mouseNoPL.lastY) * mouseSpeed.get() * 0.5;
+
+            rotX += deltaY;
+            rotY += deltaX;
+            // outDeltaX.set(deltaX);
+            // outDeltaY.set(deltaY);
+        }
+
+        mouseNoPL.firstMove = false;
+
+        mouseNoPL.lastX = e.clientX;
+        mouseNoPL.lastY = e.clientY;
+    }
+}
+
 function move()
 {
     let timeOffset = window.performance.now() - lastMove;
@@ -230,14 +294,8 @@ function move()
     posY += speedy * timeOffset;
     posZ += speedz * timeOffset;
 
-
     lastMove = window.performance.now();
 }
-
-var pressedW = false;
-var pressedA = false;
-var pressedS = false;
-var pressedD = false;
 
 function keyDown(e)
 {
@@ -257,7 +315,6 @@ function keyDown(e)
         break;
 
     default:
-
         break;
     }
 }

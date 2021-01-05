@@ -33,12 +33,25 @@ inHardEdges.onChange =
 
 render.onTriggered = renderMesh;
 
+let shader = null;
 
 function renderMesh()
 {
     if (rebuildLater)rebuild();
     if (mesh && inRenderMesh.get())
-        mesh.render(cgl.getShader());
+    {
+        if (shader != cgl.getShader())
+        {
+            shader = cgl.getShader();
+            if (!shader) return;
+            if (shader.getName() != "splinemesh_material") op.setUiError("nosplinemat", "Splinemesh needs a SplineMeshMaterial!");
+            else op.setUiError("nosplinemat");
+
+            shader = cgl.getShader();
+        }
+
+        mesh.render(shader);
+    }
 
     next.trigger();
 }

@@ -3,8 +3,8 @@ const
     inTexture = op.inTexture("Texture"),
     inTextureMask = op.inTexture("Alpha Mask"),
     useVPSize = op.inValueBool("use original size"),
-    width = op.inValueInt("width"),
-    height = op.inValueInt("height"),
+    width = op.inValueInt("width", 640),
+    height = op.inValueInt("height", 360),
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]),
     fpTexture = op.inValueBool("HDR"),
@@ -97,22 +97,6 @@ function updateResolution()
         else op.setUiError("hintnpot", null, 0);
     }
     else op.setUiError("hintnpot", null, 0);
-
-    // if (texOut.get())
-    //     if (!texOut.get().isPowerOfTwo())
-    //     {
-    //         if (!op.uiAttribs.hint)
-    //             op.uiAttr(
-    //                 {
-    //                     "hint": "texture dimensions not power of two! - texture filtering will not work.",
-    //                     "warning": null
-    //                 });
-    //     }
-    //     else
-    //     if (op.uiAttribs.hint)
-    //     {
-    //         op.uiAttr({ "hint": null, "warning": null }); // todo only when needed...
-    //     }
 }
 
 function updateSizePorts()
@@ -222,6 +206,4 @@ tfilter.onChange = onFilterChange;
 useVPSize.set(true);
 render.onTriggered = doRender;
 
-width.set(640);
-height.set(360);
 updateSizePorts();

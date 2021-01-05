@@ -1,21 +1,21 @@
-var val=op.inValue("Value",1);
-var char=op.inValueString("Char",'0');
-var num=op.inValueInt("Num",4);
-var out=op.outValue("String");
+let val = op.inValue("Value", 1);
+let char = op.inValueString("Char", "0");
+let num = op.inValueInt("Num", 4);
+let out = op.outValue("String");
 
-val.onChange=update;
-char.onChange=update;
-num.onChange=update;
+val.onChange = update;
+char.onChange = update;
+num.onChange = update;
 
 function update()
 {
-    var v=val.get();
-    var n=num.get();
+    let v = val.get();
+    let n = num.get();
 
-    var pad='';
-    for(var i=0;i<n;i++)pad+=(''+char.get());
-    
-    var str=v+'';
+    let pad = "";
+    for (let i = 0; i < n; i++)pad += ("" + char.get());
+
+    let str = v + "";
     str = pad.substring(0, pad.length - str.length) + str;
 
     out.set(str);

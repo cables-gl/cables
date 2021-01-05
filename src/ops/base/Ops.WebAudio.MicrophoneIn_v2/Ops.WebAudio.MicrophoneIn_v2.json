@@ -1,1 +1,101 @@
-{"summary":"Access to the microphone","layout":{"portsIn":[{"type":"1","name":"Start"},{"type":"0","name":"Audio Input index","subType":"integer"},{"type":"0","name":"Audio Input","subType":"string"},{"type":"0","name":"Volume","group":"Volume Settings","subType":"number"},{"type":"0","name":"Mute","group":"Volume Settings","subType":"boolean"}],"portsOut":[{"type":"2","name":"Audio Out"},{"type":"0","name":"Listening","subType":"boolean"}],"name":"Ops.WebAudio.MicrophoneIn_v2"},"author":"55d744634cdc152216eb9aad","authorName":"cables","id":"cbfbbffd-a5a8-4b21-bcb5-5d031cc5e11a","created":1606307812024,"issues":"","collections":null,"relatedops":null,"docs":{"ports":[{"name":"Start","text":"Trigger in to activate microphone"},{"name":"Audio Input","text":"list of audio input devices"},{"name":"Volume","text":"volume of the microphone"},{"name":"Mute","text":"check to mute the microphone"},{"name":"Audio Out","text":"audio signal"},{"name":"Listening","text":"Is true when microphone is on"}]},"changelog":[{"message":"cloned op from Ops.WebAudio.MicrophoneIn","author":"cables","date":1606307812024},{"message":"Ops.User.cables.MicrophoneIn_v2 renamed to Ops.WebAudio.MicrophoneIn_v2","author":"cables","date":1606308007450}],"youtubeids":[]}
+{
+    "summary": "Access to the microphone and/or audio input devices",
+    "layout": {
+        "portsIn": [
+            {
+                "type": "1",
+                "name": "Start"
+            },
+            {
+                "type": "0",
+                "name": "Audio Input index",
+                "subType": "integer"
+            },
+            {
+                "type": "0",
+                "name": "Audio Input",
+                "subType": "string"
+            },
+            {
+                "type": "0",
+                "name": "Volume",
+                "group": "Volume Settings",
+                "subType": "number"
+            },
+            {
+                "type": "0",
+                "name": "Mute",
+                "group": "Volume Settings",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Audio Out"
+            },
+            {
+                "type": "0",
+                "name": "Listening",
+                "subType": "boolean"
+            },
+            {
+                "type": "3",
+                "name": "List of Input Devices"
+            }
+        ],
+        "name": "Ops.WebAudio.MicrophoneIn_v2"
+    },
+    "author": "55d744634cdc152216eb9aad",
+    "authorName": "cables",
+    "id": "cbfbbffd-a5a8-4b21-bcb5-5d031cc5e11a",
+    "created": 1606307812024,
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Start",
+                "text": "Trigger in to activate microphone"
+            },
+            {
+                "name": "Audio Input",
+                "text": "list of audio input devices"
+            },
+            {
+                "name": "Volume",
+                "text": "volume of the microphone"
+            },
+            {
+                "name": "Mute",
+                "text": "check to mute the microphone"
+            },
+            {
+                "name": "Audio Out",
+                "text": "audio signal"
+            },
+            {
+                "name": "Listening",
+                "text": "Is true when microphone is on & capturing input"
+            },
+            {
+                "name": "List of Input Devices",
+                "text": "string array of all availible audio input devices"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.MicrophoneIn",
+            "author": "cables",
+            "date": 1606307812024
+        },
+        {
+            "message": "Ops.User.cables.MicrophoneIn_v2 renamed to Ops.WebAudio.MicrophoneIn_v2",
+            "author": "cables",
+            "date": 1606308007450
+        }
+    ],
+    "youtubeids": []
+}

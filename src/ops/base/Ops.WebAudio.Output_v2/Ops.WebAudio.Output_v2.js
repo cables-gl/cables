@@ -100,8 +100,22 @@ inGain.onChange = () =>
     setVolume();
 };
 
+op.patch.on("pause", () =>
+{
+    masterVolume = 0;
+    setVolume();
+});
+
+op.patch.on("resume", () =>
+{
+    if (op.patch.config.masterVolume !== 0) masterVolume = op.patch.config.masterVolume;
+    else masterVolume = 0;
+    setVolume();
+});
+
 op.onMasterVolumeChanged = (v) =>
 {
-    masterVolume = v;
+    if (op.patch._paused) masterVolume = 0;
+    else masterVolume = v;
     setVolume();
 };

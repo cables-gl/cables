@@ -49,6 +49,9 @@ op.onDelete = removeElement;
 inAsDOM.onChange =
     inCss.onChange = updateStyle;
 
+window.addEventListener("focus", resetTimeout);
+document.addEventListener("visibilitychange", resetTimeout);
+
 updateStyle();
 
 function removeElement()
@@ -78,11 +81,17 @@ inActive.onChange = function ()
     }
 };
 
+function resetTimeout()
+{
+    clearTimeout(timeout);
+    updateTexture();
+    timeout = setTimeout(updateTexture, 1000 / fps.get());
+}
+
 fps.onChange = function ()
 {
     if (fps.get() < 1)fps.set(1);
-    clearTimeout(timeout);
-    timeout = setTimeout(updateTexture, 1000 / fps.get());
+    resetTimeout();
 };
 
 function updateTexture()

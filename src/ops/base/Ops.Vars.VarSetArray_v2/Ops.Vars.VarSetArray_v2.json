@@ -5,6 +5,11 @@
             "message": "created op",
             "author": "pandur",
             "date": 1593236588538
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1608654868533
         }
     ],
     "authorName": "pandur",
@@ -25,5 +30,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "vargetset"
+    ]
 }
