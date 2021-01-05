@@ -6,7 +6,6 @@ geom.ignoreValueSerialize = true;
 
 let tex = op.inTexture("Texture");
 
-
 let numColumns = op.inValue("Columns", 100);
 let numRows = op.inValue("Rows", 100);
 let spacingColumns = op.inValue("Spacing Columns", 1);
@@ -21,7 +20,6 @@ transTransZ.onChange = updateTransforms;
 transRotate.onChange = updateTransforms;
 transScale.onChange = updateTransforms;
 
-
 function updateTransforms()
 {
     if (!shader) return;
@@ -35,7 +33,6 @@ function updateTransforms()
     else shader.removeDefine("TRANS_TRANS_Z");
 }
 
-
 let transformations = [];
 let mod = null;
 let mesh = null;
@@ -44,7 +41,6 @@ let uniDoInstancing = null;
 let uniSpaceX = null;
 let uniSpaceY = null;
 let recalc = true;
-
 
 numRows.onChange = reset;
 numColumns.onChange = reset;
@@ -58,12 +54,12 @@ exe.onLinkChanged = removeModule;
 
 let srcHeadVert = ""
     .endl() + "UNI float do_instancing;"
-    .endl() + "UNI sampler2D {{mod}}_field;"
+    .endl() + "UNI sampler2D {{mod}}field;"
 
-    .endl() + "UNI float {{mod}}_spaceX;"
-    .endl() + "UNI float {{mod}}_spaceY;"
-    .endl() + "UNI float {{mod}}_rows;"
-    .endl() + "UNI float {{mod}}_cols;"
+    .endl() + "UNI float {{mod}}spaceX;"
+    .endl() + "UNI float {{mod}}spaceY;"
+    .endl() + "UNI float {{mod}}rows;"
+    .endl() + "UNI float {{mod}}cols;"
 
     .endl() + "#ifdef INSTANCING"
     .endl() + "   IN mat4 instMat;"
@@ -88,11 +84,11 @@ let srcBodyVert = ""
     // .endl()+'   if( do_instancing==1.0 )'
     .endl() + "   {"
     .endl() + "       instModelMat=instMat;"
-    .endl() + "       float tx=(instModelMat[3][0]) / {{mod}}_cols;"
-    .endl() + "       float ty=(instModelMat[3][1]) / {{mod}}_rows;"
-    .endl() + "       instModelMat[3][0]*={{mod}}_spaceX;"
-    .endl() + "       instModelMat[3][1]*={{mod}}_spaceY;"
-    .endl() + "       vec4 instCol = texture2D( {{mod}}_field, vec2(tx,ty) );"
+    .endl() + "       float tx=(instModelMat[3][0]) / {{mod}}cols;"
+    .endl() + "       float ty=(instModelMat[3][1]) / {{mod}}rows;"
+    .endl() + "       instModelMat[3][0]*={{mod}}spaceX;"
+    .endl() + "       instModelMat[3][1]*={{mod}}spaceY;"
+    .endl() + "       vec4 instCol = texture2D( {{mod}}field, vec2(tx,ty) );"
 
     .endl() + "       #ifdef TRANS_ROTATE"
     .endl() + "           instModelMat*=rotationMatrix(vec3(0.0,0.0,1.0),instCol.r*3.1415926535897932384626433832795*2.0);"
@@ -111,7 +107,6 @@ let srcBodyVert = ""
     .endl() + "   }"
     .endl() + "#endif"
     .endl();
-
 
 function reset()
 {
@@ -172,11 +167,11 @@ function doRender()
 
                 shader.define("INSTANCING");
                 op.uniDoInstancing = new CGL.Uniform(shader, "f", "do_instancing", 1);
-                op.uniSpaceX = new CGL.Uniform(shader, "f", mod.prefix + "_spaceX", spacingColumns);
-                op.uniSpaceY = new CGL.Uniform(shader, "f", mod.prefix + "_spaceY", spacingRows);
-                op.uniTexture = new CGL.Uniform(shader, "t", mod.prefix + "_field", 5);
-                op.uniCols = new CGL.Uniform(shader, "f", mod.prefix + "_cols", numColumns);
-                op.uniRows = new CGL.Uniform(shader, "f", mod.prefix + "_rows", numRows);
+                op.uniSpaceX = new CGL.Uniform(shader, "f", mod.prefix + "spaceX", spacingColumns);
+                op.uniSpaceY = new CGL.Uniform(shader, "f", mod.prefix + "spaceY", spacingRows);
+                op.uniTexture = new CGL.Uniform(shader, "t", mod.prefix + "field", 5);
+                op.uniCols = new CGL.Uniform(shader, "f", mod.prefix + "cols", numColumns);
+                op.uniRows = new CGL.Uniform(shader, "f", mod.prefix + "rows", numRows);
 
                 updateTransforms();
             }
@@ -208,7 +203,6 @@ function doRender()
         prepare();
     }
 }
-
 
 function calc()
 {
