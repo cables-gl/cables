@@ -57,6 +57,11 @@
             "message": "Ops.User.pandur.Bend2 renamed to Ops.Gl.ShaderEffects.Bend_v2",
             "author": "kusma",
             "date": 1596030693591
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1608655048592
         }
     ],
     "summary": "bend objects along an axis",
@@ -66,5 +71,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

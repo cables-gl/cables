@@ -7,6 +7,11 @@
             "date": 1593236588538
         },
         {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1608654868533
+	},
+	{
             "message": " added core lib: cgl_shadermodifier",
             "author": "pandur",
             "date": 1608654775834
@@ -32,6 +37,6 @@
         "ports": []
     },
     "coreLibs": [
-	"vargetset"
+        "vargetset"
     ]
 }

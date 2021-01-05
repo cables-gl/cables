@@ -35,7 +35,6 @@ const cgl = op.patch.cgl;
 const srcVert = attachments.cubemap_vert;
 const srcFrag = attachments.cubemap_frag;
 
-
 const shader = new CGL.Shader(cgl, "cubemap material");
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 
@@ -62,7 +61,6 @@ if (cgl.glVersion == 1)
     }
 }
 
-
 shader.setSource(srcVert, srcFrag);
 const inMiplevelUniform = new CGL.Uniform(shader, "f", "miplevel", inMiplevel);
 const inRotationUniform = new CGL.Uniform(shader, "f", "inRotation", inRotation);
@@ -70,7 +68,6 @@ const inColorUniform = new CGL.Uniform(shader, "3f", "inColor", inR, inG, inB);
 const inSkyboxUniform = new CGL.Uniform(shader, "t", "skybox", 0);
 render.onTriggered = doRender;
 updateMapping();
-
 
 function doRender()
 {

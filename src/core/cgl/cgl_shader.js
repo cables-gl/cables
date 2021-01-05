@@ -316,9 +316,11 @@ Shader.prototype.createStructUniforms = function ()
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
-            const stringToInsert = "  " + this._uniforms[i].getGlslTypeString()
-                 + " " + this._uniforms[i]._propertyName + ";"
-                 + comment;
+            let stringToInsert = "";
+            if (this._uniforms[i].getGlslTypeString() == undefined)stringToInsert += "//";
+            stringToInsert += "  " + this._uniforms[i].getGlslTypeString()
+                    + " " + this._uniforms[i]._propertyName + ";"
+                    + comment;
 
             if (this._uniforms[i].getShaderType() === "both")
             {
@@ -597,7 +599,9 @@ Shader.prototype.compile = function ()
     {
         if (this._uniforms[i].shaderType && !this._uniforms[i].isStructMember())
         {
-            const uniStr = "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
+            let uniStr = "";
+            if (!this._uniforms[i].getGlslTypeString())uniStr += "// ";
+            uniStr += "UNI " + this._uniforms[i].getGlslTypeString() + " " + this._uniforms[i].getName();
             let comment = "";
             if (this._uniforms[i].comment) comment = " // " + this._uniforms[i].comment;
 
