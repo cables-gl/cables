@@ -145,8 +145,6 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
     if (typeof _value == "object" && _value instanceof Port)
     {
         this._port = _value;
-        this._value = this._port.get();
-
 
         if (_port2 && _port3 && _port4)
         {
@@ -188,6 +186,9 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         else
         {
             // this._port.on = this.updateFromPort.bind(this);
+
+            this._value = this._port.get();
+
             this._port.on("change", this.updateFromPort.bind(this));
         }
     }
