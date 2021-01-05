@@ -28,7 +28,7 @@ const fftOut = op.outArray("FFT Array");
 const ampOut = op.outArray("Waveform Array");
 const frequencyOut = op.outArray("Frequencies by Index Array");
 const fftLength = op.outNumber("Array Length");
-const avgVolumePeak = op.outNumber("average volume");
+const avgVolumePeak = op.outNumber("Average Volume");
 const avgVolumeRMS = op.outNumber("RMS Volume");
 
 let updating = false;
