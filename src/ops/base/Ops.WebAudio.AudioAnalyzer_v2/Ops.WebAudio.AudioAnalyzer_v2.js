@@ -14,9 +14,9 @@ const FFT_BUFFER_SIZES = [32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 
 
 const audioIn = op.inObject("Audio In");
 const inFFTSize = op.inDropDown("FFT size", FFT_BUFFER_SIZES, 2048);
-const inSmoothing = op.inFloatSlider("Smoothing", 0.5);
+const inSmoothing = op.inFloatSlider("Smoothing", 0.3);
 
-const inRangeMin = op.inFloat("Min", -96);
+const inRangeMin = op.inFloat("Min", -90);
 const inRangeMax = op.inFloat("Max", 0);
 
 op.setPortGroup("Inputs", [inTrigger, audioIn]);
@@ -28,7 +28,8 @@ const fftOut = op.outArray("FFT Array");
 const ampOut = op.outArray("Waveform Array");
 const frequencyOut = op.outArray("Frequencies by Index Array");
 const fftLength = op.outNumber("Array Length");
-const avgVolume = op.outNumber("RMS Volume");
+const avgVolumePeak = op.outNumber("average volume");
+const avgVolumeRMS = op.outNumber("RMS Volume");
 
 let updating = false;
 
@@ -151,15 +152,21 @@ inTrigger.onTriggered = function ()
         analyser.getByteTimeDomainData(ampDataArray);
 
         let values = 0;
+        let peakValues = 0;
 
         for (let i = 0; i < ampDataArray.length; i++)
         {
             values += ampDataArray[i] * ampDataArray[i];
+            peakValues += fftDataArray[i];
         }
+
+        const peakAverage = peakValues / ampDataArray.length;
+
+        avgVolumePeak.set(peakAverage / 128);
 
         let rms = Math.sqrt(values / ampDataArray.length);
         rms = Math.max(rms, rms * inSmoothing.get());
-        avgVolume.set(rms / 256);
+        avgVolumeRMS.set(rms / 256);
     }
     catch (e) { op.log(e); }
 
