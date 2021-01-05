@@ -1,71 +1,68 @@
-var cgl=op.patch.cgl;
-var shader=null;
-var uniTime;
+let cgl = op.patch.cgl;
+let shader = null;
+let uniTime;
 
-const render=op.inTrigger("render");
-var limitMax=op.inValueInt("Max",1000);
+const render = op.inTrigger("render");
+let limitMax = op.inValueInt("Max", 1000);
 
-const trigger=op.outTrigger("trigger");
+const trigger = op.outTrigger("trigger");
 
-var srcHeadVert=''
-    .endl()+'UNI float {{mod}}_max;'
-    .endl()+'OUT float vertNumberLimitDiscarded;'
+let srcHeadVert = ""
+    .endl() + "UNI float vertlimitmax;"
+    .endl() + "OUT float vertNumberLimitDiscarded;"
     // .endl()+'IN float attrVertIndex;'
     .endl();
 
-var srcBodyVert=''
-    .endl()+'if(attrVertIndex > {{mod}}_max) vertNumberLimitDiscarded=1.0; else vertNumberLimitDiscarded=0.0;'
+let srcBodyVert = ""
+    .endl() + "if(attrVertIndex > vertlimitmax) vertNumberLimitDiscarded=1.0; else vertNumberLimitDiscarded=0.0;"
     .endl();
 
-
-
-var srcHeadFrag=''
-    .endl()+'IN float vertNumberLimitDiscarded;'
+let srcHeadFrag = ""
+    .endl() + "IN float vertNumberLimitDiscarded;"
     .endl();
 
-var srcBodyFrag=''
-    .endl()+'if(vertNumberLimitDiscarded>0.0)discard;'
+let srcBodyFrag = ""
+    .endl() + "if(vertNumberLimitDiscarded>0.0)discard;"
     .endl();
 
-
-var module=null;
-var moduleFrag=null;
+let module = null;
+let moduleFrag = null;
 
 function removeModule()
 {
-    if(shader && module)
+    if (shader && module)
     {
         shader.removeModule(module);
         shader.removeModule(moduleFrag);
 
-        shader=null;
+        shader = null;
     }
 }
 
-render.onLinkChanged=removeModule;
-render.onTriggered=function()
+render.onLinkChanged = removeModule;
+render.onTriggered = function ()
 {
-    if(cgl.getShader()!=shader)
+    if (cgl.getShader() != shader)
     {
-        if(shader) removeModule();
-        shader=cgl.getShader();
-        module=shader.addModule(
+        if (shader) removeModule();
+        shader = cgl.getShader();
+        module = shader.addModule(
             {
-                title:op.objName,
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
+                "title": op.objName,
+                "name": "MODULE_VERTEX_POSITION",
+                "srcHeadVert": srcHeadVert,
+                "srcBodyVert": srcBodyVert
             });
 
-        moduleFrag=shader.addModule(
+        moduleFrag = shader.addModule(
             {
-                title:op.objName,
-                name:'MODULE_COLOR',
-                srcHeadFrag:srcHeadFrag,
-                srcBodyFrag:srcBodyFrag
+                "title": op.objName,
+                "name": "MODULE_COLOR",
+                "srcHeadFrag": srcHeadFrag,
+                "srcBodyFrag": srcBodyFrag
             });
 
-        limitMax.uniform=new CGL.Uniform(shader,'f',module.prefix+'_max',limitMax);
+        limitMax.uniform = new CGL.Uniform(shader, "f", "vertlimitmax", limitMax);
     }
 
     trigger.trigger();
