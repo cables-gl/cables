@@ -278,7 +278,6 @@ Uniform.prototype.getLoc = function ()
 
 Uniform.prototype.updateFromPort4f = function ()
 {
-    console.log(this);
     this._value[0] = this._port.get();
     this._value[1] = this._port2.get();
     this._value[2] = this._port3.get();
