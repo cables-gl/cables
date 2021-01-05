@@ -32,5 +32,6 @@
         "ports": []
     },
     "coreLibs": [
+	"vargetset"
     ]
 }

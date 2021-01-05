@@ -27,5 +27,8 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+	"vargetset"
+    ]
 }
