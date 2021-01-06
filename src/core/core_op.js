@@ -916,6 +916,7 @@ const Op = function ()
         return childs;
     };
 
+    // todo deprecate ?!
     Op.prototype.markChilds = function ()
     {
         this.marked = true;
@@ -929,6 +930,21 @@ const Op = function ()
             }
         }
     };
+
+    Op.prototype.selectChilds = function ()
+    {
+        this.setUiAttrib({ "selected": true });
+        for (const ipo in this.portsOut)
+        {
+            for (const l in this.portsOut[ipo].links)
+            {
+                this.portsOut[ipo].parent.setUiAttrib({ "selected": true });
+                if (this.portsOut[ipo].links[l].portIn.parent != this)
+                    this.portsOut[ipo].links[l].portIn.parent.selectChilds();
+            }
+        }
+    };
+
 
     Op.prototype.deleteChilds = function ()
     {
