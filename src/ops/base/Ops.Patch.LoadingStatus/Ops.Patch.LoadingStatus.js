@@ -25,7 +25,6 @@ vec3.set(identTranslateView, 0, 0, -2);
 
 document.body.classList.add("cables-loading");
 
-
 let prerenderCount = 0;
 const preRenderAnimFrame = function (t)
 {
@@ -87,7 +86,7 @@ setTimeout(function ()
     patch.loading.finished(loadingId);
 }, 100);
 
-this.exe.onTriggered = function ()
+this.exe.onTriggered = () =>
 {
     result.set(patch.loading.getProgress());
     this.numAssets.set(patch.loading.getNumAssets());
