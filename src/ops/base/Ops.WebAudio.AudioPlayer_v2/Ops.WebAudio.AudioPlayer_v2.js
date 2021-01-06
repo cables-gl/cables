@@ -185,7 +185,7 @@ this.file.onChange = function ()
 
         this.media = audioContext.createMediaElementSource(this.audio);
         this.media.connect(this.filter);
-        this.audioOut.val = this.filter;
+        this.audioOut.set(this.filter);
     }
     else
     {
@@ -206,7 +206,7 @@ this.file.onChange = function ()
                 buffer = res;
                 this.media.buffer = res;
                 this.media.connect(this.filter);
-                this.audioOut.val = this.filter;
+                this.audioOut.set(this.filter);
                 this.media.loop = doLoop.get();
 
                 patch.loading.finished(loadingId);

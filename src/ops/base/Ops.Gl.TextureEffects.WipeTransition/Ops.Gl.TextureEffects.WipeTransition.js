@@ -46,29 +46,30 @@ let fadeWidthUniform = new CGL.Uniform(shader, "f", "fadeWidth", 0);
 
 this.fade.onChange = function ()
 {
-    fadeUniform.setValue(this.fade.val);
+    fadeUniform.setValue(this.fade.get());
 };
 
 this.fadeWidth.onChange = function ()
 {
-    fadeWidthUniform.setValue(this.fadeWidth.val);
+    fadeWidthUniform.setValue(this.fadeWidth.get());
 };
 
-this.fade.val = 0.5;
-this.fadeWidth.val = 0.2;
+this.fade.set(0.5);
+this.fadeWidth.set(0.2);
 
 this.render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if (this.image.val && this.image.val.tex)
+    const image = this.image.get();
+    if (image && image.tex)
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
-        cgl.setTexture(1, this.image.val.tex);
+        cgl.setTexture(1, image.tex);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();
