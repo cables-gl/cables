@@ -1,4 +1,3 @@
-const self = this;
 const cgl = op.patch.cgl;
 const patch = op.patch;
 
@@ -37,12 +36,12 @@ const preRenderAnimFrame = function (t)
     op.patch.timer.setTime(time);
     cgl.renderStart(cgl, identTranslate, identTranslateView);
 
-    self.finished.trigger();
+    this.finished.trigger();
 
     cgl.gl.clearColor(0, 0, 0, 1);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 
-    self.loading.trigger();
+    this.loading.trigger();
 
     cgl.renderEnd(cgl);
     prerenderCount++;
@@ -67,7 +66,7 @@ function checkPreRender()
     {
         if (preRenderTimeFrames.anim && prerenderCount >= preRenderTimeFrames.anim.keys.length)
         {
-            self.onAnimFrame = function () {};
+            this.onAnimFrame = function () {};
             isFinishedPort.set(true);
             finishedAll = true;
         }
@@ -91,7 +90,7 @@ setTimeout(function ()
 this.exe.onTriggered = function ()
 {
     result.set(patch.loading.getProgress());
-    self.numAssets.set(patch.loading.getNumAssets());
+    this.numAssets.set(patch.loading.getNumAssets());
 
     if (patch.loading.getProgress() >= 1.0 && finishedAll)
     {
@@ -108,7 +107,7 @@ this.exe.onTriggered = function ()
             firstTime = false;
         }
 
-        self.finished.trigger();
+        this.finished.trigger();
         document.body.classList.remove("cables-loading");
         document.body.classList.add("cables-loaded");
     }
@@ -117,14 +116,14 @@ this.exe.onTriggered = function ()
         if (!preRenderTimeFrames.anim)
         {
             finishedAll = true;
-            self.onAnimFrame = function () {};
+            this.onAnimFrame = function () {};
         }
 
         if (preRenderTimeFrames.anim && patch.loading.getProgress() >= 1.0
             && prerenderCount < preRenderTimeFrames.anim.keys.length
         )
         {
-            self.onAnimFrame = preRenderAnimFrame;
+            this.onAnimFrame = preRenderAnimFrame;
             checkPreRender();
             op.loading.trigger();
         }
