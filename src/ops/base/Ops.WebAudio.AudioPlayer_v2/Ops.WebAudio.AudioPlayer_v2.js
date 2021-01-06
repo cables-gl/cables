@@ -74,12 +74,6 @@ doLoop.onChange = function ()
 
 function seek()
 {
-    // if(!window.gui && CGL.getLoadingStatus()>=1.0)
-    // {
-    //     console.log('seek canceled',CGL.getLoadingStatus());
-    //     return;
-    // }
-
     if (!synchronizedPlayer.get())
     {
         if (!self.audio) return;
@@ -101,17 +95,13 @@ function seek()
         if (!isFinite(t))
         {
             return;
-            // console.log('not finite time...',t);
-            // t=0.0;
         }
 
         playing = false;
 
-        // console.log('seek.....',self.patch.timer.isPlaying());
-
         if (self.patch.timer.isPlaying())
         {
-            console.log("play!");
+            op.log("play!");
             outPlaying.set(true);
 
             self.media.start(t);
@@ -159,14 +149,14 @@ this.file.onChange = function ()
         }
         self.audio = new Audio();
 
-        console.log("load audio", self.file.get());
+        op.log("load audio", self.file.get());
 
         self.audio.crossOrigin = "anonymous";
         self.audio.src = op.patch.getFilePath(self.file.get());
         self.audio.loop = doLoop.get();
         self.audio.crossOrigin = "anonymous";
 
-        var canplaythrough = function ()
+        const canplaythrough = function ()
         {
             if (autoPlay.get() || play.get())
             {
@@ -179,17 +169,16 @@ this.file.onChange = function ()
             self.audio.removeEventListener("canplaythrough", canplaythrough, false);
         };
 
-        self.audio.addEventListener("stalled", (err) => { console.log("mediaplayer stalled...", err); patch.loading.finished(loadingId); });
-        self.audio.addEventListener("error", (err) => { console.log("mediaplayer error...", err); patch.loading.finished(loadingId); });
-        self.audio.addEventListener("abort", (err) => { console.log("mediaplayer abort...", err); patch.loading.finished(loadingId); });
-        self.audio.addEventListener("suspend", (err) => { console.log("mediaplayer suspend...", err); patch.loading.finished(loadingId); });
+        self.audio.addEventListener("stalled", (err) => { op.log("mediaplayer stalled...", err); patch.loading.finished(loadingId); });
+        self.audio.addEventListener("error", (err) => { op.log("mediaplayer error...", err); patch.loading.finished(loadingId); });
+        self.audio.addEventListener("abort", (err) => { op.log("mediaplayer abort...", err); patch.loading.finished(loadingId); });
+        self.audio.addEventListener("suspend", (err) => { op.log("mediaplayer suspend...", err); patch.loading.finished(loadingId); });
 
 
         self.audio.addEventListener("canplaythrough", canplaythrough, false);
 
         self.audio.addEventListener("ended", function ()
         {
-            // console.log('audio player ended...');
             outPlaying.set(false);
             playing = false;
             outEnded.trigger();
@@ -217,7 +206,6 @@ this.file.onChange = function ()
             audioContext.decodeAudioData(audioData, function (res)
             {
                 buffer = res;
-                // console.log('sound load complete');
                 self.media.buffer = res;
                 self.media.connect(self.filter);
                 self.audioOut.val = self.filter;
