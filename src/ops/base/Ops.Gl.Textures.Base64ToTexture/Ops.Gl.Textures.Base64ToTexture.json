@@ -1,0 +1,25 @@
+{
+    "updated": 1536765725439,
+    "authorName": "berenger",
+    "id": "",
+    "created": 1524902340627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": "5",
+                "name": "Base64 image string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": "2",
+                "name": "Texture"
+            }
+        ],
+        "name": "Ops.Gl.Textures.TextureToBase64"
+    },
+    "summary": "Converts a base-64 image string into a texture",
+    "docs": {
+        "ports": []
+    }
+}
