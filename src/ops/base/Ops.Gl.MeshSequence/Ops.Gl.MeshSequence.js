@@ -1,4 +1,3 @@
-const self = this;
 const cgl = this.patch.cgl;
 
 const render = op.inTrigger("render");
@@ -150,12 +149,12 @@ function reload()
         {
             if (err)
             {
-                if (CABLES.UI)self.uiAttr({ "error": "file not found" });
+                if (CABLES.UI) op.setUiError("error", "file not found");
                 op.log("ajax error:", err);
                 op.patch.loading.finished(loadingId);
                 return;
             }
-            else if (CABLES.UI)self.uiAttr({ "error": null });
+            else if (CABLES.UI) op.setUiError("error", null);
 
             let data = null;
 
@@ -165,7 +164,7 @@ function reload()
             }
             catch (e)
             {
-                if (CABLES.UI)self.uiAttr({ "error": "could not load file..." });
+                if (CABLES.UI) op.setUiError("error", "could not load file...");
                 op.log("meshsequence could not load file..." + filename.get());
                 return;
             }
@@ -203,7 +202,7 @@ function reload()
             outNumFrames.set(geoms.length);
             needsUpdateFrame = true;
 
-            self.uiAttribs.info = "num frames: " + data.meshes.length;
+            op.uiAttr("info", "num frames: " + data.meshes.length);
 
             op.patch.loading.finished(loadingId);
             loadingId = -1;

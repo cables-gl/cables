@@ -1,21 +1,21 @@
-var idx=op.inValueInt("Index");
-var valuePorts=[];
-var result=op.outValue("Result");
+let idx = op.inValueInt("Index");
+let valuePorts = [];
+let result = op.outValue("Result");
 
-idx.onChange=update;
+idx.onChange = update;
 
-for(var i=0;i<10;i++)
+for (let i = 0; i < 10; i++)
 {
-    var p=op.inFile("File "+i);
-    valuePorts.push( p );
-    p.onChange=update;
+    let p = op.inFile("File " + i);
+    valuePorts.push(p);
+    p.onChange = update;
 }
 
 function update()
 {
-    const index=idx.get();
-    if(index>=0 && valuePorts[index])
+    const index = idx.get();
+    if (index >= 0 && valuePorts[index])
     {
-        result.set( valuePorts[index].get() );
+        result.set(valuePorts[index].get());
     }
 }

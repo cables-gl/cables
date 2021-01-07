@@ -65,7 +65,7 @@ function updateSize()
 inStart.onTriggered = function ()
 {
     filenamePrefix = inFilePrefix.get();
-    console.log("pref", filenamePrefix);
+    op.log("pref", filenamePrefix);
     frames.length = 0;
     outStatus.set("Starting");
     fps = inFps.get();
@@ -160,8 +160,8 @@ function render()
     frameStarted = false;
     if (countFrames > numFrames)
     {
-        console.log("FINISHED...");
-        console.log("ffmpeg -y -framerate 30 -f image2 -i " + filenamePrefix + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
+        op.log("FINISHED...");
+        op.log("ffmpeg -y -framerate 30 -f image2 -i " + filenamePrefix + "_%d.png  -b 9999k -vcodec mpeg4 " + shortId + ".mp4");
 
         if (!useCanvasSize.get())
         {
@@ -188,7 +188,7 @@ function render()
             try
             {
                 outStatus.set("Creating Video File from frames");
-                console.log("webm frames", frames.length);
+                op.log("webm frames", frames.length);
 
                 const video = Whammy.fromImageArray(frames, fps);
                 const url = window.URL.createObjectURL(video);
@@ -203,7 +203,7 @@ function render()
             }
             catch (e)
             {
-                console.error(e);
+                op.error(e);
             }
 
             frames.length = 0;
@@ -231,7 +231,7 @@ function render()
     if (countFrames > 0)
     {
         outStatus.set("Rendering Frame " + countFrames + " of " + numFrames);
-        console.log("Rendering Frame " + countFrames + " of " + numFrames, time);
+        op.log("Rendering Frame " + countFrames + " of " + numFrames, time);
         if (inType.get() == "WebM")
         {
             frames.push(op.patch.cgl.canvas.toDataURL("image/webp", inQuality.get()));
@@ -240,7 +240,7 @@ function render()
         }
         else
         {
-            console.log("screenshotting frame...", countFrames);
+            op.log("screenshotting frame...", countFrames);
             op.patch.cgl.screenShot((blob) =>
             {
                 if (blob)
@@ -271,7 +271,7 @@ function render()
                 }
                 else
                 {
-                    Log.log("screenshot: no blob");
+                    op.log("screenshot: no blob");
                 }
             }, !inTransparency.get(), mimetype, inQuality.get());
         }
@@ -279,7 +279,7 @@ function render()
     else
     {
         outStatus.set("Prerendering...");
-        console.log("pre ", countFrames, time);
+        op.log("pre ", countFrames, time);
         op.patch.cgl.screenShot((blob) =>
         {
             countFrames++;
