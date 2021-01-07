@@ -1,36 +1,21 @@
-const inExecute = op.inTrigger("Trigger In");
-const initButton = op.inTriggerButton("Initialize");
-const inUrl = op.inString("Model URL");
-const webcamTex = op.inObject("Webcam texture");
-
-const outTrigger = op.outTrigger("Trigger");
-const loadingFinished = op.outTrigger("Initialized");
-const arrayOut = op.outArray("Classifier");
+const inExecute = op.inTrigger("Trigger In"),
+      initButton = op.inTriggerButton("Initialize"),
+      inUrl = op.inString("Model URL"),
+      inTex = op.inObject("Webcam texture"),
+      outTrigger = op.outTrigger("Trigger"),
+      outFinished = op.outValueBool("Finished"),
+      loadingFinished = op.outTrigger("Initialized"),
+      arrayOut = op.outArray("Classifier");
 
 inExecute.onTriggered = loop;
 initButton.onTriggered = init;
 inUrl.onChange = init;
-webcamTex.onChange = loop;
+inTex.onChange = loop;
 
 let model;
+const gl = op.patch.cgl.gl;
+let fb = null;
 
-const ele = document.createElement("canvas");
-ele.id = "camImage";
-
-const width = 200;
-const height = 200;
-const zoom = 1;
-
-ele.style.position = "absolute";
-ele.style.display = "none";
-ele.style["z-index"] = 5;
-ele.style.width = width + "px";
-ele.style.height = height + "px";
-ele.style["pointer-events"] = "none";
-ele.style["transform-origin"] = "top left";
-document.body.appendChild(ele);
-
-const context = document.getElementById("camImage").getContext("2d");
 
 // Load the image model and setup the webcam
 async function init()
@@ -57,25 +42,65 @@ async function init()
 
 async function loop()
 {
-    // draw camera texture onto canvas
-    if (webcamTex.get() !== null)
+    if (!inTex.get() || !inTex.get().tex) return;
+    outFinished.set(false);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+    const width = inTex.get().width;
+    const height = inTex.get().height;
+
+    if (!fb)fb = gl.createFramebuffer();
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, inTex.get().tex, 0);
+
+    const canRead = (gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    if (!canRead)
     {
-        if (webcamTex.get().videoElement !== undefined)
-        {
-            context.drawImage(webcamTex.get().videoElement, 0, 0, ele.width, ele.height);
-            await predict();
-        }
+        outFinished.set(true);
+        op.error("cannot read texture!");
+        return;
     }
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    const data = new Uint8Array(width * height * 4);
+    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    // Create a 2D canvas to store the result
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+
+    // Copy the pixels to a 2D canvas
+    const imageData = context.createImageData(width, height);
+    imageData.data.set(data);
+
+    const data2 = imageData.data;
+
+    // flip image
+    Array.from({ "length": height }, (val, i) => data2.slice(i * width * 4, (i + 1) * width * 4))
+        .forEach((val, i) => data2.set(val, (height - i - 1) * width * 4));
+
+    context.putImageData(imageData, 0, 0);
+
+    await predict(canvas);
+
+    outFinished.set(true);
     outTrigger.trigger();
 }
 
 // run the webcam image through the image model
-async function predict()
+async function predict(ctx)
 {
     // predict can take in an image, video or canvas html element
-    if (ele !== undefined && model !== undefined)
+    if (ctx !== undefined && model !== undefined)
     {
-        const prediction = await model.predict(ele);
+        const prediction = await model.predict(ctx);
         arrayOut.set(prediction);
     }
 }
