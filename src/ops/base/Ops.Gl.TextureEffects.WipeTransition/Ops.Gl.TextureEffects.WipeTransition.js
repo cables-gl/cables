@@ -1,10 +1,10 @@
 let cgl = this.patch.cgl;
 
-this.render = this.addInPort(new CABLES.Port(this, "render", CABLES.OP_PORT_TYPE_FUNCTION));
-this.fade = this.addInPort(new CABLES.Port(this, "fade", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.fadeWidth = this.addInPort(new CABLES.Port(this, "fadeWidth", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
-this.image = this.addInPort(new CABLES.Port(this, "image", CABLES.OP_PORT_TYPE_TEXTURE));
-this.trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
+const render = op.addInPort(new CABLES.Port(op, "render", CABLES.OP_PORT_TYPE_FUNCTION));
+const fade = op.addInPort(new CABLES.Port(op, "fade", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+const fadeWidth = op.addInPort(new CABLES.Port(op, "fadeWidth", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+const image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTURE));
+const trigger = op.addOutPort(new CABLES.Port(op, "trigger", CABLES.OP_PORT_TYPE_FUNCTION));
 
 let shader = new CGL.Shader(cgl);
 
@@ -44,36 +44,36 @@ let textureDisplaceUniform = new CGL.Uniform(shader, "t", "image", 1);
 let fadeUniform = new CGL.Uniform(shader, "f", "fade", 0);
 let fadeWidthUniform = new CGL.Uniform(shader, "f", "fadeWidth", 0);
 
-this.fade.onChange = function ()
+fade.onChange = () =>
 {
-    fadeUniform.setValue(this.fade.get());
+    fadeUniform.setValue(fade.get());
 };
 
-this.fadeWidth.onChange = function ()
+fadeWidth.onChange = () =>
 {
-    fadeWidthUniform.setValue(this.fadeWidth.get());
+    fadeWidthUniform.setValue(fadeWidth.get());
 };
 
-this.fade.set(0.5);
-this.fadeWidth.set(0.2);
+fade.set(0.5);
+fadeWidth.set(0.2);
 
-this.render.onTriggered = function ()
+render.onTriggered = () =>
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    const image = this.image.get();
-    if (image && image.tex)
+    const img = image.get();
+    if (img && img.tex)
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
-        cgl.setTexture(1, image.tex);
+        cgl.setTexture(1, img.tex);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();
     }
 
-    this.trigger.trigger();
+    trigger.trigger();
 };
