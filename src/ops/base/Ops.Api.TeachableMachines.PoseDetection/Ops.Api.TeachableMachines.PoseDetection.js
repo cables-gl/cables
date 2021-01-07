@@ -1,67 +1,24 @@
-const inExecute = op.inTriggerButton("Render");
-const initButton = op.inTriggerButton("Initialize");
-const inUrl = op.inString("Model URL");
-const webcamTex = op.inObject("Webcam texture");
-const flipImage = op.inBool("Flip image");
+const inExecute = op.inTriggerButton("Render"),
+      initButton = op.inTriggerButton("Initialize"),
+      inUrl = op.inString("Model URL"),
+      inTex = op.inObject("Texture"),
+      outFinished = op.outValueBool("Finished"),
+      flipImage = op.inBool("Flip image"),
+      outTrigger = op.outTrigger("Trigger"),
+      loadingFinished = op.outTrigger("Initialized"),
+      arrayOut = op.outArray("Classifier"),
+      poseArrayOut = op.outArray("Pose positions"),
+      flipImageOut = op.outBool("Image flipped");
 
-let hasFlipped = false;
-flipImage.onChange = checkFlip;
 inExecute.onTriggered = loop;
 initButton.onTriggered = init;
 inUrl.onChange = init;
-webcamTex.onChange = loop;
-
-// output
-const outTrigger = op.outTrigger("Trigger");
-const loadingFinished = op.outTrigger("Initialized");
-const arrayOut = op.outArray("Classifier");
-const poseArrayOut = op.outArray("Pose positions");
-const flipImageOut = op.outBool("Image flipped");
+inTex.onChange = loop;
 
 let model;
+const gl = op.patch.cgl.gl;
+let fb = null;
 
-// canvas buffers
-const width = 200;
-const height = 200;
-const zoom = 1;
-
-const camCanvas = document.createElement("canvas");
-camCanvas.id = "camImage";
-
-camCanvas.style.position = "absolute";
-camCanvas.style.display = "none";
-camCanvas.style["z-index"] = 5;
-camCanvas.style.width = width + "px";
-camCanvas.style.height = height + "px";
-camCanvas.style["pointer-events"] = "none";
-camCanvas.style["transform-origin"] = "top right";
-camCanvas.style.left = "80px";
-camCanvas.style.top = "230px";
-document.body.appendChild(camCanvas);
-
-const camCtx = document.getElementById("camImage").getContext("2d");
-
-const poseCanvas = document.createElement("canvas");
-poseCanvas.id = "poseImage";
-
-poseCanvas.style.position = "absolute";
-poseCanvas.style.display = "none";
-poseCanvas.style["z-index"] = 5;
-poseCanvas.style.width = width + "px";
-poseCanvas.style.height = height + "px";
-poseCanvas.style["pointer-events"] = "none";
-poseCanvas.style["transform-origin"] = "top right";
-poseCanvas.style.left = "80px";
-poseCanvas.style.top = "30px";
-document.body.appendChild(poseCanvas);
-
-const poseCtx = document.getElementById("poseImage").getContext("2d");
-
-function checkFlip()
-{
-    hasFlipped = false;
-    flipImageOut.set(flipImage.get());
-}
 
 // Load the image model and setup the webcam
 async function init()
@@ -88,52 +45,112 @@ async function init()
 
 async function loop()
 {
-    // draw camera texture onto canvas
-    if (webcamTex.get())
+    if (!inTex.get() || !inTex.get().tex) return;
+    outFinished.set(false);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+    const width = inTex.get().width;
+    const height = inTex.get().height;
+
+    if (!fb)fb = gl.createFramebuffer();
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, inTex.get().tex, 0);
+
+    const canRead = (gl.checkFramebufferStatus(gl.FRAMEBUFFER) == gl.FRAMEBUFFER_COMPLETE);
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    if (!canRead)
     {
-        if (hasFlipped == false)
-        {
-            camCtx.translate(camCanvas.width, 0);
-            camCtx.scale(-1, 1);
-            hasFlipped = true;
-        }
-        camCtx.drawImage(webcamTex.get().videoElement, 0, 0, camCanvas.width, camCanvas.height);
-        await predict();
+        outFinished.set(true);
+        op.error("cannot read texture!");
+        return;
     }
+
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
+    const data = new Uint8Array(width * height * 4);
+    gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+
+    // Create a 2D canvas to store the result
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    const context = canvas.getContext("2d");
+
+    // Copy the pixels to a 2D canvas
+    const imageData = context.createImageData(width, height);
+    imageData.data.set(data);
+
+    const data2 = imageData.data;
+
+    // flip image
+    Array.from({ "length": height }, (val, i) => data2.slice(i * width * 4, (i + 1) * width * 4))
+        .forEach((val, i) => data2.set(val, (height - i - 1) * width * 4));
+
+    context.putImageData(imageData, 0, 0);
+
+
+    await predict(canvas);
+
+    outFinished.set(true);
     outTrigger.trigger();
 }
 
 // run the webcam image through the image model
-async function predict()
+async function predict(ctx)
 {
     // predict can take in an image, video or canvas html element
-    if (camCanvas !== undefined && model !== undefined)
+    if (ctx !== undefined && model !== undefined)
     {
         // Prediction #1: run input through posenet
         // estimatePose can take in an image, video or canvas html element
-        const { pose, posenetOutput } = await model.estimatePose(camCanvas);
+        const { pose, posenetOutput } = await model.estimatePose(ctx);
         // Prediction 2: run input through teachable machine classification model
         const prediction = await model.predict(posenetOutput);
         arrayOut.set(prediction);
 
         // finally draw the poses
-        drawPose(pose);
+        drawPose(pose, ctx);
     }
 }
 
-function drawPose(pose)
+function drawPose(pose, ctx)
 {
-    if (poseCanvas)
-    {
-        poseCtx.drawImage(camCanvas, 0, 0);
-        // draw the keypoints and skeleton
-        if (pose)
-        {
-            const minPartConfidence = 0.5;
-            tmPose.drawKeypoints(pose.keypoints, minPartConfidence, poseCtx);
-            tmPose.drawSkeleton(pose.keypoints, minPartConfidence, poseCtx);
+    // Create a 2D canvas to store the result
+    const poseCanvas = document.createElement("canvas");
+    poseCanvas.width = ctx.width;
+    poseCanvas.height = ctx.height;
+    const poseCtx = poseCanvas.getContext("2d");
 
-            poseArrayOut.set(pose.keypoints);
+    poseCtx.drawImage(ctx, 0, 0);
+    // draw the keypoints and skeleton
+    if (pose)
+    {
+        const minPartConfidence = 0.5;
+        tmPose.drawKeypoints(pose.keypoints, minPartConfidence, poseCtx);
+        tmPose.drawSkeleton(pose.keypoints, minPartConfidence, poseCtx);
+
+        if (flipImage.get())
+        {
+            //pose.keypoints.position.x -= 100;
+            for(var i = 0; i < pose.keypoints.length; i++) {
+                pose.keypoints[i].position.x = map_range(pose.keypoints[i].position.x, 0, ctx.width, ctx.width, 0);
+            }
         }
+
+        // normalize all keypoints
+        for(var i = 0; i < pose.keypoints.length; i++) {
+            pose.keypoints[i].position.x = map_range(pose.keypoints[i].position.x, 0, ctx.width, 0, 1);
+            pose.keypoints[i].position.y = map_range(pose.keypoints[i].position.y, 0, ctx.height, 0, 1);
+        }
+
+        poseArrayOut.set(pose.keypoints);
     }
+
+}
+
+function map_range(value, low1, high1, low2, high2) {
+    return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
 }
