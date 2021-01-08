@@ -1,33 +1,36 @@
 {
-    "updated": 1536765725439,
     "authorName": "mickey",
-    "id": "",
     "created": 1524902340627,
     "layout": {
         "portsIn": [
             {
-                "type": "1",
-                "name": "Trigger"
-            },
-            {
-                "type": "2",
+                "type": 2,
                 "name": "Texture"
             },
             {
-                "type": "0",
-                "name": "Lossless (PNG)",
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Use JPEG",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Output dataUrl",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
-                "name": "Finished",
-                "subType": "boolean"
+                "type": 5,
+                "name": "Base64 string"
             },
             {
-                "type": "5",
-                "name": "Base64 image string"
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.Textures.TextureToBase64"
@@ -35,5 +38,6 @@
     "summary": "Converts a texture into a base-64 image string",
     "docs": {
         "ports": []
-    }
+    },
+    "id": "dcc29c06-c3df-434f-9782-736548220bda"
 }

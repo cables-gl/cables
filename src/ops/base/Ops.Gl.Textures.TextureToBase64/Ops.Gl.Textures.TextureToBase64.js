@@ -1,16 +1,26 @@
 const
     inTex = op.inTexture("Texture"),
     start = op.inTriggerButton("Trigger"),
-    lossless = op.inBool("Lossless (PNG)",true),
-    outFinished = op.outValueBool("Finished"),
-    outString = op.outString("Base64 string");
+    jpeg = op.inBool("Use JPEG", false),
+    dataUrl = op.inBool("Output dataUrl", false),
+    outString = op.outString("Base64 string"),
+    outLoading = op.outValueBool("Loading");
+
 const gl = op.patch.cgl.gl;
 let fb = null;
 
-start.onTriggered = function ()
+// Create a 2D canvas to store the result
+const canvas = document.createElement("canvas");
+
+jpeg.onChange = update;
+dataUrl.onChange = update;
+start.onTriggered = update;
+
+function update()
 {
+    op.uiAttr({ "error": null });
     if (!inTex.get() || !inTex.get().tex) return;
-    outFinished.set(false);
+    outLoading.set(true);
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 
     const width = inTex.get().width;
@@ -27,8 +37,8 @@ start.onTriggered = function ()
 
     if (!canRead)
     {
-        outFinished.set(true);
-        op.error("cannot read texture!");
+        outLoading.set(true);
+        op.uiAttr({ "error": "cannot read texture!" });
         return;
     }
 
@@ -37,8 +47,6 @@ start.onTriggered = function ()
     gl.readPixels(0, 0, width, height, gl.RGBA, gl.UNSIGNED_BYTE, data);
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
-    // Create a 2D canvas to store the result
-    const canvas = document.createElement("canvas");
     canvas.width = width;
     canvas.height = height;
     const context = canvas.getContext("2d");
@@ -54,13 +62,22 @@ start.onTriggered = function ()
         .forEach((val, i) => data2.set(val, (height - i - 1) * width * 4));
 
     context.putImageData(imageData, 0, 0);
-    if(lossless.get()) {
-        outString.set(canvas.toDataURL());
-    } else {
-        outString.set(canvas.toDataURL('image/jpeg', 1.0));
+    let dataString = "";
+    if (jpeg.get())
+    {
+        dataString = canvas.toDataURL("image/jpeg", 1.0);
     }
-    outFinished.set(true);
-};
+    else
+    {
+        dataString = canvas.toDataURL();
+    }
+    if (!dataUrl.get())
+    {
+        dataString = dataString.split(",", 2)[1];
+    }
+    outString.set(dataString);
+    outLoading.set(false);
+}
 
 function dataURIToBlob(dataURI, callback)
 {
