@@ -1,15 +1,15 @@
 const patch = this.patch;
 
-this.file = op.inUrl("File", "audio");
+const file = op.inUrl("File", "audio");
 const play = op.inBool("Play", false);
 const autoPlay = op.inBool("Autoplay", false);
 
 const volume = op.inFloatSlider("Volume", 1.0);
 const synchronizedPlayer = op.inBool("Synchronized Player", false);
 
-this.audioOut = this.addOutPort(new CABLES.Port(this, "Audio out", CABLES.OP_PORT_TYPE_OBJECT));
-const outPlaying = this.addOutPort(new CABLES.Port(this, "Playing", CABLES.OP_PORT_TYPE_VALUE));
-const outEnded = this.addOutPort(new CABLES.Port(this, "Ended", CABLES.OP_PORT_TYPE_FUNCTION));
+const audioOut = op.addOutPort(new CABLES.Port(op, "Audio out", CABLES.OP_PORT_TYPE_OBJECT));
+const outPlaying = op.addOutPort(new CABLES.Port(op, "Playing", CABLES.OP_PORT_TYPE_VALUE));
+const outEnded = op.addOutPort(new CABLES.Port(op, "Ended", CABLES.OP_PORT_TYPE_FUNCTION));
 
 const doLoop = op.inBool("Loop", false);
 
@@ -23,19 +23,20 @@ if (!window.audioContext) window.audioContext = new AudioContext();
 
 if (!window.audioContext)
 {
-    if (this.patch.config.onError) this.patch.config.onError("sorry, could not initialize WebAudio. Please check if your Browser supports WebAudio");
+    if (patch.config.onError) patch.config.onError("sorry, could not initialize WebAudio. Please check if your Browser supports WebAudio");
 }
 
-this.filter = audioContext.createGain();
-this.audio = null;
+let filter = audioContext.createGain();
+let audio = null;
 let buffer = null;
 let playing = false;
+let media = null;
 outPlaying.set(false);
 
 
 play.onChange = function ()
 {
-    if (!this.audio)
+    if (!audio)
     {
         op.uiAttr({ "error": "No audio file selected" });
         return;
@@ -46,51 +47,51 @@ play.onChange = function ()
     if (play.get())
     {
         playing = true;
-        const prom = this.audio.play();
+        const prom = audio.play();
         if (prom instanceof Promise)
             prom.then(null, function (e) {});
     }
     else
     {
         playing = false;
-        this.audio.pause();
+        audio.pause();
     }
     outPlaying.set(playing);
 };
 
 
-this.onDelete = function ()
+const onDelete = function ()
 {
-    if (this.audio) this.audio.pause();
+    if (audio) audio.pause();
 };
 
 
 doLoop.onChange = function ()
 {
-    if (this.audio) this.audio.loop = doLoop.get();
-    else if (this.media) this.media.loop = doLoop.get();
+    if (audio) audio.loop = doLoop.get();
+    else if (media) media.loop = doLoop.get();
 };
 
 function seek()
 {
     if (!synchronizedPlayer.get())
     {
-        if (!this.audio) return;
+        if (!audio) return;
 
         let prom;
-        if (this.patch.timer.isPlaying() && this.audio.paused) prom = this.audio.play();
-        else if (!this.patch.timer.isPlaying() && !this.audio.paused) prom = this.audio.pause();
+        if (patch.timer.isPlaying() && audio.paused) prom = audio.play();
+        else if (!patch.timer.isPlaying() && !audio.paused) prom = audio.pause();
 
         if (prom instanceof Promise)
             prom.then(null, function (e) {});
 
-        this.audio.currentTime = this.patch.timer.getTime();
+        audio.currentTime = patch.timer.getTime();
     }
     else
     {
         if (buffer === null) return;
 
-        const t = this.patch.timer.getTime();
+        const t = patch.timer.getTime();
         if (!isFinite(t))
         {
             return;
@@ -98,12 +99,12 @@ function seek()
 
         playing = false;
 
-        if (this.patch.timer.isPlaying())
+        if (patch.timer.isPlaying())
         {
             op.log("play!");
             outPlaying.set(true);
 
-            this.media.start(t);
+            media.start(t);
             playing = true;
         }
     }
@@ -111,18 +112,18 @@ function seek()
 
 function playPause()
 {
-    if (!this.audio) return;
+    if (!audio) return;
 
     let prom;
-    if (this.patch.timer.isPlaying()) prom = this.audio.play();
-    else prom = this.audio.pause();
+    if (patch.timer.isPlaying()) prom = audio.play();
+    else prom = audio.pause();
     if (prom instanceof Promise)
         prom.then(null, function (e) {});
 }
 
 function updateVolume()
 {
-    this.filter.gain.setValueAtTime((volume.get() || 0) * op.patch.config.masterVolume, window.audioContext.currentTime);
+    filter.gain.setValueAtTime((volume.get() || 0) * op.patch.config.masterVolume, window.audioContext.currentTime);
 }
 
 volume.onChange = updateVolume;
@@ -130,52 +131,52 @@ op.onMasterVolumeChanged = updateVolume;
 
 const firstTime = true;
 let loadingFilename = "";
-this.file.onChange = function ()
+file.onChange = function ()
 {
-    if (!this.file.get()) return;
-    loadingFilename = op.patch.getFilePath(this.file.get());
+    if (!file.get()) return;
+    loadingFilename = op.patch.getFilePath(file.get());
 
-    const loadingId = patch.loading.start("audioplayer", this.file.get());
+    const loadingId = patch.loading.start("audioplayer", file.get());
 
 
     if (!synchronizedPlayer.get())
     {
-        if (this.audio)
+        if (audio)
         {
-            this.audio.pause();
+            audio.pause();
             outPlaying.set(false);
         }
-        this.audio = new Audio();
+        audio = new Audio();
 
-        op.log("load audio", this.file.get());
+        op.log("load audio", file.get());
 
-        this.audio.crossOrigin = "anonymous";
-        this.audio.src = op.patch.getFilePath(this.file.get());
-        this.audio.loop = doLoop.get();
-        this.audio.crossOrigin = "anonymous";
+        audio.crossOrigin = "anonymous";
+        audio.src = op.patch.getFilePath(file.get());
+        audio.loop = doLoop.get();
+        audio.crossOrigin = "anonymous";
 
         const canplaythrough = function ()
         {
             if (autoPlay.get() || play.get())
             {
-                const prom = this.audio.play();
+                const prom = audio.play();
                 if (prom instanceof Promise)
                     prom.then(null, function (e) {});
             }
             outPlaying.set(true);
             patch.loading.finished(loadingId);
-            this.audio.removeEventListener("canplaythrough", canplaythrough, false);
+            audio.removeEventListener("canplaythrough", canplaythrough, false);
         };
 
-        this.audio.addEventListener("stalled", (err) => { op.log("mediaplayer stalled...", err); patch.loading.finished(loadingId); });
-        this.audio.addEventListener("error", (err) => { op.log("mediaplayer error...", err); patch.loading.finished(loadingId); });
-        this.audio.addEventListener("abort", (err) => { op.log("mediaplayer abort...", err); patch.loading.finished(loadingId); });
-        this.audio.addEventListener("suspend", (err) => { op.log("mediaplayer suspend...", err); patch.loading.finished(loadingId); });
+        audio.addEventListener("stalled", (err) => { op.log("mediaplayer stalled...", err); patch.loading.finished(loadingId); });
+        audio.addEventListener("error", (err) => { op.log("mediaplayer error...", err); patch.loading.finished(loadingId); });
+        audio.addEventListener("abort", (err) => { op.log("mediaplayer abort...", err); patch.loading.finished(loadingId); });
+        audio.addEventListener("suspend", (err) => { op.log("mediaplayer suspend...", err); patch.loading.finished(loadingId); });
 
 
-        this.audio.addEventListener("canplaythrough", canplaythrough, false);
+        audio.addEventListener("canplaythrough", canplaythrough, false);
 
-        this.audio.addEventListener("ended", function ()
+        audio.addEventListener("ended", function ()
         {
             outPlaying.set(false);
             playing = false;
@@ -183,18 +184,18 @@ this.file.onChange = function ()
         }, false);
 
 
-        this.media = audioContext.createMediaElementSource(this.audio);
-        this.media.connect(this.filter);
-        this.audioOut.set(this.filter);
+        media = audioContext.createMediaElementSource(audio);
+        media.connect(filter);
+        audioOut.set(filter);
     }
     else
     {
-        this.media = audioContext.createBufferSource();
-        this.media.loop = doLoop.get();
+        media = audioContext.createBufferSource();
+        media.loop = doLoop.get();
 
         const request = new XMLHttpRequest();
 
-        request.open("GET", op.patch.getFilePath(this.file.get()), true);
+        request.open("GET", op.patch.getFilePath(file.get()), true);
         request.responseType = "arraybuffer";
 
         request.onload = function ()
@@ -204,10 +205,10 @@ this.file.onChange = function ()
             audioContext.decodeAudioData(audioData, function (res)
             {
                 buffer = res;
-                this.media.buffer = res;
-                this.media.connect(this.filter);
-                this.audioOut.set(this.filter);
-                this.media.loop = doLoop.get();
+                media.buffer = res;
+                media.connect(filter);
+                audioOut.set(filter);
+                media.loop = doLoop.get();
 
                 patch.loading.finished(loadingId);
             });
@@ -215,7 +216,7 @@ this.file.onChange = function ()
 
         request.send();
 
-        this.patch.timer.onPlayPause(seek);
-        this.patch.timer.onTimeChange(seek);
+        patch.timer.onPlayPause(seek);
+        patch.timer.onTimeChange(seek);
     }
 };
