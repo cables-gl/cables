@@ -14,8 +14,28 @@ const outIndex = op.outNumber("Index");
 
 // vars
 const el = document.createElement("div");
+el.addEventListener("dblclick", function ()
+{
+    valuePort.set(defaultValuePort.get());
+    const optionElements = input.querySelectorAll("option");
+    optionElements.forEach(function (optionElement, index)
+    {
+        if (optionElement.value.trim() === defaultValuePort.get())
+        {
+            optionElement.selected = true;
+            outIndex.set(index);
+        }
+        else
+        {
+            optionElement.removeAttribute("selected");
+        }
+    });
+});
+
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__select");
+el.classList.add("sidebar__reloadable");
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelText = document.createTextNode(labelPort.get());

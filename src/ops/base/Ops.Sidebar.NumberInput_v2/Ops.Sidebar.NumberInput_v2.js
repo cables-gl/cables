@@ -12,8 +12,16 @@ const valuePort = op.outValue("Result", defaultValuePort.get());
 
 // vars
 const el = document.createElement("div");
+el.addEventListener("dblclick", function ()
+{
+    valuePort.set(parseFloat(defaultValuePort.get()));
+    inputValuePort.set(parseFloat(defaultValuePort.get()));
+});
+
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__text-input");
+el.classList.add("sidebar__reloadable");
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelTextNode = document.createTextNode(labelPort.get());

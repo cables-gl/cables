@@ -18,9 +18,16 @@ const valuePort = op.outValue("Value", defaultValuePort.get());
 const el = document.createElement("div");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__toggle");
+el.classList.add("sidebar__reloadable");
+
 if (DEFAULT_VALUE_DEFAULT) el.classList.add("sidebar__toggle--active");
 
-el.addEventListener("click", onInputClick);
+el.addEventListener("dblclick", function ()
+{
+    valuePort.set(defaultValuePort.get());
+    inputValuePort.set(defaultValuePort.get());
+});
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelText = document.createTextNode(labelPort.get());
@@ -37,6 +44,7 @@ el.appendChild(label);
 
 const icon = document.createElement("div");
 icon.classList.add("icon_toggle");
+icon.addEventListener("click", onInputClick);
 el.appendChild(icon);
 
 

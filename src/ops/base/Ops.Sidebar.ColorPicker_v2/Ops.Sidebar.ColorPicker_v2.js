@@ -24,8 +24,29 @@ const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 
 // vars
 const el = document.createElement("div");
+el.addEventListener("dblclick", function ()
+{
+    let defaultValue = defaultValuePort.get();
+    input.setAttribute("value", defaultValue);
+    if (defaultValue)
+    {
+        if (defaultValue.length === 6 && defaultValue.charAt(0) !== "#")
+        {
+            defaultValue = "#" + defaultValue;
+        }
+        if (defaultValue.length === 7)
+        {
+            input.value = defaultValue;
+            colorInput.value = defaultValue;
+            setColorOutPorts(defaultValue);
+        }
+    }
+});
+
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__color-picker");
+el.classList.add("sidebar__reloadable");
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelTextNode = document.createTextNode(labelPort.get());
