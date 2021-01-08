@@ -21,13 +21,16 @@ render.onTriggered = function ()
     trigger.trigger();
 };
 
-
 function update()
 {
     const geom = geometry.get();
     if (geom)
     {
-        if (mesh)mesh.dispose();
+        if (mesh)
+        {
+            mesh.dispose();
+            mesh = null;
+        }
         if (!mesh)
         {
             mesh = new CGL.Mesh(op.patch.cgl, geom);
