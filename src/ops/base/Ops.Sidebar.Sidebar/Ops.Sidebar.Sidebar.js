@@ -18,6 +18,7 @@ const visiblePort = op.inValueBool("Visible", true);
 const opacityPort = op.inValueSlider("Opacity", 1);
 const defaultMinimizedPort = op.inValueBool("Default Minimized");
 const minimizedOpacityPort = op.inValueSlider("Minimized Opacity", 0.5);
+const undoButtonPort = op.inValueBool("Show undo button", false);
 
 const inTitle = op.inString("Title", "Sidebar");
 const side = op.inValueBool("Side");
@@ -45,6 +46,7 @@ visiblePort.onChange = onVisiblePortChange;
 opacityPort.onChange = onOpacityPortChange;
 defaultMinimizedPort.onChange = onDefaultMinimizedPortChanged;
 minimizedOpacityPort.onChange = onMinimizedOpacityPortChanged;
+undoButtonPort.onChange = onUndoButtonChange;
 op.onDelete = onDelete;
 
 // functions
@@ -59,6 +61,53 @@ side.onChange = function ()
     if (side.get()) sidebarEl.classList.add("sidebar-cables-right");
     else sidebarEl.classList.remove("sidebar-cables-right");
 };
+
+function onUndoButtonChange()
+{
+    const header = document.querySelector(".sidebar-cables .sidebar__group-header");
+    if (header)
+    {
+        initUndoButton(header);
+    }
+}
+
+function initUndoButton(header)
+{
+    if (header)
+    {
+        const undoButton = document.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
+        if (undoButton)
+        {
+            if (!undoButtonPort.get())
+            {
+                header.removeChild(undoButton);
+            }
+        }
+        else
+        {
+            if (undoButtonPort.get())
+            {
+                const headerUndo = document.createElement("span");
+                headerUndo.classList.add("sidebar__group-header-undo");
+                headerUndo.classList.add("fa");
+                headerUndo.classList.add("fa-undo");
+
+                headerUndo.addEventListener("click", function (event)
+                {
+                    event.stopPropagation();
+                    const reloadables = document.querySelectorAll(".sidebar-cables .sidebar__reloadable");
+                    const doubleClickEvent = document.createEvent("MouseEvents");
+                    doubleClickEvent.initEvent("dblclick", true, true);
+                    reloadables.forEach((reloadable) =>
+                    {
+                        reloadable.dispatchEvent(doubleClickEvent);
+                    });
+                });
+                header.appendChild(headerUndo);
+            }
+        }
+    }
+}
 
 function onDefaultMinimizedPortChanged()
 {
@@ -136,13 +185,16 @@ function initSidebarElement()
     const header = document.createElement("div");
     header.classList.add("sidebar__group-header");
     element.appendChild(header);
-    const headerTitle = document.createElement("div");
+    const headerTitle = document.createElement("span");
     headerTitle.classList.add("sidebar__group-header-title");
     headerTitleText = document.createElement("span");
     headerTitleText.classList.add("sidebar__group-header-title-text");
     headerTitleText.innerHTML = inTitle.get();
     headerTitle.appendChild(headerTitleText);
     header.appendChild(headerTitle);
+
+    initUndoButton(header);
+
     headerGroup.appendChild(header);
     element.appendChild(headerGroup);
     headerGroup.addEventListener("click", onOpenCloseBtnClick);

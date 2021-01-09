@@ -1,0 +1,29 @@
+{
+    "authorName": "b2renger",
+    "created": 1524902340627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Base64 / Data URI"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Textures.Base64ToTexture"
+    },
+    "summary": "Converts a base-64 image string into a texture",
+    "docs": {
+        "ports": []
+    },
+    "id": "cd07e587-432a-4a81-a2b7-51273cf32171"
+}
