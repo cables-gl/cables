@@ -3,16 +3,16 @@
     "changelog": [
         {
             "message": "created op",
-            "author": "cables",
+            "author": "simod",
             "date": 1610369383724
         },
         {
             "message": "Ops.User.cables.SamplePlayer renamed to Ops.Admin.SamplePlayer",
-            "author": "cables",
+            "author": "simod",
             "date": 1610369551899
         }
     ],
-    "authorName": "cables",
+    "authorName": "simod",
     "created": 1610369399319,
     "layout": {
         "portsIn": [
