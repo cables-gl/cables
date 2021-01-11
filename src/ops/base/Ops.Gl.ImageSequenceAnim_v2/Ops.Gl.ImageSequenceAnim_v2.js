@@ -27,8 +27,8 @@ setRepeat();
 
 function setRepeat()
 {
-    texRepeatY.set(1.0 / numY.get());
-    texRepeatX.set(1.0 / numX.get());
+    texRepeatY.set(1 / numY.get());
+    texRepeatX.set(1 / numX.get());
     update();
 }
 
