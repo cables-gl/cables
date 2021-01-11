@@ -148,7 +148,7 @@ inTrigger.onTriggered = () =>
     catch (e)
     {
         op.setUiError(e);
-        op.log("IM IN ERROR?", currentSample, e);
+        op.log("Error: ", e);
         outPlaying.set(false);
     }
 };
