@@ -15,7 +15,7 @@ webcamTex.onChange = loop;
 let model;
 
 const ele = document.createElement("canvas");
-ele.id = "camImage";
+ele.id = "camImage_" + arguments[2] || uuid(); // instance id
 
 const width = 200;
 const height = 200;
@@ -30,7 +30,7 @@ ele.style["pointer-events"] = "none";
 ele.style["transform-origin"] = "top left";
 document.body.appendChild(ele);
 
-const context = document.getElementById("camImage").getContext("2d");
+const context = document.getElementById(ele.id).getContext("2d");
 
 // Load the image model and setup the webcam
 async function init()
