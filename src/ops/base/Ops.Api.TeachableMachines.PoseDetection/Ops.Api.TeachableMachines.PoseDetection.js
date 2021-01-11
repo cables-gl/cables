@@ -26,7 +26,7 @@ const height = 200;
 const zoom = 1;
 
 const camCanvas = document.createElement("canvas");
-camCanvas.id = "camImage_" + arguments[2] || uuid(); // instance id
+camCanvas.id = "camImage_" + op.id; // instance id
 
 camCanvas.style.position = "absolute";
 camCanvas.style.display = "none";

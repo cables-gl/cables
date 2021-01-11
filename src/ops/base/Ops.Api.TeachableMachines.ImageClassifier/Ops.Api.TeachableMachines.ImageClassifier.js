@@ -15,7 +15,7 @@ webcamTex.onChange = loop;
 let model;
 
 const ele = document.createElement("canvas");
-ele.id = "camImage_" + arguments[2] || uuid(); // instance id
+ele.id = "camImage_" + op.id; // instance id
 
 const width = 200;
 const height = 200;
