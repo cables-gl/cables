@@ -30,8 +30,20 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         Log.log("op create: data.vars.objName");
         if (this._patch.getOpById(data.vars.opId)) return;
-        const op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
-        op.id = data.vars.opId;
+
+        let op = null;
+
+        if (window.gui)
+            gui.serverOps.loadOpLibs(data.vars.objName, () =>
+            {
+                op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
+                op.id = data.vars.opId;
+            });
+        else
+        {
+            op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
+            op.id = data.vars.opId;
+        }
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
     {
