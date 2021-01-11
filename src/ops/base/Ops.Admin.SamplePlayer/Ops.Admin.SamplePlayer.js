@@ -1,8 +1,7 @@
 function clamp(value, min, max)
 {
-  return Math.min(Math.max(value, min), max);
-};
-
+    return Math.min(Math.max(value, min), max);
+}
 
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
@@ -20,91 +19,87 @@ op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 const audioOutPort = op.outObject("Audio Out");
 const outPlaying = op.outBool("Is Playing", false);
 // vars
-let source = null;
 let isPlaying = false;
 
 const gainNode = audioCtx.createGain();
 
-const SOURCES = [0,1,2,3,4,5,6,7,8,9,10,11].map(() => ({
-    bufferSource: audioCtx.createBufferSource(),
-    isPlaying: false,
-    gainNode: audioCtx.createGain(),
-    }));
+const SOURCES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(() => ({
+    "bufferSource": audioCtx.createBufferSource(),
+    "isPlaying": false,
+    "gainNode": audioCtx.createGain(),
+    "isGainNodeConnected": false
+}));
 
 const SOURCES_LENGTH = SOURCES.length;
 
-SOURCES.forEach((src, index) => {
-    src.bufferSource.addEventListener("onended", () => {
-        SOURCES[index].isPlaying = false;
-        createAudioBufferSource();
-    })
-
-    src.bufferSource.connect(src.gainNode);
-    src.gainNode.connect(gainNode);
-})
-
-let paramsChanged = false;
-
-
-detunePort.onChange = playbackRatePort.onChange = () => {
-    try {
-    SOURCES.forEach((src) => {
+detunePort.onChange = playbackRatePort.onChange = () =>
+{
+    try
+    {
+        SOURCES.forEach((src) =>
+        {
         /* playback rate */
-        const playbackRate = clamp(playbackRatePort.get(), 0.01, 4);
-        if (
-            playbackRate >= src.bufferSource.playbackRate.minValue
+            const playbackRate = clamp(playbackRatePort.get(), 0.01, 4);
+            if (
+                playbackRate >= src.bufferSource.playbackRate.minValue
             && playbackRate <= src.bufferSource.playbackRate.maxValue
-        ) {
-            src.bufferSource.playbackRate.setValueAtTime(
-                playbackRate,
-                audioCtx.currentTime + 0.01
-            );
-        }
+            )
+            {
+                src.bufferSource.playbackRate.setValueAtTime(
+                    playbackRate,
+                    audioCtx.currentTime + 0.01
+                );
+            }
 
-        /* detune */
-        const detune = detunePort.get();
-        if (src.bufferSource.detune) {
-            src.bufferSource.detune.setValueAtTime(
-                detune,
-                audioCtx.currentTime + 0.01
-            );
-        }
-    });
-    } catch (e) {
+            /* detune */
+            const detune = detunePort.get();
+            if (src.bufferSource.detune)
+            {
+                src.bufferSource.detune.setValueAtTime(
+                    detune,
+                    audioCtx.currentTime + 0.01
+                );
+            }
+        });
+    }
+    catch (e)
+    {
         op.log("err in param change", e);
     }
-}
+};
 
 function createAudioBufferSource()
 {
     const buffer = audioBufferPort.get();
     if (!buffer) return;
 
-    for (let i = 0; i < SOURCES_LENGTH; i += 1) {
+    for (let i = 0; i < SOURCES_LENGTH; i += 1)
+    {
         const src = SOURCES[i];
         if (src.isPlaying) continue;
 
-        src.bufferSource.disconnect(src.gainNode);
+        // src.bufferSource.disconnect(src.gainNode);
 
         src.bufferSource = audioCtx.createBufferSource();
 
         /* end callback */
-        src.bufferSource.onended = () => {
+        src.bufferSource.onended = () =>
+        {
             src.isPlaying = false;
-            outPlaying.set(SOURCES.some(src => src.isPlaying === true));
+            outPlaying.set(SOURCES.some((src) => src.isPlaying === true));
             createAudioBufferSource();
         };
 
         src.bufferSource.buffer = buffer;
         src.bufferSource.loop = false;
-        // TODO: add playback rate & detune
 
         /* playback rate */
         const playbackRate = clamp(playbackRatePort.get(), 0.01, 4);
         if (
             playbackRate >= src.bufferSource.playbackRate.minValue
             && playbackRate <= src.bufferSource.playbackRate.maxValue
-        ) {
+        )
+        {
             src.bufferSource.playbackRate.setValueAtTime(
                 playbackRate,
                 audioCtx.currentTime
@@ -113,7 +108,8 @@ function createAudioBufferSource()
 
         /* detune */
         const detune = detunePort.get();
-        if (src.bufferSource.detune) {
+        if (src.bufferSource.detune)
+        {
             src.bufferSource.detune.setValueAtTime(
                 detune,
                 audioCtx.currentTime
@@ -123,47 +119,52 @@ function createAudioBufferSource()
         src.bufferSource.connect(src.gainNode);
         src.gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
         src.gainNode.connect(gainNode);
+        src.isGainNodeConnected = true;
     }
 
     audioOutPort.set(gainNode);
 }
 
 let currentSample = 0;
-inTrigger.onTriggered = () => {
+inTrigger.onTriggered = () =>
+{
+    if (!audioBufferPort.get() || !(audioBufferPort.get() instanceof AudioBuffer)) return;
     try
     {
-
         const time = Number(startTimePort.get());
         const offset = Number(offsetPort.get());
 
-        if (!SOURCES[currentSample].isPlaying) {
-            SOURCES[currentSample].bufferSource.start(time, offset); // 0 = now
+        if (!SOURCES[currentSample].isPlaying)
+        {
+            SOURCES[currentSample].bufferSource.start(Math.max(0, time), Math.max(0, offset));
             SOURCES[currentSample].gainNode.gain.linearRampToValueAtTime(1.0, audioCtx.currentTime + 0.01);
             SOURCES[currentSample].isPlaying = true;
             outPlaying.set(true);
         }
 
         currentSample += 1;
-        currentSample = currentSample % SOURCES_LENGTH;
+        currentSample %= SOURCES_LENGTH;
     }
     catch (e)
     {
         op.setUiError(e);
-        op.log("IM IN ERROR?", currentSample,  e);
+        op.log("IM IN ERROR?", currentSample, e);
         outPlaying.set(false);
-        isPlaying = false;
     }
-}
+};
 
-inTrigger.onLinkChanged = () => {
-    if (!inTrigger.isLinked()) {
-        SOURCES.forEach((src, index) => {
-            if (src.isPlaying) src.bufferSource.stop();
+inTrigger.onLinkChanged = () =>
+{
+    if (!inTrigger.isLinked())
+    {
+        SOURCES.forEach((src, index) =>
+        {
+            if (src.isPlaying && src.bufferSource) src.bufferSource.stop();
             src.isPlaying = false;
         });
         outPlaying.set(false);
     }
-}
+};
 // change listeners
 audioBufferPort.onChange = function ()
 {
@@ -172,21 +173,26 @@ audioBufferPort.onChange = function ()
         if (!(audioBufferPort.get() instanceof AudioBuffer))
         {
             op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
-            return;
         }
-        op.setUiError("noAudioBuffer", null);
-        createAudioBufferSource();
+        else
+        {
+            createAudioBufferSource();
+            op.setUiError("noAudioBuffer", null);
+        }
     }
     else
     {
-        op.setUiError("noAudioBuffer", null);
-        if (isPlaying)
+        SOURCES.forEach((src) =>
         {
-            stop(0);
-            setTimeout(function ()
+            if (src.bufferSource && src.isGainNodeConnected)
             {
-                if (isPlaying) source.stop();
-            }, 30);
-        }
+                src.bufferSource.disconnect(src.gainNode);
+                src.gainNode.disconnect(gainNode);
+                src.isGainNodeConnected = false;
+            }
+            src.bufferSource = null;
+        });
+        op.setUiError("noAudioBuffer", null);
+        outPlaying.set(false);
     }
 };

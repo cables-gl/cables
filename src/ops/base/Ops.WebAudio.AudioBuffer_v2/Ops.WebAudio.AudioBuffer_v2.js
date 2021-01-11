@@ -26,6 +26,10 @@ inUrlPort.onChange = function ()
         }
         CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
     }
+    else
+    {
+        invalidateOutPorts();
+    }
 };
 
 function onLoadFinished(buffer)
@@ -50,6 +54,6 @@ function invalidateOutPorts()
     durationPort.set(0);
     numberOfChannelsPort.set(0);
     sampleRatePort.set(0);
-    audioBufferPort.set(0);
+    audioBufferPort.set(null);
     finishedLoadingPort.set(false);
 }
