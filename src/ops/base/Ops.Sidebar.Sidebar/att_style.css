@@ -204,12 +204,20 @@
 }
 
 .sidebar__group-header-title {
-  /*text-align: center;*/
+  float: left;
   overflow: hidden;
   padding: 0 15px;
   padding-top:5px;
   font-weight:bold;
 }
+
+.sidebar__group-header-undo {
+    float: right;
+    overflow: hidden;
+    padding-right: 15px;
+    padding-top:5px;
+    font-weight:bold;
+  }
 
 .sidebar__group-header-icon {
     width: 17px;

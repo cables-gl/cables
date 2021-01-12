@@ -17,145 +17,145 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "MatCap"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Diffuse",
                 "group": "Texture Maps"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Normal",
                 "group": "Texture Maps"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Specular Mask",
                 "group": "Texture Maps"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Specular MatCap",
                 "group": "Texture Maps"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "AO Texture",
                 "group": "Texture Maps"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Opacity Texture",
                 "group": "Texture Maps"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "AO Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normal Map Intensity",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Repeat X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Repeat Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset X",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset Y",
                 "group": "Texture Transforms",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Screen Space Normals",
                 "group": "Texture Transforms",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Calc normal tangents",
                 "group": "Texture Transforms",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity TexCoords Transform",
                 "group": "Texture Opacity",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Discard Transparent Pixels",
                 "group": "Texture Opacity",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha Mask Source index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Alpha Mask Source",
                 "group": "Texture Opacity"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ],
