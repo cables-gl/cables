@@ -12,37 +12,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "URL"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Audio Buffer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Finished Loading",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sample Rate",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Length",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number of Channels",
                 "subType": "number"
             }
