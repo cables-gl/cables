@@ -14,6 +14,7 @@ const
     z = op.inValue("z"),
     sizeX = op.inValueSlider("Size X", 1),
     inWorldSpace = op.inValueBool("WorldSpace", true),
+    inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 
 op.setPortGroup("Position", [x, y, z]);
@@ -42,10 +43,11 @@ inWorldSpace.onChange =
 
 render.onTriggered = doRender;
 
+const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     // "priority": 2,
-    "title": op.name,
+    "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
     srcHeadVert,
     srcBodyVert
@@ -62,6 +64,23 @@ mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff
 mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 updateDefines();
+
+inPrio.onChange = function ()
+{
+    mod.removeModule(vertModTitle);
+
+    const vmod = {
+        // "priority": 2,
+        "title": vertModTitle,
+        "name": "MODULE_VERTEX_POSITION",
+        srcHeadVert,
+        srcBodyVert
+    };
+
+    if (inPrio.get())vmod.priority = 2;
+
+    mod.addModule(vmod);
+};
 
 function updateDefines()
 {
