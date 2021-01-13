@@ -33,7 +33,7 @@ Now that you connected an AudioBuffer to a player, it is time to get sound to yo
 
 ### A note on using multiple audio players
 
-If you plan on using multiple audio players, make sure to use the [Mixer](https://cables.gl/op/Ops.WebAudio.Mixer) op and connect the individual outputs of the players to it. You can then connect the Mixer op's output to the Output op. Refer to the Mixer's [example patch](https://cables.gl/edit/5fd8a1ba1d3e0022a8736e3d) to see it in use. If you cannot multiple inputs to one Output op, you might experience unexpected behaviour of the audio files (e.g.: audio files still being played back even though they were disconnected). After everything is connected, play back your audio file. You should hear sound from your speakers.
+If you plan on using multiple audio players, make sure to use the [Mixer](https://cables.gl/op/Ops.WebAudio.Mixer) op and connect the individual outputs of the players to it. You can then connect the Mixer op's output to the Output op. Refer to the Mixer's [example patch](https://cables.gl/edit/5fd8a1ba1d3e0022a8736e3d) to see it in use. If you connect multiple inputs to one Output op, you might experience unexpected behaviour of the audio files (e.g.: audio files still being played back even though they were disconnected). After everything is connected, play back your audio file. You should hear sound from your speakers.
 
 ## Working with Effects
 
