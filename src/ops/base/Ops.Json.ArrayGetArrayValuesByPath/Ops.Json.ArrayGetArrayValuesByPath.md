@@ -2,11 +2,11 @@ useful to interate over nested data structures.
 
 the path defines the way to the first object. this op will then try to iterate over the array that contains the object with the given property and return all the values fo each object in the array.
 
-given an object like this:
+given an array like this:
 
 ```
-{
-    "data": [
+[
+    [
         {
             "firstName": "Gordon",
             "lastName": "Freeman"
@@ -14,7 +14,9 @@ given an object like this:
         {
             "firstName": "Eli",
             "lastName": "Vance"
-        },
+        }
+    ],
+    [
         {
             "firstName": "Alyx",
             "lastName": "Vance"
@@ -24,17 +26,14 @@ given an object like this:
             "lastName": "Man"
         }
     ]
-}
+]
 ```
 
-
-a path of `data.0.firstName` will result in this array:
+a path of `0.0.firstName` will result in this array:
 
 ```
 [
   "Gordon",
-  "Eli",
   "Alyx",
-  "G"
 ]
 ```
