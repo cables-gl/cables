@@ -1,8 +1,8 @@
-## Basic Audio Setup
+# Basic Audio Setup
 
 To get an audio stream into cables, there are multiple options. First off, to play back any file, you need to use the [Audio Buffer](https://cables.gl/op/Ops.WebAudio.AudioBuffer_v2) op. With this op, you create an audio buffer that you can connect to one of our audio players mentioned in the next section.
 
-### A note on file formats
+#### A note on file formats
 
 Depending on your target platform, you need to keep in mind that not all file formats work consistently on all browsers & operating systems. To counteract this, we provide the [BrowserSpecificFile op](https://cables.gl/op/Ops.Html.BrowserSpecificFile_v2) that lets you switch files depending on which browser/OS is detected. In its' documentation, you can find the specific file formats needed for the different browsers. Have a look at the [example patch](https://cables.gl/edit/5f88465bab82411d4f75112e) for usage.
 
