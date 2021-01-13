@@ -26,6 +26,12 @@ inUrlPort.onChange = function ()
         }
         CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
     }
+    else
+    {
+        invalidateOutPorts();
+        op.setUiError("wavFormat", null);
+        op.setUiError("failedLoading", null);
+    }
 };
 
 function onLoadFinished(buffer)
@@ -35,12 +41,14 @@ function onLoadFinished(buffer)
     numberOfChannelsPort.set(buffer.numberOfChannels);
     sampleRatePort.set(buffer.sampleRate);
     audioBufferPort.set(buffer);
+    op.setUiError("failedLoading", null);
     finishedLoadingPort.set(true);
 }
 
 function onLoadFailed(e)
 {
     op.error("Error: Loading audio file failed: ", e);
+    op.setUiError("failedLoading", "The audio file could not be loaded. Make sure the right file URL is used.", 2);
     invalidateOutPorts();
 }
 
@@ -50,6 +58,6 @@ function invalidateOutPorts()
     durationPort.set(0);
     numberOfChannelsPort.set(0);
     sampleRatePort.set(0);
-    audioBufferPort.set(0);
+    audioBufferPort.set(null);
     finishedLoadingPort.set(false);
 }
