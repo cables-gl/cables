@@ -31,56 +31,61 @@ const audioInGains = [inAudio0Gain, inAudio1Gain, inAudio2Gain, inAudio3Gain, in
 op.setPortGroup("Audio Inputs", audioIns);
 op.setPortGroup("Input", audioInGains);
 op.setPortGroup("Output ", [inMasterGain]);
-const oldAudioIns = [];
+const oldAudioIns = audioIns.map(() => ({ "node": null, "isConnected": false }));
 
 audioInGains.forEach((port, index) =>
 {
     port.gainNode = audioCtx.createGain();
-    port.onChange = () =>
-    {
-        port.gainNode.gain.setValueAtTime((audioInGains[index].get() || 0), audioCtx.currentTime);
-    };
+    port.onChange = () => port.gainNode.gain.setValueAtTime((audioInGains[index].get() || 0), audioCtx.currentTime);
 });
-// returns a function that closes around the `current_i` formal parameter.
-const createValueChangedFunction = function (port)
-{
-    // value changed function
-    return function ()
-    {
-        if (audioIns[port].get())
-        {
-            oldAudioIns[port] = audioIns[port].get();
-            try
-            {
-                if (audioIns[port].get().connect)
-                {
-                    audioIns[port].get().connect(audioInGains[port].gainNode);
-                    audioInGains[port].gainNode.connect(gain);
-                    op.setUiError("audioCtx" + port, null);
-                }
-                else op.setUiError("audioCtx" + port, "The input passed to port " + port + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
-            }
-            catch (e) { op.log("[Error] " + e); }
-        }
-        else if (!audioIns[port].isLinked())
-        {
-            op.setUiError("audioCtx" + port, null);
-            try
-            {
-                if (oldAudioIns[port] && oldAudioIns[port].disconnect)
-                {
-                    oldAudioIns[port].disconnect(audioInGains[port].gainNode);
-                    audioInGains[port].gainNode.disconnect(gain);
-                }
-            }
-            catch (e) { op.log("[Error] " + e); }
-        }
-    };
-};
 
 audioIns.forEach((port, index) =>
 {
-    port.onChange = createValueChangedFunction(index);
+    port.onChange = () =>
+    {
+        const audioNode = audioIns[index].get();
+        try
+        {
+            if (audioNode)
+            {
+                if (audioNode.connect)
+                {
+                    const bufferedNode = oldAudioIns[index];
+                    bufferedNode.node = audioNode;
+                    const gainNodePort = audioInGains[index].gainNode;
+
+                    if (!bufferedNode.isConnected)
+                    {
+                        bufferedNode.node.connect(gainNodePort);
+                        gainNodePort.connect(gain);
+                        bufferedNode.isConnected = true;
+                    }
+
+                    op.setUiError("audioCtx" + port, null);
+                }
+                else
+                {
+                    op.setUiError("audioCtx" + port, "The input passed to port " + port + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
+                }
+            }
+            else
+            {
+                const bufferedNode = oldAudioIns[index];
+                const gainNodePort = audioInGains[index].gainNode;
+
+                if (bufferedNode.isConnected)
+                {
+                    bufferedNode.node.disconnect(gainNodePort);
+                    gainNodePort.disconnect(gain);
+                    bufferedNode.isConnected = false;
+                }
+            }
+        }
+        catch (e)
+        {
+            op.log(e);
+        }
+    };
     port.audioInPortNr = index;
 });
 
