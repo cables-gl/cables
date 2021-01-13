@@ -118,5 +118,5 @@ my-patch/
 	index.html
 ```
 
-Now you should be able to go to http://your-domain.cool/my-patch to see the patch live and independant from the main cables server. In case you don’t see the patch but get a page not found error you need to find out where your root-folder in the file-system is (your domain points to a different folder on the server). If you cannot find it out by yourself ask your web developer friend / web-hosting provider.
+Now you should be able to go to http://your-domain.cool/my-patch to see the patch live and independent from the main cables server. In case you don’t see the patch but get a page not found error you need to find out where your root-folder in the file-system is (your domain points to a different folder on the server). If you cannot find it out by yourself ask your web developer friend / web-hosting provider.
 
