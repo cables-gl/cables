@@ -8,7 +8,7 @@ To get an audio stream into cables, there are multiple options. First off, to pl
 
 ### A note on file formats
 
-Depending on your target platform, you need to keep in mind that not all file formats work consistently on all browsers & operating systems. To counteract this, we provide the [BrowserSpecificFile op](https://cables.gl/op/Ops.Html.BrowserSpecificFile_v2) that lets you switch files depending on which browser/OS is detected. Have a look at the [example patch](https://cables.gl/edit/5f88465bab82411d4f75112e) for usage.
+Depending on your target platform, you need to keep in mind that not all file formats work consistently on all browsers & operating systems. To counteract this, we provide the [BrowserSpecificFile op](https://cables.gl/op/Ops.Html.BrowserSpecificFile_v2) that lets you switch files depending on which browser/OS is detected. In its' documentation, you can find the specific file formats needed for the different browsers. Have a look at the [example patch](https://cables.gl/edit/5f88465bab82411d4f75112e) for usage.
 
 As a little example:
 To be able to loop a file in Firefox, the file format needs to be **.ogg**, where as in Chrome, you need an **.mp3**. In Safari, you need an **.m4a** file.
