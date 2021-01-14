@@ -1,13 +1,11 @@
 useful when working with nested data structures.
 
-the path defines the way to the string. the stringwill be returned
+the path defines the way to the string. the string will be returned
 
-given an object like this:
+given an array like this:
 
 ```
-{
-    "data": { "names": [ "alyx","gordon","eli","g-man"] }
-}
+[ "alyx","gordon","eli","g-man"]
 ```
 
-a path of data.names.1 will return `gordon`:
+a path of 2 will return `eli`:
