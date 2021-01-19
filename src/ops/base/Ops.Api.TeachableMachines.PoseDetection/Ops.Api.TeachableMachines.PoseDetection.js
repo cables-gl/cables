@@ -26,7 +26,7 @@ const height = 200;
 const zoom = 1;
 
 const camCanvas = document.createElement("canvas");
-camCanvas.id = "camImage";
+camCanvas.id = "camImage_" + op.id; // instance id
 
 camCanvas.style.position = "absolute";
 camCanvas.style.display = "none";
@@ -39,10 +39,10 @@ camCanvas.style.left = "80px";
 camCanvas.style.top = "230px";
 document.body.appendChild(camCanvas);
 
-const camCtx = document.getElementById("camImage").getContext("2d");
+const camCtx = document.getElementById(camCanvas.id).getContext("2d");
 
 const poseCanvas = document.createElement("canvas");
-poseCanvas.id = "poseImage";
+poseCanvas.id = "poseImage_" + arguments[2] || uuid(); // instance id
 
 poseCanvas.style.position = "absolute";
 poseCanvas.style.display = "none";
@@ -55,7 +55,8 @@ poseCanvas.style.left = "80px";
 poseCanvas.style.top = "30px";
 document.body.appendChild(poseCanvas);
 
-const poseCtx = document.getElementById("poseImage").getContext("2d");
+const poseCtx = document.getElementById(poseCanvas.id).getContext("2d");
+
 
 function checkFlip()
 {

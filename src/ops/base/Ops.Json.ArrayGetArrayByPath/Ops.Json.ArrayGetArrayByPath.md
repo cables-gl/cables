@@ -2,38 +2,32 @@ useful when working with  nested data structures.
 
 the path defines the way to the array. the given array will be returned
 
-given an object like this:
+given an array like this:
 
 ```
-{
-    "data": { 
-        "persons": [ 
-            {
-                "name": "alyx"
-            },
-            {
-                "name": "eli"
-            },
-            {
-                "name": "gordon"
-            }
-        ] 
-    }
-}
+[
+    [
+        {
+            "firstName": "Gordon",
+            "lastName": "Freeman"
+        }
+   ],
+   [
+        {
+            "firstName": "Eli",
+            "lastName": "Vance"
+        }
+    ]
+]
 ```
 
-a path of `data.persons` will result in this array:
+a path of `0` will result in this array:
 
 ```
- [ 
-            {
-                "name": "alyx"
-            },
-            {
-                "name": "eli"
-            },
-            {
-                "name": "gordon"
-            }
-        ] 
+ [
+        {
+            "firstName": "Gordon",
+            "lastName": "Freeman"
+        }
+]
 ```
