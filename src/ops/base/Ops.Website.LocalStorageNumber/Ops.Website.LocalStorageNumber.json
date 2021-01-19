@@ -1,0 +1,37 @@
+{
+    "id": "2894cca0-0c06-4034-9d38-04b72afad277",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1611058934698
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1611059028808,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Key"
+            },
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Store"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Stored Number",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Website.LocalStorageNumber"
+    }
+}
