@@ -651,7 +651,7 @@ const Op = function ()
         const p = this.addInPort(
             new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_OBJECT, {
                 "display": "texture",
-                "objTypr": "texture",
+                "objType": "texture",
                 "preview": true
             })
         );
