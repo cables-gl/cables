@@ -1,3 +1,5 @@
+2;
+
 // constants
 const STEP_DEFAULT = 0.00001;
 
@@ -51,7 +53,10 @@ value.setAttribute("type", "text");
 // value.setAttribute('pattern', '[0-9]+([\.][0-9]+)?'); // only allow '.' as separator
 // value.setAttribute('step', 'any'); /* we cannot use the slider step, as it restricts valid numbers to be entered */
 // value.setAttribute('formnovalidate', '');
-value.oninput = onTextInputChanged;
+// value.oninput = onTextInputChanged;
+value.addEventListener("input", onTextInputChanged);
+value.addEventListener("blur", onTextInputBlur);
+
 el.appendChild(value);
 
 const inputWrapper = document.createElement("div");
@@ -121,15 +126,39 @@ inVisible.onChange = function ()
     el.style.display = inVisible.get() ? "block" : "none";
 };
 
-function onTextInputChanged(ev)
+function onTextInputBlur(ev)
 {
     let newValue = parseFloat(ev.target.value);
     if (isNaN(newValue)) newValue = 0;
     const min = minPort.get();
     const max = maxPort.get();
-    if (newValue < min) { newValue = min; }
-    else if (newValue > max) { newValue = max; }
-    // input.value = newValue;
+
+    if (blur)
+    {
+        let resetValue = false;
+        if (newValue < min) { newValue = min; resetValue = true; }
+        else if (newValue > max) { newValue = max; resetValue = true; }
+
+        if (resetValue)
+        {
+            value.removeEventListener("input", onTextInputChanged);
+            // value.oninput = null;
+            value.value = newValue;
+            input.value = newValue;
+            value.addEventListener("input", onTextInputChanged);
+            // value.oninput = onTextInputChanged;
+        }
+    }
+    valuePort.set(newValue);
+    updateActiveTrack();
+    inputValuePort.set(newValue);
+    if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
+}
+
+function onTextInputChanged(ev, blur)
+{
+    let newValue = parseFloat(ev.target.value);
+    if (isNaN(newValue)) newValue = 0;
     valuePort.set(newValue);
     updateActiveTrack();
     inputValuePort.set(newValue);
@@ -141,9 +170,10 @@ function onInputValuePortChanged()
     let newValue = parseFloat(inputValuePort.get());
     const minValue = minPort.get();
     const maxValue = maxPort.get();
+    value.value = newValue;
+
     if (newValue > maxValue) { newValue = maxValue; }
     else if (newValue < minValue) { newValue = minValue; }
-    value.value = newValue;
     input.value = newValue;
     valuePort.set(newValue);
     updateActiveTrack();

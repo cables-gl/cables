@@ -3,6 +3,9 @@ const parentPort = op.inObject("link");
 const labelPort = op.inString("Text", "Select File:");
 const inId = op.inValueString("Id", "");
 const inVisible = op.inBool("Visible", true);
+const inGreyOut = op.inBool("Grey Out", false);
+const inOpenDialog = op.inTriggerButton("Show Dialog");
+
 // outputs
 
 const siblingsPort = op.outObject("childs");
@@ -25,22 +28,41 @@ fileInputEle.name = "file";
 
 fileInputEle.style["background-color"] = "transparent";
 fileInputEle.style.width = "90%";
+fileInputEle.style.display = "none";
 // fileInputEle.style.float = "left";
-
 
 const elReset = document.createElement("div");
 elReset.style.cursor = "pointer";
 elReset.style.position = "absolute";
 elReset.style.right = "10px";
-elReset.style["margin-top"] = "5x";
-elReset.innerHTML = "&nbsp;&nbsp;X";
+elReset.style["margin-top"] = "15px";
+elReset.innerHTML = "&nbsp;&nbsp;✕";
+
+const fileInputButton = document.createElement("div");
+fileInputButton.classList.add("sidebar__button-input");
+fileInputButton.innerHTML = "Choose File";
+fileInputButton.onclick = () => { fileInputEle.click(); };
+inOpenDialog.onTriggered = () => { fileInputButton.click(); };
+fileInputButton.style["margin-top"] = "10px";
+fileInputButton.style.width = "80%";
 
 el.appendChild(elReset);
+el.appendChild(fileInputButton);
 el.appendChild(fileInputEle);
 
 const imgEl = document.createElement("img");
 
 fileInputEle.addEventListener("change", handleFileSelect, false);
+
+const greyOut = document.createElement("div");
+greyOut.classList.add("sidebar__greyout");
+el.appendChild(greyOut);
+greyOut.style.display = "none";
+
+inGreyOut.onChange = function ()
+{
+    greyOut.style.display = inGreyOut.get() ? "block" : "none";
+};
 
 inVisible.onChange = function ()
 {
@@ -52,7 +74,6 @@ elReset.addEventListener("click", () =>
     fileInputEle.value = "";
     outDataURL.set("");
 });
-
 
 function handleFileSelect(evt)
 {
@@ -68,9 +89,9 @@ function handleFileSelect(evt)
         outDataURL.set(e.target.result);
     };
 
-    reader.readAsDataURL(evt.target.files[0]);
+    if (evt.target.files[0]) reader.readAsDataURL(evt.target.files[0]);
+    else outDataURL.set("");
 }
-
 
 // events
 parentPort.onChange = onParentChanged;

@@ -6,7 +6,6 @@ const defaultValuePort = op.inString("Default", "");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 
-
 // outputs
 const siblingsPort = op.outObject("Children");
 const valuePort = op.outString("Result", defaultValuePort.get());
@@ -61,7 +60,6 @@ inVisible.onChange = function ()
     el.style.display = inVisible.get() ? "block" : "none";
 };
 
-
 // events
 parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
@@ -111,7 +109,7 @@ function onValuesPortChange()
 
 function setSelectedProperty()
 {
-    const defaultItem = defaultValuePort.get();
+    const defaultItem = defaultValuePort.get() + "";
     const optionElements = input.querySelectorAll("option");
     optionElements.forEach(function (optionElement, index)
     {

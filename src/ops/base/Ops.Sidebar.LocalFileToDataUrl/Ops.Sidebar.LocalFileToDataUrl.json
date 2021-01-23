@@ -1,1 +1,67 @@
-{"id":"c99d271e-aa5e-4a9d-a4d3-4c5137c189e8","changelog":[{"message":"created op","author":"pandur","date":1597831893924},{"message":"Ops.User.pandur.LocalFileToDataUrl renamed to Ops.Sidebar.LocalFileToDataUrl","author":"pandur","date":1597843619028}],"authorName":"pandur","created":1597831902795,"layout":{"portsIn":[{"type":"2","name":"link"},{"type":"5","name":"Text"},{"type":"0","name":"Id","subType":"string"},{"type":"0","name":"Visible","subType":"boolean"}],"portsOut":[{"type":"2","name":"childs"},{"type":"5","name":"Data URL"}],"name":"Ops.Sidebar.LocalFileToDataUrl"},"summary":"load a local file and output as data url","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "c99d271e-aa5e-4a9d-a4d3-4c5137c189e8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1597831893924
+        },
+        {
+            "message": "Ops.User.pandur.LocalFileToDataUrl renamed to Ops.Sidebar.LocalFileToDataUrl",
+            "author": "pandur",
+            "date": 1597843619028
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1597831902795,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Id",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Show Dialog"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            },
+            {
+                "type": 5,
+                "name": "Data URL"
+            }
+        ],
+        "name": "Ops.Sidebar.LocalFileToDataUrl"
+    },
+    "summary": "load a local file and output as data url",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
