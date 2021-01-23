@@ -1,17 +1,17 @@
 // constants
-var CANVAS_ELEMENT = op.patch.cgl.canvas.parentElement;
+let CANVAS_ELEMENT = op.patch.cgl.canvas.parentElement;
 
 // variables
-var lastParent = null;
-var lastChild = null;
+let lastParent = null;
+let lastChild = null;
 
 // inputs
-var parentPort = op.inObject('Parent');
-var childPort = op.inObject('Child');
+let parentPort = op.inObject("Parent", null, "element");
+let childPort = op.inObject("Child", null, "element");
 
 // outputs
-var parentOutPort = op.outObject('Parent Out');
-var childOutPort = op.outObject('Child Out');
+let parentOutPort = op.outObject("Parent Out", null, "element");
+let childOutPort = op.outObject("Child Out", null, "element");
 
 // change listeners
 parentPort.onChange = update;
@@ -19,21 +19,30 @@ childPort.onChange = update;
 
 // functions
 
-function update() {
-    var parent = parentPort.get();
-    var child = childPort.get();
-    if(parent !== lastParent) {
-        if(parent) {
+function update()
+{
+    let parent = parentPort.get();
+    let child = childPort.get();
+    if (parent !== lastParent)
+    {
+        if (parent)
+        {
             handleParentConnect(parent, child);
-        } else {
+        }
+        else
+        {
             handleParentDisconnect(parent, child);
         }
         lastParent = parent;
     }
-    if(child !== lastChild) {
-        if(child) {
+    if (child !== lastChild)
+    {
+        if (child)
+        {
             handleChildConnect(parent, child);
-        } else {
+        }
+        else
+        {
             handleChildDisconnect(parent, child);
         }
         lastChild = child;
@@ -42,26 +51,34 @@ function update() {
     childOutPort.set(child);
 }
 
-function handleParentConnect(parent, child) {
-    if(child) {
+function handleParentConnect(parent, child)
+{
+    if (child)
+    {
         parent.appendChild(child);
     }
 }
 
-function handleParentDisconnect(parent, child) {
-    if(child) {
+function handleParentDisconnect(parent, child)
+{
+    if (child)
+    {
         CANVAS_ELEMENT.appendChild(child); // if there is no parent, append to patch
     }
 }
 
-function handleChildConnect(parent, child) {
-    if(parent) {
+function handleChildConnect(parent, child)
+{
+    if (parent)
+    {
         parent.appendChild(child);
     }
 }
 
-function handleChildDisconnect(parent, child) {
-    if(lastChild) {
+function handleChildDisconnect(parent, child)
+{
+    if (lastChild)
+    {
         CANVAS_ELEMENT.appendChild(lastChild);
     }
 }

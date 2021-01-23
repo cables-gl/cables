@@ -4,7 +4,7 @@ const
     vertexShader = op.inStringEditor("Vertex Code"),
     asMaterial = op.inValueBool("Use As Material", true),
     trigger = op.outTrigger("trigger"),
-    outShader = op.outObject("Shader");
+    outShader = op.outObject("Shader", null, "shader");
 
 const cgl = op.patch.cgl;
 const uniformInputs = [];
@@ -18,7 +18,6 @@ vertexShader.setUiAttribs({ "editorSyntax": "glsl" });
 
 const shader = new CGL.Shader(cgl, "shaderMaterial");
 
-
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 
 op.setPortGroup("Source Code", [fragmentShader, vertexShader]);
@@ -27,11 +26,9 @@ op.setPortGroup("Options", [asMaterial]);
 fragmentShader.set(CGL.Shader.getDefaultFragmentShader());
 vertexShader.set(CGL.Shader.getDefaultVertexShader());
 
-
 fragmentShader.onChange = vertexShader.onChange = function () { needsUpdate = true; };
 
 render.onTriggered = doRender;
-
 
 var needsUpdate = true;
 op.onLoadedValueSet = initDataOnLoad;
@@ -45,7 +42,6 @@ function initDataOnLoad(data)
             if (uniformInputs[i] && uniformInputs[i].name == data.portsIn[j].name)
                 uniformInputs[i].set(data.portsIn[j].value);
 }
-
 
 op.init = function ()
 {
@@ -89,7 +85,6 @@ const tempMat4 = mat4.create();
 // ];
 let countTexture = 0;
 const foundNames = [];
-
 
 function parseUniforms(src)
 {
@@ -267,7 +262,6 @@ function updateShader()
                 uniformTextures[j] = null;
             }
 
-
     for (var j = 0; j < uniformInputs.length; j++)
         for (var i = 0; i < foundNames.length; i++)
             if (uniformInputs[j] && foundNames.indexOf(uniformInputs[j].name) == -1)
@@ -282,13 +276,10 @@ function updateShader()
         vectors[j].changed = true;
     }
 
-
     for (i = 0; i < uniformInputs.length; i++)
         if (uniformInputs[i] && uniformInputs[i].uniform)uniformInputs[i].uniform.needsUpdate = true;
 
-
     shader.compile();
-
 
     if (CABLES.UI) gui.opParams.show(op);
 
