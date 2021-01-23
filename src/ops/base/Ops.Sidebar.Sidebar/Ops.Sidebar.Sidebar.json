@@ -5,38 +5,43 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Default Minimized",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Minimized Opacity",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 0,
+                "name": "Show undo button",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
                 "name": "Title"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Side",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "childs"
             }
         ],

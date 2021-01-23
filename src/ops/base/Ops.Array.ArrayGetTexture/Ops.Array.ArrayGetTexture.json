@@ -1,1 +1,40 @@
-{"id":"afea522b-ab72-4574-b721-5d37f5abaf77","changelog":[{"message":"created op","author":"pandur","date":1595494047208}],"authorName":"pandur","created":1595494061794,"layout":{"portsIn":[{"type":"3","name":"array"},{"type":"0","name":"index","subType":"integer"}],"portsOut":[{"type":"2","name":"value"}],"name":"Ops.Array.ArrayGetTexture"},"summary":"get texture from array at index","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "afea522b-ab72-4574-b721-5d37f5abaf77",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1595494047208
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1595494061794,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "array"
+            },
+            {
+                "type": 0,
+                "name": "index",
+                "subType": "integer"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "value"
+            }
+        ],
+        "name": "Ops.Array.ArrayGetTexture"
+    },
+    "summary": "get texture from array at index",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
