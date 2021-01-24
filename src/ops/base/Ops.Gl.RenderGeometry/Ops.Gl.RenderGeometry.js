@@ -24,8 +24,9 @@ render.onTriggered = function ()
 function update()
 {
     const geom = geometry.get();
-    if (geom)
+    if (geom && geom instanceof CGL.Geometry)
     {
+        console.log(geom);
         if (mesh)
         {
             mesh.dispose();

@@ -245,11 +245,15 @@ function parseGltf(arrayBuffer)
                 if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
                 {
                     stride = stride || 4;
-                    dataBuff = new Float32Array(num);
+
+                    const isInt=acc.componentType == 5125;
+                    if(isInt)dataBuff = new Uint32Array(num);
+                    else dataBuff = new Float32Array(num);
 
                     for (j = 0; j < num; j++)
                     {
-                        dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+                        if(isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
+                        else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
 
                         if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
                         accPos += 4;

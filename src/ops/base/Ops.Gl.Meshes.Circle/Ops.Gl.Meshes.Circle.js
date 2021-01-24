@@ -9,8 +9,7 @@ const mapping = op.inSwitch("mapping", ["flat", "round"]);
 const drawSpline = op.inValueBool("Spline", false);
 const inDraw = op.inValueBool("Draw", true);
 const trigger = op.outTrigger("trigger");
-const geomOut = op.outObject("geometry");
-
+const geomOut = op.outObject("geometry", null, "geometry");
 
 op.setPortGroup("Size", [radius, innerRadius]);
 op.setPortGroup("Display", [percent, steps, invertSteps]);

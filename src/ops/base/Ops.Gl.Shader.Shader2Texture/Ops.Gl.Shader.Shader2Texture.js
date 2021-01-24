@@ -1,6 +1,6 @@
 const
     exec = op.inTrigger("Render"),
-    inShader = op.inObject("Shader"),
+    inShader = op.inObject("Shader", null, "shader"),
     inVPSize = op.inValueBool("Use Viewport Size", true),
     inWidth = op.inValueInt("Width", 512),
     inHeight = op.inValueInt("Height", 512),
@@ -156,7 +156,7 @@ exec.onTriggered = function ()
     if (!fb || needInit)initFb();
     if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height)) initFb();
 
-    if (!inShader.get()) return;
+    if (!inShader.get() || !inShader.get().setDrawBuffers) return;
 
     if (inShader.get() != lastShader)
     {
