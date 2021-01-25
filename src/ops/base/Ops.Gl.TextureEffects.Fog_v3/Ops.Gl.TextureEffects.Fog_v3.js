@@ -5,6 +5,7 @@ const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 const inAmount = op.inFloatSlider("Amount", 1);
 const image = op.inTexture("Depth Texture");
 const inGradientTexture = op.inTexture("Gradient Texture");
+const inBgTex = op.inTexture("Background Texture");
 const inFogStart = op.inFloat("Fog Start", 1);
 const inFogEnd = op.inFloat("Fog End", 8);
 const inFogDensity = op.inFloatSlider("Fog Density", 1);
@@ -18,7 +19,7 @@ inFogR.setUiAttribs({ "colorPick": true });
 
 const trigger = op.outTrigger("trigger");
 
-op.setPortGroup("Textures", [image, inGradientTexture]);
+op.setPortGroup("Textures", [image, inGradientTexture, inBgTex]);
 op.setPortGroup("Frustum", [farPlane, nearPlane]);
 op.setPortGroup("Fog Options", [inFogStart, inFogEnd, inFogDensity]);
 op.setPortGroup("Fog Color", [inFogR, inFogG, inFogB, inFogA]);
@@ -32,6 +33,7 @@ const uniAmount = new CGL.Uniform(shader, "f", "inAmount", inAmount);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 const depthTextureUniform = new CGL.Uniform(shader, "t", "texDepth", 1);
 const uniGradientTexture = new CGL.Uniform(shader, "t", "texGradient", 2);
+const uniBgTexture = new CGL.Uniform(shader, "t", "texBg", 3);
 
 const uniFarplane = new CGL.Uniform(shader, "f", "farPlane", farPlane);
 const uniNearplane = new CGL.Uniform(shader, "f", "nearPlane", nearPlane);
@@ -41,6 +43,11 @@ const uniFogColor = new CGL.Uniform(shader, "4f", "inFogColor", inFogR, inFogG, 
 const uniFogDensity = new CGL.Uniform(shader, "f", "inFogDensity", inFogDensity);
 const uniFogStart = new CGL.Uniform(shader, "f", "inFogStart", inFogStart);
 const uniFogEnd = new CGL.Uniform(shader, "f", "inFogEnd", inFogEnd);
+
+inBgTex.onChange = () =>
+{
+    shader.toggleDefine("HAS_BG_TEX", inBgTex.get() && inBgTex.get().tex);
+};
 
 inGradientTexture.onChange = () =>
 {
@@ -75,6 +82,7 @@ render.onTriggered = function ()
         cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
         if (image.get()) cgl.setTexture(1, image.get().tex);
         if (inGradientTexture.get()) cgl.setTexture(2, inGradientTexture.get().tex);
+        if (inBgTex.get()) cgl.setTexture(3, inBgTex.get().tex);
         cgl.currentTextureEffect.finish();
         cgl.popShader();
     }

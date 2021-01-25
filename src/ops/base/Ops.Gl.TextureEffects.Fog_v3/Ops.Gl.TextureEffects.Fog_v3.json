@@ -40,12 +40,20 @@
             {
                 "type": 2,
                 "name": "Depth Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Gradient Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Background Texture",
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 0,
