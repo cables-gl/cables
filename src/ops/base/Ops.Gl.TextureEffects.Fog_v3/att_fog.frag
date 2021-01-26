@@ -6,6 +6,10 @@ UNI sampler2D texDepth;
     UNI sampler2D texGradient;
 #endif
 
+#ifdef HAS_BG_TEX
+    UNI sampler2D texBg;
+#endif
+
 UNI float nearPlane;
 UNI float farPlane;
 UNI float inAmount;
@@ -49,6 +53,11 @@ void main()
         fogColor *= fogColTex;
     #endif
 
+    #ifdef HAS_BG_TEX
+        vec4 fogColTexBg = texture(texBg, texCoord);
+        fogColor *= fogColTexBg;
+
+    #endif
 
     fogColor = color * (1.0 - fogAmount) + fogColor * fogAmount;
     // fogColor = mix(color, fogColor, fogAmount);

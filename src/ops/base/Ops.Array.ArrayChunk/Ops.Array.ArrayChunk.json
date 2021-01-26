@@ -5,32 +5,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Input Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Begin Index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Chunk Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Circular",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Output Array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Array length",
                 "subType": "number"
             }
