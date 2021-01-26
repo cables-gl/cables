@@ -8,11 +8,22 @@ const
     tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]),
     fpTexture = op.inValueBool("HDR"),
-    alphaMaskMethod = op.inSwitch("Alpha Mask Source", ["R", "A", "Luminance"]),
+    alphaMaskMethod = op.inSwitch("Alpha Mask Source", ["A", "1"], "A"),
+    greyscale = op.inSwitch("Convert Greyscale", ["Off", "R", "G", "B", "A", "Luminance"], "Off"),
+    invertR = op.inBool("Invert R", false),
+    invertG = op.inBool("Invert G", false),
+    invertB = op.inBool("Invert B", false),
+    invertA = op.inBool("Invert A", false),
 
     trigger = op.outTrigger("trigger"),
     texOut = op.outTexture("texture_out"),
     outRatio = op.outValue("Aspect Ratio");
+
+alphaMaskMethod.hidePort();
+greyscale.hidePort();
+invertR.hidePort();
+invertG.hidePort();
+invertB.hidePort();
 
 texOut.set(null);
 const cgl = op.patch.cgl;
@@ -34,6 +45,10 @@ let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
 alphaMaskMethod.onChange =
+    greyscale.onChange =
+    invertR.onChange =
+    invertG.onChange =
+    invertB.onChange =
     inTextureMask.onChange = updateDefines;
 
 updateDefines();
@@ -63,6 +78,20 @@ function initEffect()
 fpTexture.onChange = function ()
 {
     reInitEffect = true;
+};
+
+let autoRefreshTimeout = null;
+
+render.onLinkChanged =
+inTexture.onLinkChanged =
+inTexture.onChange = () =>
+{
+    if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    if (render.links.length === 0)
+    {
+        clearTimeout(autoRefreshTimeout);
+        autoRefreshTimeout = setTimeout(() => { console.log("!!!!"); doRender(); }, 10);
+    }
 };
 
 function updateResolution()
@@ -137,7 +166,11 @@ const doRender = function ()
 
     updateResolution();
 
-    if (!inTexture.get()) return;
+    if (!inTexture.get())
+    {
+        lastTex = CGL.Texture.getEmptyTexture(cgl);
+        return;
+    }
 
     lastTex = inTexture.get();
     const oldEffect = cgl.currentTextureEffect;
@@ -173,6 +206,20 @@ const doRender = function ()
 function updateDefines()
 {
     bgShader.toggleDefine("TEX_MASK", inTextureMask.get());
+
+    bgShader.toggleDefine("GREY_R", greyscale.get() === "R");
+    bgShader.toggleDefine("GREY_G", greyscale.get() === "G");
+    bgShader.toggleDefine("GREY_B", greyscale.get() === "B");
+    bgShader.toggleDefine("GREY_A", greyscale.get() === "A");
+    bgShader.toggleDefine("GREY_LUMI", greyscale.get() === "Luminance");
+
+    bgShader.toggleDefine("ALPHA_1", alphaMaskMethod.get() === "1");
+    bgShader.toggleDefine("ALPHA_A", alphaMaskMethod.get() === "A");
+
+    bgShader.toggleDefine("INVERT_R", invertR.get());
+    bgShader.toggleDefine("INVERT_G", invertG.get());
+    bgShader.toggleDefine("INVERT_B", invertB.get());
+    bgShader.toggleDefine("INVERT_A", invertA.get());
 
     textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
 }
