@@ -1,0 +1,62 @@
+{
+    "id": "c7e3fa27-21e8-44ef-b176-e0e596837abb",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1557471901737
+        },
+        {
+            "message": "cloned op from Ops.Trigger.TriggerOnChangeArray",
+            "author": "pandur",
+            "date": 1611658197625
+        },
+        {
+            "message": "Ops.User.pandur.TriggerOnChangeObject renamed to Ops.Trigger.TriggerOnChangeObject",
+            "author": "pandur",
+            "date": 1611658315070
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1611658197625,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Changed"
+            },
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Trigger.TriggerOnChangeObject"
+    },
+    "summary": "triggers when array has changed",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "docs": {
+        "ports": [
+            {
+                "name": "Array",
+                "text": "Array in"
+            },
+            {
+                "name": "Changed",
+                "text": "Trigger out - happens only when something in the array has changed"
+            },
+            {
+                "name": "Result",
+                "text": "Array out"
+            }
+        ]
+    }
+}
