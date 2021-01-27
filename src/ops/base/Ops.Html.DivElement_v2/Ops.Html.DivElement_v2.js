@@ -111,9 +111,10 @@ function onMouseLeave()
     outHover.set(false);
 }
 
-function onMouseClick()
+function onMouseClick(e)
 {
     outClicked.trigger();
+    // e.stopPropagation();
 }
 
 function updateInteractive()

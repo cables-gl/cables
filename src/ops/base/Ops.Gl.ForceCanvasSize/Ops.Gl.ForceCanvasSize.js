@@ -58,6 +58,11 @@ function updateRatioPreset()
     else if (pr == "iPhoneXr Vert")inRatio.set(9 / 19.5);
 }
 
+inRatio.onChange = () =>
+{
+    removeStyles();
+};
+
 inActive.onChange = function ()
 {
     if (!inActive.get())removeStyles();
