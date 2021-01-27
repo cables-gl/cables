@@ -71,8 +71,7 @@ var gltfMesh=class
 
         if(!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
 
-
-        if( (!geom.biTangents||geom.biTangents.length==0) && geom.tangents)
+        if( (!geom.biTangents || geom.biTangents.length==0) && geom.tangents)
         {
             console.log("calcing bitangents...");
             const bitan=vec3.create();
@@ -106,7 +105,7 @@ var gltfMesh=class
             }
         }
 
-        // if(geom.tangents.length==0)  geom.calcTangentsBitangents();
+        if(geom.tangents.length===0 || inCalcNormals.get())  geom.calcTangentsBitangents();
 
 
 
