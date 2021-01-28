@@ -1459,7 +1459,8 @@ Shader.prototype.setUniformTexture = function (uni, tex)
     for (let i = 0; i < this._textureStackTex.length; i++)
         if (this._textureStackUni[i] == uni)
         {
-            this._cgl.setTexture(i, tex, this._textureStackType[i]);
+            this._textureStackTex[i] = tex;
+            // this._cgl.setTexture(i, tex, this._textureStackType[i]);
             return true;
         }
     return false;
