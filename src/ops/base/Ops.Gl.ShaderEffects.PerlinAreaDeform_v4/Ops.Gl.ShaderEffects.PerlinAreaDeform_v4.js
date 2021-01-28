@@ -7,6 +7,7 @@ const
     inCalcNormals = op.inValueBool("Calc Normals", false),
     inFalloff = op.inValueSlider("Falloff", 0.5),
     output = op.inValueSelect("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
+    inPos = op.inSwitch("Source", ["Pos", "Orig Pos"], "Pos"),
     x = op.inValueFloat("x"),
     y = op.inValueFloat("y"),
     z = op.inValueFloat("z"),
@@ -19,7 +20,8 @@ inCalcNormals.onChange = updateCalcNormals;
 const inWorldSpace = op.inValueBool("WorldSpace");
 
 const moduleVert = null;
-output.onChange = updateOutput;
+inPos.onChange =
+    output.onChange = updateOutput;
 
 const mscaleUni = null;
 inWorldSpace.onChange = updateWorldspace;
@@ -31,7 +33,6 @@ mod.addModule({
     "srcHeadVert": attachments.perlindeform_vert,
     "srcBodyVert": attachments.perlindeform_body_vert
 });
-
 
 mod.addUniformVert("f", "MOD_size", inSize);
 mod.addUniformVert("f", "MOD_strength", inStrength);
@@ -48,7 +49,6 @@ mod.addUniformVert("f", "MOD_fallOff", inFalloff);
 
 mod.addUniformVert("f", "MOD_mScale", 1);
 
-
 updateOutput();
 updateWorldspace();
 updateCalcNormals();
@@ -58,7 +58,6 @@ function updateCalcNormals()
     mod.toggleDefine("MOD_CALC_NORMALS", inCalcNormals.get());
 }
 
-
 function updateWorldspace()
 {
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
@@ -66,13 +65,14 @@ function updateWorldspace()
 
 function updateOutput()
 {
+    mod.toggleDefine("POS_ATTR", inPos.get() == "Orig Pos");
+
     mod.toggleDefine("MOD_METH_ADD_XYZ", output.get() == "Add XYZ");
     mod.toggleDefine("MOD_METH_ADD_Z", output.get() == "Add Z");
     mod.toggleDefine("MOD_METH_ADD_Y", output.get() == "Add Y");
     mod.toggleDefine("MOD_METH_ADD_X", output.get() == "Add X");
     mod.toggleDefine("MOD_METH_MULNORM", output.get() == "Mul Normal");
 }
-
 
 function getScaling(mat)
 {
@@ -115,7 +115,6 @@ render.onTriggered = function ()
 
         cgl.popModelMatrix();
     }
-
 
     mod.bind();
     next.trigger();

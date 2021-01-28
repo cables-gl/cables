@@ -17,40 +17,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Content Element"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Show"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Close"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Show Closebutton",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Opacity",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Closed"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             }
         ],

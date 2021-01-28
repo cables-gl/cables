@@ -102,6 +102,8 @@ function updateTexture()
     cgl.gl.texImage2D(cgl.gl.TEXTURE_2D, 0, cgl.gl.RGBA, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, videoElement);
     cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
 
+    outRatio.set(videoElement.videoWidth / videoElement.videoHeight);
+
     if (!canceled) timeout = setTimeout(updateTexture, 1000 / fps.get());
 }
 
