@@ -1454,6 +1454,13 @@ Shader.prototype._bindTextures = function ()
     }
 };
 
+Shader.prototype.getUniformTextureSlot = function (uni)
+{
+    for (let i = 0; i < this._textureStackTex.length; i++)
+        if (this._textureStackUni[i] == uni) return i;
+    return null;
+};
+
 /**
  * push a texture on the stack. those textures will be bound when binding the shader. texture slots are automatically set
  * @param {uniform} texture uniform
