@@ -8,16 +8,16 @@ warning: this can potentially a problem for screen readers or vision impaired pe
 ```
 *
 {
--webkit-tap-highlight-color: transparent;
--webkit-touch-callout: none;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 ```
 
-##rubberband scrolling
+## rubberband scrolling
 
 to remove rubberband scrolling effect on ios, add `overflow:hidden` to your body style
 
