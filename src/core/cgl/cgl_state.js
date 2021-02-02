@@ -549,10 +549,13 @@ const Context = function (_patch)
         else if (this.canvas.msRequestFullscreen) this.canvas.msRequestFullscreen();
     };
 
-    this.setSize = function (w, h)
+    this.setSize = function (w, h, ignorestyle)
     {
-        this.canvas.style.width = w + "px";
-        this.canvas.style.height = h + "px";
+        if (!ignorestyle)
+        {
+            this.canvas.style.width = w + "px";
+            this.canvas.style.height = h + "px";
+        }
 
         this.canvas.width = w * this.pixelDensity;
         this.canvas.height = h * this.pixelDensity;
