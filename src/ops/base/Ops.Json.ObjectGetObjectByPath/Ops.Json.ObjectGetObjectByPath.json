@@ -1,1 +1,50 @@
-{"authorName":"cables","id":"574513c7-472b-433c-bf99-d906d3c737cd","created":1596729422402,"layout":{"portsIn":[{"type":"2","name":"Object"},{"type":"5","name":"Path"}],"portsOut":[{"type":"2","name":"Output"}],"name":"Ops.Json.ObjectGetObjectByPath"},"summary":"Returns the object at the position defined by a path","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Object","text":"json object"},{"name":"Path","text":"the path"},{"name":"Output","text":"the object"}]}}
+{
+    "authorName": "cables",
+    "id": "574513c7-472b-433c-bf99-d906d3c737cd",
+    "created": 1596729422402,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetObjectByPath"
+    },
+    "summary": "Returns the object at the position defined by a path",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Object",
+                "text": "json object"
+            },
+            {
+                "name": "Path",
+                "text": "the path"
+            },
+            {
+                "name": "Output",
+                "text": "the object"
+            }
+        ]
+    }
+}

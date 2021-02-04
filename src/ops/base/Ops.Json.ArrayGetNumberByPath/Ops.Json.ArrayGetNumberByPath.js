@@ -1,6 +1,7 @@
 const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
 const resultOut = op.outNumber("Output");
+const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
@@ -9,6 +10,7 @@ function update()
 {
     const data = objectIn.get();
     const path = pathIn.get();
+    op.setUiError("missing", null);
     if (data && path)
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
@@ -20,7 +22,26 @@ function update()
             op.setUiError("notiterable", null);
             const parts = path.split(".");
             op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
-            resultOut.set(resolve(path, data));
+            let result = resolve(path, data);
+            if (result === undefined)
+            {
+                const errorMsg = "could not find element at path " + path + ", returning null";
+                foundOut.set(false);
+                result = null;
+                op.setUiError("missing", errorMsg, 2);
+            }
+            else if (typeof result !== "number")
+            {
+                const errorMsg = "element at path " + path + " is not a number, returning null";
+                foundOut.set(false);
+                result = null;
+                op.setUiError("missing", errorMsg, 2);
+            }
+            else
+            {
+                foundOut.set(true);
+            }
+            resultOut.set(result);
         }
     }
 }

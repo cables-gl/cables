@@ -1,14 +1,18 @@
 const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
+const returnPathIn = op.inBool("Return path if missing", false);
 const resultOut = op.outString("Output");
+const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
+returnPathIn.onChange = update;
 
 function update()
 {
     const data = objectIn.get();
     const path = pathIn.get();
+    op.setUiError("missing", null);
     if (data && path)
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
@@ -20,7 +24,32 @@ function update()
             op.setUiError("notiterable", null);
             const parts = path.split(".");
             op.setUiAttrib({ "extendTitle": parts[parts.length - 1] + "" });
-            resultOut.set(resolve(path, data));
+            let result = resolve(path, data);
+            if (result === undefined)
+            {
+                let errorMsg = "could not find element at path " + path;
+                let errorLevel = 2;
+                result = null;
+                foundOut.set(false);
+                if (returnPathIn.get())
+                {
+                    result = path;
+                    errorLevel = 1;
+                    errorMsg += ", returning path";
+                }
+                else
+                {
+                    errorMsg += ", returning null";
+                    result = null;
+                }
+                op.setUiError("missing", errorMsg, errorLevel);
+            }
+            else
+            {
+                foundOut.set(true);
+                result = String(result);
+            }
+            resultOut.set(result);
         }
     }
 }
