@@ -1,1 +1,46 @@
-{"id":"ce1eaf2b-943b-4dc0-ab5e-ee11b63c9ed0","changelog":[{"message":"created op","author":"pandur","date":1555063271731}],"authorName":"pandur","created":1555063274095,"layout":{"portsIn":[{"type":"1","name":"Trigger"},{"type":"0","name":"Named Trigger","subType":"string"}],"name":"Ops.Trigger.TriggerSend"},"summary":"Allows triggers to be sent to a TriggerReceive op with the same variable name","youtubeid":"","issues":"","collections":null,"relatedops":["Ops.Trigger.TriggerReceive"],"docs":{"ports":[{"name":"Trigger","text":"Trigger in - gets sent to the matching TriggerReceive "},{"name":"Named Trigger","text":"Variable name assigned to the op - must match the TriggerReceive "}]}}
+{
+    "id": "ce1eaf2b-943b-4dc0-ab5e-ee11b63c9ed0",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1555063271731
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1555063274095,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Named Trigger",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Trigger.TriggerSend"
+    },
+    "summary": "Allows triggers to be sent to a TriggerReceive op with the same variable name",
+    "youtubeid": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.TriggerReceive"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Trigger",
+                "text": "Trigger in - gets sent to the matching TriggerReceive "
+            },
+            {
+                "name": "Named Trigger",
+                "text": "Variable name assigned to the op - must match the TriggerReceive "
+            }
+        ]
+    }
+}

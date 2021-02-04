@@ -54,6 +54,9 @@ function updateName()
 function doTrigger()
 {
     const arr = op.patch.namedTriggers[varname.get()];
+    // fire an event even if noone is receiving this trigger
+    // this way TriggerReceiveFilter can still handle it
+    op.patch.emitEvent("namedTriggerSent", varname.get());
 
     if (!arr)
     {
