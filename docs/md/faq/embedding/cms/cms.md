@@ -3,7 +3,7 @@
 Most CMSs have an option to integrate JavaScript somehow. If this is the case you
 might want to check out [Embedding Patches](../../../4_export_embed/dev_embed/dev_embed).
 
-If you are using Wordpress, this very basic [Wordpress-Plugin]() might work for you. Don't
+If you are using Wordpress, this very basic [Wordpress-Plugin](https://github.com/cables-gl/cables-wordpress-plugin) might work for you. Don't
 expect it to work with any other "page construction" plugins, like pagebuilders, though. This
 also will not work on wordpress installations that do not allow for integration of custom
 plugins, obviously.
