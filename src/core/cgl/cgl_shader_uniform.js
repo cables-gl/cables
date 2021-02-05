@@ -589,9 +589,62 @@ Uniform.prototype.setValue2F = function (v)
         this._oldValue[1] = v[1];
         this.needsUpdate = true;
     }
+    this._value = v;
+};
+
+Uniform.prototype.updateValue4F = function ()
+{
+    if (!this._isValidLoc())
+    {
+        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        profileData.profileShaderGetUniform++;
+        profileData.profileShaderGetUniformName = this._name;
+    }
+
+    this.needsUpdate = false;
+    this._shader.getCgl().gl.uniform4f(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
+    profileData.profileUniformCount++;
+};
+
+Uniform.prototype.setValue4F = function (v)
+{
+    if (typeof this.value == "number") this.value = vec4.create(); // this should not be needed, but somehow it crashes with some shadermods
+
+    if (!v) return;
+    if (!this._oldValue)
+    {
+        this._oldValue = [v[0] - 1, 1, 2, 3];
+        this.needsUpdate = true;
+    }
+    else if (v[0] != this._oldValue[0] || v[1] != this._oldValue[1] || v[2] != this._oldValue[2] || v[3] != this._oldValue[3])
+    {
+        this._oldValue[0] = v[0];
+        this._oldValue[1] = v[1];
+        this._oldValue[2] = v[2];
+        this.needsUpdate = true;
+    }
 
     this._value = v;
 };
+
+Uniform.prototype.updateValueM4 = function ()
+{
+    if (!this._isValidLoc())
+    {
+        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+        profileData.profileShaderGetUniform++;
+        profileData.profileShaderGetUniformName = this._name;
+    }
+    this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
+    profileData.profileUniformCount++;
+};
+
+Uniform.prototype.setValueM4 = function (v)
+{
+    this.needsUpdate = true;
+    this._value = v || mat4.create();
+};
+
 
 Uniform.prototype.updateValueT = function ()
 {
@@ -611,45 +664,6 @@ Uniform.prototype.setValueT = function (v)
 {
     this.needsUpdate = true;
     this._value = v;
-};
-
-Uniform.prototype.updateValue4F = function ()
-{
-    if (!this._isValidLoc())
-    {
-        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        profileData.profileShaderGetUniform++;
-        profileData.profileShaderGetUniformName = this._name;
-    }
-
-    this.needsUpdate = false;
-
-    this._shader.getCgl().gl.uniform4f(this._loc, this._value[0], this._value[1], this._value[2], this._value[3]);
-    profileData.profileUniformCount++;
-};
-
-Uniform.prototype.setValue4F = function (v)
-{
-    this.needsUpdate = true;
-    this._value = v || vec4.create();
-};
-
-Uniform.prototype.updateValueM4 = function ()
-{
-    if (!this._isValidLoc())
-    {
-        this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-        profileData.profileShaderGetUniform++;
-        profileData.profileShaderGetUniformName = this._name;
-    }
-    this._shader.getCgl().gl.uniformMatrix4fv(this._loc, false, this._value);
-    profileData.profileUniformCount++;
-};
-
-Uniform.prototype.setValueM4 = function (v)
-{
-    this.needsUpdate = true;
-    this._value = v || mat4.create();
 };
 
 /**

@@ -13,11 +13,6 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "value",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Syntax index",
                 "subType": "integer"
             },
