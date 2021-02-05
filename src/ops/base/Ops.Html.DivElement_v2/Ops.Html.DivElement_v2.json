@@ -35,6 +35,11 @@
                 "type": 0,
                 "name": "Convert Line Breaks",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Propagate Click-Events",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

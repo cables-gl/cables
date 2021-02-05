@@ -71,7 +71,7 @@ function updateVisibility()
     }
     else
     {
-        op.error("no html element");
+        // op.error("no html element");
     }
 }
 

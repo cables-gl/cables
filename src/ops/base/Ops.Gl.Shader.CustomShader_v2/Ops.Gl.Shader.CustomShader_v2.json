@@ -44,7 +44,8 @@
             },
             {
                 "type": 2,
-                "name": "Shader"
+                "name": "Shader",
+                "objType": "shader"
             }
         ],
         "name": "Ops.Gl.Shader.CustomShader_v2"

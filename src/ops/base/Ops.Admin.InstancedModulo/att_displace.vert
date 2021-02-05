@@ -8,8 +8,8 @@ MOD_p*=viewMatrix;
 
 // pos.x=mod(MOD_p.x,20.0);
 
-mMatrix[3].x=-viewMatrix[3].x+mod(viewMatrix[3].x-mMatrix[3].x,4.0)-2.0;
-mMatrix[3].y=-viewMatrix[3].y+mod(viewMatrix[3].y-mMatrix[3].y,4.0)-2.0;
+mMatrix[3].x=-viewMatrix[3].x+mod(viewMatrix[3].x-mMatrix[3].x,MOD_size.x)-(MOD_size.x/2.0)-MOD_pos.x;
+mMatrix[3].y=-2.0*viewMatrix[3].y+mod(viewMatrix[3].y-mMatrix[3].y,MOD_size.y)-(MOD_size.y/2.0)-MOD_pos.y;
 // mMatrix[3].y=mMatrix[3].y;
 mMatrix[3].z=mMatrix[3].z;
 

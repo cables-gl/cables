@@ -73,7 +73,6 @@ var gltfMesh=class
 
         if( (!geom.biTangents || geom.biTangents.length==0) && geom.tangents)
         {
-            console.log("calcing bitangents...");
             const bitan=vec3.create();
             const tan=vec3.create();
 
@@ -81,7 +80,6 @@ var gltfMesh=class
             geom.tangents=new Float32Array(tangents.length/4*3);
             geom.biTangents=new Float32Array(tangents.length/4*3);
 
-            console.log("tangents",tangents.length,geom.tangents.length)
             for(let i=0;i<tangents.length;i+=4)
             {
                 const idx=i/4*3;

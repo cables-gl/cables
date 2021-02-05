@@ -9,31 +9,35 @@ vec4 MOD_color;
 #endif
 
 
-vec2 tc=MOD_tc;
+vec2 MOD_ntc=MOD_tc;
 
 #ifdef MOD_MAP_SCREEN
-    // tc.y-=0.5;
+    // MOD_ntc.y-=0.5;
 
-    tc=(vec2(gl_FragCoord.x,gl_FragCoord.y)/vec2(MOD_viewPortW,MOD_viewPortH));
+    MOD_ntc=(vec2(gl_FragCoord.x,gl_FragCoord.y)/vec2(MOD_viewPortW,MOD_viewPortH));
 
 
     // tc+=MOD_pos;
-    tc-=vec2(0.5,0.5);
-    tc*=1.0/MOD_scale;
-    tc+=vec2(0.5,0.5);
-    tc-=MOD_offset;
+    MOD_n-=vec2(0.5,0.5);
+    MOD_n*=1.0/MOD_scale;
+    MOD_n+=vec2(0.5,0.5);
+    MOD_n-=MOD_offset;
     // tc.y=1.0-tc.y-0.5;
 
 #endif
 
 
 #ifdef MOD_DISCARD
-if(tc.x>0.0 && tc.x<1.0 && tc.y>0.0 && tc.y<1.0)
+if(MOD_ntc.x>0.0 && MOD_ntc.x<1.0 && MOD_ntc.y>0.0 && MOD_ntc.y<1.0)
 {
 #endif
 
     #ifndef MOD_MAP_TRIPLANAR
-        MOD_color=texture(MOD_tex,tc);
+        MOD_color=texture(MOD_tex,MOD_ntc);
+    #endif
+
+    #ifdef MOD_USE_IMGALPHA
+        col.a=MOD_color.a;
     #endif
 
     #ifdef MOD_BLEND_NORMAL
@@ -48,4 +52,5 @@ if(tc.x>0.0 && tc.x<1.0 && tc.y>0.0 && tc.y<1.0)
 
 #ifdef MOD_DISCARD
 }
+
 #endif

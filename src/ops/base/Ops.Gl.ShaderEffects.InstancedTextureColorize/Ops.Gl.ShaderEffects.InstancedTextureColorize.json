@@ -32,7 +32,8 @@
             },
             {
                 "type": 2,
-                "name": "Texture"
+                "name": "Texture",
+                "objType": "texture"
             },
             {
                 "type": 0,

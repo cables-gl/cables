@@ -26,6 +26,7 @@ invertG.hidePort();
 invertB.hidePort();
 
 texOut.set(null);
+let autoRefreshTimeout = null;
 const cgl = op.patch.cgl;
 let effect = null;
 let tex = null;
@@ -80,19 +81,22 @@ fpTexture.onChange = function ()
     reInitEffect = true;
 };
 
-let autoRefreshTimeout = null;
-
 render.onLinkChanged =
 inTexture.onLinkChanged =
 inTexture.onChange = () =>
 {
     if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    updateWithoutTrigger();
+};
+
+function updateWithoutTrigger()
+{
     if (render.links.length === 0)
     {
         clearTimeout(autoRefreshTimeout);
-        autoRefreshTimeout = setTimeout(() => { console.log("!!!!"); doRender(); }, 10);
+        autoRefreshTimeout = setTimeout(() => { doRender(); }, 10);
     }
-};
+}
 
 function updateResolution()
 {
@@ -222,6 +226,8 @@ function updateDefines()
     bgShader.toggleDefine("INVERT_A", invertA.get());
 
     textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
+
+    updateWithoutTrigger();
 }
 
 function onWrapChange()
@@ -232,6 +238,7 @@ function onWrapChange()
 
     reInitEffect = true;
     updateResolution();
+    updateWithoutTrigger();
 }
 
 twrap.set("clamp to edge");
@@ -245,6 +252,7 @@ function onFilterChange()
 
     reInitEffect = true;
     updateResolution();
+    updateWithoutTrigger();
 }
 
 tfilter.set("linear");

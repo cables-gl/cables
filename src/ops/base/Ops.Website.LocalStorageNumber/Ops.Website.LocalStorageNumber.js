@@ -8,6 +8,8 @@ inKey.onChange = updateOutput;
 inStore.onTriggered = storeValue;
 updateOutput();
 
+op.onLoaded = updateOutput;
+
 function getKey()
 {
     return (op.patch.namespace || "") + inKey.get();

@@ -28,8 +28,8 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 shader.setSource(attachments.splinemat_vert, attachments.splinemat_frag);
 shaderOut.set(shader);
 
-const uniTex = shader.addUniformFrag("t", "tex", inTexture);
-const uniTexMask = shader.addUniformFrag("t", "texMask", inTextureMask);
+const uniTex = shader.addUniformFrag("t", "tex");
+const uniTexMask = shader.addUniformFrag("t", "texMask");
 
 shader.addUniformFrag("4f", "color", r, g, b, a);
 shader.addUniformFrag("f", "width", inWidth);
@@ -37,16 +37,12 @@ shader.addUniformFrag("f", "texOffset", inTexOffset);
 shader.toggleDefine("PERSPWIDTH", inPerspective);
 shader.toggleDefine("USE_TEXTURE", inTexture);
 shader.toggleDefine("TEX_COLORIZE", inTexColorize);
+shader.toggleDefine("USE_TEXMASK", inTextureMask);
 
 inTexMap.on("change", updateMapping);
 
 render.onTriggered = doRender;
 updateMapping();
-
-inTextureMask.onChange = function ()
-{
-    shader.toggleDefine("USE_TEXMASK", inTextureMask.get());
-};
 
 function doRender()
 {
@@ -55,8 +51,8 @@ function doRender()
     cgl.pushShader(shader);
     shader.popTextures();
 
-    if (uniTex && inTexture.get()) shader.pushTexture(uniTex, inTexture.get());
-    if (uniTexMask && inTextureMask.get()) shader.pushTexture(uniTexMask, inTextureMask.get());
+    if (uniTex && inTexture.get()) shader.pushTexture(uniTex, inTexture.get().tex);
+    if (uniTexMask && inTextureMask.get()) shader.pushTexture(uniTexMask, inTextureMask.get().tex);
 
     trigger.trigger();
 

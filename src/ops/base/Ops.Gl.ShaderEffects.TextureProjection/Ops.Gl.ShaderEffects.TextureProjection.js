@@ -6,6 +6,8 @@ const
     inBlend = op.inSwitch("Blendmode", ["Normal", "Mul", "Add"], "Normal"),
     inAmount = op.inValueSlider("Amount", 0.3),
 
+    inUseTexAlpha = op.inBool("Use Texture Alpha", false),
+
     inPosX = op.inFloat("Pos X", 0),
     inPosY = op.inFloat("Pos Y", 0),
 
@@ -20,6 +22,7 @@ const
 
 const cgl = op.patch.cgl;
 
+inUseTexAlpha.onChange =
 inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChange = updateDefines;
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
@@ -56,6 +59,7 @@ updateDefines();
 
 function updateDefines()
 {
+    mod.toggleDefine("MOD_USE_IMGALPHA", inUseTexAlpha.get());
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
     mod.toggleDefine("MOD_MAP_XY", inMethod.get() == "XY");
     mod.toggleDefine("MOD_MAP_XZ", inMethod.get() == "XZ");
