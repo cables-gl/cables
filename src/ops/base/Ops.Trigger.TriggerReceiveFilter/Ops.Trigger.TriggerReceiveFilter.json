@@ -1,0 +1,52 @@
+{
+    "id": "7bf9e19a-55a8-4eb4-aaeb-5a15a8d2f958",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1612445104655
+        },
+        {
+            "message": "Ops.User.stephan.TriggerReceiveFilter renamed to Ops.Trigger.TriggerReceiveFilter",
+            "author": "stephan",
+            "date": 1612447019365
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1612445592447,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Prefix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger Out"
+            }
+        ],
+        "name": "Ops.User.stephan.TriggerReceiveFilter"
+    },
+    "summary": "receives all named trigges and relays them, optionally using a filter-prefix on the name",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Trigger.TriggerSend",
+        "Ops.Trigger.TriggerReceive"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Prefix",
+                "text": "triggers with name starting with this are being relayed"
+            },
+            {
+                "name": "Trigger Out",
+                "text": "output trigger"
+            }
+        ]
+    }
+}

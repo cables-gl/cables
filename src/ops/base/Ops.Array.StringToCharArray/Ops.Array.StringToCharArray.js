@@ -7,28 +7,37 @@ const arr = [];
 
 function update()
 {
-    const strLength = strIn.get().length;
     const str = strIn.get();
-
-    arr.length = 0;
-    arr.length = strLength;
-    if (convertToNumbersBool.get())
+    if (str !== undefined && str !== null)
     {
-        for (let i = 0; i < strLength; i++)
+        const strLength = str.length;
+
+        arr.length = 0;
+        arr.length = strLength;
+        if (convertToNumbersBool.get())
         {
-            arr[i] = str.charCodeAt(i);
+            for (let i = 0; i < strLength; i++)
+            {
+                arr[i] = str.charCodeAt(i);
+            }
         }
+        else
+        {
+            for (let i = 0; i < strLength; i++)
+            {
+                arr[i] = str.charAt(i);
+            }
+        }
+
+        op.setUiError("null", null);
+        arrOut.set(null);
+        arrOut.set(arr);
     }
     else
     {
-        for (let i = 0; i < strLength; i++)
-        {
-            arr[i] = str.charAt(i);
-        }
+        op.setUiError("null", "input is not of type string");
+        arrOut.set(null);
     }
-
-    arrOut.set(null);
-    arrOut.set(arr);
 }
 
 update();

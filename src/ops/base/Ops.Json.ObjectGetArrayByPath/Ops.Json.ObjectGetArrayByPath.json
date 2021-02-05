@@ -1,1 +1,50 @@
-{"authorName":"cables","id":"a9354531-a42d-4216-ad8c-364df989a9a1","created":1596729437053,"layout":{"portsIn":[{"type":"2","name":"Object"},{"type":"5","name":"Path"}],"portsOut":[{"type":"3","name":"Output"}],"name":"Ops.Json.ObjectGetArrayByPath"},"summary":"returns the array at the position defined by a path","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Object","text":"json object"},{"name":"Path","text":"path to array (i.e. data.numbers)"},{"name":"Output","text":"array of values"}]}}
+{
+    "authorName": "cables",
+    "id": "a9354531-a42d-4216-ad8c-364df989a9a1",
+    "created": 1596729437053,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Json.ObjectGetArrayByPath"
+    },
+    "summary": "returns the array at the position defined by a path",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Object",
+                "text": "json object"
+            },
+            {
+                "name": "Path",
+                "text": "path to array (i.e. data.numbers)"
+            },
+            {
+                "name": "Output",
+                "text": "array of values"
+            }
+        ]
+    }
+}
