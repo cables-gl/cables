@@ -30,5 +30,8 @@
     "summary": "add a reflection to any material",
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }
