@@ -6,6 +6,7 @@ const
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
+    inPropagation = op.inValueBool("Propagate Click-Events", true),
     outElement = op.outObject("DOM Element"),
     outHover = op.outValue("Hover"),
     outClicked = op.outTrigger("Clicked");
@@ -113,8 +114,11 @@ function onMouseLeave()
 
 function onMouseClick(e)
 {
+    if (!inPropagation.get())
+    {
+        e.stopPropagation();
+    }
     outClicked.trigger();
-    // e.stopPropagation();
 }
 
 function updateInteractive()

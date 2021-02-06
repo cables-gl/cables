@@ -15,7 +15,6 @@ shaderOut.set(shader);
 
 render.onTriggered = doRender;
 
-
 // rgba colors
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());
@@ -45,7 +44,6 @@ textureOpacity.onChange = updateOpacity;
 const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
 const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
-
 // texture coords
 
 const
@@ -54,7 +52,6 @@ const
     diffuseOffsetX = op.inValue("Tex Offset X", 0),
     diffuseOffsetY = op.inValue("Tex Offset Y", 0),
     cropRepeat = op.inBool("Crop TexCoords", false);
-
 
 shader.addUniformFrag("f", "diffuseRepeatX", diffuseRepeatX);
 shader.addUniformFrag("f", "diffuseRepeatY", diffuseRepeatY);
@@ -70,16 +67,13 @@ alphaMaskSource.onChange =
     cropRepeat.onChange =
     colorizeTexture.onChange = updateDefines;
 
-
 op.setPortGroup("Color", [r, g, b, a]);
 op.setPortGroup("Color Texture", [diffuseTexture, colorizeTexture]);
 op.setPortGroup("Opacity", [textureOpacity, alphaMaskSource, discardTransPxl, texCoordAlpha]);
 op.setPortGroup("Texture Transform", [diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY, cropRepeat]);
 
-
 updateOpacity();
 updateDiffuseTexture();
-
 
 op.preRender = function ()
 {
@@ -96,6 +90,7 @@ function doRender()
 
     if (diffuseTextureUniform && diffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, diffuseTexture.get().tex);
     if (textureOpacityUniform && textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
+
     trigger.trigger();
 
     cgl.popShader();

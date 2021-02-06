@@ -22,69 +22,71 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Width Perspective",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Texture",
-                "group": "Texture"
+                "group": "Texture",
+                "objType": "texture"
             },
             {
-                "type": "2",
-                "name": "Texture Mask"
+                "type": 2,
+                "name": "Texture Mask",
+                "objType": "texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mapping index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Mapping",
                 "group": "Texture"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Colorize Texture",
                 "group": "Texture",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Offset",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "a",
                 "group": "Color",
                 "subType": "number"
@@ -92,15 +94,15 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Admin.SplineMeshNewMaterial"
+        "name": "Ops.Gl.Meshes.SplineMeshMaterial_v2"
     },
     "summary": "material for splinemesh",
     "issues": "",

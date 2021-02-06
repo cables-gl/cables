@@ -17,10 +17,9 @@ mod.addModule({
 });
 
 mod.addUniformVert("t", "MOD_tex");
-
 inMode.onChange = updateDefines;
-
 render.onTriggered = doRender;
+updateDefines();
 
 function updateDefines()
 {

@@ -3,6 +3,7 @@ const
     inNumY = op.inValueInt("Columns", 32),
     inHeight = op.inFloat("Width", 2),
     inWidth = op.inFloat("Height", 2),
+    inRowOffset = op.inFloat("Row Offset", 0),
     inCenter = op.inValueBool("Center", true),
     outArr = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
@@ -14,6 +15,7 @@ inNumX.onChange =
 inNumY.onChange =
 inCenter.onChange =
 inWidth.onChange =
+inRowOffset.onChange =
 inHeight.onChange = generate;
 
 const arr = [];
@@ -66,14 +68,19 @@ function generate()
     arrColNums.length = l / 3;
     arrRowNums.length = l / 3;
 
+    let offRow = inRowOffset.get();
+    let off = 0;
     for (let y = 0; y < numY; y++)
     {
         for (let x = 0; x < numX; x++)
         {
+            off = 0;
+            if (x % 2 == 0 && offRow)off = offRow;
+
             arrColNums[i / 3] = y;
             arrRowNums[i / 3] = x;
 
-            arr[i++] = stepY * y - centerY;
+            arr[i++] = stepY * y - centerY + off;
             arr[i++] = stepX * x - centerX;
 
             arr[i++] = 0;

@@ -1,7 +1,9 @@
-const inRender = op.inTrigger("Render");
-const inSelect = op.inValueSelect("Uniform");
-const inValue = op.inValue("Value");
-const next = op.outTrigger("Next");
+const
+    inRender = op.inTrigger("Render"),
+    inSelect = op.inValueSelect("Uniform"),
+    inValue = op.inValue("Value"),
+    next = op.outTrigger("Next"),
+    outType = op.outString("Type");
 
 let shader = null;
 const cgl = op.patch.cgl;
@@ -22,6 +24,7 @@ inRender.onTriggered = function ()
 
     if (uniform)
     {
+        outType.set(uniform.getType());
         const oldValue = uniform.getValue();
         uniform.setValue(inValue.get());
         next.trigger();

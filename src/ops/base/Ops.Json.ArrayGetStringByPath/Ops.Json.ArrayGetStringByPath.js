@@ -8,6 +8,7 @@ objectIn.onChange = update;
 pathIn.onChange = update;
 returnPathIn.onChange = update;
 
+
 function update()
 {
     const data = objectIn.get();

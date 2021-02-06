@@ -1,4 +1,5 @@
 const serverHostname = op.inString("server hostname", "");
+const serverPath = op.inString("server path", "/socketcluster/");
 const serverPort = op.inValue("server port", 443);
 const serverSecure = op.inBool("use ssl", true);
 const allowSend = op.inBool("allow send", false);
@@ -30,6 +31,7 @@ const init = () =>
                 "hostname": serverHostname.get(),
                 "secure": serverSecure.get(),
                 "port": serverPort.get(),
+                "path": serverPath.get()
             });
             socket.allowSend = allowSend.get();
             socket.channelName = channelName.get();
@@ -119,3 +121,4 @@ const handleControlMessage = (message) =>
 };
 
 op.init = init;
+serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;

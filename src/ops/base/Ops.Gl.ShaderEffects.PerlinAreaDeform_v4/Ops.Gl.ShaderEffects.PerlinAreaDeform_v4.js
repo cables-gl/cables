@@ -28,7 +28,7 @@ inWorldSpace.onChange = updateWorldspace;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    "title": op.objName,
+    "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.perlindeform_vert,
     "srcBodyVert": attachments.perlindeform_body_vert

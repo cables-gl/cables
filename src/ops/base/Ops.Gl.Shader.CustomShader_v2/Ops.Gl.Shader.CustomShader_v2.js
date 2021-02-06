@@ -74,15 +74,16 @@ function hasUniformInput(name)
 
 const tempMat4 = mat4.create();
 // var lastm4;
-// const uniformNameBlacklist = [
-//     'modelMatrix',
-//     'viewMatrix',
-//     'normalMatrix',
-//     'mvMatrix',
-//     'projMatrix',
-//     'inverseViewMatrix',
-//     'camPos'
-// ];
+const uniformNameBlacklist = [
+    "modelMatrix",
+    "viewMatrix",
+    "normalMatrix",
+    "mvMatrix",
+    "projMatrix",
+    "inverseViewMatrix",
+    "camPos"
+];
+
 let countTexture = 0;
 const foundNames = [];
 
@@ -114,6 +115,7 @@ function parseUniforms(src)
 
                 for (let l = 0; l < names.length; l++)
                 {
+                    if (uniformNameBlacklist.indexOf(names[l]) > -1) continue;
                     const uniName = names[l].trim();
 
                     if (type === "float")
@@ -149,6 +151,28 @@ function parseUniforms(src)
                             groupUniforms.push(newInput);
                         }
                     }
+                    else if (type === "mat4")
+                    {
+                        foundNames.push(uniName);
+                        if (!hasUniformInput(uniName))
+                        {
+                            const newInput = op.inArray(uniName, 0);
+                            newInput.uniform = new CGL.Uniform(shader, "m4", uniName, newInput);
+                            uniformInputs.push(newInput);
+                            groupUniforms.push(newInput);
+
+                            const vec = {
+                                "name": uniName,
+                                "num": 16,
+                                "port": newInput,
+                                "uni": newInput.uniform,
+                                "changed": false
+                            };
+                            newInput.onChange = function () { this.changed = true; }.bind(vec);
+
+                            vectors.push(vec);
+                        }
+                    }
                     else if (type === "sampler2D")
                     {
                         foundNames.push(uniName);
@@ -182,7 +206,7 @@ function parseUniforms(src)
                             const vec = {
                                 "name": uniName,
                                 "num": num,
-                                "changed": false
+                                "changed": false,
                             };
                             vectors.push(vec);
                             initVectorUniform(vec);
@@ -305,6 +329,13 @@ function setVectorValues()
             if (v.num === 2) v.uni.setValue([v.x.get(), v.y.get()]);
             else if (v.num === 3) v.uni.setValue([v.x.get(), v.y.get(), v.z.get()]);
             else if (v.num === 4) v.uni.setValue([v.x.get(), v.y.get(), v.z.get(), v.w.get()]);
+
+            else if (v.num > 4)
+            {
+                v.uni.setValue(v.port.get());
+                // console.log(v.port.get());
+            }
+
             v.changed = false;
         }
     }

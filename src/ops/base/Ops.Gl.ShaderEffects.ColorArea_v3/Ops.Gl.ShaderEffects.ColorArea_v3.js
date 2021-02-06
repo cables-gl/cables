@@ -46,7 +46,7 @@ render.onTriggered = doRender;
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    // "priority": 2,
+    "priority": 2,
     "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
     srcHeadVert,
@@ -65,7 +65,10 @@ mod.addUniform("3f", "MOD_color", r, g, b);
 mod.addUniform("3f", "MOD_pos", x, y, z);
 updateDefines();
 
-inPrio.onChange = function ()
+inPrio.onChange = updatePrio;
+updatePrio();
+
+function updatePrio()
 {
     mod.removeModule(vertModTitle);
 
@@ -77,10 +80,10 @@ inPrio.onChange = function ()
         srcBodyVert
     };
 
-    if (inPrio.get())vmod.priority = 2;
+    if (inPrio.get()) vmod.priority = 2;
 
     mod.addModule(vmod);
-};
+}
 
 function updateDefines()
 {

@@ -3,7 +3,7 @@ const
     inDraw = op.inValueBool("draw", true),
     inNum = op.inValueInt("Num", 100),
     inGeomSurface = op.inObject("Geom Surface"),
-    inGeom = op.inObject("Geometry"),
+    // inGeom = op.inObject("Geometry"),
     inDistribution = op.inValueSelect("Distribution", ["Vertex", "Triangle Center", "Triangle Side", "Random Triangle Point"], "Vertex"),
     inVariety = op.inValueSelect("Selection", ["Random", "Sequential"], "Random"),
     seed = op.inValueFloat("Random Seed"),
@@ -12,6 +12,7 @@ const
     inDoLimit = op.inValueBool("Limit", false),
     inLimit = op.inValueInt("Limit Num", 0),
     inRotateRandom = op.inValueBool("Random Rotate", true),
+    outNext = op.outTrigger("Next"),
     outArrPositions = op.outArray("Positions"),
     outArrScale = op.outArray("Scale"),
     outArrRotations = op.outArray("Quaternions");
@@ -118,10 +119,10 @@ function setup()
 
     op.toWorkPortsNeedToBeLinkedReset();
 
-    if (inDraw.get())
-    {
-        op.toWorkPortsNeedToBeLinked(inGeom);
-    }
+    // if (inDraw.get())
+    // {
+    //     op.toWorkPortsNeedToBeLinked(inGeom);
+    // }
     const geom = inGeomSurface.get();
     const num = Math.abs(Math.floor(inNum.get()));
     const m = mat4.create();
@@ -323,11 +324,6 @@ function setup()
     outArrPositions.set(arrPositions);
 }
 
-inGeom.onChange = function ()
-{
-    reset();
-};
-
 function reset()
 {
     recalc = true;
@@ -337,4 +333,6 @@ function doRender()
 {
     if (recalc)setup();
     recalc = false;
+
+    outNext.trigger();
 }
