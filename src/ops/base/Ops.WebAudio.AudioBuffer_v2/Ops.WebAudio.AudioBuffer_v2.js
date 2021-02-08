@@ -8,6 +8,26 @@ const
     durationPort = op.outValue("Duration", 0),
     numberOfChannelsPort = op.outValue("Number of Channels", 0);
 
+if (!audioBufferPort.isLinked())
+{
+    op.setUiError("notConnected", "To play back sound, connect this op to a playback operator such as SamplePlayer or AudioBufferPlayer.", 0);
+}
+else
+{
+    op.setUiError("notConnected", null);
+}
+
+audioBufferPort.onLinkChanged = () =>
+{
+    if (audioBufferPort.isLinked())
+    {
+        op.setUiError("notConnected", null);
+    }
+    else
+    {
+        op.setUiError("notConnected", "To play back sound, connect this op to a playback operator such as SamplePlayer or AudioBufferPlayer.", 0);
+    }
+};
 // change listeners
 inUrlPort.onChange = function ()
 {

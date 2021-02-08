@@ -23,6 +23,48 @@ let source = null;
 let isPlaying = false;
 
 const gainNode = audioCtx.createGain();
+
+if (!audioBufferPort.isLinked())
+{
+    op.setUiError("inputNotConnected", "To be able to play back sound, you need to connect an AudioBuffer to this op.", 0);
+}
+else
+{
+    op.setUiError("inputNotConnected", null);
+}
+
+audioBufferPort.onLinkChanged = () =>
+{
+    if (!audioBufferPort.isLinked())
+    {
+        op.setUiError("inputNotConnected", "To be able to play back sound, you need to connect an AudioBuffer to this op.", 0);
+    }
+    else
+    {
+        op.setUiError("inputNotConnected", null);
+    }
+};
+
+if (!audioOutPort.isLinked())
+{
+    op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
+}
+else
+{
+    op.setUiError("outputNotConnected", null);
+}
+
+audioOutPort.onLinkChanged = () =>
+{
+    if (!audioOutPort.isLinked())
+    {
+        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
+    }
+    else
+    {
+        op.setUiError("outputNotConnected", null);
+    }
+};
 // change listeners
 audioBufferPort.onChange = function ()
 {
@@ -30,6 +72,7 @@ audioBufferPort.onChange = function ()
     {
         if (!(audioBufferPort.get() instanceof AudioBuffer))
         {
+            op.log("bratan");
             op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
             return;
         }
@@ -47,6 +90,7 @@ audioBufferPort.onChange = function ()
     else
     {
         op.setUiError("noAudioBuffer", null);
+
         if (isPlaying)
         {
             stop(0);

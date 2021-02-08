@@ -18,6 +18,49 @@ op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 // output ports
 const audioOutPort = op.outObject("Audio Out");
 const outPlaying = op.outBool("Is Playing", false);
+
+if (!audioBufferPort.isLinked())
+{
+    op.setUiError("inputNotConnected", "To be able to play back sound, you need to connect an AudioBuffer to this op.", 0);
+}
+else
+{
+    op.setUiError("inputNotConnected", null);
+}
+
+audioBufferPort.onLinkChanged = () =>
+{
+    if (!audioBufferPort.isLinked())
+    {
+        op.setUiError("inputNotConnected", "To be able to play back sound, you need to connect an AudioBuffer to this op.", 0);
+    }
+    else
+    {
+        op.setUiError("inputNotConnected", null);
+    }
+};
+
+if (!audioOutPort.isLinked())
+{
+    op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
+}
+else
+{
+    op.setUiError("outputNotConnected", null);
+}
+
+audioOutPort.onLinkChanged = () =>
+{
+    if (!audioOutPort.isLinked())
+    {
+        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
+    }
+    else
+    {
+        op.setUiError("outputNotConnected", null);
+    }
+};
+
 // vars
 let isPlaying = false;
 
