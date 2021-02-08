@@ -72,7 +72,6 @@ audioBufferPort.onChange = function ()
     {
         if (!(audioBufferPort.get() instanceof AudioBuffer))
         {
-            op.log("bratan");
             op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
             return;
         }
