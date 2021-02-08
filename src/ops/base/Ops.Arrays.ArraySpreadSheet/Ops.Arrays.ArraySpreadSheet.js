@@ -78,7 +78,7 @@ function asObjectArray(objects)
                 else o[x] = v;
             }
     }
-    arr.length = lastRow;
+    arr.length = lastRow + 1;
 
     return arr;
 }
