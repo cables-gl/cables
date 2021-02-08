@@ -1,1 +1,77 @@
-{"summary":"Outputs a musical scale array (major, minor, ...)","layout":{"portsIn":[{"type":0,"name":"Base Tone index","subType":"integer"},{"type":0,"name":"Base Tone","subType":"string"},{"type":0,"name":"Scale Type index","subType":"integer"},{"type":0,"name":"Scale Type","subType":"string"},{"type":0,"name":"Octave","subType":"integer"},{"type":0,"name":"Append Octave","subType":"boolean"},{"type":0,"name":"Include High Base Tone","subType":"boolean"}],"portsOut":[{"type":3,"name":"Scale Array"},{"type":3,"name":"Note Step Number Array"}],"name":"Ops.User.cables.ScaleArray_v2"},"authorName":"cables","id":"9e8c08d9-8c9a-4cff-8e5b-05c72d1f8522","created":1612791835720,"changelog":[{"message":"cloned op from Ops.WebAudio.Scale.ScaleArray","author":"cables","date":1612791835720},{"message":"Ops.User.cables.ScaleArray_v2 renamed to Ops.WebAudio.ScaleArray_v2","author":"cables","date":1612792960015}]}
+{
+    "summary": "Outputs a musical scale array (major, minor, ...)",
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Base Tone index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Base Tone",
+                "group": "Scale Settings",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Scale Type index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Scale Type",
+                "group": "Scale Settings",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Include Upper Root Note",
+                "group": "Scale Settings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Octave",
+                "group": "Scale Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Append Octave",
+                "group": "Scale Array Settings",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Scale Array"
+            },
+            {
+                "type": 3,
+                "name": "Note Step Number Array"
+            },
+            {
+                "type": 3,
+                "name": "Midi Note Array"
+            }
+        ],
+        "name": "Ops.WebAudio.ScaleArray_v2"
+    },
+    "authorName": "cables",
+    "id": "9e8c08d9-8c9a-4cff-8e5b-05c72d1f8522",
+    "created": 1612791835720,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.WebAudio.Scale.ScaleArray",
+            "author": "cables",
+            "date": 1612791835720
+        },
+        {
+            "message": "Ops.User.cables.ScaleArray_v2 renamed to Ops.WebAudio.ScaleArray_v2",
+            "author": "cables",
+            "date": 1612792960015
+        }
+    ]
+}
