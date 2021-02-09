@@ -59,18 +59,18 @@
         ],
         "name": "Ops.WebAudio.ScaleArray_v2"
     },
-    "authorName": "cables",
+    "authorName": "simod",
     "id": "9e8c08d9-8c9a-4cff-8e5b-05c72d1f8522",
     "created": 1612791835720,
     "changelog": [
         {
             "message": "cloned op from Ops.WebAudio.Scale.ScaleArray",
-            "author": "cables",
+            "author": "simod",
             "date": 1612791835720
         },
         {
-            "message": "Ops.User.cables.ScaleArray_v2 renamed to Ops.WebAudio.ScaleArray_v2",
-            "author": "cables",
+            "message": "Ops.User.simod.ScaleArray_v2 renamed to Ops.WebAudio.ScaleArray_v2",
+            "author": "simod",
             "date": 1612792960015
         }
     ]
