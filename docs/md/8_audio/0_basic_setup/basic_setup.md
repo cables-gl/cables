@@ -1,6 +1,6 @@
 # Basic Audio Setup
 
-To get an audio stream into cables, there are multiple options. First off, to play back any file, you need to use the [Audio Buffer](https://cables.gl/op/Ops.WebAudio.AudioBuffer_v2) op. With this op, you create an audio buffer that you can connect to one of our audio players mentioned in the next section.
+To get an audio stream into cables, there are multiple options. First off, to play back any file, you need to use the [Audio Buffer](https://cables.gl/op/Ops.WebAudio.AudioBuffer_v2) op. With this op, you create an audio buffer that you can connect to one of our audio players mentioned in the next section. If you upload a file to cables and drag-drop it on the patch field, an AudioBuffer op will be created.
 
 #### A note on file formats
 
@@ -15,4 +15,21 @@ After you successfully loaded a file into the AudioBuffer op, you need a player 
 
 1. If you want to play back a sound as a loop, such as a background ambience or a longer audio file, such as a musical piece, you should use the [AudioBufferPlayer](https://cables.gl/op/Ops.WebAudio.AudioBufferPlayer_v2) op.
 
-2. If you want to play a shorter sound (called one-shot), such as a notification sound, a drum sample or want to play a file based on a trigger, use the [SamplePlayer](https://cables.gl/op/Ops.WebAudio.SamplePlayer) op.  A little side note: keep in mind that when triggering multiple times and using longer files, the audio file will play back twice. Make sure you time your triggers correctly to avoid overlapping the sound multiple times. This can lead to distortion, because the sounds add up in volume.
+2. If you want to play a shorter sound (called one-shot), such as a notification sound, a drum sample or want to play a file based on a trigger, use the [SamplePlayer](https://cables.gl/op/Ops.WebAudio.SamplePlayer) op. A little side note: keep in mind that when triggering multiple times and using longer files, the audio file will play back twice. Make sure you time your triggers correctly to avoid overlapping the sound multiple times. This can lead to distortion, because the sounds add up in volume.
+
+![players](img/0_1_players.png)
+
+## Getting sound to play back on your speakers
+
+After you have connected the AudioBuffer to one of the two players, connect the player to an [Output op](https://cables.gl/op/Ops.WebAudio.Output_v2). If you press play on your player, you should hear sound coming out of the speakers. If you don't hear sound, make sure to check your system's volume settings and verify your browser tab is not muted.
+
+![output](img/0_2_output.png)
+
+## Multiple audio inputs
+
+
+It is not recommended to plug multiple audio streams (such as two SamplePlayers) into one Output op as it can lead to unexpected behaviour.
+
+If you want to connect multiple audio sources, use the [Mixer](https://cables.gl/op/Ops.WebAudio.Mixer) op before your output and connect the two. The Mixer op features volume and pan controls for up to eight channels. If you need more input channels, cascade multiple Mixers.
+
+![output](img/0_3_mixer.png)
