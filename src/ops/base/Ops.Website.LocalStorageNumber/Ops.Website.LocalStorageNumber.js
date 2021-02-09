@@ -12,7 +12,6 @@ op.onLoaded = updateOutput;
 
 function parse(val)
 {
-    console.log("parse", val);
     if (val === "true" || val === true)val = 1;
     if (val === "false" || val === false)val = 0;
     val = parseFloat(val);
