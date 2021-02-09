@@ -269,7 +269,7 @@ op.addSubLink = function (p, p2)
 
     if (p.direction == CABLES.PORT_DIR_IN)
     {
-        var l = gui.scene().link(
+        gui.scene().link(
             p.parent,
             p.getName(),
             getSubPatchInputOp(),
@@ -278,7 +278,7 @@ op.addSubLink = function (p, p2)
     }
     else
     {
-        var l = gui.scene().link(
+        gui.scene().link(
             p.parent,
             p.getName(),
             getSubPatchOutputOp(),

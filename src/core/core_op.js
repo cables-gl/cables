@@ -175,7 +175,7 @@ const Op = function ()
         p.parent = this;
         this.portsOut.push(p);
         if (this.onAddPort) this.onAddPort(p);
-        // this.fireEvent("onPortsChanged",{});
+        this.fireEvent("onPortAdd", p);
         return p;
     };
 
@@ -423,6 +423,7 @@ const Op = function ()
         }
         return p;
     };
+
 
     // old
     Op.prototype.inValueEditor = function (name, v, syntax, hideFormatButton = true)

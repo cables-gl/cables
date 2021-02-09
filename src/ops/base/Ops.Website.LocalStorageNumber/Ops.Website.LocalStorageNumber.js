@@ -10,6 +10,21 @@ updateOutput();
 
 op.onLoaded = updateOutput;
 
+function parse(val)
+{
+    console.log("parse", val);
+    if (val === "true" || val === true)val = 1;
+    if (val === "false" || val === false)val = 0;
+    val = parseFloat(val);
+    if (val != val)val = 0;
+    return val;
+}
+
+op.patch.on("localstorageStored", (key, val) =>
+{
+    if (key == inKey.get()) outValue.set(parse(val));
+});
+
 function getKey()
 {
     return (op.patch.namespace || "") + inKey.get();
@@ -17,12 +32,14 @@ function getKey()
 
 function updateOutput()
 {
-    outValue.set(window.localStorage.getItem(getKey()));
+    outValue.set(parse(window.localStorage.getItem(getKey())));
 }
 
 function storeValue()
 {
-    const val = inValue.get();
+    let val = parse(inValue.get());
+
     window.localStorage.setItem(getKey(), val);
     outValue.set(val);
+    op.patch.emitEvent("localstorageStored", inKey.get(), val);
 }
