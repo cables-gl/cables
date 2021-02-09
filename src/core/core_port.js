@@ -577,7 +577,8 @@ Port.prototype.setVariable = function (v)
         }
         else
         {
-            this._variableIn.addListener(this.set.bind(this));
+            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) this._variableIn.addListener(() => { this.set(null); this.set.bind(this); });
+            else this._variableIn.addListener(this.set.bind(this));
             this.set(this._variableIn.getValue());
         }
         this._useVariableName = v;
