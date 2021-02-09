@@ -26,6 +26,10 @@ function update()
                 removeImportedOps();
                 blueprintData.settings = op.patch.settings;
                 blueprintData.ops = blueprintData.msg;
+                blueprintData.ops.forEach((subOp) =>
+                {
+                    subOp.uiAttribs.blueprintId = op.id;
+                });
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
@@ -59,20 +63,20 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 {
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
-        op.patch.deSerialize(data, false);
         if (editorMode)
         {
-            gui.patchView.setCurrentSubPatch(subPatchId);
-            gui.patchView.setCurrentSubPatch(0);
+            gui.serverOps.loadProjectLibs(data, () =>
+            {
+                op.patch.deSerialize(data, false);
+                gui.patchView.setCurrentSubPatch(subPatchId);
+                gui.patchView.setCurrentSubPatch(0);
+            });
+        }
+        else
+        {
+            op.patch.deSerialize(data, false);
         }
     }
-    op.patch.ops.forEach((subOp) =>
-    {
-        if (subOp.uiAttribs.subPatch === subPatchId)
-        {
-            subOp.uiAttribs.blueprintId = op.id;
-        }
-    });
 }
 
 function removeImportedOps()
