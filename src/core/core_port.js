@@ -571,13 +571,14 @@ Port.prototype.setVariable = function (v)
     {
         this._variableIn = this.parent.patch.getVar(v);
 
+
         if (!this._variableIn)
         {
             console.log("PORT VAR NOT FOUND!!!");
         }
         else
         {
-            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) this._variableIn.addListener(() => { this.set(null); this.set.bind(this); });
+            if (this.type == CONSTANTS.OP.OP_PORT_TYPE_OBJECT) this._variableIn.addListener(() => { this.set(null); this.set(this._variableIn.getValue()); });
             else this._variableIn.addListener(this.set.bind(this));
             this.set(this._variableIn.getValue());
         }
