@@ -13,7 +13,7 @@ analyser.fftSize = 256;
 const FFT_BUFFER_SIZES = [32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
 
 const audioIn = op.inObject("Audio In");
-const inFFTSize = op.inDropDown("FFT size", FFT_BUFFER_SIZES, 2048);
+const inFFTSize = op.inDropDown("FFT size", FFT_BUFFER_SIZES, 256);
 const inSmoothing = op.inFloatSlider("Smoothing", 0.3);
 
 const inRangeMin = op.inFloat("Min", -90);
@@ -29,8 +29,8 @@ const ampOut = op.outArray("Waveform Array");
 const frequencyOut = op.outArray("Frequencies by Index Array");
 const fftLength = op.outNumber("Array Length");
 const avgVolumePeak = op.outNumber("Average Volume");
+const avgVolumeAmp = op.outNumber("Average Volume Time-Domain");
 const avgVolumeRMS = op.outNumber("RMS Volume");
-
 let updating = false;
 
 let fftBufferLength = analyser.frequencyBinCount;
@@ -79,7 +79,7 @@ function updateAnalyser()
         analyser.minDecibels = minDecibels;
         analyser.maxDecibels = maxDecibels;
 
-        if (minDecibels <= MAX_DBFS_RANGE_24_BIT)
+        if (minDecibels < MAX_DBFS_RANGE_24_BIT)
         {
             op.setUiError("maxDbRangeMin",
                 "Your minimum is below the lowest possible dBFS value: "
@@ -153,18 +153,21 @@ inTrigger.onTriggered = function ()
 
         let values = 0;
         let peakValues = 0;
-
-        for (let i = 0; i < ampDataArray.length; i++)
+        let ampPeakValues = 0;
+        for (let i = 0; i < analyser.frequencyBinCount; i++)
         {
             values += ampDataArray[i] * ampDataArray[i];
             peakValues += fftDataArray[i];
+            ampPeakValues += ampDataArray[i];
         }
 
-        const peakAverage = peakValues / ampDataArray.length;
+        const peakAverage = peakValues / analyser.frequencyBinCount;
+        const peakAmpAverage = ampPeakValues / analyser.frequencyBinCount;
 
         avgVolumePeak.set(peakAverage / 128);
+        avgVolumeAmp.set(peakAmpAverage / 256);
 
-        let rms = Math.sqrt(values / ampDataArray.length);
+        let rms = Math.sqrt(values / analyser.frequencyBinCount);
         rms = Math.max(rms, rms * inSmoothing.get());
         avgVolumeRMS.set(rms / 256);
     }

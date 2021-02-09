@@ -77,6 +77,11 @@
             },
             {
                 "type": 0,
+                "name": "Average Volume Time-Domain",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "RMS Volume",
                 "subType": "number"
             }

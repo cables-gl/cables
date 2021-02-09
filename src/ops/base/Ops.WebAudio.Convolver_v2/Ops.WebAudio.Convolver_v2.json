@@ -5,28 +5,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Audio In"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Impulse Response",
                 "group": "IR Options"
             },
             {
-                "type": "0",
-                "name": "IR Gain",
-                "group": "IR Options",
-                "subType": "number"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Normalize",
                 "group": "IR Options",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "IR Gain",
+                "group": "IR Options",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Predelay (MS)",
+                "group": "IR Options",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Dry/Wet",
+                "group": "Output",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Output Gain",
                 "group": "Output",
                 "subType": "number"
@@ -34,8 +46,12 @@
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Audio Out"
+            },
+            {
+                "type": 2,
+                "name": "Wet Out"
             }
         ],
         "name": "Ops.WebAudio.Convolver_v2"
