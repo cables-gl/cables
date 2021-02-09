@@ -1,0 +1,60 @@
+{
+    "id": "3b9b9ff5-4c25-42e3-9897-262b11c9cb94",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1612889555546
+        },
+        {
+            "message": "Ops.User.simod.ClockArrayTrigger renamed to Ops.WebAudio.ClockArrayTrigger",
+            "author": "simod",
+            "date": 1612889858875
+        }
+    ],
+    "authorName": "simod",
+    "created": 1612889557426,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Clock Trigger Input"
+            },
+            {
+                "type": 3,
+                "name": "Sequence Array"
+            },
+            {
+                "type": 0,
+                "name": "Steps index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Steps",
+                "subType": "string"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Sequence Trigger Output"
+            },
+            {
+                "type": 0,
+                "name": "Sequenced Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Current Step",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.ClockArrayTrigger"
+    }
+}
