@@ -12,62 +12,62 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "file"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "JsonP",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "headers"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "body"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "HTTP Method index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "HTTP Method",
                 "subType": "string"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Content-Type"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "parse json",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "reload"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "data"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "response"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Is Loading",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Loaded"
             }
         ],
