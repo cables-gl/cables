@@ -8,6 +8,7 @@ const inReset = op.inTriggerButton("Reset");
 const NOTE_QUEUE = [];
 const LOOKAHEAD_IN_MS = 25.0;
 const SCHEDULEAHEAD_IN_S = 0.1;
+const debugStrings = [];
 
 const outTriggers = [];
 for (let i = 0; i < 7 * 3; i += 1)
@@ -22,6 +23,7 @@ for (let i = 0; i < 7 * 3; i += 1)
     {
         string = "1/" + noteValue + " Dotted";
     }
+    debugStrings.push(string + " Note");
     outTriggers[i] = op.outTrigger(string + " Note Trigger");
 }
 
@@ -35,17 +37,18 @@ const MIN_BPM = 20;
 
 const MULTIPLIERS = [
     4, 2, 1, 1 / 2, 1 / 4, 1 / 8, 1 / 16,
-    8 / 3, 4 / 3, 2 / 3, 1 / 3, 1 / 6, 1 / 12, 1 / 24,
+    8 / 3, 4 / 3, 2 / 3, 1 / 3, 1 / 6, 1 / 12, 1 / 24, // triplet
     6, 3, 3 / 2, 3 / 4, 3 / 8, 3 / 16, 3 / 32 // dotted
 ];
 
-const MODULO_PER_NOTE = MULTIPLIERS.map((val) => val * 48 / 2);
+const MODULO_PER_NOTE = MULTIPLIERS.map((val) => Math.floor(val * 48 / 2));
 const TICK_INDEX = 7 * 2 - 1; // 1/64 triplet fastest note
 const MAX_ENUMERATOR = 288;
 let NOTES_IN_S = [];
 let QUARTER_NOTE_S = 60 / inBPM.get();
 NOTES_IN_S = MULTIPLIERS.map((multiplier) => multiplier * QUARTER_NOTE_S);
 let TICK_S = NOTES_IN_S[TICK_INDEX] / 2;
+op.log(MODULO_PER_NOTE);
 
 outBPM.set(inBPM.get());
 
@@ -79,6 +82,22 @@ function nextNote()
 
 function scheduleNote()
 {
+    if (waitForSchedule)
+    { // code block to swallow initial hickup when starting the sequencer
+        let compareValue = 8;
+        if (inBPM.get() > 140) compareValue = 12;
+        if (inBPM.get() > 160) compareValue = 20;
+        if (tickCount === compareValue)
+        { // half of highest value
+            resetTickCount = true;
+            waitForSchedule = false;
+        }
+        else
+        {
+            return;
+        }
+    }
+
     if (resetTickCount)
     {
         tickCount = 0;
@@ -106,6 +125,8 @@ function startScheduling()
 }
 
 let workerRunning = false;
+let waitForSchedule = false;
+
 inStart.onTriggered = () =>
 {
     if (workerRunning) return;
@@ -127,14 +148,11 @@ inStart.onTriggered = () =>
         /* dummy buffer source for time */
         const audioBuffer = audioCtx.createBufferSource();
         audioBuffer.start(0);
-        worker.postMessage("start");
         workerRunning = true;
         tickCount = 0;
+        worker.postMessage("start");
+        waitForSchedule = true;
         outRunning.set(workerRunning);
-    }
-    else
-    {
-    /* TODO: on link trigger changed */
     }
 
     outStart.trigger();
