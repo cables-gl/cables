@@ -1,6 +1,7 @@
 const objectIn = op.inObject("Object");
 const pathIn = op.inString("Path");
 const resultOut = op.outArray("Output");
+const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
@@ -10,33 +11,25 @@ function update()
     const data = objectIn.get();
     let result = [];
     const path = pathIn.get();
+    op.setUiError("path", null);
 
     if (data && path)
     {
-        if (!Array.isArray(data) && (typeof data !== "object"))
+        if (typeof data !== "object")
         {
-            op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+            foundOut.set(false);
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
         }
         else if (Array.isArray(data))
         {
-            op.setUiError("notiterable", null);
-            const parts = path.split(".");
-
-            const pathSuffix = parts.slice(1).join(".");
-
-            for (let i = 0; i < data.length; i++)
-            {
-                const resolvePath = i + "." + pathSuffix;
-                result.push(resolve(resolvePath, data));
-            }
-            const titleParts = pathIn.get().split(".");
-            op.setUiAttrib({ "extendTitle": titleParts[titleParts.length - 1] + "" });
-            resultOut.set(result);
+            foundOut.set(false);
+            op.setUiError("notiterable", "input of type " + (typeof data) + " is not an object");
         }
         else
         {
             op.setUiError("notiterable", null);
             const parts = path.split(".");
+            foundOut.set(false);
 
             // find first array in path
             let checkPath = "";
@@ -67,6 +60,10 @@ function update()
                             resolvePath += "." + pathSuffix;
                         }
                         const resolvedData = resolve(resolvePath, data);
+                        if (typeof resolvedData !== "undefined")
+                        {
+                            foundOut.set(true);
+                        }
                         result.push(resolvedData);
                     }
                 }
@@ -86,9 +83,20 @@ function update()
                 const extendTitle = titleParts[titleParts.length - 1] + "";
                 op.setUiAttrib({ "extendTitle": extendTitle });
             }
-
-            resultOut.set(result);
+            if (foundOut.get())
+            {
+                resultOut.set(result);
+            }
+            else
+            {
+                op.setUiError("path", "given path seems to be invalid!", 1);
+                resultOut.set([]);
+            }
         }
+    }
+    else
+    {
+        foundOut.set(false);
     }
 }
 

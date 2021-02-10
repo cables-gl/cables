@@ -8,7 +8,6 @@ objectIn.onChange = update;
 pathIn.onChange = update;
 returnPathIn.onChange = update;
 
-
 function update()
 {
     const data = objectIn.get();
@@ -18,7 +17,8 @@ function update()
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
         {
-            op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+            foundOut.set(false);
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
         }
         else
         {
@@ -28,7 +28,7 @@ function update()
             let result = resolve(path, data);
             if (result === undefined)
             {
-                let errorMsg = "could not find element at path " + path;
+                const errorMsg = "could not find element at path " + path;
                 let errorLevel = 2;
                 result = null;
                 foundOut.set(false);
@@ -36,11 +36,9 @@ function update()
                 {
                     result = path;
                     errorLevel = 1;
-                    errorMsg += ", returning path";
                 }
                 else
                 {
-                    errorMsg += ", returning null";
                     result = null;
                 }
                 op.setUiError("missing", errorMsg, errorLevel);
@@ -52,6 +50,10 @@ function update()
             }
             resultOut.set(result);
         }
+    }
+    else
+    {
+        foundOut.set(false);
     }
 }
 
