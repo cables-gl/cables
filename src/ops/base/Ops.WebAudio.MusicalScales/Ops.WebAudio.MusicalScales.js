@@ -55,7 +55,7 @@ const octavePort = op.inInt("Octave", OCTAVE_DEFAULT);
 const appendOctavePort = op.inBool("Append Octave To Names", APPEND_OCTAVE_DEFAULT);
 
 op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseTonePort, octavePort, appendOctavePort]);
-// op.setPortGroup("Scale Array Settings", [appendOctavePort]);
+
 // output
 const outNoteNames = op.outArray("Note Names Array");
 const outNoteSteps = op.outArray("Note Step Number Array");
