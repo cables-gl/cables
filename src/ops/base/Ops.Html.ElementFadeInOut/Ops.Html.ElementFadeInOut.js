@@ -37,6 +37,8 @@ function updateVisibility()
 
     if (styleEle && ele)
     {
+        clearTimeout(theTimeout);
+
         if (inVisible.get())
         {
             outShowing.set(true);
@@ -107,6 +109,13 @@ function update()
 
 op.onDelete = function ()
 {
+    if (ele && ele.classList)
+    {
+        ele.classList.remove("CABLES_animFadeIn");
+        ele.classList.remove("CABLES_animFadedOut");
+        ele.classList.remove("CABLES_animFadeOut");
+    }
+
     styleEle = document.getElementById(eleId);
     if (styleEle)styleEle.remove();
 };

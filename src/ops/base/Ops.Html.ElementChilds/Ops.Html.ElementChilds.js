@@ -1,5 +1,6 @@
 const
-    parentPort = op.inObject("Parent");
+    parentPort = op.inObject("Parent"),
+    outParent = op.outObject("Parent Out");
 
 const inPorts = [];
 for (let i = 0; i < 10; i++)
@@ -31,4 +32,6 @@ function rebuild()
             parent.appendChild(p);
         }
     }
+
+    outParent.set(parent);
 }
