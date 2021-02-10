@@ -92,6 +92,54 @@
             },
             {
                 "type": 0,
+                "name": "In 0 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 1 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 2 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 3 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 4 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 5 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 6 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "In 7 Pan",
+                "group": "Panning",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Output Gain",
                 "group": "Output ",
                 "subType": "number"

@@ -1,6 +1,7 @@
 const inData = op.inTrigger("data");
 const inSocket = op.inObject("socket");
 const inTopic = op.inString("topic", "main");
+const inTriggerName = op.inString("Trigger Name");
 const inDelay = op.inInt("delay (ms)", 0);
 
 const send = () =>
@@ -8,7 +9,13 @@ const send = () =>
     const socket = inSocket.get();
     if (socket && socket.channelName && socket.allowSend)
     {
-        const payload = { "topic": inTopic.get(), "clientId": socket.clientId, "payload": inData.get() };
+        let triggerName = 0;
+        if (inTriggerName.get())
+        {
+            triggerName = inTriggerName.get();
+        }
+        op.log("sending trigger", triggerName);
+        const payload = { "topic": inTopic.get(), "clientId": socket.clientId, "payload": triggerName };
         let delay = 0;
         const localDelay = inDelay.get();
         if (inDelay.get() > 0 || socket.globalDelay > 0)
