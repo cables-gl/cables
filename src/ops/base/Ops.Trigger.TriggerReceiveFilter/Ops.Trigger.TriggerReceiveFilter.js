@@ -1,21 +1,31 @@
-const prefixIn = op.inString("Prefix","");
+const prefixIn = op.inString("Prefix", "");
 const triggerOut = op.outTrigger("Trigger Out");
+const triggerNameOut = op.outString("Trigger Name");
 
-const listener = (triggerName) => {
+const listener = (triggerName) =>
+{
     const prefix = prefixIn.get();
-    if(prefix) {
-        if(triggerName.startsWith(prefix)) {
+    if (prefix)
+    {
+        if (triggerName.startsWith(prefix))
+        {
+            triggerNameOut.set(triggerName);
             triggerOut.trigger();
         }
-    }else{
+    }
+    else
+    {
+        triggerNameOut.set(triggerName);
         triggerOut.trigger();
     }
-}
+};
 
-prefixIn.onChange= () => {
-    if(prefixIn.get()) {
+prefixIn.onChange = () =>
+{
+    if (prefixIn.get())
+    {
         op.setUiAttrib({ "extendTitle": prefixIn.get() });
     }
-}
+};
 
 op.patch.addEventListener("namedTriggerSent", listener);

@@ -25,9 +25,13 @@
             {
                 "type": 1,
                 "name": "Trigger Out"
+            },
+            {
+                "type": 5,
+                "name": "Trigger Name"
             }
         ],
-        "name": "Ops.User.stephan.TriggerReceiveFilter"
+        "name": "Ops.Trigger.TriggerReceiveFilter"
     },
     "summary": "receives all named trigges and relays them, optionally using a filter-prefix on the name",
     "issues": "",

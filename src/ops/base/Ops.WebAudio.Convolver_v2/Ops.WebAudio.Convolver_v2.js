@@ -1,23 +1,51 @@
+function clamp(val, min, max)
+{
+    return Math.min(Math.max(val, min), max);
+}
+
+const MAX_DELAY_TIME_IN_SECONDS = 179.999;
+
 const cgl = op.patch.cgl;
 const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 const audioIn = op.inObject("Audio In");
+
 const impulseResponse = op.inUrl("Impulse Response");
-const inConvolverGain = op.inFloatSlider("IR Gain", 1);
 const normalize = op.inBool("Normalize", true);
+const inConvolverGain = op.inFloatSlider("IR Gain", 0.7);
+const inPreDelayMS = op.inFloat("Predelay (MS)", 0);
+
+const inDryWet = op.inFloatSlider("Dry/Wet", 0.5);
 const inOutputGain = op.inFloatSlider("Output Gain", 1);
 
 const audioOut = op.outObject("Audio Out");
+const wetOut = op.outObject("Wet Out");
 
-op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize]);
-op.setPortGroup("Output", [inOutputGain]);
+op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize, inPreDelayMS]);
+op.setPortGroup("Output", [inDryWet, inOutputGain]);
 
 const convolver = audioContext.createConvolver();
 const convolverGain = audioContext.createGain();
+const predelayNode = audioContext.createDelay(MAX_DELAY_TIME_IN_SECONDS);
+const dryNode = audioContext.createGain();
+const wetNode = audioContext.createGain();
+const inputNode = audioContext.createGain();
 const outputNode = audioContext.createGain();
 
+wetNode.gain.value = parseFloat(inDryWet.get());
+dryNode.gain.value = 1.0 - parseFloat(inDryWet.get());
+
+wetNode.connect(outputNode);
+dryNode.connect(outputNode);
+inputNode.connect(dryNode);
+
+inputNode.connect(predelayNode);
+predelayNode.connect(convolverGain);
+convolverGain.connect(convolver);
+convolver.connect(wetNode);
+
 let oldAudioIn = null;
-let myImpulseBuffer;
+let myImpulseBuffer = null;
 let impulseResponseLoaded = false;
 let scheduleConnection = false;
 let loadingId = null;
@@ -28,19 +56,21 @@ impulseResponse.onChange = () =>
     const impulseUrl = impulseResponse.get();
 
     const ajaxRequest = new XMLHttpRequest();
-    const url = op.patch.getFilePath(impulseUrl);
-    const ext = url.substr(url.lastIndexOf(".") + 1);
 
-    if (ext === "wav")
-    {
-        op.setUiError("wavExt", "Even though impulse responses are .wav files most of the time, if you plan on using WebAudio in Safari, make sure you use a .wav file that is 16bit or use an .mp3 file instead.", 1);
-    }
-    else
-    {
-        op.setUiError("wavExt", null);
-    }
     if (impulseUrl)
     {
+        const url = op.patch.getFilePath(impulseUrl);
+        const ext = url.substr(url.lastIndexOf(".") + 1);
+
+        if (ext === "wav")
+        {
+            op.setUiError("wavExt", "Even though impulse responses are .wav files most of the time, if you plan on using WebAudio in Safari, make sure you use a .wav file that is 16bit or use an .mp3 file instead.", 1);
+        }
+        else
+        {
+            op.setUiError("wavExt", null);
+        }
+
         impulseResponseLoaded = false;
         ajaxRequest.open("GET", url, true);
         ajaxRequest.responseType = "arraybuffer";
@@ -72,11 +102,9 @@ impulseResponse.onChange = () =>
                 {
                     if (audioIn.get())
                     {
-                        audioIn.get().connect(convolverGain);
-                        audioIn.get().connect(outputNode);
-            		    convolverGain.connect(convolver);
-            		    convolver.connect(outputNode);
+                        audioIn.get().connect(inputNode);
                         audioOut.set(outputNode);
+                        wetOut.set(convolver);
                     }
                     else
                     {
@@ -107,6 +135,7 @@ impulseResponse.onChange = () =>
     {
         impulseResponseLoaded = false;
         op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
+        op.setUiError("wavExt", null);
 
         convolver.buffer = null;
         audioOut.set(outputNode);
@@ -115,12 +144,28 @@ impulseResponse.onChange = () =>
 
 inConvolverGain.onChange = () =>
 {
-    convolverGain.gain.setValueAtTime((inConvolverGain.get() || 0), audioContext.currentTime);
+    convolverGain.gain.linearRampToValueAtTime(Number(inConvolverGain.get()) || 0, audioContext.currentTime + 0.01);
+};
+
+inDryWet.onChange = () =>
+{
+    wetNode.gain.linearRampToValueAtTime(Number(inDryWet.get()), audioContext.currentTime + 0.01);
+    dryNode.gain.linearRampToValueAtTime(1 - Number(inDryWet.get()), audioContext.currentTime + 0.01);
 };
 
 inOutputGain.onChange = () =>
 {
-    outputNode.gain.setValueAtTime((inOutputGain.get() || 0), audioContext.currentTime);
+    outputNode.gain.linearRampToValueAtTime(inOutputGain.get(), audioContext.currentTime + 0.01);
+};
+
+inPreDelayMS.onChange = () =>
+{
+    if (inPreDelayMS.get() < 0) op.setUiError("delayTime", "Pre-Delay should be between 0 ms and " + MAX_DELAY_TIME_IN_SECONDS * 1000 + " ms. Setting to 0.", 1);
+    else if (inPreDelayMS.get() > MAX_DELAY_TIME_IN_SECONDS * 1000) op.setUiError("delayTime", "Pre-Delay should be between 0 ms and " + MAX_DELAY_TIME_IN_SECONDS * 1000 + " ms. Setting to " + MAX_DELAY_TIME_IN_SECONDS * 1000 + ".", 1);
+    else op.setUiError("delayTime", null);
+
+    const predelayMS = clamp(inPreDelayMS.get(), 0.0, MAX_DELAY_TIME_IN_SECONDS) / 1000;
+    predelayNode.delayTime.linearRampToValueAtTime(predelayMS, audioContext.currentTime + 0.05);
 };
 
 audioIn.onChange = function ()
@@ -141,15 +186,7 @@ audioIn.onChange = function ()
 
         try
         {
-            audioIn.get().connect(outputNode);
-            audioIn.get().connect(convolverGain);
-
-            if (scheduleConnection)
-            {
-    		    convolverGain.connect(convolver);
-    		    convolver.connect(outputNode);
-    		    scheduleConnection = false;
-            }
+            audioIn.get().connect(inputNode);
 
             oldAudioIn = audioIn.get();
         }
@@ -167,6 +204,7 @@ audioIn.onChange = function ()
         {
             op.setUiError("noIR", null);
             audioOut.set(outputNode);
+            wetOut.set(convolver);
         }
     }
     else
@@ -176,8 +214,13 @@ audioIn.onChange = function ()
             op.setUiError("noIR", null);
         }
         op.setUiError("audioCtx", null);
-        if (oldAudioIn) oldAudioIn.disconnect(outputNode);
+        if (oldAudioIn)
+        {
+            oldAudioIn.disconnect(inputNode);
+        }
         audioOut.set(null);
+        wetOut.set(null);
+
         oldAudioIn = null;
     }
 };
