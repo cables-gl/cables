@@ -10,6 +10,11 @@
             "message": "Ops.User.simod.Quantizer renamed to Ops.WebAudio.NoteQuantizer",
             "author": "simod",
             "date": 1612890562284
+        },
+        {
+            "message": "Ops.WebAudio.NoteQuantizer renamed to Ops.Array.ArrayQuantizer",
+            "author": "cables",
+            "date": 1612951515199
         }
     ],
     "authorName": "simod",
@@ -23,7 +28,7 @@
             },
             {
                 "type": 3,
-                "name": "Scale Array Input"
+                "name": "Constraints Array Input"
             }
         ],
         "portsOut": [
@@ -31,8 +36,13 @@
                 "type": 0,
                 "name": "Quantized Value",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Quantization Error",
+                "subType": "number"
             }
         ],
-        "name": "Ops.WebAudio.NoteQuantizer"
+        "name": "Ops.Array.ArrayQuantizer"
     }
 }

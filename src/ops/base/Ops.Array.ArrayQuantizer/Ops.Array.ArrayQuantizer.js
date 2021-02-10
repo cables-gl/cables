@@ -16,18 +16,21 @@ function closest(num, arr)
 }
 
 const inValue = op.inFloat("Value", 0);
-const inScale = op.inArray("Scale Array Input");
+const inScale = op.inArray("Constraints Array Input");
 const outQuantized = op.outNumber("Quantized Value");
+const outError = op.outNumber("Quantization Error");
 
 inValue.onChange = () =>
 {
     if (!inScale.get())
     {
-        outQuantized.set(0);
+        outQuantized.set(inValue.get());
+        outError.set(0);
         return;
     }
 
     const arr = inScale.get();
     const quantized = closest(inValue.get(), arr);
     outQuantized.set(quantized);
+    outError.set(quantized - inValue.get());
 };
