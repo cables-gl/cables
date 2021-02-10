@@ -66,6 +66,10 @@ inTrigger.onTriggered = () =>
             outTrigger.trigger();
             outValue.set(arr[tickCount]);
         }
+        else
+        {
+            outValue.set(0);
+        }
     }
     else
     {

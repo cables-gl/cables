@@ -126,6 +126,18 @@
                 "type": 0,
                 "name": "BPM Out",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Start Out"
+            },
+            {
+                "type": 1,
+                "name": "Stop Out"
+            },
+            {
+                "type": 1,
+                "name": "Reset Out"
             }
         ],
         "name": "Ops.WebAudio.ClockSequencer"

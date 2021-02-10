@@ -3,7 +3,7 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const inBPM = op.inInt("BPM", 100);
 const inStart = op.inTriggerButton("Start");
 const inStop = op.inTriggerButton("Stop");
-const inReset = op.inTrigger("Reset");
+const inReset = op.inTriggerButton("Reset");
 
 const NOTE_QUEUE = [];
 const LOOKAHEAD_IN_MS = 25.0;
@@ -27,6 +27,10 @@ for (let i = 0; i < 7 * 3; i += 1)
 
 const outRunning = op.outBool("Sequencer Running");
 const outBPM = op.outNumber("BPM Out");
+const outStart = op.outTrigger("Start Out");
+const outStop = op.outTrigger("Stop Out");
+const outReset = op.outTrigger("Reset Out");
+
 const MIN_BPM = 20;
 
 const MULTIPLIERS = [
@@ -132,6 +136,8 @@ inStart.onTriggered = () =>
     {
     /* TODO: on link trigger changed */
     }
+
+    outStart.trigger();
 };
 
 inStop.onTriggered = () =>
@@ -144,11 +150,14 @@ inStop.onTriggered = () =>
         workerRunning = false;
         outRunning.set(workerRunning);
     }
+
+    outStop.trigger();
 };
 
 inReset.onTriggered = () =>
 {
     resetTickCount = true;
+    outReset.trigger();
 };
 
 op.onDelete = () =>
