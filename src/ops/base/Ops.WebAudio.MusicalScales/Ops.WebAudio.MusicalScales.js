@@ -52,12 +52,12 @@ const baseTonePort = op.inDropDown("Base Tone", BASE_TONES, BASE_TONE_DEFAULT);
 const scaleTypePort = op.inDropDown("Scale Type", Object.keys(SCALE_TYPES), SCALE_TYPE_DEFAULT);
 const includeHighBaseTonePort = op.inBool("Include Upper Root Note", INCLUDE_HIGH_BASE_TONE_DEFAULT);
 const octavePort = op.inInt("Octave", OCTAVE_DEFAULT);
-const appendOctavePort = op.inBool("Append Octave", APPEND_OCTAVE_DEFAULT);
+const appendOctavePort = op.inBool("Append Octave To Names", APPEND_OCTAVE_DEFAULT);
 
-op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseTonePort, octavePort]);
-op.setPortGroup("Scale Array Settings", [appendOctavePort]);
+op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseTonePort, octavePort, appendOctavePort]);
+// op.setPortGroup("Scale Array Settings", [appendOctavePort]);
 // output
-const scaleArrayPort = op.outArray("Scale Array");
+const scaleArrayPort = op.outArray("Note Names Array");
 const stepArrayPort = op.outArray("Note Step Number Array");
 const midiNoteArrayPort = op.outArray("Midi Note Array");
 
