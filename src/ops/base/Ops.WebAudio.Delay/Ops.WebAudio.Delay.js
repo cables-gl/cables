@@ -47,6 +47,9 @@ inLfoIntensity.setUiAttribs({ "greyout": !inUseModulation.get() });
 inLfoWave.setUiAttribs({ "greyout": !inUseModulation.get() });
 op.setPortGroup("Filters & Modulation", [inLowpassFrequency, inLowpassQ, inHighpassFrequency, inHighpassQ, inLfoSpeed, inLfoIntensity, inLfoWave]);
 
+const audioOut = op.outObject("Mix Out");
+const delayOut = op.outObject("Wet Out");
+
 const MULTIPLIERS = [
     4, 2, 1, 1 / 2, 1 / 4, 1 / 8, 1 / 16,
     8 / 3, 4 / 3, 2 / 3, 1 / 3, 1 / 6, 1 / 12, 1 / 24,
@@ -94,9 +97,6 @@ inBpmSync.onChange = () =>
     if (inBPM.get() < MIN_BPM) op.setUiError("minBPM", "The minimum BPM value is " + MIN_BPM + " BPM.", 1);
     else op.setUiError("minBPM", null);
 };
-
-const audioOut = op.outObject("Mix Out");
-const delayOut = op.outObject("Wet Out");
 
 const inputNode = audioCtx.createGain(); // we create an input node so we can change the delay without requiring the input signal
 const delayNode = audioCtx.createDelay(MAX_DELAY_TIME);
@@ -158,23 +158,11 @@ inUseModulation.onChange = () =>
 
         inputNode.connect(filterHighpassNode);
         filterLowpassNode.connect(delayNode);
-
-        /* STILL TBD
-        inputNode.disconnect(delayNodes[0]);
-        feedbackNode.disconnect(delayNodes[0]);
-
-        delayNodes[delayNodes.length - 1].disconnect(feedbackNode);
-
-        inputNode.connect(filterHighpassNode);
-        feedbackNode.connect(filterHighpassNode);
-
-        filterLowpassNode.connect(delayNodes[0]);
-
-        */
     }
     else
     {
         lfoGainNode.disconnect(delayNode.delayTime);
+
         inputNode.disconnect(filterHighpassNode);
         filterLowpassNode.disconnect(delayNode);
 

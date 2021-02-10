@@ -5,11 +5,6 @@ const inStart = op.inTriggerButton("Start");
 const inStop = op.inTriggerButton("Stop");
 const inReset = op.inTriggerButton("Reset");
 
-const NOTE_QUEUE = [];
-const LOOKAHEAD_IN_MS = 25.0;
-const SCHEDULEAHEAD_IN_S = 0.1;
-const debugStrings = [];
-
 const outTriggers = [];
 for (let i = 0; i < 7 * 3; i += 1)
 {
@@ -23,7 +18,6 @@ for (let i = 0; i < 7 * 3; i += 1)
     {
         string = "1/" + noteValue + " Dotted";
     }
-    debugStrings.push(string + " Note");
     outTriggers[i] = op.outTrigger(string + " Note Trigger");
 }
 
@@ -34,6 +28,10 @@ const outStop = op.outTrigger("Stop Out");
 const outReset = op.outTrigger("Reset Out");
 
 const MIN_BPM = 20;
+
+const NOTE_QUEUE = [];
+const LOOKAHEAD_IN_MS = 25.0;
+const SCHEDULEAHEAD_IN_S = 0.1;
 
 const MULTIPLIERS = [
     4, 2, 1, 1 / 2, 1 / 4, 1 / 8, 1 / 16,
@@ -48,7 +46,6 @@ let NOTES_IN_S = [];
 let QUARTER_NOTE_S = 60 / inBPM.get();
 NOTES_IN_S = MULTIPLIERS.map((multiplier) => multiplier * QUARTER_NOTE_S);
 let TICK_S = NOTES_IN_S[TICK_INDEX] / 2;
-op.log(MODULO_PER_NOTE);
 
 outBPM.set(inBPM.get());
 
