@@ -1,0 +1,147 @@
+{
+    "id": "7994c33f-d4ca-455b-af72-83dcbf5ae83f",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1612888621204
+        },
+        {
+            "message": "Ops.User.simod.ClockSequencer renamed to Ops.WebAudio.ClockSequencer",
+            "author": "simod",
+            "date": 1612889212600
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "BPM",
+                "subType": "integer"
+            },
+            {
+                "type": 1,
+                "name": "Start"
+            },
+            {
+                "type": 1,
+                "name": "Stop"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "1/1 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/2 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/4 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/8 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/16 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/32 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/64 Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/1 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/2 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/4 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/8 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/16 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/32 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/64 Triplet Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/1 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/2 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/4 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/8 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/16 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/32 Dotted Note Trigger"
+            },
+            {
+                "type": 1,
+                "name": "1/64 Dotted Note Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Sequencer Running",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "BPM Out",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Start Out"
+            },
+            {
+                "type": 1,
+                "name": "Stop Out"
+            },
+            {
+                "type": 1,
+                "name": "Reset Out"
+            }
+        ],
+        "name": "Ops.WebAudio.ClockSequencer"
+    },
+    "authorName": "simod",
+    "created": 1612888673498
+}
