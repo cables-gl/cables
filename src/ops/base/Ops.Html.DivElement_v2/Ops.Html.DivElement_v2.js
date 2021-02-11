@@ -104,7 +104,7 @@ function removeClasses()
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
-        div.classList.remove(classes[i]);
+        if (classes[i])div.classList.remove(classes[i]);
     }
     oldClassesStr = "";
 }
@@ -166,8 +166,7 @@ function updateInteractive()
     if (listenerElement)
     {
         listenerElement.removeEventListener("mouseleave", uiHoverOut);
-        listenerElement.removeEventListener("mousemove", uiHover);
-        listenerElement.removeEventListener("click", uiClick);
+        listenerElement.removeEventListener("mouseenter", uiHover);
     }
 
     removeListeners();
@@ -176,8 +175,7 @@ function updateInteractive()
     if (listenerElement)
     {
         listenerElement.addEventListener("mouseleave", uiHoverOut);
-        listenerElement.addEventListener("mousemove", uiHover);
-        listenerElement.addEventListener("click", uiClick);
+        listenerElement.addEventListener("mouseenter", uiHover);
     }
 }
 
@@ -186,6 +184,7 @@ function uiHoverOut()
     listenerElement.style.border = "inherit";
 }
 
+let uiHovering = false;
 function uiClick(e)
 {
     if (e.ctrlKey)
@@ -196,15 +195,9 @@ function uiClick(e)
 
 function uiHover(e)
 {
-    if (e.ctrlKey)
+    if (e.ctrlKey && listenerElement)
     {
-        const r = listenerElement.getBoundingClientRect();
-        const ele = document.getElementById("inspectHtmlOverlay");
-        ele.classList.remove("hidden");
-        ele.style.left = r.left;
-        ele.style.top = r.top;
-        ele.style.width = r.width;
-        ele.style.height = r.height;
+        gui.highlightHtmlElement(listenerElement, op.id);
     }
 }
 
@@ -215,7 +208,7 @@ inId.onChange = function ()
 
 function removeListeners()
 {
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.removeEventListener("click", onMouseClick);
         listenerElement.removeEventListener("mouseleave", onMouseLeave);
@@ -230,7 +223,7 @@ function addListeners()
 
     listenerElement = div;
 
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.addEventListener("click", onMouseClick);
         listenerElement.addEventListener("mouseleave", onMouseLeave);
