@@ -12,3 +12,7 @@ This op lets you specify a rectangle in the frequency spectrum of your file. The
 The third op is the [AnalyzerTexture](https://cables.gl/op/Ops.WebAudio.AnalyzerTexture_v2) op. It also takes the FFT Array output of the AudioAnalyzer and creates a black and white texture from it. This op is useful for texture masks in postprocessing or sound-dependent altering of visual aspects of objects using materials. Please refer to the [example patch](https://cables.gl/edit/5fd8b4391d3e0022a8736fd7). You could for instance use the texture output as an input to the opacity texture of a [BasicMaterial](https://cables.gl/op/Ops.Gl.Shader.BasicMaterial_v3).
 
 With these three ops, you are able to drive anything responding to sound. If you use audio effects before your analyzation (so that they are not heard), you can manipulate the audio signal in parallel while the original sound is played back. A whole world of new visualization possibilities opens up.
+
+A patch to make a circle change color & opacity could look like this:
+
+![rt_vis_example](img/2_0_rt_vis.png)

@@ -20,6 +20,10 @@ The last filter is the [BiquadFilter](https://cables.gl/op/Ops.WebAudio.BiquadFi
 
 **IMPORTANT NOTE ON FILTER Q VALUES!!!: WATCH OUT FOR HIGH Q VALUES, THEY CAN CREATE LOUD AND UNPLEASANT FEEDBACK. ESPECIALLY WHEN WORKING WITH HEADPHONES ON LOUD VOLUMES THERE IS A POTENTIAL FOR EAR DAMAGE!!**
 
-### Reverb
+### Reverb & Delay
 
-If you want to add a reverb to your sound and you are familiar with [Convolution Reverb](https://en.wikipedia.org/wiki/Convolution_reverb), you can use the [Convolver op](https://cables.gl/op/Ops.WebAudio.Convolver_v2). Have a look at the [example patch](https://cables.gl/edit/5fd732eed2245c43bad1b762) for more details.
+If you want to add a reverb to your sound and you are familiar with [Convolution Reverb](https://en.wikipedia.org/wiki/Convolution_reverb), you can use the [Convolver op](https://cables.gl/op/Ops.WebAudio.Convolver_v2). Have a look at the [example patch](https://cables.gl/edit/5fd732eed2245c43bad1b762) for more details. Cables also offers a [Delay op](https://cables.gl/op/Ops.WebAudio.Delay) you can use to add delay to an audio stream.
+
+Here is an example of how a more complex effect chain could look like:
+
+![examplefx](img/1_0_example_fx_chain.png)
