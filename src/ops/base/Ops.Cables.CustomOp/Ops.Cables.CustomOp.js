@@ -5,7 +5,6 @@ const defaultCode = "\
 // have a look at the documentation at:\n\
 // https://docs.cables.gl/dev_hello_op/dev_hello_op.html\n\
 \n\
-op.log('my custom op', op);\n\
 ";
 
 const inJS = op.inStringEditor("JavaScript");
@@ -27,11 +26,13 @@ const getEvalFunction = () =>
     }
 };
 
-let evalFunction = getEvalFunction();
-
 inJS.onChange = () =>
 {
-    evalFunction = getEvalFunction();
+    execute();
+};
+
+op.onLoaded = () =>
+{
     execute();
 };
 
@@ -63,9 +64,11 @@ const removeOutPort = (port) =>
 
 const execute = () =>
 {
+    const evalFunction = getEvalFunction();
     try
     {
         const oldLinksIn = {};
+        const oldValuesIn = {};
         const oldLinksOut = {};
         const removeInPorts = [];
         const removeOutPorts = [];
@@ -74,6 +77,7 @@ const execute = () =>
             if (port.id !== inJS.id)
             {
                 oldLinksIn[port.name] = [];
+                oldValuesIn[port.name] = port.get();
                 port.links.forEach((link) =>
                 {
                     const linkInfo = {
@@ -114,12 +118,20 @@ const execute = () =>
         evalFunction(this);
         op.portsIn.forEach((port) =>
         {
-            if ((port.id !== inJS.id) && oldLinksIn[port.name])
+            if (port.id !== inJS.id)
             {
-                oldLinksIn[port.name].forEach((link) =>
+                if (oldLinksIn[port.name])
                 {
-                    op.patch.link(op, port.name, link.op, link.portName);
-                });
+                    oldLinksIn[port.name].forEach((link) =>
+                    {
+                        op.patch.link(op, port.name, link.op, link.portName);
+                    });
+                }
+
+                if (oldValuesIn[port.name])
+                {
+                    port.set(oldValuesIn[port.name]);
+                }
             }
         });
         op.portsOut.forEach((port) =>

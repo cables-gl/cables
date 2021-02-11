@@ -1,6 +1,6 @@
 const objectIn = op.inObject("Object");
 const pathIn = op.inString("Path");
-const returnPathIn = op.inBool("Return path if missing", false);
+const returnPathIn = op.inBool("Output path if missing", false);
 const resultOut = op.outString("Output");
 const foundOut = op.outBool("Found");
 
@@ -17,7 +17,8 @@ function update()
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
         {
-            op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+            foundOut.set(false);
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
         }
         else
         {
@@ -27,7 +28,7 @@ function update()
             let result = resolve(path, data);
             if (result === undefined)
             {
-                let errorMsg = "could not find element at path " + path;
+                const errorMsg = "could not find element at path " + path;
                 let errorLevel = 2;
                 result = null;
                 foundOut.set(false);
@@ -35,11 +36,9 @@ function update()
                 {
                     result = path;
                     errorLevel = 1;
-                    errorMsg += ", returning path";
                 }
                 else
                 {
-                    errorMsg += ", returning null";
                     result = null;
                 }
                 op.setUiError("missing", errorMsg, errorLevel);
@@ -51,6 +50,10 @@ function update()
             }
             resultOut.set(result);
         }
+    }
+    else
+    {
+        foundOut.set(false);
     }
 }
 

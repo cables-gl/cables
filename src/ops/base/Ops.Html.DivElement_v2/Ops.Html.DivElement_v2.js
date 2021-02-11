@@ -74,6 +74,7 @@ function updateText()
 
 function removeElement()
 {
+    if (div) removeClasses();
     if (div && div.parentNode) div.parentNode.removeChild(div);
 }
 
@@ -96,9 +97,48 @@ function updateStyle()
     warning();
 }
 
+let oldClassesStr = "";
+
+function removeClasses()
+{
+    const classes = (inClass.get() || "").split(" ");
+    for (let i = 0; i < classes.length; i++)
+    {
+        div.classList.remove(classes[i]);
+    }
+    oldClassesStr = "";
+}
+
 function updateClass()
 {
-    div.setAttribute("class", inClass.get());
+    const classes = (inClass.get() || "").split(" ");
+    const oldClasses = (oldClassesStr || "").split(" ");
+
+    let found = false;
+
+    for (let i = 0; i < oldClasses.length; i++)
+    {
+        console.log("old", i, oldClasses[i], classes.indexOf(oldClasses[i].trim()));
+        if (
+            oldClasses[i] &&
+            classes.indexOf(oldClasses[i].trim()) == -1)
+        // div.classList.contains(oldClasses[i].trim()))
+        {
+            found = true;
+            console.log("remove", oldClasses[i]);
+            div.classList.remove(oldClasses[i]);
+        }
+    }
+
+    for (let i = 0; i < classes.length; i++)
+    {
+        if (classes[i])
+        {
+            div.classList.add(classes[i].trim());
+        }
+    }
+
+    oldClassesStr = inClass.get();
     warning();
 }
 

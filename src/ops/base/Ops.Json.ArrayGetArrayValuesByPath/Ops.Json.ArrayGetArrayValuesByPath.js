@@ -1,6 +1,7 @@
 const objectIn = op.inArray("Array");
 const pathIn = op.inString("Path");
 const resultOut = op.outArray("Output");
+const foundOut = op.outBool("Found");
 
 objectIn.onChange = update;
 pathIn.onChange = update;
@@ -10,85 +11,49 @@ function update()
     const data = objectIn.get();
     let result = [];
     const path = pathIn.get();
+    op.setUiError("path", null);
 
     if (data && path)
     {
-        if (!Array.isArray(data) && (typeof data !== "object"))
+        if (!Array.isArray(data))
         {
-            op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+            foundOut.set(false);
+            op.setUiError("notiterable", "input of type " + (typeof data) + " is not an array");
         }
-        else if (Array.isArray(data))
+        else
         {
             op.setUiError("notiterable", null);
             const parts = path.split(".");
+            foundOut.set(false);
 
             const pathSuffix = parts.slice(1).join(".");
 
             for (let i = 0; i < data.length; i++)
             {
                 const resolvePath = i + "." + pathSuffix;
-                result.push(resolve(resolvePath, data));
+                const resolvedData = resolve(resolvePath, data);
+                if (typeof resolvedData !== "undefined")
+                {
+                    foundOut.set(true);
+                }
+                result.push(resolvedData);
             }
             const titleParts = pathIn.get().split(".");
             op.setUiAttrib({ "extendTitle": titleParts[titleParts.length - 1] + "" });
-            resultOut.set(result);
-        }
-        else
-        {
-            op.setUiError("notiterable", null);
-            const parts = path.split(".");
-
-            // find first array in path
-            let checkPath = "";
-            let pathPrefix = "";
-            let pathSuffix = "";
-            let checkData = null;
-            for (let i = 0; i < parts.length; i++)
+            if (foundOut.get())
             {
-                checkPath += parts[i];
-                checkData = resolve(checkPath, data);
-                if (Array.isArray(checkData))
-                {
-                    pathPrefix = checkPath;
-                    pathSuffix = parts.splice(i + 2, parts.length - (i + 2)).join(".");
-                    break;
-                }
-                checkPath += ".";
+                resultOut.set(result);
             }
-            if (checkData)
+            else
             {
-                if (parts.length > 1)
-                {
-                    for (let i = 0; i < checkData.length; i++)
-                    {
-                        let resolvePath = pathPrefix + "." + i;
-                        if (pathSuffix && pathSuffix !== "")
-                        {
-                            resolvePath += "." + pathSuffix;
-                        }
-                        const resolvedData = resolve(resolvePath, data);
-                        result.push(resolvedData);
-                    }
-                }
-                else
-                {
-                    if (Array.isArray(checkData))
-                    {
-                        result = checkData;
-                    }
-                    else
-                    {
-                        result = [checkData];
-                    }
-                }
-
-                const titleParts = pathIn.get().split(".");
-                const extendTitle = titleParts[titleParts.length - 1] + "";
-                op.setUiAttrib({ "extendTitle": extendTitle });
+                op.setUiError("path", "given path seems to be invalid!", 1);
+                resultOut.set([]);
             }
-
-            resultOut.set(result);
         }
+    }
+    else
+    {
+        foundOut.set(false);
     }
 }
 
