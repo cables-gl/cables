@@ -123,8 +123,49 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
+    if (listenerElement)
+    {
+        listenerElement.removeEventListener("mouseleave", uiHoverOut);
+        listenerElement.removeEventListener("mousemove", uiHover);
+        listenerElement.removeEventListener("click", uiClick);
+    }
+
     removeListeners();
     if (inInteractive.get()) addListeners();
+
+    if (listenerElement)
+    {
+        listenerElement.addEventListener("mouseleave", uiHoverOut);
+        listenerElement.addEventListener("mousemove", uiHover);
+        listenerElement.addEventListener("click", uiClick);
+    }
+}
+
+function uiHoverOut()
+{
+    listenerElement.style.border = "inherit";
+}
+
+function uiClick(e)
+{
+    if (e.ctrlKey)
+    {
+        gui.patchView.centerSelectOp(op.id);
+    }
+}
+
+function uiHover(e)
+{
+    if (e.ctrlKey)
+    {
+        const r = listenerElement.getBoundingClientRect();
+        const ele = document.getElementById("inspectHtmlOverlay");
+        ele.classList.remove("hidden");
+        ele.style.left = r.left;
+        ele.style.top = r.top;
+        ele.style.width = r.width;
+        ele.style.height = r.height;
+    }
 }
 
 inId.onChange = function ()
