@@ -2,7 +2,7 @@ const
     inText = op.inString("Text", "Hello Div"),
     inId = op.inString("Id"),
     inClass = op.inString("Class"),
-    inStyle = op.inValueEditor("Style", "position:absolute;z-index:9999;", "css"),
+    inStyle = op.inValueEditor("Style", "position:absolute;\nz-index:100;", "css"),
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
@@ -31,6 +31,7 @@ inVisible.onChange = updateVisibility;
 updateText();
 updateStyle();
 warning();
+updateInteractive();
 
 op.onDelete = removeElement;
 
@@ -104,7 +105,7 @@ function removeClasses()
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
-        div.classList.remove(classes[i]);
+        if (classes[i]) div.classList.remove(classes[i]);
     }
     oldClassesStr = "";
 }
@@ -163,8 +164,35 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
+    if (div)
+    {
+        div.removeEventListener("mouseleave", uiHoverOut);
+        div.removeEventListener("mouseenter", uiHover);
+    }
+
     removeListeners();
     if (inInteractive.get()) addListeners();
+
+    if (div)
+    {
+        div.addEventListener("mouseleave", uiHoverOut);
+        div.addEventListener("mouseenter", uiHover);
+    }
+}
+
+let uiHovering = false;
+function uiHoverOut(e)
+{
+    // if (uiHovering) gui.highlightHtmlElement(null, op.id);
+    uiHovering = false;
+}
+function uiHover(e)
+{
+    if (e.ctrlKey && div)
+    {
+        uiHovering = true;
+        gui.highlightHtmlElement(div, op.id);
+    }
 }
 
 inId.onChange = function ()
@@ -174,7 +202,7 @@ inId.onChange = function ()
 
 function removeListeners()
 {
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.removeEventListener("click", onMouseClick);
         listenerElement.removeEventListener("mouseleave", onMouseLeave);
@@ -189,7 +217,7 @@ function addListeners()
 
     listenerElement = div;
 
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.addEventListener("click", onMouseClick);
         listenerElement.addEventListener("mouseleave", onMouseLeave);
