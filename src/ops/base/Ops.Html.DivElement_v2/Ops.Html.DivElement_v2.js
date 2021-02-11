@@ -163,8 +163,42 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
+    if (listenerElement)
+    {
+        listenerElement.removeEventListener("mouseleave", uiHoverOut);
+        listenerElement.removeEventListener("mouseenter", uiHover);
+    }
+
     removeListeners();
     if (inInteractive.get()) addListeners();
+
+    if (listenerElement)
+    {
+        listenerElement.addEventListener("mouseleave", uiHoverOut);
+        listenerElement.addEventListener("mouseenter", uiHover);
+    }
+}
+
+function uiHoverOut()
+{
+    listenerElement.style.border = "inherit";
+}
+
+let uiHovering = false;
+function uiClick(e)
+{
+    if (e.ctrlKey)
+    {
+        gui.patchView.centerSelectOp(op.id);
+    }
+}
+
+function uiHover(e)
+{
+    if (e.ctrlKey && listenerElement)
+    {
+        gui.highlightHtmlElement(listenerElement, op.id);
+    }
 }
 
 inId.onChange = function ()
@@ -174,7 +208,7 @@ inId.onChange = function ()
 
 function removeListeners()
 {
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.removeEventListener("click", onMouseClick);
         listenerElement.removeEventListener("mouseleave", onMouseLeave);
@@ -189,7 +223,7 @@ function addListeners()
 
     listenerElement = div;
 
-    if (listenerElement)
+    if (op.patch.isEditorMode() && listenerElement)
     {
         listenerElement.addEventListener("click", onMouseClick);
         listenerElement.addEventListener("mouseleave", onMouseLeave);
