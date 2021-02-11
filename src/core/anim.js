@@ -750,12 +750,14 @@ Anim.prototype.easingFromString = function (str)
 
 Anim.prototype.createPort = function (op, title, cb)
 {
-    const port = op.addInPort(
-        new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
-            "display": "dropdown",
-            "values": CONSTANTS.ANIM.EASINGS,
-        }),
-    );
+    const port = op.inDropDown(title, CONSTANTS.ANIM.EASINGS);
+
+    // const port = op.addInPort(
+    //     new Port(op, title, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+    //         "display": "dropdown",
+    //         "values": CONSTANTS.ANIM.EASINGS,
+    //     }),
+    // );
 
     port.set("linear");
     port.defaultValue = "linear";

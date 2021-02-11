@@ -12,48 +12,54 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Parent"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 2"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 3"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 4"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 5"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 6"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 7"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 8"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 9"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Child 10"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Parent Out"
             }
         ],
         "name": "Ops.Html.ElementChilds"

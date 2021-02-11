@@ -38,30 +38,35 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "text"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "separator"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Numbers",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Trim",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Parsed"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "array"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "length",
                 "subType": "number"
             }

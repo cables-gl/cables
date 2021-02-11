@@ -1,6 +1,7 @@
 const text = op.inStringEditor("text", "1,2,3"),
     separator = op.inString("separator", ","),
     toNumber = op.inValueBool("Numbers", true),
+    trim = op.inValueBool("Trim", true),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
     len = op.outValue("length");
@@ -23,10 +24,18 @@ function parse()
     if (separator.get() == "\\n")sep == "\n";
     const r = text.get().split(sep);
 
-
     if (r[r.length - 1] === "") r.length -= 1;
 
     len.set(r.length);
+
+    if (trim.get())
+    {
+        for (let i = 0; i < r.length; i++)
+        {
+            r[i] = r[i].replace(/^\s+|\s+$/g, "");
+            r[i].trim();
+        }
+    }
 
     op.setUiError("notnum", null);
     if (toNumber.get())

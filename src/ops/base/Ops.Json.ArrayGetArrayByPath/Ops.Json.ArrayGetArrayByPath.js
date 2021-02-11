@@ -15,7 +15,8 @@ function update()
     {
         if (!Array.isArray(data) && !(typeof data === "object"))
         {
-            op.setUiError("notiterable", "input object of type " + (typeof data) + "is not travesable by path");
+            foundOut.set(false);
+            op.setUiError("notiterable", "input object of type " + (typeof data) + " is not travesable by path");
         }
         else
         {
@@ -25,14 +26,14 @@ function update()
             let result = resolve(path, data);
             if (result === undefined)
             {
-                const errorMsg = "could not find element at path " + path + ", returning null";
+                const errorMsg = "could not find element at path " + path;
                 foundOut.set(false);
                 result = null;
                 op.setUiError("missing", errorMsg, 2);
             }
             else if (!Array.isArray(result))
             {
-                const errorMsg = "element at path " + path + " is not an array, returning null";
+                const errorMsg = "element at path " + path + " is not an array";
                 foundOut.set(false);
                 result = null;
                 op.setUiError("missing", errorMsg, 2);
@@ -43,6 +44,10 @@ function update()
             }
             resultOut.set(result);
         }
+    }
+    else
+    {
+        foundOut.set(false);
     }
 }
 

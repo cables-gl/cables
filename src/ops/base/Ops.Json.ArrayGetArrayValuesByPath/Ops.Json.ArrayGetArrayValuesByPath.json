@@ -1,1 +1,58 @@
-{"authorName":"cables","id":"f4aa5756-c681-47ac-a997-b4f91760db96","created":1610123546187,"layout":{"portsIn":[{"type":3,"name":"Array"},{"type":5,"name":"Path"}],"portsOut":[{"type":3,"name":"Output"}],"name":"Ops.User.cables.ArrayGetArrayValuesByPath"},"summary":"Outputs all the values of the properties of an array of objects given a path","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Path","text":"path to first array field (i.e. \"data.0.firstName\")"},{"name":"Output","text":"array of values"}]},"changelog":[{"message":"cloned op from Ops.Json.ObjectGetArrayValuesByPath","author":"cables","date":1610123546187},{"message":"Ops.User.cables.ArrayGetArrayValuesByPath renamed to Ops.Json.ArrayGetArrayValuesByPath","author":"cables","date":1610123597666}]}
+{
+    "authorName": "cables",
+    "id": "f4aa5756-c681-47ac-a997-b4f91760db96",
+    "created": 1610123546187,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 5,
+                "name": "Path"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Output"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Json.ArrayGetArrayValuesByPath"
+    },
+    "summary": "Outputs all the values of the properties of an array of objects given a path",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Path",
+                "text": "path to first array field (i.e. \"data.0.firstName\")"
+            },
+            {
+                "name": "Output",
+                "text": "array of values"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Json.ObjectGetArrayValuesByPath",
+            "author": "cables",
+            "date": 1610123546187
+        },
+        {
+            "message": "Ops.User.cables.ArrayGetArrayValuesByPath renamed to Ops.Json.ArrayGetArrayValuesByPath",
+            "author": "cables",
+            "date": 1610123597666
+        }
+    ]
+}

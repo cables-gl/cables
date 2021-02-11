@@ -52,14 +52,14 @@ const baseTonePort = op.inDropDown("Base Tone", BASE_TONES, BASE_TONE_DEFAULT);
 const scaleTypePort = op.inDropDown("Scale Type", Object.keys(SCALE_TYPES), SCALE_TYPE_DEFAULT);
 const includeHighBaseTonePort = op.inBool("Include Upper Root Note", INCLUDE_HIGH_BASE_TONE_DEFAULT);
 const octavePort = op.inInt("Octave", OCTAVE_DEFAULT);
-const appendOctavePort = op.inBool("Append Octave", APPEND_OCTAVE_DEFAULT);
+const appendOctavePort = op.inBool("Append Octave To Names", APPEND_OCTAVE_DEFAULT);
 
-op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseTonePort, octavePort]);
-op.setPortGroup("Scale Array Settings", [appendOctavePort]);
+op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseTonePort, octavePort, appendOctavePort]);
+
 // output
-const scaleArrayPort = op.outArray("Scale Array");
-const stepArrayPort = op.outArray("Note Step Number Array");
-const midiNoteArrayPort = op.outArray("Midi Note Array");
+const outNoteNames = op.outArray("Note Names Array");
+const outNoteSteps = op.outArray("Note Step Number Array");
+const outMidiNotes = op.outArray("Midi Note Array");
 
 // change listeners
 baseTonePort.onChange = scaleTypePort.onChange = octavePort.onChange
@@ -97,8 +97,8 @@ function setOutput()
     if (SCALE_TYPES.hasOwnProperty(scaleType) && BASE_TONES.indexOf(baseTone) > -1)
     {
         const scale = SCALE_TYPES[scaleType];
-        const scaleArray = [];
-        const stepArray = [];
+        const noteNamesArray = [];
+        const noteStepsArray = [];
         const appendOctave = appendOctavePort.get();
         let octave = octavePort.get();
 
@@ -110,30 +110,30 @@ function setOutput()
 
         for (let i = 0; i < scale.length; i++)
         {
-            scaleArray.push(getToneAt(scale[i], baseToneIndex) + (appendOctave ? octave : ""));
-            stepArray.push(scale[i]);
+            noteNamesArray.push(getToneAt(scale[i], baseToneIndex) + (appendOctave ? octave : ""));
+            noteStepsArray.push(scale[i]);
         }
 
         // append the base tone in the next octave
         if (includeHighBaseTonePort.get())
         {
-            if (appendOctave) scaleArray.push(getToneAt(scale[0], baseToneIndex) + (octave + 1));
-            stepArray.push(scale[0] + 12);
+            noteStepsArray.push(scale[0] + 12);
+            noteNamesArray.push(getToneAt(scale[0], baseToneIndex) + (appendOctave ? octave + 1 : ""));
         }
 
         const midiNotes = NOTE_NUMBERS
-            .filter((nr) => stepArray.includes(nr - 12)) // only get scale notes
+            .filter((nr) => noteStepsArray.includes(nr - 12)) // only get scale notes
             .map((nr) => nr + BASE_TONES.indexOf(baseTone) + 12 * octave) // map to midi note number
-            .filter((midiNote) => midiNote <= 127); // only use values <= 127
+            .filter((midiNote) => midiNote <= 127); // only use values <= 127 (highest possible midi note)
 
-        scaleArrayPort.set(null);
-        scaleArrayPort.set(scaleArray);
+        outNoteNames.set(null);
+        outNoteNames.set(noteNamesArray);
 
-        stepArrayPort.set(null);
-        stepArrayPort.set(stepArray);
+        outNoteSteps.set(null);
+        outNoteSteps.set(noteStepsArray);
 
-        midiNoteArrayPort.set(null);
-        midiNoteArrayPort.set(midiNotes);
+        outMidiNotes.set(null);
+        outMidiNotes.set(midiNotes);
     }
 }
 

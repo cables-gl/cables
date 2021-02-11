@@ -14,7 +14,7 @@
             },
             {
                 "type": 0,
-                "name": "Return path if missing",
+                "name": "Output path if missing",
                 "subType": "boolean"
             }
         ],
