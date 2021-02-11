@@ -44,6 +44,10 @@ function update()
             op.error(e);
         }
     }
+    else
+    {
+        setTimeout(update, 50);
+    }
 
     outEle.set(inEle.get());
 }
