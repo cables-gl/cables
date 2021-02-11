@@ -17,6 +17,8 @@ let prevDisplay = "block";
 
 const div = document.createElement("div");
 div.dataset.op = op.id;
+div.classList.add("cablesEle");
+
 const canvas = op.patch.cgl.canvas.parentElement;
 
 canvas.appendChild(div);
@@ -164,35 +166,8 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
-    if (op.patch.isEditorMode() && div)
-    {
-        div.removeEventListener("mouseleave", uiHoverOut);
-        div.removeEventListener("mouseenter", uiHover);
-    }
-
     removeListeners();
     if (inInteractive.get()) addListeners();
-
-    if (op.patch.isEditorMode() && div)
-    {
-        div.addEventListener("mouseleave", uiHoverOut);
-        div.addEventListener("mouseenter", uiHover);
-    }
-}
-
-let uiHovering = false;
-function uiHoverOut(e)
-{
-    // if (uiHovering) gui.highlightHtmlElement(null, op.id);
-    uiHovering = false;
-}
-function uiHover(e)
-{
-    if (op.patch.isEditorMode() && e.ctrlKey && div)
-    {
-        uiHovering = true;
-        gui.highlightHtmlElement(div, op.id);
-    }
 }
 
 inId.onChange = function ()
