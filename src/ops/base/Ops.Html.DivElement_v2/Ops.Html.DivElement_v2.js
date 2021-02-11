@@ -181,9 +181,10 @@ function updateInteractive()
 }
 
 let uiHovering = false;
-function uiHoverOut()
+function uiHoverOut(e)
 {
-    if (uiHovering)gui.highlightHtmlElement(null);
+    // if (uiHovering) gui.highlightHtmlElement(null, op.id);
+    uiHovering = false;
 }
 function uiHover(e)
 {
