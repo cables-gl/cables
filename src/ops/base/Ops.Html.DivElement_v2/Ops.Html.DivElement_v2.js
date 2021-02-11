@@ -31,6 +31,7 @@ inVisible.onChange = updateVisibility;
 updateText();
 updateStyle();
 warning();
+updateInteractive();
 
 op.onDelete = removeElement;
 
@@ -163,41 +164,33 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
-    if (listenerElement)
+    if (div)
     {
-        listenerElement.removeEventListener("mouseleave", uiHoverOut);
-        listenerElement.removeEventListener("mouseenter", uiHover);
+        div.removeEventListener("mouseleave", uiHoverOut);
+        div.removeEventListener("mouseenter", uiHover);
     }
 
     removeListeners();
     if (inInteractive.get()) addListeners();
 
-    if (listenerElement)
+    if (div)
     {
-        listenerElement.addEventListener("mouseleave", uiHoverOut);
-        listenerElement.addEventListener("mouseenter", uiHover);
+        div.addEventListener("mouseleave", uiHoverOut);
+        div.addEventListener("mouseenter", uiHover);
     }
-}
-
-function uiHoverOut()
-{
-    listenerElement.style.border = "inherit";
 }
 
 let uiHovering = false;
-function uiClick(e)
+function uiHoverOut()
 {
-    if (e.ctrlKey)
-    {
-        gui.patchView.centerSelectOp(op.id);
-    }
+    if (uiHovering)gui.highlightHtmlElement(null);
 }
-
 function uiHover(e)
 {
-    if (e.ctrlKey && listenerElement)
+    if (e.ctrlKey && div)
     {
-        gui.highlightHtmlElement(listenerElement, op.id);
+        uiHovering = true;
+        gui.highlightHtmlElement(div, op.id);
     }
 }
 
