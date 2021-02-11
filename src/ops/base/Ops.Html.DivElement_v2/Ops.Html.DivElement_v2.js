@@ -164,7 +164,7 @@ function onMouseClick(e)
 
 function updateInteractive()
 {
-    if (div)
+    if (op.patch.isEditorMode() && div)
     {
         div.removeEventListener("mouseleave", uiHoverOut);
         div.removeEventListener("mouseenter", uiHover);
@@ -173,7 +173,7 @@ function updateInteractive()
     removeListeners();
     if (inInteractive.get()) addListeners();
 
-    if (div)
+    if (op.patch.isEditorMode() && div)
     {
         div.addEventListener("mouseleave", uiHoverOut);
         div.addEventListener("mouseenter", uiHover);
@@ -188,7 +188,7 @@ function uiHoverOut(e)
 }
 function uiHover(e)
 {
-    if (e.ctrlKey && div)
+    if (op.patch.isEditorMode() && e.ctrlKey && div)
     {
         uiHovering = true;
         gui.highlightHtmlElement(div, op.id);
@@ -202,7 +202,7 @@ inId.onChange = function ()
 
 function removeListeners()
 {
-    if (op.patch.isEditorMode() && listenerElement)
+    if (listenerElement)
     {
         listenerElement.removeEventListener("click", onMouseClick);
         listenerElement.removeEventListener("mouseleave", onMouseLeave);
@@ -217,7 +217,7 @@ function addListeners()
 
     listenerElement = div;
 
-    if (op.patch.isEditorMode() && listenerElement)
+    if (listenerElement)
     {
         listenerElement.addEventListener("click", onMouseClick);
         listenerElement.addEventListener("mouseleave", onMouseLeave);

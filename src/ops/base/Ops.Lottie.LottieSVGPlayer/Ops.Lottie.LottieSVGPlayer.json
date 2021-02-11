@@ -20,25 +20,26 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "HTML Element"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "JSON Data"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Play",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Loop",
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.User.pandur.LottieSVGPlayer"
+        "portsOut": [],
+        "name": "Ops.Lottie.LottieSVGPlayer"
     },
     "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",
     "issues": "",
