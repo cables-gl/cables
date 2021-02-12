@@ -22,6 +22,8 @@ function updateData()
     if (anim)dispose();
     if (!inEle.get() || !inData.get()) return;
 
+    console.log(inData.get());
+
     const params = {
         "container": inEle.get(),
         "renderer": "svg",
