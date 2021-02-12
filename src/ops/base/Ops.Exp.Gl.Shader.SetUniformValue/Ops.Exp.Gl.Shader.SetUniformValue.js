@@ -8,6 +8,7 @@ const cgl = op.patch.cgl;
 let doSetupUniform = true;
 let uniform = null;
 let shaderLastCompile = -1;
+let unis = [];
 
 inRender.onTriggered = function ()
 {
@@ -24,6 +25,7 @@ inRender.onTriggered = function ()
     {
         const oldValue = uniform.getValue();
         uniform.setValue(inValue.get());
+        console.log(uniform);
         next.trigger();
         uniform.setValue(oldValue);
     }
@@ -53,7 +55,7 @@ function setupUniform()
 
 function setupShader()
 {
-    const unis = shader.getUniforms();
+    unis = shader.getUniforms();
 
     shaderLastCompile = shader.lastCompile;
     const names = ["none"];
@@ -61,6 +63,7 @@ function setupShader()
     for (let i = 0; i < unis.length; i++)
     {
         names.push(unis[i].getName());
+        console.log(unis[i]);
     }
 
     inSelect.setUiAttribs({ "values": names });

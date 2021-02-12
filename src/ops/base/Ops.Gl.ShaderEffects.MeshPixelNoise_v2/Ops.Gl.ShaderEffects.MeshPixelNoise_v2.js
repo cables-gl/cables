@@ -50,7 +50,6 @@ const srcBodyFrag = ""
     .endl() + "#endif"
     .endl();
 
-
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "title": op.name,
@@ -84,7 +83,6 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_SUB", inBlend.get() == "Sub");
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
 }
-
 
 render.onTriggered = function ()
 {
