@@ -1,0 +1,1 @@
+baseColor.rgb=vertColor.rgb;

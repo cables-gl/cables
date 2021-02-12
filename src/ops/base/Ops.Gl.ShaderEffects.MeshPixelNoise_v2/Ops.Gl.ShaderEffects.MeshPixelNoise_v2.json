@@ -5,65 +5,65 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Amount",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Blendmode index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Blendmode"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "WorldSpace",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "r",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "g",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "b",
                 "group": "Color",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "x",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "y",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "z",
                 "group": "Position",
                 "subType": "number"
@@ -71,7 +71,7 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

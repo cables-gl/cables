@@ -380,6 +380,10 @@ void main()
     vec3 calculatedColor = vec3(0.);
     vec3 normal = normalize(normInterpolated);
     vec3 baseColor = inDiffuseColor.rgb;
+
+    {{MODULE_BASE_COLOR}}
+
+
     vec3 viewDirection = normalize(v_viewDirection);
 
     #ifdef DOUBLE_SIDED
