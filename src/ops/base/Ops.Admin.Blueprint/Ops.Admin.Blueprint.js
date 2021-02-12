@@ -1,13 +1,37 @@
 const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
-const reloadTriggerIn = op.inTriggerButton("reload");
+const activeIn = op.inBool("active", false);
+const loadingOut = op.outBool("loading");
 
-reloadTriggerIn.onTriggered = update;
-op.onLoadedValueSet = update;
+activeIn.onChange = () =>
+{
+    if (activeIn.get())
+    {
+        update();
+    }
+    else
+    {
+        removeImportedOps();
+    }
+};
+
+op.onLoadedValueSet = () =>
+{
+    if (activeIn.get())
+    {
+        update();
+    }
+    else
+    {
+        removeImportedOps();
+    }
+};
+
 op.onDelete = removeImportedOps;
 
 function update()
 {
+    loadingOut.set(true);
     const patch = op.patch;
     const patchId = patchIdIn.get();
     const subPatchId = subPatchIdIn.get();
@@ -15,6 +39,7 @@ function update()
     if (patch.isEditorMode())
     {
         const options = {
+            "blueprintId": op.id,
             "patchId": patchId,
             "subPatchId": subPatchId
         };
@@ -26,16 +51,13 @@ function update()
                 removeImportedOps();
                 blueprintData.settings = op.patch.settings;
                 blueprintData.ops = blueprintData.msg;
-                blueprintData.ops.forEach((subOp) =>
-                {
-                    subOp.uiAttribs.blueprintId = op.id;
-                });
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
             {
                 op.setUiError("fetchOps", err);
             }
+            loadingOut.set(false);
         });
     }
     else
@@ -54,6 +76,7 @@ function update()
                 {
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
+                loadingOut.set(false);
             }
         );
     }

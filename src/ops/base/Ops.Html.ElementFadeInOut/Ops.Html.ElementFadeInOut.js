@@ -32,13 +32,12 @@ function updateVisibility()
     const ele = inEle.get();
     if (!loaded)
     {
+        setTimeout(updateVisibility, 50);
         return;
     }
 
     if (styleEle && ele)
     {
-        clearTimeout(theTimeout);
-
         if (inVisible.get())
         {
             outShowing.set(true);

@@ -40,11 +40,18 @@
                 "name": "subPatchId"
             },
             {
-                "type": 1,
-                "name": "reload"
+                "type": 0,
+                "name": "active",
+                "subType": "boolean"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "loading",
+                "subType": "boolean"
+            }
+        ],
         "name": "Ops.Admin.Blueprint"
     }
 }

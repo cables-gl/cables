@@ -2,7 +2,7 @@ const
     inText = op.inString("Text", "Hello Div"),
     inId = op.inString("Id"),
     inClass = op.inString("Class"),
-    inStyle = op.inValueEditor("Style", "position:absolute;z-index:9999;", "css"),
+    inStyle = op.inValueEditor("Style", "position:absolute;\nz-index:100;", "css"),
     inInteractive = op.inValueBool("Interactive", false),
     inVisible = op.inValueBool("Visible", true),
     inBreaks = op.inValueBool("Convert Line Breaks", false),
@@ -17,6 +17,8 @@ let prevDisplay = "block";
 
 const div = document.createElement("div");
 div.dataset.op = op.id;
+div.classList.add("cablesEle");
+
 const canvas = op.patch.cgl.canvas.parentElement;
 
 canvas.appendChild(div);
@@ -31,6 +33,7 @@ inVisible.onChange = updateVisibility;
 updateText();
 updateStyle();
 warning();
+updateInteractive();
 
 op.onDelete = removeElement;
 
@@ -104,7 +107,7 @@ function removeClasses()
     const classes = (inClass.get() || "").split(" ");
     for (let i = 0; i < classes.length; i++)
     {
-        div.classList.remove(classes[i]);
+        if (classes[i]) div.classList.remove(classes[i]);
     }
     oldClassesStr = "";
 }

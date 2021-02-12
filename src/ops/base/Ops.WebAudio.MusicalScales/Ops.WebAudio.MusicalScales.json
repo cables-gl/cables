@@ -1,15 +1,15 @@
 {
-    "summary": "Outputs a musical scale array (major, minor, ...)",
+    "summary": "Outputs a musical scale array (major, minor, ...) as strings, steps and midi notes",
     "layout": {
         "portsIn": [
             {
                 "type": 0,
-                "name": "Base Tone index",
+                "name": "Root Note index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "Base Tone",
+                "name": "Root Note",
                 "group": "Scale Settings",
                 "subType": "string"
             },
@@ -55,6 +55,10 @@
             {
                 "type": 3,
                 "name": "Midi Note Array"
+            },
+            {
+                "type": 5,
+                "name": "Current Scale"
             }
         ],
         "name": "Ops.WebAudio.MusicalScales"
@@ -78,5 +82,53 @@
             "author": "cables",
             "date": 1612958679099
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Root Note index",
+                "text": "root note of the scale"
+            },
+            {
+                "name": "Root Note",
+                "text": "root note of the scale"
+            },
+            {
+                "name": "Scale Type index",
+                "text": "the scale to use"
+            },
+            {
+                "name": "Scale Type",
+                "text": "the scale to use"
+            },
+            {
+                "name": "Include Upper Root Note",
+                "text": "if true includes the root note in a higher octave"
+            },
+            {
+                "name": "Octave",
+                "text": "the octave of the scale (only for string & midi note outputs)"
+            },
+            {
+                "name": "Append Octave To Names",
+                "text": "if true, octave number is appended to output strings"
+            },
+            {
+                "name": "Note Names Array",
+                "text": "notes as an array of strings"
+            },
+            {
+                "name": "Note Step Number Array",
+                "text": "steps of the scale"
+            },
+            {
+                "name": "Midi Note Array",
+                "text": "midi note numbers of the scale"
+            }
+        ]
+    }
 }

@@ -48,7 +48,7 @@ const SCALE_TYPES = {
 };
 
 // input
-const baseTonePort = op.inDropDown("Base Tone", BASE_TONES, BASE_TONE_DEFAULT);
+const baseTonePort = op.inDropDown("Root Note", BASE_TONES, BASE_TONE_DEFAULT);
 const scaleTypePort = op.inDropDown("Scale Type", Object.keys(SCALE_TYPES), SCALE_TYPE_DEFAULT);
 const includeHighBaseTonePort = op.inBool("Include Upper Root Note", INCLUDE_HIGH_BASE_TONE_DEFAULT);
 const octavePort = op.inInt("Octave", OCTAVE_DEFAULT);
@@ -60,7 +60,7 @@ op.setPortGroup("Scale Settings", [baseTonePort, scaleTypePort, includeHighBaseT
 const outNoteNames = op.outArray("Note Names Array");
 const outNoteSteps = op.outArray("Note Step Number Array");
 const outMidiNotes = op.outArray("Midi Note Array");
-
+const outCurrentScale = op.outString("Current Scale");
 // change listeners
 baseTonePort.onChange = scaleTypePort.onChange = octavePort.onChange
 = appendOctavePort.onChange = includeHighBaseTonePort.onChange = setOutput;
@@ -134,6 +134,8 @@ function setOutput()
 
         outMidiNotes.set(null);
         outMidiNotes.set(midiNotes);
+
+        outCurrentScale.set(scaleTypePort.get());
     }
 }
 

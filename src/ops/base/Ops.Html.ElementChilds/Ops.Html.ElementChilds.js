@@ -27,7 +27,7 @@ function rebuild()
     for (let i = 0; i < inPorts.length; i++)
     {
         const p = inPorts[i].get();
-        if (p)
+        if (p && parent)
         {
             parent.appendChild(p);
         }
