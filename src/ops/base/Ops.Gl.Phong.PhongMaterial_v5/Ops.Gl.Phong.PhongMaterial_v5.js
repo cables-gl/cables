@@ -20,10 +20,8 @@ function createDefaultShader()
     let fragmentHead = "";
     let fragmentBody = "";
 
-
     fragmentHead = fragmentHead.concat(createFragmentHead(0));
     fragmentBody = fragmentBody.concat(createFragmentBody(0, DEFAULT_LIGHTSTACK[0].type));
-
 
     fragmentShader = fragmentShader.replace(FRAGMENT_HEAD_REGEX, fragmentHead);
     fragmentShader = fragmentShader.replace(FRAGMENT_BODY_REGEX, fragmentBody);
@@ -35,9 +33,7 @@ function createDefaultShader()
     shader.removeDefine("HAS_AMBIENT");
 }
 
-
 const inTrigger = op.inTrigger("Trigger In");
-
 
 // * DIFFUSE *
 const inDiffuseR = op.inFloat("R", Math.random());
@@ -56,7 +52,6 @@ inAlbedo.setUiAttribs({ "greyout": true });
 inRoughness.setUiAttribs({ "greyout": true });
 inDiffuseR.setUiAttribs({ "colorPick": true });
 op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]);
-
 
 inToggleOrenNayar.onChange = function ()
 {
@@ -138,7 +133,6 @@ inSpecularMode.setUiAttribs({ "hidePort": true });
 const specularColors = [inShininess, inSpecularCoefficient, inSpecularMode];
 op.setPortGroup("Specular", specularColors);
 
-
 // * LIGHT *
 const inEnergyConservation = op.inValueBool("Energy Conservation", false);
 const inToggleDoubleSided = op.inBool("Double Sided Material", false);
@@ -168,7 +162,6 @@ const inEnvTexture = op.inTexture("Environment Map");
 const inLuminanceMaskTexture = op.inTexture("Env Map Mask");
 op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
 
-
 // TEXTURE TRANSFORMS
 const inColorizeTexture = op.inBool("Colorize Texture", false);
 const inDiffuseRepeatX = op.inFloat("Diffuse Repeat X", 1);
@@ -194,18 +187,15 @@ discardTransPxl.setUiAttribs({ "hidePort": true });
 
 op.setPortGroup("Opacity Texture", [alphaMaskSource, discardTransPxl]);
 
-
 const outTrigger = op.outTrigger("Trigger Out");
 const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
 
-
 const shader = new CGL.Shader(cgl, "simosphong");
-shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
+shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 let recompileShader = false;
 shader.define("FALLOFF_MODE_A");
-
 
 if (cgl.glVersion < 2)
 {
@@ -284,7 +274,6 @@ function createShader(lightStack)
     }
 }
 
-
 shaderOut.set(shader);
 
 let diffuseTextureUniform = null;
@@ -339,7 +328,6 @@ function updateSpecularTexture()
         specularTextureUniform = null;
     }
 }
-
 
 function updateNormalTexture()
 {
@@ -487,7 +475,6 @@ function updateAlphaMaskMethod()
     else shader.removeDefine("ALPHA_MASK_B");
 }
 alphaMaskSource.onChange = updateAlphaMaskMethod;
-
 
 function updateAlphaTexture()
 {
@@ -685,7 +672,6 @@ function compareLights(lightStack)
         setUniforms(lightStack);
     }
 }
-
 
 let defaultUniform = null;
 

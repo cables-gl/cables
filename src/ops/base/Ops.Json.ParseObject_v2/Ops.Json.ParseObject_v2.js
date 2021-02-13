@@ -8,6 +8,12 @@ parse();
 
 function parse()
 {
+    if (!str.get())
+    {
+        outObj.set(null);
+        isValid.set(false);
+        return;
+    }
     try
     {
         const obj = JSON.parse(str.get());
