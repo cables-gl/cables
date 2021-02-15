@@ -1,0 +1,1 @@
+This op triggers two outputs based on a virtual coin toss. If you flip heads, the left output is triggered, if you flip tails, the right output is triggered.
