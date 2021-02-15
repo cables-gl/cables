@@ -19,6 +19,14 @@
             {
                 "type": 5,
                 "name": "JavaScript"
+            },
+            {
+                "type": 1,
+                "name": "test"
+            },
+            {
+                "type": 1,
+                "name": "dsfds"
             }
         ],
         "portsOut": [],

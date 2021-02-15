@@ -15,7 +15,7 @@ op.setUiError("error", null);
 const getEvalFunction = () =>
 {
     op.setUiError("error", null);
-    let errorEl = document.getElementById("error-" + op.id);
+    let errorEl = document.getElementById("customop-error-" + op.id);
     if (errorEl)
     {
         errorEl.remove();
@@ -32,7 +32,7 @@ const getEvalFunction = () =>
             errorEl = document.createElement("script");
             errorEl.id = "error-" + op.id;
             errorEl.type = "text/javascript";
-            errorEl.src = "data:text/javascript;charset=utf-8," + escape(inJS.get());
+            errorEl.innerHTML = opCode;
             document.body.appendChild(errorEl);
         }
         else
@@ -163,13 +163,19 @@ const execute = () =>
         {
             if (op.patch.isEditorMode())
             {
-                let js = "op = " + JSON.stringify(op.getSerialized()) + ";\n";
-                js += inJS.get();
+                const name = "Ops.Custom." + op.id.replace(/-/g, "");
+                const code = inJS.get();
+                let codeHead = "Ops.Custom = Ops.Custom || {};\n";
+                codeHead += name + " = " + name + " || {};\n";
+                codeHead += name + " = function()\n{\nCABLES.Op.apply(this,arguments);\nconst op=this;\n";
+                let codeFoot = "\n\n};\n\n" + name + ".prototype = new CABLES.Op();\n";
+                codeFoot += "new " + name + "();\n";
+                const opCode = codeHead + code + codeFoot;
                 op.setUiError("error", e);
                 const errorEl = document.createElement("script");
-                errorEl.id = "error-" + op.id;
+                errorEl.id = "customop-error-" + op.id;
                 errorEl.type = "text/javascript";
-                errorEl.src = "data:text/javascript;charset=utf-8," + escape(js);
+                errorEl.innerHTML = opCode;
                 document.body.appendChild(errorEl);
             }
             else
