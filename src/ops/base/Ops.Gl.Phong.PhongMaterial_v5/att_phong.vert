@@ -120,7 +120,6 @@ void main()
         tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);
         bitangCameraSpace = cross(normCameraSpace, tangCameraSpace);
 
-
         TBN_Matrix = mat3(tangCameraSpace, bitangCameraSpace, normCameraSpace);
     #endif
 

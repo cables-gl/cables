@@ -169,42 +169,50 @@
             {
                 "type": 2,
                 "name": "Diffuse Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Specular Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Normal Map",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "AO Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Emissive Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Opacity Texture",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Environment Map",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Env Map Mask",
-                "group": "Textures"
+                "group": "Textures",
+                "objType": "texture"
             },
             {
                 "type": 0,
