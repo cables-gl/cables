@@ -30,9 +30,9 @@ const getEvalFunction = () =>
         if (op.patch.isEditorMode())
         {
             errorEl = document.createElement("script");
-            errorEl.id = "error-" + op.id;
+            errorEl.id = "customop-error-" + op.id;
             errorEl.type = "text/javascript";
-            errorEl.innerHTML = opCode;
+            errorEl.innerHTML = inJS.get();
             document.body.appendChild(errorEl);
         }
         else
