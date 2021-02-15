@@ -2,15 +2,15 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
 const audioBufferPort = op.inObject("Audio Buffer");
-const playPort = op.inValueBool("Start / Stop", false);
-const autoPlayPort = op.inValueBool("Autoplay", false);
-const loopPort = op.inValueBool("Loop", false);
+const playPort = op.inBool("Start / Stop", false);
+const autoPlayPort = op.inBool("Autoplay", false);
+const loopPort = op.inBool("Loop", false);
 const inResetStart = op.inTriggerButton("Restart");
-const startTimePort = op.inValue("Start Time", 0);
-const stopTimePort = op.inValue("Stop Time", 0);
-const offsetPort = op.inValue("Offset", 0);
-const playbackRatePort = op.inValue("Playback Rate", 1);
-const detunePort = op.inValue("Detune", 0);
+const startTimePort = op.inFloat("Start Time", 0);
+const stopTimePort = op.inFloat("Stop Time", 0);
+const offsetPort = op.inFloat("Offset", 0);
+const playbackRatePort = op.inFloat("Playback Rate", 1);
+const detunePort = op.inFloat("Detune", 0);
 
 op.setPortGroup("Playback Controls", [playPort, autoPlayPort, loopPort, inResetStart]);
 op.setPortGroup("Time Controls", [startTimePort, stopTimePort, offsetPort]);
@@ -21,6 +21,9 @@ const outPlaying = op.outBool("Is Playing", false);
 // vars
 let source = null;
 let isPlaying = false;
+let hasEnded = false;
+let pausedAt = null;
+let startedAt = null;
 
 const gainNode = audioCtx.createGain();
 
@@ -75,7 +78,9 @@ audioBufferPort.onChange = function ()
             op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
             return;
         }
+
         op.setUiError("noAudioBuffer", null);
+
         createAudioBufferSource();
 
         if (
@@ -83,7 +88,7 @@ audioBufferPort.onChange = function ()
         (playPort.get() && audioBufferPort.get())
         )
         {
-            start(startTimePort.get());
+            start(startTimePort.get(), offsetPort.get());
         }
     }
     else
@@ -117,6 +122,7 @@ playPort.onChange = function ()
         }
     }
 };
+
 loopPort.onChange = function ()
 {
     if (source)
@@ -159,17 +165,22 @@ function setPlaybackRate()
     }
 }
 
+let resetTriggered = false;
 inResetStart.onTriggered = function ()
 {
     if (source)
     {
         if (playPort.get())
         {
-            if (isPlaying) stop(0);
-            setTimeout(function ()
+            if (isPlaying)
             {
-                if (!isPlaying) start(0);
-            }, 35);
+                stop(0);
+                resetTriggered = true;
+            }
+            else
+            {
+                start(0);
+            }
         }
     }
 };
@@ -179,42 +190,60 @@ function createAudioBufferSource()
 {
     if (source)
     {
-        if (isPlaying)
-        {
-            stop(0);
-        }
+        stop(0);
         source.disconnect(gainNode);
     }
     source = audioCtx.createBufferSource();
     const buffer = audioBufferPort.get();
+
     if (buffer)
     {
         source.buffer = buffer;
     }
+
     source.onended = onPlaybackEnded;
     source.loop = loopPort.get();
 
     source.connect(gainNode);
-    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
 
     setPlaybackRate();
     setDetune();
     audioOutPort.set(gainNode);
+
+    if (resetTriggered)
+    {
+        start(0);
+        resetTriggered = false;
+    }
 }
+
+let timeOuting = false;
+let timerId = null;
 
 function start(time)
 {
     try
     {
+        if (offsetPort.get() > source.buffer.duration)
+        {
+            op.setUiError("offsetTooLong", "Your offset value is higher than the total time of your audio file. Please decrease the duration to be able to hear sound when playing back your buffer.", 1);
+        }
+        else
+        {
+            op.setUiError("offsetTooLong", null);
+        }
+
         source.start(time, offsetPort.get()); // 0 = now
-        gainNode.gain.linearRampToValueAtTime(1.0, audioCtx.currentTime + 0.02);
+
         isPlaying = true;
+        hasEnded = false;
         outPlaying.set(true);
     }
     catch (e)
     {
-        op.setUiError(e);
+        op.log("Error on start: ", e);
         outPlaying.set(false);
+
         isPlaying = false;
     }
 }
@@ -223,17 +252,13 @@ function stop(time)
 {
     try
     {
-        gainNode.gain.setValueAtTime(gainNode.gain.value, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.05);
-        setTimeout(function ()
+        if (isPlaying && !hasEnded)
         {
-            if (isPlaying)
-            {
-                source.stop();
-            }
-            isPlaying = false;
-            outPlaying.set(false);
-        }, 30);
+            source.stop();
+        }
+
+        isPlaying = false;
+        outPlaying.set(false);
     }
     catch (e)
     {
@@ -246,5 +271,7 @@ function onPlaybackEnded()
 {
     outPlaying.set(false);
     isPlaying = false;
+    hasEnded = true;
+
     createAudioBufferSource(); // we can only play back once, so we need to create a new one
 }
