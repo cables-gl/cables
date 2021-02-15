@@ -6,32 +6,40 @@ Math.randomSeed = 0;
 
 let scheduleUpdate = false;
 let probability = inProbability.get();
-inProbability.onChange  = () => {
-    if (inTrigger.isLinked()) {
+inProbability.onChange = () =>
+{
+    if (inTrigger.isLinked())
+    {
         scheduleUpdate = true;
         return;
     }
     probability = inProbability.get();
-}
+};
 
-inTrigger.onTriggered = () => {
-    if (scheduleUpdate) {
+inTrigger.onTriggered = () =>
+{
+    if (scheduleUpdate)
+    {
         probability = inProbability.get();
         scheduleUpdate = false;
     }
-    if (probability == 1) {
+    if (probability >= 1)
+    {
         outTrigger.trigger();
         return;
     }
 
-    if (probability == 0) {
+    if (probability <= 0)
+    {
         outInverseTrigger.trigger();
         return;
-
     }
-    if (Math.seededRandom() < probability) {
+    if (Math.seededRandom() < probability)
+    {
         outTrigger.trigger();
-    } else {
+    }
+    else
+    {
         outInverseTrigger.trigger();
     }
-}
+};
