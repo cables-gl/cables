@@ -4,6 +4,7 @@ const
     inReset = op.inTriggerButton("Reset"),
     inStyleOuter = op.inStringEditor("Style Outer", attachments.outer_css),
     inStyleInner = op.inStringEditor("Style Inner", attachments.inner_css),
+    inActive = op.inBool("Active", true),
     outNext = op.outTrigger("Next"),
     notClickedNext = op.outTrigger("Not Clicked"),
     outState = op.outString("Audiocontext State"),
@@ -21,6 +22,12 @@ createElements();
 
 inStyleOuter.onChange =
     inStyleInner.onChange = createElements;
+
+inActive.onChange = () =>
+{
+    if (!inActive.get())ele.style.display = "none";
+    else ele.style.display = "block";
+};
 
 function createElements()
 {
