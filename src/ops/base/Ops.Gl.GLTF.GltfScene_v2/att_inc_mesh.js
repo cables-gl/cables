@@ -105,10 +105,6 @@ var gltfMesh=class
 
         if(geom.tangents.length===0 || inCalcNormals.get())  geom.calcTangentsBitangents();
 
-
-
-
-
     }
 
     render(cgl,ignoreMaterial)

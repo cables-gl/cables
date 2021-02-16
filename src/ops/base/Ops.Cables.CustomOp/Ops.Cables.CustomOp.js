@@ -15,23 +15,35 @@ op.setUiError("error", null);
 const getEvalFunction = () =>
 {
     op.setUiError("error", null);
+    let errorEl = document.getElementById("customop-error-" + op.id);
+    if (errorEl)
+    {
+        errorEl.remove();
+    }
     try
     {
         return new Function("op", inJS.get());
     }
-    catch (e)
+    catch (err)
     {
-        op.setUiError("error", e);
-        op.log("error creating javascript function", e);
+        op.setUiError("error", err);
+        if (op.patch.isEditorMode())
+        {
+            errorEl = document.createElement("script");
+            errorEl.id = "customop-error-" + op.id;
+            errorEl.type = "text/javascript";
+            errorEl.innerHTML = inJS.get();
+            document.body.appendChild(errorEl);
+        }
+        else
+        {
+            op.log("error creating javascript function", err);
+        }
+        return null;
     }
 };
 
 inJS.onChange = () =>
-{
-    execute();
-};
-
-op.onLoaded = () =>
 {
     execute();
 };
@@ -65,89 +77,111 @@ const removeOutPort = (port) =>
 const execute = () =>
 {
     const evalFunction = getEvalFunction();
-    try
+    if (evalFunction)
     {
-        const oldLinksIn = {};
-        const oldValuesIn = {};
-        const oldLinksOut = {};
-        const removeInPorts = [];
-        const removeOutPorts = [];
-        op.portsIn.forEach((port) =>
+        try
         {
-            if (port.id !== inJS.id)
+            const oldLinksIn = {};
+            const oldValuesIn = {};
+            const oldLinksOut = {};
+            const removeInPorts = [];
+            const removeOutPorts = [];
+            op.portsIn.forEach((port) =>
             {
-                oldLinksIn[port.name] = [];
-                oldValuesIn[port.name] = port.get();
+                if (port.id !== inJS.id)
+                {
+                    oldLinksIn[port.name] = [];
+                    oldValuesIn[port.name] = port.get();
+                    port.links.forEach((link) =>
+                    {
+                        const linkInfo = {
+                            "op": link.portOut.parent,
+                            "portName": link.portOut.name
+                        };
+                        oldLinksIn[port.name].push(linkInfo);
+                    });
+                    removeInPorts.push(port);
+                }
+            });
+            op.portsOut.forEach((port) =>
+            {
+                oldLinksOut[port.name] = [];
                 port.links.forEach((link) =>
                 {
                     const linkInfo = {
-                        "op": link.portOut.parent,
-                        "portName": link.portOut.name
+                        "op": link.portIn.parent,
+                        "portName": link.portIn.name
                     };
-                    oldLinksIn[port.name].push(linkInfo);
+                    oldLinksOut[port.name].push(linkInfo);
                 });
-                removeInPorts.push(port);
-            }
-        });
-        op.portsOut.forEach((port) =>
-        {
-            oldLinksOut[port.name] = [];
-            port.links.forEach((link) =>
-            {
-                const linkInfo = {
-                    "op": link.portIn.parent,
-                    "portName": link.portIn.name
-                };
-                oldLinksOut[port.name].push(linkInfo);
+                removeOutPorts.push(port);
             });
-            removeOutPorts.push(port);
-        });
-        removeInPorts.forEach((port) =>
-        {
-            removeInPort(port);
-        });
-        removeOutPorts.forEach((port) =>
-        {
-            removeOutPort(port);
-        });
-        if (removeOutPorts.length > 0 || removeInPorts.length > 0)
-        {
-            this.fireEvent("onUiAttribsChange", {});
-            this.fireEvent("onPortRemoved", {});
-        }
-        evalFunction(this);
-        op.portsIn.forEach((port) =>
-        {
-            if (port.id !== inJS.id)
+            removeInPorts.forEach((port) =>
             {
-                if (oldLinksIn[port.name])
+                removeInPort(port);
+            });
+            removeOutPorts.forEach((port) =>
+            {
+                removeOutPort(port);
+            });
+            if (removeOutPorts.length > 0 || removeInPorts.length > 0)
+            {
+                this.fireEvent("onUiAttribsChange", {});
+                this.fireEvent("onPortRemoved", {});
+            }
+            evalFunction(this);
+            op.portsIn.forEach((port) =>
+            {
+                if (port.id !== inJS.id)
                 {
-                    oldLinksIn[port.name].forEach((link) =>
+                    if (oldLinksIn[port.name])
+                    {
+                        oldLinksIn[port.name].forEach((link) =>
+                        {
+                            op.patch.link(op, port.name, link.op, link.portName);
+                        });
+                    }
+
+                    if (oldValuesIn[port.name])
+                    {
+                        port.set(oldValuesIn[port.name]);
+                    }
+                }
+            });
+            op.portsOut.forEach((port) =>
+            {
+                if (oldLinksOut[port.name])
+                {
+                    oldLinksOut[port.name].forEach((link) =>
                     {
                         op.patch.link(op, port.name, link.op, link.portName);
                     });
                 }
-
-                if (oldValuesIn[port.name])
-                {
-                    port.set(oldValuesIn[port.name]);
-                }
-            }
-        });
-        op.portsOut.forEach((port) =>
+            });
+        }
+        catch (e)
         {
-            if (oldLinksOut[port.name])
+            if (op.patch.isEditorMode())
             {
-                oldLinksOut[port.name].forEach((link) =>
-                {
-                    op.patch.link(op, port.name, link.op, link.portName);
-                });
+                const name = "Ops.Custom." + op.id.replace(/-/g, "");
+                const code = inJS.get();
+                let codeHead = "Ops.Custom = Ops.Custom || {};\n";
+                codeHead += name + " = " + name + " || {};\n";
+                codeHead += name + " = function()\n{\nCABLES.Op.apply(this,arguments);\nconst op=this;\n";
+                let codeFoot = "\n\n};\n\n" + name + ".prototype = new CABLES.Op();\n";
+                codeFoot += "new " + name + "();\n";
+                const opCode = codeHead + code + codeFoot;
+                op.setUiError("error", e);
+                const errorEl = document.createElement("script");
+                errorEl.id = "customop-error-" + op.id;
+                errorEl.type = "text/javascript";
+                errorEl.innerHTML = opCode;
+                document.body.appendChild(errorEl);
             }
-        });
-    }
-    catch (e)
-    {
-        op.setUiError("error", e);
-        op.log("error executing javascript code", e);
+            else
+            {
+                op.log("error executing javascript code", e);
+            }
+        }
     }
 };

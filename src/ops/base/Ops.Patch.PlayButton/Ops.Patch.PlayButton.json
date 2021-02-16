@@ -5,51 +5,56 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Only if Audio Suspended",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Style Outer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Style Inner"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Not Clicked"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Audiocontext State"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Element"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Clicked",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Clicked Trigger"
             }
         ],
