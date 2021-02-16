@@ -18,7 +18,7 @@ exe.onTriggered = function ()
     if (!useSize.get())
     {
         op.patch.pause();
-        op.patch.cgl.setSize(width.get(), height.get());
+        op.patch.cgl.setSize(width.get() / op.patch.cgl.pixelDensity, height.get() / op.patch.cgl.pixelDensity);
         op.patch.renderOneFrame();
     }
 
@@ -27,14 +27,17 @@ exe.onTriggered = function ()
         function ()
         {
             outNext.trigger();
+
+            setTimeout(() =>
+            {
+                if (!useSize.get())
+                {
+                    op.patch.cgl.setSize(oldWidth / op.patch.cgl.pixelDensity, oldHeight / op.patch.cgl.pixelDensity);
+                }
+            }, 300);
+            op.patch.resume();
         }
     );
-
-    if (!useSize.get())
-    {
-        op.patch.cgl.setSize(oldWidth, oldHeight);
-    }
-    op.patch.resume();
 };
 
 function updateSizePorts()
