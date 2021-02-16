@@ -1,21 +1,22 @@
 const
-    render=op.inTrigger("Render"),
-    next=op.outTrigger("Next"),
-    inStrength=op.inValue("Strength",1),
-    scrollx=op.inValue("Scroll X"),
-    scrolly=op.inValue("Scroll Y"),
-    scrollz=op.inValue("Scroll Z"),
-    inWorldSpace=op.inValueBool("WorldSpace");
+    render = op.inTrigger("Render"),
+    next = op.outTrigger("Next"),
+    inStrength = op.inValue("Strength", 1),
+    scrollx = op.inValue("Scroll X"),
+    scrolly = op.inValue("Scroll Y"),
+    scrollz = op.inValue("Scroll Z"),
+    scale = op.inValue("Scale", 1),
+    meth = op.inSwitch("Method", ["Translate", "Scale"], "Translate"),
+    inWorldSpace = op.inValueBool("WorldSpace");
 
-const cgl=op.patch.cgl;
+const cgl = op.patch.cgl;
 
-var srcBodyVert=''
-    .endl()+'#ifdef INSTANCING'
-    .endl()+'   pos=MOD_deform(instMat,pos);'
-    .endl()+'#endif'
+let srcBodyVert = ""
+    .endl() + "#ifdef INSTANCING"
+    .endl() + "   pos=MOD_deform(instMat,pos);"
+    .endl() + "#endif"
 
     .endl();
-
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -24,21 +25,23 @@ mod.addModule({
     "srcBodyVert": srcBodyVert
 });
 
+mod.addUniform("f", "MOD_strength", inStrength);
+mod.addUniform("f", "MOD_scrollx", scrollx);
+mod.addUniform("f", "MOD_scrolly", scrolly);
+mod.addUniform("f", "MOD_scrollz", scrollz);
+mod.addUniform("f", "MOD_scale", scale);
 
-mod.addUniform('f','MOD_strength',inStrength);
-mod.addUniform('f','MOD_scrollx',scrollx);
-mod.addUniform('f','MOD_scrolly',scrolly);
-mod.addUniform('f','MOD_scrollz',scrollz);
+meth.onChange =
+inWorldSpace.onChange = updateDefines;
 
-
-inWorldSpace.onChange=updateWorldspace;
-
-function updateWorldspace()
+function updateDefines()
 {
-    mod.toggleDefine("MOD_WORLDSPACE",inWorldSpace.get());
+    mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
+    mod.toggleDefine("MOD_METH_TRANSLATE", meth.get() == "Translate");
+    mod.toggleDefine("MOD_METH_SCALE", meth.get() == "Scale");
 }
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
     // if(!cgl.getShader())
     // {
@@ -65,25 +68,12 @@ render.onTriggered=function()
     //     scrolly.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'scrolly',scrolly);
     //     scrollz.uniform=new CGL.Uniform(shader,'f',moduleVert.prefix+'scrollz',scrollz);
 
-    //     updateWorldspace();
+    //     updateDefines();
     // }
 
     // if(!shader)return;
 
-mod.bind();
+    mod.bind();
     next.trigger();
     mod.unbind();
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
