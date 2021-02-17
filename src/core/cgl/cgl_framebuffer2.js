@@ -146,7 +146,7 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
     let i = 0;
     for (i = 0; i < this._numRenderBuffers; i++) this._colorTextures[i].delete();
     // this._texture.delete();
-    this._textureDepth.delete();
+    if (this._textureDepth) this._textureDepth.delete();
     for (i = 0; i < this._numRenderBuffers; i++) this._cgl.gl.deleteRenderbuffer(this._colorRenderbuffers[i]);
     this._cgl.gl.deleteRenderbuffer(this._depthRenderbuffer);
     this._cgl.gl.deleteFramebuffer(this._frameBuffer);
