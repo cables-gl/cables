@@ -1,10 +1,9 @@
-
 const
     render = op.inTrigger("Render"),
 
     // meth = op.inValueSelect("Mode", ["normal", "normal xy", "mul xyz", "mul xy", "sub x", "add x", "add xy", "add y", "add z", "mul y", "mul z", "sub z", "normal2", "normal RGB", "m14"], "normal"),
     extrude = op.inValue("Extrude", 0.5),
-    meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Normals"),
+    meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
 
     texture = op.inTexture("Texture"),
@@ -42,7 +41,6 @@ axis.onChange =
 const srcHeadVert = attachments.vertdisplace_head_vert;
 const srcBodyVert = attachments.vertdisplace_body_vert;
 
-
 const srcHeadFrag = ""
     .endl() + "IN vec3 MOD_displHeightMapColor;"
     .endl() + "float MOD_map(float value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}"
@@ -57,7 +55,6 @@ const srcBodyFrag = ""
     .endl() + "   if(MOD_displHeightMapColor.r==0.0)discard;"
     .endl() + "#endif"
     .endl();
-
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -83,7 +80,6 @@ mod.addUniformFrag("f", "MOD_colorizeMin", colorizeMin);
 mod.addUniformFrag("f", "MOD_colorizeMax", colorizeMax);
 
 updateDefines();
-
 
 function updateDefines()
 {
@@ -111,7 +107,6 @@ function updateDefines()
     mod.toggleDefine("MOD_AXIS_XYZ", axis.get() == "XYZ");
     mod.toggleDefine("MOD_AXIS_XY", axis.get() == "XY");
 
-
     mod.toggleDefine("MOD_MODE_BITANGENT", meth.get() == "BiTang");
     mod.toggleDefine("MOD_MODE_TANGENT", meth.get() == "Tang");
     mod.toggleDefine("MOD_MODE_NORMAL", meth.get() == "Norm");
@@ -119,7 +114,6 @@ function updateDefines()
     mod.toggleDefine("MOD_MODE_ADD", meth.get() == "+");
     mod.toggleDefine("MOD_MODE_DIV", meth.get() == "/");
     mod.toggleDefine("MOD_SMOOTHSTEP", 0);
-
 
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXY", meth.get() == "mul xy");
