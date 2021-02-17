@@ -26,11 +26,18 @@
         ],
         "portsOut": [
             {
-                "type": 0,
-                "name": "Stored String",
-                "subType": "number"
+                "type": 5,
+                "name": "Stored String"
             }
         ],
         "name": "Ops.Website.LocalStorageString"
+    },
+    "summary": "Store and retreive a string in browser localstorage",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
