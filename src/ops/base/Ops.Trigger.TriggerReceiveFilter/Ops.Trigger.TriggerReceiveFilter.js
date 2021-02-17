@@ -5,18 +5,21 @@ const triggerNameOut = op.outString("Trigger Name");
 const listener = (triggerName) =>
 {
     const prefix = prefixIn.get();
-    if (prefix)
+    if (triggerName)
     {
-        if (triggerName.startsWith(prefix))
+        if (prefix)
+        {
+            if (triggerName.startsWith(prefix))
+            {
+                triggerNameOut.set(triggerName);
+                triggerOut.trigger();
+            }
+        }
+        else
         {
             triggerNameOut.set(triggerName);
             triggerOut.trigger();
         }
-    }
-    else
-    {
-        triggerNameOut.set(triggerName);
-        triggerOut.trigger();
     }
 };
 

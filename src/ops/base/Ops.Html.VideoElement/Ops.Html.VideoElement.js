@@ -35,6 +35,7 @@ function init()
 
     active.onChange = updateActive;
 }
+
 init();
 
 loop.onChange =
@@ -111,7 +112,7 @@ function addElement()
     element.onerror = function ()
     {
         outHasError.set(true);
-        if (element)
+        if (element && element.error)
         {
             outError.set("Error " + element.error.code + "/" + element.error.message);
             op.log("Error " + element.error.code + "; details: " + element.error.message);

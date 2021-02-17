@@ -2,7 +2,7 @@ const
     inKey = op.inString("Key"),
     inValue = op.inString("String", ""),
     inStore = op.inTriggerButton("Store"),
-    outValue = op.outValue("Stored String");
+    outValue = op.outString("Stored String");
 
 inKey.onChange = updateOutput;
 inStore.onTriggered = storeValue;

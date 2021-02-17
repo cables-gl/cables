@@ -1,12 +1,12 @@
 {
     "authorName": "pandur",
-    "id": "950c1a37-a31f-4a0d-9b08-a780fbbfba73",
-    "created": 1520365713596,
+    "id": "716a9004-cbb8-4032-9f29-2b2f8c8973ba",
+    "created": 1613473695532,
     "layout": {
         "portsIn": [
             {
                 "type": 1,
-                "name": "render"
+                "name": "Render"
             },
             {
                 "type": 0,
@@ -30,6 +30,20 @@
             },
             {
                 "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Method index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Method"
+            },
+            {
+                "type": 0,
                 "name": "WorldSpace",
                 "subType": "boolean"
             }
@@ -37,10 +51,10 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "trigger"
+                "name": "Next"
             }
         ],
-        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition"
+        "name": "Ops.Gl.ShaderEffects.InstancedPerlinPosition_v2"
     },
     "summary": "displace position of instanced object by perlin noise value",
     "docs": {
@@ -50,5 +64,17 @@
     "collections": [
         "meshInstancing"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.InstancedPerlinPosition",
+            "author": "pandur",
+            "date": 1613473695533
+        },
+        {
+            "message": "Ops.User.pandur.InstancedPerlinPosition_v2 renamed to Ops.Gl.ShaderEffects.InstancedPerlinPosition_v2",
+            "author": "pandur",
+            "date": 1613474523495
+        }
+    ]
 }
