@@ -2,19 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 1",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 2",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "boolean"
             }

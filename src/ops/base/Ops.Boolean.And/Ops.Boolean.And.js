@@ -3,7 +3,7 @@ const
     bool1 = op.inValueBool("bool 2"),
     result = op.outValueBool("result");
 
-bool0.onChange = exec;
+bool0.onChange =
 bool1.onChange = exec;
 
 function exec()
