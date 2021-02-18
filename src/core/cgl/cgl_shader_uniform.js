@@ -617,8 +617,8 @@ Uniform.prototype.updateValue4F = function ()
 
     if (!this._value)
     {
-        console.log("no valiue", this);
-        this.value = [0, 0, 0, 0];
+        console.log("no value for uniform", this.name);
+        this._value = [0, 0, 0, 0];
     }
 
     this.needsUpdate = false;
