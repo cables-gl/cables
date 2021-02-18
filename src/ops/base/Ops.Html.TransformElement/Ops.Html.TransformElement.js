@@ -5,6 +5,7 @@ const
     inScale = op.inFloat("Scale", 1),
     inOrtho = op.inBool("Orthogonal", false),
     inRotate = op.inFloat("Rotate", 0),
+    inHideBehind = op.inBool("Hide out of view", false),
     inAlignVert = op.inSwitch("Align Vertical", ["Left", "Center", "Right"], "Left"),
     inAlignHor = op.inSwitch("Align Horizontal", ["Top", "Center", "Bottom"], "Top"),
     inActive = op.inBool("Active", true);
@@ -12,6 +13,7 @@ const
 const cgl = op.patch.cgl;
 let x = 0;
 let y = 0;
+let visible = 0;
 const m = mat4.create();
 const pos = vec3.create();
 const trans = vec3.create();
@@ -34,7 +36,6 @@ function updateTransform()
     const ele = inEle.get();
     if (!ele) return;
 
-
     let translateStr = "";
     if (inAlignVert.get() == "Left")translateStr = "0%";
     if (inAlignVert.get() == "Center")translateStr = "-50%";
@@ -44,7 +45,6 @@ function updateTransform()
     if (inAlignHor.get() == "Top")translateStr += "0%";
     if (inAlignHor.get() == "Center")translateStr += "-50%";
     if (inAlignHor.get() == "Bottom")translateStr += "-100%";
-
 
     const str = "translate(" + translateStr + ") scale(" + inScale.get() + ") rotate(" + inRotate.get() + "deg)";
 
@@ -93,6 +93,8 @@ function getScreenCoord()
         x = (w - (w * 0.5 - trans[0] * w * 0.5)); //  / trans[2]
         y = (h - (h * 0.5 + trans[1] * h * 0.5)); //  / trans[2]
     }
+
+    visible = pos[2] < 0.0 && x > 0 && x < vp[2] && y > 0 && y < vp[3];
 }
 
 function setProperties()
@@ -122,6 +124,10 @@ function setProperties()
             cachedLeft = x;
         }
     }
+
+    if (inHideBehind.get())
+        if (visible)ele.style.display = "initial";
+        else ele.style.display = "none";
 
     next.trigger();
 }

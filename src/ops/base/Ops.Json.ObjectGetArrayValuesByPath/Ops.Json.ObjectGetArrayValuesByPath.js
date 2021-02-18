@@ -77,6 +77,7 @@ function update()
                     {
                         result = [checkData];
                     }
+                    foundOut.set(true);
                 }
 
                 const titleParts = pathIn.get().split(".");
