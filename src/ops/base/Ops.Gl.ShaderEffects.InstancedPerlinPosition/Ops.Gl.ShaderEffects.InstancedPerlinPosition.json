@@ -5,38 +5,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Strength",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scroll X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scroll Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scroll Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "WorldSpace",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],
