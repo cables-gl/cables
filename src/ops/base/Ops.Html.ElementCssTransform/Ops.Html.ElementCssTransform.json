@@ -1,1 +1,115 @@
-{"id":"777d00c6-5605-43c5-9b6a-b20d465bd3ba","changelog":[{"message":"created op","author":"pandur","date":1613408280888},{"message":"Ops.User.pandur.ElementCssTransform renamed to Ops.Html.ElementCssTransform","author":"pandur","date":1613408894120}],"authorName":"pandur","created":1613408373014,"layout":{"portsIn":[{"type":2,"name":"Element","group":"Element","objType":"element"},{"type":0,"name":"Translate X","group":"Translate","subType":"number"},{"type":0,"name":"Translate Y","group":"Translate","subType":"number"},{"type":0,"name":"Scale","subType":"number"},{"type":0,"name":"Rot Z","subType":"number"}],"portsOut":[],"name":"Ops.User.pandur.ElementCssTransform"},"summary":"translate,scale and rotate a HTML element using css transform","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "777d00c6-5605-43c5-9b6a-b20d465bd3ba",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1613408280888
+        },
+        {
+            "message": "Ops.User.pandur.ElementCssTransform renamed to Ops.Html.ElementCssTransform",
+            "author": "pandur",
+            "date": 1613408894120
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1613408373014,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Element",
+                "group": "Element",
+                "objType": "element"
+            },
+            {
+                "type": 0,
+                "name": "Translate Active",
+                "group": "Translation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "group": "Translation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Unit index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Unit",
+                "group": "Translation"
+            },
+            {
+                "type": 0,
+                "name": "Scale Active",
+                "group": "Scaling",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "group": "Scaling",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotate Active",
+                "group": "Rotation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Rot Z",
+                "group": "Rotation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Set Origin",
+                "group": "Origin",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Origin X index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Origin X",
+                "group": "Origin"
+            },
+            {
+                "type": 0,
+                "name": "Origin Y index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Origin Y",
+                "group": "Origin"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Html.ElementCssTransform"
+    },
+    "summary": "translate,scale and rotate a HTML element using css transform",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

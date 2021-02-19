@@ -147,8 +147,14 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         this._port = _value;
         this._value = this._port.get();
 
+
         if (_port2 && _port3 && _port4)
         {
+            if (!(_port2 instanceof Port) || !(_port3 instanceof Port) || !(_port4 instanceof Port))
+            {
+                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+            }
+
             this._value = [0, 0, 0, 0];
             this._port2 = _port2;
             this._port3 = _port3;
@@ -164,6 +170,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         }
         else if (_port2 && _port3)
         {
+            if (!(_port2 instanceof Port) || !(_port3 instanceof Port))
+            {
+                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+            }
+
             this._value = [0, 0, 0];
             this._port2 = _port2;
             this._port3 = _port3;
@@ -176,6 +187,11 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         }
         else if (_port2)
         {
+            if (!(_port2 instanceof Port))
+            {
+                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+            }
+
             this._value = [0, 0];
             this._port2 = _port2;
             // this._port.onChange = this._port2.onChange = this.updateFromPort2f.bind(this);
@@ -187,8 +203,6 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         else
         {
             // this._port.on = this.updateFromPort.bind(this);
-
-
             this._port.on("change", this.updateFromPort.bind(this));
         }
     }
@@ -599,6 +613,12 @@ Uniform.prototype.updateValue4F = function ()
         this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
         profileData.profileShaderGetUniform++;
         profileData.profileShaderGetUniformName = this._name;
+    }
+
+    if (!this._value)
+    {
+        console.log("no value for uniform", this._name, this);
+        this._value = [0, 0, 0, 0];
     }
 
     this.needsUpdate = false;

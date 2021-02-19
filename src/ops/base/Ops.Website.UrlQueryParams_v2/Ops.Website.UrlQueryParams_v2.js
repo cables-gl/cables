@@ -27,7 +27,8 @@ function update()
 {
     if (!query.hasOwnProperty(paramName.get()))
     {
-        result.set(def.get() || null);
+        const value = def.get() || null;
+        result.set(value);
     }
     else
     {
