@@ -21,9 +21,7 @@ const
 
 const cgl = op.patch.cgl;
 
-
 op.setPortGroup("Masking", [inMulTex, inMulTexMask]);
-
 
 const textureSize = 1024;
 let fontLoaded = false;
@@ -33,7 +31,6 @@ align.onChange =
     str.onChange =
     lineHeight.onChange = generateMeshLater;
 
-
 function generateMeshLater()
 {
     needUpdate = true;
@@ -42,7 +39,6 @@ function generateMeshLater()
 let canvasid = null;
 CABLES.OpTextureMeshCanvas = {};
 let valignMode = 0;
-
 
 const geom = null;
 let mesh = null;
@@ -81,7 +77,6 @@ op.patch.on("fontLoaded", (fontName) =>
     }
 });
 
-
 function checkFont()
 {
     const oldFontLoaded = fontLoaded;
@@ -103,7 +98,6 @@ function checkFont()
 
     if (!fontLoaded) setTimeout(checkFont, 250);
 }
-
 
 valign.onChange = function ()
 {
@@ -164,7 +158,6 @@ op.setPortGroup("Display", [scale, inFont]);
 op.setPortGroup("Alignment", [align, valign]);
 op.setPortGroup("Color", [r, g, b, a]);
 
-
 let height = 0;
 const vec = vec3.create();
 let lastTextureChange = -1;
@@ -222,7 +215,6 @@ letterSpace.onChange = function ()
 {
     createMesh = true;
 };
-
 
 function generateMesh()
 {
@@ -288,7 +280,6 @@ function generateMesh()
                 width += letterSpace.get();
             }
         }
-
 
         width -= letterSpace.get();
 
@@ -408,7 +399,6 @@ function printChars(fontSize, simulate)
 
     return result;
 }
-
 
 function generateTexture()
 {
