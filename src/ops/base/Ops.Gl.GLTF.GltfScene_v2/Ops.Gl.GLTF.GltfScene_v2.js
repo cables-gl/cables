@@ -228,6 +228,8 @@ function loadBin(addCacheBuster)
             outPoints.set(boundingPoints);
             if (gltf)
             {
+                op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+
                 gltf.loaded = Date.now();
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }

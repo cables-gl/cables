@@ -27,7 +27,6 @@ function update()
 
     for (let i = 0; i < arrIn.length; ++i) indices[i] = i;
 
-
     for (let i = 0; i < arrIn.length; i++)
     {
         arrOut[i] = arrIn[i];
@@ -35,14 +34,13 @@ function update()
 
     if (sortMode.get() === "Sort ascending")
     {
-
         indices.sort(function (a, b) { return arrOut[a] < arrOut[b] ? -1 : arrOut[a] > arrOut[b] ? 1 : 0; });
 
         // arrOut.sort(function (a, b) { return a - b; });
     }
     else
     {
-        arrOut.sort(function (a, b) { return b - a; });
+        indices.sort(function (a, b) { return arrOut[a] > arrOut[b] ? -1 : arrOut[a] < arrOut[b] ? 1 : 0; });
     }
 
     arrayOut.set(null);
