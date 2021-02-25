@@ -1,32 +1,20 @@
 const path = require("path");
-const webpack = require("webpack");
-// const ErrorOverlayPlugin = require("error-overlay-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const glMatrix = require("gl-matrix");
 
 const glMatrixClasses = ["glMatrix", "mat2", "mat2d", "mat3", "mat4", "quat", "quat2", "vec2", "vec3", "vec4"];
 
-const provideObject = glMatrixClasses.reduce((acc, val) =>
-{
-    acc[val] = ["gl-matrix", val];
-    return acc;
-}, {});
-
 module.exports = (isProduction, shouldBabel = false) => ({
     "mode": isProduction ? "production" : "development",
     "entry": [
         path.join(__dirname, "src", "core", "index.js"),
-        // ...fs.readdirSync('./src/ops/').filter(file => file.match(/.*\.js$/)),
     ],
-    // watch: true,
     "devtool": isProduction ? "source-map" : "cheap-module-eval-source-map",
     "output": {
         "path": path.join(__dirname, "build"),
-        // publicPath: `${__dirname}dist/`,
         "filename": isProduction ?
             (shouldBabel ? "babel.cables.min.js" : "cables.min.js")
             : (shouldBabel ? "babel.cables.max.js" : "cables.max.js"),
-        // chunkFilename: '[name].js',
         "library": "CABLES",
         "libraryExport": "default",
         "libraryTarget": "var",
@@ -36,14 +24,6 @@ module.exports = (isProduction, shouldBabel = false) => ({
     "optimization": { "minimize": isProduction },
     "module": {
         "rules": [
-            {
-                "test": /buildInfo.js$/,
-                "use": [
-                    {
-                        "loader": "val-loader",
-                    },
-                ],
-            },
             shouldBabel && {
                 "test": /.jsx?$/,
                 "include": [path.resolve(__dirname, "src")],
@@ -71,21 +51,12 @@ module.exports = (isProduction, shouldBabel = false) => ({
     "externals": ["CABLES.UI", ...Object.keys(glMatrix), "gl-matrix"],
     "resolve": {
         "extensions": [".json", ".js", ".jsx"],
-        // alias: {
-        //     CGL: path.resolve(__dirname, "./src/core/cgl/index.js"),
-        // },
     },
-    // devtool: "cheap-module-source-map",
     "plugins": [
         isProduction
             && new BundleAnalyzerPlugin({
                 "analyzerMode": "disabled",
                 "generateStatsFile": true,
-            }),
-        // new webpack.ProvidePlugin(provideObject),
-        // new webpack.ProvidePlugin({
-        //     CGL: "CGL",
-        // }),
-        // new ErrorOverlayPlugin()
+            })
     ].filter(Boolean),
 });

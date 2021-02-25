@@ -6,9 +6,9 @@ const root = document.documentElement;
 
 val.onChange = varname.onChange = quoted.onChange = update;
 
-
 function update()
 {
+    op.setUiAttrib({ "extendTitle": varname.get() });
     let value = val.get();
     if (quoted.get())
     {

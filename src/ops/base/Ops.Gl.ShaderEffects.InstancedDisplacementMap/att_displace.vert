@@ -37,13 +37,16 @@
 
     #ifdef MOD_MODE_TRANS
         #ifdef MOD_AXIS_X
-            pos.x+=MOD_dis;
+            // pos.x+=MOD_dis;
+mMatrix[3][0] += MOD_dis;
         #endif
         #ifdef MOD_AXIS_Y
-            pos.y+=MOD_dis;
+            // pos.y+=MOD_dis;
+mMatrix[3][1] += MOD_dis;
         #endif
         #ifdef MOD_AXIS_Z
-            pos.z+=MOD_dis;
+            // pos.z+=MOD_dis;
+mMatrix[3][2] += MOD_dis;
         #endif
     #endif
 

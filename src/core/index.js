@@ -46,7 +46,6 @@ const CABLES = Object.assign(
     CONSTANTS.ANIM,
     CONSTANTS.OP,
 );
-CABLES.build = require("../../buildInfo");
 
 export default CABLES;
 
