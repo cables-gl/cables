@@ -4,15 +4,52 @@ const compiler = require("webpack");
 const concat = require("gulp-concat");
 const rename = require("gulp-rename");
 const clean = require("gulp-clean");
+const getRepoInfo = require("git-repo-info");
+const fs = require("fs");
+const footer = require("gulp-footer");
 const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
 
+let buildInfo = getBuildInfo();
+
+function getBuildInfo()
+{
+    const git = getRepoInfo();
+    const date = new Date();
+    return {
+        "timestamp": date.getTime(),
+        "created": date.toISOString(),
+        "git": {
+            "branch": git.branch,
+            "commit": git.sha,
+            "date": git.committerDate,
+            "message": git.commitMessage
+        }
+    };
+}
+
+function _update_buildInfo(cb)
+{
+    buildInfo = getBuildInfo();
+    fs.writeFileSync("build/buildInfo.json", JSON.stringify(buildInfo));
+    cb();
+}
+
+function _append_build_info()
+{
+    return gulp
+        .src(["build/*.js"])
+        .pipe(footer("CABLES.build = " + JSON.stringify(buildInfo) + ";"))
+        .pipe(gulp.dest("build/"));
+}
+
+
 function _watch()
 {
-    gulp.watch("src/core/**/*", gulp.parallel(_corejs_max, _corejs_min));
-    gulp.watch("libs/**/*", gulp.parallel(_external_libs));
-    gulp.watch("src/libs/**/*", gulp.series(_core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _core_libs_copy));
+    gulp.watch("src/core/**/*", gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info));
+    gulp.watch("libs/**/*", gulp.series(_update_buildInfo, gulp.parallel(_update_buildInfo, _external_libs), _append_build_info));
+    gulp.watch("src/libs/**/*", gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
 }
 
 function _core_libs_clean()
@@ -221,6 +258,7 @@ function _corelibsjs_min()
  */
 
 gulp.task("default", gulp.series(
+    _update_buildInfo,
     gulp.parallel(
         _external_libs,
         _corejs_max,
@@ -233,11 +271,13 @@ gulp.task("default", gulp.series(
         _corelibsjs_max,
         _corelibsjs_min
     ),
+    _append_build_info,
     _core_libs_copy,
     _watch
 ));
 
 gulp.task("watch", gulp.series(
+    _update_buildInfo,
     gulp.parallel(
         _external_libs,
         _corejs_max,
@@ -250,11 +290,13 @@ gulp.task("watch", gulp.series(
         _corelibsjs_max,
         _corelibsjs_min
     ),
+    _append_build_info,
     _core_libs_copy,
     _watch
 ));
 
 gulp.task("build", gulp.series(
+    _update_buildInfo,
     gulp.parallel(
         _external_libs,
         _corejs_max,
@@ -267,5 +309,6 @@ gulp.task("build", gulp.series(
         _corelibsjs_max,
         _corelibsjs_min
     ),
+    _append_build_info,
     _core_libs_copy
 ));
