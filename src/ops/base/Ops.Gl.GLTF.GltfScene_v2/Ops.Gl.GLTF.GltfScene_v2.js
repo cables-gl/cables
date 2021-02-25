@@ -215,8 +215,7 @@ function loadBin(addCacheBuster)
             maxTime = 0;
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
-            cgl.patch.loading.finished(loadingId);
-            loadingId = null;
+
             needsMatUpdate = true;
             op.refreshParams();
             outAnimLength.set(maxTime);
@@ -235,6 +234,10 @@ function loadBin(addCacheBuster)
             }
             updateCenter();
             outLoaded.set(true);
+
+            cgl.patch.loading.finished(loadingId);
+            loadingId = null;
+
             // op.log("finished loading gltf");
         };
 

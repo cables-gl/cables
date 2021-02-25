@@ -5,43 +5,52 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Delta Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Default Value",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 0,
+                "name": "Multiply",
+                "subType": "number"
+            },
+            {
+                "type": 1,
                 "name": "Reset"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Limit",
+                "group": "Limit",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min",
+                "group": "Limit",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max",
+                "group": "Limit",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Multiply",
+                "type": 0,
+                "name": "Rubberband",
+                "group": "Limit",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Absolute Value",
                 "subType": "number"
             }
