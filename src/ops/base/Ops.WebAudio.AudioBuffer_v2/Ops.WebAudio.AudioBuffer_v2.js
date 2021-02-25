@@ -31,6 +31,7 @@ audioBufferPort.onLinkChanged = () =>
 // change listeners
 inUrlPort.onChange = function ()
 {
+    invalidateOutPorts();
     const url = op.patch.getFilePath(inUrlPort.get());
 
     if (typeof url === "string" && url.length > 1)
