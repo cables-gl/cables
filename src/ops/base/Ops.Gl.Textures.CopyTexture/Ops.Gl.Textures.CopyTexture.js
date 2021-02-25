@@ -1,12 +1,12 @@
 const
-    render = op.inTrigger("render"),
+    render = op.inTriggerButton("render"),
     inTexture = op.inTexture("Texture"),
     inTextureMask = op.inTexture("Alpha Mask"),
-    useVPSize = op.inValueBool("use original size"),
+    useVPSize = op.inValueBool("use original size", true),
     width = op.inValueInt("width", 640),
     height = op.inValueInt("height", 360),
-    tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]),
-    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"]),
+    tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"], "linear"),
+    twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     fpTexture = op.inValueBool("HDR"),
     alphaMaskMethod = op.inSwitch("Alpha Mask Source", ["A", "1"], "A"),
     greyscale = op.inSwitch("Convert Greyscale", ["Off", "R", "G", "B", "A", "Luminance"], "Off"),
@@ -16,7 +16,7 @@ const
     invertA = op.inBool("Invert A", false),
 
     trigger = op.outTrigger("trigger"),
-    texOut = op.outTexture("texture_out"),
+    texOut = op.outTexture("texture_out", null),
     outRatio = op.outValue("Aspect Ratio");
 
 alphaMaskMethod.hidePort();
@@ -25,9 +25,9 @@ invertR.hidePort();
 invertG.hidePort();
 invertB.hidePort();
 
-texOut.set(null);
 let autoRefreshTimeout = null;
 const cgl = op.patch.cgl;
+let lastTex = null;
 let effect = null;
 let tex = null;
 
@@ -50,9 +50,16 @@ alphaMaskMethod.onChange =
     invertR.onChange =
     invertG.onChange =
     invertB.onChange =
-    inTextureMask.onChange = updateDefines;
+    twrap.onChange =
+    tfilter.onChange =
+    fpTexture.onChange =
+    inTextureMask.onChange = updateSoon;
 
-updateDefines();
+render.onTriggered = doRender;
+
+updateSizePorts();
+
+updateParams();
 
 function initEffect()
 {
@@ -76,25 +83,23 @@ function initEffect()
     reInitEffect = false;
 }
 
-fpTexture.onChange = function ()
-{
-    reInitEffect = true;
-};
-
 render.onLinkChanged =
 inTexture.onLinkChanged =
 inTexture.onChange = () =>
 {
     if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
-    updateWithoutTrigger();
+    if (render.links.length === 0) updateSoon();
 };
 
-function updateWithoutTrigger()
+function updateSoon()
 {
+    updateParams();
     if (render.links.length === 0)
     {
+        reInitEffect = true;
+
         clearTimeout(autoRefreshTimeout);
-        autoRefreshTimeout = setTimeout(() => { doRender(); }, 10);
+        autoRefreshTimeout = setTimeout(() => { doRender(); }, 100);
     }
 }
 
@@ -154,10 +159,14 @@ useVPSize.onChange = function ()
     updateResolution();
 };
 
-let lastTex = null;
-
-const doRender = function ()
+function doRender()
 {
+    if (!inTexture.get())
+    {
+        lastTex = null;// CGL.Texture.getEmptyTexture(cgl);
+        return;
+    }
+
     if (!effect || reInitEffect || lastTex != inTexture.get())
     {
         initEffect();
@@ -170,11 +179,7 @@ const doRender = function ()
 
     updateResolution();
 
-    if (!inTexture.get())
-    {
-        lastTex = CGL.Texture.getEmptyTexture(cgl);
-        return;
-    }
+    console.log("update copytex!");
 
     lastTex = inTexture.get();
     const oldEffect = cgl.currentTextureEffect;
@@ -204,11 +209,15 @@ const doRender = function ()
 
     cgl.currentTextureEffect = oldEffect;
 
-    trigger.trigger();
-};
+    cgl.setTexture(0, CGL.Texture.getEmptyTexture(cgl).tex);
 
-function updateDefines()
+    trigger.trigger();
+}
+
+function updateParams()
 {
+    reInitEffect = true;
+
     bgShader.toggleDefine("TEX_MASK", inTextureMask.get());
 
     bgShader.toggleDefine("GREY_R", greyscale.get() === "R");
@@ -225,40 +234,11 @@ function updateDefines()
     bgShader.toggleDefine("INVERT_B", invertB.get());
     bgShader.toggleDefine("INVERT_A", invertA.get());
 
-    textureMaskUniform = new CGL.Uniform(bgShader, "t", "texMask", 1);
-
-    updateWithoutTrigger();
-}
-
-function onWrapChange()
-{
     if (twrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;
-    if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
-    if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+    else if (twrap.get() == "mirrored repeat") selectedWrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+    else if (twrap.get() == "clamp to edge") selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
-    reInitEffect = true;
-    updateResolution();
-    updateWithoutTrigger();
-}
-
-twrap.set("clamp to edge");
-twrap.onChange = onWrapChange;
-
-function onFilterChange()
-{
     if (tfilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
     else if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
     else if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
-
-    reInitEffect = true;
-    updateResolution();
-    updateWithoutTrigger();
 }
-
-tfilter.set("linear");
-tfilter.onChange = onFilterChange;
-
-useVPSize.set(true);
-render.onTriggered = doRender;
-
-updateSizePorts();

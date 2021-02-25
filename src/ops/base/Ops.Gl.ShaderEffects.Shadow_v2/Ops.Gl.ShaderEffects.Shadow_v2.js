@@ -73,7 +73,7 @@ inReceiveShadow.onChange = () =>
 inAlgorithm.onChange = () =>
 {
     const current = inAlgorithm.get();
-    algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
+    algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === current));
 
     setAlgorithmGreyouts();
 };
@@ -289,7 +289,7 @@ const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
-algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
+algorithms.forEach(alg => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
 
 
 const hasShadowMap = [];
@@ -326,7 +326,7 @@ function createUniforms()
         shaderModule.addUniformStructFrag("MOD_Light", "MOD_light" + i, [
             { "type": "3f", "name": "position", "v1": null },
             { "type": "2i", "name": "typeCastShadow", "v1": null },
-            { "type": "4f", "name": "shadowProperties", "v1": null },
+            { "type": "4f", "name": "shadowProperties", "v1": [light.nearFar[0], light.nearFar[1], 512, light.shadowBias] },
             { "type": "f", "name": "shadowStrength", "v1": light.shadowStrength },
         ]);
 
@@ -346,7 +346,7 @@ function createUniforms()
     {
         shaderModule.addUniformFrag("3f", "MOD_shadowColor", inShadowColorR, inShadowColorG, inShadowColorB, null);
         shaderModule.addUniformFrag("f", "MOD_sampleSpread", inSpread, null, null, null);
-        if (cgl.frameStore.lightStack.map((l) => l.type).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
+        if (cgl.frameStore.lightStack.map(l => l.type).indexOf("point") !== -1) shaderModule.addUniformFrag("3f", "MOD_camPos", [0, 0, 0], null, null, null);
     }
 
     STATE.lastLength = cgl.frameStore.lightStack.length;

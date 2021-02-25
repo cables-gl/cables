@@ -48,7 +48,9 @@ const VarSetOpWrapper = class
     _updateName()
     {
         const varname = this._varNamePort.get();
-        if (CABLES.UI) this._op.setTitle("set #" + varname);
+        this._op.setTitle("var set ");
+        this._op.setUiAttrib({ "extendTitle": "#" + varname });
+
         this._updateErrorUi();
 
         const vari = this._op.patch.getVar(varname);
@@ -164,13 +166,15 @@ const VarGetOpWrapper = class
         {
             this._variable.addListener(this._setValueOut.bind(this));
             this._op.setUiError("unknownvar", null);
-            this._op.setTitle("#" + this._varnamePort.get());
+            this._op.setTitle("var get ");
+            this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
             this._valueOutPort.set(this._variable.getValue());
         }
         else
         {
             this._op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + this._varnamePort.get() + ")");
-            this._op.setTitle("#invalid");
+            // this._op.setTitle("#invalid");
+            this._op.setUiAttrib({ "extendTitle": "#invalid" });
             this._valueOutPort.set(0);
         }
     }

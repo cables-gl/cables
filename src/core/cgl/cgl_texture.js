@@ -597,6 +597,68 @@ Texture.getRandomTexture = function (cgl)
     return cgl.randomTexture;
 };
 
+
+/**
+ * @function getEmptyCubemapTexture
+ * @memberof Texture
+ * @static
+ * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
+ * @return {Texture}
+ */
+Texture.getEmptyCubemapTexture = function (cgl)
+{
+    const faces = [
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
+    ];
+
+    const tex = cgl.gl.createTexture();
+    const target = cgl.gl.TEXTURE_CUBE_MAP;
+    const filter = Texture.FILTER_NEAREST;
+    const wrap = Texture.WRAP_CLAMP_TO_EDGE;
+    const width = 8;
+    const height = 8;
+
+    CGL.profileData.profileTextureNew++;
+
+    cgl.gl.bindTexture(target, tex);
+    CGL.profileData.profileTextureResize++;
+
+    for (let i = 0; i < 6; i += 1)
+    {
+        const data = new Uint8Array(8 * 8 * 4);
+
+        cgl.gl.texImage2D(faces[i], 0, cgl.gl.RGBA, 8, 8, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, data);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.NEAREST);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.NEAREST);
+
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+    }
+
+
+    cgl.gl.bindTexture(target, null);
+
+    return {
+        "id": CABLES.uuid(),
+        tex,
+        "cubemap": tex,
+        width,
+        height,
+        filter,
+        wrap,
+        "unpackAlpha": true,
+        "flip": true,
+        "_fromData": true,
+        "name": "emptyCubemapTexture",
+        "anisotropic": 0,
+    };
+};
+
 /**
  * @static
  * @function getTempGradientTexture
