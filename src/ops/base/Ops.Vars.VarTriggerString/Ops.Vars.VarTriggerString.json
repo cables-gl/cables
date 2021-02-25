@@ -1,1 +1,55 @@
-{"id":"d75992b7-65e2-44d8-b264-320d4c5a5630","changelog":[{"message":"created op","author":"pandur","date":1614258595413},{"message":" added core lib: vargetset","author":"pandur","date":1614258958239},{"message":"Ops.User.pandur.VarTriggerString renamed to Ops.Vars.VarTriggerString","author":"pandur","date":1614259024364}],"authorName":"pandur","created":1614258600444,"layout":{"portsIn":[{"type":5,"name":"Value"},{"type":1,"name":"Trigger"},{"type":0,"name":"Variable","group":"Variable","subType":"string"},{"type":1,"name":"Create new variable","group":"Variable"},{"type":1,"name":"","group":"Variable"}],"portsOut":[],"name":"Ops.User.pandur.VarTriggerString"},"coreLibs":["vargetset"]}
+{
+    "id": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1614258595413
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1614258958239
+        },
+        {
+            "message": "Ops.User.pandur.VarTriggerString renamed to Ops.Vars.VarTriggerString",
+            "author": "pandur",
+            "date": 1614259024364
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1614258600444,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Variable",
+                "group": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": 1,
+                "name": "Create new variable",
+                "group": "Variable"
+            },
+            {
+                "type": 1,
+                "name": "",
+                "group": "Variable"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.User.pandur.VarTriggerString"
+    },
+    "coreLibs": [
+        "vargetset"
+    ]
+}
