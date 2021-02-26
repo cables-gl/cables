@@ -1096,7 +1096,7 @@ Patch.Variable.prototype.setValue = function (v)
     this._v = v;
     for (let i = 0; i < this._changeListeners.length; i++)
     {
-        this._changeListeners[i](v);
+        this._changeListeners[i](v, this);
     }
 };
 
@@ -1109,7 +1109,8 @@ Patch.Variable.prototype.setValue = function (v)
  */
 Patch.Variable.prototype.addListener = function (cb)
 {
-    this._changeListeners.push(cb);
+    const ind = this._changeListeners.indexOf(cb);
+    if (ind == -1) this._changeListeners.push(cb);
 };
 
 /**
