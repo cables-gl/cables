@@ -1,11 +1,12 @@
 const VarSetOpWrapper = class
 {
-    constructor(op, type, valuePort, varNamePort)
+    constructor(op, type, valuePort, varNamePort, triggerPort)
     {
         this._valuePort = valuePort;
         this._varNamePort = varNamePort;
         this._op = op;
         this._type = type;
+        this._triggerPort = triggerPort;
 
         this._btnCreate = op.inTriggerButton("Create new variable");
         this._btnCreate.setUiAttribs({ "hidePort": true });
@@ -25,13 +26,22 @@ const VarSetOpWrapper = class
 
         this._varNamePort.onChange = this._updateName.bind(this);
 
-        this._valuePort.onChange = this._setVarValue.bind(this);
-        this._valuePort.changeAlways = true;
+
+        if (this._triggerPort)
+        {
+            this._triggerPort.onTriggered = this._setVarValue.bind(this);
+        }
+        else
+        {
+            this._valuePort.onChange = this._setVarValue.bind(this);
+            this._valuePort.changeAlways = true;
+        }
+
 
         this._op.init = () =>
         {
             this._updateName();
-            this._setVarValue();
+            if (!this._triggerPort) this._setVarValue();
             this._updateErrorUi();
         };
     }
