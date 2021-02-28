@@ -43,6 +43,10 @@
                 "type": 0,
                 "name": "active",
                 "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "portsData"
             }
         ],
         "portsOut": [
