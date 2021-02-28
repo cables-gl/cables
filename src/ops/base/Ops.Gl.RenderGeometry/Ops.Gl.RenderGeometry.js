@@ -26,7 +26,7 @@ function update()
     const geom = geometry.get();
     if (geom && geom instanceof CGL.Geometry)
     {
-        console.log(geom);
+        // console.log(geom);
         if (mesh)
         {
             mesh.dispose();
