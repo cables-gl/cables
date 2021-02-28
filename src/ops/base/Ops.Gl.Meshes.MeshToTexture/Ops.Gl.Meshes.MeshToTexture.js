@@ -1,13 +1,13 @@
 const
     exec = op.inTrigger("Render"),
-    inGeom=op.inObject("Geometry",null,"geometry"),
-    inVPSize = op.inValueBool("Use Viewport Size", true),
-    inWidth = op.inValueInt("Tex Size", 512),
+    inGeom = op.inObject("Geometry", null, "geometry"),
+    inWidth = op.inValueInt("Tex Size", 256),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
+    tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
     next = op.outTrigger("Next"),
+    outNumVerts = op.outNumber("Total Vertices"),
     outTex = op.outTexture("Texture"),
     outTex2 = op.outTexture("Texture 2"),
     outTex3 = op.outTexture("Texture 3"),
@@ -28,29 +28,24 @@ inWidth.onChange =
     inNumTex.onChange =
     twrap.onChange = initFbLater;
 
-inVPSize.onChange = updateUI;
-
 const showingError = false;
 
 let fb = null;
 const tex = null;
 let needInit = true;
-let mesh=null;
-
-tfilter.set("nearest");
+let mesh = null;
 
 updateUI();
 
 const drawBuffArr = [];
-
 
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
     "title": vertModTitle,
     "name": "MODULE_VERTEX_POSITION",
-    srcHeadVert:"OUT vec3 MOD_pos;",
-    srcBodyVert:attachments.vertpos_vert
+    "srcHeadVert": "OUT vec3 MOD_pos;",
+    "srcBodyVert": attachments.vertpos_vert
 });
 
 mod.addModule({
@@ -62,20 +57,23 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_texSize", inWidth);
 
-
-
-inGeom.onChange=function()
+inGeom.onChange = function ()
 {
-    const g=inGeom.get();
+    const g = inGeom.get();
 
-    if(g)
+    if (mesh)mesh.dispose();
+    if (g)
     {
-        mesh = new CGL.Mesh(cgl, g,cgl.gl.POINTS);
+        mesh = new CGL.Mesh(cgl, g, cgl.gl.POINTS);
         mesh.addVertexNumbers = true;
-
+        mesh._setVertexNumbers();
+        outNumVerts.set(g.vertices.length / 3);
     }
-
-    else mesh=null;
+    else
+    {
+        mesh = null;
+        outNumVerts.set(0);
+    }
 };
 
 function warning()
@@ -84,18 +82,6 @@ function warning()
 
 function updateUI()
 {
-    // if (inVPSize.get() === true)
-    // {
-    //     inWidth.setUiAttribs({ "greyout": true });
-    //     inHeight.setUiAttribs({ "greyout": true });
-    // }
-    // else if (inVPSize.get() === false)
-    // {
-    //     inWidth.setUiAttribs({ "greyout": false });
-    //     inHeight.setUiAttribs({ "greyout": false });
-    // }
-    // inWidth.set(cgl.getViewPort()[2]);
-    // inHeight.set(cgl.getViewPort()[3]);
 }
 
 function initFbLater()
@@ -103,7 +89,6 @@ function initFbLater()
     needInit = true;
     warning();
 }
-
 
 function resetShader()
 {
@@ -131,7 +116,6 @@ function initFb()
 
     let w = inWidth.get();
     let h = inWidth.get();
-
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
@@ -171,23 +155,6 @@ exec.onTriggered = function ()
     const vp = cgl.getViewPort();
 
     if (!fb || needInit)initFb();
-    if (inVPSize.get() && fb && (vp[2] != fb.getTextureColor().width || vp[3] != fb.getTextureColor().height)) initFb();
-
-    // if (!inShader.get() || !inShader.get().setDrawBuffers) return;
-
-    // if (inShader.get() != lastShader)
-    // {
-    //     lastShader = inShader.get();
-    //     shader = inShader.get().copy();
-
-    //     shader.setDrawBuffers(drawBuffArr);
-    // }
-
-    // if (!shader)
-    // {
-    //     outTex.set(null);
-    //     return;
-    // }
 
     prevViewPort[0] = vp[0];
     prevViewPort[1] = vp[1];
@@ -205,37 +172,21 @@ exec.onTriggered = function ()
     cgl.pushModelMatrix();
     mat4.identity(cgl.mMatrix);
 
-    // cgl.pushShader(inShader.get());
-    // if (shader.bindTextures) shader.bindTextures();
-    cgl.gl.viewport(0, 0, 512,512);
+    cgl.gl.viewport(0, 0, inWidth.get(), inWidth.get());
 
     mat4.ortho(
         cgl.pMatrix,
         0,
-        512,
+        inWidth.get(),
         0,
-        512,
+        inWidth.get(),
         -1.001,
         100
     );
 
     mod.bind();
 
-    // cgl.pushModelMatrix();
-    // mat4.identity(cgl.mMatrix);
-
-    // cgl.pushViewMatrix();
-    // mat4.identity(cgl.vMatrix);
-
-    // cgl.gl.viewport(0,512,0,221);
-
-
-
-    if(mesh)mesh.render(cgl.getShader());
-
-// cgl.popModelMatrix();
-// cgl.popViewMatrix();
-
+    if (mesh)mesh.render(cgl.getShader());
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -251,12 +202,9 @@ exec.onTriggered = function ()
     }
     else outTex.set(fb.getTextureColor());
 
-    // cgl.popShader();
-
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
     next.trigger();
 
-        mod.unbind();
-
+    mod.unbind();
 };

@@ -1,7 +1,6 @@
 
-float size=128.0;
-float tx=mod(attrVertIndex,size)/size;
-float ty=float(int((attrVertIndex/size)))/size;
+float tx=mod(attrVertIndex,MOD_texSize)/MOD_texSize;
+float ty=float(int((attrVertIndex/MOD_texSize)))/MOD_texSize;
 
 vec4 col=texture(MOD_tex,vec2(tx,ty));
 

@@ -1,13 +1,13 @@
 const
     render = op.inTrigger("render"),
+    inNum = op.inInt("Num Points", 10000),
     inTex = op.inTexture("Texture"),
-    inNum=op.inInt("Num Points",10000),
     // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;
 // let inTexUniform = null;
-let mesh=null;
+let mesh = null;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -23,7 +23,9 @@ mod.addUniformVert("t", "MOD_tex");
 render.onTriggered = doRender;
 updateDefines();
 
-inNum.onChange=setupMesh;
+mod.addUniformVert("f", "MOD_texSize", 0);
+
+inNum.onChange = setupMesh;
 setupMesh();
 
 function updateDefines()
@@ -35,18 +37,19 @@ function updateDefines()
 function doRender()
 {
     mod.bind();
-    if(inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
+    if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
 
-    if(mesh)mesh.render(cgl.getShader());
+    mod.setUniformValue("MOD_texSize", inTex.get().width);
+
+    if (mesh)mesh.render(cgl.getShader());
 
     trigger.trigger();
     mod.unbind();
 }
 
-
 function setupMesh()
 {
-    const num=Math.max(0,Math.floor(inNum.get()));
+    const num = Math.max(0, Math.floor(inNum.get()));
 
     let verts = new Float32Array(num * 3);
     let texCoords = new Float32Array(num * 2);
