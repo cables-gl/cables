@@ -163,7 +163,7 @@ const execute = () =>
         {
             if (op.patch.isEditorMode())
             {
-                const name = "Ops.Custom." + op.id.replace(/-/g, "");
+                const name = "Ops.Custom['" + op.id.replace(/-/g, "") + "']";
                 const code = inJS.get();
                 let codeHead = "Ops.Custom = Ops.Custom || {};\n";
                 codeHead += name + " = " + name + " || {};\n";
