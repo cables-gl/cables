@@ -136,22 +136,22 @@ float MOD_Perlin3D( vec3 P )
 #endif
 }
 
-vec4 MOD_deform(mat4 instMat,vec4 pos)
+vec4 MOD_deform(mat4 mMatrix,mat4 instMat,vec4 pos)
 {
 
-    vec3 ppos=vec3(instMat[3][0]*MOD_scale+MOD_scrollx,instMat[3][1]*MOD_scale+MOD_scrolly,instMat[3][2]*MOD_scale+MOD_scrollz);
+    vec3 ppos=vec3(mMatrix[3][0]+instMat[3][0]*MOD_scale+MOD_scrollx,mMatrix[3][1]+instMat[3][1]*MOD_scale+MOD_scrolly,mMatrix[3][2]+instMat[3][2]*MOD_scale+MOD_scrollz);
     float p=MOD_Perlin3D(ppos)*MOD_strength;
 
     #ifdef MOD_METH_TRANSLATE
-        pos.x+=p;
-        pos.y+=p;
-        pos.z+=p;
+        pos.x+=p*MOD_mulAxis.x;
+        pos.y+=p*MOD_mulAxis.y;
+        pos.z+=p*MOD_mulAxis.z;
     #endif
     #ifdef MOD_METH_SCALE
         p=clamp(p,0.0,99999.0);
-        pos.x*=p;
-        pos.y*=p;
-        pos.z*=p;
+        pos.x*=p*MOD_mulAxis.x;
+        pos.y*=p*MOD_mulAxis.y;
+        pos.z*=p*MOD_mulAxis.z;
     #endif
 
     return pos;
