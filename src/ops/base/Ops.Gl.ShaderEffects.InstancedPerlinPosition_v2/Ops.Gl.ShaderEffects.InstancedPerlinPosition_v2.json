@@ -75,6 +75,14 @@
             "message": "Ops.User.pandur.InstancedPerlinPosition_v2 renamed to Ops.Gl.ShaderEffects.InstancedPerlinPosition_v2",
             "author": "pandur",
             "date": 1613474523495
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1614581509160
         }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
     ]
 }
