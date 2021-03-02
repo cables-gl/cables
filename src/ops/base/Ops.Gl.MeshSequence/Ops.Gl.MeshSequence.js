@@ -173,7 +173,7 @@ function reload()
 
             for (let i = 0; i < data.meshes.length; i++)
             {
-                const geom = new CGL.Geometry();
+                const geom = new CGL.Geometry(op.name);
 
                 geom.verticesIndices = [];
                 geom.verticesIndices = [].concat.apply([], data.meshes[0].faces);

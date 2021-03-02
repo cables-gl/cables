@@ -76,7 +76,7 @@ z4.onChange=rebuild;
 // pivotX.set('center');
 // pivotY.set('center');
 
-var geom=new CGL.Geometry();
+var geom=new cgl.Geometry(op.name);
 var mesh=null;
 
 rebuild();
@@ -94,10 +94,10 @@ function rebuild()
     // var h=height.get();
     // var x=0;
     // var y=0;
-    
+
     // if(typeof w=='string')w=parseFloat(w);
     // if(typeof h=='string')h=parseFloat(h);
-    
+
     // if(pivotX.get()=='center') x=0;
     // if(pivotX.get()=='right') x=-w/2;
     // if(pivotX.get()=='left') x=+w/2;
@@ -137,18 +137,18 @@ function rebuild()
     verts[11]=z4.get();
 
 
-    
+
     // var tc=[0,0, 1,0, 0,1,  1,1];
 
     tc[0]=tcx1.get();
     tc[1]=tcy1.get();
-        
+
     tc[2]=tcx2.get();
     tc[3]=tcy2.get();
-        
+
     tc[4]=tcx3.get();
     tc[5]=tcy3.get();
-        
+
     tc[6]=tcx4.get();
     tc[7]=tcy4.get();
 

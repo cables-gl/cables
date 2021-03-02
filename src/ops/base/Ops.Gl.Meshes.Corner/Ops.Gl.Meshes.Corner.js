@@ -15,7 +15,7 @@ op.setPortGroup("Align",[pivotX,pivotY]);
 
 var cgl=op.patch.cgl;
 var mesh=null;
-var geom=new CGL.Geometry();
+var geom=new cgl.Geometry(op.name);
 geom.tangents=[];
 geom.biTangents=[];
 

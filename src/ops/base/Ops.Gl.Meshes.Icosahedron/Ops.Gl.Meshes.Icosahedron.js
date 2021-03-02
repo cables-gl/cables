@@ -40,7 +40,7 @@ function generate()
     verts.push(-t,  0, -1);
     verts.push(-t,  0,  1);
 
-    var geom=new CGL.Geometry();
+    var geom=new cgl.Geometry(op.name);
 
     geom.vertices=verts;
     geom.verticesIndices = [];

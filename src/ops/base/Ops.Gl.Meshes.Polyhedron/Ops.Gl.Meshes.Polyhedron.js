@@ -105,7 +105,7 @@ function buildMesh()
     faces = [];
     vertices = [];
     vertexColors = [];
-    const geom = new CGL.Geometry();
+    const geom = new cgl.Geometry(op.name);
 
     try
     {
