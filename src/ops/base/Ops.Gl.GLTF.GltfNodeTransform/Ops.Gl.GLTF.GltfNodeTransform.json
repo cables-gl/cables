@@ -12,36 +12,36 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Update"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Node Name"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Z",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Found",
                 "subType": "boolean"
             }

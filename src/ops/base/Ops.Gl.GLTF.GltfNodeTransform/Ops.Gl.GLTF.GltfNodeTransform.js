@@ -19,7 +19,6 @@ inNodeName.onChange = function ()
     op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
 
-
 inExec.onTriggered = function ()
 {
     if (!cgl.frameStore.currentScene) return;
