@@ -497,6 +497,7 @@ Shader.prototype.compile = function ()
         else
         {
             let count = 0;
+            drawBufferStr += "#define MULTI_COLORTARGETS".endl();
             drawBufferStr += "vec4 outColor;".endl();
 
             for (let i = 0; i < this._drawBuffers.length; i++)
