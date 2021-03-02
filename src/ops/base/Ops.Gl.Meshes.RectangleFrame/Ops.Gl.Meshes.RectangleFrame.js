@@ -21,7 +21,7 @@ op.setPortGroup("Sections", [drawTop, drawBottom, drawLeft, drawRight]);
 
 const cgl = op.patch.cgl;
 let mesh = null;
-const geom = new cgl.Geometry(op.name);
+const geom = new CGL.Geometry(op.name);
 geom.tangents = [];
 geom.biTangents = [];
 

@@ -30,7 +30,7 @@ function initEffect()
 
 function setUpPointVerts()
 {
-    const geom = new cgl.Geometry(op.name);
+    const geom = new CGL.Geometry(op.name);
     let res = 256;
     let verts = [];
     let texCoords = [];

@@ -152,7 +152,7 @@ function generate()
         }
     }
 
-    if (!geom)geom = new cgl.Geometry(op.name);
+    if (!geom)geom = new CGL.Geometry(op.name);
     geom.clear();
 
     verts = [].concat.apply([], f);

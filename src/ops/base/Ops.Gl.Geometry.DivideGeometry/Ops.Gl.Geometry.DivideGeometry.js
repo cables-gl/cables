@@ -11,7 +11,7 @@ function update()
     if (geometry.get())
     {
         let geom = geometry.get();
-        let newGeom = new cgl.Geometry(op.name);
+        let newGeom = new CGL.Geometry(op.name);
 
         let newVerts = [];
         let newFaces = [];

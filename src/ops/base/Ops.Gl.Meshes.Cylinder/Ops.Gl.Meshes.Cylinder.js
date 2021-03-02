@@ -89,7 +89,7 @@ function circleTable(n, halfCircle)
 
 function generateCylinder(radf, height, stacks, slices)
 {
-    let geom = new cgl.Geometry(op.name);
+    let geom = new CGL.Geometry(op.name);
 
     let table = circleTable(-slices, false);
 

@@ -1,88 +1,90 @@
 // from https://github.com/ahoiin/supershape.js/blob/master/js/objects.js
 
-const render=op.inTrigger("render");
+const render = op.inTrigger("render");
 
-var pNormalizeSize=op.inValueBool("Normalize Size",true);
-var asPointCloud=op.inValueBool("Point Cloud",false);
-var pStep=op.inValue("Step",0.05);
+let pNormalizeSize = op.inValueBool("Normalize Size", true);
+let asPointCloud = op.inValueBool("Point Cloud", false);
+let pStep = op.inValue("Step", 0.05);
 
-var a1=op.inValue("a1",1);
-var b1=op.inValue("b1",1);
-var m1=op.inValue("m1",5);
-var n11=op.inValue("n11",1);
-var n21=op.inValue("n21",1);
-var n31=op.inValue("n31",2);
+let a1 = op.inValue("a1", 1);
+let b1 = op.inValue("b1", 1);
+let m1 = op.inValue("m1", 5);
+let n11 = op.inValue("n11", 1);
+let n21 = op.inValue("n21", 1);
+let n31 = op.inValue("n31", 2);
 
-var a2=op.inValue("a2",1);
-var b2=op.inValue("b2",1);
-var m2=op.inValue("m2",5);
-var n12=op.inValue("n12",1);
-var n22=op.inValue("n22",1);
-var n32=op.inValue("n32",3);
+let a2 = op.inValue("a2", 1);
+let b2 = op.inValue("b2", 1);
+let m2 = op.inValue("m2", 5);
+let n12 = op.inValue("n12", 1);
+let n22 = op.inValue("n22", 1);
+let n32 = op.inValue("n32", 3);
 
-var trigger=op.outTrigger("Trigger");
-var outNumVerts=op.outValue("Num Vertices");
-var outGeom=op.outObject("geom");
+let trigger = op.outTrigger("Trigger");
+let outNumVerts = op.outValue("Num Vertices");
+let outGeom = op.outObject("geom");
 
-var needsUpdate=true;
-var geometry=new cgl.Geometry(op.name);
-var mesh=null;
-var verts=[];
+let needsUpdate = true;
+let geometry = new CGL.Geometry(op.name);
+let mesh = null;
+let verts = [];
 
 function doUpdate()
 {
-    needsUpdate=true;
+    needsUpdate = true;
 }
 
-asPointCloud.onChange=function()
+asPointCloud.onChange = function ()
 {
-    mesh=null;
-    needsUpdate=true;
+    mesh = null;
+    needsUpdate = true;
 };
-pNormalizeSize.onChange=doUpdate;
-pStep.onChange=doUpdate;
-a1.onChange=doUpdate;
-b1.onChange=doUpdate;
-m1.onChange=doUpdate;
-n11.onChange=doUpdate;
-n21.onChange=doUpdate;
-n31.onChange=doUpdate;
-a2.onChange=doUpdate;
-b2.onChange=doUpdate;
-m2.onChange=doUpdate;
-n12.onChange=doUpdate;
-n22.onChange=doUpdate;
-n32.onChange=doUpdate;
+pNormalizeSize.onChange = doUpdate;
+pStep.onChange = doUpdate;
+a1.onChange = doUpdate;
+b1.onChange = doUpdate;
+m1.onChange = doUpdate;
+n11.onChange = doUpdate;
+n21.onChange = doUpdate;
+n31.onChange = doUpdate;
+a2.onChange = doUpdate;
+b2.onChange = doUpdate;
+m2.onChange = doUpdate;
+n12.onChange = doUpdate;
+n22.onChange = doUpdate;
+n32.onChange = doUpdate;
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(needsUpdate)update();
-    if(mesh) mesh.render(op.patch.cgl.getShader());
+    if (needsUpdate)update();
+    if (mesh) mesh.render(op.patch.cgl.getShader());
 
     trigger.trigger();
 };
 function update()
 {
-    verts.length=0;
+    verts.length = 0;
     geometry.clear();
-    // geometry=new cgl.Geometry(op.name);
-    needsUpdate=false;
+    // geometry=new CGL.Geometry(op.name);
+    needsUpdate = false;
     // geometry.dynamic = true;
-    var step = pStep.get();
-    var q = parseInt(2 * Math.PI / step + 1.3462);
-    var o = parseInt(Math.PI / step + 1.5);
+    let step = pStep.get();
+    let q = parseInt(2 * Math.PI / step + 1.3462);
+    let o = parseInt(Math.PI / step + 1.5);
 
-    var resize=pNormalizeSize.get();
-    var max=0;
+    let resize = pNormalizeSize.get();
+    let max = 0;
 
-    for (var l = 0; l < (q); l++) {
+    for (let l = 0; l < (q); l++)
+    {
         var u = -Math.PI + l * step;
-        for (var h = 0; h < (o); h++) {
+        for (let h = 0; h < (o); h++)
+        {
             var s = -Math.PI / 2 + h * step;
             var m, k, n, g, v, e, t;
-            var f = 0;
-            var p = 0;
-            var w = 0;
+            let f = 0;
+            let p = 0;
+            let w = 0;
             m = Math.cos(m1.get() * u / 4);
             m = 1 / a1.get() * Math.abs(m);
             m = Math.abs(m);
@@ -108,23 +110,23 @@ function update()
             verts.push(p);
             verts.push(w);
 
-            if(resize)
+            if (resize)
             {
-                max=Math.max(max,Math.abs(f));
-                max=Math.max(max,Math.abs(p));
-                max=Math.max(max,Math.abs(w));
+                max = Math.max(max, Math.abs(f));
+                max = Math.max(max, Math.abs(p));
+                max = Math.max(max, Math.abs(w));
             }
         }
     }
 
-    if(resize && max>1) for(var i=0;i<verts.length;i++) verts[i]/=max;
+    if (resize && max > 1) for (let i = 0; i < verts.length; i++) verts[i] /= max;
 
 
-    if(asPointCloud.get())
+    if (asPointCloud.get())
     {
         geometry.setPointVertices(verts);
-        mesh =new CGL.Mesh(op.patch.cgl,geometry,op.patch.cgl.gl.POINTS);
-        mesh.addVertexNumbers=true;
+        mesh = new CGL.Mesh(op.patch.cgl, geometry, op.patch.cgl.gl.POINTS);
+        mesh.addVertexNumbers = true;
         mesh.setGeom(geometry);
     }
     else
@@ -133,10 +135,10 @@ function update()
         {
             for (var s = 0; s < (o - 1); s++)
             {
-                var d = u * o + s;
-                var c = u * o + s + 1;
-                var b = (u + 1) * o + s + 1;
-                var a = (u + 1) * o + s;
+                let d = u * o + s;
+                let c = u * o + s + 1;
+                let b = (u + 1) * o + s + 1;
+                let a = (u + 1) * o + s;
                 // geometry.faces.push(new THREE.Face4(d, c, b, a));
                 geometry.verticesIndices.push(d);
                 geometry.verticesIndices.push(c);
@@ -147,16 +149,15 @@ function update()
                 geometry.verticesIndices.push(d);
             }
         }
-        geometry.vertices=verts;
+        geometry.vertices = verts;
         outNumVerts.set(verts.length);
 
-        geometry.calculateNormals({"forceZUp":true});
+        geometry.calculateNormals({ "forceZUp": true });
 
-        if(!mesh) mesh=new CGL.Mesh(op.patch.cgl,geometry);
-            else mesh.setGeom(geometry);
+        if (!mesh) mesh = new CGL.Mesh(op.patch.cgl, geometry);
+        else mesh.setGeom(geometry);
     }
 
     outGeom.set(null);
     outGeom.set(geometry);
-};
-
+}

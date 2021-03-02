@@ -12,7 +12,7 @@ const render=op.inTrigger('render'),
 var outGeom=op.outObject("geometry");
 outGeom.ignoreValueSerialize=true;
 
-var geom=new cgl.Geometry(op.name);
+var geom=new CGL.Geometry(op.name);
 var mesh=null;
 var cgl=op.patch.cgl;
 var image = new Image();

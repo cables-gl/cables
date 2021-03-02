@@ -71,7 +71,7 @@ function rebuild()
 
     function addMesh()
     {
-        let geom = new cgl.Geometry(op.name);
+        let geom = new CGL.Geometry(op.name);
         geom.vertices = verts;
         geom.texCoords = tc;
         geom.verticesIndices = indices;

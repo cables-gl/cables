@@ -93,7 +93,7 @@ function generateCone(base, height, stacks, slices)
 {
     let r = base;
     let z = 0;
-    const geom = new cgl.Geometry(op.name);
+    const geom = new CGL.Geometry(op.name);
     geom.glPrimitive = cgl.gl.TRIANGLE_STRIP;
     geom.tangents = [];
     geom.biTangents = [];
