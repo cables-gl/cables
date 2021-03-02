@@ -1,29 +1,29 @@
-const inIndex=op.inValue("Index Position"),
-    inArr=op.inArray("Array"),
-    outX=op.outValue("result");
+const inIndex = op.inValue("Index Position"),
+    inArr = op.inArray("Array"),
+    outX = op.outValue("result");
 
-inIndex.onChange=inArr.onChange=function()
+inIndex.onChange = inArr.onChange = function ()
 {
-    var i=Math.floor(inIndex.get());
-    var fr=inIndex.get()-Math.floor(inIndex.get());
-    var arr=inArr.get();
+    let i = Math.floor(inIndex.get());
+    let fr = inIndex.get() - Math.floor(inIndex.get());
+    let arr = inArr.get();
 
-    if(i<0 || !arr)
+    if (i < 0 || !arr)
     {
         return;
     }
 
-    if(i>=arr.length-1)
+    if (i >= arr.length - 1)
     {
-        outX.set(arr[arr.length-1]);
+        outX.set(arr[arr.length - 1]);
         return;
     }
 
-    var x =  arr[i+0];
+    let x = arr[i + 0];
 
-    var x2 = arr[i+1];
+    let x2 = arr[i + 1];
 
-    x= x + (x2 - x) * fr;
+    x += (x2 - x) * fr;
 
     outX.set(x);
 };
