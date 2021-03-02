@@ -44,6 +44,21 @@
             },
             {
                 "type": 0,
+                "name": "Mul X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mul Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mul Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "WorldSpace",
                 "subType": "boolean"
             }

@@ -10,6 +10,10 @@ const defaultCode = "\
 const inJS = op.inStringEditor("JavaScript");
 inJS.setUiAttribs({ "editorSyntax": "js" });
 inJS.set(defaultCode);
+const inLib = op.inUrl("Library", [".js"]);
+
+const protectedPorts = [inJS.id, inLib.id];
+
 op.setUiError("error", null);
 
 const getEvalFunction = () =>
@@ -43,9 +47,36 @@ const getEvalFunction = () =>
     }
 };
 
-inJS.onChange = () =>
+function loadLibAndExecute()
 {
-    execute();
+    if (inLib.get())
+    {
+        let scriptTag = document.getElementById("customop_lib_" + op.id);
+        if (scriptTag)
+        {
+            scriptTag.remove();
+        }
+        scriptTag = document.createElement("script");
+        scriptTag.id = "customlib_" + op.id;
+        scriptTag.type = "text/javascript";
+        scriptTag.src = inLib.get();
+        scriptTag.onload = function ()
+        {
+            console.info("done loading library", inLib.get());
+            execute();
+        };
+        document.body.appendChild(scriptTag);
+    }
+    else
+    {
+        execute();
+    }
+}
+
+op.onLoadedValueSet = function ()
+{
+    loadLibAndExecute();
+    inLib.onChange = inJS.onChange = loadLibAndExecute;
 };
 
 const removeInPort = (port) =>
@@ -88,7 +119,7 @@ const execute = () =>
             const removeOutPorts = [];
             op.portsIn.forEach((port) =>
             {
-                if (port.id !== inJS.id)
+                if (!protectedPorts.includes(port.id))
                 {
                     oldLinksIn[port.name] = [];
                     oldValuesIn[port.name] = port.get();
@@ -132,7 +163,7 @@ const execute = () =>
             evalFunction(this);
             op.portsIn.forEach((port) =>
             {
-                if (port.id !== inJS.id)
+                if (!protectedPorts.includes(port.id))
                 {
                     if (oldLinksIn[port.name])
                     {
@@ -163,7 +194,7 @@ const execute = () =>
         {
             if (op.patch.isEditorMode())
             {
-                const name = "Ops.Custom." + op.id.replace(/-/g, "");
+                const name = "Ops.Custom.CUSTOM" + op.id.replace(/-/g, "");
                 const code = inJS.get();
                 let codeHead = "Ops.Custom = Ops.Custom || {};\n";
                 codeHead += name + " = " + name + " || {};\n";
