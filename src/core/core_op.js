@@ -128,9 +128,12 @@ const Op = function ()
     {
         if (!newAttribs) return;
 
-        if (newAttribs.error) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
+        if (newAttribs.error || newAttribs.warning || newAttribs.hint)
+        {
+            console.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
+        }
+        // if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
+        // if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
         if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
