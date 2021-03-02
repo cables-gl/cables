@@ -15,7 +15,7 @@ shader.setSource(attachments.grid_vert,attachments.grid_frag);
 
 function init()
 {
-    var geomVertical=new CGL.Geometry();
+    var geomVertical=new cgl.Geometry(op.name);
 
     const space=1.0;
     var l=space*num/2;

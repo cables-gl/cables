@@ -100,7 +100,7 @@ function update()
             if (sorting.get() != SORT_NONE) op.error("No sorting found", sorting.get());
         }
 
-        const newGeom = new CGL.Geometry();
+        const newGeom = new cgl.Geometry(op.name);
         const newVerts = [];
         const newFaces = [];
         const newNormals = [];

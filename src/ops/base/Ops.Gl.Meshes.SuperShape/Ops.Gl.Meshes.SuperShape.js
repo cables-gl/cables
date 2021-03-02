@@ -25,7 +25,7 @@ var outNumVerts=op.outValue("Num Vertices");
 var outGeom=op.outObject("geom");
 
 var needsUpdate=true;
-var geometry=new CGL.Geometry();
+var geometry=new cgl.Geometry(op.name);
 var mesh=null;
 var verts=[];
 
@@ -65,7 +65,7 @@ function update()
 {
     verts.length=0;
     geometry.clear();
-    // geometry=new CGL.Geometry();
+    // geometry=new cgl.Geometry(op.name);
     needsUpdate=false;
     // geometry.dynamic = true;
     var step = pStep.get();

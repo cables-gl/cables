@@ -73,7 +73,7 @@ z4.onChange = rebuild;
 // pivotX.set('center');
 // pivotY.set('center');
 
-let geom = new CGL.Geometry();
+let geom = new CGL.Geometry(op.name);
 let mesh = null;
 
 rebuild();

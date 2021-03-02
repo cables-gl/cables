@@ -69,7 +69,7 @@ function rebuild()
         verts[i + 2] = (Math.random() - 0.5);
     }
 
-    if (!geom)geom = new CGL.Geometry();
+    if (!geom)geom = new cgl.Geometry(op.name);
     geom.setPointVertices(verts);
 
     if (!mesh)

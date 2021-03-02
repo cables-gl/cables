@@ -37,7 +37,7 @@ axis.set("xy");
 pivotX.set("center");
 pivotY.set("center");
 
-const geom = new CGL.Geometry();
+const geom = new cgl.Geometry(op.name);
 let mesh = null;
 let div = null;
 const m = mat4.create();

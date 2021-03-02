@@ -30,11 +30,11 @@ render.onTriggered=function()
 
 function create()
 {
-    if(!geom)geom=new CGL.Geometry();
+    if(!geom)geom=new cgl.Geometry(op.name);
     var w=sizeW.get();
     var h=sizeH.get();
     var l=sizeL.get();
-    
+
     geom.vertices = [
         // -w,-l,0,
         // w,-l,0,
@@ -65,9 +65,9 @@ function create()
     ];
 
     geom.verticesIndices = [
-        0,1,2, 
+        0,1,2,
         0,2,3, // bottom
-        
+
         4,1,0,
         4,3,2,
         0,3,4,
@@ -77,7 +77,7 @@ function create()
 
     if(!inSmooth.get())geom.unIndex();
     geom.calculateNormals({forceZUp:false});
-    
+
 
     mesh=new CGL.Mesh(cgl,geom);
     geomOut.set(null);

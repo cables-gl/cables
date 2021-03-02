@@ -3,7 +3,7 @@ const
     inGeom2 = op.inObject("Geometry 2"),
     outGeom = op.outObject("Geometry Result");
 
-const geom = new CGL.Geometry();
+const geom = new cgl.Geometry(op.name);
 outGeom.set(geom);
 
 inGeom.onChange =
