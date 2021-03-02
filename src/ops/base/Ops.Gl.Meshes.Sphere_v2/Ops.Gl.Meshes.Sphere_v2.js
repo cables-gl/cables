@@ -8,7 +8,7 @@ const
     inStacklimit = op.inValueSlider("Filloffset", 1),
     inDraw = op.inValueBool("Render", true),
     outTrigger = op.outTrigger("trigger"),
-    outGeometry = op.outObject("geometry"),
+    outGeometry = op.outObject("geometry", null, "geometry"),
     UP = vec3.fromValues(0, 1, 0),
     RIGHT = vec3.fromValues(1, 0, 0);
 let

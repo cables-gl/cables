@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     inNum = op.inInt("Num Points", 10000),
-    inTex = op.inTexture("Texture"),
+    inTex = op.inTexture("Texture", null, "texture"),
     // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
     trigger = op.outTrigger("Trigger");
 
@@ -38,7 +38,7 @@ function updateDefines()
 function doRender()
 {
     mod.bind();
-    if (!inTex.get()) return;
+    if (!inTex.get() || !inTex.get().tex) return;
     if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
 
     mod.setUniformValue("MOD_texSize", inTex.get().width);

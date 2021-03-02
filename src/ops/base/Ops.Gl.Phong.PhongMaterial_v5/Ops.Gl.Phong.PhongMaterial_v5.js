@@ -188,7 +188,7 @@ discardTransPxl.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Opacity Texture", [alphaMaskSource, discardTransPxl]);
 
 const outTrigger = op.outTrigger("Trigger Out");
-const shaderOut = op.outObject("Shader");
+const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 
 const shader = new CGL.Shader(cgl, "simosphong");
