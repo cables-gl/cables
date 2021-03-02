@@ -12,18 +12,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index Position",
                 "subType": "number"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }

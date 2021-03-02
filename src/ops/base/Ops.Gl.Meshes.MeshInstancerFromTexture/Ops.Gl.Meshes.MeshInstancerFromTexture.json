@@ -42,7 +42,8 @@
             },
             {
                 "type": 2,
-                "name": "geom"
+                "name": "Geometry",
+                "objType": "geometry"
             },
             {
                 "type": 0,
@@ -52,6 +53,11 @@
             {
                 "type": 2,
                 "name": "Position Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Rotation Texture",
                 "objType": "texture"
             },
             {

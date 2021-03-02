@@ -1,6 +1,6 @@
 const
     spread = op.inArray("Spreadsheet"),
-    outp = op.inSwitch("Format", ["Objects", "Arrays", "Flat"], "Objects"),
+    outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays"], "Flat"),
     result = op.outArray("Array"),
     outColNames = op.outArray("Columns");
 
