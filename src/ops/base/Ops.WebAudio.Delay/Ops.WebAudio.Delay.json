@@ -1,1 +1,215 @@
-{"id":"60a557be-109a-494d-aba7-fcc61bbad033","changelog":[{"message":"created op","author":"simod","date":1612782883500},{"message":"Ops.User.simod.Delay renamed to Ops.WebAudio.Delay","author":"simod","date":1612887820969}],"authorName":"simod","created":1612782886892,"layout":{"portsIn":[{"type":2,"name":"Audio In"},{"type":0,"name":"Dry/Wet","group":"Main Controls","subType":"number"},{"type":0,"name":"Feedback","group":"Main Controls","subType":"number"},{"type":0,"name":"Delay Time (MS)","group":"Main Controls","subType":"number"},{"type":0,"name":"Delay Shift (MS)","group":"Main Controls","subType":"number"},{"type":0,"name":"BPM based delay time","subType":"boolean"},{"type":0,"name":"BPM","group":"Synced Controls","subType":"number"},{"type":0,"name":"Delay Time (note value)  index","subType":"integer"},{"type":0,"name":"Delay Time (note value) ","group":"Synced Controls","subType":"string"},{"type":0,"name":"Use Filter & Modulation","subType":"boolean"},{"type":0,"name":"Highpass Frequency","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"Highpass Q","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"Lowpass Frequency","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"Lowpass Q","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"LFO Speed (Hz) ","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"LFO Intensity","group":"Filters & Modulation","subType":"number"},{"type":0,"name":"LFO Waveform index","subType":"integer"},{"type":0,"name":"LFO Waveform","group":"Filters & Modulation","subType":"string"}],"portsOut":[{"type":2,"name":"Mix Out"},{"type":2,"name":"Wet Out"}],"name":"Ops.WebAudio.Delay"},"summary":"add a delay effect to an audio stream","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[{"name":"Audio In","text":"audio input"},{"name":"Dry/Wet","text":"dry wet control"},{"name":"Feedback","text":"number of repeats"},{"name":"Delay Time (MS)","text":"delay time in miliseconds, deactivated when bpm based delay time is selected"},{"name":"Delay Shift (MS)","text":"shifts the delaytime the given amount of miliseconds (negative numbers are also possible)"},{"name":"BPM based delay time","text":"check to activate bpm synced delay"},{"name":"BPM","text":"beats per minute, the tempo"},{"name":"Delay Time (note value) ","text":"choose a note value as a delay time"},{"name":"Use Filter & Modulation","text":"check to use filters in the delay path and delay time modulation"},{"name":"Highpass Frequency","text":" frequency of the highpass filter"},{"name":"Highpass Q","text":"Q value of the highpass filter"},{"name":"Lowpass Frequency","text":"frequency of the lowpass filter"},{"name":"Lowpass Q","text":"Q value of the lowpass filter"},{"name":"LFO Speed (Hz) ","text":"modulation speed in hertz"},{"name":"LFO Intensity","text":"intensity of the delay time modulation"},{"name":"LFO Waveform index","text":"choose between two different waveforms: sine & triangle"},{"name":"Mix Out","text":"mixed audio output"},{"name":"Wet Out","text":"delay only output"}]}}
+{
+    "id": "60a557be-109a-494d-aba7-fcc61bbad033",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1612782883500
+        },
+        {
+            "message": "Ops.User.simod.Delay renamed to Ops.WebAudio.Delay",
+            "author": "simod",
+            "date": 1612887820969
+        }
+    ],
+    "authorName": "simod",
+    "created": 1612782886892,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio In"
+            },
+            {
+                "type": 0,
+                "name": "Dry/Wet",
+                "group": "Main Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Feedback",
+                "group": "Main Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay Time (MS)",
+                "group": "Main Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay Shift (MS)",
+                "group": "Main Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "BPM based delay time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "BPM",
+                "group": "Synced Controls",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Delay Time (note value)  index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Delay Time (note value) ",
+                "group": "Synced Controls",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Use Filter & Modulation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Highpass Frequency",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Highpass Q",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lowpass Frequency",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Lowpass Q",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "LFO Speed (Hz) ",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "LFO Intensity",
+                "group": "Filters & Modulation",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "LFO Waveform index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "LFO Waveform",
+                "group": "Filters & Modulation",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Mix Out"
+            },
+            {
+                "type": 2,
+                "name": "Wet Out"
+            }
+        ],
+        "name": "Ops.WebAudio.Delay"
+    },
+    "summary": "add a delay effect to an audio stream",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "audio input"
+            },
+            {
+                "name": "Dry/Wet",
+                "text": "dry wet control"
+            },
+            {
+                "name": "Feedback",
+                "text": "number of repeats"
+            },
+            {
+                "name": "Delay Time (MS)",
+                "text": "delay time in miliseconds, deactivated when bpm based delay time is selected"
+            },
+            {
+                "name": "Delay Shift (MS)",
+                "text": "shifts the delaytime the given amount of miliseconds (negative numbers are also possible)"
+            },
+            {
+                "name": "BPM based delay time",
+                "text": "check to activate bpm synced delay"
+            },
+            {
+                "name": "BPM",
+                "text": "beats per minute, the tempo"
+            },
+            {
+                "name": "Delay Time (note value) ",
+                "text": "choose a note value as a delay time"
+            },
+            {
+                "name": "Use Filter & Modulation",
+                "text": "check to use filters in the delay path and delay time modulation"
+            },
+            {
+                "name": "Highpass Frequency",
+                "text": " frequency of the highpass filter"
+            },
+            {
+                "name": "Highpass Q",
+                "text": "Q value of the highpass filter"
+            },
+            {
+                "name": "Lowpass Frequency",
+                "text": "frequency of the lowpass filter"
+            },
+            {
+                "name": "Lowpass Q",
+                "text": "Q value of the lowpass filter"
+            },
+            {
+                "name": "LFO Speed (Hz) ",
+                "text": "modulation speed in hertz"
+            },
+            {
+                "name": "LFO Intensity",
+                "text": "intensity of the delay time modulation"
+            },
+            {
+                "name": "LFO Waveform index",
+                "text": "choose between two different waveforms: sine & triangle"
+            },
+            {
+                "name": "Mix Out",
+                "text": "mixed audio output"
+            },
+            {
+                "name": "Wet Out",
+                "text": "delay only output"
+            }
+        ]
+    }
+}

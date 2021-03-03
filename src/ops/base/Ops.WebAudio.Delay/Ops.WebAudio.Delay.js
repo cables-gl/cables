@@ -322,3 +322,24 @@ audioIn.onChange = function ()
     audioOut.set(outputNode);
     delayOut.set(delayNode);
 };
+
+op.onDelete = () =>
+{
+    lfoNode.disconnect();
+    delayNode.disconnect();
+    feedbackNode.disconnect();
+
+    inputNode.disconnect();
+
+    dryNode.disconnect();
+    delayNode.disconnect();
+
+    wetNode.disconnect();
+    filterHighpassNode.disconnect();
+
+    if (inUseModulation.get())
+    {
+        lfoGainNode.disconnect();
+        filterLowpassNode.disconnect();
+    }
+};

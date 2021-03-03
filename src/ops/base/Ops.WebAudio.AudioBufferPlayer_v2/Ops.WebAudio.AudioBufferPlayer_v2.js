@@ -101,7 +101,7 @@ audioBufferPort.onChange = function ()
             setTimeout(function ()
             {
                 if (isPlaying) source.stop();
-                source.disconnect();
+                if (source) source.disconnect();
                 source = null;
             }, 30);
         }
