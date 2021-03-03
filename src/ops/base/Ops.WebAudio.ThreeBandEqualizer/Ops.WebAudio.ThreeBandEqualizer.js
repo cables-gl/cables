@@ -43,30 +43,31 @@ lowFilterNode.type = inLowFilterType.get();
 midFilterNode.type = inMidFilterType.get();
 highFilterNode.type = inHighFilterType.get();
 const FILTER_TYPES = [
-    { node: lowFilterNode, port: inLowFilterType },
-    { node: midFilterNode, port: inMidFilterType },
-    { node: highFilterNode, port: inHighFilterType }
+    { "node": lowFilterNode, "port": inLowFilterType },
+    { "node": midFilterNode, "port": inMidFilterType },
+    { "node": highFilterNode, "port": inHighFilterType }
 ];
 
 const FILTER_FREQUENCIES = [
-    { node: lowFilterNode, port: inLowFrequency, name: "low" },
-    { node: midFilterNode, port: inMidFrequency, name: "mid" },
-    { node: highFilterNode, port: inHighFrequency, name: "high" }
+    { "node": lowFilterNode, "port": inLowFrequency, "name": "low" },
+    { "node": midFilterNode, "port": inMidFrequency, "name": "mid" },
+    { "node": highFilterNode, "port": inHighFrequency, "name": "high" }
 ];
 
 const FILTER_QS = [
-    { node: lowFilterNode, port: inLowQ, name: "low" },
-    { node: midFilterNode, port: inMidQ, name: "mid" },
-    { node: highFilterNode, port: inHighQ, name: "high" }
+    { "node": lowFilterNode, "port": inLowQ, "name": "low" },
+    { "node": midFilterNode, "port": inMidQ, "name": "mid" },
+    { "node": highFilterNode, "port": inHighQ, "name": "high" }
 ];
 
 const FILTER_GAINS = [
-    { node: lowFilterNode, port: inLowGain, name: "low" },
-    { node: midFilterNode, port: inMidGain, name: "mid" },
-    { node: highFilterNode, port: inHighGain, name: "high" }
+    { "node": lowFilterNode, "port": inLowGain, "name": "low" },
+    { "node": midFilterNode, "port": inMidGain, "name": "mid" },
+    { "node": highFilterNode, "port": inHighGain, "name": "high" }
 ];
 
-FILTER_TYPES.forEach((obj, index) => {
+FILTER_TYPES.forEach((obj, index) =>
+{
     /* initial greyout-ing */
     const type = obj.port.get();
 
@@ -79,7 +80,8 @@ FILTER_TYPES.forEach((obj, index) => {
     });
 
     /* onChange handler */
-    obj.port.onChange = () => {
+    obj.port.onChange = () =>
+    {
         const type = obj.port.get();
         FILTER_GAINS[index].port.setUiAttribs({
             "greyout": ["lowpass", "highpass", "bandpass", "notch", "allpass"].includes(type)
@@ -90,11 +92,13 @@ FILTER_TYPES.forEach((obj, index) => {
         });
 
         obj.node.type = type;
-    }
+    };
 });
 
-FILTER_FREQUENCIES.forEach((obj, index) => {
-    obj.port.onChange = () => {
+FILTER_FREQUENCIES.forEach((obj, index) =>
+{
+    obj.port.onChange = () =>
+    {
         const freq = obj.port.get();
         if (freq)
         {
@@ -112,11 +116,13 @@ FILTER_FREQUENCIES.forEach((obj, index) => {
                 op.setUiError("freqRange", "The frequency you selected for the " + obj.name + " band is higher than the possible frequency of " + FREQUENCY_MAX + " Hz.", 1);
             }
         }
-    }
-})
+    };
+});
 
-FILTER_QS.forEach((obj, index) => {
-    obj.port.onChange = () => {
+FILTER_QS.forEach((obj, index) =>
+{
+    obj.port.onChange = () =>
+    {
         const q = obj.port.get();
         obj.node.Q.setValueAtTime(clamp(q, Q_MIN, Q_MAX), audioContext.currentTime);
 
@@ -126,11 +132,13 @@ FILTER_QS.forEach((obj, index) => {
         {
             op.setUiError(obj.name + "_qRange", null);
         }
-    }
+    };
 });
 
-FILTER_GAINS.forEach((obj, index) => {
-    obj.port.onChange = () => {
+FILTER_GAINS.forEach((obj, index) =>
+{
+    obj.port.onChange = () =>
+    {
         const gain = obj.port.get();
 
         obj.node.gain.setValueAtTime(clamp(gain, GAIN_MIN, GAIN_MAX), audioContext.currentTime);
@@ -141,11 +149,10 @@ FILTER_GAINS.forEach((obj, index) => {
         {
             op.setUiError(obj.name + "GainRange", null);
         }
-    }
-})
+    };
+});
 
 const outAudio = op.outObject("Audio Out");
-
 
 let oldAudioIn = null;
 
@@ -157,7 +164,8 @@ inAudio.onChange = function ()
         {
             try
             {
-                if (oldAudioIn.disconnect) {
+                if (oldAudioIn.disconnect)
+                {
                     oldAudioIn.disconnect(lowFilterNode);
                 }
             }
@@ -180,4 +188,10 @@ inAudio.onChange = function ()
     }
     oldAudioIn = inAudio.get();
     outAudio.set(highFilterNode);
+};
+
+op.onDelete = () =>
+{
+    lowFilterNode.disconnect();
+    midFilterNode.disconnect();
 };
