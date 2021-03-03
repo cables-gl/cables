@@ -49,6 +49,31 @@ let updating = true;
 audioBufferPort.onChange = samplesPerPixelPort.onChange
 = inWidth.onChange = inHeight.onChange = () =>
     {
+        if (audioBufferPort.get())
+        {
+            if (!renderPort.isLinked())
+            {
+                const audioBuffer = audioBufferPort.get();
+                if (!(audioBuffer instanceof AudioBuffer))
+                {
+                    op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
+                    return;
+                }
+                else
+                {
+                    op.log("im here wit", audioBufferPort.get());
+                    op.setUiError("wrongBufferType", null);
+                }
+            }
+        }
+        else
+        {
+            if (audioBufferPort.isLinked())
+            {
+                op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
+            }
+            else op.setUiError("wrongBufferType", null);
+        }
         updating = true;
     };
 
