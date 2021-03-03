@@ -6,6 +6,8 @@ const portsData = op.inString("portsData", "{}");
 
 patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
+portsData.setUiAttribs({ "hidePort": true });
+portsData.setUiAttribs({ "hideParam": true });
 
 const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id];
 
@@ -21,7 +23,7 @@ activeIn.onChange = () =>
     }
 };
 
-op.onLoadedValueSet = () =>
+op.onLoad = () =>
 {
     if (activeIn.get())
     {
@@ -97,7 +99,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find(op =>
+            const parentSubPatch = patch.ops.find((op) =>
                 op.uiAttribs &&
                 op.uiAttribs.blueprint &&
                 op.uiAttribs.blueprint.isParentSubPatch &&
@@ -173,7 +175,7 @@ const removeOutPort = (port) =>
 
 function setupPorts(parentSubPatch)
 {
-    const subPatchDataPort = parentSubPatch.portsIn.find(port => port.name === "dataStr");
+    const subPatchDataPort = parentSubPatch.portsIn.find((port) => port.name === "dataStr");
     if (!subPatchDataPort) return;
     if (!subPatchDataPort.get()) return;
 
@@ -216,9 +218,31 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
+            const subPatchPort = parentSubPatch.portsIn.find((port) => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-            const newPortInData = op.portsInData.find(portData => portData.name == newPort.name);
+            const newPortInData = op.portsInData.find((portData) => portData.name == newPort.name);
+            if (subPatchPort)
+            {
+                switch (subPatchPort.type)
+                {
+                case CABLES.OP_PORT_TYPE_FUNCTION:
+                    const proxy = new CABLES.Port(op, "outproxy - " + subPatchPort.name, subPatchPort.type);
+                    proxy.setUiAttribs({ "hideParam": true });
+
+                    const newOutTrigger = op.addOutPort(proxy);
+                    op.patch.link(op, newOutTrigger.name, parentSubPatch, subPatchPort.name);
+                    newPort.onTriggered = () =>
+                    {
+                        newOutTrigger.trigger();
+                    };
+                    break;
+                default:
+                    newPort.onChange = () =>
+                    {
+                        subPatchPort.set(newPort.get());
+                    };
+                }
+            }
             if (newPortInData)
             {
                 if (Array.isArray(newPortInData.links))
@@ -235,23 +259,6 @@ function setupPorts(parentSubPatch)
                 newPort.set(newPortInData.value);
             }
             newPort.onLinkChanged = savePortData;
-            if (subPatchPort)
-            {
-                switch (subPatchPort.type)
-                {
-                case CABLES.OP_PORT_TYPE_FUNCTION:
-                    newPort.onTriggered = () =>
-                    {
-                        subPatchPort.trigger();
-                    };
-                    break;
-                default:
-                    newPort.onChange = () =>
-                    {
-                        subPatchPort.set(newPort.get());
-                    };
-                }
-            }
 
             if (subPatchPort.title)
             {
@@ -264,7 +271,7 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsOut[i].name))
         {
-            const subPatchPort = parentSubPatch.portsOut.find(port => port.name == subPatchPortsOut[i].name);
+            const subPatchPort = parentSubPatch.portsOut.find((port) => port.name == subPatchPortsOut[i].name);
             const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
             if (oldPortsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPortsOut[newPort.name].links))
             {
@@ -283,7 +290,11 @@ function setupPorts(parentSubPatch)
                 switch (subPatchPort.type)
                 {
                 case CABLES.OP_PORT_TYPE_FUNCTION:
-                    subPatchPort.onTriggered = () =>
+                    const proxy = new CABLES.Port(op, "inproxy - " + subPatchPort.name, subPatchPort.type);
+                    proxy.setUiAttribs({ "hideParam": true });
+                    const newInTrigger = op.addInPort(proxy);
+                    op.patch.link(op, newInTrigger.name, parentSubPatch, subPatchPort.name);
+                    newInTrigger.onTriggered = () =>
                     {
                         newPort.trigger();
                     };
