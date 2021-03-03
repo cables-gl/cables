@@ -3,6 +3,7 @@ const
     trigger = op.outTrigger("trigger"),
     amount = op.inFloat("amount", 3),
     clamp = op.inBool("Clamp", false),
+    maskInvert = op.inBool("Mask Invert", false),
     mask = op.inTexture("Mask");
 
 const cgl = op.patch.cgl;
@@ -33,9 +34,11 @@ direction.onChange = () =>
 
 clamp.onChange = () => { shader.toggleDefine("CLAMP", clamp.get()); };
 
+maskInvert.onChange =
 mask.onChange = () =>
 {
     shader.toggleDefine("USE_MASK", mask.isLinked());
+    shader.toggleDefine("MASK_INVERT", maskInvert.get());
 };
 
 render.onTriggered = function ()

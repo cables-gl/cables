@@ -30,12 +30,24 @@ void main()
     vec4 color = vec4(0.0);
 
     #ifdef USE_MASK
-        if(texture(texMask,texCoord).r>0.5)
-        {
-            outColor= texture(tex, texCoord);
 
-            return;
-        }
+        #ifdef MASK_INVERT
+            if(texture(texMask,texCoord).r<0.5)
+            {
+                outColor= texture(tex, texCoord);
+                return;
+            }
+        #endif
+
+        #ifndef MASK_INVERT
+            if(texture(texMask,texCoord).r>0.5)
+            {
+                outColor= texture(tex, texCoord);
+                return;
+            }
+        #endif
+
+
     #endif
 
     color += texture(tex, coord0) * 0.06927096443792478;
