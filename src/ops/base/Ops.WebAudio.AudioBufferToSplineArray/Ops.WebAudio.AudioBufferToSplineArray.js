@@ -61,7 +61,6 @@ audioBufferPort.onChange = samplesPerPixelPort.onChange
                 }
                 else
                 {
-                    op.log("im here wit", audioBufferPort.get());
                     op.setUiError("wrongBufferType", null);
                 }
             }
