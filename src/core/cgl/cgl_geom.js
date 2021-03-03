@@ -235,7 +235,7 @@ Geometry.prototype.merge = function (geom)
 Geometry.prototype.copy = function ()
 {
     let i = 0;
-    const geom = new Geometry(this.name);
+    const geom = new Geometry(this.name + " copy");
     geom.faceVertCount = this.faceVertCount;
 
     // geom.vertices.length=this.vertices.length;
@@ -736,9 +736,10 @@ Geometry.buildFromFaces = function (arr)
     return geom;
 };
 
+// TODO: not needed anymore ?!
 Geometry.json2geom = function (jsonMesh)
 {
-    const geom = new Geometry(this.name);
+    const geom = new Geometry("jsonMeshGeom");
     geom.verticesIndices = [];
 
     geom.vertices = jsonMesh.vertices || [];
