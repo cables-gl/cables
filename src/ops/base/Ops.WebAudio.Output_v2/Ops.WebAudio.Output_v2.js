@@ -8,7 +8,7 @@ op.requirements = [CABLES.Requirements.WEBAUDIO];
 let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // vars
-const gainNode = audioCtx.createGain();
+let gainNode = audioCtx.createGain();
 const destinationNode = audioCtx.destination;
 
 // inputs
@@ -74,7 +74,7 @@ inAudio.onChange = function ()
 function setVolume()
 {
     let volume = inGain.get() * masterVolume;
-    gainNode.gain.setValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime);
+    if (gainNode) gainNode.gain.setValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime);
 }
 
 function mute(b)
@@ -122,4 +122,10 @@ op.onMasterVolumeChanged = (v) =>
     if (op.patch._paused) masterVolume = 0;
     else masterVolume = v;
     setVolume();
+};
+
+op.onDelete = () =>
+{
+    gainNode.disconnect();
+    gainNode = null;
 };
