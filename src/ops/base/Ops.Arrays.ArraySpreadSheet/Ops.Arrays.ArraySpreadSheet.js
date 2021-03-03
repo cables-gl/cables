@@ -1,14 +1,26 @@
 const
     spread = op.inArray("Spreadsheet"),
-    outp = op.inSwitch("Format", ["Objects", "Arrays", "Flat"], "Objects"),
+    inNumColumns = op.inInt("Num Columns", 3),
+    outp = op.inSwitch("Format", ["Flat", "Objects", "Arrays"], "Flat"),
     result = op.outArray("Array"),
-    outColNames = op.outArray("Columns");
+    outColNames = op.outArray("Column Names");
 
 spread.hidePort();
-spread.setUiAttribs({ "display": "spreadsheet" });
+inNumColumns.hidePort();
 
 outp.onChange =
 spread.onChange = update;
+
+inNumColumns.onChange = updateUi;
+updateUi();
+
+function updateUi()
+{
+    spread.setUiAttribs({
+        "display": "spreadsheet",
+        "spread_numColumns": inNumColumns.get()
+    });
+}
 
 function update()
 {
@@ -48,7 +60,7 @@ function asFlat()
                 arr[x + (y * data.cols)] = v;
             }
     }
-    arr.length = lastRow * data.cols;
+    arr.length = (lastRow + 1) * data.cols;
 
     return arr;
 }

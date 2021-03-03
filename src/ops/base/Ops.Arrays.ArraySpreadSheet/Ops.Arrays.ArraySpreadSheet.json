@@ -28,6 +28,11 @@
             {
                 "type": 5,
                 "name": "Format"
+            },
+            {
+                "type": 0,
+                "name": "Num Columns",
+                "subType": "integer"
             }
         ],
         "portsOut": [
@@ -37,7 +42,7 @@
             },
             {
                 "type": 3,
-                "name": "Columns"
+                "name": "Column Names"
             }
         ],
         "name": "Ops.Arrays.ArraySpreadSheet"

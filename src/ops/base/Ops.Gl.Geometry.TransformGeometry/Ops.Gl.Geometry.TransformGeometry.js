@@ -9,7 +9,7 @@ const
     rotX = op.inValue("Rotation X"),
     rotY = op.inValue("Rotation Y"),
     rotZ = op.inValue("Rotation Z"),
-    outGeom = op.outObject("Result");
+    outGeom = op.outObject("Result", null, "geometry");
 
 transX.onChange =
     transY.onChange =
@@ -21,7 +21,6 @@ transX.onChange =
     rotY.onChange =
     rotZ.onChange =
     geometry.onChange = update;
-
 
 function update()
 {

@@ -19,6 +19,10 @@
             {
                 "type": 5,
                 "name": "JavaScript"
+            },
+            {
+                "type": 5,
+                "name": "Library"
             }
         ],
         "portsOut": [],
@@ -34,6 +38,10 @@
             {
                 "name": "JavaScript",
                 "text": "a valid javascript snippet"
+            },
+            {
+                "name": "Library",
+                "text": "url to a library (can also be uploaded to cables) - be aware that you are completely on your own here, no support (keep CORS in mind, though)"
             }
         ]
     }

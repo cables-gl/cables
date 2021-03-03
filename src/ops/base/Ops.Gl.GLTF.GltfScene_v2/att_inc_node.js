@@ -16,6 +16,7 @@ const gltfNode = class
         this._node = node;
         this._gltf = gltf;
         this.absMat = mat4.create();
+        this.addTranslate=null;
 
         this.updateMatrix();
     }
@@ -161,6 +162,9 @@ const gltfNode = class
 
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
+
+        if(this.addTranslate)mat4.translate(cgl.mMatrix,cgl.mMatrix,this.addTranslate);
+
         mat4.copy(this.absMat, cgl.mMatrix);
     }
 

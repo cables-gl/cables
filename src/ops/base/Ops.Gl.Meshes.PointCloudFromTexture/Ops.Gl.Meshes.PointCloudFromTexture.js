@@ -1,13 +1,14 @@
 const
     render = op.inTrigger("render"),
     inNum = op.inInt("Num Points", 10000),
-    inTex = op.inTexture("Texture"),
+    inTex = op.inTexture("Texture", null, "texture"),
     // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
     trigger = op.outTrigger("Trigger");
 
 const cgl = op.patch.cgl;
 // let inTexUniform = null;
 let mesh = null;
+let numVerts = 0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
@@ -37,11 +38,12 @@ function updateDefines()
 function doRender()
 {
     mod.bind();
+    if (!inTex.get() || !inTex.get().tex) return;
     if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
 
     mod.setUniformValue("MOD_texSize", inTex.get().width);
 
-    if (mesh)mesh.render(cgl.getShader());
+    if (numVerts > 0 && inNum.get() > 0 && mesh)mesh.render(cgl.getShader());
 
     trigger.trigger();
     mod.unbind();
@@ -58,9 +60,12 @@ function setupMesh()
     geom.setPointVertices(verts);
     geom.setTexCoords(texCoords);
     geom.verticesIndices = [];
+    numVerts = verts.length / 3;
 
     if (mesh)mesh.dispose();
-    mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
+
+    if (numVerts > 0)
+        mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
 
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);

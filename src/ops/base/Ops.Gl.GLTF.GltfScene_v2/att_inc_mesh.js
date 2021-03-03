@@ -113,7 +113,15 @@ var gltfMesh=class
 
         if(!this.mesh)
         {
-            this.mesh=new CGL.Mesh(cgl,this.geom);
+            let g=this.geom;
+            if(this.geom.vertices.length/3>64000)
+            {
+                g=this.geom.copy();
+                g.unIndex();
+            }
+
+            this.mesh=new CGL.Mesh(cgl,g);
+
         }
         else
         {

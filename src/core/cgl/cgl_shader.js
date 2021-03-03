@@ -497,6 +497,7 @@ Shader.prototype.compile = function ()
         else
         {
             let count = 0;
+            drawBufferStr += "#define MULTI_COLORTARGETS".endl();
             drawBufferStr += "vec4 outColor;".endl();
 
             for (let i = 0; i < this._drawBuffers.length; i++)
@@ -1080,8 +1081,21 @@ Shader.prototype.dispose = function ()
 
 Shader.prototype.setDrawBuffers = function (arr)
 {
-    this._drawBuffers = arr;
-    this._needsRecompile = true;
+    if (this._drawBuffers != arr || this._drawBuffers.length !== arr.length)
+    {
+        this._drawBuffers = arr;
+        this._needsRecompile = true;
+        return;
+    }
+    for (let i = 0; i < arr; i++)
+    {
+        if (arr[i] !== this._drawBuffers[i])
+        {
+            this._drawBuffers = arr;
+            this._needsRecompile = true;
+            return;
+        }
+    }
 };
 
 Shader.prototype.getUniforms = function ()
