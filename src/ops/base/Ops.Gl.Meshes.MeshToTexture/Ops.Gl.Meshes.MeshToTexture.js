@@ -15,12 +15,11 @@ const
 
 op.setPortGroup("Texture settings", [tfilter, twrap]);
 
-let numTextures = 1;
+let numTextures = 2;
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
 
-let lastShader = null;
 let shader = null;
 
 inWidth.onChange =
@@ -37,7 +36,7 @@ let mesh = null;
 
 updateUI();
 
-const drawBuffArr = [];
+const drawBuffArr = [true, true];
 
 const vertModTitle = "vert_" + op.name;
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -52,7 +51,7 @@ mod.addModule({
     "title": op.name,
     "name": "MODULE_COLOR",
     "srcHeadFrag": "IN vec3 MOD_pos;",
-    "srcBodyFrag": "col.rgb=MOD_pos;col.a=1.0;"
+    "srcBodyFrag": attachments.fragpos_frag
 });
 
 mod.addUniformVert("f", "MOD_texSize", inWidth);
@@ -90,27 +89,17 @@ function initFbLater()
     warning();
 }
 
-function resetShader()
-{
-    if (shader) shader.dispose();
-    lastShader = null;
-    shader = null;
-}
+// drawBuffArr.length = 0;
+// for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
 
 function initFb()
 {
     needInit = false;
     if (fb)fb.delete();
 
-    const oldLen = drawBuffArr.length;
-    numTextures = parseInt(inNumTex.get());
-    drawBuffArr.length = 0;
-    for (let i = 0; i < numTextures; i++)drawBuffArr[i] = true;
-
-    if (oldLen != drawBuffArr.length)
-    {
-        resetShader();
-    }
+    console.log("initfb");
+    // const oldLen = drawBuffArr.length;
+    // numTextures = parseInt(inNumTex.get());
 
     fb = null;
 
@@ -176,17 +165,17 @@ exec.onTriggered = function ()
 
     mat4.ortho(
         cgl.pMatrix,
-        0,
-        inWidth.get(),
-        0,
-        inWidth.get(),
-        -1.001,
-        100
-    );
+        0, inWidth.get(),
+        0, inWidth.get(),
+        -1.00, 100);
 
     mod.bind();
 
-    if (mesh)mesh.render(cgl.getShader());
+    if (mesh)
+    {
+        cgl.getShader().setDrawBuffers(drawBuffArr);
+        mesh.render(cgl.getShader());
+    }
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
@@ -197,8 +186,8 @@ exec.onTriggered = function ()
     {
         outTex.set(fb.getTextureColorNum(0));
         outTex2.set(fb.getTextureColorNum(1));
-        outTex3.set(fb.getTextureColorNum(2));
-        outTex4.set(fb.getTextureColorNum(3));
+        // outTex3.set(fb.getTextureColorNum(2));
+        // outTex4.set(fb.getTextureColorNum(3));
     }
     else outTex.set(fb.getTextureColor());
 

@@ -1,8 +1,9 @@
 const
     exe = op.inTrigger("exe"),
-    geom = op.inObject("geom"),
+    geom = op.inObject("Geometry", null, "geometry"),
     inNum = op.inInt("Num Instances", 1000),
-    inTex = op.inTexture("Position Texture"),
+    inTex = op.inTexture("Position Texture", null, "texture"),
+    inTex2 = op.inTexture("Rotation Texture", null, "texture"),
     inScale = op.inValue("Scale", 1),
 
     outTrigger = op.outTrigger("Trigger Out"),
@@ -42,7 +43,8 @@ mod.addModule({
 });
 
 mod.addUniformVert("f", "MOD_scale", inScale);
-mod.addUniformVert("t", "MOD_tex");
+mod.addUniformVert("t", "MOD_texTrans");
+mod.addUniformVert("t", "MOD_texRot");
 mod.addUniformVert("f", "MOD_texSize", 0);
 
 // inBlendMode.onChange = updateDefines;
@@ -119,7 +121,8 @@ function doRender()
     if (recalc) setupArray();
 
     if (!inTex.get()) return;
-    if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
+    if (inTex.get())mod.pushTexture("MOD_texTrans", inTex.get().tex);
+    if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
 
     mod.bind();
     mod.setUniformValue("MOD_texSize", inTex.get().width);

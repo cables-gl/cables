@@ -6,53 +6,54 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Geometry"
+                "type": 2,
+                "name": "Geometry",
+                "objType": "geometry"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Indexed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Faces",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vertices",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Normals",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "TexCoords",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Tangents",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "BiTangents",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "VertexColors",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Other Attributes",
                 "subType": "number"
             }

@@ -15,7 +15,7 @@ const
     sideFront = op.inValueBool("Front", true),
     sideBack = op.inValueBool("Back", true),
     trigger = op.outTrigger("Next"),
-    geomOut = op.outObject("geometry");
+    geomOut = op.outObject("geometry", null, "geometry");
 
 const cgl = op.patch.cgl;
 op.toWorkPortsNeedToBeLinked(render);

@@ -6,59 +6,60 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Translate Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Z",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Result"
+                "type": 2,
+                "name": "Result",
+                "objType": "geometry"
             }
         ],
         "name": "Ops.Gl.Geometry.TransformGeometry"

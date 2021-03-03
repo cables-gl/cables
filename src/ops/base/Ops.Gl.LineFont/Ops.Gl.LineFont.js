@@ -576,7 +576,7 @@ for (let i = 0; i < characters.length; i++)
             count++;
         }
 
-        let geom = new CGL.Geometry();
+        let geom = new CGL.Geometry(op.name);
         geom.vertices = vertices;
         geom.verticesIndices = indices;
         let mesh = new CGL.Mesh(op.patch.cgl, geom);

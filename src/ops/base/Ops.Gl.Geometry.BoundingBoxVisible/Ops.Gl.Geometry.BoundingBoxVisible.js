@@ -41,7 +41,7 @@ function buildMesh()
 {
     const bb = inBB.get();
     if (!bb) return;
-    geom = new CGL.Geometry();
+    geom = new CGL.Geometry(op.name);
     geom.vertices =
     [
         bb._max[0], bb._max[1], bb._max[2],

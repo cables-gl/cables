@@ -6,7 +6,7 @@ const
     meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
 
-    texture = op.inTexture("Texture"),
+    texture = op.inTexture("Texture", null, "texture"),
     channel = op.inSwitch("Channel", ["Luminance", "R", "G", "B", "A", "RGB"], "Luminance"),
     flip = op.inSwitch("Flip", ["None", "X", "Y", "XY"], "None"),
     range = op.inSwitch("Range", ["0-1", "1-0", "Normalized"], "0-1"),

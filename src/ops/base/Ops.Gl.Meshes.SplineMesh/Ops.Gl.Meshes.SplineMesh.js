@@ -70,7 +70,7 @@ let index = 0;
 function linesToGeom(points, options)
 {
     if (!geom)
-        geom = new CGL.Geometry();
+        geom = new CGL.Geometry("splinemesh");
 
     let i = 0;
 
