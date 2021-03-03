@@ -13,7 +13,6 @@ const Q_MAX = 1000;
 const GAIN_MIN = -40;
 const GAIN_MAX = 40;
 
-const biquadFilter = audioContext.createBiquadFilter();
 const filterNode = audioContext.createBiquadFilter();
 
 const inAudio = op.inObject("Audio In");
@@ -59,7 +58,7 @@ function updateFrequencyResponse()
 
         if (oldLength)
         {
-            biquadFilter.getFrequencyResponse(frequencyArray, phaseResponseArray, magnitudeResponseArray);
+            filterNode.getFrequencyResponse(frequencyArray, phaseResponseArray, magnitudeResponseArray);
 
             outMagnitudeResponseArray.set(null);
             outMagnitudeResponseArray.set(magnitudeResponseArray);
