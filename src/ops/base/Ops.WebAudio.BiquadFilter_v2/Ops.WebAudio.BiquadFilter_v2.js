@@ -44,6 +44,7 @@ let magnitudeResponseArray = null;
 function updateFrequencyResponse()
 {
     const frequencies = inFrequencyArray.get();
+
     if (!frequencies) return;
 
     if (inAudio.get())
