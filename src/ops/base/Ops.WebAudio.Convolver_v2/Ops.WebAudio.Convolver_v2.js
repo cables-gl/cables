@@ -229,3 +229,13 @@ normalize.onChange = function ()
 {
     convolver.normalize = normalize.get();
 };
+
+op.onDelete = () =>
+{
+    wetNode.disconnect();
+    dryNode.disconnect();
+    inputNode.disconnect();
+    predelayNode.disconnect();
+    convolverGain.disconnect();
+    convolver.disconnect();
+};
