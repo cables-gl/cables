@@ -272,3 +272,18 @@ inAudio.onChange = function ()
     oldAudioIn = inAudio.get();
     outAudio.set(highFilterNodes[SLOPES.length - 1]);
 };
+
+op.onDelete = () =>
+{
+    lowFilterNodes.forEach((node, index) =>
+    {
+        // if (index < SLOPES.length - 1)
+        node.disconnect();
+        // else node.connect(highFilterNodes[0]);
+    });
+
+    highFilterNodes.forEach((node, index) =>
+    {
+        if (index < SLOPES.length - 1) node.disconnect();
+    });
+};
