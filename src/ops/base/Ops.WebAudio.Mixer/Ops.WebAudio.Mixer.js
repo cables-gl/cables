@@ -144,3 +144,11 @@ audioIns.forEach((port, index) =>
 });
 
 inMasterGain.onChange = () => gain.gain.linearRampToValueAtTime((inMasterGain.get() || 0), audioCtx.currentTime + 0.01);
+
+op.onDelete = () =>
+{
+    for (let i = 0; i < audioInPans.length; i += 1)
+    {
+        audioInPans[i].panNode.disconnect();
+    }
+};
