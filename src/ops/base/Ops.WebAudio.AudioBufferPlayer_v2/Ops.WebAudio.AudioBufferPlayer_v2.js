@@ -25,7 +25,7 @@ let hasEnded = false;
 let pausedAt = null;
 let startedAt = null;
 
-const gainNode = audioCtx.createGain();
+let gainNode = audioCtx.createGain();
 
 if (!audioBufferPort.isLinked())
 {
@@ -101,7 +101,17 @@ audioBufferPort.onChange = function ()
             setTimeout(function ()
             {
                 if (isPlaying) source.stop();
+                source.disconnect();
+                source = null;
             }, 30);
+        }
+        else
+        {
+            if (source)
+            {
+                source.disconnect();
+                source = null;
+            }
         }
     }
 };
@@ -203,7 +213,7 @@ function createAudioBufferSource()
 
     source.onended = onPlaybackEnded;
     source.loop = loopPort.get();
-
+    if (!gainNode) gainNode = audioCtx.createGain();
     source.connect(gainNode);
 
     setPlaybackRate();
@@ -275,3 +285,30 @@ function onPlaybackEnded()
 
     createAudioBufferSource(); // we can only play back once, so we need to create a new one
 }
+
+op.onDelete = () =>
+{
+    if (source)
+    {
+        source.disconnect();
+        source = null;
+    }
+};
+
+audioOutPort.onLinkChanged = () =>
+{
+    if (!audioOutPort.isLinked())
+    {
+        if (source) source.disconnect();
+        return;
+    }
+
+    if (audioBufferPort.isLinked())
+    {
+        if (!source) createAudioBufferSource();
+        else
+        {
+            source.connect(gainNode);
+        }
+    }
+};
