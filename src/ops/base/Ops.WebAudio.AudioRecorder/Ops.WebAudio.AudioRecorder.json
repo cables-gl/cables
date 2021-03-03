@@ -1,1 +1,101 @@
-{"id":"b4d46521-a8f8-4d54-abdb-98f1bfb80edd","changelog":[{"message":"created op","author":"simod","date":1614686486102},{"message":"Ops.User.simod.AudioRecorder renamed to Ops.WebAudio.AudioRecorder","author":"simod","date":1614687911878}],"authorName":"simod","created":1614686502999,"layout":{"portsIn":[{"type":2,"name":"Audio In"},{"type":1,"name":"Start Recording","group":"Recording"},{"type":1,"name":"Stop Recording","group":"Recording"},{"type":0,"name":"Input Gain","group":"Recording","subType":"number"},{"type":1,"name":"Start Playback","group":"Playback"},{"type":1,"name":"Stop Playback","group":"Playback"},{"type":1,"name":"Clear Buffer","group":"Playback"},{"type":0,"name":"Playback Gain","group":"Playback","subType":"number"},{"type":0,"name":"Loop Playback","group":"Playback","subType":"boolean"},{"type":1,"name":"Download .wav File"}],"portsOut":[{"type":2,"name":"Audio Out"},{"type":2,"name":"Recorded Audio Out"},{"type":0,"name":"Is Recording","subType":"boolean"},{"type":0,"name":"Is Playing Back","subType":"boolean"},{"type":5,"name":"State"},{"type":2,"name":"AudioBuffer Out"}],"name":"Ops.User.simod.AudioRecorder"}}
+{
+    "id": "b4d46521-a8f8-4d54-abdb-98f1bfb80edd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1614686486102
+        },
+        {
+            "message": "Ops.User.simod.AudioRecorder renamed to Ops.WebAudio.AudioRecorder",
+            "author": "simod",
+            "date": 1614687911878
+        }
+    ],
+    "authorName": "simod",
+    "created": 1614686502999,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio In"
+            },
+            {
+                "type": 1,
+                "name": "Start Recording",
+                "group": "Recording"
+            },
+            {
+                "type": 1,
+                "name": "Stop Recording",
+                "group": "Recording"
+            },
+            {
+                "type": 0,
+                "name": "Input Gain",
+                "group": "Recording",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Start Playback",
+                "group": "Playback"
+            },
+            {
+                "type": 1,
+                "name": "Stop Playback",
+                "group": "Playback"
+            },
+            {
+                "type": 1,
+                "name": "Clear Buffer",
+                "group": "Playback"
+            },
+            {
+                "type": 0,
+                "name": "Playback Gain",
+                "group": "Playback",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop Playback",
+                "group": "Playback",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Download .wav File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Out"
+            },
+            {
+                "type": 2,
+                "name": "Recorded Audio Out"
+            },
+            {
+                "type": 0,
+                "name": "Is Recording",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Playing Back",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "State"
+            },
+            {
+                "type": 2,
+                "name": "AudioBuffer Out"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioRecorder"
+    }
+}

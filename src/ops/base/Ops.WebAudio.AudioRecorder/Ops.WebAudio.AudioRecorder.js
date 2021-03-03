@@ -23,7 +23,7 @@ const outIsPlayingBack = op.outBool("Is Playing Back");
 const outState = op.outString("State");
 const outBuffer = op.outObject("AudioBuffer Out");
 
-inDownloadButton.setUiAttribs({ greyout: true });
+inDownloadButton.setUiAttribs({ "greyout": true });
 
 const inputGain = audioCtx.createGain();
 const outputGain = audioCtx.createGain();
@@ -31,11 +31,11 @@ const outputGain = audioCtx.createGain();
 let isIOS = !!navigator.MediaRecorder;
 
 const STATES = {
-    RECORDING: "recording",
-    PROCESSING: "processing",
-    READY: "ready",
-    PLAYING: "playing",
-    IDLING: "idling"
+    "RECORDING": "recording",
+    "PROCESSING": "processing",
+    "READY": "ready",
+    "PLAYING": "playing",
+    "IDLING": "idling"
 };
 
 let state = STATES.IDLING;
@@ -47,34 +47,46 @@ let mediaRecorder = null;
 let fileReader = null;
 let blob = null;
 
-if (isIOS) {
+if (isIOS)
+{
     mediaRecorder = new IOSMediaRecorder(inputStream.stream);
     fileReader = new FileReader();
-} else {
+}
+else
+{
     mediaRecorder = new MediaRecorder(inputStream.stream);
 }
 
-mediaRecorder.addEventListener('dataavailable', e => {
+mediaRecorder.addEventListener("dataavailable", (e) =>
+{
     blob = e.data;
-    if (blob) {
-        inDownloadButton.setUiAttribs({ greyout: !blob });
+    if (blob)
+    {
+        inDownloadButton.setUiAttribs({ "greyout": !blob });
     }
 
-    if (!isIOS) {
+    if (!isIOS)
+    {
         e.data.arrayBuffer() // its a blob
-            .then((buffer) => {
+            .then((buffer) =>
+            {
                 arrayBuffer = buffer;
-                audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
+                audioCtx.decodeAudioData(arrayBuffer, (buffer) =>
+                {
                     audioBuffer = buffer;
                     outBuffer.set(audioBuffer);
                     createAudioBufferSource();
-                })
+                });
             })
-            .catch(e => op.log(e));
-    } else {
-        fileReader.onload = () => {
+            .catch((e) => op.log(e));
+    }
+    else
+    {
+        fileReader.onload = () =>
+        {
             arrayBuffer = fileReader.result;
-            audioCtx.decodeAudioData(arrayBuffer, (buffer) => {
+            audioCtx.decodeAudioData(arrayBuffer, (buffer) =>
+            {
                 audioBuffer = buffer;
                 outBuffer.set(audioBuffer);
                 createAudioBufferSource();
@@ -84,28 +96,30 @@ mediaRecorder.addEventListener('dataavailable', e => {
     }
 });
 
-
 let oldAudioIn = null;
 
 let isRecording = false;
 let isPlayingBack = false;
 let bufferReady = false;
 
-inStartRecording.onTriggered = () => {
-    switch (state) {
-        case STATES.RECORDING:
-            return;
-        case STATES.PROCESSING:
-            return;
-        case STATES.PLAYING:
-            return;
-        case STATES.READY:
-            break;
-        case STATES.IDLING:
-            break;
+inStartRecording.onTriggered = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        return;
+    case STATES.PROCESSING:
+        return;
+    case STATES.PLAYING:
+        return;
+    case STATES.READY:
+        break;
+    case STATES.IDLING:
+        break;
     }
 
-    if (!inAudio.get()) {
+    if (!inAudio.get())
+    {
         op.log("start rec abort");
         op.setUiError("noAudioInput", "No audio input is connected. Recording aborted.", 2);
         state = STATES.IDLING;
@@ -120,20 +134,22 @@ inStartRecording.onTriggered = () => {
     isRecording = true;
     outIsRecording.set(isRecording);
     outState.set(state);
-}
+};
 
-inStopRecording.onTriggered = () => {
-    switch (state) {
-        case STATES.RECORDING:
-            break;
-        case STATES.PROCESSING:
-            return;
-        case STATES.PLAYING:
-            return;
-        case STATES.READY:
-            return;
-        case STATES.IDLING:
-            break;
+inStopRecording.onTriggered = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        break;
+    case STATES.PROCESSING:
+        return;
+    case STATES.PLAYING:
+        return;
+    case STATES.READY:
+        return;
+    case STATES.IDLING:
+        break;
     }
 
     op.setUiError("recording", null);
@@ -142,25 +158,26 @@ inStopRecording.onTriggered = () => {
     outState.set(state);
 
     mediaRecorder.stop();
+    outIsRecording.set(isRecording);
     op.setUiError("stopRecording", "Recording stopped. Preparing...", 0);
+};
 
-}
-
-inStartPlayback.onTriggered = () => {
-    switch (state) {
-        case STATES.RECORDING:
-            break;
-        case STATES.PROCESSING:
-            return;
-        case STATES.PLAYING:
-            return;
-        case STATES.READY:
-            break;
-        case STATES.IDLING:
-            if (loopSource) break;
-            else return;
+inStartPlayback.onTriggered = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        break;
+    case STATES.PROCESSING:
+        return;
+    case STATES.PLAYING:
+        return;
+    case STATES.READY:
+        break;
+    case STATES.IDLING:
+        if (loopSource) break;
+        else return;
     }
-
 
     op.setUiError("readyPlayback", null);
     loopSource.start();
@@ -169,20 +186,22 @@ inStartPlayback.onTriggered = () => {
     outState.set(state);
     outIsPlayingBack.set(isPlayingBack);
     op.setUiError("playingLoop", "Loop is playing...", 0);
-}
+};
 
-inStopPlayback.onTriggered = () => {
-    switch (state) {
-        case STATES.RECORDING:
-            break;
-        case STATES.PROCESSING:
-            return;
-        case STATES.PLAYING:
-            break;
-        case STATES.READY:
-            return;
-        case STATES.IDLING:
-            return;
+inStopPlayback.onTriggered = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        break;
+    case STATES.PROCESSING:
+        return;
+    case STATES.PLAYING:
+        break;
+    case STATES.READY:
+        return;
+    case STATES.IDLING:
+        return;
     }
 
     op.setUiError("playingLoop", null);
@@ -192,15 +211,21 @@ inStopPlayback.onTriggered = () => {
     state = STATES.IDLING;
     outState.set(state);
     createAudioBufferSource();
-}
+};
 
-inPlaybackGain.onChange = () => {
+inPlaybackGain.onChange = () =>
+{
     outputGain.gain.linearRampToValueAtTime(inPlaybackGain.get(), audioCtx.currentTime + 0.01);
-}
+};
 
 let arrayBuffer = null;
 let audioBuffer = null;
 let loopSource = null;
+
+inLoop.onChange = () =>
+{
+    if (loopSource) loopSource.loop = inLoop.get();
+};
 
 function createAudioBufferSource()
 {
@@ -214,10 +239,11 @@ function createAudioBufferSource()
 
     if (audioBuffer) loopSource.buffer = audioBuffer;
 
-    loopSource.onended = () => {
+    loopSource.onended = () =>
+    {
         op.log("playback ended, recreating source");
         createAudioBufferSource();
-    }
+    };
     loopSource.loop = inLoop.get();
 
     loopSource.connect(outputGain);
@@ -228,23 +254,26 @@ function createAudioBufferSource()
     op.setUiError("stopRecording", null);
 }
 
-inClearBuffer.onTriggered = () => {
-    switch (state) {
-        case STATES.RECORDING:
-            return;
-        case STATES.PROCESSING:
-            return;
-        case STATES.PLAYING:
-            break;
-        case STATES.READY:
-            break;
-        case STATES.IDLING:
-            break;
+inClearBuffer.onTriggered = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        return;
+    case STATES.PROCESSING:
+        return;
+    case STATES.PLAYING:
+        break;
+    case STATES.READY:
+        break;
+    case STATES.IDLING:
+        break;
     }
 
     if (!audioBuffer) return;
 
-    if (isPlayingBack) {
+    if (isPlayingBack)
+    {
         loopSource.stop();
         isPlayingBack = false;
         outIsPlayingBack.set(isPlayingBack);
@@ -252,13 +281,14 @@ inClearBuffer.onTriggered = () => {
 
     audioBuffer = null;
     blob = null;
-    inDownloadButton.setUiAttribs({ greyout: true });
+    inDownloadButton.setUiAttribs({ "greyout": true });
 
     state = STATES.IDLING;
     outState.set(state);
-}
+};
 
-inDownloadButton.onTriggered = () => {
+inDownloadButton.onTriggered = () =>
+{
     if (!blob) return;
 
     const anchor = document.createElement("a");
@@ -270,11 +300,14 @@ inDownloadButton.onTriggered = () => {
     {
         anchor.click();
     }, 100);
-}
+};
 
-inAudio.onLinkChanged = () => {
-    if (!inAudio.isLinked()) {
-    switch (state) {
+inAudio.onLinkChanged = () =>
+{
+    if (!inAudio.isLinked())
+    {
+        switch (state)
+        {
         case STATES.RECORDING:
             break;
         case STATES.PROCESSING:
@@ -285,7 +318,7 @@ inAudio.onLinkChanged = () => {
             return;
         case STATES.IDLING:
             return;
-    }
+        }
 
         mediaRecorder.stop();
         if (isIOS) mediaRecorder.terminateWorker();
@@ -294,33 +327,35 @@ inAudio.onLinkChanged = () => {
     }
 };
 
-op.onDelete = () => {
-
-    switch (state) {
-        case STATES.RECORDING:
-            mediaRecorder.stop();
-            break;
-        case STATES.PROCESSING:
-            break;
-        case STATES.PLAYING:
-            break;
-        case STATES.READY:
-            break;
-        case STATES.IDLING:
-            break;
+op.onDelete = () =>
+{
+    switch (state)
+    {
+    case STATES.RECORDING:
+        mediaRecorder.stop();
+        break;
+    case STATES.PROCESSING:
+        break;
+    case STATES.PLAYING:
+        break;
+    case STATES.READY:
+        break;
+    case STATES.IDLING:
+        break;
     }
     if (isIOS) mediaRecorder.terminateWorker();
+};
 
-}
-
-inAudio.onChange = () => {
+inAudio.onChange = () =>
+{
     if (!inAudio.get())
     {
         if (oldAudioIn)
         {
             try
             {
-                if (oldAudioIn.disconnect) {
+                if (oldAudioIn.disconnect)
+                {
                     oldAudioIn.disconnect(inputGain);
                     oldAudioIn.disconnect(inputStream);
                 }
@@ -347,4 +382,12 @@ inAudio.onChange = () => {
     }
 
     oldAudioIn = inAudio.get();
-}
+};
+
+op.onDelete = () =>
+{
+    if (loopSource)
+    {
+        loopSource.disconnect();
+    }
+};
