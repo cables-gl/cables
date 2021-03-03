@@ -12,7 +12,6 @@ let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
 let isIOS = false;
 let panNode = null;
-
 if (audioContext.createStereoPanner)
 {
     panNode = audioContext.createStereoPanner();
@@ -24,11 +23,8 @@ else
     isIOS = true;
 }
 
-const gainNode = audioContext.createGain();
-
 function updateGain()
 {
-    // gainNode.gain.value = parseFloat( gain.get() )||0;
     const panning = clamp(pan.get(), -1, 1);
 
     if (!isIOS) panNode.pan.setValueAtTime(panning, audioContext.currentTime);
@@ -49,13 +45,18 @@ audioIn.onChange = function ()
         {
             try
             {
-                if (oldAudioIn.disconnect) oldAudioIn.disconnect(panNode);
+                if (oldAudioIn.disconnect)
+                {
+                    oldAudioIn.disconnect(panNode);
+                }
             }
             catch (e)
             {
                 op.log(e);
             }
         }
+
+        audioOut.set(null);
     }
     else
     {
@@ -63,6 +64,7 @@ audioIn.onChange = function ()
         {
             op.setUiError("audioCtx", null);
             audioIn.val.connect(panNode);
+            audioOut.set(panNode);
         }
         else
         {
@@ -71,5 +73,3 @@ audioIn.onChange = function ()
     }
     oldAudioIn = audioIn.get();
 };
-
-audioOut.set(panNode);
