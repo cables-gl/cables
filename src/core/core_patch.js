@@ -1036,7 +1036,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
 Patch.prototype.profile = function (enable)
 {
-    this.profiler = new Profiler();
+    this.profiler = new Profiler(this);
     for (const i in this.ops)
     {
         this.ops[i].profile(enable);
