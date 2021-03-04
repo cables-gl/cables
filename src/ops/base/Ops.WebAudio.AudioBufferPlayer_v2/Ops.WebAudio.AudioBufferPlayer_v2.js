@@ -57,17 +57,6 @@ else
     op.setUiError("outputNotConnected", null);
 }
 
-audioOutPort.onLinkChanged = () =>
-{
-    if (!audioOutPort.isLinked())
-    {
-        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
-    }
-    else
-    {
-        op.setUiError("outputNotConnected", null);
-    }
-};
 // change listeners
 audioBufferPort.onChange = function ()
 {
@@ -117,7 +106,7 @@ audioBufferPort.onChange = function ()
 };
 playPort.onChange = function ()
 {
-    if (source)
+    if (source && source.buffer)
     {
         if (playPort.get())
         {
@@ -202,17 +191,17 @@ function createAudioBufferSource()
     {
         stop(0);
         source.disconnect(gainNode);
+        source = null;
     }
-    source = audioCtx.createBufferSource();
     const buffer = audioBufferPort.get();
 
-    if (buffer)
-    {
-        source.buffer = buffer;
-    }
+    if (!buffer) return;
 
+    source = audioCtx.createBufferSource();
+    source.buffer = buffer;
     source.onended = onPlaybackEnded;
     source.loop = loopPort.get();
+
     if (!gainNode) gainNode = audioCtx.createGain();
     source.connect(gainNode);
 
@@ -299,12 +288,14 @@ audioOutPort.onLinkChanged = () =>
 {
     if (!audioOutPort.isLinked())
     {
+        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
         if (source) source.disconnect();
         return;
     }
 
     if (audioBufferPort.isLinked())
     {
+        op.setUiError("outputNotConnected", null);
         if (!source) createAudioBufferSource();
         else
         {

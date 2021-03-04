@@ -134,7 +134,7 @@ impulseResponse.onChange = () =>
     else
     {
         impulseResponseLoaded = false;
-        op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
+        op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through the Audio Out output.", 1);
         op.setUiError("wavExt", null);
 
         convolver.buffer = null;
@@ -197,7 +197,7 @@ audioIn.onChange = function ()
 
         if (!impulseResponseLoaded)
         {
-            op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through.", 1);
+            op.setUiError("noIR", "No impulse response loaded. Original audio will be passed through the Audio Out output.", 1);
             audioOut.set(outputNode);
         }
         else
