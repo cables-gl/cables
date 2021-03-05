@@ -45,6 +45,8 @@ function asFlat()
     const data = spread.get();
     data.cells = data.cells || [];
 
+    if (!data.cols) return;
+
     const arr = [];
     arr.length = data.cells.length * data.cols || 1;
     let lastRow = 0;
@@ -60,7 +62,10 @@ function asFlat()
                 arr[x + (y * data.cols)] = v;
             }
     }
-    arr.length = (lastRow + 1) * data.cols;
+
+    let arrSize = (lastRow + 1) * data.cols;
+    console.log(arrSize, data.cols, lastRow);
+    arr.length = arrSize;
 
     return arr;
 }

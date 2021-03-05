@@ -148,7 +148,7 @@ Mesh.prototype._bufferArray = function (array, attr)
             }
 
             profileData.profileNonTypedAttrib++;
-            profileData.profileNonTypedAttribNames = this._geom.name + " " + attr.name;
+            profileData.profileNonTypedAttribNames = "(" + this._geom.name + ":" + attr.name + ")";
         }
     }
     else floatArray = array;

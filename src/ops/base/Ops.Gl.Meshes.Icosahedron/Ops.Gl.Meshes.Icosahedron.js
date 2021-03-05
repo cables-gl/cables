@@ -1,48 +1,48 @@
 // from: http://blog.andreaskahler.com/search/label/3D
 
-var render=op.inTrigger('render');
-var smooth=op.inValueBool("smooth");
-var trigger=op.outTrigger('trigger');
-var geomOut=op.outObject("geometry");
+let render = op.inTrigger("render");
+let smooth = op.inValueBool("smooth");
+let trigger = op.outTrigger("trigger");
+let geomOut = op.outObject("geometry");
 
-geomOut.ignoreValueSerialize=true;
+geomOut.ignoreValueSerialize = true;
 
-smooth.onChange=generate;
+smooth.onChange = generate;
 
-var mesh=null;
-var cgl=op.patch.cgl;
+let mesh = null;
+let cgl = op.patch.cgl;
 smooth.set(false);
 generate();
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(mesh) mesh.render(cgl.getShader());
+    if (mesh) mesh.render(cgl.getShader());
     trigger.trigger();
 };
 
 function generate()
 {
-    var t = Math.sqrt(5.0) / 2;
-    var tc=[];
-    var verts=[];
-    verts.push(-1,  t,  0);
-    verts.push( 1,  t,  0);
-    verts.push(-1, -t,  0);
-    verts.push( 1, -t,  0);
+    let t = Math.sqrt(5.0) / 2;
+    let tc = [];
+    let verts = [];
+    verts.push(-1, t, 0);
+    verts.push(1, t, 0);
+    verts.push(-1, -t, 0);
+    verts.push(1, -t, 0);
 
-    verts.push( 0, -1,  t);
-    verts.push( 0,  1,  t);
-    verts.push( 0, -1, -t);
-    verts.push( 0,  1, -t);
+    verts.push(0, -1, t);
+    verts.push(0, 1, t);
+    verts.push(0, -1, -t);
+    verts.push(0, 1, -t);
 
-    verts.push( t,  0, -1);
-    verts.push( t,  0,  1);
-    verts.push(-t,  0, -1);
-    verts.push(-t,  0,  1);
+    verts.push(t, 0, -1);
+    verts.push(t, 0, 1);
+    verts.push(-t, 0, -1);
+    verts.push(-t, 0, 1);
 
-    var geom=new CGL.Geometry();
+    let geom = new CGL.Geometry(op.name);
 
-    geom.vertices=verts;
+    geom.vertices = verts;
     geom.verticesIndices = [];
 
     // 5 faces around point 0
@@ -73,9 +73,9 @@ function generate()
     geom.verticesIndices.push(8, 6, 7);
     geom.verticesIndices.push(9, 8, 1);
 
-    geom.texCoords=tc;
+    geom.texCoords = tc;
 
     geom.calcNormals(smooth.get());
-    mesh=new CGL.Mesh(cgl,geom);
+    mesh = new CGL.Mesh(cgl, geom);
     geomOut.set(geom);
 }

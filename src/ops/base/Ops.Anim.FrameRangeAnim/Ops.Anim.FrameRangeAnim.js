@@ -1,98 +1,95 @@
-var inTime=op.inValue("Time");
-var inStr=op.inValueString("Frames");
-var inLoop=op.inValueBool("Loop");
-var inRewind=op.inTriggerButton("Rewind");
-var outValue=op.outValue("result time");
-var outArr=op.outArray("Expanded Frames");
-var finished=op.outValue("Finished",false);
-var finishedTrigger=op.outTrigger("Finished Trigger");
-var outAnimLength=op.outValue("Anim Length");
-var outProgress=op.outValue("Progress");
+let inTime = op.inValue("Time");
+let inStr = op.inValueString("Frames");
+let inLoop = op.inValueBool("Loop");
+let inRewind = op.inTriggerButton("Rewind");
+let outValue = op.outValue("result time");
+let outArr = op.outArray("Expanded Frames");
+let finished = op.outValue("Finished", false);
+let finishedTrigger = op.outTrigger("Finished Trigger");
+let outAnimLength = op.outValue("Anim Length");
+let outProgress = op.outValue("Progress");
 
-var anim=new CABLES.Anim();
-var FPS=30;
+let anim = new CABLES.Anim();
+let FPS = 30;
 
-var timeOffset=0;
-inStr.onChange=
-inLoop.onChange=parse;
+let timeOffset = 0;
+inStr.onChange =
+inLoop.onChange = parse;
 
-
-inRewind.onTriggered=function()
+inRewind.onTriggered = function ()
 {
-    timeOffset=inTime.get();
+    timeOffset = inTime.get();
 };
 
 function setupAnim(frames)
 {
     anim.clear();
-    anim.loop=inLoop.get();
+    anim.loop = inLoop.get();
 
-    for(var i=0;i<frames.length;i++)
+    for (let i = 0; i < frames.length; i++)
     {
-        anim.defaultEasing=CABLES.ANIM.EASING_ABSOLUTE;
-        if(i<frames.length-1)
+        anim.defaultEasing = CABLES.ANIM.EASING_ABSOLUTE;
+        if (i < frames.length - 1)
         {
-            if(frames[i+1]==frames[i]+1 || frames[i+1]==frames[i]-1)
-                anim.defaultEasing=CABLES.ANIM.EASING_LINEAR;
+            if (frames[i + 1] == frames[i] + 1 || frames[i + 1] == frames[i] - 1)
+                anim.defaultEasing = CABLES.ANIM.EASING_LINEAR;
         }
 
-        anim.setValue(i/FPS,frames[i]/FPS);
+        anim.setValue(i / FPS, frames[i] / FPS);
     }
 }
 
 function parse()
 {
-    var str=inStr.get()+'';
-    var frames=[];
-    var parts=str.split(',');
-    
-    for(var i=0;i<parts.length;i++)
+    let str = inStr.get() + "";
+    let frames = [];
+    let parts = str.split(",");
+
+    for (let i = 0; i < parts.length; i++)
     {
-        if(CABLES.UTILS.isNumeric(parts[i]))
+        if (CABLES.UTILS.isNumeric(parts[i]))
         {
-            frames.push(parseInt(parts[i],10));
+            frames.push(parseInt(parts[i], 10));
         }
-        else if(parts[i].indexOf('-')>-1)
+        else if (parts[i].indexOf("-") > -1)
         {
-            var r=parts[i].split('-');
-            r[0]=parseInt(r[0],10);
-            r[1]=parseInt(r[1],10);
+            let r = parts[i].split("-");
+            r[0] = parseInt(r[0], 10);
+            r[1] = parseInt(r[1], 10);
 
-            if(r[1]>r[0])
-                for(var j=r[0];j<=r[1];j++) frames.push(j);
+            if (r[1] > r[0])
+                for (var j = r[0]; j <= r[1]; j++) frames.push(j);
             else
-                for(var j=r[0];j>=r[1];j--) frames.push(j);
-
+                for (var j = r[0]; j >= r[1]; j--) frames.push(j);
         }
     }
-    
+
     outArr.set(null);
     outArr.set(frames);
-    outAnimLength.set(frames.length/FPS);
+    outAnimLength.set(frames.length / FPS);
     setupAnim(frames);
 }
 
-inTime.onChange=function()
+inTime.onChange = function ()
 {
-    var t=inTime.get()-timeOffset;
+    let t = inTime.get() - timeOffset;
     outValue.set(anim.getValue(t));
-    
-    if(anim.keys.length>1)
+
+    if (anim.keys.length > 1)
     {
-        var l=anim.keys[anim.keys.length-1].time-anim.keys[0].time;
-        var p=(t%l)/(l);
+        let l = anim.keys[anim.keys.length - 1].time - anim.keys[0].time;
+        let p = (t % l) / (l);
+        if (!inLoop.get()) p = Math.min(t / l, 1);
         outProgress.set(p);
-        
     }
-    
-    if(anim.hasEnded(t))
+
+    if (anim.hasEnded(t))
     {
-        if(!finished.get()) finishedTrigger.trigger();
+        if (!finished.get()) finishedTrigger.trigger();
         finished.set(true);
     }
     else
     {
         finished.set(false);
     }
-
 };

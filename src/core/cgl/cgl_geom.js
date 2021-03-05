@@ -44,7 +44,7 @@ import { BoundingBox } from "./cgl_boundingbox";
  */
 const Geometry = function (name)
 {
-    this.name = name;
+    this.name = name || "unknown";
     this.faceVertCount = 3;
     this._vertices = [];
     this.verticesIndices = [];
@@ -235,7 +235,7 @@ Geometry.prototype.merge = function (geom)
 Geometry.prototype.copy = function ()
 {
     let i = 0;
-    const geom = new Geometry();
+    const geom = new Geometry(this.name + " copy");
     geom.faceVertCount = this.faceVertCount;
 
     // geom.vertices.length=this.vertices.length;
@@ -729,16 +729,17 @@ Geometry.buildFromFaces = function (arr)
         verticesIndices.push(parseInt(face[2], 10));
     }
 
-    const geom = new Geometry();
+    const geom = new Geometry(this.name);
     geom.vertices = vertices;
     geom.verticesIndices = verticesIndices;
 
     return geom;
 };
 
+// TODO: not needed anymore ?!
 Geometry.json2geom = function (jsonMesh)
 {
-    const geom = new Geometry();
+    const geom = new Geometry("jsonMeshGeom");
     geom.verticesIndices = [];
 
     geom.vertices = jsonMesh.vertices || [];

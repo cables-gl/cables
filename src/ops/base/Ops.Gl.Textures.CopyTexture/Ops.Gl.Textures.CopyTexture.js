@@ -179,8 +179,6 @@ function doRender()
 
     updateResolution();
 
-    console.log("update copytex!");
-
     lastTex = inTexture.get();
     const oldEffect = cgl.currentTextureEffect;
     cgl.currentTextureEffect = effect;

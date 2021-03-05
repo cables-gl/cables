@@ -67,13 +67,13 @@ function loadLibAndExecute()
         };
         document.body.appendChild(scriptTag);
     }
-    else
+    if (inJS.get() && inJS.get() !== defaultCode)
     {
         execute();
     }
 }
 
-op.onLoadedValueSet = function ()
+op.onCreate = function ()
 {
     loadLibAndExecute();
     inLib.onChange = inJS.onChange = loadLibAndExecute;

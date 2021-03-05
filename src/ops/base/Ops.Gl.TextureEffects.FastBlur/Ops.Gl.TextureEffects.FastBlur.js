@@ -2,20 +2,24 @@ const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
     amount = op.inFloat("amount", 3),
-    clamp = op.inBool("Clamp", false);
+    clamp = op.inBool("Clamp", false),
+    maskInvert = op.inBool("Mask Invert", false),
+    mask = op.inTexture("Mask");
 
 const cgl = op.patch.cgl;
-
 const shader = new CGL.Shader(cgl);
 
 shader.setSource(attachments.blur_vert, attachments.blur_frag);
-const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-const uniDirX = new CGL.Uniform(shader, "f", "dirX", 0);
-const uniDirY = new CGL.Uniform(shader, "f", "dirY", 0);
-const uniWidth = new CGL.Uniform(shader, "f", "width", 0);
-const uniHeight = new CGL.Uniform(shader, "f", "height", 0);
-const uniPass = new CGL.Uniform(shader, "f", "pass", 0);
-const uniAmount = new CGL.Uniform(shader, "f", "amount", amount.get());
+const
+    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+    uniDirX = new CGL.Uniform(shader, "f", "dirX", 0),
+    uniDirY = new CGL.Uniform(shader, "f", "dirY", 0),
+    uniWidth = new CGL.Uniform(shader, "f", "width", 0),
+    uniHeight = new CGL.Uniform(shader, "f", "height", 0),
+    uniPass = new CGL.Uniform(shader, "f", "pass", 0),
+    uniAmount = new CGL.Uniform(shader, "f", "amount", amount.get()),
+    textureAlpha = new CGL.Uniform(shader, "t", "texMask", 1);
+
 amount.onChange = () => { uniAmount.setValue(amount.get()); };
 
 const direction = op.inDropDown("direction", ["both", "vertical", "horizontal"]);
@@ -30,6 +34,13 @@ direction.onChange = () =>
 
 clamp.onChange = () => { shader.toggleDefine("CLAMP", clamp.get()); };
 
+maskInvert.onChange =
+mask.onChange = () =>
+{
+    shader.toggleDefine("USE_MASK", mask.isLinked());
+    shader.toggleDefine("MASK_INVERT", maskInvert.get());
+};
+
 render.onTriggered = function ()
 {
     if (!CGL.TextureEffect.checkOpInEffect(op)) return;
@@ -37,6 +48,8 @@ render.onTriggered = function ()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
     const numPasses = amount.get();
+
+    if (mask.get())cgl.setTexture(1, mask.get().tex);
 
     for (let i = 0; i < numPasses; i++)
     {

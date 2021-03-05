@@ -14,8 +14,8 @@ inNum.onChange=inSpacing.onChange=function()
 
 function init()
 {
-    var geomStepsOne=new CGL.Geometry();
-    var geomX=new CGL.Geometry();
+    var geomStepsOne=new CGL.Geometry(op.name);
+    var geomX=new CGL.Geometry(op.name);
 
     var space=inSpacing.get();
     var num=Math.floor(inNum.get());

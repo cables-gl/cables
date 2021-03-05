@@ -23,6 +23,10 @@
             {
                 "type": 5,
                 "name": "Library"
+            },
+            {
+                "type": 1,
+                "name": "name"
             }
         ],
         "portsOut": [],
