@@ -7,7 +7,7 @@ let lastIdx = null;
 const indexPort = op.inValue("Index", 0);
 const valuePort = op.inValue("Value", 0);
 const defaultValuePort = op.inValue("Default Value", DEFAULT_VALUE_DEFAULT);
-const onlyOnePort = op.inBool("Only one port active", false);
+const onlyOnePort = op.inBool("Set inactive to default", false);
 
 // output
 const valuePorts = createOutPorts(DEFAULT_VALUE_DEFAULT);
@@ -19,7 +19,6 @@ defaultValuePort.onChange = setDefaultValues;
 onlyOnePort.onChange = onlyOnePortChange;
 
 setDefaultValues();
-
 
 // functions
 

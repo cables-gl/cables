@@ -5,14 +5,14 @@ const inWidth = op.inInt("Width", 640);
 const inHeight = op.inInt("Height", 480);
 const chartOpts = op.inObject("Chart Options");
 
-const themeSelect = op.inSwitch("Theme", ['default','light','dark'],'dark');
+const themeSelect = op.inSwitch("Theme", ["default", "light", "dark"], "dark");
 const customTheme = op.inObject("Custom theme obj");
 const extraOpts = op.inObject("Extra Options");
 const inStyle = op.inValueEditor("Style", "position:absolute;z-index:100;background:white;", "css");
 const inVisible = op.inValueBool("Visible", true);
 
 const outElement = op.outObject("DOM Element");
-const outChart = op.outObject("ECharts instance");
+const outChart = op.outObject("ECharts instance", null, "echartsInstance");
 const outThemeTrig = op.outTrigger("Theme changed");
 
 const DEFAULT_THEME = 0;
@@ -41,7 +41,8 @@ themeSelect.onChange = changeTheme;
 customTheme.onChange = changeTheme;
 
 // // Functions implementation
-function main() {
+function main()
+{
     appendChartDiv();
     updateStyle();
     initChart();
@@ -51,14 +52,17 @@ function main() {
     outThemeTrig.trigger();
 }
 
-function initChart() {
-    if (chart) {
+function initChart()
+{
+    if (chart)
+    {
         chart.dispose();
         chart = null;
     }
 
     let theme = customTheme.get();
-    if (!theme) {
+    if (!theme)
+    {
         theme = themeSelect.get();
     }
 
@@ -66,30 +70,38 @@ function initChart() {
     setChartOptions();
 }
 
-function changeTheme() {
+function changeTheme()
+{
     initChart();
     outChart.set(chart);
 
     outThemeTrig.trigger();
 }
 
-function appendChartDiv() {
+function appendChartDiv()
+{
     const p = inParent.get();
-    if (!p) {
+    if (!p)
+    {
         canvas.append(div);
-    } else {
+    }
+    else
+    {
         p.append(div);
     }
 }
 
-function setChartOptions() {
+function setChartOptions()
+{
     const opts = chartOpts.get();
-    if (chart && typeof opts === 'object' && opts !== 0 && opts !== null) {
+    if (chart && typeof opts === "object" && opts !== 0 && opts !== null)
+    {
         chart.setOption(opts);
     }
 }
 
-function resize() {
+function resize()
+{
     const w = Math.max(0, inWidth.get());
     const h = Math.max(0, inHeight.get());
 
@@ -97,53 +109,64 @@ function resize() {
     chart.resize(w, h);
 }
 
-function setCSSVisible(visible) {
-    if (!visible) {
+function setCSSVisible(visible)
+{
+    if (!visible)
+    {
         div.style.visibility = "hidden";
         prevDisplay = div.style.display || "block";
         div.style.display = "none";
     }
-    else {
+    else
+    {
         if (prevDisplay == "none") prevDisplay = "block";
         div.style.visibility = "visible";
         div.style.display = prevDisplay;
     }
 }
 
-function updateVisibility() {
+function updateVisibility()
+{
     setCSSVisible(inVisible.get());
 }
 
-function updateId() {
+function updateId()
+{
     div.id = inId.get();
 }
 
-function updateStyle() {
+function updateStyle()
+{
     const w = Math.max(0, inWidth.get());
     const h = Math.max(0, inHeight.get());
 
     let s = inStyle.get();
 
-    if (w > 0) {
-        s += "width:" + w + 'px;';
+    if (w > 0)
+    {
+        s += "width:" + w + "px;";
     }
-    if (h > 0) {
-        s += "height:" + h + 'px;';
+    if (h > 0)
+    {
+        s += "height:" + h + "px;";
     }
 
-    if (s != div.style) {
+    if (s != div.style)
+    {
         div.setAttribute("style", s);
         updateVisibility();
         outElement.set(null);
         outElement.set(div);
     }
 
-    if (!div.parentElement) {
+    if (!div.parentElement)
+    {
         canvas.appendChild(div);
     }
 }
 
-function removeElement() {
+function removeElement()
+{
     if (chart) chart.dispose();
     if (div) div.remove();
 }
