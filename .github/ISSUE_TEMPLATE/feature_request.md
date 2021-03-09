@@ -1,8 +1,9 @@
 ---
-name: feature request
-about: a new feature!
+name: Feature Request
+about: Create a report to help us improve
 title: ''
 labels: new
 assignees: ''
+
 
 ---

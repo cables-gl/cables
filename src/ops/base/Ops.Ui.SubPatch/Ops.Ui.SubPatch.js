@@ -125,6 +125,7 @@ function setupPorts()
         if (!op.getPortByName(ports[i].name))
         {
             const newPort = op.addInPort(new CABLES.Port(op, ports[i].name, ports[i].type));
+
             const patchInputOp = getSubPatchInputOp();
             const newPortInPatch = patchInputOp.addOutPort(new CABLES.Port(patchInputOp, ports[i].name, ports[i].type));
 
@@ -134,6 +135,11 @@ function setupPorts()
             {
                 newPort.setUiAttribs({ "title": ports[i].title });
                 newPortInPatch.setUiAttribs({ "title": ports[i].title });
+            }
+            if (ports[i].objType)
+            {
+                newPort.setUiAttribs({ "objType": ports[i].objType });
+                newPortInPatch.setUiAttribs({ "objType": ports[i].objType });
             }
             addPortListener(newPort, newPortInPatch);
         }
@@ -155,6 +161,11 @@ function setupPorts()
                 newPortOut.setUiAttribs({ "title": portsOut[i].title });
                 newPortOutPatch.setUiAttribs({ "title": portsOut[i].title });
             }
+            if (portsOut[i].objType)
+            {
+                newPortOut.setUiAttribs({ "objType": portsOut[i].objType });
+                newPortOutPatch.setUiAttribs({ "objType": portsOut[i].objType });
+            }
 
             // addPortListener(newPortOut,newPortOutPatch);
             addPortListener(newPortOutPatch, newPortOut);
@@ -174,7 +185,9 @@ op.dyn.onLinkChanged = function ()
 
         const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
 
-        data.ports.push({ "name": newName, "type": otherPort.type });
+        const o = { "name": newName, "type": otherPort.type };
+        if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
+        data.ports.push(o);
 
         setupPorts();
 
@@ -207,7 +220,10 @@ op.dynOut.onLinkChanged = function ()
         otherPort.removeLinkTo(op.dynOut);
         const newName = "out" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
 
-        data.portsOut.push({ "name": newName, "type": otherPort.type });
+        const o = { "name": newName, "type": otherPort.type };
+        if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
+
+        data.portsOut.push(o);
 
         setupPorts();
 
