@@ -19,7 +19,7 @@ IN float ps;
     IN float opacity;
 #endif
 #ifdef VERTEX_COLORS
-    IN vec4 vertexColor;
+    IN vec3 vertexColor;
 #endif
 
 void main()
@@ -80,6 +80,10 @@ void main()
         #endif
     #endif
 
+    #ifdef VERTEX_COLORS
+        col.rgb*=vertexColor;
+    #endif
+
     #ifdef HAS_TEXTURE_COLORIZE
         col*=colorize;
     #endif
@@ -97,12 +101,7 @@ void main()
     #endif
 
 
-    #ifdef VERTEX_COLORS
-        col.rgb = vertexColor.rgb;
-        col.a *= vertexColor.a;
-    #endif
-
-    if (col.a <= 0.0) discard;
+    if(col.a<=0.0)discard;
 
     outColor = col;
 }
