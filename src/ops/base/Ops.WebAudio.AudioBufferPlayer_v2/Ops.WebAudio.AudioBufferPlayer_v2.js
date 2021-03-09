@@ -15,17 +15,21 @@ const detunePort = op.inFloat("Detune", 0);
 op.setPortGroup("Playback Controls", [playPort, autoPlayPort, loopPort, inResetStart]);
 op.setPortGroup("Time Controls", [startTimePort, stopTimePort, offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
+
 // output ports
 const audioOutPort = op.outObject("Audio Out");
 const outPlaying = op.outBool("Is Playing", false);
+const outLoading = op.outBool("Loading", false);
+
 // vars
 let source = null;
 let isPlaying = false;
 let hasEnded = false;
 let pausedAt = null;
 let startedAt = null;
+let isLoading = false;
 
-let gainNode = audioCtx.createGain();
+const gainNode = audioCtx.createGain();
 
 if (!audioBufferPort.isLinked())
 {
@@ -57,6 +61,18 @@ else
     op.setUiError("outputNotConnected", null);
 }
 
+audioOutPort.onLinkChanged = () =>
+{
+    if (!audioOutPort.isLinked())
+    {
+        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
+    }
+    else
+    {
+        op.setUiError("outputNotConnected", null);
+    }
+};
+
 // change listeners
 audioBufferPort.onChange = function ()
 {
@@ -70,55 +86,50 @@ audioBufferPort.onChange = function ()
 
         op.setUiError("noAudioBuffer", null);
 
+        /* isLoading = true;
+        outLoading.set(isLoading); */
         createAudioBufferSource();
-
-        if (
-            (autoPlayPort.get() && audioBufferPort.get()) ||
-        (playPort.get() && audioBufferPort.get())
-        )
-        {
-            start(startTimePort.get(), offsetPort.get());
-        }
     }
     else
     {
         op.setUiError("noAudioBuffer", null);
+        if (isLoading)
+        {
+            isLoading = false;
+            outLoading.set(isLoading);
+        }
 
         if (isPlaying)
         {
             stop(0);
-            setTimeout(function ()
+            source.buffer = null;
+            source = null;
+            /* setTimeout(function ()
             {
                 if (isPlaying) source.stop();
-                if (source) source.disconnect();
-                source = null;
-            }, 30);
-        }
-        else
-        {
-            if (source)
-            {
-                source.disconnect();
-                source = null;
-            }
+            }, 30); */
         }
     }
 };
+
 playPort.onChange = function ()
 {
-    if (source && source.buffer)
+    if (!audioBufferPort.get()) return;
+
+    if (!source)
     {
-        if (playPort.get())
-        {
-            const startTime = startTimePort.get() || 0;
-            createAudioBufferSource();
-            start(startTime);
-        }
-        else
-        {
-            const stopTime = stopTimePort.get() || 0;
-            stop(stopTime);
-        }
+        if (!isLoading) createAudioBufferSource();
+    }
+
+    if (playPort.get())
+    {
+        const startTime = startTimePort.get() || 0;
+        start(startTime);
+    }
+    else
+    {
+        const stopTime = stopTimePort.get() || 0;
+        stop(stopTime);
     }
 };
 
@@ -134,16 +145,15 @@ detunePort.onChange = setDetune;
 
 function setDetune()
 {
-    if (source)
+    if (!source) return;
+
+    const detune = detunePort.get() || 0;
+    if (source.detune)
     {
-        const detune = detunePort.get() || 0;
-        if (source.detune)
-        {
-            source.detune.setValueAtTime(
-                detune,
-                audioCtx.currentTime
-            );
-        }
+        source.detune.setValueAtTime(
+            detune,
+            audioCtx.currentTime
+        );
     }
 }
 
@@ -151,35 +161,33 @@ playbackRatePort.onChange = setPlaybackRate;
 
 function setPlaybackRate()
 {
-    if (source)
+    if (!source) return;
+
+    const playbackRate = playbackRatePort.get() || 0;
+    if (playbackRate >= source.playbackRate.minValue && playbackRate <= source.playbackRate.maxValue)
     {
-        const playbackRate = playbackRatePort.get() || 0;
-        if (playbackRate >= source.playbackRate.minValue && playbackRate <= source.playbackRate.maxValue)
-        {
-            source.playbackRate.setValueAtTime(
-                playbackRate,
-                audioCtx.currentTime
-            );
-        }
+        source.playbackRate.setValueAtTime(
+            playbackRate,
+            audioCtx.currentTime
+        );
     }
 }
 
 let resetTriggered = false;
 inResetStart.onTriggered = function ()
 {
-    if (source)
+    if (!source) return;
+
+    if (playPort.get())
     {
-        if (playPort.get())
+        if (isPlaying)
         {
-            if (isPlaying)
-            {
-                stop(0);
-                resetTriggered = true;
-            }
-            else
-            {
-                start(0);
-            }
+            stop(0);
+            resetTriggered = true;
+        }
+        else
+        {
+            start(0);
         }
     }
 };
@@ -187,27 +195,50 @@ inResetStart.onTriggered = function ()
 // functions
 function createAudioBufferSource()
 {
+    if (isLoading) return;
+
+    isLoading = true;
+    outLoading.set(isLoading);
+
     if (source)
     {
-        stop(0);
-        source.disconnect(gainNode);
+        if (source.buffer)
+        {
+            stop(0);
+            source.disconnect(gainNode);
+            source.buffer = null;
+        }
+
         source = null;
     }
-    const buffer = audioBufferPort.get();
-
-    if (!buffer) return;
 
     source = audioCtx.createBufferSource();
+    const buffer = audioBufferPort.get();
+
+    if (!buffer)
+    {
+        isLoading = false;
+        outLoading.set(isLoading);
+        return;
+    }
+
     source.buffer = buffer;
     source.onended = onPlaybackEnded;
     source.loop = loopPort.get();
 
-    if (!gainNode) gainNode = audioCtx.createGain();
     source.connect(gainNode);
 
     setPlaybackRate();
     setDetune();
     audioOutPort.set(gainNode);
+
+    isLoading = false;
+    outLoading.set(isLoading);
+
+    if (playPort.get())
+    {
+        start(startTimePort.get(), offsetPort.get());
+    }
 
     if (resetTriggered)
     {
@@ -223,20 +254,26 @@ function start(time)
 {
     try
     {
-        if (offsetPort.get() > source.buffer.duration)
+        if (source)
         {
-            op.setUiError("offsetTooLong", "Your offset value is higher than the total time of your audio file. Please decrease the duration to be able to hear sound when playing back your buffer.", 1);
-        }
-        else
-        {
-            op.setUiError("offsetTooLong", null);
-        }
+            if (source.buffer)
+            {
+                if (offsetPort.get() > source.buffer.duration)
+                {
+                    op.setUiError("offsetTooLong", "Your offset value is higher than the total time of your audio file. Please decrease the duration to be able to hear sound when playing back your buffer.", 1);
+                }
+                else
+                {
+                    op.setUiError("offsetTooLong", null);
+                }
+            }
 
-        source.start(time, offsetPort.get()); // 0 = now
+            source.start(time, offsetPort.get()); // 0 = now
 
-        isPlaying = true;
-        hasEnded = false;
-        outPlaying.set(true);
+            isPlaying = true;
+            hasEnded = false;
+            outPlaying.set(true);
+        }
     }
     catch (e)
     {
@@ -271,35 +308,5 @@ function onPlaybackEnded()
     outPlaying.set(false);
     isPlaying = false;
     hasEnded = true;
-
     createAudioBufferSource(); // we can only play back once, so we need to create a new one
 }
-
-op.onDelete = () =>
-{
-    if (source)
-    {
-        source.disconnect();
-        source = null;
-    }
-};
-
-audioOutPort.onLinkChanged = () =>
-{
-    if (!audioOutPort.isLinked())
-    {
-        op.setUiError("outputNotConnected", "To be able to hear sound playing, you need to connect this op to an Output op.", 0);
-        if (source) source.disconnect();
-        return;
-    }
-
-    if (audioBufferPort.isLinked())
-    {
-        op.setUiError("outputNotConnected", null);
-        if (!source) createAudioBufferSource();
-        else
-        {
-            source.connect(gainNode);
-        }
-    }
-};

@@ -6,7 +6,11 @@ const
     sampleRatePort = op.outValue("Sample Rate", 0),
     lengthPort = op.outValue("Length", 0),
     durationPort = op.outValue("Duration", 0),
-    numberOfChannelsPort = op.outValue("Number of Channels", 0);
+    numberOfChannelsPort = op.outValue("Number of Channels", 0),
+    outLoading = op.outBool("isLoading", 0);
+
+let currentBuffer = null;
+let isLoading = false;
 
 if (!audioBufferPort.isLinked())
 {
@@ -31,6 +35,7 @@ audioBufferPort.onLinkChanged = () =>
 // change listeners
 inUrlPort.onChange = function ()
 {
+    if (isLoading) return;
     invalidateOutPorts();
 
     if (inUrlPort.get())
@@ -45,6 +50,8 @@ inUrlPort.onChange = function ()
         {
             op.setUiError("wavFormat", null);
         }
+        isLoading = true;
+        outLoading.set(isLoading);
         CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
     }
     else
@@ -57,6 +64,10 @@ inUrlPort.onChange = function ()
 
 function onLoadFinished(buffer)
 {
+    isLoading = false;
+    outLoading.set(isLoading);
+
+    currentBuffer = buffer;
     lengthPort.set(buffer.length);
     durationPort.set(buffer.duration);
     numberOfChannelsPort.set(buffer.numberOfChannels);
@@ -70,7 +81,10 @@ function onLoadFailed(e)
 {
     op.error("Error: Loading audio file failed: ", e);
     op.setUiError("failedLoading", "The audio file could not be loaded. Make sure the right file URL is used.", 2);
+    isLoading = false;
     invalidateOutPorts();
+    outLoading.set(isLoading);
+    currentBuffer = null;
 }
 
 function invalidateOutPorts()
@@ -79,6 +93,11 @@ function invalidateOutPorts()
     durationPort.set(0);
     numberOfChannelsPort.set(0);
     sampleRatePort.set(0);
-    audioBufferPort.set(null);
+
+    if (currentBuffer === null)
+    {
+        audioBufferPort.set(null);
+    }
+
     finishedLoadingPort.set(false);
 }

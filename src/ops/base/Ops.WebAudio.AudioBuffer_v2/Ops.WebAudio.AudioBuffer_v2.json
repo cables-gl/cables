@@ -45,6 +45,11 @@
                 "type": 0,
                 "name": "Number of Channels",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "isLoading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.AudioBuffer_v2"

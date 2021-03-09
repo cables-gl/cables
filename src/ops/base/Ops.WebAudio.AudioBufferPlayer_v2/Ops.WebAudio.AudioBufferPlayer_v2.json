@@ -71,6 +71,11 @@
                 "type": 0,
                 "name": "Is Playing",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.AudioBufferPlayer_v2"
