@@ -18,7 +18,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "audio in"
+                "name": "audio in",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
@@ -29,7 +30,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "audio out"
+                "name": "audio out",
+                "objType": "audioNode"
             }
         ],
         "name": "Ops.WebAudio.AudioPanner"
