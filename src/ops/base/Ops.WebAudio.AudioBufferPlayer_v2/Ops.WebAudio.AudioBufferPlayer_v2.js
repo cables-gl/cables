@@ -184,7 +184,7 @@ inResetStart.onTriggered = function ()
         }
         else
         {
-            start(0);
+            start(startTimePort.get());
         }
     }
 };
@@ -234,14 +234,14 @@ function createAudioBufferSource()
 
     if (resetTriggered)
     {
-        start(0);
+        start(startTimePort.get());
         resetTriggered = false;
         return;
     }
 
     if (playPort.get())
     {
-        if (!isPlaying) start(startTimePort.get(), offsetPort.get());
+        if (!isPlaying) start(startTimePort.get());
     }
 }
 
