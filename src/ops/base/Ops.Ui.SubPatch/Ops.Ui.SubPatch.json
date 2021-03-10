@@ -5,23 +5,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "4",
+                "type": 4,
                 "name": "create port"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "dataStr",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "patchId",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "4",
+                "type": 4,
                 "name": "create port out"
             }
         ],
