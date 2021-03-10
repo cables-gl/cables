@@ -34,7 +34,7 @@ const cgl = op.patch.cgl;
 
 // input
 const renderPort = op.inTrigger("Render");
-const audioBufferPort = op.inObject("Audio Buffer");
+const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const inWidth = op.inFloat("Width", 1);
 const inHeight = op.inFloat("Height", 0.5);
 const samplesPerPixelPort = op.inInt("Samples Per Pixel", 10000);
@@ -54,25 +54,10 @@ audioBufferPort.onChange = samplesPerPixelPort.onChange
             if (!renderPort.isLinked())
             {
                 const audioBuffer = audioBufferPort.get();
-                if (!(audioBuffer instanceof AudioBuffer))
-                {
-                    op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
-                    return;
-                }
-                else
-                {
-                    op.setUiError("wrongBufferType", null);
-                }
+                if (!(audioBuffer instanceof AudioBuffer)) return;
             }
         }
-        else
-        {
-            if (audioBufferPort.isLinked())
-            {
-                op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
-            }
-            else op.setUiError("wrongBufferType", null);
-        }
+
         updating = true;
     };
 
@@ -93,20 +78,11 @@ function extractPeaks()
     {
         op.setUiError("noBuffer", null);
 
-        if (!(audioBuffer instanceof AudioBuffer))
-        {
-            op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
-            return;
-        }
-        else
-        {
-            op.setUiError("wrongBufferType", null);
-        }
+        if (!(audioBuffer instanceof AudioBuffer)) return;
     }
     else
     {
         op.setUiError("noBuffer", "You need to connect the \"Audio Buffer\" input for this op to work!", 0);
-        op.setUiError("wrongBufferType", null);
     }
 
     if (audioBuffer)
