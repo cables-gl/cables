@@ -12,7 +12,7 @@ analyser.fftSize = 256;
 
 const FFT_BUFFER_SIZES = [32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
 
-const audioIn = op.inObject("Audio In");
+const audioIn = op.inObject("Audio In", null, "audioNode");
 const inFFTSize = op.inDropDown("FFT size", FFT_BUFFER_SIZES, 256);
 const inSmoothing = op.inFloatSlider("Smoothing", 0.3);
 
@@ -23,7 +23,7 @@ op.setPortGroup("Inputs", [inTrigger, audioIn]);
 op.setPortGroup("FFT Options", [inFFTSize, inSmoothing]);
 op.setPortGroup("Range (in dBFS)", [inRangeMin, inRangeMax]);
 const outTrigger = op.outTrigger("Trigger Out");
-const audioOut = op.outObject("Audio Out");
+const audioOut = op.outObject("Audio Out", null, "audioNode");
 const fftOut = op.outArray("FFT Array");
 const ampOut = op.outArray("Waveform Array");
 const frequencyOut = op.outArray("Frequencies by Index Array");
@@ -49,11 +49,6 @@ audioIn.onChange = () =>
         {
             audioNode.connect(analyser);
             audioOut.set(analyser);
-            op.setUiError("audioCtx", null);
-        }
-        else
-        {
-            op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
         }
     }
     else
@@ -63,8 +58,8 @@ audioIn.onChange = () =>
             if (oldAudioIn.disconnect) oldAudioIn.disconnect(analyser);
             audioOut.set(null);
         }
-        op.setUiError("audioCtx", null);
     }
+
     oldAudioIn = audioIn.get();
 };
 
