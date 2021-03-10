@@ -6,7 +6,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Audio In"
+                "name": "Audio In",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
@@ -52,7 +53,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 3,

@@ -15,7 +15,7 @@ const GAIN_MAX = 40;
 
 const filterNode = audioContext.createBiquadFilter();
 
-const inAudio = op.inObject("Audio In");
+const inAudio = op.inObject("Audio In", null, "audioNode");
 const inFilterType = op.inDropDown("Type", ["peaking", "lowpass", "highpass", "bandpass", "lowshelf", "highshelf", "notch", "allpass"], "peaking");
 
 const inFrequency = op.inFloat("Frequency", 2000);
@@ -28,7 +28,7 @@ const inFrequencyArray = op.inArray("Frequency Array");
 op.setPortGroup("Filter Settings", [inFilterType, inFrequency, inQ, inGain]);
 op.setPortGroup("Detune (in cents)", [inDetune]);
 op.setPortGroup("Filter Response Input", [inFrequencyArray]);
-const outAudio = op.outObject("Audio Out");
+const outAudio = op.outObject("Audio Out", null, "audioNode");
 const outMagnitudeResponseArray = op.outArray("Magnitude Response Array");
 const outPhaseResponseArray = op.outArray("Phase Response Array");
 const responseArraysLength = op.outNumber("Response Arrays Length");
@@ -94,17 +94,12 @@ inAudio.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
+
         outAudio.set(null);
     }
     else
     {
-        if (inAudio.val.connect)
-        {
-            inAudio.val.connect(filterNode);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        if (inAudio.val.connect) inAudio.val.connect(filterNode);
     }
     oldAudioIn = inAudio.get();
     outAudio.set(filterNode);
