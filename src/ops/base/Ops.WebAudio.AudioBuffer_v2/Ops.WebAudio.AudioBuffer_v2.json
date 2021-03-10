@@ -19,7 +19,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Buffer"
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
             },
             {
                 "type": 0,

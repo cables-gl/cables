@@ -1,7 +1,7 @@
 const
     audioCtx = CABLES.WEBAUDIO.createAudioContext(op),
     inUrlPort = op.inUrl("URL", "audio"),
-    audioBufferPort = op.outObject("Audio Buffer"),
+    audioBufferPort = op.outObject("Audio Buffer", null, "audioBuffer"),
     finishedLoadingPort = op.outValue("Finished Loading", false),
     sampleRatePort = op.outValue("Sample Rate", 0),
     lengthPort = op.outValue("Length", 0),
@@ -129,10 +129,7 @@ function invalidateOutPorts()
     numberOfChannelsPort.set(0);
     sampleRatePort.set(0);
 
-    // if (currentBuffer === null)
-    // {
     audioBufferPort.set(null);
-    // }
 
     finishedLoadingPort.set(false);
 }
