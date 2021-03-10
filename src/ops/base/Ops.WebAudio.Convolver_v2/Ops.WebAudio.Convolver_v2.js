@@ -8,7 +8,7 @@ const MAX_DELAY_TIME_IN_SECONDS = 179.999;
 const cgl = op.patch.cgl;
 const audioContext = CABLES.WEBAUDIO.createAudioContext(op);
 
-const audioIn = op.inObject("Audio In");
+const audioIn = op.inObject("Audio In", null, "audioNode");
 
 const impulseResponse = op.inUrl("Impulse Response");
 const normalize = op.inBool("Normalize", true);
@@ -18,8 +18,8 @@ const inPreDelayMS = op.inFloat("Predelay (MS)", 0);
 const inDryWet = op.inFloatSlider("Dry/Wet", 0.5);
 const inOutputGain = op.inFloatSlider("Output Gain", 1);
 
-const audioOut = op.outObject("Audio Out");
-const wetOut = op.outObject("Wet Out");
+const audioOut = op.outObject("Audio Out", null, "audioNode");
+const wetOut = op.outObject("Wet Out", null, "audioNode");
 
 op.setPortGroup("IR Options", [impulseResponse, inConvolverGain, normalize, inPreDelayMS]);
 op.setPortGroup("Output", [inDryWet, inOutputGain]);
@@ -174,14 +174,10 @@ audioIn.onChange = function ()
     {
         if (!audioIn.get().connect)
         {
-            op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
             oldAudioIn = null;
             return;
         }
-        else
-        {
-            op.setUiError("audioCtx", null);
-        }
+
         op.log("[audio in] connected");
 
         try
@@ -213,7 +209,7 @@ audioIn.onChange = function ()
         {
             op.setUiError("noIR", null);
         }
-        op.setUiError("audioCtx", null);
+
         if (oldAudioIn)
         {
             oldAudioIn.disconnect(inputNode);

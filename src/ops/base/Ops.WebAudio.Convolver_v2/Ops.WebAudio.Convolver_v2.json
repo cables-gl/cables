@@ -6,7 +6,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Audio In"
+                "name": "Audio In",
+                "objType": "audioNode"
             },
             {
                 "type": 5,
@@ -47,11 +48,13 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
-                "name": "Wet Out"
+                "name": "Wet Out",
+                "objType": "audioNode"
             }
         ],
         "name": "Ops.WebAudio.Convolver_v2"
