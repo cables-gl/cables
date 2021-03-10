@@ -288,6 +288,7 @@ inClearBuffer.onTriggered = () =>
     }
 
     audioBuffer = null;
+    outBuffer.set(audioBuffer);
     blob = null;
     inDownloadButton.setUiAttribs({ "greyout": true });
 };

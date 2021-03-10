@@ -22,7 +22,7 @@ for (let i = 0; i < 7 * 3; i += 1)
     NOTE_NAMES.push(string + " Note");
 }
 
-const audioIn = op.inObject("Audio In");
+const audioIn = op.inObject("Audio In", null, "audioNode");
 const inDryWet = op.inFloatSlider("Dry/Wet", 0.4);
 const inFeedback = op.inFloatSlider("Feedback", 0.4);
 const inDelayMS = op.inFloat("Delay Time (MS)", 100);
@@ -47,8 +47,8 @@ inLfoIntensity.setUiAttribs({ "greyout": !inUseModulation.get() });
 inLfoWave.setUiAttribs({ "greyout": !inUseModulation.get() });
 op.setPortGroup("Filters & Modulation", [inLowpassFrequency, inLowpassQ, inHighpassFrequency, inHighpassQ, inLfoSpeed, inLfoIntensity, inLfoWave]);
 
-const audioOut = op.outObject("Mix Out");
-const delayOut = op.outObject("Wet Out");
+const audioOut = op.outObject("Mix Out", null, "audioNode");
+const delayOut = op.outObject("Wet Out", null, "audioNode");
 
 const MULTIPLIERS = [
     4, 2, 1, 1 / 2, 1 / 4, 1 / 8, 1 / 16,
@@ -306,18 +306,13 @@ audioIn.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
         audioOut.set(null);
     }
     else
     {
-        if (audioIn.val.connect)
-        {
-            audioIn.val.connect(inputNode);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        if (audioIn.val.connect) audioIn.val.connect(inputNode);
     }
+
     oldAudioIn = audioIn.get();
     audioOut.set(outputNode);
     delayOut.set(delayNode);
