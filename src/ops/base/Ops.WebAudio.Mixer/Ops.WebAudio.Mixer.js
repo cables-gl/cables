@@ -5,14 +5,14 @@ function clamp(val, min, max)
 
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
-const inAudio0 = op.inObject("Audio In 0");
-const inAudio1 = op.inObject("Audio In 1");
-const inAudio2 = op.inObject("Audio In 2");
-const inAudio3 = op.inObject("Audio In 3");
-const inAudio4 = op.inObject("Audio In 4");
-const inAudio5 = op.inObject("Audio In 5");
-const inAudio6 = op.inObject("Audio In 6");
-const inAudio7 = op.inObject("Audio In 7");
+const inAudio0 = op.inObject("Audio In 0", null, "audioNode");
+const inAudio1 = op.inObject("Audio In 1", null, "audioNode");
+const inAudio2 = op.inObject("Audio In 2", null, "audioNode");
+const inAudio3 = op.inObject("Audio In 3", null, "audioNode");
+const inAudio4 = op.inObject("Audio In 4", null, "audioNode");
+const inAudio5 = op.inObject("Audio In 5", null, "audioNode");
+const inAudio6 = op.inObject("Audio In 6", null, "audioNode");
+const inAudio7 = op.inObject("Audio In 7", null, "audioNode");
 
 const inAudio0Gain = op.inFloatSlider("In 0 Gain", 1);
 const inAudio1Gain = op.inFloatSlider("In 1 Gain", 1);
@@ -47,7 +47,7 @@ else
     isIOS = true;
 }
 
-const audioOut = op.outObject("Audio Out");
+const audioOut = op.outObject("Audio Out", null, "audioNode");
 
 const gain = audioCtx.createGain();
 audioOut.set(gain);
@@ -113,13 +113,6 @@ audioIns.forEach((port, index) =>
                         gainNodePort.connect(gain);
                         bufferedNode.isConnected = true;
                     }
-
-                    op.setUiError("audioCtx" + port, null);
-                    op.log("should be here with index ", index);
-                }
-                else
-                {
-                    op.setUiError("audioCtx" + port, "The input passed to port " + index + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
                 }
             }
             else
@@ -127,8 +120,6 @@ audioIns.forEach((port, index) =>
                 const bufferedNode = oldAudioIns[index];
                 const gainNodePort = audioInGains[index].gainNode;
                 const panNodePort = audioInPans[index].panNode;
-
-                op.setUiError("audioCtx" + port, null);
 
                 if (bufferedNode.isConnected)
                 {
@@ -143,6 +134,7 @@ audioIns.forEach((port, index) =>
             op.log(e);
         }
     };
+
     port.audioInPortNr = index;
 });
 

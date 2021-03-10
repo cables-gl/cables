@@ -5,42 +5,50 @@
             {
                 "type": 2,
                 "name": "Audio In 0",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 1",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 2",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 3",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 4",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 5",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 6",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
                 "name": "Audio In 7",
-                "group": "Audio Inputs"
+                "group": "Audio Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
@@ -148,7 +156,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             }
         ],
         "name": "Ops.WebAudio.Mixer"
