@@ -1,7 +1,7 @@
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
-const audioBufferPort = op.inObject("Audio Buffer");
+const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const playPort = op.inBool("Start / Stop", false);
 const autoPlayPort = op.inBool("Autoplay", false);
 const loopPort = op.inBool("Loop", false);
@@ -17,7 +17,7 @@ op.setPortGroup("Time Controls", [startTimePort, stopTimePort, offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 
 // output ports
-const audioOutPort = op.outObject("Audio Out");
+const audioOutPort = op.outObject("Audio Out", null, "audioNode");
 const outPlaying = op.outBool("Is Playing", false);
 const outLoading = op.outBool("Loading", false);
 
@@ -76,21 +76,9 @@ audioOutPort.onLinkChanged = () =>
 // change listeners
 audioBufferPort.onChange = function ()
 {
-    if (audioBufferPort.get())
-    {
-        if (!(audioBufferPort.get() instanceof AudioBuffer))
-        {
-            op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
-            return;
-        }
-
-        op.setUiError("noAudioBuffer", null);
-
-        createAudioBufferSource();
-    }
+    if (audioBufferPort.get()) createAudioBufferSource();
     else
     {
-        op.setUiError("noAudioBuffer", null);
         if (isLoading)
         {
             isLoading = false;
@@ -213,6 +201,7 @@ function createAudioBufferSource()
     }
 
     source = audioCtx.createBufferSource();
+
     const buffer = audioBufferPort.get();
 
     if (!buffer)
@@ -227,7 +216,6 @@ function createAudioBufferSource()
     source.loop = loopPort.get();
 
     source.connect(gainNode);
-
     setPlaybackRate();
     setDetune();
     audioOutPort.set(gainNode);
