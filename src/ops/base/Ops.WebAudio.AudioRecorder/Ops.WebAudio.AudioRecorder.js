@@ -2,7 +2,7 @@
 
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
-const inAudio = op.inObject("Audio In");
+const inAudio = op.inObject("Audio In", null, "audioNode");
 const inStartRecording = op.inTriggerButton("Start Recording");
 const inStopRecording = op.inTriggerButton("Stop Recording");
 const inRecordGain = op.inFloatSlider("Input Gain", 1);
@@ -16,12 +16,12 @@ const inLoop = op.inBool("Loop Playback", false);
 op.setPortGroup("Playback", [inStartPlayback, inStopPlayback, inLoop, inClearBuffer, inPlaybackGain]);
 const inDownloadButton = op.inTriggerButton("Download .wav File");
 
-const outOriginal = op.outObject("Audio Out");
-const outRecorded = op.outObject("Recorded Audio Out");
+const outOriginal = op.outObject("Audio Out", null, "audioNode");
+const outRecorded = op.outObject("Recorded Audio Out", null, "audioNode");
 const outIsRecording = op.outBool("Is Recording");
 const outIsPlayingBack = op.outBool("Is Playing Back");
 const outState = op.outString("State");
-const outBuffer = op.outObject("AudioBuffer Out");
+const outBuffer = op.outObject("AudioBuffer Out", null, "audioBuffer");
 
 inDownloadButton.setUiAttribs({ "greyout": true });
 
@@ -120,7 +120,6 @@ inStartRecording.onTriggered = () =>
 
     if (!inAudio.get())
     {
-        op.log("start rec abort");
         op.setUiError("noAudioInput", "No audio input is connected. Recording aborted.", 2);
         state = STATES.IDLING;
         return;
@@ -167,7 +166,7 @@ inStartPlayback.onTriggered = () =>
     switch (state)
     {
     case STATES.RECORDING:
-        break;
+        return;
     case STATES.PROCESSING:
         return;
     case STATES.PLAYING:
@@ -175,8 +174,8 @@ inStartPlayback.onTriggered = () =>
     case STATES.READY:
         break;
     case STATES.IDLING:
-        if (loopSource) break;
-        else return;
+        // if (loopSource) break;
+        return;
     }
 
     op.setUiError("readyPlayback", null);
@@ -193,7 +192,7 @@ inStopPlayback.onTriggered = () =>
     switch (state)
     {
     case STATES.RECORDING:
-        break;
+        return;
     case STATES.PROCESSING:
         return;
     case STATES.PLAYING:
@@ -231,18 +230,23 @@ function createAudioBufferSource()
 {
     if (loopSource)
     {
-        if (state === STATES.PLAYING) loopSource.stop();
-        loopSource.disconnect(outputGain);
+        if (state === STATES.PLAYING)
+        {
+            loopSource.stop();
+            isPlayingBack = false;
+            outIsPlayingBack.set(isPlayingBack);
+            loopSource.disconnect(outputGain);
+        }
     }
 
-    loopSource = audioCtx.createBufferSource();
+    if (!audioBuffer) return;
 
-    if (audioBuffer) loopSource.buffer = audioBuffer;
+    loopSource = audioCtx.createBufferSource();
+    loopSource.buffer = audioBuffer;
 
     loopSource.onended = () =>
     {
-        op.log("playback ended, recreating source");
-        createAudioBufferSource();
+        if (!state !== STATES.IDLING) createAudioBufferSource();
     };
     loopSource.loop = inLoop.get();
 
@@ -263,6 +267,7 @@ inClearBuffer.onTriggered = () =>
     case STATES.PROCESSING:
         return;
     case STATES.PLAYING:
+        op.setUiError("playingLoop", null);
         break;
     case STATES.READY:
         break;
@@ -271,6 +276,9 @@ inClearBuffer.onTriggered = () =>
     }
 
     if (!audioBuffer) return;
+
+    state = STATES.IDLING;
+    outState.set(state);
 
     if (isPlayingBack)
     {
@@ -282,9 +290,6 @@ inClearBuffer.onTriggered = () =>
     audioBuffer = null;
     blob = null;
     inDownloadButton.setUiAttribs({ "greyout": true });
-
-    state = STATES.IDLING;
-    outState.set(state);
 };
 
 inDownloadButton.onTriggered = () =>
@@ -366,7 +371,6 @@ inAudio.onChange = () =>
             }
         }
 
-        op.setUiError("audioCtx", null);
         outOriginal.set(null);
     }
     else
@@ -375,9 +379,8 @@ inAudio.onChange = () =>
         {
             inAudio.get().connect(inputGain);
             inAudio.get().connect(inputStream);
-            op.setUiError("audioCtx", null);
         }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+
         outOriginal.set(inputGain);
     }
 

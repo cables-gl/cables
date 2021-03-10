@@ -18,7 +18,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Audio In"
+                "name": "Audio In",
+                "objType": "audioNode"
             },
             {
                 "type": 1,
@@ -71,11 +72,13 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 2,
-                "name": "Recorded Audio Out"
+                "name": "Recorded Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
@@ -93,7 +96,8 @@
             },
             {
                 "type": 2,
-                "name": "AudioBuffer Out"
+                "name": "AudioBuffer Out",
+                "objType": "audioBuffer"
             }
         ],
         "name": "Ops.WebAudio.AudioRecorder"
