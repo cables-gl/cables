@@ -13,7 +13,7 @@ const Q_MAX = 1000;
 const GAIN_MIN = -40;
 const GAIN_MAX = 40;
 
-const inAudio = op.inObject("Audio In");
+const inAudio = op.inObject("Audio In", null, "audioNode");
 
 const inLowFilterType = op.inDropDown("Low Filter Type", ["peaking", "lowshelf"], "lowshelf");
 const inLowFrequency = op.inFloat("Low Frequency", 250);
@@ -152,7 +152,7 @@ FILTER_GAINS.forEach((obj, index) =>
     };
 });
 
-const outAudio = op.outObject("Audio Out");
+const outAudio = op.outObject("Audio Out", null, "audioNode");
 
 let oldAudioIn = null;
 
@@ -174,17 +174,11 @@ inAudio.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
         outAudio.set(null);
     }
     else
     {
-        if (inAudio.val.connect)
-        {
-            inAudio.val.connect(lowFilterNode);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        if (inAudio.val.connect) inAudio.val.connect(lowFilterNode);
     }
     oldAudioIn = inAudio.get();
     outAudio.set(highFilterNode);
