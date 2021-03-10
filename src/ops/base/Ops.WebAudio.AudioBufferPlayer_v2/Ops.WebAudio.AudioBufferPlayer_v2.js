@@ -86,8 +86,6 @@ audioBufferPort.onChange = function ()
 
         op.setUiError("noAudioBuffer", null);
 
-        /* isLoading = true;
-        outLoading.set(isLoading); */
         createAudioBufferSource();
     }
     else
@@ -174,6 +172,10 @@ inResetStart.onTriggered = function ()
 {
     if (!source) return;
     if (!audioBufferPort.get()) return;
+    else
+    {
+        if (!(audioBufferPort.get() instanceof AudioBuffer)) return;
+    }
 
     if (playPort.get())
     {
@@ -193,6 +195,7 @@ inResetStart.onTriggered = function ()
 function createAudioBufferSource()
 {
     if (isLoading) return;
+    if (!(audioBufferPort.get() instanceof AudioBuffer)) return;
 
     isLoading = true;
     outLoading.set(isLoading);
