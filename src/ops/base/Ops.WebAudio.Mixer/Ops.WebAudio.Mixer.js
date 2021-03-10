@@ -115,10 +115,11 @@ audioIns.forEach((port, index) =>
                     }
 
                     op.setUiError("audioCtx" + port, null);
+                    op.log("should be here with index ", index);
                 }
                 else
                 {
-                    op.setUiError("audioCtx" + port, "The input passed to port " + port + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
+                    op.setUiError("audioCtx" + port, "The input passed to port " + index + " is not an audio context. Please make sure you connect an audio context to the input.", 2);
                 }
             }
             else
@@ -126,6 +127,8 @@ audioIns.forEach((port, index) =>
                 const bufferedNode = oldAudioIns[index];
                 const gainNodePort = audioInGains[index].gainNode;
                 const panNodePort = audioInPans[index].panNode;
+
+                op.setUiError("audioCtx" + port, null);
 
                 if (bufferedNode.isConnected)
                 {
