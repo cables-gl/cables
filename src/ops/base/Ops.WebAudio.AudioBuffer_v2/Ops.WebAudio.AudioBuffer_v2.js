@@ -11,6 +11,8 @@ const
 
 let currentBuffer = null;
 let isLoading = false;
+let currentFileUrl = null;
+let urlToLoadNext = null;
 
 if (!audioBufferPort.isLinked())
 {
@@ -32,30 +34,50 @@ audioBufferPort.onLinkChanged = () =>
         op.setUiError("notConnected", "To play back sound, connect this op to a playback operator such as SamplePlayer or AudioBufferPlayer.", 0);
     }
 };
-// change listeners
-inUrlPort.onChange = function ()
-{
-    if (isLoading) return;
-    invalidateOutPorts();
 
-    if (inUrlPort.get())
+function loadAudioFile(url)
+{
+    const ext = url.substr(url.lastIndexOf(".") + 1);
+    if (ext === "wav")
     {
-        const url = op.patch.getFilePath(inUrlPort.get());
-        const ext = url.substr(url.lastIndexOf(".") + 1);
-        if (ext === "wav")
-        {
-            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
-        }
-        else
-        {
-            op.setUiError("wavFormat", null);
-        }
-        isLoading = true;
-        outLoading.set(isLoading);
-        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+        op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
     }
     else
     {
+        op.setUiError("wavFormat", null);
+    }
+    currentFileUrl = url;
+    isLoading = true;
+    outLoading.set(isLoading);
+    CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+}
+// change listeners
+inUrlPort.onChange = function ()
+{
+    if (inUrlPort.get())
+    {
+        if (isLoading)
+        {
+            const newUrl = op.patch.getFilePath(inUrlPort.get());
+            if (newUrl !== currentFileUrl)
+            {
+                urlToLoadNext = newUrl;
+            }
+            else
+            {
+                urlToLoadNext = null;
+            }
+
+            return;
+        }
+
+        invalidateOutPorts();
+        const url = op.patch.getFilePath(inUrlPort.get());
+        loadAudioFile(url);
+    }
+    else
+    {
+        if (isLoading) return;
         invalidateOutPorts();
         op.setUiError("wavFormat", null);
         op.setUiError("failedLoading", null);
@@ -67,14 +89,22 @@ function onLoadFinished(buffer)
     isLoading = false;
     outLoading.set(isLoading);
 
-    currentBuffer = buffer;
-    lengthPort.set(buffer.length);
-    durationPort.set(buffer.duration);
-    numberOfChannelsPort.set(buffer.numberOfChannels);
-    sampleRatePort.set(buffer.sampleRate);
-    audioBufferPort.set(buffer);
-    op.setUiError("failedLoading", null);
-    finishedLoadingPort.set(true);
+    if (urlToLoadNext)
+    {
+        loadAudioFile(urlToLoadNext);
+        urlToLoadNext = null;
+    }
+    else
+    {
+        currentBuffer = buffer;
+        lengthPort.set(buffer.length);
+        durationPort.set(buffer.duration);
+        numberOfChannelsPort.set(buffer.numberOfChannels);
+        sampleRatePort.set(buffer.sampleRate);
+        audioBufferPort.set(buffer);
+        op.setUiError("failedLoading", null);
+        finishedLoadingPort.set(true);
+    }
 }
 
 function onLoadFailed(e)
@@ -85,6 +115,11 @@ function onLoadFailed(e)
     invalidateOutPorts();
     outLoading.set(isLoading);
     currentBuffer = null;
+    if (urlToLoadNext)
+    {
+        loadAudioFile(urlToLoadNext);
+        urlToLoadNext = null;
+    }
 }
 
 function invalidateOutPorts()
@@ -94,10 +129,10 @@ function invalidateOutPorts()
     numberOfChannelsPort.set(0);
     sampleRatePort.set(0);
 
-    if (currentBuffer === null)
-    {
-        audioBufferPort.set(null);
-    }
+    // if (currentBuffer === null)
+    // {
+    audioBufferPort.set(null);
+    // }
 
     finishedLoadingPort.set(false);
 }

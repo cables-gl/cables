@@ -104,10 +104,6 @@ audioBufferPort.onChange = function ()
             stop(0);
             source.buffer = null;
             source = null;
-            /* setTimeout(function ()
-            {
-                if (isPlaying) source.stop();
-            }, 30); */
         }
     }
 };
@@ -177,6 +173,7 @@ let resetTriggered = false;
 inResetStart.onTriggered = function ()
 {
     if (!source) return;
+    if (!audioBufferPort.get()) return;
 
     if (playPort.get())
     {
@@ -235,15 +232,16 @@ function createAudioBufferSource()
     isLoading = false;
     outLoading.set(isLoading);
 
-    if (playPort.get())
-    {
-        start(startTimePort.get(), offsetPort.get());
-    }
-
     if (resetTriggered)
     {
         start(0);
         resetTriggered = false;
+        return;
+    }
+
+    if (playPort.get())
+    {
+        if (!isPlaying) start(startTimePort.get(), offsetPort.get());
     }
 }
 
