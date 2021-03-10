@@ -13,6 +13,7 @@ let currentBuffer = null;
 let isLoading = false;
 let currentFileUrl = null;
 let urlToLoadNext = null;
+let clearAfterLoad = false;
 
 if (!audioBufferPort.isLinked())
 {
@@ -46,6 +47,7 @@ function loadAudioFile(url)
     {
         op.setUiError("wavFormat", null);
     }
+
     currentFileUrl = url;
     isLoading = true;
     outLoading.set(isLoading);
@@ -68,6 +70,7 @@ inUrlPort.onChange = function ()
                 urlToLoadNext = null;
             }
 
+            clearAfterLoad = false;
             return;
         }
 
@@ -77,7 +80,11 @@ inUrlPort.onChange = function ()
     }
     else
     {
-        if (isLoading) return;
+        if (isLoading)
+        {
+            clearAfterLoad = true;
+            return;
+        }
         invalidateOutPorts();
         op.setUiError("wavFormat", null);
         op.setUiError("failedLoading", null);
@@ -88,6 +95,13 @@ function onLoadFinished(buffer)
 {
     isLoading = false;
     outLoading.set(isLoading);
+
+    if (clearAfterLoad)
+    {
+        invalidateOutPorts();
+        clearAfterLoad = false;
+        return;
+    }
 
     if (urlToLoadNext)
     {

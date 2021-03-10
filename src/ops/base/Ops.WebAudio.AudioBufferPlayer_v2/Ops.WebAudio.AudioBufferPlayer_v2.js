@@ -239,25 +239,37 @@ function createAudioBufferSource()
 let timeOuting = false;
 let timerId = null;
 
+offsetPort.onChange = () =>
+{
+    if (offsetPort.get() >= 0) op.setUiError("offsetNegative", null);
+    else
+    {
+        op.setUiError("offsetNegative", "Offset cannot be negative. Setting to 0.", 1);
+    }
+
+    if (source)
+    {
+        if (source.buffer)
+        {
+            if (offsetPort.get() > source.buffer.duration)
+            {
+                op.setUiError("offsetTooLong", "Your offset value is higher than the total time of your audio file. Please decrease the duration to be able to hear sound when playing back your buffer.", 1);
+            }
+            else
+            {
+                op.setUiError("offsetTooLong", null);
+            }
+        }
+    }
+};
 function start(time)
 {
     try
     {
+        let offset = 0;
         if (source)
         {
-            if (source.buffer)
-            {
-                if (offsetPort.get() > source.buffer.duration)
-                {
-                    op.setUiError("offsetTooLong", "Your offset value is higher than the total time of your audio file. Please decrease the duration to be able to hear sound when playing back your buffer.", 1);
-                }
-                else
-                {
-                    op.setUiError("offsetTooLong", null);
-                }
-            }
-
-            source.start(time, offsetPort.get()); // 0 = now
+            source.start(time, Math.max(0, offsetPort.get())); // 0 = now
 
             isPlaying = true;
             hasEnded = false;
