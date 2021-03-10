@@ -22,6 +22,11 @@ let masterVolume = 1;
 let oldAudioIn = null;
 let connectedToOut = false;
 
+if (inMute.get())
+{
+    gainNode.gain.value = 0;
+}
+
 inAudio.onChange = function ()
 {
     if (!inAudio.get())
@@ -71,21 +76,31 @@ inAudio.onChange = function ()
 
 // functions
 // sets the volume, multiplied by master volume
-function setVolume()
+function setVolume(fromMute)
 {
     let volume = inGain.get() * masterVolume;
-    if (gainNode) gainNode.gain.setValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime);
+    volume = clamp(volume, 0, 1);
+    if (inMute.get()) volume = 0;
+
+    if (!fromMute)
+    {
+        if (gainNode) gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.05);
+    }
+    else
+    {
+        if (gainNode) gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.2);
+    }
 }
 
 function mute(b)
 {
     if (b)
     {
-        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
     }
     else
     {
-        setVolume();
+        setVolume(true);
     }
 }
 
@@ -106,6 +121,7 @@ inGain.onChange = () =>
 
 op.patch.on("pause", () =>
 {
+    if (inMute.get()) return;
     masterVolume = 0;
     setVolume();
 });
