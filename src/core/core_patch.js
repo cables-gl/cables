@@ -564,6 +564,7 @@ Patch.prototype.renderFrame = function (e)
         }
     }
 
+
     CGL.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);

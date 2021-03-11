@@ -159,7 +159,7 @@ function calc()
             oldPosY = posy;
         }
 
-        geom = CGL.Geometry.buildFromFaces(faces);
+        geom = CGL.Geometry.buildFromFaces(faces, "circle");
         geom.vertexNormals = vertexNormals;
         geom.tangents = tangents;
         geom.biTangents = biTangents;
@@ -242,7 +242,7 @@ function calc()
             oldPosYIn = posyIn;
         }
 
-        geom = CGL.Geometry.buildFromFaces(faces);
+        geom = CGL.Geometry.buildFromFaces(faces, "circle");
         geom.vertexNormals = vertexNormals;
         geom.tangents = tangents;
         geom.biTangents = biTangents;

@@ -25,6 +25,7 @@ class ProfileData
         this.shaderCompileTime = 0;
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
+        this.heavyEvents = [];
     }
 
 
@@ -51,6 +52,11 @@ class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
+    }
+
+    addHeavyEvent(event, name)
+    {
+        this.heavyEvents.push({ "event": event, "name": name });
     }
 }
 
