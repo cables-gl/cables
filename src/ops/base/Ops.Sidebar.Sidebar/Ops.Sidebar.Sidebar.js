@@ -25,6 +25,7 @@ const side = op.inValueBool("Side");
 
 // outputs
 const childrenPort = op.outObject("childs");
+const isOpenOut = op.outBool("Opened");
 
 let sidebarEl = document.querySelector("." + SIDEBAR_ID);
 if (!sidebarEl)
@@ -115,11 +116,19 @@ function onDefaultMinimizedPortChanged()
     if (defaultMinimizedPort.get())
     {
         sidebarEl.classList.add("sidebar--closed");
+        if (visiblePort.get())
+        {
+            isOpenOut.set(false);
+        }
         // openCloseBtn.textContent = BTN_TEXT_CLOSED;
     }
     else
     {
         sidebarEl.classList.remove("sidebar--closed");
+        if (visiblePort.get())
+        {
+            isOpenOut.set(true);
+        }
         // openCloseBtn.textContent = BTN_TEXT_OPEN;
     }
 }
@@ -135,10 +144,15 @@ function onVisiblePortChange()
     if (visiblePort.get())
     {
         sidebarEl.style.display = "block";
+        if (!sidebarEl.classList.contains("sidebar--closed"))
+        {
+            isOpenOut.set(true);
+        }
     }
     else
     {
         sidebarEl.style.display = "none";
+        isOpenOut.set(false);
     }
 }
 
@@ -237,7 +251,15 @@ function onOpenCloseBtnClick(ev)
     sidebarEl.classList.toggle("sidebar--closed");
     const btn = ev.target;
     let btnText = BTN_TEXT_OPEN;
-    if (sidebarEl.classList.contains("sidebar--closed")) btnText = BTN_TEXT_CLOSED;
+    if (sidebarEl.classList.contains("sidebar--closed"))
+    {
+        btnText = BTN_TEXT_CLOSED;
+        isOpenOut.set(false);
+    }
+    else
+    {
+        isOpenOut.set(true);
+    }
 }
 
 function initSidebarCss()
