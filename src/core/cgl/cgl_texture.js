@@ -47,6 +47,7 @@ const Texture = function (__cgl, options)
     this._fromData = true;
     this.name = "unknown";
 
+
     if (options)
     {
         this.name = options.name || this.name;
@@ -70,6 +71,8 @@ const Texture = function (__cgl, options)
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
     profileData.profileTextureNew++;
+
+    CGL.profileData.addHeavyEvent("texture created", this._name);
 
     this.setSize(options.width, options.height);
 };
