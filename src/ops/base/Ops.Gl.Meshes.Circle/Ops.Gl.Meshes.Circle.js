@@ -36,8 +36,14 @@ let oldPrim = 0;
 let shader = null;
 let needsCalc = true;
 
-op.preRender =
-render.onTriggered = function ()
+render.onTriggered = renderMesh;
+
+op.preRender = () =>
+{
+    renderMesh();
+};
+
+function renderMesh()
 {
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
@@ -52,7 +58,7 @@ render.onTriggered = function ()
     trigger.trigger();
 
     shader.glPrimitive = oldPrim;
-};
+}
 
 function calc()
 {
