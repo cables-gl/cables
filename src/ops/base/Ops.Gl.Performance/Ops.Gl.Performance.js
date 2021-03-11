@@ -260,7 +260,7 @@ function updateText()
     else
     {
         html += fps + " fps / ";
-        html += "CPU: " + Math.round((currentTimeMainloop + CGL.profileData.profileOnAnimFrameOps) * 100) / 100 + "ms / ";
+        html += "CPU: " + Math.round((currentTimeMainloop + CGL.profileData.profileOnAnimFrameOps - CGL.profileData.profileMainloopMs) * 100) / 100 + "ms / ";
         if (ext && currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
         element.innerHTML = html;
     }
@@ -477,7 +477,7 @@ exe.onTriggered = function ()
 
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = CGL.profileData.profileMainloopMs;
-    const nCurrentTimeOnFrame = CGL.profileData.profileOnAnimFrameOps;
+    const nCurrentTimeOnFrame = CGL.profileData.profileOnAnimFrameOps - currentTimeMainloop;
 
     if (smoothGraph.get())
     {
