@@ -1,5 +1,5 @@
 const inTrigger = op.inTrigger("send");
-const inSocket = op.inObject("socket");
+const inSocket = op.inObject("socket", null, "socketcluster");
 const inTopic = op.inString("topic", "main");
 const inData = op.inArray("data");
 const inDelay = op.inInt("delay (ms)", 0);

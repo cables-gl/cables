@@ -1,4 +1,4 @@
-const inSocket = op.inObject("socket");
+const inSocket = op.inObject("socket", null, "socketcluster");
 const inTopic = op.inString("topic", "main");
 const inNamedTrigger = op.inBool("Use named Trigger", false);
 const clientIdOut = op.outString("client id");
