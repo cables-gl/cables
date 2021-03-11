@@ -1,0 +1,93 @@
+{
+    "authorName": "pandur",
+    "id": "68ca4a91-c3ce-4e81-bb84-3ba5f50dfaa1",
+    "created": 1615314888700,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "Translate X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Translate Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Rotation Z",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "name": "Ops.Gl.ShaderEffects.TransformVertex"
+    },
+    "changelog": [
+        {
+            "message": "Ops.User.pandur.Twist3 renamed to Ops.Gl.ShaderEffects.Twist_v3",
+            "author": "pandur",
+            "date": 1596029978529
+        },
+        {
+            "message": "cloned op from Ops.Gl.ShaderEffects.Twist_v3",
+            "author": "pandur",
+            "date": 1615314888700
+        },
+        {
+            "message": "Ops.User.pandur.TransformVertex renamed to Ops.Gl.ShaderEffects.TransformVertex",
+            "author": "pandur",
+            "date": 1615315844236
+        }
+    ],
+    "summary": "twist a mesh around an axis",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}
