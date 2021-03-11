@@ -72,7 +72,7 @@ const Texture = function (__cgl, options)
 
     profileData.profileTextureNew++;
 
-    CGL.profileData.addHeavyEvent("texture created", this._name);
+    CGL.profileData.addHeavyEvent("texture created", this.name);
 
     this.setSize(options.width, options.height);
 };
