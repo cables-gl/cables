@@ -228,6 +228,7 @@ function setupPorts(parentSubPatch)
                 case CABLES.OP_PORT_TYPE_FUNCTION:
                     const proxy = new CABLES.Port(op, "outproxy - " + subPatchPort.name, subPatchPort.type);
                     proxy.setUiAttribs({ "hideParam": true });
+                    // proxy.setUiAttribs({ "hidePort": true});
 
                     const newOutTrigger = op.addOutPort(proxy);
                     op.patch.link(op, newOutTrigger.name, parentSubPatch, subPatchPort.name);
@@ -292,6 +293,8 @@ function setupPorts(parentSubPatch)
                 case CABLES.OP_PORT_TYPE_FUNCTION:
                     const proxy = new CABLES.Port(op, "inproxy - " + subPatchPort.name, subPatchPort.type);
                     proxy.setUiAttribs({ "hideParam": true });
+                    // proxy.setUiAttribs({ "hidePort": true});
+
                     const newInTrigger = op.addInPort(proxy);
                     op.patch.link(op, newInTrigger.name, parentSubPatch, subPatchPort.name);
                     newInTrigger.onTriggered = () =>

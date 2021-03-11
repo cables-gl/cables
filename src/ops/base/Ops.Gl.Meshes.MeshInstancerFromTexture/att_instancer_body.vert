@@ -9,7 +9,7 @@ vec3 MOD_texRota=texture(MOD_texRot,vec2(tx,ty)).rgb;
 mat4 texInstMat;
 
 
-mat3 rm=ntorot((normalize(MOD_texRota)*90.0));
+mat3 rm=ntorot(((MOD_texRota)*2360.0));
 
 
 texInstMat= mat4(rm[0][0], rm[0][1], rm[0][2], 0.0,
@@ -30,7 +30,7 @@ texInstMat[1][1]=MOD_scale;
 texInstMat[2][2]=MOD_scale;
 texInstMat[3][3]=1.4; // wtf is this number
 
-mMatrix=texInstMat;
+mMatrix*=texInstMat;
 // pos.xyz*=MOD_scale;
 frag_instColor=instColor;
 

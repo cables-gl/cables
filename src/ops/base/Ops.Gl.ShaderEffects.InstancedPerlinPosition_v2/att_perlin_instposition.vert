@@ -149,9 +149,9 @@ vec4 MOD_deform(mat4 mMatrix,mat4 instMat,vec4 pos)
     #endif
     #ifdef MOD_METH_SCALE
         p=clamp(p,0.0,99999.0);
-        pos.x*=p*MOD_mulAxis.x;
-        pos.y*=p*MOD_mulAxis.y;
-        pos.z*=p*MOD_mulAxis.z;
+        pos.x*=p*MOD_mulAxis.x+MOD_minScale;
+        pos.y*=p*MOD_mulAxis.y+MOD_minScale;
+        pos.z*=p*MOD_mulAxis.z+MOD_minScale;
     #endif
 
     return pos;

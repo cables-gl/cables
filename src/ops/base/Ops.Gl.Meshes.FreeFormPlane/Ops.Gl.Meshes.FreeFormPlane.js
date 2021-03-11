@@ -149,7 +149,9 @@ function rebuild()
     geom.texCoords = tc;
     geom.verticesIndices = indices;
     // geom.vertexNormals=norms;
-    geom.calculateNormals({ "forceZUp": true });
+    // geom.calculateNormals({ "forceZUp": true });
+    // geom.calculateNormals();
+    // geom.calcTangentsBitangents();
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);

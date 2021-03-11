@@ -22,6 +22,11 @@ transX.onChange =
     rotZ.onChange =
     geometry.onChange = update;
 
+const rotVec = vec3.create();
+const emptyVec = vec3.create();
+const transVec = vec3.create();
+const centerVec = vec3.create();
+
 function update()
 {
     const oldGeom = geometry.get();
@@ -30,10 +35,6 @@ function update()
     if (oldGeom)
     {
         const geom = oldGeom.copy();
-        const rotVec = vec3.create();
-        const emptyVec = vec3.create();
-        const transVec = vec3.create();
-        const centerVec = vec3.create();
 
         for (let i = 0; i < geom.vertices.length; i += 3)
         {

@@ -10,6 +10,7 @@ const
     mulx = op.inValue("Mul X", 1),
     muly = op.inValue("Mul Y", 1),
     mulz = op.inValue("Mul Z", 1),
+    minScale = op.inValue("Min Scale", 0),
     inWorldSpace = op.inValueBool("WorldSpace");
 
 const cgl = op.patch.cgl;
@@ -36,7 +37,7 @@ mod.addUniform("f", "MOD_scrollx", scrollx);
 mod.addUniform("f", "MOD_scrolly", scrolly);
 mod.addUniform("f", "MOD_scrollz", scrollz);
 mod.addUniform("f", "MOD_scale", scale);
-
+mod.addUniform("f", "MOD_minScale", minScale);
 mod.addUniform("3f", "MOD_mulAxis", mulx, muly, mulz);
 
 meth.onChange =
