@@ -191,7 +191,11 @@ exec.onTriggered = function ()
     cgl.pushShader(inShader.get());
     if (shader.bindTextures) shader.bindTextures();
 
+    cgl.pushBlend(false);
+
     mesh.render(inShader.get());
+
+    cgl.popBlend();
 
     cgl.popPMatrix();
     cgl.popModelMatrix();
