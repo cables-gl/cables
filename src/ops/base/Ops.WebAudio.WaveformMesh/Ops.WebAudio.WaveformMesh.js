@@ -37,7 +37,7 @@ const cgl = op.patch.cgl;
 
 // input
 const renderPort = op.inTrigger("Render");
-const audioBufferPort = op.inObject("Audio Buffer");
+const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const renderActivePort = op.inBool("Render Active", true);
 const showBottomHalfPort = op.inBool("Show bottom half", true);
 const centerPort = op.inBool("Center Origin", true);
@@ -50,7 +50,7 @@ op.setPortGroup("Waveform Settings", [widthPort, samplesPerPixelPort]);
 op.setPortGroup("Mesh Options", [inCalculateUV]);
 // output
 const nextPort = op.outTrigger("Next");
-const geometryPort = op.outObject("Geometry");
+const geometryPort = op.outObject("Geometry", null, "geometry");
 
 // change listeners
 let updating = true;
@@ -191,21 +191,9 @@ function extractPeaks()
     {
         op.setUiError("noBuffer", null);
 
-        if (!(audioBuffer instanceof AudioBuffer))
-        {
-            op.setUiError("wrongBufferType", "The passed object is not of type AudioBuffer. You have to pass an AudioBuffer to visualize the waveform.", 2);
-            return;
-        }
-        else
-        {
-            op.setUiError("wrongBufferType", null);
-        }
+        if (!(audioBuffer instanceof AudioBuffer)) return;
     }
-    else
-    {
-        op.setUiError("noBuffer", "You need to connect the \"Audio Buffer\" input for this op to work!", 0);
-        op.setUiError("wrongBufferType", null);
-    }
+    else op.setUiError("noBuffer", "You need to connect the \"Audio Buffer\" input for this op to work!", 0);
 
     if (audioBuffer)
     {
@@ -293,6 +281,12 @@ function extractPeaks()
     else
     {
         geometryPort.set(null);
+        if (geom) geom.clear();
+        if (mesh)
+        {
+            mesh.dispose();
+            mesh = null;
+        }
     }
 }
 

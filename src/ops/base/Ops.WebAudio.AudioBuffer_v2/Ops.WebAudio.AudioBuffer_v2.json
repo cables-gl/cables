@@ -19,7 +19,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Buffer"
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
             },
             {
                 "type": 0,
@@ -45,6 +46,11 @@
                 "type": 0,
                 "name": "Number of Channels",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "isLoading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.AudioBuffer_v2"

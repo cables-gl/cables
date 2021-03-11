@@ -12,7 +12,7 @@ let gainNode = audioCtx.createGain();
 const destinationNode = audioCtx.destination;
 
 // inputs
-const inAudio = op.inObject("Audio In");
+const inAudio = op.inObject("Audio In", null, "audioNode");
 const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
 
@@ -45,7 +45,7 @@ inAudio.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
+
         op.setUiError("multipleInputs", null);
 
         if (connectedToOut)
@@ -58,13 +58,10 @@ inAudio.onChange = function ()
     {
         if (inAudio.links.length > 1) op.setUiError("multipleInputs", "You have connected multiple inputs. It is possible that you experience unexpected behaviour. Please use a Mixer op to connect multiple audio streams.", 1);
         else op.setUiError("multipleInputs", null);
-        if (inAudio.val.connect)
-        {
-            inAudio.val.connect(gainNode);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+
+        if (inAudio.val.connect) inAudio.val.connect(gainNode);
     }
+
     oldAudioIn = inAudio.get();
 
     if (!connectedToOut)
