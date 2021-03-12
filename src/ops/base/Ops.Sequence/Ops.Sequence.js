@@ -1,6 +1,6 @@
 const
-    cleanup = op.inTriggerButton("Clean up connections"),
-    exe = op.inTrigger("exe");
+    exe = op.inTrigger("exe"),
+    cleanup = op.inTriggerButton("Clean up connections");
 
 const
     exes = [],
