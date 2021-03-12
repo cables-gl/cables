@@ -36,8 +36,14 @@ let oldPrim = 0;
 let shader = null;
 let needsCalc = true;
 
-op.preRender =
-render.onTriggered = function ()
+render.onTriggered = renderMesh;
+
+op.preRender = () =>
+{
+    renderMesh();
+};
+
+function renderMesh()
 {
     if (!CGL.TextureEffect.checkOpNotInTextureEffect(op)) return;
 
@@ -52,7 +58,7 @@ render.onTriggered = function ()
     trigger.trigger();
 
     shader.glPrimitive = oldPrim;
-};
+}
 
 function calc()
 {
@@ -153,7 +159,7 @@ function calc()
             oldPosY = posy;
         }
 
-        geom = CGL.Geometry.buildFromFaces(faces);
+        geom = CGL.Geometry.buildFromFaces(faces, "circle");
         geom.vertexNormals = vertexNormals;
         geom.tangents = tangents;
         geom.biTangents = biTangents;
@@ -236,7 +242,7 @@ function calc()
             oldPosYIn = posyIn;
         }
 
-        geom = CGL.Geometry.buildFromFaces(faces);
+        geom = CGL.Geometry.buildFromFaces(faces, "circle");
         geom.vertexNormals = vertexNormals;
         geom.tangents = tangents;
         geom.biTangents = biTangents;

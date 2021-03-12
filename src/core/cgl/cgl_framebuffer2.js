@@ -33,6 +33,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._colorRenderbuffers = [];
     this._drawTargetArray = [];
 
+
     if (!this.Framebuffer2BlittingFramebuffer) this.Framebuffer2BlittingFramebuffer = cgl.gl.createFramebuffer();
     if (!this.Framebuffer2FinalFramebuffer) this.Framebuffer2FinalFramebuffer = cgl.gl.createFramebuffer();
 
@@ -43,6 +44,8 @@ const Framebuffer2 = function (cgl, w, h, options)
     };
 
     this.name = this._options.name || "unknown";
+
+    CGL.profileData.addHeavyEvent("framebuffer create", this.name);
 
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
@@ -155,6 +158,8 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 
 Framebuffer2.prototype.setSize = function (w, h)
 {
+    CGL.profileData.addHeavyEvent("framebuffer resize", this.name);
+
     let i = 0;
     this._width = Math.floor(w);
     this._height = Math.floor(h);

@@ -17,19 +17,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "audio in"
+                "type": 2,
+                "name": "audio in",
+                "objType": "audioNode"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pan",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "audio out"
+                "type": 2,
+                "name": "audio out",
+                "objType": "audioNode"
             }
         ],
         "name": "Ops.WebAudio.AudioPanner"

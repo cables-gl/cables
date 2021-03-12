@@ -12,7 +12,8 @@
             {
                 "type": 2,
                 "name": "Audio In",
-                "group": "Inputs"
+                "group": "Inputs",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
@@ -51,7 +52,8 @@
             },
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 3,

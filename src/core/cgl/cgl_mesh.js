@@ -46,6 +46,8 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._transformFeedBackLoc = -1;
     this._lastAttrUpdate = 0;
 
+    CGL.profileData.addHeavyEvent("mesh constructed", this._geom.name);
+
     Object.defineProperty(this, "numInstances", {
         get()
         {

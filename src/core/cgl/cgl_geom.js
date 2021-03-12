@@ -687,7 +687,7 @@ Geometry.prototype.mapTexCoords2d = function ()
 // -----------------
 
 // TODO : move this into "old" circle op
-Geometry.buildFromFaces = function (arr)
+Geometry.buildFromFaces = function (arr, name)
 {
     const vertices = [];
     const verticesIndices = [];
@@ -730,6 +730,7 @@ Geometry.buildFromFaces = function (arr)
     }
 
     const geom = new Geometry(this.name);
+    geom.name = name;
     geom.vertices = vertices;
     geom.verticesIndices = verticesIndices;
 

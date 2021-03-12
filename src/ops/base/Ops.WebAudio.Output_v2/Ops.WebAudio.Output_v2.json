@@ -4,7 +4,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Audio In"
+                "name": "Audio In",
+                "objType": "audioNode"
             },
             {
                 "type": 0,

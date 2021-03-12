@@ -442,6 +442,8 @@ Shader.prototype.compile = function ()
 
     const structStrings = this.createStructUniforms();
 
+    CGL.profileData.addHeavyEvent("shader compile", this._name);
+
     if (this._uniforms)
     {
         // * we create an array of the uniform names to check our indices & an array to save them
@@ -1579,6 +1581,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         return basLines;
     }
 
+
     const shader = cgl.gl.createShader(type);
     cgl.gl.shaderSource(shader, str);
     cgl.gl.compileShader(shader);
@@ -1618,8 +1621,8 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
 
-        cgl.patch.emitEvent("criticalError", "Shader error " + name, htmlWarning);
-        if (cgl.patch.isEditorMode())Log.log("Shader error " + name, htmlWarning);
+        cgl.patch.emitEvent("criticalError", "Shader error " + this._name, htmlWarning);
+        if (cgl.patch.isEditorMode())Log.log("Shader error " + this._name, htmlWarning);
 
         htmlWarning += "</div>";
 

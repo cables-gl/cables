@@ -9,7 +9,7 @@ const
     h = op.inValueSlider("Height", 0.2),
     drawTex = op.inValueBool("Create Texture", true),
     inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
-    texOut = op.outTexture("Texture Out"),
+    texOut = op.outTexture("Texture Out", null, "texture"),
     value = op.outValue("Area Average Volume");
 
 op.setPortGroup("Area Settings", [x, y, w, h]);

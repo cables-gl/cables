@@ -22,6 +22,8 @@ let needsRebuild = true;
 let mesh = null;
 inUVMode.hidePort();
 
+op.preRender = buildMesh;
+
 function buildMesh()
 {
     const flipTex = flipSideMapping.get();
@@ -241,7 +243,6 @@ function buildMesh()
         Array.prototype.push.apply(positions, positions.slice(0, segments * 3));
         for (i = 0; i <= segments; i++) normals.push(0, 0, -1), tangents.push(-1, 0, 0), biTangents.push(0, -1, 0);
 
-
         if (inCaps.get())
         {
             positions.push(0, 0, length / 2);
@@ -291,7 +292,6 @@ function buildMesh()
 
     needsRebuild = false;
 }
-
 
 // set event handlers
 inRender.onTriggered = function ()

@@ -1,6 +1,7 @@
 const increment = op.inTriggerButton("Increment");
 const decrement = op.inTriggerButton("Decrement");
 const inLength = op.inValueInt("Length");
+const inLimit = op.inBool("Limit", true);
 const reset = op.inTriggerButton("Reset");
 const inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind");
 const outChanged = op.outTrigger("Changed");
@@ -33,6 +34,11 @@ inMode.onChange = function ()
     }
 };
 
+inLimit.onChange = () =>
+{
+    inLength.setUiAttribs({ "greyout": !inLimit.get() });
+};
+
 function doReset()
 {
     value.set(null);
@@ -44,9 +50,11 @@ function doReset()
 decrement.onTriggered = function ()
 {
     val--;
-    if (mode == MODE_REWIND && val < 0)val = inLength.get() - 1;
-    if (mode == MODE_STOP && val < 0)val = 0;
-
+    if (inLimit.get())
+    {
+        if (mode == MODE_REWIND && val < 0)val = inLength.get() - 1;
+        if (mode == MODE_STOP && val < 0)val = 0;
+    }
     value.set(val);
 
     outChanged.trigger();
@@ -55,12 +63,15 @@ decrement.onTriggered = function ()
 increment.onTriggered = function ()
 {
     val++;
-    if (mode == MODE_REWIND && val >= inLength.get())
+    if (inLimit.get())
     {
-        val = 0;
-        outRestarted.trigger();
+        if (mode == MODE_REWIND && val >= inLength.get())
+        {
+            val = 0;
+            outRestarted.trigger();
+        }
+        if (mode == MODE_STOP && val >= inLength.get())val = inLength.get() - 1;
     }
-    if (mode == MODE_STOP && val >= inLength.get())val = inLength.get() - 1;
 
     value.set(val);
 
