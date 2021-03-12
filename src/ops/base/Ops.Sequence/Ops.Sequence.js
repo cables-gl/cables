@@ -11,7 +11,7 @@ let updateTimeout = null;
 
 exe.onTriggered = triggerAll;
 cleanup.onTriggered = clean;
-cleanup.hidePort();
+cleanup.setUiAttribs({ "hidePort": true });
 
 for (let i = 0; i < num; i++)
 {

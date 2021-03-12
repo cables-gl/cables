@@ -115,16 +115,6 @@ Port.prototype._onAnimToggle = function ()
     this.onAnimToggle();
 };
 
-/**
- * @function hidePort
- * @memberof Port
- * @instance
- * @description hide port rectangle in op
- */
-Port.prototype.hidePort = function ()
-{
-    this.setUiAttribs({ "hidePort": true });
-};
 
 /**
  * @function remove

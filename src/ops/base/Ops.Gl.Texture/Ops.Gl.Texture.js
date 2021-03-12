@@ -13,7 +13,7 @@ const ratio = op.outValue("Aspect Ratio");
 
 op.setPortGroup("Size", [width, height]);
 
-unpackAlpha.hidePort();
+unpackAlpha.setUiAttribs({ "hidePort": true });
 
 op.toWorkPortsNeedToBeLinked(textureOut);
 

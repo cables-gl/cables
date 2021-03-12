@@ -1,26 +1,27 @@
-const filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string' } ));
-const reloadBtn=op.inTriggerButton("reload");
-const jsonp=op.inValueBool("JsonP",false);
-const outData=op.outValue("Result");
-const isLoading=op.outValue("Is Loading",false);
+const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string" }));
+const reloadBtn = op.inTriggerButton("reload");
+const jsonp = op.inValueBool("JsonP", false);
+const outData = op.outValue("Result");
+const isLoading = op.outValue("Is Loading", false);
 
-filename.onChange=delayedReload;
-reloadBtn.hidePort();
-reloadBtn.onTriggered=reload;
-jsonp.onChange=delayedReload;
+filename.onChange = delayedReload;
+reloadBtn.setUiAttribs({ "hidePort": true });
 
-var loadingId=0;
-var reloadTimeout=0;
+reloadBtn.onTriggered = reload;
+jsonp.onChange = delayedReload;
+
+let loadingId = 0;
+let reloadTimeout = 0;
 
 function delayedReload()
 {
     clearTimeout(reloadTimeout);
-    reloadTimeout=setTimeout(reload,100);
+    reloadTimeout = setTimeout(reload, 100);
 }
 
-op.onFileChanged=function(fn)
+op.onFileChanged = function (fn)
 {
-    if(filename.get() && filename.get().indexOf(fn)>-1)
+    if (filename.get() && filename.get().indexOf(fn) > -1)
     {
         reload();
     }
@@ -28,34 +29,33 @@ op.onFileChanged=function(fn)
 
 function reload()
 {
-    if(!filename.get())return;
+    if (!filename.get()) return;
 
     op.patch.loading.finished(loadingId);
 
-    loadingId=op.patch.loading.start('jsonFile',''+filename.get());
+    loadingId = op.patch.loading.start("jsonFile", "" + filename.get());
     isLoading.set(true);
 
-    var f=CABLES.ajax;
-    if(jsonp.get())f=CABLES.jsonp;
+    let f = CABLES.ajax;
+    if (jsonp.get())f = CABLES.jsonp;
 
     f(
-        op.patch.getFilePath(filename.get())+'?nc='+CABLES.uuid(),
-        function(err,data,xhr)
+        op.patch.getFilePath(filename.get()) + "?nc=" + CABLES.uuid(),
+        function (err, data, xhr)
         {
             try
             {
                 outData.set(data);
-                op.uiAttr({'error':''});
+                op.uiAttr({ "error": "" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
-            catch(e)
+            catch (e)
             {
-                console.log('exc... ',filename.get(),jsonp.get());
-                op.uiAttr({'error':'error loading json'});
+                console.log("exc... ", filename.get(), jsonp.get());
+                op.uiAttr({ "error": "error loading json" });
                 op.patch.loading.finished(loadingId);
                 isLoading.set(false);
             }
         });
-
 }
