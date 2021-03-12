@@ -205,10 +205,11 @@ Framebuffer2.prototype.setSize = function (w, h)
         {
             // this._cgl.gl.getExtension("EXT_float_blend"); // remove firefox warning...
 
-            if (this._options.multisampling) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
+
+            if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
             else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
         }
-        else if (this._options.multisampling)
+        else if (this._options.multisampling && this._options.multisamplingSamples)
         {
             this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA8, this._width, this._height);
         }
