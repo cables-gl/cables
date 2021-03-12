@@ -210,7 +210,7 @@ Link.canLink = function (p1, p2)
     if (p1.direction == CONSTANTS.PORT.PORT_DIR_IN && p1.isAnimated()) return false;
     if (p2.direction == CONSTANTS.PORT.PORT_DIR_IN && p2.isAnimated()) return false;
 
-    // if (p1.isHidden() || p2.isHidden()) return false;
+    if (p1.isHidden() || p2.isHidden()) return false;
 
     if (p1.isLinkedTo(p2)) return false;
 
