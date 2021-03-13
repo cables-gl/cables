@@ -1,7 +1,6 @@
 // * see framebuffer1
 
 import { Texture } from "./cgl_texture";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
 // const fbs = {
@@ -169,7 +168,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // console.log("fb setsize", this._width, this._height, this);
 
-    profileData.profileFrameBuffercreate++;
+    this._cgl.profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
     {
@@ -338,7 +337,7 @@ Framebuffer2.prototype.renderEnd = function ()
 {
     this._cgl.popPMatrix();
 
-    profileData.profileFramebuffer++;
+    this._cgl.profileData.profileFramebuffer++;
 
     if (this._numRenderBuffers <= 1)
     {

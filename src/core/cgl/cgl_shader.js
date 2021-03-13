@@ -3,7 +3,6 @@ import { now } from "../timer";
 import { simpleId, generateUUID } from "../utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
-import { profileData } from "./cgl_profiledata";
 import { CONSTANTS } from "./constants";
 import { Log } from "../log";
 import { escapeHTML } from "./cgl_utils";
