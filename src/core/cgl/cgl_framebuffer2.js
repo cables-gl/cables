@@ -1,7 +1,6 @@
 // * see framebuffer1
 
 import { Texture } from "./cgl_texture";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
 // const fbs = {
@@ -45,7 +44,7 @@ const Framebuffer2 = function (cgl, w, h, options)
 
     this.name = this._options.name || "unknown";
 
-    CGL.profileData.addHeavyEvent("framebuffer create", this.name);
+    this._cgl.profileData.addHeavyEvent("framebuffer create", this.name);
 
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
@@ -158,7 +157,7 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 
 Framebuffer2.prototype.setSize = function (w, h)
 {
-    CGL.profileData.addHeavyEvent("framebuffer resize", this.name);
+    this._cgl.profileData.addHeavyEvent("framebuffer resize", this.name);
 
     let i = 0;
     this._width = Math.floor(w);
@@ -169,7 +168,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // console.log("fb setsize", this._width, this._height, this);
 
-    profileData.profileFrameBuffercreate++;
+    this._cgl.profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
     {
@@ -338,7 +337,7 @@ Framebuffer2.prototype.renderEnd = function ()
 {
     this._cgl.popPMatrix();
 
-    profileData.profileFramebuffer++;
+    this._cgl.profileData.profileFramebuffer++;
 
     if (this._numRenderBuffers <= 1)
     {

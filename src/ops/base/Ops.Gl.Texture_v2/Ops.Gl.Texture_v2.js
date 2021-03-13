@@ -14,7 +14,7 @@ const
 
 op.setPortGroup("Size", [width, height]);
 
-unpackAlpha.hidePort();
+unpackAlpha.setUiAttribs({ "hidePort": true });
 
 op.toWorkPortsNeedToBeLinked(textureOut);
 

@@ -20,7 +20,9 @@ const
 
 let needsRebuild = true;
 let mesh = null;
-inUVMode.hidePort();
+
+inUVMode.setUiAttribs({ "hidePort": true });
+
 
 op.preRender = buildMesh;
 

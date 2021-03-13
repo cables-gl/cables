@@ -61,4 +61,4 @@ class ProfileData
 }
 
 
-export const profileData = new ProfileData();
+export { ProfileData };

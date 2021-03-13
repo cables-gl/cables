@@ -231,15 +231,15 @@ function updateText()
 {
     if (!inShow.get()) return;
     let warn = "";
-    if (CGL.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + CGL.profileData.profileShaderCompileName + ") ";
-    if (CGL.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + CGL.profileData.profileShaderGetUniformName + ")";
-    if (CGL.profileData.profileTextureResize > 0)warn += "Texture resize! ";
-    if (CGL.profileData.profileFrameBuffercreate > 0)warn += "Framebuffer create! ";
-    if (CGL.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
-    if (CGL.profileData.profileTextureDelete > 0)warn += "Texture delete! ";
-    if (CGL.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + CGL.profileData.profileNonTypedAttribNames;
-    if (CGL.profileData.profileTextureNew > 0)warn += "new texture created! ";
-    if (CGL.profileData.profileGenMipMap > 0)warn += "generating mip maps!";
+    if (op.patch.cgl.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
+    if (op.patch.cgl.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
+    if (op.patch.cgl.profileData.profileTextureResize > 0)warn += "Texture resize! ";
+    if (op.patch.cgl.profileData.profileFrameBuffercreate > 0)warn += "Framebuffer create! ";
+    if (op.patch.cgl.profileData.profileEffectBuffercreate > 0)warn += "Effectbuffer create! ";
+    if (op.patch.cgl.profileData.profileTextureDelete > 0)warn += "Texture delete! ";
+    if (op.patch.cgl.profileData.profileNonTypedAttrib > 0)warn += "Not-Typed Buffer Attrib! " + op.patch.cgl.profileData.profileNonTypedAttribNames;
+    if (op.patch.cgl.profileData.profileTextureNew > 0)warn += "new texture created! ";
+    if (op.patch.cgl.profileData.profileGenMipMap > 0)warn += "generating mip maps!";
 
     if (warn.length > 0)
     {
@@ -260,7 +260,7 @@ function updateText()
     else
     {
         html += fps + " fps / ";
-        html += "CPU: " + Math.round((currentTimeMainloop + CGL.profileData.profileOnAnimFrameOps - CGL.profileData.profileMainloopMs) * 100) / 100 + "ms / ";
+        html += "CPU: " + Math.round((currentTimeMainloop + op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs) * 100) / 100 + "ms / ";
         if (ext && currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
         element.innerHTML = html;
     }
@@ -293,24 +293,24 @@ function updateText()
         element.innerHTML += "<br/>frame avg: " + Math.round(avgMsChilds * 100) / 100 + " ms (" + Math.round(avgMsChilds / avgMs * 100) + "%) / " + Math.round(avgMs * 100) / 100 + " ms";
         element.innerHTML += " (self: " + Math.round((selfTime) * 100) / 100 + " ms) ";
 
-        element.innerHTML += "<br/>shader binds: " + Math.ceil(CGL.profileData.profileShaderBinds / fps) +
-            " uniforms: " + Math.ceil(CGL.profileData.profileUniformCount / fps) +
-            " mvp_uni_mat4: " + Math.ceil(CGL.profileData.profileMVPMatrixCount / fps) +
-            " num glPrimitives: " + Math.ceil(CGL.profileData.profileMeshNumElements / (fps)) +
+        element.innerHTML += "<br/>shader binds: " + Math.ceil(op.patch.cgl.profileData.profileShaderBinds / fps) +
+            " uniforms: " + Math.ceil(op.patch.cgl.profileData.profileUniformCount / fps) +
+            " mvp_uni_mat4: " + Math.ceil(op.patch.cgl.profileData.profileMVPMatrixCount / fps) +
+            " num glPrimitives: " + Math.ceil(op.patch.cgl.profileData.profileMeshNumElements / (fps)) +
 
-            " mesh.setGeom: " + CGL.profileData.profileMeshSetGeom +
-            " videos: " + CGL.profileData.profileVideosPlaying +
-            " tex preview: " + CGL.profileData.profileTexPreviews;
+            " mesh.setGeom: " + op.patch.cgl.profileData.profileMeshSetGeom +
+            " videos: " + op.patch.cgl.profileData.profileVideosPlaying +
+            " tex preview: " + op.patch.cgl.profileData.profileTexPreviews;
 
         element.innerHTML +=
-        " draw meshes: " + Math.ceil(CGL.profileData.profileMeshDraw / fps) +
-        " framebuffer blit: " + Math.ceil(CGL.profileData.profileFramebuffer / fps) +
-        " texeffect blit: " + Math.ceil(CGL.profileData.profileTextureEffect / fps);
+        " draw meshes: " + Math.ceil(op.patch.cgl.profileData.profileMeshDraw / fps) +
+        " framebuffer blit: " + Math.ceil(op.patch.cgl.profileData.profileFramebuffer / fps) +
+        " texeffect blit: " + Math.ceil(op.patch.cgl.profileData.profileTextureEffect / fps);
 
-        element.innerHTML += " all shader compiletime: " + Math.round(CGL.profileData.shaderCompileTime * 100) / 100;
+        element.innerHTML += " all shader compiletime: " + Math.round(op.patch.cgl.profileData.shaderCompileTime * 100) / 100;
     }
 
-    CGL.profileData.clear();
+    op.patch.cgl.profileData.clear();
 }
 
 function styleMeasureEle(ele)
@@ -448,7 +448,7 @@ exe.onTriggered = function ()
     {
         measures();
 
-        if (opened && !CGL.profileData.pause)
+        if (opened && !op.patch.cgl.profileData.pause)
         {
             const timeUsed = performance.now() - lastTime;
             queue.push(timeUsed);
@@ -457,7 +457,7 @@ exe.onTriggered = function ()
             timesMainloop.push(childsTime);
             timesMainloop.shift();
 
-            timesOnFrame.push(CGL.profileData.profileOnAnimFrameOps - CGL.profileData.profileMainloopMs);
+            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs);
             timesOnFrame.shift();
 
             timesGPU.push(currentTimeGPU);
@@ -476,8 +476,8 @@ exe.onTriggered = function ()
     endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
-    const nCurrentTimeMainloop = CGL.profileData.profileMainloopMs;
-    const nCurrentTimeOnFrame = CGL.profileData.profileOnAnimFrameOps - currentTimeMainloop;
+    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
+    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps - currentTimeMainloop;
 
     if (smoothGraph.get())
     {

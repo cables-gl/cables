@@ -1,6 +1,6 @@
 const
-    cleanup = op.inTriggerButton("Clean up connections"),
-    exe = op.inTrigger("exe");
+    exe = op.inTrigger("exe"),
+    cleanup = op.inTriggerButton("Clean up connections");
 
 const
     exes = [],
@@ -11,7 +11,8 @@ let updateTimeout = null;
 
 exe.onTriggered = triggerAll;
 cleanup.onTriggered = clean;
-cleanup.hidePort();
+cleanup.setUiAttribs({ "hidePort": true });
+cleanup.setUiAttribs({ "hideParam": true });
 
 for (let i = 0; i < num; i++)
 {

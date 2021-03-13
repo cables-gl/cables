@@ -19,11 +19,12 @@ const
     texOut = op.outTexture("texture_out", null),
     outRatio = op.outValue("Aspect Ratio");
 
-alphaMaskMethod.hidePort();
-greyscale.hidePort();
-invertR.hidePort();
-invertG.hidePort();
-invertB.hidePort();
+alphaMaskMethod.setUiAttribs({ "hidePort": true });
+greyscale.setUiAttribs({ "hidePort": true });
+invertR.setUiAttribs({ "hidePort": true });
+invertG.setUiAttribs({ "hidePort": true });
+invertB.setUiAttribs({ "hidePort": true });
+
 
 let autoRefreshTimeout = null;
 const cgl = op.patch.cgl;
