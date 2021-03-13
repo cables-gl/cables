@@ -625,7 +625,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const width = 8;
     const height = 8;
 
-    this._cgl.profileData.profileTextureNew++;
+    cgl.profileData.profileTextureNew++;
 
     cgl.gl.bindTexture(target, tex);
     this._cgl.profileData.profileTextureResize++;
