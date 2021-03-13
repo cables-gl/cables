@@ -37,7 +37,7 @@ class CubemapTexture
         this._fromData = true;
         this.name = "cubemap unknown";
 
-        this._cgl.profileData.profileData.profileTextureNew++;
+        this._cgl.profileData.profileTextureNew++;
 
         this.setSize(options.width, options.height);
     }
@@ -61,7 +61,7 @@ class CubemapTexture
         this.height = h;
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        this._cgl.profileData.profileData.profileTextureResize++;
+        this._cgl.profileData.profileTextureResize++;
 
         if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
         {
