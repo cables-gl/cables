@@ -5,8 +5,11 @@ const
     result = op.outArray("Array"),
     outColNames = op.outArray("Column Names");
 
-spread.hidePort();
-inNumColumns.hidePort();
+// spread.hidePort();
+spread.setUiAttribs({ "hidePort": true });
+inNumColumns.setUiAttribs({ "hidePort": true });
+outp.setUiAttribs({ "hidePort": true });
+// inNumColumns.hidePort();
 
 outp.onChange =
 spread.onChange = update;

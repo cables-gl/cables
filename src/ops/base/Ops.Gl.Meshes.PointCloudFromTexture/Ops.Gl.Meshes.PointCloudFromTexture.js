@@ -1,7 +1,9 @@
 const
     render = op.inTrigger("render"),
     inNum = op.inInt("Num Points", 10000),
+    inAxis = op.inSwitch("Axis", ["XYZ", "XY"], "XYZ"),
     inTex = op.inTexture("Texture", null, "texture"),
+    inNorm = op.inBool("Normalize", false),
     // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
     trigger = op.outTrigger("Trigger");
 
@@ -26,13 +28,18 @@ updateDefines();
 
 mod.addUniformVert("f", "MOD_texSize", 0);
 
+inNorm.onChange =
+    inAxis.onChange = updateDefines;
 inNum.onChange = setupMesh;
 setupMesh();
+updateDefines();
 
 function updateDefines()
 {
-    // mod.toggleDefine("MOD_ADD", inMode.get() == "Add");
-    // mod.toggleDefine("MOD_ABS", inMode.get() == "Absolute");
+    mod.toggleDefine("MOD_AXIS_XY", inAxis.get() == "XY");
+    mod.toggleDefine("MOD_AXIS_XYZ", inAxis.get() == "XYZ");
+
+    mod.toggleDefine("MOD_NORMALIZE", inNorm.get());
 }
 
 function doRender()

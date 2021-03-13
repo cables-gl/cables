@@ -17,6 +17,11 @@ op.toWorkPortsNeedToBeLinked(tex, outColors);
 let isFloatingPoint = false;
 let channelType = op.patch.cgl.gl.UNSIGNED_BYTE;
 
+let convertedPixelData = null;
+
+let lastFloatingPoint = false;
+let lastWidth = 0;
+let lastHeight = 0;
 
 pUpdate.onTriggered = function ()
 {
@@ -41,9 +46,19 @@ pUpdate.onTriggered = function ()
 
         outIsFloatingPoint.set(isFloatingPoint);
 
-        const size = realTexture.width * realTexture.height * 4;
-        if (isFloatingPoint) pixelData = new Float32Array(size);
-        else pixelData = new Uint8Array(size);
+        if (
+            lastFloatingPoint != isFloatingPoint ||
+            lastWidth != realTexture.width ||
+            lastHeight != realTexture.height)
+        {
+            const size = realTexture.width * realTexture.height * 4;
+            if (isFloatingPoint) pixelData = new Float32Array(size);
+            else pixelData = new Uint8Array(size);
+
+            lastFloatingPoint = isFloatingPoint;
+            lastWidth = realTexture.width;
+            lastHeight = realTexture.height;
+        }
 
         texChanged = false;
     }
@@ -59,12 +74,9 @@ pUpdate.onTriggered = function ()
         pixelData
     );
 
-
-    let convertedPixelData = null;
-
     if (inNormalize.get() == "0-1")
     {
-        convertedPixelData = new Float32Array(pixelData.length);
+        if (!convertedPixelData || convertedPixelData.length != pixelData.length) convertedPixelData = new Float32Array(pixelData.length);
         for (let i = 0; i < pixelData.length; i++)
         {
             convertedPixelData[i] = pixelData[i] / 255;
@@ -72,7 +84,8 @@ pUpdate.onTriggered = function ()
     }
     if (inNormalize.get() == "-1-1")
     {
-        convertedPixelData = new Float32Array(pixelData.length);
+        if (!convertedPixelData || convertedPixelData.length != pixelData.length) convertedPixelData = new Float32Array(pixelData.length);
+
         for (let i = 0; i < pixelData.length; i++)
         {
             convertedPixelData[i] = ((pixelData[i] - 128) * 2.0) / 255;
