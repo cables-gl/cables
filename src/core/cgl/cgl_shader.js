@@ -1351,7 +1351,7 @@ Shader.prototype._linkProgram = function (program)
 
             Log.log("srcFrag", this.srcFrag);
             Log.log("srcVert", this.srcVert);
-            Log.log(name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+            Log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
             Log.log("--------------------------------------");
             Log.log(this);
