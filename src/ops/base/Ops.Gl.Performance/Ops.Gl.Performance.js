@@ -476,8 +476,8 @@ exe.onTriggered = function ()
     endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
-    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
-    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps - currentTimeMainloop;
+    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs - op.patch.cgl.profileData.profileOnAnimFrameOps;
+    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps;
 
     if (smoothGraph.get())
     {
