@@ -152,7 +152,7 @@ class CubemapFramebuffer
         this.width = Math.min(this.width, this._cgl.maxTexSize);
         this.height = Math.min(this.height, this._cgl.maxTexSize);
 
-        CGL.profileData.profileFrameBuffercreate++;
+        this._cgl.profileData.profileFrameBuffercreate++;
 
         if (this._framebuffer)
         {
@@ -286,7 +286,7 @@ class CubemapFramebuffer
 
     renderEnd()
     {
-        CGL.profileData.profileFramebuffer++;
+        this._cgl.profileData.profileFramebuffer++;
 
         if (this._cgl.glVersion !== 1)
         {

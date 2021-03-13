@@ -4,6 +4,7 @@ import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
+import { ProfileData } from "./cgl_profiledata";
 
 
 /**
@@ -17,7 +18,8 @@ const Context = function (_patch)
 {
     EventTarget.apply(this);
 
-    // var self = this;
+    this.profileData = new ProfileData();
+
     const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;

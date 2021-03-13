@@ -1,6 +1,5 @@
 import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
-import { profileData } from "./cgl_profiledata";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
 import { Log } from "../log";
 
@@ -46,7 +45,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._transformFeedBackLoc = -1;
     this._lastAttrUpdate = 0;
 
-    CGL.profileData.addHeavyEvent("mesh constructed", this._geom.name);
+    this._cgl.profileData.addHeavyEvent("mesh constructed", this._geom.name);
 
     Object.defineProperty(this, "numInstances", {
         get()
@@ -112,7 +111,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
 
-    profileData.profileMeshAttributes += (end - start) || 0;
+    this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
     // void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);
     // void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
 
@@ -149,8 +148,8 @@ Mesh.prototype._bufferArray = function (array, attr)
                 console.log("_bufferArray create new float32array", array.length, attr.name);
             }
 
-            profileData.profileNonTypedAttrib++;
-            profileData.profileNonTypedAttribNames = "(" + this._geom.name + ":" + attr.name + ")";
+            this._cgl.profileData.profileNonTypedAttrib++;
+            this._cgl.profileData.profileNonTypedAttribNames = "(" + this._geom.name + ":" + attr.name + ")";
         }
     }
     else floatArray = array;
@@ -177,7 +176,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     let i = 0;
     const numItems = array.length / itemSize;
 
-    profileData.profileMeshAttributes += numItems || 0;
+    this._cgl.profileData.profileMeshAttributes += numItems || 0;
 
     if (numItems === 0) console.warn("CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
 
@@ -350,7 +349,7 @@ Mesh.prototype.setGeom = function (geom)
     if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
 
     MESH.lastMesh = null;
-    profileData.profileMeshSetGeom++;
+    this._cgl.profileData.profileMeshSetGeom++;
 
     this._disposeAttributes();
 
@@ -431,7 +430,7 @@ Mesh.prototype._bind = function (shader)
                 attribute._attrLocationLastShaderTime = shader.lastCompile;
                 attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
                 // console.log('attribloc',attribute.name,attrLocs[i]);
-                profileData.profileAttrLoc++;
+                this._cgl.profileData.profileAttrLoc++;
             }
         }
 
@@ -487,7 +486,7 @@ Mesh.prototype._bind = function (shader)
                         {
                             pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
                         }
-                        profileData.profileAttrLoc++;
+                        this._cgl.profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
                         this._cgl.gl.vertexAttribPointer(pointer.loc, attribute.itemSize, attribute.type, false, pointer.stride, pointer.offset);
@@ -628,8 +627,8 @@ Mesh.prototype.render = function (shader)
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
     }
 
-    profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
-    profileData.profileMeshDraw++;
+    this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
+    this._cgl.profileData.profileMeshDraw++;
 };
 
 Mesh.prototype.setNumInstances = function (n)

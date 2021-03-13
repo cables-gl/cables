@@ -426,8 +426,8 @@ Shader.prototype.compile = function ()
 {
     const startTime = performance.now();
 
-    profileData.profileShaderCompiles++;
-    profileData.profileShaderCompileName = this._name;
+    this._cgl.profileData.profileShaderCompiles++;
+    this._cgl.profileData.profileShaderCompileName = this._name;
 
 
     let extensionString = "";
@@ -442,7 +442,7 @@ Shader.prototype.compile = function ()
 
     const structStrings = this.createStructUniforms();
 
-    CGL.profileData.addHeavyEvent("shader compile", this._name);
+    this._cgl.profileData.addHeavyEvent("shader compile", this._name);
 
     if (this._uniforms)
     {
@@ -771,7 +771,7 @@ Shader.prototype.compile = function ()
 
     this._cgl.printError("shader compile");
 
-    CGL.profileData.shaderCompileTime += performance.now() - startTime;
+    this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
 };
 
 Shader.hasChanged = function ()
@@ -801,7 +801,7 @@ Shader.prototype.bind = function ()
 
     if (this._cgl.currentProgram != this._program)
     {
-        profileData.profileShaderBinds++;
+        this._cgl.profileData.profileShaderBinds++;
         this._cgl.gl.useProgram(this._program);
         this._cgl.currentProgram = this._program;
     }
@@ -813,7 +813,7 @@ Shader.prototype.bind = function ()
     {
         this._pMatrixState = this._cgl.getProjectionMatrixStateCount();
         this._cgl.gl.uniformMatrix4fv(this._projMatrixUniform, false, this._cgl.pMatrix);
-        profileData.profileMVPMatrixCount++;
+        this._cgl.profileData.profileMVPMatrixCount++;
     }
 
     if (this._vMatrixUniform)
@@ -821,24 +821,24 @@ Shader.prototype.bind = function ()
         if (this._vMatrixState != this._cgl.getViewMatrixStateCount())
         {
             this._cgl.gl.uniformMatrix4fv(this._vMatrixUniform, false, this._cgl.vMatrix);
-            profileData.profileMVPMatrixCount++;
+            this._cgl.profileData.profileMVPMatrixCount++;
             this._vMatrixState = this._cgl.getViewMatrixStateCount();
 
             if (this._inverseViewMatrixUniform)
             {
                 mat4.invert(this._tempInverseViewMatrix, this._cgl.vMatrix);
                 this._cgl.gl.uniformMatrix4fv(this._inverseViewMatrixUniform, false, this._tempInverseViewMatrix);
-                profileData.profileMVPMatrixCount++;
+                this._cgl.profileData.profileMVPMatrixCount++;
             }
         }
         this._cgl.gl.uniformMatrix4fv(this._mMatrixUniform, false, this._cgl.mMatrix);
-        profileData.profileMVPMatrixCount++;
+        this._cgl.profileData.profileMVPMatrixCount++;
 
         if (this._camPosUniform)
         {
             mat4.invert(this._tempCamPosMatrix, this._cgl.vMatrix);
             this._cgl.gl.uniform3f(this._camPosUniform, this._tempCamPosMatrix[12], this._tempCamPosMatrix[13], this._tempCamPosMatrix[14]);
-            profileData.profileMVPMatrixCount++;
+            this._cgl.profileData.profileMVPMatrixCount++;
         }
     }
     else
@@ -848,7 +848,7 @@ Shader.prototype.bind = function ()
 
         mat4.mul(tempmv, this._cgl.vMatrix, this._cgl.mMatrix);
         this._cgl.gl.uniformMatrix4fv(this._mvMatrixUniform, false, tempmv);
-        profileData.profileMVPMatrixCount++;
+        this._cgl.profileData.profileMVPMatrixCount++;
     }
 
     if (this._normalMatrixUniform)
@@ -858,7 +858,7 @@ Shader.prototype.bind = function ()
         mat4.transpose(this._tempNormalMatrix, this._tempNormalMatrix);
 
         this._cgl.gl.uniformMatrix4fv(this._normalMatrixUniform, false, this._tempNormalMatrix);
-        profileData.profileMVPMatrixCount++;
+        this._cgl.profileData.profileMVPMatrixCount++;
     }
 
     for (let i = 0; i < this._libs.length; i++)
