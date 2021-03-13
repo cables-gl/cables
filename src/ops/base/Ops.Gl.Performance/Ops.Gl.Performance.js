@@ -260,7 +260,7 @@ function updateText()
     else
     {
         html += fps + " fps / ";
-        html += "CPU: " + Math.round((currentTimeMainloop + op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs) * 100) / 100 + "ms / ";
+        html += "CPU: " + Math.round((currentTimeMainloop + op.patch.cgl.profileData.profileOnAnimFrameOps) * 100) / 100 + "ms / ";
         if (ext && currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
         element.innerHTML = html;
     }
@@ -457,7 +457,7 @@ exe.onTriggered = function ()
             timesMainloop.push(childsTime);
             timesMainloop.shift();
 
-            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs);
+            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps);
             timesOnFrame.shift();
 
             timesGPU.push(currentTimeGPU);
@@ -476,7 +476,7 @@ exe.onTriggered = function ()
     endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
-    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs - op.patch.cgl.profileData.profileOnAnimFrameOps;
+    const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
     const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps;
 
     if (smoothGraph.get())
