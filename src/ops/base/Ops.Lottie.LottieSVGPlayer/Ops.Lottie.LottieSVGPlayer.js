@@ -32,7 +32,5 @@ function updateData()
         "animationData": inData.get()
     };
 
-    console.log("lottie params", params);
-
     anim = lottie.loadAnimation(params);
 }
