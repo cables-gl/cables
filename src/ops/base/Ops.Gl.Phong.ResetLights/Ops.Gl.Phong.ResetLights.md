@@ -1,0 +1,1 @@
+Use this op to exclude parts of your render path from the lighting system.

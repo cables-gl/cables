@@ -101,5 +101,78 @@
             }
         ],
         "name": "Ops.WebAudio.AudioRecorder"
+    },
+    "summary": "record, playback and download audio",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "audio input"
+            },
+            {
+                "name": "Start Recording",
+                "text": "click/trigger to start recording"
+            },
+            {
+                "name": "Stop Recording",
+                "text": "click/trigger to stop recording"
+            },
+            {
+                "name": "Input Gain",
+                "text": "volume of incoming audio"
+            },
+            {
+                "name": "Start Playback",
+                "text": "click/trigger to start playback"
+            },
+            {
+                "name": "Stop Playback",
+                "text": "click/trigger to stop playback"
+            },
+            {
+                "name": "Clear Buffer",
+                "text": "click/trigger to clear buffer (revert to \"idling\" state)"
+            },
+            {
+                "name": "Playback Gain",
+                "text": "volume of recorded audio playback"
+            },
+            {
+                "name": "Loop Playback",
+                "text": "check to loop the playback of the recorded audio"
+            },
+            {
+                "name": "Download .wav File",
+                "text": "click/trigger to download the recorded file"
+            },
+            {
+                "name": "Audio Out",
+                "text": "audio output, pass through for incoming signal"
+            },
+            {
+                "name": "Recorded Audio Out",
+                "text": "output of the recorded audio"
+            },
+            {
+                "name": "Is Recording",
+                "text": "true if currently recording"
+            },
+            {
+                "name": "Is Playing Back",
+                "text": "true if currently playing back"
+            },
+            {
+                "name": "State",
+                "text": "one of 5 states: \"idling\", \"recording\", \"processing\", \"ready\", \"playing\""
+            },
+            {
+                "name": "AudioBuffer Out",
+                "text": "audiobuffer output"
+            }
+        ]
     }
 }

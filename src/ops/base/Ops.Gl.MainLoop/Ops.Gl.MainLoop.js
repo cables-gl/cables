@@ -199,5 +199,5 @@ function render(time)
     if (!cgl.frameStore.phong)cgl.frameStore.phong = {};
     rframes++;
 
-    CGL.profileData.profileMainloopMs = performance.now() - startTime;
+    op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
 }

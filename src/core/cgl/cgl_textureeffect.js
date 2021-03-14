@@ -1,6 +1,5 @@
 import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
 
@@ -53,7 +52,7 @@ TextureEffect.prototype.setSourceTexture = function (tex)
 
         this._textureTarget = this._textureSource.clone();
 
-        profileData.profileEffectBuffercreate++;
+        this._cgl.profileData.profileEffectBuffercreate++;
 
         this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._frameBuf);
 
@@ -173,7 +172,7 @@ TextureEffect.prototype.finish = function ()
 
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, this._cgl.popGlFrameBuffer());
 
-    profileData.profileTextureEffect++;
+    this._cgl.profileData.profileTextureEffect++;
 
     // this._textureTarget.updateMipMap();
 

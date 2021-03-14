@@ -28,7 +28,7 @@ inDownloadButton.setUiAttribs({ "greyout": true });
 const inputGain = audioCtx.createGain();
 const outputGain = audioCtx.createGain();
 
-let isIOS = !!navigator.MediaRecorder;
+let isIOS = !navigator.hasOwnProperty("MediaRecorder");
 
 const STATES = {
     "RECORDING": "recording",
@@ -148,7 +148,7 @@ inStopRecording.onTriggered = () =>
     case STATES.READY:
         return;
     case STATES.IDLING:
-        break;
+        return;
     }
 
     op.setUiError("recording", null);

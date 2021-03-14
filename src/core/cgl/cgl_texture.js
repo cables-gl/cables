@@ -1,4 +1,3 @@
-import { profileData } from "./cgl_profiledata";
 import { uuid } from "../utils";
 import { Log } from "../log";
 
@@ -70,9 +69,9 @@ const Texture = function (__cgl, options)
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
-    profileData.profileTextureNew++;
+    this._cgl.profileData.profileTextureNew++;
 
-    CGL.profileData.addHeavyEvent("texture created", this.name);
+    this._cgl.profileData.addHeavyEvent("texture created", this.name);
 
     this.setSize(options.width, options.height);
 };
@@ -149,7 +148,7 @@ Texture.prototype.setSize = function (w, h)
     this.height = h;
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    profileData.profileTextureResize++;
+    this._cgl.profileData.profileTextureResize++;
 
     const uarr = null;
 
@@ -262,7 +261,7 @@ Texture.prototype.updateMipMap = function ()
     if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
-        profileData.profileGenMipMap++;
+        this._cgl.profileData.profileGenMipMap++;
     }
 };
 
@@ -325,7 +324,7 @@ Texture.prototype.delete = function ()
 
     this.width = 0;
     this.height = 0;
-    profileData.profileTextureDelete++;
+    this._cgl.profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
 
@@ -626,10 +625,10 @@ Texture.getEmptyCubemapTexture = function (cgl)
     const width = 8;
     const height = 8;
 
-    CGL.profileData.profileTextureNew++;
+    cgl.profileData.profileTextureNew++;
 
     cgl.gl.bindTexture(target, tex);
-    CGL.profileData.profileTextureResize++;
+    cgl.profileData.profileTextureResize++;
 
     for (let i = 0; i < 6; i += 1)
     {
