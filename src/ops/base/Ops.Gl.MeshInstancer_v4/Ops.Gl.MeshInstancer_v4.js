@@ -116,6 +116,11 @@ function setupArray()
 
     let transforms = inTranslates.get();
     if (!transforms) transforms = [0, 0, 0];
+    if (transforms.length === 0)
+    {
+        mesh = null;
+        return;
+    }
 
     num = Math.floor(transforms.length / 3);
 
@@ -200,8 +205,9 @@ function updateLimit()
 
 function doRender()
 {
-    if (!mesh) return;
+    // if (!mesh) return;
     if (recalc) setupArray();
+    if (!mesh) return;
 
     mod.bind();
 
