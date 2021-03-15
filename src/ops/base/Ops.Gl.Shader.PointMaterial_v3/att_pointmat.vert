@@ -6,8 +6,8 @@ IN vec3 attrTangent;
 IN vec3 attrBiTangent;
 
 #ifdef VERTEX_COLORS
-    IN vec4 attrVertColor;
-    OUT vec4 vertexColor;
+    IN vec3 attrVertColor;
+    OUT vec3 vertexColor;
 #endif
 
 OUT vec3 norm;
