@@ -1,5 +1,4 @@
 import { Texture } from "./cgl_texture";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
 // todo: convert to prototyped...
@@ -123,7 +122,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
         width = Math.ceil(w);
         height = Math.ceil(h);
 
-        profileData.profileFrameBuffercreate++;
+        cgl.profileData.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
