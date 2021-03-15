@@ -35,6 +35,8 @@ const uniformCubemap = new CGL.Uniform(projectionShader, "t", "cubemap", 0);
 projectionShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 projectionShader.setSource(attachments.projection_vert, attachments.projection_frag);
 
+projectionShader.toggleDefine("EQUIRECTANGULAR", inEquirect);
+
 inTrigger.onTriggered = function ()
 {
     if (!inCubemap.get())
@@ -43,7 +45,6 @@ inTrigger.onTriggered = function ()
         return;
     }
 
-    projectionShader.toggleDefine("EQUIRECTANGULAR", inEquirect);
     projectionShader.popTextures();
 
     cgl.frameStore.renderOffscreen = true;
