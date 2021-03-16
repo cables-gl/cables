@@ -126,7 +126,6 @@ function updateClass()
             classes.indexOf(oldClasses[i].trim()) == -1)
         {
             found = true;
-            console.log("remove", oldClasses[i]);
             div.classList.remove(oldClasses[i]);
         }
     }
