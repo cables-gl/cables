@@ -32,6 +32,12 @@ pUpdate.onTriggered = function ()
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
+    let channels = gl.RGBA;
+    // channels = gl.R;
+
+    let numChannels = 4;
+    // numChannels = 1;
+
     if (texChanged)
     {
         gl.framebufferTexture2D(
@@ -51,7 +57,7 @@ pUpdate.onTriggered = function ()
             lastWidth != realTexture.width ||
             lastHeight != realTexture.height)
         {
-            const size = realTexture.width * realTexture.height * 4;
+            const size = realTexture.width * realTexture.height * numChannels;
             if (isFloatingPoint) pixelData = new Float32Array(size);
             else pixelData = new Uint8Array(size);
 
@@ -69,7 +75,7 @@ pUpdate.onTriggered = function ()
         0, 0,
         realTexture.width,
         realTexture.height,
-        gl.RGBA,
+        channels,
         channelType,
         pixelData
     );

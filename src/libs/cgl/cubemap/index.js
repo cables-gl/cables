@@ -18,6 +18,9 @@ const Cubemap = function (cgl, options)
     this.size = options.size || 512;
     this.camPos = options.camPos || vec3.fromValues(0, 0, 0);
 
+    console.log("core lib cubemap created!");
+
+
     this._framebuffer = new CubemapFramebuffer(this._cgl, this.size, this.size, {
 
     });

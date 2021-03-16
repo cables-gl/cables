@@ -75,6 +75,9 @@ class CubemapFramebuffer
 
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
 
+
+        console.log("cubemapframebuffer created");
+
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,
