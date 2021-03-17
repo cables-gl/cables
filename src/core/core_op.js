@@ -177,7 +177,7 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p.parent = this;
         this.portsOut.push(p);
-        if (this.onAddPort) this.onAddPort(p);
+        // if (this.onAddPort) this.onAddPort(p);
         this.fireEvent("onPortAdd", p);
         return p;
     };
@@ -214,8 +214,11 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p.parent = this;
         this.portsIn.push(p);
-        if (this.onAddPort) this.onAddPort(p);
-        // this.fireEvent("onPortsChanged",{});
+
+        // if (this.onAddPort) this.onAddPort(p);
+        this.fireEvent("onPortAdd", p);
+
+
         return p;
     };
 
