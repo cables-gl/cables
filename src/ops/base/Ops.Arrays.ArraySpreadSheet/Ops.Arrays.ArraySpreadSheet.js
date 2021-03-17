@@ -67,7 +67,7 @@ function asFlat()
     }
 
     let arrSize = (lastRow + 1) * data.cols;
-    console.log(arrSize, data.cols, lastRow);
+
     arr.length = arrSize;
 
     return arr;
