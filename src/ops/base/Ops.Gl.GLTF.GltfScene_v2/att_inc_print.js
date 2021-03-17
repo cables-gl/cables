@@ -346,7 +346,11 @@ function printInfo()
             html+='<td>'+gltf.json.images[i].name+'</td>';
             html+='<td>'+gltf.json.images[i].mimeType+'</td>';
             html+='<td>';
-            html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeTexture(\''+gltf.json.images[i].name+'\')" class="treebutton">Expose</a>';
+
+            let name=gltf.json.images[i].name
+            if(name===undefined)name=gltf.json.images[i].bufferView;
+
+            html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeTexture(\''+name+'\')" class="treebutton">Expose</a>';
             html+='</td>';
 
             html+='<tr>';
