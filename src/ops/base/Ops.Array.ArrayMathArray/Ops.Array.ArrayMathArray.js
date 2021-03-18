@@ -6,7 +6,7 @@ const inArray_0 = op.inArray("array 0"),
 
 let mathFunc;
 
-const showingError = false;
+let showingError = false;
 
 const mathArray = [];
 
@@ -37,7 +37,7 @@ function update()
     const array0 = inArray_0.get();
     const array1 = inArray_1.get();
 
-    mathArray.length = 0;
+    // mathArray.length = 0;
 
     if (!array0 || !array1)
     {
@@ -46,22 +46,22 @@ function update()
         return;
     }
 
-    if (array0.length !== array1.length)
-    {
-        outArray.set(null);
-        outArrayLength.set(0);
+    // if (array0.length !== array1.length)
+    // {
+    //     outArray.set(null);
+    //     outArrayLength.set(0);
 
-        // if (!showingError)
-        // {
-        op.setUiError("errorlength", "Arrays do not have the same length !");
-        // showingError = true;
-        // }
-        return;
-    }
+    //     if (!showingError)
+    //     {
+    //         op.setUiError("errorlength", "Arrays do not have the same length !");
+    //         showingError = true;
+    //     }
+    //     return;
+    // }
     // if (showingError)
     // {
-    // showingError = false;
-    op.setUiError("errorlength", null);
+    //     showingError = false;
+    //     op.setUiError("errorlength", null);
     // }
 
     mathArray.length = array0.length;

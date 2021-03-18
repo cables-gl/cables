@@ -14,7 +14,7 @@ const send = () =>
         {
             triggerName = inTriggerName.get();
         }
-        op.log("sending trigger", triggerName);
+        op.log("sending trigger", triggerName, socket.clientId);
         const payload = { "topic": inTopic.get(), "clientId": socket.clientId, "payload": triggerName };
         let delay = 0;
         const localDelay = inDelay.get();
