@@ -20,6 +20,7 @@ op.toWorkPortsNeedToBeLinked(geom);
 op.toWorkPortsNeedToBeLinked(exe);
 
 geom.ignoreValueSerialize = true;
+let drawMesh = true;
 
 const cgl = op.patch.cgl;
 const m = mat4.create();
@@ -118,9 +119,10 @@ function setupArray()
     if (!transforms) transforms = [0, 0, 0];
     if (transforms.length === 0)
     {
-        mesh = null;
+        drawMesh = false;
         return;
     }
+    else drawMesh = true;
 
     num = Math.floor(transforms.length / 3);
 
@@ -205,20 +207,22 @@ function updateLimit()
 
 function doRender()
 {
-    // if (!mesh) return;
-    if (recalc) setupArray();
     if (!mesh) return;
+    if (recalc) setupArray();
 
     mod.bind();
 
-    if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
-    else mesh.numInstances = num;
+    if (drawMesh)
+    {
+        if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
+        else mesh.numInstances = num;
 
-    outNum.set(mesh.numInstances);
+        outNum.set(mesh.numInstances);
 
-    if (mesh.numInstances > 0) mesh.render(cgl.getShader());
+        if (mesh.numInstances > 0) mesh.render(cgl.getShader());
 
-    mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+        mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+    }
 
     outTrigger.trigger();
 
