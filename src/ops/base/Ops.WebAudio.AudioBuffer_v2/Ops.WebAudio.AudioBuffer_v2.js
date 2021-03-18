@@ -118,7 +118,7 @@ inUrlPort.onChange = function ()
         if (isLoading)
         {
             fromDataNew = String(inUrlPort.get()).indexOf("data:") == 0;
-            const newUrl = fromData ? inUrlPort.get() : op.patch.getFilePath(inUrlPort.get());
+            const newUrl = fromDataNew ? inUrlPort.get() : op.patch.getFilePath(inUrlPort.get());
             if (newUrl !== currentFileUrl)
             {
                 urlToLoadNext = newUrl;
