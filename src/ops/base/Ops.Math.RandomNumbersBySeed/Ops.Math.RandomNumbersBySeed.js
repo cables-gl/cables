@@ -5,6 +5,7 @@ const
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
     outZ = op.outNumber("Z");
+outW = op.outNumber("W");
 
 inSeed.onChange =
     min.onChange =
@@ -14,8 +15,9 @@ function update()
 {
     const inMin = min.get();
     const inMax = max.get();
-    Math.randomSeed = Math.abs(inSeed.get() || 0) * 5711 + 1.0;
+    Math.randomSeed = Math.abs(inSeed.get() || 0) * 571.1 + 1.0;
     outX.set(Math.seededRandom() * (inMax - inMin) + inMin);
     outY.set(Math.seededRandom() * (inMax - inMin) + inMin);
     outZ.set(Math.seededRandom() * (inMax - inMin) + inMin);
+    outW.set(Math.seededRandom() * (inMax - inMin) + inMin);
 }

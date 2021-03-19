@@ -47,6 +47,11 @@
                 "type": 0,
                 "name": "Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "W",
+                "subType": "number"
             }
         ],
         "name": "Ops.Math.RandomNumbersBySeed"
