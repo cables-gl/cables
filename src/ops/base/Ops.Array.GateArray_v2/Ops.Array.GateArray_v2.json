@@ -12,18 +12,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pass Through",
                 "subType": "boolean"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array in"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array Out"
             }
         ],

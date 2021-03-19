@@ -51,6 +51,8 @@ function render()
     outProgress.set((maxTime - curTime) / maxTime);
 
     next.trigger();
+    next.trigger();
+    next.trigger();
 
     CABLES.overwriteTime = undefined;
     CABLES.internalNow = oldInternalNow;

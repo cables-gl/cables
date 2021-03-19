@@ -23,8 +23,8 @@ arrayIn.onChange = passThrough.onChange = function ()
         oldArr = copyArray(arrayIn.get());
         arrayOut.set(oldArr);
     }
-    else
-    {
-        arrayOut.set(oldArr);
-    }
+    // else
+    // {
+    //     arrayOut.set(oldArr);
+    // }
 };

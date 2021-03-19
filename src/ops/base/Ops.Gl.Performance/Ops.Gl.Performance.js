@@ -482,8 +482,8 @@ exe.onTriggered = function ()
     if (smoothGraph.get())
     {
         childsTime = childsTime * 0.9 + nChildsTime * 0.1;
-        currentTimeMainloop = currentTimeMainloop * 0.9 + nCurrentTimeMainloop * 0.1;
-        currentTimeOnFrame = currentTimeOnFrame * 0.9 + nCurrentTimeOnFrame * 0.1;
+        currentTimeMainloop = currentTimeMainloop * 0.5 + nCurrentTimeMainloop * 0.5;
+        currentTimeOnFrame = currentTimeOnFrame * 0.5 + nCurrentTimeOnFrame * 0.5;
     }
     else
     {
