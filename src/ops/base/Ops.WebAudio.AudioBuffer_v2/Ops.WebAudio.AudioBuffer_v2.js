@@ -1,3 +1,5 @@
+const cgl = op.patch.cgl;
+
 const
     audioCtx = CABLES.WEBAUDIO.createAudioContext(op),
     inUrlPort = op.inUrl("URL", "audio"),
@@ -14,6 +16,11 @@ let isLoading = false;
 let currentFileUrl = null;
 let urlToLoadNext = null;
 let clearAfterLoad = false;
+let fromData = false;
+let fromDataNew = false;
+let fileReader = new FileReader();
+let arrayBuffer = null;
+let loadingIdDataURL = 0;
 
 if (!audioBufferPort.isLinked())
 {
@@ -36,31 +43,82 @@ audioBufferPort.onLinkChanged = () =>
     }
 };
 
-function loadAudioFile(url)
+function loadAudioFile(url, loadFromData)
 {
-    const ext = url.substr(url.lastIndexOf(".") + 1);
-    if (ext === "wav")
-    {
-        op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
-    }
-    else
-    {
-        op.setUiError("wavFormat", null);
-    }
-
     currentFileUrl = url;
     isLoading = true;
     outLoading.set(isLoading);
-    CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+
+    if (!loadFromData)
+    {
+        const ext = url.substr(url.lastIndexOf(".") + 1);
+        if (ext === "wav")
+        {
+            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
+        }
+        else
+        {
+            op.setUiError("wavFormat", null);
+        }
+
+        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+    }
+    else
+    {
+        let fileBlob = dataURItoBlob(url);
+
+        if (fileBlob.type === "audio/wav")
+        {
+            op.setUiError("wavFormat", "You are using a .wav file. Make sure the .wav file is 16 bit to be supported by all browsers. Safari does not support 24 bit .wav files.", 1);
+        }
+        else
+        {
+            op.setUiError("wavFormat", null);
+        }
+
+        loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, "");
+        if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingIdDataURL, "title": " loading audio data url (" + op.id + ")" });
+        fileReader.readAsArrayBuffer(fileBlob);
+    }
 }
+
+function dataURItoBlob(dataURI)
+{
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    let byteString = atob(dataURI.split(",")[1]);
+
+    // separate out the mime component
+    let mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+
+    // write the bytes of the string to an ArrayBuffer
+    let ab = new ArrayBuffer(byteString.length);
+
+    // create a view into the buffer
+    let ia = new Uint8Array(ab);
+
+    // set the bytes of the buffer to the correct values
+    for (let i = 0; i < byteString.length; i++)
+    {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    let blob = new Blob([ab], { "type": mimeString });
+    return blob;
+}
+
 // change listeners
 inUrlPort.onChange = function ()
 {
     if (inUrlPort.get())
     {
+        fromData = String(inUrlPort.get()).indexOf("data:") == 0;
+
         if (isLoading)
         {
-            const newUrl = op.patch.getFilePath(inUrlPort.get());
+            fromDataNew = String(inUrlPort.get()).indexOf("data:") == 0;
+            const newUrl = fromDataNew ? inUrlPort.get() : op.patch.getFilePath(inUrlPort.get());
             if (newUrl !== currentFileUrl)
             {
                 urlToLoadNext = newUrl;
@@ -75,8 +133,9 @@ inUrlPort.onChange = function ()
         }
 
         invalidateOutPorts();
-        const url = op.patch.getFilePath(inUrlPort.get());
-        loadAudioFile(url);
+        const url = fromData ? inUrlPort.get() : op.patch.getFilePath(inUrlPort.get());
+
+        loadAudioFile(url, fromData);
     }
     else
     {
@@ -90,6 +149,19 @@ inUrlPort.onChange = function ()
         op.setUiError("failedLoading", null);
     }
 };
+
+fileReader.onloadend = () =>
+{
+    arrayBuffer = fileReader.result;
+    cgl.patch.loading.finished(loadingIdDataURL);
+    if (cgl.patch.isEditorMode()) gui.jobs().finish("loadaudio" + loadingIdDataURL);
+    loadFromDataURL();
+};
+
+function loadFromDataURL()
+{
+    if (arrayBuffer) audioCtx.decodeAudioData(arrayBuffer, onLoadFinished, onLoadFailed);
+}
 
 function onLoadFinished(buffer)
 {
@@ -105,7 +177,7 @@ function onLoadFinished(buffer)
 
     if (urlToLoadNext)
     {
-        loadAudioFile(urlToLoadNext);
+        loadAudioFile(urlToLoadNext, fromDataNew);
         urlToLoadNext = null;
     }
     else
@@ -118,6 +190,8 @@ function onLoadFinished(buffer)
         audioBufferPort.set(buffer);
         op.setUiError("failedLoading", null);
         finishedLoadingPort.set(true);
+        fromData = false;
+        fromDataNew = false;
     }
 }
 
@@ -129,9 +203,10 @@ function onLoadFailed(e)
     invalidateOutPorts();
     outLoading.set(isLoading);
     currentBuffer = null;
+
     if (urlToLoadNext)
     {
-        loadAudioFile(urlToLoadNext);
+        loadAudioFile(urlToLoadNext, fromDataNew);
         urlToLoadNext = null;
     }
 }
