@@ -1,7 +1,8 @@
 class ProfileData
 {
-    constructor()
+    constructor(cgl)
     {
+        this._cgl = cgl;
         this._lastTime = 0;
         this.pause = false;
         this.profileUniformCount = 0;
@@ -56,7 +57,9 @@ class ProfileData
 
     addHeavyEvent(event, name)
     {
-        this.heavyEvents.push({ "event": event, "name": name });
+        const e = { "event": event, "name": name };
+        this.heavyEvents.push(e);
+        this._cgl.emitEvent("heavyEvent", e);
     }
 }
 

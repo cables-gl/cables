@@ -28,6 +28,8 @@ export const now = function ()
  */
 const Timer = function ()
 {
+    CABLES.EventTarget.apply(this);
+
     this._timeStart = internalNow();
     this._timeOffset = 0;
 
@@ -50,6 +52,7 @@ Timer.prototype._getTime = function ()
 
 Timer.prototype._eventPlayPause = function ()
 {
+    this.emitEvent("playPause");
     if (this._eventsPaused) return;
     for (const i in this.cbPlayPause) this.cbPlayPause[i]();
 };
