@@ -32,6 +32,11 @@
             {
                 "type": 5,
                 "name": "Mode"
+            },
+            {
+                "type": 0,
+                "name": "Default",
+                "subType": "integer"
             }
         ],
         "portsOut": [

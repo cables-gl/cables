@@ -3,51 +3,51 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Position index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Position"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Open",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smooth Graph",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Size",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "childs"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "FPS",
                 "subType": "number"
             }

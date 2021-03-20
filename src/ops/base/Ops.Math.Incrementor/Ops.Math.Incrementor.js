@@ -4,6 +4,7 @@ const inLength = op.inValueInt("Length");
 const inLimit = op.inBool("Limit", true);
 const reset = op.inTriggerButton("Reset");
 const inMode = op.inSwitch("Mode", ["Rewind", "Stop at Max"], "Rewind");
+const inDefault = op.inValueInt("Default", 0);
 const outChanged = op.outTrigger("Changed");
 const value = op.outValue("Value");
 
@@ -15,6 +16,7 @@ let val = 0;
 value.set(0);
 
 inLength.onTriggered = reset;
+inDefault.onChange = doReset;
 reset.onTriggered = doReset;
 
 const MODE_REWIND = 0;
@@ -42,7 +44,7 @@ inLimit.onChange = () =>
 function doReset()
 {
     value.set(null);
-    val = 0;
+    val = inDefault.get();
     value.set(val);
     outRestarted.trigger();
 }
