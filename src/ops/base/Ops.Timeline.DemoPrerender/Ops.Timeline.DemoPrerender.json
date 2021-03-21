@@ -39,6 +39,10 @@
                 "name": "Next"
             },
             {
+                "type": 1,
+                "name": "Prerendered Frame"
+            },
+            {
                 "type": 0,
                 "name": "Progress",
                 "subType": "number"
