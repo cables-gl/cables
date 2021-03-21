@@ -18,7 +18,7 @@ const Context = function (_patch)
 {
     EventTarget.apply(this);
 
-    this.profileData = new ProfileData();
+    this.profileData = new ProfileData(this);
 
     const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
