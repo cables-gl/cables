@@ -15,7 +15,7 @@ if (IS_WEBGL_1)
 {
     fb = new CGL.Framebuffer(cgl, 512, 512, {
         "isFloatingPointTexture": true,
-        "filter": CGL.Texture.FILTER_LINEAR,
+        "filter": CGL.Texture.FILTER_NEAREST, // webgl1 needs to be nearest filter
         "wrap": CGL.Texture.WRAP_REPEAT
     });
 }
