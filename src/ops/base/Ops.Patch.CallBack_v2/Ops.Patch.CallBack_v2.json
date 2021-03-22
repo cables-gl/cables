@@ -5,26 +5,27 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Callback Name"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Parameter 1"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Parameter 2"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Parameter 3"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Patch.CallBack_v2"
     },
     "changelog": [

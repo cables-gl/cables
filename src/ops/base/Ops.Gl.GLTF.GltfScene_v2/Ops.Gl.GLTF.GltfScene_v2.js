@@ -368,6 +368,13 @@ op.exposeTexture = function (name)
     gui.patch().focusOp(newop.id, true);
 };
 
+function setNewOpPosition(newOp, num)
+{
+    num = num || 1;
+
+    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * 50 } });
+}
+
 op.exposeNode = function (name, tree)
 {
     if (tree)
@@ -389,6 +396,7 @@ op.exposeNode = function (name, tree)
                     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
                     newop.getPort("Node Name").set(arrHierarchy[j].name);
                     op.patch.link(prevOp, prevPort, newop, "Render");
+                    setNewOpPosition(newop, j);
 
                     if (j == arrHierarchy.length - 1)
                     {
@@ -410,6 +418,7 @@ op.exposeNode = function (name, tree)
     {
         const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
         newop.getPort("Node Name").set(name);
+        setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
         gui.patch().focusOp(newop.id, true);
     }

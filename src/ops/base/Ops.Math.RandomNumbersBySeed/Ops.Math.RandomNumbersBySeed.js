@@ -4,8 +4,8 @@ const
     max = op.inValueFloat("Max", 1),
     outX = op.outNumber("X"),
     outY = op.outNumber("Y"),
-    outZ = op.outNumber("Z");
-outW = op.outNumber("W");
+    outZ = op.outNumber("Z"),
+    outW = op.outNumber("W");
 
 inSeed.onChange =
     min.onChange =
