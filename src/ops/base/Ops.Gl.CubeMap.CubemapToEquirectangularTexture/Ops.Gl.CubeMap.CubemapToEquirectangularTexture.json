@@ -32,7 +32,20 @@
             {
                 "type": 0,
                 "name": "Equirectangular",
+                "group": "Options",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Options",
+                "subType": "integer"
             }
         ],
         "portsOut": [
