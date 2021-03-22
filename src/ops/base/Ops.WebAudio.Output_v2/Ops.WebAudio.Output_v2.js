@@ -97,7 +97,11 @@ function mute(b)
         { // make sure that when audio context is suspended node will also be muted
             // this prevents the initial short sound burst being heard when context is suspended
             // and started from user interaction
+
             gainNode.gain.value = 0;
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+
+            // * NOTE: we have to use both of the upper statements so it works in chrome & firefox
             return;
         }
 
