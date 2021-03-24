@@ -111,8 +111,7 @@ function createCubemap()
         fb = new CGL.Framebuffer2(cgl, Number(inSize.get()), Number(inSize.get()), textureOptions);
     }
 
-    cubemap = new CGL.Cubemap(cgl, { "size": Number(inSize.get()) });
-    cubemap.initializeCubemap();
+    cubemap = new CGL.CubemapFramebuffer(cgl, Number(inSize.get()), Number(inSize.get()), {});
     reinitCubemap = false;
 }
 
@@ -141,14 +140,26 @@ inTrigger.onTriggered = function ()
         equiToCubeShader.pushTexture(uniformEquirectangularMap, inTexture.get().tex);
 
         cgl.pushShader(equiToCubeShader);
-        cubemap.renderCubemap(() => mesh.render(equiToCubeShader));
+        cubemap.renderCubemap();
+
+        cubemap.renderStart();
+
+        for (let i = 0; i < 6; i += 1)
+        {
+            cubemap.renderStartCubemapFace(i);
+            mesh.render(equiToCubeShader);
+            cubemap.renderEndCubemapFace();
+        }
+
+        cubemap.renderEnd();
+
         cgl.popShader();
 
         // fb.renderEnd();
         cgl.frameStore.renderOffscreen = false;
 
         outCubemap.set(null);
-        outCubemap.set(cubemap.getCubemap());
+        outCubemap.set(cubemap.getTextureColor());
     }
 
     outTrigger.trigger();

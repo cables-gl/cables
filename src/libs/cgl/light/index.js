@@ -143,6 +143,7 @@ Light.prototype.createFramebuffer = function (width, height, options)
 {
     this.state.isUpdating = true;
 
+
     const fbWidth = width || 512;
     const fbHeight = height || 512;
 
@@ -150,15 +151,16 @@ Light.prototype.createFramebuffer = function (width, height, options)
     {
         if (!this.hasCubemap())
         {
-            this._cubemap = new CGL.Cubemap(this._cgl, {
-                "camPos": this.position,
-                "cullFaces": true,
-                "size": fbWidth,
-                "isShadowMap": true
-            });
+            this._cubemap = new CGL.CubemapFramebuffer(this._cgl, fbWidth, fbHeight, {});
         }
 
-        this._cubemap.initializeCubemap();
+        this._cubemap.setCamPos(this.position);
+        this._cubemap.setMatrices(
+            this._shaderShadowMap.matrices.modelMatrix,
+            this._shaderShadowMap.matrices.viewMatrix,
+            this._shaderShadowMap.matrices.projMatrix
+        );
+
         this.state.isUpdating = false;
         return;
     }
@@ -360,10 +362,22 @@ Light.prototype.renderShadowPass = function (renderFunction)
 
         this._cgl.pushShader(this._shaderShadowMap.shader);
 
-        this._cubemap.renderCubemap(renderFunction);
+        // this._cubemap.renderCubemap(renderFunction);
+
+        this._cubemap.renderStart();
+
+        for (let i = 0; i < 6; i += 1)
+        {
+            this._cubemap.renderStartCubemapFace(i);
+            if (renderFunction) renderFunction();
+            this._cubemap.renderEndCubemapFace();
+        }
+
+        this._cubemap.renderEnd();
+
 
         this._cgl.popShader();
-        this.shadowCubeMap = this._cubemap._framebuffer.getTextureColor(); // getCubemap();
+        this.shadowCubeMap = this._cubemap.getTextureColor(); // getCubemap();
         return;
     }
 
