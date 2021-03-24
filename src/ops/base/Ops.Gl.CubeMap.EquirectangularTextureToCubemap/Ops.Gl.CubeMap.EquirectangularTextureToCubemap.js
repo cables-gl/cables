@@ -140,7 +140,6 @@ inTrigger.onTriggered = function ()
         equiToCubeShader.pushTexture(uniformEquirectangularMap, inTexture.get().tex);
 
         cgl.pushShader(equiToCubeShader);
-        cubemap.renderCubemap();
 
         cubemap.renderStart();
 
