@@ -153,6 +153,10 @@ Light.prototype.createFramebuffer = function (width, height, options)
         {
             this._cubemap = new CGL.CubemapFramebuffer(this._cgl, fbWidth, fbHeight, {});
         }
+        else
+        {
+            this._cubemap.setSize(fbWidth, fbHeight);
+        }
 
         this._cubemap.setCamPos(this.position);
         this._cubemap.setMatrices(
