@@ -88,6 +88,7 @@ function createCubemap()
         return;
     }
 
+    if (cubemap) cubemap.dispose();
     cubemap = null;
 
     if (fb) fb.delete();
