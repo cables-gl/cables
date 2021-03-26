@@ -57,7 +57,6 @@ const Patch = function (cfg)
     this.silent = false;
     this.profiler = null;
     this.onLoadStart = null;
-    this.onLoadEnd = null;
     this.aborted = false;
     this._crashedOps = [];
     this._renderOneFrame = false;
@@ -1032,7 +1031,9 @@ Patch.prototype.deSerialize = function (obj, genIds)
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
-    if (this.onLoadEnd) this.onLoadEnd();
+
+    this.emitEvent("patchLoadEnd");
+    // if (this.onLoadEnd) this.onLoadEnd();
 };
 
 Patch.prototype.profile = function (enable)
