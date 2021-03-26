@@ -3,8 +3,8 @@
     "id": "54e5d3f5-e3f4-4381-990d-d5e32b9a2d39",
     "created": 1587737932336,
     "coreLibs": [
-        "cgl_cubemap",
-        "cgl_light"
+        "cgl_light",
+        "cgl_cubemapframebuffer"
     ],
     "layout": {
         "portsIn": [
@@ -178,6 +178,11 @@
             "message": "Ops.Admin.ShadowPointLightCGL renamed to Ops.Gl.Phong.PointLight_v5",
             "author": "pandur",
             "date": 1596055745231
+        },
+        {
+            "message": " added core lib: cgl_cubemapframebuffer",
+            "author": "cables",
+            "date": 1616587726922
         }
     ],
     "summary": "Point light for phong shading",
