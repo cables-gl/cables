@@ -1,3 +1,12 @@
+---
+name: Social Media Posting
+about: post stuff to social media
+title: ''
+labels: new
+assignees: ''
+
+---
+
 title:
 user:
 patch:
