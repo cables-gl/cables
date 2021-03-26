@@ -417,7 +417,7 @@ Patch.prototype.createOp = function (identifier, id)
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
-Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
+Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 {
     const op = this.createOp(opIdentifier, id);
 
@@ -435,7 +435,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
-        this.emitEvent("onOpAdd", op);
+        this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
     }
@@ -909,8 +909,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
         try
         {
-            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
-            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
+            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true);
+            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
         }
         catch (e)
         {
