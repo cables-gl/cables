@@ -1,7 +1,7 @@
 ---
 name: Social Media Posting
 about: post stuff to social media
-title: ''
+title: '[social media] '
 labels: new
 assignees: ''
 
