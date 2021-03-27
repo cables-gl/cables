@@ -25,7 +25,6 @@ invertR.setUiAttribs({ "hidePort": true });
 invertG.setUiAttribs({ "hidePort": true });
 invertB.setUiAttribs({ "hidePort": true });
 
-
 let autoRefreshTimeout = null;
 const cgl = op.patch.cgl;
 let lastTex = null;
@@ -99,8 +98,14 @@ function updateSoon()
     {
         reInitEffect = true;
 
-        clearTimeout(autoRefreshTimeout);
-        autoRefreshTimeout = setTimeout(() => { doRender(); }, 100);
+        // clearTimeout(autoRefreshTimeout);
+        // autoRefreshTimeout = setTimeout(() => { doRender(); }, 100);
+        op.patch.cgl.off(autoRefreshTimeout);
+        autoRefreshTimeout = op.patch.cgl.on("beginFrame", () =>
+        {
+            doRender();
+            op.patch.cgl.off(autoRefreshTimeout);
+        });
     }
 }
 
@@ -162,6 +167,7 @@ useVPSize.onChange = function ()
 
 function doRender()
 {
+    op.patch.removeOnAnimCallback(doRender);
     if (!inTexture.get())
     {
         lastTex = null;// CGL.Texture.getEmptyTexture(cgl);

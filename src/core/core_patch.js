@@ -57,7 +57,6 @@ const Patch = function (cfg)
     this.silent = false;
     this.profiler = null;
     this.onLoadStart = null;
-    this.onLoadEnd = null;
     this.aborted = false;
     this._crashedOps = [];
     this._renderOneFrame = false;
@@ -418,7 +417,7 @@ Patch.prototype.createOp = function (identifier, id)
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
-Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
+Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 {
     const op = this.createOp(opIdentifier, id);
 
@@ -436,7 +435,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
-        this.emitEvent("onOpAdd", op);
+        this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
     }
@@ -910,8 +909,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
         try
         {
-            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
-            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
+            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true);
+            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
         }
         catch (e)
         {
@@ -1032,7 +1031,9 @@ Patch.prototype.deSerialize = function (obj, genIds)
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
-    if (this.onLoadEnd) this.onLoadEnd();
+
+    this.emitEvent("patchLoadEnd");
+    // if (this.onLoadEnd) this.onLoadEnd();
 };
 
 Patch.prototype.profile = function (enable)
