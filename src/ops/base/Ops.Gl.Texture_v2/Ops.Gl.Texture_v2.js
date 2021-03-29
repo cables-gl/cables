@@ -89,8 +89,8 @@ function realReload(nocache)
         cgl.patch.loading.addAssetLoadingTask(() =>
         {
             op.setUiError("urlerror", null);
-            if (tex)tex.delete();
-            tex = CGL.Texture.load(cgl, url,
+
+            const newTex = CGL.Texture.load(cgl, url,
                 function (err)
                 {
                     if (err)
@@ -102,14 +102,16 @@ function realReload(nocache)
                         return;
                     }
 
-                    textureOut.set(tex);
-                    width.set(tex.width);
-                    height.set(tex.height);
-                    ratio.set(tex.width / tex.height);
+                    textureOut.set(newTex);
+                    width.set(newTex.width);
+                    height.set(newTex.height);
+                    ratio.set(newTex.width / newTex.height);
 
-                    if (!tex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
+                    if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
                     else op.setUiError("npot", null);
 
+                    if (tex)tex.delete();
+                    tex = newTex;
                     textureOut.set(null);
                     textureOut.set(tex);
 
@@ -123,8 +125,8 @@ function realReload(nocache)
                     "filter": cgl_filter
                 });
 
-            textureOut.set(null);
-            textureOut.set(tex);
+            // textureOut.set(null);
+            // textureOut.set(tex);
         });
     }
     else
