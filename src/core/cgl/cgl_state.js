@@ -609,29 +609,30 @@ const Context = function (_patch)
     {
         let found = false;
         let error = this.gl.getError();
-        while (error)
-        {
-            if (error != this.gl.NO_ERROR)
-            {
-                let errStr = "";
-                if (error == this.gl.OUT_OF_MEMORY) errStr = "OUT_OF_MEMORY";
-                if (error == this.gl.INVALID_ENUM) errStr = "INVALID_ENUM";
-                if (error == this.gl.INVALID_OPERATION) errStr = "INVALID_OPERATION";
-                if (error == this.gl.INVALID_FRAMEBUFFER_OPERATION) errStr = "INVALID_FRAMEBUFFER_OPERATION";
-                if (error == this.gl.INVALID_VALUE) errStr = "INVALID_VALUE";
-                if (error == this.gl.CONTEXT_LOST_WEBGL)
-                {
-                    this.aborted = true;
-                    errStr = "CONTEXT_LOST_WEBGL";
-                }
-                if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
-                found = true;
-                Log.log("gl error: ", str, error, errStr);
-                this.patch.printTriggerStack();
+        // while (error )
+        // {
+        if (error != this.gl.NO_ERROR)
+        {
+            let errStr = "";
+            if (error == this.gl.OUT_OF_MEMORY) errStr = "OUT_OF_MEMORY";
+            if (error == this.gl.INVALID_ENUM) errStr = "INVALID_ENUM";
+            if (error == this.gl.INVALID_OPERATION) errStr = "INVALID_OPERATION";
+            if (error == this.gl.INVALID_FRAMEBUFFER_OPERATION) errStr = "INVALID_FRAMEBUFFER_OPERATION";
+            if (error == this.gl.INVALID_VALUE) errStr = "INVALID_VALUE";
+            if (error == this.gl.CONTEXT_LOST_WEBGL)
+            {
+                this.aborted = true;
+                errStr = "CONTEXT_LOST_WEBGL";
             }
-            error = this.gl.getError();
+            if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
+
+            found = true;
+            Log.log("gl error: ", str, error, errStr);
+            this.patch.printTriggerStack();
         }
+        error = this.gl.getError();
+        // }
         return found;
     };
 
