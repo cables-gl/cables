@@ -611,7 +611,6 @@ const Context = function (_patch)
         let error = this.gl.getError();
         while (error)
         {
-            error = this.gl.getError();
             if (error != this.gl.NO_ERROR)
             {
                 let errStr = "";
@@ -631,6 +630,7 @@ const Context = function (_patch)
                 Log.log("gl error: ", str, error, errStr);
                 this.patch.printTriggerStack();
             }
+            error = this.gl.getError();
         }
         return found;
     };
