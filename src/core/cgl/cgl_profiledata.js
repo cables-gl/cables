@@ -55,9 +55,9 @@ class ProfileData
         this.profileMeshNumElements = 0;
     }
 
-    addHeavyEvent(event, name)
+    addHeavyEvent(event, name, info)
     {
-        const e = { "event": event, "name": name };
+        const e = { "event": event, "name": name, "info": info };
         this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }
