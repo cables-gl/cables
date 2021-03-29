@@ -504,7 +504,10 @@ Port.prototype.trigger = function ()
             if (this.links[i].portIn)
             {
                 portTriggered = this.links[i].portIn;
+
+                portTriggered.parent.patch.pushTriggerStack(portTriggered);
                 portTriggered._onTriggered();
+                portTriggered.parent.patch.popTriggerStack();
             }
             if (this.links[i]) this.links[i].activity();
         }
