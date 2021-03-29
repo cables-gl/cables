@@ -611,6 +611,7 @@ const Context = function (_patch)
         let error = this.gl.getError();
         while (error)
         {
+            error = this.gl.getError();
             if (error != this.gl.NO_ERROR)
             {
                 let errStr = "";
