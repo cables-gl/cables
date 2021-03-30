@@ -1,8 +1,9 @@
 const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
 const activeIn = op.inBool("active", false);
-const loadingOut = op.outBool("loading", false);
 const portsData = op.inString("portsData", "{}");
+
+const loadingOut = op.outBool("loading", false);
 
 patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
@@ -11,31 +12,90 @@ portsData.setUiAttribs({ "hideParam": true });
 
 const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id];
 
+const restorePorts = () =>
+{
+    const oldPorts = getOldPorts();
+    const portInKeys = Object.keys(oldPorts.portsIn);
+    for (let i = 0; i < portInKeys.length; i++)
+    {
+        const oldPortIn = oldPorts.portsIn[portInKeys[i]];
+        const newPort = op.addInPort(new CABLES.Port(op, oldPortIn.name, oldPortIn.type));
+        if (Array.isArray(oldPortIn.links))
+        {
+            oldPortIn.links.forEach((link) =>
+            {
+                const parent = op.patch.getOpById(link.objOut);
+                if (parent)
+                {
+                    op.patch.link(parent, link.portOut, op, newPort.name);
+                }
+            });
+        }
+        newPort.onLinkChanged = savePortData;
+
+        if (oldPortIn.title)
+        {
+            newPort.setUiAttribs({ "title": oldPortIn.title });
+        }
+    }
+
+    const portOutKeys = Object.keys(oldPorts.portsOut);
+    for (let i = 0; i < portOutKeys.length; i++)
+    {
+        const oldPortOut = oldPorts.portsOut[portOutKeys[i]];
+        const newPort = op.addOutPort(new CABLES.Port(op, oldPortOut.name, oldPortOut.type));
+        if (Array.isArray(oldPortOut.links))
+        {
+            oldPortOut.links.forEach((link) =>
+            {
+                const parent = op.patch.getOpById(link.objIn);
+                if (parent)
+                {
+                    op.patch.link(op, newPort.name, parent, link.portIn);
+                }
+            });
+            newPort.onLinkChanged = savePortData;
+
+            if (oldPortOut.title)
+            {
+                newPort.setUiAttribs({ "title": oldPortOut.title });
+            }
+        }
+    }
+};
+
 activeIn.onChange = () =>
 {
     if (!loadingOut.get())
     {
         if (activeIn.get())
         {
+            op.setUiError("inactive", null);
             update();
         }
         else
         {
+            op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
         }
     }
 };
 
-op.onLoad = () =>
+op.onLoaded = () =>
 {
+    console.log("onLoad");
+    cleanupPorts();
+    restorePorts();
     if (!loadingOut.get())
     {
         if (activeIn.get())
         {
+            op.setUiError("inactive", null);
             update();
         }
         else
         {
+            op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
         }
     }
@@ -71,22 +131,33 @@ function update()
             }
             else
             {
-                op.setUiError("fetchOps", err);
+                if (err.code === 403)
+                {
+                    op.setUiError("fetchOps", "you do not have permission to use this blueprint");
+                }
+                else
+                {
+                    op.setUiError("fetchOps", "error fetching blueprint, code: " + err.code);
+                }
             }
             loadingOut.set(false);
         });
     }
     else
     {
-        const blueprintUrl = "js/" + blueprintId + ".json";
+        // const blueprintUrl = "js/" + blueprintId + ".json";
+        console.log("CABLES", CABLES.api);
+        const blueprintUrl = "http://localhost:5711/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
         CABLES.ajax(
             blueprintUrl,
             function (err, data)
             {
                 if (!err)
                 {
-                    const blueprint = JSON.parse(data);
-                    deSerializeBlueprint(blueprint, subPatchId, false);
+                    const blueprintData = JSON.parse(data);
+                    blueprintData.settings = op.patch.settings;
+                    blueprintData.ops = blueprintData.msg;
+                    deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
                 {
@@ -123,8 +194,9 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
             gui.serverOps.loadProjectLibs(data, () =>
             {
                 op.patch.deSerialize(data, false);
-                gui.patchView.setCurrentSubPatch(subPatchId);
-                gui.patchView.setCurrentSubPatch(0);
+                const originalSubPatchId = gui.patchView.getCurrentSubPatch();
+                // gui.patchView.setCurrentSubPatch(subPatchId);
+                gui.patchView.setCurrentSubPatch(originalSubPatchId);
             });
         }
         else
@@ -152,6 +224,60 @@ function removeImportedOps()
         }
     });
 }
+
+const getOldPorts = () =>
+{
+    const oldPorts = JSON.parse(portsData.get());
+    let oldPortsOut = {};
+    if (oldPorts.portsOut)
+    {
+        oldPortsOut = oldPorts.portsOut;
+    }
+    let oldPortsIn = {};
+    if (oldPorts.portsIn)
+    {
+        oldPortsIn = oldPorts.portsIn;
+    }
+    return { "portsIn": oldPortsIn, "portsOut": oldPortsOut };
+};
+
+const cleanupPorts = () =>
+{
+    const removeInPorts = [];
+    const removeOutPorts = [];
+
+    op.portsIn.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            removeInPorts.push(port);
+        }
+    });
+    op.portsOut.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            removeOutPorts.push(port);
+        }
+    });
+
+    removeInPorts.forEach((port) =>
+    {
+        removeInPort(port);
+        op.fireEvent("onPortRemoved", {});
+    });
+
+    removeOutPorts.forEach((port) =>
+    {
+        removeOutPort(port);
+        op.fireEvent("onPortRemoved", {});
+    });
+
+    if (removeOutPorts.length > 0 || removeInPorts.length > 0)
+    {
+        op.fireEvent("onUiAttribsChange", {});
+    }
+};
 
 const removeInPort = (port) =>
 {
@@ -185,46 +311,8 @@ function setupPorts(parentSubPatch)
     if (!subPatchDataPort) return;
     if (!subPatchDataPort.get()) return;
 
-    const oldPorts = JSON.parse(portsData.get());
-    let oldPortsOut = {};
-    if (oldPorts.portsOut)
-    {
-        oldPortsOut = oldPorts.portsOut;
-    }
-
-    const removeInPorts = [];
-    const removeOutPorts = [];
-
-    op.portsIn.forEach((port) =>
-    {
-        if (!protectedPorts.includes(port.id))
-        {
-            removeInPorts.push(port);
-        }
-    });
-    op.portsOut.forEach((port) =>
-    {
-        if (!protectedPorts.includes(port.id))
-        {
-            removeOutPorts.push(port);
-        }
-    });
-
-    removeInPorts.forEach((port) =>
-    {
-        removeInPort(port);
-    });
-
-    removeOutPorts.forEach((port) =>
-    {
-        removeOutPort(port);
-    });
-
-    if (removeOutPorts.length > 0 || removeInPorts.length > 0)
-    {
-        op.fireEvent("onUiAttribsChange", {});
-        op.fireEvent("onPortRemoved", {});
-    }
+    const oldPorts = getOldPorts();
+    cleanupPorts();
 
     const subPatchData = JSON.parse(subPatchDataPort.get());
     const subPatchPortsIn = subPatchData.ports || [];
@@ -237,7 +325,19 @@ function setupPorts(parentSubPatch)
         {
             const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-            const newPortInData = op.portsInData.find(portData => portData.name == newPort.name);
+            if (oldPorts.portsIn.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsIn[newPort.name].links))
+            {
+                oldPorts.portsIn[newPort.name].links.forEach((link) =>
+                {
+                    const parent = op.patch.getOpById(link.objOut);
+                    if (parent)
+                    {
+                        op.patch.link(parent, link.portOut, op, newPort.name);
+                    }
+                });
+            }
+            newPort.onLinkChanged = savePortData;
+
             if (subPatchPort)
             {
                 switch (subPatchPort.type)
@@ -255,22 +355,6 @@ function setupPorts(parentSubPatch)
                     };
                 }
             }
-            if (newPortInData)
-            {
-                if (Array.isArray(newPortInData.links))
-                {
-                    newPortInData.links.forEach((link) =>
-                    {
-                        const parent = op.patch.getOpById(link.objOut);
-                        if (parent)
-                        {
-                            op.patch.link(op, newPort.name, parent, link.portOut);
-                        }
-                    });
-                }
-                newPort.set(newPortInData.value);
-            }
-            newPort.onLinkChanged = savePortData;
 
             if (subPatchPort.title)
             {
@@ -288,9 +372,9 @@ function setupPorts(parentSubPatch)
             {
                 const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-                if (oldPortsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPortsOut[newPort.name].links))
+                if (oldPorts.portsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsOut[newPort.name].links))
                 {
-                    oldPortsOut[newPort.name].links.forEach((link) =>
+                    oldPorts.portsOut[newPort.name].links.forEach((link) =>
                     {
                         const parent = op.patch.getOpById(link.objIn);
                         if (parent)
@@ -338,8 +422,18 @@ function savePortData()
         {
             const portData = {
                 "name": port.name,
-                "title": port.title
+                "title": port.title,
+                "type": port.type,
+                "links": []
             };
+            port.links.forEach((link) =>
+            {
+                const linkData = {
+                    "objOut": link.portOut.parent.id,
+                    "portOut": link.portOut.name
+                };
+                portData.links.push(linkData);
+            });
             newPortsData.portsIn[port.name] = portData;
         }
     });
@@ -351,6 +445,7 @@ function savePortData()
             const portData = {
                 "name": port.name,
                 "title": port.title,
+                "type": port.type,
                 "links": []
             };
             port.links.forEach((link) =>
