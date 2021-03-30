@@ -62,6 +62,7 @@ const Patch = function (cfg)
     this._renderOneFrame = false;
     this._animReq = null;
     this._opIdCache = {};
+    this._triggerStack = [];
 
     this.loading = new LoadingStatus(this);
 
@@ -1333,6 +1334,25 @@ Patch.prototype.dispose = function ()
 {
     this.pause();
     this.clear();
+};
+
+
+Patch.prototype.pushTriggerStack = function (p)
+{
+    this._triggerStack.push(p);
+};
+
+Patch.prototype.popTriggerStack = function ()
+{
+    this._triggerStack.pop();
+};
+
+Patch.prototype.printTriggerStack = function ()
+{
+    for (let i = 0; i < this._triggerStack.length; i++)
+    {
+        console.log(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
+    }
 };
 
 /**

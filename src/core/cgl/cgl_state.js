@@ -529,6 +529,7 @@ const Context = function (_patch)
         {
             console.warn("frame not started " + string);
             // console.log(new Error().stack);
+            this.patch.printTriggerStack();
         }
     };
 
@@ -606,7 +607,11 @@ const Context = function (_patch)
 
     this.printError = function (str)
     {
-        const error = this.gl.getError();
+        let found = false;
+        let error = this.gl.getError();
+
+        // while (error )
+        // {
         if (error != this.gl.NO_ERROR)
         {
             let errStr = "";
@@ -622,10 +627,13 @@ const Context = function (_patch)
             }
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
+            found = true;
             Log.log("gl error: ", str, error, errStr);
-            return true;
+            this.patch.printTriggerStack();
         }
-        return false;
+        error = this.gl.getError();
+        // }
+        return found;
     };
 
     this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)

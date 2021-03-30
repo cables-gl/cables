@@ -70,7 +70,7 @@ function initEffect()
 
     tex = new CGL.Texture(cgl,
         {
-            "name": "copytexture",
+            "name": "copytexture_" + op.id,
             "isFloatingPointTexture": fpTexture.get(),
             "filter": selectedFilter,
             "wrap": selectedWrap,

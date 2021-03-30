@@ -71,9 +71,14 @@ const Texture = function (__cgl, options)
 
     this._cgl.profileData.profileTextureNew++;
 
-    this._cgl.profileData.addHeavyEvent("texture created", this.name);
+    this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
     this.setSize(options.width, options.height);
+};
+
+Texture.prototype.isFloatingPoint = function ()
+{
+    return this.textureType == Texture.TYPE_FLOAT;
 };
 
 /**
@@ -87,7 +92,18 @@ const Texture = function (__cgl, options)
 Texture.prototype.compareSettings = function (tex)
 {
     if (!tex) return false;
-    return tex.width == this.width && tex.height == this.height && tex.filter == this.filter && tex.wrap == this.wrap && tex.textureType == this.textureType && tex.unpackAlpha == this.unpackAlpha && tex.flip == this.flip;
+    return (
+        tex.width == this.width &&
+        tex.height == this.height &&
+        tex.filter == this.filter &&
+        tex.wrap == this.wrap &&
+        tex.textureType == this.textureType &&
+        tex.unpackAlpha == this.unpackAlpha &&
+        tex.anisotropic == this.anisotropic &&
+        tex.shadowMap == this.shadowMap &&
+        tex.texTarget == this.texTarget &&
+        tex.flip == this.flip
+    );
 };
 
 /**
