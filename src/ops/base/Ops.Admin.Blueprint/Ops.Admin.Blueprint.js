@@ -83,7 +83,6 @@ activeIn.onChange = () =>
 
 op.onLoaded = () =>
 {
-    console.log("onLoad");
     cleanupPorts();
     restorePorts();
     if (!loadingOut.get())
@@ -143,11 +142,36 @@ function update()
             loadingOut.set(false);
         });
     }
+    else if (document.location.href.indexOf("cables.gl") > 0)
+    {
+        // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
+        let blueprintUrl = "http://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
+        if (document.location.hostname.indexOf("devsandbox") > 0)
+        {
+            blueprintUrl = "http://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
+        }
+        CABLES.ajax(
+            blueprintUrl,
+            function (err, data)
+            {
+                if (!err)
+                {
+                    const blueprintData = JSON.parse(data);
+                    blueprintData.settings = op.patch.settings;
+                    blueprintData.ops = blueprintData.msg;
+                    deSerializeBlueprint(blueprintData, subPatchId, false);
+                }
+                else
+                {
+                    op.error("failed to load blueprint from", blueprintUrl, err);
+                }
+                loadingOut.set(false);
+            }
+        );
+    }
     else
     {
-        // const blueprintUrl = "js/" + blueprintId + ".json";
-        console.log("CABLES", CABLES.api);
-        const blueprintUrl = "http://localhost:5711/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
+        const blueprintUrl = "js/" + blueprintId + ".json";
         CABLES.ajax(
             blueprintUrl,
             function (err, data)

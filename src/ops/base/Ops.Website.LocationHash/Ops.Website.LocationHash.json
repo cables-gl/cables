@@ -1,1 +1,68 @@
-{"id":"1e76f92b-1eed-4575-96e1-fcff6ed08c04","changelog":[{"message":"created op","author":"cables","date":1615306114394},{"message":"Ops.User.cables.LocationHash renamed to Ops.Website.LocationHash","author":"stephan","date":1615318804444}],"authorName":"stephan","created":1615306259654,"layout":{"portsIn":[{"type":5,"name":"Route"}],"portsOut":[{"type":5,"name":"Hash"},{"type":2,"name":"Values"},{"type":1,"name":"Changed"}],"name":"Ops.Website.LocationHash"},"summary":"gives updated information about window.location.hash","issues":"","collections":null,"relatedops":null,"youtubeids":[],"libs":["navigo.js"],"docs":{"ports":[{"name":"Route","text":"pattern for url and variables (i.e. /scene/:id)"},{"name":"Hash","text":"the full hash as seen in the url, after the first #"},{"name":"Values","text":"an object of key-value-pairs as extracted from the hash"},{"name":"Changed","text":"fires on change of the hash in the url"}]}}
+{
+    "id": "1e76f92b-1eed-4575-96e1-fcff6ed08c04",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "cables",
+            "date": 1615306114394
+        },
+        {
+            "message": "Ops.User.cables.LocationHash renamed to Ops.Website.LocationHash",
+            "author": "stephan",
+            "date": 1615318804444
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1615306259654,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Route"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Hash"
+            },
+            {
+                "type": 2,
+                "name": "Values"
+            },
+            {
+                "type": 1,
+                "name": "Changed"
+            }
+        ],
+        "name": "Ops.Website.LocationHash"
+    },
+    "summary": "gives updated information about window.location.hash",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "libs": [
+        "navigo.js"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "Route",
+                "text": "pattern for url and variables (i.e. /scene/:id)"
+            },
+            {
+                "name": "Hash",
+                "text": "the full hash as seen in the url, after the first #"
+            },
+            {
+                "name": "Values",
+                "text": "an object of key-value-pairs as extracted from the hash"
+            },
+            {
+                "name": "Changed",
+                "text": "fires on change of the hash in the url"
+            }
+        ]
+    }
+}

@@ -8,7 +8,7 @@ let oldValues = {};
 
 if ("onhashchange" in window)
 {
-    router = new Navigo("/", { "hash": true });
+    router = new Navigo("/", { "hash": true, "noMatchWarning": true });
     window.removeEventListener("hashchange", hashChange);
     window.addEventListener("hashchange", hashChange);
     hashChange({ "newURL": window.location.href });
