@@ -1349,10 +1349,18 @@ Patch.prototype.popTriggerStack = function ()
 
 Patch.prototype.printTriggerStack = function ()
 {
+    console.groupCollapsed(
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name,
+    );
+
+    const rows = [];
     for (let i = 0; i < this._triggerStack.length; i++)
     {
-        console.log(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
+        rows.push(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
     }
+
+    console.table(rows);
+    console.groupEnd();
 };
 
 /**
