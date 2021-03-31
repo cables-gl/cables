@@ -1349,9 +1349,13 @@ Patch.prototype.popTriggerStack = function ()
 
 Patch.prototype.printTriggerStack = function ()
 {
-    console.log("stack length", this._triggerStack.length);
+    if (this._triggerStack.length == 0)
+    {
+        console.log("stack length", this._triggerStack.length);
+        return;
+    }
     console.groupCollapsed(
-        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name,
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[i].name,
     );
 
     const rows = [];
