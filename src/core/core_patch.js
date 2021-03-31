@@ -1355,7 +1355,7 @@ Patch.prototype.printTriggerStack = function ()
         return;
     }
     console.groupCollapsed(
-        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[i].name,
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
     );
 
     const rows = [];
