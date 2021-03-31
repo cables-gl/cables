@@ -56,7 +56,7 @@ const Patch = function (cfg)
     this.gui = false;
     this.silent = false;
     this.profiler = null;
-    this.onLoadStart = null;
+    // this.onLoadStart = null;
     this.aborted = false;
     this._crashedOps = [];
     this._renderOneFrame = false;
@@ -876,7 +876,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     if (this.aborted) return;
 
     const loadingId = this.loading.start("core", "deserialize");
-    if (this.onLoadStart) this.onLoadStart();
+    // if (this.onLoadStart) this.onLoadStart();
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
