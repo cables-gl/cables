@@ -163,6 +163,12 @@ Texture.prototype.setSize = function (w, h)
     this.width = w;
     this.height = h;
 
+    if (this._cgl.printError("cgltex before"))
+    {
+        this.printInfo();
+        console.log((new Error()).stack);
+    }
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.profileData.profileTextureResize++;
 
