@@ -30,6 +30,7 @@ const cgl = op.patch.cgl;
 let lastTex = null;
 let effect = null;
 let tex = null;
+let needsResUpdate = true;
 
 let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
@@ -112,6 +113,7 @@ function updateSoon()
         op.patch.cgl.off(autoRefreshTimeout);
         autoRefreshTimeout = op.patch.cgl.on("beginFrame", () =>
         {
+            if (needsResUpdate)updateResolution();
             doRender();
             op.patch.cgl.off(autoRefreshTimeout);
         });
@@ -150,12 +152,20 @@ function updateResolution()
         else op.setUiError("hintnpot", null, 0);
     }
     else op.setUiError("hintnpot", null, 0);
+
+    needsResUpdate = false;
 }
 
 function updateSizePorts()
 {
     width.setUiAttribs({ "greyout": useVPSize.get() });
     height.setUiAttribs({ "greyout": useVPSize.get() });
+}
+
+function updateResolutionLater()
+{
+    needsResUpdate = true;
+    updateSoon();
 }
 
 useVPSize.onChange = function ()
@@ -168,8 +178,8 @@ useVPSize.onChange = function ()
     }
     else
     {
-        width.onChange = updateResolution;
-        height.onChange = updateResolution;
+        width.onChange = updateResolutionLater;
+        height.onChange = updateResolutionLater;
     }
     updateResolution();
 };
