@@ -230,10 +230,6 @@ Texture.prototype.setSize = function (w, h)
         console.log((new Error()).stack);
     }
 
-    // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
-    // {
-    //     this._cgl.gl.generateMipmap(this.texTarget);
-    // }
     this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);
