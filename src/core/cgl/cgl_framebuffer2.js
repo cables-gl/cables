@@ -42,6 +42,8 @@ const Framebuffer2 = function (cgl, w, h, options)
         "isFloatingPointTexture": false,
     };
 
+    this._cgl.printError("fb2 before");
+
     this.name = this._options.name || "unknown";
 
     this._cgl.profileData.addHeavyEvent("framebuffer create", this.name);
@@ -96,6 +98,8 @@ const Framebuffer2 = function (cgl, w, h, options)
     }
 
     if (cgl.aborted) return;
+
+    this._cgl.printError("fb2 before size");
 
     this.setSize(w || defaultTexSize, h || defaultTexSize);
 };
