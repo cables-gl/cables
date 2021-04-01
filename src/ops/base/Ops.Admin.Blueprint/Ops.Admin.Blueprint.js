@@ -64,23 +64,6 @@ const restorePorts = () =>
     }
 };
 
-activeIn.onChange = () =>
-{
-    if (!loadingOut.get())
-    {
-        if (activeIn.get())
-        {
-            op.setUiError("inactive", null);
-            update();
-        }
-        else
-        {
-            op.setUiError("inactive", "blueprint is inactive", 0);
-            removeImportedOps();
-        }
-    }
-};
-
 op.onLoaded = () =>
 {
     cleanupPorts();
@@ -90,14 +73,34 @@ op.onLoaded = () =>
         if (activeIn.get())
         {
             op.setUiError("inactive", null);
+            op.log("loading on load");
             update();
         }
         else
         {
             op.setUiError("inactive", "blueprint is inactive", 0);
+            op.log("remove on load");
             removeImportedOps();
         }
     }
+    activeIn.onChange = () =>
+    {
+        if (!loadingOut.get())
+        {
+            if (activeIn.get())
+            {
+                op.log("loading on active");
+                op.setUiError("inactive", null);
+                update();
+            }
+            else
+            {
+                op.setUiError("inactive", "blueprint is inactive", 0);
+                op.log("remove on active");
+                removeImportedOps();
+            }
+        }
+    };
 };
 
 op.onDelete = removeImportedOps;
