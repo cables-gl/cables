@@ -133,6 +133,10 @@
             {
                 "name": "Is Playing",
                 "text": "returns true if audio file is playing, false if not"
+            },
+            {
+                "name": "Loading",
+                "text": "true if currently loading an audio source"
             }
         ]
     },

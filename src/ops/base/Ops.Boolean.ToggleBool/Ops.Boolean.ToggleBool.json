@@ -9,6 +9,11 @@
             {
                 "type": 1,
                 "name": "reset"
+            },
+            {
+                "type": 0,
+                "name": "Default",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

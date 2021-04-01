@@ -29,7 +29,6 @@ let prevDisplay = "block";
 // Function binding
 op.onDelete = removeElement;
 
-
 inParent.onChange = appendChartDiv;
 inStyle.onChange = updateStyle;
 inVisible.onChange = updateVisibility;

@@ -69,6 +69,10 @@
     "docs": {
         "ports": [
             {
+                "name": "In Trigger",
+                "text": "trigger input"
+            },
+            {
                 "name": "Cubemap",
                 "text": "cubemap to visualize"
             },
@@ -77,8 +81,16 @@
                 "text": "visualisation mode: switch between folded cube and equirectangular"
             },
             {
-                "name": "Refresh",
-                "text": "refresh input"
+                "name": "Width",
+                "text": "width of the resulting texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of the resulting texture"
+            },
+            {
+                "name": "Out Trigger",
+                "text": "trigger out"
             },
             {
                 "name": "Cubemap Projection",

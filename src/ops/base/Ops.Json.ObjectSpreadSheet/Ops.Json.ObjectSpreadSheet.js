@@ -3,8 +3,8 @@ const
     inNumColumns = op.inInt("Num Columns", 2),
     result = op.outObject("Result");
 
-spread.setUiAttribs({hidePort:true});
-inNumColumns.setUiAttribs({hidePort:true});
+spread.setUiAttribs({ "hidePort": true });
+inNumColumns.setUiAttribs({ "hidePort": true });
 
 spread.onChange = update;
 inNumColumns.onChange = updateUi;
@@ -29,36 +29,32 @@ function update()
     const data = spread.get();
     data.cells = data.cells || [];
 
-    const obj={};
-    console.log(data);
+    const obj = {};
 
     for (let y = 0; y < data.cells.length; y++)
     {
-        console.log("!");
-
         if (data.cells[y])
         {
-            if(data.cols==2)
+            if (data.cols == 2)
             {
                 let v = data.cells[y][1] || null;
                 if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
 
-                if(data.cells[y][0]) obj[data.cells[y][0]] = v;
+                if (data.cells[y][0]) obj[data.cells[y][0]] = v;
             }
 
-            if(data.cols>2)
+            if (data.cols > 2)
             {
-
-                let row={};
+                let row = {};
 
                 for (let x = 1; x < data.cols; x++)
                 {
                     let v = data.cells[y][x] || null;
                     if (CABLES.UTILS.isNumeric(v)) v = parseFloat(v);
 
-                    row[getColName(data,x)]=v;
+                    row[getColName(data, x)] = v;
                 }
-                if(data.cells[y] && data.cells[y][0] && row) obj[data.cells[y][0]] = row;
+                if (data.cells[y] && data.cells[y][0] && row) obj[data.cells[y][0]] = row;
             }
         }
     }

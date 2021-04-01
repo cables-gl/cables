@@ -17,7 +17,6 @@ const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
-op.log("OUTPUT - initstate", inMute.get(), audioCtx.state);
 
 let masterVolume = 1;
 let oldAudioIn = null;
@@ -82,48 +81,43 @@ function setVolume(fromMute)
 
     if (!fromMute)
     {
-        if (gainNode) gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.05);
-        op.log("from mute setVolume", gainNode.gain.value);
+        if (gainNode)
+        {
+            gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.05);
+        }
     }
     else
     {
         if (gainNode)
         {
-            op.log("not from mute setVolume", gainNode.gain.value);
             gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.2);
         }
     }
-    op.log("OUTPUT - after setVolume", inMute.get(), audioCtx.state, volume, fromMute);
 }
 
 function mute(b)
 {
-    op.log("OUTPUT - called mute", "should be muted?", b, inMute.get(), "currentState:", audioCtx.state);
     if (b)
     {
         if (audioCtx.state === "suspended")
         { // make sure that when audio context is suspended node will also be muted
             // this prevents the initial short sound burst being heard when context is suspended
             // and started from user interaction
+            // also note, we have to cancle the already scheduled values as we have no influence over
+            // the order in which onchange handlers are executed
 
+            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
             gainNode.gain.value = 0;
             gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-            op.log("OUTPUT - ctx.state: suspended", inMute.get(), audioCtx.state, gainNode.gain);
-            setInterval(() =>
-            {
-                // op.log("OUTPUT - gain", inMute.get(), audioCtx.state, gainNode.gain);
-            }, 200);
 
             // * NOTE: we have to use both of the upper statements so it works in chrome & firefox
             return;
         }
 
         gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
-        op.log("After normal mute", gainNode.gain.value);
     }
     else
     {
-        op.log("Mute is false, setting volume:", gainNode.gain.value);
         setVolume(true);
     }
 }
@@ -138,16 +132,13 @@ inGain.onChange = () =>
 {
     if (inMute.get())
     {
-        op.log("OUTPUT - returning from inGain.onChange", gainNode.gain.value);
         return;
     }
-    op.log("OUTPUT - Call setVolume from inGain.onChange", inGain.get(), inMute.get());
     setVolume();
 };
 
 op.patch.on("pause", () =>
 {
-    op.log("OUTPUT - pause", inMute.get());
     if (inMute.get()) return;
     masterVolume = 0;
     setVolume();
@@ -155,7 +146,6 @@ op.patch.on("pause", () =>
 
 op.patch.on("resume", () =>
 {
-    op.log("OUTPUT - resume", inMute.get());
     if (op.patch.config.masterVolume !== 0) masterVolume = op.patch.config.masterVolume;
     else masterVolume = 0;
     setVolume();

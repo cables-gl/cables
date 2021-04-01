@@ -1,7 +1,8 @@
 const
     trigger = op.inTriggerButton("trigger"),
     reset = op.inTriggerButton("reset"),
-    outBool = op.outBool("result");
+    outBool = op.outBool("result"),
+    inDefault = op.inBool("Default", false);
 
 let theBool = false;
 outBool.set(theBool);
@@ -15,6 +16,6 @@ trigger.onTriggered = function ()
 
 reset.onTriggered = function ()
 {
-    theBool = false;
+    theBool = inDefault.get() || true;
     outBool.set(theBool);
 };

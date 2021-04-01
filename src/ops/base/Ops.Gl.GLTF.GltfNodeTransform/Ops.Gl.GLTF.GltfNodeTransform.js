@@ -4,6 +4,7 @@ const
     outPosX = op.outNumber("Translate X", 0),
     outPosY = op.outNumber("Translate Y", 0),
     outPosZ = op.outNumber("Translate Z", 0),
+
     next = op.outTrigger("Next"),
     outFound = op.outBool("Found");
 

@@ -171,7 +171,7 @@ function loadCams(gltf)
 
     for (let i = 0; i < gltf.json.cameras.length; i++)
     {
-        gltf.cams.push(new gltfCamera(gltf, gltf.json.cameras[i]));
+        gltf.cams.push(new gltfCamera(i,gltf, gltf.json.cameras[i]));
     }
 }
 
@@ -304,10 +304,23 @@ function parseGltf(arrayBuffer)
         gltf.nodes.push(node);
     }
 
+
     for (i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
+    }
+
+    for (i = 0; i < gltf.nodes.length; i++)
+    {
+        const node = gltf.nodes[i];
+        if(node.children)
+        {
+            for(let j=0;j<node.children.length;j++)
+            {
+                gltf.nodes[node.children[j]].parent=node;
+            }
+        }
     }
 
     needsMatUpdate = true;

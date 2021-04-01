@@ -278,7 +278,7 @@ function start(time)
     }
     catch (e)
     {
-        op.log("Error on start: ", e);
+        op.log("Error on start: ", e.message);
         outPlaying.set(false);
 
         isPlaying = false;

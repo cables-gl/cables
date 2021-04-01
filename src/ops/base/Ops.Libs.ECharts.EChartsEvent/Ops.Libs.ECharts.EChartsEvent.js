@@ -9,7 +9,6 @@ const outTrigger = op.outTrigger("Trigger");
 const outEvent = op.outObject("Event params");
 const outDirty = op.outBool("Dirty (needs rebind)");
 
-
 op.onDelete = removeEvent;
 inExecute.onTriggered = main;
 evtName.onChange = queryStr.onChange = queryObj.onChange = setIsDirty;
@@ -17,7 +16,6 @@ inChart.onChange = chartChanged;
 
 let chart = null;
 let eventName = null;
-
 
 function chartChanged()
 {
@@ -35,13 +33,11 @@ function setIsDirty()
     setDirty(true);
 }
 
-
 function setDirty(v)
 {
     outDirty.set(null);
     outDirty.set(v);
 }
-
 
 function removeEvent()
 {
@@ -51,7 +47,6 @@ function removeEvent()
         chart = null;
     }
 }
-
 
 function addEvent()
 {
