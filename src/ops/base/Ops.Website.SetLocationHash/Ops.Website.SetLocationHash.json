@@ -34,8 +34,14 @@
                 "name": "Values"
             },
             {
-                "type": 1,
-                "name": "Update"
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Allow Empty",
+                "subType": "boolean"
             }
         ],
         "portsOut": [],
@@ -66,8 +72,12 @@
                 "text": "key-value object for replacements in the route"
             },
             {
-                "name": "Update",
-                "text": "do update window.location.hash"
+                "name": "Active",
+                "text": "update changes on change immediately, toggle to update \"on demand\""
+            },
+            {
+                "name": "Allow Empty",
+                "text": "allow for setting an empty hash, usually triggers a page reload"
             }
         ]
     }

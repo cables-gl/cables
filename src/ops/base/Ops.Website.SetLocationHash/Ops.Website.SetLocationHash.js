@@ -5,12 +5,26 @@
 const hashIn = op.inString("Hash", "");
 const routeIn = op.inString("Route", "");
 const valuesIn = op.inObject("Values", {});
-const testTr = op.inTriggerButton("Update");
+const activeIn = op.inBool("Active", true);
+const reloadIn = op.inBool("Allow Empty", false);
 
 const router = new Navigo("/", { "hash": true, "noMatchWarning": true });
 
-testTr.onTriggered = () =>
+let isActive = activeIn.get();
+
+hashIn.onChange = update;
+routeIn.onChange = update;
+valuesIn.onChange = update;
+activeIn.onChange = function ()
 {
+    isActive = activeIn.get();
+    update();
+};
+
+function update()
+{
+    if (!isActive) return;
+
     let hash = "";
     if (hashIn.get())
     {
@@ -33,6 +47,7 @@ testTr.onTriggered = () =>
                     tempRoute[route] = { "as": "tempRoute", "uses": () => {} };
                     router.on(tempRoute);
                     const dataRoute = router.generate("tempRoute", valuesIn.get());
+                    router.off(route);
                     if (matched)
                     {
                         hash += "#" + dataRoute;
@@ -55,5 +70,21 @@ testTr.onTriggered = () =>
         }
     }
 
-    window.location.hash = hash;
-};
+    try
+    {
+        op.setUiError("overload", null);
+        if (hash)
+        {
+            window.location.hash = hash;
+        }
+        else if (reloadIn.get())
+        {
+            window.location.hash = "";
+        }
+    }
+    catch (e)
+    {
+        op.setUiError("overload", "too many changes to the location hash, throttle down");
+        op.log(e.message);
+    }
+}
