@@ -1,1 +1,94 @@
-{"id":"576db162-78fc-422d-86df-0d4a4e66a44e","changelog":[{"message":"created op","author":"kikohs","date":1614945454218},{"message":"Ops.User.stephan.ECharts renamed to Ops.Libs.ECharts","author":"stephan","date":1614949304600},{"message":"Ops.Libs.ECharts renamed to Ops.Libs.ECharts.ECharts","author":"stephan","date":1614949392117}],"authorName":"kikohs","created":1614945508201,"libs":["echarts.js"]}
+{
+    "id": "576db162-78fc-422d-86df-0d4a4e66a44e",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1614945454218
+        },
+        {
+            "message": "Ops.User.stephan.ECharts renamed to Ops.Libs.ECharts",
+            "author": "stephan",
+            "date": 1614949304600
+        },
+        {
+            "message": "Ops.Libs.ECharts renamed to Ops.Libs.ECharts.ECharts",
+            "author": "stephan",
+            "date": 1614949392117
+        }
+    ],
+    "authorName": "kikohs",
+    "created": 1614945508201,
+    "libs": [
+        "echarts.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Parent DOM element"
+            },
+            {
+                "type": 5,
+                "name": "Id"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Chart Options"
+            },
+            {
+                "type": 0,
+                "name": "Theme index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Theme"
+            },
+            {
+                "type": 2,
+                "name": "Custom theme obj"
+            },
+            {
+                "type": 2,
+                "name": "Extra Options"
+            },
+            {
+                "type": 0,
+                "name": "Style",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Visible",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "DOM Element"
+            },
+            {
+                "type": 2,
+                "name": "ECharts instance",
+                "objType": "echartsInstance"
+            },
+            {
+                "type": 1,
+                "name": "Theme changed"
+            }
+        ],
+        "name": "Ops.Libs.ECharts.ECharts"
+    }
+}

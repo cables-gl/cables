@@ -1,1 +1,71 @@
-{"id":"70116802-623a-461b-8aad-59aaa3bd9d3c","changelog":[{"message":"created op","author":"kikohs","date":1614945678734},{"message":"Ops.User.stephan.EChartsEvent renamed to Ops.Libs.EChartsEvent","author":"stephan","date":1614949335649},{"message":"Ops.Libs.EChartsEvent renamed to Ops.Libs.ECharts.EChartsEvent","author":"stephan","date":1614949376276}],"authorName":"kikohs","created":1614945706574,"libs":["echarts.js"]}
+{
+    "id": "70116802-623a-461b-8aad-59aaa3bd9d3c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "kikohs",
+            "date": 1614945678734
+        },
+        {
+            "message": "Ops.User.stephan.EChartsEvent renamed to Ops.Libs.EChartsEvent",
+            "author": "stephan",
+            "date": 1614949335649
+        },
+        {
+            "message": "Ops.Libs.EChartsEvent renamed to Ops.Libs.ECharts.EChartsEvent",
+            "author": "stephan",
+            "date": 1614949376276
+        }
+    ],
+    "authorName": "kikohs",
+    "created": 1614945706574,
+    "libs": [
+        "echarts.js"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "ECharts instance",
+                "objType": "echartsInstance"
+            },
+            {
+                "type": 5,
+                "name": "Event name"
+            },
+            {
+                "type": 5,
+                "name": "Query string"
+            },
+            {
+                "type": 2,
+                "name": "Query object"
+            },
+            {
+                "type": 1,
+                "name": "Refresh event binding"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Out Chart",
+                "objType": "echartsInstance"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 2,
+                "name": "Event params"
+            },
+            {
+                "type": 0,
+                "name": "Dirty (needs rebind)",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Libs.ECharts.EChartsEvent"
+    }
+}

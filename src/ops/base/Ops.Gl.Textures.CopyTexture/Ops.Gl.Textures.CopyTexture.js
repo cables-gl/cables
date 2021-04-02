@@ -30,6 +30,7 @@ const cgl = op.patch.cgl;
 let lastTex = null;
 let effect = null;
 let tex = null;
+let needsResUpdate = true;
 
 let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
@@ -68,15 +69,24 @@ function initEffect()
 
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get(), "clear": false });
 
-    tex = new CGL.Texture(cgl,
-        {
-            "name": "copytexture_" + op.id,
-            "isFloatingPointTexture": fpTexture.get(),
-            "filter": selectedFilter,
-            "wrap": selectedWrap,
-            "width": Math.floor(width.get()),
-            "height": Math.floor(height.get()),
-        });
+    if (!tex ||
+        tex.width != Math.floor(width.get()) ||
+        tex.height != Math.floor(height.get()) ||
+        tex.wrap != selectedWrap ||
+        tex.isFloatingPoint() != fpTexture.get()
+    )
+    {
+        if (tex) tex.delete();
+        tex = new CGL.Texture(cgl,
+            {
+                "name": "copytexture_" + op.id,
+                "isFloatingPointTexture": fpTexture.get(),
+                "filter": selectedFilter,
+                "wrap": selectedWrap,
+                "width": Math.floor(width.get()),
+                "height": Math.floor(height.get()),
+            });
+    }
 
     effect.setSourceTexture(tex);
     texOut.set(null);
@@ -103,6 +113,7 @@ function updateSoon()
         op.patch.cgl.off(autoRefreshTimeout);
         autoRefreshTimeout = op.patch.cgl.on("beginFrame", () =>
         {
+            if (needsResUpdate)updateResolution();
             doRender();
             op.patch.cgl.off(autoRefreshTimeout);
         });
@@ -141,12 +152,20 @@ function updateResolution()
         else op.setUiError("hintnpot", null, 0);
     }
     else op.setUiError("hintnpot", null, 0);
+
+    needsResUpdate = false;
 }
 
 function updateSizePorts()
 {
     width.setUiAttribs({ "greyout": useVPSize.get() });
     height.setUiAttribs({ "greyout": useVPSize.get() });
+}
+
+function updateResolutionLater()
+{
+    needsResUpdate = true;
+    updateSoon();
 }
 
 useVPSize.onChange = function ()
@@ -159,8 +178,8 @@ useVPSize.onChange = function ()
     }
     else
     {
-        width.onChange = updateResolution;
-        height.onChange = updateResolution;
+        width.onChange = updateResolutionLater;
+        height.onChange = updateResolutionLater;
     }
     updateResolution();
 };

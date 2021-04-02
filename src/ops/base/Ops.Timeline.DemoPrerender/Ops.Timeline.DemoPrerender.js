@@ -1,6 +1,7 @@
 const
     exec = op.inTrigger("Render"),
     inEvents = op.inArray("Times"),
+    inRecord = op.inBool("Record Events", false),
     inReset = op.inTriggerButton("Reset"),
     inClear = op.inTriggerButton("Clear"),
     next = op.outTrigger("Next"),
@@ -14,20 +15,23 @@ inEvents.setUiAttribs({ "hidePort": true });
 let isPrerendering = true;
 let prerenderCount = 0;
 
-let events = [];
+let events = [0];
 
 inEvents.onChange = () =>
 {
     numEvents.set(events.length);
-    events = inEvents.get() || [];
+    events = inEvents.get() || [0];
 };
 
 op.patch.cgl.on("heavyEvent", (e) =>
 {
-    console.log("heavyEvent", op.patch.timer.getTime(), e);
-    events.push(Math.round(op.patch.timer.getTime() * 60) / 60);
-    events = CABLES.uniqueArray(events);
-    inEvents.set(events);
+    if (inRecord.get() && !isPrerendering)
+    {
+        console.log("heavyEvent", op.patch.timer.getTime(), e);
+        events.push(Math.round(op.patch.timer.getTime() * 60) / 60);
+        events = CABLES.uniqueArray(events);
+        inEvents.set(events);
+    }
 });
 
 let curTime = 0;
@@ -39,7 +43,7 @@ inReset.onTriggered = () =>
 
 inClear.onTriggered = () =>
 {
-    events = [];
+    events = [0];
     inEvents.set(events);
 };
 
@@ -50,6 +54,14 @@ function fakeNow()
 
 function render()
 {
+    if (inRecord.get())
+    {
+        isPrerendering = false;
+        outProgress.set(1);
+        next.trigger();
+
+        return;
+    }
     if (isPrerendering)
     {
         // for(let i=0;i<events.length;i++)
@@ -87,9 +99,9 @@ function render()
         }
 
         next.trigger();
-        next.trigger();
-        next.trigger();
-        outProgress.set(prerenderCount / (events.length - 1));
+        // next.trigger();
+        // next.trigger();
+        outProgress.set(prerenderCount / (events.length));
 
         nextPrerendered.trigger();
 

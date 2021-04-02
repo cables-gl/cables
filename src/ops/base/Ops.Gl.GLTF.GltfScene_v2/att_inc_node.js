@@ -5,6 +5,7 @@ const gltfNode = class
     {
         this.isChild = node.isChild || false;
         this.name = node.name;
+        if(node.camera)this.camera = node.camera;
         this.hidden = false;
         this.mat = mat4.create();
         this._animMat = mat4.create();

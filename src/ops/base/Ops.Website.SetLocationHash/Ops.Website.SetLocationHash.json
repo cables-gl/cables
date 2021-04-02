@@ -1,0 +1,84 @@
+{
+    "id": "82492357-c11d-4b76-bd57-b296d3b79b83",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1617113832831
+        },
+        {
+            "message": " added lib: navigo.js",
+            "author": "stephan",
+            "date": 1617119533403
+        },
+        {
+            "message": "Ops.User.stephan.SetLocationHash renamed to Ops.Website.SetLocationHash",
+            "author": "stephan",
+            "date": 1617122196074
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1617113990660,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Hash"
+            },
+            {
+                "type": 5,
+                "name": "Route"
+            },
+            {
+                "type": 2,
+                "name": "Values"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Allow Empty",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Website.SetLocationHash"
+    },
+    "libs": [
+        "navigo.js"
+    ],
+    "summary": "sets window.location.hash to the specified value(s)",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Website.LocationHash"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Hash",
+                "text": "new value for window.location.hash (without the #)"
+            },
+            {
+                "name": "Route",
+                "text": "pattern for url and variables (i.e. /scene/:id)"
+            },
+            {
+                "name": "Values",
+                "text": "key-value object for replacements in the route"
+            },
+            {
+                "name": "Active",
+                "text": "update changes on change immediately, toggle to update \"on demand\""
+            },
+            {
+                "name": "Allow Empty",
+                "text": "allow for setting an empty hash, usually triggers a page reload"
+            }
+        ]
+    }
+}
