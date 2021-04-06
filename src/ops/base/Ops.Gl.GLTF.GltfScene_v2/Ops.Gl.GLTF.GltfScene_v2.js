@@ -5,7 +5,7 @@ const
     inExec = op.inTrigger("Render"),
     inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
-    inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
+    inCamera = op.inDropDown("Camera", ["None"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
