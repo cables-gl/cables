@@ -14,6 +14,7 @@ inEvents.setUiAttribs({ "hidePort": true });
 
 let isPrerendering = true;
 let prerenderCount = 0;
+let delaystart = false;
 
 let events = [0];
 
@@ -91,21 +92,42 @@ function render()
             // }
         }
 
+        const numExtraFrames = 30;
         if (prerenderCount >= events.length)
         {
-            isPrerendering = false;
-            op.patch.timer.setTime(0);
-            op.patch.freeTimer.setTime(0);
+            const t = (numExtraFrames - (prerenderCount - events.length)) / numExtraFrames;
+
+            console.log("empty prerender...", t);
+            op.patch.timer.setTime(t);
+            op.patch.freeTimer.setTime(t);
         }
 
         next.trigger();
+        next.trigger();
         // next.trigger();
         // next.trigger();
-        outProgress.set(prerenderCount / (events.length));
+        outProgress.set(Math.min(1, prerenderCount / (events.length)));
 
         nextPrerendered.trigger();
 
-        prerenderCount++;
+        if (prerenderCount >= events.length + numExtraFrames)
+        {
+            op.patch.timer.setTime(0);
+            op.patch.freeTimer.setTime(0);
+
+            // setTimeout(() =>
+            // {
+            //     delaystart = false;
+            isPrerendering = false;
+            //     op.patch.timer.setTime(0);
+            //     op.patch.freeTimer.setTime(0);
+            // }, 500);
+        }
+        else
+            prerenderCount++;
     }
-    else next.trigger();
+    else
+    {
+        next.trigger();
+    }
 }
