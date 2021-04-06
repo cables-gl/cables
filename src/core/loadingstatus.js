@@ -80,8 +80,9 @@ LoadingStatus.prototype.getListJobs = function ()
     let arr = [];
     for (const i in this._loadingAssets)
     {
-        if (!this._loadingAssets[i].finished)arr.push(is._loadingAssets[i].name);
+        if (!this._loadingAssets[i].finished)arr.push(this._loadingAssets[i].name);
     }
+
     return arr;
 };
 
