@@ -21,7 +21,7 @@ const
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
-    inActive=op.inBool("Active",true),
+    inActive = op.inBool("Active", true),
 
     nextBefore = op.outTrigger("Render Before"),
     next = op.outTrigger("Next"),
@@ -33,7 +33,7 @@ const
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
-    outLoaded = op.outBool("Loaded");
+    outLoading = op.outBool("Loading");
 
 op.setPortGroup("Timing", [inTime, inTimeLine, inLoop]);
 
@@ -75,10 +75,9 @@ function updateCamera()
     {
         for (let i = 0; i < gltf.nodes.length; i++)
         {
-            if(gltf.nodes[i].camera >=0)
+            if (gltf.nodes[i].camera >= 0)
             {
                 arr.push(gltf.nodes[i].name);
-
             }
         }
     }
@@ -128,13 +127,13 @@ function setCam()
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
-        if (gltf.nodes[i].name == inCamera.get())cam = new gltfCamera(gltf,gltf.nodes[i]);
+        if (gltf.nodes[i].name == inCamera.get())cam = new gltfCamera(gltf, gltf.nodes[i]);
     }
 }
 
 inExec.onTriggered = function ()
 {
-    if (!inActive.get() || !outLoaded.get())return;
+    if (!inActive.get()) return;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
 
@@ -202,14 +201,14 @@ inExec.onTriggered = function ()
 
 function loadBin(addCacheBuster)
 {
-    if(!inActive.get())return;
+    if (!inActive.get()) return;
 
     if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
-    outLoaded.set(false);
+    outLoading.set(true);
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
     oReq.responseType = "arraybuffer";
@@ -242,7 +241,7 @@ function loadBin(addCacheBuster)
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }
             updateCenter();
-            outLoaded.set(true);
+            outLoading.set(false);
 
             cgl.patch.loading.finished(loadingId);
             loadingId = null;
@@ -267,17 +266,15 @@ op.onFileChanged = function (fn)
     }
 };
 
-inActive.onChange=()=>
+inActive.onChange = () =>
 {
-    if(inActive.get()) reloadSoon();
+    if (inActive.get()) reloadSoon();
 
-    if(!inActive.get())
+    if (!inActive.get())
     {
-        gltf=null;
-        // outLoaded.set(false);
+        gltf = null;
     }
-
-}
+};
 
 function reloadSoon(nocache)
 {

@@ -91,6 +91,15 @@
             },
             {
                 "type": 0,
+                "name": "Channel index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Channel"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "boolean"
             },

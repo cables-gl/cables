@@ -4,7 +4,7 @@ const activeIn = op.inBool("active", false);
 const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
-
+let loadingId = null;
 patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hidePort": true });
@@ -123,6 +123,9 @@ function update()
     const patchId = patchIdIn.get();
     const subPatchId = subPatchIdIn.get();
     const blueprintId = patchId + "-" + subPatchId;
+
+    loadingId = op.patch.loading.start("blueprint", blueprintId);
+
     if (patch.isEditorMode())
     {
         const options = {
@@ -155,6 +158,7 @@ function update()
                 }
             }
             loadingOut.set(false);
+            op.patch.loading.finished(loadingId);
         });
     }
     else if (document.location.href.indexOf("cables.gl") > 0)
@@ -181,6 +185,7 @@ function update()
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
                 loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
             }
         );
     }
@@ -205,6 +210,7 @@ function update()
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
                 loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
             }
         );
     }

@@ -10,7 +10,8 @@ const
     width = op.outValue("Width"),
     height = op.outValue("Height"),
     ratio = op.outValue("Aspect Ratio"),
-    loaded = op.outValue("Loaded");
+    loaded = op.outValue("Loaded", false),
+    loading = op.outValue("Loading", false);
 
 op.setPortGroup("Size", [width, height]);
 
@@ -32,8 +33,6 @@ filename.onChange = flip.onChange = function () { reloadSoon(); };
 aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
 unpackAlpha.onChange = function () { reloadSoon(); };
-
-loaded.set(false);
 
 tfilter.set("mipmap");
 wrap.set("repeat");
@@ -82,6 +81,7 @@ function realReload(nocache)
     if ((filename.get() && filename.get().length > 1))
     {
         loaded.set(false);
+        loading.set(true);
 
         op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
         op.refreshParams();
@@ -115,6 +115,7 @@ function realReload(nocache)
                     textureOut.set(null);
                     textureOut.set(tex);
 
+                    loading.set(false);
                     loaded.set(true);
                     cgl.patch.loading.finished(loadingId);
                 }, {
