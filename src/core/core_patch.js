@@ -433,6 +433,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
+
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
@@ -500,12 +501,12 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 found = true;
                 if (tryRelink)
                 {
-                    if (this.ops[i].portsIn.length > 0 && this.ops[i].portsIn[0].isLinked() && (this.ops[i].portsOut.length > 0 && this.ops[i].portsOut[0].isLinked()))
+                    if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
                     {
-                        if (this.ops[i].portsIn[0].getType() == this.ops[i].portsOut[0].getType())
+                        if (op.portsIn[0].getType() == op.portsOut[0].getType())
                         {
-                            reLinkP1 = this.ops[i].portsIn[0].links[0].getOtherPort(this.ops[i].portsIn[0]);
-                            reLinkP2 = this.ops[i].portsOut[0].links[0].getOtherPort(this.ops[i].portsOut[0]);
+                            reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
+                            reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);
                         }
                     }
                 }
@@ -532,6 +533,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 }
 
                 delete this._opIdCache[opid];
+                break;
             }
         }
     }
@@ -733,18 +735,18 @@ Patch.prototype.getOpById = function (opid)
     // }
 };
 
-Patch.prototype.getOpsById = function (opIds)
-{
-    const ops = [];
-    for (const i in this.ops)
-        for (let j = 0; j < opIds.length; j++)
-            if (this.ops[i].id === opIds[j])
-            {
-                ops.push(this.ops[i]);
-                break;
-            }
-    return ops;
-};
+// Patch.prototype.getOpsById = function (opIds)
+// {
+//     const ops = [];
+//     for (const i in this.ops)
+//         for (let j = 0; j < opIds.length; j++)
+//             if (this.ops[i].id === opIds[j])
+//             {
+//                 ops.push(this.ops[i]);
+//                 break;
+//             }
+//     return ops;
+// };
 
 Patch.prototype.getOpsByName = function (name)
 {

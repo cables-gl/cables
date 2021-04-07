@@ -21,6 +21,7 @@ const
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
+    inActive=op.inBool("Active",true),
 
     nextBefore = op.outTrigger("Render Before"),
     next = op.outTrigger("Next"),
@@ -72,9 +73,13 @@ function updateCamera()
     const arr = ["None"];
     if (gltf && gltf.json.cameras)
     {
-        for (let i = 0; i < gltf.json.cameras.length; i++)
+        for (let i = 0; i < gltf.nodes.length; i++)
         {
-            arr.push(gltf.json.cameras[i].name);
+            if(gltf.nodes[i].camera >=0)
+            {
+                arr.push(gltf.nodes[i].name);
+
+            }
         }
     }
     inCamera.uiAttribs.values = arr;
@@ -121,14 +126,15 @@ function setCam()
     cam = null;
     if (!gltf) return;
 
-    for (let i = 0; i < gltf.cams.length; i++)
+    for (let i = 0; i < gltf.nodes.length; i++)
     {
-        if (gltf.cams[i].name == inCamera.get())cam = gltf.cams[i];
+        if (gltf.nodes[i].name == inCamera.get())cam = new gltfCamera(gltf,gltf.nodes[i]);
     }
 }
 
 inExec.onTriggered = function ()
 {
+    if (!inActive.get() || !outLoaded.get())return;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
 
@@ -163,6 +169,7 @@ inExec.onTriggered = function ()
     }
 
     cgl.frameStore.currentScene = gltf;
+
     nextBefore.trigger();
 
     if (needsMatUpdate) updateMaterials();
@@ -195,6 +202,8 @@ inExec.onTriggered = function ()
 
 function loadBin(addCacheBuster)
 {
+    if(!inActive.get())return;
+
     if (!loadingId)loadingId = cgl.patch.loading.start("gltf" + inFile.get(), inFile.get());
 
     let url = op.patch.getFilePath(String(inFile.get()));
@@ -257,6 +266,18 @@ op.onFileChanged = function (fn)
         reloadSoon(true);
     }
 };
+
+inActive.onChange=()=>
+{
+    if(inActive.get()) reloadSoon();
+
+    if(!inActive.get())
+    {
+        gltf=null;
+        // outLoaded.set(false);
+    }
+
+}
 
 function reloadSoon(nocache)
 {

@@ -22,27 +22,32 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "test float 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "name",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 0,
+                "name": "Hide",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
                 "name": "Button"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "buttons"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "test float 1",
                 "subType": "number"
             }
