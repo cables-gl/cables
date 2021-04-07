@@ -1,13 +1,14 @@
-# Embedding Patches
+# Exporting Patches
 
-*cables*-Patches can be exported as a zip-file and embedded into any website. The size of the exported patches are relatively small as only the ops which you use in your patch are packed into the zip-file.
+*cables*-Patches can be exported as a zip-file and embedded into any website. 
+The size of the exported patches are relatively small as only the ops which you use in your patch are packed into the zip-file.
 
-- In your project settings click `Export Static Archive`
-- A *.zip*-archive containing all your project data is created
-- The archive contains an `index.html`-file – put this on a web-server and load it, your project should be shown. You can open your browser’s developer tools to check if there are any errors.
-- An easy way to start a local web-server on your computer is by using a program like [anvil](anvilformac.com) – after you downloaded the zip file of your project and unpacked it, just drag the extracted folder onto the menu bar icon of *anvil* and click on the newly created local web-server to open it in your browser
+- In the Editor choose `Export` in the menu to open the export dialog
+- Use one of the following export services to export your patch:
 
-## Examples
+__TOC__
+
+## Examples for Embedding
 
 Have a look at our github example repository: [github](https://github.com/cables-gl/cables-embedding)
 
@@ -103,13 +104,9 @@ For performance Reasons, you should pause the patch, when its not visible using`
 - `glCanvasResizeToWindow` Resize the Canvas to the size of the window
 - `glCanvasResizeToParent` Resize the Canvas to the size of the parent (container) element
 
-
-
-
-
 # Transparent Patch
 
-make sure `clear` checkbox is NOT checked in mainloop.
+make sure `clear` checkbox is NOT checked in MainLoop.
 
 in patch options set the following canvas context attributes:
 
