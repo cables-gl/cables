@@ -12,6 +12,6 @@ This means that whenever your change anything in your patch (or we change someth
 The easiest option for most CMSs, but not the best one if you are still working on the patch or
 want your export/integration be as "futureproof" as possible.
 
-# Prerequisites
+## Prerequisites
 
 - any website/cms you can put HTML code into
