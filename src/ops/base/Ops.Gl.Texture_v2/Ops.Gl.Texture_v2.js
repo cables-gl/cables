@@ -46,7 +46,12 @@ active.onChange = function ()
         if (loadedFilename != filename.get()) realReload();
         else textureOut.set(tex);
     }
-    else textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+    else
+    {
+        textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+        width.set(CGL.Texture.getEmptyTexture(cgl).width);
+        height.set(CGL.Texture.getEmptyTexture(cgl).height);
+    }
 };
 
 const setTempTexture = function ()

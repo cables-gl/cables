@@ -3,6 +3,7 @@ const gltfCamera = class
     constructor(gltf, node)
     {
         this.node=node;
+        this.name=node.name;
         console.log(gltf);
         this.config=gltf.json.cameras[node.camera];
 
@@ -11,7 +12,8 @@ const gltfCamera = class
         this.quatOr = quat.create();
         this.vCenter = vec3.create();
         this.vUp = vec3.create();
-        this.transMatrix = mat4.create();
+        this.vMat = mat4.create();
+
     }
 
     updateAnim(time)
@@ -79,11 +81,11 @@ const gltfCamera = class
         let mv=mat4.create();
         mv=this.node.modelMatAbs();
         mat4.invert(mv,mv);
+        this.vMat=mv;
 
         mat4.mul(cgl.vMatrix,cgl.vMatrix,mv);
 
 
-        // mat4.multiply(cgl.vMatrix,cgl.vMatrix,this.transMatrix);
     }
 
     end()

@@ -71,7 +71,7 @@ inCenter.onChange = updateCenter;
 function updateCamera()
 {
     const arr = ["None"];
-    if (gltf && gltf.json.cameras)
+    if (gltf)
     {
         for (let i = 0; i < gltf.nodes.length; i++)
         {
