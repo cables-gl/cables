@@ -98,7 +98,7 @@ inTexture.onLinkChanged =
 inTexture.onChange = () =>
 {
     if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
-    if (render.links.length === 0) updateSoon();
+    updateSoon();
 };
 
 function updateSoon()

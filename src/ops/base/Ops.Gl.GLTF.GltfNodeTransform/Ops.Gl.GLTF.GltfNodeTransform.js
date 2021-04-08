@@ -6,7 +6,8 @@ const
     outPosZ = op.outNumber("Translate Z", 0),
 
     next = op.outTrigger("Next"),
-    outFound = op.outBool("Found");
+    outFound = op.outBool("Found"),
+    outMat = op.outArray("Matrix");
 
 const cgl = op.patch.cgl;
 const translate = vec3.create();
@@ -32,6 +33,7 @@ inExec.onTriggered = function ()
         if (!cgl.frameStore || !cgl.frameStore.currentScene || !cgl.frameStore.currentScene.nodes) return;
 
         currentSceneLoaded = cgl.frameStore.currentScene.loaded;
+        outFound.set(false);
 
         for (let i = 0; i < cgl.frameStore.currentScene.nodes.length; i++)
         {
@@ -45,10 +47,15 @@ inExec.onTriggered = function ()
 
     if (node)
     {
-        mat4.getTranslation(translate, node.modelMatAbs());
+        const m = node.modelMatAbs();
+
+        mat4.getTranslation(translate, m);
         outPosX.set(translate[0]);
         outPosY.set(translate[1]);
         outPosZ.set(translate[2]);
+
+        outMat.set(null);
+        outMat.set(m);
     }
 
     next.trigger();
