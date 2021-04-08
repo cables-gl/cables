@@ -40,6 +40,10 @@
                 "name": "Positions"
             },
             {
+                "type": 1,
+                "name": "Next"
+            },
+            {
                 "type": 3,
                 "name": "Scale"
             },

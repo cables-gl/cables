@@ -4,13 +4,18 @@ const activeIn = op.inBool("active", false);
 const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
-
+let loadingId = null;
 patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });
 
 const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id];
+
+if (!activeIn.get())
+{
+    op.setUiError("inactive", "blueprint is inactive", 0);
+}
 
 const restorePorts = () =>
 {
@@ -24,10 +29,21 @@ const restorePorts = () =>
         {
             oldPortIn.links.forEach((link) =>
             {
-                const parent = op.patch.getOpById(link.objOut);
+                let parent = op.patch.getOpById(link.objOut);
                 if (parent)
                 {
                     op.patch.link(parent, link.portOut, op, newPort.name);
+                }
+                else
+                {
+                    parent = op.patch.ops.find((subOp) =>
+                        subOp.uiAttribs &&
+                        subOp.uiAttribs.blueprint &&
+                        subOp.uiAttribs.blueprint.originalOpId == link.objOut);
+                    if (parent)
+                    {
+                        op.patch.link(parent, link.portOut, op, newPort.name);
+                    }
                 }
             });
         }
@@ -48,10 +64,21 @@ const restorePorts = () =>
         {
             oldPortOut.links.forEach((link) =>
             {
-                const parent = op.patch.getOpById(link.objIn);
+                let parent = op.patch.getOpById(link.objIn);
                 if (parent)
                 {
                     op.patch.link(op, newPort.name, parent, link.portIn);
+                }
+                else
+                {
+                    parent = op.patch.ops.find((subOp) =>
+                        subOp.uiAttribs &&
+                        subOp.uiAttribs.blueprint &&
+                        subOp.uiAttribs.blueprint.originalOpId == link.objIn);
+                    if (parent)
+                    {
+                        op.patch.link(op, newPort.name, parent, link.portIn);
+                    }
                 }
             });
             newPort.onLinkChanged = savePortData;
@@ -64,48 +91,30 @@ const restorePorts = () =>
     }
 };
 
-op.onLoaded = () =>
+activeIn.onChange = () =>
 {
-    cleanupPorts();
-    restorePorts();
     if (!loadingOut.get())
     {
         if (activeIn.get())
         {
             op.setUiError("inactive", null);
-            op.log("loading on load");
             update();
         }
         else
         {
             op.setUiError("inactive", "blueprint is inactive", 0);
-            op.log("remove on load");
             removeImportedOps();
         }
     }
-    activeIn.onChange = () =>
-    {
-        if (!loadingOut.get())
-        {
-            if (activeIn.get())
-            {
-                op.log("loading on active");
-                op.setUiError("inactive", null);
-                update();
-            }
-            else
-            {
-                op.setUiError("inactive", "blueprint is inactive", 0);
-                op.log("remove on active");
-                removeImportedOps();
-            }
-        }
-    };
+};
+
+op.onLoaded = () =>
+{
+    cleanupPorts();
+    restorePorts();
 };
 
 op.onDelete = removeImportedOps;
-
-let blueprintId = op.id;
 
 function update()
 {
@@ -113,22 +122,28 @@ function update()
     const patch = op.patch;
     const patchId = patchIdIn.get();
     const subPatchId = subPatchIdIn.get();
-    blueprintId = patchId + "-" + subPatchId;
+    const blueprintId = patchId + "-" + subPatchId;
+
+    loadingId = op.patch.loading.start("blueprint", blueprintId);
+
     if (patch.isEditorMode())
     {
         const options = {
             "blueprintId": blueprintId,
             "patchId": patchId,
-            "subPatchId": subPatchId
+            "subPatchId": subPatchId,
+            "opId": op.id,
+            "blueprintSubpatchId": op.uiAttribs.subPatch
         };
-        CABLES.sandbox.getBlueprintOps(options, (err, blueprintData) =>
+        CABLES.sandbox.getBlueprintOps(options, (err, data) =>
         {
             op.setUiError("fetchOps", null);
             if (!err)
             {
                 removeImportedOps();
+                const blueprintData = {};
+                blueprintData.ops = data.msg.ops;
                 blueprintData.settings = op.patch.settings;
-                blueprintData.ops = blueprintData.msg;
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
@@ -143,6 +158,7 @@ function update()
                 }
             }
             loadingOut.set(false);
+            op.patch.loading.finished(loadingId);
         });
     }
     else if (document.location.href.indexOf("cables.gl") > 0)
@@ -161,7 +177,7 @@ function update()
                 {
                     const blueprintData = JSON.parse(data);
                     blueprintData.settings = op.patch.settings;
-                    blueprintData.ops = blueprintData.msg;
+                    blueprintData.ops = blueprintData.msg.ops;
                     deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
@@ -169,12 +185,15 @@ function update()
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
                 loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
             }
         );
     }
     else
     {
-        const blueprintUrl = "js/" + blueprintId + ".json";
+        let exportId = op.id;
+        if (op.uiAttribs.blueprint && op.uiAttribs.blueprint.originalOpId) exportId = op.uiAttribs.blueprint.originalOpId;
+        const blueprintUrl = "js/" + exportId + ".json";
         CABLES.ajax(
             blueprintUrl,
             function (err, data)
@@ -183,7 +202,7 @@ function update()
                 {
                     const blueprintData = JSON.parse(data);
                     blueprintData.settings = op.patch.settings;
-                    blueprintData.ops = blueprintData.msg;
+                    blueprintData.ops = blueprintData.ops;
                     deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
@@ -191,6 +210,7 @@ function update()
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
                 loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
             }
         );
     }
@@ -203,11 +223,11 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find(op =>
-                op.uiAttribs &&
-                op.uiAttribs.blueprint &&
-                op.uiAttribs.blueprint.isParentSubPatch &&
-                op.uiAttribs.blueprint.id == blueprintId
+            const parentSubPatch = patch.ops.find((subOp) =>
+                subOp.uiAttribs &&
+                subOp.uiAttribs.blueprint &&
+                subOp.uiAttribs.blueprint.isParentSubPatch &&
+                subOp.uiAttribs.blueprint.blueprintOpId == op.id
             );
             if (parentSubPatch)
             {
@@ -235,21 +255,16 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
 function removeImportedOps()
 {
-    const opsToDelete = [];
-    op.patch.ops.forEach((subOp) =>
+    const parentSubPatch = op.patch.ops.find((subOp) =>
+        subOp.uiAttribs &&
+        subOp.uiAttribs.blueprint &&
+        subOp.uiAttribs.blueprint.isParentSubPatch &&
+        subOp.uiAttribs.blueprint.blueprintOpId == op.id
+    );
+    if (parentSubPatch)
     {
-        if (subOp.uiAttribs.blueprint && subOp.uiAttribs.blueprint.id === blueprintId)
-        {
-            opsToDelete.push(subOp.id);
-        }
-    });
-    opsToDelete.forEach((toDelete) =>
-    {
-        if (op.patch.getOpById(toDelete))
-        {
-            op.patch.deleteOp(toDelete);
-        }
-    });
+        op.patch.deleteOp(parentSubPatch.id, parentSubPatch.uiAttribs.blueprint.blueprintOpId);
+    }
 }
 
 const getOldPorts = () =>
@@ -334,7 +349,7 @@ const removeOutPort = (port) =>
 
 function setupPorts(parentSubPatch)
 {
-    const subPatchDataPort = parentSubPatch.portsIn.find(port => port.name === "dataStr");
+    const subPatchDataPort = parentSubPatch.portsIn.find((port) => port.name === "dataStr");
     if (!subPatchDataPort) return;
     if (!subPatchDataPort.get()) return;
 
@@ -350,16 +365,27 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
+            const subPatchPort = parentSubPatch.portsIn.find((port) => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
             if (oldPorts.portsIn.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsIn[newPort.name].links))
             {
                 oldPorts.portsIn[newPort.name].links.forEach((link) =>
                 {
-                    const parent = op.patch.getOpById(link.objOut);
+                    let parent = op.patch.getOpById(link.objOut);
                     if (parent)
                     {
                         op.patch.link(parent, link.portOut, op, newPort.name);
+                    }
+                    else
+                    {
+                        parent = op.patch.ops.find((subOp) =>
+                            subOp.uiAttribs &&
+                            subOp.uiAttribs.blueprint &&
+                            subOp.uiAttribs.blueprint.originalOpId == link.objOut);
+                        if (parent)
+                        {
+                            op.patch.link(parent, link.portOut, op, newPort.name);
+                        }
                     }
                 });
             }
@@ -394,19 +420,31 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsOut[i].name))
         {
-            const patchOutputOP = op.patch.getSubPatchOp(subPatchIdIn.get(), "Ops.Ui.PatchOutput");
+            const patchPortIn = parentSubPatch.portsIn.find((port) => port.name === "patchId");
+            const patchOutputOP = op.patch.getSubPatchOp(patchPortIn.value, "Ops.Ui.PatchOutput");
             if (patchOutputOP.portsIn)
             {
-                const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
+                const subPatchPort = patchOutputOP.portsIn.find((port) => port.name == subPatchPortsOut[i].name);
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
                 if (oldPorts.portsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsOut[newPort.name].links))
                 {
                     oldPorts.portsOut[newPort.name].links.forEach((link) =>
                     {
-                        const parent = op.patch.getOpById(link.objIn);
+                        let parent = op.patch.getOpById(link.objIn);
                         if (parent)
                         {
                             op.patch.link(op, newPort.name, parent, link.portIn);
+                        }
+                        else
+                        {
+                            parent = op.patch.ops.find((subOp) =>
+                                subOp.uiAttribs &&
+                                subOp.uiAttribs.blueprint &&
+                                subOp.uiAttribs.blueprint.originalOpId == link.objIn);
+                            if (parent)
+                            {
+                                op.patch.link(op, newPort.name, parent, link.portIn);
+                            }
                         }
                     });
                 }

@@ -55,6 +55,10 @@
                 "type": 0,
                 "name": "delay send (ms)",
                 "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Additional server-data"
             }
         ],
         "portsOut": [
@@ -65,7 +69,8 @@
             },
             {
                 "type": 2,
-                "name": "socket"
+                "name": "socket",
+                "objType": "socketcluster"
             },
             {
                 "type": 5,
@@ -113,6 +118,14 @@
             {
                 "name": "channel",
                 "text": "name of channel"
+            },
+            {
+                "name": "delay send (ms)",
+                "text": "delay sending of all messages by number of ms"
+            },
+            {
+                "name": "Additional server-data",
+                "text": "add data outside the payload for the socketcluster server to read, can be used for auth-token or sessiondata"
             },
             {
                 "name": "ready",
