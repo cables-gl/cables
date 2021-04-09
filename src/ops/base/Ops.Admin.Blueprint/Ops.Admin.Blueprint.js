@@ -36,7 +36,7 @@ const restorePorts = () =>
                 }
                 else
                 {
-                    parent = op.patch.ops.find((subOp) =>
+                    parent = op.patch.ops.find(subOp =>
                         subOp.uiAttribs &&
                         subOp.uiAttribs.blueprint &&
                         subOp.uiAttribs.blueprint.originalOpId == link.objOut);
@@ -71,7 +71,7 @@ const restorePorts = () =>
                 }
                 else
                 {
-                    parent = op.patch.ops.find((subOp) =>
+                    parent = op.patch.ops.find(subOp =>
                         subOp.uiAttribs &&
                         subOp.uiAttribs.blueprint &&
                         subOp.uiAttribs.blueprint.originalOpId == link.objIn);
@@ -164,10 +164,10 @@ function update()
     else if (document.location.href.indexOf("cables.gl") > 0)
     {
         // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
-        let blueprintUrl = "http://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
+        let blueprintUrl = "http://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
         if (document.location.hostname.indexOf("devsandbox") > 0)
         {
-            blueprintUrl = "http://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId;
+            blueprintUrl = "http://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
         }
         CABLES.ajax(
             blueprintUrl,
@@ -223,7 +223,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find((subOp) =>
+            const parentSubPatch = patch.ops.find(subOp =>
                 subOp.uiAttribs &&
                 subOp.uiAttribs.blueprint &&
                 subOp.uiAttribs.blueprint.isParentSubPatch &&
@@ -255,7 +255,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
 function removeImportedOps()
 {
-    const parentSubPatch = op.patch.ops.find((subOp) =>
+    const parentSubPatch = op.patch.ops.find(subOp =>
         subOp.uiAttribs &&
         subOp.uiAttribs.blueprint &&
         subOp.uiAttribs.blueprint.isParentSubPatch &&
@@ -349,7 +349,7 @@ const removeOutPort = (port) =>
 
 function setupPorts(parentSubPatch)
 {
-    const subPatchDataPort = parentSubPatch.portsIn.find((port) => port.name === "dataStr");
+    const subPatchDataPort = parentSubPatch.portsIn.find(port => port.name === "dataStr");
     if (!subPatchDataPort) return;
     if (!subPatchDataPort.get()) return;
 
@@ -365,7 +365,7 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = parentSubPatch.portsIn.find((port) => port.name == subPatchPortsIn[i].name);
+            const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
             if (oldPorts.portsIn.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsIn[newPort.name].links))
             {
@@ -378,7 +378,7 @@ function setupPorts(parentSubPatch)
                     }
                     else
                     {
-                        parent = op.patch.ops.find((subOp) =>
+                        parent = op.patch.ops.find(subOp =>
                             subOp.uiAttribs &&
                             subOp.uiAttribs.blueprint &&
                             subOp.uiAttribs.blueprint.originalOpId == link.objOut);
@@ -420,11 +420,11 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsOut[i].name))
         {
-            const patchPortIn = parentSubPatch.portsIn.find((port) => port.name === "patchId");
+            const patchPortIn = parentSubPatch.portsIn.find(port => port.name === "patchId");
             const patchOutputOP = op.patch.getSubPatchOp(patchPortIn.value, "Ops.Ui.PatchOutput");
             if (patchOutputOP.portsIn)
             {
-                const subPatchPort = patchOutputOP.portsIn.find((port) => port.name == subPatchPortsOut[i].name);
+                const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
                 if (oldPorts.portsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsOut[newPort.name].links))
                 {
@@ -437,7 +437,7 @@ function setupPorts(parentSubPatch)
                         }
                         else
                         {
-                            parent = op.patch.ops.find((subOp) =>
+                            parent = op.patch.ops.find(subOp =>
                                 subOp.uiAttribs &&
                                 subOp.uiAttribs.blueprint &&
                                 subOp.uiAttribs.blueprint.originalOpId == link.objIn);

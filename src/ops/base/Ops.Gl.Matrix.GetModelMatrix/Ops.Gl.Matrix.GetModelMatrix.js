@@ -1,15 +1,17 @@
-var cgl=op.patch.cgl;
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+const
+    cgl = op.patch.cgl,
+    render = op.inTrigger("render"),
+    trigger = op.outTrigger("trigger"),
+    matrix = op.outArray("matrix");
 
-var m=mat4.create();
-var matrix=op.addOutPort(new CABLES.Port(this,"matrix",CABLES.OP_PORT_TYPE_ARRAY));
+const m = mat4.create();
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
     mat4.copy(m, cgl.mMatrix);
+    matrix.set(null);
     matrix.set(m);
     trigger.trigger();
 };
 
-matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );
+matrix.set([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
