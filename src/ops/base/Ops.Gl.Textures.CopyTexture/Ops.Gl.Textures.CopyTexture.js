@@ -65,7 +65,11 @@ updateParams();
 function initEffect()
 {
     if (effect)effect.delete();
-    if (tex)tex.delete();
+    if (tex)
+    {
+        tex.delete();
+        tex = null;
+    }
 
     effect = new CGL.TextureEffect(cgl, { "isFloatingPointTexture": fpTexture.get(), "clear": false });
 

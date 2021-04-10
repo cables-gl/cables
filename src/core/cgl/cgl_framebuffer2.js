@@ -3,18 +3,6 @@
 import { Texture } from "./cgl_texture";
 import { Log } from "../log";
 
-// const fbs = {
-//     Framebuffer2DrawTargetsDefault: null,
-//     Framebuffer2BlittingFramebuffer: null,
-//     Framebuffer2FinalFramebuffer: null,
-// };
-
-// var this.Framebuffer2DrawTargetsDefault = this.this.Framebuffer2DrawTargetsDefault;
-// var this.Framebuffer2BlittingFramebuffer = this.this.Framebuffer2BlittingFramebuffer;
-// var this.Framebuffer2FinalFramebuffer = this.this.Framebuffer2FinalFramebuffer;
-
-// export { fbs };
-
 
 const Framebuffer2 = function (cgl, w, h, options)
 {
