@@ -36,6 +36,7 @@ const Texture = function (__cgl, options)
     this.flip = true;
     this.flipped = false;
     this.shadowMap = false;
+    this.deleted = false;
     this.anisotropic = 0;
     this.filter = Texture.FILTER_NEAREST;
     this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
@@ -340,6 +341,7 @@ Texture.prototype.delete = function ()
         return;
     }
 
+    this.deleted = true;
     this.width = 0;
     this.height = 0;
     this._cgl.profileData.profileTextureDelete++;
