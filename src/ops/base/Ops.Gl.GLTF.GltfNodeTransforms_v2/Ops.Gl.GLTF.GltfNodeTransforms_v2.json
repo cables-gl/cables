@@ -1,0 +1,75 @@
+{
+    "id": "02247569-4a2d-4a1b-952d-3585b1c677a8",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1587737466134
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransforms renamed to Ops.Gl.GLTF.GltfNodeTransforms",
+            "author": "pandur",
+            "date": 1587794804783
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfNodeTransforms",
+            "author": "pandur",
+            "date": 1617902808681
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransforms2 renamed to Ops.Gl.GLTF.GltfNodeTransforms_v2",
+            "author": "pandur",
+            "date": 1617903101851
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1617902808681,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Search"
+            },
+            {
+                "type": 0,
+                "name": "Order index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Order"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Positions"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Scale"
+            },
+            {
+                "type": 3,
+                "name": "Names"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfNodeTransforms_v2"
+    },
+    "summary": "output all transformations of nodes starting with [search]",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -86,7 +86,7 @@ const gltfCamera = class
         this.vMat=mv;
 
         mat4.identity(cgl.vMatrix);
-        console.log(mv);
+        // console.log(mv);
         mat4.mul(cgl.vMatrix,cgl.vMatrix,mv);
 
 
