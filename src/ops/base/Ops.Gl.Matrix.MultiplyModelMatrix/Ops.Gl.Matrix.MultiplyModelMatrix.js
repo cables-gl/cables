@@ -1,21 +1,23 @@
-var cgl=op.patch.cgl;
-var render=op.inTrigger('render');
-var inIdentity=op.inValueBool("Identity",false);
-var next=op.outTrigger("trigger");
+let cgl = op.patch.cgl;
+let render = op.inTrigger("render");
+let inIdentity = op.inValueBool("Identity", false);
+let next = op.outTrigger("trigger");
 
-var m=mat4.create();
-var matrix=op.inArray("matrix");
+let m = mat4.create();
+let matrix = op.inArray("matrix");
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
     cgl.pushModelMatrix();
 
-    if(inIdentity.get()) mat4.identity(cgl.mMatrix);
+    if (inIdentity.get()) mat4.identity(cgl.mMatrix);
 
-    mat4.multiply(cgl.mMatrix,cgl.mMatrix,matrix.get());
+    const m = matrix.get();
+
+    if (m) mat4.multiply(cgl.mMatrix, cgl.mMatrix, m);
 
     next.trigger();
     cgl.popModelMatrix();
 };
 
-matrix.set( [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1] );
+matrix.set([1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);

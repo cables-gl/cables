@@ -104,6 +104,7 @@ function onValuesPortChange()
         valuePort.set("");
     }
 
+    outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
 }
 

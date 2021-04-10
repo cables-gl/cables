@@ -6,7 +6,6 @@ const gltfCamera = class
         this.config = config;
         this.node=null;
 
-console.log(idx);
         for(let i=0;i<gltf.nodes.length;i++)
             if(gltf.nodes[i].camera==idx)
             {
@@ -18,7 +17,6 @@ console.log(idx);
 
         if(!this.node) this.node = gltf.getNode(this.name);
 
-console.log(gltf.nodes);
 
         // this.nodeOrient=gltf.getNode(this.name+"_Orientation");
 

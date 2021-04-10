@@ -56,11 +56,18 @@ alphaMaskMethod.onChange =
     fpTexture.onChange =
     inTextureMask.onChange = updateSoon;
 
+render.onLinkChanged =
+inTexture.onLinkChanged =
+inTexture.onChange = () =>
+{
+    if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    updateSoon();
+};
+
 render.onTriggered = doRender;
 
-updateSizePorts();
-
-updateParams();
+// updateSizePorts();
+// updateParams();
 
 function initEffect()
 {
@@ -97,14 +104,6 @@ function initEffect()
     reInitEffect = false;
 }
 
-render.onLinkChanged =
-inTexture.onLinkChanged =
-inTexture.onChange = () =>
-{
-    if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
-    updateSoon();
-};
-
 function updateSoon()
 {
     updateParams();
@@ -117,9 +116,15 @@ function updateSoon()
         op.patch.cgl.off(autoRefreshTimeout);
         autoRefreshTimeout = op.patch.cgl.on("beginFrame", () =>
         {
-            if (needsResUpdate)updateResolution();
-            doRender();
             op.patch.cgl.off(autoRefreshTimeout);
+
+            console.log("beginframe copytexture ", op.name);
+            if (needsResUpdate)updateResolution();
+
+            if (!effect)console.log("has no effect");
+            if (!inTexture.get()) console.log("has no intexture");
+
+            doRender();
         });
     }
 }
@@ -190,7 +195,7 @@ useVPSize.onChange = function ()
 
 function doRender()
 {
-    op.patch.removeOnAnimCallback(doRender);
+    // op.patch.removeOnAnimCallback(doRender);
     if (!inTexture.get())
     {
         lastTex = null;// CGL.Texture.getEmptyTexture(cgl);

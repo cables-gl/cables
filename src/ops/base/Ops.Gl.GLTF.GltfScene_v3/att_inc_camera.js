@@ -4,7 +4,7 @@ const gltfCamera = class
     {
         this.node=node;
         this.name=node.name;
-        console.log(gltf);
+        // console.log(gltf);
         this.config=gltf.json.cameras[node.camera];
 
         this.pos = vec3.create();
@@ -42,12 +42,12 @@ const gltfCamera = class
         const asp = cgl.getViewPort()[2] / cgl.getViewPort()[3];
 
         cgl.pushPMatrix();
-        mat4.perspective(
-            cgl.pMatrix,
-            this.config.perspective.yfov*0.25,
-            asp,
-            this.config.perspective.znear,
-            this.config.perspective.zfar);
+        // mat4.perspective(
+        //     cgl.pMatrix,
+        //     this.config.perspective.yfov*0.5,
+        //     asp,
+        //     this.config.perspective.znear,
+        //     this.config.perspective.zfar);
 
         cgl.pushViewMatrix();
         // mat4.identity(cgl.vMatrix);
@@ -79,10 +79,14 @@ const gltfCamera = class
 
 
         let mv=mat4.create();
-        mv=this.node.modelMatAbs();
-        mat4.invert(mv,mv);
+        mat4.invert(mv,this.node.modelMatAbs());
+
+        // console.log(this.node.modelMatAbs());
+
         this.vMat=mv;
 
+        mat4.identity(cgl.vMatrix);
+        // console.log(mv);
         mat4.mul(cgl.vMatrix,cgl.vMatrix,mv);
 
 
