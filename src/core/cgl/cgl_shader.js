@@ -1568,7 +1568,7 @@ Shader.getErrorFragmentShader = function ()
 Shader.createShader = function (cgl, str, type, cglShader)
 {
     if (cgl.aborted) return;
-    cgl.printError("[Shader.createShader] ", this._name);
+    cgl.printError("[Shader.createShader] ", cglShader._name);
 
     function getBadLines(infoLog)
     {
