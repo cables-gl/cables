@@ -167,12 +167,24 @@ function loadAnims(gltf)
 
 function loadCams(gltf)
 {
-    // if (!gltf || !gltf.json.cameras) return;
+    if (!gltf || !gltf.json.cameras) return;
 
     // for (let i = 0; i < gltf.json.cameras.length; i++)
     // {
-    //     gltf.cams.push(new gltfCamera(i,gltf, gltf.json.cameras[i]));
+    //     gltf.cameras.push(new gltfCamera(gltf, gltf.json.cameras[i]));
     // }
+
+    gltf.cameras=gltf.cameras||[];
+
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        if(gltf.nodes[i].hasOwnProperty("camera"))
+        {
+            const cam = new gltfCamera(gltf, gltf.nodes[i]);
+            gltf.cameras.push(cam);
+
+        }
+    }
 }
 
 function parseGltf(arrayBuffer)

@@ -4,11 +4,11 @@ const
     startTimeLine = op.inBool("Play Timeline", true),
 
     next = op.outTrigger("Next"),
-    outInitialFinished = op.outBool("Finished Initial Loading",false),
-    outLoading=op.outBool("Loading"),
+    outInitialFinished = op.outBool("Finished Initial Loading", false),
+    outLoading = op.outBool("Loading"),
     outProgress = op.outNumber("Progress"),
-    outList=op.outArray("Jobs"),
-    loadingFinished = op.outTrigger("loading finished");
+    outList = op.outArray("Jobs"),
+    loadingFinished = op.outTrigger("Trigger Loading Finished ");
 
 const cgl = op.patch.cgl;
 const patch = op.patch;
@@ -19,22 +19,22 @@ let firstTime = true;
 
 document.body.classList.add("cables-loading");
 
-let loadingId = cgl.patch.loading.start("loadingStatusInit","loadingStatusInit");
+let loadingId = cgl.patch.loading.start("loadingStatusInit", "loadingStatusInit");
 
 exe.onTriggered = () =>
 {
-    const jobs=op.patch.loading.getListJobs();
+    const jobs = op.patch.loading.getListJobs();
     outProgress.set(patch.loading.getProgress());
 
-    let hasFinished=jobs.length===0;
+    let hasFinished = jobs.length === 0;
     outLoading.set(!hasFinished);
 
-    if(!hasFinished)
+    if (!hasFinished)
     {
         outList.set(op.patch.loading.getListJobs());
     }
 
-    if (!hasFinished )
+    if (!hasFinished)
     {
         if (firstTime)
         {
@@ -53,7 +53,7 @@ exe.onTriggered = () =>
     }
     else
     {
-        finishedOnce=true;
+        finishedOnce = true;
         outList.set(op.patch.loading.getListJobs());
 
         if (patch.loading.getProgress() < 1.0)
@@ -68,14 +68,11 @@ exe.onTriggered = () =>
 
     next.trigger();
 
-    if(loadingId  )
+    if (loadingId)
     {
-        console.log(op.patch.loading.getListJobs(),!firstTime);
+        console.log(op.patch.loading.getListJobs(), !firstTime);
 
         cgl.patch.loading.finished(loadingId);
-        loadingId=null;
+        loadingId = null;
     }
-
-
-
 };

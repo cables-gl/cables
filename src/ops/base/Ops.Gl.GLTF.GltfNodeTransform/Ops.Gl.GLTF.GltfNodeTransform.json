@@ -44,6 +44,10 @@
                 "type": 0,
                 "name": "Found",
                 "subType": "boolean"
+            },
+            {
+                "type": 3,
+                "name": "Matrix"
             }
         ],
         "name": "Ops.Gl.GLTF.GltfNodeTransform"

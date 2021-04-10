@@ -77,6 +77,11 @@
                 "type": 0,
                 "name": "Loaded",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Texture_v2"

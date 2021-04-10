@@ -433,6 +433,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
+        if (this._opIdCache[op.id]) console.warn("opid with id " + op.id + " already exists in patch!");
 
         this.ops.push(op);
         this._opIdCache[op.id] = op;

@@ -6,7 +6,15 @@
 
     vec2 MOD_coord=MOD_p.xy*(1.0/MOD_scale)+MOD_offset-vec2(0.5,0.5);
 
-    float MOD_dis=texture(MOD_texture,MOD_coord).r;
+    #ifdef MOD_CHAN_R
+        float MOD_dis=texture(MOD_texture,MOD_coord).r;
+    #endif
+    #ifdef MOD_CHAN_G
+        float MOD_dis=texture(MOD_texture,MOD_coord).g;
+    #endif
+    #ifdef MOD_CHAN_B
+        float MOD_dis=texture(MOD_texture,MOD_coord).b;
+    #endif
 
     #ifdef MOD_COLORIZE
         MOD_dispColor=vec3(MOD_dis);
