@@ -5,17 +5,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exec"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Debug one Frame"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],

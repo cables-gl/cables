@@ -22,21 +22,6 @@
         ],
         "portsOut": [
             {
-                "type": 0,
-                "name": "Translate X",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Translate Y",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Translate Z",
-                "subType": "number"
-            },
-            {
                 "type": 1,
                 "name": "Next"
             },

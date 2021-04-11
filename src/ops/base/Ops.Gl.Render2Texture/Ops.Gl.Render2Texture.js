@@ -120,7 +120,6 @@ function doRender()
     cgl.resetViewPort();
 
     tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-
     tex.set(fb.getTextureColor());
 }
 
