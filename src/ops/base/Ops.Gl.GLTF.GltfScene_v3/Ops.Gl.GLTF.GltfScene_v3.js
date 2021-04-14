@@ -227,6 +227,15 @@ function loadBin(addCacheBuster)
             needsMatUpdate = true;
             op.refreshParams();
             outAnimLength.set(maxTime);
+
+            for (let i = 0; i < gltf.nodes.length; i++)
+                if (!gltf.nodes[i].isChild)
+                {
+                    gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
+
+                    // gltf.nodes[i].transform(cgl,0.0);
+                }
+
             hideNodesFromData();
             if (tab)printInfo();
 

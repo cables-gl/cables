@@ -6,6 +6,8 @@ const changedOut = op.outTrigger("Changed");
 let router = null;
 let oldValues = {};
 
+hashOut.set(window.location.href.split("#", 2)[1]);
+
 if ("onhashchange" in window)
 {
     router = new Navigo("/", { "hash": true, "noMatchWarning": true });
@@ -88,13 +90,13 @@ function hashChange(event)
         }
     }
 
+    hashOut.set(hash);
+    parsedOut.set(values);
+    oldValues = values;
     if (changed)
     {
         changedOut.trigger();
     }
-    hashOut.set(hash);
-    parsedOut.set(values);
-    oldValues = values;
 }
 
 function getTypedValue(val)

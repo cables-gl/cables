@@ -5,7 +5,7 @@
 const hashIn = op.inString("Hash", "");
 const routeIn = op.inString("Route", "");
 const valuesIn = op.inObject("Values", {});
-const activeIn = op.inBool("Active", true);
+const activeIn = op.inBool("Active", false);
 const reloadIn = op.inBool("Allow Empty", false);
 
 const router = new Navigo("/", { "hash": true, "noMatchWarning": true });

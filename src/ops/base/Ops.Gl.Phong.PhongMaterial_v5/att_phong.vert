@@ -113,8 +113,8 @@ void main()
 
     #ifdef HAS_TEXTURE_NORMAL
         vec3 normCameraSpace = normalize((vec4(normInterpolated, 0.0)).xyz);
-        vec3 tangCameraSpace = normalize((mMatrix * vec4(attrTangent, 0.0)).xyz);
-        vec3 bitangCameraSpace = normalize((mMatrix * vec4(attrBiTangent, 0.0)).xyz);
+        vec3 tangCameraSpace = normalize((mMatrix * vec4(tangent, 0.0)).xyz);
+        vec3 bitangCameraSpace = normalize((mMatrix * vec4(bitangent, 0.0)).xyz);
 
         // re orthogonalization for smoother normals
         tangCameraSpace = normalize(tangCameraSpace - dot(tangCameraSpace, normCameraSpace) * normCameraSpace);

@@ -171,9 +171,6 @@ const gltfNode = class
 
     render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
     {
-        // dontTransform,drawMesh,ignoreMaterial,
-
-
         if (!dontTransform) cgl.pushModelMatrix();
         if (!dontTransform) this.transform(cgl, _time || time);
 
@@ -186,7 +183,7 @@ const gltfNode = class
             if (this.mesh && !dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
         }
 
-        if (!ignoreChilds)
+        if (!ignoreChilds && !this.hidden)
             for (let i = 0; i < this.children.length; i++)
                 if (gltf.nodes[this.children[i]])
                     gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
