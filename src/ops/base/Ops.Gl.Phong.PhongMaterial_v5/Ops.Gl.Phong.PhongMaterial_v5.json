@@ -198,6 +198,12 @@
             },
             {
                 "type": 2,
+                "name": "Emissive Mask",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
                 "name": "Opacity Texture",
                 "group": "Textures",
                 "objType": "texture"
@@ -265,6 +271,12 @@
             {
                 "type": 0,
                 "name": "Emissive Intensity",
+                "group": "Texture Intensities",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Emissive Mask Intensity",
                 "group": "Texture Intensities",
                 "subType": "number"
             },

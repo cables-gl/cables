@@ -116,13 +116,58 @@ inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
 inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
 inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
 
+let uniEmissiveColor = null;
+
 inEmissiveActive.onChange = () =>
 {
+    op.log("emissive active on change");
     shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
-    inEmissiveColorIntensity.setUiAttribs({ "greyout": !inEmissiveActive.get() });
-    inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
-    inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
-    inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
+
+    if (inEmissiveActive.get())
+    {
+        uniEmissiveColor = new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
+        inEmissiveTexture.setUiAttribs({ "greyout": false });
+        inEmissiveMaskTexture.setUiAttribs({ "greyout": false });
+
+        if (inEmissiveTexture.get()) inEmissiveIntensity.setUiAttribs({ "greyout": false });
+        if (inEmissiveMaskTexture.get()) inEmissiveMaskIntensity.setUiAttribs({ "greyout": false });
+    }
+    else
+    {
+        op.log("ayayay");
+        inEmissiveTexture.setUiAttribs({ "greyout": true });
+        inEmissiveMaskTexture.setUiAttribs({ "greyout": true });
+        inEmissiveIntensity.setUiAttribs({ "greyout": true });
+        inEmissiveMaskIntensity.setUiAttribs({ "greyout": true });
+
+        shader.removeUniform("inEmissiveColor");
+        uniEmissiveColor = null;
+    }
+
+    if (inEmissiveTexture.get())
+    {
+        inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
+        inEmissiveR.setUiAttribs({ "greyout": true });
+        inEmissiveG.setUiAttribs({ "greyout": true });
+        inEmissiveB.setUiAttribs({ "greyout": true });
+    }
+    else
+    {
+        if (inEmissiveActive.get())
+        {
+            inEmissiveColorIntensity.setUiAttribs({ "greyout": false });
+            inEmissiveR.setUiAttribs({ "greyout": false });
+            inEmissiveG.setUiAttribs({ "greyout": false });
+            inEmissiveB.setUiAttribs({ "greyout": false });
+        }
+        else
+        {
+            inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
+            inEmissiveR.setUiAttribs({ "greyout": true });
+            inEmissiveG.setUiAttribs({ "greyout": true });
+            inEmissiveB.setUiAttribs({ "greyout": true });
+        }
+    }
 };
 // * SPECULAR *
 const inShininess = op.inFloat("Shininess", 4);
@@ -157,10 +202,11 @@ const inSpecularTexture = op.inTexture("Specular Texture");
 const inNormalTexture = op.inTexture("Normal Map");
 const inAoTexture = op.inTexture("AO Texture");
 const inEmissiveTexture = op.inTexture("Emissive Texture");
+const inEmissiveMaskTexture = op.inTexture("Emissive Mask");
 const inAlphaTexture = op.inTexture("Opacity Texture");
 const inEnvTexture = op.inTexture("Environment Map");
 const inLuminanceMaskTexture = op.inTexture("Env Map Mask");
-op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
+op.setPortGroup("Textures", [inDiffuseTexture, inSpecularTexture, inNormalTexture, inAoTexture, inEmissiveTexture, inEmissiveMaskTexture, inAlphaTexture, inEnvTexture, inLuminanceMaskTexture]);
 
 // TEXTURE TRANSFORMS
 const inColorizeTexture = op.inBool("Colorize Texture", false);
@@ -173,12 +219,13 @@ const inSpecularIntensity = op.inFloatSlider("Specular Intensity", 1);
 const inNormalIntensity = op.inFloatSlider("Normal Map Intensity", 0.5);
 const inAoIntensity = op.inFloatSlider("AO Intensity", 1);
 const inEmissiveIntensity = op.inFloatSlider("Emissive Intensity", 1);
+const inEmissiveMaskIntensity = op.inFloatSlider("Emissive Mask Intensity", 1);
 const inEnvMapIntensity = op.inFloatSlider("Env Map Intensity", 1);
 const inLuminanceMaskIntensity = op.inFloatSlider("Env Mask Intensity", 1);
 
 inColorizeTexture.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Texture Transforms", [inColorizeTexture, inDiffuseRepeatY, inDiffuseRepeatX, inTextureOffsetY, inTextureOffsetX]);
-op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
+op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity, inEmissiveMaskIntensity, inEnvMapIntensity, inLuminanceMaskIntensity]);
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
@@ -281,6 +328,8 @@ let specularTextureUniform = null;
 let normalTextureUniform = null;
 let aoTextureUniform = null;
 let emissiveTextureUniform = null;
+let emissiveMaskTextureUniform = null;
+let emissiveMaskIntensityUniform = null;
 let alphaTextureUniform = null;
 let envTextureUniform = null;
 let inEnvMapIntensityUni = null;
@@ -315,6 +364,7 @@ function updateSpecularTexture()
 {
     if (inSpecularTexture.get())
     {
+        inSpecularIntensity.setUiAttribs({ "greyout": false });
         if (!shader.hasDefine("HAS_TEXTURE_SPECULAR"))
         {
             shader.define("HAS_TEXTURE_SPECULAR");
@@ -323,6 +373,7 @@ function updateSpecularTexture()
     }
     else
     {
+        inSpecularIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("texSpecular");
         shader.removeDefine("HAS_TEXTURE_SPECULAR");
         specularTextureUniform = null;
@@ -333,6 +384,8 @@ function updateNormalTexture()
 {
     if (inNormalTexture.get())
     {
+        inNormalIntensity.setUiAttribs({ "greyout": false });
+
         if (!shader.hasDefine("HAS_TEXTURE_NORMAL"))
         {
             shader.define("HAS_TEXTURE_NORMAL");
@@ -341,6 +394,8 @@ function updateNormalTexture()
     }
     else
     {
+        inNormalIntensity.setUiAttribs({ "greyout": true });
+
         shader.removeUniform("texNormal");
         shader.removeDefine("HAS_TEXTURE_NORMAL");
         normalTextureUniform = null;
@@ -351,6 +406,8 @@ function updateAoTexture()
 {
     if (inAoTexture.get())
     {
+        inAoIntensity.setUiAttribs({ "greyout": false });
+
         if (!shader.hasDefine("HAS_TEXTURE_AO"))
         {
             shader.define("HAS_TEXTURE_AO");
@@ -359,6 +416,8 @@ function updateAoTexture()
     }
     else
     {
+        inAoIntensity.setUiAttribs({ "greyout": true });
+
         shader.removeUniform("texAO");
         shader.removeDefine("HAS_TEXTURE_AO");
         aoTextureUniform = null;
@@ -369,6 +428,16 @@ function updateEmissiveTexture()
 {
     if (inEmissiveTexture.get())
     {
+        inEmissiveR.setUiAttribs({ "greyout": true });
+        inEmissiveG.setUiAttribs({ "greyout": true });
+        inEmissiveB.setUiAttribs({ "greyout": true });
+        inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
+
+        if (inEmissiveActive.get())
+        {
+            inEmissiveIntensity.setUiAttribs({ "greyout": false });
+        }
+
         if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE"))
         {
             shader.define("HAS_TEXTURE_EMISSIVE");
@@ -377,9 +446,54 @@ function updateEmissiveTexture()
     }
     else
     {
+        inEmissiveIntensity.setUiAttribs({ "greyout": true });
+
+        if (inEmissiveActive.get())
+        {
+            inEmissiveR.setUiAttribs({ "greyout": false });
+            inEmissiveG.setUiAttribs({ "greyout": false });
+            inEmissiveB.setUiAttribs({ "greyout": false });
+            inEmissiveColorIntensity.setUiAttribs({ "greyout": false });
+        }
+        else
+        {
+            inEmissiveTexture.setUiAttribs({ "greyout": true });
+        }
+
         shader.removeUniform("texEmissive");
         shader.removeDefine("HAS_TEXTURE_EMISSIVE");
         emissiveTextureUniform = null;
+    }
+}
+
+function updateEmissiveMaskTexture()
+{
+    if (inEmissiveMaskTexture.get())
+    { // we have a emissive texture
+        if (inEmissiveActive.get())
+        {
+            inEmissiveMaskIntensity.setUiAttribs({ "greyout": false });
+        }
+
+        if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE_MASK"))
+        {
+            shader.define("HAS_TEXTURE_EMISSIVE_MASK");
+            if (!emissiveMaskTextureUniform) emissiveMaskTextureUniform = new CGL.Uniform(shader, "t", "texMaskEmissive", 0);
+            if (!emissiveMaskIntensityUniform) emissiveMaskIntensityUniform = new CGL.Uniform(shader, "f", "inEmissiveMaskIntensity", inEmissiveMaskIntensity);
+        }
+    }
+    else
+    {
+        if (!inEmissiveActive.get())
+        {
+            inEmissiveMaskTexture.setUiAttribs({ "greyout": true });
+        }
+        inEmissiveMaskIntensity.setUiAttribs({ "greyout": true });
+        shader.removeUniform("texMaskEmissive");
+        shader.removeUniform("inEmissiveMaskIntensity");
+        shader.removeDefine("HAS_TEXTURE_EMISSIVE_MASK");
+        emissiveMaskTextureUniform = null;
+        emissiveMaskIntensityUniform = null;
     }
 }
 
@@ -387,6 +501,7 @@ function updateEnvTexture()
 {
     if (inEnvTexture.get())
     {
+        inEnvMapIntensity.setUiAttribs({ "greyout": false });
         if (!shader.hasDefine("HAS_TEXTURE_ENV"))
         {
             shader.define("HAS_TEXTURE_ENV");
@@ -424,6 +539,7 @@ function updateEnvTexture()
     }
     else
     {
+        inEnvMapIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("inEnvMapIntensity");
         shader.removeUniform("inEnvMapWidth");
         shader.removeUniform("texEnv");
@@ -438,6 +554,7 @@ function updateLuminanceMaskTexture()
 {
     if (inLuminanceMaskTexture.get())
     {
+        inLuminanceMaskIntensity.setUiAttribs({ "greyout": false });
         if (!luminanceTextureUniform)
         {
             shader.define("HAS_TEXTURE_LUMINANCE_MASK");
@@ -447,6 +564,7 @@ function updateLuminanceMaskTexture()
     }
     else
     {
+        inLuminanceMaskIntensity.setUiAttribs({ "greyout": true });
         shader.removeDefine("HAS_TEXTURE_LUMINANCE_MASK");
         shader.removeUniform("inLuminanceMaskIntensity");
         shader.removeUniform("texLuminance");
@@ -510,6 +628,7 @@ inSpecularTexture.onChange = updateSpecularTexture;
 inNormalTexture.onChange = updateNormalTexture;
 inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
+inEmissiveMaskTexture.onChange = updateEmissiveMaskTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
 inEnvTexture.onChange = updateEnvTexture;
 inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
@@ -568,8 +687,6 @@ const uniMaterialProps = new CGL.Uniform(shader, "4f", "inMaterialProperties", i
 const uniDiffuseColor = new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const uniTextureIntensities = new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity);
 const uniTextureRepeatOffset = new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY);
-// new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity),
-const uniEmissiveColor = new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
 
 const lightUniforms = [];
 let oldCount = 0;
@@ -790,6 +907,7 @@ inTrigger.onTriggered = function ()
     if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
     if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
     if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
+    if (inEmissiveMaskTexture.get()) shader.pushTexture(emissiveMaskTextureUniform, inEmissiveMaskTexture.get().tex);
     if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
     if (inEnvTexture.get())
     {
@@ -838,3 +956,6 @@ updateNormalTexture();
 updateAoTexture();
 updateAlphaTexture();
 updateEmissiveTexture();
+updateEmissiveMaskTexture();
+updateEnvTexture();
+updateLuminanceMaskTexture();

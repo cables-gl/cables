@@ -169,6 +169,11 @@ const float EIGHT_PI = (8. * PI);
     #ifdef HAS_TEXTURE_EMISSIVE
         UNI sampler2D texEmissive;
     #endif
+
+    #ifdef HAS_TEXTURE_EMISSIVE_MASK
+        UNI sampler2D texMaskEmissive;
+        UNI float inEmissiveMaskIntensity;
+    #endif
     #ifdef HAS_TEXTURE_ALPHA
         UNI sampler2D texAlpha;
     #endif
@@ -437,19 +442,6 @@ void main()
         #endif
     #endif
 
-    #ifdef ADD_EMISSIVE_COLOR
-        vec3 emissiveRadiance = inEmissiveColor.rgb * inEmissiveColor.w; // .w = intensity of color;
-
-        #ifdef HAS_TEXTURE_EMISSIVE
-            float emissiveIntensity = inTextureIntensities.EMISSIVE;
-            // calculatedColor += emissiveIntensity * baseColor * texture(texEmissive, texCoord).r;
-            emissiveRadiance *= (emissiveIntensity * texture(texEmissive, texCoord).rgb);
-        #endif
-
-        calculatedColor += emissiveRadiance;
-    #endif
-
-
     #ifdef DISCARDTRANS
         if(col.a<0.2) discard;
     #endif
@@ -504,6 +496,26 @@ void main()
         #endif
 
         calculatedColor.rgb += luminanceColor;
+
+
+    #endif
+
+    #ifdef ADD_EMISSIVE_COLOR
+        vec3 emissiveRadiance = mix(calculatedColor, inEmissiveColor.rgb, inEmissiveColor.w); // .w = intensity of color;
+
+        #ifdef HAS_TEXTURE_EMISSIVE
+            float emissiveIntensity = inTextureIntensities.EMISSIVE;
+            emissiveRadiance = mix(calculatedColor, texture(texEmissive, texCoord).rgb, emissiveIntensity);
+        #endif
+
+        #ifdef HAS_TEXTURE_EMISSIVE_MASK
+           float emissiveMixValue = mix(1., texture(texMaskEmissive, texCoord).r, inEmissiveMaskIntensity);
+           calculatedColor = mix(calculatedColor, emissiveRadiance, emissiveMixValue);
+        #endif
+
+        #ifndef HAS_TEXTURE_EMISSIVE_MASK
+            calculatedColor = emissiveRadiance;
+        #endif
     #endif
 
     col.rgb = clamp(calculatedColor, 0., 1.);
