@@ -1,11 +1,12 @@
 export function getShadowPassVertexShader()
 {
     return `
-{{MODULES_HEAD}}
 IN vec3 vPosition;
 IN vec2 attrTexCoord;
 IN vec3 attrVertNormal;
 IN float attrVertIndex;
+IN vec3 attrTangent;
+IN vec3 attrBiTangent;
 
 UNI mat4 projMatrix;
 UNI mat4 modelMatrix;
@@ -15,6 +16,8 @@ UNI mat4 viewMatrix;
 OUT vec2 texCoord;
 OUT vec3 norm;
 
+{{MODULES_HEAD}}
+
 ${this.type === "point" ? "OUT vec3 modelPos;" : ""}
 void main() {
     texCoord=attrTexCoord;
@@ -22,12 +25,13 @@ void main() {
     norm=attrVertNormal;
     vec4 pos = vec4(vPosition, 1.0);
     mat4 mMatrix=modelMatrix;
-
+    vec3 tangent = attrTangent;
+    vec3 bitangent = attrBiTangent;
 
     {{MODULE_VERTEX_POSITION}}
 
     mat4 mvMatrix=viewMatrix * mMatrix;
-    vec4 vPos = projMatrix * mvMatrix * vec4(vPosition, 1.);
+    vec4 vPos = projMatrix * mvMatrix * pos;
     ${this.type === "point" ? "modelPos = (mMatrix * pos).xyz;" : ""}
     gl_Position = vPos;
 }
