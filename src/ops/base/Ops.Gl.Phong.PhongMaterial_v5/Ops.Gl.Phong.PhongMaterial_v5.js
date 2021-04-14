@@ -120,7 +120,6 @@ let uniEmissiveColor = null;
 
 inEmissiveActive.onChange = () =>
 {
-    op.log("emissive active on change");
     shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
 
     if (inEmissiveActive.get())
@@ -134,7 +133,6 @@ inEmissiveActive.onChange = () =>
     }
     else
     {
-        op.log("ayayay");
         inEmissiveTexture.setUiAttribs({ "greyout": true });
         inEmissiveMaskTexture.setUiAttribs({ "greyout": true });
         inEmissiveIntensity.setUiAttribs({ "greyout": true });
