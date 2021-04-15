@@ -52,6 +52,11 @@
                 "type": 0,
                 "name": "Rotation Z",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Transform normals",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

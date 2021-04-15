@@ -333,7 +333,9 @@ function parseGltf(arrayBuffer)
                 gltf.nodes[node.children[j]].parent=node;
             }
         }
+
     }
+
 
     needsMatUpdate = true;
 

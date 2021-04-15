@@ -11,10 +11,12 @@ const
 
     rotX = op.inValue("Rotation X", 0),
     rotY = op.inValue("Rotation Y", 0),
-    rotZ = op.inValue("Rotation Z", 0);
-const cgl = op.patch.cgl;
+    rotZ = op.inValue("Rotation Z", 0),
+    transNorm = op.inBool("Transform normals", false);
 
+const cgl = op.patch.cgl;
 const mod = new CGL.ShaderModifier(cgl, op.name);
+
 mod.addModule({
     "priority": -2,
     "name": "MODULE_VERTEX_POSITION",
@@ -22,14 +24,17 @@ mod.addModule({
     "srcBodyVert": attachments.trans_vert || ""
 });
 
-updateAxis();
-
 mod.addUniformVert("3f", "MOD_translate", transX, transY, transZ);
 mod.addUniformVert("3f", "MOD_scale", scaleX, scaleY, scaleZ);
 mod.addUniformVert("3f", "MOD_rot", rotX, rotY, rotZ);
 
-function updateAxis()
+transNorm.onChange = updateDefines;
+
+updateDefines();
+
+function updateDefines()
 {
+    mod.toggleDefine("MOD_TRANS_NORMS", transNorm.get());
 }
 
 render.onTriggered = function ()

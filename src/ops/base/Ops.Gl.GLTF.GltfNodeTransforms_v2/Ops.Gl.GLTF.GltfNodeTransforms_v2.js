@@ -5,9 +5,8 @@ const
     outPos = op.outArray("Positions"),
     next = op.outTrigger("Next"),
     outScale = op.outArray("Scale"),
-    outNames = op.outArray("Names");
-
-// outRot=op.outArray("Rotation");
+    outNames = op.outArray("Names"),
+    outRot = op.outArray("Rotation");
 
 const cgl = op.patch.cgl;
 let needsupdate = true;
@@ -52,6 +51,10 @@ function update()
 
             arrPos.push(tr[0], tr[1], tr[2]);
 
+            const q = quat.create();
+            mat4.getRotation(q, node.modelMatAbs());
+            arrRot.push(q[0], q[1], q[2], q[3]);
+
             // if (n.translation) arrPos.push(n.translation[0], n.translation[1], n.translation[2]);
             // else arrPos.push(0, 0, 0);
 
@@ -93,7 +96,7 @@ function update()
     outPos.set(arrPos);
     outScale.set(arrScale);
     outNames.set(arrNames);
-    // outRot.set(arrRot);
+    outRot.set(arrRot);
 
     needsupdate = false;
 }

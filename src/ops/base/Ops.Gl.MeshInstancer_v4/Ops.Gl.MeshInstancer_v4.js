@@ -131,7 +131,10 @@ function setupArray()
 
     // shader.toggleDefine("COLORIZE_INSTANCES", colArr);
 
-    if (matrixArray.length != num * 16) matrixArray = new Float32Array(num * 16);
+    if (matrixArray.length != num * 16)
+    {
+        matrixArray = new Float32Array(num * 16);
+    }
     if (instColorArray.length != num * 4)
     {
         arrayChangedColor = true;
@@ -146,11 +149,14 @@ function setupArray()
     {
         mat4.identity(m);
 
+        const i3 = i * 3;
+        const i4 = i * 4;
+
         mat4.translate(m, m,
             [
-                transforms[i * 3],
-                transforms[i * 3 + 1],
-                transforms[i * 3 + 2]
+                transforms[i3],
+                transforms[i3 + 1],
+                transforms[i3 + 2]
             ]);
 
         if (rotArr)
@@ -158,31 +164,31 @@ function setupArray()
             if (useQuats)
             {
                 const mq = mat4.create();
-                mat4.fromQuat(mq, [rotArr[i * 4 + 0], rotArr[i * 4 + 1], rotArr[i * 4 + 2], rotArr[i * 4 + 3]]);
+                mat4.fromQuat(mq, [rotArr[i4 + 0], rotArr[i4 + 1], rotArr[i4 + 2], rotArr[i4 + 3]]);
                 mat4.mul(m, m, mq);
             }
             else
             {
-                mat4.rotateX(m, m, rotArr[i * 3 + 0] * CGL.DEG2RAD);
-                mat4.rotateY(m, m, rotArr[i * 3 + 1] * CGL.DEG2RAD);
-                mat4.rotateZ(m, m, rotArr[i * 3 + 2] * CGL.DEG2RAD);
+                mat4.rotateX(m, m, rotArr[i3 + 0] * CGL.DEG2RAD);
+                mat4.rotateY(m, m, rotArr[i3 + 1] * CGL.DEG2RAD);
+                mat4.rotateZ(m, m, rotArr[i3 + 2] * CGL.DEG2RAD);
             }
         }
 
         if (arrayChangedColor && colArr)
         {
-            instColorArray[i * 4 + 0] = colArr[i * 4 + 0];
-            instColorArray[i * 4 + 1] = colArr[i * 4 + 1];
-            instColorArray[i * 4 + 2] = colArr[i * 4 + 2];
-            instColorArray[i * 4 + 3] = colArr[i * 4 + 3];
+            instColorArray[i4 + 0] = colArr[i4 + 0];
+            instColorArray[i4 + 1] = colArr[i4 + 1];
+            instColorArray[i4 + 2] = colArr[i4 + 2];
+            instColorArray[i4 + 3] = colArr[i4 + 3];
         }
 
         if (arrayChangedColor && !colArr)
         {
-            instColorArray[i * 4 + 0] = 1;
-            instColorArray[i * 4 + 1] = 1;
-            instColorArray[i * 4 + 2] = 1;
-            instColorArray[i * 4 + 3] = 1;
+            instColorArray[i4 + 0] = 1;
+            instColorArray[i4 + 1] = 1;
+            instColorArray[i4 + 2] = 1;
+            instColorArray[i4 + 3] = 1;
         }
 
         if (scales && scales.length > i) mat4.scale(m, m, [scales[i * 3], scales[i * 3 + 1], scales[i * 3 + 2]]);
@@ -227,45 +233,4 @@ function doRender()
     outTrigger.trigger();
 
     mod.unbind();
-
-    // if (cgl.getShader() && cgl.getShader() != shader)
-    // {
-    //     removeModule();
-    //     shader = cgl.getShader();
-
-    //     if (!shader.hasDefine("INSTANCING"))
-    //     {
-    //         mod = shader.addModule(
-    //             {
-    //                 "name": "MODULE_VERTEX_POSITION",
-    //                 "title": op.objName,
-    //                 "priority": -2,
-    //                 "srcHeadVert": attachments.instancer_head_vert,
-    //                 "srcBodyVert": attachments.instancer_body_vert
-    //             });
-
-    //         fragMod = shader.addModule({
-    //             "name": "MODULE_COLOR",
-    //             "priority": -2,
-    //             "title": op.objName,
-    //             "srcHeadFrag": attachments.instancer_head_frag,
-    //             "srcBodyFrag": attachments.instancer_body_frag,
-    //         });
-
-    //         shader.define("INSTANCING");
-
-    //         updateDefines();
-    //         inScale.uniform = new CGL.Uniform(shader, "f", mod.prefix + "scale", inScale);
-    //     }
-
-    //     shader.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    // }
-
-    // if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
-    // else mesh.numInstances = num;
-
-    // outNum.set(mesh.numInstances);
-
-    // if (mesh.numInstances > 0) mesh.render(shader);
-    // outTrigger.trigger();
 }

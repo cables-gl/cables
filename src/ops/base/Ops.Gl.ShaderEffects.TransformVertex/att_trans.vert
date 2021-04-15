@@ -10,3 +10,9 @@ mat4 rmat=
         MOD_rotationZ(MOD_rot.z*0.0174533);
 
 pos*=rmat;
+
+#ifdef MOD_TRANS_NORMS
+    norm=(vec4(norm,1.0)*rmat).xyz;
+    bitangent=(vec4(bitangent,1.0)*rmat).xyz;
+    tangent=(vec4(tangent,1.0)*rmat).xyz;
+#endif
