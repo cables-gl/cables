@@ -40,6 +40,11 @@
             },
             {
                 "type": 0,
+                "name": "Silent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Allow Empty",
                 "subType": "boolean"
             }

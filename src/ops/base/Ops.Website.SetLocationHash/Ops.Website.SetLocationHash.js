@@ -6,6 +6,7 @@ const hashIn = op.inString("Hash", "");
 const routeIn = op.inString("Route", "");
 const valuesIn = op.inObject("Values", {});
 const activeIn = op.inBool("Active", false);
+const silentIn = op.inBool("Silent", true);
 const reloadIn = op.inBool("Allow Empty", false);
 
 const router = new Navigo("/", { "hash": true, "noMatchWarning": true });
@@ -73,14 +74,19 @@ function update()
     try
     {
         op.setUiError("overload", null);
+        const event = new Event("hashchange");
+        event.oldURL = window.location.href;
+        if (silentIn.get()) event.silent = true;
         if (hash)
         {
-            window.location.hash = hash;
+            history.replaceState(null, null, window.location.pathname + hash);
         }
         else if (reloadIn.get())
         {
-            window.location.hash = "";
+            history.replaceState(null, null, window.location.pathname);
         }
+        event.newURL = window.location.href;
+        window.dispatchEvent(event);
     }
     catch (e)
     {

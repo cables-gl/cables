@@ -123,44 +123,51 @@ inEmissiveActive.onChange = () =>
     op.log("emissive active on change");
     shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
 
-    if (inEmissiveActive.get()) {
+    if (inEmissiveActive.get())
+    {
         uniEmissiveColor = new CGL.Uniform(shader, "4f", "inEmissiveColor", inEmissiveR, inEmissiveG, inEmissiveB, inEmissiveColorIntensity);
-        inEmissiveTexture.setUiAttribs({ greyout: false });
-        inEmissiveMaskTexture.setUiAttribs({ greyout: false });
+        inEmissiveTexture.setUiAttribs({ "greyout": false });
+        inEmissiveMaskTexture.setUiAttribs({ "greyout": false });
 
-        if (inEmissiveTexture.get()) inEmissiveIntensity.setUiAttribs({ greyout: false });
-        if (inEmissiveMaskTexture.get()) inEmissiveMaskIntensity.setUiAttribs({ greyout: false });
-    } else {
+        if (inEmissiveTexture.get()) inEmissiveIntensity.setUiAttribs({ "greyout": false });
+        if (inEmissiveMaskTexture.get()) inEmissiveMaskIntensity.setUiAttribs({ "greyout": false });
+    }
+    else
+    {
         op.log("ayayay");
-        inEmissiveTexture.setUiAttribs({ greyout: true });
-        inEmissiveMaskTexture.setUiAttribs({ greyout: true });
-        inEmissiveIntensity.setUiAttribs({ greyout: true });
-        inEmissiveMaskIntensity.setUiAttribs({ greyout: true });
+        inEmissiveTexture.setUiAttribs({ "greyout": true });
+        inEmissiveMaskTexture.setUiAttribs({ "greyout": true });
+        inEmissiveIntensity.setUiAttribs({ "greyout": true });
+        inEmissiveMaskIntensity.setUiAttribs({ "greyout": true });
 
         shader.removeUniform("inEmissiveColor");
         uniEmissiveColor = null;
     }
 
-    if (inEmissiveTexture.get()) {
+    if (inEmissiveTexture.get())
+    {
         inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
         inEmissiveR.setUiAttribs({ "greyout": true });
         inEmissiveG.setUiAttribs({ "greyout": true });
         inEmissiveB.setUiAttribs({ "greyout": true });
-    } else {
-        if (inEmissiveActive.get()) {
+    }
+    else
+    {
+        if (inEmissiveActive.get())
+        {
             inEmissiveColorIntensity.setUiAttribs({ "greyout": false });
             inEmissiveR.setUiAttribs({ "greyout": false });
             inEmissiveG.setUiAttribs({ "greyout": false });
             inEmissiveB.setUiAttribs({ "greyout": false });
-        } else {
+        }
+        else
+        {
             inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
             inEmissiveR.setUiAttribs({ "greyout": true });
             inEmissiveG.setUiAttribs({ "greyout": true });
             inEmissiveB.setUiAttribs({ "greyout": true });
         }
     }
-
-
 };
 // * SPECULAR *
 const inShininess = op.inFloat("Shininess", 4);
@@ -357,7 +364,7 @@ function updateSpecularTexture()
 {
     if (inSpecularTexture.get())
     {
-        inSpecularIntensity.setUiAttribs({ greyout: false });
+        inSpecularIntensity.setUiAttribs({ "greyout": false });
         if (!shader.hasDefine("HAS_TEXTURE_SPECULAR"))
         {
             shader.define("HAS_TEXTURE_SPECULAR");
@@ -366,7 +373,7 @@ function updateSpecularTexture()
     }
     else
     {
-        inSpecularIntensity.setUiAttribs({ greyout: true });
+        inSpecularIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("texSpecular");
         shader.removeDefine("HAS_TEXTURE_SPECULAR");
         specularTextureUniform = null;
@@ -377,7 +384,7 @@ function updateNormalTexture()
 {
     if (inNormalTexture.get())
     {
-        inNormalIntensity.setUiAttribs({ greyout: false });
+        inNormalIntensity.setUiAttribs({ "greyout": false });
 
         if (!shader.hasDefine("HAS_TEXTURE_NORMAL"))
         {
@@ -387,7 +394,7 @@ function updateNormalTexture()
     }
     else
     {
-        inNormalIntensity.setUiAttribs({ greyout: true });
+        inNormalIntensity.setUiAttribs({ "greyout": true });
 
         shader.removeUniform("texNormal");
         shader.removeDefine("HAS_TEXTURE_NORMAL");
@@ -399,7 +406,7 @@ function updateAoTexture()
 {
     if (inAoTexture.get())
     {
-        inAoIntensity.setUiAttribs({ greyout: false });
+        inAoIntensity.setUiAttribs({ "greyout": false });
 
         if (!shader.hasDefine("HAS_TEXTURE_AO"))
         {
@@ -409,7 +416,7 @@ function updateAoTexture()
     }
     else
     {
-        inAoIntensity.setUiAttribs({ greyout: true });
+        inAoIntensity.setUiAttribs({ "greyout": true });
 
         shader.removeUniform("texAO");
         shader.removeDefine("HAS_TEXTURE_AO");
@@ -421,13 +428,14 @@ function updateEmissiveTexture()
 {
     if (inEmissiveTexture.get())
     {
-        inEmissiveR.setUiAttribs({ greyout: true });
-        inEmissiveG.setUiAttribs({ greyout: true });
-        inEmissiveB.setUiAttribs({ greyout: true });
-        inEmissiveColorIntensity.setUiAttribs({ greyout: true });
+        inEmissiveR.setUiAttribs({ "greyout": true });
+        inEmissiveG.setUiAttribs({ "greyout": true });
+        inEmissiveB.setUiAttribs({ "greyout": true });
+        inEmissiveColorIntensity.setUiAttribs({ "greyout": true });
 
-        if (inEmissiveActive.get()) {
-            inEmissiveIntensity.setUiAttribs({ greyout: false });
+        if (inEmissiveActive.get())
+        {
+            inEmissiveIntensity.setUiAttribs({ "greyout": false });
         }
 
         if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE"))
@@ -438,15 +446,18 @@ function updateEmissiveTexture()
     }
     else
     {
-        inEmissiveIntensity.setUiAttribs({ greyout: true });
+        inEmissiveIntensity.setUiAttribs({ "greyout": true });
 
-        if (inEmissiveActive.get()) {
-            inEmissiveR.setUiAttribs({ greyout: false });
-            inEmissiveG.setUiAttribs({ greyout: false });
-            inEmissiveB.setUiAttribs({ greyout: false });
-            inEmissiveColorIntensity.setUiAttribs({ greyout: false });
-        } else {
-            inEmissiveTexture.setUiAttribs({ greyout: true });
+        if (inEmissiveActive.get())
+        {
+            inEmissiveR.setUiAttribs({ "greyout": false });
+            inEmissiveG.setUiAttribs({ "greyout": false });
+            inEmissiveB.setUiAttribs({ "greyout": false });
+            inEmissiveColorIntensity.setUiAttribs({ "greyout": false });
+        }
+        else
+        {
+            inEmissiveTexture.setUiAttribs({ "greyout": true });
         }
 
         shader.removeUniform("texEmissive");
@@ -455,22 +466,29 @@ function updateEmissiveTexture()
     }
 }
 
-function updateEmissiveMaskTexture() {
-    if (inEmissiveMaskTexture.get()) { // we have a emissive texture
-        if (inEmissiveActive.get()) {
-            inEmissiveMaskIntensity.setUiAttribs({ greyout: false });
+function updateEmissiveMaskTexture()
+{
+    if (inEmissiveMaskTexture.get())
+    { // we have a emissive texture
+        if (inEmissiveActive.get())
+        {
+            inEmissiveMaskIntensity.setUiAttribs({ "greyout": false });
         }
 
-        if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE_MASK")) {
+        if (!shader.hasDefine("HAS_TEXTURE_EMISSIVE_MASK"))
+        {
             shader.define("HAS_TEXTURE_EMISSIVE_MASK");
             if (!emissiveMaskTextureUniform) emissiveMaskTextureUniform = new CGL.Uniform(shader, "t", "texMaskEmissive", 0);
-            if (!emissiveMaskIntensityUniform)  emissiveMaskIntensityUniform = new CGL.Uniform(shader, "f", "inEmissiveMaskIntensity", inEmissiveMaskIntensity);
+            if (!emissiveMaskIntensityUniform) emissiveMaskIntensityUniform = new CGL.Uniform(shader, "f", "inEmissiveMaskIntensity", inEmissiveMaskIntensity);
         }
-    } else {
-        if (!inEmissiveActive.get()) {
-            inEmissiveMaskTexture.setUiAttribs({ greyout: true });
+    }
+    else
+    {
+        if (!inEmissiveActive.get())
+        {
+            inEmissiveMaskTexture.setUiAttribs({ "greyout": true });
         }
-        inEmissiveMaskIntensity.setUiAttribs({ greyout: true });
+        inEmissiveMaskIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("texMaskEmissive");
         shader.removeUniform("inEmissiveMaskIntensity");
         shader.removeDefine("HAS_TEXTURE_EMISSIVE_MASK");
@@ -483,7 +501,7 @@ function updateEnvTexture()
 {
     if (inEnvTexture.get())
     {
-        inEnvMapIntensity.setUiAttribs({ greyout: false });
+        inEnvMapIntensity.setUiAttribs({ "greyout": false });
         if (!shader.hasDefine("HAS_TEXTURE_ENV"))
         {
             shader.define("HAS_TEXTURE_ENV");
@@ -521,7 +539,7 @@ function updateEnvTexture()
     }
     else
     {
-        inEnvMapIntensity.setUiAttribs({ greyout: true });
+        inEnvMapIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("inEnvMapIntensity");
         shader.removeUniform("inEnvMapWidth");
         shader.removeUniform("texEnv");
@@ -536,7 +554,7 @@ function updateLuminanceMaskTexture()
 {
     if (inLuminanceMaskTexture.get())
     {
-        inLuminanceMaskIntensity.setUiAttribs({ greyout: false });
+        inLuminanceMaskIntensity.setUiAttribs({ "greyout": false });
         if (!luminanceTextureUniform)
         {
             shader.define("HAS_TEXTURE_LUMINANCE_MASK");
@@ -546,7 +564,7 @@ function updateLuminanceMaskTexture()
     }
     else
     {
-        inLuminanceMaskIntensity.setUiAttribs({ greyout: true });
+        inLuminanceMaskIntensity.setUiAttribs({ "greyout": true });
         shader.removeDefine("HAS_TEXTURE_LUMINANCE_MASK");
         shader.removeUniform("inLuminanceMaskIntensity");
         shader.removeUniform("texLuminance");
@@ -669,7 +687,6 @@ const uniMaterialProps = new CGL.Uniform(shader, "4f", "inMaterialProperties", i
 const uniDiffuseColor = new CGL.Uniform(shader, "4f", "inDiffuseColor", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const uniTextureIntensities = new CGL.Uniform(shader, "4f", "inTextureIntensities", inNormalIntensity, inAoIntensity, inSpecularIntensity, inEmissiveIntensity);
 const uniTextureRepeatOffset = new CGL.Uniform(shader, "4f", "inTextureRepeatOffset", inDiffuseRepeatX, inDiffuseRepeatY, inTextureOffsetX, inTextureOffsetY);
-
 
 const lightUniforms = [];
 let oldCount = 0;

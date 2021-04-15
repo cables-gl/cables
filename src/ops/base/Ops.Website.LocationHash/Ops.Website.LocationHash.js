@@ -93,7 +93,7 @@ function hashChange(event)
     hashOut.set(hash);
     parsedOut.set(values);
     oldValues = values;
-    if (changed)
+    if (changed && !event.silent)
     {
         changedOut.trigger();
     }
