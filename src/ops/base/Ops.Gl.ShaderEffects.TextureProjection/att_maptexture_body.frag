@@ -18,10 +18,10 @@ vec2 MOD_ntc=MOD_tc;
 
 
     // tc+=MOD_pos;
-    MOD_n-=vec2(0.5,0.5);
-    MOD_n*=1.0/MOD_scale;
-    MOD_n+=vec2(0.5,0.5);
-    MOD_n-=MOD_offset;
+MOD_ntc-=vec2(0.5,0.5);
+MOD_ntc*=1.0/MOD_scale;
+MOD_ntc+=vec2(0.5,0.5);
+MOD_ntc-=MOD_offset;
     // tc.y=1.0-tc.y-0.5;
 
 #endif
