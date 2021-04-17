@@ -1,27 +1,38 @@
-const render = op.inTrigger("render");
-const enablePointerLock = op.inBool("Enable pointer lock", true);
-const trigger = op.outTrigger("trigger");
-const isLocked = op.outValue("isLocked", false);
+const
+    render = op.inTrigger("render"),
 
-const moveSpeed = op.inFloat("Speed", 1);
-const mouseSpeed = op.inFloat("Mouse Speed", 1);
+    enablePointerLock = op.inBool("Enable pointer lock", true),
+    enableTouchScreenMove = op.inBool("Enable TouchScreen move", false),
 
-const outPosX = op.outValue("posX");
-const outPosY = op.outValue("posY");
-const outPosZ = op.outValue("posZ");
+    moveSpeed = op.inFloat("Speed", 1),
+    mouseSpeed = op.inFloat("Mouse Speed", 1),
+    touchSpeed = op.inFloat("Touch Speed", 1),
 
-const outMouseDown = op.outTrigger("Mouse Left");
-const outMouseDownRight = op.outTrigger("Mouse Right");
+    fly = op.inValueBool("Allow Flying", true),
+    arrows = op.inValueBool("Enable Arrow Keys", true);
 
-const outDirX = op.outValue("Dir X");
-const outDirY = op.outValue("Dir Y");
-const outDirZ = op.outValue("Dir Z");
+
+const
+    trigger = op.outTrigger("trigger"),
+
+    isLocked = op.outValue("isLocked", false),
+    isMoving = op.outValue("isMoving", false),
+
+    outPosX = op.outValue("posX"),
+    outPosY = op.outValue("posY"),
+    outPosZ = op.outValue("posZ"),
+
+    outMouseDown = op.outTrigger("Mouse Left"),
+    outMouseDownRight = op.outTrigger("Mouse Right"),
+
+    outDirX = op.outValue("Dir X"),
+    outDirY = op.outValue("Dir Y"),
+    outDirZ = op.outValue("Dir Z");
 
 const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;
 const movementSpeedFactor = 0.5;
 
-const fly = op.inValueBool("Allow Flying", true);
 
 let mouseNoPL = { "firstMove": true,
     "deltaX": 0,
@@ -42,6 +53,14 @@ let pressedA = false;
 let pressedS = false;
 let pressedD = false;
 
+const touchScreenMove = {
+    started: false,
+    touchStartX: 0,
+    touchStartY: 0,
+    currentX: 0,
+    currentY: 0,
+};
+
 const cgl = op.patch.cgl;
 
 const viewMatrix = mat4.create();
@@ -50,8 +69,10 @@ op.toWorkPortsNeedToBeLinked(render);
 let lastMove = 0;
 
 initListener();
+initTouchScreenMove();
 
 enablePointerLock.onChange = initListener;
+enableTouchScreenMove.onChange = initTouchScreenMove;
 
 render.onTriggered = function ()
 {
@@ -201,7 +222,9 @@ function lockChangeCallback(e)
         document.addEventListener("mousemove", moveCallback, false);
         document.addEventListener("keydown", keyDown, false);
         document.addEventListener("keyup", keyUp, false);
+
         isLocked.set(true);
+
     }
     else
     {
@@ -217,17 +240,67 @@ function lockChangeCallback(e)
     }
 }
 
+function calculateTouchMove() {
+    const width = cgl.canvas.width;
+    const height = cgl.canvas.height;
+
+    const dx = touchScreenMove.touchStartX - touchScreenMove.currentX;
+    const dy = touchScreenMove.touchStartY - touchScreenMove.currentY;
+
+    const px = (-dx/width) * touchSpeed.get() * 40;
+    const py = (dy/-height) * touchSpeed.get() * 20;
+
+    moveCallback({movementX: px, movementY: py});
+
+    if(touchScreenMove.started)
+        requestAnimationFrame(calculateTouchMove)
+}
+
 function startPointerLock()
 {
     const test = false;
     if (render.isLinked() && enablePointerLock.get())
     {
-        document.addEventListener("mousemove", moveCallback, false);
         canvas.requestPointerLock = canvas.requestPointerLock ||
                                     canvas.mozRequestPointerLock ||
                                     canvas.webkitRequestPointerLock;
         canvas.requestPointerLock();
     }
+}
+
+function initTouchScreenMove()
+{
+    if (enableTouchScreenMove.get()) {
+        document.addEventListener("touchstart", touchStart, false);
+        document.addEventListener("touchend", touchEnd, false);
+        document.addEventListener("touchmove", touchMove, false);
+    } else {
+        document.removeEventListener("touchstart", touchStart, false);
+        document.removeEventListener("touchend", touchEnd, false);
+        document.removeEventListener("touchmove", touchMove, false);
+    }
+}
+
+function touchStart(e)
+{
+    touchScreenMove.touchStartX = e.touches[0].screenX;
+    touchScreenMove.touchStartY = e.touches[0].screenY;
+    touchScreenMove.currentX = e.touches[0].screenX;
+    touchScreenMove.currentY = e.touches[0].screenY;
+    touchScreenMove.started = true;
+    pressedW = true;
+
+    calculateTouchMove();
+}
+function touchEnd(e)
+{
+    touchScreenMove.started = false;
+    pressedW = false;
+}
+function touchMove(e)
+{
+    touchScreenMove.currentX = e.touches[0].screenX;
+    touchScreenMove.currentY = e.touches[0].screenY;
 }
 
 function initListener()
@@ -301,6 +374,18 @@ function keyDown(e)
 {
     switch (e.which)
     {
+    case 38:
+        pressedW = arrows.get() || pressedW;
+        break;
+    case 37:
+        pressedA = arrows.get() || pressedA;
+        break;
+    case 40:
+        pressedS = arrows.get() || pressedS;
+        break;
+    case 39:
+        pressedD = arrows.get() || pressedD;
+        break;
     case 87:
         pressedW = true;
         break;
@@ -317,12 +402,26 @@ function keyDown(e)
     default:
         break;
     }
+
+    isMoving.set(pressedW || pressedA || pressedS || pressedD);
 }
 
 function keyUp(e)
 {
     switch (e.which)
     {
+    case 38:
+        pressedW = arrows.get() ? false : pressedW;
+        break;
+    case 37:
+        pressedA = arrows.get() ? false : pressedA;
+        break;
+    case 40:
+        pressedS = arrows.get() ? false : pressedS;
+        break;
+    case 39:
+        pressedD = arrows.get() ? false : pressedD;
+        break;
     case 87:
         pressedW = false;
         break;
@@ -336,4 +435,7 @@ function keyUp(e)
         pressedD = false;
         break;
     }
+
+    isMoving.set(pressedW || pressedA || pressedS || pressedD);
 }
+
