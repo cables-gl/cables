@@ -2,14 +2,14 @@ const
     render = op.inTrigger("render"),
 
     enablePointerLock = op.inBool("Enable pointer lock", true),
+    arrows = op.inValueBool("Enable Arrow Keys", true),
     enableTouchScreenMove = op.inBool("Enable TouchScreen move", false),
 
     moveSpeed = op.inFloat("Speed", 1),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
     touchSpeed = op.inFloat("Touch Speed", 1),
 
-    fly = op.inValueBool("Allow Flying", true),
-    arrows = op.inValueBool("Enable Arrow Keys", true);
+    fly = op.inValueBool("Allow Flying", true);
 
 
 const
@@ -240,7 +240,8 @@ function lockChangeCallback(e)
     }
 }
 
-function calculateTouchMove() {
+function calculateTouchMove()
+{
     const width = cgl.canvas.width;
     const height = cgl.canvas.height;
 
@@ -290,12 +291,16 @@ function touchStart(e)
     touchScreenMove.started = true;
     pressedW = true;
 
+    isMoving.set(true);
+
     calculateTouchMove();
 }
 function touchEnd(e)
 {
     touchScreenMove.started = false;
     pressedW = false;
+
+    isMoving.set(false);
 }
 function touchMove(e)
 {
