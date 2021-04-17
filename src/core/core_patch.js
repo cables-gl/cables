@@ -662,7 +662,7 @@ Patch.prototype.exec = function (e)
  * @param {Op} op2
  * @param {String} portName2
  */
-Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase)
+Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
 {
     if (!op1)
     {
@@ -700,7 +700,7 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase)
         const link = new Link(this);
         link.link(port1, port2);
 
-        this.emitEvent("onLink", port1, port2, link);
+        this.emitEvent("onLink", port1, port2, link, fromDeserialize);
         return link;
     }
 };
@@ -897,7 +897,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const found = false;
         if (!found)
         {
-            self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName);
+            self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName, false, true);
         }
     }
 
