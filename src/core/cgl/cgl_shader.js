@@ -94,7 +94,7 @@ const Shader = function (_cgl, _name)
     this._inverseViewMatrixUniform = null;
 
     this._attrVertexPos = -1;
-    this.precision = _cgl.patch.config.glslPrecision || "highp";
+    this.precision = _cgl.patch.config.glslPrecision || "mediump";
 
     this._pMatrixState = -1;
     this._vMatrixState = -1;
