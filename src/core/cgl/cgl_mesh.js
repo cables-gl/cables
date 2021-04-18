@@ -611,6 +611,34 @@ Mesh.prototype.render = function (shader)
 
     let elementDiv = 1;
 
+
+    const doQuery = this._cgl.profileData.doProfileGlQuery;
+    if (!this._queryExt) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2");
+
+    if (doQuery && this._drawQuery)
+    {
+        const available = this._cgl.gl.getQueryParameter(this._drawQuery, this._cgl.gl.QUERY_RESULT_AVAILABLE);
+        if (available)
+        {
+            const elapsedNanos = this._cgl.gl.getQueryParameter(this._drawQuery, this._cgl.gl.QUERY_RESULT);
+            const currentTimeGPU = elapsedNanos / 1000000;
+
+            const id = this._geom.name + " " + shader.getName();
+
+            this._cgl.profileData.glQueryData[id] = { "id": id, "time": currentTimeGPU, "when": performance.now() };
+            // console.log(this._geom.name + " " + shader.name, currentTimeGPU);
+            this._drawQuery = null;
+        }
+        // if (this._drawQuery) this._cgl.gl.deleteQuery(this._drawQuery);
+    }
+
+    if (doQuery)
+    {
+        this._drawQuery = this._cgl.gl.createQuery();
+        this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, this._drawQuery);
+    }
+
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
@@ -629,6 +657,14 @@ Mesh.prototype.render = function (shader)
 
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
+
+
+    if (this._drawQuery)
+    {
+        this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
+
+        // console.log("available", available);
+    }
 };
 
 Mesh.prototype.setNumInstances = function (n)

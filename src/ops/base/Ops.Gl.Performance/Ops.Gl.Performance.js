@@ -46,8 +46,8 @@ let currentTimeMainloop = 0;
 let currentTimeOnFrame = 0;
 
 const gl = op.patch.cgl.gl;
-const ext = gl.getExtension("EXT_disjoint_timer_query_webgl2");
-let query = null;
+const glQueryExt = gl.getExtension("EXT_disjoint_timer_query_webgl2");
+// let query = null;
 
 exe.onLinkChanged =
     inShow.onChange = updateVisibility;
@@ -253,7 +253,7 @@ function updateText()
         html += "<span style=\"color:" + colorRAF + "\">■</span> " + fps + " fps ";
         html += "<span style=\"color:" + colorMainloop + "\">■</span> " + Math.round(currentTimeMainloop * 100) / 100 + "ms mainloop ";
         html += "<span style=\"color:" + colorOnFrame + "\">■</span> " + Math.round(currentTimeOnFrame * 100) / 100 + "ms onframe ";
-        if (ext) html += "<span style=\"color:" + colorGPU + "\">■</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
+        if (currentTimeGPU) html += "<span style=\"color:" + colorGPU + "\">■</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
         html += warn;
         element.innerHTML = html;
     }
@@ -261,7 +261,7 @@ function updateText()
     {
         html += fps + " fps / ";
         html += "CPU: " + Math.round((currentTimeMainloop + op.patch.cgl.profileData.profileOnAnimFrameOps) * 100) / 100 + "ms / ";
-        if (ext && currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
+        if (currentTimeGPU)html += "GPU: " + Math.round(currentTimeGPU * 100) / 100 + "ms  ";
         element.innerHTML = html;
     }
 
@@ -431,6 +431,8 @@ exe.onTriggered = function ()
     const selfTimeStart = performance.now();
     frameCount++;
 
+    if (glQueryExt)op.patch.cgl.profileData.doProfileGlQuery = true;
+
     if (fpsStartTime === 0)fpsStartTime = Date.now();
     if (Date.now() - fpsStartTime >= 1000)
     {
@@ -471,13 +473,24 @@ exe.onTriggered = function ()
     selfTime = performance.now() - selfTimeStart;
     const startTimeChilds = performance.now();
 
-    startGlQuery();
+    // startGlQuery();
     next.trigger();
-    endGlQuery();
+    // endGlQuery();
 
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
     const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps;
+
+    const glQueryData = op.patch.cgl.profileData.glQueryData;
+
+    currentTimeGPU = 0;
+    if (glQueryData)
+    {
+        for (let i in glQueryData)
+        {
+            currentTimeGPU += glQueryData[i].time;
+        }
+    }
 
     if (smoothGraph.get())
     {
@@ -493,34 +506,34 @@ exe.onTriggered = function ()
     }
 };
 
-function startGlQuery()
-{
-    if (!ext) return;
-    if (!query)
-    {
-        query = gl.createQuery();
-        gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
-        startedQuery = true;
-    }
-}
+// function startGlQuery()
+// {
+//     if (!ext) return;
+//     if (!query)
+//     {
+//         query = gl.createQuery();
+//         gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
+//         startedQuery = true;
+//     }
+// }
 
-function endGlQuery()
-{
-    if (!ext) return;
-    if (query && startedQuery)
-    {
-        gl.endQuery(ext.TIME_ELAPSED_EXT);
-        startedQuery = false;
-    }
+// function endGlQuery()
+// {
+//     if (!ext) return;
+//     if (query && startedQuery)
+//     {
+//         gl.endQuery(ext.TIME_ELAPSED_EXT);
+//         startedQuery = false;
+//     }
 
-    if (query)
-    {
-        const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
-        if (available)
-        {
-            const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-            currentTimeGPU = elapsedNanos / 1000000;
-            query = null;
-        }
-    }
-}
+//     if (query)
+//     {
+//         const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
+//         if (available)
+//         {
+//             const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
+//             currentTimeGPU = elapsedNanos / 1000000;
+//             query = null;
+//         }
+//     }
+// }

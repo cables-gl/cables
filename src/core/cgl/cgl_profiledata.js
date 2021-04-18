@@ -27,6 +27,7 @@ class ProfileData
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
         this.heavyEvents = [];
+        this.glQueryData = false;
     }
 
 
@@ -53,7 +54,9 @@ class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
+        this.glQueryData = {};
     }
+
 
     addHeavyEvent(event, name, info)
     {
