@@ -622,7 +622,7 @@ Mesh.prototype.render = function (shader)
 
         if (!queryProfilerData)
         {
-            queryProfilerData = { "id": id };
+            queryProfilerData = { "id": id, "num": 0 };
             this._cgl.profileData.glQueryData[id] = queryProfilerData;
         }
 
@@ -636,7 +636,8 @@ Mesh.prototype.render = function (shader)
                 const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
                 const currentTimeGPU = elapsedNanos / 1000000;
 
-                queryProfilerData.time = currentTimeGPU;
+                queryProfilerData.times += currentTimeGPU;
+                queryProfilerData.num++;
                 queryProfilerData.when = performance.now();
                 // this._cgl.profileData.glQueryData[id] = { "id": id, "time": currentTimeGPU, "when": performance.now() };
                 // console.log(this._geom.name + " " + shader.name, currentTimeGPU);

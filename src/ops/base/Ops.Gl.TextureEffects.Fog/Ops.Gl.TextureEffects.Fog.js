@@ -1,71 +1,71 @@
 
 
-var render=op.inTrigger('render');
-var density=op.inValueFloat("density");
-var image=op.inTexture("depth texture");
-var trigger=op.outTrigger('trigger');
-var ignoreInf=op.inValueBool("ignore infinity");
+let render = op.inTrigger("render");
+let density = op.inValueFloat("density");
+let image = op.inTexture("depth texture");
+let trigger = op.outTrigger("trigger");
+let ignoreInf = op.inValueBool("ignore infinity");
 
 ignoreInf.set(false);
-ignoreInf.onChange=function()
+ignoreInf.onChange = function ()
 {
-    if(ignoreInf.get()) shader.define('FOG_IGNORE_INFINITY');
-        else shader.removeDefine('FOG_IGNORE_INFINITY');
+    if (ignoreInf.get()) shader.define("FOG_IGNORE_INFINITY");
+    else shader.removeDefine("FOG_IGNORE_INFINITY");
 };
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+let cgl = op.patch.cgl;
+var shader = new CGL.Shader(cgl, op.name);
 
 
-var srcFrag=attachments.fog_frag;
+let srcFrag = attachments.fog_frag;
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','depthTex',1);
-var textureUniform=new CGL.Uniform(shader,'t','image',0);
+shader.setSource(shader.getDefaultVertexShader(), srcFrag);
+var textureUniform = new CGL.Uniform(shader, "t", "depthTex", 1);
+var textureUniform = new CGL.Uniform(shader, "t", "image", 0);
 
-var uniDensity=new CGL.Uniform(shader,'f','density',1.0);
-density.onChange=function()
+let uniDensity = new CGL.Uniform(shader, "f", "density", 1.0);
+density.onChange = function ()
 {
     uniDensity.setValue(density.get());
 };
 density.set(5.0);
 
 
-    // fog color
+// fog color
 
 const r = op.inValueSlider("fog r", Math.random());
 const g = op.inValueSlider("fog g", Math.random());
 const b = op.inValueSlider("fog b", Math.random());
-r.setUiAttribs({ colorPick: true });
+r.setUiAttribs({ "colorPick": true });
 
-const rUniform=new CGL.Uniform(shader,'f','r',r);
-const gUniform=new CGL.Uniform(shader,'f','g',g);
-const bUniform=new CGL.Uniform(shader,'f','b',b);
-
-
-const a=op.inValueSlider("fog a",1.0);
-const aUniform=new CGL.Uniform(shader,'f','a',a);
+const rUniform = new CGL.Uniform(shader, "f", "r", r);
+const gUniform = new CGL.Uniform(shader, "f", "g", g);
+const bUniform = new CGL.Uniform(shader, "f", "b", b);
 
 
-var start=op.inValueSlider("start");
-start.onChange=function()
+const a = op.inValueSlider("fog a", 1.0);
+const aUniform = new CGL.Uniform(shader, "f", "a", a);
+
+
+let start = op.inValueSlider("start");
+start.onChange = function ()
 {
-    if(!start.uniform) start.uniform=new CGL.Uniform(shader,'f','start',start.get());
+    if (!start.uniform) start.uniform = new CGL.Uniform(shader, "f", "start", start.get());
     else start.uniform.setValue(start.get());
 };
 start.set(0);
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
-    if(image.get() && image.get().tex)
+    if (image.get() && image.get().tex)
     {
         cgl.pushShader(shader);
         cgl.currentTextureEffect.bind();
 
-        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
-        cgl.setTexture(1, image.get().tex );
+        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+        cgl.setTexture(1, image.get().tex);
 
         cgl.currentTextureEffect.finish();
         cgl.popShader();

@@ -7,7 +7,7 @@ const
     mask = op.inTexture("Mask");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "fastblur");
 
 shader.setSource(attachments.blur_vert, attachments.blur_frag);
 const

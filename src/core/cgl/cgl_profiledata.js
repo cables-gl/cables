@@ -56,6 +56,16 @@ class ProfileData
         this.profileMeshNumElements = 0;
     }
 
+    clearGlQuery()
+    {
+        for (let i in this.glQueryData)
+        {
+            this.glQueryData[i].time = this.glQueryData[i].times;
+            this.glQueryData[i].times = 0;
+            this.glQueryData[i].num = 0;
+        }
+    }
+
 
     addHeavyEvent(event, name, info)
     {
