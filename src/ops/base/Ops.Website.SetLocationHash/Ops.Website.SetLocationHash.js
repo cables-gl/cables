@@ -1,30 +1,19 @@
-// your new op
-// have a look at the documentation at:
-// https://docs.cables.gl/dev_hello_op/dev_hello_op.html
-
-const hashIn = op.inString("Hash", "");
-const routeIn = op.inString("Route", "");
-const valuesIn = op.inObject("Values", {});
-const activeIn = op.inBool("Active", false);
-const silentIn = op.inBool("Silent", true);
-const reloadIn = op.inBool("Allow Empty", false);
+const
+    hashIn = op.inString("Hash", ""),
+    routeIn = op.inString("Route", ""),
+    valuesIn = op.inObject("Values", {}),
+    inUpdate = op.inTriggerButton("Update"),
+    activeIn = op.inBool("Active", false),
+    silentIn = op.inBool("Silent", true),
+    reloadIn = op.inBool("Allow Empty", false);
 
 const router = new Navigo("/", { "hash": true, "noMatchWarning": true });
 
-let isActive = activeIn.get();
-
-hashIn.onChange = update;
-routeIn.onChange = update;
-valuesIn.onChange = update;
-activeIn.onChange = function ()
-{
-    isActive = activeIn.get();
-    update();
-};
+inUpdate.onTriggered = update;
 
 function update()
 {
-    if (!isActive) return;
+    if (!activeIn.get()) return;
 
     let hash = "";
     if (hashIn.get())

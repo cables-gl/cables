@@ -34,6 +34,10 @@
                 "name": "Values"
             },
             {
+                "type": 1,
+                "name": "Update"
+            },
+            {
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"

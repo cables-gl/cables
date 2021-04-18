@@ -446,6 +446,20 @@ exe.onTriggered = function ()
         fpsStartTime = Date.now();
     }
 
+    const glQueryData = op.patch.cgl.profileData.glQueryData;
+    currentTimeGPU = 0;
+    if (glQueryData)
+    {
+        let count = 0;
+        for (let i in glQueryData)
+        {
+            count++;
+            if (glQueryData[i].time)
+                currentTimeGPU += glQueryData[i].time;
+        }
+        // console.log("glquery count",currentTimeGPU)
+    }
+
     if (inShow.get())
     {
         measures();
@@ -480,17 +494,6 @@ exe.onTriggered = function ()
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
     const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps;
-
-    const glQueryData = op.patch.cgl.profileData.glQueryData;
-
-    currentTimeGPU = 0;
-    if (glQueryData)
-    {
-        for (let i in glQueryData)
-        {
-            currentTimeGPU += glQueryData[i].time;
-        }
-    }
 
     if (smoothGraph.get())
     {

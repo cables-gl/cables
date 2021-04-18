@@ -6,7 +6,11 @@ const changedOut = op.outTrigger("Changed");
 let router = null;
 let oldValues = {};
 
-hashOut.set(window.location.href.split("#", 2)[1]);
+op.onLoaded = () =>
+{
+    console.log("window.location.href", window.location.href, window.location.href.split("#", 2)[1]);
+    hashOut.set(window.location.href.split("#", 2)[1] || "");
+};
 
 if ("onhashchange" in window)
 {
@@ -27,6 +31,7 @@ routeIn.onChange = function ()
 
 function hashChange(event)
 {
+    if (event.silent) return;
     op.setUiError("unsupported", null);
     let values = {};
     const fields = event.newURL.split("#");
@@ -52,11 +57,11 @@ function hashChange(event)
         }
     }
     let changed = false;
-    if (Object.keys(values).length !== Object.keys(oldValues).length)
-    {
-        changed = true;
-    }
-    else
+    // if (Object.keys(values).length !== Object.keys(oldValues).length)
+    // {
+    //     changed = true;
+    // }
+    // else
     {
         const newKeys = Object.keys(values);
         for (let i = 0; i < newKeys.length; i++)
