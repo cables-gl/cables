@@ -30,7 +30,6 @@ class ProfileData
         this.glQueryData = {};
     }
 
-
     clear()
     {
         this.profileMeshAttributes = 0;
@@ -65,7 +64,6 @@ class ProfileData
             this.glQueryData[i].num = 0;
         }
     }
-
 
     addHeavyEvent(event, name, info)
     {
