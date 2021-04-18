@@ -426,7 +426,9 @@ function measures()
     initMeasures = false;
 }
 
-exe.onTriggered = function ()
+exe.onTriggered = render;
+
+function render()
 {
     const selfTimeStart = performance.now();
     frameCount++;
@@ -504,7 +506,9 @@ exe.onTriggered = function ()
         currentTimeMainloop = nCurrentTimeMainloop;
         currentTimeOnFrame = nCurrentTimeOnFrame;
     }
-};
+
+    op.patch.cgl.profileData.clearGlQuery();
+}
 
 // function startGlQuery()
 // {
