@@ -615,7 +615,8 @@ Mesh.prototype.render = function (shader)
     const doQuery = this._cgl.profileData.doProfileGlQuery;
     if (doQuery)
     {
-        const id = this._geom.name + " " + shader.getName();
+        let id = this._geom.name + " " + shader.getName();
+        if (this._numInstances) id += " instanced" + this._numInstances;
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
