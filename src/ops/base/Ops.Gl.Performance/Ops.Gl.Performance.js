@@ -252,7 +252,7 @@ function updateText()
     {
         html += "<span style=\"color:" + colorRAF + "\">■</span> " + fps + " fps ";
         html += "<span style=\"color:" + colorMainloop + "\">■</span> " + Math.round(currentTimeMainloop * 100) / 100 + "ms mainloop ";
-        html += "<span style=\"color:" + colorOnFrame + "\">■</span> " + Math.round(currentTimeOnFrame * 100) / 100 + "ms onframe ";
+        html += "<span style=\"color:" + colorOnFrame + "\">■</span> " + Math.round((currentTimeOnFrame) * 100) / 100 + "ms onframe ";
         if (currentTimeGPU) html += "<span style=\"color:" + colorGPU + "\">■</span> " + Math.round(currentTimeGPU * 100) / 100 + "ms GPU";
         html += warn;
         element.innerHTML = html;
@@ -475,7 +475,7 @@ function render()
             timesMainloop.push(childsTime);
             timesMainloop.shift();
 
-            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps);
+            timesOnFrame.push(op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs);
             timesOnFrame.shift();
 
             timesGPU.push(currentTimeGPU);
@@ -495,7 +495,7 @@ function render()
 
     const nChildsTime = performance.now() - startTimeChilds;
     const nCurrentTimeMainloop = op.patch.cgl.profileData.profileMainloopMs;
-    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps;
+    const nCurrentTimeOnFrame = op.patch.cgl.profileData.profileOnAnimFrameOps - op.patch.cgl.profileData.profileMainloopMs;
 
     if (smoothGraph.get())
     {
