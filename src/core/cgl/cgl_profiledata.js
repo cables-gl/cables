@@ -60,7 +60,8 @@ class ProfileData
     {
         for (let i in this.glQueryData)
         {
-            this.glQueryData[i].time = 0;
+            this.glQueryData[i].time = this.glQueryData[i].times;
+            this.glQueryData[i].times = 0;
         }
     }
 
