@@ -164,24 +164,6 @@ function doRender()
 
     cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
-    // if(selectedFilter == CGL.Texture.FILTER_MIPMAP)
-    // {
-    // fps++;
-
-    // if(performance.now()-fpsStart>1000)
-    // {
-    //     if(fps>10)
-    //     {
-    //     op.setUiError("manymipmap", "generating mipmaps", 1);
-    //     }
-    //     else op.setUiError("manymipmap", null, 1);
-
-    //     fps=0;
-    //     fpsStart=performance.now();
-
-    // }
-    // }
-
     cgl.popBlend(false);
     cgl.currentTextureEffect = null;
 }
