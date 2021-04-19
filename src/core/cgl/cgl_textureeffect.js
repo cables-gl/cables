@@ -203,7 +203,7 @@ TextureEffect.prototype.getCurrentTargetTexture = function ()
 
 TextureEffect.prototype.getCurrentSourceTexture = function ()
 {
-    if (this._countEffects == 0) return this._bgTex;
+    if (this._countEffects == 0 && this._bgTex) return this._bgTex;
 
     if (this.switched) return this._textureTarget;
     return this._textureSource;
