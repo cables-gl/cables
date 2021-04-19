@@ -29,9 +29,9 @@ const TextureEffect = function (cgl, options)
     this.depth = false;
 };
 
-TextureEffect.prototype.setSourceTexture = function (tex, ignoreTextureDifference)
+TextureEffect.prototype.setSourceTexture = function (tex)
 {
-    if (!ignoreTextureDifference && tex.textureType == Texture.TYPE_FLOAT) this._cgl.gl.getExtension("EXT_color_buffer_float");
+    if (tex.textureType == Texture.TYPE_FLOAT) this._cgl.gl.getExtension("EXT_color_buffer_float");
 
     if (tex === null)
     {
@@ -44,7 +44,7 @@ TextureEffect.prototype.setSourceTexture = function (tex, ignoreTextureDifferenc
     }
 
 
-    if (!ignoreTextureDifference && !this._textureSource.compareSettings(this._textureTarget))
+    if (!this._textureSource.compareSettings(this._textureTarget))
     {
         // Log.log('change effect target texture ');
         // if(this._textureTarget) Log.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
@@ -121,8 +121,9 @@ TextureEffect.prototype.startEffect = function (bgTex)
 
     if (bgTex)
     {
-        this.setSourceTexture(bgTex, true);
+        this._bgTex = bgTex;
     }
+    this._countEffects = 0;
 };
 
 TextureEffect.prototype.endEffect = function ()
@@ -191,6 +192,7 @@ TextureEffect.prototype.finish = function ()
     }
 
     this.switched = !this.switched;
+    this._countEffects++;
 };
 
 TextureEffect.prototype.getCurrentTargetTexture = function ()
@@ -201,6 +203,8 @@ TextureEffect.prototype.getCurrentTargetTexture = function ()
 
 TextureEffect.prototype.getCurrentSourceTexture = function ()
 {
+    if (this._countEffects == 0) return this._bgTex;
+
     if (this.switched) return this._textureTarget;
     return this._textureSource;
 };
