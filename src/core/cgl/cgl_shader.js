@@ -67,6 +67,12 @@ const Shader = function (_cgl, _name)
     if (!_cgl) throw new Error("shader constructed without cgl " + _name);
 
     this._cgl = _cgl;
+
+    if (!_name)
+    {
+        console.warn("no shader name given");
+        console.log(new Error().stack);
+    }
     this._name = _name || "unknown";
     this.glslVersion = 0;
     if (_cgl.glVersion > 1) this.glslVersion = 300;

@@ -611,6 +611,46 @@ Mesh.prototype.render = function (shader)
 
     let elementDiv = 1;
 
+
+    const doQuery = this._cgl.profileData.doProfileGlQuery;
+    if (doQuery)
+    {
+        let id = this._geom.name + " " + shader.getName() + " " + shader.id;
+        if (this._numInstances) id += " instanced" + this._numInstances;
+
+        let queryProfilerData = this._cgl.profileData.glQueryData[id];
+
+        if (!queryProfilerData)
+        {
+            queryProfilerData = { "id": id, "num": 0 };
+            this._cgl.profileData.glQueryData[id] = queryProfilerData;
+        }
+
+        if (!this._queryExt) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2");
+
+        if (queryProfilerData._drawQuery)
+        {
+            const available = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT_AVAILABLE);
+            if (available)
+            {
+                const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
+                const currentTimeGPU = elapsedNanos / 1000000;
+
+                queryProfilerData._times += currentTimeGPU;
+                queryProfilerData._numcount++;
+                queryProfilerData.when = performance.now();
+                // this._cgl.profileData.glQueryData[id] = { "id": id, "time": currentTimeGPU, "when": performance.now() };
+                // console.log(this._geom.name + " " + shader.name, currentTimeGPU);
+                queryProfilerData._drawQuery = null;
+            }
+            // if (queryProfilerData._drawQuery) this._cgl.gl.deleteQuery(queryProfilerData._drawQuery);
+        }
+
+        queryProfilerData._drawQuery = this._cgl.gl.createQuery();
+        this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+    }
+
+
     if (this.hasFeedbacks())
     {
         this.drawFeedbacks(shader, prim);
@@ -629,6 +669,14 @@ Mesh.prototype.render = function (shader)
 
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
+
+
+    if (doQuery)
+    {
+        this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
+
+        // console.log("available", available);
+    }
 };
 
 Mesh.prototype.setNumInstances = function (n)

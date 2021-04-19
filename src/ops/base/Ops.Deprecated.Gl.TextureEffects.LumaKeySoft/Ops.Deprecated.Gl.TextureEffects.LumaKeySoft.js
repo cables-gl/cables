@@ -1,57 +1,57 @@
-op.name="LumaKeySoft";
-var cgl=op.patch.cgl;
+op.name = "LumaKeySoft";
+let cgl = op.patch.cgl;
 
-var render=op.inTrigger('render');
-var trigger=op.outTrigger('trigger');
+let render = op.inTrigger("render");
+let trigger = op.outTrigger("trigger");
 
-var threshold=op.addInPort(new CABLES.Port(op,"amthresholdount",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
-var mul=op.inValue("Amount",2.0);
+let threshold = op.addInPort(new CABLES.Port(op, "amthresholdount", CABLES.OP_PORT_TYPE_VALUE, { "display": "range" }));
+let mul = op.inValue("Amount", 2.0);
 threshold.set(0.5);
 
 
-var shader=new CGL.Shader(cgl);
+let shader = new CGL.Shader(cgl, op.name);
 
 
-var srcFrag=''
-    .endl()+'precision highp float;'
-    .endl()+'IN vec2 texCoord;'
-    .endl()+'uniform sampler2D tex;'
-    .endl()+'uniform float threshhold;'
-    .endl()+'uniform float mul;'
+let srcFrag = ""
+    .endl() + "precision highp float;"
+    .endl() + "IN vec2 texCoord;"
+    .endl() + "uniform sampler2D tex;"
+    .endl() + "uniform float threshhold;"
+    .endl() + "uniform float mul;"
 
-    .endl()+'uniform sampler2D text;'
+    .endl() + "uniform sampler2D text;"
 
-    .endl()+'void main()'
-    .endl()+'{'
-    .endl()+'   vec4 col = texture2D(text, texCoord );'
+    .endl() + "void main()"
+    .endl() + "{"
+    .endl() + "   vec4 col = texture2D(text, texCoord );"
 
-    .endl()+'   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );'
-    .endl()+'   if(gray < threshhold) col=col-(threshhold-gray)*mul;'
-    .endl()+'   gl_FragColor = col;'
+    .endl() + "   float gray = dot(vec3(0.2126,0.7152,0.0722), col.rgb );"
+    .endl() + "   if(gray < threshhold) col=col-(threshhold-gray)*mul;"
+    .endl() + "   gl_FragColor = col;"
 
-    .endl()+'}';
+    .endl() + "}";
 
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag);
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+shader.setSource(shader.getDefaultVertexShader(), srcFrag);
+let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 
-var unThreshold=new CGL.Uniform(shader,'f','threshhold',threshold);
-var unMul=new CGL.Uniform(shader,'f','mul',mul);
+let unThreshold = new CGL.Uniform(shader, "f", "threshhold", threshold);
+let unMul = new CGL.Uniform(shader, "f", "mul", mul);
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!cgl.currentTextureEffect)return;
+    if (!cgl.currentTextureEffect) return;
 
 
-// unThreshold.setValue( threshold.get() );
+    // unThreshold.setValue( threshold.get() );
 
 
     cgl.pushShader(shader);
 
 
     cgl.currentTextureEffect.bind();
-    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+
 
     cgl.currentTextureEffect.finish();
 

@@ -1,29 +1,29 @@
 const
-    render=op.inTrigger("Render"),
-    blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal"),
-    amount=op.inValueSlider("Amount",1),
-    trigger=op.outTrigger("Trigger"),
-    strength=op.inValue("strength",2),
-    threshold=op.inValueSlider("threshold",0.35);
+    render = op.inTrigger("Render"),
+    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
+    amount = op.inValueSlider("Amount", 1),
+    trigger = op.outTrigger("Trigger"),
+    strength = op.inValue("strength", 2),
+    threshold = op.inValueSlider("threshold", 0.35);
 
 const
-    cgl=op.patch.cgl,
-    shader=new CGL.Shader(cgl);
+    cgl = op.patch.cgl,
+    shader = new CGL.Shader(cgl, op.name);
 
-shader.setSource(shader.getDefaultVertexShader(),attachments.dither_frag);
+shader.setSource(shader.getDefaultVertexShader(), attachments.dither_frag);
 
-const textureUniform=new CGL.Uniform(shader,'t','tex',0),
-    amountUniform=new CGL.Uniform(shader,'f','amount',amount),
-    strengthUniform=new CGL.Uniform(shader,'f','strength',strength),
-    uniWidth=new CGL.Uniform(shader,'f','width',0),
-    uniHeight=new CGL.Uniform(shader,'f','height',0),
-    unithreshold=new CGL.Uniform(shader,'f','threshold',threshold);
+const textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+    amountUniform = new CGL.Uniform(shader, "f", "amount", amount),
+    strengthUniform = new CGL.Uniform(shader, "f", "strength", strength),
+    uniWidth = new CGL.Uniform(shader, "f", "width", 0),
+    uniHeight = new CGL.Uniform(shader, "f", "height", 0),
+    unithreshold = new CGL.Uniform(shader, "f", "threshold", threshold);
 
-CGL.TextureEffect.setupBlending(op,shader,blendMode,amount);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
@@ -31,7 +31,7 @@ render.onTriggered=function()
     uniWidth.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().width);
     uniHeight.setValue(cgl.currentTextureEffect.getCurrentSourceTexture().height);
 
-    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex );
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

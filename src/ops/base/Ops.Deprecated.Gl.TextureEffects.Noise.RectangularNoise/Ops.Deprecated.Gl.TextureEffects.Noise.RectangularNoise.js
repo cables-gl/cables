@@ -1,54 +1,51 @@
-op.name="RectangularNoise";
+op.name = "RectangularNoise";
 
-var render=op.inTrigger('render');
-
-
-var blendMode=CGL.TextureEffect.AddBlendSelect(op,"Blend Mode","normal");
-var amount=op.inValueSlider("Amount",1);
-
-var threshold=op.inValueSlider("Threshold",0.35);
-
-var x=op.inValue("X",0);
-var y=op.inValue("Y",0);
-var z=op.inValue("Z",0);
-var scale=op.inValue("Scale",22);
+let render = op.inTrigger("render");
 
 
+let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
+let amount = op.inValueSlider("Amount", 1);
+
+let threshold = op.inValueSlider("Threshold", 0.35);
+
+let x = op.inValue("X", 0);
+let y = op.inValue("Y", 0);
+let z = op.inValue("Z", 0);
+let scale = op.inValue("Scale", 22);
 
 
+let trigger = op.outTrigger("trigger");
 
-var trigger=op.outTrigger('trigger');
+let cgl = op.patch.cgl;
+let shader = new CGL.Shader(cgl, op.name);
 
-var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+let srcFrag = attachments.movingrectnoise_frag.replace("{{BLENDCODE}}", CGL.TextureEffect.getBlendCode());
 
-var srcFrag=attachments.movingrectnoise_frag.replace('{{BLENDCODE}}',CGL.TextureEffect.getBlendCode());
+shader.setSource(shader.getDefaultVertexShader(), srcFrag);
+let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 
-shader.setSource(shader.getDefaultVertexShader(),srcFrag );
-var textureUniform=new CGL.Uniform(shader,'t','tex',0);
+let uniZ = new CGL.Uniform(shader, "f", "z", z);
+let uniX = new CGL.Uniform(shader, "f", "x", x);
+let uniY = new CGL.Uniform(shader, "f", "y", y);
+let uniScale = new CGL.Uniform(shader, "f", "scale", scale);
+let uniThreshold = new CGL.Uniform(shader, "f", "threshold", threshold);
 
-var uniZ=new CGL.Uniform(shader,'f','z',z);
-var uniX=new CGL.Uniform(shader,'f','x',x);
-var uniY=new CGL.Uniform(shader,'f','y',y);
-var uniScale=new CGL.Uniform(shader,'f','scale',scale);
-var uniThreshold=new CGL.Uniform(shader,'f','threshold',threshold);
+let amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-var amountUniform=new CGL.Uniform(shader,'f','amount',amount);
-
-blendMode.onChange=function()
+blendMode.onChange = function ()
 {
-    CGL.TextureEffect.onChangeBlendSelect(shader,blendMode.get());
+    CGL.TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 };
 
-render.onTriggered=function()
+render.onTriggered = function ()
 {
-    if(!CGL.TextureEffect.checkOpInEffect(op)) return;
+    if (!CGL.TextureEffect.checkOpInEffect(op)) return;
 
     cgl.pushShader(shader);
     cgl.currentTextureEffect.bind();
 
-    cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    
+    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

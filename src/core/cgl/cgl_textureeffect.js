@@ -217,7 +217,7 @@ TextureEffect.prototype.delete = function ()
 
 TextureEffect.prototype.createMesh = function ()
 {
-    this._cgl.TextureEffectMesh = MESHES.getSimpleRect(this._cgl, "textureEffect rect");
+    this._cgl.TextureEffectMesh = MESHES.getSimpleRect(this._cgl, "texEffectRect");
 };
 
 // ---------------------------------------------------------------------------------

@@ -27,8 +27,8 @@ class ProfileData
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
         this.heavyEvents = [];
+        this.glQueryData = {};
     }
-
 
     clear()
     {
@@ -53,6 +53,18 @@ class ProfileData
         this.profileTextureEffect = 0;
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
+    }
+
+    clearGlQuery()
+    {
+        for (let i in this.glQueryData)
+        {
+            this.glQueryData[i].time = this.glQueryData[i]._times;
+            this.glQueryData[i].num = this.glQueryData[i]._numcount;
+
+            this.glQueryData[i]._times = 0;
+            this.glQueryData[i]._numcount = 0;
+        }
     }
 
     addHeavyEvent(event, name, info)
