@@ -512,35 +512,3 @@ function render()
 
     op.patch.cgl.profileData.clearGlQuery();
 }
-
-// function startGlQuery()
-// {
-//     if (!ext) return;
-//     if (!query)
-//     {
-//         query = gl.createQuery();
-//         gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
-//         startedQuery = true;
-//     }
-// }
-
-// function endGlQuery()
-// {
-//     if (!ext) return;
-//     if (query && startedQuery)
-//     {
-//         gl.endQuery(ext.TIME_ELAPSED_EXT);
-//         startedQuery = false;
-//     }
-
-//     if (query)
-//     {
-//         const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
-//         if (available)
-//         {
-//             const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-//             currentTimeGPU = elapsedNanos / 1000000;
-//             query = null;
-//         }
-//     }
-// }

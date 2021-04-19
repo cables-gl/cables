@@ -24,10 +24,10 @@ let w = 8, h = 8;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
-const bgShader = new CGL.Shader(cgl, "imgcompose bg");
-bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
+// const bgShader = new CGL.Shader(cgl, "imgcompose bg");
+// bgShader.setSource(bgShader.getDefaultVertexShader(), attachments.imgcomp_frag);
 
-const uniAlpha = new CGL.Uniform(bgShader, "f", "a", !inTransp.get());
+// const uniAlpha = new CGL.Uniform(bgShader, "f", "a", !inTransp.get());
 
 let selectedFilter = CGL.Texture.FILTER_LINEAR;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
@@ -44,10 +44,10 @@ onFilterChange();
 onWrapChange();
 updateSizePorts();
 
-inTransp.onChange = () =>
-{
-    uniAlpha.setValue(!inTransp.get());
-};
+// inTransp.onChange = () =>
+// {
+//     uniAlpha.setValue(!inTransp.get());
+// };
 
 function initEffect()
 {
@@ -128,7 +128,7 @@ useVPSize.onChange = function ()
 op.preRender = function ()
 {
     doRender();
-    bgShader.bind();
+    // bgShader.bind();
 };
 
 function doRender()
@@ -148,13 +148,16 @@ function doRender()
     cgl.currentTextureEffect = effect;
     effect.setSourceTexture(tex);
 
-    effect.startEffect();
+    let bgTex = CGL.Texture.getBlackTexture(cgl);
+    if (inTransp.get())bgTex = CGL.Texture.getEmptyTexture(cgl);
 
-    cgl.pushShader(bgShader);
-    cgl.currentTextureEffect.bind();
-    cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-    cgl.currentTextureEffect.finish();
-    cgl.popShader();
+    effect.startEffect(bgTex);
+
+    // cgl.pushShader(bgShader);
+    // cgl.currentTextureEffect.bind();
+    // cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    // cgl.currentTextureEffect.finish();
+    // cgl.popShader();
 
     trigger.trigger();
 
