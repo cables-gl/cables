@@ -615,8 +615,8 @@ Mesh.prototype.render = function (shader)
     const doQuery = this._cgl.profileData.doProfileGlQuery;
     if (doQuery)
     {
-        let id = this._geom.name + " " + shader.getName() + " " + shader.id;
-        if (this._numInstances) id += " instanced" + this._numInstances;
+        let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
+        if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
@@ -639,11 +639,8 @@ Mesh.prototype.render = function (shader)
                 queryProfilerData._times += currentTimeGPU;
                 queryProfilerData._numcount++;
                 queryProfilerData.when = performance.now();
-                // this._cgl.profileData.glQueryData[id] = { "id": id, "time": currentTimeGPU, "when": performance.now() };
-                // console.log(this._geom.name + " " + shader.name, currentTimeGPU);
                 queryProfilerData._drawQuery = null;
             }
-            // if (queryProfilerData._drawQuery) this._cgl.gl.deleteQuery(queryProfilerData._drawQuery);
         }
 
         queryProfilerData._drawQuery = this._cgl.gl.createQuery();

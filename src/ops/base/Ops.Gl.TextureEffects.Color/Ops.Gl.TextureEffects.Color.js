@@ -10,16 +10,14 @@ const
     trigger = op.outTrigger("trigger");
 
 r.setUiAttribs({ "colorPick": true });
-
 op.setPortGroup("Color", [r, g, b]);
 
 const TEX_SLOT = 0;
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "textureeffect color");
-
 const srcFrag = attachments.color_frag || "";
-
 shader.setSource(shader.getDefaultVertexShader(), srcFrag);
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", TEX_SLOT),
@@ -40,8 +38,6 @@ inMaskInvert.onChange = function ()
     if (inMaskInvert.get())shader.define("INVERTMASK");
     else shader.removeDefine("INVERTMASK");
 };
-
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 render.onTriggered = function ()
 {
