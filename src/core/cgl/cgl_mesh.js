@@ -321,6 +321,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
             }
         }
 
+        console.log("buff", this._bufVerticesIndizes);
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
         // todo cache this ?
