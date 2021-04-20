@@ -536,6 +536,9 @@ const Context = function (_patch)
     this.setTexture = function (slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
+
+        if (t.deleted)console.log("deleted texture", t);
+
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
