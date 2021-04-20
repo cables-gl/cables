@@ -568,7 +568,6 @@ Mesh.prototype.render = function (shader)
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
     if (!shader || !shader.isValid()) return;
-    const i = 0;
 
     if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
     if (shader.wireframe && this._geom.isIndexed())
@@ -667,6 +666,14 @@ Mesh.prototype.render = function (shader)
     {
         console.error("mesh draw gl error");
         console.log(this);
+
+        const attribNames = [];
+        for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
+        {
+            const name = this._cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+            // attribNames.push(name);
+            console.log("attrib ", name);
+        }
     }
 
 
