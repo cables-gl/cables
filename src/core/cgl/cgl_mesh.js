@@ -411,16 +411,15 @@ Mesh.prototype._bind = function (shader)
     else this._attribLocs[shader.id] = attrLocs;
 
     this._lastShader = shader;
-    let i = 0;
     if (shader.lastCompile > this._lastAttrUpdate || attrLocs.length != this._attributes.length)
     {
         this._lastAttrUpdate = shader.lastCompile;
-        for (i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
+        for (let i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
 
         this._checkAttrLengths();
     }
 
-    for (i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
         const attribute = this._attributes[i];
         if (attrLocs[i] == -1)
@@ -663,6 +662,12 @@ Mesh.prototype.render = function (shader)
         if (this._numInstances === 0) this._cgl.gl.drawElements(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0);
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
     }
+
+    if (this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
+    {
+        console.log(this);
+    }
+
 
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
