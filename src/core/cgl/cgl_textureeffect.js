@@ -43,6 +43,7 @@ TextureEffect.prototype.setSourceTexture = function (tex)
         this._textureSource = tex;
     }
 
+
     if (!this._textureSource.compareSettings(this._textureTarget))
     {
         // Log.log('change effect target texture ');
@@ -91,7 +92,7 @@ TextureEffect.prototype.setSourceTexture = function (tex)
     }
 };
 
-TextureEffect.prototype.startEffect = function ()
+TextureEffect.prototype.startEffect = function (bgTex)
 {
     if (!this._textureTarget)
     {
@@ -101,10 +102,6 @@ TextureEffect.prototype.startEffect = function ()
 
     this.switched = false;
 
-    // this._cgl.pushBlendMode(CGL.BLEND_NORMAL,false);
-    // this._cgl.pushBlend(true);
-
-    // this._cgl.gl.disable(this._cgl.gl.DEPTH_TEST);
     this._cgl.pushDepthTest(false);
 
     this._cgl.pushModelMatrix();
@@ -122,14 +119,16 @@ TextureEffect.prototype.startEffect = function ()
     this._cgl.pushModelMatrix();
     mat4.identity(this._cgl.mvMatrix);
 
-    // this._cgl.popBlend();
-    // this._cgl.popBlendMode();
+    if (bgTex)
+    {
+        this._bgTex = bgTex;
+    }
+    this._countEffects = 0;
 };
 
 TextureEffect.prototype.endEffect = function ()
 {
     this._cgl.popDepthTest(false);
-    // this._cgl.gl.enable(this._cgl.gl.DEPTH_TEST);
     this._cgl.popModelMatrix();
 
     this._cgl.popPMatrix();
@@ -193,6 +192,7 @@ TextureEffect.prototype.finish = function ()
     }
 
     this.switched = !this.switched;
+    this._countEffects++;
 };
 
 TextureEffect.prototype.getCurrentTargetTexture = function ()
@@ -203,6 +203,8 @@ TextureEffect.prototype.getCurrentTargetTexture = function ()
 
 TextureEffect.prototype.getCurrentSourceTexture = function ()
 {
+    if (this._countEffects == 0 && this._bgTex) return this._bgTex;
+
     if (this.switched) return this._textureTarget;
     return this._textureSource;
 };
@@ -343,9 +345,9 @@ TextureEffect.getBlendCode = function ()
         + "}".endl()
         + "vec4 cgl_blend(vec4 oldColor,vec4 newColor,float amount)".endl()
         + "{".endl()
-        + "   vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
-        + "   col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
-        + "   return col;".endl()
+            + "vec4 col=vec4( _blend(oldColor.rgb,newColor.rgb) ,1.0);".endl()
+            + "col=vec4( mix( col.rgb, oldColor.rgb ,1.0-oldColor.a*amount),1.0);".endl()
+            + "return col;".endl()
         + "}"
     );
 };

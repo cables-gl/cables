@@ -621,6 +621,34 @@ Texture.getRandomTexture = function (cgl)
 
 
 /**
+ * @function getBlackTexture
+ * @memberof Texture
+ * @static
+ * @description returns a reference to a black texture
+ * @return {Texture}
+ */
+Texture.getBlackTexture = function (cgl)
+{
+    if (!cgl)console.error("[getBlackTexture] no cgl!");
+    if (cgl.blackTexture) return cgl.blackTexture;
+
+    const size = 8;
+    const data = new Uint8Array(size * size * 4);
+
+    for (let x = 0; x < size * size; x++)
+    {
+        data[x * 4 + 0] = data[x * 4 + 1] = data[x * 4 + 2] = 0;
+        data[x * 4 + 3] = 255;
+    }
+
+    cgl.blackTexture = new Texture(cgl);
+    cgl.blackTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+
+    return cgl.blackTexture;
+};
+
+
+/**
  * @function getEmptyCubemapTexture
  * @memberof Texture
  * @static
