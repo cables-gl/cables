@@ -665,6 +665,7 @@ Mesh.prototype.render = function (shader)
 
     if (this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {
+        console.error("mesh draw gl error");
         console.log(this);
     }
 
