@@ -662,10 +662,12 @@ Mesh.prototype.render = function (shader)
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
     }
 
+
     if (this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {
         console.error("mesh draw gl error");
-        console.log(this);
+        console.log("mesh", this);
+        console.log("shader", shader);
 
         const attribNames = [];
         for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
