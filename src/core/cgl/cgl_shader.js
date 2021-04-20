@@ -774,7 +774,7 @@ Shader.prototype.compile = function ()
     this._needsRecompile = false;
     this.lastCompile = now();
 
-    this._cgl.printError("shader compile");
+    // this._cgl.printError("shader compile");
 
     this._cgl.profileData.shaderCompileTime += performance.now() - startTime;
 };
@@ -1574,7 +1574,7 @@ Shader.getErrorFragmentShader = function ()
 Shader.createShader = function (cgl, str, type, cglShader)
 {
     if (cgl.aborted) return;
-    cgl.printError("[Shader.createShader] ", cglShader._name);
+    // cgl.printError("[Shader.createShader] ", cglShader._name);
 
     function getBadLines(infoLog)
     {
@@ -1640,7 +1640,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     {
         // Log.log(name+' shader compiled...');
     }
-    cgl.printError("shader create2");
+    // cgl.printError("shader create2");
     return shader;
 };
 

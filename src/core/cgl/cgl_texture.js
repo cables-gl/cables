@@ -164,11 +164,11 @@ Texture.prototype.setSize = function (w, h)
     this.width = w;
     this.height = h;
 
-    if (this._cgl.printError("cgltex before"))
-    {
-        this.printInfo();
-        console.log((new Error()).stack);
-    }
+    // if (this._cgl.printError("cgltex before"))
+    // {
+    //     this.printInfo();
+    //     console.log((new Error()).stack);
+    // }
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.profileData.profileTextureResize++;
@@ -231,11 +231,11 @@ Texture.prototype.setSize = function (w, h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    if (this._cgl.printError("cgltex"))
-    {
-        this.printInfo();
-        console.log((new Error()).stack);
-    }
+    // if (this._cgl.printError("cgltex"))
+    // {
+    //     this.printInfo();
+    //     console.log((new Error()).stack);
+    // }
 
     this.updateMipMap();
 

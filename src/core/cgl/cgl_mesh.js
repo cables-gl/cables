@@ -672,15 +672,12 @@ Mesh.prototype.render = function (shader)
         for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
         {
             const name = this._cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
-            // attribNames.push(name);
             console.log("attrib ", name);
         }
     }
 
-
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
-
 
     if (doQuery)
     {
