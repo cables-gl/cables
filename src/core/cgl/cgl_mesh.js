@@ -321,7 +321,6 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
             }
         }
 
-        console.log("buff", this._bufVerticesIndizes);
         this._cgl.gl.bindBuffer(this._cgl.gl.ELEMENT_ARRAY_BUFFER, this._bufVerticesIndizes);
 
         // todo cache this ?
@@ -663,8 +662,7 @@ Mesh.prototype.render = function (shader)
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
     }
 
-
-    if (this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
+    if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {
         console.error("mesh draw gl error");
         console.log("mesh", this);
