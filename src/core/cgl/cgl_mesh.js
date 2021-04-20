@@ -406,7 +406,7 @@ Mesh.prototype._checkAttrLengths = function ()
 Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
-    if (shader != this._lastShader) this.unBind();
+    // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
@@ -690,6 +690,8 @@ Mesh.prototype.render = function (shader)
 
         // console.log("available", available);
     }
+
+    this.unBind();
 };
 
 Mesh.prototype.setNumInstances = function (n)
