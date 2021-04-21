@@ -74,11 +74,17 @@ const VarSetOpWrapper = class
         {
             this._op.refreshParams();
         }
+        this._updateDisplay();
     }
 
     _createVar()
     {
         CABLES.CMD.PATCH.createVariable(this._op, this._type, () => { this._updateName(); });
+    }
+
+    _updateDisplay()
+    {
+        this._valuePort.setUiAttribs({ "greyout": !this._varNamePort.get() });
     }
 
     _updateVarNamesDropdown()
@@ -101,6 +107,8 @@ const VarSetOpWrapper = class
 
     _setVarValue()
     {
+        if (!this._varNamePort.get()) return console.warn("[vargetset] no varnameport");
+
         this._op.patch.setVarValue(this._varNamePort.get(), this._valuePort.get());
         if (this._nextPort) this._nextPort.trigger();
     }
