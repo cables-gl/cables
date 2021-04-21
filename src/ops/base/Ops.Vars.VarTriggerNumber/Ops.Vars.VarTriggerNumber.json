@@ -1,1 +1,53 @@
-{"id":"2c29baf0-2af2-486d-9218-4299594ee9c1","changelog":[{"message":"created op","author":"pandur","date":1614258980193},{"message":"Ops.User.pandur.VarTriggerNumber renamed to Ops.Vars.VarTriggerNumber","author":"pandur","date":1614259035231}],"authorName":"pandur","created":1614258999179}
+{
+    "id": "2c29baf0-2af2-486d-9218-4299594ee9c1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1614258980193
+        },
+        {
+            "message": "Ops.User.pandur.VarTriggerNumber renamed to Ops.Vars.VarTriggerNumber",
+            "author": "pandur",
+            "date": 1614259035231
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1614258999179,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Value",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Variable",
+                "group": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": 1,
+                "name": "Create new variable",
+                "group": "Variable"
+            },
+            {
+                "type": 1,
+                "name": "",
+                "group": "Variable"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Vars.VarTriggerNumber"
+    }
+}
