@@ -100,18 +100,12 @@ Mesh.prototype.getAttribute = function (name)
 Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 {
     if (!attr) return;
-
     if (!start && !end) return;
 
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
-    if (start < 0)console.log("setattribrange <0");
-    if (start > array.length)console.log("setattribrange start");
-    if (end > array.length)console.log("setattribrange end");
-    if (end < start)console.log("end < start ");
-
-    if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array);
+    if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
     else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
 };
 
