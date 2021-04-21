@@ -1,1 +1,78 @@
-{"id":"9fd759cf-6fcc-487e-9dd9-9c9ab6143683","changelog":[{"message":"created op","author":"pandur","date":1593236588538},{"message":" added core lib: vargetset","author":"pandur","date":1608654868533},{"message":" added core lib: cgl_shadermodifier","author":"pandur","date":1608654775834},{"message":"cloned op from Ops.Vars.VarSetArray_v2","author":"pandur","date":1614259605693},{"message":"Ops.User.pandur.VarTriggerArray renamed to Ops.Vars.VarTriggerArray","author":"pandur","date":1614259859431}],"authorName":"pandur","created":1614259605693,"layout":{"portsIn":[{"type":3,"name":"Value"},{"type":1,"name":"Trigger"},{"type":0,"name":"Variable","group":"Variable","subType":"string"},{"type":1,"name":"Create new variable","group":"Variable"},{"type":1,"name":"","group":"Variable"}],"portsOut":[],"name":"Ops.User.pandur.VarTriggerArray"},"summary":"Set a variable array","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]},"coreLibs":["vargetset"]}
+{
+    "id": "9fd759cf-6fcc-487e-9dd9-9c9ab6143683",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593236588538
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1608654868533
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1608654775834
+        },
+        {
+            "message": "cloned op from Ops.Vars.VarSetArray_v2",
+            "author": "pandur",
+            "date": 1614259605693
+        },
+        {
+            "message": "Ops.User.pandur.VarTriggerArray renamed to Ops.Vars.VarTriggerArray",
+            "author": "pandur",
+            "date": 1614259859431
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1614259605693,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Value"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Variable",
+                "group": "Variable",
+                "subType": "string"
+            },
+            {
+                "type": 1,
+                "name": "Create new variable",
+                "group": "Variable"
+            },
+            {
+                "type": 1,
+                "name": "",
+                "group": "Variable"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Vars.VarTriggerArray"
+    },
+    "summary": "Set a variable array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "coreLibs": [
+        "vargetset"
+    ]
+}

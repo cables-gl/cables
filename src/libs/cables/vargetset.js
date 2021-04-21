@@ -1,12 +1,13 @@
 const VarSetOpWrapper = class
 {
-    constructor(op, type, valuePort, varNamePort, triggerPort)
+    constructor(op, type, valuePort, varNamePort, triggerPort, nextPort)
     {
         this._valuePort = valuePort;
         this._varNamePort = varNamePort;
         this._op = op;
         this._type = type;
         this._triggerPort = triggerPort;
+        this._nextPort = nextPort;
 
         this._btnCreate = op.inTriggerButton("Create new variable");
         this._btnCreate.setUiAttribs({ "hidePort": true });
@@ -73,11 +74,17 @@ const VarSetOpWrapper = class
         {
             this._op.refreshParams();
         }
+        this._updateDisplay();
     }
 
     _createVar()
     {
         CABLES.CMD.PATCH.createVariable(this._op, this._type, () => { this._updateName(); });
+    }
+
+    _updateDisplay()
+    {
+        this._valuePort.setUiAttribs({ "greyout": !this._varNamePort.get() });
     }
 
     _updateVarNamesDropdown()
@@ -100,7 +107,10 @@ const VarSetOpWrapper = class
 
     _setVarValue()
     {
+        if (!this._varNamePort.get()) return console.warn("[vargetset] no varnameport");
+
         this._op.patch.setVarValue(this._varNamePort.get(), this._valuePort.get());
+        if (this._nextPort) this._nextPort.trigger();
     }
 };
 
