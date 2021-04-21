@@ -405,22 +405,21 @@ Mesh.prototype._checkAttrLengths = function ()
 Mesh.prototype._bind = function (shader)
 {
     if (!shader.isValid()) return;
-    if (shader != this._lastShader) this.unBind();
+    // if (shader != this._lastShader) this.unBind();
     let attrLocs = [];
     if (this._attribLocs[shader.id]) attrLocs = this._attribLocs[shader.id];
     else this._attribLocs[shader.id] = attrLocs;
 
     this._lastShader = shader;
-    let i = 0;
     if (shader.lastCompile > this._lastAttrUpdate || attrLocs.length != this._attributes.length)
     {
         this._lastAttrUpdate = shader.lastCompile;
-        for (i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
+        for (let i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
 
         this._checkAttrLengths();
     }
 
-    for (i = 0; i < this._attributes.length; i++)
+    for (let i = 0; i < this._attributes.length; i++)
     {
         const attribute = this._attributes[i];
         if (attrLocs[i] == -1)
@@ -569,7 +568,6 @@ Mesh.prototype.render = function (shader)
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
     if (!shader || !shader.isValid()) return;
-    const i = 0;
 
     if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
     if (shader.wireframe && this._geom.isIndexed())
@@ -615,8 +613,8 @@ Mesh.prototype.render = function (shader)
     const doQuery = this._cgl.profileData.doProfileGlQuery;
     if (doQuery)
     {
-        let id = this._geom.name + " " + shader.getName() + " " + shader.id;
-        if (this._numInstances) id += " instanced" + this._numInstances;
+        let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
+        if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
 
@@ -639,11 +637,8 @@ Mesh.prototype.render = function (shader)
                 queryProfilerData._times += currentTimeGPU;
                 queryProfilerData._numcount++;
                 queryProfilerData.when = performance.now();
-                // this._cgl.profileData.glQueryData[id] = { "id": id, "time": currentTimeGPU, "when": performance.now() };
-                // console.log(this._geom.name + " " + shader.name, currentTimeGPU);
                 queryProfilerData._drawQuery = null;
             }
-            // if (queryProfilerData._drawQuery) this._cgl.gl.deleteQuery(queryProfilerData._drawQuery);
         }
 
         queryProfilerData._drawQuery = this._cgl.gl.createQuery();
@@ -667,9 +662,22 @@ Mesh.prototype.render = function (shader)
         else this._cgl.gl.drawElementsInstanced(prim, this._bufVerticesIndizes.numItems, this._cgl.gl.UNSIGNED_SHORT, 0, this._numInstances);
     }
 
+    if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
+    {
+        console.error("mesh draw gl error");
+        console.log("mesh", this);
+        console.log("shader", shader);
+
+        const attribNames = [];
+        for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
+        {
+            const name = this._cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
+            console.log("attrib ", name);
+        }
+    }
+
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
-
 
     if (doQuery)
     {
@@ -677,6 +685,8 @@ Mesh.prototype.render = function (shader)
 
         // console.log("available", available);
     }
+
+    this.unBind();
 };
 
 Mesh.prototype.setNumInstances = function (n)
