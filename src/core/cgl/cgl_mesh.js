@@ -100,25 +100,13 @@ Mesh.prototype.getAttribute = function (name)
 Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 {
     if (!attr) return;
-    // const attr = this.getAttribute(attrName);
-    // if (!attr)
-    // {
-    //     // console.log("no attr found", attrName);
-    //     return;
-    // }
     if (!start && !end) return;
 
-
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
-
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
-    // void gl.bufferData(target, ArrayBufferView srcData, usage, srcOffset, length);
-    // void gl.bufferSubData(target, dstByteOffset, ArrayBufferView srcData, srcOffset, length);
 
-    this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
-    // this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array, 0, 10000);
-
-    // console.log("set range,", attrName, end - start);
+    if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
+    else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
 };
 
 Mesh.prototype._bufferArray = function (array, attr)

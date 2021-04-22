@@ -46,8 +46,13 @@
                 "group": "Variable"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.User.pandur.VarTriggerString"
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Vars.VarTriggerString"
     },
     "coreLibs": [
         "vargetset"
