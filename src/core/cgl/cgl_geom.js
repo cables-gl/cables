@@ -547,7 +547,7 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 
     let count = 0;
     let i = 0;
-    // this.vertexNormals = [];
+    this.vertexNormals = [];
 
     for (i = 0; i < this.verticesIndices.length; i += 3)
     {
@@ -668,10 +668,7 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
     if (newBiTangents.length > 0) this.biTangents = newBiTangents;
     this.verticesIndices.length = 0;
     if (reIndex) this.verticesIndices = newIndizes;
-
-    console.log(this.vertexNormals);
     if (!dontCalcNormals) this.calculateNormals();
-    console.log(this.vertexNormals);
 };
 
 Geometry.prototype.calcBarycentric = function ()
