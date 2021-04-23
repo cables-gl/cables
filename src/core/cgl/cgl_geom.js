@@ -535,7 +535,7 @@ Geometry.prototype.isIndexed = function ()
  * @param {Boolean}
  * @description remove all vertex indizes, vertices array will contain 3*XYZ for every triangle
  */
-Geometry.prototype.unIndex = function (reIndex)
+Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 {
     const newVerts = [];
     const newIndizes = [];
@@ -668,7 +668,8 @@ Geometry.prototype.unIndex = function (reIndex)
     if (newBiTangents.length > 0) this.biTangents = newBiTangents;
     this.verticesIndices.length = 0;
     if (reIndex) this.verticesIndices = newIndizes;
-    this.calculateNormals();
+
+    if (!dontCalcNormals) this.calculateNormals();
 };
 
 Geometry.prototype.calcBarycentric = function ()
