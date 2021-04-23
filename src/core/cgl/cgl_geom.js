@@ -547,7 +547,7 @@ Geometry.prototype.unIndex = function (reIndex, dontCalcNormals)
 
     let count = 0;
     let i = 0;
-    this.vertexNormals = this.vertexNormals || [];
+    // this.vertexNormals = this.vertexNormals || [];
 
     for (i = 0; i < this.verticesIndices.length; i += 3)
     {
