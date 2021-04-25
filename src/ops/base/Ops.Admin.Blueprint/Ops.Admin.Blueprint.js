@@ -165,7 +165,7 @@ function update()
     {
         // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
         let blueprintUrl = "https://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
-        if (document.location.hostname.indexOf("devsandbox") > 0)
+        if (document.location.hostname.indexOf("dev") >= 0)
         {
             blueprintUrl = "https://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
         }

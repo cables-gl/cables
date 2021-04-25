@@ -25,7 +25,7 @@ var gltfMesh=class
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
-    }
+}
     fillGeomAttribs(gltf,geom,attribs)
     {
         if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
@@ -117,7 +117,7 @@ var gltfMesh=class
             if(this.geom.vertices.length/3>64000)
             {
                 g=this.geom.copy();
-                g.unIndex();
+                g.unIndex(false,true);
             }
 
             this.mesh=new CGL.Mesh(cgl,g);

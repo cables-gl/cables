@@ -127,7 +127,6 @@ function onmouseclick(e)
     mouseClick.trigger();
 }
 
-
 function onMouseLeave(e)
 {
     relLastX = 0;
@@ -258,13 +257,13 @@ function addListeners()
         listenerElement.addEventListener("touchstart", ontouchstart);
     }
 
-    listenerElement.addEventListener("click", onmouseclick);
     listenerElement.addEventListener("mousemove", onmousemove);
     listenerElement.addEventListener("mouseleave", onMouseLeave);
     listenerElement.addEventListener("mousedown", onMouseDown);
     listenerElement.addEventListener("mouseup", onMouseUp);
     listenerElement.addEventListener("mouseenter", onMouseEnter);
     listenerElement.addEventListener("contextmenu", onClickRight);
+    listenerElement.addEventListener("click", onmouseclick);
 }
 
 active.onChange = function ()
