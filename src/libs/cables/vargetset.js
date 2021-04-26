@@ -110,7 +110,7 @@ const VarSetOpWrapper = class
 
     _setVarValue(triggered)
     {
-        if (!this._varNamePort.get()) return console.warn("[vargetset] no varnameport");
+        if (!this._varNamePort.get()) return;// console.warn("[vargetset] no varnameport");
 
         const name = this._varNamePort.get();
 
