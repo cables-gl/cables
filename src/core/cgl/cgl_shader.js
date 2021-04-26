@@ -1401,12 +1401,14 @@ Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = functi
 
         .endl() + "void main()"
         .endl() + "{"
-        .endl() + "   texCoord=attrTexCoord;"
-        .endl() + "   norm=attrVertNormal;"
-        .endl() + "   vec4 pos=vec4(vPosition,  1.0);"
-        .endl() + "   mat4 mMatrix=modelMatrix;"
-        .endl() + "   {{MODULE_VERTEX_POSITION}}"
-        .endl() + "   gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;"
+        .endl() + "    texCoord=attrTexCoord;"
+        .endl() + "    norm=attrVertNormal;"
+        .endl() + "    vec4 pos=vec4(vPosition,  1.0);"
+        .endl() + "    vec3 tangent=attrTangent;"
+        .endl() + "    vec3 bitangent=attrBiTangent;"
+        .endl() + "    mat4 mMatrix=modelMatrix;"
+        .endl() + "    {{MODULE_VERTEX_POSITION}}"
+        .endl() + "    gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;"
         .endl() + "}";
 };
 
