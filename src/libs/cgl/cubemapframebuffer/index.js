@@ -82,8 +82,8 @@ class CubemapFramebuffer
             "width": this.width,
             "height": this.height,
             "isFloatingPointTexture": true,
-            "filter": CGL.Texture.FILTER_LINEAR,
-            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+            "filter": this._options.filter,
+            "wrap": this._options.wrap
         });
 
         this.initializeRenderbuffers();
@@ -304,6 +304,11 @@ class CubemapFramebuffer
         this._cgl.popFrameBuffer();
 
         this._cgl.resetViewPort();
+    }
+
+    updateMipMap()
+    {
+        this.texture.updateMipMap();
     }
 }
 
