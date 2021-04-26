@@ -69,7 +69,6 @@ class CubemapTexture
         {
             console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
             this.filter = CGL.Texture.FILTER_NEAREST;
-            console.log("filter set back to nearest");
         }
 
         this._setFilter();
