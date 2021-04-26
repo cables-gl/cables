@@ -5,6 +5,8 @@ const
     height = op.inValue("Height", 500),
     zNear = op.inValue("frustum near", -500),
     zFar = op.inValue("frustum far", 500),
+    fixAxis = op.inSwitch("Axis", ["X", "Y"], "X"),
+
     flipX = op.inBool("Flip X", false),
     flipY = op.inBool("Flip Y", false),
     zeroY = op.inBool("Zero Y", false),

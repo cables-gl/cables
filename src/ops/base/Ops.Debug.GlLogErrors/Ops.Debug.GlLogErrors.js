@@ -5,32 +5,30 @@ const gl = op.patch.cgl.gl;
 const cgl = op.patch.cgl;
 
 const originals = {};
-const counts = {};
-const durations = {};
-let branches = {};
-let firsttime = true;
+let shouldStart = true;
+let count = 0;
 
-let count=0;
+exec.onLinkChanged =
+next.onLinkChanged = () =>
+{
+    end();
+    shouldStart = true;
+};
 
 exec.onTriggered = function ()
 {
-    count=0;
-    if (firsttime)
-    {
-        start();
-    }
+    count = 0;
+    if (shouldStart) start();
 
     next.trigger();
 
-    firsttime = false;
-
+    shouldStart = false;
 };
 
 function glGetError()
 {
     return op.patch.cgl.gl.getError();
     // return originals["getError"].apply(this, arguments);
-
 }
 
 function profile(func, funcName)
@@ -41,7 +39,7 @@ function profile(func, funcName)
         // const start = performance.now(),
         let returnVal = func.apply(this, arguments);
         // op.patch.cgl.gl.getError();
-        const error=glGetError();
+        const error = glGetError();
 
         if (error != gl.NO_ERROR)
         {
@@ -58,42 +56,28 @@ function profile(func, funcName)
             }
             if (error == gl.NO_ERROR) errStr = "NO_ERROR";
 
-            console.warn("GL ERROR "+count+"th command: ",funcName);
-            console.log("arguments",arguments);
+            console.warn("GL ERROR " + count + "th command: ", funcName);
+            console.log("arguments", arguments);
 
             console.log("gl error [" + this.canvas.id + "]: ", error, errStr);
             op.patch.printTriggerStack();
             console.log((new Error()).stack);
 
-            const error2=glGetError();
-            console.log("err after",error2);
+            op.patch.printTriggerStack();
 
+            const error2 = glGetError();
+            console.log("err after", error2);
         }
-
-
 
         return returnVal;
     };
 }
 
-function resetStats()
-{
-    branches = {};
-    CABLES.profilerBranchesTimes = {};
-
-    for (const i in originals)
-    {
-        durations[i] = 0;
-        counts[i] = 0;
-    }
-}
-
 function start()
 {
-
     for (const i in gl)
     {
-        if (typeof gl[i] == "function" && i!="getError")
+        if (typeof gl[i] == "function" && i != "getError")
         {
             originals[i] = gl[i];
             const orig = originals[i];
@@ -107,7 +91,6 @@ function end()
 {
     cgl.debugOneFrame = false;
     for (const i in gl)
-        if (typeof gl[i] == "function")
+        if (originals[i] && typeof gl[i] == "function")
             gl[i] = originals[i];
 }
-

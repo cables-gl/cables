@@ -30,7 +30,10 @@ const VarSetOpWrapper = class
 
         if (this._triggerPort)
         {
-            this._triggerPort.onTriggered = this._setVarValue.bind(this);
+            this._triggerPort.onTriggered = () =>
+            {
+                this._setVarValue(true);
+            };
         }
         else
         {
@@ -105,12 +108,15 @@ const VarSetOpWrapper = class
         this._updateName();
     }
 
-    _setVarValue()
+    _setVarValue(triggered)
     {
         if (!this._varNamePort.get()) return console.warn("[vargetset] no varnameport");
 
-        this._op.patch.setVarValue(this._varNamePort.get(), this._valuePort.get());
-        if (this._nextPort) this._nextPort.trigger();
+        const name = this._varNamePort.get();
+
+        this._op.patch.setVarValue(name, this._valuePort.get());
+
+        if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };
 
