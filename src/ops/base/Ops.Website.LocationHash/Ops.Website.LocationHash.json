@@ -23,16 +23,17 @@
         ],
         "portsOut": [
             {
-                "type": 5,
-                "name": "Hash"
-            },
-            {
                 "type": 2,
                 "name": "Values"
             },
             {
                 "type": 1,
                 "name": "Changed"
+            },
+            {
+                "type": 0,
+                "name": "Matching",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Website.LocationHash"
