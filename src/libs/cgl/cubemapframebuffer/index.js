@@ -310,7 +310,7 @@ class CubemapFramebuffer
 
     updateMipMap()
     {
-        this.texture.updateMipMap();
+        if (this.texture) this.texture.updateMipMap();
     }
 }
 
