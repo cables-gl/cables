@@ -57,6 +57,7 @@ class CubemapFramebuffer
             "isFloatingPointTexture": false
         };
 
+        this.name = this._options.name || "unknown cubemapframebuffer";
         if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
         if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
         if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
@@ -74,7 +75,7 @@ class CubemapFramebuffer
         }
 
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
-
+        if (!this._options.hasOwnProperty("wrap")) this._options.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
 
         console.log("cubemapframebuffer created");
 
@@ -83,7 +84,8 @@ class CubemapFramebuffer
             "height": this.height,
             "isFloatingPointTexture": true,
             "filter": this._options.filter,
-            "wrap": this._options.wrap
+            "wrap": this._options.wrap,
+            "name": this.name + " cubemaptexture"
         });
 
         this.initializeRenderbuffers();

@@ -151,7 +151,9 @@ Light.prototype.createFramebuffer = function (width, height, options)
     {
         if (!this.hasCubemap())
         {
-            this._cubemap = new CGL.CubemapFramebuffer(this._cgl, fbWidth, fbHeight, {});
+            this._cubemap = new CGL.CubemapFramebuffer(this._cgl, fbWidth, fbHeight, {
+                "name": "point light shadowmap"
+            });
         }
         else
         {

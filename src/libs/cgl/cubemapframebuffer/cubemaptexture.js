@@ -37,7 +37,7 @@ class CubemapTexture
         this.flip = options.flip || true;
         this.flipped = false;
         this._fromData = true;
-        this.name = "cubemap unknown";
+        this.name = options.name || "cubemap unknown";
 
         this._cgl.profileData.profileTextureNew++;
 
