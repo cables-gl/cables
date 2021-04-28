@@ -141,6 +141,7 @@ To keep consistency along the many shader ops cables includes, there are variabl
 ### Default vertex attributes
 
 The following attributes are passed to the vertex shader from every renderable mesh:
+
 | Name | Data Type | Function |
 | ----------- | --------- | ------ |
 | `vPosition`| `vec3`| vertex position in object space|
@@ -153,13 +154,14 @@ The following attributes are passed to the vertex shader from every renderable m
 ### Core matrices
 
 The [following matrices](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-model-view-and-projection-matrices) are passed as uniforms to every shader:
+
 | Name | Data Type | Function |
 | ----------- | --------- | ------ |
 | `modelMatrix`| `mat4`|the model matrix|
 | `viewMatrix` | `mat4`|the view matrix|
-<!-- | `projMatrix`| `mat4`|the projection matrix|
+| `projMatrix`| `mat4`|the projection matrix|
 | `mvMatrix`| `mat4`|premultiplied model-view matrix|
-| `inverseViewMatrix`| `mat4`|the inverted view matrix| -->
+| `inverseViewMatrix`| `mat4`|the inverted view matrix|
 
 ### Default variables
 
