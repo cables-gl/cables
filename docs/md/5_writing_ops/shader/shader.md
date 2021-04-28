@@ -44,8 +44,9 @@ void main()
 }
 ```
 
+
 ```glsl
-// FRAGMENT SHADER
+/* FRAGMENT SHADER */
 
 /* layout qualifiers */
 IN vec2 texCoord;
@@ -236,7 +237,6 @@ Cables allows the following [preprocessor directives](https://www.khronos.org/op
 Let's take the default CustomShader's fragment shader code and add preprocessor directives to it:
 
 ```glsl
-
 #define PI 3.14159265
 #define TAU (2.0*PI)
 
@@ -308,6 +308,7 @@ Cables features a few default defines that get added to **every** shader on comp
 | `#define gl_FragColor outColor`| This ensures cross-compatibility for the color output of fragment shaders between WebGL1 and WebGL2.|
 
 ### Module injection points
+
 
 ```glsl
 // VERTEX SHADER
@@ -516,9 +517,9 @@ void main()
 
 So, there are a few things to notice here. First off: The module injection points `{{MODULES_HEAD}}` and `{{MODULE_VERTEX_POSITION}}` are no longer there. They have been replaced with the following segments:
 
+
 ```glsl
 // MODULES_HEAD
-
 
 // active mods: ---------------
 // 0.0. fresnelGlow (MODULE_VERTEX_POSITION)
@@ -543,6 +544,7 @@ UNI float mod12_inFresnelExponent; // mod: fresnelGlow
 
 //---- MOD: group:12: idx:0 - prfx:mod12_ - fresnelGlow ------
 ```
+
 
 ```glsl
 // MODULE_VERTEX_POSITION
