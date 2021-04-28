@@ -1,10 +1,10 @@
 # Writing Shaders
 
-In the following section, we are going to take an in-depth look at how to write (and modify) shaders in cables. To properly understand this guide, it is recommended that you already have some basic [shader knowledge](http://www.thebookofshaders.com) and are familiar with the basic [GLSL](https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)) syntax. Also, you can create a patch with a [CustomShader](https://cables.gl/op/Ops.Gl.Shader.CustomShader_v2) to follow along with this tutorial, as we shall explain the ins and outs of authoring shaders in cables with this op.
+In the following section, we are going to take an in-depth look at how to write (and modify) shaders in cables. To properly understand this guide, it is recommended that you already have some basic [shader knowledge](http://www.thebookofshaders.com) and are familiar with the basic [GLSL](https://www.khronos.org/opengl/wiki/Core_Language_(GLSL)) syntax. Also, you can create a patch with a [CustomShader](https://cables.gl/op/Ops.Gl.Shader.CustomShader_v2) to follow along with this tutorial, as we shall explain the ins and outs of authoring shaders in cables with this op. The CustomShader op allows you to quickly write your own shaders.
 
 ## Preqrequisites
 
-To get started, let's have a look at the CustomShader op's vertex and fragment shader source code:
+To get started, let's have a look at the CustomShader op's vertex and fragment shader default code:
 
 ```glsl
 // VERTEX SHADER
@@ -90,7 +90,7 @@ To counter these differences in syntax when shaders are compiled, cables uses it
 
 The correct qualifiers get injected at compile-time depending on which WebGL version is used in the patch. Thus it is possible to write one shader for both WebGL versions. You can of course still use the original qualifiers, but your shader might not work in both WebGL versions. Please see the following tables for all availible layout qualifiers in cables:
 
-------
+
 
 #### Vertex Shader Layout Qualifiers
 
@@ -107,7 +107,19 @@ The correct qualifiers get injected at compile-time depending on which WebGL ver
 | `IN` | `in`      | `varying`   |
 | `UNI` | `uniform` | `uniform`  |
 
-------
+#### Declaring Uniforms in CustomShader
+
+If you open the CustomShader's fragment shader code, you will see the following code:
+
+![customshader_defines](img/customshader_default.png)
+
+You can see that there are no declared uniforms at the moment.
+
+If we add uniforms to the CustomShader, the op looks like this:
+
+![customshader_defines](img/customshader_uniforms.png)
+
+As soon as you declare uniforms (such as a `vec3` or a `sampler2D`) in your shader code, the input ports are automatically added to the CustomShader op.
 
 ## Predefined shader variables
 
@@ -546,13 +558,10 @@ UNI float mod12_inFresnelExponent; // mod: fresnelGlow
 
 The `MOD_`-prefix has been replaced with a `mod12`-prefix. Every shader extension gets their own unique identifier to not clash with other shader extensions. If you use multiple shader effects, every shader extension will get their own `modXX`-prefix.
 
-Have a look at the following [example](https://cables.gl/edit/NPCCdA): Disconnect the FresnelGlow op and look at the vertex shader's code. After that, readd the module and inspect the code again.
+Have a look at this [example](https://cables.gl/edit/NPCCdA). Disconnect the FresnelGlow op and look at the vertex shader's code. After that, re-add the module and inspect the code again.
 
-## CustomShader op
+If you want to port [shadertoy](https://www.shadertoy.com) shaders to cables, have a look at [this section of our documentation](https://cables.gl/docs/faq/shadertoy/shadertoy).
 
-A little note on the CustomShader op:
+If you still need help, feel free to [contact us on Discord](https://discord.gg/AGTarWv). We are happy to help!
 
-As soon as you declare variables as uniforms (such as a `vec3` or a `sampler2D`), the input ports are automatically added to the op.
-
-
-If you still need help, feel free to [contact us on Discord](https://discord.gg/AGTarWv). We are happy to help! Happy shader coding!
+Happy shader coding!
