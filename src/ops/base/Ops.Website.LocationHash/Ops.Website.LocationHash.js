@@ -1,16 +1,9 @@
 const routeIn = op.inString("Route");
-const hashOut = op.outString("Hash");
 const parsedOut = op.outObject("Values", {});
 const changedOut = op.outTrigger("Changed");
+const outMatching = op.outBool("Matching");
 
 let router = null;
-let oldValues = {};
-
-op.onLoaded = () =>
-{
-    console.log("window.location.href", window.location.href, window.location.href.split("#", 2)[1]);
-    hashOut.set(window.location.href.split("#", 2)[1] || "");
-};
 
 if ("onhashchange" in window)
 {
@@ -31,74 +24,56 @@ routeIn.onChange = function ()
 
 function hashChange(event)
 {
-    if (event.silent) return;
     op.setUiError("unsupported", null);
     let values = {};
     const fields = event.newURL.split("#");
     let hash = "";
-    if (fields.length > 1)
+    let hasMatch = false;
+    if (routeIn.get())
     {
-        for (let i = 1; i < fields.length; i++)
+        if (fields.length > 1)
         {
-            let route = routeIn.get();
-            let match = fields[i];
-            hash += "#" + fields[i];
-            if (!route)
+            hasMatch = false;
+            for (let i = 1; i < fields.length; i++)
             {
-                route = "/";
-                match = "/?" + fields[i];
-            }
-            const matched = router.matchLocation(route, match);
-            if (matched)
-            {
-                if (matched.data) values = Object.assign(values, matched.data);
-                if (matched.params) values = Object.assign(values, matched.params);
+                let route = routeIn.get();
+                let match = fields[i];
+                hash += "#" + fields[i];
+                const matched = router.matchLocation(route, match);
+                if (matched)
+                {
+                    if (matched.data) values = Object.assign(values, matched.data);
+                    if (matched.params) values = Object.assign(values, matched.params);
+
+                    hasMatch = true;
+                }
             }
         }
     }
-    let changed = false;
-    // if (Object.keys(values).length !== Object.keys(oldValues).length)
-    // {
-    //     changed = true;
-    // }
-    // else
+    else
     {
-        const newKeys = Object.keys(values);
-        for (let i = 0; i < newKeys.length; i++)
-        {
-            const key = newKeys[i];
-            if (!oldValues[key])
-            {
-                changed = true;
-                break;
-            }
-            if (oldValues[key] !== values[key])
-            {
-                changed = true;
-                break;
-            }
-        }
-        const oldKeys = Object.keys(values);
-        for (let i = 0; i < oldKeys.length; i++)
-        {
-            const key = oldKeys[i];
-            if (!values[key])
-            {
-                changed = true;
-                break;
-            }
-            if (oldValues[key] !== values[key])
-            {
-                changed = true;
-                break;
-            }
-        }
+        const all = event.newURL.split("#", 2);
+        hash = all[1] || "";
+        hasMatch = true;
     }
 
-    hashOut.set(hash);
-    parsedOut.set(values);
-    oldValues = values;
-    if (changed && !event.silent)
+    if (hasMatch)
+    {
+        let paramStr = hash.split("?", 2);
+        let params = parseQuery(paramStr[1]);
+        let keys = Object.keys(params);
+        keys.forEach((key) =>
+        {
+            if (!values.hasOwnProperty(key)) values[key] = params[key];
+        });
+    }
+
+    outMatching.set(hasMatch);
+    if (!(parsedOut.get().length === 0 && values.length === 0))
+    {
+        parsedOut.set(values);
+    }
+    if (hasMatch && !event.silent)
     {
         changedOut.trigger();
     }
@@ -127,4 +102,23 @@ function getTypedValue(val)
         }
     }
     return value;
+}
+
+function parseQuery(str)
+{
+    if (typeof str != "string" || str.length == 0) return {};
+    let s = str.split("&");
+    let s_length = s.length;
+    let bit, query = {}, first, second;
+    for (let i = 0; i < s_length; i++)
+    {
+        bit = s[i].split("=");
+        first = decodeURIComponent(bit[0]);
+        if (first.length == 0) continue;
+        second = decodeURIComponent(bit[1]);
+        if (typeof query[first] == "undefined") query[first] = second;
+        else if (query[first] instanceof Array) query[first].push(second);
+        else query[first] = [query[first], second];
+    }
+    return query;
 }
