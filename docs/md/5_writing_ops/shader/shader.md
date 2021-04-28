@@ -156,10 +156,10 @@ The [following matrices](http://www.opengl-tutorial.org/beginners-tutorials/tuto
 | Name | Data Type | Function |
 | ----------- | --------- | ------ |
 | `modelMatrix`| `mat4`|the model matrix|
-| `viewMatrix` | `mat4`| the view matrix|
-| `projMatrix`| `mat4` |the projection matrix|
-| `mvMatrix`| `mat4` |premultiplied model-view matrix|
-| `inverseViewMatrix`| `mat4` |the inverted view matrix|
+| `viewMatrix` | `mat4`|the view matrix|
+<!-- | `projMatrix`| `mat4`|the projection matrix|
+| `mvMatrix`| `mat4`|premultiplied model-view matrix|
+| `inverseViewMatrix`| `mat4`|the inverted view matrix| -->
 
 ### Default variables
 
@@ -215,7 +215,7 @@ Cables allows the following [preprocessor directives](https://www.khronos.org/op
 |`#define`| Defines static variables |
 |`#ifdef {name}` | Defines a conditional branch of shader code |
 |`#ifndef {name}` | Defines a conditional branch of shader code (negated) |
-|`#endif` | Defines a conditional branch of shader code (negated) |
+|`#endif` | End of a conditional branch |
 
 #### Example for preprocessor directives
 
