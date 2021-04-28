@@ -94,18 +94,18 @@ The correct qualifiers get injected at compile-time depending on which WebGL ver
 
 #### Vertex Shader Layout Qualifiers
 
-| GLSL 1.0    | GLSL 3.0  | cables |
+| cables | GLSL 3.0  | GLSL 1.0   |
 | ----------- | --------- | ------ |
-| `varying`   | `out`     | `OUT`  |
-| `attribute` | `in`      | `IN`   |
-| `uniform`   | `uniform` | `UNI`  |
+| `OUT`   | `out`     | `varying`  |
+| `IN` | `in`      | `attribute`   |
+| `UNI`   | `uniform` | `uniform`  |
 
 #### Fragment Shader Layout Qualifiers
 
-| GLSL 1.0  | GLSL 3.0  | cables |
+| cables  | GLSL 3.0  | GLSL 1.0 |
 | --------- | --------- | ------ |
-| `varying` | `in`      | `IN`   |
-| `uniform` | `uniform` | `UNI`  |
+| `IN` | `in`      | `varying`   |
+| `UNI` | `uniform` | `uniform`  |
 
 ------
 
@@ -141,25 +141,25 @@ To keep consistency along the many shader ops cables includes, there are variabl
 ### Default vertex attributes
 
 The following attributes are passed to the vertex shader from every renderable mesh:
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `vec3`| `vPosition`| vertex position in object space|
-| `vec2` | `attrTexCoord` | texture coordinates per vertex|
-| `vec3`| `attrVertNormal` | normal per vertex|
-| `vec3`| `attrVertTangent` | tangent per vertex|
-| `vec3`| `attrVertBiTangent` | bitangent per vertex|
-| `float`| `attrVertIndex` | [index of the vertex](https://subscription.packtpub.com/book/game_development/9781849691727/2/ch02lvl1sec21/vertices-and-indices)|
+| `vPosition`| `vec3`| vertex position in object space|
+| `attrTexCoord` | `vec2` | texture coordinates per vertex|
+| `attrVertNormal`| `vec3` | normal per vertex|
+| `attrVertTangent`| `vec3` | tangent per vertex|
+| `attrVertBiTangent`| `vec3` | bitangent per vertex|
+| `attrVertIndex`| `float` | [index of the vertex](https://subscription.packtpub.com/book/game_development/9781849691727/2/ch02lvl1sec21/vertices-and-indices)|
 
 ### Core matrices
 
 The [following matrices](http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-model-view-and-projection-matrices) are passed as uniforms to every shader:
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `mat4`| `modelMatrix`|the model matrix|
-| `mat4` | `viewMatrix`| the view matrix|
-| `mat4`| `projMatrix` |the projection matrix|
-| `mat4`| `mvMatrix` |premultiplied model-view matrix|
-| `mat4`| `inverseViewMatrix` |the inverted view matrix|
+| `modelMatrix`| `mat4`|the model matrix|
+| `viewMatrix` | `mat4`| the view matrix|
+| `projMatrix`| `mat4` |the projection matrix|
+| `mvMatrix`| `mat4` |premultiplied model-view matrix|
+| `inverseViewMatrix`| `mat4` |the inverted view matrix|
 
 ### Default variables
 
@@ -167,19 +167,19 @@ For shaders to be able to consume cables' shader modules correctly, certain vari
 
 #### Vertex Shader
 
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `mat4`| `mMatrix`|the model matrix|
-| `vec4` | `pos`| the vertex' current position. NOTE: this is a `vec4` and not a `vec3` like the variable `vPos`. Make sure you do not forget to cast.|
-| `vec3`| `norm` |the vertex normal. This is usually declared as an `OUT` variable. Still it needs to be declared and assigned before module injection.|
-| `vec3`| `tangent` |the vertex' tangent|
-| `vec3`| `bitangent` |the vertex' bitangent|
+| `mMatrix`| `mat4`|the model matrix|
+| `pos` | `vec4`| the vertex' current position. NOTE: this is a `vec4` and not a `vec3` like the variable `vPos`. Make sure you do not forget to cast.|
+| `norm`| `vec3` |the vertex normal. This is usually declared as an `OUT` variable. Still it needs to be declared and assigned before module injection.|
+| `tangent`| `vec3` |the vertex' tangent|
+| `bitangent`| `vec3` |the vertex' bitangent|
 
 #### Fragment Shader
 
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `vec4`| `col`|the color of the current fragment before module injection. |
+| `col`| `vec4`|the color of the current fragment before module injection. |
 
 These variables are used for things like [instancing](https://cables.gl/op/Ops.Gl.MeshInstancer_v4) and [displacement](https://cables.gl/op/Ops.Gl.ShaderEffects.VertexDisplacementMap_v4) or [color manipulation](https://cables.gl/op/Ops.Gl.ShaderEffects.ColorArea_v3).
 
@@ -187,24 +187,24 @@ These variables are used for things like [instancing](https://cables.gl/op/Ops.G
 
 The following vectors are used as varying variables.
 
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `vec2`| `texCoord`|the current vertex texture coordinate|
-| `vec3` | `norm`| the current normal|
+| `texCoord`| `vec2`|the current vertex texture coordinate|
+| `norm` | `vec3`| the current normal|
 
 ### Default output variables
 
 #### Vertex Shader
 
-| Data Type | Name  | Function |
+| Name | Data Type  | Function |
 | ----------- | --------- | ------ |
-| `vec4`| `gl_Position`| GLSL's default vertex shader output variable |
+| `gl_Position`| `vec4`| GLSL's default vertex shader output variable |
 
 #### Fragment Shader
 
-| Data Type | Name  | Function |
+| Name | Data Type | Function |
 | ----------- | --------- | ------ |
-| `vec4`| `outColor`|drop in replacement for `gl_FragColor`. |
+| `outColor`| `vec4`|drop in replacement for `gl_FragColor`. |
 
 ### Preprocessor Directives
 
@@ -500,7 +500,7 @@ void main()
 }
 ```
 
-So, there are a few things to notice here. First off: The module injection points `{{{MODULES_HEAD}}}` and `{{{MODULE_VERTEX_POSITION}}}` are no longer there. They have been replaced with the following segments:
+So, there are a few things to notice here. First off: The module injection points `{{MODULES_HEAD}}` and `{{MODULE_VERTEX_POSITION}}` are no longer there. They have been replaced with the following segments:
 
 ```glsl
 // MODULES_HEAD
