@@ -1,5 +1,6 @@
 # Shadertoy
 
+Before you port shaders from shadertoy, make sure you know the ins and outs of [programming shaders in cables](https://cables.gl/docs/5_writing_ops/shader/shader).
 Go to this [example page](https://cables.gl/p/5f4cbae9f131bc0ec30591da) to see a basic setup of shadertoy in cables.
 Youtube tutorial [porting shadertoy to cables part 01](https://youtu.be/j_ins4RW0c8)
 
@@ -9,6 +10,7 @@ The main ops that you'll need are:
 - [shader2Texture op](https://cables.gl/op/Ops.Gl.Shader.Shader2Texture)
 
 standard glsl in [shadertoy](https://www.shadertoy.com/) and the equivalent in cables is:
+
 ```javascript
 fragCoord.xy                                //pixel coordinates in shadertoy
 gl_FragCoord.xy                             //pixel coordinates in cables
@@ -16,9 +18,10 @@ gl_FragCoord.xy                             //pixel coordinates in cables
 vec2 uv =  fragCoord/iResolution.xy;        // normalized pixel co-ordinates from 0-1 on shadertoy
 IN vec2 texcoord                            // normalized pixel co-ordinates from 0-1 in cables,already created
 ```
+
 The uniforms on [shadertoy](https://www.shadertoy.com/) and their equivalent in cables are as follows:
 
-```javascript
+```glsl
 uniform vec3      iResolution;              // viewport resolution (in pixels)
 UNI vec3          iResolution;              // get width and height output from mainloop,canvasinfo for aspect ratio/z
 
@@ -49,6 +52,3 @@ UNI float         iSampleRate;              // Use the audiobuffer op to access 
 uniform vec4      iMouse;                   // mouse pixel coords. xy: current (if MLB down), zw: click
 UNI vec4          iMouse                    // use mouse op. see example patch for in depth explanation.
 ```
-
-
-
