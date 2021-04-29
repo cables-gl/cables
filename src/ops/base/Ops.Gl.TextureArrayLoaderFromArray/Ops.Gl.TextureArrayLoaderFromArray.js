@@ -5,6 +5,7 @@ const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to ed
 const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 const unpackAlpha = op.addInPort(new CABLES.Port(op, "unpackPreMultipliedAlpha", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 const inCaching = op.inBool("Caching", false);
+const inPatchAsset = op.inBool("Asset in patch", false);
 const arrOut = op.outArray("TextureArray");
 
 // var textureOut=op.outTexture("texture");
@@ -23,6 +24,7 @@ let loadingId = null;
 const arr = [];
 arrOut.set(arr);
 
+inPatchAsset.onChange =
 flip.onChange = function () { reload(); };
 filenames.onChange = reload;
 
@@ -53,6 +55,9 @@ function loadImage(_i, _url, nocache, cb)
     const i = _i;
     if (!url) return;
     // url=url.replace("XXX",i);
+
+    if (inPatchAsset.get())
+        url = op.patch.getAssetPath() + url;
 
     url = op.patch.getFilePath(url);
     if (!inCaching.get())

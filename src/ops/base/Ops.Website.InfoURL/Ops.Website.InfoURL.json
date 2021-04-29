@@ -10,33 +10,38 @@
     "authorName": "pandur",
     "created": 1550903110452,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "URL"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Host"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Hash"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Pathname"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Protocol"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Port"
+            },
+            {
+                "type": 1,
+                "name": "Hash Changed"
             }
         ],
-        "name": "Ops.Website.DocumentURL2"
+        "name": "Ops.Website.InfoURL"
     },
     "summary": "Information about the current URL",
     "issues": "",

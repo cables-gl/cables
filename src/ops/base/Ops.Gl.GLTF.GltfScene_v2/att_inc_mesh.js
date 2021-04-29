@@ -32,7 +32,37 @@ var gltfMesh=class
         if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
         if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
         if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
-        if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+        if(attribs.hasOwnProperty("COLOR_0"))
+        {
+
+
+            // if( gltf.accBuffers[attribs.COLOR_0] instanceof Uint16Array)
+            // {
+            //     // const newBuff=new Uin
+            //     console.log("YES 16!");
+
+            //     const sixtyfour=(256*256)-1;
+
+            //     geom.vertexColors=new Float32Array(gltf.accBuffers[attribs.COLOR_0].length);
+            //     // geom.vertexColors=Float32Array.from(gltf.accBuffers[attribs.COLOR_0]);
+            //     // console.log(geom.vertexColors);
+
+            //     for(let i=0;i<geom.vertexColors.length;i++)
+            //     {
+            //         geom.vertexColors[i]=gltf.accBuffers[attribs.COLOR_0]/sixtyfour;
+
+            //     }
+
+            // }
+            // else
+            // {
+                geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+
+            // }
+
+
+            console.log("geom.vertexColors",geom.vertexColors)
+        }
 
 // Implementation note: When normals and tangents are specified,
 // client implementations should compute the bitangent by taking

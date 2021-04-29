@@ -52,14 +52,12 @@ fullscreen.onChange = updateFullscreenButton;
 setTimeout(updateFullscreenButton, 100);
 let fsElement = null;
 
-
 let winhasFocus = true;
 let winVisible = true;
 
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
-
 
 function getFpsLimit()
 {
@@ -73,7 +71,6 @@ function getFpsLimit()
 
     return fpsLimit.get();
 }
-
 
 function updateFullscreenButton()
 {
@@ -136,7 +133,6 @@ op.onDelete = function ()
     cgl.gl.clearColor(0, 0, 0, 0);
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 };
-
 
 function render(time)
 {
