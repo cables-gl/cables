@@ -27,6 +27,7 @@ const VarSetOpWrapper = class
 
         this._varNamePort.onChange = this._updateName.bind(this);
 
+        this._valuePort.changeAlways = true;
 
         if (this._triggerPort)
         {
@@ -38,7 +39,6 @@ const VarSetOpWrapper = class
         else
         {
             this._valuePort.onChange = this._setVarValue.bind(this);
-            this._valuePort.changeAlways = true;
         }
 
 
