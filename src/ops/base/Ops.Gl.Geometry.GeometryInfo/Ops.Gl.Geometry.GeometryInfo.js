@@ -35,7 +35,7 @@ geometry.onChange = function ()
         if (geom.biTangents) outBiTangents.set(geom.biTangents.length / 3);
         else outBiTangents.set(0);
 
-        if (geom.vertexColors) outVertexColors.set(geom.vertexColors.length / 3);
+        if (geom.vertexColors) outVertexColors.set(geom.vertexColors.length / 4);
         else outVertexColors.set(0);
 
         if (geom.getAttributes()) outAttribs.set(Object.keys(geom.getAttributes()).length);

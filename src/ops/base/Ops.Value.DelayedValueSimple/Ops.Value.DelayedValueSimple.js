@@ -1,20 +1,19 @@
-var val=op.inValue("Value");
-var de=op.inValue("Delay",1);
+let val = op.inValue("Value");
+let de = op.inValue("Delay", 1);
 
-var outVal=op.outValue("Out Value");
+let outVal = op.outValue("Out Value");
 
-var timeout=-1;
+let timeout = -1;
 
-val.onChange=update;
-de.onChange=update;
+val.onChange = update;
+de.onChange = update;
 
 function update()
 {
     clearTimeout(timeout);
-    var v=val.get();
-    timeout=setTimeout(function()
+    let v = val.get();
+    timeout = setTimeout(function ()
     {
-        outVal.set(v);        
-    },de.get()*1000);
-    
+        outVal.set(v);
+    }, de.get() * 1000);
 }

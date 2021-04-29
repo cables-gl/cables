@@ -17,6 +17,7 @@ else
     op.setUiError("unsupported", "Your browser does not support listening to hashchanges!");
 }
 
+op.onLoaded =
 routeIn.onChange = function ()
 {
     hashChange({ "newURL": window.location.href });
