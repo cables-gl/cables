@@ -5,7 +5,7 @@ const
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
     inInvert = op.inValueBool("Invert"),
-    inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity"], "Normal"),
+    inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
@@ -90,6 +90,7 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_NORMAL", inBlend.get() == "Normal");
     mod.toggleDefine("MOD_BLEND_OPACITY", inBlend.get() == "Opacity");
     mod.toggleDefine("MOD_BLEND_MULTIPLY", inBlend.get() == "Multiply");
+    mod.toggleDefine("MOD_BLEND_ADD", inBlend.get() == "Add");
 
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());

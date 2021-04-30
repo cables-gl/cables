@@ -10,6 +10,11 @@
             "message": "Ops.User.cables.LocationHash renamed to Ops.Website.LocationHash",
             "author": "stephan",
             "date": 1615318804444
+        },
+        {
+            "message": "Ops.Website.LocationHash renamed to Ops.Website.LocationHashRoute",
+            "author": "pandur",
+            "date": 1619518741622
         }
     ],
     "authorName": "stephan",
@@ -36,7 +41,7 @@
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Website.LocationHash"
+        "name": "Ops.Website.LocationHashRoute"
     },
     "summary": "gives updated information about window.location.hash",
     "issues": "",

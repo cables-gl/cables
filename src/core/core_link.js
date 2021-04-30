@@ -2,8 +2,6 @@ import { CONSTANTS } from "./constants";
 import { EventTarget } from "./eventtarget";
 import { Log } from "./log";
 
-//
-// var CABLES=CABLES || {};
 /**
  * @external CABLES
  * @namespace Link

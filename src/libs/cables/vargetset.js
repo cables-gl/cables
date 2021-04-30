@@ -27,6 +27,7 @@ const VarSetOpWrapper = class
 
         this._varNamePort.onChange = this._updateName.bind(this);
 
+        this._valuePort.changeAlways = true;
 
         if (this._triggerPort)
         {
@@ -38,7 +39,6 @@ const VarSetOpWrapper = class
         else
         {
             this._valuePort.onChange = this._setVarValue.bind(this);
-            this._valuePort.changeAlways = true;
         }
 
 
@@ -114,6 +114,8 @@ const VarSetOpWrapper = class
 
         const name = this._varNamePort.get();
 
+        if (CABLES.watchVars && CABLES.watchVars[name])
+            console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
         this._op.patch.setVarValue(name, this._valuePort.get());
 
         if (triggered && this._nextPort) this._nextPort.trigger();

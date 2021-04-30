@@ -2,24 +2,19 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Delay",
                 "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Latest Value",
-                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Out Value",
                 "subType": "number"
             }
@@ -27,7 +22,6 @@
         "name": "Ops.Value.DelayedValueSimple"
     },
     "summary": "delay the value data flow by x seconds",
-    "updated": 1520587493431,
     "authorName": "pandur",
     "id": "89ea7e9c-0dfb-4e1e-8e61-4e79112ee533",
     "created": 1519230727595,

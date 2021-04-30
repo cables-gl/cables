@@ -118,9 +118,7 @@ function updateSoon()
         {
             op.patch.cgl.off(autoRefreshTimeout);
 
-            console.log("beginframe copytexture ", op.name);
             if (needsResUpdate)updateResolution();
-
             if (!effect)console.log("has no effect");
             if (!inTexture.get()) console.log("has no intexture");
 

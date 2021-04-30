@@ -47,6 +47,11 @@ MOD_de=1.0-smoothstep(MOD_inSizeAmountFalloffSizeX.z*MOD_inSizeAmountFalloffSize
     col.rgb=mix(col.rgb,col.rgb*MOD_color,MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
 
+#ifdef MOD_BLEND_ADD
+    col.rgb+=MOD_de*MOD_inSizeAmountFalloffSizeX.y*MOD_color;
+#endif
+
+
 #ifdef MOD_BLEND_OPACITY
     col.a*=(1.0-MOD_de*MOD_inSizeAmountFalloffSizeX.y);
 #endif
