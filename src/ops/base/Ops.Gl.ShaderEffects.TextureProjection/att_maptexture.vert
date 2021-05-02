@@ -25,6 +25,14 @@ MOD_tc.xy+=vec2(0.5,0.5);
 MOD_tc.xy+=MOD_offset;
 
 
+#ifdef MOD_TARGET_POINTSIZE
+
+
+    gl_PointSize+=texture(MOD_tex,MOD_tc).x*MOD_amount;
+
+#endif
+
+
 #ifdef MOD_MAP_TRIPLANAR
     mapTriplanar((mMatrix*vec4(attrVertNormal,1.0)).xyz,MOD_pos);
 #endif

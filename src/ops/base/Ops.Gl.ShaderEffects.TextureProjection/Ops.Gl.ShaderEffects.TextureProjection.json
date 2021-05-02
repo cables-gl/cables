@@ -24,6 +24,15 @@
             },
             {
                 "type": 0,
+                "name": "Target index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Target"
+            },
+            {
+                "type": 0,
                 "name": "Amount",
                 "subType": "number"
             },

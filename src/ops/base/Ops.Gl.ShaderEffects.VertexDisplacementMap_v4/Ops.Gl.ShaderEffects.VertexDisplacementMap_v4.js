@@ -5,6 +5,7 @@ const
     extrude = op.inValue("Extrude", 0.5),
     meth = op.inSwitch("Mode", ["Norm", "Tang", "BiTang", "*", "+", "/"], "Norm"),
     axis = op.inSwitch("Axis", ["XYZ", "XY", "X", "Y", "Z"], "XYZ"),
+    src = op.inSwitch("Coordinates", ["Tex Coords", "Mesh XY", "Mesh XZ"], "Tex Coords"),
 
     texture = op.inTexture("Texture", null, "texture"),
     channel = op.inSwitch("Channel", ["Luminance", "R", "G", "B", "A", "RGB"], "Luminance"),
@@ -12,6 +13,7 @@ const
     range = op.inSwitch("Range", ["0-1", "1-0", "Normalized"], "0-1"),
     offsetX = op.inValueFloat("Offset X"),
     offsetY = op.inValueFloat("Offset Y"),
+    scale = op.inValueFloat("Scale", 1),
 
     calcNormals = op.inValueBool("Calc Normals", false),
     removeZero = op.inValueBool("Discard Zero Values"),
@@ -22,7 +24,7 @@ const
 
 const cgl = op.patch.cgl;
 
-op.setPortGroup("Input", [texture, flip, channel, range, offsetX, offsetY]);
+op.setPortGroup("Input", [texture, flip, channel, range, offsetX, offsetY, scale]);
 op.setPortGroup("Colorize", [colorize, colorizeMin, colorizeMax]);
 
 op.toWorkPortsNeedToBeLinked(texture, next, render);
@@ -36,6 +38,7 @@ axis.onChange =
     removeZero.onChange =
     flip.onChange =
     calcNormals.onChange =
+    src.onChange =
     meth.onChange = updateDefines;
 
 const srcHeadVert = attachments.vertdisplace_head_vert;
@@ -75,6 +78,7 @@ mod.addUniformVert("t", "MOD_texture", 0);
 mod.addUniformVert("f", "MOD_extrude", extrude);
 mod.addUniformVert("f", "MOD_offsetX", offsetX);
 mod.addUniformVert("f", "MOD_offsetY", offsetY);
+mod.addUniformVert("f", "MOD_scale", scale);
 
 mod.addUniformFrag("f", "MOD_colorizeMin", colorizeMin);
 mod.addUniformFrag("f", "MOD_colorizeMax", colorizeMax);
@@ -114,6 +118,10 @@ function updateDefines()
     mod.toggleDefine("MOD_MODE_ADD", meth.get() == "+");
     mod.toggleDefine("MOD_MODE_DIV", meth.get() == "/");
     mod.toggleDefine("MOD_SMOOTHSTEP", 0);
+
+    mod.toggleDefine("MOD_COORD_TC", src.get() == "Tex Coords");
+    mod.toggleDefine("MOD_COORD_MESHXY", src.get() == "Mesh XY");
+    mod.toggleDefine("MOD_COORD_MESHXZ", src.get() == "Mesh XZ");
 
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXYZ", meth.get() == "mul xyz");
     // mod.toggleDefine("MOD_DISPLACE_METH_MULXY", meth.get() == "mul xy");

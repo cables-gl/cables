@@ -32,6 +32,15 @@
                 "name": "Axis"
             },
             {
+                "type": 0,
+                "name": "Coordinates index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Coordinates"
+            },
+            {
                 "type": 2,
                 "name": "Texture",
                 "group": "Input",
@@ -76,6 +85,12 @@
             {
                 "type": 0,
                 "name": "Offset Y",
+                "group": "Input",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
                 "group": "Input",
                 "subType": "number"
             },

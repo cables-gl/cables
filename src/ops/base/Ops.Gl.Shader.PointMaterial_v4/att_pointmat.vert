@@ -90,8 +90,14 @@ void main()
         #endif
     #endif
 
+
+
+
+
     mat4 mMatrix=modelMatrix;
     vec4 pos = vec4( vPosition, 1. );
+
+gl_PointSize=0.0;
 
     {{MODULE_VERTEX_POSITION}}
 
@@ -139,7 +145,8 @@ addPointSize*=texPointSizeMul;
         ps = ( (pointSize+addPointSize) / cameraDist) * psMul;
     #endif
 
-    gl_PointSize = ps;
+    gl_PointSize += ps;
+
 
     gl_Position = projMatrix * viewMatrix * model;
 }
