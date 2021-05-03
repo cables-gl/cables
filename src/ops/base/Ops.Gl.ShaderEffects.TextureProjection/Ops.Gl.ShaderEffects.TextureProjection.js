@@ -4,6 +4,9 @@ const
     inScale = op.inValue("Scale", 10),
 
     inBlend = op.inSwitch("Blendmode", ["Normal", "Mul", "Add"], "Normal"),
+
+    inTarget = op.inSwitch("Target", ["Color", "Pointsize"], "Color"),
+
     inAmount = op.inValueSlider("Amount", 0.3),
 
     inUseTexAlpha = op.inBool("Use Texture Alpha", false),
@@ -23,6 +26,7 @@ const
 const cgl = op.patch.cgl;
 
 inUseTexAlpha.onChange =
+inTarget.onChange =
 inBlend.onChange = inDiscard.onChange = inWorldSpace.onChange = inMethod.onChange = updateDefines;
 
 op.setPortGroup("Rotation", [inRotX, inRotY, inRotZ]);
@@ -47,7 +51,7 @@ mod.addUniformBoth("f", "MOD_rotX", inRotX);
 mod.addUniformBoth("f", "MOD_rotY", inRotY);
 mod.addUniformBoth("f", "MOD_rotZ", inRotZ);
 
-mod.addUniformFrag("t", "MOD_tex");
+mod.addUniformBoth("t", "MOD_tex");
 mod.addUniformBoth("f", "MOD_scale", inScale);
 mod.addUniformBoth("f", "MOD_amount", inAmount);
 mod.addUniformBoth("2f", "MOD_offset", inPosX, inPosY);
@@ -71,6 +75,10 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_NORMAL", inBlend.get() == "Normal");
     mod.toggleDefine("MOD_BLEND_ADD", inBlend.get() == "Add");
     mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
+    mod.toggleDefine("MOD_BLEND_MUL", inBlend.get() == "Mul");
+
+    mod.toggleDefine("MOD_TARGET_COLOR", inTarget.get() == "Color");
+    mod.toggleDefine("MOD_TARGET_POINTSIZE", inTarget.get() == "Pointsize");
 }
 
 render.onTriggered = function ()

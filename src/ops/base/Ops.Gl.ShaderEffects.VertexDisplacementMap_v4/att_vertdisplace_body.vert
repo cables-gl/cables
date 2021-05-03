@@ -1,6 +1,14 @@
 
 vec2 MOD_tc=texCoord;
 
+#ifdef MOD_COORD_MESHXY
+    MOD_tc=pos.xy;
+#endif
+#ifdef MOD_COORD_MESHXZ
+    MOD_tc=pos.xz;
+#endif
+
+
 #ifdef MOD_FLIP_Y
     MOD_tc.y=1.0-MOD_tc.y;
 #endif
@@ -10,6 +18,8 @@ vec2 MOD_tc=texCoord;
 #ifdef MOD_FLIP_XY
     MOD_tc=1.0-MOD_tc;
 #endif
+
+MOD_tc*=MOD_scale;
 
 vec4 MOD_sample=texture2D( MOD_texture, vec2(MOD_tc.x+MOD_offsetX,MOD_tc.y+MOD_offsetY) );
 vec3 MOD_disp;
