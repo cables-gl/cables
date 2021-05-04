@@ -43,9 +43,24 @@ function hashChange(event)
                 const matched = router.matchLocation(route, match);
                 if (matched)
                 {
-                    if (matched.data) values = Object.assign(values, matched.data);
-                    if (matched.params) values = Object.assign(values, matched.params);
-
+                    if (matched.data)
+                    {
+                        const keys = Object.keys(matched.data);
+                        keys.forEach((key) =>
+                        {
+                            matched.data[key] = getTypedValue(matched.data[key]);
+                        });
+                        values = Object.assign(values, matched.data);
+                    }
+                    if (matched.params)
+                    {
+                        const keys = Object.keys(matched.params);
+                        keys.forEach((key) =>
+                        {
+                            matched.params[key] = getTypedValue(matched.params[key]);
+                        });
+                        values = Object.assign(values, matched.params);
+                    }
                     hasMatch = true;
                 }
             }
