@@ -27,6 +27,8 @@ class ProfileData
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
         this.heavyEvents = [];
+
+        this.doProfileGlQuery = false;
         this.glQueryData = {};
     }
 
