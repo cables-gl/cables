@@ -10,6 +10,8 @@ const
     amounts = [],
     blends = [],
     alphas = [],
+    texMasks = [],
+    maskModes = [],
     texs = [];
 
 let needsUpdate = true;
@@ -18,21 +20,28 @@ for (let i = 0; i < NUM; i++)
 {
     const tex = op.inTexture("Texture " + (i + 1));
     const blend = op.inDropDown("Blendmode " + (i + 1), blendmodes, "normal");
+    const texMask = op.inTexture("Mask " + (i + 1));
+    const maskMode = op.inSwitch("Mask Source " + (i + 1), ["R", "R inv", "A", "A inv"], "R");
     const alpha = op.inSwitch("Opacity " + (i + 1), ["Normal", "Prev A", "Prev R"], "Normal");
     const amount = op.inValueSlider("Amount " + (i + 1), 1);
 
     blend.onChange =
     alpha.onChange =
+    maskMode.onChange =
+    texMask.onLinkChanged =
     tex.onLinkChanged = () => { needsUpdate = true; };
 
     texs.push(tex);
+    texMasks.push(texMask);
     alphas.push(alpha);
     blends.push(blend);
     amounts.push(amount);
+    maskModes.push(maskMode);
 
-    op.setPortGroup("Image " + (i + 1), [tex, blend, amount, alpha]);
+    op.setPortGroup("Image " + (i + 1), [tex, blend, amount, alpha, texMask, maskMode]);
 
-    new CGL.Uniform(shader, "t", "tex" + (i + 1), i + 1);
+    new CGL.Uniform(shader, "t", "tex" + (i + 1), i * 2 + 1);
+    new CGL.Uniform(shader, "t", "texMask" + (i + 1), i * 2 + 2);
     new CGL.Uniform(shader, "f", "amount" + (i + 1), amount);
 }
 
@@ -52,7 +61,11 @@ function setBlendCode()
         if (active)
         {
             defines += "#define USE_TEX_" + (i + 1) + "".endl();
-            blendcode += getBlendCode(i + 1, blends[i].get(), alphas[i].get());
+            blendcode += getBlendCode(i + 1,
+                blends[i].get(),
+                alphas[i].get(),
+                texMasks[i].get(),
+                maskModes[i].get());
         }
     }
 
@@ -64,7 +77,7 @@ function setBlendCode()
     needsUpdate = false;
 }
 
-function getBlendCode(idx, name, alpha)
+function getBlendCode(idx, name, alpha, hasMask, maskMode)
 {
     let src = ""
         + "vec3 _blend" + idx + "(vec3 base,vec3 blend)".endl()
@@ -135,9 +148,15 @@ function getBlendCode(idx, name, alpha)
     src = src
 
         + "vec4 col = vec4( _blend" + idx + "(oldColor.rgb, newColor.rgb), 1.0);".endl()
-        + "col = vec4( mix( col.rgb,oldColor.rgb, col.a * 1.0-amount), 1.0);".endl()
+        + "col = vec4( mix( col.rgb,oldColor.rgb, col.a * 1.0-amount), 1.0);".endl();
 
-        + "col = vec4( mix( oldColor,col, newColor.a));".endl()
+    if (hasMask)
+        if (maskMode === "R")src = src + "newColor.a *= texture(texMask" + idx + ",texCoord).r;".endl();
+        else if (maskMode === "R inv")src = src + "newColor.a *= 1.0-texture(texMask" + idx + ",texCoord).r;".endl();
+        else if (maskMode === "A")src = src + "newColor.a *= texture(texMask" + idx + ",texCoord).a;".endl();
+        else if (maskMode === "R inv")src = src + "newColor.a *= 1.0-texture(texMask" + idx + ",texCoord).a;".endl();
+
+    src = src + "col = vec4( mix( oldColor,col, newColor.a));".endl()
 
     // + "vec3 blendedCol=_blend"+idx+"(newColor.rgb,newColor.rgb);".endl()
     // + "col.rgb=mix(oldColor.rgb,newColor.rgb,a);".endl()
@@ -161,7 +180,10 @@ render.onTriggered = function ()
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
 
     for (let i = 0; i < texs.length; i++)
-        if (texs[i].get())cgl.setTexture(i + 1, texs[i].get().tex);
+    {
+        if (texs[i].get()) cgl.setTexture(i * 2 + 1, texs[i].get().tex);
+        if (texMasks[i].get()) cgl.setTexture(i * 2 + 2, texMasks[i].get().tex);
+    }
 
     cgl.pushBlendMode(CGL.BLEND_NONE, true);
     cgl.currentTextureEffect.finish();

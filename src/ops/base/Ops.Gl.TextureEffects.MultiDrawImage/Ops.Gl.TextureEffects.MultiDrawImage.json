@@ -29,6 +29,22 @@
                 "subType": "string"
             },
             {
+                "type": 2,
+                "name": "Mask 1",
+                "group": "Image 1",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 1 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 1",
+                "group": "Image 1"
+            },
+            {
                 "type": 0,
                 "name": "Opacity 1 index",
                 "subType": "integer"
@@ -60,6 +76,22 @@
                 "name": "Blendmode 2",
                 "group": "Image 2",
                 "subType": "string"
+            },
+            {
+                "type": 2,
+                "name": "Mask 2",
+                "group": "Image 2",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 2 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 2",
+                "group": "Image 2"
             },
             {
                 "type": 0,
@@ -95,6 +127,22 @@
                 "subType": "string"
             },
             {
+                "type": 2,
+                "name": "Mask 3",
+                "group": "Image 3",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 3 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 3",
+                "group": "Image 3"
+            },
+            {
                 "type": 0,
                 "name": "Opacity 3 index",
                 "subType": "integer"
@@ -126,6 +174,22 @@
                 "name": "Blendmode 4",
                 "group": "Image 4",
                 "subType": "string"
+            },
+            {
+                "type": 2,
+                "name": "Mask 4",
+                "group": "Image 4",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 4 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 4",
+                "group": "Image 4"
             },
             {
                 "type": 0,
@@ -161,6 +225,22 @@
                 "subType": "string"
             },
             {
+                "type": 2,
+                "name": "Mask 5",
+                "group": "Image 5",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 5 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 5",
+                "group": "Image 5"
+            },
+            {
                 "type": 0,
                 "name": "Opacity 5 index",
                 "subType": "integer"
@@ -192,6 +272,22 @@
                 "name": "Blendmode 6",
                 "group": "Image 6",
                 "subType": "string"
+            },
+            {
+                "type": 2,
+                "name": "Mask 6",
+                "group": "Image 6",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 6 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 6",
+                "group": "Image 6"
             },
             {
                 "type": 0,
@@ -227,6 +323,22 @@
                 "subType": "string"
             },
             {
+                "type": 2,
+                "name": "Mask 7",
+                "group": "Image 7",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 7 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 7",
+                "group": "Image 7"
+            },
+            {
                 "type": 0,
                 "name": "Opacity 7 index",
                 "subType": "integer"
@@ -258,6 +370,22 @@
                 "name": "Blendmode 8",
                 "group": "Image 8",
                 "subType": "string"
+            },
+            {
+                "type": 2,
+                "name": "Mask 8",
+                "group": "Image 8",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Mask Source 8 index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mask Source 8",
+                "group": "Image 8"
             },
             {
                 "type": 0,

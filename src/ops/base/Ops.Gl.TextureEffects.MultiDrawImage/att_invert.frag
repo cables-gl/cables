@@ -9,6 +9,16 @@ UNI sampler2D tex6;
 UNI sampler2D tex7;
 UNI sampler2D tex8;
 
+
+UNI sampler2D texMask1;
+UNI sampler2D texMask2;
+UNI sampler2D texMask3;
+UNI sampler2D texMask4;
+UNI sampler2D texMask5;
+UNI sampler2D texMask6;
+UNI sampler2D texMask7;
+UNI sampler2D texMask8;
+
 UNI float amount1;
 UNI float amount2;
 UNI float amount3;
