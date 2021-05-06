@@ -30,6 +30,8 @@ const geom = new CGL.Geometry("pointcloudfromarray");
 let texCoords = [];
 let needsRebuild = true;
 
+let showingError = false;
+
 function doRender()
 {
     outTrigger.trigger();
