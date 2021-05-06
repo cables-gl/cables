@@ -51,7 +51,7 @@
                 "name": "Active Clients"
             },
             {
-                "type": 3,
+                "type": 2,
                 "name": "Will Time Out"
             },
             {
@@ -108,7 +108,7 @@
             },
             {
                 "name": "Will Time Out",
-                "text": "array of clientids that will timeout soon, if they do not send a new message"
+                "text": "object of clients that will timeout soon, if they do not send a new message. provides lastmessage timestamp, when it will timeout and a progress to the timeout from 0 to 1"
             },
             {
                 "name": "Timed Out Clients",
