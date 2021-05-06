@@ -73,9 +73,9 @@ function doTransform()
                     resultArr[i + 1],
                     resultArr[i + 2]);
 
-                if (nrotx > 0)vec3.rotateX(rotVec, rotVec, transVec, nrotx * CGL.DEG2RAD);
-                if (nroty > 0)vec3.rotateY(rotVec, rotVec, transVec, nroty * CGL.DEG2RAD);
-                if (nrotz > 0)vec3.rotateZ(rotVec, rotVec, transVec, nrotz * CGL.DEG2RAD);
+                if (nrotx != 0) vec3.rotateX(rotVec, rotVec, transVec, nrotx * CGL.DEG2RAD);
+                if (nroty != 0) vec3.rotateY(rotVec, rotVec, transVec, nroty * CGL.DEG2RAD);
+                if (nrotz != 0) vec3.rotateZ(rotVec, rotVec, transVec, nrotz * CGL.DEG2RAD);
 
                 resultArr[i + 0] = rotVec[0];
                 resultArr[i + 1] = rotVec[1];

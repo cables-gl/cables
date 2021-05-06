@@ -36,9 +36,29 @@
                 "type": 0,
                 "name": "Loop",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Play Backward",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Rewind"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Completed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.Lottie.LottieSVGPlayer"
     },
     "summary": "Play Bodymovin/Lottie animations as SVG in a HTML element",

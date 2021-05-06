@@ -22,7 +22,6 @@ op.toWorkPortsNeedToBeLinked(arr, exe);
 op.setPortGroup("Texture Coordinates", [pTexCoordRand, seed, inCoords]);
 
 let deactivated = false;
-let showingError = false;
 
 exe.onTriggered = doRender;
 
@@ -90,29 +89,25 @@ function rebuild()
         return;
     }
 
-    if (geom.vertices.length == verts.length && mesh && !showingError && !inCoords.isLinked() && !vertCols.isLinked())
+    console.log(verts.length % 3);
+    if (verts.length % 3 !== 0)
+    {
+        // if (!showingError)
+        // {
+        op.setUiError("div3", "Array length not multiple of 3");
+
+        // op.uiAttr({ "error": "Array length not divisible by 3!" });
+        // showingError = true;
+        // }
+        return;
+    }
+    else op.setUiError("div3", null);
+
+    if (geom.vertices.length == verts.length && mesh && !inCoords.isLinked() && !vertCols.isLinked())
     {
         mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, verts, 3);
         geom.vertices = verts;
         needsRebuild = false;
-        return;
-    }
-
-    if (showingError)
-    {
-        showingError = false;
-        op.uiAttr({ "error": null });
-    }
-
-    let divisibleBy3 = verts.length % 3 === 0;
-
-    if (divisibleBy3 === false)
-    {
-        if (!showingError)
-        {
-            op.uiAttr({ "error": "Array length not divisible by 3!" });
-            showingError = true;
-        }
         return;
     }
 

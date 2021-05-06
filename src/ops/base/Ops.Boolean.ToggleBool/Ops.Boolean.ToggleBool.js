@@ -16,6 +16,6 @@ trigger.onTriggered = function ()
 
 reset.onTriggered = function ()
 {
-    theBool = inDefault.get() || true;
+    theBool = inDefault.get();
     outBool.set(theBool);
 };
