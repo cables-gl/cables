@@ -2,11 +2,20 @@ const
     inEle = op.inObject("HTML Element"),
     inData = op.inObject("JSON Data"),
     inPlay = op.inValueBool("Play", true),
-    inLoop = op.inValueBool("Loop", true);
+    inLoop = op.inValueBool("Loop", true),
+    inDir = op.inBool("Play Backward"),
+    inRewind = op.inTriggerButton("Rewind"),
+    outComplete = op.outBool("Completed", false),
+    outProgress = op.outNumber("Progress");
+    // anim.setDirection(-1) ;
 
-inPlay.onChange = inLoop.onChange = inEle.onChange = inData.onChange = updateData;
+inPlay.onChange = play;
+inLoop.onChange = inEle.onChange = inData.onChange = updateData;
 
 let anim = null;
+
+inDir.onChange = updateDir;
+inRewind.onTriggered = updateData;
 
 function dispose()
 {
@@ -15,6 +24,22 @@ function dispose()
         anim.destroy();
         anim = null;
     }
+}
+
+function play()
+{
+    if (!anim) return;
+    outComplete.set(false);
+    anim.play();
+}
+
+function updateDir()
+{
+    if (!anim) return;
+    if (!inDir.get()) anim.setDirection(1);
+    else anim.setDirection(-1);
+
+    if (inPlay.get()) play();
 }
 
 function updateData()
@@ -33,4 +58,16 @@ function updateData()
     };
 
     anim = lottie.loadAnimation(params);
+    anim.addEventListener("complete", () =>
+    {
+        outComplete.set(true);
+    });
+
+    anim.addEventListener("enterFrame", (e) =>
+    {
+        // console.log("frame", e);
+        outProgress.set(e.currentTime / (e.totalTime - 1));
+    });
+
+    updateDir();
 }

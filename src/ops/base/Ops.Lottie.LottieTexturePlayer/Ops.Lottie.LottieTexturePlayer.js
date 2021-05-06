@@ -4,8 +4,8 @@ const filename = op.inUrl("File");
 
 const play = op.addInPort(new CABLES.Port(op, "play", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 
-
-const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
+const tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "linear");
+// const tfilter = op.addInPort(new CABLES.Port(op, "filter", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["nearest", "linear", "mipmap"] }));
 const wrap = op.addInPort(new CABLES.Port(op, "wrap", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["repeat", "mirrored repeat", "clamp to edge"] }));
 const flip = op.addInPort(new CABLES.Port(op, "flip", CABLES.OP_PORT_TYPE_VALUE, { "display": "bool" }));
 
@@ -24,11 +24,11 @@ const canvasId = "bodymovin_" + CABLES.generateUUID();
 
 bmScale.set("fit");
 
-tfilter.set("linear");
+// tfilter.set("linear");
 
 let createTexture = false;
 
-tfilter.onChange = onFilterChange;
+tfilter.onChange = onLottieFilterChange;
 filename.onChange = reload;
 
 bmScale.onChange = reloadForce;
@@ -48,7 +48,6 @@ let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 width.set(1280);
 height.set(720);
 
-
 play.onChange = function ()
 {
     if (anim)
@@ -60,7 +59,6 @@ play.onChange = function ()
         }
         else anim.pause();
 };
-
 
 rewind.onTriggered = function ()
 {
@@ -87,7 +85,7 @@ wrap.onChange = function ()
     createTexture = true;
 };
 
-function onFilterChange()
+function onLottieFilterChange()
 {
     cgl_filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
@@ -95,7 +93,6 @@ function onFilterChange()
 
     createTexture = true;
 }
-
 
 let lastFrame = -2;
 exe.onTriggered = function ()
@@ -129,7 +126,6 @@ exe.onTriggered = function ()
     }
 };
 
-
 op.onDelete = function ()
 {
     op.log("delete bodymovin...");
@@ -137,13 +133,11 @@ op.onDelete = function ()
     anim = null;
 };
 
-
 function reloadForce()
 {
     createTexture = true;
     reload(true);
 }
-
 
 function reload(force)
 {
@@ -166,7 +160,6 @@ function reload(force)
         canvas.width = width.get();
         canvas.height = height.get();
         canvas.style.display = "none";
-
 
         // op.log("canvas size",canvas.width,canvas.height);
 
