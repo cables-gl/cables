@@ -11,7 +11,8 @@ const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 const textureDisplaceUniform = new CGL.Uniform(shader, "t", "image", 1);
 const amountUniform = new CGL.Uniform(shader, "f", "amount", inAmount);
 
-const method = this.addInPort(new CABLES.Port(this, "method", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["luminance", "image alpha", "red", "green", "blue"] }));
+// const method = this.addInPort(new CABLES.Port(this, "method", CABLES.OP_PORT_TYPE_VALUE, { "display": "dropdown", "values": ["luminance", "image alpha", "red", "green", "blue"] }));
+const method = op.inDropDown("method", ["luminance", "image alpha", "red", "green", "blue"], "luminance");
 
 image.onChange =
 method.onChange = function ()
