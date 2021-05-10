@@ -47,7 +47,6 @@ const Mesh = function (_cgl, __geom, glPrimitive)
 
     this._cgl.profileData.addHeavyEvent("mesh constructed", this._geom.name);
 
-    this._queryStarted = false;
     this._queryExt = null;
 
     Object.defineProperty(this, "numInstances", {
@@ -629,18 +628,17 @@ Mesh.prototype.render = function (shader)
                 queryProfilerData._numcount++;
                 queryProfilerData.when = performance.now();
                 queryProfilerData._drawQuery = null;
-                this._queryStarted = false;
+                queryProfilerData.queryStarted = false;
             }
         }
 
-        if (!this._queryStarted)
+        if (!queryProfilerData.queryStarted)
         {
-            this._queryStarted = true;
             queryProfilerData._drawQuery = this._cgl.gl.createQuery();
             this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+            queryProfilerData.queryStarted = true;
         }
     }
-
 
     if (this.hasFeedbacks())
     {
