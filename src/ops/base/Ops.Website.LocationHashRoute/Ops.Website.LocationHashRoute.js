@@ -5,9 +5,16 @@ const outMatching = op.outBool("Matching");
 
 let router = null;
 
+let lastHref = window.location.href;
+
 if ("onhashchange" in window)
 {
     router = new Navigo("/", { "hash": true, "noMatchWarning": true });
+    if (op.patch.hasEventListener("LocationHashChange", hashChange))
+    {
+        op.patch.removeEventListener("LocationHashChange", hashChange);
+    }
+    op.patch.addEventListener("LocationHashChange", hashChange);
     window.removeEventListener("hashchange", hashChange);
     window.addEventListener("hashchange", hashChange);
     hashChange({ "newURL": window.location.href });
@@ -25,10 +32,15 @@ routeIn.onChange = function ()
 
 function hashChange(event)
 {
+    let hash = "";
+    if (event.newURL === lastHref)
+    {
+        return;
+    }
+    lastHref = event.newURL;
     op.setUiError("unsupported", null);
     let values = {};
     const fields = event.newURL.split("#");
-    let hash = "";
     let hasMatch = false;
     if (routeIn.get())
     {
@@ -89,6 +101,7 @@ function hashChange(event)
     {
         parsedOut.set(values);
     }
+
     if (hasMatch && !event.silent)
     {
         changedOut.trigger();
