@@ -47,6 +47,8 @@ const Mesh = function (_cgl, __geom, glPrimitive)
 
     this._cgl.profileData.addHeavyEvent("mesh constructed", this._geom.name);
 
+    this._queryExt = null;
+
     Object.defineProperty(this, "numInstances", {
         get()
         {
@@ -598,7 +600,7 @@ Mesh.prototype.render = function (shader)
     let elementDiv = 1;
 
 
-    const doQuery = this._cgl.profileData.doProfileGlQuery;
+    let doQuery = this._cgl.profileData.doProfileGlQuery;
     if (doQuery)
     {
         let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
@@ -626,13 +628,17 @@ Mesh.prototype.render = function (shader)
                 queryProfilerData._numcount++;
                 queryProfilerData.when = performance.now();
                 queryProfilerData._drawQuery = null;
+                queryProfilerData.queryStarted = false;
             }
         }
 
-        queryProfilerData._drawQuery = this._cgl.gl.createQuery();
-        this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+        if (!queryProfilerData.queryStarted)
+        {
+            queryProfilerData._drawQuery = this._cgl.gl.createQuery();
+            this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+            queryProfilerData.queryStarted = true;
+        }
     }
-
 
     if (this.hasFeedbacks())
     {
