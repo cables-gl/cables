@@ -84,7 +84,7 @@ allowSend.onChange = () =>
         socket.allowSend = allowSend.get();
         socketOut.set(socket);
         sendOut.set(allowSend.get());
-        const payload = { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } };
+        const payload = Object.assign(socket.commonValues, { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } });
         socket.transmitPublish(channelName.get() + "/control", payload);
     }
 };
