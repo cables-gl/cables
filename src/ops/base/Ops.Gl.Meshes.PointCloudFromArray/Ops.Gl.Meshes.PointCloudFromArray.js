@@ -91,7 +91,6 @@ function rebuild()
         return;
     }
 
-    console.log(verts.length % 3);
     if (verts.length % 3 !== 0)
     {
         // if (!showingError)
