@@ -121,11 +121,9 @@ function updateClass()
 
     for (let i = 0; i < oldClasses.length; i++)
     {
-        console.log("old", i, oldClasses[i], classes.indexOf(oldClasses[i].trim()));
         if (
             oldClasses[i] &&
             classes.indexOf(oldClasses[i].trim()) == -1)
-        // div.classList.contains(oldClasses[i].trim()))
         {
             found = true;
             console.log("remove", oldClasses[i]);

@@ -12,18 +12,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array to sort"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Sorting mode index",
                 "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Sorting mode"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Sorted array"
             }
         ],

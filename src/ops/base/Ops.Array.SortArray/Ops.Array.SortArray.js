@@ -1,19 +1,18 @@
 const arrayIn = op.inArray("Array to sort"),
-    sortMode = op.inSwitch("Sorting mode",["Sort ascending","Sort descending"],"Sort ascending"),
+    sortMode = op.inSwitch("Sorting mode", ["Sort ascending", "Sort descending"], "Sort ascending"),
     arrayOut = op.outArray("Sorted array");
-
-var arrOut = [];
+let arrOut = [];
 
 arrayIn.onChange = sortMode.onChange = update;
 update();
 
 function update()
 {
-    var arrIn = arrayIn.get();
+    let arrIn = arrayIn.get();
 
     arrOut.length = 0;
 
-    if(!arrIn)
+    if (!arrIn)
     {
         arrayOut.set(null);
         return;
@@ -21,21 +20,21 @@ function update()
 
     arrOut.length = arrIn.length;
 
-    var i;
-    for(i = 0; i < arrIn.length;i++)
+    let i;
+    for (i = 0; i < arrIn.length; i++)
     {
         arrOut[i] = arrIn[i];
     }
 
-    if(sortMode.get() === "Sort ascending")
+    if (sortMode.get() === "Sort ascending")
     {
-        arrOut.sort(function(a, b){return a-b});
+        arrOut.sort(function (a, b) { return a - b; });
     }
     else
     {
-        arrOut.sort(function(a, b){return b-a});
+        arrOut.sort(function (a, b) { return b - a; });
     }
 
     arrayOut.set(null);
     arrayOut.set(arrOut);
-};
+}
