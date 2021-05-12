@@ -183,6 +183,8 @@ op.dyn.onLinkChanged = function ()
         op.dyn.removeLinks();
         otherPort.removeLinkTo(op.dyn);
 
+        op.log("dyn link changed!!!");
+
         const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
 
         const o = { "name": newName, "type": otherPort.type };

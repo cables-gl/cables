@@ -105,6 +105,9 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
+    // console.log("buffer subdata", start, end, array.length);
+
+
     if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
     else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
 };
@@ -143,6 +146,9 @@ Mesh.prototype._bufferArray = function (array, attr)
     else floatArray = array;
 
     if (attr && floatArray) attr.floatArray = floatArray;
+
+    attr.arrayLength = floatArray.length;
+
 
     this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
 };
@@ -377,17 +383,17 @@ Mesh.prototype._checkAttrLengths = function ()
 {
     // check length
 
-    for (let i = 0; i < this._attributes.length; i++)
-    {
-        if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
-        {
-            // console.warn(
-            //     this._geom.name+": "+this._attributes[i].name+
-            //     " wrong attr length. is:",this._attributes[i].floatArray.length/this._attributes[i].itemSize,
-            //     " should be:",this._attributes[0].floatArray.length/this._attributes[0].itemSize,
-            //     );
-        }
-    }
+    // for (let i = 0; i < this._attributes.length; i++)
+    // {
+    //     if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
+    //     {
+    //         console.warn(
+    //             this._geom.name + ": " + this._attributes[i].name +
+    //             " wrong attr length. is:", this._attributes[i].floatArray.length / this._attributes[i].itemSize,
+    //             " should be:", this._attributes[0].floatArray.length / this._attributes[0].itemSize,
+    //         );
+    //     }
+    // }
 };
 
 Mesh.prototype._bind = function (shader)
@@ -544,6 +550,12 @@ Mesh.prototype.setNumVertices = function (num)
     this._bufVertexAttrib.numItems = num;
 };
 
+Mesh.prototype.getNumVertices = function ()
+{
+    return this._bufVertexAttrib.numItems;
+};
+
+
 /**
  * @function render
  * @memberof Mesh
@@ -640,6 +652,17 @@ Mesh.prototype.render = function (shader)
     }
     else if (this._bufVerticesIndizes.numItems === 0)
     {
+        for (let i = 0; i < this._attributes.length; i++)
+        {
+            if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
+            {
+                console.log("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
+                // console.log(this);
+                // debugger;
+                return;
+            }
+        }
+
         if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
         if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
         else this._cgl.gl.drawArraysInstanced(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems, this._numInstances);
