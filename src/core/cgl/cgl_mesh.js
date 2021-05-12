@@ -658,16 +658,16 @@ Mesh.prototype.render = function (shader)
     }
     else if (this._bufVerticesIndizes.numItems === 0)
     {
-        for (let i = 0; i < this._attributes.length; i++)
-        {
-            if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
-            {
-                console.log("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
-                // console.log(this);
-                // debugger;
-                return;
-            }
-        }
+        // for (let i = 0; i < this._attributes.length; i++)
+        // {
+        //     if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
+        //     {
+        //         console.log("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
+        //         // console.log(this);
+        //         // debugger;
+        //         return;
+        //     }
+        // }
 
         if (prim == this._cgl.gl.TRIANGLES)elementDiv = 3;
         if (this._numInstances === 0) this._cgl.gl.drawArrays(prim, this._bufVertexAttrib.startItem, this._bufVertexAttrib.numItems - this._bufVertexAttrib.startItem);
