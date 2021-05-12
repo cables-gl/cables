@@ -61,11 +61,15 @@ class ProfileData
     {
         for (let i in this.glQueryData)
         {
-            this.glQueryData[i].time = this.glQueryData[i]._times;
-            this.glQueryData[i].num = this.glQueryData[i]._numcount;
+            if (!this.glQueryData[i].lastClear || performance.now() - this.glQueryData[i].lastClear > 1000)
+            {
+                this.glQueryData[i].time = this.glQueryData[i]._times / this.glQueryData[i]._numcount;
+                this.glQueryData[i].num = this.glQueryData[i]._numcount;
 
-            this.glQueryData[i]._times = 0;
-            this.glQueryData[i]._numcount = 0;
+                this.glQueryData[i]._times = 0;
+                this.glQueryData[i]._numcount = 0;
+                this.glQueryData[i].lastClear = performance.now();
+            }
         }
     }
 

@@ -112,7 +112,7 @@ const cleanupClients = () =>
             }
             if (timedOutClients.includes(clientId))
             {
-                timedOutClients = timedOutClients.filter(value => value !== clientId);
+                timedOutClients = timedOutClients.filter((value) => value !== clientId);
                 timedOutClientsChanged = true;
             }
         }
@@ -145,6 +145,7 @@ const cleanupClients = () =>
     }
     if (willTimeoutClientsChanged)
     {
+        outSoftTimeout.set(null);
         outSoftTimeout.set(willTimeoutClients);
         changed = true;
     }

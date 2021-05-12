@@ -1,14 +1,15 @@
 {
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
-                "name": "top",
+                "type": 0,
+                "name": "left",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "left",
+                "type": 0,
+                "name": "top",
                 "subType": "number"
             }
         ],

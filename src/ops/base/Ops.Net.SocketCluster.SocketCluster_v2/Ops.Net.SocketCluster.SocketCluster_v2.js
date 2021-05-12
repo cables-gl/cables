@@ -1,24 +1,25 @@
-const serverHostname = op.inString("server hostname", "");
-const serverPath = op.inString("server path", "/socketcluster/");
-const serverPort = op.inValue("server port", 443);
-const serverSecure = op.inBool("use ssl", true);
-const allowSend = op.inBool("allow send", false);
-const allowMultipleSenders = op.inBool("allow multiple senders", false);
-const channelName = op.inString("channel", CABLES.generateUUID());
-const globalDelay = op.inInt("delay send (ms)", 0);
+const activeIn = op.inBool("Active", false);
+const serverHostname = op.inString("Server hostname", "");
+const serverPath = op.inString("Server path", "/socketcluster/");
+const serverPort = op.inValue("Server port", 443);
+const serverSecure = op.inBool("Use SSL", true);
+const allowSend = op.inBool("Allow send", false);
+const allowMultipleSenders = op.inBool("Allow multiple senders", false);
+const channelName = op.inString("Channel", CABLES.generateUUID());
+const globalDelay = op.inInt("Delay send (ms)", 0);
 const commonValues = op.inObject("Additional serverdata", {});
-const ready = op.outBool("ready", false);
-const socketOut = op.outObject("socket", null, "socketcluster");
-const clientIdOut = op.outString("own client id");
-const sendOut = op.outBool("can send", false);
-const errorOut = op.outObject("error", null);
+const ready = op.outBool("Ready", false);
+const socketOut = op.outObject("Socket", null, "socketcluster");
+const clientIdOut = op.outString("Own client id");
+const sendOut = op.outBool("Can send", false);
+const errorOut = op.outObject("Error", null);
 
 let socket = null;
 let initDelay = null;
 
 const init = () =>
 {
-    if (!initDelay)
+    if (!initDelay && activeIn.get())
     {
         initDelay = setTimeout(() =>
         {
@@ -65,6 +66,14 @@ const init = () =>
             serverSecure.onChange = init;
             initDelay = null;
         }, 1000);
+    }
+    else if (!activeIn.get())
+    {
+        if (socket)
+        {
+            socket.disconnect();
+            socket = null;
+        }
     }
 };
 
@@ -132,4 +141,5 @@ const handleControlMessage = (message) =>
 };
 
 op.init = init;
+activeIn.onChange = init;
 serverHostname.onChange = serverPath.onChange = serverPort.onChange = serverSecure.onChange = init;

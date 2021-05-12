@@ -75,6 +75,7 @@ function update()
             history.replaceState(null, null, window.location.pathname);
         }
         event.newURL = window.location.href;
+        op.patch.emitEvent("LocationHashChange", event);
         window.dispatchEvent(event);
     }
     catch (e)

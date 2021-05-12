@@ -30,6 +30,8 @@ const geom = new CGL.Geometry("pointcloudfromarray");
 let texCoords = [];
 let needsRebuild = true;
 
+let showingError = false;
+
 function doRender()
 {
     outTrigger.trigger();
@@ -89,7 +91,6 @@ function rebuild()
         return;
     }
 
-    console.log(verts.length % 3);
     if (verts.length % 3 !== 0)
     {
         // if (!showingError)
