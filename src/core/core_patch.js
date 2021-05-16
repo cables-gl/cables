@@ -930,6 +930,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             if (genIds) op.id = uuid();
             op.portsInData = opData.portsIn;
             op._origData = opData;
+            op.storage = opData.storage;
 
             for (const ipi in opData.portsIn)
             {
