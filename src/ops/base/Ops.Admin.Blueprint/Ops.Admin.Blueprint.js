@@ -47,6 +47,7 @@ const restorePorts = () =>
                 }
             });
         }
+        newPort.set(oldPortIn.value);
         newPort.onLinkChanged = savePortData;
 
         if (oldPortIn.title)
@@ -81,6 +82,7 @@ const restorePorts = () =>
                     }
                 }
             });
+            newPort.set(oldPortOut.value);
             newPort.onLinkChanged = savePortData;
 
             if (oldPortOut.title)
@@ -203,7 +205,6 @@ function update()
                     const blueprintData = JSON.parse(data);
                     blueprintData.settings = op.patch.settings;
                     blueprintData.ops = blueprintData.ops;
-                    console.log("blueprintData", blueprintData, subPatchId);
                     deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
@@ -389,6 +390,7 @@ function setupPorts(parentSubPatch)
                         }
                     }
                 });
+                newPort.set(oldPorts.portsIn[newPort.name].value);
             }
             newPort.onLinkChanged = savePortData;
 
@@ -406,6 +408,7 @@ function setupPorts(parentSubPatch)
                     newPort.onChange = () =>
                     {
                         subPatchPort.set(newPort.get());
+                        savePortData();
                     };
                 }
             }
@@ -448,6 +451,7 @@ function setupPorts(parentSubPatch)
                             }
                         }
                     });
+                    newPort.set(oldPorts.portsOut[newPort.name].value);
                 }
                 newPort.onLinkChanged = savePortData;
 
@@ -465,6 +469,7 @@ function setupPorts(parentSubPatch)
                         subPatchPort.onChange = () =>
                         {
                             newPort.set(subPatchPort.get());
+                            savePortData();
                         };
                     }
                     newPort.set(subPatchPort.get());
@@ -489,6 +494,7 @@ function savePortData()
             const portData = {
                 "name": port.name,
                 "title": port.title,
+                "value": port.get(),
                 "type": port.type,
                 "links": []
             };
@@ -511,6 +517,7 @@ function savePortData()
             const portData = {
                 "name": port.name,
                 "title": port.title,
+                "value": port.get(),
                 "type": port.type,
                 "links": []
             };
@@ -525,5 +532,6 @@ function savePortData()
             newPortsData.portsOut[port.name] = portData;
         }
     });
-    portsData.set(JSON.stringify(newPortsData));
+    const serializedPortsData = JSON.stringify(newPortsData);
+    portsData.set(serializedPortsData);
 }
