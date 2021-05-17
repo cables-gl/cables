@@ -42,6 +42,7 @@ const Op = function ()
     EventTarget.apply(this);
 
     this.data = {}; // reserved for op-specific user-data
+    this.storage = {}; // op-specific data to be included in export
     this.objName = "";
     this.portsOut = [];
     this.portsIn = [];
@@ -1018,6 +1019,7 @@ const Op = function ()
 
         op.id = this.id;
         op.uiAttribs = this.uiAttribs;
+        op.storage = this.storage;
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
