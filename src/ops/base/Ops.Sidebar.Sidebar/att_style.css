@@ -382,7 +382,7 @@
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;          /* Likely future */
-    height: 24px;
+    min-height: 24px;
     background-color: transparent;
     color: #CCCCCC;
     box-sizing: border-box;
@@ -391,6 +391,7 @@
     border-radius: 125px;
     border:2px solid #555;
     cursor: pointer;
+    padding-bottom: 3px;
 }
 
 .sidebar__button-input.plus, .sidebar__button-input.minus {

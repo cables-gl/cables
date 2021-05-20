@@ -611,8 +611,6 @@ const Context = function (_patch)
         let found = false;
         let error = this.gl.getError();
 
-        // while (error )
-        // {
         if (error != this.gl.NO_ERROR)
         {
             let errStr = "";
@@ -635,8 +633,6 @@ const Context = function (_patch)
         }
         error = this.gl.getError();
 
-
-        // }
         return found;
     };
 
