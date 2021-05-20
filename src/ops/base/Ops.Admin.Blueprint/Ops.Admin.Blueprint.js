@@ -1,6 +1,7 @@
 const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
 const activeIn = op.inBool("active", false);
+const gotoIn = op.inTriggerButton("Open patch");
 const portsData = op.inString("portsData", "{}");
 
 const loadingOut = op.outBool("loading", false);
@@ -9,6 +10,32 @@ patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hidePort": true });
 portsData.setUiAttribs({ "hideParam": true });
+
+gotoIn.setUiAttribs({ "greyout": true });
+gotoIn.setUiAttribs({ "hidePort": true });
+
+if (op.patch.isEditorMode())
+{
+    gotoIn.onTriggered = function ()
+    {
+        if (CABLES && CABLES.sandbox && CABLES.sandbox.getCablesUrl())
+        {
+            window.open(CABLES.sandbox.getCablesUrl() + "/edit/" + patchIdIn.get(), "_blank");
+        }
+    };
+
+    patchIdIn.onChange = function ()
+    {
+        if (patchIdIn.get())
+        {
+            gotoIn.setUiAttribs({ "greyout": false });
+        }
+        else
+        {
+            gotoIn.setUiAttribs({ "greyout": true });
+        }
+    };
+}
 
 const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id];
 

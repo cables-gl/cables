@@ -1,26 +1,27 @@
 const NUM_PORTS = 8;
 
-const inIndex = op.inValueInt("Object Index",0);
+const inIndex = op.inValueInt("Object Index", 0);
 const objectPorts = [];
 const outObject = op.outObject("object out");
 
-op.onLoaded = onPortChange = indexChanged;
+op.onLoaded = function () { onPortChange(); indexChanged(); };
 inIndex.onChange = indexChanged;
 
+let inputNum = 0;
 
-for(var i = 0; i < NUM_PORTS; i++)
+for (let i = 0; i < NUM_PORTS; i++)
 {
-    var port = op.inObject("object port " + i);
-    port.data.inputNum = i;
+    let port = op.inObject("object port " + i);
+    inputNum = i;
     port.onChange = onPortChange;
-    objectPorts[i]=port;
+    objectPorts[i] = port;
 }
 
 function indexChanged()
 {
-    var index = Math.max(0,Math.floor(inIndex.get()));
-    if(index < 0) index = 0;
-        else if(index > NUM_PORTS-1) index = NUM_PORTS-1;
+    let index = Math.max(0, Math.floor(inIndex.get()));
+    if (index < 0) index = 0;
+    else if (index > NUM_PORTS - 1) index = NUM_PORTS - 1;
 
     outObject.set(null);
     outObject.set(objectPorts[index].get());
@@ -28,7 +29,7 @@ function indexChanged()
 
 function onPortChange()
 {
-    if(op.data.inputNum != inIndex.get()) return;
+    if (inputNum != inIndex.get()) return;
 
     outObject.set(null);
     outObject.set(this.get());

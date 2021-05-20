@@ -11,7 +11,7 @@ update();
 function getCssContent()
 {
     let css = code.get();
-    css = css.replace(/{{ASSETPATH}}/g, op.patch.getAssetPath());
+    css = css.replaceAll("{{ASSETPATH}}", op.patch.getAssetPath());
     return css;
 }
 

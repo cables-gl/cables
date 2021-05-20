@@ -41,7 +41,7 @@ const Op = function ()
 {
     EventTarget.apply(this);
 
-    this.data = {}; // reserved for op-specific user-data
+    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
     this.storage = {}; // op-specific data to be included in export
     this.objName = "";
     this.portsOut = [];

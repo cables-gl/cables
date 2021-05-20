@@ -45,6 +45,10 @@
                 "subType": "boolean"
             },
             {
+                "type": 1,
+                "name": "Open patch"
+            },
+            {
                 "type": 5,
                 "name": "portsData"
             }
