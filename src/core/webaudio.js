@@ -427,7 +427,7 @@ WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
     const audioContext = WEBAUDIO.createAudioContext();
 
     let loadingId = null;
-    if (loadingTask !== false)
+    if (loadingTask || loadingTask === undefined)
     {
         loadingId = patch.loading.start("audio", url);
         if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
