@@ -67,8 +67,9 @@ function updateAnalyser()
 {
     try
     {
+        const fftSize = Number(inFFTSize.get());
         analyser.smoothingTimeConstant = clamp(inSmoothing.get(), 0.0, 1.0);
-        analyser.fftSize = Number(inFFTSize.get());
+        analyser.fftSize = fftSize;
         const minDecibels = clamp(inRangeMin.get(), MAX_DBFS_RANGE_24_BIT, -0.0001);
         const maxDecibels = Math.max(inRangeMax.get(), analyser.minDecibels + 0.0001);
         analyser.minDecibels = minDecibels;
@@ -95,6 +96,15 @@ function updateAnalyser()
         else
         {
             op.setUiError("maxDbRangeMax", null);
+        }
+
+        if (FFT_BUFFER_SIZES.indexOf(fftSize) >= 6)
+        {
+            op.setUiError("highFftSize", "Please be careful with high FFT sizes as they can slow down rendering. Check the profiler to see if performance is impacted.", 1);
+        }
+        else
+        {
+            op.setUiError("highFftSize", null);
         }
     }
     catch (e)

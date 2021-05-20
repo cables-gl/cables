@@ -12,6 +12,11 @@
             "message": "Ops.User.pandur.ExplodeDivided2 renamed to Ops.Gl.ShaderEffects.ExplodeDividedMesh_v2",
             "author": "pandur",
             "date": 1601619384720
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1620501577939
         }
     ],
     "layout": {
@@ -97,5 +102,8 @@
             }
         ],
         "name": "Ops.User.pandur.ExplodeDivided2"
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

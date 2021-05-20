@@ -61,6 +61,19 @@ const init = () =>
                     socketOut.set(socket);
                 }
             })();
+
+            // subscribe to controlmessages
+            (async () =>
+            {
+                const channel = socket.subscribe(channelName.get() + "/control");
+                for await (const obj of channel)
+                {
+                    if (obj.clientId != socket.clientId)
+                    {
+                        handleControlMessage(obj);
+                    }
+                }
+            })();
             serverHostname.onChange = init;
             serverPort.onChange = init;
             serverSecure.onChange = init;
@@ -102,10 +115,11 @@ channelName.onChange = () =>
 {
     if (socket)
     {
+        socket.unsubscribe(socket.channelName + "/control");
         socket.channelName = channelName.get();
         socketOut.set(socket);
 
-        // subscribe to controllmessages for this channel
+        // subscribe to controlmessages for this channel
         (async () =>
         {
             const channel = socket.subscribe(channelName.get() + "/control");

@@ -5,46 +5,53 @@ const outMatching = op.outBool("Matching");
 
 let router = null;
 
-let lastHref = window.location.href;
+let lastHref = null;
 
-if ("onhashchange" in window)
+op.onLoaded = function ()
 {
-    router = new Navigo("/", { "hash": true, "noMatchWarning": true });
-    if (op.patch.hasEventListener("LocationHashChange", hashChange))
+    if ("onhashchange" in window)
     {
-        op.patch.removeEventListener("LocationHashChange", hashChange);
-    }
-    op.patch.addEventListener("LocationHashChange", hashChange);
-    window.removeEventListener("hashchange", hashChange);
-    window.addEventListener("hashchange", hashChange);
-    hashChange({ "newURL": window.location.href });
-}
-else
-{
-    op.setUiError("unsupported", "Your browser does not support listening to hashchanges!");
-}
+        router = new Navigo("/", { "hash": true, "noMatchWarning": true });
+        const eventWrapper = (event) =>
+        {
+            event.internal = true;
+            hashChange(event);
+        };
 
-op.onLoaded =
-routeIn.onChange = function ()
-{
-    hashChange({ "newURL": window.location.href });
+        op.patch.removeEventListener("LocationHashChange" + op.id);
+        op.patch.addEventListener("LocationHashChange" + op.id, eventWrapper);
+        window.removeEventListener("hashchange", hashChange);
+        window.addEventListener("hashchange", hashChange);
+        hashChange({ "newURL": window.location.href });
+    }
+    else
+    {
+        op.setUiError("unsupported", "Your browser does not support listening to hashchanges!");
+    }
 };
 
-function hashChange(event)
+routeIn.onChange = function ()
+{
+    if (router)
+    {
+        hashChange({ "newURL": window.location.href }, true);
+    }
+};
+
+function hashChange(event, forceUpdate)
 {
     let hash = "";
-    if (event.newURL === lastHref)
+    if (!forceUpdate && (event.newURL === lastHref))
     {
         return;
     }
-    lastHref = event.newURL;
     op.setUiError("unsupported", null);
     let values = {};
     const fields = event.newURL.split("#");
     let hasMatch = false;
     if (routeIn.get())
     {
-        if (fields.length > 1)
+        if (router && fields.length > 1)
         {
             hasMatch = false;
             for (let i = 1; i < fields.length; i++)
@@ -97,6 +104,7 @@ function hashChange(event)
     }
 
     outMatching.set(hasMatch);
+
     if (!(parsedOut.get().length === 0 && values.length === 0))
     {
         parsedOut.set(values);
