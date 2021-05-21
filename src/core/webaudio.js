@@ -422,11 +422,16 @@ WEBAUDIO.createAudioParamInPort = function (op, portName, audioNode, options, de
  * @param {loadAudioFileErrorCallback} onError - The callback when there was an error loading the file, the rror message is passed
  * @see {@link https://developer.mozilla.org/de/docs/Web/API/AudioContext/decodeAudioData}
  */
-WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError)
+WEBAUDIO.loadAudioFile = function (patch, url, onFinished, onError, loadingTask)
 {
     const audioContext = WEBAUDIO.createAudioContext();
-    const loadingId = patch.loading.start("audio", url);
-    if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
+
+    let loadingId = null;
+    if (loadingTask || loadingTask === undefined)
+    {
+        loadingId = patch.loading.start("audio", url);
+        if (patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingId, "title": " loading audio (" + url + ")" });
+    }
     const request = new XMLHttpRequest();
     if (!url)
     {

@@ -1,7 +1,8 @@
 const
     inTrigger = op.inTrigger("Trigger"),
     inTex = op.inTexture("Texture"),
-    inMode = op.inSwitch("Mode", ["Translate", "Scale"], "Translate"),
+    inSrc = op.inSwitch("Source", ["Model Pos", "Inst Pos"], "Model Pos"),
+    inMode = op.inSwitch("Mode", ["Translate", "Scale", "Rotate"], "Translate"),
     inStrength = op.inFloat("Strength", 1),
     inMin = op.inFloat("Min", 0),
     inScale = op.inFloat("Scale", 1),
@@ -12,7 +13,7 @@ const
     inOffsetX = op.inFloat("Offset X", 0),
     inOffsetY = op.inFloat("Offset Y", 0),
 
-    inChannel = op.inSwitch("Channel", ["R", "G", "B"], "R"),
+    inChannel = op.inSwitch("Channel", ["R", "G", "B", "RGB"], "R"),
 
     inAxisX = op.inBool("X", false),
     inAxisY = op.inBool("Y", false),
@@ -57,12 +58,19 @@ mod.addUniformVert("f", "MOD_min", inMin);
 
 function updateDefines()
 {
+    op.setUiAttrib({ "extendTitle": inMode.get() });
+
     mod.toggleDefine("MOD_MODE_TRANS", inMode.get() === "Translate");
     mod.toggleDefine("MOD_MODE_SCALE", inMode.get() === "Scale");
+    mod.toggleDefine("MOD_MODE_ROT", inMode.get() === "Rotate");
 
-    mod.toggleDefine("MOD_CHAN_R", inChannel.get() != "G" && inChannel.get() != "B");
+    mod.toggleDefine("MOD_CHAN_R", inChannel.get() != "G" && inChannel.get() != "B" && inChannel.get() != "RGB");
     mod.toggleDefine("MOD_CHAN_G", inChannel.get() == "G");
     mod.toggleDefine("MOD_CHAN_B", inChannel.get() == "B");
+    mod.toggleDefine("MOD_CHAN_RGB", inChannel.get() == "RGB");
+
+    mod.toggleDefine("MOD_SRC_INSTMAT", inSrc.get() == "Inst Pos");
+    mod.toggleDefine("MOD_SRC_MMAT", inSrc.get() == "Model Pos");
 
     mod.toggleDefine("MOD_AXIS_X", inAxisX.get());
     mod.toggleDefine("MOD_AXIS_Y", inAxisY.get());

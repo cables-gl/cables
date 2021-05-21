@@ -1,0 +1,187 @@
+{
+    "id": "fb698158-3cf8-49d6-805e-6ea38fdab8c1",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1620389407066
+        },
+        {
+            "message": "Ops.User.pandur.MyArrayFromNumbers renamed to Ops.Array.ArrayFromNumbers",
+            "author": "pandur",
+            "date": 1620389789245
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1620389428061,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Limit",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Index 0",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 1",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 2",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 3",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 4",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 5",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 6",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 7",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 8",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 9",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 10",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 11",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 12",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 13",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 14",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 15",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 16",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 17",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 18",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 19",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 20",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 21",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 22",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 23",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 24",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 25",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 26",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 27",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 28",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index 29",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "name": "Ops.Array.ArrayFromNumbers"
+    }
+}

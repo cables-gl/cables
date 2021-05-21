@@ -17,7 +17,8 @@ const Port = function (__parent, name, type, uiAttribs)
 {
     EventTarget.apply(this);
 
-    this.data = {}; // reserved for port-specific user-data
+    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+
     /**
      * @type {Number}
      * @name direction

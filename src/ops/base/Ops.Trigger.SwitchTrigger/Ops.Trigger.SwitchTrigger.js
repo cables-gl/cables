@@ -8,14 +8,13 @@ const
 for (let i = 0; i < NUM_PORTS; i++)
 {
     const port = op.inTrigger("Trigger in " + i);
-    port.data.inputNum = i;
-    port.onTriggered = update;
-    triggerPorts.onChange = update;
+    port.onTriggered = function () { update(i); };
+    triggerPorts.onChange = function () { update(i); };
     triggerPorts.push(port);
 }
 
-function update()
+function update(inputNum)
 {
     const index = Math.min(Math.max(inIndex.get(), 0), 15);
-    if (this.data.inputNum == index) outTrig.trigger();
+    if (inputNum == index) outTrig.trigger();
 }
