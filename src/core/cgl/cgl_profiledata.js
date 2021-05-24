@@ -26,6 +26,7 @@ class ProfileData
         this.shaderCompileTime = 0;
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
+        this.profileSingleMeshAttribute = [];
         this.heavyEvents = [];
 
         this.doProfileGlQuery = false;
@@ -34,6 +35,7 @@ class ProfileData
 
     clear()
     {
+        this.profileSingleMeshAttribute = {};
         this.profileMeshAttributes = 0;
         this.profileUniformCount = 0;
         this.profileShaderGetUniform = 0;
