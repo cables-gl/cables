@@ -107,6 +107,11 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
+
+    this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] = this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] || 0;
+    this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] += (end - start) || 0;
+
+
     // console.log("buffer subdata", attr.name, this.name);
 
 
