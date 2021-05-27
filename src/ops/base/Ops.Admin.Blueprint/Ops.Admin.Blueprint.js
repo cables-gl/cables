@@ -183,7 +183,7 @@ function update()
                 }
                 else
                 {
-                    op.setUiError("fetchOps", "error fetching blueprint, code: " + err.code);
+                    op.setUiError("fetchOps", "error fetching blueprint, code: " + err.code + " (" + err.msg + ")");
                 }
             }
             loadingOut.set(false);
