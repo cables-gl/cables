@@ -18,7 +18,7 @@ op.setPortGroup("Green", [offsetGreenX, offsetGreenY, greenAmount]);
 op.setPortGroup("Blue", [offsetBlueX, offsetBlueY, blueAmount]);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "RGB offset");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.offsetrgb_frag);
 

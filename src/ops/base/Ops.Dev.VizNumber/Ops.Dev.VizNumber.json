@@ -8,5 +8,22 @@
         }
     ],
     "authorName": "pandur",
-    "created": 1621835195647
+    "created": 1621835195647,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number In",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Number Out",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Dev.VizNumber"
+    }
 }

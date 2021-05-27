@@ -33,7 +33,7 @@ void main()
         pos=0.75;
     #endif
 
-    gl_PointSize=0.8;
+gl_PointSize=1.0;
 
     vec4 model= vec4(strength*2.0-1.0, pos , 0.0,1.0);
 

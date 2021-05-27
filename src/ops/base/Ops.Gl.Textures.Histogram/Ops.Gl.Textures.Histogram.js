@@ -1,8 +1,9 @@
-const exe = op.inTrigger("Trigger");
-const inTex = op.inTexture("Texture");
+const
+    exe = op.inTrigger("Trigger"),
+    inTex = op.inTexture("Texture"),
+    outTex = op.outTexture("Histogram Texture"),
+    outTexData = op.outTexture("Histogram Data");
 
-const outTex = op.outTexture("Histogram Texture");
-const outTexData = op.outTexture("Histogram Data");
 const cgl = op.patch.cgl;
 let meshPoints = null;
 let fb = new CGL.Framebuffer2(cgl, 256, 8, { "isFloatingPointTexture": true });
@@ -18,10 +19,10 @@ function initEffect()
     let tex = new CGL.Texture(cgl,
         {
             "isFloatingPointTexture": false,
-            "filter": CGL.Texture.FILTER_NEAREST,
+            "filter": CGL.Texture.FILTER_LINEAR,
             "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
-            "width": 256,
-            "height": 256,
+            "width": 512,
+            "height": 512,
         });
 
     effect.setSourceTexture(tex);
@@ -86,6 +87,9 @@ exe.onTriggered = function ()
 {
     if (meshPoints && inTex.get())
     {
+        cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
+        cgl.pushBlend(true);
+
         let vp = cgl.getViewPort();
         prevViewPort[0] = vp[0];
         prevViewPort[1] = vp[1];
@@ -106,14 +110,13 @@ exe.onTriggered = function ()
 
         // render wave
 
-        cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
         cgl.currentTextureEffect = effect;
 
         effect.startEffect();
 
         cgl.pushShader(shaderWave);
         cgl.currentTextureEffect.bind();
-        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+
         cgl.setTexture(2, fb.getTextureColor().tex);
         cgl.currentTextureEffect.finish();
         cgl.popShader();
@@ -123,7 +126,10 @@ exe.onTriggered = function ()
         effect.endEffect();
 
         cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-        cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+        cgl.popBlend();
+        cgl.popBlendMode();
+
         cgl.currentTextureEffect = null;
     }
 };
