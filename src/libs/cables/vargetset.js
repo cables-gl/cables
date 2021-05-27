@@ -76,10 +76,10 @@ const VarSetOpWrapper = class
 
             this._setVarValue();
         }
-        this._updateVarNamesDropdown();
 
         if (this._op.isCurrentUiOp())
         {
+            this._updateVarNamesDropdown();
             this._op.refreshParams();
         }
         this._updateDisplay();
