@@ -37,7 +37,7 @@ if (op.patch.isEditorMode())
     };
 }
 
-const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id];
+const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, gotoIn.id];
 
 if (!activeIn.get())
 {
