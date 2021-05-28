@@ -1187,7 +1187,7 @@ Patch.prototype._sortVars = function ()
  */
 Patch.prototype.hasVar = function (name)
 {
-    return this._variables.hasOwnProperty("name");
+    return this._variables.hasOwnProperty(name);
 };
 
 // used internally

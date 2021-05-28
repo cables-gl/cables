@@ -1,13 +1,16 @@
-const exe = op.inTrigger("Trigger");
-const inTex = op.inTexture("Texture");
+const
+    exe = op.inTrigger("Trigger"),
+    inTex = op.inTexture("Texture"),
+    outTex = op.outTexture("Histogram Texture"),
+    outTexData = op.outTexture("Histogram Data");
 
-const outTex = op.outTexture("Histogram Texture");
-const outTexData = op.outTexture("Histogram Data");
 const cgl = op.patch.cgl;
 let meshPoints = null;
-let fb = new CGL.Framebuffer2(cgl, 256, 8, { "isFloatingPointTexture": true });
+let fb = new CGL.Framebuffer2(cgl, 256, 8, { "isFloatingPointTexture": true,
+    "filter": CGL.Texture.FILTER_NEAREST,
+    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE });
 
-fb.setFilter(CGL.Texture.FILTER_NEAREST);
+// fb.setFilter(CGL.Texture.FILTER_NEAREST);
 let effect = null;
 
 function initEffect()
@@ -58,22 +61,22 @@ let shaderWave = new CGL.Shader(cgl, "imgcompose bg");
 shaderWave.setSource(shaderWave.getDefaultVertexShader(), attachments.histogram_wave_frag);
 shaderWave.textureUniform = new CGL.Uniform(shaderWave, "t", "tex", 2);
 
-let shaderPointsR = new CGL.Shader(cgl, "histogram");
+let shaderPointsR = new CGL.Shader(cgl, "histogram r");
 shaderPointsR.setSource(attachments.histogram_vert, attachments.histogram_frag);
 shaderPointsR.textureUniform = new CGL.Uniform(shaderPointsR, "t", "tex", 0);
 shaderPointsR.define("HISTOGRAM_R");
 
-let shaderPointsG = new CGL.Shader(cgl, "histogram");
+let shaderPointsG = new CGL.Shader(cgl, "histogram g");
 shaderPointsG.setSource(attachments.histogram_vert, attachments.histogram_frag);
 shaderPointsG.textureUniform = new CGL.Uniform(shaderPointsG, "t", "tex", 0);
 shaderPointsG.define("HISTOGRAM_G");
 
-let shaderPointsB = new CGL.Shader(cgl, "histogram");
+let shaderPointsB = new CGL.Shader(cgl, "histogram b");
 shaderPointsB.setSource(attachments.histogram_vert, attachments.histogram_frag);
 shaderPointsB.textureUniform = new CGL.Uniform(shaderPointsB, "t", "tex", 0);
 shaderPointsB.define("HISTOGRAM_B");
 
-let shaderPointsLumi = new CGL.Shader(cgl, "histogram");
+let shaderPointsLumi = new CGL.Shader(cgl, "histogram lumi");
 shaderPointsLumi.setSource(attachments.histogram_vert, attachments.histogram_frag);
 shaderPointsLumi.textureUniform = new CGL.Uniform(shaderPointsLumi, "t", "tex", 0);
 shaderPointsLumi.define("HISTOGRAM_LUMI");
@@ -86,6 +89,9 @@ exe.onTriggered = function ()
 {
     if (meshPoints && inTex.get())
     {
+        cgl.pushBlendMode(CGL.BLEND_NORMAL, false);
+        cgl.pushBlend(true);
+
         let vp = cgl.getViewPort();
         prevViewPort[0] = vp[0];
         prevViewPort[1] = vp[1];
@@ -106,14 +112,13 @@ exe.onTriggered = function ()
 
         // render wave
 
-        cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
         cgl.currentTextureEffect = effect;
 
         effect.startEffect();
 
         cgl.pushShader(shaderWave);
         cgl.currentTextureEffect.bind();
-        cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+
         cgl.setTexture(2, fb.getTextureColor().tex);
         cgl.currentTextureEffect.finish();
         cgl.popShader();
@@ -123,7 +128,10 @@ exe.onTriggered = function ()
         effect.endEffect();
 
         cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
-        cgl.gl.blendFunc(cgl.gl.SRC_ALPHA, cgl.gl.ONE_MINUS_SRC_ALPHA);
+
+        cgl.popBlend();
+        cgl.popBlendMode();
+
         cgl.currentTextureEffect = null;
     }
 };
