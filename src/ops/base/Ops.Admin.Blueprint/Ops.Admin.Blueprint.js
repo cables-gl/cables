@@ -48,7 +48,7 @@ const restorePorts = () =>
 {
     const oldPorts = getOldPorts();
     const portInKeys = Object.keys(oldPorts.portsIn);
-    CABLES.UI.undo.pause();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     for (let i = 0; i < portInKeys.length; i++)
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
@@ -129,7 +129,7 @@ const restorePorts = () =>
             }
         }
     }
-    CABLES.UI.undo.resume();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 };
 
 activeIn.onChange = () =>
@@ -420,7 +420,7 @@ function setupPorts(parentSubPatch)
     const subPatchPortsOut = subPatchData.portsOut || [];
     let i = 0;
 
-    CABLES.UI.undo.pause();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     for (i = 0; i < subPatchPortsIn.length; i++)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
@@ -559,7 +559,7 @@ function setupPorts(parentSubPatch)
         }
     }
     savePortData();
-    CABLES.UI.undo.resume();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 }
 
 function savePortData()
