@@ -343,7 +343,7 @@ Port.prototype.getSerialized = function ()
         obj.links = [];
         for (const i in this.links)
         {
-            if (this.links[i].portIn && this.links[i].portOut) obj.links.push(this.links[i].getSerialized());
+            if (!this.links[i].ignoreInSerialize && (this.links[i].portIn && this.links[i].portOut)) obj.links.push(this.links[i].getSerialized());
         }
     }
     return obj;
