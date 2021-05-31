@@ -145,7 +145,7 @@ activeIn.onChange = () =>
         {
             op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
-            if (op.uiAttribs.pasted) op.log("is pasted");
+            if (op.uiAttribs.pasted) delete op.uiAttribs.pasted;
         }
     }
 };
