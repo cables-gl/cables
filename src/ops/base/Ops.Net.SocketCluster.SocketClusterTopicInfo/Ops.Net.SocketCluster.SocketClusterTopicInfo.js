@@ -16,6 +16,8 @@ const clientLastTimestamps = {};
 let willTimeoutClients = {};
 let timedOutClients = [];
 
+let newClient = false;
+
 const init = () =>
 {
     const socket = inSocket.get();
@@ -51,6 +53,7 @@ const handleMessage = (socket, msg, type) =>
         if (!activeClients.hasOwnProperty(msg.clientId))
         {
             activeClients[msg.clientId] = [];
+            newClient = true;
         }
         const timestamp = Date.now();
         const clientData = {
@@ -60,13 +63,13 @@ const handleMessage = (socket, msg, type) =>
         };
         activeClients[msg.clientId].push(clientData);
         clientLastTimestamps[msg.clientId] = Date.now();
-        cleanupClients();
+        // cleanupClients(newClient);
     }
 };
 
 const cleanupClients = () =>
 {
-    let activeClientsChanged = false;
+    let activeClientsChanged = newClient;
     let willTimeoutClientsChanged = false;
     let timedOutClientsChanged = false;
     let messagesChanged = false;
@@ -119,27 +122,29 @@ const cleanupClients = () =>
     });
     if (inRetain.get() > 0)
     {
-        Object.keys(activeClients).forEach((clientId) =>
+        const clientIds = Object.keys(activeClients);
+        for (let i = 0; i < clientIds.length; i++)
         {
-            if (activeClients[clientId].length > inRetain.get())
+            const clientId = clientIds[i];
+            const shift = activeClients[clientId].length - inRetain.get();
+            for (let j = 0; j < shift; j++)
             {
-                while (activeClients[clientId].length > inRetain.get())
-                {
-                    activeClients[clientId].shift();
-                }
+                activeClients[clientId].shift();
                 messagesChanged = true;
-                activeClientsChanged = true;
             }
-        });
+        }
     }
     let changed = false;
     if (activeClientsChanged)
     {
+        outActive.set(null);
         outActive.set(Object.keys(activeClients));
         changed = true;
+        newClient = false;
     }
     if (messagesChanged)
     {
+        outMessages.set(null);
         outMessages.set(activeClients);
         changed = true;
     }
@@ -151,6 +156,7 @@ const cleanupClients = () =>
     }
     if (timedOutClientsChanged)
     {
+        outTimeout.set(null);
         outTimeout.set(timedOutClients);
         changed = true;
     }

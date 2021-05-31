@@ -17,7 +17,8 @@ const Port = function (__parent, name, type, uiAttribs)
 {
     EventTarget.apply(this);
 
-    this.data = {}; // reserved for port-specific user-data
+    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+
     /**
      * @type {Number}
      * @name direction
@@ -342,7 +343,7 @@ Port.prototype.getSerialized = function ()
         obj.links = [];
         for (const i in this.links)
         {
-            if (this.links[i].portIn && this.links[i].portOut) obj.links.push(this.links[i].getSerialized());
+            if (!this.links[i].ignoreInSerialize && (this.links[i].portIn && this.links[i].portOut)) obj.links.push(this.links[i].getSerialized());
         }
     }
     return obj;

@@ -16,6 +16,7 @@ filename.setUiAttribs({ "title": "URL" });
 reloadTrigger.setUiAttribs({ "buttonTitle": "trigger request" });
 
 outData.ignoreValueSerialize = true;
+outString.ignoreValueSerialize = true;
 
 inAutoRequest.onChange = filename.onChange = jsonp.onChange = headers.onChange = inMethod.onChange = inParseJson.onChange = function ()
 {

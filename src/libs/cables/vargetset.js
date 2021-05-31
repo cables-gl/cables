@@ -70,11 +70,16 @@ const VarSetOpWrapper = class
         const vari = this._op.patch.getVar(varname);
         if (vari && !vari.type) vari.type = this._type;
 
-        if (!this._op.patch.hasVar(varname)) this._setVarValue();
-        this._updateVarNamesDropdown();
+        if (!this._op.patch.hasVar(varname) && varname != 0 && !this._triggerPort)
+        {
+            console.log("var does not exist", varname);
+
+            this._setVarValue(); // this should not be done, its kept because of compatibility anxiety
+        }
 
         if (this._op.isCurrentUiOp())
         {
+            this._updateVarNamesDropdown();
             this._op.refreshParams();
         }
         this._updateDisplay();

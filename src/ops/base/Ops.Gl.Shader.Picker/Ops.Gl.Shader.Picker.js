@@ -1,16 +1,16 @@
 op.render = op.inTrigger("render");
 
-const useMouseCoords = op.inValueBool("Use Mouse Coordinates", true);
+const useMouseCoords = op.inBool("Use Mouse Coordinates", true);
 
-op.x = op.inValueFloat("x");
-op.y = op.inValueFloat("y");
-op.enabled = op.inValueBool("enabled");
+op.x = op.inFloat("x");
+op.y = op.inFloat("y");
+op.enabled = op.inBool("enabled");
 op.enabled.set(true);
 
 op.trigger = op.outTrigger("trigger");
-const somethingPicked = op.outValue("Something Picked");
+const somethingPicked = op.outBool("Something Picked");
 
-const cursor = this.inValueSelect("cursor", ["", "pointer", "auto", "default", "crosshair", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help"]);
+const cursor = op.inDropDown("cursor", ["", "pointer", "auto", "default", "crosshair", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help"]);
 
 // inValueSelect
 cursor.set("default");
@@ -58,7 +58,6 @@ function updateListeners()
     cgl.canvas.removeEventListener("touchstart", ontouchstart);
     cgl.canvas.removeEventListener("touchend", ontouchend);
     cgl.canvas.removeEventListener("touchcancel", ontouchend);
-
 
     if (useMouseCoords.get())
     {
@@ -118,7 +117,6 @@ function ontouchmove(event)
     }
 }
 
-
 const doRender = function ()
 {
     if (cursor.get() != cgl.canvas.style.cursor)
@@ -161,8 +159,7 @@ const doRender = function ()
             cgl.popModelMatrix();
         }
 
-
-        cgl.frameStore.pickedColor = pixelRGB[0];
+        cgl.frameStore.pickedColor = pixelRGB[0] + pixelRGB[2];
 
         if (cgl.frameStore.pickedColor)somethingPicked.set(true);
         else somethingPicked.set(false);

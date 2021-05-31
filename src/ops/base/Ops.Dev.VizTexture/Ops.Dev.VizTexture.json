@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.PreviewTexture renamed to Ops.Admin.PreviewTexture",
             "author": "pandur",
             "date": 1591801952881
+        },
+        {
+            "message": "Ops.Admin.PreviewTexture renamed to Ops.Dev.VizTexture",
+            "author": "pandur",
+            "date": 1621835702412
         }
     ],
     "authorName": "pandur",
@@ -17,24 +22,18 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "Texture"
-            },
-            {
-                "type": "0",
-                "name": "Active",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Size",
-                "subType": "number"
-            },
-            {
-                "type": "1",
-                "name": "Trigger"
+                "type": 2,
+                "name": "Texture In",
+                "objType": "texture"
             }
         ],
-        "name": "Ops.Admin.PreviewTexture"
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture Out",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.VizTexture"
     }
 }
