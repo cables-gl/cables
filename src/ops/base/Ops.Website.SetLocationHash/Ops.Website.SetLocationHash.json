@@ -26,14 +26,6 @@
                 "name": "Hash"
             },
             {
-                "type": 5,
-                "name": "Route"
-            },
-            {
-                "type": 2,
-                "name": "Values"
-            },
-            {
                 "type": 1,
                 "name": "Update"
             },
@@ -56,9 +48,7 @@
         "portsOut": [],
         "name": "Ops.Website.SetLocationHash"
     },
-    "libs": [
-        "navigo.js"
-    ],
+    "libs": [],
     "summary": "sets window.location.hash to the specified value(s)",
     "issues": "",
     "collections": null,
@@ -73,16 +63,12 @@
                 "text": "new value for window.location.hash (without the #)"
             },
             {
-                "name": "Route",
-                "text": "pattern for url and variables (i.e. /scene/:id)"
-            },
-            {
-                "name": "Values",
-                "text": "key-value object for replacements in the route"
-            },
-            {
                 "name": "Active",
-                "text": "update changes on change immediately, toggle to update \"on demand\""
+                "text": "active/inactive"
+            },
+            {
+                "name": "Silent",
+                "text": "make event not trigger LocationHashRoute op"
             },
             {
                 "name": "Allow Empty",

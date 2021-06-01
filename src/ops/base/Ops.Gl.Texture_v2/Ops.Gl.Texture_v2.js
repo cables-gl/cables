@@ -43,7 +43,7 @@ active.onChange = function ()
 {
     if (active.get())
     {
-        if (loadedFilename != filename.get()) realReload();
+        if (loadedFilename != filename.get()) reloadSoon();
         else textureOut.set(tex);
     }
     else

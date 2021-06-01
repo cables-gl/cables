@@ -12,17 +12,17 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 1"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "String 2"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "boolean"
             }

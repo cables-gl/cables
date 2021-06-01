@@ -3,6 +3,7 @@ const cgl = op.patch.cgl;
 const
     audioCtx = CABLES.WEBAUDIO.createAudioContext(op),
     inUrlPort = op.inUrl("URL", "audio"),
+    inLoadingTask = op.inBool("Create Loading Task", true),
     audioBufferPort = op.outObject("Audio Buffer", null, "audioBuffer"),
     finishedLoadingPort = op.outValue("Finished Loading", false),
     sampleRatePort = op.outValue("Sample Rate", 0),
@@ -61,7 +62,7 @@ function loadAudioFile(url, loadFromData)
             op.setUiError("wavFormat", null);
         }
 
-        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed);
+        CABLES.WEBAUDIO.loadAudioFile(op.patch, url, onLoadFinished, onLoadFailed, inLoadingTask.get());
     }
     else
     {
@@ -76,8 +77,12 @@ function loadAudioFile(url, loadFromData)
             op.setUiError("wavFormat", null);
         }
 
-        loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, "");
-        if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingIdDataURL, "title": " loading audio data url (" + op.id + ")" });
+        if (inLoadingTask.get())
+        {
+            loadingIdDataURL = cgl.patch.loading.start("audiobuffer from data-url " + op.id, "");
+            if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadaudio" + loadingIdDataURL, "title": " loading audio data url (" + op.id + ")" });
+        }
+
         fileReader.readAsArrayBuffer(fileBlob);
     }
 }

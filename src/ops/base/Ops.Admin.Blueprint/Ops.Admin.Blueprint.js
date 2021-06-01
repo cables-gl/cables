@@ -48,18 +48,20 @@ const restorePorts = () =>
 {
     const oldPorts = getOldPorts();
     const portInKeys = Object.keys(oldPorts.portsIn);
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     for (let i = 0; i < portInKeys.length; i++)
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
         const newPort = op.addInPort(new CABLES.Port(op, oldPortIn.name, oldPortIn.type));
-        if (Array.isArray(oldPortIn.links))
+        if (!op.uiAttribs.pasted && Array.isArray(oldPortIn.links))
         {
             oldPortIn.links.forEach((link) =>
             {
                 let parent = op.patch.getOpById(link.objOut);
                 if (parent)
                 {
-                    op.patch.link(parent, link.portOut, op, newPort.name);
+                    const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                    if (newLink) newLink.ignoreInSerialize = true;
                 }
                 else
                 {
@@ -69,12 +71,16 @@ const restorePorts = () =>
                         subOp.storage.blueprint.originalOpId == link.objOut);
                     if (parent)
                     {
-                        op.patch.link(parent, link.portOut, op, newPort.name);
+                        const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                        if (newLink) newLink.ignoreInSerialize = true;
                     }
                 }
             });
         }
-        newPort.set(oldPortIn.value);
+        if (!newPort.isLinked())
+        {
+            newPort.set(oldPortIn.value);
+        }
         newPort.onLinkChanged = savePortData;
 
         if (oldPortIn.title)
@@ -88,14 +94,15 @@ const restorePorts = () =>
     {
         const oldPortOut = oldPorts.portsOut[portOutKeys[i]];
         const newPort = op.addOutPort(new CABLES.Port(op, oldPortOut.name, oldPortOut.type));
-        if (Array.isArray(oldPortOut.links))
+        if (!op.uiAttribs.pasted && Array.isArray(oldPortOut.links))
         {
             oldPortOut.links.forEach((link) =>
             {
                 let parent = op.patch.getOpById(link.objIn);
                 if (parent)
                 {
-                    op.patch.link(op, newPort.name, parent, link.portIn);
+                    const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                    if (newLink) newLink.ignoreInSerialize = true;
                 }
                 else
                 {
@@ -105,11 +112,15 @@ const restorePorts = () =>
                         subOp.storage.blueprint.originalOpId == link.objIn);
                     if (parent)
                     {
-                        op.patch.link(op, newPort.name, parent, link.portIn);
+                        const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                        if (newLink) newLink.ignoreInSerialize = true;
                     }
                 }
             });
-            newPort.set(oldPortOut.value);
+            if (!newPort.isLinked())
+            {
+                newPort.set(oldPortOut.value);
+            }
             newPort.onLinkChanged = savePortData;
 
             if (oldPortOut.title)
@@ -118,6 +129,7 @@ const restorePorts = () =>
             }
         }
     }
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 };
 
 activeIn.onChange = () =>
@@ -133,6 +145,7 @@ activeIn.onChange = () =>
         {
             op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
+            if (op.uiAttribs.pasted) delete op.uiAttribs.pasted;
         }
     }
 };
@@ -141,6 +154,10 @@ op.onLoaded = () =>
 {
     cleanupPorts();
     restorePorts();
+    if (!activeIn.get())
+    {
+        if (op.uiAttribs) delete op.uiAttribs.pasted;
+    }
 };
 
 op.onDelete = removeImportedOps;
@@ -164,6 +181,7 @@ function update()
             "opId": op.id,
             "blueprintSubpatchId": op.uiAttribs.subPatch
         };
+
         CABLES.sandbox.getBlueprintOps(options, (err, data) =>
         {
             op.setUiError("fetchOps", null);
@@ -188,6 +206,10 @@ function update()
             }
             loadingOut.set(false);
             op.patch.loading.finished(loadingId);
+            if (op.uiAttribs)
+            {
+                delete op.uiAttribs.pasted;
+            }
         });
     }
     else if (document.location.href.indexOf("cables.gl") > 0)
@@ -215,6 +237,10 @@ function update()
                 }
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
+                if (op.uiAttribs)
+                {
+                    delete op.uiAttribs.pasted;
+                }
             }
         );
     }
@@ -240,6 +266,10 @@ function update()
                 }
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
+                if (op.uiAttribs)
+                {
+                    delete op.uiAttribs.pasted;
+                }
             }
         );
     }
@@ -390,36 +420,13 @@ function setupPorts(parentSubPatch)
     const subPatchPortsOut = subPatchData.portsOut || [];
     let i = 0;
 
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
     for (i = 0; i < subPatchPortsIn.length; i++)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
             const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-            if (oldPorts.portsIn.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsIn[newPort.name].links))
-            {
-                oldPorts.portsIn[newPort.name].links.forEach((link) =>
-                {
-                    let parent = op.patch.getOpById(link.objOut);
-                    if (parent)
-                    {
-                        op.patch.link(parent, link.portOut, op, newPort.name);
-                    }
-                    else
-                    {
-                        parent = op.patch.ops.find(subOp =>
-                            subOp.storage &&
-                            subOp.storage.blueprint &&
-                            subOp.storage.blueprint.originalOpId == link.objOut);
-                        if (parent)
-                        {
-                            op.patch.link(parent, link.portOut, op, newPort.name);
-                        }
-                    }
-                });
-                newPort.set(oldPorts.portsIn[newPort.name].value);
-            }
-            newPort.onLinkChanged = savePortData;
 
             if (subPatchPort)
             {
@@ -440,6 +447,39 @@ function setupPorts(parentSubPatch)
                 }
             }
 
+            if (oldPorts.portsIn.hasOwnProperty(newPort.name))
+            {
+                if (!op.uiAttribs.pasted && Array.isArray(oldPorts.portsIn[newPort.name].links))
+                {
+                    oldPorts.portsIn[newPort.name].links.forEach((link) =>
+                    {
+                        let parent = op.patch.getOpById(link.objOut);
+                        if (parent)
+                        {
+                            const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                            if (newLink) newLink.ignoreInSerialize = true;
+                        }
+                        else
+                        {
+                            parent = op.patch.ops.find(subOp =>
+                                subOp.storage &&
+                                subOp.storage.blueprint &&
+                                subOp.storage.blueprint.originalOpId == link.objOut);
+                            if (parent)
+                            {
+                                const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                                if (newLink) newLink.ignoreInSerialize = true;
+                            }
+                        }
+                    });
+                }
+                if (!newPort.isLinked())
+                {
+                    newPort.set(oldPorts.portsIn[newPort.name].value);
+                }
+            }
+            newPort.onLinkChanged = savePortData;
+
             if (subPatchPort.title)
             {
                 newPort.setUiAttribs({ "title": subPatchPortsIn[i].title });
@@ -457,30 +497,6 @@ function setupPorts(parentSubPatch)
             {
                 const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
-                if (oldPorts.portsOut.hasOwnProperty(newPort.name) && Array.isArray(oldPorts.portsOut[newPort.name].links))
-                {
-                    oldPorts.portsOut[newPort.name].links.forEach((link) =>
-                    {
-                        let parent = op.patch.getOpById(link.objIn);
-                        if (parent)
-                        {
-                            op.patch.link(op, newPort.name, parent, link.portIn);
-                        }
-                        else
-                        {
-                            parent = op.patch.ops.find(subOp =>
-                                subOp.storage &&
-                                subOp.storage.blueprint &&
-                                subOp.storage.blueprint.originalOpId == link.objIn);
-                            if (parent)
-                            {
-                                op.patch.link(op, newPort.name, parent, link.portIn);
-                            }
-                        }
-                    });
-                    newPort.set(oldPorts.portsOut[newPort.name].value);
-                }
-                newPort.onLinkChanged = savePortData;
 
                 if (subPatchPort)
                 {
@@ -501,6 +517,40 @@ function setupPorts(parentSubPatch)
                     }
                     newPort.set(subPatchPort.get());
                 }
+
+                if (oldPorts.portsOut.hasOwnProperty(newPort.name))
+                {
+                    if (!op.uiAttribs.pasted && Array.isArray(oldPorts.portsOut[newPort.name].links))
+                    {
+                        oldPorts.portsOut[newPort.name].links.forEach((link) =>
+                        {
+                            let parent = op.patch.getOpById(link.objIn);
+                            if (parent)
+                            {
+                                const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                                if (newLink) newLink.ignoreInSerialize = true;
+                            }
+                            else
+                            {
+                                parent = op.patch.ops.find(subOp =>
+                                    subOp.storage &&
+                                    subOp.storage.blueprint &&
+                                    subOp.storage.blueprint.originalOpId == link.objIn);
+                                if (parent)
+                                {
+                                    const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                                    if (newLink) newLink.ignoreInSerialize = true;
+                                }
+                            }
+                        });
+                    }
+                    if (!newPort.isLinked())
+                    {
+                        newPort.set(oldPorts.portsOut[newPort.name].value);
+                    }
+                }
+                newPort.onLinkChanged = savePortData;
+
                 if (subPatchPort.title)
                 {
                     newPort.setUiAttribs({ "title": subPatchPortsOut[i].title });
@@ -509,6 +559,7 @@ function setupPorts(parentSubPatch)
         }
     }
     savePortData();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
 }
 
 function savePortData()
@@ -527,6 +578,7 @@ function savePortData()
             };
             port.links.forEach((link) =>
             {
+                link.ignoreInSerialize = true;
                 const linkData = {
                     "objOut": link.portOut.parent.id,
                     "portOut": link.portOut.name
@@ -550,6 +602,7 @@ function savePortData()
             };
             port.links.forEach((link) =>
             {
+                link.ignoreInSerialize = true;
                 const linkData = {
                     "objIn": link.portIn.parent.id,
                     "portIn": link.portIn.name

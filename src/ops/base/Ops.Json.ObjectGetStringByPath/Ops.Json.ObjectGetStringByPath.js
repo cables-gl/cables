@@ -4,6 +4,8 @@ const returnPathIn = op.inBool("Output path if missing", false);
 const resultOut = op.outString("Output");
 const foundOut = op.outBool("Found");
 
+objectIn.ignoreValueSerialize = true;
+
 objectIn.onChange = update;
 pathIn.onChange = update;
 returnPathIn.onChange = update;

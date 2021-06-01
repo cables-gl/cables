@@ -4,10 +4,12 @@ const changedOut = op.outTrigger("Changed");
 const outMatching = op.outBool("Matching");
 
 let router = null;
-
 let lastHref = null;
+let hashChangeListener = null;
 
-op.onLoaded = function ()
+op.onLoaded, op.onCreate = init;
+
+function init()
 {
     if ("onhashchange" in window)
     {
@@ -18,16 +20,35 @@ op.onLoaded = function ()
             hashChange(event);
         };
 
-        op.patch.removeEventListener("LocationHashChange" + op.id);
-        op.patch.addEventListener("LocationHashChange" + op.id, eventWrapper);
-        window.removeEventListener("hashchange", hashChange);
-        window.addEventListener("hashchange", hashChange);
+        if (hashChangeListener)
+        {
+            op.patch.removeEventListener(hashChangeListener);
+            hashChangeListener = null;
+        }
+        hashChangeListener = op.patch.addEventListener("LocationHashChange", eventWrapper);
+        window.removeEventListener("hashchange", hashChangeFromBrowser);
+        window.addEventListener("hashchange", hashChangeFromBrowser);
         hashChange({ "newURL": window.location.href });
     }
     else
     {
         op.setUiError("unsupported", "Your browser does not support listening to hashchanges!");
     }
+}
+
+function hashChangeFromBrowser(event)
+{
+    hashChange(event);
+}
+
+op.onDelete = function ()
+{
+    if (hashChangeListener)
+    {
+        op.patch.removeEventListener(hashChangeListener);
+        hashChangeListener = null;
+    }
+    window.removeEventListener("hashchange", hashChangeFromBrowser);
 };
 
 routeIn.onChange = function ()
@@ -45,6 +66,7 @@ function hashChange(event, forceUpdate)
     {
         return;
     }
+    lastHref = event.newURL;
     op.setUiError("unsupported", null);
     let values = {};
     const fields = event.newURL.split("#");

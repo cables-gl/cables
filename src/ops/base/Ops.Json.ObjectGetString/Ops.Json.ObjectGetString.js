@@ -1,22 +1,22 @@
-var data=op.inObject("data");
-var key = op.inString("Key");
-const result=op.outString("Result");
+let data = op.inObject("data");
+let key = op.inString("Key");
+const result = op.outString("Result");
 
-result.ignoreValueSerialize=true;
-data.ignoreValueSerialize=true;
+result.ignoreValueSerialize = true;
+data.ignoreValueSerialize = true;
 
-key.onChange=function()
+key.onChange = function ()
 {
-    op.setUiAttrib({ extendTitle: key.get() });
+    op.setUiAttrib({ "extendTitle": key.get() });
     exec();
 };
-data.onChange=exec;
+data.onChange = exec;
 
 function exec()
 {
-    if(data.get() && data.get().hasOwnProperty(key.get()))
+    if (data.get() && data.get().hasOwnProperty(key.get()))
     {
-        result.set( data.get()[key.get()] );
+        result.set(data.get()[key.get()]);
     }
     else
     {
