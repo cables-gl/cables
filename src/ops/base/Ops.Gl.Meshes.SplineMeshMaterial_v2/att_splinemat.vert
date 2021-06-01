@@ -16,7 +16,7 @@ UNI mat4 modelMatrix;
 UNI float width;
 UNI float texOffset;
 
-#define PI 3.1415926538m
+#define PI 3.1415926538
 
 vec2 rotate(vec2 v, float a)
 {
