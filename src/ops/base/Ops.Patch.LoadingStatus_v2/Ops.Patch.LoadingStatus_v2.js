@@ -27,19 +27,19 @@ exe.onTriggered = () =>
     outProgress.set(patch.loading.getProgress());
 
     let hasFinished = jobs.length === 0;
-    outLoading.set(!hasFinished);
+    const notFinished = !hasFinished;
+    // outLoading.set(!hasFinished);
 
-    if (!hasFinished)
+    if (notFinished)
     {
         outList.set(op.patch.loading.getListJobs());
     }
 
-    if (!hasFinished)
+    if (notFinished)
     {
         if (firstTime)
         {
             if (preRenderOps.get()) op.patch.preRenderOps();
-            loadingFinished.trigger();
             op.patch.timer.setTime(0);
             if (startTimeLine.get())
             {
@@ -64,7 +64,10 @@ exe.onTriggered = () =>
     }
 
     outInitialFinished.set(finishedOnce);
-    outLoading.set(!hasFinished);
+
+    if (outLoading.get() && hasFinished) loadingFinished.trigger();
+
+    outLoading.set(notFinished);
 
     next.trigger();
 

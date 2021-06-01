@@ -15,7 +15,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.User.stephan.Base64Encode_v2"
+        "name": "Ops.String.Base64Encode_v2"
     },
     "summary": "encode a string to base64",
     "changelog": [

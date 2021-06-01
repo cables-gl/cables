@@ -1,1 +1,49 @@
-{"authorName":"b2renger","created":1524902340627,"layout":{"portsIn":[{"type":5,"name":"Base64 / Data URI"}],"portsOut":[{"type":2,"name":"Texture"},{"type":0,"name":"Loading","subType":"boolean"}],"name":"Ops.Gl.Textures.Base64ToTexture"},"summary":"Converts a base-64 image string into a texture","docs":{"ports":[{"name":"Base64 / Data URI","text":"Place either a Base64 string directly or as a Data URI to be converted"},{"name":"Texture","text":"Texture conversion of the input string"},{"name":"Loading","text":"Indicates whether it is still busy with converting the string"}]},"id":"cd07e587-432a-4a81-a2b7-51273cf32171","issues":"","collections":null,"relatedops":["TextureToBase64"],"youtubeids":[]}
+{
+    "authorName": "b2renger",
+    "created": 1524902340627,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Base64 / Data URI"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            }
+        ],
+        "name": "Ops.Gl.Textures.Base64ToTexture"
+    },
+    "summary": "Converts a base-64 image string into a texture",
+    "docs": {
+        "ports": [
+            {
+                "name": "Base64 / Data URI",
+                "text": "Place either a Base64 string directly or as a Data URI to be converted"
+            },
+            {
+                "name": "Texture",
+                "text": "Texture conversion of the input string"
+            },
+            {
+                "name": "Loading",
+                "text": "Indicates whether it is still busy with converting the string"
+            }
+        ]
+    },
+    "id": "cd07e587-432a-4a81-a2b7-51273cf32171",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "TextureToBase64"
+    ],
+    "youtubeids": []
+}
