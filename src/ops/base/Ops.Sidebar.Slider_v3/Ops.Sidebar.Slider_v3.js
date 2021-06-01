@@ -198,8 +198,8 @@ function updateActiveTrack(val)
 {
     let valueToUse = parseFloat(input.value);
     if (typeof val !== "undefined") valueToUse = val;
-    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
-    if (availableWidth === 0) { availableWidth = 206; }
+    let availableWidth = activeTrack.parentElement.getBoundingClientRect().width;
+
     const trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min),
@@ -207,7 +207,6 @@ function updateActiveTrack(val)
         0,
         availableWidth - 16 /* subtract slider thumb width */
     );
-    // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
     activeTrack.style.width = trackWidth + "px";
 }
 
@@ -254,6 +253,8 @@ function onParentChanged()
         siblingsPort.set(parent);
     }
     else if (el.parentElement) el.parentElement.removeChild(el);
+
+    updateActiveTrack();
 }
 
 function showElement(el)

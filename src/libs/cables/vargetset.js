@@ -74,7 +74,7 @@ const VarSetOpWrapper = class
         {
             console.log("var does not exist", varname);
 
-            this._setVarValue(); // this should not be done, its kept because of compatibility anxiety
+            this._setVarValue(); // this should not be done!!!, its kept because of compatibility anxiety
         }
 
         if (this._op.isCurrentUiOp())
