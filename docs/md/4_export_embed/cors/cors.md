@@ -38,6 +38,12 @@ side of the provider of the files** in various webservers and programming langua
 to adding this to your HTTP-Response headers:
 
 ```
- Access-Control-Allow-Origin: *
- Access-Control-Allow-Origin: http://example.com:8080
+Access-Control-Allow-Origin: https://cables.gl
+Access-Control-Allow-Origin: https://sandbox.cables.gl
+```
+
+or more broadly:
+
+```
+Access-Control-Allow-Origin: *
 ```
