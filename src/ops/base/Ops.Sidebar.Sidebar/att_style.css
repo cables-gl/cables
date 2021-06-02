@@ -23,14 +23,19 @@
 }
 
 .sidebar-cables {
+    --sidebar-color: #07f78c;//#ff0000;//#24baa7;
+    --sidebar-width: 220px;
+    --sidebar-border-radius: 10px;
+    --sidebar-monospace-font-stack: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    --sidebar-hover-transition-time: .2s;
+
     position: absolute;
     top: 15px;
     left: 15px;
-    border-radius: 10px;
-    /*border:10px solid #1a1a1a;*/
+    border-radius: var(--sidebar-border-radius);
     z-index: 100000;
     color: #BBBBBB;
-    width: 220px;
+    width: var(  --sidebar-width);
     max-height: 100%;
     box-sizing: border-box;
     overflow-y: auto;
@@ -38,13 +43,10 @@
     font-size: 13px;
     font-family: Arial;
     line-height: 1em; /* prevent emojis from breaking height of the title */
-    --sidebar-border-radius: 4px;
-    --sidebar-monospace-font-stack: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    --sidebar-hover-transition-time: .2s;
 }
 
 .sidebar-cables::selection {
-    background-color: #24baa7;
+    background-color: var(--sidebar-color);
     color: #EEEEEE;
 }
 
@@ -286,7 +288,7 @@
 }
 
 .sidebar__item-value-label::selection {
-    background-color: #24baa7;
+    background-color: var(--sidebar-color);
     color: #EEEEEE;
 }
 
@@ -401,7 +403,7 @@
 
 .sidebar__button-input:hover {
   background-color: #333;
-  border:2px solid #07f78c;
+  border:2px solid var(--sidebar-color);
 }
 
 /*
@@ -449,7 +451,7 @@
     z-index: 11;
     top: 0;
     left: 0;
-    background-color: #07f78c;
+    background-color: var(--sidebar-color);
     pointer-events: none;
     height: var(--sidebar-slider-input-height);
 
@@ -477,7 +479,7 @@
     z-index: 900 !important;
     border-radius: 20px !important;
     cursor: pointer;
-    background: #07f78c !important;
+    background: var(--sidebar-color) !important;
     user-select: none;
 
 }
@@ -763,4 +765,36 @@
     z-index: 1000;
     right: 0;
     top: 0;
+}
+
+.sidebar_tabs
+{
+    background-color: #151515;
+    padding-bottom: 0px;
+}
+
+.sidebar_tab
+{
+    float:left;
+    background-color: #151515;
+    border-bottom:1px solid transparent;
+    padding-right:3px;
+    padding-left:3px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    cursor:pointer;
+}
+
+.sidebar_tab_active
+{
+    background-color: #272727;
+    color:white;
+    padding-right:7px;
+    padding-left:7px;
+}
+
+.sidebar_tab:hover
+{
+    border-bottom:1px solid #777;
+    color:white;
 }
