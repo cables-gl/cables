@@ -1033,7 +1033,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     for (const i in this.ops)
     {
         this.ops[i].initVarPorts();
-        // delete this.ops[i].uiAttribs.pasted;
+        delete this.ops[i].uiAttribs.pasted;
     }
 
 
