@@ -11,7 +11,7 @@ certain HTTP-Headers (see below). Really often this is not the case.
 
 ## How do i know this happens to me?
 
-First of all, you won't see the files loaded, no images, no data from the API. Check your developers console
+First of all, you won't see the files loaded, no images, no data from the API. Check your developer tools (ctrl+shift+i or cmd+option+i) console
 in the browser and you will, most likely, see something like this:
 
 ```
