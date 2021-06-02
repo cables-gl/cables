@@ -88,6 +88,10 @@
             {
                 "type": 3,
                 "name": "Colors"
+            },
+            {
+                "type": 3,
+                "name": "TexCoords"
             }
         ],
         "portsOut": [

@@ -778,8 +778,8 @@
     float:left;
     background-color: #151515;
     border-bottom:1px solid transparent;
-    padding-right:3px;
-    padding-left:3px;
+    padding-right:7px;
+    padding-left:7px;
     padding-bottom: 5px;
     padding-top: 5px;
     cursor:pointer;
@@ -789,8 +789,6 @@
 {
     background-color: #272727;
     color:white;
-    padding-right:7px;
-    padding-left:7px;
 }
 
 .sidebar_tab:hover
