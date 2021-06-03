@@ -1030,7 +1030,11 @@ Patch.prototype.deSerialize = function (obj, genIds)
         for (const varName in this.config.variables)
             this.setVarValue(varName, this.config.variables[varName]);
 
-    for (const i in this.ops) this.ops[i].initVarPorts();
+    for (const i in this.ops)
+    {
+        this.ops[i].initVarPorts();
+        delete this.ops[i].uiAttribs.pasted;
+    }
 
 
     setTimeout(() => { this.loading.finished(loadingId); }, 100);

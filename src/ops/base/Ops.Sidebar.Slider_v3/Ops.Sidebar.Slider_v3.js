@@ -15,6 +15,8 @@ const inputValuePort = op.inValue("Input", 0.5);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const reset = op.inTriggerButton("Reset");
 
+let parent = null;
+
 const defaultValuePort = op.inValue("Default", 0.5);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
 
@@ -37,6 +39,8 @@ el.addEventListener("dblclick", function ()
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__slider");
 el.classList.add("sidebar__reloadable");
+
+op.patch.on("sidebarStylesChanged", () => { updateActiveTrack(); });
 
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
@@ -198,7 +202,8 @@ function updateActiveTrack(val)
 {
     let valueToUse = parseFloat(input.value);
     if (typeof val !== "undefined") valueToUse = val;
-    let availableWidth = activeTrack.parentElement.getBoundingClientRect().width;
+    let availableWidth = activeTrack.parentElement.getBoundingClientRect().width || 220;
+    if (parent) availableWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width"));
 
     const trackWidth = CABLES.map(
         valueToUse,
@@ -245,7 +250,7 @@ function onLabelTextChanged()
 
 function onParentChanged()
 {
-    const parent = parentPort.get();
+    parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);

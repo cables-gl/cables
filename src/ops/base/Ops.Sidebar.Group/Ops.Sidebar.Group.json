@@ -5,31 +5,36 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "Show Title",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Default Minimized",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "next"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "childs"
             }
         ],

@@ -14,6 +14,8 @@ portsData.setUiAttribs({ "hideParam": true });
 gotoIn.setUiAttribs({ "greyout": true });
 gotoIn.setUiAttribs({ "hidePort": true });
 
+let wasPasted = false;
+
 if (op.patch.isEditorMode())
 {
     gotoIn.onTriggered = function ()
@@ -53,7 +55,7 @@ const restorePorts = () =>
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
         const newPort = op.addInPort(new CABLES.Port(op, oldPortIn.name, oldPortIn.type));
-        if (!op.uiAttribs.pasted && Array.isArray(oldPortIn.links))
+        if (!wasPasted && Array.isArray(oldPortIn.links))
         {
             oldPortIn.links.forEach((link) =>
             {
@@ -94,7 +96,7 @@ const restorePorts = () =>
     {
         const oldPortOut = oldPorts.portsOut[portOutKeys[i]];
         const newPort = op.addOutPort(new CABLES.Port(op, oldPortOut.name, oldPortOut.type));
-        if (!op.uiAttribs.pasted && Array.isArray(oldPortOut.links))
+        if (!wasPasted && Array.isArray(oldPortOut.links))
         {
             oldPortOut.links.forEach((link) =>
             {
@@ -145,19 +147,19 @@ activeIn.onChange = () =>
         {
             op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
-            if (op.uiAttribs.pasted) delete op.uiAttribs.pasted;
+            if (wasPasted) wasPasted = false;
         }
     }
 };
 
 op.onLoaded = () =>
 {
+    if (op.uiAttribs)
+    {
+        wasPasted = op.uiAttribs.pasted;
+    }
     cleanupPorts();
     restorePorts();
-    if (!activeIn.get())
-    {
-        if (op.uiAttribs) delete op.uiAttribs.pasted;
-    }
 };
 
 op.onDelete = removeImportedOps;
@@ -206,9 +208,9 @@ function update()
             }
             loadingOut.set(false);
             op.patch.loading.finished(loadingId);
-            if (op.uiAttribs)
+            if (wasPasted)
             {
-                delete op.uiAttribs.pasted;
+                wasPasted = false;
             }
         });
     }
@@ -237,9 +239,9 @@ function update()
                 }
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
-                if (op.uiAttribs)
+                if (wasPasted)
                 {
-                    delete op.uiAttribs.pasted;
+                    wasPasted = false;
                 }
             }
         );
@@ -266,9 +268,9 @@ function update()
                 }
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
-                if (op.uiAttribs)
+                if (wasPasted)
                 {
-                    delete op.uiAttribs.pasted;
+                    wasPasted = false;
                 }
             }
         );
@@ -449,7 +451,7 @@ function setupPorts(parentSubPatch)
 
             if (oldPorts.portsIn.hasOwnProperty(newPort.name))
             {
-                if (!op.uiAttribs.pasted && Array.isArray(oldPorts.portsIn[newPort.name].links))
+                if (!wasPasted && Array.isArray(oldPorts.portsIn[newPort.name].links))
                 {
                     oldPorts.portsIn[newPort.name].links.forEach((link) =>
                     {
@@ -520,7 +522,7 @@ function setupPorts(parentSubPatch)
 
                 if (oldPorts.portsOut.hasOwnProperty(newPort.name))
                 {
-                    if (!op.uiAttribs.pasted && Array.isArray(oldPorts.portsOut[newPort.name].links))
+                    if (!wasPasted && Array.isArray(oldPorts.portsOut[newPort.name].links))
                     {
                         oldPorts.portsOut[newPort.name].links.forEach((link) =>
                         {
