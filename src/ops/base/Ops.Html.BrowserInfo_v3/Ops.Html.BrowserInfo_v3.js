@@ -1,5 +1,6 @@
 const
     isMobile = op.outBool("Is Mobile", false),
+    isTouch = op.outBool("Is Touchscreen", false),
     isIe = op.outBool("Is IE", false),
     isEdge = op.outBool("Is Edge", false),
     isChrome = op.outBool("Is Chrome", false),
@@ -57,8 +58,13 @@ const isMobileBool = (osFamily === "webOS" // LG mobile phones
     || pf.name === "Opera Mobile");
 const isElectronBool = pf.name === "Electron";
 
+const isTouchDevice = (
+    ("ontouchstart" in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0));
 
 isMobile.set(isMobileBool);
+isTouch.set(isTouchDevice);
 
 isIe.set(isIEBool);
 isEdge.set(isEdgeBool);
@@ -73,7 +79,6 @@ isWindows.set(isWindowsBool);
 isIos.set(isIosBool);
 isAndroid.set(isAndroidBool);
 isElectron.set(isElectronBool);
-
 
 outNav.set(navigator.language || navigator.userLanguage);
 outUA.set(pf.ua);
