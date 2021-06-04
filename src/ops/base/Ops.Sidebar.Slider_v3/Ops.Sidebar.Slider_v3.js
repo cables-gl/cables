@@ -203,7 +203,7 @@ function updateActiveTrack(val)
     let valueToUse = parseFloat(input.value);
     if (typeof val !== "undefined") valueToUse = val;
     let availableWidth = activeTrack.parentElement.getBoundingClientRect().width || 220;
-    if (parent) availableWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width"));
+    if (parent) availableWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width")) - 20;
 
     const trackWidth = CABLES.map(
         valueToUse,
