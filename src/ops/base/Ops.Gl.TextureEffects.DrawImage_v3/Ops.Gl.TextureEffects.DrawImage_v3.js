@@ -89,7 +89,6 @@ function updateAspectRatio()
         if (inAspectAxis.get() == "X") shader.define("ASPECT_AXIS_X");
         if (inAspectAxis.get() == "Y") shader.define("ASPECT_AXIS_Y");
     }
-
 }
 
 function updateRemoveAlphaSrc()
@@ -224,7 +223,7 @@ function doRender()
         const imgTex = cgl.currentTextureEffect.getCurrentSourceTexture();
         cgl.setTexture(0, imgTex.tex);
 
-        uniTexAspect.setValue(1 / (tex.height / tex.width * imgTex.width / imgTex.height));
+        uniTexAspect.setValue(1 / (cgl.currentTextureEffect.getWidth() / cgl.currentTextureEffect.getHeight() * imgTex.width / imgTex.height));
 
         cgl.setTexture(1, tex.tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, image.get().tex );
