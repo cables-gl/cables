@@ -66,34 +66,30 @@ function updateAspectRatio()
 {
     shader.removeDefine("ASPECT_AXIS_X");
     shader.removeDefine("ASPECT_AXIS_Y");
+    shader.removeDefine("ASPECT_CROP");
+
+    inAspectPos.setUiAttribs({ "greyout": !inAspect.get() });
+    inAspectCrop.setUiAttribs({ "greyout": !inAspect.get() });
+    inAspectAxis.setUiAttribs({ "greyout": !inAspect.get() });
 
     if (inAspect.get())
     {
         shader.define("ASPECT_RATIO");
 
         if (inAspectCrop.get()) shader.define("ASPECT_CROP");
-        else shader.removeDefine("ASPECT_CROP");
 
         if (inAspectAxis.get() == "X") shader.define("ASPECT_AXIS_X");
         if (inAspectAxis.get() == "Y") shader.define("ASPECT_AXIS_Y");
-
-        inAspectPos.setUiAttribs({ "greyout": false });
-        inAspectCrop.setUiAttribs({ "greyout": false });
-        inAspectAxis.setUiAttribs({ "greyout": false });
     }
     else
     {
         shader.removeDefine("ASPECT_RATIO");
         if (inAspectCrop.get()) shader.define("ASPECT_CROP");
-        else shader.removeDefine("ASPECT_CROP");
 
         if (inAspectAxis.get() == "X") shader.define("ASPECT_AXIS_X");
         if (inAspectAxis.get() == "Y") shader.define("ASPECT_AXIS_Y");
-
-        inAspectPos.setUiAttribs({ "greyout": true });
-        inAspectCrop.setUiAttribs({ "greyout": true });
-        inAspectAxis.setUiAttribs({ "greyout": true });
     }
+
 }
 
 function updateRemoveAlphaSrc()
