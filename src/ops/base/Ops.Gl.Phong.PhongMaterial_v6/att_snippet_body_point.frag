@@ -12,7 +12,9 @@
 
         #ifdef HAS_TEXTURES
             #ifdef HAS_TEXTURE_AO
-                lightColor{{LIGHT_INDEX}} *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
+                // lightColor{{LIGHT_INDEX}} *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
+                lightColor{{LIGHT_INDEX}} *= texture(texAO, texCoord).g, inTextureIntensities.AO;
+
             #endif
 
             #ifdef HAS_TEXTURE_SPECULAR
