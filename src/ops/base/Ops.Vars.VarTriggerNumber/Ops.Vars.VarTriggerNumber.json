@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.VarTriggerNumber renamed to Ops.Vars.VarTriggerNumber",
             "author": "pandur",
             "date": 1614259035231
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1623159667598
         }
     ],
     "authorName": "pandur",
@@ -49,5 +54,8 @@
             }
         ],
         "name": "Ops.Vars.VarTriggerNumber"
-    }
+    },
+    "coreLibs": [
+        "vargetset"
+    ]
 }
