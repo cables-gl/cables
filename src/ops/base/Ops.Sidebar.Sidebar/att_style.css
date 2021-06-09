@@ -773,6 +773,11 @@
     padding-bottom: 0px;
 }
 
+.sidebar_switchs
+{
+    float: right;
+}
+
 .sidebar_tab
 {
     float:left;
@@ -794,5 +799,41 @@
 .sidebar_tab:hover
 {
     border-bottom:1px solid #777;
+    color:white;
+}
+
+
+.sidebar_switch
+{
+    float:left;
+    background-color: #444;
+    padding-right:7px;
+    padding-left:7px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    cursor:pointer;
+}
+
+.sidebar_switch:last-child
+{
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+.sidebar_switch:first-child
+{
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+}
+
+
+.sidebar_switch_active
+{
+    background-color: #999;
+    color:white;
+}
+
+.sidebar_switch:hover
+{
     color:white;
 }

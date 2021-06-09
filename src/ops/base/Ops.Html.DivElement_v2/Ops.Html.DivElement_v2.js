@@ -142,12 +142,12 @@ function updateClass()
     warning();
 }
 
-function onMouseEnter()
+function onMouseEnter(e)
 {
     outHover.set(true);
 }
 
-function onMouseLeave()
+function onMouseLeave(e)
 {
     outHover.set(false);
 }
@@ -176,9 +176,9 @@ function removeListeners()
 {
     if (listenerElement)
     {
-        listenerElement.removeEventListener("click", onMouseClick);
-        listenerElement.removeEventListener("mouseleave", onMouseLeave);
-        listenerElement.removeEventListener("mouseenter", onMouseEnter);
+        listenerElement.removeEventListener("pointerdown", onMouseClick);
+        listenerElement.removeEventListener("pointerleave", onMouseLeave);
+        listenerElement.removeEventListener("pointerenter", onMouseEnter);
         listenerElement = null;
     }
 }
@@ -191,15 +191,14 @@ function addListeners()
 
     if (listenerElement)
     {
-        listenerElement.addEventListener("click", onMouseClick);
-        listenerElement.addEventListener("mouseleave", onMouseLeave);
-        listenerElement.addEventListener("mouseenter", onMouseEnter);
+        listenerElement.addEventListener("pointerdown", onMouseClick);
+        listenerElement.addEventListener("pointerleave", onMouseLeave);
+        listenerElement.addEventListener("pointerenter", onMouseEnter);
     }
 }
 
 op.addEventListener("onEnabledChange", function (enabled)
 {
-    op.log("css changed");
     setCSSVisible(div.style.visibility != "visible");
 });
 

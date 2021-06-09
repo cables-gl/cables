@@ -58,7 +58,7 @@ function normalizeWheel(event)
         if (event.deltaY > 20)sY = 20;
         else if (event.deltaY < -20)sY = -20;
     }
-    return sY;
+    return sY * dir;
 }
 
 function normalizeWheelX(event)

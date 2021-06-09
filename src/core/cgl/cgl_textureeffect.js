@@ -29,6 +29,16 @@ const TextureEffect = function (cgl, options)
     this.depth = false;
 };
 
+TextureEffect.prototype.getWidth = function ()
+{
+    return this._textureSource.width;
+};
+
+TextureEffect.prototype.getHeight = function ()
+{
+    return this._textureSource.height;
+};
+
 TextureEffect.prototype.setSourceTexture = function (tex)
 {
     if (tex.textureType == Texture.TYPE_FLOAT) this._cgl.gl.getExtension("EXT_color_buffer_float");

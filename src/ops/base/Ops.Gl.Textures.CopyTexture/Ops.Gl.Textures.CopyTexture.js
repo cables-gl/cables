@@ -32,7 +32,7 @@ let effect = null;
 let tex = null;
 let needsResUpdate = true;
 
-let w = 8, h = 8;
+let w = 2, h = 2;
 const prevViewPort = [0, 0, 0, 0];
 let reInitEffect = true;
 
