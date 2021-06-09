@@ -1161,7 +1161,8 @@ Patch.Variable.prototype.removeListener = function (cb)
  */
 Patch.prototype.setVariable = function (name, val)
 {
-    if (this._variables.hasOwnProperty(name))
+    // if (this._variables.hasOwnProperty(name))
+    if (this._variables[name] !== undefined)
     {
         this._variables[name].setValue(val);
     }
@@ -1191,13 +1192,15 @@ Patch.prototype._sortVars = function ()
  */
 Patch.prototype.hasVar = function (name)
 {
-    return this._variables.hasOwnProperty(name);
+    return this._variables[name] !== undefined;
+
+    // return this._variables.hasOwnProperty(name);
 };
 
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
-    if (this._variables.hasOwnProperty(name))
+    if (this.hasVar(name))
     {
         this._variables[name].setValue(val);
     }
