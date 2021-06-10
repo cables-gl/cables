@@ -43,7 +43,7 @@ active.onChange = function ()
 {
     if (active.get())
     {
-        if (loadedFilename != filename.get()) reloadSoon();
+        if (loadedFilename != filename.get() || !tex) reloadSoon();
         else textureOut.set(tex);
     }
     else
@@ -51,6 +51,8 @@ active.onChange = function ()
         textureOut.set(CGL.Texture.getEmptyTexture(cgl));
         width.set(CGL.Texture.getEmptyTexture(cgl).width);
         height.set(CGL.Texture.getEmptyTexture(cgl).height);
+        if (tex)tex.delete();
+        tex = null;
     }
 };
 

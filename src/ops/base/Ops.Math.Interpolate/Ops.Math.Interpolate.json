@@ -3,24 +3,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 1",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value 2",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Percentage",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

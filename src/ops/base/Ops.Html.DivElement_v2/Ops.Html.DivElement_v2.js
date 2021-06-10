@@ -177,8 +177,8 @@ function removeListeners()
     if (listenerElement)
     {
         listenerElement.removeEventListener("pointerdown", onMouseClick);
-        listenerElement.removeEventListener("mouseleave", onMouseLeave);
-        listenerElement.removeEventListener("mouseenter", onMouseEnter);
+        listenerElement.removeEventListener("pointerleave", onMouseLeave);
+        listenerElement.removeEventListener("pointerenter", onMouseEnter);
         listenerElement = null;
     }
 }
