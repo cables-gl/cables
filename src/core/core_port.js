@@ -716,6 +716,12 @@ Port.prototype.setUiActiveState = function (onoff)
     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
 };
 
+Port.prototype.hidePort = function ()
+{
+    console.log("op.hideport() is deprecated, do not use it!");
+};
+
+
 /**
  * Returns the port type string, e.g. "value" based on the port type number
  * @function portTypeNumberToString
