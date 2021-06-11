@@ -155,10 +155,8 @@ relative.onChange = function ()
     offsetY = 0;
 };
 
-function onmousemove(e)
+function setCoords(e)
 {
-    mouseOver.set(true);
-
     if (!relative.get())
     {
         if (area.get() != "Document")
@@ -207,6 +205,17 @@ function onmousemove(e)
     }
 }
 
+function onmousemove(e)
+{
+    mouseOver.set(true);
+    setCoords(e);
+}
+
+function ontouchmove(e)
+{
+    if (event.touches && event.touches.length > 0) setCoords(e.touches[0]);
+}
+
 function ontouchstart(event)
 {
     mouseDown.set(true);
@@ -231,6 +240,7 @@ function removeListeners()
     if (!listenerElement) return;
     listenerElement.removeEventListener("touchend", ontouchend);
     listenerElement.removeEventListener("touchstart", ontouchstart);
+    listenerElement.removeEventListener("touchmove", ontouchmove);
 
     listenerElement.removeEventListener("click", onmouseclick);
     listenerElement.removeEventListener("mousemove", onmousemove);
@@ -255,6 +265,7 @@ function addListeners()
     {
         listenerElement.addEventListener("touchend", ontouchend);
         listenerElement.addEventListener("touchstart", ontouchstart);
+        listenerElement.addEventListener("touchmove", ontouchmove);
     }
 
     listenerElement.addEventListener("mousemove", onmousemove);
