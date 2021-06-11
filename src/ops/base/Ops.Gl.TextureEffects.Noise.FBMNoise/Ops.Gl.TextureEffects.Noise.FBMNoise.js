@@ -10,7 +10,7 @@ const
 r.setUiAttribs({ "colorPick": true });
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "fbmnoise");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.fbmnoise_frag);
 const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
