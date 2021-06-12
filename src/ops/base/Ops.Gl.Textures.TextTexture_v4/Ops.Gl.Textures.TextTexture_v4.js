@@ -18,6 +18,7 @@ const
     inFontSize = op.inValueFloat("fontSize", 30),
     lineDistance = op.inValueFloat("Line Height", 1),
     lineOffset = op.inValueFloat("Vertical Offset", 0),
+    // letterSpacing = op.inValueFloat("Spacing", 0),
     drawDebug = op.inBool("Show Debug", false),
     limitLines = op.inValueInt("Limit Lines", 0),
     texWidth = op.inValueInt("texture width", 512),
@@ -43,8 +44,8 @@ const
 r.setUiAttribs({ "colorPick": true });
 
 op.setPortGroup("Color", [r, g, b]);
-op.setPortGroup("Size", [font, maximize, inFontSize, lineDistance, lineOffset]);
-op.setPortGroup("Texture", [texWidth, weight, texHeight, tfilter, aniso]);
+op.setPortGroup("Size", [font, weight, maximize, inFontSize, lineDistance, lineOffset]);
+op.setPortGroup("Texture", [texWidth, texHeight, tfilter, aniso]);
 op.setPortGroup("Alignment", [valign, align]);
 op.setPortGroup("Rendering", [drawMesh, renderHard, meshScale]);
 
@@ -58,7 +59,7 @@ align.onChange =
     lineOffset.onChange =
     lineDistance.onChange =
     cachetexture.onChange =
-
+    // letterSpacing.onChange =
     limitLines.onChange =
     texWidth.onChange =
     texHeight.onChange =
@@ -194,6 +195,11 @@ function removeEmptyLines(lines)
 function refresh()
 {
     cgl.checkFrameStarted("texttrexture refresh");
+
+    // const num=String(parseInt(letterSpacing.get()));
+    // console.log("num",num);
+    //     fontImage.style["letter-spacing"] = num+"px";
+    // fontImage.style["font-kerning"]="normal";
 
     ctx.clearRect(0, 0, fontImage.width, fontImage.height);
     const rgbString = "rgba(" + Math.floor(r.get() * 255) + ","
