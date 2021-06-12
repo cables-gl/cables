@@ -51,7 +51,8 @@ op.patch.on("fontLoaded", (fontName) =>
 {
     if (fontName == font.get())
     {
-        needsRefresh = true;
+        // needsRefresh = true;
+        refresh();
     }
 });
 
