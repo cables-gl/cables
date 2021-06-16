@@ -1,6 +1,6 @@
 const inStr = op.inString("String", "default");
 const outNum = op.outNumber("Result", 0);
-const numberStrings = ["one", "two", "three", "four", "six", "seven", "eight", "nine", "ten"];
+const numberStrings = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
 
 const strings = [];
 const numbers = [];

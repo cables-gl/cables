@@ -31,6 +31,11 @@
                 "subType": "integer"
             },
             {
+                "type": 0,
+                "name": "Round Corners",
+                "subType": "number"
+            },
+            {
                 "type": 5,
                 "name": "Special Color"
             }
@@ -42,5 +47,13 @@
             }
         ],
         "name": "Ops.Sidebar.SideBarStyle"
+    },
+    "summary": "adjust appearance of sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -1,1 +1,97 @@
-{"id":"f45fdd5e-b20a-4553-a83b-57eed8a98c80","changelog":[{"message":"created op","author":"pandur","date":1618323401309},{"message":"Ops.User.pandur.ArrayMergeTrigger renamed to Ops.Array.ArrayMergeTrigger","author":"pandur","date":1618323580125}],"authorName":"pandur","created":1618323456249}
+{
+    "id": "f45fdd5e-b20a-4553-a83b-57eed8a98c80",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1618323401309
+        },
+        {
+            "message": "Ops.User.pandur.ArrayMergeTrigger renamed to Ops.Array.ArrayMergeTrigger",
+            "author": "pandur",
+            "date": 1618323580125
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1618323456249,
+    "summary": "merge /concatinate arrays by trigger",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Merge"
+            },
+            {
+                "type": 3,
+                "name": "Array 0"
+            },
+            {
+                "type": 3,
+                "name": "Array 1"
+            },
+            {
+                "type": 3,
+                "name": "Array 2"
+            },
+            {
+                "type": 3,
+                "name": "Array 3"
+            },
+            {
+                "type": 3,
+                "name": "Array 4"
+            },
+            {
+                "type": 3,
+                "name": "Array 5"
+            },
+            {
+                "type": 3,
+                "name": "Array 6"
+            },
+            {
+                "type": 3,
+                "name": "Array 7"
+            },
+            {
+                "type": 3,
+                "name": "Array 8"
+            },
+            {
+                "type": 3,
+                "name": "Array 9"
+            },
+            {
+                "type": 3,
+                "name": "Array 10"
+            },
+            {
+                "type": 3,
+                "name": "Array 11"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 3,
+                "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Array length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Array.ArrayMergeTrigger"
+    }
+}

@@ -183,5 +183,13 @@
             }
         ],
         "name": "Ops.Array.ArrayFromNumbers"
+    },
+    "summary": "simple way to create small arrays of numbers",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
