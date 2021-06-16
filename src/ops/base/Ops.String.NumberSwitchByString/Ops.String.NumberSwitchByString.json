@@ -100,6 +100,15 @@
                 "type": 0,
                 "name": "Number 9",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 10"
+            },
+            {
+                "type": 0,
+                "name": "Number 10",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -110,5 +119,13 @@
             }
         ],
         "name": "Ops.String.NumberSwitchByString"
+    },
+    "summary": "associate numbers by strings",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

@@ -1,38 +1,36 @@
 const
-    exec=op.inTrigger("Merge"),
-    next=op.outTrigger("Next");
+    exec = op.inTrigger("Merge"),
+    next = op.outTrigger("Next");
 
-const numArrays=12;
-const inArrs=[];
-let needsUpdate=true;
+const numArrays = 12;
+const inArrs = [];
+let needsUpdate = true;
 
-for(let i =0;i<numArrays;i++)
+for (let i = 0; i < numArrays; i++)
 {
-    inArrs[i]=op.inArray("Array "+i);
-    inArrs[i].onChange=function()
+    inArrs[i] = op.inArray("Array " + i);
+    inArrs[i].onChange = () =>
     {
-        // update();
-        needsUpdate=true;
-    }
+        needsUpdate = true;
+    };
 }
 
 const
-    outArr=op.outArray("Result"),
+    outArr = op.outArray("Result"),
     outArrayLength = op.outNumber("Array length");
 
-var arr=[];
+let arr = [];
 
-exec.onTriggered=()=>
+exec.onTriggered = () =>
 {
-
-    if(needsUpdate)
+    if (needsUpdate)
     {
-        arr.length=0;
+        arr.length = 0;
 
-        for(let i=0;i<numArrays;i++)
+        for (let i = 0; i < numArrays; i++)
         {
-            const ar=inArrs[i].get();
-            if(ar)arr=arr.concat(ar);
+            const ar = inArrs[i].get();
+            if (ar)arr = arr.concat(ar);
         }
 
         outArr.set(null);
@@ -41,5 +39,4 @@ exec.onTriggered=()=>
     }
 
     next.trigger();
-
 };

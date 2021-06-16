@@ -1,10 +1,12 @@
 const parentPort = op.inObject("link"),
     inWidth = op.inInt("Width", 220),
+    inBorderRadius = op.inFloat("Round Corners", 10),
     inColorSpecial = op.inString("Special Color", "#07f78c"),
 
     siblingsPort = op.outObject("childs");
 
 inColorSpecial.onChange =
+inBorderRadius.onChange =
 inWidth.onChange = setStyle;
 
 parentPort.onChange = onParentChanged;
@@ -22,6 +24,8 @@ function setStyle()
     sideBarEle.style.setProperty("--sidebar-width", inWidth.get() + "px");
 
     sideBarEle.style.setProperty("--sidebar-color", inColorSpecial.get());
+
+    sideBarEle.style.setProperty("--sidebar-border-radius", Math.round(inBorderRadius.get()) + "px");
 
     op.patch.emitEvent("sidebarStylesChanged");
 }
