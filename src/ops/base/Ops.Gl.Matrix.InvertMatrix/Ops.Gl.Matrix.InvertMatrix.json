@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.Gl.Matrix.InvertMatrix"
+    },
+    "summary": "outputs an inverted matrix",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

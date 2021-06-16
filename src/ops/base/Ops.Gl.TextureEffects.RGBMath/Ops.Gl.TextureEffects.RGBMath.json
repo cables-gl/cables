@@ -1,5 +1,5 @@
 {
-    "summary": "multiply image colors by color channel",
+    "summary": "apply simple mathematical functions on pixels color values",
     "layout": {
         "portsIn": [
             {
@@ -78,5 +78,12 @@
             "author": "pandur",
             "date": 1620998033733
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
