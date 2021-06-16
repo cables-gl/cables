@@ -33,5 +33,13 @@
             }
         ],
         "name": "Ops.Json.ObjectValues"
+    },
+    "summary": "extract all object values as an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

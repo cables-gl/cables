@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.Debug.GlLogErrors"
+    },
+    "summary": "execute glGetError after every gl command and log to console",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
