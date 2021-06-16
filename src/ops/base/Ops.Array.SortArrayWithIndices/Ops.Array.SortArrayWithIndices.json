@@ -47,7 +47,7 @@
         ],
         "name": "Ops.Array.SortArrayWithIndices"
     },
-    "summary": "Sorts an array of numbers with one of two modes - ascending or descending",
+    "summary": "Sorts an array of numbers and also get sorted indices ",
     "issues": "",
     "collections": [
         "sort"
