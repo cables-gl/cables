@@ -1,0 +1,56 @@
+{
+    "id": "240172a6-7dde-4dcc-b862-bbe764aec3f3",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1613571997155
+        },
+        {
+            "message": "Ops.User.pandur.ArrayIndexMinMax renamed to Ops.Array.ArrayIndexMinMax",
+            "author": "pandur",
+            "date": 1623845889674
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1613572064918,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Array"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index Min",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.ArrayIndexMinMax"
+    },
+    "summary": "find lowest/highest numbers in an array",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}
