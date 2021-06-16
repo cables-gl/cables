@@ -13,5 +13,25 @@
         }
     ],
     "authorName": "kikohs",
-    "created": 1623827076879
+    "created": 1623827076879,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Num values",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Values"
+            }
+        ],
+        "name": "Ops.Json.ObjectValues"
+    }
 }

@@ -3,9 +3,11 @@ const
     outNumValues = op.outValue("Num values"),
     outValues = op.outArray("Values");
 
-inObj.onChange = () => {
+inObj.onChange = () =>
+{
     const sourceObj = inObj.get();
-    if (!sourceObj) {
+    if (!sourceObj)
+    {
         outNumValues.set(0);
         outValues.set([]);
         return;
