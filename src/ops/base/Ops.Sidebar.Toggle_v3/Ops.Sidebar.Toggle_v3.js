@@ -28,6 +28,11 @@ el.addEventListener("dblclick", function ()
     inputValuePort.set(defaultValuePort.get());
 });
 
+op.onLoaded = op.onInit = function ()
+{
+    inputValuePort.set(defaultValuePort.get());
+};
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelText = document.createTextNode(labelPort.get());

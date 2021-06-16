@@ -101,8 +101,8 @@ exe.onTriggered = () =>
             if (startTimeLine.get())
             {
                 op.patch.timer.play();
-                isFinishedPort.set(true);
             }
+            isFinishedPort.set(true);
             firstTime = false;
         }
 
