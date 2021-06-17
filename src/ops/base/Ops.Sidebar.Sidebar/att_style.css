@@ -23,7 +23,7 @@
 }
 
 .sidebar-cables {
-    --sidebar-color: #07f78c;//#ff0000;//#24baa7;
+    --sidebar-color: #07f78c;
     --sidebar-width: 220px;
     --sidebar-border-radius: 10px;
     --sidebar-monospace-font-stack: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;

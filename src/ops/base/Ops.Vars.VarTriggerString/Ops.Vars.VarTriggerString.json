@@ -56,5 +56,13 @@
     },
     "coreLibs": [
         "vargetset"
-    ]
+    ],
+    "summary": "set string variable by trigger",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

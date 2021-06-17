@@ -173,13 +173,17 @@ function parseUniforms(src)
                             vectors.push(vec);
                         }
                     }
-                    else if (type === "sampler2D")
+                    else if (type === "sampler2D" || type === "samplerCube")
                     {
                         foundNames.push(uniName);
                         if (!hasUniformInput(uniName))
                         {
                             const newInputTex = op.inObject(uniName);
-                            newInputTex.uniform = new CGL.Uniform(shader, "t", uniName, 3 + uniformTextures.length);
+
+                            let uniType = "t";
+                            if (type === "samplerCube")uniType = "tc";
+
+                            newInputTex.uniform = new CGL.Uniform(shader, uniType, uniName, 3 + uniformTextures.length);
                             uniformTextures.push(newInputTex);
                             groupUniforms.push(newInputTex);
                             newInputTex.set(CGL.Texture.getTempTexture(cgl));

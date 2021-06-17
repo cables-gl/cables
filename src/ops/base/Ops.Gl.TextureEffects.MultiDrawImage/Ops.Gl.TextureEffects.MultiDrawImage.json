@@ -1,5 +1,5 @@
 {
-    "summary": "invert image colors",
+    "summary": "draw multiple images at once",
     "layout": {
         "portsIn": [
             {
@@ -429,5 +429,9 @@
             "author": "pandur",
             "date": 1620311106730
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

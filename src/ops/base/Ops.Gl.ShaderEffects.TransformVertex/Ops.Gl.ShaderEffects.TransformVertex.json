@@ -84,7 +84,7 @@
             "date": 1615315844236
         }
     ],
-    "summary": "twist a mesh around an axis",
+    "summary": "transform vertices of a mesh via vertex shader",
     "issues": "",
     "collections": null,
     "relatedops": null,

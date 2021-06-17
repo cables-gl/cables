@@ -1,59 +1,51 @@
 {
-    "id": "b4608e38-cc48-4748-a640-d653f53fc950",
+    "id": "240172a6-7dde-4dcc-b862-bbe764aec3f3",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
-            "date": 1614623586659
+            "date": 1613571997155
         },
         {
-            "message": "Ops.User.pandur.GltfSineAnim renamed to Ops.Gl.GLTF.GltfNodeSineAnim",
+            "message": "Ops.User.pandur.ArrayIndexMinMax renamed to Ops.Array.ArrayIndexMinMax",
             "author": "pandur",
-            "date": 1614625830664
+            "date": 1623845889674
         }
     ],
     "authorName": "pandur",
-    "created": 1614623660974,
+    "created": 1613572064918,
     "layout": {
         "portsIn": [
             {
-                "type": 1,
-                "name": "Update"
-            },
-            {
-                "type": 5,
-                "name": "Filter"
-            },
-            {
-                "type": 0,
-                "name": "Time",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Offset",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Amplitude",
-                "subType": "number"
+                "type": 3,
+                "name": "Array"
             }
         ],
         "portsOut": [
             {
-                "type": 1,
-                "name": "Next"
+                "type": 0,
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Found",
+                "name": "Index Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Index Min",
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.GltfSineAnim"
+        "name": "Ops.User.pandur.ArrayIndexMinMax"
     },
-    "summary": "sine animate gltf nodes by a filter",
+    "summary": "find lowest/highest numbers in an array",
     "issues": "",
     "collections": null,
     "relatedops": null,

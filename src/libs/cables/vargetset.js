@@ -76,6 +76,13 @@ const VarSetOpWrapper = class
 
             this._setVarValue(); // this should not be done!!!, its kept because of compatibility anxiety
         }
+        if (!this._op.patch.hasVar(varname) && varname != 0 && this._triggerPort)
+        {
+            if (this._type == "string") this._op.patch.setVarValue(varname, "");
+            else if (this._type == "number") this._op.patch.setVarValue(varname, "");
+            else this._op.patch.setVarValue(varname, null);
+        }
+
 
         if (this._op.isCurrentUiOp())
         {
