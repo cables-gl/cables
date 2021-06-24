@@ -261,7 +261,7 @@ Patch.prototype.getAssetPath = function ()
     }
     else
     {
-        return "assets/";
+        return this.config.prefixAssetPath + "assets/";
     }
 };
 
