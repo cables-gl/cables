@@ -250,7 +250,7 @@ function update()
     {
         let exportId = op.id;
         if (op.storage && op.storage.blueprint && op.storage.blueprint.originalOpId) exportId = op.storage.blueprint.originalOpId;
-        const blueprintUrl = "js/" + exportId + ".json";
+        const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
         CABLES.ajax(
             blueprintUrl,
             function (err, data)

@@ -29,6 +29,7 @@ import { Log } from "./log";
  *     glCanvasResizeToWindow:true,
  *     canvas:{powerPreference:"high-performance"},
  *     prefixAssetPath:'/assets/',
+ *     prefixAssetPath:'/js/',
  *     onError:function(e){console.log(e);}
  * });
  */
@@ -42,6 +43,7 @@ const Patch = function (cfg)
     this.config = cfg || {
         "glCanvasResizeToWindow": false,
         "prefixAssetPath": "",
+        "prefixJsPath": "",
         "silent": false,
         "onError": null,
         "onFinishedLoading": null,
@@ -98,6 +100,7 @@ const Patch = function (cfg)
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
+    if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
