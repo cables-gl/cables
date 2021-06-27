@@ -228,6 +228,7 @@ function parseGltf(arrayBuffer)
             else if (acc.type == "VEC2")numComps = 2;
             else if (acc.type == "VEC3")numComps = 3;
             else if (acc.type == "VEC4")numComps = 4;
+            else if (acc.type == "MAT4")numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
             const num = acc.count * numComps;
@@ -297,6 +298,15 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
 
+
+    for (i = 0; i < gltf.json.nodes.length; i++)
+    {
+        if(gltf.json.nodes[i].children)
+        for (j = 0; j < gltf.json.nodes[i].children.length; j++)
+        {
+            gltf.json.nodes[gltf.json.nodes[i].children[j]].isChild=true;
+        }
+    }
 
     for (i = 0; i < gltf.json.nodes.length; i++)
     {

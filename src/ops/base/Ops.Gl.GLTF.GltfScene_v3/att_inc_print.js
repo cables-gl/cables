@@ -388,6 +388,30 @@ function printInfo()
         html+='</table>';
     }
 
+    if(gltf.json.skins)
+    {
+        html+='<h3>Skins ('+gltf.json.skins.length+')</h3>';
+        html+='<table class="table treetable">';
+
+        html+='<tr>';
+        html+='  <th>name</th>';
+        html+='  <th>skeleton</th>';
+        html+='  <th>total joints</th>';
+        html+='</tr>';
+
+        for(var i=0;i<gltf.json.skins.length;i++)
+        {
+            html+='<tr>';
+            html+='<td>'+gltf.json.skins[i].name+'</td>';
+            html+='<td>'+gltf.json.skins[i].skeleton+'</td>';
+            html+='<td>'+gltf.json.skins[i].joints.length+'</td>';
+            html+='<td>';
+            html+='</td>';
+
+            html+='<tr>';
+        }
+        html+='</table>';
+    }
 
 
     // html+='data size: '+;

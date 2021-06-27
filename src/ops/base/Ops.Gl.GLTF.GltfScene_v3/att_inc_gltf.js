@@ -309,6 +309,14 @@ function parseGltf(arrayBuffer)
 
     gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
 
+    for (i = 0; i < gltf.json.nodes.length; i++)
+    {
+        if(gltf.json.nodes[i].children)
+        for (j = 0; j < gltf.json.nodes[i].children.length; j++)
+        {
+            gltf.json.nodes[gltf.json.nodes[i].children[j]].isChild=true;
+        }
+    }
 
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
