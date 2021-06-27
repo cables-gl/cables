@@ -174,15 +174,14 @@ function loadCams(gltf)
     //     gltf.cameras.push(new gltfCamera(gltf, gltf.json.cameras[i]));
     // }
 
-    gltf.cameras=gltf.cameras||[];
+    gltf.cameras = gltf.cameras || [];
 
     for (let i = 0; i < gltf.nodes.length; i++)
     {
-        if(gltf.nodes[i].hasOwnProperty("camera"))
+        if (gltf.nodes[i].hasOwnProperty("camera"))
         {
             const cam = new gltfCamera(gltf, gltf.nodes[i]);
             gltf.cameras.push(cam);
-
         }
     }
 }
@@ -240,6 +239,7 @@ function parseGltf(arrayBuffer)
             else if (acc.type == "VEC2")numComps = 2;
             else if (acc.type == "VEC3")numComps = 3;
             else if (acc.type == "VEC4")numComps = 4;
+            else if (acc.type == "MAT4")numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
             const num = acc.count * numComps;
@@ -258,13 +258,13 @@ function parseGltf(arrayBuffer)
                 {
                     stride = stride || 4;
 
-                    const isInt=acc.componentType == 5125;
-                    if(isInt)dataBuff = new Uint32Array(num);
+                    const isInt = acc.componentType == 5125;
+                    if (isInt)dataBuff = new Uint32Array(num);
                     else dataBuff = new Float32Array(num);
 
                     for (j = 0; j < num; j++)
                     {
-                        if(isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
+                        if (isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
                         else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
 
                         if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
@@ -311,11 +311,11 @@ function parseGltf(arrayBuffer)
 
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
-        if(gltf.json.nodes[i].children)
-        for (j = 0; j < gltf.json.nodes[i].children.length; j++)
-        {
-            gltf.json.nodes[gltf.json.nodes[i].children[j]].isChild=true;
-        }
+        if (gltf.json.nodes[i].children)
+            for (j = 0; j < gltf.json.nodes[i].children.length; j++)
+            {
+                gltf.json.nodes[gltf.json.nodes[i].children[j]].isChild = true;
+            }
     }
 
     for (i = 0; i < gltf.json.nodes.length; i++)
@@ -334,14 +334,13 @@ function parseGltf(arrayBuffer)
     for (i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
-        if(node.children)
+        if (node.children)
         {
-            for(let j=0;j<node.children.length;j++)
+            for (let j = 0; j < node.children.length; j++)
             {
-                gltf.nodes[node.children[j]].parent=node;
+                gltf.nodes[node.children[j]].parent = node;
             }
         }
-
     }
 
 
