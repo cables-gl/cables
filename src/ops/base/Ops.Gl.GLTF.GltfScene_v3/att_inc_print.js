@@ -61,7 +61,7 @@ function printNode(html,node,level)
                 countMats++;
             }
         }
-        if(countMats==0)html+="-";
+        if(countMats==0)html+="none";
         html+='</td>';
 
     }
@@ -72,8 +72,13 @@ function printNode(html,node,level)
 
 
     html+='<td><!-- anim -->';
-    if(node._animRot || node._animScale || node._animTrans) html+='Yes';
-    else html+='-';
+    if(node._animRot || node._animScale || node._animTrans)
+    {
+        if(node._animRot) html+='Rot ';
+        if(node._animScale) html+='Scale ';
+        if(node._animTrans) html+='Trans ';
+    }
+    else html+='None';
     html+='</td>';
 
     html+='<td>';
