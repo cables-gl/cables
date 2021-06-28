@@ -46,24 +46,41 @@ function printNode(html,node,level)
             // html+=' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) ';
         }
         html+='</td>';
-        html+='<td>';
+
+        html+='<td><!-- skin -->';
+        html+=node.hasSkin()||"-";
+        html+='</td>';
+
+        html+='<td><!-- material> -->';
+        let countMats=0;
         for(i=0;i<node.mesh.meshes.length;i++)
         {
             if(node.mesh.meshes[i].material)
+            {
                 html+=gltf.json.materials[node.mesh.meshes[i].material].name;
+                countMats++;
+            }
         }
+        if(countMats==0)html+="none";
         html+='</td>';
 
     }
     else
     {
-        html+='<td>-</td><td>-</td>';
+        html+='<td>-</td><td>-</td><td>-</td>';
     }
-    html+='<td>';
-    if(node._animRot || node._animScale || node._animTrans) html+='Yes';
-    else html+='-';
 
+
+    html+='<td><!-- anim -->';
+    if(node._animRot || node._animScale || node._animTrans)
+    {
+        if(node._animRot) html+='Rot ';
+        if(node._animScale) html+='Scale ';
+        if(node._animTrans) html+='Trans ';
+    }
+    else html+='None';
     html+='</td>';
+
     html+='<td>';
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
@@ -161,6 +178,7 @@ function printInfo()
     html+='<tr>';
     html+=' <th colspan="21">Name</th>';
     html+=' <th>Mesh</th>';
+    html+=' <th>Skin</th>';
     html+=' <th>Material</th>';
     html+=' <th>Anim</th>';
     html+=' <th>Show</th>';
@@ -192,6 +210,7 @@ function printInfo()
         html+='<tr>';
         html+='<td>'+gltf.json.meshes[i].name+"</td>";
 
+
         html+='<td>';
         for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
         {
@@ -208,7 +227,6 @@ function printInfo()
             if(gltf.json.meshes[i].primitives[j].attributes.POSITION)
             {
                 html+=gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count;
-
             }
         }
         html+='</td>';
@@ -231,7 +249,6 @@ function printInfo()
                 sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
             }
 
-
             for(var k in gltf.json.meshes[i].primitives[j].attributes)
             {
                 const attr=gltf.json.meshes[i].primitives[j].attributes[k];
@@ -242,12 +259,8 @@ function printInfo()
                     sizeBufferViews.push(bufView);
                     sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
                 }
-
-
             }
-
         }
-
 
     }
     html+='</table>';
@@ -388,6 +401,30 @@ function printInfo()
         html+='</table>';
     }
 
+    if(gltf.json.skins)
+    {
+        html+='<h3>Skins ('+gltf.json.skins.length+')</h3>';
+        html+='<table class="table treetable">';
+
+        html+='<tr>';
+        html+='  <th>name</th>';
+        html+='  <th>skeleton</th>';
+        html+='  <th>total joints</th>';
+        html+='</tr>';
+
+        for(var i=0;i<gltf.json.skins.length;i++)
+        {
+            html+='<tr>';
+            html+='<td>'+gltf.json.skins[i].name+'</td>';
+            html+='<td>'+gltf.json.skins[i].skeleton+'</td>';
+            html+='<td>'+gltf.json.skins[i].joints.length+'</td>';
+            html+='<td>';
+            html+='</td>';
+
+            html+='<tr>';
+        }
+        html+='</table>';
+    }
 
 
     // html+='data size: '+;

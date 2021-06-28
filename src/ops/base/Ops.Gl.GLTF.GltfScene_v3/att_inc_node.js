@@ -22,6 +22,13 @@ const gltfNode = class
         this.updateMatrix();
     }
 
+    hasSkin()
+    {
+        console.log(this._gltf);
+        if(this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name||"unknown";
+        return false;
+    }
+
     updateMatrix()
     {
         mat4.identity(this.mat);
