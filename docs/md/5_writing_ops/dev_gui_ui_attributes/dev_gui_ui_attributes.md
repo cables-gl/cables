@@ -32,9 +32,9 @@ If the value is lower than 0 then the UI will show this message
 
 ```javascript
 //create a port for value input
-const inVal  = op.inValueFloat ("Value in");
+const inVal  = op.inFloat ("Value in");
 //create a port for value output
-const outVal = op.outValue("value out");
+const outVal = op.outNumber("value out");
 
 //when inVal changes run this function
 inVal.onChange = function()
