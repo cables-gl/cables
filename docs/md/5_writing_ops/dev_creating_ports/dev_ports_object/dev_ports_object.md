@@ -35,7 +35,7 @@ to see the following code:
 //Create a input port of the type value
 const inObj  = op.inObject("Object in");
 //Create a output port of the type value
-const outKeyVal=op.outValueString("Test");
+const outKeyVal=op.outString("Test");
 
 //when input port changes call the function 'update'
 inObj.onChange=update;
