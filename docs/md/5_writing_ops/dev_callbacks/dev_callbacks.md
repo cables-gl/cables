@@ -98,20 +98,6 @@ op.onDelete( function()
 });
 ```
 
-### op.data
-
-Sometimes you need to create variables inside your op and make them accessible globally. Every op has a `data`-object-property which can be used for this. Instead of writing:
-```javascript
-var myVar = 1;
-```
-
-you could then do:
-```javascript
-op.data.myVar = 1; // globally accessible if you have access to the op
-```
-
-In most cases you don’t need this, but there are some use cases where it is useful.
-
 ### op.setUiError
 Sometimes you will want to create a UI element to show if there is an error or a warning when some condition occurs in the code for an op.
 
