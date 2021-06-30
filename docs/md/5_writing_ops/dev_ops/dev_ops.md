@@ -13,7 +13,7 @@ const outNumber = op.outNumber("number out");
 ```
 Integer number ports in and out:
 ```javascript
-const inInt = op.inFloat("int in");
+const inInt = op.inInt("int in");
 const outNumber = op.outNumber("number out");
 ```
 String ports in and out:
@@ -98,7 +98,7 @@ If your op has one main-port which is needed to trigger it, call it `Execute`, i
 
 
 ```javascript
-var innerRadius = op.addInPort("Inner Radius");
+var innerRadius = op.inFloat("Inner Radius");
 ```
 
 # Op Documentation
@@ -117,5 +117,5 @@ You can now fill in all the details and documentation for your new op !
 
 ### Publishing Ops
 
-If you made an op and think it would be useful for other users get in touch with the cables-staff (via discord or the [cables forum](https://forum.cables.gl/)).
+If you made an op and think it would be useful for other users get in touch with the cables-staff (via [discord](https://discordapp.com/invite/AGTarWv) or the [cables forum](https://forum.cables.gl/)).
 
