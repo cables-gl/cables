@@ -10,6 +10,6 @@ libraries, save and reload the patch and you can use them in your ops.
 
 #### How do I get "libXYZ.js" into cables (add new libraries)?
 
-- If the library is not in the list above, drop us a mail or talk to us on discord, we are usually very open to make more
+- If the library is not in the list above, drop us a mail or talk to us on [discord](https://discordapp.com/invite/AGTarWv), we are usually very open to make more
 libraries available in cables. Sometimes there may be licencing issued (preferrably pick libraries that have been put unter
 MIT-Licence) or we already have the functionality in cables. So this is a bit of a vested process.
