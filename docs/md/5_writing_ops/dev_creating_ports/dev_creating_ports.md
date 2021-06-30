@@ -76,7 +76,7 @@ Click this [link](dev_ports_object/dev_ports_object) for an example
 ##### Display: String
 
 ```javascript
-var inPort = op.addInPort("inPort");
+var inPort = op.inString("inPort");
 
 inPort.onChange=function() {
 	op.log( "Port changed to: " + inPort.get() === "foo bar" );
@@ -89,7 +89,7 @@ inPort.onChange=function() {
 ![Editor Button](img/editor.png)
 
 ```javascript
-var text = op.addInPort( new Port("text");
+var text = op.inStringEditor("text");
 
 text.onChange=function() {
     op.log('text changed to:' + text.get());
@@ -101,12 +101,7 @@ If you click the edit button, text can be edited in the editor. Used for all kin
 It is also possible to define the syntax highlighting for the editor-tab:
 
 ```javascript
-var styleSheetPort = op.addInPort(
-    new CABLES.Port(op, "Stylesheet",CABLES.OP_PORT_TYPE_VALUE, {
-        display: 'editor',
-        editorSyntax: 'css'
-    })
-);
+text.setUiAttribs({ "editorSyntax": "css" });
 ```
 
 ##### Display: Dropdown
@@ -114,13 +109,13 @@ var styleSheetPort = op.addInPort(
 For a fixed amount of values to choose from.
 
 ```javascript
-var align = op.addInPort( new Port( op, "align",CABLES.OP_PORT_TYPE_VALUE, { display: 'dropdown', values: ['left', 'center', 'right'] } ) );
+var options = op.inDropDown("options", ['option a','option b']);
 ```
 
 ### Array Ports
 
-```
-OP_PORT_TYPE_ARRAY
+```javascript
+var options = op.inArray("options");
 ```
 
 A Javascript array, which can either contain simple values, arrays or objects.
@@ -129,8 +124,8 @@ E.g. `[1, 2, 3]`, `[[1, 2], [3, 4]]`, `[{"one": 2}, {"three": 4}]`
 
 ### Object Ports
 
-```
-OP_PORT_TYPE_OBJECT
+```javascript
+var data = op.inObject("data");
 ```
 
 An object can contain basically anything, e.g.:
