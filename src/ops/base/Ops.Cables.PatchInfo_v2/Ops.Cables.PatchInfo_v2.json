@@ -1,0 +1,59 @@
+{
+    "authorName": "pandur",
+    "id": "7187c2f2-67a9-479e-92c4-0e415443f504",
+    "created": 1625058870561,
+    "summary": "read patch config when embedding on another page",
+    "docs": {
+        "ports": [
+            {
+                "name": "Config",
+                "text": "an object with the patch configuration"
+            },
+            {
+                "name": "Name",
+                "text": "the name of the patch"
+            },
+            {
+                "name": "Patch Id",
+                "text": "the id of the patch"
+            },
+            {
+                "name": "Namespace",
+                "text": "namespace of the patch, if available"
+            }
+        ]
+    },
+    "layout": {
+        "portsIn": [],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Config"
+            },
+            {
+                "type": 5,
+                "name": "Name"
+            },
+            {
+                "type": 5,
+                "name": "Patch Id"
+            },
+            {
+                "type": 5,
+                "name": "Namespace"
+            }
+        ],
+        "name": "Ops.Cables.PatchInfo"
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Cables.PatchInfo",
+            "author": "stephan",
+            "date": 1625058870561
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
+}
