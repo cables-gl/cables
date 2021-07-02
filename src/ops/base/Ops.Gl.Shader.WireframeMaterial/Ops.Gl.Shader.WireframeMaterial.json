@@ -5,63 +5,63 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "enable depth testing",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "fill",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "opacity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "diffuse r",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "diffuse g",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "diffuse b",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fill R",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fill G",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Fill B",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

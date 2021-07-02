@@ -258,7 +258,11 @@ function refresh()
 
             for (let i = 0; i < strings.length; i++)
             {
-                if (!strings[i]) continue;
+                if (!strings[i])
+                {
+                    newString += "\n";
+                    continue;
+                }
                 let sumWidth = 0;
                 const words = strings[i].split(" ");
 

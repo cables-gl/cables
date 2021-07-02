@@ -7,6 +7,7 @@ const labelPort = op.inString("Text", "Slider");
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", STEP_DEFAULT);
+const labelSuffix = op.inString("Suffix", "");
 
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
@@ -57,14 +58,21 @@ el.appendChild(label);
 const value = document.createElement("input");
 value.value = defaultValuePort.get();
 value.classList.add("sidebar__text-input-input");
-// value.setAttribute('type', 'number'); /* not possible to use '.' instead of ',' as separator on German computer, so not usable... */
 value.setAttribute("type", "text");
-// value.setAttribute('lang', 'en-US'); // force '.' as decimal separator
-// value.setAttribute('pattern', '[0-9]+([\.][0-9]+)?'); // only allow '.' as separator
-// value.setAttribute('step', 'any'); /* we cannot use the slider step, as it restricts valid numbers to be entered */
-// value.setAttribute('formnovalidate', '');
 value.oninput = onTextInputChanged;
 el.appendChild(value);
+
+const suffixEle = document.createElement("span");
+// value.value = defaultValuePort.get();
+// value.setAttribute("type", "text");
+// value.oninput = onTextInputChanged;
+
+el.appendChild(suffixEle);
+
+labelSuffix.onChange = () =>
+{
+    suffixEle.innerHTML = labelSuffix.get();
+};
 
 const inputWrapper = document.createElement("div");
 inputWrapper.classList.add("sidebar__slider-input-wrapper");

@@ -31,6 +31,10 @@
                 "subType": "number"
             },
             {
+                "type": 5,
+                "name": "Suffix"
+            },
+            {
                 "type": 0,
                 "name": "Grey Out",
                 "group": "Visibility",
