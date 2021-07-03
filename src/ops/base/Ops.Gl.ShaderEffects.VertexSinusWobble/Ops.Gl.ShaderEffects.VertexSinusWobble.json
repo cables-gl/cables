@@ -5,58 +5,63 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "frequency",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "amount",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "phase",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "mul",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "add",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "axisX",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "axisY",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "axisZ",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Source index",
                 "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Source",
+                "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],
@@ -70,5 +75,15 @@
     "collections": [
         "vertexDeformers"
     ],
-    "relatedops": null
+    "relatedops": null,
+    "changelog": [
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1623936330348
+        }
+    ],
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }
