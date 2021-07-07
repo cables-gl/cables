@@ -12,14 +12,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Number",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Mode"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }
@@ -32,6 +41,23 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Number",
+                "text": "the number"
+            },
+            {
+                "name": "Mode index",
+                "text": "round up (ceil) or down (floor)"
+            },
+            {
+                "name": "Mode",
+                "text": "round up (ceil) or down (floor)"
+            },
+            {
+                "name": "Result",
+                "text": "the rounded output"
+            }
+        ]
     }
 }
