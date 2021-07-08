@@ -4,6 +4,9 @@ const
     inNum = op.inInt("Num Instances", 1000),
     inTex = op.inTexture("Position Texture", null, "texture"),
     inTex2 = op.inTexture("Rotation Texture", null, "texture"),
+    inTex3 = op.inTexture("Scale Texture", null, "texture"),
+    inTex4 = op.inTexture("Color Texture", null, "texture"),
+    inBlendMode = op.inSwitch("Color Texture Blendmode", ["Multiply", "Add", "Normal"], "Multiply"),
     inScale = op.inValue("Scale", 1),
 
     outTrigger = op.outTrigger("Trigger Out"),
@@ -45,7 +48,15 @@ mod.addModule({
 mod.addUniformVert("f", "MOD_scale", inScale);
 mod.addUniformVert("t", "MOD_texTrans");
 mod.addUniformVert("t", "MOD_texRot");
+mod.addUniformVert("t", "MOD_texScale");
+mod.addUniformVert("t", "MOD_texColor");
 mod.addUniformVert("f", "MOD_texSize", 0);
+
+inBlendMode.onChange =
+inTex.onChange =
+inTex3.onChange =
+inTex4.onChange =
+inTex2.onChange = updateDefines;
 
 // inBlendMode.onChange = updateDefines;
 // doLimit.onChange = updateLimit;
@@ -71,10 +82,13 @@ function reset()
 
 function updateDefines()
 {
-    // mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    // mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
-    // mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
-    // mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
+    mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
+    mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
+    mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
+
+    mod.toggleDefine("USE_TEX_ROT", inTex2.get());
+    mod.toggleDefine("USE_TEX_SCALE", inTex3.get());
+    mod.toggleDefine("USE_TEX_COLOR", inTex4.get());
 }
 
 geom.onChange = function ()
@@ -123,6 +137,8 @@ function doRender()
     if (!inTex.get()) return;
     if (inTex.get())mod.pushTexture("MOD_texTrans", inTex.get().tex);
     if (inTex2.get())mod.pushTexture("MOD_texRot", inTex2.get().tex);
+    if (inTex3.get())mod.pushTexture("MOD_texScale", inTex3.get().tex);
+    if (inTex4.get())mod.pushTexture("MOD_texColor", inTex4.get().tex);
 
     mod.bind();
     mod.setUniformValue("MOD_texSize", inTex.get().width);

@@ -61,6 +61,25 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "Scale Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Color Texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Color Texture Blendmode index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Color Texture Blendmode"
+            },
+            {
                 "type": 0,
                 "name": "Scale",
                 "subType": "number"
