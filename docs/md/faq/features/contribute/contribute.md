@@ -2,7 +2,7 @@
 
 So you found something missing in cables, integrated a new technology or fixed a bug? Awesome!
 
-The easiest way to contribute this to cables - for now - is to [write your user-op](../../5_writing_ops/dev_ops/dev_ops) and then do one of the following:
+The easiest way to contribute this to cables - for now - is to [write your user-op](../../../5_writing_ops/dev_ops/dev_ops) and then do one of the following:
 
 - post your code on the [public issue tracker](https://github.com/cables-gl/cables_docs/issues)
 - post your code to the [forums](https://forum.cables.gl/)
