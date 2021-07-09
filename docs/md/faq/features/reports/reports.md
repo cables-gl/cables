@@ -1,4 +1,4 @@
-# Hot to report a bug in cables
+# How to report a bug in cables
 
 As cables is in constant development, there will be bugs here and there. Maybe things are unclear, not properly
 documented or just not as you are used to from other backgrounds. 
@@ -53,4 +53,4 @@ workarounds for the time until the next release.
 
 ## I have code that fixes the issue!
 
-Awesome! Share in your post on the forum and we'll take a look at it. Thanks for contributing!
+Awesome! Try to [get in contact](../contribute/contribute) with us and we'll take a look at it. Thanks for contributing!
