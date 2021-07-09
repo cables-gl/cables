@@ -10,7 +10,6 @@ const footer = require("gulp-footer");
 const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
-
 let buildInfo = getBuildInfo();
 
 function getBuildInfo()
@@ -32,8 +31,15 @@ function getBuildInfo()
 function _update_buildInfo(cb)
 {
     buildInfo = getBuildInfo();
-    fs.writeFileSync("build/buildInfo.json", JSON.stringify(buildInfo));
-    cb();
+    fs.mkdir("build/", { "recursive": true }, (err) =>
+    {
+        if (err)
+        {
+            return console.error(err);
+        }
+        fs.writeFileSync("build/buildInfo.json", JSON.stringify(buildInfo));
+        cb();
+    });
 }
 
 function _append_build_info()

@@ -20,7 +20,6 @@ op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 const audioOutPort = op.outObject("Audio Out", null, "audioNode");
 const outPlaying = op.outBool("Is Playing", false);
 const outLoading = op.outBool("Loading", false);
-const outProgress = op.outNumber("Playback Position", 0.0);
 
 // vars
 let source = null;
@@ -29,8 +28,6 @@ let hasEnded = false;
 let pausedAt = null;
 let startedAt = null;
 let isLoading = false;
-let playbackStartTime = 0;
-let audioAnimationFrame = null;
 
 const gainNode = audioCtx.createGain();
 
@@ -79,7 +76,7 @@ audioOutPort.onLinkChanged = () =>
 // change listeners
 audioBufferPort.onChange = function ()
 {
-    if (audioBufferPort.get()) createAudioBufferSource(true);
+    if (audioBufferPort.get()) createAudioBufferSource();
     else
     {
         if (isLoading)
@@ -183,7 +180,7 @@ inResetStart.onTriggered = function ()
 };
 
 // functions
-function createAudioBufferSource(startPlayback)
+function createAudioBufferSource()
 {
     if (isLoading) return;
     if (!(audioBufferPort.get() instanceof AudioBuffer)) return;
@@ -226,14 +223,14 @@ function createAudioBufferSource(startPlayback)
     isLoading = false;
     outLoading.set(isLoading);
 
-    if (resetTriggered && startPlayback)
+    if (resetTriggered)
     {
         start(startTimePort.get());
         resetTriggered = false;
         return;
     }
 
-    if (playPort.get() && startPlayback)
+    if (playPort.get())
     {
         if (!isPlaying) start(startTimePort.get());
     }
@@ -265,26 +262,14 @@ offsetPort.onChange = () =>
         }
     }
 };
-
-function updatePlaybackProgress(time, startOffset)
-{
-    const now = Date.now() / 1000;
-    const currentTime = (now - playbackStartTime) + time + startOffset;
-    outProgress.set(currentTime);
-    audioAnimationFrame = requestAnimationFrame(() => updatePlaybackProgress(time, startOffset));
-}
-
 function start(time)
 {
     try
     {
+        let offset = 0;
         if (source)
         {
-            const startOffset = Math.max(0, offsetPort.get());
-            source.start(time, startOffset); // 0 = now
-            outProgress.set(startOffset);
-            playbackStartTime = Date.now() / 1000;
-            audioAnimationFrame = requestAnimationFrame(() => { updatePlaybackProgress(time, startOffset); });
+            source.start(time, Math.max(0, offsetPort.get())); // 0 = now
 
             isPlaying = true;
             hasEnded = false;
@@ -317,14 +302,12 @@ function stop(time)
         op.setUiError(e);
         outPlaying.set(false);
     }
-    cancelAnimationFrame(audioAnimationFrame);
 }
 
 function onPlaybackEnded()
 {
-    cancelAnimationFrame(audioAnimationFrame);
     outPlaying.set(false);
     isPlaying = false;
     hasEnded = true;
-    createAudioBufferSource(loopPort.get()); // we can only play back once, so we need to create a new one
+    createAudioBufferSource(); // we can only play back once, so we need to create a new one
 }

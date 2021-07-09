@@ -5,7 +5,7 @@ const SIDEBAR_CLASS = "sidebar-cables";
 const SIDEBAR_ID = "sidebar" + CABLES.uuid();
 const SIDEBAR_ITEMS_CLASS = "sidebar__items";
 const SIDEBAR_OPEN_CLOSE_BTN_CLASS = "sidebar__close-button";
-const SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS = "sidebar__close-button-icon";
+
 const BTN_TEXT_OPEN = ""; // 'Close';
 const BTN_TEXT_CLOSED = ""; // 'Show Controls';
 
@@ -19,6 +19,7 @@ const opacityPort = op.inValueSlider("Opacity", 1);
 const defaultMinimizedPort = op.inValueBool("Default Minimized");
 const minimizedOpacityPort = op.inValueSlider("Minimized Opacity", 0.5);
 const undoButtonPort = op.inValueBool("Show undo button", false);
+const inMinimize = op.inValueBool("Show Minimize", false);
 
 const inTitle = op.inString("Title", "Sidebar");
 const side = op.inValueBool("Side");
@@ -57,6 +58,31 @@ function onMinimizedOpacityPortChanged()
     updateDynamicStyles();
 }
 
+inMinimize.onChange = updateMinimize;
+
+function updateMinimize(header)
+{
+    if (!header || header.uiAttribs) header = document.querySelector(".sidebar-cables .sidebar__group-header");
+    if (!header) return;
+
+    const undoButton = document.querySelector(".sidebar-cables .sidebar__group-header .sidebar__group-header-undo");
+
+    if (inMinimize.get())
+    {
+        header.classList.add("iconsidebar-chevron-up");
+        header.classList.add("iconsidebar-minimizebutton");
+
+        if (undoButton)undoButton.style.marginRight = "20px";
+    }
+    else
+    {
+        header.classList.remove("iconsidebar-chevron-up");
+        header.classList.remove("iconsidebar-minimizebutton");
+
+        if (undoButton)undoButton.style.marginRight = "initial";
+    }
+}
+
 side.onChange = function ()
 {
     if (side.get()) sidebarEl.classList.add("sidebar-cables-right");
@@ -81,7 +107,8 @@ function initUndoButton(header)
         {
             if (!undoButtonPort.get())
             {
-                header.removeChild(undoButton);
+                // header.removeChild(undoButton);
+                undoButton.remove();
             }
         }
         else
@@ -108,6 +135,7 @@ function initUndoButton(header)
             }
         }
     }
+    updateMinimize(header);
 }
 
 function onDefaultMinimizedPortChanged()
@@ -195,9 +223,11 @@ function initSidebarElement()
     // header...
     const headerGroup = document.createElement("div");
     headerGroup.classList.add("sidebar__group");
+
     element.appendChild(headerGroup);
     const header = document.createElement("div");
     header.classList.add("sidebar__group-header");
+
     element.appendChild(header);
     const headerTitle = document.createElement("span");
     headerTitle.classList.add("sidebar__group-header-title");
@@ -208,6 +238,7 @@ function initSidebarElement()
     header.appendChild(headerTitle);
 
     initUndoButton(header);
+    updateMinimize(header);
 
     headerGroup.appendChild(header);
     element.appendChild(headerGroup);
@@ -227,9 +258,12 @@ function initSidebarElement()
     openCloseBtn.addEventListener("click", onOpenCloseBtnClick);
     // openCloseBtn.textContent = BTN_TEXT_OPEN;
     element.appendChild(openCloseBtn);
-    openCloseBtnIcon = document.createElement("span");
-    openCloseBtnIcon.classList.add(SIDEBAR_OPEN_CLOSE_BTN_ICON_CLASS);
-    openCloseBtn.appendChild(openCloseBtnIcon);
+    // openCloseBtnIcon = document.createElement("span");
+
+    // openCloseBtnIcon.classList.add("sidebar__close-button-icon");
+    // openCloseBtnIcon.classList.add("iconsidebar-chevron-up");
+
+    // openCloseBtn.appendChild(openCloseBtnIcon);
 
     return element;
 }

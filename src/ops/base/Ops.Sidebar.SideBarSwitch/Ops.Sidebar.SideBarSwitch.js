@@ -4,6 +4,8 @@ const parentPort = op.inObject("link"),
     labelPort = op.inString("Text", "Switch"),
 
     setDefaultValueButtonPort = op.inTriggerButton("Set Default"),
+    inGreyOut = op.inBool("Grey Out", false),
+
     inDefault = op.inValue("Default", 0),
 
     siblingsPort = op.outObject("childs"),
@@ -25,6 +27,11 @@ el.appendChild(label);
 const switchGroup = document.createElement("div");
 el.appendChild(switchGroup);
 
+const greyOut = document.createElement("div");
+greyOut.classList.add("sidebar__greyout");
+el.appendChild(greyOut);
+greyOut.style.display = "none";
+
 parentPort.onChange = onParentChanged;
 op.onDelete = onDelete;
 
@@ -39,6 +46,11 @@ updateStyle();
 labelPort.onChange = () =>
 {
     label.innerHTML = labelPort.get();
+};
+
+inGreyOut.onChange = function ()
+{
+    greyOut.style.display = inGreyOut.get() ? "block" : "none";
 };
 
 function rebuildHtml()

@@ -12,41 +12,50 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Default"
             },
             {
-                "type": "0",
+                "type": 5,
+                "name": "Placeholder"
+            },
+            {
+                "type": 0,
                 "name": "TextArea",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Grey Out",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Children"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Result"
+            },
+            {
+                "type": 0,
+                "name": "Focus",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Sidebar.TextInput_v2"

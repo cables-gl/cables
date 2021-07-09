@@ -44,6 +44,11 @@
             },
             {
                 "type": 0,
+                "name": "Grey Out",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Default",
                 "group": "Default Item",
                 "subType": "number"

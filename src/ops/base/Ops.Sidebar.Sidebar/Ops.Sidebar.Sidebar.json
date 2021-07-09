@@ -30,6 +30,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Show Minimize",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "Title"
             },

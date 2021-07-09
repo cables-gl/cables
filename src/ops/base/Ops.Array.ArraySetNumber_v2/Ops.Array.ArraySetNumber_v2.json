@@ -1,14 +1,24 @@
 {
-    "id": "78eb6f9d-e82b-427a-9d1f-138328138f2d",
+    "id": "a6366c3e-dab0-4b4c-b790-e66b82b93a25",
     "changelog": [
         {
             "message": "created op",
             "author": "pandur",
             "date": 1584365937229
+        },
+        {
+            "message": "cloned op from Ops.Array.ArraySetNumber",
+            "author": "pandur",
+            "date": 1623915562880
+        },
+        {
+            "message": "Ops.User.pandur.ArraySetNumber2 renamed to Ops.Array.ArraySetNumber_v2",
+            "author": "pandur",
+            "date": 1623915599231
         }
     ],
     "authorName": "pandur",
-    "created": 1584366020284,
+    "created": 1623915562880,
     "layout": {
         "portsIn": [
             {
@@ -28,10 +38,6 @@
                 "type": 0,
                 "name": "Number",
                 "subType": "number"
-            },
-            {
-                "type": 1,
-                "name": "Reset"
             }
         ],
         "portsOut": [
@@ -44,7 +50,7 @@
                 "name": "Result"
             }
         ],
-        "name": "Ops.Array.ArraySetNumber"
+        "name": "Ops.Array.ArraySetNumber_v2"
     },
     "summary": "set a number at index in an array",
     "issues": "",
