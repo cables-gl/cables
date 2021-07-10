@@ -129,14 +129,17 @@ export const WirePoint = function (cgl)
         // var shader=cgl.getDefaultShader();
         const shader = _cgl.getShader();
 
-        shader.bind();
-        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+        if (shader)
+        {
+            shader.bind();
+            _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
 
-        _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
-        _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+            _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
+            _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
 
-        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
-        _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
+            _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+            _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
+        }
 
         _cgl.popModelMatrix();
     };
@@ -196,14 +199,17 @@ export const WireCube = function (cgl)
         mat4.scale(_cgl.mvMatrix, _cgl.mvMatrix, vScale);
 
         const shader = _cgl.getShader();
-        shader.bind();
-        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+        if (shader)
+        {
+            shader.bind();
+            _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
 
-        _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
-        _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
+            _cgl.gl.vertexAttribPointer(shader.getAttrVertexPos(), buffer.itemSize, _cgl.gl.FLOAT, false, 0, 0);
+            _cgl.gl.enableVertexAttribArray(shader.getAttrVertexPos());
 
-        _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
-        _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
+            _cgl.gl.bindBuffer(_cgl.gl.ARRAY_BUFFER, buffer);
+            _cgl.gl.drawArrays(_cgl.gl.LINE_STRIP, 0, buffer.numItems);
+        }
 
         _cgl.popModelMatrix();
     };
