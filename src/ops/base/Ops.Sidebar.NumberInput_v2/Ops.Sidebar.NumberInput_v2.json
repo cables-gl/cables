@@ -5,30 +5,35 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Set Default"
+            },
+            {
+                "type": 0,
+                "name": "Default",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Children"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

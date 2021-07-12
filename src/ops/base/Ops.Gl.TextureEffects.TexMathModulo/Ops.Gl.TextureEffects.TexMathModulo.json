@@ -40,7 +40,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.ColorModulo"
+        "name": "Ops.Gl.TextureEffects.TexMathModulo"
     },
     "docs": {
         "ports": []
