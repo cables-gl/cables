@@ -405,7 +405,7 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * 50 } });
+    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLGUI.VISUALCONFIG.newOpDistanceY } });
 }
 
 op.exposeNode = function (name, tree)
