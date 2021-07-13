@@ -2,12 +2,13 @@ let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
 let inGradient = op.inTexture("Gradient");
+let inMethod = op.inSwitch("Method", ["Luminance", "Channels"], "Luminance");
 
 let inPos = op.inValueSlider("Position", 0.5);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name);
-
+shader.define("METH_LUMI");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.colormap_frag);
 var textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
@@ -15,6 +16,11 @@ var textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 var textureUniform = new CGL.Uniform(shader, "t", "gradient", 1);
 let uniPos = new CGL.Uniform(shader, "f", "pos", inPos);
 
+inMethod.onChange = () =>
+{
+    shader.toggleDefine("METH_LUMI", inMethod.get() == "Luminance");
+    shader.toggleDefine("METH_CHANNELS", inMethod.get() == "Channels");
+};
 
 render.onTriggered = function ()
 {
@@ -25,7 +31,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
 
     cgl.setTexture(1, inGradient.get().tex);
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inGradient.get().tex );

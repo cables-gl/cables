@@ -4,7 +4,10 @@ const labelPort = op.inString("Label", "Incrementor");
 const inMin = op.inValue("min", 0);
 const inMax = op.inValue("max", 10);
 const inStepsize = op.inValue("stepsize", 1);
+const inDefault = op.inValue("Default", 0);
 const inValues = op.inArray("Values");
+const inSetDefault = op.inTriggerButton("Set Default");
+inSetDefault.onTriggered = setDefaultValue;
 
 // outputs
 const siblingsPort = op.outObject("childs");
@@ -14,9 +17,14 @@ const outValue = op.outNumber("value");
 let currentPosition = 0;
 
 const containerEl = document.createElement("div");
+
 containerEl.classList.add("sidebar__item");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
+label.addEventListener("dblclick", function ()
+{
+    outValue.set(inDefault.get());
+});
 const labelTextEl = document.createTextNode(labelPort.get());
 label.appendChild(labelTextEl);
 containerEl.appendChild(label);
@@ -66,11 +74,35 @@ containerEl.appendChild(innerContainer);
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
+function setDefaultValue()
+{
+    console.log("set default", outValue.get());
+    inDefault.set(outValue.get());
+    if (CABLES.UI && op.isCurrentUiOp())
+    {
+        gui.opParams.show(op); /* update DOM */
+    }
+}
+
 // events
 parentPort.onChange = onParentChanged;
 inValues.onChange = onValueChange;
 labelPort.onChange = onLabelTextChanged;
 op.onDelete = onDelete;
+
+op.onLoaded = op.onInit = function ()
+{
+    if (Array.isArray(inValues.get()))
+    {
+        inDefault.setUiAttribs({ "greyout": true });
+    }
+    else
+    {
+        console.log("init default", inDefault.get());
+        outValue.set(inDefault.get());
+        valueText.textContent = inDefault.get();
+    }
+};
 
 function onValueChange()
 {
@@ -84,12 +116,15 @@ function onValueChange()
         inMax.setUiAttribs({ "greyout": true });
         inStepsize.setUiAttribs({ "greyout": true });
         inStepsize.set(1);
+        inDefault.setUiAttribs({ "greyout": true });
+        inDefault.set(0);
     }
     else
     {
         inMin.setUiAttribs({ "greyout": false });
         inMax.setUiAttribs({ "greyout": false });
         inStepsize.setUiAttribs({ "greyout": false });
+        inDefault.setUiAttribs({ "greyout": false });
     }
     outValue.set(value);
     valueText.textContent = value;
