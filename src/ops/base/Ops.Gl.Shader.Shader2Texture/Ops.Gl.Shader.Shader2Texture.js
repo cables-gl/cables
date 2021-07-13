@@ -39,6 +39,7 @@ const showingError = false;
 let fb = null;
 const tex = null;
 let needInit = true;
+
 const mesh = CGL.MESHES.getSimpleRect(cgl, "shader2texture rect");
 
 op.toWorkPortsNeedToBeLinked(inShader);
