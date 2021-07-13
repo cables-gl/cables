@@ -1,0 +1,1 @@
+The generated numbers are between `Min` and `Max`.
