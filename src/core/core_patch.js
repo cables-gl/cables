@@ -1233,15 +1233,6 @@ Patch.prototype.getVar = function (name)
     if (this._variables.hasOwnProperty(name)) return this._variables[name];
 };
 
-/**
- * @function
- * @memberof Patch
- * @instance
- */
-Patch.prototype.getVars = function ()
-{
-    return this._variables;
-};
 
 Patch.prototype.deleteVar = function (name)
 {
@@ -1268,10 +1259,27 @@ Patch.prototype.deleteVar = function (name)
  * @return {Array<Variable>} variables
  * @function
  */
-Patch.prototype.getVars = function ()
+Patch.prototype.getVars = function (t)
 {
-    return this._variables;
+    console.log("getvars", t);
+    if (t === undefined) return this._variables;
+
+
+    console.log("this._variables", this._variables);
+    const vars = [];
+    if (t == CABLES.OP_PORT_TYPE_STRING) t = "string";
+    if (t == CABLES.OP_PORT_TYPE_VALUE) t = "number";
+    if (t == CABLES.OP_PORT_TYPE_ARRAY) t = "array";
+    if (t == CABLES.OP_PORT_TYPE_OBJECT) t = "object";
+
+    for (const i in this._variables)
+    {
+        console.log(this._variables[i]);
+        if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
+    }
+    return vars;
 };
+
 
 /**
  * @function exitError

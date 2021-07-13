@@ -11,6 +11,17 @@ float lumi(vec3 color)
 void main()
 {
    vec4 base=texture(tex,texCoord);
-   vec4 color=texture(gradient,vec2(lumi(base.rgb),pos));
+
+    #ifdef METH_LUMI
+        vec4 color=texture(gradient,vec2(lumi(base.rgb),pos));
+    #endif
+
+    #ifdef METH_CHANNELS
+        vec4 color=vec4(1.0);
+        color.r=texture(gradient,vec2(base.r,pos)).r;
+        color.g=texture(gradient,vec2(base.g,pos)).g;
+        color.b=texture(gradient,vec2(base.b,pos)).b;
+    #endif
+
    outColor= vec4(color);
 }

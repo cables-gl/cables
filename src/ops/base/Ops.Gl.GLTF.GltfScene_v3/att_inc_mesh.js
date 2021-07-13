@@ -17,15 +17,29 @@ var gltfMesh=class
         if(prim.targets)
             for(var j=0;j<prim.targets.length;j++)
             {
-                var tgeom=new CGL.Geometry("gltf_"+this.name);
+                // var tgeom=new CGL.Geometry("gltf_"+this.name);
+                let tgeom=this.geom.copy();
+
                 if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
                 this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+
+                // console.log( Object.keys(prim.targets[j]) );
+
+
+                { // calculate normals for final position of morphtarget for later...
+                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
+                    tgeom.calculateNormals();
+                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
+                }
+
+
                 this.geom.morphTargets.push(tgeom);
             }
 
         this.morphGeom=this.geom.copy();
         this.bounds=this.geom.getBounds();
-}
+    }
+
     fillGeomAttribs(gltf,geom,attribs)
     {
         if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
@@ -33,6 +47,8 @@ var gltfMesh=class
         if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
         if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
         if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+
+
 
 // Implementation note: When normals and tangents are specified,
 // client implementations should compute the bitangent by taking
@@ -138,30 +154,30 @@ var gltfMesh=class
                 if(mt && mt.vertices)
                 {
                     const fract=this.test%1;
-                    for(var i=0;i<this.morphGeom.vertices.length;i++)
+                    for(let i=0;i<this.morphGeom.vertices.length;i++)
                     {
                         this.morphGeom.vertices[i]=
                             this.geom.vertices[i]+
                             (1.0-fract)*mt.vertices[i]+
                             fract*mt2.vertices[i];
+
+                        this.morphGeom.vertexNormals[i]=
+                            (1.0-fract)*mt.vertexNormals[i]+
+                            fract*mt2.vertexNormals[i];
                     }
 
+                    this.mesh.updateNormals(this.morphGeom);
                     this.mesh.updateVertices(this.morphGeom);
                 }
             }
 
-
             const useMat=!ignoreMaterial && this.material!=-1 && gltf.shaders[this.material];
-
-            // console.log(gltf.shaders);
-            // console.log(this.material);
 
             if(useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             this.mesh.render(cgl.getShader(),ignoreMaterial);
 
             if(useMat) cgl.popShader();
-
         }
     }
 
