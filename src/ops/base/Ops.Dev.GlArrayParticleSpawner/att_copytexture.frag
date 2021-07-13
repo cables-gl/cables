@@ -3,14 +3,10 @@
 UNI float time;
 
 UNI sampler2D tex;
-
 UNI sampler2D texSpawnCoords;
 UNI sampler2D texLifetimes;
 
 
-#ifdef TEX_MASK
-UNI sampler2D texMask;
-#endif
 
 IN vec2 texCoord;
 
@@ -75,6 +71,8 @@ void main()
 
 
 // col.a=time
-
+col.a=1.0;
+    // col=texture(texSpawnCoords,texCoord);
     outColor= col;
+
 }

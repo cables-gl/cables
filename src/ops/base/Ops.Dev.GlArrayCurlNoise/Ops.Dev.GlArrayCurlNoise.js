@@ -53,6 +53,7 @@ function updateDefines()
 
 function dorender()
 {
+    outTex.set(null);
     const finTex = texMath.render(shader);
     outTex.set(finTex);
     trigger.trigger();

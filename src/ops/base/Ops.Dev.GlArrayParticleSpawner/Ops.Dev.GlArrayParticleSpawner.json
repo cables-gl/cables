@@ -1,1 +1,95 @@
-{"authorName":"pandur","id":"37816692-8a4c-4b20-9ba3-b0e678b14bb5","created":1625753482075,"layout":{"portsIn":[{"type":1,"name":"render"},{"type":2,"name":"Texture","objType":"texture"},{"type":2,"name":"Spawn Coords","objType":"texture"},{"type":2,"name":"Lifetimes","objType":"texture"},{"type":0,"name":"Time","subType":"number"},{"type":0,"name":"use original size","group":"Size","subType":"boolean"},{"type":0,"name":"width","group":"Size","subType":"integer"},{"type":0,"name":"height","group":"Size","subType":"integer"}],"portsOut":[{"type":1,"name":"trigger"},{"type":2,"name":"texture_out","objType":"texture"}],"name":"Ops.User.pandur.PointTexParticleSpawner"},"summary":"copy a texture and optionally resize it","docs":{"ports":[]},"changelog":[{"message":"cloned op from Ops.Gl.Textures.CopyTexture","author":"pandur","date":1625753482076},{"message":"Ops.User.pandur.PointTexSpawner renamed to Ops.User.pandur.PointTexParticleSpawner","author":"pandur","date":1625753615135},{"message":"Ops.User.pandur.PointTexParticleSpawner renamed to Ops.Dev.GlArrayParticleSpawner","author":"pandur","date":1626192969143}]}
+{
+    "authorName": "pandur",
+    "id": "37816692-8a4c-4b20-9ba3-b0e678b14bb5",
+    "created": 1625753482075,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "GlArray",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Spawn Coords",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Lifetimes",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.GlArrayParticleSpawner"
+    },
+    "summary": "copy a texture and optionally resize it",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.Textures.CopyTexture",
+            "author": "pandur",
+            "date": 1625753482076
+        },
+        {
+            "message": "Ops.User.pandur.PointTexSpawner renamed to Ops.User.pandur.PointTexParticleSpawner",
+            "author": "pandur",
+            "date": 1625753615135
+        },
+        {
+            "message": "Ops.User.pandur.PointTexParticleSpawner renamed to Ops.Dev.GlArrayParticleSpawner",
+            "author": "pandur",
+            "date": 1626192969143
+        }
+    ]
+}
