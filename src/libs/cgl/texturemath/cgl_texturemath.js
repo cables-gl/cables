@@ -20,18 +20,11 @@ class ShaderTextureMath
         this._fb = null;
     }
 
-    _initFb(tex)
+    _initFb(w, h)
     {
         if (this._fb) this._fb.delete();
         this._fb = null;
 
-        let w = this._w;
-        let h = this._h;
-        if (this._texPort.get())
-        {
-            w = this._texPort.get().width;
-            h = this._texPort.get().height;
-        }
 
         if (this._cgl.glVersion >= 2)
         {
@@ -59,11 +52,18 @@ class ShaderTextureMath
 
     render(shader)
     {
-        if (!this._texPort.get()) return;
+        if (this._texPort && !this._texPort.get()) return;
 
         const vp = this._cgl.getViewPort();
 
-        if (!this._fb || this._fb.getWidth() != this._texPort.get().width || this._fb.getHeight() != this._texPort.get().height) this._initFb();
+        let w = this._w;
+        let h = this._h;
+        if (this._texPort && this._texPort.get())
+        {
+            w = this._texPort.get().width;
+            h = this._texPort.get().height;
+        }
+        if (!this._fb || this._fb.getWidth() != w || this._fb.getHeight() != h) this._initFb(w, h);
 
         if (!shader)
         {
@@ -92,7 +92,7 @@ class ShaderTextureMath
             if (shader.bindTextures) shader.bindTextures();
 
             if (this._texPort)
-                this._cgl.setTexture(0, this._texPort.tex);
+                this._cgl.setTexture(0, this._texPort.get().tex);
 
             this._cgl.pushBlend(false);
 

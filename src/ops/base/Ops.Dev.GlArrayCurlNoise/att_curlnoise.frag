@@ -152,9 +152,9 @@ void main()
     vec4 base=texture(tex,texCoord);
 
     vec3 coord=base.xyz;
-    coord.x+=((Perlin3D( ( (base.xyz* 20.0) + vec3(x,y,z)) *scale ))*0.01);
-    coord.y+=((Perlin3D( ( (base.xyz*-20.0) + vec3(x,y,z)) *scale ))*0.01);
-    coord.z+=((Perlin3D( ( (base.xyz* 30.0) + vec3(x,y,z)) *scale ))*0.01);
+    coord.x+=((Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale ))*0.01);
+    coord.y+=((Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale ))*0.01);
+    coord.z+=((Perlin3D( ( (base.xyz+30.0) + vec3(x,y,z)) *scale ))*0.01);
 
     // additional noise on top
     coord.x+=Perlin3D(vec3(texCoord.x))*0.001;

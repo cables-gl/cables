@@ -1,4 +1,7 @@
 {
+    "authorName": "pandur",
+    "id": "37816692-8a4c-4b20-9ba3-b0e678b14bb5",
+    "created": 1625753482075,
     "layout": {
         "portsIn": [
             {
@@ -11,9 +14,28 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "Spawn Coords",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Lifetimes",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Scale",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             },
             {
                 "type": 0,
@@ -47,45 +69,27 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.GlArrayCurlNoise"
+        "name": "Ops.Dev.GlArrayParticleSpawner"
     },
-    "summary": "draw perlin noise into an image",
-    "credits": [
-        {
-            "title": "GPU-Noise-Lib",
-            "author": "Brian Sharpe",
-            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
-            "licence": "Public Domain"
-        }
-    ],
-    "authorName": "pandur",
-    "id": "25467f40-8f78-4dca-ba6c-951ae49cac59",
-    "created": 1625738171489,
-    "issues": "",
-    "collections": [
-        "random",
-        "generator"
-    ],
-    "relatedops": null,
-    "youtubeids": [],
+    "summary": "copy a texture and optionally resize it",
     "docs": {
         "ports": []
     },
     "changelog": [
         {
-            "message": "cloned op from Ops.Gl.TextureEffects.Noise.PerlinNoise",
+            "message": "cloned op from Ops.Gl.Textures.CopyTexture",
             "author": "pandur",
-            "date": 1625738171489
+            "date": 1625753482076
         },
         {
-            "message": "Ops.User.pandur.CurlNoise renamed to Ops.User.pandur.PointTexCurlNoise",
+            "message": "Ops.User.pandur.PointTexSpawner renamed to Ops.User.pandur.PointTexParticleSpawner",
             "author": "pandur",
-            "date": 1625753171241
+            "date": 1625753615135
         },
         {
-            "message": "Ops.User.pandur.PointTexCurlNoise renamed to Ops.Dev.GlArrayCurlNoise",
+            "message": "Ops.User.pandur.PointTexParticleSpawner renamed to Ops.Dev.GlArrayParticleSpawner",
             "author": "pandur",
-            "date": 1626186945975
+            "date": 1626192969143
         }
     ]
 }
