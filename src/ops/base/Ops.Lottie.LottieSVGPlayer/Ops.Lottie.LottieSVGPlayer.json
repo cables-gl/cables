@@ -10,12 +10,17 @@
             "message": "Ops.Bodymovin.LottieSVGPlayer renamed to Ops.Lottie.LottieSVGPlayer",
             "author": "pandur",
             "date": 1560783156915
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104391335
         }
     ],
     "authorName": "pandur",
     "created": 1555057857873,
     "libs": [
-        "lottie_svg.js"
+        "lottie.js"
     ],
     "layout": {
         "portsIn": [
