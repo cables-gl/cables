@@ -1261,11 +1261,8 @@ Patch.prototype.deleteVar = function (name)
  */
 Patch.prototype.getVars = function (t)
 {
-    console.log("getvars", t);
     if (t === undefined) return this._variables;
 
-
-    console.log("this._variables", this._variables);
     const vars = [];
     if (t == CABLES.OP_PORT_TYPE_STRING) t = "string";
     if (t == CABLES.OP_PORT_TYPE_VALUE) t = "number";

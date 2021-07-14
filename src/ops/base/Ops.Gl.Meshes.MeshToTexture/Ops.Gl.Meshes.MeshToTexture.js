@@ -5,17 +5,17 @@ const
 
     tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
-    inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
+    // inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
     next = op.outTrigger("Next"),
     outNumVerts = op.outNumber("Total Vertices"),
-    outTex = op.outTexture("Texture"),
-    outTex2 = op.outTexture("Texture 2"),
-    outTex3 = op.outTexture("Texture 3"),
-    outTex4 = op.outTexture("Texture 4");
+    outTex = op.outTexture("Texture");
+    // outTex2 = op.outTexture("Texture 2"),
+    // outTex3 = op.outTexture("Texture 3"),
+    // outTex4 = op.outTexture("Texture 4");
 
 op.setPortGroup("Texture settings", [tfilter, twrap]);
 
-let numTextures = 2;
+let numTextures = 1;
 const cgl = op.patch.cgl;
 const prevViewPort = [0, 0, 0, 0];
 const effect = null;
@@ -24,7 +24,7 @@ let shader = null;
 
 inWidth.onChange =
     tfilter.onChange =
-    inNumTex.onChange =
+    // inNumTex.onChange =
     twrap.onChange = initFbLater;
 
 const showingError = false;
@@ -120,7 +120,7 @@ function initFb()
             {
                 "isFloatingPointTexture": true,
                 "multisampling": false,
-                "numRenderBuffers": numTextures,
+                // "numRenderBuffers": numTextures,
                 "wrap": selectedWrap,
                 "filter": filter,
                 "depth": true,
@@ -182,14 +182,15 @@ exec.onTriggered = function ()
     cgl.popViewMatrix();
     fb.renderEnd(cgl);
 
-    if (numTextures >= 2)
-    {
-        outTex.set(fb.getTextureColorNum(0));
-        outTex2.set(fb.getTextureColorNum(1));
-        // outTex3.set(fb.getTextureColorNum(2));
-        // outTex4.set(fb.getTextureColorNum(3));
-    }
-    else outTex.set(fb.getTextureColor());
+    // if (numTextures >= 2)
+    // {
+    //     outTex.set(fb.getTextureColorNum(0));
+    //     // outTex2.set(fb.getTextureColorNum(1));
+    //     // outTex3.set(fb.getTextureColorNum(2));
+    //     // outTex4.set(fb.getTextureColorNum(3));
+    // }
+    // else
+    outTex.set(fb.getTextureColor());
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
