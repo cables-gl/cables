@@ -14,10 +14,15 @@
             "message": "Ops.Admin.LottieTexturePlayer renamed to Ops.Lottie.LottieTexturePlayer",
             "author": "pandur",
             "date": 1587367524875
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104402127
         }
     ],
     "libs": [
-        "lottie_canvas.min.js"
+        "lottie.js"
     ],
     "authorName": "pandur",
     "id": "e9946c8c-afb8-4ab5-b534-3fe53ed45dcf",
