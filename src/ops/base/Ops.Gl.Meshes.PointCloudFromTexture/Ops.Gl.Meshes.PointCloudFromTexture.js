@@ -3,6 +3,7 @@ const
     inNum = op.inInt("Num Points", 10000),
     inAxis = op.inSwitch("Axis", ["XYZ", "XY"], "XYZ"),
     inTex = op.inTexture("Texture", null, "texture"),
+    inTexPS = op.inTexture("Point Size", null, "texture"),
     inNorm = op.inBool("Normalize", false),
     // inMode = op.inSwitch("Mode", ["Absolute", "Add"], "Absolute"),
     trigger = op.outTrigger("Trigger");
@@ -22,6 +23,7 @@ mod.addModule({
 });
 
 mod.addUniformVert("t", "MOD_tex");
+mod.addUniformVert("t", "MOD_texPointSize");
 // inMode.onChange = updateDefines;
 render.onTriggered = doRender;
 updateDefines();
@@ -29,6 +31,7 @@ updateDefines();
 mod.addUniformVert("f", "MOD_texSize", 0);
 
 inNorm.onChange =
+    inTexPS.onChange =
     inAxis.onChange = updateDefines;
 inNum.onChange = setupMesh;
 setupMesh();
@@ -40,6 +43,8 @@ function updateDefines()
     mod.toggleDefine("MOD_AXIS_XYZ", inAxis.get() == "XYZ");
 
     mod.toggleDefine("MOD_NORMALIZE", inNorm.get());
+
+    mod.toggleDefine("MOD_HAS_PS_TEX", inTexPS.get());
 }
 
 function doRender()
@@ -47,8 +52,9 @@ function doRender()
     mod.bind();
     if (!inTex.get() || !inTex.get().tex) return;
     if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
+    if (inTexPS.get())mod.pushTexture("MOD_texPointSize", inTexPS.get().tex);
 
-    mod.setUniformValue("MOD_texSize", inTex.get().width);
+    mod.setUniformValue("MOD_texSize", inTex.get().width + 1);
 
     if (numVerts > 0 && inNum.get() > 0 && mesh)mesh.render(cgl.getShader());
 

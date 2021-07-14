@@ -55,6 +55,11 @@
                 "objType": "texture"
             },
             {
+                "type": 2,
+                "name": "Point Size",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "Normalize",
                 "subType": "boolean"

@@ -1,1 +1,95 @@
-{"id":"041f5b18-74b4-4a03-9987-4451bd334464","changelog":[{"message":"created op","author":"pandur","date":1626170532235},{"message":"Ops.User.pandur.TestGlArray renamed to Ops.User.pandur.GlArrayMath","author":"pandur","date":1626173698486},{"message":"Ops.User.pandur.GlArrayMath renamed to Ops.Dev.GlArrayMath","author":"pandur","date":1626175390946},{"message":" added core lib: cgl_texturemath","author":"pandur","date":1626179431070},{"message":"cloned op from Ops.Dev.GlArrayMath","author":"pandur","date":1626180443074},{"message":"Ops.User.pandur.GlArrayRandom renamed to Ops.Dev.GlArrayRandom","author":"pandur","date":1626196661252}],"authorName":"pandur","created":1626180443073,"layout":{"portsIn":[{"type":1,"name":"Render"},{"type":0,"name":"X Min","subType":"number"},{"type":0,"name":"X Max","subType":"number"},{"type":0,"name":"Y Min","subType":"number"},{"type":0,"name":"Y Max","subType":"number"},{"type":0,"name":"Z Min","subType":"number"},{"type":0,"name":"Z Max","subType":"number"},{"type":0,"name":"Seed","subType":"number"}],"portsOut":[{"type":1,"name":"Next"},{"type":2,"name":"Result","objType":"texture"}],"name":"Ops.User.pandur.GlArrayRandom"},"coreLibs":["cgl_texturemath"]}
+{
+    "id": "041f5b18-74b4-4a03-9987-4451bd334464",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1626170532235
+        },
+        {
+            "message": "Ops.User.pandur.TestGlArray renamed to Ops.User.pandur.GlArrayMath",
+            "author": "pandur",
+            "date": 1626173698486
+        },
+        {
+            "message": "Ops.User.pandur.GlArrayMath renamed to Ops.Dev.GlArrayMath",
+            "author": "pandur",
+            "date": 1626175390946
+        },
+        {
+            "message": " added core lib: cgl_texturemath",
+            "author": "pandur",
+            "date": 1626179431070
+        },
+        {
+            "message": "cloned op from Ops.Dev.GlArrayMath",
+            "author": "pandur",
+            "date": 1626180443074
+        },
+        {
+            "message": "Ops.User.pandur.GlArrayRandom renamed to Ops.Dev.GlArrayRandom",
+            "author": "pandur",
+            "date": 1626196661252
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1626180443073,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 0,
+                "name": "X Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z Max",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Seed",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.GlArrayRandom"
+    },
+    "coreLibs": [
+        "cgl_texturemath"
+    ]
+}
