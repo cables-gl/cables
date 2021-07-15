@@ -50,6 +50,12 @@ class ShaderTextureMath
         }
     }
 
+    setSize(w, h)
+    {
+        this._w = w;
+        this._h = h;
+    }
+
     render(shader)
     {
         if (this._texPort && !this._texPort.get()) return;
