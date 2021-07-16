@@ -2,11 +2,19 @@ const
     inKey = op.inString("Key"),
     inValue = op.inString("String", ""),
     inStore = op.inTriggerButton("Store"),
-    outValue = op.outString("Stored String");
+    outValue = op.outString("Stored String"),
+    outSupported = op.outBool("Storage Support", true);
 
+const localStorageSupport = !!window.localStorage;
+if (!localStorageSupport)
+{
+    op.error("your browser does not support or blocks access to localStorage, output will be inValue!");
+    outSupported.set(false);
+}
+
+updateOutput();
 inKey.onChange = updateOutput;
 inStore.onTriggered = storeValue;
-updateOutput();
 
 function getKey()
 {
@@ -15,12 +23,26 @@ function getKey()
 
 function updateOutput()
 {
-    outValue.set(window.localStorage.getItem(getKey()));
+    if (localStorageSupport)
+    {
+        outValue.set(window.localStorage.getItem(getKey()));
+    }
+    else
+    {
+        outValue.set(inValue.get());
+    }
 }
 
 function storeValue()
 {
     const val = inValue.get();
-    window.localStorage.setItem(getKey(), val);
+    if (localStorageSupport)
+    {
+        window.localStorage.setItem(getKey(), val);
+    }
+    else
+    {
+        op.warn("not storing to localstorage, missing browsersupport!");
+    }
     outValue.set(val);
 }
