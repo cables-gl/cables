@@ -17,6 +17,11 @@
             },
             {
                 "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },

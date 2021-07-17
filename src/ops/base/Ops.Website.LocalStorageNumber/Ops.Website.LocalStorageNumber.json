@@ -30,8 +30,42 @@
                 "type": 0,
                 "name": "Stored Number",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Storage Support",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Website.LocalStorageNumber"
+    },
+    "summary": "Store and retreive a number in browser localstorage",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Key",
+                "text": "storage key"
+            },
+            {
+                "name": "Number",
+                "text": "storage value"
+            },
+            {
+                "name": "Store",
+                "text": "trigger to store number"
+            },
+            {
+                "name": "Stored Number",
+                "text": "the stored value"
+            },
+            {
+                "name": "Storage Support",
+                "text": "boolean to indicate browser support for localstorage"
+            }
+        ]
     }
 }

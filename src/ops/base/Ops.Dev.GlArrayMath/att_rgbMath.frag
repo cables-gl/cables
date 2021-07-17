@@ -1,5 +1,6 @@
 IN vec2 texCoord;
 UNI sampler2D tex;
+UNI sampler2D tex2;
 UNI float r;
 UNI float g;
 UNI float b;
@@ -9,6 +10,11 @@ void main()
 {
     vec4 col=texture(tex,texCoord);
     vec4 v=vec4(r,g,b,a);
+
+    #ifdef MOD_USE_TEX
+        v=texture(tex2,texCoord);
+    #endif
+
 
     #ifdef MOD_OP_SUB_CX
         #ifdef MOD_CHAN_R
