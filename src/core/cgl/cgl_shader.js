@@ -1325,7 +1325,7 @@ Shader.prototype._createProgram = function (vstr, fstr)
     this._cgl.gl.attachShader(program, this.vshader);
     this._cgl.gl.attachShader(program, this.fshader);
 
-    this._linkProgram(program);
+    this._linkProgram(program, vstr, fstr);
     return program;
 };
 
@@ -1334,7 +1334,7 @@ Shader.prototype.hasErrors = function ()
     return this._hasErrors;
 };
 
-Shader.prototype._linkProgram = function (program)
+Shader.prototype._linkProgram = function (program, vstr, fstr)
 {
     if (this._feedBackNames.length > 0)
     {
@@ -1356,8 +1356,8 @@ Shader.prototype._linkProgram = function (program)
             console.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             console.error(name + " shader linking fail...");
 
-            Log.log("srcFrag", this.srcFrag);
-            Log.log("srcVert", this.srcVert);
+            Log.log("srcFrag", fstr);
+            Log.log("srcVert", vstr);
             Log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
             Log.log("--------------------------------------");
