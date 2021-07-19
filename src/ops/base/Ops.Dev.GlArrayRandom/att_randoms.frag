@@ -23,7 +23,7 @@ float map(float value, float min1, float max1, float min2, float max2) {
 
 void main()
 {
-    vec4 rnd=vec4((cgl_random3(texCoord.xy+vec2(seed))),1.0);
+    vec4 rnd=vec4((cgl_random3(texCoord.xy + vec2(seed))), 1.0);
 
     rnd.r=map(rnd.x, 0., 1., rmin, rmax);
     rnd.y=map(rnd.y, 0., 1., gmin, gmax);

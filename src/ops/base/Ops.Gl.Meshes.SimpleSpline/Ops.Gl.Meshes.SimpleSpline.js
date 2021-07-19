@@ -58,7 +58,6 @@ function rebuild()
 
     attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
 
-
     const numTc = (newLength / 3) * 2;
     if (currentTexCoords != texCoords.get() || mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems != numTc / 2)
     {
@@ -118,7 +117,6 @@ render.onTriggered = function ()
 {
     if (!inPoints.get()) return;
 
-
     if (needsRebuild)rebuild();
     const shader = cgl.getShader();
     if (!shader) return;
@@ -130,7 +128,6 @@ render.onTriggered = function ()
     if (attr)
         if (numPoints.get() <= 0)attr.numItems = buff.length / 3;
         else attr.numItems = Math.min(numPoints.get(), buff.length / 3);
-
 
     if (mesh && buff.length !== 0) mesh.render(shader);
 

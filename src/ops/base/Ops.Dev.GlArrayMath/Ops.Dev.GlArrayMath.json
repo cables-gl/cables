@@ -65,6 +65,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 2,
+                "name": "Value",
+                "objType": "texture"
+            },
+            {
                 "type": 0,
                 "name": "r",
                 "subType": "number"

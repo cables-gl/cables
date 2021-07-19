@@ -2,6 +2,7 @@ const
     render = op.inTrigger("Render"),
     inTex = op.inTexture("GlArray"),
     scale = op.inValue("Scale", 1),
+    time = op.inValue("Time", 0),
 
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
@@ -10,6 +11,7 @@ const
     trigger = op.outTrigger("trigger"),
     outTex = op.outTexture("Result");
 
+let lastTime = time.get();
 render.onTriggered = dorender;
 
 const cgl = op.patch.cgl;
@@ -22,6 +24,7 @@ const uniformR = new CGL.Uniform(shader, "f", "x", x);
 const uniformG = new CGL.Uniform(shader, "f", "y", y);
 const uniformB = new CGL.Uniform(shader, "f", "z", z);
 const uniformA = new CGL.Uniform(shader, "f", "scale", scale);
+const uniformTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 0);
 
 updateDefines();
 
@@ -53,6 +56,9 @@ function updateDefines()
 
 function dorender()
 {
+    uniformTimeDelta.set(time.get() - lastTime);
+    lastTime = time.get();
+
     outTex.set(null);
     const finTex = texMath.render(shader);
     outTex.set(finTex);

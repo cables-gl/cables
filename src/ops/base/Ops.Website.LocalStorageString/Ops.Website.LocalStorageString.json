@@ -28,6 +28,11 @@
             {
                 "type": 5,
                 "name": "Stored String"
+            },
+            {
+                "type": 0,
+                "name": "Storage Support",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Website.LocalStorageString"
@@ -38,6 +43,27 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Key",
+                "text": "storage key"
+            },
+            {
+                "name": "String",
+                "text": "storage value"
+            },
+            {
+                "name": "Store",
+                "text": "trigger to store number"
+            },
+            {
+                "name": "Stored String",
+                "text": "the stored value"
+            },
+            {
+                "name": "Storage Support",
+                "text": "boolean to indicate browser support for localstorage"
+            }
+        ]
     }
 }
