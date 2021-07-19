@@ -1271,7 +1271,7 @@ Patch.prototype.getVars = function (t)
 
     for (const i in this._variables)
     {
-        console.log(this._variables[i]);
+        // console.log(this._variables[i]);
         if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
     }
     return vars;
