@@ -1320,7 +1320,9 @@ Shader.prototype._createProgram = function (vstr, fstr)
 {
     const program = this._cgl.gl.createProgram();
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
+    this._cgl.printError("shader createShader vert");
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
+    this._cgl.printError("shader createShader frag");
 
     this._cgl.gl.attachShader(program, this.vshader);
     this._cgl.gl.attachShader(program, this.fshader);
@@ -1345,10 +1347,12 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
 
     this._cgl.gl.linkProgram(program);
     this._isValid = true;
+    this._cgl.printError("shader linkProgram");
 
     if (this._cgl.patch.config.glValidateShader !== false)
     {
         this._cgl.gl.validateProgram(program);
+        this._cgl.printError("shader validateProgram");
 
         if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
         {
