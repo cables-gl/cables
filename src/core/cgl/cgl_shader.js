@@ -429,6 +429,8 @@ Shader.prototype.createStructUniforms = function ()
 
 Shader.prototype.compile = function ()
 {
+    this._cgl.printError("shader compile start");
+
     const startTime = performance.now();
 
     this._cgl.profileData.profileShaderCompiles++;
@@ -747,6 +749,9 @@ Shader.prototype.compile = function ()
 
     vs = this._addLibs(vs);
     fs = this._addLibs(fs);
+
+    this._cgl.printError("shader before createprogram");
+
 
     if (!this._program)
     {
@@ -1319,6 +1324,8 @@ Shader.prototype.hasUniform = function (name)
 Shader.prototype._createProgram = function (vstr, fstr)
 {
     const program = this._cgl.gl.createProgram();
+    this._cgl.printError("shader createProgram");
+
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
     this._cgl.printError("shader createShader vert");
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
