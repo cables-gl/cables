@@ -1358,7 +1358,6 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
 
             Log.log("srcFrag", fstr);
             Log.log("srcVert", vstr);
-            this._cgl.printError("shader link err");
             Log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
             Log.log("--------------------------------------");
@@ -1368,6 +1367,7 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
 
             this._name = "errorshader";
             this.setSource(Shader.getDefaultVertexShader(), Shader.getErrorFragmentShader());
+            this._cgl.printError("shader link err");
         }
     }
 };
