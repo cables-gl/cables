@@ -1318,14 +1318,34 @@ Shader.prototype.hasUniform = function (name)
 
 Shader.prototype._createProgram = function (vstr, fstr)
 {
+    this._cgl.printError("_createprogram");
+
     const program = this._cgl.gl.createProgram();
+
+    this._cgl.printError("gl.createprogram");
+
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
+
+    this._cgl.printError("createshader");
+
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
+    this._cgl.printError("createshader");
+
+
     this._cgl.gl.attachShader(program, this.vshader);
+
+    this._cgl.printError("attachshader ");
+
+
     this._cgl.gl.attachShader(program, this.fshader);
 
+    this._cgl.printError("attachshader ");
+
+
     this._linkProgram(program, vstr, fstr);
+
+    this._cgl.printError("shader linkprogram err");
     return program;
 };
 
