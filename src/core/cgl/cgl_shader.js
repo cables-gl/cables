@@ -520,6 +520,7 @@ Shader.prototype.compile = function ()
             .endl() + "// vertex shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -533,6 +534,7 @@ Shader.prototype.compile = function ()
             .endl() + "// fragment shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
