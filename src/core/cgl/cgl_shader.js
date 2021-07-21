@@ -790,6 +790,7 @@ Shader.prototype.bind = function ()
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
+    if (!this._isValid) return;
 
     if (!this._projMatrixUniform)
     {
