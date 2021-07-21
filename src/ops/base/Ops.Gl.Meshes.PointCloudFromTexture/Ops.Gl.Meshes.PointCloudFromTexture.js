@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    inNum = op.inInt("Num Points", 10000),
+    inNum = op.inInt("Num Points", 0),
     inAxis = op.inSwitch("Axis", ["XYZ", "XY"], "XYZ"),
     inTex = op.inTexture("Texture", null, "texture"),
     inTexPS = op.inTexture("Point Size", null, "texture"),
@@ -33,6 +33,8 @@ mod.addUniformVert("f", "MOD_texSize", 0);
 inNorm.onChange =
     inTexPS.onChange =
     inAxis.onChange = updateDefines;
+
+inTex.onChange =
 inNum.onChange = setupMesh;
 setupMesh();
 updateDefines();
@@ -56,7 +58,7 @@ function doRender()
 
     mod.setUniformValue("MOD_texSize", inTex.get().width + 1);
 
-    if (numVerts > 0 && inNum.get() > 0 && mesh)mesh.render(cgl.getShader());
+    if (numVerts > 0 && inNum.get() >= 0 && mesh) mesh.render(cgl.getShader());
 
     trigger.trigger();
     mod.unbind();
@@ -64,7 +66,9 @@ function doRender()
 
 function setupMesh()
 {
-    const num = Math.max(0, Math.floor(inNum.get()));
+    if (inNum.get() === 0 && !inTex.get()) return;
+
+    const num = Math.max(0, Math.ceil(inNum.get() || inTex.get().width * inTex.get().height));
 
     let verts = new Float32Array(num * 3);
     let texCoords = new Float32Array(num * 2);

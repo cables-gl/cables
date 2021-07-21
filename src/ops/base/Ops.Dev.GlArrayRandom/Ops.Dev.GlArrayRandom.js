@@ -1,19 +1,18 @@
 const
     render = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
+    inNum = op.inInt("Length", 10000),
 
+    inRMin = op.inFloat("X Min", 0),
+    inRMax = op.inFloat("X Max", 1),
 
-    inRMin=op.inFloat("X Min",0),
-    inRMax=op.inFloat("X Max",1),
+    inGMin = op.inFloat("Y Min", 0),
+    inGMax = op.inFloat("Y Max", 1),
 
-    inGMin=op.inFloat("Y Min",0),
-    inGMax=op.inFloat("Y Max",1),
+    inBMin = op.inFloat("Z Min", 0),
+    inBMax = op.inFloat("Z Max", 1),
 
-    inBMin=op.inFloat("Z Min",0),
-    inBMax=op.inFloat("Z Max",1),
-
-    inSeed=op.inFloat("Seed",1),
-
+    inSeed = op.inFloat("Seed", 1),
 
     outTex = op.outTexture("Result");
 
@@ -21,7 +20,9 @@ render.onTriggered = dorender;
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
-const texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "width":128,"height":128 });
+let texMath = null;// = new CGL.ShaderTextureMath(cgl, op.objName, { "width":100,"height":100 });
+
+updateSize();
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.randoms_frag);
 const
@@ -39,6 +40,15 @@ const
     uniformSeed = new CGL.Uniform(shader, "f", "seed", inSeed);
 
 updateDefines();
+
+inNum.onChange = updateSize;
+
+function updateSize()
+{
+    const size = Math.ceil(Math.sqrt(inNum.get()));
+
+    texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "width": size, "height": size });
+}
 
 function updateDefines()
 {
