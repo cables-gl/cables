@@ -1356,6 +1356,8 @@ Shader.prototype.hasErrors = function ()
 
 Shader.prototype._linkProgram = function (program, vstr, fstr)
 {
+    this._cgl.printError("_linkprogram");
+
     if (this._feedBackNames.length > 0)
     {
         this._cgl.gl.transformFeedbackVaryings(program, this._feedBackNames, this._cgl.gl.SEPARATE_ATTRIBS);
@@ -1364,6 +1366,7 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
     }
 
     this._cgl.gl.linkProgram(program);
+    this._cgl.printError("gl.linkprogram");
     this._isValid = true;
 
     if (this._cgl.patch.config.glValidateShader !== false)
