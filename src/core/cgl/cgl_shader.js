@@ -94,7 +94,7 @@ const Shader = function (_cgl, _name)
     this._inverseViewMatrixUniform = null;
 
     this._attrVertexPos = -1;
-    this.precision = _cgl.patch.config.glslPrecision || "mediump";
+    this.precision = _cgl.patch.config.glslPrecision || "highp";
 
     this._pMatrixState = -1;
     this._vMatrixState = -1;
@@ -520,7 +520,6 @@ Shader.prototype.compile = function ()
             .endl() + "// vertex shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
-            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -534,7 +533,6 @@ Shader.prototype.compile = function ()
             .endl() + "// fragment shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
-            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
