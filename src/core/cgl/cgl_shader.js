@@ -94,7 +94,7 @@ const Shader = function (_cgl, _name)
     this._inverseViewMatrixUniform = null;
 
     this._attrVertexPos = -1;
-    this.precision = _cgl.patch.config.glslPrecision || "highp";
+    this.precision = _cgl.patch.config.glslPrecision || "mediump";
 
     this._pMatrixState = -1;
     this._vMatrixState = -1;
@@ -520,6 +520,7 @@ Shader.prototype.compile = function ()
             .endl() + "// vertex shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -533,6 +534,7 @@ Shader.prototype.compile = function ()
             .endl() + "// fragment shader " + this._name
             .endl() + "// "
             .endl() + "precision " + this.precision + " float;"
+            .endl() + "precision " + this.precision + " int;"
             .endl() + ""
             .endl() + "#define WEBGL2"
             .endl() + "#define texture2D texture"
@@ -790,6 +792,7 @@ Shader.prototype.bind = function ()
     MESH.lastShader = this;
 
     if (!this._program || this._needsRecompile) this.compile();
+    if (!this._isValid) return;
 
     if (!this._projMatrixUniform)
     {
@@ -1318,14 +1321,34 @@ Shader.prototype.hasUniform = function (name)
 
 Shader.prototype._createProgram = function (vstr, fstr)
 {
+    this._cgl.printError("_createprogram");
+
     const program = this._cgl.gl.createProgram();
+
+    this._cgl.printError("gl.createprogram");
+
     this.vshader = Shader.createShader(this._cgl, vstr, this._cgl.gl.VERTEX_SHADER, this);
+
+    this._cgl.printError("createshader");
+
     this.fshader = Shader.createShader(this._cgl, fstr, this._cgl.gl.FRAGMENT_SHADER, this);
 
+    this._cgl.printError("createshader");
+
+
     this._cgl.gl.attachShader(program, this.vshader);
+
+    this._cgl.printError("attachshader ");
+
+
     this._cgl.gl.attachShader(program, this.fshader);
 
+    this._cgl.printError("attachshader ");
+
+
     this._linkProgram(program, vstr, fstr);
+
+    this._cgl.printError("shader linkprogram err");
     return program;
 };
 
@@ -1336,6 +1359,8 @@ Shader.prototype.hasErrors = function ()
 
 Shader.prototype._linkProgram = function (program, vstr, fstr)
 {
+    this._cgl.printError("_linkprogram");
+
     if (this._feedBackNames.length > 0)
     {
         this._cgl.gl.transformFeedbackVaryings(program, this._feedBackNames, this._cgl.gl.SEPARATE_ATTRIBS);
@@ -1344,6 +1369,7 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
     }
 
     this._cgl.gl.linkProgram(program);
+    this._cgl.printError("gl.linkprogram");
     this._isValid = true;
 
     if (this._cgl.patch.config.glValidateShader !== false)

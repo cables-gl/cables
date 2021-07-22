@@ -42,6 +42,11 @@
             },
             {
                 "type": 0,
+                "name": "Length",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "X Min",
                 "subType": "number"
             },

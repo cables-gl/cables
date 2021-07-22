@@ -55,7 +55,7 @@ op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]
 
 inToggleOrenNayar.onChange = function ()
 {
-    shader.toggleDefine("ENABLE_OREN_NAYAR_DIFFUSE", inToggleOrenNayar);
+    shader.toggleDefine("ENABLE_OREN_NAYAR_DIFFUSE", inToggleOrenNayar.get());
     inAlbedo.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
     inRoughness.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
 };
@@ -79,7 +79,20 @@ let uniFresnel = null;
 let uniFresnelWidthExponent = null;
 inToggleFresnel.onChange = function ()
 {
-    shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel);
+    shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel.get());
+
+    if (uniFresnel)
+    {
+        shader.removeUniform("inFresnel");
+        uniFresnel = null;
+    }
+
+    if (uniFresnelWidthExponent)
+    {
+        shader.removeUniform("inFresnelWidthExponent");
+        uniFresnelWidthExponent = null;
+    }
+
     if (inToggleFresnel.get())
     {
         if (!uniFresnel) uniFresnel = new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel);
@@ -87,17 +100,6 @@ inToggleFresnel.onChange = function ()
     }
     else
     {
-        if (uniFresnel)
-        {
-            shader.removeUniform("inFresnel");
-            uniFresnel = null;
-        }
-
-        if (uniFresnelWidthExponent)
-        {
-            shader.removeUniform("inFresnelWidthExponent");
-            uniFresnelWidthExponent = null;
-        }
     }
 
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
@@ -118,7 +120,7 @@ inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
 
 inEmissiveActive.onChange = () =>
 {
-    shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
+    shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive.get());
     inEmissiveColorIntensity.setUiAttribs({ "greyout": !inEmissiveActive.get() });
     inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
     inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
