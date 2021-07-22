@@ -97,7 +97,7 @@ function reset()
 function updateDefines()
 {
     mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    mod.toggleDefine("TEXCOORDS_INSTANCES", inColor.get());
+    mod.toggleDefine("TEXCOORDS_INSTANCES", inTexCoords.get());
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
     mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
