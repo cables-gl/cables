@@ -431,6 +431,8 @@ Shader.prototype.compile = function ()
 {
     const startTime = performance.now();
 
+    this._cgl.printError("shader.compile");
+
     this._cgl.profileData.profileShaderCompiles++;
     this._cgl.profileData.profileShaderCompileName = this._name;
 
@@ -446,6 +448,7 @@ Shader.prototype.compile = function ()
         definesStr += "#define " + this._defines[i][0] + " " + this._defines[i][1] + "".endl();
 
     const structStrings = this.createStructUniforms();
+    this._cgl.printError("createStructUniforms");
 
     this._cgl.profileData.addHeavyEvent("shader compile", this._name);
 
@@ -472,6 +475,8 @@ Shader.prototype.compile = function ()
             else this._uniforms[j].resetLoc();
         }
     }
+
+    this._cgl.printError("uniform resets");
 
     if (this.hasTextureUniforms()) definesStr += "#define HAS_TEXTURES".endl();
 
