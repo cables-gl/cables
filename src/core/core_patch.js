@@ -31,6 +31,7 @@ import { Log } from "./log";
  *     prefixAssetPath:'/assets/',
  *     prefixAssetPath:'/js/',
  *     onError:function(e){console.log(e);}
+ *     glslPrecision:'highp'
  * });
  */
 

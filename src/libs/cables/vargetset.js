@@ -72,7 +72,7 @@ const VarSetOpWrapper = class
 
         if (!this._op.patch.hasVar(varname) && varname != 0 && !this._triggerPort)
         {
-            console.log("var does not exist", varname);
+            // console.log("var does not exist", varname);
 
             this._setVarValue(); // this should not be done!!!, its kept because of compatibility anxiety
         }
