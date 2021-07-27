@@ -48,7 +48,7 @@ function updateName()
 
     op.setTitle(">" + varname.get());
 
-    if (CABLES.UI) gui.opParams.show(op);
+    if (op.isCurrentUiOp()) gui.opParams.show(op);
 }
 
 function doTrigger()

@@ -50,7 +50,12 @@ const glQueryExt = gl.getExtension("EXT_disjoint_timer_query_webgl2");
 // let query = null;
 
 exe.onLinkChanged =
-    inShow.onChange = updateVisibility;
+    inShow.onChange = () =>
+    {
+        updateOpened();
+        updateVisibility();
+    };
+
 position.onChange = updatePos;
 inSizeGraph.onChange = updateSize;
 
@@ -433,7 +438,7 @@ function render()
     const selfTimeStart = performance.now();
     frameCount++;
 
-    if (glQueryExt)op.patch.cgl.profileData.doProfileGlQuery = true;
+    if (glQueryExt && inShow.get())op.patch.cgl.profileData.doProfileGlQuery = true;
 
     if (fpsStartTime === 0)fpsStartTime = Date.now();
     if (Date.now() - fpsStartTime >= 1000)

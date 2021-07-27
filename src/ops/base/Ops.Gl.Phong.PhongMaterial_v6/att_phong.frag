@@ -75,7 +75,7 @@ const float EIGHT_PI = (8. * PI);
 #define RECIPROCAL_PI2 RECIPROCAL_PI/2.
 
 // TEXTURES
-#ifdef HAS_TEXTURES
+// #ifdef HAS_TEXTURES
     UNI vec4 inTextureIntensities;
 
     #ifdef HAS_TEXTURE_ENV
@@ -177,7 +177,7 @@ const float EIGHT_PI = (8. * PI);
     #ifdef HAS_TEXTURE_ALPHA
         UNI sampler2D texAlpha;
     #endif
-#endif
+// #endif
 
 {{MODULES_HEAD}}
 
