@@ -73,6 +73,7 @@ function dorender()
 
     const finTex = texMath.render(shader);
 
+    outTex.set(null);
     outTex.set(finTex);
     trigger.trigger();
 }
