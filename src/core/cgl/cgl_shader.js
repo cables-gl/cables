@@ -82,8 +82,7 @@ const Shader = function (_cgl, _name)
     this._program = null;
     this._uniforms = [];
     this._drawBuffers = [true];
-    this
-        .this.setWhyCompile("copy"); _defines = [];
+    this._defines = [];
     this._needsRecompile = true;
 
     this._projMatrixUniform = null;
@@ -154,8 +153,7 @@ Shader.prototype.getName = function ()
  */
 Shader.prototype.enableExtension = function (name)
 {
-    this
-        .this.setWhyCompile("copy"); setWhyCompile("enable extension " + name);
+    this.setWhyCompile("enable extension " + name);
     this._needsRecompile = true;
     this._extensions.push(name);
 };
@@ -1488,8 +1486,7 @@ Shader.prototype.addAttribute = function (attr)
     {
         if (this._attributes[i].name == attr.name && this._attributes[i].nameFrag == attr.nameFrag) return;
     }
-    this
-        .this.setWhyCompile("copy"); _attributes.push(attr);
+    this._attributes.push(attr);
     this._needsRecompile = true;
     this.setWhyCompile("addAttribute");
 };
