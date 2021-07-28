@@ -401,6 +401,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTURE_NORMAL
+
             normal = texture(texNormal, texCoord).rgb;
             normal = normalize(normal * 2. - 1.);
             float normalIntensity = inTextureIntensities.NORMAL;

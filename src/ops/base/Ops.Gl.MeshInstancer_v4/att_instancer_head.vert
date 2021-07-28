@@ -1,4 +1,5 @@
 
+IN vec4 instColor;
 IN mat4 instMat;
 IN vec4 instTexCoords;
 OUT mat4 instModelMat;

@@ -33,7 +33,7 @@ OUT vec3 fragPos;
 
 OUT vec3 v_viewDirection;
 OUT mat3 normalMatrix;
-OUT mat4 mvMatrix;
+mat4 mvMatrix;
 
 #ifdef HAS_TEXTURES
     UNI vec4 inTextureRepeatOffset;

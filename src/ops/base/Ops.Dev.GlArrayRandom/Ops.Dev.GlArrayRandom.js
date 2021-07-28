@@ -2,6 +2,7 @@ const
     render = op.inTrigger("Render"),
     next = op.outTrigger("Next"),
     inNum = op.inInt("Length", 10000),
+    inLayout = op.inSwitch("Layout", ["Square", "Vertical", "Horizontal"], "Square"),
 
     inRMin = op.inFloat("X Min", 0),
     inRMax = op.inFloat("X Max", 1),
@@ -27,27 +28,47 @@ updateSize();
 shader.setSource(shader.getDefaultVertexShader(), attachments.randoms_frag);
 const
     textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
-
     uniformRMin = new CGL.Uniform(shader, "f", "rmin", inRMin),
     uniformRMax = new CGL.Uniform(shader, "f", "rmax", inRMax),
-
     uniformGMin = new CGL.Uniform(shader, "f", "gmin", inGMin),
     uniformGMax = new CGL.Uniform(shader, "f", "gmax", inGMax),
-
     uniformBMin = new CGL.Uniform(shader, "f", "bmin", inBMin),
     uniformBMax = new CGL.Uniform(shader, "f", "bmax", inBMax),
-
     uniformSeed = new CGL.Uniform(shader, "f", "seed", inSeed);
 
 updateDefines();
 
-inNum.onChange = updateSize;
+inLayout.onChange =
+    inNum.onChange = updateSize;
 
 function updateSize()
 {
-    const size = Math.ceil(Math.sqrt(inNum.get()));
+    let w = Math.ceil(Math.sqrt(inNum.get())); // square texture size
+    let h = w;
+    const max = op.patch.cgl.gl.getParameter(op.patch.cgl.gl.MAX_TEXTURE_SIZE);
 
-    texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "width": size, "height": size });
+    if (inLayout.get() === "Vertical" || inLayout.get() === "Horizontal")
+    {
+        if (inNum.get() < max)
+        {
+            w = 1;
+            h = inNum.get();
+        }
+        else
+        {
+            w = Math.ceil(inNum.get() / max);
+            h = max;
+        }
+    }
+
+    if (inLayout.get() === "Horizontal")
+    {
+        let x = w;
+        w = h;
+        h = x;
+    }
+
+    texMath = new CGL.ShaderTextureMath(cgl, op.objName, { "width": w, "height": h });
 }
 
 function updateDefines()

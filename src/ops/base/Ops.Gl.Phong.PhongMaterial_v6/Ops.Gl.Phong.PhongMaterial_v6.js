@@ -10,7 +10,7 @@ const snippets = {
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
-const createFragmentHead = n => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader()
@@ -189,8 +189,8 @@ inFalloffMode.onChange = () =>
 {
     const MODES = ["A", "B", "C", "D"];
     shader.define("FALLOFF_MODE_" + inFalloffMode.get());
-    MODES.filter(mode => mode !== inFalloffMode.get())
-        .forEach(mode => shader.removeDefine("FALLOFF_MODE_" + mode));
+    MODES.filter((mode) => mode !== inFalloffMode.get())
+        .forEach((mode) => shader.removeDefine("FALLOFF_MODE_" + mode));
 };
 
 const lightProps = [inEnergyConservation, inToggleDoubleSided, inFalloffMode];

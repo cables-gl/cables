@@ -91,6 +91,14 @@
             "message": "Ops.User.pandur.PointTexCurlNoise renamed to Ops.Dev.GlArrayCurlNoise",
             "author": "pandur",
             "date": 1626186945975
+        },
+        {
+            "message": " added core lib: cgl_texturemath",
+            "author": "pandur",
+            "date": 1627378262843
         }
+    ],
+    "coreLibs": [
+        "cgl_texturemath"
     ]
 }
