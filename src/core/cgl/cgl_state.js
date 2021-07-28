@@ -629,10 +629,11 @@ const Context = function (_patch)
             found = true;
 
             Log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
-            this.patch.printTriggerStack();
 
             if (!this._loggedGlError)
             {
+                this.patch.printTriggerStack();
+
                 console.log((new Error()).stack);
                 this._loggedGlError = true;
             }
