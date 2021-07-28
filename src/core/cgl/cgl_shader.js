@@ -1102,7 +1102,7 @@ Shader.prototype.dispose = function ()
 
 Shader.prototype.setDrawBuffers = function (arr)
 {
-    if (this._drawBuffers != arr || this._drawBuffers.length !== arr.length)
+    if (this._drawBuffers.length !== arr.length)
     {
         this._drawBuffers = arr;
         this._needsRecompile = true;
