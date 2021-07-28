@@ -936,20 +936,20 @@ Shader.prototype.define = function (name, value)
     }
 
 
-    this._needsRecompile = true;
-    this.setWhyCompile("define " + name + " " + value);
-
     for (let i = 0; i < this._defines.length; i++)
     {
         if (this._defines[i][0] == name && this._defines[i][1] == value) return;
         if (this._defines[i][0] == name)
         {
             this._defines[i][1] = value;
+            this.setWhyCompile("define " + name + " " + value);
+
             this._needsRecompile = true;
             return;
         }
     }
-
+    this.setWhyCompile("define " + name + " " + value);
+    this._needsRecompile = true;
     this._defines.push([name, value]);
 };
 
