@@ -236,6 +236,8 @@ function updateText()
 {
     if (!inShow.get()) return;
     let warn = "";
+
+
     if (op.patch.cgl.profileData.profileShaderCompiles > 0)warn += "Shader compile (" + op.patch.cgl.profileData.profileShaderCompileName + ") ";
     if (op.patch.cgl.profileData.profileShaderGetUniform > 0)warn += "Shader get uni loc! (" + op.patch.cgl.profileData.profileShaderGetUniformName + ")";
     if (op.patch.cgl.profileData.profileTextureResize > 0)warn += "Texture resize! ";

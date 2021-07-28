@@ -84,6 +84,7 @@ const Shader = function (_cgl, _name)
     this._drawBuffers = [true];
     this._defines = [];
     this._needsRecompile = true;
+    this._compileReason = "initial";
 
     this._projMatrixUniform = null;
     this._mvMatrixUniform = null;
@@ -173,9 +174,7 @@ Shader.prototype.hasTextureUniforms = function ()
 Shader.prototype.setWhyCompile = function (why)
 {
     this._compileReason = why;
-    // Log.log('recompile because '+why);
 };
-
 
 /**
  * copy all uniform values from another shader
@@ -436,7 +435,7 @@ Shader.prototype.compile = function ()
     this._cgl.printError("shader.compile");
 
     this._cgl.profileData.profileShaderCompiles++;
-    this._cgl.profileData.profileShaderCompileName = this._name;
+    this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
 
     let extensionString = "";
