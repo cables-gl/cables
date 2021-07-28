@@ -164,6 +164,10 @@ Texture.prototype.setSize = function (w, h)
     this.width = w;
     this.height = h;
 
+
+    this.shortInfoString = w + "x" + h + "";
+    if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
+
     // if (this._cgl.printError("cgltex before"))
     // {
     //     this.printInfo();
@@ -383,6 +387,7 @@ Texture.prototype.getInfoReadable = function ()
 
     return html;
 };
+
 
 Texture.prototype.getInfo = function ()
 {
