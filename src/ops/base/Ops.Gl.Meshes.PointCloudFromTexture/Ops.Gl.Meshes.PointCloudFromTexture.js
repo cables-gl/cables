@@ -34,23 +34,23 @@ inNorm.onChange =
     inTexPS.onChange =
     inAxis.onChange = updateDefines;
 
+let needsMeshSetup = true;
+
 inTex.onChange =
-inNum.onChange = setupMesh;
-setupMesh();
+inNum.onChange = () => { needsMeshSetup = true; };
 updateDefines();
 
 function updateDefines()
 {
     mod.toggleDefine("MOD_AXIS_XY", inAxis.get() == "XY");
     mod.toggleDefine("MOD_AXIS_XYZ", inAxis.get() == "XYZ");
-
     mod.toggleDefine("MOD_NORMALIZE", inNorm.get());
-
     mod.toggleDefine("MOD_HAS_PS_TEX", inTexPS.get());
 }
 
 function doRender()
 {
+    if (needsMeshSetup)setupMesh();
     mod.bind();
     if (!inTex.get() || !inTex.get().tex) return;
     if (inTex.get())mod.pushTexture("MOD_tex", inTex.get().tex);
@@ -86,4 +86,5 @@ function setupMesh()
 
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);
+    needsMeshSetup = false;
 }

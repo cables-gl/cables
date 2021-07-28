@@ -45,7 +45,6 @@ function initFb()
         return;
     }
 
-
     needInit = false;
     if (fb)fb.delete();
     fb = null;

@@ -53,7 +53,8 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_scale", inScale);
 
-inBlendMode.onChange = updateDefines;
+let needsUpdateDefines = true;
+inBlendMode.onChange = () => { needsUpdateDefines = true; };
 doLimit.onChange = updateLimit;
 exe.onTriggered = doRender;
 exe.onLinkChanged = function ()
@@ -77,14 +78,14 @@ inTexCoords.onChange = function ()
 {
     arrayChangedTexcoords = true;
     recalc = true;
-    updateDefines();
+    needsUpdateDefines = true;
 };
 
 inColor.onChange = function ()
 {
     arrayChangedColor = true;
     recalc = true;
-    updateDefines();
+    needsUpdateDefines = true;
 };
 
 function reset()
@@ -101,6 +102,7 @@ function updateDefines()
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
     mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
+    needsUpdateDefines = false;
 }
 
 geom.onChange = function ()
@@ -128,6 +130,8 @@ function setupArray()
     if (!transforms) transforms = [0, 0, 0];
 
     num = Math.floor(transforms.length / 3);
+
+    if (needsUpdateDefines)updateDefines();
 
     const colArr = inColor.get();
     const tcArr = inTexCoords.get();
