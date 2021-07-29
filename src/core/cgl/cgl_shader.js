@@ -84,6 +84,7 @@ const Shader = function (_cgl, _name)
     this._drawBuffers = [true];
     this._defines = [];
     this._needsRecompile = true;
+    this._compileReason = "initial";
 
     this._projMatrixUniform = null;
     this._mvMatrixUniform = null;
@@ -172,9 +173,8 @@ Shader.prototype.hasTextureUniforms = function ()
 
 Shader.prototype.setWhyCompile = function (why)
 {
-    // Log.log('recompile because '+why);
+    this._compileReason = why;
 };
-
 
 /**
  * copy all uniform values from another shader
@@ -238,6 +238,7 @@ Shader.prototype.copy = function ()
         u.resetLoc();
     }
 
+    this.setWhyCompile("copy");
     shader._needsRecompile = true;
     return shader;
 };
@@ -434,7 +435,7 @@ Shader.prototype.compile = function ()
     this._cgl.printError("shader.compile");
 
     this._cgl.profileData.profileShaderCompiles++;
-    this._cgl.profileData.profileShaderCompileName = this._name;
+    this._cgl.profileData.profileShaderCompileName = this._name + " [" + this._compileReason + "]";
 
 
     let extensionString = "";
@@ -450,7 +451,8 @@ Shader.prototype.compile = function ()
     const structStrings = this.createStructUniforms();
     this._cgl.printError("createStructUniforms");
 
-    this._cgl.profileData.addHeavyEvent("shader compile", this._name);
+    this._cgl.profileData.addHeavyEvent("shader compile", this._name + " [" + this._compileReason + "]");
+    this._compileReason = "";
 
     if (this._uniforms)
     {
@@ -940,14 +942,15 @@ Shader.prototype.define = function (name, value)
         if (this._defines[i][0] == name)
         {
             this._defines[i][1] = value;
+            this.setWhyCompile("define " + name + " " + value);
+
             this._needsRecompile = true;
             return;
         }
     }
-
-    this._defines.push([name, value]);
-    this._needsRecompile = true;
     this.setWhyCompile("define " + name + " " + value);
+    this._needsRecompile = true;
+    this._defines.push([name, value]);
 };
 
 Shader.prototype.getDefines = function ()
@@ -991,6 +994,9 @@ Shader.prototype.removeDefine = function (name)
         {
             this._defines.splice(i, 1);
             this._needsRecompile = true;
+
+            this.setWhyCompile("define removed:" + name);
+
             return;
         }
     }
@@ -1096,10 +1102,11 @@ Shader.prototype.dispose = function ()
 
 Shader.prototype.setDrawBuffers = function (arr)
 {
-    if (this._drawBuffers != arr || this._drawBuffers.length !== arr.length)
+    if (this._drawBuffers.length !== arr.length)
     {
         this._drawBuffers = arr;
         this._needsRecompile = true;
+        this.setWhyCompile("setDrawBuffers");
         return;
     }
     for (let i = 0; i < arr; i++)
@@ -1108,6 +1115,7 @@ Shader.prototype.setDrawBuffers = function (arr)
         {
             this._drawBuffers = arr;
             this._needsRecompile = true;
+            this.setWhyCompile("setDrawBuffers");
             return;
         }
     }
@@ -1408,6 +1416,7 @@ Shader.prototype.getProgram = function ()
 
 Shader.prototype.setFeedbackNames = function (names)
 {
+    this.setWhyCompile("setFeedbackNames");
     this._needsRecompile = true;
     this._feedBackNames = names;
 };
@@ -1478,6 +1487,7 @@ Shader.prototype.addAttribute = function (attr)
     }
     this._attributes.push(attr);
     this._needsRecompile = true;
+    this.setWhyCompile("addAttribute");
 };
 
 Shader.prototype.bindTextures =

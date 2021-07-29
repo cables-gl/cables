@@ -77,7 +77,7 @@ class ProfileData
 
     addHeavyEvent(event, name, info)
     {
-        const e = { "event": event, "name": name, "info": info };
+        const e = { "event": event, "name": name, "info": info, "date": performance.now() };
         this.heavyEvents.push(e);
         this._cgl.emitEvent("heavyEvent", e);
     }

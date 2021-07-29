@@ -80,6 +80,11 @@ pUpdate.onTriggered = function ()
         pixelData
     );
 
+    // if (!convertedPixelData || convertedPixelData.length != pixelData.length) convertedPixelData = new Float32Array(pixelData.length);
+    // for (let i = 0; i < pixelData.length; i++)
+    // {
+    //     convertedPixelData[i] = pixelData[i];
+    // }
     if (inNormalize.get() == "0-1")
     {
         if (!convertedPixelData || convertedPixelData.length != pixelData.length) convertedPixelData = new Float32Array(pixelData.length);
