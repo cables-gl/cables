@@ -1,34 +1,35 @@
 {
     "summary": "the size of the canvas in pixels, aspect ratio and pixel density",
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "height",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pixel Ratio",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Aspect Ratio",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Landscape",
                 "subType": "boolean"
             }
         ],
-        "name": "Ops.Gl.CanvasSize"
+        "name": "Ops.Gl.CanvasInfo"
     },
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
