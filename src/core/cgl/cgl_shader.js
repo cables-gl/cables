@@ -1100,6 +1100,11 @@ Shader.prototype.dispose = function ()
     this._cgl.gl.deleteProgram(this._program);
 };
 
+Shader.prototype.needsRecompile = function ()
+{
+    return this._needsRecompile;
+};
+
 Shader.prototype.setDrawBuffers = function (arr)
 {
     if (this._drawBuffers.length !== arr.length)
