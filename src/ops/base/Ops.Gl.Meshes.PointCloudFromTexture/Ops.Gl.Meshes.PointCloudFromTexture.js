@@ -15,7 +15,7 @@ let numVerts = 0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    "priority": 2,
+    "priority": 0,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": "",
