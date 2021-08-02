@@ -60,13 +60,12 @@ render.onLinkChanged =
 inTexture.onLinkChanged =
 inTexture.onChange = () =>
 {
-    if (!inTexture.get()) texOut.set(CGL.Texture.getEmptyTexture(cgl));
+    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) texOut.set(CGL.Texture.getEmptyTexture(cgl));
     updateSoon();
 };
 
 render.onTriggered = doRender;
-
-// updateSizePorts();
+updateSizePorts();
 // updateParams();
 
 function initEffect()
@@ -129,8 +128,8 @@ function updateSoon()
 
 function updateResolution()
 {
+    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl)) return;
     if (!effect)initEffect();
-    if (!inTexture.get()) return;
 
     if (useVPSize.get())
     {
@@ -145,6 +144,7 @@ function updateResolution()
 
     if ((w != tex.width || h != tex.height) && (w !== 0 && h !== 0))
     {
+        // console.log("res changed!");
         height.set(h);
         width.set(w);
         tex.filter = selectedFilter;
@@ -194,12 +194,14 @@ useVPSize.onChange = function ()
 function doRender()
 {
     // op.patch.removeOnAnimCallback(doRender);
-    if (!inTexture.get())
+    // if (!inTexture.get())
+    if (!inTexture.get() || inTexture.get() == CGL.Texture.getEmptyTexture(cgl))
     {
         lastTex = null;// CGL.Texture.getEmptyTexture(cgl);
+        trigger.trigger();
         return;
     }
-
+    else
     if (!effect || reInitEffect || lastTex != inTexture.get())
     {
         initEffect();
@@ -247,8 +249,6 @@ function doRender()
 
 function updateParams()
 {
-    reInitEffect = true;
-
     bgShader.toggleDefine("TEX_MASK", inTextureMask.get());
 
     bgShader.toggleDefine("GREY_R", greyscale.get() === "R");
@@ -272,4 +272,18 @@ function updateParams()
     if (tfilter.get() == "nearest") selectedFilter = CGL.Texture.FILTER_NEAREST;
     else if (tfilter.get() == "linear") selectedFilter = CGL.Texture.FILTER_LINEAR;
     else if (tfilter.get() == "mipmap") selectedFilter = CGL.Texture.FILTER_MIPMAP;
+
+    if (bgShader.needsRecompile())
+    {
+        reInitEffect = true;
+    }
+    if (tex && (
+        tex.width != Math.floor(width.get()) ||
+        tex.height != Math.floor(height.get()) ||
+        tex.wrap != selectedWrap ||
+        tex.isFloatingPoint() != fpTexture.get()
+    ))
+    {
+        reInitEffect = true;
+    }
 }

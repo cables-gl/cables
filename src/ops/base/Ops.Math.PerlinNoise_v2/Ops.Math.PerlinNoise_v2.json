@@ -50,5 +50,34 @@
             }
         ],
         "name": "Ops.Math.PerlinNoise_v2"
+    },
+    "summary": "outputs a perlin noise value like random ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "X",
+                "text": "Scroll noise values in the X dimension."
+            },
+            {
+                "name": "Y",
+                "text": "Scroll noise values in the Y dimension."
+            },
+            {
+                "name": "Z",
+                "text": "Scroll noise values in the Z dimension."
+            },
+            {
+                "name": "Scale",
+                "text": "Noise Scale - affects rate of change in values. The smaller the Scale number, the smoother the changes of the output."
+            },
+            {
+                "name": "Seed",
+                "text": "Noise Seed"
+            }
+        ]
     }
 }
