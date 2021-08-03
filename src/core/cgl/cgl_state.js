@@ -455,11 +455,11 @@ const Context = function (_patch)
         this.pushCullFaceFacing(cgl.gl.BACK);
         this.pushCullFace(false);
 
-        if (this.clearCanvasTransparent)
-        {
-            cgl.gl.clearColor(0, 0, 0, 0);
-            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
-        }
+        // if (this.clearCanvasTransparent)
+        // {
+        //     cgl.gl.clearColor(0, 0, 0, 0);
+        //     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT);
+        // }
         if (this.clearCanvasDepth) cgl.gl.clear(cgl.gl.DEPTH_BUFFER_BIT);
 
         cgl.setViewPort(0, 0, cgl.canvasWidth, cgl.canvasHeight);
