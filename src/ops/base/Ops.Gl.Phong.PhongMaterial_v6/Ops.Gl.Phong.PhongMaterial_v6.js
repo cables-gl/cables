@@ -500,49 +500,38 @@ function updateEmissiveMaskTexture()
     }
 }
 
+let updateEnvTextureLater = false;
 function updateEnvTexture()
 {
+    shader.toggleDefine("HAS_TEXTURE_ENV", inEnvTexture.get());
+
+    inEnvMapIntensity.setUiAttribs({ "greyout": !inEnvTexture.get() });
+
     if (inEnvTexture.get())
     {
-        inEnvMapIntensity.setUiAttribs({ "greyout": false });
-        if (!shader.hasDefine("HAS_TEXTURE_ENV"))
-        {
-            shader.define("HAS_TEXTURE_ENV");
-            if (!envTextureUniform)
-            {
-                envTextureUniform = new CGL.Uniform(shader, "t", "texEnv", 0);
-            }
-        }
+        if (!envTextureUniform) envTextureUniform = new CGL.Uniform(shader, "t", "texEnv", 0);
+
+        shader.toggleDefine("TEX_FORMAT_CUBEMAP", inEnvTexture.get().cubemap);
 
         if (inEnvTexture.get().cubemap)
         {
-            shader.define("TEX_FORMAT_CUBEMAP");
             shader.removeDefine("TEX_FORMAT_EQUIRECT");
             shader.removeDefine("ENVMAP_MATCAP");
-            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
-            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
+            if (!inEnvMapIntensityUni)inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            if (!inEnvMapWidthUni)inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().cubemap.width);
         }
         else
         {
-            shader.removeDefine("TEX_FORMAT_CUBEMAP");
-            if (inEnvTexture.get().width === inEnvTexture.get().height)
-            {
-                shader.define("ENVMAP_MATCAP");
-                shader.removeDefine("TEX_FORMAT_EQUIRECT");
-            }
-            else
-            {
-                shader.removeDefine("ENVMAP_MATCAP");
-                shader.define("TEX_FORMAT_EQUIRECT");
-            }
+            const isSquare = inEnvTexture.get().width === inEnvTexture.get().height;
+            shader.toggleDefine("TEX_FORMAT_EQUIRECT", !isSquare);
+            shader.toggleDefine("ENVMAP_MATCAP", isSquare);
 
-            inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
-            inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
+            if (!inEnvMapIntensityUni)inEnvMapIntensityUni = new CGL.Uniform(shader, "f", "inEnvMapIntensity", inEnvMapIntensity);
+            if (!inEnvMapWidthUni) inEnvMapWidthUni = new CGL.Uniform(shader, "f", "inEnvMapWidth", inEnvTexture.get().width);
         }
     }
     else
     {
-        inEnvMapIntensity.setUiAttribs({ "greyout": true });
         shader.removeUniform("inEnvMapIntensity");
         shader.removeUniform("inEnvMapWidth");
         shader.removeUniform("texEnv");
@@ -551,6 +540,7 @@ function updateEnvTexture()
         envTextureUniform = null;
         inEnvMapIntensityUni = null;
     }
+    updateEnvTextureLater = false;
 }
 
 function updateLuminanceMaskTexture()
@@ -634,7 +624,7 @@ inAoTexture.onChange = updateAoTexture;
 inEmissiveTexture.onChange = updateEmissiveTexture;
 inEmissiveMaskTexture.onChange = updateEmissiveMaskTexture;
 inAlphaTexture.onChange = updateAlphaTexture;
-inEnvTexture.onChange = updateEnvTexture;
+inEnvTexture.onChange = () => { updateEnvTextureLater = true; };
 inLuminanceMaskTexture.onChange = updateLuminanceMaskTexture;
 
 const MAX_UNIFORM_FRAGMENTS = cgl.maxUniformsFrag;
@@ -901,6 +891,8 @@ inTrigger.onTriggered = function ()
         op.log("phong has no shader...");
         return;
     }
+
+    if (updateEnvTextureLater)updateEnvTexture();
 
     cgl.setShader(shader);
 

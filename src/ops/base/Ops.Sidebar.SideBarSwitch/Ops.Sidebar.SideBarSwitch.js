@@ -3,6 +3,8 @@ const parentPort = op.inObject("link"),
     inStyle = op.inSwitch("Style", ["Tabs", "Switch"], "Switch"),
     labelPort = op.inString("Text", "Switch"),
 
+    inInput = op.inInt("Input", 0),
+
     setDefaultValueButtonPort = op.inTriggerButton("Set Default"),
     inGreyOut = op.inBool("Grey Out", false),
 
@@ -115,6 +117,13 @@ function addTab(title)
 
     return tabEle;
 }
+
+inInput.onChange = () =>
+{
+    if (tabEles.length > inInput.get())
+        tabClicked({ "target": tabEles[inInput.get()] });
+    // setActiveTab(tabEles[inInput.get()]);
+};
 
 function setActiveTab(el)
 {

@@ -6,34 +6,33 @@ const
     outNext = op.outTrigger("Next"),
     outArray = op.outArray("Result");
 
-const newArr = [];
-let hasChanged = false;
-inArray.onChange = () => { hasChanged = true; };
+let arr = [];
+inArray.onChange = () =>
+{
+    arr = inArray.get();
+};
 
-inTrigger.onTriggered =
-    () =>
+inTrigger.onTriggered = () =>
+{
+    if (!arr)
     {
-        const arr = inArray.get();
-
-        if (!arr)
-        {
-            outArray.set(null);
-            return;
-        }
-
-        if (newArr.length != arr.length) newArr.length = arr.length;
-        for (let i = 0; i < arr.length; i++) newArr[i] = arr[i];
-        hasChanged = false;
-
-        const idx = Math.floor(inIndex.get());
-
-        if (idx >= 0)
-        {
-            newArr[idx] = inValue.get();
-        }
-
-        inArray.onChange = null;
         outArray.set(null);
-        outArray.set(newArr);
-        outNext.trigger();
-    };
+        return;
+    }
+
+    const newArr = [];
+    // if (newArr.length != arr.length) newArr.length = arr.length;
+    for (let i = 0; i < arr.length; i++) newArr[i] = arr[i];
+    const idx = Math.floor(inIndex.get());
+
+    if (idx >= 0)
+    // if (idx >= 0 && idx < arr.length)
+    {
+        newArr[idx] = inValue.get();
+    }
+
+    arr = newArr;
+    outArray.set(null);
+    outArray.set(newArr);
+    outNext.trigger();
+};
