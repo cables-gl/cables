@@ -51,6 +51,7 @@ function init()
     for (let i = 0; i < inNum.get(); i++)
     {
         textures[i] = inTexture.get().clone();
+        // textures[i].updateMipMap();
     }
 
     // cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
@@ -64,6 +65,8 @@ function init()
     // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, null);
     // cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, null);
     cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, null);
+
+    // textures[0].updateMipMap();
 
     inited = true;
 }
@@ -172,6 +175,11 @@ function render()
 
     cgl.popPMatrix();
     cgl.resetViewPort();
+
+    op.patch.cgl.gl.bindTexture(op.patch.cgl.gl.TEXTURE_2D, textures[index].tex);
+    // this._colorTextures[i].updateMipMap();
+    textures[index].updateMipMap();
+    op.patch.cgl.gl.bindTexture(op.patch.cgl.gl.TEXTURE_2D, null);
 
     if (inSort.get())
     {
