@@ -26,8 +26,7 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "ECharts instance",
-                "objType": "echartsInstance"
+                "name": "ECharts instance"
             },
             {
                 "type": 5,
@@ -49,8 +48,7 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Out Chart",
-                "objType": "echartsInstance"
+                "name": "Out Chart"
             },
             {
                 "type": 1,

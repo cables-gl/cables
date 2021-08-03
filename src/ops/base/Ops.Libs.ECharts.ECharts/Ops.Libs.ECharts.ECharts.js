@@ -1,27 +1,34 @@
 // I/O
+
+const createChartTrig = op.inTriggerButton("Create");
 const inParent = op.inObject("Parent DOM element");
 const inId = op.inString("Id");
 const inWidth = op.inInt("Width", 640);
 const inHeight = op.inInt("Height", 480);
-const chartOpts = op.inObject("Chart Options");
-
+const chartOpts = op.inObject("Chart Object");
+const mergeOpts = op.inObject("Merge options");
+const rendererSel = op.inSwitch("Renderer", ["canvas", "svg"], "canvas");
 const themeSelect = op.inSwitch("Theme", ["default", "light", "dark"], "dark");
 const customTheme = op.inObject("Custom theme obj");
-const extraOpts = op.inObject("Extra Options");
+const inInitExtraOpts = op.inObject("Init extra Options");
 const inStyle = op.inValueEditor("Style", "position:absolute;z-index:100;background:white;", "css");
 const inVisible = op.inValueBool("Visible", true);
 
 const outElement = op.outObject("DOM Element");
-const outChart = op.outObject("ECharts instance", null, "echartsInstance");
+const outChart = op.outObject("ECharts instance");
+const outChartUpdated = op.outTrigger("Chart updated");
 const outThemeTrig = op.outTrigger("Theme changed");
 
 const DEFAULT_THEME = 0;
 const DARK_THEME = 1;
 const CUSTOM_THEME = 2;
 
+let loaded = false;
+
 // Core variables
 const div = document.createElement("div");
 div.dataset.op = op.id;
+
 const canvas = op.patch.cgl.canvas.parentElement;
 let chart = null;
 let prevDisplay = "block";
@@ -35,24 +42,39 @@ inVisible.onChange = updateVisibility;
 inId.onChange = updateId;
 inWidth.onChange = resize;
 inHeight.onChange = resize;
-chartOpts.onChange = setChartOptions;
+chartOpts.onChange = updateChart;
+mergeOpts.onChange = updateChart;
 themeSelect.onChange = changeTheme;
 customTheme.onChange = changeTheme;
+rendererSel.onChange = changeRenderer;
 
 // // Functions implementation
+
+function isValidObj(obj)
+{
+    if (obj && typeof obj === "object" && obj !== 0 && obj !== null)
+        return true;
+    return false;
+}
+
 function main()
 {
     appendChartDiv();
     updateStyle();
+
+    loaded = true;
     initChart();
     resize();
 
     outChart.set(chart);
     outThemeTrig.trigger();
+    outChartUpdated.trigger();
 }
 
 function initChart()
 {
+    if (!loaded) return;
+
     if (chart)
     {
         chart.dispose();
@@ -65,16 +87,32 @@ function initChart()
         theme = themeSelect.get();
     }
 
-    chart = echarts.init(div, theme, extraOpts.get());
+    let extra = inInitExtraOpts.get();
+    if (!isValidObj(extra))
+    {
+        const rend = rendererSel.get();
+        extra = {
+            "renderer": rend
+        };
+    }
+
+    chart = echarts.init(div, theme, extra);
     setChartOptions();
+}
+
+function changeRenderer()
+{
+    initChart();
+    outChart.set(chart);
+    outChartUpdated.trigger();
 }
 
 function changeTheme()
 {
     initChart();
     outChart.set(chart);
-
     outThemeTrig.trigger();
+    outChartUpdated.trigger();
 }
 
 function appendChartDiv()
@@ -92,11 +130,29 @@ function appendChartDiv()
 
 function setChartOptions()
 {
+    // https://echarts.apache.org/en/api.html#echartsInstance.setOption
     const opts = chartOpts.get();
-    if (chart && typeof opts === "object" && opts !== 0 && opts !== null)
+    const merge = mergeOpts.get();
+
+    if (!chart) return;
+
+    if (isValidObj(opts))
     {
-        chart.setOption(opts);
+        if (isValidObj(merge))
+        {
+            chart.setOption(opts, merge);
+        }
+        else
+        {
+            chart.setOption(opts, false, true);
+        }
     }
+}
+
+function updateChart()
+{
+    setChartOptions();
+    outChartUpdated.trigger();
 }
 
 function resize()
@@ -105,7 +161,9 @@ function resize()
     const h = Math.max(0, inHeight.get());
 
     updateStyle();
-    chart.resize(w, h);
+
+    if (chart)
+        chart.resize(w, h);
 }
 
 function setCSSVisible(visible)
@@ -170,4 +228,4 @@ function removeElement()
     if (div) div.remove();
 }
 
-main();
+createChartTrig.onTriggered = main;
