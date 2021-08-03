@@ -62,16 +62,9 @@ function warning()
 
 function updateUI()
 {
-    if (inVPSize.get() === true)
-    {
-        inWidth.setUiAttribs({ "greyout": true });
-        inHeight.setUiAttribs({ "greyout": true });
-    }
-    else if (inVPSize.get() === false)
-    {
-        inWidth.setUiAttribs({ "greyout": false });
-        inHeight.setUiAttribs({ "greyout": false });
-    }
+    inWidth.setUiAttribs({ "greyout": inVPSize.get() });
+    inHeight.setUiAttribs({ "greyout": inVPSize.get() });
+
     inWidth.set(cgl.getViewPort()[2]);
     inHeight.set(cgl.getViewPort()[3]);
 }
