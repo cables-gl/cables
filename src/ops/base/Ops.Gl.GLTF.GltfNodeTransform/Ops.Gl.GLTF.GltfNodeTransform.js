@@ -56,7 +56,6 @@ inExec.onTriggered = function ()
     if (node)
     {
         mat4.copy(m, node.modelMatAbs());
-        // console.log(node.modelMatAbs())
 
         // mat4.getTranslation(translate, m);
         // outPosX.set(translate[0]);

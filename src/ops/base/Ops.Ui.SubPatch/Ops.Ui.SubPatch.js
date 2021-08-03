@@ -305,7 +305,7 @@ op.addSubLink = function (p, p2)
     }
 
     const bounds = gui.patchView.getSubPatchBounds(op.patchId.get());
-    console.log("subpatchbounds", bounds);
+    op.log("subpatchbounds", bounds);
     getSubPatchInputOp().uiAttr(
         {
             "translate":

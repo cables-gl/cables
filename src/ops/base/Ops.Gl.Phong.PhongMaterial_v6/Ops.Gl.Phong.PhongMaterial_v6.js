@@ -10,7 +10,7 @@ const snippets = {
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
-const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createFragmentHead = n => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader()
@@ -189,8 +189,8 @@ inFalloffMode.onChange = () =>
 {
     const MODES = ["A", "B", "C", "D"];
     shader.define("FALLOFF_MODE_" + inFalloffMode.get());
-    MODES.filter((mode) => mode !== inFalloffMode.get())
-        .forEach((mode) => shader.removeDefine("FALLOFF_MODE_" + mode));
+    MODES.filter(mode => mode !== inFalloffMode.get())
+        .forEach(mode => shader.removeDefine("FALLOFF_MODE_" + mode));
 };
 
 const lightProps = [inEnergyConservation, inToggleDoubleSided, inFalloffMode];
@@ -249,16 +249,16 @@ if (cgl.glVersion < 2)
     shader.enableExtension("GL_OES_standard_derivatives");
 
     if (cgl.gl.getExtension("OES_texture_float")) shader.enableExtension("GL_OES_texture_float");
-    else console.log("error loading extension OES_texture_float");
+    else op.log("error loading extension OES_texture_float");
 
     if (cgl.gl.getExtension("OES_texture_float_linear")) shader.enableExtension("GL_OES_texture_float_linear");
-    else console.log("error loading extention OES_texture_float_linear");
+    else op.log("error loading extention OES_texture_float_linear");
 
     if (cgl.gl.getExtension("GL_OES_texture_half_float")) shader.enableExtension("GL_OES_texture_half_float");
-    else console.log("error loading extention GL_OES_texture_half_float");
+    else op.log("error loading extention GL_OES_texture_half_float");
 
     if (cgl.gl.getExtension("GL_OES_texture_half_float_linear")) shader.enableExtension("GL_OES_texture_half_float_linear");
-    else console.log("error loading extention GL_OES_texture_half_float_linear");
+    else op.log("error loading extention GL_OES_texture_half_float_linear");
 }
 
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");

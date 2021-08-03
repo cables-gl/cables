@@ -197,7 +197,6 @@ function refresh()
     cgl.checkFrameStarted("texttrexture refresh");
 
     // const num=String(parseInt(letterSpacing.get()));
-    // console.log("num",num);
     //     fontImage.style["letter-spacing"] = num+"px";
     // fontImage.style["font-kerning"]="normal";
 
