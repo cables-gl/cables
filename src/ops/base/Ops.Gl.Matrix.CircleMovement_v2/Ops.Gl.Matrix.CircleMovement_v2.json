@@ -76,5 +76,50 @@
             }
         ],
         "name": "Ops.Gl.Matrix.CircleMovement_v2"
+    },
+    "summary": "Transform objects along a circular path",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Duration ",
+                "text": "Defines how the Time value offsets position - like a multiplier."
+            },
+            {
+                "name": "offset",
+                "text": "Offset of the location on the defied circular path"
+            },
+            {
+                "name": "Time",
+                "text": "Time based offset that depends on the Duration value"
+            },
+            {
+                "name": "segments",
+                "text": "number of segments in the circular path"
+            },
+            {
+                "name": "radius",
+                "text": "Radius of the circular path"
+            },
+            {
+                "name": "mulX",
+                "text": "applies a multiplier to the generated X transform"
+            },
+            {
+                "name": "mulY",
+                "text": "applies a multiplier to the generated Y transform"
+            },
+            {
+                "name": "X",
+                "text": "X position output"
+            },
+            {
+                "name": "Y",
+                "text": "Y position output"
+            }
+        ]
     }
 }

@@ -60,7 +60,7 @@ inArray.onChange = function ()
 
     for (let i = 0; i < arr.length; i++)
     {
-        goal[i] = arr[i];
+        goal[i] = arr[i] || 0;
     }
 };
 
