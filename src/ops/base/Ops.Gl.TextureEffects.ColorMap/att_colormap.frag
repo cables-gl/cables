@@ -2,6 +2,12 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI sampler2D gradient;
 UNI float pos;
+UNI float amount;
+UNI float vmin;
+UNI float vmax;
+
+{{CGL.BLENDMODES}}
+
 
 float lumi(vec3 color)
 {
@@ -10,7 +16,9 @@ float lumi(vec3 color)
 
 void main()
 {
-   vec4 base=texture(tex,texCoord);
+    vec4 base=texture(tex,texCoord);
+
+   base=clamp(base,vmin,vmax);
 
     #ifdef METH_LUMI
         vec4 color=texture(gradient,vec2(lumi(base.rgb),pos));
@@ -23,5 +31,7 @@ void main()
         color.b=texture(gradient,vec2(base.b,pos)).b;
     #endif
 
-   outColor= vec4(color);
+//   outColor= vec4(color);
+   outColor=cgl_blend(base,color,amount);
+
 }

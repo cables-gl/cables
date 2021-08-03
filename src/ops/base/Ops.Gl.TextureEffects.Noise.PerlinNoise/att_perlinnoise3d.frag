@@ -157,9 +157,16 @@ void main()
 
     float aa=texture(tex,texCoord).r;
     float v=Perlin3D(vec3(p.x,p.y,z))*0.5+0.5;
+    float v2=v;
+    float v3=v;
 
+    #ifdef RGB
+        v2=Perlin3D(vec3(p.x*2.0,p.y*2.0,z))*0.5+0.5;
+        v3=Perlin3D(vec3(p.x*3.0,p.y*3.0,z))*0.5+0.5;
+    #endif
 
-    vec4 col=vec4(v,v,v,1.0);
+    vec4 col=vec4(v,v2,v3,1.0);
+
 
     outColor=cgl_blend(base,col,amount);
 }

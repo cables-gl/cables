@@ -11,6 +11,23 @@
                 "name": "render"
             },
             {
+                "type": 0,
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Blend Mode",
+                "group": "Blending",
+                "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "Gradient",
                 "objType": "texture"
@@ -23,6 +40,16 @@
             {
                 "type": 5,
                 "name": "Method"
+            },
+            {
+                "type": 0,
+                "name": "Min",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Max",
+                "subType": "number"
             },
             {
                 "type": 0,
