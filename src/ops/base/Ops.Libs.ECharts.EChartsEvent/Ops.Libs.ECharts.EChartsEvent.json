@@ -65,5 +65,54 @@
             }
         ],
         "name": "Ops.Libs.ECharts.EChartsEvent"
+    },
+    "summary": "capture echart-library-events",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Libs.ECharts.ECharts"
+    ],
+    "youtubeids": [
+        "moeK10BhmAw"
+    ],
+    "docs": {
+        "ports": [
+            {
+                "name": "ECharts instance",
+                "text": "The ECharts instance"
+            },
+            {
+                "name": "Event name",
+                "text": "Name of the event e.g \"click\""
+            },
+            {
+                "name": "Query string",
+                "text": "Ëlement selector e.g \"series.bar\""
+            },
+            {
+                "name": "Query object",
+                "text": "Optional: More complex selection of elements to bind the event"
+            },
+            {
+                "name": "Refresh event binding",
+                "text": "Trigger if the reference to the chart changed or if you add/delete event dynamically"
+            },
+            {
+                "name": "Out Chart",
+                "text": "ECharts instance"
+            },
+            {
+                "name": "Trigger",
+                "text": "Event was triggered"
+            },
+            {
+                "name": "Event params",
+                "text": "Event parameters"
+            },
+            {
+                "name": "Dirty (needs rebind)",
+                "text": "Check whether the event needs to be rebounded to the ECharts instance object"
+            }
+        ]
     }
 }
