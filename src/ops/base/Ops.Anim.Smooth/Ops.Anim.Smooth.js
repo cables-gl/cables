@@ -35,8 +35,8 @@ update();
 function onFilterChange()
 {
     const selectedMode = inMode.get();
-    if (selectedMode === false) selectIndex = MODE_SINGLE;
-    else if (selectedMode === true) selectIndex = MODE_UP_DOWN;
+    if (!selectedMode) selectIndex = MODE_SINGLE;
+    else selectIndex = MODE_UP_DOWN;
 
     if (selectIndex == MODE_SINGLE)
     {

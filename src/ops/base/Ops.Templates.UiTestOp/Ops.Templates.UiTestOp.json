@@ -39,12 +39,6 @@
     ],
     "authorName": "pandur",
     "created": 1596026347078,
-    "coreLibs": [
-        "cgl_cubemapframebuffer"
-    ],
-    "libs": [
-        "cannon.js"
-    ],
     "layout": {
         "portsIn": [
             {
