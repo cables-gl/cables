@@ -1,10 +1,10 @@
-const inChart = op.inObject("ECharts instance", null, "echartsInstance");
+const inChart = op.inObject("ECharts instance");
 const evtName = op.inString("Event name");
 const queryStr = op.inString("Query string");
 const queryObj = op.inObject("Query object");
 const inExecute = op.inTriggerButton("Refresh event binding");
 
-const outChart = op.outObject("Out Chart", null, "echartsInstance");
+const outChart = op.outObject("Out Chart");
 const outTrigger = op.outTrigger("Trigger");
 const outEvent = op.outObject("Event params");
 const outDirty = op.outBool("Dirty (needs rebind)");
@@ -54,14 +54,14 @@ function addEvent()
     if (!newChart)
     {
         removeEvent();
-        op.setUiError("error", "Null ECharts instance");
         setDirty(true);
         outChart.set(null);
         return;
     }
 
     if (newChart == chart)
-    { // same reference
+    {
+        // same reference
         // do nothing, event is already bound
         return;
     }
@@ -73,7 +73,8 @@ function addEvent()
         eventName = evtName.get();
         let q = queryObj.get();
         if (!q)
-        { // if we don't use the query obj
+        {
+            // if we don't use the query obj
             q = queryStr.get();
         }
 
