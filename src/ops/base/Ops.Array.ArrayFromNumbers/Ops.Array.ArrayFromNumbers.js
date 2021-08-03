@@ -18,7 +18,7 @@ inUpdate.onTriggered = update;
 
 function update()
 {
-    const l = Math.max(0, Math.min(inLimit.get(), inPorts.length));
+    const l = Math.max(0, Math.ceil(Math.min(inLimit.get(), inPorts.length)));
     arr.length = l;
     for (let i = 0; i < l; i++)
     {

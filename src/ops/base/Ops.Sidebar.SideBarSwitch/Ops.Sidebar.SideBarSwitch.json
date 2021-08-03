@@ -38,6 +38,11 @@
                 "name": "Text"
             },
             {
+                "type": 0,
+                "name": "Input",
+                "subType": "integer"
+            },
+            {
                 "type": 1,
                 "name": "Set Default",
                 "group": "Default Item"

@@ -58,8 +58,8 @@ function updateSelect()
             const other = presetPorts[i].links[0].getOtherPort(presetPorts[i]);
 
             // other.parent.removeListener("onTitleChange",updateSelect);
-            if (!other.parent.hasEventListener("onTitleChange", updateSelect))
-                other.parent.addEventListener("onTitleChange", updateSelect);
+            if (!other.parent.hasEventListener(other.parent.onTitlechangeevent))
+                other.parent.onTitlechangeevent = other.parent.addEventListener("onTitleChange", updateSelect);
 
             option.text = "" + other.parent.name;
             selectList.appendChild(option);
@@ -200,7 +200,7 @@ function addPreset()
 
     const r = serializeSidebar();
 
-    const newOp = op.patch.addOp("Ops.Json.ParseObject");
+    const newOp = op.patch.addOp("Ops.Json.ParseObject_v2");
 
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
     if (CABLES.UI)gui.patch().focusOp(newOp);
