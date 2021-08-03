@@ -65,7 +65,6 @@ function updateData()
 
     anim.addEventListener("enterFrame", (e) =>
     {
-        // console.log("frame", e);
         outProgress.set(e.currentTime / (e.totalTime - 1));
     });
 

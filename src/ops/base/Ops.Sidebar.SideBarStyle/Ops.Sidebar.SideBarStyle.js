@@ -20,7 +20,6 @@ function setStyle()
 {
     if (!sideBarEle) return;
 
-    // console.log(sideBarEle);
     sideBarEle.style.setProperty("--sidebar-width", inWidth.get() + "px");
 
     sideBarEle.style.setProperty("--sidebar-color", inColorSpecial.get());
