@@ -3,6 +3,11 @@ const varname = op.inString("Named Trigger", "");
 
 trigger.onTriggered = doTrigger;
 
+varname.onChange = () =>
+{
+    op.setUiAttrib({ "extendTitle": varname.get() });
+};
+
 function doTrigger()
 {
     const arr = op.patch.namedTriggers[varname.get()];
@@ -15,10 +20,8 @@ function doTrigger()
         return;
     }
 
-
     for (let i = 0; i < arr.length; i++)
     {
         arr[i]();
     }
-
 }
