@@ -284,7 +284,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         // op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find(subOp =>
+            const parentSubPatch = op.patch.ops.find(subOp =>
                 subOp.storage &&
                 subOp.storage.blueprint &&
                 subOp.storage.blueprint.isParentSubPatch &&
