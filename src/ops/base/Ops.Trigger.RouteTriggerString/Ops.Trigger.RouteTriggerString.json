@@ -226,13 +226,9 @@
             {
                 "type": 1,
                 "name": "Trigger 23"
-            },
-            {
-                "type": 1,
-                "name": "Default Trigger"
             }
         ],
-        "name": "Ops.User.pandur.RouteTriggerString"
+        "name": "Ops.Trigger.RouteTriggerString"
     },
     "summary": "route trigger output by string",
     "issues": "",
