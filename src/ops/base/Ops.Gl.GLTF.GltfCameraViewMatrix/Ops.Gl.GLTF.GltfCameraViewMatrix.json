@@ -44,6 +44,15 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Node Name",
+                "text": "the exact name of a camera view to find in the scene."
+            },
+            {
+                "name": "Found",
+                "text": "was the node name of the camera found"
+            }
+        ]
     }
 }

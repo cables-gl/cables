@@ -18,7 +18,7 @@ inExec.onTriggered = () =>
     }
 };
 
-inName.onChange = findCam;
+inName.onChange = () => { camNode = null; };
 
 function findCam()
 {

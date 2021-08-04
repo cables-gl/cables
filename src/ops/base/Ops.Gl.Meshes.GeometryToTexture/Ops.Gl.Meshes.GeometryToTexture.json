@@ -59,7 +59,7 @@
         ],
         "name": "Ops.Gl.Meshes.MeshToTexture"
     },
-    "summary": "convert vertices of a mesh to a data texture",
+    "summary": "convert vertices of a geometry to a data texture",
     "docs": {
         "ports": [
             {
@@ -108,6 +108,11 @@
             "message": " added core lib: cgl_shadermodifier",
             "author": "pandur",
             "date": 1625755242464
+        },
+        {
+            "message": "Ops.Gl.Meshes.MeshToTexture renamed to Ops.Gl.Meshes.GeometryToTexture",
+            "author": "pandur",
+            "date": 1628062127775
         }
     ],
     "coreLibs": [
