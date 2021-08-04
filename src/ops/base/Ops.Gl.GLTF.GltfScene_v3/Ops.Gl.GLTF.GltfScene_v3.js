@@ -399,6 +399,7 @@ op.exposeTexture = function (name)
     newop.getPort("Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patch().focusOp(newop.id, true);
+    gui.patchView.testCollision(newop);
 };
 
 function setNewOpPosition(newOp, num)
@@ -443,6 +444,7 @@ op.exposeNode = function (name, tree)
 
                     prevPort = "Next";
                     prevOp = newop;
+                    gui.patchView.testCollision(newop);
                 }
             }
         }
@@ -454,6 +456,7 @@ op.exposeNode = function (name, tree)
         setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
         gui.patch().focusOp(newop.id, true);
+        gui.patchView.testCollision(newop);
     }
     CABLES.UI.MODAL.hide();
 };
@@ -464,6 +467,9 @@ op.assignMaterial = function (name)
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patch().focusOp(newop.id, true);
+    setNewOpPosition(newop);
+    gui.patchView.testCollision(newop);
+
     CABLES.UI.MODAL.hide();
 };
 
