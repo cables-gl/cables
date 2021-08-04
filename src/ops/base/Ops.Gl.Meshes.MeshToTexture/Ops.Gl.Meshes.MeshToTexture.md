@@ -1,1 +1,1 @@
-Designed to be mainly used with the customShader op.
+every pixel contains XYZ position data of the given geometry
