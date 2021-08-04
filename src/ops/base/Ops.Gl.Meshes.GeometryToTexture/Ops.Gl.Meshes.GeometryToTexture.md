@@ -1,0 +1,1 @@
+every pixel contains XYZ position data of the given geometry
