@@ -48,7 +48,7 @@
         ],
         "name": "Ops.Vars.VarTriggerArray"
     },
-    "summary": "Set a variable array",
+    "summary": "Set an array variable by a trigger",
     "issues": "",
     "collections": null,
     "relatedops": null,
