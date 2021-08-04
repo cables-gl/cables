@@ -1,8 +1,14 @@
 let render = op.inTrigger("render");
 let trigger = op.outTrigger("trigger");
 
+const blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
+const amount = op.inValueSlider("Amount", 1);
+
 let inGradient = op.inTexture("Gradient");
 let inMethod = op.inSwitch("Method", ["Luminance", "Channels"], "Luminance");
+
+let inMin = op.inFloatSlider("Min", 0);
+let inMax = op.inFloatSlider("Max", 1);
 
 let inPos = op.inValueSlider("Position", 0.5);
 
@@ -15,6 +21,12 @@ var textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 
 var textureUniform = new CGL.Uniform(shader, "t", "gradient", 1);
 let uniPos = new CGL.Uniform(shader, "f", "pos", inPos);
+
+let uniMin = new CGL.Uniform(shader, "f", "vmin", inMin);
+let uniMax = new CGL.Uniform(shader, "f", "vmax", inMax);
+let uniAmount = new CGL.Uniform(shader, "f", "amount", amount);
+
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 inMethod.onChange = () =>
 {

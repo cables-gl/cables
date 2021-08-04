@@ -29,11 +29,16 @@ function calculateModule(n1, n2)
     return re;
 }
 
-function calculatePingPong(n1, n2)
+function calculatePingPong(i, n)
 {
-    let r = ((n1 % n2) + n2) % n2 * 2;
-    if (r > n2) return n2 * 2.0 - r;
-    else return r;
+    let cycle = 2 * n;
+    i %= cycle;
+    if (i >= n) return cycle - i;
+    else return i;
+
+    // let r = ((n1 % n2) + n2) % n2 * 2;
+    // if (r > n2) return n2 * 2.0 - r;
+    // else return r;
 }
 
 function updatePingPong()

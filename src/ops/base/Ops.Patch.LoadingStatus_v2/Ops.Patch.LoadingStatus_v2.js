@@ -73,8 +73,6 @@ exe.onTriggered = () =>
 
     if (loadingId)
     {
-        // console.log(op.patch.loading.getListJobs(), !firstTime);
-
         cgl.patch.loading.finished(loadingId);
         loadingId = null;
     }

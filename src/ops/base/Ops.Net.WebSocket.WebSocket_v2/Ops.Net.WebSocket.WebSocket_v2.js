@@ -20,7 +20,7 @@ let connecting = false;
 
 function checkConnection()
 {
-    if (outConnected.get() === false && !connecting)
+    if (!outConnected.get() && !connecting)
     {
         op.log("reconnect websocket...");
         connect();
@@ -31,14 +31,14 @@ function checkConnection()
 
 op.onDelete = function ()
 {
-    if (outConnected.get() === true)connection.close();
+    if (outConnected.get())connection.close();
     connecting = false;
     clearTimeout(timeout);
 };
 
 function connect()
 {
-    if (outConnected.get() === true && connectedTo == inUrl.get()) return;
+    if (outConnected.get() && connectedTo == inUrl.get()) return;
     // if(outConnected.get()===true)connection.close();
 
     if (!inUrl.get() || inUrl.get() === "")

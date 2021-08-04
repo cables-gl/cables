@@ -80,8 +80,6 @@ function init()
     if (cycle == 1) cycle = 0;
     else cycle = 1;
 
-    // console.log("animating to:",cycle);
-
     if (cycle == 0)
     {
         arr1 = inMat.get();
@@ -94,8 +92,6 @@ function init()
         arr2 = inMat.get();
         mat4.copy(arr1, result);
     }
-
-    // console.log(arr1,arr2);
 
     anim.setValue(inDur.get() + CABLES.now() / 1000.0, cycle, () =>
     {
@@ -122,9 +118,9 @@ function ipMat(perc)
         // getYPR(a, arr1);
         // getYPR(b, arr2);
 
-        for(let i=0;i<arr1.length;i++)
+        for (let i = 0; i < arr1.length; i++)
         {
-            result[i]=ip(arr1[i], arr2[i], perc);
+            result[i] = ip(arr1[i], arr2[i], perc);
         }
         // mat4.identity(result);
         // result[12] = ip(arr1[12], arr2[12], perc);

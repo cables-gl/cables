@@ -75,6 +75,7 @@ const Texture = function (__cgl, options)
     this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
     this.setSize(options.width, options.height);
+    this.getInfoOneLine();
 };
 
 Texture.prototype.isFloatingPoint = function ()
@@ -165,8 +166,8 @@ Texture.prototype.setSize = function (w, h)
     this.height = h;
 
 
-    this.shortInfoString = w + "x" + h + "";
-    if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
+    this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
+    // if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
 
     // if (this._cgl.printError("cgltex before"))
     // {
@@ -332,6 +333,8 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+
+    this.getInfoOneLine();
 };
 
 /**
@@ -388,6 +391,23 @@ Texture.prototype.getInfoReadable = function ()
     return html;
 };
 
+Texture.prototype.getInfoOneLine = function ()
+{
+    let txt = "" + this.width + "x" + this.height;
+    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " HDR";
+
+    if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
+    if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";
+    if (this.filter === CGL.Texture.FILTER_MIPMAP) txt += " mipmap";
+
+    if (this.wrap === CGL.Texture.WRAP_CLAMP_TO_EDGE) txt += " clamp";
+    if (this.wrap === CGL.Texture.WRAP_REPEAT) txt += " repeat";
+    if (this.wrap === CGL.Texture.WRAP_MIRRORED_REPEAT) txt += " repeatmir";
+
+    this.shortInfoString = txt;
+
+    return txt;
+};
 
 Texture.prototype.getInfo = function ()
 {
@@ -504,6 +524,7 @@ Texture.prototype._setFilter = function ()
             }
         }
     }
+    this.getInfoOneLine();
 };
 
 

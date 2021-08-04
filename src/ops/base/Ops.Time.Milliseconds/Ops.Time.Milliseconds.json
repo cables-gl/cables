@@ -30,7 +30,7 @@
         ],
         "name": "Ops.Admin.PerformanceNow"
     },
-    "summary": "current time/date in milliseconds (perormance.now())",
+    "summary": "Value since the time origin in milliseconds (performance.now())",
     "issues": "",
     "collections": null,
     "relatedops": null,

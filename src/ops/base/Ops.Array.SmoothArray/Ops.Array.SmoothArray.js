@@ -25,12 +25,12 @@ function onFilterChange()
 {
     selectedMode = inModeBool.get();
 
-    if (selectedMode === false)
+    if (!selectedMode)
     {
         decFactor.setUiAttribs({ "greyout": true });
         incFactor.setUiAttribs({ "title": "Inc/Dec factor" });
     }
-    else if (selectedMode === true)
+    else
     {
         decFactor.setUiAttribs({ "greyout": false });
         incFactor.setUiAttribs({ "title": "Inc factor" });
@@ -60,7 +60,7 @@ inArray.onChange = function ()
 
     for (let i = 0; i < arr.length; i++)
     {
-        goal[i] = arr[i];
+        goal[i] = arr[i] || 0;
     }
 };
 

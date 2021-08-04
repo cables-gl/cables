@@ -138,7 +138,6 @@ function setSelectedProperty()
 
             // optionElement.setAttribute("selected", "");
             // outIndex.set(index);
-            // console.log(index,optionElement.value.trim())
         }
     });
 

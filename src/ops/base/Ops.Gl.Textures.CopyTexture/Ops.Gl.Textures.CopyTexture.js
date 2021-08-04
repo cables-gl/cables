@@ -118,8 +118,8 @@ function updateSoon()
             op.patch.cgl.off(autoRefreshTimeout);
 
             if (needsResUpdate)updateResolution();
-            if (!effect)console.log("has no effect");
-            if (!inTexture.get()) console.log("has no intexture");
+            if (!effect)op.log("has no effect");
+            if (!inTexture.get()) op.log("has no intexture");
 
             doRender();
         });
@@ -144,7 +144,6 @@ function updateResolution()
 
     if ((w != tex.width || h != tex.height) && (w !== 0 && h !== 0))
     {
-        // console.log("res changed!");
         height.set(h);
         width.set(w);
         tex.filter = selectedFilter;

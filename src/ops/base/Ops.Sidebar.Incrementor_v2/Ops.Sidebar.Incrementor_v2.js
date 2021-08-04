@@ -76,7 +76,6 @@ op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 function setDefaultValue()
 {
-    console.log("set default", outValue.get());
     inDefault.set(outValue.get());
     if (CABLES.UI && op.isCurrentUiOp())
     {
@@ -98,7 +97,6 @@ op.onLoaded = op.onInit = function ()
     }
     else
     {
-        console.log("init default", inDefault.get());
         outValue.set(inDefault.get());
         valueText.textContent = inDefault.get();
     }

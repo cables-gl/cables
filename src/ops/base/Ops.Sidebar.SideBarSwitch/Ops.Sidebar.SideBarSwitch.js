@@ -128,7 +128,7 @@ inInput.onChange = () =>
 function setActiveTab(el)
 {
     elTabActive = el;
-    console.log(el.dataset.index);
+    op.log(el.dataset.index);
     outIndex.set(parseInt(el.dataset.index));
     outStr.set(el.dataset.txt);
 
