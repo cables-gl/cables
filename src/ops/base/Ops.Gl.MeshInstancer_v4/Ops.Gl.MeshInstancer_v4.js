@@ -155,9 +155,6 @@ function setupArray()
 
     const useQuats = inRotMeth.get() == "Quaternions";
 
-    let hasColors = false;
-    let hasTexCoords = false;
-
     for (let i = 0; i < num; i++)
     {
         mat4.identity(m);
@@ -187,25 +184,19 @@ function setupArray()
 
         if (arrayChangedColor && colArr)
         {
-            hasColors = true;
-
             instColorArray[i * 4 + 0] = colArr[i * 4 + 0];
             instColorArray[i * 4 + 1] = colArr[i * 4 + 1];
             instColorArray[i * 4 + 2] = colArr[i * 4 + 2];
             instColorArray[i * 4 + 3] = colArr[i * 4 + 3];
         }
-        mod.toggleDefine("HAS_COLORS", hasColors);
 
         if (arrayChangedTexcoords && tcArr)
         {
-            hasTexCoords = true;
             instTexcoordArray[i * 4 + 0] = tcArr[i * 4 + 0];
             instTexcoordArray[i * 4 + 1] = tcArr[i * 4 + 1];
             instTexcoordArray[i * 4 + 2] = tcArr[i * 4 + 2];
             instTexcoordArray[i * 4 + 3] = tcArr[i * 4 + 3];
         }
-
-        mod.toggleDefine("HAS_TEXCOORDS", hasTexCoords);
 
         if (scales && scales.length > i) mat4.scale(m, m, [scales[i * 3], scales[i * 3 + 1], scales[i * 3 + 2]]);
         else mat4.scale(m, m, [1, 1, 1]);
@@ -216,8 +207,11 @@ function setupArray()
     mesh.numInstances = num;
 
     if (arrayChangedTrans) mesh.addAttribute("instMat", matrixArray, 16);
-    if (hasColors) mesh.addAttribute("instColor", instColorArray, 4, { "instanced": true });
-    if (hasTexCoords) mesh.addAttribute("instTexCoords", instTexcoordArray, 4, { "instanced": true });
+    if (arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { "instanced": true });
+    if (arrayChangedTexcoords) mesh.addAttribute("instTexCoords", instTexcoordArray, 4, { "instanced": true });
+
+    mod.toggleDefine("HAS_TEXCOORDS", tcArr);
+    mod.toggleDefine("HAS_COLORS", colArr);
 
     arrayChangedColor = false;
     recalc = false;
@@ -241,8 +235,6 @@ function doRender()
     outNum.set(mesh.numInstances);
 
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
-
-    mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
 
     outTrigger.trigger();
 
