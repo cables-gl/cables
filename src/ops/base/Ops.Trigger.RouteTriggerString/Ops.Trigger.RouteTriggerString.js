@@ -4,7 +4,7 @@ const switchPort = op.inString("Switch Value");
 const nextTriggerPort = op.outTrigger("Next Trigger");
 const valueOutPort = op.outValue("Switched Index");
 
-let index=-1;
+let index = -1;
 
 const triggerPorts = [];
 const namePorts = [];
@@ -13,22 +13,22 @@ for (let j = 0; j < NUM_PORTS; j++)
 {
     triggerPorts[j] = op.outTrigger("Trigger " + j);
     namePorts[j] = op.inString("String " + j);
-    namePorts[j].onChange=updateIndex;
+    namePorts[j].onChange = updateIndex;
 }
-const defaultTriggerPort = op.outTrigger("Default Trigger");
+// const defaultTriggerPort = op.outTrigger("Default Trigger");
 
-op.onLoad=
-op.onInit=
-switchPort.onChange=updateIndex;
+op.onLoad =
+op.onInit =
+switchPort.onChange = updateIndex;
 
 function updateIndex()
 {
-    index=-1;
-    for(let i=0;i<namePorts.length;i++)
+    index = -1;
+    for (let i = 0; i < namePorts.length; i++)
     {
-        if(namePorts[i].get()==switchPort.get())
+        if (namePorts[i].get() == switchPort.get())
         {
-            index=i;
+            index = i;
         }
     }
     // if (index >= 0 && index < NUM_PORTS)
@@ -41,15 +41,12 @@ function updateIndex()
     //     valueOutPort.set(-1);
     //     defaultTriggerPort.trigger();
     // }
-    // nextTriggerPort.trigger();
 }
 
-exePort.onTriggered = ()=>
+exePort.onTriggered = () =>
 {
-    if(index>=0) triggerPorts[index].trigger();
+    if (index >= 0) triggerPorts[index].trigger();
 
     valueOutPort.set(index);
-
+    nextTriggerPort.trigger();
 };
-
-

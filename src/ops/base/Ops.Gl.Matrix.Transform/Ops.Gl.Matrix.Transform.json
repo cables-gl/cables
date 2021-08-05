@@ -3,47 +3,47 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posX",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posY",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posZ",
                 "group": "Position",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scale",
                 "group": "Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "rotX",
                 "group": "Rotation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "rotY",
                 "group": "Rotation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "rotZ",
                 "group": "Rotation",
                 "subType": "number"
@@ -51,7 +51,7 @@
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

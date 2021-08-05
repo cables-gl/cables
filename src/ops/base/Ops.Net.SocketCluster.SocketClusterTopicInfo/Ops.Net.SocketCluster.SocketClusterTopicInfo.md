@@ -1,4 +1,4 @@
-give you information about active clients that are subscribed to a topic.
+Socket Cluster Topic Info gives you information about active clients that are subscribed to a topic.
 
 "active" is defined by the "timeout" parameter, clients that didn't send a message for longer than the timeout will be considered inactive.
 

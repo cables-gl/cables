@@ -281,7 +281,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 {
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
-        // op.patch.config.onPatchLoaded = function (patch)
+        op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
             const parentSubPatch = patch.ops.find(subOp =>
@@ -295,7 +295,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 op.setUiAttrib({ "extendTitle": parentSubPatch.uiAttribs.title });
                 setupPorts(parentSubPatch);
             }
-        }
+        };
 
         if (editorMode)
         {

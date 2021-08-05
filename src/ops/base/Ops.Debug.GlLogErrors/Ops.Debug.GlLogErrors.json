@@ -29,7 +29,7 @@
         ],
         "name": "Ops.Debug.GlLogErrors"
     },
-    "summary": "execute glGetError after every gl command and log to console",
+    "summary": "execute glGetError after every gl command and log to browser console",
     "issues": "",
     "collections": null,
     "relatedops": null,

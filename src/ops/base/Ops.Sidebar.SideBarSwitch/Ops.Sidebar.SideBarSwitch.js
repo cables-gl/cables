@@ -127,13 +127,16 @@ inInput.onChange = () =>
 
 function setActiveTab(el)
 {
-    elTabActive = el;
-    op.log(el.dataset.index);
-    outIndex.set(parseInt(el.dataset.index));
-    outStr.set(el.dataset.txt);
+    if (el)
+    {
+        elTabActive = el;
+        op.log(el.dataset.index);
+        outIndex.set(parseInt(el.dataset.index));
+        outStr.set(el.dataset.txt);
 
-    if (inStyle.get() == "Tabs") el.classList.add("sidebar_tab_active");
-    else el.classList.add("sidebar_switch_active");
+        if (inStyle.get() == "Tabs") el.classList.add("sidebar_tab_active");
+        else el.classList.add("sidebar_switch_active");
+    }
 }
 
 function tabClicked(e)
