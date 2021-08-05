@@ -49,7 +49,7 @@
         ],
         "name": "Ops.Anim.Smooth"
     },
-    "summary": "Smooths out jumps in values",
+    "summary": "Smooths out jumps in values (AverageInterpolation)",
     "issues": "",
     "collections": null,
     "relatedops": null,
