@@ -232,8 +232,9 @@ float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
         vec3 halfDirection = normalize( nNormal + nDirection );
 
         float cosine = dot( halfDirection, nDirection );
-        float product = max( cosine, 0.0 );
+        float product = max( cosine, 0.01 );
         float factor = pow(product, inFresnelWidthExponent.y);
+        // float factor=0.5;
 
         return 5. * factor;
     }
@@ -416,7 +417,7 @@ void main()
 
 
     #ifdef ENABLE_FRESNEL
-        calculatedColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);
+        calculatedColor += inFresnel.rgb* (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);
     #endif
 
      #ifdef HAS_TEXTURE_ALPHA
