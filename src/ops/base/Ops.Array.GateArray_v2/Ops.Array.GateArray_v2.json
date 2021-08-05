@@ -28,5 +28,13 @@
             }
         ],
         "name": "Ops.Array.GateArray_v2"
+    },
+    "summary": "Only allows an array through if pass through is true",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

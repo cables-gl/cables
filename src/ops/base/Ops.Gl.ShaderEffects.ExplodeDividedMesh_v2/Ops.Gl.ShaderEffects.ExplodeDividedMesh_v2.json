@@ -105,5 +105,13 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "explode a (divided) mesh in the direction of faces normals",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
