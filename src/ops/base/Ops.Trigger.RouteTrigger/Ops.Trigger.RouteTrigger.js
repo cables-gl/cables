@@ -17,9 +17,6 @@ const defaultTriggerPort = op.outTrigger("Default Trigger");
 
 // functions
 
-/**
- * Performs the switch case
- */
 function update()
 {
     const index = Math.round(switchPort.get());

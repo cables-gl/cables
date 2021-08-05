@@ -86,7 +86,7 @@ function doRender()
         }
         else
         {
-            fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": fpTexture.get() });
+            fb = new CGL.Framebuffer(cgl, 8, 8, { "isFloatingPointTexture": fpTexture.get(), "clear": clear.get() });
         }
 
         if (tfilter.get() == "nearest") fb.setFilter(CGL.Texture.FILTER_NEAREST);
@@ -120,7 +120,6 @@ function doRender()
     cgl.resetViewPort();
 
     tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
-
     tex.set(fb.getTextureColor());
 }
 

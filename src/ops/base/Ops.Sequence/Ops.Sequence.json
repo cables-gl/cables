@@ -11,11 +11,11 @@
         "portsIn": [
             {
                 "type": 1,
-                "name": "Clean up connections"
+                "name": "exe"
             },
             {
                 "type": 1,
-                "name": "exe"
+                "name": "Clean up connections"
             },
             {
                 "type": 1,

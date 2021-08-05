@@ -5,20 +5,22 @@ IN vec3 attrVertNormal;
 UNI mat4 projMatrix;
 UNI mat4 mvMatrix;
 
-UNI float posX;
-UNI float posY;
-UNI float scaleX;
-UNI float scaleY;
-UNI float rotate;
-
 OUT vec2 texCoord;
-OUT vec3 norm;
-OUT mat3 transform;
+// OUT vec3 norm;
+
+#ifdef TEX_TRANSFORM
+    UNI float posX;
+    UNI float posY;
+    UNI float scaleX;
+    UNI float scaleY;
+    UNI float rotate;
+    OUT mat3 transform;
+#endif
 
 void main()
 {
    texCoord=attrTexCoord;
-   norm=attrVertNormal;
+//   norm=attrVertNormal;
 
    #ifdef TEX_TRANSFORM
         vec3 coordinates=vec3(attrTexCoord.x, attrTexCoord.y,1.0);

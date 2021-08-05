@@ -6,7 +6,8 @@
         "portsIn": [
             {
                 "type": 2,
-                "name": "Audio Buffer"
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
             },
             {
                 "type": 0,
@@ -65,11 +66,17 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Out"
+                "name": "Audio Out",
+                "objType": "audioNode"
             },
             {
                 "type": 0,
                 "name": "Is Playing",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
                 "subType": "boolean"
             }
         ],
@@ -126,6 +133,10 @@
             {
                 "name": "Is Playing",
                 "text": "returns true if audio file is playing, false if not"
+            },
+            {
+                "name": "Loading",
+                "text": "true if currently loading an audio source"
             }
         ]
     },

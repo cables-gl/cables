@@ -11,11 +11,13 @@ let val = 0;
 let goal = 0;
 let oldVal = 0;
 let lastTrigger = 0;
+
 op.toWorkPortsNeedToBeLinked(exec);
 
 let divisorUp;
 let divisorDown;
 let divisor = 4;
+let finished = true;
 
 let selectIndex = 0;
 const MODE_SINGLE = 0;
@@ -33,9 +35,8 @@ update();
 function onFilterChange()
 {
     const selectedMode = inMode.get();
-    if (selectedMode === false) selectIndex = MODE_SINGLE;
-    else if (selectedMode === true) selectIndex = MODE_UP_DOWN;
-
+    if (!selectedMode) selectIndex = MODE_SINGLE;
+    else selectIndex = MODE_UP_DOWN;
 
     if (selectIndex == MODE_SINGLE)
     {
@@ -71,6 +72,8 @@ function getDivisors()
 
 inVal.onChange = function ()
 {
+    finished = false;
+    let oldGoal = goal;
     goal = inVal.get();
 };
 
@@ -81,10 +84,6 @@ inDivisorUp.onChange = function ()
 
 function update()
 {
-    // next.trigger();
-    // result.set(goal);
-    // return;
-
     let tm = 1;
     if (performance.now() - lastTrigger > 500 || lastTrigger === 0) val = inVal.get();
     else tm = (performance.now() - lastTrigger) / (performance.now() - lastTrigger);
@@ -97,7 +96,8 @@ function update()
     if (diff >= 0) val += (diff) / (divisorDown * tm);
     else val += (diff) / (divisorUp * tm);
 
-    if (val > 0 && val < 0.000000001)val = 0;
+    if (Math.abs(diff) < 0.00001)val = goal;
+
     if (divisor != divisor)val = 0;
     if (val != val || val == -Infinity || val == Infinity)val = inVal.get();
 
@@ -105,6 +105,12 @@ function update()
     {
         result.set(val);
         oldVal = val;
+    }
+
+    if (val == goal && !finished)
+    {
+        finished = true;
+        result.set(val);
     }
 
     next.trigger();

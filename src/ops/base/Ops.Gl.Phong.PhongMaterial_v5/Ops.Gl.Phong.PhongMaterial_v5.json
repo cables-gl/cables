@@ -304,7 +304,8 @@
             },
             {
                 "type": 2,
-                "name": "Shader"
+                "name": "Shader",
+                "objType": "shader"
             }
         ],
         "name": "Ops.Gl.Phong.PhongMaterial_v5"

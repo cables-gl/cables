@@ -20,7 +20,8 @@ inStr.onChange = function ()
 };
 function exec()
 {
-    if (needsupdate)update();
+    // if (needsupdate)
+    update();
     next.trigger();
 }
 

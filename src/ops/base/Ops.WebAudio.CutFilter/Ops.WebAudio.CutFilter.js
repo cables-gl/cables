@@ -13,7 +13,7 @@ const Q_MAX = 1000;
 const GAIN_MIN = -40;
 const GAIN_MAX = 40;
 const SLOPES = [12, 24, 36, 48];
-const inAudio = op.inObject("Audio In");
+const inAudio = op.inObject("Audio In", null, "audioNode");
 
 const inLowActive = op.inBool("Highpass active ", true);
 const inLowSlope = op.inSwitch("Highpass Slope (in dB)", SLOPES, 12);
@@ -235,7 +235,7 @@ inLowQ.onChange = () =>
     }
 };
 
-const outAudio = op.outObject("Audio Out");
+const outAudio = op.outObject("Audio Out", null, "audioNode");
 
 let oldAudioIn = null;
 
@@ -257,18 +257,26 @@ inAudio.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
         outAudio.set(null);
     }
     else
     {
-        if (inAudio.val.connect)
-        {
-            inAudio.val.connect(lowFilterNodes[0]);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        if (inAudio.val.connect) inAudio.val.connect(lowFilterNodes[0]);
     }
+
     oldAudioIn = inAudio.get();
     outAudio.set(highFilterNodes[SLOPES.length - 1]);
+};
+
+op.onDelete = () =>
+{
+    lowFilterNodes.forEach((node, index) =>
+    {
+        node.disconnect();
+    });
+
+    highFilterNodes.forEach((node, index) =>
+    {
+        if (index < SLOPES.length - 1) node.disconnect();
+    });
 };

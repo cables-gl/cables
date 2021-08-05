@@ -41,7 +41,8 @@ const Op = function ()
 {
     EventTarget.apply(this);
 
-    this.data = {}; // reserved for op-specific user-data
+    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+    this.storage = {}; // op-specific data to be included in export
     this.objName = "";
     this.portsOut = [];
     this.portsIn = [];
@@ -128,9 +129,12 @@ const Op = function ()
     {
         if (!newAttribs) return;
 
-        if (newAttribs.error) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
+        if (newAttribs.error || newAttribs.warning || newAttribs.hint)
+        {
+            console.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
+        }
+        // if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
+        // if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
         if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
@@ -174,7 +178,7 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_OUT;
         p.parent = this;
         this.portsOut.push(p);
-        if (this.onAddPort) this.onAddPort(p);
+        // if (this.onAddPort) this.onAddPort(p);
         this.fireEvent("onPortAdd", p);
         return p;
     };
@@ -211,8 +215,11 @@ const Op = function ()
         p.direction = CONSTANTS.PORT.PORT_DIR_IN;
         p.parent = this;
         this.portsIn.push(p);
-        if (this.onAddPort) this.onAddPort(p);
-        // this.fireEvent("onPortsChanged",{});
+
+        // if (this.onAddPort) this.onAddPort(p);
+        this.fireEvent("onPortAdd", p);
+
+
         return p;
     };
 
@@ -1012,6 +1019,7 @@ const Op = function ()
 
         op.id = this.id;
         op.uiAttribs = this.uiAttribs;
+        op.storage = this.storage;
 
         if (this.uiAttribs.title == this._shortOpName) delete this.uiAttribs.title;
         if (this.uiAttribs.hasOwnProperty("working") && this.uiAttribs.working == true) delete this.uiAttribs.working;
@@ -1118,86 +1126,6 @@ const Op = function ()
     {
         for (let ipo = 0; ipo < this.portsOut.length; ipo++) this.portsOut[ipo].removeLinks();
         for (let ipi = 0; ipi < this.portsIn.length; ipi++) this.portsIn[ipi].removeLinks();
-    };
-
-    Op.unLinkTempReLinkP1 = null;
-    Op.unLinkTempReLinkP2 = null;
-
-    Op.prototype.undoUnLinkTemporary = function ()
-    {
-        if (this.shakeLink) this.shakeLink.remove();
-        this.shakeLink = null;
-
-        if (this.oldLinks)
-        {
-            for (let i = 0; i < this.oldLinks.length; i++)
-            {
-                this.patch.link(
-                    this.oldLinks[i].in.parent,
-                    this.oldLinks[i].in.getName(),
-                    this.oldLinks[i].out.parent,
-                    this.oldLinks[i].out.getName()
-                );
-            }
-            this.oldLinks.length = 0;
-        }
-
-        Op.unLinkTempReLinkP1 = null;
-        Op.unLinkTempReLinkP2 = null;
-    };
-
-    Op.prototype.unLinkTemporary = function ()
-    {
-        const tryRelink = true;
-        let i = 0;
-
-        this.shakeLink = null;
-        this.oldLinks = [];
-
-        if (tryRelink)
-        {
-            if (
-                this.portsIn.length > 0 &&
-                this.portsIn[0].isLinked() &&
-                this.portsOut.length > 0 &&
-                this.portsOut[0].isLinked()
-            )
-            {
-                if (this.portsIn[0].getType() == this.portsOut[0].getType())
-                {
-                    Op.unLinkTempReLinkP1 = this.portsIn[0].links[0].getOtherPort(this.portsIn[0]);
-                    Op.unLinkTempReLinkP2 = this.portsOut[0].links[0].getOtherPort(this.portsOut[0]);
-                }
-            }
-        }
-
-        for (let ipi = 0; ipi < this.portsIn.length; ipi++)
-        {
-            for (i = 0; i < this.portsIn[ipi].links.length; i++)
-            {
-                this.oldLinks.push({
-                    "in": this.portsIn[ipi].links[i].portIn,
-                    "out": this.portsIn[ipi].links[i].portOut
-                });
-            }
-        }
-
-        for (let ipo = 0; ipo < this.portsOut.length; ipo++)
-            for (i = 0; i < this.portsOut[ipo].links.length; i++)
-                this.oldLinks.push({
-                    "in": this.portsOut[ipo].links[i].portIn,
-                    "out": this.portsOut[ipo].links[i].portOut
-                });
-
-        this.unLink();
-
-        if (Op.unLinkTempReLinkP1 && Op.unLinkTempReLinkP2)
-            this.shakeLink = this.patch.link(
-                Op.unLinkTempReLinkP1.parent,
-                Op.unLinkTempReLinkP1.getName(),
-                Op.unLinkTempReLinkP2.parent,
-                Op.unLinkTempReLinkP2.getName()
-            );
     };
 
     Op.prototype.profile = function (enable)

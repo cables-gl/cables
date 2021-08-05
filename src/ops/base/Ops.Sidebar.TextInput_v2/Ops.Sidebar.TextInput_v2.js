@@ -2,6 +2,7 @@
 const parentPort = op.inObject("Link");
 const labelPort = op.inString("Text", "Text");
 const defaultValuePort = op.inString("Default", "");
+const inPlaceholder = op.inString("Placeholder", "");
 const inTextArea = op.inBool("TextArea", false);
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
@@ -9,14 +10,10 @@ const inVisible = op.inBool("Visible", true);
 // outputs
 const siblingsPort = op.outObject("Children");
 const valuePort = op.outString("Result", defaultValuePort.get());
+const outFocus = op.outBool("Focus");
 
 // vars
 const el = document.createElement("div");
-el.addEventListener("dblclick", function ()
-{
-    valuePort.set(defaultValuePort.get());
-    input.value = defaultValuePort.get();
-});
 
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__text-input");
@@ -27,14 +24,16 @@ label.classList.add("sidebar__item-label");
 const labelText = document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
-// var inputWrapper = document.createElement('div');
-// inputWrapper.classList.add('sidebar__text-input-input-wrapper');
-// el.appendChild(inputWrapper);
+
+label.addEventListener("dblclick", function ()
+{
+    valuePort.set(defaultValuePort.get());
+    input.value = defaultValuePort.get();
+});
 
 let input = null;
 creatElement();
 
-// inputWrapper.appendChild(input);
 op.toWorkPortsNeedToBeLinked(parentPort);
 
 inTextArea.onChange = creatElement;
@@ -55,14 +54,32 @@ function creatElement()
     input.classList.add("sidebar__text-input-input");
     input.setAttribute("type", "text");
     input.setAttribute("value", defaultValuePort.get());
+    input.setAttribute("placeholder", inPlaceholder.get());
+
     el.appendChild(input);
     input.addEventListener("input", onInput);
+    input.addEventListener("focus", onFocus);
+    input.addEventListener("blur", onBlur);
 }
 
 const greyOut = document.createElement("div");
 greyOut.classList.add("sidebar__greyout");
 el.appendChild(greyOut);
 greyOut.style.display = "none";
+
+function onFocus()
+{
+    outFocus.set(true);
+}
+function onBlur()
+{
+    outFocus.set(false);
+}
+
+inPlaceholder.onChange = () =>
+{
+    input.setAttribute("placeholder", inPlaceholder.get());
+};
 
 inGreyOut.onChange = function ()
 {
@@ -73,7 +90,6 @@ inVisible.onChange = function ()
 {
     el.style.display = inVisible.get() ? "block" : "none";
 };
-
 
 // events
 parentPort.onChange = onParentChanged;

@@ -5,7 +5,7 @@ const
     inExec = op.inTrigger("Render"),
     inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
-    inCamera = op.inDropDown("Camera", ["Ncaone"], "None"),
+    inCamera = op.inDropDown("Camera", ["None"], "None"),
     inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
@@ -215,8 +215,7 @@ function loadBin(addCacheBuster)
             maxTime = 0;
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
-            cgl.patch.loading.finished(loadingId);
-            loadingId = null;
+
             needsMatUpdate = true;
             op.refreshParams();
             outAnimLength.set(maxTime);
@@ -228,11 +227,17 @@ function loadBin(addCacheBuster)
             outPoints.set(boundingPoints);
             if (gltf)
             {
+                op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+
                 gltf.loaded = Date.now();
                 if (gltf.bounds)outBounds.set(gltf.bounds);
             }
             updateCenter();
             outLoaded.set(true);
+
+            cgl.patch.loading.finished(loadingId);
+            loadingId = null;
+
             // op.log("finished loading gltf");
         };
 
@@ -363,6 +368,13 @@ op.exposeTexture = function (name)
     gui.patch().focusOp(newop.id, true);
 };
 
+function setNewOpPosition(newOp, num)
+{
+    num = num || 1;
+
+    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * 50 } });
+}
+
 op.exposeNode = function (name, tree)
 {
     if (tree)
@@ -384,6 +396,7 @@ op.exposeNode = function (name, tree)
                     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
                     newop.getPort("Node Name").set(arrHierarchy[j].name);
                     op.patch.link(prevOp, prevPort, newop, "Render");
+                    setNewOpPosition(newop, j);
 
                     if (j == arrHierarchy.length - 1)
                     {
@@ -405,6 +418,7 @@ op.exposeNode = function (name, tree)
     {
         const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
         newop.getPort("Node Name").set(name);
+        setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
         gui.patch().focusOp(newop.id, true);
     }

@@ -76,7 +76,7 @@ void main()
             float a=smoothstep(0.25,0.25-fwidth(gl_PointCoord.x),circ);
             if(a==0.0)discard;
             col.a=a;
-            col.r=0.0;
+            // col.r=0.0;
         #endif
     #endif
 

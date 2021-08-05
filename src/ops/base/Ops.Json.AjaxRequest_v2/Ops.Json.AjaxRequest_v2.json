@@ -48,6 +48,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Auto request",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "reload"
             }
@@ -81,10 +86,6 @@
     "docs": {
         "ports": [
             {
-                "name": "URL",
-                "text": "the url of the reques"
-            },
-            {
                 "name": "JsonP",
                 "text": "wether or not to load jsonp (to circumvent CORS)"
             },
@@ -113,8 +114,12 @@
                 "text": "do we expect the response to be JSON, then parse the output"
             },
             {
+                "name": "Auto request",
+                "text": "trigger the request on any value change (or on pagereload)"
+            },
+            {
                 "name": "reload",
-                "text": "refresh data from remote"
+                "text": "refresh data from remote (overrides an inactive \"auto request\")"
             },
             {
                 "name": "data",

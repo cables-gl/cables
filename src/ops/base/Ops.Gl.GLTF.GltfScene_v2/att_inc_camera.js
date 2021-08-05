@@ -1,16 +1,23 @@
 const gltfCamera = class
 {
-    constructor(gltf, config)
+    constructor(idx,gltf, config)
     {
         this.name = config.name || "unknown";
         this.config = config;
-        this.node = gltf.getNode(this.name);
+        this.node=null;
 
-        if (!this.node)
-        {
-            // console.log("gltf camera - no node!!");
-            return;
-        }
+        for(let i=0;i<gltf.nodes.length;i++)
+            if(gltf.nodes[i].camera==idx)
+            {
+                this.node=gltf.nodes[i].parent;
+                this.nodeDirect=gltf.nodes[i];
+            }
+
+        // this.node=gltf.nodes[gltf.nodes[idx].camera].parent;
+
+        if(!this.node) this.node = gltf.getNode(this.name);
+
+
         // this.nodeOrient=gltf.getNode(this.name+"_Orientation");
 
         this.pos = vec3.create();
@@ -20,16 +27,31 @@ const gltfCamera = class
         this.vUp = vec3.create();
         this.transMatrix = mat4.create();
 
+
+        if (!this.node)
+        {
+            console.log("gltf camera - no node!!");
+            return;
+        }
+
         vec3.set(this.pos,
             this.node._node.translation[0],
             this.node._node.translation[1],
             this.node._node.translation[2]);
+
+        // if(this.node.parent)
+        // {
+        //     console.log(this.node.parent)
+        //             vec3.add(this.pos,this.pos,this.node.parent._node.translation);
+
+        // }
 
         quat.set(this.quat,
             this.node._node.rotation[0],
             this.node._node.rotation[1],
             this.node._node.rotation[2],
             this.node._node.rotation[3]);
+
 
         // vec3.set(this.quatOr,
         //     this.nodeOrient._node.rotation[0],
@@ -46,7 +68,7 @@ const gltfCamera = class
 
     updateAnim(time)
     {
-        if (this.node._animTrans)
+        if (this.node && this.node._animTrans)
         {
 
             vec3.set(this.pos,
@@ -80,13 +102,33 @@ const gltfCamera = class
         cgl.pushViewMatrix();
         // mat4.identity(cgl.vMatrix);
 
+        // if(this.node && this.node.parent)
+        // {
+        //     console.log(this.node.parent)
+            // vec3.add(this.pos,this.pos,this.node.parent._node.translation);
+            // vec3.sub(this.vCenter,this.vCenter,this.node.parent._node.translation);
+            // mat4.translate(cgl.vMatrix,cgl.vMatrix,
+            // [
+            //     -this.node.parent._node.translation[0],
+            //     -this.node.parent._node.translation[1],
+            //     -this.node.parent._node.translation[2]
+            // ])
+        // }
+
+
+
         vec3.set(this.vUp, 0, 1, 0);
         vec3.set(this.vCenter, 0, -1, 0);
+        // vec3.set(this.vCenter, 0, 1, 0);
         vec3.transformQuat(this.vCenter, this.vCenter, this.quat);
         vec3.normalize(this.vCenter, this.vCenter);
         vec3.add(this.vCenter, this.vCenter, this.pos);
 
+
         mat4.lookAt(cgl.vMatrix, this.pos, this.vCenter, this.vUp);
+
+
+
         // mat4.multiply(cgl.vMatrix,cgl.vMatrix,this.transMatrix);
     }
 

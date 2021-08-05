@@ -10,7 +10,7 @@ const snippets = {
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
-const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createFragmentHead = n => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader()
@@ -55,7 +55,7 @@ op.setPortGroup("Oren-Nayar Diffuse", [inToggleOrenNayar, inAlbedo, inRoughness]
 
 inToggleOrenNayar.onChange = function ()
 {
-    shader.toggleDefine("ENABLE_OREN_NAYAR_DIFFUSE", inToggleOrenNayar);
+    shader.toggleDefine("ENABLE_OREN_NAYAR_DIFFUSE", inToggleOrenNayar.get());
     inAlbedo.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
     inRoughness.setUiAttribs({ "greyout": !inToggleOrenNayar.get() });
 };
@@ -79,7 +79,20 @@ let uniFresnel = null;
 let uniFresnelWidthExponent = null;
 inToggleFresnel.onChange = function ()
 {
-    shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel);
+    shader.toggleDefine("ENABLE_FRESNEL", inToggleFresnel.get());
+
+    if (uniFresnel)
+    {
+        shader.removeUniform("inFresnel");
+        uniFresnel = null;
+    }
+
+    if (uniFresnelWidthExponent)
+    {
+        shader.removeUniform("inFresnelWidthExponent");
+        uniFresnelWidthExponent = null;
+    }
+
     if (inToggleFresnel.get())
     {
         if (!uniFresnel) uniFresnel = new CGL.Uniform(shader, "4f", "inFresnel", inFresnelR, inFresnelG, inFresnelB, inFresnel);
@@ -87,17 +100,6 @@ inToggleFresnel.onChange = function ()
     }
     else
     {
-        if (uniFresnel)
-        {
-            shader.removeUniform("inFresnel");
-            uniFresnel = null;
-        }
-
-        if (uniFresnelWidthExponent)
-        {
-            shader.removeUniform("inFresnelWidthExponent");
-            uniFresnelWidthExponent = null;
-        }
     }
 
     fresnelArr.forEach(function (port) { port.setUiAttribs({ "greyout": !inToggleFresnel.get() }); });
@@ -118,7 +120,7 @@ inEmissiveB.setUiAttribs({ "greyout": !inEmissiveActive.get() });
 
 inEmissiveActive.onChange = () =>
 {
-    shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive);
+    shader.toggleDefine("ADD_EMISSIVE_COLOR", inEmissiveActive.get());
     inEmissiveColorIntensity.setUiAttribs({ "greyout": !inEmissiveActive.get() });
     inEmissiveR.setUiAttribs({ "greyout": !inEmissiveActive.get() });
     inEmissiveG.setUiAttribs({ "greyout": !inEmissiveActive.get() });
@@ -144,8 +146,8 @@ inFalloffMode.onChange = () =>
 {
     const MODES = ["A", "B", "C", "D"];
     shader.define("FALLOFF_MODE_" + inFalloffMode.get());
-    MODES.filter((mode) => mode !== inFalloffMode.get())
-        .forEach((mode) => shader.removeDefine("FALLOFF_MODE_" + mode));
+    MODES.filter(mode => mode !== inFalloffMode.get())
+        .forEach(mode => shader.removeDefine("FALLOFF_MODE_" + mode));
 };
 
 const lightProps = [inEnergyConservation, inToggleDoubleSided, inFalloffMode];
@@ -188,10 +190,10 @@ discardTransPxl.setUiAttribs({ "hidePort": true });
 op.setPortGroup("Opacity Texture", [alphaMaskSource, discardTransPxl]);
 
 const outTrigger = op.outTrigger("Trigger Out");
-const shaderOut = op.outObject("Shader");
+const shaderOut = op.outObject("Shader", null, "shader");
 shaderOut.ignoreValueSerialize = true;
 
-const shader = new CGL.Shader(cgl, "simosphong");
+const shader = new CGL.Shader(cgl, "phongmaterial_" + op.id);
 shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG", "MODULE_BASE_COLOR"]);
 shader.setSource(attachments.simosphong_vert, attachments.simosphong_frag);
 let recompileShader = false;
@@ -199,16 +201,19 @@ shader.define("FALLOFF_MODE_A");
 
 if (cgl.glVersion < 2)
 {
-    cgl.gl.getExtension("OES_texture_float");
-    cgl.gl.getExtension("OES_texture_float_linear");
-    cgl.gl.getExtension("OES_texture_half_float");
-    cgl.gl.getExtension("OES_texture_half_float_linear");
-
     shader.enableExtension("GL_OES_standard_derivatives");
-    shader.enableExtension("GL_OES_texture_float");
-    shader.enableExtension("GL_OES_texture_float_linear");
-    shader.enableExtension("GL_OES_texture_half_float");
-    shader.enableExtension("GL_OES_texture_half_float_linear");
+
+    if (cgl.gl.getExtension("OES_texture_float")) shader.enableExtension("GL_OES_texture_float");
+    else console.log("error loading extension OES_texture_float");
+
+    if (cgl.gl.getExtension("OES_texture_float_linear")) shader.enableExtension("GL_OES_texture_float_linear");
+    else console.log("error loading extention OES_texture_float_linear");
+
+    if (cgl.gl.getExtension("GL_OES_texture_half_float")) shader.enableExtension("GL_OES_texture_half_float");
+    else console.log("error loading extention GL_OES_texture_half_float");
+
+    if (cgl.gl.getExtension("GL_OES_texture_half_float_linear")) shader.enableExtension("GL_OES_texture_half_float_linear");
+    else console.log("error loading extention GL_OES_texture_half_float_linear");
 }
 
 const FRAGMENT_HEAD_REGEX = new RegExp("{{PHONG_FRAGMENT_HEAD}}", "g");
@@ -474,6 +479,7 @@ function updateAlphaMaskMethod()
     if (alphaMaskSource.get() == "B") shader.define("ALPHA_MASK_B");
     else shader.removeDefine("ALPHA_MASK_B");
 }
+
 alphaMaskSource.onChange = updateAlphaMaskMethod;
 
 function updateAlphaTexture()

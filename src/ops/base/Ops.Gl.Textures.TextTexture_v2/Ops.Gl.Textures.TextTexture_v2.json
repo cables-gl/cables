@@ -5,88 +5,89 @@
     "layout": {
         "portsIn": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "text"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Refresh"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "font",
                 "group": "Size"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Maximize Size",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "fontSize",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "line distance",
                 "group": "Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture width",
                 "group": "Texture Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture height",
                 "group": "Texture Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "align index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "align",
                 "group": "Alignment"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "vertical align index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "vertical align",
                 "group": "Alignment"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "border",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Reuse Texture",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ratio",
                 "subType": "number"
             },
             {
-                "type": "2",
-                "name": "texture"
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.Textures.TextTexture_v2"

@@ -1,0 +1,131 @@
+{
+    "id": "bb3f53ab-c4ad-4c07-81df-d9ca7ee976f2",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1621872362566
+        },
+        {
+            "message": "Ops.User.pandur.StringMapNumber renamed to Ops.String.NumberSwitchByString",
+            "author": "pandur",
+            "date": 1621872659064
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1621872601628,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            },
+            {
+                "type": 5,
+                "name": "String 1"
+            },
+            {
+                "type": 0,
+                "name": "Number 1",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 2"
+            },
+            {
+                "type": 0,
+                "name": "Number 2",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 3"
+            },
+            {
+                "type": 0,
+                "name": "Number 3",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 4"
+            },
+            {
+                "type": 0,
+                "name": "Number 4",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 5"
+            },
+            {
+                "type": 0,
+                "name": "Number 5",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 6"
+            },
+            {
+                "type": 0,
+                "name": "Number 6",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 7"
+            },
+            {
+                "type": 0,
+                "name": "Number 7",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 8"
+            },
+            {
+                "type": 0,
+                "name": "Number 8",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 9"
+            },
+            {
+                "type": 0,
+                "name": "Number 9",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "String 10"
+            },
+            {
+                "type": 0,
+                "name": "Number 10",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.String.NumberSwitchByString"
+    },
+    "summary": "associate numbers by strings",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

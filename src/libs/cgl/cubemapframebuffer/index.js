@@ -57,6 +57,7 @@ class CubemapFramebuffer
             "isFloatingPointTexture": false
         };
 
+        this.name = this._options.name || "unknown cubemapframebuffer";
         if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
         if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
         if (!this._options.hasOwnProperty("clear")) this._options.clear = true;
@@ -74,13 +75,17 @@ class CubemapFramebuffer
         }
 
         if (!this._options.hasOwnProperty("filter")) this._options.filter = CGL.Texture.FILTER_LINEAR;
+        if (!this._options.hasOwnProperty("wrap")) this._options.wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+        console.log("cubemapframebuffer created");
 
         this.texture = new CubemapTexture(this._cgl, {
             "width": this.width,
             "height": this.height,
             "isFloatingPointTexture": true,
-            "filter": CGL.Texture.FILTER_LINEAR,
-            "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+            "filter": this._options.filter,
+            "wrap": this._options.wrap,
+            "name": this.name + " cubemaptexture"
         });
 
         this.initializeRenderbuffers();
@@ -152,7 +157,7 @@ class CubemapFramebuffer
         this.width = Math.min(this.width, this._cgl.maxTexSize);
         this.height = Math.min(this.height, this._cgl.maxTexSize);
 
-        CGL.profileData.profileFrameBuffercreate++;
+        this._cgl.profileData.profileFrameBuffercreate++;
 
         if (this._framebuffer)
         {
@@ -286,7 +291,7 @@ class CubemapFramebuffer
 
     renderEnd()
     {
-        CGL.profileData.profileFramebuffer++;
+        this._cgl.profileData.profileFramebuffer++;
 
         if (this._cgl.glVersion !== 1)
         {
@@ -301,6 +306,11 @@ class CubemapFramebuffer
         this._cgl.popFrameBuffer();
 
         this._cgl.resetViewPort();
+    }
+
+    updateMipMap()
+    {
+        if (this.texture) this.texture.updateMipMap();
     }
 }
 

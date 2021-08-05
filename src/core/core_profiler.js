@@ -1,12 +1,13 @@
 import { now } from "./timer";
 import { Log } from "./log";
 
-const Profiler = function ()
+const Profiler = function (patch)
 {
+    this.startFrame = patch.getFrameNum();
+
     let items = {};
     let currentId = null;
     let currentStart = 0;
-
 
     this.getItems = function ()
     {
@@ -49,6 +50,12 @@ const Profiler = function ()
                 };
             }
 
+            // this.startFrame = patch.getFrameNum();
+            if (items[object.id].lastFrame != patch.getFrameNum())
+            {
+                items[object.id].numTriggers = 0;
+            }
+            items[object.id].lastFrame = patch.getFrameNum();
             items[object.id].numTriggers++;
             items[object.id].opid = object.parent.id;
             items[object.id].title = object.parent.name + "." + object.name;

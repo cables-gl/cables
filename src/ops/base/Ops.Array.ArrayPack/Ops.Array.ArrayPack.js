@@ -1,52 +1,57 @@
-const outArr=op.outArray("Result");
+const outArr = op.outArray("Result");
 
-const NUM_PORTS=8;
-const inArrPorts=[];
+const NUM_PORTS = 8;
+const inArrPorts = [];
 
-var showingError=false;
+let showingError = false;
 
-for(var i=0;i<NUM_PORTS;i++)
+for (let i = 0; i < NUM_PORTS; i++)
 {
-    var p=op.inArray("Array "+i);
-    p.onChange=update;
+    let p = op.inArray("Array " + i);
+    p.onChange = update;
     inArrPorts.push(p);
 }
 
 function update()
 {
-    const arr=[];
-    const inArrays=[];
-    var i=0;
+    const arr = [];
+    const inArrays = [];
+    let i = 0;
 
-    for(i=0;i<NUM_PORTS;i++)
+    for (i = 0; i < NUM_PORTS; i++)
     {
-        var a=inArrPorts[i].get();
-        if(a)
+        let a = inArrPorts[i].get();
+        if (a)
         {
             inArrays.push(a);
-            if(a.length!=inArrays[0].length)
+            if (a.length != inArrays[0].length)
             {
-                if(!showingError)op.uiAttr({error:"Arrays do not have the same length !"});
+                if (!showingError)op.setUiError("arraylen", "Arrays do not have the same length !");
                 outArr.set(null);
-                showingError=true;
+                showingError = true;
                 return;
             }
         }
     }
 
-    if(inArrays.length===0)
+    if (inArrays.length === 0)
     {
-        if(!showingError)op.uiAttr({error:"No Valid Arrays"});
+        if (!showingError)op.setUiError("invalid", "No Valid Arrays");
+        // op.uiAttr({ "error": "No Valid Arrays" });
         outArr.set(null);
-        showingError=true;
+        showingError = true;
         return;
     }
 
-    if(showingError)op.uiAttr({error:null});
-    showingError=false;
+    if (showingError)
+    {
+        op.setUiError("arraylen", null);
+        op.setUiError("invalid", null);
+    }
+    showingError = false;
 
-    for(var j=0;j<inArrays[0].length;j++)
-        for(i=0;i<inArrays.length;i++)
+    for (let j = 0; j < inArrays[0].length; j++)
+        for (i = 0; i < inArrays.length; i++)
             arr.push(inArrays[i][j]);
 
     outArr.set(null);

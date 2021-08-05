@@ -1,24 +1,22 @@
-
 const
-    fn=op.inString("Filename",""),
-    path=op.outString("Path");
+    fn = op.inString("Filename", ""),
+    path = op.outString("Path");
 
-fn.onChange=update;
+fn.onChange = update;
 
 update();
 
 function update()
 {
-    var filename=fn.get();
+    let filename = fn.get();
 
-    if(filename==null || filename==undefined)
+    if (!fn.get())
     {
         path.set("");
         return;
     }
 
-    filename=op.patch.getAssetPath()+filename;
-    var url=op.patch.getFilePath(filename);
+    filename = op.patch.getAssetPath() + filename;
+    let url = op.patch.getFilePath(filename);
     path.set(url);
 }
-

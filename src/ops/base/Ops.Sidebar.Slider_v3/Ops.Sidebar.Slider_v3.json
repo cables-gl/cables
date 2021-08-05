@@ -5,69 +5,73 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min",
                 "group": "Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max",
                 "group": "Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Step",
                 "group": "Range",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 5,
+                "name": "Suffix"
+            },
+            {
+                "type": 0,
                 "name": "Grey Out",
                 "group": "Visibility",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Visible",
                 "group": "Visibility",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Input",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Set Default"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Default",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "childs"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

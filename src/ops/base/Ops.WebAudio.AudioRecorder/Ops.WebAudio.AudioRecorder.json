@@ -1,0 +1,178 @@
+{
+    "id": "b4d46521-a8f8-4d54-abdb-98f1bfb80edd",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1614686486102
+        },
+        {
+            "message": "Ops.User.simod.AudioRecorder renamed to Ops.WebAudio.AudioRecorder",
+            "author": "simod",
+            "date": 1614687911878
+        }
+    ],
+    "authorName": "simod",
+    "created": 1614686502999,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Audio In",
+                "objType": "audioNode"
+            },
+            {
+                "type": 1,
+                "name": "Start Recording",
+                "group": "Recording"
+            },
+            {
+                "type": 1,
+                "name": "Stop Recording",
+                "group": "Recording"
+            },
+            {
+                "type": 0,
+                "name": "Input Gain",
+                "group": "Recording",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Start Playback",
+                "group": "Playback"
+            },
+            {
+                "type": 1,
+                "name": "Stop Playback",
+                "group": "Playback"
+            },
+            {
+                "type": 1,
+                "name": "Clear Buffer",
+                "group": "Playback"
+            },
+            {
+                "type": 0,
+                "name": "Playback Gain",
+                "group": "Playback",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loop Playback",
+                "group": "Playback",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Download .wav File"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Audio Out",
+                "objType": "audioNode"
+            },
+            {
+                "type": 2,
+                "name": "Recorded Audio Out",
+                "objType": "audioNode"
+            },
+            {
+                "type": 0,
+                "name": "Is Recording",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Is Playing Back",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
+                "name": "State"
+            },
+            {
+                "type": 2,
+                "name": "AudioBuffer Out",
+                "objType": "audioBuffer"
+            }
+        ],
+        "name": "Ops.WebAudio.AudioRecorder"
+    },
+    "summary": "record, playback and download audio",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Audio In",
+                "text": "audio input"
+            },
+            {
+                "name": "Start Recording",
+                "text": "click/trigger to start recording"
+            },
+            {
+                "name": "Stop Recording",
+                "text": "click/trigger to stop recording"
+            },
+            {
+                "name": "Input Gain",
+                "text": "volume of incoming audio"
+            },
+            {
+                "name": "Start Playback",
+                "text": "click/trigger to start playback"
+            },
+            {
+                "name": "Stop Playback",
+                "text": "click/trigger to stop playback"
+            },
+            {
+                "name": "Clear Buffer",
+                "text": "click/trigger to clear buffer (revert to \"idling\" state)"
+            },
+            {
+                "name": "Playback Gain",
+                "text": "volume of recorded audio playback"
+            },
+            {
+                "name": "Loop Playback",
+                "text": "check to loop the playback of the recorded audio"
+            },
+            {
+                "name": "Download .wav File",
+                "text": "click/trigger to download the recorded file"
+            },
+            {
+                "name": "Audio Out",
+                "text": "audio output, pass through for incoming signal"
+            },
+            {
+                "name": "Recorded Audio Out",
+                "text": "output of the recorded audio"
+            },
+            {
+                "name": "Is Recording",
+                "text": "true if currently recording"
+            },
+            {
+                "name": "Is Playing Back",
+                "text": "true if currently playing back"
+            },
+            {
+                "name": "State",
+                "text": "one of 5 states: \"idling\", \"recording\", \"processing\", \"ready\", \"playing\""
+            },
+            {
+                "name": "AudioBuffer Out",
+                "text": "audiobuffer output"
+            }
+        ]
+    }
+}

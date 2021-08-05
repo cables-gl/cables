@@ -7,7 +7,6 @@ function clamp(val, min, max)
     return Math.min(Math.max(val, min), max);
 }
 
-
 const inTrigger = op.inTrigger("Trigger In");
 const inCastShadow = op.inBool("Cast Shadow", true);
 const inReceiveShadow = op.inBool("Receive Shadow", true);
@@ -78,7 +77,6 @@ inAlgorithm.onChange = () =>
     setAlgorithmGreyouts();
 };
 
-
 function setAlgorithmGreyouts()
 {
     if (!inReceiveShadow.get())
@@ -105,9 +103,7 @@ inSamples.onChange = () =>
     shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 };
 
-
 const outTrigger = op.outTrigger("Trigger Out");
-
 
 const createVertexHead = (n, type) =>
 {
@@ -237,7 +233,7 @@ function createModuleShaders()
 }
 
 // * SHADOW PASS MODULE *
-const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier");
+const shadowShaderModule = new CGL.ShaderModifier(cgl, "shadowPassModifier_" + op.id);
 shadowShaderModule.addModule({
     "name": "MODULE_COLOR",
     // "priority": -2,
@@ -283,14 +279,12 @@ let srcBodyVert = srcBodyVertBase;
 let srcHeadFrag = srcHeadFragBase;
 let srcBodyFrag = srcBodyFragBase;
 
-
 // * MAIN PASS MODULE *
-const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule");
+const shaderModule = new CGL.ShaderModifier(cgl, "shadowModule_" + op.id);
 shaderModule.define("SAMPLE_AMOUNT", "float(" + clamp(Number(inSamples.get()), 1, 16).toString() + ")");
 shaderModule.toggleDefine("RECEIVE_SHADOW", inReceiveShadow);
 
 algorithms.forEach((alg) => shaderModule.toggleDefine("MODE_" + alg.toUpperCase(), alg === inAlgorithm.get()));
-
 
 const hasShadowMap = [];
 const hasShadowCubemap = [];
@@ -322,11 +316,10 @@ function createUniforms()
     {
         const light = cgl.frameStore.lightStack[i];
 
-
         shaderModule.addUniformStructFrag("MOD_Light", "MOD_light" + i, [
             { "type": "3f", "name": "position", "v1": null },
             { "type": "2i", "name": "typeCastShadow", "v1": null },
-            { "type": "4f", "name": "shadowProperties", "v1": null },
+            { "type": "4f", "name": "shadowProperties", "v1": [light.nearFar[0], light.nearFar[1], 512, light.shadowBias] },
             { "type": "f", "name": "shadowStrength", "v1": light.shadowStrength },
         ]);
 
@@ -357,7 +350,6 @@ function setUniforms()
 {
     if (STATE.updating) return;
     const receiveShadow = inReceiveShadow.get();
-
 
     for (let i = 0; i < cgl.frameStore.lightStack.length; i += 1)
     {
@@ -405,7 +397,6 @@ function setUniforms()
             ]);
 
             if (light.type === "point") shaderModule.setUniformValue("MOD_camPos", [_tempCamPosMatrix[12], _tempCamPosMatrix[13], _tempCamPosMatrix[14]]);
-
 
             if (hasShadowMap[i])
             {
@@ -458,7 +449,6 @@ function setUniforms()
     }
 }
 
-
 function updateShader()
 {
     if (cgl.frameStore.lightStack.length !== STATE.lastLength)
@@ -481,7 +471,6 @@ outTrigger.onLinkChanged = function ()
 };
 
 const _tempCamPosMatrix = mat4.create();
-
 
 inTrigger.onTriggered = () =>
 {
@@ -531,7 +520,6 @@ inTrigger.onTriggered = () =>
         outTrigger.trigger();
     }
 };
-
 
 function checkUiErrors()
 {

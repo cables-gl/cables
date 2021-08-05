@@ -22,27 +22,41 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "In Trigger"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Cubemap"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Equirectangular",
+                "group": "Options",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "group": "Options",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "group": "Options",
+                "subType": "integer"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Out Trigger"
             },
             {
-                "type": "2",
-                "name": "Cubemap Projection"
+                "type": 2,
+                "name": "Cubemap Projection",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.CubeMap.CubemapToEquirectangularTexture"
@@ -55,6 +69,10 @@
     "docs": {
         "ports": [
             {
+                "name": "In Trigger",
+                "text": "trigger input"
+            },
+            {
                 "name": "Cubemap",
                 "text": "cubemap to visualize"
             },
@@ -63,8 +81,16 @@
                 "text": "visualisation mode: switch between folded cube and equirectangular"
             },
             {
-                "name": "Refresh",
-                "text": "refresh input"
+                "name": "Width",
+                "text": "width of the resulting texture"
+            },
+            {
+                "name": "Height",
+                "text": "height of the resulting texture"
+            },
+            {
+                "name": "Out Trigger",
+                "text": "trigger out"
             },
             {
                 "name": "Cubemap Projection",

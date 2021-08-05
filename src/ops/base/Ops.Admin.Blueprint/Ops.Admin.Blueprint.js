@@ -1,38 +1,168 @@
 const patchIdIn = op.inString("externalPatchId", "");
 const subPatchIdIn = op.inString("subPatchId", "");
 const activeIn = op.inBool("active", false);
-const loadingOut = op.outBool("loading");
+const gotoIn = op.inTriggerButton("Open patch");
+const portsData = op.inString("portsData", "{}");
 
+const loadingOut = op.outBool("loading", false);
+let loadingId = null;
 patchIdIn.setUiAttribs({ "hidePort": true });
 subPatchIdIn.setUiAttribs({ "hidePort": true });
+portsData.setUiAttribs({ "hidePort": true });
+portsData.setUiAttribs({ "hideParam": true });
+
+gotoIn.setUiAttribs({ "greyout": true });
+gotoIn.setUiAttribs({ "hidePort": true });
+
+let wasPasted = false;
+
+if (op.patch.isEditorMode())
+{
+    gotoIn.onTriggered = function ()
+    {
+        if (CABLES && CABLES.sandbox && CABLES.sandbox.getCablesUrl())
+        {
+            window.open(CABLES.sandbox.getCablesUrl() + "/edit/" + patchIdIn.get(), "_blank");
+        }
+    };
+
+    patchIdIn.onChange = function ()
+    {
+        if (patchIdIn.get())
+        {
+            gotoIn.setUiAttribs({ "greyout": false });
+        }
+        else
+        {
+            gotoIn.setUiAttribs({ "greyout": true });
+        }
+    };
+}
+
+const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, portsData.id, loadingOut.id, gotoIn.id];
+
+if (!activeIn.get())
+{
+    op.setUiError("inactive", "blueprint is inactive", 0);
+}
+
+const restorePorts = () =>
+{
+    const oldPorts = getOldPorts();
+    const portInKeys = Object.keys(oldPorts.portsIn);
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    for (let i = 0; i < portInKeys.length; i++)
+    {
+        const oldPortIn = oldPorts.portsIn[portInKeys[i]];
+        const newPort = op.addInPort(new CABLES.Port(op, oldPortIn.name, oldPortIn.type));
+        if (!wasPasted && Array.isArray(oldPortIn.links))
+        {
+            oldPortIn.links.forEach((link) =>
+            {
+                let parent = op.patch.getOpById(link.objOut);
+                if (parent)
+                {
+                    const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                    if (newLink) newLink.ignoreInSerialize = true;
+                }
+                else
+                {
+                    parent = op.patch.ops.find(subOp =>
+                        subOp.storage &&
+                        subOp.storage.blueprint &&
+                        subOp.storage.blueprint.originalOpId == link.objOut);
+                    if (parent)
+                    {
+                        const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                        if (newLink) newLink.ignoreInSerialize = true;
+                    }
+                }
+            });
+        }
+        if (!newPort.isLinked())
+        {
+            newPort.set(oldPortIn.value);
+        }
+        newPort.onLinkChanged = savePortData;
+
+        if (oldPortIn.title)
+        {
+            newPort.setUiAttribs({ "title": oldPortIn.title });
+        }
+    }
+
+    const portOutKeys = Object.keys(oldPorts.portsOut);
+    for (let i = 0; i < portOutKeys.length; i++)
+    {
+        const oldPortOut = oldPorts.portsOut[portOutKeys[i]];
+        const newPort = op.addOutPort(new CABLES.Port(op, oldPortOut.name, oldPortOut.type));
+        if (!wasPasted && Array.isArray(oldPortOut.links))
+        {
+            oldPortOut.links.forEach((link) =>
+            {
+                let parent = op.patch.getOpById(link.objIn);
+                if (parent)
+                {
+                    const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                    if (newLink) newLink.ignoreInSerialize = true;
+                }
+                else
+                {
+                    parent = op.patch.ops.find(subOp =>
+                        subOp.storage &&
+                        subOp.storage.blueprint &&
+                        subOp.storage.blueprint.originalOpId == link.objIn);
+                    if (parent)
+                    {
+                        const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                        if (newLink) newLink.ignoreInSerialize = true;
+                    }
+                }
+            });
+            if (!newPort.isLinked())
+            {
+                newPort.set(oldPortOut.value);
+            }
+            newPort.onLinkChanged = savePortData;
+
+            if (oldPortOut.title)
+            {
+                newPort.setUiAttribs({ "title": oldPortOut.title });
+            }
+        }
+    }
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
+};
 
 activeIn.onChange = () =>
 {
-    if (activeIn.get())
+    if (!loadingOut.get())
     {
-        update();
-    }
-    else
-    {
-        removeImportedOps();
+        if (activeIn.get())
+        {
+            op.setUiError("inactive", null);
+            update();
+        }
+        else
+        {
+            op.setUiError("inactive", "blueprint is inactive", 0);
+            removeImportedOps();
+            if (wasPasted) wasPasted = false;
+        }
     }
 };
 
-op.onLoadedValueSet = () =>
+op.onLoaded = () =>
 {
-    if (activeIn.get())
+    if (op.uiAttribs)
     {
-        update();
+        wasPasted = op.uiAttribs.pasted;
     }
-    else
-    {
-        removeImportedOps();
-    }
+    cleanupPorts();
+    restorePorts();
 };
 
 op.onDelete = removeImportedOps;
-
-let blueprintId = op.id;
 
 function update()
 {
@@ -40,48 +170,108 @@ function update()
     const patch = op.patch;
     const patchId = patchIdIn.get();
     const subPatchId = subPatchIdIn.get();
-    blueprintId = patchId + "-" + subPatchId;
+    const blueprintId = patchId + "-" + subPatchId;
+
+    loadingId = op.patch.loading.start("blueprint", blueprintId);
+
     if (patch.isEditorMode())
     {
         const options = {
             "blueprintId": blueprintId,
             "patchId": patchId,
-            "subPatchId": subPatchId
+            "subPatchId": subPatchId,
+            "opId": op.id,
+            "blueprintSubpatchId": op.uiAttribs.subPatch
         };
-        CABLES.sandbox.getBlueprintOps(options, (err, blueprintData) =>
+
+        CABLES.sandbox.getBlueprintOps(options, (err, data) =>
         {
             op.setUiError("fetchOps", null);
             if (!err)
             {
                 removeImportedOps();
+                const blueprintData = {};
+                blueprintData.ops = data.msg.ops;
                 blueprintData.settings = op.patch.settings;
-                blueprintData.ops = blueprintData.msg;
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
             else
             {
-                op.setUiError("fetchOps", err);
+                if (err.code === 403)
+                {
+                    op.setUiError("fetchOps", "you do not have permission to use this blueprint");
+                }
+                else
+                {
+                    op.setUiError("fetchOps", "error fetching blueprint, code: " + err.code + " (" + err.msg + ")");
+                }
             }
             loadingOut.set(false);
+            op.patch.loading.finished(loadingId);
+            if (wasPasted)
+            {
+                wasPasted = false;
+            }
         });
     }
-    else
+    else if (document.location.href.indexOf("cables.gl") > 0)
     {
-        const blueprintUrl = "js/" + blueprintId + ".json";
+        // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
+        let blueprintUrl = "https://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
+        if (document.location.hostname.indexOf("dev") >= 0)
+        {
+            blueprintUrl = "https://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
+        }
         CABLES.ajax(
             blueprintUrl,
             function (err, data)
             {
                 if (!err)
                 {
-                    const blueprint = JSON.parse(data);
-                    deSerializeBlueprint(blueprint, subPatchId, false);
+                    const blueprintData = JSON.parse(data);
+                    blueprintData.settings = op.patch.settings;
+                    blueprintData.ops = blueprintData.msg.ops;
+                    deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else
                 {
                     op.error("failed to load blueprint from", blueprintUrl, err);
                 }
                 loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
+                if (wasPasted)
+                {
+                    wasPasted = false;
+                }
+            }
+        );
+    }
+    else
+    {
+        let exportId = op.id;
+        if (op.storage && op.storage.blueprint && op.storage.blueprint.originalOpId) exportId = op.storage.blueprint.originalOpId;
+        const blueprintUrl = op.patch.config.prefixJsPath + "js/" + exportId + ".json";
+        CABLES.ajax(
+            blueprintUrl,
+            function (err, data)
+            {
+                if (!err)
+                {
+                    const blueprintData = JSON.parse(data);
+                    blueprintData.settings = op.patch.settings;
+                    blueprintData.ops = blueprintData.ops;
+                    deSerializeBlueprint(blueprintData, subPatchId, false);
+                }
+                else
+                {
+                    op.error("failed to load blueprint from", blueprintUrl, err);
+                }
+                loadingOut.set(false);
+                op.patch.loading.finished(loadingId);
+                if (wasPasted)
+                {
+                    wasPasted = false;
+                }
             }
         );
     }
@@ -94,11 +284,11 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
         op.patch.config.onPatchLoaded = function (patch)
         {
             op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find((op) =>
-                op.uiAttribs &&
-                op.uiAttribs.blueprint &&
-                op.uiAttribs.blueprint.isParentSubPatch &&
-                op.uiAttribs.blueprint.id == blueprintId
+            const parentSubPatch = patch.ops.find(subOp =>
+                subOp.storage &&
+                subOp.storage.blueprint &&
+                subOp.storage.blueprint.isParentSubPatch &&
+                subOp.storage.blueprint.blueprintOpId == op.id
             );
             if (parentSubPatch)
             {
@@ -112,8 +302,9 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
             gui.serverOps.loadProjectLibs(data, () =>
             {
                 op.patch.deSerialize(data, false);
-                gui.patchView.setCurrentSubPatch(subPatchId);
-                gui.patchView.setCurrentSubPatch(0);
+                const originalSubPatchId = gui.patchView.getCurrentSubPatch();
+                // gui.patchView.setCurrentSubPatch(subPatchId);
+                gui.patchView.setCurrentSubPatch(originalSubPatchId);
             });
         }
         else
@@ -125,22 +316,71 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
 function removeImportedOps()
 {
-    const opsToDelete = [];
-    op.patch.ops.forEach((subOp) =>
+    const parentSubPatch = op.patch.ops.find(subOp =>
+        subOp.storage &&
+        subOp.storage.blueprint &&
+        subOp.storage.blueprint.isParentSubPatch &&
+        subOp.storage.blueprint.blueprintOpId == op.id
+    );
+    if (parentSubPatch)
     {
-        if (subOp.uiAttribs.blueprint && subOp.uiAttribs.blueprint.id === blueprintId)
-        {
-            opsToDelete.push(subOp.id);
-        }
-    });
-    opsToDelete.forEach((toDelete) =>
-    {
-        if (op.patch.getOpById(toDelete))
-        {
-            op.patch.deleteOp(toDelete);
-        }
-    });
+        op.patch.deleteOp(parentSubPatch.id, parentSubPatch.storage.blueprint.blueprintOpId);
+    }
 }
+
+const getOldPorts = () =>
+{
+    const oldPorts = JSON.parse(portsData.get());
+    let oldPortsOut = {};
+    if (oldPorts.portsOut)
+    {
+        oldPortsOut = oldPorts.portsOut;
+    }
+    let oldPortsIn = {};
+    if (oldPorts.portsIn)
+    {
+        oldPortsIn = oldPorts.portsIn;
+    }
+    return { "portsIn": oldPortsIn, "portsOut": oldPortsOut };
+};
+
+const cleanupPorts = () =>
+{
+    const removeInPorts = [];
+    const removeOutPorts = [];
+
+    op.portsIn.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            removeInPorts.push(port);
+        }
+    });
+    op.portsOut.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            removeOutPorts.push(port);
+        }
+    });
+
+    removeInPorts.forEach((port) =>
+    {
+        removeInPort(port);
+        op.fireEvent("onPortRemoved", {});
+    });
+
+    removeOutPorts.forEach((port) =>
+    {
+        removeOutPort(port);
+        op.fireEvent("onPortRemoved", {});
+    });
+
+    if (removeOutPorts.length > 0 || removeInPorts.length > 0)
+    {
+        op.fireEvent("onUiAttribsChange", {});
+    }
+};
 
 const removeInPort = (port) =>
 {
@@ -170,163 +410,210 @@ const removeOutPort = (port) =>
 
 function setupPorts(parentSubPatch)
 {
-    const dataPort = parentSubPatch.portsIn.find((port) => port.name === "dataStr");
-    if (!dataPort) return;
-    if (!dataPort.get()) return;
+    const subPatchDataPort = parentSubPatch.portsIn.find(port => port.name === "dataStr");
+    if (!subPatchDataPort) return;
+    if (!subPatchDataPort.get()) return;
 
-    const oldLinksIn = {};
-    const oldValuesIn = {};
-    const oldLinksOut = {};
+    const oldPorts = getOldPorts();
+    cleanupPorts();
 
-    const removeInPorts = [];
-    const removeOutPorts = [];
-
-    const protectedPorts = [patchIdIn.id, subPatchIdIn.id, activeIn.id, loadingOut.id];
-
-    op.portsIn.forEach((port) =>
-    {
-        if (!protectedPorts.includes(port.id))
-        {
-            oldLinksIn[port.name] = [];
-            oldValuesIn[port.name] = port.get();
-            port.links.forEach((link) =>
-            {
-                const linkInfo = {
-                    "op": link.portOut.parent,
-                    "portName": link.portOut.name
-                };
-                oldLinksIn[port.name].push(linkInfo);
-            });
-            removeInPorts.push(port);
-        }
-    });
-    op.portsOut.forEach((port) =>
-    {
-        if (!protectedPorts.includes(port.id))
-        {
-            oldLinksOut[port.name] = [];
-            port.links.forEach((link) =>
-            {
-                const linkInfo = {
-                    "op": link.portIn.parent,
-                    "portName": link.portIn.name
-                };
-                oldLinksOut[port.name].push(linkInfo);
-            });
-            removeOutPorts.push(port);
-        }
-    });
-    /*
-    removeInPorts.forEach((port) =>
-    {
-        removeInPort(port);
-    });
-
-    removeOutPorts.forEach((port) =>
-    {
-        removeOutPort(port);
-    });
-    if (removeOutPorts.length > 0 || removeInPorts.length > 0)
-    {
-        op.fireEvent("onUiAttribsChange", {});
-        op.fireEvent("onPortRemoved", {});
-    }
-    */
-
-    const data = JSON.parse(dataPort.get());
-    const ports = data.ports || [];
-    const portsOut = data.portsOut || [];
+    const subPatchData = JSON.parse(subPatchDataPort.get());
+    const subPatchPortsIn = subPatchData.ports || [];
+    const subPatchPortsOut = subPatchData.portsOut || [];
     let i = 0;
 
-    for (i = 0; i < ports.length; i++)
+    if (op.patch.isEditorMode()) CABLES.UI.undo.pause();
+    for (i = 0; i < subPatchPortsIn.length; i++)
     {
-        if (!op.getPortByName(ports[i].name))
+        if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = parentSubPatch.portsIn.find((port) => port.name == ports[i].name);
-            const newPort = op.addInPort(new CABLES.Port(op, ports[i].name, ports[i].type));
-            /*
-            if (oldValuesIn[ports[i].name])
-            {
-                newPort.set(oldValuesIn[ports[i].name]);
-            }
-            if (oldLinksIn[ports[i].name])
-            {
-                oldLinksIn[ports[i].name].forEach((link) =>
-                {
-                    op.patch.link(op, ports[i].name, link.op, link.portName);
-                });
-            }
-            */
+            const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
+            const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
+
             if (subPatchPort)
             {
-                switch (ports[i].type)
+                switch (subPatchPort.type)
                 {
                 case CABLES.OP_PORT_TYPE_FUNCTION:
                     newPort.onTriggered = () =>
                     {
-                        // subPatchPort.onTriggered = undefined;
-                        // subPatchPort.links = [
-                        //    { "activity": function () {} }
-                        // ];
-                        subPatchPort.trigger();
+                        subPatchPort.onTriggered();
                     };
                     break;
                 default:
                     newPort.onChange = () =>
                     {
                         subPatchPort.set(newPort.get());
+                        savePortData();
                     };
                 }
             }
 
-            newPort.ignoreValueSerialize = true;
-            newPort.setUiAttribs({ "editableTitle": true });
-            if (ports[i].title)
+            if (oldPorts.portsIn.hasOwnProperty(newPort.name))
             {
-                newPort.setUiAttribs({ "title": ports[i].title });
+                if (!wasPasted && Array.isArray(oldPorts.portsIn[newPort.name].links))
+                {
+                    oldPorts.portsIn[newPort.name].links.forEach((link) =>
+                    {
+                        let parent = op.patch.getOpById(link.objOut);
+                        if (parent)
+                        {
+                            const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                            if (newLink) newLink.ignoreInSerialize = true;
+                        }
+                        else
+                        {
+                            parent = op.patch.ops.find(subOp =>
+                                subOp.storage &&
+                                subOp.storage.blueprint &&
+                                subOp.storage.blueprint.originalOpId == link.objOut);
+                            if (parent)
+                            {
+                                const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
+                                if (newLink) newLink.ignoreInSerialize = true;
+                            }
+                        }
+                    });
+                }
+                if (!newPort.isLinked())
+                {
+                    newPort.set(oldPorts.portsIn[newPort.name].value);
+                }
+            }
+            newPort.onLinkChanged = savePortData;
+
+            if (subPatchPort.title)
+            {
+                newPort.setUiAttribs({ "title": subPatchPortsIn[i].title });
             }
         }
     }
 
-    for (i = 0; i < portsOut.length; i++)
+    for (i = 0; i < subPatchPortsOut.length; i++)
     {
-        if (!op.getPortByName(portsOut[i].name))
+        if (!op.getPortByName(subPatchPortsOut[i].name))
         {
-            const subPatchPort = parentSubPatch.portsOut.find((port) => port.name == portsOut[i].name);
-            const newPortOut = op.addOutPort(new CABLES.Port(op, portsOut[i].name, portsOut[i].type));
-            /*
-            if (oldLinksOut[portsOut[i].name])
+            const patchPortIn = parentSubPatch.portsIn.find(port => port.name === "patchId");
+            const patchOutputOP = op.patch.getSubPatchOp(patchPortIn.value, "Ops.Ui.PatchOutput");
+            if (patchOutputOP.portsIn)
             {
-                oldLinksOut[portsOut[i].name].forEach((link) =>
-                {
-                    op.patch.link(op, portsOut[i].name, link.op, link.portName);
-                });
-            }
-            */
-            if (subPatchPort)
-            {
-                switch (subPatchPort.type)
-                {
-                case CABLES.OP_PORT_TYPE_FUNCTION:
-                    subPatchPort.onTriggered = () =>
-                    {
-                        newPortOut.trigger();
-                    };
-                    break;
-                default:
-                    subPatchPort.onChange = () =>
-                    {
-                        newPortOut.set(subPatchPort.get());
-                    };
-                }
-            }
-            newPortOut.ignoreValueSerialize = true;
-            newPortOut.setUiAttribs({ "editableTitle": true });
+                const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
+                const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
 
-            if (portsOut[i].title)
-            {
-                newPortOut.setUiAttribs({ "title": portsOut[i].title });
+                if (subPatchPort)
+                {
+                    switch (subPatchPort.type)
+                    {
+                    case CABLES.OP_PORT_TYPE_FUNCTION:
+                        subPatchPort.onTriggered = () =>
+                        {
+                            newPort.trigger();
+                        };
+                        break;
+                    default:
+                        subPatchPort.onChange = () =>
+                        {
+                            newPort.set(subPatchPort.get());
+                            savePortData();
+                        };
+                    }
+                    newPort.set(subPatchPort.get());
+                }
+
+                if (oldPorts.portsOut.hasOwnProperty(newPort.name))
+                {
+                    if (!wasPasted && Array.isArray(oldPorts.portsOut[newPort.name].links))
+                    {
+                        oldPorts.portsOut[newPort.name].links.forEach((link) =>
+                        {
+                            let parent = op.patch.getOpById(link.objIn);
+                            if (parent)
+                            {
+                                const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                                if (newLink) newLink.ignoreInSerialize = true;
+                            }
+                            else
+                            {
+                                parent = op.patch.ops.find(subOp =>
+                                    subOp.storage &&
+                                    subOp.storage.blueprint &&
+                                    subOp.storage.blueprint.originalOpId == link.objIn);
+                                if (parent)
+                                {
+                                    const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
+                                    if (newLink) newLink.ignoreInSerialize = true;
+                                }
+                            }
+                        });
+                    }
+                    if (!newPort.isLinked())
+                    {
+                        newPort.set(oldPorts.portsOut[newPort.name].value);
+                    }
+                }
+                newPort.onLinkChanged = savePortData;
+
+                if (subPatchPort.title)
+                {
+                    newPort.setUiAttribs({ "title": subPatchPortsOut[i].title });
+                }
             }
         }
     }
+    savePortData();
+    if (op.patch.isEditorMode()) CABLES.UI.undo.resume();
+}
+
+function savePortData()
+{
+    const newPortsData = { "portsIn": {}, "portsOut": {} };
+    op.portsIn.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            const portData = {
+                "name": port.name,
+                "title": port.title,
+                "value": port.get(),
+                "type": port.type,
+                "links": []
+            };
+            port.links.forEach((link) =>
+            {
+                link.ignoreInSerialize = true;
+                const linkData = {
+                    "objOut": link.portOut.parent.id,
+                    "portOut": link.portOut.name
+                };
+                portData.links.push(linkData);
+            });
+            newPortsData.portsIn[port.name] = portData;
+        }
+    });
+
+    op.portsOut.forEach((port) =>
+    {
+        if (!protectedPorts.includes(port.id))
+        {
+            const portData = {
+                "name": port.name,
+                "title": port.title,
+                "value": port.get(),
+                "type": port.type,
+                "links": []
+            };
+            port.links.forEach((link) =>
+            {
+                link.ignoreInSerialize = true;
+                const linkData = {
+                    "objIn": link.portIn.parent.id,
+                    "portIn": link.portIn.name
+                };
+                portData.links.push(linkData);
+            });
+            newPortsData.portsOut[port.name] = portData;
+        }
+    });
+    const serializedPortsData = JSON.stringify(newPortsData);
+    portsData.set(serializedPortsData);
 }

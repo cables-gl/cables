@@ -9,15 +9,15 @@ const inStrRule3 = op.inString("Rule 3");
 const inStrConstant4 = op.inString("Constant 4", "z");
 const inStrRule4 = op.inString("Rule 4");
 
-inStrAxiom.hidePort();
-inStrConstant1.hidePort();
-inStrRule1.hidePort();
-inStrConstant2.hidePort();
-inStrRule2.hidePort();
-inStrConstant3.hidePort();
-inStrRule3.hidePort();
-inStrConstant4.hidePort();
-inStrRule4.hidePort();
+inStrAxiom.setUiAttribs({ "hidePort": true });
+inStrConstant1.setUiAttribs({ "hidePort": true });
+inStrRule1.setUiAttribs({ "hidePort": true });
+inStrConstant2.setUiAttribs({ "hidePort": true });
+inStrRule2.setUiAttribs({ "hidePort": true });
+inStrConstant3.setUiAttribs({ "hidePort": true });
+inStrRule3.setUiAttribs({ "hidePort": true });
+inStrConstant4.setUiAttribs({ "hidePort": true });
+inStrRule4.setUiAttribs({ "hidePort": true });
 
 const inIterations = op.inValueInt("Iterations", 1);
 const inStepLength = op.inValue("Step length", 1.0);

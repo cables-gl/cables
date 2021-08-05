@@ -6,7 +6,7 @@ function clamp(value, min, max)
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 // input ports
-const audioBufferPort = op.inObject("Audio Buffer");
+const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const inTrigger = op.inTriggerButton("Play Sample");
 const startTimePort = op.inValue("Start Time", 0);
 const offsetPort = op.inValue("Offset", 0);
@@ -16,7 +16,7 @@ const detunePort = op.inValue("Detune", 0);
 op.setPortGroup("Time Controls", [startTimePort, offsetPort]);
 op.setPortGroup("Miscellaneous", [playbackRatePort, detunePort]);
 // output ports
-const audioOutPort = op.outObject("Audio Out");
+const audioOutPort = op.outObject("Audio Out", null, "audioNode");
 const outPlaying = op.outBool("Is Playing", false);
 
 if (!audioBufferPort.isLinked())
@@ -219,14 +219,9 @@ audioBufferPort.onChange = function ()
 {
     if (audioBufferPort.get())
     {
-        if (!(audioBufferPort.get() instanceof AudioBuffer))
-        {
-            op.setUiError("noAudioBuffer", "The passed object is not an AudioBuffer. You have to pass an AudioBuffer to be able to play back sound.", 2);
-        }
-        else
+        if ((audioBufferPort.get() instanceof AudioBuffer))
         {
             createAudioBufferSources();
-            op.setUiError("noAudioBuffer", null);
         }
     }
     else
@@ -241,7 +236,7 @@ audioBufferPort.onChange = function ()
             }
             src.bufferSource = null;
         });
-        op.setUiError("noAudioBuffer", null);
+
         outPlaying.set(false);
     }
 };

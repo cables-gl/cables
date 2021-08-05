@@ -1,4 +1,3 @@
-import { profileData } from "./cgl_profiledata";
 import { uuid } from "../utils";
 import { Log } from "../log";
 
@@ -37,6 +36,7 @@ const Texture = function (__cgl, options)
     this.flip = true;
     this.flipped = false;
     this.shadowMap = false;
+    this.deleted = false;
     this.anisotropic = 0;
     this.filter = Texture.FILTER_NEAREST;
     this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
@@ -46,6 +46,7 @@ const Texture = function (__cgl, options)
     this.unpackAlpha = true;
     this._fromData = true;
     this.name = "unknown";
+
 
     if (options)
     {
@@ -69,9 +70,17 @@ const Texture = function (__cgl, options)
     if (!options.width) options.width = DEFAULT_TEXTURE_SIZE;
     if (!options.height) options.height = DEFAULT_TEXTURE_SIZE;
 
-    profileData.profileTextureNew++;
+    this._cgl.profileData.profileTextureNew++;
+
+    this._cgl.profileData.addHeavyEvent("texture created", this.name, options.width + "x" + options.height);
 
     this.setSize(options.width, options.height);
+    this.getInfoOneLine();
+};
+
+Texture.prototype.isFloatingPoint = function ()
+{
+    return this.textureType == Texture.TYPE_FLOAT;
 };
 
 /**
@@ -85,7 +94,18 @@ const Texture = function (__cgl, options)
 Texture.prototype.compareSettings = function (tex)
 {
     if (!tex) return false;
-    return tex.width == this.width && tex.height == this.height && tex.filter == this.filter && tex.wrap == this.wrap && tex.textureType == this.textureType && tex.unpackAlpha == this.unpackAlpha && tex.flip == this.flip;
+    return (
+        tex.width == this.width &&
+        tex.height == this.height &&
+        tex.filter == this.filter &&
+        tex.wrap == this.wrap &&
+        tex.textureType == this.textureType &&
+        tex.unpackAlpha == this.unpackAlpha &&
+        tex.anisotropic == this.anisotropic &&
+        tex.shadowMap == this.shadowMap &&
+        tex.texTarget == this.texTarget &&
+        tex.flip == this.flip
+    );
 };
 
 /**
@@ -145,16 +165,30 @@ Texture.prototype.setSize = function (w, h)
     this.width = w;
     this.height = h;
 
+
+    this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
+    // if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
+
+    // if (this._cgl.printError("cgltex before"))
+    // {
+    //     this.printInfo();
+    //     console.log((new Error()).stack);
+    // }
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
-    profileData.profileTextureResize++;
+    this._cgl.profileData.profileTextureResize++;
 
     const uarr = null;
 
-    if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
+    if (
+        this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_LINEAR &&
+         (!this._cgl.gl.getExtension("OES_texture_float_linear"))
+    )
     {
         console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
         this.filter = Texture.FILTER_NEAREST;
     }
+
 
     this._setFilter();
 
@@ -206,16 +240,12 @@ Texture.prototype.setSize = function (w, h)
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
 
-    if (this._cgl.printError("cgltex"))
-    {
-        this.printInfo();
-        console.log((new Error()).stack);
-    }
-
-    // if( ( this._cgl.glVersion==2 || this.isPowerOfTwo()) && this.filter==Texture.FILTER_MIPMAP)
+    // if (this._cgl.printError("cgltex"))
     // {
-    //     this._cgl.gl.generateMipmap(this.texTarget);
+    //     this.printInfo();
+    //     console.log((new Error()).stack);
     // }
+
     this.updateMipMap();
 
     this._cgl.gl.bindTexture(this.texTarget, null);
@@ -259,7 +289,7 @@ Texture.prototype.updateMipMap = function ()
     if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == Texture.FILTER_MIPMAP)
     {
         this._cgl.gl.generateMipmap(this.texTarget);
-        profileData.profileGenMipMap++;
+        this._cgl.profileData.profileGenMipMap++;
     }
 };
 
@@ -303,6 +333,8 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.bindTexture(this.texTarget, null);
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+
+    this.getInfoOneLine();
 };
 
 /**
@@ -320,9 +352,10 @@ Texture.prototype.delete = function ()
         return;
     }
 
+    this.deleted = true;
     this.width = 0;
     this.height = 0;
-    profileData.profileTextureDelete++;
+    this._cgl.profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 };
 
@@ -356,6 +389,24 @@ Texture.prototype.getInfoReadable = function ()
     }
 
     return html;
+};
+
+Texture.prototype.getInfoOneLine = function ()
+{
+    let txt = "" + this.width + "x" + this.height;
+    if (this.textureType === CGL.Texture.TYPE_FLOAT) txt += " HDR";
+
+    if (this.filter === CGL.Texture.FILTER_NEAREST) txt += " nearest";
+    if (this.filter === CGL.Texture.FILTER_LINEAR) txt += " linear";
+    if (this.filter === CGL.Texture.FILTER_MIPMAP) txt += " mipmap";
+
+    if (this.wrap === CGL.Texture.WRAP_CLAMP_TO_EDGE) txt += " clamp";
+    if (this.wrap === CGL.Texture.WRAP_REPEAT) txt += " repeat";
+    if (this.wrap === CGL.Texture.WRAP_MIRRORED_REPEAT) txt += " repeatmir";
+
+    this.shortInfoString = txt;
+
+    return txt;
 };
 
 Texture.prototype.getInfo = function ()
@@ -473,6 +524,7 @@ Texture.prototype._setFilter = function ()
             }
         }
     }
+    this.getInfoOneLine();
 };
 
 
@@ -595,6 +647,96 @@ Texture.getRandomTexture = function (cgl)
     cgl.randomTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
 
     return cgl.randomTexture;
+};
+
+
+/**
+ * @function getBlackTexture
+ * @memberof Texture
+ * @static
+ * @description returns a reference to a black texture
+ * @return {Texture}
+ */
+Texture.getBlackTexture = function (cgl)
+{
+    if (!cgl)console.error("[getBlackTexture] no cgl!");
+    if (cgl.blackTexture) return cgl.blackTexture;
+
+    const size = 8;
+    const data = new Uint8Array(size * size * 4);
+
+    for (let x = 0; x < size * size; x++)
+    {
+        data[x * 4 + 0] = data[x * 4 + 1] = data[x * 4 + 2] = 0;
+        data[x * 4 + 3] = 255;
+    }
+
+    cgl.blackTexture = new Texture(cgl);
+    cgl.blackTexture.initFromData(data, size, size, Texture.FILTER_NEAREST, Texture.WRAP_REPEAT);
+
+    return cgl.blackTexture;
+};
+
+
+/**
+ * @function getEmptyCubemapTexture
+ * @memberof Texture
+ * @static
+ * @description returns an empty cubemap texture with rgba = [0, 0, 0, 0]
+ * @return {Texture}
+ */
+Texture.getEmptyCubemapTexture = function (cgl)
+{
+    const faces = [
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Y,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Y,
+        cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
+        cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
+    ];
+
+    const tex = cgl.gl.createTexture();
+    const target = cgl.gl.TEXTURE_CUBE_MAP;
+    const filter = Texture.FILTER_NEAREST;
+    const wrap = Texture.WRAP_CLAMP_TO_EDGE;
+    const width = 8;
+    const height = 8;
+
+    cgl.profileData.profileTextureNew++;
+
+    cgl.gl.bindTexture(target, tex);
+    cgl.profileData.profileTextureResize++;
+
+    for (let i = 0; i < 6; i += 1)
+    {
+        const data = new Uint8Array(8 * 8 * 4);
+
+        cgl.gl.texImage2D(faces[i], 0, cgl.gl.RGBA, 8, 8, 0, cgl.gl.RGBA, cgl.gl.UNSIGNED_BYTE, data);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MAG_FILTER, cgl.gl.NEAREST);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_MIN_FILTER, cgl.gl.NEAREST);
+
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_S, cgl.gl.CLAMP_TO_EDGE);
+        cgl.gl.texParameteri(target, cgl.gl.TEXTURE_WRAP_T, cgl.gl.CLAMP_TO_EDGE);
+    }
+
+
+    cgl.gl.bindTexture(target, null);
+
+    return {
+        "id": CABLES.uuid(),
+        tex,
+        "cubemap": tex,
+        width,
+        height,
+        filter,
+        wrap,
+        "unpackAlpha": true,
+        "flip": true,
+        "_fromData": true,
+        "name": "emptyCubemapTexture",
+        "anisotropic": 0,
+    };
 };
 
 /**

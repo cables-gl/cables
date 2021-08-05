@@ -1,20 +1,7 @@
 // * see framebuffer1
 
 import { Texture } from "./cgl_texture";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
-
-// const fbs = {
-//     Framebuffer2DrawTargetsDefault: null,
-//     Framebuffer2BlittingFramebuffer: null,
-//     Framebuffer2FinalFramebuffer: null,
-// };
-
-// var this.Framebuffer2DrawTargetsDefault = this.this.Framebuffer2DrawTargetsDefault;
-// var this.Framebuffer2BlittingFramebuffer = this.this.Framebuffer2BlittingFramebuffer;
-// var this.Framebuffer2FinalFramebuffer = this.this.Framebuffer2FinalFramebuffer;
-
-// export { fbs };
 
 
 const Framebuffer2 = function (cgl, w, h, options)
@@ -33,6 +20,7 @@ const Framebuffer2 = function (cgl, w, h, options)
     this._colorRenderbuffers = [];
     this._drawTargetArray = [];
 
+
     if (!this.Framebuffer2BlittingFramebuffer) this.Framebuffer2BlittingFramebuffer = cgl.gl.createFramebuffer();
     if (!this.Framebuffer2FinalFramebuffer) this.Framebuffer2FinalFramebuffer = cgl.gl.createFramebuffer();
 
@@ -42,7 +30,11 @@ const Framebuffer2 = function (cgl, w, h, options)
         "isFloatingPointTexture": false,
     };
 
+    // this._cgl.printError("fb2 before");
+
     this.name = this._options.name || "unknown";
+
+    this._cgl.profileData.addHeavyEvent("framebuffer create", this.name);
 
     if (!this._options.hasOwnProperty("numRenderBuffers")) this._options.numRenderBuffers = 1;
     if (!this._options.hasOwnProperty("depth")) this._options.depth = true;
@@ -94,6 +86,8 @@ const Framebuffer2 = function (cgl, w, h, options)
     }
 
     if (cgl.aborted) return;
+
+    // this._cgl.printError("fb2 before size");
 
     this.setSize(w || defaultTexSize, h || defaultTexSize);
 };
@@ -155,6 +149,8 @@ Framebuffer2.prototype.delete = Framebuffer2.prototype.dispose = function ()
 
 Framebuffer2.prototype.setSize = function (w, h)
 {
+    this._cgl.profileData.addHeavyEvent("framebuffer resize", this.name);
+
     let i = 0;
     this._width = Math.floor(w);
     this._height = Math.floor(h);
@@ -164,7 +160,7 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // console.log("fb setsize", this._width, this._height, this);
 
-    profileData.profileFrameBuffercreate++;
+    this._cgl.profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
     {
@@ -200,10 +196,11 @@ Framebuffer2.prototype.setSize = function (w, h)
         {
             // this._cgl.gl.getExtension("EXT_float_blend"); // remove firefox warning...
 
-            if (this._options.multisampling) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
+
+            if (this._options.multisampling && this._options.multisamplingSamples) this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA32F, this._width, this._height);
             else this._cgl.gl.renderbufferStorage(this._cgl.gl.RENDERBUFFER, this._cgl.gl.RGBA32F, this._width, this._height);
         }
-        else if (this._options.multisampling)
+        else if (this._options.multisampling && this._options.multisamplingSamples)
         {
             this._cgl.gl.renderbufferStorageMultisample(this._cgl.gl.RENDERBUFFER, this._options.multisamplingSamples, this._cgl.gl.RGBA8, this._width, this._height);
         }
@@ -268,11 +265,11 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-    const err = this._cgl.printError("fb setsize1");
-    if (err)
-    {
-        console.log(err);
-    }
+    // const err = this._cgl.printError("fb setsize1");
+    // if (err)
+    // {
+    // console.log(err);
+    // }
 
     if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) console.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
@@ -305,7 +302,7 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
     this._cgl.gl.bindRenderbuffer(this._cgl.gl.RENDERBUFFER, null);
 
-    this._cgl.printError("fb setsize");
+    // this._cgl.printError("fb setsize");
 };
 
 Framebuffer2.prototype.renderStart = function ()
@@ -332,7 +329,7 @@ Framebuffer2.prototype.renderEnd = function ()
 {
     this._cgl.popPMatrix();
 
-    profileData.profileFramebuffer++;
+    this._cgl.profileData.profileFramebuffer++;
 
     if (this._numRenderBuffers <= 1)
     {

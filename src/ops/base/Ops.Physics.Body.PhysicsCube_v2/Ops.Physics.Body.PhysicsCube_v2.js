@@ -62,8 +62,6 @@ function setup(modelScale)
 
     if (body)lastWorld.removeBody(body);
 
-    op.log("make new!", sizeX.get());
-
     // shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
     shape = new CANNON.Box(new CANNON.Vec3(sizeX.get() * 0.5, sizeY.get() * 0.5, sizeZ.get() * 0.5));
 

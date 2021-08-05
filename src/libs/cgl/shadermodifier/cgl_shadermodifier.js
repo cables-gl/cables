@@ -111,14 +111,12 @@ class ShaderModifier
 
         if (this._mods.length > 1) firstMod = this._mods[0];
 
-        for (let i = 0; i < this._mods.length; i++)
-            shader.addModule(this._mods[i], firstMod);
+        for (let i = 0; i < this._mods.length; i++) shader.addModule(this._mods[i], firstMod);
     }
 
     _removeModulesFromShader(mod)
     {
-        for (const j in this._origShaders)
-            this._origShaders[j].shader.removeModule(mod);
+        for (const j in this._origShaders) this._origShaders[j].shader.removeModule(mod);
     }
 
     addModule(mod)

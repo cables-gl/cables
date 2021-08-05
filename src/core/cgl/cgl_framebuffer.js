@@ -1,5 +1,4 @@
 import { Texture } from "./cgl_texture";
-import { profileData } from "./cgl_profiledata";
 import { Log } from "../log";
 
 // todo: convert to prototyped...
@@ -37,6 +36,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
         "isFloatingPointTexture": false,
     };
 
+    if (!options.hasOwnProperty("clear")) options.clear = true;
     if (!options.hasOwnProperty("filter")) options.filter = Texture.FILTER_LINEAR;
 
     const texture = new Texture(cgl, {
@@ -52,6 +52,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
             "isDepthTexture": true,
         });
     }
+    this._options = options;
 
     const frameBuf = cgl.gl.createFramebuffer();
     const depthBuffer = cgl.gl.createRenderbuffer();
@@ -123,7 +124,7 @@ const Framebuffer = function (_cgl, _w, _h, options)
         width = Math.ceil(w);
         height = Math.ceil(h);
 
-        profileData.profileFrameBuffercreate++;
+        cgl.profileData.profileFrameBuffercreate++;
 
         cgl.gl.bindFramebuffer(cgl.gl.FRAMEBUFFER, frameBuf);
         cgl.gl.bindRenderbuffer(cgl.gl.RENDERBUFFER, depthBuffer);
@@ -195,8 +196,11 @@ const Framebuffer = function (_cgl, _w, _h, options)
         cgl.pushPMatrix();
         cgl.gl.viewport(0, 0, width, height);
 
-        cgl.gl.clearColor(0, 0, 0, 0);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        if (this._options.clear)
+        {
+            cgl.gl.clearColor(0, 0, 0, 0);
+            cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+        }
     };
 
     this.renderEnd = function ()

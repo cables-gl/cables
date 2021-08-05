@@ -1,16 +1,19 @@
 const
     inExec = op.inTrigger("Update"),
     inNodeName = op.inString("Node Name"),
-    outPosX = op.outNumber("Translate X", 0),
-    outPosY = op.outNumber("Translate Y", 0),
-    outPosZ = op.outNumber("Translate Z", 0),
+    // outPosX = op.outNumber("Translate X", 0),
+    // outPosY = op.outNumber("Translate Y", 0),
+    // outPosZ = op.outNumber("Translate Z", 0),
+
     next = op.outTrigger("Next"),
-    outFound = op.outBool("Found");
+    outFound = op.outBool("Found"),
+    outMat = op.outArray("Matrix");
 
 const cgl = op.patch.cgl;
 const translate = vec3.create();
 let node = null;
 let currentSceneLoaded = null;
+const m = mat4.create();
 
 inNodeName.onChange = function ()
 {
@@ -19,11 +22,11 @@ inNodeName.onChange = function ()
     op.setUiAttrib({ "extendTitle": inNodeName.get() });
 };
 
-
 inExec.onTriggered = function ()
 {
     if (!cgl.frameStore.currentScene) return;
     if (currentSceneLoaded != cgl.frameStore.currentScene.loaded) node = null;
+    let found = false;
 
     if (!node)
     {
@@ -38,17 +41,29 @@ inExec.onTriggered = function ()
             if (cgl.frameStore.currentScene.nodes[i].name == name)
             {
                 node = cgl.frameStore.currentScene.nodes[i];
-                outFound.set(true);
+                found = true;
+                break;
             }
         }
     }
+    else
+    {
+        found = true;
+    }
+
+    outFound.set(found);
 
     if (node)
     {
-        mat4.getTranslation(translate, node.modelMatAbs());
-        outPosX.set(translate[0]);
-        outPosY.set(translate[1]);
-        outPosZ.set(translate[2]);
+        mat4.copy(m, node.modelMatAbs());
+
+        // mat4.getTranslation(translate, m);
+        // outPosX.set(translate[0]);
+        // outPosY.set(translate[1]);
+        // outPosZ.set(translate[2]);
+
+        outMat.set(null);
+        outMat.set(m);
     }
 
     next.trigger();

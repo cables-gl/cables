@@ -1,9 +1,16 @@
+UNI float hue;
 
 #ifdef HAS_TEXTURES
   IN vec2 texCoord;
   UNI sampler2D tex;
 #endif
-UNI float hue;
+
+#ifdef TEX_MASK
+    UNI sampler2D texMask;
+#endif
+#ifdef TEX_OFFSET
+    UNI sampler2D texOffset;
+#endif
 
 vec3 rgb2hsv(vec3 c)
 {
@@ -26,12 +33,25 @@ vec3 hsv2rgb(vec3 c)
 void main()
 {
    vec4 col=vec4(1.0,0.0,0.0,1.0);
-   #ifdef HAS_TEXTURES
-       col=texture(tex,texCoord);
+    #ifdef HAS_TEXTURES
+        col=texture(tex,texCoord);
+        float h=hue;
 
-       vec3 hsv = rgb2hsv(col.rgb);
-       hsv.x=hsv.x+hue;
-       col.rgb = hsv2rgb(hsv);
+        #ifdef TEX_OFFSET
+            h += texture(texOffset,texCoord).r;
+        #endif
+
+
+        vec3 hsv = rgb2hsv(col.rgb);
+        hsv.x=hsv.x+h;
+
+        #ifndef TEX_MASK
+            col.rgb = hsv2rgb(hsv);
+        #endif
+
+        #ifdef TEX_MASK
+            col.rgb = mix(col.rgb,hsv2rgb(hsv),texture(texMask,texCoord).r);
+        #endif
 
    #endif
    outColor= col;

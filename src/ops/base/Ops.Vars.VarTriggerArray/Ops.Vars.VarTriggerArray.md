@@ -1,0 +1,1 @@
+Use a trigger to change an Array Variable

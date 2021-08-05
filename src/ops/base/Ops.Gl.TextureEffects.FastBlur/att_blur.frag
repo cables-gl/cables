@@ -1,5 +1,8 @@
 
 UNI sampler2D tex;
+#ifdef USE_MASK
+    UNI sampler2D texMask;
+#endif
 UNI float amount;
 UNI float pass;
 
@@ -25,6 +28,24 @@ IN vec2 coord6;
 void main()
 {
     vec4 color = vec4(0.0);
+
+    #ifdef USE_MASK
+        #ifdef MASK_INVERT
+            if(texture(texMask,texCoord).r<0.5)
+            {
+                outColor= texture(tex, texCoord);
+                return;
+            }
+        #endif
+
+        #ifndef MASK_INVERT
+            if(texture(texMask,texCoord).r>0.5)
+            {
+                outColor= texture(tex, texCoord);
+                return;
+            }
+        #endif
+    #endif
 
     color += texture(tex, coord0) * 0.06927096443792478;
     color += texture(tex, coord1) * 0.1383328848652136;

@@ -30,43 +30,55 @@ easing.onChange = function ()
     else easingFunction = null;
 };
 
+let needsUpdate = true;
+
+inArr1.onChange =
+inArr2.onChange =
+inPos.onChange =
+inWidth.onChange = () =>
+{
+    needsUpdate = true;
+};
+
 exe.onTriggered = function ()
 {
     const arr1 = inArr1.get();
     const arr2 = inArr2.get();
 
-    if (!arr1 || !arr2 || arr2.length < arr1.length)
-    {
-        outArr.set(null);
-    }
-    else
-    {
-        if (resultArr.length != arr1.length) resultArr.length = arr1.length;
-        const distNum = inWidth.get() * (resultArr.length * 4);
-        const pos = inPos.get() * (arr1.length + distNum);
-
-        for (let i = 0; i < arr1.length; i++)
+    if (needsUpdate)
+        if (!arr1 || !arr2 || arr2.length < arr1.length)
         {
-            const val1 = arr1[i];
-            const val2 = arr2[i];
+            outArr.set(null);
+        }
+        else
+        {
+            if (resultArr.length != arr1.length) resultArr.length = arr1.length;
+            const distNum = inWidth.get() * (resultArr.length * 4);
+            const pos = inPos.get() * (arr1.length + distNum);
 
-            let ppos = pos - i;
-            if (reverse.get())ppos = pos - (arr1.length - i);
-            let dist = ppos / distNum;
-
-            if (dist > 1) resultArr[i] = val2;
-            else if (dist <= 0) resultArr[i] = val1;
-            else
+            for (let i = 0; i < arr1.length; i++)
             {
-                if (easingFunction) dist = easingFunction(dist);
-                const m = ((val2 - val1) * dist + val1);
-                resultArr[i] = m;
+                const val1 = arr1[i];
+                const val2 = arr2[i];
+
+                let ppos = pos - i;
+                if (reverse.get())ppos = pos - (arr1.length - i);
+                let dist = ppos / distNum;
+
+                if (dist > 1) resultArr[i] = val2;
+                else if (dist <= 0) resultArr[i] = val1;
+                else
+                {
+                    if (easingFunction) dist = easingFunction(dist);
+                    const m = ((val2 - val1) * dist + val1);
+                    resultArr[i] = m;
+                }
             }
+
+            outArr.set(null);
+            outArr.set(resultArr);
         }
 
-        outArr.set(null);
-        outArr.set(resultArr);
-    }
-
     next.trigger();
+    needsUpdate = false;
 };

@@ -4,6 +4,7 @@ const
     inIndex = op.inInt("Index", 0),
     inValue = op.inFloat("Number", 1),
     inReset = op.inTriggerButton("Reset"),
+    outNext = op.outTrigger("Next"),
     outArray = op.outArray("Result");
 
 const newArr = [];
@@ -15,24 +16,25 @@ inReset.onTriggered = function ()
 inArray.onChange = copyArray;
 
 inTrigger.onTriggered =
-function ()
-{
-    const arr = inArray.get();
-
-    if (!arr) return;
-    if (newArr.length != arr.length)newArr.length = arr.length;
-
-    const idx = Math.floor(inIndex.get());
-
-    if (idx >= 0)
+    () =>
     {
-        newArr[idx] = inValue.get();
-    }
+        const arr = inArray.get();
 
-    inArray.onChange = null;
-    outArray.set(null);
-    outArray.set(newArr);
-};
+        if (!arr) return;
+        if (newArr.length != arr.length)newArr.length = arr.length;
+
+        const idx = Math.floor(inIndex.get());
+
+        if (idx >= 0)
+        {
+            newArr[idx] = inValue.get();
+        }
+
+        inArray.onChange = null;
+        outArray.set(null);
+        outArray.set(newArr);
+        outNext.trigger();
+    };
 
 function copyArray(force)
 {

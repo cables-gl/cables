@@ -32,112 +32,123 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "File Type index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "File Type",
                 "group": "File",
                 "subType": "string"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "ZIP multiple files",
+                "group": "File",
                 "subType": "boolean"
             },
             {
-                "type": "5",
+                "type": 0,
+                "name": "Download Files",
+                "group": "File",
+                "subType": "boolean"
+            },
+            {
+                "type": 5,
                 "name": "Filename",
                 "group": "File"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Quality",
                 "group": "File",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration Type index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Duration Type",
                 "group": "Timing"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration",
                 "group": "Timing",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "FPS",
                 "group": "Timing",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Transparency",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Use Canvas Size",
                 "group": "Size",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture width",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture height",
                 "group": "Size",
                 "subType": "integer"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Start"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Progress",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Frame",
                 "subType": "number"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Status"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Started",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 5,
+                "name": "Data URL"
+            },
+            {
+                "type": 1,
                 "name": "Finished"
             }
         ],

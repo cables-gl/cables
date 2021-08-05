@@ -1,5 +1,5 @@
 {
-    "summary": "Trigger every x ms",
+    "summary": "Timed Trigger every x ms",
     "layout": {
         "portsIn": [
             {
@@ -41,5 +41,9 @@
                 "text": "Triggers every x milliseconds"
             }
         ]
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

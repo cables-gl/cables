@@ -29,7 +29,9 @@ import { Log } from "./log";
  *     glCanvasResizeToWindow:true,
  *     canvas:{powerPreference:"high-performance"},
  *     prefixAssetPath:'/assets/',
+ *     prefixAssetPath:'/js/',
  *     onError:function(e){console.log(e);}
+ *     glslPrecision:'highp'
  * });
  */
 
@@ -42,6 +44,7 @@ const Patch = function (cfg)
     this.config = cfg || {
         "glCanvasResizeToWindow": false,
         "prefixAssetPath": "",
+        "prefixJsPath": "",
         "silent": false,
         "onError": null,
         "onFinishedLoading": null,
@@ -56,13 +59,13 @@ const Patch = function (cfg)
     this.gui = false;
     this.silent = false;
     this.profiler = null;
-    this.onLoadStart = null;
-    this.onLoadEnd = null;
+    // this.onLoadStart = null;
     this.aborted = false;
     this._crashedOps = [];
     this._renderOneFrame = false;
     this._animReq = null;
     this._opIdCache = {};
+    this._triggerStack = [];
 
     this.loading = new LoadingStatus(this);
 
@@ -98,6 +101,7 @@ const Patch = function (cfg)
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";
+    if (!this.config.prefixJsPath) this.config.prefixJsPath = "";
     if (!this.config.masterVolume) this.config.masterVolume = 1.0;
 
     this._variables = {};
@@ -418,7 +422,7 @@ Patch.prototype.createOp = function (identifier, id)
  * // add invisible op
  * patch.addOp('Ops.Math.Sum', { showUiAttribs: false });
  */
-Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
+Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 {
     const op = this.createOp(opIdentifier, id);
 
@@ -433,10 +437,12 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id)
         if (op.hasOwnProperty("onAnimFrame")) this.addOnAnimFrame(op);
         if (op.hasOwnProperty("onMasterVolumeChanged")) this._volumeListeners.push(op);
 
+        if (this._opIdCache[op.id]) console.warn("opid with id " + op.id + " already exists in patch!");
+
         this.ops.push(op);
         this._opIdCache[op.id] = op;
 
-        this.emitEvent("onOpAdd", op);
+        this.emitEvent("onOpAdd", op, fromDeserialize);
 
         if (op.init) op.init();
     }
@@ -500,12 +506,12 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 found = true;
                 if (tryRelink)
                 {
-                    if (this.ops[i].portsIn.length > 0 && this.ops[i].portsIn[0].isLinked() && (this.ops[i].portsOut.length > 0 && this.ops[i].portsOut[0].isLinked()))
+                    if (op.portsIn.length > 0 && op.portsIn[0].isLinked() && (op.portsOut.length > 0 && op.portsOut[0].isLinked()))
                     {
-                        if (this.ops[i].portsIn[0].getType() == this.ops[i].portsOut[0].getType())
+                        if (op.portsIn[0].getType() == op.portsOut[0].getType())
                         {
-                            reLinkP1 = this.ops[i].portsIn[0].links[0].getOtherPort(this.ops[i].portsIn[0]);
-                            reLinkP2 = this.ops[i].portsOut[0].links[0].getOtherPort(this.ops[i].portsOut[0]);
+                            reLinkP1 = op.portsIn[0].links[0].getOtherPort(op.portsIn[0]);
+                            reLinkP2 = op.portsOut[0].links[0].getOtherPort(op.portsOut[0]);
                         }
                     }
                 }
@@ -532,6 +538,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 }
 
                 delete this._opIdCache[opid];
+                break;
             }
         }
     }
@@ -564,7 +571,8 @@ Patch.prototype.renderFrame = function (e)
         }
     }
 
-    CGL.profileData.profileOnAnimFrameOps = performance.now() - startTime;
+
+    this.cgl.profileData.profileOnAnimFrameOps = performance.now() - startTime;
 
     this.emitEvent("onRenderFrame", time);
 
@@ -658,7 +666,7 @@ Patch.prototype.exec = function (e)
  * @param {Op} op2
  * @param {String} portName2
  */
-Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase)
+Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, fromDeserialize)
 {
     if (!op1)
     {
@@ -696,7 +704,7 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase)
         const link = new Link(this);
         link.link(port1, port2);
 
-        this.emitEvent("onLink", port1, port2, link);
+        this.emitEvent("onLink", port1, port2, link, fromDeserialize);
         return link;
     }
 };
@@ -732,18 +740,18 @@ Patch.prototype.getOpById = function (opid)
     // }
 };
 
-Patch.prototype.getOpsById = function (opIds)
-{
-    const ops = [];
-    for (const i in this.ops)
-        for (let j = 0; j < opIds.length; j++)
-            if (this.ops[i].id === opIds[j])
-            {
-                ops.push(this.ops[i]);
-                break;
-            }
-    return ops;
-};
+// Patch.prototype.getOpsById = function (opIds)
+// {
+//     const ops = [];
+//     for (const i in this.ops)
+//         for (let j = 0; j < opIds.length; j++)
+//             if (this.ops[i].id === opIds[j])
+//             {
+//                 ops.push(this.ops[i]);
+//                 break;
+//             }
+//     return ops;
+// };
 
 Patch.prototype.getOpsByName = function (name)
 {
@@ -875,7 +883,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
     if (this.aborted) return;
 
     const loadingId = this.loading.start("core", "deserialize");
-    if (this.onLoadStart) this.onLoadStart();
+    // if (this.onLoadStart) this.onLoadStart();
 
     this.namespace = obj.namespace || "";
     this.name = obj.name || "";
@@ -893,7 +901,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
         const found = false;
         if (!found)
         {
-            self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName);
+            self.link(self.getOpById(opinid), inName, self.getOpById(opoutid), outName, false, true);
         }
     }
 
@@ -909,8 +917,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
         try
         {
-            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id);
-            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id);
+            if (opData.opId) op = this.addOp(opData.opId, opData.uiAttribs, opData.id, true);
+            else op = this.addOp(opData.objName, opData.uiAttribs, opData.id, true);
         }
         catch (e)
         {
@@ -926,6 +934,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
             if (genIds) op.id = uuid();
             op.portsInData = opData.portsIn;
             op._origData = opData;
+            op.storage = opData.storage;
 
             for (const ipi in opData.portsIn)
             {
@@ -1025,18 +1034,24 @@ Patch.prototype.deSerialize = function (obj, genIds)
         for (const varName in this.config.variables)
             this.setVarValue(varName, this.config.variables[varName]);
 
-    for (const i in this.ops) this.ops[i].initVarPorts();
+    for (const i in this.ops)
+    {
+        this.ops[i].initVarPorts();
+        delete this.ops[i].uiAttribs.pasted;
+    }
 
 
     setTimeout(() => { this.loading.finished(loadingId); }, 100);
     if (this.config.onPatchLoaded) this.config.onPatchLoaded(this);
 
-    if (this.onLoadEnd) this.onLoadEnd();
+
+    this.emitEvent("patchLoadEnd");
+    // if (this.onLoadEnd) this.onLoadEnd();
 };
 
 Patch.prototype.profile = function (enable)
 {
-    this.profiler = new Profiler();
+    this.profiler = new Profiler(this);
     for (const i in this.ops)
     {
         this.ops[i].profile(enable);
@@ -1096,7 +1111,7 @@ Patch.Variable.prototype.setValue = function (v)
     this._v = v;
     for (let i = 0; i < this._changeListeners.length; i++)
     {
-        this._changeListeners[i](v);
+        this._changeListeners[i](v, this);
     }
 };
 
@@ -1109,7 +1124,8 @@ Patch.Variable.prototype.setValue = function (v)
  */
 Patch.Variable.prototype.addListener = function (cb)
 {
-    this._changeListeners.push(cb);
+    const ind = this._changeListeners.indexOf(cb);
+    if (ind == -1) this._changeListeners.push(cb);
 };
 
 /**
@@ -1149,7 +1165,8 @@ Patch.Variable.prototype.removeListener = function (cb)
  */
 Patch.prototype.setVariable = function (name, val)
 {
-    if (this._variables.hasOwnProperty(name))
+    // if (this._variables.hasOwnProperty(name))
+    if (this._variables[name] !== undefined)
     {
         this._variables[name].setValue(val);
     }
@@ -1179,13 +1196,15 @@ Patch.prototype._sortVars = function ()
  */
 Patch.prototype.hasVar = function (name)
 {
-    return this._variables.hasOwnProperty("name");
+    return this._variables[name] !== undefined;
+
+    // return this._variables.hasOwnProperty(name);
 };
 
 // used internally
 Patch.prototype.setVarValue = function (name, val)
 {
-    if (this._variables.hasOwnProperty(name))
+    if (this.hasVar(name))
     {
         this._variables[name].setValue(val);
     }
@@ -1215,15 +1234,6 @@ Patch.prototype.getVar = function (name)
     if (this._variables.hasOwnProperty(name)) return this._variables[name];
 };
 
-/**
- * @function
- * @memberof Patch
- * @instance
- */
-Patch.prototype.getVars = function ()
-{
-    return this._variables;
-};
 
 Patch.prototype.deleteVar = function (name)
 {
@@ -1250,10 +1260,24 @@ Patch.prototype.deleteVar = function (name)
  * @return {Array<Variable>} variables
  * @function
  */
-Patch.prototype.getVars = function ()
+Patch.prototype.getVars = function (t)
 {
-    return this._variables;
+    if (t === undefined) return this._variables;
+
+    const vars = [];
+    if (t == CABLES.OP_PORT_TYPE_STRING) t = "string";
+    if (t == CABLES.OP_PORT_TYPE_VALUE) t = "number";
+    if (t == CABLES.OP_PORT_TYPE_ARRAY) t = "array";
+    if (t == CABLES.OP_PORT_TYPE_OBJECT) t = "object";
+
+    for (const i in this._variables)
+    {
+        // console.log(this._variables[i]);
+        if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
+    }
+    return vars;
 };
+
 
 /**
  * @function exitError
@@ -1330,6 +1354,38 @@ Patch.prototype.dispose = function ()
 {
     this.pause();
     this.clear();
+};
+
+
+Patch.prototype.pushTriggerStack = function (p)
+{
+    this._triggerStack.push(p);
+};
+
+Patch.prototype.popTriggerStack = function ()
+{
+    this._triggerStack.pop();
+};
+
+Patch.prototype.printTriggerStack = function ()
+{
+    if (this._triggerStack.length == 0)
+    {
+        console.log("stack length", this._triggerStack.length);
+        return;
+    }
+    console.groupCollapsed(
+        "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
+    );
+
+    const rows = [];
+    for (let i = 0; i < this._triggerStack.length; i++)
+    {
+        rows.push(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
+    }
+
+    console.table(rows);
+    console.groupEnd();
 };
 
 /**

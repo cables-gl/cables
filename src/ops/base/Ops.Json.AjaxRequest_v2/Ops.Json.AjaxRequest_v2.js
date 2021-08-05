@@ -5,6 +5,7 @@ const filename = op.inUrl("file"),
     inMethod = op.inDropDown("HTTP Method", ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "CONNECT", "OPTIONS", "TRACE"], "GET"),
     inContentType = op.inString("Content-Type", "application/json"),
     inParseJson = op.inBool("parse json", true),
+    inAutoRequest = op.inBool("Auto request", true),
     reloadTrigger = op.inTriggerButton("reload"),
     outData = op.outObject("data"),
     outString = op.outString("response"),
@@ -12,23 +13,28 @@ const filename = op.inUrl("file"),
     outTrigger = op.outTrigger("Loaded");
 
 filename.setUiAttribs({ "title": "URL" });
+reloadTrigger.setUiAttribs({ "buttonTitle": "trigger request" });
 
 outData.ignoreValueSerialize = true;
+outString.ignoreValueSerialize = true;
 
-filename.onChange = jsonp.onChange = headers.onChange = inMethod.onChange = inParseJson.onChange = delayedReload;
+inAutoRequest.onChange = filename.onChange = jsonp.onChange = headers.onChange = inMethod.onChange = inParseJson.onChange = function ()
+{
+    delayedReload(false);
+};
 
 reloadTrigger.onTriggered = function ()
 {
-    delayedReload();
+    delayedReload(true);
 };
 
 let loadingId = 0;
 let reloadTimeout = 0;
 
-function delayedReload()
+function delayedReload(force = false)
 {
     clearTimeout(reloadTimeout);
-    reloadTimeout = setTimeout(reload, 100);
+    reloadTimeout = setTimeout(function () { reload(null, force); }, 100);
 }
 
 op.onFileChanged = function (fn)
@@ -36,8 +42,9 @@ op.onFileChanged = function (fn)
     if (filename.get() && filename.get().indexOf(fn) > -1) reload(true);
 };
 
-function reload(addCachebuster)
+function reload(addCachebuster, force = false)
 {
+    if (!inAutoRequest.get() && !force) return;
     if (!filename.get()) return;
 
     op.patch.loading.finished(loadingId);

@@ -6,7 +6,7 @@ const text = op.inStringEditor("text", "1,2,3"),
     arr = op.outArray("array"),
     len = op.outValue("length");
 
-text.onChange = separator.onChange = toNumber.onChange = parse;
+text.onChange = separator.onChange = toNumber.onChange = trim.onChange = parse;
 
 parse();
 
@@ -20,9 +20,16 @@ function parse()
         return;
     }
 
+    let textInput = text.get();
+    if (trim.get() && textInput)
+    {
+        textInput = textInput.replace(/^\s+|\s+$/g, "");
+        textInput = textInput.trim();
+    }
+
     const sep = separator.get();
     if (separator.get() == "\\n")sep == "\n";
-    const r = text.get().split(sep);
+    const r = textInput.split(sep);
 
     if (r[r.length - 1] === "") r.length -= 1;
 
@@ -33,7 +40,7 @@ function parse()
         for (let i = 0; i < r.length; i++)
         {
             r[i] = r[i].replace(/^\s+|\s+$/g, "");
-            r[i].trim();
+            r[i] = r[i].trim();
         }
     }
 

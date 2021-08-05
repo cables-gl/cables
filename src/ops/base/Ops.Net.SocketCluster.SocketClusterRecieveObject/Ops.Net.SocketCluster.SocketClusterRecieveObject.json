@@ -5,25 +5,26 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
-                "name": "socket"
+                "type": 2,
+                "name": "socket",
+                "objType": "socketcluster"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "topic"
             }
         ],
         "portsOut": [
             {
-                "type": "5",
+                "type": 5,
                 "name": "client id"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "data"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "received"
             }
         ],

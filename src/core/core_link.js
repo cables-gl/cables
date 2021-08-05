@@ -2,8 +2,6 @@ import { CONSTANTS } from "./constants";
 import { EventTarget } from "./eventtarget";
 import { Log } from "./log";
 
-//
-// var CABLES=CABLES || {};
 /**
  * @external CABLES
  * @namespace Link
@@ -21,6 +19,7 @@ const Link = function (scene)
     this.portOut = null;
     this.scene = scene; // todo: make private and rename to patch
     this.activityCounter = 0;
+    this.ignoreInSerialize = false;
 };
 
 Link.prototype.setValue = function (v)

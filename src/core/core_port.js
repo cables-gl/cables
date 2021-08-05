@@ -17,7 +17,8 @@ const Port = function (__parent, name, type, uiAttribs)
 {
     EventTarget.apply(this);
 
-    this.data = {}; // reserved for port-specific user-data
+    this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
+
     /**
      * @type {Number}
      * @name direction
@@ -85,12 +86,12 @@ Port.prototype.getValueForDisplay = function ()
 {
     let str = String(this.val);
 
-    if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
-    {
-        if (!this.val) str = "false";
-        else str = "true";
-    }
-    else if (str.length > 100) str = str.substring(0, 100);
+    // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
+    // {
+    //     if (!this.val) str = "false";
+    //     else str = "true";
+    // }
+    if (str.length > 100) str = str.substring(0, 100);
 
     return str;
 };
@@ -115,16 +116,6 @@ Port.prototype._onAnimToggle = function ()
     this.onAnimToggle();
 };
 
-/**
- * @function hidePort
- * @memberof Port
- * @instance
- * @description hide port rectangle in op
- */
-Port.prototype.hidePort = function ()
-{
-    this.setUiAttribs({ "hidePort": true });
-};
 
 /**
  * @function remove
@@ -352,7 +343,7 @@ Port.prototype.getSerialized = function ()
         obj.links = [];
         for (const i in this.links)
         {
-            if (this.links[i].portIn && this.links[i].portOut) obj.links.push(this.links[i].getSerialized());
+            if (!this.links[i].ignoreInSerialize && (this.links[i].portIn && this.links[i].portOut)) obj.links.push(this.links[i].getSerialized());
         }
     }
     return obj;
@@ -514,7 +505,10 @@ Port.prototype.trigger = function ()
             if (this.links[i].portIn)
             {
                 portTriggered = this.links[i].portIn;
+
+                portTriggered.parent.patch.pushTriggerStack(portTriggered);
                 portTriggered._onTriggered();
+                portTriggered.parent.patch.popTriggerStack();
             }
             if (this.links[i]) this.links[i].activity();
         }
@@ -722,6 +716,12 @@ Port.prototype.setUiActiveState = function (onoff)
     if (this.onUiActiveStateChange) this.onUiActiveStateChange();
 };
 
+Port.prototype.hidePort = function ()
+{
+    console.log("op.hideport() is deprecated, do not use it!");
+};
+
+
 /**
  * Returns the port type string, e.g. "value" based on the port type number
  * @function portTypeNumberToString
@@ -780,6 +780,20 @@ class SwitchPort extends Port
     }
 }
 
-class ValueSelectPort extends SwitchPort {}
+class ValueSelectPort extends SwitchPort
+{
+    setUiAttribs(newAttribs)
+    {
+        // never unhide valuePort when indexPort is linked
+        if (this.indexPort.isLinked())
+        {
+            for (const p in newAttribs)
+            {
+                if (p == "greyout" && !newAttribs[p]) newAttribs[p] = "true";
+            }
+        }
+        super.setUiAttribs(newAttribs);
+    }
+}
 
 export { Port, SwitchPort, ValueSelectPort };

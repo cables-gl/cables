@@ -14,10 +14,15 @@
             "message": "Ops.Admin.LottieTexturePlayer renamed to Ops.Lottie.LottieTexturePlayer",
             "author": "pandur",
             "date": 1587367524875
+        },
+        {
+            "message": " added lib: lottie.js",
+            "author": "stephan",
+            "date": 1626104402127
         }
     ],
     "libs": [
-        "lottie_canvas.min.js"
+        "lottie.js"
     ],
     "authorName": "pandur",
     "id": "e9946c8c-afb8-4ab5-b534-3fe53ed45dcf",
@@ -25,67 +30,73 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "File"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "play",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
                 "name": "filter",
                 "subType": "string"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "wrap",
-                "subType": "string"
+                "subType": "select box"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "flip",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture width",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "texture height",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scale",
-                "subType": "string"
+                "subType": "select box"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "rewind"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "frame",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "texture"
+                "type": 2,
+                "name": "texture",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Lottie.LottieTexturePlayer"

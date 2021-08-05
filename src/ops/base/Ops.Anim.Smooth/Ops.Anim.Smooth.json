@@ -12,37 +12,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Update"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Separate inc/dec",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Inc factor",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Dec factor",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }

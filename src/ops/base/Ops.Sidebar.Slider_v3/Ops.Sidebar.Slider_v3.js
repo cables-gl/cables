@@ -7,6 +7,7 @@ const labelPort = op.inString("Text", "Slider");
 const minPort = op.inValue("Min", 0);
 const maxPort = op.inValue("Max", 1);
 const stepPort = op.inValue("Step", STEP_DEFAULT);
+const labelSuffix = op.inString("Suffix", "");
 
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
@@ -14,6 +15,8 @@ const inVisible = op.inBool("Visible", true);
 const inputValuePort = op.inValue("Input", 0.5);
 const setDefaultValueButtonPort = op.inTriggerButton("Set Default");
 const reset = op.inTriggerButton("Reset");
+
+let parent = null;
 
 const defaultValuePort = op.inValue("Default", 0.5);
 defaultValuePort.setUiAttribs({ "hidePort": true, "greyout": true });
@@ -38,6 +41,8 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__slider");
 el.classList.add("sidebar__reloadable");
 
+op.patch.on("sidebarStylesChanged", () => { updateActiveTrack(); });
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 
@@ -53,14 +58,21 @@ el.appendChild(label);
 const value = document.createElement("input");
 value.value = defaultValuePort.get();
 value.classList.add("sidebar__text-input-input");
-// value.setAttribute('type', 'number'); /* not possible to use '.' instead of ',' as separator on German computer, so not usable... */
 value.setAttribute("type", "text");
-// value.setAttribute('lang', 'en-US'); // force '.' as decimal separator
-// value.setAttribute('pattern', '[0-9]+([\.][0-9]+)?'); // only allow '.' as separator
-// value.setAttribute('step', 'any'); /* we cannot use the slider step, as it restricts valid numbers to be entered */
-// value.setAttribute('formnovalidate', '');
 value.oninput = onTextInputChanged;
 el.appendChild(value);
+
+const suffixEle = document.createElement("span");
+// value.value = defaultValuePort.get();
+// value.setAttribute("type", "text");
+// value.oninput = onTextInputChanged;
+
+el.appendChild(suffixEle);
+
+labelSuffix.onChange = () =>
+{
+    suffixEle.innerHTML = labelSuffix.get();
+};
 
 const inputWrapper = document.createElement("div");
 inputWrapper.classList.add("sidebar__slider-input-wrapper");
@@ -198,8 +210,9 @@ function updateActiveTrack(val)
 {
     let valueToUse = parseFloat(input.value);
     if (typeof val !== "undefined") valueToUse = val;
-    let availableWidth = input.offsetWidth; /* this returns 0 at the beginning... */
-    if (availableWidth === 0) { availableWidth = 206; }
+    let availableWidth = activeTrack.parentElement.getBoundingClientRect().width || 220;
+    if (parent) availableWidth = parseInt(getComputedStyle(parent.parentElement).getPropertyValue("--sidebar-width")) - 20;
+
     const trackWidth = CABLES.map(
         valueToUse,
         parseFloat(input.min),
@@ -207,7 +220,6 @@ function updateActiveTrack(val)
         0,
         availableWidth - 16 /* subtract slider thumb width */
     );
-    // activeTrack.style.width = 'calc(' + percentage + '%' + ' - 9px)';
     activeTrack.style.width = trackWidth + "px";
 }
 
@@ -246,7 +258,7 @@ function onLabelTextChanged()
 
 function onParentChanged()
 {
-    const parent = parentPort.get();
+    parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
@@ -254,6 +266,8 @@ function onParentChanged()
         siblingsPort.set(parent);
     }
     else if (el.parentElement) el.parentElement.removeChild(el);
+
+    updateActiveTrack();
 }
 
 function showElement(el)

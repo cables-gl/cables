@@ -17,55 +17,59 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "prevent scroll",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Flip Direction",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Simple Delta",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Area index",
                 "subType": "integer"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Area"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "active",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "delta",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "delta X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "browser event delta",
                 "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Wheel Action"
             }
         ],
         "name": "Ops.Devices.Mouse.MouseWheel_v2"

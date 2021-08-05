@@ -7,7 +7,7 @@ const inInit = op.inTriggerButton("Start");
 const inInputDevices = op.inDropDown("Audio Input", ["None"]);
 const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
-const audioOut = op.outObject("Audio Out");
+const audioOut = op.outObject("Audio Out", null, "audioNode");
 const recording = op.outBool("Listening", false);
 const outDevices = op.outArray("List of Input Devices");
 

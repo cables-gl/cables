@@ -55,7 +55,8 @@
         "portsOut": [
             {
                 "type": 2,
-                "name": "Texture"
+                "name": "Texture",
+                "objType": "texture"
             },
             {
                 "type": 0,
@@ -75,6 +76,11 @@
             {
                 "type": 0,
                 "name": "Loaded",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
                 "subType": "number"
             }
         ],

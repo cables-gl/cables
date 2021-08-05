@@ -142,8 +142,8 @@ inTrigger.onTriggered = function ()
         }
     }
 
-    w = Math.floor(w);
-    h = Math.floor(h);
+    w = Math.ceil(w);
+    h = Math.ceil(h);
 
     if (inCenter.get())
     {
@@ -175,5 +175,6 @@ inTrigger.onTriggered = function ()
         outHeight.set(h);
         cgl.setSize(w, h);
     }
-    else next.trigger();
+    // else
+    next.trigger();
 };

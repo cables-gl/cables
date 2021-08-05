@@ -1,0 +1,104 @@
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 2,
+                "name": "GlArray",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Z",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "a",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "trigger"
+            },
+            {
+                "type": 2,
+                "name": "Result",
+                "objType": "texture"
+            }
+        ],
+        "name": "Ops.Dev.GlArrayCurlNoise"
+    },
+    "summary": "draw perlin noise into an image",
+    "credits": [
+        {
+            "title": "GPU-Noise-Lib",
+            "author": "Brian Sharpe",
+            "url": "https://github.com/BrianSharpe/GPU-Noise-Lib",
+            "licence": "Public Domain"
+        }
+    ],
+    "authorName": "pandur",
+    "id": "25467f40-8f78-4dca-ba6c-951ae49cac59",
+    "created": 1625738171489,
+    "issues": "",
+    "collections": [
+        "random",
+        "generator"
+    ],
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.Noise.PerlinNoise",
+            "author": "pandur",
+            "date": 1625738171489
+        },
+        {
+            "message": "Ops.User.pandur.CurlNoise renamed to Ops.User.pandur.PointTexCurlNoise",
+            "author": "pandur",
+            "date": 1625753171241
+        },
+        {
+            "message": "Ops.User.pandur.PointTexCurlNoise renamed to Ops.Dev.GlArrayCurlNoise",
+            "author": "pandur",
+            "date": 1626186945975
+        },
+        {
+            "message": " added core lib: cgl_texturemath",
+            "author": "pandur",
+            "date": 1627378262843
+        }
+    ],
+    "coreLibs": [
+        "cgl_texturemath"
+    ]
+}

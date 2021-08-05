@@ -1,0 +1,59 @@
+{
+    "id": "93939bed-e43c-48e1-aa45-0a73534bd5d6",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1593236765771
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "stephan",
+            "date": 1594107151238
+        },
+        {
+            "message": "cloned op from Ops.Vars.VarSetObject_v2",
+            "author": "pandur",
+            "date": 1614259627755
+        },
+        {
+            "message": "Ops.User.pandur.VarTriggerObject renamed to Ops.Vars.VarTriggerObject",
+            "author": "pandur",
+            "date": 1614259737789
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1614259627755,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Value"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Vars.VarTriggerObject"
+    },
+    "coreLibs": [
+        "vargetset"
+    ],
+    "summary": "Set a variable object",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "sUR6b0zvuSY"
+    ],
+    "docs": {
+        "ports": []
+    }
+}

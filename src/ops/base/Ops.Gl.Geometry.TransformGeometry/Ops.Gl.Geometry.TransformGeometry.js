@@ -9,7 +9,7 @@ const
     rotX = op.inValue("Rotation X"),
     rotY = op.inValue("Rotation Y"),
     rotZ = op.inValue("Rotation Z"),
-    outGeom = op.outObject("Result");
+    outGeom = op.outObject("Result", null, "geometry");
 
 transX.onChange =
     transY.onChange =
@@ -22,6 +22,10 @@ transX.onChange =
     rotZ.onChange =
     geometry.onChange = update;
 
+const rotVec = vec3.create();
+const emptyVec = vec3.create();
+const transVec = vec3.create();
+const centerVec = vec3.create();
 
 function update()
 {
@@ -31,10 +35,6 @@ function update()
     if (oldGeom)
     {
         const geom = oldGeom.copy();
-        const rotVec = vec3.create();
-        const emptyVec = vec3.create();
-        const transVec = vec3.create();
-        const centerVec = vec3.create();
 
         for (let i = 0; i < geom.vertices.length; i += 3)
         {

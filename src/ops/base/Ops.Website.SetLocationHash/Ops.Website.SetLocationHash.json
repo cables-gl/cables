@@ -1,0 +1,79 @@
+{
+    "id": "82492357-c11d-4b76-bd57-b296d3b79b83",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "stephan",
+            "date": 1617113832831
+        },
+        {
+            "message": " added lib: navigo.js",
+            "author": "stephan",
+            "date": 1617119533403
+        },
+        {
+            "message": "Ops.User.stephan.SetLocationHash renamed to Ops.Website.SetLocationHash",
+            "author": "stephan",
+            "date": 1617122196074
+        }
+    ],
+    "authorName": "stephan",
+    "created": 1617113990660,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Hash"
+            },
+            {
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Silent",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Allow Empty",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Website.SetLocationHash"
+    },
+    "libs": [],
+    "summary": "sets window.location.hash to the specified value(s)",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Website.LocationHash"
+    ],
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Hash",
+                "text": "new value for window.location.hash (without the #)"
+            },
+            {
+                "name": "Active",
+                "text": "active/inactive"
+            },
+            {
+                "name": "Silent",
+                "text": "make event not trigger LocationHashRoute op"
+            },
+            {
+                "name": "Allow Empty",
+                "text": "allow for setting an empty hash, usually triggers a page reload"
+            }
+        ]
+    }
+}

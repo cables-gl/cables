@@ -3,6 +3,7 @@ const
     next = op.outTrigger("Next"),
     inType = op.inDropDown("File Type", ["PNG", "JPG", "WebP", "WebM"], "PNG"),
     inZip = op.inBool("ZIP multiple files", false),
+    inDownload = op.inBool("Download Files", true),
     inFilePrefix = op.inString("Filename", "cables"),
     inQuality = op.inFloatSlider("Quality", 0.8),
     inDurType = op.inSwitch("Duration Type", ["Seconds", "Frames"], "Seconds"),
@@ -17,11 +18,14 @@ const
     outFrame = op.outNumber("Frame", 0),
     outStatus = op.outString("Status", "Waiting"),
     outStarted = op.outBool("Started"),
+    outUrl = op.outString("Data URL"),
     outFinished = op.outTrigger("Finished");
 
-op.setPortGroup("File", [inType, inFilePrefix, inQuality]);
+op.setPortGroup("File", [inType, inZip, inDownload, inFilePrefix, inQuality]);
 op.setPortGroup("Size", [useCanvasSize, inWidth, inHeight]);
 op.setPortGroup("Timing", [inFps, inDurType, inDuration]);
+
+outUrl.ignoreValueSerialize = true;
 
 exec.onTriggered = render;
 
@@ -80,7 +84,7 @@ inStart.onTriggered = function ()
     {
         oldSizeW = CABLES.patch.cgl.canvasWidth;
         oldSizeH = CABLES.patch.cgl.canvasHeight;
-        op.patch.cgl.setSize(inWidth.get(), inHeight.get());
+        op.patch.cgl.setSize(inWidth.get() / CABLES.patch.cgl.pixelDensity, inHeight.get() / CABLES.patch.cgl.pixelDensity);
         op.patch.cgl.updateSize();
     }
 
@@ -177,9 +181,20 @@ function render()
                     const anchor = document.createElement("a");
                     anchor.download = filenamePrefix + ".zip";
                     anchor.href = URL.createObjectURL(blob);
-                    anchor.click();
+                    if (inDownload.get())
+                    {
+                        anchor.click();
+                    }
                     stopRendering();
-                    outFinished.trigger();
+                    if (outUrl.isLinked())
+                    {
+                        blobToDataURL(blob, (dataUrl) => { outUrl.set(dataUrl); outFinished.trigger(); });
+                    }
+                    else
+                    {
+                        outUrl.set(null);
+                        outFinished.trigger();
+                    }
                 });
         }
         else
@@ -197,9 +212,20 @@ function render()
                 anchor.setAttribute("download", filenamePrefix + ".webm");
                 anchor.setAttribute("href", url);
                 document.body.appendChild(anchor);
-                anchor.click();
+                if (inDownload.get())
+                {
+                    anchor.click();
+                }
                 stopRendering();
-                outFinished.trigger();
+                if (outUrl.isLinked())
+                {
+                    blobToDataURL(video, (dataUrl) => { outUrl.set(dataUrl); outFinished.trigger(); });
+                }
+                else
+                {
+                    outUrl.set(null);
+                    outFinished.trigger();
+                }
             }
             catch (e)
             {
@@ -263,7 +289,18 @@ function render()
 
                         setTimeout(() =>
                         {
-                            anchor.click();
+                            if (outUrl.isLinked())
+                            {
+                                blobToDataURL(blob, (dataUrl) => { outUrl.set(dataUrl); });
+                            }
+                            else
+                            {
+                                outUrl.set(null);
+                            }
+                            if (inDownload.get())
+                            {
+                                anchor.click();
+                            }
                             countFrames++;
                             updateTime();
                         }, 200);
@@ -286,4 +323,11 @@ function render()
             updateTime();
         });
     }
+}
+
+function blobToDataURL(blob, callback)
+{
+    let a = new FileReader();
+    a.onload = function (e) { callback(e.target.result); };
+    a.readAsDataURL(blob);
 }

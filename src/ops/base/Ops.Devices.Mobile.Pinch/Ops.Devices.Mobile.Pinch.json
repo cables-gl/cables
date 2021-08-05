@@ -5,42 +5,42 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Enabled",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Min Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Max Scale",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset Scale"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Limit",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scale",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event Details"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Delta",
                 "subType": "number"
             }

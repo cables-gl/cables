@@ -1,116 +1,82 @@
-var self=this;
-const cgl=op.patch.cgl;
+let self = this;
+const cgl = op.patch.cgl;
 
-var shader=null;
-var module=null;
-var uniTime;
+// let shader = null;
+// let module = null;
 
-const render=op.inTrigger("render");
-const next=this.outTrigger("trigger");
-const frequency=op.inValueFloat("frequency",1);
-const amount=op.inValueSlider("amount",1.0);
-const phase=op.inValueFloat("phase",1);
-const mul=op.inValueFloat("mul",3);
-const add=op.inValueFloat("add",0);
-const toAxisX=op.inValueBool("axisX",true);
-const toAxisY=op.inValueBool("axisY",true);
-const toAxisZ=op.inValueBool("axisZ",true);
-var src=op.inValueSelect("Source",[
+const render = op.inTrigger("render");
+const next = this.outTrigger("trigger");
+const frequency = op.inValueFloat("frequency", 1);
+const amount = op.inValueSlider("amount", 1.0);
+const phase = op.inValueFloat("phase", 1);
+const mul = op.inValueFloat("mul", 3);
+const add = op.inValueFloat("add", 0);
+const toAxisX = op.inValueBool("axisX", true);
+const toAxisY = op.inValueBool("axisY", true);
+const toAxisZ = op.inValueBool("axisZ", true);
+let src = op.inValueSelect("Source", [
     "X * Z + Time",
     "X * Y + Time",
     "X + Time",
     "Y + Time",
-    "Z + Time"],"X * Z + Time" );
+    "Z + Time"], "X * Z + Time");
 
-var uniMul=null;
-var uniFrequency=null;
-var uniAmount=null;
-var uniPhase=null;
-var uniAdd=null;
+let uniMul = null;
+let uniFrequency = null;
+let uniAmount = null;
+let uniPhase = null;
+let uniAdd = null;
 
+src.onChange =
+    toAxisZ.onChange =
+    toAxisX.onChange =
+    toAxisY.onChange = setDefines;
 
+const srcHeadVert = ""
+    // .endl() + "UNI float MOD_time;"
+    // .endl() + "UNI float MOD_frequency;"
+    // .endl() + "UNI float MOD_amount;"
+    // .endl() + "UNI float MOD_phase;"
+    // .endl() + "UNI float MOD_mul;"
+    // .endl() + "UNI float MOD_add;"
+    .endl();
 
-src.onChange=
-    toAxisZ.onChange=
-    toAxisX.onChange=
-    toAxisY.onChange=setDefines;
+// const srcBodyVert=attachments.sinewobble_vert||'';
+let startTime = CABLES.now() / 1000.0;
+
+const mod = new CGL.ShaderModifier(cgl, op.name);
+
+mod.addModule({
+    "title": op.name,
+    "name": "MODULE_VERTEX_POSITION",
+    "srcHeadVert": srcHeadVert,
+    "srcBodyVert": attachments.sinewobble_vert
+});
+
+// mod.addUniformVert("f", "MOD_size", inSize);
+mod.addUniformVert("f", "MOD_time", 0);
+mod.addUniformVert("f", "MOD_frequency", frequency);
+mod.addUniformVert("f", "MOD_amount", amount);
+mod.addUniformVert("f", "MOD_phase", phase);
+mod.addUniformVert("f", "MOD_mul", mul);
+mod.addUniformVert("f", "MOD_add", add);
 
 function setDefines()
 {
-    if(!shader)return;
-
-    if(toAxisX.val)shader.define(module.prefix+'TO_AXIS_X');
-        else shader.removeDefine(module.prefix+'TO_AXIS_X');
-
-    if(toAxisY.val)shader.define(module.prefix+'TO_AXIS_Y');
-        else shader.removeDefine(module.prefix+'TO_AXIS_Y');
-
-    if(toAxisZ.val)shader.define(module.prefix+'TO_AXIS_Z');
-        else shader.removeDefine(module.prefix+'TO_AXIS_Z');
-
-    if(!src.get() || src.get()=='X * Z + Time' || src.get()==='') shader.define(module.prefix+'SRC_XZ');
-        else shader.removeDefine(module.prefix+'SRC_XZ');
-
-    if(src.get()=='X * Y + Time')shader.define(module.prefix+'SRC_XY');
-        else shader.removeDefine(module.prefix+'SRC_XY');
-
-    if(src.get()=='X + Time')shader.define(module.prefix+'SRC_X');
-        else shader.removeDefine(module.prefix+'SRC_X');
-
-    if(src.get()=='Y + Time')shader.define(module.prefix+'SRC_Y');
-        else shader.removeDefine(module.prefix+'SRC_Y');
-
-    if(src.get()=='Z + Time')shader.define(module.prefix+'SRC_Z');
-        else shader.removeDefine(module.prefix+'SRC_Z');
+    mod.toggleDefine("MOD_TO_AXIS_X", toAxisX.get());
+    mod.toggleDefine("MOD_TO_AXIS_Y", toAxisY.get());
+    mod.toggleDefine("MOD_TO_AXIS_Z", toAxisZ.get());
+    mod.toggleDefine("MOD_SRC_XZ", !src.get() || src.get() == "X * Z + Time" || src.get() === "");
+    mod.toggleDefine("MOD_SRC_XY", src.get() == "X * Y + Time");
+    mod.toggleDefine("MOD_SRC_X", src.get() == "X + Time");
+    mod.toggleDefine("MOD_SRC_Y", src.get() == "Y + Time");
+    mod.toggleDefine("MOD_SRC_Z", src.get() == "Z + Time");
 }
 
-var srcHeadVert=''
-    .endl()+'UNI float MOD_time;'
-    .endl()+'UNI float MOD_frequency;'
-    .endl()+'UNI float MOD_amount;'
-    .endl()+'UNI float MOD_phase;'
-    .endl()+'UNI float MOD_mul;'
-    .endl()+'UNI float MOD_add;'
-    .endl();
-
-var srcBodyVert=attachments.sinewobble_vert||'';
-
-
-
-var startTime=CABLES.now()/1000.0;
-
-function removeModule()
+render.onTriggered = function ()
 {
-    if(shader && module)
-    {
-        shader.removeModule(module);
-        shader=null;
-    }
-}
-
-render.onLinkChanged=removeModule;
-render.onTriggered=function()
-{
-    if(cgl.getShader()!=shader)
-    {
-        if(shader) removeModule();
-        shader=cgl.getShader();
-        module=shader.addModule(
-            {
-                name:'MODULE_VERTEX_POSITION',
-                srcHeadVert:srcHeadVert,
-                srcBodyVert:srcBodyVert
-            });
-
-        uniTime=new CGL.Uniform(shader,'f',module.prefix+'time',0);
-        uniFrequency=new CGL.Uniform(shader,'f',module.prefix+'frequency',frequency);
-        uniAmount=new CGL.Uniform(shader,'f',module.prefix+'amount',amount);
-        uniPhase=new CGL.Uniform(shader,'f',module.prefix+'phase',phase);
-        uniMul=new CGL.Uniform(shader,'f',module.prefix+'mul',mul);
-        uniAdd=new CGL.Uniform(shader,'f',module.prefix+'add',add);
-        setDefines();
-    }
-
-    uniTime.setValue(CABLES.now()/1000.0-startTime);
+    mod.bind();
+    mod.setUniformValue("MOD_time", CABLES.now() / 1000.0 - startTime);
     next.trigger();
+    mod.unbind();
 };

@@ -11,12 +11,10 @@ const durations = {};
 let branches = {};
 let dumpFrame = false;
 
-const query = null;
-
 const started = false;
 
-const ext = gl.getExtension("EXT_disjoint_timer_query_webgl2");
-
+// const query = null;
+// const ext = gl.getExtension("EXT_disjoint_timer_query_webgl2");
 
 exec.onTriggered = function ()
 {
@@ -26,33 +24,7 @@ exec.onTriggered = function ()
         resetStats();
     }
 
-    // if(!query)
-    // {
-    // query = gl.createQuery();
-    // gl.beginQuery(ext.TIME_ELAPSED_EXT, query);
-    // started=true;
-
-    // }
-
     next.trigger();
-
-    // if(query && started)
-    // {
-    //     gl.endQuery(ext.TIME_ELAPSED_EXT);
-    //     started=false;
-    // }
-
-    // if(query)
-    // {
-    //     const available = gl.getQueryParameter(query, gl.QUERY_RESULT_AVAILABLE);
-    //     if (available)
-    //     {
-    //         const elapsedNanos = gl.getQueryParameter(query, gl.QUERY_RESULT);
-    //         query=null;
-    //     }
-
-    // }
-
 
     if (dumpFrame)
     {
@@ -68,7 +40,6 @@ exec.onTriggered = function ()
 
         console.table(rows);
 
-
         const rowsBranches = [];
         for (const i in branches)
         {
@@ -79,7 +50,6 @@ exec.onTriggered = function ()
             rowsBranches.push([i, count, Math.round(count / numGlCalls * 100) + "%"]);
         }
         console.table(rowsBranches);
-
 
         op.log(CABLES.profilerBranchesTimes);
 
@@ -147,7 +117,6 @@ function end()
         if (typeof gl[i] == "function")
             gl[i] = originals[i];
 }
-
 
 dump.onTriggered = function ()
 {

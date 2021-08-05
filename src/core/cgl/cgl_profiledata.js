@@ -1,7 +1,8 @@
 class ProfileData
 {
-    constructor()
+    constructor(cgl)
     {
+        this._cgl = cgl;
         this._lastTime = 0;
         this.pause = false;
         this.profileUniformCount = 0;
@@ -25,11 +26,16 @@ class ProfileData
         this.shaderCompileTime = 0;
         this.profileMeshNumElements = 0;
         this.profileMeshAttributes = 0;
-    }
+        this.profileSingleMeshAttribute = [];
+        this.heavyEvents = [];
 
+        this.doProfileGlQuery = false;
+        this.glQueryData = {};
+    }
 
     clear()
     {
+        this.profileSingleMeshAttribute = {};
         this.profileMeshAttributes = 0;
         this.profileUniformCount = 0;
         this.profileShaderGetUniform = 0;
@@ -52,7 +58,30 @@ class ProfileData
         this.profileTexPreviews = 0;
         this.profileMeshNumElements = 0;
     }
+
+    clearGlQuery()
+    {
+        for (let i in this.glQueryData)
+        {
+            if (!this.glQueryData[i].lastClear || performance.now() - this.glQueryData[i].lastClear > 1000)
+            {
+                this.glQueryData[i].time = this.glQueryData[i]._times / this.glQueryData[i]._numcount;
+                this.glQueryData[i].num = this.glQueryData[i]._numcount;
+
+                this.glQueryData[i]._times = 0;
+                this.glQueryData[i]._numcount = 0;
+                this.glQueryData[i].lastClear = performance.now();
+            }
+        }
+    }
+
+    addHeavyEvent(event, name, info)
+    {
+        const e = { "event": event, "name": name, "info": info, "date": performance.now() };
+        this.heavyEvents.push(e);
+        this._cgl.emitEvent("heavyEvent", e);
+    }
 }
 
 
-export const profileData = new ProfileData();
+export { ProfileData };

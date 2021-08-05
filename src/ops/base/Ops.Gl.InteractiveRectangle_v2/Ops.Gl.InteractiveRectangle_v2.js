@@ -37,7 +37,7 @@ axis.set("xy");
 pivotX.set("center");
 pivotY.set("center");
 
-const geom = new CGL.Geometry();
+const geom = new CGL.Geometry(op.name);
 let mesh = null;
 let div = null;
 const m = mat4.create();
@@ -219,15 +219,12 @@ function updateDivSize()
 {
     // var vp=cgl.getViewPort();
 
-
     mat4.multiply(mMatrix, cgl.vMatrix, cgl.mMatrix);
     vec3.transformMat4(pos, divAlign, mMatrix);
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
-
     const x1 = (trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2;
     const y1 = (trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2;
-
 
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1];
@@ -238,7 +235,6 @@ function updateDivSize()
     const x2 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
     const y2 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
 
-
     divAlignSize[0] = divAlign[0];
     divAlignSize[1] = divAlign[1] + height.get();
 
@@ -248,7 +244,6 @@ function updateDivSize()
     const x3 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
     const y3 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
 
-
     divAlignSize[0] = divAlign[0] + width.get();
     divAlignSize[1] = divAlign[1] + height.get();
 
@@ -257,7 +252,6 @@ function updateDivSize()
 
     const x4 = ((trans[0] * cgl.canvasWidth / 2) + cgl.canvasWidth / 2);
     const y4 = ((trans[1] * cgl.canvasHeight / 2) + cgl.canvasHeight / 2);
-
 
     divX = Math.min(x1, x2, x3, x4);
     divY = Math.min(cgl.canvasHeight - y1, cgl.canvasHeight - y2, cgl.canvasHeight - y3, cgl.canvasHeight - y4);
@@ -272,7 +266,6 @@ function updateDivSize()
 
     divWidth = Math.abs(xb - divX);
     divHeight = Math.abs(yb - divY);
-
 
     divX /= op.patch.cgl.pixelDensity;
     divY /= op.patch.cgl.pixelDensity;
@@ -324,7 +317,7 @@ function setUpDiv()
         div.style.border = "1px solid red";
         // div.style['border-left']="1px solid blue";
         // div.style['border-top']="1px solid green";
-        div.style["z-index"] = "1000";
+        div.style["z-index"] = "500";
 
         div.style["-webkit-user-select"] = "none";
         div.style["user-select"] = "none";
@@ -405,7 +398,6 @@ function onTouchMove(e)
         mouseOver.set(false);
     }
 }
-
 
 active.onChange = updateActiveRender;
 function updateActiveRender()

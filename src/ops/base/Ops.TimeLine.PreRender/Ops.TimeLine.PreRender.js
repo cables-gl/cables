@@ -4,6 +4,7 @@ const
     progress = op.outTrigger("Render Progress"),
     done = op.outTrigger("Done"),
     inMaxTime = op.inInt("Max Time", 1),
+
     inStep = op.inInt("Step", 30),
     inReset = op.inTriggerButton("Reset"),
     outProgress = op.outNumber("Progress", 0);
@@ -50,6 +51,8 @@ function render()
 
     outProgress.set((maxTime - curTime) / maxTime);
 
+    next.trigger();
+    next.trigger();
     next.trigger();
 
     CABLES.overwriteTime = undefined;

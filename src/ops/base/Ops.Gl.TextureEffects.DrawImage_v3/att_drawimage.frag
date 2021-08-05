@@ -4,8 +4,10 @@
     UNI sampler2D image;
 #endif
 
-IN mat3 transform;
-UNI float rotate;
+#ifdef TEX_TRANSFORM
+    IN mat3 transform;
+#endif
+// UNI float rotate;
 
 {{CGL.BLENDMODES}}
 
@@ -23,6 +25,7 @@ UNI float amount;
 void main()
 {
     vec4 blendRGBA=vec4(0.0,0.0,0.0,1.0);
+
     #ifdef HAS_TEXTURES
         vec2 tc=texCoord;
 
@@ -102,13 +105,10 @@ void main()
         #endif
     #endif
 
-
-
     // blendRGBA.rgb=mix( colNew, base ,1.0-am);
-
     // blendRGBA.a=clamp((blendRGBA.a*am),0.,1.);
 
-    blendRGBA.rgb=mix( colNew, base ,1.0-(am*blendRGBA.a));
+    blendRGBA.rgb=mix(colNew,base,1.0-(am*blendRGBA.a));
     blendRGBA.a=clamp(baseRGBA.a+(blendRGBA.a*am),0.,1.);
 
 

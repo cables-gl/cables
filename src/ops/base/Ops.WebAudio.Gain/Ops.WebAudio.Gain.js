@@ -1,27 +1,27 @@
-const audioIn = op.inObject("audio in");
+const audioIn = op.inObject("audio in", null, "audioNode");
 const gain = op.inFloatSlider("gain", 1);
 const inMute = op.inBool("Mute", false);
-const audioOut = op.outObject("audio out");
+const audioOut = op.outObject("audio out", null, "audioNode");
 
-let audioContext = CABLES.WEBAUDIO.createAudioContext(op);
+const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 const gainNode = audioContext.createGain();
 
 gain.onChange = () =>
 {
     if (inMute.get()) return;
-    // gainNode.gain.value = parseFloat( gain.get() )||0;
-    gainNode.gain.setValueAtTime(Number(gain.get()) || 0, window.audioContext.currentTime);
+
+    gainNode.gain.setValueAtTime(Number(gain.get()) || 0, audioCtx.currentTime);
 };
 
 inMute.onChange = () =>
 {
     if (inMute.get())
     {
-        gainNode.gain.setValueAtTime(0, window.audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.01);
     }
     else
     {
-        gainNode.gain.setValueAtTime(Number(gain.get()) || 0, window.audioContext.currentTime);
+        gainNode.gain.linearRampToValueAtTime(Number(gain.get()) || 0, audioCtx.currentTime + 0.01);
     }
 };
 let oldAudioIn = null;
@@ -41,17 +41,11 @@ audioIn.onChange = function ()
                 op.log(e);
             }
         }
-        op.setUiError("audioCtx", null);
         audioOut.set(null);
     }
     else
     {
-        if (audioIn.val.connect)
-        {
-            audioIn.val.connect(gainNode);
-            op.setUiError("audioCtx", null);
-        }
-        else op.setUiError("audioCtx", "The passed input is not an audio context. Please make sure you connect an audio context to the input.", 2);
+        if (audioIn.val.connect) audioIn.val.connect(gainNode);
     }
     oldAudioIn = audioIn.get();
     audioOut.set(gainNode);

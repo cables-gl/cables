@@ -43,6 +43,14 @@
                 "type": 0,
                 "name": "active",
                 "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Open patch"
+            },
+            {
+                "type": 5,
+                "name": "portsData"
             }
         ],
         "portsOut": [
@@ -53,5 +61,13 @@
             }
         ],
         "name": "Ops.Admin.Blueprint"
+    },
+    "summary": "include subpatches from other patchs",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

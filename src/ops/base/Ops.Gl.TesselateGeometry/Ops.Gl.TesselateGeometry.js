@@ -110,7 +110,7 @@ function tesselate(vertices, x1, y1, z1, x2, y2, z2, x3, y3, z3)
 
 function tesselateGeom(oldGeom)
 {
-    const geom = new CGL.Geometry();
+    const geom = new CGL.Geometry(op.name);
     const vertices = [];
     const norms = [];
     const biTangents = [];

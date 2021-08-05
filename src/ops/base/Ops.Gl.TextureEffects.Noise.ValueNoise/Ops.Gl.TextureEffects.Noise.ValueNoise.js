@@ -13,7 +13,7 @@ op.setPortGroup("Position",[x,y,z]);
 op.setPortGroup("Look",[scale]);
 
 var cgl=op.patch.cgl;
-var shader=new CGL.Shader(cgl);
+var shader=new CGL.Shader(cgl,op.name);
 
 shader.setSource(shader.getDefaultVertexShader(),attachments.valuenoise3d_frag);
 var textureUniform=new CGL.Uniform(shader,'t','tex',0);

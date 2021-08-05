@@ -1,0 +1,40 @@
+{
+    "id": "2ebd0d87-f67a-4101-bdf0-283c610b095a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1617814252687
+        },
+        {
+            "message": "Ops.User.pandur.InvertMatrix renamed to Ops.Gl.Matrix.InvertMatrix",
+            "author": "pandur",
+            "date": 1617876247252
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1617814574893,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Matrix"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.Gl.Matrix.InvertMatrix"
+    },
+    "summary": "outputs an inverted matrix",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

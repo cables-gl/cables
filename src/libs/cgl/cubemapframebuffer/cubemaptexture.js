@@ -11,6 +11,8 @@ class CubemapTexture
 
         this._cgl = cgl;
 
+        console.log("cubemaptexture created!");
+
         this._cubemapFaces = [
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
@@ -35,9 +37,9 @@ class CubemapTexture
         this.flip = options.flip || true;
         this.flipped = false;
         this._fromData = true;
-        this.name = "cubemap unknown";
+        this.name = options.name || "unknown cubemap texture";
 
-        CGL.profileData.profileTextureNew++;
+        this._cgl.profileData.profileTextureNew++;
 
         this.setSize(options.width, options.height);
     }
@@ -61,7 +63,7 @@ class CubemapTexture
         this.height = h;
 
         this._cgl.gl.bindTexture(this.texTarget, this.tex);
-        CGL.profileData.profileTextureResize++;
+        this._cgl.profileData.profileTextureResize++;
 
         if (this.textureType == CGL.Texture.TYPE_FLOAT && this.filter == CGL.Texture.FILTER_LINEAR && !this._cgl.gl.getExtension("OES_texture_float_linear"))
         {
@@ -93,6 +95,7 @@ class CubemapTexture
             // * NOTE: was gl.RGBA32F && gl.FLOAT instead of gl.RGBA && gl.UNSIGNED_BYTE
         }
 
+        this.updateMipMap();
         this._cgl.gl.bindTexture(this._cgl.gl.TEXTURE_CUBE_MAP, null);
     }
 
@@ -111,7 +114,7 @@ class CubemapTexture
 
         if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
         {
-        // Log.log( 'non power of two',this.width,this.height );
+            // Log.log( 'non power of two',this.width,this.height );
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
@@ -175,6 +178,15 @@ class CubemapTexture
     isPowerOfTwo(x)
     {
         return x == 1 || x == 2 || x == 4 || x == 8 || x == 16 || x == 32 || x == 64 || x == 128 || x == 256 || x == 512 || x == 1024 || x == 2048 || x == 4096 || x == 8192 || x == 16384;
+    }
+
+    updateMipMap()
+    {
+        if ((this._cgl.glVersion == 2 || this.isPowerOfTwo()) && this.filter == CGL.Texture.FILTER_MIPMAP)
+        {
+            this._cgl.gl.generateMipmap(this.texTarget);
+            this._cgl.profileData.profileGenMipMap++;
+        }
     }
 }
 

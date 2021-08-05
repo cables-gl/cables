@@ -24,8 +24,10 @@ const scalePort = op.outValue("Scale", 1);
 const eventPort = op.outObject("Event Details");
 const outDelta = op.outNumber("Delta");
 
-
 // change listeners
+window.addEventListener("gesturestart", (e) => e.preventDefault());
+window.addEventListener("gesturechange", (e) => e.preventDefault());
+window.addEventListener("gestureend", (e) => e.preventDefault());
 
 hammertime.on("pinch", function (ev)
 {
@@ -62,7 +64,6 @@ hammertime.on("pinch", function (ev)
     else if (d > 0) d = 1;
 
     outDelta.set(d);
-
 
     // if(ev.additionalEvent) {
 	    /*

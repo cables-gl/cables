@@ -30,6 +30,11 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Show Minimize",
+                "subType": "boolean"
+            },
+            {
                 "type": 5,
                 "name": "Title"
             },
@@ -43,14 +48,55 @@
             {
                 "type": 2,
                 "name": "childs"
+            },
+            {
+                "type": 0,
+                "name": "Opened",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Sidebar.Sidebar"
     },
     "summary": "sidebar overlay to control values",
-    "youtubeid": "cpRVswVdvI0",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Visible",
+                "text": "hide sidebar competely"
+            },
+            {
+                "name": "Opacity",
+                "text": "opacity when opened"
+            },
+            {
+                "name": "Default Minimized",
+                "text": "start with minimized sidebar"
+            },
+            {
+                "name": "Minimized Opacity",
+                "text": "opacity when minimized"
+            },
+            {
+                "name": "Show undo button",
+                "text": "show undo button on top of sidebar"
+            },
+            {
+                "name": "Title",
+                "text": "the title"
+            },
+            {
+                "name": "Side",
+                "text": "switch left/right side of screen"
+            },
+            {
+                "name": "childs",
+                "text": "attach sidebar ops here"
+            },
+            {
+                "name": "Opened",
+                "text": "sidebar visible and not minimized"
+            }
+        ]
     },
     "todos": [
         {
@@ -59,5 +105,11 @@
             "id": "7343d67c-cd34-4717-8ae9-83558f39c030",
             "date": 1560339002381
         }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [
+        "cpRVswVdvI0"
     ]
 }

@@ -1,0 +1,40 @@
+{
+    "id": "26be55ca-23c0-4f22-bdea-0fd4c63b2067",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1618901978480
+        },
+        {
+            "message": "Ops.User.pandur.GlGetError renamed to Ops.Debug.GlLogErrors",
+            "author": "pandur",
+            "date": 1618903069151
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1618901980551,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Exec"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Debug.GlLogErrors"
+    },
+    "summary": "execute glGetError after every gl command and log to browser console",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

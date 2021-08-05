@@ -10,11 +10,12 @@ const
     width = op.outValue("Width"),
     height = op.outValue("Height"),
     ratio = op.outValue("Aspect Ratio"),
-    loaded = op.outValue("Loaded");
+    loaded = op.outValue("Loaded", false),
+    loading = op.outValue("Loading", false);
 
 op.setPortGroup("Size", [width, height]);
 
-unpackAlpha.hidePort();
+unpackAlpha.setUiAttribs({ "hidePort": true });
 
 op.toWorkPortsNeedToBeLinked(textureOut);
 
@@ -33,8 +34,6 @@ aniso.onChange = tfilter.onChange = onFilterChange;
 wrap.onChange = onWrapChange;
 unpackAlpha.onChange = function () { reloadSoon(); };
 
-loaded.set(false);
-
 tfilter.set("mipmap");
 wrap.set("repeat");
 
@@ -44,10 +43,17 @@ active.onChange = function ()
 {
     if (active.get())
     {
-        if (loadedFilename != filename.get()) realReload();
+        if (loadedFilename != filename.get() || !tex) reloadSoon();
         else textureOut.set(tex);
     }
-    else textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+    else
+    {
+        textureOut.set(CGL.Texture.getEmptyTexture(cgl));
+        width.set(CGL.Texture.getEmptyTexture(cgl).width);
+        height.set(CGL.Texture.getEmptyTexture(cgl).height);
+        if (tex)tex.delete();
+        tex = null;
+    }
 };
 
 const setTempTexture = function ()
@@ -82,6 +88,7 @@ function realReload(nocache)
     if ((filename.get() && filename.get().length > 1))
     {
         loaded.set(false);
+        loading.set(true);
 
         op.setUiAttrib({ "extendTitle": CABLES.basename(url) });
         op.refreshParams();
@@ -89,30 +96,33 @@ function realReload(nocache)
         cgl.patch.loading.addAssetLoadingTask(() =>
         {
             op.setUiError("urlerror", null);
-            if (tex)tex.delete();
-            tex = CGL.Texture.load(cgl, url,
+
+            const newTex = CGL.Texture.load(cgl, url,
                 function (err)
                 {
                     if (err)
                     {
                         setTempTexture();
-                        op.error(err);
+                        // op.error(err);
                         op.setUiError("urlerror", "could not load texture:<br/>\"" + filename.get() + "\"", 2);
                         cgl.patch.loading.finished(loadingId);
                         return;
                     }
 
-                    textureOut.set(tex);
-                    width.set(tex.width);
-                    height.set(tex.height);
-                    ratio.set(tex.width / tex.height);
+                    textureOut.set(newTex);
+                    width.set(newTex.width);
+                    height.set(newTex.height);
+                    ratio.set(newTex.width / newTex.height);
 
-                    if (!tex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
+                    if (!newTex.isPowerOfTwo()) op.setUiError("npot", "Texture dimensions not power of two! - Texture filtering will not work in WebGL 1.", 0);
                     else op.setUiError("npot", null);
 
+                    if (tex)tex.delete();
+                    tex = newTex;
                     textureOut.set(null);
                     textureOut.set(tex);
 
+                    loading.set(false);
                     loaded.set(true);
                     cgl.patch.loading.finished(loadingId);
                 }, {
@@ -123,8 +133,8 @@ function realReload(nocache)
                     "filter": cgl_filter
                 });
 
-            textureOut.set(null);
-            textureOut.set(tex);
+            // textureOut.set(null);
+            // textureOut.set(tex);
         });
     }
     else

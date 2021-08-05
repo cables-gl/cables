@@ -25,14 +25,14 @@ void main()
    texCoord=(attrTexOffsets+attrTexCoord*attrTcSize);
    texCoord.y=1.0-texCoord.y;
 
-   mat4 instModelMat=instMat;
+   mat4 instMVMat=instMat;
    vec4 vert=vec4( vPosition, 1. );
    vert.x*=attrSize.x*mulSize;
    vert.y*=attrSize.y*mulSize;
 
    texIndex=attrPage+0.4; // strange ios rounding errors?!
 
-   mat4 mvMatrix=viewMatrix * modelMatrix * instModelMat;
+   mat4 mvMatrix=viewMatrix * modelMatrix * instMVMat;
 
    gl_Position = projMatrix * mvMatrix * vert;
 }

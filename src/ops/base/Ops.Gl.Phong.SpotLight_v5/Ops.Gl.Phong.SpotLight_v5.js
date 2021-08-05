@@ -239,7 +239,15 @@ function drawHelpers()
 }
 
 let errorActive = false;
-inTrigger.onTriggered = function ()
+inTrigger.onTriggered = renderLight;
+
+op.preRender = () =>
+{
+    updateShadowMapFramebuffer();
+    renderLight();
+};
+
+function renderLight()
 {
     if (updating)
     {
@@ -321,4 +329,4 @@ inTrigger.onTriggered = function ()
     outTrigger.trigger();
 
     cgl.frameStore.lightStack.pop();
-};
+}

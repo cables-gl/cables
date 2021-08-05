@@ -1,0 +1,52 @@
+{
+    "id": "d75992b7-65e2-44d8-b264-320d4c5a5630",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1614258595413
+        },
+        {
+            "message": " added core lib: vargetset",
+            "author": "pandur",
+            "date": 1614258958239
+        },
+        {
+            "message": "Ops.User.pandur.VarTriggerString renamed to Ops.Vars.VarTriggerString",
+            "author": "pandur",
+            "date": 1614259024364
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1614258600444,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Value"
+            },
+            {
+                "type": 1,
+                "name": "Trigger"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Vars.VarTriggerString"
+    },
+    "coreLibs": [
+        "vargetset"
+    ],
+    "summary": "set string variable by trigger",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

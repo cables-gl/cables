@@ -1,0 +1,44 @@
+{
+    "authorName": "pandur",
+    "id": "e6ff2e1b-0c7a-4d0b-b1cf-720c2bbe3514",
+    "created": 1621603158288,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.String.Base64Encode_v2"
+    },
+    "summary": "encode a string to base64",
+    "changelog": [
+        {
+            "message": "cloned op from Ops.String.Base64Encode",
+            "author": "stephan",
+            "date": 1621603158289
+        }
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "String",
+                "text": "the input string"
+            },
+            {
+                "name": "Result",
+                "text": "base64 output"
+            }
+        ]
+    }
+}

@@ -1,11 +1,13 @@
 const VarSetOpWrapper = class
 {
-    constructor(op, type, valuePort, varNamePort)
+    constructor(op, type, valuePort, varNamePort, triggerPort, nextPort)
     {
         this._valuePort = valuePort;
         this._varNamePort = varNamePort;
         this._op = op;
         this._type = type;
+        this._triggerPort = triggerPort;
+        this._nextPort = nextPort;
 
         this._btnCreate = op.inTriggerButton("Create new variable");
         this._btnCreate.setUiAttribs({ "hidePort": true });
@@ -25,13 +27,25 @@ const VarSetOpWrapper = class
 
         this._varNamePort.onChange = this._updateName.bind(this);
 
-        this._valuePort.onChange = this._setVarValue.bind(this);
         this._valuePort.changeAlways = true;
+
+        if (this._triggerPort)
+        {
+            this._triggerPort.onTriggered = () =>
+            {
+                this._setVarValue(true);
+            };
+        }
+        else
+        {
+            this._valuePort.onChange = this._setVarValue.bind(this);
+        }
+
 
         this._op.init = () =>
         {
             this._updateName();
-            this._setVarValue();
+            if (!this._triggerPort) this._setVarValue();
             this._updateErrorUi();
         };
     }
@@ -48,24 +62,44 @@ const VarSetOpWrapper = class
     _updateName()
     {
         const varname = this._varNamePort.get();
-        if (CABLES.UI) this._op.setTitle("set #" + varname);
+        this._op.setTitle("var set ");
+        this._op.setUiAttrib({ "extendTitle": "#" + varname });
+
         this._updateErrorUi();
 
         const vari = this._op.patch.getVar(varname);
         if (vari && !vari.type) vari.type = this._type;
 
-        if (!this._op.patch.hasVar(varname)) this._setVarValue();
-        this._updateVarNamesDropdown();
+        if (!this._op.patch.hasVar(varname) && varname != 0 && !this._triggerPort)
+        {
+            // console.log("var does not exist", varname);
+
+            this._setVarValue(); // this should not be done!!!, its kept because of compatibility anxiety
+        }
+        if (!this._op.patch.hasVar(varname) && varname != 0 && this._triggerPort)
+        {
+            if (this._type == "string") this._op.patch.setVarValue(varname, "");
+            else if (this._type == "number") this._op.patch.setVarValue(varname, "");
+            else this._op.patch.setVarValue(varname, null);
+        }
+
 
         if (this._op.isCurrentUiOp())
         {
+            this._updateVarNamesDropdown();
             this._op.refreshParams();
         }
+        this._updateDisplay();
     }
 
     _createVar()
     {
         CABLES.CMD.PATCH.createVariable(this._op, this._type, () => { this._updateName(); });
+    }
+
+    _updateDisplay()
+    {
+        this._valuePort.setUiAttribs({ "greyout": !this._varNamePort.get() });
     }
 
     _updateVarNamesDropdown()
@@ -86,9 +120,18 @@ const VarSetOpWrapper = class
         this._updateName();
     }
 
-    _setVarValue()
+    _setVarValue(triggered)
     {
-        this._op.patch.setVarValue(this._varNamePort.get(), this._valuePort.get());
+        const name = this._varNamePort.get();
+
+        if (!name) return;// console.warn("[vargetset] no varnameport");
+
+        if (CABLES.watchVars && CABLES.watchVars[name])
+            console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
+
+        this._op.patch.setVarValue(name, this._valuePort.get());
+
+        if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };
 
@@ -164,13 +207,15 @@ const VarGetOpWrapper = class
         {
             this._variable.addListener(this._setValueOut.bind(this));
             this._op.setUiError("unknownvar", null);
-            this._op.setTitle("#" + this._varnamePort.get());
+            this._op.setTitle("var get ");
+            this._op.setUiAttrib({ "extendTitle": "#" + this._varnamePort.get() });
             this._valueOutPort.set(this._variable.getValue());
         }
         else
         {
             this._op.setUiError("unknownvar", "unknown variable! - there is no setVariable with this name (" + this._varnamePort.get() + ")");
-            this._op.setTitle("#invalid");
+            // this._op.setTitle("#invalid");
+            this._op.setUiAttrib({ "extendTitle": "#invalid" });
             this._valueOutPort.set(0);
         }
     }

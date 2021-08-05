@@ -5,5 +5,5 @@ v.onChange = exec;
 
 function exec()
 {
-    result.set(v.get());
+    result.set(Number(v.get()));
 }

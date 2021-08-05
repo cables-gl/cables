@@ -109,39 +109,39 @@ function setRay(world)
     toY.set(to[1]);
     toZ.set(to[2]);
 
-    rayResult = new CANNON.RaycastResult();
-    // world.raycastClosest(
-    //     new CANNON.Vec3(origin[0], origin[1], origin[2]),
-    //     new CANNON.Vec3(to[0], to[1], to[2]),
-    //     {},
-    //     rayResult);
-
     results.length = 0;
 
-    world.raycastAll(
+    rayResult = new CANNON.RaycastResult();
+    world.raycastClosest(
         new CANNON.Vec3(origin[0], origin[1], origin[2]),
         new CANNON.Vec3(to[0], to[1], to[2]),
-        { "skipBackfaces": false },
-        function (r)
-        {
-            // todo sort all results by distance to find closest ?
-            // check if visible on screen or behind cam...
-            const pos = vec3.create();
-            vec3.set(pos, r.hitPointWorld.x, r.hitPointWorld.y, r.hitPointWorld.z);
-            vec3.transformMat4(pos, pos, cgl.vMatrix);
+        {},
+        rayResult);
 
-            const screenTrans = vec3.create();
-            vec3.transformMat4(screenTrans, pos, cgl.pMatrix);
+    // world.raycastAll(
+    //     new CANNON.Vec3(origin[0], origin[1], origin[2]),
+    //     new CANNON.Vec3(to[0], to[1], to[2]),
+    //     { "skipBackfaces": false },
+    //     function (r)
+    //     {
+    //         // todo sort all results by distance to find closest ?
+    //         // check if visible on screen or behind cam...
+    //         const pos = vec3.create();
+    //         vec3.set(pos, r.hitPointWorld.x, r.hitPointWorld.y, r.hitPointWorld.z);
+    //         vec3.transformMat4(pos, pos, cgl.vMatrix);
 
-            const vp = cgl.getViewPort();
+    //         const screenTrans = vec3.create();
+    //         vec3.transformMat4(screenTrans, pos, cgl.pMatrix);
 
-            const xp = (screenTrans[0] * vp[2] / 2) + vp[2] / 2;
-            const yp = (screenTrans[1] * vp[3] / 2) + vp[3] / 2;
+    //         const vp = cgl.getViewPort();
 
-            const visi = screenTrans[2] < 1 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3];
+    //         const xp = (screenTrans[0] * vp[2] / 2) + vp[2] / 2;
+    //         const yp = (screenTrans[1] * vp[3] / 2) + vp[3] / 2;
 
-            if (visi)rayResult = r;
-        });
+    //         const visi = screenTrans[2] < 1 && xp > 0 && xp < vp[2] && yp > 0 && yp < vp[3];
+
+    //         if (visi)rayResult = r;
+    //     });
 }
 
 function render()

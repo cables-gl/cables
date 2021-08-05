@@ -1,0 +1,1 @@
+The default transfer function for the waveshaper is taken from https://stackoverflow.com/a/22313408

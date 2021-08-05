@@ -1,0 +1,59 @@
+{
+    "id": "87d78a59-c8d4-4269-a3f8-af273741aae4",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1622527751528
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.sidebartabs",
+            "author": "pandur",
+            "date": 1622529549185
+        },
+        {
+            "message": "Ops.User.pandur.SideBarStyle renamed to Ops.Sidebar.SideBarStyle",
+            "author": "pandur",
+            "date": 1622531294836
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1622529549185,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "link"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Round Corners",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Special Color"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "childs"
+            }
+        ],
+        "name": "Ops.Sidebar.SideBarStyle"
+    },
+    "summary": "adjust appearance of sidebar",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

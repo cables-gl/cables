@@ -3,49 +3,59 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 1",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 2",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 3",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 4",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 5",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 6",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 7",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "bool 8",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "bool 9",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "bool 10",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "boolean"
             }

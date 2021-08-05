@@ -4,13 +4,13 @@ const
     inScale = op.inValue("Scale", 1),
     doLimit = op.inValueBool("Limit Instances", false),
     inLimit = op.inValueInt("Limit", 100),
-
     inTranslates = op.inArray("positions"),
     inScales = op.inArray("Scale Array"),
     inRot = op.inArray("Rotations"),
     inRotMeth = op.inSwitch("Rotation Type", ["Euler", "Quaternions"], "Euler"),
     inBlendMode = op.inSwitch("Material blend mode", ["Multiply", "Add", "Normal"], "Multiply"),
     inColor = op.inArray("Colors"),
+    inTexCoords = op.inArray("TexCoords"),
     outTrigger = op.outTrigger("Trigger Out"),
     outNum = op.outValue("Num");
 
@@ -26,10 +26,12 @@ const m = mat4.create();
 let
     matrixArray = new Float32Array(1),
     instColorArray = new Float32Array(1),
+    instTexcoordArray = new Float32Array(1),
     mesh = null,
     recalc = true,
     num = 0,
     arrayChangedColor = true,
+    arrayChangedTexcoords = true,
     arrayChangedTrans = true;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -51,7 +53,8 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_scale", inScale);
 
-inBlendMode.onChange = updateDefines;
+let needsUpdateDefines = true;
+inBlendMode.onChange = () => { needsUpdateDefines = true; };
 doLimit.onChange = updateLimit;
 exe.onTriggered = doRender;
 exe.onLinkChanged = function ()
@@ -71,11 +74,18 @@ inRotMeth.onChange =
         recalc = true;
     };
 
+inTexCoords.onChange = function ()
+{
+    arrayChangedTexcoords = true;
+    recalc = true;
+    needsUpdateDefines = true;
+};
+
 inColor.onChange = function ()
 {
     arrayChangedColor = true;
     recalc = true;
-    updateDefines();
+    needsUpdateDefines = true;
 };
 
 function reset()
@@ -88,9 +98,11 @@ function reset()
 function updateDefines()
 {
     mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
+    mod.toggleDefine("TEXCOORDS_INSTANCES", inTexCoords.get());
     mod.toggleDefine("BLEND_MODE_MULTIPLY", inBlendMode.get() === "Multiply");
     mod.toggleDefine("BLEND_MODE_ADD", inBlendMode.get() === "Add");
     mod.toggleDefine("BLEND_MODE_NONE", inBlendMode.get() === "Normal");
+    needsUpdateDefines = false;
 }
 
 geom.onChange = function ()
@@ -119,7 +131,10 @@ function setupArray()
 
     num = Math.floor(transforms.length / 3);
 
+    if (needsUpdateDefines)updateDefines();
+
     const colArr = inColor.get();
+    const tcArr = inTexCoords.get();
     const scales = inScales.get();
 
     // shader.toggleDefine("COLORIZE_INSTANCES", colArr);
@@ -129,6 +144,11 @@ function setupArray()
     {
         arrayChangedColor = true;
         instColorArray = new Float32Array(num * 4);
+    }
+    if (instTexcoordArray.length != num * 4)
+    {
+        arrayChangedTexcoords = true;
+        instTexcoordArray = new Float32Array(num * 4);
     }
 
     const rotArr = inRot.get();
@@ -170,12 +190,12 @@ function setupArray()
             instColorArray[i * 4 + 3] = colArr[i * 4 + 3];
         }
 
-        if (arrayChangedColor && !colArr)
+        if (arrayChangedTexcoords && tcArr)
         {
-            instColorArray[i * 4 + 0] = 1;
-            instColorArray[i * 4 + 1] = 1;
-            instColorArray[i * 4 + 2] = 1;
-            instColorArray[i * 4 + 3] = 1;
+            instTexcoordArray[i * 4 + 0] = tcArr[i * 4 + 0];
+            instTexcoordArray[i * 4 + 1] = tcArr[i * 4 + 1];
+            instTexcoordArray[i * 4 + 2] = tcArr[i * 4 + 2];
+            instTexcoordArray[i * 4 + 3] = tcArr[i * 4 + 3];
         }
 
         if (scales && scales.length > i) mat4.scale(m, m, [scales[i * 3], scales[i * 3 + 1], scales[i * 3 + 2]]);
@@ -188,6 +208,10 @@ function setupArray()
 
     if (arrayChangedTrans) mesh.addAttribute("instMat", matrixArray, 16);
     if (arrayChangedColor) mesh.addAttribute("instColor", instColorArray, 4, { "instanced": true });
+    if (arrayChangedTexcoords) mesh.addAttribute("instTexCoords", instTexcoordArray, 4, { "instanced": true });
+
+    mod.toggleDefine("HAS_TEXCOORDS", tcArr);
+    mod.toggleDefine("HAS_COLORS", colArr);
 
     arrayChangedColor = false;
     recalc = false;
@@ -212,50 +236,7 @@ function doRender()
 
     if (mesh.numInstances > 0) mesh.render(cgl.getShader());
 
-    mod.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-
     outTrigger.trigger();
 
     mod.unbind();
-
-    // if (cgl.getShader() && cgl.getShader() != shader)
-    // {
-    //     removeModule();
-    //     shader = cgl.getShader();
-
-    //     if (!shader.hasDefine("INSTANCING"))
-    //     {
-    //         mod = shader.addModule(
-    //             {
-    //                 "name": "MODULE_VERTEX_POSITION",
-    //                 "title": op.objName,
-    //                 "priority": -2,
-    //                 "srcHeadVert": attachments.instancer_head_vert,
-    //                 "srcBodyVert": attachments.instancer_body_vert
-    //             });
-
-    //         fragMod = shader.addModule({
-    //             "name": "MODULE_COLOR",
-    //             "priority": -2,
-    //             "title": op.objName,
-    //             "srcHeadFrag": attachments.instancer_head_frag,
-    //             "srcBodyFrag": attachments.instancer_body_frag,
-    //         });
-
-    //         shader.define("INSTANCING");
-
-    //         updateDefines();
-    //         inScale.uniform = new CGL.Uniform(shader, "f", mod.prefix + "scale", inScale);
-    //     }
-
-    //     shader.toggleDefine("COLORIZE_INSTANCES", inColor.get());
-    // }
-
-    // if (doLimit.get()) mesh.numInstances = Math.min(num, inLimit.get());
-    // else mesh.numInstances = num;
-
-    // outNum.set(mesh.numInstances);
-
-    // if (mesh.numInstances > 0) mesh.render(shader);
-    // outTrigger.trigger();
 }

@@ -104,31 +104,52 @@ function onValuesPortChange()
         valuePort.set("");
     }
 
+    outIndex.set(0);
     setSelectedProperty(); /* set the selected property for the default value */
 }
 
+let finalIndex = 0;
 function setSelectedProperty()
 {
     const defaultItem = defaultValuePort.get() + "";
     const optionElements = input.querySelectorAll("option");
+
+    let finalEle = null;
+
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.value.trim() === defaultItem.trim() || optionElement.value.trim() === valuePort.get())
+        if (optionElement.value.trim() === defaultItem.trim())
         {
-            optionElement.setAttribute("selected", "");
-            outIndex.set(index);
+            finalEle = optionElement;
+            finalIndex = index;
+            // optionElement.setAttribute("selected", "");
+            // outIndex.set(index);
         }
-        else
+
+        optionElement.removeAttribute("selected");
+    });
+
+    optionElements.forEach(function (optionElement, index)
+    {
+        if (optionElement.value.trim() === valuePort.get())
         {
-            optionElement.removeAttribute("selected");
+            finalEle = optionElement;
+            finalIndex = index;
+
+            // optionElement.setAttribute("selected", "");
+            // outIndex.set(index);
         }
     });
+
+    if (finalEle) finalEle.setAttribute("selected", "");
+    outIndex.set(finalIndex);
 }
 
 function onInput(ev)
 {
     valuePort.set(ev.target.value);
     outIndex.set(options.indexOf(ev.target.value));
+    setSelectedProperty();
 }
 
 function onDefaultValueChanged()
@@ -173,6 +194,7 @@ function showElement(el)
     {
         el.style.display = "block";
     }
+    setSelectedProperty();
 }
 
 function hideElement(el)

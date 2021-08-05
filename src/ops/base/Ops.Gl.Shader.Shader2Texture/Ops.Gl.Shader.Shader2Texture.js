@@ -39,6 +39,7 @@ const showingError = false;
 let fb = null;
 const tex = null;
 let needInit = true;
+
 const mesh = CGL.MESHES.getSimpleRect(cgl, "shader2texture rect");
 
 op.toWorkPortsNeedToBeLinked(inShader);
@@ -61,16 +62,9 @@ function warning()
 
 function updateUI()
 {
-    if (inVPSize.get() === true)
-    {
-        inWidth.setUiAttribs({ "greyout": true });
-        inHeight.setUiAttribs({ "greyout": true });
-    }
-    else if (inVPSize.get() === false)
-    {
-        inWidth.setUiAttribs({ "greyout": false });
-        inHeight.setUiAttribs({ "greyout": false });
-    }
+    inWidth.setUiAttribs({ "greyout": inVPSize.get() });
+    inHeight.setUiAttribs({ "greyout": inVPSize.get() });
+
     inWidth.set(cgl.getViewPort()[2]);
     inHeight.set(cgl.getViewPort()[3]);
 }
@@ -191,7 +185,11 @@ exec.onTriggered = function ()
     cgl.pushShader(inShader.get());
     if (shader.bindTextures) shader.bindTextures();
 
+    cgl.pushBlend(false);
+
     mesh.render(inShader.get());
+
+    cgl.popBlend();
 
     cgl.popPMatrix();
     cgl.popModelMatrix();

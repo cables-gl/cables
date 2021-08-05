@@ -1,431 +1,418 @@
-var tab=null;
+let tab = null;
 
 function closeTab()
 {
-    if(tab)gui.mainTabs.closeTab(tab.id);
+    if (tab)gui.mainTabs.closeTab(tab.id);
 }
 
-function printNode(html,node,level)
+function printNode(html, node, level)
 {
-    if(!gltf)return;
+    if (!gltf) return;
 
-    html+='<tr class="row">';
-    var i=0;
-    var ident="";
+    html += "<tr class=\"row\">";
+    let i = 0;
+    let ident = "";
 
-    for(i=0;i<level;i++)
+    for (i = 0; i < level; i++)
     {
         // var last=level-1==i;
         // var identClass=last?"identnormal":"identlast";
 
-        var identClass="identBg";
-        if(i==0)identClass="identBgLevel0";
+        let identClass = "identBg";
+        if (i == 0)identClass = "identBgLevel0";
         // if(i==level-1)identClass="identBgLast";
-        ident+='<td class="ident  '+identClass+'" ><div style=""></div></td>';
+        ident += "<td class=\"ident  " + identClass + "\" ><div style=\"\"></div></td>";
     }
-    var id=CABLES.uuid();
-    html+=ident;
-    html+='<td colspan="'+(20-level)+'">';
+    let id = CABLES.uuid();
+    html += ident;
+    html += "<td colspan=\"" + (20 - level) + "\">";
 
-    if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
-    else html+='<span class="icon icon-circle"></span> &nbsp;';
+    if (node.mesh && node.mesh.meshes.length)html += "<span class=\"icon icon-cube\"></span>&nbsp;";
+    else html += "<span class=\"icon icon-circle\"></span> &nbsp;";
 
-    html+=node.name;
-    html+='</td>';
-    html+='<td>';
-    html+='</td>';
+    html += node.name;
+    html += "</td>";
+    html += "<td>";
+    html += "</td>";
 
     // html+='<td>';
 
-    if(node.mesh)
+    if (node.mesh)
     {
-        html+='<td>';
-        for(i=0;i<node.mesh.meshes.length;i++)
+        html += "<td>";
+        for (i = 0; i < node.mesh.meshes.length; i++)
         {
-            html+=node.mesh.meshes[i].name;
+            html += node.mesh.meshes[i].name;
             // html+=' ('+node.mesh.meshes[i].geom.vertices.length/3+' verts) ';
         }
-        html+='</td>';
-        html+='<td>';
-        for(i=0;i<node.mesh.meshes.length;i++)
+        html += "</td>";
+        html += "<td>";
+        for (i = 0; i < node.mesh.meshes.length; i++)
         {
-            if(node.mesh.meshes[i].material)
-                html+=gltf.json.materials[node.mesh.meshes[i].material].name;
+            if (node.mesh.meshes[i].material)
+                html += gltf.json.materials[node.mesh.meshes[i].material].name;
         }
-        html+='</td>';
-
+        html += "</td>";
     }
     else
     {
-        html+='<td>-</td><td>-</td>';
+        html += "<td>-</td><td>-</td>";
     }
-    html+='<td>';
-    if(node._animRot || node._animScale || node._animTrans) html+='Yes';
-    else html+='-';
+    html += "<td>";
+    if (node._animRot || node._animScale || node._animTrans) html += "Yes";
+    else html += "-";
 
-    html+='</td>';
-    html+='<td>';
-    var hideclass='';
-    if(node.hidden)hideclass='node-hidden';
+    html += "</td>";
+    html += "<td>";
+    let hideclass = "";
+    if (node.hidden)hideclass = "node-hidden";
 
-    html+='Expose: ';
-    html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\',true)" class="treebutton">Hierarchy</a>';
-    html+=' <a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Node</a>';
-    html+='&nbsp;';
+    html += "Expose: ";
+    html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "',true)\" class=\"treebutton\">Hierarchy</a>";
+    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "')\" class=\"treebutton\">Node</a>";
+    html += "&nbsp;";
 
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.corePatch().getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
-    html+='</td>';
+    html += "<span class=\"icon iconhover icon-eye " + hideclass + "\" onclick=\"gui.corePatch().getOpById('" + op.id + "').toggleNodeVisibility('" + node.name + "');this.classList.toggle('node-hidden');\"></span>";
+    html += "</td>";
 
-    html+="</tr>";
+    html += "</tr>";
 
-    if(node.children)
-        for(i=0;i<node.children.length;i++)
-            html=printNode(html,gltf.nodes[node.children[i]],level+1);
+    if (node.children)
+        for (i = 0; i < node.children.length; i++)
+            html = printNode(html, gltf.nodes[node.children[i]], level + 1);
 
     return html;
 }
 
-function printMaterial(mat,idx)
+function printMaterial(mat, idx)
 {
-    var html='<tr>';
-    html+=' <td>'+idx+'</td>';
-    html+=' <td>'+mat.name+'</td>';
+    let html = "<tr>";
+    html += " <td>" + idx + "</td>";
+    html += " <td>" + mat.name + "</td>";
     // html+=' <td><a onclick="" class="treebutton">Assign</a><td>';
 
 
-
-    html+=' <td>';
-    if(mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
+    html += " <td>";
+    if (mat.pbrMetallicRoughness && mat.pbrMetallicRoughness.baseColorFactor)
     {
-        var rgb='';
-        rgb+=''+Math.round(mat.pbrMetallicRoughness.baseColorFactor[0]*255);
-        rgb+=','+Math.round(mat.pbrMetallicRoughness.baseColorFactor[1]*255);
-        rgb+=','+Math.round(mat.pbrMetallicRoughness.baseColorFactor[2]*255);
+        let rgb = "";
+        rgb += "" + Math.round(mat.pbrMetallicRoughness.baseColorFactor[0] * 255);
+        rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[1] * 255);
+        rgb += "," + Math.round(mat.pbrMetallicRoughness.baseColorFactor[2] * 255);
 
-        html+='<div style="width:15px;height:15px;;background-color:rgb('+rgb+')">&nbsp;</a>';
+        html += "<div style=\"width:15px;height:15px;;background-color:rgb(" + rgb + ")\">&nbsp;</a>";
 
         // html+='<td>';
     }
-    html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.corePatch().getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
-    html+='<td>';
-
+    html += " <td style=\"\">" + (gltf.shaders[idx] ? "-" : "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').assignMaterial('" + mat.name + "')\" class=\"treebutton\">Assign</a>") + "<td>";
+    html += "<td>";
 
 
     // console.log();
 
 
-    html+='</tr>';
+    html += "</tr>";
     return html;
 }
 
 function printInfo()
 {
-    if(!gltf)return;
+    if (!gltf) return;
 
     console.log(gltf);
 
-    const sizes={};
+    const sizes = {};
 
-    var html='<div style="overflow:scroll;width:100%;height:100%">';
-
-
-    html+='generator:'+gltf.json.asset.generator;
+    let html = "<div style=\"overflow:scroll;width:100%;height:100%\">";
 
 
-    if(!gltf.json.materials || gltf.json.materials.length==0)
+    html += "generator:" + gltf.json.asset.generator;
+
+
+    if (!gltf.json.materials || gltf.json.materials.length == 0)
     {
-        html+='<h3>Materials</h3>';
-        html+="No materials";
+        html += "<h3>Materials</h3>";
+        html += "No materials";
     }
     else
     {
-        html+='<h3>Materials ('+gltf.json.materials.length+')</h3>';
-        html+='<table class="table treetable">';
-        html+='<tr>';
-        html+=' <th>Index</th>';
-        html+=' <th>Name</th>';
-        html+=' <th>Color</th>';
-        html+=' <th>Function</th>';
-        html+=' <th></th>';
-        html+='</tr>';
-        for(var i=0;i<gltf.json.materials.length;i++)
+        html += "<h3>Materials (" + gltf.json.materials.length + ")</h3>";
+        html += "<table class=\"table treetable\">";
+        html += "<tr>";
+        html += " <th>Index</th>";
+        html += " <th>Name</th>";
+        html += " <th>Color</th>";
+        html += " <th>Function</th>";
+        html += " <th></th>";
+        html += "</tr>";
+        for (var i = 0; i < gltf.json.materials.length; i++)
         {
-            html+=printMaterial(gltf.json.materials[i],i);
+            html += printMaterial(gltf.json.materials[i], i);
         }
-        html+='</table>';
+        html += "</table>";
     }
 
-    html+='<h3>Nodes ('+gltf.nodes.length+')</h3>';
-    html+='<table class="table treetable">';
+    html += "<h3>Nodes (" + gltf.nodes.length + ")</h3>";
+    html += "<table class=\"table treetable\">";
 
-    html+='<tr>';
-    html+=' <th colspan="21">Name</th>';
-    html+=' <th>Mesh</th>';
-    html+=' <th>Material</th>';
-    html+=' <th>Anim</th>';
-    html+=' <th>Show</th>';
-    html+='</tr>';
+    html += "<tr>";
+    html += " <th colspan=\"21\">Name</th>";
+    html += " <th>Mesh</th>";
+    html += " <th>Material</th>";
+    html += " <th>Anim</th>";
+    html += " <th>Show</th>";
+    html += "</tr>";
 
-    for(var i=0;i<gltf.nodes.length;i++)
+    for (var i = 0; i < gltf.nodes.length; i++)
     {
-        if(!gltf.nodes[i].isChild)
-            html=printNode(html,gltf.nodes[i],1);
+        if (!gltf.nodes[i].isChild)
+            html = printNode(html, gltf.nodes[i], 1);
     }
-    html+='</table>';
+    html += "</table>";
 
-    html+='<h3>Meshes ('+gltf.json.meshes.length+')</h3>';
+    html += "<h3>Meshes (" + gltf.json.meshes.length + ")</h3>";
 
-    html+='<table class="table treetable">';
-    html+='<tr>';
-    html+=' <th>Name</th>';
-    html+=' <th>Material</th>';
-    html+=' <th>Vertices</th>';
-    html+=' <th>Attributes</th>';
-    html+='</tr>';
+    html += "<table class=\"table treetable\">";
+    html += "<tr>";
+    html += " <th>Name</th>";
+    html += " <th>Material</th>";
+    html += " <th>Vertices</th>";
+    html += " <th>Attributes</th>";
+    html += "</tr>";
 
 
-    var sizeBufferViews=[];
-    sizes.meshes=0;
+    let sizeBufferViews = [];
+    sizes.meshes = 0;
 
-    for(var i=0;i<gltf.json.meshes.length;i++)
+    for (var i = 0; i < gltf.json.meshes.length; i++)
     {
-        html+='<tr>';
-        html+='<td>'+gltf.json.meshes[i].name+"</td>";
+        html += "<tr>";
+        html += "<td>" + gltf.json.meshes[i].name + "</td>";
 
-        html+='<td>';
-        for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
+        html += "<td>";
+        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            if(gltf.json.meshes[i].primitives[j].material)
-                html+=gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
-                else html+='None';
+            if (gltf.json.meshes[i].primitives[j].material)
+                html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name;
+            else html += "None";
         }
-        html+='</td>';
+        html += "</td>";
 
-        html+='<td>';
-        for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
+        html += "<td>";
+        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             // html+=gltf.json.meshes[i].primitives[j].indices;
-            if(gltf.json.meshes[i].primitives[j].attributes.POSITION)
+            if (gltf.json.meshes[i].primitives[j].attributes.POSITION)
             {
-                html+=gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count;
-
+                html += gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count;
             }
         }
-        html+='</td>';
+        html += "</td>";
 
-        html+='<td>';
-        for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
-            html+=Object.keys(gltf.json.meshes[i].primitives[j].attributes);
-        html+='</td>';
+        html += "<td>";
+        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+            html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
+        html += "</td>";
 
-        html+='</tr>';
+        html += "</tr>";
 
 
-        for(var j=0;j<gltf.json.meshes[i].primitives.length;j++)
+        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            var bufView=gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
+            var bufView = gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
 
-            if(sizeBufferViews.indexOf(bufView)==-1)
+            if (sizeBufferViews.indexOf(bufView) == -1)
             {
                 sizeBufferViews.push(bufView);
-                sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+                sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
             }
 
 
-            for(var k in gltf.json.meshes[i].primitives[j].attributes)
+            for (let k in gltf.json.meshes[i].primitives[j].attributes)
             {
-                const attr=gltf.json.meshes[i].primitives[j].attributes[k];
-                const bufView=gltf.json.accessors[attr].bufferView;
+                const attr = gltf.json.meshes[i].primitives[j].attributes[k];
+                const bufView = gltf.json.accessors[attr].bufferView;
 
-                if(sizeBufferViews.indexOf(bufView)==-1)
+                if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);
-                    sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+                    sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
                 }
-
-
             }
-
         }
-
-
     }
-    html+='</table>';
+    html += "</table>";
 
 
-
-    if(gltf.json.animations)
+    if (gltf.json.animations)
     {
-        html+='<h3>Animations ('+gltf.json.animations.length+')</h3>';
-        html+='<table class="table treetable">';
-        html+='<tr>';
-        html+='  <th>Name</th>';
-        html+='  <th>Target node</th>';
-        html+='  <th>Path</th>';
-        html+='  <th>Interpolation</th>';
-        html+='  <th>Keys</th>';
-        html+='</tr>';
+        html += "<h3>Animations (" + gltf.json.animations.length + ")</h3>";
+        html += "<table class=\"table treetable\">";
+        html += "<tr>";
+        html += "  <th>Name</th>";
+        html += "  <th>Target node</th>";
+        html += "  <th>Path</th>";
+        html += "  <th>Interpolation</th>";
+        html += "  <th>Keys</th>";
+        html += "</tr>";
 
-        sizes.animations=0;
+        sizes.animations = 0;
 
-        for(var i=0;i<gltf.json.animations.length;i++)
+        for (var i = 0; i < gltf.json.animations.length; i++)
         {
-            for(var j=0;j< gltf.json.animations[i].samplers.length;j++)
+            for (var j = 0; j < gltf.json.animations[i].samplers.length; j++)
             {
-                var bufView=gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
-                if(sizeBufferViews.indexOf(bufView)==-1)
+                var bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
+                if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);
-                    sizes.animations+=gltf.json.bufferViews[bufView].byteLength;
+                    sizes.animations += gltf.json.bufferViews[bufView].byteLength;
                 }
 
-                var bufView=gltf.json.accessors[gltf.json.animations[i].samplers[j].output].bufferView;
-                if(sizeBufferViews.indexOf(bufView)==-1)
+                var bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].output].bufferView;
+                if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);
-                    sizes.animations+=gltf.json.bufferViews[bufView].byteLength;
+                    sizes.animations += gltf.json.bufferViews[bufView].byteLength;
                 }
-
             }
 
 
-
-
-            for(var j=0;j< gltf.json.animations[i].channels.length;j++)
+            for (var j = 0; j < gltf.json.animations[i].channels.length; j++)
             {
-                html+='<tr>';
-                html+='  <td>'+gltf.json.animations[i].name+' ('+i+')</td>';
+                html += "<tr>";
+                html += "  <td>" + gltf.json.animations[i].name + " (" + i + ")</td>";
 
-                html+='  <td>'+gltf.nodes[gltf.json.animations[i].channels[j].target.node].name+'</td>';
-                html+='  <td>';
-                html+=gltf.json.animations[i].channels[j].target.path+' ';
-                html+='  </td>';
+                html += "  <td>" + gltf.nodes[gltf.json.animations[i].channels[j].target.node].name + "</td>";
+                html += "  <td>";
+                html += gltf.json.animations[i].channels[j].target.path + " ";
+                html += "  </td>";
 
-                const smplidx=gltf.json.animations[i].channels[j].sampler;
-                const smplr=gltf.json.animations[i].samplers[smplidx];
+                const smplidx = gltf.json.animations[i].channels[j].sampler;
+                const smplr = gltf.json.animations[i].samplers[smplidx];
 
-                html+='  <td>'+smplr.interpolation+'</td>'
-
-
-                html+='  <td>'+gltf.json.accessors[smplr.output].count;+'</td>'
+                html += "  <td>" + smplr.interpolation + "</td>";
 
 
+                html += "  <td>" + gltf.json.accessors[smplr.output].count; +"</td>";
 
-                html+='</tr>';
 
+                html += "</tr>";
             }
         }
-        html+='</table>';
-
+        html += "</table>";
     }
     else
     {
-        html+='<h3>Animations (0)</h3>';
+        html += "<h3>Animations (0)</h3>";
     }
 
-    if(gltf.json.images)
+    if (gltf.json.images)
     {
-        html+='<h3>Images ('+gltf.json.images.length+')</h3>';
-        html+='<table class="table treetable">';
+        html += "<h3>Images (" + gltf.json.images.length + ")</h3>";
+        html += "<table class=\"table treetable\">";
 
-        html+='<tr>';
-        html+='  <th>name</th>';
-        html+='  <th>type</th>';
-        html+='  <th>func</th>';
+        html += "<tr>";
+        html += "  <th>name</th>";
+        html += "  <th>type</th>";
+        html += "  <th>func</th>";
 
-        html+='</tr>';
+        html += "</tr>";
 
-        sizes.images=0;
+        sizes.images = 0;
 
-        for(var i=0;i<gltf.json.images.length;i++)
+        for (var i = 0; i < gltf.json.images.length; i++)
         {
-            if(gltf.json.images[i].bufferView)
-                sizes.images+=gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
+            if (gltf.json.images[i].bufferView)
+                sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
 
-            html+='<tr>';
-            html+='<td>'+gltf.json.images[i].name+'</td>';
-            html+='<td>'+gltf.json.images[i].mimeType+'</td>';
-            html+='<td>';
-            html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeTexture(\''+gltf.json.images[i].name+'\')" class="treebutton">Expose</a>';
-            html+='</td>';
+            html += "<tr>";
+            html += "<td>" + gltf.json.images[i].name + "</td>";
+            html += "<td>" + gltf.json.images[i].mimeType + "</td>";
+            html += "<td>";
 
-            html+='<tr>';
+            let name = gltf.json.images[i].name;
+            if (name === undefined)name = gltf.json.images[i].bufferView;
+
+            html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeTexture('" + name + "')\" class=\"treebutton\">Expose</a>";
+            html += "</td>";
+
+            html += "<tr>";
         }
-        html+='</table>';
+        html += "</table>";
     }
 
 
-    if(gltf.json.cameras)
+    if (gltf.json.cameras)
     {
-        html+='<h3>Cameras ('+gltf.json.cameras.length+')</h3>';
-        html+='<table class="table treetable">';
+        html += "<h3>Cameras (" + gltf.json.cameras.length + ")</h3>";
+        html += "<table class=\"table treetable\">";
 
-        html+='<tr>';
-        html+='  <th>name</th>';
-        html+='  <th>type</th>';
-        html+='  <th>info</th>';
-        html+='</tr>';
+        html += "<tr>";
+        html += "  <th>name</th>";
+        html += "  <th>type</th>";
+        html += "  <th>info</th>";
+        html += "</tr>";
 
-        for(var i=0;i<gltf.json.cameras.length;i++)
+        for (var i = 0; i < gltf.json.cameras.length; i++)
         {
-            html+='<tr>';
-            html+='<td>'+gltf.json.cameras[i].name+'</td>';
-            html+='<td>'+gltf.json.cameras[i].type+'</td>';
-            html+='<td>';
-            html+='yfov: '+Math.round(gltf.json.cameras[i].perspective.yfov*100)/100;
-            html+=", ";
-            html+='zfar: '+Math.round(gltf.json.cameras[i].perspective.zfar*100)/100;
-            html+=", ";
-            html+='znear: '+Math.round(gltf.json.cameras[i].perspective.znear*100)/100;
-            html+='</td>';
+            html += "<tr>";
+            html += "<td>" + gltf.json.cameras[i].name + "</td>";
+            html += "<td>" + gltf.json.cameras[i].type + "</td>";
+            html += "<td>";
+            html += "yfov: " + Math.round(gltf.json.cameras[i].perspective.yfov * 100) / 100;
+            html += ", ";
+            html += "zfar: " + Math.round(gltf.json.cameras[i].perspective.zfar * 100) / 100;
+            html += ", ";
+            html += "znear: " + Math.round(gltf.json.cameras[i].perspective.znear * 100) / 100;
+            html += "</td>";
 
-            html+='<tr>';
+            html += "<tr>";
         }
-        html+='</table>';
+        html += "</table>";
     }
-
 
 
     // html+='data size: '+;
-    const sizeBin=gltf.json.buffers[0].byteLength;
-    html+='<h3>Binary Data ('+readableSize(sizeBin)+')</h3>';
+    const sizeBin = gltf.json.buffers[0].byteLength;
+    html += "<h3>Binary Data (" + readableSize(sizeBin) + ")</h3>";
 
 
-    html+='<table class="table treetable">';
-    html+='<tr>';
-    html+='  <th>name</th>';
-    html+='  <th>size</th>';
-    html+='  <th>%</th>';
-    html+='</tr>';
-    var sizeUnknown=sizeBin;
-    for(var i in sizes)
+    html += "<table class=\"table treetable\">";
+    html += "<tr>";
+    html += "  <th>name</th>";
+    html += "  <th>size</th>";
+    html += "  <th>%</th>";
+    html += "</tr>";
+    let sizeUnknown = sizeBin;
+    for (var i in sizes)
     {
         // html+=i+':'+Math.round(sizes[i]/1024);
-        html+='<tr>';
-        html+='<td>'+i+'</td>';
-        html+='<td>'+readableSize(sizes[i])+' </td>';
-        html+='<td>'+Math.round(sizes[i]/sizeBin*100)+'% </td>';
-        html+='<tr>';
-        sizeUnknown-=sizes[i];
+        html += "<tr>";
+        html += "<td>" + i + "</td>";
+        html += "<td>" + readableSize(sizes[i]) + " </td>";
+        html += "<td>" + Math.round(sizes[i] / sizeBin * 100) + "% </td>";
+        html += "<tr>";
+        sizeUnknown -= sizes[i];
     }
 
-    if(sizeUnknown!=0)
+    if (sizeUnknown != 0)
     {
-        html+='<tr>';
-        html+='<td>unknown</td>';
-        html+='<td>'+readableSize(sizeUnknown)+' </td>';
-        html+='<td>'+Math.round(sizeUnknown/sizeBin*100)+'% </td>';
-        html+='<tr>';
+        html += "<tr>";
+        html += "<td>unknown</td>";
+        html += "<td>" + readableSize(sizeUnknown) + " </td>";
+        html += "<td>" + Math.round(sizeUnknown / sizeBin * 100) + "% </td>";
+        html += "<tr>";
     }
 
-    html+='</table>';
-    html+='</div>';
+    html += "</table>";
+    html += "</div>";
 
     // CABLES.UI.MODAL.show(html);
 
     // closeTab();
-    tab=new CABLES.UI.Tab("GLTF",{"icon":"cube","infotext":"tab_gltf","padding":true,"singleton":true});
-    gui.mainTabs.addTab(tab,true);
+    tab = new CABLES.UI.Tab("GLTF", { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
+    gui.mainTabs.addTab(tab, true);
     tab.html(html);
 
     console.log(gltf);
@@ -433,10 +420,7 @@ function printInfo()
 
 function readableSize(n)
 {
-    if(n>1024)return Math.round(n/1024)+' kb';
-    if(n>1024*500)return Math.round(n/1024)+' mb';
-    else return n+' bytes';
-
+    if (n > 1024) return Math.round(n / 1024) + " kb";
+    if (n > 1024 * 500) return Math.round(n / 1024) + " mb";
+    else return n + " bytes";
 }
-
-

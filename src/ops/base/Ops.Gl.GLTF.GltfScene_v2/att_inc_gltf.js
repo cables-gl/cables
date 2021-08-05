@@ -171,7 +171,7 @@ function loadCams(gltf)
 
     for (let i = 0; i < gltf.json.cameras.length; i++)
     {
-        gltf.cams.push(new gltfCamera(gltf, gltf.json.cameras[i]));
+        gltf.cams.push(new gltfCamera(i,gltf, gltf.json.cameras[i]));
     }
 }
 
@@ -228,6 +228,7 @@ function parseGltf(arrayBuffer)
             else if (acc.type == "VEC2")numComps = 2;
             else if (acc.type == "VEC3")numComps = 3;
             else if (acc.type == "VEC4")numComps = 4;
+            else if (acc.type == "MAT4")numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
             const num = acc.count * numComps;
@@ -300,14 +301,36 @@ function parseGltf(arrayBuffer)
 
     for (i = 0; i < gltf.json.nodes.length; i++)
     {
+        if(gltf.json.nodes[i].children)
+        for (j = 0; j < gltf.json.nodes[i].children.length; j++)
+        {
+            gltf.json.nodes[gltf.json.nodes[i].children[j]].isChild=true;
+        }
+    }
+
+    for (i = 0; i < gltf.json.nodes.length; i++)
+    {
         const node = new gltfNode(gltf.json.nodes[i], gltf);
         gltf.nodes.push(node);
     }
+
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
+    }
+
+    for (i = 0; i < gltf.nodes.length; i++)
+    {
+        const node = gltf.nodes[i];
+        if(node.children)
+        {
+            for(let j=0;j<node.children.length;j++)
+            {
+                gltf.nodes[node.children[j]].parent=node;
+            }
+        }
     }
 
     needsMatUpdate = true;

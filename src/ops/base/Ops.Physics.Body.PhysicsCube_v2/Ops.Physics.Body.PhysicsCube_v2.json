@@ -17,70 +17,70 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exec"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Name"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mass",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "sizeX",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "sizeY",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "sizeZ",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Render",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ray Hit",
                 "subType": "boolean"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Collision"
             }
         ],

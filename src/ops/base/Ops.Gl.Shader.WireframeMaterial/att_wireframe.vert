@@ -17,7 +17,8 @@ void main()
     norm=attrVertNormal;
     texCoord=attrTexCoord;
     barycentric=attrBarycentric;
+    mat4 mMatrix=modelMatrix;
     vec4 pos = vec4( vPosition, 1. );
     {{MODULE_VERTEX_POSITION}}
-    gl_Position = projMatrix * viewMatrix * modelMatrix * pos;
+    gl_Position = projMatrix * viewMatrix * mMatrix * pos;
 }

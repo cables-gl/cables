@@ -43,6 +43,7 @@ function createElements()
     elePlay.style = inStyleInner.get();
 
     ele.appendChild(elePlay);
+    ele.classList.add("playButton");
 
     ele.addEventListener("mouseenter", hover);
     ele.addEventListener("mouseleave", hoverOut);

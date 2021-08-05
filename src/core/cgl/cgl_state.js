@@ -4,6 +4,7 @@ import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
+import { ProfileData } from "./cgl_profiledata";
 
 
 /**
@@ -17,7 +18,8 @@ const Context = function (_patch)
 {
     EventTarget.apply(this);
 
-    // var self = this;
+    this.profileData = new ProfileData(this);
+
     const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
@@ -527,12 +529,14 @@ const Context = function (_patch)
         {
             console.warn("frame not started " + string);
             // console.log(new Error().stack);
+            this.patch.printTriggerStack();
         }
     };
 
     this.setTexture = function (slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
+
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);
@@ -604,7 +608,9 @@ const Context = function (_patch)
 
     this.printError = function (str)
     {
-        const error = this.gl.getError();
+        let found = false;
+        let error = this.gl.getError();
+
         if (error != this.gl.NO_ERROR)
         {
             let errStr = "";
@@ -620,10 +626,21 @@ const Context = function (_patch)
             }
             if (error == this.gl.NO_ERROR) errStr = "NO_ERROR";
 
-            Log.log("gl error: ", str, error, errStr);
-            return true;
+            found = true;
+
+            Log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
+
+            if (!this._loggedGlError)
+            {
+                this.patch.printTriggerStack();
+
+                console.log((new Error()).stack);
+                this._loggedGlError = true;
+            }
         }
-        return false;
+        error = this.gl.getError();
+
+        return found;
     };
 
     this.saveScreenshot = function (filename, cb, pw, ph, noclearalpha)

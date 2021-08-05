@@ -5,37 +5,37 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Degree",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Height",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Axis index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Axis",
                 "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger"
             }
         ],
-        "name": "Ops.User.pandur.Twist3"
+        "name": "Ops.Gl.ShaderEffects.Twist_v3"
     },
     "changelog": [
         {

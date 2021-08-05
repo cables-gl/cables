@@ -82,14 +82,8 @@ learn.onTriggered = function ()
 
 function addListener()
 {
-    if (canvasOnly.get() === true)
-    {
-        addCanvasListener();
-    }
-    else
-    {
-        addDocumentListener();
-    }
+    if (canvasOnly.get()) addCanvasListener();
+    else addDocumentListener();
 }
 
 function removeListeners()

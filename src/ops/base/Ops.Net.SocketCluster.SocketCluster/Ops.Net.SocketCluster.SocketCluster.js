@@ -6,8 +6,9 @@ const allowSend = op.inBool("allow send", false);
 const allowMultipleSenders = op.inBool("allow multiple senders", false);
 const channelName = op.inString("channel", CABLES.generateUUID());
 const globalDelay = op.inInt("delay send (ms)", 0);
+const commonValues = op.inObject("Additional serverdata", {});
 const ready = op.outBool("ready", false);
-const socketOut = op.outObject("socket");
+const socketOut = op.outObject("socket", null, "socketcluster");
 const clientIdOut = op.outString("own client id");
 const sendOut = op.outBool("can send", false);
 const errorOut = op.outObject("error", null);
@@ -36,6 +37,7 @@ const init = () =>
             socket.allowSend = allowSend.get();
             socket.channelName = channelName.get();
             socket.globalDelay = globalDelay.get();
+            socket.commonValues = commonValues.get() || {};
             sendOut.set(allowSend.get());
             clientIdOut.set(socket.clientId);
 
@@ -82,7 +84,7 @@ allowSend.onChange = () =>
         socket.allowSend = allowSend.get();
         socketOut.set(socket);
         sendOut.set(allowSend.get());
-        const payload = { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } };
+        const payload = Object.assign(socket.commonValues, { "topic": "cablescontrol", "clientId": socket.clientId, "payload": { "allowSend": allowSend.get() } });
         socket.transmitPublish(channelName.get() + "/control", payload);
     }
 };
@@ -106,6 +108,15 @@ channelName.onChange = () =>
                 }
             }
         })();
+    }
+};
+
+commonValues.onChange = () =>
+{
+    if (socket)
+    {
+        socket.commonValues = commonValues.get() || {};
+        socketOut.set(socket);
     }
 };
 

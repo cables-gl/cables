@@ -15,7 +15,7 @@ const
     sideD = op.inFloat("Side D", 1);
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "border");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.border_frag);
 

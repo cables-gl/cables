@@ -14,12 +14,18 @@
             {
                 "type": 5,
                 "name": "URL"
+            },
+            {
+                "type": 0,
+                "name": "Create Loading Task",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
             {
                 "type": 2,
-                "name": "Audio Buffer"
+                "name": "Audio Buffer",
+                "objType": "audioBuffer"
             },
             {
                 "type": 0,
@@ -45,6 +51,11 @@
                 "type": 0,
                 "name": "Number of Channels",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "isLoading",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.WebAudio.AudioBuffer_v2"
@@ -58,7 +69,7 @@
         "ports": [
             {
                 "name": "URL",
-                "text": "The audio file to load. Mostly you will drag an audio file into the cables window and select it via the file-chooser in the op parameter view. Depending on the browser you use (or user who will see / hear your exported patch) only certain file types can be played back. MP3 seems to be the best supported audio format."
+                "text": "The audio file to load. Mostly you will drag an audio file into the cables window and select it via the file-chooser in the op parameter view. Depending on the browser you use (or user who will see / hear your exported patch) only certain file types can be played back. MP3 seems to be the best supported audio format. It is also possible to pass a data URL (from a local file) to the buffer."
             },
             {
                 "name": "Audio Buffer",
@@ -83,6 +94,10 @@
             {
                 "name": "Number of Channels",
                 "text": "How many channels the audio file contains, 2 is stereo, 1 is mono"
+            },
+            {
+                "name": "isLoading",
+                "text": "indicates if buffer is currently loading"
             }
         ]
     }

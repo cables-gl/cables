@@ -8,14 +8,14 @@ const
 
     delta = op.outValue("delta", 0),
     deltaX = op.outValue("delta X", 0),
-    deltaOrig = op.outValue("browser event delta", 0);
+    deltaOrig = op.outValue("browser event delta", 0),
+    trigger = op.outTrigger("Wheel Action");
 
 const cgl = op.patch.cgl;
 const value = 0;
 
 const startTime = CABLES.now() / 1000.0;
 const v = 0;
-
 
 let dir = 1;
 
@@ -25,7 +25,6 @@ area.onChange = updateArea;
 const vOut = 0;
 
 addListener();
-
 
 const isChromium = window.chrome,
     winNav = window.navigator,
@@ -41,13 +40,11 @@ const isMac = window.navigator.userAgent.indexOf("Mac") != -1;
 const isChrome = (isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera === false && isIEedge === false);
 const isFirefox = navigator.userAgent.search("Firefox") > 1;
 
-
 flip.onChange = function ()
 {
     if (flip.get())dir = -1;
     else dir = 1;
 };
-
 
 function normalizeWheel(event)
 {
@@ -61,7 +58,7 @@ function normalizeWheel(event)
         if (event.deltaY > 20)sY = 20;
         else if (event.deltaY < -20)sY = -20;
     }
-    return sY;
+    return sY * dir;
 }
 
 function normalizeWheelX(event)
@@ -110,6 +107,7 @@ function onMouseWheel(e)
     }
 
     if (preventScroll.get()) e.preventDefault();
+    trigger.trigger();
 }
 
 function updateArea()

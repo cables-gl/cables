@@ -1,8 +1,8 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("Trigger"),
-    amount = op.inValue("Degree", 180),
-    height = op.inValue("Height", 2),
+    amount = op.inFloat("Degree", 180),
+    height = op.inFloat("Height", 2),
     axis = op.inValueSelect("Axis", ["X", "Y", "Z"], "Y");
 
 const cgl = op.patch.cgl;
@@ -21,14 +21,12 @@ updateAxis();
 mod.addUniformVert("f", "MOD_amount", amount);
 mod.addUniformVert("f", "MOD_height", height);
 
-
 function updateAxis()
 {
-    mod.toggleDefine("MOD_AXIS_X",axis.get() == "X");
-    mod.toggleDefine("MOD_AXIS_Y",axis.get() == "Y");
-    mod.toggleDefine("MOD_AXIS_Z",axis.get() == "Z");
+    mod.toggleDefine("MOD_AXIS_X", axis.get() == "X");
+    mod.toggleDefine("MOD_AXIS_Y", axis.get() == "Y");
+    mod.toggleDefine("MOD_AXIS_Z", axis.get() == "Z");
 }
-
 
 render.onTriggered = function ()
 {

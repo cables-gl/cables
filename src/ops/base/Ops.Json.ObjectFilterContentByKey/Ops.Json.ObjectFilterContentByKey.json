@@ -1,1 +1,54 @@
-{"id":"89bddc38-000b-4982-8b37-b6e48f0b001b","changelog":[{"message":"created op","author":"pandur","date":1612941889605},{"message":"Ops.User.pandur.ObjectFilterContent renamed to Ops.Json.ObjectFilterContent","author":"pandur","date":1612942349353},{"message":"Ops.Json.ObjectFilterContent renamed to Ops.Json.ObjectFilterContentByKey","author":"pandur","date":1613484386105}],"authorName":"pandur","created":1612941958112,"layout":{"portsIn":[{"type":2,"name":"Object"},{"type":5,"name":"name"},{"type":0,"name":"Remove Null","subType":"boolean"}],"portsOut":[{"type":2,"name":"Result"}],"name":"Ops.User.pandur.ObjectFilterContent"},"summary":"remove values from an object if key starts with input string ","issues":"","collections":null,"relatedops":null,"youtubeids":[],"docs":{"ports":[]}}
+{
+    "id": "89bddc38-000b-4982-8b37-b6e48f0b001b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612941889605
+        },
+        {
+            "message": "Ops.User.pandur.ObjectFilterContent renamed to Ops.Json.ObjectFilterContent",
+            "author": "pandur",
+            "date": 1612942349353
+        },
+        {
+            "message": "Ops.Json.ObjectFilterContent renamed to Ops.Json.ObjectFilterContentByKey",
+            "author": "pandur",
+            "date": 1613484386105
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1612941958112,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Object"
+            },
+            {
+                "type": 5,
+                "name": "name"
+            },
+            {
+                "type": 0,
+                "name": "Remove Null",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.ObjectFilterContent"
+    },
+    "summary": "filter values from an object if key starts with input string ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

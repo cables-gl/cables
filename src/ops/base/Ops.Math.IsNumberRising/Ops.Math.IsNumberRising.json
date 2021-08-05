@@ -1,0 +1,42 @@
+{
+    "id": "1598fbdf-eab9-41a1-98de-794795255359",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1620741256742
+        },
+        {
+            "message": "Ops.User.pandur.IsNumberRising renamed to Ops.Math.IsNumberRising",
+            "author": "pandur",
+            "date": 1623845388368
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1620741333163,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Rising",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Math.IsNumberRising"
+    },
+    "summary": "detect if a number rising or falling ",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

@@ -225,18 +225,18 @@ float when_le(float x, float y) { return 1.0 - when_gt(x, y); }
 #endif
 
 #ifdef ENABLE_FRESNEL
-    float CalculateFresnel(vec3 direction, vec3 normal)
+    float CalculateFresnel(vec3 direction, vec3 nrml)
     {
         vec3 nDirection = normalize( direction );
-        vec3 nNormal = normalize( mat3(viewMatrix) * normal );
-        vec3 halfDirection = normalize( nNormal + nDirection );
+        vec3 nNormal = normalize( mat3(viewMatrix) * nrml );
+        vec3 hlfDirection = normalize( nNormal + nDirection );
 
-        float cosine = dot( halfDirection, nDirection );
-        float product = max( cosine, 0.01 );
-        float factor = pow(product, inFresnelWidthExponent.y);
-        // float factor=0.5;
+        float cosine = dot( hlfDirection, nDirection );
+        float prodct = max(cosine,0.0);
+        float y=inFresnelWidthExponent.y;
+        float fctor = pow( prodct , y );
 
-        return 5. * factor;
+        return (5.0 * fctor);
     }
 #endif
 
@@ -401,6 +401,7 @@ void main()
         #endif
 
         #ifdef HAS_TEXTURE_NORMAL
+
             normal = texture(texNormal, texCoord).rgb;
             normal = normalize(normal * 2. - 1.);
             float normalIntensity = inTextureIntensities.NORMAL;

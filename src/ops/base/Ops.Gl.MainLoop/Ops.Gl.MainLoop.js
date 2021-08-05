@@ -4,7 +4,7 @@ const width = op.outValue("width");
 const height = op.outValue("height");
 const reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true);
 const reduceLoadingFPS = op.inValueBool("Reduce FPS loading");
-const clear = op.inValueBool("Clear", true);
+// const clear = op.inValueBool("Clear", true);
 const clearAlpha = op.inValueBool("ClearAlpha", true);
 const fullscreen = op.inValueBool("Fullscreen Button", false);
 const active = op.inValueBool("Active", true);
@@ -52,14 +52,12 @@ fullscreen.onChange = updateFullscreenButton;
 setTimeout(updateFullscreenButton, 100);
 let fsElement = null;
 
-
 let winhasFocus = true;
 let winVisible = true;
 
 window.addEventListener("blur", () => { winhasFocus = false; });
 window.addEventListener("focus", () => { winhasFocus = true; });
 document.addEventListener("visibilitychange", () => { winVisible = !document.hidden; });
-
 
 function getFpsLimit()
 {
@@ -73,7 +71,6 @@ function getFpsLimit()
 
     return fpsLimit.get();
 }
-
 
 function updateFullscreenButton()
 {
@@ -102,7 +99,7 @@ function updateFullscreenButton()
             fsElement.addEventListener("mouseenter", onMouseEnter);
             fsElement.addEventListener("click", function (e)
             {
-                if (CABLES.UI && !e.shiftKey) gui.cycleRendererSize();
+                if (CABLES.UI && !e.shiftKey) gui.cycleFullscreen();
                 else cgl.fullScreen();
             });
         }
@@ -137,7 +134,6 @@ op.onDelete = function ()
     cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
 };
 
-
 function render(time)
 {
     if (!active.get()) return;
@@ -171,11 +167,11 @@ function render(time)
 
     cgl.renderStart(cgl, identTranslate, identTranslateView);
 
-    if (clear.get())
-    {
-        cgl.gl.clearColor(0, 0, 0, 1);
-        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    }
+    // if (clear.get())
+    // {
+    cgl.gl.clearColor(0, 0, 0, 1);
+    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    // }
 
     trigger.trigger();
 
@@ -199,5 +195,5 @@ function render(time)
     if (!cgl.frameStore.phong)cgl.frameStore.phong = {};
     rframes++;
 
-    CGL.profileData.profileMainloopMs = performance.now() - startTime;
+    op.patch.cgl.profileData.profileMainloopMs = performance.now() - startTime;
 }

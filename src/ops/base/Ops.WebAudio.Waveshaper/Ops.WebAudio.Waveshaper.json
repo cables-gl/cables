@@ -1,0 +1,115 @@
+{
+    "id": "c7c957a7-4531-4909-8721-172e568ee076",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "simod",
+            "date": 1618823400024
+        },
+        {
+            "message": "Ops.User.simod.TestDistortion renamed to Ops.WebAudio.Waveshaper",
+            "author": "simod",
+            "date": 1618845684382
+        }
+    ],
+    "authorName": "simod",
+    "created": 1618823414227,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "audio in",
+                "objType": "audioNode"
+            },
+            {
+                "type": 0,
+                "name": "Dry/Wet",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Oversampling index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Oversampling",
+                "group": "Waveshape Settings"
+            },
+            {
+                "type": 0,
+                "name": "Distortion Amount",
+                "group": "Waveshape Settings",
+                "subType": "integer"
+            },
+            {
+                "type": 3,
+                "name": "Waveshape Array In",
+                "group": "Waveshape Settings"
+            },
+            {
+                "type": 0,
+                "name": "Output Gain",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "audio out",
+                "objType": "audioNode"
+            },
+            {
+                "type": 3,
+                "name": "Curve Out"
+            },
+            {
+                "type": 0,
+                "name": "Curve Length",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.WebAudio.Waveshaper"
+    },
+    "summary": "add waveshaping (distortion, overdrive, fuzz) to an audio stream",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "audio in",
+                "text": "audio input"
+            },
+            {
+                "name": "Dry/Wet",
+                "text": "dry wet control - 0 only dry, 1 only wet (distorted) signal"
+            },
+            {
+                "name": "Oversampling",
+                "text": "how much oversampling should be applied to the waveshaping"
+            },
+            {
+                "name": "Distortion Amount",
+                "text": "the amount of distortion (equals to the amount of sample points of the waveshaper's transfer function - more points = more distortion), inactive when waveshape array in is used"
+            },
+            {
+                "name": "Waveshape Array In",
+                "text": "array input for the waveshaper (custom distortion transfer function)"
+            },
+            {
+                "name": "audio out",
+                "text": "audio output"
+            },
+            {
+                "name": "Curve Out",
+                "text": "distortion curve array output (one-dimensional)"
+            },
+            {
+                "name": "Curve Length",
+                "text": "length of the curve array"
+            }
+        ]
+    }
+}
