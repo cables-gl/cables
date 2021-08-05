@@ -1,0 +1,20 @@
+name: new issues to discord
+
+on:
+  workflow_dispatch:
+  issues:
+    types: [opened]
+
+env:
+  JDOC_APP_ID: "131e893c-eac4-4713-917b-a49fdd10c1c8"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'New issue: {{ EVENT_PAYLOAD.issue.title }} by {{ EVENT_PAYLOAD.user.login }}.'
