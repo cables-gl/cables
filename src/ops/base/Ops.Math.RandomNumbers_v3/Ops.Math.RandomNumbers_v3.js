@@ -1,58 +1,23 @@
 const
-    numValues=op.inValueInt("numValues",10),
-    min=op.inValueFloat("Min",0),
-    max=op.inValueFloat("Max",1),
-    seed=op.inValueFloat("random seed"),
-    values=op.outArray("values",100),
-    outArrayLength = op.outNumber("Array length"),
-    inInteger=op.inValueBool("Integer",false);
+    inSeed = op.inValueFloat("Seed", 1),
+    min = op.inValueFloat("Min", 0),
+    max = op.inValueFloat("Max", 1),
+    outX = op.outNumber("X"),
+    outY = op.outNumber("Y"),
+    outZ = op.outNumber("Z"),
+    outW = op.outNumber("W");
 
-values.ignoreValueSerialize=true;
-op.setPortGroup("Value Range",[min,max]);
-op.setPortGroup("",[seed]);
+inSeed.onChange =
+    min.onChange =
+    max.onChange = update;
 
-max.onChange=
-    min.onChange=
-    numValues.onChange=
-    seed.onChange=
-    values.onLinkChanged=
-    inInteger.onChange =init;
-
-var arr=[];
-init();
-
-function init()
+function update()
 {
-    Math.randomSeed=seed.get();
-    var isInteger=inInteger.get();
-
-    var arrLength = arr.length=Math.abs(parseInt(numValues.get()));
-
-    var minIn = min.get();
-    var maxIn = max.get();
-
-    if(arrLength===0)
-    {
-        values.set(null);
-        outArrayLength.set(0);
-        return;
-    }
-    if(!isInteger)
-    {
-        for(var i=0;i<arrLength;i++)
-        {
-            arr[i]=Math.seededRandom()* ( maxIn - minIn ) + minIn ;
-        }
-    }
-    else
-    {
-        for(var i=0;i<arrLength;i++)
-        {
-            arr[i]=Math.floor(Math.seededRandom()* ( (maxIn - minIn) + 1 ) + minIn);
-        }
-    }
-
-    values.set(null);
-    values.set(arr);
-    outArrayLength.set(arrLength);
-};
+    const inMin = min.get();
+    const inMax = max.get();
+    Math.randomSeed = Math.abs(inSeed.get() || 0) * 571.1 + 1.0;
+    outX.set(Math.seededRandom() * (inMax - inMin) + inMin);
+    outY.set(Math.seededRandom() * (inMax - inMin) + inMin);
+    outZ.set(Math.seededRandom() * (inMax - inMin) + inMin);
+    outW.set(Math.seededRandom() * (inMax - inMin) + inMin);
+}
