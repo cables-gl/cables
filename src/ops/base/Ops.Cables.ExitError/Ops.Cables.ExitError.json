@@ -1,1 +1,43 @@
-{"id":"e1ad65d5-1f84-45d7-8291-925474bd2bd9","changelog":[{"message":"created op","author":"pandur","date":1607417562212},{"message":"Ops.User.cables.ExitError renamed to Ops.Cables.ExitError","author":"pandur","date":1607420904551}],"authorName":"cables","created":1607417604702,"layout":{"portsIn":[{"type":"5","name":"ID"},{"type":"5","name":"Message"},{"type":"1","name":"Exit"}],"name":"Ops.User.cables.ExitError"}}
+{
+    "id": "e1ad65d5-1f84-45d7-8291-925474bd2bd9",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1607417562212
+        },
+        {
+            "message": "Ops.User.cables.ExitError renamed to Ops.Cables.ExitError",
+            "author": "pandur",
+            "date": 1607420904551
+        }
+    ],
+    "authorName": "cables",
+    "created": 1607417604702,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "ID"
+            },
+            {
+                "type": 5,
+                "name": "Message"
+            },
+            {
+                "type": 1,
+                "name": "Exit"
+            }
+        ],
+        "portsOut": [],
+        "name": "Ops.Cables.ExitError"
+    },
+    "summary": "stop executing the patch",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

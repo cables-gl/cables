@@ -17,5 +17,13 @@
             }
         ],
         "name": "Ops.Gl.Geometry.GeometryUnIndex"
+    },
+    "summary": "conver geometry to only flat triangles withour reusing vertices positions",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

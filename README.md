@@ -97,3 +97,6 @@ libs
 2. Go to the `Core Libs` tab
 3. Get your library file from the dropdown, click `Add`
 4. Reload patch
+5. profit
+
+

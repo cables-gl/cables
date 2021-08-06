@@ -418,7 +418,7 @@ void main()
 
 
     #ifdef ENABLE_FRESNEL
-        calculatedColor += inFresnel.rgb * (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);
+        calculatedColor += inFresnel.rgb* (CalculateFresnel(vec3(cameraSpace_pos), normal) * inFresnel.w * inFresnelWidthExponent.x);
     #endif
 
      #ifdef HAS_TEXTURE_ALPHA
