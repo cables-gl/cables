@@ -158,7 +158,7 @@
         "whammy.js",
         "jszip.js"
     ],
-    "summary": "render an animation and save as file webm video or png image sequence",
+    "summary": "record, render an animation and save as webm video file or png image sequence",
     "issues": "",
     "collections": null,
     "relatedops": null,

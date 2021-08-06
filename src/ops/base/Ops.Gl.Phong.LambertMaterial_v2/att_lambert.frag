@@ -154,5 +154,7 @@ void main()
 
     {{MODULE_COLOR}}
 
+    // col.rgb=norm.rgb;
+
     outColor = col;
 }
