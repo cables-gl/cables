@@ -98,11 +98,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Mask Channel",
-                "group": "Texture"
-            },
-            {
                 "type": 2,
                 "name": "Texture Colorize",
                 "group": "Texture",
@@ -132,11 +127,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Point Size Channel",
-                "group": "Size"
-            },
-            {
                 "type": 0,
                 "name": "Texture Point Size Mul",
                 "group": "Size",
@@ -146,10 +136,6 @@
                 "type": 0,
                 "name": "Map Size 0 index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Map Size 0"
             },
             {
                 "type": 0,
