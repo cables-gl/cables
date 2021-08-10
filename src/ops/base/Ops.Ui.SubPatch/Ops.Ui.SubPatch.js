@@ -331,7 +331,7 @@ op.onDelete = function ()
 {
     for (let i = op.patch.ops.length - 1; i >= 0; i--)
     {
-        if (op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == op.patchId.get())
+        if (op.patch.ops[i] && op.patch.ops[i].uiAttribs && op.patch.ops[i].uiAttribs.subPatch == op.patchId.get())
         {
             op.patch.deleteOp(op.patch.ops[i].id);
         }
