@@ -299,16 +299,19 @@ class ShaderModifier
     addUniformFrag(type, name, valOrPort, v2, v3, v4)
     {
         this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "frag");
+        this._changedUniforms = true;
     }
 
     addUniformVert(type, name, valOrPort, v2, v3, v4)
     {
         this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "vert");
+        this._changedUniforms = true;
     }
 
     addUniformBoth(type, name, valOrPort, v2, v3, v4)
     {
         this.addUniform(type, name, valOrPort, v2, v3, v4, null, null, null, "both");
+        this._changedUniforms = true;
     }
 
     addUniformStruct(structName, uniformName, members, shaderType)
