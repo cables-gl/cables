@@ -7,6 +7,8 @@ UNI sampler2D tex;
 
 UNI float amount;
 UNI float timeDelta;
+UNI float speedMin;
+UNI float speedMax;
 
 {{CGL.BLENDMODES}}
 
@@ -152,10 +154,11 @@ void main()
 {
     vec4 base=texture(tex,texCoord);
 
+// float minSpeed=0.05;
     vec3 coord=base.xyz;
-    coord.x+=((Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale ))*timeDelta);
-    coord.y+=((Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale ))*timeDelta);
-    coord.z+=((Perlin3D( ( (base.xyz+30.0) + vec3(x,y,z)) *scale ))*timeDelta);
+    coord.x+=( Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale )*timeDelta);
+    coord.y+=( Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale )*timeDelta);
+    coord.z+=( Perlin3D( ( (base.xyz+30.0) + vec3(x,y,z)) *scale )*timeDelta);
 
     // additional noise on top
     // coord.x+=Perlin3D(vec3(texCoord.x))*0.001;
