@@ -171,6 +171,7 @@
     overflow: hidden;
     box-sizing: border-box;
     animate: height;
+    background-color: #151515;
     /* max-height: 1000px; */
     /* transition: max-height 0.5s; */
 --sidebar-group-header-height: 33px;
@@ -195,12 +196,14 @@
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
     user-select: none;          /* Likely future */
-    height: var(--sidebar-group-header-height);
+
+    /*height: 100%;//var(--sidebar-group-header-height);*/
+
     padding-top: 7px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     cursor: pointer;
-    transition: background-color var(--sidebar-hover-transition-time);
+    /*transition: background-color var(--sidebar-hover-transition-time);*/
     position: relative;
 }
 
@@ -213,6 +216,7 @@
   overflow: hidden;
   padding: 0 15px;
   padding-top:5px;
+  padding-bottom:10px;
   font-weight:bold;
 }
 

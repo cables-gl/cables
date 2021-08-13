@@ -4,6 +4,9 @@ const
     scale = op.inValue("Scale", 1),
     time = op.inValue("Time", 0),
 
+    inSpeedMin = op.inFloatSlider("Min Speed", 0),
+    inSpeedMax = op.inFloatSlider("Max Speed", 1),
+
     x = op.inValue("X", 0),
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
@@ -24,6 +27,10 @@ const uniformR = new CGL.Uniform(shader, "f", "x", x);
 const uniformG = new CGL.Uniform(shader, "f", "y", y);
 const uniformB = new CGL.Uniform(shader, "f", "z", z);
 const uniformA = new CGL.Uniform(shader, "f", "scale", scale);
+
+const uniformSpMi = new CGL.Uniform(shader, "f", "speedMin", inSpeedMin);
+const uniformSpMa = new CGL.Uniform(shader, "f", "speedMax", inSpeedMax);
+
 const uniformTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 0);
 
 updateDefines();
