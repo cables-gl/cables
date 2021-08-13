@@ -220,7 +220,7 @@ op.dynOut.onLinkChanged = function ()
         const otherPort = op.dynOut.links[0].getOtherPort(op.dynOut);
         op.dynOut.removeLinks();
         otherPort.removeLinkTo(op.dynOut);
-        const newName = "out" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+        const newName = "out" + data.portsOut.length + " " + otherPort.parent.name + " " + otherPort.name;
 
         const o = { "name": newName, "type": otherPort.type };
         if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
