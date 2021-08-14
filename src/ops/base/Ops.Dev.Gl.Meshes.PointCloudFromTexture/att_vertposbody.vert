@@ -1,13 +1,13 @@
 
-float tx=mod(attrVertIndex,(MOD_texSize))/(MOD_texSize);
-float ty=float(int((attrVertIndex/(MOD_texSize))))/(MOD_texSize);
+// float tx=mod(attrVertIndex,(MOD_texSize))/(MOD_texSize);
+// float ty=float(int((attrVertIndex/(MOD_texSize))))/(MOD_texSize);
 
-vec4 col=texture(MOD_tex,vec2(tx,ty));
+vec4 col=texture(MOD_tex,texCoord);//vec2(tx,ty));
 
 // vec4 col=texture(MOD_tex,texCoord);
 
 #ifdef MOD_HAS_PS_TEX
-    psMul*=texture(MOD_texPointSize,vec2(tx,ty)).r;
+    psMul*=texture(MOD_texPointSize,texCoord).r;
     // psMul*=attrVertIndex/21000.0;
 #endif
 

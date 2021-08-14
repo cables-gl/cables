@@ -28,6 +28,8 @@ void main()
 
     ax=((ax-0.5)*width)+0.5;
 
+    // ax-=0.03;
+
     #ifndef GRAD_SMOOTHSTEP
         if(ax<=pos) col = vec4(mix(colA, colB, ax*1.0/pos),1.0);
         else col = vec4(mix(colB, colC, min(1.0,(ax-pos)*1.0/(1.0-pos))),1.0);

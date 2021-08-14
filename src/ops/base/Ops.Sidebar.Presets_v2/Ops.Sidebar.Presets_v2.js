@@ -10,6 +10,7 @@ inUpdatePreset.onTriggered = updatePreset;
 parentPort.onChange = onParentChanged;
 
 const presetPorts = [];
+const presetTitlePorts = [];
 
 const el = document.createElement("div");
 el.classList.add("sidebar__item");
@@ -27,9 +28,12 @@ const MAX_PRESETS = 8;
 
 for (let i = 0; i < MAX_PRESETS; i++)
 {
+    const inpTitle = op.inString("Preset Title " + i);
     const inp = op.inObject("Preset " + i);
     presetPorts.push(inp);
-    inp.onLinkChanged = updateSelect;
+    presetTitlePorts.push(inpTitle);
+
+    inpTitle.onLinkChanged = inp.onLinkChanged = updateSelect;
 }
 
 selectList.onchange = function ()
@@ -58,10 +62,11 @@ function updateSelect()
             const other = presetPorts[i].links[0].getOtherPort(presetPorts[i]);
 
             // other.parent.removeListener("onTitleChange",updateSelect);
-            if (!other.parent.hasEventListener(other.parent.onTitlechangeevent))
-                other.parent.onTitlechangeevent = other.parent.addEventListener("onTitleChange", updateSelect);
 
-            option.text = "" + other.parent.name;
+            // if (!other.parent.hasEventListener(other.parent.onTitlechangeevent))
+            // other.parent.onTitlechangeevent = other.parent.addEventListener("onTitleChange", updateSelect);
+
+            option.text = "" + presetTitlePorts[i].get();
             selectList.appendChild(option);
         }
     }

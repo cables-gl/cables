@@ -309,5 +309,23 @@ function onPlaybackEnded()
     outPlaying.set(false);
     isPlaying = false;
     hasEnded = true;
-    createAudioBufferSource(); // we can only play back once, so we need to create a new one
+    if (loopPort.get())
+    {
+        isPlaying = true;
+        hasEnded = false;
+        createAudioBufferSource(); // we can only play back once, so we need to create a new one
+    }
+    else
+    {
+        if (source)
+        {
+            if (source.buffer)
+            {
+                stop(0);
+                source.disconnect(gainNode);
+                source.buffer = null;
+            }
+            source = null;
+        }
+    }
 }

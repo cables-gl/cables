@@ -68,16 +68,27 @@ function setupMesh()
 {
     if (inNum.get() === 0 && !inTex.get()) return;
 
-    const num = Math.max(0, Math.ceil(inNum.get() || inTex.get().width * inTex.get().height));
+    const num = inTex.get().width * inTex.get().height;
 
     let verts = new Float32Array(num * 3);
     let texCoords = new Float32Array(num * 2);
+
+    let bias = 0.5 * (1.0 / inTex.get().width);
+
+    for (let x = 0; x < inTex.get().width; x++)
+        for (let y = 0; y < inTex.get().height; y++)
+        {
+            texCoords[(x + y * inTex.get().width) * 2] = (x / inTex.get().width) + bias;
+            texCoords[(x + y * inTex.get().width) * 2 + 1] = (y / inTex.get().height) + bias;
+        }
 
     const geom = new CGL.Geometry("pointcloudfromTexture");
     geom.setPointVertices(verts);
     geom.setTexCoords(texCoords);
     geom.verticesIndices = [];
     numVerts = verts.length / 3;
+
+    console.log("points  numVerts", numVerts);
 
     if (mesh)mesh.dispose();
 
