@@ -144,7 +144,7 @@
     },
     "authorName": "simod",
     "created": 1612888673498,
-    "summary": "send bpm based triggers",
+    "summary": "send bpm based triggers like a clocked trigger sequencer / clock divider",
     "issues": "",
     "collections": null,
     "relatedops": null,

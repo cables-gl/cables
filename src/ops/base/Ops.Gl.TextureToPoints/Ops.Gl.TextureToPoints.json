@@ -68,6 +68,11 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Seed",
+                "text": "Seed value 0 will continuously randomize point position"
+            }
+        ]
     }
 }

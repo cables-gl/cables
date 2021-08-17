@@ -51,7 +51,18 @@ outBPM.set(inBPM.get());
 
 let resetTickCount = false;
 let changeWhileRunning = false;
-inBPM.onChange = () =>
+inBPM.onChange = updateBpm;
+
+let worker = null;
+let isPlaying = false;
+let currentNote = 0;
+let nextNoteTime = null;
+let tickCount = 0;
+let workerRunning = false;
+let waitForSchedule = false;
+updateBpm();
+
+function updateBpm()
 {
     outBPM.set(inBPM.get());
 
@@ -63,13 +74,7 @@ inBPM.onChange = () =>
     QUARTER_NOTE_S = 60 / inBPM.get();
     NOTES_IN_S = MULTIPLIERS.map((multiplier) => multiplier * QUARTER_NOTE_S);
     TICK_S = NOTES_IN_S[TICK_INDEX];
-};
-
-let worker = null;
-let isPlaying = false;
-let currentNote = 0;
-let nextNoteTime = null;
-let tickCount = 0;
+}
 
 function nextNote()
 {
@@ -120,9 +125,6 @@ function startScheduling()
         nextNote();
     }
 }
-
-let workerRunning = false;
-let waitForSchedule = false;
 
 inStart.onTriggered = () =>
 {
