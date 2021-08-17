@@ -22,6 +22,11 @@
             },
             {
                 "type": 0,
+                "name": "Normalize Speed",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "X",
                 "subType": "number"
             },

@@ -190,8 +190,6 @@ Texture.prototype.setSize = function (w, h)
     }
 
 
-    this._setFilter();
-
     if (this.textureType == Texture.TYPE_FLOAT)
     {
         // if(this._cgl.glVersion==1 && !this._cgl.gl.getExtension('OES_texture_float')) throw "no float texture extension";
@@ -239,6 +237,8 @@ Texture.prototype.setSize = function (w, h)
     {
         this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, uarr);
     }
+
+    this._setFilter();
 
     // if (this._cgl.printError("cgltex"))
     // {

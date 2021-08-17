@@ -61,5 +61,13 @@
             }
         ],
         "name": "Ops.Patch.LoadingStatus_v2"
+    },
+    "summary": "trigger events / get information about asset-loading status",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

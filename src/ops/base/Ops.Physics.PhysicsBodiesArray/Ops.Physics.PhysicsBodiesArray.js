@@ -52,7 +52,7 @@ inPositions.onChange =
 inReset.onTriggered = () =>
 {
     const staticPos = inMass.get() == 0;
-    if (!staticPos)
+    if (staticPos)
     {
         setBodyPositions();
     }
@@ -217,10 +217,18 @@ function render()
 
     outNum.set(bodies.length);
 
-    if (!skipSimulation)
+    if (inMass.get() == 0.0)
     {
-        updatePositions();
+        for (let i = 0; i < bodies.length; i++)
+        {
+            bodies[i].mass = 0;
+            bodies[i].velocity.set(0, 0, 0);
+            bodies[i].angularVelocity.set(0, 0, 0);
+            bodies[i].updateMassProperties();
+        }
     }
+
+    if (!skipSimulation || inMass.get() === 0) updatePositions();
 
     skipSimulation = false;
 
@@ -228,7 +236,4 @@ function render()
     resultArrPos.set(resultsPositions);
 
     next.trigger();
-
-    // CABLES.physicsCurrentBody = null;
-    // cgl.popModelMatrix();
 }

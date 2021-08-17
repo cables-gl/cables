@@ -32,7 +32,7 @@ class ShaderTextureMath
                 {
                     "isFloatingPointTexture": true,
                     "multisampling": false,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE,
+                    "wrap": CGL.Texture.WRAP_REPEAT,
                     "filter": CGL.Texture.FILTER_NEAREST,
                     "depth": true,
                     "multisamplingSamples": 0,
@@ -45,7 +45,7 @@ class ShaderTextureMath
                 {
                     "isFloatingPointTexture": true,
                     "filter": CGL.Texture.FILTER_NEAREST,
-                    "wrap": CGL.Texture.WRAP_CLAMP_TO_EDGE
+                    "wrap": CGL.Texture.WRAP_REPEAT
                 });
         }
     }

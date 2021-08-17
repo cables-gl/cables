@@ -193,7 +193,11 @@ Shader.prototype.copyUniformValues = function (origShader)
             continue;
         }
 
-        this._uniforms[i].set(origShader._uniforms[i].getValue());
+        // console.log(origShader._uniforms[i].getName());
+        // this.getUniform(origShader._uniforms[i].)
+        // this._uniforms[i].set(origShader._uniforms[i].getValue());
+
+        this.getUniform(origShader._uniforms[i].getName()).set(origShader._uniforms[i].getValue());
     }
 
     this.popTextures();

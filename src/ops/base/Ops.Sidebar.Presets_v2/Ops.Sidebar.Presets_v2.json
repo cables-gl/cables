@@ -21,32 +21,64 @@
                 "name": "Update current Preset"
             },
             {
+                "type": 5,
+                "name": "Preset Title 0"
+            },
+            {
                 "type": 2,
                 "name": "Preset 0"
+            },
+            {
+                "type": 5,
+                "name": "Preset Title 1"
             },
             {
                 "type": 2,
                 "name": "Preset 1"
             },
             {
+                "type": 5,
+                "name": "Preset Title 2"
+            },
+            {
                 "type": 2,
                 "name": "Preset 2"
+            },
+            {
+                "type": 5,
+                "name": "Preset Title 3"
             },
             {
                 "type": 2,
                 "name": "Preset 3"
             },
             {
+                "type": 5,
+                "name": "Preset Title 4"
+            },
+            {
                 "type": 2,
                 "name": "Preset 4"
+            },
+            {
+                "type": 5,
+                "name": "Preset Title 5"
             },
             {
                 "type": 2,
                 "name": "Preset 5"
             },
             {
+                "type": 5,
+                "name": "Preset Title 6"
+            },
+            {
                 "type": 2,
                 "name": "Preset 6"
+            },
+            {
+                "type": 5,
+                "name": "Preset Title 7"
             },
             {
                 "type": 2,

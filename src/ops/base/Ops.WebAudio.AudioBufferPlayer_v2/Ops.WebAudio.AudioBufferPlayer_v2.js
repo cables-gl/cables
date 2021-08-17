@@ -180,7 +180,7 @@ inResetStart.onTriggered = function ()
 };
 
 // functions
-function createAudioBufferSource()
+function createAudioBufferSource(dontStart = false)
 {
     if (isLoading) return;
     if (!(audioBufferPort.get() instanceof AudioBuffer)) return;
@@ -230,7 +230,7 @@ function createAudioBufferSource()
         return;
     }
 
-    if (playPort.get())
+    if (playPort.get() && !dontStart)
     {
         if (!isPlaying) start(startTimePort.get());
     }
@@ -289,7 +289,7 @@ function stop(time)
 {
     try
     {
-        if (isPlaying && !hasEnded)
+        if (isPlaying)
         {
             source.stop();
         }
@@ -309,5 +309,15 @@ function onPlaybackEnded()
     outPlaying.set(false);
     isPlaying = false;
     hasEnded = true;
-    createAudioBufferSource(); // we can only play back once, so we need to create a new one
+    let dontStart = false;
+    if (loopPort.get())
+    {
+        isPlaying = true;
+        hasEnded = false;
+    }
+    else
+    {
+        dontStart = true;
+    }
+    createAudioBufferSource(dontStart);
 }
