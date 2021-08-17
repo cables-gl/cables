@@ -22,13 +22,8 @@
             },
             {
                 "type": 0,
-                "name": "Min Speed",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Max Speed",
-                "subType": "number"
+                "name": "Normalize Speed",
+                "subType": "boolean"
             },
             {
                 "type": 0,
