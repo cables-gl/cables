@@ -7,9 +7,10 @@ UNI sampler2D tex;
 
 UNI float amount;
 UNI float timeDelta;
+UNI float offset;
 
 {{CGL.BLENDMODES}}
-
+{{CGL.RANDOM_TEX}}
 
 float Interpolation_C2( float x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }   //  6x^5-15x^4+10x^3	( Quintic Curve.  As used by Perlin in Improved Noise.  http://mrl.nyu.edu/~perlin/paper445.pdf )
 vec2 Interpolation_C2( vec2 x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }
@@ -148,22 +149,80 @@ float Perlin3D( vec3 P )
 #endif
 }
 
+
 void main()
 {
     vec4 base=texture(tex,texCoord);
 
-    vec3 rnd=vec3(
-        ( Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale )),
-        ( Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale )),
-        ( Perlin3D( ( (base.xyz+60.0) + vec3(x,y,z)) *scale ))
-    );
+
+    vec3 rnd=
+        vec3(
+            Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz+60.0) + vec3(x,y,z)) *scale )
+        );
+
+
+    vec3 noise=(cgl_random3(texCoord.xy)-0.5)*offset;
+    rnd+=
+        vec3(
+            Perlin3D( ( (base.xyz+20.0+noise.x) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz-20.0+noise.y) + vec3(x,y,z)) *scale ),
+            Perlin3D( ( (base.xyz+60.0+noise.z) + vec3(x,y,z)) *scale )
+        );
+
+
+    // rnd=
+    // (
+    //     vec3(
+    //         Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz-20.0) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz+60.0) + vec3(x,y,z)) *scale )
+    //     )+
+    //     vec3(
+    //         Perlin3D( ( (base.xyz+20.0+(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz-20.0+(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz+60.0+(offset*scale)) + vec3(x,y,z)) *scale )
+    //     )*0.25+
+    //     vec3(
+    //         Perlin3D( ( (base.xyz+20.0-(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz-20.0-(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz+60.0-(offset*scale)) + vec3(x,y,z)) *scale )
+    //     )*0.25+
+    //     vec3(
+    //         Perlin3D( ( (base.xyz+20.0-(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz-20.0+(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz+60.0-(offset*scale)) + vec3(x,y,z)) *scale )
+    //     )*0.25+
+    //     vec3(
+    //         Perlin3D( ( (base.xyz+20.0+(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz-20.0-(offset*scale)) + vec3(x,y,z)) *scale ),
+    //         Perlin3D( ( (base.xyz+60.0+(offset*scale)) + vec3(x,y,z)) *scale )
+    //     )*0.25
+
+    //     )/2.0;
+
+
+
+
+
+
 
     #ifdef MOD_NORM_SPEED
-        rnd=normalize(rnd)*0.2*(timeDelta);
+        rnd=normalize(rnd)*0.2;
     #endif
     #ifndef MOD_NORM_SPEED
-        rnd*=timeDelta;
+        // rnd*=timeDelta;
     #endif
+
+    // rnd=clamp(rnd,vec3(-0.01),vec3(0.01));
+    // rnd*=0.01;
+    // float cl=0.03;
+    // rnd.x=clamp(rnd.x,-cl,cl);
+    // rnd.y=clamp(rnd.y,-cl,cl);
+    // rnd.z=clamp(rnd.z,-cl,cl);
+
+    rnd*=timeDelta;
 
     vec3 coord=base.xyz+rnd;
     // coord.x+=( Perlin3D( ( (base.xyz+20.0) + vec3(x,y,z)) *scale )*timeDelta);
