@@ -44,7 +44,7 @@ const
 exec.onTriggered = render;
 
 const results = [];
-let rayResult = null;
+let rayResult = new CANNON.RaycastResult();
 let didsetCursor = false;
 const mat = mat4.create();
 
@@ -61,7 +61,7 @@ function setRay(world)
     const x = inX.get();
     const y = inY.get();
 
-    const origin = vec3.fromValues(x, y, 0);
+    const origin = vec3.fromValues(x, y, -1);
     mat4.mul(mat, cgl.pMatrix, cgl.vMatrix);
     mat4.invert(mat, mat);
 
@@ -75,26 +75,28 @@ function setRay(world)
 
     vec3.transformMat4(to, to, mat);
 
-    let vx = origin[0] - to[0];
-    let vy = origin[1] - to[1];
-    let vz = origin[2] - to[2];
+    // -----------
 
-    const v3 = vec3.create();
-    vec3.set(v3, vx, vy, vz);
-    vec3.normalize(v3, v3);
-    vx = v3[0];
-    vy = v3[1];
-    vz = v3[2];
+    // let vx = origin[0] - to[0];
+    // let vy = origin[1] - to[1];
+    // let vz = origin[2] - to[2];
 
-    const huge = 99999;
+    // const v3 = vec3.create();
+    // vec3.set(v3, vx, vy, vz);
+    // vec3.normalize(v3, v3);
+    // vx = v3[0];
+    // vy = v3[1];
+    // vz = v3[2];
 
-    origin[0] = to[0] + vx * huge;
-    origin[1] = to[1] + vy * huge;
-    origin[2] = to[2] + vz * huge;
+    // const huge = 99999;
 
-    to[0] -= vx * huge;
-    to[1] -= vy * huge;
-    to[2] -= vz * huge;
+    // origin[0] = to[0] + vx;
+    // origin[1] = to[1] + vy;
+    // origin[2] = to[2] + vz;
+
+    // to[0] -= vx * huge;
+    // to[1] -= vy * huge;
+    // to[2] -= vz * huge;
 
     // ray = new CANNON.Ray(
     //     new CANNON.Vec3(to[0], to[1], to[2]),
@@ -111,11 +113,11 @@ function setRay(world)
 
     results.length = 0;
 
-    rayResult = new CANNON.RaycastResult();
+    // rayResult = new CANNON.RaycastResult();
     world.raycastClosest(
         new CANNON.Vec3(origin[0], origin[1], origin[2]),
         new CANNON.Vec3(to[0], to[1], to[2]),
-        {},
+        { "checkCollisionResponse": false },
         rayResult);
 
     // world.raycastAll(
@@ -171,7 +173,7 @@ function render()
             op.patch.cgl.setCursor("auto");
             didsetCursor = false;
         }
-        // ray.skipBackFaces = true;
+
         if (rayResult.body)
         {
             aabbX.set(rayResult.body.aabb.lowerBound.x);

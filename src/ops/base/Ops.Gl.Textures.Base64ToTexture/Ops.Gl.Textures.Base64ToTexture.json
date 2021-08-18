@@ -6,6 +6,16 @@
             {
                 "type": 5,
                 "name": "Base64 / Data URI"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
             }
         ],
         "portsOut": [
