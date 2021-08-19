@@ -667,7 +667,6 @@
  * COLOR PICKER
  */
 
- .sidebar__color-picker-color-input {}
 
  .sidebar__color-picker input[type=text] {
     box-sizing: border-box;
@@ -691,14 +690,17 @@
     color: #EEEEEE;
 }
 
+div.sidebar__color-picker-color-input,
 .sidebar__color-picker input[type=color],
 .sidebar__palette-picker input[type=color] {
     display: inline-block;
     border-radius: 100%;
     height: 14px;
     width: 14px;
+
     padding: 0;
     border: none;
+    /*border:2px solid red;*/
     border-color: transparent;
     outline: none;
     background: none;
