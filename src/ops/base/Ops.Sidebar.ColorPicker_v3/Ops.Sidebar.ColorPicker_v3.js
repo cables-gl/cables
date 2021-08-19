@@ -47,6 +47,13 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__color-picker");
 el.classList.add("sidebar__reloadable");
 
+const styleEle = document.createElement("style");
+styleEle.type = "text/css";
+styleEle.textContent = attachments.colorrick_css;
+
+const head = document.getElementsByTagName("body")[0];
+head.appendChild(styleEle);
+
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
 const labelTextNode = document.createTextNode(labelPort.get());
@@ -66,27 +73,26 @@ input.addEventListener("input", onInput);
 const colorInput = document.createElement("div");
 colorInput.classList.add("sidebar__color-picker-color-input");
 // colorInput.setAttribute("type", "color");
-colorInput.style.backgroundColor=defaultValuePort.get();
+colorInput.style.backgroundColor = defaultValuePort.get();
 // colorInput.addEventListener("change", onColorPickerChange, false);
 
-colorInput.addEventListener("click",function()
+colorInput.addEventListener("click", function ()
 {
     new ColorRick(
         {
-            ele:this,
-            color:this.style.backgroundColor||'#ff0000',
-            onChange:(col)=>
-                {
-                    const hex=col.hex();
-                    this.style.backgroundColor=hex;
-                    setColorOutPorts(hex);
-                    input.value = hex;
-                    outHex.set(hex);
-                    setInputsByHex(hex);
-                }
+            "ele": this,
+            "color": this.style.backgroundColor || "#ff0000",
+            "onChange": (col) =>
+            {
+                const hex = col.hex();
+                this.style.backgroundColor = hex;
+                setColorOutPorts(hex);
+                input.value = hex;
+                outHex.set(hex);
+                setInputsByHex(hex);
+            }
         });
 });
-
 
 el.appendChild(colorInput);
 input.addEventListener("input", onInput);

@@ -1,1 +1,115 @@
-{"authorName":"pandur","id":"52dc1ef8-deb0-4664-a924-4c5548aa8a55","created":1629365132838,"layout":{"portsIn":[{"type":2,"name":"Link"},{"type":5,"name":"Text"},{"type":0,"name":"Input Red","subType":"number"},{"type":0,"name":"Input Green","subType":"number"},{"type":0,"name":"Input Blue","subType":"number"},{"type":1,"name":"Set Default"}],"portsOut":[{"type":2,"name":"Children"},{"type":0,"name":"Red","subType":"number"},{"type":0,"name":"Green","subType":"number"},{"type":0,"name":"Blue","subType":"number"},{"type":5,"name":"Hex"}],"name":"Ops.User.pandur.ColorPicker2"},"summary":"Shows a color-picker in the sidebar","docs":{"ports":[{"name":"Link","text":"Either a link to the sidebar or sidebar group"},{"name":"Text","text":"The label text"},{"name":"Default","text":"The default color (as 6 or 7 digit hex color), e.g. \"#ff0000\""},{"name":"Children","text":"Here you can connect other sidebar ops"},{"name":"Red","text":"The red amount from the color picker, in range `[0..1]`"},{"name":"Green","text":"The green amount from the color picker, in range `[0..1]`"},{"name":"Blue","text":"The blue amount from the color picker, in range `[0..1]`"}]},"changelog":[{"message":"cloned op from Ops.Sidebar.ColorPicker_v2","author":"pandur","date":1629365132839},{"message":" added lib: colorrick.js","author":"pandur","date":1629365161529},{"message":"Ops.User.pandur.ColorPicker2 renamed to Ops.Sidebar.ColorPicker_v3","author":"pandur","date":1629366157692}],"libs":["colorrick.js"]}
+{
+    "authorName": "pandur",
+    "id": "52dc1ef8-deb0-4664-a924-4c5548aa8a55",
+    "created": 1629365132838,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 2,
+                "name": "Link"
+            },
+            {
+                "type": 5,
+                "name": "Text"
+            },
+            {
+                "type": 0,
+                "name": "Input Red",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Input Green",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Input Blue",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Set Default"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Children"
+            },
+            {
+                "type": 0,
+                "name": "Red",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Green",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Blue",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Hex"
+            }
+        ],
+        "name": "Ops.Sidebar.ColorPicker_v3"
+    },
+    "summary": "Shows a color-picker in the sidebar",
+    "docs": {
+        "ports": [
+            {
+                "name": "Link",
+                "text": "Either a link to the sidebar or sidebar group"
+            },
+            {
+                "name": "Text",
+                "text": "The label text"
+            },
+            {
+                "name": "Default",
+                "text": "The default color (as 6 or 7 digit hex color), e.g. \"#ff0000\""
+            },
+            {
+                "name": "Children",
+                "text": "Here you can connect other sidebar ops"
+            },
+            {
+                "name": "Red",
+                "text": "The red amount from the color picker, in range `[0..1]`"
+            },
+            {
+                "name": "Green",
+                "text": "The green amount from the color picker, in range `[0..1]`"
+            },
+            {
+                "name": "Blue",
+                "text": "The blue amount from the color picker, in range `[0..1]`"
+            }
+        ]
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Sidebar.ColorPicker_v2",
+            "author": "pandur",
+            "date": 1629365132839
+        },
+        {
+            "message": " added lib: colorrick.js",
+            "author": "pandur",
+            "date": 1629365161529
+        },
+        {
+            "message": "Ops.User.pandur.ColorPicker2 renamed to Ops.Sidebar.ColorPicker_v3",
+            "author": "pandur",
+            "date": 1629366157692
+        }
+    ],
+    "libs": [
+        "colorrick.js"
+    ]
+}

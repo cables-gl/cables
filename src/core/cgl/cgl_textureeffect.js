@@ -416,9 +416,9 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
     else shader.removeDefine("BM_COLORBURN");
 };
 
-TextureEffect.AddBlendSelect = function (op, name)
+TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 {
-    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
+    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], defaultMode || "normal");
     return p;
 };
 
