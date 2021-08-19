@@ -6,7 +6,7 @@ const
     inStrength = op.inValueFloat("Strength", 1),
     inCalcNormals = op.inValueBool("Calc Normals", false),
     inFalloff = op.inValueSlider("Falloff", 0.5),
-    output = op.inValueSelect("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
+    output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
     inPos = op.inSwitch("Source", ["Pos", "Orig Pos"], "Pos"),
     x = op.inValueFloat("x"),
     y = op.inValueFloat("y"),
@@ -69,6 +69,7 @@ function updateOutput()
 
     mod.toggleDefine("MOD_METH_ADD_XYZ", output.get() == "Add XYZ");
     mod.toggleDefine("MOD_METH_ADD_Z", output.get() == "Add Z");
+    mod.toggleDefine("MOD_METH_MUL_Z", output.get() == "Mul Z");
     mod.toggleDefine("MOD_METH_ADD_Y", output.get() == "Add Y");
     mod.toggleDefine("MOD_METH_ADD_X", output.get() == "Add X");
     mod.toggleDefine("MOD_METH_MULNORM", output.get() == "Mul Normal");
