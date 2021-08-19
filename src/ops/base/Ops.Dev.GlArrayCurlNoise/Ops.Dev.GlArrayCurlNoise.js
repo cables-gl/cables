@@ -10,6 +10,8 @@ const
     y = op.inValue("Y", 0),
     z = op.inValue("Z", 0),
     a = op.inValue("a", 1),
+
+    inOffset = op.inFloatSlider("offset", 0),
     trigger = op.outTrigger("trigger"),
     outTex = op.outTexture("Result");
 
@@ -28,7 +30,8 @@ const
     uniformG = new CGL.Uniform(shader, "f", "y", y),
     uniformB = new CGL.Uniform(shader, "f", "z", z),
     uniformA = new CGL.Uniform(shader, "f", "scale", scale),
-    uniformTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 0);
+    uniformTimeDelta = new CGL.Uniform(shader, "f", "timeDelta", 0),
+    uniforoffs = new CGL.Uniform(shader, "f", "offset", inOffset);
 
 inNormSpeed.onChange = updateDefines;
 updateDefines();
