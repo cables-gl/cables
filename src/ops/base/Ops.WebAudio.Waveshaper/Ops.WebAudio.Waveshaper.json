@@ -32,11 +32,6 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Oversampling",
-                "group": "Waveshape Settings"
-            },
-            {
                 "type": 0,
                 "name": "Distortion Amount",
                 "group": "Waveshape Settings",
