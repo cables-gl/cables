@@ -10,11 +10,7 @@ changelog:
 
 */
 
-{{CGL.BLENDMODES}}
-
 IN vec2 texCoord;
-
-UNI float amount;
 
 UNI sampler2D texDepth;
 UNI sampler2D tex;
@@ -62,9 +58,6 @@ const float gdisplace = 0.4; //gauss bell center
 // const bool onlyAO = false; //use only ambient occlusion pass?
 // const float lumInfluence = 0.7; //how much luminance affects occlusion
 UNI float lumInfluence;
-
-
-
 
 //--------------------------------------------------------
 
@@ -168,14 +161,26 @@ void main(void)
 
 	ao /= float(SAMPLES);
 	ao = 1.0-ao;
-	vec4 color = texture(tex,texCoord);
+
+// 	if (mist)
+// 	{
+// 	ao = mix(ao, 1.0,doMist());
+// 	}
+
+	vec3 color = texture(tex,texCoord).rgb;
 
 	vec3 lumcoeff = vec3(0.299,0.587,0.114);
 	float lum = dot(color.rgb, lumcoeff);
 	vec3 luminance = vec3(lum, lum, lum);
-	vec3 final = vec3(mix( clamp(vec3(ao),0.0,1.0),vec3(1.0),luminance*(1.0-amount)));//mix(color*ao, white, luminance)
 
-    vec4 col=vec4( _blend(color.rgb,final) ,1.0);
+	vec3 final = vec3(color*mix(vec3(ao),vec3(1.0),luminance*lumInfluence));//mix(color*ao, white, luminance)
 
-    outColor=vec4( mix( col.rgb, color.rgb ,1.0-color.a*amount),1.0);
+// 	if (onlyAO)
+// 	{
+// 	final = vec3(mix(vec3(ao),vec3(1.0),luminance*lumInfluence)); //ambient occlusion only
+// 	}
+
+
+	outColor= vec4(final,1.0);
+
 }

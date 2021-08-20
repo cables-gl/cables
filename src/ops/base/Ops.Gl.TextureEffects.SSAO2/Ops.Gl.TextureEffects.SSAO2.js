@@ -1,10 +1,6 @@
 const
     render = op.inTrigger("render"),
     trigger = op.outTrigger("trigger"),
-
-    blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "multiply"),
-    amount = op.inValueSlider("Amount", 1),
-
     depth = op.inTexture("depth texture"),
     zNear = op.inValue("Frustum Near", 0.1),
     zFar = op.inValue("Frustum Far", 20),
@@ -18,10 +14,6 @@ const
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 
-op.setPortGroup("Noise", [noise, noiseamount]);
-
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
-
 shader.setSource(shader.getDefaultVertexShader(), attachments.ssao_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 let textureAlpha = new CGL.Uniform(shader, "t", "texDepth", 1);
@@ -33,8 +25,6 @@ lumInfluence.uniform = new CGL.Uniform(shader, "f", "lumInfluence", lumInfluence
 
 zNear.uniform = new CGL.Uniform(shader, "f", "znear", zNear);
 zFar.uniform = new CGL.Uniform(shader, "f", "zfar", zFar);
-
-const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
 noiseamount.uniform = new CGL.Uniform(shader, "f", "noiseamount", noiseamount);
 
@@ -48,8 +38,8 @@ samples.onChange = function ()
     shader.define("SAMPLES", samples.get());
 };
 
-let uniWidth = new CGL.Uniform(shader, "f", "width", 1024),
-    uniHeight = new CGL.Uniform(shader, "f", "height", 512);
+let uniWidth = new CGL.Uniform(shader, "f", "width", 1024);
+let uniHeight = new CGL.Uniform(shader, "f", "height", 512);
 
 shader.define("SAMPLES", samples.get());
 aoClamp.uniform = new CGL.Uniform(shader, "f", "aoclamp", aoClamp);
