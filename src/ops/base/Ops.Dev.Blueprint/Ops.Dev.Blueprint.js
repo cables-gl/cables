@@ -184,14 +184,14 @@ function update()
             "blueprintSubpatchId": op.uiAttribs.subPatch
         };
 
-        CABLES.sandbox.getBlueprintOps(options, (err, data) =>
+        CABLES.sandbox.getBlueprintOps(options, (err, response) =>
         {
             op.setUiError("fetchOps", null);
             if (!err)
             {
                 removeImportedOps();
                 const blueprintData = {};
-                blueprintData.ops = data.msg.ops;
+                blueprintData.ops = response.data.ops;
                 blueprintData.settings = op.patch.settings;
                 deSerializeBlueprint(blueprintData, subPatchId, true);
             }
@@ -224,13 +224,13 @@ function update()
         }
         CABLES.ajax(
             blueprintUrl,
-            function (err, data)
+            function (err, response)
             {
                 if (!err)
                 {
-                    const blueprintData = JSON.parse(data);
+                    const blueprintData = JSON.parse(response);
                     blueprintData.settings = op.patch.settings;
-                    blueprintData.ops = blueprintData.msg.ops;
+                    blueprintData.ops = blueprintData.data.ops;
                     deSerializeBlueprint(blueprintData, subPatchId, false);
                 }
                 else

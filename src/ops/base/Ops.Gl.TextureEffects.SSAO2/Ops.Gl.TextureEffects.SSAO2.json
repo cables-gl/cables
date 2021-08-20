@@ -2,57 +2,89 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "2",
-                "name": "depth texture"
+                "type": 0,
+                "name": "Blend Mode index",
+                "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "depth texture",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
                 "name": "Frustum Near",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Frustum Far",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Samples",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ao Radius",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Ao Clamp",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Luminance Influence",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
+                "name": "r",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "g",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "b",
+                "group": "Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Enable noise",
+                "group": "Noise",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Noise amount",
+                "group": "Noise",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],
