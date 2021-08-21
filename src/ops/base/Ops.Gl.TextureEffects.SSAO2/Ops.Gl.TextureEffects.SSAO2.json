@@ -6,17 +6,6 @@
                 "name": "render"
             },
             {
-                "type": 0,
-                "name": "Blend Mode index",
-                "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Amount",
-                "group": "Blending",
-                "subType": "number"
-            },
-            {
                 "type": 2,
                 "name": "depth texture",
                 "objType": "texture"
@@ -53,32 +42,12 @@
             },
             {
                 "type": 0,
-                "name": "r",
-                "group": "Color",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "g",
-                "group": "Color",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "b",
-                "group": "Color",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "Enable noise",
-                "group": "Noise",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Noise amount",
-                "group": "Noise",
                 "subType": "number"
             }
         ],

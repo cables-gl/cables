@@ -110,9 +110,10 @@ const Op = function ()
         this.uiAttrib(obj);
     };
 
-    Op.prototype.getTitle = function (name)
+    Op.prototype.getTitle = function ()
     {
-        return this.uiAttribs.title || this.name;
+        if (!this.uiAttribs) return this.name;
+        return (this.uiAttribs.title || this.name);
     };
 
     Op.prototype.setTitle = function (name)

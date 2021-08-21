@@ -41,17 +41,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Source"
-            },
-            {
                 "type": 0,
                 "name": "Mode index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Mode"
             },
             {
                 "type": 0,
@@ -102,10 +94,6 @@
                 "type": 0,
                 "name": "Channel index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Channel"
             },
             {
                 "type": 0,

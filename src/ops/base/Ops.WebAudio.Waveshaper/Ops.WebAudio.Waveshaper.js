@@ -48,7 +48,9 @@ waveshaperNode.connect(wetNode);
 
 wetNode.connect(outputNode);
 
-const changeDistortion = () =>
+changeDistortion();
+
+function changeDistortion()
 {
     if (inWaveshapeArray.get())
     {
@@ -71,7 +73,7 @@ const changeDistortion = () =>
 
     outCurve.set(Array.from(waveshaperNode.curve));
     outCurveLength.set(waveshaperNode.curve.length);
-};
+}
 
 // * onChange handlers * //
 inDryWet.onChange = () =>

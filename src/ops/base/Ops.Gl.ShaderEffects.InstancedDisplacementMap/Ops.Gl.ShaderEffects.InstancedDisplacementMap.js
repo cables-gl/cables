@@ -55,6 +55,7 @@ mod.addUniformVert("2f", "MOD_offset", inOffsetX, inOffsetY);
 mod.addUniformVert("f", "MOD_scale", inScale);
 mod.addUniformVert("f", "MOD_strength", inStrength);
 mod.addUniformVert("f", "MOD_min", inMin);
+updateDefines();
 
 function updateDefines()
 {
