@@ -23,7 +23,7 @@ const
     inCustom=op.inValueFloat("Custom",1.777777);
 
 const
-    useVPSize=op.inValueBool("use viewport size",true),
+    useVPSize=op.inBool("use viewport size",true),
     width=op.inValueInt("texture width",512),
     height=op.inValueInt("texture height",512);
 

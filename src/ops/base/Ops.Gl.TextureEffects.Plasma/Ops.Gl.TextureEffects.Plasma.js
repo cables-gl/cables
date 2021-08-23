@@ -8,7 +8,7 @@ const
     offsetX = op.inValue("offset X", 0),
     offsetY = op.inValue("offset Y", 0),
     time = op.inValue("Time", 1),
-    greyscale = op.inValueBool("Greyscale", true),
+    greyscale = op.inBool("Greyscale", true),
     trigger = op.outTrigger("trigger");
 
 

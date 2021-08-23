@@ -10,7 +10,7 @@ const trigger = op.outTrigger("trigger");
 const calcVertexNormals = this.inValueBool("smooth");
 calcVertexNormals.set(true);
 
-const doDraw = op.inValueBool("Render", true);
+const doDraw = op.inBool("Render", true);
 
 const outNumFrames = op.outValue("Num Frames");
 const outName = op.outValue("Frame Name");

@@ -22,11 +22,11 @@ render.onTriggered = function ()
     trigger.trigger();
 };
 
-let channelR = op.inValueBool("channelR", true);
-let channelG = op.inValueBool("channelG", false);
-let channelB = op.inValueBool("channelB", false);
-let mono = op.inValueBool("mono", false);
-let alpha = op.inValueBool("Alpha", false);
+let channelR = op.inBool("channelR", true);
+let channelG = op.inBool("channelG", false);
+let channelB = op.inBool("channelB", false);
+let mono = op.inBool("mono", false);
+let alpha = op.inBool("Alpha", false);
 
 mono.onChange =
     alpha.onChange =

@@ -1,4 +1,4 @@
-let visible = op.inValueBool("visible", true);
+let visible = op.inBool("visible", true);
 
 
 visible.onChange = function ()

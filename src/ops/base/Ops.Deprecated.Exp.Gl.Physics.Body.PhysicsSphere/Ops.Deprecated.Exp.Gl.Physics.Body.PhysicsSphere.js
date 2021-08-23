@@ -2,7 +2,7 @@ let exec = op.inTrigger("Exec");
 let inMass = op.inValue("Mass");
 let inRadius = op.inValue("Radius", 1);
 
-let doRender = op.inValueBool("Render", true);
+let doRender = op.inBool("Render", true);
 
 let posX = op.inValue("Pos X");
 let posY = op.inValue("Pos Y");

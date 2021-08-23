@@ -7,11 +7,11 @@ let inLaser = op.inValue("laser id", 0);
 let inSpeed = op.inValue("speed", 7000);
 
 
-let inDraw = op.inValueBool("Draw");
-let inDrawClamp = op.inValueBool("Draw Clamp");
-let close = op.inValueBool("Close");
-let blackEnd = op.inValueBool("blackEnd");
-let inDots = op.inValueBool("dots");
+let inDraw = op.inBool("Draw");
+let inDrawClamp = op.inBool("Draw Clamp");
+let close = op.inBool("Close");
+let blackEnd = op.inBool("blackEnd");
+let inDots = op.inBool("dots");
 
 
 let inPoints = op.inArray("Points");
@@ -19,7 +19,7 @@ let inColors = op.inArray("Colors");
 
 let pointRepeat = op.inValueInt("Point Repeat", 1);
 
-let inNeverDrop = op.inValueBool("neverDrop");
+let inNeverDrop = op.inBool("neverDrop");
 
 
 let inClampXLeft = op.inValue("Clamp X Left");

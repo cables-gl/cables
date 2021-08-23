@@ -86,12 +86,13 @@ Port.prototype.getValueForDisplay = function ()
 {
     let str = String(this.val);
 
-    // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
-    // {
-    //     if (!this.val) str = "false";
-    //     else str = "true";
-    // }
+    if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
+    {
+        if (!this.val) str += " (false)";
+        else str += " (true)";
+    }
     if (str.length > 100) str = str.substring(0, 100);
+
 
     return str;
 };
@@ -740,6 +741,23 @@ Port.portTypeNumberToString = function (type)
     if (type == CONSTANTS.OP.OP_PORT_TYPE_DYNAMIC) return "dynamic";
     return "unknown";
 };
+
+class BoolPort extends Port
+{
+    set(b)
+    {
+        super.set(b ? 1 : 0);
+        // console.log("bool set", b, this.get());
+    }
+
+    get()
+    {
+        // console.log("bool get", super.get());
+        return super.get() ? 1 : 0;
+    }
+}
+
+
 class SwitchPort extends Port
 {
     constructor(__parent, name, type, uiAttribs, indexPort)
@@ -796,4 +814,5 @@ class ValueSelectPort extends SwitchPort
     }
 }
 
-export { Port, SwitchPort, ValueSelectPort };
+
+export { Port, SwitchPort, BoolPort, ValueSelectPort };

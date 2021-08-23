@@ -1,6 +1,6 @@
 var exec=op.inTrigger("exec");
 var num=this.inValueInt("num");
-var defaultTransparent=op.inValueBool("Default Texture Transparent",true);
+var defaultTransparent=op.inBool("Default Texture Transparent",true);
 var textureOut=this.outTexture("texture");
 
 var cgl=op.patch.cgl;

@@ -4,13 +4,13 @@ let render = op.inTrigger("render");
 let blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal");
 let amount = op.inValueSlider("Amount", 1);
 
-let fill = op.inValueBool("Fill", false);
+let fill = op.inBool("Fill", false);
 let offset = op.inValue("offset", 0);
 let frequency = op.inValue("frequency", 10);
 let amplitude = op.inValueSlider("amplitude", 1);
 let thick = op.inValueSlider("Thickness", 0.1);
 
-let flip = op.inValueBool("Flip", false);
+let flip = op.inBool("Flip", false);
 
 let trigger = op.outTrigger("trigger");
 

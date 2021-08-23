@@ -1,6 +1,6 @@
 const
     inEle=op.inObject("Element"),
-    active=op.inValueBool("active",true),
+    active=op.inBool("active",true),
     filename=op.inFile("image file"),
     inSize=op.inValueSelect("Size",["auto","length","cover","contain","initial","inherit","75%","50%","25%"],"auto"),
     inRepeat=op.inValueSelect("Repeat",["no-repeat","repeat","repeat-x","repeat-y"],"no-repeat"),

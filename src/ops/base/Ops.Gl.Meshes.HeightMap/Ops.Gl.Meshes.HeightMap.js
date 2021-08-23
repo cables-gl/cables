@@ -5,8 +5,8 @@ const render=op.inTrigger('render'),
     mHeight=op.inValueFloat("height",3),
     nRows=op.inValueInt("rows",20),
     nColumns=op.inValueInt("columns",20),
-    sliceTex=op.inValueBool("texCoords slice"),
-    flat=op.inValueBool("flat"),
+    sliceTex=op.inBool("texCoords slice"),
+    flat=op.inBool("flat"),
     trigger=op.outTrigger('trigger');
 
 var outGeom=op.outObject("geometry");

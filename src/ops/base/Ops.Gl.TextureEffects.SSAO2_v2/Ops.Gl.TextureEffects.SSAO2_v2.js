@@ -12,7 +12,7 @@ const
     aoRadius = op.inValue("Ao Radius", 3),
     aoClamp = op.inValueSlider("Ao Clamp", 0.25),
     lumInfluence = op.inValueSlider("Luminance Influence", 0.7),
-    noise = op.inValueBool("Enable noise", false),
+    noise = op.inBool("Enable noise", false),
     noiseamount = op.inValueFloat("Noise amount", 0.0008);
 
 const cgl = op.patch.cgl;

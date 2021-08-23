@@ -111,7 +111,7 @@ function doRender()
 
 }
 
-op.colorizeTexture=op.inValueBool("colorizeTexture");
+op.colorizeTexture=op.inBool("colorizeTexture");
 op.colorizeTexture.set(false);
 op.colorizeTexture.onChange=function()
 {
@@ -119,7 +119,7 @@ op.colorizeTexture.onChange=function()
         else shader.removeDefine('COLORIZE_TEXTURE');
 };
 
-op.doBillboard=op.inValueBool("billboard");
+op.doBillboard=op.inBool("billboard");
 op.doBillboard.set(false);
 
 op.doBillboard.onChange=function()
@@ -128,7 +128,7 @@ op.doBillboard.onChange=function()
         else shader.removeDefine('BILLBOARD');
 };
 
-var texCoordAlpha=op.inValueBool("Opacity TexCoords Transform",false);
+var texCoordAlpha=op.inBool("Opacity TexCoords Transform",false);
 
 texCoordAlpha.onChange=function()
 {
@@ -137,7 +137,7 @@ texCoordAlpha.onChange=function()
 
 };
 
-var preMultipliedAlpha=op.inValueBool("preMultiplied alpha");
+var preMultipliedAlpha=op.inBool("preMultiplied alpha");
 
 function updateTexRepeat()
 {

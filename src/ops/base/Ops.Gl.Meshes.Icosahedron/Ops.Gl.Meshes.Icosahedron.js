@@ -1,7 +1,7 @@
 // from: http://blog.andreaskahler.com/search/label/3D
 
 let render = op.inTrigger("render");
-let smooth = op.inValueBool("smooth");
+let smooth = op.inBool("smooth");
 let trigger = op.outTrigger("trigger");
 let geomOut = op.outObject("geometry");
 

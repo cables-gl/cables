@@ -1,7 +1,7 @@
 const
     exe=op.inTriggerButton("exe"),
-    smooth=op.inValueBool("Smooth",false),
-    seconds=op.inValueBool("Seconds",false),
+    smooth=op.inBool("Smooth",false),
+    seconds=op.inBool("Seconds",false),
     trigger=op.outTrigger('trigger'),
     result=op.outValue("result");
 

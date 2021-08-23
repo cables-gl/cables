@@ -3,7 +3,7 @@
 const render = op.inTrigger("Render");
 const inMeshIndex = op.inValueInt("MeshIndex");
 const inGeom = op.inObject("Geometry");
-const draw = op.inValueBool("draw", true);
+const draw = op.inBool("draw", true);
 const next = op.outTrigger("Next");
 
 let geom = null;

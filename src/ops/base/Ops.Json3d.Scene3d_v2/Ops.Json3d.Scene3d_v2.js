@@ -2,9 +2,9 @@ op.exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
 let filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "3d json" }));
 let trigger = op.outTrigger("trigger");
 let doCreate = op.inTriggerButton("Create Nodes");
-let createNonMesh = op.inValueBool("Create Non Mesh Nodes");
-let createMaterials = op.inValueBool("Create Materials", false);
-let detectClones = op.inValueBool("Detect Clones", true);
+let createNonMesh = op.inBool("Create Non Mesh Nodes");
+let createMaterials = op.inBool("Create Materials", false);
+let detectClones = op.inBool("Detect Clones", true);
 let inReplaceMaterials = op.inObject("Mesh Materials");
 let outLoading = op.outValueBool("Loading", false);
 

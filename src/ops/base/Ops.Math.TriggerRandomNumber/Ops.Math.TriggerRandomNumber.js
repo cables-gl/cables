@@ -4,7 +4,7 @@ const
     max=op.inValue("max",1),
     outTrig = op.outTrigger("next"),
     result=op.outValue("result"),
-    inInteger=op.inValueBool("Integer",false);
+    inInteger=op.inBool("Integer",false);
 
 exe.onTriggered=genRandom;
 max.onChange=genRandom;

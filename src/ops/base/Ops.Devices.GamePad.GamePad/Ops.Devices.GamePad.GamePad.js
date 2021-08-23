@@ -1,6 +1,6 @@
 var data=op.inObject("GamePad Data");
 var outID=op.outValue("ID");
-var digitalAnalog=op.inValueBool("Analog to Digital",true);
+var digitalAnalog=op.inBool("Analog to Digital",true);
 var outAxes=op.outArray("Axes");
 
 var pressedLeft=op.outValueBool("Pad Left");

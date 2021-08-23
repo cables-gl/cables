@@ -7,8 +7,8 @@ let trigger = this.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TY
 let textureOut = this.addOutPort(new CABLES.Port(this, "texture", CABLES.OP_PORT_TYPE_TEXTURE));
 let outFPS = this.addOutPort(new CABLES.Port(this, "fps", CABLES.OP_PORT_TYPE_VALUE));
 
-let drawGraph = op.inValueBool("Draw Graph", true);
-let enabled = op.inValueBool("enabled", true);
+let drawGraph = op.inBool("Draw Graph", true);
+let enabled = op.inBool("enabled", true);
 let numBars = 256;
 
 let canvas = document.createElement("canvas");

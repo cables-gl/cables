@@ -3,8 +3,8 @@ const trigger = op.addOutPort(new CABLES.Port(op, "Next", CABLES.OP_PORT_TYPE_FU
 const thick = op.inValue("Thickness");
 const inStart = op.inValueSlider("Start");
 const inLength = op.inValueSlider("Length", 1);
-const calcNormals = op.inValueBool("Calculate Normals", false);
-const inStrip = op.inValueBool("Line Strip", true);
+const calcNormals = op.inBool("Calculate Normals", false);
+const inStrip = op.inBool("Line Strip", true);
 const inPoints = op.inArray("points");
 const inNumPoints = op.inValue("Num Points", 0);
 

@@ -1,6 +1,6 @@
 op.name="PolyBoolean";
 
-var pDefault=op.inValueBool("default",true);
+var pDefault=op.inBool("default",true);
 
 var pName=op.inValueString("name","paramname");
 var pTitle=op.inValueString("title","something readable");

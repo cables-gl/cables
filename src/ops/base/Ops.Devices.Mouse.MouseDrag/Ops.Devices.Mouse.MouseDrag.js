@@ -1,5 +1,5 @@
 const
-    active = op.inValueBool("Active", true),
+    active = op.inBool("Active", true),
     speed = op.inValue("Speed", 0.01),
     inputType = op.inSwitch("Input Type", ["All", "Mouse", "Touch"], "All"),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),

@@ -1,20 +1,20 @@
 
-var val=op.inValueBool("Value",false);
+let val = op.inBool("Value", false);
 
-var next=op.outTrigger("Next");
+let next = op.outTrigger("Next");
 
-var oldVal=0;
+let oldVal = 0;
 
-val.onChange=function()
+val.onChange = function ()
 {
-    var newVal=val.get();
-    if(!oldVal && newVal)
+    let newVal = val.get();
+    if (!oldVal && newVal)
     {
-        oldVal=true;
+        oldVal = true;
         next.trigger();
     }
     else
     {
-        oldVal=false;
+        oldVal = false;
     }
 };

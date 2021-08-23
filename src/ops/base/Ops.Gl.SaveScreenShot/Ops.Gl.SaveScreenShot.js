@@ -2,7 +2,7 @@
 var exe=op.inTriggerButton("Screenshot");
 var filename=op.inValueString("Filename","cables");
 
-var useSize=op.inValueBool("Use Canvas Size",true);
+var useSize=op.inBool("Use Canvas Size",true);
 
 var outNext=op.outTrigger("Finished");
 
@@ -54,5 +54,5 @@ function updateSizePorts()
         width.setUiAttribs({hidePort:false,greyout:false});
         height.setUiAttribs({hidePort:false,greyout:false});
     }
-    
+
 }

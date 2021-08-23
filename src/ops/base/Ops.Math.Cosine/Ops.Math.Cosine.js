@@ -4,7 +4,7 @@ var value = op.inValue('Value');
 var phase = op.inValue('Phase', 0.0);
 var mul = op.inValue('Frequency', 1.0);
 var amplitude = op.inValue('Amplitude', 1.0);
-var invert = op.inValueBool("asine", false);
+var invert = op.inBool("asine", false);
 
 // output
 var result = op.outValue('Result');

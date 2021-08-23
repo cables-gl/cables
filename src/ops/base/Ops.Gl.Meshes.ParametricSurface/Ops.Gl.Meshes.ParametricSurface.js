@@ -613,12 +613,12 @@ const shapes = op.inDropDown("shapes", parametricBodies.map(bod => bod.title));
 const render = op.inTrigger("render");
 const inSegmentsU = op.inValueInt("u Segments", 48);
 const inSegmentsV = op.inValueInt("v Segments", 48);
-const multByPiU = op.inValueBool("Multiple of PI - u", false);
+const multByPiU = op.inBool("Multiple of PI - u", false);
 const inMinU = op.inValueFloat("uMin", -2);
 const inMaxU = op.inValueFloat("uMax", 2);
 const inDisplaceU = op.inValueFloat("Displace U", 0);
 
-const multByPiV = op.inValueBool("Multiple of PI - v", false);
+const multByPiV = op.inBool("Multiple of PI - v", false);
 const inMinV = op.inValueFloat("vMin", -1);
 const inMaxV = op.inValueFloat("vMax", 1);
 const inDisplaceV = op.inValueFloat("Displace V", 0);
@@ -636,7 +636,7 @@ const inScaleZ = op.inFloatSlider("Scale Z", 1);
 
 op.setPortGroup("XYZ Functions", [inFunctionX, inScaleX, inFunctionY, inScaleY, inFunctionZ, inScaleZ]);
 op.setPortGroup("Scaling", [inScaleX, inScaleY, inScaleZ]);
-const draw = op.inValueBool("Draw", true);
+const draw = op.inBool("Draw", true);
 op.setPortGroup("Draw", [draw]);
 
 

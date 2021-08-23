@@ -1,7 +1,7 @@
 const
     valueInPort = op.inObject("Object In"),
-    passThroughPort = op.inValueBool("Pass Through", false),
-    onlyValid = op.inValueBool("Only Valid Objects", false),
+    passThroughPort = op.inBool("Pass Through", false),
+    onlyValid = op.inBool("Only Valid Objects", false),
     valueOutPort = op.outObject("Object Out");
 
 valueInPort.onChange =

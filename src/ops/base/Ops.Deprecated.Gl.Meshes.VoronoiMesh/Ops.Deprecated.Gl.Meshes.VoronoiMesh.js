@@ -2,8 +2,8 @@ var render=op.inTrigger("Render");
 var inDiagram=op.inObject("Diagram");
 var next=op.outTrigger("Next");
 var pExtrCenter=op.inValue("Extrude Cell Center",0.1);
-var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
-var inCalcNormals=op.inValueBool("Calc Normals",true);
+var pIgnoreBorderCells=op.inBool("Ignore Border Cells",false);
+var inCalcNormals=op.inBool("Calc Normals",true);
 var updatebutton=op.inTriggerButton("Update");
 
 var needsGeomUpdate=false;

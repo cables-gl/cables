@@ -7,7 +7,7 @@ var numFrames=op.addInPort(new CABLES.Port(op,"Num Frames",CABLES.OP_PORT_TYPE_V
 var numX=op.addInPort(new CABLES.Port(op,"Num X",CABLES.OP_PORT_TYPE_VALUE));
 var numY=op.addInPort(new CABLES.Port(op,"Num Y",CABLES.OP_PORT_TYPE_VALUE));
 
-var play=op.inValueBool("Play",true);
+var play=op.inBool("Play",true);
 
 var texRepeatX=op.addOutPort(new CABLES.Port(op,"Repeat X",CABLES.OP_PORT_TYPE_VALUE));
 var texRepeatY=op.addOutPort(new CABLES.Port(op,"Repeat Y",CABLES.OP_PORT_TYPE_VALUE));

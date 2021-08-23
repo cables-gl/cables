@@ -1,22 +1,22 @@
 const
     filename = op.inUrl("file", "video"),
-    play = op.inValueBool("play"),
-    loop = op.inValueBool("loop"),
-    autoPlay = op.inValueBool("auto play", false),
+    play = op.inBool("play"),
+    loop = op.inBool("loop"),
+    autoPlay = op.inBool("auto play", false),
 
     volume = op.inValueSlider("Volume", 1),
-    muted = op.inValueBool("mute", true),
+    muted = op.inBool("mute", true),
     speed = op.inValueFloat("speed", 1),
 
     tfilter = op.inValueSelect("filter", ["nearest", "linear"], "linear"),
     wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
 
-    flip = op.inValueBool("flip", true),
+    flip = op.inBool("flip", true),
     fps = op.inValueFloat("fps", 25),
     time = op.inValueFloat("set time"),
     rewind = op.inTriggerButton("rewind"),
 
-    inPreload = op.inValueBool("Preload", true),
+    inPreload = op.inBool("Preload", true),
 
     textureOut = op.outTexture("texture"),
     outDuration = op.outValue("duration"),

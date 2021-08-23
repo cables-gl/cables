@@ -13,11 +13,11 @@ const pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]);
 
 const axis = op.inValueSelect("axis", ["xy", "xz"]);
 
-const isInteractive = op.inValueBool("Is Interactive", true);
-const renderRect = op.inValueBool("Render Rectangle", true);
-const divVisible = op.inValueBool("Show Boundings", true);
+const isInteractive = op.inBool("Is Interactive", true);
+const renderRect = op.inBool("Render Rectangle", true);
+const divVisible = op.inBool("Show Boundings", true);
 const cursorPort = op.inValueSelect("Cursor", ["auto", "crosshair", "pointer", "Hand", "move", "n-resize", "ne-resize", "e-resize", "se-resize", "s-resize", "sw-resize", "w-resize", "nw-resize", "text", "wait", "help", "none"], "pointer");
-const active = op.inValueBool("Render", true);
+const active = op.inBool("Render", true);
 
 
 const geomOut = op.outObject("geometry");

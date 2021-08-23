@@ -1,6 +1,6 @@
 const render = op.inTrigger("render");
-const x = op.inValueBool("X");
-const y = op.inValueBool("Y");
+const x = op.inBool("X");
+const y = op.inBool("Y");
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

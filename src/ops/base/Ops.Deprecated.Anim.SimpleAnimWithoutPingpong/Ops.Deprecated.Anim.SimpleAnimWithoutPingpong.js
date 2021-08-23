@@ -10,13 +10,13 @@ var inEnd=op.addInPort(new CABLES.Port(op,"end"));
 var duration=op.addInPort(new CABLES.Port(op,"duration"));
 
 var loop=op.addInPort(new CABLES.Port(op,"loop",CABLES.OP_PORT_TYPE_VALUE,{display:"bool"}));
-var pingpong=op.inValueBool("Ping Pong",true);
+var pingpong=op.inBool("Ping Pong",true);
 
 var result=op.addOutPort(new CABLES.Port(op,"result"));
 var finished=op.addOutPort(new CABLES.Port(op,"finished",CABLES.OP_PORT_TYPE_VALUE));
 
 var resetted=false;
-var waitForReset=op.inValueBool("Wait for Reset",false);
+var waitForReset=op.inBool("Wait for Reset",false);
 
 
 var anim=new CABLES.Anim();
@@ -26,7 +26,7 @@ anim.createPort(op,"easing",init);
 var currentEasing=-1;
 function init()
 {
-    
+
     if(pingpong.get())
     {
         if(anim.keys.length!=3)
@@ -50,11 +50,11 @@ function init()
             anim.setValue(0,0);
             anim.setValue(1,0);
         }
-        
+
     }
-    
+
     console.log(anim.keys);
-    
+
     anim.keys[0].time=CABLES.now()/1000.0;
     anim.keys[0].value=inStart.get();
     if(anim.defaultEasing!=currentEasing) anim.keys[0].setEasing(anim.defaultEasing);
@@ -78,7 +78,7 @@ function init()
             anim.keys[2].value=anim.keys[1].value;
             if(anim.defaultEasing!=currentEasing) anim.keys[2].setEasing(anim.defaultEasing);
         }
-        
+
     }
     finished.set(false);
 
@@ -97,7 +97,7 @@ rewind.onTriggered=function()
 {
     // anim.clear();
     // anim.setValue(CABLES.now()/1000,inStart.get());
-    
+
     anim.keys[0].time=CABLES.now()/1000.0;
     anim.keys[0].value=inStart.get();
 
@@ -113,7 +113,7 @@ rewind.onTriggered=function()
 
 exe.onTriggered=function()
 {
-    if(waitForReset.get() && !resetted) 
+    if(waitForReset.get() && !resetted)
     {
         result.set(inStart.get());
         return;

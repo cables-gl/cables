@@ -3,9 +3,9 @@ const
     geometry=op.inObject("geometry"),
     seed=op.inValueFloat("random seed"),
     num=op.inValueInt("num",20),
-    rotX=op.inValueBool("Rotate X",true),
-    rotY=op.inValueBool("Rotate Y",true),
-    rotZ=op.inValueBool("Rotate Z",true),
+    rotX=op.inBool("Rotate X",true),
+    rotY=op.inBool("Rotate Y",true),
+    rotZ=op.inBool("Rotate Z",true),
     trigger=op.outTrigger('trigger'),
     index=op.outValue("index"),
     outPoints=op.outArray("Points");

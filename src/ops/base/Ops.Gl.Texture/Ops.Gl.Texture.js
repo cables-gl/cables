@@ -1,8 +1,8 @@
 const filename = op.inFile("file", "image");
 const tfilter = op.inSwitch("filter", ["nearest", "linear", "mipmap"]);
 const wrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
-const flip = op.inValueBool("flip", false);
-const unpackAlpha = op.inValueBool("unpackPreMultipliedAlpha", false);
+const flip = op.inBool("flip", false);
+const unpackAlpha = op.inBool("unpackPreMultipliedAlpha", false);
 const aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0);
 
 const textureOut = op.outTexture("texture");

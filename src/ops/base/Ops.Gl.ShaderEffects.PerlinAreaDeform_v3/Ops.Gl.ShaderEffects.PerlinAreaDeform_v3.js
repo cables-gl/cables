@@ -4,7 +4,7 @@ const
     inScale = op.inValueFloat("Scale", 1),
     inSize = op.inValueFloat("Size", 1),
     inStrength = op.inValueFloat("Strength", 1),
-    inCalcNormals = op.inValueBool("Calc Normals", true),
+    inCalcNormals = op.inBool("Calc Normals", true),
     inFalloff = op.inValueSlider("Falloff", 0.5),
     output = op.inValueSelect("Output", ["Mul Normal", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
     x = op.inValueFloat("x"),
@@ -16,7 +16,7 @@ const
 
 const cgl = op.patch.cgl;
 inCalcNormals.onChange = updateCalcNormals;
-let inWorldSpace = op.inValueBool("WorldSpace");
+let inWorldSpace = op.inBool("WorldSpace");
 let shader = null;
 let moduleVert = null;
 output.onChange = updateOutput;

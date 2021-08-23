@@ -5,7 +5,7 @@ const
     amount = op.inValueSlider("Amount", 1),
     farPlane = op.inValue("farplane", 50.0),
     nearPlane = op.inValue("nearplane", 0.1),
-    inInv = op.inValueBool("Invert", false),
+    inInv = op.inBool("Invert", false),
     trigger = op.outTrigger("trigger");
 
 op.setPortGroup("Frustum", [farPlane, nearPlane]);

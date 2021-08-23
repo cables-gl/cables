@@ -1,6 +1,6 @@
 // input
 const valueInPort = op.inValue("Value In", 0);
-const passThroughPort = op.inValueBool("Pass Through");
+const passThroughPort = op.inBool("Pass Through");
 
 // output
 const valueOutPort = op.outValue("Value Out");

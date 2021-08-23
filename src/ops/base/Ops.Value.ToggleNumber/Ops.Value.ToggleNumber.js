@@ -1,5 +1,5 @@
 // inputs
-const useValue1Port = op.inValueBool("Use Value 1", false);
+const useValue1Port = op.inBool("Use Value 1", false);
 const value0port = op.inValue("Value 0", 0);
 const value1port = op.inValue("Value 1", 1);
 

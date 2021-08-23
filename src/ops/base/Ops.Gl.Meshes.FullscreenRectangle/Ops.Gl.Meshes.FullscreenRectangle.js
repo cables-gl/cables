@@ -1,8 +1,8 @@
 const
     render=op.inTrigger('render'),
-    centerInCanvas=op.inValueBool("Center in Canvas"),
-    flipY=op.inValueBool("Flip Y"),
-    flipX=op.inValueBool("Flip X"),
+    centerInCanvas=op.inBool("Center in Canvas"),
+    flipY=op.inBool("Flip Y"),
+    flipX=op.inBool("Flip X"),
     inTexture=op.inTexture("Texture"),
     trigger=op.outTrigger('trigger');
 

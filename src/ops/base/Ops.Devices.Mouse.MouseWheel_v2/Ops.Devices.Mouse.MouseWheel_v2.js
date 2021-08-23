@@ -1,10 +1,10 @@
 const
     speed = op.inValue("Speed", 1),
-    preventScroll = op.inValueBool("prevent scroll", true),
-    flip = op.inValueBool("Flip Direction"),
+    preventScroll = op.inBool("prevent scroll", true),
+    flip = op.inBool("Flip Direction"),
     inSimpleIncrement = op.inBool("Simple Delta", false),
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
-    active = op.inValueBool("active", true),
+    active = op.inBool("active", true),
 
     delta = op.outValue("delta", 0),
     deltaX = op.outValue("delta X", 0),

@@ -3,7 +3,7 @@ const
     v = op.inValue("Value", 0),
     delay = op.inValue("Delay", 0.5),
     result = op.outValue("Result", 0),
-    clear = op.inValueBool("Clear on Change", false);
+    clear = op.inBool("Clear on Change", false);
 
 const anim = new CABLES.Anim();
 anim.createPort(op, "easing", function () {}).set("absolute");

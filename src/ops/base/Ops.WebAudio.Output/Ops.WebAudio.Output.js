@@ -16,7 +16,7 @@ var masterVolume = 1;
 // inputs
 var audioInPort = CABLES.WEBAUDIO.createAudioInPort(op, "Audio In", gainNode);
 var volumePort = op.inValueSlider("Volume", VOLUME_DEFAULT);
-var mutePort = op.inValueBool("Mute", false);
+var mutePort = op.inBool("Mute", false);
 
 // functions
 // sets the volume, multiplied by master volume
