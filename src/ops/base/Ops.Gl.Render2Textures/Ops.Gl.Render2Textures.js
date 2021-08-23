@@ -107,7 +107,7 @@ function doRender()
         reInitFb = false;
     }
 
-    if (useVPSize.val)
+    if (useVPSize.get())
     {
         width.set(cgl.getViewPort()[2]);
         height.set(cgl.getViewPort()[3]);

@@ -8,7 +8,7 @@ const
 
 exe.onTriggered = function ()
 {
-    if (!arr.val) return;
+    if (!arr.get()) return;
     for (let i = 0; i < arr.get().length; i++)
     {
         val.set(arr.val[i]);

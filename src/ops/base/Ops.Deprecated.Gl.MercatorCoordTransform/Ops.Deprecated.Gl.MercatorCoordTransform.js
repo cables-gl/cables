@@ -1,86 +1,79 @@
 // //Op.apply(this, arguments);
 // var self=this;
-var cgl=this.patch.cgl;
-this.name='MercatorCoordTransform';
-var exe=this.addInPort(new CABLES.Port(this,"exe",CABLES.OP_PORT_TYPE_FUNCTION));
-var arr=this.addInPort(new CABLES.Port(this,"array",CABLES.OP_PORT_TYPE_ARRAY));
+let cgl = this.patch.cgl;
+this.name = "MercatorCoordTransform";
+let exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
+let arr = this.addInPort(new CABLES.Port(this, "array", CABLES.OP_PORT_TYPE_ARRAY));
 
-var centerLon=this.addInPort(new CABLES.Port(this,"center lon",CABLES.OP_PORT_TYPE_VALUE));
-var centerLat=this.addInPort(new CABLES.Port(this,"center lat",CABLES.OP_PORT_TYPE_VALUE));
+let centerLon = this.addInPort(new CABLES.Port(this, "center lon", CABLES.OP_PORT_TYPE_VALUE));
+let centerLat = this.addInPort(new CABLES.Port(this, "center lat", CABLES.OP_PORT_TYPE_VALUE));
 
-var mul=this.addInPort(new CABLES.Port(this,"mul",CABLES.OP_PORT_TYPE_VALUE));
-
-
-
-var indexOut=this.addOutPort(new CABLES.Port(this,"index",CABLES.OP_PORT_TYPE_VALUE));
-const trigger=op.outTrigger("trigger");
+let mul = this.addInPort(new CABLES.Port(this, "mul", CABLES.OP_PORT_TYPE_VALUE));
 
 
-var vecMin=vec3.create();
-    
-var centerX=0,centerY=0;
+let indexOut = this.addOutPort(new CABLES.Port(this, "index", CABLES.OP_PORT_TYPE_VALUE));
+const trigger = op.outTrigger("trigger");
 
-function getCoord(lat,lon)
+
+let vecMin = vec3.create();
+
+let centerX = 0, centerY = 0;
+
+function getCoord(lat, lon)
 {
-    var vec=vec3.create();
-    var x=parseFloat(lon);
-    var y=parseFloat(lat);
-    x=x-centerX;
-    y=y-centerY;
-    vec3.set(vec,x,y,0);
+    let vec = vec3.create();
+    let x = parseFloat(lon);
+    let y = parseFloat(lat);
+    x -= centerX;
+    y -= centerY;
+    vec3.set(vec, x, y, 0);
     return vec;
 }
 
-var points=[];
+let points = [];
 
-var parse=function()
+let parse = function ()
 {
-    points.length=0;
-    centerX=centerY=0;
-    var cvec=getCoord(centerLat.get(),centerLon.get());
-    centerX=cvec[0];
-    centerY=cvec[1];
+    points.length = 0;
+    centerX = centerY = 0;
+    let cvec = getCoord(centerLat.get(), centerLon.get());
+    centerX = cvec[0];
+    centerY = cvec[1];
 
-    var theArray=arr.get();
-    for(var i in theArray)
+    let theArray = arr.get();
+    for (let i in theArray)
     {
-        var lon=(theArray[i].lon || theArray[i].longitude);
-        var lat=(theArray[i].lat || theArray[i].latitude);
-        
-        var vec=getCoord(lat,lon);
-        var vecMin=vec3.create();
+        let lon = (theArray[i].lon || theArray[i].longitude);
+        let lat = (theArray[i].lat || theArray[i].latitude);
 
-        vec[0]*=mul.get();
-        vec[1]*=mul.get();
+        let vec = getCoord(lat, lon);
+        let vecMin = vec3.create();
 
-        vec3.set(vecMin,-1*vec[0],-1*vec[1],0);
-        points.push({vec:vec,vecMin:vecMin})
+        vec[0] *= mul.get();
+        vec[1] *= mul.get();
 
+        vec3.set(vecMin, -1 * vec[0], -1 * vec[1], 0);
+        points.push({ "vec": vec, "vecMin": vecMin });
     }
-    console.log('parse json coords...')
-
-}
+    console.log("parse json coords...");
+};
 
 arr.onValueChange(parse);
 centerLat.onValueChange(parse);
 centerLon.onValueChange(parse);
 
-exe.onTriggered=function()
+exe.onTriggered = function ()
 {
-    if(!arr.val)return;
+    if (!arr.get()) return;
 
-    
 
-    for(var i=0;i<points.length;i++)
+    for (let i = 0; i < points.length; i++)
     {
         indexOut.set(i);
         cgl.pushModelMatrix();
-        mat4.translate(cgl.mvMatrix,cgl.mvMatrix, points[i].vec);
+        mat4.translate(cgl.mvMatrix, cgl.mvMatrix, points[i].vec);
         trigger.trigger();
         // mat4.translate(cgl.mvMatrix,cgl.mvMatrix, points[i].vecMin);
         cgl.popModelMatrix();
     }
-
-    
-
 };
