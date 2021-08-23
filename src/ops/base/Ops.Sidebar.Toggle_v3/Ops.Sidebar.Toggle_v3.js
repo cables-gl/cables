@@ -12,7 +12,7 @@ const inVisible = op.inBool("Visible", true);
 
 // outputs
 const siblingsPort = op.outObject("childs");
-const valuePort = op.outValue("Value", defaultValuePort.get());
+const valuePort = op.outBool("Value", defaultValuePort.get());
 
 // vars
 const el = document.createElement("div");
@@ -68,6 +68,8 @@ setDefaultValueButtonPort.onTriggered = setDefaultValue;
 function setDefaultValue()
 {
     const defaultValue = inputValuePort.get();
+
+    console.log("inputValuePort.get()", inputValuePort.get());
     defaultValuePort.set(defaultValue);
     valuePort.set(defaultValue);
     if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
