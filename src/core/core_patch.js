@@ -941,7 +941,7 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 const objPort = opData.portsIn[ipi];
                 const port = op.getPort(objPort.name);
 
-                if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
+                if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value;// === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
                 if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
                 if (port && objPort && objPort.useVariable) port.setVariableName(objPort.useVariable);

@@ -315,7 +315,7 @@ const Op = function ()
         if (v !== undefined)
         {
             p.set(v);
-            p.defaultValue = v;
+            p.defaultValue = p.get();
         }
         return p;
     };
@@ -791,7 +791,7 @@ const Op = function ()
             })
         );
         if (v !== undefined) p.set(v);
-        else p.set(false);
+        else p.set(0);
         return p;
     };
 
