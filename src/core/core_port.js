@@ -808,7 +808,7 @@ class BoolPort extends Port
     get()
     {
         // console.log("bool get", super.get());
-        return super.get() ? 1 : 0;
+        return super.get();// ? 1 : 0;
     }
 }
 
