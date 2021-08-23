@@ -23,7 +23,14 @@ function update()
     if (dat && dat.hasOwnProperty(k))
     {
         result.set(dat[k]);
-        arrLength.set(result.get().length);
+        if (!result.get())
+        {
+            arrLength.set(0);
+        }
+        else
+        {
+            arrLength.set(result.get().length);
+        }
     }
     else
     {

@@ -1,9 +1,6 @@
 let self = this;
 const cgl = op.patch.cgl;
 
-// let shader = null;
-// let module = null;
-
 const render = op.inTrigger("render");
 const next = this.outTrigger("trigger");
 const frequency = op.inValueFloat("frequency", 1);
@@ -32,16 +29,8 @@ src.onChange =
     toAxisX.onChange =
     toAxisY.onChange = setDefines;
 
-const srcHeadVert = ""
-    // .endl() + "UNI float MOD_time;"
-    // .endl() + "UNI float MOD_frequency;"
-    // .endl() + "UNI float MOD_amount;"
-    // .endl() + "UNI float MOD_phase;"
-    // .endl() + "UNI float MOD_mul;"
-    // .endl() + "UNI float MOD_add;"
-    .endl();
+const srcHeadVert = "";
 
-// const srcBodyVert=attachments.sinewobble_vert||'';
 let startTime = CABLES.now() / 1000.0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
@@ -53,13 +42,13 @@ mod.addModule({
     "srcBodyVert": attachments.sinewobble_vert
 });
 
-// mod.addUniformVert("f", "MOD_size", inSize);
 mod.addUniformVert("f", "MOD_time", 0);
 mod.addUniformVert("f", "MOD_frequency", frequency);
 mod.addUniformVert("f", "MOD_amount", amount);
 mod.addUniformVert("f", "MOD_phase", phase);
 mod.addUniformVert("f", "MOD_mul", mul);
 mod.addUniformVert("f", "MOD_add", add);
+setDefines();
 
 function setDefines()
 {
