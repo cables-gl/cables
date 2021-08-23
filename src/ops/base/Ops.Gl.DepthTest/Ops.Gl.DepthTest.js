@@ -1,9 +1,9 @@
 // todo:rename to depthtest
 
 const render = op.inTrigger("Render");
-const enable = op.inBool("Enable depth testing", true);
+const enable = op.inValueBool("Enable depth testing", true);
 const meth = op.inValueSelect("Depth Test Method", ["never", "always", "less", "less or equal", "greater", "greater or equal", "equal", "not equal"], "less or equal");
-const write = op.inBool("Write to depth buffer", true);
+const write = op.inValueBool("Write to depth buffer", true);
 const trigger = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

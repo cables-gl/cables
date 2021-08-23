@@ -2,7 +2,7 @@ const exec = op.inTrigger("Exec");
 const inMass = op.inValue("Mass");
 const inRadius = op.inValue("Radius");
 
-const doRender = op.inBool("Render", true);
+const doRender = op.inValueBool("Render", true);
 
 const posX = op.inValue("Pos X");
 const posY = op.inValue("Pos Y");

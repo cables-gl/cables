@@ -8,7 +8,7 @@ const zNear = op.inValue("frustum near", 0.01);
 const zFar = op.inValue("frustum far", 5000.0);
 
 const fov = op.inValue("fov", 45);
-const autoAspect = op.inBool("Auto Aspect Ratio", true);
+const autoAspect = op.inValueBool("Auto Aspect Ratio", true);
 const aspect = op.inValue("Aspect Ratio", 1);
 
 // look at camera

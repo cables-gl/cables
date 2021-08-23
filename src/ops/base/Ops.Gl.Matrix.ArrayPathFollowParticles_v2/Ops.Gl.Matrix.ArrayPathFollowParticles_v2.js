@@ -6,7 +6,7 @@ const
     inSpread = op.inValue("Spread", 0.2),
     inOffset = op.inValue("Offset"),
     inMaxDistance = op.inValue("Max Distance", 0),
-    inRandomSpeed = op.inBool("RandomSpeed"),
+    inRandomSpeed = op.inValueBool("RandomSpeed"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

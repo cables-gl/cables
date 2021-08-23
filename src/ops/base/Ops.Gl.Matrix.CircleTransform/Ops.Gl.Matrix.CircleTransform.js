@@ -5,7 +5,7 @@ const
     percent = op.inValueSlider("percent", 1),
     numAbs = op.inBool("Absolute", true),
     flip = op.inBool("Flip", false),
-    inRotate = op.inBool("Rotate"),
+    inRotate = op.inValueBool("Rotate"),
     trigger = op.outTrigger("trigger"),
     index = op.outValue("index");
 

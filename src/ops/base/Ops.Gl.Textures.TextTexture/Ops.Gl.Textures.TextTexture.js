@@ -10,7 +10,7 @@ var lineDistance=op.addInPort(new CABLES.Port(op,"line distance"));
 var border=op.addInPort(new CABLES.Port(op,"border"));
 var doRefresh=op.inTriggerButton("Refresh");
 
-var cachetexture=op.inBool("Reuse Texture",true);
+var cachetexture=op.inValueBool("Reuse Texture",true);
 
 // var textureOut=op.addOutPort(new CABLES.Port(op,"texture",CABLES.OP_PORT_TYPE_TEXTURE));
 var textureOut=op.outTexture("texture");

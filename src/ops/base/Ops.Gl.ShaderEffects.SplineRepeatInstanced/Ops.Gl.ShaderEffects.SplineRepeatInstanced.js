@@ -9,7 +9,7 @@ const inNum = op.inValueInt("Num", 2000);
 
 const inOffset = op.inValue("Offset");
 
-const rotPos = op.inBool("Rotate by Position", true);
+const rotPos = op.inValueBool("Rotate by Position", true);
 
 const inMeth = op.inValueSelect("Method", ["Array", "Fill"], "Array");
 const inSpacing = op.inValue("Spacing", 0.2);

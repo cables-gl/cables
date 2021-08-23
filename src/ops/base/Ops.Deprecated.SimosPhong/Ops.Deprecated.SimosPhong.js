@@ -41,8 +41,8 @@ op.setPortGroup("Specular", specularColors);
 
 
 // * LIGHT *
-const inBlinn = op.inBool("Blinn Reflection Model", false);
-const inEnergyConservation = op.inBool("Energy Conservation", false);
+const inBlinn = op.inValueBool("Blinn Reflection Model", false);
+const inEnergyConservation = op.inValueBool("Energy Conservation", false);
 const inToggleDoubleSided = op.inBool("Double Sided Material", false);
 const lightProps = [inBlinn, inEnergyConservation, inToggleDoubleSided];
 op.setPortGroup("Light Options", lightProps);

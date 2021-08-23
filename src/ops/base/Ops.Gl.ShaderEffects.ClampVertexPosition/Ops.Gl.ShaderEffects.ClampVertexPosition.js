@@ -9,7 +9,7 @@ var axis=op.inValueSelect("Axis",["X","Y","Z"],"X");
 var min=op.inValue("min",0);
 var max=op.inValue("max",1);
 
-var inUpdateNormals=op.inBool("Update Normals");
+var inUpdateNormals=op.inValueBool("Update Normals");
 
 
 var srcHeadVert=attachments.restrictVertexHead_vert;

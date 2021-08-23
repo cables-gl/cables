@@ -31,7 +31,7 @@ const diffuseTexture = op.inTexture("texture");
 let diffuseTextureUniform = null;
 diffuseTexture.onChange = updateDiffuseTexture;
 
-const colorizeTexture = op.inBool("colorizeTexture", false);
+const colorizeTexture = op.inValueBool("colorizeTexture", false);
 
 // opacity texture
 const textureOpacity = op.inTexture("textureOpacity");
@@ -41,8 +41,8 @@ const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G",
 alphaMaskSource.setUiAttribs({ "greyout": true });
 textureOpacity.onChange = updateOpacity;
 
-const texCoordAlpha = op.inBool("Opacity TexCoords Transform", false);
-const discardTransPxl = op.inBool("Discard Transparent Pixels");
+const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
+const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 // texture coords
 
@@ -58,7 +58,7 @@ shader.addUniformFrag("f", "diffuseRepeatY", diffuseRepeatY);
 shader.addUniformFrag("f", "texOffsetX", diffuseOffsetX);
 shader.addUniformFrag("f", "texOffsetY", diffuseOffsetY);
 
-const doBillboard = op.inBool("billboard", false);
+const doBillboard = op.inValueBool("billboard", false);
 
 alphaMaskSource.onChange =
     doBillboard.onChange =

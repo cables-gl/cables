@@ -10,7 +10,7 @@ const NUM_BUFFERS = 4;
 
 for (let i = 0; i < NUM_BUFFERS; i++)
 {
-    const p = op.inBool("Texture " + i, i === 0);
+    const p = op.inValueBool("Texture " + i, i === 0);
     // p.onChange=updateBools;
     ports.push(p);
 }

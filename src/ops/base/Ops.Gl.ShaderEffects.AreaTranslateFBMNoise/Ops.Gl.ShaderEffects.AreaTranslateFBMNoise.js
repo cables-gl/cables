@@ -4,7 +4,7 @@ const
     inMode = op.inSwitch("Mode", ["Rotate", "Translate"], "Translate"),
     inSize = op.inValue("Size", 1),
     inStrength = op.inValue("Strength", 1),
-    inSmooth = op.inBool("Smooth", true),
+    inSmooth = op.inValueBool("Smooth", true),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),

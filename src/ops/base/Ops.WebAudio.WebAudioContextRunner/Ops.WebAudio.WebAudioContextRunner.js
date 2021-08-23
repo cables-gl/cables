@@ -18,7 +18,7 @@ CABLES.WEBAUDIO.createAudioContext = function (op)
 const context = CABLES.WEBAUDIO.createAudioContext(op);
 context.addEventListener("statechange", onContextStateChange);
 const canvasWrapper = op.patch.cgl.canvas.parentElement;
-const showOverlayPort = op.inBool("Show Overlay", true);
+const showOverlayPort = op.inValueBool("Show Overlay", true);
 let overlay = null;
 let button = null;
 

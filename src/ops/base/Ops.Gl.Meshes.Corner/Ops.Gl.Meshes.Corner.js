@@ -3,7 +3,7 @@ let render = op.inTrigger("Render");
 let width = op.inValueFloat("Width", 1);
 let height = op.inValueFloat("Height", 1);
 let thickness = op.inValueFloat("Thickness", -0.1);
-let dodraw = op.inBool("Draw", true);
+let dodraw = op.inValueBool("Draw", true);
 let pivotX = op.inValueSelect("pivot x", ["center", "left", "right"]);
 let pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"]);
 

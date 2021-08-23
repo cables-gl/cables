@@ -5,8 +5,8 @@
 const render=op.inTrigger("render");
 const inCubemap=op.inObject("Cubemap");
 const inReflectionCubemap=op.inObject("Reflection Cubemap");
-const inFlipY=op.inBool("Flip Y");
-const inFlipX=op.inBool("Flip X");
+const inFlipY=op.inValueBool("Flip Y");
+const inFlipX=op.inValueBool("Flip X");
 const inRough=op.inTexture("Roughness");
 const inRoughMul=op.inValueSlider("Roughness Amount",0);
 const inReflection=op.inTexture("Reflection");
@@ -28,7 +28,7 @@ function doRender()
 
     if(inCubemap.get())
     {
-
+        
         if(!inCubemap.get().cubemap)
         {
             cgl.setTexture(0,inCubemap.get().tex);
@@ -52,7 +52,7 @@ function doRender()
         cgl.setTexture(2, inReflection.get().tex);
         // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inReflection.get().tex);
     }
-
+    
     if(inNormal.get())
     {
         cgl.setTexture(3, inNormal.get().tex);
@@ -97,7 +97,7 @@ function updateFlip()
         else shader.removeDefine("FLIPY");
     if(inFlipX.get()) shader.define("FLIPX");
         else shader.removeDefine("FLIPX");
-
+    
 }
 
 function updateTexturesDefines()
@@ -130,7 +130,7 @@ function updateTexturesDefines()
 
     if(inReflectionCubemap.get()) shader.define("MAP_REFLECTION");
         else shader.removeDefine("MAP_REFLECTION");
-
+    
     updateFlip();
 }
 

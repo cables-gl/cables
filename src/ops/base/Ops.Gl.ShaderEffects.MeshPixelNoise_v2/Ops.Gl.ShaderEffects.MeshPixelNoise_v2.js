@@ -4,7 +4,7 @@ const
     inScale = op.inValue("Scale", 10),
     inAmount = op.inValueSlider("Amount", 0.3),
     inBlend = op.inSwitch("Blendmode", ["Sub", "Add", "Mul"], "Sub"),
-    inWorldSpace = op.inBool("WorldSpace"),
+    inWorldSpace = op.inValueBool("WorldSpace"),
     r = op.inValueSlider("r", 0),
     g = op.inValueSlider("g", 0),
     b = op.inValueSlider("b", 0),

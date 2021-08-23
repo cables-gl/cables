@@ -1,7 +1,7 @@
 const text = op.inStringEditor("text", "1,2,3"),
     separator = op.inString("separator", ","),
-    toNumber = op.inBool("Numbers", true),
-    trim = op.inBool("Trim", true),
+    toNumber = op.inValueBool("Numbers", true),
+    trim = op.inValueBool("Trim", true),
     parsed = op.outTrigger("Parsed"),
     arr = op.outArray("array"),
     len = op.outValue("length");

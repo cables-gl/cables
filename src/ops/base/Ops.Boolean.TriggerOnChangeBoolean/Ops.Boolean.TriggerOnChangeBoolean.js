@@ -1,9 +1,10 @@
-let inBool = op.inBool("Value");
-let outTrue = op.outTrigger("True");
-let outFalse = op.outTrigger("False");
+var inBool=op.inValueBool("Value");
+var outTrue=op.outTrigger("True");
+var outFalse=op.outTrigger("False");
 
-inBool.onChange = function ()
+inBool.onChange=function()
 {
-    if (inBool.get()) outTrue.trigger();
-    else outFalse.trigger();
+    if(inBool.get()) outTrue.trigger();
+        else outFalse.trigger();
+    
 };

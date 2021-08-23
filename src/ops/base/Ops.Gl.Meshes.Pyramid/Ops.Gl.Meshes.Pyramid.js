@@ -4,9 +4,9 @@ var sizeW=op.inValue("Width",1);
 var sizeL=op.inValue("Length",1);
 var sizeH=op.inValue("Height",2);
 
-var inSmooth=op.inBool("Smooth",false);
+var inSmooth=op.inValueBool("Smooth",false);
 
-var inDraw=op.inBool("Draw",true);
+var inDraw=op.inValueBool("Draw",true);
 
 var trigger=op.outTrigger('trigger');
 var geomOut=op.outObject("geometry");

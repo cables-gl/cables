@@ -8,7 +8,7 @@ var noteEnd=op.addInPort(new CABLES.Port(op,"Note End"));
 var learnEnd=op.addInPort(new CABLES.Port(op,"Learn End",CABLES.OP_PORT_TYPE_FUNCTION,{display:'button'}));
 
 var lights=op.addInPort(new CABLES.Port(op,"Light",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));
-var toggle=op.inBool("Toggle");
+var toggle=op.inValueBool("Toggle");
 
 var inValue=op.inValue("Button Value",1);
 
@@ -21,7 +21,7 @@ var values=op.addOutPort(new CABLES.Port(op, "Buttons",CABLES.OP_PORT_TYPE_ARRAY
 
 var inClear=op.inTriggerButton("Clear");
 
-var inEnabled=op.inBool("enabled",true);
+var inEnabled=op.inValueBool("enabled",true);
 
 values.ignoreValueSerialize=true;
 

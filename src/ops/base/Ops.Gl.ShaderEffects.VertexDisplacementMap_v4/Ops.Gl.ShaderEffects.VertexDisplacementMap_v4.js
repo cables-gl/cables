@@ -15,9 +15,9 @@ const
     offsetY = op.inValueFloat("Offset Y"),
     scale = op.inValueFloat("Scale", 1),
 
-    calcNormals = op.inBool("Calc Normals", false),
-    removeZero = op.inBool("Discard Zero Values"),
-    colorize = op.inBool("colorize", false),
+    calcNormals = op.inValueBool("Calc Normals", false),
+    removeZero = op.inValueBool("Discard Zero Values"),
+    colorize = op.inValueBool("colorize", false),
     colorizeMin = op.inValueSlider("Colorize Min", 0),
     colorizeMax = op.inValueSlider("Colorize Max", 1),
     next = op.outTrigger("trigger");

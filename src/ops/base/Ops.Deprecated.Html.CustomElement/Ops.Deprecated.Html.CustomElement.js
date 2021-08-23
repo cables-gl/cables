@@ -121,7 +121,7 @@ var idPort = op.inValueString("Id");
 var classPort = op.inValueString("Class");
 var textPort = op.inValueString("Text");
 var stylePort = op.inValueEditor("Inline Style", "/* e.g. position: absolute; */", "css");
-var visiblePort = op.inBool("Visible", true);
+var visiblePort = op.inValueBool("Visible", true);
 
 // outputs
 var elementPort = op.outObject("DOM Element");
@@ -182,7 +182,7 @@ function updateText() {
 
 function deleteElement() {
     if(!el) { return; }
-    el.remove();
+    el.remove();    
 }
 
 function updateId() {
@@ -238,7 +238,7 @@ function removeListeners()
 function addListeners()
 {
     if(listenerElement)removeListeners();
-
+    
     listenerElement=div;
 
     if(listenerElement)

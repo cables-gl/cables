@@ -2,8 +2,8 @@ const
     render = op.inTrigger("Render"),
     blendMode = CGL.TextureEffect.AddBlendSelect(op, "Blend Mode", "normal"),
     amount = op.inValueSlider("Amount", 1),
-    animated = op.inBool("Animated", true),
-    inRGB = op.inBool("RGB", false),
+    animated = op.inValueBool("Animated", true),
+    inRGB = op.inValueBool("RGB", false),
     trigger = op.outTrigger("Next");
 
 const

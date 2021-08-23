@@ -1,6 +1,6 @@
 const
     exe = op.inTrigger("exe"),
-    inShow = op.inBool("Visible", true),
+    inShow = op.inValueBool("Visible", true),
     next = op.outTrigger("childs"),
     position = op.inSwitch("Position", ["top", "bottom"], "top"),
     openDefault = op.inBool("Open", false),

@@ -6,14 +6,14 @@ op.trigger = op.outTrigger("trigger");
 const texture = op.inTexture("texture");
 const extrude = op.inValue("extrude", 0.5);
 
-const flip = op.inBool("flip", true);
+const flip = op.inValueBool("flip", true);
 
-const removeZero = op.inBool("Ignore Zero Values");
-const invert = op.inBool("invert");
+const removeZero = op.inValueBool("Ignore Zero Values");
+const invert = op.inValueBool("invert");
 const offsetX = op.inValueFloat("offset X");
 const offsetY = op.inValueFloat("offset Y");
 
-const colorize = op.inBool("colorize");
+const colorize = op.inValueBool("colorize");
 const colorizeAdd = op.inValueSlider("colorize add");
 const meth = op.inValueSelect("mode", ["normal", "normal xy", "mul xyz", "sub x", "add x", "add y", "add z", "mul y", "mul z", "sub z"]);
 

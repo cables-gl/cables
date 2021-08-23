@@ -1,6 +1,6 @@
 const render=op.inTrigger("Render");
 const inGeom=op.inObject("Geometry");
-const inDraw=op.inBool("Draw",true);
+const inDraw=op.inValueBool("Draw",true);
 
 const next=op.outTrigger("Next");
 

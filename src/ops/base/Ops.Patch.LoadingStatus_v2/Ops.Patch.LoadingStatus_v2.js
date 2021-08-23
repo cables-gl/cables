@@ -1,6 +1,6 @@
 const
     exe = op.addInPort(new CABLES.Port(op, "exe", CABLES.OP_PORT_TYPE_FUNCTION)),
-    preRenderOps = op.inBool("PreRender Ops"),
+    preRenderOps = op.inValueBool("PreRender Ops"),
     startTimeLine = op.inBool("Play Timeline", true),
 
     next = op.outTrigger("Next"),

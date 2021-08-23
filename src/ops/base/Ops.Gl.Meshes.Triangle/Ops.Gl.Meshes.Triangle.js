@@ -3,7 +3,7 @@ const
     trigger = op.outTrigger("trigger"),
     sizeW = op.inValueFloat("width", 1),
     sizeH = op.inValueFloat("height", 1),
-    draw = op.inBool("Draw", true),
+    draw = op.inValueBool("Draw", true),
     geom = new CGL.Geometry("triangle"),
     geomOut = op.outObject("geometry");
 

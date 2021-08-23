@@ -1,6 +1,6 @@
 const
-    bool0 = op.inBool("bool 1"),
-    bool1 = op.inBool("bool 2"),
+    bool0 = op.inValueBool("bool 1"),
+    bool1 = op.inValueBool("bool 2"),
     result = op.outValueBool("result");
 
 bool0.onChange =

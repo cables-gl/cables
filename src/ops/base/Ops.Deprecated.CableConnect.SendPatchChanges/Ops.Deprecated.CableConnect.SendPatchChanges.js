@@ -1,6 +1,6 @@
 let connection = op.inObject("Connection");
 let start = op.inTriggerButton("Start");
-let reloadOnSave = op.inBool("Reload listeners on Save");
+let reloadOnSave = op.inValueBool("Reload listeners on Save");
 
 let conn = null;
 

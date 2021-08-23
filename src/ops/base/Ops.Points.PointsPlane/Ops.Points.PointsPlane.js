@@ -3,7 +3,7 @@ const
     inNumY = op.inValueInt("Columns", 32),
     inWidth = op.inValueInt("Width", 2),
     inHeight = op.inValueInt("Height", 2),
-    inCenter = op.inBool("Center", true),
+    inCenter = op.inValueBool("Center", true),
     outArr = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length"),

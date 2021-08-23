@@ -4,14 +4,14 @@ const
     texture = op.inTexture("texture"),
     meth = op.inValueSelect("mode", ["normal", "normal xy", "mul xyz", "sub x", "add x", "add y", "add z", "mul y", "mul z", "sub z"], "normal"),
     extrude = op.inValue("extrude", 0.5),
-    flip = op.inBool("flip", false),
+    flip = op.inValueBool("flip", false),
 
-    removeZero = op.inBool("Ignore Zero Values"),
-    invert = op.inBool("invert"),
+    removeZero = op.inValueBool("Ignore Zero Values"),
+    invert = op.inValueBool("invert"),
     offsetX = op.inValueFloat("offset X"),
     offsetY = op.inValueFloat("offset Y"),
 
-    colorize = op.inBool("colorize", false),
+    colorize = op.inValueBool("colorize", false),
     colorizeMin = op.inValueSlider("Colorize Min", 0),
     colorizeMax = op.inValueSlider("Colorize Max", 1),
 

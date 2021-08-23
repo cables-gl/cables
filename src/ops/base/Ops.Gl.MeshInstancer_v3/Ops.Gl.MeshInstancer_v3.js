@@ -3,7 +3,7 @@ const
     geom = op.inObject("geom"),
     inScale = op.inValue("Scale", 1),
 
-    doLimit = op.inBool("Limit Instances", false),
+    doLimit = op.inValueBool("Limit Instances", false),
     inLimit = op.inValueInt("Limit", 100),
 
     inTranslates = op.inArray("positions"),

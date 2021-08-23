@@ -9,11 +9,11 @@ const
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("Geometry"),
 
-    drawTop = op.inBool("Draw Top", true),
-    drawBottom = op.inBool("Draw Bottom", true),
-    drawLeft = op.inBool("Draw Left", true),
-    drawRight = op.inBool("Draw Right", true),
-    active = op.inBool("Active", true);
+    drawTop = op.inValueBool("Draw Top", true),
+    drawBottom = op.inValueBool("Draw Bottom", true),
+    drawLeft = op.inValueBool("Draw Left", true),
+    drawRight = op.inValueBool("Draw Right", true),
+    active = op.inValueBool("Active", true);
 
 op.setPortGroup("Geometry", [width, height, thickness]);
 op.setPortGroup("Transform", [pivotX, pivotY]);

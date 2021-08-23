@@ -5,7 +5,7 @@ op.trigger=op.outTrigger("trigger");
 
 var inStrength=op.inValueSlider("Amount",1);
 
-var mulColor=op.inBool("Multiply Color");
+var mulColor=op.inValueBool("Multiply Color");
 
 var inLookup=op.inTexture("Lookup Texture");
 

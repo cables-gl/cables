@@ -1,8 +1,8 @@
 const
-    disableScaleWeb = op.inBool("Disable Scaling", true),
-    disableDefault = op.inBool("Disable Scroll", true),
-    hdpi = op.inBool("HDPI Coordinates", false),
-    active = op.inBool("Active", true),
+    disableScaleWeb = op.inValueBool("Disable Scaling", true),
+    disableDefault = op.inValueBool("Disable Scroll", true),
+    hdpi = op.inValueBool("HDPI Coordinates", false),
+    active = op.inValueBool("Active", true),
 
     outTouched = op.outValue("Touched", false),
     numFingers = op.outValue("Fingers", 0),
@@ -16,8 +16,8 @@ const
     area = op.inSwitch("Area", ["Canvas", "Document"], "Canvas"),
 
     outEvents = op.outArray("Events"),
-    normalize = op.inBool("Normalize Coordinates"),
-    flipY = op.inBool("Flip Y"),
+    normalize = op.inValueBool("Normalize Coordinates"),
+    flipY = op.inValueBool("Flip Y"),
     outTouchStart = op.outTrigger("Touch Start"),
     outTouchEnd = op.outTrigger("Touch End");
 

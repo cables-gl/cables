@@ -22,16 +22,16 @@ const uniScrollY = new CGL.Uniform(shader, "f", "scrollY", op.inValue("scrollY",
 const uniRepeat = new CGL.Uniform(shader, "f", "repeat", op.inValue("repeat", 1));
 const uniAspect = new CGL.Uniform(shader, "f", "aspect", op.inValue("aspect", 1));
 
-const uniLayer1 = new CGL.Uniform(shader, "b", "layer1", op.inBool("Layer 1", true));
-const uniLayer2 = new CGL.Uniform(shader, "b", "layer2", op.inBool("Layer 2", true));
-const uniLayer3 = new CGL.Uniform(shader, "b", "layer3", op.inBool("Layer 3", true));
-const uniLayer4 = new CGL.Uniform(shader, "b", "layer4", op.inBool("Layer 4", true));
+const uniLayer1 = new CGL.Uniform(shader, "b", "layer1", op.inValueBool("Layer 1", true));
+const uniLayer2 = new CGL.Uniform(shader, "b", "layer2", op.inValueBool("Layer 2", true));
+const uniLayer3 = new CGL.Uniform(shader, "b", "layer3", op.inValueBool("Layer 3", true));
+const uniLayer4 = new CGL.Uniform(shader, "b", "layer4", op.inValueBool("Layer 4", true));
 
 const uniColor = new CGL.Uniform(shader, "3f", "color", r, g, b);
 
 const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
 
-const tile = op.inBool("Tileable", false);
+const tile = op.inValueBool("Tileable", false);
 tile.onChange = updateTileable;
 function updateTileable()
 {

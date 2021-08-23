@@ -1,11 +1,11 @@
 const
     render = op.inTrigger("render"),
     geometry = op.inObject("Geometry", null, "geometry"),
-    updateAll = op.inBool("Update All", true),
-    updateFaces = op.inBool("Update Face Indices", false),
-    updateVerts = op.inBool("Update Vertices", false),
-    updateTexcoords = op.inBool("Update Texcoords", false),
-    vertNums = op.inBool("Vertex Numbers", true),
+    updateAll = op.inValueBool("Update All", true),
+    updateFaces = op.inValueBool("Update Face Indices", false),
+    updateVerts = op.inValueBool("Update Vertices", false),
+    updateTexcoords = op.inValueBool("Update Texcoords", false),
+    vertNums = op.inValueBool("Vertex Numbers", true),
     trigger = op.outTrigger("trigger");
 
 geometry.ignoreValueSerialize = true;

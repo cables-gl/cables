@@ -1,7 +1,7 @@
 let cgl = op.patch.cgl;
 
 let render = op.inTrigger("render");
-let smallRender = op.inBool("Small Renderer");
+let smallRender = op.inValueBool("Small Renderer");
 
 let trigger = op.outTrigger("trigger");
 let triggerGamePad = op.addOutPort(new CABLES.Port(op, "Controller Matrix", CABLES.OP_PORT_TYPE_FUNCTION));

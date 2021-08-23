@@ -6,7 +6,7 @@ const
     inStacks = op.inValue("stacks", 32),
     inSlices = op.inValue("slices", 32),
     inStacklimit = op.inValueSlider("Filloffset", 1),
-    inDraw = op.inBool("Render", true),
+    inDraw = op.inValueBool("Render", true),
     outTrigger = op.outTrigger("trigger"),
     outGeometry = op.outObject("geometry", null, "geometry"),
     UP = vec3.fromValues(0, 1, 0),

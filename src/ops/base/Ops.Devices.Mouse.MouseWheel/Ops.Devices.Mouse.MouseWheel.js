@@ -6,11 +6,11 @@ const min=op.inValue("min",-100);
 const maxUnlimitedPort = op.inValueBool('Max Unlimited', false);
 maxUnlimitedPort.setUiAttribs({ hidePort: true });
 const max=op.inValue("max", 100);
-const smooth=op.inBool("smooth");
+const smooth=op.inValueBool("smooth");
 const smoothSpeed=op.inValue("delay",0.3);
-const preventScroll=op.inBool("prevent scroll");
-const flip=op.inBool("Flip Direction");
-const active=op.inBool("active",true);
+const preventScroll=op.inValueBool("prevent scroll");
+const flip=op.inValueBool("Flip Direction");
+const active=op.inValueBool("active",true);
 const reset=op.inTriggerButton("Reset");
 const area=op.inSwitch("Area",['Canvas','Document'],'Canvas');
 

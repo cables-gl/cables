@@ -1,7 +1,7 @@
 const
     render=op.inTrigger("render"),
     trigger=op.outTrigger("trigger"),
-    enable=op.inBool("enable",true),
+    enable=op.inValueBool("enable",true),
     facing=op.inSwitch("facing",['back','front','both'],'back'),
     cgl=op.patch.cgl;
 

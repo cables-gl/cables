@@ -15,7 +15,7 @@ var znear=op.inValueInt("Z Near",0.1);
 var zfar=op.inValueInt("Z Far",300);
 var lookat=op.inArray("Look at");
 
-var showMapArea=op.inBool("Show Map Area",false);
+var showMapArea=op.inValueBool("Show Map Area",false);
 var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;

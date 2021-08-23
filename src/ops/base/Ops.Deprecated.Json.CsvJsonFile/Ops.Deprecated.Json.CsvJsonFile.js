@@ -1,7 +1,7 @@
 const filename = op.addInPort(new CABLES.Port(op, "file", CABLES.OP_PORT_TYPE_VALUE, { "display": "file", "type": "string", "filter": "json" }));
 const result = op.outArray("Result");
 const isLoading = op.outValue("Is Loading", false);
-const jsonp = op.inBool("JsonP", false);
+const jsonp = op.inValueBool("JsonP", false);
 
 result.ignoreValueSerialize = true;
 

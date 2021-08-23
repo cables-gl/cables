@@ -7,7 +7,7 @@ op.trigger = op.addOutPort(new CABLES.Port(this, "trigger", CABLES.OP_PORT_TYPE_
 let inScale = op.inValue("Scale", 1);
 let inSize = op.inValue("Size", 1);
 let inStrength = op.inValue("Strength", 1);
-let inSmooth = op.inBool("Smooth", true);
+let inSmooth = op.inValueBool("Smooth", true);
 
 let output = op.inValueSelect("Output", ["Add XYZ", "Add Z"], "Add XYZ");
 
@@ -22,7 +22,7 @@ let scrollz = op.inValue("Scroll Z");
 
 let shader = null;
 
-let inWorldSpace = op.inBool("WorldSpace");
+let inWorldSpace = op.inValueBool("WorldSpace");
 
 let moduleVert = null;
 

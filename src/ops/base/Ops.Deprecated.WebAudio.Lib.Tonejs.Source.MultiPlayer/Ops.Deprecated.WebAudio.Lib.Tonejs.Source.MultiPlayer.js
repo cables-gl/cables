@@ -67,7 +67,7 @@ var stopPort = op.inTriggerButton("Stop Buffer");
 var stopAllPort = op.inTriggerButton("Stop All Buffers");
 var fadeOutPort = op.inValueString("Fade Out Time", FADE_OUT_TIME_DEFAULT);
 var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX }, VOLUME_DEFAULT ));
-var mutePort = op.inBool("Mute", MUTE_DEFAULT);
+var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // change listeners
 starPort.onTriggered = function() {
@@ -87,7 +87,7 @@ starPort.onTriggered = function() {
         var gain = gainPort.get();
         //Tone.js doc: start (bufferName, time[, offset][, duration][, pitch][, gain])
         try {
-            node.start(audioBufferPorts[index].data.index, time, offset, duration, pitch, gain);
+            node.start(audioBufferPorts[index].data.index, time, offset, duration, pitch, gain);    
         } catch(e) { op.log(e); }
     } else {
         op.log("Warning: There is no buffer at index ", index);
@@ -119,7 +119,7 @@ starLoopPort.onTriggered = function() {
         }
         // tone.js doc: .startLoop (bufferName, time[, offset][, loopStart][, loopEnd][, pitch][, gain])
         try {
-            node.startLoop(audioBufferPorts[index].data.index, time, offset, loopStartTime, loopEndTime, duration, pitch, gain);
+            node.startLoop(audioBufferPorts[index].data.index, time, offset, loopStartTime, loopEndTime, duration, pitch, gain);    
         } catch(e) { op.log(e); }
     } else {
         op.log("Warning: There is no buffer at index ", index);
@@ -134,7 +134,7 @@ stopPort.onTriggered = function() {
             time = TIME_DEFAULT;
         }
         try {
-            node.stop(index, time);
+            node.stop(index, time);    
         } catch(e) { op.log(e); }
     } else {
         op.log("Warning: The AudioBuffer to stop does not seem to exist, index:  ", index);
@@ -148,7 +148,7 @@ stopAllPort.onTriggered = function() {
     }
     try {
         node.stopAll(time);
-    } catch(e) { op.log(e); }
+    } catch(e) { op.log(e); }   
 };
 
 fadeInPort.onChange = function() {
@@ -170,14 +170,14 @@ fadeOutPort.onChange = function() {
 volumePort.onChange = function() {
     var volume = volumePort.get();
     if(volume >= VOLUME_MIN && volume <= VOLUME_MAX) {
-        node.set("volume", volume);
+        node.set("volume", volume);    
     }
 };
 
 mutePort.onChange = function() {
     var mute = mutePort.get() ? true : false;
     try {
-        node.mute = mute;
+        node.mute = mute;    
     } catch(e) {
         op.log("Error: Could not mute MultiPlayer");
     }

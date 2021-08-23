@@ -2,7 +2,7 @@ const render = op.inTrigger("render");
 const trigger = op.outTrigger("trigger");
 const amount = op.inValueSlider("amount", 1);
 const inMask = op.inTexture("Mask");
-const invertMask = op.inBool("Invert Mask");
+const invertMask = op.inValueBool("Invert Mask");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);

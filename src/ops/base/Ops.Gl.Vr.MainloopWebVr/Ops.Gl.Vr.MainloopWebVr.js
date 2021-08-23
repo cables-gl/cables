@@ -3,7 +3,7 @@ let inStopVr = op.inTriggerButton("Stop VR");
 
 let inResMul = op.inValueSlider("Scale Resolution", 1);
 
-let inResizeCancas = op.inBool("Resize Canvas", false);
+let inResizeCancas = op.inValueBool("Resize Canvas", false);
 
 let nextVr = op.outTrigger("VR Mainloop");
 let nextNonVr = op.outTrigger("NoVR Mainloop");
@@ -28,7 +28,7 @@ let outGamePadRight = op.outObject("Gamepad object Right");
 
 // single trigger for now with things like average interpolation
 let singleTrigger = op.outTrigger("single trigger out");
-let useGamepads = op.inBool("use gamepads", false);
+let useGamepads = op.inValueBool("use gamepads", false);
 
 let outPMatrix = op.outArray("Left PMatrix");
 

@@ -1,4 +1,4 @@
-const bool = op.inBool("Boolean");
+const bool = op.inValueBool("Boolean");
 const outbool = op.outValue("Result");
 
 bool.changeAlways = true;

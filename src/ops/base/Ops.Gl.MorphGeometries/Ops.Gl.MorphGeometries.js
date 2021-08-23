@@ -4,7 +4,7 @@ const
     inGeomA=op.inObject("Geometry 1"),
     inGeomB=op.inObject("Geometry 2"),
     inFade=op.inValueSlider("Fade"),
-    inNormals=op.inBool("Normals");
+    inNormals=op.inValueBool("Normals");
 
 var cgl=op.patch.cgl;
 var shader=null;

@@ -3,7 +3,7 @@ const
     defVal = op.inValue("Default Value", 0),
     inMul = op.inValue("Multiply", 1),
     inReset = op.inTriggerButton("Reset"),
-    inLimit = op.inBool("Limit", false),
+    inLimit = op.inValueBool("Limit", false),
     inMin = op.inValue("Min", 0),
     inMax = op.inValue("Max", 100),
     inRubber = op.inValue("Rubberband", 0),

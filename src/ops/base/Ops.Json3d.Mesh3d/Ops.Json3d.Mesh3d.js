@@ -5,10 +5,10 @@ const
     inNormals = op.inSwitch("Calculate Normals", ["no", "smooth", "flat"], "no"),
     inResize = op.inBool("Resize", true),
     inSize = op.inValue("New Size", 1),
-    centerPivot = op.inBool("Center", true),
-    merge = op.inBool("Merge All", false),
+    centerPivot = op.inValueBool("Center", true),
+    merge = op.inValueBool("Merge All", false),
     next = op.outTrigger("trigger"),
-    draw = op.inBool("Draw", true),
+    draw = op.inValueBool("Draw", true),
     geometryOut = op.outObject("Geometry"),
     outScale = op.outValue("Scaling", 1.0),
     outName = op.outString("Mesh Name");

@@ -1,7 +1,7 @@
 var render=op.inTrigger("Render");
 var inDiagram=op.inObject("Diagram");
 var next=op.outTrigger("Next");
-var pIgnoreBorderCells=op.inBool("Ignore Border Cells",false);
+var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
 
 var needsGeomUpdate=false;
 var verts=null;

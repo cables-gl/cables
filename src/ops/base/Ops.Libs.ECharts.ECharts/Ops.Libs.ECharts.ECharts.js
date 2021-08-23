@@ -12,7 +12,7 @@ const themeSelect = op.inSwitch("Theme", ["default", "light", "dark"], "dark");
 const customTheme = op.inObject("Custom theme obj");
 const inInitExtraOpts = op.inObject("Init extra Options");
 const inStyle = op.inValueEditor("Style", "position:absolute;z-index:100;background:white;", "css");
-const inVisible = op.inBool("Visible", true);
+const inVisible = op.inValueBool("Visible", true);
 
 const outElement = op.outObject("DOM Element");
 const outChart = op.outObject("ECharts instance");

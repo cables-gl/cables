@@ -3,7 +3,7 @@ const elId = "glcanvas";
 const initialScale = 1.0;
 
 // inputs
-const enabledPort = op.inBool("Enabled", true);
+const enabledPort = op.inValueBool("Enabled", true);
 const minScalePort = op.inValue("Min Scale", 0.0);
 const maxScalePort = op.inValue("Max Scale", 4.0);
 const resetScalePort = op.inTriggerButton("Reset Scale");

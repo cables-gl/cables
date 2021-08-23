@@ -1,6 +1,6 @@
 const
     inExec = op.inTrigger("Trigger"),
-    inIfSuspended = op.inBool("Only if Audio Suspended"),
+    inIfSuspended = op.inValueBool("Only if Audio Suspended"),
     inReset = op.inTriggerButton("Reset"),
     inStyleOuter = op.inStringEditor("Style Outer", attachments.outer_css),
     inStyleInner = op.inStringEditor("Style Inner", attachments.inner_css),

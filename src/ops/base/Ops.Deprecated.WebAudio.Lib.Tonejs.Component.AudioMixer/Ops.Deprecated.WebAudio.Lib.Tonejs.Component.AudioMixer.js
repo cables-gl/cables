@@ -125,12 +125,12 @@ function createInputPorts()
         volumePort.data.index = i;
         volumePorts.push(volumePort);
         // mute port
-        let mutePort = op.inBool("Channel " + (i + 1) + " Mute", false);
+        let mutePort = op.inValueBool("Channel " + (i + 1) + " Mute", false);
         mutePort.data.index = i;
         mutePort.onChange = muteOnChange.bind(mutePort);
         mutePorts.push(mutePort);
         // solo port
-        let soloPort = op.inBool("Channel " + (i + 1) + " Solo", false);
+        let soloPort = op.inValueBool("Channel " + (i + 1) + " Solo", false);
         soloPort.data.index = i;
         soloPort.onChange = soloOnChange.bind(soloPort);
         soloPorts.push(soloPort);

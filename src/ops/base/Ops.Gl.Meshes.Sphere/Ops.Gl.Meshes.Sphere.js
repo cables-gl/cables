@@ -2,7 +2,7 @@ const render=op.inTrigger("render");
 const inStacks=op.inValueInt("stacks",32);
 const inSlices=op.inValueInt("slices",32);
 const inRadius=op.inValueFloat("radius");
-const inRender=op.inBool("Render",true);
+const inRender=op.inValueBool("Render",true);
 const trigger=op.outTrigger("trigger")
 const geomOut=op.outObject("geometry");
 

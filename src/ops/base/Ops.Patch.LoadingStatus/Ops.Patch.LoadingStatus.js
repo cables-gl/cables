@@ -7,7 +7,7 @@ const result = op.addOutPort(new CABLES.Port(op, "status", CABLES.OP_PORT_TYPE_V
 const isFinishedPort = op.outValue("all loaded", false);
 const preRenderStatus = op.addOutPort(new CABLES.Port(op, "preRenderStatus", CABLES.OP_PORT_TYPE_VALUE));
 const preRenderTimeFrames = op.addInPort(new CABLES.Port(op, "preRenderTimes", CABLES.OP_PORT_TYPE_VALUE));
-const preRenderOps = op.inBool("PreRender Ops");
+const preRenderOps = op.inValueBool("PreRender Ops");
 const startTimeLine = op.inBool("Play Timeline", true);
 preRenderStatus.set(0);
 const numAssets = op.addOutPort(new CABLES.Port(op, "numAssets", CABLES.OP_PORT_TYPE_VALUE));

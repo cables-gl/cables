@@ -2,7 +2,7 @@
 const inArrayPort = op.inArray("Input Array"),
     beginPort = op.inValueInt("Begin Index", 0),
     sizePort = op.inValueInt("Chunk Size", 1),
-    circularPort = op.inBool("Circular", false),
+    circularPort = op.inValueBool("Circular", false),
     outArrayPort = op.outArray("Output Array"),
     outArrayLength = op.outNumber("Array length");
 

@@ -7,7 +7,7 @@ var inAmount=op.inValue("Amount",1);
 var inSize=op.inValue("Size",20);
 var inFalloff=op.inValueSlider("Falloff",0.5);
 var inScale=op.inValueSlider("Scale",1);
-var inInvert=op.inBool("Invert");
+var inInvert=op.inValueBool("Invert");
 
 {
     // position

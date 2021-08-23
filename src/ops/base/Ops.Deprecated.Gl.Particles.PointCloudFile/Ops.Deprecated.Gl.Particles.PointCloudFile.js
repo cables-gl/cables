@@ -1,8 +1,8 @@
 const render=op.inTrigger("render");
 const trigger=op.outTrigger("trigger");
 const points=op.inArray("points");
-const doCenter=op.inBool("center");
-const doRender=op.inBool("Render",true);
+const doCenter=op.inValueBool("center");
+const doRender=op.inValueBool("Render",true);
 
 const outPoints=op.outArray("Points");
 const outVertColors=op.outArray("Vertex Colors");

@@ -3,8 +3,8 @@ const
     next = op.outTrigger("trigger"),
     inSize = op.inValue("Size", 1),
     inStrength = op.inValue("Strength", 0.5),
-    inSmooth = op.inBool("Smooth", true),
-    inWorldSpace = op.inBool("WorldSpace", false),
+    inSmooth = op.inValueBool("Smooth", true),
+    inWorldSpace = op.inValueBool("WorldSpace", false),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z");

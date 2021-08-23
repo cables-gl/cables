@@ -4,8 +4,8 @@ const
     tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "mipmap"),
     wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
     aniso = op.inSwitch("Anisotropic", [0, 1, 2, 4, 8, 16], 0),
-    flip = op.inBool("Flip", false),
-    unpackAlpha = op.inBool("Pre Multiplied Alpha", false),
+    flip = op.inValueBool("Flip", false),
+    unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
 
     outTex = op.outTexture("Texture"),
     width = op.outValue("Width"),

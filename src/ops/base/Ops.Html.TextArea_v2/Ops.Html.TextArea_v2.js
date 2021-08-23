@@ -1,4 +1,4 @@
-var visible=op.inBool("visible",true);
+var visible=op.inValueBool("visible",true);
 var inFocus=op.inTriggerButton("focus");
 var inBlur=op.inTriggerButton("blur");
 

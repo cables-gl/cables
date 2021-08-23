@@ -5,7 +5,7 @@ op.render=op.inTrigger("render");
 op.trigger=op.outTrigger("trigger");
 
 var inDistance=op.inValue("Distance",1);
-var inAbsolute=op.inBool("Absolute",false);
+var inAbsolute=op.inValueBool("Absolute",false);
 
 {
     var x=op.inValue("add x");

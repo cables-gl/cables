@@ -3,7 +3,7 @@ const
     next = op.outTrigger("trigger"),
     inSize = op.inValue("Size", 1),
     inStrength = op.inValue("Strength", 0.5),
-    inSmooth = op.inBool("Smooth", true),
+    inSmooth = op.inValueBool("Smooth", true),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z");

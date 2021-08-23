@@ -10,7 +10,7 @@ let cgl = op.patch.cgl;
 
 let shader = null;
 
-let inWorldSpace = op.inBool("WorldSpace");
+let inWorldSpace = op.inValueBool("WorldSpace");
 
 let srcHeadVert = attachments.perlin_instposition_vert || "";
 

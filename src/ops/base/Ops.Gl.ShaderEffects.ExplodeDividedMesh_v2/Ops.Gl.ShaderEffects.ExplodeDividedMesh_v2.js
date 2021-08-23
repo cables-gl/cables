@@ -3,7 +3,7 @@ const
     inDistance=op.inValue("Distance",1),
     inSize=op.inValue("Size",1),
 
-    inAbsolute=op.inBool("Absolute",false),
+    inAbsolute=op.inValueBool("Absolute",false),
     x=op.inValue("add x"),
     y=op.inValue("add y"),
     z=op.inValue("add z"),

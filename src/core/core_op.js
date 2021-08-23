@@ -1,7 +1,7 @@
 import { EventTarget } from "./eventtarget";
 import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
-import { Port, SwitchPort, ValueSelectPort, BoolPort } from "./core_port";
+import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import { Log } from "./log";
 
@@ -303,11 +303,12 @@ const Op = function ()
      * @param {Boolean} value
      * @return {Port} created port
      */
+
     Op.prototype.inValueBool = Op.prototype.inBool = function (name, v)
     {
         // old
         const p = this.addInPort(
-            new BoolPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
                 "display": "bool"
             })
         );
@@ -783,8 +784,11 @@ const Op = function ()
      */
     Op.prototype.outValueBool = Op.prototype.outBool = function (name, v)
     {
+        // old
         const p = this.addOutPort(
-            new BoolPort(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, { "display": "bool" })
+            new Port(this, name, CONSTANTS.OP.OP_PORT_TYPE_VALUE, {
+                "display": "bool"
+            })
         );
         if (v !== undefined) p.set(v);
         else p.set(false);

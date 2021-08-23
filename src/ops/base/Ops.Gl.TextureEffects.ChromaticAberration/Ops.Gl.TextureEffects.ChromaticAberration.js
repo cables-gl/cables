@@ -4,7 +4,7 @@ const
     amount=op.inValueSlider("Amount",1),
     pixel=op.inValue("Pixel",5),
     lensDistort=op.inValueSlider("Lens Distort",0),
-    doSmooth=op.inBool("Smooth",false),
+    doSmooth=op.inValueBool("Smooth",false),
     textureMask=op.inTexture("Mask"),
     trigger=op.outTrigger('trigger');
 

@@ -17,7 +17,7 @@ anim.clear();
 
 const trigger = op.outTrigger("trigger");
 
-const calcVertexNormals = op.inBool("smooth");
+const calcVertexNormals = op.inValueBool("smooth");
 calcVertexNormals.set(true);
 
 const geoms = [];

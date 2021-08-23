@@ -4,7 +4,7 @@ const
     inSize = op.inValue("Size", 1),
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
-    inInvert = op.inBool("Invert"),
+    inInvert = op.inValueBool("Invert"),
     inBlend = op.inSwitch("Blend ", ["Normal", "Multiply"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
@@ -13,7 +13,7 @@ const
     y = op.inValue("y"),
     z = op.inValue("z"),
     sizeX = op.inValueSlider("Size X", 1),
-    inWorldSpace = op.inBool("WorldSpace", true),
+    inWorldSpace = op.inValueBool("WorldSpace", true),
     next = op.outTrigger("Next");
 
 op.setPortGroup("Position", [x, y, z]);

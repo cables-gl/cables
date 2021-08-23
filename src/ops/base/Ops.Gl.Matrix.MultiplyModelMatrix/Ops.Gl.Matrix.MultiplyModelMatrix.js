@@ -1,6 +1,6 @@
 let cgl = op.patch.cgl;
 let render = op.inTrigger("render");
-let inIdentity = op.inBool("Identity", false);
+let inIdentity = op.inValueBool("Identity", false);
 let next = op.outTrigger("trigger");
 
 let m = mat4.create();

@@ -3,16 +3,16 @@ const blendMode = CGL.TextureEffect.AddBlendSelect(op, "blendMode");
 const amount = op.inValueSlider("amount", 1);
 
 const image = op.inTexture("Image");
-const removeAlphaSrc = op.inBool("removeAlphaSrc", false);
+const removeAlphaSrc = op.inValueBool("removeAlphaSrc", false);
 
 const imageAlpha = op.inTexture("Mask");
 const alphaSrc = op.inValueSelect("Mask Src", ["alpha channel", "luminance", "luminance inv"], "luminance");
-const invAlphaChannel = op.inBool("Invert alpha channel");
+const invAlphaChannel = op.inValueBool("Invert alpha channel");
 
-const inAspect = op.inBool("Aspect Ratio", false);
+const inAspect = op.inValueBool("Aspect Ratio", false);
 const inAspectAxis = op.inValueSelect("Stretch Axis", ["X", "Y"], "X");
 const inAspectPos = op.inValueSlider("Position", 0.0);
-const inAspectCrop = op.inBool("Crop", false);
+const inAspectCrop = op.inValueBool("Crop", false);
 
 const trigger = op.outTrigger("trigger");
 
@@ -109,8 +109,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    const flipX = op.inBool("flip x");
-    const flipY = op.inBool("flip y");
+    const flipX = op.inValueBool("flip x");
+    const flipY = op.inValueBool("flip y");
 
     flipX.onChange = function ()
     {
@@ -130,7 +130,7 @@ alphaSrc.set("alpha channel");
     // texture transform
     //
 
-    var doTransform = op.inBool("Transform");
+    var doTransform = op.inValueBool("Transform");
 
     var scaleX = op.inValueSlider("Scale X", 1);
     var scaleY = op.inValueSlider("Scale Y", 1);
@@ -140,7 +140,7 @@ alphaSrc.set("alpha channel");
 
     var rotate = op.inValue("Rotation", 0);
 
-    const inClipRepeat = op.inBool("Clip Repeat", false);
+    const inClipRepeat = op.inValueBool("Clip Repeat", false);
 
     inClipRepeat.onChange = updateClip;
     function updateClip()

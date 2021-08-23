@@ -1,17 +1,17 @@
 const
     render = op.inTrigger("render"),
-    inInvert = op.inBool("Invert"),
+    inInvert = op.inValueBool("Invert"),
     inArea = op.inValueSelect("Area", ["Sphere", "Box", "Axis X", "Axis Y", "Axis Z", "Axis XY", "Axis XZ", "Axis YZ", "Axis X Infinite", "Axis Y Infinite", "Axis Z Infinite"], "Sphere"),
     inSize = op.inValue("Size", 1),
     inSizeX = op.inValueFloat("Size X", 1),
     inSizeY = op.inValueFloat("Size Y", 1),
     inSizeZ = op.inValueFloat("Size Z", 1),
-    inRepeat = op.inBool("Repeat"),
+    inRepeat = op.inValueBool("Repeat"),
     inRepeatDist = op.inValueFloat("Repeat Distance", 0.0),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    inWorldSpace = op.inBool("WorldSpace", true),
+    inWorldSpace = op.inValueBool("WorldSpace", true),
     next = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;

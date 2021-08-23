@@ -1,6 +1,6 @@
 var interval=op.inValue('interval');
 var trigger=op.outTrigger('trigger');
-var active=op.inBool("Active",true);
+var active=op.inValueBool("Active",true);
 
 active.onChange=function()
 {

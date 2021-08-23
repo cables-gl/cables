@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Exec"),
     inMass = op.inValue("Mass"),
     inRadius = op.inValue("Radius", 1),
-    doRender = op.inBool("Render", true),
+    doRender = op.inValueBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outRadius = op.outValue("Out Radius"),

@@ -1,7 +1,7 @@
 const
     exec = op.inTrigger("Render"),
     inBlend = op.inValueSelect("Blendmode", ["None", "Normal", "Add", "Subtract", "Multiply"], "Normal"),
-    inPremul = op.inBool("Premultiplied"),
+    inPremul = op.inValueBool("Premultiplied"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;

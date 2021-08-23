@@ -29,7 +29,7 @@ var startPort = op.addInPort( new CABLES.Port( op, "Start",CABLES.OP_PORT_TYPE_F
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var stopPort = op.addInPort( new CABLES.Port( op, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
+var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, null, VOLUME_DEFAULT);
 var mutePort = op.addInPort( new CABLES.Port( op, "Mute", CABLES.OP_PORT_TYPE_VALUE, { display: 'bool' } ) );
 mutePort.set(MUTE_DEFAULT);
@@ -96,7 +96,7 @@ autoStartPort.onChange = function() {
 };
 
 mutePort.onChange = function() {
-    node.mute = mutePort.get() ? true : false;
+    node.mute = mutePort.get() ? true : false; 
 };
 
 // outputs

@@ -10,8 +10,8 @@ var visible=op.addInPort(new CABLES.Port(op,"Visible",CABLES.OP_PORT_TYPE_VALUE,
 visible.set(true);
 
 
-var doCenterX=op.inBool("Center X",false);
-var doCenterY=op.inBool("Center Y",false);
+var doCenterX=op.inValueBool("Center X",false);
+var doCenterY=op.inValueBool("Center Y",false);
 
 var posLeft=op.addInPort(new CABLES.Port(op,"Left",CABLES.OP_PORT_TYPE_VALUE));
 var posTop=op.addInPort(new CABLES.Port(op,"Top",CABLES.OP_PORT_TYPE_VALUE));
@@ -211,7 +211,7 @@ function updateClasses()
     {
         element.className = classes.get();
     }
-
+    
 }
 
 
@@ -224,11 +224,11 @@ function init()
     element.style.position="absolute";
     element.style.overflow="hidden";
     element.style["z-index"]="9999";
-
+    
     // element.style["background-color"]="#f00";
+    
 
-
-    // var canvas = document.getElementById("cablescanvas") || document.body;
+    // var canvas = document.getElementById("cablescanvas") || document.body; 
     var canvas = op.patch.cgl.canvas.parentElement;
     canvas.appendChild(element);
 
@@ -242,7 +242,7 @@ function init()
     updateCursor();
     updateIgnoreMouse();
     updateOpacity();
-
+    
     element.onclick=function(e)
     {
         clickTrigger.trigger();
@@ -264,7 +264,7 @@ function init()
     {
         mouseOver.set(false);
     };
-
+    
     updateText();
     updateClasses();
 }

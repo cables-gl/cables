@@ -1,7 +1,7 @@
 const
     inEle=op.inObject("HTML Element"),
     inClassName=op.inString("Classname"),
-    inActive=op.inBool("Active",true);
+    inActive=op.inValueBool("Active",true);
 
 inActive.onChange=
     inClassName.onChange=

@@ -9,8 +9,8 @@ const next = op.outTrigger("next");
 const inIterations = op.inValue("Iterations", 4);
 const geomOut = op.outObject("Geometry");
 
-const flat = op.inBool("Flat", false);
-const inDraw = op.inBool("Draw", true);
+const flat = op.inValueBool("Flat", false);
+const inDraw = op.inValueBool("Draw", true);
 
 let verts = [];
 let geom = null;

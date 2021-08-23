@@ -19,10 +19,10 @@ const
 op.setPortGroup("Roughness",[inRoughMul,inRough]);
 
 const
-    inNormalScreen=op.inBool("Screenspace Normals",false),
+    inNormalScreen=op.inValueBool("Screenspace Normals",false),
     inNormal=op.inTexture("Normal Map"),
     inNormalIntensity=op.inValueSlider("Normal Intensity",1),
-    inNormalFlip=op.inBool("Normal Flip",false);
+    inNormalFlip=op.inValueBool("Normal Flip",false);
 op.setPortGroup("Normals",[inNormalScreen,inNormal,inNormalIntensity,inNormalFlip]);
 
 const
@@ -36,7 +36,7 @@ const
     inOpacity=op.inValueSlider("Opacity",1);
 
 const
-    inFresnel=op.inBool("Fresnel"),
+    inFresnel=op.inValueBool("Fresnel"),
     inFresnelAmount=op.inValueSlider("Amount",1.0),
     inFresnelWidth=op.inValue("Width",1.0),
     inFresnelExponent=op.inValue("Exponent",5.0),
@@ -51,7 +51,7 @@ const
     inRepeatY=op.inValue("Repeat Y",1),
     inOffsetX=op.inValue("Offset X",0),
     inOffsetY=op.inValue("Offset Y",0),
-    inTransfOpacity=op.inBool("Transform Opacity",true);
+    inTransfOpacity=op.inValueBool("Transform Opacity",true);
 op.setPortGroup("Texture Transform",[inRepeatX,inRepeatY,inOffsetX,inOffsetY]);
 
 const trigger=op.outTrigger("trigger");

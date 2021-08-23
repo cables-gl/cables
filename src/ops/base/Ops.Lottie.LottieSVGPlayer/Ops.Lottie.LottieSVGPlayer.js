@@ -1,8 +1,8 @@
 const
     inEle = op.inObject("HTML Element"),
     inData = op.inObject("JSON Data"),
-    inPlay = op.inBool("Play", true),
-    inLoop = op.inBool("Loop", true),
+    inPlay = op.inValueBool("Play", true),
+    inLoop = op.inValueBool("Loop", true),
     inDir = op.inBool("Play Backward"),
     inRewind = op.inTriggerButton("Rewind"),
     outComplete = op.outBool("Completed", false),

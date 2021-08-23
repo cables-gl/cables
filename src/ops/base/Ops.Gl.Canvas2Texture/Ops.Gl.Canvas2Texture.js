@@ -7,8 +7,8 @@ const
     inCanvas = op.inObject("canvas"),
     inTextureFilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"]),
     inTextureWrap = op.inValueSelect("wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge"),
-    inTextureFlip = op.inBool("flip"),
-    inUnpackAlpha = op.inBool("unpackPreMultipliedAlpha"),
+    inTextureFlip = op.inValueBool("flip"),
+    inUnpackAlpha = op.inValueBool("unpackPreMultipliedAlpha"),
 
     outTexture = op.outTexture("texture"),
     outWidth = op.outValue("width"),

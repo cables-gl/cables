@@ -26,7 +26,7 @@ var ratePort = op.addInPort( new CABLES.Port( op, "Rate", CABLES.OP_PORT_TYPE_VA
 ratePort.set(RATE_DEFAULT);
 var volumePort = op.addInPort( new CABLES.Port( op, "Volume", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX } ));
 volumePort.set(VOLUME_DEFAULT);
-var sayOnTextChangePort = op.inBool("Say on Text Change", false);
+var sayOnTextChangePort = op.inValueBool("Say on Text Change", false);
 var pausePort = op.inTriggerButton("Pause");
 var resumePort = op.inTriggerButton("Resume");
 var cancelPort = op.inTriggerButton("Cancel");

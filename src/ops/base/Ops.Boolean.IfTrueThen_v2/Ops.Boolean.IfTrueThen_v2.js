@@ -1,13 +1,14 @@
 const
-    exe = op.inTrigger("exe"),
-    boolean = op.inBool("boolean", false),
-    triggerThen = op.outTrigger("then"),
-    triggerElse = op.outTrigger("else");
+    exe=op.inTrigger("exe"),
+    boolean=op.inValueBool("boolean",false),
+    triggerThen=op.outTrigger("then"),
+    triggerElse=op.outTrigger("else");
 
-exe.onTriggered = exec;
+exe.onTriggered=exec;
 
 function exec()
 {
-    if (boolean.get()) triggerThen.trigger();
+    if(boolean.get()) triggerThen.trigger();
     else triggerElse.trigger();
 }
+

@@ -5,7 +5,7 @@ var shape=op.inValueSelect('Shape',['Star','Saw','Gear'],'Star');
 var outerRadius=op.inValue('Length',1.5);
 var percent=op.inValueSlider('percent');
 
-var fill=op.inBool("Fill");
+var fill=op.inValueBool("Fill");
 
 var trigger=op.outTrigger('trigger');
 var geomOut=op.addOutPort(new CABLES.Port(op,"geometry",CABLES.OP_PORT_TYPE_OBJECT));

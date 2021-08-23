@@ -3,8 +3,8 @@ const inClass=op.inValueString("Class");
 const inText=op.inValueString("Text","Hello Div");
 const inStyle=op.inValueEditor("Style","position:absolute;z-index:9999;","css");
 
-const inInteractive=op.inBool("Interactive",false);
-const inVisible=op.inBool("Visible",true);
+const inInteractive=op.inValueBool("Interactive",false);
+const inVisible=op.inValueBool("Visible",true);
 
 const outElement=op.outObject("DOM Element");
 const outHover=op.outValue("Hover");

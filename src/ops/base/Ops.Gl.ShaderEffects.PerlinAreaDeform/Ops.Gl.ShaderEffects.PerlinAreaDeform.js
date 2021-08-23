@@ -7,7 +7,7 @@ op.trigger=op.addOutPort(new CABLES.Port(this,"trigger",CABLES.OP_PORT_TYPE_FUNC
 var inScale=op.inValue("Scale",1);
 var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",1);
-var inSmooth=op.inBool("Smooth",true);
+var inSmooth=op.inValueBool("Smooth",true);
 
 var x=op.inValue("x");
 var y=op.inValue("y");
@@ -17,14 +17,14 @@ var scrollx=op.inValue("Scroll X");
 var scrolly=op.inValue("Scroll Y");
 var scrollz=op.inValue("Scroll Z");
 
-var doX=op.inBool("Deform X",true);
-var doY=op.inBool("Deform Y",true);
-var doZ=op.inBool("Deform Z",true);
+var doX=op.inValueBool("Deform X",true);
+var doY=op.inValueBool("Deform Y",true);
+var doZ=op.inValueBool("Deform Z",true);
 
 
 var shader=null;
 
-var inWorldSpace=op.inBool("WorldSpace");
+var inWorldSpace=op.inValueBool("WorldSpace");
 
 
 var srcHeadVert=attachments.perlin_deformer_vert;

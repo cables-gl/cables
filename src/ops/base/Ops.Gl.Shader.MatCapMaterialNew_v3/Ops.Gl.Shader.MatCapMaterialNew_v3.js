@@ -19,10 +19,10 @@ const
     repeatY = op.inValue("Repeat Y", 1),
     offsetX = op.inValue("Offset X", 0),
     offsetY = op.inValue("Offset Y", 0),
-    ssNormals = op.inBool("Screen Space Normals"),
-    calcTangents = op.inBool("Calc normal tangents", true),
-    texCoordAlpha = op.inBool("Opacity TexCoords Transform", false),
-    discardTransPxl = op.inBool("Discard Transparent Pixels"),
+    ssNormals = op.inValueBool("Screen Space Normals"),
+    calcTangents = op.inValueBool("Calc normal tangents", true),
+    texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false),
+    discardTransPxl = op.inValueBool("Discard Transparent Pixels"),
 
     next = op.outTrigger("Next"),
     shaderOut = op.outObject("Shader");

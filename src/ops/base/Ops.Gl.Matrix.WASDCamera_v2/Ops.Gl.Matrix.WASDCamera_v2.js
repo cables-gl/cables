@@ -21,7 +21,7 @@ const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;
 const movementSpeedFactor = 0.5;
 
-const fly = op.inBool("Allow Flying", true);
+const fly = op.inValueBool("Allow Flying", true);
 
 let mouseNoPL = { "firstMove": true,
     "deltaX": 0,

@@ -5,7 +5,7 @@ var render=op.inTrigger('render');
 var inMiplevel=op.inValueSlider("Mip Level",0.0);
 var inCubemap=op.inObject("Cubemap");
 
-var mapReflect=op.inBool("Reflection",true);
+var mapReflect=op.inValueBool("Reflection",true);
 mapReflect.onChange=updateMapping;
 inCubemap.onChange=updateMapping;
 

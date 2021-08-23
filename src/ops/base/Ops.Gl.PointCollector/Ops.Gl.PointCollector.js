@@ -3,7 +3,7 @@ var trigger=op.outTrigger('trigger');
 var outPoints=op.addOutPort(new CABLES.Port(op,"Points",CABLES.OP_PORT_TYPE_ARRAY));
 outPoints.ignoreValueSerialize=true;
 
-var inAbsolute=op.inBool("Absolute",true);
+var inAbsolute=op.inValueBool("Absolute",true);
 
 var points=[];
 var cgl=op.patch.cgl;

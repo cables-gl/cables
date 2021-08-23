@@ -10,7 +10,7 @@ var inY=op.inValue("Pos Y",0);
 
 var fallOff=op.inValueSelect("fallOff",['Linear','SmoothStep'],"Linear");
 var inFadeOut=op.inValueSlider("fade Out");
-var warnOverflow=op.inBool("warn overflow",true);
+var warnOverflow=op.inValueBool("warn overflow",true);
 
 const r = op.inValueSlider("r", 1);
 const g = op.inValueSlider("g", 1);

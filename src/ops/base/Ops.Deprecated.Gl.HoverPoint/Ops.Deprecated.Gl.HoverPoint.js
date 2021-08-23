@@ -4,13 +4,13 @@ var trigger=op.outTrigger('Trigger');
 var inId=op.inValueString("id");
 var pPointSize=op.inValue("Size Point",10);
 
-var show=op.inBool("show",true);
+var show=op.inValueBool("show",true);
 var index=op.inValue("index");
 var title=op.inValueString("Title");
 
 var inText=op.inValueString("Text");
 
-var ignore=op.inBool("Ignore Mouse");
+var ignore=op.inValueBool("Ignore Mouse");
 
 var outHovering=op.outValue("Hovering",false);
 var outHoverIndex=op.outValue("Hover Index",-1);
@@ -37,14 +37,14 @@ inText.onChange=updateText;
 pPointSize.onChange=function()
 {
     pointSize=pPointSize.get();
-    for(var i=0;i<elements.length;i++)
+    for(var i=0;i<elements.length;i++) 
     {
         if(elements[i])
         {
             elements[i].style.width=pointSize+"px";
             elements[i].style.height=pointSize+"px";
             elements[i].style['border-radius']=2*pointSize+"px";
-
+            
         }
     }
 
@@ -62,7 +62,7 @@ function updateVisibility()
 
     if(show.get())
     {
-        for(i=0;i<elements.length;i++)
+        for(i=0;i<elements.length;i++) 
         {
             if(elements[i])
             {
@@ -73,7 +73,7 @@ function updateVisibility()
     }
     else
     {
-        for(i=0;i<elements.length;i++)
+        for(i=0;i<elements.length;i++) 
         {
             if(elements[i])
             {
@@ -92,7 +92,7 @@ index.onChange=function()
     {
         elements.length=currentIndex+1;
     }
-
+    
     if(elements[currentIndex]) elements[currentIndex].dataset.index=currentIndex;
 
 };
@@ -107,10 +107,10 @@ function onMouseClick(e)
 function onMouseEnter(e)
 {
     var index=e.currentTarget.index;
-
+    
     outHovering.set(true);
     outHoverIndex.set(index);
-
+    
     if(elementOver)
     {
         elementOver.innerHTML=elements[index].title;
@@ -123,7 +123,7 @@ function onMouseEnter(e)
 function onMouseLeave(e)
 {
     outHovering.set(false);
-
+    
     var index=e.currentTarget.index;
     if(elementOver) elementOver.style.opacity=0;
     if(elementOver) elementOver.style["pointer-events"]="none";
@@ -134,13 +134,13 @@ function init()
 {
     var id=inId.get()+'_';
     var canvas = op.patch.cgl.canvas.parentElement;
-
+    
     elements[currentIndex] = document.createElement('div');
     elements[currentIndex].style.position="absolute";
     elements[currentIndex].classList.add("hoverpoint");
-
+    
     id+=currentIndex;
-
+    
     elements[currentIndex].id=id;
     elements[currentIndex].style.width=pointSize+"px";
     elements[currentIndex].style.height=pointSize+"px";
@@ -151,9 +151,9 @@ function init()
     elements[currentIndex].style.transition="opacity 0.3s ease "+Math.random()*0.2+"s";
     elements[currentIndex].style.opacity=0;
     elements[currentIndex].index=currentIndex;
-
+    
     elements[currentIndex].dataset.index=currentIndex;
-
+    
     elements[currentIndex].style.opacity="0.5";
 
     if(!elementOver)
@@ -208,7 +208,7 @@ function removeListeners()
         elements[currentIndex].removeEventListener('mouseleave', onMouseLeave);
         elements[currentIndex].removeEventListener('mouseenter', onMouseEnter);
         elements[currentIndex].removeEventListener('click', onMouseClick);
-
+        
     }
 }
 
@@ -221,7 +221,7 @@ function updateListeners()
 op.onDelete=function()
 {
     if(elementOver)elementOver.remove();
-
+    
     for(var i=0;i<elements.length;i++)
     {
         if(elements[i])elements[i].remove();
@@ -236,11 +236,11 @@ function getScreenCoord()
     mat4.multiply(m,cgl.vMatrix,cgl.mvMatrix);
 
     vec3.transformMat4(pos, [0,0,0], m);
-
+    
     vec3.transformMat4(trans, pos, cgl.pMatrix);
 
     var vp=cgl.getViewPort();
-
+    
     x=( vp[2]-( vp[2]  * 0.5 - trans[0] * vp[2] * 0.5 / trans[2] ));
     y=( vp[3]-( vp[3]  * 0.5 + trans[1] * vp[3] * 0.5 / trans[2] ));
 

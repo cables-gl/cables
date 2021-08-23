@@ -6,8 +6,8 @@ var width=op.addInPort(new CABLES.Port(op,"width",CABLES.OP_PORT_TYPE_VALUE));
 var height=op.addInPort(new CABLES.Port(op,"height",CABLES.OP_PORT_TYPE_VALUE));
 var tfilter=op.inValueSelect("filter",['nearest','linear','mipmap']);
 
-var fpTexture=op.inBool("HDR");
-var clear=op.inBool("Clear",true);
+var fpTexture=op.inValueBool("HDR");
+var clear=op.inValueBool("Clear",true);
 
 var trigger=op.outTrigger('trigger');
 var texOut=op.outTexture("texture_out");
@@ -137,7 +137,7 @@ var doRender=function()
         cgl.pushShader(bgShader);
         cgl.currentTextureEffect.bind();
         cgl.setTexture(0,cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
+        
         cgl.currentTextureEffect.finish();
         cgl.popShader();
     }

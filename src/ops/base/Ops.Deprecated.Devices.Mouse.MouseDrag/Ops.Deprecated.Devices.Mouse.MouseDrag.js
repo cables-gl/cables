@@ -81,9 +81,9 @@ var canvas=op.patch.cgl.canvas;
 
 var outX=op.addOutPort(new CABLES.Port(op,"x"));
 var outY=op.addOutPort(new CABLES.Port(op,"y"));
-var flipY=op.inBool("Flip Y",true);
-var kinetic=op.inBool("Inertia Movement",true);
-var limit=op.inBool("Limit");
+var flipY=op.inValueBool("Flip Y",true);
+var kinetic=op.inValueBool("Inertia Movement",true);
+var limit=op.inValueBool("Limit");
 
 var doReset=op.inTriggerButton("Reset");
 
@@ -94,7 +94,7 @@ var maxX=op.inValue("maxX",600);
 var minY=op.inValue("minY",-600);
 var maxY=op.inValue("maxY",600);
 
-var active=op.inBool("Active",true);
+var active=op.inValueBool("Active",true);
 
 var isMoving=op.outValue("isMoving");
 var isPressed=op.outValue("isPressed");
@@ -123,7 +123,7 @@ doReset.onTriggered=function()
 
     outX.set(0);
     outY.set(0);
-
+    
     if(kinetic.get())
     {
         animX.set(0);
@@ -155,7 +155,7 @@ function updateKineticY(v)
 
 function onmouseclick()
 {
-
+    
 }
 
 var movingTimeout=0;
@@ -178,7 +178,7 @@ function onmousemove(e)
     if(pressed)
     {
         seMoving();
-
+        
         if(lastX!=-1)
         {
             if(kinetic.get())
@@ -248,7 +248,7 @@ function onMouseUp(e)
         animX.release();
         animY.release();
     }
-
+    
     isPressed.set(false);
     lastX=-1;
     lastY=-1;
@@ -257,7 +257,7 @@ function onMouseUp(e)
 
 function onMouseEnter()
 {
-
+    
 }
 
 
@@ -295,7 +295,7 @@ function unbind()
     canvas.removeEventListener('mouseup', onMouseUp);
     canvas.removeEventListener('mouseenter', onMouseEnter);
     canvas.removeEventListener('mouseleave', onMouseLeave);
-
+    
     canvas.removeEventListener("touchmove", ontouchstart);
     canvas.removeEventListener("touchend", onMouseUp);
     canvas.removeEventListener('touchstart', ontouchstart);

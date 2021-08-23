@@ -8,7 +8,7 @@ let image = op.addInPort(new CABLES.Port(op, "image", CABLES.OP_PORT_TYPE_TEXTUR
 let trigger = op.outTrigger("trigger");
 
 // var vert=op.addOutPort(new CABLES.Port(op,"vertical",CABLES.OP_PORT_TYPE_FUNCTION));
-let vert = op.inBool("vertical", true);
+let vert = op.inValueBool("vertical", true);
 
 let cgl = op.patch.cgl;
 let shader = new CGL.Shader(cgl, op.name);

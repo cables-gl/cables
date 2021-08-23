@@ -1,6 +1,6 @@
 var hex=op.inValueString("Hex");
 
-var asBytes=op.inBool("Bytes");
+var asBytes=op.inValueBool("Bytes");
 
 var outR=op.outValue("R");
 var outG=op.outValue("G");

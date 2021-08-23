@@ -2,7 +2,7 @@ const anim = new CABLES.Anim();
 
 const
     exe = op.inTrigger("exe"),
-    bool = op.inBool("bool"),
+    bool = op.inValueBool("bool"),
     pease = anim.createPort(op, "easing"),
     duration = op.inValue("duration", 0.5),
     dir = op.inValueSelect("Direction", ["Animate Both", "Only True", "Only False"], "Both"),

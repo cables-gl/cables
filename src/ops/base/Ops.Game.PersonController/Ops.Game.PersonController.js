@@ -3,10 +3,10 @@ const speed=op.inValue("Speed",1);
 const outX=op.outValue("X");
 const outY=op.outValue("Y");
 const outDir=op.outValue("Dir");
-const goNorth=op.inBool("North");
-const goEast=op.inBool("East");
-const goSouth=op.inBool("South");
-const goWest=op.inBool("West");
+const goNorth=op.inValueBool("North");
+const goEast=op.inValueBool("East");
+const goSouth=op.inValueBool("South");
+const goWest=op.inValueBool("West");
 
 var lastTime=performance.now();
 var dir=0;

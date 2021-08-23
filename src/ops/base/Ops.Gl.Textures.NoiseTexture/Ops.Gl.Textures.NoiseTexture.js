@@ -1,6 +1,6 @@
 var inWidth=op.inValueInt("Width",256);
 var inHeight=op.inValueInt("Height",256);
-var inColor=op.inBool("Color",false);
+var inColor=op.inValueBool("Color",false);
 var outTex=op.outTexture("Texture");
 
 var cgl=op.patch.cgl;

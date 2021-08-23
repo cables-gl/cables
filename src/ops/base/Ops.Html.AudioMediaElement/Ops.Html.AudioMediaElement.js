@@ -1,10 +1,10 @@
 var fileName=op.inFile("file","audio");
-var inPlay=op.inBool("Play");
+var inPlay=op.inValueBool("Play");
 var volume=op.inValueSlider("Volume");
 var outPlaying=op.outValue("Playing");
 var outEnded=op.outTrigger("Has Ended");
 
-var doLoop=op.inBool("Loop");
+var doLoop=op.inValueBool("Loop");
 
 
 volume.set(1.0);

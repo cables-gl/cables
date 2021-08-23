@@ -5,7 +5,7 @@ const
     stacks = op.inValue("stacks", 5),
     radius = op.inValue("radius", 1),
     height = op.inValue("height", 2),
-    active = op.inBool("Active", true),
+    active = op.inValueBool("Active", true),
     trigger = op.outTrigger("trigger"),
     geomOut = op.outObject("geometry");
 

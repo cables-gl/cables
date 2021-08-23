@@ -8,8 +8,8 @@ const
     y3=op.inFloat("C Y",1),
     x4=op.inFloat("D X",0),
     y4=op.inFloat("D Y",1),
-    flipY=op.inBool("Flip Y"),
-    flipX=op.inBool("Flip X"),
+    flipY=op.inValueBool("Flip Y"),
+    flipX=op.inValueBool("Flip X"),
     inTexture=op.inTexture("Texture"),
     trigger=op.outTrigger('trigger');
 

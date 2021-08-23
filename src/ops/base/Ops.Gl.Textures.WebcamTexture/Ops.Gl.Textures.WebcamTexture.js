@@ -2,11 +2,11 @@
 
 const
     inFacing = op.inSwitch("Facing", ["environment", "user"], "user"),
-    flip = op.inBool("flip"),
+    flip = op.inValueBool("flip"),
     fps = op.inValueInt("fps"),
     width = op.inValueInt("Width", 640),
     height = op.inValueInt("Height", 480),
-    inActive = op.inBool("Active", true),
+    inActive = op.inValueBool("Active", true),
     textureOut = op.outTexture("texture"),
     outRatio = op.outValue("Ratio"),
     available = op.outValue("Available"),

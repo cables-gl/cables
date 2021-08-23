@@ -4,7 +4,7 @@ const amount = op.inValueSlider("Amount", 1);
 const width = op.inValue("Width", 1);
 const gType = op.inSwitch("Type", ["X", "Y", "XY", "Radial"], "X");
 const pos1 = op.inValueSlider("Pos", 0.5);
-const smoothStep = op.inBool("Smoothstep", true);
+const smoothStep = op.inValueBool("Smoothstep", true);
 
 const r = op.inValueSlider("r", Math.random());
 const g = op.inValueSlider("g", Math.random());

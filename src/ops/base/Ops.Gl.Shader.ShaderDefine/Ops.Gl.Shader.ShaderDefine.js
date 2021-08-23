@@ -2,7 +2,7 @@ const
     inShader=op.inObject("Shader"),
     inDefineName=op.inString("Name"),
     inDefineValue=op.inString("Value"),
-    inActive=op.inBool("Active")
+    inActive=op.inValueBool("Active")
     ;
 
 

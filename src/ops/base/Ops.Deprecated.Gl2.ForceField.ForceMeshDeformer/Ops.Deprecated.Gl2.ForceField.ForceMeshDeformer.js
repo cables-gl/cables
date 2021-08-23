@@ -1,6 +1,6 @@
 var render=op.inTrigger("Render");
 
-var inSmooth=op.inBool("Smooth",true);
+var inSmooth=op.inValueBool("Smooth",true);
 var next=op.outTrigger("Next");
 
 var cgl=op.patch.cgl;
@@ -51,11 +51,11 @@ render.onTriggered=function()
             });
 
         uniTime=new CGL.Uniform(shader,'f',shaderModule.prefix+'time',0);
-
+        
         uniSmooth=new CGL.Uniform(shader,'f',shaderModule.prefix+'smooth',inSmooth);
         uniModelMatrix=new CGL.Uniform(shader,'m4',shaderModule.prefix+'modelMatrix',cgl.modelMatrix());
     }
-
+    
     if(!shader)return;
 
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
@@ -87,7 +87,7 @@ render.onTriggered=function()
 
     lastTime=op.patch.freeTimer.get();
 
-    next.trigger();
+    next.trigger();    
 
 };
 

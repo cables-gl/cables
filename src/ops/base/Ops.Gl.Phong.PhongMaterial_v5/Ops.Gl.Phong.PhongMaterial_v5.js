@@ -61,7 +61,7 @@ inToggleOrenNayar.onChange = function ()
 };
 
 // * FRESNEL *
-const inToggleFresnel = op.inBool("Active", false);
+const inToggleFresnel = op.inValueBool("Active", false);
 inToggleFresnel.setUiAttribs({ "hidePort": true });
 const inFresnel = op.inValueSlider("Fresnel Intensity", 0.7);
 const inFresnelWidth = op.inFloat("Fresnel Width", 1);
@@ -136,7 +136,7 @@ const specularColors = [inShininess, inSpecularCoefficient, inSpecularMode];
 op.setPortGroup("Specular", specularColors);
 
 // * LIGHT *
-const inEnergyConservation = op.inBool("Energy Conservation", false);
+const inEnergyConservation = op.inValueBool("Energy Conservation", false);
 const inToggleDoubleSided = op.inBool("Double Sided Material", false);
 const inFalloffMode = op.inSwitch("Falloff Mode", ["A", "B", "C", "D"], "A");
 inEnergyConservation.setUiAttribs({ "hidePort": true });
@@ -184,7 +184,7 @@ op.setPortGroup("Texture Intensities", [inNormalIntensity, inAoIntensity, inSpec
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
-const discardTransPxl = op.inBool("Discard Transparent Pixels");
+const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 discardTransPxl.setUiAttribs({ "hidePort": true });
 
 op.setPortGroup("Opacity Texture", [alphaMaskSource, discardTransPxl]);

@@ -1,6 +1,6 @@
 const index=op.inValueInt("Index",0);
 const textureOut=op.outTexture("Texture");
-const inLinear=op.inBool("Smooth")
+const inLinear=op.inValueBool("Smooth")
 const arrOut=op.outArray("Color Array");
 
 var canvas = document.createElement('canvas');

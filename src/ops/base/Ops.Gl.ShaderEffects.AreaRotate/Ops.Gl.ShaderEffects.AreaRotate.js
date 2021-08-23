@@ -5,7 +5,7 @@ op.trigger=op.outTrigger("trigger");
 
 var inSize=op.inValue("Size",1);
 var inStrength=op.inValue("Strength",1);
-var inSmooth=op.inBool("Smooth",true);
+var inSmooth=op.inValueBool("Smooth",true);
 
 var x=op.inValue("x");
 var y=op.inValue("y");

@@ -7,7 +7,7 @@ const
     y = op.inValueSlider("Y Position"),
     w = op.inValueSlider("Width", 0.2),
     h = op.inValueSlider("Height", 0.2),
-    drawTex = op.inBool("Create Texture", true),
+    drawTex = op.inValueBool("Create Texture", true),
     inCanvasSize = op.inSwitch("Texture Size", TEX_SIZES, 128),
     texOut = op.outTexture("Texture Out", null, "texture"),
     value = op.outValue("Area Average Volume");

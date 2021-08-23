@@ -18,16 +18,16 @@ var LOOP_START_DEFAULT = "0";
 var LOOP_END_DEFAULT = "1m";
 var LOOP_DEFAULT = false;
 var ITERATIONS_DEFAULT = 0;
-var TIME_NOTE_ARRAY_DEFAULT =
+var TIME_NOTE_ARRAY_DEFAULT = 
 [
     {
-        "time" : "0",
-        "note" : "C3",
+        "time" : "0", 
+        "note" : "C3", 
         "velocity": 0.9
-    },
+    }, 
     {
-       "time" : "0:2",
-       "note" : "C4",
+       "time" : "0:2", 
+       "note" : "C4", 
        "velocity": 0.5
     }
 ];
@@ -40,22 +40,22 @@ var updateStatePorts = op.inTrigger("Update State Ports");
 updateStatePorts.onLinkChanged = checkAutoStart;
 var timeNoteArrayPort = op.addInPort( new CABLES.Port( op, "Time & Note Array",CABLES.OP_PORT_TYPE_ARRAY, { type: 'string', display:'editor' } ));
 timeNoteArrayPort.set(JSON.stringify(TIME_NOTE_ARRAY_DEFAULT, null, 4));
-var loopPort = op.inBool("Loop", LOOP_DEFAULT);
+var loopPort = op.inValueBool("Loop", LOOP_DEFAULT);
 var iterationsPort = op.inValue("Loop Iterations", ITERATIONS_DEFAULT);
 var loopStartPort = op.inValueString("Loop Start", LOOP_START_DEFAULT);
 var loopEndPort = op.inValueString("Loop End", LOOP_END_DEFAULT);
 var playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
-var humanizePort = op.inBool("Humanize", false);
+var humanizePort = op.inValueBool("Humanize", false);
 var humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var startTriggerPort = op.inTriggerButton("Start");
-var autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
+var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 var stopTriggerPort = op.inTriggerButton("Stop");
 var cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
 var cancelTriggerPort = op.inTriggerButton("Cancel");
-var mutePort = op.inBool("Mute", MUTE_DEFAULT);
+var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // functions
 
@@ -78,7 +78,7 @@ function cb(time, value) {
     timePort.set(time);
     if(value) {
         if(value.note) notePort.set(value.note);
-        if(value.velocity) velocityPort.set(value.velocity);
+        if(value.velocity) velocityPort.set(value.velocity);    
     }
     triggerPort.trigger();
 }
@@ -86,24 +86,24 @@ function cb(time, value) {
 function start(startTime) {
     if(node.state !== 'started') {
         if(CABLES.WEBAUDIO.isValidToneTime(startTime)) {
-            node.start(startTime);
+            node.start(startTime);    
         } else {
             op.log("Warning: Start time is not a valid tone time, starting now");
-            node.start("+0");
+            node.start("+0");    
         }
-
+        
     }
 }
 
 function stop(stopTime) {
     if(node.state !== 'stopped') {
         if(CABLES.WEBAUDIO.isValidToneTime(stopTime)) {
-            node.stop(stopTime);
+            node.stop(stopTime);    
         } else {
             op.log("Warning: Stop time is not a valid tone time, stopping now");
             node.stop("+0");
         }
-
+        
     }
 }
 
@@ -119,9 +119,9 @@ timeNoteArrayPort.onChange = function() {
     if(arr.length) {
         for(var i=0; i<arr.length; i++) {
             if(arr[i] && typeof arr[i].time !== 'undefined' && typeof arr[i].note !== 'undefined' && typeof arr[i].velocity !== 'undefined') {
-                node.add(arr[i].time, arr[i]);
+                node.add(arr[i].time, arr[i]);    
             }
-        }
+        }    
     }
 };
 
@@ -211,12 +211,12 @@ loopPort.onChange = function() {
     var iterations = iterationsPort.get();
     if(loop) {
         if(iterations >= 0) {
-            node.set("loop", iterations);
+            node.set("loop", iterations);    
         } else {
             op.log("Warning: Part will not trigger because loop is set and loop-iterations <= 0");
         }
     } else {
-        node.set("loop", false);
+        node.set("loop", false);    
     }
 };
 
@@ -231,11 +231,11 @@ iterationsPort.onChange = function() {
         iterationsN = ITERATIONS_DEFAULT;
         op.log("Warning: Invalid iterations, using: ", ITERATIONS_DEFAULT);
     }
-    if(iterationsN <= 0) {
-        iterationsN = ITERATIONS_DEFAULT;
+    if(iterationsN <= 0) { 
+        iterationsN = ITERATIONS_DEFAULT; 
         op.log("Warning: Invalid iterations, using: ", ITERATIONS_DEFAULT);
     }
-    node.set("loop", iterationsN);
+    node.set("loop", iterationsN);    
 };
 
 humanizePort.onChange = handleHumanizeChange;

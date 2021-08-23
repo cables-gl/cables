@@ -1,21 +1,22 @@
 
-let obj = op.inObject("Object");
-let result = op.outValue("Result");
+var obj=op.inObject("Object");
+var result=op.outValue("Result");
 
-let pretty = op.inBool("Pretty Print", true);
+var pretty=op.inValueBool("Pretty Print",true);
 
-pretty.onChange = update;
-obj.onChange = update;
+pretty.onChange=update;
+obj.onChange=update;
 
 function update()
 {
     try
     {
-        if (pretty.get()) result.set(JSON.stringify(obj.get(), null, 4));
-        else result.set(JSON.stringify(obj.get()));
+        if(pretty.get()) result.set(JSON.stringify(obj.get(),null,4));
+            else result.set(JSON.stringify(obj.get()));
     }
-    catch (e)
+    catch(e)
     {
         result.set("error");
     }
 }
+

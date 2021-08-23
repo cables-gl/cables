@@ -4,7 +4,7 @@ const
     amountX = op.inValue("amountX"),
     amountY = op.inValue("amountY"),
     textureMask = op.inTexture("Mask"),
-    repeat = op.inBool("Repeat", true);
+    repeat = op.inValueBool("Repeat", true);
 
 repeat.onChange = updateRepeat;
 

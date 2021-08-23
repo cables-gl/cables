@@ -1,7 +1,7 @@
 const
     render = op.inTrigger("render"),
     matrix = op.inArray("matrix"),
-    inIdentity = op.inBool("Identity", false),
+    inIdentity = op.inValueBool("Identity", false),
     trigger = op.outTrigger("trigger");
 
 const m = mat4.create();

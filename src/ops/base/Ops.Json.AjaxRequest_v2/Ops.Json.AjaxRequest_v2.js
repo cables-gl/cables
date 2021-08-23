@@ -1,5 +1,5 @@
 const filename = op.inUrl("file"),
-    jsonp = op.inBool("JsonP", false),
+    jsonp = op.inValueBool("JsonP", false),
     headers = op.inObject("headers", {}),
     inBody = op.inStringEditor("body", ""),
     inMethod = op.inDropDown("HTTP Method", ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "CONNECT", "OPTIONS", "TRACE"], "GET"),

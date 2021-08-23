@@ -1,22 +1,23 @@
 
-let exe = op.inTrigger("Exe");
+var exe=op.inTrigger("Exe");
 
-let boolean = op.inBool("Boolean", false);
+var boolean=op.inValueBool("Boolean",false);
 
-let triggerThen = op.outTrigger("then");
-let triggerElse = op.outTrigger("else");
+var triggerThen=op.outTrigger("then");
+var triggerElse=op.outTrigger("else");
 
-boolean.onChange = execBool;
-exe.onTriggered = exec;
+boolean.onChange=execBool;
+exe.onTriggered=exec;
 
 function execBool()
 {
-    if (exe.isLinked()) return;
+    if(exe.isLinked())return;
     exec();
 }
 
 function exec()
 {
-    if (!boolean.get()) triggerThen.trigger();
+    if(!boolean.get()) triggerThen.trigger();
     else triggerElse.trigger();
 }
+

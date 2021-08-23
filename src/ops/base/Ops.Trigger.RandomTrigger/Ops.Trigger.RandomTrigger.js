@@ -2,7 +2,7 @@ const
     exec = op.inTrigger("Render"),
     inNum = op.inValue("Num Times", 3),
     inSeed = op.inValue("Seed", 1),
-    inOnlyOnce = op.inBool("Only Once"),
+    inOnlyOnce = op.inValueBool("Only Once"),
     outIndex = op.outValue("Index");
 
 const linked = [];

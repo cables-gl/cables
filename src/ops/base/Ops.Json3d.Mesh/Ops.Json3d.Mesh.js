@@ -1,7 +1,7 @@
 const render = op.inTrigger("render");
 op.index = op.inValueInt("mesh index", 0);
-const draw = op.inBool("draw", true);
-const centerPivot = op.inBool("center pivot", false);
+const draw = op.inValueBool("draw", true);
+const centerPivot = op.inValueBool("center pivot", false);
 
 const next = op.outTrigger("next");
 const geometryOut = op.outObject("geometry");

@@ -1,7 +1,7 @@
 const result = op.outValue("result");
 const number1 = op.inValueFloat("number1");
 const number2 = op.inValueFloat("number2");
-const pingpong = op.inBool("pingpong");
+const pingpong = op.inValueBool("pingpong");
 
 // pointer to function
 let calculateFunction = calculateModule;

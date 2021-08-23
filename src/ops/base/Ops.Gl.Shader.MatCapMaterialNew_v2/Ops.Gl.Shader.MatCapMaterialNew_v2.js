@@ -16,9 +16,9 @@ const
     repeatY = op.inValue("Repeat Y", 1),
     offsetX = op.inValue("Offset X", 0),
     offsetY = op.inValue("Offset Y", 0),
-    calcTangents = op.inBool("calc normal tangents", true),
+    calcTangents = op.inValueBool("calc normal tangents", true),
     projectCoords = op.inValueSelect("projectCoords", ["no", "xy", "yz", "xz"], "no"),
-    ssNormals = op.inBool("Screen Space Normals"),
+    ssNormals = op.inValueBool("Screen Space Normals"),
     next = op.outTrigger("trigger"),
     shaderOut = op.outObject("Shader");
 
@@ -27,8 +27,8 @@ r.setUiAttribs({ "colorPick": true });
 const alphaMaskSource = op.inSwitch("Alpha Mask Source", ["Luminance", "R", "G", "B", "A"], "Luminance");
 alphaMaskSource.setUiAttribs({ "greyout": true });
 
-const texCoordAlpha = op.inBool("Opacity TexCoords Transform", false);
-const discardTransPxl = op.inBool("Discard Transparent Pixels");
+const texCoordAlpha = op.inValueBool("Opacity TexCoords Transform", false);
+const discardTransPxl = op.inValueBool("Discard Transparent Pixels");
 
 op.setPortGroup("Texture Opacity", [alphaMaskSource, texCoordAlpha, discardTransPxl]);
 op.setPortGroup("Texture maps", [textureDiffuse, textureNormal, textureSpec, textureSpecMatCap, textureAo, textureOpacity]);

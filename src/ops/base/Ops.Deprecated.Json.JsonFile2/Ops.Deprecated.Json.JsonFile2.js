@@ -4,7 +4,7 @@ var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ 
 var outData=op.addOutPort(new CABLES.Port(op,"data",CABLES.OP_PORT_TYPE_OBJECT));
 var isLoading=op.outValue("Is Loading",false);
 
-var jsonp=op.inBool("JsonP",false);
+var jsonp=op.inValueBool("JsonP",false);
 
 outData.ignoreValueSerialize=true;
 var patch=op.patch;
@@ -26,9 +26,9 @@ function delayedReload()
 function reload()
 {
     if(!filename.get())return;
-
+    
     patch.loading.finished(loadingId);
-
+    
     loadingId=patch.loading.start('jsonFile',''+filename.get());
     isLoading.set(true);
 
@@ -57,6 +57,6 @@ function reload()
                 isLoading.set(false);
             }
         });
-
+    
 };
 

@@ -26,17 +26,17 @@ updateStatePorts.onLinkChanged = checkAutoStart;
 var intervalPort = op.inValueString("Interval", INTERVAL_DEFAULT);
 var iterationsPort = op.inValue("Iterations", ITERATIONS_DEFAULT);
 var playbackRatePort = op.inValue("Playback Rate", PLAYBACK_RATE_DEFAULT);
-var humanizePort = op.inBool("Humanize", false);
+var humanizePort = op.inValueBool("Humanize", false);
 var humanizeTimePort = op.inValueString("Humanize Time", HUMANIZE_TIME_DEFAULT);
 var probabilityPort = op.inValueSlider("Probability", PROBABILITY_DEFAULT);
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var startTriggerPort = op.inTriggerButton("Start");
-var autoStartPort = op.inBool("Auto Start", true);
+var autoStartPort = op.inValueBool("Auto Start", true);
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 var stopTriggerPort = op.inTriggerButton("Stop");
 var cancelTimePort = op.inValueString("Cancel Time", CANCEL_TIME_DEFAULT);
 var cancelTriggerPort = op.inTriggerButton("Cancel");
-var mutePort = op.inBool("Mute", MUTE_DEFAULT);
+var mutePort = op.inValueBool("Mute", MUTE_DEFAULT);
 
 // functions
 
@@ -64,24 +64,24 @@ function cb(time) {
 function start(startTime) {
     if(node.state !== 'started') {
         if(CABLES.WEBAUDIO.isValidToneTime(startTime)) {
-            node.start(startTime);
+            node.start(startTime);    
         } else {
             op.log("Warning: Start time is not a valid tone time, starting now");
-            node.start("+0");
+            node.start("+0");    
         }
-
+        
     }
 }
 
 function stop(stopTime) {
     if(node.state !== 'stopped') {
         if(CABLES.WEBAUDIO.isValidToneTime(stopTime)) {
-            node.stop(stopTime);
+            node.stop(stopTime);    
         } else {
             op.log("Warning: Stop time is not a valid tone time, stopping now");
             node.stop("+0");
         }
-
+        
     }
 }
 
@@ -129,7 +129,7 @@ iterationsPort.onChange = function() {
         iterationsF = Infinity;
     }
     if(iterationsF <= 0) { iterationsF = Infinity; }
-    node.set("iterations", iterationsF);
+    node.set("iterations", iterationsF);    
 };
 
 mutePort.onChange = function() {

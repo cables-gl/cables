@@ -1,6 +1,6 @@
 const
     render=op.inTrigger('render'),
-    value=op.inBool("value"),
+    value=op.inValueBool("value"),
     shader=op.inObject("shader true"),
     shader2=op.inObject("shader false"),
     trigger=op.outTrigger('trigger'),

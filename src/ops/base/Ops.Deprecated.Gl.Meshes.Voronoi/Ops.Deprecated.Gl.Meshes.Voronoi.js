@@ -2,7 +2,7 @@ op.name="voronoi";
 var render=op.inTrigger('render');
 var pSites=op.inArray("Site Points");
 
-var pRender=op.inBool("Render",true);
+var pRender=op.inValueBool("Render",true);
 
 var pWidth=op.inValue("Width",2);
 var pHeight=op.inValue("Height",2);
@@ -102,10 +102,10 @@ function updateGeom()
         var mY=0;
         var check=0;
         var indices=[];
-
+        
         var w=pWidth.get();
         var h=pHeight.get();
-
+        
         if(!geoms[vid])geoms[vid]=new CGL.Geometry();
 
         var minDist=9999999;
@@ -154,20 +154,20 @@ function updateGeom()
 
             indices.push(verts.length/3-1);
         }
-
+        
         geoms[vid].vertices=verts;
         geoms[vid].verticesIndices=indices;
         geoms[vid].texCoords=new Float32Array(tc);
         geoms[vid].calculateNormals({"forceZUp":true});
-
+        
         if(!meshes[vid]) meshes[vid]=new CGL.Mesh(op.patch.cgl,geoms[vid]);
             else meshes[vid].setGeom(geoms[vid]);
             // else meshes[vid].updateVertices(geoms[vid]);
 
-
+        
         meshes[vid].pos=[sites[ic].x,sites[ic].y,0];
-
-
+        
+        
         var md=99999;
 
         for (var s = 0; s < sites.length; s++)
@@ -183,17 +183,17 @@ function updateGeom()
                 sites[ic].mdIndex=s;
             }
         }
-
+        
         // md=md*md;
         meshes[vid].scale=[sites[ic].md,sites[ic].md,sites[ic].md];
-
+        
     }
 }
 
 render.onTriggered=function()
 {
     if(needsUpdate)updateGeom();
-
+    
     shader=cgl.getShader();
     if(!shader)return;
     oldPrim=shader.glPrimitive;
@@ -212,7 +212,7 @@ render.onTriggered=function()
             cgl.popModelMatrix();
         }
     }
-
+        
 
 
 };

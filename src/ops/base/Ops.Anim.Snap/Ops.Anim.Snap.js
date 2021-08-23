@@ -11,7 +11,7 @@ let inMin = op.inValue("Min", 0);
 let inMax = op.inValue("Max", 0);
 
 let inMul = op.inValue("Value Mul", 1);
-let inEnabled = op.inBool("Enabled", true);
+let inEnabled = op.inValueBool("Enabled", true);
 
 let outVal = op.outValue("Result");
 let outDist = op.outValue("Distance");

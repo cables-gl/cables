@@ -2,7 +2,7 @@ const
     exe = op.inTrigger("exe"),
     num = op.inValueInt("num"),
     seed = op.inValueFloat("random seed", 1),
-    round = op.inBool("round", false),
+    round = op.inValueBool("round", false),
     size = op.inValueFloat("size", 10),
     scaleX = op.inValueFloat("scaleX", 1),
     scaleY = op.inValueFloat("scaleY", 1),

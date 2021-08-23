@@ -6,7 +6,7 @@ const
     outX = op.outValue("X"),
     outY = op.outValue("Y"),
     outZ = op.outValue("Z"),
-    inInteger = op.inBool("Integer", false);
+    inInteger = op.inValueBool("Integer", false);
 
 let arr = [];
 let numValues = 100;

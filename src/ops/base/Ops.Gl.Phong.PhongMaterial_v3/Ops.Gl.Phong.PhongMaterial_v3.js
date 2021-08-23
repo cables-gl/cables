@@ -25,8 +25,8 @@ b.uniform = new CGL.Uniform(shader, "f", "b", b);
 a.uniform = new CGL.Uniform(shader, "f", "a", a);
 
 a.set(1.0);
-const inColorize = op.inBool("Colorize Texture", false);
-const inDoubleSided = op.inBool("Double Sided", false);
+const inColorize = op.inValueBool("Colorize Texture", false);
+const inDoubleSided = op.inValueBool("Double Sided", false);
 
 inFesnel.uniform = new CGL.Uniform(shader, "f", "fresnel", inFesnel);
 inShininess.uniform = new CGL.Uniform(shader, "f", "specShininess", inShininess);
@@ -290,41 +290,41 @@ function bindTextures()
 }
 
 
-const toggleLambert = op.inBool("Toggle Light Shading", true);
+const toggleLambert = op.inValueBool("Toggle Light Shading", true);
 toggleLambert.setUiAttribs({ "hidePort": true });
 toggleLambert.onChange = updateToggles;
 
-const toggleDiffuse = op.inBool("Toggle Diffuse Texture", true);
+const toggleDiffuse = op.inValueBool("Toggle Diffuse Texture", true);
 toggleDiffuse.setUiAttribs({ "hidePort": true });
 toggleDiffuse.onChange = updateToggles;
 
-const toggleNormal = op.inBool("Toggle Normal Texture", true);
+const toggleNormal = op.inValueBool("Toggle Normal Texture", true);
 toggleNormal.setUiAttribs({ "hidePort": true });
 toggleNormal.onChange = updateToggles;
 
 
-// var toggleSpecular=op.inBool("Toggle Specular",true);
+// var toggleSpecular=op.inValueBool("Toggle Specular",true);
 // toggleSpecular.setUiAttribs({"hidePort":true});
 // toggleSpecular.onChange=updateToggles;
 
-const toggleAo = op.inBool("Toggle Ao Texture", true);
+const toggleAo = op.inValueBool("Toggle Ao Texture", true);
 toggleAo.setUiAttribs({ "hidePort": true });
 toggleAo.onChange = updateToggles;
 
-const toggleFalloff = op.inBool("Toggle Falloff", true);
+const toggleFalloff = op.inValueBool("Toggle Falloff", true);
 toggleFalloff.setUiAttribs({ "hidePort": true });
 toggleFalloff.onChange = updateToggles;
 
-const toggleEmissive = op.inBool("Toggle Emissive", true);
+const toggleEmissive = op.inValueBool("Toggle Emissive", true);
 toggleEmissive.setUiAttribs({ "hidePort": true });
 toggleEmissive.onChange = updateToggles;
 
 
-const toggleSpecular = op.inBool("Toggle Specular", true);
+const toggleSpecular = op.inValueBool("Toggle Specular", true);
 toggleSpecular.setUiAttribs({ "hidePort": true });
 toggleSpecular.onChange = updateToggles;
 
-const toggleFresnel = op.inBool("Toggle Fresnel", true);
+const toggleFresnel = op.inValueBool("Toggle Fresnel", true);
 toggleFresnel.setUiAttribs({ "hidePort": true });
 toggleFresnel.onChange = updateToggles;
 
