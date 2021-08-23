@@ -12,7 +12,7 @@ const inVisible = op.inBool("Visible", true);
 
 // outputs
 const siblingsPort = op.outObject("childs");
-const valuePort = op.outBool("Value", defaultValuePort.get());
+const valuePort = op.outValue("Value", defaultValuePort.get());
 
 // vars
 const el = document.createElement("div");
