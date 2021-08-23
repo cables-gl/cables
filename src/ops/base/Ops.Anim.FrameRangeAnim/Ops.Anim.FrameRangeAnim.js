@@ -1,6 +1,6 @@
 let inTime = op.inValue("Time");
 let inStr = op.inValueString("Frames");
-let inLoop = op.inValueBool("Loop");
+let inLoop = op.inBool("Loop");
 let inRewind = op.inTriggerButton("Rewind");
 let outValue = op.outValue("result time");
 let outArr = op.outArray("Expanded Frames");

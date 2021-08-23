@@ -4,8 +4,8 @@ op.trigger = op.outTrigger("trigger");
 
 const inSize = op.inValue("Size", 1);
 const inStrength = op.inValue("Strength", 1);
-const inSmooth = op.inValueBool("Smooth", true);
-const inToZero = op.inValueBool("Keep Min Size", true);
+const inSmooth = op.inBool("Smooth", true);
+const inToZero = op.inBool("Keep Min Size", true);
 
 const cgl = op.patch.cgl;
 

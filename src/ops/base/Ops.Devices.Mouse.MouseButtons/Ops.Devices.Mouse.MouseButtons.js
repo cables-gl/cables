@@ -12,7 +12,7 @@ const
     triggerMouseUpMiddle = op.outTrigger("Mouse Up Middle"),
     triggerMouseUpRight = op.outTrigger("Mouse Up Right"),
     area = op.inValueSelect("Area", ["Canvas", "Document"], "Canvas"),
-    active = op.inValueBool("Active", true);
+    active = op.inBool("Active", true);
 
 const cgl = op.patch.cgl;
 let listenerElement = null;

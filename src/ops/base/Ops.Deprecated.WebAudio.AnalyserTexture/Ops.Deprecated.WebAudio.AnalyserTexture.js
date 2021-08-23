@@ -229,7 +229,7 @@ function blurTexture()
 
 var shaderMirror=new CGL.Shader(cgl);
 
-var doMirror=op.inValueBool("Mirror");
+var doMirror=op.inBool("Mirror");
 var mirrorWidth=op.addInPort(new CABLES.Port(op,"mirror width",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var mirrorOffset=op.addInPort(new CABLES.Port(op,"mirror offset",CABLES.OP_PORT_TYPE_VALUE,{display:'range'}));
 var mirrorFlip=op.addInPort(new CABLES.Port(op,"mirror flip",CABLES.OP_PORT_TYPE_VALUE,{display:'bool'}));

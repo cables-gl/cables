@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     inner = op.inValueSlider("Radius Inner", 0),
     outer = op.inValueSlider("Radius Outer", 1),
-    crop = op.inValueBool("Crop", false),
+    crop = op.inBool("Crop", false),
     trigger = op.outTrigger("trigger"),
     cgl = op.patch.cgl;
 

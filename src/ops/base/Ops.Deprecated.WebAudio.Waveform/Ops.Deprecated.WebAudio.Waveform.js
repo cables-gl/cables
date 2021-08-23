@@ -14,9 +14,9 @@ const renderPort = op.inTrigger("Render");
 const audioBufferPort = op.inObject("Audio Buffer");
 const widthPort = op.inValue("Width", 30);
 const samplesPerPixelPort = op.inValue("Samples Per Pixel", 10000);
-const showBottomHalfPort = op.inValueBool("Show bottom half", true);
-const centerPort = op.inValueBool("Center Origin", true);
-const renderActivePort = op.inValueBool("Render Active", true);
+const showBottomHalfPort = op.inBool("Show bottom half", true);
+const centerPort = op.inBool("Center Origin", true);
+const renderActivePort = op.inBool("Render Active", true);
 
 // output
 const nextPort = op.outTrigger("Next");

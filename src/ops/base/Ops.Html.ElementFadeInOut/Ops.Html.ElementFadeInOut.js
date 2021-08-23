@@ -1,5 +1,5 @@
 const inEle = op.inObject("HTML Element");
-const inVisible = op.inValueBool("Visible", true);
+const inVisible = op.inBool("Visible", true);
 const inDuration = op.inValue("Duration", 0.5);
 const inOpacity = op.inValue("Opacity", 1);
 const outShowing = op.outValueBool("Is Showing", false);

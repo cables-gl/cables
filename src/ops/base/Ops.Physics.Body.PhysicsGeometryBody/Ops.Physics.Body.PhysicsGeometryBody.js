@@ -4,7 +4,7 @@ const
     inName = op.inString("Name", ""),
     inMass = op.inValue("Mass", 0),
     inGeom = op.inObject("Geometry"),
-    doRender = op.inValueBool("Render", true),
+    doRender = op.inBool("Render", true),
     inReset = op.inTriggerButton("Reset"),
     next = op.outTrigger("Next"),
     outX = op.outValue("X"),

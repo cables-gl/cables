@@ -3,22 +3,22 @@ CABLES.WEBAUDIO.createAudioContext(op);
 
 // defaults
 var TYPES = [
-    "sine", 
-    "sine2", 
-    "sine3", 
-    "sine4", 
-    "sine5", 
-    "sine6", 
-    "sine7", 
-    "sine8", 
-    "square", 
-    "square2", 
-    "square3", 
-    "square4", 
-    "square5", 
-    "square6", 
-    "square7", 
-    "square8", 
+    "sine",
+    "sine2",
+    "sine3",
+    "sine4",
+    "sine5",
+    "sine6",
+    "sine7",
+    "sine8",
+    "square",
+    "square2",
+    "square3",
+    "square4",
+    "square5",
+    "square6",
+    "square7",
+    "square8",
     "triangle",
     "triangle2",
     "triangle3",
@@ -64,12 +64,12 @@ var typePort = op.addInPort( new CABLES.Port( op, "Type", CABLES.OP_PORT_TYPE_VA
 typePort.set("sine");
 var phasePort = op.addInPort( new CABLES.Port( op, "Phase", CABLES.OP_PORT_TYPE_VALUE, { 'display': 'range', 'min': PHASE_MIN, 'max': PHASE_MAX }, PHASE_DEFAULT ));
 phasePort.set(PHASE_DEFAULT);
-var syncFrequencyPort = op.inValueBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
+var syncFrequencyPort = op.inBool("Sync Frequency", SYNC_FREQUENCY_DEFAULT);
 var startPort = op.addInPort( new CABLES.Port( op, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var stopPort = op.addInPort( new CABLES.Port( op, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
-var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+var autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 var volumePort = CABLES.WEBAUDIO.createAudioParamInPort(op, "Volume", node.volume, {'display': 'range', 'min': VOLUME_MIN, 'max': VOLUME_MAX}, VOLUME_DEFAULT);
 //volumePort.set(VOLUME_DEFAULT);
 
@@ -128,7 +128,7 @@ function stop() {
 
 function setNodeValue(key, value) {
     try{
-        node.set(key, value);    
+        node.set(key, value);
     } catch(e) {
         op.log("ERROR!", e);
     }

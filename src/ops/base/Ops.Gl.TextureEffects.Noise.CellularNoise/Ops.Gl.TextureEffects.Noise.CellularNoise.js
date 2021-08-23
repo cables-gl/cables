@@ -7,7 +7,7 @@ const
     z = op.inValue("Z", 0),
     scale = op.inValue("Scale", 3),
     trigger = op.outTrigger("trigger"),
-    tile = op.inValueBool("Tileable", false);
+    tile = op.inBool("Tileable", false);
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);

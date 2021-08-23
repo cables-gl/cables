@@ -1,8 +1,8 @@
 const
     geometry=op.inObject("Geometry"),
     outGeom=op.outObject("Result"),
-    doFlip=op.inValueBool("Flip",true),
-    doNormalize=op.inValueBool("Normalize",true);
+    doFlip=op.inBool("Flip",true),
+    doNormalize=op.inBool("Normalize",true);
 
 doFlip.onChange=
     doNormalize.onChange=

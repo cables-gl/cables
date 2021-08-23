@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     fragmentShader = op.inStringEditor("Fragment Code"),
     vertexShader = op.inStringEditor("Vertex Code"),
-    asMaterial = op.inValueBool("Use As Material", true),
+    asMaterial = op.inBool("Use As Material", true),
     trigger = op.outTrigger("trigger"),
     outShader = op.outObject("Shader", null, "shader");
 

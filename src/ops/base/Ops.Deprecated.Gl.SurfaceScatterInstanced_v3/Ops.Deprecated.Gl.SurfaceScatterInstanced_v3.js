@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("Render"),
-    inDraw = op.inValueBool("draw", true),
+    inDraw = op.inBool("draw", true),
     inNum = op.inValueInt("Num", 100),
     inGeomSurface = op.inObject("Geom Surface"),
     inGeom = op.inObject("Geometry"),
@@ -9,9 +9,9 @@ const
     seed = op.inValueFloat("Random Seed"),
     inSizeMin = op.inValueSlider("Size min", 1.0),
     inSizeMax = op.inValueSlider("Size max", 1.0),
-    inDoLimit = op.inValueBool("Limit", false),
+    inDoLimit = op.inBool("Limit", false),
     inLimit = op.inValueInt("Limit Num", 0),
-    inRotateRandom = op.inValueBool("Random Rotate", true),
+    inRotateRandom = op.inBool("Random Rotate", true),
     outArrPositions = op.outArray("Positions")
     // outArrRotations=op.outArray("Rotation")
     ;

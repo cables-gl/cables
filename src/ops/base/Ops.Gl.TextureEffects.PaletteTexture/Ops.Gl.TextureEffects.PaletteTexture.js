@@ -1,6 +1,6 @@
 const
     arrayInPalette = op.inArray("Palette array"),
-    inLinear=op.inValueBool("Smooth"),
+    inLinear=op.inBool("Smooth"),
     arrOut=op.outArray("Color Array"),
     textureOut=op.outTexture("Texture");
 

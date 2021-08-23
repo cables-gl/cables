@@ -1,7 +1,7 @@
 
 var geometry=op.inObject("Geometry");
-var smoothNormals=op.inValueBool("Smooth");
-var forceZUp=op.inValueBool("Force Z Up");
+var smoothNormals=op.inBool("Smooth");
+var forceZUp=op.inBool("Force Z Up");
 
 var geomOut=op.outObject("Geometry Out");
 

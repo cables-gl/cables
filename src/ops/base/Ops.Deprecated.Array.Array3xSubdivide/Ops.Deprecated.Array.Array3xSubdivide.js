@@ -1,6 +1,6 @@
 const inArr=op.inArray("Points");
 const subDivs=op.inValue("Num Subdivs",5);
-const bezier=op.inValueBool("Smooth",true);
+const bezier=op.inBool("Smooth",true);
 
 const result=op.outArray("Result");
 
@@ -8,7 +8,7 @@ subDivs.onChange=calc;
 bezier.onChange=calc;
 inArr.onChange=calc;
 
-function ip(x0,x1,x2,t)//Bezier 
+function ip(x0,x1,x2,t)//Bezier
 {
     var r =(x0 * (1-t) * (1-t) + 2 * x1 * (1 - t)* t + x2 * t * t);
     return r;
@@ -25,9 +25,9 @@ function calc()
     }
     var subd=Math.floor(subDivs.get());
     var inPoints=inArr.get();
-    
+
     if(inPoints.length<3)return;
-    
+
     var i=0;
     var j=0;
     var k=0;
@@ -85,7 +85,7 @@ function calc()
             }
         }
     }
-    
+
     // op.log('subdiv ',inPoints.length,arr.length);
     // op.log(arr);
     result.set(null);

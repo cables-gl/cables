@@ -4,10 +4,10 @@ const innerRadius = op.inValueSlider("innerRadius", 0);
 const segments = op.inValueInt("segments", 40);
 const percent = op.inValueSlider("percent", 1);
 const steps = op.inValue("steps", 0);
-const invertSteps = op.inValueBool("invertSteps", false);
+const invertSteps = op.inBool("invertSteps", false);
 const mapping = op.inSwitch("mapping", ["flat", "round"]);
-const drawSpline = op.inValueBool("Spline", false);
-const inDraw = op.inValueBool("Draw", true);
+const drawSpline = op.inBool("Spline", false);
+const inDraw = op.inBool("Draw", true);
 const trigger = op.outTrigger("trigger");
 const geomOut = op.outObject("geometry", null, "geometry");
 

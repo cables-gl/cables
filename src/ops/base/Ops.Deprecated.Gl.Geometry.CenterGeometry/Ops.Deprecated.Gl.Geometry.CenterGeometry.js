@@ -1,32 +1,29 @@
 
-var geometry=op.addInPort(new CABLES.Port(op,"Geometry",CABLES.OP_PORT_TYPE_OBJECT));
+let geometry = op.addInPort(new CABLES.Port(op, "Geometry", CABLES.OP_PORT_TYPE_OBJECT));
 
-var x=op.inValueBool("x");
-var y=op.inValueBool("y");
-var z=op.inValueBool("z");
+let x = op.inBool("x");
+let y = op.inBool("y");
+let z = op.inBool("z");
 
 
-var outGeom=op.outObject("Result");
+let outGeom = op.outObject("Result");
 
-x.onChange=update;
-y.onChange=update;
-z.onChange=update;
-geometry.onChange=update;
+x.onChange = update;
+y.onChange = update;
+z.onChange = update;
+geometry.onChange = update;
 
 
 function update()
 {
-    var oldGeom=geometry.get();
+    let oldGeom = geometry.get();
 
 
-
-
-    if(oldGeom)
+    if (oldGeom)
     {
-        var geom=oldGeom.copy();
-        geom.center(x.get(),y.get(),z.get());
-       
+        let geom = oldGeom.copy();
+        geom.center(x.get(), y.get(), z.get());
+
         outGeom.set(geom);
     }
-
 }

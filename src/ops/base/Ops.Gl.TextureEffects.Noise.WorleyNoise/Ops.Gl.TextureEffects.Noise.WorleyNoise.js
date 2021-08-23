@@ -7,7 +7,7 @@ let x = op.inValue("X", 0);
 let y = op.inValue("Y", 0);
 let z = op.inValue("Z", 0);
 let scale = op.inValue("Scale", 22);
-let inv = op.inValueBool("Invert", true);
+let inv = op.inBool("Invert", true);
 
 let rangeA = op.inValueSlider("RangeA", 0.4);
 let rangeB = op.inValueSlider("RangeB", 0.5);
@@ -41,7 +41,7 @@ function updateInvert()
     else shader.removeDefine("DO_INVERT");
 }
 
-let tile = op.inValueBool("Tileable", false);
+let tile = op.inBool("Tileable", false);
 tile.onChange = updateTileable;
 function updateTileable()
 {

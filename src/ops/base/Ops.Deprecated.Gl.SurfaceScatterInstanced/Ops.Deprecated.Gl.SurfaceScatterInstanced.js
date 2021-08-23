@@ -8,7 +8,7 @@ var inVariety=op.inValueSelect("Selection",["Random","Sequential"],"Random");
 var inNum=op.inValue("Num",100);
 var inSizeMin=op.inValueSlider("Size min",1.0);
 var inSizeMax=op.inValueSlider("Size max",1.0);
-var inRotateRandom=op.inValueBool("Random Rotate",true);
+var inRotateRandom=op.inBool("Random Rotate",true);
 var seed=op.addInPort(new CABLES.Port(op,"Random Seed"));
 
 var mod=null;
@@ -46,7 +46,7 @@ function setup()
     if(!geom) return;
 
     Math.randomSeed=seed.get();
-    
+
     var distMode=0;
     if(inDistribution.get()=='Triangle Center')distMode=1;
     if(inDistribution.get()=='Triangle Side')distMode=2;
@@ -69,7 +69,7 @@ function setup()
             }
 
             mat4.identity(m);
-            
+
             if(distMode==0)
             {
                 mat4.translate(m,m,
@@ -91,7 +91,7 @@ function setup()
             } else if(distMode==2)
             {
                 var which=Math.round(Math.seededRandom()*3.0);
-                
+
                 var whichA=which;
                 var whichB=which+1;
                 if(whichB>2)whichB=0;
@@ -155,7 +155,7 @@ function setup()
         console.error("geom is not indexed");
     }
 
-    if(op.patch.cgl.glVersion>=2) 
+    if(op.patch.cgl.glVersion>=2)
     {
         mesh.numInstances=num;
         if(num>0)mesh.addAttribute('instMat',matrixArray,16);
@@ -181,7 +181,7 @@ function setup()
 var srcHeadVert=''
     .endl()+'UNI float do_instancing;'
     // .endl()+'UNI float MOD_scale;'
-    
+
     .endl()+'#ifdef INSTANCING'
     .endl()+'   IN mat4 instMat;'
     .endl()+'   OUT mat4 instModelMat;'
@@ -231,7 +231,7 @@ function doRender()
     if(!inGeomSurface.get())return;
     if(!geom.get())return;
 
-    if(op.patch.cgl.glVersion>=2) 
+    if(op.patch.cgl.glVersion>=2)
     {
         if(cgl.getShader() && cgl.getShader()!=shader)
         {
@@ -240,7 +240,7 @@ function doRender()
                 shader.removeModule(mod);
                 shader=null;
             }
-    
+
             shader=cgl.getShader();
             if(!shader.hasDefine('INSTANCING'))
             {
@@ -252,7 +252,7 @@ function doRender()
                         srcHeadVert: srcHeadVert,
                         srcBodyVert: srcBodyVert
                     });
-    
+
                 shader.define('INSTANCING');
                 uniDoInstancing=new CGL.Uniform(shader,'f','do_instancing',0);
             }
@@ -262,7 +262,7 @@ function doRender()
             }
             setup();
         }
-    
+
         if(mesh.numInstances>0)
         {
             uniDoInstancing.setValue(1);
@@ -273,8 +273,8 @@ function doRender()
     else
     {
         // fallback - SLOW
- 
-        
+
+
         for(var i=0;i<matrixArray.length;i+=16)
         {
             op.patch.cgl.pushModelMatrix();
@@ -287,7 +287,7 @@ function doRender()
             mesh.render(cgl.getShader());
             op.patch.cgl.popModelMatrix();
         }
-        
+
         // console.log(i/16);
     }
 }

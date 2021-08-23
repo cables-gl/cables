@@ -1,7 +1,7 @@
 const render = op.inTrigger("Render");
 const trigger = op.outTrigger("Next");
 const msaa = op.inValueSelect("MSAA", ["none", "2x", "4x", "8x"], "none");
-const useVPSize = op.inValueBool("use viewport size");
+const useVPSize = op.inBool("use viewport size");
 
 const width = op.inValueInt("texture width");
 const height = op.inValueInt("texture height");
@@ -14,9 +14,9 @@ const tex3 = op.outTexture("texture 3");
 
 const texDepth = op.outTexture("textureDepth");
 
-const fpTexture = op.inValueBool("HDR");
-const depth = op.inValueBool("Depth", true);
-const clear = op.inValueBool("Clear", true);
+const fpTexture = op.inBool("HDR");
+const depth = op.inBool("Depth", true);
+const clear = op.inBool("Clear", true);
 
 op.requirements = [CABLES.Requirements.WEBGL2];
 

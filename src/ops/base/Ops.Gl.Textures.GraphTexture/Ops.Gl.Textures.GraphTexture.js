@@ -3,7 +3,7 @@ const
     value=this.inValueFloat("value"),
     index=this.inValueInt("index"),
     inReset=this.inTriggerButton("reset"),
-    inShowMinMax=op.inValueBool("Show Min/Max"),
+    inShowMinMax=op.inBool("Show Min/Max"),
     inSeed=op.inValueFloat("Color Random Seed",23),
     inWidth=op.inValueInt("Texture Width",512),
     inHeight=op.inValueInt("Texture Height",512),

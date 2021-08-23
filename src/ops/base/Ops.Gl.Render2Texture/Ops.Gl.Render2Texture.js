@@ -2,7 +2,7 @@ const cgl = op.patch.cgl;
 
 const
     render = op.inTrigger("render"),
-    useVPSize = op.inValueBool("use viewport size", true),
+    useVPSize = op.inBool("use viewport size", true),
     width = op.inValueInt("texture width", 512),
     height = op.inValueInt("texture height", 512),
     aspect = op.inBool("Auto Aspect", false),
@@ -12,9 +12,9 @@ const
     trigger = op.outTrigger("trigger"),
     tex = op.outTexture("texture"),
     texDepth = op.outTexture("textureDepth"),
-    fpTexture = op.inValueBool("HDR"),
-    depth = op.inValueBool("Depth", true),
-    clear = op.inValueBool("Clear", true);
+    fpTexture = op.inBool("HDR"),
+    depth = op.inBool("Depth", true),
+    clear = op.inBool("Clear", true);
 
 let fb = null;
 let reInitFb = true;

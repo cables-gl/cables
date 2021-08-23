@@ -8,8 +8,8 @@ const
     num = op.inValue("Num", 50),
     seed = op.inValue("seed", 0),
     fill = op.inValueSelect("Fill", ["None", "Random", "Gradient", "Gray"], "Random"),
-    drawIsoLines = op.inValueBool("Draw Isolines", false),
-    drawDistance = op.inValueBool("Draw Distance", false),
+    drawIsoLines = op.inBool("Draw Isolines", false),
+    drawDistance = op.inBool("Draw Distance", false),
     centerSize = op.inValueSlider("Draw Center", 0);
 
 const cgl = op.patch.cgl;

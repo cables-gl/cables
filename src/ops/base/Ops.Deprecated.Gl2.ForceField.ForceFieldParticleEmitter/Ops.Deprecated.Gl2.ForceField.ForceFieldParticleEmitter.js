@@ -8,7 +8,7 @@ var numPoints=op.inValue("Particles",300);
 var speed=op.inValue("Speed",0.2);
 var lifetime=op.inValue("Lifetime",5);
 var fadeInOut=op.inValueSlider("Fade Birth Death",0.2);
-var show=op.inValueBool("Show");
+var show=op.inBool("Show");
 var posX=op.inValue("Pos X");
 var posY=op.inValue("Pos Y");
 var posZ=op.inValue("Pos Z");
@@ -66,17 +66,17 @@ function doReset()
 
     if(!geom)geom=new CGL.Geometry();
     geom.setPointVertices(verts);
-    
+
     for(i=0;i<geom.texCoords.length;i+=2)
     {
         geom.texCoords[i]=Math.random();
         geom.texCoords[i+1]=Math.random();
     }
 
-    if(!mesh) 
+    if(!mesh)
     {
         mesh =new CGL.Mesh(cgl,geom,cgl.gl.POINTS);
-    
+
         mesh.addVertexNumbers=true;
         mesh._verticesNumbers=null;
 
@@ -91,7 +91,7 @@ function doReset()
     mesh.setGeom(geom);
 
     // mesh.updateVertices(geom);
-    
+
     // op.log("set geom",mesh._attributes.length);
     // op.log("set geom",mesh._attributes.length);
 
@@ -103,22 +103,22 @@ function doReset()
     // buffB.numItems = bufferB.length/3;
 
     mesh.setAttribute("rndpos",bufferB,3);
-    
+
 
     op.log("Reset particles",num,numPoints.get());
-    
+
     mesh.removeFeedbacks();
 
 
 
     var life=new Float32Array(num);
-    for(i=0;i<num;i+=3) 
+    for(i=0;i<num;i+=3)
     {
         life[i]=op.patch.freeTimer.get()-Math.random()*lifetime.get();
         life[i+1]=op.patch.freeTimer.get();
         life[i+2]=op.patch.freeTimer.get();
     }
-    
+
     // console.log(op.patch.freeTimer.get(),life[0],bufferB[0]);
 
     // mesh.setAttribute("life",life,3);
@@ -126,8 +126,8 @@ function doReset()
 
 
 
-    
-    
+
+
     mesh.setFeedback(
         mesh.setAttribute("inPos",bufferB,3),
         "outPos",bufferB );
@@ -140,11 +140,11 @@ function doReset()
 
         // feebackOutpos.buffer=buffB;
 
-    
-    
+
+
     // var timeOffsetArr=new Float32Array(num/3);
     // for(i=0;i<num;i++)timeOffsetArr[i]=Math.random();
-    
+
     // mesh.setAttribute("timeOffset",timeOffsetArr,1);
 
     // if(feebackOutpos)feebackOutpos.buffer=buffB;
@@ -204,13 +204,13 @@ render.onTriggered=function()
         uniTimeDiff=new CGL.Uniform(shader,'f',shaderModule.prefix+'timeDiff',0);
         uniLifetime=new CGL.Uniform(shader,'f',shaderModule.prefix+'lifeTime',lifetime);
         uniFadeInOut=new CGL.Uniform(shader,'f',shaderModule.prefix+'fadeinout',fadeInOut);
-        
-        
-        
+
+
+
         uniSpawnFrom=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnFrom',0);
         uniSpawnTo=new CGL.Uniform(shader,'f',shaderModule.prefix+'spawnTo',0);
     }
-    
+
     if(!shader)return;
 
     for(var i=0;i<CABLES.forceFieldForces.length;i++)
@@ -240,10 +240,10 @@ render.onTriggered=function()
     uniSizeZ.setValue(inSizeZ.get());
     uniTimeDiff.setValue(timeDiff*(speed.get()));
     uniTime.setValue(time);
-    
-    
+
+
     uniPos.setValue([posX.get(),posY.get(),posZ.get()]);
-    
+
     if(mesh) mesh.render(shader);
 
     // console.log( '1',mesh._bufVertexAttrib );
@@ -253,8 +253,8 @@ render.onTriggered=function()
     // mesh._bufVertexAttrib.buffer=feebackOutpos.buffer;
     // feebackOutpos.buffer=t;
     lastTime=op.patch.freeTimer.get();
-    
-    
+
+
     if(show.get())
     {
         cgl.pushModelMatrix();
@@ -269,14 +269,14 @@ render.onTriggered=function()
     var numSpawn=perSecond*Math.min(1/33,timeDiff);
     uniSpawnFrom.setValue(particleSpawnStart);
     uniSpawnTo.setValue(particleSpawnStart+numSpawn);
-    
+
     // op.log(particleSpawnStart,particleSpawnStart+numSpawn);
     // if(numSpawn>30)
     // console.log("should spawn",numSpawn);
     particleSpawnStart+=numSpawn;
 
-    
-    
+
+
 
 
 };

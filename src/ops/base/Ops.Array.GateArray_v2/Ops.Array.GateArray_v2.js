@@ -1,4 +1,4 @@
-const passThrough = op.inValueBool("Pass Through", true),
+const passThrough = op.inBool("Pass Through", true),
     arrayIn = op.inArray("Array in"),
     arrayOut = op.outArray("Array Out");
 

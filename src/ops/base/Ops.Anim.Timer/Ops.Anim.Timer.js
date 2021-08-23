@@ -1,16 +1,16 @@
-var playPause=op.inValueBool("Play",true);
-var reset=op.inTriggerButton("Reset");
-var outTime=op.outValue("Time");
-var inSpeed=op.inValue("Speed",1);
+let playPause = op.inBool("Play", true);
+let reset = op.inTriggerButton("Reset");
+let outTime = op.outValue("Time");
+let inSpeed = op.inValue("Speed", 1);
 
-var timer=new CABLES.Timer();
+let timer = new CABLES.Timer();
 
-playPause.onChange=setState;
+playPause.onChange = setState;
 setState();
 
 function setState()
 {
-    if(playPause.get())
+    if (playPause.get())
     {
         timer.play();
         op.patch.addOnAnimFrame(op);
@@ -22,15 +22,14 @@ function setState()
     }
 }
 
-reset.onTriggered=function()
+reset.onTriggered = function ()
 {
     timer.setTime(0);
     outTime.set(0);
 };
 
-op.onAnimFrame=function()
+op.onAnimFrame = function ()
 {
     timer.update();
-    outTime.set(timer.get()*inSpeed.get());
-
+    outTime.set(timer.get() * inSpeed.get());
 };

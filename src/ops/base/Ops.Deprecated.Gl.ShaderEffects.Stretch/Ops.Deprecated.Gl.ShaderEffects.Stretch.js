@@ -9,7 +9,7 @@ var axis=op.inValueSelect("Axis",["X","Y","Z"],"X");
 var min=op.inValue("min",1);
 var max=op.inValue("max",0);
 
-var inUpdateNormals=op.inValueBool("Update Normals");
+var inUpdateNormals=op.inBool("Update Normals");
 
 
 var srcHeadVert=attachments.stretchHead_vert||'';
@@ -35,7 +35,7 @@ function updateNormals()
     if(shader)
         if(inUpdateNormals.get()) shader.define("RESTRICT_UPDATENORMALS");
             else shader.removeDefine("RESTRICT_UPDATENORMALS");
-    
+
 }
 
 function updateAxis()
@@ -45,7 +45,7 @@ function updateAxis()
         shader.removeDefine("RESTRICT_AXIS_X");
         shader.removeDefine("RESTRICT_AXIS_Y");
         shader.removeDefine("RESTRICT_AXIS_Z");
-        
+
         if(axis.get()=="X") shader.define("RESTRICT_AXIS_X");
         if(axis.get()=="Y") shader.define("RESTRICT_AXIS_Y");
         if(axis.get()=="Z") shader.define("RESTRICT_AXIS_Z");
@@ -81,7 +81,7 @@ op.render.onTriggered=function()
         updateNormals();
     }
 
-    
+
     if(!shader)return;
 
     op.trigger.trigger();

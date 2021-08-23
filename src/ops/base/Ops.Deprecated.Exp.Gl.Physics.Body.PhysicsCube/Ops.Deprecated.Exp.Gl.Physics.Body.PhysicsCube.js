@@ -1,7 +1,7 @@
 var exec=op.inTrigger("Exec");
 var inMass=op.inValue("Mass");
 
-var doRender=op.inValueBool("Render",true);
+var doRender=op.inBool("Render",true);
 
 
 var posX=op.inValue("Pos X");

@@ -1,7 +1,7 @@
 var inExec=op.inTriggerButton("Calculate");
 var inArr=op.inArray("Array3x");
 var inDist=op.inValue("Distance");
-var inNormalized=op.inValueBool("Normalized");
+var inNormalized=op.inBool("Normalized");
 
 var outNext=op.outTrigger("Next");
 var outX=op.outValue("X");

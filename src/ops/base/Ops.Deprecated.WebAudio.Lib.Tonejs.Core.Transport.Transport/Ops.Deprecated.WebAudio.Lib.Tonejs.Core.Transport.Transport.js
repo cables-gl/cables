@@ -29,7 +29,7 @@ var ppqPort = op.inValue("Pulses Per Quarter Note");
 var startPort = op.addInPort( new CABLES.Port( this, "Start",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var startTimePort = op.inValueString("Start Time", START_TIME_DEFAULT);
 var startOffsetPort = op.inValueString("Start Offset", START_OFFSET_DEFAULT);
-var autoStartPort = op.inValueBool("Auto Start", AUTO_START_DEFAULT);
+var autoStartPort = op.inBool("Auto Start", AUTO_START_DEFAULT);
 var stopPort = op.addInPort( new CABLES.Port( this, "Stop",CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" } ));
 var stopTimePort = op.inValueString("Stop Time", STOP_TIME_DEFAULT);
 
@@ -105,13 +105,13 @@ updatePort.onLinkChanged = function() {
 bpmPort.onChange = function() {
     var bpm = bpmPort.get();
     if(bpm && bpm >= BPM_MIN && bpm <= BPM_MAX) {
-        Tone.Transport.set("bpm", bpmPort.get());        
+        Tone.Transport.set("bpm", bpmPort.get());
     }
 };
 
 swingPort.onChange = function() {
     try {
-        Tone.Transport.set("swing", swingPort.get());    
+        Tone.Transport.set("swing", swingPort.get());
     } catch(e) {}
 };
 

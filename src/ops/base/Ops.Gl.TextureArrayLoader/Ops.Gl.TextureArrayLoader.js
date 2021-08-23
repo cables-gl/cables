@@ -2,7 +2,7 @@ const USE_LEFT_PAD_DEFAULT = false;
 
 // var filename=op.addInPort(new CABLES.Port(op,"file",CABLES.OP_PORT_TYPE_VALUE,{ display:'file',type:'string',filter:'image' } ));
 const filename = op.inValueString("url");
-const leftPadFilename = op.inValueBool("Left Pad", USE_LEFT_PAD_DEFAULT);
+const leftPadFilename = op.inBool("Left Pad", USE_LEFT_PAD_DEFAULT);
 const numberLengthPort = op.inValue("Num Digits", 3);
 numberLengthPort.setUiAttribs({ "hidePort": !USE_LEFT_PAD_DEFAULT, "greyout": !USE_LEFT_PAD_DEFAULT });
 

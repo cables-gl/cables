@@ -4,19 +4,19 @@ const DEFAULT_HEIGHT = 480;
 const
     inTrigger = op.inTrigger("Render"),
     inStart = op.inTriggerButton("Start webcam"),
-    inActive = op.inValueBool("Generate Texture", true),
+    inActive = op.inBool("Generate Texture", true),
     inInputDevices = op.inDropDown("Webcam Input", ["None"]),
     inFacing = op.inSwitch("Facing", ["environment", "user"], "environment"),
     inWidth = op.inValueInt("Requested Width", 640),
     inHeight = op.inValueInt("Requested Height", 480),
 
-    flip = op.inValueBool("Flip", false),
+    flip = op.inBool("Flip", false),
 
-    inAsDOM = op.inValueBool("Show HTML Element", false),
+    inAsDOM = op.inBool("Show HTML Element", false),
     textureOut = op.outTexture("Texture"),
     inCss = op.inStringEditor("CSS", "z-index:99999;position:absolute;"),
-    htmlFlipX = op.inValueBool("Flip X", false),
-    htmlFlipY = op.inValueBool("Flip Y", false),
+    htmlFlipX = op.inBool("Flip X", false),
+    htmlFlipY = op.inBool("Flip Y", false),
 
     outRatio = op.outNumber("Ratio"),
     available = op.outBool("Available"),

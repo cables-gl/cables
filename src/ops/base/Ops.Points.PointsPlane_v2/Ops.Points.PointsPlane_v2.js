@@ -4,7 +4,7 @@ const
     inHeight = op.inFloat("Width", 2),
     inWidth = op.inFloat("Height", 2),
     inRowOffset = op.inFloat("Row Offset", 0),
-    inCenter = op.inValueBool("Center", true),
+    inCenter = op.inBool("Center", true),
     outArr = op.outArray("Result"),
     outTotalPoints = op.outNumber("Total points"),
     outArrayLength = op.outNumber("Array length"),

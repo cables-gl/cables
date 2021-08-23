@@ -1,8 +1,8 @@
 const exec = op.inTrigger("Exec"),
 
     reset = op.inTriggerButton("Reset"),
-    doDraw = op.inValueBool("Draw Bodies", true),
-    groundPlane = op.inValueBool("Groundplane", false),
+    doDraw = op.inBool("Draw Bodies", true),
+    groundPlane = op.inBool("Groundplane", false),
 
     gravX = op.inValue("Gravity X"),
     gravY = op.inValue("Gravity Y", -9.82),

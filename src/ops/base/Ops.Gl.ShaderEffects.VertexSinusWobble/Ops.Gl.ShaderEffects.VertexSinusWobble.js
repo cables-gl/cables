@@ -11,9 +11,9 @@ const amount = op.inValueSlider("amount", 1.0);
 const phase = op.inValueFloat("phase", 1);
 const mul = op.inValueFloat("mul", 3);
 const add = op.inValueFloat("add", 0);
-const toAxisX = op.inValueBool("axisX", true);
-const toAxisY = op.inValueBool("axisY", true);
-const toAxisZ = op.inValueBool("axisZ", true);
+const toAxisX = op.inBool("axisX", true);
+const toAxisY = op.inBool("axisY", true);
+const toAxisZ = op.inBool("axisZ", true);
 let src = op.inValueSelect("Source", [
     "X * Z + Time",
     "X * Y + Time",

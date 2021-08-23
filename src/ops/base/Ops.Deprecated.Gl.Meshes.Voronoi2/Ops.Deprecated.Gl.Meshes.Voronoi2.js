@@ -2,9 +2,9 @@
 var render=op.inTrigger('render');
 var pSites=op.inArray("Site Points");
 
-var pRender=op.inValueBool("Render",true);
-var pInvert=op.inValueBool("Invert",false);
-var pIgnoreBorderCells=op.inValueBool("Ignore Border Cells",false);
+var pRender=op.inBool("Render",true);
+var pInvert=op.inBool("Invert",false);
+var pIgnoreBorderCells=op.inBool("Ignore Border Cells",false);
 
 
 var pWidth=op.inValue("Width",2);
@@ -16,7 +16,7 @@ var maxSize=op.inValue("Scale Out Size Start",0);
 var maxSizeEnd=op.inValue("Scale Out Size End",0);
 
 
-var inCalcNormals=op.inValueBool("Calc Normals",true);
+var inCalcNormals=op.inBool("Calc Normals",true);
 var next=op.outTrigger("Next");
 var outVerts=op.outArray("Points");
 var outCenter=op.outArray("Center Points");

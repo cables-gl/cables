@@ -1,6 +1,6 @@
 const
     inObj = op.inObject("Object"),
-    inBeautify = op.inValueBool("Beautify"),
+    inBeautify = op.inBool("Beautify"),
     outString = op.outString("Result");
 
 inBeautify.onChange = inObj.onChange = update;

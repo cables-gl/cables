@@ -1,14 +1,14 @@
 const
-    bool0 = op.inValueBool("bool 1"),
-    bool1 = op.inValueBool("bool 2"),
-    bool2 = op.inValueBool("bool 3"),
-    bool3 = op.inValueBool("bool 4"),
-    bool4 = op.inValueBool("bool 5"),
-    bool5 = op.inValueBool("bool 6"),
-    bool6 = op.inValueBool("bool 7"),
-    bool7 = op.inValueBool("bool 8"),
-    bool8 = op.inValueBool("bool 9"),
-    bool9 = op.inValueBool("bool 10"),
+    bool0 = op.inBool("bool 1"),
+    bool1 = op.inBool("bool 2"),
+    bool2 = op.inBool("bool 3"),
+    bool3 = op.inBool("bool 4"),
+    bool4 = op.inBool("bool 5"),
+    bool5 = op.inBool("bool 6"),
+    bool6 = op.inBool("bool 7"),
+    bool7 = op.inBool("bool 8"),
+    bool8 = op.inBool("bool 9"),
+    bool9 = op.inBool("bool 10"),
     result = op.outValueBool("result");
 
 bool0.onChange =

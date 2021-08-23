@@ -4,7 +4,7 @@ var render=op.inTrigger("Render");
 
 var inThickness=op.inValue("Thickness",1);
 
-var inFill=op.inValueBool("Fill");
+var inFill=op.inBool("Fill");
 
 var next=op.outTrigger("Next");
 var inPoints=op.inArray("points");
@@ -58,7 +58,7 @@ render.onTriggered=function()
         // uniShift.setValue(1);
         // uniLineWidth.setValue([delta, alpha, 2*delta, alpha]);
         // mesh.render(shader);
-        
+
         // console.log(delta);
 
         shader.glPrimitive=cgl.gl.TRIANGLE_STRIP;
@@ -84,9 +84,9 @@ inPoints.onChange=function()
 {
     var pointArr=inPoints.get();
     if(!pointArr)return;
-    
+
     if(!geom)geom=new CGL.Geometry("Spline2d");
-    
+
     geom.vertices=pointArr;
 
     if(!mesh)mesh=new CGL.Mesh(cgl, geom);

@@ -1,6 +1,6 @@
 var ts1=op.inValue("Timestamp 1");
 var ts2=op.inValue("Timestamp 2");
-var stopAtZero=op.inValueBool("Stop at 0");
+var stopAtZero=op.inBool("Stop at 0");
 var outYear=op.outValue("Year");
 var outMonth=op.outValue("Month");
 var outDay=op.outValue("Day");

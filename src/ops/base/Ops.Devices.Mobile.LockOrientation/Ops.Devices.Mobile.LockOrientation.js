@@ -1,5 +1,5 @@
-var inPortrait=op.inValueBool("Portrait");
-var inLandscape=op.inValueBool("Landscape");
+var inPortrait=op.inBool("Portrait");
+var inLandscape=op.inBool("Landscape");
 
 screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
 

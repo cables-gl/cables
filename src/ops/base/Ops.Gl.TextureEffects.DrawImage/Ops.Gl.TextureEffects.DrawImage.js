@@ -6,9 +6,9 @@ const image = op.inTexture("image");
 
 const imageAlpha = op.inTexture("imageAlpha");
 const alphaSrc = op.inValueSelect("alphaSrc", ["alpha channel", "luminance"]);
-const removeAlphaSrc = op.inValueBool("removeAlphaSrc");
+const removeAlphaSrc = op.inBool("removeAlphaSrc");
 
-const invAlphaChannel = op.inValueBool("invert alpha channel");
+const invAlphaChannel = op.inBool("invert alpha channel");
 const trigger = op.outTrigger("trigger");
 
 op.toWorkPortsNeedToBeLinked(image);
@@ -52,8 +52,8 @@ alphaSrc.set("alpha channel");
     //
     // texture flip
     //
-    const flipX = op.inValueBool("flip x");
-    const flipY = op.inValueBool("flip y");
+    const flipX = op.inBool("flip x");
+    const flipY = op.inBool("flip y");
 
     flipX.onChange = function ()
     {

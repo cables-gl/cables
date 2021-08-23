@@ -5,8 +5,8 @@ const inNum = op.inValueInt("Num", 8);
 
 const outArr = op.outArray("Result");
 
-const inSort = op.inValueBool("Order");
-const inClear = op.inValueBool("Clear", true);
+const inSort = op.inBool("Order");
+const inClear = op.inBool("Clear", true);
 
 const cgl = op.patch.cgl;
 const frameBuf = cgl.gl.createFramebuffer();

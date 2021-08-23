@@ -7,7 +7,7 @@ var inPoints=op.inArray("Positions");
 var range=op.inValue("Range Radius",1);
 var attraction=op.inValue("attraction");
 var angle=op.inValue("Angle");
-var show=op.inValueBool("Show");
+var show=op.inBool("Show");
 
 
 var next=op.outTrigger("next");
@@ -37,7 +37,7 @@ function reset()
     var points=inPoints.get();
     if(!points)return;
 
-    if(forces.length != points.length/3) 
+    if(forces.length != points.length/3)
         forces.length=points.length/3;
 
     // forces.length=Math.floor(num.get());
@@ -60,7 +60,7 @@ function reset()
         //     points[(i)*3+1],
         //     points[(i)*3+2],
         //     ];
-            
+
         // forces[(i*2+1)].range=range.get();
         // forces[(i*2+1)].attraction=-attraction.get();
         // forces[(i*2+1)].angle=angle.get();
@@ -84,19 +84,19 @@ exec.onTriggered=function()
 
     if(show.get())
     {
-        
+
         for(var i=0;i<num;i++)
         {
             if(forces[i])
             {
                 cgl.pushModelMatrix();
-        
+
                 // if(!mesh)mesh=new CGL.WirePoint(cgl);
                 mat4.translate(cgl.mvMatrix,cgl.mvMatrix,forces[i].pos);
                 // mesh.render(cgl,range.get()*2);
                 mark.draw(cgl);
                 cgl.popModelMatrix();
-                
+
             }
         }
     }
@@ -120,7 +120,7 @@ exec.onTriggered=function()
 
     next.trigger();
 
-    for(var i=0;i<num;i++) 
+    for(var i=0;i<num;i++)
         if(forces[i])
             CABLES.forceFieldForces.pop();
 

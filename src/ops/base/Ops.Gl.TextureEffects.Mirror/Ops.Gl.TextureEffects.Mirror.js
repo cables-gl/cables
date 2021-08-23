@@ -4,7 +4,7 @@ const
     axis = op.inSwitch("axis", ["X", "Y"], "X"),
     width = op.inValueFloat("width", 0.5),
     offset = op.inValueFloat("offset"),
-    flip = op.inValueBool("flip");
+    flip = op.inBool("flip");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);

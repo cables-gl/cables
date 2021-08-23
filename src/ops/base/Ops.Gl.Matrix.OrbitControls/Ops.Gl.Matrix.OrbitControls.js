@@ -17,13 +17,13 @@ const smoothness = op.inValueSlider("Smoothness", 1.0);
 const speedX = op.inValue("Speed X", 1);
 const speedY = op.inValue("Speed Y", 1);
 
-const active = op.inValueBool("Active", true);
+const active = op.inBool("Active", true);
 
-const allowPanning = op.inValueBool("Allow Panning", true);
-const allowZooming = op.inValueBool("Allow Zooming", true);
-const allowRotation = op.inValueBool("Allow Rotation", true);
-const restricted = op.inValueBool("restricted", true);
-const pointerLock = op.inValueBool("Pointerlock", false);
+const allowPanning = op.inBool("Allow Panning", true);
+const allowZooming = op.inBool("Allow Zooming", true);
+const allowRotation = op.inBool("Allow Rotation", true);
+const restricted = op.inBool("restricted", true);
+const pointerLock = op.inBool("Pointerlock", false);
 
 const trigger = op.outTrigger("trigger");
 const outRadius = op.outValue("radius");

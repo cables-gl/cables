@@ -11,7 +11,7 @@ const
     muly = op.inValue("Mul Y", 1),
     mulz = op.inValue("Mul Z", 1),
     minScale = op.inValue("Min Scale", 0),
-    inWorldSpace = op.inValueBool("WorldSpace");
+    inWorldSpace = op.inBool("WorldSpace");
 
 const cgl = op.patch.cgl;
 

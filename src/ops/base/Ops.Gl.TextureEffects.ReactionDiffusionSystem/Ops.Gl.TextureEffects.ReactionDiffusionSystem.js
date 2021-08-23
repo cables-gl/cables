@@ -9,7 +9,7 @@ const outTex = op.outTexture("Texture");
 
 
 // Texture
-const inVPSize = op.inValueBool("Use Viewport Size", true);
+const inVPSize = op.inBool("Use Viewport Size", true);
 const inWidth = op.inValueInt("Width", 512);
 const inHeight = op.inValueInt("Height", 512);
 

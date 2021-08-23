@@ -6,7 +6,7 @@ var num=op.inValue("num",20);
 var range=op.inValue("Range Radius",1);
 var attraction=op.inValue("attraction");
 var angle=op.inValue("Angle");
-var show=op.inValueBool("Show");
+var show=op.inBool("Show");
 var seed=op.inValue("Random Seed");
 
 var posX=op.inValue("Pos X");

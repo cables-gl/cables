@@ -2,7 +2,7 @@ const
     render = op.inTrigger("render"),
     width = op.inValueFloat("width", 10),
     height = op.inValueFloat("height", 1),
-    doLog = op.inValueBool("Logarithmic", false),
+    doLog = op.inBool("Logarithmic", false),
     pivotX = op.inValueSelect("pivot x", ["center", "left", "right"], "center"),
     pivotY = op.inValueSelect("pivot y", ["center", "top", "bottom"], "center"),
     nColumns = op.inValueInt("num columns", 10),
