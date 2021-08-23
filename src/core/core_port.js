@@ -70,11 +70,15 @@ const Port = function (__parent, name, type, uiAttribs)
     Object.defineProperty(this, "val", {
         get()
         {
+            console.log("val getter deprecated!");
+            console.log((new Error()).stack);
             this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
         {
+            console.log("val setter deprecated!");
+            console.log((new Error()).stack);
             this.setValue(v);
             // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
@@ -84,7 +88,7 @@ const Port = function (__parent, name, type, uiAttribs)
 
 Port.prototype.getValueForDisplay = function ()
 {
-    let str = String(this.val);
+    let str = String(this.value);
 
     // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
     // {
