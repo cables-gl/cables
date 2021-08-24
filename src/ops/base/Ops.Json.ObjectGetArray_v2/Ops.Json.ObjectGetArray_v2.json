@@ -17,21 +17,21 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "data"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "key"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "result"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Length",
                 "subType": "number"
             }
