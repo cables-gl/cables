@@ -11,6 +11,7 @@ import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
 import { Log } from "./log";
 
+
 /**
  * Patch class, contains all operators,values,links etc. manages loading and running of the whole patch
  *

@@ -1169,7 +1169,9 @@ const Op = function ()
 
     Op.prototype.instanced = function (triggerPort)
     {
+        console.log("instanced", this.patch.instancing.numCycles());
         if (this.patch.instancing.numCycles() === 0) return false;
+
 
         let i = 0;
         let ipi = 0;
@@ -1178,6 +1180,7 @@ const Op = function ()
             if (!this._instances) this._instances = [];
             Log.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
             this._instances.length = this.patch.instancing.numCycles();
+
             for (i = 0; i < this._instances.length; i++)
             {
                 this._instances[i] = this.patch.createOp(this.objName, true);
@@ -1191,9 +1194,7 @@ const Op = function ()
                 {
                     if (this.portsOut[ipo].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
                     {
-                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[
-                            ipo
-                        ].trigger.bind(this.portsOut[ipo]);
+                        this._instances[i].getPortByName(this.portsOut[ipo].name).trigger = this.portsOut[ipo].trigger.bind(this.portsOut[ipo]);
                     }
                 }
             }

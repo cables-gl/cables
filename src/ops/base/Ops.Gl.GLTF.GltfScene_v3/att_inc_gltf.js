@@ -210,6 +210,8 @@ function parseGltf(arrayBuffer)
     pos += 4;
 
     outVersion.set(version);
+    outExtensions.set(gltf.json.extensionsUsed||[]);
+
 
     const chunks = [];
     gltf.chunks = chunks;
@@ -225,6 +227,17 @@ function parseGltf(arrayBuffer)
     const accessors = chunks[0].data.accessors;
 
     gltf.timing.push("Parse buffers", Math.round((performance.now() - gltf.startTime)));
+
+
+    console.log(gltf.json.extensionsUsed);
+    if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
+    {
+        op.setUiError("gltfdraco", "GLTF compression");
+
+        return gltf;
+    }
+    op.setUiError("gltfdraco", null);
+    // let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
 
 
     if (views)

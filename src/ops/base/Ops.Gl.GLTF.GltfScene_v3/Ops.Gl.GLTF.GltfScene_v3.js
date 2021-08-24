@@ -27,6 +27,7 @@ const
     next = op.outTrigger("Next"),
     outGenerator = op.outString("Generator"),
     outVersion = op.outNumber("GLTF Version"),
+    outExtensions = op.outNumber("GLTF Extensions Used"),
     outAnimLength = op.outNumber("Anim Length", 0),
     outAnimTime = op.outNumber("Anim Time", 0),
     outJson = op.outObject("Json"),
