@@ -115,7 +115,7 @@ class BoundingBox
             let i = 0;
 
             for (i = 0; i < geom.vertices.length; i += 3)
-                if (geom.vertices[i + 0] == geom.vertices[i + 0])
+                if (geom.vertices[i + 0] == geom.vertices[i + 0] || geom.vertices[i + 0]!=null)
                 {
                     // if(mat)
                     // {
