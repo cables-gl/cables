@@ -151,6 +151,9 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
+        if(x==Number.MAX_VALUE || x==-Number.MAX_VALUE) return;
+        if(y==Number.MAX_VALUE || y==-Number.MAX_VALUE) return;
+        if(z==Number.MAX_VALUE || z==-Number.MAX_VALUE) return;
         if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
 
         if (this._first)
@@ -188,7 +191,7 @@ class BoundingBox
         this._center[2] = (this._min[2] + this._max[2]) / 2;
 
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
-        if(this._maxAxis==Infinity || this._maxAxis==null) this._init();
+
 
     }
 
