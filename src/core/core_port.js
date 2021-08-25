@@ -70,14 +70,14 @@ const Port = function (__parent, name, type, uiAttribs)
     Object.defineProperty(this, "val", {
         get()
         {
-            console.log("val getter deprecated!");
+            console.log("val getter deprecated!", this);
             console.log((new Error()).stack);
             this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
         {
-            console.log("val setter deprecated!");
+            console.log("val setter deprecated!", this);
             console.log((new Error()).stack);
             this.setValue(v);
             // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);

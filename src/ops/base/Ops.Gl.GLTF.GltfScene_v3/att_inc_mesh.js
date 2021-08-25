@@ -12,32 +12,51 @@ var gltfMesh=class
 
         if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
 
-        this.fillGeomAttribs(gltf,this.geom,prim.attributes);
+        gltf.loadingMeshes=gltf.loadingMeshes||0;
+        gltf.loadingMeshes++;
 
-        if(prim.targets)
-            for(var j=0;j<prim.targets.length;j++)
-            {
-                // var tgeom=new CGL.Geometry("gltf_"+this.name);
-                let tgeom=this.geom.copy();
+        if(gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
+        {
+            dracoLoadMesh(gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView],this.name,
+                (geom)=>
+                {
+                    this.setGeom(geom);
+                    this.mesh=null;
+                    gltf.loadingMeshes--;
 
-                if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
-                this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+                });
+        }
+        else
+        {
+            gltf.loadingMeshes--;
+            this.fillGeomAttribs(gltf,this.geom,prim.attributes);
 
-                // console.log( Object.keys(prim.targets[j]) );
+            if(prim.targets)
+                for(let j=0;j<prim.targets.length;j++)
+                {
+                    // var tgeom=new CGL.Geometry("gltf_"+this.name);
+                    let tgeom=this.geom.copy();
+
+                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
+                    this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+
+                    // console.log( Object.keys(prim.targets[j]) );
 
 
-                { // calculate normals for final position of morphtarget for later...
-                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
-                    tgeom.calculateNormals();
-                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
+                    { // calculate normals for final position of morphtarget for later...
+                        for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
+                        tgeom.calculateNormals();
+                        for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
+                    }
+
+
+                    this.geom.morphTargets.push(tgeom);
                 }
 
+        }
 
-                this.geom.morphTargets.push(tgeom);
-            }
 
-        this.morphGeom=this.geom.copy();
-        this.bounds=this.geom.getBounds();
+
     }
 
     fillGeomAttribs(gltf,geom,attribs)
@@ -48,13 +67,20 @@ var gltfMesh=class
         if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
         if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
+        if(geom && geom.verticesIndices) this.setGeom(geom);
 
+        // Implementation note: When normals and tangents are specified,
+        // client implementations should compute the bitangent by taking
+        // the cross product of the normal and tangent xyz vectors and
+        // multiplying against the w component of the tangent:
+        // bitangent = cross(normal, tangent.xyz) * tangent.w
 
-// Implementation note: When normals and tangents are specified,
-// client implementations should compute the bitangent by taking
-// the cross product of the normal and tangent xyz vectors and
-// multiplying against the w component of the tangent:
-// bitangent = cross(normal, tangent.xyz) * tangent.w
+    }
+
+    setGeom(geom)
+    {
+        this.morphGeom=geom.copy();
+        this.bounds=geom.getBounds();
 
         if(inNormFormat.get()=="X-ZY")
         {
@@ -70,7 +96,6 @@ var gltfMesh=class
             //     let t=geom.tangents[i+2];
             //     geom.tangents[i+2]=geom.tangents[i+1];
             //     geom.tangents[i+1]=-t;
-
             // }
         }
 
@@ -120,14 +145,14 @@ var gltfMesh=class
         }
 
         if(geom.tangents.length===0 || inCalcNormals.get())  geom.calcTangentsBitangents();
-
+        this.geom=geom;
     }
 
     render(cgl,ignoreMaterial)
     {
         if(!this.geom)return;
 
-        if(!this.mesh)
+        if(!this.mesh && this.geom && this.geom.verticesIndices)
         {
             let g=this.geom;
             if(this.geom.vertices.length/3>64000)
@@ -175,7 +200,11 @@ var gltfMesh=class
 
             if(useMat) cgl.pushShader(gltf.shaders[this.material]);
 
-            this.mesh.render(cgl.getShader(),ignoreMaterial);
+            if(this.mesh)
+            {
+                // console.log("nesgh render")
+                this.mesh.render(cgl.getShader(),ignoreMaterial);
+            }
 
             if(useMat) cgl.popShader();
         }
