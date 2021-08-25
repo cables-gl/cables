@@ -45,6 +45,7 @@ inFile.onChange =
     inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
+let finishedLoading = false;
 let cam = null;
 let boundingPoints = [];
 let gltf = null;
@@ -134,6 +135,8 @@ function setCam()
 
 inExec.onTriggered = function ()
 {
+    if (!finishedLoading) return;
+
     if (!inActive.get()) return;
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
@@ -153,7 +156,7 @@ inExec.onTriggered = function ()
 
     outAnimTime.set(time || 0);
 
-    if (gltf && gltf.bounds)
+    if (finishedLoading && gltf && gltf.bounds)
     {
         if (inRescale.get())
         {
@@ -172,24 +175,27 @@ inExec.onTriggered = function ()
 
     nextBefore.trigger();
 
-    if (needsMatUpdate) updateMaterials();
-
-    if (cam) cam.start(time);
-
-    if (gltf && inRender.get())
+    if (finishedLoading)
     {
-        gltf.time = time;
+        if (needsMatUpdate) updateMaterials();
 
-        if (gltf.bounds && cgl.shouldDrawHelpers(op))
+        if (cam) cam.start(time);
+
+        if (gltf && inRender.get())
         {
-            if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-            else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
-            gltf.bounds.render(cgl);
-            cgl.popShader();
-        }
+            gltf.time = time;
 
-        for (let i = 0; i < gltf.nodes.length; i++)
-            if (!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+            if (gltf.bounds && cgl.shouldDrawHelpers(op))
+            {
+                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                gltf.bounds.render(cgl);
+                cgl.popShader();
+            }
+
+            for (let i = 0; i < gltf.nodes.length; i++)
+                if (!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+        }
     }
 
     next.trigger();
@@ -200,6 +206,54 @@ inExec.onTriggered = function ()
     if (cam)cam.end();
 };
 
+function finishLoading()
+{
+    if (gltf.loadingMeshes > 0)
+    {
+        console.log("waiting for async meshes...");
+        setTimeout(finishLoading, 100);
+        return;
+    }
+
+    needsMatUpdate = true;
+    op.refreshParams();
+    outAnimLength.set(maxTime);
+
+    if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
+    else op.setUiError("urlerror", null);
+
+    if (gltf)
+    {
+        for (let i = 0; i < gltf.nodes.length; i++)
+            if (!gltf.nodes[i].isChild)
+            {
+                gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
+            }
+    }
+
+    hideNodesFromData();
+    if (tab)printInfo();
+
+    updateCamera();
+    setCam();
+    outPoints.set(boundingPoints);
+    if (gltf)
+    {
+        op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+
+        gltf.loaded = Date.now();
+        if (gltf.bounds)outBounds.set(gltf.bounds);
+    }
+    updateCenter();
+    outLoading.set(false);
+
+    cgl.patch.loading.finished(loadingId);
+    loadingId = null;
+
+    finishedLoading = true;
+    op.log("finished loading gltf");
+}
+
 function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
@@ -209,6 +263,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
+    finishedLoading = false;
     outLoading.set(true);
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
@@ -225,44 +280,7 @@ function loadBin(addCacheBuster)
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
 
-            needsMatUpdate = true;
-            op.refreshParams();
-            outAnimLength.set(maxTime);
-
-            if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
-            else op.setUiError("urlerror", null);
-
-            if (gltf)
-            {
-                for (let i = 0; i < gltf.nodes.length; i++)
-                    if (!gltf.nodes[i].isChild)
-                    {
-                        gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
-
-                        // gltf.nodes[i].transform(cgl,0.0);
-                    }
-            }
-
-            hideNodesFromData();
-            if (tab)printInfo();
-
-            updateCamera();
-            setCam();
-            outPoints.set(boundingPoints);
-            if (gltf)
-            {
-                op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
-
-                gltf.loaded = Date.now();
-                if (gltf.bounds)outBounds.set(gltf.bounds);
-            }
-            updateCenter();
-            outLoading.set(false);
-
-            cgl.patch.loading.finished(loadingId);
-            loadingId = null;
-
-            // op.log("finished loading gltf");
+            finishLoading();
         };
 
         oReq.send(null);

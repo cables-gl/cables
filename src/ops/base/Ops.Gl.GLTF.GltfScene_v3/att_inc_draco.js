@@ -1,13 +1,61 @@
+function dracoLoadMesh(view,name,next)
+{
+    // console.log("!!!!!!DracoDecoderModule");
 
-function dracoAttributes(draco,decoder,dracoGeometry,geometryType,gltfMesh)
+    new DracoDecoderModule().then( (m) =>
+    {
+        return m;
+    }).then( (e)=>
+    {
+        const f=new e.Decoder();
+        // console.log("f",f);
+        // const view =gltf.chunks[0].data.bufferViews[0];
+        // console.log("view",view);
+        const num = view.byteLength;
+        const dataBuff = new Int8Array(num);
 
-// if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
-// if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
-// if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
-// if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
-// if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+        const stride=0;
 
+        let accPos = (view.byteOffset || 0) ;//+ (acc.byteOffset || 0);
 
+        for (let j = 0; j < num; j++)
+        {
+            // if (isInt)
+            dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
+            // else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+
+            // if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
+            accPos++;
+
+        }
+
+        // console.log("dataBuff",dataBuff);
+        const geometryType = f.GetEncodedGeometryType(dataBuff);
+        // console.log("geometryType",geometryType);
+
+        const buffer = new e.DecoderBuffer();
+        buffer.Init(dataBuff, dataBuff.byteLength);
+
+        // console.log("buffer",buffer);
+
+        let outputGeometry = new e.Mesh();
+        const status=f.DecodeBufferToMesh(buffer,outputGeometry);
+
+        // console.log("outputGeometry",outputGeometry);
+        // console.log("status ",status.ok());
+        // console.log("status",status.error_msg());
+
+		const attribute = f.GetAttributeByUniqueId( outputGeometry, 1 );
+// 		console.log("attribute",attribute);
+
+		const geom=dracoAttributes(e,f,outputGeometry,geometryType,name);
+
+		next(geom);
+
+    });
+}
+
+function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 {
 
 	const attributeIDs = {
@@ -31,7 +79,7 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,gltfMesh)
 		attributes: []
 	}; // Gather all vertex attributes.
 
-let count=0;
+    let count=0;
 	for ( const attributeName in attributeIDs ) {
 
 		const attributeType = attributeTypes[ attributeName ];
@@ -53,7 +101,7 @@ let count=0;
 			if ( attributeID === - 1 ) continue;
 
 			attribute = decoder.GetAttribute( dracoGeometry, attributeID );
-			console.log("attribute",attribute,attributeID,attributeIDs[ attributeName ])
+// 			console.log("attribute",attribute,attributeID,attributeIDs[ attributeName ])
 
 // 		}
 
@@ -69,11 +117,13 @@ let count=0;
 
 		geometry.index = decodeIndex( draco, decoder, dracoGeometry );
 
+		console.log(name,geometry.index);
+
 	}
 
-	console.log(geometry);
+// 	console.log(geometry);
 
-	const geom=gltfMesh.geom=new CGL.Geometry("draco mesh "+gltfMesh.name);
+	const geom=new CGL.Geometry("draco mesh "+name);
 
 	for(let i=0;i<geometry.attributes.length;i++)
 	{
@@ -84,7 +134,7 @@ let count=0;
 	    else console.log("unknown draco attrib" , geometry.attributes[i]);
 	}
 
-	geom.verticesIndices=geometry.index.array
+	geom.verticesIndices=geometry.index.array;
 
 // if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
 // if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
@@ -92,10 +142,11 @@ let count=0;
 // if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
 // if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
-
+    // console.log("geom",geom)
 
 
 	draco.destroy( dracoGeometry );
+    return geom;
 
 }
 
@@ -130,7 +181,7 @@ let count=0;
 
 			const ptr = draco._malloc( byteLength );
 
-console.log(attributeName,numComponents,attributeType,numPoints,"byteLength",byteLength,dataType)
+            // console.log(attributeName,numComponents,attributeType,numPoints,"byteLength",byteLength,dataType)
 
 
             if(attributeType!="Float32Array") console.log("draco unknown attrib type",attributeType);

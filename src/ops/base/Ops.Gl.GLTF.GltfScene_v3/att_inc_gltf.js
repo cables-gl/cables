@@ -231,9 +231,10 @@ gltf.chunks=chunks;
     gltf.timing.push("Parse buffers", Math.round((performance.now() - gltf.startTime)));
 
 
-    console.log(gltf.json.extensionsUsed);
+    // console.log(gltf.json.extensionsUsed);
     if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
     {
+
 
         if(!window.DracoDecoderModule)
         {
@@ -243,6 +244,7 @@ gltf.chunks=chunks;
         }
         else
         {
+            gltf.useDraco=true;
         }
     }
 
@@ -297,44 +299,40 @@ gltf.chunks=chunks;
 
 
 
-// if(true)
-if(!view )
-{
-    console.log("has no view",acc)
+                // if(true)
+                if(!view )
+                {
+                    // console.log("has no view",acc)
 
-    // function decodeDracoData(rawBuffer, decoder) {
-    //   const buffer = new decoderModule.DecoderBuffer();
-    //   buffer.Init(new Int8Array(rawBuffer), rawBuffer.byteLength);
-    //   const geometryType = decoder.GetEncodedGeometryType(buffer);
+                    // function decodeDracoData(rawBuffer, decoder) {
+                    //   const buffer = new decoderModule.DecoderBuffer();
+                    //   buffer.Init(new Int8Array(rawBuffer), rawBuffer.byteLength);
+                    //   const geometryType = decoder.GetEncodedGeometryType(buffer);
 
-    //   let dracoGeometry;
-    //   let status;
-    //   if (geometryType === decoderModule.TRIANGULAR_MESH) {
-    //     dracoGeometry = new decoderModule.Mesh();
-    //     status = decoder.DecodeBufferToMesh(buffer, dracoGeometry);
-    //   } else {
-    //     const errorMsg = 'Error: Unknown geometry type.';
-    //     console.error(errorMsg);
-    //   }
-    //   decoderModule.destroy(buffer);
+                    //   let dracoGeometry;
+                    //   let status;
+                    //   if (geometryType === decoderModule.TRIANGULAR_MESH) {
+                    //     dracoGeometry = new decoderModule.Mesh();
+                    //     status = decoder.DecodeBufferToMesh(buffer, dracoGeometry);
+                    //   } else {
+                    //     const errorMsg = 'Error: Unknown geometry type.';
+                    //     console.error(errorMsg);
+                    //   }
+                    //   decoderModule.destroy(buffer);
 
-    //   return dracoGeometry;
-    // }
-
-
-}
+                    //   return dracoGeometry;
+                    // }
 
 
+                }
 
+                if(view)
+                {
 
-
-    if(view)
-    {
-
-            const num = acc.count * numComps;
-                let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
-                let stride = view.byteStride || 0;
-                let dataBuff = null;
+                    const num = acc.count * numComps;
+                    let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
+                    let stride = view.byteStride || 0;
+                    let dataBuff = null;
 
 
                     if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
@@ -373,17 +371,16 @@ if(!view )
                     {
                         console.error("unknown component type", acc.componentType);
                     }
-                gltf.accBuffers.push(dataBuff);
+
+                    gltf.accBuffers.push(dataBuff);
                 }
                 else
                 {
                     console.log("has no dataview")
                 }
-
-    }
-
             }
         }
+    }
 
     gltf.timing.push("Parse mesh groups", Math.round((performance.now() - gltf.startTime)));
 
