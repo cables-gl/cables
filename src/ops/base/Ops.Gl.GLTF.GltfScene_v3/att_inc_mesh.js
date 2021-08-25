@@ -10,34 +10,201 @@ var gltfMesh=class
         this.geom=new CGL.Geometry("gltf_"+this.name);
         this.geom.verticesIndices = [];
 
-        if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
-
-        this.fillGeomAttribs(gltf,this.geom,prim.attributes);
-
-        if(prim.targets)
-            for(var j=0;j<prim.targets.length;j++)
-            {
-                // var tgeom=new CGL.Geometry("gltf_"+this.name);
-                let tgeom=this.geom.copy();
-
-                if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
-                this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
-
-                // console.log( Object.keys(prim.targets[j]) );
+        if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices]||[];
 
 
-                { // calculate normals for final position of morphtarget for later...
-                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
-                    tgeom.calculateNormals();
-                    for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
+// if(true)
+// {
+
+// // function decodeDracoData(rawBuffer, decoder) {
+// //   const buffer = new decoderModule.DecoderBuffer();
+// //   buffer.Init(new Int8Array(rawBuffer), rawBuffer.byteLength);
+// //   const geometryType = decoder.GetEncodedGeometryType(buffer);
+
+// //   let dracoGeometry;
+// //   let status;
+// //   if (geometryType === decoderModule.TRIANGULAR_MESH) {
+// //     dracoGeometry = new decoderModule.Mesh();
+// //     status = decoder.DecodeBufferToMesh(buffer, dracoGeometry);
+// //   } else {
+// //     const errorMsg = 'Error: Unknown geometry type.';
+// //     console.error(errorMsg);
+// //   }
+// //   decoderModule.destroy(buffer);
+
+// //   return dracoGeometry;
+// // }
+
+//     new DracoDecoderModule().then((m) =>{
+
+//         return m;
+
+//         }).then( (e)=>{
+
+//           const f=new e.Decoder();
+//           console.log("f",f);
+
+//              const buffer = new e.DecoderBuffer();
+
+//              console.log("CHIUNKDS")
+//              console.log(gltf.chunks)
+
+
+//              const dv=gltf.chunks[1].dataView;
+//              console.log("dv",dv);
+//              const idx=0;
+
+//              const bv=gltf.chunks[0].data.bufferViews[idx];
+//              console.log("bufferview",bv);
+
+//             const dataBuff = gltf.chunks[0].dataView.getUint8(accPos, le);
+
+
+//             buffer.Init("chunks[1].data.bufferViews",gltf.accBuffers[bv.buffer], bv.byteLength);
+
+//             console.log("buffer",buffer);
+
+//             const g=f.DecodeBufferToMesh(
+//                 buffer// gltf.accBuffers[prim.attributes.POSITION]
+//                 );
+
+
+//                 console.log("g",g,g.error_msg());
+//                 console.log("f",f.GetAttributeFloat(prim.attributes.POSITION));
+//         });
+//         // ).then(d )
+
+//     //   const decoder = new DracoDecoderModule;
+//     //   const decodedGeometry = decodeDracoData(data, decoder);
+//     //   // Encode mesh
+//     //   encodeMeshToFile(decodedGeometry, decoder);
+
+//     //   decoderModule.destroy(decoder);
+//     //   decoderModule.destroy(decodedGeometry);
+// }
+
+
+
+{
+    console.log("!!!!!!DracoDecoderModule");
+
+    new DracoDecoderModule().then((m) =>
+    {
+        return m;
+    }).then(
+        (e)=>
+    {
+        const f=new e.Decoder();
+        console.log("f",f);
+
+
+        //  console.log("CHIUNKDS")
+        //  console.log(gltf.chunks)
+
+
+        //  const dv=gltf.chunks[1].dataView;
+        //  console.log("dv",dv);
+        //  const idx=0;
+
+        //  const bv=gltf.chunks[0].data.bufferViews[idx];
+        //  console.log("bufferview",bv);
+        // const buffview=1;
+        // const view = views[buffview];
+        // let accPos = (view.byteOffset || 0);// + (acc.byteOffset || 0);
+        // const num = acc.count * numComps;
+
+        // console.log("views[0]",views[0]);
+        // const dataBuff = views[0].getUint8(accPos, le);
+
+
+
+const view =gltf.chunks[0].data.bufferViews[0];
+console.log("view",view);
+        const num = view.byteLength;
+        const dataBuff = new Int8Array(num);
+
+// console.log("acc",acc)
+
+
+        // stride = stride || 4;
+        const stride=0;
+
+        // const isInt = acc.componentType == 5125;
+
+let accPos = (view.byteOffset || 0) ;//+ (acc.byteOffset || 0);
+// let stride = view.byteStride || 0;
+
+        for (let j = 0; j < num; j++)
+        {
+            // if (isInt)
+            dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
+            // else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+
+            // if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
+            accPos++;
+
+        }
+
+        console.log("dataBuff",dataBuff);
+        const geometryType = f.GetEncodedGeometryType(dataBuff);
+        console.log("geometryType",geometryType);
+
+        const buffer = new e.DecoderBuffer();
+        buffer.Init(dataBuff, dataBuff.byteLength);
+
+// chunks[1].dataView.getFloat32(accPos, le);
+
+        console.log("buffer",buffer);
+
+        // console.log("views",views[0])
+
+
+        let outputGeometry = new e.Mesh();
+        const status=f.DecodeBufferToMesh( buffer ,outputGeometry);
+
+        console.log("outputGeometry",outputGeometry)
+        console.log("status ",status.ok());
+        console.log("status",status.error_msg());
+
+		const attribute = f.GetAttributeByUniqueId( outputGeometry, 1 );
+		console.log("attribute",attribute);
+
+		dracoAttributes(e,f,outputGeometry,geometryType,this);
+
+    });
+}
+
+        if(this.geom.vertices.length>0)
+        {
+
+            this.fillGeomAttribs(gltf,this.geom,prim.attributes);
+
+            if(prim.targets)
+                for(var j=0;j<prim.targets.length;j++)
+                {
+                    // var tgeom=new CGL.Geometry("gltf_"+this.name);
+                    let tgeom=this.geom.copy();
+
+                    if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices]||[];
+                    this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+
+                    // console.log( Object.keys(prim.targets[j]) );
+
+
+                    { // calculate normals for final position of morphtarget for later...
+                        for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
+                        tgeom.calculateNormals();
+                        for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
+                    }
+
+
+                    this.geom.morphTargets.push(tgeom);
                 }
 
+            this.morphGeom=this.geom.copy();
+            this.bounds=this.geom.getBounds();
+        }
 
-                this.geom.morphTargets.push(tgeom);
-            }
-
-        this.morphGeom=this.geom.copy();
-        this.bounds=this.geom.getBounds();
     }
 
     fillGeomAttribs(gltf,geom,attribs)
@@ -85,7 +252,7 @@ var gltfMesh=class
             }
         }
 
-        if(!geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
+        if(!geom.vertexNormals || !geom.vertexNormals.length || inCalcNormals.get()) geom.calculateNormals();
 
         if( (!geom.biTangents || geom.biTangents.length==0) && geom.tangents)
         {
@@ -96,6 +263,7 @@ var gltfMesh=class
             geom.tangents=new Float32Array(tangents.length/4*3);
             geom.biTangents=new Float32Array(tangents.length/4*3);
 
+            if(tangents)
             for(let i=0;i<tangents.length;i+=4)
             {
                 const idx=i/4*3;
@@ -129,6 +297,7 @@ var gltfMesh=class
 
         if(!this.mesh)
         {
+            // console.log("no mesh",this.geom)
             let g=this.geom;
             if(this.geom.vertices.length/3>64000)
             {

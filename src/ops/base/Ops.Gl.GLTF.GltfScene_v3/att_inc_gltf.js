@@ -223,6 +223,8 @@ function parseGltf(arrayBuffer)
 
     chunks.push(readChunk(dv, byteArray, arrayBuffer, pos));
 
+gltf.chunks=chunks;
+
     const views = chunks[0].data.bufferViews;
     const accessors = chunks[0].data.accessors;
 
@@ -232,12 +234,22 @@ function parseGltf(arrayBuffer)
     console.log(gltf.json.extensionsUsed);
     if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
     {
-        op.setUiError("gltfdraco", "GLTF compression");
 
-        return gltf;
+        if(!window.DracoDecoderModule)
+        {
+            op.setUiError("gltfdraco", "GLTF draco compression lib not found / add draco op to your patch!");
+            return gltf;
+
+        }
+        else
+        {
+        }
     }
+
     op.setUiError("gltfdraco", null);
     // let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
+
+
 
 
     if (views)
@@ -245,7 +257,16 @@ function parseGltf(arrayBuffer)
         for (i = 0; i < accessors.length; i++)
         {
             const acc = accessors[i];
+
             const view = views[acc.bufferView];
+
+
+
+            // if(!view || !acc)
+            // {
+
+            //     continue;
+            // }
 
             let numComps = 0;
             if (acc.type == "SCALAR")numComps = 1;
@@ -255,59 +276,114 @@ function parseGltf(arrayBuffer)
             else if (acc.type == "MAT4")numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
-            const num = acc.count * numComps;
-            let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
-            let stride = view.byteStride || 0;
-            let dataBuff = null;
+    //   const decoder = new decoderModule.Decoder();
+    //   const decodedGeometry = decodeDracoData(data, decoder);
+    //   // Encode mesh
+    //   encodeMeshToFile(decodedGeometry, decoder);
+
+    //   decoderModule.destroy(decoder);
+    //   decoderModule.destroy(decodedGeometry);
 
 
             // 5120 (BYTE)	1
-            // 5121(UNSIGNED_BYTE)	1
+            // 5121 (UNSIGNED_BYTE)	1
             // 5122 (SHORT)	2
 
             if (chunks[1].dataView)
             {
-                if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
-                {
-                    stride = stride || 4;
 
-                    const isInt = acc.componentType == 5125;
-                    if (isInt)dataBuff = new Uint32Array(num);
-                    else dataBuff = new Float32Array(num);
 
-                    for (j = 0; j < num; j++)
+
+
+
+
+// if(true)
+if(!view )
+{
+    console.log("has no view",acc)
+
+    // function decodeDracoData(rawBuffer, decoder) {
+    //   const buffer = new decoderModule.DecoderBuffer();
+    //   buffer.Init(new Int8Array(rawBuffer), rawBuffer.byteLength);
+    //   const geometryType = decoder.GetEncodedGeometryType(buffer);
+
+    //   let dracoGeometry;
+    //   let status;
+    //   if (geometryType === decoderModule.TRIANGULAR_MESH) {
+    //     dracoGeometry = new decoderModule.Mesh();
+    //     status = decoder.DecodeBufferToMesh(buffer, dracoGeometry);
+    //   } else {
+    //     const errorMsg = 'Error: Unknown geometry type.';
+    //     console.error(errorMsg);
+    //   }
+    //   decoderModule.destroy(buffer);
+
+    //   return dracoGeometry;
+    // }
+
+
+}
+
+
+
+
+
+    if(view)
+    {
+
+            const num = acc.count * numComps;
+                let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
+                let stride = view.byteStride || 0;
+                let dataBuff = null;
+
+
+                    if (acc.componentType == 5126 || acc.componentType == 5125) // 4byte FLOAT or INT
                     {
-                        if (isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
-                        else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+                        stride = stride || 4;
 
-                        if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
-                        accPos += 4;
+                        const isInt = acc.componentType == 5125;
+                        if (isInt)dataBuff = new Uint32Array(num);
+                        else dataBuff = new Float32Array(num);
+
+                        for (j = 0; j < num; j++)
+                        {
+                            if (isInt) dataBuff[j] = chunks[1].dataView.getUint32(accPos, le);
+                            else dataBuff[j] = chunks[1].dataView.getFloat32(accPos, le);
+
+                            if (stride != 4 && (j + 1) % numComps === 0)accPos += stride - (numComps * 4);
+                            accPos += 4;
+                        }
                     }
-                }
-                else if (acc.componentType == 5123) // UNSIGNED_SHORT
-                {
-                    stride = stride || 2;
-
-                    dataBuff = new Uint16Array(num);
-
-                    for (j = 0; j < num; j++)
+                    else if (acc.componentType == 5123) // UNSIGNED_SHORT
                     {
-                        dataBuff[j] = chunks[1].dataView.getUint16(accPos, le);
+                        stride = stride || 2;
 
-                        if (stride != 2 && (j + 1) % numComps === 0) accPos += stride - (numComps * 2);
+                        dataBuff = new Uint16Array(num);
 
-                        accPos += 2;
+                        for (j = 0; j < num; j++)
+                        {
+                            dataBuff[j] = chunks[1].dataView.getUint16(accPos, le);
+
+                            if (stride != 2 && (j + 1) % numComps === 0) accPos += stride - (numComps * 2);
+
+                            accPos += 2;
+                        }
                     }
+                    else
+                    {
+                        console.error("unknown component type", acc.componentType);
+                    }
+                gltf.accBuffers.push(dataBuff);
                 }
                 else
                 {
-                    console.error("unknown component type", acc.componentType);
+                    console.log("has no dataview")
                 }
-            }
 
-            gltf.accBuffers.push(dataBuff);
-        }
     }
+
+            }
+        }
 
     gltf.timing.push("Parse mesh groups", Math.round((performance.now() - gltf.startTime)));
 
