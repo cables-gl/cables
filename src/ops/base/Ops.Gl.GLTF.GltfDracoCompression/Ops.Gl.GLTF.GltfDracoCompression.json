@@ -1,0 +1,43 @@
+{
+    "id": "4ecdc2ef-a242-4548-ad74-13f617119a64",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1629877533436
+        },
+        {
+            "message": " added lib: draco_decoder.js",
+            "author": "pandur",
+            "date": 1629878014750
+        },
+        {
+            "message": "Ops.User.pandur.Draco renamed to Ops.Gl.GLTF.GLTFDracoCompression",
+            "author": "pandur",
+            "date": 1629883379994
+        },
+        {
+            "message": "Ops.Gl.GLTF.GLTFDracoCompression renamed to Ops.Gl.GLTF.GltfDracoCompression",
+            "author": "pandur",
+            "date": 1629883824963
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1629877544198,
+    "libs": [
+        "draco_decoder.js"
+    ],
+    "layout": {
+        "portsIn": [],
+        "portsOut": [],
+        "name": "Ops.User.pandur.Draco"
+    },
+    "summary": "gltf draco compression library",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

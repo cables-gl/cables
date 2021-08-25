@@ -246,7 +246,7 @@ function printInfo()
             if(sizeBufferViews.indexOf(bufView)==-1)
             {
                 sizeBufferViews.push(bufView);
-                sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+                if(gltf.json.bufferViews[bufView])sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
             }
 
             for(var k in gltf.json.meshes[i].primitives[j].attributes)
@@ -257,7 +257,7 @@ function printInfo()
                 if(sizeBufferViews.indexOf(bufView)==-1)
                 {
                     sizeBufferViews.push(bufView);
-                    sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
+                    if(gltf.json.bufferViews[bufView])sizes.meshes+=gltf.json.bufferViews[bufView].byteLength;
                 }
             }
         }
