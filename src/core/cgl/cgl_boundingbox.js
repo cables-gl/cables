@@ -148,6 +148,7 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
+        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
         if (this._first)
         {
             this._max[0] = x;
