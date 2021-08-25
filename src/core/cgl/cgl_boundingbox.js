@@ -112,9 +112,7 @@ class BoundingBox
         }
         else
         {
-            let i = 0;
-
-            for (i = 0; i < geom.vertices.length; i += 3)
+            for (let i = 0; i < geom.vertices.length; i += 3)
                 if (geom.vertices[i + 0] == geom.vertices[i + 0] || geom.vertices[i + 0]!=null)
                 {
                     // if(mat)
@@ -176,9 +174,9 @@ class BoundingBox
         // this._size[0]=Math.abs(this._min[0])+Math.abs(this._max[0]);
         // this._size[1]=Math.abs(this._min[1])+Math.abs(this._max[1]);
         // this._size[2]=Math.abs(this._min[2])+Math.abs(this._max[2]);
-        this._size[0] = this._max[0] - this._min[0];
-        this._size[1] = this._max[1] - this._min[1];
-        this._size[2] = this._max[2] - this._min[2];
+        this._size[0] = (this._max[0] - this._min[0])||0;
+        this._size[1] = (this._max[1] - this._min[1])||0;
+        this._size[2] = (this._max[2] - this._min[2])||0;
 
         this._center[0] = (this._min[0] + this._max[0]) / 2;
         this._center[1] = (this._min[1] + this._max[1]) / 2;
