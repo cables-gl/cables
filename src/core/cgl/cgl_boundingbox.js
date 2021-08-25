@@ -13,8 +13,8 @@ class BoundingBox
     {
         this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
         this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
-        this._center = [];
-        this._size = [];
+        this._center = [0,0,0];
+        this._size = [0,0,0];
         this._first = true;
         this._wireMesh = null;
 
@@ -149,6 +149,7 @@ class BoundingBox
     applyPos(x, y, z)
     {
         if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
+
         if (this._first)
         {
             this._max[0] = x;
