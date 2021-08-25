@@ -482,7 +482,7 @@ const Op = function ()
                     "display": "dropdown",
                     "hidePort": true,
                     "type": "string",
-                    values
+                    "values":values
                 },
                 n
             );
