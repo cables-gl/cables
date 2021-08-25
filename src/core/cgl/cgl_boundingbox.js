@@ -11,14 +11,19 @@ class BoundingBox
 {
     constructor(geom)
     {
-        this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
-        this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
-        this._center = [0,0,0];
-        this._size = [0,0,0];
+        this._init();
         this._first = true;
         this._wireMesh = null;
 
         if (geom) this.apply(geom);
+    }
+
+    _init()
+    {
+        this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
+        this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
+        this._center = [0,0,0];
+        this._size = [0,0,0];
     }
 
     /**
@@ -174,15 +179,17 @@ class BoundingBox
         // this._size[0]=Math.abs(this._min[0])+Math.abs(this._max[0]);
         // this._size[1]=Math.abs(this._min[1])+Math.abs(this._max[1]);
         // this._size[2]=Math.abs(this._min[2])+Math.abs(this._max[2]);
-        this._size[0] = (this._max[0] - this._min[0])||0;
-        this._size[1] = (this._max[1] - this._min[1])||0;
-        this._size[2] = (this._max[2] - this._min[2])||0;
+        this._size[0] = this._max[0] - this._min[0];
+        this._size[1] = this._max[1] - this._min[1];
+        this._size[2] = this._max[2] - this._min[2];
 
         this._center[0] = (this._min[0] + this._max[0]) / 2;
         this._center[1] = (this._min[1] + this._max[1]) / 2;
         this._center[2] = (this._min[2] + this._max[2]) / 2;
 
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
+        if(this._maxAxis==Infinity) this._init();
+
     }
 
     mulMat4(m)
