@@ -188,7 +188,7 @@ class BoundingBox
         this._center[2] = (this._min[2] + this._max[2]) / 2;
 
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
-        if(this._maxAxis==Infinity) this._init();
+        if(this._maxAxis==Infinity || this._maxAxis==null) this._init();
 
     }
 
