@@ -24,6 +24,7 @@ class BoundingBox
         this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
         this._center = [0,0,0];
         this._size = [0,0,0];
+        this._maxAxis=1.0;
     }
 
     /**
