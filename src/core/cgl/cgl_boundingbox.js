@@ -11,14 +11,19 @@ class BoundingBox
 {
     constructor(geom)
     {
-        this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
-        this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
-        this._center = [];
-        this._size = [];
+        this._init();
         this._first = true;
         this._wireMesh = null;
 
         if (geom) this.apply(geom);
+    }
+
+    _init()
+    {
+        this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
+        this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
+        this._center = [0,0,0];
+        this._size = [0,0,0];
     }
 
     /**
@@ -112,10 +117,8 @@ class BoundingBox
         }
         else
         {
-            let i = 0;
-
-            for (i = 0; i < geom.vertices.length; i += 3)
-                if (geom.vertices[i + 0] == geom.vertices[i + 0])
+            for (let i = 0; i < geom.vertices.length; i += 3)
+                if (geom.vertices[i + 0] == geom.vertices[i + 0] || geom.vertices[i + 0]!=null)
                 {
                     // if(mat)
                     // {
@@ -148,6 +151,11 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
+        if(x==Number.MAX_VALUE || x==-Number.MAX_VALUE) return;
+        if(y==Number.MAX_VALUE || y==-Number.MAX_VALUE) return;
+        if(z==Number.MAX_VALUE || z==-Number.MAX_VALUE) return;
+        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
+
         if (this._first)
         {
             this._max[0] = x;
@@ -183,6 +191,8 @@ class BoundingBox
         this._center[2] = (this._min[2] + this._max[2]) / 2;
 
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
+
+
     }
 
     mulMat4(m)

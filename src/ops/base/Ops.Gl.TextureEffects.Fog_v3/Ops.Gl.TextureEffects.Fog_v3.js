@@ -68,7 +68,7 @@ render.onTriggered = function ()
     {
         op.setUiError("noDepthTex", null);
     }
-    if (image.val && image.val.tex)
+    if (image.get() && image.get().tex)
     {
         const a =
             cgl.currentTextureEffect.getCurrentSourceTexture().height
