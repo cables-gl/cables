@@ -25,6 +25,7 @@ class BoundingBox
         this._center = [0,0,0];
         this._size = [0,0,0];
         this._maxAxis=1.0;
+        this._first = true;
     }
 
     /**
