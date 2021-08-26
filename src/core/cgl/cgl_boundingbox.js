@@ -151,10 +151,10 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
-        if(x==Number.MAX_VALUE || x==-Number.MAX_VALUE) return;
-        if(y==Number.MAX_VALUE || y==-Number.MAX_VALUE) return;
-        if(z==Number.MAX_VALUE || z==-Number.MAX_VALUE) return;
-        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
+        if(x == Number.MAX_VALUE || x == -Number.MAX_VALUE) return;
+        if(y == Number.MAX_VALUE || y == -Number.MAX_VALUE) return;
+        if(z == Number.MAX_VALUE || z == -Number.MAX_VALUE) return;
+        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z)) return;
 
         if (this._first)
         {
@@ -168,6 +168,7 @@ class BoundingBox
             this._first = false;
             return;
         }
+
         this._max[0] = Math.max(this._max[0], x);
         this._max[1] = Math.max(this._max[1], y);
         this._max[2] = Math.max(this._max[2], z);
@@ -179,6 +180,7 @@ class BoundingBox
 
     calcCenterSize()
     {
+        if(this._first)return;
         // this._size[0]=Math.abs(this._min[0])+Math.abs(this._max[0]);
         // this._size[1]=Math.abs(this._min[1])+Math.abs(this._max[1]);
         // this._size[2]=Math.abs(this._min[2])+Math.abs(this._max[2]);
