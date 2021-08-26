@@ -24,7 +24,7 @@ class BoundingBox
         this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
         this._center = [0,0,0];
         this._size = [0,0,0];
-        this._maxAxis=1.0;
+        this._maxAxis=0.0;
         this._first = true;
     }
 
@@ -32,7 +32,7 @@ class BoundingBox
      * get biggest number of maxX,maxY,maxZ
      * @type {Number}
      */
-    get maxAxis() { return this._maxAxis; }
+    get maxAxis() { return this._maxAxis||1; }
 
     /**
      * size of bounding box
