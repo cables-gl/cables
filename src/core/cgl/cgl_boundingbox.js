@@ -201,6 +201,16 @@ class BoundingBox
 
     mulMat4(m)
     {
+        if(this._first)
+        {
+            this._max[0] = 0;
+            this._max[1] = 0;
+            this._max[2] = 0;
+
+            this._min[0] = 0;
+            this._min[1] = 0;
+            this._min[2] = 0;
+        }
         vec3.transformMat4(this._max, this._max, m);
         vec3.transformMat4(this._min, this._min, m);
         this.calcCenterSize();
