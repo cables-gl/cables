@@ -24,13 +24,15 @@ class BoundingBox
         this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
         this._center = [0,0,0];
         this._size = [0,0,0];
+        this._maxAxis=0.0;
+        this._first = true;
     }
 
     /**
      * get biggest number of maxX,maxY,maxZ
      * @type {Number}
      */
-    get maxAxis() { return this._maxAxis; }
+    get maxAxis() { return this._maxAxis||1; }
 
     /**
      * size of bounding box
@@ -151,10 +153,10 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
-        if(x==Number.MAX_VALUE || x==-Number.MAX_VALUE) return;
-        if(y==Number.MAX_VALUE || y==-Number.MAX_VALUE) return;
-        if(z==Number.MAX_VALUE || z==-Number.MAX_VALUE) return;
-        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z))return;
+        if(x == Number.MAX_VALUE || x == -Number.MAX_VALUE) return;
+        if(y == Number.MAX_VALUE || y == -Number.MAX_VALUE) return;
+        if(z == Number.MAX_VALUE || z == -Number.MAX_VALUE) return;
+        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z)) return;
 
         if (this._first)
         {
@@ -168,6 +170,7 @@ class BoundingBox
             this._first = false;
             return;
         }
+
         this._max[0] = Math.max(this._max[0], x);
         this._max[1] = Math.max(this._max[1], y);
         this._max[2] = Math.max(this._max[2], z);
@@ -179,6 +182,7 @@ class BoundingBox
 
     calcCenterSize()
     {
+        if(this._first)return;
         // this._size[0]=Math.abs(this._min[0])+Math.abs(this._max[0]);
         // this._size[1]=Math.abs(this._min[1])+Math.abs(this._max[1]);
         // this._size[2]=Math.abs(this._min[2])+Math.abs(this._max[2]);
@@ -197,6 +201,17 @@ class BoundingBox
 
     mulMat4(m)
     {
+        if(this._first)
+        {
+            this._max[0] = 0;
+            this._max[1] = 0;
+            this._max[2] = 0;
+
+            this._min[0] = 0;
+            this._min[1] = 0;
+            this._min[2] = 0;
+            this._first = false;
+        }
         vec3.transformMat4(this._max, this._max, m);
         vec3.transformMat4(this._min, this._min, m);
         this.calcCenterSize();
