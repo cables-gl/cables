@@ -27,7 +27,7 @@ const
     next = op.outTrigger("Next"),
     outGenerator = op.outString("Generator"),
     outVersion = op.outNumber("GLTF Version"),
-    outExtensions = op.outNumber("GLTF Extensions Used"),
+    outExtensions = op.outArray("GLTF Extensions Used"),
     outAnimLength = op.outNumber("Anim Length", 0),
     outAnimTime = op.outNumber("Anim Time", 0),
     outJson = op.outObject("Json"),
@@ -136,8 +136,8 @@ function setCam()
 inExec.onTriggered = function ()
 {
     if (!finishedLoading) return;
-
     if (!inActive.get()) return;
+
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
 
@@ -160,9 +160,13 @@ inExec.onTriggered = function ()
     {
         if (inRescale.get())
         {
-            const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            let sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            // if (!CABLES.UTILS.isNumeric(sc))sc = 1.0;
             gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
+
+            // console.log(gltf.bounds);
+
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
         }
         if (doCenter)
@@ -216,11 +220,42 @@ function finishLoading()
     }
 
     needsMatUpdate = true;
-    op.refreshParams();
+    // op.refreshParams();
     outAnimLength.set(maxTime);
+
+    gltf.bounds = new CGL.BoundingBox();
+    // gltf.bounds.applyPos(0, 0, 0);
 
     if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
     else op.setUiError("urlerror", null);
+
+    console.log("yo", JSON.stringify(gltf.bounds));
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        const node = gltf.nodes[i];
+        node.updateMatrix();
+        if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
+
+        // if(i==0) gltf.bounds=node.get
+
+        console.log("CALCBOUNDS", JSON.stringify(gltf.bounds));
+    }
+    if (gltf.bounds)outBounds.set(gltf.bounds);
+
+    hideNodesFromData();
+    if (tab)printInfo();
+
+    updateCamera();
+    setCam();
+    outPoints.set(boundingPoints);
+
+    if (gltf)
+    {
+        op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+
+        gltf.loaded = Date.now();
+        // if (gltf.bounds)outBounds.set(gltf.bounds);
+    }
 
     if (gltf)
     {
@@ -231,19 +266,6 @@ function finishLoading()
             }
     }
 
-    hideNodesFromData();
-    if (tab)printInfo();
-
-    updateCamera();
-    setCam();
-    outPoints.set(boundingPoints);
-    if (gltf)
-    {
-        op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
-
-        gltf.loaded = Date.now();
-        if (gltf.bounds)outBounds.set(gltf.bounds);
-    }
     updateCenter();
     outLoading.set(false);
 
@@ -272,7 +294,7 @@ function loadBin(addCacheBuster)
 
     cgl.patch.loading.addAssetLoadingTask(() =>
     {
-        oReq.onload = function (oEvent)
+        oReq.onload = (oEvent) =>
         {
             boundingPoints = [];
 

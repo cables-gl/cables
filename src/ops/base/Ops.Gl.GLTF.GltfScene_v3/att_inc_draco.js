@@ -84,41 +84,20 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 
 		const attributeType = attributeTypes[ attributeName ];
 		let attribute;
-		let attributeID; // A Draco file may be created with default vertex attributes, whose attribute IDs
-		// are mapped 1:1 from their semantic name (POSITION, NORMAL, ...). Alternatively,
-		// a Draco file may contain a custom set of attributes, identified by known unique
-		// IDs. glTF files always do the latter, and `.drc` files typically do the former.
+		let attributeID;
 
-// 		if ( taskConfig.useUniqueIDs ) {
 
-// 			attributeID = attributeIDs[ attributeName ];
-// 			attribute = decoder.GetAttributeByUniqueId( dracoGeometry, attributeID );
+		attributeID = decoder.GetAttributeId( dracoGeometry, count );
+		count++;
+		if ( attributeID === - 1 ) continue;
 
-// 		} else {
-
-			attributeID = decoder.GetAttributeId( dracoGeometry, count );
-			count++;
-			if ( attributeID === - 1 ) continue;
-
-			attribute = decoder.GetAttribute( dracoGeometry, attributeID );
-// 			console.log("attribute",attribute,attributeID,attributeIDs[ attributeName ])
-
-// 		}
+		attribute = decoder.GetAttribute( dracoGeometry, attributeID );
 
 		geometry.attributes.push( decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute ) );
-
-
-
-
-	} // Add index.
-
+	}
 
 	if ( geometryType === draco.TRIANGULAR_MESH ) {
-
 		geometry.index = decodeIndex( draco, decoder, dracoGeometry );
-
-		console.log(name,geometry.index);
-
 	}
 
 // 	console.log(geometry);

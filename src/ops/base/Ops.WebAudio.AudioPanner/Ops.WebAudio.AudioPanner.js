@@ -59,9 +59,9 @@ audioIn.onChange = function ()
     }
     else
     {
-        if (audioIn.val.connect)
+        if (audioIn.get().connect)
         {
-            audioIn.val.connect(panNode);
+            audioIn.get().connect(panNode);
             audioOut.set(panNode);
         }
     }

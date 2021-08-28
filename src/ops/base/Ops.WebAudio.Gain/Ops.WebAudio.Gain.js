@@ -45,7 +45,7 @@ audioIn.onChange = function ()
     }
     else
     {
-        if (audioIn.val.connect) audioIn.val.connect(gainNode);
+        if (audioIn.get().connect) audioIn.get().connect(gainNode);
     }
     oldAudioIn = audioIn.get();
     audioOut.set(gainNode);

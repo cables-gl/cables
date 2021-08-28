@@ -139,7 +139,7 @@ function printInfo()
 {
     if(!gltf)return;
 
-    console.log(gltf);
+    // console.log(gltf);
 
     const sizes={};
 
@@ -469,7 +469,7 @@ function printInfo()
     gui.mainTabs.addTab(tab,true);
     tab.html(html);
 
-    console.log(gltf);
+    // console.log(gltf);
 }
 
 function readableSize(n)
