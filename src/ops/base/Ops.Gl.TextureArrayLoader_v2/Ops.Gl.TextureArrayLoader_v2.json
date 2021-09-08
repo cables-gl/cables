@@ -1,1 +1,119 @@
-{"layout":{"portsIn":[{"type":5,"name":"Url"},{"type":0,"name":"Left Pad","subType":"boolean"},{"type":0,"name":"Index Start","subType":"integer"},{"type":0,"name":"Index End","subType":"integer"},{"type":0,"name":"filter index","subType":"integer"},{"type":0,"name":"wrap index","subType":"integer"},{"type":0,"name":"Flip","subType":"boolean"},{"type":0,"name":"unpackPreMultipliedAlpha","subType":"boolean"}],"portsOut":[{"type":3,"name":"TextureArray"},{"type":0,"name":"Width","subType":"number"},{"type":0,"name":"Height","subType":"number"},{"type":0,"name":"Loading","subType":"boolean"},{"type":0,"name":"Aspect Ratio","subType":"number"}],"name":"Ops.User.stephan.TextureArrayLoader_v2"},"summary":"load multiple images into an array","authorName":"stephan","id":"4bbb57ce-3c7b-49c1-84fd-2b6a27ff3afa","created":1631107270910,"docs":{"ports":[{"name":"url","text":"The image URL-blueprint, choose the first file using the file chooser, then replace the number with XXX"},{"name":"Left Pad","text":"Activate when your images have preceding zeros, e.g. `my_image_001.jpg`, … `my_image_056.jpg`"},{"name":"Num Digits","text":"How many digits the numbers have, e.g. `my_image_0001.jpg` —> `4`, `my_image_01.jpg` —> `2`"},{"name":"Index Start","text":"The first image number, e.g. `my_image_0005.jpg` —> `5`"},{"name":"Index End","text":"The last image number, e.g. `my_image_0143.jpg` —> `143`"}]},"issues":"","collections":null,"relatedops":["Ops.Gl.Texture","Ops.Gl.TextureArrayLoaderFromArray"],"youtubeids":[],"changelog":[{"message":"cloned op from Ops.Gl.TextureArrayLoader","author":"stephan","date":1631107270911},{"message":"Ops.User.stephan.TextureArrayLoader_v2 renamed to Ops.Gl.TextureArrayLoader_v2","author":"stephan","date":1631107797285}]}
+{
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "Url"
+            },
+            {
+                "type": 0,
+                "name": "Left Pad",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Index Start",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Index End",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "unpackPreMultipliedAlpha",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "TextureArray"
+            },
+            {
+                "type": 0,
+                "name": "Width",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Loading",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Aspect Ratio",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.TextureArrayLoader_v2"
+    },
+    "summary": "load multiple images into an array",
+    "authorName": "stephan",
+    "id": "4bbb57ce-3c7b-49c1-84fd-2b6a27ff3afa",
+    "created": 1631107270910,
+    "docs": {
+        "ports": [
+            {
+                "name": "url",
+                "text": "The image URL-blueprint, choose the first file using the file chooser, then replace the number with XXX"
+            },
+            {
+                "name": "Left Pad",
+                "text": "Activate when your images have preceding zeros, e.g. `my_image_001.jpg`, … `my_image_056.jpg`"
+            },
+            {
+                "name": "Num Digits",
+                "text": "How many digits the numbers have, e.g. `my_image_0001.jpg` —> `4`, `my_image_01.jpg` —> `2`"
+            },
+            {
+                "name": "Index Start",
+                "text": "The first image number, e.g. `my_image_0005.jpg` —> `5`"
+            },
+            {
+                "name": "Index End",
+                "text": "The last image number, e.g. `my_image_0143.jpg` —> `143`"
+            }
+        ]
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.Texture",
+        "Ops.Gl.TextureArrayLoaderFromArray"
+    ],
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureArrayLoader",
+            "author": "stephan",
+            "date": 1631107270911
+        },
+        {
+            "message": "Ops.User.stephan.TextureArrayLoader_v2 renamed to Ops.Gl.TextureArrayLoader_v2",
+            "author": "stephan",
+            "date": 1631107797285
+        }
+    ]
+}
