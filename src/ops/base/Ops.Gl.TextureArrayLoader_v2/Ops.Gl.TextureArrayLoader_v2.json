@@ -2,9 +2,8 @@
     "layout": {
         "portsIn": [
             {
-                "type": 0,
-                "name": "url",
-                "subType": "string"
+                "type": 5,
+                "name": "Url"
             },
             {
                 "type": 0,
@@ -33,7 +32,7 @@
             },
             {
                 "type": 0,
-                "name": "flip",
+                "name": "Flip",
                 "subType": "boolean"
             },
             {
@@ -49,18 +48,18 @@
             },
             {
                 "type": 0,
-                "name": "width",
+                "name": "Width",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "height",
+                "name": "Height",
                 "subType": "number"
             },
             {
                 "type": 0,
-                "name": "loading",
-                "subType": "number"
+                "name": "Loading",
+                "subType": "boolean"
             },
             {
                 "type": 0,
@@ -68,12 +67,12 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Gl.TextureArrayLoader"
+        "name": "Ops.Gl.TextureArrayLoader_v2"
     },
     "summary": "load multiple images into an array",
-    "authorName": "tim",
-    "id": "4ee5bc6d-fd73-4498-8378-6846e57cdd7f",
-    "created": 1519307241280,
+    "authorName": "stephan",
+    "id": "4bbb57ce-3c7b-49c1-84fd-2b6a27ff3afa",
+    "created": 1631107270910,
     "docs": {
         "ports": [
             {
@@ -104,5 +103,17 @@
         "Ops.Gl.Texture",
         "Ops.Gl.TextureArrayLoaderFromArray"
     ],
-    "youtubeids": []
+    "youtubeids": [],
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureArrayLoader",
+            "author": "stephan",
+            "date": 1631107270911
+        },
+        {
+            "message": "Ops.User.stephan.TextureArrayLoader_v2 renamed to Ops.Gl.TextureArrayLoader_v2",
+            "author": "stephan",
+            "date": 1631107797285
+        }
+    ]
 }

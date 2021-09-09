@@ -33,7 +33,7 @@ void main()
     col=texture(tex,vec2(x,y));
 
     #ifdef NO_REPEAT
-        if(x>1.0 || x<0.0 || y>1.0 || y<0.0) col=vec4(0.0,0.0,0.0,1.0);
+        if(x>1.0 || x<0.0 || y>1.0 || y<0.0) col=vec4(0.0,0.0,0.0,0.0);
     #endif
     outColor= col;
 }
