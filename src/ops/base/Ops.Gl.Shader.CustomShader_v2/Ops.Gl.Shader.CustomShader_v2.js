@@ -36,11 +36,15 @@ op.onLoadedValueSet = initDataOnLoad;
 function initDataOnLoad(data)
 {
     updateShader();
+    console.log(data);
     // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
     for (let i = 0; i < uniformInputs.length; i++)
         for (let j = 0; j < data.portsIn.length; j++)
             if (uniformInputs[i] && uniformInputs[i].name == data.portsIn[j].name)
+            {
                 uniformInputs[i].set(data.portsIn[j].value);
+                uniformInputs[i].deSerializeSettings(data.portsIn[j]);
+            }
 }
 
 op.init = function ()
@@ -66,9 +70,8 @@ function bindTextures()
 
 function hasUniformInput(name)
 {
-    let i = 0;
-    for (i = 0; i < uniformInputs.length; i++) if (uniformInputs[i] && uniformInputs[i].name == name) return true;
-    for (i = 0; i < uniformTextures.length; i++) if (uniformTextures[i] && uniformTextures[i].name == name) return true;
+    for (let i = 0; i < uniformInputs.length; i++) if (uniformInputs[i] && uniformInputs[i].name == name) return true;
+    for (let i = 0; i < uniformTextures.length; i++) if (uniformTextures[i] && uniformTextures[i].name == name) return true;
     return false;
 }
 

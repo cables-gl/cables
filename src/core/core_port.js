@@ -326,6 +326,12 @@ Port.prototype.getTypeString = function ()
     return "Unknown";
 };
 
+Port.prototype.deSerializeSettings = function (objPort)
+{
+    if (objPort && objPort.animated) this.setAnimated(objPort.animated);
+    if (objPort && objPort.useVariable) this.setVariableName(objPort.useVariable);
+};
+
 Port.prototype.getSerialized = function ()
 {
     const obj = {};
@@ -569,10 +575,9 @@ Port.prototype.setVariable = function (v)
     {
         this._variableIn = this.parent.patch.getVar(v);
 
-
         if (!this._variableIn)
         {
-            console.log("PORT VAR NOT FOUND!!!");
+            console.log("PORT VAR NOT FOUND!!!", v);
         }
         else
         {

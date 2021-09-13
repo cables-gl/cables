@@ -28,11 +28,6 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "test float 1",
-                "subType": "number"
-            },
-            {
-                "type": 0,
                 "name": "name",
                 "subType": "number"
             },
@@ -57,7 +52,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.Admin.TestOp_v2"
+        "name": "Ops.Dev.TestOp_v2"
     },
     "summary": "just for testing",
     "issues": "",

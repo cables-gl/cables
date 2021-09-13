@@ -820,7 +820,14 @@ Patch.prototype.reloadOp = function (objName, cb)
             {
                 const p = op.getPort(oldOp.portsIn[j].name);
                 if (!p) Log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
-                else p.set(oldOp.portsIn[j].get());
+                else
+                {
+                    p.set(oldOp.portsIn[j].get());
+
+
+                    if (oldOp.portsIn[j].getVariableName())
+                        p.setVariable(oldOp.portsIn[j].getVariableName());
+                }
             }
             else
             {
@@ -944,8 +951,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
                 if (port && (port.uiAttribs.display == "bool" || port.uiAttribs.type == "bool") && !isNaN(objPort.value)) objPort.value = objPort.value === true;
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
-                if (port && objPort && objPort.animated) port.setAnimated(objPort.animated);
-                if (port && objPort && objPort.useVariable) port.setVariableName(objPort.useVariable);
+
+                if (port)port.deSerializeSettings(objPort);
 
                 if (port && objPort && objPort.anim)
                 {
