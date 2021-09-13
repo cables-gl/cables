@@ -593,6 +593,24 @@ Port.prototype.setVariable = function (v)
     this.setUiAttribs(attr);
 };
 
+Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
+{
+    let hasTriggerPort = false;
+    for (let i = 0; i < this.parent.portsIn.length; i++)
+    {
+        if (this.parent.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        {
+            hasTriggerPort = true;
+            break;
+        }
+    }
+    if (!hasTriggerPort)
+    {
+        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame", this.updateAnim.bind(this));
+        else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
+    }
+};
+
 Port.prototype.setAnimated = function (a)
 {
     if (this._animated != a)
@@ -601,6 +619,9 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
+
+    this._handleNoTriggerOpAnimUpdates();
+
     this.setUiAttribs({ "isAnimated": this._animated });
 };
 
