@@ -20,12 +20,27 @@ void main()
     uv.x = (uv.x - centerX) / (uScaleX * multiplier)  + centerX+offsetX ;
     uv.y = (uv.y - centerY) / (uScaleY * multiplier)  + centerY+offsetY ;
 
+
+
+
     //blend section
     vec4 col = texture(tex,uv);
+
+
+
     //original texture
     vec4 base = texture(tex,texCoord);
 
     //blend stuff
+    float a=amount;
 
-    outColor=cgl_blend(base,col,amount);
+
+    outColor=cgl_blend(base,col,a);
+
+    if(uv.x>1.0||uv.y>1.0||uv.x<0.0||uv.y<0.0)
+    {
+        outColor.a=0.0;
+        // a=0.0;
+    }
+
 }

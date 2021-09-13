@@ -24,7 +24,7 @@ const gltfNode = class
 
     hasSkin()
     {
-        console.log(this._gltf);
+        // console.log(this._gltf);
         if(this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name||"unknown";
         return false;
     }
@@ -75,33 +75,41 @@ const gltfNode = class
     calcBounds(gltf, mat, bounds)
     {
         const localMat = mat4.create();
-        if (mat)
-        {
-            mat4.copy(localMat, mat);
-        }
+        if (mat) mat4.copy(localMat, mat);
 
-        // mat=mat||mat4.create();
+        if (this.mat) mat4.mul(localMat, localMat, this.mat);
 
-        if (this.mat)
-            mat4.mul(localMat, localMat, this.mat);
 
-        if (this.mesh)
+console.log("before",JSON.stringify(bounds));
+
+        if (this.mesh && bounds.changed)
         {
             const bb = this.mesh.bounds.copy();
+            console.log("copy",JSON.stringify(bb));
             bb.mulMat4(localMat);
             bounds.apply(bb);
 
-            boundingPoints.push(bb._min[0], bb._min[1], bb._min[2]);
-            boundingPoints.push(bb._max[0], bb._max[1], bb._max[2]);
+if(bounds.changed)
+{
+            boundingPoints.push(bb._min[0]||0, bb._min[1]||0, bb._min[2]||0);
+            boundingPoints.push(bb._max[0]||0, bb._max[1]||0, bb._max[2]||0);
+
+}
         }
+
+console.log("after",JSON.stringify(bounds));
+
 
         for (let i = 0; i < this.children.length; i++)
         {
             if (gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
             {
-                bounds.apply(gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds));
+                const b=gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
+
+                bounds.apply(b);
             }
         }
+
 
         if (bounds.changed) return bounds;
         else return null;

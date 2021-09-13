@@ -1,7 +1,7 @@
 
 var gltfMesh=class
 {
-    constructor(name,prim,gltf)
+    constructor(name,prim,gltf,finished)
     {
         this.test=0;
         this.name=name;
@@ -9,6 +9,7 @@ var gltfMesh=class
         this.mesh=null;
         this.geom=new CGL.Geometry("gltf_"+this.name);
         this.geom.verticesIndices = [];
+        this.bounds=null;
 
         if(prim.hasOwnProperty("indices")) this.geom.verticesIndices=gltf.accBuffers[prim.indices];
 
@@ -23,6 +24,8 @@ var gltfMesh=class
                     this.setGeom(geom);
                     this.mesh=null;
                     gltf.loadingMeshes--;
+
+                    if(finished)finished(this);
 
                 });
         }
@@ -39,9 +42,17 @@ var gltfMesh=class
 
                     if(prim.hasOwnProperty("indices")) tgeom.verticesIndices=gltf.accBuffers[prim.indices];
                     this.fillGeomAttribs(gltf,tgeom,prim.targets[j]);
+                    // const attribs=prim.targets[j];
+
+                    // if(attribs.hasOwnProperty("POSITION"))tgeom.vertices=gltf.accBuffers[attribs.POSITION];
+                    // if(attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
+                    // if(attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
+                    // if(attribs.hasOwnProperty("TANGENT"))tgeom.tangents=gltf.accBuffers[attribs.TANGENT];
+                    // if(attribs.hasOwnProperty("COLOR_0"))tgeom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
+
+                    // if(tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
 
                     // console.log( Object.keys(prim.targets[j]) );
-
 
                     { // calculate normals for final position of morphtarget for later...
                         for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]+= this.geom.vertices[i];
@@ -49,38 +60,42 @@ var gltfMesh=class
                         for(let i=0;i<tgeom.vertices.length;i++) tgeom.vertices[i]-=this.geom.vertices[i];
                     }
 
-
                     this.geom.morphTargets.push(tgeom);
                 }
-
+            if(finished)finished(this);
         }
-
-
-
     }
 
-    fillGeomAttribs(gltf,geom,attribs)
+
+    fillGeomAttribs(gltf,tgeom,attribs)
     {
-        if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
-        if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
-        if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
-        if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
-        if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
-        if(geom && geom.verticesIndices) this.setGeom(geom);
+        if(attribs.hasOwnProperty("POSITION"))tgeom.vertices=gltf.accBuffers[attribs.POSITION];
+        if(attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
+        if(attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
+        if(attribs.hasOwnProperty("TANGENT"))tgeom.tangents=gltf.accBuffers[attribs.TANGENT];
+        if(attribs.hasOwnProperty("COLOR_0"))tgeom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
 
-        // Implementation note: When normals and tangents are specified,
-        // client implementations should compute the bitangent by taking
-        // the cross product of the normal and tangent xyz vectors and
-        // multiplying against the w component of the tangent:
-        // bitangent = cross(normal, tangent.xyz) * tangent.w
+        if(tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
 
     }
+    // fillGeomAttribs(gltf,geom,attribs)
+    // {
+
+    //     // Implementation note: When normals and tangents are specified,
+    //     // client implementations should compute the bitangent by taking
+    //     // the cross product of the normal and tangent xyz vectors and
+    //     // multiplying against the w component of the tangent:
+    //     // bitangent = cross(normal, tangent.xyz) * tangent.w
+
+    // }
 
     setGeom(geom)
     {
         this.morphGeom=geom.copy();
-        this.bounds=geom.getBounds();
+
+
+        console.log("this.bounds",this.bounds,geom);
 
         if(inNormFormat.get()=="X-ZY")
         {
@@ -90,15 +105,7 @@ var gltfMesh=class
                 geom.vertexNormals[i+2]=geom.vertexNormals[i+1];
                 geom.vertexNormals[i+1]=-t;
             }
-
-            // for(let i=0;i<geom.tangents.length;i+=3)
-            // {
-            //     let t=geom.tangents[i+2];
-            //     geom.tangents[i+2]=geom.tangents[i+1];
-            //     geom.tangents[i+1]=-t;
-            // }
         }
-
 
         if(inVertFormat.get()=="XZ-Y")
         {
@@ -146,11 +153,15 @@ var gltfMesh=class
 
         if(geom.tangents.length===0 || inCalcNormals.get())  geom.calcTangentsBitangents();
         this.geom=geom;
+
+        this.bounds=geom.getBounds();
+
+        console.log("GEOM BOUNDS",this.name,this.bounds)
     }
 
     render(cgl,ignoreMaterial)
     {
-        if(!this.geom)return;
+        if(!this.geom) return;
 
         if(!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -162,7 +173,6 @@ var gltfMesh=class
             }
 
             this.mesh=new CGL.Mesh(cgl,g);
-
         }
         else
         {
@@ -202,7 +212,7 @@ var gltfMesh=class
 
             if(this.mesh)
             {
-                // console.log("nesgh render")
+
                 this.mesh.render(cgl.getShader(),ignoreMaterial);
             }
 

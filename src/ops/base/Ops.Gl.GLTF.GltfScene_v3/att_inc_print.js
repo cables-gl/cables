@@ -1,8 +1,9 @@
-var tab=null;
+let tab=null;
 
 function closeTab()
 {
     if(tab)gui.mainTabs.closeTab(tab.id);
+    tab=null;
 }
 
 function printNode(html,node,level)
@@ -139,7 +140,7 @@ function printInfo()
 {
     if(!gltf)return;
 
-    console.log(gltf);
+    // console.log(gltf);
 
     const sizes={};
 
@@ -469,7 +470,7 @@ function printInfo()
     gui.mainTabs.addTab(tab,true);
     tab.html(html);
 
-    console.log(gltf);
+    // console.log(gltf);
 }
 
 function readableSize(n)

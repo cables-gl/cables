@@ -69,6 +69,7 @@ function updateTexCoordsPorts()
         else seed.setUiAttribs({ "greyout": false });
     }
 
+    mesh = null;
     needsRebuild = true;
 }
 

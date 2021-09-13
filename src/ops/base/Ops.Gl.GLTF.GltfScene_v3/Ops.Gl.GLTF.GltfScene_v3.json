@@ -109,9 +109,8 @@
                 "subType": "number"
             },
             {
-                "type": 0,
-                "name": "GLTF Extensions Used",
-                "subType": "number"
+                "type": 3,
+                "name": "GLTF Extensions Used"
             },
             {
                 "type": 0,
