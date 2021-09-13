@@ -1,6 +1,6 @@
 import { EventTarget } from "./eventtarget";
 import { generateUUID } from "./utils";
-import { Anim } from "./anim";
+import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Log } from "./log";
 
@@ -328,8 +328,19 @@ Port.prototype.getTypeString = function ()
 
 Port.prototype.deSerializeSettings = function (objPort)
 {
-    if (objPort && objPort.animated) this.setAnimated(objPort.animated);
-    if (objPort && objPort.useVariable) this.setVariableName(objPort.useVariable);
+    if (!objPort) return;
+    if (objPort.animated) this.setAnimated(objPort.animated);
+    if (objPort.useVariable) this.setVariableName(objPort.useVariable);
+
+    if (objPort.anim)
+    {
+        if (!this.anim) this.anim = new Anim();
+        if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
+        for (const ani in objPort.anim.keys)
+        {
+            this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
+        }
+    }
 };
 
 Port.prototype.getSerialized = function ()

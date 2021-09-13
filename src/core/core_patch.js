@@ -953,16 +953,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
                 if (port && objPort.value !== undefined && port.type != CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) port.set(objPort.value);
 
                 if (port)port.deSerializeSettings(objPort);
-
-                if (port && objPort && objPort.anim)
-                {
-                    if (!port.anim) port.anim = new Anim();
-                    if (objPort.anim.loop) port.anim.loop = objPort.anim.loop;
-                    for (const ani in objPort.anim.keys)
-                    {
-                        port.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
-                    }
-                }
             }
 
             for (const ipo in opData.portsOut)
