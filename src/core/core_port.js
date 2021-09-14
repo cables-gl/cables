@@ -1,6 +1,6 @@
 import { EventTarget } from "./eventtarget";
 import { generateUUID } from "./utils";
-import { Anim } from "./anim";
+import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Log } from "./log";
 
@@ -326,6 +326,23 @@ Port.prototype.getTypeString = function ()
     return "Unknown";
 };
 
+Port.prototype.deSerializeSettings = function (objPort)
+{
+    if (!objPort) return;
+    if (objPort.animated) this.setAnimated(objPort.animated);
+    if (objPort.useVariable) this.setVariableName(objPort.useVariable);
+
+    if (objPort.anim)
+    {
+        if (!this.anim) this.anim = new Anim();
+        if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
+        for (const ani in objPort.anim.keys)
+        {
+            this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
+        }
+    }
+};
+
 Port.prototype.getSerialized = function ()
 {
     const obj = {};
@@ -569,10 +586,9 @@ Port.prototype.setVariable = function (v)
     {
         this._variableIn = this.parent.patch.getVar(v);
 
-
         if (!this._variableIn)
         {
-            console.log("PORT VAR NOT FOUND!!!");
+            console.log("PORT VAR NOT FOUND!!!", v);
         }
         else
         {
@@ -593,6 +609,24 @@ Port.prototype.setVariable = function (v)
     this.setUiAttribs(attr);
 };
 
+Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
+{
+    let hasTriggerPort = false;
+    for (let i = 0; i < this.parent.portsIn.length; i++)
+    {
+        if (this.parent.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        {
+            hasTriggerPort = true;
+            break;
+        }
+    }
+    if (!hasTriggerPort)
+    {
+        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame", this.updateAnim.bind(this));
+        else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
+    }
+};
+
 Port.prototype.setAnimated = function (a)
 {
     if (this._animated != a)
@@ -601,6 +635,9 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
+
+    this._handleNoTriggerOpAnimUpdates();
+
     this.setUiAttribs({ "isAnimated": this._animated });
 };
 

@@ -1,8 +1,9 @@
-var tab=null;
+let tab=null;
 
 function closeTab()
 {
     if(tab)gui.mainTabs.closeTab(tab.id);
+    tab=null;
 }
 
 function printNode(html,node,level)

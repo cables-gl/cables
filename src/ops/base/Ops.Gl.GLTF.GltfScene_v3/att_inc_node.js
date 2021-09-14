@@ -5,7 +5,7 @@ const gltfNode = class
     {
         this.isChild = node.isChild || false;
         this.name = node.name;
-        if(node.hasOwnProperty("camera"))this.camera = node.camera;
+        if (node.hasOwnProperty("camera")) this.camera = node.camera;
         this.hidden = false;
         this.mat = mat4.create();
         this._animMat = mat4.create();
@@ -17,7 +17,7 @@ const gltfNode = class
         this._node = node;
         this._gltf = gltf;
         this.absMat = mat4.create();
-        this.addTranslate=null;
+        this.addTranslate = null;
 
         this.updateMatrix();
     }
@@ -25,7 +25,7 @@ const gltfNode = class
     hasSkin()
     {
         // console.log(this._gltf);
-        if(this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name||"unknown";
+        if (this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name || "unknown";
         return false;
     }
 
@@ -80,31 +80,30 @@ const gltfNode = class
         if (this.mat) mat4.mul(localMat, localMat, this.mat);
 
 
-console.log("before",JSON.stringify(bounds));
+        // console.log("before",JSON.stringify(bounds));
 
         if (this.mesh && bounds.changed)
         {
             const bb = this.mesh.bounds.copy();
-            console.log("copy",JSON.stringify(bb));
+            console.log("copy", JSON.stringify(bb));
             bb.mulMat4(localMat);
             bounds.apply(bb);
 
-if(bounds.changed)
-{
-            boundingPoints.push(bb._min[0]||0, bb._min[1]||0, bb._min[2]||0);
-            boundingPoints.push(bb._max[0]||0, bb._max[1]||0, bb._max[2]||0);
-
-}
+            if (bounds.changed)
+            {
+                boundingPoints.push(bb._min[0] || 0, bb._min[1] || 0, bb._min[2] || 0);
+                boundingPoints.push(bb._max[0] || 0, bb._max[1] || 0, bb._max[2] || 0);
+            }
         }
 
-console.log("after",JSON.stringify(bounds));
+        // console.log("after",JSON.stringify(bounds));
 
 
         for (let i = 0; i < this.children.length; i++)
         {
             if (gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
             {
-                const b=gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
+                const b = gltf.nodes[this.children[i]].calcBounds(gltf, localMat, bounds);
 
                 bounds.apply(b);
             }
@@ -179,7 +178,7 @@ console.log("after",JSON.stringify(bounds));
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this._animMat);
         }
 
-        if(this.addTranslate)mat4.translate(cgl.mMatrix,cgl.mMatrix,this.addTranslate);
+        if (this.addTranslate)mat4.translate(cgl.mMatrix, cgl.mMatrix, this.addTranslate);
 
         mat4.copy(this.absMat, cgl.mMatrix);
     }

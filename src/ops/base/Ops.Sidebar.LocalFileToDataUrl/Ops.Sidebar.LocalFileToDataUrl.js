@@ -10,6 +10,7 @@ const inOpenDialog = op.inTriggerButton("Show Dialog");
 
 const siblingsPort = op.outObject("childs");
 const outDataURL = op.outString("Data URL");
+outDataURL.ignoreValueSerialize = true;
 
 // vars
 const el = document.createElement("div");

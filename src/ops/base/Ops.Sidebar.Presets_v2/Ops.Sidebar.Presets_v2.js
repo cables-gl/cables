@@ -105,7 +105,14 @@ function deSerializeSidebar(obj)
                 const p = theOp.getPortByName(portName);
                 if (p)
                 {
-                    p.set(obj.ops[i].ports[portName].value);
+                    if (typeof obj.ops[i].ports[portName] !== "object")
+                    {
+                        p.set(obj.ops[i].ports[portName]);
+                    }
+                    else
+                    {
+                        p.set(obj.ops[i].ports[portName].value);
+                    }
                 }
                 else
                 {
@@ -116,6 +123,11 @@ function deSerializeSidebar(obj)
                 if (def)
                 {
                     def.set(obj.ops[i].ports[portName]);
+                }
+                const namedInPort = theOp.getPortByName("Input " + p.name);
+                if (namedInPort)
+                {
+                    namedInPort.set(obj.ops[i].ports[portName]);
                 }
             }
         }

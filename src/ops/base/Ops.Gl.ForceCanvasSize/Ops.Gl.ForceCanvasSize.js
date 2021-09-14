@@ -106,19 +106,31 @@ inTrigger.onTriggered = function ()
     let w = inWidth.get();
     let h = inHeight.get();
 
+    let clientRect = cgl.canvas.parentNode.getBoundingClientRect();
+    if (clientRect.height == 0)
+    {
+        cgl.canvas.parentNode.style.height = "100%";
+        clientRect = cgl.canvas.parentNode.getBoundingClientRect();
+    }
+    if (clientRect.width == 0)
+    {
+        cgl.canvas.parentNode.style.width = "100%";
+        clientRect = cgl.canvas.parentNode.getBoundingClientRect();
+    }
+
     if (align == ALIGN_WIDTH)
     {
-        w = cgl.canvas.parentNode.getBoundingClientRect().width;
+        w = clientRect.width;
         h = w * 1 / inRatio.get();
     }
     else if (align == ALIGN_HEIGHT)
     {
-        h = cgl.canvas.parentNode.getBoundingClientRect().height;
+        h = clientRect.height;
         w = h * inRatio.get();
     }
     else if (align == ALIGN_AUTO)
     {
-        const rect = cgl.canvas.parentNode.getBoundingClientRect();
+        const rect = clientRect;
 
         h = rect.height;
         w = h * inRatio.get();
@@ -131,7 +143,7 @@ inTrigger.onTriggered = function ()
     }
     else if (align == ALIGN_BOTH)
     {
-        const rect = cgl.canvas.parentNode.getBoundingClientRect();
+        const rect = clientRect;
         h = rect.height;
         w = h * inRatio.get();
 
@@ -147,7 +159,7 @@ inTrigger.onTriggered = function ()
 
     if (inCenter.get())
     {
-        const rect = cgl.canvas.parentNode.getBoundingClientRect();
+        const rect = clientRect;
         cgl.canvas.style["margin-top"] = (rect.height - h) / 2 + "px";
         cgl.canvas.style["margin-left"] = (rect.width - w) / 2 + "px";
     }
@@ -159,7 +171,7 @@ inTrigger.onTriggered = function ()
 
     if (inScaleFit.get())
     {
-        const rect = cgl.canvas.parentNode.getBoundingClientRect();
+        const rect = clientRect;
         const scX = rect.width / inWidth.get();
         const scY = rect.height / inHeight.get();
         cgl.canvas.style.transform = "scale(" + Math.min(scX, scY) + ")";
