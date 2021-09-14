@@ -5,7 +5,8 @@ const nudgeLeft = this.addInPort(new CABLES.Port(this, "nudgeLeft", CABLES.OP_PO
 const nudgeRight = this.addInPort(new CABLES.Port(this, "nudgeRight", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
 
 const beat = this.addOutPort(new CABLES.Port(this, "beat", CABLES.OP_PORT_TYPE_FUNCTION));
-const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }));
+// const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }),0);
+const bpm = op.outNumber("Bpm", 0);
 const outStates = this.addOutPort(new CABLES.Port(this, "States", CABLES.OP_PORT_TYPE_ARRAY));
 
 const beatNum = this.addOutPort(new CABLES.Port(this, "Beat Index", CABLES.OP_PORT_TYPE_VALUE));
