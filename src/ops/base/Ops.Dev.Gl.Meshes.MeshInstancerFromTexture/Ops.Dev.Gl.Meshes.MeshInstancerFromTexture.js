@@ -94,7 +94,8 @@ function updateDefines()
 geom.onChange = function ()
 {
     if (mesh)mesh.dispose();
-    if (!geom.get())
+
+    if (!geom.get() || !geom.get().vertices)
     {
         mesh = null;
         return;
