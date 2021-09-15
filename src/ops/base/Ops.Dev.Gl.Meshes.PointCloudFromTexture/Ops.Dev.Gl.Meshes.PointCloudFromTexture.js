@@ -95,6 +95,7 @@ function setupMesh()
     if (numVerts > 0)
         mesh = new CGL.Mesh(cgl, geom, cgl.gl.POINTS);
 
+    if (!mesh) return;
     mesh.addVertexNumbers = true;
     mesh.setGeom(geom);
     needsMeshSetup = false;

@@ -7,9 +7,9 @@ const
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    mulx = op.inValue("Multiply x"),
-    muly = op.inValue("Multiply y"),
-    mulz = op.inValue("Multiply z");
+    mulx = op.inValue("Multiply x", 1),
+    muly = op.inValue("Multiply y", 1),
+    mulz = op.inValue("Multiply z", 1);
 
 const cgl = op.patch.cgl;
 

@@ -1,7 +1,7 @@
 
 
-float tx=mod(instanceIndex,(MOD_texSize-1.0))/MOD_texSize;
-float ty=float(int((instanceIndex/(MOD_texSize-1.0))))/MOD_texSize;
+float tx=mod(instanceIndex,(MOD_texSize))/MOD_texSize+(1.0/MOD_texSize*0.5);
+float ty=float(int((instanceIndex/(MOD_texSize))))/MOD_texSize+(1.0/MOD_texSize*0.5);
 
 vec3 MOD_texPos=texture(MOD_texTrans,vec2(tx,ty)).rgb;
 
@@ -16,7 +16,6 @@ mat4 texInstMat;
 mat3 rm;
 #endif
 
-
 texInstMat= mat4(rm[0][0], rm[0][1], rm[0][2], 0.0,
 			rm[1][0], rm[1][1], rm[1][2], 0.0,
 			rm[2][0], rm[2][1], rm[2][2], 0.0,
@@ -24,11 +23,6 @@ texInstMat= mat4(rm[0][0], rm[0][1], rm[0][2], 0.0,
 			MOD_texPos.y,
 			MOD_texPos.z,
 			1.0 );
-
-
-// texInstMat[3][0]=MOD_texPos.x;
-// texInstMat[3][1]=MOD_texPos.y;
-// texInstMat[3][2]=MOD_texPos.z;
 
 vec3 scale=vec3(1.0);
 
@@ -40,12 +34,9 @@ vec3 scale=vec3(1.0);
 texInstMat[0][0]=MOD_scale*scale.x;
 texInstMat[1][1]=MOD_scale*scale.y;
 texInstMat[2][2]=MOD_scale*scale.z;
-texInstMat[3][3]=1.4; // wtf is this number
+texInstMat[3][3]=1.4; // ?
 
 mMatrix*=texInstMat;
-// pos.xyz*=MOD_scale;
-
-
 
 #ifdef USE_TEX_COLOR
 
