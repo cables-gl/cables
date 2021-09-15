@@ -424,9 +424,7 @@ TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 
 TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 {
-    op.setPortGroup("Blending", [blendMode, amount]);
-
-    blendMode.onChange = function ()
+    const onChange = () =>
     {
         TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
@@ -451,6 +449,11 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 
         op.setUiAttrib({ "extendTitle": str });
     };
+    op.setPortGroup("Blending", [blendMode, amount]);
+
+    blendMode.onChange = onChange;
+
+    TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 };
 
 export { TextureEffect };

@@ -20,23 +20,18 @@ const shader = new CGL.Shader(cgl, op.name);
 
 op.setPortGroup("Noise", [noise, noiseamount]);
 
-CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
-
 shader.setSource(shader.getDefaultVertexShader(), attachments.ssao_frag);
 let textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
 let textureAlpha = new CGL.Uniform(shader, "t", "texDepth", 1);
-
 aoRadius.uniform = new CGL.Uniform(shader, "f", "radius", aoRadius);
 aoClamp.uniform = new CGL.Uniform(shader, "f", "aoclamp", aoClamp);
 lumInfluence.uniform = new CGL.Uniform(shader, "f", "lumInfluence", lumInfluence);
-// samples.uniform=new CGL.Uniform(shader,'i','samples',samples);
-
 zNear.uniform = new CGL.Uniform(shader, "f", "znear", zNear);
 zFar.uniform = new CGL.Uniform(shader, "f", "zfar", zFar);
-
 const amountUniform = new CGL.Uniform(shader, "f", "amount", amount);
-
 noiseamount.uniform = new CGL.Uniform(shader, "f", "noiseamount", noiseamount);
+
+CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
 noise.onChange = function ()
 {
