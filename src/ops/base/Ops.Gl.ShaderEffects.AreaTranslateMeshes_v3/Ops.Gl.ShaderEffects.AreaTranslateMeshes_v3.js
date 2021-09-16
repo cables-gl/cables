@@ -3,13 +3,12 @@ const
     next = op.outTrigger("trigger"),
     inSize = op.inValue("Size", 1),
     inStrength = op.inValue("Strength", 0.5),
-    inSmooth = op.inValueBool("Smooth", true),
     x = op.inValue("x"),
     y = op.inValue("y"),
     z = op.inValue("z"),
-    mulx = op.inValue("Multiply x", 1),
-    muly = op.inValue("Multiply y", 1),
-    mulz = op.inValue("Multiply z", 1);
+    mulx = op.inValue("Multiply x",1),
+    muly = op.inValue("Multiply y",1),
+    mulz = op.inValue("Multiply z",1);
 
 const cgl = op.patch.cgl;
 
@@ -37,7 +36,6 @@ mod.addModule({
 
 mod.addUniformVert("f", "MOD_size", inSize);
 mod.addUniformVert("f", "MOD_strength", inStrength);
-// mod.addUniformVert("i", "MOD_smooth", inSmooth);
 
 mod.addUniformVert("3f", "MOD_pos", x, y, z);
 mod.addUniformVert("3f", "MOD_mul", mulx, muly, mulz);

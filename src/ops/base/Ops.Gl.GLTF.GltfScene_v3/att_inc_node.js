@@ -82,7 +82,7 @@ const gltfNode = class
 
         // console.log("before",JSON.stringify(bounds));
 
-        if (this.mesh && bounds.changed)
+        if (this.mesh )
         {
             const bb = this.mesh.bounds.copy();
             console.log("copy", JSON.stringify(bb));

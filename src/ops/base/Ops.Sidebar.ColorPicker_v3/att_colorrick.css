@@ -13,7 +13,7 @@
     position: absolute;
     border-radius: 10px;
     overflow: hidden;
-    z-index: 9999;
+    z-index: 999999;
 
 }
 

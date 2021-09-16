@@ -1,4 +1,3 @@
-// import { vec3, mat4 } from "gl-matrix";
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
@@ -1230,6 +1229,5 @@ Context.prototype.setCursor = function (str)
 {
     this._cursor = str;
 };
-
 
 export { Context };
