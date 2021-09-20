@@ -439,7 +439,7 @@ op.exposeTexture = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
     newop.getPort("Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
 };
 
@@ -496,7 +496,7 @@ op.exposeNode = function (name, tree)
         newop.getPort("Node Name").set(name);
         setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
-        gui.patch().focusOp(newop.id, true);
+        gui.patchView.centerSelectOp(newop.id, true);
         gui.patchView.testCollision(newop);
     }
     CABLES.UI.MODAL.hide();
@@ -507,7 +507,7 @@ op.assignMaterial = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     setNewOpPosition(newop);
     gui.patchView.testCollision(newop);
 

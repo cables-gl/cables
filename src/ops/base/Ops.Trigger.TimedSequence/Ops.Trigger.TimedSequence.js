@@ -80,13 +80,14 @@ function doTrigger(_time)
                 {
                     if (triggers[i].links[spl].portIn.parent.patchId)
                     {
-                        if (gui.patch().getCurrentSubPatch() == triggers[i].links[spl].portIn.parent.patchId.get())
-                        {
-                            op.patch.timer.overwriteTime = -1;
+                        if (gui.patch())
+                            if (gui.patch().getCurrentSubPatch() == triggers[i].links[spl].portIn.parent.patchId.get())
+                            {
+                                op.patch.timer.overwriteTime = -1;
 
-                            triggers[i].trigger();
-                            return;
-                        }
+                                triggers[i].trigger();
+                                return;
+                            }
                     }
                 }
             }

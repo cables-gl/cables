@@ -152,5 +152,7 @@ op.onFileChanged = function (fn)
         textureOut.set(CGL.Texture.getTempTexture(cgl));
 
         realReload(true);
+
+        if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op);
     }
 };
