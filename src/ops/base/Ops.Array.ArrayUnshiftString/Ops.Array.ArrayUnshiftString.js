@@ -1,26 +1,25 @@
 const
-    inArr=op.inArray("Array"),
-    inString=op.inString("String",""),
-    result=op.outArray("Result");
+    inArr = op.inArray("Array"),
+    inString = op.inString("String", ""),
+    result = op.outArray("Result");
 
-const arr=[];
+const arr = [];
 
-    inString.onChange=
-    inArr.onChange=
-    function()
+inString.onChange =
+    inArr.onChange =
+    function ()
     {
-        const oldArr=inArr.get();
+        const oldArr = inArr.get();
         result.set(null);
-        if(!oldArr)return;
+        if (!oldArr) return;
 
-        arr.length=oldArr.length+1;
-        arr[0]=inString.get();
+        arr.length = oldArr.length + 1;
+        arr[0] = inString.get();
 
-        for(let i=0;i<oldArr.length;i++)
+        for (let i = 0; i < oldArr.length; i++)
         {
-            arr[i+1]=oldArr[i];
+            arr[i + 1] = oldArr[i];
         }
 
         result.set(arr);
-
     };
