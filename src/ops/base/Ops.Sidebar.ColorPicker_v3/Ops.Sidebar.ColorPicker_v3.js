@@ -90,6 +90,8 @@ colorInput.addEventListener("click", function ()
                 input.value = hex;
                 outHex.set(hex);
                 setInputsByHex(hex);
+
+                if (op.isCurrentUiOp()) gui.opParams.show(op);
             }
         });
 });
@@ -124,9 +126,9 @@ function inputColorChanged()
  */
 function getInputColorHex()
 {
-    const r = inputRedPort.get();
-    const g = inputGreenPort.get();
-    const b = inputBluePort.get();
+    const r = CABLES.clamp(inputRedPort.get(), 0, 1);
+    const g = CABLES.clamp(inputGreenPort.get(), 0, 1);
+    const b = CABLES.clamp(inputBluePort.get(), 0, 1);
     const hex = rgbNormToHex(r, g, b);
     return hex;
 }

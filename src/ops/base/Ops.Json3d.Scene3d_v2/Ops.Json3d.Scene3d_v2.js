@@ -667,15 +667,12 @@ function createNodes()
         {
             setTimeout(function ()
             {
-                // gui.patch().setSelectedOpById(op.id);
-                // CABLES.CMD.PATCH.tidyChildOps();
-
-                gui.patch().setSelectedOpById(subPatchOpStart.id);
+                gui.patchView.centerSelectOp(subPatchOpStart.id);
                 CABLES.CMD.PATCH.tidyChildOps();
 
-                gui.patch().updateSubPatches();
+                gui.patchView.updateSubPatches();
             }, 100);
-            gui.patch().updateSubPatches();
+            gui.patchView.updateSubPatches();
         }
     }
     else

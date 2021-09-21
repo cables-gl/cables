@@ -136,6 +136,21 @@ export const smootherStep = function (perc)
     return perc;
 };
 
+
+/**
+ * clamp number / make sure its between min/max
+ * @function map
+ * @memberof Utils
+ * @param {Number} value value to be mapped
+ * @param {Number} min minimum value
+ * @param {Number} max maximum value
+ * @static
+ */
+export const clamp = function (value, min, max)
+{
+    return Math.min(Math.max(value, min), max);
+};
+
 /**
  * map a value in a range to a value in another range
  * @function map
