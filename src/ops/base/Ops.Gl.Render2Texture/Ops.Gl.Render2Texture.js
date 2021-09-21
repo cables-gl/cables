@@ -39,6 +39,8 @@ function initFbLater()
     reInitFb = true;
 }
 
+const prevViewPort = [0, 0, 0, 0];
+
 fpTexture.onChange =
     depth.onChange =
 clear.onChange =
@@ -48,6 +50,12 @@ twrap.onChange =
 
 function doRender()
 {
+    const vp = cgl.getViewPort();
+    prevViewPort[0] = vp[0];
+    prevViewPort[1] = vp[1];
+    prevViewPort[2] = vp[2];
+    prevViewPort[3] = vp[3];
+
     if (!fb || reInitFb)
     {
         if (fb) fb.delete();
@@ -97,7 +105,7 @@ function doRender()
         reInitFb = false;
     }
 
-    if (useVPSize.val)
+    if (useVPSize.get())
     {
         width.set(cgl.getViewPort()[2]);
         height.set(cgl.getViewPort()[3]);
@@ -117,7 +125,8 @@ function doRender()
     trigger.trigger();
     fb.renderEnd(cgl);
 
-    cgl.resetViewPort();
+    // cgl.resetViewPort();
+    cgl.setViewPort(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
     tex.set(CGL.Texture.getEmptyTexture(op.patch.cgl));
     tex.set(fb.getTextureColor());

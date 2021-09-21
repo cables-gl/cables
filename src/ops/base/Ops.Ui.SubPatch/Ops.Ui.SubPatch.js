@@ -208,7 +208,7 @@ op.dyn.onLinkChanged = function ()
         setTimeout(function ()
         {
             op.dyn.removeLinks();
-            gui.patch().removeDeadLinks();
+            if (gui.patch())gui.patch().removeDeadLinks();
         }, 100);
     }
 };
@@ -244,12 +244,12 @@ op.dynOut.onLinkChanged = function ()
         setTimeout(function ()
         {
             op.dynOut.removeLinks();
-            gui.patch().removeDeadLinks();
+            if (gui.patch())gui.patch().removeDeadLinks();
         }, 100);
 
         op.log("dynOut unlinked...");
     }
-    gui.patch().removeDeadLinks();
+    if (gui.patch())gui.patch().removeDeadLinks();
 };
 
 function getSubPatchOutputOp()

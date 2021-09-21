@@ -1,4 +1,4 @@
-var gltfMeshGroup=class
+const gltfMeshGroup=class
 {
     constructor(gltf,m)
     {
@@ -7,11 +7,16 @@ var gltfMeshGroup=class
         this.name=m.name;
         const prims=m.primitives;
 
-        for(var i=0;i<prims.length;i++)
+        for(let i=0;i<prims.length;i++)
         {
-            var mesh=new gltfMesh(this.name,prims[i],gltf);
+            const mesh=new gltfMesh(this.name,prims[i],gltf,
+                (mesh)=>{
+                    this.bounds.apply(mesh.bounds);
+
+                    console.log("MESHGROUPBOUNDS",this.bounds);
+                });
+
             this.meshes.push(mesh);
-            this.bounds.apply(mesh.bounds);
         }
 
         // console.log("mesh group bounds:",this.bounds._maxAxis);

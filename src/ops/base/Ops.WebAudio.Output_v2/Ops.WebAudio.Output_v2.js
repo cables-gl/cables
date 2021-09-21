@@ -59,7 +59,7 @@ inAudio.onChange = function ()
         if (inAudio.links.length > 1) op.setUiError("multipleInputs", "You have connected multiple inputs. It is possible that you experience unexpected behaviour. Please use a Mixer op to connect multiple audio streams.", 1);
         else op.setUiError("multipleInputs", null);
 
-        if (inAudio.val.connect) inAudio.val.connect(gainNode);
+        if (inAudio.get().connect) inAudio.get().connect(gainNode);
     }
 
     oldAudioIn = inAudio.get();

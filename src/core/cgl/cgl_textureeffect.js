@@ -416,17 +416,15 @@ TextureEffect.onChangeBlendSelect = function (shader, blendName)
     else shader.removeDefine("BM_COLORBURN");
 };
 
-TextureEffect.AddBlendSelect = function (op, name)
+TextureEffect.AddBlendSelect = function (op, name, defaultMode)
 {
-    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], "normal");
+    const p = op.inValueSelect(name, ["normal", "lighten", "darken", "multiply", "multiply invert", "average", "add", "substract", "difference", "negation", "exclusion", "overlay", "screen", "color dodge", "color burn", "softlight", "hardlight"], defaultMode || "normal");
     return p;
 };
 
 TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 {
-    op.setPortGroup("Blending", [blendMode, amount]);
-
-    blendMode.onChange = function ()
+    const onChange = () =>
     {
         TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 
@@ -451,6 +449,11 @@ TextureEffect.setupBlending = function (op, shader, blendMode, amount)
 
         op.setUiAttrib({ "extendTitle": str });
     };
+    op.setPortGroup("Blending", [blendMode, amount]);
+
+    blendMode.onChange = onChange;
+
+    TextureEffect.onChangeBlendSelect(shader, blendMode.get());
 };
 
 export { TextureEffect };

@@ -29,20 +29,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Filter",
-                "group": "Texture Settings"
-            },
-            {
                 "type": 0,
                 "name": "Wrap index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Wrap",
-                "group": "Texture Settings",
-                "subType": "string"
             },
             {
                 "type": 0,

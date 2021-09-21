@@ -40,17 +40,8 @@
             },
             {
                 "type": 0,
-                "name": "Output",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Source index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Source"
             },
             {
                 "type": 0,

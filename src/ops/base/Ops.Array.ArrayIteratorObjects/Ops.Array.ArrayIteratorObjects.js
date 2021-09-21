@@ -8,10 +8,12 @@ const
 
 exe.onTriggered = function ()
 {
-    if (!arr.val) return;
-    for (let i = 0; i < arr.get().length; i++)
+    const theArr = arr.get();
+    if (!theArr) return;
+
+    for (let i = 0; i < theArr.length; i++)
     {
-        val.set(arr.val[i]);
+        val.set(theArr[i]);
         idx.set(i);
 
         trigger.trigger();

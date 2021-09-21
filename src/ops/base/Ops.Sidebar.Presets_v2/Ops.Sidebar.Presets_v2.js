@@ -105,7 +105,14 @@ function deSerializeSidebar(obj)
                 const p = theOp.getPortByName(portName);
                 if (p)
                 {
-                    p.set(obj.ops[i].ports[portName].value);
+                    if (typeof obj.ops[i].ports[portName] !== "object")
+                    {
+                        p.set(obj.ops[i].ports[portName]);
+                    }
+                    else
+                    {
+                        p.set(obj.ops[i].ports[portName].value);
+                    }
                 }
                 else
                 {
@@ -116,6 +123,11 @@ function deSerializeSidebar(obj)
                 if (def)
                 {
                     def.set(obj.ops[i].ports[portName]);
+                }
+                const namedInPort = theOp.getPortByName("Input " + p.name);
+                if (namedInPort)
+                {
+                    namedInPort.set(obj.ops[i].ports[portName]);
                 }
             }
         }
@@ -208,7 +220,8 @@ function addPreset()
     const newOp = op.patch.addOp("Ops.Json.ParseObject_v2");
 
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
-    if (CABLES.UI)gui.patch().focusOp(newOp);
+    // if (CABLES.UI)gui.patch().focusOp(newOp);
+    if (CABLES.UI) gui.patch().centerSelectOp(newOp.id);
 
     op.patch.link(op, freePort.name, newOp, "Result");
 }

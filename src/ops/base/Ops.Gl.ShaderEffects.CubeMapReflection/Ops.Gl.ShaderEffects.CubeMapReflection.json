@@ -6,22 +6,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Cubemap"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Amount",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "next"
             }
         ],

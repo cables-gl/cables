@@ -207,7 +207,7 @@ function addPreset()
 
     const newOp = op.patch.addOp("Ops.Json.ParseObject");
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
-    if (CABLES.UI)gui.patch().focusOp(newOp);
+    if (CABLES.UI)gui.patchView.centerSelectOp(newOp);
 
     op.patch.link(op, freePort.name, newOp, "Result");
 }

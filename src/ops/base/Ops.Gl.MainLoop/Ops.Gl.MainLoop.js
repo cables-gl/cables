@@ -4,7 +4,7 @@ const width = op.outValue("width");
 const height = op.outValue("height");
 const reduceFocusFPS = op.inValueBool("Reduce FPS not focussed", true);
 const reduceLoadingFPS = op.inValueBool("Reduce FPS loading");
-// const clear = op.inValueBool("Clear", true);
+const clear = op.inValueBool("Clear", true);
 const clearAlpha = op.inValueBool("ClearAlpha", true);
 const fullscreen = op.inValueBool("Fullscreen Button", false);
 const active = op.inValueBool("Active", true);
@@ -167,11 +167,11 @@ function render(time)
 
     cgl.renderStart(cgl, identTranslate, identTranslateView);
 
-    // if (clear.get())
-    // {
-    cgl.gl.clearColor(0, 0, 0, 1);
-    cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
-    // }
+    if (clear.get())
+    {
+        cgl.gl.clearColor(0, 0, 0, 1);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
+    }
 
     trigger.trigger();
 

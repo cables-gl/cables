@@ -44,6 +44,11 @@
                 "type": 0,
                 "name": "a",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "offset",
+                "subType": "number"
             }
         ],
         "portsOut": [

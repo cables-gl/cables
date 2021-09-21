@@ -229,7 +229,7 @@ op.exposeNode = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode");
     newop.getPort("Node Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     CABLES.UI.MODAL.hide();
 };
 
@@ -238,7 +238,7 @@ op.assignMaterial = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     CABLES.UI.MODAL.hide();
 };
 

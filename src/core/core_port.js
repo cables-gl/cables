@@ -1,6 +1,6 @@
 import { EventTarget } from "./eventtarget";
 import { generateUUID } from "./utils";
-import { Anim } from "./anim";
+import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Log } from "./log";
 
@@ -70,11 +70,15 @@ const Port = function (__parent, name, type, uiAttribs)
     Object.defineProperty(this, "val", {
         get()
         {
+            console.log("val getter deprecated!", this);
+            console.log((new Error()).stack);
             this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
         {
+            console.log("val setter deprecated!", this);
+            console.log((new Error()).stack);
             this.setValue(v);
             // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
@@ -84,7 +88,7 @@ const Port = function (__parent, name, type, uiAttribs)
 
 Port.prototype.getValueForDisplay = function ()
 {
-    let str = String(this.val);
+    let str = String(this.value);
 
     // if (this.uiAttribs && (this.uiAttribs.display == "bool" || this.uiAttribs.type == "bool"))
     // {
@@ -320,6 +324,23 @@ Port.prototype.getTypeString = function ()
     if (this.type == CONSTANTS.OP.OP_PORT_TYPE_ARRAY) return "Array";
     if (this.type == CONSTANTS.OP.OP_PORT_TYPE_STRING) return "String";
     return "Unknown";
+};
+
+Port.prototype.deSerializeSettings = function (objPort)
+{
+    if (!objPort) return;
+    if (objPort.animated) this.setAnimated(objPort.animated);
+    if (objPort.useVariable) this.setVariableName(objPort.useVariable);
+
+    if (objPort.anim)
+    {
+        if (!this.anim) this.anim = new Anim();
+        if (objPort.anim.loop) this.anim.loop = objPort.anim.loop;
+        for (const ani in objPort.anim.keys)
+        {
+            this.anim.keys.push(new ANIM.Key(objPort.anim.keys[ani]));
+        }
+    }
 };
 
 Port.prototype.getSerialized = function ()
@@ -565,10 +586,9 @@ Port.prototype.setVariable = function (v)
     {
         this._variableIn = this.parent.patch.getVar(v);
 
-
         if (!this._variableIn)
         {
-            console.log("PORT VAR NOT FOUND!!!");
+            console.log("PORT VAR NOT FOUND!!!", v);
         }
         else
         {
@@ -589,6 +609,24 @@ Port.prototype.setVariable = function (v)
     this.setUiAttribs(attr);
 };
 
+Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
+{
+    let hasTriggerPort = false;
+    for (let i = 0; i < this.parent.portsIn.length; i++)
+    {
+        if (this.parent.portsIn.type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
+        {
+            hasTriggerPort = true;
+            break;
+        }
+    }
+    if (!hasTriggerPort)
+    {
+        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame", this.updateAnim.bind(this));
+        else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
+    }
+};
+
 Port.prototype.setAnimated = function (a)
 {
     if (this._animated != a)
@@ -597,6 +635,9 @@ Port.prototype.setAnimated = function (a)
         if (this._animated && !this.anim) this.anim = new Anim();
         this._onAnimToggle();
     }
+
+    this._handleNoTriggerOpAnimUpdates();
+
     this.setUiAttribs({ "isAnimated": this._animated });
 };
 
@@ -795,5 +836,22 @@ class ValueSelectPort extends SwitchPort
         super.setUiAttribs(newAttribs);
     }
 }
+
+
+// class BoolPort extends Port
+// {
+//     set(b)
+//     {
+//         super.set(b ? 1 : 0);
+//         // console.log("bool set", b, this.get());
+//     }
+
+//     get()
+//     {
+//         // console.log("bool get", super.get());
+//         return super.get() ? 1 : 0;
+//     }
+// }
+
 
 export { Port, SwitchPort, ValueSelectPort };

@@ -11,7 +11,6 @@ const
     noise = op.inValueBool("Enable noise", false),
     noiseamount = op.inValueFloat("Noise amount", 0.0008);
 
-
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 
@@ -26,7 +25,6 @@ lumInfluence.uniform = new CGL.Uniform(shader, "f", "lumInfluence", lumInfluence
 
 zNear.uniform = new CGL.Uniform(shader, "f", "znear", zNear);
 zFar.uniform = new CGL.Uniform(shader, "f", "zfar", zFar);
-
 
 noiseamount.uniform = new CGL.Uniform(shader, "f", "noiseamount", noiseamount);
 
@@ -58,7 +56,6 @@ render.onTriggered = function ()
 
     cgl.currentTextureEffect.bind();
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
 
     if (depth.get() && depth.get().tex)
     {

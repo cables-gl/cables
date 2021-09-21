@@ -6,7 +6,7 @@ const
 const reload = function ()
 {
     CABLES.ajax(
-        op.patch.getFilePath(filename.val),
+        op.patch.getFilePath(filename.get()),
         function (err, _data, xhr)
         {
             try

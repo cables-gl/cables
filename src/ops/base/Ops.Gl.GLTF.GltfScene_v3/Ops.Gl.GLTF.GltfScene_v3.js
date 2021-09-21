@@ -27,6 +27,7 @@ const
     next = op.outTrigger("Next"),
     outGenerator = op.outString("Generator"),
     outVersion = op.outNumber("GLTF Version"),
+    outExtensions = op.outArray("GLTF Extensions Used"),
     outAnimLength = op.outNumber("Anim Length", 0),
     outAnimTime = op.outNumber("Anim Time", 0),
     outJson = op.outObject("Json"),
@@ -44,6 +45,7 @@ inFile.onChange =
     inCalcNormals.onChange =
     inNormFormat.onChange = reloadSoon;
 
+let finishedLoading = false;
 let cam = null;
 let boundingPoints = [];
 let gltf = null;
@@ -133,7 +135,9 @@ function setCam()
 
 inExec.onTriggered = function ()
 {
+    if (!finishedLoading) return;
     if (!inActive.get()) return;
+
     if (inTimeLine.get()) time = op.patch.timer.getTime();
     else time = Math.max(0, inTime.get());
 
@@ -152,13 +156,17 @@ inExec.onTriggered = function ()
 
     outAnimTime.set(time || 0);
 
-    if (gltf && gltf.bounds)
+    if (finishedLoading && gltf && gltf.bounds)
     {
         if (inRescale.get())
         {
-            const sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            let sc = inRescaleSize.get() / gltf.bounds.maxAxis;
+            // if (!CABLES.UTILS.isNumeric(sc))sc = 1.0;
             gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
+
+            // console.log(gltf.bounds);
+
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
         }
         if (doCenter)
@@ -171,24 +179,27 @@ inExec.onTriggered = function ()
 
     nextBefore.trigger();
 
-    if (needsMatUpdate) updateMaterials();
-
-    if (cam) cam.start(time);
-
-    if (gltf && inRender.get())
+    if (finishedLoading)
     {
-        gltf.time = time;
+        if (needsMatUpdate) updateMaterials();
 
-        if (gltf.bounds && cgl.shouldDrawHelpers(op))
+        if (cam) cam.start(time);
+
+        if (gltf && inRender.get())
         {
-            if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-            else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
-            gltf.bounds.render(cgl);
-            cgl.popShader();
-        }
+            gltf.time = time;
 
-        for (let i = 0; i < gltf.nodes.length; i++)
-            if (!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+            if (gltf.bounds && cgl.shouldDrawHelpers(op))
+            {
+                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                gltf.bounds.render(cgl);
+                cgl.popShader();
+            }
+
+            for (let i = 0; i < gltf.nodes.length; i++)
+                if (!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+        }
     }
 
     next.trigger();
@@ -199,6 +210,72 @@ inExec.onTriggered = function ()
     if (cam)cam.end();
 };
 
+function finishLoading()
+{
+    if (gltf.loadingMeshes > 0)
+    {
+        console.log("waiting for async meshes...");
+        setTimeout(finishLoading, 100);
+        return;
+    }
+
+    needsMatUpdate = true;
+    // op.refreshParams();
+    outAnimLength.set(maxTime);
+
+    gltf.bounds = new CGL.BoundingBox();
+    // gltf.bounds.applyPos(0, 0, 0);
+
+    if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
+    else op.setUiError("urlerror", null);
+
+    console.log("yo", JSON.stringify(gltf.bounds));
+    for (let i = 0; i < gltf.nodes.length; i++)
+    {
+        const node = gltf.nodes[i];
+        node.updateMatrix();
+        if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
+
+        // if(i==0) gltf.bounds=node.get
+
+        console.log("CALCBOUNDS", JSON.stringify(gltf.bounds));
+    }
+    if (gltf.bounds)outBounds.set(gltf.bounds);
+
+    hideNodesFromData();
+    if (tab)printInfo();
+
+    updateCamera();
+    setCam();
+    outPoints.set(boundingPoints);
+
+    if (gltf)
+    {
+        op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
+
+        gltf.loaded = Date.now();
+        // if (gltf.bounds)outBounds.set(gltf.bounds);
+    }
+
+    if (gltf)
+    {
+        for (let i = 0; i < gltf.nodes.length; i++)
+            if (!gltf.nodes[i].isChild)
+            {
+                gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
+            }
+    }
+
+    updateCenter();
+    outLoading.set(false);
+
+    cgl.patch.loading.finished(loadingId);
+    loadingId = null;
+
+    finishedLoading = true;
+    op.log("finished loading gltf");
+}
+
 function loadBin(addCacheBuster)
 {
     if (!inActive.get()) return;
@@ -208,6 +285,7 @@ function loadBin(addCacheBuster)
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
 
+    finishedLoading = false;
     outLoading.set(true);
     const oReq = new XMLHttpRequest();
     oReq.open("GET", url, true);
@@ -216,7 +294,7 @@ function loadBin(addCacheBuster)
 
     cgl.patch.loading.addAssetLoadingTask(() =>
     {
-        oReq.onload = function (oEvent)
+        oReq.onload = (oEvent) =>
         {
             boundingPoints = [];
 
@@ -224,44 +302,7 @@ function loadBin(addCacheBuster)
             const arrayBuffer = oReq.response;
             gltf = parseGltf(arrayBuffer);
 
-            needsMatUpdate = true;
-            op.refreshParams();
-            outAnimLength.set(maxTime);
-
-            if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
-            else op.setUiError("urlerror", null);
-
-            if (gltf)
-            {
-                for (let i = 0; i < gltf.nodes.length; i++)
-                    if (!gltf.nodes[i].isChild)
-                    {
-                        gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
-
-                        // gltf.nodes[i].transform(cgl,0.0);
-                    }
-            }
-
-            hideNodesFromData();
-            if (tab)printInfo();
-
-            updateCamera();
-            setCam();
-            outPoints.set(boundingPoints);
-            if (gltf)
-            {
-                op.setUiAttrib({ "extendTitle": CABLES.basename(inFile.get()) });
-
-                gltf.loaded = Date.now();
-                if (gltf.bounds)outBounds.set(gltf.bounds);
-            }
-            updateCenter();
-            outLoading.set(false);
-
-            cgl.patch.loading.finished(loadingId);
-            loadingId = null;
-
-            // op.log("finished loading gltf");
+            finishLoading();
         };
 
         oReq.send(null);
@@ -398,7 +439,7 @@ op.exposeTexture = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
     newop.getPort("Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
 };
 
@@ -455,7 +496,7 @@ op.exposeNode = function (name, tree)
         newop.getPort("Node Name").set(name);
         setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
-        gui.patch().focusOp(newop.id, true);
+        gui.patchView.centerSelectOp(newop.id, true);
         gui.patchView.testCollision(newop);
     }
     CABLES.UI.MODAL.hide();
@@ -466,7 +507,7 @@ op.assignMaterial = function (name)
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfSetMaterial");
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
-    gui.patch().focusOp(newop.id, true);
+    gui.patchView.centerSelectOp(newop.id, true);
     setNewOpPosition(newop);
     gui.patchView.testCollision(newop);
 

@@ -1,14 +1,12 @@
 const
     inUpdate = op.inTrigger("Update"),
-    inLimit = op.inInt("Limit", 32),
+    inLimit = op.inInt("Limit", 30),
     outArr = op.outArray("Array");
 
 const inPorts = [];
 for (let i = 0; i < 30; i++)
 {
     const inp = op.inFloat("Index " + i, 0);
-
-    // inp.onChange=update;
     inPorts.push(inp);
 }
 
