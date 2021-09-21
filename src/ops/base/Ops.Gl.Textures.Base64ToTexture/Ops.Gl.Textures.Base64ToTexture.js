@@ -9,7 +9,7 @@ const image = new Image();
 
 let doUpdateTex = false;
 let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
-let selectedFilter = CGL.Texture.FILTER_NEAREST;
+let selectedFilter = CGL.Texture.FILTER_LINEAR;
 
 function createTex()
 {

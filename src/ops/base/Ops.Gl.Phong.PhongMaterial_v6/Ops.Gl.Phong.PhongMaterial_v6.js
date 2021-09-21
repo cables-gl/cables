@@ -10,7 +10,7 @@ const snippets = {
 };
 const LIGHT_INDEX_REGEX = new RegExp("{{LIGHT_INDEX}}", "g");
 
-const createFragmentHead = n => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
+const createFragmentHead = (n) => attachmentFragmentHead.replace("{{LIGHT_INDEX}}", n);
 const createFragmentBody = (n, type) => snippets[type].replace(LIGHT_INDEX_REGEX, n);
 
 function createDefaultShader()
@@ -189,8 +189,8 @@ inFalloffMode.onChange = () =>
 {
     const MODES = ["A", "B", "C", "D"];
     shader.define("FALLOFF_MODE_" + inFalloffMode.get());
-    MODES.filter(mode => mode !== inFalloffMode.get())
-        .forEach(mode => shader.removeDefine("FALLOFF_MODE_" + mode));
+    MODES.filter((mode) => mode !== inFalloffMode.get())
+        .forEach((mode) => shader.removeDefine("FALLOFF_MODE_" + mode));
 };
 
 const lightProps = [inEnergyConservation, inToggleDoubleSided, inFalloffMode];
@@ -405,26 +405,33 @@ function updateNormalTexture()
     }
 }
 
+aoTextureUniform = new CGL.Uniform(shader, "t", "texAO");
+
 function updateAoTexture()
 {
-    if (inAoTexture.get())
-    {
-        inAoIntensity.setUiAttribs({ "greyout": false });
+    shader.toggleDefine("HAS_TEXTURE_AO", inAoTexture.get());
 
-        if (!shader.hasDefine("HAS_TEXTURE_AO"))
-        {
-            shader.define("HAS_TEXTURE_AO");
-            if (!aoTextureUniform) aoTextureUniform = new CGL.Uniform(shader, "t", "texAO", 0);
-        }
-    }
-    else
-    {
-        inAoIntensity.setUiAttribs({ "greyout": true });
+    inAoIntensity.setUiAttribs({ "greyout": !inAoTexture.get() });
 
-        shader.removeUniform("texAO");
-        shader.removeDefine("HAS_TEXTURE_AO");
-        aoTextureUniform = null;
-    }
+    // if (inAoTexture.get())
+    // {
+    //     // inAoIntensity.setUiAttribs({ "greyout": false });
+
+    //     // if (!shader.hasDefine("HAS_TEXTURE_AO"))
+    //     // {
+    //         // shader.define("HAS_TEXTURE_AO");
+    //         // if (!aoTextureUniform)
+    //         aoTextureUniform = new CGL.Uniform(shader, "t", "texAO", 0);
+    //     // }
+    // }
+    // else
+    // {
+    //     // inAoIntensity.setUiAttribs({ "greyout": true });
+
+    //     shader.removeUniform("texAO");
+    //     // shader.removeDefine("HAS_TEXTURE_AO");
+    //     aoTextureUniform = null;
+    // }
 }
 
 function updateEmissiveTexture()
