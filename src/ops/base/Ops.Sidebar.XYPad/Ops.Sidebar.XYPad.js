@@ -96,6 +96,7 @@ canv.width = canv.height = size;
 canv.style.width = size + "px";
 canv.style.height = size + "px";
 canv.style.marginTop = "6px";
+canv.style.position = "initial";
 el.appendChild(canv);
 
 const ctx = canv.getContext("2d");
