@@ -6,6 +6,17 @@
                 "name": "render"
             },
             {
+                "type": 0,
+                "name": "Blend Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Amount",
+                "group": "Blending",
+                "subType": "number"
+            },
+            {
                 "type": 2,
                 "name": "depth texture",
                 "objType": "texture"
@@ -43,11 +54,13 @@
             {
                 "type": 0,
                 "name": "Enable noise",
+                "group": "Noise",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Noise amount",
+                "group": "Noise",
                 "subType": "number"
             }
         ],
@@ -57,7 +70,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.Gl.TextureEffects.SSAO2"
+        "name": "Ops.Gl.TextureEffects.SSAO_v2"
     },
     "summary": "screen space ambient occlusion",
     "credits": [
@@ -69,6 +82,23 @@
     ],
     "author": "55d744634cdc152216eb9aad",
     "authorName": "pandur",
-    "id": "76d2dafc-aaf9-48ca-8b24-ee18492fba80",
-    "created": 1510089517558
+    "id": "049ad504-09a2-4bc0-bbf1-dad67608a3d2",
+    "created": 1629451230027,
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Gl.TextureEffects.SSAO2",
+            "author": "pandur",
+            "date": 1629451230028
+        },
+        {
+            "message": "Ops.User.pandur.Ssao22 renamed to Ops.Gl.TextureEffects.SSAO2_v2",
+            "author": "pandur",
+            "date": 1629451259083
+        },
+        {
+            "message": "Ops.Gl.TextureEffects.SSAO2_v2 renamed to Ops.Gl.TextureEffects.SSAO_v2",
+            "author": "pandur",
+            "date": 1632208806750
+        }
+    ]
 }
