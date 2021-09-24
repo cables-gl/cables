@@ -25,5 +25,13 @@
             }
         ],
         "name": "Ops.Gl.OverwriteViewportSize"
+    },
+    "summary": "Force a manually set viewport size for connected ops",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
