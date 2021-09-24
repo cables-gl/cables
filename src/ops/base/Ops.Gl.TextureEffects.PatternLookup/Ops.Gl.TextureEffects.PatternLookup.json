@@ -49,5 +49,30 @@
             "author": "pandur",
             "date": 1566733308555
         }
-    ]
+    ],
+    "summary": "map a pattern to value levels of your texture",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "render",
+                "text": "attach in ImageCompose"
+            },
+            {
+                "name": "Multiplier",
+                "text": "input texture to apply to your image"
+            },
+            {
+                "name": "Width",
+                "text": "width of grid pattern"
+            },
+            {
+                "name": "Height",
+                "text": "height of grid pattern"
+            }
+        ]
+    }
 }

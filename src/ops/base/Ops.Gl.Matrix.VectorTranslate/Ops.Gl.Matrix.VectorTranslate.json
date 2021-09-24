@@ -45,5 +45,13 @@
             }
         ],
         "name": "Ops.Gl.Matrix.VectorTranslate"
+    },
+    "summary": "Translate any geometry underneath it using vectors and speed.",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
