@@ -1,19 +1,18 @@
-const gltfMeshGroup=class
+const gltfMeshGroup = class
 {
-    constructor(gltf,m)
+    constructor(gltf, m)
     {
-        this.bounds=new CGL.BoundingBox();
-        this.meshes=[];
-        this.name=m.name;
-        const prims=m.primitives;
+        this.bounds = new CGL.BoundingBox();
+        this.meshes = [];
+        this.name = m.name;
+        const prims = m.primitives;
 
-        for(let i=0;i<prims.length;i++)
+        for (let i = 0; i < prims.length; i++)
         {
-            const mesh=new gltfMesh(this.name,prims[i],gltf,
-                (mesh)=>{
+            const mesh = new gltfMesh(this.name, prims[i], gltf,
+                (mesh) =>
+                {
                     this.bounds.apply(mesh.bounds);
-
-                    console.log("MESHGROUPBOUNDS",this.bounds);
                 });
 
             this.meshes.push(mesh);
@@ -24,9 +23,9 @@ const gltfMeshGroup=class
 
     render(cgl, ignoreMat)
     {
-        for(var i=0;i<this.meshes.length;i++)
+        for (let i = 0; i < this.meshes.length; i++)
         {
-            this.meshes[i].render(cgl,ignoreMat);
+            this.meshes[i].render(cgl, ignoreMat);
         }
     }
 };
