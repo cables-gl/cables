@@ -229,7 +229,7 @@ function finishLoading()
     if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
     else op.setUiError("urlerror", null);
 
-    console.log("yo", JSON.stringify(gltf.bounds));
+    // console.log("yo", JSON.stringify(gltf.bounds));
     for (let i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
@@ -238,7 +238,7 @@ function finishLoading()
 
         // if(i==0) gltf.bounds=node.get
 
-        console.log("CALCBOUNDS", JSON.stringify(gltf.bounds));
+        // console.log("CALCBOUNDS", JSON.stringify(gltf.bounds));
     }
     if (gltf.bounds)outBounds.set(gltf.bounds);
 

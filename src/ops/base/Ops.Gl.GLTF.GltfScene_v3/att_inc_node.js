@@ -82,10 +82,9 @@ const gltfNode = class
 
         // console.log("before",JSON.stringify(bounds));
 
-        if (this.mesh )
+        if (this.mesh)
         {
             const bb = this.mesh.bounds.copy();
-            console.log("copy", JSON.stringify(bb));
             bb.mulMat4(localMat);
             bounds.apply(bb);
 
