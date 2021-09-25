@@ -8,7 +8,7 @@ const inCentered = op.inBool("Centered", false);
 const trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
-const shader = new CGL.Shader(cgl);
+const shader = new CGL.Shader(cgl, "checkerboard");
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.checkerboard_frag);
 

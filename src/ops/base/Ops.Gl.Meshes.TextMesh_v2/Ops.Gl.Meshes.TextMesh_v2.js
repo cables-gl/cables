@@ -124,7 +124,7 @@ function getFont()
             "ctx": _ctx,
             "canvas": fontImage,
             "chars": {},
-            "characters": "?",
+            "characters": "",
             "fontSize": 320
         };
     return CABLES.OpTextureMeshCanvas[canvasid];

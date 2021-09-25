@@ -1,1 +1,68 @@
-{"id":"e8f8f23c-e7d3-44bf-9f1f-86230f4e533a","changelog":[{"message":"created op","author":"pandur","date":1612768563869},{"message":"Ops.User.pandur.spreadsheet renamed to Ops.Arrays.ArraySpreadSheet","author":"pandur","date":1612769501347},{"message":"Ops.Arrays.ArraySpreadSheet renamed to Ops.Array.ArraySpreadSheet","author":"pandur","date":1617699517176},{"message":"Ops.Array.ArraySpreadSheet renamed to Ops.Dev.Array.ArraySpreadSheet","author":"pandur","date":1618469091426}],"authorName":"pandur","created":1612768566040,"layout":{"portsIn":[{"type":3,"name":"Spreadsheet"},{"type":0,"name":"Num Columns","subType":"integer"},{"type":0,"name":"Format index","subType":"integer"},{"type":5,"name":"Format"}],"portsOut":[{"type":3,"name":"Array"},{"type":3,"name":"Column Names"}],"name":"Ops.Arrays.ArraySpreadSheet"}}
+{
+    "id": "e8f8f23c-e7d3-44bf-9f1f-86230f4e533a",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1612768563869
+        },
+        {
+            "message": "Ops.User.pandur.spreadsheet renamed to Ops.Arrays.ArraySpreadSheet",
+            "author": "pandur",
+            "date": 1612769501347
+        },
+        {
+            "message": "Ops.Arrays.ArraySpreadSheet renamed to Ops.Array.ArraySpreadSheet",
+            "author": "pandur",
+            "date": 1617699517176
+        },
+        {
+            "message": "Ops.Array.ArraySpreadSheet renamed to Ops.Dev.Array.ArraySpreadSheet",
+            "author": "pandur",
+            "date": 1618469091426
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1612768566040,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Spreadsheet"
+            },
+            {
+                "type": 0,
+                "name": "Num Columns",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Format index",
+                "subType": "integer"
+            },
+            {
+                "type": 5,
+                "name": "Format"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Array"
+            },
+            {
+                "type": 3,
+                "name": "Column Names"
+            }
+        ],
+        "name": "Ops.Arrays.ArraySpreadSheet"
+    },
+    "summary": "Give the possibility to create an Array and edit its content in a Spreadsheet view.",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

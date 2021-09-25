@@ -1327,8 +1327,6 @@ Patch.prototype.exitError = function (errorId, errorMessage, ex)
 Patch.prototype.preRenderOps = function ()
 {
     Log.log("prerendering...");
-    let stopwatch = null;
-    if (CABLES.StopWatch) stopwatch = new CABLES.StopWatch("prerendering");
 
     for (let i = 0; i < this.ops.length; i++)
     {
@@ -1338,8 +1336,6 @@ Patch.prototype.preRenderOps = function ()
             Log.log("prerender " + this.ops[i].objName);
         }
     }
-
-    if (stopwatch) stopwatch.stop("prerendering");
 };
 
 /**
