@@ -154,7 +154,8 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-                CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                console.log(this._animRot);
+                CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0].getValue(time), this._animRot[1].getValue(time), this._animRot[2].getValue(time), this._animRot[3].getValue(time));
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);
