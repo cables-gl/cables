@@ -4,7 +4,7 @@ const EventTarget = function ()
 {
     this._eventCallbacks = {};
     this._logName = "";
-    this._log = false;
+    this._logEvents = false;
     this._listeners = {};
 
     this.addEventListener = this.on = function (which, cb, idPrefix)
@@ -99,13 +99,13 @@ const EventTarget = function ()
 
     this.logEvents = function (enabled, name)
     {
-        this._log = enabled;
+        this._logEvents = enabled;
         this._logName = name;
     };
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-        if (this._log) console.log("[event] ", this._logName, which, this._eventCallbacks);
+        if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks);
 
         if (this._eventCallbacks[which])
         {
@@ -120,7 +120,7 @@ const EventTarget = function ()
         else
         {
             // Log.warn("has no event callback",which,this._eventCallbacks);
-            if (this._log) console.log("[event] has no event callback", which, this._eventCallbacks);
+            if (this._logEvents) console.log("[event] has no event callback", which, this._eventCallbacks);
         }
     };
 };
