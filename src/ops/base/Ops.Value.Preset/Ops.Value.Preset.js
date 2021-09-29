@@ -433,7 +433,6 @@ addPort.onLinkChanged = function ()
     op.patch.getVar(varname).type = "preset";
 
     addPort.removeLinks();
-    if (CABLES.UI && gui && gui.patch()) gui.patch().removeDeadLinks();
     saveData();
     op.refreshParams();
 

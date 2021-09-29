@@ -668,7 +668,7 @@ function createNodes()
             setTimeout(function ()
             {
                 gui.patchView.centerSelectOp(subPatchOpStart.id);
-                CABLES.CMD.PATCH.tidyChildOps();
+                // CABLES.CMD.PATCH.tidyChildOps();
 
                 gui.patchView.updateSubPatches();
             }, 100);
