@@ -74,6 +74,14 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("TANGENT"))tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
         if (attribs.hasOwnProperty("COLOR_0"))tgeom.vertexColors = gltf.accBuffers[attribs.COLOR_0];
 
+
+        if (attribs.hasOwnProperty("TEXCOORD_1"))tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);
+        if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
+        if (attribs.hasOwnProperty("TEXCOORD_3"))tgeom.setAttribute("attrTexCoord3", gltf.accBuffers[attribs.TEXCOORD_3], 2);
+        if (attribs.hasOwnProperty("TEXCOORD_4"))tgeom.setAttribute("attrTexCoord4", gltf.accBuffers[attribs.TEXCOORD_4], 2);
+
+
+
         if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
     // fillGeomAttribs(gltf,geom,attribs)

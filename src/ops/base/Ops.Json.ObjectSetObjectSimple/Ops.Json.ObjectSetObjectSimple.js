@@ -1,26 +1,28 @@
-const inObject=op.inObject("Object");
-const inKey=op.inString("Key");
-const inValue=op.inObject("Object Value");
-const outObject=op.outObject("Result Object");
+const inObject = op.inObject("Object");
+const inKey = op.inString("Key");
+const inValue = op.inObject("Object Value");
+const outObject = op.outObject("Result Object");
 
-op.onDelete=removeKey;
+op.onDelete = removeKey;
 
-inKey.onChange=()=>{
+inObject.onLinkChanged =
+inValue.onChange =
+inKey.onChange = () =>
+{
     removeKey();
     update();
 };
 
-outObject.onLinkChanged=
-inObject.onChange=update;
+outObject.onLinkChanged =
+inObject.onChange = update;
 
-let currentKey="";
+let currentKey = "";
 
-let obj={};
+let obj = {};
 
 function removeKey()
 {
     delete obj[currentKey];
-
 }
 
 function copyObject()
@@ -28,16 +30,15 @@ function copyObject()
 
 }
 
-
 function update()
 {
-    obj=inObject.get()||{};
+    obj = inObject.get() || {};
 
-    let changed=false;
+    let changed = false;
 
-    currentKey=inKey.get();
-    if(obj[inKey.get()]!=inValue.get())changed=true;
-    obj[inKey.get()]=inValue.get();
+    currentKey = inKey.get();
+    if (obj[inKey.get()] != inValue.get())changed = true;
+    obj[inKey.get()] = inValue.get();
 
     outObject.set(null);
     outObject.set(obj);

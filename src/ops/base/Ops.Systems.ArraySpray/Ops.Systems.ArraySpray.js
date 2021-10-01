@@ -7,10 +7,14 @@ const sizeZ = op.inValue("Size Z");
 const movementX = op.inValue("movement x", 1);
 const movementY = op.inValue("movement y", 1);
 const movementZ = op.inValue("movement z", 1);
+
+const centerX = op.inBool("Center X", false);
+const centerY = op.inBool("Center Y", false);
+const centerZ = op.inBool("Center Z", false);
+
 const inReset = op.inTriggerButton("Reset");
 const lifetime = op.inValue("lifetime", 10);
 const lifetimeMin = op.inValue("Lifetime Minimum", 5);
-
 
 const
     outTrigger = op.outTrigger("Trigger Out"),
@@ -29,6 +33,9 @@ num.onChange =
     sizeY.onChange =
     sizeZ.onChange =
     lifetime.onChange =
+    centerX.onChange =
+    centerY.onChange =
+    centerZ.onChange =
     lifetimeMin.onChange = reset;
 
 reset();
@@ -41,7 +48,6 @@ function Particle()
     this.lifeTime = 0;
     this.lifeTimePercent = 0;
     this.endTime = 0;
-
 
     this.pos = [0, 0, 0];
     this.moveVec = [0, 0, 0];
@@ -79,10 +85,21 @@ function Particle()
             this.endTime = timer.get() + this.lifeTime * Math.random();
         }
 
+        let r = Math.random();
+
+        if (centerX.get())r -= 0.5;
+        const x = r * sizeX.get();
+
+        if (centerY.get())r -= 0.5;
+        const y = r * sizeY.get();
+
+        if (centerZ.get())r -= 0.5;
+        const z = r * sizeZ.get();
+
         this.startPos = vec3.fromValues(
-            Math.random() * sizeX.get(),
-            Math.random() * sizeY.get(),
-            Math.random() * sizeZ.get());
+            x,
+            y,
+            z);
 
         this.moveVec = [
             Math.random() * movementX.get(),

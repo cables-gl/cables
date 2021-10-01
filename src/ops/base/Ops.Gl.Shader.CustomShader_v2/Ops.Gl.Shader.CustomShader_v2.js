@@ -36,7 +36,7 @@ op.onLoadedValueSet = initDataOnLoad;
 function initDataOnLoad(data)
 {
     updateShader();
-    console.log(data);
+    // console.log(data);
     // set uniform values AFTER shader has been compiled and uniforms are extracted and uniform ports are created.
     for (let i = 0; i < uniformInputs.length; i++)
         for (let j = 0; j < data.portsIn.length; j++)
