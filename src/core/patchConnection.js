@@ -21,7 +21,7 @@ const PatchConnectionReceiver = function (patch, options, connector)
 
 PatchConnectionReceiver.prototype._receive = function (ev)
 {
-    console.log("ev", ev);
+    // console.log("ev", ev);
     let data = {};
     if (ev.hasOwnProperty("event")) data = ev;
     else data = JSON.parse(ev.data);

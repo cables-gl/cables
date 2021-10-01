@@ -273,7 +273,6 @@ function finishLoading()
     loadingId = null;
 
     finishedLoading = true;
-    op.log("finished loading gltf");
 }
 
 function loadBin(addCacheBuster)
