@@ -150,6 +150,7 @@ function loadAnims(gltf)
             else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
             else console.warn("[gltf] unknown interpolation", sampler.interpolation);
 
+            if(bufferIn)
             for (let j = 0; j < bufferIn.length; j++)
             {
                 maxTime = Math.max(bufferIn[j], maxTime);
