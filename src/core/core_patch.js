@@ -78,7 +78,6 @@ const Patch = function (cfg)
         "_fpsStart": 0,
     };
 
-
     this._volumeListeners = [];
     this._paused = false;
     this._frameNum = 0;
@@ -91,7 +90,6 @@ const Patch = function (cfg)
     this._frameInterval = 0;
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
-
 
     if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
 
@@ -809,7 +807,6 @@ Patch.prototype.reloadOp = function (objName, cb)
         const oldOp = oldOps[i];
         oldOp.deleted = true;
         const self = this;
-
         const op = this.addOp(objName, oldOp.uiAttribs);
         ops.push(op);
 
@@ -979,7 +976,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
             this.ops[i]._origData = null;
         }
     }
-
 
     // create links...
     if (obj.ops)

@@ -19,17 +19,9 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Blendmode"
-            },
-            {
                 "type": 0,
                 "name": "Target index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Target"
             },
             {
                 "type": 0,
@@ -80,11 +72,6 @@
                 "type": 0,
                 "name": "Mapping index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "Mapping",
-                "subType": "string"
             },
             {
                 "type": 0,

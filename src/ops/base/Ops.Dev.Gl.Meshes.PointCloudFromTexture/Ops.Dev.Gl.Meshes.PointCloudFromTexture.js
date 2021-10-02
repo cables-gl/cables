@@ -66,7 +66,7 @@ function doRender()
 
 function setupMesh()
 {
-    if (inNum.get() === 0 && !inTex.get()) return;
+    if (inNum.get() === 0 || !inTex.get()) return;
 
     const num = inTex.get().width * inTex.get().height;
 

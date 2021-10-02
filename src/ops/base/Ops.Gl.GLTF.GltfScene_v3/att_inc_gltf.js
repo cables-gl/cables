@@ -184,11 +184,12 @@ function loadCams(gltf)
 
 function loadAfterDraco()
 {
-    if(!window.DracoDecoderModule)
+    if (!window.DracoDecoderModule)
     {
-        setTimeout(()=>{
+        setTimeout(() =>
+        {
             loadAfterDraco();
-        },100);
+        }, 100);
     }
 
     reloadSoon();
@@ -227,11 +228,11 @@ function parseGltf(arrayBuffer)
     pos += chunks[0].size + CHUNK_HEADER_SIZE;
     gltf.json = chunks[0].data;
     outJson.set(gltf.json);
-    outExtensions.set(gltf.json.extensionsUsed||[]);
+    outExtensions.set(gltf.json.extensionsUsed || []);
 
     chunks.push(readChunk(dv, byteArray, arrayBuffer, pos));
 
-    gltf.chunks=chunks;
+    gltf.chunks = chunks;
 
     const views = chunks[0].data.bufferViews;
     const accessors = chunks[0].data.accessors;
@@ -240,7 +241,7 @@ function parseGltf(arrayBuffer)
 
     if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
     {
-        if(!window.DracoDecoderModule)
+        if (!window.DracoDecoderModule)
         {
             op.setUiError("gltfdraco", "GLTF draco compression lib not found / add draco op to your patch!");
 
@@ -249,7 +250,7 @@ function parseGltf(arrayBuffer)
         }
         else
         {
-            gltf.useDraco=true;
+            gltf.useDraco = true;
         }
     }
 
@@ -263,7 +264,6 @@ function parseGltf(arrayBuffer)
             const acc = accessors[i];
 
             const view = views[acc.bufferView];
-
 
 
             // if(!view || !acc)
@@ -280,13 +280,13 @@ function parseGltf(arrayBuffer)
             else if (acc.type == "MAT4")numComps = 16;
             else console.error("unknown accessor type", acc.type);
 
-    //   const decoder = new decoderModule.Decoder();
-    //   const decodedGeometry = decodeDracoData(data, decoder);
-    //   // Encode mesh
-    //   encodeMeshToFile(decodedGeometry, decoder);
+            //   const decoder = new decoderModule.Decoder();
+            //   const decodedGeometry = decodeDracoData(data, decoder);
+            //   // Encode mesh
+            //   encodeMeshToFile(decodedGeometry, decoder);
 
-    //   decoderModule.destroy(decoder);
-    //   decoderModule.destroy(decodedGeometry);
+            //   decoderModule.destroy(decoder);
+            //   decoderModule.destroy(decodedGeometry);
 
 
             // 5120 (BYTE)	1
@@ -295,10 +295,8 @@ function parseGltf(arrayBuffer)
 
             if (chunks[1].dataView)
             {
-
-                if(view)
+                if (view)
                 {
-
                     const num = acc.count * numComps;
                     let accPos = (view.byteOffset || 0) + (acc.byteOffset || 0);
                     let stride = view.byteStride || 0;
@@ -346,7 +344,7 @@ function parseGltf(arrayBuffer)
                 }
                 else
                 {
-                    console.log("has no dataview")
+                    // console.log("has no dataview");
                 }
             }
         }

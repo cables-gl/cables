@@ -1,3 +1,4 @@
+const crashButton = op.inTriggerButton("Crash");
 const paramtest_1 = op.inValueFloat("test float 1", 1.0);
 const paramtest_2 = op.outNumber("test float 1", 1.0);
 const slider = op.inFloatSlider("name", 15, 10, 20);
@@ -21,4 +22,9 @@ buttons.onTriggered = function (e)
 inCheck.onChange = () =>
 {
     op.setUiAttrib({ "hideOp": true });
+};
+
+crashButton.onTriggered = function ()
+{
+    cdfsvjkldsjkl;
 };
