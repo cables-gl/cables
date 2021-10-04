@@ -474,6 +474,7 @@ op.exposeTexture = function (name)
 {
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
     newop.getPort("Name").set(name);
+    setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Render");
     gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
@@ -483,7 +484,7 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * 20 } });
+    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY } });
 }
 
 op.exposeNode = function (name, tree)
