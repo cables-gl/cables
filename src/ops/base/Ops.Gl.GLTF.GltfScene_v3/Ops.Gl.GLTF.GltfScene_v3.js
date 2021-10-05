@@ -343,25 +343,62 @@ function updateMaterials()
 
     gltf.shaders = {};
 
-    for (let j = 0; j < inMaterials.links.length; j++)
+    if (inMaterials.links.length == 1 && inMaterials.get())
     {
-        const op = inMaterials.links[j].portOut.parent;
+        // just accept a associative object with shader in it
+        const op = inMaterials.links[0].portOut.parent;
+
         const portShader = op.getPort("Shader");
         const portName = op.getPort("Material Name");
 
-        if (portShader && portName && portShader.get())
+        console.log(inMaterials.get());
+
+        if (!portShader && !portName)
         {
-            const name = portName.get();
-            if (gltf.json.materials)
-                for (let i = 0; i < gltf.json.materials.length; i++)
-                    if (gltf.json.materials[i].name == name)
+            const inMats = inMaterials.get();
+            for (let matname in inMats)
+            {
+                console.log("matname", matname);
+                if (inMats[matname] && gltf.json.materials)
+                    for (let i = 0; i < gltf.json.materials.length; i++)
                     {
-                        if (gltf.shaders[i])
+                        console.log("gltf.json.materials[i].name", gltf.json.materials[i].name);
+                        if (gltf.json.materials[i].name == matname)
                         {
-                            op.warn("double material assignment:", name);
+                            if (gltf.shaders[i])
+                            {
+                                op.warn("double material assignment:", name);
+                            }
+                            gltf.shaders[i] = inMats[matname];
+                            console.log("shader found!", gltf.shaders[i]);
                         }
-                        gltf.shaders[i] = portShader.get();
                     }
+            }
+        }
+    }
+
+    if (inMaterials.get())
+    {
+        for (let j = 0; j < inMaterials.links.length; j++)
+        {
+            const op = inMaterials.links[j].portOut.parent;
+            const portShader = op.getPort("Shader");
+            const portName = op.getPort("Material Name");
+
+            if (portShader && portName && portShader.get())
+            {
+                const name = portName.get();
+                if (gltf.json.materials)
+                    for (let i = 0; i < gltf.json.materials.length; i++)
+                        if (gltf.json.materials[i].name == name)
+                        {
+                            if (gltf.shaders[i])
+                            {
+                                op.warn("double material assignment:", name);
+                            }
+                            gltf.shaders[i] = portShader.get();
+                        }
+            }
         }
     }
     needsMatUpdate = false;
@@ -437,6 +474,7 @@ op.exposeTexture = function (name)
 {
     const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfTexture");
     newop.getPort("Name").set(name);
+    setNewOpPosition(newop, 1);
     op.patch.link(op, next.name, newop, "Render");
     gui.patchView.centerSelectOp(newop.id, true);
     gui.patchView.testCollision(newop);
@@ -446,7 +484,7 @@ function setNewOpPosition(newOp, num)
 {
     num = num || 1;
 
-    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * 20 } });
+    newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY } });
 }
 
 op.exposeNode = function (name, tree)

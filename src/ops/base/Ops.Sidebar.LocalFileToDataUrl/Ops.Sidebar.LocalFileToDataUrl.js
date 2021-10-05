@@ -5,6 +5,7 @@ const inId = op.inValueString("Id", "");
 const inVisible = op.inBool("Visible", true);
 const inGreyOut = op.inBool("Grey Out", false);
 const inOpenDialog = op.inTriggerButton("Show Dialog");
+const reset = op.inTriggerButton("Reset");
 
 // outputs
 
@@ -70,11 +71,14 @@ inVisible.onChange = function ()
     el.style.display = inVisible.get() ? "block" : "none";
 };
 
-elReset.addEventListener("click", () =>
+function onReset()
 {
     fileInputEle.value = "";
     outDataURL.set("");
-});
+}
+
+reset.onTriggered = onReset;
+elReset.addEventListener("click", onReset);
 
 function handleFileSelect(evt)
 {

@@ -42,6 +42,10 @@
             {
                 "type": 1,
                 "name": "Show Dialog"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
