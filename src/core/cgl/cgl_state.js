@@ -574,7 +574,6 @@ const Context = function (_patch)
 
     this._resizeToParentSize = function ()
     {
-        // Log.log("_resizeToParentSize");
         const p = this.canvas.parentElement;
         if (!p)
         {
@@ -582,7 +581,6 @@ const Context = function (_patch)
             return;
         }
         this.setSize(p.clientWidth, p.clientHeight);
-        // Log.log("_resizeToParentSize", p.clientWidth, p.clientHeight);
 
         this.updateSize();
     };

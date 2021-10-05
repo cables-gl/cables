@@ -136,7 +136,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         this.set = this.setValue = this.setValueArrayT.bind(this);
         this.updateValue = this.updateValueArrayT.bind(this);
     }
-    else if (__type == "m4")
+    else if (__type == "m4" || __type == "m4[]")
     {
         this.set = this.setValue = this.setValueM4.bind(this);
         this.updateValue = this.updateValueM4.bind(this);
@@ -236,6 +236,7 @@ Uniform.prototype.getGlslTypeString = function ()
     if (this._type == "3f") return "vec3";
     if (this._type == "4f") return "vec4";
     if (this._type == "m4") return "mat4";
+
     if (this._type == "t") return "sampler2D";
     if (this._type == "tc") return "samplerCube";
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
@@ -530,15 +531,6 @@ Uniform.prototype.setValueArrayT = function (v)
     this._value = v;
 };
 
-Uniform.prototype.updateValueArrayT = function ()
-{
-    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
-    else this.needsUpdate = false;
-
-    if (!this._value) return;
-    this._shader.getCgl().gl.uniform1iv(this._loc, this._value);
-    this._cgl.profileData.profileUniformCount++;
-};
 
 Uniform.prototype.updateValue3F = function ()
 {
@@ -666,6 +658,16 @@ Uniform.prototype.setValueM4 = function (v)
     this._value = v || mat4.create();
 };
 
+
+Uniform.prototype.updateValueArrayT = function ()
+{
+    if (!this._isValidLoc()) this._loc = this._shader.getCgl().gl.getUniformLocation(this._shader.getProgram(), this._name);
+    else this.needsUpdate = false;
+
+    if (!this._value) return;
+    this._shader.getCgl().gl.uniform1iv(this._loc, this._value);
+    this._cgl.profileData.profileUniformCount++;
+};
 
 Uniform.prototype.updateValueT = function ()
 {
