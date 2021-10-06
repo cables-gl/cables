@@ -174,7 +174,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 {
     if (!array)
     {
-        console.error("mesh addAttribute - no array given!");
+        console.error("mesh addAttribute - no array given! " + name);
         throw new Error();
     }
     let cb = null;
