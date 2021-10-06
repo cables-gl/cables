@@ -22,6 +22,12 @@ const gltfNode = class
         this.updateMatrix();
     }
 
+    get skin()
+    {
+        if (this._node.hasOwnProperty("skin")) return this._node.skin;
+        else return -1;
+    }
+
     hasSkin()
     {
         // console.log(this._gltf);
@@ -121,6 +127,12 @@ const gltfNode = class
         else console.warn("unknown anim path", path, anims);
     }
 
+    modelMatLocal()
+    {
+        return this._animMat||this.mat;
+    }
+
+
     modelMatAbs()
     {
         return this.absMat;
@@ -154,7 +166,7 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-                // console.log(this._animRot);
+                // console.log(this._animRot);a
                 CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
