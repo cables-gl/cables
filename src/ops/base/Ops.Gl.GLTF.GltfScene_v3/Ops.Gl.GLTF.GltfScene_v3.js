@@ -161,12 +161,8 @@ inExec.onTriggered = function ()
         if (inRescale.get())
         {
             let sc = inRescaleSize.get() / gltf.bounds.maxAxis;
-            // if (!CABLES.UTILS.isNumeric(sc))sc = 1.0;
             gltf.scale = sc;
             vec3.set(scale, sc, sc, sc);
-
-            // console.log(gltf.bounds);
-
             mat4.scale(cgl.mMatrix, cgl.mMatrix, scale);
         }
         if (doCenter)
@@ -235,11 +231,8 @@ function finishLoading()
         const node = gltf.nodes[i];
         node.updateMatrix();
         if (!node.isChild) node.calcBounds(gltf, null, gltf.bounds);
-
-        // if(i==0) gltf.bounds=node.get
-
-        // console.log("CALCBOUNDS", JSON.stringify(gltf.bounds));
     }
+
     if (gltf.bounds)outBounds.set(gltf.bounds);
 
     hideNodesFromData();
@@ -260,10 +253,18 @@ function finishLoading()
     if (gltf)
     {
         for (let i = 0; i < gltf.nodes.length; i++)
+        {
             if (!gltf.nodes[i].isChild)
             {
                 gltf.nodes[i].render(cgl, false, true, true, false, true, 0);
             }
+        }
+
+        for (let i = 0; i < gltf.nodes.length; i++)
+        {
+            const node = gltf.nodes[i];
+            node.children = uniqueArray(node.children); // stupid fix why are there too many children ?!
+        }
     }
 
     updateCenter();
@@ -563,3 +564,17 @@ op.toggleNodeVisibility = function (name)
 
     saveData();
 };
+
+function uniqueArray(arr)
+{
+    const u = {}, a = [];
+    for (let i = 0, l = arr.length; i < l; ++i)
+    {
+        if (!u.hasOwnProperty(arr[i]))
+        {
+            a.push(arr[i]);
+            u[arr[i]] = 1;
+        }
+    }
+    return a;
+}

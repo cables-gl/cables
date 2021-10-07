@@ -172,6 +172,11 @@ Mesh.prototype._bufferArray = function (array, attr)
  */
 Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.setAttribute = function (name, array, itemSize, options)
 {
+    if (!array)
+    {
+        console.error("mesh addAttribute - no array given! " + name);
+        throw new Error();
+    }
     let cb = null;
     let instanced = false;
     let i = 0;

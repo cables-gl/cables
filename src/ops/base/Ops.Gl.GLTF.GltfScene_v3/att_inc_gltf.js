@@ -335,6 +335,23 @@ function parseGltf(arrayBuffer)
                             accPos += 2;
                         }
                     }
+                    else if (acc.componentType == 5121) // UNSIGNED_BYTE
+                    {
+                        stride = stride || 1;
+
+                        dataBuff = new Uint8Array(num);
+
+                        for (j = 0; j < num; j++)
+                        {
+                            dataBuff[j] = chunks[1].dataView.getUint8(accPos, le);
+
+                            if (stride != 1 && (j + 1) % numComps === 0) accPos += stride - (numComps * 1);
+
+                            accPos += 1;
+                        }
+                    }
+
+
                     else
                     {
                         console.error("unknown component type", acc.componentType);
@@ -376,18 +393,22 @@ function parseGltf(arrayBuffer)
     {
         const node = new gltfNode(gltf.json.nodes[i], gltf);
         gltf.nodes.push(node);
+
     }
 
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
+
         if (node.children)
         {
+
             for (let j = 0; j < node.children.length; j++)
             {
                 gltf.nodes[node.children[j]].parent = node;
             }
+
         }
     }
 
