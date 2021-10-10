@@ -12,20 +12,20 @@ function printNode(html,node,level)
 
     html+='<tr class="row">';
 
-    // var ident="";
-    // let identSpace="";
+    var ident="";
+    let identSpace="";
 
-    // for(i=0;i<level;i++)
-    // {
-        // identSpace+="&nbsp;&nbsp;&nbsp;";
-        // var identClass="identBg";
-        // if(i==0)identClass="identBgLevel0";
-        // ident+='<td class="ident  '+identClass+'" ><div style=""></div></td>';
-    // }
+    for(let i=1;i<level;i++)
+    {
+        identSpace+="&nbsp;&nbsp;&nbsp;";
+        var identClass="identBg";
+        if(i==1)identClass="identBgLevel0";
+        ident+='<td class="ident '+identClass+'" ><div style=""></div></td>';
+    }
     var id=CABLES.uuid();
-    // html+=ident;
-    html+='<td >'; //colspan="'+(20-level)+'"
-    html+='<div style="display:inline-block;border:0px solid red;height:10px;width:'+level*10+'px"></div>';
+    html+=ident;
+    html+='<td colspan="'+(20-level)+'">';
+    // html+='<div style="display:inline-block;border:0px solid red;height:10px;width:'+level*10+'px"></div>';
 
     if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
     else html+='<span class="icon icon-circle"></span> &nbsp;';
@@ -94,7 +94,7 @@ function printNode(html,node,level)
 
     if(node.children)
     {
-         node.children=CABLES.uniqueArray(node.children); // stupid fix why are there too many children ?!
+
         for(let i=0;i<node.children.length;i++)
             html=printNode(html,gltf.nodes[node.children[i]],level+1);
     }

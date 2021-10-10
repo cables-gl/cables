@@ -43,26 +43,12 @@ let gltfMesh = class
 
                     if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
 
-                    // console.log(gltf.accBuffers[prim.targets[j].POSITION])
-
                     this.fillGeomAttribs(gltf, tgeom, prim.targets[j],false);
-
-                    // const attribs=prim.targets[j];
-
-                    // if(attribs.hasOwnProperty("POSITION"))tgeom.vertices=gltf.accBuffers[attribs.POSITION];
-                    // if(attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
-                    // if(attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
-                    // if(attribs.hasOwnProperty("TANGENT"))tgeom.tangents=gltf.accBuffers[attribs.TANGENT];
-                    // if(attribs.hasOwnProperty("COLOR_0"))tgeom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
-                    // if(tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
-                    // console.log( Object.keys(prim.targets[j]) );
 
                     { // calculate normals for final position of morphtarget for later...
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
                         tgeom.calculateNormals();
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] -= this.geom.vertices[i];
-
-                        console.log(tgeom.vertexNormals);
                     }
 
                     this.geom.morphTargets.push(tgeom);
@@ -85,6 +71,13 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
         if (attribs.hasOwnProperty("TEXCOORD_3"))tgeom.setAttribute("attrTexCoord3", gltf.accBuffers[attribs.TEXCOORD_3], 2);
         if (attribs.hasOwnProperty("TEXCOORD_4"))tgeom.setAttribute("attrTexCoord4", gltf.accBuffers[attribs.TEXCOORD_4], 2);
+
+        if (attribs.hasOwnProperty("WEIGHTS_0"))tgeom.setAttribute("attrWeights", gltf.accBuffers[attribs.WEIGHTS_0], 4);
+        if (attribs.hasOwnProperty("JOINTS_0"))
+        {
+            if(!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
+            tgeom.setAttribute("attrJoints", gltf.accBuffers[attribs.JOINTS_0], 4);
+        }
 
         if(setGeom!==false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }

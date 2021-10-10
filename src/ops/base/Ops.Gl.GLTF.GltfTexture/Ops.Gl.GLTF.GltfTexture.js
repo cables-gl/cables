@@ -39,6 +39,8 @@ inExec.onTriggered = function ()
         return;
     }
 
+    if (!cgl.frameStore.currentScene.json.images) return;
+
     let img = null;
 
     for (let i = 0; i < cgl.frameStore.currentScene.json.images.length; i++)
