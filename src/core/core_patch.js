@@ -221,9 +221,9 @@ Patch.prototype.resume = function ()
     if (this._paused)
     {
         cancelAnimationFrame(this._animReq);
-        this.emitEvent("resume");
         this._paused = false;
         this.freeTimer.play();
+        this.emitEvent("resume");
         this.exec();
     }
 };
