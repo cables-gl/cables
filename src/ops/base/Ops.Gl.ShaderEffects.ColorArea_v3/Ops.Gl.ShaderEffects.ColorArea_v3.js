@@ -14,6 +14,7 @@ const
     z = op.inValue("z"),
     sizeX = op.inValueSlider("Size X", 1),
     inWorldSpace = op.inValueBool("WorldSpace", true),
+    inPosAbs = op.inValueBool("Position Absolute", true),
     inPrio = op.inBool("Priority", true),
     next = op.outTrigger("Next");
 
@@ -25,12 +26,22 @@ const cgl = op.patch.cgl;
 
 const srcHeadVert = ""
     .endl() + "OUT vec4 MOD_vertPos;"
+    .endl() + "OUT vec3 MOD_pos;"
     .endl();
 
 const srcBodyVert = ""
+
+    .endl() + "#ifndef MOD_POS_ABS"
+    .endl() + "   MOD_pos=(vec4(MOD_posi,1.0)*mMatrix).xyz;"
+    .endl() + "#endif"
+    .endl() + "#ifdef MOD_POS_ABS"
+    .endl() + "   MOD_pos=MOD_posi;"
+    .endl() + "#endif"
+
     .endl() + "#ifndef MOD_WORLDSPACE"
     .endl() + "   MOD_vertPos=vec4(vPosition,1.0);"
     .endl() + "#endif"
+
     .endl() + "#ifdef MOD_WORLDSPACE"
     .endl() + "   MOD_vertPos=mMatrix*pos;"
     .endl() + "#endif"
@@ -39,6 +50,7 @@ const srcBodyVert = ""
 inWorldSpace.onChange =
     inArea.onChange =
     inInvert.onChange =
+    inPosAbs.onChange =
     inBlend.onChange = updateDefines;
 
 render.onTriggered = doRender;
@@ -62,7 +74,7 @@ mod.addModule({
 
 mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
 mod.addUniform("3f", "MOD_color", r, g, b);
-mod.addUniform("3f", "MOD_pos", x, y, z);
+mod.addUniform("3f", "MOD_posi", x, y, z);
 updateDefines();
 
 inPrio.onChange = updatePrio;
@@ -94,6 +106,7 @@ function updateDefines()
 
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
     mod.toggleDefine("MOD_WORLDSPACE", inWorldSpace.get());
+    mod.toggleDefine("MOD_POS_ABS", inPosAbs.get());
 
     mod.toggleDefine("MOD_AREA_AXIS_X", inArea.get() == "Axis X");
     mod.toggleDefine("MOD_AREA_AXIS_Y", inArea.get() == "Axis Y");
