@@ -13,6 +13,7 @@ const
     outClickedTrigger = op.outTrigger("Clicked Trigger");
 
 op.toWorkPortsNeedToBeLinked(inExec);
+let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 
 const canvas = op.patch.cgl.canvas.parentElement;
 let wasClicked = false;
@@ -22,6 +23,8 @@ createElements();
 
 inStyleOuter.onChange =
     inStyleInner.onChange = createElements;
+
+audioCtx.addEventListener("statechange", updateState);
 
 inActive.onChange = () =>
 {
@@ -37,6 +40,7 @@ function createElements()
     ele = document.createElement("div");
     ele.style = inStyleOuter.get();
     outEle.set(ele);
+
     canvas.appendChild(ele);
 
     elePlay = document.createElement("div");
@@ -59,14 +63,14 @@ inReset.onTriggered = function ()
     outClicked.set(wasClicked);
 };
 
+function updateState()
+{
+    outState.set(audioCtx.state);
+    if (inIfSuspended.get() && audioCtx.state == "running") clicked();
+}
+
 inExec.onTriggered = function ()
 {
-    if (window.audioContext)
-    {
-        outState.set(window.audioContext.state);
-    }
-
-    if (inIfSuspended.get() && window.audioContext.state == "running") clicked();
     if (wasClicked) outNext.trigger();
     else notClickedNext.trigger();
 };
@@ -74,7 +78,7 @@ inExec.onTriggered = function ()
 function clicked()
 {
     removeElements();
-    if (window.audioContext && window.audioContext.state == "suspended")window.audioContext.resume();
+    if (audioCtx && audioCtx.state == "suspended")audioCtx.resume();
     wasClicked = true;
     outClicked.set(wasClicked);
     outClickedTrigger.trigger();

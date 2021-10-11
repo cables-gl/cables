@@ -1,5 +1,3 @@
-const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-
 // input ports
 const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const playPort = op.inBool("Start / Stop", false);
@@ -28,6 +26,9 @@ let hasEnded = false;
 let pausedAt = null;
 let startedAt = null;
 let isLoading = false;
+
+const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
+audioCtx.addEventListener("statechange", updateStateError);
 
 const gainNode = audioCtx.createGain();
 
@@ -262,6 +263,15 @@ offsetPort.onChange = () =>
         }
     }
 };
+
+function updateStateError()
+{
+    console.log("audioCtx.state", audioCtx.state);
+
+    if (isPlaying && audioCtx.state == "suspended") op.setUiError("ctxSusp", "Your Browser suspended audio context, use playButton op to play audio after a user interaction");
+    else op.setUiError("ctxSusp", null);
+}
+
 function start(time)
 {
     try
@@ -275,6 +285,12 @@ function start(time)
             hasEnded = false;
             outPlaying.set(true);
         }
+        else
+        {
+            op.log("start() but no src...");
+        }
+
+        updateStateError();
     }
     catch (e)
     {

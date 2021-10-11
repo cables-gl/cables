@@ -31,7 +31,7 @@
     float MOD_de=MOD_pos.y-MOD_vertPos.y;
 #endif
 #ifdef MOD_AREA_AXIS_Z_INFINITE
-    float MOD_de=MOD_pos.z-MOD_vertPos.z;
+    float MOD_de=(MOD_pos).z-MOD_vertPos.z;
 #endif
 
 MOD_de=1.0-smoothstep(MOD_inSizeAmountFalloffSizeX.z*MOD_inSizeAmountFalloffSizeX.x,MOD_inSizeAmountFalloffSizeX.x,MOD_de);

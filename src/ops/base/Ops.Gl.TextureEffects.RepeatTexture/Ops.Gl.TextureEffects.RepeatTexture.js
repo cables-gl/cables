@@ -20,6 +20,10 @@ const amountYUniform = new CGL.Uniform(shader, "f", "amountY", amountY);
 
 CGL.TextureEffect.setupBlending(op, shader, blendMode, amount);
 
+mulTex.onChange = () =>
+{
+    shader.toggleDefine("HAS_MASK", mulTex.get());
+};
 
 render.onTriggered = function ()
 {
