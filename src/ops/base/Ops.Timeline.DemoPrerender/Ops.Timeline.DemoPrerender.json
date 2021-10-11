@@ -21,10 +21,6 @@
                 "name": "Render"
             },
             {
-                "type": 3,
-                "name": "Times"
-            },
-            {
                 "type": 0,
                 "name": "Record Events",
                 "subType": "boolean"

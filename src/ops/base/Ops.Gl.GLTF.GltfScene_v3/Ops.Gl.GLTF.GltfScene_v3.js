@@ -193,8 +193,16 @@ inExec.onTriggered = function ()
                 cgl.popShader();
             }
 
+            if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
+            cgl.pushModelMatrix();
+            mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
+            mat4.identity(cgl.mMatrix);
+
             for (let i = 0; i < gltf.nodes.length; i++)
-                if (!gltf.nodes[i].isChild) gltf.nodes[i].render(cgl);
+                if (!gltf.nodes[i].isChild)
+                    gltf.nodes[i].render(cgl);
+
+            cgl.popModelMatrix();
         }
     }
 

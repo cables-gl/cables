@@ -20,7 +20,13 @@
                 "subType": "boolean"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Current Volume",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.WebAudio.Output_v2"
     },
     "author": "58dabd06a0d7ec8d1a982e66",
