@@ -10,9 +10,10 @@
     "authorName": "pandur",
     "created": 1555064338485,
     "layout": {
+        "portsIn": [],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Triggered"
             }
         ],
