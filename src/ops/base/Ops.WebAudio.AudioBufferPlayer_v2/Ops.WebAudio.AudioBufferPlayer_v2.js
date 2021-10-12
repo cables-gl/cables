@@ -28,7 +28,6 @@ let startedAt = null;
 let isLoading = false;
 
 const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-audioCtx.addEventListener("statechange", updateStateError);
 
 const gainNode = audioCtx.createGain();
 
@@ -191,6 +190,8 @@ function createAudioBufferSource(dontStart = false)
 
     if (source)
     {
+        source.onended = null;
+
         if (source.buffer)
         {
             stop(0);
@@ -233,7 +234,8 @@ function createAudioBufferSource(dontStart = false)
 
     if (playPort.get() && !dontStart)
     {
-        if (!isPlaying) start(startTimePort.get());
+        // if (!isPlaying)
+        start(startTimePort.get());
     }
 }
 
@@ -264,14 +266,6 @@ offsetPort.onChange = () =>
     }
 };
 
-function updateStateError()
-{
-    console.log("audioCtx.state", audioCtx.state);
-
-    if (isPlaying && audioCtx.state == "suspended") op.setUiError("ctxSusp", "Your Browser suspended audio context, use playButton op to play audio after a user interaction");
-    else op.setUiError("ctxSusp", null);
-}
-
 function start(time)
 {
     try
@@ -289,8 +283,6 @@ function start(time)
         {
             op.log("start() but no src...");
         }
-
-        updateStateError();
     }
     catch (e)
     {
@@ -301,13 +293,21 @@ function start(time)
     }
 }
 
+function recreateBuffer()
+{
+    let dontStart = !loopPort.get();
+    createAudioBufferSource(dontStart);
+}
+
 function stop(time)
 {
     try
     {
         if (isPlaying)
         {
+            console.log("stop...");
             source.stop();
+            recreateBuffer();
         }
 
         isPlaying = false;
@@ -322,18 +322,15 @@ function stop(time)
 
 function onPlaybackEnded()
 {
-    outPlaying.set(false);
     isPlaying = false;
     hasEnded = true;
-    let dontStart = false;
     if (loopPort.get())
     {
         isPlaying = true;
         hasEnded = false;
     }
-    else
-    {
-        dontStart = true;
-    }
-    createAudioBufferSource(dontStart);
+    console.log("is playing", isPlaying);
+    outPlaying.set(isPlaying);
+
+    recreateBuffer();
 }
