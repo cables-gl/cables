@@ -129,14 +129,7 @@ const gltfNode = class
 
     modelMatLocal()
     {
-        if(this._animMat)
-        {
-
-        const m=mat4.create();
-        mat4.mul(m,this._animMat,this.mat);
-        return m;
-        }
-        else return this.mat;
+        return this._animMat||this.mat;
     }
 
 
@@ -173,16 +166,8 @@ const gltfNode = class
 
             if (playAnims && this._animRot)
             {
-
-                try {
-
+                // console.log(this._animRot);a
                 CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
-                } catch (e) {
-                    // console.error(e)
-                    // console.log(this._animRot.keys.length);
-
-                }
-
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);

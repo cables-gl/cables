@@ -37,7 +37,7 @@ updateAudioStateButton();
 
 op.onDelete = () =>
 {
-    gainNode.disconnect();
+    if (gainNode)gainNode.disconnect();
     gainNode = null;
     if (fsElement)fsElement.remove();
 };
@@ -65,7 +65,7 @@ inAudio.onChange = function ()
 
         if (connectedToOut)
         {
-            gainNode.disconnect(destinationNode);
+            if (gainNode)gainNode.disconnect(destinationNode);
             connectedToOut = false;
         }
     }
@@ -81,7 +81,7 @@ inAudio.onChange = function ()
 
     if (!connectedToOut)
     {
-        gainNode.connect(destinationNode);
+        if (gainNode)gainNode.connect(destinationNode);
         connectedToOut = true;
     }
 
@@ -104,7 +104,7 @@ function setVolume(fromMute)
     if (!gainNode)
         op.error("gainNode undefined");
 
-    gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
+    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
 
     outVol.set(volume);
 }
@@ -120,9 +120,12 @@ function mute(b)
             // also note, we have to cancle the already scheduled values as we have no influence over
             // the order in which onchange handlers are executed
 
-            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-            gainNode.gain.value = 0;
-            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            if (gainNode)
+            {
+                gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+                gainNode.gain.value = 0;
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            }
 
             outVol.set(0);
 
