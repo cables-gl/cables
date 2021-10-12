@@ -505,8 +505,10 @@ op.exposeNode = function (name, tree)
             if (gltf.nodes[i].name == name)
             {
                 const node = gltf.nodes[i];
-                const arrHierarchy = [];
+                let arrHierarchy = [];
                 findParents(arrHierarchy, i);
+
+                arrHierarchy = arrHierarchy.reverse();
 
                 arrHierarchy.push(node, node);
 
