@@ -15,6 +15,7 @@ const destinationNode = audioCtx.destination;
 const inAudio = op.inObject("Audio In", null, "audioNode");
 const inGain = op.inFloatSlider("Volume", 1);
 const inMute = op.inBool("Mute", false);
+const outVol = op.outNumber("Current Volume", 0);
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
 
@@ -69,30 +70,30 @@ inAudio.onChange = function ()
         gainNode.connect(destinationNode);
         connectedToOut = true;
     }
+
+    setVolume();
 };
 
 // functions
 // sets the volume, multiplied by master volume
 function setVolume(fromMute)
 {
-    let volume = inGain.get() * masterVolume;
-    volume = clamp(volume, 0, 1);
-    if (inMute.get()) volume = 0;
+    const masterVolume = op.patch.config.masterVolume || 0;
 
-    if (!fromMute)
-    {
-        if (gainNode)
-        {
-            gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.05);
-        }
-    }
-    else
-    {
-        if (gainNode)
-        {
-            gainNode.gain.linearRampToValueAtTime(clamp(volume, 0, 1), audioCtx.currentTime + 0.2);
-        }
-    }
+    // console.log(op.patch._paused, op.patch.config.masterVolume, inGain.get());
+
+    let volume = inGain.get() * masterVolume;
+
+    if (op.patch._paused || inMute.get()) volume = 0;
+
+    let addTime = 0.05;
+    if (fromMute) addTime = 0.2;
+
+    volume = clamp(volume, 0, 1);
+    // console.log("volume", volume);
+    gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
+
+    outVol.set(volume);
 }
 
 function mute(b)
@@ -110,16 +111,14 @@ function mute(b)
             gainNode.gain.value = 0;
             gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
 
+            outVol.set(0);
+
             // * NOTE: we have to use both of the upper statements so it works in chrome & firefox
             return;
         }
+    }
 
-        gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.2);
-    }
-    else
-    {
-        setVolume(true);
-    }
+    setVolume(true);
 }
 
 // change listeners
@@ -128,35 +127,11 @@ inMute.onChange = () =>
     mute(inMute.get());
 };
 
-inGain.onChange = () =>
-{
-    if (inMute.get())
-    {
-        return;
-    }
-    setVolume();
-};
+inGain.onChange = setVolume;
+op.onMasterVolumeChanged = setVolume;
 
-op.patch.on("pause", () =>
-{
-    if (inMute.get()) return;
-    masterVolume = 0;
-    setVolume();
-});
-
-op.patch.on("resume", () =>
-{
-    if (op.patch.config.masterVolume !== 0) masterVolume = op.patch.config.masterVolume;
-    else masterVolume = 0;
-    setVolume();
-});
-
-op.onMasterVolumeChanged = (v) =>
-{
-    if (op.patch._paused) masterVolume = 0;
-    else masterVolume = v;
-    setVolume();
-};
+op.patch.on("pause", setVolume);
+op.patch.on("resume", setVolume);
 
 op.onDelete = () =>
 {

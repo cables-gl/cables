@@ -194,7 +194,7 @@ exec.onTriggered = function ()
 
     cgl.gl.viewport(prevViewPort[0], prevViewPort[1], prevViewPort[2], prevViewPort[3]);
 
-    next.trigger();
-
     mod.unbind();
+
+    next.trigger();
 };

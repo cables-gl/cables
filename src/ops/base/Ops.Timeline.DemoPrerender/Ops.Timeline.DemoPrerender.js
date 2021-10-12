@@ -6,7 +6,7 @@ const
     inClear = op.inTriggerButton("Clear"),
     next = op.outTrigger("Next"),
     nextPrerendered = op.outTrigger("Prerendered Frame"),
-    outProgress = op.outNumber("Progress"),
+    outProgress = op.outNumber("Progress", 0),
     numEvents = op.outNumber("Num Events");
 
 exec.onTriggered = render;
@@ -75,7 +75,7 @@ function render()
             curTime = events[prerenderCount];
             op.patch._frameNum = prerenderCount + 22;
 
-            console.log("isPrerendering at ", curTime);
+            // console.log("isPrerendering at ", curTime);
 
             CABLES.overwriteTime = curTime;
             op.patch.timer.setTime(curTime);
@@ -97,7 +97,7 @@ function render()
         {
             const t = (numExtraFrames - (prerenderCount - events.length)) / numExtraFrames;
 
-            console.log("empty prerender...", t);
+            // console.log("empty prerender...", t);
             op.patch.timer.setTime(t);
             op.patch.freeTimer.setTime(t);
         }
@@ -106,7 +106,8 @@ function render()
         next.trigger();
         // next.trigger();
         // next.trigger();
-        outProgress.set(Math.min(1, prerenderCount / (events.length)));
+        outProgress.set(Math.min(1, prerenderCount / (events.length + numExtraFrames)));
+        // console.log("progress...", outProgress.get());
 
         nextPrerendered.trigger();
 

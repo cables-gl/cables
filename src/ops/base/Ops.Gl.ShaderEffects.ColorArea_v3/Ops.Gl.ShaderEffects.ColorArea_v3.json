@@ -15,11 +15,6 @@
             },
             {
                 "type": 0,
-                "name": "Area",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Size",
                 "subType": "number"
             },
@@ -42,11 +37,6 @@
                 "type": 0,
                 "name": "Blend  index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Blend ",
-                "group": "Color"
             },
             {
                 "type": 0,
@@ -92,6 +82,11 @@
             {
                 "type": 0,
                 "name": "WorldSpace",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Position Absolute",
                 "subType": "boolean"
             },
             {

@@ -201,6 +201,8 @@ let gltfMesh = class
 
 
 
+cgl.pushModelMatrix();
+if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
@@ -211,6 +213,7 @@ let gltfMesh = class
             }
 
             if (useMat) cgl.popShader();
+cgl.popModelMatrix();
         }
     }
 };

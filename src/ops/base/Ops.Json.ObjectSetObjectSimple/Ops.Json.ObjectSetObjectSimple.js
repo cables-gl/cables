@@ -11,6 +11,7 @@ inKey.onChange = () =>
 {
     removeKey();
     update();
+    op.setUiAttrib({ "extendTitle": inKey.get() });
 };
 
 outObject.onLinkChanged =

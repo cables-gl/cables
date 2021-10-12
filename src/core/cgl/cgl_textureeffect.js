@@ -256,15 +256,16 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 
 TextureEffect.checkOpInEffect = function (op)
 {
-    if (op.patch.cgl.currentTextureEffect && op.uiAttribs.error)
+    if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
     {
+        op.setUiError("texeffect", null);
         op.uiAttr({ "error": null });
         return true;
     }
 
     if (op.patch.cgl.currentTextureEffect) return true;
 
-    if (!op.patch.cgl.currentTextureEffect && !op.uiAttribs.error)
+    if (!op.patch.cgl.currentTextureEffect && (!op.uiAttribs.uierrors || op.uiAttribs.uierrors.length == 0))
     {
         op.setUiError("texeffect", "This op must be a child of an ImageCompose op! More infos <a href=\"https://docs.cables.gl/image_composition/image_composition.html\" target=\"_blank\">here</a>.", 1);
         return false;

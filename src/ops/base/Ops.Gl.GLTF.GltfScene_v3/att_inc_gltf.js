@@ -119,7 +119,6 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
 function loadAnims(gltf)
 {
-    let k = 0;
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
@@ -132,36 +131,51 @@ function loadAnims(gltf)
             const sampler = an.samplers[chan.sampler];
 
             const acc = gltf.json.accessors[sampler.input];
-            const bufferIn = gltf.accBuffers[sampler.input];
+            const bufferIn = gltf.accBuffers[acc.bufferView];
 
             const accOut = gltf.json.accessors[sampler.output];
-            const bufferOut = gltf.accBuffers[sampler.output];
+            const bufferOut = gltf.accBuffers[accOut.bufferView];
 
-            let numComps = 1;
-            if (accOut.type == "VEC2")numComps = 2;
-            else if (accOut.type == "VEC3")numComps = 3;
-            else if (accOut.type == "VEC4")numComps = 4;
-
-            const anims = [];
-
-            for (k = 0; k < numComps; k++) anims.push(new CABLES.TL.Anim());
-
-            if (sampler.interpolation == "LINEAR") {}
-            else if (sampler.interpolation == "STEP") for (k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
-            else console.warn("[gltf] unknown interpolation", sampler.interpolation);
-
-            if(bufferIn)
-            for (let j = 0; j < bufferIn.length; j++)
+            if(bufferIn && bufferOut)
             {
-                maxTime = Math.max(bufferIn[j], maxTime);
 
-                for (k = 0; k < numComps; k++)
+                let numComps = 1;
+                if (accOut.type == "VEC2")numComps = 2;
+                else if (accOut.type == "VEC3")numComps = 3;
+                else if (accOut.type == "VEC4")numComps = 4;
+                else op.warn("unknown accOut.type",accOut.type);
+
+                const anims = [];
+
+                for (let k = 0; k < numComps; k++) anims.push(new CABLES.TL.Anim());
+
+                if (sampler.interpolation == "LINEAR") {}
+                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
+                else op.warn("unknown interpolation", sampler.interpolation);
+
+                for (let j = 0; j < bufferIn.length; j++)
                 {
-                    anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
+                    maxTime = Math.max(bufferIn[j], maxTime);
+
+                    for (let k = 0; k < numComps; k++)
+                    {
+                        anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
+                    }
                 }
+
+                node.setAnim(chan.target.path, anims);
+            }
+            else
+            {
+                op.warn("loadAmins bufferIn undefined ",bufferIn===undefined);
+                op.warn("loadAmins bufferOut undefined ",bufferOut===undefined);
+                op.warn("loadAmins ",sampler,accOut);
+                op.warn("loadAmins num accBuffers",gltf.accBuffers.length);
+                op.warn("loadAmins num accessors",gltf.json.accessors.length);
             }
 
-            node.setAnim(chan.target.path, anims);
+
+
         }
     }
 }
@@ -393,22 +407,16 @@ function parseGltf(arrayBuffer)
     {
         const node = new gltfNode(gltf.json.nodes[i], gltf);
         gltf.nodes.push(node);
-
     }
-
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
 
-        if (node.children)
+        if (!node.children)continue;
+        for (let j = 0; j < node.children.length; j++)
         {
-
-            for (let j = 0; j < node.children.length; j++)
-            {
-                gltf.nodes[node.children[j]].parent = node;
-            }
-
+            gltf.nodes[node.children[j]].parent = node;
         }
     }
 
