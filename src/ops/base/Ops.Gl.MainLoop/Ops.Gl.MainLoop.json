@@ -20,6 +20,11 @@
             },
             {
                 "type": 0,
+                "name": "Clear",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "ClearAlpha",
                 "subType": "boolean"
             },
