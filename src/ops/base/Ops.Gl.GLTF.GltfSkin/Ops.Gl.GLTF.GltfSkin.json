@@ -1,0 +1,74 @@
+{
+    "id": "0ce62e9b-d990-4ae2-b40f-a036a021aa9c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1633347466268
+        },
+        {
+            "message": "Ops.User.pandur.Gltfskeleton renamed to Ops.User.pandur.GltfHierarchy",
+            "author": "pandur",
+            "date": 1633349746011
+        },
+        {
+            "message": "cloned op from Ops.User.pandur.GltfHierarchy",
+            "author": "pandur",
+            "date": 1633440350131
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1633445590008
+        },
+        {
+            "message": "Ops.User.pandur.GltfRig renamed to Ops.Gl.GLTF.GltfSkin",
+            "author": "pandur",
+            "date": 1634109850994
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1633440350130,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Scene Time",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Found Node",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Found Skin",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Next"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfSkin"
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
+}

@@ -1,4 +1,3 @@
-
 const gltfNode = class
 {
     constructor(node, gltf)
@@ -18,7 +17,6 @@ const gltfNode = class
         this._gltf = gltf;
         this.absMat = mat4.create();
         this.addTranslate = null;
-
         this.updateMatrix();
     }
 
@@ -30,7 +28,6 @@ const gltfNode = class
 
     hasSkin()
     {
-        // console.log(this._gltf);
         if (this._node.hasOwnProperty("skin")) return this._gltf.json.skins[this._node.skin].name || "unknown";
         return false;
     }
@@ -81,12 +78,9 @@ const gltfNode = class
     calcBounds(gltf, mat, bounds)
     {
         const localMat = mat4.create();
+
         if (mat) mat4.copy(localMat, mat);
-
         if (this.mat) mat4.mul(localMat, localMat, this.mat);
-
-
-        // console.log("before",JSON.stringify(bounds));
 
         if (this.mesh)
         {
@@ -101,9 +95,6 @@ const gltfNode = class
             }
         }
 
-        // console.log("after",JSON.stringify(bounds));
-
-
         for (let i = 0; i < this.children.length; i++)
         {
             if (gltf.nodes[this.children[i]] && gltf.nodes[this.children[i]].calcBounds)
@@ -113,7 +104,6 @@ const gltfNode = class
                 bounds.apply(b);
             }
         }
-
 
         if (bounds.changed) return bounds;
         else return null;
@@ -132,12 +122,9 @@ const gltfNode = class
         return this._animMat||this.mat;
     }
 
-
     modelMatAbs()
     {
         return this.absMat;
-        // if(!this._animTrans) return this.mat;
-        // else return this._animMat;
     }
 
     transform(cgl, _time)
@@ -157,17 +144,16 @@ const gltfNode = class
             if (playAnims && this._animTrans)
             {
                 mat4.translate(this._animMat, this._animMat, [
-                    this._animTrans[0].getValue(time),
-                    this._animTrans[1].getValue(time),
-                    this._animTrans[2].getValue(time)]);
+                    this._animTrans[0].getValue(_time),
+                    this._animTrans[1].getValue(_time),
+                    this._animTrans[2].getValue(_time)]);
             }
             else
             if (this.translation) mat4.translate(this._animMat, this._animMat, this.translation);
 
             if (playAnims && this._animRot)
             {
-                // console.log(this._animRot);a
-                CABLES.TL.Anim.slerpQuaternion(time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);
@@ -181,9 +167,9 @@ const gltfNode = class
             if (playAnims && this._animScale)
             {
                 mat4.scale(this._animMat, this._animMat, [
-                    this._animScale[0].getValue(time),
-                    this._animScale[1].getValue(time),
-                    this._animScale[2].getValue(time)]);
+                    this._animScale[0].getValue(_time),
+                    this._animScale[1].getValue(_time),
+                    this._animScale[2].getValue(_time)]);
             }
             else if (this._scale) mat4.scale(this._animMat, this._animMat, this._scale);
 
@@ -198,7 +184,7 @@ const gltfNode = class
     render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
     {
         if (!dontTransform) cgl.pushModelMatrix();
-        if (!dontTransform) this.transform(cgl, _time || time);
+        if (!dontTransform) this.transform(cgl, _time );
 
         if (this.hidden && !drawHidden)
         {

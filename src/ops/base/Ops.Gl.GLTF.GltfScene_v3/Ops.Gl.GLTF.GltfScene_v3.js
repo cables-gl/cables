@@ -496,20 +496,21 @@ function setNewOpPosition(newOp, num)
     newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY } });
 }
 
-op.exposeNode = function (name, tree)
+op.exposeNode = function (name, tree, options)
 {
     if (tree)
     {
+        let ops = [];
+
         for (let i = 0; i < gltf.nodes.length; i++)
         {
             if (gltf.nodes[i].name == name)
             {
-                const node = gltf.nodes[i];
                 let arrHierarchy = [];
+                const node = gltf.nodes[i];
                 findParents(arrHierarchy, i);
 
                 arrHierarchy = arrHierarchy.reverse();
-
                 arrHierarchy.push(node, node);
 
                 let prevPort = next.name;
@@ -533,14 +534,24 @@ op.exposeNode = function (name, tree)
 
                     prevPort = "Next";
                     prevOp = newop;
+                    ops.push(newop);
                     gui.patchView.testCollision(newop);
                 }
             }
         }
+
+        for (let i = 0; i < ops.length; i++)
+        {
+            ops[i].selectChilds();
+        }
     }
     else
     {
-        const newop = gui.corePatch().addOp("Ops.Gl.GLTF.GltfNode_v2");
+        let newopname = "Ops.Gl.GLTF.GltfNode_v2";
+        if (options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
+
+        let newop = gui.corePatch().addOp(newopname);
+
         newop.getPort("Node Name").set(name);
         setNewOpPosition(newop);
         op.patch.link(op, next.name, newop, "Render");
