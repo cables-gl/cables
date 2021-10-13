@@ -1,32 +1,46 @@
-function clamp(val, min, max)
-{
-    return Math.min(Math.max(val, min), max);
-}
-
 op.requirements = [CABLES.Requirements.WEBAUDIO];
 
+let isSuspended = false;
 let audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
-
-// vars
 let gainNode = audioCtx.createGain();
 const destinationNode = audioCtx.destination;
 
-// inputs
-const inAudio = op.inObject("Audio In", null, "audioNode");
-const inGain = op.inFloatSlider("Volume", 1);
-const inMute = op.inBool("Mute", false);
-const outVol = op.outNumber("Current Volume", 0);
+const
+    inAudio = op.inObject("Audio In", null, "audioNode"),
+    inGain = op.inFloatSlider("Volume", 1),
+    inMute = op.inBool("Mute", false),
+    inShowSusp = op.inBool("Show Audio Suspended Button", true),
+    outVol = op.outNumber("Current Volume", 0),
+    outState = op.outString("Context State", "unknown");
 
 op.setPortGroup("Volume Settings", [inMute, inGain]);
 
 let masterVolume = 1;
 let oldAudioIn = null;
 let connectedToOut = false;
+let fsElement = null;
 
-if (inMute.get())
+inMute.onChange = () =>
 {
-    gainNode.gain.value = 0;
-}
+    mute(inMute.get());
+};
+
+inGain.onChange = setVolume;
+op.onMasterVolumeChanged = setVolume;
+op.patch.on("pause", setVolume);
+op.patch.on("resume", setVolume);
+
+audioCtx.addEventListener("statechange", updateStateError);
+
+updateStateError();
+updateAudioStateButton();
+
+op.onDelete = () =>
+{
+    if (gainNode)gainNode.disconnect();
+    gainNode = null;
+    if (fsElement)fsElement.remove();
+};
 
 inAudio.onChange = function ()
 {
@@ -51,7 +65,7 @@ inAudio.onChange = function ()
 
         if (connectedToOut)
         {
-            gainNode.disconnect(destinationNode);
+            if (gainNode)gainNode.disconnect(destinationNode);
             connectedToOut = false;
         }
     }
@@ -67,20 +81,16 @@ inAudio.onChange = function ()
 
     if (!connectedToOut)
     {
-        gainNode.connect(destinationNode);
+        if (gainNode)gainNode.connect(destinationNode);
         connectedToOut = true;
     }
 
     setVolume();
 };
 
-// functions
-// sets the volume, multiplied by master volume
 function setVolume(fromMute)
 {
     const masterVolume = op.patch.config.masterVolume || 0;
-
-    // console.log(op.patch._paused, op.patch.config.masterVolume, inGain.get());
 
     let volume = inGain.get() * masterVolume;
 
@@ -89,9 +99,12 @@ function setVolume(fromMute)
     let addTime = 0.05;
     if (fromMute) addTime = 0.2;
 
-    volume = clamp(volume, 0, 1);
-    // console.log("volume", volume);
-    gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
+    volume = CABLES.clamp(volume, 0, 1);
+
+    if (!gainNode)
+        op.error("gainNode undefined");
+
+    if (gainNode) gainNode.gain.linearRampToValueAtTime(volume, audioCtx.currentTime + addTime);
 
     outVol.set(volume);
 }
@@ -107,13 +120,15 @@ function mute(b)
             // also note, we have to cancle the already scheduled values as we have no influence over
             // the order in which onchange handlers are executed
 
-            gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
-            gainNode.gain.value = 0;
-            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            if (gainNode)
+            {
+                gainNode.gain.cancelScheduledValues(audioCtx.currentTime);
+                gainNode.gain.value = 0;
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            }
 
             outVol.set(0);
 
-            // * NOTE: we have to use both of the upper statements so it works in chrome & firefox
             return;
         }
     }
@@ -121,20 +136,60 @@ function mute(b)
     setVolume(true);
 }
 
-// change listeners
-inMute.onChange = () =>
+function updateStateError()
 {
-    mute(inMute.get());
-};
+    outState.set(audioCtx.state);
+    console.log("audioCtx.state change", audioCtx.state);
 
-inGain.onChange = setVolume;
-op.onMasterVolumeChanged = setVolume;
+    if (audioCtx.state == "suspended") op.setUiError("ctxSusp", "Your Browser suspended audio context, use playButton op to play audio after a user interaction");
+    else op.setUiError("ctxSusp", null);
 
-op.patch.on("pause", setVolume);
-op.patch.on("resume", setVolume);
+    updateAudioStateButton();
+}
 
-op.onDelete = () =>
+function updateAudioStateButton()
 {
-    gainNode.disconnect();
-    gainNode = null;
-};
+    if (audioCtx.state == "suspended")
+    {
+        isSuspended = true;
+        if (!fsElement)
+        {
+            fsElement = document.createElement("div");
+
+            const container = op.patch.cgl.canvas.parentElement;
+            if (container)container.appendChild(fsElement);
+
+            fsElement.addEventListener("pointerdown", function (e)
+            {
+                if (audioCtx && audioCtx.state == "suspended")
+                {
+                    audioCtx.resume();
+                }
+            });
+        }
+
+        fsElement.style.padding = "10px";
+        fsElement.style.position = "absolute";
+        fsElement.style.right = "20px";
+        fsElement.style.bottom = "20px";
+        fsElement.style.width = "24px";
+        fsElement.style.height = "24px";
+        fsElement.style.cursor = "pointer";
+        fsElement.style["border-radius"] = "40px";
+        fsElement.style.background = "#444";
+        fsElement.style["z-index"] = "9999";
+        fsElement.style.display = "block";
+        fsElement.innerHTML = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-volume-2\"><polygon points=\"11 5 6 9 2 9 2 15 6 15 11 19 11 5\"></polygon><path d=\"M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07\"></path></svg>";
+    }
+    else
+    {
+        if (fsElement) fsElement.remove();
+        fsElement = null;
+
+        if (isSuspended)
+        {
+            console.log("was suspended - set vol");
+            setVolume(true);
+        }
+    }
+}

@@ -131,10 +131,10 @@ function loadAnims(gltf)
             const sampler = an.samplers[chan.sampler];
 
             const acc = gltf.json.accessors[sampler.input];
-            const bufferIn = gltf.accBuffers[acc.bufferView];
+            const bufferIn = gltf.accBuffers[sampler.input];
 
             const accOut = gltf.json.accessors[sampler.output];
-            const bufferOut = gltf.accBuffers[accOut.bufferView];
+            const bufferOut = gltf.accBuffers[sampler.output];
 
             if(bufferIn && bufferOut)
             {

@@ -1,10 +1,6 @@
 const
     inExec = op.inTrigger("Update"),
     inNodeName = op.inString("Node Name"),
-    // outPosX = op.outNumber("Translate X", 0),
-    // outPosY = op.outNumber("Translate Y", 0),
-    // outPosZ = op.outNumber("Translate Z", 0),
-
     next = op.outTrigger("Next"),
     outFound = op.outBool("Found"),
     outMat = op.outArray("Matrix");
@@ -56,11 +52,6 @@ inExec.onTriggered = function ()
     if (node)
     {
         mat4.copy(m, node.modelMatAbs());
-
-        // mat4.getTranslation(translate, m);
-        // outPosX.set(translate[0]);
-        // outPosY.set(translate[1]);
-        // outPosZ.set(translate[2]);
 
         outMat.set(null);
         outMat.set(m);

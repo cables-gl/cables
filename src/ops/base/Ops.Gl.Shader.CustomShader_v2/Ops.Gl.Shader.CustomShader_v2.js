@@ -4,7 +4,8 @@ const
     vertexShader = op.inStringEditor("Vertex Code"),
     asMaterial = op.inValueBool("Use As Material", true),
     trigger = op.outTrigger("trigger"),
-    outShader = op.outObject("Shader", null, "shader");
+    outShader = op.outObject("Shader", null, "shader"),
+    outErrors = op.outBool("Has Errors");
 
 const cgl = op.patch.cgl;
 const uniformInputs = [];
@@ -317,6 +318,11 @@ function updateShader()
     outShader.set(null);
     outShader.set(shader);
     needsUpdate = false;
+
+    if (shader.hasErrors()) op.setUiError("compile", "Shader has errors");
+    else op.setUiError("compile", null);
+
+    outErrors.set(shader.hasErrors());
 }
 
 function initVectorUniform(vec)

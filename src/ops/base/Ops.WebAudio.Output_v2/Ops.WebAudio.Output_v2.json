@@ -18,6 +18,11 @@
                 "name": "Mute",
                 "group": "Volume Settings",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Show Audio Suspended Button",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -25,12 +30,15 @@
                 "type": 0,
                 "name": "Current Volume",
                 "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Context State"
             }
         ],
         "name": "Ops.WebAudio.Output_v2"
     },
-    "author": "58dabd06a0d7ec8d1a982e66",
-    "authorName": "simod",
+    "authorName": "pandur",
     "id": "90b95403-b0c4-4980-ab3b-b6c354771c81",
     "created": 1606754727180,
     "docs": {

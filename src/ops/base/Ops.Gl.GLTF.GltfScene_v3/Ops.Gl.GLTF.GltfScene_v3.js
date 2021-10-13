@@ -193,16 +193,16 @@ inExec.onTriggered = function ()
                 cgl.popShader();
             }
 
-            if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
-            cgl.pushModelMatrix();
-            mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
-            mat4.identity(cgl.mMatrix);
+            // if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
+            // cgl.pushModelMatrix();
+            // mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
+            // mat4.identity(cgl.mMatrix);
 
             for (let i = 0; i < gltf.nodes.length; i++)
                 if (!gltf.nodes[i].isChild)
                     gltf.nodes[i].render(cgl);
 
-            cgl.popModelMatrix();
+            // cgl.popModelMatrix();
         }
     }
 
@@ -505,8 +505,10 @@ op.exposeNode = function (name, tree)
             if (gltf.nodes[i].name == name)
             {
                 const node = gltf.nodes[i];
-                const arrHierarchy = [];
+                let arrHierarchy = [];
                 findParents(arrHierarchy, i);
+
+                arrHierarchy = arrHierarchy.reverse();
 
                 arrHierarchy.push(node, node);
 

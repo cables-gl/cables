@@ -46,7 +46,7 @@ const srcBodyVert = attachments.vertdisplace_body_vert;
 
 const srcHeadFrag = ""
     .endl() + "IN vec3 MOD_displHeightMapColor;"
-    .endl() + "float MOD_map(float value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}"
+    .endl() + "vec3 MOD_map(vec3 value, float inMin, float inMax, float outMin, float outMax) { return outMin + (outMax - outMin) * (value - inMin) / (inMax - inMin);}"
 
     .endl();
 

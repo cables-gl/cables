@@ -201,19 +201,15 @@ let gltfMesh = class
 
 
 
-cgl.pushModelMatrix();
-if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
+// cgl.pushModelMatrix();
+// if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
-            if (this.mesh)
-            {
-
-                this.mesh.render(cgl.getShader(), ignoreMaterial);
-            }
+            if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 
             if (useMat) cgl.popShader();
-cgl.popModelMatrix();
+// cgl.popModelMatrix();
         }
     }
 };

@@ -46,6 +46,11 @@
                 "type": 2,
                 "name": "Shader",
                 "objType": "shader"
+            },
+            {
+                "type": 0,
+                "name": "Has Errors",
+                "subType": "boolean"
             }
         ],
         "name": "Ops.Gl.Shader.CustomShader_v2"
