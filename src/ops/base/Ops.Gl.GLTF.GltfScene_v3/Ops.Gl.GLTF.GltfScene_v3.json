@@ -23,6 +23,10 @@
                 "subType": "integer"
             },
             {
+                "type": 5,
+                "name": "Animation"
+            },
+            {
                 "type": 1,
                 "name": "Show Structure"
             },
@@ -128,6 +132,10 @@
             },
             {
                 "type": 3,
+                "name": "Anims"
+            },
+            {
+                "type": 3,
                 "name": "BoundingPoints"
             },
             {
@@ -166,6 +174,11 @@
             "message": "Ops.User.pandur.MyTestGLTF renamed to Ops.Gl.GLTF.GltfScene_v3",
             "author": "pandur",
             "date": 1617712099220
+        },
+        {
+            "message": " added core lib: cgl_shadermodifier",
+            "author": "pandur",
+            "date": 1634219748194
         }
     ],
     "summary": "Load GLTF/GLB 3d files",
@@ -177,5 +190,8 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "coreLibs": [
+        "cgl_shadermodifier"
+    ]
 }

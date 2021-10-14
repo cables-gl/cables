@@ -55,7 +55,7 @@
                 "name": "trigger"
             }
         ],
-        "name": "Ops.User.pandur.PixelDiff"
+        "name": "Ops.Gl.TextureEffects.PixelDifference"
     },
     "credits": [
         {

@@ -78,9 +78,9 @@ void main()
         b=pxb;
     #endif
     #ifdef FLIP_G
-        vec4 c=a;
+        vec4 c3=a;
         a=b;
-        b=c;
+        b=c3;
     #endif
     #ifdef METH_G_DIFF
         #ifdef METH_G_R
@@ -126,9 +126,9 @@ void main()
         b=pxb;
     #endif
     #ifdef FLIP_B
-        vec4 c=a;
+        vec4 c2=a;
         a=b;
-        b=c;
+        b=c2;
     #endif
     #ifdef METH_B_DIFF
         #ifdef METH_B_R

@@ -6,6 +6,7 @@ const
     inFile = op.inUrl("glb File", [".glb"]),
     inRender = op.inBool("Draw", true),
     inCamera = op.inDropDown("Camera", ["None"], "None"),
+    inAnimation = op.inString("Animation", ""),
     inShow = op.inTriggerButton("Show Structure"),
     inCenter = op.inSwitch("Center", ["None", "XYZ", "XZ"], "XYZ"),
     inRescale = op.inBool("Rescale", true),
@@ -31,6 +32,7 @@ const
     outAnimLength = op.outNumber("Anim Length", 0),
     outAnimTime = op.outNumber("Anim Time", 0),
     outJson = op.outObject("Json"),
+    outAnims = op.outArray("Anims"),
     outPoints = op.outArray("BoundingPoints"),
     outBounds = op.outObject("Bounds"),
     outAnimFinished = op.outTrigger("Finished"),
@@ -65,6 +67,7 @@ inShow.onTriggered = printInfo;
 dataPort.setUiAttribs({ "hideParam": true, "hidePort": true });
 dataPort.onChange = loadData;
 inHideNodes.onChange = hideNodesFromData;
+inAnimation.onChange = updateAnimation;
 
 op.setPortGroup("Transform", [inRescale, inRescaleSize, inCenter]);
 
@@ -276,6 +279,8 @@ function finishLoading()
     }
 
     updateCenter();
+    updateAnimation();
+
     outLoading.set(false);
 
     cgl.patch.loading.finished(loadingId);
@@ -467,6 +472,17 @@ function saveData()
     dataPort.set(JSON.stringify(data));
 }
 
+function updateAnimation()
+{
+    if (gltf && gltf.nodes)
+    {
+        for (let i = 0; i < gltf.nodes.length; i++)
+        {
+            gltf.nodes[i].setAnimAction(inAnimation.get());
+        }
+    }
+}
+
 function findParents(nodes, childNodeIndex)
 {
     for (let i = 0; i < gltf.nodes.length; i++)
@@ -550,13 +566,16 @@ op.exposeNode = function (name, tree, options)
         let newopname = "Ops.Gl.GLTF.GltfNode_v2";
         if (options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
 
-        let newop = gui.corePatch().addOp(newopname);
+        gui.serverOps.loadOpLibs(newopname, () =>
+        {
+            let newop = gui.corePatch().addOp(newopname);
 
-        newop.getPort("Node Name").set(name);
-        setNewOpPosition(newop);
-        op.patch.link(op, next.name, newop, "Render");
-        gui.patchView.centerSelectOp(newop.id, true);
-        gui.patchView.testCollision(newop);
+            newop.getPort("Node Name").set(name);
+            setNewOpPosition(newop);
+            op.patch.link(op, next.name, newop, "Render");
+            gui.patchView.centerSelectOp(newop.id, true);
+            gui.patchView.testCollision(newop);
+        });
     }
     CABLES.UI.MODAL.hide();
 };
