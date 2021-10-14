@@ -24,7 +24,7 @@ function printNode(html,node,level)
     }
     var id=CABLES.uuid();
     html+=ident;
-    html+='<td colspan="'+(20-level)+'">';
+    html+='<td colspan="'+(21-level)+'">';
     // html+='<div style="display:inline-block;border:0px solid red;height:10px;width:'+level*10+'px"></div>';
 
     if(node.mesh && node.mesh.meshes.length)html+='<span class="icon icon-cube"></span>&nbsp;';
@@ -82,12 +82,16 @@ function printNode(html,node,level)
     var hideclass='';
     if(node.hidden)hideclass='node-hidden';
 
-    html+='Expose: ';
+    // html+='';
     html+='<a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\',true)" class="treebutton">Hierarchy</a>';
     html+=' <a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\')" class="treebutton">Node</a>';
-    html+='&nbsp;';
 
-    html+='<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.corePatch().getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
+    if(node.hasSkin())
+        html+=' <a onclick="gui.corePatch().getOpById(\''+op.id+'\').exposeNode(\''+node.name+'\',false,{skin:true});" class="treebutton">Skin</a>';
+
+
+    html+='</td><td>';
+    html+='&nbsp;<span class="icon iconhover icon-eye '+hideclass+'" onclick="gui.corePatch().getOpById(\''+op.id+'\').toggleNodeVisibility(\''+node.name+'\');this.classList.toggle(\'node-hidden\');"></span>';
     html+='</td>';
 
     html+="</tr>";
@@ -121,14 +125,9 @@ function printMaterial(mat,idx)
 
         html+='<div style="width:15px;height:15px;;background-color:rgb('+rgb+')">&nbsp;</a>';
 
-        // html+='<td>';
     }
     html+=' <td style="">'+(gltf.shaders[idx]?"-":'<a onclick="gui.corePatch().getOpById(\''+op.id+'\').assignMaterial(\''+mat.name+'\')" class="treebutton">Assign</a>')+'<td>';
     html+='<td>';
-
-
-
-    // console.log();
 
 
     html+='</tr>';
@@ -181,7 +180,8 @@ function printInfo()
     html+=' <th>Skin</th>';
     html+=' <th>Material</th>';
     html+=' <th>Anim</th>';
-    html+=' <th>Show</th>';
+    html+=' <th>Expose</th>';
+    html+=' <th></th>';
     html+='</tr>';
 
     for(var i=0;i<gltf.nodes.length;i++)
