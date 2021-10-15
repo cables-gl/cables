@@ -18,6 +18,7 @@ const gltfNode = class
         this.absMat = mat4.create();
         this.addTranslate = null;
         this.updateMatrix();
+        this._animActions={};
     }
 
     get skin()
@@ -109,8 +110,29 @@ const gltfNode = class
         else return null;
     }
 
-    setAnim(path, anims)
+
+    setAnimAction(name)
     {
+        if(name && !this._animActions[name]) return console.log("no action found: ",name);
+
+        for(let path in this._animActions[name])
+        {
+            if (path == "translation") this._animTrans =this._animActions[name][path];
+            else if (path == "rotation") this._animRot =this._animActions[name][path];
+            else if (path == "scale") this._animScale =this._animActions[name][path];
+            else console.warn("unknown anim path", path,this._animActions[name][path]);
+        }
+
+    }
+
+    setAnim(path,name, anims)
+    {
+        this._animActions[name]=this._animActions[name]||{};
+
+        if(this._animActions[name][path])op.warn("animation action path already exists",name,path,this._animActions[name][path]);
+
+        this._animActions[name][path]=anims;
+
         if (path == "translation") this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
@@ -192,13 +214,33 @@ const gltfNode = class
         }
         else
         {
-            if (this.mesh && !dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
+            if(this.skinRenderer)
+            {
+                // console.log(this.mesh)
+
+                // console.log(this.name);
+
+                this.skinRenderer.renderStart(cgl,_time);
+                this.mesh.render(cgl, ignoreMaterial);
+                this.skinRenderer.renderFinish(cgl);
+            }
+            else
+            {
+                if (this.mesh && !dontDrawMesh)
+                {
+
+                    this.mesh.render(cgl, ignoreMaterial);
+                }
+            }
         }
 
         if (!ignoreChilds && !this.hidden)
             for (let i = 0; i < this.children.length; i++)
                 if (gltf.nodes[this.children[i]])
+                {
                     gltf.nodes[this.children[i]].render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time);
+                }
+
 
         if (!dontTransform)cgl.popModelMatrix();
     }

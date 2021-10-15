@@ -119,6 +119,8 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
 function loadAnims(gltf)
 {
+    const uniqueAnimNames={};
+
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
         const an = gltf.json.animations[i];
@@ -147,7 +149,14 @@ function loadAnims(gltf)
 
                 const anims = [];
 
-                for (let k = 0; k < numComps; k++) anims.push(new CABLES.TL.Anim());
+                uniqueAnimNames[an.name]=true;
+
+                for (let k = 0; k < numComps; k++)
+                {
+                    const newAnim=new CABLES.TL.Anim();
+                    // newAnim.name=an.name;
+                    anims.push(newAnim);
+                }
 
                 if (sampler.interpolation == "LINEAR") {}
                 else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
@@ -163,7 +172,7 @@ function loadAnims(gltf)
                     }
                 }
 
-                node.setAnim(chan.target.path, anims);
+                node.setAnim(chan.target.path,an.name, anims);
             }
             else
             {
@@ -174,10 +183,12 @@ function loadAnims(gltf)
                 op.warn("loadAmins num accessors",gltf.json.accessors.length);
             }
 
-
-
         }
     }
+
+
+    outAnims.set(null);
+    outAnims.set(Object.keys(uniqueAnimNames));
 }
 
 function loadCams(gltf)
@@ -420,6 +431,13 @@ function parseGltf(arrayBuffer)
         }
     }
 
+    for (i = 0; i < gltf.nodes.length; i++)
+    {
+        if(gltf.nodes[i].skin>-1)
+        {
+            gltf.nodes[i].skinRenderer=new GltfSkin(gltf.nodes[i]);
+        }
+    }
 
     needsMatUpdate = true;
 
