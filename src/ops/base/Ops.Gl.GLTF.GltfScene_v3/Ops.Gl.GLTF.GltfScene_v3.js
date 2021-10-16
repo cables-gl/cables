@@ -184,28 +184,40 @@ inExec.onTriggered = function ()
 
         if (cam) cam.start(time);
 
-        if (gltf && inRender.get())
+        if (gltf)
         {
             gltf.time = time;
 
-            if (gltf.bounds && cgl.shouldDrawHelpers(op))
             {
-                if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
-                else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
-                gltf.bounds.render(cgl);
-                cgl.popShader();
+                if (gltf.bounds && cgl.shouldDrawHelpers(op))
+                {
+                    if (CABLES.UI.renderHelper)cgl.pushShader(CABLES.GL_MARKER.getDefaultShader(cgl));
+                    else cgl.pushShader(CABLES.GL_MARKER.getSelectedShader(cgl));
+                    gltf.bounds.render(cgl);
+                    cgl.popShader();
+                }
+
+                // if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
+                // cgl.pushModelMatrix();
+                // mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
+                // mat4.identity(cgl.mMatrix);
+
+                if (inRender.get())
+                {
+                    for (let i = 0; i < gltf.nodes.length; i++)
+                        if (!gltf.nodes[i].isChild)
+                            gltf.nodes[i].render(cgl);
+                }
+                else
+                {
+                    for (let i = 0; i < gltf.nodes.length; i++)
+                        if (!gltf.nodes[i].isChild)
+                            gltf.nodes[i].render(cgl, false, true);
+                    // render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
+                }
+
+                // cgl.popModelMatrix();
             }
-
-            // if (!gltf.renderMMatrix)gltf.renderMMatrix = mat4.create();
-            // cgl.pushModelMatrix();
-            // mat4.copy(gltf.renderMMatrix, cgl.mMatrix);
-            // mat4.identity(cgl.mMatrix);
-
-            for (let i = 0; i < gltf.nodes.length; i++)
-                if (!gltf.nodes[i].isChild)
-                    gltf.nodes[i].render(cgl);
-
-            // cgl.popModelMatrix();
         }
     }
 
@@ -603,6 +615,32 @@ op.toggleNodeVisibility = function (name)
         else delete data.hiddenNodes[name];
 
     saveData();
+};
+
+op.showAnim = function (anim, channel)
+{
+    console.log("showanim", channel);
+
+    console.log(gltf.json.animations[anim].channels[channel]);
+
+    const an = gltf.json.animations[anim];
+    const chan = gltf.json.animations[anim].channels[channel];
+
+    const node = gltf.nodes[chan.target.node];
+    const sampler = an.samplers[chan.sampler];
+
+    const acc = gltf.json.accessors[sampler.input];
+    const bufferIn = gltf.accBuffers[sampler.input];
+
+    const accOut = gltf.json.accessors[sampler.output];
+    const bufferOut = gltf.accBuffers[sampler.output];
+
+    console.log({
+        "channel": chan,
+        "sampler": sampler,
+        "bufferIn": bufferIn,
+        "bufferOut": bufferOut,
+    });
 };
 
 function uniqueArray(arr)

@@ -320,7 +320,13 @@ function printInfo()
                 html+='  <td>'+smplr.interpolation+'</td>'
 
 
-                html+='  <td>'+gltf.json.accessors[smplr.output].count;+'</td>'
+                html+='  <td>'+gltf.json.accessors[smplr.output].count;
+
+                html+='&nbsp;&nbsp;<a onclick="gui.corePatch().getOpById(\''+op.id+'\').showAnim(\''+i+'\',\''+j+'\')" class="icon icon-search"></a>';
+
+                html+='</td>'
+
+
 
 
 
@@ -408,7 +414,7 @@ function printInfo()
 
         html+='<tr>';
         html+='  <th>name</th>';
-        html+='  <th>skeleton</th>';
+        html+='  <th></th>';
         html+='  <th>total joints</th>';
         html+='</tr>';
 
@@ -416,21 +422,17 @@ function printInfo()
         {
             html+='<tr>';
             html+='<td>'+gltf.json.skins[i].name+'</td>';
-            html+='<td>'+gltf.json.skins[i].skeleton+'</td>';
+            html+='<td>'+'</td>';
             html+='<td>'+gltf.json.skins[i].joints.length+'</td>';
             html+='<td>';
             html+='</td>';
-
             html+='<tr>';
         }
         html+='</table>';
     }
 
-
-    // html+='data size: '+;
     const sizeBin=gltf.json.buffers[0].byteLength;
     html+='<h3>Binary Data ('+readableSize(sizeBin)+')</h3>';
-
 
     html+='<table class="table treetable">';
     html+='<tr>';

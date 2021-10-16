@@ -206,7 +206,10 @@ const gltfNode = class
     render(cgl, dontTransform, dontDrawMesh, ignoreMaterial, ignoreChilds, drawHidden, _time)
     {
         if (!dontTransform) cgl.pushModelMatrix();
-        if (!dontTransform) this.transform(cgl, _time );
+
+        if(_time===undefined)_time=gltf.time;
+
+        if (!dontTransform || this.skinRenderer) this.transform(cgl, _time );
 
         if (this.hidden && !drawHidden)
         {
@@ -216,19 +219,14 @@ const gltfNode = class
         {
             if(this.skinRenderer)
             {
-                // console.log(this.mesh)
-
-                // console.log(this.name);
-
                 this.skinRenderer.renderStart(cgl,_time);
-                this.mesh.render(cgl, ignoreMaterial);
+                if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
                 this.skinRenderer.renderFinish(cgl);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
                 {
-
                     this.mesh.render(cgl, ignoreMaterial);
                 }
             }

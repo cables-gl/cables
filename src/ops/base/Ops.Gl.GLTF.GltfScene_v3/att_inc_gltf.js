@@ -140,7 +140,6 @@ function loadAnims(gltf)
 
             if(bufferIn && bufferOut)
             {
-
                 let numComps = 1;
                 if (accOut.type == "VEC2")numComps = 2;
                 else if (accOut.type == "VEC3")numComps = 3;
@@ -162,6 +161,17 @@ function loadAnims(gltf)
                 else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
+
+
+
+                // if there is no keyframe for time 0 copy value of first keyframe at time 0
+                if(bufferIn[0]!==0.0)
+                    for (let k = 0; k < numComps; k++)
+                        anims[k].setValue(0, bufferOut[0 * numComps + k]);
+
+
+
+
                 for (let j = 0; j < bufferIn.length; j++)
                 {
                     maxTime = Math.max(bufferIn[j], maxTime);
@@ -170,7 +180,11 @@ function loadAnims(gltf)
                     {
                         anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                     }
+
                 }
+
+
+
 
                 node.setAnim(chan.target.path,an.name, anims);
             }

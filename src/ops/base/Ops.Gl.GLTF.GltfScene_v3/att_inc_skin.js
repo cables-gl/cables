@@ -13,7 +13,6 @@ const GltfSkin = class
 
     }
 
-
     renderStart(cgl,time)
     {
         if(!this._mod)
@@ -28,14 +27,10 @@ const GltfSkin = class
             });
 
             this._mod.addUniformVert("m4[]", "MOD_boneMats", []);//bohnenmatze
-
             const tr = vec3.create();
-
         }
 
-
         let arr = []; // TODO make member
-
 
         const skinIdx = this._node.skin;
         const arrLength = gltf.json.skins[skinIdx].joints.length * 16;
@@ -45,7 +40,6 @@ const GltfSkin = class
         const invBindMatrix = mat4.create();
         const m = mat4.create();
         const nodeSkin = gltf.nodes[this._node.skin];
-
 
         // console.log("yo",this._node.skin)
         // this._node.render(cgl, false, true, true, false, false, time);
@@ -64,19 +58,14 @@ const GltfSkin = class
         }
 
         this._mod.setUniformValue("MOD_boneMats", arr);
-
-
         this._mod.define("SKIN_NUM_BONES", gltf.json.skins[skinIdx].joints.length);
-
         this._mod.bind();
 
         // draw mesh...
         cgl.pushModelMatrix();
-        // this._node.render(cgl, true, false, true, false, true);
+        mat4.identity(cgl.mMatrix);
 
+    // console.log("draw skin...",time)
 
     }
-}
-
-
-
+};
