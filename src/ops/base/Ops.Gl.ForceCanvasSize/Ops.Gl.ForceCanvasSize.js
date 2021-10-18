@@ -6,7 +6,7 @@ const
     inScaleFit = op.inBool("Scale to fit Parent", false),
     inWidth = op.inInt("Set Width", 300),
     inHeight = op.inInt("Set Height", 200),
-    inPresets = op.inDropDown("Aspect Ratio", ["21:9", "2:1", "16:9", "16:10", "4:3", "1:1", "9:16", "1:2", "iPhoneXr Vert"], "16:9"),
+    inPresets = op.inDropDown("Aspect Ratio", ["Custom", "21:9", "2:1", "16:9", "16:10", "4:3", "1:1", "9:16", "1:2", "iPhoneXr Vert"], "16:9"),
     inRatio = op.inFloat("Ratio", 0),
     inStretch = op.inDropDown("Fill Parent", ["Auto", "Width", "Height", "Both"], "Auto"),
     next = op.outTrigger("Next"),
@@ -47,7 +47,8 @@ function updateMethod()
 function updateRatioPreset()
 {
     const pr = inPresets.get();
-    if (pr == "16:9")inRatio.set(16 / 9);
+    if (pr == "Custom") return;
+    else if (pr == "16:9")inRatio.set(16 / 9);
     else if (pr == "4:3")inRatio.set(4 / 3);
     else if (pr == "16:10")inRatio.set(16 / 10);
     else if (pr == "21:9")inRatio.set(21 / 9);

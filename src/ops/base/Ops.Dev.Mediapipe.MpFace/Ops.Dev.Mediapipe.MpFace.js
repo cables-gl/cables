@@ -17,8 +17,8 @@ inEle.onChange = () =>
         {
             await faceMesh.send({ "image": inEle.get() });
         },
-        "width": 1280,
-        "height": 720
+        "width": 640,
+        "height": 480
     });
     camera.start();
 };
