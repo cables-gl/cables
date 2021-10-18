@@ -104,34 +104,48 @@ hands.onResults((r) =>
     {
         outFound.set(r.multiHandedness.length);
     }
-    else outFound.set(0);
+    else
+    {
+        outFound.set(0);
+    }
 
     if (r && r.multiHandLandmarks && r.multiHandLandmarks[0])
     {
         for (let i = 0; i < r.multiHandLandmarks[0].length; i++)
         {
-            points[i * 3] = (r.multiHandLandmarks[0][i].x - 0.5) * 2.0 * 1.77777;
+            points[i * 3] = (r.multiHandLandmarks[0][i].x - 0.5) * 2.0 * 1.3333;
             points[i * 3 + 1] = -1 * (r.multiHandLandmarks[0][i].y - 0.5) * 2.0;
             points[i * 3 + 2] = 0;
         }
         lines = getLines(points);
+
+        outPoints.set(points);
+        outLines.set(lines);
+    }
+    else
+    {
+        outPoints.set(null);
+        outLines.set(null);
     }
 
     if (r && r.multiHandLandmarks && r.multiHandLandmarks[1])
     {
         for (let i = 0; i < r.multiHandLandmarks[1].length; i++)
         {
-            points2[i * 3] = (r.multiHandLandmarks[1][i].x - 0.5) * 2.0 * 1.77777;
+            points2[i * 3] = (r.multiHandLandmarks[1][i].x - 0.5) * 2.0 * 1.3333;
             points2[i * 3 + 1] = -1 * (r.multiHandLandmarks[1][i].y - 0.5) * 2.0;
             points2[i * 3 + 2] = 0;
         }
         lines2 = getLines(points2);
+
+        outPoints2.set(points2);
+        outLines2.set(lines2);
+    }
+    else
+    {
+        outPoints2.set(null);
+        outLines2.set(null);
     }
 
     outResult.set(r);
-
-    outPoints.set(points);
-    outPoints2.set(points2);
-    outLines.set(lines);
-    outLines2.set(lines2);
 });
