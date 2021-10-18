@@ -22,37 +22,44 @@
             },
             {
                 "type": 2,
-                "name": "MatCap"
+                "name": "MatCap",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Diffuse",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Normal",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Specular Mask",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Specular MatCap",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "AO Texture",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 2,
                 "name": "Opacity Texture",
-                "group": "Texture Maps"
+                "group": "Texture Maps",
+                "objType": "texture"
             },
             {
                 "type": 0,
@@ -142,11 +149,6 @@
                 "type": 0,
                 "name": "Alpha Mask Source index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Alpha Mask Source",
-                "group": "Texture Opacity"
             }
         ],
         "portsOut": [
