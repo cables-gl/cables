@@ -255,10 +255,12 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
+            let v = null;
+            if (port.ignoreValueSerialize)v = null;
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
+                "value": v,
                 "type": port.type,
                 "links": []
             };
@@ -279,10 +281,14 @@ function savePortData()
     {
         if (!protectedPorts.includes(port.id))
         {
+            let v = port.get();
+
+            // if(port.ignoreValueSerialize)v=null;
+
             const portData = {
                 "name": port.name,
                 "title": port.title,
-                "value": port.get(),
+                // "value": v,
                 "type": port.type,
                 "links": []
             };

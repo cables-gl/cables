@@ -35,12 +35,51 @@
                 "name": "Library"
             },
             {
-                "type": 5,
-                "name": "portsData"
+                "type": 1,
+                "name": "Update"
+            },
+            {
+                "type": 3,
+                "name": "Data"
+            },
+            {
+                "type": 3,
+                "name": "Unit Names"
+            },
+            {
+                "type": 3,
+                "name": "Unit Pos"
+            },
+            {
+                "type": 0,
+                "name": "Unit Cluster Size",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Sphere Size",
+                "subType": "number"
             }
         ],
-        "portsOut": [],
-        "name": "Ops.Cables.CustomOp"
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Positions Internal"
+            },
+            {
+                "type": 3,
+                "name": "Positions External"
+            },
+            {
+                "type": 3,
+                "name": "Positions External Colors"
+            },
+            {
+                "type": 3,
+                "name": "modified Data"
+            }
+        ],
+        "name": "Ops.Cables.CustomOp_v2"
     },
     "summary": "code a custom op that will only be available in the current patch",
     "issues": "",
