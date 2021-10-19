@@ -257,7 +257,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     this.parent.patch.emitEvent("exception".ex, this.parent);
                 }
 
-                if (this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
+                if (this.parent && this.parent.patch && this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
             }
 
             if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT) for (let i = 0; i < this.links.length; ++i) this.links[i].setValue();

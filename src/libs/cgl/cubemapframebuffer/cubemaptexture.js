@@ -11,8 +11,6 @@ class CubemapTexture
 
         this._cgl = cgl;
 
-        console.log("cubemaptexture created!");
-
         this._cubemapFaces = [
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_X,
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_X,
@@ -21,7 +19,6 @@ class CubemapTexture
             this._cgl.gl.TEXTURE_CUBE_MAP_POSITIVE_Z,
             this._cgl.gl.TEXTURE_CUBE_MAP_NEGATIVE_Z
         ];
-
 
         this.tex = this._cgl.gl.createTexture();
         this.cubemap = this.tex;

@@ -13,7 +13,9 @@ function update()
 {
     height.set(cgl.canvasHeight);
     width.set(cgl.canvasWidth);
-    pixelRatio.set(window.devicePixelRatio);
+
+    pixelRatio.set(op.patch.cgl.pixelDensity); // window.devicePixelRatio
+
     aspect.set(cgl.canvasWidth / cgl.canvasHeight);
     landscape.set(cgl.canvasWidth > cgl.canvasHeight ? 1 : 0);
 }
