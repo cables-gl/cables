@@ -5,7 +5,7 @@ const
     inAmount = op.inValueSlider("Amount", 0.5),
     inFalloff = op.inValueSlider("Falloff", 0),
     inInvert = op.inValueBool("Invert"),
-    inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add"], "Normal"),
+    inBlend = op.inSwitch("Blend ", ["Normal", "Multiply", "Opacity", "Add", "Discard"], "Normal"),
     r = op.inValueSlider("r", Math.random()),
     g = op.inValueSlider("g", Math.random()),
     b = op.inValueSlider("b", Math.random()),
@@ -32,7 +32,7 @@ const srcHeadVert = ""
 const srcBodyVert = ""
 
     // .endl() + "#ifndef MOD_POS_ABS"
-    // .endl() + "   MOD_pos=(vec4(MOD_posi,1.0)*mMatrix).xyz;"
+    // .endl() + "   MOD_pos=(mMatrix*vec4(MOD_posi,1.0)).xyz;"
     // .endl() + "#endif"
     // .endl() + "#ifdef MOD_POS_ABS"
     .endl() + "   MOD_pos=MOD_posi;"
@@ -85,7 +85,7 @@ function updatePrio()
     mod.removeModule(vertModTitle);
 
     const vmod = {
-        // "priority": 2,
+        // "priority": 0,
         "title": vertModTitle,
         "name": "MODULE_VERTEX_POSITION",
         srcHeadVert,
@@ -102,6 +102,7 @@ function updateDefines()
     mod.toggleDefine("MOD_BLEND_NORMAL", inBlend.get() == "Normal");
     mod.toggleDefine("MOD_BLEND_OPACITY", inBlend.get() == "Opacity");
     mod.toggleDefine("MOD_BLEND_MULTIPLY", inBlend.get() == "Multiply");
+    mod.toggleDefine("MOD_BLEND_DISCARD", inBlend.get() == "Discard");
     mod.toggleDefine("MOD_BLEND_ADD", inBlend.get() == "Add");
 
     mod.toggleDefine("MOD_AREA_INVERT", inInvert.get());
