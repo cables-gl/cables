@@ -86,11 +86,6 @@
             },
             {
                 "type": 0,
-                "name": "Position Absolute",
-                "subType": "boolean"
-            },
-            {
-                "type": 0,
                 "name": "Priority",
                 "subType": "boolean"
             }
