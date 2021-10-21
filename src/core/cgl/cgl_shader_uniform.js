@@ -239,6 +239,9 @@ Uniform.prototype.getGlslTypeString = function ()
 
     if (this._type == "t") return "sampler2D";
     if (this._type == "tc") return "samplerCube";
+
+    if (this._type == "m4[]") return null; // ignore this for now...
+
     console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
 };
 

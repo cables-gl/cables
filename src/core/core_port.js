@@ -611,6 +611,7 @@ Port.prototype.setVariable = function (v)
 
 Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
 {
+    console.log("_handleNoTriggerOpAnimUpdates");
     let hasTriggerPort = false;
     for (let i = 0; i < this.parent.portsIn.length; i++)
     {
@@ -620,9 +621,17 @@ Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
             break;
         }
     }
+
+    console.log("hasTriggerPort", hasTriggerPort, a);
+
     if (!hasTriggerPort)
     {
-        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame", this.updateAnim.bind(this));
+        if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame",
+            () =>
+            {
+                console.log("updateanim notrigger");
+                this.updateAnim();
+            });
         else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
     }
 };
@@ -636,7 +645,7 @@ Port.prototype.setAnimated = function (a)
         this._onAnimToggle();
     }
 
-    this._handleNoTriggerOpAnimUpdates();
+    this._handleNoTriggerOpAnimUpdates(a);
 
     this.setUiAttribs({ "isAnimated": this._animated });
 };
