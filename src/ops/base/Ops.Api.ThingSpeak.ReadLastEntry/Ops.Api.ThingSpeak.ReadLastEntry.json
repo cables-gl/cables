@@ -2,35 +2,35 @@
     "author": "56cdab144f85abfb36c6c089",
     "authorName": "tim",
     "id": "840011a8-812e-458e-973f-dbf5cb83eee5",
-    "updated": 1519664457718,
     "created": 1519664457720,
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Read"
             },
             {
-                "type": "0",
+                "type": 5,
                 "name": "Channel ID"
             },
             {
-                "type": "0",
+                "type": 5,
                 "name": "Read API Key"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "When Finished"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Last Entry"
             },
             {
-                "type": "0",
-                "name": "Success"
+                "type": 0,
+                "name": "Success",
+                "subType": "number"
             }
         ],
         "name": "Ops.Api.ThingSpeak.ReadLastEntry"

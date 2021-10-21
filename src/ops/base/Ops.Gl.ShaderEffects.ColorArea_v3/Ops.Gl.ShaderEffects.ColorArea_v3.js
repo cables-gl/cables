@@ -26,16 +26,16 @@ const cgl = op.patch.cgl;
 
 const srcHeadVert = ""
     .endl() + "OUT vec4 MOD_vertPos;"
-    .endl() + "OUT vec3 MOD_pos;"
+    // .endl() + "OUT vec3 MOD_pos;"
     .endl();
 
 const srcBodyVert = ""
 
-    // .endl() + "#ifndef MOD_POS_ABS"
-    // .endl() + "   MOD_pos=(mMatrix*vec4(MOD_posi,1.0)).xyz;"
-    // .endl() + "#endif"
-    // .endl() + "#ifdef MOD_POS_ABS"
-    .endl() + "   MOD_pos=MOD_posi;"
+// .endl() + "#ifndef MOD_POS_ABS"
+// .endl() + "   MOD_pos=(mMatrix*vec4(MOD_posi,1.0)).xyz;"
+// .endl() + "#endif"
+// .endl() + "#ifdef MOD_POS_ABS"
+// .endl() + "   MOD_pos=MOD_posi;"
 // .endl() + "#endif"
 
     .endl() + "#ifndef MOD_WORLDSPACE"
@@ -74,7 +74,7 @@ mod.addModule({
 
 mod.addUniform("4f", "MOD_inSizeAmountFalloffSizeX", inSize, inAmount, inFalloff, sizeX);
 mod.addUniform("3f", "MOD_color", r, g, b);
-mod.addUniform("3f", "MOD_posi", x, y, z);
+mod.addUniform("3f", "MOD_pos", x, y, z);
 updateDefines();
 
 inPrio.onChange = updatePrio;

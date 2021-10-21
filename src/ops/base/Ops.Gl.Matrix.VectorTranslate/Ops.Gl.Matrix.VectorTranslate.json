@@ -5,42 +5,57 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Exec"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vector X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vector Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Vector Z",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 0,
+                "name": "Reset Position X",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reset Position Y",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Reset Position Z",
+                "subType": "number"
+            },
+            {
+                "type": 1,
                 "name": "reset"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "max",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
