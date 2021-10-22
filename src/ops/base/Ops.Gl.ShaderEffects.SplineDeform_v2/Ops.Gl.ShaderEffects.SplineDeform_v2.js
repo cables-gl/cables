@@ -32,17 +32,22 @@ inPoints.onChange = () =>
 render.onTriggered = function ()
 {
     mod.bind();
+    let pointArray = inPoints.get();
 
     if (needsUpdate)
     {
         if (inPoints.get())
         {
-            let pointArray = inPoints.get();
-            mod.define("SPLINE_POINTS", Math.floor(pointArray.length / 3));
-            mod.setUniformValue("MOD_points", pointArray);
-            needsUpdate = false;
+            if (pointArray && pointArray.length > 0)
+            {
+                mod.define("SPLINE_POINTS", Math.floor(pointArray.length / 3));
+                needsUpdate = false;
+            }
         }
     }
+
+    if (pointArray && pointArray.length > 0)
+        mod.setUniformValue("MOD_points", pointArray);
 
     next.trigger();
     mod.unbind();

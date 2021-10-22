@@ -3,7 +3,9 @@ const speed = op.inValue("Speed");
 const vecX = op.inValue("Vector X");
 const vecY = op.inValue("Vector Y");
 const vecZ = op.inValue("Vector Z");
-
+const resetVecX = op.inFloat("Reset Position X");
+const resetVecY = op.inFloat("Reset Position Y");
+const resetVecZ = op.inFloat("Reset Position Z");
 const next = op.outTrigger("Next");
 
 const reset = op.inTriggerButton("reset");
@@ -21,7 +23,11 @@ let timeDiff = 0;
 
 reset.onTriggered = function ()
 {
-    vec3.set(pos, 0, 0, 0);
+    vec3.set(pos,
+        (resetVecX.get()),
+        (resetVecY.get()),
+        (resetVecZ.get())
+    );
 };
 
 let dir = false;
@@ -42,11 +48,9 @@ function isOutside()
     return false;
 }
 
-
 function move()
 {
 }
-
 
 exec.onTriggered = function ()
 {
