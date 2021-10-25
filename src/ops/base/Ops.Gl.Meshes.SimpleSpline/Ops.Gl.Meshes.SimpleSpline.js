@@ -6,6 +6,7 @@ const
     outGeom = op.outObject("Geometry"),
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!
     texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random", "Fill"], "0"),
+    inTexCoords = op.inArray("TexCoords Array"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
@@ -21,6 +22,7 @@ let needsRebuild = true;
 let attr;
 let currentTexCoords = "";
 
+inTexCoords.onChange =
 texCoords.onChange =
     numPoints.onChange =
     inPoints.onChange =
@@ -59,6 +61,13 @@ function rebuild()
     attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
 
     const numTc = (newLength / 3) * 2;
+
+    if (inTexCoords.get())
+    {
+        const intc = inTexCoords.get();
+        const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD, intc, 2);
+    }
+    else
     if (currentTexCoords != texCoords.get() || mesh.getAttribute(CGL.SHADERVAR_VERTEX_TEXCOORD).numItems != numTc / 2)
     {
         currentTexCoords = texCoords.get();
@@ -86,8 +95,6 @@ function rebuild()
                     idx++;
                     bufTexCoord[idx * 2 + 0] = i / sizel;
                     bufTexCoord[idx * 2 + 1] = j / sizel;
-                    // bufTexCoord[i + j * sizel] = (i) / sizel;
-                    // bufTexCoord[i + j * sizel + 1] = j / sizel;
                 }
             }
         }
