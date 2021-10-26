@@ -493,7 +493,7 @@ void main()
 
         #ifdef HAS_TEXTURE_AO
             // luminanceColor *= mix(vec3(1.), texture(texAO, texCoord).rgb, inTextureIntensities.AO);
-            luminanceColor *= texture(texAO, texCoord).g* inTextureIntensities.AO;
+            luminanceColor *= texture(texAO, texCoord).g*inTextureIntensities.AO;
         #endif
 
         calculatedColor.rgb += luminanceColor;

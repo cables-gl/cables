@@ -81,7 +81,7 @@ void main()
     {{MODULE_VERTEX_POSITION}}
 
     mvMatrix = viewMatrix * mMatrix;
-    vec3 normal = attrVertNormal;
+    vec3 normal = norm;
 
     normalMatrix = transposeMat3(inverseMat3(mat3(mvMatrix)));
 
