@@ -127,7 +127,7 @@
             },
             {
                 "name": "Pow factor",
-                "text": "Alters the gradient effect"
+                "text": "Alters the gradient effect. Square Wave requires values between 0.0 and 1.0"
             },
             {
                 "name": "Offset",

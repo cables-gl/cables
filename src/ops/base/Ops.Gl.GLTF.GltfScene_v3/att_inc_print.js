@@ -133,6 +133,7 @@ function printInfo()
 {
     if (!gltf) return;
 
+    const startTime = performance.now();
     // console.log(gltf);
 
     const sizes = {};

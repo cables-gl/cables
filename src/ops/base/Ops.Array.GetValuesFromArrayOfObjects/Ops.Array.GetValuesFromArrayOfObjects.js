@@ -28,7 +28,7 @@ function exec()
         {
             if (numsonly)
             {
-                if (CABLES.UTILS.isNumeric(obj[key])) newArr.push(obj[key]);
+                if (CABLES.UTILS.isNumeric(obj[key])) newArr.push(parseFloat(obj[key]));
             }
             else
             {

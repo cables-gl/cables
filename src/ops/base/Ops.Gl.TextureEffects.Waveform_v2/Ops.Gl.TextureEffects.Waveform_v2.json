@@ -129,7 +129,7 @@
             },
             {
                 "name": "Waveform",
-                "text": "Amplitude/Height of the wave"
+                "text": "Pick a waveform with a dropdown"
             },
             {
                 "name": "Amplitude",

@@ -45,7 +45,7 @@ void main()
     #endif
 
     col=vec4( _blend(base.rgb,vec3(r,g,b)) ,1.0);
-    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount),1.0);
+    col=vec4( mix( col.rgb, base.rgb ,1.0-base.a*v*amount*a),1.0);
     outColor=col;
 
     #ifdef WARN_OVERFLOW
