@@ -105,13 +105,11 @@ playPort.onChange = function ()
 
     if (playPort.get())
     {
-        console.log("PLAY");
         const startTime = startTimePort.get() || 0;
         start(startTime);
     }
     else
     {
-        console.log("STOP");
         const stopTime = stopTimePort.get() || 0;
         stop(stopTime);
     }
@@ -305,9 +303,8 @@ function stop(time)
 {
     try
     {
-        if (isPlaying)
+        if (source)
         {
-            console.log("stop...");
             source.stop();
             recreateBuffer();
         }
@@ -331,7 +328,6 @@ function onPlaybackEnded()
         isPlaying = true;
         hasEnded = false;
     }
-    console.log("is playing", isPlaying);
     outPlaying.set(isPlaying);
 
     recreateBuffer();
