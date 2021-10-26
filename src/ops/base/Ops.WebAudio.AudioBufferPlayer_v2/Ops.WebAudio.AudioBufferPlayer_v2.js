@@ -105,11 +105,13 @@ playPort.onChange = function ()
 
     if (playPort.get())
     {
+        console.log("PLAY");
         const startTime = startTimePort.get() || 0;
         start(startTime);
     }
     else
     {
+        console.log("STOP");
         const stopTime = stopTimePort.get() || 0;
         stop(stopTime);
     }
