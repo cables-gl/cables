@@ -140,6 +140,7 @@ function printInfo()
 {
     if(!gltf)return;
 
+    const startTime=performance.now();
     // console.log(gltf);
 
     const sizes={};
@@ -465,10 +466,18 @@ function printInfo()
 
     // CABLES.UI.MODAL.show(html);
 
+
+
+
     // closeTab();
     tab=new CABLES.UI.Tab("GLTF",{"icon":"cube","infotext":"tab_gltf","padding":true,"singleton":true});
     gui.mainTabs.addTab(tab,true);
+
+    console.log("gltf print", (performance.now()-startTime)/1000);
+
     tab.html(html);
+
+
 
     // console.log(gltf);
 }

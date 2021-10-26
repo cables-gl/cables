@@ -18,7 +18,7 @@
         ],
         "name": "Ops.Array.PaletteLibrary"
     },
-    "summary": "Contains a collection of palettes in groups of 5 to be used with the palette texture op",
+    "summary": "Contains a collection of color palettes in groups of 5 in an array",
     "issues": "",
     "collections": null,
     "relatedops": [

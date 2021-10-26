@@ -105,7 +105,14 @@ parentPort.onChange = onParentChanged;
 labelPort.onChange = onLabelTextChanged;
 op.onDelete = onDelete;
 
-inRange.onChange = redraw();
+inRange.onChange = () =>
+{
+    // console.log("inRange");
+    // valueInputChanged();
+    setOutValue(defaultValuePortX.get(), defaultValuePortY.get());
+
+    redraw();
+};
 
 redraw();
 
@@ -128,14 +135,16 @@ canv.addEventListener("pointerup", (e) =>
 
 inputX.onChange = () =>
 {
-    outX.set(Math.min(1, Math.max(inputX.get(), 0)));
-    redraw();
+    // outX.set(Math.min(1, Math.max(inputX.get(), 0)));
+    setOutValue(inputX.get(), inputY.get());
+    // redraw();
 };
 
 inputY.onChange = () =>
 {
-    outY.set(Math.min(1, Math.max(inputY.get(), 0)));
-    redraw();
+    // outY.set(Math.min(1, Math.max(inputY.get(), 0)));
+    setOutValue(inputX.get(), inputY.get());
+    // redraw();
 };
 
 canv.addEventListener("pointermove", (e) =>

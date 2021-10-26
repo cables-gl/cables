@@ -29,7 +29,7 @@ function init()
 
     const isInteger = inInteger.get();
 
-    const arrLength = arr.length = Math.floor(Math.abs(numValues.get() * 3));
+    const arrLength = arr.length = Math.max(0, Math.floor(Math.abs((numValues.get() || 0) * 3)));
 
     if (arrLength === 0)
     {

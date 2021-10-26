@@ -19,7 +19,6 @@
         "name": "Ops.Trigger.TriggerReceive"
     },
     "summary": "Receives triggers from a TriggerSend op with the same variable name",
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": [
@@ -28,13 +27,12 @@
     "docs": {
         "ports": [
             {
-                "name": "Named Trigger",
-                "text": "Variable name assigned to the op - must match the TriggerSend op"
-            },
-            {
                 "name": "Triggered",
                 "text": "Trigger out"
             }
         ]
-    }
+    },
+    "youtubeids": [
+        "QZqtvPytsKE"
+    ]
 }
