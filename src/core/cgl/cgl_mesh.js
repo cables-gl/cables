@@ -111,10 +111,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] = this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] || 0;
     this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] += (end - start) || 0;
 
-
-    // console.log("buffer subdata", attr.name, this.name);
-
-    if (array.length < start + (end - start)) console.log("buffersubdata out of bounds ?", array.length, end, start, attr);
+    // if (array.length <= end) console.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
 
     if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
     else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
