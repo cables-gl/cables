@@ -9,6 +9,8 @@ const buttons = op.inUiTriggerButtons("buttons", ["a", "b", "hund", "&#9662;"]);
 
 paramtest_1.setUiAttribs({ "hidePort": true });
 
+op.setUiAttrib({ "extendTitle": "wurste" });
+
 op.onLoaded = function ()
 {
     op.log("op loaded!");
