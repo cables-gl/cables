@@ -649,6 +649,7 @@ Mesh.prototype.render = function (shader)
 
 
     let doQuery = this._cgl.profileData.doProfileGlQuery;
+    let queryStarted = false;
     if (doQuery)
     {
         let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
@@ -684,7 +685,7 @@ Mesh.prototype.render = function (shader)
         {
             queryProfilerData._drawQuery = this._cgl.gl.createQuery();
             this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
-            queryProfilerData.queryStarted = true;
+            queryStarted = queryProfilerData.queryStarted = true;
         }
     }
 
@@ -732,7 +733,7 @@ Mesh.prototype.render = function (shader)
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
 
-    if (doQuery)
+    if (doQuery && queryStarted)
     {
         this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
 
