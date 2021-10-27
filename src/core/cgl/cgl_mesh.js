@@ -112,13 +112,13 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] += (end - start) || 0;
 
 
-    if (attr.numItems < array.length / attr.itemSize)
-    {
-        console.log("wrong attr size", attr.numItems, array.length);
-        this._resizeAttr(array, attr);
+    // if (attr.numItems < array.length / attr.itemSize)
+    // {
+    //     console.log("wrong attr size", attr.numItems, array.length);
+    //     this._resizeAttr(array, attr);
 
-        // return;
-    }
+    //     // return;
+    // }
 
     if (end > array.length)
     {
