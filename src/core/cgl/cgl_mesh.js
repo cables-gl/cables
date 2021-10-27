@@ -227,15 +227,17 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
         const attr = this._attributes[i];
         if (attr.name == name)
         {
-            // if (attr.numItems === numItems)
+            this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+            this._bufferArray(array, attr);
+
+            if (attr.numItems === numItems)
             {
-                this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
-                this._bufferArray(array, attr);
             }
-            // else
-            // {
-            //     this._resizeAttr(array, attr);
-            // }
+            else
+            {
+                console.log("wrong buffer size", attr.numItems, numItems);
+                // this._resizeAttr(array, attr);
+            }
 
             return attr;
         }
