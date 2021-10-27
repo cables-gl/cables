@@ -1,0 +1,1 @@
+To organize your sidebar controls and content, it helps grouping them into collapsable tabs with the Group operator. To add specific elements to the group, connect them into the "childs" port.

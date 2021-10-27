@@ -76,8 +76,12 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 {
     const chunk = {};
 
+    if(offset>=dv.byteLength)
+    {
+        console.log("could not read chunk...");
+        return;
+    }
     chunk.size = dv.getUint32(offset + 0, le);
-
 
     // chunk.type = new TextDecoder("utf-8").decode(bArr.subarray(offset+4, offset+4+4));
     chunk.type = Utf8ArrayToStr(bArr.subarray(offset + 4, offset + 4 + 4));

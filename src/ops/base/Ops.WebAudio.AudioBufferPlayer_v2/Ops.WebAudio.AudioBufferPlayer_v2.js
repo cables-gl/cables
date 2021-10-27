@@ -303,9 +303,8 @@ function stop(time)
 {
     try
     {
-        if (isPlaying)
+        if (source)
         {
-            console.log("stop...");
             source.stop();
             recreateBuffer();
         }
@@ -329,7 +328,6 @@ function onPlaybackEnded()
         isPlaying = true;
         hasEnded = false;
     }
-    console.log("is playing", isPlaying);
     outPlaying.set(isPlaying);
 
     recreateBuffer();

@@ -28,15 +28,29 @@
         "draco_decoder.js"
     ],
     "layout": {
-        "portsIn": [],
-        "portsOut": [],
-        "name": "Ops.User.pandur.Draco"
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Hund",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Katze",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfDracoCompression"
     },
     "summary": "gltf draco compression library",
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "Vo3Hs8-p7_I"
+    ],
     "docs": {
         "ports": []
     }

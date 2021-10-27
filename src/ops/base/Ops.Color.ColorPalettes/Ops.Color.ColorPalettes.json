@@ -1,5 +1,5 @@
 {
-    "summary": "Contains a collection of nice color palettes",
+    "summary": "Contains a collection of nice color palettes output to texture or array via index",
     "layout": {
         "portsIn": [
             {

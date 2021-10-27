@@ -22,22 +22,22 @@
     "layout": {
         "portsIn": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Array"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Key"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Numbers Only",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "3",
+                "type": 3,
                 "name": "Result"
             }
         ],

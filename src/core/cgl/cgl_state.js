@@ -69,6 +69,7 @@ const Context = function (_patch)
     this._glFrameBufferStack = [];
     this._frameBufferStack = [];
     this._shaderStack = [];
+    this._stackDepthTest = [];
 
     Object.defineProperty(this, "mvMatrix", {
         get()
@@ -312,7 +313,8 @@ const Context = function (_patch)
         if (!this._hadStackError)
         {
             this._hadStackError = true;
-            console.warn(str);
+            // console.warn(str);
+            Log.warn("[" + this.canvas.id + "]: ", str);
         }
     };
 

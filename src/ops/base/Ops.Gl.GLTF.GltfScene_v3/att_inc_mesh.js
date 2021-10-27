@@ -66,7 +66,18 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
         if (attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
         if (attribs.hasOwnProperty("TANGENT"))tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
-        if (attribs.hasOwnProperty("COLOR_0"))tgeom.vertexColors = gltf.accBuffers[attribs.COLOR_0];
+        if (attribs.hasOwnProperty("COLOR_0"))
+        {
+            tgeom.vertexColors = gltf.accBuffers[attribs.COLOR_0];
+
+            if(gltf.accBuffers[attribs.COLOR_0] instanceof Uint16Array)
+            {
+                const fb=new Float32Array(tgeom.vertexColors.length);
+                for(let i=0;i<tgeom.vertexColors.length;i++) fb[i]=tgeom.vertexColors[i]/65535;
+                tgeom.vertexColors=fb;
+            }
+        }
+
         if (attribs.hasOwnProperty("TEXCOORD_1"))tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);
         if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
         if (attribs.hasOwnProperty("TEXCOORD_3"))tgeom.setAttribute("attrTexCoord3", gltf.accBuffers[attribs.TEXCOORD_3], 2);

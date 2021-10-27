@@ -42,8 +42,8 @@
                 "text": "Plug a timer into this to determine the speed of the oscillation"
             },
             {
-                "name": "Type",
-                "text": "Shape of LFO, available modes are : `sine`-`triangle`-`ramp up`-`ramp down`-`block (square)`"
+                "name": "Type index",
+                "text": "selection index of Waveform: Sine, Triangle, Ramp Up, Ramp Down, Block (Square)"
             },
             {
                 "name": "Phase",
@@ -59,11 +59,11 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": [
         "Ops.Math.MapRange",
         "Ops.Anim.SineAnim"
-    ]
+    ],
+    "youtubeids": []
 }
