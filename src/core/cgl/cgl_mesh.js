@@ -115,7 +115,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     if (attr.numItems < array.length)
     {
         // console.log("attr...", attr.numItems, array.length);
-        // this._resizeAttr(array, attr);
+        this._resizeAttr(array, attr);
 
         // return;
     }
@@ -227,15 +227,15 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
         const attr = this._attributes[i];
         if (attr.name == name)
         {
-            if (attr.numItems === numItems)
+            // if (attr.numItems === numItems)
             {
                 this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
                 this._bufferArray(array, attr);
             }
-            else
-            {
-                this._resizeAttr(array, attr);
-            }
+            // else
+            // {
+            //     this._resizeAttr(array, attr);
+            // }
 
             return attr;
         }
