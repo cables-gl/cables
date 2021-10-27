@@ -115,7 +115,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     if (attr.numItems < array.length)
     {
         // console.log("attr...", attr.numItems, array.length);
-        this._resizeAttr(array, attr);
+        // this._resizeAttr(array, attr);
 
         // return;
     }
