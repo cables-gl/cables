@@ -17,30 +17,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "link"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Text"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Id",
                 "subType": "string"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "childs"
             },
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ],
-        "name": "Ops.User.pandur.LocalFileSidebar"
+        "name": "Ops.Sidebar.LocalTextureFile"
     },
     "summary": "Let the user select a local file as a texture",
     "issues": "",

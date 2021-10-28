@@ -15,6 +15,8 @@ outDataURL.ignoreValueSerialize = true;
 
 // vars
 const el = document.createElement("div");
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");

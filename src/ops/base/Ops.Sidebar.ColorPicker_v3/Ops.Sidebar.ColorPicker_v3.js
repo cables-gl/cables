@@ -24,6 +24,8 @@ const outHex = op.outString("Hex", DEFAULT_COLOR_HEX);
 
 // vars
 const el = document.createElement("div");
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.addEventListener("dblclick", function ()
 {
     let defaultValue = defaultValuePort.get();

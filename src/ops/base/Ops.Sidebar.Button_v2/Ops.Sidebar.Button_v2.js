@@ -9,9 +9,10 @@ const buttonPressedPort = op.outTrigger("Pressed Trigger");
 const inGreyOut = op.inBool("Grey Out", false);
 const inVisible = op.inBool("Visible", true);
 
-
 // vars
 const el = document.createElement("div");
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar--button");
 const input = document.createElement("div");
@@ -41,7 +42,6 @@ inVisible.onChange = function ()
 {
     el.style.display = inVisible.get() ? "block" : "none";
 };
-
 
 function onButtonClick()
 {
