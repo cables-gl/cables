@@ -26,8 +26,10 @@ function exec()
     {
         const obj = arr[i];
 
-        if (obj && obj.hasOwnProperty(key))
+        if (obj)
         {
+            if (!(key in obj)) continue;
+
             if (numsonly)
             {
                 if (CABLES.UTILS.isNumeric(obj[key])) newArr.push(parseFloat(obj[key]));
