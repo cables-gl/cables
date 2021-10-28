@@ -576,7 +576,7 @@ op.exposeNode = function (name, tree, options)
     else
     {
         let newopname = "Ops.Gl.GLTF.GltfNode_v2";
-        if (options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
+        if (options && options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
 
         gui.serverOps.loadOpLibs(newopname, () =>
         {

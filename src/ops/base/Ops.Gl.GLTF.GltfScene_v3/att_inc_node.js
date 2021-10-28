@@ -153,7 +153,7 @@ const gltfNode = class
     {
         if (!_time)_time = time;
 
-        if (!this._animTrans)
+        if (!this._animTrans && !this._animRot && !this._animScale)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);
         }

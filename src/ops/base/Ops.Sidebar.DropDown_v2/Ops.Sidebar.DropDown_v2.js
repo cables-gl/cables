@@ -118,27 +118,23 @@ function setSelectedProperty()
 
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.value.trim() === defaultItem.trim())
+        if (optionElement.value.trim() === valuePort.get())
         {
             finalEle = optionElement;
             finalIndex = index;
-            // optionElement.setAttribute("selected", "");
-            // outIndex.set(index);
         }
-
         optionElement.removeAttribute("selected");
     });
 
     optionElements.forEach(function (optionElement, index)
     {
-        if (optionElement.value.trim() === valuePort.get())
+        if (optionElement.value.trim() === defaultItem.trim())
         {
             finalEle = optionElement;
             finalIndex = index;
-
-            // optionElement.setAttribute("selected", "");
-            // outIndex.set(index);
         }
+
+        optionElement.removeAttribute("selected");
     });
 
     if (finalEle) finalEle.setAttribute("selected", "");
