@@ -1,0 +1,42 @@
+{
+    "id": "0d9eb214-c1a2-4ef5-8bcb-79b89fcfba57",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1635325031907
+        },
+        {
+            "message": "Ops.User.pandur.ArrayRotations renamed to Ops.Array.AnglesBetweenPoints",
+            "author": "pandur",
+            "date": 1635339726861
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1635325061543,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 3,
+                "name": "Points"
+            },
+            {
+                "type": 0,
+                "name": "Theta",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Phi",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 3,
+                "name": "Rotations"
+            }
+        ],
+        "name": "Ops.Array.AnglesBetweenPoints"
+    }
+}
