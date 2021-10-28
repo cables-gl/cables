@@ -232,7 +232,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
             }
             else
             {
-                console.log("wrong buffer size", attr.numItems, numItems);
+                console.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
                 this._resizeAttr(array, attr);
             }
 

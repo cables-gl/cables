@@ -629,7 +629,7 @@ Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
         if (a) this._notriggerAnimUpdate = this.parent.patch.on("onRenderFrame",
             () =>
             {
-                console.log("updateanim notrigger");
+                // console.log("updateanim notrigger");
                 this.updateAnim();
             });
         else this.parent.patch.removeEventListener(this._notriggerAnimUpdate);
