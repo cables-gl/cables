@@ -109,9 +109,8 @@ function onValuesPortChange()
 }
 
 let finalIndex = 0;
-function setSelectedProperty()
+function setSelectedProperty(defaultinput)
 {
-    const defaultItem = defaultValuePort.get() + "";
     const optionElements = input.querySelectorAll("option");
 
     let finalEle = null;
@@ -126,16 +125,21 @@ function setSelectedProperty()
         optionElement.removeAttribute("selected");
     });
 
-    optionElements.forEach(function (optionElement, index)
+    if (defaultinput)
     {
-        if (optionElement.value.trim() === defaultItem.trim())
-        {
-            finalEle = optionElement;
-            finalIndex = index;
-        }
+        const defaultItem = defaultValuePort.get() + "".trim();
 
-        optionElement.removeAttribute("selected");
-    });
+        optionElements.forEach(function (optionElement, index)
+        {
+            if (optionElement.value.trim() === defaultItem)
+            {
+                finalEle = optionElement;
+                finalIndex = index;
+            }
+
+            optionElement.removeAttribute("selected");
+        });
+    }
 
     if (finalEle) finalEle.setAttribute("selected", "");
     outIndex.set(finalIndex);
