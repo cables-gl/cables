@@ -16,6 +16,18 @@ gotoIn.setUiAttribs({ "hidePort": true });
 
 let wasPasted = false;
 
+subPatchIdIn.onChange = () =>
+{
+    if (!activeIn.get())
+    {
+        op.setUiError("fetchOps", null);
+    }
+    if (!loadingOut.get() && activeIn.get() && patchIdIn.get() && subPatchIdIn.get())
+    {
+        update();
+    }
+};
+
 if (op.patch.isEditorMode())
 {
     gotoIn.onTriggered = function ()
@@ -31,6 +43,14 @@ if (op.patch.isEditorMode())
         if (patchIdIn.get())
         {
             gotoIn.setUiAttribs({ "greyout": false });
+            if (!activeIn.get())
+            {
+                op.setUiError("fetchOps", null);
+            }
+            if (!loadingOut.get() && activeIn.get() && subPatchIdIn.get())
+            {
+                update();
+            }
         }
         else
         {
@@ -145,6 +165,7 @@ activeIn.onChange = () =>
         }
         else
         {
+            op.setUiError("fetchOps", null);
             op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
             if (wasPasted) wasPasted = false;
