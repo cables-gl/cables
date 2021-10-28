@@ -423,6 +423,7 @@ Mesh.prototype._checkAttrLengths = function ()
 {
     // check length
 
+
     // for (let i = 0; i < this._attributes.length; i++)
     // {
     //     if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
