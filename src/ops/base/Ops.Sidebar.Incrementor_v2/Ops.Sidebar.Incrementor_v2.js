@@ -17,7 +17,8 @@ const outValue = op.outNumber("value");
 let currentPosition = 0;
 
 const containerEl = document.createElement("div");
-
+containerEl.dataset.op = op.id;
+containerEl.classList.add("cablesEle");
 containerEl.classList.add("sidebar__item");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");

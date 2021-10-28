@@ -17,7 +17,8 @@ const parentPort = op.inObject("link"),
 let elTabActive = null;
 const el = document.createElement("div");
 el.classList.add("sidebar__item");
-
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 inDefault.setUiAttribs({ "greyout": true });
 
 const label = document.createElement("div");

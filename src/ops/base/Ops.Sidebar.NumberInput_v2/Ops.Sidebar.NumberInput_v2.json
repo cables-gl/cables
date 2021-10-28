@@ -20,11 +20,6 @@
             {
                 "type": 1,
                 "name": "Set Default"
-            },
-            {
-                "type": 0,
-                "name": "Default",
-                "subType": "number"
             }
         ],
         "portsOut": [

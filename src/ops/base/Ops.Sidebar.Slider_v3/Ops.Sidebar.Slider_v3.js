@@ -37,6 +37,9 @@ el.addEventListener("dblclick", function ()
     inputValuePort.set(parseFloat(defaultValuePort.get()));
 });
 
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
+
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__slider");
 el.classList.add("sidebar__reloadable");
