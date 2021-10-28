@@ -111,11 +111,35 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] = this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] || 0;
     this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] += (end - start) || 0;
 
-    // if (array.length <= end) console.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+
+    if (attr.numItems < array.length / attr.itemSize)
+    {
+        console.log("wrong attr size", attr.numItems, array.length);
+        this._resizeAttr(array, attr);
+
+        // return;
+    }
+
+    if (end > array.length)
+    {
+        console.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+    }
 
     if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
     else this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, start * 4, array, start, (end - start));
 };
+
+Mesh.prototype._resizeAttr = function (array, attr)
+{
+    if (attr.buffer)
+        this._cgl.gl.deleteBuffer(attr.buffer);
+
+    attr.buffer = this._cgl.gl.createBuffer();
+    this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+    this._bufferArray(array, attr);
+    attr.numItems = array.length / attr.itemSize;// numItems;
+};
+
 
 Mesh.prototype._bufferArray = function (array, attr)
 {
@@ -200,16 +224,22 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
     for (i = 0; i < this._attributes.length; i++)
     {
-        if (this._attributes[i].name == name)
+        const attr = this._attributes[i];
+        if (attr.name == name)
         {
-            this._attributes[i].numItems = numItems;
+            if (attr.numItems === numItems)
+            {
+            }
+            else
+            {
+                console.log("wrong buffer size", attr.numItems, numItems);
+                this._resizeAttr(array, attr);
+            }
 
-            this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, this._attributes[i].buffer);
+            this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
+            this._bufferArray(array, attr);
 
-            // this._cgl.gl.bufferData(this._cgl.gl.ARRAY_BUFFER, floatArray, this._cgl.gl.DYNAMIC_DRAW);
-            this._bufferArray(array, this._attributes[i]);
-
-            return this._attributes[i];
+            return attr;
         }
     }
 
@@ -621,6 +651,7 @@ Mesh.prototype.render = function (shader)
 
 
     let doQuery = this._cgl.profileData.doProfileGlQuery;
+    let queryStarted = false;
     if (doQuery)
     {
         let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
@@ -656,7 +687,7 @@ Mesh.prototype.render = function (shader)
         {
             queryProfilerData._drawQuery = this._cgl.gl.createQuery();
             this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
-            queryProfilerData.queryStarted = true;
+            queryStarted = queryProfilerData.queryStarted = true;
         }
     }
 
@@ -704,7 +735,7 @@ Mesh.prototype.render = function (shader)
     this._cgl.profileData.profileMeshNumElements += (this._bufVertexAttrib.numItems / elementDiv) * (this._numInstances || 1);
     this._cgl.profileData.profileMeshDraw++;
 
-    if (doQuery)
+    if (doQuery && queryStarted)
     {
         this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
 
