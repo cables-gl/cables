@@ -31,6 +31,8 @@ el.addEventListener("dblclick", function ()
     });
 });
 
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.classList.add("sidebar__item");
 el.classList.add("sidebar__select");
 el.classList.add("sidebar__reloadable");
@@ -109,25 +111,11 @@ function onValuesPortChange()
 }
 
 let finalIndex = 0;
-function setSelectedProperty()
+function setSelectedProperty(defaultinput)
 {
-    const defaultItem = defaultValuePort.get() + "";
     const optionElements = input.querySelectorAll("option");
 
     let finalEle = null;
-
-    optionElements.forEach(function (optionElement, index)
-    {
-        if (optionElement.value.trim() === defaultItem.trim())
-        {
-            finalEle = optionElement;
-            finalIndex = index;
-            // optionElement.setAttribute("selected", "");
-            // outIndex.set(index);
-        }
-
-        optionElement.removeAttribute("selected");
-    });
 
     optionElements.forEach(function (optionElement, index)
     {
@@ -135,11 +123,25 @@ function setSelectedProperty()
         {
             finalEle = optionElement;
             finalIndex = index;
-
-            // optionElement.setAttribute("selected", "");
-            // outIndex.set(index);
         }
+        optionElement.removeAttribute("selected");
     });
+
+    if (defaultinput)
+    {
+        const defaultItem = defaultValuePort.get() + "".trim();
+
+        optionElements.forEach(function (optionElement, index)
+        {
+            if (optionElement.value.trim() === defaultItem)
+            {
+                finalEle = optionElement;
+                finalIndex = index;
+            }
+
+            optionElement.removeAttribute("selected");
+        });
+    }
 
     if (finalEle) finalEle.setAttribute("selected", "");
     outIndex.set(finalIndex);

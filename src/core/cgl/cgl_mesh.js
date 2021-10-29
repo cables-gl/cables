@@ -114,7 +114,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     if (attr.numItems < array.length / attr.itemSize)
     {
-        console.log("wrong attr size", attr.numItems, array.length);
+        // console.log("wrong attr size", attr.numItems, array.length);
         this._resizeAttr(array, attr);
 
         // return;
@@ -232,7 +232,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
             }
             else
             {
-                console.log("wrong buffer size", attr.numItems, numItems);
+                // console.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
                 this._resizeAttr(array, attr);
             }
 
@@ -422,6 +422,7 @@ Mesh.prototype._preBind = function (shader)
 Mesh.prototype._checkAttrLengths = function ()
 {
     // check length
+
 
     // for (let i = 0; i < this._attributes.length; i++)
     // {

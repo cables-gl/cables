@@ -16,6 +16,8 @@ inVisible.onChange = function ()
 
 // vars
 var el = document.createElement("div");
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.classList.add("sidebar__group");
 onDefaultMinimizedPortChanged();
 let header = document.createElement("div");

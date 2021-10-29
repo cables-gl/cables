@@ -23,6 +23,8 @@ const outX = op.outValue("X", 0.0);
 const outY = op.outValue("Y", 0.0);
 
 const el = document.createElement("div");
+el.dataset.op = op.id;
+el.classList.add("cablesEle");
 el.addEventListener("dblclick", function ()
 {
     setOutValue(defaultValuePortX.get(), defaultValuePortY.get());

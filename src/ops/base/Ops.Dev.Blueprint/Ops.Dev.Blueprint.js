@@ -16,6 +16,18 @@ gotoIn.setUiAttribs({ "hidePort": true });
 
 let wasPasted = false;
 
+subPatchIdIn.onChange = () =>
+{
+    if (!activeIn.get())
+    {
+        op.setUiError("fetchOps", null);
+    }
+    if (!loadingOut.get() && activeIn.get() && patchIdIn.get() && subPatchIdIn.get())
+    {
+        update();
+    }
+};
+
 if (op.patch.isEditorMode())
 {
     gotoIn.onTriggered = function ()
@@ -31,6 +43,14 @@ if (op.patch.isEditorMode())
         if (patchIdIn.get())
         {
             gotoIn.setUiAttribs({ "greyout": false });
+            if (!activeIn.get())
+            {
+                op.setUiError("fetchOps", null);
+            }
+            if (!loadingOut.get() && activeIn.get() && subPatchIdIn.get())
+            {
+                update();
+            }
         }
         else
         {
@@ -67,7 +87,7 @@ const restorePorts = () =>
                 }
                 else
                 {
-                    parent = op.patch.ops.find((subOp) =>
+                    parent = op.patch.ops.find(subOp =>
                         subOp.storage &&
                         subOp.storage.blueprint &&
                         subOp.storage.blueprint.originalOpId == link.objOut);
@@ -108,7 +128,7 @@ const restorePorts = () =>
                 }
                 else
                 {
-                    parent = op.patch.ops.find((subOp) =>
+                    parent = op.patch.ops.find(subOp =>
                         subOp.storage &&
                         subOp.storage.blueprint &&
                         subOp.storage.blueprint.originalOpId == link.objIn);
@@ -145,6 +165,7 @@ activeIn.onChange = () =>
         }
         else
         {
+            op.setUiError("fetchOps", null);
             op.setUiError("inactive", "blueprint is inactive", 0);
             removeImportedOps();
             if (wasPasted) wasPasted = false;
@@ -281,10 +302,9 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 {
     if (Array.isArray(data.ops) && data.ops.length > 0)
     {
-        op.patch.config.onPatchLoaded = function (patch)
+        const cb = () =>
         {
-            op.patch.onPatchLoaded = null;
-            const parentSubPatch = patch.ops.find((subOp) =>
+            const parentSubPatch = op.patch.ops.find(subOp =>
                 subOp.storage &&
                 subOp.storage.blueprint &&
                 subOp.storage.blueprint.isParentSubPatch &&
@@ -295,7 +315,10 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
                 op.setUiAttrib({ "extendTitle": parentSubPatch.uiAttribs.title });
                 setupPorts(parentSubPatch);
             }
+            op.patch.removeEventListener(listenerId);
         };
+
+        const listenerId = op.patch.addEventListener("patchLoadEnd", cb);
 
         if (editorMode)
         {
@@ -316,7 +339,7 @@ function deSerializeBlueprint(data, subPatchId, editorMode)
 
 function removeImportedOps()
 {
-    const parentSubPatch = op.patch.ops.find((subOp) =>
+    const parentSubPatch = op.patch.ops.find(subOp =>
         subOp.storage &&
         subOp.storage.blueprint &&
         subOp.storage.blueprint.isParentSubPatch &&
@@ -410,7 +433,7 @@ const removeOutPort = (port) =>
 
 function setupPorts(parentSubPatch)
 {
-    const subPatchDataPort = parentSubPatch.portsIn.find((port) => port.name === "dataStr");
+    const subPatchDataPort = parentSubPatch.portsIn.find(port => port.name === "dataStr");
     if (!subPatchDataPort) return;
     if (!subPatchDataPort.get()) return;
 
@@ -427,7 +450,7 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsIn[i].name))
         {
-            const subPatchPort = parentSubPatch.portsIn.find((port) => port.name == subPatchPortsIn[i].name);
+            const subPatchPort = parentSubPatch.portsIn.find(port => port.name == subPatchPortsIn[i].name);
             const newPort = op.addInPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
 
             if (subPatchPort)
@@ -463,7 +486,7 @@ function setupPorts(parentSubPatch)
                         }
                         else
                         {
-                            parent = op.patch.ops.find((subOp) =>
+                            parent = op.patch.ops.find(subOp =>
                                 subOp.storage &&
                                 subOp.storage.blueprint &&
                                 subOp.storage.blueprint.originalOpId == link.objOut);
@@ -493,11 +516,11 @@ function setupPorts(parentSubPatch)
     {
         if (!op.getPortByName(subPatchPortsOut[i].name))
         {
-            const patchPortIn = parentSubPatch.portsIn.find((port) => port.name === "patchId");
+            const patchPortIn = parentSubPatch.portsIn.find(port => port.name === "patchId");
             const patchOutputOP = op.patch.getSubPatchOp(patchPortIn.value, "Ops.Ui.PatchOutput");
             if (patchOutputOP.portsIn)
             {
-                const subPatchPort = patchOutputOP.portsIn.find((port) => port.name == subPatchPortsOut[i].name);
+                const subPatchPort = patchOutputOP.portsIn.find(port => port.name == subPatchPortsOut[i].name);
                 const newPort = op.addOutPort(new CABLES.Port(op, subPatchPort.name, subPatchPort.type));
 
                 if (subPatchPort)
@@ -534,7 +557,7 @@ function setupPorts(parentSubPatch)
                             }
                             else
                             {
-                                parent = op.patch.ops.find((subOp) =>
+                                parent = op.patch.ops.find(subOp =>
                                     subOp.storage &&
                                     subOp.storage.blueprint &&
                                     subOp.storage.blueprint.originalOpId == link.objIn);
