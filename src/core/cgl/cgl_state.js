@@ -538,6 +538,11 @@ const Context = function (_patch)
     {
         this.checkFrameStarted("cgl setTexture");
 
+        if (t === null)
+        {
+            t = CGL.Texture.getEmptyTexture(this).tex;
+        }
+
         if (this._textureslots[slot] != t)
         {
             this.gl.activeTexture(this.gl.TEXTURE0 + slot);

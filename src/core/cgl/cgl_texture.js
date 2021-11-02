@@ -348,7 +348,7 @@ Texture.prototype.delete = function ()
     if (this.loading)
     {
         // cant delete texture when still loading
-        setTimeout(this.delete.bind(this), 50);
+        // setTimeout(this.delete.bind(this), 50);
         return;
     }
 
@@ -358,7 +358,7 @@ Texture.prototype.delete = function ()
     this._cgl.profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
 
-    this.tex = Texture.getEmptyTexture(this._cgl).tex;
+    this.tex = null;
 };
 
 /**
