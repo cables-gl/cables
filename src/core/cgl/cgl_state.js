@@ -538,8 +538,15 @@ const Context = function (_patch)
     {
         this.checkFrameStarted("cgl setTexture");
 
+
         if (t === null)
         {
+            t = CGL.Texture.getEmptyTexture(this).tex;
+        }
+
+        if (!this.gl.isTexture(t))
+        {
+            console.log("not a texture!!!!");
             t = CGL.Texture.getEmptyTexture(this).tex;
         }
 
