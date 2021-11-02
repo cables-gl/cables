@@ -357,6 +357,8 @@ Texture.prototype.delete = function ()
     this.height = 0;
     this._cgl.profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
+
+    this.tex = this.getEmptyTexture(this._cgl).tex;
 };
 
 /**

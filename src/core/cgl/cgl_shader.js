@@ -1566,7 +1566,6 @@ Shader.prototype.pushTexture = function (uniform, t, type)
         return;
     }
 
-    if (t.deleted) console.log("tex already deleted...", this._name, t);
 
     // this._cgl.setTexture(this._textureStackTex.length-1,this._textureStackTex[i],this._textureStackType[i]);
 
