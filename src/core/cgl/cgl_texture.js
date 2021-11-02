@@ -164,7 +164,7 @@ Texture.prototype.setSize = function (w, h)
 
     this.width = w;
     this.height = h;
-
+    this.deleted = false;
 
     this.shortInfoString = this.getInfoOneLine();// w + "x" + h + "";
     // if (this.textureType == Texture.TYPE_FLOAT) this.shortInfoString += " Float";
@@ -271,6 +271,7 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this.width = w;
     this.height = h;
     this._fromData = true;
+    this.deleted = false;
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
     this._setFilter();
@@ -319,6 +320,7 @@ Texture.prototype.initTexture = function (img, filter)
 
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
 
+    this.deleted = false;
     this.flipped = !this.flip;
     this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flipped);
 
