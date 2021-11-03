@@ -687,8 +687,8 @@ Shader.prototype.compile = function ()
                 srcHeadVert += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
                 srcHeadFrag += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
 
-                srcVert += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
-                srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
+                srcVert += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
+                srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
 
 
                 if (!addedAttributes)
