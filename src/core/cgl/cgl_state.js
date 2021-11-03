@@ -149,7 +149,7 @@ const Context = function (_patch)
             this.glVersion = 1;
 
             // safari
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !this.patch.config.noHalfFloatTex)
+            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && (navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPhone/i)))
             {
                 this.glUseHalfFloatTex = true;
             }
