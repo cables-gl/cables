@@ -149,7 +149,7 @@ const Context = function (_patch)
             this.glVersion = 1;
 
             // safari
-            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent))
+            if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent) && !this.patch.config.noHalfFloatTex)
             {
                 this.glUseHalfFloatTex = true;
             }
@@ -537,6 +537,18 @@ const Context = function (_patch)
     this.setTexture = function (slot, t, type)
     {
         this.checkFrameStarted("cgl setTexture");
+
+
+        if (t === null)
+        {
+            t = CGL.Texture.getEmptyTexture(this).tex;
+        }
+
+        // if (!this.gl.isTexture(t))
+        // {
+        //     console.log("not a texture!!!!");
+        //     t = CGL.Texture.getEmptyTexture(this).tex;
+        // }
 
         if (this._textureslots[slot] != t)
         {
