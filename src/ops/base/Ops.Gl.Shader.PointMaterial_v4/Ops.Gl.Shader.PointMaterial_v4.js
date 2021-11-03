@@ -90,11 +90,11 @@ function doRender()
 
     cgl.pushShader(shader);
     shader.popTextures();
-    if (texture.get() && !texture.get().deleted) shader.pushTexture(textureUniform, texture.get().tex);
-    if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get().tex);
-    if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get().tex);
-    if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get().tex);
-    if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get().tex);
+    if (texture.get() && !texture.get().deleted) shader.pushTexture(textureUniform, texture.get());
+    if (textureMask.get()) shader.pushTexture(textureMaskUniform, textureMask.get());
+    if (textureColorize.get()) shader.pushTexture(textureColorizeUniform, textureColorize.get());
+    if (textureOpacity.get()) shader.pushTexture(textureOpacityUniform, textureOpacity.get());
+    if (texturePointSize.get()) shader.pushTexture(texturePointSizeUniform, texturePointSize.get());
 
     trigger.trigger();
 
