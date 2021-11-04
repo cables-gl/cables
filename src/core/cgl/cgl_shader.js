@@ -687,8 +687,8 @@ Shader.prototype.compile = function ()
                 srcHeadVert += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
                 srcHeadFrag += "\n//---- MOD: group:" + this._modules[j].group + ": idx:" + j + " - prfx:" + this._modules[j].prefix + " - " + this._modules[j].title + " ------\n";
 
-                srcVert += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
-                srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " ------\n";
+                srcVert += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
+                srcFrag += "\n\n//---- MOD: " + this._modules[j].title + " / " + this._modules[j].priority + " ------\n";
 
 
                 if (!addedAttributes)
@@ -1512,21 +1512,29 @@ Shader.prototype._bindTextures = function ()
 
     for (let i = 0; i < this._textureStackTex.length; i++)
     {
-        if (!this._textureStackTex[i])
+        if (!this._textureStackTex[i] && !this._textureStackTexCgl[i])
         {
             console.log("no texture for pushtexture", this._name);
         }
         else
-        if (!this._textureStackUni[i])
         {
-            // throw(new Error('no uniform given to texturestack'));
-            console.log("no uniform for pushtexture", this._name);
-            this._cgl.setTexture(i, this._textureStackTex[i], this._textureStackType[i]);
-        }
-        else
-        {
-            this._textureStackUni[i].setValue(i);
-            this._cgl.setTexture(i, this._textureStackTex[i], this._textureStackType[i]);
+            let t = this._textureStackTex[i];
+            if (this._textureStackTexCgl[i])
+            {
+                t = this._textureStackTexCgl[i].tex || CGL.Texture.getEmptyTexture(this._cgl).tex;
+            }
+
+            if (!this._textureStackUni[i])
+            {
+                // throw(new Error('no uniform given to texturestack'));
+                console.log("no uniform for pushtexture", this._name);
+                this._cgl.setTexture(i, t, this._textureStackType[i]);
+            }
+            else
+            {
+                this._textureStackUni[i].setValue(i);
+                this._cgl.setTexture(i, t, this._textureStackType[i]);
+            }
         }
     }
 };
@@ -1560,9 +1568,11 @@ Shader.prototype.pushTexture = function (uniform, t, type)
     {
         return;
     }
-    if (!(t instanceof WebGLTexture))
+    if (!t.hasOwnProperty("tex") && !(t instanceof WebGLTexture))
     {
-        console.warn("[cgl_shader] invalid texture", t);
+        console.log(new Error("invalid texture").stack);
+
+        console.warn("[cgl_shader] invalid texture...", t);
         return;
     }
 
@@ -1571,10 +1581,10 @@ Shader.prototype.pushTexture = function (uniform, t, type)
 
     this._textureStackUni.push(uniform);
 
-    if (t.tex)
+    if (t.hasOwnProperty("tex"))
     {
         this._textureStackTexCgl.push(t);
-        this._textureStackTex.push(t.tex);
+        this._textureStackTex.push(null);
     }
     else
     {
