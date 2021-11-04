@@ -309,7 +309,6 @@ function loadBin(addCacheBuster)
 
     let url = op.patch.getFilePath(String(inFile.get()));
     if (addCacheBuster)url += "?rnd=" + CABLES.generateUUID();
-    console.log("gltf", url);
     finishedLoading = false;
     outLoading.set(true);
     const oReq = new XMLHttpRequest();
