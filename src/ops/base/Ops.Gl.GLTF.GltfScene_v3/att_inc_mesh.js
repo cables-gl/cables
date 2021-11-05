@@ -22,8 +22,12 @@ let gltfMesh = class
                 (geom) =>
                 {
                     this.setGeom(geom);
+
                     this.mesh = null;
                     gltf.loadingMeshes--;
+
+
+
 
                     if (finished)finished(this);
                 });
@@ -83,7 +87,10 @@ let gltfMesh = class
         if (attribs.hasOwnProperty("TEXCOORD_3"))tgeom.setAttribute("attrTexCoord3", gltf.accBuffers[attribs.TEXCOORD_3], 2);
         if (attribs.hasOwnProperty("TEXCOORD_4"))tgeom.setAttribute("attrTexCoord4", gltf.accBuffers[attribs.TEXCOORD_4], 2);
 
-        if (attribs.hasOwnProperty("WEIGHTS_0"))tgeom.setAttribute("attrWeights", gltf.accBuffers[attribs.WEIGHTS_0], 4);
+        if (attribs.hasOwnProperty("WEIGHTS_0"))
+        {
+            tgeom.setAttribute("attrWeights", gltf.accBuffers[attribs.WEIGHTS_0], 4);
+        }
         if (attribs.hasOwnProperty("JOINTS_0"))
         {
             if(!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");

@@ -59,20 +59,21 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 {
 
 	const attributeIDs = {
-		position: 'POSITION',
-		normal: 'NORMAL',
-		color: 'COLOR',
-		uv: 'TEX_COORD'
+		position: draco.POSITION,
+		normal: draco.NORMAL,
+		color: draco.COLOR,
+		uv: draco.TEX_COORD,
+		joints: draco.GENERIC,
+		weights: draco.GENERIC,
 	};
 	const attributeTypes = {
 		position: 'Float32Array',
 		normal: 'Float32Array',
 		color: 'Float32Array',
+		weights: 'Float32Array',
+		joints: 'Uint8Array',
 		uv: 'Float32Array'
 	};
-
-// const attributeIDs=[0,1,2];
-
 
 	const geometry = {
 		index: null,
@@ -83,45 +84,52 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 	for ( const attributeName in attributeIDs ) {
 
 		const attributeType = attributeTypes[ attributeName ];
-		let attribute;
-		let attributeID;
 
-
-		attributeID = decoder.GetAttributeId( dracoGeometry, count );
+		let attributeID = decoder.GetAttributeId( dracoGeometry, attributeIDs[attributeName] );
 		count++;
-		if ( attributeID === - 1 ) continue;
-
-		attribute = decoder.GetAttribute( dracoGeometry, attributeID );
-
-		geometry.attributes.push( decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute ) );
+		if ( attributeID != - 1 )
+		{
+    		let attribute = decoder.GetAttribute( dracoGeometry, attributeID );
+    		geometry.attributes.push( decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute ) );
+		}
 	}
 
 	if ( geometryType === draco.TRIANGULAR_MESH ) {
 		geometry.index = decodeIndex( draco, decoder, dracoGeometry );
 	}
 
-// 	console.log(geometry);
-
 	const geom=new CGL.Geometry("draco mesh "+name);
 
 	for(let i=0;i<geometry.attributes.length;i++)
 	{
-	    if(geometry.attributes[i].name=="position") geom.vertices=geometry.attributes[i].array;
-	    else if(geometry.attributes[i].name=="normal") geom.vertexNormals=geometry.attributes[i].array;
-	    else if(geometry.attributes[i].name=="uv") geom.texCoords=geometry.attributes[i].array;
-	   // else if(geometry.attributes[i].name=="color") geom.vertexColors=geometry.attributes[i].array;
-	    else console.log("unknown draco attrib" , geometry.attributes[i]);
+	    const attr=geometry.attributes[i];
+
+	    if(attr.name=="position") geom.vertices=attr.array;
+	    else if(attr.name=="normal") geom.vertexNormals=attr.array;
+	    else if(attr.name=="uv") geom.texCoords=attr.array;
+	    else if(attr.name=="weights")
+	    {
+	        const arr4=new Float32Array(attr.array.length/attr.itemSize*4);
+
+	        for(let k=0;k<attr.array.length/attr.itemSize;k++)
+	        {
+	            arr4[k*4+0]=arr4[k*4+1]=arr4[k*4+2]=arr4[k*4+3]=0;
+	            for(let j=0;j<attr.itemSize;j++)
+	            {
+	                arr4[k*4+j]=attr.array[k*attr.itemSize+j];
+	            }
+	        }
+	        geom.setAttribute("attrWeights", arr4, 4);
+	    }
+	    else if(attr.name=="joints")
+	    {
+	        geom.setAttribute("attrJoints", Array.from(attr.array), 4);
+	    }
+	    else console.log("unknown draco attrib" , attr);
 	}
 
 	geom.verticesIndices=geometry.index.array;
 
-// if(attribs.hasOwnProperty("POSITION"))geom.vertices=gltf.accBuffers[attribs.POSITION];
-// if(attribs.hasOwnProperty("NORMAL"))geom.vertexNormals=gltf.accBuffers[attribs.NORMAL];
-// if(attribs.hasOwnProperty("TEXCOORD_0"))geom.texCoords=gltf.accBuffers[attribs.TEXCOORD_0];
-// if(attribs.hasOwnProperty("TANGENT"))geom.tangents=gltf.accBuffers[attribs.TANGENT];
-// if(attribs.hasOwnProperty("COLOR_0"))geom.vertexColors=gltf.accBuffers[attribs.COLOR_0];
-
-    // console.log("geom",geom)
 
 
 	draco.destroy( dracoGeometry );
@@ -150,23 +158,28 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 
 		}
 
-		function decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute ) {
+		function decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute )
+		{
+            let bytesPerElement=4;
+            if(attributeType=="Float32Array")bytesPerElement=4;
+            else if(attributeType=="Uint8Array")bytesPerElement=1;
+            else console.log("unknown attrtype bytesPerElement",attributeType);
 
 			const numComponents = attribute.num_components();
 			const numPoints = dracoGeometry.num_points();
 			const numValues = numPoints * numComponents;
-			const byteLength = numValues * 4;//attributeType.BYTES_PER_ELEMENT;
+			const byteLength = numValues * bytesPerElement;
 			const dataType = getDracoDataType( draco, attributeType );
-
 			const ptr = draco._malloc( byteLength );
 
-            // console.log(attributeName,numComponents,attributeType,numPoints,"byteLength",byteLength,dataType)
-
-
-            if(attributeType!="Float32Array") console.log("draco unknown attrib type",attributeType);
-
 			decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
-			const array = new Float32Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
+
+			let array=null;
+
+
+			if(attributeType=="Float32Array") array = new Float32Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
+			else if(attributeType=="Uint8Array") array = new Uint8Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
+			else console.log("unknown attrtype",attributeType);
 
 			draco._free( ptr );
 
@@ -202,7 +215,6 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 
 				case "Uint32Array":
 					return draco.DT_UINT32;
-
 			}
 
 		}
