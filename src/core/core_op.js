@@ -482,7 +482,7 @@ const Op = function ()
                     "display": "dropdown",
                     "hidePort": true,
                     "type": "string",
-                    "values":values
+                    "values": values
                 },
                 n
             );
@@ -1101,7 +1101,7 @@ const Op = function ()
         Function.prototype.apply.apply(console.log, [console, args]);
     };
 
-    Op.prototype.error = function ()
+    Op.prototype.error = Op.prototype.logError = function ()
     {
         if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
@@ -1109,12 +1109,20 @@ const Op = function ()
         Function.prototype.apply.apply(console.error, [console, args]);
     };
 
-    Op.prototype.warn = function ()
+    Op.prototype.warn = Op.prototype.logWarn = function ()
     {
         if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.warn, [console, args]);
+    };
+
+    Op.prototype.verbose = Op.prototype.logVerbose = function ()
+    {
+        if (this.patch.silent) return;
+        const args = ["[op " + this._shortOpName + "]"];
+        args.push.apply(args, arguments);
+        Function.prototype.apply.apply(console.info, [console, args]);
     };
 
     /**

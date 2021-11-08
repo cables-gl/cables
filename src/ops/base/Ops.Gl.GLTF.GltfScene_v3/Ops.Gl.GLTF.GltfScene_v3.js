@@ -460,7 +460,7 @@ function hideNodesFromData()
         {
             const n = gltf.getNode(i);
             if (n) n.hidden = true;
-            else op.warn("node to be hidden not found", i, n);
+            else op.verbose("node to be hidden not found", i, n);
         }
     }
     hideNodesFromArray();

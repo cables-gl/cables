@@ -611,7 +611,6 @@ Port.prototype.setVariable = function (v)
 
 Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
 {
-    console.log("_handleNoTriggerOpAnimUpdates");
     let hasTriggerPort = false;
     for (let i = 0; i < this.parent.portsIn.length; i++)
     {
@@ -621,8 +620,6 @@ Port.prototype._handleNoTriggerOpAnimUpdates = function (a)
             break;
         }
     }
-
-    console.log("hasTriggerPort", hasTriggerPort, a);
 
     if (!hasTriggerPort)
     {
