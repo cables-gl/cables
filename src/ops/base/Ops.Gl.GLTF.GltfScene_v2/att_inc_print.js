@@ -414,7 +414,7 @@ function printInfo()
     tab = new CABLES.UI.Tab("GLTF", { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
     gui.mainTabs.addTab(tab, true);
     tab.html(html);
-
+    gui.maintabPanel.show(true);
     console.log(gltf);
 }
 

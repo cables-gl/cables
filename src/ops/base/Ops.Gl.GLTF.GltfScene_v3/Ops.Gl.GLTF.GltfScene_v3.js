@@ -233,7 +233,7 @@ function finishLoading()
 {
     if (gltf.loadingMeshes > 0)
     {
-        console.log("waiting for async meshes...");
+        // op.log("waiting for async meshes...");
         setTimeout(finishLoading, 100);
         return;
     }
