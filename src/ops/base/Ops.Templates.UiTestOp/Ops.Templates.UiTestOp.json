@@ -42,26 +42,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Warning 1",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Warning 2",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Slider",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
+            },
+            {
+                "type": 1,
+                "name": "op.log()"
             }
         ],
-        "name": "Ops.User.pandur.errortestop"
+        "portsOut": [],
+        "name": "Ops.Templates.UiTestOp"
     },
     "summary": "UI indicators example op",
     "issues": "",

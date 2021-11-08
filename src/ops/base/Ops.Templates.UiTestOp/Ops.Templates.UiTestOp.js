@@ -4,6 +4,7 @@ const inWarning1 = op.inBool("Warning 1", false);
 const inWarning2 = op.inBool("Warning 2", false);
 const innum = op.inFloatSlider("Slider", 0);
 const trig = op.inTrigger("trigger");
+const log = op.inTriggerButton("op.log()");
 
 trig.onTriggered = update;
 
@@ -37,3 +38,8 @@ function update()
 {
 
 }
+
+log.onTriggered = () =>
+{
+    op.log("op logging!!!!!");
+};
