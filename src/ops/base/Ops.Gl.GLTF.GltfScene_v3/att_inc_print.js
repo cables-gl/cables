@@ -130,6 +130,7 @@ function printMaterial(mat, idx)
 
 function printInfo()
 {
+    console.log("printInfo", gltf);
     if (!gltf) return;
 
     const startTime = performance.now();
@@ -208,25 +209,22 @@ function printInfo()
 
 
         html += "<td>";
-        let count=0;
-        let nodename="";
+        let count = 0;
+        let nodename = "";
         for (var j = 0; j < gltf.json.nodes.length; j++)
         {
-
-            if(gltf.json.nodes[j].mesh==i)
+            if (gltf.json.nodes[j].mesh == i)
             {
                 count++;
-                if (count==1 )
+                if (count == 1)
                 {
-                    nodename = gltf.json.nodes[j].name
+                    nodename = gltf.json.nodes[j].name;
                 }
-
             }
         }
-        if(count>1) html+=(count)+" nodes ("+nodename+" ...)";
-        else html+=nodename;
+        if (count > 1) html += (count) + " nodes (" + nodename + " ...)";
+        else html += nodename;
         html += "</td>";
-
 
 
         html += "<td>";
@@ -234,14 +232,14 @@ function printInfo()
         {
             if (gltf.json.meshes[i].primitives[j].material)
             {
-                html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name+" ";
+                html += gltf.json.materials[gltf.json.meshes[i].primitives[j].material].name + " ";
             }
             else html += "None";
         }
         html += "</td>";
 
         html += "<td>";
-        let numVerts=0;
+        let numVerts = 0;
         for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
             // html+=gltf.json.meshes[i].primitives[j].indices;
@@ -250,13 +248,13 @@ function printInfo()
                 numVerts += parseInt(gltf.json.accessors[gltf.json.meshes[i].primitives[j].attributes.POSITION].count);
             }
         }
-        html+=numVerts;
+        html += numVerts;
         html += "</td>";
 
         html += "<td>";
-        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            if(j>0)html+=", ";
+            if (j > 0)html += ", ";
             html += Object.keys(gltf.json.meshes[i].primitives[j].attributes);
         }
         html += "</td>";
@@ -264,9 +262,9 @@ function printInfo()
         html += "</tr>";
 
 
-        for (var j = 0; j < gltf.json.meshes[i].primitives.length; j++)
+        for (let j = 0; j < gltf.json.meshes[i].primitives.length; j++)
         {
-            var bufView = gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
+            let bufView = gltf.json.accessors[gltf.json.meshes[i].primitives[j].indices].bufferView;
 
             if (sizeBufferViews.indexOf(bufView) == -1)
             {
@@ -277,12 +275,12 @@ function printInfo()
             for (let k in gltf.json.meshes[i].primitives[j].attributes)
             {
                 const attr = gltf.json.meshes[i].primitives[j].attributes[k];
-                const bufView = gltf.json.accessors[attr].bufferView;
+                const bufView2 = gltf.json.accessors[attr].bufferView;
 
-                if (sizeBufferViews.indexOf(bufView) == -1)
+                if (sizeBufferViews.indexOf(bufView2) == -1)
                 {
-                    sizeBufferViews.push(bufView);
-                    if (gltf.json.bufferViews[bufView])sizes.meshes += gltf.json.bufferViews[bufView].byteLength;
+                    sizeBufferViews.push(bufView2);
+                    if (gltf.json.bufferViews[bufView2])sizes.meshes += gltf.json.bufferViews[bufView2].byteLength;
                 }
             }
         }
@@ -304,18 +302,18 @@ function printInfo()
 
         sizes.animations = 0;
 
-        for (var i = 0; i < gltf.json.animations.length; i++)
+        for (let i = 0; i < gltf.json.animations.length; i++)
         {
-            for (var j = 0; j < gltf.json.animations[i].samplers.length; j++)
+            for (let j = 0; j < gltf.json.animations[i].samplers.length; j++)
             {
-                var bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
+                let bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].input].bufferView;
                 if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);
                     sizes.animations += gltf.json.bufferViews[bufView].byteLength;
                 }
 
-                var bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].output].bufferView;
+                bufView = gltf.json.accessors[gltf.json.animations[i].samplers[j].output].bufferView;
                 if (sizeBufferViews.indexOf(bufView) == -1)
                 {
                     sizeBufferViews.push(bufView);
@@ -324,7 +322,7 @@ function printInfo()
             }
 
 
-            for (var j = 0; j < gltf.json.animations[i].channels.length; j++)
+            for (let j = 0; j < gltf.json.animations[i].channels.length; j++)
             {
                 html += "<tr>";
                 html += "  <td>" + gltf.json.animations[i].name + " (" + i + ")</td>";
@@ -449,8 +447,8 @@ function printInfo()
 
     let sizeBin = 0;
 
-    if(gltf.json.buffers)
-        sizeBin=gltf.json.buffers[0].byteLength;
+    if (gltf.json.buffers)
+        sizeBin = gltf.json.buffers[0].byteLength;
 
     html += "<h3>Binary Data (" + readableSize(sizeBin) + ")</h3>";
 
@@ -484,17 +482,12 @@ function printInfo()
     html += "</table>";
     html += "</div>";
 
-    // CABLES.UI.MODAL.show(html);
-
-    // closeTab();
     tab = new CABLES.UI.Tab("GLTF", { "icon": "cube", "infotext": "tab_gltf", "padding": true, "singleton": true });
     gui.mainTabs.addTab(tab, true);
 
     tab.addEventListener("onClose", closeTab);
-
     tab.html(html);
-
-    // console.log(gltf);
+    gui.maintabPanel.show(true);
 }
 
 function readableSize(n)

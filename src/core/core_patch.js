@@ -46,7 +46,7 @@ const Patch = function (cfg)
         "glCanvasResizeToWindow": false,
         "prefixAssetPath": "",
         "prefixJsPath": "",
-        "silent": false,
+        "silent": true,
         "onError": null,
         "onFinishedLoading": null,
         "onFirstFrameRendered": null,

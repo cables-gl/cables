@@ -1,3 +1,5 @@
+// when doing a new version: remove smoothing
+
 const
     active = op.inValueBool("Active", true),
     relative = op.inValueBool("relative"),

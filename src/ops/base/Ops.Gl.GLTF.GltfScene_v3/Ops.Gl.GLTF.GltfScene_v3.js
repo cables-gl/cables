@@ -233,7 +233,7 @@ function finishLoading()
 {
     if (gltf.loadingMeshes > 0)
     {
-        console.log("waiting for async meshes...");
+        // op.log("waiting for async meshes...");
         setTimeout(finishLoading, 100);
         return;
     }
@@ -460,7 +460,7 @@ function hideNodesFromData()
         {
             const n = gltf.getNode(i);
             if (n) n.hidden = true;
-            else op.warn("node to be hidden not found", i, n);
+            else op.verbose("node to be hidden not found", i, n);
         }
     }
     hideNodesFromArray();
