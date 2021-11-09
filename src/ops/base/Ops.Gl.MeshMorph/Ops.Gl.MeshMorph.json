@@ -3,65 +3,60 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Geometry",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Duration",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "smooth",
-                "subType": "boolean"
-            },
-            {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 0"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 1"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 2"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 3"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 4"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 5"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 6"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Geometry 7"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Finished",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],

@@ -4,8 +4,8 @@ MOD_pos=(pos).xyz;
 
 
 
-float tx=mod(attrVertIndex,MOD_texSize);
-float ty=float(int((attrVertIndex/MOD_texSize)));
+float tx=mod(attrVertIndex,MOD_texSize)+1.0/MOD_texSize;
+float ty=floor(attrVertIndex/MOD_texSize);
 
 
 // viewMatrix=mat4(0.0);

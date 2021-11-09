@@ -9,27 +9,34 @@ const
     g = op.inValue("g", 1),
     b = op.inValue("b", 1),
     a = op.inValue("a", 1),
+    inTexMask = op.inTexture("Mask"),
     trigger = op.outTrigger("trigger");
 
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, op.name);
 
 shader.setSource(shader.getDefaultVertexShader(), attachments.rgbmul_frag);
-const textureUniform = new CGL.Uniform(shader, "t", "tex", 0);
-const uniformR = new CGL.Uniform(shader, "f", "r", r);
-const uniformG = new CGL.Uniform(shader, "f", "g", g);
-const uniformB = new CGL.Uniform(shader, "f", "b", b);
-const uniformA = new CGL.Uniform(shader, "f", "a", a);
+const
+    textureUniform = new CGL.Uniform(shader, "t", "tex", 0),
+    textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 1),
+    uniformR = new CGL.Uniform(shader, "f", "r", r),
+    uniformG = new CGL.Uniform(shader, "f", "g", g),
+    uniformB = new CGL.Uniform(shader, "f", "b", b),
+    uniformA = new CGL.Uniform(shader, "f", "a", a);
 
 chanR.onChange =
+    inTexMask.onChange =
     chanG.onChange =
     chanB.onChange =
     chanA.onChange =
     inOp.onChange = updateDefines;
+
 updateDefines();
 
 function updateDefines()
 {
+    shader.toggleDefine("MOD_MASK", inTexMask.get());
+
     shader.toggleDefine("MOD_OP_SUB_CX", inOp.get() === "c-x");
     shader.toggleDefine("MOD_OP_SUB_XC", inOp.get() === "x-c");
 
@@ -62,6 +69,7 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
+    if (inTexMask.get())cgl.setTexture(1, inTexMask.get().tex);
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

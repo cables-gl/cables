@@ -104,5 +104,9 @@ void main()
 
     if (col.a <= 0.0) discard;
 
+    #ifdef HAS_TEXTURE_COLORIZE
+        col=colorize;
+    #endif
+
     outColor = col;
 }

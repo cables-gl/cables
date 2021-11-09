@@ -89,6 +89,11 @@
             {
                 "type": 2,
                 "name": "Children"
+            },
+            {
+                "type": 0,
+                "name": "Index",
+                "subType": "number"
             }
         ],
         "name": "Ops.Sidebar.Presets_v2"
