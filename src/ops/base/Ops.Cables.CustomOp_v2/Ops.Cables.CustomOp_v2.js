@@ -181,15 +181,17 @@ const execute = () =>
                 this.fireEvent("onPortRemoved", {});
             }
             evalFunction(this);
-            if (!wasPasted)
+
+            op.portsIn.forEach((port) =>
             {
-                op.portsIn.forEach((port) =>
+                if (!protectedPorts.includes(port.id))
                 {
-                    if (!protectedPorts.includes(port.id))
+                    port.onLinkChanged = savePortData;
+
+                    if (!wasPasted)
                     {
                         if (oldLinksIn[port.name])
                         {
-                            port.onLinkChanged = savePortData;
                             oldLinksIn[port.name].forEach((link) =>
                             {
                                 op.patch.link(op, port.name, link.op, link.portName);
@@ -199,22 +201,24 @@ const execute = () =>
                         if (oldValuesIn[port.name])
                         {
                             port.set(oldValuesIn[port.name]);
-                            port.onLinkChanged = savePortData;
                         }
                     }
-                });
-                op.portsOut.forEach((port) =>
+                }
+            });
+            op.portsOut.forEach((port) =>
+            {
+                port.onLinkChanged = savePortData;
+                if (!wasPasted)
                 {
                     if (oldLinksOut[port.name])
                     {
-                        port.onLinkChanged = savePortData;
                         oldLinksOut[port.name].forEach((link) =>
                         {
                             op.patch.link(op, port.name, link.op, link.portName);
                         });
                     }
-                });
-            }
+                }
+            });
             if (wasPasted)
             {
                 wasPasted = false;
@@ -333,6 +337,7 @@ const restorePorts = () =>
     {
         const oldPortIn = oldPorts.portsIn[portInKeys[i]];
         const newPort = op.addInPort(new CABLES.Port(op, oldPortIn.name, oldPortIn.type));
+
         if (!wasPasted && Array.isArray(oldPortIn.links))
         {
             oldPortIn.links.forEach((link) =>
