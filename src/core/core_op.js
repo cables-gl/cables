@@ -134,6 +134,7 @@ const Op = function ()
         {
             console.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
         }
+
         // if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
         // if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
@@ -482,7 +483,7 @@ const Op = function ()
                     "display": "dropdown",
                     "hidePort": true,
                     "type": "string",
-                    "values":values
+                    "values": values
                 },
                 n
             );
@@ -1096,25 +1097,39 @@ const Op = function ()
     Op.prototype.log = function ()
     {
         if (this.patch.silent) return;
-        const args = ["[op " + this._shortOpName + "]"];
+        const initiator = "op " + this._shortOpName;
+        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(this.name, ...arguments)) return;
+
+        const args = ["[" + initiator + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.log, [console, args]);
     };
 
-    Op.prototype.error = function ()
+    Op.prototype.error = Op.prototype.logError = function ()
     {
-        if (this.patch.silent) return;
+        // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.error, [console, args]);
     };
 
-    Op.prototype.warn = function ()
+    Op.prototype.warn = Op.prototype.logWarn = function ()
     {
-        if (this.patch.silent) return;
+        // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.warn, [console, args]);
+    };
+
+    Op.prototype.verbose = Op.prototype.logVerbose = function ()
+    {
+        if (this.patch.silent) return;
+        const initiator = "op " + this._shortOpName;
+        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(this.name, ...arguments)) return;
+
+        const args = ["[" + initiator + "]"];
+        args.push.apply(args, arguments);
+        Function.prototype.apply.apply(console.info, [console, args]);
     };
 
     /**

@@ -140,7 +140,7 @@ function mute(b)
 function updateStateError()
 {
     outState.set(audioCtx.state);
-    console.log("audioCtx.state change", audioCtx.state);
+    op.logVerbose("audioCtx.state change", audioCtx.state);
 
     if (audioCtx.state == "suspended") op.setUiError("ctxSusp", "Your Browser suspended audio context, use playButton op to play audio after a user interaction");
     else op.setUiError("ctxSusp", null);

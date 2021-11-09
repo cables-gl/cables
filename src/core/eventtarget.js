@@ -84,6 +84,7 @@ const EventTarget = function ()
         }
 
         console.warn("[eventtarget] old function signature: removeEventListener! use listener id");
+        console.log((new Error()).stack);
 
         let index = null;
         for (let i = 0; i < this._eventCallbacks[which].length; i++)

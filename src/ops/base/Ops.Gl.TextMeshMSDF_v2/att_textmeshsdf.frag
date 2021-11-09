@@ -84,10 +84,10 @@ void main()
     opacity *= clamp(sigDist + 0.5, 0.0, 1.0);
 
     #ifdef BORDER
-        float sigDist1 = median(smpl.r, smpl.g, smpl.b) - 0.01;
+        float sigDist2 = median(smpl.r, smpl.g, smpl.b) - 0.01;
         float bw=borderWidth*0.6+0.24;
-        float opacity1 = smoothstep(bw-borderSmooth,bw+borderSmooth,sigDist1*sigDist1);
-        fgColor=mix(fgColor,vec4(colorBorder,1.0),1.0-opacity1);
+        float opacity2 = smoothstep(bw-borderSmooth,bw+borderSmooth,sigDist2*sigDist2);
+        fgColor=mix(fgColor,vec4(colorBorder,1.0),1.0-opacity2);
     #endif
 
     if(color.a==0.0)discard;

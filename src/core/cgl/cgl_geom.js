@@ -399,7 +399,7 @@ Geometry.prototype.calcTangentsBitangents = function ()
     }
     if (!this.texCoords.length)
     {
-        console.warn("No texcoords. Replacing with default values [0, 0].");
+        // console.warn("No texcoords. Replacing with default values [0, 0].");
         const texCoordLength = (this.vertices.length / 3) * 2;
         this.texCoords = new Float32Array(texCoordLength);
         for (let i = 0; i < texCoordLength; i += 1) this.texCoords[i] = 0;

@@ -206,7 +206,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
     this._cgl.profileData.profileMeshAttributes += numItems || 0;
 
-    if (numItems === 0) console.warn("CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
+    if (numItems === 0) console.warn(CABLES.patch.cgl.canvas.id + "CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
 
     if (typeof options == "function")
     {
