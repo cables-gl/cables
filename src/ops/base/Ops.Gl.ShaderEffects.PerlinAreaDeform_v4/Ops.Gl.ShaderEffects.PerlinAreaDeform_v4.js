@@ -6,7 +6,7 @@ const
     inStrength = op.inValueFloat("Strength", 1),
     inCalcNormals = op.inValueBool("Calc Normals", false),
     inFalloff = op.inValueSlider("Falloff", 0.5),
-    output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", , "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
+    output = op.inValueSelect("Output", ["Mul Normal", "Mul Z", "Mul XYZ",, "Mul Norm Y", "Add XYZ", "Add X", "Add Y", "Add Z"], "Add XYZ"),
     inPos = op.inSwitch("Source", ["Pos", "Orig Pos"], "Pos"),
     // inInstancer = op.inBool("For Instancing", false),
     x = op.inValueFloat("x"),
@@ -30,7 +30,7 @@ const mscaleUni = null;
 inWorldSpace.onChange = updateWorldspace;
 
 mod.addModule({
-    // "priority": -6,
+    "priority": 6,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": attachments.perlindeform_vert,
@@ -89,6 +89,7 @@ function updateOutput()
 {
     mod.toggleDefine("POS_ATTR", inPos.get() == "Orig Pos");
 
+    mod.toggleDefine("MOD_METH_MUL_XYZ", output.get() == "Mul XYZ");
     mod.toggleDefine("MOD_METH_ADD_XYZ", output.get() == "Add XYZ");
     mod.toggleDefine("MOD_METH_ADD_Z", output.get() == "Add Z");
     mod.toggleDefine("MOD_METH_MUL_Z", output.get() == "Mul Z");

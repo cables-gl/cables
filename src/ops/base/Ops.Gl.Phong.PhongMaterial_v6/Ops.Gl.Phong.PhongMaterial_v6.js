@@ -904,22 +904,22 @@ inTrigger.onTriggered = function ()
 
     shader.popTextures();
 
-    if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get().tex);
-    if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get().tex);
-    if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get().tex);
-    if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get().tex);
-    if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get().tex);
-    if (inEmissiveMaskTexture.get()) shader.pushTexture(emissiveMaskTextureUniform, inEmissiveMaskTexture.get().tex);
-    if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get().tex);
+    if (inDiffuseTexture.get()) shader.pushTexture(diffuseTextureUniform, inDiffuseTexture.get());
+    if (inSpecularTexture.get()) shader.pushTexture(specularTextureUniform, inSpecularTexture.get());
+    if (inNormalTexture.get()) shader.pushTexture(normalTextureUniform, inNormalTexture.get());
+    if (inAoTexture.get()) shader.pushTexture(aoTextureUniform, inAoTexture.get());
+    if (inEmissiveTexture.get()) shader.pushTexture(emissiveTextureUniform, inEmissiveTexture.get());
+    if (inEmissiveMaskTexture.get()) shader.pushTexture(emissiveMaskTextureUniform, inEmissiveMaskTexture.get());
+    if (inAlphaTexture.get()) shader.pushTexture(alphaTextureUniform, inAlphaTexture.get());
     if (inEnvTexture.get())
     {
         if (inEnvTexture.get().cubemap) shader.pushTexture(envTextureUniform, inEnvTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-        else shader.pushTexture(envTextureUniform, inEnvTexture.get().tex);
+        else shader.pushTexture(envTextureUniform, inEnvTexture.get());
     }
 
     if (inLuminanceMaskTexture.get())
     {
-        shader.pushTexture(luminanceTextureUniform, inLuminanceMaskTexture.get().tex);
+        shader.pushTexture(luminanceTextureUniform, inLuminanceMaskTexture.get());
     }
 
     updateLights();

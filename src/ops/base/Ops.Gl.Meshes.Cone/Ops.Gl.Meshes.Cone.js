@@ -37,7 +37,7 @@ render.onTriggered = function ()
         trigger.trigger();
         return;
     }
-    mesh.render(cgl.getShader());
+    // mesh.render(cgl.getShader());
     trigger.trigger();
 };
 

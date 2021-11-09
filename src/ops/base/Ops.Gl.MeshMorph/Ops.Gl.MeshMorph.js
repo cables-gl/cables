@@ -1,12 +1,11 @@
+const
+    render = op.inTrigger("render"),
+    nextGeom = op.inValueInt("Geometry"),
+    duration = op.inValue("Duration", 1.0),
+    finished = op.outValue("Finished"),
+    trigger = op.outTrigger("trigger");
+
 const cgl = op.patch.cgl;
-
-const render = op.inTrigger("render");
-
-const nextGeom = op.inValueInt("Geometry");
-const duration = op.inValue("Duration", 1.0);
-
-const finished = op.outValue("Finished");
-
 let mesh = null;
 const inGeoms = [];
 nextGeom.onChange = updateGeom;
@@ -14,11 +13,7 @@ nextGeom.onChange = updateGeom;
 let oldGeom = 0;
 const anim = new CABLES.Anim();
 anim.clear();
-
-const trigger = op.outTrigger("trigger");
-
-const calcVertexNormals = op.inValueBool("smooth");
-calcVertexNormals.set(true);
+anim.createPort(op, "Easing", updateGeom);
 
 const geoms = [];
 // var mesh=null;

@@ -3,39 +3,38 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Execute"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Red",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Green",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Blue",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Alpha",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Next"
             }
         ],
         "name": "Ops.Gl.ColorMask"
     },
-    "updated": 1542701294712,
     "authorName": "pandur",
     "id": "44433419-dcf4-46e6-8f40-d331598029ac",
     "created": 1542701267377,

@@ -4,6 +4,7 @@ const siblingsPort = op.outObject("Children");
 
 const inAddPreset = op.inTriggerButton("Add Preset");
 const inUpdatePreset = op.inTriggerButton("Update current Preset");
+const outIndex = op.outNumber("Index");
 
 inAddPreset.onTriggered = addPreset;
 inUpdatePreset.onTriggered = updatePreset;
@@ -38,15 +39,23 @@ for (let i = 0; i < MAX_PRESETS; i++)
 
 selectList.onchange = function ()
 {
+    outIndex.set(selectList.selectedIndex);
     setSidebar(selectList.options[selectList.selectedIndex].value);
 };
 
-op.init = function ()
+op.patch.addEventListener("patchLoadEnd", initialize);
+op.init = initialize;
+
+function initialize()
 {
-    for (let i = 0; i < MAX_PRESETS; i++)
-        if (presetPorts[i].isLinked())
-            return setSidebar(0);
-};
+    setTimeout(() =>
+    {
+        for (let i = 0; i < MAX_PRESETS; i++)
+            if (presetPorts[i].isLinked())
+                setSidebar(i);
+        setSidebar(0);
+    }, 1000);
+}
 
 function updateSelect()
 {
@@ -222,7 +231,6 @@ function addPreset()
     newOp.getPortByName("JSON String").set(JSON.stringify(r));
 
     if (CABLES.UI) gui.patchView.centerSelectOp(newOp.id);
-
 
     op.patch.link(op, freePort.name, newOp, "Result");
 }

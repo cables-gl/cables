@@ -14,7 +14,7 @@ el.classList.add("sidebar__item");
 el.classList.add("sidebar__text");
 const label = document.createElement("div");
 label.classList.add("sidebar__item-label");
-const labelText = document.createTextNode(labelPort.get());
+const labelText = document.createElement("div");// document.createTextNode(labelPort.get());
 label.appendChild(labelText);
 el.appendChild(label);
 
@@ -36,7 +36,7 @@ function onIdChanged()
 function onLabelTextChanged()
 {
     const labelText = labelPort.get();
-    label.textContent = labelText;
+    label.innerHTML = labelText;
     if (CABLES.UI)
     {
         if (labelText && typeof labelText === "string")

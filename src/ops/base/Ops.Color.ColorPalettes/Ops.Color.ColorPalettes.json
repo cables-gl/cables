@@ -3,23 +3,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Index",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Smooth",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             },
             {
-                "type": "3",
+                "type": 3,
                 "name": "Color Array"
             }
         ],
@@ -44,7 +45,6 @@
             }
         ]
     },
-    "updated": 1541327478296,
     "created": 1523828824965,
     "issues": "",
     "collections": null,

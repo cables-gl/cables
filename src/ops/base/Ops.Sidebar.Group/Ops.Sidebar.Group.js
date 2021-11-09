@@ -17,11 +17,11 @@ inVisible.onChange = function ()
 // vars
 var el = document.createElement("div");
 el.dataset.op = op.id;
-el.classList.add("cablesEle");
 el.classList.add("sidebar__group");
 onDefaultMinimizedPortChanged();
 let header = document.createElement("div");
 header.classList.add("sidebar__group-header");
+header.classList.add("cablesEle");
 el.appendChild(header);
 header.addEventListener("click", onClick);
 let headerTitle = document.createElement("div");

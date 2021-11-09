@@ -15,7 +15,7 @@ let numVerts = 0;
 
 const mod = new CGL.ShaderModifier(cgl, op.name);
 mod.addModule({
-    "priority": 0,
+    // "priority": 111,
     "title": op.name,
     "name": "MODULE_VERTEX_POSITION",
     "srcHeadVert": "",
@@ -66,7 +66,7 @@ function doRender()
 
 function setupMesh()
 {
-    if (inNum.get() === 0 || !inTex.get()) return;
+    if (!inTex.get()) return;
 
     const num = inTex.get().width * inTex.get().height;
 
