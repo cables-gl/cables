@@ -48,7 +48,7 @@ const
     uniHeight = new CGL.Uniform(shader, "f", "canvasHeight", cgl.canvasHeight),
     textureUniform = new CGL.Uniform(shader, "t", "diffTex"),
     textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize"),
-    textureOpacityUniform = new CGL.Uniform(shader, "t", "TextureOpacity"),
+    textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity"),
     textureColoPointSize = new CGL.Uniform(shader, "t", "texPointSize"),
     texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize"),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask");
