@@ -49,7 +49,7 @@ const
     textureUniform = new CGL.Uniform(shader, "t", "diffTex"),
     textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize"),
     textureOpacityUniform = new CGL.Uniform(shader, "t", "TextureOpacity"),
-    textureColoPointSize = new CGL.Uniform(shader, "t", "texColorize"),
+    textureColoPointSize = new CGL.Uniform(shader, "t", "texPointSize"),
     texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize"),
     textureMaskUniform = new CGL.Uniform(shader, "t", "texMask");
 
