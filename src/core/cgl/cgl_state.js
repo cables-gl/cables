@@ -556,11 +556,11 @@ const Context = function (_patch)
             this._textureslots[slot] = t;
         }
 
-        if (!this.gl.isTexture(t))
-        {
-            this._log.warn("not a texture!!!!");
-            return false;
-        }
+        // if (!this.gl.isTexture(t))
+        // {
+        //     this._log.warn("not a texture!!!!");
+        //     return false;
+        // }
 
         return true;
     };

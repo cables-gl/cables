@@ -1194,7 +1194,7 @@ const Op = function ()
         if (!this._instances || this._instances.length != this.patch.instancing.numCycles())
         {
             if (!this._instances) this._instances = [];
-            Log.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
+            this._.log("creating instances of ", this.objName, this.patch.instancing.numCycles(), this._instances.length);
             this._instances.length = this.patch.instancing.numCycles();
 
             for (i = 0; i < this._instances.length; i++)
