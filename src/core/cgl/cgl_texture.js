@@ -132,8 +132,8 @@ Texture.prototype.clone = function ()
     if (!this.compareSettings(newTex))
     {
         this._log.error("Cloned texture settings do not compare!");
-        Log.log(this);
-        Log.log(newTex);
+        this._log.error(this);
+        this._log.error(newTex);
     }
 
     return newTex;
@@ -381,7 +381,7 @@ Texture.prototype.isPowerOfTwo = function ()
 
 Texture.prototype.printInfo = function ()
 {
-    Log.log(this.getInfo());
+    console.log(this.getInfo());
 };
 
 Texture.prototype.getInfoReadable = function ()
@@ -459,21 +459,20 @@ Texture.prototype._setFilter = function ()
 
     if (this.shadowMap)
     {
-        Log.log("shadowmap tex");
+        this._log.log("shadowmap tex");
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        Log.log("texture: HDR and mipmap filtering at the same time is not possible");
+        this._log.log("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
-        Log.stack();
+        this._log.stack();
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
     {
-        // Log.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
@@ -518,7 +517,7 @@ Texture.prototype._setFilter = function ()
         }
         else
         {
-            Log.log("unknown texture filter!", this.filter);
+            this._log.log("unknown texture filter!", this.filter);
             throw new Error("unknown texture filter!" + this.filter);
         }
 
