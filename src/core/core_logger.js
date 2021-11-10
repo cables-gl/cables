@@ -1,10 +1,9 @@
 /* eslint-disable no-console */
 
-export default class Logger extends CABLES.EventTarget
+export default class Logger
 {
     constructor(initiator)
     {
-        super();
         this._logs = [];
         this.initiator = initiator;
     }
