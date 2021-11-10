@@ -1,7 +1,9 @@
+import Logger from "./core_logger";
 import { Log } from "./log";
 
 const EventTarget = function ()
 {
+    this._log = new Logger("eventtaget");
     this._eventCallbacks = {};
     this._logName = "";
     this._logEvents = false;
@@ -33,7 +35,7 @@ const EventTarget = function ()
         }
         else
         {
-            console.warn("old eventtarget function haseventlistener!");
+            this._log.warn("old eventtarget function haseventlistener!");
             if (which && cb)
             {
                 if (this._eventCallbacks[which])
@@ -83,8 +85,8 @@ const EventTarget = function ()
             return;
         }
 
-        console.warn("[eventtarget] old function signature: removeEventListener! use listener id");
-        console.log((new Error()).stack);
+        this._log.warn(" old function signature: removeEventListener! use listener id");
+        this._log.stack();
 
         let index = null;
         for (let i = 0; i < this._eventCallbacks[which].length; i++)
@@ -95,7 +97,7 @@ const EventTarget = function ()
         {
             delete this._eventCallbacks[index];
         }
-        else console.warn("[removeEventListener] not found " + which);
+        else this._log.warn("removeEventListener not found " + which);
     };
 
     this.logEvents = function (enabled, name)
@@ -106,7 +108,7 @@ const EventTarget = function ()
 
     this.emitEvent = function (which, param1, param2, param3, param4, param5, param6)
     {
-        if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks);
+        if (this._logEvents) console.log("[event] ", this._logName, which, this._eventCallbacks); // eslint-disable-line
 
         if (this._eventCallbacks[which])
         {
@@ -121,7 +123,7 @@ const EventTarget = function ()
         else
         {
             // Log.warn("has no event callback",which,this._eventCallbacks);
-            if (this._logEvents) console.log("[event] has no event callback", which, this._eventCallbacks);
+            if (this._logEvents) console.log("[event] has no event callback", which, this._eventCallbacks); // eslint-disable-line
         }
     };
 };

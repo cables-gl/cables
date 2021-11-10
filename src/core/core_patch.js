@@ -10,6 +10,7 @@ import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
 import { Log } from "./log";
+import Logger from "./core_logger";
 
 
 /**
@@ -40,6 +41,7 @@ const Patch = function (cfg)
 {
     EventTarget.apply(this);
 
+    this._log = new Logger("core_patch");
     this.ops = [];
     this.settings = {};
     this.config = cfg || {
@@ -58,7 +60,7 @@ const Patch = function (cfg)
     this.animFrameOps = [];
     this.animFrameCallbacks = [];
     this.gui = false;
-    this.silent = false;
+    CABLES.logSilent = this.silent = false;
     this.profiler = null;
     // this.onLoadStart = null;
     this.aborted = false;
@@ -91,11 +93,11 @@ const Patch = function (cfg)
     this._lastFrameTime = 0;
     this._frameWasdelayed = true;
 
-    if (!(function () { return !this; }())) console.log("not in strict mode: core patch");
+    if (!(function () { return !this; }())) this._log.warn("not in strict mode: core patch");
 
     this._isLocal = document.location.href.indexOf("file:") === 0;
 
-    Log.setSilent(this.config.silent);
+    this.silent = CABLES.logSilent = this.config.silent;
 
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
@@ -149,7 +151,7 @@ const Patch = function (cfg)
         this.timer.play();
     }
 
-    console.log("made with https://cables.gl");
+    console.log("made with https://cables.gl"); // eslint-disable-line
 };
 
 Patch.prototype.isPlaying = function ()
@@ -367,13 +369,12 @@ Patch.prototype.createOp = function (identifier, id)
                 else if (parts.length == 8) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]](this, objName, id);
                 else if (parts.length == 9) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]](this, objName, id);
                 else if (parts.length == 10) op = new window[parts[0]][parts[1]][parts[2]][parts[3]][parts[4]][parts[5]][parts[6]][parts[7]][parts[8]][parts[9]](this, objName, id);
-                else Log.log("parts.length", parts.length);
+                else this._log.warn("parts.length", parts.length);
             }
 
             if (op)
             {
                 op.opId = null;
-                // Log.log("op created by objName:",objName);
                 for (const i in CABLES.OPS)
                 {
                     if (CABLES.OPS[i].objName == objName) op.opId = i;
@@ -384,13 +385,12 @@ Patch.prototype.createOp = function (identifier, id)
     catch (e)
     {
         this._crashedOps.push(objName);
-        console.error(e);
+        this._log.error(e);
         this.emitEvent("exceptionOp", e, objName);
 
         if (!this.isEditorMode())
         {
-            Log.log(e);
-            Log.error("[instancing error] " + objName, e);
+            this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
             this.exitError("INSTANCE_ERR", "Instancing Error " + objName, e);
@@ -405,7 +405,7 @@ Patch.prototype.createOp = function (identifier, id)
     }
     else
     {
-        console.log("no op was created!?");
+        this._log.log("no op was created!?", identifier, id);
     }
     return op;
 };
@@ -438,7 +438,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
 
         if (this._opIdCache[op.id])
         {
-            console.warn("opid with id " + op.id + " already exists in patch!");
+            this._log.warn("opid with id " + op.id + " already exists in patch!");
             return;
         }
 
@@ -451,7 +451,7 @@ Patch.prototype.addOp = function (opIdentifier, uiAttribs, id, fromDeserialize)
     }
     else
     {
-        console.error("addop: no op.....");
+        this._log.error("addop: no op.....");
     }
 
     return op;
@@ -546,7 +546,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
         }
     }
 
-    if (!found)console.log("core patch deleteop: not found...");
+    if (!found) this._log.warn("core patch deleteop: not found...");
 };
 
 Patch.prototype.getFrameNum = function ()
@@ -673,12 +673,12 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 {
     if (!op1)
     {
-        Log.log("link: op1 is null ");
+        this._log.warn("link: op1 is null ");
         return;
     }
     if (!op2)
     {
-        Log.log("link: op2 is null");
+        this._log.warn("link: op2 is null");
         return;
     }
 
@@ -687,13 +687,13 @@ Patch.prototype.link = function (op1, port1Name, op2, port2Name, lowerCase, from
 
     if (!port1)
     {
-        console.warn("port not found! " + port1Name + "(" + op1.objName + ")");
+        this._log.warn("port not found! " + port1Name + "(" + op1.objName + ")");
         return;
     }
 
     if (!port2)
     {
-        console.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
+        this._log.warn("port not found! " + port2Name + " of " + op2.name + "(" + op2.objName + ")");
         return;
     }
 
@@ -840,7 +840,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                     oldOp.portsIn[j].links[0].remove();
 
                     l = self.link(op, oldName, oldOutOp, oldOutName);
-                    if (!l) Log.log("[reloadOp] relink after op reload not successfull for port " + oldOutName);
+                    if (!l) this._log.warn("[reloadOp] relink after op reload not successfull for port " + oldOutName);
                     else l.setValue();
                 }
             }
@@ -856,7 +856,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 oldOp.portsOut[j].links[0].remove();
 
                 l = self.link(op, oldNewName, oldInOp, oldInName);
-                if (!l) Log.log("relink after op reload not successfull for port " + oldInName);
+                if (!l) this._log.warn("relink after op reload not successfull for port " + oldInName);
                 else l.setValue();
             }
         }
@@ -916,7 +916,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
 
     const reqs = new Requirements(this);
 
-    // Log.log('add ops ',obj.ops);
     // add ops...
     for (const iop in obj.ops)
     {
@@ -931,8 +930,8 @@ Patch.prototype.deSerialize = function (obj, genIds)
         }
         catch (e)
         {
-            // console.warn("something gone wrong");
-            console.warn("[instancing error] op data:", opData, e);
+            // this._log.warn("something gone wrong");
+            this._log.warn("[instancing error] op data:", opData, e);
             throw new Error("instancing error: " + opData.objName);
         }
 
@@ -964,11 +963,10 @@ Patch.prototype.deSerialize = function (obj, genIds)
             }
         }
 
-        // if (performance.now() - startTime > 100) console.log("op crerate took long: ", opData.objName);
+        // if (performance.now() - startTime > 100) this._log.warn("op crerate took long: ", opData.objName);
 
         const timeused = Math.round(100 * (CABLES.now() - start)) / 100;
-        if (!this.silent && timeused > 200)console.warn("long op init ", obj.ops[iop].objName, timeused);
-        // else Log.log('op time',obj.ops[iop].objName,timeused);
+        if (!this.silent && timeused > 200) this._log.warn("long op init ", obj.ops[iop].objName, timeused);
     }
 
     for (const i in this.ops)
@@ -1170,7 +1168,7 @@ Patch.prototype.setVariable = function (name, val)
     }
     else
     {
-        console.warn("variable " + name + " not found!");
+        this._log.warn("variable " + name + " not found!");
     }
 };
 
@@ -1270,7 +1268,6 @@ Patch.prototype.getVars = function (t)
 
     for (const i in this._variables)
     {
-        // console.log(this._variables[i]);
         if (!this._variables[i].type || this._variables[i].type == t) vars.push(this._variables[i]);
     }
     return vars;
@@ -1326,14 +1323,14 @@ Patch.prototype.exitError = function (errorId, errorMessage, ex)
  */
 Patch.prototype.preRenderOps = function ()
 {
-    Log.log("prerendering...");
+    this._log.log("prerendering...");
 
     for (let i = 0; i < this.ops.length; i++)
     {
         if (this.ops[i].preRender)
         {
             this.ops[i].preRender();
-            Log.log("prerender " + this.ops[i].objName);
+            this._log.log("prerender " + this.ops[i].objName);
         }
     }
 };
@@ -1365,10 +1362,10 @@ Patch.prototype.printTriggerStack = function ()
 {
     if (this._triggerStack.length == 0)
     {
-        console.log("stack length", this._triggerStack.length);
+        console.log("stack length", this._triggerStack.length); // eslint-disable-line
         return;
     }
-    console.groupCollapsed(
+    console.groupCollapsed( // eslint-disable-line
         "trigger port stack " + this._triggerStack[this._triggerStack.length - 1].parent.name + "." + this._triggerStack[this._triggerStack.length - 1].name,
     );
 
@@ -1378,8 +1375,8 @@ Patch.prototype.printTriggerStack = function ()
         rows.push(i + ". " + this._triggerStack[i].parent.name + " " + this._triggerStack[i].name);
     }
 
-    console.table(rows);
-    console.groupEnd();
+    console.table(rows); // eslint-disable-line
+    console.groupEnd(); // eslint-disable-line
 };
 
 /**

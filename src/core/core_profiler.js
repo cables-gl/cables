@@ -72,10 +72,10 @@ const Profiler = function (patch)
 
     this.print = function ()
     {
-        Log.log("--------");
+        console.log("--------");
         for (const i in items)
         {
-            Log.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
+            console.log(items[i].title + ": " + items[i].numTriggers + " / " + items[i].timeUsed);
         }
     };
 };

@@ -1,4 +1,5 @@
 
+import Logger from "../core_logger";
 import { Port } from "../core_port";
 import { Log } from "../log";
 
@@ -40,6 +41,7 @@ import { Log } from "../log";
 export const Uniform = function (__shader, __type, __name, _value, _port2, _port3, _port4, _structUniformName, _structName, _propertyName)
 {
     this._loc = -1;
+    this._log = new Logger("cgl_uniform");
     this._type = __type;
     this._cgl = __shader._cgl;
     this._name = __name;
@@ -153,7 +155,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         {
             if (!(_port2 instanceof Port) || !(_port3 instanceof Port) || !(_port4 instanceof Port))
             {
-                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+                this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
             }
 
             this._value = [0, 0, 0, 0];
@@ -173,7 +175,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         {
             if (!(_port2 instanceof Port) || !(_port3 instanceof Port))
             {
-                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+                this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
             }
 
             this._value = [0, 0, 0];
@@ -190,7 +192,7 @@ export const Uniform = function (__shader, __type, __name, _value, _port2, _port
         {
             if (!(_port2 instanceof Port))
             {
-                console.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
+                this._log.error("[cgl_uniform] mixed port/value parameter for vec4 ", this._name);
             }
 
             this._value = [0, 0];
@@ -243,7 +245,7 @@ Uniform.prototype.getGlslTypeString = function ()
     if (this._type == "3f[]") return null; // ignore this for now...
     if (this._type == "m4[]") return null; // ignore this for now...
 
-    console.log("[CGL UNIFORM] unknown glsl type string ", this._type);
+    this._log.warn("[CGL UNIFORM] unknown glsl type string ", this._type);
 };
 
 Uniform.prototype._isValidLoc = function ()
@@ -614,7 +616,7 @@ Uniform.prototype.updateValue4F = function ()
 
     if (!this._value)
     {
-        console.log("no value for uniform", this._name, this);
+        this._log.warn("no value for uniform", this._name, this);
         this._value = [0, 0, 0, 0];
     }
 

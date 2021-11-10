@@ -3,7 +3,7 @@ import { uuid, UTILS } from "./utils";
 import { CONSTANTS } from "./constants";
 import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
-import { Log } from "./log";
+import Logger from "./core_logger";
 
 /**
  * op the class of all operators
@@ -41,6 +41,7 @@ const Op = function ()
 {
     EventTarget.apply(this);
 
+    this._log = new Logger("core_op");
     this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
     this.storage = {}; // op-specific data to be included in export
     this.objName = "";
@@ -132,13 +133,13 @@ const Op = function ()
 
         if (newAttribs.error || newAttribs.warning || newAttribs.hint)
         {
-            console.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
+            this._log.warn("old ui error/warning attribute in " + this.name + ", use op.setUiError !", newAttribs);
         }
 
-        // if (newAttribs.warning) console.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
-        // if (newAttribs.hint) console.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
+        // if (newAttribs.warning) this._log.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
+        // if (newAttribs.hint) this._log.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
-        if (typeof newAttribs != "object")console.error("op.uiAttrib attribs are not string");
+        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not string");
         if (!this.uiAttribs) this.uiAttribs = {};
         for (const p in newAttribs)
         {
@@ -908,9 +909,9 @@ const Op = function ()
 
     Op.prototype.printInfo = function ()
     {
-        for (let i = 0; i < this.portsIn.length; i++) Log.log("in: " + this.portsIn[i].getName());
+        for (let i = 0; i < this.portsIn.length; i++) console.log("in: " + this.portsIn[i].getName());// eslint-disable-line
 
-        for (const ipo in this.portsOut) Log.log("out: " + this.portsOut[ipo].getName());
+        for (const ipo in this.portsOut) console.log("out: " + this.portsOut[ipo].getName());// eslint-disable-line
     };
 
     Op.prototype.getOutChilds = function ()
@@ -1102,7 +1103,7 @@ const Op = function ()
 
         const args = ["[" + initiator + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.log, [console, args]);
+        Function.prototype.apply.apply(console.log, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.error = Op.prototype.logError = function ()
@@ -1110,7 +1111,7 @@ const Op = function ()
         // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.error, [console, args]);
+        Function.prototype.apply.apply(console.error, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.warn = Op.prototype.logWarn = function ()
@@ -1118,7 +1119,7 @@ const Op = function ()
         // if (this.patch.silent) return;
         const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.warn, [console, args]);
+        Function.prototype.apply.apply(console.warn, [console, args]);// eslint-disable-line
     };
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
@@ -1129,7 +1130,7 @@ const Op = function ()
 
         const args = ["[" + initiator + "]"];
         args.push.apply(args, arguments);
-        Function.prototype.apply.apply(console.info, [console, args]);
+        Function.prototype.apply.apply(console.info, [console, args]);// eslint-disable-line
     };
 
     /**
@@ -1289,7 +1290,7 @@ const Op = function ()
         {
             const port = this.getPortByName(i);
             if (port) port.set(obj[i]);
-            else Log.log("op.setValues: port not found:", i);
+            else this._log.warn("op.setValues: port not found:", i);
         }
     };
 
@@ -1308,7 +1309,7 @@ const Op = function ()
         if (!txt && !this._uiErrors.hasOwnProperty(id)) return;
         if (this._uiErrors.hasOwnProperty(id) && this._uiErrors[id].txt == txt) return;
 
-        if (id.indexOf(" ") > -1) console.warn("setuierror id cant have spaces!");
+        if (id.indexOf(" ") > -1) this._log.warn("setuierror id cant have spaces!");
 
         if (!txt && this._uiErrors.hasOwnProperty(id)) delete this._uiErrors[id];
         else
@@ -1331,25 +1332,25 @@ const Op = function ()
     // todo: remove
     Op.prototype.setError = function (id, txt)
     {
-        console.warn("old error message op.error() - use op.setUiError()");
+        this._log.warn("old error message op.error() - use op.setUiError()");
 
-        if (txt === undefined)
-        {
-            this.uiAttr({ "error": id });
-        }
-        else
-        {
-            if (this._uiErrors[id] != txt)
-            {
-                this._uiErrors[id] = txt;
-                if (!txt) delete this._uiErrors[id];
+        // if (txt === undefined)
+        // {
+        //     this.uiAttr({ "error": id });
+        // }
+        // else
+        // {
+        //     if (this._uiErrors[id] != txt)
+        //     {
+        //         this._uiErrors[id] = txt;
+        //         if (!txt) delete this._uiErrors[id];
 
-                const errorArr = [];
-                for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
-                this.uiAttr({ "errors": errorArr });
-                console.log(errorArr);
-            }
-        }
+        //         const errorArr = [];
+        //         for (const i in this._uiErrors) errorArr.push(this._uiErrors[i]);
+        //         this.uiAttr({ "errors": errorArr });
+        //         console.log(errorArr);
+        //     }
+        // }
     };
 
     // // todo: remove
@@ -1393,7 +1394,7 @@ const Op = function ()
         }
         else
         {
-            Log.log("hasListener: missing parameters");
+            this._log.warn("hasListener: missing parameters");
         }
     };
 
@@ -1410,7 +1411,7 @@ const Op = function ()
         if (this._eventCallbacks[which])
         {
             const idx = this._eventCallbacks[which].indexOf(cb);
-            if (idx == -1) Log.log("eventlistener " + which + " not found...");
+            if (idx == -1) this._log.warn("eventlistener " + which + " not found...");
             else this._eventCallbacks[which].slice(idx);
         }
     };
@@ -1453,7 +1454,7 @@ const Op = function ()
             if (ports[i] && ports[i].setUiAttribs) ports[i].setUiAttribs({ "group": name });
             else
             {
-                console.error("setPortGroup: invalid port!");
+                this._log.error("setPortGroup: invalid port!");
             }
         }
     };

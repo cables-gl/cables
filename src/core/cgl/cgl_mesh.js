@@ -2,6 +2,7 @@ import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
 import { Log } from "../log";
+import Logger from "../core_logger";
 
 const MESH = {};
 MESH.lastMesh = null;
@@ -27,6 +28,7 @@ MESH.lastMesh = null;
 const Mesh = function (_cgl, __geom, glPrimitive)
 {
     this._cgl = _cgl;
+    this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
     this._attributes = [];
@@ -114,7 +116,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     if (attr.numItems < array.length / attr.itemSize)
     {
-        // console.log("wrong attr size", attr.numItems, array.length);
+        // this._log.log("wrong attr size", attr.numItems, array.length);
         this._resizeAttr(array, attr);
 
         // return;
@@ -122,7 +124,7 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
 
     if (end > array.length)
     {
-        console.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
+        this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
     }
 
     if (this._cgl.glVersion == 1) this._cgl.gl.bufferSubData(this._cgl.gl.ARRAY_BUFFER, 0, array); // probably slow/ maybe create and array with only changed size ??
@@ -149,7 +151,7 @@ Mesh.prototype._bufferArray = function (array, attr)
 
     if (this._cgl.debugOneFrame)
     {
-        console.log("_bufferArray", array.length, attr.name);
+        console.log("_bufferArray", array.length, attr.name); // eslint-disable-line
     }
 
     if (!(array instanceof Float32Array))
@@ -165,7 +167,7 @@ Mesh.prototype._bufferArray = function (array, attr)
 
             if (this._cgl.debugOneFrame)
             {
-                console.log("_bufferArray create new float32array", array.length, attr.name);
+                console.log("_bufferArray create new float32array", array.length, attr.name); // eslint-disable-line
             }
 
             this._cgl.profileData.profileNonTypedAttrib++;
@@ -196,7 +198,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 {
     if (!array)
     {
-        console.error("mesh addAttribute - no array given! " + name);
+        this._log.error("mesh addAttribute - no array given! " + name);
         throw new Error();
     }
     let cb = null;
@@ -206,7 +208,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
 
     this._cgl.profileData.profileMeshAttributes += numItems || 0;
 
-    // if (numItems === 0) console.warn(CABLES.patch.cgl.canvas.id + " CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
+    // if (numItems === 0) this._log.warn(CABLES.patch.cgl.canvas.id + " CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
 
     if (typeof options == "function")
     {
@@ -232,7 +234,7 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
             }
             else
             {
-                // console.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
+                // this._log.log("wrong buffer size", this._geom.name, attr.name, attr.numItems, numItems);
                 this._resizeAttr(array, attr);
             }
 
@@ -350,7 +352,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
         {
             if (vertIndices[i] >= this._geom.vertices.length / 3)
             {
-                console.warn("invalid index in " + this._geom.name);
+                this._log.warn("invalid index in " + this._geom.name);
                 return;
             }
         }
@@ -428,7 +430,7 @@ Mesh.prototype._checkAttrLengths = function ()
     // {
     //     if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
     //     {
-    //         console.warn(
+    //         this._log.warn(
     //             this._geom.name + ": " + this._attributes[i].name +
     //             " wrong attr length. is:", this._attributes[i].floatArray.length / this._attributes[i].itemSize,
     //             " should be:", this._attributes[0].floatArray.length / this._attributes[0].itemSize,
@@ -463,7 +465,7 @@ Mesh.prototype._bind = function (shader)
             {
                 attribute._attrLocationLastShaderTime = shader.lastCompile;
                 attrLocs[i] = this._cgl.glGetAttribLocation(shader.getProgram(), attribute.name);
-                // console.log('attribloc',attribute.name,attrLocs[i]);
+                // this._log.log('attribloc',attribute.name,attrLocs[i]);
                 this._cgl.profileData.profileAttrLoc++;
             }
         }
@@ -702,8 +704,8 @@ Mesh.prototype.render = function (shader)
         // {
         //     if (this._attributes[i].arrayLength / this._attributes[i].itemSize != this._bufVertexAttrib.floatArray.length / 3)
         //     {
-        //         console.log("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
-        //         // console.log(this);
+        //         this._log.warn("attrib buffer length wrong! ", this._attributes[i].name, this._attributes[i].arrayLength / this._attributes[i].itemSize, this._bufVertexAttrib.floatArray.length / 3, this._attributes[i].itemSize);
+        //         // this._log.log(this);
         //         // debugger;
         //         return;
         //     }
@@ -721,15 +723,15 @@ Mesh.prototype.render = function (shader)
 
     if (this._cgl.debugOneFrame && this._cgl.gl.getError() != this._cgl.gl.NO_ERROR)
     {
-        console.error("mesh draw gl error");
-        console.log("mesh", this);
-        console.log("shader", shader);
+        this._log.error("mesh draw gl error");
+        this._log.error("mesh", this);
+        this._log.error("shader", shader);
 
         const attribNames = [];
         for (let i = 0; i < this._cgl.gl.getProgramParameter(shader.getProgram(), this._cgl.gl.ACTIVE_ATTRIBUTES); i++)
         {
             const name = this._cgl.gl.getActiveAttrib(shader.getProgram(), i).name;
-            console.log("attrib ", name);
+            this._log.error("attrib ", name);
         }
     }
 
@@ -740,7 +742,7 @@ Mesh.prototype.render = function (shader)
     {
         this._cgl.gl.endQuery(this._queryExt.TIME_ELAPSED_EXT);
 
-        // console.log("available", available);
+        // this._log.log("available", available);
     }
 
     this.unBind();

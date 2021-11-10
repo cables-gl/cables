@@ -1,6 +1,7 @@
 import { generateUUID } from "./utils";
 // eslint-disable-next-line
 import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL properly.. wtf?
+import Logger from "./core_logger";
 
 /**
  * LoadingStatus class, manages asynchronous loading jobs
@@ -12,6 +13,7 @@ import { CGL } from "./cgl"; // * if you remove this, the project wont build CGL
  */
 const LoadingStatus = function (patch)
 {
+    this._log = new Logger("LoadingStatus");
     this._loadingAssets = {};
     this._cbFinished = [];
     this._assetTasks = [];
@@ -102,11 +104,11 @@ LoadingStatus.prototype.print = function ()
         ]);
     }
 
-    console.groupCollapsed(
+    this._log.groupCollapsed(
         "finished loading " + this._order + " assets in " + (Date.now() - this._startTime) / 1000 + "s",
     );
-    console.table(rows);
-    console.groupEnd();
+    this._log.table(rows);
+    this._log.groupEnd();
 };
 
 LoadingStatus.prototype.finished = function (id)

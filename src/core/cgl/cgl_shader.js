@@ -6,6 +6,7 @@ import { MESH } from "./cgl_mesh";
 import { CONSTANTS } from "./constants";
 import { Log } from "../log";
 import { escapeHTML } from "./cgl_utils";
+import Logger from "../core_logger";
 // ---------------------------------------------------------------------------
 export const SHADER_VARS = {
     "profileShaderBinds": 0,
@@ -66,12 +67,13 @@ const Shader = function (_cgl, _name)
 {
     if (!_cgl) throw new Error("shader constructed without cgl " + _name);
 
+    this._log = new Logger("cgl_shader");
     this._cgl = _cgl;
 
     if (!_name)
     {
-        console.warn("no shader name given");
-        console.log(new Error().stack);
+        this._log.warn("no shader name given");
+        this._log.stack();
     }
     this._name = _name || "unknown";
     this.glslVersion = 0;
@@ -189,11 +191,11 @@ Shader.prototype.copyUniformValues = function (origShader)
     {
         if (!this._uniforms[i])
         {
-            // console.log("unknown uniform?!");
+            // this._log.log("unknown uniform?!");
             continue;
         }
 
-        // console.log(origShader._uniforms[i].getName());
+        // this._log.log(origShader._uniforms[i].getName());
         // this.getUniform(origShader._uniforms[i].)
         // this._uniforms[i].set(origShader._uniforms[i].getValue());
 
@@ -491,7 +493,7 @@ Shader.prototype.compile = function ()
 
     if (!this.srcFrag)
     {
-        console.error("[cgl shader] has no fragment source!");
+        this._log.error("[cgl shader] has no fragment source!");
         this.srcVert = this.getDefaultVertexShader();
         this.srcFrag = this.getDefaultFragmentShader();
         // return;
@@ -593,8 +595,6 @@ Shader.prototype.compile = function ()
         {
             if (this._modules[j].name == this._moduleNames[i])
             {
-                // console.log(this._modules[j]);
-
                 if (this._modules[j].srcBodyFrag || this._modules[j].srcHeadFrag)
                 {
                     foundModsFrag = true;
@@ -645,8 +645,8 @@ Shader.prototype.compile = function ()
             if (this._uniforms[i].shaderType == "frag" || this._uniforms[i].shaderType == "both") countUniFrag++;
         }
     }
-    if (countUniFrag >= this._cgl.maxUniformsFrag) console.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
-    if (countUniVert >= this._cgl.maxUniformsVert) console.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
+    if (countUniFrag >= this._cgl.maxUniformsFrag) this._log.warn("[cgl_shader] num uniforms frag: " + countUniFrag + " / " + this._cgl.maxUniformsFrag);
+    if (countUniVert >= this._cgl.maxUniformsVert) this._log.warn("[cgl_shader] num uniforms vert: " + countUniVert + " / " + this._cgl.maxUniformsVert);
 
 
     if (fs.indexOf("precision") == -1) fs = "precision " + this.precision + " float;".endl() + fs;
@@ -1318,7 +1318,7 @@ Shader.prototype.addUniformStructBoth = function (structName, uniformName, membe
     {
         const member = members[i];
         if ((member.type === "2i" || member.type === "i" || member.type === "3i"))
-            console.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
+            this._log.error("Adding an integer struct member to both shaders can potentially error. Please use different structs for each shader. Error occured in struct:", structName, " with member:", member.name, " of type:", member.type, ".");
         if (!this.hasUniform(uniformName + "." + member.name))
         {
             const uni = new CGL.Uniform(this, member.type, uniformName + "." + member.name, member.v1, member.v2, member.v3, member.v4, uniformName, structName, member.name);
@@ -1401,9 +1401,9 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
         if (!this._cgl.gl.getProgramParameter(program, this._cgl.gl.LINK_STATUS))
         {
             this._hasErrors = true;
-            console.warn(this._cgl.gl.getShaderInfoLog(this.fshader) || "empty shader infolog");
-            console.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
-            console.error(this._name + " shader linking fail...");
+            this._log.warn(this._cgl.gl.getShaderInfoLog(this.fshader) || "empty shader infolog");
+            this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
+            this._log.error(this._name + " shader linking fail...");
 
             Log.log("srcFrag", fstr);
             Log.log("srcVert", vstr);
@@ -1507,14 +1507,14 @@ Shader.prototype._bindTextures = function ()
 {
     if (this._textureStackTex.length > this._cgl.maxTextureUnits)
     {
-        console.log("[shader._bindTextures] too many textures bound", this._textureStackTex.length + "/" + this._cgl.maxTextureUnits);
+        this._log.warn("[shader._bindTextures] too many textures bound", this._textureStackTex.length + "/" + this._cgl.maxTextureUnits);
     }
 
     for (let i = 0; i < this._textureStackTex.length; i++)
     {
         if (!this._textureStackTex[i] && !this._textureStackTexCgl[i])
         {
-            console.log("no texture for pushtexture", this._name);
+            this._log.warn("no texture for pushtexture", this._name);
         }
         else
         {
@@ -1530,7 +1530,7 @@ Shader.prototype._bindTextures = function ()
             if (!this._textureStackUni[i])
             {
                 // throw(new Error('no uniform given to texturestack'));
-                console.log("no uniform for pushtexture", this._name);
+                this._log.warn("no uniform for pushtexture", this._name);
                 bindOk = this._cgl.setTexture(i, t, this._textureStackType[i]);
             }
             else
@@ -1538,7 +1538,7 @@ Shader.prototype._bindTextures = function ()
                 this._textureStackUni[i].setValue(i);
                 bindOk = this._cgl.setTexture(i, t, this._textureStackType[i]);
             }
-            if (!bindOk) console.log("tex bind failed", this.getName(), this._textureStackUni[i]);
+            if (!bindOk) this._log.warn("tex bind failed", this.getName(), this._textureStackUni[i]);
         }
     }
 };
@@ -1574,9 +1574,9 @@ Shader.prototype.pushTexture = function (uniform, t, type)
     }
     if (!t.hasOwnProperty("tex") && !(t instanceof WebGLTexture))
     {
-        console.log(new Error("invalid texture").stack);
+        this._log.warn(new Error("invalid texture").stack);
 
-        console.warn("[cgl_shader] invalid texture...", t);
+        this._log.warn("[cgl_shader] invalid texture...", t);
         return;
     }
 
@@ -1668,7 +1668,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         if (type == cgl.gl.VERTEX_SHADER) Log.log("VERTEX_SHADER");
         if (type == cgl.gl.FRAGMENT_SHADER) Log.log("FRAGMENT_SHADER");
 
-        // console.warn(cgl.gl.getShaderInfoLog(shader));
+        // this._log.warn(cgl.gl.getShaderInfoLog(shader));
 
         let infoLog = cgl.gl.getShaderInfoLog(shader) || "empty shader info log";
         const badLines = getBadLines(infoLog);
@@ -1690,7 +1690,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
             if (isBadLine) htmlWarning += "</span>";
         }
 
-        console.warn(infoLog);
+        this._log.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
 

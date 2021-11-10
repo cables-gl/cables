@@ -4,6 +4,7 @@ import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
+import Logger from "../core_logger";
 
 
 /**
@@ -18,7 +19,7 @@ const Context = function (_patch)
     EventTarget.apply(this);
 
     this.profileData = new ProfileData(this);
-
+    this._log = new Logger("cgl_context");
     const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
@@ -180,7 +181,7 @@ const Context = function (_patch)
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
-            console.log("canvas lost...", event);
+            this._log.error("canvas lost...", event);
             this.aborted = true;
         });
 
@@ -313,7 +314,6 @@ const Context = function (_patch)
         if (!this._hadStackError)
         {
             this._hadStackError = true;
-            // console.warn(str);
             Log.warn("[" + this.canvas.id + "]: ", str);
         }
     };
@@ -528,8 +528,7 @@ const Context = function (_patch)
     {
         if (!this._frameStarted)
         {
-            console.warn("frame not started " + string);
-            // console.log(new Error().stack);
+            this._log.warn("frame not started " + string);
             this.patch.printTriggerStack();
         }
     };
@@ -559,7 +558,7 @@ const Context = function (_patch)
 
         if (!this.gl.isTexture(t))
         {
-            console.log("not a texture!!!!");
+            this._log.warn("not a texture!!!!");
             return false;
         }
 
@@ -599,7 +598,7 @@ const Context = function (_patch)
         const p = this.canvas.parentElement;
         if (!p)
         {
-            console.error("cables: can not resize to container element");
+            this._log.error("cables: can not resize to container element");
             return;
         }
         this.setSize(p.clientWidth, p.clientHeight);
@@ -653,7 +652,8 @@ const Context = function (_patch)
             {
                 this.patch.printTriggerStack();
 
-                console.log((new Error()).stack);
+                this._log.stack();
+
                 this._loggedGlError = true;
             }
         }
