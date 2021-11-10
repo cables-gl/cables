@@ -267,7 +267,7 @@ const Context = function (_patch)
             this.canvas.toBlob((blob) =>
             {
                 if (cb) cb(blob);
-                else Log.log("no screenshot callback...");
+                else this._log.log("no screenshot callback...");
             }, mimeType, quality);
         }
     };
@@ -314,7 +314,7 @@ const Context = function (_patch)
         if (!this._hadStackError)
         {
             this._hadStackError = true;
-            Log.warn("[" + this.canvas.id + "]: ", str);
+            this._log.warn("[" + this.canvas.id + "]: ", str);
         }
     };
 
@@ -646,7 +646,7 @@ const Context = function (_patch)
 
             found = true;
 
-            Log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
+            this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
             if (!this._loggedGlError)
             {
@@ -711,7 +711,7 @@ const Context = function (_patch)
             }
             else
             {
-                Log.log("screenshot: no blob");
+                this._log.log("screenshot: no blob");
             }
         }.bind(this), noclearalpha);
     };
@@ -1233,7 +1233,7 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
     else
     {
-        Log.log("setblendmode: unknown blendmode");
+        this._log.log("setblendmode: unknown blendmode");
     }
 };
 

@@ -459,14 +459,13 @@ Texture.prototype._setFilter = function ()
 
     if (this.shadowMap)
     {
-        this._log.log("shadowmap tex");
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        this._log.log("texture: HDR and mipmap filtering at the same time is not possible");
+        this._log.warn("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
         this._log.stack();
     }
