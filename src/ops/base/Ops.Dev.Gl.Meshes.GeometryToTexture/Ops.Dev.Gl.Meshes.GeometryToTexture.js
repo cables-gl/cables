@@ -3,7 +3,7 @@ const
     inGeom = op.inObject("Geometry", null, "geometry"),
     inWidth = op.inValueInt("Tex Size", 256),
 
-    tfilter = op.inValueSelect("filter", ["nearest", "linear", "mipmap"], "nearest"),
+    tfilter = op.inValueSelect("filter", ["nearest", "linear"], "nearest"),
     twrap = op.inValueSelect("wrap", ["clamp to edge", "repeat", "mirrored repeat"], "clamp to edge"),
     // inNumTex = op.inSwitch("Num Textures", ["1", "4"], "1"),
     next = op.outTrigger("Next"),
@@ -108,7 +108,6 @@ function initFb()
 
     let filter = CGL.Texture.FILTER_NEAREST;
     if (tfilter.get() == "linear") filter = CGL.Texture.FILTER_LINEAR;
-    else if (tfilter.get() == "mipmap") filter = CGL.Texture.FILTER_MIPMAP;
 
     let selectedWrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
     if (twrap.get() == "repeat") selectedWrap = CGL.Texture.WRAP_REPEAT;

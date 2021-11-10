@@ -12,8 +12,11 @@ IN vec3 attrBiTangent;
 
 OUT vec3 norm;
 OUT float ps;
+
+OUT vec2 texCoord;
+
+
 #ifdef HAS_TEXTURES
-    OUT vec2 texCoord;
 #endif
 
 #ifdef HAS_TEXTURE_COLORIZE
@@ -71,9 +74,9 @@ void main()
         vertexColor=attrVertColor;
     #endif
 
-    #ifdef HAS_TEXTURES
+    // #ifdef HAS_TEXTURES
         texCoord=attrTexCoord;
-    #endif
+    // #endif
 
     #ifdef HAS_TEXTURE_OPACITY
         // opacity=texture(texOpacity,vec2(rand(attrVertIndex+texCoord.x*texCoord.y+texCoord.y+texCoord.x),rand(texCoord.y*texCoord.x-texCoord.x-texCoord.y-attrVertIndex))).r;

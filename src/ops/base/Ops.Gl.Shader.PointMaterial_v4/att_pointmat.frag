@@ -36,31 +36,29 @@ void main()
 
     vec4 col=color;
 
-    #ifdef HAS_TEXTURES
 
-        #ifdef HAS_TEXTURE_MASK
-            float mask;
-            #ifdef TEXTURE_MASK_R
-                mask=texture(texMask,pointCoord).r;
-            #endif
-            #ifdef TEXTURE_MASK_A
-                mask=texture(texMask,pointCoord).a;
-            #endif
-            #ifdef TEXTURE_MASK_LUMI
-            	vec3 lumcoeff = vec3(0.299,0.587,0.114);
-            	mask = dot(texture(texMask,pointCoord).rgb, lumcoeff);
-            #endif
-
+    #ifdef HAS_TEXTURE_MASK
+        float mask;
+        #ifdef TEXTURE_MASK_R
+            mask=texture(texMask,pointCoord).r;
+        #endif
+        #ifdef TEXTURE_MASK_A
+            mask=texture(texMask,pointCoord).a;
+        #endif
+        #ifdef TEXTURE_MASK_LUMI
+        	vec3 lumcoeff = vec3(0.299,0.587,0.114);
+        	mask = dot(texture(texMask,pointCoord).rgb, lumcoeff);
         #endif
 
-        #ifdef HAS_TEXTURE_DIFFUSE
-            col=texture(diffTex,pointCoord);
-            #ifdef COLORIZE_TEXTURE
-              col.rgb*=color.rgb;
-            #endif
-        #endif
-        col.a*=color.a;
     #endif
+
+    #ifdef HAS_TEXTURE_DIFFUSE
+        col=texture(diffTex,pointCoord);
+        #ifdef COLORIZE_TEXTURE
+          col.rgb*=color.rgb;
+        #endif
+    #endif
+    col.a*=color.a;
 
     {{MODULE_COLOR}}
 
@@ -103,6 +101,10 @@ void main()
     #endif
 
     if (col.a <= 0.0) discard;
+
+    #ifdef HAS_TEXTURE_COLORIZE
+        col*=colorize;
+    #endif
 
     outColor = col;
 }

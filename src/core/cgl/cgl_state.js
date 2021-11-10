@@ -546,7 +546,7 @@ const Context = function (_patch)
 
         // if (!this.gl.isTexture(t))
         // {
-        //     console.log("not a texture!!!!");
+        //     console.log("not a texture!!!!"); return false
         //     t = CGL.Texture.getEmptyTexture(this).tex;
         // }
 
@@ -556,6 +556,14 @@ const Context = function (_patch)
             this.gl.bindTexture(type || this.gl.TEXTURE_2D, t);
             this._textureslots[slot] = t;
         }
+
+        if (!this.gl.isTexture(t))
+        {
+            console.log("not a texture!!!!");
+            return false;
+        }
+
+        return true;
     };
 
     this.fullScreen = function ()

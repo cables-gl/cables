@@ -46,13 +46,12 @@ const
     uniColor = new CGL.Uniform(shader, "4f", "color", r, g, b, a),
     uniWidth = new CGL.Uniform(shader, "f", "canvasWidth", cgl.canvasWidth),
     uniHeight = new CGL.Uniform(shader, "f", "canvasHeight", cgl.canvasHeight),
-    textureUniform = new CGL.Uniform(shader, "t", "diffTex", 0),
-    textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize", 0),
-    textureOpacityUniform = new CGL.Uniform(shader, "t", "TextureOpacity", 0),
-
-    textureColoPointSize = new CGL.Uniform(shader, "t", "texColorize", 0),
-    texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize", 0),
-    textureMaskUniform = new CGL.Uniform(shader, "t", "texMask", 0);
+    textureUniform = new CGL.Uniform(shader, "t", "diffTex"),
+    textureColorizeUniform = new CGL.Uniform(shader, "t", "texColorize"),
+    textureOpacityUniform = new CGL.Uniform(shader, "t", "texOpacity"),
+    textureColoPointSize = new CGL.Uniform(shader, "t", "texPointSize"),
+    texturePointSizeUniform = new CGL.Uniform(shader, "t", "texPointSize"),
+    textureMaskUniform = new CGL.Uniform(shader, "t", "texMask");
 
 shader.setSource(attachments.pointmat_vert, attachments.pointmat_frag);
 shader.glPrimitive = cgl.gl.POINTS;

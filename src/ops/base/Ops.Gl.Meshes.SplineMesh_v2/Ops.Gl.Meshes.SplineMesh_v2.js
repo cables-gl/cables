@@ -5,7 +5,7 @@ const
     inRenderMesh = op.inBool("Render Mesh", true),
     next = op.outTrigger("Next");
 
-const geom = new CGL.Geometry("splinemesh2");
+const geom = new CGL.Geometry("splinemesh_2");
 geom.vertices = [];
 geom.clear();
 
@@ -50,7 +50,7 @@ function renderMesh()
             shader = cgl.getShader();
         }
 
-        mesh.render(shader);
+        if (verts.length > 0) mesh.render(shader);
     }
 
     next.trigger();
