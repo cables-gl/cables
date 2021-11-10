@@ -628,6 +628,7 @@ Texture.getEmptyTexture = function (cgl)
     return cgl.tempTextureEmpty;
 };
 
+
 /**
  * @function getRandomTexture
  * @memberof Texture
