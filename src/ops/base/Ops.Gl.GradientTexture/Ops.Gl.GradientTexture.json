@@ -5,39 +5,50 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
-                "name": "Gradient",
-                "subType": "number"
-            },
-            {
-                "type": "0",
-                "name": "Smoothstep",
-                "subType": "boolean"
-            },
-            {
-                "type": "0",
-                "name": "Size",
-                "subType": "integer"
-            },
-            {
-                "type": "3",
-                "name": "Gradient Array"
-            },
-            {
-                "type": "0",
+                "type": 0,
                 "name": "Direction index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Direction",
-                "subType": "string"
+                "type": 0,
+                "name": "Smoothstep",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Step",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Flip",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Size",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "wrap index",
+                "subType": "integer"
+            },
+            {
+                "type": 3,
+                "name": "Gradient Array"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
-                "name": "Texture"
+                "type": 2,
+                "name": "Texture",
+                "objType": "texture"
             }
         ],
         "name": "Ops.Gl.GradientTexture"
