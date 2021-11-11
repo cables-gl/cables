@@ -1,5 +1,4 @@
 import { uuid } from "../utils";
-import { Log } from "../log";
 import Logger from "../core_logger";
 
 
@@ -186,7 +185,7 @@ Texture.prototype.setSize = function (w, h)
          (!this._cgl.gl.getExtension("OES_texture_float_linear"))
     )
     {
-        this._log.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
+        console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
         this.filter = Texture.FILTER_NEAREST;
     }
 
@@ -220,7 +219,7 @@ Texture.prototype.setSize = function (w, h)
         {
             // if(this._cgl.gl.getExtension('OES_texture_half_float'))
             // {
-            //     Log.log("is half float");
+            //     console.log("is half float");
             //     var tcomp=this._cgl.gl.DEPTH_COMPONENT;
             //     this._cgl.gl.texImage2D(this.texTarget, 0, tcomp, w,h, 0, this._cgl.gl.DEPTH_COMPONENT, this._cgl.gl.HALD_FLOAT_OES, null);
             // }
@@ -465,7 +464,7 @@ Texture.prototype._setFilter = function ()
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        this._log.warn("texture: HDR and mipmap filtering at the same time is not possible");
+        console.warn("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
         this._log.stack();
     }
@@ -566,7 +565,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
 
     texture.image.onabort = texture.image.onerror = (e) =>
     {
-        Log.warn("[cgl.texture.load] error loading texture", url, e);
+        console.warn("[cgl.texture.load] error loading texture", url, e);
         texture.loading = false;
         cgl.patch.loading.finished(loadingId);
         const error = { "error": true };
@@ -601,7 +600,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  */
 Texture.getTempTexture = function (cgl)
 {
-    if (!cgl) this._log.error("[getTempTexture] no cgl!");
+    if (!cgl) console.error("[getTempTexture] no cgl!");
     if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
     return cgl.tempTexture;
 };
@@ -615,7 +614,7 @@ Texture.getTempTexture = function (cgl)
  */
 Texture.getEmptyTexture = function (cgl)
 {
-    if (!cgl) this._log.error("[getEmptyTexture] no cgl!");
+    if (!cgl) console.error("[getEmptyTexture] no cgl!");
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
     cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
@@ -636,7 +635,7 @@ Texture.getEmptyTexture = function (cgl)
  */
 Texture.getRandomTexture = function (cgl)
 {
-    if (!cgl) this._log.error("[getRandomTexture] no cgl!");
+    if (!cgl) console.error("[getRandomTexture] no cgl!");
     if (cgl.randomTexture) return cgl.randomTexture;
 
     const size = 256;
@@ -756,7 +755,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
  */
 Texture.getTempGradientTexture = function (cgl)
 {
-    if (!cgl) this._log.error("[getTempGradientTexture] no cgl!");
+    if (!cgl) console.error("[getTempGradientTexture] no cgl!");
 
     if (cgl.tempTextureGradient) return cgl.tempTextureGradient;
     const temptex = new Texture(cgl);
@@ -832,7 +831,7 @@ Texture.createFromImage = function (cgl, img, options)
 // deprecated!
 Texture.fromImage = function (cgl, img, filter, wrap)
 {
-    Log.error("deprecated texture from image...");
+    console.error("deprecated texture from image...");
 
     const texture = new Texture(cgl);
     texture.flip = false;

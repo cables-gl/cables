@@ -176,7 +176,7 @@ Geometry.prototype.setTexCoords = function (arr)
 //         if (this.verticesIndices[i * 3 + 0] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 1] >= this._vertices.length / 3 || this.verticesIndices[i * 3 + 2] >= this._vertices.length / 3)
 //         {
 //             foundError = true;
-//             Log.log("index error!");
+//             console.log("index error!");
 //         }
 //     }
 // };

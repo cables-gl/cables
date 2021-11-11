@@ -111,7 +111,6 @@ class CubemapTexture
 
         if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
         {
-            // Log.log( 'non power of two',this.width,this.height );
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
             this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 

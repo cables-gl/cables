@@ -80,7 +80,7 @@ const Port = function (__parent, name, type, uiAttribs)
             this._log.warn("val setter deprecated!", this);
             this._log.stack();
             this.setValue(v);
-            // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
+            // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
         }
     });
@@ -109,7 +109,7 @@ Port.prototype.getValueForDisplay = function ()
  * const myPort=op.inString("MyPort");
  * myPort.onChange=function()
  * {
- *   Log.log("was changed to: ",myPort.get());
+ *   console.log("was changed to: ",myPort.get());
  * }
  *
  */
@@ -419,23 +419,6 @@ Port.prototype.removeLink = function (link)
         if (this.type == CONSTANTS.OP.OP_PORT_TYPE_VALUE) this.setValue(this._valueBeforeLink || 0);
         else this.setValue(this._valueBeforeLink || null);
     }
-
-    // if (this.type == CABLES.CONSTANTS.OP.OP_PORT_TYPE_OBJECT && this.direction == CABLES.CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
-    // {
-    //     Log.log("REMOVELINK OBJECT!!",this);
-
-    //     for (var i=0;i<this.links.length;i++)
-    //     {
-    //         // Log.log('iii', i, this.links[i].portOut.get());
-    //         // this.links[i].setValue();
-    //         // this.set(null);
-    //         // this.forceChange();
-    //         this.set(this.links[i].portOut.get());
-    //         Log.log(this.get())
-    //         // this.forceChange();
-
-    //     }
-    // }
 
     if (this.onLinkChanged) this.onLinkChanged();
     this.emitEvent("onLinkChanged");

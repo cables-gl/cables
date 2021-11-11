@@ -1,4 +1,3 @@
-import { Log } from "./log";
 
 /**
  * @external CABLES
@@ -362,11 +361,8 @@ export const jsonp = function (url, cb)
     jsonpCounter++;
     const jsonPID = jsonpCounter;
 
-    // Log.log("making jsonp request...");
-
     CABLES["jsonpFunc" + jsonPID] = function (data)
     {
-        // Log.log(data);
         cb(false, data);
     };
 
@@ -436,11 +432,11 @@ export const request = function (options)
 
     xhr.addEventListener("progress", (ev) =>
     {
-        // Log.log('progress',ev.loaded/1024+' kb');
+        // console.log('progress',ev.loaded/1024+' kb');
         // if (ev.lengthComputable)
         // {
         //     var percentComplete = ev.loaded / ev.total;
-        //     Log.log(url,percentComplete);
+        //     console.log(url,percentComplete);
         // }
     });
 

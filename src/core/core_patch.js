@@ -139,9 +139,9 @@ const Patch = function (cfg)
                     if (err)
                     {
                         const txt = "";
-                        Log.error("err", err);
-                        Log.error("data", data);
-                        Log.error("data", data.msg);
+                        this._log.error("err", err);
+                        this._log.error("data", data);
+                        this._log.error("data", data.msg);
                         return;
                     }
                     this.deSerialize(data);
@@ -355,7 +355,7 @@ Patch.prototype.createOp = function (identifier, id)
             {
                 this.emitEvent("criticalError", "unknown op", "unknown op: " + objName);
 
-                Log.error("unknown op: " + objName);
+                this._log.error("unknown op: " + objName);
                 throw new Error("unknown op: " + objName);
             }
             else
@@ -525,7 +525,7 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 if (this.onDelete)
                 {
                     // todo: remove
-                    Log.warn("deprecated this.onDelete", this.onDelete);
+                    this._log.warn("deprecated this.onDelete", this.onDelete);
                     this.onDelete(opToDelete);
                 }
 
@@ -820,7 +820,7 @@ Patch.prototype.reloadOp = function (objName, cb)
             if (oldOp.portsIn[j].links.length === 0)
             {
                 const p = op.getPort(oldOp.portsIn[j].name);
-                if (!p) Log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
+                if (!p) this._log.error("[reloadOp] could not set port " + oldOp.portsIn[j].name + ", propably renamed port ?");
                 else
                 {
                     p.set(oldOp.portsIn[j].get());

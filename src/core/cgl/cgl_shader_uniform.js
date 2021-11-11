@@ -1,7 +1,6 @@
 
 import Logger from "../core_logger";
 import { Port } from "../core_port";
-import { Log } from "../log";
 
 /**
  * Shader uniforms

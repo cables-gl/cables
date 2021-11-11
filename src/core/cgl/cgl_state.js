@@ -1,7 +1,6 @@
 import { CONSTANTS } from "./constants";
 import { Shader } from "./cgl_shader";
 import { MatrixStack } from "./cgl_matrixstack";
-import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
 import Logger from "../core_logger";
@@ -1149,10 +1148,10 @@ Context.prototype.popBlendMode = function ()
 Context.prototype.glGetAttribLocation = function (prog, name)
 {
     const l = this.gl.getAttribLocation(prog, name);
-    if (l == -1)
-    {
-        // Log.log("get attr loc -1 ",name);
-    }
+    // if (l == -1)
+    // {
+    //     this._log.warn("get attr loc -1 ", name);
+    // }
     return l;
 };
 

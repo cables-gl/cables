@@ -122,7 +122,6 @@ const EventTarget = function ()
         }
         else
         {
-            // Log.warn("has no event callback",which,this._eventCallbacks);
             if (this._logEvents) console.log("[event] has no event callback", which, this._eventCallbacks); // eslint-disable-line
         }
     };

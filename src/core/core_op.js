@@ -1234,8 +1234,6 @@ const Op = function ()
             }
             if (this.portsIn[ipi].type == CONSTANTS.OP.OP_PORT_TYPE_FUNCTION)
             {
-                // Log.log(this.patch.instancing.index());
-                // Log.log(this._instances.length);
                 // if(this._instances[ this.patch.instancing.index() ].portsIn[ipi].name==triggerPort.name)
                 // theTriggerPort=this._instances[ this.patch.instancing.index() ].portsIn[ipi];
             }
@@ -1258,7 +1256,7 @@ const Op = function ()
     {
         //         if(this.isInstanced)
         //         {
-        //             Log.log('cancel instancing');
+        //             console.log('cancel instancing');
         //             return;
         //         }
         //         this._instances=[];
@@ -1275,7 +1273,7 @@ const Op = function ()
         //                 {
         //
         //                     var i=0;
-        // // Log.log('trigger',this._instances.length);
+        // // console.log('trigger',this._instances.length);
         //
         //                 }.bind(this,ipi );
         //
