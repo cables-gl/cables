@@ -2,6 +2,7 @@
 import { UTILS } from "../utils";
 import { b64decTypedArray } from "../base64";
 import { BoundingBox } from "./cgl_boundingbox";
+import Logger from "../core_logger";
 
 /**
  * a geometry contains all information about a mesh, vertices, texturecoordinates etc. etc.
@@ -45,6 +46,7 @@ import { BoundingBox } from "./cgl_boundingbox";
 const Geometry = function (name)
 {
     this.name = name || "unknown";
+    this._log = new Logger("cgl_geometry");
     this.faceVertCount = 3;
     this._vertices = [];
     this.verticesIndices = [];
@@ -192,7 +194,7 @@ Geometry.prototype.setPointVertices = function (verts)
 {
     if (verts.length % 3 !== 0)
     {
-        console.error("CGL MESH : SetPointVertices: Array must be multiple of three.");
+        this._log.error("SetPointVertices: Array must be multiple of three.");
         return;
     }
 
@@ -389,12 +391,12 @@ Geometry.prototype.calcTangentsBitangents = function ()
 {
     if (!this.vertices.length)
     {
-        console.error("Cannot calculate tangents/bitangents without vertices.");
+        this._log.error("Cannot calculate tangents/bitangents without vertices.");
         return;
     }
     if (!this.vertexNormals.length)
     {
-        console.error("Cannot calculate tangents/bitangents without normals.");
+        this._log.error("Cannot calculate tangents/bitangents without normals.");
         return;
     }
     if (!this.texCoords.length)
@@ -406,13 +408,13 @@ Geometry.prototype.calcTangentsBitangents = function ()
     }
     if (!this.verticesIndices || !this.verticesIndices.length)
     {
-        console.error("Cannot calculate tangents/bitangents without vertex indices.");
+        this._log.error("Cannot calculate tangents/bitangents without vertex indices.");
         return;
     }
     // this code assumes that we have three indices per triangle
     if (this.verticesIndices.length % 3 !== 0)
     {
-        console.error("Vertex indices mismatch!");
+        this._log.error("Vertex indices mismatch!");
         return;
     }
 

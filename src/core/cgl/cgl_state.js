@@ -4,6 +4,7 @@ import { MatrixStack } from "./cgl_matrixstack";
 import { Log } from "../log";
 import { EventTarget } from "../eventtarget";
 import { ProfileData } from "./cgl_profiledata";
+import Logger from "../core_logger";
 
 
 /**
@@ -18,7 +19,7 @@ const Context = function (_patch)
     EventTarget.apply(this);
 
     this.profileData = new ProfileData(this);
-
+    this._log = new Logger("cgl_context");
     const viewPort = [0, 0, 0, 0];
     this.glVersion = 0;
     this.glUseHalfFloatTex = false;
@@ -180,7 +181,7 @@ const Context = function (_patch)
 
         this.canvas.addEventListener("webglcontextlost", (event) =>
         {
-            console.log("canvas lost...", event);
+            this._log.error("canvas lost...", event);
             this.aborted = true;
         });
 
@@ -266,7 +267,7 @@ const Context = function (_patch)
             this.canvas.toBlob((blob) =>
             {
                 if (cb) cb(blob);
-                else Log.log("no screenshot callback...");
+                else this._log.log("no screenshot callback...");
             }, mimeType, quality);
         }
     };
@@ -313,8 +314,7 @@ const Context = function (_patch)
         if (!this._hadStackError)
         {
             this._hadStackError = true;
-            // console.warn(str);
-            Log.warn("[" + this.canvas.id + "]: ", str);
+            this._log.warn("[" + this.canvas.id + "]: ", str);
         }
     };
 
@@ -528,8 +528,7 @@ const Context = function (_patch)
     {
         if (!this._frameStarted)
         {
-            console.warn("frame not started " + string);
-            // console.log(new Error().stack);
+            this._log.warn("frame not started " + string);
             this.patch.printTriggerStack();
         }
     };
@@ -557,11 +556,11 @@ const Context = function (_patch)
             this._textureslots[slot] = t;
         }
 
-        if (!this.gl.isTexture(t))
-        {
-            console.log("not a texture!!!!");
-            return false;
-        }
+        // if (!this.gl.isTexture(t))
+        // {
+        //     this._log.warn("not a texture!!!!");
+        //     return false;
+        // }
 
         return true;
     };
@@ -599,7 +598,7 @@ const Context = function (_patch)
         const p = this.canvas.parentElement;
         if (!p)
         {
-            console.error("cables: can not resize to container element");
+            this._log.error("cables: can not resize to container element");
             return;
         }
         this.setSize(p.clientWidth, p.clientHeight);
@@ -647,13 +646,14 @@ const Context = function (_patch)
 
             found = true;
 
-            Log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
+            this._log.warn("gl error [" + this.canvas.id + "]: ", str, error, errStr);
 
             if (!this._loggedGlError)
             {
                 this.patch.printTriggerStack();
 
-                console.log((new Error()).stack);
+                this._log.stack();
+
                 this._loggedGlError = true;
             }
         }
@@ -711,7 +711,7 @@ const Context = function (_patch)
             }
             else
             {
-                Log.log("screenshot: no blob");
+                this._log.log("screenshot: no blob");
             }
         }.bind(this), noclearalpha);
     };
@@ -1233,7 +1233,7 @@ Context.prototype._setBlendMode = function (blendMode, premul)
     }
     else
     {
-        Log.log("setblendmode: unknown blendmode");
+        this._log.log("setblendmode: unknown blendmode");
     }
 };
 

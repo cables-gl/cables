@@ -1,5 +1,6 @@
 import { uuid } from "../utils";
 import { Log } from "../log";
+import Logger from "../core_logger";
 
 
 const DEFAULT_TEXTURE_SIZE = 8;
@@ -26,7 +27,7 @@ const DEFAULT_TEXTURE_SIZE = 8;
 const Texture = function (__cgl, options)
 {
     if (!__cgl) throw new Error("no cgl");
-
+    this._log = new Logger("cgl_texture");
     this._cgl = __cgl;
     this.tex = this._cgl.gl.createTexture();
     this.id = uuid();
@@ -130,9 +131,9 @@ Texture.prototype.clone = function ()
 
     if (!this.compareSettings(newTex))
     {
-        console.error("Cloned texture settings do not compare!");
-        Log.log(this);
-        Log.log(newTex);
+        this._log.error("Cloned texture settings do not compare!");
+        this._log.error(this);
+        this._log.error(newTex);
     }
 
     return newTex;
@@ -151,7 +152,7 @@ Texture.prototype.setSize = function (w, h)
     if (w != w || w <= 0 || !w) w = DEFAULT_TEXTURE_SIZE;
     if (h != h || h <= 0 || !h) h = DEFAULT_TEXTURE_SIZE;
 
-    if (w > this._cgl.maxTexSize || h > this._cgl.maxTexSize) console.error("texture size too big! " + w + "x" + h + " / max: " + this._cgl.maxTexSize);
+    if (w > this._cgl.maxTexSize || h > this._cgl.maxTexSize) this._log.error("texture size too big! " + w + "x" + h + " / max: " + this._cgl.maxTexSize);
 
     w = Math.min(w, this._cgl.maxTexSize);
     h = Math.min(h, this._cgl.maxTexSize);
@@ -185,7 +186,7 @@ Texture.prototype.setSize = function (w, h)
          (!this._cgl.gl.getExtension("OES_texture_float_linear"))
     )
     {
-        console.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
+        this._log.warn("this graphics card does not support floating point texture linear interpolation! using NEAREST");
         this.filter = Texture.FILTER_NEAREST;
     }
 
@@ -272,6 +273,9 @@ Texture.prototype.initFromData = function (data, w, h, filter, wrap)
     this.height = h;
     this._fromData = true;
     this.deleted = false;
+
+    this._cgl.gl.pixelStorei(this._cgl.gl.UNPACK_FLIP_Y_WEBGL, this.flip);
+
     this._cgl.gl.bindTexture(this.texTarget, this.tex);
     this._cgl.gl.texImage2D(this.texTarget, 0, this._cgl.gl.RGBA, w, h, 0, this._cgl.gl.RGBA, this._cgl.gl.UNSIGNED_BYTE, data);
     this._setFilter();
@@ -313,8 +317,8 @@ Texture.prototype.initTexture = function (img, filter)
     if (img.height) this.height = img.height;
     if (filter) this.filter = filter;
 
-    if (img.width > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.width, this._cgl.maxTexSize);
-    if (img.height > this._cgl.maxTexSize) console.error("[cgl_texture] texture size to big!!!", img.height, this._cgl.maxTexSize);
+    if (img.width > this._cgl.maxTexSize) this._log.error("[cgl_texture] texture size to big!!!", img.width, this._cgl.maxTexSize);
+    if (img.height > this._cgl.maxTexSize) this._log.error("[cgl_texture] texture size to big!!!", img.height, this._cgl.maxTexSize);
 
     // console.log("loaded texture", img.width, img.height);
 
@@ -377,7 +381,7 @@ Texture.prototype.isPowerOfTwo = function ()
 
 Texture.prototype.printInfo = function ()
 {
-    Log.log(this.getInfo());
+    console.log(this.getInfo());
 };
 
 Texture.prototype.getInfoReadable = function ()
@@ -455,21 +459,19 @@ Texture.prototype._setFilter = function ()
 
     if (this.shadowMap)
     {
-        Log.log("shadowmap tex");
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_MODE, this._cgl.gl.COMPARE_REF_TO_TEXTURE);
         this._cgl.gl.texParameteri(this._cgl.gl.TEXTURE_2D, this._cgl.gl.TEXTURE_COMPARE_FUNC, this._cgl.gl.LEQUAL);
     }
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        Log.log("texture: HDR and mipmap filtering at the same time is not possible");
+        this._log.warn("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
-        Log.stack();
+        this._log.stack();
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())
     {
-        // Log.log( 'non power of two',this.width,this.height );
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MAG_FILTER, this._cgl.gl.NEAREST);
         this._cgl.gl.texParameteri(this.texTarget, this._cgl.gl.TEXTURE_MIN_FILTER, this._cgl.gl.NEAREST);
 
@@ -514,7 +516,7 @@ Texture.prototype._setFilter = function ()
         }
         else
         {
-            Log.log("unknown texture filter!", this.filter);
+            this._log.log("unknown texture filter!", this.filter);
             throw new Error("unknown texture filter!" + this.filter);
         }
 
@@ -599,7 +601,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
  */
 Texture.getTempTexture = function (cgl)
 {
-    if (!cgl)console.error("[getTempTexture] no cgl!");
+    if (!cgl) this._log.error("[getTempTexture] no cgl!");
     if (!cgl.tempTexture) cgl.tempTexture = Texture.getTemporaryTexture(cgl, 256, Texture.FILTER_LINEAR, Texture.REPEAT);
     return cgl.tempTexture;
 };
@@ -613,7 +615,7 @@ Texture.getTempTexture = function (cgl)
  */
 Texture.getEmptyTexture = function (cgl)
 {
-    if (!cgl)console.error("[getEmptyTexture] no cgl!");
+    if (!cgl) this._log.error("[getEmptyTexture] no cgl!");
     if (cgl.tempTextureEmpty) return cgl.tempTextureEmpty;
 
     cgl.tempTextureEmpty = new Texture(cgl, { "name": "emptyTexture" });
@@ -624,6 +626,7 @@ Texture.getEmptyTexture = function (cgl)
     return cgl.tempTextureEmpty;
 };
 
+
 /**
  * @function getRandomTexture
  * @memberof Texture
@@ -633,7 +636,7 @@ Texture.getEmptyTexture = function (cgl)
  */
 Texture.getRandomTexture = function (cgl)
 {
-    if (!cgl)console.error("[getRandomTexture] no cgl!");
+    if (!cgl) this._log.error("[getRandomTexture] no cgl!");
     if (cgl.randomTexture) return cgl.randomTexture;
 
     const size = 256;
@@ -663,7 +666,7 @@ Texture.getRandomTexture = function (cgl)
  */
 Texture.getBlackTexture = function (cgl)
 {
-    if (!cgl)console.error("[getBlackTexture] no cgl!");
+    if (!cgl) this._log.error("[getBlackTexture] no cgl!");
     if (cgl.blackTexture) return cgl.blackTexture;
 
     const size = 8;
@@ -753,7 +756,7 @@ Texture.getEmptyCubemapTexture = function (cgl)
  */
 Texture.getTempGradientTexture = function (cgl)
 {
-    if (!cgl)console.error("[getTempGradientTexture] no cgl!");
+    if (!cgl) this._log.error("[getTempGradientTexture] no cgl!");
 
     if (cgl.tempTextureGradient) return cgl.tempTextureGradient;
     const temptex = new Texture(cgl);

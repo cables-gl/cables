@@ -2,10 +2,12 @@
 
 import { Texture } from "./cgl_texture";
 import { Log } from "../log";
+import Logger from "../core_logger";
 
 
 const Framebuffer2 = function (cgl, w, h, options)
 {
+    this._log = new Logger("cgl_framebuffer2");
     this.Framebuffer2DrawTargetsDefault = null;
     this.Framebuffer2BlittingFramebuffer = null;
     this.Framebuffer2FinalFramebuffer = null;
@@ -157,9 +159,6 @@ Framebuffer2.prototype.setSize = function (w, h)
     this._width = Math.min(this._width, this._cgl.maxTexSize);
     this._height = Math.min(this._height, this._cgl.maxTexSize);
 
-
-    // console.log("fb setsize", this._width, this._height, this);
-
     this._cgl.profileData.profileFrameBuffercreate++;
 
     if (this._frameBuffer)
@@ -265,18 +264,13 @@ Framebuffer2.prototype.setSize = function (w, h)
 
     // this._cgl.gl.bindFramebuffer(this._cgl.gl.FRAMEBUFFER, null);
 
-    // const err = this._cgl.printError("fb setsize1");
-    // if (err)
-    // {
-    // console.log(err);
-    // }
 
-    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) console.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
+    if (!this._cgl.gl.isFramebuffer(this._textureFrameBuffer)) this._log.warn("invalid framebuffer");// throw new Error("Invalid framebuffer");
     const status = this._cgl.gl.checkFramebufferStatus(this._cgl.gl.FRAMEBUFFER);
 
     if (status != this._cgl.gl.FRAMEBUFFER_COMPLETE)
     {
-        console.log("framebuffer incomplete: " + this.name, this);
+        this._log.error("framebuffer incomplete: " + this.name, this);
         switch (status)
         {
         case this._cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:

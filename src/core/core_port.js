@@ -2,7 +2,7 @@ import { EventTarget } from "./eventtarget";
 import { generateUUID } from "./utils";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
-import { Log } from "./log";
+import Logger from "./core_logger";
 
 /**
  * data is coming into and out of ops through input and output ports
@@ -18,7 +18,7 @@ const Port = function (__parent, name, type, uiAttribs)
     EventTarget.apply(this);
 
     this.data = {}; // UNUSED, DEPRECATED, only left in for backwards compatibility with userops
-
+    this._log = new Logger("core_port");
     /**
      * @type {Number}
      * @name direction
@@ -70,15 +70,15 @@ const Port = function (__parent, name, type, uiAttribs)
     Object.defineProperty(this, "val", {
         get()
         {
-            console.log("val getter deprecated!", this);
-            console.log((new Error()).stack);
+            this._log.warn("val getter deprecated!", this);
+            this._log.stack();
             this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
         {
-            console.log("val setter deprecated!", this);
-            console.log((new Error()).stack);
+            this._log.warn("val setter deprecated!", this);
+            this._log.stack();
             this.setValue(v);
             // if(!this._warnedDeprecated)Log.log('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;
@@ -248,9 +248,9 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     this.setValue = function (_v) {};
                     this.onTriggered = function () {};
 
-                    console.error("onvaluechanged exception cought", ex);
-                    Log.log(ex.stack);
-                    Log.log("exception in: " + this.parent.name);
+                    this._log.error("onvaluechanged exception cought", ex);
+                    this._log.error(ex.stack);
+                    this._log.warn("exception in: " + this.parent.name);
 
                     if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
@@ -299,7 +299,7 @@ Port.prototype.forceChange = function ()
     {
         // very temporary: deprecated warning!!!!!!!!!
         // var params=Port.args(this.onValueChanged||this.onChange)
-        // if(params.length>0) console.warn('TOM: port has onchange params!',this.parent.objName,this.name);
+        // if(params.length>0) this._log.warn('TOM: port has onchange params!',this.parent.objName,this.name);
     }
 
     this.emitEvent("change", this.value, this);
@@ -389,7 +389,7 @@ Port.prototype.removeLinks = function ()
         count++;
         if (count > 5000)
         {
-            console.warn("could not delete links... / infinite loop");
+            this._log.warn("could not delete links... / infinite loop");
             this.links.length = 0;
             break;
         }
@@ -543,22 +543,22 @@ Port.prototype.trigger = function ()
             this.parent.patch.emitEvent("exception", ex, portTriggered.parent);
             this.parent.patch.emitEvent("opcrash", portTriggered);
         }
-        Log.log("exception!");
-        console.error("ontriggered exception cought", ex);
-        Log.log(ex.stack);
-        Log.log("exception in: " + portTriggered.parent.name);
+        this._log.warn("exception!");
+        this._log.error("ontriggered exception cought", ex);
+        this._log.error(ex.stack);
+        this._log.warn("exception in: " + portTriggered.parent.name);
     }
 };
 
 Port.prototype.call = function ()
 {
-    Log.log("call deprecated - use trigger() ");
+    this._log.warn("call deprecated - use trigger() ");
     this.trigger();
 };
 
 Port.prototype.execute = function ()
 {
-    Log.log("### execute port: " + this.getName(), this.goals.length);
+    this._log.warn("### execute port: " + this.getName(), this.goals.length);
 };
 
 Port.prototype.setVariableName = function (n)
@@ -588,7 +588,7 @@ Port.prototype.setVariable = function (v)
 
         if (!this._variableIn)
         {
-            console.log("PORT VAR NOT FOUND!!!", v);
+            this._log.warn("PORT VAR NOT FOUND!!!", v);
         }
         else
         {
@@ -765,7 +765,7 @@ Port.prototype.setUiActiveState = function (onoff)
 
 Port.prototype.hidePort = function ()
 {
-    console.log("op.hideport() is deprecated, do not use it!");
+    this._log.warn("op.hideport() is deprecated, do not use it!");
 };
 
 
