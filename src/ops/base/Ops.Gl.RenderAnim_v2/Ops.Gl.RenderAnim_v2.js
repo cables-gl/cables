@@ -55,6 +55,11 @@ useCanvasSize.onChange = updateSize;
 updateQuality();
 updateSize();
 
+inZip.onChange = () =>
+{
+    zip = null;
+};
+
 function updateQuality()
 {
     inQuality.setUiAttribs({ "greyout": inType.get() == "PNG" });

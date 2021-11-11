@@ -1689,7 +1689,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
             if (isBadLine) htmlWarning += "</span>";
         }
 
-        this._log.warn(infoLog);
+        console.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
 
