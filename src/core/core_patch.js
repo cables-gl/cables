@@ -9,7 +9,6 @@ import { Context } from "./cgl/cgl_state";
 import { Anim, ANIM } from "./anim";
 import { CONSTANTS } from "./constants";
 import { Requirements } from "./requirements";
-import { Log } from "./log";
 import Logger from "./core_logger";
 
 

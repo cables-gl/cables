@@ -1,5 +1,4 @@
 import Logger from "./core_logger";
-import { Log } from "./log";
 
 const EventTarget = function ()
 {

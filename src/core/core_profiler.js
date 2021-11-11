@@ -1,5 +1,4 @@
 import { now } from "./timer";
-import { Log } from "./log";
 
 const Profiler = function (patch)
 {

@@ -12,6 +12,10 @@
     "layout": {
         "portsIn": [
             {
+                "type": 5,
+                "name": "value"
+            },
+            {
                 "type": 0,
                 "name": "Syntax index",
                 "subType": "integer"
