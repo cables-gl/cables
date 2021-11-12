@@ -270,8 +270,14 @@ presetUpdate.onTriggered = function ()
 presetCreate.onTriggered = function ()
 {
     if (!op.patch.isEditorMode()) return;
-    CABLES.UI.MODAL.prompt("New Preset", "Enter a new preset name", "",
-        function (str)
+
+
+    new CABLES.UI.ModalDialog({
+        "prompt": true,
+        "title": "New Preset",
+        "text": "Enter a new preset name",
+        "promptValue": "",
+        "promptOk": (str) =>
         {
             op.refreshParams();
             presetNames.set(str);
@@ -280,7 +286,7 @@ presetCreate.onTriggered = function ()
             presets.push(preset);
             updateDropdown();
             savePresets();
-        });
+        } });
 };
 
 presetDelete.onTriggered = function ()
@@ -303,8 +309,12 @@ presetRename.onTriggered = function ()
 {
     if (!CABLES.UI) return;
 
-    CABLES.UI.MODAL.prompt("New Preset", "Enter a new preset name", "",
-        function (str)
+    new CABLES.UI.ModalDialog({
+        "prompt": true,
+        "title": "New Preset",
+        "text": "Enter a new preset name",
+        "promptValue": "",
+        "promptOk": (str) =>
         {
             if (!str) return;
             const current = presetNames.get();
@@ -313,7 +323,8 @@ presetRename.onTriggered = function ()
             saveData();
             op.refreshParams();
             updateDropdown();
-        });
+        }
+    });
 };
 
 dataPort.onChange = function ()
@@ -328,20 +339,20 @@ dataPort.onChange = function ()
 
         if (!op.getPort(varname))
         {
-        	if (portObject.type == CABLES.OP_PORT_TYPE_VALUE)
-        	{
+            if (portObject.type == CABLES.OP_PORT_TYPE_VALUE)
+            {
                 const val = op.patch.getVarValue(varname);
-        	    const port = op.inFloat(varname, val);
+                const port = op.inFloat(varname, val);
 
-        	    port.setUiAttribs({
-        	        "editableTitle": true,
-        	        "title": portObject.title });
+                port.setUiAttribs({
+                    "editableTitle": true,
+                    "title": portObject.title });
 
-        	    listenPortChange(port, varname);
+                listenPortChange(port, varname);
 
-        	    port.set(val);
-        	    port.forceChange();
-        	}
+                port.set(val);
+                port.forceChange();
+            }
         }
     }
 
