@@ -1,5 +1,4 @@
 import { now } from "./timer";
-import { Log } from "./log";
 
 const Profiler = function (patch)
 {
@@ -27,7 +26,6 @@ const Profiler = function (patch)
             {
                 if (items[currentId])
                 {
-                    // Log.log(currentStart);
                     items[currentId].timeUsed += performance.now() - currentStart;
 
                     if (!items[currentId].peakTime || now() - items[currentId].peakTime > 5000)

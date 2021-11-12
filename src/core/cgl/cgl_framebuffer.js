@@ -1,5 +1,5 @@
+import Logger from "../core_logger";
 import { Texture } from "./cgl_texture";
-import { Log } from "../log";
 
 // todo: convert to prototyped...
 
@@ -16,6 +16,7 @@ import { Log } from "../log";
 const Framebuffer = function (_cgl, _w, _h, options)
 {
     const cgl = _cgl;
+    this._log = new Logger("Framebuffer");
 
     const depthTextureExt =
         cgl.gl.getExtension("WEBGL_depth_texture") ||
@@ -139,10 +140,6 @@ const Framebuffer = function (_cgl, _w, _h, options)
 
         if (depthTextureExt)
         {
-            // if(this._cgl.gl.getExtension('OES_texture_half_float'))
-            // {
-            //     Log.log("half float");HALF_FLOAT_OES
-            // }
             cgl.gl.framebufferRenderbuffer(cgl.gl.FRAMEBUFFER, cgl.gl.DEPTH_ATTACHMENT, cgl.gl.RENDERBUFFER, depthBuffer);
             cgl.gl.framebufferTexture2D(
                 cgl.gl.FRAMEBUFFER,
@@ -161,22 +158,22 @@ const Framebuffer = function (_cgl, _w, _h, options)
         case cgl.gl.FRAMEBUFFER_COMPLETE:
             break;
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_ATTACHMENT:
-            Log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", width, height, texture.tex, depthBuffer);
+            this._log.warn("FRAMEBUFFER_INCOMPLETE_ATTACHMENT...", width, height, texture.tex, depthBuffer);
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_ATTACHMENT");
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT:
-            Log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
+            this._log.warn("FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT");
         case cgl.gl.FRAMEBUFFER_INCOMPLETE_DIMENSIONS:
-            Log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
+            this._log.warn("FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_INCOMPLETE_DIMENSIONS");
         case cgl.gl.FRAMEBUFFER_UNSUPPORTED:
-            Log.warn("FRAMEBUFFER_UNSUPPORTED");
+            this._log.warn("FRAMEBUFFER_UNSUPPORTED");
             throw new Error("Incomplete framebuffer: FRAMEBUFFER_UNSUPPORTED");
         case 0x8CDB:
-            Log.warn("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
+            this._log.warn("Incomplete: FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER from ext. Or Safari/iOS undefined behaviour.");
             break;
         default:
-            Log.warn("incomplete framebuffer", status);
+            this._log.warn("incomplete framebuffer", status);
             throw new Error("Incomplete framebuffer: " + status);
             // throw("Incomplete framebuffer: " + status);
         }

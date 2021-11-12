@@ -4,7 +4,6 @@ import { simpleId, generateUUID } from "../utils";
 import { MESH } from "./cgl_mesh";
 // import { CGL } from "./index";
 import { CONSTANTS } from "./constants";
-import { Log } from "../log";
 import { escapeHTML } from "./cgl_utils";
 import Logger from "../core_logger";
 // ---------------------------------------------------------------------------
@@ -1405,13 +1404,13 @@ Shader.prototype._linkProgram = function (program, vstr, fstr)
             this._log.warn(this._cgl.gl.getShaderInfoLog(this.vshader) || "empty shader infolog");
             this._log.error(this._name + " shader linking fail...");
 
-            Log.log("srcFrag", fstr);
-            Log.log("srcVert", vstr);
-            Log.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
+            console.log("srcFrag", fstr);
+            console.log("srcVert", vstr);
+            console.log(this._name + " programinfo: ", this._cgl.gl.getProgramInfoLog(program));
 
-            Log.log("--------------------------------------");
-            Log.log(this);
-            Log.log("--------------------------------------");
+            console.log("--------------------------------------");
+            console.log(this);
+            console.log("--------------------------------------");
             this._isValid = false;
 
             this._name = "errorshader";
@@ -1663,10 +1662,10 @@ Shader.createShader = function (cgl, str, type, cglShader)
 
     if (!cgl.gl.getShaderParameter(shader, cgl.gl.COMPILE_STATUS))
     {
-        Log.log("compile status: ");
+        console.log("compile status: ");
 
-        if (type == cgl.gl.VERTEX_SHADER) Log.log("VERTEX_SHADER");
-        if (type == cgl.gl.FRAGMENT_SHADER) Log.log("FRAGMENT_SHADER");
+        if (type == cgl.gl.VERTEX_SHADER) console.log("VERTEX_SHADER");
+        if (type == cgl.gl.FRAGMENT_SHADER) console.log("FRAGMENT_SHADER");
 
         // this._log.warn(cgl.gl.getShaderInfoLog(shader));
 
@@ -1679,7 +1678,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
         {
             const j = parseInt(i, 10) + 1;
             const line = j + ": " + lines[i];
-            Log.log(line);
+            console.log(line);
 
             let isBadLine = false;
             for (const bj in badLines)
@@ -1690,14 +1689,14 @@ Shader.createShader = function (cgl, str, type, cglShader)
             if (isBadLine) htmlWarning += "</span>";
         }
 
-        this._log.warn(infoLog);
+        console.warn(infoLog);
 
         infoLog = infoLog.replace(/\n/g, "<br/>");
 
         htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
 
         cgl.patch.emitEvent("criticalError", "Shader error " + this._name, htmlWarning);
-        if (cgl.patch.isEditorMode())Log.log("Shader error " + this._name, htmlWarning);
+        if (cgl.patch.isEditorMode())console.log("Shader error " + this._name, htmlWarning);
 
         htmlWarning += "</div>";
 
@@ -1706,7 +1705,7 @@ Shader.createShader = function (cgl, str, type, cglShader)
     }
     else
     {
-        // Log.log(name+' shader compiled...');
+        // console.log(name+' shader compiled...');
     }
     // cgl.printError("shader create2");
     return shader;

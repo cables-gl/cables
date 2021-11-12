@@ -1,6 +1,5 @@
 import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
-import { Log } from "../log";
 
 
 const TextureEffect = function (cgl, options)
@@ -56,9 +55,6 @@ TextureEffect.prototype.setSourceTexture = function (tex)
 
     if (!this._textureSource.compareSettings(this._textureTarget))
     {
-        // Log.log('change effect target texture ');
-        // if(this._textureTarget) Log.log('change effect target texture from to ',this._textureTarget.width,this._textureSource.width);
-        // this._textureTarget.textureType=this._textureSource.textureType;
         if (this._textureTarget) this._textureTarget.delete();
 
         this._textureTarget = this._textureSource.clone();
@@ -106,7 +102,7 @@ TextureEffect.prototype.startEffect = function (bgTex)
 {
     if (!this._textureTarget)
     {
-        Log.log("effect has no target");
+        this._log.warn("effect has no target");
         return;
     }
 
@@ -153,7 +149,7 @@ TextureEffect.prototype.bind = function ()
 {
     if (this._textureSource === null)
     {
-        Log.log("no base texture set!");
+        this._log.warn("no base texture set!");
         return;
     }
 
@@ -173,7 +169,7 @@ TextureEffect.prototype.finish = function ()
 {
     if (this._textureSource === null)
     {
-        Log.log("no base texture set!");
+        this._log.warn("no base texture set!");
         return;
     }
 

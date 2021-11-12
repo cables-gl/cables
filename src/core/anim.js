@@ -1,8 +1,9 @@
 // import { quat } from "gl-matrix";
 import { Port } from "./core_port";
-import { Log } from "./log";
+
 
 import { CONSTANTS } from "./constants";
+import Logger from "./core_logger";
 
 const ANIM = {};
 
@@ -469,6 +470,7 @@ const Anim = function (cfg)
     this.onChange = null;
     this.stayInTimeline = false;
     this.loop = false;
+    this._log = new Logger("Anim");
 
     /**
      * @member defaultEasing
@@ -692,7 +694,7 @@ Anim.prototype.getValue = function (time)
 
     const perc = (time - key1.time) / (key2.time - key1.time);
 
-    if (!key1.ease) console.log("has no ease", key1, key2);
+    if (!key1.ease) this.log._warn("has no ease", key1, key2);
 
     return key1.ease(perc, key2);
 };
@@ -701,7 +703,7 @@ Anim.prototype.addKey = function (k)
 {
     if (k.time === undefined)
     {
-        Log.log("key time undefined, ignoring!");
+        this.log.warn("key time undefined, ignoring!");
     }
     else
     {

@@ -1,6 +1,5 @@
 import { CONSTANTS } from "./constants";
 import { EventTarget } from "./eventtarget";
-import { Log } from "./log";
 
 /**
  * @external CABLES
@@ -115,7 +114,7 @@ Link.prototype.link = function (p1, p2)
 {
     if (!Link.canLink(p1, p2))
     {
-        Log.log("cannot link ports!");
+        console.warn("[core_link] cannot link ports!", p1, p2);
         return false;
     }
 

@@ -55,6 +55,11 @@ useCanvasSize.onChange = updateSize;
 updateQuality();
 updateSize();
 
+inZip.onChange = () =>
+{
+    zip = null;
+};
+
 function updateQuality()
 {
     inQuality.setUiAttribs({ "greyout": inType.get() == "PNG" });
@@ -260,7 +265,7 @@ function render()
         op.log("Rendering Frame " + countFrames + " of " + numFrames, time);
         if (inType.get() == "WebM")
         {
-            frames.push(op.patch.cgl.canvas.toDataURL("image/webp", inQuality.get()));
+            frames.push(op.patch.cgl.canvas.toDataURL("image/webp", inQuality.get() * 0.999));
             countFrames++;
             updateTime();
         }

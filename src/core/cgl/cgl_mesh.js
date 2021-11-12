@@ -1,7 +1,6 @@
 import { Uniform } from "./cgl_shader_uniform";
 import { CONSTANTS } from "./constants";
 import { extendMeshWithFeedback } from "./cgl_mesh_feedback";
-import { Log } from "../log";
 import Logger from "../core_logger";
 
 const MESH = {};
@@ -343,7 +342,7 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
 {
     if (!this._bufVerticesIndizes)
     {
-        Log.warn("no bufVerticesIndizes");
+        this._log.warn("no bufVerticesIndizes");
         return;
     }
     if (vertIndices.length > 0)
@@ -480,7 +479,7 @@ Mesh.prototype._bind = function (shader)
                 // todo: easier way to fill mat4 attribs...
                 if (attribute.itemSize <= 4)
                 {
-                    if (!attribute.itemSize || attribute.itemSize == 0) Log.log("instanced attrib itemsize error", this._geom.name, attribute);
+                    if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("instanced attrib itemsize error", this._geom.name, attribute);
 
                     this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
                     this._cgl.gl.vertexAttribDivisor(attrLocs[i], 1);
@@ -504,12 +503,12 @@ Mesh.prototype._bind = function (shader)
                 }
                 else
                 {
-                    Log.log("unknown instance attrib size", attribute.name);
+                    this._log.warn("unknown instance attrib size", attribute.name);
                 }
             }
             else
             {
-                if (!attribute.itemSize || attribute.itemSize == 0) Log.log("attrib itemsize error", this._geom.name, attribute);
+                if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("attrib itemsize error", this._geom.name, attribute);
                 this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
 
                 if (attribute.pointer)
@@ -581,10 +580,10 @@ Mesh.prototype.meshChanged = function ()
 
 Mesh.prototype.printDebug = function (shader)
 {
-    Log.log("--attributes");
+    console.log("--attributes");
     for (let i = 0; i < this._attributes.length; i++)
     {
-        Log.log("attribute " + i + " " + this._attributes[i].name);
+        console.log("attribute " + i + " " + this._attributes[i].name);
     }
 };
 

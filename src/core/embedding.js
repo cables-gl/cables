@@ -1,6 +1,5 @@
 import Patch from "./core_patch";
 import { generateUUID } from "./utils";
-import { Log } from "./log";
 
 const EMBED = {};
 
@@ -50,7 +49,7 @@ EMBED.addPatch = function (_element, options)
     {
         options.onError = function (err)
         {
-            Log.error(err);
+            console.error(err);
         };
     }
 
