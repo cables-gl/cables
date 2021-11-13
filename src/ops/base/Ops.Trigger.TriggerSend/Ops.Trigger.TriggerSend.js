@@ -27,13 +27,18 @@ function updateName()
     {
         if (varname.get() == "+ create new one")
         {
-        	CABLES.UI.MODAL.prompt("New Trigger", "enter a name for the new trigger", "",
-        		function (str)
-        		{
-        		    varname.set(str);
+            new CABLES.UI.ModalDialog({
+                "prompt": true,
+                "title": "New Trigger",
+                "text": "enter a name for the new trigger",
+                "promptValue": "",
+                "promptOK": (str) =>
+                {
+                    varname.set(str);
                     op.patch.namedTriggers[str] = op.patch.namedTriggers[str] || [];
                     updateVarNamesDropdown();
-        		});
+                }
+            });
             return;
         }
 
