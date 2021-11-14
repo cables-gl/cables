@@ -6,6 +6,7 @@ const
     controls = op.inBool("Controls", true),
     active = op.inBool("Active", true),
     loop = op.inBool("Loop", false),
+    inMuted = op.inBool("Muted", false),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
     rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),
@@ -39,7 +40,8 @@ function init()
 init();
 
 loop.onChange =
-controls.onChange = updateVideoSettings;
+controls.onChange =
+inMuted.onChange = updateVideoSettings;
 
 function updateVideoSettings()
 {
@@ -53,6 +55,9 @@ function updateVideoSettings()
 
     if (loop.get()) element.loop = "true";
     else element.removeAttribute("loop");
+
+    if (inMuted.get()) element.muted = "true";
+    else element.removeAttribute("muted");
 }
 
 function updatePlay()

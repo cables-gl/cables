@@ -92,6 +92,11 @@
             },
             {
                 "type": 0,
+                "name": "Abs",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Channel index",
                 "subType": "integer"
             },

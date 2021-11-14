@@ -51,7 +51,9 @@
             col.rgb+=MOD_color.rgb*MOD_amount;
         #endif
         #ifdef MOD_BLEND_MUL
-            col.rgb*=MOD_color.rgb*MOD_amount;
+            // col.rgb*=MOD_color.rgb*MOD_amount;
+            col.rgb=mix(col.rgb,col.rgb*MOD_color.rgb,MOD_amount);
+
         #endif
 
     #ifdef MOD_DISCARD
