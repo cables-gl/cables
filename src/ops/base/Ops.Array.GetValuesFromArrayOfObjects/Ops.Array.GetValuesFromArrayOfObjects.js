@@ -2,9 +2,13 @@ const
     inArr = op.inArray("Array"),
     inKey = op.inString("Key"),
     inignoreNonNums = op.inBool("Numbers Only", false),
+    inRemoveInvalid = op.inBool("Remove empty/invalid", false),
     outArray = op.outArray("Result");
 
-inKey.onChange = inArr.onChange = inignoreNonNums.onChange = exec;
+inRemoveInvalid.onChange =
+inKey.onChange =
+inArr.onChange =
+inignoreNonNums.onChange = exec;
 
 function exec()
 {
@@ -22,6 +26,8 @@ function exec()
 
     op.setUiAttrib({ "extendTitle": inKey.get() });
 
+    const removeInvalid = inRemoveInvalid.get();
+
     for (let i = 0; i < arr.length; i++)
     {
         const obj = arr[i];
@@ -30,13 +36,24 @@ function exec()
         {
             if (!(key in obj)) continue;
 
+            const v = obj[key];
+
+            if (removeInvalid)
+            {
+                if (v === "" ||
+                    v === null ||
+                    v === undefined
+
+                ) continue;
+            }
+
             if (numsonly)
             {
-                if (CABLES.UTILS.isNumeric(obj[key])) newArr.push(parseFloat(obj[key]));
+                if (CABLES.UTILS.isNumeric(v)) newArr.push(parseFloat(v));
             }
             else
             {
-                newArr.push(obj[key]);
+                newArr.push(v);
             }
         }
     }

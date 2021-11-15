@@ -33,6 +33,11 @@
                 "type": 0,
                 "name": "Numbers Only",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Remove empty/invalid",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

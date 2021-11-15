@@ -37,13 +37,13 @@
             {
                 "type": 0,
                 "name": "Grey Out",
-                "group": "Visibility",
+                "group": "Display",
                 "subType": "boolean"
             },
             {
                 "type": 0,
                 "name": "Visible",
-                "group": "Visibility",
+                "group": "Display",
                 "subType": "boolean"
             },
             {

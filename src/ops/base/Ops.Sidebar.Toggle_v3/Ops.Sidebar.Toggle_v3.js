@@ -71,7 +71,6 @@ function setDefaultValue()
 {
     const defaultValue = inputValuePort.get();
 
-    console.log("inputValuePort.get()", inputValuePort.get());
     defaultValuePort.set(defaultValue);
     valuePort.set(defaultValue);
     if (CABLES.UI && op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
