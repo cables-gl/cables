@@ -1,7 +1,7 @@
 const
-    exe = op.inTriggerButton("Screenshot"),
     filename = op.inString("Filename", "cables"),
     useSize = op.inValueBool("Use Canvas Size", true),
+    exe = op.inTriggerButton("Screenshot"),
     outNext = op.outTrigger("Finished"),
     width = op.inValueInt("Width", 0),
     height = op.inValueInt("Height", 0);

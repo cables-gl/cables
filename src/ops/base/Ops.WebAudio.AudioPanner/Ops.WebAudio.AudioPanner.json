@@ -36,7 +36,7 @@
         ],
         "name": "Ops.WebAudio.AudioPanner"
     },
-    "summary": "pan an audio signal from left to right",
+    "summary": "stereo pan an audio signal from left to right",
     "issues": "",
     "collections": null,
     "relatedops": null,

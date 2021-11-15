@@ -2,12 +2,16 @@ function dracoLoadMesh(view,name,next)
 {
     // console.log("!!!!!!DracoDecoderModule");
 
+    // console.log("start dracoloadmesh.... ",name);
     new DracoDecoderModule().then( (m) =>
     {
         return m;
     }).then( (e)=>
     {
+        // console.log("dracoloadmesh finished",name);
         const f=new e.Decoder();
+
+
         // console.log("f",f);
         // const view =gltf.chunks[0].data.bufferViews[0];
         // console.log("view",view);
@@ -52,6 +56,10 @@ function dracoLoadMesh(view,name,next)
 
 		next(geom);
 
+        e.destroy(f);
+        e.destroy(buffer);
+        // f.destroy(dracoGeometry);
+        // e.destroy();
     });
 }
 
@@ -138,83 +146,83 @@ function dracoAttributes(draco,decoder,dracoGeometry,geometryType,name)
 }
 
 
-		function decodeIndex( draco, decoder, dracoGeometry ) {
+function decodeIndex( draco, decoder, dracoGeometry )
+{
+	const numFaces = dracoGeometry.num_faces();
+	const numIndices = numFaces * 3;
+	const byteLength = numIndices * 4;
 
-			const numFaces = dracoGeometry.num_faces();
-			const numIndices = numFaces * 3;
-			const byteLength = numIndices * 4;
+	const ptr = draco._malloc( byteLength );
 
-			const ptr = draco._malloc( byteLength );
+	decoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
+	const index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
 
-			decoder.GetTrianglesUInt32Array( dracoGeometry, byteLength, ptr );
-			const index = new Uint32Array( draco.HEAPF32.buffer, ptr, numIndices ).slice();
+	draco._free( ptr );
 
-			draco._free( ptr );
+	return {
+		array: index,
+		itemSize: 1
+	};
 
-			return {
-				array: index,
-				itemSize: 1
-			};
+}
 
-		}
+function decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute )
+{
+    let bytesPerElement=4;
+    if(attributeType=="Float32Array")bytesPerElement=4;
+    else if(attributeType=="Uint8Array")bytesPerElement=1;
+    else console.log("unknown attrtype bytesPerElement",attributeType);
 
-		function decodeAttribute( draco, decoder, dracoGeometry, attributeName, attributeType, attribute )
-		{
-            let bytesPerElement=4;
-            if(attributeType=="Float32Array")bytesPerElement=4;
-            else if(attributeType=="Uint8Array")bytesPerElement=1;
-            else console.log("unknown attrtype bytesPerElement",attributeType);
+	const numComponents = attribute.num_components();
+	const numPoints = dracoGeometry.num_points();
+	const numValues = numPoints * numComponents;
+	const byteLength = numValues * bytesPerElement;
+	const dataType = getDracoDataType( draco, attributeType );
+	const ptr = draco._malloc( byteLength );
 
-			const numComponents = attribute.num_components();
-			const numPoints = dracoGeometry.num_points();
-			const numValues = numPoints * numComponents;
-			const byteLength = numValues * bytesPerElement;
-			const dataType = getDracoDataType( draco, attributeType );
-			const ptr = draco._malloc( byteLength );
+	decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
 
-			decoder.GetAttributeDataArrayForAllPoints( dracoGeometry, attribute, dataType, byteLength, ptr );
-
-			let array=null;
+	let array=null;
 
 
-			if(attributeType=="Float32Array") array = new Float32Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
-			else if(attributeType=="Uint8Array") array = new Uint8Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
-			else console.log("unknown attrtype",attributeType);
+	if(attributeType=="Float32Array") array = new Float32Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
+	else if(attributeType=="Uint8Array") array = new Uint8Array( draco.HEAPF32.buffer, ptr, numValues ).slice();
+	else console.log("unknown attrtype",attributeType);
 
-			draco._free( ptr );
+	draco._free( ptr );
 
-			return {
-				name: attributeName,
-				array: array,
-				itemSize: numComponents
-			};
+	return {
+		name: attributeName,
+		array: array,
+		itemSize: numComponents
+	};
 
-		}
+}
 
-		function getDracoDataType( draco, attributeType ) {
+function getDracoDataType( draco, attributeType ) {
 
-			switch ( attributeType ) {
+	switch ( attributeType ) {
 
-				case "Float32Array":
-					return draco.DT_FLOAT32;
+		case "Float32Array":
+			return draco.DT_FLOAT32;
 
-				case "Int8Array":
-					return draco.DT_INT8;
+		case "Int8Array":
+			return draco.DT_INT8;
 
-				case "Int16Array":
-					return draco.DT_INT16;
+		case "Int16Array":
+			return draco.DT_INT16;
 
-				case "Int32Array":
-					return draco.DT_INT32;
+		case "Int32Array":
+			return draco.DT_INT32;
 
-				case "Uint8Array":
-					return draco.DT_UINT8;
+		case "Uint8Array":
+			return draco.DT_UINT8;
 
-				case "Uint16Array":
-					return draco.DT_UINT16;
+		case "Uint16Array":
+			return draco.DT_UINT16;
 
-				case "Uint32Array":
-					return draco.DT_UINT32;
-			}
+		case "Uint32Array":
+			return draco.DT_UINT32;
+	}
 
-		}
+}
