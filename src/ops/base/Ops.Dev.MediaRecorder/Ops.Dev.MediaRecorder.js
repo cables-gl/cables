@@ -1,11 +1,11 @@
 const videoTypes = ["webm", "mp4", "x-matroska"];
 const audioTypes = ["webm", "mp3", "x-matroska"];
 const videoCodecs = ["vp9", "vp8", "avc1", "av1", "h265", "h264", "mpeg", "mp4a"];
-const audioCodecs=["opus", "pcm", "aac","mp3","ogg"];
+const audioCodecs = ["opus", "pcm", "aac", "mp3", "ogg"];
 
-const supportedVideos = getSupportedMimeTypes("video", videoTypes, videoCodecs,audioCodecs);
+const supportedVideos = getSupportedMimeTypes("video", videoTypes, videoCodecs, audioCodecs);
 
-function getSupportedMimeTypes(media, types, codecs,codecsB)
+function getSupportedMimeTypes(media, types, codecs, codecsB)
 {
     const isSupported = MediaRecorder.isTypeSupported;
     const supported = [];
@@ -28,27 +28,31 @@ function getSupportedMimeTypes(media, types, codecs,codecsB)
             {
                 if (isSupported(variation)) supported.push(variation);
             }));
-
         }));
     });
     return supported;
 }
 
-///////////////////
+/// ////////////////
 
 const
     recordingToggle = op.inBool("Recording", false),
-    inAudio = op.inObject("Audio In", null, "audioNode"),
 
-    // inTex = op.inTexture("Texture"),
-    inMedia=op.inSwitch("Media",['Video','Audio','Audio+Video'],'Video'),
+    inCodecs = op.inDropDown("Mimetype", supportedVideos),
     inMbit = op.inFloat("MBit", 5),
     inFPS = op.inFloat("FPS", 30),
-    inCodecs = op.inDropDown("Mimetype", supportedVideos),
-    downloadBtn = op.inTriggerButton("Download"),
-    outState=op.outString("State"),
-    outError=op.outString("Error"),
-    outCodec=op.outString("Final Mimetype");
+
+    inMedia = op.inSwitch("Media", ["Video", "Audio", "Audio+Video"], "Video"),
+    inAudio = op.inObject("Audio In", null, "audioNode"),
+    inCanvasId = op.inString("Video Canvas Id", "glcanvas"),
+
+    inAudoDownload = op.inBool("Auto Download", true),
+    outState = op.outString("State"),
+    outError = op.outString("Error"),
+    outCodec = op.outString("Final Mimetype");
+
+op.setPortGroup("Inputs", [inMedia, inAudio, inCanvasId]);
+op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS]);
 
 const gl = op.patch.cgl.gl;
 let fb = null;
@@ -61,16 +65,7 @@ let tex = null;
 let timeout = null;
 let firstTime = true;
 
-const canvas = op.patch.cgl.canvas;
-
-
 recordingToggle.onChange = toggleRecording;
-downloadBtn.onTriggered = download;
-
-canvas.getContext("2d");
-
-
-
 
 let mediaRecorder;
 let recordedBlobs;
@@ -96,6 +91,7 @@ inFPS.onChange =
 inMbit.onChange =
 inMedia.onChange =
 inAudio.onChange =
+inCanvasId.onChange =
 inCodecs.onChange = setupMediaRecorder;
 
 function setupMediaRecorder()
@@ -107,9 +103,10 @@ function setupMediaRecorder()
     outError.set("");
     op.setUiError("constr", null);
     op.setUiError("audionoaudio", null);
-    mediaRecorder=null;
+    op.setUiError("nocanvas", null);
+    mediaRecorder = null;
 
-    if(inCodecs.get()===""||inCodecs.get()===0)
+    if (inCodecs.get() === "" || inCodecs.get() === 0)
     {
         return;
     }
@@ -118,39 +115,42 @@ function setupMediaRecorder()
     recordedBlobs = [];
     try
     {
-        console.log(inMedia.get());
-
+        const canvas = document.getElementById(inCanvasId.get());
+        if (!canvas)
+        {
+            op.setUiError("nocanvas", "canvas not found ");
+            return;
+        }
+        canvas.getContext("2d");
         const streamVid = canvas.captureStream(inFPS.get());
 
-        let stream=streamVid;
-        if(inMedia!="Video")
+        let stream = streamVid;
+        if (inMedia.get() != "Video")
         {
             const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
             const streamAudio = audioCtx.createMediaStreamDestination();
 
-            if(!inAudio.get())
+            if (!inAudio.get())
             {
                 op.setUiError("audionoaudio", "no audio connected ");
-
                 return;
             }
             inAudio.get().connect(streamAudio);
 
-            if(inMedia.get()=="Audio+Video")stream= new MediaStream([...streamVid.getTracks(), ...streamAudio.stream.getTracks()]);
-            else stream=streamAudio;
-
+            if (inMedia.get() == "Audio+Video")stream = new MediaStream([...streamVid.getTracks(), ...streamAudio.stream.getTracks()]);
+            else stream = streamAudio;
         }
 
         mediaRecorder = new MediaRecorder(stream, options);
     }
     catch (err)
     {
+        console.log(err);
         console.log("error mr constructor: ", err);
         outError.set(err.msg);
-        op.setUiError("contr", "MediaRecorder error: "+err.message);
-
+        op.setUiError("contr", "MediaRecorder error: " + err.message);
     }
-    if(mediaRecorder)
+    if (mediaRecorder)
     {
         outState.set(mediaRecorder.state);
         outCodec.set(mediaRecorder.mimeType);
@@ -159,7 +159,6 @@ function setupMediaRecorder()
     {
         console.log("no mediarecorder created...");
     }
-
 }
 
 // The nested try blocks will be simplified when Chrome 47 moves to Stable
@@ -180,7 +179,7 @@ function stopRecording()
 {
     if (!mediaRecorder)
     {
-        op.warn("cant stop no mediarecorder")
+        op.warn("cant stop no mediarecorder");
         return;
     }
     console.log("mediaRecorder.state", mediaRecorder.state);
@@ -193,11 +192,12 @@ function stopRecording()
     outState.set(mediaRecorder.state);
 
     console.log("Recorded Blobs: ", recordedBlobs);
+    if (inAudoDownload.get())download();
 }
 
 function download()
 {
-    if(recordedBlobs.length==0)
+    if (recordedBlobs.length == 0)
     {
         op.warn("download canceled, no recordedBlobs");
     }
