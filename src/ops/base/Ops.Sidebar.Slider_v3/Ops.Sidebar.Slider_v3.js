@@ -27,7 +27,7 @@ const valuePort = op.outValue("Result", defaultValuePort.get());
 
 op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 op.setPortGroup("Range", [minPort, maxPort, stepPort]);
-op.setPortGroup("Visibility", [inGreyOut, inVisible]);
+op.setPortGroup("Display", [inGreyOut, inVisible]);
 
 // vars
 const el = document.createElement("div");
@@ -66,7 +66,7 @@ value.oninput = onTextInputChanged;
 el.appendChild(value);
 
 const suffixEle = document.createElement("span");
-// value.value = defaultValuePort.get();
+// setValueFieldValue(defaultValuePort).get();
 // value.setAttribute("type", "text");
 // value.oninput = onTextInputChanged;
 
@@ -128,8 +128,8 @@ reset.onTriggered = function ()
 {
     const newValue = parseFloat(defaultValuePort.get());
     valuePort.set(newValue);
-    value.value = newValue;
-    input.value = newValue;
+    setValueFieldValue(newValue);
+    setInputFieldValue(newValue);
     inputValuePort.set(newValue);
     updateActiveTrack();
 };
@@ -152,7 +152,7 @@ function onTextInputChanged(ev)
     const max = maxPort.get();
     if (newValue < min) { newValue = min; }
     else if (newValue > max) { newValue = max; }
-    // input.value = newValue;
+    // setInputFieldValue(newValue);
     valuePort.set(newValue);
     updateActiveTrack();
     inputValuePort.set(newValue);
@@ -166,8 +166,8 @@ function onInputValuePortChanged()
     const maxValue = maxPort.get();
     if (newValue > maxValue) { newValue = maxValue; }
     else if (newValue < minValue) { newValue = minValue; }
-    value.value = newValue;
-    input.value = newValue;
+    setValueFieldValue(newValue);
+    setInputFieldValue(newValue);
     valuePort.set(newValue);
     updateActiveTrack();
 }
@@ -179,8 +179,8 @@ function onSetDefaultValueButtonPress()
     const maxValue = maxPort.get();
     if (newValue > maxValue) { newValue = maxValue; }
     else if (newValue < minValue) { newValue = minValue; }
-    value.value = newValue;
-    input.value = newValue;
+    setValueFieldValue(newValue);
+    setInputFieldValue(newValue);
     valuePort.set(newValue);
     defaultValuePort.set(newValue);
     if (op.isCurrentUiOp()) gui.opParams.show(op); /* update DOM */
@@ -192,7 +192,7 @@ function onSliderInput(ev)
 {
     ev.preventDefault();
     ev.stopPropagation();
-    value.value = ev.target.value;
+    setValueFieldValue(ev.target.value);
     const inputFloat = parseFloat(ev.target.value);
     valuePort.set(inputFloat);
     inputValuePort.set(inputFloat);
@@ -246,8 +246,8 @@ function onDefaultValueChanged()
     valuePort.set(parseFloat(defaultValue));
     onMinPortChange();
     onMaxPortChange();
-    input.value = defaultValue;
-    value.value = defaultValue;
+    setInputFieldValue(defaultValue);
+    setValueFieldValue(defaultValue);
 
     updateActiveTrack(defaultValue); // needs to be passed as argument, is this async?
 }
@@ -273,6 +273,15 @@ function onParentChanged()
     updateActiveTrack();
 }
 
+function setValueFieldValue(v)
+{
+    value.value = v;
+}
+
+function setInputFieldValue(v)
+{
+    input.value = v;
+}
 function showElement(el)
 {
     if (el)el.style.display = "block";
