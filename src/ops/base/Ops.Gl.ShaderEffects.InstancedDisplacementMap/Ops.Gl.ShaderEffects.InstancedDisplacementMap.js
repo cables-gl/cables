@@ -12,7 +12,7 @@ const
     inNormalize = op.inBool("Normalize", false),
     inOffsetX = op.inFloat("Offset X", 0),
     inOffsetY = op.inFloat("Offset Y", 0),
-
+    inAbs = op.inBool("Abs", false),
     inChannel = op.inSwitch("Channel", ["R", "G", "B", "RGB"], "R"),
 
     inAxisX = op.inBool("X", false),
@@ -30,6 +30,7 @@ inTex.onChange =
     inNormalize.onChange =
     inDebug.onChange =
     inChannel.onChange =
+    inAbs.onChange =
     inColorize.onChange = updateDefines;
 inTrigger.onTriggered = render;
 
@@ -76,6 +77,8 @@ function updateDefines()
     mod.toggleDefine("MOD_AXIS_X", inAxisX.get());
     mod.toggleDefine("MOD_AXIS_Y", inAxisY.get());
     mod.toggleDefine("MOD_AXIS_Z", inAxisZ.get());
+
+    mod.toggleDefine("MOD_ABS", inAbs.get());
 
     mod.toggleDefine("MOD_CLAMP", inClamp.get());
     mod.toggleDefine("MOD_COLORIZE", inColorize.get() || inDebug.get());

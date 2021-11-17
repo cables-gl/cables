@@ -17,22 +17,23 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Open"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "URL"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Target Name"
             },
             {
-                "type": "5",
+                "type": 5,
                 "name": "Specs"
             }
         ],
+        "portsOut": [],
         "name": "Ops.Html.HyperLink_v2"
     },
     "summary": "Open another website",

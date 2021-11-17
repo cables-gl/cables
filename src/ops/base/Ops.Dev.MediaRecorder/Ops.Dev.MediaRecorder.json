@@ -1,0 +1,79 @@
+{
+    "id": "ff12e50f-e2bd-4554-9aec-dab9de4cba8b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1636701596931
+        },
+        {
+            "message": "Ops.User.pandur.MediaRecorder renamed to Ops.Dev.MediaRecorder",
+            "author": "pandur",
+            "date": 1636903749376
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1636701601165,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Recording",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Mimetype index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "MBit",
+                "group": "Encoding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "FPS",
+                "group": "Encoding",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Media index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Audio In",
+                "group": "Inputs",
+                "objType": "audioNode"
+            },
+            {
+                "type": 5,
+                "name": "Video Canvas Id",
+                "group": "Inputs"
+            },
+            {
+                "type": 0,
+                "name": "Auto Download",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "State"
+            },
+            {
+                "type": 5,
+                "name": "Error"
+            },
+            {
+                "type": 5,
+                "name": "Final Mimetype"
+            }
+        ],
+        "name": "Ops.Dev.MediaRecorder"
+    }
+}

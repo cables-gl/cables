@@ -43,6 +43,14 @@
                 "name": "Data"
             },
             {
+                "type": 5,
+                "name": "Filter Unit"
+            },
+            {
+                "type": 3,
+                "name": "Links"
+            },
+            {
                 "type": 3,
                 "name": "Unit Names"
             },
@@ -68,11 +76,15 @@
             },
             {
                 "type": 3,
+                "name": "Positions Internal TC"
+            },
+            {
+                "type": 3,
                 "name": "Positions External"
             },
             {
                 "type": 3,
-                "name": "Positions External Colors"
+                "name": "Positions External TC"
             },
             {
                 "type": 3,

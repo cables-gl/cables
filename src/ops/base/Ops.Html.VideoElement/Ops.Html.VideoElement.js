@@ -1,11 +1,12 @@
 const
     // src=op.inString("URL",'https://undev.studio'),
-    src = op.inUrl("File"),
+    src = op.inUrl("File", null, ""),
     elId = op.inString("ID"),
     play = op.inBool("Play"),
     controls = op.inBool("Controls", true),
     active = op.inBool("Active", true),
     loop = op.inBool("Loop", false),
+    inMuted = op.inBool("Muted", false),
     inStyle = op.inStringEditor("Style", "position:absolute;\nz-index:9999;\nborder:0;\nwidth:50%;\nheight:50%;"),
     rewind = op.inTriggerButton("Rewind"),
     outEle = op.outObject("Element"),
@@ -39,7 +40,8 @@ function init()
 init();
 
 loop.onChange =
-controls.onChange = updateVideoSettings;
+controls.onChange =
+inMuted.onChange = updateVideoSettings;
 
 function updateVideoSettings()
 {
@@ -53,6 +55,9 @@ function updateVideoSettings()
 
     if (loop.get()) element.loop = "true";
     else element.removeAttribute("loop");
+
+    if (inMuted.get()) element.muted = "true";
+    else element.removeAttribute("muted");
 }
 
 function updatePlay()
@@ -131,6 +136,7 @@ function addElement()
     updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);
+
     updateVideoSettings();
 
     if (play.get())updatePlay();
@@ -146,7 +152,7 @@ function updateSoon()
 
 function updateAttribs()
 {
-    if (!element) return;
+    if (!element || !src.get()) return;
     element.setAttribute("style", inStyle.get());
     element.setAttribute("src", src.get());
     element.setAttribute("id", elId.get());

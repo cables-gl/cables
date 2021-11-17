@@ -75,6 +75,10 @@
         MOD_dis*=MOD_strength;
         MOD_dis+=MOD_min;
 
+        #ifdef MOD_ABS
+            MOD_dis=abs(MOD_dis);
+        #endif
+
         #ifdef MOD_AXIS_X
             pos.x*=MOD_dis.x;
         #endif
