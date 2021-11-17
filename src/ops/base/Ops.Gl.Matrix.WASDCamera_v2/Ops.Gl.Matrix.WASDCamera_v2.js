@@ -1,27 +1,36 @@
-const render = op.inTrigger("render");
-const enablePointerLock = op.inBool("Enable pointer lock", true);
-const trigger = op.outTrigger("trigger");
-const isLocked = op.outValue("isLocked", false);
+const
+    render = op.inTrigger("render"),
+    enablePointerLock = op.inBool("Enable pointer lock", true),
+    trigger = op.outTrigger("trigger"),
+    isLocked = op.outValue("isLocked", false),
 
-const moveSpeed = op.inFloat("Speed", 1);
-const mouseSpeed = op.inFloat("Mouse Speed", 1);
+    moveSpeed = op.inFloat("Speed", 1),
+    mouseSpeed = op.inFloat("Mouse Speed", 1),
+    fly = op.inValueBool("Allow Flying", true),
 
-const outPosX = op.outValue("posX");
-const outPosY = op.outValue("posY");
-const outPosZ = op.outValue("posZ");
+    inMoveXPos = op.inBool("Move X+"),
+    inMoveXNeg = op.inBool("Move X-"),
+    inMoveYPos = op.inBool("Move Y+"),
+    inMoveYNeg = op.inBool("Move Y-"),
 
-const outMouseDown = op.outTrigger("Mouse Left");
-const outMouseDownRight = op.outTrigger("Mouse Right");
+    inReset = op.inTriggerButton("Reset"),
 
-const outDirX = op.outValue("Dir X");
-const outDirY = op.outValue("Dir Y");
-const outDirZ = op.outValue("Dir Z");
+    outPosX = op.outValue("posX"),
+    outPosY = op.outValue("posY"),
+    outPosZ = op.outValue("posZ"),
+
+    outMouseDown = op.outTrigger("Mouse Left"),
+    outMouseDownRight = op.outTrigger("Mouse Right"),
+
+    outDirX = op.outValue("Dir X"),
+    outDirY = op.outValue("Dir Y"),
+    outDirZ = op.outValue("Dir Z");
 
 const vPos = vec3.create();
 let speedx = 0, speedy = 0, speedz = 0;
 const movementSpeedFactor = 0.5;
 
-const fly = op.inValueBool("Allow Flying", true);
+op.setPortGroup("Move", [inMoveYNeg, inMoveYPos, inMoveXNeg, inMoveXPos]);
 
 let mouseNoPL = { "firstMove": true,
     "deltaX": 0,
@@ -52,6 +61,15 @@ let lastMove = 0;
 initListener();
 
 enablePointerLock.onChange = initListener;
+
+inReset.onTriggered = () =>
+{
+    rotX = 0;
+    rotY = 0;
+    posX = 0;
+    posY = 0;
+    posZ = 0;
+};
 
 render.onTriggered = function ()
 {
@@ -197,16 +215,16 @@ function lockChangeCallback(e)
             document.mozPointerLockElement === canvas ||
             document.webkitPointerLockElement === canvas)
     {
-        document.addEventListener("mousedown", mouseDown, false);
-        document.addEventListener("mousemove", moveCallback, false);
+        document.addEventListener("pointerdown", mouseDown, false);
+        document.addEventListener("pointermove", moveCallback, false);
         document.addEventListener("keydown", keyDown, false);
         document.addEventListener("keyup", keyUp, false);
         isLocked.set(true);
     }
     else
     {
-        document.removeEventListener("mousedown", mouseDown, false);
-        document.removeEventListener("mousemove", moveCallback, false);
+        document.removeEventListener("pointerdown", mouseDown, false);
+        document.removeEventListener("pointermove", moveCallback, false);
         document.removeEventListener("keydown", keyDown, false);
         document.removeEventListener("keyup", keyUp, false);
         isLocked.set(false);
@@ -337,3 +355,8 @@ function keyUp(e)
         break;
     }
 }
+
+inMoveXPos.onChange = () => { pressedD = inMoveXPos.get(); };
+inMoveXNeg.onChange = () => { pressedA = inMoveXNeg.get(); };
+inMoveYPos.onChange = () => { pressedW = inMoveYPos.get(); };
+inMoveYNeg.onChange = () => { pressedS = inMoveYNeg.get(); };

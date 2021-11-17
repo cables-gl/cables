@@ -6,75 +6,103 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Enable pointer lock",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mouse Speed",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Allow Flying",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move X+",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move X-",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y+",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Move Y-",
+                "group": "Move",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Reset"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "isLocked",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posX",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posY",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "posZ",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Left"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Mouse Right"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Dir X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Dir Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Dir Z",
                 "subType": "number"
             }
