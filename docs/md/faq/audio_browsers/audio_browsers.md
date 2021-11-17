@@ -42,7 +42,7 @@ in Chrome you can click the little Lock icon next to the url.
 - "default" will (probably) suspend it by default
 - "block" will always block a permission
 
-![chrome-audiosetting](img/pagepermissions.jpg)
+![chrome-audiosetting](img/pagepermissions.png)
 
 </br>
 
@@ -51,9 +51,9 @@ in Chrome you can click the little Lock icon next to the url.
 
 The [AudioOutput operator](https://cables.gl/op/Ops.WebAudio.Output_v2) has been streamlined and now displays a button to manually permit the browser to play your project's audio. Think of it as a free PlayButton safety net in case you don't need or forgot to add it into your patch.
 
-![audioout_unmute](img/outputspeaker.gif)
+![audioout_unmute](img/outputspeaker.png)
 
 </br>
 In case you don't want to see the little speaker button, you can toggle it off in the op's parameters.
 
-![show_audiounmute](img/showspeaker.gif)
+![show_audiounmute](img/showspeaker.png)
