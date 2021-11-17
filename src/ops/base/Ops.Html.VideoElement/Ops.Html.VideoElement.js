@@ -1,6 +1,6 @@
 const
     // src=op.inString("URL",'https://undev.studio'),
-    src = op.inUrl("File"),
+    src = op.inUrl("File", null, ""),
     elId = op.inString("ID"),
     play = op.inBool("Play"),
     controls = op.inBool("Controls", true),
@@ -136,6 +136,7 @@ function addElement()
     updateAttribs();
     const parent = op.patch.cgl.canvas.parentElement;
     parent.appendChild(element);
+
     updateVideoSettings();
 
     if (play.get())updatePlay();
@@ -151,7 +152,7 @@ function updateSoon()
 
 function updateAttribs()
 {
-    if (!element) return;
+    if (!element || !src.get()) return;
     element.setAttribute("style", inStyle.get());
     element.setAttribute("src", src.get());
     element.setAttribute("id", elId.get());
