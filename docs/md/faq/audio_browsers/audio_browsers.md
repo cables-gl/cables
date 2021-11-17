@@ -1,4 +1,4 @@
-## Audio in web browsers
+# Audio in web browsers
 
 Before diving into adding sounds into your cables projects, let's cover some basics of web based audio in its current state.
 As a general rule, browsers will only allow playing audio after some user-interaction with the webpage has happened.
@@ -16,6 +16,7 @@ https://developer.chrome.com/blog/autoplay/
 
 https://developer.mozilla.org/en-US/docs/Web/Media/Autoplay_guide
 
+</br>
 let's take a look at some frequently asked questions and answers:
 
 
@@ -24,6 +25,7 @@ let's take a look at some frequently asked questions and answers:
 This is most likely related to the way web browsers decide if a sound is allowed to play on a webpage. When you are working in the cables.gl editor, you are interacting with a "website" and therefore any audio that you specify to play will be allowed to play. 
 
 When you or a visitor to your page sees the same project, you may not have set up a user interaction to allow the browser to play a sound. The easiest way to insure that you can play sounds in your exported and shared projects is to add a [PlayButton operator](https://cables.gl/op/Ops.Patch.PlayButton).
+
 
 
 ### we still don't get sound in my project, but everything seems to be setup correctly?
@@ -53,7 +55,7 @@ The [AudioOutput operator](https://cables.gl/op/Ops.WebAudio.Output_v2) has been
 
 ![audioout_unmute](img/outputspeaker.png)
 
-</br>
+
 In case you don't want to see the little speaker button, you can toggle it off in the op's parameters.
 
 ![show_audiounmute](img/showspeaker.png)
