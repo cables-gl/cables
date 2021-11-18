@@ -11,7 +11,7 @@ ANIM.Key = function (obj)
 {
     this.time = 0.0;
     this.value = 0.0;
-    this.ui = {};
+    this.ui = null;
     this.onChange = null;
     this._easing = 0;
     // this.bezTime = 0.5;
@@ -23,7 +23,7 @@ ANIM.Key = function (obj)
     this.cbTriggered = false;
 
     const bezierAnim = null;
-    this._updateBezier = false;
+    // this._updateBezier = false;
 
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
@@ -338,11 +338,11 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
-    else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
-    {
-        this._updateBezier = true;
-        this.ease = ANIM.Key.easeBezier;
-    }
+    // else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
+    // {
+    //     // this._updateBezier = true;
+    //     this.ease = ANIM.Key.easeBezier;
+    // }
     else
     {
         this._easing = CONSTANTS.ANIM.EASING_LINEAR;
@@ -359,7 +359,7 @@ ANIM.Key.prototype.trigger = function ()
 ANIM.Key.prototype.setValue = function (v)
 {
     this.value = v;
-    this._updateBezier = true;
+    // this._updateBezier = true;
     if (this.onChange !== null) this.onChange();
 };
 
