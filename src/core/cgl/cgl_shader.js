@@ -69,11 +69,7 @@ const Shader = function (_cgl, _name)
     this._log = new Logger("cgl_shader");
     this._cgl = _cgl;
 
-    if (!_name)
-    {
-        this._log.warn("no shader name given");
-        this._log.stack();
-    }
+    if (!_name) this._log.stack("no shader name given");
     this._name = _name || "unknown";
     this.glslVersion = 0;
     if (_cgl.glVersion > 1) this.glslVersion = 300;

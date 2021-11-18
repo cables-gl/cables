@@ -464,9 +464,8 @@ Texture.prototype._setFilter = function ()
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        console.warn("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
-        this._log.stack();
+        this._log.stack("texture: HDR and mipmap filtering at the same time is not possible");
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())

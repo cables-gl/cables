@@ -651,7 +651,7 @@ const Context = function (_patch)
             {
                 this.patch.printTriggerStack();
 
-                this._log.stack();
+                this._log.stack("glerror");
 
                 this._loggedGlError = true;
             }
