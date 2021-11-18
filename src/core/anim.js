@@ -14,10 +14,10 @@ ANIM.Key = function (obj)
     this.ui = {};
     this.onChange = null;
     this._easing = 0;
-    this.bezTime = 0.5;
-    this.bezValue = 0;
-    this.bezTimeIn = -0.5;
-    this.bezValueIn = 0;
+    // this.bezTime = 0.5;
+    // this.bezValue = 0;
+    // this.bezTimeIn = -0.5;
+    // this.bezValueIn = 0;
 
     this.cb = null;
     this.cbTriggered = false;
@@ -312,7 +312,8 @@ ANIM.Key.prototype.setEasing = function (e)
 {
     this._easing = e;
 
-    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeAbsolute;
+    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeLinear;
+    else if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = ANIM.Key.easeAbsolute;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = ANIM.Key.easeSmoothStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = ANIM.Key.easeSmootherStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = ANIM.Key.easeCubicIn;
@@ -338,11 +339,11 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
-    else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
-    {
-        this._updateBezier = true;
-        this.ease = ANIM.Key.easeBezier;
-    }
+    // else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
+    // {
+    //     this._updateBezier = true;
+    //     this.ease = ANIM.Key.easeBezier;
+    // }
     else
     {
         this._easing = CONSTANTS.ANIM.EASING_LINEAR;
@@ -376,11 +377,11 @@ ANIM.Key.prototype.set = function (obj)
 
         if (obj.b)
         {
-            this.bezTime = obj.b[0];
-            this.bezValue = obj.b[1];
-            this.bezTimeIn = obj.b[2];
-            this.bezValueIn = obj.b[3];
-            this._updateBezier = true;
+            // this.bezTime = obj.b[0];
+            // this.bezValue = obj.b[1];
+            // this.bezTimeIn = obj.b[2];
+            // this.bezValueIn = obj.b[3];
+            // this._updateBezier = true;
         }
 
         if (obj.hasOwnProperty("t")) this.time = obj.t;
@@ -397,7 +398,7 @@ ANIM.Key.prototype.getSerialized = function ()
     obj.t = this.time;
     obj.v = this.value;
     obj.e = this._easing;
-    if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
+    // if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
     return obj;
 };
