@@ -1,6 +1,7 @@
 // import { quat } from "gl-matrix";
 import { Port } from "./core_port";
 
+
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
 
@@ -309,11 +310,9 @@ ANIM.Key.easeSmootherStep = function (perc, key2)
 
 ANIM.Key.prototype.setEasing = function (e)
 {
-    this._easing = e || CONSTANTS.ANIM.EASING_LINEAR;
-    this.ease = ANIM.Key.easeLinear;
+    this._easing = e;
 
-    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeLinear;
-    else if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = ANIM.Key.easeAbsolute;
+    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeAbsolute;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = ANIM.Key.easeSmoothStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = ANIM.Key.easeSmootherStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = ANIM.Key.easeCubicIn;
@@ -339,11 +338,16 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
-    // else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
-    // {
-    //     this._updateBezier = true;
-    //     this.ease = ANIM.Key.easeBezier;
-    // }
+    else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
+    {
+        this._updateBezier = true;
+        this.ease = ANIM.Key.easeBezier;
+    }
+    else
+    {
+        this._easing = CONSTANTS.ANIM.EASING_LINEAR;
+        this.ease = ANIM.Key.easeLinear;
+    }
 };
 
 ANIM.Key.prototype.trigger = function ()
@@ -593,10 +597,10 @@ Anim.prototype.setValue = function (time, value, cb)
     {
         this.keys.push(
             new ANIM.Key({
-                "time": time,
-                "value": value,
+                time,
+                value,
                 "e": this.defaultEasing,
-                "cb": cb,
+                cb,
             }),
         );
     }
