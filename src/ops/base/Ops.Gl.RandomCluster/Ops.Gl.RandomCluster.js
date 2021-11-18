@@ -80,7 +80,6 @@ function getRandomPos()
     );
 }
 
-
 function reset()
 {
     randoms.length = 0;
@@ -98,7 +97,7 @@ function reset()
 
         let v = getRandomPos();
 
-        if (makeRound)
+        if (makeRound && size.get() > 0)
             while (vec3.len(v) > size.get() / 2)
                 v = getRandomPos();
 
