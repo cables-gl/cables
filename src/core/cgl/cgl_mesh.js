@@ -615,17 +615,19 @@ Mesh.prototype.render = function (shader)
 
     if (!shader || !shader.isValid()) return;
 
-    if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
-    if (shader.wireframe && this._geom.isIndexed())
+    if (this._geom)
     {
-        this._preWireframeGeom = this._geom;
-        this._geom = this._geom.copy();
-        this._geom.unIndex();
-        this._geom.calcBarycentric();
-        this.setGeom(this._geom);
-        this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+        if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
+        if (shader.wireframe && this._geom.isIndexed())
+        {
+            this._preWireframeGeom = this._geom;
+            this._geom = this._geom.copy();
+            this._geom.unIndex();
+            this._geom.calcBarycentric();
+            this.setGeom(this._geom);
+            this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+        }
     }
-
     let needsBind = false;
     if (MESH.lastMesh != this)
     {
@@ -660,7 +662,7 @@ Mesh.prototype.render = function (shader)
     let queryStarted = false;
     if (doQuery)
     {
-        let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
+        let id = this._name + " " + shader.getName() + " #" + shader.id;
         if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];
