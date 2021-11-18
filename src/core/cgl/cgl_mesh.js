@@ -98,6 +98,11 @@ Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
     }
 };
 
+Mesh.prototype.removeAttributesBuffers = function ()
+{
+    for (let i = 0; i < this._attributes.length; i++) this._attributes[i].floatArray = null;
+};
+
 Mesh.prototype.getAttribute = function (name)
 {
     for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
