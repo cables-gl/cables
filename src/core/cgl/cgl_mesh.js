@@ -98,10 +98,6 @@ Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
     }
 };
 
-Mesh.prototype.removeAttributesBuffers = function ()
-{
-    for (let i = 0; i < this._attributes.length; i++) this._attributes[i].floatArray = null;
-};
 
 Mesh.prototype.getAttribute = function (name)
 {
@@ -163,10 +159,10 @@ Mesh.prototype._bufferArray = function (array, attr)
 
     if (!(array instanceof Float32Array))
     {
-        if (attr && attr.floatArray && attr.floatArray.length == array.length)
+        if (attr && floatArray && floatArray.length == array.length)
         {
-            attr.floatArray.set(array);
-            floatArray = attr.floatArray;
+            floatArray.set(array);
+            // floatArray = floatArray;
         }
         else
         {
@@ -183,7 +179,7 @@ Mesh.prototype._bufferArray = function (array, attr)
     }
     else floatArray = array;
 
-    if (attr && floatArray) attr.floatArray = floatArray;
+    // if (attr && floatArray) attr.floatArray = floatArray;
 
     attr.arrayLength = floatArray.length;
 
