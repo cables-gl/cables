@@ -1,7 +1,6 @@
 // import { quat } from "gl-matrix";
 import { Port } from "./core_port";
 
-
 import { CONSTANTS } from "./constants";
 import Logger from "./core_logger";
 
@@ -310,7 +309,8 @@ ANIM.Key.easeSmootherStep = function (perc, key2)
 
 ANIM.Key.prototype.setEasing = function (e)
 {
-    this._easing = e;
+    this._easing = e || CONSTANTS.ANIM.EASING_LINEAR;
+    this.ease = ANIM.Key.easeLinear;
 
     if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeLinear;
     else if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = ANIM.Key.easeAbsolute;
@@ -344,11 +344,6 @@ ANIM.Key.prototype.setEasing = function (e)
     //     this._updateBezier = true;
     //     this.ease = ANIM.Key.easeBezier;
     // }
-    else
-    {
-        this._easing = CONSTANTS.ANIM.EASING_LINEAR;
-        this.ease = ANIM.Key.easeLinear;
-    }
 };
 
 ANIM.Key.prototype.trigger = function ()
@@ -598,10 +593,10 @@ Anim.prototype.setValue = function (time, value, cb)
     {
         this.keys.push(
             new ANIM.Key({
-                time,
-                value,
+                "time": time,
+                "value": value,
                 "e": this.defaultEasing,
-                cb,
+                "cb": cb,
             }),
         );
     }
