@@ -26,9 +26,6 @@ let gltfMesh = class
                     this.mesh = null;
                     gltf.loadingMeshes--;
 
-
-
-
                     if (finished)finished(this);
                 });
         }
@@ -96,6 +93,19 @@ let gltfMesh = class
             if(!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
             tgeom.setAttribute("attrJoints", gltf.accBuffers[attribs.JOINTS_0], 4);
         }
+
+
+        if (attribs.hasOwnProperty("POSITION")) gltf.accBuffersDelete.push(attribs.POSITION);
+        if (attribs.hasOwnProperty("NORMAL")) gltf.accBuffersDelete.push(attribs.NORMAL);
+        if (attribs.hasOwnProperty("TEXCOORD_0")) gltf.accBuffersDelete.push(attribs.TEXCOORD_0);
+        if (attribs.hasOwnProperty("TANGENT")) gltf.accBuffersDelete.push(attribs.TANGENT);
+        if (attribs.hasOwnProperty("COLOR_0"))gltf.accBuffersDelete.push(attribs.COLOR_0);
+        if (attribs.hasOwnProperty("TEXCOORD_1")) gltf.accBuffersDelete.push(attribs.TEXCOORD_1);
+        if (attribs.hasOwnProperty("TEXCOORD_2")) gltf.accBuffersDelete.push(attribs.TEXCOORD_2);
+        if (attribs.hasOwnProperty("TEXCOORD_3")) gltf.accBuffersDelete.push(attribs.TEXCOORD_3);
+        if (attribs.hasOwnProperty("TEXCOORD_4")) gltf.accBuffersDelete.push(attribs.TEXCOORD_4);
+
+
 
         if(setGeom!==false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
@@ -166,7 +176,8 @@ let gltfMesh = class
 
     render(cgl, ignoreMaterial)
     {
-        if (!this.geom) return;
+
+
 
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -178,11 +189,14 @@ let gltfMesh = class
             }
 
             this.mesh = new CGL.Mesh(cgl, g);
+            this.mesh._geom=null;
+
+            this.geom=null;
         }
         else
         {
             // update morphTargets
-            if (this.geom.morphTargets.length)
+            if (this.geom && this.geom.morphTargets.length)
             {
                 this.test = time * 11.7;
 

@@ -298,6 +298,22 @@ function finishLoading()
     cgl.patch.loading.finished(loadingId);
     loadingId = null;
 
+    // console.log(gltf.accBuffersDelete);
+
+    if (gltf.chunks.length > 1) gltf.chunks[1] = null;
+    if (gltf.chunks.length > 2) gltf.chunks[2] = null;
+
+    if (gltf.accBuffersDelete)
+    {
+        for (let i = 0; i < gltf.accBuffersDelete.length; i++)
+        {
+            gltf.accBuffers[gltf.accBuffersDelete[i]] = null;
+            // console.log("delete",i,gltf.accBuffersDelete[i]);
+        }
+    }
+
+    console.log(gltf);
+
     finishedLoading = true;
 }
 
@@ -335,6 +351,7 @@ function loadBin(addCacheBuster)
 
 op.onFileChanged = function (fn)
 {
+    gltf.accBuffersDelete[i];
     if (fn && fn.length > 3 && inFile.get() && inFile.get().indexOf(fn) > -1) reloadSoon(true);
 };
 
