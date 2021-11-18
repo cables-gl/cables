@@ -32,10 +32,6 @@
                 "type": 0,
                 "name": "Replace What index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Replace What"
             }
         ],
         "portsOut": [
@@ -52,6 +48,23 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "String",
+                "text": "incoming string"
+            },
+            {
+                "name": "Search For",
+                "text": "find a string or character"
+            },
+            {
+                "name": "Replace",
+                "text": "replace with this string"
+            },
+            {
+                "name": "Replace What index",
+                "text": "ALL(0) or First(1) occurrence "
+            }
+        ]
     }
 }

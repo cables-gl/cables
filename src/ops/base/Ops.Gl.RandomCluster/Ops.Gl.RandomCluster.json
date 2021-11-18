@@ -6,87 +6,87 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "exe"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "num",
                 "group": "Parameters",
                 "subType": "integer"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "random seed",
                 "group": "Parameters",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "round",
                 "group": "Parameters",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "size",
                 "group": "Area",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scaleX",
                 "group": "Area",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scaleY",
                 "group": "Area",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scaleZ",
                 "group": "Area",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotate X",
                 "group": "Rotation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotate Y",
                 "group": "Rotation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotate Z",
                 "group": "Rotation",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Scroll X",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "index",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "rnd",
                 "subType": "number"
             }
