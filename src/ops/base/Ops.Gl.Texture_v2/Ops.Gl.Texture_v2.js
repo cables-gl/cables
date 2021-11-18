@@ -11,7 +11,8 @@ const
     height = op.outValue("Height"),
     ratio = op.outValue("Aspect Ratio"),
     loaded = op.outValue("Loaded", false),
-    loading = op.outValue("Loading", false);
+    loading = op.outValue("Loading", false),
+    inFreeMemory = op.outValue("Save Memory", false);
 
 op.setPortGroup("Size", [width, height]);
 
@@ -126,6 +127,9 @@ function realReload(nocache)
 
                     loading.set(false);
                     loaded.set(true);
+
+                    if (inFreeMemory.get()) tex.image = null;
+
                     cgl.patch.loading.finished(loadingId);
                 }, {
                     "anisotropic": cgl_aniso,

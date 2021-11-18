@@ -64,6 +64,11 @@
                 "type": 0,
                 "name": "Loading",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Save Memory",
+                "subType": "number"
             }
         ],
         "name": "Ops.Gl.Texture_v2"
