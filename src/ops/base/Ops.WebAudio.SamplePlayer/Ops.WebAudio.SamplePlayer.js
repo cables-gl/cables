@@ -8,8 +8,10 @@ const audioCtx = CABLES.WEBAUDIO.createAudioContext(op);
 // input ports
 const audioBufferPort = op.inObject("Audio Buffer", null, "audioBuffer");
 const inTrigger = op.inTriggerButton("Play Sample");
+const inTriggerStop = op.inTriggerButton("Stop Playback");
 const startTimePort = op.inValue("Start Time", 0);
 const offsetPort = op.inValue("Offset", 0);
+const maxSamples = op.inInt("Buffer Size", 32);
 const playbackRatePort = op.inValue("Playback Rate", 1);
 const detunePort = op.inValue("Detune", 0);
 
@@ -66,16 +68,41 @@ let isPlaying = false;
 
 const gainNode = audioCtx.createGain();
 
-const SOURCES = new Array(32).fill(0).map(() => ({
+let sourceSize = maxSamples.get() || 32;
+let SOURCES = new Array(sourceSize).fill(0).map(() => ({
     "bufferSource": audioCtx.createBufferSource(),
     "isPlaying": false,
     "gainNode": audioCtx.createGain(),
     "isGainNodeConnected": false
 }));
-const SOURCES_LENGTH = SOURCES.length;
+let SOURCES_LENGTH = SOURCES.length;
+
+maxSamples.onChange = () =>
+{
+    op.setUiError("maxSamples", null);
+    if (!maxSamples.get() || maxSamples.get < 1 || maxSamples.get() > 32)
+    {
+        op.setUiError("maxSamples", "Buffer Size needs to be a number (1-32)");
+    }
+    sourceSize = maxSamples.get() || 32;
+    SOURCES = new Array(sourceSize).fill(0).map(() => ({
+        "bufferSource": audioCtx.createBufferSource(),
+        "isPlaying": false,
+        "gainNode": audioCtx.createGain(),
+        "isGainNodeConnected": false
+    }));
+    SOURCES_LENGTH = SOURCES.length;
+    currentSample = 0;
+    createAudioBufferSources();
+};
 
 detunePort.onChange = playbackRatePort.onChange = () =>
 {
+    op.setUiError("playbackRate", null);
+    if (playbackRatePort.get() < 0)
+    {
+        op.setUiError("playbackRate", "Playback Rate needs to be a positive number");
+    }
     try
     {
         SOURCES.forEach((src) =>
@@ -177,6 +204,9 @@ function createSingleSource(src)
 let currentSample = 0;
 inTrigger.onTriggered = () =>
 {
+    if (!maxSamples.get() || maxSamples.get < 1 || maxSamples.get() > 32) return;
+    if (playbackRatePort.get() < 0) return;
+
     if (!audioBufferPort.get() || !(audioBufferPort.get() instanceof AudioBuffer)) return;
     try
     {
@@ -200,6 +230,16 @@ inTrigger.onTriggered = () =>
         op.log("Error: ", e);
         outPlaying.set(false);
     }
+};
+
+inTriggerStop.onTriggered = () =>
+{
+    SOURCES.forEach((src, index) =>
+    {
+        if (src.isPlaying && src.bufferSource) src.bufferSource.stop();
+        src.isPlaying = false;
+    });
+    outPlaying.set(false);
 };
 
 inTrigger.onLinkChanged = () =>
