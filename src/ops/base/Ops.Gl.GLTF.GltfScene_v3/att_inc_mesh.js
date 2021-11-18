@@ -10,7 +10,7 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
-
+console.log(gltf);
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
 
         gltf.loadingMeshes = gltf.loadingMeshes || 0;

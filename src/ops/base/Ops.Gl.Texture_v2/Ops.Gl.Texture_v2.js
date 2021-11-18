@@ -6,13 +6,13 @@ const
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
+    inFreeMemory = op.inBool("Save Memory", false),
     textureOut = op.outTexture("Texture"),
     width = op.outValue("Width"),
     height = op.outValue("Height"),
     ratio = op.outValue("Aspect Ratio"),
     loaded = op.outValue("Loaded", false),
-    loading = op.outValue("Loading", false),
-    inFreeMemory = op.outValue("Save Memory", false);
+    loading = op.outValue("Loading", false);
 
 op.setPortGroup("Size", [width, height]);
 

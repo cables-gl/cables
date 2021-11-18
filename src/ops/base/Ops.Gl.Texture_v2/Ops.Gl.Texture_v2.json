@@ -32,6 +32,11 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Save Memory",
+                "subType": "boolean"
             }
         ],
         "portsOut": [
@@ -63,11 +68,6 @@
             {
                 "type": 0,
                 "name": "Loading",
-                "subType": "number"
-            },
-            {
-                "type": 0,
-                "name": "Save Memory",
                 "subType": "number"
             }
         ],
