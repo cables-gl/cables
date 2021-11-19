@@ -10,7 +10,7 @@ let gltfMesh = class
         this.geom = new CGL.Geometry("gltf_" + this.name);
         this.geom.verticesIndices = [];
         this.bounds = null;
-console.log(gltf);
+
         if (prim.hasOwnProperty("indices")) this.geom.verticesIndices = gltf.accBuffers[prim.indices];
 
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
@@ -18,16 +18,53 @@ console.log(gltf);
 
         if (gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
         {
-            dracoLoadMesh(gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView], this.name,
-                (geom) =>
+            const view = gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView];
+            const num = view.byteLength;
+            const dataBuff = new Int8Array(num);
+            let accPos = (view.byteOffset || 0);// + (acc.byteOffset || 0);
+            for (let j = 0; j < num; j++)
+            {
+                dataBuff[j] = gltf.chunks[1].dataView.getInt8(accPos, le);
+                accPos++;
+            }
+
+            const dracoDecoder = window.DracoDecoder;
+            dracoDecoder.decodeGeometry(dataBuff.buffer, (geometry) =>
+            {
+                const geom = new CGL.Geometry("draco mesh " + name);
+
+                for (let i = 0; i < geometry.attributes.length; i++)
                 {
-                    this.setGeom(geom);
+                    const attr = geometry.attributes[i];
 
-                    this.mesh = null;
-                    gltf.loadingMeshes--;
+                    if (attr.name === "position") geom.vertices = attr.array;
+                    else if (attr.name === "normal") geom.vertexNormals = attr.array;
+                    else if (attr.name === "uv") geom.texCoords = attr.array;
+                    else if (attr.name === "joints") geom.setAttribute("attrJoints", Array.from(attr.array), 4);
+                    else if (attr.name === "weights")
+                    {
+                        const arr4 = new Float32Array(attr.array.length / attr.itemSize * 4);
 
-                    if (finished)finished(this);
-                });
+                        for (let k = 0; k < attr.array.length / attr.itemSize; k++)
+                        {
+                            arr4[k * 4] = arr4[k * 4 + 1] = arr4[k * 4 + 2] = arr4[k * 4 + 3] = 0;
+                            for (let j = 0; j < attr.itemSize; j++)
+                                arr4[k * 4 + j] = attr.array[k * attr.itemSize + j];
+                        }
+                        geom.setAttribute("attrWeights", arr4, 4);
+                    }
+                    else op.logWarn("unknown draco attrib", attr);
+                }
+
+                geometry.attributes = null;
+                geom.verticesIndices = geometry.index.array;
+
+                this.setGeom(geom);
+
+                this.mesh = null;
+                gltf.loadingMeshes--;
+                if (finished)finished(this);
+            }, (error) => { op.logError(error); });
         }
         else
         {
@@ -36,15 +73,15 @@ console.log(gltf);
 
             if (prim.targets)
             {
-                console.log("prim.targets",prim.targets.length);
-                for(let j = 0; j < prim.targets.length; j++)
+                console.log("prim.targets", prim.targets.length);
+                for (let j = 0; j < prim.targets.length; j++)
                 {
                     // var tgeom=new CGL.Geometry("gltf_"+this.name);
                     let tgeom = this.geom.copy();
 
                     if (prim.hasOwnProperty("indices")) tgeom.verticesIndices = gltf.accBuffers[prim.indices];
 
-                    this.fillGeomAttribs(gltf, tgeom, prim.targets[j],false);
+                    this.fillGeomAttribs(gltf, tgeom, prim.targets[j], false);
 
                     { // calculate normals for final position of morphtarget for later...
                         for (let i = 0; i < tgeom.vertices.length; i++) tgeom.vertices[i] += this.geom.vertices[i];
@@ -54,14 +91,13 @@ console.log(gltf);
 
                     this.geom.morphTargets.push(tgeom);
                 }
-
             }
             if (finished)finished(this);
         }
     }
 
 
-    fillGeomAttribs(gltf, tgeom, attribs,setGeom)
+    fillGeomAttribs(gltf, tgeom, attribs, setGeom)
     {
         if (attribs.hasOwnProperty("POSITION"))tgeom.vertices = gltf.accBuffers[attribs.POSITION];
         if (attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
@@ -71,11 +107,11 @@ console.log(gltf);
         {
             tgeom.vertexColors = gltf.accBuffers[attribs.COLOR_0];
 
-            if(gltf.accBuffers[attribs.COLOR_0] instanceof Uint16Array)
+            if (gltf.accBuffers[attribs.COLOR_0] instanceof Uint16Array)
             {
-                const fb=new Float32Array(tgeom.vertexColors.length);
-                for(let i=0;i<tgeom.vertexColors.length;i++) fb[i]=tgeom.vertexColors[i]/65535;
-                tgeom.vertexColors=fb;
+                const fb = new Float32Array(tgeom.vertexColors.length);
+                for (let i = 0; i < tgeom.vertexColors.length; i++) fb[i] = tgeom.vertexColors[i] / 65535;
+                tgeom.vertexColors = fb;
             }
         }
 
@@ -90,7 +126,7 @@ console.log(gltf);
         }
         if (attribs.hasOwnProperty("JOINTS_0"))
         {
-            if(!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
+            if (!gltf.accBuffers[attribs.JOINTS_0])console.log("no !gltf.accBuffers[attribs.JOINTS_0]");
             tgeom.setAttribute("attrJoints", gltf.accBuffers[attribs.JOINTS_0], 4);
         }
 
@@ -106,8 +142,7 @@ console.log(gltf);
         if (attribs.hasOwnProperty("TEXCOORD_4")) gltf.accBuffersDelete.push(attribs.TEXCOORD_4);
 
 
-
-        if(setGeom!==false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
+        if (setGeom !== false) if (tgeom && tgeom.verticesIndices) this.setGeom(tgeom);
     }
 
     setGeom(geom)
@@ -176,9 +211,6 @@ console.log(gltf);
 
     render(cgl, ignoreMaterial)
     {
-
-
-
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
             let g = this.geom;
@@ -189,9 +221,9 @@ console.log(gltf);
             }
 
             this.mesh = new CGL.Mesh(cgl, g);
-            this.mesh._geom=null;
+            this.mesh._geom = null;
 
-            this.geom=null;
+            this.geom = null;
         }
         else
         {
@@ -207,9 +239,8 @@ console.log(gltf);
 
                 if (mt && mt.vertices)
                 {
-
-                    if(this.morphGeom.vertexNormals.length!=mt.vertexNormals.length)
-                        this.morphGeom.vertexNormals=new Float32Array(mt.vertexNormals.length);
+                    if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
+                        this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);
 
                     const fract = this.test % 1;
                     for (let i = 0; i < this.morphGeom.vertices.length; i++)
@@ -232,16 +263,15 @@ console.log(gltf);
             const useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
 
 
-
-// cgl.pushModelMatrix();
-// if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
+            // cgl.pushModelMatrix();
+            // if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 
             if (useMat) cgl.popShader();
-// cgl.popModelMatrix();
+            // cgl.popModelMatrix();
         }
     }
 };
