@@ -1,0 +1,3 @@
+This operator uses the JavaScript function replace() with a regex syntax. Usually you can simply type an alpha numeric string, but if you want to get fancy or need to replace a character such as a period, you will need to format your string replace according to the Regular Expression syntax ( https://en.wikipedia.org/wiki/Regular_expression ).
+
+For example, replacing a period with a blank space would require you to seek "\." and replace with a " "

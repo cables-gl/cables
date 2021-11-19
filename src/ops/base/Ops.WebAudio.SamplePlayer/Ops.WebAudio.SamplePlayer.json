@@ -31,6 +31,10 @@
                 "name": "Play Sample"
             },
             {
+                "type": 1,
+                "name": "Stop Playback"
+            },
+            {
                 "type": 0,
                 "name": "Start Time",
                 "group": "Time Controls",
@@ -41,6 +45,11 @@
                 "name": "Offset",
                 "group": "Time Controls",
                 "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Buffer Size",
+                "subType": "integer"
             },
             {
                 "type": 0,

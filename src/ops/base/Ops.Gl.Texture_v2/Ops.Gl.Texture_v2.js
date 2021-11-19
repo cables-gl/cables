@@ -6,6 +6,7 @@ const
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
+    inFreeMemory = op.inBool("Save Memory", false),
     textureOut = op.outTexture("Texture"),
     width = op.outValue("Width"),
     height = op.outValue("Height"),
@@ -126,6 +127,9 @@ function realReload(nocache)
 
                     loading.set(false);
                     loaded.set(true);
+
+                    if (inFreeMemory.get()) tex.image = null;
+
                     cgl.patch.loading.finished(loadingId);
                 }, {
                     "anisotropic": cgl_aniso,

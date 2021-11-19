@@ -32,6 +32,11 @@
                 "type": 0,
                 "name": "Active",
                 "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Save Memory",
+                "subType": "boolean"
             }
         ],
         "portsOut": [

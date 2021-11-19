@@ -1,0 +1,1 @@
+This op will take an incoming array of point locations in 3D space (groups of X,Y,Z coordinates) and output an array of angles between the points. 

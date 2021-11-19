@@ -11,19 +11,19 @@ ANIM.Key = function (obj)
 {
     this.time = 0.0;
     this.value = 0.0;
-    this.ui = {};
+    this.ui = null;
     this.onChange = null;
     this._easing = 0;
-    this.bezTime = 0.5;
-    this.bezValue = 0;
-    this.bezTimeIn = -0.5;
-    this.bezValueIn = 0;
+    // this.bezTime = 0.5;
+    // this.bezValue = 0;
+    // this.bezTimeIn = -0.5;
+    // this.bezValueIn = 0;
 
     this.cb = null;
     this.cbTriggered = false;
 
     const bezierAnim = null;
-    this._updateBezier = false;
+    // this._updateBezier = false;
 
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
@@ -338,11 +338,11 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
-    else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
-    {
-        this._updateBezier = true;
-        this.ease = ANIM.Key.easeBezier;
-    }
+    // else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
+    // {
+    //     // this._updateBezier = true;
+    //     this.ease = ANIM.Key.easeBezier;
+    // }
     else
     {
         this._easing = CONSTANTS.ANIM.EASING_LINEAR;
@@ -359,7 +359,7 @@ ANIM.Key.prototype.trigger = function ()
 ANIM.Key.prototype.setValue = function (v)
 {
     this.value = v;
-    this._updateBezier = true;
+    // this._updateBezier = true;
     if (this.onChange !== null) this.onChange();
 };
 
@@ -376,11 +376,11 @@ ANIM.Key.prototype.set = function (obj)
 
         if (obj.b)
         {
-            this.bezTime = obj.b[0];
-            this.bezValue = obj.b[1];
-            this.bezTimeIn = obj.b[2];
-            this.bezValueIn = obj.b[3];
-            this._updateBezier = true;
+            // this.bezTime = obj.b[0];
+            // this.bezValue = obj.b[1];
+            // this.bezTimeIn = obj.b[2];
+            // this.bezValueIn = obj.b[3];
+            // this._updateBezier = true;
         }
 
         if (obj.hasOwnProperty("t")) this.time = obj.t;
@@ -397,7 +397,7 @@ ANIM.Key.prototype.getSerialized = function ()
     obj.t = this.time;
     obj.v = this.value;
     obj.e = this._easing;
-    if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
+    // if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
     return obj;
 };

@@ -71,14 +71,14 @@ const Port = function (__parent, name, type, uiAttribs)
         get()
         {
             this._log.warn("val getter deprecated!", this);
-            this._log.stack();
+            this._log.stack("val getter deprecated");
             this._warnedDeprecated = true;
             return this.get();
         },
         set(v)
         {
             this._log.warn("val setter deprecated!", this);
-            this._log.stack();
+            this._log.stack("val setter deprecated");
             this.setValue(v);
             // if(!this._warnedDeprecated)console.warn('deprecated .val set used',this.parent.name);
             this._warnedDeprecated = true;

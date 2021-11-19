@@ -59,7 +59,7 @@ const Patch = function (cfg)
     this.animFrameOps = [];
     this.animFrameCallbacks = [];
     this.gui = false;
-    CABLES.logSilent = this.silent = false;
+    CABLES.logSilent = this.silent = true;
     this.profiler = null;
     // this.onLoadStart = null;
     this.aborted = false;
@@ -96,8 +96,7 @@ const Patch = function (cfg)
 
     this._isLocal = document.location.href.indexOf("file:") === 0;
 
-    this.silent = CABLES.logSilent = this.config.silent;
-
+    if (this.config.hasOwnProperty("silent")) this.silent = CABLES.logSilent = this.config.silent;
     if (!this.config.hasOwnProperty("doRequestAnimation")) this.config.doRequestAnimation = true;
 
     if (!this.config.prefixAssetPath) this.config.prefixAssetPath = "";

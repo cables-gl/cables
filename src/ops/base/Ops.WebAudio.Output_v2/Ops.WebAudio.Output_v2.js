@@ -58,7 +58,7 @@ inAudio.onChange = function ()
             }
             catch (e)
             {
-                op.log(e);
+                op.error(e);
             }
         }
 

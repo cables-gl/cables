@@ -27,6 +27,7 @@ MESH.lastMesh = null;
 const Mesh = function (_cgl, __geom, glPrimitive)
 {
     this._cgl = _cgl;
+
     this._log = new Logger("cgl_mesh");
     this._bufVertexAttrib = null;
     this._bufVerticesIndizes = this._cgl.gl.createBuffer();
@@ -45,8 +46,9 @@ const Mesh = function (_cgl, __geom, glPrimitive)
     this._feedBacksChanged = false;
     this._transformFeedBackLoc = -1;
     this._lastAttrUpdate = 0;
+    this._name = "unknown";
 
-    this._cgl.profileData.addHeavyEvent("mesh constructed", this._geom.name);
+    this._cgl.profileData.addHeavyEvent("mesh constructed", this._name);
 
     this._queryExt = null;
 
@@ -72,6 +74,7 @@ const Mesh = function (_cgl, __geom, glPrimitive)
 Mesh.prototype.updateVertices = function (geom)
 {
     this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_POSITION, geom.vertices, 3);
+    this._numVerts = geom.vertices.length / 3;
 };
 
 Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
@@ -95,6 +98,7 @@ Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
     }
 };
 
+
 Mesh.prototype.getAttribute = function (name)
 {
     for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
@@ -109,8 +113,8 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
 
 
-    this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] = this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] || 0;
-    this._cgl.profileData.profileSingleMeshAttribute[this._geom.name] += (end - start) || 0;
+    this._cgl.profileData.profileSingleMeshAttribute[this._name] = this._cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
+    this._cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
 
 
     if (attr.numItems < array.length / attr.itemSize)
@@ -155,10 +159,10 @@ Mesh.prototype._bufferArray = function (array, attr)
 
     if (!(array instanceof Float32Array))
     {
-        if (attr && attr.floatArray && attr.floatArray.length == array.length)
+        if (attr && floatArray && floatArray.length == array.length)
         {
-            attr.floatArray.set(array);
-            floatArray = attr.floatArray;
+            floatArray.set(array);
+            // floatArray = floatArray;
         }
         else
         {
@@ -170,12 +174,12 @@ Mesh.prototype._bufferArray = function (array, attr)
             }
 
             this._cgl.profileData.profileNonTypedAttrib++;
-            this._cgl.profileData.profileNonTypedAttribNames = "(" + this._geom.name + ":" + attr.name + ")";
+            this._cgl.profileData.profileNonTypedAttribNames = "(" + this._name + ":" + attr.name + ")";
         }
     }
     else floatArray = array;
 
-    if (attr && floatArray) attr.floatArray = floatArray;
+    // if (attr && floatArray) attr.floatArray = floatArray;
 
     attr.arrayLength = floatArray.length;
 
@@ -206,8 +210,6 @@ Mesh.prototype.addAttribute = Mesh.prototype.updateAttribute = Mesh.prototype.se
     const numItems = array.length / itemSize;
 
     this._cgl.profileData.profileMeshAttributes += numItems || 0;
-
-    // if (numItems === 0) this._log.warn(CABLES.patch.cgl.canvas.id + " CGL_MESH: " + this._geom.name + " num items in attribute " + name + " is ZERO");
 
     if (typeof options == "function")
     {
@@ -322,18 +324,16 @@ Mesh.prototype.updateNormals = function (geom)
 
 Mesh.prototype._setVertexNumbers = function ()
 {
-    const numVerts = this._geom.vertices.length / 3;
-
-    if (!this._verticesNumbers || this._verticesNumbers.length != numVerts)
+    if (!this._verticesNumbers || this._verticesNumbers.length != this._numVerts)
     {
-        this._verticesNumbers = new Float32Array(numVerts);
+        this._verticesNumbers = new Float32Array(this._numVerts);
 
-        for (let i = 0; i < numVerts; i++) this._verticesNumbers[i] = i;
+        for (let i = 0; i < this._numVerts; i++) this._verticesNumbers[i] = i;
 
         this.setAttribute(CONSTANTS.SHADER.SHADERVAR_VERTEX_NUMBER, this._verticesNumbers, 1, (attr, geom, shader) =>
         {
-            if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", numVerts);
-            shader.uniformNumVertices.setValue(numVerts);
+            if (!shader.uniformNumVertices) shader.uniformNumVertices = new Uniform(shader, "f", "numVertices", this._numVerts);
+            shader.uniformNumVertices.setValue(this._numVerts);
         });
     }
 };
@@ -349,9 +349,9 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
     {
         for (let i = 0; i < vertIndices.length; i++)
         {
-            if (vertIndices[i] >= this._geom.vertices.length / 3)
+            if (vertIndices[i] >= this._numVerts)
             {
-                this._log.warn("invalid index in " + this._geom.name);
+                this._log.warn("invalid index in " + this._name);
                 return;
             }
         }
@@ -378,10 +378,11 @@ Mesh.prototype.setVertexIndices = function (vertIndices)
  * @description set geometry for mesh
  * @param {Geometry} geometry
  */
-Mesh.prototype.setGeom = function (geom)
+Mesh.prototype.setGeom = function (geom, removeRef)
 {
     this._geom = geom;
     if (geom.glPrimitive != null) this._glPrimitive = geom.glPrimitive;
+    if (this._geom && this._geom.name) this._name = "mesh " + this._geom.name;
 
     MESH.lastMesh = null;
     this._cgl.profileData.profileMeshSetGeom++;
@@ -393,7 +394,6 @@ Mesh.prototype.setGeom = function (geom)
 
     this.updateTexCoords(this._geom);
     this.updateNormals(this._geom);
-
 
     if (this._geom.hasOwnProperty("tangents") && this._geom.tangents && this._geom.tangents.length > 0) this.setAttribute("attrTangent", this._geom.tangents, 3);
     if (this._geom.hasOwnProperty("biTangents") && this._geom.biTangents && this._geom.biTangents.length > 0) this.setAttribute("attrBiTangent", this._geom.biTangents, 3);
@@ -407,6 +407,11 @@ Mesh.prototype.setGeom = function (geom)
 
     const geomAttribs = this._geom.getAttributes();
     for (const index in geomAttribs) this.setAttribute(index, geomAttribs[index].data, geomAttribs[index].itemSize);
+
+    if (removeRef)
+    {
+        this._geom = null;
+    }
 };
 
 Mesh.prototype._preBind = function (shader)
@@ -508,7 +513,7 @@ Mesh.prototype._bind = function (shader)
             }
             else
             {
-                if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("attrib itemsize error", this._geom.name, attribute);
+                if (!attribute.itemSize || attribute.itemSize == 0) this._log.warn("attrib itemsize error", this._name, attribute);
                 this._cgl.gl.vertexAttribPointer(attrLocs[i], attribute.itemSize, attribute.type, false, attribute.itemSize * 4, 0);
 
                 if (attribute.pointer)
@@ -611,17 +616,19 @@ Mesh.prototype.render = function (shader)
 
     if (!shader || !shader.isValid()) return;
 
-    if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
-    if (shader.wireframe && this._geom.isIndexed())
+    if (this._geom)
     {
-        this._preWireframeGeom = this._geom;
-        this._geom = this._geom.copy();
-        this._geom.unIndex();
-        this._geom.calcBarycentric();
-        this.setGeom(this._geom);
-        this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+        if (!shader.wireframe && !this._geom.isIndexed() && this._preWireframeGeom) this.setGeom(this._preWireframeGeom);
+        if (shader.wireframe && this._geom.isIndexed())
+        {
+            this._preWireframeGeom = this._geom;
+            this._geom = this._geom.copy();
+            this._geom.unIndex();
+            this._geom.calcBarycentric();
+            this.setGeom(this._geom);
+            this.setAttribute("attrBarycentric", this._geom.barycentrics, 3);
+        }
     }
-
     let needsBind = false;
     if (MESH.lastMesh != this)
     {
@@ -656,7 +663,7 @@ Mesh.prototype.render = function (shader)
     let queryStarted = false;
     if (doQuery)
     {
-        let id = this._geom.name + " " + shader.getName() + " #" + shader.id;
+        let id = this._name + " " + shader.getName() + " #" + shader.id;
         if (this._numInstances) id += " instanced " + this._numInstances + "x";
 
         let queryProfilerData = this._cgl.profileData.glQueryData[id];

@@ -37,6 +37,7 @@ const Texture = function (__cgl, options)
     this.flipped = false;
     this.shadowMap = false;
     this.deleted = false;
+    this.image = null;
     this.anisotropic = 0;
     this.filter = Texture.FILTER_NEAREST;
     this.wrap = Texture.WRAP_CLAMP_TO_EDGE;
@@ -362,6 +363,7 @@ Texture.prototype.delete = function ()
     this.height = 0;
     this._cgl.profileData.profileTextureDelete++;
     this._cgl.gl.deleteTexture(this.tex);
+    this.image = null;
 
     this.tex = null;
 };
@@ -464,9 +466,8 @@ Texture.prototype._setFilter = function ()
 
     if (this.textureType == Texture.TYPE_FLOAT && this.filter == Texture.FILTER_MIPMAP)
     {
-        console.warn("texture: HDR and mipmap filtering at the same time is not possible");
         this.filter = Texture.FILTER_LINEAR;
-        this._log.stack();
+        this._log.stack("texture: HDR and mipmap filtering at the same time is not possible");
     }
 
     if (this._cgl.glVersion == 1 && !this.isPowerOfTwo())

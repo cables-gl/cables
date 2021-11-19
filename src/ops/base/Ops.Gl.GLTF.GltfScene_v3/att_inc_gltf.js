@@ -15,6 +15,7 @@ const Gltf = class
         this.startTime = performance.now();
         this.bounds = new CGL.BoundingBox();
         this.loaded = Date.now();
+        this.accBuffersDelete=[];
     }
 
     getNode(n)
@@ -142,6 +143,8 @@ function loadAnims(gltf)
             const accOut = gltf.json.accessors[sampler.output];
             const bufferOut = gltf.accBuffers[sampler.output];
 
+            gltf.accBuffersDelete.push(sampler.output,sampler.input);
+
             if(bufferIn && bufferOut)
             {
                 let numComps = 1;
@@ -186,9 +189,6 @@ function loadAnims(gltf)
                     }
 
                 }
-
-
-
 
                 node.setAnim(chan.target.path,an.name, anims);
             }
