@@ -150,6 +150,17 @@ LoadingStatus.prototype.addAssetLoadingTask = function (cb)
     }
 };
 
+LoadingStatus.prototype.existByName = function (name)
+{
+    for (let i in this._loadingAssets)
+    {
+        if (this._loadingAssets[i].name == name && !this._loadingAssets[i].finished)
+        {
+            return true;
+        }
+    }
+};
+
 LoadingStatus.prototype.start = function (type, name)
 {
     if (this._startTime == 0) this._startTime = Date.now();

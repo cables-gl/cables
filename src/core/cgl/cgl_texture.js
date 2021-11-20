@@ -547,9 +547,10 @@ Texture.prototype._setFilter = function ()
  */
 Texture.load = function (cgl, url, finishedCallback, settings)
 {
-    const loadingId = cgl.patch.loading.start("texture", url);
-    const texture = new Texture(cgl);
+    let loadingId = null;
+    if (cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("texture", url);
 
+    const texture = new Texture(cgl);
     texture.name = url;
 
     if (cgl.patch.isEditorMode()) gui.jobs().start({ "id": "loadtexture" + loadingId, "title": "loading texture " + CABLES.basename(url) });
@@ -568,7 +569,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
     {
         console.warn("[cgl.texture.load] error loading texture", url, e);
         texture.loading = false;
-        cgl.patch.loading.finished(loadingId);
+        if (loadingId) cgl.patch.loading.finished(loadingId);
         const error = { "error": true };
         if (finishedCallback) finishedCallback(error);
         if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
@@ -579,7 +580,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         cgl.addNextFrameOnceCallback(() =>
         {
             texture.initTexture(texture.image);
-            cgl.patch.loading.finished(loadingId);
+            if (loadingId) cgl.patch.loading.finished(loadingId);
             texture.loading = false;
             if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
 
