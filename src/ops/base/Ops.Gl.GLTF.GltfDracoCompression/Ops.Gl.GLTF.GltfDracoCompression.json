@@ -25,7 +25,8 @@
     "authorName": "pandur",
     "created": 1629877544198,
     "libs": [
-        "draco_decoder.js"
+        "draco_wasm_wrapper.js",
+        "draco_decoder_wasm.js"
     ],
     "layout": {
         "portsIn": [
