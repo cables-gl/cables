@@ -5,46 +5,40 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Device index",
                 "subType": "integer"
             },
             {
-                "type": "0",
-                "name": "Device",
-                "group": "Device Select",
-                "subType": "string"
-            },
-            {
-                "type": "1",
+                "type": 1,
                 "name": "Learn",
                 "group": "Controls"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Panic",
                 "group": "Controls"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Note"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "CC"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "NRPN"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Clock"
             }
         ],
