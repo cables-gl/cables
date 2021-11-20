@@ -547,8 +547,9 @@ Texture.prototype._setFilter = function ()
  */
 Texture.load = function (cgl, url, finishedCallback, settings)
 {
+    if (!url) return finishedCallback({ "error": true });
     let loadingId = null;
-    if (cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("texture", url);
+    if (!cgl.patch.loading.existByName(url)) loadingId = cgl.patch.loading.start("texture", url);
 
     const texture = new Texture(cgl);
     texture.name = url;

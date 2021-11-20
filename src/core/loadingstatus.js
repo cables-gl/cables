@@ -167,9 +167,9 @@ LoadingStatus.prototype.start = function (type, name)
     const id = generateUUID();
 
     this._loadingAssets[id] = {
-        id,
-        type,
-        name,
+        "id": id,
+        "type": type,
+        "name": name,
         "finished": false,
         "timeStart": Date.now(),
         "order": this._order,
