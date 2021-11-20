@@ -312,8 +312,6 @@ function finishLoading()
         }
     }
 
-    console.log(gltf);
-
     finishedLoading = true;
 }
 

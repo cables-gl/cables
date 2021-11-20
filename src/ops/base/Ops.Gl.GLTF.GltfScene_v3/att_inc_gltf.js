@@ -15,7 +15,7 @@ const Gltf = class
         this.startTime = performance.now();
         this.bounds = new CGL.BoundingBox();
         this.loaded = Date.now();
-        this.accBuffersDelete=[];
+        this.accBuffersDelete = [];
     }
 
     getNode(n)
@@ -77,7 +77,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 {
     const chunk = {};
 
-    if(offset>=dv.byteLength)
+    if (offset >= dv.byteLength)
     {
         console.log("could not read chunk...");
         return;
@@ -124,7 +124,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
 function loadAnims(gltf)
 {
-    const uniqueAnimNames={};
+    const uniqueAnimNames = {};
 
     for (let i = 0; i < gltf.json.animations.length; i++)
     {
@@ -143,23 +143,23 @@ function loadAnims(gltf)
             const accOut = gltf.json.accessors[sampler.output];
             const bufferOut = gltf.accBuffers[sampler.output];
 
-            gltf.accBuffersDelete.push(sampler.output,sampler.input);
+            gltf.accBuffersDelete.push(sampler.output, sampler.input);
 
-            if(bufferIn && bufferOut)
+            if (bufferIn && bufferOut)
             {
                 let numComps = 1;
                 if (accOut.type == "VEC2")numComps = 2;
                 else if (accOut.type == "VEC3")numComps = 3;
                 else if (accOut.type == "VEC4")numComps = 4;
-                else op.warn("unknown accOut.type",accOut.type);
+                else op.warn("unknown accOut.type", accOut.type);
 
                 const anims = [];
 
-                uniqueAnimNames[an.name]=true;
+                uniqueAnimNames[an.name] = true;
 
                 for (let k = 0; k < numComps; k++)
                 {
-                    const newAnim=new CABLES.TL.Anim();
+                    const newAnim = new CABLES.TL.Anim();
                     // newAnim.name=an.name;
                     anims.push(newAnim);
                 }
@@ -169,14 +169,10 @@ function loadAnims(gltf)
                 else op.warn("unknown interpolation", sampler.interpolation);
 
 
-
-
                 // if there is no keyframe for time 0 copy value of first keyframe at time 0
-                if(bufferIn[0]!==0.0)
+                if (bufferIn[0] !== 0.0)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
-
-
 
 
                 for (let j = 0; j < bufferIn.length; j++)
@@ -187,20 +183,18 @@ function loadAnims(gltf)
                     {
                         anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                     }
-
                 }
 
-                node.setAnim(chan.target.path,an.name, anims);
+                node.setAnim(chan.target.path, an.name, anims);
             }
             else
             {
-                op.warn("loadAmins bufferIn undefined ",bufferIn===undefined);
-                op.warn("loadAmins bufferOut undefined ",bufferOut===undefined);
-                op.warn("loadAmins ",sampler,accOut);
-                op.warn("loadAmins num accBuffers",gltf.accBuffers.length);
-                op.warn("loadAmins num accessors",gltf.json.accessors.length);
+                op.warn("loadAmins bufferIn undefined ", bufferIn === undefined);
+                op.warn("loadAmins bufferOut undefined ", bufferOut === undefined);
+                op.warn("loadAmins ", sampler, accOut);
+                op.warn("loadAmins num accBuffers", gltf.accBuffers.length);
+                op.warn("loadAmins num accessors", gltf.json.accessors.length);
             }
-
         }
     }
 
@@ -227,7 +221,7 @@ function loadCams(gltf)
 
 function loadAfterDraco()
 {
-    if (!window.DracoDecoderModule)
+    if (!window.DracoDecoder)
     {
         setTimeout(() =>
         {
@@ -284,7 +278,7 @@ function parseGltf(arrayBuffer)
 
     if (gltf.json.extensionsUsed && gltf.json.extensionsUsed.indexOf("KHR_draco_mesh_compression") > -1)
     {
-        if (!window.DracoDecoderModule)
+        if (!window.DracoDecoder)
         {
             op.setUiError("gltfdraco", "GLTF draco compression lib not found / add draco op to your patch!");
 
@@ -442,7 +436,7 @@ function parseGltf(arrayBuffer)
     {
         const node = gltf.nodes[i];
 
-        if (!node.children)continue;
+        if (!node.children) continue;
         for (let j = 0; j < node.children.length; j++)
         {
             gltf.nodes[node.children[j]].parent = node;
@@ -451,9 +445,9 @@ function parseGltf(arrayBuffer)
 
     for (i = 0; i < gltf.nodes.length; i++)
     {
-        if(gltf.nodes[i].skin>-1)
+        if (gltf.nodes[i].skin > -1)
         {
-            gltf.nodes[i].skinRenderer=new GltfSkin(gltf.nodes[i]);
+            gltf.nodes[i].skinRenderer = new GltfSkin(gltf.nodes[i]);
         }
     }
 
