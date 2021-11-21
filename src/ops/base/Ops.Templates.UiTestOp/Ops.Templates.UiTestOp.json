@@ -43,12 +43,20 @@
         "portsIn": [
             {
                 "type": 0,
-                "name": "Warning 1",
+                "name": "Warning",
+                "group": "Warnings",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "Warning 2",
+                "name": "Error",
+                "group": "Warnings",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Hint",
+                "group": "Warnings",
                 "subType": "boolean"
             },
             {
@@ -62,7 +70,32 @@
             },
             {
                 "type": 1,
-                "name": "op.log()"
+                "name": "op.log()",
+                "group": "Logging"
+            },
+            {
+                "type": 1,
+                "name": "op.logWarn()",
+                "group": "Logging"
+            },
+            {
+                "type": 1,
+                "name": "op.logError()",
+                "group": "Logging"
+            },
+            {
+                "type": 1,
+                "name": "Open Prompt",
+                "group": "Modal"
+            },
+            {
+                "type": 1,
+                "name": "Open Modal",
+                "group": "Modal"
+            },
+            {
+                "type": 1,
+                "name": "Open new Tab"
             }
         ],
         "portsOut": [],

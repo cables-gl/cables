@@ -48,7 +48,7 @@ const OUTPUTS = OUTPUT_KEYS.reduce((acc, cur) =>
 op.setPortGroup("MIDI Event", [OUTPUTS.Event]);
 op.setPortGroup(
     "MIDI Event by Type",
-    Object.keys(OUTPUTS).map(key => key !== "Event" && OUTPUTS[key]).filter(Boolean),
+    Object.keys(OUTPUTS).map((key) => key !== "Event" && OUTPUTS[key]).filter(Boolean),
 );
 
 /* CONSTANTS */
@@ -130,20 +130,20 @@ const LSBRoutine = (ccIndex, ccValue) =>
     nrpnIndex_ = nrpnIndexMSB | nrpnIndexLSB;
 
     if (typeof nrpnIndex_ === "number")
-{
+    {
         if (ccIndex === NRPN_VALUE_MSB)
-{
+        {
             nrpnValueMSB = ccValue << 7;
 
             lastMSB = ccValue;
             if (typeof nrpnValueLSB === "number")
-{
+            {
                 nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
                 return [nrpnIndex_, nrpnValue_];
             }
         }
- else if (ccIndex === NRPN_VALUE_LSB)
-{
+        else if (ccIndex === NRPN_VALUE_LSB)
+        {
             nrpnValueLSB = ccValue;
             lastLSB = ccValue;
             nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
@@ -161,19 +161,19 @@ const MSBRoutine = (ccIndex, ccValue) =>
 
     nrpnIndex_ = nrpnIndexMSB | nrpnIndexLSB;
     if (typeof nrpnIndex_ === "number")
-{
+    {
         if (ccIndex === NRPN_VALUE_MSB)
-{
+        {
             nrpnValueMSB = ccValue << 7;
 
             if (typeof nrpnValueLSB === "number")
-{
+            {
                 nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
                 return [nrpnIndex_, nrpnValue_];
             }
         }
- else if (ccIndex === NRPN_VALUE_LSB)
-{
+        else if (ccIndex === NRPN_VALUE_LSB)
+        {
             nrpnValueLSB = ccValue;
             nrpnValue_ = nrpnValueMSB | nrpnValueLSB;
             return [nrpnIndex_, nrpnValue_];
@@ -186,16 +186,16 @@ const MSBRoutine = (ccIndex, ccValue) =>
 const NRPNRoutine = (ccIndex, ccValue) =>
 {
     if (FIRST_CC === null)
-{
+    {
         FIRST_CC = ccIndex;
         ROUTINE_TYPE = FIRST_CC === NRPN_INDEX_MSB ? MSB_START : LSB_START;
     }
     if (ROUTINE_TYPE === MSB_START)
-{
+    {
         return MSBRoutine(ccIndex, ccValue);
     }
     if (ROUTINE_TYPE === LSB_START)
-{
+    {
         return LSBRoutine(ccIndex, ccValue);
     }
     return null;
@@ -209,17 +209,19 @@ function onMIDIMessage(_event)
 {
     if (!_event) return;
 
+    if (this.isEditorMode()) gui.emitEvent("userActivity");
+
     const { data } = _event;
     const [statusByte, LSB, MSB] = data;
 
     if (CLOCK_SIGNALS.includes(statusByte))
-{
+    {
         OUTPUTS.Clock.set(_event);
         return;
     }
 
     if (statusByte > 248)
-{
+    {
     // we don't use statusbytes above 248 for now
         return;
     }
@@ -231,15 +233,15 @@ function onMIDIMessage(_event)
     const outputIndex = LSB;
     const outputValue = MSB;
 
-    const isNRPNByte = messageType === "CC" && NRPN_CCS.some(cc => cc === LSB);
+    const isNRPNByte = messageType === "CC" && NRPN_CCS.some((cc) => cc === LSB);
     let nrpnIndex;
     let nrpnValue;
 
     if (isNRPNByte)
-{
+    {
         const nrpnValueRes = NRPNRoutine(LSB, MSB);
         if (nrpnValueRes)
-{
+        {
             const [index, value] = nrpnValueRes;
             messageType = "NRPN";
             nrpnIndex = index;
@@ -247,34 +249,32 @@ function onMIDIMessage(_event)
         }
     }
 
-    const newEvent = Object.assign(
-        {
-            /* OLD EVENT v */
-            deviceName,
-            "inputId": 0, // what is this for?
-            messageType,
-            // ...,
-            "index": outputIndex,
-            "value": outputValue,
+    const newEvent = {
+        /* OLD EVENT v */
+        deviceName,
+        "inputId": 0, // what is this for?
+        messageType,
+        // ...,
+        "index": outputIndex,
+        "value": outputValue,
 
-            "cmd": data[0] >> 4,
-            "channel": data[0] & 0xf,
-            "type": data[0] & 0xf0,
-            "note": data[1],
-            "velocity": data[2],
-            data,
-        },
-        messageType === "Note" && {
+        "cmd": data[0] >> 4,
+        "channel": data[0] & 0xf,
+        "type": data[0] & 0xf0,
+        "note": data[1],
+        "velocity": data[2],
+        data,
+        ...messageType === "Note" && {
             "newNote": [LSB, getMIDINote(LSB)],
             "velocity": outputValue,
         },
-        messageType === "NRPN" && { nrpnIndex, nrpnValue },
-    );
+        ...messageType === "NRPN" && { nrpnIndex, nrpnValue },
+    };
 
     if (learning)
-{
+    {
         if (["Note", "CC", "NRPN"].includes(messageType))
-{
+        {
             const newOp = op.patch.addOp(OPS[messageType].NAMESPACE, {
                 "translate": {
                     "x": op.uiAttribs.translate.x,
@@ -286,7 +286,7 @@ function onMIDIMessage(_event)
             newOp.getPortByName("MIDI Channel").set(channel + 1);
 
             if (messageType === "Note")
-{
+            {
                 const {
                     "newNote": [, noteName],
                 } = newEvent;
@@ -294,13 +294,13 @@ function onMIDIMessage(_event)
             }
 
             if (messageType === "CC")
-{
+            {
                 const { index } = newEvent;
                 newOp.getPortByName("CC Index").set(index);
             }
 
             if (messageType === "NRPN")
-{
+            {
                 newOp.getPortByName("NRPN Index").set(nrpnIndex);
             }
         }
@@ -318,7 +318,7 @@ function onMIDIMessage(_event)
     OUTPUTS.Event.set(newEvent);
 
     if (messageType !== "UNKNOWN" && !NOT_YET_USED.includes(messageType))
-{
+    {
         OUTPUTS[messageType].set(null);
         OUTPUTS[messageType].set(newEvent);
     }
@@ -335,13 +335,13 @@ function setDevice()
     //  const outputs = midi.outputs.values();
 
     for (let input = inputs.next(); input && !input.done; input = inputs.next())
-{
+    {
         if (input.value.name === name)
-{
+        {
             input.value.onmidimessage = onMIDIMessage;
             outputDevice = midi.inputs.get(input.value.id);
         }
- else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
+        else if (input.value.onmidimessage === onMIDIMessage) input.value.onmidimessage = null;
     }
 
     /* for (let output = outputs.next(); output && !output.done; output = outputs.next()) {
@@ -364,9 +364,8 @@ function onMIDISuccess(midiAccess)
 
     const deviceNames = [];
 
-
     for (let input = inputs.next(); input && !input.done; input = inputs.next())
-{
+    {
         deviceNames.push(input.value.name);
     }
 
@@ -382,7 +381,7 @@ if (navigator.requestMIDIAccess)
 {
     navigator.requestMIDIAccess({ "sysex": false }).then(onMIDISuccess, onMIDIFailure);
 }
- else onMIDIFailure();
+else onMIDIFailure();
 
 resetIn.onTriggered = () =>
 {
