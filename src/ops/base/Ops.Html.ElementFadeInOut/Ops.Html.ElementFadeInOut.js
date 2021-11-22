@@ -16,6 +16,7 @@ const eleId = "css_" + CABLES.uuid();
 
 update();
 
+let oldEle = null;
 let loaded = true;
 const oldvis = null;
 loaded = true;
@@ -30,6 +31,7 @@ op.onLoaded = function ()
 function updateVisibility()
 {
     const ele = inEle.get();
+
     if (!loaded)
     {
         setTimeout(updateVisibility, 50);
@@ -38,6 +40,8 @@ function updateVisibility()
 
     if (styleEle && ele)
     {
+        // if (ele == oldEle) return;
+        // oldEle = ele;
         if (inVisible.get())
         {
             outShowing.set(true);

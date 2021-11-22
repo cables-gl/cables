@@ -158,7 +158,7 @@ function onDefaultValueChanged()
 {
     const defaultValue = defaultValuePort.get();
     valuePort.set(defaultValue);
-    // input.value = defaultValue;
+    input.value = defaultValue;
     setSelectedProperty();
 }
 

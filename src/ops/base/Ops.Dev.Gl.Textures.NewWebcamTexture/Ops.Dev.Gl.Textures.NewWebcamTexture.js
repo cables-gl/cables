@@ -182,12 +182,12 @@ function getCamConstraints()
         let deviceInfo = null;
         if (!deviceLabel || deviceLabel === "None")
         {
-            op.log("USE FIRST CAMERA");
+            console.log("USE FIRST CAMERA");
             deviceInfo = Object.values(camInputDevices)[0]; // get first camera
         }
         else
         {
-            op.log("FIND BY LABEL", deviceInfo, camInputDevices, deviceLabel);
+            console.log("FIND BY LABEL", deviceInfo, camInputDevices, deviceLabel);
             // Find by label
             deviceInfo = camInputDevices.filter((d) => d.label === deviceLabel);
             if (deviceInfo)
@@ -210,7 +210,7 @@ function getCamConstraints()
     }
     else
     {
-        op.log("NO CAM LOADED");
+        console.log("NO CAM LOADED");
         outSelectedDevice.set("");
     }
 
@@ -295,7 +295,7 @@ function initDevices()
             startWebcam();
         }).catch((e) =>
         {
-            op.log("error", e);
+            console.log("error", e);
             outError.set(e.name + ": " + e.message);
             cgl.patch.loading.finished(loadingId);
             camLoaded = false;

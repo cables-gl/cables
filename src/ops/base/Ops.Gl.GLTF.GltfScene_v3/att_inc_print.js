@@ -80,7 +80,8 @@ function printNode(html, node, level)
     if (node.hidden)hideclass = "node-hidden";
 
     // html+='';
-    html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "',true)\" class=\"treebutton\">Hierarchy</a>";
+    html += "<a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','transform')\" class=\"treebutton\">Transform</a>";
+    html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "','hierarchy')\" class=\"treebutton\">Hierarchy</a>";
     html += " <a onclick=\"gui.corePatch().getOpById('" + op.id + "').exposeNode('" + node.name + "')\" class=\"treebutton\">Node</a>";
 
     if (node.hasSkin())
@@ -130,19 +131,13 @@ function printMaterial(mat, idx)
 
 function printInfo()
 {
-    console.log("printInfo", gltf);
     if (!gltf) return;
 
     const startTime = performance.now();
-    // console.log(gltf);
-
     const sizes = {};
-
     let html = "<div style=\"overflow:scroll;width:100%;height:100%\">";
 
-
     html += "generator:" + gltf.json.asset.generator;
-
 
     if (!gltf.json.materials || gltf.json.materials.length == 0)
     {

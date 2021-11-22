@@ -6,7 +6,7 @@ const
     flip = op.inValueBool("Flip", false),
     unpackAlpha = op.inValueBool("Pre Multiplied Alpha", false),
     active = op.inValueBool("Active", true),
-    inFreeMemory = op.inBool("Save Memory", false),
+    inFreeMemory = op.inBool("Save Memory", true),
     textureOut = op.outTexture("Texture"),
     width = op.outValue("Width"),
     height = op.outValue("Height"),

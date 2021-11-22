@@ -538,8 +538,9 @@ function setNewOpPosition(newOp, num)
     newOp.setUiAttrib({ "translate": { "x": op.uiAttribs.translate.x, "y": op.uiAttribs.translate.y + num * CABLES.GLUI.glUiConfig.newOpDistanceY } });
 }
 
-op.exposeNode = function (name, tree, options)
+op.exposeNode = function (name, type, options)
 {
+    tree = type == "hierarchy";
     if (tree)
     {
         let ops = [];
@@ -591,6 +592,7 @@ op.exposeNode = function (name, tree, options)
     {
         let newopname = "Ops.Gl.GLTF.GltfNode_v2";
         if (options && options.skin)newopname = "Ops.Gl.GLTF.GltfSkin";
+        if (type == "transform")newopname = "Ops.Gl.GLTF.GltfNodeTransform_v2";
 
         gui.serverOps.loadOpLibs(newopname, () =>
         {
