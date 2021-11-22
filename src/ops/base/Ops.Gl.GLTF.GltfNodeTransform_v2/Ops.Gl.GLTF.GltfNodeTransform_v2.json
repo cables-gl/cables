@@ -1,0 +1,72 @@
+{
+    "id": "5a36a0f2-a4cb-4ac4-a7af-95924f2a9558",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1592407895084
+        },
+        {
+            "message": "Ops.User.pandur.GltfNode_v2 renamed to Ops.Gl.GLTF.GltfNode_v2",
+            "author": "pandur",
+            "date": 1592409514095
+        },
+        {
+            "message": "cloned op from Ops.Gl.GLTF.GltfNode_v2",
+            "author": "pandur",
+            "date": 1637605603183
+        },
+        {
+            "message": "Ops.User.pandur.GltfNodeTransform renamed to Ops.Gl.GLTF.GltfNodeTransform_v2",
+            "author": "pandur",
+            "date": 1637605939207
+        }
+    ],
+    "authorName": "pandur",
+    "created": 1637605603182,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "Render"
+            },
+            {
+                "type": 5,
+                "name": "Node Name"
+            },
+            {
+                "type": 0,
+                "name": "Set Matrix",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "Next"
+            },
+            {
+                "type": 0,
+                "name": "Found",
+                "subType": "boolean"
+            },
+            {
+                "type": 3,
+                "name": "Matrix"
+            }
+        ],
+        "name": "Ops.Gl.GLTF.GltfNodeTransform_v2"
+    },
+    "summary": "Control a single node from the GLTFscene op",
+    "issues": "",
+    "collections": null,
+    "relatedops": [
+        "Ops.Gl.GLTF.GltfScene"
+    ],
+    "youtubeids": [
+        "QNLw21hSweg"
+    ],
+    "docs": {
+        "ports": []
+    }
+}
