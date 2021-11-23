@@ -572,7 +572,7 @@ Texture.load = function (cgl, url, finishedCallback, settings)
         texture.loading = false;
         if (loadingId) cgl.patch.loading.finished(loadingId);
         const error = { "error": true };
-        if (finishedCallback) finishedCallback(error);
+        if (finishedCallback) finishedCallback(error, texture);
         if (cgl.patch.isEditorMode()) gui.jobs().finish("loadtexture" + loadingId);
     };
 
