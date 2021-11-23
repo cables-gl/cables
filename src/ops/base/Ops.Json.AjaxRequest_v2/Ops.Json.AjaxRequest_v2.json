@@ -34,11 +34,6 @@
                 "subType": "integer"
             },
             {
-                "type": 0,
-                "name": "HTTP Method",
-                "subType": "string"
-            },
-            {
                 "type": 5,
                 "name": "Content-Type"
             },

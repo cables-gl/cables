@@ -32,7 +32,7 @@ function updateName()
                 "title": "New Trigger",
                 "text": "enter a name for the new trigger",
                 "promptValue": "",
-                "promptOK": (str) =>
+                "promptOk": (str) =>
                 {
                     varname.set(str);
                     op.patch.namedTriggers[str] = op.patch.namedTriggers[str] || [];

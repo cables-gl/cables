@@ -5,31 +5,31 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Boolean",
                 "subType": "boolean"
             },
             {
-                "type": "0",
-                "name": "Value true",
+                "type": 0,
+                "name": "Value false",
                 "group": "Output Values",
                 "subType": "number"
             },
             {
-                "type": "0",
-                "name": "Value false",
+                "type": 0,
+                "name": "Value true",
                 "group": "Output Values",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Result",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Value.ValueSwitchBoolean"
+        "name": "Ops.Value.NumberSwitchBoolean"
     },
     "summary": "switch between two values by a boolean",
     "docs": {
