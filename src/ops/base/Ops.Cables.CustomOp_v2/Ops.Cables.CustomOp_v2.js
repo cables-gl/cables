@@ -45,6 +45,44 @@ op.patch.on("onOpAdd", (newOp, fromDeserizalize) =>
 op.onError = function (ex)
 {
     op.setUiError("error", ex);
+    const str = inJS.get();
+    const badLines = [];
+    let htmlWarning = "<div class=\"shaderErrorCode\">";
+    const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
+
+    let anonLine = 0;
+    const exLines = ex.stack.split("\n");
+    for (let i = 0; i < exLines.length; i++)
+    {
+        if (exLines[i].includes("anonymous"))
+        {
+            anonLine = exLines[i];
+            break;
+        }
+    }
+
+    let lineFields = anonLine.split(":");
+    let errorLine = lineFields[lineFields.length - 2];
+
+    let infoLog = ex || "empty info log";
+    badLines.push(errorLine - 2);
+
+    for (const i in lines)
+    {
+        const j = parseInt(i, 10) + 1;
+        const line = j + ": " + lines[i];
+
+        let isBadLine = false;
+        for (const bj in badLines)
+            if (badLines[bj] == j) isBadLine = true;
+
+        if (isBadLine) htmlWarning += "<span class=\"error\">";
+        htmlWarning += line;
+        if (isBadLine) htmlWarning += "</span>";
+    }
+
+    htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
+    setTimeout(() => { op.patch.emitEvent("criticalError", "CustomOp error " + op.name, htmlWarning); }, 150);
 };
 
 
