@@ -4,16 +4,15 @@ const
     inMode = op.inValueSelect("Mode", ["document", "string input"], "document"),
     inMimeType = op.inValueSelect("Type", ["text/html", "text/xml"], "text/html"),
     inSource = op.inStringEditor("Document", "xml"),
-    elementPort = op.outObject("Element");
+    elementPort = op.outArray("Elements");
 
-if (inMode.get() === "document")
-{
+if(inMode.get() === "document") {
     inSource.setUiAttribs({ "greyout": true });
-    inMimeType.set("text/html");
+    inMimeType.set("text/html")
     inMimeType.setUiAttribs({ "greyout": true });
 }
 
-inUpdate.onTriggered =
+inUpdate.onTriggered=
 queryPort.onChange =
 inMimeType.onChange =
 inSource.onChange = update;
@@ -25,26 +24,21 @@ function update()
     const q = queryPort.get();
     const theDocument = inSource.get();
     const mode = inMode.get();
-    if (mode === "string input" && theDocument)
-    {
+    if(mode === "string input" && theDocument) {
         let parser = new DOMParser();
         let htmlDoc = null;
-        try
-        {
+        try {
             htmlDoc = parser.parseFromString(theDocument, inMimeType.get());
-            const el = htmlDoc.querySelector(q);
+            const el = Array.from(htmlDoc.querySelectorAll(q));
             elementPort.set(el);
         }
-        catch (e)
-        {
+        catch (e) {
             op.error(e);
         }
-    }
-    else
-    {
+    }else{
         try
         {
-            const el = document.querySelector(q);
+            const el = Array.from(document.querySelectorAll(q));
             elementPort.set(el);
         }
         catch (e)
@@ -52,19 +46,17 @@ function update()
             op.error(e);
         }
     }
+
 }
 
-function modeChange()
-{
-    if (inMode.get() === "document")
-    {
+function modeChange() {
+    if(inMode.get() === "document") {
         inSource.setUiAttribs({ "greyout": true });
-        inMimeType.set("text/html");
+        inMimeType.set("text/html")
         inMimeType.setUiAttribs({ "greyout": true });
-    }
-    else
-    {
+    }else{
         inSource.setUiAttribs({ "greyout": false });
         inMimeType.setUiAttribs({ "greyout": false });
     }
 }
+

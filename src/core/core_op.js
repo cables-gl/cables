@@ -83,6 +83,7 @@ const Op = function ()
     this.onLoaded = null;
     this.onDelete = null;
     this.onUiAttrChange = null;
+    this.onError = null;
     this._eventCallbacks = {};
     this._instances = null;
 

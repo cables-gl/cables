@@ -1,14 +1,24 @@
 {
-    "id": "a1a2189b-564c-4dd7-b3d9-a6cebc0cd94e",
+    "id": "001799c7-9ddf-4f3e-b260-e865f0ed2c0e",
     "changelog": [
         {
             "message": "created op",
             "author": "tim",
             "date": 1582126210630
+        },
+        {
+            "message": "cloned op from Ops.Html.QuerySelector_v2",
+            "author": "stephan",
+            "date": 1637067837289
+        },
+        {
+            "message": "Ops.User.stephan.QuerySelectorAll renamed to Ops.Html.QuerySelectorAll",
+            "author": "stephan",
+            "date": 1637339433540
         }
     ],
-    "authorName": "tim",
-    "created": 1582126224873,
+    "authorName": "stephan",
+    "created": 1637067837289,
     "layout": {
         "portsIn": [
             {
@@ -36,13 +46,13 @@
         ],
         "portsOut": [
             {
-                "type": 2,
-                "name": "Element"
+                "type": 3,
+                "name": "Elements"
             }
         ],
-        "name": "Ops.Html.QuerySelector_v2"
+        "name": "Ops.User.stephan.QuerySelectorAll"
     },
-    "summary": "Selects an element in the DOM",
+    "summary": "Selects all matching elements in the DOM",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -52,10 +62,6 @@
             {
                 "name": "Query",
                 "text": "E.g. \".some-classname\", '#some-id' or \"footer\""
-            },
-            {
-                "name": "Element",
-                "text": "The first element which can be found using the query or null (no results)"
             }
         ]
     }
