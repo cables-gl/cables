@@ -235,37 +235,28 @@ function update()
             }
         });
     }
-    else if (document.location.href.indexOf("cables.gl") > 0)
+    else if (CABLES.talkerAPI)
     {
         // use this to workaround /viewer/ and /p/ not being "isEditorMode" but also not having exported assets
-        let blueprintUrl = "https://cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
-        if (document.location.hostname.indexOf("dev") >= 0)
+        const callbackTalkerApi = (options, next) =>
         {
-            blueprintUrl = "https://dev.cables.gl/api/blueprints/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch;
-        }
-        CABLES.ajax(
-            blueprintUrl,
-            function (err, response)
+            if (options.blueprint && options.blueprint.data.blueprintOpId === op.id)
             {
-                if (!err)
-                {
-                    const blueprintData = JSON.parse(response);
-                    blueprintData.settings = op.patch.settings;
-                    blueprintData.ops = blueprintData.data.ops;
-                    deSerializeBlueprint(blueprintData, subPatchId, false);
-                }
-                else
-                {
-                    op.error("failed to load blueprint from", blueprintUrl, err);
-                }
+                const blueprintData = options.blueprint;
+                blueprintData.settings = op.patch.settings;
+                blueprintData.ops = blueprintData.data.ops;
+                deSerializeBlueprint(blueprintData, subPatchId, false);
                 loadingOut.set(false);
                 op.patch.loading.finished(loadingId);
                 if (wasPasted)
                 {
                     wasPasted = false;
                 }
+                CABLES.talkerAPI.removeEventListener(callbackTalkerApi);
             }
-        );
+        };
+        CABLES.talkerAPI.addEventListener("blueprint", callbackTalkerApi);
+        CABLES.talkerAPI.send("sendBlueprint", { "url": "/" + blueprintId + "/" + patchId + "/" + subPatchId + "/" + op.id + "/" + op.uiAttribs.subPatch });
     }
     else
     {
