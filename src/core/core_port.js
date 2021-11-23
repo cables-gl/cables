@@ -255,6 +255,7 @@ Port.prototype.set = Port.prototype.setValue = function (v)
                     if (this.parent.patch.isEditorMode()) gui.showOpCrash(this.parent);
 
                     this.parent.patch.emitEvent("exception".ex, this.parent);
+                    if (this.parent.onError) this.parent.onError(ex);
                 }
 
                 if (this.parent && this.parent.patch && this.parent.patch.isEditorMode() && this.type == CONSTANTS.OP.OP_PORT_TYPE_TEXTURE) gui.texturePreview().updateTexturePort(this);
@@ -525,6 +526,7 @@ Port.prototype.trigger = function ()
         {
             this.parent.patch.emitEvent("exception", ex, portTriggered.parent);
             this.parent.patch.emitEvent("opcrash", portTriggered);
+            if (this.parent.onError) this.parent.onError(ex);
         }
         this._log.warn("exception!");
         this._log.error("ontriggered exception cought", ex);
