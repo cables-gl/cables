@@ -100,8 +100,8 @@ function realReload(nocache)
         {
             op.setUiError("urlerror", null);
 
-            const newTex = CGL.Texture.load(cgl, url,
-                function (err)
+            CGL.Texture.load(cgl, url,
+                function (err, newTex)
                 {
                     if (err)
                     {
@@ -113,6 +113,7 @@ function realReload(nocache)
                     }
 
                     textureOut.set(newTex);
+
                     width.set(newTex.width);
                     height.set(newTex.height);
                     ratio.set(newTex.width / newTex.height);
