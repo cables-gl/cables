@@ -28,6 +28,7 @@ const Context = function (_patch)
     this.debugOneFrame = false;
 
     this.maxTextureUnits = 0;
+    this.maxVaryingVectors = 0;
     this.currentProgram = null;
     this._hadStackError = false;
     this.glSlowRenderer = false;
@@ -185,6 +186,7 @@ const Context = function (_patch)
         });
 
 
+        this.maxVaryingVectors = this.gl.getParameter(this.gl.MAX_VARYING_VECTORS);
         this.maxTextureUnits = this.gl.getParameter(this.gl.MAX_TEXTURE_IMAGE_UNITS);
         this.maxTexSize = this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE);
         this.maxUniformsFrag = this.gl.getParameter(this.gl.MAX_FRAGMENT_UNIFORM_VECTORS);

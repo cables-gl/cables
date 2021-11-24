@@ -1,4 +1,5 @@
 const crashButton = op.inTriggerButton("Crash");
+const crashButton2 = op.inTriggerButton("Crash 2");
 const paramtest_1 = op.inValueFloat("test float 1", 1.0);
 const paramtest_2 = op.outNumber("test float 1", 1.0);
 const slider = op.inFloatSlider("name", 15, 10, 20);
@@ -29,4 +30,13 @@ inCheck.onChange = () =>
 crashButton.onTriggered = function ()
 {
     cdfsvjkldsjkl;
+};
+
+crashButton2.onTriggered = function ()
+{
+    setTimeout(function ()
+    {
+        const arr = [1, 2];
+        console.log(arr.length = 1.4);
+    }, 100);
 };

@@ -1,12 +1,10 @@
-// const
-    // exe=op.inTrigger("Trigger"),
-    // inNum=op.inInt("Num",5),
-    // trigger=op.outTrigger("Next"),
-    // idx=op.outNumber("Index");
+const inTitle = op.inString("Title", "");
+// exe=op.inTrigger("Trigger"),
+// inNum=op.inInt("Num",5),
+// trigger=op.outTrigger("Next"),
+// idx=op.outNumber("Index");
 
-op.setUiAttrib({"hasArea":true});
-
-op.log("hund");
+op.setUiAttrib({ "hasArea": true });
 
 // exe.onTriggered=function()
 // {
@@ -22,3 +20,21 @@ op.log("hund");
 //     op.patch.instancing.popLoop();
 // };
 
+op.init =
+    inTitle.onChange =
+    op.onLoaded = update;
+
+update();
+
+function update()
+{
+    if (CABLES.UI)
+    {
+        op.uiAttr(
+            {
+                "comment_title": inTitle.get()
+            });
+
+        op.name = inTitle.get();
+    }
+}
