@@ -1,0 +1,34 @@
+{
+    "id": "2b60d12d-2884-4ad0-bda4-0caeb6882f5c",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1637676931322
+        },
+        {
+            "message": "Ops.User.pandur.VizNum renamed to Ops.Ui.VizNumber",
+            "author": "pandur",
+            "date": 1637677608370
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Number",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Result",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.VizNum"
+    },
+    "authorName": "pandur",
+    "created": 1637676964149
+}
