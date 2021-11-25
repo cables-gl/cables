@@ -526,7 +526,7 @@ Port.prototype.trigger = function ()
         {
             this.parent.patch.emitEvent("exception", ex, portTriggered.parent);
             this.parent.patch.emitEvent("opcrash", portTriggered);
-            if (this.parent.onError) this.parent.onError(ex);
+            if (portTriggered.parent.onError) portTriggered.parent.onError(ex);
         }
         this._log.warn("exception!");
         this._log.error("ontriggered exception cought", ex);
