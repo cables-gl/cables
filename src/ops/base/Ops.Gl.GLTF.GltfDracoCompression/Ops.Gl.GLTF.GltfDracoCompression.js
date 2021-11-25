@@ -131,7 +131,7 @@ class DracoDecoderClass
                     const attribute = f.GetAttributeByUniqueId(outputGeometry, 1);
                     const geometry = dracoAttributes(draco, f, outputGeometry, geometryType, name);
 
-                    self.postMessage({ "type": "done", "taskID": message.taskID, "geometry": geometry });
+                    this.postMessage({ "type": "done", "taskID": message.taskID, "geometry": geometry });
 
                     draco.destroy(f);
                     draco.destroy(buffer);
