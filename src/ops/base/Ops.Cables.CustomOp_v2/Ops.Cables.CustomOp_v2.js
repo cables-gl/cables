@@ -46,6 +46,7 @@ op.onError = function (ex)
 {
     if (op.patch.isEditorMode())
     {
+        console.log("THE EX", ex.stack);
         op.setUiError("error", ex);
         const str = inJS.get();
         const badLines = [];
@@ -56,12 +57,20 @@ op.onError = function (ex)
         const exLines = ex.stack.split("\n");
         for (let i = 0; i < exLines.length; i++)
         {
+            // firefox
+            if (exLines[i].includes("Function:"))
+            {
+                anonLine = exLines[i];
+                break;
+            }
+            // chrome
             if (exLines[i].includes("anonymous"))
             {
                 anonLine = exLines[i];
                 break;
             }
         }
+        console.log("ANONLINE", anonLine);
 
         let lineFields = anonLine.split(":");
         let errorLine = lineFields[lineFields.length - 2];
