@@ -115,7 +115,7 @@ const getEvalFunction = () =>
         }
         else
         {
-            console.log("error creating javascript function", err);
+            op.logError("error creating javascript function", err);
         }
         return null;
     }
@@ -136,7 +136,7 @@ function loadLibAndExecute()
         scriptTag.src = inLib.get();
         scriptTag.onload = function ()
         {
-            console.log("done loading library", inLib.get());
+            op.logVerbose("done loading library", inLib.get());
             execute();
         };
         document.body.appendChild(scriptTag);
@@ -294,7 +294,7 @@ const execute = () =>
             }
             else
             {
-                console.log("error executing javascript code", e);
+                op.logError("error executing javascript code", e);
             }
         }
     }
