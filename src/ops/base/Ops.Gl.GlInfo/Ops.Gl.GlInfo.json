@@ -37,6 +37,11 @@
             },
             {
                 "type": 0,
+                "name": "Max Varying Vectors",
+                "subType": "number"
+            },
+            {
+                "type": 0,
                 "name": "Max MSAA Samples",
                 "subType": "number"
             },

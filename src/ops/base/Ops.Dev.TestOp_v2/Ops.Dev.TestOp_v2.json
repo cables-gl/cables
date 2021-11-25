@@ -31,6 +31,10 @@
                 "name": "Crash"
             },
             {
+                "type": 1,
+                "name": "Crash 2"
+            },
+            {
                 "type": 0,
                 "name": "name",
                 "subType": "number"
