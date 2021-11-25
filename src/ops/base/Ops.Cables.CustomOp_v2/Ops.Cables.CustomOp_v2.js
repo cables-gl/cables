@@ -66,7 +66,6 @@ op.onError = function (ex)
         let lineFields = anonLine.split(":");
         let errorLine = lineFields[lineFields.length - 2];
 
-        let infoLog = ex || "empty info log";
         badLines.push(errorLine - 2);
 
         for (const i in lines)
@@ -84,8 +83,7 @@ op.onError = function (ex)
             if (isBadLine) htmlWarning += "</span>";
         }
 
-        htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
-        ex.message = htmlWarning;
+        ex.customMessage = htmlWarning;
         ex.stack = "";
         op.patch.emitEvent("exceptionOp", ex, op.name);
     }
