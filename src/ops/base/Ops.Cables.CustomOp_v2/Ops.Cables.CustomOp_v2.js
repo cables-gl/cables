@@ -44,45 +44,58 @@ op.patch.on("onOpAdd", (newOp, fromDeserizalize) =>
 
 op.onError = function (ex)
 {
-    op.setUiError("error", ex);
-    const str = inJS.get();
-    const badLines = [];
-    let htmlWarning = "<div class=\"shaderErrorCode\">";
-    const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
-
-    let anonLine = 0;
-    const exLines = ex.stack.split("\n");
-    for (let i = 0; i < exLines.length; i++)
+    if (op.patch.isEditorMode())
     {
-        if (exLines[i].includes("anonymous"))
+        console.log("THE EX", ex.stack);
+        op.setUiError("error", ex);
+        const str = inJS.get();
+        const badLines = [];
+        let htmlWarning = "<div class=\"shaderErrorCode\">";
+        const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
+
+        let anonLine = 0;
+        const exLines = ex.stack.split("\n");
+        for (let i = 0; i < exLines.length; i++)
         {
-            anonLine = exLines[i];
-            break;
+            // firefox
+            if (exLines[i].includes("Function:"))
+            {
+                anonLine = exLines[i];
+                break;
+            }
+            // chrome
+            if (exLines[i].includes("anonymous"))
+            {
+                anonLine = exLines[i];
+                break;
+            }
         }
+        console.log("ANONLINE", anonLine);
+
+        let lineFields = anonLine.split(":");
+        let errorLine = lineFields[lineFields.length - 2];
+
+        badLines.push(errorLine - 2);
+
+        for (const i in lines)
+        {
+            const j = parseInt(i, 10) + 1;
+            const line = j + ": " + lines[i];
+
+            let isBadLine = false;
+            for (const bj in badLines)
+                if (badLines[bj] == j) isBadLine = true;
+
+            if (isBadLine) htmlWarning += "<span class=\"error\">";
+            htmlWarning += line.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\"", "&quot;")
+                .replaceAll("'", "&#039;");
+            if (isBadLine) htmlWarning += "</span>";
+        }
+
+        ex.customMessage = htmlWarning;
+        ex.stack = "";
+        op.patch.emitEvent("exceptionOp", ex, op.name);
     }
-
-    let lineFields = anonLine.split(":");
-    let errorLine = lineFields[lineFields.length - 2];
-
-    let infoLog = ex || "empty info log";
-    badLines.push(errorLine - 2);
-
-    for (const i in lines)
-    {
-        const j = parseInt(i, 10) + 1;
-        const line = j + ": " + lines[i];
-
-        let isBadLine = false;
-        for (const bj in badLines)
-            if (badLines[bj] == j) isBadLine = true;
-
-        if (isBadLine) htmlWarning += "<span class=\"error\">";
-        htmlWarning += line;
-        if (isBadLine) htmlWarning += "</span>";
-    }
-
-    htmlWarning = infoLog + "<br/>" + htmlWarning + "<br/><br/>";
-    setTimeout(() => { op.patch.emitEvent("criticalError", "CustomOp error " + op.name, htmlWarning); }, 150);
 };
 
 
@@ -111,7 +124,7 @@ const getEvalFunction = () =>
         }
         else
         {
-            console.log("error creating javascript function", err);
+            op.logError("error creating javascript function", err);
         }
         return null;
     }
@@ -132,7 +145,7 @@ function loadLibAndExecute()
         scriptTag.src = inLib.get();
         scriptTag.onload = function ()
         {
-            console.log("done loading library", inLib.get());
+            op.logVerbose("done loading library", inLib.get());
             execute();
         };
         document.body.appendChild(scriptTag);
@@ -290,7 +303,7 @@ const execute = () =>
             }
             else
             {
-                console.log("error executing javascript code", e);
+                op.logError("error executing javascript code", e);
             }
         }
     }
