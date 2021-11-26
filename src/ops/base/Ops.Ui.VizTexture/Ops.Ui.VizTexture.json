@@ -15,6 +15,11 @@
             "message": "Ops.Admin.PreviewTexture renamed to Ops.Dev.VizTexture",
             "author": "pandur",
             "date": 1621835702412
+        },
+        {
+            "message": "Ops.Dev.VizTexture renamed to Ops.Ui.VizTexture",
+            "author": "pandur",
+            "date": 1637834150633
         }
     ],
     "authorName": "pandur",
@@ -34,6 +39,6 @@
                 "objType": "texture"
             }
         ],
-        "name": "Ops.Dev.VizTexture"
+        "name": "Ops.Ui.VizTexture"
     }
 }

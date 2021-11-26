@@ -200,7 +200,6 @@ const Context = function (_patch)
             this.gl.drawElementsInstanced = instancingExt.drawElementsInstancedANGLE.bind(instancingExt);
         }
 
-
         this.updateSize();
     };
 

@@ -540,7 +540,7 @@ function setNewOpPosition(newOp, num)
 
 op.exposeNode = function (name, type, options)
 {
-    tree = type == "hierarchy";
+    let tree = type == "hierarchy";
     if (tree)
     {
         let ops = [];

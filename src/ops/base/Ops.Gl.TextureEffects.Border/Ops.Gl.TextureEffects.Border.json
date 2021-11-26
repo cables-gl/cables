@@ -1,5 +1,5 @@
 {
-    "summary": "Draws a Border around the current ImageCompose",
+    "summary": "Draws a Border (rectangular frame) around the current ImageCompose",
     "layout": {
         "portsIn": [
             {

@@ -165,6 +165,13 @@ function setupMediaRecorder()
 function startRecording()
 {
     if (!mediaRecorder)setupMediaRecorder();
+    if (!mediaRecorder)
+    {
+        op.setUiError("noobj", "could not create mediarecorder, try setting all parameters");
+        return;
+    }
+
+    op.setUiError("noobj", null);
 
     console.log("start recording: ", inCodecs.get());
 

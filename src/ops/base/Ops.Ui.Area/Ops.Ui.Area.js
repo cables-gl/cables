@@ -32,7 +32,7 @@ function update()
     {
         op.uiAttr(
             {
-                "comment_title": inTitle.get()
+                "comment_title": inTitle.get() || " "
             });
 
         op.name = inTitle.get();
