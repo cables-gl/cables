@@ -169,6 +169,7 @@ function generate()
     }
 
     geom.calculateNormals({ "forceZUp": false });
+    geom.calcTangentsBitangents();
 
     mesh = new CGL.Mesh(cgl, geom);
     geomOut.set(null);

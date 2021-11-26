@@ -40,6 +40,7 @@ let gltfMesh = class
                     if (attr.name === "position") geom.vertices = attr.array;
                     else if (attr.name === "normal") geom.vertexNormals = attr.array;
                     else if (attr.name === "uv") geom.texCoords = attr.array;
+                    else if (attr.name === "color") this.setGeomVertCols(geom, attr.array);
                     else if (attr.name === "joints") geom.setAttribute("attrJoints", Array.from(attr.array), 4);
                     else if (attr.name === "weights")
                     {
@@ -97,23 +98,45 @@ let gltfMesh = class
     }
 
 
+    setGeomVertCols(tgeom,arr)
+    {
+
+        if (arr instanceof Float32Array)
+        {
+            let div=false;
+            for (let i = 0; i < arr.length; i++)
+            {
+                if(arr[i]>1)
+                {
+                    div=true;
+                    continue
+                }
+            }
+
+            if(div)
+            for (let i = 0; i < arr.length; i++)  arr[i] /= 65535;
+
+            tgeom.vertexColors = arr;
+        }
+
+        else if (arr instanceof Uint16Array)
+        {
+            const fb = new Float32Array(arr.length);
+            for (let i = 0; i < arr.length; i++)  fb[i] = arr[i] / 65535;
+
+            tgeom.vertexColors = fb;
+        } else tgeom.vertexColors = arr;
+
+    }
+
+
     fillGeomAttribs(gltf, tgeom, attribs, setGeom)
     {
         if (attribs.hasOwnProperty("POSITION"))tgeom.vertices = gltf.accBuffers[attribs.POSITION];
         if (attribs.hasOwnProperty("NORMAL"))tgeom.vertexNormals = gltf.accBuffers[attribs.NORMAL];
         if (attribs.hasOwnProperty("TEXCOORD_0"))tgeom.texCoords = gltf.accBuffers[attribs.TEXCOORD_0];
         if (attribs.hasOwnProperty("TANGENT"))tgeom.tangents = gltf.accBuffers[attribs.TANGENT];
-        if (attribs.hasOwnProperty("COLOR_0"))
-        {
-            tgeom.vertexColors = gltf.accBuffers[attribs.COLOR_0];
-
-            if (gltf.accBuffers[attribs.COLOR_0] instanceof Uint16Array)
-            {
-                const fb = new Float32Array(tgeom.vertexColors.length);
-                for (let i = 0; i < tgeom.vertexColors.length; i++) fb[i] = tgeom.vertexColors[i] / 65535;
-                tgeom.vertexColors = fb;
-            }
-        }
+        if (attribs.hasOwnProperty("COLOR_0"))this.setGeomVertCols(tgeom,gltf.accBuffers[attribs.COLOR_0]);
 
         if (attribs.hasOwnProperty("TEXCOORD_1"))tgeom.setAttribute("attrTexCoord1", gltf.accBuffers[attribs.TEXCOORD_1], 2);
         if (attribs.hasOwnProperty("TEXCOORD_2"))tgeom.setAttribute("attrTexCoord2", gltf.accBuffers[attribs.TEXCOORD_2], 2);
@@ -223,7 +246,7 @@ let gltfMesh = class
             this.mesh = new CGL.Mesh(cgl, g);
             this.mesh._geom = null;
 
-            this.geom = null;
+            // this.geom = null;
         }
         else
         {
