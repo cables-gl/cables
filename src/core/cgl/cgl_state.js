@@ -164,7 +164,7 @@ const Context = function (_patch)
 
         if (!this.gl)
         {
-            this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL.");
+            this.exitError("NO_WEBGL", "sorry, could not initialize WebGL. Please check if your Browser supports WebGL or try to restart your browser.");
             return;
         }
 
