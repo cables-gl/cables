@@ -11,3 +11,8 @@ const
 op.setUiAttrib({ "height": 150 });
 
 // inNum.onChange = () => { outNum.set(inNum.get()); };
+
+op.onPreviewLayer = (ctx, x, y, w, h) =>
+{
+
+};
