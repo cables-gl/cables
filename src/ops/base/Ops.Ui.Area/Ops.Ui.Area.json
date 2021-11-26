@@ -18,5 +18,18 @@
         "portsIn": [],
         "portsOut": [],
         "name": "Ops.Ui.Area"
+    },
+    "summary": "Organize and group your patch operators",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Title",
+                "text": "name of the group"
+            }
+        ]
     }
 }

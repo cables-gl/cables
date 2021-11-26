@@ -1,1 +1,37 @@
-{"author":"5a0fe67d9641cedb39929853","authorName":"pandur","id":"8db7e954-81f4-4b34-a938-0155097410de","created":1512215895683,"libs":["conway-hart.js"],"credits":[{"title":"conway-heart","author":"mikolalysenko","url":"https://github.com/mikolalysenko/conway-hart","licence":"GPL"}],"layout":{"portsIn":[{"type":"0","name":"Receipt","subType":"string"}],"portsOut":[{"type":"2","name":"Geometry"}],"name":"Ops.Gl.Meshes.Polyhedron"},"summary":"generate polyhedron meshes ","docs":{"ports":[]}}
+{
+    "author": "5a0fe67d9641cedb39929853",
+    "authorName": "pandur",
+    "id": "8db7e954-81f4-4b34-a938-0155097410de",
+    "created": 1512215895683,
+    "libs": [
+        "conway-hart.js"
+    ],
+    "credits": [
+        {
+            "title": "conway-heart",
+            "author": "mikolalysenko",
+            "url": "https://github.com/mikolalysenko/conway-hart",
+            "licence": "GPL"
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Receipt",
+                "subType": "string"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 2,
+                "name": "Geometry"
+            }
+        ],
+        "name": "Ops.Gl.Meshes.Polyhedron"
+    },
+    "summary": "generate polyhedron meshes ",
+    "docs": {
+        "ports": []
+    }
+}

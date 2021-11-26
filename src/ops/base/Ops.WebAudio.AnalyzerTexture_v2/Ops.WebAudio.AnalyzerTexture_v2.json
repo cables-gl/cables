@@ -28,11 +28,6 @@
                 "type": 0,
                 "name": "Texture Size index",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Texture Size",
-                "group": "Texture Options"
             }
         ],
         "portsOut": [
@@ -40,6 +35,11 @@
                 "type": 2,
                 "name": "Texture Out",
                 "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Position",
+                "subType": "number"
             }
         ],
         "name": "Ops.WebAudio.AnalyzerTexture_v2"
