@@ -15,13 +15,21 @@
     "authorName": "pandur",
     "created": 1629721822424,
     "layout": {
-        "portsIn": [
-            {
-                "type": 5,
-                "name": "Title"
-            }
-        ],
+        "portsIn": [],
         "portsOut": [],
         "name": "Ops.Ui.Area"
+    },
+    "summary": "Organize and group your patch operators",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": [
+            {
+                "name": "Title",
+                "text": "name of the group"
+            }
+        ]
     }
 }

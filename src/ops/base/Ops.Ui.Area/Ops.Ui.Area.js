@@ -1,8 +1,6 @@
 const inTitle = op.inString("Title", "");
-// exe=op.inTrigger("Trigger"),
-// inNum=op.inInt("Num",5),
-// trigger=op.outTrigger("Next"),
-// idx=op.outNumber("Index");
+
+inTitle.setUiAttribs({ "hidePort": true });
 
 op.setUiAttrib({ "hasArea": true });
 
@@ -30,6 +28,7 @@ function update()
 {
     if (CABLES.UI)
     {
+        gui.setStateUnsaved();
         op.uiAttr(
             {
                 "comment_title": inTitle.get() || " "

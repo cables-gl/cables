@@ -127,6 +127,7 @@ function buildMesh()
     geom.verticesIndices = faces;
     geom.vertexColors = vertexColors;
     geom.calculateNormals();
+    geom.calcTangentsBitangents();
 
     outGeom.set(null);
     outGeom.set(geom);

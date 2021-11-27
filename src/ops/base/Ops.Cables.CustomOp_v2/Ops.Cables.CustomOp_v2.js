@@ -46,7 +46,6 @@ op.onError = function (ex)
 {
     if (op.patch.isEditorMode())
     {
-        console.log("THE EX", ex.stack);
         op.setUiError("error", ex);
         const str = inJS.get();
         const badLines = [];
@@ -70,7 +69,6 @@ op.onError = function (ex)
                 break;
             }
         }
-        console.log("ANONLINE", anonLine);
 
         let lineFields = anonLine.split(":");
         let errorLine = lineFields[lineFields.length - 2];

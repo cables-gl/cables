@@ -1098,11 +1098,11 @@ const Op = function ()
 
     Op.prototype.log = function ()
     {
-        if (this.patch.silent) return;
-        const initiator = "op " + this._shortOpName;
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(this.name, ...arguments)) return;
+        const initiator = "op " + this.objName;
+        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, ...arguments)) return;
+        if (!CABLES.UI && this.patch.silent) return;
 
-        const args = ["[" + initiator + "]"];
+        const args = ["[op " + this._shortOpName + "]"];
         args.push.apply(args, arguments);
         Function.prototype.apply.apply(console.log, [console, args]);// eslint-disable-line
     };
@@ -1125,9 +1125,10 @@ const Op = function ()
 
     Op.prototype.verbose = Op.prototype.logVerbose = function ()
     {
-        if (this.patch.silent) return;
         const initiator = "op " + this._shortOpName;
-        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(this.name, ...arguments)) return;
+        if (CABLES.UI && !CABLES.UI.logFilter.shouldPrint(initiator, ...arguments)) return;
+
+        if (!CABLES.UI && this.patch.silent) return;
 
         const args = ["[" + initiator + "]"];
         args.push.apply(args, arguments);

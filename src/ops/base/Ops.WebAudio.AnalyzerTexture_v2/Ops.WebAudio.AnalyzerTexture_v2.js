@@ -12,6 +12,7 @@ op.setPortGroup("Texture Options", [inTextureSize]);
 op.setPortGroup("Mirror Options", [inMirrorActive, inMirrorWidth]);
 
 const outTexture = op.outTexture("Texture Out", null, "texture");
+const outPosition = op.outNumber("Position");
 
 let updateTextureSize = false;
 inTextureSize.onChange = () =>
@@ -65,6 +66,8 @@ function updateFFT()
     line++;
 
     if (line >= height) line = 0;
+
+    outPosition.set(line / height);
 
     for (let i = 0; i < width; i++)
     {
