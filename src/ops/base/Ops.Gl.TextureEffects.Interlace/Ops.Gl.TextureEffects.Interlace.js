@@ -1,7 +1,7 @@
 let render = op.inTrigger("render");
 let amount = op.inValueSlider("amount", 0.5);
 let lum = op.inValueSlider("Lumi Scale", 0.9);
-let direction = op.inBool("X or Y", true);
+let direction = op.inBool("X or Y", false);
 let lineSize = op.inValue("Line Size", 4);
 let displace = op.inValueSlider("Displacement", 0);
 
@@ -36,7 +36,6 @@ render.onTriggered = function ()
     cgl.currentTextureEffect.bind();
 
     cgl.setTexture(0, cgl.currentTextureEffect.getCurrentSourceTexture().tex);
-
 
     cgl.currentTextureEffect.finish();
     cgl.popShader();

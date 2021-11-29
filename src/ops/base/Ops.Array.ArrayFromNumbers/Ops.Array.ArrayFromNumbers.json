@@ -192,6 +192,15 @@
         "iXKo7mU422M"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Update",
+                "text": "operator must be updated any time you change values in it, or connected to the mainloop op"
+            },
+            {
+                "name": "Limit",
+                "text": "range is 1-30"
+            }
+        ]
     }
 }

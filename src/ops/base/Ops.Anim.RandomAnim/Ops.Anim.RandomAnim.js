@@ -1,14 +1,15 @@
-const exe = op.inTrigger("exe");
+const
+    exe = op.inTrigger("exe"),
 
-const min = op.inValue("min", 0);
-const max = op.inValue("max", 1);
-const seed = op.inValue("random seed", 0);
+    min = op.inValue("min", 0),
+    max = op.inValue("max", 1),
+    seed = op.inValue("random seed", 0),
 
-const duration = op.inValue("duration", 0.5);
-const pause = op.inValue("pause between", 0);
-const next = op.outTrigger("Next");
-const result = op.outValue("result");
-const looped = op.outTrigger("Looped");
+    duration = op.inValue("duration", 0.5),
+    pause = op.inValue("pause between", 0),
+    next = op.outTrigger("Next"),
+    result = op.outValue("result"),
+    looped = op.outTrigger("Looped");
 
 const anim = new CABLES.Anim();
 anim.createPort(op, "easing", reinit);
@@ -21,10 +22,10 @@ op.toWorkPortsNeedToBeLinked(exe);
 let counter = 0;
 
 min.onChange =
-max.onChange =
-pause.onChange =
-seed.onChange =
-duration.onChange = reinitLater;
+    max.onChange =
+    pause.onChange =
+    seed.onChange =
+    duration.onChange = reinitLater;
 
 let needsReinit = true;
 
@@ -50,10 +51,10 @@ function init(v)
 {
     anim.clear();
 
-    anim.setValue(op.patch.freeTimer.get(), v);
-    if (pause.get() !== 0.0) anim.setValue(op.patch.freeTimer.get() + pause.get(), v);
+    anim.setValue(CABLES.now() / 1000.0, v);
+    if (pause.get() !== 0.0) anim.setValue(CABLES.now() / 1000.0 + pause.get(), v);
 
-    anim.setValue(duration.get() + op.patch.freeTimer.get() + pause.get(), getRandom());
+    anim.setValue(duration.get() + CABLES.now() / 1000.0 + pause.get(), getRandom());
 }
 
 exe.onTriggered = updateExe;
@@ -62,7 +63,7 @@ function updateExe()
 {
     if (needsReinit)reinit();
 
-    const t = op.patch.freeTimer.get();
+    const t = CABLES.now() / 1000.0;
     const v = anim.getValue(t);
 
     if (anim.hasEnded(t))

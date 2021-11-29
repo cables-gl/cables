@@ -87,6 +87,43 @@
     ],
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Positions",
+                "text": "Array3 input for physics collision cages"
+            },
+            {
+                "name": "Name",
+                "text": "name of objects in the array"
+            },
+            {
+                "name": "Mass",
+                "text": "Mass of objects"
+            },
+            {
+                "name": "sizeX",
+                "text": "objects' size on X dimension"
+            },
+            {
+                "name": "sizeY",
+                "text": "objects' size on Y dimension"
+            },
+            {
+                "name": "sizeZ",
+                "text": "objects' size on Z dimension"
+            },
+            {
+                "name": "Simulated Positions",
+                "text": "positions of objects after physics simulation"
+            },
+            {
+                "name": "Names",
+                "text": "Names of each of the objects (the name you set in parameters followed by a number)"
+            },
+            {
+                "name": "Total Bodies",
+                "text": "number of physics objects generated from a given array"
+            }
+        ]
     }
 }

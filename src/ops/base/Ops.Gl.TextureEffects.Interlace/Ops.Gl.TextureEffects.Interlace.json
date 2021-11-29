@@ -2,48 +2,48 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "render"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "amount",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Lumi Scale",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "X or Y",
                 "subType": "boolean"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Line Size",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Displacement",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Add",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "scroll",
                 "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "trigger"
             }
         ],
