@@ -35,7 +35,16 @@
     "id": "94ef0da0-c920-415c-81b0-fecbd437991d",
     "created": 1510738260027,
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Mask",
+                "text": "Mask texture for the Offset texture"
+            },
+            {
+                "name": "Offset",
+                "text": "Control Hue  setting with a texture"
+            }
+        ]
     },
     "todos": [
         {
@@ -44,5 +53,9 @@
             "id": "182b59f6-02e6-4b3e-8301-843faa57c6d0",
             "date": 1560196212801
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

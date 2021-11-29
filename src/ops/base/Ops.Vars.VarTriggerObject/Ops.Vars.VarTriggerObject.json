@@ -46,14 +46,19 @@
     "coreLibs": [
         "vargetset"
     ],
-    "summary": "Set a variable object",
+    "summary": "Set an object variable by trigger",
     "issues": "",
     "collections": null,
     "relatedops": null,
     "youtubeids": [
-        "sUR6b0zvuSY"
+        "30v_GQc6ajA"
     ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Value",
+                "text": "textures, geometry, api request returns, etc"
+            }
+        ]
     }
 }

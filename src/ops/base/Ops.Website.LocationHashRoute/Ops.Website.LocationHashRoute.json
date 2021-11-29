@@ -47,7 +47,9 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "hUdHnFtBTNU"
+    ],
     "libs": [
         "navigo.js"
     ],
@@ -56,10 +58,6 @@
             {
                 "name": "Route",
                 "text": "pattern for url and variables (i.e. /scene/:id)"
-            },
-            {
-                "name": "Hash",
-                "text": "the full hash as seen in the url, after the first #"
             },
             {
                 "name": "Values",

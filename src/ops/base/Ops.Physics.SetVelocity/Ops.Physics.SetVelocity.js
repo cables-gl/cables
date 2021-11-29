@@ -1,27 +1,33 @@
-var exec=op.inTrigger("Exec");
+let exec = op.inTrigger("Exec");
 
-var velX=op.inValue("Velocity X");
-var velY=op.inValue("Velocity Y");
-var velZ=op.inValue("Velocity Z");
+let velX = op.inValue("Velocity X");
+let velY = op.inValue("Velocity Y");
+let velZ = op.inValue("Velocity Z");
 
-var doSet=op.inTriggerButton("Set");
+let doSet = op.inTriggerButton("Set");
 
-var next=op.outTrigger("Next");
+let next = op.outTrigger("Next");
 
-var doSetDelayed=false;
+let doSetDelayed = false;
 
-doSet.onTriggered=function()
+doSet.onTriggered = function ()
 {
-    doSetDelayed=true;
+    doSetDelayed = true;
 };
 
-exec.onTriggered=function()
+exec.onTriggered = function ()
 {
-    if(doSetDelayed && CABLES.physicsCurrentBody)
+    // console.log(CABLES.physicsCurrentBody.velocity);
+
+    if (doSetDelayed && CABLES.physicsCurrentBody)
     {
-        CABLES.physicsCurrentBody.velocity.set(velX.get(),velY.get(),velZ.get());
-        doSetDelayed=false;
+        CABLES.physicsCurrentBody.velocity.set(
+            velX.get(), // CABLES.physicsCurrentBody.velocity.x  +
+            velY.get(), // CABLES.physicsCurrentBody.velocity.y +
+            velZ.get()); // CABLES.physicsCurrentBody.velocity.z +
+        // CABLES.physicsCurrentBody.velocity.set(velX.get(),velY.get(),velZ.get());
+        doSetDelayed = false;
     }
-    
+
     next.trigger();
 };

@@ -1,5 +1,6 @@
 const
     exec = op.inTrigger("Exec"),
+    inName = op.inString("Name", "Sphere"),
     inMass = op.inValue("Mass"),
     inRadius = op.inValue("Radius", 1),
     doRender = op.inValueBool("Render", true),
@@ -24,8 +25,9 @@ let collided = false;
 let needSetup = true;
 let body = null;
 let shape = null;
-inMass.onChange = setup;
-inRadius.onChange = setup;
+
+inMass.onChange =
+    inRadius.onChange = setup;
 exec.onTriggered = render;
 
 op.toWorkNeedsParent("Ops.Exp.Gl.Physics.World");
@@ -35,6 +37,7 @@ inReset.onTriggered = function ()
     needSetup = true;
 };
 
+inName.onChange =
 exec.onLinkChanged =
 op.onDelete =
 function ()
@@ -53,10 +56,13 @@ function setup(modelScale)
     if (body)world.removeBody(body);
     shape = new CANNON.Sphere(Math.max(0, inRadius.get() * modelScale));
     body = new CANNON.Body({
+        "name": inName.get(),
+
         "mass": inMass.get(), // kg
         //   position: new CANNON.Vec3(posX.get(), posY.get(), posZ.get()), // m
         shape
     });
+    body.name = inName.get();
 
     world.addBody(body);
 
@@ -70,7 +76,6 @@ function setup(modelScale)
     outRadius.set(inRadius.get());
 }
 
-
 const scale = vec3.create();
 
 function getScaling(mat)
@@ -80,7 +85,6 @@ function getScaling(mat)
     const m33 = mat[10];
     return Math.hypot(m31, m32, m33);
 }
-
 
 function render()
 {
@@ -106,7 +110,6 @@ function render()
         body.updateBoundingRadius();
         // body.computeAABB();
     }
-
 
     if (staticPos)
     {
@@ -145,7 +148,6 @@ function render()
         // mat4.translate(cgl.mMatrix,cgl.mMatrix,[x.get(),y.get(),z.get()]);
         CABLES.GL_MARKER.drawSphere(op, inRadius.get());
     }
-
 
     outX.set(body.position.x);
     outY.set(body.position.y);

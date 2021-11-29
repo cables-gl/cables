@@ -92,6 +92,39 @@
     "relatedops": null,
     "youtubeids": [],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Name",
+                "text": "name of this physics cube object"
+            },
+            {
+                "name": "Mass",
+                "text": "Mass of object. Value of 0 will cause no gravity to be applied to the object"
+            },
+            {
+                "name": "Reset",
+                "text": "reset this object to original position/restart simulation for this object"
+            },
+            {
+                "name": "X",
+                "text": "position of object in the world on the X axis (during simulation)"
+            },
+            {
+                "name": "Y",
+                "text": "position of object in the world on the Y axis (during simulation)"
+            },
+            {
+                "name": "Z",
+                "text": "position of object in the world on the Z axis (during simulation)"
+            },
+            {
+                "name": "Ray Hit",
+                "text": "has a Cast Ray hit this object? for use with Cast Ray operator (Ops.Physics.CastRay)"
+            },
+            {
+                "name": "Collision",
+                "text": "trigger when collided with another object or the ground plane"
+            }
+        ]
     }
 }
