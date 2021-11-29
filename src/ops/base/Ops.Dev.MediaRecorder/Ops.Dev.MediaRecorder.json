@@ -75,5 +75,13 @@
             }
         ],
         "name": "Ops.Dev.MediaRecorder"
+    },
+    "summary": "record the renderer-output to video",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

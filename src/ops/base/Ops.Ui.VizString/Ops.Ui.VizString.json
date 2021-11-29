@@ -1,1 +1,40 @@
-{"id":"b04ff547-f557-4a54-a3ad-8a668fe1303d","changelog":[{"message":"created op","author":"pandur","date":1637912986143},{"message":"Ops.User.pandur.VizString renamed to Ops.Ui.VizString","author":"pandur","date":1637913135317}],"layout":{"portsIn":[{"type":5,"name":"String"}],"portsOut":[{"type":5,"name":"Result"}],"name":"Ops.User.pandur.VizString"},"authorName":"pandur","created":1637913011187}
+{
+    "id": "b04ff547-f557-4a54-a3ad-8a668fe1303d",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "pandur",
+            "date": 1637912986143
+        },
+        {
+            "message": "Ops.User.pandur.VizString renamed to Ops.Ui.VizString",
+            "author": "pandur",
+            "date": 1637913135317
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 5,
+                "name": "String"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 5,
+                "name": "Result"
+            }
+        ],
+        "name": "Ops.User.pandur.VizString"
+    },
+    "authorName": "pandur",
+    "created": 1637913011187,
+    "summary": "displays input string on the patchfield",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
+}

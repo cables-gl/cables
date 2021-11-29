@@ -30,5 +30,13 @@
         "name": "Ops.User.pandur.VizNum"
     },
     "authorName": "pandur",
-    "created": 1637676964149
+    "created": 1637676964149,
+    "summary": "displays input string on the patchfield",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }
