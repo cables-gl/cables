@@ -115,7 +115,7 @@ const shaderDefault = new CGL.Shader(cgl, "AnalyzerTexture - defaultShader");
 shaderDefault.setSource(shaderDefault.getDefaultVertexShader(), attachments.default_frag);
 const texUniformDefault = new CGL.Uniform(shaderDefault, "t", "texFFT", 1);
 
-const shaderMirror = new CGL.Shader(cgl);
+const shaderMirror = new CGL.Shader(cgl, "AnalyzerTexture mirror");
 
 shaderMirror.setSource(shaderMirror.getDefaultVertexShader(), attachments.mirror_frag);
 

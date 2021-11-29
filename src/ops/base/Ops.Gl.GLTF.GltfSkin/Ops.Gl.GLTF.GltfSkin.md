@@ -1,0 +1,1 @@
+by default gltfscene will do this internally for you, so should only be needed in special cases
