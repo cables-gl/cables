@@ -1,0 +1,1 @@
+uses the browser to record the renderer-output to any videocodec supported by your browser
