@@ -17,19 +17,24 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Render"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Refresh"
             },
             {
-                "type": "1",
+                "type": 1,
+                "name": "debug"
+            },
+            {
+                "type": 1,
                 "name": "Next"
             }
         ],
-        "name": "Ops.Admin.GlPatch"
+        "portsOut": [],
+        "name": "Ops.Dev.GlPatch"
     },
     "summary": "This render the editor ops in your canvas.",
     "issues": "",

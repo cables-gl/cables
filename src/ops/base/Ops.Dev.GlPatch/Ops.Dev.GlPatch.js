@@ -1,6 +1,7 @@
 const
     render = op.inTrigger("Render"),
     refresh = op.inTriggerButton("Refresh"),
+    debug = op.inTriggerButton("debug"),
     next = op.inTrigger("Next");
 
 const p = new CABLES.GLGUI.GlPatch(op.patch.cgl);
@@ -26,4 +27,29 @@ render.onTriggered = function ()
         op.patch.cgl.canvasHeight
     );
     next.trigger();
+};
+
+debug.onTriggered = () =>
+{
+    console.log(p);
+
+    let count = 0;
+    for (const i in p._glOpz)
+    {
+        p._glOpz[i].updateVisible();
+        p._glOpz[i].updatePosition();
+
+        for (const k in p._glOpz[i]._links)
+        {
+            count++;
+            if (p._glOpz[i]._links[k]) p._glOpz[i]._links[k].update();
+            console.log(p._glOpz[i]._links[k]);
+
+            p._glOpz[i]._links[k]._cable.updateLineStyle();
+            p._glOpz[i]._links[k]._cable._updateLinePos();
+        }
+    }
+
+    console.log(p._splineDrawers[0]);
+    console.log("num splines ", count);
 };
