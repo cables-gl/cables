@@ -209,7 +209,7 @@ function onMIDIMessage(_event)
 {
     if (!_event) return;
 
-    if (this.isEditorMode()) gui.emitEvent("userActivity");
+    if (op.patch.isEditorMode()) gui.emitEvent("userActivity");
 
     const { data } = _event;
     const [statusByte, LSB, MSB] = data;
