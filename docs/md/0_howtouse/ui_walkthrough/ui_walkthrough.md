@@ -255,4 +255,11 @@ Quickly **find your sidebar operators** in a patch by `left clicking` on a sideb
 
 
 ![alt text ](video/inspect_sidebar.gif)
+<br />
+<br />
 
+
+You can **organize your operators** into colorful Area groups by selecting multiple ops and `left clicking` Create Area. Move operators out of an area to separate them, group groups into groups, hold down `ALT` to drag Area without ops!
+
+
+![alt text ](video/area_create.gif)
