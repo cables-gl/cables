@@ -70,5 +70,13 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "summary": "render a skinned mesh (bone/rigging/rigged animation)",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
+    }
 }

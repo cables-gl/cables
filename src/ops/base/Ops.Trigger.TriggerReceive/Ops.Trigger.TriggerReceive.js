@@ -1,5 +1,5 @@
 const next = op.outTrigger("Triggered");
-let varname = op.inValueSelect("Named Trigger", [], "", true);
+op.varName = op.inValueSelect("Named Trigger", [], "", true);
 
 updateVarNamesDropdown();
 op.patch.addEventListener("namedTriggersChanged", updateVarNamesDropdown);
@@ -19,11 +19,11 @@ function updateVarNamesDropdown()
         let vars = op.patch.namedTriggers;
         // varnames.push('+ create new one');
         for (let i in vars) varnames.push(i);
-        varname.uiAttribs.values = varnames;
+        op.varName.uiAttribs.values = varnames;
     }
 }
 
-varname.onChange = function ()
+op.varName.onChange = function ()
 {
     if (oldName)
     {
@@ -32,10 +32,23 @@ varname.onChange = function ()
         if (a != -1) oldCbs.splice(a, 1);
     }
 
-    op.setTitle(">" + varname.get());
-    op.patch.namedTriggers[varname.get()] = op.patch.namedTriggers[varname.get()] || [];
-    let cbs = op.patch.namedTriggers[varname.get()];
+    op.setTitle(">" + op.varName.get());
+    op.patch.namedTriggers[op.varName.get()] = op.patch.namedTriggers[op.varName.get()] || [];
+    let cbs = op.patch.namedTriggers[op.varName.get()];
 
     cbs.push(doTrigger);
-    oldName = varname.get();
+    oldName = op.varName.get();
+    updateError();
 };
+
+op.on("uiParamPanel", updateError);
+
+function updateError()
+{
+    if (!op.varName.get())
+    {
+        op.setUiError("unknowntrigger", "unknown trigger");
+    }
+    else op.setUiError("unknowntrigger", null);
+    console.log("op.varName", op.varName.get());
+}

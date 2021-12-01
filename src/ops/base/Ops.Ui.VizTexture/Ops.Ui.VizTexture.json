@@ -40,5 +40,13 @@
             }
         ],
         "name": "Ops.Ui.VizTexture"
+    },
+    "summary": "displays texture at input port",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

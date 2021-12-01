@@ -1,0 +1,1 @@
+displays a graph of all the numbers connected to the input ports over time, useful so debug animations and easings

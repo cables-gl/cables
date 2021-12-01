@@ -105,9 +105,70 @@
         ],
         "name": "Ops.Physics.Cannon"
     },
-    "summary": "shoot physic objects",
+    "summary": "shoot physics objects",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Exec",
+                "text": "connect underneath World op"
+            },
+            {
+                "name": "Pos X",
+                "text": "spawn position - X axis location"
+            },
+            {
+                "name": "Pos Y",
+                "text": "spawn position - Y axis location"
+            },
+            {
+                "name": "Pos Z",
+                "text": "spawn position - Z axis location"
+            },
+            {
+                "name": "dir X",
+                "text": "direction on X axis"
+            },
+            {
+                "name": "dir Y",
+                "text": "direction on Y axis"
+            },
+            {
+                "name": "dir Z",
+                "text": "direction on Z axis"
+            },
+            {
+                "name": "Speed",
+                "text": "speed of spawned object towards the direction goal"
+            },
+            {
+                "name": "Reset",
+                "text": "reset cannon op"
+            },
+            {
+                "name": "Spawn",
+                "text": "spawn an object"
+            },
+            {
+                "name": "Out Radius",
+                "text": "Radius of object - handy to connect to a rendered geometry"
+            },
+            {
+                "name": "X",
+                "text": "location of X axis last spawned object"
+            },
+            {
+                "name": "Y",
+                "text": "location on Y axis of last spawned object"
+            },
+            {
+                "name": "Z",
+                "text": "location of Z axis last spawned object"
+            },
+            {
+                "name": "Index",
+                "text": "spawned object index"
+            }
+        ]
     },
     "libs": [
         "cannon.js"
@@ -118,5 +179,9 @@
             "author": "pandur",
             "date": 1596093468549
         }
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

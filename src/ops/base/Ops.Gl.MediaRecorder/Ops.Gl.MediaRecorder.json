@@ -10,6 +10,11 @@
             "message": "Ops.User.pandur.MediaRecorder renamed to Ops.Dev.MediaRecorder",
             "author": "pandur",
             "date": 1636903749376
+        },
+        {
+            "message": "Ops.Dev.MediaRecorder renamed to Ops.Gl.MediaRecorder",
+            "author": "pandur",
+            "date": 1638262270448
         }
     ],
     "authorName": "pandur",
@@ -74,6 +79,14 @@
                 "name": "Final Mimetype"
             }
         ],
-        "name": "Ops.Dev.MediaRecorder"
+        "name": "Ops.Gl.MediaRecorder"
+    },
+    "summary": "record the renderer-output to video",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }

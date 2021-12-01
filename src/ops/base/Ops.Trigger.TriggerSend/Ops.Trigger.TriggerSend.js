@@ -1,7 +1,7 @@
 const trigger = op.inTriggerButton("Trigger");
-const varname = op.inValueSelect("Named Trigger", [], "", true);
+op.varName = op.inValueSelect("Named Trigger", [], "", true);
 
-varname.onChange = updateName;
+op.varName.onChange = updateName;
 
 trigger.onTriggered = doTrigger;
 
@@ -17,7 +17,7 @@ function updateVarNamesDropdown()
         const vars = op.patch.namedTriggers;
         varnames.push("+ create new one");
         for (const i in vars) varnames.push(i);
-        varname.uiAttribs.values = varnames;
+        op.varName.uiAttribs.values = varnames;
     }
 }
 
@@ -25,7 +25,7 @@ function updateName()
 {
     if (CABLES.UI)
     {
-        if (varname.get() == "+ create new one")
+        if (op.varName.get() == "+ create new one")
         {
             new CABLES.UI.ModalDialog({
                 "prompt": true,
@@ -34,7 +34,7 @@ function updateName()
                 "promptValue": "",
                 "promptOk": (str) =>
                 {
-                    varname.set(str);
+                    op.varName.set(str);
                     op.patch.namedTriggers[str] = op.patch.namedTriggers[str] || [];
                     updateVarNamesDropdown();
                 }
@@ -45,29 +45,32 @@ function updateName()
         gui.opParams.show(op);
     }
 
-    if (!op.patch.namedTriggers[varname.get()])
+    if (!op.patch.namedTriggers[op.varName.get()])
     {
-        op.patch.namedTriggers[varname.get()] = op.patch.namedTriggers[varname.get()] || [];
+        op.patch.namedTriggers[op.varName.get()] = op.patch.namedTriggers[op.varName.get()] || [];
         op.patch.emitEvent("namedTriggersChanged");
     }
 
-    op.setTitle(">" + varname.get());
+    op.setTitle(">" + op.varName.get());
 
     if (op.isCurrentUiOp()) gui.opParams.show(op);
 }
 
 function doTrigger()
 {
-    const arr = op.patch.namedTriggers[varname.get()];
+    const arr = op.patch.namedTriggers[op.varName.get()];
     // fire an event even if noone is receiving this trigger
     // this way TriggerReceiveFilter can still handle it
-    op.patch.emitEvent("namedTriggerSent", varname.get());
+    op.patch.emitEvent("namedTriggerSent", op.varName.get());
 
     if (!arr)
     {
-        op.error("unknown trigger array!", varname.get());
+        op.setUiError("unknowntrigger", "unknown trigger");
+        op.error("unknown trigger array!", op.varName.get());
+
         return;
     }
+    else op.setUiError("unknowntrigger", null);
 
     for (let i = 0; i < arr.length; i++)
     {

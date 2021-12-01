@@ -676,27 +676,30 @@ Mesh.prototype.render = function (shader)
 
         if (!this._queryExt) this._queryExt = this._cgl.gl.getExtension("EXT_disjoint_timer_query_webgl2");
 
-        if (queryProfilerData._drawQuery)
+        if (this._queryExt)
         {
-            const available = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT_AVAILABLE);
-            if (available)
+            if (queryProfilerData._drawQuery)
             {
-                const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
-                const currentTimeGPU = elapsedNanos / 1000000;
+                const available = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT_AVAILABLE);
+                if (available)
+                {
+                    const elapsedNanos = this._cgl.gl.getQueryParameter(queryProfilerData._drawQuery, this._cgl.gl.QUERY_RESULT);
+                    const currentTimeGPU = elapsedNanos / 1000000;
 
-                queryProfilerData._times += currentTimeGPU;
-                queryProfilerData._numcount++;
-                queryProfilerData.when = performance.now();
-                queryProfilerData._drawQuery = null;
-                queryProfilerData.queryStarted = false;
+                    queryProfilerData._times += currentTimeGPU;
+                    queryProfilerData._numcount++;
+                    queryProfilerData.when = performance.now();
+                    queryProfilerData._drawQuery = null;
+                    queryProfilerData.queryStarted = false;
+                }
             }
-        }
 
-        if (!queryProfilerData.queryStarted)
-        {
-            queryProfilerData._drawQuery = this._cgl.gl.createQuery();
-            this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
-            queryStarted = queryProfilerData.queryStarted = true;
+            if (!queryProfilerData.queryStarted)
+            {
+                queryProfilerData._drawQuery = this._cgl.gl.createQuery();
+                this._cgl.gl.beginQuery(this._queryExt.TIME_ELAPSED_EXT, queryProfilerData._drawQuery);
+                queryStarted = queryProfilerData.queryStarted = true;
+            }
         }
     }
 

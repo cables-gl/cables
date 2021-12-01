@@ -1,0 +1,1 @@
+small preview of the texture put into the op, useful for debugging textureeffects without rendering to the canvas

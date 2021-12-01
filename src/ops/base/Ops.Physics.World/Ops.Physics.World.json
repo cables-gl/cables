@@ -75,9 +75,30 @@
         ],
         "name": "Ops.Physics.World"
     },
-    "summary": "start/configure a world with physic simulation",
+    "summary": "start/configure a world with physics simulation",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Reset",
+                "text": "reset all contents of a physics world"
+            },
+            {
+                "name": "Draw Bodies",
+                "text": "draw collision cages around your physics bodies assigned under the World"
+            },
+            {
+                "name": "Groundplane",
+                "text": "add a quick groundplane to your world - it is located at 0,0,0 and is invisible"
+            },
+            {
+                "name": "Simulate",
+                "text": "toggle physics simulation"
+            },
+            {
+                "name": "Num Bodies",
+                "text": "number of total physics bodies in this world."
+            }
+        ]
     },
     "todos": [
         {
@@ -109,5 +130,9 @@
     ],
     "coreLibs": [
         "cgl_wireframes"
-    ]
+    ],
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }
