@@ -32,6 +32,7 @@ const OUTPUT_KEYS = [
     "NRPN",
     // 'SysEx',
     // "Pitchbend",
+    "Program Change",
     "Clock",
 ];
 
