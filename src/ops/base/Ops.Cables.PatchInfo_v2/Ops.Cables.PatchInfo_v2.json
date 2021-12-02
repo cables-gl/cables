@@ -41,9 +41,19 @@
             {
                 "type": 5,
                 "name": "Namespace"
+            },
+            {
+                "type": 0,
+                "name": "Last Saved",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Last Exported",
+                "subType": "number"
             }
         ],
-        "name": "Ops.Cables.PatchInfo"
+        "name": "Ops.Cables.PatchInfo_v2"
     },
     "changelog": [
         {
