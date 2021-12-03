@@ -12,68 +12,73 @@
     "layout": {
         "portsIn": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "Event",
                 "group": "MIDI"
             }
         ],
         "portsOut": [
             {
-                "type": "2",
+                "type": 2,
                 "name": "MIDI Event Out"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Device",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "MIDI Channel",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Message Type",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Note",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Note Velocity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "CC Number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "CC Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Pitch Bend Value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "NRPN Number",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "NRPN Value",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Program Change Value",
                 "subType": "number"
             }
         ],
