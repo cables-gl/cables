@@ -7,7 +7,6 @@ const clean = require("gulp-clean");
 const getRepoInfo = require("git-repo-info");
 const fs = require("fs");
 const footer = require("gulp-footer");
-const watch = require("gulp-watch");
 const webpackConfig = require("./webpack.config");
 const libWebpackConfig = require("./webpack.config.libs");
 
@@ -54,16 +53,22 @@ function _append_build_info()
 
 function _watch(done)
 {
-    watch("src/core/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info));
-    watch("libs/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info));
-    watch("src/libs/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
-    console.log("registered watchers...");
+    gulp.watch("src/core/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info, _copy_ui));
+    gulp.watch("libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info, _copy_ui));
+    gulp.watch("src/libs/**/*", { "usePolling": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
     done();
 }
 
 function _core_libs_clean()
 {
     return gulp.src("build/libs/*", { "read": false }).pipe(clean());
+}
+
+function _copy_ui()
+{
+    return gulp
+        .src(["/build/**/*", "!build/buildInfo.json", "!/build/libs/*"])
+        .pipe(gulp.dest("dist/js/"));
 }
 
 function _core_libs_copy()
