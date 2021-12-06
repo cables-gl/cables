@@ -28,7 +28,7 @@ function getBuildInfo()
     };
 }
 
-function _update_buildInfo(cb)
+function _update_buildInfo(done)
 {
     buildInfo = getBuildInfo();
     fs.mkdir("build/", { "recursive": true }, (err) =>
@@ -38,7 +38,7 @@ function _update_buildInfo(cb)
             return console.error(err);
         }
         fs.writeFileSync("build/buildInfo.json", JSON.stringify(buildInfo));
-        cb();
+        done();
     });
 }
 
@@ -51,11 +51,13 @@ function _append_build_info()
 }
 
 
-function _watch()
+function _watch(done)
 {
-    gulp.watch("src/core/**/*", gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info));
-    gulp.watch("libs/**/*", gulp.series(_update_buildInfo, gulp.parallel(_update_buildInfo, _external_libs), _append_build_info));
-    gulp.watch("src/libs/**/*", gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
+    gulp.watch("src/core/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, gulp.parallel(_corejs_max, _corejs_min), _append_build_info));
+    gulp.watch("libs/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, _external_libs, _append_build_info));
+    gulp.watch("src/libs/**/*", { "ignoreInitial": true }, gulp.series(_update_buildInfo, _core_libs_clean, gulp.parallel(_corelibsjs_max, _corelibsjs_min), _append_build_info, _core_libs_copy));
+    console.log("registered watchers...");
+    done();
 }
 
 function _core_libs_clean()
@@ -73,139 +75,124 @@ function _external_libs()
     return (
         gulp
             .src(["libs/*.js"])
-            // .pipe(sourcemaps.init())
             .pipe(concat("libs.core.js"))
             .pipe(gulp.dest("build"))
             .pipe(rename("libs.core.min.js"))
-            // .pipe(uglify())
-            // .pipe(sourcemaps.write('./'))
             .pipe(gulp.dest("build"))
     );
 }
 
-function _corejs_max()
+function _corejs_max(done)
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/core/index.js"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/core/index.js"])
+        .pipe(
+            webpack(
+                {
+                    "config": webpackConfig(false, false),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": webpackConfig(false, false),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        done(new Error(stats.compilation.errors.join("\n")));
                     }
-                )
+                    done();
+                }
             )
-            .pipe(gulp.dest("build"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        )
+        .pipe(gulp.dest("build"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
 
-function _corejs_max_babel()
+function _corejs_max_babel(done)
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/core/index.js"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/core/index.js"])
+        .pipe(
+            webpack(
+                {
+                    "config": webpackConfig(false, true),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": webpackConfig(false, true),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        done(new Error(stats.compilation.errors.join("\n")));
                     }
-                )
+                    done();
+                }
             )
-            .pipe(gulp.dest("build"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        )
+        .pipe(gulp.dest("build"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
 
-function _corejs_min()
+function _corejs_min(done)
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/core/index.js"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/core/index.js"])
+        .pipe(
+            webpack(
+                {
+                    "config": webpackConfig(true, false),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": webpackConfig(true, false),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        done(new Error(stats.compilation.errors.join("\n")));
                     }
-                )
+                    done();
+                }
             )
+        )
 
-            .pipe(gulp.dest("build"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        .pipe(gulp.dest("build"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
 
-function _corejs_min_babel()
+function _corejs_min_babel(done)
 {
-    return new Promise((resolve, reject) =>
-    {
-        gulp.src(["src/core/index.js"])
-            .pipe(
-                webpack(
+    return gulp.src(["src/core/index.js"])
+        .pipe(
+            webpack(
+                {
+                    "config": webpackConfig(true, true),
+                },
+                compiler,
+                (err, stats) =>
+                {
+                    if (err) throw err;
+                    if (stats.hasErrors())
                     {
-                        "config": webpackConfig(true, true),
-                    },
-                    compiler,
-                    (err, stats) =>
-                    {
-                        if (err) throw err;
-                        if (stats.hasErrors())
-                        {
-                            return reject(new Error(stats.compilation.errors.join("\n")));
-                        }
-                        resolve();
+                        done(new Error(stats.compilation.errors.join("\n")));
                     }
-                )
+                    done();
+                }
             )
+        )
 
-            .pipe(gulp.dest("build"))
-            .on("error", (err) =>
-            {
-                console.error("WEBPACK ERROR", err);
-            });
-    });
+        .pipe(gulp.dest("build"))
+        .on("error", (err) =>
+        {
+            console.error("WEBPACK ERROR", err);
+        });
 }
 
-function _corelibsjs_max()
+function _corelibsjs_max(done)
 {
     return gulp.src(["src/libs/**/*"])
         .pipe(
@@ -219,8 +206,9 @@ function _corelibsjs_max()
                     if (err) throw err;
                     if (stats.hasErrors())
                     {
-                        return new Error(stats.compilation.errors.join("\n"));
+                        done(Error(stats.compilation.errors.join("\n")));
                     }
+                    done();
                 }
             )
         )

@@ -9,7 +9,9 @@
     "private": true,
     "scripts": {
         "build": "gulp build",
-        "watch": "gulp watch"
+        "build:live": "gulp build",
+        "watch": "gulp watch",
+        "start": "gulp"
     },
     "repository": {
         "type": "git",
