@@ -5,12 +5,14 @@ import { Port, SwitchPort, ValueSelectPort } from "./core_port";
 import { Link } from "./core_link";
 import Logger from "./core_logger";
 
+
 /**
  * op the class of all operators
  * @external CABLES
  * @namespace Op
  * @hideconstructor
  */
+
 
 /**
  * @type {Object}

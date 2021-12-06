@@ -234,7 +234,8 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 {
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
-        op.uiAttr({ "error": null });
+        op.setUiError("textureeffect", null);
+        // op.uiAttr({ "error": null });
         return true;
     }
 
@@ -255,7 +256,7 @@ TextureEffect.checkOpInEffect = function (op)
     if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
     {
         op.setUiError("texeffect", null);
-        op.uiAttr({ "error": null });
+        // op.uiAttr({ "error": null });
         return true;
     }
 
