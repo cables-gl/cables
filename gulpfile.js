@@ -68,7 +68,7 @@ function _copy_ui()
 {
     return gulp
         .src(["/build/**/*", "!build/buildInfo.json", "!/build/libs/*"])
-        .pipe(gulp.dest("dist/js/"));
+        .pipe(gulp.dest("../cables_ui/dist/js/"));
 }
 
 function _core_libs_copy()
