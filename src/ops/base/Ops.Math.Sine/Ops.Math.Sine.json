@@ -5,34 +5,34 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "value",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "phase",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "frequency",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "amplitude",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "asine",
                 "subType": "boolean"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "result",
                 "subType": "number"
             }
