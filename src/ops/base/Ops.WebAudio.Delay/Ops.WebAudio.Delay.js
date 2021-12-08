@@ -310,7 +310,7 @@ audioIn.onChange = function ()
     }
     else
     {
-        if (audioIn.get().connect) audioIn.val.connect(inputNode);
+        if (audioIn.get().connect) audioIn.get().connect(inputNode);
     }
 
     oldAudioIn = audioIn.get();

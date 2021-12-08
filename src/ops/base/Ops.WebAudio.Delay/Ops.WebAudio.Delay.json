@@ -63,12 +63,6 @@
             },
             {
                 "type": 0,
-                "name": "Delay Time (note value) ",
-                "group": "Synced Controls",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Use Filter & Modulation",
                 "subType": "boolean"
             },
@@ -112,12 +106,6 @@
                 "type": 0,
                 "name": "LFO Waveform index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "LFO Waveform",
-                "group": "Filters & Modulation",
-                "subType": "string"
             }
         ],
         "portsOut": [

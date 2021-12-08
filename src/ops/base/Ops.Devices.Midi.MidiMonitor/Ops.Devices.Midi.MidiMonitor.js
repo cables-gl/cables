@@ -22,17 +22,17 @@ const triggerOut = op.outTrigger("Trigger Out");
 
 // create outputs from keys specified above
 const OUTPUTS = {
-    "Device": op.outValue("Device", "-"),
-    "MIDI Channel": op.outValue("MIDI Channel", "-"),
-    "Message Type": op.outValue("Message Type", "-"),
-    "Note": op.outValue("Note", "-"),
-    "Note Velocity": op.outValue("Note Velocity", "-"),
-    "CC Number": op.outValue("CC Number", "-"),
-    "CC Value": op.outValue("CC Value", "-"),
-    "Pitch Bend Value": op.outValue("Pitch Bend Value", "-"),
-    "NRPN Number": op.outValue("NRPN Number", "-"),
-    "NRPN Value": op.outValue("NRPN Value", "-"),
-    "Program Change Value": op.outValue("Program Change Value", "-"),
+    "Device": op.outNumber("Device", -1),
+    "MIDI Channel": op.outNumber("MIDI Channel", -1),
+    "Message Type": op.outNumber("Message Type", -1),
+    "Note": op.outNumber("Note", -1),
+    "Note Velocity": op.outNumber("Note Velocity", -1),
+    "CC Number": op.outNumber("CC Number", -1),
+    "CC Value": op.outNumber("CC Value", -1),
+    "Pitch Bend Value": op.outNumber("Pitch Bend Value", -1),
+    "NRPN Number": op.outNumber("NRPN Number", -1),
+    "NRPN Value": op.outNumber("NRPN Value", -1),
+    "Program Change Value": op.outNumber("Program Change Value", -1),
 
 };
 
