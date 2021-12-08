@@ -1,10 +1,12 @@
 import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
+import Logger from "../core_logger";
 
 
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;
+    this._log = new Logger("cgl_TextureEffect");
 
     if (!cgl.TextureEffectMesh) this.createMesh();
 
