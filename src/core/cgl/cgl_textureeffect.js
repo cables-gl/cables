@@ -1,10 +1,12 @@
 import { Texture } from "./cgl_texture";
 import { MESHES } from "./cgl_simplerect";
+import Logger from "../core_logger";
 
 
 const TextureEffect = function (cgl, options)
 {
     this._cgl = cgl;
+    this._log = new Logger("cgl_TextureEffect");
 
     if (!cgl.TextureEffectMesh) this.createMesh();
 
@@ -234,7 +236,8 @@ TextureEffect.checkOpNotInTextureEffect = function (op)
 {
     if (op.uiAttribs.error && !op.patch.cgl.currentTextureEffect)
     {
-        op.uiAttr({ "error": null });
+        op.setUiError("textureeffect", null);
+        // op.uiAttr({ "error": null });
         return true;
     }
 
@@ -255,7 +258,7 @@ TextureEffect.checkOpInEffect = function (op)
     if (op.patch.cgl.currentTextureEffect && op.uiAttribs.uierrors)
     {
         op.setUiError("texeffect", null);
-        op.uiAttr({ "error": null });
+        // op.uiAttr({ "error": null });
         return true;
     }
 
