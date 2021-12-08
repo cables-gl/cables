@@ -52,7 +52,7 @@ op.onError = function (ex)
         let htmlWarning = "<div class=\"shaderErrorCode\">";
         const lines = str.match(/^.*((\r\n|\n|\r)|$)/gm);
 
-        let anonLine = 0;
+        let anonLine = "";
         const exLines = ex.stack.split("\n");
         for (let i = 0; i < exLines.length; i++)
         {
@@ -249,7 +249,8 @@ const execute = () =>
                         {
                             oldLinksIn[port.name].forEach((link) =>
                             {
-                                op.patch.link(op, port.name, link.op, link.portName);
+                                const newLink = op.patch.link(op, port.name, link.op, link.portName);
+                                if (newLink) newLink.ignoreInSerialize = true;
                             });
                         }
 
@@ -269,7 +270,8 @@ const execute = () =>
                     {
                         oldLinksOut[port.name].forEach((link) =>
                         {
-                            op.patch.link(op, port.name, link.op, link.portName);
+                            const newLink = op.patch.link(op, port.name, link.op, link.portName);
+                            if (newLink) newLink.ignoreInSerialize = true;
                         });
                     }
                 }
