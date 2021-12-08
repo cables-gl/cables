@@ -178,7 +178,7 @@ inAudio.onChange = function ()
     }
     else
     {
-        if (inAudio.val.connect) inAudio.val.connect(lowFilterNode);
+        if (inAudio.get().connect) inAudio.get().connect(lowFilterNode);
     }
     oldAudioIn = inAudio.get();
     outAudio.set(highFilterNode);

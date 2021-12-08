@@ -118,9 +118,9 @@ inAudio.onChange = function ()
     }
     else
     {
-        if (inAudio.val.connect)
+        if (inAudio.get().connect)
         {
-            inAudio.val.connect(inputNode);
+            inAudio.get().connect(inputNode);
             audioOut.set(outputNode);
         }
     }
