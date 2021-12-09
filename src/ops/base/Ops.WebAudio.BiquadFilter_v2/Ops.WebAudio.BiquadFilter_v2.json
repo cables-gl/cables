@@ -16,12 +16,6 @@
             },
             {
                 "type": 0,
-                "name": "Type",
-                "group": "Filter Settings",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Frequency",
                 "group": "Filter Settings",
                 "subType": "number"

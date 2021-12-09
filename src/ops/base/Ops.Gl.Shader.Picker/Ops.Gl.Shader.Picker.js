@@ -178,13 +178,13 @@ const doRender = function ()
 function preview()
 {
     render();
-    tex.val.preview();
+    tex.get().preview();
 }
 
-tex.onPreviewChanged = function ()
-{
-    if (tex.showPreview) op.render.onTriggered = doRender;
-    else op.render.onTriggered = doRender;
-};
+// tex.onPreviewChanged = function ()
+// {
+//     if (tex.showPreview) op.render.onTriggered = doRender;
+//     else op.render.onTriggered = doRender;
+// };
 
 op.render.onTriggered = doRender;

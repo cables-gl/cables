@@ -77,6 +77,10 @@
             {
                 "type": 5,
                 "name": "Final Mimetype"
+            },
+            {
+                "type": 3,
+                "name": "Valid Mimetypes"
             }
         ],
         "name": "Ops.Gl.MediaRecorder"

@@ -219,9 +219,12 @@ const gltfNode = class
         {
             if(this.skinRenderer)
             {
+            // if (!ignoreMaterial) cgl.pushShader(gltf.shaders[this.mesh.material]);
+
                 this.skinRenderer.renderStart(cgl,_time);
                 if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
                 this.skinRenderer.renderFinish(cgl);
+            // if (!ignoreMaterial) cgl.popShader();
             }
             else
             {

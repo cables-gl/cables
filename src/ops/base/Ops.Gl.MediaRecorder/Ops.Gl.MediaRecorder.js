@@ -49,7 +49,8 @@ const
     inAudoDownload = op.inBool("Auto Download", true),
     outState = op.outString("State"),
     outError = op.outString("Error"),
-    outCodec = op.outString("Final Mimetype");
+    outCodec = op.outString("Final Mimetype"),
+    outCodecs = op.outArray("Valid Mimetypes", supportedVideos);
 
 op.setPortGroup("Inputs", [inMedia, inAudio, inCanvasId]);
 op.setPortGroup("Encoding", [inMbit, inCodecs, inFPS]);

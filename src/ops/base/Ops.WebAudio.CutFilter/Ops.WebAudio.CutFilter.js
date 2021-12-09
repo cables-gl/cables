@@ -27,7 +27,7 @@ const inHighFrequency = op.inFloat("High Frequency", 5000);
 const inHighQ = op.inFloat("High Q", 0.0001);
 op.setPortGroup("Lowpass / Highcut", [inHighActive, inHighSlope, inHighFrequency, inHighQ]);
 
-const lowFilterNodes = SLOPES.map((entry) => audioContext.createBiquadFilter());
+const lowFilterNodes = SLOPES.map(entry => audioContext.createBiquadFilter());
 const highFilterNodes = SLOPES.map(() => audioContext.createBiquadFilter());
 
 /* instantiation */
@@ -60,7 +60,7 @@ highFilterNodes.forEach((node, index) =>
 
 /* onChange handlers */
 
-let lastHighState = highFilterNodes.map((node) => node.type);
+let lastHighState = highFilterNodes.map(node => node.type);
 
 inHighActive.onChange = () =>
 {
@@ -78,7 +78,7 @@ inHighActive.onChange = () =>
     }
     else
     {
-        lastHighState = highFilterNodes.map((node) => node.type);
+        lastHighState = highFilterNodes.map(node => node.type);
 
         for (let i = 0; i < SLOPES.length; i += 1)
         {
@@ -88,7 +88,7 @@ inHighActive.onChange = () =>
     }
 };
 
-let lastLowState = lowFilterNodes.map((node) => node.type);
+let lastLowState = lowFilterNodes.map(node => node.type);
 
 inLowActive.onChange = () =>
 {
@@ -106,7 +106,7 @@ inLowActive.onChange = () =>
     }
     else
     {
-        lastLowState = lowFilterNodes.map((node) => node.type);
+        lastLowState = lowFilterNodes.map(node => node.type);
 
         for (let i = 0; i < SLOPES.length; i += 1)
         {
@@ -261,7 +261,7 @@ inAudio.onChange = function ()
     }
     else
     {
-        if (inAudio.val.connect) inAudio.val.connect(lowFilterNodes[0]);
+        if (inAudio.get().connect) inAudio.get().connect(lowFilterNodes[0]);
     }
 
     oldAudioIn = inAudio.get();

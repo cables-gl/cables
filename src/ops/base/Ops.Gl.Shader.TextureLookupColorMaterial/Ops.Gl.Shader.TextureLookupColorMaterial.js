@@ -63,11 +63,11 @@ op.texture.onChange = function ()
 op.textureOpacity = op.inTexture("textureOpacity");
 op.textureOpacityUniform = null;
 
-op.textureOpacity.onPreviewChanged = function ()
-{
-    if (op.textureOpacity.showPreview) render.onTriggered = op.textureOpacity.val.preview;
-    else render.onTriggered = doRender;
-};
+// op.textureOpacity.onPreviewChanged = function ()
+// {
+//     if (op.textureOpacity.showPreview) render.onTriggered = op.textureOpacity.get().preview;
+//     else render.onTriggered = doRender;
+// };
 
 op.textureOpacity.onChange = function ()
 {
