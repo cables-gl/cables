@@ -1,4 +1,4 @@
-## Common pitfalls with the "usual suspects"
+# Common pitfalls with the "usual suspects"
 
 After following the steps in the section before, you should have a clearer idea on what is causing your bottleneck. Here are a few usual suspects that degrade performance:
 
