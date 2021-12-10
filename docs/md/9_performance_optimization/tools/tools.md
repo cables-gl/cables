@@ -1,6 +1,6 @@
-## Tools for debugging your patch
+# Tools for debugging your patch
 
-### The Performance op
+## The Performance op
 
 Cables has a tool to measure performance. The [Performance op](https://cables.gl/op/Ops.Gl.Performance) should always be inserted right after the [MainLoop](https://cables.gl/op/Ops.Gl.MainLoop) as the second operator of your patch. In its minimized state, you can see the **FPS** (frames per second), the amount of time it takes for **CPU** calculations per frame in your patch & the amount of **GPU** calculations per frame (in **ms** - milliseconds).
 
@@ -34,7 +34,7 @@ Have a look at the [example patch](https://cables.gl/edit/5e9029d1c6835b4330a4c5
 With all of the above information, you are able to further diagnose what is causing a performance caveat in your patch.
 In general, lower numbers relate to better rendering performance. Orange warnings shown by [Performance op](https://cables.gl/op/Ops.Gl.Performance) indicate that something is really slow in your patch, try to not have any warnings appear after loading of your patch is done.
 
-### Flow mode
+## Flow mode
 
 Flow mode allows you to ‘see’ the Flow of data between all operators in real time. Press **f** in the patch editor to activate or deactivate Flow mode. With Flow mode, you can see how often something is triggered and when. This is useful for debugging any bottlenecks.
 
