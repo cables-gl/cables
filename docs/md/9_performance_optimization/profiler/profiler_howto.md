@@ -1,4 +1,4 @@
-## How to optimize cables patches with the Profiler
+# How to optimize cables patches with the Profiler
 
 The profiler can be found under **Tools > Profile**. It can analyze how much the CPU is being used by Ops in your patch.
 
