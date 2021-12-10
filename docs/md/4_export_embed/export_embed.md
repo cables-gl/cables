@@ -1,3 +1,3 @@
-# Exporting And Embedding
+# Exporting and Embedding
 
 __TOC__
