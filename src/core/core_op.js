@@ -1183,6 +1183,7 @@ const Op = function ()
             {
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
             }
+
             this._instances.length = 0;
         }
     };
