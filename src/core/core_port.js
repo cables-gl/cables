@@ -160,6 +160,8 @@ Port.prototype.setUiAttribs = function (newAttribs)
     {
         if (this.uiAttribs[p] != newAttribs[p]) changed = true;
         this.uiAttribs[p] = newAttribs[p];
+
+        if (p == "group" && this.indexPort) this.indexPort.setUiAttribs({ "group": newAttribs[p] });
     }
 
     if (changed) this.emitEvent("onUiAttrChange", newAttribs);

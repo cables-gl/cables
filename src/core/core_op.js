@@ -492,6 +492,8 @@ const Op = function ()
                 n
             );
 
+            valuePort.indexPort = indexPort;
+
             indexPort.onLinkChanged = function ()
             {
                 valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
