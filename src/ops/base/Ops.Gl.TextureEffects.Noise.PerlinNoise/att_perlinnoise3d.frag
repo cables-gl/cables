@@ -2,8 +2,16 @@ UNI float z;
 UNI float x;
 UNI float y;
 UNI float scale;
+UNI float rangeMul;
+
 IN vec2 texCoord;
 UNI sampler2D tex;
+
+#ifdef HAS_TEX_OFFSETMAP
+    UNI sampler2D texOffsetZ;
+    UNI float offMul;
+#endif
+
 
 UNI float amount;
 
@@ -16,6 +24,33 @@ vec3 Interpolation_C2( vec3 x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.
 vec4 Interpolation_C2( vec4 x ) { return x * x * x * (x * (x * 6.0 - 15.0) + 10.0); }
 vec4 Interpolation_C2_InterpAndDeriv( vec2 x ) { return x.xyxy * x.xyxy * ( x.xyxy * ( x.xyxy * ( x.xyxy * vec2( 6.0, 0.0 ).xxyy + vec2( -15.0, 30.0 ).xxyy ) + vec2( 10.0, -60.0 ).xxyy ) + vec2( 0.0, 30.0 ).xxyy ); }
 vec3 Interpolation_C2_Deriv( vec3 x ) { return x * x * (x * (x * 30.0 - 60.0) + 30.0); }
+
+
+void FAST32_hash_3D( vec3 gridcell, out vec4 lowz_hash, out vec4 highz_hash )	//	generates a random number for each of the 8 cell corners
+{
+    //    gridcell is assumed to be an integer coordinate
+
+    //	TODO: 	these constants need tweaked to find the best possible noise.
+    //			probably requires some kind of brute force computational searching or something....
+    const vec2 OFFSET = vec2( 50.0, 161.0 );
+    const float DOMAIN = 69.0;
+    const float SOMELARGEFLOAT = 635.298681;
+    const float ZINC = 48.500388;
+
+    //	truncate the domain
+    gridcell.xyz = gridcell.xyz - floor(gridcell.xyz * ( 1.0 / DOMAIN )) * DOMAIN;
+    vec3 gridcell_inc1 = step( gridcell, vec3( DOMAIN - 1.5 ) ) * ( gridcell + 1.0 );
+
+    //	calculate the noise
+    vec4 P = vec4( gridcell.xy, gridcell_inc1.xy ) + OFFSET.xyxy;
+    P *= P;
+    P = P.xzxz * P.yyww;
+    highz_hash.xy = vec2( 1.0 / ( SOMELARGEFLOAT + vec2( gridcell.z, gridcell_inc1.z ) * ZINC ) );
+    lowz_hash = fract( P * highz_hash.xxxx );
+    highz_hash = fract( P * highz_hash.yyyy );
+}
+
+
 
 
 void FAST32_hash_3D( 	vec3 gridcell,
@@ -52,6 +87,10 @@ void FAST32_hash_3D( 	vec3 gridcell,
     lowz_hash_2 = fract( P * lowz_mod.zzzz );
     highz_hash_2 = fract( P * highz_mod.zzzz );
 }
+float Falloff_Xsq_C1( float xsq ) { xsq = 1.0 - xsq; return xsq*xsq; }	// ( 1.0 - x*x )^2   ( Used by Humus for lighting falloff in Just Cause 2.  GPUPro 1 )
+float Falloff_Xsq_C2( float xsq ) { xsq = 1.0 - xsq; return xsq*xsq*xsq; }	// ( 1.0 - x*x )^3.   NOTE: 2nd derivative is 0.0 at x=1.0, but non-zero at x=0.0
+vec4 Falloff_Xsq_C2( vec4 xsq ) { xsq = 1.0 - xsq; return xsq*xsq*xsq; }
+
 
 //
 //	Perlin Noise 3D  ( gradient noise )
@@ -155,8 +194,49 @@ void main()
     p=p*scale;
     p=vec2(p.x+0.5-x,p.y+0.5-y);
 
+
+
+    vec3 offset;
+    #ifdef HAS_TEX_OFFSETMAP
+        vec4 offMap=texture(texOffsetZ,texCoord);
+
+        #ifdef OFFSET_X_R
+            offset.x=offMap.r;
+        #endif
+        #ifdef OFFSET_X_G
+            offset.x=offMap.g;
+        #endif
+        #ifdef OFFSET_X_B
+            offset.x=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Y_R
+            offset.y=offMap.r;
+        #endif
+        #ifdef OFFSET_Y_G
+            offset.y=offMap.g;
+        #endif
+        #ifdef OFFSET_Y_B
+            offset.y=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Z_R
+            offset.z=offMap.r;
+        #endif
+        #ifdef OFFSET_Z_G
+            offset.z=offMap.g;
+        #endif
+        #ifdef OFFSET_Z_B
+            offset.z=offMap.b;
+        #endif
+        offset*=offMul;
+    #endif
+
+
     float aa=texture(tex,texCoord).r;
-    float v=Perlin3D(vec3(p.x,p.y,z))*0.5+0.5;
+    float v=(Perlin3D(vec3(p.x,p.y,z)+offset));
+    v*=rangeMul;
+    v=v*0.5+0.5;
     float v2=v;
     float v3=v;
 

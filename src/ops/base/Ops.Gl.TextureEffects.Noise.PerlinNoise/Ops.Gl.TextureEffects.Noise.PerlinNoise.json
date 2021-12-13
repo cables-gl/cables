@@ -12,12 +12,6 @@
             },
             {
                 "type": 0,
-                "name": "Blend Mode",
-                "group": "Blending",
-                "subType": "string"
-            },
-            {
-                "type": 0,
                 "name": "Amount",
                 "group": "Blending",
                 "subType": "number"
@@ -28,12 +22,13 @@
                 "subType": "integer"
             },
             {
-                "type": 5,
-                "name": "Color"
+                "type": 0,
+                "name": "Scale",
+                "subType": "number"
             },
             {
                 "type": 0,
-                "name": "Scale",
+                "name": "Multiply",
                 "subType": "number"
             },
             {
@@ -53,6 +48,33 @@
                 "name": "Z",
                 "group": "Position",
                 "subType": "number"
+            },
+            {
+                "type": 2,
+                "name": "Offset",
+                "group": "Offset Map",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Offset Multiply",
+                "group": "Offset Map",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Offset X index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Y index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Offset Z index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

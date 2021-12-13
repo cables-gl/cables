@@ -6,6 +6,12 @@ IN vec2 texCoord;
 UNI sampler2D tex;
 UNI float amount;
 
+#ifdef HAS_TEX_OFFSETMAP
+    UNI sampler2D texOffsetZ;
+    UNI float offMul;
+#endif
+
+
 {{CGL.BLENDMODES}}
 
 void FAST32_hash_3D( 	vec3 gridcell,
@@ -126,11 +132,48 @@ void main()
 
     p=vec2(p.x+0.5-x,p.y+0.5-y);
 
-    float v=Cellular3D(vec3(p.x,p.y,z));
+    vec3 offset;
+    #ifdef HAS_TEX_OFFSETMAP
+        vec4 offMap=texture(texOffsetZ,texCoord);
 
-       //blend section
+        #ifdef OFFSET_X_R
+            offset.x=offMap.r;
+        #endif
+        #ifdef OFFSET_X_G
+            offset.x=offMap.g;
+        #endif
+        #ifdef OFFSET_X_B
+            offset.x=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Y_R
+            offset.y=offMap.r;
+        #endif
+        #ifdef OFFSET_Y_G
+            offset.y=offMap.g;
+        #endif
+        #ifdef OFFSET_Y_B
+            offset.y=offMap.b;
+        #endif
+
+        #ifdef OFFSET_Z_R
+            offset.z=offMap.r;
+        #endif
+        #ifdef OFFSET_Z_G
+            offset.z=offMap.g;
+        #endif
+        #ifdef OFFSET_Z_B
+            offset.z=offMap.b;
+        #endif
+
+        offset*=offMul;
+
+    #endif
+
+    float v=Cellular3D(vec3(p.x,p.y,z)+offset);
+
     vec4 col=vec4(v,v,v,1.0);
-    //original texture
+
     vec4 base=texture(tex,texCoord);
 
 
