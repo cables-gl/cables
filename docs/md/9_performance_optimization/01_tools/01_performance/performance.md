@@ -1,4 +1,4 @@
-## How to optimize cables patches with the Performance op
+# How to optimize cables patches with the Performance op
 
 So, how can we use the performance op and Flow mode to find potential bottlenecks and optimize our patch?
 If you find yourself with a patch that feels slow or is stuttering, try the following procedure:
