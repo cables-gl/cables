@@ -39,3 +39,5 @@ In general, lower numbers relate to better rendering performance. Orange warning
 Flow mode allows you to ‘see’ the Flow of data between all operators in real time. Press **f** in the patch editor to activate or deactivate Flow mode. With Flow mode, you can see how often something is triggered and when. This is useful for debugging any bottlenecks.
 
 Use Flow mode to make sure that all Ops that are currently being triggered are needed to draw the current scene onto the screen.
+
+TOC
