@@ -520,6 +520,8 @@ Patch.prototype.deleteOp = function (opid, tryRelink, reloadingOp)
                 const opToDelete = this.ops[i];
                 opToDelete.removeLinks();
 
+                opToDelete.emitEvent("onDelete", this.ops[i]);
+
                 if (this.onDelete)
                 {
                     // todo: remove

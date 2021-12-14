@@ -18,6 +18,7 @@
             {
                 "type": 0,
                 "name": "Red index",
+                "group": "Method",
                 "subType": "integer"
             },
             {
@@ -29,6 +30,7 @@
             {
                 "type": 0,
                 "name": "Green index",
+                "group": "Method",
                 "subType": "integer"
             },
             {
@@ -40,6 +42,7 @@
             {
                 "type": 0,
                 "name": "Blue index",
+                "group": "Method",
                 "subType": "integer"
             },
             {

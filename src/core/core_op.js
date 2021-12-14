@@ -492,6 +492,8 @@ const Op = function ()
                 n
             );
 
+            valuePort.indexPort = indexPort;
+
             indexPort.onLinkChanged = function ()
             {
                 valuePort.setUiAttribs({ "greyout": indexPort.isLinked() });
@@ -1183,6 +1185,7 @@ const Op = function ()
             {
                 if (this._instances[i].onDelete) this._instances[i].onDelete();
             }
+
             this._instances.length = 0;
         }
     };
