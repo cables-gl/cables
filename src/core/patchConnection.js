@@ -34,12 +34,14 @@ PatchConnectionReceiver.prototype._receive = function (ev)
         let op = null;
 
         if (window.gui)
+        {
             gui.serverOps.loadOpLibs(data.vars.objName, () =>
             {
                 op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
                 op.id = data.vars.opId;
                 op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
             });
+        }
         else
         {
             op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
@@ -59,7 +61,17 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         this._log.log("PACO load patch.....");
         this._patch.clear();
-        this._patch.deSerialize(data.vars.patch);
+        if (window.gui)
+        {
+            gui.serverOps.loadProjectLibs(JSON.parse(data.vars.patch), () =>
+            {
+                this._patch.deSerialize(data.vars.patch);
+            });
+        }
+        else
+        {
+            this._patch.deSerialize(data.vars.patch);
+        }
     }
     else if (data.event == CONSTANTS.PACO.PACO_CLEAR)
     {
