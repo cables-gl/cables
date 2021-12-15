@@ -22,7 +22,6 @@ const PatchConnectionReceiver = function (patch, options, connector)
 
 PatchConnectionReceiver.prototype._receive = function (ev)
 {
-    // console.log("ev", ev);
     let data = {};
     if (ev.hasOwnProperty("event")) data = ev;
     else data = JSON.parse(ev.data);
@@ -39,11 +38,21 @@ PatchConnectionReceiver.prototype._receive = function (ev)
             {
                 op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
                 op.id = data.vars.opId;
+                op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
             });
         else
         {
             op = this._patch.addOp(data.vars.objName, null, data.vars.opId);
             op.id = data.vars.opId;
+            op.uiAttribs = { ...op.uiAttribs, ...data.vars.uiAttribs };
+        }
+        if (op && data.vars.portsIn)
+        {
+            data.vars.portsIn.forEach((portInfo) =>
+            {
+                const port = op.getPortByName(portInfo.name);
+                if (port) port.set(portInfo.value);
+            });
         }
     }
     else if (data.event == CONSTANTS.PACO.PACO_LOAD)
@@ -71,6 +80,11 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     {
         const op = this._patch.getOpById(data.vars.op);
         if (op) op.enabled = false;
+    }
+    else if (data.event == CONSTANTS.PACO.PACO_UIATTRIBS)
+    {
+        const op = this._patch.getOpById(data.vars.op);
+        if (op) op.setUiAttrib(data.vars.uiAttribs);
     }
     else if (data.event == CONSTANTS.PACO.PACO_UNLINK)
     {
@@ -121,9 +135,22 @@ const PatchConnectionSender = function (patch)
     patch.addEventListener("onOpAdd",
         (op) =>
         {
+            const portsIn = [];
+            op.portsIn.forEach((portIn) =>
+            {
+                const port = {
+                    "id": portIn.id,
+                    "name": portIn.name,
+                    "value": portIn.get()
+                };
+                portsIn.push(port);
+            });
+            op.uiAttribs.fromNetwork = true;
             this.send(CABLES.PACO_OP_CREATE, {
                 "opId": op.id,
-                "objName": op.objName
+                "objName": op.objName,
+                "uiAttribs": op.uiAttribs,
+                "portsIn": portsIn
             });
         });
 
@@ -136,6 +163,12 @@ const PatchConnectionSender = function (patch)
             "port2": p2.getName()
         });
     });
+
+    patch.addEventListener("onUiAttribsChange", (op) =>
+    {
+        this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": op.uiAttribs });
+    });
+
 
     patch.addEventListener("onLink", (p1, p2) =>
     {
