@@ -255,7 +255,7 @@ UTILS.arrayWriteToEnd = function (arr, v)
  */
 UTILS.isNumeric = function (n)
 {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNaN(n) && isFinite(n);
 };
 
 /**
