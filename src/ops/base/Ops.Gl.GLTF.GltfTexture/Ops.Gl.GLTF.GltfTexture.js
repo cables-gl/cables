@@ -59,9 +59,10 @@ inExec.onTriggered = function ()
         height.set(tex.height);
         return;
     }
-
+    console.log(cgl.frameStore.currentScene.chunks);
     const buffView = cgl.frameStore.currentScene.json.bufferViews[img.bufferView];
-    const dv = cgl.frameStore.currentScene.chunks[1].dataView;
+    let dv = cgl.frameStore.currentScene.chunks[1].dataView;
+    // if(cgl.frameStore.currentScene.chunks[1])
 
     if (!buffView) return;
     const data = new Uint8Array(buffView.byteLength);
