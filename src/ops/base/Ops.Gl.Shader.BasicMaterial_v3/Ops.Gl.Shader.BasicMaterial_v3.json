@@ -45,6 +45,12 @@
                 "subType": "boolean"
             },
             {
+                "type": 0,
+                "name": "Vertex Colors",
+                "group": "Color Texture",
+                "subType": "boolean"
+            },
+            {
                 "type": 2,
                 "name": "textureOpacity",
                 "group": "Opacity",
@@ -53,6 +59,7 @@
             {
                 "type": 0,
                 "name": "Alpha Mask Source index",
+                "group": "Opacity",
                 "subType": "integer"
             },
             {

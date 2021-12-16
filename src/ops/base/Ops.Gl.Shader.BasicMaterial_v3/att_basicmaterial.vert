@@ -20,6 +20,13 @@ UNI mat4 viewMatrix;
     UNI float texOffsetY;
 #endif
 
+#ifdef VERTEX_COLORS
+    in vec4 attrVertColor;
+    out vec4 vertCol;
+
+#endif
+
+
 void main()
 {
     mat4 mMatrix=modelMatrix;
@@ -31,6 +38,10 @@ void main()
     #ifdef HAS_TEXTURES
         texCoord.x=texCoord.x*diffuseRepeatX+texOffsetX;
         texCoord.y=(1.0-texCoord.y)*diffuseRepeatY+texOffsetY;
+    #endif
+
+    #ifdef VERTEX_COLORS
+        vertCol=attrVertColor;
     #endif
 
     vec4 pos = vec4(vPosition, 1.0);

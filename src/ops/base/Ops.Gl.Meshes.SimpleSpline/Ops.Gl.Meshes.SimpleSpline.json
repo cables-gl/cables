@@ -28,6 +28,10 @@
             {
                 "type": 3,
                 "name": "TexCoords Array"
+            },
+            {
+                "type": 3,
+                "name": "Vertex Colors"
             }
         ],
         "portsOut": [
