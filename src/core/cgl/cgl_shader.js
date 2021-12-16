@@ -18,6 +18,8 @@ export const SHADER_VARS = {
     "SHADERVAR_VERTEX_POSITION": "vPosition",
     "SHADERVAR_VERTEX_NUMBER": "attrVertIndex",
     "SHADERVAR_VERTEX_TEXCOORD": "attrTexCoord",
+    "SHADERVAR_VERTEX_COLOR": "attrVertColor",
+
     "SHADERVAR_INSTANCE_MMATRIX": "instMat",
 
     // default uniforms
