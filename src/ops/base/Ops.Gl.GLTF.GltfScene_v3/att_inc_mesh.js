@@ -98,9 +98,20 @@ let gltfMesh = class
     }
 
 
+
+	_linearToSrgb(x) {
+		if (x <= 0)
+			return 0;
+		else if (x >= 1)
+			return 1;
+		else if (x < 0.0031308)
+			return x * 12.92;
+		else
+			return Math.pow(x, 1 / 2.2) * 1.055 - 0.055;
+	}
+
     setGeomVertCols(tgeom,arr)
     {
-
         if (arr instanceof Float32Array)
         {
             let div=false;
@@ -126,6 +137,14 @@ let gltfMesh = class
 
             tgeom.vertexColors = fb;
         } else tgeom.vertexColors = arr;
+
+
+        for(let i=0;i<tgeom.vertexColors.length;i++)
+        {
+            tgeom.vertexColors[i]=this._linearToSrgb(tgeom.vertexColors[i]);
+        }
+
+
 
     }
 

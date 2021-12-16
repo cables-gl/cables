@@ -238,6 +238,8 @@ function finishLoading()
         return;
     }
 
+    gltf.timing.push("finishLoading()", Math.round((performance.now() - gltf.startTime)));
+
     needsMatUpdate = true;
     // op.refreshParams();
     outAnimLength.set(maxTime);
@@ -248,7 +250,8 @@ function finishLoading()
     if (!gltf)op.setUiError("urlerror", "could not load gltf:<br/>\"" + inFile.get() + "\"", 2);
     else op.setUiError("urlerror", null);
 
-    // console.log("yo", JSON.stringify(gltf.bounds));
+    gltf.timing.push("start calc bounds", Math.round((performance.now() - gltf.startTime)));
+
     for (let i = 0; i < gltf.nodes.length; i++)
     {
         const node = gltf.nodes[i];
@@ -258,8 +261,15 @@ function finishLoading()
 
     if (gltf.bounds)outBounds.set(gltf.bounds);
 
+    gltf.timing.push("calced bounds", Math.round((performance.now() - gltf.startTime)));
+
     hideNodesFromData();
+
+    gltf.timing.push("hideNodesFromData", Math.round((performance.now() - gltf.startTime)));
+
     if (tab)printInfo();
+
+    gltf.timing.push("printinfo", Math.round((performance.now() - gltf.startTime)));
 
     updateCamera();
     setCam();
@@ -300,8 +310,10 @@ function finishLoading()
 
     // console.log(gltf.accBuffersDelete);
 
-    if (gltf.chunks.length > 1) gltf.chunks[1] = null;
-    if (gltf.chunks.length > 2) gltf.chunks[2] = null;
+    // if (gltf.chunks.length > 1) gltf.chunks[1] = null;
+    // if (gltf.chunks.length > 2) gltf.chunks[2] = null;
+
+    op.setUiAttrib({ "accBuffersDelete": CABLES.basename(inFile.get()) });
 
     if (gltf.accBuffersDelete)
     {
@@ -312,6 +324,7 @@ function finishLoading()
         }
     }
 
+    console.log("gltf timing", gltf.timing);
     finishedLoading = true;
 }
 
@@ -391,7 +404,7 @@ function updateMaterials()
         const portShader = op.getPort("Shader");
         const portName = op.getPort("Material Name");
 
-        console.log(inMaterials.get());
+        // console.log(inMaterials.get());
 
         if (!portShader && !portName)
         {
