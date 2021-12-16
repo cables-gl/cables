@@ -151,6 +151,7 @@ const Op = function ()
 
         if (newAttribs.title && newAttribs.title != this.name) this.setTitle(newAttribs.title);
         this.fireEvent("onUiAttribsChange", newAttribs);
+        this.patch.emitEvent("onUiAttribsChange", this);
     };
     /**
      * setUiAttrib
