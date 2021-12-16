@@ -7,29 +7,6 @@ import { CONSTANTS } from "./constants";
 import { escapeHTML } from "./cgl_utils";
 import Logger from "../core_logger";
 // ---------------------------------------------------------------------------
-export const SHADER_VARS = {
-    "profileShaderBinds": 0,
-    // profileUniformCount: 0,
-    "profileShaderCompiles": 0,
-    "profileVideosPlaying": 0,
-    "profileMVPMatrixCount": 0,
-
-    // default attributes
-    "SHADERVAR_VERTEX_POSITION": "vPosition",
-    "SHADERVAR_VERTEX_NUMBER": "attrVertIndex",
-    "SHADERVAR_VERTEX_TEXCOORD": "attrTexCoord",
-    "SHADERVAR_VERTEX_COLOR": "attrVertColor",
-
-    "SHADERVAR_INSTANCE_MMATRIX": "instMat",
-
-    // default uniforms
-    "SHADERVAR_UNI_PROJMAT": "projMatrix",
-    "SHADERVAR_UNI_VIEWMAT": "viewMatrix",
-    "SHADERVAR_UNI_MODELMAT": "modelMatrix",
-    "SHADERVAR_UNI_NORMALMAT": "normalMatrix",
-    "SHADERVAR_UNI_INVVIEWMAT": "inverseViewMatrix",
-    "SHADERVAR_UNI_VIEWPOS": "camPos",
-};
 
 
 /*
