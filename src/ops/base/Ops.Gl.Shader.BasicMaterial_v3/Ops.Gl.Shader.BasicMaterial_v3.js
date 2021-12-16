@@ -32,6 +32,7 @@ let diffuseTextureUniform = null;
 diffuseTexture.onChange = updateDiffuseTexture;
 
 const colorizeTexture = op.inValueBool("colorizeTexture", false);
+const vertexColors = op.inValueBool("Vertex Colors", false);
 
 // opacity texture
 const textureOpacity = op.inTexture("textureOpacity");
@@ -65,10 +66,11 @@ alphaMaskSource.onChange =
     discardTransPxl.onChange =
     texCoordAlpha.onChange =
     cropRepeat.onChange =
+    vertexColors.onChange =
     colorizeTexture.onChange = updateDefines;
 
 op.setPortGroup("Color", [r, g, b, a]);
-op.setPortGroup("Color Texture", [diffuseTexture, colorizeTexture]);
+op.setPortGroup("Color Texture", [diffuseTexture, vertexColors, colorizeTexture]);
 op.setPortGroup("Opacity", [textureOpacity, alphaMaskSource, discardTransPxl, texCoordAlpha]);
 op.setPortGroup("Texture Transform", [diffuseRepeatX, diffuseRepeatY, diffuseOffsetX, diffuseOffsetY, cropRepeat]);
 
@@ -150,6 +152,7 @@ function updateDiffuseTexture()
 
 function updateDefines()
 {
+    shader.toggleDefine("VERTEX_COLORS", vertexColors.get());
     shader.toggleDefine("CROP_TEXCOORDS", cropRepeat.get());
     shader.toggleDefine("COLORIZE_TEXTURE", colorizeTexture.get());
     shader.toggleDefine("TRANSFORMALPHATEXCOORDS", texCoordAlpha.get());

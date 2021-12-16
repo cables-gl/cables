@@ -10,7 +10,6 @@ const options = [
 
 const
     render = op.inTrigger("render"),
-    trigger = op.outTrigger("trigger"),
     strength = op.inValue("Strength", 4),
     step = op.inValue("Step", 1),
     rMeth = op.inDropDown("Red", options, "Horizontal Difference Red"),
@@ -18,8 +17,8 @@ const
     gMeth = op.inDropDown("Green", options, "Vertical Difference Red"),
     gFlip = op.inBool("Green Flip", false),
     bMeth = op.inDropDown("Blue", options, "Midpoint"),
-    bFlip = op.inBool("Blue Flip", false);
-
+    bFlip = op.inBool("Blue Flip", false),
+    trigger = op.outTrigger("trigger");
 op.setPortGroup("Method", [rFlip, gFlip, bFlip, rMeth, gMeth, bMeth]);
 
 rFlip.onChange =
@@ -86,8 +85,6 @@ function updateDefines()
     shader.toggleDefine("FLIP_R", rFlip.get());
     shader.toggleDefine("FLIP_G", gFlip.get());
     shader.toggleDefine("FLIP_B", bFlip.get());
-
-    console.log(shader.getDefines());
 }
 
 render.onTriggered = function ()

@@ -1176,7 +1176,10 @@ Patch.prototype._sortVars = function ()
 {
     if (!this.isEditorMode()) return;
     const ordered = {};
-    Object.keys(this._variables).sort().forEach((key) =>
+    Object.keys(this._variables).sort(
+        (a, b) =>
+            a.localeCompare(b, "en", { "sensitivity": "base" })
+    ).forEach((key) =>
     {
         ordered[key] = this._variables[key];
     });

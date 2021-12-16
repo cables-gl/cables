@@ -7,6 +7,7 @@ const
     // a=op.inSwitch("Mode",["Line Strip","Line Loop","Lines"]), // next version!
     texCoords = op.inSwitch("TexCoords", ["0", "0-1", "Random", "Fill"], "0"),
     inTexCoords = op.inArray("TexCoords Array"),
+    inVertCols = op.inArray("Vertex Colors"),
     next = op.outTrigger("Next");
 
 const cgl = op.patch.cgl;
@@ -22,6 +23,7 @@ let needsRebuild = true;
 let attr;
 let currentTexCoords = "";
 
+inVertCols.onChange =
 inTexCoords.onChange =
 texCoords.onChange =
     numPoints.onChange =
@@ -59,6 +61,11 @@ function rebuild()
     }
 
     attr = mesh.setAttribute(CGL.SHADERVAR_VERTEX_POSITION, buff, 3);
+
+    if (inVertCols.get())
+    {
+        const attrTc = mesh.setAttribute(CGL.SHADERVAR_VERTEX_COLOR || "attrVertColor", inVertCols.get(), 4);
+    }
 
     const numTc = (newLength / 3) * 2;
 

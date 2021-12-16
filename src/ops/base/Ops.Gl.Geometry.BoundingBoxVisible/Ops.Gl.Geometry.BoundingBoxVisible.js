@@ -17,14 +17,12 @@ let
     geom = null,
     mesh = null;
 
-
 function isVisible(posi)
 {
     // vec3.add(pos,pos,posi);
     vec3.transformMat4(pos, posi, m);
 
     vec3.transformMat4(trans, pos, cgl.pMatrix);
-
 
     const xp = (trans[0] * vp[2] / 2) + vp[2] / 2;
     const yp = (trans[1] * vp[3] / 2) + vp[3] / 2;
@@ -78,13 +76,11 @@ function buildMesh()
         bb._min[0], bb._max[1], bb._min[2],
         bb._min[0], bb._max[1], bb._max[2],
 
-
         bb._max[0], bb._min[1], bb._min[2],
         bb._max[0], bb._min[1], bb._max[2],
 
         bb._min[0], bb._min[1], bb._min[2],
         bb._min[0], bb._min[1], bb._max[2],
-
 
         //
 
@@ -98,7 +94,6 @@ function buildMesh()
 
     mesh = new CGL.Mesh(cgl, geom, cgl.gl.LINES);
 }
-
 
 // LINE/LINE
 function lineToScreen(posA, posB)
@@ -118,7 +113,6 @@ function lineToScreen(posA, posB)
 
     const x2 = (trans[0] * vp[2] / 2) + vp[2] / 2;
     const y2 = (trans[1] * vp[3] / 2) + vp[3] / 2;
-
 
     const w = vp[2];
     const h = vp[3];
@@ -141,14 +135,13 @@ function lineline(x1, y1, x2, y2, x3, y3, x4, y4)
     // if uA and uB are between 0-1, lines are colliding
     if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1)
     {
-        // const intersectionX = x1 + (uA * (x2 - x1));
+        // const intersectionX =d x1 + (uA * (x2 - x1));
         // const intersectionY = y1 + (uA * (y2 - y1));
 
         return true;
     }
     return false;
 }
-
 
 exec.onTriggered = () =>
 {
@@ -174,6 +167,9 @@ exec.onTriggered = () =>
 
         isVisible(bb._center) ||
 
+        isVisible(bb._max) ||
+        isVisible(bb._min) ||
+
         lineToScreen(bb._max, bb._min) ||
 
         lineToScreen([bb._max[0], bb._max[1], bb._max[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
@@ -194,7 +190,6 @@ exec.onTriggered = () =>
         lineToScreen([bb._min[0], bb._max[1], bb._min[2]], [bb._min[0], bb._max[1], bb._max[2]]) ||
         lineToScreen([bb._max[0], bb._min[1], bb._min[2]], [bb._max[0], bb._min[1], bb._max[2]]) ||
         lineToScreen([bb._min[0], bb._min[1], bb._min[2]], [bb._min[0], bb._min[1], bb._max[2]]);
-
 
     result.set(isVis);
     next.trigger();

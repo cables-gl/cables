@@ -2,6 +2,10 @@
 
 IN vec2 texCoord;
 
+#ifdef VERTEX_COLORS
+IN vec4 vertCol;
+#endif
+
 #ifdef HAS_TEXTURES
     IN vec2 texCoordOrig;
     #ifdef HAS_TEXTURE_DIFFUSE
@@ -16,6 +20,7 @@ void main()
 {
     {{MODULE_BEGIN_FRAG}}
     vec4 col=color;
+
 
     #ifdef HAS_TEXTURES
         vec2 uv=texCoord;
@@ -61,6 +66,10 @@ void main()
 
     #ifdef DISCARDTRANS
         if(col.a<0.2) discard;
+    #endif
+
+    #ifdef VERTEX_COLORS
+        col*=vertCol;
     #endif
 
     outColor = col;

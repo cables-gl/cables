@@ -5,6 +5,7 @@ const SHADER = {
     "SHADERVAR_VERTEX_NORMAL": "attrVertNormal",
     "SHADERVAR_VERTEX_TEXCOORD": "attrTexCoord",
     "SHADERVAR_INSTANCE_MMATRIX": "instMat",
+    "SHADERVAR_VERTEX_COLOR": "attrVertColor",
 
     // default uniforms
     "SHADERVAR_UNI_PROJMAT": "projMatrix",
@@ -14,6 +15,7 @@ const SHADER = {
     "SHADERVAR_UNI_INVVIEWMAT": "inverseViewMatrix",
     "SHADERVAR_UNI_VIEWPOS": "camPos",
 };
+
 
 const BLEND_MODES = {
     "BLEND_NONE": 0,

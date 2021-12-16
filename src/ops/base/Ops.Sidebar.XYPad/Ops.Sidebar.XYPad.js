@@ -149,7 +149,7 @@ inputY.onChange = () =>
     // redraw();
 };
 
-canv.addEventListener("pointermove", (e) =>
+function move(e)
 {
     if (e.buttons == 1)
     {
@@ -168,7 +168,10 @@ canv.addEventListener("pointermove", (e) =>
         inputY.set(y / size);
         if (op.patch.isEditorMode() && op.isCurrentUiOp()) gui.opParams.show(op);
     }
-}, false);
+}
+
+canv.addEventListener("pointermove", move, false);
+canv.addEventListener("pointerdown", move, false);
 
 function setOutValue(x, y)
 {
