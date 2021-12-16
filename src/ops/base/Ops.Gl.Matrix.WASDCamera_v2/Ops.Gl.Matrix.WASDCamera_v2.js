@@ -240,7 +240,7 @@ function startPointerLock()
     const test = false;
     if (render.isLinked() && enablePointerLock.get())
     {
-        document.addEventListener("mousemove", moveCallback, false);
+        document.addEventListener("pointermove", moveCallback, false);
         canvas.requestPointerLock = canvas.requestPointerLock ||
                                     canvas.mozRequestPointerLock ||
                                     canvas.webkitRequestPointerLock;
@@ -257,8 +257,8 @@ function initListener()
         document.addEventListener("webkitpointerlockchange", lockChangeCallback, false);
         document.getElementById("glcanvas").addEventListener("mousedown", startPointerLock);
 
-        cgl.canvas.removeEventListener("mousemove", moveCallbackNoPL, false);
-        cgl.canvas.removeEventListener("mouseup", upCallbackNoPL, false);
+        cgl.canvas.removeEventListener("pointermove", moveCallbackNoPL, false);
+        cgl.canvas.removeEventListener("pointerup", upCallbackNoPL, false);
         cgl.canvas.removeEventListener("keydown", keyDown, false);
         cgl.canvas.removeEventListener("keyup", keyUp, false);
     }

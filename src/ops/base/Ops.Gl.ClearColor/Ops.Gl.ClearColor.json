@@ -67,7 +67,6 @@
             }
         ]
     },
-    "youtubeid": "",
     "issues": "",
     "collections": null,
     "relatedops": null,
@@ -81,5 +80,6 @@
             "deletedBy": "cables",
             "deletedDate": 1605544717592
         }
-    ]
+    ],
+    "youtubeids": []
 }
