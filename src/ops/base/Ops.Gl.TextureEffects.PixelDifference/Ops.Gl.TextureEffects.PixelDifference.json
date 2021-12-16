@@ -70,7 +70,28 @@
     "created": 1633376809397,
     "summary": "visualize the difference of neighbouring pixels (slope)",
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Strength",
+                "text": "multiplier for colors in resulting texture reporting pixel difference"
+            },
+            {
+                "name": "Step",
+                "text": "range of pixel difference comparison"
+            },
+            {
+                "name": "Red index",
+                "text": "mode selection for the Red channel"
+            },
+            {
+                "name": "Green index",
+                "text": "mode selection for the Green channel"
+            },
+            {
+                "name": "Blue index",
+                "text": "mode selection for the Blue channel"
+            }
+        ]
     },
     "changelog": [
         {
@@ -105,5 +126,7 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": []
+    "youtubeids": [
+        "tGDDUyFIQPU"
+    ]
 }

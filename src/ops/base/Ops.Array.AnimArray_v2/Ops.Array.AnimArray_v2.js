@@ -30,9 +30,9 @@ inTrigger.onTriggered = () =>
 
 function copyArray(a)
 {
-    let b=[];
-    b.length=a.length;
-    for(let i=0;i<a.length;i++) b[i]=a[i];
+    let b = [];
+    b.length = a.length;
+    for (let i = 0; i < a.length; i++) b[i] = a[i];
     return b;
 }
 
@@ -42,7 +42,7 @@ function init()
     if (inArr.get() == lastArr) return;
 
     if (lastArr)
-        if (inArr.get() == lastArr )
+        if (inArr.get() == lastArr)
             return;
 
     lastArr = inArr.get();
@@ -54,7 +54,7 @@ function init()
     if (cycle == 1) cycle = 0;
     else cycle = 1;
 
-    if(result.length!=lastArr.length)result=copyArray(lastArr);
+    if (result.length != lastArr.length)result = copyArray(lastArr);
 
     if (cycle == 0)
     {
