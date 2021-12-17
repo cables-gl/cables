@@ -92,6 +92,7 @@ export const CONSTANTS = {
         "PACO_OP_CREATE": 6,
         "PACO_OP_ENABLE": 7,
         "PACO_OP_DISABLE": 8,
-        "PACO_UIATTRIBS": 9
+        "PACO_UIATTRIBS": 9,
+        "PACO_VARIABLES": 10
     },
 };

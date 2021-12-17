@@ -1201,7 +1201,7 @@ Patch.prototype.hasVar = function (name)
 };
 
 // used internally
-Patch.prototype.setVarValue = function (name, val)
+Patch.prototype.setVarValue = function (name, val, type)
 {
     if (this.hasVar(name))
     {
@@ -1209,7 +1209,7 @@ Patch.prototype.setVarValue = function (name, val)
     }
     else
     {
-        this._variables[name] = new Patch.Variable(name, val);
+        this._variables[name] = new Patch.Variable(name, val, type);
         this._sortVars();
         this.emitEvent("variablesChanged");
     }
