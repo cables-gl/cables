@@ -22,9 +22,9 @@ class BoundingBox
     {
         this._max = [-Number.MAX_VALUE, -Number.MAX_VALUE, -Number.MAX_VALUE];
         this._min = [Number.MAX_VALUE, Number.MAX_VALUE, Number.MAX_VALUE];
-        this._center = [0,0,0];
-        this._size = [0,0,0];
-        this._maxAxis=0.0;
+        this._center = [0, 0, 0];
+        this._size = [0, 0, 0];
+        this._maxAxis = 0.0;
         this._first = true;
     }
 
@@ -32,7 +32,7 @@ class BoundingBox
      * get biggest number of maxX,maxY,maxZ
      * @type {Number}
      */
-    get maxAxis() { return this._maxAxis||1; }
+    get maxAxis() { return this._maxAxis || 1; }
 
     /**
      * size of bounding box
@@ -120,17 +120,17 @@ class BoundingBox
         else
         {
             for (let i = 0; i < geom.vertices.length; i += 3)
-                if (geom.vertices[i + 0] == geom.vertices[i + 0] || geom.vertices[i + 0]!=null)
-                {
-                    // if(mat)
-                    // {
-                    this.applyPos(geom.vertices[i + 0], geom.vertices[i + 1], geom.vertices[i + 2]);
-                    // }
-                    // else
-                    // {
-                    //     this.applyPos(geom.vertices[i + 0],geom.vertices[i + 1],geom.vertices[i + 2]);
-                    // }
-                }
+                // if (geom.vertices[i] == geom.vertices[i] || geom.vertices[i] != null)
+                // {
+            // if(mat)
+            // {
+                this.applyPos(geom.vertices[i], geom.vertices[i + 1], geom.vertices[i + 2]);
+            // }
+            // else
+            // {
+            //     this.applyPos(geom.vertices[i + 0],geom.vertices[i + 1],geom.vertices[i + 2]);
+            // }
+                // }
         }
         this.calcCenterSize();
     }
@@ -153,10 +153,11 @@ class BoundingBox
 
     applyPos(x, y, z)
     {
-        if(x == Number.MAX_VALUE || x == -Number.MAX_VALUE) return;
-        if(y == Number.MAX_VALUE || y == -Number.MAX_VALUE) return;
-        if(z == Number.MAX_VALUE || z == -Number.MAX_VALUE) return;
-        if(!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z)) return;
+        if (x == Number.MAX_VALUE || x == -Number.MAX_VALUE ||
+            y == Number.MAX_VALUE || y == -Number.MAX_VALUE ||
+            z == Number.MAX_VALUE || z == -Number.MAX_VALUE) return;
+
+        if (!CABLES.UTILS.isNumeric(x) || !CABLES.UTILS.isNumeric(y) || !CABLES.UTILS.isNumeric(z)) return;
 
         if (this._first)
         {
@@ -182,7 +183,7 @@ class BoundingBox
 
     calcCenterSize()
     {
-        if(this._first)return;
+        if (this._first) return;
         // this._size[0]=Math.abs(this._min[0])+Math.abs(this._max[0]);
         // this._size[1]=Math.abs(this._min[1])+Math.abs(this._max[1]);
         // this._size[2]=Math.abs(this._min[2])+Math.abs(this._max[2]);
@@ -195,13 +196,11 @@ class BoundingBox
         this._center[2] = (this._min[2] + this._max[2]) / 2;
 
         this._maxAxis = Math.max(this._size[2], Math.max(this._size[0], this._size[1]));
-
-
     }
 
     mulMat4(m)
     {
-        if(this._first)
+        if (this._first)
         {
             this._max[0] = 0;
             this._max[1] = 0;

@@ -33,6 +33,7 @@
             {
                 "type": 0,
                 "name": "Center index",
+                "group": "Transform",
                 "subType": "integer"
             },
             {

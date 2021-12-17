@@ -7,11 +7,12 @@ Click the show structure button to see the way the GLB file is constructed with 
 
 - object animation: https://dev.cables.gl/p/8m-jxX
 - draco compression: https://dev.cables.gl/p/gc93YM
-- vertex colors: https://dev.cables.gl/p/ep1Umu
+- vertex colors: https://dev.cables.gl/edit/6MsLhR
 - multi uv channels: https://dev.cables.gl/edit/LKhGaN
-- vertex anim: https://dev.cables.gl/edit/k2kKaN
+- vertex anim: https://dev.cables.gl/edit/k2kKaN 
 - multiple animation tracks/actions: https://dev.cables.gl/edit/sJYbXN
 - skinning: https://dev.cables.gl/edit/TWBC-N
+- embedded texture: https://dev.cables.gl/edit/LT4CVS
 
 
 ## convertes:

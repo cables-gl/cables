@@ -1176,7 +1176,10 @@ Patch.prototype._sortVars = function ()
 {
     if (!this.isEditorMode()) return;
     const ordered = {};
-    Object.keys(this._variables).sort().forEach((key) =>
+    Object.keys(this._variables).sort(
+        (a, b) =>
+            a.localeCompare(b, "en", { "sensitivity": "base" })
+    ).forEach((key) =>
     {
         ordered[key] = this._variables[key];
     });
@@ -1198,7 +1201,7 @@ Patch.prototype.hasVar = function (name)
 };
 
 // used internally
-Patch.prototype.setVarValue = function (name, val)
+Patch.prototype.setVarValue = function (name, val, type)
 {
     if (this.hasVar(name))
     {
@@ -1206,7 +1209,7 @@ Patch.prototype.setVarValue = function (name, val)
     }
     else
     {
-        this._variables[name] = new Patch.Variable(name, val);
+        this._variables[name] = new Patch.Variable(name, val, type);
         this._sortVars();
         this.emitEvent("variablesChanged");
     }

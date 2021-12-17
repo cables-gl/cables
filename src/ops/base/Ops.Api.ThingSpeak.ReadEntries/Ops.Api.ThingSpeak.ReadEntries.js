@@ -46,7 +46,7 @@ function handleResponse(response)
     }
     else
     {
-        entry.set(response.feeds);
+        entries.set(response.feeds);
         channelInfos.set(response.channel);
         success.set(true);
         // TODO: Remove UI-Error Attribute

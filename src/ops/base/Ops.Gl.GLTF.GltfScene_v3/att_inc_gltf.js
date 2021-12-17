@@ -79,7 +79,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
 
     if (offset >= dv.byteLength)
     {
-        console.log("could not read chunk...");
+        op.log("could not read chunk...");
         return;
     }
     chunk.size = dv.getUint32(offset + 0, le);
@@ -117,6 +117,7 @@ function readChunk(dv, bArr, arrayBuffer, offset)
     }
     else
     {
+        op.warn("unknown type",chunk.type)
     }
 
     return chunk;
@@ -236,7 +237,10 @@ function parseGltf(arrayBuffer)
 {
     let j = 0, i = 0;
 
+console.log(1)
+
     const gltf = new Gltf();
+    gltf.timing.push("Start parsing", Math.round((performance.now() - gltf.startTime)));
 
     if (!arrayBuffer) return;
     const byteArray = new Uint8Array(arrayBuffer);
@@ -247,7 +251,7 @@ function parseGltf(arrayBuffer)
     pos += 4;
     if (string != "glTF") return;
 
-    gltf.timing.push("Start parsing", Math.round((performance.now() - gltf.startTime)));
+    gltf.timing.push("dataview", Math.round((performance.now() - gltf.startTime)));
 
     const dv = new DataView(arrayBuffer);
     const version = dv.getUint32(pos, le);
@@ -267,7 +271,13 @@ function parseGltf(arrayBuffer)
     outJson.set(gltf.json);
     outExtensions.set(gltf.json.extensionsUsed || []);
 
-    chunks.push(readChunk(dv, byteArray, arrayBuffer, pos));
+    let ch=readChunk(dv, byteArray, arrayBuffer, pos);
+    while(ch)
+    {
+        chunks.push(ch);
+        pos += ch.size + CHUNK_HEADER_SIZE;
+        ch=readChunk(dv, byteArray, arrayBuffer, pos);
+    }
 
     gltf.chunks = chunks;
 

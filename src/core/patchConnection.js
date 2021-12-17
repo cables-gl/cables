@@ -119,9 +119,21 @@ PatchConnectionReceiver.prototype._receive = function (ev)
     }
     else if (data.event == CONSTANTS.PACO.PACO_VALUECHANGE)
     {
+        // do not handle variable creation events
+        if (data.vars.v === "+ create new one") return;
         const op = this._patch.getOpById(data.vars.op);
         const p = op.getPort(data.vars.port);
         p.set(data.vars.v);
+    }
+    else if (data.event == CONSTANTS.PACO.PACO_VARIABLES)
+    {
+        if (data.vars.variables)
+        {
+            data.vars.variables.forEach((variable) =>
+            {
+                this._patch.setVarValue(variable.name, variable.value, variable.type);
+            });
+        }
     }
     else
     {
@@ -181,6 +193,21 @@ const PatchConnectionSender = function (patch)
         this.send(CABLES.PACO_UIATTRIBS, { "op": op.id, "uiAttribs": op.uiAttribs });
     });
 
+    patch.addEventListener("variablesChanged", () =>
+    {
+        const vars = [];
+        const patchVars = patch.getVars();
+        for (const i in patch.getVars())
+        {
+            const patchVar = patchVars[i];
+            vars.push({
+                "name": patchVar.getName(),
+                "type": patchVar.type,
+                "value": patchVar.getValue()
+            });
+        }
+        this.send(CABLES.PACO_VARIABLES, { "variables": vars });
+    });
 
     patch.addEventListener("onLink", (p1, p2) =>
     {
@@ -195,6 +222,8 @@ const PatchConnectionSender = function (patch)
 
 PatchConnectionSender.prototype.send = function (event, vars)
 {
+    // do not send variable creation events
+    if (event === CABLES.PACO_VALUECHANGE && vars.v === "+ create new one") return;
     for (let i = 0; i < this.connectors.length; i++)
     {
         this.connectors[i].send(event, vars);
