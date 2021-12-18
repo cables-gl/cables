@@ -26,7 +26,7 @@ const side = op.inValueBool("Side");
 
 // outputs
 const childrenPort = op.outObject("childs");
-const isOpenOut = op.outBool("Opened");
+const isOpenOut = op.outBool("Opfened");
 
 let sidebarEl = document.querySelector("." + SIDEBAR_ID);
 if (!sidebarEl)
@@ -117,8 +117,7 @@ function initUndoButton(header)
             {
                 const headerUndo = document.createElement("span");
                 headerUndo.classList.add("sidebar__group-header-undo");
-                headerUndo.classList.add("fa");
-                headerUndo.classList.add("fa-undo");
+                headerUndo.classList.add("sidebar-icon-undo");
 
                 headerUndo.addEventListener("click", function (event)
                 {
