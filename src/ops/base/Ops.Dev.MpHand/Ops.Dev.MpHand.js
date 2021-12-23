@@ -1,12 +1,11 @@
 const
-    inMpResult=op.inObject("Hands Result"),
+    inMpResult = op.inObject("Hands Result"),
     outPoints = op.outArray("Points"),
     outLines = op.outArray("Lines"),
-    inWhichHand=op.inSwitch("Hand",['Left','Right'],'Left'),
+    inWhichHand = op.inSwitch("Hand", ["Left", "Right"], "Left"),
     outResult = op.outObject("Data"),
     outFound = op.outNumber("Found Hand"),
     outScore = op.outNumber("Score");
-
 
 function getLines(points)
 {
@@ -62,14 +61,13 @@ function getLines(points)
     return lines;
 }
 
-
-inMpResult.onChange=()=>
+inMpResult.onChange = () =>
 {
     let points = [];
     let points2 = [];
     let lines = null;
     let lines2 = null;
-    let r=inMpResult.get();
+    let r = inMpResult.get();
 
     if (r && r.multiHandedness)
     {
@@ -82,22 +80,21 @@ inMpResult.onChange=()=>
         return;
     }
 
-    let idx=0;
+    let idx = 0;
 
     // console.log(r);
 
-    if(r.multiHandedness)
+    if (r.multiHandedness)
     {
-        for(let i=0;i<r.multiHandedness.length;i++)
+        for (let i = 0; i < r.multiHandedness.length; i++)
         {
-            if(r.multiHandedness[i].label==inWhichHand.get())
+            if (r.multiHandedness[i].label == inWhichHand.get())
             {
-                idx=i;//r.multiHandedness[i].index;
+                idx = i;// r.multiHandedness[i].index;
                 outScore.set(r.multiHandedness[i].score);
             }
         }
     }
-
 
     if (r && r.multiHandLandmarks && r.multiHandLandmarks[idx])
     {
@@ -119,6 +116,4 @@ inMpResult.onChange=()=>
         outPoints.set(null);
         outLines.set(null);
     }
-
-}
-
+};
