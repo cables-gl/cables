@@ -13,6 +13,7 @@ Click the show structure button to see the way the GLB file is constructed with 
 - multiple animation tracks/actions: https://dev.cables.gl/edit/sJYbXN
 - skinning: https://dev.cables.gl/edit/TWBC-N
 - embedded texture: https://dev.cables.gl/edit/LT4CVS
+- multiple skins: https://dev.cables.gl/edit/Vkp-WN
 
 
 ## convertes:

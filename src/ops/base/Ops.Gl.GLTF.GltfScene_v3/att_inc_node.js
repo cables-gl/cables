@@ -154,6 +154,9 @@ const gltfNode = class
     {
         if (!_time)_time = time;
 
+        // mat4.identity(cgl.mMatrix);
+
+
         if (!this._animTrans && !this._animRot && !this._animScale)
         {
             mat4.mul(cgl.mMatrix, cgl.mMatrix, this.mat);

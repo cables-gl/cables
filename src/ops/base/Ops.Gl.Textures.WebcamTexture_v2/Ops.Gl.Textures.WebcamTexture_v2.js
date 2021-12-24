@@ -40,8 +40,8 @@ op.patch.cgl.canvas.parentElement.appendChild(videoElement);
 const tex = new CGL.Texture(cgl);
 tex.setSize(8, 8);
 textureOut.set(tex);
-let timeout = null;
 
+let timeout = null;
 let canceled = false;
 
 op.onDelete = removeElement;
@@ -118,6 +118,9 @@ function camInitComplete(stream)
     {
         available.set(true);
 
+        // videoElement.setAttribute("height", videoElement.videoHeight);
+        // videoElement.setAttribute("width", videoElement.videoWidth);
+
         outHeight.set(videoElement.videoHeight);
         outWidth.set(videoElement.videoWidth);
 
@@ -136,8 +139,8 @@ function startWebcam()
     const constraints = { "audio": false, "video": {} };
 
     constraints.video.facingMode = inFacing.get();
-    constraints.video.width = width.get();
-    constraints.video.height = height.get();
+    constraints.video.width = { "ideal": width.get() };
+    constraints.video.height = { "ideal": height.get() };
 
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
     // navigator.mediaDevices.getUserMedia ||

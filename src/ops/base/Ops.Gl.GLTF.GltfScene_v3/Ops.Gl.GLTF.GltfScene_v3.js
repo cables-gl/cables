@@ -231,6 +231,12 @@ inExec.onTriggered = function ()
 
 function finishLoading()
 {
+    if (!gltf)
+    {
+        op.setUiError("nogltf", "gltf not found");
+        return;
+    }
+    op.setUiError("nogltf", null);
     if (gltf.loadingMeshes > 0)
     {
         // op.log("waiting for async meshes...");
