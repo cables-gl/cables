@@ -17,7 +17,7 @@ const GltfSkin = class
     {
         if(!this._mod)
         {
-            this._mod = new CGL.ShaderModifier(cgl, op.name);
+            this._mod = new CGL.ShaderModifier(cgl, op.name+this._node.name);
 
             this._mod.addModule({
                 "priority": -2,
@@ -39,7 +39,7 @@ const GltfSkin = class
 
         const invBindMatrix = mat4.create();
         const m = mat4.create();
-        const nodeSkin = gltf.nodes[this._node.skin];
+        // const nodeSkin = gltf.nodes[this._node.skin];
 
         // console.log("yo",this._node.skin)
         // this._node.render(cgl, false, true, true, false, false, time);

@@ -279,7 +279,7 @@ let gltfMesh = class
                 const mt = this.geom.morphTargets[Math.floor(this.test)];
                 const mt2 = this.geom.morphTargets[Math.floor(this.test + 1)];
 
-                if (mt && mt.vertices)
+                if (mt && mt.vertices && mt2)
                 {
                     if (this.morphGeom.vertexNormals.length != mt.vertexNormals.length)
                         this.morphGeom.vertexNormals = new Float32Array(mt.vertexNormals.length);

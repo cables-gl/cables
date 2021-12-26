@@ -1,5 +1,5 @@
 {
-    "id": "5251e50f-abaf-4ca3-a809-61f8ca58ec35",
+    "id": "279774b0-9897-4f36-840e-5f823cfc988a",
     "changelog": [
         {
             "message": "created op",
@@ -35,12 +35,22 @@
             "message": "Ops.Admin.Mediapipe.MpHands renamed to Ops.Dev.Mediapipe.MpHands",
             "author": "pandur",
             "date": 1623913601812
+        },
+        {
+            "message": "cloned op from Ops.Dev.Mediapipe.MpHands",
+            "author": "pandur",
+            "date": 1640184895627
+        },
+        {
+            "message": "Ops.User.pandur.MpPose renamed to Ops.Dev.MpPose",
+            "author": "pandur",
+            "date": 1640190458007
         }
     ],
-    "authorName": "cables",
-    "created": 1608577908279,
+    "authorName": "pandur",
+    "created": 1640184895626,
     "libs": [
-        "mp_hands.js",
+        "mp_pose.js",
         "mp_camera_utils.js"
     ],
     "layout": {
@@ -57,26 +67,26 @@
             },
             {
                 "type": 3,
+                "name": "Landmarks"
+            },
+            {
+                "type": 3,
                 "name": "Lines"
             },
             {
-                "type": 3,
-                "name": "Points 2"
-            },
-            {
-                "type": 3,
-                "name": "Lines 2"
-            },
-            {
-                "type": 2,
-                "name": "Result"
-            },
-            {
                 "type": 0,
-                "name": "Found Hands",
+                "name": "Found",
                 "subType": "number"
             }
         ],
-        "name": "Ops.Dev.Mediapipe.MpHands"
+        "name": "Ops.User.pandur.MpPose"
+    },
+    "summary": "",
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": [],
+    "docs": {
+        "ports": []
     }
 }
