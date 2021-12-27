@@ -383,11 +383,12 @@ Patch.prototype.createOp = function (identifier, id)
     catch (e)
     {
         this._crashedOps.push(objName);
-        this._log.error(e);
+
         this.emitEvent("exceptionOp", e, objName);
 
         if (!this.isEditorMode())
         {
+            this._log.error(e);
             this._log.error("[instancing error] " + objName, e);
 
             if (CABLES.api) CABLES.api.sendErrorReport(e);
