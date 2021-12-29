@@ -11,7 +11,9 @@ const
     inStretch = op.inDropDown("Fill Parent", ["Auto", "Width", "Height", "Both"], "Auto"),
     next = op.outTrigger("Next"),
     outWidth = op.outNumber("Width"),
-    outHeight = op.outNumber("Height");
+    outHeight = op.outNumber("Height"),
+    outMarginLeft = op.outNumber("Margin Left"),
+    outMarginTop = op.outNumber("Margin Top");
 
 op.setPortGroup("Size", [inWidth, inHeight]);
 op.setPortGroup("Proportions", [inRatio, inStretch, inPresets]);
@@ -96,6 +98,9 @@ function removeStyles()
     cgl.canvas.style["margin-top"] = "";
     cgl.canvas.style["margin-left"] = "";
 
+    outMarginLeft.set(0);
+    outMarginTop.set(0);
+
     const rect = cgl.canvas.parentNode.getBoundingClientRect();
     cgl.setSize(rect.width, rect.height);
 }
@@ -161,13 +166,23 @@ inTrigger.onTriggered = function ()
     if (inCenter.get())
     {
         const rect = clientRect;
-        cgl.canvas.style["margin-top"] = (rect.height - h) / 2 + "px";
-        cgl.canvas.style["margin-left"] = (rect.width - w) / 2 + "px";
+
+        const t = (rect.height - h) / 2;
+        const l = (rect.width - w) / 2;
+
+        outMarginLeft.set(l);
+        outMarginTop.set(t);
+
+        cgl.canvas.style["margin-top"] = t + "px";
+        cgl.canvas.style["margin-left"] = l + "px";
     }
     else
     {
         cgl.canvas.style["margin-top"] = "0";
         cgl.canvas.style["margin-left"] = "0";
+
+        outMarginLeft.set(0);
+        outMarginTop.set(0);
     }
 
     if (inScaleFit.get())
