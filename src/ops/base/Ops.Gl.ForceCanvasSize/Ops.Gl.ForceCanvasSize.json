@@ -56,6 +56,7 @@
             {
                 "type": 0,
                 "name": "Aspect Ratio index",
+                "group": "Proportions",
                 "subType": "integer"
             },
             {
@@ -67,6 +68,7 @@
             {
                 "type": 0,
                 "name": "Fill Parent index",
+                "group": "Proportions",
                 "subType": "integer"
             }
         ],
@@ -83,6 +85,16 @@
             {
                 "type": 0,
                 "name": "Height",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Left",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Margin Top",
                 "subType": "number"
             }
         ],
