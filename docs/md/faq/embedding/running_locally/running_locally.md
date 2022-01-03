@@ -5,7 +5,7 @@ Just [export a ZIP-File](../../../4_export_embed/dev_embed/export_zip/export_zip
 
 However, if you are using any kind of assets you browser will most likely give you a  security warning in the dev-console. Something like this:
 
-```
+```text
 The HTMLMediaElement passed to createMediaElementSource has 
 a cross-origin resource, the node will output silence.
 ```
