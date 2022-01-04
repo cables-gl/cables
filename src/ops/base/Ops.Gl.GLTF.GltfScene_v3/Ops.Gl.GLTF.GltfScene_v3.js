@@ -624,7 +624,7 @@ op.exposeNode = function (name, type, options)
             gui.patchView.testCollision(newop);
         });
     }
-    CABLES.UI.MODAL.hide();
+    gui.closeModal();
 };
 
 op.assignMaterial = function (name)
@@ -636,7 +636,7 @@ op.assignMaterial = function (name)
     setNewOpPosition(newop);
     gui.patchView.testCollision(newop);
 
-    CABLES.UI.MODAL.hide();
+    gui.closeModal();
 };
 
 op.toggleNodeVisibility = function (name)

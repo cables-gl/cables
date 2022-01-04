@@ -17,14 +17,44 @@ const
 const cgl = op.patch.cgl;
 let shader = null;
 
+function showCodeModal(title, code, type)
+{
+    if (!CABLES.UI || !CABLES.UI.ModalDialog)
+    {
+        console.log(title, code);
+    }
+
+    let html = "";
+    html += "<h2>Code</h2>";
+    html += "<b>" + title + "</b> ";
+    html += "<br/><br/>";
+    html += "<br/><br/>";
+
+    code = code || "";
+    code = code.replace(/\</g, "&lt;"); // for <
+    code = code.replace(/\>/g, "&gt;"); // for >
+
+    html += "<pre><code class=\"" + (type || "javascript") + "\">" + code + "</code></pre>";
+
+    new CABLES.UI.ModalDialog({
+        "title": title,
+        "html": html
+    });
+
+    Array.from(document.querySelectorAll("pre code")).forEach(function (block)
+    {
+        hljs.highlightBlock(block);
+    });
+}
+
 showFrag.onTriggered = function ()
 {
-    if (CABLES.UI && shader) CABLES.UI.MODAL.showCode("fragment shader", shader.finalShaderFrag, "GLSL");
+    if (CABLES.UI && shader) showCodeModal("fragment shader", shader.finalShaderFrag, "GLSL");
 };
 
 showVert.onTriggered = function ()
 {
-    if (CABLES.UI && shader) CABLES.UI.MODAL.showCode("vertex shader", shader.finalShaderVert, "GLSL");
+    if (CABLES.UI && shader) showCodeModal("vertex shader", shader.finalShaderVert, "GLSL");
 };
 
 let doStateDump = false;
@@ -108,7 +138,7 @@ exec.onTriggered = function ()
                 "structUniformName": shader._uniforms[i]._structUniformName
             });
         }
-        CABLES.UI.MODAL.showCode("shader uniforms", JSON.stringify(json, false, 2), "json");
+        showCodeModal("shader uniforms", JSON.stringify(json, false, 2), "json");
 
         doUniformDump = false;
     }
@@ -169,7 +199,7 @@ function stateDump()
         txt += "\n";
     }
 
-    CABLES.UI.MODAL.showCode("state info", txt);
+    showCodeModal("state info", txt);
 }
 
 showModules.onTriggered = function ()
@@ -177,5 +207,5 @@ showModules.onTriggered = function ()
     if (!shader) return;
     const mods = shader.getCurrentModules();
 
-    CABLES.UI.MODAL.showCode("vertex shader", JSON.stringify(mods, false, 4), "json");
+    showCodeModal("vertex shader", JSON.stringify(mods, false, 4), "json");
 };

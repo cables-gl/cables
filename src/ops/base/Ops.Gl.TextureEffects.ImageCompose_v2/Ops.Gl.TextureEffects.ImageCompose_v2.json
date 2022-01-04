@@ -26,11 +26,13 @@
             {
                 "type": 0,
                 "name": "Filter index",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
                 "type": 0,
                 "name": "Wrap index",
+                "group": "Texture Settings",
                 "subType": "integer"
             },
             {
