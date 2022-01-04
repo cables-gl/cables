@@ -1,30 +1,30 @@
-const exe=op.inTriggerButton("trigger in"),
-    reset=op.inTriggerButton("reset"),
-    trigger=op.outTrigger("trigger out"),
-    num=op.outValue("current count"),
+const exe = op.inTriggerButton("trigger in"),
+    reset = op.inTriggerButton("reset"),
+    trigger = op.outTrigger("trigger out"),
+    num = op.outValue("current count"),
 
-    inMinLoopValue = op.inValueInt("Loop min",0.0),
-    inMaxLoopValue = op.inValueInt("Loop max",4.0);
+    inMinLoopValue = op.inValueInt("Loop min", 0.0),
+    inMaxLoopValue = op.inValueInt("Loop max", 4.0);
 
-var n = Math.floor(inMinLoopValue.get());
+let n = Math.floor(inMinLoopValue.get());
 
-//increments with each trigger and loops
-//depending on min and max loop values
-//can also work with negative numbers
-//if min is greater than max then it decrements
-//instead of incrementing
-exe.onTriggered= function()
+// increments with each trigger and loops
+// depending on min and max loop values
+// can also work with negative numbers
+// if min is greater than max then it decrements
+// instead of incrementing
+exe.onTriggered = function ()
 {
-    var inMin = Math.floor(inMinLoopValue.get());
-    var inMax = Math.floor(inMaxLoopValue.get());
+    let inMin = Math.floor(inMinLoopValue.get());
+    let inMax = Math.floor(inMaxLoopValue.get());
 
-    if(inMin < inMax)
+    if (inMin < inMax)
     {
-        if(n < inMin)
+        if (n < inMin)
         {
             n = inMinLoopValue.get();
         }
-        else if(n >= inMax)
+        else if (n >= inMax)
         {
             n = inMinLoopValue.get();
         }
@@ -35,11 +35,11 @@ exe.onTriggered= function()
     }
     else if (inMin > inMax)
     {
-        if(n < inMax)
+        if (n < inMax)
         {
             n = inMin;
         }
-        else if(n > inMin)
+        else if (n > inMin)
         {
             inMin;
         }
@@ -53,17 +53,18 @@ exe.onTriggered= function()
         }
     }
     num.set(n);
+    op.setUiAttrib({ "extendTitle": n });
     trigger.trigger();
 };
 
-reset.onTriggered= function()
+reset.onTriggered = function ()
 {
-    var inMin = Math.floor(inMinLoopValue.get());
-    var inMax = Math.floor(inMaxLoopValue.get());
+    let inMin = Math.floor(inMinLoopValue.get());
+    let inMax = Math.floor(inMaxLoopValue.get());
 
-    if(inMin < inMax)
+    if (inMin < inMax)
     {
-        n = inMin
+        n = inMin;
     }
     else if (inMax < inMin)
     {
@@ -73,5 +74,6 @@ reset.onTriggered= function()
     {
         n = 0;
     }
+    op.setUiAttrib({ "extendTitle": n });
     num.set(n);
 };

@@ -16,11 +16,13 @@ exe.onTriggered = function ()
 {
     n++;
     num.set(n);
+    op.setUiAttrib({ "extendTitle": n });
     trigger.trigger();
 };
 
 function doReset()
 {
     n = 0;
+    op.setUiAttrib({ "extendTitle": n });
     num.set(n);
 }

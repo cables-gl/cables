@@ -11,9 +11,10 @@ update();
 function getCssContent()
 {
     let css = code.get();
-    // css = css.replaceAll("{{ASSETPATH}}", op.patch.getAssetPath());
-    css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath());
-
+    if (css)
+    {
+        css = css.replace(new RegExp("{{ASSETPATH}}", "g"), op.patch.getAssetPath());
+    }
     return css;
 }
 
