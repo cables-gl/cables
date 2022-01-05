@@ -2,13 +2,13 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Vibrate"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Supported",
                 "subType": "number"
             }
@@ -16,18 +16,17 @@
         "name": "Ops.Devices.Mobile.DeviceVibrate"
     },
     "summary": "vibrating a mobile device",
-    "updated": 1542699557440,
     "authorName": "pandur",
     "id": "e947fc63-e44e-4bdd-98e0-89e79373f073",
     "created": 1542699557913,
-    "youtubeid": "",
     "collections": [
         "hardware"
     ],
-    "relatedops": [
-        ""
-    ],
+    "relatedops": null,
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "youtubeids": [],
+    "caniusequery": "Navigator API: vibrate"
 }

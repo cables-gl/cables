@@ -20,6 +20,21 @@
             "message": "Ops.Admin.TestOp_v2 renamed to Ops.Dev.TestOp_v2",
             "author": "pandur",
             "date": 1623914609035
+        },
+        {
+            "message": " added lib: ammo.js",
+            "author": "cables",
+            "date": 1641374746337
+        },
+        {
+            "message": " added lib: tone.js",
+            "author": "cables",
+            "date": 1641374816294
+        },
+        {
+            "message": " removed lib: tone.js",
+            "author": "cables",
+            "date": 1641374825748
         }
     ],
     "authorName": "pandur",
@@ -69,5 +84,8 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "libs": [
+        "ammo.js"
+    ]
 }
