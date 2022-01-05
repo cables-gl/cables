@@ -230,7 +230,7 @@ op.exposeNode = function (name)
     newop.getPort("Node Name").set(name);
     op.patch.link(op, next.name, newop, "Render");
     gui.patchView.centerSelectOp(newop.id, true);
-    CABLES.UI.MODAL.hide();
+    gui.closeModal();
 };
 
 op.assignMaterial = function (name)
@@ -239,7 +239,7 @@ op.assignMaterial = function (name)
     newop.getPort("Material Name").set(name);
     op.patch.link(op, inMaterials.name, newop, "Material");
     gui.patchView.centerSelectOp(newop.id, true);
-    CABLES.UI.MODAL.hide();
+    gui.closeModal();
 };
 
 op.toggleNodeVisibility = function (name)

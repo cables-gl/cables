@@ -3,8 +3,6 @@ const
     syntax = op.inValueSelect("Syntax", ["text", "glsl", "css", "html", "xml", "json", "javascript"], "text"),
     result = op.outString("Result");
 
-// v.setUiAttribs({ "hidePort": true });
-
 syntax.onChange = updateSyntax;
 
 function updateSyntax()
