@@ -98,7 +98,6 @@ Mesh.prototype.setAttributePointer = function (attrName, name, stride, offset)
     }
 };
 
-
 Mesh.prototype.getAttribute = function (name)
 {
     for (let i = 0; i < this._attributes.length; i++) if (this._attributes[i].name == name) return this._attributes[i];
@@ -109,23 +108,25 @@ Mesh.prototype.setAttributeRange = function (attr, array, start, end)
     if (!attr) return;
     if (!start && !end) return;
 
+    if (!attr.name)
+    {
+        console.log(attr);
+        this._log.stack("no attrname?!");
+    }
+
     this._cgl.gl.bindBuffer(this._cgl.gl.ARRAY_BUFFER, attr.buffer);
     this._cgl.profileData.profileMeshAttributes += (end - start) || 0;
-
 
     this._cgl.profileData.profileSingleMeshAttribute[this._name] = this._cgl.profileData.profileSingleMeshAttribute[this._name] || 0;
     this._cgl.profileData.profileSingleMeshAttribute[this._name] += (end - start) || 0;
 
-
     if (attr.numItems < array.length / attr.itemSize)
     {
-        // this._log.log("wrong attr size", attr.numItems, array.length);
         this._resizeAttr(array, attr);
-
-        // return;
     }
 
-    if (end > array.length)
+
+    if (end >= array.length - 1)
     {
         this._log.log(this._cgl.canvas.id + " " + attr.name + " buffersubdata out of bounds ?", array.length, end, start, attr);
     }
@@ -430,17 +431,17 @@ Mesh.prototype._checkAttrLengths = function ()
     // check length
 
 
-    // for (let i = 0; i < this._attributes.length; i++)
-    // {
-    //     if (this._attributes[0].floatArray.length / this._attributes[0].itemSize != this._attributes[i].floatArray.length / this._attributes[i].itemSize)
-    //     {
-    //         this._log.warn(
-    //             this._geom.name + ": " + this._attributes[i].name +
-    //             " wrong attr length. is:", this._attributes[i].floatArray.length / this._attributes[i].itemSize,
-    //             " should be:", this._attributes[0].floatArray.length / this._attributes[0].itemSize,
-    //         );
-    //     }
-    // }
+    for (let i = 0; i < this._attributes.length; i++)
+    {
+        if (this._attributes[i].arrayLength / this._attributes[i].itemSize < this._attributes[0].arrayLength / this._attributes[0].itemSize)
+        {
+            this._log.warn(
+                this._geom.name + ": " + this._attributes[i].name +
+                " wrong attr length. is:", this._attributes[i].arrayLength / this._attributes[i].itemSize,
+                " should be:", this._attributes[0].arrayLength / this._attributes[0].itemSize,
+            );
+        }
+    }
 };
 
 Mesh.prototype._bind = function (shader)
@@ -456,8 +457,6 @@ Mesh.prototype._bind = function (shader)
     {
         this._lastAttrUpdate = shader.lastCompile;
         for (let i = 0; i < this._attributes.length; i++) attrLocs[i] = -1;
-
-        this._checkAttrLengths();
     }
 
     for (let i = 0; i < this._attributes.length; i++)
@@ -523,9 +522,8 @@ Mesh.prototype._bind = function (shader)
                         const pointer = attribute.pointer[ip];
 
                         if (pointer.loc == -1)
-                        {
                             pointer.loc = this._cgl.glGetAttribLocation(shader.getProgram(), pointer.name);
-                        }
+
                         this._cgl.profileData.profileAttrLoc++;
 
                         this._cgl.gl.enableVertexAttribArray(pointer.loc);
@@ -615,6 +613,9 @@ Mesh.prototype.render = function (shader)
     // TODO: enable/disablevertex only if the mesh has changed... think drawing 10000x the same mesh
 
     if (!shader || !shader.isValid()) return;
+
+    this._checkAttrLengths();
+
 
     if (this._geom)
     {
