@@ -80,7 +80,6 @@ req.onTriggered = function ()
             })
             .catch(op.error);
 
-
         window.DeviceOrientationEvent.requestPermission()
             .then((response) =>
             {
@@ -97,3 +96,9 @@ req.onTriggered = function ()
         window.addEventListener("deviceorientation", handleDeviceOrientation, true);
     }
 };
+
+if (window.self !== window.top)
+{
+    op.setUiError("iframe", "Device Vibratge does not work in an iframe, open the patch without an iframe to get it to work", 1);
+    op.warn("Device Vibratge does not work in an iframe, open the patch without an iframe to get it to work");
+}

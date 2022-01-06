@@ -17,82 +17,82 @@
     "layout": {
         "portsIn": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Mul Orientation",
                 "subType": "number"
             },
             {
-                "type": "1",
+                "type": 1,
                 "name": "Request Permissions"
             }
         ],
         "portsOut": [
             {
-                "type": "0",
+                "type": 0,
                 "name": "Orientation Alpha",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Orientation Beta",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Orientation Gamma",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration X",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Y",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Z",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration X no gravity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Y no gravity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Acceleration Z no gravity",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Rate Alpha",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Rate Beta",
                 "subType": "number"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Rotation Rate Gamma",
                 "subType": "number"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Object"
             }
         ],
-        "name": "Ops.Devices.Mobile.MotionSensor2"
+        "name": "Ops.Devices.Mobile.MotionSensor_v2"
     },
     "summary": "get values from the device motion sensor mobile",
     "issues": "",

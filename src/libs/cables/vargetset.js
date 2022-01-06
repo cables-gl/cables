@@ -131,10 +131,7 @@ const VarSetOpWrapper = class
 
         if (this._type == "object" || this._type == "array") this._op.patch.setVarValue(name, null);
 
-
         this._op.patch.setVarValue(name, this._valuePort.get());
-
-
 
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
