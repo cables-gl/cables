@@ -42,7 +42,7 @@ function updateName()
             return;
         }
 
-        gui.opParams.show(op);
+        if (op.isCurrentUiOp()) gui.opParams.show(op);
     }
 
     if (!op.patch.namedTriggers[op.varName.get()])

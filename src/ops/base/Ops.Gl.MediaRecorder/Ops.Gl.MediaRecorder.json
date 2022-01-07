@@ -29,6 +29,7 @@
             {
                 "type": 0,
                 "name": "Mimetype index",
+                "group": "Encoding",
                 "subType": "integer"
             },
             {
@@ -46,6 +47,7 @@
             {
                 "type": 0,
                 "name": "Media index",
+                "group": "Inputs",
                 "subType": "integer"
             },
             {
@@ -92,5 +94,6 @@
     "youtubeids": [],
     "docs": {
         "ports": []
-    }
+    },
+    "caniusequery": "MediaRecorder API"
 }

@@ -59,10 +59,6 @@
     "docs": {
         "ports": [
             {
-                "name": "Device",
-                "text": "list of your midi devices"
-            },
-            {
                 "name": "Note",
                 "text": "the input port for MIDI note events"
             },
@@ -75,5 +71,6 @@
                 "text": "the input port for MIDI NRPN events"
             }
         ]
-    }
+    },
+    "caniusequery": "Web MIDI API"
 }

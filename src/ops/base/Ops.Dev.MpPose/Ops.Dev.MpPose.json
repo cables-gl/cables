@@ -58,6 +58,36 @@
             {
                 "type": 2,
                 "name": "Element"
+            },
+            {
+                "type": 0,
+                "name": "Model Complexity index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Smooth Landmarks",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Enable Segmentation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Smooth Segmentation",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Min Detection Confidence",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Min Tracking Confidence",
+                "subType": "number"
             }
         ],
         "portsOut": [
@@ -79,7 +109,7 @@
                 "subType": "number"
             }
         ],
-        "name": "Ops.User.pandur.MpPose"
+        "name": "Ops.Dev.MpPose"
     },
     "summary": "",
     "issues": "",

@@ -90,9 +90,11 @@ function Particle()
         if (centerX.get())r -= 0.5;
         const x = r * sizeX.get();
 
+        r = Math.random();
         if (centerY.get())r -= 0.5;
         const y = r * sizeY.get();
 
+        r = Math.random();
         if (centerZ.get())r -= 0.5;
         const z = r * sizeZ.get();
 

@@ -1,19 +1,19 @@
 // constants
-var ARRAY_LENGTH_DEFAULT = 10;
-var INACTIVE_VALUE = 0;
-var ACTIVE_VALUE = 1;
+let ARRAY_LENGTH_DEFAULT = 10;
+let INACTIVE_VALUE = 0;
+let ACTIVE_VALUE = 1;
 
 // variables
-var stateArray = [];
+let stateArray = [];
 
 // inputs
-var arrayLengthPort = op.inValue('Array Length', ARRAY_LENGTH_DEFAULT);
-var activeIndexPort = op.inValue('Active Index', 0);
-var inactiveValuePort = op.inValue('Inactive Value', 0);
-var activeValuePort = op.inValue('Active Value', 1);
+let arrayLengthPort = op.inValue("Array Length", ARRAY_LENGTH_DEFAULT);
+let activeIndexPort = op.inValue("Active Index", 0);
+let inactiveValuePort = op.inValue("Inactive Value", 0);
+let activeValuePort = op.inValue("Active Value", 1);
 
 // outputs
-var stateArrayPort = op.outArray('State Array');
+let stateArrayPort = op.outArray("State Array");
 
 // change listeners
 arrayLengthPort.onChange = update;
@@ -26,15 +26,20 @@ update();
 
 // functions
 
-function update() {
-    var arrLength = arrayLengthPort.get();
-    var activeIndex = Math.round(activeIndexPort.get());
-    var inactiveValue = inactiveValuePort.get();
-    var activeValue = activeValuePort.get();
-    for(var i=0; i<arrLength; i++) {
-        if(i === activeIndex) {
+function update()
+{
+    let arrLength = Math.max(0, arrayLengthPort.get());
+    let activeIndex = Math.round(activeIndexPort.get());
+    let inactiveValue = inactiveValuePort.get();
+    let activeValue = activeValuePort.get();
+    for (let i = 0; i < arrLength; i++)
+    {
+        if (i === activeIndex)
+        {
             stateArray[i] = activeValue;
-        } else {
+        }
+        else
+        {
             stateArray[i] = inactiveValue;
         }
     }
