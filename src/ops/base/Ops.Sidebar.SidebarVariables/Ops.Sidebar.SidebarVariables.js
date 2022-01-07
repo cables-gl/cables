@@ -1,28 +1,28 @@
 // inputs
-var parentPort = op.inObject('link');
-var inId = op.inValueString('Id', '');
-var inUpdate=op.inTriggerButton("update");
+let parentPort = op.inObject("link");
+let inId = op.inValueString("Id", "");
+let inUpdate = op.inTriggerButton("update");
 
 // outputs
-var siblingsPort = op.outObject('childs');
+let siblingsPort = op.outObject("childs");
 
 // vars
-var el = document.createElement('div');
-el.classList.add('sidebar__item');
-el.classList.add('sidebar__text');
-var label = document.createElement('div');
+let el = document.createElement("div");
+el.classList.add("sidebar__item");
+el.classList.add("sidebar__text");
+let label = document.createElement("div");
 // label.classList.add('sidebar__item-label');
 
 el.appendChild(label);
 
 // events
 parentPort.onChange = onParentChanged;
-inUpdate.onTriggered=update;
+inUpdate.onTriggered = update;
 
 inId.onChange = onIdChanged;
 op.onDelete = onDelete;
 
-op.toWorkNeedsParent('Ops.Sidebar.Sidebar');
+op.toWorkNeedsParent("Ops.Sidebar.Sidebar");
 
 update();
 
@@ -30,10 +30,11 @@ update();
 
 function onIdChanged()
 {
-    el.id=inId.get();
+    el.id = inId.get();
 }
 
-function update() {
+function update()
+{
     // var labelText = labelPort.get();
     // label.textContent = labelText;
     // if(CABLES.UI) {
@@ -44,51 +45,63 @@ function update() {
     //     }
     // }
 
-    var vars= op.patch.getVars();
-    var html='<table style="font-size:13px;">';
-    for(var ki in vars)
+    let vars = op.patch.getVars();
+    let html = "<table style=\"font-size:13px;\">";
+    for (let ki in vars)
     {
-        var v=vars[ki].getValue();
+        let v = vars[ki].getValue();
 
-        if(typeof v =='object') v="[object]";
-        html+='<tr><td>'+ki+'</td><td><b>'+v+'</b></td></tr>';
+        if (typeof v == "object") v = "[object]";
+        html += "<tr><td>" + ki + "</td><td><b>" + v + "</b></td></tr>";
     }
-    html+='</table>';
+    html += "</table>";
 
-    label.innerHTML=html;
+    label.innerHTML = html;
 }
 
-function onParentChanged() {
-    var parent = parentPort.get();
-    if(parent && parent.parentElement) {
+function onParentChanged()
+{
+    siblingsPort.set(null);
+    let parent = parentPort.get();
+    if (parent && parent.parentElement)
+    {
         parent.parentElement.appendChild(el);
-        siblingsPort.set(null);
         siblingsPort.set(parent);
-    } else { // detach
-        if(el.parentElement) {
+    }
+    else
+    { // detach
+        if (el.parentElement)
+        {
             el.parentElement.removeChild(el);
         }
     }
 }
 
-function showElement(el) {
-    if(el) {
-        el.style.display = 'block';
+function showElement(el)
+{
+    if (el)
+    {
+        el.style.display = "block";
     }
 }
 
-function hideElement(el) {
-    if(el) {
-        el.style.display = 'none';
+function hideElement(el)
+{
+    if (el)
+    {
+        el.style.display = "none";
     }
 }
 
-function onDelete() {
+function onDelete()
+{
     removeElementFromDOM(el);
 }
 
-function removeElementFromDOM(el) {
-    if(el && el.parentNode && el.parentNode.removeChild) {
+function removeElementFromDOM(el)
+{
+    if (el && el.parentNode && el.parentNode.removeChild)
+    {
         el.parentNode.removeChild(el);
     }
 }

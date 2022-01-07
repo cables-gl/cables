@@ -85,11 +85,11 @@ function onLabelTextChanged()
 
 function onParentChanged()
 {
+    childrenPort.set(null);
     let parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
-        childrenPort.set(null);
         childrenPort.set({
             "parentElement": groupItems,
             "parentOp": op,

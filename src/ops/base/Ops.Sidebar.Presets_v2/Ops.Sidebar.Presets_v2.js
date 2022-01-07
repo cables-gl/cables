@@ -83,11 +83,11 @@ function updateSelect()
 
 function onParentChanged()
 {
+    siblingsPort.set(null);
     const parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
-        siblingsPort.set(null);
         siblingsPort.set(parent);
     }
     else
