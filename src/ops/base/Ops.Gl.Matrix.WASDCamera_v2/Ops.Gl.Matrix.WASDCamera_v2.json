@@ -31,6 +31,11 @@
             },
             {
                 "type": 0,
+                "name": "Active",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Move X+",
                 "group": "Move",
                 "subType": "boolean"

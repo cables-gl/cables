@@ -80,11 +80,11 @@ function onLabelTextChanged()
 
 function onParentChanged()
 {
+    siblingsPort.set(null);
     let parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(el);
-        siblingsPort.set(null);
         siblingsPort.set(parent);
     }
     else

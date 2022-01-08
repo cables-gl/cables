@@ -17,6 +17,6 @@ inVibrate.onTriggered = function ()
 
 if (window.self !== window.top)
 {
-    op.setUiError("iframe", "Device Vibratge does not work in an iframe, open the patch without an iframe to get it to work", 1);
-    op.warn("Device Vibratge does not work in an iframe, open the patch without an iframe to get it to work");
+    op.setUiError("iframe", "DeviceVibrate does not work in an iframe, open the patch without an iframe to get it to work", 1);
+    op.warn("DeviceVibrate does not work in an iframe, open the patch without an iframe to get it to work");
 }

@@ -7,6 +7,7 @@ const
     moveSpeed = op.inFloat("Speed", 1),
     mouseSpeed = op.inFloat("Mouse Speed", 1),
     fly = op.inValueBool("Allow Flying", true),
+    inActive = op.inBool("Active", true),
 
     inMoveXPos = op.inBool("Move X+"),
     inMoveXNeg = op.inBool("Move X-"),
@@ -69,6 +70,19 @@ inReset.onTriggered = () =>
     posX = 0;
     posY = 0;
     posZ = 0;
+};
+
+inActive.onChange = () =>
+{
+    document.exitPointerLock();
+    removeListener();
+
+    lockChangeCallback();
+
+    if (inActive.get())
+    {
+        initListener();
+    }
 };
 
 render.onTriggered = function ()
@@ -246,6 +260,19 @@ function startPointerLock()
                                     canvas.webkitRequestPointerLock;
         canvas.requestPointerLock();
     }
+}
+
+function removeListener()
+{
+    cgl.canvas.removeEventListener("pointermove", moveCallbackNoPL, false);
+    cgl.canvas.removeEventListener("pointerup", upCallbackNoPL, false);
+    cgl.canvas.removeEventListener("keydown", keyDown, false);
+    cgl.canvas.removeEventListener("keyup", keyUp, false);
+
+    document.removeEventListener("pointerlockchange", lockChangeCallback, false);
+    document.removeEventListener("mozpointerlockchange", lockChangeCallback, false);
+    document.removeEventListener("webkitpointerlockchange", lockChangeCallback, false);
+    document.getElementById("glcanvas").removeEventListener("mousedown", startPointerLock);
 }
 
 function initListener()

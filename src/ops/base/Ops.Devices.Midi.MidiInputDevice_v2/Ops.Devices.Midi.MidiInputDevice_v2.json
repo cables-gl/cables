@@ -66,10 +66,6 @@
     "docs": {
         "ports": [
             {
-                "name": "Device",
-                "text": "list of your midi devices"
-            },
-            {
                 "name": "Learn",
                 "text": "press button and send midi signal to automatically create op"
             },
@@ -105,5 +101,6 @@
             "author": "pandur",
             "date": 1560333646996
         }
-    ]
+    ],
+    "caniusequery": "Web MIDI API"
 }

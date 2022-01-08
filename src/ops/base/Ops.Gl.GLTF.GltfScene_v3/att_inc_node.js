@@ -152,7 +152,7 @@ const gltfNode = class
 
     transform(cgl, _time)
     {
-        if (!_time)_time = time;
+        if (!_time && _time!=0)_time = time;
 
         // mat4.identity(cgl.mMatrix);
 

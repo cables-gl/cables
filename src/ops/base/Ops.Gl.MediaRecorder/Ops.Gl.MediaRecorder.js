@@ -215,7 +215,7 @@ function download()
     const a = document.createElement("a");
     a.style.display = "none";
     a.href = url;
-    const codec = "mediaRecorder.mimeType";
+    const codec = mediaRecorder.mimeType;
     let ext = "webm";
     if (codec.indexOf("video/x-matroska") >= 0)ext = "mkv";
     if (codec.indexOf("video/mp4") >= 0)ext = "mp4";

@@ -20,8 +20,8 @@ eleClose.style["line-height"] = "25px";
 eleClose.style["z-index"] = "9999";
 eleClose.style.cursor = "pointer";
 eleClose.style["font-size"] = "50px";
-eleClose.addEventListener("click", hide);
-eleContainer.addEventListener("click", hide);
+eleClose.addEventListener("pointerdown", hide);
+eleContainer.addEventListener("pointerdown", hide);
 eleContainer.appendChild(eleClose);
 
 inOpacity.onChange = updateBgColor;

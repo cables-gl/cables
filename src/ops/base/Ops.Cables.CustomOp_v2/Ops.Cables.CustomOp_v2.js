@@ -140,7 +140,7 @@ function loadLibAndExecute()
         scriptTag = document.createElement("script");
         scriptTag.id = "customlib_" + op.id;
         scriptTag.type = "text/javascript";
-        scriptTag.src = inLib.get();
+        scriptTag.src = op.patch.getFilePath(String(inLib.get()));
         scriptTag.onload = function ()
         {
             op.logVerbose("done loading library", inLib.get());

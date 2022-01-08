@@ -31,12 +31,11 @@ function setStyle()
 
 function onParentChanged()
 {
+    siblingsPort.set(null);
     const parent = parentPort.get();
     if (parent && parent.parentElement)
     {
-        siblingsPort.set(null);
         siblingsPort.set(parent);
-
         sideBarEle = parent.parentElement.parentElement;
         setStyle();
     }

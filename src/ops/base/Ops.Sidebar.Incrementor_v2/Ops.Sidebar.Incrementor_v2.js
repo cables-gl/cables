@@ -177,11 +177,11 @@ function onPrev()
 
 function onParentChanged()
 {
+    siblingsPort.set(null);
     const parent = parentPort.get();
     if (parent && parent.parentElement)
     {
         parent.parentElement.appendChild(containerEl);
-        siblingsPort.set(null);
         siblingsPort.set(parent);
     }
     else if (containerEl.parentElement)
