@@ -64,6 +64,7 @@ const Port = function (__parent, name, type, uiAttribs)
 
     this._warnedDeprecated = false;
     this._useVariableName = null;
+    this.activityCounter = 0;
 
     this._tempLastUiValue = null;
     // this.onUiAttrChange=null;
@@ -305,7 +306,7 @@ Port.prototype.forceChange = function ()
         // var params=Port.args(this.onValueChanged||this.onChange)
         // if(params.length>0) this._log.warn('TOM: port has onchange params!',this.parent.objName,this.name);
     }
-
+    this._activity();
     this.emitEvent("change", this.value, this);
 
     if (this.onChange) this.onChange(this, this.value);
@@ -494,6 +495,11 @@ Port.prototype.isLinkedTo = function (p2)
     return false;
 };
 
+Port.prototype._activity = function ()
+{
+    this.activityCounter++;
+};
+
 /**
  * @function trigger
  * @memberof Port
@@ -502,6 +508,7 @@ Port.prototype.isLinkedTo = function (p2)
  */
 Port.prototype.trigger = function ()
 {
+    this._activity();
     if (this.links.length === 0) return;
     if (!this.parent.enabled) return;
 
@@ -710,6 +717,7 @@ Port.prototype.isHidden = function ()
  */
 Port.prototype._onTriggered = function (a)
 {
+    this._activity();
     this.parent.updateAnims();
     if (this.parent.enabled && this.onTriggered) this.onTriggered(a);
 };
