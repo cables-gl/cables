@@ -44,8 +44,12 @@
     "authorName": "pandur",
     "id": "4fb6167d-a9b0-4604-84c4-755b09fd8dd7",
     "created": 1519027703473,
-    "summary": "convert color to balck and white patterns",
+    "summary": "convert color to black and white patterns",
     "docs": {
         "ports": []
-    }
+    },
+    "issues": "",
+    "collections": null,
+    "relatedops": null,
+    "youtubeids": []
 }

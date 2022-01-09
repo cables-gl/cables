@@ -57,7 +57,7 @@
         ],
         "name": "Ops.Gl.GLTF.GltfNodeTransform_v2"
     },
-    "summary": "Control a single node from the GLTFscene op",
+    "summary": "Get the transform from the GLTFscene op",
     "issues": "",
     "collections": null,
     "relatedops": [

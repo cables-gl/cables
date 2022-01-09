@@ -75,8 +75,23 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "I_eD5nml_5A"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Node Name",
+                "text": "Mesh Skin name to render"
+            },
+            {
+                "name": "Scene Time",
+                "text": "use GLTF scene timer or not"
+            },
+            {
+                "name": "Time",
+                "text": "separate timing for selected Mesh Skin"
+            }
+        ]
     }
 }
