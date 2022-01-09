@@ -42,11 +42,11 @@ function printNode(html, node, level)
         }
         html += "</td>";
 
-        html += "<td><!-- skin -->";
+        html += "<td>";
         html += node.hasSkin() || "-";
         html += "</td>";
 
-        html += "<td><!-- material> -->";
+        html += "<td>";
         let countMats = 0;
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
@@ -65,7 +65,7 @@ function printNode(html, node, level)
     }
 
 
-    html += "<td><!-- anim -->";
+    html += "<td>";
     if (node._animRot || node._animScale || node._animTrans)
     {
         if (node._animRot) html += "Rot ";

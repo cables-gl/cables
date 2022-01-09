@@ -15,11 +15,6 @@
                 "type": 0,
                 "name": "cursor index",
                 "subType": "integer"
-            },
-            {
-                "type": 0,
-                "name": "cursor",
-                "subType": "string"
             }
         ],
         "portsOut": [
