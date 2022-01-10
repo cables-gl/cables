@@ -435,8 +435,10 @@ Mesh.prototype._checkAttrLengths = function ()
     {
         if (this._attributes[i].arrayLength / this._attributes[i].itemSize < this._attributes[0].arrayLength / this._attributes[0].itemSize)
         {
+            let name = "unknown";
+            if (this._geom)name = this._geom.name;
             this._log.warn(
-                this._geom.name + ": " + this._attributes[i].name +
+                name + ": " + this._attributes[i].name +
                 " wrong attr length. is:", this._attributes[i].arrayLength / this._attributes[i].itemSize,
                 " should be:", this._attributes[0].arrayLength / this._attributes[0].itemSize,
             );

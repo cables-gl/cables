@@ -1,31 +1,57 @@
 const
-    colName=op.inString("Column Name","name"),
-    inArr=op.inArray("CSV Array"),
-    result=op.outArray("Result");
+    colName = op.inString("Column Name", "name"),
+    inArr = op.inArray("CSV Array"),
+    inNumbers = op.inBool("Numbers", false),
+    result = op.outArray("Result");
 
-colName.onChange=
-    inArr.onChange=update;
+colName.onChange =
+inNumbers.onChange =
+    inArr.onChange = update;
 
 function update()
 {
-    let iArr=inArr.get();
-    let iName=colName.get();
+    let iArr = inArr.get();
+    let iName = colName.get();
 
-    if(!iArr)
+    if (!iArr)
     {
         result.set(null);
         return;
     }
 
-    if(iArr[0].hasOwnProperty(iName))
-    {
-        let arr=[];
+    op.setUiError("notfound", null);
+    op.setUiError("notnum", null);
 
-        for(let i=0;i<iArr.length;i++)
+    if (iArr[0].hasOwnProperty(iName))
+    {
+        let arr = [];
+
+        let hasStrings = false;
+
+        if (inNumbers.get())
         {
-            arr.push(iArr[i][iName]);
+            for (let i = 0; i < iArr.length; i++)
+            {
+                let n = Number(iArr[i][iName] || 0);
+                arr.push(n);
+                if (!CABLES.UTILS.isNumeric(iArr[i][iName]))
+                {
+                    hasStrings = true;
+                }
+            }
+
+            if (hasStrings)
+            {
+                op.setUiError("notnum", "Parse Error / Not all values numerical!");
+            }
+        }
+        else
+        {
+            for (let i = 0; i < iArr.length; i++)
+                arr.push(iArr[i][iName]);
         }
         result.set(arr);
     }
-
+    else
+        op.setUiError("notfound", "Column not found");
 }
