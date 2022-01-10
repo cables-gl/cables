@@ -46,8 +46,19 @@
     "issues": "",
     "collections": null,
     "relatedops": null,
-    "youtubeids": [],
+    "youtubeids": [
+        "I_eD5nml_5A"
+    ],
     "docs": {
-        "ports": []
+        "ports": [
+            {
+                "name": "Node name",
+                "text": "GLTF node name to start hierarchy extraction from"
+            },
+            {
+                "name": "Bones Lines",
+                "text": "Array3 of node positions"
+            }
+        ]
     }
 }

@@ -17,10 +17,11 @@ key.onChange = function ()
 
 function update()
 {
+    console.log(data.get());
     result.set(null);
     const dat = data.get();
     const k = key.get();
-    if (dat && dat.hasOwnProperty(k))
+    if (dat && (dat.hasOwnProperty(k) || dat[k]))
     {
         result.set(dat[k]);
         if (!result.get())
