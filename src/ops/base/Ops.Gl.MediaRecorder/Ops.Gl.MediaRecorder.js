@@ -61,16 +61,27 @@ const cgl = op.patch.cgl;
 
 let cgl_filter = 0;
 let cgl_wrap = 0;
-
 let tex = null;
 let timeout = null;
 let firstTime = true;
-
-recordingToggle.onChange = toggleRecording;
-
 let mediaRecorder;
 let recordedBlobs;
 let sourceBuffer;
+
+recordingToggle.onChange = toggleRecording;
+
+inFPS.onChange =
+    inMbit.onChange =
+    inMedia.onChange =
+    inAudio.onChange =
+    inCanvasId.onChange =
+    inCodecs.onChange = setupMediaRecorder;
+
+op.patch.cgl.on("resize", () =>
+{
+    console.log(op.patch.cgl.canvas.width, op.patch.cgl.canvas.height, op.patch.cgl.pixelDensity);
+    mediaRecorder = null;
+});
 
 setupMediaRecorder();
 
@@ -87,13 +98,6 @@ function toggleRecording()
     if (recordingToggle.get()) startRecording();
     else stopRecording();
 }
-
-inFPS.onChange =
-inMbit.onChange =
-inMedia.onChange =
-inAudio.onChange =
-inCanvasId.onChange =
-inCodecs.onChange = setupMediaRecorder;
 
 function setupMediaRecorder()
 {
