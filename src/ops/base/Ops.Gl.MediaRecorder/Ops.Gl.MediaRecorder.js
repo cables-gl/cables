@@ -79,7 +79,8 @@ inFPS.onChange =
 
 op.patch.cgl.on("resize", () =>
 {
-    console.log(op.patch.cgl.canvas.width, op.patch.cgl.canvas.height, op.patch.cgl.pixelDensity);
+    if (mediaRecorder)mediaRecorder.stop();
+    // console.log(op.patch.cgl.canvas.width, op.patch.cgl.canvas.height, op.patch.cgl.pixelDensity);
     mediaRecorder = null;
 });
 
