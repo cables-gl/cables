@@ -99,6 +99,9 @@ const Context = function (_patch)
 
     this.addEventListener = function (event, cb)
     {
+        console.log("cgl state old addEventListener");
+        this._log.stack("cgl state old addEventListener");
+
         if (event == "resize") cbResize.push(cb);
     };
 
@@ -301,6 +304,7 @@ const Context = function (_patch)
             this.updateSize();
 
             for (let i = 0; i < cbResize.length; i++) cbResize[i]();
+            this.emitEvent("resize");
         }
 
         if (this._cursor != this._currentCursor)

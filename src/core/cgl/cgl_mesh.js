@@ -429,8 +429,6 @@ Mesh.prototype._preBind = function (shader)
 Mesh.prototype._checkAttrLengths = function ()
 {
     // check length
-
-
     for (let i = 0; i < this._attributes.length; i++)
     {
         if (this._attributes[i].arrayLength / this._attributes[i].itemSize < this._attributes[0].arrayLength / this._attributes[0].itemSize)

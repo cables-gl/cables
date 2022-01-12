@@ -33,7 +33,7 @@ const init = function ()
     if (wasPasted) wasPasted = false;
 };
 
-op.onLoaded = init;
+op.onLoadedValueSet = init;
 op.patch.on("onOpAdd", (newOp, fromDeserizalize) =>
 {
     if (op == newOp && !fromDeserizalize)
@@ -95,7 +95,6 @@ op.onError = function (ex)
         op.patch.emitEvent("exceptionOp", ex, op.name);
     }
 };
-
 
 const getEvalFunction = () =>
 {
@@ -243,14 +242,14 @@ const execute = () =>
                 {
                     port.onLinkChanged = savePortData;
 
-                    if (!wasPasted)
+                    // if (!wasPasted)
                     {
                         if (oldLinksIn[port.name])
                         {
                             oldLinksIn[port.name].forEach((link) =>
                             {
                                 const newLink = op.patch.link(op, port.name, link.op, link.portName);
-                                if (newLink) newLink.ignoreInSerialize = true;
+                                // if (newLink) newLink.ignoreInSerialize = true;
                             });
                         }
 
@@ -264,14 +263,14 @@ const execute = () =>
             op.portsOut.forEach((port) =>
             {
                 port.onLinkChanged = savePortData;
-                if (!wasPasted)
+                // if (!wasPasted)
                 {
                     if (oldLinksOut[port.name])
                     {
                         oldLinksOut[port.name].forEach((link) =>
                         {
                             const newLink = op.patch.link(op, port.name, link.op, link.portName);
-                            if (newLink) newLink.ignoreInSerialize = true;
+                            // if (newLink) newLink.ignoreInSerialize = true;
                         });
                     }
                 }
@@ -327,7 +326,7 @@ function savePortData()
             };
             port.links.forEach((link) =>
             {
-                link.ignoreInSerialize = true;
+                // link.ignoreInSerialize = true;
                 const linkData = {
                     "objOut": link.portOut.parent.id,
                     "portOut": link.portOut.name
@@ -355,7 +354,7 @@ function savePortData()
             };
             port.links.forEach((link) =>
             {
-                link.ignoreInSerialize = true;
+                // link.ignoreInSerialize = true;
                 const linkData = {
                     "objIn": link.portIn.parent.id,
                     "portIn": link.portIn.name
@@ -403,7 +402,7 @@ const restorePorts = () =>
                 if (parent)
                 {
                     const newLink = op.patch.link(parent, link.portOut, op, newPort.name);
-                    if (newLink) newLink.ignoreInSerialize = true;
+                    // if (newLink) newLink.ignoreInSerialize = true;
                 }
             });
         }
@@ -432,7 +431,7 @@ const restorePorts = () =>
                 if (parent)
                 {
                     const newLink = op.patch.link(op, newPort.name, parent, link.portIn);
-                    if (newLink) newLink.ignoreInSerialize = true;
+                    // if (newLink) newLink.ignoreInSerialize = true;
                 }
             });
             if (!newPort.isLinked())
