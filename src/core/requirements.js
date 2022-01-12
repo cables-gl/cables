@@ -58,7 +58,7 @@ Requirements.prototype.checkOp = function (op)
                     if (Requirements.infos[reqId].caniuse) title = "<a href=\"" + Requirements.infos[reqId].caniuse + "\" target=\"_blank\">" + Requirements.infos[reqId].title + " (" + op.objName + ")</a>";
                     // document.writeln('<pre>browser does not meet requirement: '+title+'</pre>');
                     // console.error("browser does not meet requirement: "+Requirements.infos[reqId].title);
-                    throw new Error("this browser does not meet requirement: " + Requirements.infos[reqId].title + " (" + op.objName + ")");
+                    console.warn("this browser does not meet requirement: " + Requirements.infos[reqId].title + " (" + op.objName + ")");
                 }
 
                 this.result[reqId] = {

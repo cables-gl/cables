@@ -83,7 +83,6 @@ function doRender()
             _w = w;
         }
 
-        console.log(w, h);
         cgl.setViewPort((w - _w) / 2, (h - _h) / 2, _w, _h);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     }
