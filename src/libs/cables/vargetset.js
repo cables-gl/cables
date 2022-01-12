@@ -129,7 +129,18 @@ const VarSetOpWrapper = class
         if (CABLES.watchVars && CABLES.watchVars[name])
             console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
 
-        if (this._type == "object" || this._type == "array") this._op.patch.setVarValue(name, null);
+
+        if (this._type == "array")
+        {
+            this._arr = this._arr || [];
+            CABLES.UTILS.copyArray(this._valuePort.get(), this._arr);
+            this._op.patch.setVarValue(name, this._arr);
+        }
+        if (this._type == "object")
+        {
+            CABLES.UTILS.copyArray;
+            this._op.patch.setVarValue(name, null);
+        }
 
         this._op.patch.setVarValue(name, this._valuePort.get());
 

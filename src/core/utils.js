@@ -328,6 +328,28 @@ export const cacheBust = function (url)
 };
 
 /**
+ * copy the content of an array
+ * @function copyArray
+ * @static
+ * @memberof Utils
+ * @param {Array} sourceArray
+ * @param {Array} dst optional
+ * @return {Array} dst
+ */
+export const copyArray = function (src, dst)
+{
+    dst = dst || [];
+    dst.length = src.length;
+    for (let i = 0; i < src.length; i++)
+    {
+        dst[i] = src[i];
+    }
+
+    return dst;
+};
+
+
+/**
  * return the filename part of a url
  * @function basename
  * @static
