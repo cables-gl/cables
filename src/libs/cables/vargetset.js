@@ -134,15 +134,18 @@ const VarSetOpWrapper = class
         {
             this._arr = this._arr || [];
             CABLES.copyArray(this._valuePort.get(), this._arr);
+            this._op.patch.setVarValue(name, null);
             this._op.patch.setVarValue(name, this._arr);
         }
-        if (this._type == "object")
+        else
         {
-            this._op.patch.setVarValue(name, null);
+            if (this._type == "object")
+            {
+                this._op.patch.setVarValue(name, null);
+            }
+
+            this._op.patch.setVarValue(name, this._valuePort.get());
         }
-
-        this._op.patch.setVarValue(name, this._valuePort.get());
-
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };
