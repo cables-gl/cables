@@ -138,7 +138,6 @@ const VarSetOpWrapper = class
         }
         if (this._type == "object")
         {
-            CABLES.UTILS.copyArray;
             this._op.patch.setVarValue(name, null);
         }
 
