@@ -133,7 +133,7 @@ const VarSetOpWrapper = class
         if (this._type == "array")
         {
             this._arr = this._arr || [];
-            CABLES.UTILS.copyArray(this._valuePort.get(), this._arr);
+            CABLES.copyArray(this._valuePort.get(), this._arr);
             this._op.patch.setVarValue(name, this._arr);
         }
         if (this._type == "object")
