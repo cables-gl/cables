@@ -26,7 +26,7 @@ to create an API key goto your settings, select the tab "apikey" and click "crea
 
 use this to test your apikey via command line:
 
-`curl -H 'X-apikey: YOUR_API_KEY' 'http://cables.gl/api/mypatches'`
+`curl -H 'X-apikey: YOUR_API_KEY' 'https://cables.gl/api/mypatches'`
 
 #### exporting cables projects
 
