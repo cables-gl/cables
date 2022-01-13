@@ -364,7 +364,7 @@ Port.prototype.getSerialized = function ()
     if (this._animated) obj.animated = true;
     if (this.anim) obj.anim = this.anim.getSerialized();
     if (this.uiAttribs.display == "file") obj.display = this.uiAttribs.display;
-    if (this.direction == CONSTANTS.PORT.PORT_DIR_IN && this.links.length > 0)
+    if (this.direction == CONSTANTS.PORT.PORT_DIR_OUT && this.links.length > 0)
     {
         obj.links = [];
         for (const i in this.links)
