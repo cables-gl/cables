@@ -826,6 +826,7 @@ Patch.prototype.reloadOp = function (objName, cb)
                 {
                     p.set(oldOp.portsIn[j].get());
 
+
                     if (oldOp.portsIn[j].getVariableName())
                         p.setVariable(oldOp.portsIn[j].getVariableName());
                 }
@@ -1004,12 +1005,6 @@ Patch.prototype.deSerialize = function (obj, genIds)
                     }
                 }
             }
-            if (obj.ops[iop].portsOut)
-                for (let ipi2 = 0; ipi2 < obj.ops[iop].portsOut.length; ipi2++)
-                    if (obj.ops[iop].portsOut[ipi2].links)
-                        for (let ili = 0; ili < obj.ops[iop].portsOut[ipi2].links.length; ili++)
-                            if (obj.ops[iop].portsOut[ipi2].links[ili])
-                                addLink(obj.ops[iop].portsOut[ipi2].links[ili].objIn, obj.ops[iop].portsOut[ipi2].links[ili].objOut, obj.ops[iop].portsOut[ipi2].links[ili].portIn, obj.ops[iop].portsOut[ipi2].links[ili].portOut);
         }
     }
 
@@ -1184,7 +1179,7 @@ Patch.prototype._sortVars = function ()
     const ordered = {};
     Object.keys(this._variables).sort(
         (a, b) =>
-        { return a.localeCompare(b, "en", { "sensitivity": "base" }); }
+            a.localeCompare(b, "en", { "sensitivity": "base" })
     ).forEach((key) =>
     {
         ordered[key] = this._variables[key];
