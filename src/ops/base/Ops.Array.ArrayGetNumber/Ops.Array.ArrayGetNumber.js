@@ -1,20 +1,20 @@
 const
-    array=op.inArray("array"),
-    index=op.inValueInt("index"),
-    value=op.outValue("value");
+    array = op.inArray("array"),
+    index = op.inValueInt("index"),
+    value = op.outValue("value");
 
-array.ignoreValueSerialize=true;
+array.ignoreValueSerialize = true;
 
-index.onChange=array.onChange=update;
+index.onChange = array.onChange = update;
 
 function update()
 {
-    if(array.get())
+    if (array.get())
     {
-        var input=array.get()[index.get()];
-        if(isNaN(input))
+        let input = array.get()[index.get()];
+        if (isNaN(input))
         {
-            value.set(NaN);
+            value.set(0);
             return;
         }
         value.set(input);

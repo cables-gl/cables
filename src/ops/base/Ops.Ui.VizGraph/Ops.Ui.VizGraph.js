@@ -8,7 +8,7 @@ const
     inNum7 = op.inFloat("Number 7"),
     inNum8 = op.inFloat("Number 8");
 
-op.setUiAttrib({ "height": 150 });
+op.setUiAttrib({ "height": 150, "resizable": true });
 
 // inNum.onChange = () => { outNum.set(inNum.get()); };
 

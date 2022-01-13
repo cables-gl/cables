@@ -65,6 +65,11 @@
                 "subType": "number"
             },
             {
+                "type": 0,
+                "name": "Resizable",
+                "subType": "boolean"
+            },
+            {
                 "type": 1,
                 "name": "trigger"
             },
@@ -98,7 +103,13 @@
                 "name": "Open new Tab"
             }
         ],
-        "portsOut": [],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "Something",
+                "subType": "number"
+            }
+        ],
         "name": "Ops.Templates.UiTestOp"
     },
     "summary": "UI indicators example op",

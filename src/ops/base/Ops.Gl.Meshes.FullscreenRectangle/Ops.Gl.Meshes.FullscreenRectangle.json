@@ -8,8 +8,8 @@
             },
             {
                 "type": 0,
-                "name": "Center in Canvas",
-                "subType": "boolean"
+                "name": "Scale index",
+                "subType": "integer"
             },
             {
                 "type": 0,

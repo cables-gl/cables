@@ -3,17 +3,18 @@ const
     inUiError = op.inBool("Error", false),
     inUiHint = op.inBool("Hint", false),
     innum = op.inFloatSlider("Slider", 0),
+    inResize = op.inBool("Resizable"),
     trig = op.inTrigger("trigger"),
     inLog = op.inTriggerButton("op.log()"),
     inLogWarn = op.inTriggerButton("op.logWarn()"),
     inLogErr = op.inTriggerButton("op.logError()"),
     inPrompt = op.inTriggerButton("Open Prompt"),
     inModal = op.inTriggerButton("Open Modal"),
-    inTab = op.inTriggerButton("Open new Tab");
+    inTab = op.inTriggerButton("Open new Tab"),
+    outBlah = op.outNumber("Something");
 
 op.setPortGroup("Warnings", [inWarning1, inUiHint, inUiError]);
 op.setPortGroup("Logging", [inLog, inLogWarn, inLogErr]);
-
 op.setPortGroup("Modal", [inPrompt, inModal]);
 
 inWarning1.onChange = () =>
@@ -78,6 +79,11 @@ inPrompt.onTriggered = () =>
             console.log("yes! prompt finished", v);
         }
     });
+};
+
+inResize.onChange = () =>
+{
+    op.setUiAttrib({ "resizable": inResize.get() });
 };
 
 inModal.onTriggered = () =>

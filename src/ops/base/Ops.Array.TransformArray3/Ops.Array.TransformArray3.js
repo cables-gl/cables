@@ -1,17 +1,21 @@
 const
     inExec = op.inTriggerButton("Transform"),
     inArr = op.inArray("Array"),
-    transX = op.inValue("Translate X"),
-    transY = op.inValue("Translate Y"),
-    transZ = op.inValue("Translate Z"),
-    scaleX = op.inValueSlider("Scale X", 1),
-    scaleY = op.inValueSlider("Scale Y", 1),
-    scaleZ = op.inValueSlider("Scale Z", 1),
-    rotX = op.inValue("Rotation X"),
-    rotY = op.inValue("Rotation Y"),
-    rotZ = op.inValue("Rotation Z"),
+    transX = op.inFloat("Translate X"),
+    transY = op.inFloat("Translate Y"),
+    transZ = op.inFloat("Translate Z"),
+    scaleX = op.inFloat("Scale X", 1),
+    scaleY = op.inFloat("Scale Y", 1),
+    scaleZ = op.inFloat("Scale Z", 1),
+    rotX = op.inFloat("Rotation X"),
+    rotY = op.inFloat("Rotation Y"),
+    rotZ = op.inFloat("Rotation Z"),
     next = op.outTrigger("Next"),
     outArr = op.outArray("Result");
+
+op.setPortGroup("Translation", [transX, transY, transZ]);
+op.setPortGroup("Scale", [scaleX, scaleY, scaleZ]);
+op.setPortGroup("Rotation", [rotX, rotY, rotZ]);
 
 let resultArr = [];
 let needsCalc = true;

@@ -1,6 +1,6 @@
 const
     render = op.inTrigger("render"),
-    centerInCanvas = op.inValueBool("Center in Canvas"),
+    inScale = op.inSwitch("Scale", ["Stretch", "Fit"], "Stretch"),
     flipY = op.inValueBool("Flip Y"),
     flipX = op.inValueBool("Flip X"),
     inTexture = op.inTexture("Texture"),
@@ -11,7 +11,7 @@ let mesh = null;
 let geom = new CGL.Geometry("fullscreen rectangle");
 let x = 0, y = 0, z = 0, w = 0, h = 0;
 
-centerInCanvas.onChange = rebuild;
+// inScale.onChange = rebuild;
 flipX.onChange = rebuildFlip;
 flipY.onChange = rebuildFlip;
 
@@ -20,9 +20,11 @@ shader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"
 
 shader.setSource(attachments.shader_vert, attachments.shader_frag);
 shader.fullscreenRectUniform = new CGL.Uniform(shader, "t", "tex", 0);
+shader.aspectUni = new CGL.Uniform(shader, "f", "aspectTex", 0);
 
 let useShader = false;
 let updateShaderLater = true;
+let fitImageAspect = false;
 render.onTriggered = doRender;
 
 op.toWorkPortsNeedToBeLinked(render);
@@ -42,12 +44,14 @@ function updateShader()
 op.preRender = function ()
 {
     updateShader();
-    // if(useShader)
-    {
-        shader.bind();
-        if (mesh)mesh.render(shader);
-        doRender();
-    }
+    shader.bind();
+    if (mesh)mesh.render(shader);
+    doRender();
+};
+
+inScale.onChange = () =>
+{
+    fitImageAspect = inScale.get() == "Fit";
 };
 
 function doRender()
@@ -58,10 +62,6 @@ function doRender()
 
     cgl.pushPMatrix();
     mat4.identity(cgl.pMatrix);
-
-    // prevViewPort[0],prevViewPort[1]
-
-    // console.log(cgl.getViewPort());
     mat4.ortho(cgl.pMatrix, 0, w, h, 0, -10.0, 1000);
 
     cgl.pushModelMatrix();
@@ -70,23 +70,27 @@ function doRender()
     cgl.pushViewMatrix();
     mat4.identity(cgl.vMatrix);
 
-    if (centerInCanvas.get())
+    if (fitImageAspect && inTexture.get())
     {
-        let x = 0;
-        let y = 0;
-        if (w < cgl.canvasWidth) x = (cgl.canvasWidth - w) / 2;
-        if (h < cgl.canvasHeight) y = (cgl.canvasHeight - h) / 2;
+        const rat = inTexture.get().width / inTexture.get().height;
 
-        cgl.setViewPort(x, y, w, h);
+        let _h = h;
+        let _w = h * rat;
+
+        if (_w > w)
+        {
+            _h = w * 1 / rat;
+            _w = w;
+        }
+
+        cgl.setViewPort((w - _w) / 2, (h - _h) / 2, _w, _h);
+        cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     }
 
     if (useShader)
     {
         if (inTexture.get())
-        {
             cgl.setTexture(0, inTexture.get().tex);
-            // cgl.gl.bindTexture(cgl.gl.TEXTURE_2D, inTexture.get().tex);
-        }
 
         mesh.render(shader);
     }
@@ -175,10 +179,6 @@ function rebuild()
         0, -1, 0,
         0, -1, 0,
         0, -1, 0]);
-
-    // norms.push(0,0,1);
-    // tangents.push(-1,0,0);
-    // biTangents.push(0,-1,0);
 
     if (!mesh) mesh = new CGL.Mesh(cgl, geom);
     else mesh.setGeom(geom);

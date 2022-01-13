@@ -142,7 +142,7 @@ const Op = function ()
         // if (newAttribs.warning) this._log.warn("old ui warning attribute in " + this.name + ", use op.setUiError !");
         // if (newAttribs.hint) this._log.warn("old ui hint attribute in " + this.name + ", use op.setUiError !");
 
-        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not string");
+        if (typeof newAttribs != "object") this._log.error("op.uiAttrib attribs are not of type object");
         if (!this.uiAttribs) this.uiAttribs = {};
         for (const p in newAttribs)
         {
@@ -168,8 +168,7 @@ const Op = function ()
      * @example
      * op.setUiAttrib({"extendTitle":str});
      */
-    Op.prototype.setUiAttrib = _setUiAttrib;
-    Op.prototype.uiAttr = _setUiAttrib;
+    Op.prototype.setUiAttribs = Op.prototype.setUiAttrib = Op.prototype.uiAttr = _setUiAttrib;
 
     Op.prototype.getName = function ()
     {
@@ -505,7 +504,7 @@ const Op = function ()
             if (v !== undefined)
             {
                 p.set(v);
-                const index = values.findIndex(item => item == v);
+                const index = values.findIndex((item) => { return item == v; });
                 n.setValue(index);
                 p.defaultValue = v;
                 n.defaultValue = index;
@@ -568,7 +567,7 @@ const Op = function ()
             if (v !== undefined)
             {
                 p.set(v);
-                const index = values.findIndex(item => item == v);
+                const index = values.findIndex((item) => { return item == v; });
                 n.setValue(index);
                 p.defaultValue = v;
                 n.defaultValue = index;

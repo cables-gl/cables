@@ -126,13 +126,26 @@ const VarSetOpWrapper = class
 
         if (!name) return;// console.warn("[vargetset] no varnameport");
 
-        if (CABLES.watchVars && CABLES.watchVars[name])
-            console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
+        // if (CABLES.watchVars && CABLES.watchVars[name])
+        //     console.log(this._op.getTitle(), "change var ", name, "to", this._valuePort.get(), this._op.id);
 
-        if (this._type == "object" || this._type == "array") this._op.patch.setVarValue(name, null);
 
-        this._op.patch.setVarValue(name, this._valuePort.get());
+        if (this._type == "array")
+        {
+            this._arr = this._arr || [];
+            CABLES.copyArray(this._valuePort.get(), this._arr);
+            this._op.patch.setVarValue(name, null);
+            this._op.patch.setVarValue(name, this._arr);
+        }
+        else
+        {
+            if (this._type == "object")
+            {
+                this._op.patch.setVarValue(name, null);
+            }
 
+            this._op.patch.setVarValue(name, this._valuePort.get());
+        }
         if (triggered && this._nextPort) this._nextPort.trigger();
     }
 };
