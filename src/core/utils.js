@@ -338,6 +338,7 @@ export const cacheBust = function (url)
  */
 export const copyArray = function (src, dst)
 {
+    if (!src) return null;
     dst = dst || [];
     dst.length = src.length;
     for (let i = 0; i < src.length; i++)
