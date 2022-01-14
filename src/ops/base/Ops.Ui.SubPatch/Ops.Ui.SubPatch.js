@@ -74,6 +74,8 @@ function saveData()
     dataStr.set(JSON.stringify(data));
 }
 
+op.saveData = saveData;
+
 function addPortListener(newPort, newPortInPatch)
 {
     newPort.addEventListener("onUiAttrChange", function (attribs)
@@ -175,6 +177,18 @@ function setupPorts()
     dataLoaded = true;
 }
 
+op.addNewInPort = function (otherPort, type, objType)
+{
+    const newName = "out" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+
+    const o = { "name": newName, "type": otherPort.type };
+    if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
+
+    data.ports.push(o);
+    setupPorts();
+    return newName;
+};
+
 op.dyn.onLinkChanged = function ()
 {
     if (op.dyn.isLinked())
@@ -185,13 +199,15 @@ op.dyn.onLinkChanged = function ()
 
         op.log("dyn link changed!!!");
 
-        const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
+        // const newName = "in" + data.ports.length + " " + otherPort.parent.name + " " + otherPort.name;
 
-        const o = { "name": newName, "type": otherPort.type };
-        if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
-        data.ports.push(o);
+        // const o = { "name": newName, "type": otherPort.type };
+        // if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
+        // data.ports.push(o);
 
-        setupPorts();
+        // setupPorts();
+
+        const newName = op.addNewInPort(otherPort);
 
         const l = gui.scene().link(
             otherPort.parent,
@@ -212,6 +228,18 @@ op.dyn.onLinkChanged = function ()
     }
 };
 
+op.addNewOutPort = function (otherPort, type, objType)
+{
+    const newName = "out" + data.portsOut.length + " " + otherPort.parent.name + " " + otherPort.name;
+
+    const o = { "name": newName, "type": otherPort.type };
+    if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
+
+    data.portsOut.push(o);
+    setupPorts();
+    return newName;
+};
+
 op.dynOut.onLinkChanged = function ()
 {
     if (op.dynOut.isLinked())
@@ -219,14 +247,8 @@ op.dynOut.onLinkChanged = function ()
         const otherPort = op.dynOut.links[0].getOtherPort(op.dynOut);
         op.dynOut.removeLinks();
         otherPort.removeLinkTo(op.dynOut);
-        const newName = "out" + data.portsOut.length + " " + otherPort.parent.name + " " + otherPort.name;
 
-        const o = { "name": newName, "type": otherPort.type };
-        if (otherPort.uiAttribs.objType)o.objType = otherPort.uiAttribs.objType;
-
-        data.portsOut.push(o);
-
-        setupPorts();
+        const newName = op.addNewOutPort(otherPort);
 
         gui.scene().link(
             otherPort.parent,
