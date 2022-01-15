@@ -25,6 +25,7 @@ shader.aspectUni = new CGL.Uniform(shader, "f", "aspectTex", 0);
 let useShader = false;
 let updateShaderLater = true;
 let fitImageAspect = false;
+let oldVp = [];
 render.onTriggered = doRender;
 
 op.toWorkPortsNeedToBeLinked(render);
@@ -83,6 +84,11 @@ function doRender()
             _w = w;
         }
 
+        oldVp[0] = cgl.getViewPort()[0];
+        oldVp[1] = cgl.getViewPort()[1];
+        oldVp[2] = cgl.getViewPort()[2];
+        oldVp[3] = cgl.getViewPort()[3];
+
         cgl.setViewPort((w - _w) / 2, (h - _h) / 2, _w, _h);
         cgl.gl.clear(cgl.gl.COLOR_BUFFER_BIT | cgl.gl.DEPTH_BUFFER_BIT);
     }
@@ -104,6 +110,9 @@ function doRender()
     cgl.popPMatrix();
     cgl.popModelMatrix();
     cgl.popViewMatrix();
+
+    if (fitImageAspect && inTexture.get())
+        cgl.setViewPort(oldVp[0], oldVp[1], oldVp[2], oldVp[3]);
 
     trigger.trigger();
 }

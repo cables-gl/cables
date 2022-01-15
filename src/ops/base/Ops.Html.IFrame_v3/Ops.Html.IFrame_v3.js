@@ -11,11 +11,10 @@ let element = null;
 
 op.onDelete = removeEle;
 
-op.onLoaded = () =>
+op.onLoadedValueSet = op.init = () =>
 {
     addElement();
     updateSoon();
-
     inStyle.onChange =
         src.onChange =
         elId.onChange = updateSoon;
