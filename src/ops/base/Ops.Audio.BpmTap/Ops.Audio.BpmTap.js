@@ -1,17 +1,17 @@
-const exe = this.addInPort(new CABLES.Port(this, "exe", CABLES.OP_PORT_TYPE_FUNCTION));
-const tap = this.addInPort(new CABLES.Port(this, "tap", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-const sync = this.addInPort(new CABLES.Port(this, "sync", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-const nudgeLeft = this.addInPort(new CABLES.Port(this, "nudgeLeft", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-const nudgeRight = this.addInPort(new CABLES.Port(this, "nudgeRight", CABLES.OP_PORT_TYPE_FUNCTION, { "display": "button" }));
-
-const beat = this.addOutPort(new CABLES.Port(this, "beat", CABLES.OP_PORT_TYPE_FUNCTION));
-// const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }),0);
-const bpm = op.outNumber("Bpm", 0);
-const outStates = this.addOutPort(new CABLES.Port(this, "States", CABLES.OP_PORT_TYPE_ARRAY));
-
-const beatNum = this.addOutPort(new CABLES.Port(this, "Beat Index", CABLES.OP_PORT_TYPE_VALUE));
-
 const DEFAULT_BPM = 127;
+
+const exe = op.inTrigger("exe");
+const tap = op.inTriggerButton("tap");
+const sync = op.inTriggerButton("sync");
+const nudgeLeft = op.inTriggerButton("nudgeLeft");
+const nudgeRight = op.inTriggerButton("nudgeRight");
+
+const beat = op.outTrigger("beat");
+// const bpm = this.addOutPort(new CABLES.Port(this, "Bpm", CABLES.OP_PORT_TYPE_VALUE, { "display": "editor" }),0);
+const bpm = op.outNumber("Bpm", DEFAULT_BPM);
+const outStates = op.outArray("States");
+const beatNum = op.outNumber("Beat Index");
+
 const DEFAULT_MILLIS = bpmToMillis(DEFAULT_BPM);
 const NUDGE_VALUE = 0.5; // to add / substract from avg bpm
 
@@ -40,7 +40,7 @@ exe.onTriggered = function ()
         outStates.set(null);
         outStates.set(states);
 
-        bpm.set(millisToBpm(avgMillis));
+        if (taps.length > 0) bpm.set(millisToBpm(avgMillis));
         lastFlash = op.patch.freeTimer.get() * 1000;
     }
 };
@@ -82,9 +82,9 @@ function millisToBpm(millis)
     return Number(60 * 1000 / millis).toFixed(2);
 }
 
-function bpmToMillis(bpm)
+function bpmToMillis(bpms)
 {
-    return 60 * 1000 / bpm;
+    return 60 * 1000 / bpms;
 }
 
 function getAvgMillis()
