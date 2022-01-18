@@ -330,7 +330,7 @@ function finishLoading()
         }
     }
 
-    console.log("gltf timing", gltf.timing);
+    // console.log("gltf timing", gltf.timing);
     finishedLoading = true;
 }
 

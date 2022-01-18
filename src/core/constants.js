@@ -32,7 +32,7 @@ export const CONSTANTS = {
         "EASING_ABSOLUTE": 1,
         "EASING_SMOOTHSTEP": 2,
         "EASING_SMOOTHERSTEP": 3,
-        "EASING_BEZIER": 4,
+        "EASING_CUBICSPLINE": 4,
 
         "EASING_CUBIC_IN": 5,
         "EASING_CUBIC_OUT": 6,

@@ -167,14 +167,15 @@ function loadAnims(gltf)
 
                 if (sampler.interpolation == "LINEAR") {}
                 else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
+                else if (sampler.interpolation == "CUBICSPLINE") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_CUBICSPLINE;
                 else op.warn("unknown interpolation", sampler.interpolation);
-
 
                 // if there is no keyframe for time 0 copy value of first keyframe at time 0
                 if (bufferIn[0] !== 0.0)
                     for (let k = 0; k < numComps; k++)
                         anims[k].setValue(0, bufferOut[0 * numComps + k]);
 
+                // console.log(sampler.interpolation,bufferOut.length/numComps)
 
                 for (let j = 0; j < bufferIn.length; j++)
                 {
@@ -182,7 +183,20 @@ function loadAnims(gltf)
 
                     for (let k = 0; k < numComps; k++)
                     {
-                        anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
+                        if(anims[k].defaultEasing === CABLES.EASING_CUBICSPLINE)
+                        {
+                            const idx= (j * numComps + k)* 3;
+                            const key=anims[k].setValue(bufferIn[j], bufferOut[idx+1]);
+                            key.bezTangIn=bufferOut[idx+0];
+                            key.bezTangOut=bufferOut[idx+2];
+
+                            // console.log(bufferOut[idx],key.bezTangIn,key.bezTangOut);
+                        }
+                        else
+                        {
+                            anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
+                        }
+
                     }
                 }
 

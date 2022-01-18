@@ -14,6 +14,8 @@ ANIM.Key = function (obj)
     this.ui = null;
     this.onChange = null;
     this._easing = 0;
+    this.bezTangIn = 0;
+    this.bezTangOut = 0;
     // this.bezTime = 0.5;
     // this.bezValue = 0;
     // this.bezTimeIn = -0.5;
@@ -28,6 +30,26 @@ ANIM.Key = function (obj)
     this.setEasing(CONSTANTS.ANIM.EASING_LINEAR);
     this.set(obj);
 };
+
+ANIM.Key.cubicSpline = function (perc, key2, key1)
+{
+    let
+        previousPoint = key1.value,
+        previousTangent = key1.bezTangOut,
+        nextPoint = key2.value,
+        nextTangent = key2.bezTangIn;
+    let t = perc;
+    let t2 = t * t;
+    let t3 = t2 * t;
+
+    return (2 * t3 - 3 * t2 + 1) * previousPoint + (t3 - 2 * t2 + t) * previousTangent + (-2 * t3 + 3 * t2) * nextPoint + (t3 - t2) * nextTangent;
+};
+
+ANIM.Key.easeCubicSpline = function (perc, key2)
+{
+    return ANIM.Key.cubicSpline(perc, this, key2);
+};
+
 
 ANIM.Key.linear = function (perc, key1, key2)
 {
@@ -117,6 +139,7 @@ ANIM.Key.easeCubicIn = function (t, key2)
     t = easeCubicIn(t);
     return ANIM.Key.linear(t, this, key2);
 };
+
 
 // b 0
 // c 1/2 or 1
@@ -312,7 +335,8 @@ ANIM.Key.prototype.setEasing = function (e)
 {
     this._easing = e;
 
-    if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeAbsolute;
+    if (this._easing == CONSTANTS.ANIM.EASING_LINEAR) this.ease = ANIM.Key.easeLinear;
+    else if (this._easing == CONSTANTS.ANIM.EASING_ABSOLUTE) this.ease = ANIM.Key.easeAbsolute;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHSTEP) this.ease = ANIM.Key.easeSmoothStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_SMOOTHERSTEP) this.ease = ANIM.Key.easeSmootherStep;
     else if (this._easing == CONSTANTS.ANIM.EASING_CUBIC_IN) this.ease = ANIM.Key.easeCubicIn;
@@ -338,11 +362,11 @@ ANIM.Key.prototype.setEasing = function (e)
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_OUT) this.ease = ANIM.Key.easeOutQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_IN) this.ease = ANIM.Key.easeInQuint;
     else if (this._easing == CONSTANTS.ANIM.EASING_QUINT_INOUT) this.ease = ANIM.Key.easeInOutQuint;
-    // else if (this._easing == CONSTANTS.ANIM.EASING_BEZIER)
-    // {
-    //     // this._updateBezier = true;
-    //     this.ease = ANIM.Key.easeBezier;
-    // }
+    else if (this._easing == CONSTANTS.ANIM.EASING_CUBICSPLINE)
+    {
+        // this._updateBezier = true;
+        this.ease = ANIM.Key.easeCubicSpline;
+    }
     else
     {
         this._easing = CONSTANTS.ANIM.EASING_LINEAR;
@@ -397,7 +421,7 @@ ANIM.Key.prototype.getSerialized = function ()
     obj.t = this.time;
     obj.v = this.value;
     obj.e = this._easing;
-    // if (this._easing == CONSTANTS.ANIM.EASING_BEZIER) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
+    // if (this._easing == CONSTANTS.ANIM.EASING_CUBICSPLINE) obj.b = [this.bezTime, this.bezValue, this.bezTimeIn, this.bezValueIn];
 
     return obj;
 };
@@ -420,7 +444,7 @@ export { ANIM };
  * CONSTANTS.ANIM.EASING_ABSOLUTE
  * CONSTANTS.ANIM.EASING_SMOOTHSTEP
  * CONSTANTS.ANIM.EASING_SMOOTHERSTEP
- * CONSTANTS.ANIM.EASING_BEZIER
+ * CONSTANTS.ANIM.EASING_CUBICSPLINE
 
  * CONSTANTS.ANIM.EASING_CUBIC_IN
  * CONSTANTS.ANIM.EASING_CUBIC_OUT
@@ -549,7 +573,7 @@ Anim.prototype.clear = function (time)
 
 Anim.prototype.sortKeys = function ()
 {
-    this.keys.sort((a, b) => parseFloat(a.time) - parseFloat(b.time));
+    this.keys.sort((a, b) => { return parseFloat(a.time) - parseFloat(b.time); });
     this._needsSort = false;
 };
 
@@ -581,7 +605,7 @@ Anim.prototype.getKeyIndex = function (time)
  */
 Anim.prototype.setValue = function (time, value, cb)
 {
-    let found = false;
+    let found = null;
     for (const i in this.keys)
     {
         if (this.keys[i].time == time)
@@ -595,18 +619,18 @@ Anim.prototype.setValue = function (time, value, cb)
 
     if (!found)
     {
-        this.keys.push(
-            new ANIM.Key({
-                time,
-                value,
-                "e": this.defaultEasing,
-                cb,
-            }),
-        );
+        found = new ANIM.Key({
+            time,
+            value,
+            "e": this.defaultEasing,
+            cb,
+        });
+        this.keys.push(found);
     }
 
     if (this.onChange) this.onChange();
     this._needsSort = true;
+    return found;
 };
 
 Anim.prototype.getSerialized = function ()
