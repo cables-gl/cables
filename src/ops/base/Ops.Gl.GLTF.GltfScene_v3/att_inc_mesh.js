@@ -16,6 +16,21 @@ let gltfMesh = class
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
         gltf.loadingMeshes++;
 
+
+        this.materialJson=null;
+
+        if(gltf.json.materials)
+        {
+            if(this.material!=-1)this.materialJson=gltf.json.materials[this.material];
+
+            if(this.materialJson && this.materialJson.pbrMetallicRoughness && this.materialJson.pbrMetallicRoughness.baseColorFactor)
+            {
+
+                this._diffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
+            }
+        }
+
+
         if (gltf.useDraco && prim.extensions.KHR_draco_mesh_compression)
         {
             const view = gltf.chunks[0].data.bufferViews[prim.extensions.KHR_draco_mesh_compression.bufferView];
@@ -309,7 +324,20 @@ let gltfMesh = class
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
+            const uniDiff=cgl.getShader().uniformColorDiffuse;
+            if(inUseMatProps.get() && uniDiff && this._diffuseColor)
+            {
+                this._diffuseColorOrig=[uniDiff.getValue()[0],uniDiff.getValue()[1],uniDiff.getValue()[2],uniDiff.getValue()[3]];
+
+                uniDiff.setValue(this._diffuseColor);
+            }
+
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
+
+            if(inUseMatProps.get() && uniDiff && this._diffuseColor)
+            {
+                uniDiff.setValue(this._diffuseColorOrig);
+            }
 
             if (useMat) cgl.popShader();
         }

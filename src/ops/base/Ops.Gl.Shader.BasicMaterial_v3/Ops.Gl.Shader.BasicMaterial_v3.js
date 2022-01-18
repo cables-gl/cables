@@ -23,7 +23,9 @@ const a = op.inValueSlider("a", 1);
 r.setUiAttribs({ "colorPick": true });
 
 // const uniColor=new CGL.Uniform(shader,'4f','color',r,g,b,a);
-shader.addUniformFrag("4f", "color", r, g, b, a);
+const colUni = shader.addUniformFrag("4f", "color", r, g, b, a);
+
+shader.uniformColorDiffuse = colUni;
 
 // diffuse outTexture
 

@@ -91,6 +91,11 @@
             },
             {
                 "type": 0,
+                "name": "Use Material Properties",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
                 "name": "Active",
                 "subType": "boolean"
             }

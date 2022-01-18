@@ -51,12 +51,13 @@ function updateDiffuseTexture()
 
 const next = op.outTrigger("next");
 
-
 const cgl = op.patch.cgl;
 const shader = new CGL.Shader(cgl, "LambertMaterial");
 shader.define("NUM_LIGHTS", "1");
 
 const colUni = new CGL.Uniform(shader, "4f", "materialColor", r, g, b, a);
+
+shader.uniformColorDiffuse = colUni;
 
 const outShader = op.outObject("Shader");
 outShader.set(shader);
@@ -220,7 +221,6 @@ function setUniforms(lightStack)
             light.falloff,
             light.radius,
         ]);
-
 
         lightUniforms[i].conePointAt.setValue(light.conePointAt);
         lightUniforms[i].spotProperties.setValue([
