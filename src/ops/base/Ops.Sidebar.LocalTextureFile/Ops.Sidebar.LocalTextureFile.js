@@ -1,7 +1,10 @@
 // inputs
-let parentPort = op.inObject("link");
-let labelPort = op.inString("Text", "Select File:");
-let inId = op.inValueString("Id", "");
+let parentPort = op.inObject("link"),
+    labelPort = op.inString("Text", "Select File:"),
+    inId = op.inValueString("Id", ""),
+
+    tfilter = op.inSwitch("Filter", ["nearest", "linear", "mipmap"], "linear"),
+    wrap = op.inValueSelect("Wrap", ["repeat", "mirrored repeat", "clamp to edge"], "clamp to edge");
 
 // outputs
 let siblingsPort = op.outObject("childs");
@@ -28,6 +31,10 @@ el.appendChild(fileInputEle);
 
 const imgEl = document.createElement("img");
 
+tfilter.onChange = wrap.onChange = () =>
+{
+    fileInputEle.dispatchEvent(new Event("change"));
+};
 fileInputEle.addEventListener("change", handleFileSelect, false);
 
 function handleFileSelect(evt)
@@ -48,7 +55,18 @@ function handleFileSelect(evt)
         };
         image.onload = function (e)
         {
-            let tex = CGL.Texture.createFromImage(op.patch.cgl, image, {});
+            let cgl_filter = CGL.Texture.FILTER_LINEAR;
+            let cgl_wrap = CGL.Texture.WRAP_REPEAT;
+            if (tfilter.get() == "nearest") cgl_filter = CGL.Texture.FILTER_NEAREST;
+            else if (tfilter.get() == "linear") cgl_filter = CGL.Texture.FILTER_LINEAR;
+            else if (tfilter.get() == "mipmap") cgl_filter = CGL.Texture.FILTER_MIPMAP;
+            else if (tfilter.get() == "Anisotropic") cgl_filter = CGL.Texture.FILTER_ANISOTROPIC;
+
+            if (wrap.get() == "repeat") cgl_wrap = CGL.Texture.WRAP_REPEAT;
+            if (wrap.get() == "mirrored repeat") cgl_wrap = CGL.Texture.WRAP_MIRRORED_REPEAT;
+            if (wrap.get() == "clamp to edge") cgl_wrap = CGL.Texture.WRAP_CLAMP_TO_EDGE;
+
+            let tex = CGL.Texture.createFromImage(op.patch.cgl, image, { "filter": cgl_filter, "wrap": cgl_wrap });
             outTex.set(tex);
         };
         image.src = e.target.result;
