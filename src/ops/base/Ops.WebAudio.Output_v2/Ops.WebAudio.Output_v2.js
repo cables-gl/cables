@@ -158,6 +158,7 @@ function updateAudioStateButton()
 
     if (audioCtx.state == "suspended")
     {
+        mute(true);
         if (inShowSusp.get())
         {
             isSuspended = true;
