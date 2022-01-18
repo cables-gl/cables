@@ -178,8 +178,7 @@ const gltfNode = class
                     this._animTrans[2].getValue(_time)]);
             }
             else
-            if (this.translation) mat4.translate(this._animMat, this._animMat, this.translation);
-            // if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
+            if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
 
             if (playAnims && this._animRot)
             {

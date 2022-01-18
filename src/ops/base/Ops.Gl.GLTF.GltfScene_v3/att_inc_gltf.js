@@ -171,7 +171,8 @@ function loadAnims(gltf)
                 else op.warn("unknown interpolation", sampler.interpolation);
 
 
-console.log(bufferOut)
+                // console.log(bufferOut)
+
                 // if there is no keyframe for time 0 copy value of first keyframe at time 0
                 if (bufferIn[0] !== 0.0)
                     for (let k = 0; k < numComps; k++)
