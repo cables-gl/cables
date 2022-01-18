@@ -194,5 +194,6 @@
     },
     "coreLibs": [
         "cgl_shadermodifier"
-    ]
+    ],
+    "caniusequery": ""
 }

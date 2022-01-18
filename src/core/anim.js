@@ -31,7 +31,7 @@ ANIM.Key = function (obj)
     this.set(obj);
 };
 
-ANIM.Key.cubicSpline = function (perc, key2, key1)
+ANIM.Key.cubicSpline = function (perc, key1, key2)
 {
     let
         previousPoint = key1.value,
