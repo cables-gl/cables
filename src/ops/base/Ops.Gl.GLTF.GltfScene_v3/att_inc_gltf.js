@@ -194,12 +194,12 @@ function loadAnims(gltf)
                             key.bezTangIn=bufferOut[idx];
                             key.bezTangOut=bufferOut[idx+6];
 
-                            console.log(an.name,k,bufferOut[idx+1]);
+                            // console.log(an.name,k,bufferOut[idx+1]);
 
                         }
                         else
                         {
-                            console.log(an.name,k,bufferOut[j * numComps + k]);
+                            // console.log(an.name,k,bufferOut[j * numComps + k]);
                             anims[k].setValue(bufferIn[j], bufferOut[j * numComps + k]);
                         }
 
