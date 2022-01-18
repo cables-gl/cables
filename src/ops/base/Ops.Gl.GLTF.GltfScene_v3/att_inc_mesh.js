@@ -251,7 +251,7 @@ let gltfMesh = class
         this.bounds = geom.getBounds();
     }
 
-    render(cgl, ignoreMaterial)
+    render(cgl, ignoreMaterial,skinRenderer)
     {
         if (!this.mesh && this.geom && this.geom.verticesIndices)
         {
@@ -302,18 +302,16 @@ let gltfMesh = class
                 }
             }
 
-            const useMat = !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
+            let useMat =  !ignoreMaterial && this.material != -1 && gltf.shaders[this.material];
+            if(skinRenderer)useMat=false;
 
-
-            // cgl.pushModelMatrix();
-            // if(gltf.renderMMatrix) mat4.mul(cgl.mMatrix,gltf.renderMMatrix,cgl.mMatrix);
+            // console.log(gltf.shaders[this.material])
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 
             if (useMat) cgl.popShader();
-            // cgl.popModelMatrix();
         }
     }
 };
