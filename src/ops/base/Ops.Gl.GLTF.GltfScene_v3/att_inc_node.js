@@ -238,25 +238,15 @@ const gltfNode = class
         }
         else
         {
-
             if(this.skinRenderer)
             {
-this.skinRenderer.time=_time;
-                // this.skinRenderer.renderStart(cgl,_time);
-                // if (!ignoreMaterial) cgl.pushShader(gltf.shaders[this.mesh.material]);
+                this.skinRenderer.time=_time;
                 if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer);
-                // this.skinRenderer.renderFinish(cgl);
-
-
-
-                // if (!ignoreMaterial) cgl.popShader();
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                {
                     this.mesh.render(cgl, ignoreMaterial,null);
-                }
             }
         }
 
