@@ -190,9 +190,9 @@ function loadAnims(gltf)
                         {
                             const idx=((j * numComps)*3+k);
 
-                            const key=anims[k].setValue(bufferIn[j], bufferOut[idx+3]);
+                            const key=anims[k].setValue(bufferIn[j], bufferOut[idx+numComps]);
                             key.bezTangIn=bufferOut[idx];
-                            key.bezTangOut=bufferOut[idx+6];
+                            key.bezTangOut=bufferOut[idx+(numComps*2)];
 
                             // console.log(an.name,k,bufferOut[idx+1]);
 

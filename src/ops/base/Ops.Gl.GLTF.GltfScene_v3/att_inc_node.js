@@ -118,9 +118,9 @@ const gltfNode = class
 
         for(let path in this._animActions[name])
         {
-            if (path == "translation") this._animTrans =this._animActions[name][path];
-            else if (path == "rotation") this._animRot =this._animActions[name][path];
-            else if (path == "scale") this._animScale =this._animActions[name][path];
+            if (path == "translation") this._animTrans = this._animActions[name][path];
+            else if (path == "rotation") this._animRot = this._animActions[name][path];
+            else if (path == "scale") this._animScale = this._animActions[name][path];
             else console.warn("unknown anim path", path,this._animActions[name][path]);
         }
 
