@@ -134,7 +134,10 @@ const gltfNode = class
 
         this._animActions[name][path]=anims;
 
-        if (path == "translation") this._animTrans = anims;
+        // console.log(name,path,this._animTrans);
+        // console.log(this._animActions);
+
+        if (path == "translation")  this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
         else console.warn("unknown anim path", path, anims);
@@ -176,6 +179,7 @@ const gltfNode = class
             }
             else
             if (this.translation) mat4.translate(this._animMat, this._animMat, this.translation);
+            // if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
 
             if (playAnims && this._animRot)
             {
@@ -223,12 +227,11 @@ const gltfNode = class
         {
             if(this.skinRenderer)
             {
-            // if (!ignoreMaterial) cgl.pushShader(gltf.shaders[this.mesh.material]);
-
+                // if (!ignoreMaterial) cgl.pushShader(gltf.shaders[this.mesh.material]);
                 this.skinRenderer.renderStart(cgl,_time);
                 if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
                 this.skinRenderer.renderFinish(cgl);
-            // if (!ignoreMaterial) cgl.popShader();
+                // if (!ignoreMaterial) cgl.popShader();
             }
             else
             {

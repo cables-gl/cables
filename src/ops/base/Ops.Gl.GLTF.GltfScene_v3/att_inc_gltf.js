@@ -419,11 +419,13 @@ console.log(1)
     gltf.json.meshes = gltf.json.meshes || [];
 
     if (gltf.json.meshes)
+    {
         for (i = 0; i < gltf.json.meshes.length; i++)
         {
             const mesh = new gltfMeshGroup(gltf, gltf.json.meshes[i]);
             gltf.meshes.push(mesh);
         }
+    }
 
     gltf.timing.push("Parse nodes", Math.round((performance.now() - gltf.startTime)));
 

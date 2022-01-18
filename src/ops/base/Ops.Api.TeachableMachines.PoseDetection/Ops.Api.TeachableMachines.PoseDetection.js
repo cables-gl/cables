@@ -57,7 +57,6 @@ document.body.appendChild(poseCanvas);
 
 const poseCtx = document.getElementById(poseCanvas.id).getContext("2d");
 
-
 function checkFlip()
 {
     hasFlipped = false;
@@ -90,7 +89,7 @@ async function init()
 async function loop()
 {
     // draw camera texture onto canvas
-    if (webcamTex.get())
+    if (webcamTex.get() && webcamTex.get().videoElement)
     {
         if (hasFlipped == false)
         {
