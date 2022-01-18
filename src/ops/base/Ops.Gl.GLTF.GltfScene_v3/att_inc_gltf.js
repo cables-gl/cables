@@ -166,7 +166,7 @@ function loadAnims(gltf)
                 }
 
                 if (sampler.interpolation == "LINEAR") {}
-                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_LINEAR;
+                else if (sampler.interpolation == "STEP") for (let k = 0; k < numComps; k++) anims[k].defaultEasing = CABLES.EASING_ABSOLUTE;
                 else op.warn("unknown interpolation", sampler.interpolation);
 
 
