@@ -6,6 +6,7 @@ import { MESH } from "./cgl_mesh";
 import { CONSTANTS } from "./constants";
 import { escapeHTML } from "./cgl_utils";
 import Logger from "../core_logger";
+import defaultShaderSrcFrag from "./cgl_shader_default_glsl.vert";
 // ---------------------------------------------------------------------------
 
 
@@ -437,7 +438,7 @@ Shader.prototype.compile = function ()
     if (this._uniforms)
     {
         // * we create an array of the uniform names to check our indices & an array to save them
-        const uniNames = this._uniforms.map(uni => uni._name);
+        const uniNames = this._uniforms.map((uni) => { return uni._name; });
         const indicesToRemove = [];
 
         // * we go through our uniforms and check if the same name is contained somewhere further in the array
@@ -1409,32 +1410,7 @@ Shader.prototype.setFeedbackNames = function (names)
 
 Shader.prototype.getDefaultVertexShader = Shader.getDefaultVertexShader = function ()
 {
-    return ""
-        .endl() + "{{MODULES_HEAD}}"
-        .endl() + "IN vec3 vPosition;"
-        .endl() + "IN vec2 attrTexCoord;"
-        .endl() + "IN vec3 attrVertNormal;"
-        .endl() + "IN vec3 attrTangent,attrBiTangent;"
-
-        .endl() + "IN float attrVertIndex;"
-
-        .endl() + "OUT vec2 texCoord;"
-        .endl() + "OUT vec3 norm;"
-        .endl() + "UNI mat4 projMatrix;"
-        .endl() + "UNI mat4 viewMatrix;"
-        .endl() + "UNI mat4 modelMatrix;"
-
-        .endl() + "void main()"
-        .endl() + "{"
-        .endl() + "    texCoord=attrTexCoord;"
-        .endl() + "    norm=attrVertNormal;"
-        .endl() + "    vec4 pos=vec4(vPosition,  1.0);"
-        .endl() + "    vec3 tangent=attrTangent;"
-        .endl() + "    vec3 bitangent=attrBiTangent;"
-        .endl() + "    mat4 mMatrix=modelMatrix;"
-        .endl() + "    {{MODULE_VERTEX_POSITION}}"
-        .endl() + "    gl_Position = projMatrix * (viewMatrix*mMatrix) * pos;"
-        .endl() + "}";
+    return defaultShaderSrcFrag;
 };
 
 Shader.prototype.getDefaultFragmentShader = Shader.getDefaultFragmentShader = function (r, g, b)
