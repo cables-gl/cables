@@ -43,12 +43,8 @@
             {
                 "type": 0,
                 "name": "Unit index",
+                "group": "Translation",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Unit",
-                "group": "Translation"
             },
             {
                 "type": 0,
@@ -83,22 +79,14 @@
             {
                 "type": 0,
                 "name": "Origin X index",
+                "group": "Origin",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Origin X",
-                "group": "Origin"
             },
             {
                 "type": 0,
                 "name": "Origin Y index",
+                "group": "Origin",
                 "subType": "integer"
-            },
-            {
-                "type": 5,
-                "name": "Origin Y",
-                "group": "Origin"
             }
         ],
         "portsOut": [],

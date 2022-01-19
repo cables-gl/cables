@@ -21,6 +21,8 @@ op.setPortGroup("Scaling", [inScale, inDoScale]);
 op.setPortGroup("Rotation", [inDoRot, inRot]);
 op.setPortGroup("Origin", [inDoOrigin, inOriginX, inOriginY]);
 
+inTransUnit.onChange =
+inDoScale.onChange =
 inDoOrigin.onChange =
 inOriginX.onChange =
 inOriginY.onChange =

@@ -21,11 +21,22 @@ const gltfMeshGroup = class
         // console.log("mesh group bounds:",this.bounds._maxAxis);
     }
 
-    render(cgl, ignoreMat)
+    render(cgl, ignoreMat,skinRenderer)
     {
         for (let i = 0; i < this.meshes.length; i++)
         {
-            this.meshes[i].render(cgl, ignoreMat);
+
+            const useMat =  gltf.shaders[this.meshes[i].material];
+
+            if (useMat) cgl.pushShader(gltf.shaders[this.meshes[i].material]);
+            // console.log(gltf.shaders[this.meshes[i].material],this.meshes[i].material)
+                if(skinRenderer)skinRenderer.renderStart(cgl,skinRenderer._time);
+
+
+            this.meshes[i].render(cgl, ignoreMat,skinRenderer);
+                if(skinRenderer)skinRenderer.renderFinish(cgl);
+            if (useMat) cgl.popShader();
+
         }
     }
 };

@@ -38,8 +38,10 @@ function printNode(html, node, level)
         html += "<td>";
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
+            if(i>0)html+=", ";
             html += node.mesh.meshes[i].name;
         }
+
         html += "</td>";
 
         html += "<td>";
@@ -50,8 +52,10 @@ function printNode(html, node, level)
         let countMats = 0;
         for (let i = 0; i < node.mesh.meshes.length; i++)
         {
+            if(countMats>0)html+=", ";
             if (node.mesh.meshes[i].material)
             {
+
                 html += gltf.json.materials[node.mesh.meshes[i].material].name;
                 countMats++;
             }
@@ -155,7 +159,7 @@ function printInfo()
         html += " <th>Function</th>";
         html += " <th></th>";
         html += "</tr>";
-        for (var i = 0; i < gltf.json.materials.length; i++)
+        for (let i = 0; i < gltf.json.materials.length; i++)
         {
             html += printMaterial(gltf.json.materials[i], i);
         }
@@ -175,7 +179,7 @@ function printInfo()
     html += " <th></th>";
     html += "</tr>";
 
-    for (var i = 0; i < gltf.nodes.length; i++)
+    for (let i = 0; i < gltf.nodes.length; i++)
     {
         if (!gltf.nodes[i].isChild)
             html = printNode(html, gltf.nodes[i], 1);
@@ -197,7 +201,7 @@ function printInfo()
     let sizeBufferViews = [];
     sizes.meshes = 0;
 
-    for (var i = 0; i < gltf.json.meshes.length; i++)
+    for (let i = 0; i < gltf.json.meshes.length; i++)
     {
         html += "<tr>";
         html += "<td>" + gltf.json.meshes[i].name + "</td>";
@@ -364,7 +368,7 @@ function printInfo()
 
         sizes.images = 0;
 
-        for (var i = 0; i < gltf.json.images.length; i++)
+        for (let i = 0; i < gltf.json.images.length; i++)
         {
             if (gltf.json.images[i].bufferView)
                 sizes.images += gltf.json.bufferViews[gltf.json.images[i].bufferView].byteLength;
@@ -397,7 +401,7 @@ function printInfo()
         html += "  <th>info</th>";
         html += "</tr>";
 
-        for (var i = 0; i < gltf.json.cameras.length; i++)
+        for (let i = 0; i < gltf.json.cameras.length; i++)
         {
             html += "<tr>";
             html += "<td>" + gltf.json.cameras[i].name + "</td>";
@@ -426,7 +430,7 @@ function printInfo()
         html += "  <th>total joints</th>";
         html += "</tr>";
 
-        for (var i = 0; i < gltf.json.skins.length; i++)
+        for (let i = 0; i < gltf.json.skins.length; i++)
         {
             html += "<tr>";
             html += "<td>" + gltf.json.skins[i].name + "</td>";
@@ -454,7 +458,7 @@ function printInfo()
     html += "  <th>%</th>";
     html += "</tr>";
     let sizeUnknown = sizeBin;
-    for (var i in sizes)
+    for (let i in sizes)
     {
         // html+=i+':'+Math.round(sizes[i]/1024);
         html += "<tr>";

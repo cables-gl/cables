@@ -28,6 +28,16 @@
                 "type": 0,
                 "name": "Id",
                 "subType": "string"
+            },
+            {
+                "type": 0,
+                "name": "Filter index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "Wrap index",
+                "subType": "integer"
             }
         ],
         "portsOut": [

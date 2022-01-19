@@ -118,9 +118,9 @@ const gltfNode = class
 
         for(let path in this._animActions[name])
         {
-            if (path == "translation") this._animTrans =this._animActions[name][path];
-            else if (path == "rotation") this._animRot =this._animActions[name][path];
-            else if (path == "scale") this._animScale =this._animActions[name][path];
+            if (path == "translation") this._animTrans = this._animActions[name][path];
+            else if (path == "rotation") this._animRot = this._animActions[name][path];
+            else if (path == "scale") this._animScale = this._animActions[name][path];
             else console.warn("unknown anim path", path,this._animActions[name][path]);
         }
 
@@ -134,7 +134,10 @@ const gltfNode = class
 
         this._animActions[name][path]=anims;
 
-        if (path == "translation") this._animTrans = anims;
+        // console.log(name,path,this._animTrans);
+        // console.log(this._animActions);
+
+        if (path == "translation")  this._animTrans = anims;
         else if (path == "rotation") this._animRot = anims;
         else if (path == "scale") this._animScale = anims;
         else console.warn("unknown anim path", path, anims);
@@ -175,11 +178,25 @@ const gltfNode = class
                     this._animTrans[2].getValue(_time)]);
             }
             else
-            if (this.translation) mat4.translate(this._animMat, this._animMat, this.translation);
+            if (this._node.translation) mat4.translate(this._animMat, this._animMat, this._node.translation);
 
             if (playAnims && this._animRot)
             {
-                CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+
+                if(this._animRot[0].defaultEasing==CABLES.EASING_LINEAR) CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                else if(this._animRot[0].defaultEasing==CABLES.EASING_ABSOLUTE)
+                {
+                    this._tempQuat[0]=this._animRot[0].getValue(_time);
+                    this._tempQuat[1]=this._animRot[1].getValue(_time);
+                    this._tempQuat[2]=this._animRot[2].getValue(_time);
+                    this._tempQuat[3]=this._animRot[3].getValue(_time);
+                }
+                else if(this._animRot[0].defaultEasing==CABLES.EASING_CUBICSPLINE)
+                {
+                    CABLES.TL.Anim.slerpQuaternion(_time, this._tempQuat, this._animRot[0], this._animRot[1], this._animRot[2], this._animRot[3]);
+                }
+
+
 
                 mat4.fromQuat(this._tempMat, this._tempQuat);
                 mat4.mul(this._animMat, this._animMat, this._tempMat);
@@ -223,19 +240,13 @@ const gltfNode = class
         {
             if(this.skinRenderer)
             {
-            // if (!ignoreMaterial) cgl.pushShader(gltf.shaders[this.mesh.material]);
-
-                this.skinRenderer.renderStart(cgl,_time);
-                if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial);
-                this.skinRenderer.renderFinish(cgl);
-            // if (!ignoreMaterial) cgl.popShader();
+                this.skinRenderer.time=_time;
+                if(!dontDrawMesh) this.mesh.render(cgl, ignoreMaterial, this.skinRenderer);
             }
             else
             {
                 if (this.mesh && !dontDrawMesh)
-                {
-                    this.mesh.render(cgl, ignoreMaterial);
-                }
+                    this.mesh.render(cgl, ignoreMaterial,null);
             }
         }
 

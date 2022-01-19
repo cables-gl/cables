@@ -14,6 +14,8 @@ Click the show structure button to see the way the GLB file is constructed with 
 - skinning: https://dev.cables.gl/edit/TWBC-N
 - embedded texture: https://dev.cables.gl/edit/LT4CVS
 - multiple skins: https://dev.cables.gl/edit/Vkp-WN
+- interpolation methods: https://dev.cables.gl/edit/pmKMIV
+- assigned material skinned mesh: https://dev.cables.gl/edit/KSoMZS
 
 
 ## convertes:

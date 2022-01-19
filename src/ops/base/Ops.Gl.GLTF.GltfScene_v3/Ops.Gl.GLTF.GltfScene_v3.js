@@ -22,6 +22,7 @@ const
 
     inMaterials = op.inObject("Materials"),
     inHideNodes = op.inArray("Hide Nodes"),
+    inUseMatProps = op.inBool("Use Material Properties", false),
     inActive = op.inBool("Active", true),
 
     nextBefore = op.outTrigger("Render Before"),
@@ -330,7 +331,7 @@ function finishLoading()
         }
     }
 
-    console.log("gltf timing", gltf.timing);
+    // console.log("gltf timing", gltf.timing);
     finishedLoading = true;
 }
 

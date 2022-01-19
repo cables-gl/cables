@@ -39,11 +39,11 @@ function copyArray(a)
 function init()
 {
     if (!inArr.get()) return;
-    if (inArr.get() == lastArr) return;
 
-    if (lastArr)
-        if (inArr.get() == lastArr)
-            return;
+    // if (inArr.get() == lastArr) return; // cant dothat, then changes in array ref are not working...
+    // if (lastArr)
+    //     if (inArr.get() == lastArr)
+    //         return;
 
     lastArr = inArr.get();
     startTime = performance.now();

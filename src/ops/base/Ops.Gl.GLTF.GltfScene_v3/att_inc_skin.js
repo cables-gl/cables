@@ -39,10 +39,6 @@ const GltfSkin = class
 
         const invBindMatrix = mat4.create();
         const m = mat4.create();
-        // const nodeSkin = gltf.nodes[this._node.skin];
-
-        // console.log("yo",this._node.skin)
-        // this._node.render(cgl, false, true, true, false, false, time);
 
         for (let i = 0; i < gltf.json.skins[skinIdx].joints.length; i++)
         {
