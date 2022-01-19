@@ -1,0 +1,79 @@
+{
+    "id": "7110f169-adfd-4649-a77a-c825751eaa9b",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "amajesticseaflapflap",
+            "date": 1642599506723
+        }
+    ],
+    "coreLibs": [
+        "cgl_cubemapframebuffer"
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 1,
+                "name": "recapture"
+            },
+            {
+                "type": 2,
+                "name": "environment texture (rgbe)",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "irradiance map size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "pre-filtered environment size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "IBL LUT size index",
+                "subType": "integer"
+            },
+            {
+                "type": 0,
+                "name": "environment does not contain RGBE data",
+                "subType": "boolean"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 2,
+                "name": "IBL LUT",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "cubemap (diffuse irradiance)",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "cubemap (pre-filtered environment map)",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Number of Pre-filtered mip levels",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.Dev.PBRPrecomputeIBL"
+    },
+    "authorName": "amajesticseaflapflap",
+    "created": 1642599890799
+}
