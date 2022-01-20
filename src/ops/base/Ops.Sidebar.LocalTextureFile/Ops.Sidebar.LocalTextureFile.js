@@ -72,7 +72,8 @@ function handleFileSelect(evt)
         image.src = e.target.result;
     };
 
-    reader.readAsDataURL(evt.target.files[0]);
+    if (evt && evt.target && evt.target.files[0])
+        reader.readAsDataURL(evt.target.files[0]);
 }
 
 // events
