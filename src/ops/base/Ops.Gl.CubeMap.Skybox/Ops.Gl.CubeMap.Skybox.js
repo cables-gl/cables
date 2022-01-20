@@ -1,67 +1,80 @@
 const cgl = op.patch.cgl;
-
-
 const inTrigger = op.inTrigger("Trigger In");
 const inRender = op.inBool("Render", true);
 const inTexture = op.inObject("Skybox");
-const outTrigger = op.outTrigger("Trigger Out");
 
+const inRGBE = op.inBool("RGBE Format", false);
+const inExposure = op.inFloat("Exposure", 0.5);
+const inGamma = op.inFloat("Gamma", 1.5);
+
+const outTrigger = op.outTrigger("Trigger Out");
 
 const geometry = new CGL.Geometry("unit cube");
 
 geometry.vertices = new Float32Array([
     // * NOTE: tex coords not needed for cubemapping
-    -1.0,  1.0, -1.0,
+    -1.0, 1.0, -1.0,
     -1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-     1.0,  1.0, -1.0,
-    -1.0,  1.0, -1.0,
+    1.0, -1.0, -1.0,
+    1.0, -1.0, -1.0,
+    1.0, 1.0, -1.0,
+    -1.0, 1.0, -1.0,
 
-    -1.0, -1.0,  1.0,
+    -1.0, -1.0, 1.0,
     -1.0, -1.0, -1.0,
-    -1.0,  1.0, -1.0,
-    -1.0,  1.0, -1.0,
-    -1.0,  1.0,  1.0,
-    -1.0, -1.0,  1.0,
+    -1.0, 1.0, -1.0,
+    -1.0, 1.0, -1.0,
+    -1.0, 1.0, 1.0,
+    -1.0, -1.0, 1.0,
 
-     1.0, -1.0, -1.0,
-     1.0, -1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0, -1.0,
-     1.0, -1.0, -1.0,
+    1.0, -1.0, -1.0,
+    1.0, -1.0, 1.0,
+    1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0,
+    1.0, 1.0, -1.0,
+    1.0, -1.0, -1.0,
 
-    -1.0, -1.0,  1.0,
-    -1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-     1.0, -1.0,  1.0,
-    -1.0, -1.0,  1.0,
+    -1.0, -1.0, 1.0,
+    -1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0,
+    1.0, -1.0, 1.0,
+    -1.0, -1.0, 1.0,
 
-    -1.0,  1.0, -1.0,
-     1.0,  1.0, -1.0,
-     1.0,  1.0,  1.0,
-     1.0,  1.0,  1.0,
-    -1.0,  1.0,  1.0,
-    -1.0,  1.0, -1.0,
+    -1.0, 1.0, -1.0,
+    1.0, 1.0, -1.0,
+    1.0, 1.0, 1.0,
+    1.0, 1.0, 1.0,
+    -1.0, 1.0, 1.0,
+    -1.0, 1.0, -1.0,
 
     -1.0, -1.0, -1.0,
-    -1.0, -1.0,  1.0,
-     1.0, -1.0, -1.0,
-     1.0, -1.0, -1.0,
-    -1.0, -1.0,  1.0,
-     1.0, -1.0,  1.0
+    -1.0, -1.0, 1.0,
+    1.0, -1.0, -1.0,
+    1.0, -1.0, -1.0,
+    -1.0, -1.0, 1.0,
+    1.0, -1.0, 1.0
 ]);
 const mesh = new CGL.Mesh(cgl, geometry);
 const skyboxShader = new CGL.Shader(cgl, "skybox");
-const uniformSkybox = new CGL.Uniform(skyboxShader, 't', 'skybox', 0);
-skyboxShader.setModules(['MODULE_VERTEX_POSITION', 'MODULE_COLOR', 'MODULE_BEGIN_FRAG']);
+const uniformSkybox = new CGL.Uniform(skyboxShader, "t", "skybox", 0);
+
+const uniExposure = new CGL.Uniform(skyboxShader, "2f", "expGamma", inExposure, inGamma);
+
+skyboxShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
 skyboxShader.setSource(attachments.skybox_vert, attachments.skybox_frag);
 skyboxShader.offScreenPass = true;
 
-inTexture.onChange = () => {
-    if(inTexture.get() && inTexture.get().cubemap)
+inRGBE.onChange = () =>
+{
+    skyboxShader.toggleDefine("RGBE", inRGBE.get());
+    inGamma.setUiAttribs({ "greyout": !inRGBE.get() });
+    inExposure.setUiAttribs({ "greyout": !inRGBE.get() });
+};
+
+inTexture.onChange = () =>
+{
+    if (inTexture.get() && inTexture.get().cubemap)
     {
         skyboxShader.define("TEX_FORMAT_CUBEMAP");
         skyboxShader.removeDefine("TEX_FORMAT_EQUIRECT");
@@ -71,28 +84,37 @@ inTexture.onChange = () => {
         skyboxShader.removeDefine("TEX_FORMAT_CUBEMAP");
         skyboxShader.define("TEX_FORMAT_EQUIRECT");
     }
-}
-inTrigger.onTriggered = () => {
-    if (!inTexture.get()) {
+};
+
+inTrigger.onTriggered = () =>
+{
+    if (!inTexture.get())
+    {
         outTrigger.trigger();
         return;
     }
 
-    if (inRender.get()) {
+    if (inRender.get())
+    {
         skyboxShader.popTextures();
 
         cgl.pushDepthFunc(cgl.gl.LEQUAL);
 
-        if (!inTexture.get().cubemap && inTexture.get().filter !== CGL.Texture.FILTER_LINEAR) {
+        if (!inTexture.get().cubemap && inTexture.get().filter !== CGL.Texture.FILTER_LINEAR)
+        {
             op.setUiError("linearFilter", "If there is a seam in the skybox, try changing the texture filter to linear!", 1);
-        } else {
+        }
+        else
+        {
             op.setUiError("linearFilter", null);
         }
 
-        if (inTexture.get().tex) {
+        if (inTexture.get().tex)
+        {
             skyboxShader.pushTexture(uniformSkybox, inTexture.get().tex);
         }
-        else if (inTexture.get().cubemap) {
+        else if (inTexture.get().cubemap)
+        {
             skyboxShader.pushTexture(uniformSkybox, inTexture.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
         }
         mesh.render(skyboxShader);
@@ -101,4 +123,4 @@ inTrigger.onTriggered = () => {
     }
 
     outTrigger.trigger();
-}
+};

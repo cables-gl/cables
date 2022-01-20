@@ -17,26 +17,41 @@
     "layout": {
         "portsIn": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger In"
             },
             {
-                "type": "0",
+                "type": 0,
                 "name": "Render",
                 "subType": "boolean"
             },
             {
-                "type": "2",
+                "type": 2,
                 "name": "Skybox"
+            },
+            {
+                "type": 0,
+                "name": "RGBE Format",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Exposure",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Gamma",
+                "subType": "number"
             }
         ],
         "portsOut": [
             {
-                "type": "1",
+                "type": 1,
                 "name": "Trigger Out"
             }
         ],
-        "name": "Ops.User.cables.Skybox"
+        "name": "Ops.Gl.CubeMap.Skybox"
     },
     "summary": "render an equirectangular map or a cubemap as scene background",
     "issues": "",
