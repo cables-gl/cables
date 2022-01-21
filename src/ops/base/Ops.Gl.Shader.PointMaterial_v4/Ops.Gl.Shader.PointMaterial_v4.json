@@ -1,5 +1,5 @@
 {
-    "authorName": "stephan",
+    "authorName": "pandur",
     "id": "a7cb5d1c-cd4a-4c28-bb13-7bb9bda187ed",
     "created": 1616178535004,
     "layout": {
@@ -163,17 +163,17 @@
         },
         {
             "message": "cloned op from Ops.Gl.Shader.PointMaterial_v3",
-            "author": "stephan",
+            "author": "pandur",
             "date": 1616178535005
         },
         {
-            "message": "Ops.User.stephan.PointMaterial_v4 renamed to Ops.Gl.Shader.PointMaterial_v4",
-            "author": "stephan",
+            "message": "Ops.User.pandur.PointMaterial_v4 renamed to Ops.Gl.Shader.PointMaterial_v4",
+            "author": "pandur",
             "date": 1616178603397
         },
         {
             "message": "added alpha",
-            "author": "stephan",
+            "author": "pandur",
             "date": 1616178893665
         }
     ],

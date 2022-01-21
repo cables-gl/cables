@@ -217,7 +217,7 @@ function capturePrefilteredCubemap(size)
     PrefilteringShader.popTextures();
     PrefilteringShader.pushTexture(uniformPrefilteringCubemap, inCubemap.get().tex);
 
-    for (let mip = 0; mip < maxMipLevels; ++mip)
+    for (let mip = 0; mip <= maxMipLevels; ++mip)
     {
         let currentMipSize = Number(size) * Math.pow(0.5, mip);
         let roughness = mip / (maxMipLevels - 1);
