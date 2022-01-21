@@ -25,8 +25,8 @@ const cgl = op.patch.cgl;
 let loadedFilename = null;
 let loadingId = null;
 let tex = null;
-let cgl_filter = 0;
-let cgl_wrap = 0;
+let cgl_filter = CGL.Texture.FILTER_MIPMAP;
+let cgl_wrap = CGL.Texture.WRAP_REPEAT;
 let cgl_aniso = 0;
 let timedLoader = 0;
 

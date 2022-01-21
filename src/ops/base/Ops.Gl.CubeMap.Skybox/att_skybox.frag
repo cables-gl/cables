@@ -3,6 +3,10 @@
 #define RECIPROCAL_PI 1./PI
 #define RECIPROCAL_PI2 RECIPROCAL_PI/2.
 
+#ifdef RGBE
+    UNI vec2 expGamma;
+#endif
+
 #ifdef TEX_FORMAT_CUBEMAP
     UNI samplerCube skybox;
     #ifndef WEBGL1
@@ -37,6 +41,12 @@ vec4 sampleEquirect(sampler2D tex, vec3 direction) {
     return texture(tex, sampleUV);
 }
 
+highp vec3 DecodeRGBE8(highp vec4 rgbe)
+{
+    highp vec3 vDecoded = rgbe.rgb * pow(2.0, rgbe.a * 255.0-128.0);
+    return vDecoded;
+}
+
 void main() {
     {{MODULE_BEGIN_FRAG}}
     vec4 col = vec4(1.);
@@ -44,7 +54,26 @@ void main() {
     {{MODULE_COLOR}}
 
     vec3 newPos = worldPos;
-    outColor = vec4(SAMPLETEX(skybox, worldPos));
+
+
+    #ifndef RGBE
+        outColor = vec4(SAMPLETEX(skybox, newPos));
+    #endif
+
+
+    #ifdef RGBE
+
+        vec3 hdrColor=DecodeRGBE8(SAMPLETEX(skybox, newPos));
+
+        float gamma=expGamma.x;
+        float exposure=expGamma.y;
+        hdrColor = vec3(1.0) - exp(-hdrColor * exposure);
+        // gamma correction
+        hdrColor = pow(hdrColor, vec3(1.0 / gamma));
+
+        outColor=vec4(hdrColor,1.0);
+    #endif
+
     // outColor = vec4(1.,0.,0.,1.);
 }
 

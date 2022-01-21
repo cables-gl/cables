@@ -1,0 +1,138 @@
+{
+    "id": "a5234947-f65a-41e2-a691-b81382903a71",
+    "changelog": [
+        {
+            "message": "created op",
+            "author": "amajesticseaflapflap",
+            "date": 1642599258807
+        }
+    ],
+    "layout": {
+        "portsIn": [
+            {
+                "type": 1,
+                "name": "render"
+            },
+            {
+                "type": 0,
+                "name": "R",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "G",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "B",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "A",
+                "group": "Diffuse Color",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Roughness",
+                "group": "Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Metalness",
+                "group": "Shader Parameters",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "use mesh tangents/binormals",
+                "group": "Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "disable geometric roughness",
+                "group": "Shader Parameters",
+                "subType": "boolean"
+            },
+            {
+                "type": 0,
+                "name": "Alpha Mode index",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "IBL LUT",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "cubemap (diffuse irradiance)",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "cubemap (pre-filtered environment map)",
+                "group": "Lighting",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Number of Pre-filtered mip levels",
+                "group": "Lighting",
+                "subType": "integer"
+            },
+            {
+                "type": 2,
+                "name": "Albedo (sRGB)",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "AORM (linear rec.709, R: ambient occlusion, G: roughness, B: metalness)",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 2,
+                "name": "Normal map (linear rec.709, +Y, TS per vertex)",
+                "group": "Textures",
+                "objType": "texture"
+            },
+            {
+                "type": 0,
+                "name": "Diffuse Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Specular Intensity",
+                "group": "Lighting",
+                "subType": "number"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 1,
+                "name": "next"
+            },
+            {
+                "type": 2,
+                "name": "Shader"
+            }
+        ],
+        "name": "Ops.Dev.PBRMaterial"
+    },
+    "authorName": "amajesticseaflapflap",
+    "created": 1642599874914
+}
