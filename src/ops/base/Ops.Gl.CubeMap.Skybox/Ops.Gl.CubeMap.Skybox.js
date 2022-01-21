@@ -2,10 +2,11 @@ const cgl = op.patch.cgl;
 const inTrigger = op.inTrigger("Trigger In");
 const inRender = op.inBool("Render", true);
 const inTexture = op.inObject("Skybox");
+const inRot = op.inFloat("Rotate", 0);
 
 const inRGBE = op.inBool("RGBE Format", false);
-const inExposure = op.inFloat("Exposure", 0.5);
-const inGamma = op.inFloat("Gamma", 1.5);
+const inExposure = op.inFloat("Exposure", 1);
+const inGamma = op.inFloat("Gamma", 2.2);
 
 const outTrigger = op.outTrigger("Trigger Out");
 
@@ -98,6 +99,7 @@ inTrigger.onTriggered = () =>
     {
         skyboxShader.popTextures();
 
+        cgl.pushModelMatrix();
         cgl.pushDepthFunc(cgl.gl.LEQUAL);
 
         if (!inTexture.get().cubemap && inTexture.get().filter !== CGL.Texture.FILTER_LINEAR)
@@ -109,6 +111,8 @@ inTrigger.onTriggered = () =>
             op.setUiError("linearFilter", null);
         }
 
+        mat4.rotateY(cgl.mMatrix, cgl.mMatrix, inRot.get() * CGL.DEG2RAD);
+
         if (inTexture.get().tex)
         {
             skyboxShader.pushTexture(uniformSkybox, inTexture.get().tex);
@@ -119,6 +123,7 @@ inTrigger.onTriggered = () =>
         }
         mesh.render(skyboxShader);
 
+        cgl.popModelMatrix();
         cgl.popDepthFunc();
     }
 
