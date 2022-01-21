@@ -64,6 +64,7 @@
             {
                 "type": 0,
                 "name": "Alpha Mode index",
+                "group": "Shader Parameters",
                 "subType": "integer"
             },
             {
@@ -131,7 +132,7 @@
                 "name": "Shader"
             }
         ],
-        "name": "Ops.Dev.PBRMaterial"
+        "name": "Ops.Dev.PbrMaterial"
     },
     "authorName": "amajesticseaflapflap",
     "created": 1642599874914

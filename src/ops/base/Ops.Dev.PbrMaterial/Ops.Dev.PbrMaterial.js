@@ -82,7 +82,7 @@ const inNormalUniform = new CGL.Uniform(PBRShader, "t", "_NormalMap", 0);
 const inIBLLUTUniform = new CGL.Uniform(PBRShader, "t", "IBL_BRDF_LUT", 0);
 const inIrradianceUniform = new CGL.Uniform(PBRShader, "tc", "_irradiance", 1);
 const inPrefilteredUniform = new CGL.Uniform(PBRShader, "tc", "_prefilteredEnvironmentColour", 1);
-const inMipLevelsUniform = new CGL.Uniform(PBRShader, "f", "MAX_REFLECTION_LOD", inMipLevels);
+const inMipLevelsUniform = new CGL.Uniform(PBRShader, "f", "MAX_REFLECTION_LOD", 0);
 // let inTonemappingExposureUniform = new CGL.Uniform(PBRShader, "f", "tonemappingExposure", 2.0);
 const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntensity", 1.0);
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", 1.0);
@@ -90,6 +90,8 @@ const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularInte
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
 const inRoughessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", 0.5);
 const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", 0);
+
+inTexPrefiltered.onChange = updateIBLTexDefines;
 
 inTexAlbedo.onChange = () =>
 {
@@ -155,15 +157,45 @@ op.preRender = function ()
     doRender();
 };
 
+function updateIBLTexDefines()
+{
+    inMipLevels.setUiAttribs({ "greyout": !inTexPrefiltered.get() });
+}
+
 function doRender()
 {
     cgl.pushShader(PBRShader);
 
     PBRShader.popTextures();
 
-    if (inTexIBLLUT.get()) PBRShader.pushTexture(inIBLLUTUniform, inTexIBLLUT.get().tex);
-    if (inTexIrradiance.get()) PBRShader.pushTexture(inIrradianceUniform, inTexIrradiance.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
-    if (inTexPrefiltered.get()) PBRShader.pushTexture(inPrefilteredUniform, inTexPrefiltered.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+    if (cgl.frameStore.pbrEnvStack && cgl.frameStore.pbrEnvStack.length > 0 &&
+        cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texIBLLUT.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texDiffIrr.tex && cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1].texPreFiltered.tex)
+    {
+        const pbrEnv = cgl.frameStore.pbrEnvStack[cgl.frameStore.pbrEnvStack.length - 1];
+
+        PBRShader.pushTexture(inIBLLUTUniform, pbrEnv.texIBLLUT.tex);
+        PBRShader.pushTexture(inIrradianceUniform, pbrEnv.texDiffIrr.tex, cgl.gl.TEXTURE_CUBE_MAP);
+        PBRShader.pushTexture(inPrefilteredUniform, pbrEnv.texPreFiltered.tex, cgl.gl.TEXTURE_CUBE_MAP);
+        inMipLevelsUniform.setValue(pbrEnv.texPreFilteredMipLevels || 7);
+        op.setUiError("noPbrEnv", null);
+    }
+    else
+    {
+        op.setUiError("noPbrEnv", "No PBR precompute environment setup found in branch");
+        PBRShader.pushTexture(inIBLLUTUniform, CGL.Texture.getEmptyTexture(cgl).tex);
+        PBRShader.pushTexture(inIrradianceUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
+        PBRShader.pushTexture(inPrefilteredUniform, CGL.Texture.getEmptyCubemapTexture(cgl).tex, cgl.gl.TEXTURE_CUBE_MAP);
+        inMipLevelsUniform.setValue(7);
+    }
+
+    if (inTexIBLLUT.get())
+    {
+        op.setUiError("noPbrEnv", null);
+        PBRShader.pushTexture(inIBLLUTUniform, inTexIBLLUT.get().tex);
+        inMipLevelsUniform.setValue(inMipLevels.get());
+        if (inTexIrradiance.get()) PBRShader.pushTexture(inIrradianceUniform, inTexIrradiance.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+        if (inTexPrefiltered.get()) PBRShader.pushTexture(inPrefilteredUniform, inTexPrefiltered.get().cubemap, cgl.gl.TEXTURE_CUBE_MAP);
+    }
 
     if (inTexAlbedo.get()) PBRShader.pushTexture(inAlbedoUniform, inTexAlbedo.get().tex);
     if (inTexAORM.get()) PBRShader.pushTexture(inAORMUniform, inTexAORM.get().tex);

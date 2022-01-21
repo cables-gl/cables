@@ -82,7 +82,7 @@ let PrefilteredTexture = null;
 let PrefilteredFrameBuffer = null;
 let IBLLUTFrameBuffer = null;
 let maxMipLevels = null;
-
+const pbrEnv = {};
 const IrradianceShader = new CGL.Shader(cgl, "IrradianceShader");
 const PrefilteringShader = new CGL.Shader(cgl, "PrefilteringShader");
 IrradianceShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -314,7 +314,18 @@ inTrigger.onTriggered = function ()
         captureIrradianceCubemap(Number(inIrradianceSize.get()));
         IrradianceSizeChanged = false;
     }
+
+    pbrEnv.texIBLLUT = outTexIBLLUT.get();
+    pbrEnv.texDiffIrr = outTexIrradiance.get();
+    pbrEnv.texPreFiltered = outTexPrefiltered.get();
+    pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
+
+    cgl.frameStore.pbrEnvStack = cgl.frameStore.pbrEnvStack || [];
+    cgl.frameStore.pbrEnvStack.push(pbrEnv);
+
     outTrigger.trigger();
+
+    cgl.frameStore.pbrEnvStack.pop();
 };
 
 inTriggerRecapture.onTriggered = function ()

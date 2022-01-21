@@ -41,6 +41,7 @@ const Context = function (_patch)
     this._cursor = "auto";
     this._currentCursor = "";
 
+
     /**
      * Current projection matrix
      * @memberof Context
