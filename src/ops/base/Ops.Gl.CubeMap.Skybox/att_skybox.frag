@@ -55,25 +55,17 @@ void main() {
 
     vec3 newPos = worldPos;
 
-
     #ifndef RGBE
         outColor = vec4(SAMPLETEX(skybox, newPos));
     #endif
 
-
     #ifdef RGBE
-
         vec3 hdrColor=DecodeRGBE8(SAMPLETEX(skybox, newPos));
-
         float gamma=expGamma.x;
         float exposure=expGamma.y;
         hdrColor = vec3(1.0) - exp(-hdrColor * exposure);
-        // gamma correction
-        hdrColor = pow(hdrColor, vec3(1.0 / gamma));
 
+        hdrColor = pow(hdrColor, vec3(1.0 / gamma));
         outColor=vec4(hdrColor,1.0);
     #endif
-
-    // outColor = vec4(1.,0.,0.,1.);
 }
-

@@ -50,7 +50,7 @@ const mesh = new CGL.Mesh(cgl, geometry);
 const fullscreenRectangle = CGL.MESHES.getSimpleRect(cgl, "fullscreenRectangle");
 // inputs
 const inTrigger = op.inTrigger("render");
-const inTriggerRecapture = op.inTriggerButton("recapture");
+// const inTriggerRecapture = op.inTriggerButton("recapture");
 
 const inCubemap = op.inTexture("environment texture (rgbe)");
 
@@ -328,8 +328,8 @@ inTrigger.onTriggered = function ()
     cgl.frameStore.pbrEnvStack.pop();
 };
 
-inTriggerRecapture.onTriggered = function ()
-{
-    IrradianceSizeChanged = true;
-    PrefilteredSizeChanged = true;
-};
+// inTriggerRecapture.onTriggered = function ()
+// {
+//     IrradianceSizeChanged = true;
+//     PrefilteredSizeChanged = true;
+// };
