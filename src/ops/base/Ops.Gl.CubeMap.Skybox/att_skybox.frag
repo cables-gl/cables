@@ -35,7 +35,7 @@ vec4 sampleEquirect(sampler2D tex, vec3 direction) {
     vec2 sampleUV;
     vec3 newDirection = normalize(direction);
 
-    sampleUV.x = -1. * (atan( newDirection.z, newDirection.x ) * RECIPROCAL_PI2 + 0.75);
+    sampleUV.x = atan( newDirection.z, newDirection.x ) * RECIPROCAL_PI2 + 0.75;
     sampleUV.y = asin( clamp(newDirection.y, -1., 1.) ) * RECIPROCAL_PI + 0.5;
 
     return texture(tex, sampleUV);
