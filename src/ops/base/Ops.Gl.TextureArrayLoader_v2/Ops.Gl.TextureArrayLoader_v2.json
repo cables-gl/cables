@@ -70,7 +70,7 @@
         "name": "Ops.Gl.TextureArrayLoader_v2"
     },
     "summary": "load multiple images into an array",
-    "authorName": "stephan",
+    "authorName": "pandur",
     "id": "4bbb57ce-3c7b-49c1-84fd-2b6a27ff3afa",
     "created": 1631107270910,
     "docs": {
@@ -107,12 +107,12 @@
     "changelog": [
         {
             "message": "cloned op from Ops.Gl.TextureArrayLoader",
-            "author": "stephan",
+            "author": "pandur",
             "date": 1631107270911
         },
         {
-            "message": "Ops.User.stephan.TextureArrayLoader_v2 renamed to Ops.Gl.TextureArrayLoader_v2",
-            "author": "stephan",
+            "message": "Ops.User.pandur.TextureArrayLoader_v2 renamed to Ops.Gl.TextureArrayLoader_v2",
+            "author": "pandur",
             "date": 1631107797285
         }
     ]

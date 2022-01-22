@@ -1,1 +1,74 @@
-{"authorName":"stephan","id":"c0613f9e-5ddb-479e-bc90-4ffc23f97860","created":1615829783108,"layout":{"portsIn":[{"type":0,"name":"Time","subType":"number"},{"type":5,"name":"Frames"},{"type":0,"name":"Loop","subType":"boolean"},{"type":1,"name":"Rewind"}],"portsOut":[{"type":0,"name":"result time","subType":"number"},{"type":3,"name":"Expanded Frames"},{"type":0,"name":"Finished","subType":"number"},{"type":1,"name":"Finished Trigger"},{"type":0,"name":"Anim Length","subType":"number"},{"type":0,"name":"Progress","subType":"number"}],"name":"Ops.User.stephan.FrameRangeAnim_v2"},"summary":"parses string containing ranges of frames and play as coherent animation","docs":{"ports":[]},"changelog":[{"message":"cloned op from Ops.Anim.FrameRangeAnim","author":"stephan","date":1615829783109},{"message":"Ops.User.stephan.FrameRangeAnim_v2 renamed to Ops.Anim.FrameRangeAnim_v2","author":"stephan","date":1615829957178}]}
+{
+    "authorName": "pandur",
+    "id": "c0613f9e-5ddb-479e-bc90-4ffc23f97860",
+    "created": 1615829783108,
+    "layout": {
+        "portsIn": [
+            {
+                "type": 0,
+                "name": "Time",
+                "subType": "number"
+            },
+            {
+                "type": 5,
+                "name": "Frames"
+            },
+            {
+                "type": 0,
+                "name": "Loop",
+                "subType": "boolean"
+            },
+            {
+                "type": 1,
+                "name": "Rewind"
+            }
+        ],
+        "portsOut": [
+            {
+                "type": 0,
+                "name": "result time",
+                "subType": "number"
+            },
+            {
+                "type": 3,
+                "name": "Expanded Frames"
+            },
+            {
+                "type": 0,
+                "name": "Finished",
+                "subType": "number"
+            },
+            {
+                "type": 1,
+                "name": "Finished Trigger"
+            },
+            {
+                "type": 0,
+                "name": "Anim Length",
+                "subType": "number"
+            },
+            {
+                "type": 0,
+                "name": "Progress",
+                "subType": "number"
+            }
+        ],
+        "name": "Ops.User.pandur.FrameRangeAnim_v2"
+    },
+    "summary": "parses string containing ranges of frames and play as coherent animation",
+    "docs": {
+        "ports": []
+    },
+    "changelog": [
+        {
+            "message": "cloned op from Ops.Anim.FrameRangeAnim",
+            "author": "pandur",
+            "date": 1615829783109
+        },
+        {
+            "message": "Ops.User.pandur.FrameRangeAnim_v2 renamed to Ops.Anim.FrameRangeAnim_v2",
+            "author": "pandur",
+            "date": 1615829957178
+        }
+    ]
+}
