@@ -17,10 +17,6 @@
                 "name": "render"
             },
             {
-                "type": 1,
-                "name": "recapture"
-            },
-            {
                 "type": 2,
                 "name": "environment texture (rgbe)",
                 "objType": "texture"

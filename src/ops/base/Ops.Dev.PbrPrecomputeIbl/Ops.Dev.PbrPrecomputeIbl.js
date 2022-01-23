@@ -50,7 +50,7 @@ const mesh = new CGL.Mesh(cgl, geometry);
 const fullscreenRectangle = CGL.MESHES.getSimpleRect(cgl, "fullscreenRectangle");
 // inputs
 const inTrigger = op.inTrigger("render");
-const inTriggerRecapture = op.inTriggerButton("recapture");
+// const inTriggerRecapture = op.inTriggerButton("recapture");
 
 const inCubemap = op.inTexture("environment texture (rgbe)");
 
@@ -82,7 +82,7 @@ let PrefilteredTexture = null;
 let PrefilteredFrameBuffer = null;
 let IBLLUTFrameBuffer = null;
 let maxMipLevels = null;
-
+const pbrEnv = {};
 const IrradianceShader = new CGL.Shader(cgl, "IrradianceShader");
 const PrefilteringShader = new CGL.Shader(cgl, "PrefilteringShader");
 IrradianceShader.setModules(["MODULE_VERTEX_POSITION", "MODULE_COLOR", "MODULE_BEGIN_FRAG"]);
@@ -314,11 +314,22 @@ inTrigger.onTriggered = function ()
         captureIrradianceCubemap(Number(inIrradianceSize.get()));
         IrradianceSizeChanged = false;
     }
+
+    pbrEnv.texIBLLUT = outTexIBLLUT.get();
+    pbrEnv.texDiffIrr = outTexIrradiance.get();
+    pbrEnv.texPreFiltered = outTexPrefiltered.get();
+    pbrEnv.texPreFilteredMipLevels = outMipLevels.get();
+
+    cgl.frameStore.pbrEnvStack = cgl.frameStore.pbrEnvStack || [];
+    cgl.frameStore.pbrEnvStack.push(pbrEnv);
+
     outTrigger.trigger();
+
+    cgl.frameStore.pbrEnvStack.pop();
 };
 
-inTriggerRecapture.onTriggered = function ()
-{
-    IrradianceSizeChanged = true;
-    PrefilteredSizeChanged = true;
-};
+// inTriggerRecapture.onTriggered = function ()
+// {
+//     IrradianceSizeChanged = true;
+//     PrefilteredSizeChanged = true;
+// };

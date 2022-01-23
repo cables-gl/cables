@@ -41,6 +41,7 @@ const Context = function (_patch)
     this._cursor = "auto";
     this._currentCursor = "";
 
+
     /**
      * Current projection matrix
      * @memberof Context
@@ -549,7 +550,7 @@ const Context = function (_patch)
 
         // if (!this.gl.isTexture(t))
         // {
-        //     console.log("not a texture!!!!"); return false
+        //     console.log("not a texture!!!!"); return false;
         //     t = CGL.Texture.getEmptyTexture(this).tex;
         // }
 
