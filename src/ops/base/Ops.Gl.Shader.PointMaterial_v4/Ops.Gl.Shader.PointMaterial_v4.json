@@ -95,6 +95,7 @@
             {
                 "type": 0,
                 "name": "Mask Channel index",
+                "group": "Texture",
                 "subType": "integer"
             },
             {
@@ -124,6 +125,7 @@
             {
                 "type": 0,
                 "name": "Point Size Channel index",
+                "group": "Size",
                 "subType": "integer"
             },
             {
