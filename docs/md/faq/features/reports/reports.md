@@ -7,7 +7,7 @@ Please provide us with enough information to investigate your issue. This is a s
 
 ## Where to report bugs?
 
-Please keep all bugreports to the [forum](https://forum.cables.gl/) and make sure the same
+Please keep all bugreports to the [forum](https://github.com/cables-gl/cables_docs/discussions/categories/bug-reports) and make sure the same
 or a similar bug has not been posted before.
 
 ## What information to include in my post to the forum?
