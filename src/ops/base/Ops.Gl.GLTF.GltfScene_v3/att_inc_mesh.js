@@ -16,17 +16,30 @@ let gltfMesh = class
         gltf.loadingMeshes = gltf.loadingMeshes || 0;
         gltf.loadingMeshes++;
 
+        this.materialJson=
+            this._matPbrMetalness=
+            this._matPbrRoughness=
+            this._matDiffuseColor=null;
 
-        this.materialJson=null;
+
 
         if(gltf.json.materials)
         {
             if(this.material!=-1)this.materialJson=gltf.json.materials[this.material];
 
-            if(this.materialJson && this.materialJson.pbrMetallicRoughness && this.materialJson.pbrMetallicRoughness.baseColorFactor)
+            if(this.materialJson && this.materialJson.pbrMetallicRoughness)
             {
 
-                this._diffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
+                if( this.materialJson.pbrMetallicRoughness.baseColorFactor)
+                    this._matDiffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
+
+
+                this._matDiffuseColor=this.materialJson.pbrMetallicRoughness.baseColorFactor;
+
+                this._matPbrMetalness=this.materialJson.pbrMetallicRoughness.metallicFactor||null;
+                this._matPbrRoughness=this.materialJson.pbrMetallicRoughness.roughnessFactor||null;
+
+
             }
         }
 
@@ -324,19 +337,50 @@ let gltfMesh = class
 
             if (useMat) cgl.pushShader(gltf.shaders[this.material]);
 
-            const uniDiff=cgl.getShader().uniformColorDiffuse;
-            if(inUseMatProps.get() && uniDiff && this._diffuseColor)
-            {
-                this._diffuseColorOrig=[uniDiff.getValue()[0],uniDiff.getValue()[1],uniDiff.getValue()[2],uniDiff.getValue()[3]];
 
-                uniDiff.setValue(this._diffuseColor);
+            const uniDiff=cgl.getShader().uniformColorDiffuse;
+
+            const uniPbrMetalness=cgl.getShader().uniformPbrMetalness;
+            const uniPbrRoughness=cgl.getShader().uniformPbrRoughness;
+
+            if(inUseMatProps.get())
+            {
+
+                if(uniDiff && this._matDiffuseColor)
+                {
+                    this._matDiffuseColorOrig=[uniDiff.getValue()[0],uniDiff.getValue()[1],uniDiff.getValue()[2],uniDiff.getValue()[3]];
+                    uniDiff.setValue(this._matDiffuseColor);
+
+                    // console.log("rough",this._matDiffuseColor)
+
+                }
+
+                if(uniPbrMetalness)
+                    if(this._matPbrMetalness!=null)
+                    {
+                        this._matPbrMetalnessOrig=uniPbrMetalness.getValue();
+                        uniPbrMetalness.setValue(this._matPbrMetalness);
+                    }
+                    else
+                    uniPbrMetalness.setValue(0);
+
+
+                if(uniPbrRoughness)
+                    if( this._matPbrRoughness!=null )
+                    {
+                        this._matPbrRoughnessOrig=uniPbrRoughness.getValue();
+                        uniPbrRoughness.setValue(this._matPbrRoughness);
+                    }
+                    else uniPbrRoughness.setValue(0);
             }
 
             if (this.mesh) this.mesh.render(cgl.getShader(), ignoreMaterial);
 
-            if(inUseMatProps.get() && uniDiff && this._diffuseColor)
+            if(inUseMatProps.get())
             {
-                uniDiff.setValue(this._diffuseColorOrig);
+                if(uniDiff && this._matDiffuseColor) uniDiff.setValue(this._matDiffuseColorOrig);
+                if(uniPbrMetalness && this._matPbrMetalnessOrig!=undefined) uniPbrMetalness.setValue(this._matPbrMetalnessOrig);
+                if(uniPbrRoughness && this._matPbrRoughnessOrig!=undefined) uniPbrRoughness.setValue(this._matPbrRoughnessOrig);
             }
 
             if (useMat) cgl.popShader();

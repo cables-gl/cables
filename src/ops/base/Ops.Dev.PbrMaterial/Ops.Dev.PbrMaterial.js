@@ -88,8 +88,12 @@ const inDiffuseIntensityUniform = new CGL.Uniform(PBRShader, "f", "diffuseIntens
 const inSpecularIntensityUniform = new CGL.Uniform(PBRShader, "f", "specularIntensity", 1.0);
 
 const inDiffuseColor = new CGL.Uniform(PBRShader, "4f", "_Albedo", inDiffuseR, inDiffuseG, inDiffuseB, inDiffuseA);
-const inRoughessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", 0.5);
+const inRoughnessUniform = new CGL.Uniform(PBRShader, "f", "_Roughness", 0.5);
 const inMetalnessUniform = new CGL.Uniform(PBRShader, "f", "_Metalness", 0);
+
+PBRShader.uniformColorDiffuse = inDiffuseColor;
+PBRShader.uniformPbrMetalness = inMetalnessUniform;
+PBRShader.uniformPbrRoughness = inRoughnessUniform;
 
 inTexPrefiltered.onChange = updateIBLTexDefines;
 
@@ -203,7 +207,7 @@ function doRender()
 
     if (!inTexAORM.get())
     {
-        inRoughessUniform.setValue(inRoughness.get());
+        inRoughnessUniform.setValue(inRoughness.get());
         inMetalnessUniform.setValue(inMetalness.get());
     }
 

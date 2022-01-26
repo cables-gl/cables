@@ -281,6 +281,9 @@ function computeIBLLUT(size)
 
 inCubemap.onChange = () =>
 {
+    if (inCubemap.get())
+        op.setUiError("nocubemapinput", null);
+
     PrefilteredSizeChanged =
     IrradianceSizeChanged = true;
 };
@@ -291,6 +294,7 @@ inTrigger.onTriggered = function ()
     if (!inCubemap.get())
     {
         outTrigger.trigger();
+        op.setUiError("nocubemapinput", "No Environment Texture connected");
         return;
     }
 
