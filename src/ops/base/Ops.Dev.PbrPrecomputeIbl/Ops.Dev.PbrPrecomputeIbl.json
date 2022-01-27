@@ -18,27 +18,27 @@
             },
             {
                 "type": 2,
-                "name": "environment texture (rgbe)",
+                "name": "RGBE Environment map",
                 "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "irradiance map size index",
+                "name": "Size Irradiance map index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "pre-filtered environment size index",
+                "name": "Size pre-filtered environment index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "IBL LUT size index",
+                "name": "Size IBL LUT index",
                 "subType": "integer"
             },
             {
                 "type": 0,
-                "name": "environment does not contain RGBE data",
+                "name": "Environment map does not contain RGBE data",
                 "subType": "boolean"
             }
         ],

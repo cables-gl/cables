@@ -13,26 +13,34 @@ op.setPortGroup("Diffuse Color", diffuseColors);
 
 const inRoughness = op.inFloatSlider("Roughness", 0.5);
 const inMetalness = op.inFloatSlider("Metalness", 1.0);
-const inToggleGS = op.inBool("use mesh tangents/binormals", false);
-const inToggleGR = op.inBool("disable geometric roughness", false);
+const inToggleGS = op.inBool("Use mesh tangents/binormals", false);
+const inToggleGR = op.inBool("Disable geometric roughness", false);
 const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "Blend"], "Opaque");
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
-const inTexIrradiance = op.inTexture("cubemap (diffuse irradiance)");
-const inTexPrefiltered = op.inTexture("cubemap (pre-filtered environment map)");
-const inMipLevels = op.inInt("Number of Pre-filtered mip levels");
+const inTexIrradiance = op.inTexture("Diffuse Irradiance)");
+const inTexPrefiltered = op.inTexture("Pre-filtered envmap");
+const inMipLevels = op.inInt("Num mip levels");
+// const inTexIBLLUT = op.inTexture("IBL LUT");
+// const inTexIrradiance = op.inTexture("cubemap (diffuse irradiance)");
+// const inTexPrefiltered = op.inTexture("cubemap (pre-filtered environment map)");
+// const inMipLevels = op.inInt("Number of Pre-filtered mip levels");
 
-const inTexAlbedo = op.inTexture("Albedo (sRGB)");
-const inTexAORM = op.inTexture("AORM (linear rec.709, R: ambient occlusion, G: roughness, B: metalness)");
-const inTexNormal = op.inTexture("Normal map (linear rec.709, +Y, TS per vertex)");
+const inTexAlbedo = op.inTexture("Albedo");
+const inTexAORM = op.inTexture("AORM");
+const inTexNormal = op.inTexture("Normal map");
+
+// const inTexAlbedo = op.inTexture("Albedo (sRGB)");
+// const inTexAORM = op.inTexture("AORM (linear rec.709, R: ambient occlusion, G: roughness, B: metalness)");
+// const inTexNormal = op.inTexture("Normal map (linear rec.709, +Y, TS per vertex)");
 
 // const inTonemappingExposure = op.inFloat("Tonemapping Exposure", 2.0);
 const inDiffuseIntensity = op.inFloat("Diffuse Intensity", 1.0);
 const inSpecularIntensity = op.inFloat("Specular Intensity", 1.0);
 
 // outputs
-const outTrigger = op.outTrigger("next");
+const outTrigger = op.outTrigger("Next");
 const shaderOut = op.outObject("Shader");
 shaderOut.ignoreValueSerialize = true;
 // UI stuff
