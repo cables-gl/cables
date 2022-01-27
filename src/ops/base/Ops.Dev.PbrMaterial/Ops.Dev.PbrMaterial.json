@@ -135,5 +135,20 @@
         "name": "Ops.Dev.PbrMaterial"
     },
     "authorName": "amajesticseaflapflap",
-    "created": 1642599874914
+    "created": 1642599874914,
+    "credits": [
+        {
+            "title": "BabylonJS Shader Code",
+            "author": "Babylon.js",
+            "url": "https://github.com/BabylonJS/Babylon.js/blob/master/license.md",
+            "licence": "Apache License"
+        },
+        {
+            "title": "Filament Code",
+            "author": "google",
+            "url": "https://github.com/google/filament/blob/main/LICENSE",
+            "licence": "Apache License"
+        }
+    ]
+
 }
