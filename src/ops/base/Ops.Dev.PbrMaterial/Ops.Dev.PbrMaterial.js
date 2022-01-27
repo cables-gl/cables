@@ -19,7 +19,7 @@ const inAlphaMode = op.inSwitch("Alpha Mode", ["Opaque", "Masked", "Dithered", "
 
 // texture inputs
 const inTexIBLLUT = op.inTexture("IBL LUT");
-const inTexIrradiance = op.inTexture("Diffuse Irradiance)");
+const inTexIrradiance = op.inTexture("Diffuse Irradiance");
 const inTexPrefiltered = op.inTexture("Pre-filtered envmap");
 const inMipLevels = op.inInt("Num mip levels");
 // const inTexIBLLUT = op.inTexture("IBL LUT");

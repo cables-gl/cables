@@ -75,7 +75,7 @@
             },
             {
                 "type": 2,
-                "name": "Diffuse Irradiance)",
+                "name": "Diffuse Irradiance",
                 "group": "Lighting",
                 "objType": "texture"
             },
