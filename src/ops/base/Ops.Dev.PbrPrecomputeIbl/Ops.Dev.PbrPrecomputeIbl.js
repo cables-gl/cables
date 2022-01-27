@@ -52,12 +52,12 @@ const fullscreenRectangle = CGL.MESHES.getSimpleRect(cgl, "fullscreenRectangle")
 const inTrigger = op.inTrigger("render");
 // const inTriggerRecapture = op.inTriggerButton("recapture");
 
-const inCubemap = op.inTexture("environment texture (rgbe)");
+const inCubemap = op.inTexture("RGBE Environment map");
 
-const inIrradianceSize = op.inDropDown("irradiance map size", [16, 32, 64], 64);
-const inPrefilteredSize = op.inDropDown("pre-filtered environment size", [64, 128], 128);
-const inIBLLUTSize = op.inDropDown("IBL LUT size", [128, 256, 512, 1024], 256);
-const inToggleRGBE = op.inBool("environment does not contain RGBE data", false);
+const inIrradianceSize = op.inDropDown("Size Irradiance map", [16, 32, 64], 64);
+const inPrefilteredSize = op.inDropDown("Size pre-filtered environment", [64, 128], 128);
+const inIBLLUTSize = op.inDropDown("Size IBL LUT", [128, 256, 512, 1024], 256);
+const inToggleRGBE = op.inBool("Environment map does not contain RGBE data", false);
 
 let IrradianceSizeChanged = true;
 let PrefilteredSizeChanged = true;
@@ -281,6 +281,9 @@ function computeIBLLUT(size)
 
 inCubemap.onChange = () =>
 {
+    if (inCubemap.get())
+        op.setUiError("nocubemapinput", null);
+
     PrefilteredSizeChanged =
     IrradianceSizeChanged = true;
 };
@@ -291,6 +294,7 @@ inTrigger.onTriggered = function ()
     if (!inCubemap.get())
     {
         outTrigger.trigger();
+        op.setUiError("nocubemapinput", "No Environment Texture connected");
         return;
     }
 
