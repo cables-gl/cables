@@ -54,5 +54,13 @@
     ],
     "docs": {
         "ports": []
-    }
+    },
+    "credits": [
+        {
+            "title": "DRACO Compression Loader",
+            "author": "three.js",
+            "url": "https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/DRACOLoader.js",
+            "licence": "MIT"
+        }
+    ]
 }

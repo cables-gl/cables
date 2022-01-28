@@ -51,13 +51,13 @@
             },
             {
                 "type": 0,
-                "name": "use mesh tangents/binormals",
+                "name": "Use mesh tangents/binormals",
                 "group": "Shader Parameters",
                 "subType": "boolean"
             },
             {
                 "type": 0,
-                "name": "disable geometric roughness",
+                "name": "Disable geometric roughness",
                 "group": "Shader Parameters",
                 "subType": "boolean"
             },
@@ -75,37 +75,37 @@
             },
             {
                 "type": 2,
-                "name": "cubemap (diffuse irradiance)",
+                "name": "Diffuse Irradiance",
                 "group": "Lighting",
                 "objType": "texture"
             },
             {
                 "type": 2,
-                "name": "cubemap (pre-filtered environment map)",
+                "name": "Pre-filtered envmap",
                 "group": "Lighting",
                 "objType": "texture"
             },
             {
                 "type": 0,
-                "name": "Number of Pre-filtered mip levels",
+                "name": "Num mip levels",
                 "group": "Lighting",
                 "subType": "integer"
             },
             {
                 "type": 2,
-                "name": "Albedo (sRGB)",
+                "name": "Albedo",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
                 "type": 2,
-                "name": "AORM (linear rec.709, R: ambient occlusion, G: roughness, B: metalness)",
+                "name": "AORM",
                 "group": "Textures",
                 "objType": "texture"
             },
             {
                 "type": 2,
-                "name": "Normal map (linear rec.709, +Y, TS per vertex)",
+                "name": "Normal map",
                 "group": "Textures",
                 "objType": "texture"
             },
@@ -125,7 +125,7 @@
         "portsOut": [
             {
                 "type": 1,
-                "name": "next"
+                "name": "Next"
             },
             {
                 "type": 2,
@@ -135,5 +135,20 @@
         "name": "Ops.Dev.PbrMaterial"
     },
     "authorName": "amajesticseaflapflap",
-    "created": 1642599874914
+    "created": 1642599874914,
+    "credits": [
+        {
+            "title": "BabylonJS Shader Code",
+            "author": "Babylon.js",
+            "url": "https://github.com/BabylonJS/Babylon.js/blob/master/license.md",
+            "licence": "Apache License"
+        },
+        {
+            "title": "Filament Code",
+            "author": "google",
+            "url": "https://github.com/google/filament/blob/main/LICENSE",
+            "licence": "Apache License"
+        }
+    ]
+
 }
