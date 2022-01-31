@@ -1,5 +1,3 @@
-// thanks to: https://github.com/mrdoob/three.js/blob/master/examples/jsm/loaders/DRACOLoader.js
-
 class DracoDecoderClass
 {
     constructor()
@@ -10,7 +8,7 @@ class DracoDecoderClass
         this.workerSourceURL = "";
 
         this.config = {
-            "wasm": Uint8Array.from(atob(DracoDecoderWASM), c => c.charCodeAt(0)),
+            "wasm": Uint8Array.from(atob(DracoDecoderWASM), (c) => { return c.charCodeAt(0); }),
             "wrapper": DracoWASMWrapperCode,
             "decoderSettings": {},
         };
