@@ -1,36 +1,33 @@
-const render = op.inTrigger("render");
-const minDist = op.inValueFloat("min distance");
-const maxDist = op.inValueFloat("max distance");
+const
+    render = op.inTrigger("render"),
+    minDist = op.inValueFloat("min distance"),
+    maxDist = op.inValueFloat("max distance"),
 
-const minRotY = op.inValue("min rot y", 0);
-const maxRotY = op.inValue("max rot y", 0);
+    minRotY = op.inValue("min rot y", 0),
+    maxRotY = op.inValue("max rot y", 0),
 
-// const minRotX=op.inValue("min rot x",0);
-// const maxRotX=op.inValue("max rot x",0);
+    initialRadius = op.inValue("initial radius", 0),
+    initialAxis = op.inValueSlider("initial axis y"),
+    initialX = op.inValueSlider("initial axis x"),
 
-const initialRadius = op.inValue("initial radius", 0);
-const initialAxis = op.inValueSlider("initial axis y");
-const initialX = op.inValueSlider("initial axis x");
+    mul = op.inValueFloat("mul"),
+    smoothness = op.inValueSlider("Smoothness", 1.0),
+    speedX = op.inValue("Speed X", 1),
+    speedY = op.inValue("Speed Y", 1),
 
-const mul = op.inValueFloat("mul");
-const smoothness = op.inValueSlider("Smoothness", 1.0);
-const speedX = op.inValue("Speed X", 1);
-const speedY = op.inValue("Speed Y", 1);
+    active = op.inValueBool("Active", true),
 
-const active = op.inValueBool("Active", true);
+    allowPanning = op.inValueBool("Allow Panning", true),
+    allowZooming = op.inValueBool("Allow Zooming", true),
+    allowRotation = op.inValueBool("Allow Rotation", true),
+    restricted = op.inValueBool("restricted", true),
 
-const allowPanning = op.inValueBool("Allow Panning", true);
-const allowZooming = op.inValueBool("Allow Zooming", true);
-const allowRotation = op.inValueBool("Allow Rotation", true);
-const restricted = op.inValueBool("restricted", true);
-const pointerLock = op.inValueBool("Pointerlock", false);
+    trigger = op.outTrigger("trigger"),
+    outRadius = op.outValue("radius"),
+    outXDeg = op.outValue("Rot X"),
+    outYDeg = op.outValue("Rot Y"),
 
-const trigger = op.outTrigger("trigger");
-const outRadius = op.outValue("radius");
-const outXDeg = op.outValue("Rot X");
-const outYDeg = op.outValue("Rot Y");
-
-const inReset = op.inTriggerButton("Reset");
+    inReset = op.inTriggerButton("Reset");
 
 op.setPortGroup("Initial Values", [initialAxis, initialX, initialRadius]);
 op.setPortGroup("Interaction", [mul, smoothness, speedX, speedY]);
@@ -76,14 +73,6 @@ let element = null;
 updateSmoothness();
 
 op.onDelete = unbind;
-
-let doLockPointer = false;
-
-pointerLock.onChange = function ()
-{
-    doLockPointer = pointerLock.get();
-    op.log("doLockPointer", doLockPointer);
-};
 
 const halfCircle = Math.PI;
 const fullCircle = Math.PI * 2;
@@ -138,8 +127,6 @@ const lastPx = 0;
 
 render.onTriggered = function ()
 {
-    // if (cgl.frameStore.shadowPass) return trigger.trigger();
-
     cgl.pushViewMatrix();
 
     px = ip(px, percX);
@@ -181,48 +168,12 @@ render.onTriggered = function ()
     finalCenter[2] = ip(finalCenter[2], tempCenter[2]);
 
     const empty = vec3.create();
-    // var fpm=mat4.create();
-
-    // mat4.translate(fpm, fpm, finalEye);
-    // mat4.rotate(fpm, fpm, px, vUp);
-    // mat4.multiply(fpm,fpm, cgl.vMatrix);
-    // vec3.transformMat4(finalEyeAbs, empty, fpm);
-
-    // outPosX.set(finalEyeAbs[0]);
-    // outPosY.set(finalEyeAbs[1]);
-    // outPosZ.set(finalEyeAbs[2]);
 
     mat4.lookAt(viewMatrix, finalEye, finalCenter, vUp);
     mat4.rotate(viewMatrix, viewMatrix, px, vUp);
 
     // finaly multiply current scene viewmatrix
     mat4.multiply(cgl.vMatrix, cgl.vMatrix, viewMatrix);
-
-    // vec3.transformMat4(finalEyeAbs, empty, cgl.vMatrix);
-
-    // outPosX.set(finalEyeAbs[0]);
-    // outPosY.set(finalEyeAbs[1]);
-    // outPosZ.set(finalEyeAbs[2]);
-
-    // var fpm=mat4.create();
-    // mat4.identity(fpm);
-    // mat4.translate(fpm,fpm,finalEye);
-    // mat4.rotate(fpm, fpm, px, vUp);
-    // mat4.multiply(fpm,fpm,cgl.vMatrix);
-
-    // // vec3.copy(finalEyeAbs,finalEye);
-    // // vec3.set(finalEyeAbs,0,1,0);
-    // // mat4.rotate(viewMatrix, viewMatrix, px, vUp);
-    // // vec3.transformMat4( finalEyeAbs, finalEye, fpm );
-
-    // // vec3.transformMat4( finalEyeAbs, finalEyeAbs, cgl.vMatrix );
-    // // mat4.getTranslation(finalEyeAbs,fpm);
-    // var pos=vec3.create();
-    // vec3.transformMat4(finalEyeAbs, empty, fpm);
-
-    // outPosX.set(finalEyeAbs[0]);
-    // outPosY.set(finalEyeAbs[1]);
-    // outPosZ.set(finalEyeAbs[2]);
 
     trigger.trigger();
     cgl.popViewMatrix();
@@ -238,7 +189,7 @@ function circlePosi(vec, perc)
     outRadius.set(radius * mmul);
 
     let i = 0, degInRad = 0;
-    // var vec=vec3.create();
+
     degInRad = 360 * perc / 2 * CGL.DEG2RAD;
     vec3.set(vec,
         Math.cos(degInRad) * radius * mmul,
@@ -274,12 +225,6 @@ function onmousemove(event)
 
     let movementX = (x - lastMouseX);
     let movementY = (y - lastMouseY);
-
-    if (doLockPointer)
-    {
-        movementX = event.movementX * mul.get();
-        movementY = event.movementY * mul.get();
-    }
 
     movementX *= speedX.get();
     movementY *= speedY.get();
@@ -322,19 +267,6 @@ function onMouseDown(event)
 
     try { element.setPointerCapture(event.pointerId); }
     catch (e) {}
-
-    if (doLockPointer)
-    {
-        const el = op.patch.cgl.canvas;
-        el.requestPointerLock = el.requestPointerLock || el.mozRequestPointerLock || el.webkitRequestPointerLock;
-        if (el.requestPointerLock) el.requestPointerLock();
-        else op.warn("no requestPointerLock found");
-        // document.addEventListener("mousemove", onmousemove, false);
-
-        document.addEventListener("pointerlockchange", lockChange, false);
-        document.addEventListener("mozpointerlockchange", lockChange, false);
-        document.addEventListener("webkitpointerlockchange", lockChange, false);
-    }
 }
 
 function onMouseUp(e)
@@ -344,16 +276,6 @@ function onMouseUp(e)
 
     try { element.releasePointerCapture(e.pointerId); }
     catch (e) {}
-
-    if (doLockPointer)
-    {
-        document.removeEventListener("pointerlockchange", lockChange, false);
-        document.removeEventListener("mozpointerlockchange", lockChange, false);
-        document.removeEventListener("webkitpointerlockchange", lockChange, false);
-
-        if (document.exitPointerLock) document.exitPointerLock();
-        document.removeEventListener("mousemove", pointerLock, false);
-    }
 }
 
 function lockChange()
@@ -401,19 +323,16 @@ const onMouseWheel = function (event)
 
 const ontouchstart = function (event)
 {
-    doLockPointer = false;
     if (event.touches && event.touches.length > 0) onMouseDown(event.touches[0]);
 };
 
 const ontouchend = function (event)
 {
-    doLockPointer = false;
     onMouseUp();
 };
 
 const ontouchmove = function (event)
 {
-    doLockPointer = false;
     if (event.touches && event.touches.length > 0) onmousemove(event.touches[0]);
 };
 
@@ -439,10 +358,6 @@ function bind()
     element.addEventListener("pointerenter", onMouseEnter);
     element.addEventListener("contextmenu", function (e) { e.preventDefault(); });
     element.addEventListener("wheel", onMouseWheel, { "passive": true });
-
-    // element.addEventListener("touchmove", ontouchmove, { "passive": true });
-    // element.addEventListener("touchstart", ontouchstart, { "passive": true });
-    // element.addEventListener("touchend", ontouchend, { "passive": true });
 }
 
 function unbind()
@@ -455,10 +370,6 @@ function unbind()
     element.removeEventListener("pointerleave", onMouseUp);
     element.removeEventListener("pointerenter", onMouseUp);
     element.removeEventListener("wheel", onMouseWheel);
-
-    // element.removeEventListener("touchmove", ontouchmove);
-    // element.removeEventListener("touchstart", ontouchstart);
-    // element.removeEventListener("touchend", ontouchend);
 }
 
 eye = circlePos(0);
