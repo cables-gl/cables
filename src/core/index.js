@@ -17,7 +17,6 @@ import { Variable } from "./sessionvar";
 import { Timer, now, internalNow } from "./timer";
 import * as PatchConnections from "./patchConnection";
 import { CONSTANTS } from "./constants";
-import EXRLoader from "./exrloader";
 
 const CABLES = Object.assign(
     {
@@ -27,7 +26,6 @@ const CABLES = Object.assign(
         Port,
         Op,
         Profiler,
-        EXRLoader,
         Requirements,
         Patch,
         Instancing,
